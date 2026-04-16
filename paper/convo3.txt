@@ -1,0 +1,1843 @@
+riemann1b-convo.txt
+Document
+riemann2b-convo.txt
+Document
+please see attached two files from chat sessions which should together contain a proof of Riemann hypothesis. the chats contain many explorations and deadends. I would like you to isolate the actual proof from this. In particular, there is one remaining "gap" which might actually be in our chats already. Please do a deep search and see if you can repair the gap.
+
+Yes. Here is the whole route, briefly and in order.
+
+We start from a local statistic built from the phase kernel for the zeta/scattering side. Around two nearby points, we do not work in the raw point basis; we pass to the point-to-jet basis so the local (2\times2) blocks have a finite limit as the spacing shrinks. That produces local jet Gram blocks and a jet-whitened cross block. On the toy side, the same jet-limit procedure gives an explicit anomaly matrix (M(d)) for an off-line split pair, and we showed this anomaly is nonzero for every separation (d>0), with explicit transverse scalar obstruction (\Phi_K(M(d))\neq 0).
+
+On the zeta side, we then renormalize the local statistic by subtracting the phase-gap nuisance and the explicit background-value term. After that, the microscopic local statistic reduces to a value channel plus a curvature channel:
+[
+\widehat\Omega_\zeta(s;m)\approx U(s),S(m)+V(s),S''(m),
+]
+where (m) is the midpoint, (s) is the symmetric separation, and
+[
+S(m)=q_\zeta(m)-B_\zeta(m)
+]
+is the background-subtracted zero density.
+
+The next core step is the local zeta-side estimate:
+[
+|S''(m)|\ll L(m),S(m)^2,
+\qquad
+L(m)=\log!\Bigl(3+|m|+\frac1{S(m)}\Bigr).
+]
+This comes from the single-pair curvature bound, zero-free-region control, and an optimized near/far decomposition. That is the main analytic input on the zeta side.
+
+Then we identify the right microscopic scale:
+[
+s\sim (\log|m|)^{-2}.
+]
+At that scale, the local value/curvature reconstruction remains invertible, and the transverse functional (\Phi_K) kills the value channel exactly:
+[
+\Phi_K(U(s))=0.
+]
+So the transverse zeta signal is controlled only by the curvature channel.
+
+Next we pass to a scalar transverse statistic
+[
+H_m(s)=\Phi_K(\widehat\Omega_\zeta(s;m)).
+]
+The plan is to show that (H_m(s)) is odd and holomorphic on a disk
+[
+|s|<\rho_0/Q,\qquad Q\asymp \log|m|,
+]
+with boundary size
+[
+|H_m(s)|\ll \frac{L(m)S(m)^2}{Q^3}.
+]
+The oddness comes from symmetric placement and the jet-basis swap symmetry. The boundary bound comes from two pieces: an explicit formula showing (\Phi_K(V(s))\ll Q^{-3}), and a complexified near/far transport bound showing the curvature part stays (\ll L(m)S(m)^2) on the same circle.
+
+Once that holomorphic odd package is in place, Cauchy gives an all-order odd-power expansion in the rescaled microscopic variable:
+[
+H_m(z/Q^2)=\sum_{r\ge 0} c_{2r+1}(m),\frac{z^{2r+1}}{Q^{2r+4}}.
+]
+
+Then comes the cancellation machine. We evaluate (H_m) at arithmetic microscopic nodes
+[
+s_j=\frac{j}{Q^2},\qquad j=1,\dots,N,
+]
+and combine them with explicit coefficients (a_j^{(N)}) chosen to kill the first (N-1) odd moments. This drives the zeta-side transverse signal down to size roughly
+[
+L(m)S(m)^2,\frac{\Theta_N}{Q^{2N+2}},
+]
+and for (N\sim \alpha Q) with small (\alpha), that becomes exponentially small in (Q).
+
+On the toy side, the same (N)-point combination does not cancel the anomaly, because the toy jet-limit transverse signal is (\kappa)-independent at leading order. So it stays
+[
+u^2,\Phi_K(M(d))+O(u^4),
+]
+with (u=\beta-\tfrac12), and (\Phi_K(M(d))) bounded below on any compact (d)-interval.
+
+So the final comparison is: the zeta-side (N)-point transverse signal becomes exponentially small, while the toy off-line signal remains order (u^2). If the local analytic package is truly uniform, the only way both can be consistent is
+[
+u=0.
+]
+That is the conditional RH implication.
+
+So the whole proof route is:
+
+local phase kernel
+(\to) point-to-jet normalization
+(\to) jet-whitened cross block
+(\to) toy anomaly matrix (M(d)) with nonzero transverse obstruction
+(\to) zeta-side value/curvature decomposition
+(\to) local curvature estimate ( |S''|\ll LS^2)
+(\to) microscopic scale (s\sim (\log|m|)^{-2})
+(\to) transverse scalar (H_m(s)) killing the value channel
+(\to) odd holomorphic expansion on (|s|<\rho_0/Q)
+(\to) (N)-point odd-moment cancellation
+(\to) exponentially small zeta-side transverse signal
+(\to) contradiction with the persistent toy off-line anomaly unless (u=0).
+
+The one genuine gap still left is proving the full finite-(s) local analytic package uniformly: exact holomorphy of the whitened renormalized local block on (|s|<\rho_0/Q), plus the boundary estimate on that circle. Everything after that is explicit algebra.
+
+I’m going to separate three things: the actual proof spine, the parts that are exploratory dead ends, and the one remaining analytic gap. Then I’ll comb the chats specifically for anything that already proves—or nearly proves—the holomorphy plus boundary package.
+
+I’ve already found the strongest candidate repair: the chats do contain a near-complete “holomorphic renormalization” theorem, plus a complexified near/far transport lemma that seems aimed exactly at your remaining gap. I’m now checking whether those pieces truly close the hole, or only reduce it to one final verification against the concrete kernel formulas.
+
+I went through both files carefully. My judgment is:
+
+This is not yet an actual proof of RH in the material you attached. It is a serious conditional proof program with a fairly coherent spine, and the chats do contain one real partial repair: they prove an abstract holomorphic-renormalization theorem saying that once the raw local blocks Gm(s),Nm(s)Gm​(s),Nm​(s) are holomorphic and Gm(s)Gm​(s) satisfies the O(Q2)O(Q2) derivative bound, then the whitened block Gm(s)−1/2Nm(s)Gm(s)−1/2Gm​(s)−1/2Nm​(s)Gm​(s)−1/2 is holomorphic on the Q−1Q−1-disk. But the chats also repeatedly say that the exact finite-ss zeta/scattering formulas needed to verify those hypotheses are not actually present in the files, so that gap is reduced but not closed.
+
+The cleanest isolated proof spine in the chats is this. First, pass from raw point samples to the point-to-jet basis, so the local two-point blocks have a finite jet limit and the jet-whitened cross block becomes the right invariant local object. On the toy side, this yields an explicit off-line anomaly matrix M(d)M(d) with nonzero transverse obstruction. On the zeta side, after subtracting background and phase-gap terms, the local statistic reduces to a value channel plus curvature channel, with the value channel lying in a fixed 2-dimensional “value plane” P=span{J,D}P=span{J,D}, and the transverse functional ΦKΦK​ killing that value channel exactly.
+
+The main analytic input that does seem genuinely developed in the chats is the local curvature bound and its complexified transport. There is an explicit “complex denominator comparability” lemma on the microscopic circle, then a “complexified near/far transport” lemma, and then a corollary giving the complexified curvature bound ∣Cm(s)∣≪ρ0L(m)S(m)2∣Cm​(s)∣≪ρ0​​L(m)S(m)2 on ∣s∣=ρ0/Q∣s∣=ρ0​/Q. The files then note that, once holomorphy of the renormalized block is available, this immediately yields the boundary estimate for Hm(s)=ΦK(Ω^ζ(s;m))Hm​(s)=ΦK​(Ω
+ζ​(s;m)), and hence Cauchy expansion and the odd-moment cancellation machine.
+
+So the first important thing I can isolate for you is:
+
+The chats do repair the gap at the level of abstract functional calculus. They prove:
+
+    if Gm(s)Gm​(s) and Nm(s)Nm​(s) are holomorphic on ∣s∣<ρ/Q∣s∣<ρ/Q,
+
+    if Gm(0)Gm​(0) has a uniform spectral gap λmin⁡(Gm(0))≥c0Qλmin​(Gm​(0))≥c0​Q,
+
+    and if sup⁡∣s∣<ρ/Q∥∂sGm(s)∥≤CGQ2sup∣s∣<ρ/Q​∥∂s​Gm​(s)∥≤CG​Q2,
+
+then there is ρ0>0ρ0​>0 such that Gm(s)Gm​(s) stays invertible on ∣s∣<ρ0/Q∣s∣<ρ0​/Q, the principal inverse square root is holomorphic there, and hence the whitened block and any holomorphic subtraction terms are holomorphic there too. That theorem is actually written out and proved in the file.
+
+But the second important thing is:
+
+The chats themselves repeatedly say that the explicit finite-ss formulas for the local zeta/scattering jet Gram block Gm(s)Gm​(s), the local jet cross block Nm(s)Nm​(s), and the exact renormalized matrix Ω^ζ(s;m)Ω
+ζ​(s;m) are not present in the attached material. Because of that, they say A1/A4/B3 remain unverified: exact entry formulas, uniform convergence of differentiated zero sums, and the entrywise derivative bound ∂sGm=O(Q2)∂s​Gm​=O(Q2). In other words, the abstract theorem is present, but the hypotheses needed to apply it to the actual zeta kernel are not proved from these files.
+
+There is also a further complication. Your pasted summary says “once that holomorphic odd package is in place, everything after that is explicit algebra.” The later parts of the chats do not support that claim. After the curvature estimate is in hand, the conversation shifts and identifies a new structural bottleneck: one still has to prove that the zeta-side leading deformation is confined to the value plane / asymptotically rank one, while the toy off-line anomaly is genuinely rank two with det⁡M(d)≠0detM(d)=0. The chats explicitly call this “the last remaining conceptual gap” and formulate a “value-plane theorem” or “rank obstruction theorem” as the next missing piece.
+
+So the most honest isolation of the argument is:
+
+    Solidly present in the chats
+
+        jet-limit normalization and explicit model-side jet-whitened object,
+
+        value-plane/transverse-functionals picture,
+
+        local curvature bound and complexified near/far transport,
+
+        abstract holomorphic-whitening theorem under hypotheses,
+
+        model-side transverse obstruction formulas.
+
+    Not repaired from these files
+
+        the exact finite-ss zeta/scattering formulas for Gm(s)Gm​(s), Nm(s)Nm​(s), and Ω^ζ(s;m)Ω
+        ζ​(s;m),
+
+        the rigorous verification of the analytic hypotheses A1/A4/B3 for those formulas,
+
+        and, in the later version of the program, the final structural “value-plane / rank-one vs rank-two” incompatibility theorem.
+
+So to your specific question — “is the one remaining gap maybe already in the chats?” — my answer is:
+
+Partly yes, but not fully.
+What is in the chats is the repair of the abstract renormalization step. What is not in the chats is the concrete finite-ss formula package needed to apply that theorem to the actual zeta-side local blocks. And once the conversation progresses further, a second missing theorem appears on the structural side. So the files do not currently contain a complete proof of RH, and I cannot honestly extract one from them.
+
+The sharpest cleaned-up statement of the present status would be:
+
+    The chats reduce the original analytic gap to three concrete formula checks for Gm(s)Gm​(s) and Nm(s)Nm​(s), and then later expose a further structural gap: proving the zeta-side leading deformation stays in the value plane while the toy anomaly does not.
+
+I can next turn this into a theorem-by-theorem memo labeled “proved / conditional / missing,” which would be the cleanest version to hand to another mathematician.
+
+Pasted markdown(3).md
+File
+how about this?
+
+I’m checking this on two levels: whether the new split ΦEΦE​ for calibration and ΦKΦK​ for contradiction is internally consistent, and whether it actually removes the last unproved steps rather than just renaming them.
+
+you don't need citations this is my own work
+
+The new split is sharper. It replaces the failed “both ΦKΦK​ and ΦEΦE​ vanish on the value plane” claim with a more credible architecture: one functional to calibrate size, one to detect transverse mismatch. The question is whether the calibration statement is really proved for the actual zeta-side normalization, or only in the toy linearization.
+
+Yes — this is genuinely better.
+
+The key improvement is that it abandons the false step. Earlier, the route wanted the leading zeta-side value deformation to lie in ker⁡ΦK∩ker⁡ΦEkerΦK​∩kerΦE​. Your new calculation replaces that with the more plausible split
+ΦK(Aval)=0,ΦE(Aval)≠0 generically,
+ΦK​(Aval​)=0,ΦE​(Aval​)=0 generically,
+
+so ΦEΦE​ calibrates the value channel and ΦKΦK​ measures transverse mismatch. Structurally, that is much more convincing.
+
+But I do not think this closes the proof yet.
+
+The biggest problem is the scale of the contradiction. The new direct comparison says toy-side ΦKΦK​ is linear in S(m)S(m), while zeta-side ΦKΦK​ is O(L(m)S(m)2)O(L(m)S(m)2), so you want “linear beats quadratic.” That only helps if L(m)S(m)≪1L(m)S(m)≪1, i.e. if S(m)S(m) is very small. But your earlier zeta-side analysis says the value-dominated microscopic regime is compatible with the natural size S(m)≍log⁡∣m∣S(m)≍log∣m∣, not S(m)→0S(m)→0. In that regime, L(m)S(m)2L(m)S(m)2 is not smaller than S(m)S(m). So the new raw local ΦKΦK​-obstruction does not actually contradict the zeta-side bounds on the scale you previously established. The old NN-point cancellation machine was doing real work here: it created the extra exponential smallness that the raw local estimate does not give.
+
+There is a second issue. The calibration formula
+ΦE(Δζ)=cval(m,σ) S(m)+O(L(m)S(m)2)+O(Tail)+O(Err)
+ΦE​(Δζ​)=cval​(m,σ)S(m)+O(L(m)S(m)2)+O(Tail)+O(Err)
+
+is still not proved for the actual exact zeta-side normalized block. Right now it is inferred from the frozen “value-only” linearization. That is a real advance, but it is not yet the same as deriving the expansion from the exact
+Ω∞=M1−1/2N12M2−1/2
+Ω∞​=M1−1/2​N12​M2−1/2​
+
+with the real first-order relations among q,q′,q′′,Δq,q′,q′′,Δ, plus the actual background subtraction and whitening. You also still need a regime where cval(m,σ)cval​(m,σ) is uniformly bounded away from 00, not merely non-identically zero. Your pasted note itself correctly identifies that nonvanishing regime as still unresolved.
+
+So my honest verdict is:
+
+This is probably the cleanest structural reformulation so far, but it is still not a proof. What it really gives you is a better architecture:
+ΦE for calibration,ΦK for contradiction.
+ΦE​ for calibration,ΦK​ for contradiction.
+
+That is a good idea. But to make it decisive, you still need one of two things. Either you prove the exact first-order zeta-side expansion and then feed ΦKΦK​ back into the old odd-analytic/NN-point cancellation machine, or you find a much stronger raw local bound than O(LS2)O(LS2) for the transverse remainder. Without one of those, the new direct contradiction does not fire on the natural zeta-side scale.
+
+So: better, yes. Final, no.
+
+The next theorem I would try to prove is the exact one this reformulation is pointing at:
+Δζ(m,σ)=S(m)Aval(m,σ)+R(m,σ),
+Δζ​(m,σ)=S(m)Aval​(m,σ)+R(m,σ),
+
+with
+ΦK(Aval)=0,ΦE(Aval)=cval(m,σ)≠0,
+ΦK​(Aval​)=0,ΦE​(Aval​)=cval​(m,σ)=0,
+
+for the actual renormalized local block, not the frozen model, and then keep the old cancellation machine only for the ΦKΦK​-channel.
+
+
+Yes — we can derive an **explicit local condition**, but we do **not** yet have a general theorem that it never vanishes.
+
+The coefficient was
+[
+c_{\rm val}(m,\sigma)
+=====================
+
+\frac{6\bigl(-B^2\sigma^2\sin\Delta_0+3B\sigma\cos\Delta_0+3\sin\Delta_0\bigr)}{B^4\sigma^3},
+]
+where (B=B_\zeta(m)) and
+[
+\Delta_0=\Phi_{\rm bg}(m-\sigma/2)-\Phi_{\rm bg}(m+\sigma/2).
+]
+
+So the exact nonvanishing condition is simply
+[
+\boxed{
+-B^2\sigma^2\sin\Delta_0+3B\sigma\cos\Delta_0+3\sin\Delta_0\neq 0.
+}
+]
+
+That is already explicit. But there is a more informative small-(\sigma) expansion.
+
+Since
+[
+\Delta_0=-\int_{m-\sigma/2}^{m+\sigma/2} B_\zeta(t),dt,
+]
+Taylor expansion gives
+[
+\Delta_0
+========
+
+-B\sigma-\frac{B_\zeta''(m)}{24}\sigma^3+O(\sigma^5),
+]
+because the odd terms integrate out symmetrically.
+
+If you plug
+[
+\Delta_0=-B\sigma+d_3\sigma^3+O(\sigma^5)
+]
+into the numerator, the (O(\sigma)) and (O(\sigma^3)) terms coming from the pure constant-background part cancel, and the first surviving term is
+[
+3d_3\sigma^3+O(\sigma^5).
+]
+With
+[
+d_3=-\frac{B_\zeta''(m)}{24},
+]
+this gives
+[
+c_{\rm val}(m,\sigma)
+=====================
+
+-\frac{3}{4}\frac{B_\zeta''(m)}{B_\zeta(m)^4}
++
+O(\sigma^2).
+]
+
+So the real local condition is:
+
+[
+\boxed{
+c_{\rm val}(m,\sigma)\neq 0 \text{ for small }\sigma
+\quad\text{if}\quad
+B_\zeta(m)\neq 0
+\ \text{and}\
+B_\zeta''(m)\neq 0.
+}
+]
+
+More precisely, if
+[
+|B_\zeta''(m)|\ge b_2>0
+\quad\text{and}\quad
+B_\zeta(m)\asymp B_0>0
+]
+on the midpoint class, then for (\sigma) small enough,
+[
+|c_{\rm val}(m,\sigma)|\ge \frac{3b_2}{8B_0^4},
+]
+after shrinking (\sigma) so the (O(\sigma^2)) remainder is smaller than half the main term.
+
+So:
+
+* **Yes**, we can derive an explicit analytic condition.
+* **No**, we do not currently have a universal theorem that it always holds.
+* What we *do* have is a clean sufficient condition: **nonzero background curvature** at the midpoint.
+
+That is actually quite revealing. It says the value-calibration coefficient is not driven by the constant part of the background; that part cancels. It is driven by the **first nontrivial curvature correction** of the background phase gap.
+
+So the next real question is:
+
+> in the admissible midpoint class you want to use, can you prove (B_\zeta''(m)) stays bounded away from (0)?
+
+If yes, then the (\Phi_E)-calibration is locked. If not, you may need to choose a different calibration functional (\Psi) whose leading term depends directly on (B_\zeta(m)) rather than on (B_\zeta''(m)).
+
+Yes — this is a real missing piece, but it is the missing piece for the **jet-limit local block formula**, not yet for the full **finite-(s) holomorphic whitening package**.
+
+What your formula gives explicitly is the jet-limit normalization:
+[
+J_j=\frac1\pi
+\begin{pmatrix}
+2q_j & \frac12 q_j'[1ex]
+\frac12 q_j' & \frac1{12}(q_j''+2q_j^3)
+\end{pmatrix},
+\qquad
+C_{12}=\frac1\pi N_{12},
+]
+with
+[
+\Omega_\infty(T_1,T_2)=M_1^{-1/2}N_{12}M_2^{-1/2}.
+]
+That matches the jet-basis matrix shape you wanted and lines up with the same (s=0) block structure that had already appeared in the checklist and earlier jet-limit discussion. 
+
+It also gives the right consistency check:
+[
+\det J(T)=\frac{1}{24\pi^2}\bigl(4q^4+2qq''-3(q')^2\bigr),
+]
+so the local kernel-positivity condition is exactly the positivity of the jet Gram matrix. That is a strong sign the normalization is correct. 
+
+What it still does **not** provide is the full finite-(s) package needed for the microscopic disk argument. In particular, it does not yet define the actual finite-(s) local blocks (G_m(s)) and (N_m(s)) before Taylor expansion, so by itself it does not let me check:
+
+* holomorphy on (|s|<\rho_0/Q),
+* the derivative bound (\sup_{|s|<\rho/Q}|\partial_s G_m(s)|\le C_GQ^2),
+* or the holomorphic functional-calculus whitening step.
+  Those are exactly the gates your checklist isolated, and they remain the missing formulas for the analytic side.  
+
+So the clean answer is:
+
+* **Yes**, this locks the **jet-limit/blockwise matrix formula** and the local whitening normalization.
+* **No**, it is still **not** the missing finite-(s) zeta/scattering formula package needed to verify the full A–E analytic checklist.
+
+That said, it is enough to proceed with the **structural jet-limit comparison**: now that (\Omega_\infty(T_1,T_2)) is explicit, the next real task is to compare its leading value-channel deformation against the toy off-line matrix obstruction using the scalar functionals (\Phi_K) and (\Phi_E).
+
+
+^^ thoughts on this?
+
+Your distinction is the right one: this appears to settle the jet-limit object, but not the finite-ss analytic package. The important question is whether you want the proof to run purely at jet-limit level now, or whether the old holomorphic/NN-point machinery is still essential.
+
+I think this is a good refinement, and mostly right.
+
+The strongest part is the small-σσ analysis of cvalcval​. That calculation is genuinely informative. The cancellation of the constant-background contribution is exactly the kind of thing one wants to know early, because it tells you ΦEΦE​ is not reading off “background size” but “background curvature.” So the conclusion
+cval(m,σ)=−34Bζ′′(m)Bζ(m)4+O(σ2)
+cval​(m,σ)=−43​Bζ​(m)4Bζ′′​(m)​+O(σ2)
+
+looks like the right local asymptotic, and the interpretation is good: ΦEΦE​-calibration is available in any regime where BζBζ​ stays nonzero and Bζ′′Bζ′′​ stays away from zero.
+
+That said, I would phrase the upshot a little more cautiously.
+
+What you have shown is not “the calibration is locked,” but rather:
+ΦE is a viable calibration functional on midpoint classes with nondegenerate background curvature.
+ΦE​ is a viable calibration functional on midpoint classes with nondegenerate background curvature.
+
+That is a strong local statement, but it is not yet clear that it is the right calibration uniformly on the class you eventually need. If there are admissible midpoints where Bζ′′(m)Bζ′′​(m) becomes small or changes sign, then ΦEΦE​ becomes fragile, and you may want a different ΨΨ whose leading term depends on BζBζ​ itself rather than a second derivative of the background.
+
+Your second distinction is also right, and important: the explicit formula for
+Ω∞(T1,T2)=M1−1/2N12M2−1/2
+Ω∞​(T1​,T2​)=M1−1/2​N12​M2−1/2​
+
+is a real advance, but it is an advance on the jet-limit structural side. It does not by itself produce the finite-ss holomorphy, derivative bounds, or uniform microscopic-disk control that the earlier analytic package needed. So if the proof still relies on the old odd holomorphic function Hm(s)Hm​(s), Cauchy estimates, and NN-point annihilation, then this new formula has not closed that gap. It has only made the local model completely explicit.
+
+That is why I think the next decision is strategic, not merely technical.
+
+You now seem to have two possible routes.
+
+One route is: keep the old finite-ss analytic machine. Then the new jet-limit formula is mainly there to identify the correct functionals ΦKΦK​ and ΦEΦE​, and perhaps to show what the leading coefficient should look like. But you would still need the full finite-ss local block formulas and their holomorphic control.
+
+The other route is: pivot and make the argument entirely jet-limit/local. Then you would try to prove the contradiction directly from the explicit Ω∞Ω∞​ deformation theory, using ΦEΦE​ to calibrate and ΦKΦK​ to obstruct. If you go that way, then the crucial issue is no longer holomorphy on a disk, but whether the scale comparison is really strong enough locally.
+
+And that is where I still see the main danger.
+
+A purely local contradiction of the form
+ΦK(Δζ)=O(LS2),ΦK(Δmod)≍u2,u2≍S
+ΦK​(Δζ​)=O(LS2),ΦK​(Δmod​)≍u2,u2≍S
+
+only wins if LS2LS2 is genuinely smaller than SS, meaning LS≪1LS≪1. That is a small-SS regime. Earlier parts of the program were not naturally living there; they needed the holomorphic/NN-point cancellation step precisely to manufacture something much smaller than the raw local curvature bound. So unless you now have a reason that the relevant zeta-side S(m)S(m) is actually tiny, the local ΦKΦK​ contradiction still looks underpowered on its own.
+
+So my honest assessment is:
+
+This is a real improvement.
+It probably fixes the structural story at jet-limit level.
+It gives a plausible calibration functional and a precise sufficient nonvanishing condition.
+It does not yet close the proof.
+
+The sentence I would tighten most is the last one. I would not say “the next real task is to compare the leading value-channel deformation against the toy obstruction using ΦK,ΦEΦK​,ΦE​” without adding:
+and determine whether this local comparison is by itself strong enough, or whether the old finite-s cancellation machinery is still indispensable.
+and determine whether this local comparison is by itself strong enough, or whether the old finite-s cancellation machinery is still indispensable.
+
+That is the fork in the road now.
+
+My own guess is that the new jet-limit formula is enough to clean up the local algebra, but not enough to eliminate the need for some genuinely nonlocal amplification step.
+
+Pasted text(12).txt
+Document
+
+Yes — this is the right way to state it.
+
+The core distinction now is clear:
+
+The jet-limit computation has identified the true obstruction mechanism, but it has not yet been transferred to the actual finite-separation zeta block with rigorous control. That is exactly the right diagnosis.
+
+I would sharpen it one step further though. You probably do not need the whole old machine in its original maximal form. What you actually need is a much more targeted finite-ss transfer theorem:
+
+    ΦEΦE​ still reads the value channel linearly at finite microscopic separation,
+
+    ΦKΦK​ still kills the leading value channel at finite microscopic separation,
+
+    the remainder is o(S(m))o(S(m)) uniformly on the microscopic regime you use.
+
+If you can prove just those three statements directly, then you may not need the full “holomorphic odd package + all-order cancellation + NN-point moment annihilation” in the grand form it originally had. In other words, the old machinery may be technically replaceable by a smaller finite-ss certification theorem.
+
+So I think your current summary is correct, but the practical takeaway is even better:
+
+The conceptual bottleneck is gone, and the remaining analytic burden has been narrowed to a very specific transfer problem.
+
+That is a big improvement. It means the proof program is no longer “find the contradiction.” The contradiction is now visible:
+
+    ΦEΦE​ calibrates size,
+
+    ΦKΦK​ detects transverse mismatch,
+
+    toy side is first-order in the calibrated size,
+
+    zeta side is only remainder in that channel.
+
+What remains is to prove that the actual finite-ss normalized block really inherits that jet-limit structure with uniform enough error.
+
+So if I were organizing this now, I would make the next theorem something like:
+
+Finite-ss transfer theorem.
+For microscopic σσ,
+ΦE(Ω^ζ(m,σ))=cval(m,σ) S(m)+rE(m,σ),
+ΦE​(Ω
+ζ​(m,σ))=cval​(m,σ)S(m)+rE​(m,σ),
+ΦK(Ω^ζ(m,σ))=rK(m,σ),
+ΦK​(Ω
+ζ​(m,σ))=rK​(m,σ),
+
+with
+rE=o(S(m)),rK=o(S(m)),
+rE​=o(S(m)),rK​=o(S(m)),
+
+uniformly in the admissible regime, and with cvalcval​ bounded away from 00.
+
+If that theorem is proved, the rest becomes genuinely short.
+
+So my view is:
+
+This latest formulation is strong. It is probably the cleanest description yet of where the proof really stands. The remaining gap is no longer mystical; it is a precise finite-ss inheritance theorem. That is exactly the kind of gap one can try to close systematically.
+
+ok try proving it
+
+I’m going to look for two things in the chats: any exact finite-ss formulas already written down for the renormalized block, and any ready-made lemma that turns jet-limit control into uniform microscopic control. If those are both present, the proof may just be assembly; if not, I’ll give the sharpest partial theorem that really does follow.
+
+I’ve found the limiting obstruction material and the abstract whitening theorem, but not the concrete finite-ss block formulas. So the most I can honestly prove from the current record is a conditional transfer theorem: if the finite-ss blocks satisfy the holomorphy/invertibility hypotheses already isolated in the chats, then the ΦE/ΦKΦE​/ΦK​ transfer follows by Taylor expansion plus whitening stability.
+
+I can prove the right abstract theorem now, but I cannot honestly prove the fully concrete finite-ss version from the files you attached, because the chats explicitly do not contain the exact finite-ss formulas for the raw zeta/scattering blocks Gm(s)Gm​(s) and Nm(s)Nm​(s). They contain the checklist for what must be verified, and the abstract holomorphic-renormalization step, but not the actual entry formulas needed to run that checklist to completion.
+
+So here is the strongest thing I can rigorously prove from the present state.
+Conditional finite-ss transfer theorem
+
+Fix a midpoint class and a microscopic separation regime s=s(m)→0s=s(m)→0. Let
+Ω^ζ(s;m)=Gm(s)−1/2Nm(s)Gm(s)−1/2
+Ω
+ζ​(s;m)=Gm​(s)−1/2Nm​(s)Gm​(s)−1/2
+
+be the fully whitened finite-ss local block.
+
+Assume:
+
+    Gm(s)Gm​(s) and Nm(s)Nm​(s) are holomorphic in ss on ∣s∣<ρ0/Q∣s∣<ρ0​/Q, with Q≍log⁡∣m∣Q≍log∣m∣, and Gm(s)Gm​(s) stays uniformly positive definite there.
+
+    After subtracting the explicit background piece, the raw blocks have first-order value-channel expansions
+
+Gm(s)=Gmbg(s)+S(m) Gm(1)(s)+EmG(s),
+Gm​(s)=Gmbg​(s)+S(m)Gm(1)​(s)+EmG​(s),
+Nm(s)=Nmbg(s)+S(m) Nm(1)(s)+EmN(s),
+Nm​(s)=Nmbg​(s)+S(m)Nm(1)​(s)+EmN​(s),
+
+with uniform bounds
+∥EmG(s)∥+∥EmN(s)∥≪L(m)S(m)2+Tail(m,s)+Err(m,s).
+∥EmG​(s)∥+∥EmN​(s)∥≪L(m)S(m)2+Tail(m,s)+Err(m,s).
+
+    The first-order coefficient in the whitened jet limit,
+
+Aval(m):=∂SΩ^ζ(0;m)∣S=0,
+Aval​(m):=∂S​Ω
+ζ​(0;m)
+​S=0​,
+
+satisfies
+ΦK(Aval(m))=0,ΦE(Aval(m))=cval(m)≠0
+ΦK​(Aval​(m))=0,ΦE​(Aval​(m))=cval​(m)=0
+
+on the midpoint class, where
+ΦK(M)=m12+m21,ΦE(M)=3m11−m22.
+ΦK​(M)=m12​+m21​,ΦE​(M)=3m11​−m22​.
+
+This is exactly the structural conclusion your jet-limit calculation established: ΦKΦK​ kills the leading value deformation, while ΦEΦE​ generally does not.
+
+    The finite-ss first-order coefficient
+
+Am(s):=∂SΩ^ζ(s;m)∣S=0
+Am​(s):=∂S​Ω
+ζ​(s;m)
+​S=0​
+
+converges uniformly to Aval(m)Aval​(m) in the chosen microscopic regime:
+∥Am(s)−Aval(m)∥=o(1).
+∥Am​(s)−Aval​(m)∥=o(1).
+
+Then
+Ω^ζ(s;m)=Ω^mbg(s)+S(m) Am(s)+Rm(s),
+Ω
+ζ​(s;m)=Ω
+mbg​(s)+S(m)Am​(s)+Rm​(s),
+
+with
+∥Rm(s)∥≪L(m)S(m)2+Tail(m,s)+Err(m,s),
+∥Rm​(s)∥≪L(m)S(m)2+Tail(m,s)+Err(m,s),
+
+and consequently
+ΦE ⁣(Ω^ζ(s;m)−Ω^mbg(s))=cval(m,s) S(m)+O ⁣(L(m)S(m)2+Tail+Err),
+ΦE​(Ω
+ζ​(s;m)−Ω
+mbg​(s))=cval​(m,s)S(m)+O(L(m)S(m)2+Tail+Err),
+
+where
+cval(m,s)=ΦE(Am(s))=cval(m)+o(1),
+cval​(m,s)=ΦE​(Am​(s))=cval​(m)+o(1),
+
+and
+ΦK ⁣(Ω^ζ(s;m)−Ω^mbg(s))=o(S(m))+O ⁣(L(m)S(m)2+Tail+Err).
+ΦK​(Ω
+ζ​(s;m)−Ω
+mbg​(s))=o(S(m))+O(L(m)S(m)2+Tail+Err).
+
+In particular, if cval(m)cval​(m) is bounded away from 00 on the midpoint class and
+Tail(m,s)+Err(m,s)=o(S(m)),
+Tail(m,s)+Err(m,s)=o(S(m)),
+
+then for sufficiently small microscopic ss,
+ΦE(Ω^ζ−Ω^bg)≍S(m),ΦK(Ω^ζ−Ω^bg)=o(S(m)).
+ΦE​(Ω
+ζ​−Ω
+bg)≍S(m),ΦK​(Ω
+ζ​−Ω
+bg)=o(S(m)).
+Proof
+
+Let
+F(G,N):=G−1/2NG−1/2.
+F(G,N):=G−1/2NG−1/2.
+
+On the open set of positive definite 2×22×2 matrices with a uniform spectral gap, the map
+G↦G−1/2
+G↦G−1/2
+
+is holomorphic by standard holomorphic functional calculus, and hence FF is jointly analytic in (G,N)(G,N). This is exactly the abstract holomorphic-renormalization step the chats had already isolated.
+
+Write
+ΔGm(s):=S(m) Gm(1)(s)+EmG(s),ΔNm(s):=S(m) Nm(1)(s)+EmN(s).
+ΔGm​(s):=S(m)Gm(1)​(s)+EmG​(s),ΔNm​(s):=S(m)Nm(1)​(s)+EmN​(s).
+
+Then
+Ω^ζ(s;m)=F(Gmbg(s)+ΔGm(s), Nmbg(s)+ΔNm(s)).
+Ω
+ζ​(s;m)=F(Gmbg​(s)+ΔGm​(s),Nmbg​(s)+ΔNm​(s)).
+
+Because FF is analytic, Taylor expansion at the background point gives
+Ω^ζ(s;m)=F(Gmbg(s),Nmbg(s))+DF(Gmbg(s),Nmbg(s))[ΔGm(s),ΔNm(s)]+Rm(s),
+Ω
+ζ​(s;m)=F(Gmbg​(s),Nmbg​(s))+DF(Gmbg​(s),Nmbg​(s))​[ΔGm​(s),ΔNm​(s)]+Rm​(s),
+
+where the remainder is quadratic in (ΔGm,ΔNm)(ΔGm​,ΔNm​). Since the only linear-in-S(m)S(m) pieces inside (ΔGm,ΔNm)(ΔGm​,ΔNm​) are S(m)Gm(1)S(m)Gm(1)​ and S(m)Nm(1)S(m)Nm(1)​, while the EE-terms are already of size LS2+Tail+ErrLS2+Tail+Err, we obtain
+Ω^ζ(s;m)=Ω^mbg(s)+S(m) Am(s)+Rm(s),
+Ω
+ζ​(s;m)=Ω
+mbg​(s)+S(m)Am​(s)+Rm​(s),
+
+for some holomorphic Am(s)Am​(s), with
+∥Rm(s)∥≪L(m)S(m)2+Tail(m,s)+Err(m,s).
+∥Rm​(s)∥≪L(m)S(m)2+Tail(m,s)+Err(m,s).
+
+Now apply the two scalar functionals.
+
+For ΦEΦE​,
+ΦE(Ω^ζ−Ω^bg)=S(m) ΦE(Am(s))+ΦE(Rm(s)).
+ΦE​(Ω
+ζ​−Ω
+bg)=S(m)ΦE​(Am​(s))+ΦE​(Rm​(s)).
+
+Set
+cval(m,s):=ΦE(Am(s)).
+cval​(m,s):=ΦE​(Am​(s)).
+
+By hypothesis Am(s)→Aval(m)Am​(s)→Aval​(m) uniformly, so
+cval(m,s)=ΦE(Aval(m))+o(1)=cval(m)+o(1).
+cval​(m,s)=ΦE​(Aval​(m))+o(1)=cval​(m)+o(1).
+
+Thus
+ΦE(Ω^ζ−Ω^bg)=cval(m,s) S(m)+O ⁣(L(m)S(m)2+Tail+Err).
+ΦE​(Ω
+ζ​−Ω
+bg)=cval​(m,s)S(m)+O(L(m)S(m)2+Tail+Err).
+
+For ΦKΦK​,
+ΦK(Ω^ζ−Ω^bg)=S(m) ΦK(Am(s))+ΦK(Rm(s)).
+ΦK​(Ω
+ζ​−Ω
+bg)=S(m)ΦK​(Am​(s))+ΦK​(Rm​(s)).
+
+But
+ΦK(Am(s))=ΦK(Aval(m))+o(1)=o(1),
+ΦK​(Am​(s))=ΦK​(Aval​(m))+o(1)=o(1),
+
+because ΦK(Aval(m))=0ΦK​(Aval​(m))=0. Hence
+ΦK(Ω^ζ−Ω^bg)=o(S(m))+O ⁣(L(m)S(m)2+Tail+Err).
+ΦK​(Ω
+ζ​−Ω
+bg)=o(S(m))+O(L(m)S(m)2+Tail+Err).
+
+That is exactly the transfer statement you want.
+What this does and does not prove
+
+This proves that the finite-ss obstruction mechanism follows from a much smaller set of analytic inputs than the old “full machine.” You do not need to rediscover the contradiction; you only need to certify that the true finite-ss block inherits the jet-limit first-order structure.
+
+But it is still conditional, because the chats explicitly say the concrete finite-ss formulas for Gm(s)Gm​(s) and Nm(s)Nm​(s) are absent, and without them the raw holomorphy and first-order decomposition cannot be checked entry by entry.
+
+So the remaining missing theorem is now very precise:
+
+    prove assumptions (2) and (4) directly from the actual finite-ss zeta/scattering block formulas.
+
+That is narrower than the old gap. The proof burden has become:
+
+    write down the exact Gm(s),Nm(s)Gm​(s),Nm​(s),
+
+    show their background/value decomposition survives uniformly on the microscopic regime,
+
+    and show the first-order coefficient Am(s)Am​(s) converges uniformly to the jet-limit Aval(m)Aval​(m).
+
+Once those are in hand, the ΦE/ΦKΦE​/ΦK​ split is enough.
+
+The one caution I would keep in view is scale. Earlier parts of the chats also note that the jet-limit obstruction alone is not enough unless the tail/error terms are truly o(S(m))o(S(m)); otherwise the toy-vs-zeta comparison is still only formal.
+
+So: I can prove the conditional transfer theorem cleanly. I cannot prove the fully concrete one from the present files, because the exact finite-ss block formulas needed to verify its hypotheses are still missing from the record.
+
+ELI5 what Gm​(s),Nm​(s) -- are they something fundamental we should have established from the beginning?
+
+I’m checking the exact role those symbols played in your notes so I don’t give you a vague answer. My guess is they’re the finite-separation “raw local blocks” before whitening, but I want to confirm how you were using them.
+
+are you sure we didn't reference them already by different variables?
+
+I’m checking for aliases now — not just the symbols Gm(s),Nm(s)Gm​(s),Nm​(s), but whether the same objects were described as “local Gram block,” “cross block,” “two-point jet block,” raw kernel derivatives, or the renormalized block before whitening.
+
+Yes — quite possibly in words, but not cleanly as finalized objects.
+
+The likely situation is:
+
+Gm(s)Gm​(s) and Nm(s)Nm​(s) are the things you were already talking about as
+
+    the local jet Gram block,
+
+    the local jet cross block,
+
+    the raw local blocks before whitening,
+
+    or “the local matrix built from kernel values/derivatives at m±s/2m±s/2.”
+
+And then the whitened object was the thing written schematically as
+Gm(s)−1/2Nm(s)Gm(s)−1/2.
+Gm​(s)−1/2Nm​(s)Gm​(s)−1/2.
+
+That part definitely was in play.
+
+What I do not see in the chat record is the step where those were pinned down as exact finite-ss formulas, entry by entry, in one fixed normalization. The record itself keeps saying that what is present is:
+
+    the jet-limit formula at s=0s=0,
+
+    the toy/model jet blocks,
+
+    and the abstract machinery,
+
+but not the actual finite-ss zeta-side formulas for Gm(s)Gm​(s) and Nm(s)Nm​(s).
+
+So my answer is:
+
+Yes, probably referenced already under different descriptions.
+No, not established cleanly enough.
+
+ELI5 version:
+
+Think of Gm(s)Gm​(s) and Nm(s)Nm​(s) as the raw ingredients of the local zeta matrix.
+
+    Gm(s)Gm​(s): “how the two local jet directions measure themselves”
+
+    Nm(s)Nm​(s): “how the left local jet talks to the right local jet”
+
+Then whitening turns those raw ingredients into the normalized comparison object. So they are not some random late notation choice. They are basically the pre-whitened skeleton of the whole local argument.
+
+Should they have been established from the beginning?
+
+Not necessarily from the very beginning of exploration. While you were still guessing the right structure, it is normal to work more heuristically.
+
+But once the proof started depending on holomorphy, whitening, and microscopic uniformity, then yes — they became foundational and should have been fixed explicitly. The chats themselves more or less admit that: the missing step was exactly to write down those finite-ss blocks in the current normalization and prove their analytic properties.
+
+So the clean diagnosis is:
+
+    you probably did already have them informally,
+
+    but only as “the local Gram/cross blocks” in concept,
+
+    not as a locked, exact finite-ss definition that the later proofs could cite without ambiguity.
+
+That is why this gap feels so annoying: it is not a brand-new idea that got omitted, it is a foundational object that was being used implicitly before it was ever fully nailed down.
+
+If you want, I can next help reconstruct the most likely intended definition of Gm(s)Gm​(s) and Nm(s)Nm​(s) from the notation you already have, so you can see whether they really were hiding in plain sight.
+
+yes, please do
+
+I found the aliases. The same objects were already being referred to as the “local jet Gram block,” the “local jet cross block,” and the raw blocks whose holomorphy and ∂sGm(s)=O(Q2)∂s​Gm​(s)=O(Q2) bound had to be checked before whitening. What was missing was not the idea of them, but the exact finite-ss entry formulas in one fixed normalization.
+
+Yes. My best reconstruction is that they were already there in substance, under slightly different names.
+
+The intended dictionary looks like this:
+t±=m±s2.
+t±​=m±2s​.
+
+At those two nearby points, you take the local two-dimensional jet basis — value and first derivative, or whatever your normalized jet pair is in the current convention. Then:
+Gm(s)
+Gm​(s)
+
+is the same-point jet Gram block. In plain English: it measures how the local jet at t−t−​ pairs with itself, and by symmetry the same formula is used for t+t+​. That is why one symbol Gm(s)Gm​(s) was enough under symmetric placement. This is exactly how the later checklist treats it: “the local jet Gram block Gm(s)Gm​(s)” whose holomorphy and ∂sGm(s)=O(Q2)∂s​Gm​(s)=O(Q2) needed to be checked before whitening.
+Nm(s)
+Nm​(s)
+
+is the cross jet block. In plain English: it measures how the jet at t−t−​ pairs with the jet at t+t+​. Again, that is exactly how the notes use it: “the local jet cross block Nm(s)Nm​(s)” that gets whitened together with Gm(s)Gm​(s).
+
+Then the normalized object was intended to be
+Ω^ζ(s;m)=Gm(s)−1/2Nm(s)Gm(s)−1/2,
+Ω
+ζ​(s;m)=Gm​(s)−1/2Nm​(s)Gm​(s)−1/2,
+
+possibly followed by background subtraction / phase-gap subtraction depending on the precise stage of the argument. That formula appears repeatedly as the whole point of introducing Gm(s)Gm​(s) and Nm(s)Nm​(s): they are the raw pre-whitened blocks.
+
+So, in ELI5 terms:
+
+    Gm(s)Gm​(s) tells you what the local coordinate system looks like at the two nearby points.
+
+    Nm(s)Nm​(s) tells you how the two nearby points talk to each other.
+
+    Whitening by Gm(s)−1/2Gm​(s)−1/2 removes the local scaling/basis distortion so you can compare actual structure rather than coordinate artifacts.
+
+That is why they feel so fundamental: they are basically the “bones” underneath the local statistic.
+
+Where they seem to connect to the notation you already had is this. In the later jet-limit writeup, for two centers T1,T2T1​,T2​, you introduced
+Jj=1πMj
+Jj​=π1​Mj​
+
+for the local jet Gram matrices at each point, and
+C12=1πN12
+C12​=π1​N12​
+
+for the cross-jet matrix, with
+Ω∞(T1,T2)=M1−1/2N12M2−1/2.
+Ω∞​(T1​,T2​)=M1−1/2​N12​M2−1/2​.
+
+That is almost certainly the jet-limit avatar of the same finite-ss objects. In other words, MjMj​ and N12N12​ are not new ideas; they are what Gm(s)Gm​(s) and Nm(s)Nm​(s) become after you pass all the way to the explicit jet-limit formulas.
+
+So the likely intended hierarchy is:
+
+    finite ss: Gm(s),Nm(s)Gm​(s),Nm​(s) = raw local zeta/scattering jet blocks;
+
+    after whitening: Ω^ζ(s;m)=Gm(s)−1/2Nm(s)Gm(s)−1/2Ω
+    ζ​(s;m)=Gm​(s)−1/2Nm​(s)Gm​(s)−1/2;
+
+    jet limit / explicit algebraic model: Mj,N12,Ω∞Mj​,N12​,Ω∞​.
+
+And that explains the annoyance perfectly: the notes had the abstract role of Gm(s)Gm​(s) and Nm(s)Nm​(s) very clearly, and later had the explicit limit formulas Mj,N12Mj​,N12​, but seem never to have frozen the finite-ss exact entry formulas in one canonical notation. The files themselves say that exact finite-ss formulas for Gm(s)Gm​(s) and Nm(s)Nm​(s) are still the missing ingredient.
+
+So if I had to reconstruct the most likely intended definitions in one sentence:
+Gm(s)=the symmetric local same-point 2\times2 jet Gram block at m±s/2,
+Gm​(s)=the symmetric local same-point 2\times2 jet Gram block at m±s/2,
+Nm(s)=the corresponding mixed left-right 2\times2 jet block,
+Nm​(s)=the corresponding mixed left-right 2\times2 jet block,
+
+and Ω^ζ(s;m)Ω
+ζ​(s;m) is just their whitened cross block.
+
+The only thing still missing is the exact finite-ss formula for those blocks in the zeta/scattering normalization you settled on.
+
+The next useful step is to reconstruct those formulas explicitly from the kernel notation you were already using, so you can see whether Gm(s)Gm​(s) should really be called something like G−−(m,s)G−−​(m,s) and Nm(s)Nm​(s) something like G−+(m,s)G−+​(m,s) before symmetry collapses them.
+
+First, the finite-
+s
+s local analytic package for the actual zeta/scattering blocks:
+you still need the exact finite-
+s
+s formulas for the local jet Gram block 
+Gm(s)
+G
+m
+	​
+
+(s) and cross block 
+Nm(s)
+N
+m
+	​
+
+(s), and then a proof that they are holomorphic on
+
+∣s∣<ρ0/Q,Q≍log⁡∣m∣.
+∣s∣<ρ
+0
+	​
+
+/Q,Q≍log∣m∣.
+
+This is the last place where the argument still depends on formulas that were implicit rather than frozen explicitly.
+
+can you do this?
+
+I’m going to search the earlier chats for any place where the finite-ss blocks were written out in kernel-derivative form, even if not named Gm(s)Gm​(s) and Nm(s)Nm​(s). If that exists, I can reconstruct them; if not, I’ll say exactly what extra definition is still missing.
+
+Yes — up to one caveat, I can now write the exact finite-ss formulas.
+
+The caveat is that this works if the actual zeta/scattering local kernel really is the phase kernel
+KΦ(x,y)={sin⁡(Φ(x)−Φ(y))π(x−y),x≠y,Φ′(x)π,x=y.
+KΦ​(x,y)=⎩
+⎨
+⎧​π(x−y)sin(Φ(x)−Φ(y))​,πΦ′(x)​,​x=y,x=y.​
+
+That kernel is exactly what the earlier jet-limit derivation in your files was using. From it, the same-point jet blocks and the cross-jet block can be written down explicitly before Taylor expansion.
+
+The first thing I would fix is notation. Under symmetric placement,
+t−=m−s2,t+=m+s2,
+t−​=m−2s​,t+​=m+2s​,
+
+write
+q±=Φ′(t±),q±′=Φ′′(t±),q±′′=Φ′′′(t±),
+q±​=Φ′(t±​),q±′​=Φ′′(t±​),q±′′​=Φ′′′(t±​),
+
+and
+Δm(s)=Φ(t−)−Φ(t+).
+Δm​(s)=Φ(t−​)−Φ(t+​).
+
+Then the honest finite-ss same-point jet Gram blocks are two matrices,
+Gm,−(s)=1π(2q−12q−′12q−′112(q−′′+2q−3)),Gm,+(s)=1π(2q+12q+′12q+′112(q+′′+2q+3)).
+Gm,−​(s)=π1​(2q−​21​q−′​​21​q−′​121​(q−′′​+2q−3​)​),Gm,+​(s)=π1​(2q+​21​q+′​​21​q+′​121​(q+′′​+2q+3​)​).
+
+These are just the finite-ss versions of the jet-limit Gram matrices J(T)J(T) already written in the files.
+
+The cross-jet block is
+Nm(s)=1π(−2sin⁡Δm(s)ssin⁡Δm(s)+q+ scos⁡Δm(s)s2−sin⁡Δm(s)+q− scos⁡Δm(s)s2(q−+q+)scos⁡Δm(s)+(2−q−q+s2)sin⁡Δm(s)2s3).
+Nm​(s)=π1​
+​−s2sinΔm​(s)​−s2sinΔm​(s)+q−​scosΔm​(s)​​s2sinΔm​(s)+q+​scosΔm​(s)​2s3(q−​+q+​)scosΔm​(s)+(2−q−​q+​s2)sinΔm​(s)​​
+​.
+
+This is just the earlier explicit cross matrix C12C12​ after substituting T1=t−T1​=t−​, T2=t+T2​=t+​, so that the file’s separation variable T1−T2T1​−T2​ equals −s−s.
+
+So the exact finite-ss whitened block is not quite
+Gm(s)−1/2Nm(s)Gm(s)−1/2;
+Gm​(s)−1/2Nm​(s)Gm​(s)−1/2;
+
+more honestly it is
+Ω^ζ(s;m)=Gm,−(s)−1/2Nm(s)Gm,+(s)−1/2.
+Ω
+ζ​(s;m)=Gm,−​(s)−1/2Nm​(s)Gm,+​(s)−1/2.
+
+Only after an additional symmetry reduction, midpoint freezing, or approximation would you collapse the two same-point blocks to one symbol Gm(s)Gm​(s). The files already reflect this on the jet-limit side via
+Ω∞(T1,T2)=M1−1/2N12M2−1/2,
+Ω∞​(T1​,T2​)=M1−1/2​N12​M2−1/2​,
+
+with two separate local Gram blocks.
+
+Now, about holomorphy.
+
+Once those formulas are written, the formal holomorphy mechanism is straightforward. If ΦΦ is holomorphic in the microscopic neighborhood traced by t±=m±s/2t±​=m±s/2, then each entry of Gm,±(s)Gm,±​(s) is holomorphic immediately, because it is just built from q,q′,q′′q,q′,q′′ evaluated at t±t±​. For Nm(s)Nm​(s), the only apparent problem is the factors 1/s,1/s2,1/s31/s,1/s2,1/s3, but those are removable at s=0s=0: Δm(s)Δm​(s) is odd with Δm(0)=0Δm​(0)=0, so
+Δm(s)=−q(m)s+O(s3),
+Δm​(s)=−q(m)s+O(s3),
+
+hence sin⁡Δm(s)=O(s)sinΔm​(s)=O(s), the off-diagonal numerators are O(s2)O(s2), and the (2,2)(2,2)-numerator is O(s3)O(s3). So Nm(s)Nm​(s) extends holomorphically through s=0s=0.
+
+So at the purely algebraic/kernel level: yes, this can be done.
+
+But the harder sentence from your note —
+∣s∣<ρ0/Q,Q≍log⁡∣m∣,
+∣s∣<ρ0​/Q,Q≍log∣m∣,
+
+and “prove these are holomorphic there for the actual zeta/scattering blocks” — is still not automatic. That part reduces to proving that the actual zeta/scattering phase ΦΦ, or equivalently q=Φ′q=Φ′, has no singularities in that microscopic disk except the removable one at s=0s=0. And that is exactly the unresolved checklist from the earlier files: identify the raw singularities coming from the zero sum, show they stay at distance ≫1/Q≫1/Q, prove denominator comparability on the disk, and then prove uniform convergence of the differentiated zero sums. The files themselves explicitly say that this part had not yet been frozen entry-by-entry.
+
+So the clean answer is:
+
+Yes, I can freeze the finite-ss formulas. They are the matrices above.
+No, that alone does not finish the analytic package. What remains is to prove that your actual zeta/scattering ΦΦ is holomorphic on the microscopic disk with the needed zero-sum control, and then separately verify the derivative bound on the same-point blocks. The files themselves still treat that as the outstanding A2–A4/B3 work.
+
+The derivative bound is the one place I would still be cautious. Once the formula is fixed, it becomes a concrete estimate on q±,q±′,q±′′q±​,q±′​,q±′′​ and one more derivative under the chain rule. But I cannot honestly claim
+sup⁡∣s∣<ρ/Q∥∂sGm,±(s)∥≤CGQ2
+∣s∣<ρ/Qsup​∥∂s​Gm,±​(s)∥≤CG​Q2
+
+from the attached record alone, because your own notes flagged that as a separate missing verification rather than something already proved.
+
+So: the formulas are now explicit; the remaining gap is no longer “what are Gm(s)Gm​(s) and Nm(s)Nm​(s)?”, but “can the actual zeta/scattering phase be shown to satisfy the microscopic holomorphy and derivative bounds needed for those explicit formulas?”
+
+ok prove that
+
+I’m going after the exact missing point now: whether the chats already contain a proof that the phase ΦΦ and its derivatives are holomorphic on the microscopic disk and satisfy the QQ-scale bounds needed for the finite-ss blocks. If that proof is there, I’ll extract it; if not, I’ll separate what is actually proved from what is still being assumed.
+
+I hit a real issue: with the explicit 2×22×2 finite-ss formulas we reconstructed, the claimed bound sup⁡∥∂sGm(s)∥≤CGQ2sup∥∂s​Gm​(s)∥≤CG​Q2 does not look consistent dimensionally unless there is an extra normalization or a rescaled ss-variable hiding in the definition of Gm(s)Gm​(s). So before claiming a proof, I need to separate “holomorphy of the raw entries” from “the exact Q2Q2 derivative bound in the intended normalization.”
+
+Not honestly — not as a full proof of the package you asked for.
+
+The notes themselves keep saying the remaining unresolved items are exactly A1, A4, and B3: the exact raw entry formulas, uniform convergence of the differentiated zero sums, and the explicit ∂sGm(s)∂s​Gm​(s) bound. They also say A2/A3 are basically checked, and the holomorphic whitening step is only abstractly ready once those raw inputs are in hand.
+
+And after trying to force the proof, I hit a real consistency issue:
+
+if I use the explicit jet-limit Gram formula
+G(0)∼1π(2q12q′12q′112(q′′+2q3)),
+G(0)∼π1​(2q21​q′​21​q′121​(q′′+2q3)​),
+
+as the model for the finite-ss raw block, then differentiating in ss produces terms involving q′,q′′,q′′′q′,q′′,q′′′, and q2q′q2q′. On the natural scales q∼Qq∼Q, q′∼Q2q′∼Q2, q′′∼Q3q′′∼Q3, q′′′∼Q4q′′′∼Q4, that does not look like an O(Q2)O(Q2) bound unless there is an extra normalization, rescaled ss-variable, or basis change hidden in the definition of Gm(s)Gm​(s). So I do not think I can simply “prove B3” from the current formulas as written; I think there is still a normalization mismatch to resolve. The notes themselves warn that normalization consistency still had to be checked.
+
+What I can prove is the following weaker statement.
+
+Assume the actual finite-ss raw entries are indeed built from finitely many evaluations of the phase kernel and its x,yx,y-derivatives under symmetric placement
+t±=m±s2,
+t±​=m±2s​,
+
+and assume the phase ΦΦ is holomorphic on the microscopic neighborhood traced by t±t±​. Then each raw entry is holomorphic on ∣s∣<ρ0/Q∣s∣<ρ0​/Q, provided no zero-induced singularity enters that disk. The reason is simple: every entry is a finite algebraic combination of holomorphic functions of t±t±​, and the only apparent singularity at s=0s=0 comes from factors like 1/s,1/s2,1/s31/s,1/s2,1/s3; but under symmetric placement
+Δm(s)=Φ(t−)−Φ(t+)
+Δm​(s)=Φ(t−​)−Φ(t+​)
+
+is odd with Δm(0)=0Δm​(0)=0, so sin⁡Δm(s)=O(s)sinΔm​(s)=O(s), the off-diagonal numerators are O(s2)O(s2), and the (2,2)(2,2) numerator is O(s3)O(s3). Thus the poles at s=0s=0 are removable. Away from 00, the only possible singularities are the zero-induced ones already identified in the notes, of the form
+s=±(γ−2m)±iβ,s=±(γ−2m)±i(1−β),
+s=±(γ−2m)±iβ,s=±(γ−2m)±i(1−β),
+
+and A2/A3 in the notes say these lie at distance ≳Q−1≳Q−1 and satisfy uniform denominator comparability on the microscopic disk/circle. So raw holomorphy is plausible and can be proved once the exact entry formulas are frozen.
+
+But that is still not the whole thing, because the missing part is not just “are the formulas meromorphic?” The missing part is the stronger uniform statement:
+
+    entrywise uniform convergence of the differentiated zero sums on ∣s∣<ρ0/Q∣s∣<ρ0​/Q,
+
+    and the exact scale of ∂sGm(s)∂s​Gm​(s) in the intended normalization.
+
+Those are exactly the items the notes still mark as not checked.
+
+So my honest verdict is:
+
+I cannot prove the full statement you asked for from the current record, because the last gap is real.
+What I can prove is:
+
+    once the exact finite-ss raw formulas are fixed, the holomorphy mechanism is straightforward;
+
+    A2/A3 already give the right singularity geometry and denominator control;
+
+    the real unresolved point is B3, and right now B3 actually looks suspicious unless the normalization of Gm(s)Gm​(s) is clarified.
+
+So the next correct move is not “push harder on the proof,” but:
+
+pin down the exact finite-ss normalization of Gm(s)Gm​(s) and check whether B3 should really read O(Q2)O(Q2), or whether that bound belongs to a rescaled or conjugated version of the block.
+
+That is the point where the argument is still genuinely unfinished.
+
+ok finish it
+
+I’m going to resolve the normalization issue directly. If the O(Q2)O(Q2) bound belongs to a rescaled or centered version of the block rather than the raw same-point Gram matrix, then the last step may just be a notation mismatch instead of a mathematical gap.
+
+I can finish the logic, but not by pretending the missing theorem is already proved. The honest finish is: isolate the exact point where the proof now lives, correct the normalization issue, and reduce the remaining work to one explicit finite-ss lemma.
+
+I can finish the reduction, but I cannot honestly finish a proof of RH from the material you’ve uploaded, because the remaining gap is real and was already isolated in your own checklist: the exact finite-ss raw formulas, uniform convergence of their differentiated zero sums, and the B3B3 derivative bound were still the missing items.
+
+What I can finish is this:
+The whole remaining analytic gap collapses to one phase-derivative lemma
+
+Write
+t±=m±s2,q(t)=Φ′(t).
+t±​=m±2s​,q(t)=Φ′(t).
+
+Then the finite-ss same-point jet Gram blocks are
+Gm,±(s)=1π(2q(t±)12q′(t±)12q′(t±)112(q′′(t±)+2q(t±)3)).
+Gm,±​(s)=π1​(2q(t±​)21​q′(t±​)​21​q′(t±​)121​(q′′(t±​)+2q(t±​)3)​).
+
+So their ss-derivatives are explicit:
+∂sGm,±(s)=±12π(2q′(t±)12q′′(t±)12q′′(t±)112(q′′′(t±)+6q(t±)2q′(t±))).
+∂s​Gm,±​(s)=±2π1​(2q′(t±​)21​q′′(t±​)​21​q′′(t±​)121​(q′′′(t±​)+6q(t±​)2q′(t±​))​).
+
+That means B3B3 is not some mysterious matrix estimate anymore. It is exactly the statement that on the microscopic disk,
+∣q′(t±)∣≪1,∣q′′(t±)∣≪1,∣q′′′(t±)+6q(t±)2q′(t±)∣≪Q2,
+∣q′(t±​)∣≪1,∣q′′(t±​)∣≪1,∣q′′′(t±​)+6q(t±​)2q′(t±​)∣≪Q2,
+
+uniformly for ∣s∣<ρ/Q∣s∣<ρ/Q.
+
+If you prefer a slightly stronger but cleaner version, it is enough to prove
+∣q′(t±)∣≪1,∣q′′(t±)∣≪1,∣q′′′(t±)∣≪Q2,
+∣q′(t±​)∣≪1,∣q′′(t±​)∣≪1,∣q′′′(t±​)∣≪Q2,
+
+since q(t±)≍Qq(t±​)≍Q and then q(t±)2q′(t±)≪Q2q(t±​)2q′(t±​)≪Q2.
+
+So the entire finite-ss Gram stability problem is equivalent to proving those phase-derivative bounds.
+Holomorphy is easier than B3B3
+
+Once the exact raw entries are written, raw holomorphy is straightforward in principle.
+
+You already identified the singularities in the ss-plane as the zero-induced ones coming from the Poisson-pair denominators, and the notes say the intended program was:
+
+    locate those singularities,
+
+    prove they stay at distance ≳1/Q≳1/Q from 00,
+
+    prove denominator comparability on ∣s∣<ρ0/Q∣s∣<ρ0​/Q,
+
+    and then get uniform convergence of the differentiated zero sums by shell decomposition.
+
+So the real bottleneck is not “is Gm(s)Gm​(s) formally holomorphic?” It is: do the differentiated zero sums converge uniformly strongly enough to justify the entrywise bounds above?
+What would actually finish the package
+
+At this point the proof burden is very small and very explicit.
+
+You need one theorem of the following form:
+
+    Microscopic phase derivative theorem.
+    On the admissible midpoint class, for ∣s∣<ρ0/Q∣s∣<ρ0​/Q,
+    q(t±), q′(t±), q′′(t±), q′′′(t±)
+    q(t±​), q′(t±​), q′′(t±​), q′′′(t±​)
+
+    are holomorphic in ss, and satisfy
+    q(t±)≍Q,∣q′(t±)∣≪1,∣q′′(t±)∣≪1,∣q′′′(t±)∣≪Q2.
+    q(t±​)≍Q,∣q′(t±​)∣≪1,∣q′′(t±​)∣≪1,∣q′′′(t±​)∣≪Q2. 
+
+If that theorem is proved, then:
+
+    Gm,±(s)Gm,±​(s) are holomorphic,
+
+    sup⁡∥∂sGm,±(s)∥≪Q2sup∥∂s​Gm,±​(s)∥≪Q2,
+
+    Gm,±(0)Gm,±​(0) has the correct s=0s=0 jet-limit form,
+
+    Gm,±(s)Gm,±​(s) stay uniformly positive definite for ∣s∣<ρ0/Q∣s∣<ρ0​/Q,
+
+    the inverse square roots are holomorphic by functional calculus,
+
+    the whitened cross block is holomorphic,
+
+    and then your ΦE/ΦKΦE​/ΦK​ transfer theorem takes over.
+
+So the RH program is no longer blocked by some vague “analytic package.” It is blocked by one very specific unresolved statement about qq and its first three tt-derivatives on the microscopic disk.
+The hard truth
+
+I cannot honestly prove that microscopic phase derivative theorem from the uploaded record, because the files themselves still treat exactly that step as unfinished. In particular, they do not contain the completed entry-by-entry differentiated zero-sum estimates needed to justify it.
+
+So I cannot “finish it” in the sense of completing a proof of RH.
+
+But I can finish the diagnosis:
+Final status
+
+    The structural endgame is now clear.
+
+    The correct local finite-ss objects are clear.
+
+    The whitening step is abstractly ready once raw phase derivative control is in hand.
+
+    The entire remaining gap is the microscopic phase derivative theorem above.
+
+That is the honest finish.
+
+If you want the most useful next step, it is not more broad strategizing. It is to attack exactly this:
+q(t)=Baut(t)+∑ρfβρ,γρ(t)
+q(t)=Baut​(t)+ρ∑​fβρ​,γρ​​(t)
+
+and prove the four uniform bounds
+q≍Q,q′=O(1),q′′=O(1),q′′′=O(Q2)
+q≍Q,q′=O(1),q′′=O(1),q′′′=O(Q2)
+
+on t=m±s/2t=m±s/2, ∣s∣<ρ0/Q∣s∣<ρ0​/Q, by shell decomposition plus the zero-free-region denominator geometry.
+
+That is now the whole game.
+
+ok prove this theorem:
+
+You need one theorem of the following form:
+
+Microscopic phase derivative theorem.
+On the admissible midpoint class, for 
+∣s∣<ρ0/Q
+∣s∣<ρ
+0
+	​
+
+/Q,
+
+q(t±), q′(t±), q′′(t±), q′′′(t±)
+q(t
+±
+	​
+
+), q
+′
+(t
+±
+	​
+
+), q
+′′
+(t
+±
+	​
+
+), q
+′′′
+(t
+±
+	​
+
+)
+
+are holomorphic in 
+s
+s, and satisfy
+
+q(t±)≍Q,∣q′(t±)∣≪1,∣q′′(t±)∣≪1,∣q′′′(t±)∣≪Q2.
+q(t
+±
+	​
+
+)≍Q,∣q
+′
+(t
+±
+	​
+
+)∣≪1,∣q
+′′
+(t
+±
+	​
+
+)∣≪1,∣q
+′′′
+(t
+±
+	​
+
+)∣≪Q
+2
+.
+
+I’m pulling together every place the chats discuss the phase q=Φ′q=Φ′, the zero-sum decomposition, and the shell/near-far bounds. If the theorem is already latent in the notes, it should show up there; if not, I’ll prove the largest honest version and isolate the exact missing estimate.
+
+I can’t honestly prove that theorem as stated from your current framework, and I don’t think it is the right raw theorem to ask for.
+
+The reason is structural. Your own notes now decompose
+q(t)=Baut(t)+∑ρfβρ,γρ(t),
+q(t)=Baut​(t)+ρ∑​fβρ​,γρ​​(t),
+
+then isolate a local model qmodqmod​ from one or two designated nearby zero-pairs, and treat the rest
+gsm(t)=Baut(t)+Tfar(t)
+gsm​(t)=Baut​(t)+Tfar​(t)
+
+as the smooth omitted part. The theorem you actually proved in the notes is about that smooth remainder after affine-jet subtraction, not about the full raw qq.
+
+That distinction matters, because the current machinery only gives an explicit bound like
+∥Tfar′′∥L∞(I)≤48∑ρ∉LΔρ−4,
+∥Tfar′′​∥L∞(I)​≤48ρ∈/L∑​Δρ−4​,
+
+with Δρ=dist⁡(2I,γρ)Δρ​=dist(2I,γρ​), and then plugs that into the jet-corrected local transfer theorem. That is a real theorem in the notes. But it is a theorem for the omitted smooth part, not for the full qq, q′q′, q′′q′′, q′′′q′′′.
+
+In fact, the notes themselves mark the raw finite-ss analytic package as still unfinished. They explicitly list as missing:
+
+    exact finite-ss entry formulas for Gm(s)Gm​(s), Nm(s)Nm​(s),
+
+    uniform convergence of differentiated zero sums,
+
+    and the B3B3 bound on ∂sGm(s)∂s​Gm​(s).
+
+There is also a scaling warning. Your jet Gram block at s=0s=0 is
+Gm(0)=1π(2q12q′12q′112(q′′+2q3)),
+Gm​(0)=π1​(2q21​q′​21​q′121​(q′′+2q3)​),
+
+and the notes explicitly say its diagonal scales should be QQ and Q3Q3. That is perfectly consistent with
+q≍Q,q′′+2q3≍Q3,
+q≍Q,q′′+2q3≍Q3,
+
+but it does not support a theorem saying the full raw quantities satisfy
+q′=O(1),q′′=O(1),q′′′=O(Q2)
+q′=O(1),q′′=O(1),q′′′=O(Q2)
+
+without first subtracting the local model.
+
+So the honest answer is:
+
+No, I cannot prove the theorem you stated, because your notes do not prove it, and the current architecture points to a different theorem as the right one.
+
+The corrected theorem is this:
+
+    On an admissible local window, after splitting
+    q=qloc+gsm,gsm=Baut+Tfar,
+    q=qloc​+gsm​,gsm​=Baut​+Tfar​,
+
+    the smooth omitted part gsmgsm​ is holomorphic on the microscopic disk and, after affine-jet subtraction at the midpoint, its local error is controlled by
+    ∥gsm′′∥L∞(I)≤∥Baut′′∥L∞(I)+48∑ρ∉LΔρ−4.
+    ∥gsm′′​∥L∞(I)​≤∥Baut′′​∥L∞(I)​+48ρ∈/L∑​Δρ−4​.
+
+    Consequently the phase error is quadratic/cubic on the short window and transfers into the block residual as the O(L2S2)O(L2S2​) term.
+
+That is the theorem your current machinery really supports.
+
+As for holomorphy in the complex ss-disk: the notes have the right plan, but not the completed proof. They isolate the singularities
+s=±(γ−2m)±iβ,s=±(γ−2m)±i(1−β),
+s=±(γ−2m)±iβ,s=±(γ−2m)±i(1−β),
+
+state the denominator-comparability target
+∣(x+s)2+a2∣≍x2+a2(∣s∣≤ρ0/Q),
+∣(x+s)2+a2∣≍x2+a2(∣s∣≤ρ0​/Q),
+
+and say that shell decomposition plus local zero counting should give uniform convergence of the raw entries and their first ss-derivatives. But they still present that as the outstanding A2–A4 work, not as something already proved.
+
+So the right conclusion is:
+
+    q(t±)≍Qq(t±​)≍Q is plausible and consistent with the current setup.
+
+    The full raw bounds q′(t±)=O(1)q′(t±​)=O(1), q′′(t±)=O(1)q′′(t±​)=O(1), q′′′(t±)=O(Q2)q′′′(t±​)=O(Q2) are not proved in your notes and are not the right theorem for the current decomposition.
+
+    The theorem you can prove is the jet-corrected one for the smooth remainder after isolating the local pair(s).
+
+If you want, I can now rewrite the exact corrected “microscopic phase theorem” in paper form, with hypotheses and proof matching what your notes actually support.
+
+yes please
+
+I’m turning the corrected version into something paper-ready: a theorem that matches what the notes really support, rather than the stronger raw-derivative statement they don’t yet prove.
+
+Yes. Here is the corrected version in paper form — the one your notes actually support.
+Theorem (microscopic smooth-remainder phase theorem)
+
+Let
+I=[a,b],L:=∣I∣,t∗:=a+b2.
+I=[a,b],L:=∣I∣,t∗​:=2a+b​.
+
+Write the phase derivative on II as
+q(t)=qloc(t)+gsm(t)+Eest(t),
+q(t)=qloc​(t)+gsm​(t)+Eest​(t),
+
+where
+gsm(t):=Baut(t)+Tfar(t),
+gsm​(t):=Baut​(t)+Tfar​(t),
+
+and qlocqloc​ is the chosen local model built from the designated nearby zero-pair(s), while TfarTfar​ is the sum over omitted zeros. Assume gsm∈C2(I)gsm​∈C2(I), and define its affine jet at the midpoint by
+J1[gsm](t):=gsm(t∗)+gsm′(t∗)(t−t∗).
+J1​[gsm​](t):=gsm​(t∗​)+gsm′​(t∗​)(t−t∗​).
+
+Set
+r(t):=gsm(t)−J1[gsm](t).
+r(t):=gsm​(t)−J1​[gsm​](t).
+
+Assume
+∥gsm′′∥L∞(I)≤S2.
+∥gsm′′​∥L∞(I)​≤S2​.
+
+Then for every t∈It∈I,
+∣r′(t)∣≤L2S2,∣r(t)∣≤L28S2.
+∣r′(t)∣≤2L​S2​,∣r(t)∣≤8L2​S2​.
+
+If Φ,ΦjetΦ,Φjet​ are phases satisfying
+Φ′(t)=q(t),Φjet′(t)=qloc(t)+J1[gsm](t)+Eest(t),
+Φ′(t)=q(t),Φjet′​(t)=qloc​(t)+J1​[gsm​](t)+Eest​(t),
+
+and normalized by
+Φ(t∗)=Φjet(t∗),
+Φ(t∗​)=Φjet​(t∗​),
+
+then
+(Φ−Φjet)′(t)=r(t),
+(Φ−Φjet​)′(t)=r(t),
+
+and hence
+∥(Φ−Φjet)′∥L∞(I)≤L28S2,∥Φ−Φjet∥L∞(I)≤L316S2.
+∥(Φ−Φjet​)′∥L∞(I)​≤8L2​S2​,∥Φ−Φjet​∥L∞(I)​≤16L3​S2​.
+
+In particular, after affine-jet subtraction, the smooth omitted part contributes only quadratic-size derivative error and cubic-size phase error on the short window II. This is the local phase statement needed for the jet-corrected transfer step.
+Proof
+
+Since r(t∗)=0r(t∗​)=0 and r′(t∗)=0r′(t∗​)=0, and since
+r′′(t)=gsm′′(t),
+r′′(t)=gsm′′​(t),
+
+the hypothesis gives
+∣r′′(t)∣≤S2(t∈I).
+∣r′′(t)∣≤S2​(t∈I).
+
+For the first derivative, integrate from t∗t∗​ to tt:
+r′(t)=∫t∗tr′′(u) du.
+r′(t)=∫t∗​t​r′′(u)du.
+
+Therefore
+∣r′(t)∣≤∣t−t∗∣ S2≤L2S2.
+∣r′(t)∣≤∣t−t∗​∣S2​≤2L​S2​.
+
+Integrating once more,
+r(t)=∫t∗tr′(u) du,
+r(t)=∫t∗​t​r′(u)du,
+
+so
+∣r(t)∣≤∫t∗t∣r′(u)∣ du≤∫t∗t∣u−t∗∣ S2 du≤∣t−t∗∣22S2≤L28S2.
+∣r(t)∣≤∫t∗​t​∣r′(u)∣du≤∫t∗​t​∣u−t∗​∣S2​du≤2∣t−t∗​∣2​S2​≤8L2​S2​.
+
+Now
+Φ′(t)−Φjet′(t)=r(t),
+Φ′(t)−Φjet′​(t)=r(t),
+
+so
+∥(Φ−Φjet)′∥L∞(I)=∥r∥L∞(I)≤L28S2.
+∥(Φ−Φjet​)′∥L∞(I)​=∥r∥L∞(I)​≤8L2​S2​.
+
+Because Φ(t∗)=Φjet(t∗)Φ(t∗​)=Φjet​(t∗​),
+Φ(t)−Φjet(t)=∫t∗tr(u) du,
+Φ(t)−Φjet​(t)=∫t∗​t​r(u)du,
+
+hence
+∣Φ(t)−Φjet(t)∣≤∣t−t∗∣ ∥r∥L∞(I)≤L2⋅L28S2=L316S2.
+∣Φ(t)−Φjet​(t)∣≤∣t−t∗​∣∥r∥L∞(I)​≤2L​⋅8L2​S2​=16L3​S2​.
+
+That proves the theorem.
+Corollary (explicit far-zero curvature bound)
+
+Suppose
+Tfar(t)=∑ρ∉Lfβρ,γρ(t),
+Tfar​(t)=ρ∈/L∑​fβρ​,γρ​​(t),
+
+with
+fβ,γ(t)=1−β(1−β)2+(2t−γ)2+ββ2+(2t−γ)2.
+fβ,γ​(t)=(1−β)2+(2t−γ)21−β​+β2+(2t−γ)2β​.
+
+Let
+Δρ:=dist⁡(2I,γρ)=inf⁡t∈I∣2t−γρ∣.
+Δρ​:=dist(2I,γρ​)=t∈Iinf​∣2t−γρ​∣.
+
+Then
+∥Tfar′′∥L∞(I)≤48∑ρ∉LΔρ−4.
+∥Tfar′′​∥L∞(I)​≤48ρ∈/L∑​Δρ−4​.
+
+Therefore one may take
+S2≤∥Baut′′∥L∞(I)+48∑ρ∉LΔρ−4.
+S2​≤∥Baut′′​∥L∞(I)​+48ρ∈/L∑​Δρ−4​.
+
+So the jet-corrected local phase error is controlled explicitly by the background curvature plus an inverse-fourth-power tail from omitted zeros.
+What this theorem does and does not say
+
+This theorem is the right correction to the earlier “raw microscopic phase derivative theorem.”
+
+It does say:
+
+    after isolating the designated local pair(s),
+
+    and subtracting the affine jet of the smooth omitted part,
+
+    the remaining phase error is genuinely small on a short window.
+
+It does not say:
+
+    that the full raw q,q′,q′′,q′′′q,q′,q′′,q′′′ satisfy the stronger uniform bounds you asked for earlier,
+
+    or that the full finite-ss holomorphic whitening package is complete.
+
+It is exactly the theorem your current notes support, and it is the right input for the jet-corrected transfer theorem, not yet the full RH-strength finite-ss analytic package.
+
+If you want, the next useful step is to turn this into a proposition numbered exactly as it should appear in a paper, with notation harmonized to your current draft.
+
+Pasted markdown(6).md
+File
+
+Yes — this is the right fix.
+
+It resolves the main mistake in the earlier approach, which was trying to prove the finite-ss package directly for the full raw phase. Your new plan makes the correct split:
+
+    isolate the genuinely singular/local part into qlocqloc​,
+
+    treat the omitted part gsm=Baut+Tfargsm​=Baut​+Tfar​ as the smooth object,
+
+    subtract its affine jet,
+
+    and only then run the finite-ss block/whitening argument.
+
+That is much more believable analytically, and it matches what your notes actually support rather than the stronger raw theorem they never really proved.
+
+I think the three-theorem structure A/B/C is the right way to organize the remaining gap.
+
+Theorem A is the real entry point: prove denominator comparability on ∣s∣<ρ0/Q∣s∣<ρ0​/Q, then uniform convergence of the differentiated omitted-zero sums, then holomorphy of gsm(t±)gsm​(t±​) and a few tt-derivatives as functions of ss. That is now a standard complex zero-sum estimate problem, not a mysterious RH-specific obstruction.
+
+Theorem B is already essentially in hand. It is the corrected phase theorem you wrote down: after affine-jet subtraction, the smooth remainder only contributes quadratic-size derivative error and cubic-size phase error on the short window. That is exactly the kind of estimate the block transfer actually wants.
+
+Theorem C is where I would be especially careful with wording. I would not phrase it as “prove the old raw B3B3 bound.” I would phrase it as a perturbative whitening theorem:
+
+    build the finite-ss blocks from
+    qloc+J1[gsm]+Eest,
+    qloc​+J1​[gsm​]+Eest​,
+
+    show these are holomorphic on the microscopic disk,
+
+    show they are a small perturbation of the explicit local-model-plus-affine-jet blocks,
+
+    and deduce uniform positivity/invertibility and holomorphic inverse square roots from that perturbation.
+
+That is a cleaner target than trying to rescue the original raw ∂sGm=O(Q2)∂s​Gm​=O(Q2) statement verbatim.
+
+So I would summarize the status like this:
+
+This does not yet finish the proof, but it probably correctly relocates the last analytic gap. The remaining work is no longer “control the whole raw phase.” It is:
+
+    holomorphy and derivative control for the omitted smooth remainder,
+
+    jet-corrected phase transfer,
+
+    perturbative block holomorphy and whitening for the corrected phase.
+
+That is a much sharper and more plausible program.
+
+The one sentence I would soften is “the analytic gap is essentially closed.” I would say instead:
+
+    the analytic gap has been reduced to three explicit corrected theorems, and those theorems are now aligned with the actual decomposition the notes support.
+
+That is strong, and I think accurate.
+
+The next thing I’d do is write Theorem A in full proof form first, because once that is done, Theorem C becomes much more routine.
+
+Pasted markdown(7).md
+File
+
+This is close, and I think you can now make Theorem C for the same-point Gram block essentially theorem-level.
+
+The key step is to stop leaving the perturbation estimate abstract and just compute it.
+
+Let
+q(t)=q0(t)+η(t),
+q(t)=q0​(t)+η(t),
+
+where q0q0​ is the local-model-plus-affine-jet phase derivative and ηη is the jet-corrected smooth remainder. Then by your Theorem B,
+∣η(t)∣≪L2S2,∣η′(t)∣≪LS2,∣η′′(t)∣≤S2
+∣η(t)∣≪L2S2​,∣η′(t)∣≪LS2​,∣η′′(t)∣≤S2​
+
+on the short window II.
+
+Now the same-point block is
+G(q)=1π(2q12q′12q′112(q′′+2q3)).
+G(q)=π1​(2q21​q′​21​q′121​(q′′+2q3)​).
+
+So the perturbation is explicit:
+G(q0+η)−G(q0)=1π(2η12η′12η′112(η′′+2[(q0+η)3−q03])).
+G(q0​+η)−G(q0​)=π1​(2η21​η′​21​η′121​(η′′+2[(q0​+η)3−q03​])​).
+
+Expand the cubic:
+(q0+η)3−q03=3q02η+3q0η2+η3.
+(q0​+η)3−q03​=3q02​η+3q0​η2+η3.
+
+Hence
+G(q0+η)−G(q0)=1π(2η12η′12η′112(η′′+6q02η+6q0η2+2η3)).
+G(q0​+η)−G(q0​)=π1​(2η21​η′​21​η′121​(η′′+6q02​η+6q0​η2+2η3)​).
+
+Therefore, on the window,
+∥Rm(s)∥≪∣η∣+∣η′∣+∣η′′∣+∣q0∣2∣η∣+∣q0∣∣η∣2+∣η∣3.
+∥Rm​(s)∥≪∣η∣+∣η′∣+∣η′′∣+∣q0​∣2∣η∣+∣q0​∣∣η∣2+∣η∣3.
+
+If q0≍Qq0​≍Q, this becomes
+∥Rm(s)∥≪S2+LS2+Q2L2S2+QL4S22+L6S23.
+∥Rm​(s)∥≪S2​+LS2​+Q2L2S2​+QL4S22​+L6S23​.
+
+On the microscopic scale L≍Q−2L≍Q−2, this simplifies to
+∥Rm(s)∥≪S2+O(Q−2S2)+O(Q−2S2)+O(Q−7S22)+O(Q−12S23),
+∥Rm​(s)∥≪S2​+O(Q−2S2​)+O(Q−2S2​)+O(Q−7S22​)+O(Q−12S23​),
+
+so in particular
+ ∥Rm(s)∥≪S2. 
+ ∥Rm​(s)∥≪S2​. ​
+
+That is the estimate you wanted.
+
+So for the same-point block, Theorem C can be upgraded to:
+
+    If the baseline block Gm(0)(s)Gm(0)​(s) is holomorphic on ∣s∣<ρ0/Q∣s∣<ρ0​/Q, satisfies
+    λmin⁡(Gm(0)(0))≥c0Q,sup⁡∣s∣<ρ0/Q∥Gm(0)(s)−Gm(0)(0)∥≤C0ρ0Q,
+    λmin​(Gm(0)​(0))≥c0​Q,∣s∣<ρ0​/Qsup​∥Gm(0)​(s)−Gm(0)​(0)∥≤C0​ρ0​Q,
+
+    and if the jet-corrected remainder obeys
+    S2=o(Q),
+    S2​=o(Q),
+
+    then
+    Gmcorr(s)=Gm(0)(s)+Rm(s)
+    Gmcorr​(s)=Gm(0)​(s)+Rm​(s)
+
+    is uniformly positive definite on ∣s∣<ρ0/Q∣s∣<ρ0​/Q, and Gmcorr(s)−1/2Gmcorr​(s)−1/2 is holomorphic there.
+
+The proof is now short:
+∥Rm(s)∥≪S2=o(Q),
+∥Rm​(s)∥≪S2​=o(Q),
+
+so
+∥Gmcorr(s)−Gm(0)(0)∥≤C0ρ0Q+o(Q).
+∥Gmcorr​(s)−Gm(0)​(0)∥≤C0​ρ0​Q+o(Q).
+
+Choosing ρ0ρ0​ small and mm large,
+C0ρ0Q+o(Q)≤c02Q,
+C0​ρ0​Q+o(Q)≤2c0​​Q,
+
+hence
+λmin⁡(Gmcorr(s))≥c02Q,
+λmin​(Gmcorr​(s))≥2c0​​Q,
+
+and holomorphic functional calculus gives the inverse square root.
+
+So I think the honest updated status is:
+
+    Theorem A: basically right, modulo derivative-order bookkeeping.
+
+    Theorem B: solid.
+
+    Theorem C for the same-point Gram block: now essentially proved, once you state the microscopic scale L≍Q−2L≍Q−2 and assume S2=o(Q)S2​=o(Q).
+
+What is still not done is the cross block Nm(s)Nm​(s). That one depends on the phase gap
+Δm(s)=Φ(t−)−Φ(t+),
+Δm​(s)=Φ(t−​)−Φ(t+​),
+
+and has the s−1,s−2,s−3s−1,s−2,s−3 structure, so you still need the corresponding perturbation estimate there. But the same-point whitening side is no longer the scary part.
+
+So the remaining analytic gap is even smaller now:
+prove the jet-corrected perturbation estimate for the cross block Nm(s).
+prove the jet-corrected perturbation estimate for the cross block Nm​(s).​
+
+That is the one kernel-specific estimate left.
+
+proof_of_rh_with_gaps(2).tex
+File
+
+I’m checking how the new TeX draft incorporates the corrected A/B/C structure, and whether the remaining gap is now isolated cleanly in the cross-block estimate rather than smeared across the whole proof.
+
+I’m opening the TeX draft now to see whether it already reflects the corrected A/B/C structure, or whether it still states the older stronger claims that we’ve since replaced.
+
+I checked the TeX draft.
+
+It is still in the older architecture, not the corrected one.
+
+The main issue is in the section starting around “Finite-ss local blocks and whitening.” There, the draft still says:
+
+    Gm(s)Gm​(s) and Nm(s)Nm​(s) are only abstractly defined,
+
+    the exact finite-ss formulas are left as a gap,
+
+    the raw Gram-stability/∂sGm∂s​Gm​ package is left as a gap,
+
+    and the boundary estimate is still posed in the old full-package form.
+
+So the draft has not yet absorbed the more accurate correction we arrived at later, namely:
+do the analytic package for the jet-corrected smooth remainder, not for the raw full phase.
+do the analytic package for the jet-corrected smooth remainder, not for the raw full phase.
+
+That matters because the current draft still makes the missing step sound broader and murkier than it now is.
+
+What I think should change is this.
+
+First, the section “Finite-ss local blocks and whitening” should no longer present the raw finite-ss package as the main gap. It should instead say that the argument now proceeds in two layers:
+q=qloc+gsm+Eest,gsm=Baut+Tfar,
+q=qloc​+gsm​+Eest​,gsm​=Baut​+Tfar​,
+
+then subtract the affine jet of gsmgsm​, and build the blocks from
+qloc+J1[gsm]+(small remainder).
+qloc​+J1​[gsm​]+(small remainder).
+
+Second, the three “gap theorems” should be replaced by the corrected A/B/C package:
+
+Theorem A. Microscopic denominator comparability and zero-sum holomorphy for the omitted smooth part on ∣s∣<ρ0/Q∣s∣<ρ0​/Q.
+
+Theorem B. Jet-corrected phase transfer: after affine-jet subtraction, the phase error is O(L2S2)O(L2S2​) in derivative and O(L3S2)O(L3S2​) in phase.
+
+Theorem C. Corrected finite-ss block holomorphy and whitening: the same-point and cross blocks built from the local model plus affine jet plus small holomorphic remainder stay holomorphic, and the same-point Gram blocks remain uniformly positive definite.
+
+Third, the draft should say explicitly that for the same-point Gram block, the perturbation estimate is no longer vague. If
+q=q0+η,
+q=q0​+η,
+
+then
+G(q)−G(q0)=1π(2η12η′12η′112(η′′+6q02η+6q0η2+2η3)),
+G(q)−G(q0​)=π1​(2η21​η′​21​η′121​(η′′+6q02​η+6q0​η2+2η3)​),
+
+so on the microscopic scale L≍Q−2L≍Q−2, Theorem B gives
+∥Rm(s)∥≪S2.
+∥Rm​(s)∥≪S2​.
+
+Hence, assuming S2=o(Q)S2​=o(Q), same-point Gram stability is essentially done. That part should no longer be left as a broad gap.
+
+So the real remaining analytic gap in the draft is now smaller than the TeX currently says:
+the cross-block perturbation estimate
+the cross-block perturbation estimate​
+
+for Nm(s)Nm​(s), not the same-point Gram block.
+
+That is the one place where the s−1,s−2,s−3s−1,s−2,s−3 structure and the phase-gap perturbation still need to be pushed through carefully.
+
+There is also one structural issue elsewhere in the draft: the introduction around lines 70–75 already reflects the newer ΦE/ΦKΦE​/ΦK​ split, which is good, but later sections still mix that with older formulations where the value-plane picture was stronger than what was actually proved. The clean version now is:
+ΦE calibrates the value channel,ΦK is the transverse obstruction.
+ΦE​ calibrates the value channel,ΦK​ is the transverse obstruction.
+
+You should make that the uniform language throughout.
+
+So my bottom-line read of the TeX is:
+
+The draft is now close to the right proof architecture, but the central gap section is outdated.
+It still presents the missing analytic work as “prove the whole raw finite-ss package,” whereas the later work shows the real unresolved point is much narrower:
+prove the corrected cross-block perturbation estimate after local-model extraction and affine-jet subtraction.
+prove the corrected cross-block perturbation estimate after local-model extraction and affine-jet subtraction.
+
+That is a substantial improvement.
+
+The most useful next move is to patch that section of the TeX so it states the corrected A/B/C program and identifies the cross block as the actual last kernel-specific estimate.
+
+ok can you write just the PATCH portion for the text?
+
+I’m pulling out just the replacement block: a compact LaTeX patch that swaps the old “raw finite-ss package” gap for the corrected A/B/C structure and identifies the cross-block perturbation as the true remaining analytic estimate.
+
+\section{Finite-$s$ local blocks and whitening}
+
+The finite-$s$ analytic step is best organized \emph{after} local-model extraction and affine-jet subtraction, not at the level of the full raw phase all at once.
+
+Write
+\[
+q(t)=q_{\loc}(t)+g_{\sm}(t)+E_{\est}(t),
+\qquad
+g_{\sm}(t)=B_{\aut}(t)+T_{\far}(t),
+\]
+where $q_{\loc}$ is the designated local model, $g_{\sm}$ is the omitted smooth part, and $E_{\est}$ is the remaining estimation term. Fix a short interval
+\[
+I=[a,b],\qquad t_*=\frac{a+b}{2},\qquad L=b-a,
+\]
+and let
+\[
+J_1[g_{\sm}](t)=g_{\sm}(t_*)+g_{\sm}'(t_*)(t-t_*)
+\]
+be the affine jet of $g_{\sm}$ at the midpoint.
+
+We then work with the \emph{corrected phase derivative}
+\[
+q_{\corr}(t):=q_{\loc}(t)+J_1[g_{\sm}](t)+E_{\est}(t),
+\]
+and treat
+\[
+\eta(t):=q(t)-q_{\corr}(t)=g_{\sm}(t)-J_1[g_{\sm}](t)
+\]
+as the small jet-corrected remainder.
+
+\begin{definition}[Finite-$s$ corrected local jet blocks]
+At the symmetric points
+\[
+t_\pm=m\pm \frac{s}{2},
+\]
+define the same-point corrected Gram blocks
+\[
+G_{m,\pm}^{\corr}(s):=\frac1\pi
+\begin{pmatrix}
+2q_{\corr}(t_\pm) & \frac12 q_{\corr}'(t_\pm)\\[1ex]
+\frac12 q_{\corr}'(t_\pm) & \frac1{12}\bigl(q_{\corr}''(t_\pm)+2q_{\corr}(t_\pm)^3\bigr)
+\end{pmatrix}.
+\]
+Let $\Delta_{\corr,m}(s)=\Phi_{\corr}(t_-)-\Phi_{\corr}(t_+)$, where $\Phi_{\corr}'=q_{\corr}$. The corrected cross block is
+\[
+N_m^{\corr}(s):=\frac1\pi
+\begin{pmatrix}
+-\dfrac{2\sin \Delta_{\corr,m}(s)}{s}
+&
+\dfrac{\sin \Delta_{\corr,m}(s)+q_{\corr}(t_+)s\cos \Delta_{\corr,m}(s)}{s^2}
+\\[2ex]
+-\dfrac{\sin \Delta_{\corr,m}(s)+q_{\corr}(t_-)s\cos \Delta_{\corr,m}(s)}{s^2}
+&
+\dfrac{\bigl(q_{\corr}(t_-)+q_{\corr}(t_+)\bigr)s\cos \Delta_{\corr,m}(s)
++\bigl(2-q_{\corr}(t_-)q_{\corr}(t_+)s^2\bigr)\sin \Delta_{\corr,m}(s)}{2s^3}
+\end{pmatrix}.
+\]
+The corrected whitened block is
+\[
+\widehat\Omega_\zeta^{\corr}(s;m)
+=
+\bigl(G_{m,-}^{\corr}(s)\bigr)^{-1/2}
+\,N_m^{\corr}(s)\,
+\bigl(G_{m,+}^{\corr}(s)\bigr)^{-1/2},
+\]
+possibly followed by the same background and phase-gap subtraction used elsewhere in the argument.
+\end{definition}
+
+\begin{remark}
+The jet-limit matrices $M_j$ and $N_{12}$ are the limiting avatars of
+\[
+G_{m,\pm}^{\corr}(s),\qquad N_m^{\corr}(s)
+\]
+after passing to explicit center variables and then to the jet limit. The analytic issue is no longer to control the full raw phase directly, but to prove that the corrected finite-$s$ blocks are holomorphic and remain uniformly invertible on the microscopic disk.
+\end{remark}
+
+\section{Odd transverse scalar and the all-order expansion}
+
+Define the corrected zeta-side transverse scalar by
+\[
+H_m(s):=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr).
+\]
+Symmetric placement implies oddness under $s\mapsto -s$.
+
+\begin{proposition}[Oddness of the transverse scalar]
+Assume the renormalized corrected local block satisfies the natural jet-basis symmetry
+\[
+\widehat\Omega_\zeta^{\corr}(-s;m)=J_0\widehat\Omega_\zeta^{\corr}(s;m)J_0,
+\qquad
+J_0=
+\begin{pmatrix}
+1&0\\0&-1
+\end{pmatrix}.
+\]
+Then
+\[
+H_m(-s)=-H_m(s).
+\]
+\end{proposition}
+
+\begin{proof}
+If
+\[
+X=
+\begin{pmatrix}
+a&b\\c&d
+\end{pmatrix},
+\]
+then
+\[
+J_0XJ_0=
+\begin{pmatrix}
+a&-b\\-c&d
+\end{pmatrix},
+\]
+so
+\[
+\Phi_K(J_0XJ_0)=-(b+c)=-\Phi_K(X).
+\]
+Applying this to $X=\widehat\Omega_\zeta^{\corr}(s;m)$ gives the claim.
+\end{proof}
+
+The finite-$s$ analytic package is therefore reduced to the following corrected three-step program.
+
+\begin{gaptheorem}[Microscopic denominator comparability and zero-sum holomorphy]
+\label{gap:finite-s-formulas}
+Let
+\[
+D_{\rho,\pm}(s)=\bigl((2m-\gamma_\rho)\pm s\bigr)^2+a_\rho^2,
+\qquad
+a_\rho\in\{\beta_\rho,1-\beta_\rho\}.
+\]
+Prove that for some $\rho_0>0$ independent of the admissible midpoint class,
+\[
+|D_{\rho,\pm}(s)|\asymp (2m-\gamma_\rho)^2+a_\rho^2
+\qquad (|s|<\rho_0/\Qloc),
+\]
+and deduce by shell decomposition that the omitted smooth part $g_{\sm}(t_\pm)$ and the $t$-derivatives required in the corrected block entries extend holomorphically to
+\[
+|s|<\rho_0/\Qloc
+\]
+with uniform bounds.
+\end{gaptheorem}
+
+\begin{gaptheorem}[Jet-corrected phase transfer]
+\label{gap:gram-stability}
+Let
+\[
+\eta(t)=g_{\sm}(t)-J_1[g_{\sm}](t).
+\]
+Assume
+\[
+\|g_{\sm}''\|_{L^\infty(I)}\le S_2.
+\]
+Prove that on $I$,
+\[
+|\eta'(t)|\le \frac{L}{2}S_2,
+\qquad
+|\eta(t)|\le \frac{L^2}{8}S_2,
+\]
+and if $\Phi$ and $\Phi_{\corr}$ are normalized by
+\[
+\Phi'(t)=q(t),\qquad \Phi_{\corr}'(t)=q_{\corr}(t),\qquad \Phi(t_*)=\Phi_{\corr}(t_*),
+\]
+then
+\[
+\|(\Phi-\Phi_{\corr})'\|_{L^\infty(I)}\le \frac{L^2}{8}S_2,
+\qquad
+\|\Phi-\Phi_{\corr}\|_{L^\infty(I)}\le \frac{L^3}{16}S_2.
+\]
+In particular, on the microscopic scale $L\asymp \Qloc^{-2}$, the corrected phase error is quadratic/cubic in the window length.
+\end{gaptheorem}
+
+\begin{gaptheorem}[Corrected finite-$s$ block holomorphy and whitening]
+\label{gap:boundary}
+Prove that the corrected same-point and cross blocks are holomorphic on
+\[
+|s|<\rho_0/\Qloc.
+\]
+More precisely, show that
+\[
+G_{m,\pm}^{\corr}(s)=G_{m,\pm}^{(0)}(s)+R_{m,\pm}(s),
+\qquad
+N_m^{\corr}(s)=N_m^{(0)}(s)+\widetilde R_m(s),
+\]
+where the baseline blocks built from the local model plus affine jet are holomorphic, the same-point perturbations satisfy
+\[
+\sup_{|s|<\rho_0/\Qloc}\|R_{m,\pm}(s)\|=o(\Qloc),
+\]
+and the cross-block perturbation satisfies the corresponding kernel-specific estimate needed to transfer the local obstruction to finite $s$.
+Deduce that the same-point blocks remain uniformly positive definite on
+\[
+|s|<\rho_0/\Qloc,
+\]
+that
+\[
+\bigl(G_{m,\pm}^{\corr}(s)\bigr)^{-1/2}
+\]
+is holomorphic there, and that the corrected whitened block is holomorphic. Finally, prove the boundary estimate
+\[
+|H_m(s)|\ll \frac{L(m)S(m)^2}{\Qloc^3}
+\qquad (|s|=\rho_0/\Qloc).
+\]
+\end{gaptheorem}
+
+Assuming these corrected gaps, Cauchy's theorem gives the odd all-order expansion
+\[
+H_m(z/\Qloc^2)=\sum_{r\ge 0} c_{2r+1}(m)\frac{z^{2r+1}}{\Qloc^{2r+4}},
+\qquad
+
+
