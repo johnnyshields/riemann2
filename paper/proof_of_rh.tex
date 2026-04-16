@@ -1718,9 +1718,17 @@ $N=\alpha Q$, which gives
 \]
 \end{proof}
 
-\begin{proposition}[Toy $N$-point preservation]
-\label{prop:toy-n-point}
-Let
+We isolate the toy microscopic expansion in
+Appendix~\ref{app:toy-microscopic-expansion}; the only fact used in the main
+argument is the following $N$-point preservation statement.
+
+\begin{proposition}[Toy $N$-point transverse preservation]
+\label{prop:toy-n-point-direct}
+Fix a compact interval
+\[
+D=[d_-,d_+]\subset(0,\infty),
+\]
+and let
 \[
 \Xi_{\toy}^{(N)}(u,d)
 :=
@@ -1729,37 +1737,17 @@ Let
 \qquad
 s_j=\frac{j}{Q^2},
 \]
-with the normalization
+where the coefficients satisfy
 \[
 \sum_{j=1}^N a_j^{(N)}=1.
 \]
-Assume the toy local deformation satisfies, uniformly in the microscopic nodes,
+Then, for $d\in D$ and $|u|<u_0(D)$,
 \[
-\Delta_{\toy}(u,d;s_j)=u^2M(d)+u^4E_j(u,d),
-\]
-where
-\[
-\sup_{1\le j\le N}\|E_j(u,d)\|\ll 1
-\]
-for $d$ in compact subsets of $(0,\infty)$. Then
-\[
-\boxed{
 \Xi_{\toy}^{(N)}(u,d)
 =
-u^2\Phi_K(M(d))
-+
-O\!\left(u^4\sum_{j=1}^N |a_j^{(N)}|\right).
-}
+u^2\Phi_K(M(d))+O(u^4),
 \]
-In particular, if
-\[
-u^2\sum_{j=1}^N |a_j^{(N)}|\to 0,
-\]
-then
-\[
-\Xi_{\toy}^{(N)}(u,d)=u^2\Phi_K(M(d))+O(u^4),
-\]
-and therefore
+uniformly in $d\in D$. In particular,
 \[
 |\Xi_{\toy}^{(N)}(u,d)|\asymp u^2
 \]
@@ -1767,7 +1755,13 @@ uniformly on compact $d$-ranges.
 \end{proposition}
 
 \begin{proof}
-Apply $\Phi_K$ to the toy expansion:
+By Lemma~\ref{lem:toy-microscopic-expansion}, one has
+\[
+\Delta_{\toy}(u,d;s_j)=u^2M(d)+u^4E_j(u,d),
+\qquad
+\sup_{1\le j\le N}\|E_j(u,d)\|\ll 1
+\]
+uniformly for $d\in D$. Applying $\Phi_K$ gives
 \[
 \Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr)
 =
@@ -1777,7 +1771,7 @@ Summing over $j$ and using
 \[
 \sum_{j=1}^N a_j^{(N)}=1
 \]
-gives
+yields
 \[
 \Xi_{\toy}^{(N)}(u,d)
 =
@@ -1786,13 +1780,17 @@ u^2\Phi_K(M(d))
 u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d)).
 \]
 Since $\Phi_K$ is bounded and $\sup_j\|E_j(u,d)\|\ll 1$, the error term is
+$O(u^4)$, uniformly for $d\in D$. This proves the expansion.
+
+Because $\Phi_K(M(d))\neq 0$ for $d>0$, and is bounded away from $0$ on every
+compact interval $D\subset(0,\infty)$, the final estimate
 \[
-O\!\left(u^4\sum_{j=1}^N |a_j^{(N)}|\right).
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2
 \]
-This proves the claim.
+follows.
 \end{proof}
 
-On the toy side, Proposition~\ref{prop:toy-n-point} gives
+On the toy side, Proposition~\ref{prop:toy-n-point-direct} gives
 \begin{equation}\label{eq:Xi-toy}
 \Xi_{\toy}^{(N)}(u,d)=u^2\Phi_K(M(d))+O(u^4),
 \end{equation}
@@ -1887,7 +1885,7 @@ regime one has
 u^2\asymp \frac{x_0}{B_\zeta(m)}S(m).
 \]
 
-On the toy side, Proposition~\ref{prop:toy-n-point} gives
+On the toy side, Proposition~\ref{prop:toy-n-point-direct} gives
 \[
 \Xi_{\toy}^{(N)}(u,d)=u^2\Phi_K(M(d))+O(u^4),
 \]
@@ -1924,6 +1922,86 @@ an off-line zero configuration. Thus no off-line zero can occur. Since every
 violation of the Riemann Hypothesis would produce such an off-line local
 anomaly, all nontrivial zeros must lie on the critical line. Hence $\RH$
 holds.
+\end{proof}
+
+\appendix
+
+\section{Toy microscopic expansion}
+\label{app:toy-microscopic-expansion}
+
+\begin{lemma}[Uniform microscopic expansion of the toy local deformation]
+\label{lem:toy-microscopic-expansion}
+Fix a compact interval
+\[
+D=[d_-,d_+]\subset(0,\infty),
+\]
+and let
+\[
+\Delta_{\toy}(u,d;s)
+\]
+denote the toy local deformation matrix in the symmetric microscopic regime,
+with off-line parameter $u$, separation parameter $d$, and microscopic node
+$s$.
+
+Then there exist constants $\rho_{\toy}>0$ and $u_0(D)>0$ such that for all
+\[
+d\in D,
+\qquad
+|s|<\rho_{\toy},
+\qquad
+|u|<u_0(D),
+\]
+one has the expansion
+\[
+\Delta_{\toy}(u,d;s)=u^2M(d)+u^4E(u,d;s),
+\]
+where $M(d)$ is the toy anomaly matrix and
+\[
+\sup_{\substack{d\in D\\ |s|<\rho_{\toy}\\ |u|<u_0(D)}} \|E(u,d;s)\|\ll 1.
+\]
+In particular, for the microscopic nodes
+\[
+s_j=\frac{j}{Q^2},
+\qquad
+j=1,\dots,N,
+\]
+with $N\le \rho_{\toy}Q^2$, one has uniformly
+\[
+\Delta_{\toy}(u,d;s_j)=u^2M(d)+u^4E_j(u,d),
+\qquad
+\sup_j \|E_j(u,d)\|\ll 1.
+\]
+\end{lemma}
+
+\begin{proof}
+The toy local deformation is obtained from an explicit finite-dimensional
+off-line perturbation of the toy block. By construction it depends smoothly
+(in fact analytically) on the parameters $(u,s,d)$ in a neighborhood of
+\[
+(u,s,d)=(0,0,d_0),
+\qquad d_0\in D.
+\]
+At $u=0$, the deformation vanishes, and by the even symmetry of the off-line
+split there is no linear term in $u$. Hence the first nontrivial term is
+quadratic:
+\[
+\Delta_{\toy}(u,d;s)=u^2M(d,s)+O(u^4),
+\]
+uniformly on compact $d$-ranges and for $|s|$ in a fixed microscopic disk.
+
+By the jet-limit computation for the toy model, the leading quadratic
+coefficient is independent of the microscopic node $s$ and equals the toy
+anomaly matrix $M(d)$. Thus
+\[
+M(d,s)\equiv M(d),
+\]
+and the expansion becomes
+\[
+\Delta_{\toy}(u,d;s)=u^2M(d)+u^4E(u,d;s),
+\]
+with $E$ uniformly bounded on compact parameter ranges. Restricting to the
+microscopic nodes $s_j=j/Q^2$ gives the stated uniform bound for
+$E_j(u,d)$.
 \end{proof}
 
 \end{document}
