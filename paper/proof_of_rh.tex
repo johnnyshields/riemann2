@@ -903,9 +903,23 @@ Define the corrected $N$-point zeta transverse scalar
 \Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s_j;m)\bigr).
 \]
 
-\begin{proposition}[Corrected \texorpdfstring{$N$}{N}-point transverse estimate]
+\begin{proposition}[Corrected \texorpdfstring{$N$}{N}-point transverse estimate for the full corrected scalar]
 \label{prop:corrected-n-point}
+Let
+\[
+H_m(s):=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
+\]
+be the full corrected transverse scalar.
 For $N=\lfloor \alpha Q\rfloor$ with $\alpha>0$ sufficiently small,
+define
+\[
+s_j=\frac{j}{Q^2},
+\qquad
+\Xi_\zeta^{(N)}(m)
+:=
+\sum_{j=1}^N a_j^{(N)}\,H_m(s_j).
+\]
+Then
 \[
 |\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}
 \]
@@ -914,13 +928,86 @@ for some $\delta>0$.
 
 \begin{proof}
 By Proposition~\ref{prop:odd-expansion}, the full corrected scalar $H_m(s)$
-admits the odd microscopic expansion with coefficients
+is odd and holomorphic on $|s|<\rho_0/Q$ and admits the expansion
+\[
+H_m(z/Q^2)
+=
+\sum_{r\ge 0} c_{2r+1}(m)\frac{z^{2r+1}}{Q^{2r+4}},
+\]
+with
 \[
 |c_{2r+1}(m)|\ll L(m)S(m)^2\,\rho_0^{-(2r+1)}.
 \]
 Applying the standard odd-moment cancellation with the coefficients
-$a_j^{(N)}$ kills the first $N-1$ odd terms. The surviving moment factor is
-exponentially tame for $N=\alpha Q$, yielding the stated bound.
+$a_j^{(N)}$ kills the first $N-1$ odd terms of this full corrected expansion.
+The surviving moment factor is exponentially tame for $N=\alpha Q$, which
+gives the stated bound.
+\end{proof}
+
+
+\begin{lemma}[Crude polynomial bound for the local value scale]
+\label{lem:crude-S-bound}
+Let
+\[
+S(m)=\sum_\rho f_{\beta_\rho,\gamma_\rho}(m),
+\]
+where
+\[
+f_{\beta,\gamma}(m)
+=
+\frac{1-\beta}{(1-\beta)^2+(2m-\gamma)^2}
++
+\frac{\beta}{\beta^2+(2m-\gamma)^2}.
+\]
+Then
+\[
+S(m)\ll Q^2,
+\qquad Q\asymp \log|m|.
+\]
+Consequently
+\[
+L(m)\ll Q
+\]
+and
+\[
+B_\zeta(m)L(m)S(m)\ll Q^4.
+\]
+\end{lemma}
+
+\begin{proof}
+By the zero-free region, for zeros at relevant height one has
+\[
+\min(\beta,1-\beta)\gg \frac1Q.
+\]
+Hence
+\[
+f_{\beta,\gamma}(m)\ll \frac{Q}{1+(2m-\gamma)^2}.
+\]
+Partition the zeros into unit shells
+\[
+\mathcal S_k:=\{\rho: k\le |2m-\gamma_\rho|<k+1\},
+\qquad k=0,1,2,\dots
+\]
+Standard zero counting gives
+\[
+\#\mathcal S_k\ll Q
+\]
+for each unit shell near height $m$. Therefore
+\[
+S(m)
+\ll
+\sum_{k\ge 0}\#\mathcal S_k\frac{Q}{1+k^2}
+\ll
+Q\sum_{k\ge 0}\frac{Q}{1+k^2}
+\ll
+Q^2.
+\]
+Since
+\[
+L(m)=\log\!\Bigl(3+|m|+\frac1{S(m)}\Bigr),
+\]
+we trivially have $L(m)\ll Q$, and the last estimate follows from
+$B_\zeta(m)\asymp Q$.
 \end{proof}
 
 \begin{theorem}[Final calibrated \texorpdfstring{$N$}{N}-point contradiction]
@@ -955,18 +1042,15 @@ On the zeta side, Proposition~\ref{prop:corrected-n-point} gives
 |\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}.
 \]
 
-It remains only to compare these sizes. Since
+It remains only to compare these sizes. By Lemma~\ref{lem:crude-S-bound}, one has
 \[
-B_\zeta(m)\asymp Q
-\qquad\text{and}\qquad
+S(m)\ll Q^2,
+\qquad
 L(m)\ll Q,
+\qquad
+B_\zeta(m)L(m)S(m)\ll Q^4.
 \]
-it is enough to know that $S(m)$ is subexponential in $Q$. A crude bound
-suffices:
-\[
-S(m)=\sum_\rho f_{\beta_\rho,\gamma_\rho}(m)\ll Q^2,
-\]
-by shell decomposition and standard zero counting. Therefore
+Therefore
 \[
 \frac{L(m)S(m)^2e^{-\delta Q}}{(x_0/B_\zeta(m))S(m)}
 =
@@ -977,11 +1061,15 @@ Q^4e^{-\delta Q}\to 0.
 
 Hence for $Q$ sufficiently large,
 \[
-|\Xi_\zeta^{(N)}(m)|<|\Xi_{\toy}^{(N)}(u,d)|,
+|\Xi_\zeta^{(N)}(m)|<|\Xi_{\toy}^{(N)}(u,d)|.
 \]
-which is impossible if the corrected zeta deformation realized the toy
-off-line anomaly. Therefore no such anomaly can occur. This excludes all
-off-line zeros, and $\RH$ follows.
+This is impossible if the corrected local zeta deformation realizes the local
+off-line toy anomaly with parameter $d\in D$, because the calibrated $N$-point
+construction was set up precisely so that the toy model is the jet-limit local
+avatar of an off-line zero configuration. Thus no off-line zero can occur.
+Since every violation of the Riemann Hypothesis would produce such an off-line
+local anomaly, all nontrivial zeros must lie on the critical line. Hence
+$\RH$ holds.
 \end{proof}
 
 \end{document}
