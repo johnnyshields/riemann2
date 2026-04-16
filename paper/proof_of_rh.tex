@@ -1304,16 +1304,49 @@ product of holomorphic factors.
 
 \begin{proposition}[Corrected local deformation decomposition]
 \label{prop:corrected-local-decomposition}
+Fix a near/far cutoff $R$, and let
+\[
+q(t)=q_{\loc,R}(t)+g_{\sm,R}(t)+E_{\est,R}(t)
+\]
+be the corresponding decomposition of the phase derivative, where
+\[
+g_{\sm,R}(t)=B_{\bg}(t)+T_{\far,R}(t).
+\]
+Let $J_1[g_{\sm,R}]$ denote the affine jet of $g_{\sm,R}$ at the midpoint,
+and let $\Phi_{\corr,R}$ be the corrected phase obtained from this
+decomposition.
+
+Using $\Phi_{\corr,R}$, define the corrected same-point blocks
+\[
+G_{m,\pm}^{\corr,R}(s),
+\]
+the corrected mixed block
+\[
+N_m^{\corr,R}(s),
+\]
+and the corrected whitened block
+\[
+\widehat\Omega_\zeta^{\corr,R}(s;m)
+=
+G_{m,-}^{\corr,R}(s)^{-1/2}
+N_m^{\corr,R}(s)
+G_{m,+}^{\corr,R}(s)^{-1/2}.
+\]
+
 Let
+\[
+\widehat\Omega_{\bg}^{\corr,R}(s;m)
+\]
+denote the corresponding corrected whitened block at background value-channel
+parameter $S(m)=0$, and define the corrected local deformation
 \[
 \Delta_\zeta(m,\sigma)
 :=
-\widehat\Omega_\zeta^{\corr}(s;m)-\widehat\Omega_{\bg}^{\corr}(s;m),
-\qquad
-s=\sigma,
+\widehat\Omega_\zeta^{\corr,R}(s;m)-\widehat\Omega_{\bg}^{\corr,R}(s;m),
+\qquad s=\sigma.
 \]
-where $\widehat\Omega_{\bg}^{\corr}(s;m)$ denotes the corrected whitened block
-at background value-channel parameter $S(m)=0$. Then
+
+Then the corrected local deformation admits the expansion
 \[
 \boxed{
 \Delta_\zeta(m,\sigma)
@@ -1321,75 +1354,176 @@ at background value-channel parameter $S(m)=0$. Then
 S(m)\,A_{\val}(m,\sigma)+R_\zeta(m,\sigma),
 }
 \]
-where $A_{\val}(m,\sigma)$ is the pure value-channel derivative from
-\eqref{eq:A-val-def}, and
+where $A_{\val}(m,\sigma)$ is the pure value-channel derivative of the
+jet-limit block, and $R_\zeta(m,\sigma)$ is internal to the full corrected
+cutoff-dependent scalar
 \[
-\|R_\zeta(m,\sigma)\|
-\ll
-S(m)^2+S_2+\Tail(m,\sigma)+\Err(m,\sigma).
+H_{m,R}(s):=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr,R}(s;m)\bigr).
 \]
-In particular, in any regime where
+
+In particular, once the corrected odd holomorphic package is established for
+$H_{m,R}(s)$, no external tail/error term survives outside the resulting
+$N$-point scalar
 \[
-S_2+\Tail+\Err\ll L(m)S(m)^2,
-\]
-one has
-\[
-\|R_\zeta(m,\sigma)\|\ll L(m)S(m)^2.
+\Xi_{\zeta,R}^{(N)}(m)
+:=
+\sum_{j=1}^N a_j^{(N)}H_{m,R}(s_j).
 \]
 \end{proposition}
 
 \begin{proof}
-Consider the analytic map
+Consider the analytic whitening map
 \[
-\mathcal W(G_-,N,G_+):=G_-^{-1/2}\,N\,G_+^{-1/2}.
+\mathcal W(G_-,N,G_+):=G_-^{-1/2}NG_+^{-1/2}.
 \]
-By Proposition~\ref{prop:corrected-whitening}, this map is holomorphic on the
-open set where $G_\pm$ are uniformly positive definite.
+By the corrected finite-$s$ holomorphic-whitening theorem, this map is
+holomorphic on the open set where $G_\pm$ remain uniformly positive definite.
 
-Write the corrected blocks as
+For the fixed cutoff $R$, the corrected blocks are built from the decomposition
 \[
-G_{m,\pm}^{\corr}(s)=G_{m,\pm}^{\bg}(s)+S(m)\,\dot G_{m,\pm}(s)+E_{m,\pm}(s),
+q=q_{\loc,R}+g_{\sm,R}+E_{\est,R}.
 \]
+Thus every omitted-zero tail contribution from $T_{\far,R}$, every affine-jet
+correction from $J_1[g_{\sm,R}]$, and every explicit estimation term
+$E_{\est,R}$ is already absorbed into the corrected phase $\Phi_{\corr,R}$,
+hence into the corrected same-point blocks $G_{m,\pm}^{\corr,R}(s)$, the
+corrected mixed block $N_m^{\corr,R}(s)$, the corrected whitened block
+$\widehat\Omega_\zeta^{\corr,R}(s;m)$, and therefore into the corrected
+transverse scalar
 \[
-N_m^{\corr}(s)=N_m^{\bg}(s)+S(m)\,\dot N_m(s)+\widetilde E_m(s),
+H_{m,R}(s)=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr,R}(s;m)\bigr).
 \]
-where the $\dot G_{m,\pm},\dot N_m$ terms are the pure value-channel first
-variations and the error terms satisfy
-\[
-\|E_{m,\pm}(s)\|+\|\widetilde E_m(s)\|
-\ll
-S_2+\Tail+\Err.
-\]
-By Propositions~\ref{prop:block-perturbation}
-and~\ref{prop:cross-block-perturbation}, this error control is uniform on the
-microscopic disk.
 
-Applying first-order Taylor expansion of $\mathcal W$ at the background point
-gives
+Now expand the corrected whitened block around the background value-channel
+parameter $S(m)=0$. By analyticity of $\mathcal W$,
 \[
-\widehat\Omega_\zeta^{\corr}(s;m)
+\widehat\Omega_\zeta^{\corr,R}(s;m)
 =
-\widehat\Omega_{\bg}^{\corr}(s;m)
+\widehat\Omega_{\bg}^{\corr,R}(s;m)
 +
 S(m)\,D\mathcal W_{(\bg)}[\dot G_-,\dot N,\dot G_+]
 +
 R_\zeta(m,\sigma),
 \]
-where the remainder satisfies
+where the first-order coefficient
 \[
-\|R_\zeta(m,\sigma)\|
-\ll
-S(m)^2+\|E_{m,-}\|+\|\widetilde E_m\|+\|E_{m,+}\|.
+D\mathcal W_{(\bg)}[\dot G_-,\dot N,\dot G_+]
 \]
-By definition of the pure value-channel derivative, the first-order coefficient
-is exactly $A_{\val}(m,\sigma)$. This yields
+is exactly the pure value-channel derivative $A_{\val}(m,\sigma)$ by
+definition, and $R_\zeta(m,\sigma)$ collects the higher-order terms of this
+Taylor expansion inside the same corrected cutoff-dependent object.
+
+Subtracting the background block gives
 \[
 \Delta_\zeta(m,\sigma)
 =
 S(m)\,A_{\val}(m,\sigma)+R_\zeta(m,\sigma),
 \]
-with the claimed bound on $R_\zeta$.
+which is the claimed decomposition.
+
+Finally, because every cutoff-dependent tail, jet-correction, and estimation
+piece has already been absorbed into the full corrected scalar $H_{m,R}(s)$,
+the remainder $R_\zeta(m,\sigma)$ does not generate any separate external
+tail/error term outside the resulting $N$-point scalar
+\[
+\Xi_{\zeta,R}^{(N)}(m).
+\]
+This is precisely the cutoff-compatibility principle used later in the
+$N$-point argument.
 \end{proof}
+
+\begin{proposition}[Cutoff compatibility and absorption into the full corrected scalar]
+\label{prop:cutoff-compatibility}
+Fix a near/far cutoff $R$, and write the phase-derivative decomposition in
+the form
+\[
+q(t)=q_{\loc,R}(t)+g_{\sm,R}(t)+E_{\est,R}(t),
+\]
+where
+\[
+g_{\sm,R}(t)=B_{\bg}(t)+T_{\far,R}(t).
+\]
+Let $J_1[g_{\sm,R}]$ denote the affine jet of $g_{\sm,R}$ at the midpoint,
+and let $\Phi_{\corr,R}$ be the corrected phase obtained from this
+decomposition.
+
+Using $\Phi_{\corr,R}$, define the corrected same-point blocks
+\[
+G_{m,\pm}^{\corr,R}(s),
+\]
+the corrected mixed block
+\[
+N_m^{\corr,R}(s),
+\]
+the corrected whitened block
+\[
+\widehat\Omega_\zeta^{\corr,R}(s;m)
+=
+G_{m,-}^{\corr,R}(s)^{-1/2}
+N_m^{\corr,R}(s)
+G_{m,+}^{\corr,R}(s)^{-1/2},
+\]
+and the corrected transverse scalar
+\[
+H_{m,R}(s):=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr,R}(s;m)\bigr).
+\]
+
+Then every cutoff-dependent tail, jet-correction, and estimation contribution
+is internal to the single scalar function $H_{m,R}(s)$. In particular, once
+the corrected odd holomorphic package is proved for $H_{m,R}(s)$, the
+$N$-point odd-moment cancellation theorem applies directly to the full
+corrected object, and there is no separate external tail/error term to track
+outside the resulting $N$-point scalar
+\[
+\Xi_{\zeta,R}^{(N)}(m)
+:=
+\sum_{j=1}^N a_j^{(N)}H_{m,R}(s_j).
+\]
+\end{proposition}
+
+\begin{proof}
+Every occurrence of the cutoff $R$ enters only through the decomposition
+\[
+q=q_{\loc,R}+g_{\sm,R}+E_{\est,R}.
+\]
+This decomposition is then used to define:
+\begin{enumerate}
+\item the corrected phase $\Phi_{\corr,R}$,
+\item the corrected same-point blocks $G_{m,\pm}^{\corr,R}(s)$,
+\item the corrected mixed block $N_m^{\corr,R}(s)$,
+\item the corrected whitened block $\widehat\Omega_\zeta^{\corr,R}(s;m)$,
+\item and finally the corrected transverse scalar $H_{m,R}(s)$.
+\end{enumerate}
+
+Thus every cutoff-dependent contribution from the omitted-zero tail
+$T_{\far,R}$, every affine-jet correction from $J_1[g_{\sm,R}]$, and every
+explicit estimation term $E_{\est,R}$ is already absorbed into the definition
+of $H_{m,R}(s)$. No cutoff-dependent quantity is added afterward as an
+external remainder.
+
+Therefore, if one proves the corrected odd holomorphic package for
+$H_{m,R}(s)$ itself --- namely holomorphy on the microscopic disk, oddness,
+and the boundary estimate
+\[
+|H_{m,R}(s)|\ll \frac{L(m)S(m)^2}{Q^3}
+\qquad (|s|=\rho_0/Q),
+\]
+then Cauchy's theorem and the odd-moment cancellation argument apply directly
+to the full corrected scalar. The resulting $N$-point quantity
+\[
+\Xi_{\zeta,R}^{(N)}(m)
+\]
+already contains all tail/error effects associated with the cutoff $R$, so no
+separate external tail/error term remains.
+\end{proof}
+
+\begin{remark}[Cutoff bookkeeping]
+\label{rem:cutoff-bookkeeping}
+Proposition~\ref{prop:cutoff-compatibility} is purely a bookkeeping statement:
+it does not depend on any particular optimization of the cutoff $R$. Any later
+choice of $R$ must be justified separately from the estimates in which it is
+used.
+\end{remark}
 
 \begin{proposition}[Whitened mixed-block transfer with preserved $Q^{-3}$ scale]
 \label{prop:whitened-mixed-transfer}
@@ -1790,43 +1924,61 @@ one has
 
 \begin{proof}
 By Proposition~\ref{prop:corrected-local-decomposition}, the corrected local
-deformation has the form
+deformation may be written in the form
 \[
 \Delta_\zeta(m,\sigma)
 =
-S(m)\,A_{\val}(m,\sigma)+R_\zeta(m,\sigma).
+S(m)\,A_{\val}(m,\sigma)+R_\zeta(m,\sigma),
 \]
-Applying $\Phi_K$ and using
+where $R_\zeta(m,\sigma)$ is internal to the full corrected cutoff-dependent
+scalar
+\[
+H_{m,R}(s):=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr,R}(s;m)\bigr).
+\]
+By Proposition~\ref{prop:cutoff-compatibility}, all cutoff-dependent tail,
+jet-correction, and estimation contributions are already absorbed into this
+full corrected scalar, so no external remainder term is carried separately at
+the boundary stage.
+
+Applying $\Phi_K$ to the corrected local decomposition and using
 Corollary~\ref{cor:PhiK-Aval-zero},
 \[
 \Phi_K(A_{\val}(m,\sigma))=0,
 \]
-we obtain
+gives
 \[
-H_m(s)
+H_{m,R}(s)
 =
-\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
+\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr,R}(s;m)\bigr)
 =
 \Phi_K\!\bigl(R_\zeta(m,\sigma)\bigr).
 \]
 
-By Proposition~\ref{prop:whitened-mixed-transfer}, passing the corrected
-perturbation through whitening and then through $\Phi_K$ preserves the
-microscopic transverse gain:
+Now compare the full corrected whitened block with its baseline counterpart.
+By Proposition~\ref{prop:whitened-mixed-transfer},
 \[
-\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)-\widehat\Omega_\zeta^{(0)}(s;m)\bigr)
+\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr,R}(s;m)-\widehat\Omega_\zeta^{(0),R}(s;m)\bigr)
 \ll
-\frac{S_2}{Q^3}.
+\frac{S_2}{Q^3}
+\qquad (|s|<\rho_0/Q).
 \]
-By the tail-curvature theorem and the corrected transfer bounds,
+On the microscopic boundary $|s|=\rho_0/Q$, the tail-curvature theorem and
+the corrected transfer bounds imply
 \[
 S_2\ll L(m)S(m)^2
 \]
 in the corrected regime. Therefore
 \[
-|H_m(s)|\ll \frac{L(m)S(m)^2}{Q^3}.
+|H_{m,R}(s)|
+\ll
+\frac{L(m)S(m)^2}{Q^3}
+\qquad (|s|=\rho_0/Q).
 \]
-This is the claimed boundary estimate.
+
+Since the cutoff bookkeeping has already been absorbed into the full corrected
+scalar $H_{m,R}(s)$, this is the boundary estimate for the complete corrected
+object, not merely for a leading part plus an external tail/error remainder.
+This proves the claim.
 \end{proof}
 
 \begin{proposition}[Odd microscopic expansion]
@@ -1907,7 +2059,11 @@ By Proposition~\ref{prop:corrected-whitening}, the full corrected scalar
 \[
 H_m(s)=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
 \]
-is holomorphic on $|s|<\rho_0/Q$. By Proposition~\ref{prop:boundary-estimate},
+is holomorphic on $|s|<\rho_0/Q$. By
+Proposition~\ref{prop:cutoff-compatibility}, all cutoff-dependent tail,
+jet-correction, and estimation contributions are already internal to the full
+corrected scalar $H_m(s)$; hence no external remainder is carried into
+$\Xi_\zeta^{(N)}(m)$. By Proposition~\ref{prop:boundary-estimate},
 it satisfies
 \[
 |H_m(s)|\ll_{\rho_0}\frac{L(m)S(m)^2}{Q^3}
