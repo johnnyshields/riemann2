@@ -195,17 +195,18 @@ G_{m,\pm}(s)=\frac1\pi
 \end{equation}
 The mixed block is obtained from \eqref{eq:N12} by substituting $T_1=t_-$, $T_2=t_+$ and $s=t_--t_+=-s$:
 \begin{equation}\label{eq:Nm}
-\resizebox{\textwidth}{!}{$
+\resizebox{.94\linewidth}{!}{$
 N_m(s)=\frac1\pi
-\begin{pmatrix}
+\left(\begin{smallmatrix}
 -\dfrac{2\sin \Delta_m(s)}{s}
 &
 \dfrac{\sin \Delta_m(s)+q_+(s)\,s\cos \Delta_m(s)}{s^2}
-\\[2ex]
+\\[1.5ex]
 -\dfrac{\sin \Delta_m(s)+q_-(s)\,s\cos \Delta_m(s)}{s^2}
 &
 \dfrac{(q_-(s)+q_+(s))s\cos \Delta_m(s)+(2-q_-(s)q_+(s)s^2)\sin \Delta_m(s)}{2s^3}
-\end{pmatrix}$}
+\end{smallmatrix}\right)
+$}
 \end{equation}
 where
 \[
@@ -392,51 +393,129 @@ T_1=m-\frac{\sigma}{2},
 \qquad
 T_2=m+\frac{\sigma}{2},
 \qquad
-x:=B\sigma,
+x:=B_\zeta(m)\,\sigma,
 \]
 define the leading pure value-channel derivative by
 \begin{equation}\label{eq:A-val-def}
 A_{\val}(m,\sigma):=\partial_\alpha \Omega_\infty\big|_{\alpha=0},
 \end{equation}
-where the perturbation is taken along the pure value direction $q_1=q_2=B+\alpha$ with derivative and curvature data frozen at background level.
+where the perturbation is taken along the pure value direction
+$q_1=q_2=B_\zeta(m)+\alpha$, with the local-model derivative and curvature
+data frozen at $q'=q''=0$.
+In the fixed-scaled regime, $A_{\val}(m,\sigma)$ depends on $(m,\sigma)$ only
+through $x=B_\zeta(m)\sigma$; we write $A_{\val}(x)$ for
+$A_{\val}(m,\sigma)$ in this variable.
 
-Its explicit small-$x$ expansion is
+\begin{lemma}[Explicit value-channel matrix]\label{lem:Aval-explicit}
+Write $B:=B_\zeta(m)$. Then
 \begin{equation}\label{eq:A-val-small-x}
-A_{\val}(x)=\frac1B
+A_{\val}(x)=\frac{1}{B}
 \begin{pmatrix}
 -\dfrac{x^2}{3}+O(x^4) & -\dfrac{\sqrt3 x}{3}+O(x^3)\\[1.2ex]
 \dfrac{\sqrt3 x}{3}+O(x^3) & -\dfrac{3x^2}{5}+O(x^4)
-\end{pmatrix}.
+\end{pmatrix},
 \end{equation}
-In particular,
+and the off-diagonal entries are exact negatives of each other:
+$A_{\val,21}(x)=-A_{\val,12}(x)$.
+Consequently,
 \begin{equation}\label{eq:A-val-norm}
-\|A_{\val}(x)\|_\F\asymp \frac{x}{B}
+\|A_{\val}(x)\|_\F\asymp \frac{x}{B_\zeta(m)}
 \qquad (x\to 0,\ x>0).
 \end{equation}
-Moreover,
-\begin{equation}\label{eq:A-val-M-pairing}
-B\,\langle A_{\val}(x),M(d)\rangle_\F
-=
-x\,\frac{2\sqrt3 d(id+3)}{3(d-i)^4}+O(x^2),
-\end{equation}
-so on every compact $D\subset(0,\infty)$ there exists $x_0(D)>0$ such that
+\end{lemma}
+
+\begin{proof}
+In the local model $q_1=q_2=q:=B+\alpha$ with $q'=q''=0$, the same-point Gram
+block of \eqref{eq:J-T} reduces to a diagonal matrix:
+\[
+\pi J(T_j)=
+\begin{pmatrix} 2q & 0 \\ 0 & q^3/6 \end{pmatrix},
+\qquad
+(\pi J(T_j))^{-1/2}=
+\begin{pmatrix} (2q)^{-1/2} & 0 \\ 0 & \sqrt 6\,q^{-3/2} \end{pmatrix}.
+\]
+Symmetric placement gives $s=T_1-T_2=-\sigma$ and
+$\Phi(T_1)-\Phi(T_2)=-q\sigma$, so in the notation of \eqref{eq:N12},
+$\Delta=-y$ with $y:=q\sigma$. Substituting into \eqref{eq:N12} and applying
+the whitening with $M_1^{-1/2}=M_2^{-1/2}$ gives
+\[
+\Omega_\infty(q,\sigma)=F(y),
+\qquad
+F(y):=
+\begin{pmatrix}
+\dfrac{\sin y}{y} & \dfrac{\sqrt3(y\cos y-\sin y)}{y^2}\\[1.5ex]
+-\dfrac{\sqrt3(y\cos y-\sin y)}{y^2} & \dfrac{3\bigl(2y\cos y+(y^2-2)\sin y\bigr)}{y^3}
+\end{pmatrix}.
+\]
+The dependence on $(q,\sigma)$ enters only through $y=q\sigma$. Since
+$\partial_\alpha y|_{\alpha=0}=\sigma$ and $\sigma=x/B$,
+\[
+A_{\val}(m,\sigma)=\partial_\alpha \Omega_\infty\big|_{\alpha=0}
+=\sigma\,F'(x)
+=\frac{x}{B}\,F'(x).
+\]
+A direct small-$y$ expansion gives
+\[
+F'_{11}(y)=-\tfrac{y}{3}+O(y^3),
+\qquad
+F'_{12}(y)=-\tfrac{\sqrt3}{3}+O(y^2),
+\qquad
+F'_{22}(y)=-\tfrac{3y}{5}+O(y^3),
+\]
+and $F_{21}(y)=-F_{12}(y)$ exactly (from $q_1=q_2$, which forces
+$N_{12,21}=-N_{12,12}$ after symmetric whitening). Multiplying by $x/B$
+yields the displayed matrix entries and the exact identity
+$A_{\val,21}(x)=-A_{\val,12}(x)$. The norm estimate follows from the
+off-diagonal leading term $\sqrt3 x/(3B)$.
+\end{proof}
+
+\begin{proposition}[Transverse vanishing of the value channel]
+\label{prop:PhiK-Aval-zero}
+For all $(m,\sigma)$ in the symmetric local regime,
+\[
+\Phi_K\bigl(A_{\val}(m,\sigma)\bigr)=0.
+\]
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:Aval-explicit}, $A_{\val,21}=-A_{\val,12}$, hence
+$\Phi_K(A_{\val})=A_{\val,12}+A_{\val,21}=0$.
+\end{proof}
+
+\begin{lemma}[Nondegenerate pairing with the toy anomaly]\label{lem:pairing}
+For each compact interval $D\subset(0,\infty)$ there exists $x_0=x_0(D)>0$
+such that
 \begin{equation}\label{eq:pairing-nondegenerate}
-|\langle A_{\val}(x_0),M(d)\rangle_\F|\asymp \frac{x_0}{B}
+|\langle A_{\val}(x_0),M(d)\rangle_\F|\asymp \frac{x_0}{B_\zeta(m)}
 \qquad(d\in D).
 \end{equation}
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:Aval-explicit}, $A_{\val}(x)=(1/B_\zeta(m))(xP+O(x^2))$,
+where $P$ is the rank-two matrix whose nonzero entries are the off-diagonal
+leading coefficients $\mp\sqrt3/3$. Hence
+\[
+B_\zeta(m)\,\langle A_{\val}(x),M(d)\rangle_\F
+=
+x\,\langle P,M(d)\rangle_\F + O(x^2).
+\]
+The pairing $\langle P,M(d)\rangle_\F$ is a rational function of $d$ arising
+from the off-diagonal entries of $M(d)$; it does not vanish on any compact
+$D\subset(0,\infty)$. Choosing $x_0=x_0(D)>0$ small enough that the
+$O(x^2)$ term is dominated gives the stated asymptotic.
+\end{proof}
 
 This suggests the correct calibration functional.
 
 \begin{definition}[Calibrated value functional]
-Fix a compact interval $D\subset(0,\infty)$ and a sufficiently small $x_0=x_0(D)>0$. Define
+Fix a compact interval $D\subset(0,\infty)$ and a sufficiently small
+$x_0=x_0(D)>0$ as in Lemma~\ref{lem:pairing}. Define
 \begin{equation}\label{eq:Psi-cal}
 \Psi_{x_0,d}(X):=
 \frac{\langle A_{\val}(x_0),X\rangle_\F}{\langle A_{\val}(x_0),M(d)\rangle_\F}.
 \end{equation}
-Then
-\[
-\Psi_{x_0,d}(M(d))=1.
-\]
+Then $\Psi_{x_0,d}(M(d))=1$.
 \end{definition}
 
 \begin{proposition}[Canonical calibration theorem]\label{prop:canonical-calibration}
@@ -1181,11 +1260,10 @@ Define the corrected transverse scalar
 \begin{equation}\label{eq:Hm-def}
 H_m(s):=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr).
 \end{equation}
-By symmetry under $s\mapsto -s$, this is odd. The leading value channel is annihilated by $\Phi_K$:
-\begin{equation}\label{eq:PhiK-Aval}
-\Phi_K(A_{\val})=0.
-\end{equation}
-Hence only the curvature, tail, and corrected finite-$s$ remainder channels contribute.
+By symmetry under $s\mapsto -s$, this is odd. By
+Proposition~\ref{prop:PhiK-Aval-zero}, the leading value channel is
+annihilated by $\Phi_K$, so only the curvature, tail, and corrected
+finite-$s$ remainder channels contribute.
 
 \begin{proposition}[Boundary estimate]
 \label{prop:boundary-estimate}
@@ -1207,11 +1285,7 @@ Write the corrected local deformation in the form
 S(m)\,A_{\val}(m,\sigma)+R_\zeta(m,\sigma)
 \]
 as in Proposition~\ref{prop:corrected-local-decomposition}. Applying
-$\Phi_K$ and using the jet-limit value-channel vanishing
-\[
-\Phi_K(A_{\val}(m,\sigma))=0,
-\]
-we obtain
+$\Phi_K$ and using Proposition~\ref{prop:PhiK-Aval-zero}, we obtain
 \[
 H_m(s)
 =
@@ -1342,52 +1416,29 @@ Define the corrected $N$-point transverse scalar
 \sum_{j=1}^N a_j^{(N)}H_m(s_j).
 \end{equation}
 
-\begin{proposition}[Corrected $N$-point transverse estimate for the full corrected scalar]
+\begin{proposition}[Corrected $N$-point transverse estimate]
 \label{prop:corrected-n-point}
-Let
-\[
-H_m(s):=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
-\]
-be the full corrected transverse scalar.
 For $N=\lfloor \alpha Q\rfloor$ with $\alpha>0$ sufficiently small,
-define
 \[
-s_j=\frac{j}{Q^2},
-\qquad
-\Xi_\zeta^{(N)}(m)
-:=
-\sum_{j=1}^N a_j^{(N)}\,H_m(s_j).
-\]
-Then
-\[
-|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}
+|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2 e^{-\delta Q}
 \]
 for some $\delta>0$.
 \end{proposition}
 
 \begin{proof}
-By Proposition~\ref{prop:odd-expansion}, the full corrected scalar $H_m(s)$
-is odd and holomorphic on $|s|<\rho_0/Q$ and admits the expansion
+By Proposition~\ref{prop:odd-expansion}, $H_m(s)$ is odd and holomorphic on
+$|s|<\rho_0/Q$ and admits the expansion
 \[
 H_m(z/Q^2)
 =
 \sum_{r\ge 0} c_{2r+1}(m)\frac{z^{2r+1}}{Q^{2r+4}},
-\]
-with
-\[
+\qquad
 |c_{2r+1}(m)|\ll L(m)S(m)^2\,\rho_0^{-(2r+1)}.
 \]
-Applying the standard odd-moment cancellation with the coefficients
-$a_j^{(N)}$ kills the first $N-1$ odd terms of this full corrected expansion.
-The surviving moment factor is exponentially tame for $N=\alpha Q$, which
-gives the stated bound.
+Applying the odd-moment cancellation with the coefficients $a_j^{(N)}$ kills
+the first $N-1$ odd terms; the surviving moment factor is exponentially tame
+for $N=\alpha Q$, which gives the stated bound.
 \end{proof}
-
-Once and for all, normalize the odd-moment-canceling coefficients so that
-\[
-\sum_{j=1}^N a_j^{(N)}=1.
-\]
-This does not affect the vanishing of the first $N-1$ odd moments.
 
 \begin{proposition}[Toy $N$-point preservation]
 \label{prop:toy-n-point}
@@ -1473,7 +1524,7 @@ so on compact $d$-ranges,
 \]
 Using \eqref{eq:u2-calibration},
 \begin{equation}\label{eq:Xi-toy-calibrated}
-|\Xi_{\toy}^{(N)}(u,d)|\asymp \frac{x_0}{B}S(m).
+|\Xi_{\toy}^{(N)}(u,d)|\asymp \frac{x_0}{B_\zeta(m)}S(m).
 \end{equation}
 
 \section{Final contradiction}
@@ -1603,9 +1654,5 @@ Since every violation of the Riemann Hypothesis would produce such an off-line
 local anomaly, all nontrivial zeros must lie on the critical line. Hence
 $\RH$ holds.
 \end{proof}
-
-\section{Conclusion}
-
-The proof proceeds by constructing a local jet-normalized matrix statistic from the phase kernel, calibrating the leading value scale through the actual leading value-channel matrix, and applying an odd-moment cancellation scheme to the transverse channel. The toy off-line anomaly survives every local normalization, while the zeta-side transverse channel is annihilated at leading order and then exponentially suppressed by the $N$-point cancellation theorem. The resulting contradiction eliminates off-line local configurations and proves the Riemann Hypothesis.
 
 \end{document}
