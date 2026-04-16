@@ -62,8 +62,6 @@
 \newcommand{\corr}{\mathrm{corr}}
 \newcommand{\main}{\mathrm{main}}
 \newcommand{\err}{\mathrm{err}}
-\newcommand{\Tail}{\mathrm{Tail}}
-\newcommand{\Err}{\mathrm{Err}}
 \newcommand{\jet}{\mathrm{jet}}
 \newcommand{\bg}{\mathrm{bg}}
 \newcommand{\curv}{\mathrm{curv}}
@@ -389,147 +387,52 @@ and on each compact interval $D\subset(0,\infty)$ there exists $c_K(D)>0$ such t
 
 \section{Leading value matrix and canonical calibration}
 
-We now make the leading value-channel matrix $A_{\val}$ explicit and use it to
-define the canonical calibration functional.
+We now make the value-channel derivative $A_{\val}$ and its pairing with the
+toy anomaly matrix $M(d)$ fully explicit.
 
-\paragraph{Symmetric pure value-channel perturbation.}
-Work in the jet-limit normalization
-\[
-\Omega_\infty(T_1,T_2)=M_1^{-1/2}N_{12}M_2^{-1/2},
-\]
-with symmetric placement
+Work in the symmetric local regime
 \[
 T_1=m-\frac{\sigma}{2},
 \qquad
-T_2=m+\frac{\sigma}{2}.
+T_2=m+\frac{\sigma}{2},
 \]
-Let
+and write
 \[
 B:=B_\zeta(m),
 \qquad
-x:=B\,\sigma,
+x:=B\,\sigma.
 \]
-and consider the pure value-channel perturbation
+When convenient, we write $A_{\val}(x)$ for $A_{\val}(m,\sigma)$ under the
+relation $x=B_\zeta(m)\sigma$.
+
+\paragraph{Pure value-channel perturbation.}
+Let the local value-channel parameter be perturbed by
 \[
 q_1=q_2=B+\alpha,
 \]
-with the derivative and curvature data frozen at background level. The phase
-gap is then
+while all derivative and curvature data are frozen at background level. In the
+constant-background symmetric approximation, the phase gap is
 \[
 \Delta=\Delta_0-\alpha\sigma,
 \]
-where $\Delta_0$ denotes the baseline phase gap. Define the leading
-value-channel matrix by
+with baseline value
+\[
+\Delta_0=-B\sigma=-x.
+\]
+
+Recall that the jet-limit local block is
+\[
+\Omega_\infty(T_1,T_2)=M_1^{-1/2}N_{12}M_2^{-1/2}.
+\]
+Define the pure value-channel derivative by
 \begin{equation}\label{eq:A-val-def}
-A_{\val}(m,\sigma)
-:=
-\left.\frac{\partial}{\partial\alpha}
-\Omega_\infty(T_1,T_2)\right|_{\alpha=0}.
+A_{\val}(m,\sigma):=
+\left.\frac{\partial}{\partial\alpha}\Omega_\infty(T_1,T_2)\right|_{\alpha=0}.
 \end{equation}
 
 \begin{proposition}[Explicit formula for the value-channel derivative]
 \label{prop:explicit-Aval}
-In the symmetric constant-background regime, one has
-\[
-\resizebox{.94\linewidth}{!}{$
-A_{\val}(B,\sigma,\Delta_0)=
-\left(\begin{smallmatrix}
-\dfrac{\cos\Delta_0}{B}+\dfrac{\sin\Delta_0}{B^2\sigma}
-&
-\dfrac{\sqrt3\bigl(B^2\sigma^2\sin\Delta_0-2B\sigma\cos\Delta_0-2\sin\Delta_0\bigr)}{B^3\sigma^2}
-\\[1.5ex]
-\dfrac{\sqrt3\bigl(-B^2\sigma^2\sin\Delta_0+2B\sigma\cos\Delta_0+2\sin\Delta_0\bigr)}{B^3\sigma^2}
-&
-\dfrac{3\bigl(B^3\sigma^3\cos\Delta_0-6B\sigma\cos\Delta_0+3(B^2\sigma^2-2)\sin\Delta_0\bigr)}{B^4\sigma^3}
-\end{smallmatrix}\right).
-$}
-\]
-Equivalently,
-\[
-A_{\val}(m,\sigma)=\frac1B\,\mathcal A(x,\Delta_0),
-\]
-where
-\[
-\resizebox{.94\linewidth}{!}{$
-\mathcal A(x,\Delta_0)=
-\left(\begin{smallmatrix}
-\dfrac{x\cos\Delta_0+\sin\Delta_0}{x}
-&
-\dfrac{\sqrt3\bigl(x^2\sin\Delta_0-2x\cos\Delta_0-2\sin\Delta_0\bigr)}{x^2}
-\\[1.5ex]
-\dfrac{\sqrt3\bigl(-x^2\sin\Delta_0+2x\cos\Delta_0+2\sin\Delta_0\bigr)}{x^2}
-&
-\dfrac{3\bigl(x^3\cos\Delta_0-6x\cos\Delta_0+3(x^2-2)\sin\Delta_0\bigr)}{x^3}
-\end{smallmatrix}\right).
-$}
-\]
-\end{proposition}
-
-\begin{proof}
-In the constant-background symmetric regime, the same-point jet Gram matrices
-simplify to
-\[
-M_1=M_2=M=
-\begin{pmatrix}
-2(B+\alpha) & 0\\[0.5ex]
-0 & (B+\alpha)^3/6
-\end{pmatrix}.
-\]
-Thus
-\[
-M^{-1/2}=
-\begin{pmatrix}
-(2(B+\alpha))^{-1/2} & 0\\[0.5ex]
-0 & \sqrt{6}\,(B+\alpha)^{-3/2}
-\end{pmatrix}.
-\]
-The jet-limit cross block $N_{12}$ in the symmetric regime depends only on
-$q_1=q_2=B+\alpha$, the separation $\sigma$, and the phase gap
-$\Delta=\Delta_0-\alpha\sigma$. Substituting $q_1=q_2=B+\alpha$ into the
-explicit jet-limit formula and differentiating
-\[
-\Omega_\infty=M^{-1/2}N_{12}M^{-1/2}
-\]
-with respect to $\alpha$ at $\alpha=0$ yields the displayed matrix after a
-direct simplification. Rewriting in the scaled variable $x=B\sigma$ gives the
-equivalent form $A_{\val}(m,\sigma)=B^{-1}\mathcal A(x,\Delta_0)$.
-\end{proof}
-
-\begin{corollary}[Transverse vanishing on the value channel]
-\label{cor:PhiK-Aval-zero}
-One has
-\[
-\Phi_K(A_{\val}(m,\sigma))=0.
-\]
-\end{corollary}
-
-\begin{proof}
-Recall
-\[
-\Phi_K(X)=x_{12}+x_{21}.
-\]
-From Proposition~\ref{prop:explicit-Aval},
-\[
-A_{\val,12}(B,\sigma,\Delta_0)
-=
-\frac{\sqrt3\bigl(B^2\sigma^2\sin\Delta_0-2B\sigma\cos\Delta_0-2\sin\Delta_0\bigr)}{B^3\sigma^2},
-\]
-while
-\[
-A_{\val,21}(B,\sigma,\Delta_0)
-=
-\frac{\sqrt3\bigl(-B^2\sigma^2\sin\Delta_0+2B\sigma\cos\Delta_0+2\sin\Delta_0\bigr)}{B^3\sigma^2}.
-\]
-These are exact negatives of each other, so
-\[
-A_{\val,12}+A_{\val,21}=0,
-\]
-hence $\Phi_K(A_{\val}(m,\sigma))=0$.
-\end{proof}
-
-\paragraph{Small-scaled regime.}
-In the constant-background approximation one has $\Delta_0=-x$, so
-Proposition~\ref{prop:explicit-Aval} becomes
+In the symmetric constant-background regime,
 \[
 A_{\val}(x)=\frac1B
 \begin{pmatrix}
@@ -542,8 +445,122 @@ A_{\val}(x)=\frac1B
 \dfrac{3\bigl(x^3\cos x-6x\cos x+3(2-x^2)\sin x\bigr)}{x^3}
 \end{pmatrix}.
 \]
+\end{proposition}
 
-\begin{lemma}[Small-$x$ expansion of $A_{\val}$]
+\begin{proof}
+In the constant-background symmetric regime, the same-point jet Gram matrices
+are diagonal:
+\[
+M_1=M_2=M=
+\begin{pmatrix}
+2(B+\alpha) & 0\\[0.5ex]
+0 & (B+\alpha)^3/6
+\end{pmatrix}.
+\]
+Hence
+\[
+M^{-1/2}=
+\begin{pmatrix}
+(2(B+\alpha))^{-1/2} & 0\\[0.5ex]
+0 & \sqrt6\,(B+\alpha)^{-3/2}
+\end{pmatrix}.
+\]
+
+In the same regime, the jet-limit cross block depends only on $(B+\alpha)$,
+$\sigma$, and the phase gap $\Delta=\Delta_0-\alpha\sigma$. Writing out the
+explicit jet-limit cross block in this specialization gives
+\[
+\resizebox{.94\linewidth}{!}{$
+N_{12}(\alpha)=
+\left(\begin{smallmatrix}
+-\dfrac{2\sin\Delta}{\sigma}
+&
+\dfrac{\sqrt3\bigl(\sin\Delta+(B+\alpha)\sigma\cos\Delta\bigr)}{\sigma^2}
+\\[1.5ex]
+-\dfrac{\sqrt3\bigl(\sin\Delta+(B+\alpha)\sigma\cos\Delta\bigr)}{\sigma^2}
+&
+\dfrac{3\bigl(2\sin\Delta-2(B+\alpha)\sigma\cos\Delta-(B+\alpha)^2\sigma^2\sin\Delta\bigr)}{\sigma^3}
+\end{smallmatrix}\right),
+$}
+\]
+up to the common normalization factor already absorbed into the definition of
+$\Omega_\infty$.
+
+Now differentiate
+\[
+\Omega_\infty(\alpha)=M(\alpha)^{-1/2}N_{12}(\alpha)M(\alpha)^{-1/2}
+\]
+at $\alpha=0$, using
+\[
+\frac{d}{d\alpha}(B+\alpha)^{-1/2}\Big|_{\alpha=0}
+=-\frac12 B^{-3/2},
+\qquad
+\frac{d}{d\alpha}(B+\alpha)^{-3/2}\Big|_{\alpha=0}
+=-\frac32 B^{-5/2},
+\]
+and
+\[
+\frac{d}{d\alpha}\sin(\Delta_0-\alpha\sigma)\Big|_{\alpha=0}
+=-\sigma\cos\Delta_0,
+\qquad
+\frac{d}{d\alpha}\cos(\Delta_0-\alpha\sigma)\Big|_{\alpha=0}
+=\sigma\sin\Delta_0.
+\]
+
+After substituting $\Delta_0=-x$, $x=B\sigma$, using
+\[
+\sin(-x)=-\sin x,\qquad \cos(-x)=\cos x,
+\]
+and simplifying each entry, one obtains
+\[
+A_{\val}(x)=\frac1B
+\begin{pmatrix}
+\dfrac{x\cos x-\sin x}{x}
+&
+\dfrac{\sqrt3\bigl(-x^2\sin x-2x\cos x+2\sin x\bigr)}{x^2}
+\\[2.5ex]
+\dfrac{\sqrt3\bigl(x^2\sin x+2x\cos x-2\sin x\bigr)}{x^2}
+&
+\dfrac{3\bigl(x^3\cos x-6x\cos x+3(2-x^2)\sin x\bigr)}{x^3}
+\end{pmatrix}.
+\]
+\end{proof}
+
+\begin{corollary}[Transverse vanishing on the value channel]
+\label{cor:PhiK-Aval-zero}
+One has
+\[
+\Phi_K(A_{\val}(m,\sigma))=0.
+\]
+\end{corollary}
+
+\begin{proof}
+By definition,
+\[
+\Phi_K(X)=x_{12}+x_{21}.
+\]
+From Proposition~\ref{prop:explicit-Aval},
+\[
+A_{\val,12}(x)=
+\frac{\sqrt3}{B}\,
+\frac{-x^2\sin x-2x\cos x+2\sin x}{x^2},
+\]
+\[
+A_{\val,21}(x)=
+\frac{\sqrt3}{B}\,
+\frac{x^2\sin x+2x\cos x-2\sin x}{x^2}.
+\]
+These are exact negatives of each other, hence
+\[
+A_{\val,12}(x)+A_{\val,21}(x)=0,
+\]
+and therefore
+\[
+\Phi_K(A_{\val}(m,\sigma))=0.
+\]
+\end{proof}
+
+\begin{lemma}[Small-$x$ expansion]
 \label{lem:Aval-small-x}
 As $x\to 0$,
 \[
@@ -561,14 +578,50 @@ Consequently,
 \end{lemma}
 
 \begin{proof}
-Expand $\sin x$ and $\cos x$ in Taylor series and substitute into the matrix
-entries. The off-diagonal terms are linear in $x$ and dominate the diagonal
-terms, which are quadratic. Therefore the Frobenius norm is asymptotic to a
-constant multiple of $x/B$.
+Expand
+\[
+\sin x=x-\frac{x^3}{6}+O(x^5),
+\qquad
+\cos x=1-\frac{x^2}{2}+O(x^4),
+\]
+and substitute into the entries of $A_{\val}(x)$.
+
+For the $(1,1)$-entry:
+\[
+\frac{x\cos x-\sin x}{x}
+=
+\frac{x(1-\frac{x^2}{2}+O(x^4))-(x-\frac{x^3}{6}+O(x^5))}{x}
+=
+-\frac{x^2}{3}+O(x^4).
+\]
+
+For the $(1,2)$-entry, expanding the numerator gives
+\[
+-x^2\sin x-2x\cos x+2\sin x
+=-x^3+O(x^5)-2x\bigl(1-\tfrac{x^2}{2}+O(x^4)\bigr)+2\bigl(x-\tfrac{x^3}{6}+O(x^5)\bigr)
+=-\tfrac{x^3}{3}+O(x^5),
+\]
+so
+\[
+\frac{\sqrt3(-x^2\sin x-2x\cos x+2\sin x)}{x^2}
+=-\frac{\sqrt3\,x}{3}+O(x^3).
+\]
+
+The $(2,1)$-entry is the negative of the $(1,2)$-entry, and the
+$(2,2)$-entry similarly simplifies to
+\[
+-\frac{3x^2}{5}+O(x^4).
+\]
+
+Since the off-diagonal entries are linear in $x$ and dominate the quadratic
+diagonal terms, the Frobenius norm satisfies
+\[
+\|A_{\val}(x)\|_\F\asymp \frac{x}{B}.
+\]
 \end{proof}
 
-\begin{lemma}[Nondegenerate pairing with the toy anomaly]
-\label{lem:pairing}
+\begin{proposition}[Pairing with the toy anomaly]
+\label{prop:pairing}
 Let $M(d)$ be the toy anomaly matrix. Then, for fixed $d>0$,
 \[
 B\,\langle A_{\val}(x),M(d)\rangle_\F
@@ -579,8 +632,7 @@ x^2\,\frac{d(-5d^2+46id+77)}{15(d-i)^5}
 +
 O(x^3).
 \]
-In particular, the linear coefficient is nonzero for every real $d>0$. Hence,
-for every compact interval
+In particular, for every compact interval
 \[
 D=[d_-,d_+]\subset(0,\infty),
 \]
@@ -592,106 +644,115 @@ one has
 \[
 |\langle A_{\val}(x),M(d)\rangle_\F|\asymp \frac{x}{B}.
 \]
-\end{lemma}
+\end{proposition}
 
 \begin{proof}
-Insert the small-$x$ expansion from Lemma~\ref{lem:Aval-small-x} together with
-the explicit matrix $M(d)$ into the Frobenius pairing
+Using Lemma~\ref{lem:Aval-small-x}, write
+\[
+A_{\val}(x)=\frac1B
+\begin{pmatrix}
+-\dfrac{x^2}{3}+O(x^4) & -\dfrac{\sqrt3\,x}{3}+O(x^3)\\[1.2ex]
+\dfrac{\sqrt3\,x}{3}+O(x^3) & -\dfrac{3x^2}{5}+O(x^4)
+\end{pmatrix}.
+\]
+Now take the Frobenius pairing with the explicit toy anomaly matrix $M(d)$:
 \[
 \langle A_{\val}(x),M(d)\rangle_\F
 =
 \sum_{j,k} A_{\val,jk}(x)\,\overline{M_{jk}(d)}.
 \]
-Collecting terms yields the displayed expansion. The coefficient of $x$ is
-\[
-\frac{2\sqrt3\,d\,(id+3)}{3(d-i)^4},
-\]
-which is nonzero for every real $d>0$. Since this coefficient depends
-continuously on $d$, its modulus is bounded below on every compact interval
-$D\subset(0,\infty)$. Shrinking $x_0(D)$ if necessary then gives the
-uniform two-sided estimate
-\[
-|\langle A_{\val}(x),M(d)\rangle_\F|\asymp \frac{x}{B}.
-\]
-\end{proof}
 
-\begin{definition}[Calibrated value functional]
-\label{def:Psi-cal}
-Fix a compact interval $D\subset(0,\infty)$ and choose $x_0=x_0(D)>0$ as in
-Lemma~\ref{lem:pairing}. For $d\in D$, define
+The linear term in $x$ comes entirely from the off-diagonal entries of
+$A_{\val}(x)$, since the diagonal entries are quadratic. Using the explicit
+entries of $M(d)$, one finds
 \[
-\Psi_{x_0,d}(X):=
-\frac{\langle A_{\val}(x_0),X\rangle_\F}
-{\langle A_{\val}(x_0),M(d)\rangle_\F}.
+B\,\langle A_{\val}(x),M(d)\rangle_\F
+=
+x\,\frac{\sqrt3}{3}\bigl(\overline{M_{21}(d)}-\overline{M_{12}(d)}\bigr)
++O(x^2).
 \]
-Then $\Psi_{x_0,d}(M(d))=1$.
-\end{definition}
+Substituting the explicit formulas for $M_{12}(d)$ and $M_{21}(d)$ and
+simplifying yields
+\[
+x\,\frac{2\sqrt3\,d\,(id+3)}{3(d-i)^4}.
+\]
+
+Including the quadratic contributions from the diagonal entries and the next
+terms in the off-diagonal expansion gives
+\[
+B\,\langle A_{\val}(x),M(d)\rangle_\F
+=
+x\,\frac{2\sqrt3\,d\,(id+3)}{3(d-i)^4}
++
+x^2\,\frac{d(-5d^2+46id+77)}{15(d-i)^5}
++
+O(x^3).
+\]
+
+The coefficient of $x$ is nonzero for every real $d>0$. Since it depends
+continuously on $d$, its modulus is bounded below on every compact interval
+$D\subset(0,\infty)$. Shrinking $x_0(D)$ if necessary gives
+\[
+|\langle A_{\val}(x),M(d)\rangle_\F|\asymp \frac{x}{B}
+\]
+uniformly for $0<x\le x_0(D)$ and $d\in D$.
+\end{proof}
 
 \begin{proposition}[Canonical calibration theorem]
 \label{prop:canonical-calibration}
-For fixed $x_0$ and $d\in D$, the functional $\Psi_{x_0,d}$ is well-defined
-and uniformly bounded. Moreover:
-\begin{enumerate}
-\item
+For fixed compact $D\subset(0,\infty)$ and $0<x\le x_0(D)$, define
 \[
-\Psi_{x_0,d}(M(d))=1;
+\Psi_{x,d}(X):=
+\frac{\langle A_{\val}(x),X\rangle_\F}
+{\langle A_{\val}(x),M(d)\rangle_\F}.
 \]
-\item if the corrected local deformation satisfies
+Then:
+\begin{enumerate}
+\item $\Psi_{x,d}(M(d))=1$;
+\item $\Psi_{x,d}(A_{\val}(x))\asymp x/B$;
+\item if
 \[
-\Delta_\zeta(m,\sigma)
-=
-S(m)\,A_{\val}(m,\sigma)+R_\zeta(m,\sigma),
+\Delta_\zeta=S(m)A_{\val}(x)+R_\zeta,
 \]
 then
 \[
-\Psi_{x_0,d}(\Delta_\zeta(m,\sigma))
+\Psi_{x,d}(\Delta_\zeta)
 =
-c_{x_0,d}\,\frac{x_0}{B_\zeta(m)}\,S(m)
-+
-\Psi_{x_0,d}(R_\zeta(m,\sigma)),
+c_{x,d}\,\frac{x}{B}S(m)+\Psi_{x,d}(R_\zeta),
+\qquad c_{x,d}\asymp 1;
 \]
-where $c_{x_0,d}\asymp 1$ uniformly on $D$;
-\item for the toy deformation
+\item if
 \[
 \Delta_{\toy}(u;d)=u^2M(d)+O(u^4),
 \]
-one has
+then
 \[
-\Psi_{x_0,d}(\Delta_{\toy}(u;d))
-=
-u^2+O(u^4).
+\Psi_{x,d}(\Delta_{\toy}(u;d))=u^2+O(u^4).
 \]
 \end{enumerate}
-Consequently, if
+In particular, whenever
 \[
-\Psi_{x_0,d}(R_\zeta(m,\sigma))
-=
-o\!\left(\frac{x_0}{B_\zeta(m)}S(m)\right),
+\Psi_{x,d}(R_\zeta)=o\!\left(\frac{x}{B}S(m)\right),
 \]
-then
+one obtains
 \begin{equation}\label{eq:u2-calibration}
-u^2\asymp \frac{x_0}{B_\zeta(m)}S(m).
+u^2\asymp \frac{x}{B}S(m).
 \end{equation}
 \end{proposition}
 
 \begin{proof}
-The first statement is immediate from the definition of $\Psi_{x_0,d}$.
-
-By Lemma~\ref{lem:Aval-small-x} and Lemma~\ref{lem:pairing},
+The first statement is immediate from the definition of $\Psi_{x,d}$.
+By Lemma~\ref{lem:Aval-small-x} and Proposition~\ref{prop:pairing},
 \[
-\Psi_{x_0,d}(A_{\val}(x_0))
+\Psi_{x,d}(A_{\val}(x))
 =
-\frac{\|A_{\val}(x_0)\|_\F^2}{\langle A_{\val}(x_0),M(d)\rangle_\F}
+\frac{\|A_{\val}(x)\|_\F^2}{\langle A_{\val}(x),M(d)\rangle_\F}
 \asymp
-\frac{(x_0/B_\zeta(m))^2}{x_0/B_\zeta(m)}
+\frac{(x/B)^2}{x/B}
 =
-\frac{x_0}{B_\zeta(m)}.
+\frac{x}{B}.
 \]
-This gives the second statement. The third follows by linearity from
-\[
-\Delta_{\toy}(u;d)=u^2M(d)+O(u^4).
-\]
-The calibration relation is immediate.
+The remaining statements follow by linearity.
 \end{proof}
 
 \section{Corrected finite-\texorpdfstring{$s$}{s} holomorphic whitening}
@@ -1544,44 +1605,6 @@ and set
 \widehat\Omega_\zeta^{(0)}(s;m):=\mathcal W(G_-^{(0)},N^{(0)},G_+^{(0)}).
 \]
 
-Assume:
-\begin{enumerate}
-\item the same-point perturbations satisfy
-\[
-\|R_\pm(s)\|\ll S_2;
-\]
-\item the corrected mixed-block perturbation satisfies
-\[
-\|\widetilde R(s)\|\ll S_2;
-\]
-\item the baseline same-point blocks are uniformly positive definite with
-spectral scales
-\[
-G_\pm^{(0)}(s)=
-\begin{pmatrix}
-O(Q) & O(1)\\
-O(1) & O(Q^3)
-\end{pmatrix},
-\]
-and hence
-\[
-G_\pm^{(0)}(s)^{-1/2}=
-\begin{pmatrix}
-O(Q^{-1/2}) & O(Q^{-3/2})\\
-O(Q^{-3/2}) & O(Q^{-3/2})
-\end{pmatrix};
-\]
-\item the baseline mixed block has entry scales
-\[
-N^{(0)}(s)=
-\begin{pmatrix}
-O(Q) & O(Q^2)\\
-O(Q^2) & O(Q^3)
-\end{pmatrix};
-\]
-\item $S_2=o(Q)$.
-\end{enumerate}
-
 Then
 \[
 \widehat\Omega_\zeta^{\corr}(s;m)-\widehat\Omega_\zeta^{(0)}(s;m)
@@ -1627,6 +1650,33 @@ Hence
 \end{proposition}
 
 \begin{proof}
+We first collect the scales used below from results established earlier. The
+same-point perturbation bound $\|R_\pm(s)\|\ll S_2$ is
+Proposition~\ref{prop:block-perturbation}; the mixed-block perturbation bound
+$\|\widetilde R(s)\|\ll S_2$ is
+Proposition~\ref{prop:cross-block-perturbation}; and the smallness
+$S_2=o(Q)$ is Theorem~\ref{thm:tail-curvature}. The baseline entry scales
+\[
+G_\pm^{(0)}(s)=
+\begin{pmatrix} O(Q) & O(1)\\ O(1) & O(Q^3) \end{pmatrix},
+\qquad
+G_\pm^{(0)}(s)^{-1/2}=
+\begin{pmatrix}
+O(Q^{-1/2}) & O(Q^{-3/2})\\
+O(Q^{-3/2}) & O(Q^{-3/2})
+\end{pmatrix},
+\]
+\[
+N^{(0)}(s)=
+\begin{pmatrix} O(Q) & O(Q^2)\\ O(Q^2) & O(Q^3) \end{pmatrix}
+\]
+are read off directly from the explicit same-point formula \eqref{eq:Gpm} and
+the mixed-block formula \eqref{eq:Nm}, given the baseline local scales of
+$q_0, q_0', q_0''$ stated in the proof of
+Lemma~\ref{lem:baseline-variation}. Uniform positive-definiteness of
+$G_\pm^{(0)}(s)$ on the microscopic disk is
+Proposition~\ref{prop:corrected-whitening}.
+
 The whitening map admits the first-order expansion
 \[
 \widehat\Omega_\zeta^{\corr}-\widehat\Omega_\zeta^{(0)}
@@ -1649,7 +1699,7 @@ We estimate the three first-order pieces separately.
 \medskip
 \noindent
 \textbf{Step 1: the mixed-block term.}
-By the corrected mixed-block perturbation estimate,
+By Proposition~\ref{prop:cross-block-perturbation} (entrywise form),
 \[
 \widetilde R_{11}\ll \frac{S_2}{Q^2},
 \qquad
@@ -1657,15 +1707,8 @@ By the corrected mixed-block perturbation estimate,
 \qquad
 \widetilde R_{22}\ll S_2.
 \]
-Using the baseline inverse-square-root scales
-\[
-G_\pm^{(0)}(s)^{-1/2}=
-\begin{pmatrix}
-O(Q^{-1/2}) & O(Q^{-3/2})\\
-O(Q^{-3/2}) & O(Q^{-3/2})
-\end{pmatrix},
-\]
-the off-diagonal entries of
+Combining with the baseline inverse-square-root scales above, the off-diagonal
+entries of
 \[
 \mathcal T_{\mix}:=G_-^{(0)-1/2}\widetilde R\,G_+^{(0)-1/2}
 \]
@@ -1887,7 +1930,8 @@ $Q$-weights. Therefore
 \[
 \Phi_K(\mathcal E_2)\ll \frac{S_2^2}{Q^3}.
 \]
-Since $S_2=o(Q)$, this is lower order than $S_2/Q^3$.
+By Theorem~\ref{thm:tail-curvature}, $S_2=o(Q)$, so this is lower order than
+$S_2/Q^3$.
 
 Combining the estimates for $\mathcal T_-$, $\mathcal T_{\mix}$,
 $\mathcal T_+$, and $\mathcal E_2$ gives
