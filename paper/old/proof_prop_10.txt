@@ -1,0 +1,196 @@
+\begin{proposition}[Entry-by-entry perturbation estimate for the corrected same-point blocks]
+\label{prop:block-perturbation}
+In the corrected finite-$s$ normalization, write
+\[
+G_{m,\pm}^{\corr}(s)
+=
+\frac1\pi
+\begin{pmatrix}
+2q(t_\pm) & \frac12 q'(t_\pm)\\[1ex]
+\frac12 q'(t_\pm) & \frac1{12}\bigl(q''(t_\pm)+2q(t_\pm)^3\bigr)
+\end{pmatrix},
+\qquad
+t_\pm=m\pm \frac{s}{2}.
+\]
+Let
+\[
+q(t)=q_0(t)+\delta q(t),
+\]
+where $q_0$ is the baseline local-model-plus-affine-jet part and $\delta q$ is the corrected remainder.
+Define the baseline same-point blocks
+\[
+G_{m,\pm}^{(0)}(s)
+=
+\frac1\pi
+\begin{pmatrix}
+2q_0(t_\pm) & \frac12 q_0'(t_\pm)\\[1ex]
+\frac12 q_0'(t_\pm) & \frac1{12}\bigl(q_0''(t_\pm)+2q_0(t_\pm)^3\bigr)
+\end{pmatrix},
+\]
+and set
+\[
+R_{m,\pm}(s):=G_{m,\pm}^{\corr}(s)-G_{m,\pm}^{(0)}(s).
+\]
+
+Assume that on the microscopic window one has
+\[
+|\delta q(t_\pm)|\ll L_I^2 S_2,
+\qquad
+|\delta q'(t_\pm)|\ll L_I S_2,
+\qquad
+|\delta q''(t_\pm)|\ll S_2,
+\]
+where $L_I$ is the local window length, and that in the fixed-scaled regime
+\[
+L_I\asymp \frac{x_0}{Q},
+\qquad
+|q_0(t_\pm)|\asymp Q.
+\]
+Then
+\[
+\boxed{
+\|R_{m,\pm}(s)\|\ll S_2
+}
+\]
+uniformly for $|s|<\rho_0/Q$.
+\end{proposition}
+
+\begin{proof}
+We estimate the entries of $R_{m,\pm}(s)$ one by one.
+
+\medskip
+\noindent
+\textbf{(1,1)-entry.}
+Since
+\[
+R_{11}
+=
+\frac1\pi\cdot 2\delta q(t_\pm),
+\]
+we have
+\[
+|R_{11}|
+\ll
+|\delta q(t_\pm)|
+\ll
+L_I^2S_2
+\ll
+\frac{S_2}{Q^2}
+\ll
+S_2.
+\]
+
+\medskip
+\noindent
+\textbf{(1,2)- and (2,1)-entries.}
+Since
+\[
+R_{12}=R_{21}
+=
+\frac1\pi\cdot \frac12 \delta q'(t_\pm),
+\]
+we get
+\[
+|R_{12}|=|R_{21}|
+\ll
+|\delta q'(t_\pm)|
+\ll
+L_I S_2
+\ll
+\frac{S_2}{Q}
+\ll
+S_2.
+\]
+
+\medskip
+\noindent
+\textbf{(2,2)-entry.}
+We have
+\[
+R_{22}
+=
+\frac1{12\pi}
+\left(
+\delta q''(t_\pm)
++
+2\Bigl((q_0+\delta q)^3-q_0^3\Bigr)(t_\pm)
+\right).
+\]
+Expand the cubic difference:
+\[
+(q_0+\delta q)^3-q_0^3
+=
+3q_0^2\delta q+3q_0(\delta q)^2+(\delta q)^3.
+\]
+Hence
+\[
+R_{22}
+=
+\frac1{12\pi}
+\left(
+\delta q''
++
+6q_0^2\delta q
++
+6q_0(\delta q)^2
++
+2(\delta q)^3
+\right)(t_\pm).
+\]
+
+Now estimate each term.
+
+First,
+\[
+|\delta q''(t_\pm)|\ll S_2.
+\]
+
+Second, using $|q_0(t_\pm)|\asymp Q$ and $|\delta q(t_\pm)|\ll L_I^2S_2\ll S_2/Q^2$,
+\[
+|q_0(t_\pm)^2\delta q(t_\pm)|
+\ll
+Q^2\cdot \frac{S_2}{Q^2}
+=
+S_2.
+\]
+
+Third,
+\[
+|q_0(t_\pm)(\delta q(t_\pm))^2|
+\ll
+Q\left(\frac{S_2}{Q^2}\right)^2
+=
+\frac{S_2^2}{Q^3}.
+\]
+Since from the tail-curvature theorem one already has $S_2=o(Q)$, for $Q$
+sufficiently large this is $O(S_2/Q^2)$ and hence $\ll S_2$.
+
+Finally,
+\[
+|(\delta q(t_\pm))^3|
+\ll
+\left(\frac{S_2}{Q^2}\right)^3
+=
+\frac{S_2^3}{Q^6}
+\ll
+S_2.
+\]
+
+Therefore
+\[
+|R_{22}|\ll S_2.
+\]
+
+\medskip
+\noindent
+Collecting the four entrywise bounds, we obtain
+\[
+|R_{11}|,\ |R_{12}|,\ |R_{21}|,\ |R_{22}|
+\ll S_2.
+\]
+Since all norms on $2\times 2$ matrices are equivalent,
+\[
+\|R_{m,\pm}(s)\|\ll S_2,
+\]
+uniformly on the microscopic disk. This proves the proposition.
+\end{proof}

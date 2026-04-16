@@ -1,0 +1,424 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm,mathtools,fullpage,enumitem}
+\usepackage{hyperref}
+
+\title{Toward a Proof of the Riemann Hypothesis:\\
+A Jet-Whitened Local Block Strategy}
+\author{}
+\date{}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{gap}[theorem]{Gap}
+\newtheorem{definition}[theorem]{Definition}
+
+\newcommand{\RH}{\mathrm{RH}}
+\newcommand{\Om}{\Omega}
+\newcommand{\Del}{\Delta}
+\newcommand{\Ph}{\Phi}
+\newcommand{\PsiCal}{\Psi}
+\newcommand{\val}{\mathrm{val}}
+\newcommand{\toy}{\mathrm{toy}}
+\newcommand{\zetaSide}{\zeta}
+\newcommand{\blk}{\mathrm{blk}}
+\newcommand{\Err}{\mathrm{Err}}
+\newcommand{\Tail}{\mathrm{Tail}}
+\newcommand{\bg}{\mathrm{bg}}
+\newcommand{\sym}{\mathrm{sym}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This document records a proof strategy for the Riemann Hypothesis based on
+local jet-normalized blocks of the phase kernel, together with a precise list
+of the remaining gaps.
+The main purpose is organizational: every unresolved point is isolated as a
+named theorem-sized statement so that it can be proved one-by-one.
+\end{abstract}
+
+\section{Main conditional theorem}
+
+\begin{theorem}[Conditional proof of $\RH$ from five local analytic inputs]
+Assume Gaps~\ref{gap:finite-s-formulas}--\ref{gap:smallness-regime} below.
+Then the Riemann Hypothesis holds.
+\end{theorem}
+
+\begin{proof}[Proof assuming the five gaps]
+The proof proceeds in five stages.
+
+\medskip
+\noindent
+\textbf{Stage 1: Local block construction.}
+For symmetric placement
+\[
+t_\pm = m \pm \frac{s}{2},
+\]
+let $G_m(s)$ be the same-point $2\times 2$ jet Gram block and $N_m(s)$ the
+mixed left-right $2\times 2$ jet block. Define the whitened local block
+\[
+\widehat{\Om}_{\zetaSide}(s;m)
+=
+G_m(s)^{-1/2}\,N_m(s)\,G_m(s)^{-1/2},
+\]
+followed by the phase-gap and background-value subtractions.
+By Gap~\ref{gap:finite-s-formulas} and Gap~\ref{gap:gram-stability},
+this is holomorphic on the microscopic disk
+\[
+|s|<\rho_0/Q,
+\qquad Q \asymp \log |m|.
+\]
+
+\medskip
+\noindent
+\textbf{Stage 2: Zeta-side odd analytic transverse scalar.}
+Define the transverse functional
+\[
+\Phi_K(X):=x_{12}+x_{21}
+\qquad
+\left(
+X=
+\begin{pmatrix}
+x_{11}&x_{12}\\
+x_{21}&x_{22}
+\end{pmatrix}
+\right),
+\]
+and set
+\[
+H_m(s):=\Phi_K(\widehat{\Om}_{\zetaSide}(s;m)).
+\]
+By symmetry under $s\mapsto -s$, $H_m$ is odd. By Gap~\ref{gap:boundary},
+\[
+|H_m(s)| \ll \frac{L(m)S(m)^2}{Q^3}
+\qquad (|s|=\rho_0/Q),
+\]
+where
+\[
+S(m):=q_\zeta(m)-B_\zeta(m),
+\qquad
+L(m):=\log\!\Bigl(3+|m|+\frac1{S(m)}\Bigr).
+\]
+Hence Cauchy's estimate gives an odd expansion
+\[
+H_m(z/Q^2)
+=
+\sum_{r\ge 0} c_{2r+1}(m)\,\frac{z^{2r+1}}{Q^{2r+4}},
+\]
+with
+\[
+|c_{2r+1}(m)| \ll L(m)S(m)^2\,\rho_0^{-(2r+1)}.
+\]
+
+\medskip
+\noindent
+\textbf{Stage 3: $N$-point odd-moment cancellation.}
+For $N\le \rho_0 Q$, define
+\[
+s_j=\frac{j}{Q^2},
+\qquad
+j=1,\dots,N,
+\]
+and let $a_j^{(N)}$ be the explicit odd-moment-canceling coefficients with
+\[
+\sum_{j=1}^N a_j^{(N)}=1,
+\qquad
+\sum_{j=1}^N a_j^{(N)}j^{2r+1}=0
+\quad (r=0,\dots,N-2).
+\]
+Then
+\[
+\Psi^{(N)}_{\zetaSide}(m)
+:=
+\sum_{j=1}^N a_j^{(N)} H_m(s_j)
+\]
+satisfies
+\[
+|\Psi^{(N)}_{\zetaSide}(m)|
+\ll
+L(m)S(m)^2\,\frac{\Theta_N}{Q^{2N+2}},
+\]
+and for $N=\lfloor \alpha Q\rfloor$ with $\alpha>0$ small enough, $\Theta_N$
+is exponentially tame, so the right-hand side is exponentially small in $Q$.
+
+\medskip
+\noindent
+\textbf{Stage 4: Model-side anomaly and value calibration.}
+Let
+\[
+\Delta_{\toy}(u;d)=u^2 M(d)+O(u^4)
+\]
+be the toy off-line deformation, with $u=\beta-\tfrac12$ and separation
+parameter $d>0$. One has
+\[
+\Phi_K(M(d))\neq 0
+\qquad(d>0),
+\]
+so the toy-side transverse signal survives.
+
+Let
+\[
+A_{\val}(m,\sigma):=\partial_\alpha \Omega_\infty\big|_{\alpha=0}
+\]
+be the leading pure value-channel derivative of the jet-limit zeta-side block,
+and define the canonical dual calibration functional
+\[
+\PsiCal_{m,\sigma}(X)
+:=
+\frac{\langle A_{\val}(m,\sigma),X\rangle_F}
+{\|A_{\val}(m,\sigma)\|_F^2}.
+\]
+By Gap~\ref{gap:value-calibration}, in a fixed small-scaled regime
+\[
+x:=B_\zeta(m)\sigma = x_0,
+\]
+this functional is stable and calibrates the value scale:
+\[
+\PsiCal_{m,\sigma}(\Delta_{\zetaSide}) = S(m)+o(S(m)),
+\qquad
+\PsiCal_{m,\sigma}(\Delta_{\toy}(u;d)) \asymp u^2.
+\]
+Hence
+\[
+u^2 \asymp S(m).
+\]
+
+\medskip
+\noindent
+\textbf{Stage 5: Contradiction.}
+By construction,
+\[
+\Phi_K(A_{\val})=0,
+\]
+so on the zeta side the leading value channel is killed and only the
+curvature/tail/error channel survives:
+\[
+\Phi_K(\Delta_{\zetaSide})
+=
+O(L(m)S(m)^2)+O(\Tail)+O(\Err).
+\]
+By Gap~\ref{gap:smallness-regime},
+\[
+B_\zeta(m)L(m)S(m)\to 0,
+\qquad
+B_\zeta(m)(\Tail+\Err)=o(S(m))
+\]
+in the chosen regime, hence
+\[
+\Phi_K(\Delta_{\zetaSide})=o(S(m)).
+\]
+But on the toy side,
+\[
+\Phi_K(\Delta_{\toy}(u;d))
+=
+u^2\Phi_K(M(d))+O(u^4)
+\asymp u^2
+\asymp S(m).
+\]
+This is impossible for sufficiently small $S(m)$.
+Hence no off-line local deformation can occur, and therefore $\RH$ follows.
+\end{proof}
+
+\section{Core established spine}
+
+\begin{proposition}[Jet-limit normalization]
+In the local point-to-jet basis, the same-point blocks converge to jet Gram
+matrices and the mixed blocks converge to a jet cross matrix. After whitening,
+the jet-limit local block takes the form
+\[
+\Omega_\infty(T_1,T_2)=M_1^{-1/2}N_{12}M_2^{-1/2}.
+\]
+\end{proposition}
+
+\begin{proposition}[Toy transverse obstruction]
+For the toy anomaly matrix $M(d)$ one has
+\[
+\Phi_K(M(d))\neq 0
+\qquad(d>0),
+\]
+and in fact on every compact interval $D\subset(0,\infty)$ there is
+$c_K(D)>0$ with
+\[
+|\Phi_K(M(d))|\ge c_K(D)
+\qquad(d\in D).
+\]
+\end{proposition}
+
+\begin{proposition}[Zeta-side curvature estimate]
+The background-subtracted zero density $S(m)$ satisfies
+\[
+|S''(m)|\ll L(m)S(m)^2.
+\]
+\end{proposition}
+
+\begin{proposition}[Leading value-channel geometry]
+In the pure value-channel linearization, the leading matrix $A_{\val}$
+satisfies
+\[
+\Phi_K(A_{\val})=0.
+\]
+\end{proposition}
+
+\section{The five remaining gaps}
+
+\begin{gap}[Exact finite-$s$ formulas and holomorphy]
+\label{gap:finite-s-formulas}
+Write the exact finite-$s$ formulas for the local jet Gram block $G_m(s)$ and
+the local jet cross block $N_m(s)$ in the actual zeta/scattering normalization,
+and prove that they are entrywise holomorphic for
+\[
+|s|<\rho_0/Q
+\]
+with $\rho_0>0$ independent of the admissible midpoint class.
+\end{gap}
+
+\begin{remark}[Next step for Gap~\ref{gap:finite-s-formulas}]
+Freeze one canonical notation for the finite-$s$ blocks:
+\[
+G_m(s)=\text{same-point jet Gram block at }t_\pm=m\pm s/2,
+\]
+\[
+N_m(s)=\text{mixed left-right jet block at }t_\pm=m\pm s/2.
+\]
+Then verify holomorphy directly from the exact kernel denominators and uniform
+convergence of the resulting zero sums on the disk.
+\end{remark}
+
+\begin{gap}[Uniform Gram stability and holomorphic whitening]
+\label{gap:gram-stability}
+Prove the derivative estimate
+\[
+\sup_{|s|<\rho/Q}\|\partial_s G_m(s)\|\le C_GQ^2,
+\]
+and deduce that $G_m(s)$ remains uniformly positive definite on
+\[
+|s|<\rho_0/Q.
+\]
+Then prove that
+\[
+G_m(s)^{-1/2}
+\]
+is holomorphic there, so the whitened block
+\[
+\widehat{\Om}_{\zetaSide}(s;m)
+=
+G_m(s)^{-1/2}N_m(s)G_m(s)^{-1/2}
+\]
+is holomorphic.
+\end{gap}
+
+\begin{remark}[Next step for Gap~\ref{gap:gram-stability}]
+Differentiate the exact entries of $G_m(s)$ entry-by-entry, show the dominant
+$(2,2)$-entry varies like $O(Q^2)$ and the others are smaller, then use the
+spectral gap of $G_m(0)$ to propagate invertibility to the full disk.
+\end{remark}
+
+\begin{gap}[Boundary estimate for the transverse scalar]
+\label{gap:boundary}
+Prove that on the microscopic boundary
+\[
+|s|=\rho_0/Q,
+\]
+the transverse scalar satisfies
+\[
+|H_m(s)|=
+|\Phi_K(\widehat{\Om}_{\zetaSide}(s;m))|
+\ll
+\frac{L(m)S(m)^2}{Q^3}.
+\]
+\end{gap}
+
+\begin{remark}[Next step for Gap~\ref{gap:boundary}]
+Combine:
+\begin{itemize}[nosep]
+\item complexified denominator comparability on $|s|=\rho_0/Q$,
+\item the transported near/far curvature bounds,
+\item and the explicit factor $\Phi_K(V(s))\ll Q^{-3}$.
+\end{itemize}
+This is the exact input needed for Cauchy's theorem and the all-order odd
+microscopic expansion.
+\end{remark}
+
+\begin{gap}[Canonical value calibration]
+\label{gap:value-calibration}
+Let
+\[
+A_{\val}(m,\sigma):=\partial_\alpha \Omega_\infty\big|_{\alpha=0}
+\]
+be the leading pure value-channel derivative in the symmetric local regime.
+Prove that on a fixed small-scaled regime
+\[
+x:=B_\zeta(m)\sigma=x_0,
+\]
+the canonical dual functional
+\[
+\PsiCal_{m,\sigma}(X)
+=
+\frac{\langle A_{\val}(m,\sigma),X\rangle_F}{\|A_{\val}(m,\sigma)\|_F^2}
+\]
+is stable and calibrates the value scale:
+\[
+\PsiCal_{m,\sigma}(\Delta_{\zetaSide})=S(m)+o(S(m)),
+\qquad
+\PsiCal_{m,\sigma}(\Delta_{\toy}(u;d))\asymp u^2.
+\]
+\end{gap}
+
+\begin{remark}[Next step for Gap~\ref{gap:value-calibration}]
+Compute the full matrix $A_{\val}$ explicitly in the chosen normalization, then
+prove:
+\[
+\|A_{\val}\|_F \asymp \frac{x_0}{B_\zeta(m)},
+\qquad
+|\langle A_{\val},M(d)\rangle_F|
+\asymp
+\frac{x_0}{B_\zeta(m)}
+\]
+uniformly for $d$ in a fixed compact interval. This turns the canonical dual
+into a stable value calibrator.
+\end{remark}
+
+\begin{gap}[Smallness of tail and error terms in the fixed-$x_0$ regime]
+\label{gap:smallness-regime}
+In the regime
+\[
+\sigma=\frac{x_0}{B_\zeta(m)}
+\]
+with fixed small $x_0>0$, prove
+\[
+B_\zeta(m)L(m)S(m)\to 0,
+\qquad
+B_\zeta(m)(\Tail+\Err)=o(S(m)).
+\]
+Equivalently, after calibration, prove that the zeta-side remainder is
+quadratically small compared to the calibrated value scale.
+\end{gap}
+
+\begin{remark}[Next step for Gap~\ref{gap:smallness-regime}]
+Audit every tail and reconstruction term after choosing $\sigma=x_0/B_\zeta(m)$.
+The target is to show that calibration amplifies errors by at most a factor
+comparable to $B_\zeta(m)$, and that this is still negligible compared to
+$S(m)$ in the comparison regime.
+\end{remark}
+
+\section{Suggested work order}
+
+\begin{enumerate}[label=\arabic*.]
+\item Prove Gap~\ref{gap:finite-s-formulas}.
+\item Prove Gap~\ref{gap:gram-stability}.
+\item Prove Gap~\ref{gap:boundary}.
+\item Prove Gap~\ref{gap:value-calibration}.
+\item Prove Gap~\ref{gap:smallness-regime}.
+\end{enumerate}
+
+\begin{remark}
+The first three gaps complete the local analytic package and make the
+$N$-point cancellation machine rigorous. The fourth and fifth convert that
+machine into the corrected calibration-plus-obstruction endgame.
+\end{remark}
+
+\end{document}

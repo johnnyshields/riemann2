@@ -1,0 +1,717 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\title{A Proof of the Reimann Hypothesis (WITH GAPS)}
+\author{}
+\date{}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{gaptheorem}[theorem]{Gap}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{setup}[theorem]{Setup}
+
+\newcommand{\RH}{\mathrm{RH}}
+\newcommand{\Om}{\Omega}
+\newcommand{\Del}{\Delta}
+\newcommand{\Ph}{\Phi}
+\newcommand{\Psical}{\Psi}
+\newcommand{\zetaSide}{\zeta}
+\newcommand{\toy}{\mathrm{toy}}
+\newcommand{\val}{\mathrm{val}}
+\newcommand{\bg}{\mathrm{bg}}
+\newcommand{\sym}{\mathrm{sym}}
+\newcommand{\Err}{\mathrm{Err}}
+\newcommand{\Tail}{\mathrm{Tail}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\Ker}{\mathrm{Ker}}
+\newcommand{\Span}{\mathrm{span}}
+\newcommand{\sgn}{\mathrm{sgn}}
+\newcommand{\wt}{\widetilde}
+\newcommand{\cK}{c_K}
+\newcommand{\cval}{c_{\val}}
+\newcommand{\Aval}{A_{\val}}
+\newcommand{\Qloc}{Q}
+\newcommand{\inner}[2]{\left\langle #1,#2\right\rangle_F}
+\newcommand{\norm}[1]{\left\lVert #1\right\rVert}
+\newcommand{\abs}[1]{\left\lvert #1\right\rvert}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This document records a proof strategy for the Riemann Hypothesis based on local jet-normalized blocks of a phase kernel, together with a precise list of the remaining gaps. The text is written in the style of a research proof draft: statements that are already part of the established spine are written as propositions or lemmas with proofs or proof sketches at a level intended to be compatible with a serious mathematical paper; statements that remain unresolved are labeled explicitly as \emph{Gap}. The purpose is to make the architecture of the argument maximally explicit so that the remaining issues can be filled one-by-one.
+\end{abstract}
+
+\tableofcontents
+
+\section{Overview}
+
+The argument has three large components.
+
+First, one builds a local matrix statistic from two nearby sample points of the phase kernel and passes from the raw point basis to a point-to-jet basis. In that basis, the local same-point and cross-point blocks have finite limits and can be whitened. This produces a canonical local normalized matrix.
+
+Second, one studies two models for that local matrix: the true zeta/scattering-side matrix and an explicit toy off-line model. On the toy side, the leading deformation is a concrete matrix $M(d)$ depending on a separation parameter $d$, and a certain transverse scalar functional $\Phi_K$ detects it nontrivially for every $d>0$. On the zeta side, after background subtraction and phase-gap subtraction, the local deformation is value-dominated, with curvature controlled by a local estimate of the form
+\[
+\abs{S''(m)}\ll L(m)S(m)^2.
+\]
+
+Third, one uses two scalar functionals in an asymmetric way. A canonical calibration functional, built from the leading zeta-side value-channel matrix, measures the effective size of the local value channel. The functional $\Phi_K$ then serves as a transverse obstruction: it kills the leading zeta value channel but not the toy off-line anomaly. In the end, the zeta-side transverse scalar is quadratically small in the calibrated size, whereas the toy-side transverse scalar is linearly large in that size. This is the intended contradiction.
+
+The only unresolved points are local analytic and quantitative statements. Every such point is isolated as a named \emph{Gap} below.
+
+\section{Set-up and notation}
+
+\begin{setup}[Local midpoint and separation]
+Let $m\in \mathbb{R}$ be a local midpoint and let $s\in \mathbb{C}$ be a symmetric separation parameter. Write
+\[
+t_\pm = m \pm \frac{s}{2}.
+\]
+Throughout, we use the notation
+\[
+\Qloc=\Qloc(m)\asymp \log \abs{m}
+\]
+for the local logarithmic scale. On the background side, one writes
+\[
+q_\zeta(m)=B_\zeta(m)+S(m),
+\]
+where $B_\zeta(m)$ is the explicit archimedean/trivial-zero background and $S(m)$ is the positive zero contribution.
+\end{setup}
+
+\begin{definition}[Phase kernel]
+Let $\Phi$ be a real phase function and define the associated kernel
+\[
+K_\Phi(x,y):=
+\begin{cases}
+\dfrac{\sin(\Phi(x)-\Phi(y))}{\pi(x-y)}, & x\neq y,\\[1ex]
+\dfrac{\Phi'(x)}{\pi}, & x=y.
+\end{cases}
+\]
+The local zeta/scattering-side phase will be a specific instance of this construction.
+\end{definition}
+
+\begin{definition}[Point-to-jet basis]
+For a local point spacing $h>0$, define
+\[
+P_h:=\frac12\begin{pmatrix}1&1\\ -1/h&1/h\end{pmatrix}.
+\]
+This changes from the raw two-point basis to a value/first-derivative jet basis. The key feature is that local blocks acquire finite limits as $h\to 0$.
+\end{definition}
+
+\section{Jet-limit normalization and the local block}
+
+\subsection{The jet-limit same-point block}
+
+Fix a center $T$. Consider the local two-point block $A_h$ built from the pair $T\pm h/2$. Passing to jet coordinates gives
+\[
+\wt A_h=P_hA_hP_h^\top.
+\]
+A direct Taylor expansion yields a finite limit.
+
+\begin{proposition}[Jet-limit same-point block]
+Let $K=K_\Phi$ be the phase kernel associated to a sufficiently smooth phase $\Phi$. Then
+\[
+\wt A_h = J(T)+O(h^2),
+\]
+where
+\[
+J(T)=
+\begin{pmatrix}
+2K(T,T) & K_x(T,T)\\[1ex]
+K_x(T,T) & \frac12 K_{xy}(T,T)
+\end{pmatrix}.
+\]
+For the phase kernel, writing
+\[
+q=\Phi',\qquad q'=\Phi'',\qquad q''=\Phi''',
+\]
+one has
+\[
+K(T,T)=\frac{q(T)}{\pi},\qquad K_x(T,T)=\frac{q'(T)}{2\pi},\qquad K_{xy}(T,T)=\frac{q''(T)+2q(T)^3}{6\pi}.
+\]
+Hence
+\[
+J(T)=\frac1\pi
+\begin{pmatrix}
+2q(T) & \frac12 q'(T)\\[1ex]
+\frac12 q'(T) & \frac1{12}\bigl(q''(T)+2q(T)^3\bigr)
+\end{pmatrix}.
+\]
+\end{proposition}
+
+\begin{proof}
+The point-to-jet basis is designed so that the first coordinate records the local value mode and the second the local first-derivative mode. Taylor-expand the kernel entries around $(T,T)$ to second order. The zeroth and first order terms survive in the scaled combination defined by $P_h$, while the residual terms are $O(h^2)$. The stated formulas for $K(T,T)$, $K_x(T,T)$, and $K_{xy}(T,T)$ are obtained by differentiating the explicit phase-kernel formula at the diagonal. Substituting these identities into the matrix definition of $J(T)$ gives the displayed expression.
+\end{proof}
+
+\begin{corollary}[Jet Gram positivity criterion]
+For the phase kernel,
+\[
+\det J(T)=\frac{1}{24\pi^2}\Bigl(4q(T)^4+2q(T)q''(T)-3q'(T)^2\Bigr).
+\]
+In particular, positivity of the local jet Gram matrix is equivalent to the inequality
+\[
+4q^4+2qq''-3(q')^2\ge 0.
+\]
+\end{corollary}
+
+\begin{proof}
+Compute the determinant directly from the $2\times2$ matrix formula for $J(T)$.
+\end{proof}
+
+\subsection{The jet-limit cross block}
+
+Now fix two distinct centers $T_1\neq T_2$, let
+\[
+q_j=q(T_j),\qquad q_j'=q'(T_j),\qquad q_j''=q''(T_j),\qquad j=1,2,
+\]
+and write
+\[
+\Delta:=\Phi(T_1)-\Phi(T_2),\qquad s:=T_1-T_2\neq 0.
+\]
+
+\begin{proposition}[Jet-limit cross block]
+Let $C_h$ be the local cross block between two two-point samples centered at $T_1$ and $T_2$. Then
+\[
+\wt C_h=P_hC_hP_h^\top=J_{12}+O(h^2),
+\]
+where
+\[
+J_{12}=
+\begin{pmatrix}
+2K(T_1,T_2) & K_y(T_1,T_2)\\[1ex]
+K_x(T_1,T_2) & \frac12 K_{xy}(T_1,T_2)
+\end{pmatrix}.
+\]
+For the phase kernel, write
+\[
+M_j:=
+\begin{pmatrix}
+2q_j & \frac12 q_j'\\[1ex]
+\frac12 q_j' & \frac1{12}(q_j''+2q_j^3)
+\end{pmatrix}
+\]
+and
+\[
+N_{12}:=
+\begin{pmatrix}
+\dfrac{2\sin\Delta}{s} & \dfrac{\sin\Delta-q_2s\cos\Delta}{s^2}\\[2ex]
+\dfrac{q_1s\cos\Delta-\sin\Delta}{s^2} & \dfrac{(q_1+q_2)s\cos\Delta+(q_1q_2s^2-2)\sin\Delta}{2s^3}
+\end{pmatrix}.
+\]
+Then
+\[
+J_j=\frac1\pi M_j,
+\qquad
+J_{12}=\frac1\pi N_{12}.
+\]
+Consequently the jet-whitened cross block is
+\[
+\Omega_\infty(T_1,T_2)=M_1^{-1/2}N_{12}M_2^{-1/2}.
+\]
+\end{proposition}
+
+\begin{proof}
+The proof is parallel to the same-point case. Taylor-expand the phase kernel in the mixed variables around $(T_1,T_2)$ and pass to the point-to-jet basis. The formulas for $K(T_1,T_2)$, $K_x(T_1,T_2)$, $K_y(T_1,T_2)$, and $K_{xy}(T_1,T_2)$ are obtained by direct differentiation of the phase-kernel formula. The common factor $1/\pi$ cancels under whitening.
+\end{proof}
+
+\section{The toy anomaly and its transverse obstruction}
+
+The toy off-line model produces a jet-limit anomaly matrix $M(d)$ depending on a separation parameter $d>0$. The explicit formula obtained earlier is
+\[
+M(d)=
+\begin{pmatrix}
+\dfrac{d}{(d+i)^3} & \dfrac{i\bigl(2(d+i)^2+1\bigr)}{(d+i)^4}\\[2ex]
+\dfrac{2d-i}{(d+i)^4} & \dfrac{4i\bigl((d+i)^2+1\bigr)}{(d+i)^5}
+\end{pmatrix}.
+\]
+
+\begin{definition}[Transverse obstruction functional]
+For a $2\times2$ matrix
+\[
+X=
+\begin{pmatrix}
+x_{11}&x_{12}\\x_{21}&x_{22}
+\end{pmatrix},
+\]
+define
+\[
+\Phi_K(X):=x_{12}+x_{21}.
+\]
+\end{definition}
+
+\begin{proposition}[Toy transverse obstruction]
+For every real $d>0$,
+\[
+\Phi_K(M(d))
+=
+\frac{2\bigl(i(d^2-1)-d\bigr)}{(d+i)^4}
+\neq 0.
+\]
+Moreover,
+\[
+\abs{\Phi_K(M(d))}
+=
+\frac{2\sqrt{d^4-d^2+1}}{(d^2+1)^2}.
+\]
+Hence, on every compact interval
+\[
+D=[d_-,d_+]\subset(0,\infty),
+\]
+there exists $\cK(D)>0$ such that
+\[
+\abs{\Phi_K(M(d))}\ge \cK(D)
+\qquad(d\in D).
+\]
+\end{proposition}
+
+\begin{proof}
+The formula for $\Phi_K(M(d))$ is obtained by direct addition of the $(1,2)$- and $(2,1)$-entries of $M(d)$. The modulus formula follows by elementary algebra. Since the numerator has nonzero real part $-2d$ for every real $d>0$, the quantity cannot vanish.
+\end{proof}
+
+\begin{corollary}[Toy transverse signal]
+If the toy deformation has the form
+\[
+\Delta_\toy(u;d)=u^2M(d)+O(u^4),
+\]
+then
+\[
+\Phi_K(\Delta_\toy(u;d))=u^2\Phi_K(M(d))+O(u^4),
+\]
+and therefore, for $d\in D$,
+\[
+\abs{\Phi_K(\Delta_\toy(u;d))}\ge \cK(D)u^2-Cu^4.
+\]
+In particular, for sufficiently small $u$,
+\[
+\abs{\Phi_K(\Delta_\toy(u;d))}\asymp u^2.
+\]
+\end{corollary}
+
+\section{Zeta-side value/curvature decomposition}
+
+The zeta-side phase density is decomposed as
+\[
+q_\zeta(m)=B_\zeta(m)+S(m),
+\]
+where $B_\zeta$ is explicit and $S(m)$ is the positive zero contribution.
+
+\begin{proposition}[Local curvature estimate]
+Let
+\[
+L(m):=\log\!\Bigl(3+\abs{m}+\frac1{S(m)}\Bigr).
+\]
+Then
+\[
+\abs{S''(m)}\ll L(m)S(m)^2.
+\]
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Write $S$ as a sum of local Poisson-pair profiles. For each pair,
+\[
+\abs{f_\rho''(m)}\le \frac{24}{\min(\beta_\rho,1-\beta_\rho)}f_\rho(m)^2.
+\]
+Use the zero-free region to bound the reciprocal of the minimum distance to the critical line by a logarithm in local height, then split the zero sum into near and far parts. The near part contributes $\ll L(m)S(m)^2$, and the far part can be optimized away with a shell-sum argument.
+\end{proof}
+
+\section{Finite-$s$ local blocks and whitening}
+
+This section records the abstract finite-$s$ local objects. The exact formulas remain to be written in one canonical notation; this is isolated as Gap~\ref{gap:finite-s-formulas} below.
+
+\begin{definition}[Finite-$s$ local jet blocks]
+At the symmetric points
+\[
+t_\pm=m\pm \frac{s}{2},
+\]
+let
+\[
+G_m(s)
+\]
+denote the same-point $2\times 2$ jet Gram block and let
+\[
+N_m(s)
+\]
+denote the mixed left-right $2\times 2$ jet cross block. The whitened local block is
+\[
+\widehat\Omega_\zeta(s;m)=G_m(s)^{-1/2}N_m(s)G_m(s)^{-1/2},
+\]
+possibly followed by background and phase-gap subtraction depending on the stage of the argument.
+\end{definition}
+
+\begin{remark}
+The jet-limit matrices $M_j$ and $N_{12}$ are the limiting avatars of $G_m(s)$ and $N_m(s)$ when one passes to explicit center variables and then to the jet limit. The missing ingredient is the exact finite-$s$ entry formulas in one fixed notation.
+\end{remark}
+
+\section{Odd transverse scalar and the all-order expansion}
+
+Define the zeta-side transverse scalar by
+\[
+H_m(s):=\Phi_K(\widehat\Omega_\zeta(s;m)).
+\]
+Symmetric placement implies oddness under $s\mapsto -s$.
+
+\begin{proposition}[Oddness of the transverse scalar]
+Assume the renormalized local block satisfies the natural jet-basis symmetry
+\[
+\widehat\Omega_\zeta(-s;m)=J_0\widehat\Omega_\zeta(s;m)J_0,
+\qquad
+J_0=
+\begin{pmatrix}
+1&0\\0&-1
+\end{pmatrix}.
+\]
+Then
+\[
+H_m(-s)=-H_m(s).
+\]
+\end{proposition}
+
+\begin{proof}
+If
+\[
+X=
+\begin{pmatrix}
+a&b\\c&d
+\end{pmatrix},
+\]
+then
+\[
+J_0XJ_0=
+\begin{pmatrix}
+a&-b\\-c&d
+\end{pmatrix},
+\]
+so
+\[
+\Phi_K(J_0XJ_0)=-(b+c)=-\Phi_K(X).
+\]
+Applying this to $X=\widehat\Omega_\zeta(s;m)$ gives the claim.
+\end{proof}
+
+The following three gaps are the finite-$s$ analytic package needed to make the odd expansion rigorous.
+
+\begin{gaptheorem}[Exact finite-$s$ formulas and holomorphy]
+\label{gap:finite-s-formulas}
+Write the exact finite-$s$ entry formulas for $G_m(s)$ and $N_m(s)$ in the actual zeta/scattering normalization, and prove that they are holomorphic for
+\[
+|s|<\rho_0/\Qloc
+\]
+with $\rho_0>0$ independent of the admissible midpoint class.
+\end{gaptheorem}
+
+\begin{gaptheorem}[Uniform Gram stability and holomorphic whitening]
+\label{gap:gram-stability}
+Prove the derivative estimate
+\[
+\sup_{|s|<\rho/\Qloc}\norm{\partial_s G_m(s)}\le C_G\Qloc^2,
+\]
+and deduce that $G_m(s)$ remains uniformly positive definite on
+\[
+|s|<\rho_0/\Qloc.
+\]
+Then prove that
+\[
+G_m(s)^{-1/2}
+\]
+is holomorphic there, so the whitened block is holomorphic.
+\end{gaptheorem}
+
+\begin{gaptheorem}[Boundary estimate]
+\label{gap:boundary}
+Prove that on the microscopic boundary
+\[
+|s|=\rho_0/\Qloc,
+\]
+one has
+\[
+\abs{H_m(s)}\ll \frac{L(m)S(m)^2}{\Qloc^3}.
+\]
+\end{gaptheorem}
+
+Assuming these gaps, Cauchy's theorem gives the odd all-order expansion
+\[
+H_m(z/\Qloc^2)=\sum_{r\ge 0} c_{2r+1}(m)\frac{z^{2r+1}}{\Qloc^{2r+4}},
+\qquad
+\abs{c_{2r+1}(m)}\ll L(m)S(m)^2\rho_0^{-(2r+1)}.
+\]
+
+\section{$N$-point odd-moment cancellation}
+
+For $N\le \rho_0\Qloc$, define
+\[
+s_j=\frac{j}{\Qloc^2},\qquad j=1,\dots,N,
+\]
+and let
+\[
+a_j^{(N)}
+=
+(-1)^{j-1}
+\frac{2(2N-1)N!(N-1)!j}{(N-j)!(N+j)!}
+\]
+be the explicit odd-moment-canceling coefficients.
+
+\begin{proposition}[$N$-point cancellation]
+These coefficients satisfy
+\[
+\sum_{j=1}^N a_j^{(N)}=1,
+\qquad
+\sum_{j=1}^N a_j^{(N)}j^{2r+1}=0
+\quad (r=0,\dots,N-2).
+\]
+Consequently, if the odd analytic expansion of $H_m$ holds, then the combination
+\[
+\Psi_{\zetaSide}^{(N)}(m):=\sum_{j=1}^N a_j^{(N)}H_m(s_j)
+\]
+satisfies
+\[
+\abs{\Psi_{\zetaSide}^{(N)}(m)}
+\ll
+L(m)S(m)^2\frac{\Theta_N}{\Qloc^{2N+2}},
+\]
+where $\Theta_N$ is explicit and exponentially tame for $N=\lfloor \alpha \Qloc\rfloor$ with $\alpha>0$ small enough.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+The moment-canceling identities are standard for the explicit coefficients. Substituting the odd expansion of $H_m$ shows that the first $N-1$ odd terms vanish, leaving only higher terms. The resulting coefficient sum can be estimated by the exact moment generating function, yielding the displayed bound.
+\end{proof}
+
+\section{Corrected endgame: calibration and obstruction}
+
+The recent correction to the endgame is as follows. One does \emph{not} try to make two functionals vanish on the leading zeta value plane. Instead:
+
+\begin{itemize}[nosep]
+\item one uses a canonical calibration functional $\Psical$ derived from the actual leading value matrix,
+\item and one keeps $\Phi_K$ as the transverse contradiction channel.
+\end{itemize}
+
+\subsection{The leading value matrix}
+
+In the symmetric background regime let
+\[
+T_1=m-\frac{\sigma}{2},\qquad T_2=m+\frac{\sigma}{2},\qquad x:=B_\zeta(m)\sigma.
+\]
+Let $\Omega_\infty$ be the explicit jet-limit block. Define the leading pure value-channel matrix by
+\[
+\Aval(m,\sigma):=\partial_\alpha \Omega_\infty\big|_{\alpha=0},
+\]
+where one perturbs the local value channel by $q_1=q_2=B+\alpha$ and freezes the derivative/curvature data at background level.
+
+The explicit small-$x$ expansion established earlier is
+\[
+\Aval(x)=\frac1{B}
+\begin{pmatrix}
+-\dfrac{x^2}{3}+O(x^4) & -\dfrac{\sqrt3 x}{3}+O(x^3)\\[1.2ex]
+\dfrac{\sqrt3 x}{3}+O(x^3) & -\dfrac{3x^2}{5}+O(x^4)
+\end{pmatrix}.
+\]
+In particular,
+\[
+\norm{\Aval(x)}\asymp \frac{x}{B}
+\qquad(x\to 0).
+\]
+
+Moreover,
+\[
+\Phi_K(\Aval)=0.
+\]
+Thus $\Phi_K$ kills the leading zeta value channel.
+
+\subsection{Canonical calibration functional}
+
+Define the canonical dual functional
+\[
+\Psical_x(X):=rac{\inner{\Aval(x)}{X}}{\norm{\Aval(x)}^2}.
+\]
+Then
+\[
+\Psical_x(\Aval)=1.
+\]
+The small-$x$ pairing with the toy anomaly is
+\[
+B\,\inner{\Aval(x)}{M(d)}
+=
+x\,c_1(d)+x^2c_2(d)+O(x^3),
+\qquad
+c_1(d)=\frac{2\sqrt3 d(id+3)}{3(d-i)^4},
+\]
+so $c_1(d)\neq 0$ for every real $d>0$.
+
+\begin{proposition}[Stable small-$x$ calibration regime]
+Fix a compact interval
+\[
+D=[d_-,d_+]\subset(0,\infty).
+\]
+Then there exists $x_0=x_0(D)>0$ and constants $0<c_-(D)\le c_+(D)<\infty$ such that for all
+\[
+0<x\le x_0,
+\qquad
+d\in D,
+\]
+one has
+\[
+c_-(D)\frac{x}{B}\le \norm{\Aval(x)}\le c_+(D)\frac{x}{B},
+\]
+and
+\[
+c_-(D)\frac{x}{B}\le \abs{\inner{\Aval(x)}{M(d)}}\le c_+(D)\frac{x}{B}.
+\]
+Consequently,
+\[
+\norm{\Psical_x}\asymp \frac{B}{x},
+\qquad
+\abs{\Psical_x(M(d))}\asymp \frac{B}{x},
+\]
+uniformly on this regime.
+\end{proposition}
+
+\begin{proof}
+For the norm, the off-diagonal entries dominate, as in the explicit small-$x$ expansion; squaring and summing yields
+\[
+\norm{\Aval(x)}^2=\frac{2x^2}{3B^2}+O\!\left(\frac{x^4}{B^2}\right).
+\]
+Taking square roots gives the two-sided bound after shrinking $x_0$.
+
+For the pairing, the coefficient $c_1(d)$ is continuous and nonzero on the compact interval $D$, so
+\[
+m_1(D):=\min_{d\in D}\abs{c_1(d)}>0.
+\]
+Then
+\[
+B\abs{\inner{\Aval(x)}{M(d)}}\ge x m_1(D)-C(D)x^2,
+\]
+and choosing $x_0$ sufficiently small yields the lower bound. The upper bound is immediate from the same expansion.
+\end{proof}
+
+\subsection{Zeta-side calibration and transverse obstruction}
+
+The intended zeta-side decomposition is
+\[
+\Delta_\zeta = S(m)\Aval(x)+R_\zeta,
+\]
+with
+\[
+\norm{R_\zeta}\ll L(m)S(m)^2+\Tail+\Err.
+\]
+Applying $\Psical_x$ gives
+\[
+\Psical_x(\Delta_\zeta)
+=
+S(m)+O\!\left(\frac{B}{x}\bigl(L(m)S(m)^2+\Tail+\Err\bigr)\right).
+\]
+On the toy side,
+\[
+\Delta_\toy(u;d)=u^2M(d)+O(u^4),
+\]
+so
+\[
+\Psical_x(\Delta_\toy(u;d))
+=
+u^2\Psical_x(M(d))+O(u^4).
+\]
+Thus $\Psical_x$ calibrates $u^2\leftrightarrow S(m)$.
+
+Meanwhile $\Phi_K$ kills the zeta leading value channel but not the toy anomaly:
+\[
+\Phi_K(\Delta_\zeta)=O(L(m)S(m)^2)+O(\Tail)+O(\Err),
+\]
+whereas
+\[
+\Phi_K(\Delta_\toy(u;d))=u^2\Phi_K(M(d))+O(u^4)\asymp u^2.
+\]
+This is the contradiction mechanism.
+
+The remaining two gaps isolate the point where the corrected endgame still needs proof.
+
+\begin{gaptheorem}[Canonical calibration theorem]
+\label{gap:value-calibration}
+In the fixed small-scaled regime
+\[
+\sigma=\frac{x_0}{B_\zeta(m)}
+\]
+with $x_0$ as above, prove that the true zeta-side local deformation satisfies
+\[
+\Delta_\zeta = S(m)\Aval(x_0)+R_\zeta,
+\qquad
+\norm{R_\zeta}\ll L(m)S(m)^2+\Tail+\Err,
+\]
+so that
+\[
+\Psical_{x_0}(\Delta_\zeta)=S(m)+o(S(m)).
+\]
+\end{gaptheorem}
+
+\begin{remark}
+The key step is to prove that the leading value-channel contribution to the true zeta-side deformation is exactly the matrix $\Aval(x_0)$ produced by the finite-dimensional jet-limit linearization.
+\end{remark}
+
+\begin{gaptheorem}[Smallness of tail and error terms in the fixed-$x_0$ regime]
+\label{gap:smallness-regime}
+Prove that in the regime
+\[
+\sigma=\frac{x_0}{B_\zeta(m)},
+\]
+one has
+\[
+B_\zeta(m)L(m)S(m)\to 0,
+\qquad
+B_\zeta(m)(\Tail+\Err)=o(S(m)).
+\]
+Equivalently, after calibration, the zeta-side remainder is quadratically small relative to the calibrated value scale.
+\end{gaptheorem}
+
+\section{Final conditional theorem}
+
+\begin{theorem}[Conditional proof of $\RH$]
+Assume Gap~\ref{gap:finite-s-formulas}, Proposition~\ref{prop:corrected-whitening}, Gap~\ref{gap:boundary}, Gap~\ref{gap:value-calibration}, and Gap~\ref{gap:smallness-regime}, together with Proposition~\ref{prop:tail-curvature}. Then the Riemann Hypothesis holds.
+\end{theorem}
+
+\begin{proof}
+By Gap~\ref{gap:finite-s-formulas}, Proposition~\ref{prop:corrected-whitening}, and Gap~\ref{gap:boundary}, the odd holomorphic local package is valid and the $N$-point odd-moment cancellation theorem applies. By Gap~\ref{gap:value-calibration}, the canonical calibration functional $\Psical_{x_0}$ identifies the toy size parameter with the zeta value scale:
+\[
+u^2\asymp S(m).
+\]
+By construction,
+\[
+\Phi_K(\Aval)=0,
+\]
+so the zeta-side transverse signal is only
+\[
+\Phi_K(\Delta_\zeta)=O(L(m)S(m)^2)+O(\Tail)+O(\Err).
+\]
+Proposition~\ref{prop:tail-curvature} controls the tail contribution, and Gap~\ref{gap:smallness-regime} controls the remaining quantitative smallness, so this is $o(S(m))$. But on the toy side,
+\[
+\Phi_K(\Delta_\toy(u;d))\asymp u^2\asymp S(m)
+\]
+on every compact $d$-interval. Contradiction. Therefore no off-line local deformation can occur. Hence all nontrivial zeros lie on the critical line, i.e. $\RH$ holds.
+\end{proof}
+
+\section{Work order}
+
+To complete the proof, the natural order is:
+\begin{enumerate}[label=\arabic*.]
+\item prove Gap~\ref{gap:finite-s-formulas};
+\item prove Gap~\ref{gap:gram-stability};
+\item prove Gap~\ref{gap:boundary};
+\item prove Gap~\ref{gap:value-calibration};
+\item prove Gap~\ref{gap:smallness-regime}.
+\end{enumerate}
+
+The first three gaps complete the finite-$s$ local analytic package. Proposition~\ref{prop:tail-curvature} supplies the omitted-zero tail estimate. The last two gaps complete the corrected calibration-plus-obstruction endgame.
+
+\end{document}
