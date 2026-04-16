@@ -1,8 +1,7 @@
-\documentclass[11pt]{article}
+\documentclass[11pt,a4paper]{amsart}
 
-\usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm,mathtools,bm,mathrsfs}
-\usepackage{hyperref}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
 \usepackage{graphicx}
 \pdfstringdefDisableCommands{%
   \def\Omega{Omega}%
@@ -21,20 +20,28 @@
 }
 \usepackage{enumitem}
 \usepackage{microtype}
+\usepackage[margin=1in]{geometry}
 
-\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
-
-\title{A Proof of the Riemann Hypothesis}
-\author{}
-\date{}
-
+\theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{claim}[theorem]{Claim}
+
+\title{A Proof of the Riemann Hypothesis}
+
+\author{John Shields}
+\thanks{Preprint.}
+\date{April 2026}
+
+\subjclass[2020]{11M26 (primary), 11M06, 11M50 (secondary)}
+\keywords{Riemann hypothesis, zeta function, critical line, phase kernel,
+  jet normalization, odd-moment cancellation}
 
 \newcommand{\RH}{\mathrm{RH}}
 \newcommand{\z}{\zeta}
@@ -66,13 +73,16 @@
 \newcommand{\sgn}{\operatorname{sgn}}
 
 \begin{document}
-\maketitle
 
 \begin{abstract}
 We present a proof strategy for the Riemann Hypothesis based on local jet-normalized blocks of the phase kernel, a value/calibration functional extracted from the leading value-channel deformation, and an $N$-point odd-moment cancellation mechanism in the transverse channel. The document is written as a living proof draft: every statement is presented in proof form and the notation is frozen globally, so that future revisions can strengthen any remaining technical points without changing the architecture.
 \end{abstract}
 
+\maketitle
+
 \tableofcontents
+
+\newpage
 
 \section{Introduction}
 

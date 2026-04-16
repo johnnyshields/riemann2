@@ -1,0 +1,646 @@
+Yes. Here are five surgical LaTeX patches, one for each point.
+
+I wrote them so you can drop them in with minimal editing. I’ve noted where each one should go.
+
+---
+
+## Patch 1 — omitted-smooth-part holomorphy on the microscopic disk
+
+**Insert near the start of the section `Corrected finite-$s$ holomorphic whitening`, before Proposition `\ref{prop:block-perturbation}`.**
+
+```tex
+\begin{proposition}[Microscopic denominator comparability and omitted-smooth holomorphy]
+\label{prop:denominator-comparability}
+Fix an admissible midpoint $m$ and write
+\[
+t_\pm=m\pm \frac{s}{2},
+\qquad
+Q\asymp \log |m|.
+\]
+For each omitted zero $\rho=\beta_\rho+i\gamma_\rho$, set
+\[
+D_{\rho,\pm}(s):=\bigl((2m-\gamma_\rho)\pm s\bigr)^2+a_\rho^2,
+\qquad
+a_\rho\in\{\beta_\rho,1-\beta_\rho\}.
+\]
+Assume the zero-free region gives
+\[
+a_\rho\ge \frac{\sigma_0}{Q}
+\]
+for some absolute $\sigma_0>0$ on the admissible midpoint class. If
+\[
+|s|\le \frac{\rho_0}{Q},
+\qquad
+\rho_0\le \frac{\sigma_0}{\sqrt 6},
+\]
+then
+\[
+\frac12\Bigl((2m-\gamma_\rho)^2+a_\rho^2\Bigr)
+\le
+|D_{\rho,\pm}(s)|
+\le
+\frac32\Bigl((2m-\gamma_\rho)^2+a_\rho^2\Bigr).
+\]
+
+Consequently, for every derivative order $r\le r_*$ needed in the corrected
+finite-$s$ block entries, the omitted-zero sums defining
+\[
+T_{\far}(t_\pm),\quad \partial_t T_{\far}(t_\pm),\quad \dots,\quad \partial_t^{\,r_*}T_{\far}(t_\pm)
+\]
+converge uniformly on $|s|<\rho_0/Q$, provided the corresponding real-line shell
+sums converge. In particular,
+\[
+g_{\sm}(t_\pm)=B_{\aut}(t_\pm)+T_{\far}(t_\pm)
+\]
+and its required $t$-derivatives extend holomorphically to
+\[
+|s|<\rho_0/Q.
+\]
+\end{proposition}
+
+\begin{proof}
+Set
+\[
+x:=2m-\gamma_\rho,\qquad a:=a_\rho.
+\]
+Then
+\[
+D_{\rho,\pm}(s)=(x^2+a^2)\pm 2xs+s^2.
+\]
+Using
+\[
+|2xs+s^2|\le 2|x||s|+|s|^2\le \frac12 x^2+3|s|^2,
+\]
+and the assumptions
+\[
+a\ge \frac{\sigma_0}{Q},
+\qquad
+|s|\le \frac{\rho_0}{Q},
+\qquad
+\rho_0\le \frac{\sigma_0}{\sqrt 6},
+\]
+we obtain
+\[
+3|s|^2\le \frac12 a^2.
+\]
+Hence
+\[
+|2xs+s^2|
+\le
+\frac12(x^2+a^2),
+\]
+which gives the stated lower and upper bounds.
+
+Now every differentiated omitted-zero term is a rational combination of powers of
+$D_{\rho,\pm}(s)^{-1}$ with coefficients depending only on the derivative order.
+By the above comparability, on $|s|<\rho_0/Q$ these are uniformly comparable to
+their real-line counterparts. Therefore the same shell decomposition used on the
+real line yields uniform convergence of the differentiated omitted-zero sums on
+the complex disk, and hence holomorphy of $T_{\far}(t_\pm)$ and the required
+$t$-derivatives there. Adding the holomorphic background term $B_{\aut}(t_\pm)$
+gives the corresponding statement for $g_{\sm}(t_\pm)$.
+\end{proof}
+```
+
+---
+
+## Patch 2 — corrected cross-block perturbation estimate
+
+**Insert immediately after Proposition `\ref{prop:block-perturbation}`.**
+
+```tex
+\begin{proposition}[Entry-by-entry perturbation estimate for the corrected mixed block]
+\label{prop:cross-block-perturbation}
+Let
+\[
+q(t)=q_0(t)+\delta q(t),
+\qquad
+\Phi(t)=\Phi_0(t)+\delta\Phi(t),
+\]
+where $q_0$ is the baseline local-model-plus-affine-jet phase derivative and
+$\delta q$ is the corrected remainder. Write
+\[
+t_\pm=m\pm \frac{s}{2},
+\qquad
+\Delta(s):=\Phi(t_-)-\Phi(t_+),
+\qquad
+\Delta_0(s):=\Phi_0(t_-)-\Phi_0(t_+),
+\]
+and set
+\[
+\delta\Delta(s):=\Delta(s)-\Delta_0(s).
+\]
+
+Let $N_m^{\corr}(s)$ be the corrected finite-$s$ mixed block built from
+$q,\Delta$, and let $N_m^{(0)}(s)$ be the corresponding block built from
+$q_0,\Delta_0$. Define
+\[
+\widetilde R_m(s):=N_m^{\corr}(s)-N_m^{(0)}(s).
+\]
+
+Assume that on the microscopic window one has
+\[
+|\delta q(t_\pm)|\ll L_I^2S_2,
+\qquad
+|\delta q'(t_\pm)|\ll L_I S_2,
+\qquad
+|\delta q''(t_\pm)|\ll S_2,
+\]
+and
+\[
+|\delta\Delta(s)|\ll L_I^3S_2,
+\]
+with
+\[
+L_I\asymp \frac{x_0}{Q},
+\qquad
+|q_0(t_\pm)|\asymp Q,
+\qquad
+|s|\asymp L_I.
+\]
+Then
+\[
+\boxed{\ \|\widetilde R_m(s)\|\ll S_2\ }
+\]
+uniformly for $|s|<\rho_0/Q$.
+\end{proposition}
+
+\begin{proof}
+Write the corrected mixed block entrywise as
+\[
+N_m^{\corr}(s)=\frac1\pi
+\begin{pmatrix}
+-\dfrac{2\sin\Delta}{s}
+&
+\dfrac{\sin\Delta+q(t_+)s\cos\Delta}{s^2}
+\\[2ex]
+-\dfrac{\sin\Delta+q(t_-)s\cos\Delta}{s^2}
+&
+\dfrac{(q(t_-)+q(t_+))s\cos\Delta+(2-q(t_-)q(t_+)s^2)\sin\Delta}{2s^3}
+\end{pmatrix},
+\]
+and analogously for $N_m^{(0)}(s)$ with $(q_0,\Delta_0)$.
+
+We estimate the perturbation entry by entry. Throughout, use
+\[
+\sin(\Delta_0+\delta\Delta)-\sin\Delta_0=O(|\delta\Delta|),
+\qquad
+\cos(\Delta_0+\delta\Delta)-\cos\Delta_0=O(|\delta\Delta|).
+\]
+
+\medskip
+\noindent
+\textbf{(1,1)-entry.}
+\[
+\widetilde R_{11}
+=
+-\frac{2}{\pi s}\bigl(\sin\Delta-\sin\Delta_0\bigr),
+\]
+hence
+\[
+|\widetilde R_{11}|
+\ll
+\frac{|\delta\Delta|}{|s|}
+\ll
+\frac{L_I^3S_2}{L_I}
+\ll
+L_I^2S_2
+\ll
+S_2.
+\]
+
+\medskip
+\noindent
+\textbf{(1,2)-entry.}
+The numerator perturbation is
+\[
+(\sin\Delta-\sin\Delta_0)
++
+\bigl(q(t_+)-q_0(t_+)\bigr)s\cos\Delta
++
+q_0(t_+)s(\cos\Delta-\cos\Delta_0).
+\]
+Therefore
+\[
+|\widetilde R_{12}|
+\ll
+\frac{|\delta\Delta|+|\delta q(t_+)|\,|s|+|q_0(t_+)|\,|s|\,|\delta\Delta|}{|s|^2}.
+\]
+Using
+\[
+|\delta\Delta|\ll L_I^3S_2,\quad
+|\delta q(t_+)|\ll L_I^2S_2,\quad
+|q_0(t_+)|\asymp Q,\quad
+|s|\asymp L_I\asymp Q^{-1},
+\]
+we get
+\[
+|\widetilde R_{12}|\ll \frac{L_I^3S_2}{L_I^2}
++\frac{L_I^3S_2}{L_I^2}
++\frac{Q\,L_I^4S_2}{L_I^2}
+\ll
+\frac{S_2}{Q}
+\ll S_2.
+\]
+The same argument gives
+\[
+|\widetilde R_{21}|\ll S_2.
+\]
+
+\medskip
+\noindent
+\textbf{(2,2)-entry.}
+Write the numerator as
+\[
+F(q_-,q_+,\Delta;s):=
+(q_-+q_+)s\cos\Delta+(2-q_-q_+s^2)\sin\Delta.
+\]
+Then
+\[
+\widetilde R_{22}
+=
+\frac{F(q(t_-),q(t_+),\Delta;s)-F(q_0(t_-),q_0(t_+),\Delta_0;s)}{2\pi s^3}.
+\]
+A first-order expansion of $F$ in $(q_-,q_+,\Delta)$ gives
+\[
+|F-F_0|
+\ll
+|s|\,|\delta q(t_-)|+|s|\,|\delta q(t_+)|
++|s|^2Q\,|\delta q(t_-)|+|s|^2Q\,|\delta q(t_+)|
++\bigl(|s|Q+1\bigr)|\delta\Delta|.
+\]
+Using
+\[
+|\delta q(t_\pm)|\ll L_I^2S_2,\qquad
+|\delta\Delta|\ll L_I^3S_2,\qquad
+|s|\asymp L_I\asymp Q^{-1},
+\]
+we obtain
+\[
+|F-F_0|\ll L_I^3S_2.
+\]
+Hence
+\[
+|\widetilde R_{22}|
+\ll
+\frac{L_I^3S_2}{|s|^3}
+\ll
+S_2.
+\]
+
+Collecting the four entrywise bounds and using equivalence of norms on
+$2\times2$ matrices gives
+\[
+\|\widetilde R_m(s)\|\ll S_2,
+\]
+uniformly on the microscopic disk.
+\end{proof}
+```
+
+---
+
+## Patch 3 — derive the corrected local deformation decomposition
+
+**Insert after Proposition `\ref{prop:corrected-whitening}` and before the boundary-estimate section.**
+
+```tex
+\begin{proposition}[Corrected local deformation decomposition]
+\label{prop:corrected-local-decomposition}
+Let
+\[
+\Delta_\zeta(m,\sigma)
+:=
+\widehat\Omega_\zeta^{\corr}(s;m)-\widehat\Omega_{\bg}^{\corr}(s;m),
+\qquad
+s=\sigma,
+\]
+where $\widehat\Omega_{\bg}^{\corr}(s;m)$ denotes the corrected whitened block at
+background value-channel parameter $S(m)=0$.
+
+Assume:
+\begin{enumerate}
+\item the corrected same-point and mixed blocks are holomorphic on
+\[
+|s|<\rho_0/Q;
+\]
+\item the same-point perturbation estimate of
+Proposition~\ref{prop:block-perturbation} and the mixed-block perturbation estimate of
+Proposition~\ref{prop:cross-block-perturbation} hold;
+\item the same-point blocks remain uniformly positive definite on the microscopic disk.
+\end{enumerate}
+
+Then the corrected local deformation admits the expansion
+\[
+\boxed{
+\Delta_\zeta(m,\sigma)
+=
+S(m)\,A_{\val}(m,\sigma)+R_\zeta(m,\sigma),
+}
+\]
+where $A_{\val}(m,\sigma)$ is the pure value-channel derivative of the jet-limit
+block, and
+\[
+\|R_\zeta(m,\sigma)\|
+\ll
+S(m)^2+S_2+\Tail(m,\sigma)+\Err(m,\sigma).
+\]
+In particular, in any regime where
+\[
+S_2+\Tail+\Err\ll L(m)S(m)^2,
+\]
+one has
+\[
+\|R_\zeta(m,\sigma)\|\ll L(m)S(m)^2.
+\]
+\end{proposition}
+
+\begin{proof}
+Consider the analytic map
+\[
+\mathcal W(G_-,N,G_+):=G_-^{-1/2}\,N\,G_+^{-1/2}.
+\]
+By Proposition~\ref{prop:corrected-whitening}, this map is holomorphic on the
+open set where $G_\pm$ are uniformly positive definite.
+
+Write the corrected blocks as
+\[
+G_{m,\pm}^{\corr}(s)=G_{m,\pm}^{\bg}(s)+S(m)\,\dot G_{m,\pm}(s)+E_{m,\pm}(s),
+\]
+\[
+N_m^{\corr}(s)=N_m^{\bg}(s)+S(m)\,\dot N_m(s)+\widetilde E_m(s),
+\]
+where the $\dot G_{m,\pm},\dot N_m$ terms are the pure value-channel first
+variations and the error terms satisfy
+\[
+\|E_{m,\pm}(s)\|+\|\widetilde E_m(s)\|
+\ll
+S_2+\Tail+\Err.
+\]
+By Propositions~\ref{prop:block-perturbation}
+and~\ref{prop:cross-block-perturbation}, this error control is uniform on the
+microscopic disk.
+
+Applying first-order Taylor expansion of $\mathcal W$ at the background point
+gives
+\[
+\widehat\Omega_\zeta^{\corr}(s;m)
+=
+\widehat\Omega_{\bg}^{\corr}(s;m)
++
+S(m)\,D\mathcal W_{(\bg)}[\dot G_-,\dot N,\dot G_+]
++
+R_\zeta(m,\sigma),
+\]
+where the remainder satisfies
+\[
+\|R_\zeta(m,\sigma)\|
+\ll
+S(m)^2+\|E_{m,-}\|+\|\widetilde E_m\|+\|E_{m,+}\|.
+\]
+By definition of the pure value-channel derivative, the first-order coefficient
+is exactly $A_{\val}(m,\sigma)$. This yields
+\[
+\Delta_\zeta(m,\sigma)
+=
+S(m)\,A_{\val}(m,\sigma)+R_\zeta(m,\sigma),
+\]
+with the claimed bound on $R_\zeta$.
+\end{proof}
+```
+
+---
+
+## Patch 4 — expanded boundary estimate
+
+**Replace the current proof of Proposition `\ref{prop:boundary-estimate}` with the following.**
+
+```tex
+\begin{proof}
+Write the corrected local deformation in the form
+\[
+\Delta_\zeta(m,\sigma)
+=
+S(m)\,A_{\val}(m,\sigma)+R_\zeta(m,\sigma)
+\]
+as in Proposition~\ref{prop:corrected-local-decomposition}. Applying
+$\Phi_K$ and using the jet-limit value-channel vanishing
+\[
+\Phi_K(A_{\val}(m,\sigma))=0,
+\]
+we obtain
+\[
+H_m(s)
+=
+\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
+=
+\Phi_K\!\bigl(R_\zeta(m,\sigma)\bigr).
+\]
+
+We now split the remainder into its three natural pieces,
+\[
+R_\zeta
+=
+\Omega_{\curv}+\Omega_{\tail}+\Omega_{\err}.
+\]
+
+\medskip
+\noindent
+\textbf{Curvature contribution.}
+By the local curvature estimate and the corrected transfer theorem, the
+curvature channel has the form
+\[
+\Omega_{\curv}(s;m)=C_m(s)\,V(s),
+\]
+where
+\[
+|C_m(s)|\ll L(m)S(m)^2
+\]
+on the microscopic boundary, and the explicit transverse profile satisfies
+\[
+|\Phi_K(V(s))|\ll_{\rho_0} Q^{-3}
+\qquad (|s|=\rho_0/Q).
+\]
+Therefore
+\[
+|\Phi_K(\Omega_{\curv}(s;m))|
+\le
+|C_m(s)|\,|\Phi_K(V(s))|
+\ll_{\rho_0}
+\frac{L(m)S(m)^2}{Q^3}.
+\]
+
+\medskip
+\noindent
+\textbf{Tail and error contributions.}
+By Proposition~\ref{prop:denominator-comparability}, the omitted smooth part is
+holomorphic on the microscopic disk, and by
+Propositions~\ref{prop:block-perturbation}
+and~\ref{prop:cross-block-perturbation} its contribution to the corrected
+finite-$s$ blocks is perturbative. The same holds for the estimation term.
+After whitening, these perturbations remain of the same order up to bounded
+operator factors, so on $|s|=\rho_0/Q$,
+\[
+\|\Omega_{\tail}(s;m)\|+\|\Omega_{\err}(s;m)\|
+\ll
+\frac{\Tail(m,\sigma)+\Err(m,\sigma)}{Q^3}.
+\]
+Applying the bounded linear functional $\Phi_K$ gives
+\[
+|\Phi_K(\Omega_{\tail}(s;m))|+|\Phi_K(\Omega_{\err}(s;m))|
+\ll
+\frac{\Tail(m,\sigma)+\Err(m,\sigma)}{Q^3}.
+\]
+
+Combining the three pieces yields
+\[
+|H_m(s)|
+\ll_{\rho_0}
+\frac{L(m)S(m)^2+\Tail(m,\sigma)+\Err(m,\sigma)}{Q^3}.
+\]
+In the corrected regime where
+\[
+\Tail(m,\sigma)+\Err(m,\sigma)\ll L(m)S(m)^2,
+\]
+this simplifies to
+\[
+|H_m(s)|\ll_{\rho_0}\frac{L(m)S(m)^2}{Q^3},
+\]
+as claimed.
+\end{proof}
+```
+
+---
+
+## Patch 5 — toy (N)-point preservation lemma
+
+**Insert right before Theorem `\ref{thm:final-contradiction}`.**
+**Also add the one-line normalization sentence just before defining the (N)-point combination.**
+
+### Small normalization line
+
+```tex
+Once and for all, normalize the odd-moment-canceling coefficients so that
+\[
+\sum_{j=1}^N a_j^{(N)}=1.
+\]
+This does not affect the vanishing of the first $N-1$ odd moments.
+```
+
+### Lemma / proposition
+
+```tex
+\begin{proposition}[Toy $N$-point preservation]
+\label{prop:toy-n-point}
+Let
+\[
+\Xi_{\toy}^{(N)}(u,d)
+:=
+\sum_{j=1}^N a_j^{(N)}\,
+\Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr),
+\qquad
+s_j=\frac{j}{Q^2},
+\]
+with the normalization
+\[
+\sum_{j=1}^N a_j^{(N)}=1.
+\]
+Assume the toy local deformation satisfies, uniformly in the microscopic nodes,
+\[
+\Delta_{\toy}(u,d;s_j)=u^2M(d)+u^4E_j(u,d),
+\]
+where
+\[
+\sup_{1\le j\le N}\|E_j(u,d)\|\ll 1
+\]
+for $d$ in compact subsets of $(0,\infty)$. Then
+\[
+\boxed{
+\Xi_{\toy}^{(N)}(u,d)
+=
+u^2\Phi_K(M(d))
++
+O\!\left(u^4\sum_{j=1}^N |a_j^{(N)}|\right).
+}
+\]
+In particular, if
+\[
+\sum_{j=1}^N |a_j^{(N)}|\ll 1
+\]
+or more generally if $u^2\sum_j|a_j^{(N)}|\to 0$, then
+\[
+\Xi_{\toy}^{(N)}(u,d)=u^2\Phi_K(M(d))+O(u^4),
+\]
+and therefore
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2
+\]
+uniformly on compact $d$-ranges.
+\end{proposition}
+
+\begin{proof}
+Apply $\Phi_K$ to the toy expansion:
+\[
+\Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr)
+=
+u^2\Phi_K(M(d))+u^4\Phi_K(E_j(u,d)).
+\]
+Summing over $j$ and using
+\[
+\sum_{j=1}^N a_j^{(N)}=1
+\]
+gives
+\[
+\Xi_{\toy}^{(N)}(u,d)
+=
+u^2\Phi_K(M(d))
++
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d)).
+\]
+Since $\Phi_K$ is bounded and $\sup_j\|E_j(u,d)\|\ll 1$, the error term is
+\[
+O\!\left(u^4\sum_{j=1}^N |a_j^{(N)}|\right).
+\]
+This proves the claim.
+\end{proof}
+```
+
+---
+
+## Two tiny cleanup edits I’d also make
+
+### Cleanup A — merge the two calibration propositions
+
+You currently have both `\ref{prop:calibration}` and `\ref{prop:canonical-calibration}`. I would keep only the second and delete the first. The second is the cleaner final version.
+
+### Cleanup B — use the new toy lemma in the final proof
+
+In the proof of Theorem `\ref{thm:final-contradiction}`, replace
+
+```tex
+On the toy side, the same $N$-point combination preserves the leading
+transverse signal:
+\[
+\Xi_{\toy}^{(N)}(u,d)
+=
+u^2\Phi_K(M(d))+O(u^4),
+\]
+```
+
+with
+
+```tex
+On the toy side, Proposition~\ref{prop:toy-n-point} gives
+\[
+\Xi_{\toy}^{(N)}(u,d)
+=
+u^2\Phi_K(M(d))
++
+O\!\left(u^4\sum_{j=1}^N |a_j^{(N)}|\right).
+\]
+Under the chosen normalization and coefficient bounds, this is
+\[
+\Xi_{\toy}^{(N)}(u,d)=u^2\Phi_K(M(d))+O(u^4).
+\]
+```
+
+If you want, I can also give you a **single consolidated patch** that applies these directly into your current draft in the right order.
