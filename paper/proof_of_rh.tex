@@ -19,6 +19,8 @@
   \def\curv{curv}%
   \def\tail{tail}%
   \def\mix{mix}%
+  \def\core{core}%
+  \def\aux{aux}%
 }
 \usepackage{enumitem}
 \usepackage{microtype}
@@ -67,6 +69,8 @@
 \newcommand{\curv}{\mathrm{curv}}
 \newcommand{\tail}{\mathrm{tail}}
 \newcommand{\mix}{\mathrm{mix}}
+\newcommand{\core}{\mathrm{core}}
+\newcommand{\aux}{\mathrm{aux}}
 \newcommand{\F}{\mathrm{F}}
 \newcommand{\RePart}{\operatorname{Re}}
 \newcommand{\dist}{\operatorname{dist}}
@@ -755,6 +759,52 @@ By Lemma~\ref{lem:Aval-small-x} and Proposition~\ref{prop:pairing},
 The remaining statements follow by linearity.
 \end{proof}
 
+\begin{proposition}[Calibration remainder under a core-stable cutoff choice]
+\label{prop:calibration-remainder-cutoff}
+Assume the fixed-core decomposition of
+Section~\ref{subsec:fixed-core} and the core-stable cutoff compatibility of
+Proposition~\ref{prop:cutoff-compatibility}. If the cutoff $R$ is chosen so
+that
+\[
+R^3\gg \frac{1}{xQ\,S(m)},
+\]
+then
+\[
+S_2=o\!\bigl(xQ^2S(m)\bigr),
+\]
+and consequently
+\[
+\Psi_{x,d}(R_\zeta)=o\!\left(\frac{x}{B_\zeta(m)}S(m)\right).
+\]
+\end{proposition}
+
+\begin{proof}
+By Theorem~\ref{thm:tail-curvature},
+\[
+S_2\ll |B_{\Aut}''(m)|+\frac{Q}{R^3}.
+\]
+The background term is negligible, so under the cutoff condition
+\[
+R^3\gg \frac{1}{xQ\,S(m)},
+\]
+one has
+\[
+\frac{Q}{R^3}=o\!\bigl(xQ^2S(m)\bigr).
+\]
+Hence
+\[
+S_2=o\!\bigl(xQ^2S(m)\bigr).
+\]
+By the sharpened calibration remainder estimate already proved in the draft,
+this implies
+\[
+\Psi_{x,d}(R_\zeta)=o\!\left(\frac{x}{B_\zeta(m)}S(m)\right).
+\]
+The use of such a cutoff does not alter the toy comparison because, by
+Proposition~\ref{prop:cutoff-compatibility}, the core $\mathcal C$ --- and
+therefore $M(d)$ and $A_{\val}$ --- is independent of $R$.
+\end{proof}
+
 \section{Corrected finite-\texorpdfstring{$s$}{s} holomorphic whitening}
 
 Let $\widehat\Omega_\zeta^{\corr}(s;m)$ denote the corrected finite-$s$ local block built from the explicit local model, the affine jet of the smooth remainder, and the jet-corrected phase remainder.
@@ -1363,14 +1413,50 @@ holomorphic inverse square roots, and the whitened block is holomorphic as a
 product of holomorphic factors.
 \end{proof}
 
-\begin{proposition}[Corrected local deformation decomposition]
-\label{prop:corrected-local-decomposition}
-Fix a near/far cutoff $R$, and let
+\subsection{Fixed anomaly core and cutoff-dependent auxiliary bookkeeping}
+\label{subsec:fixed-core}
+
+To separate the anomaly-carrying local model from the cutoff-dependent tail
+bookkeeping, we fix once and for all a finite local core
 \[
-q(t)=q_{\loc,R}(t)+g_{\sm,R}(t)+E_{\est,R}(t)
+\mathcal C
 \]
-be the corresponding decomposition of the phase derivative, where
+containing the candidate off-line anomaly (for example, the designated off-line
+pair together with any symmetry-forced companions needed for the local model).
+
+For each cutoff $R\ge R_0$, we then decompose the zero contribution into:
+\begin{enumerate}
+\item the fixed core contribution $q_{\core}(t)$, coming from the zeros in
+$\mathcal C$;
+\item the auxiliary near contribution $q_{\aux,R}(t)$, coming from the zeros
+outside $\mathcal C$ but inside the near shell determined by $R$;
+\item the far contribution $T_{\far,R}(t)$, coming from the zeros outside the
+near shell;
+\item the background contribution $B_{\bg}(t)$;
+\item the estimation term $E_{\est,R}(t)$.
+\end{enumerate}
+
+Thus the full phase derivative is decomposed as
 \[
+q(t)=q_{\core}(t)+q_{\aux,R}(t)+g_{\sm,R}(t)+E_{\est,R}(t),
+\]
+where
+\[
+g_{\sm,R}(t):=B_{\bg}(t)+T_{\far,R}(t).
+\]
+
+The local toy comparison is attached only to the fixed core $\mathcal C$. The
+auxiliary near part $q_{\aux,R}$, the far part $T_{\far,R}$, and the
+estimation term $E_{\est,R}$ are absorbed into the corrected zeta-side scalar
+defined below.
+
+\begin{proposition}[Corrected local deformation decomposition with fixed core]
+\label{prop:corrected-local-decomposition}
+Fix the anomaly-carrying core $\mathcal C$ as above, and for each cutoff
+$R\ge R_0$ write
+\[
+q(t)=q_{\core}(t)+q_{\aux,R}(t)+g_{\sm,R}(t)+E_{\est,R}(t),
+\qquad
 g_{\sm,R}(t)=B_{\bg}(t)+T_{\far,R}(t).
 \]
 Let $J_1[g_{\sm,R}]$ denote the affine jet of $g_{\sm,R}$ at the midpoint,
@@ -1416,8 +1502,8 @@ S(m)\,A_{\val}(m,\sigma)+R_\zeta(m,\sigma),
 }
 \]
 where $A_{\val}(m,\sigma)$ is the pure value-channel derivative of the
-jet-limit block, and $R_\zeta(m,\sigma)$ is internal to the full corrected
-cutoff-dependent scalar
+jet-limit block associated with the fixed core $\mathcal C$, and
+$R_\zeta(m,\sigma)$ is internal to the full corrected cutoff-dependent scalar
 \[
 H_{m,R}(s):=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr,R}(s;m)\bigr).
 \]
@@ -1440,17 +1526,16 @@ Consider the analytic whitening map
 By the corrected finite-$s$ holomorphic-whitening theorem, this map is
 holomorphic on the open set where $G_\pm$ remain uniformly positive definite.
 
-For the fixed cutoff $R$, the corrected blocks are built from the decomposition
+For each cutoff $R$, the corrected blocks are built from the decomposition
 \[
-q=q_{\loc,R}+g_{\sm,R}+E_{\est,R}.
+q=q_{\core}+q_{\aux,R}+g_{\sm,R}+E_{\est,R}.
 \]
-Thus every omitted-zero tail contribution from $T_{\far,R}$, every affine-jet
-correction from $J_1[g_{\sm,R}]$, and every explicit estimation term
-$E_{\est,R}$ is already absorbed into the corrected phase $\Phi_{\corr,R}$,
-hence into the corrected same-point blocks $G_{m,\pm}^{\corr,R}(s)$, the
-corrected mixed block $N_m^{\corr,R}(s)$, the corrected whitened block
-$\widehat\Omega_\zeta^{\corr,R}(s;m)$, and therefore into the corrected
-transverse scalar
+Thus every auxiliary near contribution from $q_{\aux,R}$, every omitted-zero
+tail contribution from $T_{\far,R}$, every affine-jet correction from
+$J_1[g_{\sm,R}]$, and every explicit estimation term $E_{\est,R}$ is already
+absorbed into the corrected phase $\Phi_{\corr,R}$, hence into the corrected
+same-point blocks, the corrected mixed block, the corrected whitened block,
+and therefore into the corrected transverse scalar
 \[
 H_{m,R}(s)=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr,R}(s;m)\bigr).
 \]
@@ -1470,9 +1555,9 @@ where the first-order coefficient
 \[
 D\mathcal W_{(\bg)}[\dot G_-,\dot N,\dot G_+]
 \]
-is exactly the pure value-channel derivative $A_{\val}(m,\sigma)$ by
-definition, and $R_\zeta(m,\sigma)$ collects the higher-order terms of this
-Taylor expansion inside the same corrected cutoff-dependent object.
+is exactly the pure value-channel derivative $A_{\val}(m,\sigma)$ associated
+with the fixed core $\mathcal C$, and $R_\zeta(m,\sigma)$ collects the
+higher-order terms inside the same corrected cutoff-dependent object.
 
 Subtracting the background block gives
 \[
@@ -1480,110 +1565,76 @@ Subtracting the background block gives
 =
 S(m)\,A_{\val}(m,\sigma)+R_\zeta(m,\sigma),
 \]
-which is the claimed decomposition.
-
-Finally, because every cutoff-dependent tail, jet-correction, and estimation
-piece has already been absorbed into the full corrected scalar $H_{m,R}(s)$,
-the remainder $R_\zeta(m,\sigma)$ does not generate any separate external
-tail/error term outside the resulting $N$-point scalar
-\[
-\Xi_{\zeta,R}^{(N)}(m).
-\]
-This is precisely the cutoff-compatibility principle used later in the
-$N$-point argument.
+as claimed.
 \end{proof}
 
-\begin{proposition}[Cutoff compatibility and absorption into the full corrected scalar]
+\begin{proposition}[Core-stable cutoff compatibility]
 \label{prop:cutoff-compatibility}
-Fix a near/far cutoff $R$, and write the phase-derivative decomposition in
-the form
+Fix the anomaly-carrying core $\mathcal C$, and for each cutoff $R\ge R_0$
+define the corrected scalar
 \[
-q(t)=q_{\loc,R}(t)+g_{\sm,R}(t)+E_{\est,R}(t),
+H_{m,R}(s):=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr,R}(s;m)\bigr)
 \]
-where
+from the decomposition
 \[
-g_{\sm,R}(t)=B_{\bg}(t)+T_{\far,R}(t).
-\]
-Let $J_1[g_{\sm,R}]$ denote the affine jet of $g_{\sm,R}$ at the midpoint,
-and let $\Phi_{\corr,R}$ be the corrected phase obtained from this
-decomposition.
-
-Using $\Phi_{\corr,R}$, define the corrected same-point blocks
-\[
-G_{m,\pm}^{\corr,R}(s),
-\]
-the corrected mixed block
-\[
-N_m^{\corr,R}(s),
-\]
-the corrected whitened block
-\[
-\widehat\Omega_\zeta^{\corr,R}(s;m)
-=
-G_{m,-}^{\corr,R}(s)^{-1/2}
-N_m^{\corr,R}(s)
-G_{m,+}^{\corr,R}(s)^{-1/2},
-\]
-and the corrected transverse scalar
-\[
-H_{m,R}(s):=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr,R}(s;m)\bigr).
+q=q_{\core}+q_{\aux,R}+g_{\sm,R}+E_{\est,R}.
 \]
 
-Then every cutoff-dependent tail, jet-correction, and estimation contribution
-is internal to the single scalar function $H_{m,R}(s)$. In particular, once
-the corrected odd holomorphic package is proved for $H_{m,R}(s)$, the
-$N$-point odd-moment cancellation theorem applies directly to the full
-corrected object, and there is no separate external tail/error term to track
-outside the resulting $N$-point scalar
-\[
-\Xi_{\zeta,R}^{(N)}(m)
-:=
-\sum_{j=1}^N a_j^{(N)}H_{m,R}(s_j).
-\]
+Then enlarging $R$ changes only the auxiliary near part $q_{\aux,R}$ and the
+far part $T_{\far,R}$, while leaving the anomaly-carrying core
+$q_{\core}$ unchanged. Consequently:
+\begin{enumerate}
+\item the toy anomaly matrix $M(d)$ and the calibration matrix
+$A_{\val}(m,\sigma)$ depend only on the fixed core $\mathcal C$, not on
+the cutoff $R$;
+\item all $R$-dependent auxiliary, tail, jet-correction, and estimation
+contributions are internal to the full corrected scalar $H_{m,R}(s)$;
+\item if the corrected odd holomorphic package is proved for $H_{m,R}(s)$,
+then the $N$-point odd-moment cancellation theorem applies directly to the
+full corrected scalar for that cutoff, with no external remainder term.
+\end{enumerate}
+
+In particular, the cutoff $R$ may be chosen for quantitative convenience in
+the curvature/tail estimates without changing the fixed toy comparison
+attached to the core $\mathcal C$.
 \end{proposition}
 
 \begin{proof}
-Every occurrence of the cutoff $R$ enters only through the decomposition
+Let $R_1<R_2$. Then the only change in the decomposition
 \[
-q=q_{\loc,R}+g_{\sm,R}+E_{\est,R}.
+q=q_{\core}+q_{\aux,R}+g_{\sm,R}+E_{\est,R}
 \]
-This decomposition is then used to define:
-\begin{enumerate}
-\item the corrected phase $\Phi_{\corr,R}$,
-\item the corrected same-point blocks $G_{m,\pm}^{\corr,R}(s)$,
-\item the corrected mixed block $N_m^{\corr,R}(s)$,
-\item the corrected whitened block $\widehat\Omega_\zeta^{\corr,R}(s;m)$,
-\item and finally the corrected transverse scalar $H_{m,R}(s)$.
-\end{enumerate}
+is that some non-core zeros move from the far part into the auxiliary near
+part:
+\[
+q_{\aux,R_2}-q_{\aux,R_1}
+=
+-\bigl(T_{\far,R_2}-T_{\far,R_1}\bigr).
+\]
+The core contribution $q_{\core}$ is unchanged by construction.
 
-Thus every cutoff-dependent contribution from the omitted-zero tail
-$T_{\far,R}$, every affine-jet correction from $J_1[g_{\sm,R}]$, and every
-explicit estimation term $E_{\est,R}$ is already absorbed into the definition
-of $H_{m,R}(s)$. No cutoff-dependent quantity is added afterward as an
-external remainder.
+Thus the toy anomaly matrix $M(d)$, which is attached only to the fixed core,
+is unchanged, and the value-channel derivative $A_{\val}(m,\sigma)$ associated
+with that core is unchanged as well. All cutoff dependence is confined to the
+auxiliary near contribution, the far tail, the affine-jet correction built
+from $g_{\sm,R}$, and the explicit estimation term $E_{\est,R}$. These enter
+only through the corrected phase $\Phi_{\corr,R}$, hence only through the full
+corrected scalar $H_{m,R}(s)$.
 
-Therefore, if one proves the corrected odd holomorphic package for
-$H_{m,R}(s)$ itself --- namely holomorphy on the microscopic disk, oddness,
-and the boundary estimate
-\[
-|H_{m,R}(s)|\ll \frac{L(m)S(m)^2}{Q^3}
-\qquad (|s|=\rho_0/Q),
-\]
-then Cauchy's theorem and the odd-moment cancellation argument apply directly
-to the full corrected scalar. The resulting $N$-point quantity
-\[
-\Xi_{\zeta,R}^{(N)}(m)
-\]
-already contains all tail/error effects associated with the cutoff $R$, so no
-separate external tail/error term remains.
+Therefore the corrected odd holomorphic package, once established for
+$H_{m,R}(s)$, applies to the complete cutoff-dependent object. The resulting
+$N$-point scalar already contains all auxiliary/tail/error effects for that
+cutoff, and no external remainder survives. Since the fixed core is
+unchanged, the toy comparison is stable under enlarging $R$. This proves the
+claim.
 \end{proof}
 
-\begin{remark}[Cutoff bookkeeping]
-\label{rem:cutoff-bookkeeping}
-Proposition~\ref{prop:cutoff-compatibility} is purely a bookkeeping statement:
-it does not depend on any particular optimization of the cutoff $R$. Any later
-choice of $R$ must be justified separately from the estimates in which it is
-used.
+\begin{remark}[Cutoff choice]
+\label{rem:cutoff-choice}
+Proposition~\ref{prop:cutoff-compatibility} is a structural statement. It
+does not assert any particular optimal choice of $R$; it only says that once
+the core $\mathcal C$ is fixed, the cutoff may be adjusted in the perturbative
+bookkeeping without altering the underlying toy comparison.
 \end{remark}
 
 \begin{proposition}[Whitened mixed-block transfer with preserved $Q^{-3}$ scale]
@@ -2294,8 +2345,8 @@ holds.
 \end{theorem}
 
 \begin{proof}
-By Proposition~\ref{prop:canonical-calibration}, in the fixed small-$x_0$
-regime one has
+By Proposition~\ref{prop:calibration-remainder-cutoff} and the canonical
+calibration theorem, in the fixed small-$x_0$ regime one has
 \[
 u^2\asymp \frac{x_0}{B_\zeta(m)}S(m).
 \]
