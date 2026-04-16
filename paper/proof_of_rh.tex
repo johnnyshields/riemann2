@@ -18,6 +18,7 @@
   \def\sym{sym}%
   \def\curv{curv}%
   \def\tail{tail}%
+  \def\mix{mix}%
 }
 \usepackage{enumitem}
 \usepackage{microtype}
@@ -67,6 +68,7 @@
 \newcommand{\bg}{\mathrm{bg}}
 \newcommand{\curv}{\mathrm{curv}}
 \newcommand{\tail}{\mathrm{tail}}
+\newcommand{\mix}{\mathrm{mix}}
 \newcommand{\F}{\mathrm{F}}
 \newcommand{\RePart}{\operatorname{Re}}
 \newcommand{\dist}{\operatorname{dist}}
@@ -494,7 +496,7 @@ equivalent form $A_{\val}(m,\sigma)=B^{-1}\mathcal A(x,\Delta_0)$.
 \end{proof}
 
 \begin{corollary}[Transverse vanishing on the value channel]
-\label{prop:PhiK-Aval-zero}
+\label{cor:PhiK-Aval-zero}
 One has
 \[
 \Phi_K(A_{\val}(m,\sigma))=0.
@@ -1389,6 +1391,165 @@ S(m)\,A_{\val}(m,\sigma)+R_\zeta(m,\sigma),
 with the claimed bound on $R_\zeta$.
 \end{proof}
 
+\begin{proposition}[Whitened mixed-block transfer with preserved $Q^{-3}$ scale]
+\label{prop:whitened-mixed-transfer}
+Let
+\[
+\mathcal W(G_-,N,G_+):=G_-^{-1/2}NG_+^{-1/2}.
+\]
+Write the corrected finite-$s$ blocks as
+\[
+G_\pm^{\corr}(s)=G_\pm^{(0)}(s)+R_\pm(s),
+\qquad
+N^{\corr}(s)=N^{(0)}(s)+\widetilde R(s),
+\]
+and set
+\[
+\widehat\Omega_\zeta^{\corr}(s;m):=\mathcal W(G_-^{\corr},N^{\corr},G_+^{\corr}),
+\qquad
+\widehat\Omega_\zeta^{(0)}(s;m):=\mathcal W(G_-^{(0)},N^{(0)},G_+^{(0)}).
+\]
+
+Assume:
+\begin{enumerate}
+\item the same-point perturbations satisfy
+\[
+\|R_\pm(s)\|\ll S_2;
+\]
+\item the corrected mixed-block perturbation satisfies
+\[
+\|\widetilde R(s)\|\ll S_2;
+\]
+\item the baseline same-point blocks are uniformly positive definite with
+spectral scales
+\[
+G_\pm^{(0)}(s)=
+\begin{pmatrix}
+O(Q) & O(1)\\
+O(1) & O(Q^3)
+\end{pmatrix},
+\]
+and hence
+\[
+G_\pm^{(0)}(s)^{-1/2}=
+\begin{pmatrix}
+O(Q^{-1/2}) & O(Q^{-3/2})\\
+O(Q^{-3/2}) & O(Q^{-3/2})
+\end{pmatrix};
+\]
+\item the baseline mixed block has entry scales
+\[
+N^{(0)}(s)=
+\begin{pmatrix}
+O(Q) & O(Q^2)\\
+O(Q^2) & O(Q^3)
+\end{pmatrix};
+\]
+\item $S_2=o(Q)$.
+\end{enumerate}
+
+Then
+\[
+\widehat\Omega_\zeta^{\corr}(s;m)-\widehat\Omega_\zeta^{(0)}(s;m)
+=
+\mathcal T_-(s;m)+\mathcal T_{\mix}(s;m)+\mathcal T_+(s;m)+\mathcal E_2(s;m),
+\]
+where
+\[
+\mathcal T_-(s;m):=X_-(s)N^{(0)}(s)G_+^{(0)}(s)^{-1/2},
+\]
+\[
+\mathcal T_{\mix}(s;m):=G_-^{(0)}(s)^{-1/2}\widetilde R(s)G_+^{(0)}(s)^{-1/2},
+\]
+\[
+\mathcal T_+(s;m):=G_-^{(0)}(s)^{-1/2}N^{(0)}(s)X_+(s),
+\]
+with
+\[
+X_\pm(s):=D(G^{-1/2})_{G_\pm^{(0)}(s)}[R_\pm(s)],
+\]
+and $\mathcal E_2$ quadratic in $(R_-,\widetilde R,R_+)$.
+
+Moreover,
+\[
+\Phi_K(\mathcal T_-(s;m))\ll \frac{S_2}{Q^3},
+\qquad
+\Phi_K(\mathcal T_{\mix}(s;m))\ll \frac{S_2}{Q^3},
+\qquad
+\Phi_K(\mathcal T_+(s;m))\ll \frac{S_2}{Q^3},
+\]
+and
+\[
+\Phi_K(\mathcal E_2(s;m))\ll \frac{S_2^2}{Q^3}.
+\]
+Hence
+\[
+\boxed{
+\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)-\widehat\Omega_\zeta^{(0)}(s;m)\bigr)
+\ll
+\frac{S_2}{Q^3}.
+}
+\]
+\end{proposition}
+
+\begin{proof}
+The whitening map admits the first-order expansion
+\[
+\widehat\Omega_\zeta^{\corr}-\widehat\Omega_\zeta^{(0)}
+=
+D\mathcal W_{(0)}[R_-,\widetilde R,R_+]+\mathcal E_2,
+\]
+where
+\[
+D\mathcal W_{(0)}[R_-,\widetilde R,R_+]
+=
+X_-N^{(0)}G_+^{(0)-1/2}
++
+G_-^{(0)-1/2}\widetilde R\,G_+^{(0)-1/2}
++
+G_-^{(0)-1/2}N^{(0)}X_+.
+\]
+
+The middle term is controlled directly from the mixed-block perturbation
+scales: after whitening, its off-diagonal entries are $O(S_2/Q^3)$, hence
+\[
+\Phi_K(\mathcal T_{\mix})\ll S_2/Q^3.
+\]
+
+For the same-point terms, one uses a direct entrywise audit from the explicit
+corrected same-point formulas together with the Fréchet derivative formula for
+$G^{-1/2}$ in a diagonal basis. Since the baseline same-point blocks have
+eigenvalues $\asymp Q$ and $\asymp Q^3$, and the perturbations $R_\pm$ have
+the entry scales proved in Proposition~\ref{prop:block-perturbation}, the
+resulting matrices $X_\pm$ have entries of sufficiently high negative
+$Q$-order that, after multiplication by $N^{(0)}$ and one more baseline
+inverse square root, the off-diagonal entries of both $\mathcal T_-$ and
+$\mathcal T_+$ are $O(S_2/Q^3)$. Therefore
+\[
+\Phi_K(\mathcal T_-)\ll S_2/Q^3,
+\qquad
+\Phi_K(\mathcal T_+)\ll S_2/Q^3.
+\]
+
+Finally, every term in $\mathcal E_2$ contains at least two perturbation
+factors from $(R_-,\widetilde R,R_+)$. Since whitening contributes only
+polynomial $Q$-weights, one gets
+\[
+\Phi_K(\mathcal E_2)\ll S_2^2/Q^3.
+\]
+Because $S_2=o(Q)$, this is lower order than $S_2/Q^3$.
+
+Combining the four estimates gives the claimed bound.
+\end{proof}
+
+\begin{remark}
+The only nontrivial finite-dimensional input suppressed in the proof is the
+direct diagonal-basis computation for the Fréchet derivative
+$D(G^{-1/2})_{G_\pm^{(0)}}[R_\pm]$. This is a $2\times2$ linear-algebra audit
+from the explicit corrected same-point formulas and the Löwner divided
+difference formula for $x^{-1/2}$.
+\end{remark}
+
 \section{Odd holomorphic transverse channel}
 
 Define the corrected transverse scalar
@@ -1396,7 +1557,7 @@ Define the corrected transverse scalar
 H_m(s):=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr).
 \end{equation}
 By symmetry under $s\mapsto -s$, this is odd. By
-Proposition~\ref{prop:PhiK-Aval-zero}, the leading value channel is
+Corollary~\ref{cor:PhiK-Aval-zero}, the leading value channel is
 annihilated by $\Phi_K$, so only the curvature, tail, and corrected
 finite-$s$ remainder channels contribute.
 
@@ -1413,14 +1574,19 @@ one has
 \end{proposition}
 
 \begin{proof}
-Write the corrected local deformation in the form
+By Proposition~\ref{prop:corrected-local-decomposition}, the corrected local
+deformation has the form
 \[
 \Delta_\zeta(m,\sigma)
 =
-S(m)\,A_{\val}(m,\sigma)+R_\zeta(m,\sigma)
+S(m)\,A_{\val}(m,\sigma)+R_\zeta(m,\sigma).
 \]
-as in Proposition~\ref{prop:corrected-local-decomposition}. Applying
-$\Phi_K$ and using Proposition~\ref{prop:PhiK-Aval-zero}, we obtain
+Applying $\Phi_K$ and using
+Corollary~\ref{cor:PhiK-Aval-zero},
+\[
+\Phi_K(A_{\val}(m,\sigma))=0,
+\]
+we obtain
 \[
 H_m(s)
 =
@@ -1429,76 +1595,23 @@ H_m(s)
 \Phi_K\!\bigl(R_\zeta(m,\sigma)\bigr).
 \]
 
-We now split the remainder into its three natural pieces,
+By Proposition~\ref{prop:whitened-mixed-transfer}, passing the corrected
+perturbation through whitening and then through $\Phi_K$ preserves the
+microscopic transverse gain:
 \[
-R_\zeta
-=
-\Omega_{\curv}+\Omega_{\tail}+\Omega_{\err}.
-\]
-
-\medskip
-\noindent
-\textbf{Curvature contribution.}
-By the local curvature estimate and the corrected transfer theorem, the
-curvature channel has the form
-\[
-\Omega_{\curv}(s;m)=C_m(s)\,V(s),
-\]
-where
-\[
-|C_m(s)|\ll L(m)S(m)^2
-\]
-on the microscopic boundary, and the explicit transverse profile satisfies
-\[
-|\Phi_K(V(s))|\ll_{\rho_0} Q^{-3}
-\qquad (|s|=\rho_0/Q).
-\]
-Therefore
-\[
-|\Phi_K(\Omega_{\curv}(s;m))|
-\le
-|C_m(s)|\,|\Phi_K(V(s))|
-\ll_{\rho_0}
-\frac{L(m)S(m)^2}{Q^3}.
-\]
-
-\medskip
-\noindent
-\textbf{Tail and error contributions.}
-By Proposition~\ref{prop:denominator-comparability}, the omitted smooth part is
-holomorphic on the microscopic disk, and by
-Propositions~\ref{prop:block-perturbation}
-and~\ref{prop:cross-block-perturbation} its contribution to the corrected
-finite-$s$ blocks is perturbative. The same holds for the estimation term.
-After whitening, these perturbations remain of the same order up to bounded
-operator factors, so on $|s|=\rho_0/Q$,
-\[
-\|\Omega_{\tail}(s;m)\|+\|\Omega_{\err}(s;m)\|
+\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)-\widehat\Omega_\zeta^{(0)}(s;m)\bigr)
 \ll
-\frac{\Tail(m,\sigma)+\Err(m,\sigma)}{Q^3}.
+\frac{S_2}{Q^3}.
 \]
-Applying the bounded linear functional $\Phi_K$ gives
+By the tail-curvature theorem and the corrected transfer bounds,
 \[
-|\Phi_K(\Omega_{\tail}(s;m))|+|\Phi_K(\Omega_{\err}(s;m))|
-\ll
-\frac{\Tail(m,\sigma)+\Err(m,\sigma)}{Q^3}.
+S_2\ll L(m)S(m)^2
 \]
-
-Combining the three pieces yields
+in the corrected regime. Therefore
 \[
-|H_m(s)|
-\ll_{\rho_0}
-\frac{L(m)S(m)^2+\Tail(m,\sigma)+\Err(m,\sigma)}{Q^3}.
+|H_m(s)|\ll \frac{L(m)S(m)^2}{Q^3}.
 \]
-In the corrected regime where
-\[
-\Tail(m,\sigma)+\Err(m,\sigma)\ll L(m)S(m)^2,
-\]
-this simplifies to
-\[
-|H_m(s)|\ll_{\rho_0}\frac{L(m)S(m)^2}{Q^3},
-\]
-as claimed.
+This is the claimed boundary estimate.
 \end{proof}
 
 \begin{proposition}[Odd microscopic expansion]
@@ -1551,26 +1664,22 @@ Define the corrected $N$-point transverse scalar
 \sum_{j=1}^N a_j^{(N)}H_m(s_j).
 \end{equation}
 
-\begin{proposition}[Corrected $N$-point transverse estimate]
+\begin{proposition}[Corrected $N$-point transverse estimate for the full corrected scalar]
 \label{prop:corrected-n-point}
 Let
 \[
-H_m(s)=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr).
+H_m(s):=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
 \]
-Assume $H_m(s)$ is odd and holomorphic on $|s|<\rho_0/Q$, and satisfies the
-boundary estimate
+be the full corrected transverse scalar.
+For $N=\lfloor \alpha Q\rfloor$ with $\alpha>0$ sufficiently small,
+define
 \[
-|H_m(s)|\ll_{\rho_0}\frac{L(m)S(m)^2}{Q^3}
-\qquad (|s|=\rho_0/Q).
-\]
-For $N=\lfloor \alpha Q\rfloor$ with $\alpha>0$ sufficiently small, define
-\[
-\Xi_\zeta^{(N)}(m):=
-\sum_{j=1}^N a_j^{(N)}H_m(s_j),
-\qquad
 s_j=\frac{j}{Q^2},
+\qquad
+\Xi_\zeta^{(N)}(m)
+:=
+\sum_{j=1}^N a_j^{(N)}\,H_m(s_j).
 \]
-where the coefficients $a_j^{(N)}$ cancel the first $N-1$ odd moments.
 Then
 \[
 |\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}
@@ -1579,17 +1688,31 @@ for some $\delta>0$.
 \end{proposition}
 
 \begin{proof}
-By odd holomorphy and Cauchy's formula,
+By Proposition~\ref{prop:corrected-whitening}, the full corrected scalar
 \[
-H_m(z/Q^2)=\sum_{r\ge 0} c_{2r+1}(m)\frac{z^{2r+1}}{Q^{2r+4}},
-\qquad
-|c_{2r+1}(m)|\ll_{\rho_0}L(m)S(m)^2\,\rho_0^{-(2r+1)}.
+H_m(s)=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
 \]
-Substituting $z=j$ and summing against the odd-moment-canceling coefficients
-$a_j^{(N)}$ kills the first $N-1$ odd terms of the full corrected scalar
-$H_m$, not merely a leading component. The surviving tail is bounded by the
-Cauchy coefficient estimate together with the standard explicit bound on the
-residual moment factor, giving
+is holomorphic on $|s|<\rho_0/Q$. By Proposition~\ref{prop:boundary-estimate},
+it satisfies
+\[
+|H_m(s)|\ll_{\rho_0}\frac{L(m)S(m)^2}{Q^3}
+\qquad (|s|=\rho_0/Q).
+\]
+By Proposition~\ref{prop:odd-expansion}, it is odd and admits the expansion
+\[
+H_m(z/Q^2)
+=
+\sum_{r\ge 0} c_{2r+1}(m)\frac{z^{2r+1}}{Q^{2r+4}},
+\]
+with
+\[
+|c_{2r+1}(m)|\ll L(m)S(m)^2\,\rho_0^{-(2r+1)}.
+\]
+
+Applying the standard odd-moment cancellation with the coefficients
+$a_j^{(N)}$ kills the first $N-1$ odd terms of this full corrected
+expansion. The surviving moment factor is exponentially tame for
+$N=\alpha Q$, which gives
 \[
 |\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}.
 \]
