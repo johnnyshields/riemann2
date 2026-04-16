@@ -1510,45 +1510,260 @@ G_-^{(0)-1/2}\widetilde R\,G_+^{(0)-1/2}
 G_-^{(0)-1/2}N^{(0)}X_+.
 \]
 
-The middle term is controlled directly from the mixed-block perturbation
-scales: after whitening, its off-diagonal entries are $O(S_2/Q^3)$, hence
-\[
-\Phi_K(\mathcal T_{\mix})\ll S_2/Q^3.
-\]
+We estimate the three first-order pieces separately.
 
-For the same-point terms, one uses a direct entrywise audit from the explicit
-corrected same-point formulas together with the Fréchet derivative formula for
-$G^{-1/2}$ in a diagonal basis. Since the baseline same-point blocks have
-eigenvalues $\asymp Q$ and $\asymp Q^3$, and the perturbations $R_\pm$ have
-the entry scales proved in Proposition~\ref{prop:block-perturbation}, the
-resulting matrices $X_\pm$ have entries of sufficiently high negative
-$Q$-order that, after multiplication by $N^{(0)}$ and one more baseline
-inverse square root, the off-diagonal entries of both $\mathcal T_-$ and
-$\mathcal T_+$ are $O(S_2/Q^3)$. Therefore
+\medskip
+\noindent
+\textbf{Step 1: the mixed-block term.}
+By the corrected mixed-block perturbation estimate,
 \[
-\Phi_K(\mathcal T_-)\ll S_2/Q^3,
+\widetilde R_{11}\ll \frac{S_2}{Q^2},
 \qquad
-\Phi_K(\mathcal T_+)\ll S_2/Q^3.
+\widetilde R_{12},\widetilde R_{21}\ll \frac{S_2}{Q},
+\qquad
+\widetilde R_{22}\ll S_2.
 \]
-
-Finally, every term in $\mathcal E_2$ contains at least two perturbation
-factors from $(R_-,\widetilde R,R_+)$. Since whitening contributes only
-polynomial $Q$-weights, one gets
+Using the baseline inverse-square-root scales
 \[
-\Phi_K(\mathcal E_2)\ll S_2^2/Q^3.
+G_\pm^{(0)}(s)^{-1/2}=
+\begin{pmatrix}
+O(Q^{-1/2}) & O(Q^{-3/2})\\
+O(Q^{-3/2}) & O(Q^{-3/2})
+\end{pmatrix},
 \]
-Because $S_2=o(Q)$, this is lower order than $S_2/Q^3$.
+the off-diagonal entries of
+\[
+\mathcal T_{\mix}:=G_-^{(0)-1/2}\widetilde R\,G_+^{(0)-1/2}
+\]
+are all $O(S_2/Q^3)$. Hence
+\[
+\Phi_K(\mathcal T_{\mix})\ll \frac{S_2}{Q^3}.
+\]
 
-Combining the four estimates gives the claimed bound.
+\medskip
+\noindent
+\textbf{Step 2: the same-point Fréchet derivative.}
+We prove the corresponding estimate for the left same-point term
+\[
+\mathcal T_-:=X_-N^{(0)}G_+^{(0)-1/2},
+\qquad
+X_-:=D(G^{-1/2})_{G_-^{(0)}}[R_-].
+\]
+The proof for $\mathcal T_+$ is identical.
+
+Write one baseline same-point block in the form
+\[
+G_0=
+\begin{pmatrix}
+a & b\\
+b & c
+\end{pmatrix},
+\qquad
+a\asymp Q,\quad b=O(1),\quad c\asymp Q^3,
+\]
+and one perturbation as
+\[
+R=
+\begin{pmatrix}
+r_{11} & r_{12}\\
+r_{12} & r_{22}
+\end{pmatrix},
+\qquad
+r_{11}\ll \frac{S_2}{Q^2},\quad
+r_{12}\ll \frac{S_2}{Q},\quad
+r_{22}\ll S_2.
+\]
+
+Diagonalize
+\[
+G_0=U\Lambda U^\top,
+\qquad
+\Lambda=\operatorname{diag}(\lambda_1,\lambda_2),
+\]
+with $U$ orthogonal. Since
+\[
+a\asymp Q,\qquad c\asymp Q^3,\qquad b=O(1),
+\]
+we have
+\[
+\lambda_1\asymp Q,\qquad \lambda_2\asymp Q^3.
+\]
+Moreover, if $U$ is a rotation by angle $\theta$, then
+\[
+\tan(2\theta)=\frac{2b}{c-a}=O(Q^{-3}),
+\]
+hence
+\[
+\theta=O(Q^{-3}),
+\qquad
+U=I+O(Q^{-3}).
+\]
+
+Set
+\[
+H:=U^\top R\,U.
+\]
+A direct computation gives
+\[
+H_{11}=r_{11}+2\theta r_{12}+O(\theta^2 r_{22}),
+\]
+\[
+H_{12}=r_{12}+\theta(r_{22}-r_{11})+O(\theta^2 r_{12}),
+\]
+\[
+H_{22}=r_{22}-2\theta r_{12}+O(\theta^2 r_{11}).
+\]
+Using
+\[
+\theta=O(Q^{-3}),
+\qquad
+r_{11}\ll \frac{S_2}{Q^2},
+\qquad
+r_{12}\ll \frac{S_2}{Q},
+\qquad
+r_{22}\ll S_2,
+\]
+we obtain
+\[
+H_{11}\ll \frac{S_2}{Q^2},
+\qquad
+H_{12}\ll \frac{S_2}{Q},
+\qquad
+H_{22}\ll S_2.
+\]
+
+Now let $f(x)=x^{-1/2}$. For a diagonal matrix $\Lambda$, the Fréchet
+derivative is given entrywise by the Löwner formula
+\[
+Df_\Lambda(H)_{ij}=f^{[1]}(\lambda_i,\lambda_j)H_{ij},
+\]
+where
+\[
+f^{[1]}(u,v)=
+\begin{cases}
+\dfrac{u^{-1/2}-v^{-1/2}}{u-v}, & u\neq v,\\[1.2ex]
+-\dfrac{1}{2u^{3/2}}, & u=v.
+\end{cases}
+\]
+Since
+\[
+\lambda_1\asymp Q,\qquad \lambda_2\asymp Q^3,
+\]
+we have
+\[
+f^{[1]}(\lambda_1,\lambda_1)\asymp Q^{-3/2},
+\qquad
+f^{[1]}(\lambda_2,\lambda_2)\asymp Q^{-9/2},
+\qquad
+f^{[1]}(\lambda_1,\lambda_2)\asymp Q^{-7/2}.
+\]
+Therefore, if
+\[
+Y:=Df_\Lambda(H),
+\]
+then
+\[
+Y_{11}\ll Q^{-3/2}\cdot \frac{S_2}{Q^2}
+=\frac{S_2}{Q^{7/2}},
+\]
+\[
+Y_{12}\ll Q^{-7/2}\cdot \frac{S_2}{Q}
+=\frac{S_2}{Q^{9/2}},
+\]
+\[
+Y_{22}\ll Q^{-9/2}\cdot S_2
+=\frac{S_2}{Q^{9/2}}.
+\]
+
+Since
+\[
+X=U\,Y\,U^\top
+\]
+and $U=I+O(Q^{-3})$, these scales persist in the original basis:
+\[
+X_{11}\ll \frac{S_2}{Q^{7/2}},
+\qquad
+X_{12},X_{21}\ll \frac{S_2}{Q^{9/2}},
+\qquad
+X_{22}\ll \frac{S_2}{Q^{9/2}}.
+\]
+
+\medskip
+\noindent
+\textbf{Step 3: the left same-point term $\mathcal T_-$.}
+The baseline mixed-block scales are
+\[
+N^{(0)}=
+\begin{pmatrix}
+O(Q) & O(Q^2)\\
+O(Q^2) & O(Q^3)
+\end{pmatrix},
+\qquad
+G_+^{(0)-1/2}=
+\begin{pmatrix}
+O(Q^{-1/2}) & O(Q^{-3/2})\\
+O(Q^{-3/2}) & O(Q^{-3/2})
+\end{pmatrix}.
+\]
+We estimate only the off-diagonal entries, since
+\[
+\Phi_K(Y)=Y_{12}+Y_{21}.
+\]
+
+For $(\mathcal T_-)_{12}$, every summand is $O(S_2/Q^3)$. For example,
+\[
+X_{11}N_{12}(G_+^{-1/2})_{22}
+\ll
+\frac{S_2}{Q^{7/2}}\cdot Q^2\cdot Q^{-3/2}
+=
+\frac{S_2}{Q^3},
+\]
+and
+\[
+X_{12}N_{22}(G_+^{-1/2})_{22}
+\ll
+\frac{S_2}{Q^{9/2}}\cdot Q^3\cdot Q^{-3/2}
+=
+\frac{S_2}{Q^3}.
+\]
+All other terms are smaller. Thus
+\[
+(\mathcal T_-)_{12}\ll \frac{S_2}{Q^3}.
+\]
+The same argument gives
+\[
+(\mathcal T_-)_{21}\ll \frac{S_2}{Q^3},
+\]
+and hence
+\[
+\Phi_K(\mathcal T_-)\ll \frac{S_2}{Q^3}.
+\]
+
+By symmetry, the same estimate holds for the right same-point term:
+\[
+\Phi_K(\mathcal T_+)\ll \frac{S_2}{Q^3}.
+\]
+
+\medskip
+\noindent
+\textbf{Step 4: the quadratic remainder.}
+Every term in $\mathcal E_2$ contains at least two perturbation factors from
+$(R_-,\widetilde R,R_+)$, and whitening contributes only polynomial
+$Q$-weights. Therefore
+\[
+\Phi_K(\mathcal E_2)\ll \frac{S_2^2}{Q^3}.
+\]
+Since $S_2=o(Q)$, this is lower order than $S_2/Q^3$.
+
+Combining the estimates for $\mathcal T_-$, $\mathcal T_{\mix}$,
+$\mathcal T_+$, and $\mathcal E_2$ gives
+\[
+\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)-\widehat\Omega_\zeta^{(0)}(s;m)\bigr)
+\ll
+\frac{S_2}{Q^3},
+\]
+as claimed.
 \end{proof}
-
-\begin{remark}
-The only nontrivial finite-dimensional input suppressed in the proof is the
-direct diagonal-basis computation for the Fréchet derivative
-$D(G^{-1/2})_{G_\pm^{(0)}}[R_\pm]$. This is a $2\times2$ linear-algebra audit
-from the explicit corrected same-point formulas and the Löwner divided
-difference formula for $x^{-1/2}$.
-\end{remark}
 
 \section{Odd holomorphic transverse channel}
 
