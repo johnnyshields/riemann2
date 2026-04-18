@@ -24,6 +24,7 @@
   \def\out{out}%
   \def\pair{pair}%
   \def\lin{lin}%
+  \def\new{new}%
 }
 \usepackage{enumitem}
 \usepackage{microtype}
@@ -77,6 +78,7 @@
 \newcommand{\out}{\mathrm{out}}
 \newcommand{\pair}{\mathrm{pair}}
 \newcommand{\lin}{\mathrm{lin}}
+\newcommand{\new}{\mathrm{new}}
 \newcommand{\F}{\mathrm{F}}
 \newcommand{\RePart}{\operatorname{Re}}
 \newcommand{\dist}{\operatorname{dist}}
@@ -2762,10 +2764,83 @@ F_h(z)\in Q[[z^2]]
 denote the corrected quotient odd germ of the normalized one-pair family, where
 $Q$ is the odd-germ quotient by the value/gauge family.
 
+\begin{lemma}[First-order generator map]
+\label{lem:first-order-generator-map}
+Let $G_0$ and $N_0$ denote the background same-point and mixed blocks,
+and write
+\[
+X_0:=G_0^{-1/2}.
+\]
+Let $L$ be the Fr\'echet derivative of the inverse-square-root map
+$G\mapsto G^{-1/2}$ at $G_0$, so that
+\[
+(G_0+\varepsilon H)^{-1/2}
+=
+X_0+\varepsilon L(H)+O(\varepsilon^2).
+\]
+If $\dot G_1$ and $\dot N_1$ are the first odd same-point and mixed
+variations arising from the first-order generator directions, then the induced
+first-order odd coefficient in the corrected local block is
+\[
+B_1
+=
+L(\dot G_1)\,N_0\,X_0
++
+X_0\,\dot N_1\,X_0
++
+X_0\,N_0\,L(\dot G_1).
+\]
+Equivalently, the first-order family $V_{\val}^{(1)}$ is the image of the
+linear map
+\[
+(\dot G_1,\dot N_1)\longmapsto
+L(\dot G_1)\,N_0\,X_0
++
+X_0\,\dot N_1\,X_0
++
+X_0\,N_0\,L(\dot G_1).
+\]
+\end{lemma}
+
+\begin{proof}
+Expand the corrected local block to first order under a value/gauge
+deformation:
+\[
+G(s)=G_0+\varepsilon \dot G_1+O(\varepsilon^2),
+\qquad
+N(s)=N_0+\varepsilon \dot N_1+O(\varepsilon^2).
+\]
+Then
+\[
+G(s)^{-1/2}=X_0+\varepsilon L(\dot G_1)+O(\varepsilon^2),
+\]
+so multiplying
+\[
+G(s)^{-1/2}\,N(s)\,G(s)^{-1/2}
+\]
+to first order gives
+\[
+X_0N_0X_0
++
+\varepsilon\Bigl(
+L(\dot G_1)\,N_0\,X_0
++
+X_0\,\dot N_1\,X_0
++
+X_0\,N_0\,L(\dot G_1)
+\Bigr)
++
+O(\varepsilon^2).
+\]
+The coefficient of $\varepsilon$ is exactly the first-order generator
+$B_1$.
+\end{proof}
+
 \begin{proposition}[Generic triviality of the first quotient order]
 \label{prop:first-order-quotient-trivial}
 Under the generic nondegeneracy assumptions on the background same-point
-block, the first-order value-family fills the full matrix space:
+block, the image of the first-order generator map of
+Lemma~\ref{lem:first-order-generator-map} fills the full matrix space:
 \[
 V_{\val}^{(1)}=M_2(\mathbf C).
 \]
@@ -2775,6 +2850,17 @@ Consequently
 \]
 so the generic leading quotient order is at least $3$.
 \end{proposition}
+
+\begin{remark}[Structural split still to be made explicit]
+\label{rem:wip-raw-vs-full-value-family}
+At first order the family $V_{\val}^{(1)}$ fills $M_2(\mathbf C)$, while
+the odd coefficients of the raw corrected local block are expected to satisfy
+additional swap/parity constraints. This indicates that the present notation
+$V_{\val}^{(2j+1)}$ is bundling together at least two logically distinct
+sources of ambiguity: raw pure-value odd jets and normalization/basis-gauge
+directions. The current draft uses the combined family $V_{\val}^{(2j+1)}$.
+A later refinement should separate these components explicitly.
+\end{remark}
 
 \begin{lemma}[Rigidity of the cubic scalar $B$]
 \label{lem:B-rigidity}
@@ -2932,6 +3018,135 @@ is denoted by
 \overline v_1(h)\in Q/\ell_h.
 \]
 \end{definition}
+
+\subsection{Normalization gauge at the first residual step}
+
+The first residual step involves an additional ambiguity beyond the odd
+value-family itself: an even scalar renormalization and an even jet-basis
+change on the odd germ. It is useful to record this separately.
+
+\begin{definition}[Normalization gauge]
+\label{def:normalization-gauge}
+Let
+\[
+F(z)=A_3 z^3+A_5 z^5+O(z^7)
+\]
+be a matrix-valued odd germ. The normalization gauge acts by
+\[
+F(z)\longmapsto a(z)\,P(z)\,F(z)\,P(z)^{-1},
+\]
+where
+\[
+a(z)=1+c_2 z^2+c_4 z^4+\cdots
+\]
+is an even scalar germ with $a(0)=1$, and
+\[
+P(z)=I+B_2 z^2+B_4 z^4+\cdots
+\]
+is an even $2\times 2$ matrix germ with $P(0)=I$.
+\end{definition}
+
+\begin{proposition}[First-residual transformation law]
+\label{prop:first-residual-gauge-law}
+Let
+\[
+F(z)=A_3 z^3+A_5 z^5+O(z^7)
+\]
+be an odd matrix germ, and let
+\[
+F^{\new}(z):=a(z)\,P(z)\,F(z)\,P(z)^{-1}
+\]
+with $a,P$ as in Definition~\ref{def:normalization-gauge}. Then
+\[
+A_3^{\new}=A_3,
+\qquad
+A_5^{\new}=A_5+c_2A_3+[B_2,A_3].
+\]
+\end{proposition}
+
+\begin{proof}
+Expand
+\[
+P(z)^{-1}=I-B_2 z^2+O(z^4).
+\]
+Then
+\[
+P(z)F(z)P(z)^{-1}
+=
+(I+B_2 z^2)\,(A_3 z^3+A_5 z^5)\,(I-B_2 z^2)+O(z^7),
+\]
+so
+\[
+P(z)F(z)P(z)^{-1}
+=
+A_3 z^3+\bigl(A_5+[B_2,A_3]\bigr)z^5+O(z^7).
+\]
+Multiplying by
+\[
+a(z)=1+c_2 z^2+O(z^4)
+\]
+gives
+\[
+F^{\new}(z)
+=
+A_3 z^3+\bigl(A_5+c_2A_3+[B_2,A_3]\bigr)z^5+O(z^7),
+\]
+as claimed.
+\end{proof}
+
+\begin{corollary}[Residual effect of scalar renormalization]
+\label{cor:first-residual-scalar-renormalization}
+Let $\ell:=\mathbf C A_3$. Under the normalization gauge,
+\[
+A_5 \longmapsto A_5 + c_2 A_3 + [B_2,A_3].
+\]
+Hence the scalar renormalization term is invisible modulo the leading line:
+\[
+[A_5] \longmapsto [A_5+[B_2,A_3]]
+\qquad\text{in}\qquad
+\mathcal J_5/\ell.
+\]
+\end{corollary}
+
+\begin{proof}
+This is immediate from Proposition~\ref{prop:first-residual-gauge-law}, since
+$c_2A_3\in \ell$.
+\end{proof}
+
+\begin{corollary}[Trace invariance under normalization gauge]
+\label{cor:trace-invariant-under-normalization-gauge}
+If $A_3$ is diagonal-traceless, then
+\[
+\operatorname{tr}(A_5^{\new})=\operatorname{tr}(A_5)
+\]
+for every normalization-gauge transform $F^{\new}$ of $F$.
+\end{corollary}
+
+\begin{proof}
+The scalar renormalization term $c_2A_3$ is traceless because $A_3$ is.
+The commutator term is traceless because
+\[
+\operatorname{tr}[B_2,A_3]=0.
+\]
+Hence Proposition~\ref{prop:first-residual-gauge-law} gives
+\[
+\operatorname{tr}(A_5^{\new})=\operatorname{tr}(A_5).
+\]
+\end{proof}
+
+\begin{remark}[What remains at quintic order]
+\label{rem:quintic-pure-value-bottleneck}
+The normalization gauge is therefore harmless for the first residual step.
+The remaining local issue is the quintic slice of the odd value-family. To
+make trace a fully rigorous residual detector, it would suffice to prove
+\[
+\operatorname{tr}\bigl(V_{\val}^{(5)}(h)\bigr)=0
+\qquad (h\in \mathcal U_{\mathrm{cub}}),
+\]
+or, more generally, to construct a linear functional on the quintic quotient
+space that annihilates both $V_{\val}^{(5)}(h)$ and the cubic leading line
+$\ell_h$, but not the quintic witness.
+\end{remark}
 
 \begin{lemma}[Quintic trace witness]
 \label{lem:quintic-trace-witness}
@@ -3225,19 +3440,30 @@ this witness, and that the same corrected commutator structure governs the
 two-pair interaction in the septic trace channel.
 \end{remark}
 
-\begin{proposition}[Nontrivial first residual class]
-\label{prop:first-residual-class-nontrivial}
-For $h\in \mathcal U_{\mathrm{cub}}$, the first residual class is nonzero:
+\begin{proposition}[Generic first residual nonvanishing under trace-free quintic value slice]
+\label{prop:first-residual-class-generic}
+Assume that for every $h\in \mathcal U_{\mathrm{cub}}$,
+\[
+\operatorname{tr}\bigl(V_{\val}^{(5)}(h)\bigr)=0.
+\]
+Then there exists an open dense subset
+\[
+\mathcal U_{\mathrm{res}}\subset \mathcal U_{\mathrm{cub}}
+\]
+such that
 \[
 \overline v_1(h)\neq 0
-\quad\text{in }Q/\ell_h.
+\qquad\text{in }Q/\ell_h
 \]
-Equivalently, the quintic quotient coefficient is not collinear with the
-cubic leading line:
+for every $h\in \mathcal U_{\mathrm{res}}$.
+
+Equivalently, on $\mathcal U_{\mathrm{res}}$ the quintic quotient coefficient
+is not collinear with the cubic leading line:
 \[
 v_1(h)\notin \ell_h.
 \]
-Hence the one-pair quotient odd germ is not projectively constant.
+Hence the one-pair quotient odd germ is not projectively constant on
+$\mathcal U_{\mathrm{res}}$.
 \end{proposition}
 
 \begin{proof}
@@ -3246,47 +3472,57 @@ the cubic quotient coefficient
 \[
 v_0(h)=[J_3^{\pair}(h)]
 \]
-is nonzero and defines the leading line $\ell_h$.
+is nonzero and defines the leading line $\ell_h$, and this line is
+diagonal-traceless.
+
+By Corollary~\ref{cor:trace-invariant-under-normalization-gauge}, trace is
+invariant under the normalization gauge at the first residual step. By the
+present hypothesis, trace also annihilates the quintic value slice
+$V_{\val}^{(5)}(h)$. Therefore trace descends to a well-defined linear
+functional
+\[
+\tau_h:Q/\ell_h\to \mathbf C.
+\]
+
 By Lemma~\ref{lem:no-cancellation-quintic-trace},
 \[
-\operatorname{tr}J_5^{\pair}(h)\not\equiv 0.
+\tau_h(\overline v_1(h))
+=
+\operatorname{tr}J_5^{\pair}(h)
+\not\equiv 0
 \]
-But the cubic leading line is diagonal-traceless, whereas a nonzero trace
-component is automatically transverse to that line. Therefore the quintic
-quotient coefficient $v_1(h)$ cannot lie in $\ell_h$, so its image in
-$Q/\ell_h$ is nonzero:
+as a function of $h$ on $\mathcal U_{\mathrm{cub}}$. Since the family is
+real-analytic in $h$, the zero set of
 \[
-\overline v_1(h)\neq 0.
+h\longmapsto \tau_h(\overline v_1(h))
 \]
-Thus the residual germ is nontrivial at the first step, and the one-pair
-quotient odd germ cannot be projectively constant.
-\end{proof}
+is a proper analytic subset of $\mathcal U_{\mathrm{cub}}$. Its complement
+$\mathcal U_{\mathrm{res}}$ is therefore open and dense.
 
-\begin{remark}[Work in progress: pointwise vs.\ generic residual nonvanishing]
-\label{rem:wip-first-residual-class-pointwise-vs-generic}
-The current quintic argument proves that the
-$(K_1,\eta_2,q^{(5)})$-slice of $\operatorname{tr}J_5^{\pair}(h)$ has
-nonzero coefficient. Equivalently,
+For $h\in \mathcal U_{\mathrm{res}}$ we have
 \[
-\operatorname{tr}J_5^{\pair}(h)\not\equiv 0
+\tau_h(\overline v_1(h))\neq 0,
 \]
-as a function of $h$, so the one-pair quotient odd germ is not
-projectively constant.
-
-What is \emph{not} yet proved here is the stronger pointwise statement
+hence
 \[
 \overline v_1(h)\neq 0
-\qquad\text{for every }h\in \mathcal U_{\mathrm{cub}}.
+\qquad\text{in }Q/\ell_h.
 \]
-Thus the present local analysis establishes generic nontriviality of the
-first residual class, but not yet pointwise nonvanishing on all of
-$\mathcal U_{\mathrm{cub}}$.
+Thus the one-pair quotient odd germ is not projectively constant on
+$\mathcal U_{\mathrm{res}}$.
+\end{proof}
 
-Whether this pointwise strengthening is actually needed will be determined by
-the later two-pair and minimal-core rigidity arguments. If those sections
-require only failure of projective constancy of the one-pair family, then
-the current local theorem is already sufficient; if they require pointwise
-residual nonvanishing, an additional local argument will be needed.
+\begin{remark}[Work in progress: trace-free quintic value slice]
+\label{rem:wip-trace-free-quintic-value-slice}
+The remaining local task is to determine the quintic value slice
+$V_{\val}^{(5)}(h)$ explicitly enough to prove
+\[
+\operatorname{tr}\bigl(V_{\val}^{(5)}(h)\bigr)=0
+\qquad (h\in \mathcal U_{\mathrm{cub}}),
+\]
+or to replace trace by another linear functional annihilating the quintic
+value slice and the cubic leading line while still detecting the quintic
+witness.
 \end{remark}
 
 \subsection{From the one-pair residual germ to two-pair and minimal-core rigidity}
@@ -3301,7 +3537,7 @@ interaction and exceptional-set steps remain schematic in the present draft.
 
 Let $F_h(z)$ denote the corrected quotient odd germ of the normalized one-pair
 family. By Proposition~\ref{prop:cubic-leading-order} and
-Proposition~\ref{prop:first-residual-class-nontrivial}, on the generic
+Proposition~\ref{prop:first-residual-class-generic}, on the generic
 one-pair region we have
 \[
 F_h(z)=v_0(h)z^3+v_1(h)z^5+\cdots,
