@@ -4260,6 +4260,70 @@ equivalently, that tangent lines from the right interval do not meet the
 adjacent left interval.
 \end{remark}
 
+\begin{remark}[Audit: first-zero compactness repair]
+\label{rem:audit-first-zero-compactness}
+Any eventual proof of adjacent tangent-separator sign regularity should avoid
+the informal phrase ``take the first zero on the adjacent interval pair'' on
+raw open intervals. The correct setup is to remove a boundary-near region on
+which $K(s,t)$ is already known to have fixed sign, truncate to compact
+subintervals $J_1\Subset I_1$, $J_2\Subset I_2$, and then work with the closed
+zero set of
+\[
+K(s,t)=\det(F(s),F'(s),F(t))
+\]
+inside $J_2\times J_1$. This is the right framework in which a minimal/first
+zero can be realized and the implicit-function-theorem argument can be applied
+rigorously.
+\end{remark}
+
+\begin{remark}[Audit: first-zero implies tangency]
+\label{rem:audit-first-zero-implies-tangency}
+In the current adjacent-interval strategy, the key differential step is:
+if $(s_*,t_*)$ is a first zero of $K(s,t)$ in the $s$-ordering, then that
+zero cannot be transverse in $t$. Equivalently,
+\[
+K(s_*,t_*)=0
+\quad\Longrightarrow\quad
+\partial_t K(s_*,t_*)=0
+\]
+at the first appearance of a zero. This is what upgrades a first adjacent
+intersection into a common tangent line. The final proof should isolate this
+step explicitly as an application of the implicit function theorem on the
+compactly truncated adjacent interval pair.
+\end{remark}
+
+\begin{remark}[Audit: adjacent slope-range hypotheses]
+\label{rem:audit-adjacent-slope-range-hypotheses}
+The current adjacent-interval attack uses disjointness of the interior tangent
+slope ranges in the two generic boundary cases:
+
+\begin{enumerate}
+\item $W=0$, $M\neq 0$, where one must use continuity of
+\[
+m(h)=\frac{N(h)}{M(h)}
+\]
+across the boundary together with the sign change of
+\[
+m'(h)=\frac{W(h)}{M(h)^2}
+\]
+to conclude that the two one-sided slope intervals meet only at the boundary
+endpoint value;
+
+\item $M=0$, $M'\neq 0$, where one must also assume
+\[
+N(h_*)\neq 0
+\]
+at the turning point $h_*$ in order to obtain the one-sided blow-up
+\[
+m(h)\to \pm\infty
+\]
+and hence disjoint slope ranges.
+\end{enumerate}
+
+These hypotheses should be stated explicitly in any final proof of the adjacent
+tangent-separator theorem.
+\end{remark}
+
 \begin{remark}[Audit: global no-four-secant theorem]
 \label{rem:audit-global-no-four-secant}
 Assuming the adjacent tangent-separator sign theorem, the support intervals of
@@ -4268,6 +4332,72 @@ two different branches. The deduction from adjacent tangent separation to a
 global no-four-secant theorem should still be audited carefully in the final
 endgame writeup.
 \end{remark}
+
+\begin{proposition}[Conditional adjacent tangent separation implies global no-secant]
+\label{prop:conditional-global-no-secant}
+Assume the following adjacent tangent-separator sign regularity statement:
+
+for every adjacent pair of ECT intervals $I_1<I_2$ in the affine
+$x=v_5/c$ ordering, one has
+\[
+K(s,t)\neq 0
+\qquad
+(s\in I_2,\ t\in I_1),
+\]
+where
+\[
+K(s,t)=\det(F(s),F'(s),F(t)),
+\qquad
+F(h)=(c(h),v_5(h),\Delta_7(h)).
+\]
+
+Then no affine line in the chart
+\[
+x=\frac{v_5}{c},
+\qquad
+y=\frac{\Delta_7}{c}
+\]
+is $2$-secant to two distinct ECT intervals. Equivalently, there is no
+global four-secant line for the normalized planar curve $\Gamma(h)$.
+\end{proposition}
+
+\begin{proof}
+Let $I_1<I_2$ be adjacent ECT intervals, and let $L$ be any tangent line to
+the branch $\Gamma(I_2)$. Then $L$ is the tangent line at some point
+$\Gamma(s)$ with $s\in I_2$. By the adjacent tangent-separator hypothesis,
+the function
+\[
+t\longmapsto K(s,t)
+\]
+has no zero on $I_1$. Hence $L$ does not meet $\Gamma(I_1)$, so
+$\Gamma(I_1)$ lies strictly on one side of every support/tangent line of
+$\Gamma(I_2)$.
+
+In support-function language, for every slope $m$ realized on $I_2$, the
+upper support level of $I_1$ does not exceed the lower support level of
+$I_2$. Thus the intercept intervals of $I_1$ and $I_2$ are disjoint for
+every common slope.
+
+By transitivity over the $x$-ordering of adjacent intervals, the support
+intervals of any two distinct ECT intervals are disjoint. Therefore no affine
+line can be $2$-secant to two different ECT intervals. In particular, no
+global four-secant line exists.
+\end{proof}
+
+\begin{corollary}[Conditional exclusion of pair-pair branch configurations]
+\label{cor:conditional-pair-pair-exclusion}
+Under the hypothesis of
+Proposition~\ref{prop:conditional-global-no-secant}, a bad finite core cannot
+contain two distinct ECT intervals each contributing a pair of points.
+\end{corollary}
+
+\begin{proof}
+Each ECT interval contributes at most two points to the zero set of any affine
+line in the normalized chart. By
+Proposition~\ref{prop:conditional-global-no-secant}, no affine line can be
+$2$-secant to two distinct ECT intervals. Hence a pair-pair configuration
+across two distinct ECT intervals is impossible.
+\end{proof}
 
 \subsection{From the one-pair residual germ to two-pair and minimal-core rigidity}
 
@@ -4568,40 +4698,22 @@ h\longmapsto \left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right).
 \]
 \end{remark}
 
-\begin{remark}[Work in progress: planar ECT and tangent-separator reformulation]
-\label{rem:wip-planar-convexity-reformulation}
-The later working analysis suggests that the remaining generic obstruction
-should be reformulated in terms of the normalized planar curve
+\begin{remark}[Current geometric bottleneck]
+\label{rem:current-geometric-bottleneck}
+The remaining generic obstruction is now the adjacent-interval
+tangent-separator sign problem for the normalized planar curve
 \[
-\Gamma(h)=\left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right)
+\Gamma(h)=\left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right).
 \]
-and the tangent-separator kernel
+Equivalently, what remains is to prove that for adjacent ECT intervals
+$I_1<I_2$, the kernel
 \[
 K(s,t)=\det(F(s),F'(s),F(t)),
 \qquad
-F(h)=(c(h),v_5(h),\Delta_7(h)).
+F(h)=(c(h),v_5(h),\Delta_7(h)),
 \]
-On intervals where
-\[
-c(h)\neq 0,\qquad M(h)\neq 0,\qquad W(h)\neq 0,
-\]
-the triple $(c,v_5,\Delta_7)$ is an ECT system, so every affine line meets
-the corresponding branch of $\Gamma$ in at most two points. The remaining
-global obstruction is therefore not same-branch secancy, but the possibility
-that tangent or secant lines interact across adjacent ECT intervals.
-\end{remark}
-
-\begin{remark}[Current geometric bottleneck]
-\label{rem:current-geometric-bottleneck}
-The remaining generic obstruction is now a global line-incidence problem for
-the planar curve
-\[
-h\longmapsto \left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right),
-\]
-namely the possibility of a common four-secant line meeting two separated
-convex components twice each. Thus the next missing theorem is no longer a
-local quintic bookkeeping statement, but an endpoint/support-function
-separation statement for this curve.
+has constant nonzero sign on $I_2\times I_1$. Once this is established, the
+global no-four-secant theorem follows by support transitivity.
 \end{remark}
 
 \begin{remark}[Current state of the argument]
