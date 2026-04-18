@@ -3949,6 +3949,153 @@ coefficient notation $(u,v,w,\alpha,\beta,\gamma,r,\dots)$ remains
 incomplete beyond the structural identities recorded above.
 \end{remark}
 
+\subsection{Normalized planar curve and curvature bridge}
+
+On the region where $c(h)\neq 0$, define the normalized scalars
+\[
+\rho_1(h):=\frac{v_5(h)}{c(h)},
+\qquad
+\rho_2(h):=\frac{\Delta_7(h)}{c(h)},
+\]
+and the associated planar invariant curve
+\[
+\Gamma(h):=\bigl(\rho_1(h),\rho_2(h)\bigr).
+\]
+
+\begin{proposition}[Non-affinity of the second normalized residual scalar]
+\label{prop:rho2-not-affine-in-rho1}
+Assume that the direct $q^{(7)}$-driven slice of $\Delta_7(h)$ is
+generically nonzero on the quintic-generic region. Then there do not exist
+constants $A,B\in\mathbf C$ such that
+\[
+\rho_2(h)\equiv A\,\rho_1(h)+B
+\]
+on any connected component of $\{h:c(h)\neq 0\}$.
+
+Equivalently,
+\[
+\Delta_7(h)\not\equiv A\,v_5(h)+B\,c(h).
+\]
+\end{proposition}
+
+\begin{proof}
+Suppose
+\[
+\Delta_7(h)\equiv A\,v_5(h)+B\,c(h)
+\]
+on a connected component of $\{c\neq 0\}$. Then the direct $q^{(7)}$-driven
+slice of the right-hand side vanishes, because $v_5$ and $c$ are governed
+by the cubic/quintic layers and carry no direct septic $q^{(7)}$-slice.
+But the direct $q^{(7)}$-driven slice of $\Delta_7$ is generically nonzero
+by hypothesis. This is a contradiction. Dividing by $c(h)$ yields
+\[
+\rho_2(h)\not\equiv A\,\rho_1(h)+B.
+\qedhere
+\]
+\end{proof}
+
+\begin{definition}[Normalized derivative numerators]
+\label{def:MN-normalized-curve}
+Define
+\[
+M(h):=c(h)v_5'(h)-c'(h)v_5(h),
+\qquad
+N(h):=c(h)\Delta_7'(h)-c'(h)\Delta_7(h).
+\]
+Then
+\[
+\rho_1'(h)=\frac{M(h)}{c(h)^2},
+\qquad
+\rho_2'(h)=\frac{N(h)}{c(h)^2}.
+\]
+\end{definition}
+
+\begin{proposition}[Curvature bridge for the normalized planar curve]
+\label{prop:curvature-bridge-normalized-curve}
+Let
+\[
+K_\Gamma(h):=\rho_1'(h)\rho_2''(h)-\rho_2'(h)\rho_1''(h)
+\]
+denote the affine curvature numerator of the planar curve $\Gamma(h)$.
+Then
+\[
+K_\Gamma(h)=\frac{M(h)N'(h)-N(h)M'(h)}{c(h)^4}.
+\]
+In particular, if $K_\Gamma\equiv 0$ on a connected open set on which
+$M\neq 0$, then $\rho_2$ is affine in $\rho_1$ on that set.
+Consequently, under the hypothesis of
+Proposition~\ref{prop:rho2-not-affine-in-rho1}, one has
+\[
+K_\Gamma\not\equiv 0
+\]
+on the generic region.
+\end{proposition}
+
+\begin{proof}
+By Definition~\ref{def:MN-normalized-curve},
+\[
+\rho_1'=\frac{M}{c^2},
+\qquad
+\rho_2'=\frac{N}{c^2}.
+\]
+Differentiating gives
+\[
+\rho_1''=\frac{M'c-2Mc'}{c^3},
+\qquad
+\rho_2''=\frac{N'c-2Nc'}{c^3}.
+\]
+Therefore
+\[
+K_\Gamma
+=
+\frac{M}{c^2}\frac{N'c-2Nc'}{c^3}
+-
+\frac{N}{c^2}\frac{M'c-2Mc'}{c^3}
+=
+\frac{MN'-NM'}{c^4}.
+\]
+
+If $K_\Gamma\equiv 0$ on a connected open set with $M\neq 0$, then
+\[
+0=MN'-NM'=M^2\left(\frac{N}{M}\right)',
+\]
+so $N/M$ is constant there:
+\[
+\frac{N}{M}=A.
+\]
+Since
+\[
+\frac{N}{M}=\frac{\rho_2'}{\rho_1'},
+\]
+it follows that
+\[
+\rho_2'=A\,\rho_1',
+\]
+hence
+\[
+\rho_2=A\,\rho_1+B
+\]
+on that connected set. The final claim now follows from
+Proposition~\ref{prop:rho2-not-affine-in-rho1}.
+\end{proof}
+
+\begin{remark}[Geometric consequence]
+\label{rem:geometric-consequence-normalized-curve}
+Proposition~\ref{prop:curvature-bridge-normalized-curve} is the local-to-global
+bridge from the order-$7$ fixed-sector analysis back to the secant/tangent
+program. On the open set where
+\[
+c(h)\neq 0,
+\qquad
+M(h)\neq 0,
+\qquad
+M(h)N'(h)-N(h)M'(h)\neq 0,
+\]
+the normalized planar curve $\Gamma(h)$ is a strictly convex graph in the
+affine chart $(\rho_1,\rho_2)$. Thus the remaining global obstruction is a
+common four-secant line meeting two separated convex components twice each.
+\end{remark}
+
 \subsection{From the one-pair residual germ to two-pair and minimal-core rigidity}
 
 \begin{remark}[Strengthened organizing principle]
@@ -3997,20 +4144,58 @@ with cubic leading line
 \]
 Under the additional trace-free pure-value quintic hypothesis of
 Proposition~\ref{prop:first-residual-class-generic}, there is an open dense
-subset $\mathcal U_{\mathrm{res}}\subset\mathcal U_{\mathrm{cub}}$ on which
-the first residual class
+subset
+\[
+\mathcal U_{\mathrm{res}}\subset \mathcal U_{\mathrm{cub}}
+\]
+on which the first residual class
 \[
 \overline v_1(h)\in Q/\ell_h
 \]
-is nonzero. In the later fixed-sector refinement, the strengthened one-pair
-package is recorded by
+is nonzero.
+
+In the strengthened fixed-sector refinement, the one-pair local package is
+recorded by
 \[
-c(h),\qquad A_5^{\mathfrak f}(h),\qquad \Delta_7(h),
+c(h),\qquad A_5^{\mathfrak f}(h)=u_5(h)I+v_5(h)S,\qquad
+\Delta_7(h),
 \]
-or equivalently by the normalized affine curve
+and hence by the normalized planar curve
 \[
-h\longmapsto \left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right).
+\Gamma(h):=\left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right)
+=
+\bigl(\rho_1(h),\rho_2(h)\bigr).
 \]
+By Proposition~\ref{prop:curvature-bridge-normalized-curve}, the affine
+curvature numerator of $\Gamma$ is
+\[
+K_\Gamma(h)
+=
+\rho_1'(h)\rho_2''(h)-\rho_2'(h)\rho_1''(h)
+=
+\frac{M(h)N'(h)-N(h)M'(h)}{c(h)^4},
+\]
+where
+\[
+M(h)=c(h)v_5'(h)-c'(h)v_5(h),
+\qquad
+N(h)=c(h)\Delta_7'(h)-c'(h)\Delta_7(h).
+\]
+Thus the strengthened one-pair geometry is governed by the curve $\Gamma(h)$
+and its secant/tangent behavior on the region where
+\[
+c(h)\neq 0,
+\qquad
+M(h)\neq 0,
+\qquad
+M(h)N'(h)-N(h)M'(h)\neq 0.
+\]
+
+In this formulation, the intended two-pair and minimal-core rigidity statements
+should ultimately be read as restrictions on coincidence, secant, and
+four-secant configurations for the normalized planar curve $\Gamma(h)$, with
+the older cubic/residual projective language recovered as the first two layers
+of this strengthened invariant package.
 
 \begin{definition}[Two-pair decomposition]
 \label{def:two-pair-decomposition}
