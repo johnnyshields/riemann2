@@ -3525,7 +3525,183 @@ value slice and the cubic leading line while still detecting the quintic
 witness.
 \end{remark}
 
+\begin{remark}[Beyond the first residual trace]
+\label{rem:beyond-first-residual-trace}
+The quintic trace is the first scalar residual detector, but it is not the end
+of the one-pair local structure. The later fixed-sector refinement
+$
+A_5^{\mathfrak f},A_7^{\mathfrak f},\Delta_7
+$
+indicates that the residual germ carries further geometric information beyond
+the first trace channel.
+\end{remark}
+
+\subsection{Fixed-sector refinement at quintic and septic order}
+
+The trace witness at quintic order suggests a more structured refinement of the
+one-pair residual germ than the trace alone records. For bookkeeping purposes,
+it is convenient to decompose the quintic and septic coefficients into fixed and
+anti-fixed parts with respect to the involution
+\[
+\iota(A):=J_0AJ_0,
+\qquad
+J_0=
+\begin{pmatrix}
+0&1\\
+1&0
+\end{pmatrix}.
+\]
+
+Write
+\[
+\pi_{\mathfrak f}(A):=\frac12(A+J_0AJ_0),
+\qquad
+\pi_{\mathfrak a}(A):=\frac12(A-J_0AJ_0).
+\]
+Then
+\[
+\mathfrak f=\operatorname{span}\{I,S\},
+\qquad
+\mathfrak a=\operatorname{span}\{D,J\},
+\]
+where
+\[
+I=
+\begin{pmatrix}
+1&0\\0&1
+\end{pmatrix},
+\quad
+S=
+\begin{pmatrix}
+0&1\\1&0
+\end{pmatrix},
+\quad
+D=
+\begin{pmatrix}
+1&0\\0&-1
+\end{pmatrix},
+\quad
+J=
+\begin{pmatrix}
+0&-1\\1&0
+\end{pmatrix}.
+\]
+
+\begin{definition}[Fixed-sector quintic and septic coefficients]
+\label{def:fixed-sector-quintic-septic}
+Let
+\[
+F_h(z)=A_3(h)z^3+A_5(h)z^5+A_7(h)z^7+\cdots
+\]
+denote the normalized one-pair quotient odd germ on the cubic-generic region.
+Its fixed-sector quintic and septic coefficients are defined by
+\[
+A_5^{\mathfrak f}(h):=\pi_{\mathfrak f}(A_5(h)),
+\qquad
+A_7^{\mathfrak f}(h):=\pi_{\mathfrak f}(A_7(h)).
+\]
+Write
+\[
+A_5^{\mathfrak f}(h)=u_5(h)\,I+v_5(h)\,S,
+\qquad
+A_7^{\mathfrak f}(h)=u_7(h)\,I+v_7(h)\,S.
+\]
+\end{definition}
+
+\begin{definition}[Second residual determinant]
+\label{def:second-residual-determinant}
+On the cubic-generic region, define
+\[
+\Delta_7(h):=u_7(h)v_5(h)-u_5(h)v_7(h).
+\]
+\end{definition}
+
+\begin{remark}[Interpretation]
+\label{rem:fixed-sector-residual-package}
+The quintic fixed-sector vector $A_5^{\mathfrak f}(h)$ refines the first
+residual data beyond the trace detector alone, and the determinant
+$\Delta_7(h)$ records the next residual quotient at septic order. In the
+working notes, these form the first two nontrivial layers of a one-pair
+residual package:
+\[
+c(h),\qquad A_5^{\mathfrak f}(h),\qquad \Delta_7(h).
+\]
+The current draft has not yet fully translated these objects into the existing
+coefficient notation $(u,v,w,\alpha,\beta,\gamma,r,\dots)$, but they are the
+natural variables for the geometric reformulation of the multi-pair problem.
+\end{remark}
+
+\begin{remark}[Work in progress: fixed-sector geometry]
+\label{rem:wip-fixed-sector-geometry}
+The later local analysis suggests the normalized affine chart
+\[
+x(h):=\frac{v_5(h)}{c(h)},
+\qquad
+y(h):=\frac{\Delta_7(h)}{c(h)}
+\]
+on the cubic-generic region. The intended geometric program is to study the
+planar curve
+\[
+h\longmapsto (x(h),y(h))
+\]
+rather than only the scalar quintic trace. In this formulation, the remaining
+generic obstruction is reduced to common four-secant lines of this planar
+curve.
+\end{remark}
+
+\begin{remark}[Derived structural identities]
+\label{rem:derived-fixed-sector-identities}
+The working analysis gives the following identities, which should be proved in
+a later draft in the paper's native coefficient language.
+
+\begin{enumerate}
+\item If
+\[
+X_1=
+\begin{pmatrix}
+u&v\\v&w
+\end{pmatrix},
+\qquad
+X_3=
+\begin{pmatrix}
+\alpha&\beta\\\beta&\gamma
+\end{pmatrix},
+\]
+then the quintic fixed-sector $S$-component coming from the commutator-type
+channel is
+\[
+v_5=\gamma u-\alpha w.
+\]
+
+\item The direct linear $q^{(7)}$-driven contribution to the septic
+fixed-sector coefficient is $I$-directional. In particular, on that slice,
+\[
+v_7^{(q^{(7)})}=0,
+\qquad
+\Delta_7^{(q^{(7)})}=u_7^{(q^{(7)})}v_5.
+\]
+Thus the determinant $\Delta_7$ is the natural second residual scalar once
+$A_5^{\mathfrak f}$ has been fixed.
+\end{enumerate}
+\end{remark}
+
 \subsection{From the one-pair residual germ to two-pair and minimal-core rigidity}
+
+\begin{remark}[Strengthened organizing principle]
+\label{rem:strengthened-organizing-principle}
+The original version of this subsection was organized around the cubic leading
+line and the first residual trace witness. The later working analysis suggests
+a stronger one-pair package:
+\[
+c(h),\qquad A_5^{\mathfrak f}(h),\qquad \Delta_7(h),
+\]
+or equivalently the normalized affine curve
+\[
+h\longmapsto \left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right).
+\]
+The intended two-pair and minimal-core rigidity statements should ultimately be
+reformulated in terms of this strengthened one-pair invariant geometry.
+\end{remark}
 
 \begin{remark}[Work in progress]
 \label{rem:wip-multi-pair-subsection}
@@ -3674,6 +3850,23 @@ are harmless in the normalized regime or state the proposition explicitly
 in conditional form.
 \end{remark}
 
+\begin{remark}[Work in progress: strengthened two-pair invariant]
+\label{rem:wip-strengthened-two-pair-invariant}
+The current two-pair rigidity statement is still phrased in terms of the cubic
+leading line and the first residual trace channel. The later working analysis
+indicates that the more natural invariant map is
+\[
+\Phi(h):=\bigl(c(h),u_5(h),v_5(h),\Delta_7(h)\bigr),
+\]
+or in normalized form
+\[
+\Psi(h):=\left(\frac{u_5(h)}{c(h)},\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right).
+\]
+The intended sharpened two-pair statement is that a genuine bad two-pair core
+forces coincidence of this normalized invariant map, or of a lower-dimensional
+projection of it, up to the interaction corrections.
+\end{remark}
+
 \begin{definition}[Minimal bad core]
 \label{def:minimal-bad-core}
 A normalized finite core is called bad if its quotient odd germ vanishes
@@ -3727,6 +3920,59 @@ right framework for extending the one-pair and two-pair projective rigidity
 analysis to general finite cores, but the present draft has not yet proved
 that the resulting exceptional configuration is empty or contained entirely
 in the degenerate locus.
+\end{remark}
+
+\begin{remark}[Work in progress: planar convexity reformulation]
+\label{rem:wip-planar-convexity-reformulation}
+The later working analysis suggests that the remaining generic obstruction
+should be reformulated as a planar geometry problem for the curve
+\[
+h\longmapsto \left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right).
+\]
+On the open set where
+\[
+c(h)\neq 0,
+\qquad
+\frac{d}{dh}\!\left(\frac{v_5(h)}{c(h)}\right)\neq 0,
+\qquad
+\det\!\begin{pmatrix}
+x'(h) & y'(h)\\
+x''(h) & y''(h)
+\end{pmatrix}\neq 0,
+\]
+with
+\[
+x(h)=\frac{v_5(h)}{c(h)},
+\qquad
+y(h)=\frac{\Delta_7(h)}{c(h)},
+\]
+the image breaks into strictly convex graph components. On each such component,
+a line meets the curve in at most two points. The remaining generic global
+obstruction is therefore reduced to the possibility of a common four-secant
+line meeting two separated convex components twice each.
+
+In this formulation, the unresolved endgame is no longer local quintic
+bookkeeping but endpoint/support-function geometry for the planar curve
+$(v_5/c,\Delta_7/c)$.
+\end{remark}
+
+\begin{remark}[Current state of the argument]
+\label{rem:current-state-of-argument}
+At this stage, the local one-pair analysis has progressed beyond the present
+trace-only formulation: the later working notes identify a fixed-sector
+quintic/septic package
+\[
+A_5^{\mathfrak f}(h),\qquad \Delta_7(h),
+\]
+and a corresponding planar invariant curve
+\[
+h\longmapsto \left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right).
+\]
+The remaining generic obstruction is best viewed as a global planar secant
+problem for that curve together with the final compactness/exclusion bridge.
+Thus the bottleneck is no longer the existence of a first residual witness, but
+the endpoint geometry of the strengthened one-pair invariant curve and its use
+in the multi-pair/minimal-core endgame.
 \end{remark}
 
 \section{Final contradiction}
