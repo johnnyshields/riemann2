@@ -2972,6 +2972,74 @@ the product $v(h)(\gamma(h)-\alpha(h))^{\lin}$ contains the monomial
 with nonzero coefficient.
 \end{lemma}
 
+\begin{lemma}[Parity of the whitening expansion at a diagonal base]
+\label{lem:whitening-parity}
+Let
+\[
+G_0=\diag(\lambda_1,\lambda_2),
+\qquad \lambda_1,\lambda_2>0,
+\]
+and let
+\[
+X(H):=(G_0+H)^{-1/2}
+\]
+for $H$ sufficiently small. Write
+\[
+E:=\left\{
+\begin{pmatrix}
+*&0\\0&*
+\end{pmatrix}
+\right\},
+\qquad
+O:=\left\{
+\begin{pmatrix}
+0&*\\ *&0
+\end{pmatrix}
+\right\}.
+\]
+Then every multilinear Taylor coefficient of $X(H)$ has definite matrix
+parity: a coefficient depending on perturbation factors
+$H_1,\dots,H_n$ lies in $E$ if an even number of the $H_j$ lie in
+$O$, and lies in $O$ if an odd number of the $H_j$ lie in $O$.
+
+In particular, diagonal input gives diagonal output at linear order, and a
+bilinear coefficient with one diagonal and one off-diagonal input is
+off-diagonal.
+\end{lemma}
+
+\begin{proof}
+Use the holomorphic functional calculus
+\[
+(G_0+H)^{-1/2}
+=
+\frac{1}{2\pi i}\oint_{\Gamma} z^{-1/2}(zI-G_0-H)^{-1}\,dz,
+\]
+where $\Gamma$ encloses the spectrum of $G_0+H$. Expanding the resolvent,
+\[
+(zI-G_0-H)^{-1}
+=
+R(z)+R(z)HR(z)+R(z)HR(z)HR(z)+\cdots,
+\]
+with
+\[
+R(z):=(zI-G_0)^{-1},
+\]
+every factor $R(z)$ is diagonal because $G_0$ is diagonal. Hence the
+matrix parity of each word
+\[
+R(z)H_{i_1}R(z)H_{i_2}\cdots R(z)H_{i_n}R(z)
+\]
+is exactly the parity of the product $H_{i_1}\cdots H_{i_n}$. Since
+\[
+E\cdot E\subset E,\qquad
+E\cdot O\subset O,\qquad
+O\cdot E\subset O,\qquad
+O\cdot O\subset E,
+\]
+the parity rule follows. Integrating over $z$ preserves the subspaces
+$E$ and $O$.
+\end{proof}
+
 \begin{lemma}[No-cancellation of the quintic trace witness]
 \label{lem:no-cancellation-quintic-trace}
 The monomial
@@ -2979,34 +3047,143 @@ The monomial
 \kappa(h)\,\eta_2(h)\,q'''''\!(h)
 \]
 appearing in Lemma~\ref{lem:quintic-trace-witness} is not produced by any
-other quintic contribution to $\operatorname{tr}J_5^{\pair}(h)$. Consequently
+other quintic contribution to $\operatorname{tr}J_5^{\pair}(h)$. More
+precisely, on the graded slice corresponding to
+\[
+(K_1,\eta_2,q^{(5)}),
+\]
+the only contributing channels in
+$\operatorname{tr}J_5^{\pair}(h)$ are
+\[
+-2\kappa(h)\,(x_1-x_2)r(h)
+\qquad\text{and}\qquad
+-2\kappa(h)\,v(h)\bigl(\gamma(h)-\alpha(h)\bigr),
+\]
+and their total coefficient of
+$\kappa(h)\eta_2(h)q^{(5)}(h)$ is nonzero. Consequently
 \[
 \operatorname{tr}J_5^{\pair}(h)\not\equiv 0
 \]
 on the generic one-pair region.
 \end{lemma}
 
-\begin{remark}[Work in progress]
-\label{rem:wip-no-cancellation-quintic-trace}
-This lemma is presently a bookkeeping target rather than a fully closed
-proof. The intended argument isolates the monomial
-$\kappa(h)\eta_2(h)q^{(5)}(h)$ inside $\operatorname{tr}J_5^{\pair}(h)$ and
-shows that no other quintic contribution produces the same monomial with
-opposite coefficient. For drafting purposes, this lemma should be read as
-the main remaining local technical bottleneck.
-\end{remark}
+\begin{proof}
+Fix $h$ and isolate the graded slice
+\[
+\kappa(h)\,\eta_2(h)\,q^{(5)}(h).
+\]
+
+We first exclude all non-$K_1$ contributions. Same-point quintic terms
+carry no $\kappa$-factor, so they cannot contribute. A $K_5$-transport
+term leaves no same-point degree available, and a $K_3$-transport term
+leaves only same-point degree $2$, whereas the factor $q^{(5)}(h)$
+first appears in same-point degree $3$. Hence the target monomial can
+occur only in the $K_1$-transport sector.
+
+Now consider the same-point expansion. By the explicit formula
+\[
+G_{m,\pm}^{\corr}(s)
+=
+\frac1\pi
+\begin{pmatrix}
+2q(t_\pm) & \frac12 q'(t_\pm)\\[.5ex]
+\frac12 q'(t_\pm) & \frac1{12}(q''(t_\pm)+2q(t_\pm)^3)
+\end{pmatrix},
+\]
+the factor $q^{(5)}(h)$ first appears only in the cubic same-point
+coefficient $G_3$, and there only in the diagonal sector, namely through
+the cubic Taylor term of the $(2,2)$-entry coming from $q''(t_\pm)$.
+Therefore, by Lemma~\ref{lem:whitening-parity}, the linear
+$q^{(5)}$-contribution to $X_3$ is diagonal. In particular it contributes
+to $\gamma-\alpha$, but not to $\beta$.
+
+Likewise, the $\eta_2(h)$-slice of $X_1(h)$ is off-diagonal, because
+\[
+v(h)=-\frac{1}{4\pi(s_1+s_2)}\,\eta_2(h).
+\]
+Applying Lemma~\ref{lem:whitening-parity} again, the mixed
+$(\eta_2,q^{(5)})$-slice of $X_4$ is off-diagonal. Hence it contributes
+to $r$, but not to the diagonal difference $u-w$.
+
+It follows that on the graded slice
+$(K_1,\eta_2,q^{(5)})$, the term
+\[
+-2\kappa(h)\,\beta(h)\bigl(u(h)-w(h)\bigr)
+\]
+does not contribute at all. Thus the only surviving $K_1$-channels are
+\[
+-2\kappa(h)\,(x_1-x_2)r(h)
+\qquad\text{and}\qquad
+-2\kappa(h)\,v(h)\bigl(\gamma(h)-\alpha(h)\bigr).
+\]
+
+To compute their combined coefficient, it suffices by multilinearity to
+restrict to the two perturbation directions carrying the relevant tags:
+an off-diagonal first-order perturbation $A$ for the $\eta_2$-slice and
+a diagonal third-order perturbation $D$ for the $q^{(5)}$-slice.
+Accordingly, write
+\[
+G_0=\diag(a^2,b^2),
+\qquad
+A=
+\begin{pmatrix}
+0&u\\u&0
+\end{pmatrix},
+\qquad
+D=
+\begin{pmatrix}
+0&0\\0&d
+\end{pmatrix},
+\]
+and expand
+\[
+X(\varepsilon,\delta):=(G_0+\varepsilon A+\delta D)^{-1/2}
+=
+X_0+\varepsilon U+\delta V+\varepsilon\delta W+O(\varepsilon^2,\delta^2).
+\]
+Solving the identity
+\[
+X(\varepsilon,\delta)\,(G_0+\varepsilon A+\delta D)\,X(\varepsilon,\delta)=I
+\]
+order by order gives
+\[
+U_{12}=-\frac{u}{ab(a+b)},
+\qquad
+V_{22}=-\frac{d}{2b^3},
+\qquad
+W_{12}=\frac{du(a+2b)}{2ab^3(a+b)^2}.
+\]
+Here $U_{12}$ is the $\eta_2$-slice of $v$, $V_{22}$ is the
+$q^{(5)}$-slice of $\gamma-\alpha$, and $W_{12}$ is the mixed
+$(\eta_2,q^{(5)})$-slice of $r$. Therefore the total coefficient of the
+target slice inside
+\[
+(x_1-x_2)r+v(\gamma-\alpha)
+\]
+is
+\[
+\left(\frac1a-\frac1b\right)W_{12}+U_{12}V_{22}
+=
+\frac{du}{a^2b^2(a+b)^2},
+\]
+which is nonzero.
+
+Thus the monomial
+$\kappa(h)\eta_2(h)q^{(5)}(h)$ occurs in
+$\operatorname{tr}J_5^{\pair}(h)$ with nonzero total coefficient and is not
+canceled by any other quintic contribution. Hence
+\[
+\operatorname{tr}J_5^{\pair}(h)\not\equiv 0.
+\]
+\end{proof}
 
 \begin{proposition}[Nontrivial first residual class]
 \label{prop:first-residual-class-nontrivial}
-Assume the generic nondegeneracy hypotheses of
-Proposition~\ref{prop:cubic-leading-order} and the no-cancellation statement
-of Lemma~\ref{lem:no-cancellation-quintic-trace}.
-Then the first residual class is nonzero:
+For $h\in \mathcal U_{\mathrm{cub}}$, the first residual class is nonzero:
 \[
 \overline v_1(h)\neq 0
-\quad\text{in }Q/\ell_h
+\quad\text{in }Q/\ell_h.
 \]
-on the generic one-pair region.
 Equivalently, the quintic quotient coefficient is not collinear with the
 cubic leading line:
 \[
@@ -3016,7 +3193,8 @@ Hence the one-pair quotient odd germ is not projectively constant.
 \end{proposition}
 
 \begin{proof}
-By Proposition~\ref{prop:cubic-leading-order}, the cubic quotient coefficient
+By Proposition~\ref{prop:cubic-leading-order}, for $h\in\mathcal U_{\mathrm{cub}}$
+the cubic quotient coefficient
 \[
 v_0(h)=[J_3^{\pair}(h)]
 \]
@@ -3035,15 +3213,6 @@ $Q/\ell_h$ is nonzero:
 Thus the residual germ is nontrivial at the first step, and the one-pair
 quotient odd germ cannot be projectively constant.
 \end{proof}
-
-\begin{remark}[Work in progress]
-\label{rem:wip-first-residual-class-nontrivial}
-This proposition is conditional on the no-cancellation mechanism in
-Lemma~\ref{lem:no-cancellation-quintic-trace}. Structurally, the argument is
-in place: cubic order supplies the generic leading line, and quintic trace
-supplies the first residual witness. The remaining task is to make the
-quintic bookkeeping completely explicit.
-\end{remark}
 
 \subsection{From the one-pair residual germ to two-pair and minimal-core rigidity}
 
