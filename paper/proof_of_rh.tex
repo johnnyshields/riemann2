@@ -2772,41 +2772,140 @@ Consequently
 so the generic leading quotient order is at least $3$.
 \end{proposition}
 
+\begin{lemma}[Rigidity of the cubic scalar $B$]
+\label{lem:B-rigidity}
+Let $I$ be a connected parameter interval, and define
+\[
+B(h):=\frac{q(h)^2q'(h)}{4}-\frac{q'''(h)}{48}.
+\]
+Then the following are equivalent:
+\begin{enumerate}
+\item $B\equiv 0$ on $I$;
+\item $q'''=12q^2q'$ on $I$;
+\item there exists a constant $C_0\in \mathbf C$ such that
+\[
+q''=4q^3+C_0
+\qquad\text{on }I.
+\]
+\end{enumerate}
+In particular, the hypothesis $B\not\equiv 0$ is equivalent to excluding
+the special cubic ODE $q''=4q^3+C_0$.
+\end{lemma}
+
+\begin{proof}
+By definition,
+\[
+48\,B = 12q^2q' - q'''.
+\]
+Hence $B\equiv 0$ is equivalent to
+\[
+q'''=(4q^3)'.
+\]
+Integrating on the connected interval $I$ gives
+\[
+q''=4q^3+C_0
+\]
+for some constant $C_0\in \mathbf C$. The converse is immediate by
+differentiation.
+\end{proof}
+
 \begin{proposition}[Generic cubic leading quotient order]
 \label{prop:cubic-leading-order}
-Let $J_3^{\pair}(h)$ denote the cubic jet of the normalized one-pair family.
-Then the cubic value-family $V_{\val}^{(3)}$ is confined to the off-diagonal
-sector. Moreover, the diagonal part of the actual cubic jet is
+Let $I$ be a connected one-pair parameter interval, and let
+$J_3^{\pair}(h)$ denote the cubic jet of the normalized one-pair family.
+
+Assume:
+\begin{enumerate}
+\item the cubic value-family satisfies
+\[
+V_{\val}^{(3)}
+\subset
+\left\{
+\begin{pmatrix}
+0&*\\ *&0
+\end{pmatrix}
+\right\};
+\]
+\item the background same-point block is nondegenerate, so that the diagonal
+entries of $X_0=G_0^{-1/2}$ satisfy $x_1\neq x_2$;
+\item the scalar $v(h)$ is not identically zero on $I$;
+\item $B(h)\not\equiv 0$ on $I$, equivalently, by
+Lemma~\ref{lem:B-rigidity}, $q$ does not satisfy
+\[
+q''=4q^3+C_0
+\]
+identically on $I$.
+\end{enumerate}
+
+Define the cubic-generic region
+\[
+\mathcal U_{\mathrm{cub}}
+:=
+\{\,h\in I:\ v(h)B(h)\neq 0\,\}.
+\]
+Then $\mathcal U_{\mathrm{cub}}$ is open and dense in $I$, and for every
+$h\in \mathcal U_{\mathrm{cub}}$,
+\[
+[J_3^{\pair}(h)]\neq 0
+\quad\text{in}\quad
+\mathcal J_3/V_{\val}^{(3)}.
+\]
+
+More precisely, the image of $J_3^{\pair}(h)$ in the cubic quotient has
+nonzero diagonal-traceless component
+\[
+v(h)\,B(h)\,(x_1-x_2)
+\begin{pmatrix}
+1&0\\0&-1
+\end{pmatrix}.
+\]
+Consequently,
+\[
+F_h(z)=v_0(h)z^3+v_1(h)z^5+\cdots,
+\qquad
+v_0(h):=[J_3^{\pair}(h)]\neq 0
+\]
+for $h\in \mathcal U_{\mathrm{cub}}$. Since the first quotient order is
+generically trivial, the generic leading quotient order is therefore exactly
+$3$ on $\mathcal U_{\mathrm{cub}}$.
+\end{proposition}
+
+\begin{proof}
+By assumption,
 \[
 \operatorname{diag}J_3^{\pair}(h)
 =
 v(h)\,B(h)\,(x_1-x_2)
 \begin{pmatrix}
 1&0\\0&-1
-\end{pmatrix},
+\end{pmatrix}.
 \]
-where $x_1\neq x_2$ are the diagonal entries of $X_0=G_0^{-1/2}$,
-$v(h)$ is the off-diagonal entry of $X_1(h)$, and
-\[
-B(h)=\frac{q(h)^2q'(h)}{4}-\frac{q'''(h)}{48}.
-\]
-In particular, if
-\[
-v(h)\not\equiv 0,\qquad B(h)\not\equiv 0,\qquad x_1\neq x_2,
-\]
-then
-\[
-[J_3^{\pair}(h)]\neq 0
-\quad\text{in}\quad
-\mathcal J_3/V_{\val}^{(3)}.
-\]
-Hence, on the generic one-pair region,
-\[
-F_h(z)=v_0(h)z^3+v_1(h)z^5+\cdots,
-\qquad
-v_0(h):=[J_3^{\pair}(h)]\neq 0.
-\]
-\end{proposition}
+Because $V_{\val}^{(3)}$ is confined to the off-diagonal sector, it cannot
+cancel any nonzero diagonal component. Hence for every $h$ with
+$v(h)B(h)(x_1-x_2)\neq 0$, the cubic quotient class
+$[J_3^{\pair}(h)]$ is nonzero.
+
+Since $x_1\neq x_2$ is fixed and both $v$ and $B$ are not identically
+zero, the set $\mathcal U_{\mathrm{cub}}$ is nonempty; if the dependence on
+$h$ is real-analytic, its complement is a proper analytic subset, hence
+$\mathcal U_{\mathrm{cub}}$ is open and dense. Finally,
+Proposition~\ref{prop:first-order-quotient-trivial} shows that the leading
+quotient order is at least $3$, while the present argument shows that it is
+equal to $3$ on $\mathcal U_{\mathrm{cub}}$.
+\end{proof}
+
+\begin{remark}[What is genuinely generic here]
+\label{rem:cubic-leading-genericity}
+The cubic-leading statement depends on three logically distinct inputs:
+\begin{enumerate}
+\item $x_1\neq x_2$, a background same-point nondegeneracy condition;
+\item $v\not\equiv 0$, a one-pair nonfreezing condition;
+\item exclusion of the special ODE $q''=4q^3+C_0$, equivalently
+$B\not\equiv 0$.
+\end{enumerate}
+This separates the structural cubic mechanism from the residual quintic
+bookkeeping needed later.
+\end{remark}
 
 \begin{definition}[Cubic leading line and first residual class]
 \label{def:cubic-leading-line}
