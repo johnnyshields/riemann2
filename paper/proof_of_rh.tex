@@ -2861,6 +2861,13 @@ all of $M_2(\mathbf C)$. The present proposition records that intended
 generic outcome.
 \end{remark}
 
+\begin{remark}[Audit: first-order surjectivity]
+\label{rem:audit-first-order-surjectivity}
+The first-order generator map is now explicit, but the proof that its image is
+all of $M_2(\mathbf C)$ under the stated generic nondegeneracy assumptions
+should still be audited as a separate finite-dimensional linear-algebra check.
+\end{remark}
+
 \begin{remark}[Structural split still to be made explicit]
 \label{rem:wip-raw-vs-full-value-family}
 At first order the family $V_{\val}^{(1)}$ fills $M_2(\mathbf C)$, while
@@ -3513,6 +3520,15 @@ gives a fully rigorous open-dense nonvanishing theorem for the first residual
 class.
 \end{remark}
 
+\begin{remark}[Audit: quintic pure-value trace annihilation]
+\label{rem:audit-quintic-pure-value-trace}
+The generic first residual theorem presently depends on the claim that trace
+annihilates the quintic pure-value slice $V_{\val}^{(5)}(h)$, or at least its
+image in the residual quotient. This remains the main local order-$5$
+structural statement to audit if one wants the first residual layer to be fully
+closed without additional hypotheses.
+\end{remark}
+
 \begin{remark}[Beyond the first residual trace]
 \label{rem:beyond-first-residual-trace}
 The quintic trace is the first scalar residual detector, but it is not the end
@@ -3621,24 +3637,6 @@ incomplete is the full closed coefficient formula for the total septic
 fixed-sector pair $(u_7,v_7)$ after all order-7 sectors are included.
 These are nevertheless the natural variables for the geometric reformulation
 of the multi-pair problem.
-\end{remark}
-
-\begin{remark}[Work in progress: normalized affine one-pair invariant curve]
-\label{rem:wip-normalized-affine-one-pair-curve}
-The later working analysis suggests the normalized affine chart
-\[
-x(h):=\frac{v_5(h)}{c(h)},
-\qquad
-y(h):=\frac{\Delta_7(h)}{c(h)}
-\]
-on the cubic-generic region. The intended geometric program is to study the
-planar curve
-\[
-h\longmapsto (x(h),y(h))
-\]
-rather than only the scalar quintic trace. In this formulation, the remaining
-generic obstruction is reduced to common four-secant lines of this planar
-curve.
 \end{remark}
 
 \begin{proposition}[Explicit fixed-sector formulas at quintic order]
@@ -3920,33 +3918,14 @@ the direct $q^{(7)}$-slice satisfies
 \]
 \end{proof}
 
-\begin{remark}[Status of explicit fixed-sector formulas]
-\label{rem:status-explicit-fixed-sector-formulas}
-Proposition~\ref{prop:explicit-quintic-fixed-sector} gives an explicit
-coefficient formula for the quintic commutator contribution to
-$A_5^{\mathfrak f}$, and
-Proposition~\ref{prop:explicit-septic-k1-fixed-sector} gives an explicit
-formula for the septic $K_1$-transport contribution to
-$A_7^{\mathfrak f}$. What is still not known in full explicit form is the
-total septic fixed-sector coefficient after all order-7 sectors are included.
-Thus the formulas above should be read as the explicit transport-level
-contribution underlying the second residual determinant $\Delta_7$, not yet
-as a closed formula for the full total pair $(u_7,v_7)$.
-\end{remark}
-
-\begin{remark}[Status of the fixed-sector refinement]
-\label{rem:wip-status-fixed-sector-refinement}
-The objects
-\[
-A_5^{\mathfrak f}(h),\qquad
-A_7^{\mathfrak f}(h),\qquad
-\Delta_7(h)
-\]
-are now the correct later-stage local variables, but the current draft has not
-yet fully rewritten the one-pair section in these coordinates. In particular,
-the explicit translation of $u_5,v_5,u_7,v_7,\Delta_7$ into the existing
-coefficient notation $(u,v,w,\alpha,\beta,\gamma,r,\dots)$ remains
-incomplete beyond the structural identities recorded above.
+\begin{remark}[Audit: full septic fixed-sector coefficient]
+\label{rem:audit-full-septic-fixed-sector}
+The draft now contains explicit coefficient formulas for the quintic
+commutator contribution to $A_5^{\mathfrak f}$ and for the septic
+$K_1$-transport contribution to $A_7^{\mathfrak f}$. What still needs to be
+audited is the contribution of the remaining order-$7$ sectors to the full
+total septic fixed-sector pair $(u_7,v_7)$, and hence to the full total
+second residual determinant $\Delta_7$.
 \end{remark}
 
 \subsection{Normalized planar curve and curvature bridge}
@@ -4094,6 +4073,200 @@ M(h)N'(h)-N(h)M'(h)\neq 0,
 the normalized planar curve $\Gamma(h)$ is a strictly convex graph in the
 affine chart $(\rho_1,\rho_2)$. Thus the remaining global obstruction is a
 common four-secant line meeting two separated convex components twice each.
+\end{remark}
+
+\begin{definition}[Projective Wronskian of the strengthened one-pair triple]
+\label{def:projective-wronskian-c-v5-delta7}
+Define
+\[
+W(h):=
+\det\!
+\begin{pmatrix}
+c(h) & v_5(h) & \Delta_7(h)\\
+c'(h) & v_5'(h) & \Delta_7'(h)\\
+c''(h) & v_5''(h) & \Delta_7''(h)
+\end{pmatrix}.
+\]
+\end{definition}
+
+\begin{proposition}[Projective-Wronskian bridge]
+\label{prop:projective-wronskian-bridge}
+With $M(h)$ and $N(h)$ as in
+Definition~\ref{def:MN-normalized-curve}, one has
+\[
+M(h)N'(h)-N(h)M'(h)=c(h)\,W(h).
+\]
+Consequently,
+\[
+K_\Gamma(h)=\frac{W(h)}{c(h)^3}
+\]
+on the region where $c(h)\neq 0$.
+\end{proposition}
+
+\begin{proof}
+Using
+\[
+M=c\,v_5'-c'v_5,
+\qquad
+N=c\,\Delta_7'-c'\Delta_7,
+\]
+a direct expansion gives
+\[
+M N'-N M'
+=
+(c\,v_5'-c'v_5)(c\,\Delta_7''-c''\Delta_7)
+-
+(c\,\Delta_7'-c'\Delta_7)(c\,v_5''-c''v_5).
+\]
+Expanding and regrouping yields
+\[
+M N'-N M'
+=
+c\,
+\det\!
+\begin{pmatrix}
+c & v_5 & \Delta_7\\
+c' & v_5' & \Delta_7'\\
+c'' & v_5'' & \Delta_7''
+\end{pmatrix}
+=
+c\,W.
+\]
+The displayed formula for $K_\Gamma$ now follows from
+Proposition~\ref{prop:curvature-bridge-normalized-curve}.
+\end{proof}
+
+\begin{proposition}[ECT intervals for the strengthened one-pair triple]
+\label{prop:ect-intervals-c-v5-delta7}
+Let $I$ be a connected interval on which
+\[
+c(h)\neq 0,
+\qquad
+M(h)\neq 0,
+\qquad
+W(h)\neq 0.
+\]
+Then the triple
+\[
+(c,\ v_5,\ \Delta_7)
+\]
+is an extended complete Chebyshev system on $I$. Equivalently, every
+nontrivial linear combination
+\[
+A\,c(h)+B\,v_5(h)+C\,\Delta_7(h)
+\]
+has at most two zeros on $I$, counting multiplicity.
+
+In particular, in the affine chart
+\[
+x=\frac{v_5}{c},\qquad y=\frac{\Delta_7}{c},
+\]
+every affine line meets $\Gamma(I)$ in at most two points, counting
+tangency with multiplicity.
+\end{proposition}
+
+\begin{proof}
+On $I$, the successive initial Wronskians are
+\[
+c,\qquad
+\det\!\begin{pmatrix}c&v_5\\ c'&v_5'\end{pmatrix}=M,
+\qquad
+\det\!\begin{pmatrix}
+c&v_5&\Delta_7\\
+c'&v_5'&\Delta_7'\\
+c''&v_5''&\Delta_7''
+\end{pmatrix}=W.
+\]
+Since all three are nonvanishing on $I$, the standard ECT criterion applies.
+The affine-line statement follows by writing
+\[
+A\,c+B\,v_5+C\,\Delta_7=0
+\]
+as the equation of a line in the chart $(v_5/c,\Delta_7/c)$.
+\end{proof}
+
+\begin{definition}[Tangent-separator kernel]
+\label{def:tangent-separator-kernel}
+Let
+\[
+F(h):=(c(h),v_5(h),\Delta_7(h)).
+\]
+For $s,t$ in the generic region, define
+\[
+K(s,t):=\det\!\bigl(F(s),F'(s),F(t)\bigr).
+\]
+For fixed $s$, the zeros of $t\mapsto K(s,t)$ are exactly the
+intersections of the tangent line at $\Gamma(s)$ with the curve
+$\Gamma(t)$.
+\end{definition}
+
+\begin{lemma}[Basic properties of the tangent-separator kernel]
+\label{lem:tangent-separator-basic-properties}
+For every $s$ in the generic region,
+\[
+K(s,s)=0,
+\qquad
+\partial_tK(s,s)=0,
+\qquad
+\partial_t^2K(s,s)=W(s).
+\]
+In particular, on any interval where $W$ has fixed sign, the tangent line at
+$\Gamma(s)$ is locally supporting.
+\end{lemma}
+
+\begin{proof}
+The first two identities follow because, at $t=s$, the third column of the
+determinant equals $F(s)$, and after differentiating once in $t$ it equals
+$F'(s)$. Differentiating a second time gives
+\[
+\partial_t^2K(s,s)=
+\det\!\bigl(F(s),F'(s),F''(s)\bigr)=W(s).
+\qedhere
+\]
+\end{proof}
+
+\begin{remark}[Audit: direct septic witness]
+\label{rem:audit-direct-septic-witness}
+The use of Proposition~\ref{prop:rho2-not-affine-in-rho1} still depends on the
+claim that the direct $q^{(7)}$-driven slice of $\Delta_7$ is generically
+nonzero. The current draft contains the explicit $K_1$-transport formulas
+and the $I$-directionality of the direct $q^{(7)}$-slice, but the final
+generic noncancellation statement for that slice should still be audited as a
+standalone local theorem.
+\end{remark}
+
+\begin{remark}[Audit: ECT criterion usage]
+\label{rem:audit-ect-criterion-usage}
+Proposition~\ref{prop:ect-intervals-c-v5-delta7} uses the standard ECT
+criterion for triples of $C^2$ functions with nonvanishing successive initial
+Wronskians. The current draft should retain an explicit audit note that the
+regularity and sign hypotheses needed for this criterion are satisfied on the
+intended generic intervals.
+\end{remark}
+
+\begin{remark}[Audit: tangent-separator sign regularity]
+\label{rem:audit-tangent-separator-sign-regularity}
+The remaining global obstruction is the sign behavior of
+\[
+K(s,t)=\det(F(s),F'(s),F(t))
+\]
+across adjacent ECT intervals. What still needs to be audited is the claim that
+for adjacent intervals $I_1<I_2$, one has
+\[
+K(s,t)\neq 0
+\qquad (s\in I_2,\ t\in I_1),
+\]
+equivalently, that tangent lines from the right interval do not meet the
+adjacent left interval.
+\end{remark}
+
+\begin{remark}[Audit: global no-four-secant theorem]
+\label{rem:audit-global-no-four-secant}
+Assuming the adjacent tangent-separator sign theorem, the support intervals of
+distinct ECT branches are disjoint, and hence no affine line can be 2-secant to
+two different branches. The deduction from adjacent tangent separation to a
+global no-four-secant theorem should still be audited carefully in the final
+endgame writeup.
 \end{remark}
 
 \subsection{From the one-pair residual germ to two-pair and minimal-core rigidity}
@@ -4395,38 +4568,27 @@ h\longmapsto \left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right).
 \]
 \end{remark}
 
-\begin{remark}[Work in progress: planar convexity reformulation]
+\begin{remark}[Work in progress: planar ECT and tangent-separator reformulation]
 \label{rem:wip-planar-convexity-reformulation}
 The later working analysis suggests that the remaining generic obstruction
-should be reformulated as a planar geometry problem for the curve
+should be reformulated in terms of the normalized planar curve
 \[
-h\longmapsto \left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right).
+\Gamma(h)=\left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right)
 \]
-On the open set where
+and the tangent-separator kernel
 \[
-c(h)\neq 0,
+K(s,t)=\det(F(s),F'(s),F(t)),
 \qquad
-\frac{d}{dh}\!\left(\frac{v_5(h)}{c(h)}\right)\neq 0,
-\qquad
-\det\!\begin{pmatrix}
-x'(h) & y'(h)\\
-x''(h) & y''(h)
-\end{pmatrix}\neq 0,
+F(h)=(c(h),v_5(h),\Delta_7(h)).
 \]
-with
+On intervals where
 \[
-x(h)=\frac{v_5(h)}{c(h)},
-\qquad
-y(h)=\frac{\Delta_7(h)}{c(h)},
+c(h)\neq 0,\qquad M(h)\neq 0,\qquad W(h)\neq 0,
 \]
-the image breaks into strictly convex graph components. On each such component,
-a line meets the curve in at most two points. The remaining generic global
-obstruction is therefore reduced to the possibility of a common four-secant
-line meeting two separated convex components twice each.
-
-In this formulation, the unresolved endgame is no longer local quintic
-bookkeeping but endpoint/support-function geometry for the planar curve
-$(v_5/c,\Delta_7/c)$.
+the triple $(c,v_5,\Delta_7)$ is an ECT system, so every affine line meets
+the corresponding branch of $\Gamma$ in at most two points. The remaining
+global obstruction is therefore not same-branch secancy, but the possibility
+that tangent or secant lines interact across adjacent ECT intervals.
 \end{remark}
 
 \begin{remark}[Current geometric bottleneck]
@@ -4447,12 +4609,36 @@ separation statement for this curve.
 The local one-pair analysis now consists of three layers:
 the cubic leading scalar $c(h)$, the quintic fixed-sector refinement
 $A_5^{\mathfrak f}(h)$, and the septic determinant $\Delta_7(h)$.
-The remaining generic obstacle is global: converting the geometry of the
-normalized planar curve
+These determine the normalized planar curve
 \[
-h\longmapsto \left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right)
+\Gamma(h)=\left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right),
 \]
-into a full exclusion of bad multi-pair cores.
+together with the derivative numerators
+\[
+M(h)=c(h)v_5'(h)-c'(h)v_5(h),
+\qquad
+N(h)=c(h)\Delta_7'(h)-c'(h)\Delta_7(h),
+\]
+and the projective Wronskian
+\[
+W(h)=
+\det\!
+\begin{pmatrix}
+c&v_5&\Delta_7\\
+c'&v_5'&\Delta_7'\\
+c''&v_5''&\Delta_7''
+\end{pmatrix}.
+\]
+On intervals where $c$, $M$, and $W$ do not vanish, the triple
+$(c,v_5,\Delta_7)$ is an ECT system, so same-branch secant/tangent
+obstructions are excluded. The remaining generic obstacle is global:
+sign-regularity of the tangent-separator kernel
+\[
+K(s,t)=\det(F(s),F'(s),F(t)),
+\qquad
+F=(c,v_5,\Delta_7),
+\]
+across adjacent ECT intervals, and the resulting no-four-secant endgame.
 \end{remark}
 
 \section{Final contradiction}
