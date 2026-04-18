@@ -4195,9 +4195,10 @@ For $s,t$ in the generic region, define
 \[
 K(s,t):=\det\!\bigl(F(s),F'(s),F(t)\bigr).
 \]
-For fixed $s$, the zeros of $t\mapsto K(s,t)$ are exactly the
-intersections of the tangent line at $\Gamma(s)$ with the curve
-$\Gamma(t)$.
+For fixed $s$, the zeros of $t\mapsto K(s,t)$ are exactly the points
+$\Gamma(t)$ lying on the affine tangent line to $\Gamma$ at $\Gamma(s)$.
+Equivalently, $K(s,t)=0$ is the tangent-separator incidence condition for
+the tangent at $s$ and the point at $t$.
 \end{definition}
 
 \begin{lemma}[Basic properties of the tangent-separator kernel]
@@ -4224,6 +4225,18 @@ $F'(s)$. Differentiating a second time gives
 \qedhere
 \]
 \end{proof}
+
+\begin{remark}
+If, in addition, $\partial_tK(s,t)=0$, then
+\[
+\det(F(s),F'(s),F'(t))=0,
+\]
+so the tangent direction at $t$ lies on the same affine line. Hence
+\[
+K(s,t)=0,\qquad \partial_tK(s,t)=0
+\]
+is exactly the common-tangent-line condition.
+\end{remark}
 
 \begin{lemma}[Compact first-zero reduction on adjacent intervals]
 \label{lem:compact-first-zero-reduction}
@@ -4291,15 +4304,16 @@ K(s,t)=\det(F(s),F'(s),F(t)),
 \qquad
 \partial_tK(s,t)=\det(F(s),F'(s),F'(t))
 \]
-show that $K(s_*,t_*)=0$ means $\Gamma(t_*)$ lies on the tangent line at
-$\Gamma(s_*)$, while $\partial_tK(s_*,t_*)=0$ means the tangent direction
-at $t_*$ lies on the same line. Thus the line is tangent at both points.
+show that $K(s_*,t_*)=0$ places $\Gamma(t_*)$ on the tangent line at
+$\Gamma(s_*)$, while $\partial_tK(s_*,t_*)=0$ places the tangent direction
+at $t_*$ on that same line. Hence the line is tangent to $\Gamma$ at both
+$\Gamma(s_*)$ and $\Gamma(t_*)$; that is, it is a common tangent line.
 \end{proof}
 
-\begin{proposition}[Adjacent slope-range separation under generic boundary hypotheses]
+\begin{proposition}[Adjacent slope-range separation]
 \label{prop:adjacent-slope-range-separation}
 Let $I_1<I_2$ be adjacent ECT intervals, meeting at a boundary point $h_b$.
-Assume one of the following generic boundary hypotheses holds:
+Assume one of the following boundary hypotheses holds:
 
 \begin{enumerate}
 \item $W(h_b)=0$, $M(h_b)\neq 0$, the slope
@@ -4311,7 +4325,9 @@ extends continuously across $h_b$, and $W$ changes sign across $h_b$;
 \item $M(h_b)=0$, $M'(h_b)\neq 0$, and $N(h_b)\neq 0$.
 \end{enumerate}
 
-Then the interior tangent-slope ranges of $I_1$ and $I_2$ are disjoint.
+Then the interior tangent-slope ranges of $I_1$ and $I_2$ are disjoint; in
+particular, adjacent ECT intervals cannot share an interior common tangent
+slope.
 \end{proposition}
 
 \begin{proof}
@@ -4409,7 +4425,7 @@ the function
 t\longmapsto K(s,t)
 \]
 has no zero on $I_1$. Hence $L$ does not meet $\Gamma(I_1)$, so
-$\Gamma(I_1)$ lies strictly on one side of every support/tangent line of
+$\Gamma(I_1)$ lies strictly on one side of every tangent-support line of
 $\Gamma(I_2)$.
 
 In support-function language, for every slope $m$ realized on $I_2$, the
@@ -4744,8 +4760,8 @@ tangent-separator sign problem for the normalized planar curve
 \[
 \Gamma(h)=\left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right).
 \]
-Equivalently, what remains is to prove that for adjacent ECT intervals
-$I_1<I_2$, the kernel
+Equivalently, the remaining geometric input is to prove that for adjacent ECT
+intervals $I_1<I_2$, the kernel
 \[
 K(s,t)=\det(F(s),F'(s),F(t)),
 \qquad
