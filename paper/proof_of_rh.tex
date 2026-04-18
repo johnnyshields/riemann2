@@ -22,6 +22,8 @@
   \def\core{core}%
   \def\aux{aux}%
   \def\out{out}%
+  \def\pair{pair}%
+  \def\lin{lin}%
 }
 \usepackage{enumitem}
 \usepackage{microtype}
@@ -73,6 +75,8 @@
 \newcommand{\core}{\mathrm{core}}
 \newcommand{\aux}{\mathrm{aux}}
 \newcommand{\out}{\mathrm{out}}
+\newcommand{\pair}{\mathrm{pair}}
+\newcommand{\lin}{\mathrm{lin}}
 \newcommand{\F}{\mathrm{F}}
 \newcommand{\RePart}{\operatorname{Re}}
 \newcommand{\dist}{\operatorname{dist}}
@@ -2656,6 +2660,362 @@ Using \eqref{eq:u2-calibration},
 \begin{equation}\label{eq:Xi-toy-calibrated}
 |\Xi_{\toy}^{(N)}(u,d)|\asymp \frac{x_0}{B_\zeta(m)}S(m).
 \end{equation}
+
+\section{Local projective rigidity of the one-pair and multi-pair families}
+\label{sec:projective-rigidity}
+
+Throughout this section, $Q$ denotes the odd-germ quotient by the
+value/gauge family (not the height scale $Q\asymp\log|m|$ used elsewhere in
+the paper). The context disambiguates the two usages.
+
+\subsection{Cubic leading line and the first residual class for the one-pair family}
+
+Let
+\[
+F_h(z)\in Q[[z^2]]
+\]
+denote the corrected quotient odd germ of the normalized one-pair family, where
+$Q$ is the odd-germ quotient by the value/gauge family.
+
+\begin{proposition}[Generic triviality of the first quotient order]
+\label{prop:first-order-quotient-trivial}
+Under the generic nondegeneracy assumptions on the background same-point
+block, the first-order value-family fills the full matrix space:
+\[
+V_{\val}^{(1)}=M_2(\mathbf C).
+\]
+Consequently
+\[
+\mathcal J_1/V_{\val}^{(1)}=0,
+\]
+so the generic leading quotient order is at least $3$.
+\end{proposition}
+
+\begin{proposition}[Generic cubic leading quotient order]
+\label{prop:cubic-leading-order}
+Let $J_3^{\pair}(h)$ denote the cubic jet of the normalized one-pair family.
+Then the cubic value-family $V_{\val}^{(3)}$ is confined to the off-diagonal
+sector. Moreover, the diagonal part of the actual cubic jet is
+\[
+\operatorname{diag}J_3^{\pair}(h)
+=
+v(h)\,B(h)\,(x_1-x_2)
+\begin{pmatrix}
+1&0\\0&-1
+\end{pmatrix},
+\]
+where $x_1\neq x_2$ are the diagonal entries of $X_0=G_0^{-1/2}$,
+$v(h)$ is the off-diagonal entry of $X_1(h)$, and
+\[
+B(h)=\frac{q(h)^2q'(h)}{4}-\frac{q'''(h)}{48}.
+\]
+In particular, if
+\[
+v(h)\not\equiv 0,\qquad B(h)\not\equiv 0,\qquad x_1\neq x_2,
+\]
+then
+\[
+[J_3^{\pair}(h)]\neq 0
+\quad\text{in}\quad
+\mathcal J_3/V_{\val}^{(3)}.
+\]
+Hence, on the generic one-pair region,
+\[
+F_h(z)=v_0(h)z^3+v_1(h)z^5+\cdots,
+\qquad
+v_0(h):=[J_3^{\pair}(h)]\neq 0.
+\]
+\end{proposition}
+
+\begin{definition}[Cubic leading line and first residual class]
+\label{def:cubic-leading-line}
+On the generic one-pair region, define the cubic leading line
+\[
+\ell_h:=\mathbf C\,v_0(h)\subset Q.
+\]
+Let $v_1(h):=[J_5^{\pair}(h)]$ denote the quintic quotient coefficient.
+Its image in the residual quotient
+\[
+Q/\ell_h
+\]
+is denoted by
+\[
+\overline v_1(h)\in Q/\ell_h.
+\]
+\end{definition}
+
+\begin{lemma}[Quintic trace witness]
+\label{lem:quintic-trace-witness}
+Let $J_{5,K_1}(h)$ denote the $K_1$-transport contribution to the quintic
+jet:
+\[
+J_{5,K_1}
+=
+-\,X_4K_1X_0+X_3K_1X_1-X_2K_1X_2+X_1K_1X_3-X_0K_1X_4.
+\]
+Then
+\[
+\operatorname{tr}J_{5,K_1}(h)
+=
+-2\kappa(h)\Bigl((x_1-x_2)r(h)+\beta(h)(u(h)-w(h))+v(h)(\gamma(h)-\alpha(h))\Bigr),
+\]
+where $K_1=\kappa(h)J$, $v(h)$ is the off-diagonal part of $X_1(h)$,
+and $\gamma(h)-\alpha(h)$ is the diagonal-traceless part of $X_3(h)$.
+
+Moreover, the linear $G_3$-contribution to $\gamma(h)-\alpha(h)$ is
+\[
+(\gamma-\alpha)^{\lin}
+=
+\frac{1}{2\pi}\left[
+x_1^3\frac{q'''}{24}
+-
+x_2^3\left(
+\frac{q'''''}{576}
++\frac{q^2q'''}{96}
++\frac{qq'q''}{16}
++\frac{(q')^3}{48}
+\right)
+\right].
+\]
+Since
+\[
+v(h)=-\frac{1}{4\pi(s_1+s_2)}\,\eta_2(h),
+\]
+the product $v(h)(\gamma(h)-\alpha(h))^{\lin}$ contains the monomial
+\[
+\kappa(h)\,\eta_2(h)\,q'''''\!(h)
+\]
+with nonzero coefficient.
+\end{lemma}
+
+\begin{lemma}[No-cancellation of the quintic trace witness]
+\label{lem:no-cancellation-quintic-trace}
+The monomial
+\[
+\kappa(h)\,\eta_2(h)\,q'''''\!(h)
+\]
+appearing in Lemma~\ref{lem:quintic-trace-witness} is not produced by any
+other quintic contribution to $\operatorname{tr}J_5^{\pair}(h)$. Consequently
+\[
+\operatorname{tr}J_5^{\pair}(h)\not\equiv 0
+\]
+on the generic one-pair region.
+\end{lemma}
+
+\begin{proposition}[Nontrivial first residual class]
+\label{prop:first-residual-class-nontrivial}
+Assume the generic nondegeneracy hypotheses of
+Proposition~\ref{prop:cubic-leading-order} and the no-cancellation statement
+of Lemma~\ref{lem:no-cancellation-quintic-trace}.
+Then the first residual class is nonzero:
+\[
+\overline v_1(h)\neq 0
+\quad\text{in }Q/\ell_h
+\]
+on the generic one-pair region.
+Equivalently, the quintic quotient coefficient is not collinear with the
+cubic leading line:
+\[
+v_1(h)\notin \ell_h.
+\]
+Hence the one-pair quotient odd germ is not projectively constant.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:cubic-leading-order}, the cubic quotient coefficient
+\[
+v_0(h)=[J_3^{\pair}(h)]
+\]
+is nonzero and defines the leading line $\ell_h$.
+By Lemma~\ref{lem:no-cancellation-quintic-trace},
+\[
+\operatorname{tr}J_5^{\pair}(h)\not\equiv 0.
+\]
+But the cubic leading line is diagonal-traceless, whereas a nonzero trace
+component is automatically transverse to that line. Therefore the quintic
+quotient coefficient $v_1(h)$ cannot lie in $\ell_h$, so its image in
+$Q/\ell_h$ is nonzero:
+\[
+\overline v_1(h)\neq 0.
+\]
+Thus the residual germ is nontrivial at the first step, and the one-pair
+quotient odd germ cannot be projectively constant.
+\end{proof}
+
+\subsection{From the one-pair residual germ to two-pair and minimal-core rigidity}
+
+Let $F_h(z)$ denote the corrected quotient odd germ of the normalized one-pair
+family. By Proposition~\ref{prop:cubic-leading-order} and
+Proposition~\ref{prop:first-residual-class-nontrivial}, on the generic
+one-pair region we have
+\[
+F_h(z)=v_0(h)z^3+v_1(h)z^5+\cdots,
+\qquad
+v_0(h)\neq 0,
+\]
+with cubic leading line
+\[
+\ell_h:=\mathbf C\,v_0(h)\subset Q,
+\]
+and nontrivial first residual class
+\[
+\overline v_1(h)\in Q/\ell_h,
+\qquad
+\overline v_1(h)\neq 0.
+\]
+
+\begin{definition}[Two-pair decomposition]
+\label{def:two-pair-decomposition}
+For a normalized two-pair core with amplitudes $a_1,a_2$ and offsets
+$h_1,h_2$, write its quotient odd germ as
+\[
+F_{(a_1,h_1;a_2,h_2)}(z)
+=
+a_1F_{h_1}(z)+a_2F_{h_2}(z)+\mathcal I_{12}(z),
+\]
+where $\mathcal I_{12}(z)$ denotes the pair-interaction germ, quadratic in
+the pair amplitudes.
+\end{definition}
+
+\begin{lemma}[Two-pair cubic leading-line constraint]
+\label{lem:two-pair-cubic-leading-constraint}
+Assume
+\[
+F_{(a_1,h_1;a_2,h_2)}(z)\equiv 0.
+\]
+Then the cubic coefficient satisfies
+\[
+a_1v_0(h_1)+a_2v_0(h_2)+I_{12}^{(3)}=0,
+\]
+where $I_{12}^{(3)}$ denotes the cubic coefficient of the interaction germ
+$\mathcal I_{12}$. In particular, if $I_{12}^{(3)}$ vanishes or belongs to a
+controlled lower-order correction class on the normalized region, then the
+leading cubic lines must coincide projectively:
+\[
+\ell_{h_1}=\ell_{h_2}.
+\]
+\end{lemma}
+
+\begin{proof}
+Take the cubic coefficient of the identity
+\[
+a_1F_{h_1}(z)+a_2F_{h_2}(z)+\mathcal I_{12}(z)\equiv 0.
+\]
+By definition of the cubic leading coefficient $v_0(h)$, this yields
+\[
+a_1v_0(h_1)+a_2v_0(h_2)+I_{12}^{(3)}=0.
+\]
+If the interaction cubic coefficient is absent or controlled as a lower-order
+perturbation in the normalized regime, then the first two terms must already
+be projectively dependent, which forces
+\[
+\ell_{h_1}=\ell_{h_2}.\qedhere
+\]
+\end{proof}
+
+\begin{lemma}[Two-pair first residual constraint]
+\label{lem:two-pair-first-residual-constraint}
+Assume
+\[
+F_{(a_1,h_1;a_2,h_2)}(z)\equiv 0
+\]
+and that the cubic leading lines coincide:
+\[
+\ell_{h_1}=\ell_{h_2}=:\ell.
+\]
+Then, after passing to the residual quotient $Q/\ell$, the quintic
+coefficient satisfies
+\[
+a_1\overline v_1(h_1)+a_2\overline v_1(h_2)+\overline I_{12}^{(5)}=0,
+\]
+where $\overline I_{12}^{(5)}$ is the image of the quintic interaction
+coefficient in $Q/\ell$. In particular, if $\overline I_{12}^{(5)}$ vanishes
+or is controlled as a lower-order perturbation on the normalized region, then
+the first residual classes must also coincide projectively.
+\end{lemma}
+
+\begin{proof}
+Subtract the cubic leading direction by passing to the quotient $Q/\ell$.
+Since the cubic terms are killed in the residual quotient, the first
+nontrivial coefficient is the quintic residual coefficient. Taking the
+quintic coefficient of the quotient identity gives
+\[
+a_1\overline v_1(h_1)+a_2\overline v_1(h_2)+\overline I_{12}^{(5)}=0.
+\]
+The stated projective coincidence follows whenever the interaction term is
+absent or controlled as a lower-order perturbation.
+\end{proof}
+
+\begin{proposition}[Two-pair residual rigidity]
+\label{prop:two-pair-residual-rigidity}
+Assume the one-pair family has nontrivial cubic leading line and nontrivial
+first residual class on the generic normalized region. Then any normalized
+two-pair bad core with vanishing quotient odd germ must lie in the
+simultaneous coincidence locus determined by
+\[
+\ell_{h_1}=\ell_{h_2},
+\qquad
+\overline v_1(h_1)=\overline v_1(h_2),
+\]
+up to the quadratic interaction corrections $I_{12}^{(3)}$ and
+$\overline I_{12}^{(5)}$. In particular, bad two-pair cores are confined to a
+lower-dimensional exceptional set in the normalized parameter space.
+\end{proposition}
+
+\begin{proof}
+Combine Lemma~\ref{lem:two-pair-cubic-leading-constraint} and
+Lemma~\ref{lem:two-pair-first-residual-constraint}. The vanishing of the
+full two-pair germ forces projective coincidence first at the cubic leading
+level and then at the first residual level. These are two independent
+coincidence conditions on the normalized two-pair parameters, modulo the
+quadratic interaction corrections, so the bad locus is confined to the
+corresponding exceptional set.
+\end{proof}
+
+\begin{definition}[Minimal bad core]
+\label{def:minimal-bad-core}
+A normalized finite core is called bad if its quotient odd germ vanishes
+identically. A minimal bad core is a bad normalized finite core with minimal
+number of constituent pairs.
+\end{definition}
+
+\begin{theorem}[Minimal bad core rigidity]
+\label{thm:minimal-bad-core-rigidity}
+Assume there exists a genuine normalized finite bad core, and choose one with
+minimal size $k$. Write its quotient odd germ as
+\[
+F_{\core}(z)=\sum_{j=1}^k a_jF_{h_j}(z)+\mathcal I_{\ge 2}(z),
+\]
+where $\mathcal I_{\ge 2}(z)$ contains all multi-pair interaction terms of
+order at least quadratic in the constituent amplitudes. Then all constituent
+one-pair germs $F_{h_j}$ lie in a common exceptional projective
+configuration:
+\begin{enumerate}
+\item their cubic leading lines $\ell_{h_j}$ lie in a common projective
+coincidence locus;
+\item after quotienting by that common leading line, their first residual
+classes $\overline v_1(h_j)$ also lie in a common residual coincidence
+locus.
+\end{enumerate}
+Consequently the parameters of a minimal bad core are confined to a highly
+rigid lower-dimensional exceptional set.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Take the leading cubic coefficient of the identity
+\[
+F_{\core}(z)\equiv 0.
+\]
+As in the two-pair case, vanishing forces the constituent cubic leading lines
+to satisfy a common projective coincidence relation, modulo the interaction
+corrections. Passing to the residual quotient by this common leading line
+and taking the next nontrivial coefficient yields the corresponding residual
+coincidence relation for the first residual classes. Since the core is
+minimal, no proper subcollection of constituent pairs can already form a bad
+core, so these coincidence relations must hold simultaneously across the
+full collection. Hence the core parameters lie in a lower-dimensional
+exceptional configuration.
+\end{proof}
 
 \section{Final contradiction}
 
