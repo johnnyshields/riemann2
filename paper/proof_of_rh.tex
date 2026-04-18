@@ -2851,6 +2851,16 @@ Consequently
 so the generic leading quotient order is at least $3$.
 \end{proposition}
 
+\begin{remark}[Work in progress: first-order surjectivity check]
+\label{rem:wip-first-order-surjectivity}
+Lemma~\ref{lem:first-order-value-family-generator} makes the first-order
+value-family explicit as the image of a linear map. What remains at this step
+is the finite-dimensional surjectivity check showing that, under the generic
+nondegeneracy assumptions on the background same-point block, this image is
+all of $M_2(\mathbf C)$. The present proposition records that intended
+generic outcome.
+\end{remark}
+
 \begin{remark}[Structural split still to be made explicit]
 \label{rem:wip-raw-vs-full-value-family}
 At first order the family $V_{\val}^{(1)}$ fills $M_2(\mathbf C)$, while
@@ -3452,7 +3462,7 @@ this witness, and that the same corrected commutator structure governs the
 two-pair interaction in the septic trace channel.
 \end{remark}
 
-\begin{proposition}[Generic first residual nonvanishing under trace-free quintic value slice]
+\begin{proposition}[Generic first residual nonvanishing under trace-free quintic pure value slice]
 \label{prop:first-residual-class-generic}
 Assume that for every $h\in \mathcal U_{\mathrm{cub}}$,
 \[
@@ -3489,7 +3499,7 @@ diagonal-traceless.
 
 By Corollary~\ref{cor:trace-invariant-under-normalization-gauge}, trace is
 invariant under the normalization gauge at the first residual step. By the
-present hypothesis, trace also annihilates the quintic value slice
+present hypothesis, trace also annihilates the quintic pure value slice
 $V_{\val}^{(5)}(h)$. Therefore trace descends to a well-defined linear
 functional
 \[
@@ -3696,6 +3706,21 @@ v_7^{(q^{(7)})}=0,
 Thus the determinant $\Delta_7$ is the natural second residual scalar once
 $A_5^{\mathfrak f}$ has been fixed.
 \end{enumerate}
+\end{remark}
+
+\begin{remark}[Status of the fixed-sector refinement]
+\label{rem:wip-status-fixed-sector-refinement}
+The objects
+\[
+A_5^{\mathfrak f}(h),\qquad
+A_7^{\mathfrak f}(h),\qquad
+\Delta_7(h)
+\]
+are now the correct later-stage local variables, but the current draft has not
+yet fully rewritten the one-pair section in these coordinates. In particular,
+the explicit translation of $u_5,v_5,u_7,v_7,\Delta_7$ into the existing
+coefficient notation $(u,v,w,\alpha,\beta,\gamma,r,\dots)$ remains
+incomplete beyond the structural identities recorded above.
 \end{remark}
 
 \subsection{From the one-pair residual germ to two-pair and minimal-core rigidity}
@@ -3978,23 +4003,30 @@ bookkeeping but endpoint/support-function geometry for the planar curve
 $(v_5/c,\Delta_7/c)$.
 \end{remark}
 
+\begin{remark}[Current geometric bottleneck]
+\label{rem:current-geometric-bottleneck}
+The remaining generic obstruction is now a global line-incidence problem for
+the planar curve
+\[
+h\longmapsto \left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right),
+\]
+namely the possibility of a common four-secant line meeting two separated
+convex components twice each. Thus the next missing theorem is no longer a
+local quintic bookkeeping statement, but an endpoint/support-function
+separation statement for this curve.
+\end{remark}
+
 \begin{remark}[Current state of the argument]
 \label{rem:current-state-of-argument}
-At this stage, the local one-pair analysis has progressed beyond the present
-trace-only formulation: the later working notes identify a fixed-sector
-quintic/septic package
+The local one-pair analysis now consists of three layers:
+the cubic leading scalar $c(h)$, the quintic fixed-sector refinement
+$A_5^{\mathfrak f}(h)$, and the septic determinant $\Delta_7(h)$.
+The remaining generic obstacle is global: converting the geometry of the
+normalized planar curve
 \[
-A_5^{\mathfrak f}(h),\qquad \Delta_7(h),
+h\longmapsto \left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right)
 \]
-and a corresponding planar invariant curve
-\[
-h\longmapsto \left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right).
-\]
-The remaining generic obstruction is best viewed as a global planar secant
-problem for that curve together with the final compactness/exclusion bridge.
-Thus the bottleneck is no longer the existence of a first residual witness, but
-the endpoint geometry of the strengthened one-pair invariant curve and its use
-in the multi-pair/minimal-core endgame.
+into a full exclusion of bad multi-pair cores.
 \end{remark}
 
 \section{Final contradiction}
