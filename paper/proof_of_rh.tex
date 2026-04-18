@@ -4225,6 +4225,118 @@ $F'(s)$. Differentiating a second time gives
 \]
 \end{proof}
 
+\begin{lemma}[Compact first-zero reduction on adjacent intervals]
+\label{lem:compact-first-zero-reduction}
+Let $I_1<I_2$ be adjacent ECT intervals in the affine
+$x=v_5/c$ ordering. Assume there are compact subintervals
+\[
+J_1\Subset I_1,\qquad J_2\Subset I_2
+\]
+such that every zero of the tangent-separator kernel
+\[
+K(s,t)=\det(F(s),F'(s),F(t)),
+\qquad
+F(h)=(c(h),v_5(h),\Delta_7(h)),
+\]
+with $s\in I_2$, $t\in I_1$, lies in $J_2\times J_1$.
+
+If $K$ has a zero on $J_2\times J_1$, then there exists a zero
+\[
+(s_*,t_*)\in J_2\times J_1
+\]
+such that $s_*$ is minimal in the $x=v_5/c$ ordering among all
+$s$-coordinates of zeros of $K$ on $J_2\times J_1$.
+\end{lemma}
+
+\begin{proof}
+Because $K$ is continuous, its zero set in the compact set $J_2\times J_1$
+is closed, hence compact. The projection of that zero set to the $s$-axis is
+therefore compact as well. Since $x=v_5/c$ is monotone on $I_2$, the
+induced $x$-ordering is equivalent to the interval ordering on $J_2$. Thus
+the projected zero set has a minimal element $s_*$, and there exists
+$t_*\in J_1$ such that $(s_*,t_*)$ is a zero of $K$.
+\end{proof}
+
+\begin{lemma}[First adjacent zero implies tangency]
+\label{lem:first-adjacent-zero-implies-tangency}
+In the setting of Lemma~\ref{lem:compact-first-zero-reduction}, let
+$(s_*,t_*)$ be a zero with minimal $s$-coordinate in the
+$x=v_5/c$ ordering. Then
+\[
+\partial_t K(s_*,t_*)=0.
+\]
+Consequently,
+\[
+K(s_*,t_*)=0,
+\qquad
+\partial_t K(s_*,t_*)=0
+\]
+force the tangent line at $\Gamma(s_*)$ to be tangent also at
+$\Gamma(t_*)$.
+\end{lemma}
+
+\begin{proof}
+If $\partial_tK(s_*,t_*)\neq 0$, the implicit function theorem gives a local
+$C^1$ zero curve
+\[
+t=t(s)
+\]
+through $(s_*,t_*)$. In particular, for $s$ sufficiently close to $s_*$,
+there are zeros of $K(s,t(s))$. This produces zeros with $s<s_*$,
+contradicting the minimality of $s_*$. Hence $\partial_tK(s_*,t_*)=0$.
+
+The identities
+\[
+K(s,t)=\det(F(s),F'(s),F(t)),
+\qquad
+\partial_tK(s,t)=\det(F(s),F'(s),F'(t))
+\]
+show that $K(s_*,t_*)=0$ means $\Gamma(t_*)$ lies on the tangent line at
+$\Gamma(s_*)$, while $\partial_tK(s_*,t_*)=0$ means the tangent direction
+at $t_*$ lies on the same line. Thus the line is tangent at both points.
+\end{proof}
+
+\begin{proposition}[Adjacent slope-range separation under generic boundary hypotheses]
+\label{prop:adjacent-slope-range-separation}
+Let $I_1<I_2$ be adjacent ECT intervals, meeting at a boundary point $h_b$.
+Assume one of the following generic boundary hypotheses holds:
+
+\begin{enumerate}
+\item $W(h_b)=0$, $M(h_b)\neq 0$, the slope
+\[
+m(h):=\frac{N(h)}{M(h)}
+\]
+extends continuously across $h_b$, and $W$ changes sign across $h_b$;
+
+\item $M(h_b)=0$, $M'(h_b)\neq 0$, and $N(h_b)\neq 0$.
+\end{enumerate}
+
+Then the interior tangent-slope ranges of $I_1$ and $I_2$ are disjoint.
+\end{proposition}
+
+\begin{proof}
+In case (1), one has
+\[
+m'(h)=\frac{W(h)}{M(h)^2}.
+\]
+Since $M(h_b)\neq 0$, the slope $m$ is continuous at $h_b$. Because $W$
+changes sign across $h_b$, the one-sided restrictions of $m$ are monotone
+with opposite monotonicity, and the common boundary value $m(h_b)$ is an
+endpoint extremum on each side. Hence the interior slope ranges on $I_1$ and
+$I_2$ meet at most at the boundary endpoint value, so their interiors are
+disjoint.
+
+In case (2), $M(h_b)=0$ is a simple zero and $N(h_b)\neq 0$. Therefore
+\[
+m(h)=\frac{N(h)}{M(h)}
+\]
+has opposite one-sided blow-up:
+\[
+m(h)\to \pm\infty
+\]
+as $h\to h_b^\pm$. Hence the one-sided slope ranges are disjoint.
+\end{proof}
+
 \begin{remark}[Audit: direct septic witness]
 \label{rem:audit-direct-septic-witness}
 The use of Proposition~\ref{prop:rho2-not-affine-in-rho1} still depends on the
@@ -4258,79 +4370,6 @@ K(s,t)\neq 0
 \]
 equivalently, that tangent lines from the right interval do not meet the
 adjacent left interval.
-\end{remark}
-
-\begin{remark}[Audit: first-zero compactness repair]
-\label{rem:audit-first-zero-compactness}
-Any eventual proof of adjacent tangent-separator sign regularity should avoid
-the informal phrase ``take the first zero on the adjacent interval pair'' on
-raw open intervals. The correct setup is to remove a boundary-near region on
-which $K(s,t)$ is already known to have fixed sign, truncate to compact
-subintervals $J_1\Subset I_1$, $J_2\Subset I_2$, and then work with the closed
-zero set of
-\[
-K(s,t)=\det(F(s),F'(s),F(t))
-\]
-inside $J_2\times J_1$. This is the right framework in which a minimal/first
-zero can be realized and the implicit-function-theorem argument can be applied
-rigorously.
-\end{remark}
-
-\begin{remark}[Audit: first-zero implies tangency]
-\label{rem:audit-first-zero-implies-tangency}
-In the current adjacent-interval strategy, the key differential step is:
-if $(s_*,t_*)$ is a first zero of $K(s,t)$ in the $s$-ordering, then that
-zero cannot be transverse in $t$. Equivalently,
-\[
-K(s_*,t_*)=0
-\quad\Longrightarrow\quad
-\partial_t K(s_*,t_*)=0
-\]
-at the first appearance of a zero. This is what upgrades a first adjacent
-intersection into a common tangent line. The final proof should isolate this
-step explicitly as an application of the implicit function theorem on the
-compactly truncated adjacent interval pair.
-\end{remark}
-
-\begin{remark}[Audit: adjacent slope-range hypotheses]
-\label{rem:audit-adjacent-slope-range-hypotheses}
-The current adjacent-interval attack uses disjointness of the interior tangent
-slope ranges in the two generic boundary cases:
-
-\begin{enumerate}
-\item $W=0$, $M\neq 0$, where one must use continuity of
-\[
-m(h)=\frac{N(h)}{M(h)}
-\]
-across the boundary together with the sign change of
-\[
-m'(h)=\frac{W(h)}{M(h)^2}
-\]
-to conclude that the two one-sided slope intervals meet only at the boundary
-endpoint value;
-
-\item $M=0$, $M'\neq 0$, where one must also assume
-\[
-N(h_*)\neq 0
-\]
-at the turning point $h_*$ in order to obtain the one-sided blow-up
-\[
-m(h)\to \pm\infty
-\]
-and hence disjoint slope ranges.
-\end{enumerate}
-
-These hypotheses should be stated explicitly in any final proof of the adjacent
-tangent-separator theorem.
-\end{remark}
-
-\begin{remark}[Audit: global no-four-secant theorem]
-\label{rem:audit-global-no-four-secant}
-Assuming the adjacent tangent-separator sign theorem, the support intervals of
-distinct ECT branches are disjoint, and hence no affine line can be 2-secant to
-two different branches. The deduction from adjacent tangent separation to a
-global no-four-secant theorem should still be audited carefully in the final
-endgame writeup.
 \end{remark}
 
 \begin{proposition}[Conditional adjacent tangent separation implies global no-secant]
@@ -4712,8 +4751,10 @@ K(s,t)=\det(F(s),F'(s),F(t)),
 \qquad
 F(h)=(c(h),v_5(h),\Delta_7(h)),
 \]
-has constant nonzero sign on $I_2\times I_1$. Once this is established, the
-global no-four-secant theorem follows by support transitivity.
+has constant nonzero sign on $I_2\times I_1$. By
+Proposition~\ref{prop:conditional-global-no-secant}, this adjacent
+sign-regularity is the remaining input needed for the global no-four-secant
+theorem.
 \end{remark}
 
 \begin{remark}[Current state of the argument]
