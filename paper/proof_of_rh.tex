@@ -2936,13 +2936,21 @@ is denoted by
 \begin{lemma}[Quintic trace witness]
 \label{lem:quintic-trace-witness}
 Let $J_{5,K_1}(h)$ denote the $K_1$-transport contribution to the quintic
-jet:
+jet. At the trace level, the relevant contribution is
 \[
-J_{5,K_1}
+\operatorname{tr}J_{5,K_1}(h)
 =
--\,X_4K_1X_0+X_3K_1X_1-X_2K_1X_2+X_1K_1X_3-X_0K_1X_4.
+\kappa(h)\,\operatorname{tr}\!\Bigl(
+X_0JX_4(h)-X_4(h)JX_0
++
+X_3(h)JX_1(h)-X_1(h)JX_3(h)
+\Bigr),
 \]
-Then
+since
+\[
+\operatorname{tr}\bigl(X_2(h)JX_2(h)\bigr)=0
+\]
+for symmetric $X_2(h)$. Therefore
 \[
 \operatorname{tr}J_{5,K_1}(h)
 =
@@ -3181,6 +3189,41 @@ canceled by any other quintic contribution. Hence
 \operatorname{tr}J_5^{\pair}(h)\not\equiv 0.
 \]
 \end{proof}
+
+\begin{remark}[Work in progress: septic $K_1$ trace target]
+\label{rem:wip-septic-k1-trace-target}
+The corrected trace-level commutator pattern at quintic order suggests the
+following septic analogue. Let $J_{7,K_1}(h)$ denote the $K_1$-transport
+contribution to the septic jet. At the trace level, the natural candidate is
+\[
+\operatorname{tr}J_{7,K_1}(h)
+=
+\kappa(h)\,\operatorname{tr}\!\Bigl(
+X_0JX_6(h)-X_6(h)JX_0
++
+X_5(h)JX_1(h)-X_1(h)JX_5(h)
++
+X_2(h)JX_4(h)-X_4(h)JX_2(h)
+\Bigr),
+\]
+since
+\[
+\operatorname{tr}\bigl(X_3(h)JX_3(h)\bigr)=0
+\]
+for symmetric $X_3(h)$.
+
+This is the order-$7$ analogue of the verified quintic trace structure.
+The expected septic witness is the monomial
+\[
+\kappa(h)\,\eta_2(h)\,q^{(7)}(h),
+\]
+arising from the linear $G_5$-contribution to the diagonal-traceless part
+of $X_5(h)$, paired with the off-diagonal $\eta_2$-slice of $X_1(h)$.
+
+What remains to be checked is that the mixed $X_6$-channel does not cancel
+this witness, and that the same corrected commutator structure governs the
+two-pair interaction in the septic trace channel.
+\end{remark}
 
 \begin{proposition}[Nontrivial first residual class]
 \label{prop:first-residual-class-nontrivial}
