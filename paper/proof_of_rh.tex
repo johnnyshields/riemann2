@@ -3614,9 +3614,13 @@ residual package:
 \[
 c(h),\qquad A_5^{\mathfrak f}(h),\qquad \Delta_7(h).
 \]
-The current draft has not yet fully translated these objects into the existing
-coefficient notation $(u,v,w,\alpha,\beta,\gamma,r,\dots)$, but they are the
-natural variables for the geometric reformulation of the multi-pair problem.
+The current draft now records explicit coefficient formulas for the quintic
+commutator contribution and the septic $K_1$-transport contribution in the
+existing notation $(u,v,w,\alpha,\beta,\gamma,r,\dots)$. What remains
+incomplete is the full closed coefficient formula for the total septic
+fixed-sector pair $(u_7,v_7)$ after all order-7 sectors are included.
+These are nevertheless the natural variables for the geometric reformulation
+of the multi-pair problem.
 \end{remark}
 
 \begin{remark}[Work in progress: normalized affine one-pair invariant curve]
@@ -3637,40 +3641,283 @@ generic obstruction is reduced to common four-secant lines of this planar
 curve.
 \end{remark}
 
-\begin{remark}[Derived structural identities]
-\label{rem:derived-fixed-sector-identities}
-The working analysis gives the following identities, which should be proved in
-a later draft in the paper's native coefficient language.
-
-\begin{enumerate}
-\item If
+\begin{proposition}[Explicit fixed-sector formulas at quintic order]
+\label{prop:explicit-quintic-fixed-sector}
+Write
 \[
 X_1=
 \begin{pmatrix}
-u&v\\v&w
+u&v\\
+v&w
 \end{pmatrix},
 \qquad
 X_3=
 \begin{pmatrix}
-\alpha&\beta\\\beta&\gamma
+\alpha&\beta\\
+\beta&\gamma
+\end{pmatrix}.
+\]
+Then the fixed-sector part of the basic quintic commutator channel
+\[
+X_3JX_1-X_1JX_3
+\]
+is
+\[
+\pi_{\mathfrak f}(X_3JX_1-X_1JX_3)
+=
+\bigl(v(\gamma-\alpha)+\beta(u-w)\bigr)I
++
+(\gamma u-\alpha w)S.
+\]
+Consequently, for the quintic fixed-sector coefficient
+\[
+A_5^{\mathfrak f}(h)=u_5(h)\,I+v_5(h)\,S,
+\]
+the commutator-type contribution is explicitly
+\[
+u_5^{(\mathrm{comm})}
+=
+v(\gamma-\alpha)+\beta(u-w),
+\qquad
+v_5^{(\mathrm{comm})}
+=
+\gamma u-\alpha w.
+\]
+\end{proposition}
+
+\begin{proof}
+A direct multiplication gives
+\[
+X_3JX_1-X_1JX_3
+=
+\begin{pmatrix}
+-2\alpha v+2\beta u & \gamma u-\alpha w\\[.5ex]
+\gamma u-\alpha w & -2\beta w+2\gamma v
 \end{pmatrix},
 \]
-then the quintic fixed-sector $S$-component coming from the commutator-type
-channel is
+and hence its fixed-sector projection is obtained by taking the average of the
+diagonal entries for the $I$-component and the common off-diagonal entry for
+the $S$-component:
 \[
-v_5=\gamma u-\alpha w.
+\pi_{\mathfrak f}(X_3JX_1-X_1JX_3)
+=
+\frac{(-2\alpha v+2\beta u)+(-2\beta w+2\gamma v)}{2}\,I
++
+(\gamma u-\alpha w)S.
+\]
+This simplifies to
+\[
+\bigl(v(\gamma-\alpha)+\beta(u-w)\bigr)I
++
+(\gamma u-\alpha w)S,
+\]
+as claimed.
+\end{proof}
+
+\begin{proposition}[Explicit septic $K_1$-transport fixed-sector formulas]
+\label{prop:explicit-septic-k1-fixed-sector}
+Write
+\[
+X_0=\diag(x_1,x_2),
+\qquad
+X_1=
+\begin{pmatrix}
+u&v\\
+v&w
+\end{pmatrix},
+\qquad
+X_2=
+\begin{pmatrix}
+a&b\\
+b&c
+\end{pmatrix},
+\]
+\[
+X_4=
+\begin{pmatrix}
+p&r\\
+r&s
+\end{pmatrix},
+\qquad
+X_5=
+\begin{pmatrix}
+\alpha_5&\beta_5\\
+\beta_5&\gamma_5
+\end{pmatrix},
+\qquad
+X_6=
+\begin{pmatrix}
+\mu_6&\nu_6\\
+\nu_6&\lambda_6
+\end{pmatrix}.
+\]
+Then the fixed-sector parts of the three septic $K_1$-transport channels are
+\[
+\pi_{\mathfrak f}(X_5JX_1-X_1JX_5)
+=
+\bigl(\beta_5(u-w)+v(\gamma_5-\alpha_5)\bigr)I
++
+(\gamma_5u-\alpha_5w)S,
+\]
+\[
+\pi_{\mathfrak f}(X_2JX_4-X_4JX_2)
+=
+\bigl(b(p-s)+r(c-a)\bigr)I
++
+(cp-as)S,
+\]
+and
+\[
+\pi_{\mathfrak f}(X_0JX_6-X_6JX_0)
+=
+(x_2-x_1)\nu_6\,I
++
+(x_2\mu_6-x_1\lambda_6)S.
 \]
 
-\item The direct linear $q^{(7)}$-driven contribution to the septic
-fixed-sector coefficient is $I$-directional. In particular, on that slice,
+Consequently, if the septic $K_1$-transport fixed-sector coefficient is
+written
 \[
-v_7^{(q^{(7)})}=0,
+A_{7,K_1}^{\mathfrak f}(h)=u_{7,K_1}(h)\,I+v_{7,K_1}(h)\,S,
+\]
+then
+\[
+u_{7,K_1}
+=
+\kappa\Bigl(
+(x_2-x_1)\nu_6
++
+\beta_5(u-w)+v(\gamma_5-\alpha_5)
++
+b(p-s)+r(c-a)
+\Bigr),
+\]
+\[
+v_{7,K_1}
+=
+\kappa\Bigl(
+x_2\mu_6-x_1\lambda_6
++
+\gamma_5u-\alpha_5w
++
+cp-as
+\Bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+For two symmetric matrices
+\[
+X=
+\begin{pmatrix}
+a&b\\
+b&c
+\end{pmatrix},
 \qquad
+Y=
+\begin{pmatrix}
+p&q\\
+q&r
+\end{pmatrix},
+\]
+a direct calculation gives
+\[
+XJY-YJX
+=
+\begin{pmatrix}
+-2aq+2bp & -ar+cp\\
+-ar+cp & -2br+2cq
+\end{pmatrix}.
+\]
+Taking fixed-sector projection yields
+\[
+\pi_{\mathfrak f}(XJY-YJX)
+=
+\bigl(b(p-r)+q(c-a)\bigr)I
++
+(cp-ar)S.
+\]
+Applying this formula to $(X,Y)=(X_5,X_1)$ and $(X,Y)=(X_2,X_4)$ gives the
+first two displayed identities.
+
+For the $X_0/X_6$ channel, a direct multiplication gives
+\[
+X_0JX_6-X_6JX_0
+=
+\begin{pmatrix}
+-2x_1\nu_6 & -x_1\lambda_6+x_2\mu_6\\
+-x_1\lambda_6+x_2\mu_6 & 2x_2\nu_6
+\end{pmatrix},
+\]
+whose fixed-sector part is
+\[
+(x_2-x_1)\nu_6\,I
++
+(x_2\mu_6-x_1\lambda_6)S.
+\]
+Summing the three channels gives the stated formulas for
+$u_{7,K_1}$ and $v_{7,K_1}$.
+\end{proof}
+
+\begin{corollary}[Direct $q^{(7)}$-driven septic slice]
+\label{cor:direct-q7-septic-slice}
+On the direct linear $q^{(7)}$-driven slice, the septic $K_1$-transport
+fixed-sector contribution is $I$-directional. More precisely,
+\[
+v_{7,K_1}^{(q^{(7)})}=0,
+\]
+and
+\[
+u_{7,K_1}^{(q^{(7)})}
+=
+\kappa\Bigl(
+(x_2-x_1)\nu_6^{(q^{(7)})}
++
+v\,(\gamma_5-\alpha_5)^{(q^{(7)})}
+\Bigr),
+\]
+so in particular
+\[
 \Delta_7^{(q^{(7)})}=u_7^{(q^{(7)})}v_5.
 \]
-Thus the determinant $\Delta_7$ is the natural second residual scalar once
-$A_5^{\mathfrak f}$ has been fixed.
-\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+On the direct $q^{(7)}$-driven slice, the linear $X_5$-input is diagonal,
+hence
+\[
+\beta_5^{(q^{(7)})}=0.
+\]
+The mixed $X_6$-slice is off-diagonal on this grading, so
+\[
+\mu_6^{(q^{(7)})}=\lambda_6^{(q^{(7)})}=0.
+\]
+Moreover the $X_2/X_4$-channel does not lie on the pure
+$(K_1,\eta_2,q^{(7)})$-slice. Therefore the $S$-component vanishes and the
+displayed formula for $u_{7,K_1}^{(q^{(7)})}$ follows from
+Proposition~\ref{prop:explicit-septic-k1-fixed-sector}. Since
+\[
+\Delta_7=u_7v_5-u_5v_7,
+\]
+the direct $q^{(7)}$-slice satisfies
+\[
+\Delta_7^{(q^{(7)})}=u_7^{(q^{(7)})}v_5.
+\qedhere
+\]
+\end{proof}
+
+\begin{remark}[Status of explicit fixed-sector formulas]
+\label{rem:status-explicit-fixed-sector-formulas}
+Proposition~\ref{prop:explicit-quintic-fixed-sector} gives an explicit
+coefficient formula for the quintic commutator contribution to
+$A_5^{\mathfrak f}$, and
+Proposition~\ref{prop:explicit-septic-k1-fixed-sector} gives an explicit
+formula for the septic $K_1$-transport contribution to
+$A_7^{\mathfrak f}$. What is still not known in full explicit form is the
+total septic fixed-sector coefficient after all order-7 sectors are included.
+Thus the formulas above should be read as the explicit transport-level
+contribution underlying the second residual determinant $\Delta_7$, not yet
+as a closed formula for the full total pair $(u_7,v_7)$.
 \end{remark}
 
 \begin{remark}[Status of the fixed-sector refinement]
