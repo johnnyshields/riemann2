@@ -813,6 +813,18 @@ Proposition~\ref{prop:cutoff-compatibility}, the core $\mathcal C$ --- and
 therefore $M(d)$ and $A_{\val}$ --- is independent of $R$.
 \end{proof}
 
+\begin{remark}[Work in progress: sharpened calibration remainder estimate]
+\label{rem:wip-sharpened-calibration-remainder}
+The proof above invokes a ``sharpened calibration remainder estimate'' that
+converts $S_2=o(xQ^2 S(m))$ into
+$\Psi_{x,d}(R_\zeta)=o\!\left(\tfrac{x}{B_\zeta(m)}S(m)\right)$. The
+structural control of $R_\zeta$ is in place from
+Proposition~\ref{prop:corrected-local-decomposition} and the corrected
+transfer bounds, but the draft has not yet isolated this quantitative step
+as a named lemma with an explicit constant. It should be added in a later
+pass.
+\end{remark}
+
 \section{Corrected finite-\texorpdfstring{$s$}{s} holomorphic whitening}
 
 Let $\widehat\Omega_\zeta^{\corr}(s;m)$ denote the corrected finite-$s$ local block built from the explicit local model, the affine jet of the smooth remainder, and the jet-corrected phase remainder.
@@ -2403,8 +2415,8 @@ This is exactly the scale compatible with the already-proved $r=0$ case and is
 sufficient for all later applications.
 \end{proof}
 
-\begin{remark}[On the stronger formal coefficient bound]
-\label{rem:stronger-formal-odd-jet}
+\begin{remark}[Work in progress: stronger formal coefficient bound]
+\label{rem:wip-stronger-formal-odd-jet}
 If one formally combines the rescaled derivative estimate from
 Corollary~\ref{cor:single-pair-odd-jet} with the normalized
 $z/Q^2$-expansion, one is led to the stronger-looking expression
@@ -2494,8 +2506,8 @@ since $2r+4\ge 4$. Summing over $k\ge 0$,
 as claimed.
 \end{proof}
 
-\begin{remark}[On the shell-summed $Q$-factor]
-\label{rem:outside-q-factor}
+\begin{remark}[Work in progress: shell-summed $Q$-factor]
+\label{rem:wip-outside-q-factor}
 Corollary~\ref{cor:single-pair-odd-jet} gives the single-pair bound
 \[
 |a_{2r+1}(\rho)|\ll_r \frac{1}{Q\,\Delta^{2r+4}}.
@@ -2688,7 +2700,7 @@ Using \eqref{eq:u2-calibration},
 The following remark records the current status of the toy model in the
 overall proof strategy.
 
-\begin{remark}[Work-in-progress note: pair-like versus finite-core endgame]
+\begin{remark}[Work in progress: pair-like versus finite-core endgame]
 \label{rem:wip-pairlike-finitecore}
 At the current stage of the draft, the toy anomaly model should be understood
 as a \emph{pair-core first-odd-jet normal form}, not yet as a universal normal
@@ -2871,6 +2883,16 @@ other quintic contribution to $\operatorname{tr}J_5^{\pair}(h)$. Consequently
 on the generic one-pair region.
 \end{lemma}
 
+\begin{remark}[Work in progress]
+\label{rem:wip-no-cancellation-quintic-trace}
+This lemma is presently a bookkeeping target rather than a fully closed
+proof. The intended argument isolates the monomial
+$\kappa(h)\eta_2(h)q^{(5)}(h)$ inside $\operatorname{tr}J_5^{\pair}(h)$ and
+shows that no other quintic contribution produces the same monomial with
+opposite coefficient. For drafting purposes, this lemma should be read as
+the main remaining local technical bottleneck.
+\end{remark}
+
 \begin{proposition}[Nontrivial first residual class]
 \label{prop:first-residual-class-nontrivial}
 Assume the generic nondegeneracy hypotheses of
@@ -2911,7 +2933,24 @@ Thus the residual germ is nontrivial at the first step, and the one-pair
 quotient odd germ cannot be projectively constant.
 \end{proof}
 
+\begin{remark}[Work in progress]
+\label{rem:wip-first-residual-class-nontrivial}
+This proposition is conditional on the no-cancellation mechanism in
+Lemma~\ref{lem:no-cancellation-quintic-trace}. Structurally, the argument is
+in place: cubic order supplies the generic leading line, and quintic trace
+supplies the first residual witness. The remaining task is to make the
+quintic bookkeeping completely explicit.
+\end{remark}
+
 \subsection{From the one-pair residual germ to two-pair and minimal-core rigidity}
+
+\begin{remark}[Work in progress]
+\label{rem:wip-multi-pair-subsection}
+This subsection is best read as a rigidity program built on the one-pair
+local theory. The projective coincidence conditions are the intended
+organizing principle for the two-pair and minimal-core analysis, but several
+interaction and exceptional-set steps remain schematic in the present draft.
+\end{remark}
 
 Let $F_h(z)$ denote the corrected quotient odd germ of the normalized one-pair
 family. By Proposition~\ref{prop:cubic-leading-order} and
@@ -3041,6 +3080,17 @@ quadratic interaction corrections, so the bad locus is confined to the
 corresponding exceptional set.
 \end{proof}
 
+\begin{remark}[Work in progress]
+\label{rem:wip-two-pair-residual-rigidity}
+At present this proposition should be read as a rigidity schema. The
+one-pair cubic leading line and first residual class indicate the correct
+projective coincidence conditions, but the treatment of the quadratic
+interaction corrections $I_{12}^{(3)}$ and $\overline I_{12}^{(5)}$ is not
+yet fully quantitative. A later draft should either prove these corrections
+are harmless in the normalized regime or state the proposition explicitly
+in conditional form.
+\end{remark}
+
 \begin{definition}[Minimal bad core]
 \label{def:minimal-bad-core}
 A normalized finite core is called bad if its quotient odd germ vanishes
@@ -3085,6 +3135,16 @@ core, so these coincidence relations must hold simultaneously across the
 full collection. Hence the core parameters lie in a lower-dimensional
 exceptional configuration.
 \end{proof}
+
+\begin{remark}[Work in progress]
+\label{rem:wip-minimal-bad-core-rigidity}
+This theorem records the intended endgame architecture rather than a
+completed contradiction. The minimal-bad-core strategy appears to be the
+right framework for extending the one-pair and two-pair projective rigidity
+analysis to general finite cores, but the present draft has not yet proved
+that the resulting exceptional configuration is empty or contained entirely
+in the degenerate locus.
+\end{remark}
 
 \section{Final contradiction}
 
@@ -3286,5 +3346,15 @@ with $E$ uniformly bounded on compact parameter ranges. Restricting to the
 microscopic nodes $s_j=j/Q^2$ gives the stated uniform bound for
 $E_j(u,d)$.
 \end{proof}
+
+\begin{remark}[Work in progress: toy microscopic expansion]
+\label{rem:wip-toy-microscopic-expansion}
+The proof above is schematic: it uses smoothness in $(u,s,d)$, vanishing at
+$u=0$, and even symmetry in the off-line split to obtain the quadratic
+leading term, and invokes the jet-limit computation to identify the
+coefficient as the toy anomaly matrix $M(d)$. A later pass should make the
+analyticity and uniform-bound steps quantitative by recording an explicit
+Taylor remainder with a constant depending only on $D$.
+\end{remark}
 
 \end{document}
