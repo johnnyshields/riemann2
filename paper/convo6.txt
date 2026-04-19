@@ -8070,4 +8070,710 @@ close [A7f​] or Δ7​,not a unique raw (u7​,v7​).
 
 That is enough for the proof route you now have.
 
+proof_of_rh(94).tex
+File
+ok can you check these and give me latex edits for each:
+
+Full order-7 fixed-sector algebra is not done — needs a careful rephrase
+
+Your earlier wording was a bit too strong. The draft now claims that the canonical quotient-level order-7 package is closed.
+
+Specifically:
+
+4989–5096 prove and summarize quotient-septic closure
+5073–5096 say the order-7 fixed-sector analysis is closed at the canonical quotient level
+7361–7365 repeats that the remaining order-7 ambiguity is only raw gauge choice and does not affect Δ
+7
+	​
+
+
+But the draft also still says that the full raw total pair (u
+7
+	​
+
+,v
+7
+	​
+
+) is not fully completed:
+
+5471–5472: “what remains open is the contribution of the lower/mixed septic sectors to the full total pair (u
+7
+	​
+
+,v
+7
+	​
+
+)”
+6670–6674 says the same in the audit remark
+
+So the correct statement is:
+
+The order-7 package is closed at the level of the canonical quotient invariant Δ
+7
+	​
+
+, but the full lower/mixed septic completion of the raw total pair (u
+7
+	​
+
+,v
+7
+	​
+
+) is still open.
+
+I’m checking the exact wording around those order-7 status remarks so I can give you literal replacement text that makes the distinction crisp: quotient-level closure yes, raw-pair completion still no.
+
+Yes. The draft now needs a careful rephrase, not a rollback.
+
+Your stated diagnosis is right:
+
+    the canonical quotient-level order-7 package is closed,
+
+    but the raw total pair (u7,v7)(u7​,v7​) is still not fully completed after the lower/mixed septic sectors are included.
+
+So I would make the following exact edits.
+1) Replace rem:status-full-septic-fixed-sector
+
+Find this entire block:
+
+\begin{remark}[Status of the order-$7$ fixed-sector package]
+\label{rem:status-full-septic-fixed-sector}
+The order-$7$ fixed-sector analysis is now closed at the canonical quotient
+level. By Theorem~\ref{thm:quotient-septic-closure}, the full total septic
+fixed-sector class satisfies
+\[
+[A_7^{\mathfrak f}]
+=
+[A_{7,K_1}^{\mathfrak f}]
+\quad\text{in }\mathfrak f/\mathbf C A_5^{\mathfrak f},
+\]
+and the full total second residual determinant is
+\[
+\Delta_7=\Delta_{7,K_1}.
+\]
+
+What remains gauge-dependent is only the choice of raw representative of
+$A_7^{\mathfrak f}$ inside the affine line
+\[
+A_{7,K_1}^{\mathfrak f}+\mathbf C A_5^{\mathfrak f},
+\]
+as already recorded by Proposition~\ref{prop:projected-septic-gauge-law}.
+Thus no further order-$7$ local invariant is missing for the later geometric
+arguments.
+\end{remark}
+
+Replace it with:
+
+\begin{remark}[Status of the order-$7$ fixed-sector package]
+\label{rem:status-full-septic-fixed-sector}
+The order-$7$ fixed-sector analysis is now closed at the canonical quotient
+level. By Theorem~\ref{thm:quotient-septic-closure}, the full total septic
+fixed-sector class satisfies
+\[
+[A_7^{\mathfrak f}]
+=
+[A_{7,K_1}^{\mathfrak f}]
+\quad\text{in }\mathfrak f/\mathbf C A_5^{\mathfrak f},
+\]
+and the canonical second residual determinant is
+\[
+\Delta_7=\Delta_{7,K_1}.
+\]
+
+What remains non-unique is the raw representative of \(A_7^{\mathfrak f}\)
+inside the affine line
+\[
+A_{7,K_1}^{\mathfrak f}+\mathbf C A_5^{\mathfrak f},
+\]
+as recorded by Proposition~\ref{prop:projected-septic-gauge-law}. Equivalently,
+the full lower/mixed septic completion of the raw total pair \((u_7,v_7)\) is
+still open, but this remaining gauge-dependent choice does not affect the
+canonical quotient class \([A_7^{\mathfrak f}]\) or the residual determinant
+\(\Delta_7\) used in the later geometric arguments.
+\end{remark}
+
+This keeps the good part — quotient closure — while no longer implying the raw pair is settled.
+2) Tighten the sentence at lines 5471–5472
+
+Right now the sentence is basically fine, but it should explicitly distinguish the quotient-level closure from the raw-pair openness.
+
+Find this tail of the remark/proof paragraph:
+
+on that interval. In this sense, the present argument excludes $W$-flatness on
+an $M\neq 0$ region without requiring a separate differential equation for
+$\lambda^{[1]}$; what remains open is the contribution of the lower/mixed
+septic sectors to the full total pair $(u_7,v_7)$.
+
+Replace it with:
+
+on that interval. In this sense, the present argument excludes $W$-flatness on
+an $M\neq 0$ region without requiring a separate differential equation for
+$\lambda^{[1]}$; what remains open is not the canonical quotient-level order-$7$
+invariant, but only the contribution of the lower/mixed septic sectors to the
+raw total pair \((u_7,v_7)\).
+
+This makes that remark consistent with the new quotient-septic closure theorem.
+3) Tighten rem:audit-direct-septic-witness
+
+Find this entire block:
+
+\begin{remark}[Audit: direct septic witness]
+\label{rem:audit-direct-septic-witness}
+The direct $q^{(7)}$-slice of total $\Delta_7$ is now closed at the
+weight-one level by
+Proposition~\ref{prop:direct-q7-total-delta7-nonzero}. What remains open at
+order $7$ is the full lower/mixed septic completion of the total fixed-sector
+pair $(u_7,v_7)$.
+\end{remark}
+
+Replace it with:
+
+\begin{remark}[Audit: direct septic witness]
+\label{rem:audit-direct-septic-witness}
+The direct \(q^{(7)}\)-slice of total \(\Delta_7\) is now closed at the
+weight-one level by
+Proposition~\ref{prop:direct-q7-total-delta7-nonzero}. Together with
+Theorem~\ref{thm:quotient-septic-closure}, this closes the canonical
+quotient-level order-\(7\) package. What remains open at order \(7\) is only
+the full lower/mixed septic completion of the raw fixed-sector pair
+\((u_7,v_7)\).
+\end{remark}
+
+This is the most direct place to state the distinction.
+4) Soften the sentence in rem:wip-final-endgame-status
+
+The current sentence is slightly too strong:
+
+    “At the local algebraic level, the order-7 fixed-sector package is now closed canonically…”
+
+It should explicitly say quotient-level closure, not raw-pair closure.
+
+Find this paragraph:
+
+At the local algebraic level, the order-$7$ fixed-sector package is now
+closed canonically via Theorem~\ref{thm:quotient-septic-closure}: the
+remaining order-$7$ ambiguity is only the raw gauge choice of representative
+inside $A_{7,K_1}^{\mathfrak f}+\mathbf C A_5^{\mathfrak f}$, and does not
+affect the canonical second residual determinant $\Delta_7$.
+
+Replace it with:
+
+At the local algebraic level, the canonical quotient-level order-$7$
+fixed-sector package is now closed via
+Theorem~\ref{thm:quotient-septic-closure}: the remaining order-$7$ ambiguity is
+only the lower/mixed septic completion of a raw representative inside
+\(A_{7,K_1}^{\mathfrak f}+\mathbf C A_5^{\mathfrak f}\), and does not affect
+the quotient class \([A_7^{\mathfrak f}]\) or the canonical second residual
+determinant \(\Delta_7\).
+
+That makes the endgame status remark precise.
+5) Optional companion sentence in Interpretation
+
+If you want the section to be fully self-consistent from the start, I would also adjust the earlier interpretation paragraph so it no longer sounds like “full total pair formula” is the goal.
+
+Find the sentence (or paragraph) that says roughly:
+
+What remains incomplete is the full closed coefficient formula for the total
+septic fixed-sector pair \((u_7,v_7)\) after all order-\(7\) sectors are
+included.
+
+Replace with:
+
+What remains incomplete is the full lower/mixed septic completion of the raw
+fixed-sector pair \((u_7,v_7)\) after all order-\(7\) sectors are included.
+At the canonical level, however, the quotient class
+\([A_7^{\mathfrak f}]\in \mathfrak f/\mathbf C A_5^{\mathfrak f}\) and the
+residual determinant \(\Delta_7\) are already the correct order-\(7\)
+invariants for the later geometry.
+
+This is optional, but it helps the section read cleanly from top to bottom.
+Net effect
+
+After these edits, the paper will say the right thing everywhere:
+
+    closed: quotient class [A7f][A7f​], canonical Δ7Δ7​,
+
+    still open: lower/mixed septic completion of the raw pair (u7,v7)(u7​,v7​),
+
+    not needed later: a unique gauge-independent representative of (u7,v7)(u7​,v7​).
+
+That is the right mathematical status.
+
+If you want, the next pass can be the same kind of edit list for the symmetric zero-capture / directional-kernel bottleneck so the global status remarks become just as crisp.
+
+ok, if this is still open: lower/mixed septic completion of the raw pair (u7, v7), can we finish this?
+
+I’m checking the current draft language around the order-7 fixed-sector package so I can separate “mathematically impossible because of gauge freedom” from “still finishable by fixing a gauge.”
+
+proof_of_rh(101).tex
+File
+here's the most recent draft. continue
+
+I’m checking the latest draft specifically on the order-7 fixed-sector section and the current “still open” wording, because the key question is whether the raw pair is actually finishable or whether it remains gauge-nonunique by design.
+
+Yes — but only after making the distinction explicit.
+
+From the current draft, the situation is now:
+
+    the canonical quotient-level order-7 package is closed:
+    [A7f]=[A7,K1f]in f/CA5f,Δ7=Δ7,K1;
+    [A7f​]=[A7,K1​f​]in f/CA5f​,Δ7​=Δ7,K1​​;
+
+    what remains open is only the raw representative (u7,v7)(u7​,v7​), because there is still the genuine one-dimensional ambiguity
+    A7f↦A7f+c2A5f.
+    A7f​↦A7f​+c2​A5f​.
+
+The draft says exactly that in the current status remarks.
+
+So the answer is:
+
+You cannot finish the raw pair as a unique invariant theorem without choosing a gauge.
+That is not a missing computation anymore; it is a genuine residual freedom.
+
+What you can finish is one of these two stronger-looking but actually correct alternatives:
+1. Declare the raw pair intentionally gauge-dependent
+
+Say that the order-7 layer is closed canonically via Δ7Δ7​ and [A7f][A7f​], and that any raw pair (u7,v7)(u7​,v7​) is only defined up to
+(u7,v7)↦(u7,v7)+c2(u5,v5).
+(u7​,v7​)↦(u7​,v7​)+c2​(u5​,v5​).
+
+This is already enough for the RH architecture, because all later geometry uses c,v5,Δ7c,v5​,Δ7​, not a chosen raw representative. That is the cleanest mathematical stopping point.
+2. If you insist on a raw pair, fix a gauge section
+
+You can finish the raw pair after choosing a gauge convention.
+
+Since
+A5f=u5I+v5S,A7f=u7I+v7S,
+A5f​=u5​I+v5​S,A7f​=u7​I+v7​S,
+
+and the ambiguity is
+(u7,v7)↦(u7,v7)+c2(u5,v5),
+(u7​,v7​)↦(u7​,v7​)+c2​(u5​,v5​),
+
+on any region where v5≠0v5​=0 you may choose
+c2=−v7v5,
+c2​=−v5​v7​​,
+
+which gives a gauge with
+v~7=0,u~7=Δ7v5.
+v~7​=0,u~7​=v5​Δ7​​.
+
+Similarly, on any region where u5≠0u5​=0, choose
+c2=−u7u5,
+c2​=−u5​u7​​,
+
+which gives
+u~7=0,v~7=−Δ7u5.
+u~7​=0,v~7​=−u5​Δ7​​.
+
+So the raw pair is locally finishable on charts where one component of A5fA5f​ is nonzero. What is not available is a single globally canonical representative independent of gauge. That is the precise mathematical answer.
+
+So if your question is “can we fully finish the raw lower/mixed septic completion as a unique theorem?”, my answer is:
+
+No, not uniquely, because the one-dimensional septic gauge freedom is real.
+
+If your question is “can we finish it enough for the paper and even choose a raw representative if desired?”, my answer is:
+
+Yes.
+The paper can now safely say:
+
+    canonically, the order-7 layer is closed via [A7f][A7f​] and Δ7Δ7​;
+
+    raw representatives (u7,v7)(u7​,v7​) can be chosen locally by gauge-fixing, but are not canonical.
+
+That is the right endpoint of this line of work.
+
+ok, give the latex insertions/edits to update the draft to cleanly state:
+(1) canonically, the order-7 layer is closed via [A
+7
+f
+	​
+
+] and Δ
+7
+	​
+
+;
+
+AND
+
+(1) make a REMARK that raw representatives (u
+7
+	​
+
+,v
+7
+	​
+
+) can be chosen locally by gauge-fixing, but are not canonical.
+
+remove/update any ambiguous wip/audit comments that might confuse the reader.
+
+I’m pulling the exact order-7 status and remark blocks from the latest TeX so I can give you literal find-and-replace edits with placement, not general advice.
+
+I checked the current draft. On the order-7 front, I do not think there is more essential math to do for the RH architecture.
+
+The draft now already contains the whole quotient-level closure stack:
+
+    the projected septic gauge law, which shows the genuine ambiguity is
+    A7f↦A7f+c2A5f;
+    A7f​↦A7f​+c2​A5f​;
+
+    the explicit K5K5​-shadow identification and projected law;
+
+    the projected K3K3​-shadow vanishing;
+
+    the full odd-germ parity elimination of the pure same-point septic sector;
+
+    and the quotient-septic closure theorem
+    [A7f]=[A7,K1f]in f/CA5f,Δ7=Δ7,K1.
+    [A7f​]=[A7,K1​f​]in f/CA5f​,Δ7​=Δ7,K1​​.
+
+All of that is now present in the current file.
+
+So the right conclusion is:
+
+    canonically, the order-7 layer is closed, via [A7f][A7f​] and Δ7Δ7​;
+
+    what is still “open” is only the raw representative (u7,v7)(u7​,v7​), because the one-dimensional gauge freedom is real, not a missing computation. The draft now says this clearly in the status remark.
+
+That means there is no further order-7 theorem you need in order to advance the proof. Trying to “finish the raw total pair” uniquely would be solving the wrong problem unless you first choose a gauge convention. If you wanted, you could add a purely expository remark that on a chart where v5≠0v5​=0 one may choose a local gauge with v~7=0v~7​=0, or where u5≠0u5​=0 a gauge with u~7=0u~7​=0, but that would only produce a local representative choice, not a new invariant theorem.
+
+So where to go next is no longer order-7 algebra. The real remaining fronts are the ones the draft still flags:
+
+    the symmetric turning-boundary zero-capture / directional-kernel theorem,
+
+    the quintic pure-value quotient detector issue,
+
+    and the first-order surjectivity cleanup.
+
+So my continuation advice is:
+
+freeze the order-7 section as canonically closed and stop spending proof effort there.
+Only add a short explanatory remark, if you want, saying that raw representatives (u7,v7)(u7​,v7​) can be chosen locally by gauge-fixing but are not canonical. After that, the main battle is purely elsewhere.
+
+ok so give me the exact latex edits to make in the paper
+
+I’m pulling the exact order-7 status and remark blocks from the latest TeX so I can give you literal find-and-replace edits, not general advice.
+
+and make sure to remove/update any wip- / audit- remarks that are no longer relevant
+
+Yes. Here are the exact LaTeX edits I would make in proof_of_rh(101).tex so the paper says the right thing everywhere:
+
+    canonically closed: [A7f][A7f​] and Δ7Δ7​,
+
+    still non-unique: the raw representative (u7,v7)(u7​,v7​),
+
+    but harmless: local raw representatives can be chosen by gauge-fixing.
+
+I’ll give these as literal “find this / replace with this” and one insertion.
+1) In Remark [Interpretation], replace the last paragraph
+
+Find:
+
+The current draft now records explicit coefficient formulas for the quintic
+commutator contribution and the septic $K_1$-transport contribution in the
+existing notation $(u,v,w,\alpha,\beta,\gamma,r,\dots)$. The canonical
+order-$7$ fixed-sector content is the quotient class
+\[
+[A_7^{\mathfrak f}] \in \mathfrak f/\mathbf C A_5^{\mathfrak f},
+\]
+equivalently the second residual determinant
+\[
+\Delta_7=u_7v_5-u_5v_7.
+\]
+What remains non-unique is only the raw representative pair $(u_7,v_7)$,
+which is defined only up to the one-dimensional septic gauge ambiguity along
+the quintic fixed-sector line $\mathbf C A_5^{\mathfrak f}$. These are
+nevertheless the natural variables for the geometric reformulation of the
+multi-pair problem.
+
+Replace with:
+
+The current draft now records explicit coefficient formulas for the quintic
+commutator contribution and the septic $K_1$-transport contribution in the
+existing notation $(u,v,w,\alpha,\beta,\gamma,r,\dots)$. The canonical
+order-$7$ fixed-sector content is the quotient class
+\[
+[A_7^{\mathfrak f}] \in \mathfrak f/\mathbf C A_5^{\mathfrak f},
+\]
+equivalently the second residual determinant
+\[
+\Delta_7=u_7v_5-u_5v_7.
+\]
+What remains non-unique is only the raw representative pair $(u_7,v_7)$,
+which is defined only up to the one-dimensional septic gauge ambiguity along
+the quintic fixed-sector line $\mathbf C A_5^{\mathfrak f}$. Thus the later
+geometry should be formulated in terms of the canonical quotient-level order-$7$
+data \([A_7^{\mathfrak f}]\) and \(\Delta_7\), rather than a uniquely chosen
+raw pair \((u_7,v_7)\). These are nevertheless the natural variables for the
+geometric reformulation of the multi-pair problem.
+
+2) Replace Remark [Status of the order-7 fixed-sector package]
+
+Find:
+
+\begin{remark}[Status of the order-$7$ fixed-sector package]
+\label{rem:status-full-septic-fixed-sector}
+The order-$7$ fixed-sector analysis is now closed at the canonical quotient
+level. By Theorem~\ref{thm:quotient-septic-closure}, the full total septic
+fixed-sector class satisfies
+\[
+[A_7^{\mathfrak f}]
+=
+[A_{7,K_1}^{\mathfrak f}]
+\quad\text{in }\mathfrak f/\mathbf C A_5^{\mathfrak f},
+\]
+and the canonical second residual determinant is
+\[
+\Delta_7=\Delta_{7,K_1}.
+\]
+
+What remains non-unique is the raw representative of $A_7^{\mathfrak f}$
+inside the affine line
+\[
+A_{7,K_1}^{\mathfrak f}+\mathbf C A_5^{\mathfrak f},
+\]
+as recorded by Proposition~\ref{prop:projected-septic-gauge-law}. Equivalently,
+the full lower/mixed septic completion of the raw total pair $(u_7,v_7)$ is
+still open, but this remaining gauge-dependent choice does not affect the
+canonical quotient class $[A_7^{\mathfrak f}]$ or the residual determinant
+$\Delta_7$ used in the later geometric arguments.
+\end{remark}
+
+Replace with:
+
+\begin{remark}[Status of the order-$7$ fixed-sector package]
+\label{rem:status-full-septic-fixed-sector}
+The order-$7$ fixed-sector analysis is now closed at the canonical quotient
+level. By Theorem~\ref{thm:quotient-septic-closure}, the full total septic
+fixed-sector class satisfies
+\[
+[A_7^{\mathfrak f}]
+=
+[A_{7,K_1}^{\mathfrak f}]
+\quad\text{in }\mathfrak f/\mathbf C A_5^{\mathfrak f},
+\]
+and the canonical second residual determinant is
+\[
+\Delta_7=\Delta_{7,K_1}.
+\]
+
+What remains non-unique is only the raw representative of \(A_7^{\mathfrak f}\)
+inside the affine line
+\[
+A_{7,K_1}^{\mathfrak f}+\mathbf C A_5^{\mathfrak f},
+\]
+as recorded by Proposition~\ref{prop:projected-septic-gauge-law}. Equivalently,
+the full lower/mixed septic completion of the raw total pair \((u_7,v_7)\) is
+not canonically determined. This remaining gauge-dependent choice does not
+affect the quotient class \([A_7^{\mathfrak f}]\) or the residual determinant
+\(\Delta_7\) used in the later geometric arguments.
+\end{remark}
+
+3) Insert a new remark immediately after rem:status-full-septic-fixed-sector
+
+Insert immediately after the remark above:
+
+\begin{remark}[Local gauge-fixing for raw septic representatives]
+\label{rem:local-gauge-fixing-u7-v7}
+Although the raw representative pair \((u_7,v_7)\) is not canonical, local
+choices may be made by fixing a gauge section along the quintic fixed-sector
+line. Indeed, Proposition~\ref{prop:projected-septic-gauge-law} gives
+\[
+(u_7^{\new},v_7^{\new})=(u_7,v_7)+c_2(u_5,v_5).
+\]
+Hence on any region where \(v_5\neq 0\), one may choose
+\[
+c_2=-\frac{v_7}{v_5},
+\]
+so that
+\[
+v_7^{\new}=0,
+\qquad
+u_7^{\new}=\frac{\Delta_7}{v_5}.
+\]
+Similarly, on any region where \(u_5\neq 0\), one may choose
+\[
+c_2=-\frac{u_7}{u_5},
+\]
+so that
+\[
+u_7^{\new}=0,
+\qquad
+v_7^{\new}=-\frac{\Delta_7}{u_5}.
+\]
+Thus raw septic representatives can be chosen locally by gauge-fixing, but
+such choices are auxiliary and are not canonical.
+\end{remark}
+
+This is the cleanest place to say exactly what you want the reader to understand.
+4) Tighten the λ-reduction remark
+
+Find:
+
+on that interval. In this sense, the present argument excludes $W$-flatness on
+an $M\neq 0$ region without requiring a separate differential equation for
+$\lambda^{[1]}$; what remains open is not the canonical quotient-level order-$7$
+invariant, but only the contribution of the lower/mixed septic sectors to the
+raw total pair $(u_7,v_7)$.
+
+Replace with:
+
+on that interval. In this sense, the present argument excludes $W$-flatness on
+an $M\neq 0$ region without requiring a separate differential equation for
+$\lambda^{[1]}$; what remains open is not the canonical quotient-level order-$7$
+invariant, but only the lower/mixed septic completion of a raw representative
+pair \((u_7,v_7)\), which is irrelevant to the quotient class
+\([A_7^{\mathfrak f}]\) and to \(\Delta_7\).
+
+5) Replace Remark [Audit: direct septic witness]
+
+Find:
+
+\begin{remark}[Audit: direct septic witness]
+\label{rem:audit-direct-septic-witness}
+The direct $q^{(7)}$-slice of total $\Delta_7$ is now closed at the
+weight-one level by
+Proposition~\ref{prop:direct-q7-total-delta7-nonzero}. Together with
+Theorem~\ref{thm:quotient-septic-closure}, this closes the canonical
+quotient-level order-$7$ package. What remains open at order $7$ is only
+the full lower/mixed septic completion of the raw fixed-sector pair
+$(u_7,v_7)$.
+\end{remark}
+
+Replace with:
+
+\begin{remark}[Audit: direct septic witness]
+\label{rem:audit-direct-septic-witness}
+The direct \(q^{(7)}\)-slice of total \(\Delta_7\) is now closed at the
+weight-one level by
+Proposition~\ref{prop:direct-q7-total-delta7-nonzero}. Together with
+Theorem~\ref{thm:quotient-septic-closure}, this closes the canonical
+quotient-level order-\(7\) package. What remains non-unique at order \(7\) is
+only the lower/mixed septic completion of a raw representative pair
+\((u_7,v_7)\), not any further canonical quotient-level invariant.
+\end{remark}
+
+This removes the suggestion that an order-7 theorem still needed by the proof is open.
+6) Tighten the endgame status remark
+
+Find this paragraph inside rem:wip-final-endgame-status:
+
+At the local algebraic level, the canonical quotient-level order-$7$
+fixed-sector package is now closed via
+Theorem~\ref{thm:quotient-septic-closure}: the remaining order-$7$ ambiguity is
+only the lower/mixed septic completion of a raw representative inside
+$A_{7,K_1}^{\mathfrak f}+\mathbf C A_5^{\mathfrak f}$, and does not affect
+the quotient class $[A_7^{\mathfrak f}]$ or the canonical second residual
+determinant $\Delta_7$.
+
+Replace with:
+
+At the local algebraic level, the canonical quotient-level order-$7$
+fixed-sector package is now closed via
+Theorem~\ref{thm:quotient-septic-closure}: the remaining order-$7$ ambiguity is
+only the choice of a raw representative inside
+\(A_{7,K_1}^{\mathfrak f}+\mathbf C A_5^{\mathfrak f}\), equivalently a local
+gauge-fixing of \((u_7,v_7)\), and does not affect the quotient class
+\([A_7^{\mathfrak f}]\) or the canonical second residual determinant
+\(\Delta_7\).
+
+This aligns the endgame wording with the new local gauge-fixing remark.
+7) Remove/update any stale “still open” wording about order-7 if present elsewhere
+
+Search for any remaining phrases like:
+
+    full lower/mixed septic completion of the raw total pair
+
+    full total pair $(u_7,v_7)$ is still open
+
+    order-7 fixed-sector algebra still open
+
+and replace them with one of these two forms, depending on context:
+If the sentence is about canonical proof-relevant content, use:
+
+the canonical quotient-level order-\(7\) package is now closed via
+Theorem~\ref{thm:quotient-septic-closure}
+
+If the sentence is about raw coefficients, use:
+
+only the raw representative \((u_7,v_7)\) remains gauge-dependent, with local
+choices available by Remark~\ref{rem:local-gauge-fixing-u7-v7}
+
+8) One optional cleanup in Remark [Interpretation]
+
+This is optional, but I would improve the last sentence slightly.
+
+Find:
+
+These are nevertheless the natural variables for the geometric reformulation of the
+multi-pair problem.
+
+Replace with:
+
+At the canonical level, these are the natural variables for the geometric
+reformulation of the multi-pair problem; raw representatives \((u_7,v_7)\) may
+be chosen locally by gauge-fixing when convenient, but are not themselves
+canonical.
+
+Net effect
+
+After these edits, the paper will say exactly the right thing:
+
+    Canonically closed: [A7f][A7f​] and Δ7Δ7​
+
+    Not canonically unique: raw (u7,v7)(u7​,v7​)
+
+    Still usable if wanted: local raw representatives via gauge-fixing
+
+    No stale confusion: no lingering audit/WIP language implying that a proof-relevant order-7 invariant is still missing
+
+If you want, I can do the same kind of exact-edit pass next for the global geometry bottleneck language so the turning-boundary zero-capture gap is stated just as crisply.
+
+proof_of_rh(106).tex
+File
+check the latest draft
+
+I’m checking the latest TeX directly around the order-7 section, the status remarks, and the endgame wording to see whether the draft now states the proof status consistently.
+
+I checked the latest draft, and on the order-7 front it now looks internally consistent.
+
+The good news is that the paper now says the right thing:
+
+    the canonical order-7 content is closed via the quotient class [A7f][A7f​] and the residual determinant Δ7Δ7​;
+
+    the raw pair (u7,v7)(u7​,v7​) is only a gauge-dependent representative;
+
+    the new local gauge-fixing remark makes that explicit instead of leaving it implicit.
+
+That is the right mathematical status, and it means order-7 is no longer a live bottleneck for the later geometry. The recent quotient-septic block is doing the job it should.
+
+I also checked compilation: the file builds cleanly after rerun, with no remaining undefined-reference problem.
+
+So my holistic verdict is:
+
+Order-7 is now in good shape. I would stop spending proof effort there.
+
+The real remaining fronts are now elsewhere:
+
+    the symmetric turning-boundary zero-capture / directional-kernel theorem;
+
+    the quintic pure-value quotient detector issue;
+
+    and the first-order surjectivity cleanup.
+
+One thing is still correctly non-final in the draft: the endgame remains explicitly in the pair-like branch. That is good and honest. It means the paper is no longer overstating order-7, but it still is not a finished unconditional RH proof because the global turning-boundary kernel theorem and the general finite-core endgame are still not closed.
+
+So the short answer is:
+
+    latest order-7 edits: good,
+
+    status language: now basically correct,
+
+    next place to work: not order-7 anymore — move to the turning-boundary zero-capture theorem.
+
 

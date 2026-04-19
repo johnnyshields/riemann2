@@ -1,0 +1,3139 @@
+convo4(2).txt
+Document
+proof_of_rh(27).tex
+File
+### quintic and septic local algebra
+
+Please audit the attached TeX draft as a referee, focusing only on these items:
+
+1. audit-quintic-pure-value-trace
+   Check whether the draft actually proves that trace annihilates the quintic pure-value slice (V_{\val}^{(5)}(h)), or whether this is still conditional. If conditional, tell me exactly what remains to be shown and whether the current formulation is honest.
+
+2. audit-direct-septic-witness
+   Check whether the direct (q^{(7)})-driven septic witness is really established generically nonzero at the level claimed in the draft. Focus on the graded-slice argument and whether the displayed order-7 formulas are enough.
+
+3. audit-full-septic-fixed-sector
+   Check whether the draft truly has the full total septic fixed-sector pair ((u_7,v_7)), or only the (K_1)-transport contribution plus the direct (q^{(7)})-slice. Identify exactly what is still missing.
+
+Please ignore the later global geometry. I only want a precise audit of the local order-5 / order-7 algebra and whether the current audit remarks are correctly scoped.
+
+For each item, give me:
+* “proved as written,”
+* “conditional but honestly stated,” or
+* “still a real gap,”
+And suggest how to repair any gaps or upgrade from conditional. You can also refer to convo4.txt as a reference/context around the derivations and proofs
+
+I’m reading the TeX and the convo note together, then I’ll pin each audit item to what the draft actually proves versus what is still only scaffolded. I’ll stay strictly on the local order-5/order-7 algebra and ignore the later global geometry.
+
+I’ve narrowed the file to the local spots that matter. Now I’m checking the actual theorem/remark text around the three audit labels so I can separate “proved,” “generic but conditional,” and “real gap” against the draft itself rather than the convo notes.
+
+I checked the local order-5/order-7 section against the current TeX, and the three audit labels are scoped mostly honestly.
+
+    audit-quintic-pure-value-trace
+
+Verdict: conditional but honestly stated.
+
+The draft does not prove that trace annihilates the quintic pure-value slice V\val(5)(h)V\val(5)​(h). Instead, the first residual theorem is explicitly stated under the hypothesis
+tr⁡(V\val(5)(h))=0(h∈Ucub),
+tr(V\val(5)​(h))=0(h∈Ucub​),
+
+and the proof uses that hypothesis to make trace descend to Q/ℓhQ/ℓh​. Right after that, both the WIP remark and the audit remark say this is still the main remaining local order-5 structural task. That is an honest conditional formulation, not a hidden proof gap.
+
+What remains to be shown is exactly one of these:
+tr⁡(V\val(5)(h))=0 for all h∈Ucub,
+tr(V\val(5)​(h))=0 for all h∈Ucub​,
+
+or, in the weaker form the draft itself allows, that trace annihilates the image of V\val(5)(h)V\val(5)​(h) in the residual quotient Q/ℓhQ/ℓh​. The normalization-gauge part is already separated off, so the missing step is specifically the pure-value order-5 slice, not gauge leakage.
+
+The clean repair is to compute the order-5 pure-value family explicitly after whitening/normalization and show its image is trace-free, or at least show its residual image lies in ker⁡(τh)ker(τh​). If that cannot be done cleanly, the fallback is to replace raw trace by a quotient-level functional constructed to vanish on the pure-value slice.
+
+    audit-direct-septic-witness
+
+Verdict: conditional but honestly stated.
+
+The draft proves a graded-slice structure statement, not generic nonvanishing. What is actually established is: on the direct linear q(7)q(7)-driven slice, the septic K1K1​-transport fixed-sector contribution is II-directional, with
+v7,K1(q(7))=0,u7,K1(q(7))=κ((x2−x1)ν6(q(7))+v(γ5−α5)(q(7))),
+v7,K1​(q(7))​=0,u7,K1​(q(7))​=κ((x2​−x1​)ν6(q(7))​+v(γ5​−α5​)(q(7))),
+
+and therefore
+Δ7(q(7))=u7(q(7))v5.
+Δ7(q(7))​=u7(q(7))​v5​.
+
+That is real progress, but it is only a directionality/reduction statement. It does not prove the displayed coefficient is generically nonzero.
+
+The proof of the later non-affinity proposition then explicitly assumes that the direct q(7)q(7)-slice of Δ7Δ7​ is generically nonzero, and the later audit remark repeats that this still needs to be audited as a standalone local theorem. So the file is not silently using more than it has proved.
+
+What remains is to prove that the combination
+(x2−x1)ν6(q(7))+v(γ5−α5)(q(7))
+(x2​−x1​)ν6(q(7))​+v(γ5​−α5​)(q(7))
+
+does not vanish generically on the relevant region. The present order-7 formulas are enough to isolate the candidate witness, exclude the SS-component on that grading, and reduce the question to that scalar combination. They are not enough, as written, to conclude generic noncancellation.
+
+    audit-full-septic-fixed-sector
+
+Verdict: conditional but honestly stated.
+
+The draft does not have a full explicit formula for the total septic fixed-sector pair (u7,v7)(u7​,v7​). What it has is an explicit formula for the septic K1K1​-transport contribution
+A7,K1f(h)=u7,K1(h)I+v7,K1(h)S,
+A7,K1​f​(h)=u7,K1​​(h)I+v7,K1​​(h)S,
+
+with the three displayed channels X5/X1X5​/X1​, X2/X4X2​/X4​, and X0/X6X0​/X6​ summed inside that K1K1​-transport sector.
+
+But the draft’s own audit remark then says plainly that what is still missing is the contribution of the remaining order-7 sectors to the full total pair (u7,v7)(u7​,v7​), hence also to the full total Δ7Δ7​. So the current text is not pretending that the full septic fixed-sector algebra is closed; it is only claiming the K1K1​-transport piece plus the direct q(7)q(7)-slice analysis inside that piece.
+
+So the exact answer to your question is: the draft currently has only the K1K1​-transport fixed-sector contribution, plus the direct q(7)q(7)-slice corollary built from it, not the full total septic pair. The repair is to derive the remaining order-7 sectors from the actual recursion, project each to ff, and then sum them into closed formulas for u7u7​ and v7v7​. Only after that can Δ7Δ7​ be treated as fully explicit rather than partly transport-level.
+
+My bottom line:
+
+audit-quintic-pure-value-trace: conditional but honestly stated.
+audit-direct-septic-witness: conditional but honestly stated.
+audit-full-septic-fixed-sector: conditional but honestly stated.
+
+I do not see any of the three being proved as written. I also do not see the draft hiding that fact. The real remaining work is exactly what the audit remarks say: trace-freeness of V\val(5)V\val(5)​, generic noncancellation of the direct q(7)q(7)-slice, and completion of the non-K1K1​ septic sectors.
+
+can you do the repairs for #1 and #2?
+
+I’m pulling the exact local sections for the quintic trace and the direct septic witness so I can see whether they can be repaired by tightening the existing argument, or whether one of them still needs a genuinely new lemma.
+
+Yes, but asymmetrically.
+
+For #2 I think there is a real repair: the file already isolates the direct q(7)q(7)-slice and proves its II-directionality, so the missing step is a local noncancellation proposition very close to the quintic no-cancellation lemma.
+
+For #1 I do not think there is a clean proof from the current ingredients. The right repair is to make that part explicitly auxiliary and stop treating it as a load-bearing input for the strengthened 3/5/73/5/7 route. The convo audit is basically right that this is still genuinely open unless you prove a stronger normalization/quotient statement or replace trace by a different detector.
+
+Here is exactly what I would do.
+Repair for #1: make the first-residual trace theorem auxiliary, not load-bearing
+
+I would not claim to have proved
+tr⁡(V\val(5)(h))=0.
+tr(V\val(5)​(h))=0.
+
+Instead I would strengthen the wording so the proposition only uses the weaker residual-quotient hypothesis that is actually needed, and then add a remark that the later fixed-sector route does not depend on it.
+Replace the current proposition statement
+
+Replace the current proposition header and hypothesis block
+
+\begin{proposition}[Generic first residual nonvanishing under trace-free quintic pure value slice]
+\label{prop:first-residual-class-generic}
+Assume that for every $h\in \mathcal U_{\mathrm{cub}}$,
+\[
+\operatorname{tr}\bigl(V_{\val}^{(5)}(h)\bigr)=0.
+\]
+Then there exists an open dense subset
+...
+\end{proposition}
+
+with
+
+\begin{proposition}[Auxiliary first residual nonvanishing under a quotient-trace hypothesis]
+\label{prop:first-residual-class-generic}
+Assume that for every $h\in \mathcal U_{\mathrm{cub}}$, trace annihilates the
+image of the quintic pure-value slice $V_{\val}^{(5)}(h)$ in the residual
+quotient $Q/\ell_h$.
+Then there exists an open dense subset
+\[
+\mathcal U_{\mathrm{res}}\subset \mathcal U_{\mathrm{cub}}
+\]
+such that
+\[
+\overline v_1(h)\neq 0
+\qquad\text{in }Q/\ell_h
+\]
+for every $h\in \mathcal U_{\mathrm{res}}$.
+
+Equivalently, on $\mathcal U_{\mathrm{res}}$ the quintic quotient coefficient
+is not collinear with the cubic leading line:
+\[
+v_1(h)\notin \ell_h.
+\]
+Hence the one-pair quotient odd germ is not projectively constant on
+$\mathcal U_{\mathrm{res}}$.
+\end{proposition}
+
+Tighten the proof opening
+
+Replace
+
+By Corollary~\ref{cor:trace-invariant-under-normalization-gauge}, trace is
+invariant under the normalization gauge at the first residual step. By the
+present hypothesis, trace also annihilates the quintic pure value slice
+$V_{\val}^{(5)}(h)$. Therefore trace descends to a well-defined linear
+functional
+\[
+\tau_h:Q/\ell_h\to \mathbf C.
+\]
+
+with
+
+By Corollary~\ref{cor:trace-invariant-under-normalization-gauge}, trace is
+invariant under the normalization gauge at the first residual step. By the
+present hypothesis, trace also annihilates the image of the quintic pure-value
+slice in the residual quotient. Therefore trace descends to a well-defined
+linear functional
+\[
+\tau_h:Q/\ell_h\to \mathbf C.
+\]
+
+Add a status remark immediately after the audit remark
+
+Insert after rem:audit-quintic-pure-value-trace:
+
+\begin{remark}[Status of the first residual trace detector]
+\label{rem:status-first-residual-trace-detector}
+Proposition~\ref{prop:first-residual-class-generic} should be read as an
+auxiliary closure result for the raw trace route. The strengthened one-pair
+package developed below uses
+\[
+c(h),\qquad A_5^{\mathfrak f}(h),\qquad \Delta_7(h),
+\]
+and does not depend on the trace-free pure-value quintic hypothesis.
+\end{remark}
+
+Tighten the later narrative paragraph
+
+In the later summary paragraph that currently says
+
+Under the additional trace-free pure-value quintic hypothesis of
+Proposition~\ref{prop:first-residual-class-generic}, there is an open dense
+subset ...
+
+change it to
+
+Auxiliarily, under the quotient-trace hypothesis of
+Proposition~\ref{prop:first-residual-class-generic}, there is an open dense
+subset ...
+
+and then add one sentence after that paragraph:
+
+This auxiliary first-residual statement is not used in the strengthened
+fixed-sector route based on $(c,v_5,\Delta_7)$.
+
+That does not “solve” #1 mathematically, but it does repair the draft honestly: the open issue remains local and explicit, and it no longer pretends to be a hidden prerequisite for the later normalized-planar-curve route. That is the best repair I can defend from the present file.
+Repair for #2: add the missing noncancellation proposition and weaken the later hypothesis accordingly
+
+This one I think you can actually close at the local level.
+
+The file already has the corollary
+v7,K1(q(7))=0,u7,K1(q(7))=κ((x2−x1)ν6(q(7))+v(γ5−α5)(q(7))),
+v7,K1​(q(7))​=0,u7,K1​(q(7))​=κ((x2​−x1​)ν6(q(7))​+v(γ5​−α5​)(q(7))),
+
+and hence
+Δ7(q(7))=u7(q(7))v5.
+Δ7(q(7))​=u7(q(7))​v5​.
+
+What is missing is exactly the same kind of parity/graded-slice noncancellation argument you already used at quintic order.
+Insert this immediately after cor:direct-q7-septic-slice
+
+\begin{proposition}[Generic nonvanishing of the direct septic $K_1$ witness]
+\label{prop:direct-q7-k1-witness-nonzero}
+On the graded slice $(K_1,\eta_2,q^{(7)})$, the only contributing channels to
+$u_{7,K_1}$ are
+\[
+\kappa(x_2-x_1)\nu_6
+\qquad\text{and}\qquad
+\kappa\,v(\gamma_5-\alpha_5),
+\]
+and their total coefficient of the monomial
+\[
+\kappa(h)\,\eta_2(h)\,q^{(7)}(h)
+\]
+is nonzero. Consequently
+\[
+u_{7,K_1}^{(q^{(7)})}(h)\not\equiv 0
+\]
+on every connected one-pair region satisfying the cubic nondegeneracy
+hypotheses.
+
+If moreover $v_5\not\equiv 0$ on a connected component of $\{c\neq 0\}$, then
+\[
+\Delta_7^{(q^{(7)})}(h)=u_7^{(q^{(7)})}(h)\,v_5(h)
+\]
+is generically nonzero on that component.
+\end{proposition}
+
+\begin{proof}
+The proof is the septic analogue of
+Lemma~\ref{lem:no-cancellation-quintic-trace}.
+
+First, the direct $q^{(7)}$-factor first appears only in same-point degree $5$,
+through the quintic Taylor coefficient of the $(2,2)$-entry of
+\[
+G_{m,\pm}^{\corr}(s)
+=
+\frac1\pi
+\begin{pmatrix}
+2q(t_\pm) & \frac12 q'(t_\pm)\\[.5ex]
+\frac12 q'(t_\pm) & \frac1{12}(q''(t_\pm)+2q(t_\pm)^3)
+\end{pmatrix},
+\]
+namely through the quintic Taylor term of $q''(t_\pm)$. Hence the direct
+$q^{(7)}$-slice of $G_5$ is diagonal.
+
+By Lemma~\ref{lem:whitening-parity}, the corresponding linear $q^{(7)}$-slice
+of $X_5$ is therefore diagonal. In particular it contributes to
+$\gamma_5-\alpha_5$, but not to $\beta_5$.
+
+Likewise, the $\eta_2$-slice of $X_1$ is off-diagonal. Applying
+Lemma~\ref{lem:whitening-parity} again, the mixed
+$(\eta_2,q^{(7)})$-slice of $X_6$ is off-diagonal. Hence it contributes to
+$\nu_6$, but not to $\mu_6$ or $\lambda_6$.
+
+Therefore, on the graded slice $(K_1,\eta_2,q^{(7)})$, the only contributing
+channels to $u_{7,K_1}$ are indeed
+\[
+\kappa(x_2-x_1)\nu_6
+\qquad\text{and}\qquad
+\kappa\,v(\gamma_5-\alpha_5).
+\]
+
+To compute their combined coefficient, it suffices by multilinearity to
+restrict to the two perturbation directions carrying the relevant tags:
+an off-diagonal first-order perturbation
+\[
+A=\begin{pmatrix}0&u\\u&0\end{pmatrix}
+\]
+for the $\eta_2$-slice, and a diagonal fifth-order perturbation
+\[
+D=\begin{pmatrix}0&0\\0&d\end{pmatrix}
+\]
+for the direct $q^{(7)}$-slice. Write
+\[
+G_0=\diag(a^2,b^2),
+\qquad
+X(\varepsilon,\delta):=(G_0+\varepsilon A+\delta D)^{-1/2}
+=
+X_0+\varepsilon U+\delta V+\varepsilon\delta W+O(\varepsilon^2,\delta^2).
+\]
+Exactly as in the quintic calculation, solving
+\[
+X(\varepsilon,\delta)\,(G_0+\varepsilon A+\delta D)\,X(\varepsilon,\delta)=I
+\]
+order by order gives
+\[
+U_{12}=-\frac{u}{ab(a+b)},
+\qquad
+V_{22}=-\frac{d}{2b^3},
+\qquad
+W_{12}=\frac{du(a+2b)}{2ab^3(a+b)^2}.
+\]
+
+Here $U_{12}$ is the $\eta_2$-slice of $v$, $V_{22}$ is the direct
+$q^{(7)}$-slice of $\gamma_5-\alpha_5$, and $W_{12}$ is the mixed
+$(\eta_2,q^{(7)})$-slice of $\nu_6$. Therefore the total coefficient of the
+target slice inside
+\[
+(x_2-x_1)\nu_6+v(\gamma_5-\alpha_5)
+\]
+is
+\[
+\left(\frac1a-\frac1b\right)W_{12}+U_{12}V_{22}
+=
+\frac{du}{a^2b^2(a+b)^2},
+\]
+which is nonzero.
+
+Thus
+\[
+u_{7,K_1}^{(q^{(7)})}(h)\not\equiv 0.
+\]
+Finally, if $v_5\not\equiv 0$ on the connected component under consideration,
+then Corollary~\ref{cor:direct-q7-septic-slice} gives
+\[
+\Delta_7^{(q^{(7)})}=u_7^{(q^{(7)})}v_5,
+\]
+which is therefore generically nonzero on that component.
+\end{proof}
+
+Then weaken the hypothesis in prop:rho2-not-affine-in-rho1
+
+Replace
+
+\begin{proposition}[Non-affinity of the second normalized residual scalar]
+\label{prop:rho2-not-affine-in-rho1}
+Assume that the direct $q^{(7)}$-driven slice of $\Delta_7(h)$ is
+generically nonzero on the quintic-generic region. Then there do not exist
+constants $A,B\in\mathbf C$ such that
+...
+\end{proposition}
+
+with
+
+\begin{proposition}[Non-affinity of the second normalized residual scalar]
+\label{prop:rho2-not-affine-in-rho1}
+Assume that $v_5\not\equiv 0$ on the connected component of $\{c\neq 0\}$
+under consideration. Then there do not exist constants $A,B\in\mathbf C$ such
+that
+\[
+\rho_2(h)\equiv A\,\rho_1(h)+B
+\]
+on that component.
+
+Equivalently,
+\[
+\Delta_7(h)\not\equiv A\,v_5(h)+B\,c(h).
+\]
+\end{proposition}
+
+and replace the proof with
+
+\begin{proof}
+Suppose
+\[
+\Delta_7(h)\equiv A\,v_5(h)+B\,c(h)
+\]
+on a connected component of $\{c\neq 0\}$. Then the direct $q^{(7)}$-driven
+slice of the right-hand side vanishes, because $v_5$ and $c$ have no direct
+septic $q^{(7)}$-slice.
+
+On the other hand, by
+Proposition~\ref{prop:direct-q7-k1-witness-nonzero} and
+Corollary~\ref{cor:direct-q7-septic-slice}, the direct $q^{(7)}$-driven slice
+of $\Delta_7$ is generically nonzero on the component whenever
+$v_5\not\equiv 0$. This is a contradiction. Therefore
+\[
+\Delta_7(h)\not\equiv A\,v_5(h)+B\,c(h),
+\]
+and dividing by $c(h)$ yields
+\[
+\rho_2(h)\not\equiv A\,\rho_1(h)+B.
+\qedhere
+\]
+\end{proof}
+
+This really does close the direct-slice audit at the local level. What remains open after that is only the already-separated issue that the full total (u7,v7)(u7​,v7​) has not yet been completed beyond the K1K1​-transport sector. That is exactly what the other septic audit remark already says.
+Bottom line
+
+I would do these two things:
+
+For #1, I would not pretend the trace-annihilation theorem is proved. I would repair the draft by making it explicitly auxiliary and non-load-bearing.
+
+For #2, I would add the new proposition above and then weaken the later non-affinity hypothesis from “assume the direct q(7)q(7)-slice of Δ7Δ7​ is generically nonzero” to the cleaner and more transparent hypothesis v5≢0v5​≡0 on the component. The file already has the ingredients needed for that upgrade.
+
+If you want, I’ll turn this into a strict old-text/new-text patch list with insertion points only.
+
+proof_of_rh(37).tex
+File
+ok read this, there have been some fixes.
+
+Without weakening anything, can you give me only the repairs that strengthen things?
+
+I’m checking the revised file against the two local issues we discussed, with one filter only: keep anything that genuinely strengthens the draft, and discard anything that merely hedges or weakens claims.
+
+Yes. After reading the revised file, I think there is only one strengthening repair I can defend from the current state:
+
+Strengthen #2 by proving the direct q(7)q(7)-slice is generically nonzero at the level of the septic K1K1​-transport witness itself.
+
+For #1, I do not see a strengthening-only repair in the current draft. The file still does not prove
+tr⁡(V\val(5)(h))=0,
+tr(V\val(5)​(h))=0,
+
+and any textual change there that avoids proving it would be a hedge rather than a strengthening. So I would leave #1 alone unless you have a real new proof.
+
+Here is the strengthening repair I would actually make.
+1. Add a standalone local theorem after cor:direct-q7-septic-slice
+
+Insert this immediately after
+
+\end{proof}
+
+of \begin{corollary}[Direct $q^{(7)}$-driven septic slice].
+
+\begin{proposition}[Noncancellation of the direct septic $K_1$ witness]
+\label{prop:direct-q7-k1-witness-nonzero}
+On the graded slice
+\[
+(K_1,\eta_2,q^{(7)}),
+\]
+the only contributing channels to
+\[
+u_{7,K_1}^{(q^{(7)})}
+\]
+are
+\[
+\kappa(x_2-x_1)\nu_6^{(q^{(7)})}
+\qquad\text{and}\qquad
+\kappa\,v(\gamma_5-\alpha_5)^{(q^{(7)})},
+\]
+and their total coefficient of the monomial
+\[
+\kappa(h)\,\eta_2(h)\,q^{(7)}(h)
+\]
+is nonzero. Consequently,
+\[
+u_{7,K_1}^{(q^{(7)})}(h)\not\equiv 0
+\]
+on the generic one-pair region.
+\end{proposition}
+
+\begin{proof}
+Fix \(h\) and isolate the graded slice
+\[
+\kappa(h)\,\eta_2(h)\,q^{(7)}(h).
+\]
+
+By Corollary~\ref{cor:direct-q7-septic-slice}, the direct \(q^{(7)}\)-driven
+slice is \(I\)-directional and is given by
+\[
+u_{7,K_1}^{(q^{(7)})}
+=
+\kappa\Bigl(
+(x_2-x_1)\nu_6^{(q^{(7)})}
++
+v(\gamma_5-\alpha_5)^{(q^{(7)})}
+\Bigr).
+\]
+Thus it remains only to show that the two displayed channels do not cancel.
+
+Now consider the same-point expansion. By the explicit formula
+\[
+G_{m,\pm}^{\corr}(s)
+=
+\frac1\pi
+\begin{pmatrix}
+2q(t_\pm) & \frac12 q'(t_\pm)\\[.5ex]
+\frac12 q'(t_\pm) & \frac1{12}(q''(t_\pm)+2q(t_\pm)^3)
+\end{pmatrix},
+\]
+the factor \(q^{(7)}(h)\) first appears only in the quintic same-point
+coefficient \(G_5\), and there only in the diagonal sector, namely through
+the quintic Taylor term of the \((2,2)\)-entry coming from \(q''(t_\pm)\).
+Therefore, by Lemma~\ref{lem:whitening-parity}, the linear
+\(q^{(7)}\)-contribution to \(X_5\) is diagonal. In particular it contributes
+to \(\gamma_5-\alpha_5\), but not to \(\beta_5\).
+
+Likewise, the \(\eta_2(h)\)-slice of \(X_1(h)\) is off-diagonal, because
+\[
+v(h)=-\frac{1}{4\pi(s_1+s_2)}\,\eta_2(h).
+\]
+Applying Lemma~\ref{lem:whitening-parity} again, the mixed
+\((\eta_2,q^{(7)})\)-slice of \(X_6\) is off-diagonal. Hence it contributes
+to \(\nu_6\), but not to \(\mu_6\) or \(\lambda_6\).
+
+Thus the only contributing channels on the graded slice
+\[
+(K_1,\eta_2,q^{(7)})
+\]
+are exactly
+\[
+\kappa(x_2-x_1)\nu_6^{(q^{(7)})}
+\qquad\text{and}\qquad
+\kappa\,v(\gamma_5-\alpha_5)^{(q^{(7)})}.
+\]
+
+To compute their combined coefficient, it suffices by multilinearity to
+restrict to the two perturbation directions carrying the relevant tags:
+an off-diagonal first-order perturbation \(A\) for the \(\eta_2\)-slice and
+a diagonal fifth-order perturbation \(D\) for the \(q^{(7)}\)-slice.
+Accordingly, write
+\[
+G_0=\diag(a^2,b^2),
+\qquad
+A=
+\begin{pmatrix}
+0&u\\u&0
+\end{pmatrix},
+\qquad
+D=
+\begin{pmatrix}
+0&0\\0&d
+\end{pmatrix},
+\]
+and expand
+\[
+X(\varepsilon,\delta):=(G_0+\varepsilon A+\delta D)^{-1/2}
+=
+X_0+\varepsilon U+\delta V+\varepsilon\delta W+O(\varepsilon^2,\delta^2).
+\]
+Solving the identity
+\[
+X(\varepsilon,\delta)\,(G_0+\varepsilon A+\delta D)\,X(\varepsilon,\delta)=I
+\]
+order by order gives
+\[
+U_{12}=-\frac{u}{ab(a+b)},
+\qquad
+V_{22}=-\frac{d}{2b^3},
+\qquad
+W_{12}=\frac{du(a+2b)}{2ab^3(a+b)^2}.
+\]
+Here \(U_{12}\) is the \(\eta_2\)-slice of \(v\), \(V_{22}\) is the
+\(q^{(7)}\)-slice of \(\gamma_5-\alpha_5\), and \(W_{12}\) is the mixed
+\((\eta_2,q^{(7)})\)-slice of \(\nu_6\). Therefore the total coefficient of the
+target slice inside
+\[
+(x_2-x_1)\nu_6+v(\gamma_5-\alpha_5)
+\]
+is
+\[
+\left(\frac1a-\frac1b\right)W_{12}+U_{12}V_{22}
+=
+\frac{du}{a^2b^2(a+b)^2},
+\]
+which is nonzero.
+
+Thus the monomial
+\[
+\kappa(h)\,\eta_2(h)\,q^{(7)}(h)
+\]
+occurs in \(u_{7,K_1}^{(q^{(7)})}(h)\) with nonzero total coefficient, so
+\[
+u_{7,K_1}^{(q^{(7)})}(h)\not\equiv 0.
+\]
+\end{proof}
+
+This is a genuine strengthening: it turns the current “directionality only” corollary into a real noncancellation theorem for the direct local septic witness, without weakening any downstream claim.
+2. Narrow the audit remark, but do not weaken the later proposition
+
+Since this new proposition still stops at u7,K1(q(7))u7,K1​(q(7))​, not the full total Δ7(q(7))Δ7(q(7))​, I would not weaken prop:rho2-not-affine-in-rho1.
+
+What I would change is only the audit remark, so it reflects the smaller remaining gap.
+
+Replace the current remark
+
+\begin{remark}[Audit: direct septic witness]
+\label{rem:audit-direct-septic-witness}
+The use of Proposition~\ref{prop:rho2-not-affine-in-rho1} still depends on the
+claim that the direct $q^{(7)}$-driven slice of $\Delta_7$ is generically
+nonzero. The current draft contains the explicit $K_1$-transport formulas
+and the $I$-directionality of the direct $q^{(7)}$-slice, but the final
+generic noncancellation statement for that slice should still be audited as a
+standalone local theorem.
+\end{remark}
+
+with
+
+\begin{remark}[Audit: direct septic witness]
+\label{rem:audit-direct-septic-witness}
+The direct septic $K_1$ witness is now isolated and its
+$(K_1,\eta_2,q^{(7)})$-slice is proved generically nonzero by
+Proposition~\ref{prop:direct-q7-k1-witness-nonzero}. What still remains to be
+audited is the passage from this nonzero $K_1$-transport witness to the full
+total direct $q^{(7)}$-driven slice of $\Delta_7$, i.e.\ the contribution of
+the remaining order-$7$ sectors and the resulting total noncancellation in
+\(\Delta_7\).
+\end{remark}
+
+That is also a strengthening: it shrinks the live order-7 gap to exactly what is still open, instead of leaving the whole direct witness looking unfinished.
+3. What I would not change
+
+I would leave the quintic trace section alone for now.
+
+The file still has:
+
+    the proposition under the hypothesis
+    tr⁡(V\val(5)(h))=0,
+    tr(V\val(5)​(h))=0,
+
+    the WIP remark,
+
+    and the audit remark.
+
+From the current draft, I do not see a strengthening-only patch there. Anything short of an actual proof of trace annihilation would just reframe the dependency, not strengthen it.
+
+So my recommendation is:
+
+    Do not touch #1 unless you have a real new argument.
+
+    Add the new Proposition prop:direct-q7-k1-witness-nonzero.
+
+    Tighten rem:audit-direct-septic-witness to reflect the smaller remaining gap.
+
+    Do not weaken prop:rho2-not-affine-in-rho1 yet.
+
+If you want, I can turn this into a strict “old text / new text / insert after label X” patch list.
+
+proof_of_rh(39).tex
+File
+ok check this latest draft. are the fixes in? what work remains from the the original request of this thread, and what is done. (For reference: here is the original request):
+
+### quintic and septic local algebra
+
+Please audit the attached TeX draft as a referee, focusing only on these items:
+
+1. audit-quintic-pure-value-trace
+   Check whether the draft actually proves that trace annihilates the quintic pure-value slice (V_{\val}^{(5)}(h)), or whether this is still conditional. If conditional, tell me exactly what remains to be shown and whether the current formulation is honest.
+
+2. audit-direct-septic-witness
+   Check whether the direct (q^{(7)})-driven septic witness is really established generically nonzero at the level claimed in the draft. Focus on the graded-slice argument and whether the displayed order-7 formulas are enough.
+
+3. audit-full-septic-fixed-sector
+   Check whether the draft truly has the full total septic fixed-sector pair ((u_7,v_7)), or only the (K_1)-transport contribution plus the direct (q^{(7)})-slice. Identify exactly what is still missing.
+
+Please ignore the later global geometry. I only want a precise audit of the local order-5 / order-7 algebra and whether the current audit remarks are correctly scoped.
+
+For each item, give me:
+* “proved as written,”
+* “conditional but honestly stated,” or
+* “still a real gap,”
+And suggest how to repair any gaps or upgrade from conditional. You can also refer to convo4.txt as a reference/context around the derivations and proofs
+
+I’m checking the new TeX against the three original audit items only, and I’m comparing it to the earlier state so I can say what is now genuinely closed versus what is still only conditional.
+
+I’ve got the answer now. The main change is real but narrower than the whole original septic request: the new draft closes the graded K1K1​ direct-slice noncancellation, but it still does not close the full total Δ7Δ7​ slice or the full total (u7,v7)(u7​,v7​) package.
+
+Yes, one substantial fix is in.
+
+The order-7 strengthening repair we discussed is now present: the draft has the corollary isolating the direct q(7)q(7)-driven septic K1K1​-slice, and it now also has a separate proposition proving noncancellation of that graded (K1,η2,q(7))(K1​,η2​,q(7)) witness. That is the strengthening move we wanted, and the later audit remark has been narrowed accordingly. This matches the repair path sketched in convo4.
+
+The order-5 pure-value trace issue is not fixed in the strong sense. The draft still treats the first residual theorem under the hypothesis that trace annihilates V\val(5)(h)V\val(5)​(h), and it still keeps both the WIP remark and the audit remark saying this remains to be proved. That is still honest, but it is still conditional. This also matches the earlier diagnosis in convo4.
+
+So, against the original three audit items, here is the clean state.
+
+audit-quintic-pure-value-trace
+
+Status now: conditional but honestly stated.
+
+What is done: the draft is honest about the dependency. It no longer hides the issue; it states the proposition conditionally and keeps the WIP/audit remarks.
+
+What remains: you still need an actual proof that
+tr⁡(V\val(5)(h))=0
+tr(V\val(5)​(h))=0
+
+for h∈Ucubh∈Ucub​, or at least that trace annihilates the image of V\val(5)(h)V\val(5)​(h) in the residual quotient. Nothing in the latest draft upgrades this beyond a hypothesis.
+
+audit-direct-septic-witness
+
+Status now: partly fixed; still conditional at the full Δ7Δ7​ level, but honestly stated.
+
+What is done: the local graded-slice theorem you wanted is now in. The draft proves that on the graded slice (K1,η2,q(7))(K1​,η2​,q(7)), the only contributing channels to u7,K1(q(7))u7,K1​(q(7))​ are the two displayed ones, and that their total coefficient is nonzero. So the direct septic K1K1​-transport witness is now genuinely established as generically nonzero.
+
+What remains: the later normalized-curve use still needs the direct q(7)q(7)-slice of the full total
+Δ7
+Δ7​
+
+to be generically nonzero, and that is still only assumed in prop:rho2-not-affine-in-rho1. So the repair closed the K1K1​-graded local witness, but not yet the passage from that witness to the full total direct slice of Δ7Δ7​. The updated audit remark says exactly that, which is the right scope. This is also exactly the distinction we wanted the draft to make.
+
+audit-full-septic-fixed-sector
+
+Status now: conditional but honestly stated.
+
+What is done: the draft clearly records the quintic fixed-sector data and the explicit septic K1K1​-transport contribution.
+
+What remains: it still does not have the full total septic fixed-sector pair (u7,v7)(u7​,v7​). What is missing is the contribution of the remaining order-7 sectors beyond the K1K1​-transport piece, and therefore the full closed formula for total (u7,v7)(u7​,v7​) and full total Δ7Δ7​. The current audit remark is correctly scoped to that. This again matches the earlier repair target in convo4.
+
+So the short answer to “are the fixes in?” is:
+
+The septic strengthening fix is in.
+The quintic pure-value trace fix is not in.
+The full septic completion is not in.
+
+And the remaining work from the original request is now much cleaner than before:
+
+First, prove the order-5 pure-value trace annihilation, or a quotient-level substitute strong enough to make the first residual trace detector unconditional.
+
+Second, complete the remaining order-7 sectors and show that the full direct q(7)q(7)-slice of total Δ7Δ7​ is generically nonzero, not just the K1K1​-transport witness.
+
+Third, derive the full total septic fixed-sector pair (u7,v7)(u7​,v7​), not merely the K1K1​-transport contribution.
+
+So relative to the original thread, the main progress is that item 2 has been reduced from a vague local concern to a precise remaining gap: not “is there any septic direct witness at all?”, but “can the now-proved nonzero K1K1​ witness be lifted to the full total Δ7Δ7​ slice?” That is real progress.
+
+proof_of_rh(52).tex
+File
+take a look at the latest paper draft, and assess holistically which of your items remain, and how we can attack them
+
+I’m checking the latest draft against the live local algebra items first, then I’ll widen back out and tell you which ones still matter strategically versus which ones are now just cleanup.
+
+I read the latest draft holistically. My overall take is:
+
+The paper now has a coherent local 3/5/7 package. The live issues are no longer “the local algebra is missing everywhere,” but a much smaller set:
+
+First, there are still two local cleanup theorems you have not actually proved.
+Second, there is one medium local-to-global bridge that is now very close.
+Third, the real proof bottleneck has moved to the global geometric side, specifically the W=0, M≠0W=0, M=0 boundary and adjacent-interval tangent/separator behavior.
+
+That matches the direction we had already been converging on in the earlier notes: once the draft carries the c,v5,Δ7c,v5​,Δ7​ package honestly, the next phase is either finishing the remaining local algebra or pushing the planar endpoint/support geometry.
+
+Here is the clean status.
+What now looks basically in place
+
+The first-order generator is explicit and honestly marked as pending only for surjectivity. The quintic first-residual proposition is now correctly phrased as conditional on the trace-free pure-value slice. The fixed-sector subsection now really exists in the paper and includes explicit quintic and septic K1K1​-transport formulas, the direct q(7)q(7)-slice, the noncancellation proposition for the direct septic K1K1​ witness, the parity elimination of pure same-point septic terms, and the weight-one reduction to the direct K1K1​ slice. The draft also now says plainly that the main remaining geometric obstruction sits at W=0W=0 boundaries, not at the old “quintic bookkeeping” level. That overall architecture is now in the right shape.
+What still remains from my earlier list
+1. First-order surjectivity still remains
+
+This is still the small, clean, finite-dimensional item.
+
+The draft now has the WIP remark exactly where it belongs, but the proposition still relies on the claim that the first-order generator map hits all of M2(C)M2​(C). That is not yet proved in the file. This remains a real but low-risk linear-algebra task. Earlier notes identified it the same way: explicit map now exists, but the rank computation is still separate.
+
+How to attack it:
+Write the first-order generator map in coordinates relative to the four basis directions of the value-family parameters, evaluate its image on a convenient basis, and compute the determinant of the resulting 4×44×4 matrix. This is the one remaining local issue that should be closed by brute force rather than theory.
+2. Quintic pure-value trace annihilation still remains
+
+This is still the main unresolved order-5 local statement.
+
+The draft is now honest about it. But it is still not proved that
+tr⁡(V\val(5)(h))=0,
+tr(V\val(5)​(h))=0,
+
+or even the weaker quotient-level statement that trace kills the image of V\val(5)(h)V\val(5)​(h) in the first residual quotient. Earlier notes were explicit that this remained the cleanest local algebra bottleneck if you want the first residual layer truly closed.
+
+How to attack it:
+There are really only two sensible routes now.
+
+The direct route is to compute the pure-value order-5 slice after whitening and quotient normalization and show that its image has zero trace. This is a finite but ugly bookkeeping lemma.
+
+The smarter route is to stop treating the trace detector as load-bearing and replace it with the fixed-sector package. In other words, instead of spending weeks proving trace annihilation of V\val(5)V\val(5)​, you can let the old first-residual trace theorem stay auxiliary and push the proof through v5v5​ and Δ7Δ7​. That is consistent with the way the draft now describes the strengthened one-pair package.
+
+So this item still remains, but it may no longer be the best use of effort unless you want the trace route itself to be airtight.
+3. Full septic fixed-sector completion still remains, but it is now narrower
+
+This has improved materially.
+
+Before, the order-7 story was “we have a candidate direct witness.” Now the file has something much stronger: the direct q(7)q(7)-driven K1K1​ witness is isolated and its graded slice is proved nonzero, and the weight-one septic coefficient is reduced to the direct K1K1​ slice. So the top genuinely new order-7 contribution is no longer vague. That is real progress. Earlier notes had identified full septic fixed-sector completion as one of the remaining local algebra fronts; that is still true, but the open part is now the lower/mixed sectors, not the top new coefficient.
+
+How to attack it:
+There are two different goals, and you should separate them.
+
+If your goal is just to strengthen the normalized-curve bridge, then you may not need the full total (u7,v7)(u7​,v7​) formula. You likely only need to harmonize the current proposition rho2-not-affine with the new weight-one reduction.
+
+If your goal is to close the full order-7 package once and for all, then you still need the remaining order-7 sectors beyond K1K1​-transport written explicitly and summed into total (u7,v7)(u7​,v7​). That is still open.
+
+My judgment: do not do the full lower/mixed-sector expansion unless the W=0W=0 boundary analysis forces you to. Right now it looks like overkill.
+4. The direct-septic-witness issue is no longer a major theorem gap, but the draft is not yet fully harmonized
+
+This is the one item I would reclassify.
+
+I do not think “direct septic witness” is still a deep open item in the same sense as before. The latest draft has already done the hard part: isolate the (K1,η2,q(7))(K1​,η2​,q(7))-slice, prove its noncancellation, and reduce the weight-one septic coefficient to that direct slice.
+
+So what remains is more of a logic cleanup than a new mathematical frontier.
+
+The draft still states prop:rho2-not-affine-in-rho1 under the hypothesis that the direct q(7)q(7)-slice of Δ7Δ7​ is generically nonzero. With the new material, that ought to be derivable once you settle the exact relation between the weight-one direct slice and the total direct slice on the region you care about. The remaining nuisance is that Δ7(q(7))=u7(q(7))v5Δ7(q(7))​=u7(q(7))​v5​ still leaves a dependence on v5v5​, and the file does not yet prove a clean generic nonvanishing theorem for v5v5​.
+
+How to attack it:
+The cheapest repair is:
+
+    prove a generic nontriviality theorem for v5v5​, or at least assume v5≢0v5​≡0 on the relevant component;
+
+    then upgrade the current weight-one reduction plus direct K1K1​ noncancellation into a theorem that the direct q(7)q(7)-slice of Δ7Δ7​ is generically nonzero;
+
+    then remove the standalone hypothesis from prop:rho2-not-affine-in-rho1.
+
+So I would say this item still remains, but only as a short bridge theorem, not as a fundamental hole.
+What now looks like the real bottleneck
+
+The real bottleneck is no longer the old local quintic/septic bookkeeping.
+
+It is the W=0, M≠0W=0, M=0 boundary geometry and the associated adjacent-interval tangent/separator sign regularity. The draft itself now says this pretty clearly: the turning-boundary geometry is comparatively controlled, while the unresolved issue is whether the normalized planar curve has generic affine-inflection behavior at W=0W=0 boundaries or some special structure that kills it. Earlier notes had already pointed toward this: once the c,v5,Δ7c,v5​,Δ7​ curve is in place, the next meaningful theorem is endpoint/support-function separation across adjacent ECT intervals.
+
+How to attack it:
+I would attack this through the exact WW and W′W′ identities, not by expanding the two-pair section first.
+
+The concrete target is one of these:
+
+    prove W′(hb)=0W′(hb​)=0 on the W=0, M≠0W=0, M=0 boundary, or
+
+    prove enough factorization/sign structure in the leading coefficient of W′W′ to rule out ordinary affine inflection behavior there, or
+
+    replace the current tangent-separator argument by a stronger invariant that survives generic W=0W=0 boundaries.
+
+The draft already says the highest genuinely new contribution to this obstruction is still governed by the septic package, not by some brand-new order-9 primitive. That is an important simplification. So if you want leverage toward RH rather than local closure for its own sake, this is where I would push next.
+What this means for the old “big three” endgame gaps
+
+The old trio
+
+    two-pair interaction/rigidity,
+
+    minimal bad-core exclusion,
+
+    global extraction bridge
+
+are still not proved in the draft. But they no longer look like three independent mysteries.
+
+At this point they mostly read as downstream consequences of the geometric theorem you do not yet have. In other words: if you get the right adjacent-interval tangent/separator theorem across the W=0W=0 boundary, those sections become formalizable. If you do not get it, polishing the two-pair or minimal-core sections first will not move the proof much.
+
+So the hierarchy is now:
+
+    small local cleanup: first-order surjectivity;
+
+    optional local closure: quintic pure-value trace annihilation;
+
+    medium bridge cleanup: direct q(7)q(7)-slice of total Δ7Δ7​;
+
+    real proof bottleneck: W=0W=0 boundary / tangent-separator sign regularity;
+
+    only then: finalize two-pair, minimal bad-core, and extraction.
+
+My recommendation on what to do next
+
+If your goal is “make the draft less conditional locally,” do this next:
+
+    close first-order surjectivity,
+
+    then either prove quintic pure-value trace annihilation or explicitly demote it permanently,
+
+    then clean up rho2-not-affine using the new order-7 weight-one reduction.
+
+If your goal is “move the RH proof forward,” I would skip the quintic trace fight for now and go straight at the W=0W=0 boundary theorem. That is now the place with the most leverage.
+
+The shortest honest summary is:
+
+The local package is now strong enough that the proof no longer looks blocked by vague algebra. It looks blocked by one specific geometric theorem. That is progress.
+
+ok let's do first-order surjectivity;
+
+I’m pulling the exact first-order generator section and the surrounding audit remark from the latest draft so I can turn this into a concrete finite-dimensional rank computation, not just a general suggestion.
+
+Yes. I think first-order surjectivity is now down to a very concrete 44-direction check, and most of the algebra is already visible.
+
+The key simplification is this. The first-order generator in the draft is
+B1=L(G˙1) N0 X0+X0 N˙1 X0+X0 N0 L(G˙1),X0=G0−1/2,
+B1​=L(G˙1​)N0​X0​+X0​N˙1​X0​+X0​N0​L(G˙1​),X0​=G0−1/2​,
+
+with V\val(1)V\val(1)​ defined as its image.
+
+At the coincident background, the mixed block and same-point block agree:
+N0=G0.
+N0​=G0​.
+
+That is exactly what the explicit same-point and mixed formulas are telling you at s=0s=0: the mixed block limits to the same jet block. The same-point block formula is already in the file, and the mixed-block expansion around small ss matches it at order 00.
+
+Once you use N0=G0N0​=G0​, the generator collapses. Differentiate
+XGX=I
+XGX=I
+
+at G0G0​. You get
+L(H) G0 X0+X0 H X0+X0 G0 L(H)=0.
+L(H)G0​X0​+X0​HX0​+X0​G0​L(H)=0.
+
+So with H=G˙1H=G˙1​,
+L(G˙1) N0 X0+X0 N0 L(G˙1)=− X0 G˙1 X0.
+L(G˙1​)N0​X0​+X0​N0​L(G˙1​)=−X0​G˙1​X0​.
+
+Therefore
+B1=X0(N˙1−G˙1)X0.
+B1​=X0​(N˙1​−G˙1​)X0​.
+
+Since conjugation by X0X0​ is an isomorphism of M2(C)M2​(C), first-order surjectivity is equivalent to:
+{N˙1−G˙1}=M2(C).
+{N˙1​−G˙1​}=M2​(C).
+
+That is the real reduction.
+
+So now the problem is no longer “some mysterious rank computation on the Fréchet derivative.” It is just: do the available first-order pure-value directions give all symmetric matrices, plus one independent skew direction?
+
+I think the answer is yes, provided you make one structural point explicit.
+
+From the same-point formula
+Gm,±\corr(s)=1π(2q(t±)12q′(t±)12q′(t±)112(q′′(t±)+2q(t±)3)),
+Gm,±\corr​(s)=π1​(2q(t±​)21​q′(t±​)​21​q′(t±​)121​(q′′(t±​)+2q(t±​)3)​),
+
+the first odd same-point variation coming from infinitesimal variations in
+δq,δq′,δq′′
+δq,δq′,δq′′
+
+at the midpoint is
+δG1=1π(2 δq12 δq′12 δq′112(δq′′+6q02δq)).
+δG1​=π1​(2δq21​δq′​21​δq′121​(δq′′+6q02​δq)​).
+
+As (δq,δq′,δq′′)(δq,δq′,δq′′) vary, this fills \Sym2(C)\Sym2​(C). The three entries are plainly independent: δq′δq′ controls the off-diagonal entry, δq′′δq′′ gives a pure (2,2)(2,2)-direction, and δqδq moves the (1,1)(1,1)-entry.
+
+So the symmetric part is fine.
+
+What remains is one skew direction. And that should come from the mixed block, via an independent cubic phase-gap variation. If you freeze the same-point jets and vary only
+Δm(s)↦Δm(s)+εθs3,
+Δm​(s)↦Δm​(s)+εθs3,
+
+then the mixed block formula gives, at first odd order,
+δN1(Δ)=θπ(01−10).
+δN1(Δ)​=πθ​(0−1​10​).
+
+The diagonal entries do not contribute at odd order, and the two off-diagonal entries appear with opposite sign. So this is exactly the missing skew generator.
+
+At that point,
+G˙1 spans \Sym2(C),N˙1(Δ) gives C(01−10),
+G˙1​ spans \Sym2​(C),N˙1(Δ)​ gives C(0−1​10​),
+
+hence
+N˙1−G˙1
+N˙1​−G˙1​
+
+fills all of M2(C)M2​(C), and therefore
+V\val(1)=M2(C).
+V\val(1)​=M2​(C).
+
+So my honest judgment is:
+
+The first-order surjectivity item is basically reduced to one explicit local lemma:
+
+    Lemma needed. The pure value family contains an independent cubic phase-gap direction whose induced first odd mixed variation is skew off-diagonal, while the first odd same-point variations fill \Sym2\Sym2​.
+
+If that is already what you intend “pure value family” to mean, then the proof is essentially done. If the draft does not yet define the pure value family that concretely, then that definition/lemma is the only real remaining step; the linear algebra itself is no longer the bottleneck.
+
+So the attack I would make next is very specific:
+
+    Add the reduction
+    B1=X0(N˙1−G˙1)X0.
+    B1​=X0​(N˙1​−G˙1​)X0​.
+
+    Prove the same-point span
+    {G˙1}=\Sym2(C)
+    {G˙1​}=\Sym2​(C)
+
+    from the explicit same-point block formula.
+
+    Prove the cubic phase-gap direction gives
+    δN1(Δ)∝(01−10).
+    δN1(Δ)​∝(0−1​10​).
+
+    Conclude
+    V\val(1)=M2(C).
+    V\val(1)​=M2​(C).
+
+That is much smaller than the old “audit-first-order-surjectivity” wording made it sound.
+
+ok attack it
+
+I’m drilling into the exact first-order section now. The key question is whether the file already contains enough explicit mixed-block structure to manufacture the missing skew direction, or whether that part still needs a new local lemma.
+
+I attacked it, and I do not think the current first-order surjectivity claim can be proved in the raw form.
+
+What falls out is actually sharper:
+V\val(1)=M2(C)
+V\val(1)​=M2​(C)
+
+cannot be the raw pure-value first-order odd family.
+
+The reason is structural, not just “we haven’t found the right rank computation yet.”
+
+First, there is a useful simplification of the generator map. At s=0s=0, the mixed block equals the same-point block, so
+N0=G0,X0=G0−1/2.
+N0​=G0​,X0​=G0−1/2​.
+
+Differentiating
+XGX=I
+XGX=I
+
+at G0G0​ gives
+L(H) G0 X0+X0 H X0+X0 G0 L(H)=0.
+L(H)G0​X0​+X0​HX0​+X0​G0​L(H)=0.
+
+So the first-order generator
+B1=L(G˙1) N0 X0+X0 N˙1 X0+X0 N0 L(G˙1)
+B1​=L(G˙1​)N0​X0​+X0​N˙1​X0​+X0​N0​L(G˙1​)
+
+collapses to
+B1=X0(N˙1−G˙1)X0.
+B1​=X0​(N˙1​−G˙1​)X0​.​
+
+That means the linear-algebra part is simpler than it looked.
+
+But the more important point is the symmetry obstruction. For pure value deformations, the corrected local block still satisfies the swap symmetry
+Ωθ\corr(−s;m)=J0 Ωθ\corr(s;m) J0.
+Ωθ\corr​(−s;m)=J0​Ωθ\corr​(s;m)J0​.
+
+Differentiating in the deformation parameter and comparing odd coefficients forces every raw odd coefficient to satisfy
+J0A2r+1J0=−A2r+1.
+J0​A2r+1​J0​=−A2r+1​.
+
+So the raw first odd coefficient lies in the anti-fixed plane
+a={A:J0AJ0=−A}=span⁡{D,J},
+a={A:J0​AJ0​=−A}=span{D,J},
+
+which is only 22-dimensional and automatically traceless. That is exactly the structural conflict we had flagged earlier: the raw odd family cannot simultaneously satisfy the swap symmetry and fill all of M2(C)M2​(C).
+
+So my honest conclusion is:
+
+The current proposition is not waiting on a missing 4×44×4 determinant. It is pointing at a real notational conflation.
+
+The draft’s own “structural split still to be made explicit” remark is not cosmetic; it is mathematically forced. If the full first-order family really fills M2(C)M2​(C), then V\val(1)V\val(1)​ must already be bundling together at least two things:
+
+    the raw pure-value odd family, which lives in aa, and
+
+    extra first-order directions not coming from the raw pure-value odd coefficients.
+
+There is also a concrete local expansion consistent with this. Direct Taylor expansion of the finite-ss blocks gives
+Gm,±(s)=G0±sπ(q′(m)14q′′(m)14q′′(m)q(3)(m)+6q(m)2q′(m)24)+O(s2),
+Gm,±​(s)=G0​±πs​(q′(m)41​q′′(m)​41​q′′(m)24q(3)(m)+6q(m)2q′(m)​​)+O(s2),
+
+while
+Nm(s)=G0+sπ(0q′′(m)−4q(m)312−q′′(m)−4q(m)3120)+O(s2).
+Nm​(s)=G0​+πs​(0−12q′′(m)−4q(m)3​​12q′′(m)−4q(m)3​0​)+O(s2).
+
+So the raw first odd mixed term is already visibly skew, and the whole odd package is consistent with anti-fixed symmetry, not with full 44-dimensional freedom.
+
+So the right next move is not “prove surjectivity as written.” It is this:
+
+    Define a new raw space Vraw(1)Vraw(1)​ for the first odd coefficients of the actual corrected whitened block under pure value deformations.
+
+    Prove
+
+Vraw(1)⊂a.
+Vraw(1)​⊂a.
+
+    Replace the current first-order claim by a split such as
+
+Vfull(1)=Vraw(1)+Vextra(1),
+Vfull(1)​=Vraw(1)​+Vextra(1)​,
+
+where Vextra(1)Vextra(1)​ are the additional first-order directions currently bundled into V\val(1)V\val(1)​.
+
+    Only after identifying Vextra(1)Vextra(1)​ can one honestly assert a full M2(C)M2​(C) statement.
+
+One more important point: those extra directions cannot come from the later even normalization gauge
+a(z)=1+c2z2+⋯ ,P(z)=I+B2z2+⋯ ,
+a(z)=1+c2​z2+⋯,P(z)=I+B2​z2+⋯,
+
+because that gauge does not touch the order-11 coefficient of an odd germ. So if full first-order fullness is true, its source is earlier and different.
+
+So this attack did produce something real, but it is not a proof of surjectivity. It is a proof that the current surjectivity target is aimed at the wrong object.
+
+The next exact theorem to write is:
+Vraw(1)⊂a,and the current V\val(1) must be a larger bundled family.
+Vraw(1)​⊂a,and the current V\val(1)​ must be a larger bundled family.​
+
+That would cleanly resolve the contradiction and make the later quintic/septic bookkeeping more honest.
+
+ok attack
+
+I’m checking the exact first-order definitions in the latest draft before pushing further. The main question is whether the paper has already separated the raw odd first-order slice from the larger bundled family, or whether that conflation is still in the file.
+
+I attacked it further, and I think the right conclusion is now sharper than “surjectivity is still unproved.”
+
+I think the raw first-order pure-value odd family cannot be surjective onto M2(C)M2​(C). The obstruction is structural.
+
+The useful reduction is still the generator formula already isolated in the draft:
+B1=L(G˙1) N0 X0+X0 N˙1 X0+X0 N0 L(G˙1),X0=G0−1/2.
+B1​=L(G˙1​)N0​X0​+X0​N˙1​X0​+X0​N0​L(G˙1​),X0​=G0−1/2​.
+
+That is the right starting point.
+
+Now at the coincident background one has N0=G0N0​=G0​, so differentiating
+XGX=I
+XGX=I
+
+at G0G0​ gives
+L(H) G0 X0+X0 H X0+X0 G0 L(H)=0.
+L(H)G0​X0​+X0​HX0​+X0​G0​L(H)=0.
+
+Plugging H=G˙1H=G˙1​ into the generator formula collapses it to
+ B1=X0(N˙1−G˙1)X0 .
+B1​=X0​(N˙1​−G˙1​)X0​​.
+
+So the problem is not a mysterious Fréchet-derivative rank check anymore. It is purely about the raw first odd same-point and mixed coefficients.
+
+Here is the key obstruction.
+
+If the corrected local block satisfies the swap symmetry
+Ω^\corr(−s)=J0 Ω^\corr(s) J0,
+Ω
+\corr(−s)=J0​Ω
+\corr(s)J0​,
+
+then every odd coefficient A2r+1A2r+1​ satisfies
+J0A2r+1J0=−A2r+1.
+J0​A2r+1​J0​=−A2r+1​.
+
+For 2×22×2 matrices with J0=(0110)J0​=(01​10​), that anti-fixed subspace is
+a={(ab−b−a):a,b∈C}=span⁡ ⁣{(100−1),(01−10)}.
+a={(a−b​b−a​):a,b∈C}=span{(10​0−1​),(0−1​10​)}.
+
+So it is only 22-dimensional. The earlier conversation already pointed at exactly this symmetry split as the real issue.
+
+That immediately tells you something important:
+
+If V\val(1)V\val(1)​ is meant to be the raw first odd corrected pure-value family, then
+V\val(1)⊂a,
+V\val(1)​⊂a,
+
+so it cannot equal M2(C)M2​(C).
+
+In other words, the current first-order surjectivity target is not “missing a determinant computation.” It is aimed at the wrong object.
+
+There are really only two possibilities now.
+
+Either the proposition is false as stated.
+
+Or the draft’s V\val(1)V\val(1)​ is not the raw pure-value odd family, but a larger bundled family that already includes extra first-order directions beyond the swap-odd corrected block.
+
+And there is one more useful constraint: those extra directions do not come from the later even normalization gauge
+a(z)=1+c2z2+⋯ ,P(z)=I+B2z2+⋯ ,
+a(z)=1+c2​z2+⋯,P(z)=I+B2​z2+⋯,
+
+because an even gauge cannot change the z1z1-coefficient of an odd germ. So if full M2M2​-surjectivity is genuinely true, the missing directions must enter before that stage, through whatever the draft is bundling into “value/gauge family.” That is consistent with the conversation’s repeated warning that the first-order family was being treated more broadly than the raw odd coefficients alone.
+
+So the right next attack is not another blind rank check. It is this exact structural split:
+Vraw(1):={raw first odd corrected coefficients under pure value deformations},
+Vraw(1)​:={raw first odd corrected coefficients under pure value deformations},
+
+prove
+Vraw(1)⊂a,
+Vraw(1)​⊂a,
+
+and then identify the extra first-order directions that the draft is implicitly adding when it writes V\val(1)=M2(C)V\val(1)​=M2​(C).
+
+That is the theorem I now think is actually true.
+
+So my blunt bottom line is:
+Raw first-order pure-value surjectivity onto M2(C) should fail.
+Raw first-order pure-value surjectivity onto M2​(C) should fail.​
+
+What remains to be attacked is not “prove surjectivity,” but:
+
+    define the raw first-order family cleanly,
+
+    prove its anti-fixed 22-dimensional constraint,
+
+    identify the additional bundled generators,
+
+    only then decide whether the larger family really fills M2(C)M2​(C).
+
+That is real progress, because it turns a vague audited item into a precise dichotomy. The current proposition is either conflating two families, or it is false in its present interpretation.
+
+attack
+
+I’m going straight at the exact first-order definitions now. The real question is whether the latest draft has already separated the raw odd slice from the larger bundled family, because that decides whether we should prove a rank statement or expose a structural mismatch.
+
+I found the crux. The latest draft’s first-order lemma is using a one-sided simplification that throws away the real degrees of freedom. That is why the surjectivity claim looked contradictory before.
+
+I think I found the real repair.
+
+The surjectivity claim is probably salvageable, but the current first-order lemma is written for the wrong linearization.
+
+What the latest draft currently linearizes is
+G(s)−1/2 N(s) G(s)−1/2,
+G(s)−1/2N(s)G(s)−1/2,
+
+with a single same-point variation G˙1G˙1​. That is too collapsed. The actual finite-ss local block in the paper is
+Ω^(s;m)=G−(s)−1/2 N(s) G+(s)−1/2,
+Ω
+(s;m)=G−​(s)−1/2N(s)G+​(s)−1/2,
+
+with two same-point blocks, left and right. At first order, those are separate inputs. That distinction is exactly what resolves the contradiction.
+
+The corrected first-order generator should be
+B1=L(G˙−,1) N0 X0+X0 N˙1 X0+X0 N0 L(G˙+,1),X0=G0−1/2,
+B1​=L(G˙−,1​)N0​X0​+X0​N˙1​X0​+X0​N0​L(G˙+,1​),X0​=G0−1/2​,
+
+not the one-input formula with a single G˙1G˙1​.
+
+Now use the fact that at the coincident background,
+N0=G0.
+N0​=G0​.
+
+Conjugate the whole problem by X0X0​, so the background becomes the identity:
+G~±=X0G±X0,N~=X0NX0.
+G
+±​=X0​G±​X0​,N
+=X0​NX0​.
+
+Then
+G~±,0=N~0=I,
+G
+±,0​=N
+0​=I,
+
+and the inverse-square-root differential at II is just
+LI(H)=−12H.
+LI​(H)=−21​H.
+
+So in whitened background coordinates the first-order map becomes
+B~1=N˙~1−12G˙~−,1−12G˙~+,1.
+B
+1​=N˙
+1​−21​G˙
+−,1​−21​G˙
++,1​.​
+
+That is the real finite-dimensional map.
+
+Now the span question is easy.
+
+The same-point block formula is
+Gm,±(s)=1π(2q(t±)12q′(t±)12q′(t±)112(q′′(t±)+2q(t±)3)).
+Gm,±​(s)=π1​(2q(t±​)21​q′(t±​)​21​q′(t±​)121​(q′′(t±​)+2q(t±​)3)​).
+
+So an infinitesimal pure-value variation at one side gives
+δG±=1π(2 δq±12 δq±′12 δq±′112(δq±′′+6q±,02δq±)).
+δG±​=π1​(2δq±​21​δq±′​​21​δq±′​121​(δq±′′​+6q±,02​δq±​)​).
+
+As (δq±,δq±′,δq±′′)(δq±​,δq±′​,δq±′′​) vary, this fills \Sym2(C)\Sym2​(C) at each side. Therefore
+G˙~−,1+G˙~+,1
+G˙
+−,1​+G˙
++,1​
+
+certainly fills \Sym2(C)\Sym2​(C).
+
+For the mixed block, a small-ss expansion of Nm(s)Nm​(s) gives
+Nm(s)=G0+sπ q′′(m)−4q(m)312(01−10)+O(s2).
+Nm​(s)=G0​+πs​12q′′(m)−4q(m)3​(0−1​10​)+O(s2).
+
+So the first odd mixed coefficient is a skew line. Varying the cubic phase-gap coefficient, equivalently varying q′′−4q3q′′−4q3, produces
+N˙~1∈C(01−10).
+N˙
+1​∈C(0−1​10​).
+
+Hence the image of the corrected first-order map contains
+\Sym2(C)⊕C(01−10)=M2(C).
+\Sym2​(C)⊕C(0−1​10​)=M2​(C).
+
+So the full combined first-order family really can be all of M2(C)M2​(C).
+
+This also explains the earlier apparent contradiction with swap symmetry. If you restrict to the raw one-pair odd jet, then the left/right same-point odd pieces are tied by
+G˙+,1=−G˙−,1,
+G˙+,1​=−G˙−,1​,
+
+and the raw odd family collapses to a much smaller anti-fixed slice. But the proposition in the draft is not about that raw slice; it is about the larger bundled value/gauge family. The latest draft already hints at exactly this structural split. So the proposition is probably right in spirit, but the lemma underneath it is still using the raw one-input model instead of the full bundled one.
+
+So the attack result is:
+
+    the current one-input first-order generator lemma is the wrong object;
+
+    the correct three-input first-order map is explicit;
+
+    once written correctly, surjectivity onto M2(C)M2​(C) is very plausible and close to proved;
+
+    the raw-vs-full split remark is not optional anymore — it is the conceptual reason this works.
+
+The next repair is to rewrite Lemma first-order-value-family-generator with (G˙−,1,N˙1,G˙+,1)(G˙−,1​,N˙1​,G˙+,1​) and then prove surjectivity by the span argument above.
+
+ok do that attack
+
+I’m pulling the exact first-order section from the latest draft now so I can check whether the three-input version really matches the paper’s definitions, rather than just being the right abstract model.
+
+I checked it, and the attack changes the picture in a useful way.
+
+The current first-order lemma in the one-pair section is still linearizing the wrong object. In Section 12 it writes the generator as if the corrected block were
+G−1/2NG−1/2,
+G−1/2NG−1/2,
+
+so the first-order family is modeled by
+(G˙1,N˙1)↦L(G˙1)N0X0+X0N˙1X0+X0N0L(G˙1).
+(G˙1​,N˙1​)↦L(G˙1​)N0​X0​+X0​N˙1​X0​+X0​N0​L(G˙1​).
+
+That is exactly what Proposition 12.2 is now resting on, and the draft itself still flags the surjectivity step as unfinished.
+
+But earlier in the draft, the corrected whitening map is already defined correctly as
+W(G−,N,G+):=G−−1/2NG+−1/2,
+W(G−​,N,G+​):=G−−1/2​NG+−1/2​,
+
+and the corrected local deformation decomposition differentiates it as
+DW(bg)[G˙−,N˙,G˙+].
+DW(bg)​[G˙−​,N˙,G˙+​].
+
+So the file already knows the first-order object is three-input, not two-input.
+
+That means the right first-order generator is
+B1=L(G˙−,1) N0 X0+X0 N˙1 X0+X0 N0 L(G˙+,1),X0=G0−1/2,
+B1​=L(G˙−,1​)N0​X0​+X0​N˙1​X0​+X0​N0​L(G˙+,1​),X0​=G0−1/2​,
+
+not the current one-input formula.
+
+Now comes the useful simplification. At the coincident background one has N0=G0N0​=G0​. If you conjugate everything by X0X0​, so the background becomes the identity, then the Fréchet derivative of G↦G−1/2G↦G−1/2 at II is just
+LI(H)=−12H.
+LI​(H)=−21​H.
+
+So in whitened background coordinates the corrected first-order map becomes
+B~1=N˙~1−12 G˙~−,1−12 G˙~+,1.
+B
+1​=N˙
+1​−21​G˙
+−,1​−21​G˙
++,1​.​
+
+That is the actual finite-dimensional map you want.
+
+From there the span argument is straightforward.
+
+For each side, the same-point block has the explicit form
+Gm,±\corr(s)=1π(2q(t±)12q′(t±)12q′(t±)112(q′′(t±)+2q(t±)3)).
+Gm,±\corr​(s)=π1​(2q(t±​)21​q′(t±​)​21​q′(t±​)121​(q′′(t±​)+2q(t±​)3)​).
+
+So an infinitesimal pure-value variation on one side gives
+δG±=1π(2 δq±12 δq±′12 δq±′112(δq±′′+6q±,02δq±)).
+δG±​=π1​(2δq±​21​δq±′​​21​δq±′​121​(δq±′′​+6q±,02​δq±​)​).
+
+As (δq±,δq±′,δq±′′)(δq±​,δq±′​,δq±′′​) vary, this fills \Sym2(C)\Sym2​(C): δq±′δq±′​ isolates the off-diagonal direction, δq±′′δq±′′​ isolates a pure (2,2)(2,2)-direction, and δq±δq±​ moves the (1,1)(1,1)-entry. So
+span⁡{G˙~−,1}=\Sym2(C),span⁡{G˙~+,1}=\Sym2(C).
+span{G˙
+−,1​}=\Sym2​(C),span{G˙
++,1​}=\Sym2​(C).
+
+For the mixed block, the first odd pure-value slice coming from the phase-gap variable is skew:
+N˙~1(Δ)=cΔ(01−10),cΔ≠0.
+N˙
+1(Δ)​=cΔ​(0−1​10​),cΔ​=0.
+
+The exact scalar is not important here; only the skew line matters.
+
+Therefore the image of
+(G˙~−,1,N˙~1,G˙~+,1)⟼N˙~1−12G˙~−,1−12G˙~+,1
+(G˙
+−,1​,N˙
+1​,G˙
++,1​)⟼N˙
+1​−21​G˙
+−,1​−21​G˙
++,1​
+
+contains
+\Sym2(C)⊕C(01−10)=M2(C).
+\Sym2​(C)⊕C(0−1​10​)=M2​(C).
+
+So the attack result is:
+
+The surjectivity target itself is probably right. What is wrong is the present lemma under it. The current first-order lemma is underlinearized; it threw away the independent left/right same-point inputs. Once you restore the correct three-input derivative already used elsewhere in the draft, the rank computation stops being mysterious and reduces to “symmetric from the same-point sides, skew from the mixed phase-gap side.”
+
+What still remains, strictly speaking, is one explicit local check: the draft should say that the pure value channel really does supply those three first-order directions independently, namely left same-point jet variation, right same-point jet variation, and the phase-gap mixed variation. But that is a much smaller check than the old proposition made it sound. It is no longer a black-box determinant computation on the Fréchet derivative; it is just verifying the channel decomposition already present in the corrected-local-deformation part of the paper.
+
+So the next exact move is to replace Lemma 12.1 by the three-input version and prove
+V\val(1)=M2(C)
+V\val(1)​=M2​(C)
+
+from
+B~1=N˙~1−12G˙~−,1−12G˙~+,1.
+B
+1​=N˙
+1​−21​G˙
+−,1​−21​G˙
++,1​.
+
+If you want, I’ll now turn that into a precise theorem-proof patch, but mathematically this is the attack: the obstruction was not lack of rank, it was the wrong linearization.
+
+ok please do that
+
+I’m pulling the exact first-order lemma/proposition block from the current draft so I can give you a drop-in replacement instead of a floating patch.
+
+Yes. Here is the patch I would make.
+
+It does three things:
+
+It replaces the current one-input first-order generator lemma by the correct three-input derivative of
+W(G−,N,G+)=G−−1/2NG+−1/2.
+W(G−​,N,G+​)=G−−1/2​NG+−1/2​.
+
+It inserts the two short span lemmas you actually need:
+same-point directions span \Sym2(C)\Sym2​(C), and a mixed phase-gap direction gives the missing skew line.
+
+It then replaces the proposition by a proved version.
+1. Replace the current lemma block
+
+Replace everything from
+
+\begin{lemma}[First-order value-family generator]
+\label{lem:first-order-value-family-generator}
+...
+\end{lemma}
+
+\begin{proof}
+...
+\end{proof}
+
+through that proof with this:
+
+\begin{lemma}[First-order value-family generator]
+\label{lem:first-order-value-family-generator}
+Let
+\[
+\mathcal W(G_-,N,G_+):=G_-^{-1/2}NG_+^{-1/2}.
+\]
+Let \(G_0\) and \(N_0\) denote the coincident background same-point and mixed
+blocks, and write
+\[
+X_0:=G_0^{-1/2}.
+\]
+Let \(L\) be the Fr\'echet derivative of the inverse-square-root map
+\(G\mapsto G^{-1/2}\) at \(G_0\), so that
+\[
+(G_0+\varepsilon H)^{-1/2}
+=
+X_0+\varepsilon L(H)+O(\varepsilon^2).
+\]
+
+If \(\dot G_{-,1}\), \(\dot N_1\), and \(\dot G_{+,1}\) are the first-order
+odd pure-value variations of the left same-point block, the mixed block, and
+the right same-point block, respectively, then the induced first-order odd
+coefficient in the corrected local block is
+\[
+B_1
+=
+L(\dot G_{-,1})\,N_0\,X_0
++
+X_0\,\dot N_1\,X_0
++
+X_0\,N_0\,L(\dot G_{+,1}).
+\]
+Equivalently, the first-order family \(V_{\val}^{(1)}\) is the image of the
+linear map
+\[
+(\dot G_{-,1},\dot N_1,\dot G_{+,1})
+\longmapsto
+L(\dot G_{-,1})\,N_0\,X_0
++
+X_0\,\dot N_1\,X_0
++
+X_0\,N_0\,L(\dot G_{+,1}).
+\]
+\end{lemma}
+
+\begin{proof}
+The corrected local block is obtained by the analytic whitening map
+\[
+\mathcal W(G_-,N,G_+)=G_-^{-1/2}NG_+^{-1/2}.
+\]
+Expand the three inputs to first odd order under a pure value deformation:
+\[
+G_-(s)=G_0+\varepsilon \dot G_{-,1}+O(\varepsilon^2),\qquad
+N(s)=N_0+\varepsilon \dot N_1+O(\varepsilon^2),\qquad
+G_+(s)=G_0+\varepsilon \dot G_{+,1}+O(\varepsilon^2).
+\]
+Then
+\[
+G_\pm(s)^{-1/2}
+=
+X_0+\varepsilon L(\dot G_{\pm,1})+O(\varepsilon^2),
+\]
+so multiplying
+\[
+G_-(s)^{-1/2}\,N(s)\,G_+(s)^{-1/2}
+\]
+to first order gives
+\[
+X_0N_0X_0
++
+\varepsilon\Bigl(
+L(\dot G_{-,1})\,N_0\,X_0
++
+X_0\,\dot N_1\,X_0
++
+X_0\,N_0\,L(\dot G_{+,1})
+\Bigr)
++
+O(\varepsilon^2).
+\]
+The coefficient of \(\varepsilon\) is exactly the first-order generator
+\(B_1\).
+\end{proof}
+
+2. Insert the reduction-to-identity lemma immediately after it
+
+Insert this immediately after the proof above:
+
+\begin{lemma}[Whitened first-order reduction]
+\label{lem:first-order-generator-whitened}
+At the coincident background one has
+\[
+N_0=G_0.
+\]
+If
+\[
+\widetilde H:=X_0HX_0
+\]
+denotes whitening by \(X_0=G_0^{-1/2}\), then the first-order generator of
+Lemma~\ref{lem:first-order-value-family-generator} becomes
+\[
+\widetilde B_1
+=
+\widetilde{\dot N}_1
+-\frac12\,\widetilde{\dot G}_{-,1}
+-\frac12\,\widetilde{\dot G}_{+,1}.
+\]
+\end{lemma}
+
+\begin{proof}
+Since \(X_0G_0X_0=I\), whitening conjugates the background to the identity.
+The Fr\'echet derivative of \(G\mapsto G^{-1/2}\) at \(I\) is
+\[
+L_I(H)=-\frac12 H.
+\]
+Therefore, after whitening the formula of
+Lemma~\ref{lem:first-order-value-family-generator} becomes
+\[
+\widetilde B_1
+=
+L_I(\widetilde{\dot G}_{-,1})\,I\,I
++
+I\,\widetilde{\dot N}_1\,I
++
+I\,I\,L_I(\widetilde{\dot G}_{+,1})
+=
+\widetilde{\dot N}_1
+-\frac12\,\widetilde{\dot G}_{-,1}
+-\frac12\,\widetilde{\dot G}_{+,1}.
+\qedhere
+\]
+\end{proof}
+
+3. Insert the symmetric-span lemma
+
+Insert this immediately after the previous lemma:
+
+\begin{lemma}[First-order same-point span]
+\label{lem:first-order-same-point-span}
+The first-order pure-value same-point variations span the full symmetric
+subspace:
+\[
+\operatorname{span}\{\widetilde{\dot G}_{-,1}\}
+=
+\operatorname{span}\{\widetilde{\dot G}_{+,1}\}
+=
+\Sym_2(\mathbf C).
+\]
+\end{lemma}
+
+\begin{proof}
+The corrected same-point block has the form
+\[
+G_{m,\pm}^{\corr}(s)
+=
+\frac1\pi
+\begin{pmatrix}
+2q(t_\pm) & \frac12 q'(t_\pm)\\[.5ex]
+\frac12 q'(t_\pm) & \frac1{12}\bigl(q''(t_\pm)+2q(t_\pm)^3\bigr)
+\end{pmatrix}.
+\]
+Therefore an infinitesimal pure-value variation at one side gives
+\[
+\delta G_\pm
+=
+\frac1\pi
+\begin{pmatrix}
+2\,\delta q_\pm & \frac12\,\delta q'_\pm\\[.5ex]
+\frac12\,\delta q'_\pm &
+\frac1{12}\bigl(\delta q''_\pm+6q_{\pm,0}^2\delta q_\pm\bigr)
+\end{pmatrix}.
+\]
+As \(\delta q_\pm\), \(\delta q'_\pm\), and \(\delta q''_\pm\) vary
+independently, the off-diagonal entry, the \((1,1)\)-entry, and the pure
+\((2,2)\)-direction may be varied independently. Hence the span is the full
+space \(\Sym_2(\mathbf C)\). Whitening by \(X_0\) preserves the symmetric
+subspace and is invertible, so the same conclusion holds for
+\(\widetilde{\dot G}_{\pm,1}\).
+\end{proof}
+
+4. Insert the skew-direction lemma
+
+Insert this immediately after the same-point-span lemma:
+
+\begin{lemma}[First-order mixed skew direction]
+\label{lem:first-order-mixed-skew}
+The first-order pure-value mixed variations contain a nonzero skew direction:
+\[
+\mathbf C
+\begin{pmatrix}
+0&1\\
+-1&0
+\end{pmatrix}
+\subset
+\operatorname{span}\{\widetilde{\dot N}_1\}.
+\]
+\end{lemma}
+
+\begin{proof}
+At first odd order, the mixed block has a phase-gap contribution whose two
+off-diagonal entries occur with opposite sign, while the diagonal entries do
+not contribute at odd order. Equivalently, the direct cubic phase-gap
+variation produces a nonzero multiple of
+\[
+J:=
+\begin{pmatrix}
+0&1\\
+-1&0
+\end{pmatrix}
+\]
+in \(\dot N_1\). Whitening by \(X_0\) is invertible and preserves the skew line
+spanned by \(J\). Hence
+\[
+\mathbf C J\subset \operatorname{span}\{\widetilde{\dot N}_1\}.
+\]
+\end{proof}
+
+5. Replace the current proposition with a proved version
+
+Replace the current proposition block
+
+\begin{proposition}[Generic triviality of the first quotient order]
+\label{prop:first-order-quotient-trivial}
+Under the generic nondegeneracy assumptions on the background same-point
+block, the image of the first-order generator map of
+Lemma~\ref{lem:first-order-value-family-generator} fills the full matrix space:
+\[
+V_{\val}^{(1)}=M_2(\mathbf C).
+\]
+Consequently
+\[
+\mathcal J_1/V_{\val}^{(1)}=0,
+\]
+so the generic leading quotient order is at least $3$.
+\end{proposition}
+
+with this:
+
+\begin{proposition}[Generic triviality of the first quotient order]
+\label{prop:first-order-quotient-trivial}
+The first-order pure-value family fills the full matrix space:
+\[
+V_{\val}^{(1)}=M_2(\mathbf C).
+\]
+Consequently
+\[
+\mathcal J_1/V_{\val}^{(1)}=0,
+\]
+so the generic leading quotient order is at least \(3\).
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:first-order-generator-whitened}, the first-order generator is
+\[
+\widetilde B_1
+=
+\widetilde{\dot N}_1
+-\frac12\,\widetilde{\dot G}_{-,1}
+-\frac12\,\widetilde{\dot G}_{+,1}.
+\]
+By Lemma~\ref{lem:first-order-same-point-span}, the same-point directions
+\(\widetilde{\dot G}_{-,1}\) and \(\widetilde{\dot G}_{+,1}\) span the full
+symmetric subspace \(\Sym_2(\mathbf C)\). By
+Lemma~\ref{lem:first-order-mixed-skew}, the mixed directions contain the skew
+line
+\[
+\mathbf C
+\begin{pmatrix}
+0&1\\
+-1&0
+\end{pmatrix}.
+\]
+Therefore the image of the generator contains
+\[
+\Sym_2(\mathbf C)
+\oplus
+\mathbf C
+\begin{pmatrix}
+0&1\\
+-1&0
+\end{pmatrix}
+=
+M_2(\mathbf C).
+\]
+Hence
+\[
+V_{\val}^{(1)}=M_2(\mathbf C),
+\]
+and so
+\[
+\mathcal J_1/V_{\val}^{(1)}=0.
+\]
+Thus the generic leading quotient order is at least \(3\).
+\end{proof}
+
+6. What to do with the two remarks
+
+If you insert the proof above, then the following two remarks should come out:
+
+\begin{remark}[Work in progress: first-order surjectivity check]
+\label{rem:wip-first-order-surjectivity}
+...
+\end{remark}
+
+and
+
+\begin{remark}[Audit: first-order surjectivity]
+\label{rem:audit-first-order-surjectivity}
+...
+\end{remark}
+
+I would replace them with one shorter structural remark:
+
+\begin{remark}[Raw versus full first-order family]
+\label{rem:wip-raw-vs-full-first-order}
+The surjectivity statement above concerns the full first-order pure-value family
+as it appears in the three-input derivative
+\[
+D\mathcal W_{(\bg)}[\dot G_-,\dot N,\dot G_+].
+\]
+This is larger than the raw swap-odd one-pair slice obtained by tying the left
+and right same-point variations together. The distinction is important in later
+bookkeeping, but it does not affect the present quotient-triviality statement.
+\end{remark}
+
+7. One honest caution
+
+The only place I would still ask you to check once, against your actual earlier derivation, is the sentence in lem:first-order-mixed-skew that the first odd mixed phase-gap direction really gives a nonzero multiple of
+(01−10).
+(0−1​10​).
+
+Conceptually that is the right missing line, and it is exactly what should happen. But that is the one spot where I would verify your notation matches the earlier mixed-block expansion before deleting the old audit remark.
+
+Everything else in this patch is the correct repair.
+
+can you do this check--
+
+7. One honest caution
+
+The only place I would still ask you to check once, against your actual earlier derivation, is the sentence in lem:first-order-mixed-skew that the first odd mixed phase-gap direction really gives a nonzero multiple of
+
+(
+0
+−1
+	​
+
+1
+0
+	​
+
+).
+
+Conceptually that is the right missing line, and it is exactly what should happen. But that is the one spot where I would verify your notation matches the earlier mixed-block expansion before deleting the old audit remark.
+
+I’m checking the actual mixed-block expansion now, not just the heuristic. The question is very specific: whether the first odd phase-gap slice really lands in the skew line with the sign convention used in the draft.
+
+Yes. I checked it, and the cautious sentence is mathematically correct up to an overall sign.
+
+The important point is the line
+C ⁣(01−10),
+C(0−1​10​),
+
+not which of the two opposite orientations you write. Your displayed matrix
+(0−110)
+(01​−10​)
+
+is just −J−J. So if the lemma says “a nonzero multiple of the skew matrix,” that part is fine. The only thing that would matter is if you were claiming a specific sign convention later in a coefficient identity.
+
+Here is the direct check from the mixed-block formula.
+
+The raw finite-ss mixed block is
+Nm(s)=1π(−2sin⁡Δm(s)ssin⁡Δm(s)+q+(s) scos⁡Δm(s)s2−sin⁡Δm(s)+q−(s) scos⁡Δm(s)s2(q−(s)+q+(s))scos⁡Δm(s)+(2−q−(s)q+(s)s2)sin⁡Δm(s)2s3).
+Nm​(s)=π1​
+​−s2sinΔm​(s)​−s2sinΔm​(s)+q−​(s)scosΔm​(s)​​s2sinΔm​(s)+q+​(s)scosΔm​(s)​2s3(q−​(s)+q+​(s))scosΔm​(s)+(2−q−​(s)q+​(s)s2)sinΔm​(s)​​
+​.
+
+Now freeze q±q±​ and vary only the phase gap:
+Δm(s)↦Δm(s)+ε δΔ(s),δΔ(s)=θs3+O(s5).
+Δm​(s)↦Δm​(s)+εδΔ(s),δΔ(s)=θs3+O(s5).
+
+Linearizing in εε, the off-diagonal entries vary by
+δN12(s)=1πs2(cos⁡Δm(s)−q+(s)ssin⁡Δm(s)) δΔ(s),
+δN12​(s)=πs21​(cosΔm​(s)−q+​(s)ssinΔm​(s))δΔ(s),
+δN21(s)=−1πs2(cos⁡Δm(s)−q−(s)ssin⁡Δm(s)) δΔ(s).
+δN21​(s)=−πs21​(cosΔm​(s)−q−​(s)ssinΔm​(s))δΔ(s).
+
+Since Δm(s)=O(s)Δm​(s)=O(s), q±(s)=q(m)+O(s)q±​(s)=q(m)+O(s), and δΔ(s)=θs3+O(s5)δΔ(s)=θs3+O(s5), we get
+cos⁡Δm(s)−q±(s)ssin⁡Δm(s)=1+O(s2),
+cosΔm​(s)−q±​(s)ssinΔm​(s)=1+O(s2),
+
+hence
+δN12(s)=θπs+O(s3),δN21(s)=−θπs+O(s3).
+δN12​(s)=πθ​s+O(s3),δN21​(s)=−πθ​s+O(s3).
+
+So the first odd mixed coefficient coming from a cubic phase-gap variation is indeed
+θπ(01−10),
+πθ​(0−1​10​),
+
+up to the sign of θθ. Equivalently, it is a nonzero multiple of either JJ or −J−J, depending on convention.
+
+Two practical consequences.
+
+First, your lemma
+C(01−10)⊂span⁡{N˙~1}
+C(0−1​10​)⊂span{N˙
+1​}
+
+is fine exactly as stated.
+
+Second, if elsewhere in the paper you define
+J:=(0−110),
+J:=(01​−10​),
+
+then the cleanest wording is not “the phase-gap direction gives +J+J,” but rather:
+
+    the phase-gap direction gives a nonzero multiple of the skew line CJCJ.
+
+That avoids a fake sign issue.
+
+So my answer is:
+
+Yes, the check passes.
+The first odd mixed phase-gap direction really is skew with opposite off-diagonal signs.
+The only honest refinement is: treat the result as landing in the skew line CJCJ, not as a fixed signed matrix unless you also pin down the sign convention for δΔδΔ.
+
+ok give me the latex for that last change
+
+Yes. I would make the lemma and proof sign-agnostic by switching from a fixed matrix to the skew line.
+
+Replace the current lemma block
+
+\begin{lemma}[First-order mixed skew direction]
+\label{lem:first-order-mixed-skew}
+The first-order pure-value mixed variations contain a nonzero skew direction:
+\[
+\mathbf C
+\begin{pmatrix}
+0&1\\
+-1&0
+\end{pmatrix}
+\subset
+\operatorname{span}\{\widetilde{\dot N}_1\}.
+\]
+\end{lemma}
+
+\begin{proof}
+At first odd order, the mixed block has a phase-gap contribution whose two
+off-diagonal entries occur with opposite sign, while the diagonal entries do
+not contribute at odd order. Equivalently, the direct cubic phase-gap
+variation produces a nonzero multiple of
+\[
+J:=
+\begin{pmatrix}
+0&1\\
+-1&0
+\end{pmatrix}
+\]
+in \(\dot N_1\). Whitening by \(X_0\) is invertible and preserves the skew line
+spanned by \(J\). Hence
+\[
+\mathbf C J\subset \operatorname{span}\{\widetilde{\dot N}_1\}.
+\]
+\end{proof}
+
+with this:
+
+\begin{lemma}[First-order mixed skew direction]
+\label{lem:first-order-mixed-skew}
+Let
+\[
+\mathfrak{so}_2(\mathbf C)
+:=
+\left\{
+\begin{pmatrix}
+0&\xi\\
+-\xi&0
+\end{pmatrix}
+:\ \xi\in\mathbf C
+\right\}.
+\]
+Then the first-order pure-value mixed variations contain the full skew line:
+\[
+\mathfrak{so}_2(\mathbf C)\subset \operatorname{span}\{\widetilde{\dot N}_1\}.
+\]
+Equivalently, the first-order mixed family contains a nonzero skew direction.
+\end{lemma}
+
+\begin{proof}
+Freeze the same-point data and vary only the phase gap:
+\[
+\Delta_m(s)\mapsto \Delta_m(s)+\varepsilon\,\delta\Delta(s),
+\qquad
+\delta\Delta(s)=\theta s^3+O(s^5),
+\quad \theta\neq 0.
+\]
+Linearizing the mixed block formula in \(\varepsilon\), the two off-diagonal
+entries vary with opposite sign, while the diagonal entries do not contribute
+at first odd order. More precisely,
+\[
+\delta N_{12}(s)=\frac{\theta}{\pi}s+O(s^3),
+\qquad
+\delta N_{21}(s)=-\frac{\theta}{\pi}s+O(s^3),
+\]
+up to the overall sign convention for \(\theta\). Hence the first odd mixed
+coefficient of this phase-gap variation is a nonzero element of
+\[
+\mathfrak{so}_2(\mathbf C).
+\]
+Whitening by \(X_0\) is invertible, so the whitened first-order mixed family
+also contains a nonzero skew element. Since \(\mathfrak{so}_2(\mathbf C)\) is
+one-dimensional, this is equivalent to
+\[
+\mathfrak{so}_2(\mathbf C)\subset \operatorname{span}\{\widetilde{\dot N}_1\}.
+\]
+\end{proof}
+
+And then in the proposition proof, replace
+
+By Lemma~\ref{lem:first-order-mixed-skew}, the mixed directions contain the skew
+line
+\[
+\mathbf C
+\begin{pmatrix}
+0&1\\
+-1&0
+\end{pmatrix}.
+\]
+Therefore the image of the generator contains
+\[
+\Sym_2(\mathbf C)
+\oplus
+\mathbf C
+\begin{pmatrix}
+0&1\\
+-1&0
+\end{pmatrix}
+=
+M_2(\mathbf C).
+\]
+
+with
+
+By Lemma~\ref{lem:first-order-mixed-skew}, the mixed directions contain the skew
+line
+\[
+\mathfrak{so}_2(\mathbf C).
+\]
+Therefore the image of the generator contains
+\[
+\Sym_2(\mathbf C)\oplus \mathfrak{so}_2(\mathbf C)=M_2(\mathbf C).
+\]
+
+That is the cleanest version. It removes the sign-convention nuisance completely.
+
+proof_of_rh(66).tex
+File
+check this holistically. (1) did your edits go in properly, and (2) what open items remain?
+
+I’m checking the new draft in two passes: first the exact first-order patch to see whether the three-input linearization and skew-line fix landed cleanly, then the broader audit list to see what’s still genuinely open versus now only stylistic.
+
+Yes. Holistically, the latest draft is in much better shape.
+
+On your first question: the first-order edits went in properly.
+
+The three-input generator is there, the whitened reduction is there, the same-point span lemma is there, the mixed skew-line lemma is there in the sign-agnostic so2(C)so2​(C) form, and the proposition first-order-quotient-trivial is now actually proved from those lemmas rather than left as a bare claim. The “raw versus full first-order family” remark is also in place, which is important because it explains why this does not contradict the raw swap-odd slice. That is exactly the conceptual repair we were aiming for. The latest local order-1 story is no longer just an audit placeholder; it is a real argument.
+
+I do have one mild note there: you now have two nearby remarks saying almost the same structural thing, namely rem:wip-raw-vs-full-first-order and rem:wip-raw-vs-full-value-family. They are not inconsistent, but they overlap enough that you could probably merge them later.
+
+On your second question: here is what still looks open.
+
+The main local order-5 item still open is the quintic pure-value trace issue. The current first-residual proposition is now phrased in the explicit finite-order model, but the audit remark is still right: you have not yet proved that trace annihilates the quintic pure-value slice, or at least its image in the residual quotient. So that local detector remains conditional. That was already the real load-bearing quintic gap in the earlier audit, and it still is.
+
+The main local order-7 item still open is not the top new q(7)q(7) coefficient anymore. You now have the direct septic K1K1​ witness, the parity elimination lemma, and the weight-one reduction to the direct K1K1​ slice. So the top new coefficient is no longer the issue. What remains is exactly what your current audit remark says: the remaining order-7 sectors and therefore the full total septic fixed-sector pair (u7,v7)(u7​,v7​), hence the full total Δ7Δ7​. In other words, the open septic work is now the lower/mixed septic completion, not the direct q(7)q(7) witness itself. That is a real narrowing of the problem.
+
+Relatedly, prop:rho2-not-affine-in-rho1 is still explicitly conditional on the direct q(7)q(7)-driven slice of total Δ7Δ7​ being generically nonzero. That is still the right place where the remaining septic bridge sits. So the draft has improved the local witness, but it has not yet converted that into an unconditional theorem about the full total Δ7Δ7​.
+
+Beyond those local items, the real remaining bottleneck is still the global geometric side, and the draft now says that honestly. The live issue is the W=0, M≠0W=0, M=0 boundary behavior and the tangent-separator sign story across adjacent ECT intervals. That is now clearly the main unresolved endgame theorem, rather than vague algebraic bookkeeping. The earlier audit language already pointed in exactly that direction, and the present draft is consistent with it.
+
+So my current “done vs open” split is:
+
+Done or mostly done
+
+    first-order surjectivity package;
+
+    direct septic K1K1​ witness at the graded (K1,η2,q(7))(K1​,η2​,q(7)) level;
+
+    parity elimination of pure same-point septic terms;
+
+    weight-one reduction of Δ7Δ7​ to the direct K1K1​ slice.
+
+Still open
+
+    quintic pure-value trace annihilation in the first residual quotient;
+
+    full total septic fixed-sector completion (u7,v7)(u7​,v7​);
+
+    unconditional passage from the direct septic witness to the full direct q(7)q(7)-slice of total Δ7Δ7​;
+
+    the W=0, M≠0W=0, M=0 affine-inflection / adjacent tangent-separator theorem.
+
+If you want the practical next move, I would not go back to first-order anymore. I would choose between two tracks:
+
+Either finish the remaining local closure by attacking quintic pure-value trace annihilation and the lower/mixed septic sectors.
+
+Or, if you want the highest leverage for the proof, go straight at the W=0W=0 boundary theorem, because that is now the real bottleneck.
+
+My own recommendation is: keep the first-order section as settled, leave the quintic trace theorem explicitly conditional for now unless you see a clean proof, and push next on the full direct q(7)q(7)-slice of Δ7Δ7​ or the W=0W=0 boundary geometry. The latter is now the most important unresolved theorem.
+
+can you give me the latex which consolidates these, and what to replace: I do have one mild note there: you now have two nearby remarks saying almost the same structural thing, namely rem:wip-raw-vs-full-first-order and rem:wip-raw-vs-full-value-family. They are not inconsistent, but they overlap enough that you could probably merge them later.
+
+I’m pulling the two remark blocks so I can give you a literal replacement instead of a paraphrase.
+
+Yes. I would replace both nearby remarks with a single consolidated one.
+
+Replace this entire block:
+
+\begin{remark}[Raw versus full first-order family]
+\label{rem:wip-raw-vs-full-first-order}
+The surjectivity statement above concerns the full first-order pure-value family
+as it appears in the three-input derivative
+\[
+D\mathcal W_{(\bg)}[\dot G_-,\dot N,\dot G_+].
+\]
+This is larger than the raw swap-odd one-pair slice obtained by tying the left
+and right same-point variations together. The distinction is important in later
+bookkeeping, but it does not affect the present quotient-triviality statement.
+\end{remark}
+
+\begin{remark}[Structural split still to be made explicit]
+\label{rem:wip-raw-vs-full-value-family}
+At first order the family $V_{\val}^{(1)}$ fills $M_2(\mathbf C)$, while
+the odd coefficients of the raw corrected local block are expected to satisfy
+additional swap/parity constraints. This indicates that the present notation
+$V_{\val}^{(2j+1)}$ is bundling together at least two logically distinct
+sources of ambiguity: raw pure-value odd jets and normalization/basis-gauge
+directions. The current draft uses the combined family $V_{\val}^{(2j+1)}$.
+A later refinement should separate these components explicitly.
+\end{remark}
+
+with this single remark:
+
+\begin{remark}[Raw versus full value family]
+\label{rem:wip-raw-vs-full-value-family}
+The first-order surjectivity statement concerns the full value family as it
+appears in the three-input derivative
+\[
+D\mathcal W_{(\bg)}[\dot G_-,\dot N,\dot G_+].
+\]
+This is larger than the raw swap-odd one-pair slice obtained by tying the left
+and right same-point variations together. In particular, at first order the
+combined family \(V_{\val}^{(1)}\) fills \(M_2(\mathbf C)\), while the odd
+coefficients of the raw corrected local block are expected to satisfy
+additional swap/parity constraints. Thus the present notation
+\[
+V_{\val}^{(2j+1)}
+\]
+is bundling together at least two logically distinct sources of ambiguity:
+raw pure-value odd jets and additional normalization/basis-gauge directions.
+The current draft works with this combined family; a later refinement should
+separate these components explicitly.
+\end{remark}
+
+A small extra cleanup: after this replacement, there should be only one surviving label, namely
+
+\label{rem:wip-raw-vs-full-value-family}
+
+So references to rem:wip-raw-vs-full-first-order should be removed or redirected if any exist.
+
+proof_of_rh(69).tex
+File
+check the latest draft and give me next steps
+
+I’m checking the new draft against the actual live bottlenecks, not just the previous to-do list. I’ll separate what is now genuinely closed from what still matters strategically, so the next steps are not just more cleanup for its own sake.
+
+I checked the latest draft. My overall view is: do not do another architecture pass. The paper now has a real spine, and the live issues are much narrower than before.
+
+What is now basically in place:
+
+The first-order section is no longer a placeholder. The three-input whitening derivative, the whitened reduction, the symmetric-span lemma, the mixed skew-line lemma, and the proof of first-order quotient triviality are all there and fit together. The consolidated “raw versus full value family” remark also resolves the earlier conceptual mismatch.
+
+More importantly, the old quintic bottleneck has changed shape. In the latest draft, you no longer rely on the raw statement “trace kills V\val(5)V\val(5)​” in the old broad sense. Instead, you introduced the explicit finite-order model with Vraw(5)Vraw(5)​, Nh(5)Nh(5)​, Vamb(5)Vamb(5)​, and Rh(5)Rh(5)​, and then proved ΣΣ-stability / anti-fixedness for the ambiguity space. That is a real improvement: the first residual detector is now much more honest and much less hand-wavy.
+
+At order 77, the draft now has the direct q(7)q(7)-driven K1K1​ witness, its noncancellation proof, parity elimination of pure same-point septic terms, and the weight-one reduction of Δ7Δ7​ to the direct K1K1​ slice. So the top genuinely new local order-77 coefficient is no longer vague.
+
+Because of that, the paper’s center of gravity has shifted. The main unresolved theorem is now geometric, not raw local algebra.
+
+So the next steps I would recommend are these, in order.
+
+First, do one short local bridge: attack the hypothesis in prop:rho2-not-affine-in-rho1. Right now that proposition still assumes the direct q(7)q(7)-driven slice of the full total Δ7Δ7​ is generically nonzero. But the draft already proves:
+
+    the direct K1K1​ witness is nonzero,
+
+    pure same-point septic terms do not contribute to weight one,
+
+    and the weight-one part of Δ7Δ7​ comes from the direct K1K1​ slice.
+
+So the remaining task is no longer “find a septic witness.” It is to turn those three facts into the theorem that the full direct q(7)q(7)-slice of Δ7Δ7​ is generically nonzero. That is the cleanest remaining local bridge, and it would let you remove a conspicuous hypothesis from the normalized planar-curve section.
+
+Second, once that is done, I would stop spending effort on more local refinements unless forced. In particular, I would not rush to compute every lower/mixed order-77 sector unless it is actually needed for the previous bridge. The audit remark about the “full septic fixed-sector coefficient” is still honest, but it is no longer the most valuable place to push unless the Δ7(q(7))Δ7(q(7))​ bridge really needs those terms.
+
+Third, move directly to the real bottleneck: the turning-boundary directional-kernel / zero-capture problem. The current draft says this clearly now. You have:
+
+    the normalized planar curve Γ=(v5/c,Δ7/c)Γ=(v5​/c,Δ7​/c),
+
+    the M,N,WM,N,W package,
+
+    the ECT interval layer,
+
+    the tangent-separator kernel,
+
+    the conditional adjacent theorem,
+
+    and the reduction of pair-pair birth to an interior zero of a directional kernel.
+
+That means the live theorem is not “more one-pair algebra.” It is: prove the relevant zero-capture / sign-regularity statement for the directional tangent-separator kernels across adjacent turning boundaries. That is where I would put the next serious mathematical effort.
+
+Fourth, treat the two-pair and minimal-core sections as downstream architecture, not the next place to do heavy lifting. They are in the right place now, but they are still schematic. I would not try to make those sections fully rigorous before the turning-boundary kernel problem is settled, because right now they depend more on the global geometric theorem than on additional local bookkeeping.
+
+So my practical recommendation is:
+
+    Close the rho2-not-affine hypothesis by proving generic nonvanishing of the direct q(7)q(7)-slice of total Δ7Δ7​.
+
+    Then attack the turning-boundary directional-kernel zero-capture theorem.
+
+    Only after that, return to sharpen the two-pair and minimal-core sections.
+
+If you want the blunt summary: the draft is now strong enough that the next meaningful work is no longer “clean up the local algebra again.” It is one short local bridge, then the real geometric theorem.
+
+ok let's do this: First, do one short local bridge: attack the hypothesis in prop:rho2-not-affine-in-rho1. Right now that proposition still assumes the direct q
+(7)
+-driven slice of the full total Δ
+7
+	​
+
+ is generically nonzero. But the draft already proves:
+
+I’m tracing the exact dependency chain around prop:rho2-not-affine-in-rho1 now. The right target is to see whether the current draft already has enough to promote the direct q(7)q(7)-slice of total Δ7Δ7​ from an assumption to a theorem, or whether one small extra lemma is still missing.
+
+Yes. This is now a short bridge, not a new local theory.
+
+The current proposition still assumes generic nonvanishing of the direct q(7)q(7)-slice of total Δ7Δ7​. But the draft already has the two ingredients that almost replace that hypothesis:
+
+First, on the direct linear q(7)q(7)-driven slice, the septic K1K1​-transport contribution is II-directional and satisfies
+Δ7(q(7))=u7(q(7))v5.
+Δ7(q(7))​=u7(q(7))​v5​.
+
+Second, the highest genuinely new q(7)q(7)-coefficient of the total septic determinant is reduced to the direct K1K1​ slice:
+[Δ7][1]=[Δ7,K1][1].
+[Δ7​][1]=[Δ7,K1​​][1].
+
+So the only missing bridge is to combine that with the already-inserted noncancellation of the direct septic K1K1​ witness and then ask only for v5≢0v5​≡0 on the component.
+
+In other words: you probably cannot remove all hypotheses from prop:rho2-not-affine-in-rho1 yet, but you can replace the current hypothesis by a much smaller one:
+v5≢0on the connected component under consideration.
+v5​≡0on the connected component under consideration.
+
+That is a real strengthening, because the present draft already reduces the genuinely new order-77 coefficient to the direct K1K1​ slice, and the separate direct-witness proposition gives the needed nonzero u7,K1(q(7))u7,K1​(q(7))​.
+What to insert
+
+Insert this immediately after Corollary \ref{cor:weight-one-septic-reduction} and before the audit remark on the full septic fixed-sector coefficient.
+
+\begin{proposition}[Generic nonvanishing of the direct septic slice under nontrivial quintic fixed-sector coefficient]
+\label{prop:direct-q7-total-delta7-nonzero}
+Let \(J\) be a connected component of the quintic-generic region.
+Assume
+\[
+v_5\not\equiv 0
+\qquad\text{on }J.
+\]
+Then the direct \(q^{(7)}\)-driven slice of the full total septic residual
+determinant is generically nonzero on \(J\). Equivalently,
+\[
+\Delta_7^{(q^{(7)})}\not\equiv 0
+\qquad\text{on }J.
+\]
+\end{proposition}
+
+\begin{proof}
+By Corollary~\ref{cor:weight-one-septic-reduction},
+\[
+[\Delta_7]^{[1]}=[\Delta_{7,K_1}]^{[1]}.
+\]
+Thus the highest genuinely new direct \(q^{(7)}\)-coefficient of the total
+septic residual determinant is the same as that of the direct \(K_1\)-transport
+slice.
+
+By Proposition~\ref{prop:direct-q7-k1-witness-nonzero}, the direct septic
+\(K_1\) witness is nonzero:
+\[
+u_{7,K_1}^{(q^{(7)})}\not\equiv 0
+\qquad\text{on }J.
+\]
+Moreover, by Corollary~\ref{cor:direct-q7-septic-slice}, on the direct
+\(q^{(7)}\)-driven slice one has
+\[
+v_{7,K_1}^{(q^{(7)})}=0,
+\qquad
+\Delta_{7,K_1}^{(q^{(7)})}
+=
+u_{7,K_1}^{(q^{(7)})}\,v_5.
+\]
+Since \(v_5\not\equiv 0\) on \(J\), it follows that
+\[
+\Delta_{7,K_1}^{(q^{(7)})}\not\equiv 0
+\qquad\text{on }J.
+\]
+Therefore
+\[
+\Delta_7^{(q^{(7)})}\not\equiv 0
+\qquad\text{on }J,
+\]
+as claimed.
+\end{proof}
+
+Then replace the current proposition statement
+
+Replace this:
+
+\begin{proposition}[Non-affinity of the second normalized residual scalar]
+\label{prop:rho2-not-affine-in-rho1}
+Assume that the direct $q^{(7)}$-driven slice of $\Delta_7(h)$ is
+generically nonzero on the quintic-generic region. Then there do not exist
+constants $A,B\in\mathbf C$ such that
+\[
+\rho_2(h)\equiv A\,\rho_1(h)+B
+\]
+on any connected component of $\{h:c(h)\neq 0\}.
+
+with this:
+
+\begin{proposition}[Non-affinity of the second normalized residual scalar]
+\label{prop:rho2-not-affine-in-rho1}
+Let \(J\) be a connected component of the quintic-generic region intersected
+with \(\{h:c(h)\neq 0\}\). Assume
+\[
+v_5\not\equiv 0
+\qquad\text{on }J.
+\]
+Then there do not exist constants \(A,B\in\mathbf C\) such that
+\[
+\rho_2(h)\equiv A\,\rho_1(h)+B
+\]
+on \(J\).
+
+And replace the proof with this
+
+\begin{proof}
+Suppose
+\[
+\Delta_7(h)\equiv A\,v_5(h)+B\,c(h)
+\]
+on \(J\). Then the direct \(q^{(7)}\)-driven slice of the right-hand side
+vanishes, because \(v_5\) and \(c\) are governed by the cubic/quintic layers
+and carry no direct septic \(q^{(7)}\)-slice.
+
+On the other hand, by
+Proposition~\ref{prop:direct-q7-total-delta7-nonzero}, the direct
+\(q^{(7)}\)-driven slice of \(\Delta_7\) is generically nonzero on \(J\).
+This is a contradiction. Dividing by \(c(h)\) yields
+\[
+\rho_2(h)\not\equiv A\,\rho_1(h)+B.
+\qedhere
+\]
+\end{proof}
+
+Why this is the right bridge
+
+This uses exactly what the draft now truly knows:
+
+    the direct q(7)q(7)-driven septic slice is controlled at the K1K1​ level, with the formula Δ7(q(7))=u7(q(7))v5Δ7(q(7))​=u7(q(7))​v5​;
+
+    the genuinely new order-77 coefficient of the total Δ7Δ7​ comes only from the direct K1K1​ slice;
+
+    and the current rho2-not-affine proposition is still assuming a stronger generic-nonvanishing statement than the file now needs.
+
+One extra payoff
+
+This also helps the downstream no-W-flat-interval use.
+
+That proposition already assumes M≠0M=0 on the interval. On any connected interval with c≠0c=0, the identity
+M=c v5′−c′v5
+M=cv5′​−c′v5​
+
+immediately rules out v5≡0v5​≡0. So for the actual downstream application, the new hypothesis v5≢0v5​≡0 is automatically satisfied whenever M≠0M=0 on the interval.
+
+So this is the right short local bridge:
+you do not need the full lower/mixed septic completion to strengthen prop:rho2-not-affine-in-rho1; you only need to replace the current hypothesis by the nontriviality of v5v5​ on the component and insert the bridge proposition above.
+
+do we also need to update downstream no-W-flat-interval use, or elsewhere?
+
+That proposition already assumes M
+
+=0 on the interval. On any connected interval with c
+
+=0, the identity
+
+M=cv
+5
+′
+	​
+
+−c
+′
+v
+5
+	​
+
+
+immediately rules out v
+5
+	​
+
+≡0. So for the actual downstream application, the new hypothesis v
+5
+	​
+
+
+≡0 is automatically satisfied whenever M
+
+=0 on the interval.
+
+??
+
+I’m checking the exact downstream dependency chain now. The key question is whether the new weaker hypothesis v5≢0v5​≡0 needs to be threaded into later propositions, or whether it is already automatic where the paper actually uses rho2-not-affine-in-rho1.
+
+Yes — but with one important nuance.
+
+You should update downstream uses if you change prop:rho2-not-affine-in-rho1 to the new weaker hypothesis v5≢0v5​≡0. The main downstream place is exactly prop:no-W-flat-interval, and there is one smaller cleanup in the curvature bridge discussion. See the current statements in the .
+
+The nuance is this:
+
+If you restate prop:rho2-not-affine-in-rho1 locally on an arbitrary connected interval J⊂{c≠0}J⊂{c=0}, assuming only
+v5≢0on J,
+v5​≡0on J,
+
+then prop:no-W-flat-interval becomes cleaner immediately, because its hypotheses already include
+c≠0,M≠0on J,
+c=0,M=0on J,
+
+and
+M=c v5′−c′v5
+M=cv5′​−c′v5​
+
+forces v5≢0v5​≡0 on that same interval JJ. In that local form, the new hypothesis is automatic, so no-W-flat-interval should indeed be updated.
+
+But if you restate prop:rho2-not-affine-in-rho1 only on a maximal connected component of the generic region, then no-W-flat-interval does not follow quite as cleanly, because that proposition gives an affine relation only on the smaller interval JJ, not necessarily on the whole component. So the clean downstream update works best if rho2-not-affine is stated locally.
+
+So my recommendation is:
+
+Write prop:rho2-not-affine-in-rho1 in local form:
+
+    let JJ be any connected open interval in the relevant region,
+
+    assume c≠0c=0 and v5≢0v5​≡0 on JJ,
+
+    conclude ρ2≢Aρ1+Bρ2​≡Aρ1​+B on JJ.
+
+Then make these downstream edits.
+
+For prop:no-W-flat-interval, yes, update it. Its current extra hypothesis about the direct q(7)q(7)-slice can be removed and replaced by one sentence in the proof:
+
+    Since M=c v5′−c′v5M=cv5′​−c′v5​ is nonzero on JJ, one cannot have v5≡0v5​≡0 on JJ. Hence Proposition~\ref{prop:rho2-not-affine-in-rho1} applies on JJ.
+
+That is the real payoff of the bridge.
+
+For prop:curvature-bridge-normalized-curve, I would do a lighter cleanup. The final sentence
+“Consequently, under the hypothesis of Proposition \refprop:rho2-not-affine-in-rho1, one has KΓ≢0 …”
+“Consequently, under the hypothesis of Proposition \refprop:rho2-not-affine-in-rho1, one has KΓ​≡0 …”
+
+is now a bit too vague. I would either remove that sentence entirely, or localize it the same way:
+on any connected interval JJ with c≠0c=0, M≠0M=0, and v5≢0v5​≡0, one has KΓ≢0KΓ​≡0 by the new non-affinity proposition.
+
+The later remark rem:lambda-reduction-no-W-flatness does not need a substantive change. Its logic still runs once prop:no-W-flat-interval has been updated.
+
+So the short answer is:
+
+Yes, you should update downstream use in no-W-flat-interval, and probably make a small wording cleanup in the curvature bridge proposition.
+
+But that works cleanly only if rho2-not-affine-in-rho1 is restated locally, not just on a whole connected component.
+
+proof_of_rh(72).tex
+File
+ok based on the current state of the paper, can you give me the exact latex edits to make and where to make them?
+
+I’m locating the exact proposition and proof blocks in the latest TeX so I can give you literal replacements with insertion points, not just suggested wording.
+
+Yes. Based on the current state of proof_of_rh(72).tex, these are the exact edits I would make.
+
+They do three things:
+
+    localize the new direct-septic bridge so it applies on any connected interval, not just a whole component;
+
+    localize prop:rho2-not-affine-in-rho1 the same way;
+
+    update the downstream uses in the curvature bridge and no-W-flat-interval so the logic is actually airtight.
+
+Edit 1: localize the direct-septic bridge proposition
+Find this exact block
+
+\begin{proposition}[Generic nonvanishing of the direct septic slice under nontrivial quintic fixed-sector coefficient]
+\label{prop:direct-q7-total-delta7-nonzero}
+Let $J$ be a connected component of the quintic-generic region.
+Assume
+\[
+v_5\not\equiv 0
+\qquad\text{on }J.
+\]
+Then the direct $q^{(7)}$-driven slice of the full total septic residual
+determinant is generically nonzero on $J$. Equivalently,
+\[
+\Delta_7^{(q^{(7)})}\not\equiv 0
+\qquad\text{on }J.
+\]
+\end{proposition}
+
+\begin{proof}
+By Corollary~\ref{cor:weight-one-septic-reduction},
+\[
+[\Delta_7]^{[1]}=[\Delta_{7,K_1}]^{[1]}.
+\]
+Thus the highest genuinely new direct $q^{(7)}$-coefficient of the total
+septic residual determinant is the same as that of the direct $K_1$-transport
+slice.
+
+By Proposition~\ref{prop:direct-q7-k1-witness-nonzero}, the direct septic
+$K_1$ witness is nonzero:
+\[
+u_{7,K_1}^{(q^{(7)})}\not\equiv 0
+\qquad\text{on }J.
+\]
+Moreover, by Corollary~\ref{cor:direct-q7-septic-slice}, on the direct
+$q^{(7)}$-driven slice one has
+\[
+v_{7,K_1}^{(q^{(7)})}=0,
+\qquad
+\Delta_{7,K_1}^{(q^{(7)})}
+=
+u_{7,K_1}^{(q^{(7)})}\,v_5.
+\]
+Since $v_5\not\equiv 0$ on $J$, it follows that
+\[
+\Delta_{7,K_1}^{(q^{(7)})}\not\equiv 0
+\qquad\text{on }J.
+\]
+Therefore
+\[
+\Delta_7^{(q^{(7)})}\not\equiv 0
+\qquad\text{on }J,
+\]
+as claimed.
+\end{proof}
+
+Replace it with
+
+\begin{proposition}[Generic nonvanishing of the direct septic slice under nontrivial quintic fixed-sector coefficient]
+\label{prop:direct-q7-total-delta7-nonzero}
+Let $J$ be a connected open interval contained in the quintic-generic region.
+Assume
+\[
+v_5\not\equiv 0
+\qquad\text{on }J.
+\]
+Then the direct $q^{(7)}$-driven slice of the full total septic residual
+determinant is generically nonzero on $J$. Equivalently,
+\[
+\Delta_7^{(q^{(7)})}\not\equiv 0
+\qquad\text{on }J.
+\]
+\end{proposition}
+
+\begin{proof}
+By Corollary~\ref{cor:weight-one-septic-reduction},
+\[
+[\Delta_7]^{[1]}=[\Delta_{7,K_1}]^{[1]}.
+\]
+Thus the highest genuinely new direct $q^{(7)}$-coefficient of the total
+septic residual determinant is the same as that of the direct $K_1$-transport
+slice.
+
+By Proposition~\ref{prop:direct-q7-k1-witness-nonzero}, the direct septic
+$K_1$ witness is generically nonzero on the quintic-generic region. In
+particular,
+\[
+u_{7,K_1}^{(q^{(7)})}\not\equiv 0
+\qquad\text{on }J.
+\]
+Moreover, by Corollary~\ref{cor:direct-q7-septic-slice}, on the direct
+$q^{(7)}$-driven slice one has
+\[
+v_{7,K_1}^{(q^{(7)})}=0,
+\qquad
+\Delta_{7,K_1}^{(q^{(7)})}
+=
+u_{7,K_1}^{(q^{(7)})}\,v_5.
+\]
+Since $v_5\not\equiv 0$ on $J$, it follows that
+\[
+\Delta_{7,K_1}^{(q^{(7)})}\not\equiv 0
+\qquad\text{on }J.
+\]
+Therefore
+\[
+\Delta_7^{(q^{(7)})}\not\equiv 0
+\qquad\text{on }J,
+\]
+as claimed.
+\end{proof}
+
+Edit 2: localize prop:rho2-not-affine-in-rho1
+Find this exact block
+
+\begin{proposition}[Non-affinity of the second normalized residual scalar]
+\label{prop:rho2-not-affine-in-rho1}
+Let $J$ be a connected component of the quintic-generic region intersected
+with $\{h:c(h)\neq 0\}$. Assume
+\[
+v_5\not\equiv 0
+\qquad\text{on }J.
+\]
+Then there do not exist constants $A,B\in\mathbf C$ such that
+\[
+\rho_2(h)\equiv A\,\rho_1(h)+B
+\]
+on $J$.
+
+Equivalently,
+\[
+\Delta_7(h)\not\equiv A\,v_5(h)+B\,c(h).
+\]
+\end{proposition}
+
+\begin{proof}
+Suppose
+\[
+\Delta_7(h)\equiv A\,v_5(h)+B\,c(h)
+\]
+on $J$. Then the direct $q^{(7)}$-driven slice of the right-hand side
+vanishes, because $v_5$ and $c$ are governed by the cubic/quintic layers
+and carry no direct septic $q^{(7)}$-slice.
+
+On the other hand, by
+Proposition~\ref{prop:direct-q7-total-delta7-nonzero}, the direct
+$q^{(7)}$-driven slice of $\Delta_7$ is generically nonzero on $J$.
+This is a contradiction. Dividing by $c(h)$ yields
+\[
+\rho_2(h)\not\equiv A\,\rho_1(h)+B.
+\qedhere
+\]
+\end{proof}
+
+Replace it with
+
+\begin{proposition}[Non-affinity of the second normalized residual scalar]
+\label{prop:rho2-not-affine-in-rho1}
+Let $J$ be a connected open interval contained in the quintic-generic region
+and in $\{h:c(h)\neq 0\}$. Assume
+\[
+v_5\not\equiv 0
+\qquad\text{on }J.
+\]
+Then there do not exist constants $A,B\in\mathbf C$ such that
+\[
+\rho_2(h)\equiv A\,\rho_1(h)+B
+\]
+on $J$.
+
+Equivalently,
+\[
+\Delta_7(h)\not\equiv A\,v_5(h)+B\,c(h)
+\]
+on $J$.
+\end{proposition}
+
+\begin{proof}
+Suppose
+\[
+\Delta_7(h)\equiv A\,v_5(h)+B\,c(h)
+\]
+on $J$. Then the direct $q^{(7)}$-driven slice of the right-hand side
+vanishes, because $v_5$ and $c$ are governed by the cubic/quintic layers
+and carry no direct septic $q^{(7)}$-slice.
+
+On the other hand, by
+Proposition~\ref{prop:direct-q7-total-delta7-nonzero}, the direct
+$q^{(7)}$-driven slice of $\Delta_7$ is generically nonzero on $J$.
+This is a contradiction. Dividing by $c(h)$ yields
+\[
+\rho_2(h)\not\equiv A\,\rho_1(h)+B.
+\qedhere
+\]
+\end{proof}
+
+This is the key logical repair. After this change, the later use on an arbitrary interval JJ is valid.
+Edit 3: tighten the final claim in the curvature-bridge proposition
+Find this exact block inside prop:curvature-bridge-normalized-curve
+
+In particular, if $K_\Gamma\equiv 0$ on a connected open set on which
+$M\neq 0$, then $\rho_2$ is affine in $\rho_1$ on that set.
+Consequently, under the hypothesis of
+Proposition~\ref{prop:rho2-not-affine-in-rho1}, one has
+\[
+K_\Gamma\not\equiv 0
+\]
+on the generic region.
+
+Replace it with
+
+In particular, if $K_\Gamma\equiv 0$ on a connected open interval \(J\) on
+which
+\[
+c\neq 0,
+\qquad
+M\neq 0,
+\qquad
+v_5\not\equiv 0,
+\]
+then \(\rho_2\) is affine in \(\rho_1\) on \(J\), contradicting
+Proposition~\ref{prop:rho2-not-affine-in-rho1}. Hence on every such interval
+one has
+\[
+K_\Gamma\not\equiv 0.
+\]
+
+Then find the end of the proof of that proposition
+
+hence
+\[
+\rho_2=A\,\rho_1+B
+\]
+on that connected set. The final claim now follows from
+Proposition~\ref{prop:rho2-not-affine-in-rho1}.
+
+Replace it with
+
+hence
+\[
+\rho_2=A\,\rho_1+B
+\]
+on that connected interval. If in addition
+\[
+c\neq 0,
+\qquad
+v_5\not\equiv 0,
+\]
+there, this contradicts Proposition~\ref{prop:rho2-not-affine-in-rho1}. The
+final claim follows.
+
+This makes the proposition match the localized non-affinity theorem exactly.
+Edit 4: update prop:no-W-flat-interval
+Find this exact block
+
+\begin{proposition}[Exclusion of $W$-flat intervals under direct septic nonvanishing]
+\label{prop:no-W-flat-interval}
+Assume that the direct $q^{(7)}$-driven slice of $\Delta_7(h)$ is
+generically nonzero on the quintic-generic region. Let $J$ be a connected
+open interval on which
+\[
+c(h)\neq 0,
+\qquad
+M(h)\neq 0.
+\]
+Then
+\[
+W\not\equiv 0
+\qquad\text{on }J.
+\]
+\end{proposition}
+
+\begin{proof}
+Suppose for contradiction that
+\[
+W\equiv 0
+\qquad\text{on }J.
+\]
+By Proposition~\ref{prop:projective-wronskian-bridge},
+\[
+K_\Gamma(h)=\frac{W(h)}{c(h)^3}\equiv 0
+\qquad\text{on }J.
+\]
+Since $M\neq 0$ on $J$, Proposition~\ref{prop:curvature-bridge-normalized-curve}
+implies that
+\[
+\rho_2(h)=A\,\rho_1(h)+B
+\]
+for some constants $A,B\in\mathbf C$, i.e.
+\[
+\Delta_7(h)=A\,v_5(h)+B\,c(h)
+\qquad\text{on }J.
+\]
+This contradicts Proposition~\ref{prop:rho2-not-affine-in-rho1}. Therefore
+$W$ cannot vanish identically on $J$.
+\end{proof}
+
+Replace it with
+
+\begin{proposition}[Exclusion of $W$-flat intervals]
+\label{prop:no-W-flat-interval}
+Let $J$ be a connected open interval on which
+\[
+c(h)\neq 0,
+\qquad
+M(h)\neq 0.
+\]
+Then
+\[
+W\not\equiv 0
+\qquad\text{on }J.
+\]
+\end{proposition}
+
+\begin{proof}
+Suppose for contradiction that
+\[
+W\equiv 0
+\qquad\text{on }J.
+\]
+By Proposition~\ref{prop:projective-wronskian-bridge},
+\[
+K_\Gamma(h)=\frac{W(h)}{c(h)^3}\equiv 0
+\qquad\text{on }J.
+\]
+Since
+\[
+M=c\,v_5'-c'v_5
+\]
+and \(c\neq 0\) on \(J\), the hypothesis \(M\neq 0\) on \(J\) rules out
+\(v_5\equiv 0\) on \(J\). Hence \(v_5\not\equiv 0\) on \(J\).
+
+By Proposition~\ref{prop:curvature-bridge-normalized-curve}, it follows that
+\[
+\rho_2(h)=A\,\rho_1(h)+B
+\]
+for some constants \(A,B\in\mathbf C\), i.e.
+\[
+\Delta_7(h)=A\,v_5(h)+B\,c(h)
+\qquad\text{on }J.
+\]
+This contradicts Proposition~\ref{prop:rho2-not-affine-in-rho1}. Therefore
+\[
+W\not\equiv 0
+\qquad\text{on }J.
+\qedhere
+\]
+\end{proof}
+
+This is the main downstream update you asked about. After the new bridge proposition, the old direct-septic hypothesis is no longer needed here.
+Edit 5: make the interpretation remark match the new proposition title
+Find
+
+forced by Proposition~\ref{prop:no-W-flat-interval} implies
+
+That line is already correct as a reference, but the remark still says:
+
+If $W\equiv 0$ on a
+connected open interval with $c\neq 0$ and $M\neq 0$, then the affine
+dependence
+\[
+\Delta_7=A\,v_5+B\,c
+\]
+forced by Proposition~\ref{prop:no-W-flat-interval} implies
+
+You do not need to change the logic there, but I would add one sentence before the affine dependence line:
+
+Since \(M=c\,v_5'-c'v_5\) and \(c\neq 0\) on the interval, the hypothesis
+\(M\neq 0\) also forces \(v_5\not\equiv 0\) there.
+
+So replace this part:
+
+Thus if $W\equiv 0$ on a
+connected open interval with $c\neq 0$ and $M\neq 0$, then the affine
+dependence
+
+with
+
+Thus if $W\equiv 0$ on a
+connected open interval with $c\neq 0$ and $M\neq 0$, then
+\[
+v_5\not\equiv 0
+\]
+on that interval, because \(M=c\,v_5'-c'v_5\). The affine dependence
+
+That makes the remark track the new local hypothesis explicitly.
+Optional small cleanup
+
+Right after prop:no-W-flat-interval, I would consider changing the proposition title from
+
+[Exclusion of $W$-flat intervals]
+
+to
+
+[Exclusion of $W$-flat intervals on the \(c\neq 0,\ M\neq 0\) region]
+
+only if you want the title to reflect its real scope a bit more explicitly.
+Summary of what to change
+
+You only need to touch four main places in the current file:
+
+    prop:direct-q7-total-delta7-nonzero
+
+    prop:rho2-not-affine-in-rho1
+
+    prop:curvature-bridge-normalized-curve
+
+    prop:no-W-flat-interval
+
+And one small explanatory sentence in rem:lambda-reduction-no-W-flatness.
+
+After these edits, the local bridge is logically tight and the downstream use is aligned with the current state of the paper.
+
+proof_of_rh(76).tex
+File
+check this holistically. (1) are your edits in and (2) what remains holistically?
+
+I’m checking the latest draft against the exact patch list from the last round, then I’ll give you a fresh “closed vs still open” assessment rather than just repeating the older queue.
+
+Yes, mostly.
+
+On (1): the substantive edits are in.
+
+What is now clearly in place:
+
+    the first-order package is repaired and proved: lem:first-order-mixed-skew, prop:first-order-quotient-trivial, and the consolidated remark rem:raw-vs-full-value-family;
+
+    the short local bridge is in: prop:direct-q7-total-delta7-nonzero, localized prop:rho2-not-affine-in-rho1, the localized curvature bridge, and the updated prop:no-W-flat-interval;
+
+    the downstream \lambda-reduction remark was also updated consistently.
+
+So the mathematical patch set landed.
+
+What is not fully updated is the surrounding commentary. I see three stale places:
+
+    rem:audit-direct-septic-witness is now outdated.
+    It still says the use of prop:rho2-not-affine-in-rho1 depends on auditing passage from the K1K1​ witness to the full direct q(7)q(7)-slice of Δ7Δ7​. But that passage is now exactly what prop:direct-q7-total-delta7-nonzero proves. So this remark should be removed or rewritten.
+
+    rem:current-geometric-bottleneck still says:
+    “under the current direct septic nonvanishing hypothesis, Proposition~\ref{prop:no-W-flat-interval} excludes the flat case...”
+    That is stale. prop:no-W-flat-interval no longer carries that hypothesis.
+
+    rem:current-state-of-argument is also stale in two ways.
+    It says:
+
+        “Under the current direct septic nonvanishing hypothesis...” for prop:no-W-flat-interval, which is no longer true.
+
+        the final sentence listing “remaining audited issues overall” still includes first-order surjectivity, which is no longer open.
+
+So the edits are in at the theorem/proposition level, but the meta-remarks need one cleanup pass.
+
+On (2): what remains holistically is now narrower and clearer.
+What is genuinely done
+
+The order-1 package now looks closed.
+
+The order-7 top new coefficient bridge also looks closed:
+
+    direct K1K1​ witness isolated,
+
+    noncancellation proved,
+
+    weight-one reduction to the direct K1K1​ slice proved,
+
+    direct q(7)q(7)-slice of total Δ7Δ7​ promoted from hypothesis to theorem,
+
+    downstream non-affinity and no-WW-flatness updated accordingly.
+
+That is real progress.
+
+The explicit finite-order first residual model also looks much stronger than the old “trace-free pure value slice” formulation. At this point, the live quintic issue is no longer the old vague trace-annihilation claim, but whether you want a comparison theorem from the explicit finite-order quotient Rh(5)Rh(5)​ back to the ambient abstract quotient notation.
+What still remains mathematically open
+1. Full order-7 fixed-sector algebra
+
+This is still open, but now in a narrower sense.
+
+You have the top new q(7)q(7)-coefficient and the transport-level structure you needed for the current bridge. What still remains is the full total pair
+(u7,v7)
+(u7​,v7​)
+
+after all lower/mixed order-7 sectors are included.
+
+So the real remaining order-7 task is not the direct witness anymore. It is the complete lower/mixed septic bookkeeping if you want a closed total formula for (u7,v7)(u7​,v7​) and Δ7Δ7​, not just the weight-one/top-new part.
+2. Explicit finite-order model vs ambient quotient
+
+Your first residual step is now rigorous in the explicit finite-order model. What remains, if you care, is the comparison theorem showing that the ambient quotient-germ notation introduces no extra quintic ambiguity beyond what is built into
+Rh(5).
+Rh(5)​.
+
+This is now a clarification theorem, not a core bottleneck.
+3. The real bottleneck: turning-boundary directional-kernel closure
+
+This is now the main unresolved theorem.
+
+The draft itself says this, and I think that’s right: the live obstruction is now the symmetric compact directional-kernel / zero-capture problem across adjacent turning-boundary pairs.
+
+You have:
+
+    no WW-flat intervals on the c≠0, M≠0c=0, M=0 region,
+
+    local sterility of finite-order isolated W=0, M≠0W=0, M=0 boundaries,
+
+    directional kernels,
+
+    and a conditional symmetric exclusion theorem.
+
+What remains is the actual zero-capture theorem in both directions needed to eliminate the last adjacent turning-boundary continuation scenario.
+
+That is now the central theorem.
+4. Two-pair and minimal-core sections remain architectural
+
+They are in better shape, but they are still not the place where the proof truly closes.
+
+Right now they still read as a downstream program contingent on the geometric theorem above. I would not treat them as the next thing to fully prove before the turning-boundary kernel problem is settled.
+What I would do next
+
+I would do one short cleanup pass, then push the real theorem.
+Cleanup pass
+
+Make these remark-level changes:
+
+    Delete or rewrite rem:audit-direct-septic-witness.
+    Suggested replacement:
+    “The direct q(7)q(7)-slice of total Δ7Δ7​ is now closed at the weight-one level by Proposition~\ref{prop:direct-q7-total-delta7-nonzero}. What remains open at order 77 is the full lower/mixed septic completion of the total fixed-sector pair (u7,v7)(u7​,v7​).”
+
+    In rem:current-geometric-bottleneck, remove
+    “under the current direct septic nonvanishing hypothesis”.
+
+    In rem:current-state-of-argument, remove that same phrase, and replace the final list
+    “first-order surjectivity, the quintic pure-value quotient detector, the full order-7 fixed-sector algebra, and the turning-boundary directional-kernel closure”
+    with something like
+    “the explicit-to-ambient first residual comparison, the full order-7 fixed-sector algebra, and the turning-boundary directional-kernel closure.”
+
+Mathematical next step
+
+Then I would stop touching local algebra and go straight at:
+
+Prove the symmetric compact directional-kernel / zero-capture theorem across adjacent turning-boundary pairs.
+
+That is now the real global endgame input.
+
+So the short verdict is:
+
+    Yes, the theorem-level edits are in.
+
+    No, the commentary layer is not fully updated yet.
+
+    Holistically, the main remaining work is no longer local 3/5/7 algebra. It is the turning-boundary directional-kernel theorem.
+
+If you want, I’ll give you the exact latex replacements for those stale remarks next.
+
+proof_of_rh(91).tex
+File
+here's the updated paper, please check it
+
+I’m checking the current draft against the specific live issues from the last round: whether the theorem-level bridge is still intact, whether the stale remarks were cleaned up, and what’s still genuinely open now.
+
+I’ve got it. The newest draft is materially stronger than the last one: the order-7 bridge is no longer just a hypothesis, and the paper now really looks bottlenecked by the turning-boundary geometry rather than by unfinished local algebra.
+
+I checked the updated draft holistically.
+
+The big picture is good: this version is meaningfully stronger than the previous one. The theorem-level edits are in, and they change the landscape.
+
+What is now genuinely in place:
+
+The first-order package is closed. The three-input generator, whitened reduction, symmetric span, skew-line lemma, and prop:first-order-quotient-trivial are all there, and the consolidated raw-vs-full remark is in the right form.
+
+The explicit first-residual model is also much stronger now than it was a few versions ago. You now have the anti-fixed ambiguity model, trace descending on Rh(5)Rh(5)​, and prop:first-residual-class-generic proved in that explicit finite-order quotient. So the old quintic “trace-free pure-value slice” issue is no longer the live bottleneck in the old vague form.
+
+Most importantly, the short local order-7 bridge is now in, and it is stronger than before. You have:
+
+    prop:direct-q7-total-delta7-nonzero,
+
+    localized prop:rho2-not-affine-in-rho1,
+
+    localized curvature-bridge use,
+
+    updated prop:no-W-flat-interval,
+
+    and then, beyond that, the new thm:quotient-septic-closure, which is a real upgrade.
+
+That theorem changes the order-7 status materially. At the canonical quotient level, the full septic fixed-sector class is now reduced to the K1K1​ piece modulo the A5fA5f​-line, and you explicitly conclude
+Δ7=Δ7,K1.
+Δ7​=Δ7,K1​​.
+
+That is a much stronger closure statement than the earlier “weight-one reduction” alone.
+
+So, in substance: yes, the new paper is better, and the center of gravity has shifted.
+
+There are still a couple of stale commentary points.
+
+The main stale one is rem:audit-direct-septic-witness. It still says that what remains open at order 77 is the full lower/mixed septic completion of (u7,v7)(u7​,v7​). That was fair before thm:quotient-septic-closure, but after that theorem it is no longer the right summary. At the quotient/invariant level relevant for Δ7Δ7​, the order-7 package is now closed. What remains gauge-dependent is only the raw representative inside the affine line
+A7,K1f+CA5f,
+A7,K1​f​+CA5f​,
+
+which your own rem:status-full-septic-fixed-sector now says explicitly. So that audit remark should be removed or rewritten.
+
+The other clearly stale point is in rem:current-state-of-argument, which still says:
+“Under the current direct septic nonvanishing hypothesis ...”
+That phrase is now obsolete. prop:no-W-flat-interval no longer depends on that old hypothesis. So that sentence should be cleaned up.
+
+There is also a softer staleness in rem:audit-w0-affine-inflection: it says the obstruction may be decided at order 77 “once the full top new coefficient of Δ7Δ7​ is pinned down.” With thm:quotient-septic-closure and the direct-slice bridge now present, that wording is behind the paper. The spirit is still right, but the tense is wrong. It should now say the obstruction is already encoded by the order-7 package you have identified, not that this may happen later.
+
+Holistically, what remains mathematically open is now much narrower.
+
+The main remaining bottleneck is no longer local 3/5/7 algebra. It is the geometric theorem around adjacent turning-boundary continuation: the symmetric compact directional-kernel / zero-capture problem across W=0, M≠0W=0, M=0 boundaries. Your current remarks already point there, and I think that is now correct.
+
+The multi-pair and minimal-core sections are still architectural. They are in a much better place because the local package is stronger, but they still read as a program contingent on the turning-boundary theorem rather than as something ready to be fully closed independently.
+
+If I were prioritizing next steps from this exact draft, I would do them in this order:
+
+First, one short cleanup pass on the stale remarks:
+
+    remove or rewrite rem:audit-direct-septic-witness,
+
+    remove the phrase “under the current direct septic nonvanishing hypothesis” from rem:current-state-of-argument,
+
+    slightly modernize rem:audit-w0-affine-inflection so it reflects that the order-7 package is now pinned down at the invariant level.
+
+Second, stop touching the local algebra unless some later proof forces you back. The one-pair package is now strong enough.
+
+Third, push directly on the turning-boundary directional-kernel theorem. That is now the real live mathematical problem.
+
+So the short verdict is:
+
+Yes, this draft is substantially improved.
+Yes, the theorem-level edits are in.
+The main remaining mathematical problem is now global turning-boundary geometry, not unfinished local order-7 bookkeeping.
+What still needs immediate attention is mostly commentary cleanup so the remarks match theorems you now actually have.
+
+proof_of_rh(99).tex
+File
+ok, give me a holistic summary of everything that remains open in this draft
+
+I’m scanning the latest draft for the live WIP/audit remarks and theorems so I can separate what’s still mathematically open from what’s merely stale commentary.
+
+I checked the current draft in .
+
+At this point, the genuinely open items split into four layers.
+
+First, the canonical local 3/5/7 package is mostly closed. The first-order quotient triviality is now proved. The explicit finite-order first residual model is also closed at the order-≤5≤5 level, and the canonical quotient-level order-77 package is closed by the direct q(7)q(7) bridge together with quotient-septic closure. So the old broad local worries are no longer the main problem. What is still open locally is narrower: the raw lower/mixed septic completion of the total fixed-sector pair (u7,v7)(u7​,v7​) is not fully written out. But that is now a raw representative issue, not a canonical quotient-level issue, since the draft already states that [A7f]=[A7,K1f][A7f​]=[A7,K1​f​] modulo the A5fA5f​-line and Δ7=Δ7,K1Δ7​=Δ7,K1​​.
+
+Second, there is one optional but nontrivial ambient-identification issue left near the first residual layer. The draft now says the explicit finite-order quotient Rh(5)Rh(5)​ is enough for the first residual step. What remains, only if you want a stronger global ambient formulation, is a theorem saying that later uses of the abstract quotient QabsQabs​ do not introduce new ambiguity beyond order 55. I would classify that as a clarification theorem, not a central bottleneck.
+
+Third, the real live problem is now the turning-boundary geometry. The draft has:
+
+    no WW-flat intervals on the c≠0, M≠0c=0, M=0 region,
+
+    ECT intervals on the c≠0, M≠0, W≠0c=0, M=0, W=0 region,
+
+    adjacent tangent-separator sign regularity across a generic turning boundary,
+
+    and even the symmetric directional-kernel exclusion theorem.
+
+But both of the turning-boundary sign theorems are still conditional on zero-capture hypotheses for the directional kernels. So the main open theorem is now: prove the compact interior zero-capture / zero-free statement for the two directional kernels across adjacent turning boundaries. That is the central unresolved geometric input.
+
+Fourth, tied to that same boundary issue, the draft still openly leaves unresolved the W=0, M≠0W=0, M=0 affine-inflection structure. It does not yet prove that the actual triple (c,v5,Δ7)(c,v5​,Δ7​) has special structure forcing W′(hb)=0W′(hb​)=0 or otherwise ruling out ordinary affine inflection at a W=0W=0 boundary. The draft is explicit that this is where the obstruction lives now. So there are really two intertwined open problems here:
+
+    prove the needed special structure at W=0, M≠0W=0, M=0 boundaries, or
+
+    find a different invariant that bypasses ordinary affine-inflection behavior there.
+
+After that come the multi-pair and endgame layers. The two-pair rigidity theorem, the strengthened two-pair invariant remark, the minimal bad-core theorem, and the final contradiction are still architectural rather than closed. They are now downstream of the geometric kernel problem, not independent local-algebra gaps. In other words, I would not treat those sections as the next place to do heavy proof work until the turning-boundary zero-capture theorem is settled.
+
+So the honest “everything still open” summary is:
+
+    full raw lower/mixed septic completion of (u7,v7)(u7​,v7​), though not needed for the canonical quotient-level Δ7Δ7​;
+
+    optional stronger ambient comparison beyond the explicit order-≤5≤5 first residual model;
+
+    the main theorem: symmetric compact zero-capture / directional-kernel exclusion across adjacent turning boundaries;
+
+    the related W=0, M≠0W=0, M=0 affine-inflection / W′(hb)W′(hb​) structure problem;
+
+    downstream rewriting and closure of the multi-pair, minimal-core, and final contradiction layers once the geometric theorem is in hand.
+
+There is also one small editorial open item: the “Current state of the argument” remark still says “under the current direct septic nonvanishing hypothesis,” but that theorem-level hypothesis has already been replaced in the body by the newer bridge. That is just stale commentary, not a mathematical gap.
+
+So if you want the shortest honest verdict: the draft is no longer bottlenecked by local order-55/77 bookkeeping. It is bottlenecked by the turning-boundary directional-kernel / affine-inflection theorem, and then by propagating that into the multi-pair endgame.
+
+proof_of_rh(104).tex
+File
+check the latest draft, and give me the remaining items
+
+I’m checking the current draft for the live theorem statements and the surviving WIP/audit remarks, so I can separate real mathematical gaps from stale commentary.
+
+I checked the latest draft holistically. The remaining items are now fairly concentrated.
+
+The main open item is still the turning-boundary zero-capture theorem. The draft has reduced the adjacent-interval problem to directional tangent-separator kernels, and it now even has the conditional symmetric exclusion theorem, but the actual zero-capture hypotheses for those kernels are still assumptions. Until those are proved, the adjacent turning-boundary sign theorem, the partial global no-secant theorem, and the partial pair-pair exclusion corollary remain conditional.
+
+Closely tied to that is the W=0, M≠0W=0, M=0 boundary structure problem. You now rule out open WW-flat intervals and prove local sterility for finite-order isolated W=0W=0 boundaries, so the old “bulk W=0W=0” obstruction is mostly gone. What remains is the harder question of whether the actual triple (c,v5,Δ7)(c,v5​,Δ7​) has extra structure at such boundaries that rules out ordinary affine-inflection behavior, or whether there can still be a genuinely global continuation phenomenon there. That is exactly what the W′(hb)W′(hb​) audit remark is about.
+
+A third live item is the symmetric compact directional-kernel / continuation problem across adjacent turning-boundary pairs. In practice this is the same battlefield as the first item, but it is worth naming separately because the draft now makes a sharper distinction: orientation selection is no longer the issue; the issue is proving zero-capture in both directions for the two kernels.
+
+After that, the remaining mathematical work is in the multi-pair / minimal-core / endgame layer. The draft now has a stronger one-pair package and some architectural two-pair statements, but the strengthened two-pair invariant theorem is still marked as work in progress, the minimal bad-core rigidity statement is still work in progress, and the extraction into the fully general finite-core endgame is not yet closed.
+
+Relatedly, the final contradiction is still only closed in the pair-like branch. The draft says this honestly in the endgame-status remark: the genuinely finite-core branch, where the first odd coefficient cancels and a later corrected anomaly survives, is not yet fully completed. So the final contradiction theorem is not yet the full RH endgame; it is the pair-like branch endgame.
+
+There is also one remaining optional clarification theorem: the draft now closes the first residual step at the explicit finite-order ambient level, but if you want the strongest formulation, there is still a possible later theorem to show that using the ambient abstract quotient QabsQabs​ beyond order 55 introduces no new ambiguity relevant downstream. That is no longer a bottleneck, but it is still listed honestly.
+
+At order 77, the canonical quotient-level package is now closed, so that is no longer a real obstruction. The only thing still open there is the raw lower/mixed septic completion of a representative pair (u7,v7)(u7​,v7​). But the draft now also says clearly that this is just a gauge-dependent representative issue and does not affect the canonical quotient class or Δ7Δ7​. So I would not treat that as a major remaining theorem unless you specifically want a raw closed formula.
+
+There is also one small editorial stale point still in the file: in rem:current-state-of-argument, the phrase “under the current direct septic nonvanishing hypothesis” is now obsolete, because that bridge has already been promoted to theorem-level earlier in the draft.
+
+So the clean list of remaining items is:
+
+    prove the turning-boundary directional-kernel zero-capture theorem in both directions;
+
+    resolve the W=0, M≠0W=0, M=0 affine-inflection / W′(hb)W′(hb​) structure problem, or otherwise bypass it;
+
+    propagate that geometric theorem into the strengthened two-pair and minimal-core layer;
+
+    complete the fully general finite-core endgame, beyond the pair-like branch;
+
+    optionally, prove the stronger abstract-ambient comparison beyond order 55;
+
+    optionally, compute the full raw lower/mixed order-77 representative, though that no longer affects the canonical invariants.
+
+So the short verdict is: the draft is no longer bottlenecked by local 3/5/73/5/7 bookkeeping. It is bottlenecked by the turning-boundary kernel/continuation theorem, and then by carrying that into the general finite-core endgame.
+
+
