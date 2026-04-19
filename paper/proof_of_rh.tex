@@ -4429,6 +4429,48 @@ W'=\det(F,F',F''').
 Expanding along the third column gives the second formula.
 \end{proof}
 
+\begin{proposition}[Exclusion of $W$-flat intervals under direct septic nonvanishing]
+\label{prop:no-W-flat-interval}
+Assume that the direct $q^{(7)}$-driven slice of $\Delta_7(h)$ is
+generically nonzero on the quintic-generic region. Let $J$ be a connected
+open interval on which
+\[
+c(h)\neq 0,
+\qquad
+M(h)\neq 0.
+\]
+Then
+\[
+W\not\equiv 0
+\qquad\text{on }J.
+\]
+\end{proposition}
+
+\begin{proof}
+Suppose for contradiction that
+\[
+W\equiv 0
+\qquad\text{on }J.
+\]
+By Proposition~\ref{prop:projective-wronskian-bridge},
+\[
+K_\Gamma(h)=\frac{W(h)}{c(h)^3}\equiv 0
+\qquad\text{on }J.
+\]
+Since $M\neq 0$ on $J$, Proposition~\ref{prop:curvature-bridge-normalized-curve}
+implies that
+\[
+\rho_2(h)=A\,\rho_1(h)+B
+\]
+for some constants $A,B\in\mathbf C$, i.e.
+\[
+\Delta_7(h)=A\,v_5(h)+B\,c(h)
+\qquad\text{on }J.
+\]
+This contradicts Proposition~\ref{prop:rho2-not-affine-in-rho1}. Therefore
+$W$ cannot vanish identically on $J$.
+\end{proof}
+
 \begin{proposition}[ECT intervals for the strengthened one-pair triple]
 \label{prop:ect-intervals-c-v5-delta7}
 Let $I$ be a connected interval on which
@@ -5111,6 +5153,193 @@ of the interval $\phi_m(J_I)=\mathcal B_I(m)$. This is precisely the
 $2$-secant condition, proving (4).
 \end{proof}
 
+\begin{lemma}[Support-overlap truncation across a generic turning boundary]
+\label{lem:support-overlap-truncation-turning}
+Let $I_1<I_2$ be adjacent ECT intervals meeting at a generic turning boundary
+\[
+c(h_b)\neq 0,
+\qquad
+M(h_b)=0,
+\qquad
+M'(h_b)\neq 0,
+\qquad
+N(h_b)\neq 0.
+\]
+For a fixed finite slope $m$, define
+\[
+\phi_m(h):=\frac{\Delta_7(h)-m v_5(h)}{c(h)},
+\qquad
+\mathcal B_I(m):=\phi_m(I).
+\]
+Assume
+\[
+b\in \mathcal B_{I_1}(m)\cap \mathcal B_{I_2}(m).
+\]
+Then there exists a neighborhood $U$ of $h_b$ and compact subintervals
+\[
+J_1\Subset I_1\setminus U,
+\qquad
+J_2\Subset I_2\setminus U
+\]
+such that
+\[
+b\in \mathcal B_{J_1}(m)\cap \mathcal B_{J_2}(m).
+\]
+\end{lemma}
+
+\begin{proof}
+Differentiate:
+\[
+\phi_m'(h)=\frac{N(h)-mM(h)}{c(h)^2}.
+\]
+At $h=h_b$, since $M(h_b)=0$,
+\[
+\phi_m'(h_b)=\frac{N(h_b)}{c(h_b)^2}\neq 0.
+\]
+Hence for each fixed finite $m$, after shrinking to a small neighborhood $U$
+of $h_b$, the function $\phi_m$ is strictly monotone on each one-sided piece
+\[
+I_1\cap U,
+\qquad
+I_2\cap U.
+\]
+Therefore, for each $i=1,2$, the equation
+\[
+\phi_m(h)=b
+\]
+has at most one solution in $I_i\cap U$.
+
+But the assumption
+\[
+b\in \mathcal B_{I_i}(m)
+\]
+means exactly that there is at least one solution of $\phi_m(h)=b$ somewhere
+on $I_i$. Therefore, after removing the boundary neighborhood $U$, at least
+one such solution
+\[
+h_i^\sharp\in I_i\setminus U
+\]
+remains on each side. Choose small compact subintervals
+\[
+J_i\Subset I_i\setminus U
+\]
+with $h_i^\sharp\in J_i$. Then by continuity,
+\[
+b=\phi_m(h_i^\sharp)\in \phi_m(J_i)=\mathcal B_{J_i}(m),
+\]
+for $i=1,2$. This proves the claim.
+\end{proof}
+
+\begin{lemma}[Compact adjacent pair-pair implies a directional kernel zero]
+\label{lem:pair-pair-gives-directional-kernel-zero}
+Let $I_1<I_2$ be adjacent ECT intervals meeting at a generic turning boundary,
+and let
+\[
+L:\ y=mx+b
+\]
+be a finite-slope line that is $2$-secant to both $\Gamma(I_1)$ and
+$\Gamma(I_2)$.
+Then, after removing a sufficiently small boundary neighborhood, there exist
+compact subintervals
+\[
+J_1\Subset I_1,
+\qquad
+J_2\Subset I_2
+\]
+and points $s\in J_2$, $t\in J_1$ such that one of the two directional
+kernels vanishes:
+\[
+K_{21}(s,t):=\det(F(s),F'(s),F(t))=0,
+\]
+or
+\[
+K_{12}(t,s):=\det(F(t),F'(t),F(s))=0,
+\]
+where
+\[
+F(h)=(c(h),v_5(h),\Delta_7(h)).
+\]
+\end{lemma}
+
+\begin{proof}
+Because $L$ is $2$-secant to each branch, Lemma~\ref{lem:fixed-slope-intercept-sets}
+shows that $m$ lies in the interior tangent-slope range of each interval.
+Hence each branch has a unique interior tangent line of slope $m$, with tangent
+intercept
+\[
+\tau_{I_i}(m)=\inf \mathcal B_{I_i}(m).
+\]
+
+At a generic turning boundary,
+\[
+\frac{dy/dh}{dx/dh}=\frac{N(h)}{M(h)}
+\]
+has one-sided blow-up, so no finite-slope tangency can occur arbitrarily close
+to $h_b$. Therefore, after shrinking away a boundary neighborhood and applying
+Lemma~\ref{lem:support-overlap-truncation-turning}, we may choose compact
+subintervals
+\[
+J_1\Subset I_1,
+\qquad
+J_2\Subset I_2
+\]
+such that:
+\begin{enumerate}
+\item $b\in \mathcal B_{J_1}(m)\cap \mathcal B_{J_2}(m)$;
+\item the unique slope-$m$ tangency point of each branch lies in the
+corresponding $J_i$.
+\end{enumerate}
+Hence each $\mathcal B_{J_i}(m)$ is a compact interval whose lower endpoint
+is the tangent intercept
+\[
+\tau_i:=\tau_{J_i}(m)=\inf \mathcal B_{J_i}(m).
+\]
+
+Now set
+\[
+b_*:=\inf\bigl(\mathcal B_{J_1}(m)\cap \mathcal B_{J_2}(m)\bigr).
+\]
+Since the intersection of two compact intervals is again a compact interval,
+\[
+b_*=\max(\tau_1,\tau_2).
+\]
+So $b_*$ is equal to one of the two tangent intercepts, and it still lies in
+the support set of the other branch.
+
+If $b_*=\tau_2$, then the slope-$m$ tangent line to $\Gamma(J_2)$ meets
+$\Gamma(J_1)$. Thus there are points $s\in J_2$, $t\in J_1$ such that
+\[
+\det(F(s),F'(s),F(t))=0,
+\]
+i.e.
+\[
+K_{21}(s,t)=0.
+\]
+
+If $b_*=\tau_1$, then the slope-$m$ tangent line to $\Gamma(J_1)$ meets
+$\Gamma(J_2)$. Thus there are points $t\in J_1$, $s\in J_2$ such that
+\[
+\det(F(t),F'(t),F(s))=0,
+\]
+i.e.
+\[
+K_{12}(t,s)=0.
+\]
+This proves the lemma.
+\end{proof}
+
+\begin{remark}[Audit: directional kernel orientation]
+\label{rem:audit-directional-kernel-orientation}
+Lemma~\ref{lem:pair-pair-gives-directional-kernel-zero} yields a compact
+interior zero of one of the two directional tangent-separator kernels. What
+remains to be shown for a one-sided turning-boundary barrier theorem is an
+orientation principle forcing the relevant overlap endpoint to come from the
+right branch, equivalently an argument selecting $K_{21}$ rather than merely
+one of $K_{21},K_{12}$. The present reduction therefore moves the turning
+problem from boundary-local geometry to compact directional-kernel geometry,
+but does not yet identify a preferred direction.
+\end{remark}
+
 \begin{lemma}[Adjacent support-ordering]
 \label{lem:adjacent-support-ordering}
 Let $I_1<I_2$ be adjacent ECT intervals under the hypotheses of
@@ -5305,6 +5534,138 @@ jet contribution to $W'$ is already governed by the weight-one septic
 coefficient $[\Delta_7]^{[1]}$, so the present obstruction is not a new
 primitive order-$9$ invariant but a question about the full order-$7$
 package.
+\end{remark}
+
+\begin{theorem}[Finite-order $W=0$ boundaries are locally sterile for pair-pair birth]
+\label{thm:finite-order-w-zero-local-sterility}
+Let $h_b$ satisfy
+\[
+c(h_b)\neq 0,
+\qquad
+M(h_b)\neq 0,
+\qquad
+W(h_b)=0,
+\]
+and assume that $W$ has finite vanishing order $r\ge 1$ at $h_b$:
+\[
+W(h)=(h-h_b)^r\,\widetilde W(h),
+\qquad
+\widetilde W(h_b)\neq 0.
+\]
+Define
+\[
+F(h):=(c(h),v_5(h),\Delta_7(h)),
+\qquad
+D(s,t,u):=\det(F(s),F(t),F(u)).
+\]
+Then, after shrinking to a sufficiently small neighborhood $U$ of $h_b$,
+the following holds.
+
+If $s<t<h_b$ lie in $U$, then:
+\begin{enumerate}
+\item if $r$ is even, the function $u\mapsto D(s,t,u)$ has no zero on the
+opposite side $h_b<u\in U$;
+\item if $r$ is odd, the function $u\mapsto D(s,t,u)$ has at most one zero on
+the opposite side $h_b<u\in U$.
+\end{enumerate}
+The same conclusion holds with left and right exchanged. In particular, no
+finite-order boundary of type $W=0,\ M\neq 0$ can support a local pair-pair
+birth.
+\end{theorem}
+
+\begin{proof}
+Work in the affine chart
+\[
+x(h):=\frac{v_5(h)}{c(h)},
+\qquad
+y(h):=\frac{\Delta_7(h)}{c(h)}.
+\]
+Since
+\[
+x'(h)=\frac{M(h)}{c(h)^2},
+\]
+the hypothesis $M(h_b)\neq 0$ implies that $x$ is a valid local coordinate
+near $h_b$. After translating so that $x(h_b)=0$ and subtracting the tangent
+line, we may write the normalized curve as
+\[
+y=f(x),
+\qquad
+f(0)=f'(0)=0.
+\]
+
+By Proposition~\ref{prop:projective-wronskian-bridge},
+\[
+\frac{d^2y}{dx^2}=\frac{c(h)^3W(h)}{M(h)^3}.
+\]
+Because $x'(h_b)\neq 0$, the finite vanishing order of $W$ in $h$ is the same
+as its finite vanishing order in the local coordinate $x$. Therefore
+\[
+f''(x)=\lambda x^r+O(x^{r+1})
+\qquad(\lambda\neq 0).
+\]
+
+Fix two same-side points
+\[
+x_1<x_2<0
+\]
+sufficiently close to $0$, and define
+\[
+\widehat D(x_1,x_2,u):=
+\det\!\begin{pmatrix}
+1&x_1&f(x_1)\\
+1&x_2&f(x_2)\\
+1&u&f(u)
+\end{pmatrix}.
+\]
+Then
+\[
+\widehat D(x_1,x_2,u)
+=
+(x_2-x_1)(u-x_1)(u-x_2)\,H_{x_1,x_2}(u),
+\]
+where
+\[
+H_{x_1,x_2}(u):=f[x_1,x_2,u]
+\]
+is the second divided difference of $f$.
+
+If $r$ is even, then $f''$ has fixed sign near $0$. By the Hermite--Genocchi
+formula for second divided differences, $H_{x_1,x_2}(u)$ has that same fixed
+sign for $u>0$ sufficiently small. Hence $\widehat D(x_1,x_2,u)\neq 0$ on the
+opposite side.
+
+If $r$ is odd, then
+\[
+f'''(x)=\lambda r\,x^{r-1}+O(x^r)
+\]
+has fixed nonzero sign near $0$, because $r-1$ is even. Differentiating with
+respect to the repeated node gives
+\[
+\partial_u H_{x_1,x_2}(u)=f[x_1,x_2,u,u].
+\]
+By the Hermite--Genocchi formula for repeated-node divided differences,
+$f[x_1,x_2,u,u]$ has the same fixed nonzero sign for $u>0$ sufficiently small.
+Thus $u\mapsto H_{x_1,x_2}(u)$ is strictly monotone on the opposite side, and
+therefore has at most one zero there.
+
+Finally,
+\[
+D(s,t,u)=c(s)c(t)c(u)\,\widehat D(x(s),x(t),x(u)),
+\]
+and $c$ is nonzero on a small neighborhood of $h_b$, so the zero set of $D$
+is exactly the zero set of $\widehat D$. The theorem follows.
+\end{proof}
+
+\begin{remark}[Audit: residual $W=0$ pathology]
+\label{rem:audit-residual-w0-pathology}
+By Proposition~\ref{prop:no-W-flat-interval}, the $W=0,\ M\neq 0$ side is no
+longer obstructed by open-interval flatness $W\equiv 0$ on a component with
+$c\neq 0$ and $M\neq 0$. By
+Theorem~\ref{thm:finite-order-w-zero-local-sterility}, every finite-order
+isolated $W=0$ boundary is locally sterile for pair-pair birth. Thus any
+remaining $W=0$ issue would have to come either from non-analytic /
+infinite-order flatness or from a genuinely global continuation phenomenon,
+not from a generic local inflection birth mechanism.
 \end{remark}
 
 \subsection{From the one-pair residual germ to two-pair and minimal-core rigidity}
@@ -5608,26 +5969,32 @@ h\longmapsto \left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right).
 
 \begin{remark}[Current geometric bottleneck]
 \label{rem:current-geometric-bottleneck}
-The remaining geometric obstruction is now concentrated at boundaries of type
-\[
-W(h_b)=0,\qquad M(h_b)\neq 0.
-\]
-At such points, the normalized planar curve
-\[
-\Gamma(h)=\left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right)
-\]
-has cubic coefficient proportional to $W'(h_b)$. The current architecture
-does not yet force $W'(h_b)=0$, so the default local model is an ordinary
-affine inflection. Thus the turning-boundary part of the secant/tangent
-geometry is comparatively well controlled, while the real remaining issue is to
-find a $W=0$-specific replacement theorem or an additional structural
-identity forcing nongeneric affine-jet behavior there.
+The $W=0,\ M\neq 0$ side is now split into two parts.
 
-Moreover, the exact identities for $W$ and $W'$ show that the highest
-genuinely new jet contribution to the $W=0$ obstruction is already governed by
-the septic residual determinant $\Delta_7$; thus the present issue is not the
-appearance of a fundamentally new order-$9$ invariant, but the full closure of
-the order-$7$ package at $W=0$.
+First, under the current direct septic nonvanishing hypothesis,
+Proposition~\ref{prop:no-W-flat-interval} excludes the flat case
+\[
+W\equiv 0
+\]
+on any connected open interval with $c\neq 0$ and $M\neq 0$.
+
+Second, Theorem~\ref{thm:finite-order-w-zero-local-sterility} shows that every
+finite-order isolated boundary of type
+\[
+W(h_b)=0,\qquad M(h_b)\neq 0
+\]
+is locally sterile for pair-pair birth.
+
+Thus the remaining generic obstruction is no longer bulk $W=0$ geometry, but a
+global continuation / zero-capture problem across adjacent boundaries,
+especially on the turning-boundary side. By
+Lemma~\ref{lem:pair-pair-gives-directional-kernel-zero}, any adjacent
+pair-pair line across a generic turning boundary produces a compact interior
+zero of one of the two directional tangent-separator kernels.
+
+Moreover, the exact identities for $W$ and $W'$ still show that any residual
+$W=0$ pathology is encoded by the order-$7$ package through $\Delta_7$, not by
+a genuinely new primitive order-$9$ invariant.
 \end{remark}
 
 \begin{remark}[Current state of the argument]
@@ -5657,20 +6024,31 @@ c''&v_5''&\Delta_7''
 \]
 
 On intervals where $c$, $M$, and $W$ do not vanish, the triple
-$(c,v_5,\Delta_7)$ is an ECT system. The turning-boundary case
+$(c,v_5,\Delta_7)$ is an ECT system. Under the current direct septic
+nonvanishing hypothesis, open-interval flatness $W\equiv 0$ is excluded on the
+$c\neq 0,\ M\neq 0$ region by Proposition~\ref{prop:no-W-flat-interval}.
+At isolated finite-order $W=0,\ M\neq 0$ boundaries,
+Theorem~\ref{thm:finite-order-w-zero-local-sterility} shows that no local
+pair-pair birth occurs.
+
+Thus the remaining geometric issue is now concentrated in turning-boundary
+continuation: if a finite-slope line is $2$-secant to both adjacent branches
+across a generic turning boundary, then
+Lemma~\ref{lem:pair-pair-gives-directional-kernel-zero} produces a compact
+interior zero of one of the two directional kernels
 \[
-M=0,\qquad M'\neq 0,\qquad N\neq 0
+K_{21}(s,t)=\det(F(s),F'(s),F(t)),
+\qquad
+K_{12}(t,s)=\det(F(t),F'(t),F(s)).
 \]
-is comparatively well behaved. The remaining nonlocal geometric issue is the
-$W=0,\ M\neq 0$ case, where the cubic-inflection coefficient is controlled by
-$W'(h_b)$ and the current architecture does not yet force nongeneric
-vanishing. The present evidence suggests that this $W=0$ obstruction is still
-encoded by the full septic coefficient of $\Delta_7$, via the exact identities
-for $W$ and $W'$, rather than by a genuinely new primitive order-$9$ scalar.
-The remaining audited issues are therefore both local and global:
-first-order surjectivity, the quintic pure-value quotient detector, the
-completion of the order-$7$ fixed-sector algebra, and the special
-$W=0$-boundary structure of the actual triple $(c,v_5,\Delta_7)$.
+What remains audited at the geometric level is therefore the compact
+directional-kernel / zero-capture problem, together with the orientation issue
+isolated in Remark~\ref{rem:audit-directional-kernel-orientation}.
+
+The remaining audited issues overall are:
+first-order surjectivity, the quintic pure-value quotient detector, the full
+order-$7$ fixed-sector algebra, and the turning-boundary directional-kernel
+closure.
 \end{remark}
 
 \section{Final contradiction}
