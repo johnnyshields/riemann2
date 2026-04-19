@@ -79,6 +79,7 @@
 \newcommand{\pair}{\mathrm{pair}}
 \newcommand{\lin}{\mathrm{lin}}
 \newcommand{\new}{\mathrm{new}}
+\newcommand{\Qabs}{\mathcal Q^{\mathrm{abs}}}
 \newcommand{\F}{\mathrm{F}}
 \newcommand{\RePart}{\operatorname{Re}}
 \newcommand{\dist}{\operatorname{dist}}
@@ -2751,18 +2752,21 @@ should still be read as a work in progress.
 \section{Local projective rigidity of the one-pair and multi-pair families}
 \label{sec:projective-rigidity}
 
-Throughout this section, $Q$ denotes the odd-germ quotient by the
-value/gauge family (not the height scale $Q\asymp\log|m|$ used elsewhere in
-the paper). The context disambiguates the two usages.
+Throughout this section, $\Qabs$ denotes the abstract odd-germ quotient by
+the value/gauge family (not the height scale $Q\asymp\log|m|$ used
+elsewhere in the paper). For the first residual step on the cubic-generic
+region, we will also introduce an explicit finite-order model
+$\mathcal R_h^{(5)}$ through order $5$. The latter supplements, but does
+not globally replace, the ambient abstract quotient $\Qabs$.
 
 \subsection{Cubic leading line and the first residual class for the one-pair family}
 
 Let
 \[
-F_h(z)\in Q[[z^2]]
+F_h(z)\in \Qabs[[z^2]]
 \]
 denote the corrected quotient odd germ of the normalized one-pair family, where
-$Q$ is the odd-germ quotient by the value/gauge family.
+$\Qabs$ is the abstract odd-germ quotient by the value/gauge family.
 
 \begin{lemma}[First-order value-family generator]
 \label{lem:first-order-value-family-generator}
@@ -3198,16 +3202,16 @@ v_0(h)=[J_3^{\pair}(h)]
 is nonzero by Proposition~\ref{prop:cubic-leading-order}. Define the cubic
 leading line by
 \[
-\ell_h:=\mathbf C\,v_0(h)\subset Q.
+\ell_h:=\mathbf C\,v_0(h)\subset \Qabs.
 \]
 Let $v_1(h):=[J_5^{\pair}(h)]$ denote the quintic quotient coefficient.
 Its image in the residual quotient
 \[
-Q/\ell_h
+\Qabs/\ell_h
 \]
 is denoted by
 \[
-\overline v_1(h)\in Q/\ell_h.
+\overline v_1(h)\in \Qabs/\ell_h.
 \]
 \end{definition}
 
@@ -3609,91 +3613,229 @@ canceled by any other quintic contribution. Hence
 \]
 \end{proof}
 
-\begin{proposition}[Generic first residual nonvanishing under trace-free quintic pure value slice]
-\label{prop:first-residual-class-generic}
-Assume that for every $h\in \mathcal U_{\mathrm{cub}}$,
+\subsection{Explicit finite-order model of the first residual quotient}
+
+For the first residual step it is enough to model the ambient abstract quotient
+through order $5$ on the cubic-generic region.
+
+\begin{definition}[Swap involution on cubic--quintic germs]
+\label{def:sigma-cubic-quintic}
+Let
 \[
-\operatorname{tr}\bigl(V_{\val}^{(5)}(h)\bigr)=0.
+J_0=
+\begin{pmatrix}
+0&1\\
+1&0
+\end{pmatrix}.
 \]
-Then there exists an open dense subset
+For a truncated odd germ
+\[
+F(z)=A_3 z^3+A_5 z^5+O(z^7)
+\]
+define
+\[
+\Sigma(F)(z):=J_0\,F(-z)\,J_0
+=
+-\,J_0A_3J_0\,z^3
+-\,J_0A_5J_0\,z^5
++O(z^7).
+\]
+Thus the induced involution on quintic coefficients is
+\[
+\Sigma_5(A):=-J_0AJ_0.
+\]
+\end{definition}
+
+\begin{definition}[Cubic-normalized raw corrected germ through order $5$]
+\label{def:raw-corrected-germ-order-five}
+Fix $h\in \mathcal U_{\mathrm{cub}}$, and choose a diagonal-traceless
+matrix
+\[
+A_3(h)
+\]
+representing the cubic leading line $\ell_h$.
+
+A cubic-normalized raw corrected germ through order $5$ at $h$ is a
+truncated odd germ of the form
+\[
+R_h(z)=A_3(h)z^3+A_5 z^5+O(z^7)
+\]
+obtained from the corrected one-pair local block before quotienting by the
+normalization gauge.
+
+Its raw pure-value quintic slice is the coefficient space
+\[
+V_{\mathrm{raw}}^{(5)}(h)
+\]
+consisting of all quintic coefficients $A_5$ arising in this way under pure
+value deformations at the fixed parameter $h$.
+\end{definition}
+
+\begin{definition}[Quintic ambiguity space and explicit first residual quotient]
+\label{def:finite-order-quotient-model}
+For $h\in \mathcal U_{\mathrm{cub}}$, define the normalization-gauge
+quintic directions by
+\[
+\mathcal N_h^{(5)}
+:=
+\left\{
+c_2A_3(h)+[B_2,A_3(h)]:
+c_2\in\mathbf C,\;
+B_2\in M_2(\mathbf C)
+\right\}.
+\]
+Set
+\[
+V_{\mathrm{amb}}^{(5)}(h)
+:=
+V_{\mathrm{raw}}^{(5)}(h)+\mathcal N_h^{(5)}.
+\]
+
+Define the explicit first residual quotient by
+\[
+\mathcal R_h^{(5)}
+:=
+\mathcal J_5/
+\bigl(\mathbf C\,A_3(h)+V_{\mathrm{amb}}^{(5)}(h)\bigr).
+\]
+\end{definition}
+
+\begin{proposition}[$\Sigma$-stability of the quintic ambiguity space]
+\label{prop:sigma-stability-quintic-ambiguity}
+Assume that every cubic-normalized raw corrected representative satisfies the
+swap symmetry
+\[
+R_h(-z)=J_0\,R_h(z)\,J_0,
+\]
+and that the allowed normalization gauge is symmetry-preserving, in the sense
+that
+\[
+a(-z)=a(z),
+\qquad
+P(-z)=J_0P(z)J_0.
+\]
+Then for every $h\in \mathcal U_{\mathrm{cub}}$,
+\[
+V_{\mathrm{amb}}^{(5)}(h)\subset
+\{A\in M_2(\mathbf C):J_0AJ_0=-A\}.
+\]
+In particular,
+\[
+\operatorname{tr}\bigl(V_{\mathrm{amb}}^{(5)}(h)\bigr)=0.
+\]
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+R_h(z)=A_3(h)z^3+A_5 z^5+O(z^7)
+\]
+be a cubic-normalized raw corrected representative. From
+\[
+R_h(-z)=J_0R_h(z)J_0
+\]
+and coefficient comparison at order $z^5$, one gets
+\[
+J_0A_5J_0=-A_5.
+\]
+Hence $V_{\mathrm{raw}}^{(5)}(h)$ is anti-fixed.
+
+Next write
+\[
+P(z)=I+B_2z^2+O(z^4).
+\]
+The condition $P(-z)=J_0P(z)J_0$ implies
+\[
+J_0B_2J_0=B_2.
+\]
+Since $A_3(h)$ is diagonal-traceless,
+\[
+J_0A_3(h)J_0=-A_3(h).
+\]
+Therefore
+\[
+J_0(c_2A_3(h))J_0=-c_2A_3(h),
+\]
+and
+\[
+J_0[B_2,A_3(h)]J_0
+=
+[B_2,-A_3(h)]
+=
+-[B_2,A_3(h)].
+\]
+Thus $\mathcal N_h^{(5)}$ is anti-fixed as well. Hence every element of
+$V_{\mathrm{amb}}^{(5)}(h)$ is anti-fixed, and therefore traceless.
+\end{proof}
+
+\begin{corollary}[Trace descends on the explicit first residual quotient]
+\label{cor:trace-descends-explicit-first-residual}
+Under the hypotheses of
+Proposition~\ref{prop:sigma-stability-quintic-ambiguity}, trace annihilates
+\[
+\mathbf C\,A_3(h)+V_{\mathrm{amb}}^{(5)}(h).
+\]
+Hence trace descends to a well-defined linear functional
+\[
+\tau_h:\mathcal R_h^{(5)}\to \mathbf C.
+\]
+\end{corollary}
+
+\begin{proof}
+Trace vanishes on $V_{\mathrm{amb}}^{(5)}(h)$ by the proposition, and on
+$\mathbf C\,A_3(h)$ because $A_3(h)$ is diagonal-traceless.
+\end{proof}
+
+\begin{proposition}[Generic first residual nonvanishing in the explicit finite-order model]
+\label{prop:first-residual-class-generic}
+Assume the hypotheses of
+Proposition~\ref{prop:sigma-stability-quintic-ambiguity}. Then there exists an
+open dense subset
 \[
 \mathcal U_{\mathrm{res}}\subset \mathcal U_{\mathrm{cub}}
 \]
 such that
 \[
 \overline v_1(h)\neq 0
-\qquad\text{in }Q/\ell_h
+\qquad\text{in }\mathcal R_h^{(5)}
 \]
 for every $h\in \mathcal U_{\mathrm{res}}$.
 
-Equivalently, on $\mathcal U_{\mathrm{res}}$ the quintic quotient coefficient
-is not collinear with the cubic leading line:
+Equivalently,
 \[
-v_1(h)\notin \ell_h.
+A_5(h)\notin \mathbf C\,A_3(h)+V_{\mathrm{amb}}^{(5)}(h)
 \]
+on $\mathcal U_{\mathrm{res}}$.
 Hence the one-pair quotient odd germ is not projectively constant on
-$\mathcal U_{\mathrm{res}}$.
+$\mathcal U_{\mathrm{res}}$ at the explicit first residual level.
 \end{proposition}
 
 \begin{proof}
-By Proposition~\ref{prop:cubic-leading-order}, for $h\in\mathcal U_{\mathrm{cub}}$
-the cubic quotient coefficient
+By Corollary~\ref{cor:trace-descends-explicit-first-residual}, trace defines a
+linear functional
 \[
-v_0(h)=[J_3^{\pair}(h)]
+\tau_h:\mathcal R_h^{(5)}\to\mathbf C.
 \]
-is nonzero and defines the leading line $\ell_h$, and this line is
-diagonal-traceless.
-
-By Corollary~\ref{cor:trace-invariant-under-normalization-gauge}, trace is
-invariant under the normalization gauge at the first residual step. By the
-present hypothesis, trace also annihilates the quintic pure value slice
-$V_{\val}^{(5)}(h)$. Therefore trace descends to a well-defined linear
-functional
-\[
-\tau_h:Q/\ell_h\to \mathbf C.
-\]
-
 By Lemma~\ref{lem:no-cancellation-quintic-trace},
+\[
+\operatorname{tr}J_5^{\pair}(h)\not\equiv 0
+\]
+on the cubic-generic region. Hence there is an open dense subset
+\[
+\mathcal U_{\mathrm{res}}\subset \mathcal U_{\mathrm{cub}}
+\]
+on which
+\[
+\operatorname{tr}J_5^{\pair}(h)\neq 0.
+\]
+For such $h$,
 \[
 \tau_h(\overline v_1(h))
 =
-\operatorname{tr}J_5^{\pair}(h)
-\not\equiv 0
+\operatorname{tr}J_5^{\pair}(h)\neq 0,
 \]
-as a function of $h$ on $\mathcal U_{\mathrm{cub}}$. Since the family is
-real-analytic in $h$, the zero set of
-\[
-h\longmapsto \tau_h(\overline v_1(h))
-\]
-is a proper analytic subset of $\mathcal U_{\mathrm{cub}}$. Its complement
-$\mathcal U_{\mathrm{res}}$ is therefore open and dense.
-
-For $h\in \mathcal U_{\mathrm{res}}$ we have
-\[
-\tau_h(\overline v_1(h))\neq 0,
-\]
-hence
-\[
-\overline v_1(h)\neq 0
-\qquad\text{in }Q/\ell_h.
-\]
-Thus the one-pair quotient odd germ is not projectively constant on
-$\mathcal U_{\mathrm{res}}$.
+so $\overline v_1(h)\neq 0$ in $\mathcal R_h^{(5)}$.
 \end{proof}
-
-\begin{remark}[Work in progress: trace-free pure value quintic slice]
-\label{rem:wip-trace-free-pure-value-quintic}
-The remaining local task is to prove
-\[
-\operatorname{tr}\bigl(V_{\val}^{(5)}(h)\bigr)=0
-\qquad (h\in \mathcal U_{\mathrm{cub}}),
-\]
-or more weakly that trace annihilates the image of $V_{\val}^{(5)}(h)$ in
-the residual quotient. Once this is established,
-Proposition~\ref{prop:first-residual-class-generic}
-gives a fully rigorous open-dense nonvanishing theorem for the first residual
-class.
-\end{remark}
 
 \begin{remark}[Audit: quintic pure-value trace annihilation]
 \label{rem:audit-quintic-pure-value-trace}
@@ -5905,6 +6047,29 @@ algebraic interaction corrections and the extraction into the finite-core
 endgame.
 \end{remark}
 
+\begin{remark}[Interpretation of residual notation in the multi-pair architecture]
+\label{rem:residual-notation-multipair}
+In the remainder of this section, the symbols
+\[
+F_h(z),\qquad \ell_h,\qquad \overline v_1(h),\qquad
+\Qabs/\ell_h
+\]
+are used schematically to describe the intended cubic-leading / first-residual
+architecture of multi-pair and minimal-core configurations.
+
+The fully explicit rigorous first-residual object established earlier is
+\[
+\mathcal R_h^{(5)}
+=
+\mathcal J_5/
+\bigl(\mathbf C\,A_3(h)+V_{\mathrm{amb}}^{(5)}(h)\bigr).
+\]
+Accordingly, whenever a later statement invokes the first residual class in a
+theorem-strength way, it should be interpreted through $\mathcal R_h^{(5)}$.
+The subsequent two-pair and minimal-bad-core statements remain architectural
+until the interaction terms are rewritten in this explicit finite-order model.
+\end{remark}
+
 Let $F_h(z)$ denote the corrected quotient odd germ of the normalized one-pair
 family. By Proposition~\ref{prop:cubic-leading-order}, on the cubic-generic
 region we have
@@ -5915,17 +6080,14 @@ v_0(h)\neq 0,
 \]
 with cubic leading line
 \[
-\ell_h:=\mathbf C\,v_0(h)\subset Q.
+\ell_h:=\mathbf C\,v_0(h)\subset \Qabs.
 \]
-Under the additional trace-free pure-value quintic hypothesis of
+Under the additional hypotheses of
 Proposition~\ref{prop:first-residual-class-generic}, there is an open dense
-subset
+subset $\mathcal U_{\mathrm{res}}\subset \mathcal U_{\mathrm{cub}}$ on which
+the explicit first residual class
 \[
-\mathcal U_{\mathrm{res}}\subset \mathcal U_{\mathrm{cub}}
-\]
-on which the first residual class
-\[
-\overline v_1(h)\in Q/\ell_h
+\overline v_1(h)\in\mathcal R_h^{(5)}
 \]
 is nonzero.
 
@@ -6030,27 +6192,28 @@ and that the cubic leading lines coincide:
 \[
 \ell_{h_1}=\ell_{h_2}=:\ell.
 \]
-Then, after passing to the residual quotient $Q/\ell$, the quintic
-coefficient satisfies
+Then, after passing to the corresponding first residual quotient by the common
+cubic line, the quintic coefficient satisfies
 \[
 a_1\overline v_1(h_1)+a_2\overline v_1(h_2)+\overline I_{12}^{(5)}=0,
 \]
-where $\overline I_{12}^{(5)}$ is the image of the quintic interaction
-coefficient in $Q/\ell$. In particular, if $\overline I_{12}^{(5)}$ vanishes
-or is controlled as a lower-order perturbation on the normalized region, then
-the first residual classes must also coincide projectively.
+where $\overline I_{12}^{(5)}$ denotes the image of the quintic interaction
+coefficient in that first residual quotient. In the rigorous finite-order
+model, this quotient is $\mathcal R_h^{(5)}$. In particular, if
+$\overline I_{12}^{(5)}$ vanishes or is controlled as a lower-order
+perturbation on the normalized region, then the first residual classes must
+also coincide projectively.
 \end{lemma}
 
 \begin{proof}
-Subtract the cubic leading direction by passing to the quotient $Q/\ell$.
-Since the cubic terms are killed in the residual quotient, the first
-nontrivial coefficient is the quintic residual coefficient. Taking the
-quintic coefficient of the quotient identity gives
+Subtract the cubic leading direction by passing to the corresponding first
+residual quotient by the common line $\ell$. Since the cubic terms are
+killed in the residual quotient, the first nontrivial coefficient is the
+quintic residual coefficient. Taking the quintic coefficient of the quotient
+identity gives
 \[
 a_1\overline v_1(h_1)+a_2\overline v_1(h_2)+\overline I_{12}^{(5)}=0.
 \]
-The stated projective coincidence follows whenever the interaction term is
-absent or controlled as a lower-order perturbation.
 \end{proof}
 
 \begin{proposition}[Two-pair residual rigidity]
