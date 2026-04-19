@@ -5763,6 +5763,221 @@ pair $(u_7,v_7)$, which is irrelevant to the quotient class
 $[A_7^{\mathfrak f}]$ and to $\Delta_7$.
 \end{remark}
 
+\begin{definition}[Projective graph and dual tangent-line variables]
+\label{def:mu-lambda-beta-m}
+On the region where $v_5\neq 0$, define
+\[
+\mu:=\frac{c}{v_5},
+\qquad
+\lambda:=\frac{\Delta_7}{v_5}.
+\]
+On the subregion where $M\neq 0$, define
+\[
+L:=v_5\Delta_7'-v_5'\Delta_7,
+\qquad
+\beta:=\frac{d\lambda}{d\mu},
+\qquad
+m:=\lambda-\mu\beta.
+\]
+\end{definition}
+
+\begin{proposition}[Closed minor system and dual tangent-line curve]
+\label{prop:closed-minor-system-dual-curve}
+Let
+\[
+F:=(c,v_5,\Delta_7),
+\qquad
+U:=(L,-N,M).
+\]
+Then
+\[
+F\times F'=U,
+\qquad
+U\times U'=W\,F.
+\]
+Equivalently,
+\[
+MN'-NM'=cW,
+\qquad
+ML'-LM'=v_5W,
+\qquad
+NL'-LN'=\Delta_7W.
+\]
+
+On the region where $v_5M\neq 0$,
+\[
+\mu'=-\frac{M}{v_5^2},
+\qquad
+\beta=-\frac{L}{M},
+\qquad
+m=\frac{N}{M},
+\]
+and
+\[
+\beta'=-\frac{v_5W}{M^2},
+\qquad
+m'=\frac{cW}{M^2}.
+\]
+Hence the dual tangent-line curve
+\[
+T(h):=(\beta(h),m(h))
+\]
+satisfies
+\[
+T'(h)=\frac{W(h)}{M(h)^2}\,(-v_5(h),c(h)).
+\]
+Moreover,
+\[
+\det(T'(h),T''(h))=\frac{W(h)^2}{M(h)^3}.
+\]
+\end{proposition}
+
+\begin{proof}
+The identity
+\[
+F\times F'=(L,-N,M)
+\]
+is the direct expansion of the cross product. Differentiating gives
+\[
+U'=F\times F''.
+\]
+Applying the vector identity
+\[
+(A\times B)\times(A\times C)=\det(A,B,C)\,A
+\]
+with $A=F$, $B=F'$, $C=F''$ yields
+\[
+U\times U'=(F\times F')\times(F\times F'')=\det(F,F',F'')\,F=W\,F,
+\]
+which is exactly the three displayed scalar identities.
+
+Next,
+\[
+\mu'=\left(\frac{c}{v_5}\right)'
+=\frac{c'v_5-cv_5'}{v_5^2}
+=-\frac{M}{v_5^2},
+\]
+and
+\[
+\lambda'=\left(\frac{\Delta_7}{v_5}\right)'
+=\frac{v_5\Delta_7'-v_5'\Delta_7}{v_5^2}
+=\frac{L}{v_5^2},
+\]
+so
+\[
+\beta=\frac{\lambda'}{\mu'}=-\frac{L}{M}.
+\]
+Also
+\[
+\mu L+M\lambda
+=
+\frac{c}{v_5}(v_5\Delta_7'-v_5'\Delta_7)
++
+(cv_5'-c'v_5)\frac{\Delta_7}{v_5}
+=
+c\Delta_7'-c'\Delta_7
+=
+N,
+\]
+hence
+\[
+m=\lambda-\mu\beta=\lambda+\mu\frac{L}{M}=\frac{N}{M}.
+\]
+The formulas for $\beta'$ and $m'$ follow immediately from
+\[
+ML'-LM'=v_5W,
+\qquad
+MN'-NM'=cW.
+\]
+
+Finally, write
+\[
+T'=\alpha V,
+\qquad
+\alpha:=\frac{W}{M^2},
+\qquad
+V:=(-v_5,c).
+\]
+Then
+\[
+\det(T',T'')=\alpha^2\det(V,V')
+=\frac{W^2}{M^4}\det\!\begin{pmatrix}
+-v_5 & -v_5'\\
+c & c'
+\end{pmatrix}
+=
+\frac{W^2}{M^3},
+\]
+because
+\[
+\det(V,V')=cv_5'-c'v_5=M.
+\]
+\end{proof}
+
+\begin{corollary}[Graph curvature identities in $(\mu,\lambda)$-coordinates]
+\label{cor:mu-lambda-curvature-identities}
+On the region where $v_5M\neq 0$,
+\[
+\lambda_{\mu\mu}=\frac{v_5^3}{M^3}W,
+\]
+and
+\[
+\lambda_{\mu\mu\mu}
+=
+-\frac{v_5^5}{M^4}
+\left(
+W'+3\left(\frac{v_5'}{v_5}-\frac{M'}{M}\right)W
+\right).
+\]
+In particular, at a point where $W=0$, $M\neq 0$, and $v_5\neq 0$,
+\[
+\lambda_{\mu\mu\mu}
+=
+-\frac{v_5^5}{M^4}W'.
+\]
+\end{corollary}
+
+\begin{proof}
+Since
+\[
+\frac{d}{d\mu}=\frac{1}{\mu'}\frac{d}{dh}
+=
+-\frac{v_5^2}{M}\frac{d}{dh},
+\]
+the identity
+\[
+\lambda_{\mu\mu}=\frac{v_5^3}{M^3}W
+\]
+follows from
+\[
+\lambda_\mu=\beta,
+\qquad
+\beta'=-\frac{v_5W}{M^2}.
+\]
+Differentiating once more gives
+\[
+\lambda_{\mu\mu\mu}
+=
+-\frac{v_5^2}{M}\frac{d}{dh}\!\left(\frac{v_5^3}{M^3}W\right),
+\]
+which expands to the displayed formula. The last statement is the specialisation
+$W=0$.
+\end{proof}
+
+\begin{remark}[Determinant interpretation on a fixed-sign $W$-interval]
+\label{rem:determinant-interpretation-fixed-sign-W}
+On any connected interval where $c$, $M$, and $W$ are nonzero and $W$
+keeps one sign, the graph $\lambda=\lambda(\mu)$ is strictly convex or
+strictly concave. Consequently, for any ordered triple of distinct points on
+that interval, the determinant
+\[
+D(s,t,u)=\det(F(s),F(t),F(u))
+\]
+has the corresponding fixed Vandermonde sign. Thus the unresolved global issue
+is not intervalwise sign regularity, but propagation across turning seams and
+possible nonadjacent recurrence of tangent-slope / tangent-line data.
+\end{remark}
+
 \begin{proposition}[ECT intervals for the strengthened one-pair triple]
 \label{prop:ect-intervals-c-v5-delta7}
 Let $I$ be a connected interval on which
@@ -6304,12 +6519,16 @@ K(s,t)\neq 0
 
 \begin{remark}[Status of the turning-boundary adjacent theorem]
 \label{rem:status-zero-capture-turning-boundary}
-Theorem~\ref{thm:adjacent-tangent-separator-sign-regularity} is now stated and
-proved conditionally on a zero-capture hypothesis for the tangent-separator
-kernel $K(s,t)$ on the adjacent pair $I_2\times I_1$. The remaining issue
-here is therefore not a gap in the local compact first-zero argument, but the
-separate task of proving zero-capture for the tangent-separator kernel
-$K(s,t)$ under the turning-boundary hypotheses.
+Theorem~\ref{thm:adjacent-tangent-separator-sign-regularity} remains a
+conditional turning-boundary theorem: the local compact first-zero and
+first-zero-implies-tangency mechanism is in place, but it still depends on a
+separate zero-capture statement for the directional tangent-separator kernel
+$K_{21}(s,t)$ on the full adjacent pair $I_2\times I_1$.
+
+However, by Theorem~\ref{thm:adjacent-pair-pair-exclusion-turning}, full
+zero-capture is no longer needed to exclude actual adjacent pair-pair lines.
+What remains open here is therefore only the stronger support-ordering /
+directional-kernel route, not the local adjacent $2+2$ exclusion itself.
 \end{remark}
 
 \begin{lemma}[Boundary-near exclusion for both directional kernels at a generic turning boundary]
@@ -6812,15 +7031,354 @@ K_{12}(t,s)=0.
 This proves the lemma.
 \end{proof}
 
+\begin{lemma}[Strip exclusion for $K_{21}$ against a compact opposite branch]
+\label{lem:strip-exclusion-k21}
+Let $I_1<I_2$ be adjacent ECT intervals meeting at a generic turning boundary
+\[
+M(h_b)=0,\qquad M'(h_b)\neq 0,\qquad N(h_b)\neq 0.
+\]
+Let $J_1\Subset I_1$ be a compact subinterval. Then there exists a one-sided
+neighborhood $U_2\subset I_2$ of the shared boundary point $h_b$ such that
+\[
+K_{21}(s,t):=\det(F(s),F'(s),F(t))\neq 0
+\qquad
+(s\in U_2,\ t\in J_1),
+\]
+where $F(h)=(c(h),v_5(h),\Delta_7(h))$.
+\end{lemma}
+
+\begin{proof}
+Work in the affine chart
+\[
+x(h):=\frac{v_5(h)}{c(h)},
+\qquad
+y(h):=\frac{\Delta_7(h)}{c(h)}.
+\]
+At a generic turning boundary one has
+\[
+x'(h_b)=0,\qquad x''(h_b)\neq 0,\qquad y'(h_b)\neq 0.
+\]
+Hence $y$ is a valid local coordinate and the normalized curve may be written
+near $h_b$ as a graph
+\[
+x=\chi(y)
+\]
+with
+\[
+\chi'(y_b)=0,\qquad \chi''(y_b)\neq 0.
+\]
+Thus $x$ has a strict local extremum at the boundary, while the tangent slope
+\[
+m(h)=\frac{dy/dh}{dx/dh}=\frac{N(h)}{M(h)}
+\]
+blows up one-sidedly as $h\to h_b$ from either adjacent interval.
+
+Because $J_1\Subset I_1$ is compact away from $h_b$, there exists
+$\delta>0$ such that
+\[
+|x(t)-x(h_b)|\ge 2\delta
+\qquad
+(t\in J_1).
+\]
+After shrinking to a small one-sided neighborhood $U_2\subset I_2$ of $h_b$,
+we may also assume
+\[
+|x(s)-x(h_b)|\le \delta
+\qquad
+(s\in U_2).
+\]
+Hence
+\[
+|x(t)-x(s)|\ge \delta
+\qquad
+(s\in U_2,\ t\in J_1).
+\]
+
+Fix a preliminary compact neighborhood $U_2^0\Subset I_2$ of $h_b$ and set
+\[
+B:=\sup\{|y(t)-y(s)|:\ t\in J_1,\ s\in U_2^0\}<\infty.
+\]
+Since $m(s)\to \pm\infty$ as $s\to h_b$ in $I_2$, we may shrink further to
+$U_2\subset U_2^0$ so that
+\[
+|m(s)|>\frac{2B}{\delta}
+\qquad
+(s\in U_2).
+\]
+
+If $K_{21}(s,t)=0$, then the tangent line at $\Gamma(s)$ passes through
+$\Gamma(t)$, equivalently
+\[
+y(t)-y(s)=m(s)\bigl(x(t)-x(s)\bigr).
+\]
+Taking absolute values gives
+\[
+B\ge |y(t)-y(s)|=|m(s)|\,|x(t)-x(s)|>\frac{2B}{\delta}\cdot \delta=2B,
+\]
+a contradiction. Therefore $K_{21}(s,t)\neq 0$ on $U_2\times J_1$.
+\end{proof}
+
+\begin{lemma}[Strip exclusion for $K_{12}$ against a compact opposite branch]
+\label{lem:strip-exclusion-k12}
+Let $I_1<I_2$ be adjacent ECT intervals meeting at a generic turning boundary
+\[
+M(h_b)=0,\qquad M'(h_b)\neq 0,\qquad N(h_b)\neq 0.
+\]
+Let $J_2\Subset I_2$ be a compact subinterval. Then there exists a one-sided
+neighborhood $U_1\subset I_1$ of the shared boundary point $h_b$ such that
+\[
+K_{12}(t,s):=\det(F(t),F'(t),F(s))\neq 0
+\qquad
+(t\in U_1,\ s\in J_2),
+\]
+where $F(h)=(c(h),v_5(h),\Delta_7(h))$.
+\end{lemma}
+
+\begin{proof}
+This is the left-right mirror of Lemma~\ref{lem:strip-exclusion-k21}.
+\end{proof}
+
+\begin{lemma}[Compact first-contact for $K_{21}$]
+\label{lem:compact-first-contact-k21}
+Let $J_1\Subset I_1$, $J_2\Subset I_2$ be compact subintervals across a
+generic turning boundary. Assume there is a relatively open collar
+$V_2\subset J_2$ at the boundary-facing end of $J_2$ such that
+\[
+K_{21}(s,t)\neq 0
+\qquad
+(s\in V_2,\ t\in J_1).
+\]
+Assume also that the zero set of $K_{21}$ in $J_2\times J_1$ is nonempty.
+Then there exists a zero $(s_*,t_*)\in J_2\times J_1$ such that:
+\begin{enumerate}
+\item $s_*$ is boundary-nearest in the $x=v_5/c$ ordering among all
+$s\in J_2$ for which $K_{21}(s,t)=0$ for some $t\in J_1$;
+\item
+\[
+\partial_t K_{21}(s_*,t_*)=0.
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Define
+\[
+A_{21}:=\{\,s\in J_2:\ \exists\, t\in J_1 \text{ with } K_{21}(s,t)=0\,\}.
+\]
+Since the zero set of $K_{21}$ in $J_2\times J_1$ is compact and nonempty,
+the set $A_{21}$ is compact and nonempty. By hypothesis,
+\[
+A_{21}\cap V_2=\varnothing.
+\]
+Hence $A_{21}$ has a boundary-nearest element $s_*$ in the $x=v_5/c$
+ordering on $J_2$. Choose $t_*\in J_1$ with
+\[
+K_{21}(s_*,t_*)=0.
+\]
+
+Suppose
+\[
+\partial_t K_{21}(s_*,t_*)\neq 0.
+\]
+Then by the implicit function theorem there is a $C^1$ local zero curve
+\[
+t=t(s)
+\]
+through $(s_*,t_*)$, defined for $s$ near $s_*$, such that
+\[
+K_{21}(s,t(s))=0.
+\]
+Because $s_*\notin V_2$ and $V_2$ is an open collar at the boundary-facing
+end of $J_2$, there exist nearby points $s\in J_2$ that are boundary-nearer
+than $s_*$ in the $x=v_5/c$ ordering. For such $s$, the point
+$(s,t(s))$ is also a zero of $K_{21}$, contradicting the minimality of
+$s_*$. Therefore
+\[
+\partial_t K_{21}(s_*,t_*)=0.
+\]
+\end{proof}
+
+\begin{lemma}[Compact first-contact for $K_{12}$]
+\label{lem:compact-first-contact-k12}
+Let $J_1\Subset I_1$, $J_2\Subset I_2$ be compact subintervals across a
+generic turning boundary. Assume there is a relatively open collar
+$V_1\subset J_1$ at the boundary-facing end of $J_1$ such that
+\[
+K_{12}(t,s)\neq 0
+\qquad
+(t\in V_1,\ s\in J_2).
+\]
+Assume also that the zero set of $K_{12}$ in $J_1\times J_2$ is nonempty.
+Then there exists a zero $(t_*,s_*)\in J_1\times J_2$ such that:
+\begin{enumerate}
+\item $t_*$ is boundary-nearest in the $x=v_5/c$ ordering among all
+$t\in J_1$ for which $K_{12}(t,s)=0$ for some $s\in J_2$;
+\item
+\[
+\partial_s K_{12}(t_*,s_*)=0.
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Define
+\[
+A_{12}:=\{\,t\in J_1:\ \exists\, s\in J_2 \text{ with } K_{12}(t,s)=0\,\}.
+\]
+Since the zero set of $K_{12}$ in $J_1\times J_2$ is compact and nonempty,
+the set $A_{12}$ is compact and nonempty. By hypothesis,
+\[
+A_{12}\cap V_1=\varnothing.
+\]
+Hence $A_{12}$ has a boundary-nearest element $t_*$ in the $x=v_5/c$
+ordering on $J_1$. Choose $s_*\in J_2$ with
+\[
+K_{12}(t_*,s_*)=0.
+\]
+
+Suppose
+\[
+\partial_s K_{12}(t_*,s_*)\neq 0.
+\]
+Then by the implicit function theorem there is a $C^1$ local zero curve
+\[
+s=s(t)
+\]
+through $(t_*,s_*)$, defined for $t$ near $t_*$, such that
+\[
+K_{12}(t,s(t))=0.
+\]
+Because $t_*\notin V_1$ and $V_1$ is an open collar at the boundary-facing
+end of $J_1$, there exist nearby points $t\in J_1$ that are boundary-nearer
+than $t_*$ in the $x=v_5/c$ ordering. For such $t$, the point
+$(t,s(t))$ is also a zero of $K_{12}$, contradicting the minimality of
+$t_*$. Therefore
+\[
+\partial_s K_{12}(t_*,s_*)=0.
+\]
+\end{proof}
+
+\begin{theorem}[Adjacent pair-pair exclusion across a generic turning boundary]
+\label{thm:adjacent-pair-pair-exclusion-turning}
+Let $I_1<I_2$ be adjacent ECT intervals meeting at a generic turning boundary
+\[
+M(h_b)=0,\qquad M'(h_b)\neq 0,\qquad N(h_b)\neq 0.
+\]
+Then no finite-slope affine line in the chart
+\[
+x=\frac{v_5}{c},
+\qquad
+y=\frac{\Delta_7}{c}
+\]
+is $2$-secant to both $\Gamma(I_1)$ and $\Gamma(I_2)$.
+\end{theorem}
+
+\begin{proof}
+Assume for contradiction that a finite-slope line
+\[
+L:\ y=mx+b
+\]
+is $2$-secant to both adjacent branches. By
+Lemma~\ref{lem:pair-pair-gives-directional-kernel-zero}, after removing a
+small boundary neighborhood there exist compact subintervals
+\[
+J_1\Subset I_1,\qquad J_2\Subset I_2
+\]
+and a zero of one of the two directional kernels.
+
+First suppose there exist $s_0\in J_2$, $t_0\in J_1$ such that
+\[
+K_{21}(s_0,t_0)=0.
+\]
+By Lemma~\ref{lem:strip-exclusion-k21}, there exists a one-sided neighborhood
+$U_2\subset I_2$ of $h_b$ such that
+\[
+K_{21}(s,t)\neq 0
+\qquad
+(s\in U_2,\ t\in J_1).
+\]
+Choose a compact interval $\widetilde J_2\Subset I_2$ containing $s_0$ and
+whose boundary-facing collar $V_2$ lies in $U_2$. Then the zero set of
+$K_{21}$ in $\widetilde J_2\times J_1$ is nonempty, and
+Lemma~\ref{lem:compact-first-contact-k21} yields a zero
+\[
+(s_*,t_*)\in \widetilde J_2\times J_1
+\]
+such that
+\[
+\partial_t K_{21}(s_*,t_*)=0.
+\]
+Together with $K_{21}(s_*,t_*)=0$, this means that the tangent line at
+$\Gamma(s_*)$ is also tangent at $\Gamma(t_*)$. Since
+$s_*\in I_2$ and $t_*\in I_1$ are interior points, this gives a common
+interior tangent slope across the adjacent branches, contradicting
+Proposition~\ref{prop:adjacent-slope-range-separation}.
+
+Now suppose instead there exist $t_0\in J_1$, $s_0\in J_2$ such that
+\[
+K_{12}(t_0,s_0)=0.
+\]
+By Lemma~\ref{lem:strip-exclusion-k12}, there exists a one-sided neighborhood
+$U_1\subset I_1$ of $h_b$ such that
+\[
+K_{12}(t,s)\neq 0
+\qquad
+(t\in U_1,\ s\in J_2).
+\]
+Choose a compact interval $\widetilde J_1\Subset I_1$ containing $t_0$ and
+whose boundary-facing collar $V_1$ lies in $U_1$. Then the zero set of
+$K_{12}$ in $\widetilde J_1\times J_2$ is nonempty, and
+Lemma~\ref{lem:compact-first-contact-k12} yields a zero
+\[
+(t_*,s_*)\in \widetilde J_1\times J_2
+\]
+such that
+\[
+\partial_s K_{12}(t_*,s_*)=0.
+\]
+Together with $K_{12}(t_*,s_*)=0$, this means that the tangent line at
+$\Gamma(t_*)$ is also tangent at $\Gamma(s_*)$. Again this gives a common
+interior tangent slope across the adjacent branches, contradicting
+Proposition~\ref{prop:adjacent-slope-range-separation}.
+
+Both cases are impossible. Therefore no finite-slope line is $2$-secant to
+both adjacent branches across a generic turning boundary.
+\end{proof}
+
+\begin{remark}[What the unconditional adjacent turning theorem does and does not yet replace]
+\label{rem:status-adjacent-pair-pair-turning}
+Theorem~\ref{thm:adjacent-pair-pair-exclusion-turning} gives an unconditional
+exclusion of finite-slope pair-pair lines across a single generic turning
+boundary. It is stronger than the older local directional-kernel reduction in
+that it bypasses full symmetric zero-capture.
+
+However, it does not by itself replace
+Theorem~\ref{thm:partial-global-no-secant}. To obtain a full global no-four-secant
+theorem from it, one would still need a separate propagation statement reducing
+nonadjacent pair-pair lines to the adjacent turning-boundary case.
+\end{remark}
+
 \begin{remark}[Status of the directional-kernel reduction]
 \label{rem:audit-directional-kernel-orientation}
 Lemma~\ref{lem:pair-pair-gives-directional-kernel-zero} reduces an adjacent
 pair-pair line across a generic turning boundary to a compact interior zero of
-one of the two directional tangent-separator kernels. With
-Theorem~\ref{thm:conditional-symmetric-directional-kernel-exclusion}, the
-orientation issue is no longer the main gap. What remains is the symmetric
-zero-capture problem for $K_{21}$ on $I_2\times I_1$ and $K_{12}$ on
-$I_1\times I_2$.
+one of the two directional tangent-separator kernels.
+
+There are now two closures of that reduction in the draft:
+\begin{enumerate}
+\item Theorem~\ref{thm:adjacent-pair-pair-exclusion-turning} gives an
+unconditional closure for actual adjacent pair-pair lines, via strip exclusion
+and compact first-contact.
+
+\item Theorem~\ref{thm:conditional-symmetric-directional-kernel-exclusion}
+gives a stronger zero-freeness statement for both directional kernels, but only
+conditionally on symmetric zero-capture.
+\end{enumerate}
+
+Thus orientation selection between $K_{21}$ and $K_{12}$ is no longer the
+main issue. What remains open only for the stronger tangent-separator /
+support-ordering route is the symmetric zero-capture problem on the full
+adjacent rectangle.
 \end{remark}
 
 \begin{lemma}[Adjacent support-ordering]
@@ -6970,28 +7528,68 @@ canonical quotient-level invariant. Accordingly, order-$7$ is no longer a
 live audited obstruction for the later geometric arguments.
 \end{remark}
 
-\begin{remark}[Audit: $W=0$ affine-inflection structure]
-\label{rem:audit-w0-affine-inflection}
-The current global endgame is blocked not by the turning-point boundaries
-$M=0$, but by generic boundaries of type
+\begin{remark}[Work in progress: highest-new scalar on the direct septic slice]
+\label{rem:wip-highest-new-scalar-direct-slice}
+On the region $v_5\neq 0$, set
 \[
-W=0,\qquad M\neq 0.
+\mu:=\frac{c}{v_5},
+\qquad
+\lambda:=\frac{\Delta_7}{v_5},
+\qquad
+\phi:=\lambda^{[1]}.
 \]
-For an ordinary affine inflection
+By Corollary~\ref{cor:direct-q7-septic-slice},
+Corollary~\ref{cor:weight-one-septic-reduction}, and
+Theorem~\ref{thm:quotient-septic-closure}, the highest-new quotient-level
+septic scalar is already reduced to the direct $q^{(7)}$-driven $K_1$-slice:
 \[
-y=ax^3+O(x^4),\qquad a\neq 0,
+\Delta_7^{[1]}=v_5\,\phi,
+\qquad
+\phi
+=
+\kappa\Bigl(
+(x_2-x_1)\nu_6^{(q^{(7)})}
++
+v(\gamma_5-\alpha_5)^{(q^{(7)})}
+\Bigr).
 \]
-the tangent line from one side meets the opposite side again, so adjacent
-tangent-separator sign regularity fails in general. The remaining audited
-global issue is therefore whether the actual triple $(c,v_5,\Delta_7)$
-satisfies additional jet constraints at $W=0$ boundaries that rule out this
-generic inflection behavior, or whether a different global invariant must be
-used there.
 
-The current evidence from the septic package suggests that this obstruction may
-already be decided at order $7$, once the full top new coefficient of
-$\Delta_7$ is pinned down, rather than requiring a genuinely new primitive
-order-$9$ invariant.
+In the minimal graded model explored in the present worklog, the combined
+coefficient is proportional to
+\[
+\frac{eu\,(a^2+ab-b^2)}{a^2b^4(a+b)^2},
+\]
+so the highest-new slice is generically nonzero but not manifestly one-signed.
+Thus the remaining order-$7$ issue is no longer survival of the canonical
+quotient-level witness, but the global line-incidence / slope-recurrence
+geometry of the resulting scalar graph.
+\end{remark}
+
+\begin{remark}[Status of the $W=0,\ M\neq 0$ side]
+\label{rem:audit-w0-affine-inflection}
+On the region $c\neq 0,\ M\neq 0$, Proposition~\ref{prop:no-W-flat-interval}
+excludes open-interval flatness $W\equiv 0$. At an isolated boundary
+\[
+W(h_b)=0,\qquad M(h_b)\neq 0,
+\]
+the normalized planar curve in the chart
+\[
+x=\frac{v_5}{c},
+\qquad
+y=\frac{\Delta_7}{c}
+\]
+is an ordinary odd-order affine inflection whenever $W$ changes sign, so
+adjacent tangent-separator sign regularity fails there in general.
+
+However, Theorem~\ref{thm:finite-order-w-zero-local-sterility} shows that every
+finite-order isolated boundary of type $W=0,\ M\neq 0$ is locally sterile for
+pair-pair birth. Thus the remaining issue on this side is not local creation of
+a bad $2+2$ line, but global continuation / recurrence of determinant-zero or
+tangent-slope data across multiple intervals.
+
+The exact identities for $W$ and $W'$ continue to show that this residual
+obstruction is still encoded through the canonical order-$7$ package
+$\Delta_7$, not by a genuinely new primitive order-$9$ invariant.
 \end{remark}
 
 \begin{remark}[Audit: $W'(h_b)$ at $W=0,\ M\neq 0$]
@@ -7000,26 +7598,22 @@ At a point $h_b$ with
 \[
 W(h_b)=0,\qquad M(h_b)\neq 0,
 \]
-the cubic-inflection coefficient of the normalized planar curve is proportional
-to
+the cubic-inflection coefficient of the normalized planar curve in the
+$(\mu,\lambda)$-coordinates is proportional to
 \[
 W'(h_b).
 \]
-The present fixed-sector architecture does not yet prove that
-\[
-W'(h_b)=0
-\]
-on this boundary locus. Thus the current default expectation is ordinary affine
-inflection behavior unless the full leading coefficient of $W'$ can be shown
-to factor through additional special structure of the triple
-$(c,v_5,\Delta_7)$.
+So $W'(h_b)$ still governs the local simple-inflection jet.
 
-By Lemma~\ref{lem:exact-W-and-Wprime-identities} and
-Corollary~\ref{cor:weight-one-septic-reduction}, the highest genuinely new
-jet contribution to $W'$ is already governed by the weight-one septic
-coefficient $[\Delta_7]^{[1]}$, so the present obstruction is not a new
-primitive order-$9$ invariant but a question about the full order-$7$
-package.
+But proving $W'(h_b)=0$ is no longer the main target, because simple
+$W=0,\ M\neq 0$ boundaries are already locally benign for pair-pair birth.
+The live question is now whether the canonical order-$7$ package imposes any
+further global non-recurrence on the associated determinant/tangent-slope data.
+
+At the highest-new level, $[\Delta_7]^{[1]}$ is already reduced to the direct
+$q^{(7)}$-driven $K_1$-slice, so the present obstruction is not a new
+primitive order-$9$ invariant but a question about global propagation of the
+canonical order-$7$ geometry.
 \end{remark}
 
 \begin{theorem}[Finite-order $W=0$ boundaries are locally sterile for pair-pair birth]
@@ -7141,6 +7735,16 @@ D(s,t,u)=c(s)c(t)c(u)\,\widehat D(x(s),x(t),x(u)),
 and $c$ is nonzero on a small neighborhood of $h_b$, so the zero set of $D$
 is exactly the zero set of $\widehat D$. The theorem follows.
 \end{proof}
+
+\begin{remark}[Consequence for the $W=0,\ M\neq 0$ endgame]
+\label{rem:consequence-finite-order-w-zero-local-sterility}
+Theorem~\ref{thm:finite-order-w-zero-local-sterility} shows that finite-order
+$W=0,\ M\neq 0$ boundaries are not local birthplaces of pair-pair
+configurations. Combined with Proposition~\ref{prop:no-W-flat-interval}, this
+means the remaining issue on the $W=0$ side is genuinely global: continuation
+or recurrence of determinant-zero / tangent-slope data across multiple
+intervals, not local creation of a second opposite-side zero branch.
+\end{remark}
 
 \begin{remark}[Audit: residual $W=0$ pathology]
 \label{rem:audit-residual-w0-pathology}
@@ -7590,94 +8194,136 @@ h\longmapsto \left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right).
 
 \begin{remark}[Current geometric bottleneck]
 \label{rem:current-geometric-bottleneck}
-The $W=0,\ M\neq 0$ side is now split into two parts.
+The remaining generic obstruction is no longer bulk $W=0$ geometry, and it is
+no longer local adjacent pair-pair birth across a generic turning boundary.
 
-First, Proposition~\ref{prop:no-W-flat-interval} excludes the flat case
+On the $W=0,\ M\neq 0$ side, Proposition~\ref{prop:no-W-flat-interval}
+excludes open-interval flatness and
+Theorem~\ref{thm:finite-order-w-zero-local-sterility} shows that every
+finite-order isolated $W=0$ boundary is locally sterile for pair-pair birth.
+On the turning-boundary side,
+Theorem~\ref{thm:adjacent-pair-pair-exclusion-turning} removes actual adjacent
+pair-pair lines unconditionally.
+
+What remains is a genuinely global propagation / recurrence problem for
+tangent-slope and tangent-line data. In the variables
 \[
-W\equiv 0
+L:=v_5\Delta_7'-v_5'\Delta_7,
+\qquad
+\beta(h):=-\frac{L(h)}{M(h)},
+\qquad
+T(h):=\left(-\frac{L(h)}{M(h)},\frac{N(h)}{M(h)}\right),
 \]
-on any connected open interval with $c\neq 0$ and $M\neq 0$.
+the missing theorem can be viewed equivalently as non-recurrence of the slope
+function $\beta$, as a one-sidedness theorem for the dual tangent-line curve
+$T$, or, on the highest-new slice, as a no-reentry theorem for the scalar
+graph $\phi=\lambda^{[1]}$.
 
-Second, Theorem~\ref{thm:finite-order-w-zero-local-sterility} shows that every
-finite-order isolated boundary of type
-\[
-W(h_b)=0,\qquad M(h_b)\neq 0
-\]
-is locally sterile for pair-pair birth.
-
-Thus the remaining generic obstruction is no longer bulk $W=0$ geometry, but a
-symmetric zero-capture / continuation problem for the two directional
-tangent-separator kernels across adjacent turning boundaries. By
-Lemma~\ref{lem:pair-pair-gives-directional-kernel-zero}, any adjacent
-pair-pair line across a generic turning boundary produces a compact interior
-zero of one of the two directional tangent-separator kernels, and by
-Theorem~\ref{thm:conditional-symmetric-directional-kernel-exclusion} the
-remaining issue is not orientation selection between them, but proving
-zero-capture in both directions.
-
-Moreover, the exact identities for $W$ and $W'$ still show that any residual
-$W=0$ pathology is encoded by the order-$7$ package through $\Delta_7$, not by
-a genuinely new primitive order-$9$ invariant.
+Moreover, the exact identities for $W$ and $W'$ show that this remaining
+obstruction is still encoded by the canonical order-$7$ package through
+$\Delta_7$, not by a genuinely new primitive order-$9$ invariant.
 \end{remark}
 
 \begin{remark}[Current state of the argument]
 \label{rem:current-state-of-argument}
-The local one-pair analysis now consists of three layers:
-the cubic leading scalar $c(h)$, the quintic fixed-sector refinement
-$A_5^{\mathfrak f}(h)$, and the septic determinant $\Delta_7(h)$.
-These determine the normalized planar curve
+The local one-pair analysis now consists of the canonical triple
 \[
-\Gamma(h)=\left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right),
+(c(h),\,v_5(h),\,\Delta_7(h)),
 \]
-together with the derivative numerators
+together with the derived quantities
 \[
 M(h)=c(h)v_5'(h)-c'(h)v_5(h),
 \qquad
 N(h)=c(h)\Delta_7'(h)-c'(h)\Delta_7(h),
 \]
-and the projective Wronskian
 \[
-W(h)=
-\det\!
-\begin{pmatrix}
-c&v_5&\Delta_7\\
-c'&v_5'&\Delta_7'\\
-c''&v_5''&\Delta_7''
-\end{pmatrix}.
-\]
-
-On intervals where $c$, $M$, and $W$ do not vanish, the triple
-$(c,v_5,\Delta_7)$ is an ECT system. Under the current direct septic
-nonvanishing hypothesis, open-interval flatness $W\equiv 0$ is excluded on the
-$c\neq 0,\ M\neq 0$ region by Proposition~\ref{prop:no-W-flat-interval}.
-At isolated finite-order $W=0,\ M\neq 0$ boundaries,
-Theorem~\ref{thm:finite-order-w-zero-local-sterility} shows that no local
-pair-pair birth occurs.
-
-Thus the remaining geometric issue is now concentrated in turning-boundary
-continuation: if a finite-slope line is $2$-secant to both adjacent branches
-across a generic turning boundary, then
-Lemma~\ref{lem:pair-pair-gives-directional-kernel-zero} produces a compact
-interior zero of one of the two directional kernels
-\[
-K_{21}(s,t)=\det(F(s),F'(s),F(t)),
+L(h)=v_5(h)\Delta_7'(h)-v_5'(h)\Delta_7(h),
 \qquad
-K_{12}(t,s)=\det(F(t),F'(t),F(s)).
+W(h)=\det(F(h),F'(h),F''(h)).
 \]
-By Theorem~\ref{thm:conditional-symmetric-directional-kernel-exclusion}, the
-orientation issue is no longer the main point: what remains audited at the
-geometric level is the symmetric compact directional-kernel / zero-capture
-problem for these two kernels on adjacent turning-boundary pairs.
 
-The remaining audited issues overall are:
-the symmetric turning-boundary zero-capture / directional-kernel theorem,
-the downstream rewriting of the multi-pair / minimal-core layer in the
-strengthened local variables, and the fully general finite-core endgame.
+On the region where $v_5M\neq 0$, the projective graph variables
+\[
+\mu=\frac{c}{v_5},
+\qquad
+\lambda=\frac{\Delta_7}{v_5}
+\]
+identify the normalized curve with a graph $\lambda=\lambda(\mu)$, and
+\[
+\lambda_{\mu\mu}=\frac{v_5^3}{M^3}W,
+\qquad
+\beta:=\lambda_\mu=-\frac{L}{M},
+\qquad
+T(h)=\left(-\frac{L(h)}{M(h)},\frac{N(h)}{M(h)}\right).
+\]
+Thus the global line-incidence problem is equivalently a problem about the
+recurrence of tangent slopes $\beta$, or about vertical-line re-entry on the
+dual tangent-line curve $T$.
+
+Locally, both generic boundary types are now under control. At finite-order
+$W=0,\ M\neq 0$ boundaries there is no local pair-pair birth, while at
+generic turning boundaries actual adjacent pair-pair lines are excluded
+unconditionally. The stronger symmetric directional-kernel theorem remains
+available only conditionally on zero-capture and now serves as a sharper but
+nonessential alternative route.
+
+Accordingly, the remaining gap is no longer local boundary geometry. It is the
+global propagation theorem linking these local facts: no fixed finite-slope line
+should be able to leave and later re-enter the tangent-slope / tangent-line
+data on nonadjacent branches. On the highest-new slice, this is the same as a
+no-reentry theorem for the scalar graph
+\[
+\phi=\lambda^{[1]},
+\qquad
+\beta^{[1]}=\phi_\mu,
+\qquad
+m^{[1]}=\phi-\mu\phi_\mu.
+\]
 \end{remark}
 
-\section{Final contradiction}
+\section{Endgame architecture and remaining global propagation problem}
 
-The calibrated $N$-point comparison now closes the argument.
+The remaining endgame is now a global propagation problem for the normalized
+line-incidence geometry rather than a local boundary-creation problem.
+
+\begin{remark}[Equivalent formulations of the remaining global problem]
+\label{rem:equivalent-global-propagation-problem}
+On a generic component, the remaining missing theorem may be formulated in any
+of the following equivalent ways:
+\begin{enumerate}
+\item no finite-slope affine line in the chart
+\[
+x=\frac{v_5}{c},
+\qquad
+y=\frac{\Delta_7}{c}
+\]
+is $2$-secant to two nonadjacent ECT intervals;
+
+\item the slope function
+\[
+\beta(h):=-\frac{L(h)}{M(h)},
+\qquad
+L=v_5\Delta_7'-v_5'\Delta_7,
+\]
+does not revisit a level on nonadjacent branches;
+
+\item the dual tangent-line curve
+\[
+T(h)=\left(-\frac{L(h)}{M(h)},\frac{N(h)}{M(h)}\right)
+\]
+has no nonadjacent same-parity re-entry against a vertical line in the
+$(b,m)$-plane;
+
+\item on the highest-new slice, the scalar graph
+\[
+\phi=\lambda^{[1]}
+\]
+has no nonadjacent re-entry of its slope $\phi_\mu$.
+\end{enumerate}
+The results proved above resolve the local behavior at finite-order
+$W=0,\ M\neq 0$ boundaries and at generic turning boundaries; what remains is
+the global propagation theorem linking these local facts.
+\end{remark}
 
 \begin{lemma}[Crude polynomial bound for the local value scale]
 \label{lem:crude-S-bound}
