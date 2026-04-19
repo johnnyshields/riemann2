@@ -810,8 +810,7 @@ Hence
 \[
 S_2=o\!\bigl(xQ^2S(m)\bigr).
 \]
-By the sharpened calibration remainder estimate already proved in the draft,
-this implies
+By Corollary~\ref{cor:sharpened-calibration-remainder}, this implies
 \[
 \Psi_{x,d}(R_\zeta)=o\!\left(\frac{x}{B_\zeta(m)}S(m)\right).
 \]
@@ -820,24 +819,15 @@ Proposition~\ref{prop:cutoff-compatibility}, the core $\mathcal C$ --- and
 therefore $M(d)$ and $A_{\val}$ --- is independent of $R$.
 \end{proof}
 
-\begin{remark}[Status of the sharpened calibration remainder estimate]
+\begin{remark}[Status of the calibration remainder estimate]
 \label{rem:status-sharpened-calibration-remainder}
-The proof above uses a sharpened calibration remainder estimate that
-converts
+Corollary~\ref{cor:sharpened-calibration-remainder} isolates the quantitative
+bound actually used later:
 \[
-S_2=o(xQ^2 S(m))
+|\Psi_{x,d}(R_\zeta)|\ll_D \frac{S_2}{Q^3}.
 \]
-into
-\[
-\Psi_{x,d}(R_\zeta)=o\!\left(\frac{x}{B_\zeta(m)}S(m)\right).
-\]
-The structural input for this step is already in place from
-Proposition~\ref{prop:corrected-local-decomposition} and the corrected
-transfer bounds. What has not yet been extracted is a standalone quantitative
-lemma with an explicit constant.
-
-This refinement is analytic packaging rather than a main obstruction to the
-current proof architecture.
+Thus the calibration remainder step is no longer a deferred analytic-packaging
+item.
 \end{remark}
 
 \section{Corrected finite-\texorpdfstring{$s$}{s} holomorphic whitening}
@@ -1528,7 +1518,7 @@ parameter $S(m)=0$, and define the corrected local deformation
 \qquad s=\sigma.
 \]
 
-Then the corrected local deformation admits the expansion
+Then the corrected local deformation admits the decomposition
 \[
 \boxed{
 \Delta_\zeta(m,\sigma)
@@ -1537,20 +1527,23 @@ S(m)\,A_{\val}(m,\sigma)+R_\zeta(m,\sigma),
 }
 \]
 where $A_{\val}(m,\sigma)$ is the pure value-channel derivative of the
-jet-limit block associated with the fixed core $\mathcal C$, and
-$R_\zeta(m,\sigma)$ is internal to the full corrected cutoff-dependent scalar
+jet-limit block associated with the fixed core $\mathcal C$, and where
 \[
-H_{m,R}(s):=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr,R}(s;m)\bigr).
-\]
-
-In particular, once the corrected odd holomorphic package is established for
-$H_{m,R}(s)$, no external tail/error term survives outside the resulting
-$N$-point scalar
-\[
-\Xi_{\zeta,R}^{(N)}(m)
+\boxed{
+R_\zeta(m,\sigma)
 :=
-\sum_{j=1}^N a_j^{(N)}H_{m,R}(s_j).
+\Delta_\zeta(m,\sigma)-S(m)\,A_{\val}(m,\sigma).
+}
 \]
+Thus, by definition, $R_\zeta(m,\sigma)$ is exactly the non-leading part of
+the corrected local deformation after the explicit value-channel linear term
+is removed. In particular, $R_\zeta(m,\sigma)$ is internal to the same full
+corrected cutoff-dependent object
+\[
+H_{m,R}(s):=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr,R}(s;m)\bigr),
+\]
+so once the corrected odd holomorphic package is established for $H_{m,R}(s)$,
+no external tail/error term survives outside the resulting $N$-point scalar.
 \end{proposition}
 
 \begin{proof}
@@ -1591,8 +1584,14 @@ where the first-order coefficient
 D\mathcal W_{(\bg)}[\dot G_-,\dot N,\dot G_+]
 \]
 is exactly the pure value-channel derivative $A_{\val}(m,\sigma)$ associated
-with the fixed core $\mathcal C$, and $R_\zeta(m,\sigma)$ collects the
-higher-order terms inside the same corrected cutoff-dependent object.
+with the fixed core $\mathcal C$. We therefore define
+\[
+R_\zeta(m,\sigma)
+:=
+\Delta_\zeta(m,\sigma)-S(m)\,A_{\val}(m,\sigma),
+\]
+so that $R_\zeta(m,\sigma)$ is, by definition, the full non-leading remainder
+inside the same corrected cutoff-dependent object.
 
 Subtracting the background block gives
 \[
@@ -2027,6 +2026,168 @@ $\mathcal T_+$, and $\mathcal E_2$ gives
 \frac{S_2}{Q^3},
 \]
 as claimed.
+\end{proof}
+
+\begin{corollary}[Sharpened calibration remainder estimate]
+\label{cor:sharpened-calibration-remainder}
+Fix a compact interval
+\[
+D\subset(0,\infty),
+\]
+and work in the fixed-scaled regime
+\[
+0<x\le x_0(D),\qquad d\in D,\qquad x=B_\zeta(m)\sigma,\qquad |\sigma|\asymp Q^{-1}.
+\]
+Write the corrected local deformation in the form
+\[
+\Delta_\zeta(m,\sigma)=S(m)A_{\val}(x)+R_\zeta(m,\sigma).
+\]
+Then
+\[
+\bigl|\langle A_{\val}(x),R_\zeta(m,\sigma)\rangle_\F\bigr|
+\ll_D
+\frac{x}{B_\zeta(m)}\frac{S_2}{Q^3},
+\]
+and hence
+\[
+\boxed{
+|\Psi_{x,d}(R_\zeta(m,\sigma))|
+\ll_D
+\frac{S_2}{Q^3}.
+}
+\]
+In particular, if
+\[
+S_2=o\!\bigl(xQ^2S(m)\bigr),
+\]
+then
+\[
+\Psi_{x,d}(R_\zeta(m,\sigma))
+=
+o\!\left(\frac{x}{B_\zeta(m)}S(m)\right).
+\]
+\end{corollary}
+
+\begin{proof}
+By Proposition~\ref{prop:corrected-local-decomposition}, after subtraction of
+the explicit leading value-channel term $S(m)A_{\val}(x)$, the remaining
+contribution $R_\zeta(m,\sigma)$ is internal to the same corrected
+transferred package controlled by the whitening perturbation analysis.
+
+We therefore use the entry scales already established in the proof of
+Proposition~\ref{prop:whitened-mixed-transfer}. First, from
+Proposition~\ref{prop:cross-block-perturbation} and the baseline
+inverse-square-root scales,
+\[
+G_\pm^{(0)}(s)^{-1/2}
+=
+\begin{pmatrix}
+O(Q^{-1/2}) & O(Q^{-3/2})\\
+O(Q^{-3/2}) & O(Q^{-3/2})
+\end{pmatrix},
+\qquad
+\widetilde R(s)=
+\begin{pmatrix}
+O(S_2/Q^2) & O(S_2/Q)\\
+O(S_2/Q) & O(S_2)
+\end{pmatrix},
+\]
+one gets
+\[
+\mathcal T_{\mix}(s;m)
+=
+G_-^{(0)}(s)^{-1/2}\widetilde R(s)G_+^{(0)}(s)^{-1/2}
+=
+\begin{pmatrix}
+O(S_2/Q^3) & O(S_2/Q^3)\\
+O(S_2/Q^3) & O(S_2/Q^3)
+\end{pmatrix}.
+\]
+
+Next, from the same proof,
+\[
+X_\pm(s)=
+\begin{pmatrix}
+O(S_2/Q^{7/2}) & O(S_2/Q^{9/2})\\
+O(S_2/Q^{9/2}) & O(S_2/Q^{9/2})
+\end{pmatrix},
+\qquad
+N^{(0)}(s)=
+\begin{pmatrix}
+O(Q) & O(Q^2)\\
+O(Q^2) & O(Q^3)
+\end{pmatrix},
+\]
+and multiplying once more by $G_\pm^{(0)}(s)^{-1/2}$ gives
+\[
+\mathcal T_-(s;m)=
+\begin{pmatrix}
+O(S_2/Q^3) & O(S_2/Q^3)\\
+O(S_2/Q^3) & O(S_2/Q^3)
+\end{pmatrix},
+\qquad
+\mathcal T_+(s;m)=
+\begin{pmatrix}
+O(S_2/Q^3) & O(S_2/Q^3)\\
+O(S_2/Q^3) & O(S_2/Q^3)
+\end{pmatrix}.
+\]
+
+Finally, every entry of the quadratic remainder $\mathcal E_2(s;m)$ is
+\[
+O(S_2^2/Q^3),
+\]
+which is lower order because $S_2=o(Q)$ by
+Theorem~\ref{thm:tail-curvature}.
+
+Thus the part of the corrected deformation seen after removal of the leading
+value-channel term satisfies
+\[
+R_\zeta(m,\sigma)
+=
+\begin{pmatrix}
+O(S_2/Q^3) & O(S_2/Q^3)\\
+O(S_2/Q^3) & O(S_2/Q^3)
+\end{pmatrix}
+\]
+up to lower-order $O(S_2^2/Q^3)$ terms.
+
+Now use the explicit small-$x$ structure of the value-channel derivative:
+by Lemma~\ref{lem:Aval-small-x},
+\[
+A_{\val}(x)=\frac1{B_\zeta(m)}
+\begin{pmatrix}
+O(x^2) & O(x)\\
+O(x) & O(x^2)
+\end{pmatrix}.
+\]
+Therefore
+\[
+\bigl|\langle A_{\val}(x),R_\zeta(m,\sigma)\rangle_\F\bigr|
+\ll
+\frac{x}{B_\zeta(m)}\frac{S_2}{Q^3}.
+\]
+
+By Proposition~\ref{prop:pairing},
+\[
+\bigl|\langle A_{\val}(x),M(d)\rangle_\F\bigr|
+\asymp_D
+\frac{x}{B_\zeta(m)},
+\]
+so dividing gives
+\[
+|\Psi_{x,d}(R_\zeta(m,\sigma))|
+\ll_D
+\frac{S_2}{Q^3}.
+\]
+
+Finally, since $B_\zeta(m)\asymp Q$,
+\[
+\frac{S_2/Q^3}{(x/B_\zeta(m))S(m)}
+\asymp
+\frac{S_2}{xQ^2S(m)}\to 0
+\]
+under the hypothesis $S_2=o(xQ^2S(m))$. This proves the final claim.
 \end{proof}
 
 \section{Odd holomorphic transverse channel}
