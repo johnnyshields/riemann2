@@ -10046,26 +10046,42 @@ This proves the classification.
 
 \begin{remark}[Nonmixed $4$-point zeros can carry preexisting close branches]
 \label{rem:nonmixed-four-point-zeros-can-carry-preexisting-branches}
-A blanket local theorem excluding preexisting close $4$-point branches near
-nonmixed finite-order $T_v$-zeros is false in generic lifted geometry.
-Indeed, the model
+At a nonmixed lifted point
 \[
-Q(x)=(x^4,x,x^2)
-\]
-satisfies
-\[
-K_v\neq 0,
+K_v(0)\neq 0,
 \qquad
-T_v\sim x,
+T_v(0)=0,
 \]
-yet the exact coplanarity determinant is the generalized Vandermonde for
-exponents
+the local model may be affine-normalized to
 \[
-0,\ 1,\ 2,\ 4,
+Q_v(x)=(x^n,x,x^2),
+\qquad
+n\ge 3,
+\]
+so that
+\[
+\operatorname{ord}_0 T_v=n-3.
+\]
+
+The exact four-point coplanarity determinant of this model is the generalized
+Vandermonde for exponents
+\[
+0,\ 1,\ 2,\ n,
 \]
 hence factors as
 \[
-\Delta_4=\pm V_4\,e_1,
+\Delta_4^{\mathrm{model}}
+=
+\pm V_4\,h_{n-3},
+\]
+where $V_4$ is the ordinary Vandermonde and $h_{n-3}$ is the complete
+homogeneous symmetric polynomial of degree $n-3$.
+
+In particular, the case $n=4$ gives
+\[
+\Delta_4^{\mathrm{model}}
+=
+\pm V_4\,e_1,
 \qquad
 e_1(x_1,x_2,x_3,x_4)=x_1+x_2+x_3+x_4.
 \]
@@ -10076,44 +10092,156 @@ x_1<x_2<x_3<0<x_4,
 \qquad
 x_1+x_2+x_3+x_4=0.
 \]
-So on the lifted $4$-point side, the strongest generic local statements are
-the shrinking-core concentration into $\{T_v=0\}$, the parity-based
-birth/crossing classification, and the mixed-locus analysis, not a blanket
-no-preexisting-branch theorem.
+
+So on the lifted $4$-point side, the strongest generic local statements are:
+shrinking-core concentration into $\{T_v=0\}$, parity-based
+birth/crossing control, and the mixed-locus analysis. A blanket
+no-preexisting-branch theorem near nonmixed finite-order $T_v$-zeros is
+false in generic lifted geometry.
 \end{remark}
 
-\begin{remark}[Work in progress: interaction defects and global branch control for the lifted order-$7$ geometry]
+\begin{remark}[Mixed order bookkeeping and lack of generic parity obstruction]
+\label{rem:mixed-order-bookkeeping-no-generic-parity-obstruction}
+At a mixed lifted point
+\[
+K_v(0)=0,
+\qquad
+T_v(0)=0,
+\]
+the current affine-normalized model is
+\[
+Q_v(x)\sim (x^n,x,x^m),
+\qquad
+m\ge 3,
+\qquad
+n>m.
+\]
+If
+\[
+r:=\operatorname{ord}_0 K_v,
+\qquad
+s:=\operatorname{ord}_0 T_v,
+\]
+then the model exponents satisfy
+\[
+r=m-2,
+\qquad
+s=m+n-5,
+\]
+hence
+\[
+m=r+2,
+\qquad
+n=s-r+3,
+\qquad
+s\ge 2r.
+\]
+
+The immediately dangerous parity sector in the mixed model is
+\[
+n\ \text{even}
+\qquad\Longleftrightarrow\qquad
+s-r\ \text{odd}.
+\]
+
+However, generic smooth lifted geometry imposes no further parity restriction.
+Indeed, the smooth local model
+\[
+c(x)\equiv 1,
+\qquad
+v_5(x)=1+x,
+\qquad
+S(x)=x^m,
+\qquad
+Y(x)=x^n
+\]
+lies on a good $v_5$-patch and realizes arbitrary integers
+\[
+m\ge 3,
+\qquad
+n>m,
+\]
+hence arbitrary order pairs
+\[
+r\ge 1,
+\qquad
+s\ge 2r.
+\]
+
+Thus any exclusion of dangerous mixed patterns must come from RH-specific jet
+identities or from additional algebraic compatibility conditions for true bad
+four-point cores, not from generic lifted differential geometry alone.
+\end{remark}
+
+\begin{remark}[Next algebraic target on the four-point branch]
+\label{rem:next-algebraic-target-four-point}
+The lifted four-point geometry shows that generic coplanarity alone is too
+weak: nonmixed odd-order $T_v$-zeros can already support a preexisting close
+branch, and the mixed model can admit dangerous generalized-Vandermonde
+coplanar quadruples.
+
+Accordingly, the next algebraic target for the bad four-point core is not
+another generic local exclusion theorem, but an extra compatibility condition
+coming from the source-level corrected finite-core relation itself. The right
+question is therefore:
+
+\begin{quote}
+What additional algebraic condition does a true bad four-point core impose on a
+local lifted coplanarity branch, beyond the vanishing of the lifted four-point
+determinant?
+\end{quote}
+
+Any successful closure of the four-point branch will have to use that extra
+compatibility condition, or else rule out the dangerous mixed exponent patterns
+by RH-specific jet identities.
+\end{remark}
+
+\begin{remark}[Work in progress: what remains in the lifted order-$7$ geometry]
 \label{rem:wip-lifted-order7-zero-capture}
-The results above isolate the correct local one-pair obstructions for the
-finite-core endgame, but two ingredients are still open.
+The lifted $v_5$-patch geometry now splits more sharply than a blanket
+zero-capture problem.
 
-First, the actual multi-pair interaction germ
+First, Propositions~\ref{prop:shrinking-exact-lifted-three-point-circuits-force-Kv-zero}
+and~\ref{prop:shrinking-exact-lifted-four-point-circuits-force-Tv-zero} show
+that shrinking exact lifted three-point and four-point circuits can accumulate
+only at
 \[
-\mathcal I_{\ge2}(z)
+K_v=0
+\qquad\text{and}\qquad
+T_v=0,
 \]
-has not yet been rewritten explicitly in the corrected finite-order model
-through orders $3,5,7$. Thus the genuine finite-core argument still needs
-the defect terms
-\[
-E_{\ge2}^{(3)},\qquad E_{\ge2}^{(5)},\qquad \overline E_{\ge2}^{(7)}.
-\]
+respectively, and give uniform small-diameter exclusion away from those zero
+sets.
 
-Second, the lifted local analysis now gives exact shrinking-core concentration
-into the zero sets of $K_v$ and $T_v$, together with uniform
-small-diameter exclusion away from those zero sets. What is still missing is
-not a blanket zero-capture theorem near nonmixed zeros: generic lifted
-geometry already allows preexisting close branches near certain odd-order
-nonmixed zeros. The real missing input is a branch-continuation /
-non-recurrence theorem for the nonmixed lifted branches, together with the
-analysis of the mixed codimension-two locus
-\[
-K_v=T_v=0.
-\]
+Second, Proposition~\ref{prop:repeated-node-limits-of-exact-lifted-determinants}
+identifies the one-pair collapse limits as tangent-line and tangent-plane
+contact determinants for the lifted curves $\Lambda_v$ and $Q_v$.
 
-The same discussion has a parallel $u_5\neq 0$ version obtained from the
-local gauge $u_7=0$, but the $v_5\neq 0$ patch is the natural first
-setting because $x=v_5/c$ is already the distinguished ECT coordinate in
-the one-pair planar geometry.
+Third, the nonmixed and mixed four-point local pictures are genuinely
+different. On the nonmixed side, generic odd-order $T_v$-zeros can carry a
+preexisting close branch; on the mixed side $K_v=T_v=0$, the order
+bookkeeping is
+\[
+m=r+2,
+\qquad
+n=s-r+3,
+\qquad
+s\ge 2r,
+\]
+and there is no generic parity obstruction beyond this order inequality.
+
+Thus the missing global ingredient is no longer a single blanket first-contact
+lemma. It is a combination of:
+\begin{itemize}
+\item source-level control of the multi-pair interaction defects
+\[
+E_{\ge2}^{(3)},\qquad E_{\ge2}^{(5)},\qquad \overline E_{\ge2}^{(7)};
+\]
+\item extra algebraic compatibility conditions for true bad four-point cores,
+beyond generic coplanarity of the lifted points;
+\item and, on the mixed side, RH-specific jet restrictions excluding the
+dangerous exponent patterns.
+\end{itemize}
 \end{remark}
 
 \begin{remark}[Work in progress: stratified lifted local picture]
@@ -10150,18 +10278,22 @@ as local coordinate, the lifted space curve is led to a monomial model
 \[
 Q_v(x)\sim (x^n,x,x^m),
 \]
-and the leading $4$-point coplanarity determinant becomes the generalized
-Vandermonde for exponents
+with order bookkeeping
 \[
-0,\ 1,\ m,\ n.
+m=r+2,
+\qquad
+n=s-r+3,
+\qquad
+s\ge 2r.
 \]
-For some exponent patterns this model does admit opposite-side quadruples, so
-the mixed locus remains the genuinely new codimension-two local obstruction.
+No generic parity obstruction is available at this level, so the mixed locus
+remains the genuinely new codimension-two local obstruction.
 
 Thus the remaining lifted local issues are:
 the continuation / non-recurrence of the unique odd-order $3$-point branch,
 the continuation / non-recurrence of nonmixed $4$-point branches, possible
-infinite-order flatness, and the mixed codimension-two locus.
+infinite-order flatness, and the mixed codimension-two locus together with the
+extra bad-core compatibility conditions needed there.
 \end{remark}
 
 \begin{remark}[Current geometric bottleneck]
@@ -10193,7 +10325,9 @@ completely classified by parity; on the $4$-point side, however, generic
 nonmixed odd-order $T_v$-zeros can still carry preexisting close branches.
 So the missing lifted ingredient is not a blanket zero-capture theorem, but a
 global branch-continuation / non-recurrence theorem for the nonmixed lifted
-branches, together with the analysis of the mixed locus $K_v=T_v=0$.
+branches, together with the analysis of the mixed locus $K_v=T_v=0$ and the
+extra algebraic compatibility conditions required for true bad four-point
+cores there.
 
 What remains is a genuinely global propagation / recurrence problem for
 tangent-slope and tangent-line data. More precisely, the missing theorem is
@@ -10279,29 +10413,45 @@ no-reentry theorem for the scalar graph
 m^{[1]}=\phi-\mu\phi_\mu.
 \]
 
-In parallel, the finite-core endgame now splits into a global bridge, a
-two-point algebraic branch, and a lifted $3/4$-point branch. On the global
-side, the two-pair algebra forces quantitative near-coincidence of the
-strengthened invariant $\widehat\Psi$, and on good $M\neq 0$ patches this
-forces bad two-pair cores into a defect-scale close regime. For the two-point
-branch, the sharp remaining algebraic target is the source-level structural
-reduction of the raw corrected interaction remainder: if the corrected
-two-pair object is defined source-level and collapses on coincident atoms,
-then the normalized defects are $O(|h_1-h_2|^2)$ and the two-point branch
-is excluded on compact good patches.
+In parallel, the finite-core endgame now splits into three layers.
 
-On the lifted side, exact shrinking $3$- and $4$-point circuits now
-concentrate into the zero sets of $K_v$ and $T_v$, respectively, with
-uniform small-diameter exclusion away from those zero sets. Near finite-order
-isolated $K_v$-zeros, the $3$-point branch is completely classified by
-parity. On the $4$-point side, finite-order sterility controls local
-birth/crossing, but generic nonmixed odd-order zeros can still carry a
-preexisting close branch. Thus the remaining lifted local issues are the
-global continuation / non-recurrence of the nonmixed branches, possible
-infinite-order flatness, and the mixed codimension-two locus
+First, on the two-pair side, the strengthened invariant
 \[
-K_v=T_v=0.
+\widehat\Psi(h)=
+\left(
+\frac{u_5(h)}{c(h)},
+\frac{v_5(h)}{c(h)},
+\frac{\Delta_7(h)}{c(h)^2}
+\right)
 \]
+gives the correct algebraic bridge, and on good $M\neq 0$ patches the
+quantitative two-pair coincidence theorem forces bad two-point cores into a
+defect-scale close regime. The remaining structural issue there is to
+formalize the corrected quotient-germ construction at source level so that the
+raw quadratic separation factorization becomes automatic.
+
+Second, on the lifted three-point side, shrinking exact circuits now
+concentrate into $K_v=0$, repeated-node limits become tangent-line contacts,
+and finite-order $K_v$-zeros admit an explicit local branch classification:
+even-order zeros are sterile, while odd-order zeros carry exactly one local
+branch.
+
+Third, on the lifted four-point side, shrinking exact circuits now
+concentrate into $T_v=0$, repeated-node limits become tangent-plane
+contacts, and the local picture splits into the nonmixed and mixed regimes.
+Nonmixed odd-order $T_v$-zeros already support preexisting close branches in
+generic models, so blanket local exclusion is false there; the mixed case
+\[
+K_v=T_v=0
+\]
+remains the genuine codimension-two obstruction, and generic lifted geometry
+imposes only the order inequality
+\[
+s\ge 2r.
+\]
+Thus any closure of the four-point branch must use extra algebraic
+compatibility conditions or RH-specific jet restrictions, not generic local
+geometry alone.
 \end{remark}
 
 \section{Endgame architecture and remaining global propagation problem}
