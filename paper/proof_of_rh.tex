@@ -2864,6 +2864,44 @@ compact interval $D\subset(0,\infty)$, the final estimate
 follows.
 \end{proof}
 
+\begin{remark}[Work in progress: coefficient control in toy $N$-point preservation]
+\label{rem:wip-toy-n-point-coefficients}
+As written, Proposition~\ref{prop:toy-n-point-direct} uses only the
+normalization
+\[
+\sum_{j=1}^N a_j^{(N)}=1,
+\]
+but this alone does not justify the estimate
+\[
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d))=O(u^4)
+\]
+uniformly in $N$ and $Q$.
+
+Indeed, from
+\[
+\sup_j \|E_j(u,d)\|\ll 1
+\]
+one only obtains
+\[
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d))
+=
+O\!\Bigl(u^4\sum_{j=1}^N |a_j^{(N)}|\Bigr),
+\]
+so a uniform $O(u^4)$ remainder requires additional control on the coefficient
+family, for example a bound of the form
+\[
+\sum_{j=1}^N |a_j^{(N)}|\ll 1
+\qquad\text{or more generally}\qquad
+\sum_{j=1}^N |a_j^{(N)}|\le e^{o(Q)},
+\]
+which would still be negligible against the zeta-side exponential decay.
+Alternatively, one could prove an exact cancellation identity for the
+$u^4$-error term itself.
+
+Thus the proposition should presently be read as conditional on a
+coefficient-control input not yet written explicitly in the draft.
+\end{remark}
+
 On the toy side, Proposition~\ref{prop:toy-n-point-direct} gives
 \begin{equation}\label{eq:Xi-toy}
 \Xi_{\toy}^{(N)}(u,d)=u^2\Phi_K(M(d))+O(u^4),
@@ -2876,6 +2914,41 @@ Using \eqref{eq:u2-calibration},
 \begin{equation}\label{eq:Xi-toy-calibrated}
 |\Xi_{\toy}^{(N)}(u,d)|\asymp \frac{x_0}{B_\zeta(m)}S(m).
 \end{equation}
+
+\begin{remark}[Work in progress: calibrated size versus microscopic toy regime]
+\label{rem:wip-calibration-small-u}
+The calibrated relation
+\[
+u^2\asymp \frac{x_0}{B_\zeta(m)}S(m)
+\]
+must still be reconciled with the small-parameter regime required by the toy
+microscopic expansion.
+
+Indeed, Proposition~\ref{prop:toy-n-point-direct} is proved only for
+\[
+|u|<u_0(D),
+\]
+where $u_0(D)>0$ is fixed independently of $Q$.  However, with only the crude
+global bounds used later in the final contradiction,
+\[
+S(m)\ll Q^2,
+\qquad
+B_\zeta(m)\asymp Q,
+\]
+the calibration gives at best
+\[
+u^2\ll x_0 Q,
+\]
+which does not by itself force $u\to 0$ as $Q\to\infty$.
+
+Accordingly, one still needs an additional input ensuring that the calibrated
+toy parameter remains in the microscopic regime in which the toy expansion is
+valid.  Conceptually, this could come from a sharper upper bound on $S(m)$,
+from a choice of $x_0$ that shrinks with height, or from a strengthening of
+the toy analysis to a range of $u$ large enough to contain the calibrated
+scale.  Until such an input is made explicit, the final comparison should be
+read as assuming that the calibrated $u$ lies inside the uniform toy regime.
+\end{remark}
 
 The following remark records the current status of the toy model in the
 overall proof strategy.
@@ -7703,6 +7776,33 @@ $A_{7,K_1}^{\mathfrak f}+\mathbf C A_5^{\mathfrak f}$, equivalently a local
 gauge-fixing of $(u_7,v_7)$, and does not affect the quotient class
 $[A_7^{\mathfrak f}]$ or the canonical second residual determinant
 $\Delta_7$.
+\end{remark}
+
+\begin{remark}[Work in progress: high-height contradiction versus full $\RH$]
+\label{rem:wip-high-height-only}
+The contradiction proved below is asymptotic in the height parameter $Q$:
+the comparison concludes only after reaching a stage at which
+\[
+Q^4 e^{-\delta Q}\ll 1.
+\]
+Thus, as presently written, the argument rules out sufficiently large
+pair-like off-line anomalies, but does not yet by itself exclude a
+hypothetical low-lying off-line zero.
+
+To deduce the full Riemann Hypothesis from this asymptotic contradiction, one
+still needs an additional bridge, for example:
+\begin{enumerate}
+\item a theorem showing that any off-line zero forces a corresponding bad
+local anomaly at arbitrarily large heights;
+\item a finite verification excluding all low-lying off-line zeros below the
+threshold at which the asymptotic contradiction applies; or
+\item a reformulation of the endgame that yields a contradiction uniformly in
+height, without a ``for $Q$ sufficiently large'' clause.
+\end{enumerate}
+
+Accordingly, the theorem below should presently be interpreted as an
+asymptotic pair-like contradiction theorem rather than yet as a complete proof
+of $\RH$.
 \end{remark}
 
 \begin{theorem}[Final calibrated $N$-point contradiction in the pair-like branch]
