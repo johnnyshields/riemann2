@@ -6044,6 +6044,208 @@ is not intervalwise sign regularity, but propagation across turning seams and
 possible nonadjacent recurrence of tangent-slope / tangent-line data.
 \end{remark}
 
+\begin{proposition}[Local determinant sign transport across a generic turning boundary]
+\label{prop:local-determinant-sign-transport-turning}
+Let $h_b$ be a generic turning boundary:
+\[
+M(h_b)=0,\qquad M'(h_b)\neq 0,\qquad N(h_b)\neq 0.
+\]
+Then there exists a neighborhood $U$ of $h_b$ and a sign
+$\sigma_{\mathrm{turn}}\in\{\pm 1\}$ such that for any three distinct points
+$h_1,h_2,h_3\in U$,
+\[
+\operatorname{sgn} D(h_1,h_2,h_3)
+=
+\sigma_{\mathrm{turn}}\,
+\operatorname{sgn}\bigl((h_2-h_1)(h_3-h_1)(h_3-h_2)\bigr),
+\]
+where
+\[
+D(h_1,h_2,h_3):=\det(F(h_1),F(h_2),F(h_3)),
+\qquad
+F=(c,v_5,\Delta_7).
+\]
+Equivalently, the triple $(c,v_5,\Delta_7)$ is locally discretely sign-regular
+of order $3$ across a generic turning boundary.
+\end{proposition}
+
+\begin{proof}
+Work in the normalized affine chart
+\[
+x(h):=\frac{v_5(h)}{c(h)},
+\qquad
+y(h):=\frac{\Delta_7(h)}{c(h)}.
+\]
+At a generic turning boundary one has
+\[
+x'(h_b)=0,\qquad x''(h_b)\neq 0,\qquad y'(h_b)\neq 0.
+\]
+Hence $y$ is a valid local coordinate near $h_b$, and the normalized curve
+may be written as
+\[
+x=\chi(y)
+\]
+with
+\[
+\chi'(y_b)=0,\qquad \chi''(y_b)\neq 0.
+\]
+After shrinking $U$, the sign of $\chi''$ is constant on $U$.
+
+Now for $h_i\in U$, write
+\[
+x_i:=x(h_i),\qquad y_i:=y(h_i).
+\]
+Since
+\[
+F(h_i)=c(h_i)\,(1,x_i,y_i),
+\]
+we have
+\[
+D(h_1,h_2,h_3)
+=
+c(h_1)c(h_2)c(h_3)\,
+\det\!\begin{pmatrix}
+1&x_1&y_1\\
+1&x_2&y_2\\
+1&x_3&y_3
+\end{pmatrix}.
+\]
+Using $x_i=\chi(y_i)$, the $3\times 3$ determinant factors as
+\[
+\det\!\begin{pmatrix}
+1&x_1&y_1\\
+1&x_2&y_2\\
+1&x_3&y_3
+\end{pmatrix}
+=
+(y_2-y_1)(y_3-y_1)(y_3-y_2)\,\chi[y_1,y_2,y_3],
+\]
+where $\chi[y_1,y_2,y_3]$ is the second divided difference of $\chi$.
+By the scalar divided-difference mean-value theorem,
+\[
+\chi[y_1,y_2,y_3]=\frac12\,\chi''(\eta)
+\]
+for some $\eta$ between the $y_i$. Thus $\chi[y_1,y_2,y_3]$ has fixed sign
+on $U$.
+
+Also $c$ has fixed sign on a sufficiently small neighborhood of $h_b$, and
+since $y'(h_b)\neq 0$, the map $h\mapsto y(h)$ is monotone on $U$. Hence
+\[
+\operatorname{sgn}\bigl((y_2-y_1)(y_3-y_1)(y_3-y_2)\bigr)
+=
+\operatorname{sgn}(y')^3\,
+\operatorname{sgn}\bigl((h_2-h_1)(h_3-h_1)(h_3-h_2)\bigr),
+\]
+with $\operatorname{sgn}(y')$ constant on $U$.
+
+Collecting the fixed signs of $c$, $y'$, and $\chi''$ gives the desired
+constant $\sigma_{\mathrm{turn}}$.
+\end{proof}
+
+\begin{proposition}[Dual asymptote at a generic turning boundary]
+\label{prop:dual-asymptote-turning-boundary}
+Let $h_b$ be a generic turning boundary:
+\[
+M(h_b)=0,\qquad M'(h_b)\neq 0,\qquad N(h_b)\neq 0.
+\]
+Assume $v_5(h_b)\neq 0$, and write
+\[
+\mu_b:=\frac{c(h_b)}{v_5(h_b)},
+\qquad
+\lambda_b:=\frac{\Delta_7(h_b)}{v_5(h_b)}.
+\]
+Let
+\[
+T(h)=\bigl(\beta(h),m(h)\bigr)
+=
+\left(-\frac{L(h)}{M(h)},\frac{N(h)}{M(h)}\right)
+\]
+be the dual tangent-line curve on the neighboring $M\neq 0$ branches.
+Then both one-sided dual arcs have the common asymptote
+\[
+m=-\mu_b\,\beta+\lambda_b,
+\]
+and, more precisely,
+\[
+m+\mu_b\beta-\lambda_b
+=
+\frac{1}{4a\,\beta}+o\!\left(\frac1\beta\right)
+\qquad\text{as } |\beta|\to\infty,
+\]
+where $a\neq 0$ is the quadratic coefficient in the local turning-point normal
+form
+\[
+\mu-\mu_b=a(\lambda-\lambda_b)^2+O((\lambda-\lambda_b)^3).
+\]
+In particular, the two adjacent dual arcs approach the same asymptote from
+opposite sides. This asymptotic separation is the dual-curve explanation of
+the local adjacent turning-boundary exclusion theorem proved later.
+\end{proposition}
+
+\begin{proof}
+At a generic turning boundary one has $\mu'(h_b)=0$ and $\lambda'(h_b)\neq 0$,
+so $\lambda$ is a valid local coordinate and
+\[
+\mu-\mu_b=a(\lambda-\lambda_b)^2+O((\lambda-\lambda_b)^3),
+\qquad a\neq 0.
+\]
+Differentiating gives
+\[
+\frac{d\mu}{d\lambda}=2a(\lambda-\lambda_b)+O((\lambda-\lambda_b)^2),
+\]
+hence
+\[
+\beta=\frac{d\lambda}{d\mu}
+=
+\frac{1}{2a(\lambda-\lambda_b)}+O(1).
+\]
+Thus $|\beta|\to\infty$ as $h\to h_b$ from either side.
+
+Now
+\[
+m=\lambda-\mu\beta,
+\]
+so
+\[
+m+\mu_b\beta-\lambda_b
+=
+(\lambda-\lambda_b)-(\mu-\mu_b)\beta.
+\]
+Using
+\[
+\mu-\mu_b=a(\lambda-\lambda_b)^2+O((\lambda-\lambda_b)^3)
+\]
+and
+\[
+\beta=\frac{1}{2a(\lambda-\lambda_b)}+O(1),
+\]
+we obtain
+\[
+(\mu-\mu_b)\beta
+=
+\frac12(\lambda-\lambda_b)+O((\lambda-\lambda_b)^2).
+\]
+Therefore
+\[
+m+\mu_b\beta-\lambda_b
+=
+\frac12(\lambda-\lambda_b)+O((\lambda-\lambda_b)^2).
+\]
+Substituting
+\[
+\lambda-\lambda_b=\frac{1}{2a\beta}+o\!\left(\frac1\beta\right)
+\]
+gives
+\[
+m+\mu_b\beta-\lambda_b
+=
+\frac{1}{4a\,\beta}+o\!\left(\frac1\beta\right).
+\]
+Since $\beta\to+\infty$ on one side and $\beta\to-\infty$ on the other, the
+correction term changes sign, so the two one-sided dual arcs approach the same
+asymptote from opposite sides.
+\end{proof}
+
 \begin{proposition}[ECT intervals for the strengthened one-pair triple]
 \label{prop:ect-intervals-c-v5-delta7}
 Let $I$ be a connected interval on which
@@ -8855,18 +9057,27 @@ $v_5\neq 0$ patches; the missing global ingredient there is likewise a
 zero-capture theorem.
 
 What remains is a genuinely global propagation / recurrence problem for
-tangent-slope and tangent-line data. In the variables
+tangent-slope and tangent-line data. More precisely, the missing theorem is
+best viewed as a non-recurrence theorem for the slope function
 \[
-L:=v_5\Delta_7'-v_5'\Delta_7,
-\qquad
 \beta(h):=-\frac{L(h)}{M(h)},
-\qquad
+\]
+equivalently as a no-reentry theorem for the dual tangent-line curve
+\[
 T(h):=\left(-\frac{L(h)}{M(h)},\frac{N(h)}{M(h)}\right),
 \]
-the missing theorem can be viewed equivalently as non-recurrence of the slope
-function $\beta$, as a one-sidedness theorem for the dual tangent-line curve
-$T$, or, on the highest-new slice, as a no-reentry theorem for the scalar
-graph $\phi=\lambda^{[1]}$.
+or, on the highest-new slice, as a no-reentry theorem for the scalar graph
+\[
+\phi=\lambda^{[1]},
+\qquad
+\beta^{[1]}=\phi_\mu,
+\qquad
+m^{[1]}=\phi-\mu\phi_\mu.
+\]
+The local theorems proved above resolve the creation of bad $2+2$ geometry at
+generic $W=0,\ M\neq 0$ and generic turning boundaries; what is missing is a
+global theorem preventing reappearance of the same line-incidence data on
+nonadjacent branches.
 
 Moreover, the exact identities for $W$ and $W'$ show that this remaining
 obstruction is still encoded by the canonical order-$7$ package through
@@ -8976,8 +9187,38 @@ $(b,m)$-plane;
 has no nonadjacent re-entry of its slope $\phi_\mu$.
 \end{enumerate}
 The results proved above resolve the local behavior at finite-order
-$W=0,\ M\neq 0$ boundaries and at generic turning boundaries; what remains is
-the global propagation theorem linking these local facts.
+$W=0,\ M\neq 0$ boundaries and at generic turning boundaries. Thus the
+remaining theorem target is not local boundary geometry but global non-recurrence:
+a fixed finite slope should not leave and later re-enter the tangent-slope /
+tangent-line data on nonadjacent branches. In the three equivalent languages
+above, this is a theorem about the level sets of $\beta$, about vertical-line
+re-entry for the dual curve $T$, or about nonadjacent slope re-entry for the
+highest-new scalar graph $\phi$.
+\end{remark}
+
+\begin{remark}[Warning: what the current local theory does \emph{not} imply]
+\label{rem:warning-no-easy-globalization}
+Several tempting globalization statements suggested by the local theory are too
+strong in generic models and should not be assumed without further RH-specific
+input.
+
+\begin{enumerate}
+\item Naive support propagation is not enough: exclusion of adjacent pair-pair
+lines does not by itself force exclusion for nonadjacent pairs.
+
+\item Local convexity of the dual tangent-line curve, even together with the
+shared asymptote structure of
+Proposition~\ref{prop:dual-asymptote-turning-boundary}, is not by itself enough
+to forbid nonadjacent same-parity re-entry in the dual $(\beta,m)$-plane.
+
+\item The direct highest-new septic coefficient is explicit enough to prove
+noncancellation, but not generically one-signed. Thus no trivial sign theorem
+for the scalar graph $\phi=\lambda^{[1]}$ should be expected without further
+RH-specific structure.
+\end{enumerate}
+
+Accordingly, the remaining gap is now a genuinely global special-structure
+theorem, not a missing local lemma.
 \end{remark}
 
 \begin{lemma}[Crude polynomial bound for the local value scale]
