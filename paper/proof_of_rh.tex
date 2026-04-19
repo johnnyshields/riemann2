@@ -2721,18 +2721,145 @@ For $N\le \rho_0Q$, set
 s_j=\frac{j}{Q^2},
 \qquad j=1,\dots,N,
 \]
-and let $a_j^{(N)}$ be the explicit odd-moment-canceling coefficients satisfying
+and define
 \[
-\sum_{j=1}^N a_j^{(N)}=1,
-\qquad
-\sum_{j=1}^N a_j^{(N)}j^{2r+1}=0
-\quad (0\le r\le N-2).
+a_j^{(N)}
+:=
+(-1)^{j+1}\,
+\frac{j\binom{2N}{N+j}}{\binom{2N-2}{N-1}},
+\qquad 1\le j\le N.
 \]
 Define the corrected $N$-point transverse scalar
 \begin{equation}\label{eq:Xi-zeta}
 \Xi_\zeta^{(N)}(m):=
 \sum_{j=1}^N a_j^{(N)}H_m(s_j).
 \end{equation}
+
+\begin{lemma}[Explicit odd-moment-canceling coefficients and $\ell^1$ control]
+\label{lem:n-point-coefficients}
+The coefficients $a_j^{(N)}$ satisfy
+\[
+\sum_{j=1}^N a_j^{(N)}=1,
+\qquad
+\sum_{j=1}^N a_j^{(N)}j^{2r+1}=0
+\quad (0\le r\le N-2).
+\]
+Moreover,
+\[
+\sum_{j=1}^N |a_j^{(N)}|=2N-1.
+\]
+Consequently, for every integer $k\ge 0$,
+\[
+\left|\sum_{j=1}^N a_j^{(N)}j^k\right|
+\le
+(2N-1)N^k.
+\]
+\end{lemma}
+
+\begin{proof}
+Set
+\[
+D_N:=\binom{2N-2}{N-1}.
+\]
+
+We first prove the normalization. Writing
+\[
+j\binom{2N}{N+j}
+=
+N\!\left(\binom{2N-1}{N+j-1}-\binom{2N-1}{N+j}\right),
+\]
+one gets
+\[
+\sum_{j=1}^N (-1)^{j+1}j\binom{2N}{N+j}
+=
+N\sum_{j=1}^N (-1)^{j+1}
+\left(\binom{2N-1}{N+j-1}-\binom{2N-1}{N+j}\right).
+\]
+Using the partial alternating-binomial identity
+\[
+\sum_{k=0}^{m}(-1)^k\binom{n}{k}
+=
+(-1)^m\binom{n-1}{m},
+\]
+one finds
+\[
+\sum_{k=N}^{2N-1}(-1)^k\binom{2N-1}{k}
+=
+(-1)^N\binom{2N-2}{N-1}.
+\]
+Substituting this into the preceding display yields
+\[
+\sum_{j=1}^N (-1)^{j+1}j\binom{2N}{N+j}
+=
+\binom{2N-2}{N-1}
+=
+D_N,
+\]
+hence
+\[
+\sum_{j=1}^N a_j^{(N)}=1.
+\]
+
+Next, for $0\le r\le N-2$, apply the standard finite-difference identity
+\[
+\sum_{k=0}^{2N}(-1)^k\binom{2N}{k}P(k)=0
+\]
+to the polynomial
+\[
+P(k)=(k-N)^{2r+2},
+\qquad
+\deg P=2r+2<2N.
+\]
+After the change of variables $j=k-N$, this gives
+\[
+\sum_{j=-N}^{N}(-1)^j\binom{2N}{N+j}j^{2r+2}=0.
+\]
+Since $2r+2$ is even and the $j=0$ term vanishes,
+\[
+\sum_{j=1}^{N}(-1)^j\binom{2N}{N+j}j^{2r+2}=0.
+\]
+Dividing by $D_N$ yields
+\[
+\sum_{j=1}^N a_j^{(N)}j^{2r+1}=0
+\qquad (0\le r\le N-2).
+\]
+
+Finally, since the signs alternate,
+\[
+\sum_{j=1}^N |a_j^{(N)}|
+=
+\frac{1}{D_N}\sum_{j=1}^N j\binom{2N}{N+j}.
+\]
+Using again
+\[
+j\binom{2N}{N+j}
+=
+N\!\left(\binom{2N-1}{N+j-1}-\binom{2N-1}{N+j}\right),
+\]
+this telescopes to
+\[
+\sum_{j=1}^N j\binom{2N}{N+j}
+=
+N\binom{2N-1}{N}.
+\]
+Therefore
+\[
+\sum_{j=1}^N |a_j^{(N)}|
+=
+N\frac{\binom{2N-1}{N}}{\binom{2N-2}{N-1}}
+=
+2N-1.
+\]
+The final moment bound is immediate from
+\[
+\left|\sum_{j=1}^N a_j^{(N)}j^k\right|
+\le
+\sum_{j=1}^N |a_j^{(N)}|\,j^k
+\le
+(2N-1)N^k.
+\qedhere
+\]
+\end{proof}
 
 \begin{proposition}[Corrected $N$-point transverse estimate for the full corrected scalar]
 \label{prop:corrected-n-point}
@@ -2767,7 +2894,6 @@ Proposition~\ref{prop:cutoff-compatibility}, all cutoff-dependent tail,
 jet-correction, and estimation contributions are already internal to the full
 corrected scalar $H_m(s)$; hence no external remainder is carried into
 $\Xi_\zeta^{(N)}(m)$. By Proposition~\ref{prop:boundary-estimate},
-it satisfies
 \[
 |H_m(s)|\ll_{\rho_0}\frac{L(m)S(m)^2}{Q^3}
 \qquad (|s|=\rho_0/Q).
@@ -2783,13 +2909,73 @@ with
 |c_{2r+1}(m)|\ll L(m)S(m)^2\,\rho_0^{-(2r+1)}.
 \]
 
-Applying the standard odd-moment cancellation with the coefficients
-$a_j^{(N)}$ kills the first $N-1$ odd terms of this full corrected
-expansion. The surviving moment factor is exponentially tame for
-$N=\alpha Q$, which gives
+Define
 \[
-|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}.
+\mu_k^{(N)}:=\sum_{j=1}^N a_j^{(N)}j^k.
 \]
+Then
+\[
+\Xi_\zeta^{(N)}(m)
+=
+\sum_{r\ge 0} c_{2r+1}(m)\frac{\mu_{2r+1}^{(N)}}{Q^{2r+4}}.
+\]
+By Lemma~\ref{lem:n-point-coefficients},
+\[
+\mu_{2r+1}^{(N)}=0
+\qquad (0\le r\le N-2),
+\]
+so
+\[
+\Xi_\zeta^{(N)}(m)
+=
+\sum_{r\ge N-1} c_{2r+1}(m)\frac{\mu_{2r+1}^{(N)}}{Q^{2r+4}}.
+\]
+Using Lemma~\ref{lem:n-point-coefficients} again,
+\[
+|\mu_{2r+1}^{(N)}|
+\le
+(2N-1)N^{2r+1}.
+\]
+Hence
+\[
+|\Xi_\zeta^{(N)}(m)|
+\ll
+L(m)S(m)^2
+\sum_{r\ge N-1}
+\rho_0^{-(2r+1)}
+\frac{(2N-1)N^{2r+1}}{Q^{2r+4}}.
+\]
+Equivalently,
+\[
+|\Xi_\zeta^{(N)}(m)|
+\ll
+\frac{(2N-1)L(m)S(m)^2}{Q^3}
+\sum_{r\ge N-1}
+\left(\frac{N}{\rho_0Q}\right)^{2r+1}.
+\]
+
+Now take
+\[
+N=\lfloor \alpha Q\rfloor
+\]
+with $0<\alpha<\rho_0$. Then
+\[
+\frac{N}{\rho_0Q}\le \frac{\alpha}{\rho_0}<1,
+\]
+so the tail is geometric and its first term is exponentially small in $Q$.
+Thus, for some $\delta>0$,
+\[
+\sum_{r\ge N-1}
+\left(\frac{N}{\rho_0Q}\right)^{2r+1}
+\ll e^{-\delta Q}.
+\]
+Since $(2N-1)/Q^3\ll 1$, it follows that
+\[
+|\Xi_\zeta^{(N)}(m)|
+\ll
+L(m)S(m)^2e^{-\delta Q},
+\]
+as claimed.
 \end{proof}
 
 We isolate the toy microscopic expansion in
@@ -2802,18 +2988,23 @@ Fix a compact interval
 \[
 D=[d_-,d_+]\subset(0,\infty),
 \]
-and let
+let $\rho_{\toy}$ and $u_0(D)$ be as in
+Lemma~\ref{lem:toy-microscopic-expansion}, and fix
+\[
+0<\alpha<\rho_{\toy}.
+\]
+For
+\[
+N=\lfloor \alpha Q\rfloor,
+\qquad
+s_j=\frac{j}{Q^2},
+\]
+define
 \[
 \Xi_{\toy}^{(N)}(u,d)
 :=
 \sum_{j=1}^N a_j^{(N)}\,
-\Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr),
-\qquad
-s_j=\frac{j}{Q^2},
-\]
-where the coefficients satisfy
-\[
-\sum_{j=1}^N a_j^{(N)}=1.
+\Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr).
 \]
 Then, for $d\in D$ and $|u|<u_0(D)$,
 \[
@@ -2829,78 +3020,111 @@ uniformly on compact $d$-ranges.
 \end{proposition}
 
 \begin{proof}
-By Lemma~\ref{lem:toy-microscopic-expansion}, one has
+By Lemma~\ref{lem:toy-microscopic-expansion},
 \[
-\Delta_{\toy}(u,d;s_j)=u^2M(d)+u^4E_j(u,d),
-\qquad
-\sup_{1\le j\le N}\|E_j(u,d)\|\ll 1
+\Delta_{\toy}(u,d;s)=u^2M(d)+u^4E(u,d;s),
 \]
-uniformly for $d\in D$. Applying $\Phi_K$ gives
+where $E(u,d;s)$ is analytic in $s$ on $|s|<\rho_{\toy}$ and uniformly
+bounded there for $d\in D$ and $|u|<u_0(D)$. Applying the linear
+functional $\Phi_K$, define
+\[
+R_{u,d}(s):=\Phi_K(E(u,d;s)).
+\]
+Then $R_{u,d}(s)$ is analytic on $|s|<\rho_{\toy}$, and by Cauchy's
+estimate its Taylor coefficients satisfy
+\[
+R_{u,d}(s)=\sum_{n\ge 0} b_n(u,d)s^n,
+\qquad
+|b_n(u,d)|\ll \rho_{\toy}^{-n},
+\]
+uniformly for $d\in D$ and $|u|<u_0(D)$.
+
+Therefore
 \[
 \Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr)
 =
-u^2\Phi_K(M(d))+u^4\Phi_K(E_j(u,d)).
+u^2\Phi_K(M(d))+u^4R_{u,d}(s_j),
 \]
-Summing over $j$ and using
-\[
-\sum_{j=1}^N a_j^{(N)}=1
-\]
-yields
+so
 \[
 \Xi_{\toy}^{(N)}(u,d)
 =
 u^2\Phi_K(M(d))
 +
-u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d)).
+u^4\sum_{j=1}^N a_j^{(N)}R_{u,d}(s_j).
 \]
-Since $\Phi_K$ is bounded and $\sup_j\|E_j(u,d)\|\ll 1$, the error term is
-$O(u^4)$, uniformly for $d\in D$. This proves the expansion.
+Expand $R_{u,d}$ at the microscopic nodes $s_j=j/Q^2$:
+\[
+\sum_{j=1}^N a_j^{(N)}R_{u,d}(s_j)
+=
+\sum_{n\ge 0} b_n(u,d)\frac{\mu_n^{(N)}}{Q^{2n}},
+\qquad
+\mu_n^{(N)}:=\sum_{j=1}^N a_j^{(N)}j^n.
+\]
 
-Because $\Phi_K(M(d))\neq 0$ for $d>0$, and is bounded away from $0$ on every
-compact interval $D\subset(0,\infty)$, the final estimate
+The constant term contributes
+\[
+b_0(u,d)\mu_0^{(N)}=b_0(u,d),
+\]
+since $\mu_0^{(N)}=\sum_j a_j^{(N)}=1$ by
+Lemma~\ref{lem:n-point-coefficients}. For the remaining terms, split into
+even and odd parts.
+
+For the even terms, Lemma~\ref{lem:n-point-coefficients} gives
+\[
+|\mu_{2\ell}^{(N)}|
+\le
+(2N-1)N^{2\ell},
+\]
+so
+\[
+\sum_{\ell\ge 1}
+|b_{2\ell}(u,d)|\frac{|\mu_{2\ell}^{(N)}|}{Q^{4\ell}}
+\ll
+(2N-1)\sum_{\ell\ge 1}
+\rho_{\toy}^{-2\ell}\frac{N^{2\ell}}{Q^{4\ell}}
+\ll
+\frac{1}{Q},
+\]
+because $N\asymp Q$.
+
+For the odd terms, Lemma~\ref{lem:n-point-coefficients} gives
+\[
+\mu_{2r+1}^{(N)}=0
+\qquad (0\le r\le N-2),
+\]
+so only the tail $r\ge N-1$ remains. Again using
+Lemma~\ref{lem:n-point-coefficients},
+\[
+\sum_{r\ge N-1}
+|b_{2r+1}(u,d)|\frac{|\mu_{2r+1}^{(N)}|}{Q^{4r+2}}
+\ll
+\frac{2N-1}{Q}
+\sum_{r\ge N-1}
+\left(\frac{N}{\rho_{\toy}Q}\right)^{2r+1}.
+\]
+Since $N=\lfloor \alpha Q\rfloor$ with $0<\alpha<\rho_{\toy}$, this tail
+is exponentially small in $Q$, hence in particular $O(1)$.
+
+Combining the constant, even, and odd contributions,
+\[
+\sum_{j=1}^N a_j^{(N)}R_{u,d}(s_j)=O(1),
+\]
+uniformly for $d\in D$ and $|u|<u_0(D)$. Therefore
+\[
+\Xi_{\toy}^{(N)}(u,d)
+=
+u^2\Phi_K(M(d))+O(u^4),
+\]
+uniformly in $d\in D$.
+
+Because $\Phi_K(M(d))\neq 0$ for $d>0$, and is bounded away from $0$ on
+every compact interval $D\subset(0,\infty)$, the final estimate
 \[
 |\Xi_{\toy}^{(N)}(u,d)|\asymp u^2
 \]
 follows.
 \end{proof}
-
-\begin{remark}[Work in progress: coefficient control in toy $N$-point preservation]
-\label{rem:wip-toy-n-point-coefficients}
-As written, Proposition~\ref{prop:toy-n-point-direct} uses only the
-normalization
-\[
-\sum_{j=1}^N a_j^{(N)}=1,
-\]
-but this alone does not justify the estimate
-\[
-u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d))=O(u^4)
-\]
-uniformly in $N$ and $Q$.
-
-Indeed, from
-\[
-\sup_j \|E_j(u,d)\|\ll 1
-\]
-one only obtains
-\[
-u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d))
-=
-O\!\Bigl(u^4\sum_{j=1}^N |a_j^{(N)}|\Bigr),
-\]
-so a uniform $O(u^4)$ remainder requires additional control on the coefficient
-family, for example a bound of the form
-\[
-\sum_{j=1}^N |a_j^{(N)}|\ll 1
-\qquad\text{or more generally}\qquad
-\sum_{j=1}^N |a_j^{(N)}|\le e^{o(Q)},
-\]
-which would still be negligible against the zeta-side exponential decay.
-Alternatively, one could prove an exact cancellation identity for the
-$u^4$-error term itself.
-
-Thus the proposition should presently be read as conditional on a
-coefficient-control input not yet written explicitly in the draft.
-\end{remark}
 
 On the toy side, Proposition~\ref{prop:toy-n-point-direct} gives
 \begin{equation}\label{eq:Xi-toy}
@@ -9555,7 +9779,8 @@ one has the expansion
 \[
 \Delta_{\toy}(u,d;s)=u^2M(d)+u^4E(u,d;s),
 \]
-where $M(d)$ is the toy anomaly matrix and
+where $M(d)$ is the toy anomaly matrix, $E(u,d;s)$ is analytic in $s$
+for $|s|<\rho_{\toy}$, and
 \[
 \sup_{\substack{d\in D\\ |s|<\rho_{\toy}\\ |u|<u_0(D)}} \|E(u,d;s)\|\ll 1.
 \]
@@ -9599,9 +9824,9 @@ and the expansion becomes
 \[
 \Delta_{\toy}(u,d;s)=u^2M(d)+u^4E(u,d;s),
 \]
-with $E$ uniformly bounded on compact parameter ranges. Restricting to the
-microscopic nodes $s_j=j/Q^2$ gives the stated uniform bound for
-$E_j(u,d)$.
+with $E$ analytic in $s$ and uniformly bounded on compact parameter
+ranges. Restricting to the microscopic nodes $s_j=j/Q^2$ gives the stated
+uniform bound for $E_j(u,d)$.
 \end{proof}
 
 \begin{remark}[Work in progress: toy microscopic expansion]
