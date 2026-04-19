@@ -9699,6 +9699,90 @@ Proposition~\ref{prop:direct-q7-total-delta7-nonzero}, which gives
 on $J$.
 \end{proof}
 
+\begin{proposition}[Exact $x$-coordinate identities for the lifted $4$-point invariants]
+\label{prop:exact-x-coordinate-identities-lifted-four-point}
+On a good $v_5$-patch, write
+\[
+x=\frac{v_5}{c},
+\qquad
+Y=\frac{u_5}{c},
+\qquad
+S=\sigma_v=\frac{\Delta_7}{c\,v_5}.
+\]
+Then:
+\begin{enumerate}
+\item the lifted planar curvature numerator satisfies
+\[
+K_v=(x')^3\,S''(x);
+\]
+\item the lifted $4$-point Wronskian satisfies
+\[
+T_v=(x')^6\,W_x(1,Y,x,S)
+=(x')^6\bigl(S''Y'''-S'''Y''\bigr);
+\]
+\item equivalently,
+\[
+T_v=(x')^6\,S''^{\,2}\,\frac{d}{dx}\!\left(\frac{Y''}{S''}\right)
+=K_v^{\,2}\,\frac{d}{dx}\!\left(\frac{Y''}{S''}\right).
+\]
+\end{enumerate}
+In particular, $K_v$ and $S''$ have the same zero set and the same
+vanishing order on every good $v_5$-patch.
+\end{proposition}
+
+\begin{proof}
+By definition,
+\[
+K_v=x'\sigma_v''-\sigma_v' x''.
+\]
+Since $S=\sigma_v$ as a function of the local coordinate $x$, we have
+\[
+\sigma_v'=S' x',
+\qquad
+\sigma_v''=S''(x')^2+S' x'',
+\]
+hence
+\[
+K_v=x'\bigl(S''(x')^2+S'x''\bigr)-S' x' x''=(x')^3S''.
+\]
+
+Next,
+\[
+T_v=W_h(1,Y,x,S).
+\]
+Under reparametrization $h\mapsto x(h)$, a $4\times4$ Wronskian gains the
+factor $(x')^{0+1+2+3}=(x')^6$, so
+\[
+T_v=(x')^6\,W_x(1,Y,x,S).
+\]
+Now
+\[
+W_x(1,Y,x,S)
+=
+\det\!\begin{pmatrix}
+1&Y&x&S\\
+0&Y'&1&S'\\
+0&Y''&0&S''\\
+0&Y'''&0&S'''
+\end{pmatrix}
+=
+S''Y'''-S'''Y'',
+\]
+which proves the second identity.
+
+Finally,
+\[
+S''Y'''-S'''Y''
+=
+S''^{\,2}\,\frac{d}{dx}\!\left(\frac{Y''}{S''}\right),
+\]
+and using $K_v=(x')^3S''$ gives
+\[
+(x')^6S''^{\,2}=K_v^{\,2}.
+\]
+This yields the third identity.
+\end{proof}
+
 \begin{corollary}[Local defect-free four-point exclusion on lifted ECT subintervals]
 \label{cor:local-four-point-exclusion-lifted-vpatch}
 Let $J\subset\{c\neq 0,\ M\neq 0,\ v_5\neq 0\}$ be a connected interval on
@@ -10044,7 +10128,7 @@ u=\lambda_m(-a)+O(a^2).
 This proves the classification.
 \end{proof}
 
-\begin{remark}[Nonmixed $4$-point zeros can carry preexisting close branches]
+\begin{remark}[Exact nonmixed jet reduction for the lifted $4$-point branch]
 \label{rem:nonmixed-four-point-zeros-can-carry-preexisting-branches}
 At a nonmixed lifted point
 \[
@@ -10052,55 +10136,52 @@ K_v(0)\neq 0,
 \qquad
 T_v(0)=0,
 \]
-the local model may be affine-normalized to
+Proposition~\ref{prop:exact-x-coordinate-identities-lifted-four-point} gives
 \[
-Q_v(x)=(x^n,x,x^2),
-\qquad
-n\ge 3,
+T_v=(x')^6\,S''^{\,2}\,\frac{d}{dx}\!\left(\frac{Y''}{S''}\right).
 \]
-so that
+Since $K_v(0)\neq 0$, one has $S''(0)\neq 0$, so after analytic
+reparametrization and affine target normalization preserving coplanarity one may
+write the lifted germ as
 \[
-\operatorname{ord}_0 T_v=n-3.
+Q_v(\xi)=\bigl(\widetilde Y(\xi),\,\xi,\,\xi^2\bigr),
+\qquad
+\widetilde Y(0)=\widetilde Y'(0)=\widetilde Y''(0)=0.
+\]
+In these normalized coordinates,
+\[
+W_\xi(1,\widetilde Y,\xi,\xi^2)=2\,\widetilde Y'''.
+\]
+Thus the nonmixed lifted $4$-point problem is exactly the jet problem of
+excluding odd-order zeros of $\widetilde Y'''$.
+
+In particular, the low-order dangerous nonmixed cases are exactly:
+\[
+\operatorname{ord}_0 T_v=1
+\iff
+\widetilde Y'''(0)=0,\ \widetilde Y^{(4)}(0)\neq 0,
+\]
+\[
+\operatorname{ord}_0 T_v=3
+\iff
+\widetilde Y^{(3)}(0)=\widetilde Y^{(4)}(0)=\widetilde Y^{(5)}(0)=0,\
+\widetilde Y^{(6)}(0)\neq 0,
+\]
+\[
+\operatorname{ord}_0 T_v=5
+\iff
+\widetilde Y^{(3)}(0)=\cdots=\widetilde Y^{(7)}(0)=0,\
+\widetilde Y^{(8)}(0)\neq 0.
 \]
 
-The exact four-point coplanarity determinant of this model is the generalized
-Vandermonde for exponents
-\[
-0,\ 1,\ 2,\ n,
-\]
-hence factors as
-\[
-\Delta_4^{\mathrm{model}}
-=
-\pm V_4\,h_{n-3},
-\]
-where $V_4$ is the ordinary Vandermonde and $h_{n-3}$ is the complete
-homogeneous symmetric polynomial of degree $n-3$.
+So the nonmixed $4$-point endgame has been reduced to the finite jet problem:
+rule out leading terms of $\widetilde Y$ in degrees $4,6,8$.
 
-In particular, the case $n=4$ gives
-\[
-\Delta_4^{\mathrm{model}}
-=
-\pm V_4\,e_1,
-\qquad
-e_1(x_1,x_2,x_3,x_4)=x_1+x_2+x_3+x_4.
-\]
-Thus there are exact shrinking coplanar quadruples near $0$, for example any
-distinct
-\[
-x_1<x_2<x_3<0<x_4,
-\qquad
-x_1+x_2+x_3+x_4=0.
-\]
-
-So on the lifted $4$-point side, the strongest generic local statements are:
-shrinking-core concentration into $\{T_v=0\}$, parity-based
-birth/crossing control, and the mixed-locus analysis. A blanket
-no-preexisting-branch theorem near nonmixed finite-order $T_v$-zeros is
-false in generic lifted geometry.
+This is strictly sharper than the earlier qualitative statement that
+nonmixed odd-order $T_v$-zeros can carry preexisting close branches.
 \end{remark}
 
-\begin{remark}[Mixed order bookkeeping and lack of generic parity obstruction]
+\begin{remark}[Exact mixed jet reduction and low-order dangerous list]
 \label{rem:mixed-order-bookkeeping-no-generic-parity-obstruction}
 At a mixed lifted point
 \[
@@ -10108,27 +10189,60 @@ K_v(0)=0,
 \qquad
 T_v(0)=0,
 \]
-the current affine-normalized model is
-\[
-Q_v(x)\sim (x^n,x,x^m),
-\qquad
-m\ge 3,
-\qquad
-n>m.
-\]
-If
+set
 \[
 r:=\operatorname{ord}_0 K_v,
 \qquad
-s:=\operatorname{ord}_0 T_v,
+s:=\operatorname{ord}_0 T_v.
 \]
-then the model exponents satisfy
+By Proposition~\ref{prop:exact-x-coordinate-identities-lifted-four-point},
 \[
-r=m-2,
-\qquad
-s=m+n-5,
+K_v=(x')^3S'',
 \]
-hence
+so on a good $v_5$-patch one has
+\[
+S''(x)=\kappa x^r+O(x^{r+1}),
+\qquad \kappa\neq 0.
+\]
+After removing affine terms and integrating twice,
+\[
+S(x)=\frac{\kappa}{(r+1)(r+2)}x^{r+2}+O(x^{r+3}).
+\]
+Thus the mixed exponent $m$ of the monomial model
+\[
+Q_v(x)\sim (x^n,\ x,\ x^m)
+\]
+is exactly
+\[
+m=r+2.
+\]
+
+Now let $n$ be the first degree of $Y(x)$ not absorbed by
+$\operatorname{span}\{1,x,S\}$, so that
+\[
+Y(x)=\alpha x^n+O(x^{n+1}),
+\qquad \alpha\neq 0,
+\qquad n>r+2.
+\]
+Using
+\[
+T_v=(x')^6\bigl(S''Y'''-S'''Y''\bigr),
+\]
+one finds
+\[
+T_v
+=
+(x')^6\,
+\kappa\alpha\,n(n-1)\bigl(n-r-2\bigr)x^{n+r-3}
++O(x^{n+r-2}),
+\]
+and since $n>r+2$, the leading coefficient is nonzero. Therefore
+\[
+s=n+r-3,
+\qquad
+n=s-r+3.
+\]
+So the mixed exponents are exactly
 \[
 m=r+2,
 \qquad
@@ -10137,63 +10251,161 @@ n=s-r+3,
 s\ge 2r.
 \]
 
-The immediately dangerous parity sector in the mixed model is
+The dangerous low-order mixed models are therefore finite and explicit:
 \[
-n\ \text{even}
-\qquad\Longleftrightarrow\qquad
-s-r\ \text{odd}.
+(m,n)=(3,4),\ (3,6),\ (4,6),
+\]
+equivalently
+\[
+(r,s)=(1,2),\ (1,4),\ (2,5).
 \]
 
-However, generic smooth lifted geometry imposes no further parity restriction.
-Indeed, the smooth local model
-\[
-c(x)\equiv 1,
-\qquad
-v_5(x)=1+x,
-\qquad
-S(x)=x^m,
-\qquad
-Y(x)=x^n
-\]
-lies on a good $v_5$-patch and realizes arbitrary integers
-\[
-m\ge 3,
-\qquad
-n>m,
-\]
-hence arbitrary order pairs
-\[
-r\ge 1,
-\qquad
-s\ge 2r.
-\]
-
-Thus any exclusion of dangerous mixed patterns must come from RH-specific jet
-identities or from additional algebraic compatibility conditions for true bad
-four-point cores, not from generic lifted differential geometry alone.
+Thus the mixed lifted $4$-point problem has also been reduced to a finite jet
+obstruction list: rule out those three order pairs in the actual geometry.
 \end{remark}
 
-\begin{remark}[Next algebraic target on the four-point branch]
+\begin{proposition}[Realization lemma for lifted germs]
+\label{prop:realization-lemma-lifted-germs}
+Let $\widetilde Y(\xi)$ and $\widetilde S(\xi)$ be arbitrary analytic germs
+at $\xi=0$. Define
+\[
+c(\xi)\equiv 1,
+\qquad
+v_5(\xi):=1+\xi,
+\qquad
+u_5(\xi):=\widetilde Y(\xi),
+\qquad
+\Delta_7(\xi):=(1+\xi)\widetilde S(\xi).
+\]
+Then on a sufficiently small neighborhood of $0$,
+\[
+c\neq 0,
+\qquad
+v_5\neq 0,
+\qquad
+M=c\,v_5'-c'v_5=1\neq 0,
+\]
+so this is a good $v_5$-patch. The normalized lifted coordinates are
+\[
+x=\frac{v_5}{c}=1+\xi,
+\qquad
+Y=\frac{u_5}{c}=\widetilde Y(\xi),
+\qquad
+S=\frac{\Delta_7}{c\,v_5}=\widetilde S(\xi).
+\]
+After the affine shift $x\mapsto x-1$, the lifted germ becomes
+\[
+Q_v(\xi)=\bigl(\widetilde Y(\xi),\,\xi,\,\widetilde S(\xi)\bigr).
+\]
+
+Thus every analytic pair of germs $(\widetilde Y,\widetilde S)$ occurs, after
+affine normalization, as the lifted pair $(Y,S)$ on some good $v_5$-patch.
+\end{proposition}
+
+\begin{proof}
+The displayed formulas are immediate from the definitions. The hypotheses
+$c\neq 0$, $v_5\neq 0$, and $M=1\neq 0$ hold on a sufficiently small
+neighborhood of $0$, and the formulas for $x,Y,S$ are direct.
+\end{proof}
+
+\begin{corollary}[No new jet obstruction is available at the current lifted level]
+\label{cor:no-new-jet-obstruction-current-lifted-level}
+No identity involving only
+\[
+c,\qquad v_5,\qquad u_5,\qquad \Delta_7
+\]
+and their derivatives can exclude the low-order dangerous lifted $4$-point
+patterns listed above.
+
+In particular, the dangerous nonmixed models
+\[
+Q_v(\xi)=(\xi^n,\xi,\xi^2),
+\qquad n=4,6,8,
+\]
+and the dangerous mixed models
+\[
+Q_v(\xi)=(\xi^n,\xi,\xi^m),
+\qquad (m,n)=(3,4),\ (3,6),\ (4,6),
+\]
+are all realizable at the present lifted level.
+
+Consequently, any RH-specific obstruction to these low-order $4$-point
+patterns must use information not encoded in the current lifted variables
+\[
+(c,v_5,u_5,\Delta_7)
+\]
+alone. It must come from deeper source-level corrected quotient-germ structure,
+matrix-level identities behind $(u_5,\Delta_7)$, or an additional symmetry
+not yet visible in the present lifted formulation.
+\end{corollary}
+
+\begin{proof}
+Apply Proposition~\ref{prop:realization-lemma-lifted-germs} with
+\[
+(\widetilde Y,\widetilde S)=(\xi^n,\xi^2)
+\]
+for the nonmixed cases, and with
+\[
+(\widetilde Y,\widetilde S)=(\xi^n,\xi^m)
+\]
+for the mixed cases.
+\end{proof}
+
+\begin{remark}[Work in progress: a dream parity identity]
+\label{rem:wip-dream-parity-identity-four-point}
+After nonmixed normalization
+\[
+Q_v(\xi)=\bigl(\widetilde Y(\xi),\,\xi,\,\xi^2\bigr),
+\]
+a parity identity of the form
+\[
+\widetilde Y(-\xi)=-\widetilde Y(\xi)
+\]
+would immediately eliminate all currently dangerous nonmixed low-order jet
+patterns, since it would forbid leading terms of degrees $4,6,8$, and would
+also remove the dangerous mixed sector with even $n$. The present lifted
+formalism does not supply such an identity; if it exists, it must come from a
+deeper RH-specific symmetry not yet visible in the current quotient-germ
+package.
+\end{remark}
+
+\begin{remark}[What the four-point branch now reduces to]
 \label{rem:next-algebraic-target-four-point}
-The lifted four-point geometry shows that generic coplanarity alone is too
-weak: nonmixed odd-order $T_v$-zeros can already support a preexisting close
-branch, and the mixed model can admit dangerous generalized-Vandermonde
-coplanar quadruples.
+The lifted $4$-point geometry is now sharply reduced.
 
-Accordingly, the next algebraic target for the bad four-point core is not
-another generic local exclusion theorem, but an extra compatibility condition
-coming from the source-level corrected finite-core relation itself. The right
-question is therefore:
+On the nonmixed side, the exact invariant identity
+\[
+T_v=(x')^6\,S''^{\,2}\,\frac{d}{dx}\!\left(\frac{Y''}{S''}\right)
+\]
+shows that the low-order dangerous cases are precisely the odd-order zeros of
+$\widetilde Y'''$ of orders $1,3,5$ after normalizing the lower triple to
+\[
+(1,\xi,\xi^2).
+\]
 
-\begin{quote}
-What additional algebraic condition does a true bad four-point core impose on a
-local lifted coplanarity branch, beyond the vanishing of the lifted four-point
-determinant?
-\end{quote}
+On the mixed side, the dangerous low-order cases are precisely the three order
+pairs
+\[
+(r,s)=(1,2),\ (1,4),\ (2,5),
+\]
+equivalently
+\[
+(m,n)=(3,4),\ (3,6),\ (4,6).
+\]
 
-Any successful closure of the four-point branch will have to use that extra
-compatibility condition, or else rule out the dangerous mixed exponent patterns
-by RH-specific jet identities.
+By Corollary~\ref{cor:no-new-jet-obstruction-current-lifted-level}, these
+patterns cannot be excluded by any identity involving only the present lifted
+variables
+\[
+(c,v_5,u_5,\Delta_7)
+\]
+and their derivatives.
+
+Accordingly, the next serious four-point target is no longer another lifted jet
+computation. Any closure of the four-point branch must come from deeper
+source-level corrected quotient-germ structure, matrix-level identities behind
+$(u_5,\Delta_7)$, or a hidden RH-specific symmetry not yet encoded in the
+present lifted formulation.
 \end{remark}
 
 \begin{remark}[Work in progress: what remains in the lifted order-$7$ geometry]
@@ -10237,10 +10449,14 @@ lemma. It is a combination of:
 \[
 E_{\ge2}^{(3)},\qquad E_{\ge2}^{(5)},\qquad \overline E_{\ge2}^{(7)};
 \]
-\item extra algebraic compatibility conditions for true bad four-point cores,
-beyond generic coplanarity of the lifted points;
-\item and, on the mixed side, RH-specific jet restrictions excluding the
-dangerous exponent patterns.
+\item extra algebraic compatibility conditions for true bad four-point cores
+coming from a deeper source-level corrected quotient-germ construction, not from
+the present lifted coordinates alone;
+\item and, on the mixed side, RH-specific restrictions excluding the three
+explicit low-order order pairs
+\[
+(r,s)=(1,2),\ (1,4),\ (2,5).
+\]
 \end{itemize}
 \end{remark}
 
