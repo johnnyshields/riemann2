@@ -2917,37 +2917,103 @@ Using \eqref{eq:u2-calibration},
 
 \begin{remark}[Work in progress: calibrated size versus microscopic toy regime]
 \label{rem:wip-calibration-small-u}
-The calibrated relation
+As presently written, the final calibration freezes the comparison scale at a
+fixed value $x=x_0(D)$, which yields
 \[
-u^2\asymp \frac{x_0}{B_\zeta(m)}S(m)
+u^2 \asymp \frac{x_0}{B_\zeta(m)}\,S(m).
 \]
-must still be reconciled with the small-parameter regime required by the toy
-microscopic expansion.
-
-Indeed, Proposition~\ref{prop:toy-n-point-direct} is proved only for
-\[
-|u|<u_0(D),
-\]
-where $u_0(D)>0$ is fixed independently of $Q$.  However, with only the crude
-global bounds used later in the final contradiction,
+With only the crude global bounds used later in the contradiction,
 \[
 S(m)\ll Q^2,
 \qquad
 B_\zeta(m)\asymp Q,
 \]
-the calibration gives at best
+this gives at best
 \[
 u^2\ll x_0 Q,
 \]
-which does not by itself force $u\to 0$ as $Q\to\infty$.
+and therefore does not by itself force the calibrated toy parameter $u$ to
+lie in the microscopic toy regime $|u|<u_0(D)$ required by
+Proposition~\ref{prop:toy-n-point-direct}.
 
-Accordingly, one still needs an additional input ensuring that the calibrated
-toy parameter remains in the microscopic regime in which the toy expansion is
-valid.  Conceptually, this could come from a sharper upper bound on $S(m)$,
-from a choice of $x_0$ that shrinks with height, or from a strengthening of
-the toy analysis to a range of $u$ large enough to contain the calibrated
-scale.  Until such an input is made explicit, the final comparison should be
-read as assuming that the calibrated $u$ lies inside the uniform toy regime.
+A plausible repair is to avoid freezing the scale at $x_0(D)$, and instead
+to choose the comparison scale adaptively:
+\[
+x=x(m)\in (0,x_0(D)].
+\]
+Since the pairing and calibration statements are naturally formulated for
+$0<x\le x_0(D)$, one expects to choose $x(m)$ so that
+\[
+u^2 \asymp \frac{x(m)}{B_\zeta(m)}\,S(m)
+\]
+is forced to remain below the toy threshold $u_0(D)^2$.  For example, if
+the implicit upper bound
+\[
+u^2 \le C\,\frac{x}{B_\zeta(m)}\,S(m)
+\]
+is available uniformly, then one may try to take
+\[
+x(m):=
+\min\!\left\{
+x_0(D),\;
+\frac{u_0(D)^2}{2C}\frac{B_\zeta(m)}{S(m)}
+\right\},
+\]
+which would guarantee
+\[
+u^2\le \frac{u_0(D)^2}{2}.
+\]
+
+To make this repair rigorous, however, the draft must still verify that the
+entire calibration chain remains valid uniformly in such a variable
+$x$-regime.  In particular, one still needs to check all of the following:
+
+\begin{enumerate}
+\item The pairing and denominator estimates remain uniform for all
+$0<x\le x_0(D)$, including the regime $x\to 0$, so that the calibration
+functional is still well-defined and the main term continues to scale linearly
+in $x$.
+
+\item The fixed-scaled statements currently written in terms of
+\[
+x=B_\zeta(m)\sigma,
+\qquad
+|\sigma|\asymp Q^{-1},
+\]
+can be upgraded to a variable/shrinking regime of the form
+\[
+x=B_\zeta(m)\sigma,
+\qquad
+|\sigma|\le c\,Q^{-1},
+\]
+or an equivalent $0<x\le x_0(D)$ formulation, without loss of the transfer,
+whitening, and calibration estimates used later.
+
+\item The remainder bound after applying the calibrated functional remains
+uniform in the variable-$x$ regime; in particular, one needs the normalized
+error estimate to stay independent of $x$, or at least sufficiently mild as
+$x\to 0$, so that shrinking $x$ to enforce $|u|<u_0(D)$ does not
+destroy the zeta-side control.
+
+\item The cutoff choice required in the calibration remainder estimate can
+still be made uniformly when $x=x(m)$ is allowed to shrink.  Concretely, one
+must check that the condition
+\[
+R^3 \gg \frac{1}{xQ\,S(m)}
+\]
+remains compatible with the admissible cutoff regime under the adaptive choice
+of $x(m)$.
+
+\item The final contradiction theorem must be reformulated so that the toy-side
+main term is compared at the variable scale $x(m)$, rather than at the fixed
+scale $x_0(D)$, and one must verify that the resulting lower bound still
+dominates the exponentially small zeta-side bound.
+\end{enumerate}
+
+Accordingly, the small-$u$ issue does not presently appear to be a
+fundamental obstruction, but the current argument should be read as
+conditional on a variable-$x$ calibration rewrite that has not yet been
+carried out in the draft.
 \end{remark}
 
 The following remark records the current status of the toy model in the
@@ -8140,70 +8206,544 @@ identically. A minimal bad core is a bad normalized finite core with minimal
 number of constituent pairs.
 \end{definition}
 
-\begin{theorem}[Minimal bad core rigidity]
-\label{thm:minimal-bad-core-rigidity}
-Assume there exists a genuine normalized finite bad core, and choose one with
-minimal size $k$. Write its quotient odd germ as
+\begin{theorem}[Defect-free quintic circuit reduction]
+\label{thm:defect-free-quintic-circuit-reduction}
+Let
 \[
-F_{\core}(z)=\sum_{j=1}^k a_jF_{h_j}(z)+\mathcal I_{\ge 2}(z),
+F_{\core}(z)=\sum_{j=1}^k a_jF_{h_j}(z)+\mathcal I_{\ge 2}(z)
 \]
-where $\mathcal I_{\ge 2}(z)$ contains all multi-pair interaction terms of
-order at least quadratic in the constituent amplitudes. Then all constituent
-one-pair germs $F_{h_j}$ lie in a common exceptional projective
-configuration:
-\begin{enumerate}
-\item their cubic leading lines $\ell_{h_j}$ lie in a common projective
-coincidence locus;
-\item after quotienting by that common leading line, their first residual
-classes $\overline v_1(h_j)$ also lie in a common residual coincidence
-locus.
-\end{enumerate}
-Consequently the parameters of a minimal bad core are confined to a highly
-rigid lower-dimensional exceptional set.
+be a normalized finite core, and assume that the multi-pair interaction germ
+$\mathcal I_{\ge 2}(z)$ contributes nothing to the cubic and quintic
+coefficients. Write
+\[
+A_5^{\mathfrak f}(h)=u_5(h)I+v_5(h)S,
+\qquad
+V(h):=\bigl(c(h),u_5(h),v_5(h)\bigr)\in\mathbf C^3,
+\]
+and on $\{c\neq 0\}$ define
+\[
+\Xi(h):=\left(\frac{u_5(h)}{c(h)},\frac{v_5(h)}{c(h)}\right)\in\mathbf C^2.
+\]
+If
+\[
+F_{\core}(z)\equiv 0,
+\]
+then
+\[
+\sum_{j=1}^k a_j\,V(h_j)=0.
+\]
+Equivalently, with
+\[
+b_j:=a_j\,c(h_j),
+\]
+one has
+\[
+\sum_{j=1}^k b_j=0,
+\qquad
+\sum_{j=1}^k b_j\,\Xi(h_j)=0.
+\]
+Thus the points $\Xi(h_j)$ are affinely dependent.
 \end{theorem}
 
-\begin{proof}[Proof sketch]
-Take the leading cubic coefficient of the identity
+\begin{proof}
+Taking the cubic coefficient in the identity
 \[
-F_{\core}(z)\equiv 0.
+F_{\core}(z)\equiv 0
 \]
-As in the two-pair case, vanishing forces the constituent cubic leading lines
-to satisfy a common projective coincidence relation, modulo the interaction
-corrections. Passing to the residual quotient by this common leading line
-and taking the next nontrivial coefficient yields the corresponding residual
-coincidence relation for the first residual classes. Since the core is
-minimal, no proper subcollection of constituent pairs can already form a bad
-core, so these coincidence relations must hold simultaneously across the
-full collection. Hence the core parameters lie in a lower-dimensional
-exceptional configuration.
+and using the hypothesis that $\mathcal I_{\ge2}$ contributes nothing at
+cubic order gives
+\[
+\sum_{j=1}^k a_j\,c(h_j)=0.
+\]
+Taking the quintic fixed-sector coefficient and using the corresponding
+defect-free hypothesis at order $5$ gives
+\[
+\sum_{j=1}^k a_j\,A_5^{\mathfrak f}(h_j)=0.
+\]
+Since
+\[
+A_5^{\mathfrak f}(h_j)=u_5(h_j)I+v_5(h_j)S
+\]
+and $I,S$ are linearly independent, this is equivalent to
+\[
+\sum_{j=1}^k a_j\,u_5(h_j)=0,
+\qquad
+\sum_{j=1}^k a_j\,v_5(h_j)=0.
+\]
+Together these three identities are exactly
+\[
+\sum_{j=1}^k a_j\,V(h_j)=0.
+\]
+If $c(h_j)\neq 0$ for all $j$, dividing the last two identities by
+$c(h_j)$ after setting $b_j=a_jc(h_j)$ yields
+\[
+\sum_{j=1}^k b_j=0,
+\qquad
+\sum_{j=1}^k b_j\,\Xi(h_j)=0,
+\]
+which is the affine dependence statement.
 \end{proof}
 
-\begin{remark}[Work in progress]
-\label{rem:wip-minimal-bad-core-rigidity}
-This theorem records the intended endgame architecture rather than a completed
-contradiction. The minimal-bad-core strategy appears to be the right framework
-for extending the one-pair and two-pair rigidity analysis to general finite
-cores, but the present draft has not yet proved that the resulting exceptional
-configuration is empty. In the later geometric reformulation, the remaining
-generic obstruction is a global line-incidence problem for the normalized
+\begin{corollary}[Defect-free minimal quintic circuits have size at most four]
+\label{cor:defect-free-minimal-quintic-circuits}
+In the defect-free order-$\le 5$ model of
+Theorem~\ref{thm:defect-free-quintic-circuit-reduction}, every minimal bad
+core has size at most $4$. More precisely:
+\begin{enumerate}
+\item if $k=2$, then $\Xi(h_1)=\Xi(h_2)$;
+\item if $k=3$, then the three points $\Xi(h_1),\Xi(h_2),\Xi(h_3)$ are
+collinear;
+\item if $k=4$, then the four points $\Xi(h_1),\dots,\Xi(h_4)$ form an
+affine circuit in $\mathbf C^2$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:defect-free-quintic-circuit-reduction}, a minimal
+defect-free bad core produces a minimal affine dependence among finitely many
+points of the affine plane $\mathbf C^2$. Such a minimal affine dependent
+set has size at most $4$. The cases $k=2,3,4$ are the standard affine
+configurations in dimension $2$: coincidence, collinear triple, or
+four-point affine circuit.
+\end{proof}
+
+\begin{definition}[Lifted $v_5$-patch coordinates]
+\label{def:lifted-v-patch-coordinates}
+On a connected interval $U\subset\{c\neq 0,\ v_5\neq 0\}$, define
+\[
+x(h):=\frac{v_5(h)}{c(h)},
+\qquad
+y(h):=\frac{u_5(h)}{c(h)},
+\qquad
+\sigma_v(h):=\frac{\Delta_7(h)}{c(h)\,v_5(h)}.
+\]
+The associated lifted planar and space curves are
+\[
+\Lambda_v(h):=\bigl(x(h),\sigma_v(h)\bigr)\in\mathbf C^2,
+\qquad
+Q_v(h):=\bigl(y(h),x(h),\sigma_v(h)\bigr)\in\mathbf C^3.
+\]
+\end{definition}
+
+\begin{proposition}[Defect-free lifted affine dependence on a $v_5$-patch]
+\label{prop:defect-free-lifted-affine-dependence-vpatch}
+Let
+\[
+F_{\core}(z)=\sum_{j=1}^k a_jF_{h_j}(z)+\mathcal I_{\ge 2}(z)
+\]
+be a normalized finite core, and assume:
+\begin{enumerate}
+\item all parameters $h_j$ lie in one connected interval
+$U\subset\{c\neq 0,\ v_5\neq 0\}$;
+\item the multi-pair interaction germ $\mathcal I_{\ge2}(z)$ contributes
+nothing to the cubic, quintic, or septic coefficients.
+\end{enumerate}
+Then, after choosing on $U$ the local septic gauge $v_7=0$, the vanishing
+identity
+\[
+F_{\core}(z)\equiv 0
+\]
+implies
+\[
+\sum_{j=1}^k b_j=0,
+\qquad
+\sum_{j=1}^k b_j\,y(h_j)=0,
+\qquad
+\sum_{j=1}^k b_j\,x(h_j)=0,
+\qquad
+\sum_{j=1}^k b_j\,\sigma_v(h_j)=0,
+\]
+where $b_j:=a_jc(h_j)$. Equivalently, the points $Q_v(h_j)\in\mathbf C^3$
+are affinely dependent.
+\end{proposition}
+
+\begin{proof}
+The cubic and quintic identities are exactly those in
+Theorem~\ref{thm:defect-free-quintic-circuit-reduction}, so after setting
+$b_j=a_jc(h_j)$ we obtain
+\[
+\sum_{j=1}^k b_j=0,
+\qquad
+\sum_{j=1}^k b_j\,y(h_j)=0,
+\qquad
+\sum_{j=1}^k b_j\,x(h_j)=0.
+\]
+On the interval $U$ we may choose the local septic gauge $v_7=0$. Then
+\[
+u_7(h)=\frac{\Delta_7(h)}{v_5(h)}=c(h)\,\sigma_v(h).
+\]
+Since the septic interaction is assumed absent, taking the septic fixed-sector
+coefficient of $F_{\core}\equiv 0$ yields
+\[
+\sum_{j=1}^k a_j\,u_7(h_j)=0.
+\]
+Substituting $u_7(h_j)=c(h_j)\sigma_v(h_j)$ gives
+\[
+\sum_{j=1}^k b_j\,\sigma_v(h_j)=0.
+\]
+Hence the points $Q_v(h_j)$ are affinely dependent.
+\end{proof}
+
+\begin{proposition}[Linear independence of $1,u_5/c,v_5/c$]
+\label{prop:linear-independence-one-u5-over-c-v5-over-c}
+Let $J$ be a connected open interval on which
+\[
+c\neq 0,
+\qquad
+M\neq 0.
+\]
+Then the three functions
+\[
+1,
+\qquad
+\frac{u_5}{c},
+\qquad
+\frac{v_5}{c}
+\]
+are linearly independent on $J$.
+\end{proposition}
+
+\begin{proof}
+Assume there exist constants $A,B,C\in\mathbf C$, not all zero, such that
+\[
+A+B\frac{u_5}{c}+C\frac{v_5}{c}\equiv 0
+\qquad\text{on }J.
+\]
+Multiplying by $c$ gives
+\[
+A\,c+B\,u_5+C\,v_5\equiv 0.
+\]
+
+If $B=0$, then
+\[
+A\,c+C\,v_5\equiv 0,
+\]
+so $v_5/c$ is constant on $J$. But
+\[
+\left(\frac{v_5}{c}\right)'=\frac{M}{c^2},
+\]
+and $M\neq 0$ on $J$. This is impossible.
+
+Hence $B\neq 0$, and after renormalization we may write
+\[
+u_5=\alpha\,v_5+\beta\,c
+\]
+for constants $\alpha,\beta$.
+
+Now isolate the graded slice corresponding to
+\[
+(K_1,\eta_2,q^{(5)}).
+\]
+By Lemmas~\ref{lem:quintic-trace-witness}
+and~\ref{lem:no-cancellation-quintic-trace}, the tagged monomial
+\[
+\kappa(h)\,\eta_2(h)\,q^{(5)}(h)
+\]
+occurs with nonzero coefficient in $\operatorname{tr}J_5^{\pair}(h)$.
+Since
+\[
+A_5^{\mathfrak f}(h)=u_5(h)I+v_5(h)S
+\]
+and $S$ is traceless, this means exactly that the same tagged monomial
+occurs in the $I$-coefficient $u_5(h)$.
+
+It cannot occur in $c(h)$, since $c$ is cubic and carries no quintic
+$q^{(5)}$-slice. It also cannot occur in $v_5(h)$. Indeed, on the tagged
+slice, the only surviving quintic $K_1$-transport channels are those already
+isolated in Lemma~\ref{lem:no-cancellation-quintic-trace}. For the channel
+\[
+X_0JX_4-X_4JX_0,
+\]
+Lemma~\ref{lem:whitening-parity} shows that the relevant
+$(\eta_2,q^{(5)})$-slice is diagonal, hence contributes only to the
+$I$-component. For the commutator channel
+\[
+X_3JX_1-X_1JX_3,
+\]
+Proposition~\ref{prop:explicit-quintic-fixed-sector} gives
+\[
+v_5^{(\mathrm{comm})}=\gamma u-\alpha w.
+\]
+On the tagged slice the $\eta_2$-input in $X_1$ is purely off-diagonal, so
+$u=w=0$, while the $q^{(5)}$-input in $X_3$ is diagonal. Hence
+\[
+v_5^{(\mathrm{comm})}=0
+\]
+on that tagged slice.
+
+Thus the monomial $\kappa\eta_2 q^{(5)}$ occurs in $u_5$ but in neither
+$v_5$ nor $c$, contradicting
+\[
+u_5=\alpha\,v_5+\beta\,c.
+\]
+This proves the claim.
+\end{proof}
+
+\begin{proposition}[Non-affinity of the lifted septic scalar]
+\label{prop:sigmav-not-affine-in-x}
+Let $J$ be a connected open interval contained in the quintic-generic region
+and in
+\[
+\{h:c(h)\neq 0,\ v_5(h)\neq 0\}.
+\]
+Then there do not exist constants $A,B\in\mathbf C$ such that
+\[
+\sigma_v(h)\equiv A\,x(h)+B
+\qquad\text{on }J.
+\]
+Equivalently,
+\[
+\Delta_7(h)\not\equiv A\,v_5(h)^2+B\,c(h)v_5(h)
+\qquad\text{on }J.
+\]
+\end{proposition}
+
+\begin{proof}
+If
+\[
+\sigma_v(h)\equiv A\,x(h)+B,
+\]
+then multiplying by $c(h)v_5(h)$ gives
+\[
+\Delta_7(h)\equiv A\,v_5(h)^2+B\,c(h)v_5(h).
+\]
+The right-hand side is built only from the cubic and quintic layers and
+therefore has no direct septic $q^{(7)}$-slice. But by
+Proposition~\ref{prop:direct-q7-total-delta7-nonzero}, the direct
+$q^{(7)}$-slice of $\Delta_7$ is generically nonzero on $J$. This is a
+contradiction.
+\end{proof}
+
+\begin{definition}[Lifted derivative numerator and curvature numerator]
+\label{def:lifted-vpatch-derivative-and-curvature}
+On $\{c\neq 0,\ v_5\neq 0\}$, define
+\[
+P_v(h):=c(h)v_5(h)\Delta_7'(h)-\Delta_7(h)\bigl(c(h)v_5(h)\bigr)'.
+\]
+Then
+\[
+\sigma_v'(h)=\frac{P_v(h)}{c(h)^2\,v_5(h)^2}.
+\]
+Define also the affine curvature numerator of the lifted planar curve
+\[
+\Lambda_v(h)=\bigl(x(h),\sigma_v(h)\bigr)
+\]
+by
+\[
+K_v(h):=x'(h)\sigma_v''(h)-\sigma_v'(h)x''(h).
+\]
+\end{definition}
+
+\begin{proposition}[Curvature bridge for the lifted $v_5$-patch curve]
+\label{prop:curvature-bridge-lifted-vpatch}
+On $\{c\neq 0,\ M\neq 0,\ v_5\neq 0\}$,
+\[
+\frac{d\sigma_v}{dx}
+=
+\frac{P_v}{M\,v_5^2},
+\]
+and
+\[
+K_v(h)
+=
+\frac{M(h)^2}{c(h)^4}
+\frac{d}{dh}\!\left(\frac{P_v(h)}{M(h)\,v_5(h)^2}\right).
+\]
+In particular, if $K_v\equiv 0$ on a connected open interval $J\subset
+\{c\neq 0,\ M\neq 0,\ v_5\neq 0\}$, then $\sigma_v$ is affine in $x$ on
+$J$, contradicting Proposition~\ref{prop:sigmav-not-affine-in-x}. Hence
+\[
+K_v\not\equiv 0
+\]
+on every such interval.
+\end{proposition}
+
+\begin{proof}
+Since
+\[
+x=\frac{v_5}{c},
+\qquad
+x'=\frac{M}{c^2},
+\qquad
+\sigma_v'=\frac{P_v}{c^2v_5^2},
+\]
+we obtain
+\[
+\frac{d\sigma_v}{dx}
+=
+\frac{\sigma_v'}{x'}
+=
+\frac{P_v}{M\,v_5^2}.
+\]
+Differentiating with respect to $h$ and multiplying by
+\[
+x'=\frac{M}{c^2}
+\]
+gives
+\[
+K_v
+=
+x'^2\,\frac{d}{dx}\!\left(\frac{d\sigma_v}{dx}\right)
+=
+\frac{M^2}{c^4}\,
+\frac{d}{dh}\!\left(\frac{P_v}{M\,v_5^2}\right).
+\]
+If $K_v\equiv 0$ on a connected interval with $M\neq 0$, then
+\[
+\frac{P_v}{M\,v_5^2}
+\]
+is constant there, so $d\sigma_v/dx$ is constant and $\sigma_v$ is affine
+in $x$. This contradicts
+Proposition~\ref{prop:sigmav-not-affine-in-x}.
+\end{proof}
+
+\begin{corollary}[Local defect-free three-point exclusion on lifted ECT subintervals]
+\label{cor:local-three-point-exclusion-lifted-vpatch}
+Let $J\subset\{c\neq 0,\ M\neq 0,\ v_5\neq 0\}$ be a connected interval on
+which $K_v$ has fixed nonzero sign. Then the triple
+\[
+1,\qquad x,\qquad \sigma_v
+\]
+is an ECT system on $J$. In particular, no affine line meets the lifted
 planar curve
 \[
-h\longmapsto \left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right).
+\Lambda_v(h)=\bigl(x(h),\sigma_v(h)\bigr)
 \]
+in three points of $J$. Hence the defect-free three-point branch is excluded
+on such a subinterval.
+\end{corollary}
+
+\begin{proof}
+The Wronskian of $1,x,\sigma_v$ is exactly $K_v$. If $K_v$ has fixed
+nonzero sign on $J$, the ECT criterion applies.
+\end{proof}
+
+\begin{corollary}[Lifted order-$7$ Wronskian is not identically zero]
+\label{cor:lifted-vpatch-wronskian-not-identically-zero}
+Let $J$ be a connected open interval contained in the quintic-generic region
+and in
+\[
+\{h:c(h)\neq 0,\ M(h)\neq 0,\ v_5(h)\neq 0\}.
+\]
+Then
+\[
+T_v(h):=
+W_h\!\left(
+1,\ \frac{u_5(h)}{c(h)},\ \frac{v_5(h)}{c(h)},\
+\frac{\Delta_7(h)}{c(h)\,v_5(h)}
+\right)
+\]
+is not identically zero on $J$.
+\end{corollary}
+
+\begin{proof}
+Write
+\[
+y:=\frac{u_5}{c},
+\qquad
+x:=\frac{v_5}{c},
+\qquad
+\sigma_v:=\frac{\Delta_7}{c\,v_5}.
+\]
+If $T_v\equiv 0$ on $J$, then by analyticity the four functions
+\[
+1,\ y,\ x,\ \sigma_v
+\]
+are locally linearly dependent on $J$, hence linearly dependent on all of
+the connected interval $J$. By
+Proposition~\ref{prop:linear-independence-one-u5-over-c-v5-over-c}, the first
+three are linearly independent, so there exist constants $A,B,C$ such that
+\[
+\sigma_v=A+By+Cx.
+\]
+Multiplying by $c\,v_5$ gives
+\[
+\Delta_7=A\,c\,v_5+B\,u_5v_5+C\,v_5^2.
+\]
+The right-hand side is built entirely from the cubic/quintic layers and
+therefore carries no direct $q^{(7)}$-slice. This contradicts
+Proposition~\ref{prop:direct-q7-total-delta7-nonzero}, which gives
+\[
+\Delta_7^{(q^{(7)})}\not\equiv 0
+\]
+on $J$.
+\end{proof}
+
+\begin{corollary}[Local defect-free four-point exclusion on lifted ECT subintervals]
+\label{cor:local-four-point-exclusion-lifted-vpatch}
+Let $J\subset\{c\neq 0,\ M\neq 0,\ v_5\neq 0\}$ be a connected interval on
+which $T_v$ has fixed nonzero sign. Then the quadruple
+\[
+1,\qquad \frac{u_5}{c},\qquad \frac{v_5}{c},\qquad
+\frac{\Delta_7}{c\,v_5}
+\]
+is an ECT system on $J$. Equivalently, no affine plane meets the lifted
+space curve
+\[
+Q_v(h)=\left(\frac{u_5(h)}{c(h)},\frac{v_5(h)}{c(h)},
+\frac{\Delta_7(h)}{c(h)\,v_5(h)}\right)
+\]
+in four points of $J$. Hence the defect-free four-point branch is excluded
+on such a subinterval.
+\end{corollary}
+
+\begin{proof}
+The Wronskian of the displayed quadruple is exactly $T_v$. If $T_v$ has
+fixed nonzero sign on $J$, the ECT criterion applies.
+\end{proof}
+
+\begin{remark}[Work in progress: interaction defects and zero-capture for the lifted order-$7$ geometry]
+\label{rem:wip-lifted-order7-zero-capture}
+The results above isolate the correct local one-pair obstructions for the
+finite-core endgame, but two ingredients are still open.
+
+First, the actual multi-pair interaction germ
+\[
+\mathcal I_{\ge2}(z)
+\]
+has not yet been rewritten explicitly in the corrected finite-order model
+through orders $3,5,7$. Thus the genuine finite-core argument still needs
+the defect terms
+\[
+E_{\ge2}^{(3)},\qquad E_{\ge2}^{(5)},\qquad \overline E_{\ge2}^{(7)}.
+\]
+
+Second, Corollaries~\ref{cor:local-three-point-exclusion-lifted-vpatch}
+and~\ref{cor:local-four-point-exclusion-lifted-vpatch} are local ECT
+consequences on subintervals where the new lifted determinants $K_v$ and
+$T_v$ keep fixed nonzero sign. To globalize these exclusions one still needs
+a zero-capture / first-contact theorem for the lifted order-$7$ geometry,
+parallel to the turning-boundary zero-capture work elsewhere in the draft.
+
+The same discussion has a parallel $u_5\neq 0$ version obtained from the
+local gauge $u_7=0$, but the $v_5\neq 0$ patch is the natural first
+setting because $x=v_5/c$ is already the distinguished ECT coordinate in
+the one-pair planar geometry.
 \end{remark}
 
 \begin{remark}[Current geometric bottleneck]
 \label{rem:current-geometric-bottleneck}
-The remaining generic obstruction is no longer bulk $W=0$ geometry, and it is
-no longer local adjacent pair-pair birth across a generic turning boundary.
+The remaining geometric bottleneck is now split into two layers.
 
-On the $W=0,\ M\neq 0$ side, Proposition~\ref{prop:no-W-flat-interval}
-excludes open-interval flatness and
+On the one-pair geometric layer, the obstruction is no longer bulk $W=0$
+geometry, and it is no longer local adjacent pair-pair birth across a generic
+turning boundary. On the $W=0,\ M\neq 0$ side,
+Proposition~\ref{prop:no-W-flat-interval} excludes open-interval flatness and
 Theorem~\ref{thm:finite-order-w-zero-local-sterility} shows that every
 finite-order isolated $W=0$ boundary is locally sterile for pair-pair birth.
 On the turning-boundary side,
 Theorem~\ref{thm:adjacent-pair-pair-exclusion-turning} removes actual adjacent
 pair-pair lines unconditionally.
+
+At the lifted order-$7$ level, the new local determinants
+\[
+K_v
+\qquad\text{and}\qquad
+T_v
+\]
+play the analogous role for defect-free three-point and four-point branches on
+$v_5\neq 0$ patches; the missing global ingredient there is likewise a
+zero-capture theorem.
 
 What remains is a genuinely global propagation / recurrence problem for
 tangent-slope and tangent-line data. In the variables
@@ -8279,6 +8819,12 @@ no-reentry theorem for the scalar graph
 \qquad
 m^{[1]}=\phi-\mu\phi_\mu.
 \]
+
+In parallel, the finite-core endgame is now locally reduced to two explicit
+tasks: extracting the multi-pair interaction defects
+$E_{\ge2}^{(3)},E_{\ge2}^{(5)},\overline E_{\ge2}^{(7)}$ in the corrected
+finite-order model, and proving zero-capture for the lifted order-$7$
+determinants $K_v$ and $T_v$ on $v_5\neq 0$ patches.
 \end{remark}
 
 \section{Endgame architecture and remaining global propagation problem}
