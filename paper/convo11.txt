@@ -1,0 +1,4014 @@
+proof_of_rh(111).tex
+File
+read this proof of rh (incomplete, currently overclaiming). focus on the approach. does it feel like this approach should have been tried before?
+
+I’m reading the draft itself first and then I’ll answer the narrower question you asked: not whether the proof works, but whether the approach feels like something the field plausibly would already have explored.
+
+I’ve got the overall skeleton now. The main thing I’m checking next is whether this is “just another local-statistics attack” in disguise, or whether the normalization/calibration machinery really makes it a meaningfully different route.
+
+My reaction is: the ingredients feel familiar, but the exact package does not feel like a standard route that the field had already obviously exhausted.
+
+What your draft is trying to do, at the level of approach, is fairly distinctive. It is not mainly a classical explicit-formula attack, not mainly a de Branges/positivity attack, not mainly a Hilbert–Pólya spectral attack, and not mainly a random-matrix/local-statistics attack. Instead it builds a local two-point jet-normalized matrix object from the phase kernel, compares that to an explicit off-line toy anomaly, kills the leading value channel with a chosen transverse functional, then calibrates the remaining size using the actual value-channel derivative, and finally uses an odd holomorphic NN-point cancellation to force the zeta-side transverse scalar to become exponentially small. As a package, that has a real “new synthesis” feel.
+
+That said, it does not feel like it came out of nowhere. Several nearby instincts have definitely been tried before, in serious ways. Kernel/Hilbert-space/reproducing-kernel approaches are part of the RH landscape; de Branges-type positivity conditions and related reproducing-kernel structures have been studied explicitly, and Conrey–Li already highlighted real difficulties with pushing de Branges positivity directly toward RH. The broader RH literature also contains large families of function-space, positivity, and dynamical/spectral approaches.
+
+Likewise, anything that leans on local rescaling near height TT sits near a very well-developed tradition around local zero statistics. Modern surveys emphasize that one must rescale locally because zero density varies with height, and this local viewpoint is central to the Montgomery/Odlyzko/Katz–Sarnak world. But that is also exactly why a purely local-statistical attack is dangerous: Lagarias and Rodgers showed that what is currently known about local statistics does not rule out an “alternative hypothesis” point process mimicking those statistics.
+
+That is why your draft feels different from a mere spacing-statistics argument. It is trying to use more rigid analytic structure than statistics alone: not just local spacing data, but a specific normalized block built from the phase derivative, a specific transverse annihilator, and a specific calibrated odd-jet mechanism. In other words, it is trying to escape the “local statistics are too soft” objection by introducing a much more structured local invariant. That part does feel nonstandard.
+
+There is also an older geometric ancestry here. Any RH route that extracts local geometry from ζζ, ξξ, or their derivatives lives in the shadow of Speiser-type phenomena: RH is equivalent to a certain geometric restriction on zeros of ζ′(s)ζ′(s), and that has long encouraged people to look for geometric encodings of off-line zeros. But your draft is not just “another Speiser reformulation.” The jet-whitening plus toy-anomaly comparison is more bespoke than that.
+
+So the honest answer is:
+
+No, this does not feel like an obvious well-trodden path in exactly this form.
+But yes, it feels adjacent to several traditions that absolutely have been explored before:
+kernel/reproducing-kernel methods, local rescaling/statistics, and geometric derivative-based viewpoints.
+
+If I had to compress the judgment into one sentence: it feels less like “someone surely already tried this exact thing” and more like “this is an unusual recombination of known themes into a new local-rigidity architecture.”
+
+One further point: that is neither good nor bad by itself. Sometimes “nobody tried this” means “fresh idea.” Sometimes it means “the invariant is too delicate and the last bridge is where everyone dies.” Reading your draft, my impression is that the architecture has enough internal specificity that it does not read like a random reinvention; it reads like a genuinely idiosyncratic program. The places where it still looks vulnerable are exactly the places your draft itself now flags: the passage from one-pair local geometry to two-pair/minimal-core rigidity, and then from the pair-like branch to the fully general finite-core endgame. Those are the spots where a novel local invariant has to prove it is not just beautifully engineered formalism.
+
+My bottom-line impression: the approach has “should have ancestors” vibes, but not “surely already done” vibes.
+
+worthwhile to see where it goes?
+
+I’m checking the draft structure a bit more concretely before answering, so I can say whether it looks like a live research program versus an elegant dead end.
+
+I’ve checked the endgame framing too. My answer is probably going to be “yes, with a very specific attitude”: worthwhile as an exploration of the local-rigidity machinery, not yet as something to trust because the last bridge is open.
+
+Yes — worthwhile, but only if you treat it as a research program now, not as a proof-claim cleanup exercise.
+
+What makes it worth pursuing is that the draft does not read like empty formalism. The approach has a real internal spine: local phase kernel, jet normalization, whitening, toy anomaly, transverse functional, canonical calibration, odd-holomorphic cancellation, then a rigidity/exclusion endgame. That is enough structure that even if the RH claim fails, the machinery itself could still yield interesting theorems.
+
+More bluntly: this does not feel like a random overengineered proof fantasy. It feels like a serious attempt to build a new local invariant and show that an off-line zero would force a forbidden mode in it. That is mathematically substantive.
+
+The reason I would still continue is that the current obstacle is also very informative. The draft’s own bottleneck is not “some epsilon estimate somewhere.” It is whether the one-pair obstruction really survives passage to the two-pair / minimal-core / genuinely finite-core setting, or whether the local anomaly can migrate to a higher odd jet and evade the current endgame. That is exactly the kind of obstruction worth understanding, because a clean resolution either way tells you something deep:
+
+    if you can make that bridge unconditional, the approach becomes dramatically more credible;
+
+    if you cannot, you will likely learn the precise reason the invariant is too weak.
+
+That is good mathematics either way.
+
+My strongest recommendation is: keep going, but change the success criterion. The next goal should not be “finish the RH proof.” It should be something like:
+
+“Does the corrected transverse odd-jet invariant admit an unconditional first-nonzero-odd-jet rigidity theorem strong enough to exclude all finite bad cores, not just the pair-like branch?”
+
+That is the real question now.
+
+If you can answer that, the project lives or dies honestly. If you cannot, then the approach may still generate publishable local geometry, but not an RH proof.
+
+So my judgment is:
+
+Yes, worth seeing where it goes.
+But only if you are willing to let the approach falsify itself cleanly, rather than continually widening the toy branch around the obstruction.
+
+The healthiest next move is to attack exactly the place where the current draft admits weakness: the unconditional finite-core/minimal-core bridge. That is where this program will reveal whether it is profound or merely elegant.
+
+ok can you audit the proof--ignoring any already indicated/known gaps, is there anything obvious "right under our nose" that will cause this paper to fail, that we are missing?
+
+I’m going through it as a hostile referee now: not rehashing the known open bridges, but looking for places where the current architecture might quietly break even if those were fixed.
+
+I’ve found one thing that is more serious than a cosmetic gap: the NN-point cancellation layer is using coefficient properties it never actually proves, and one toy-side estimate is invalid as written unless those coefficients satisfy an extra norm bound. I’m checking whether there are one or two similarly “structural” issues elsewhere.
+
+Yes. Three things jump out that are not just the already-admitted geometric/endgame gaps.
+
+First, the NN-point cancellation layer is using coefficient control it does not actually establish in the current draft. On the zeta side, the proof says the “surviving moment factor is exponentially tame,” but the main text no longer gives the explicit coefficient formula or the needed norm/generating-function estimate. On the toy side, there is a sharper problem: the proof of toy NN-point preservation replaces
+u4∑j=1Naj(N)ΦK(Ej(u,d))
+u4j=1∑N​aj(N)​ΦK​(Ej​(u,d))
+
+by O(u4)O(u4) using only ∑jaj(N)=1∑j​aj(N)​=1. That is not enough. You need at least an ℓ1ℓ1-bound like ∑j∣aj(N)∣≪eo(Q)∑j​∣aj(N)​∣≪eo(Q), or an exact cancellation identity for the error term. As written, that estimate is simply invalid.
+
+Second, there is a calibration-versus-small-uu mismatch sitting right in the final comparison. The paper uses
+u2≍x0Bζ(m)S(m),
+u2≍Bζ​(m)x0​​S(m),
+
+with x=Bζ(m)σx=Bζ​(m)σ and ∣σ∣≍Q−1∣σ∣≍Q−1, so xx is effectively order 11, while later the only global bound used is S(m)≪Q2S(m)≪Q2 and Bζ(m)≍QBζ​(m)≍Q. That only gives u2≲Qu2≲Q, not u→0u→0. But the toy expansion and the toy NN-point proposition are small-uu statements, explicitly requiring ∣u∣<u0(D)∣u∣<u0​(D). So the current endgame can push the calibrated toy parameter out of the regime where the toy asymptotic is justified. This is a real structural mismatch, not just a missing epsilon.
+
+Third, the final contradiction is only asymptotic in height. The proof ends with “hence for QQ sufficiently large,” and then concludes RH. That only excludes sufficiently high off-line anomalies. It does not rule out a hypothetical low-lying counterexample unless you also prove one of two extra things: either a separate finite verification / low-height exclusion, or a theorem that any RH violation forces arbitrarily large bad heights. I do not see either bridge in the current draft. So even setting aside the known pair-like / finite-core fork, the last theorem is still logically too strong for the proof beneath it.
+
+Those are the three I would treat as the most dangerous “right under our nose” issues.
+
+My honest ranking is: the coefficient-control problem is the most immediate technical failure, the small-uu calibration mismatch is the most conceptually dangerous, and the large-QQ-only conclusion is the cleanest final logic gap. If those three are not fixed, the paper still fails even before you get to the already-flagged geometric bottlenecks.
+
+ok can you draft latex insertions of wip-____ remarks for all three of these gaps, along with where to put them?
+
+I’m locating the exact insertion points in the TeX so I can give you remarks that slot into the right places rather than vague “put this near the end” advice.
+
+I’ve pinned down the cleanest places. The first wants to sit right after the toy NN-point proposition, the second right after the calibrated toy-size equation, and the third right before the final theorem so the theorem’s scope is visibly fenced.
+
+Yes. Here are clean wip-... remarks for all three, with exact insertion points.
+
+First, add this immediately after the proof of Proposition~\ref{prop:toy-n-point-direct}, i.e. right after the line \end{proof} and before the paragraph beginning On the toy side, Proposition~\ref{prop:toy-n-point-direct} gives.
+
+\begin{remark}[Work in progress: coefficient control in toy $N$-point preservation]
+\label{rem:wip-toy-n-point-coefficients}
+As written, Proposition~\ref{prop:toy-n-point-direct} uses only the
+normalization
+\[
+\sum_{j=1}^N a_j^{(N)}=1,
+\]
+but this alone does not justify the estimate
+\[
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d))=O(u^4)
+\]
+uniformly in $N$ and $Q$.
+
+Indeed, from
+\[
+\sup_j \|E_j(u,d)\|\ll 1
+\]
+one only obtains
+\[
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d))
+=
+O\!\Bigl(u^4\sum_{j=1}^N |a_j^{(N)}|\Bigr),
+\]
+so a uniform $O(u^4)$ remainder requires additional control on the coefficient
+family, for example a bound of the form
+\[
+\sum_{j=1}^N |a_j^{(N)}|\ll 1
+\qquad\text{or more generally}\qquad
+\sum_{j=1}^N |a_j^{(N)}|\le e^{o(Q)},
+\]
+which would still be negligible against the zeta-side exponential decay.
+Alternatively, one could prove an exact cancellation identity for the
+$u^4$-error term itself.
+
+Thus the proposition should presently be read as conditional on a
+coefficient-control input not yet written explicitly in the draft.
+\end{remark}
+
+Second, add this immediately after equation \eqref{eq:Xi-toy-calibrated}, i.e. right after
+
+\begin{equation}\label{eq:Xi-toy-calibrated}
+|\Xi_{\toy}^{(N)}(u,d)|\asymp \frac{x_0}{B_\zeta(m)}S(m).
+\end{equation}
+
+and before the existing remark \begin{remark}[Work in progress: pair-like versus finite-core endgame].
+
+\begin{remark}[Work in progress: calibrated size versus microscopic toy regime]
+\label{rem:wip-calibration-small-u}
+The calibrated relation
+\[
+u^2\asymp \frac{x_0}{B_\zeta(m)}S(m)
+\]
+must still be reconciled with the small-parameter regime required by the toy
+microscopic expansion.
+
+Indeed, Proposition~\ref{prop:toy-n-point-direct} is proved only for
+\[
+|u|<u_0(D),
+\]
+where $u_0(D)>0$ is fixed independently of $Q$.  However, with only the crude
+global bounds used later in the final contradiction,
+\[
+S(m)\ll Q^2,
+\qquad
+B_\zeta(m)\asymp Q,
+\]
+the calibration gives at best
+\[
+u^2\ll x_0 Q,
+\]
+which does not by itself force $u\to 0$ as $Q\to\infty$.
+
+Accordingly, one still needs an additional input ensuring that the calibrated
+toy parameter remains in the microscopic regime in which the toy expansion is
+valid.  Conceptually, this could come from a sharper upper bound on $S(m)$,
+from a choice of $x_0$ that shrinks with height, or from a strengthening of
+the toy analysis to a range of $u$ large enough to contain the calibrated
+scale.  Until such an input is made explicit, the final comparison should be
+read as assuming that the calibrated $u$ lies inside the uniform toy regime.
+\end{remark}
+
+Third, add this immediately before the theorem
+
+\begin{theorem}[Final calibrated $N$-point contradiction in the pair-like branch]
+
+That is, place it right after the existing remark \end{remark} for rem:wip-final-endgame-status.
+
+\begin{remark}[Work in progress: high-height contradiction versus full $\RH$]
+\label{rem:wip-high-height-only}
+The contradiction proved below is asymptotic in the height parameter $Q$:
+the comparison concludes only after reaching a stage at which
+\[
+Q^4 e^{-\delta Q}\ll 1.
+\]
+Thus, as presently written, the argument rules out sufficiently large
+pair-like off-line anomalies, but does not yet by itself exclude a
+hypothetical low-lying off-line zero.
+
+To deduce the full Riemann Hypothesis from this asymptotic contradiction, one
+still needs an additional bridge, for example:
+\begin{enumerate}
+\item a theorem showing that any off-line zero forces a corresponding bad
+local anomaly at arbitrarily large heights;
+\item a finite verification excluding all low-lying off-line zeros below the
+threshold at which the asymptotic contradiction applies; or
+\item a reformulation of the endgame that yields a contradiction uniformly in
+height, without a ``for $Q$ sufficiently large'' clause.
+\end{enumerate}
+
+Accordingly, the theorem below should presently be interpreted as an
+asymptotic pair-like contradiction theorem rather than yet as a complete proof
+of $\RH$.
+\end{remark}
+
+A small style note: after adding the third remark, the final two sentences of the proof
+
+Thus no off-line zero can occur. Since every
+violation of the Riemann Hypothesis would produce such an off-line local
+anomaly, all nontrivial zeros must lie on the critical line. Hence $\RH$
+holds.
+
+will read too strongly relative to the new remark. I would at least mark that conclusion as provisional, or replace it with something like
+
+Thus no sufficiently large pair-like off-line anomaly can occur. Subject to
+the additional endgame bridge discussed in
+Remark~\ref{rem:wip-high-height-only}, this yields the desired contradiction.
+
+If you want, I can also draft the exact minimal edits to the theorem statement and proof so they align cleanly with these three new WIP remarks.
+
+ok, do any of these feel immediately fatal?
+
+Yes — but not all in the same way.
+
+For the current paper as a proof of RH, all three are fatal.
+For the approach itself, only one feels potentially truly dangerous.
+
+The least scary is the high-height-only issue. That is fatal to the current final theorem, but not to the architecture. It mostly means: you have proved, at best, an asymptotic exclusion, not RH. That can be repaired either by weakening the theorem now or by later adding a low-height bridge. Annoying, but not a sign the mechanism is wrong.
+
+The coefficient-control issue is more serious, but still feels like a “missing lemma / wrong estimate” problem rather than a death blow. If the aj(N)aj(N)​ come from a family with decent ℓ1ℓ1-control, or if the cancellation can be organized differently, this can be fixed. If instead those coefficients necessarily grow like ecNecN with the wrong constant, then it becomes much worse. So right now I would call it locally fatal to the written argument, but not yet fatal to the program.
+
+The one that feels most dangerous is the small-uu calibration mismatch. That is the one that could kill the route conceptually. Because if the actual zeta-side calibration naturally lands you outside the microscopic toy regime, then the toy model is not probing the part of the geometry that the argument needs. In that case the whole comparison principle may be mis-scaled, not just underproved. That would mean the local invariant is being matched to the wrong toy amplitude.
+
+So my honest ranking is:
+
+    Not fundamentally fatal: high-height-only.
+
+    Probably salvageable, but must be fixed: coefficient control.
+
+    Potentially genuinely fatal to the approach: calibrated uu not actually being small.
+
+That third one is the first place I would attack hard. Because if you can show the calibrated uu really is microscopic in the bad-core regime, the architecture survives. If you cannot, then a lot of the rest may be beautifully engineered but aimed at the wrong scale.
+
+please check the small-u calibration mismatch in detail, to see if it is repairable
+
+I’m tracing the calibration chain line by line now: where uu is defined, what scale information is actually proved for S(m)S(m), Bζ(m)Bζ​(m), and xx, and whether the toy propositions truly need u→0u→0 or only uu bounded in a fixed window.
+
+Yes — this one looks repairable, and in a fairly natural way.
+
+The key point is that the dangerous step comes from the paper freezing the comparison scale at a fixed x=x0(D)x=x0​(D), which forces
+u2≍x0Bζ(m) S(m).
+u2≍Bζ​(m)x0​​S(m).
+
+With only the crude bound S(m)≪Q2S(m)≪Q2 and Bζ(m)≍QBζ​(m)≍Q, that gives only
+u2≪x0Q,
+u2≪x0​Q,
+
+so the calibrated uu can drift far outside the toy regime ∣u∣<u0(D)∣u∣<u0​(D).
+
+But when I checked the actual architecture, the paper already contains the seed of the fix:
+
+    the pairing and canonical calibration statements are uniform for all
+    0<x≤x0(D),
+    0<x≤x0​(D),
+
+    not just for one frozen x0x0​;
+
+    the denominator
+    ⟨A\val(x),M(d)⟩\F≍x/B
+    ⟨A\val​(x),M(d)⟩\F​≍x/B
+
+    behaves linearly in xx, so the calibration functional still makes sense as x→0x→0;
+
+    the remainder estimate after applying Ψx,dΨx,d​ is essentially
+    ∣Ψx,d(Rζ)∣≪S2Q3,
+    ∣Ψx,d​(Rζ​)∣≪Q3S2​​,
+
+    which is notably independent of xx after normalization.
+
+That means the natural repair is:
+do not fix x=x0;choose x=x(m)∈(0,x0(D)] adaptively.
+do not fix x=x0​;choose x=x(m)∈(0,x0​(D)] adaptively.
+
+A clean choice is
+x(m):=min⁡ ⁣{x0(D),  u0(D)22CBζ(m)S(m)},
+x(m):=min{x0​(D),2Cu0​(D)2​S(m)Bζ​(m)​},
+
+where CC is the upper implicit constant in
+u2≤C xBζ(m)S(m).
+u2≤CBζ​(m)x​S(m).
+
+Then automatically
+u2≤u0(D)22,
+u2≤2u0​(D)2​,
+
+so the calibrated toy parameter stays inside the microscopic toy regime.
+
+That is the main reason I think this is not a fundamental obstruction.
+
+What I checked next was whether shrinking xx breaks anything else. At first glance, it does not.
+
+The calibration remainder condition in the draft is
+S2=o(xQ2S(m)),
+S2​=o(xQ2S(m)),
+
+obtained by choosing the cutoff so that
+R3≫1xQ S(m).
+R3≫xQS(m)1​.
+
+If you shrink xx, this looks worse, but with the adaptive choice above it is actually fine. In the branch where
+x∼Bζ(m)S(m),
+x∼S(m)Bζ​(m)​,
+
+you get
+xQ S(m)≍Bζ(m)Q≍Q2,
+xQS(m)≍Bζ​(m)Q≍Q2,
+
+so the cutoff requirement becomes only
+R3≫Q−2,
+R3≫Q−2,
+
+which is harmless. In the branch x=x0(D)x=x0​(D), you are back in the original regime.
+
+The final comparison also survives. The toy main term becomes
+xBζ(m)S(m)=min⁡ ⁣{x0Bζ(m)S(m),  u0(D)22C}.
+Bζ​(m)x​S(m)=min{Bζ​(m)x0​​S(m),2Cu0​(D)2​}.
+
+So either it is the original quantity, or it is bounded below by a fixed positive constant. Meanwhile the zeta-side bound stays
+∣Ξζ(N)(m)∣≪L(m)S(m)2e−δQ,
+∣Ξζ(N)​(m)∣≪L(m)S(m)2e−δQ,
+
+which still goes to zero exponentially relative to either branch. So shrinking xx does not sabotage the contradiction; if anything, in the large-SS branch it makes the toy side easier.
+
+So the real issue is not the mathematics of the fix. It is that the draft currently hardcodes a fixed-scaled regime
+x=Bζ(m)σ,∣σ∣≍Q−1,
+x=Bζ​(m)σ,∣σ∣≍Q−1,
+
+whereas the repair wants a variable/shrinking-scaled regime
+x=Bζ(m)σ,∣σ∣≤c Q−1,
+x=Bζ​(m)σ,∣σ∣≤cQ−1,
+
+with x=x(m)x=x(m) possibly tending to 00.
+
+That means the paper would need a systematic rewrite of the places that currently insist on the frozen scale. From what I checked, the most important such places are:
+
+    the “fixed-scaled regime” formulations around the calibration remainder corollary;
+
+    any local-window statements written as
+    LI≍x0Q
+    LI​≍Qx0​​
+
+    instead of something like
+    LI≍xQor at leastLI≪x0Q;
+    LI​≍Qx​or at leastLI​≪Qx0​​;
+
+    the final contradiction theorem, which currently plugs in x0x0​ once and for all.
+
+What I do not currently see is any place where a genuine lower bound
+∣σ∣≫Q−1
+∣σ∣≫Q−1
+
+is essential. If such a step exists elsewhere in the draft, then the repair would be in trouble. But from the calibration chain itself, I do not see that dependence.
+
+So my bottom line is:
+
+    As currently written: the small-uu issue is fatal.
+
+    As a research route: it looks repairable.
+
+    Most plausible repair: stop freezing xx, and run the calibration in a variable x=x(m)x=x(m) regime.
+
+    Main thing still to verify carefully: that every “fixed-scaled” estimate in the transfer/whitening layer remains valid for ∣σ∣≤c/Q∣σ∣≤c/Q, not only for ∣σ∣≍Q−1∣σ∣≍Q−1.
+
+If you want, the next useful step is for me to draft the exact theorem-by-theorem rewrite needed to convert the current fixed-x0x0​ calibration chain into a variable-xx chain.
+
+Update your \begin{remark}[Work in progress: calibrated size versus microscopic toy regime]  --> give me a new one (in latex format) that includes the suggested repair, and what is needed to apply as per your message above (do NOT actually give me the repair edits, put everything inside the wip-remark
+
+Replace that remark with:
+
+\begin{remark}[Work in progress: calibrated size versus microscopic toy regime]
+\label{rem:wip-calibration-small-u}
+As presently written, the final calibration freezes the comparison scale at a
+fixed value \(x=x_0(D)\), which yields
+\[
+u^2 \asymp \frac{x_0}{B_\zeta(m)}\,S(m).
+\]
+With only the crude global bounds used later in the contradiction,
+\[
+S(m)\ll Q^2,
+\qquad
+B_\zeta(m)\asymp Q,
+\]
+this gives at best
+\[
+u^2\ll x_0 Q,
+\]
+and therefore does not by itself force the calibrated toy parameter \(u\) to
+lie in the microscopic toy regime \(|u|<u_0(D)\) required by
+Proposition~\ref{prop:toy-n-point-direct}.
+
+A plausible repair is to avoid freezing the scale at \(x_0(D)\), and instead
+to choose the comparison scale adaptively:
+\[
+x=x(m)\in (0,x_0(D)].
+\]
+Since the pairing and calibration statements are naturally formulated for
+\(0<x\le x_0(D)\), one expects to choose \(x(m)\) so that
+\[
+u^2 \asymp \frac{x(m)}{B_\zeta(m)}\,S(m)
+\]
+is forced to remain below the toy threshold \(u_0(D)^2\).  For example, if
+the implicit upper bound
+\[
+u^2 \le C\,\frac{x}{B_\zeta(m)}\,S(m)
+\]
+is available uniformly, then one may try to take
+\[
+x(m):=
+\min\!\left\{
+x_0(D),\;
+\frac{u_0(D)^2}{2C}\frac{B_\zeta(m)}{S(m)}
+\right\},
+\]
+which would guarantee
+\[
+u^2\le \frac{u_0(D)^2}{2}.
+\]
+
+To make this repair rigorous, however, the draft must still verify that the
+entire calibration chain remains valid uniformly in such a variable
+\(x\)-regime.  In particular, one still needs to check all of the following:
+
+\begin{enumerate}
+\item The pairing and denominator estimates remain uniform for all
+\(0<x\le x_0(D)\), including the regime \(x\to 0\), so that the calibration
+functional is still well-defined and the main term continues to scale linearly
+in \(x\).
+
+\item The fixed-scaled statements currently written in terms of
+\[
+x=B_\zeta(m)\sigma,
+\qquad
+|\sigma|\asymp Q^{-1},
+\]
+can be upgraded to a variable/shrinking regime of the form
+\[
+x=B_\zeta(m)\sigma,
+\qquad
+|\sigma|\le c\,Q^{-1},
+\]
+or an equivalent \(0<x\le x_0(D)\) formulation, without loss of the transfer,
+whitening, and calibration estimates used later.
+
+\item The remainder bound after applying the calibrated functional remains
+uniform in the variable-\(x\) regime; in particular, one needs the normalized
+error estimate to stay independent of \(x\), or at least sufficiently mild as
+\(x\to 0\), so that shrinking \(x\) to enforce \(|u|<u_0(D)\) does not
+destroy the zeta-side control.
+
+\item The cutoff choice required in the calibration remainder estimate can
+still be made uniformly when \(x=x(m)\) is allowed to shrink.  Concretely, one
+must check that the condition
+\[
+R^3 \gg \frac{1}{xQ\,S(m)}
+\]
+remains compatible with the admissible cutoff regime under the adaptive choice
+of \(x(m)\).
+
+\item The final contradiction theorem must be reformulated so that the toy-side
+main term is compared at the variable scale \(x(m)\), rather than at the fixed
+scale \(x_0(D)\), and one must verify that the resulting lower bound still
+dominates the exponentially small zeta-side bound.
+\end{enumerate}
+
+Accordingly, the small-\(u\) issue does not presently appear to be a
+fundamental obstruction, but the current argument should be read as
+conditional on a variable-\(x\) calibration rewrite that has not yet been
+carried out in the draft.
+\end{remark}
+
+
+ok now let's investigate high-height-only, and find a possible repair
+
+I’m checking whether the “high-height only” problem is just a theorem-statement mismatch, or whether the whole mechanism intrinsically only speaks about Q→∞Q→∞. That distinction matters a lot for whether there’s a believable repair.
+
+I don’t see an automatic propagation mechanism yet. So I’m checking whether the draft ever proves something stronger than “an off-line zero creates a local anomaly near its own height,” because without that, the only obvious fix is an added low-height bridge.
+
+Yes. After looking at it more carefully, I think the realistic repair for the high-height-only problem is an effective asymptotic theorem plus a finite low-height verification bridge.
+
+I do not see a natural purely internal repair in the current architecture that turns one hypothetical low-lying off-line zero into arbitrarily large-QQ bad cores. Right now the mechanism is local in height: an off-line zero gives you a bad local configuration near its own height, and the draft does not contain any propagation principle that transports that anomaly upward. So the “for QQ sufficiently large” clause is not just a wording issue. Without an added bridge, it really only proves an asymptotic exclusion.
+
+The clean repair is this.
+
+First, weaken the final theorem to an effective asymptotic theorem of the form:
+There exists Q∗ such that no pair-like off-line anomaly can occur for Q≥Q∗.
+There exists Q∗​ such that no pair-like off-line anomaly can occur for Q≥Q∗​.
+
+To get that, you would need to replace the current soft endgame
+Q4e−δQ→0
+Q4e−δQ→0
+
+by an explicit inequality
+Cup Q4e−δQ<clow(Q≥Q∗),
+Cup​Q4e−δQ<clow​(Q≥Q∗​),
+
+where clowclow​ is the explicit toy-side lower constant and CupCup​ is the explicit zeta-side upper constant coming from the calibration chain. In other words, you make the contradiction quantitative rather than merely asymptotic.
+
+Second, convert Q∗Q∗​ into a height threshold T∗T∗​. Since throughout the draft QQ is logarithmic in the height scale, this gives a concrete finite threshold
+∣γ∣≤T∗
+∣γ∣≤T∗​
+
+below which the asymptotic argument does not automatically apply.
+
+Third, add a separate low-height bridge:
+either prove
+\RH(T∗)
+\RH(T∗​)
+
+by a finite computation, or import an existing rigorous computation if T∗T∗​ lands below a currently verified range. Rigorous numerical verification of RH up to height 3⋅10123⋅1012 is already in the literature, via interval arithmetic and Turing-style counting.
+
+So the repair template is:
+effective asymptotic contradiction above T∗+rigorous finite verification below T∗⟹\RH.
+effective asymptotic contradiction above T∗​+rigorous finite verification below T∗​⟹\RH.
+
+That is, in my view, the only genuinely plausible repair visible from the current draft.
+
+There is a more “pure” alternative in principle: prove a propagation theorem saying that any off-line zero would force bad local anomalies at arbitrarily large heights, so the asymptotic contradiction would automatically catch it. But I do not see that in the current machinery, and honestly it looks like a substantially new theorem, not a cleanup. It would likely be harder than the present endgame.
+
+So my verdict is:
+
+    Repairable: yes.
+
+    Likely repair: effective threshold Q∗Q∗​, then finite low-height verification.
+
+    Unlikely near-term repair: a purely structural propagation theorem eliminating the need for computation.
+
+That means the “high-height-only” issue is not conceptually fatal. It is more of a missing effective-and-finite bridge. The price is that, unless you find a much stronger internal theorem, the final proof would become a hybrid of structural argument plus finite verification, not a fully self-contained pure asymptotic contradiction.
+
+The next concrete thing to do is to see whether your current constants can plausibly make T∗T∗​ small enough to fall within already verified territory.
+
+so does this prevent an unconditional proof of RH?
+
+Not necessarily — it depends what you mean by “unconditional.”
+
+If by “unconditional” you mean “not assuming any unproved hypothesis,” then no, this does not prevent an unconditional proof of RH. A proof of the form
+rigorous asymptotic theorem above T∗+rigorous finite verification below T∗
+rigorous asymptotic theorem above T∗​+rigorous finite verification below T∗​
+
+is still unconditional. It is not conditional on RH or any conjecture. It is just partly computer-assisted.
+
+But if by “unconditional” you mean “purely internal, pen-and-paper, no separate finite computation, no imported verification,” then yes, the current high-height-only issue blocks that version of the proof.
+
+So the clean distinction is:
+
+    Unconditional in the standard mathematical sense: still possible.
+
+    Purely asymptotic / fully self-contained analytic proof from the current draft alone: not yet.
+
+Right now the draft gives, at best, something like:
+no bad configuration for sufficiently large Q.
+no bad configuration for sufficiently large Q.
+
+That does not rule out a hypothetical low-lying counterexample unless you add one of these:
+(i) finite rigorous low-height verification,
+(i) finite rigorous low-height verification,
+
+or
+(ii) a propagation theorem sending any off-line zero into arbitrarily large bad heights,
+(ii) a propagation theorem sending any off-line zero into arbitrarily large bad heights,
+
+or
+(iii) a uniform-in-height contradiction.
+(iii) a uniform-in-height contradiction.
+
+Of those, (i) is the realistic repair; (ii) and (iii) would be much stronger new mathematics.
+
+So my honest answer is: it does not prevent an unconditional proof, but it probably does prevent the kind of purely self-contained proof the current draft seems to want, unless you find a much stronger bridge.
+
+so may paper could cite rh verification below some value?
+
+I’m checking the most reliable citation for the rigorous verified-height result, so I can tell you exactly how this could fit into the paper rather than hand-waving it.
+
+Yes — absolutely. If your argument yields an explicit threshold T∗T∗​ such that all off-line zeros with 0<∣ℑρ∣>T∗0<∣ℑρ∣>T∗​ are excluded, then you can finish by citing a rigorous low-height verification result that covers 0<∣ℑρ∣≤T∗0<∣ℑρ∣≤T∗​. Platt and Trudgian proved, rigorously with interval arithmetic, that RH holds up to height 3⋅10123⋅1012 (more precisely 3,000,175,332,8003,000,175,332,800).
+
+So the logic would be:
+your theorem: no off-line zeros above T∗
+your theorem: no off-line zeros above T∗​
+
+plus
+Platt–Trudgian: no off-line zeros up to 3⋅1012
+Platt–Trudgian: no off-line zeros up to 3⋅1012
+
+implies RH, provided T∗≤3⋅1012T∗​≤3⋅1012.
+
+That would still count as an unconditional proof, just a computer-assisted one rather than a purely internal pen-and-paper proof. The important thing is that your paper must make the threshold explicit. A merely asymptotic statement like “for QQ sufficiently large” is not enough to combine with a finite verification theorem; you need an actual computable cutoff.
+
+Two cautions. First, if your threshold comes out above the verified range, then citing Platt–Trudgian alone will not close the gap. Second, the paper should say this plainly: the final theorem is an effective high-height exclusion, and RH follows after combining it with the cited finite verification. That is much cleaner than pretending the asymptotic theorem by itself proves RH.
+
+A standard way to present it would be something like:
+
+    Our argument yields an explicit height T∗T∗​ above which no off-critical-line zero can occur. Since RH has been rigorously verified for all nontrivial zeros with 0<ℑρ≤3⋅10120<ℑρ≤3⋅1012 by Platt and Trudgian, it follows that RH holds provided T∗≤3⋅1012T∗​≤3⋅1012.
+
+If you want, I can draft the exact theorem/remark wording for that hybrid endgame.
+
+how can I determine the height in paper?
+
+I’m checking the draft for where the “height” variable is actually encoded — usually this will be through QQ, mm, or the local window parameter rather than a direct theorem saying “height TT.”
+
+Yes. In its current form, the paper does not determine a height, because the final contradiction is still written with soft notation:
+Q≍log⁡∣m∣,S(m)≪Q2,Bζ(m)≍Q,Q4e−δQ→0.
+Q≍log∣m∣,S(m)≪Q2,Bζ​(m)≍Q,Q4e−δQ→0.
+
+That proves only “for QQ sufficiently large.” It does not produce an actual threshold Q∗Q∗​, hence no actual height T∗T∗​. The good news is that there is a very standard way to make one.
+
+Here is the right workflow.
+
+First, decide what “height” means in your notation. In the draft, the local midpoint parameter is mm, and the paper explicitly states
+Q≍log⁡∣m∣.
+Q≍log∣m∣.
+
+Also the local points are
+t±=m±σ2,
+t±​=m±2σ​,
+
+with ∣σ∣≍Q−1∣σ∣≍Q−1, so the actual zero height and the midpoint height differ only by a tiny O(Q−1)O(Q−1) amount. So once you get a threshold m∗m∗​, the corresponding zero-height threshold is essentially
+T∗≈∣m∗∣.
+T∗​≈∣m∗​∣.
+
+Second, replace every final-use asymptotic by an explicit inequality with named constants. At the end of the paper, the contradiction comes from comparing
+
+toy lower side:
+∣Ξ\toy(N)(u,d)∣≥c\toy x0Bζ(m)S(m)
+∣Ξ\toy(N)​(u,d)∣≥c\toy​Bζ​(m)x0​​S(m)
+
+for some explicit c\toy>0c\toy​>0,
+
+against zeta upper side:
+∣Ξζ(N)(m)∣≤Cζ L(m)S(m)2e−δQ.
+∣Ξζ(N)​(m)∣≤Cζ​L(m)S(m)2e−δQ.
+
+Then also make explicit the comparabilities
+Bζ(m)≤CBQ,L(m)≤CLQ,S(m)≤CSQ2
+Bζ​(m)≤CB​Q,L(m)≤CL​Q,S(m)≤CS​Q2
+
+for all heights in the admissible regime. Substituting those in gives
+∣Ξζ(N)(m)∣∣Ξ\toy(N)(u,d)∣≤CζCBCLCSc\toyx0 Q4e−δQ.
+∣Ξ\toy(N)​(u,d)∣∣Ξζ(N)​(m)∣​≤c\toy​x0​Cζ​CB​CL​CS​​Q4e−δQ.
+
+So the whole theorem reduces to an explicit scalar inequality
+C∗Q4e−δQ<1,C∗:=CζCBCLCSc\toyx0.
+C∗​Q4e−δQ<1,C∗​:=c\toy​x0​Cζ​CB​CL​CS​​.
+
+Third, solve that inequality for QQ. Define Q∗Q∗​ to be any explicit number such that
+C∗Q4e−δQ≤12for all Q≥Q∗.
+C∗​Q4e−δQ≤21​for all Q≥Q∗​.
+
+You can solve this numerically, or even crudely by hand. This is the exact place where the threshold comes from.
+
+Fourth, convert Q∗Q∗​ to a midpoint height m∗m∗​. Since the paper only says
+Q≍log⁡∣m∣,
+Q≍log∣m∣,
+
+you need the actual two-sided constants:
+cQlog⁡(3+∣m∣)≤Q≤CQlog⁡(3+∣m∣).
+cQ​log(3+∣m∣)≤Q≤CQ​log(3+∣m∣).
+
+From the lower bound,
+Q≥cQlog⁡(3+∣m∣),
+Q≥cQ​log(3+∣m∣),
+
+you get a sufficient condition for Q≥Q∗Q≥Q∗​, namely
+∣m∣≥exp⁡(Q∗/cQ)−3.
+∣m∣≥exp(Q∗​/cQ​)−3.
+
+So one admissible threshold is
+m∗:=exp⁡(Q∗/cQ)−3.
+m∗​:=exp(Q∗​/cQ​)−3.
+
+Fifth, convert midpoint height to zero height. Since
+t±=m±σ2,∣σ∣≍Q−1,
+t±​=m±2σ​,∣σ∣≍Q−1,
+
+the difference is negligible, so you can take
+T∗:=m∗+CσQ∗
+T∗​:=m∗​+Q∗​Cσ​​
+
+if you want to be explicit, or simply absorb that tiny correction and say RH is proved above height T∗T∗​.
+
+So, structurally, the paper needs to produce this chain:
+explicit constants⟹Q∗⟹m∗⟹T∗.
+explicit constants⟹Q∗​⟹m∗​⟹T∗​.
+
+The important part is that the threshold does not come from some mysterious analytic height estimate hidden elsewhere. It comes entirely from the final comparison inequality, once every ≪≪, O(⋅)O(⋅), and ≍≍ used there has been made effective.
+
+Concretely, the constants you would need to expose are these:
+
+    the toy lower constant from
+    ∣Ξ\toy(N)(u,d)∣≍u2
+    ∣Ξ\toy(N)​(u,d)∣≍u2
+
+    on the chosen compact dd-range and microscopic uu-range;
+
+    the calibration constant from
+    u2≍xBζ(m)S(m);
+    u2≍Bζ​(m)x​S(m);
+
+    the upper constant in
+    ∣Ξζ(N)(m)∣≪L(m)S(m)2e−δQ;
+    ∣Ξζ(N)​(m)∣≪L(m)S(m)2e−δQ;
+
+    the explicit exponential decay rate δδ;
+
+    the explicit bounds
+    Bζ(m)≤CBQ,L(m)≤CLQ,S(m)≤CSQ2;
+    Bζ​(m)≤CB​Q,L(m)≤CL​Q,S(m)≤CS​Q2;
+
+    the explicit constants in
+    cQlog⁡(3+∣m∣)≤Q≤CQlog⁡(3+∣m∣).
+    cQ​log(3+∣m∣)≤Q≤CQ​log(3+∣m∣).
+
+Without those, the height is not determined.
+
+So the honest answer is: you determine the height by effectivizing the final contradiction, not by discovering a new theorem. The threshold is already latent in the last page of the proof; it is just hidden behind non-explicit comparison symbols.
+
+There is one more practical point. If you adopt the variable-xx repair for the small-uu issue, then the final lower bound may not be exactly
+x0Bζ(m)S(m),
+Bζ​(m)x0​​S(m),
+
+but something like
+min⁡ ⁣{x0Bζ(m)S(m), c0}.
+min{Bζ​(m)x0​​S(m),c0​}.
+
+In that case the threshold equation changes slightly, but the same procedure still works: isolate an explicit positive lower bound and compare it to the explicit exponentially decaying upper bound.
+
+So the next real task is not “find the height” directly. It is:
+
+    make the endgame constants explicit,
+
+    solve for Q∗Q∗​,
+
+    translate Q∗Q∗​ into T∗T∗​.
+
+If you want, I can now turn this into a paper-facing checklist of exact lemmas/propositions whose constants would need to be made explicit to extract T∗T∗​.
+
+ok, as you did before, can you update the wip remark for the high-height issue to include the full potential repair. again keep everything inside the remark, as you have written above, and be thorough
+
+Replace the earlier high-height remark with:
+
+\begin{remark}[Work in progress: asymptotic contradiction versus full $\RH$]
+\label{rem:wip-high-height-only}
+As presently written, the final contradiction is only asymptotic in the height
+parameter \(Q\): the comparison closes after reaching a regime in which the
+zeta-side upper bound is dominated by the toy-side lower bound, schematically
+because
+\[
+Q^4 e^{-\delta Q}\to 0
+\qquad (Q\to\infty).
+\]
+Accordingly, the current argument excludes sufficiently large pair-like
+off-line anomalies, but does not yet by itself rule out a hypothetical
+low-lying off-line zero.  In particular, the present proof does not furnish a
+uniform-in-height contradiction, nor does it presently prove that a single
+off-line zero at one height would force corresponding bad local anomalies at
+arbitrarily large heights.
+
+A plausible repair is to split the endgame into an effective high-height
+theorem plus a separate finite low-height bridge.
+
+\smallskip
+
+\noindent
+\emph{Effective high-height step.}
+One should first replace the soft asymptotic comparison by an explicit
+inequality.  Concretely, the final contradiction compares a toy-side lower
+bound of the form
+\[
+|\Xi_{\toy}^{(N)}(u,d)|
+\ge
+c_{\toy}\,\mathcal{L}(m)
+\]
+against a zeta-side upper bound of the form
+\[
+|\Xi_{\zeta}^{(N)}(m)|
+\le
+C_{\zeta}\,\mathcal{U}(m)\,e^{-\delta Q},
+\]
+where in the present draft one has schematically
+\[
+\mathcal{L}(m)\asymp \frac{x}{B_\zeta(m)}S(m)
+\]
+(or its variable-\(x\) replacement from
+Remark~\ref{rem:wip-calibration-small-u}),
+and
+\[
+\mathcal{U}(m)\asymp L(m)S(m)^2.
+\]
+To extract an actual threshold, every use of \(O(\cdot)\), \(\ll\), and
+\(\asymp\) in the final comparison must be replaced by explicit constants.
+After substituting explicit bounds such as
+\[
+B_\zeta(m)\le C_B Q,\qquad
+L(m)\le C_L Q,\qquad
+S(m)\le C_S Q^2,
+\]
+the contradiction should reduce to an explicit scalar inequality of the form
+\[
+C_* Q^4 e^{-\delta Q}<1
+\qquad (Q\ge Q_*),
+\]
+for some computable constant \(C_*>0\).  Any explicit \(Q_*\) satisfying this
+inequality would then yield an \emph{effective} theorem excluding pair-like
+off-line anomalies for all \(Q\ge Q_*\).
+
+\smallskip
+
+\noindent
+\emph{Height extraction.}
+Once \(Q_*\) is known explicitly, one must convert it into an actual height
+threshold.  Since the draft works with a midpoint parameter \(m\) satisfying
+\[
+Q\asymp \log |m|,
+\]
+this requires making the logarithmic comparability effective, for example in
+the form
+\[
+c_Q \log(3+|m|)\le Q\le C_Q \log(3+|m|).
+\]
+From such inequalities one obtains an explicit midpoint threshold \(m_*\), and
+hence an explicit zero-height threshold \(T_*\), since the local points under
+consideration satisfy
+\[
+t_\pm = m \pm \frac{\sigma}{2}
+\]
+with \(|\sigma|\) microscopic relative to the height scale.  Thus one would
+arrive at a statement of the form:
+\[
+\text{no pair-like off-line zero can occur for } |\Im \rho|>T_*.
+\]
+
+\smallskip
+
+\noindent
+\emph{Finite low-height bridge.}
+The effective high-height theorem alone still does not imply the full Riemann
+Hypothesis unless one also excludes all potential off-line zeros below the
+threshold \(T_*\).  A natural way to do this is to combine the structural
+argument above height \(T_*\) with a rigorous finite verification of \(\RH\)
+up to height \(T_*\).  Accordingly, if one can arrange that the explicit
+threshold \(T_*\) lies below a rigorously verified range, then the final step
+would be:
+\[
+\text{high-height exclusion above }T_*
+\quad+\quad
+\text{rigorous verification below }T_*
+\quad\Longrightarrow\quad
+\RH.
+\]
+This would still be an unconditional proof, albeit a computer-assisted one
+rather than a purely internal asymptotic contradiction.
+
+\smallskip
+
+\noindent
+\emph{What still needs to be made explicit.}
+To implement this repair rigorously, the draft must still supply all of the
+following ingredients in effective form:
+\begin{enumerate}
+\item an explicit toy-side lower constant on the admissible compact
+\(d\)-range and microscopic \(u\)-range;
+\item an explicit zeta-side upper constant in the \(N\)-point cancellation
+estimate, including the exponential decay rate \(\delta\);
+\item explicit growth bounds for the auxiliary quantities appearing in the
+final comparison, including \(B_\zeta(m)\), \(L(m)\), and \(S(m)\);
+\item an explicit conversion between the logarithmic parameter \(Q\) and the
+actual height variable;
+\item a final theorem stated as an effective exclusion above a concrete
+threshold \(T_*\), rather than merely ``for \(Q\) sufficiently large'';
+\item a separate low-height bridge, either by citing a rigorous finite
+verification result covering the range up to \(T_*\), or by proving an
+alternative uniform-in-height contradiction.
+\end{enumerate}
+
+\smallskip
+
+\noindent
+There is, in principle, a second possible repair: prove a propagation theorem
+showing that any off-line zero at one height would force corresponding bad
+local anomalies at arbitrarily large heights, so that the asymptotic
+contradiction would automatically apply.  However, no such propagation
+principle is currently established in the draft, and at present this appears
+to be a substantially stronger theorem than the effective-threshold route
+described above.
+
+Accordingly, the current endgame should be read as an asymptotic contradiction
+theorem in the pair-like branch.  A plausible route to a complete proof of
+\(\RH\) is available, but it requires an effective extraction of the height
+threshold together with a finite low-height bridge, neither of which has yet
+been written out in the draft.
+\end{remark}
+
+
+ok lastly, attack this:
+The coefficient-control issue is more serious, but still feels like a “missing lemma / wrong estimate” problem rather than a death blow. If the a
+j
+(N)
+	​
+
+ come from a family with decent ℓ
+1
+-control, or if the cancellation can be organized differently, this can be fixed. If instead those coefficients necessarily grow like e
+cN
+ with the wrong constant, then it becomes much worse. So right now I would call it locally fatal to the written argument, but not yet fatal to the program.
+
+I’m drilling into the actual NN-point coefficients now: where they’re defined, what identities they satisfy, and whether the draft already gives enough structure to get ℓ1ℓ1-control or to reorganize the remainder so that ∑∣aj(N)∣∑∣aj(N)​∣ never appears.
+
+Yes. I think this issue is very likely repairable, and in a stronger way than I first suspected.
+
+The good news is that the coefficient family is not mysterious at all. The moment conditions
+∑j=1Naj(N)=1,∑j=1Naj(N)j2r+1=0(0≤r≤N−2)
+j=1∑N​aj(N)​=1,j=1∑N​aj(N)​j2r+1=0(0≤r≤N−2)
+
+have a unique solution, and it has an explicit closed form:
+aj(N)=(−1)j+1 j(2NN+j)(2N−2N−1),1≤j≤N.
+aj(N)​=(−1)j+1(N−12N−2​)j(N+j2N​)​,1≤j≤N.
+
+So the first fear — that these coefficients might secretly blow up like ecNecN — is false. In fact they alternate in sign, and their ℓ1ℓ1-norm is exactly linear:
+∑j=1N∣aj(N)∣=2N−1.
+j=1∑N​∣aj(N)​∣=2N−1.
+
+That identity is clean. Since the signs alternate, it is enough to sum the positive version:
+∑j=1N∣aj(N)∣=1(2N−2N−1)∑j=1Nj(2NN+j).
+j=1∑N​∣aj(N)​∣=(N−12N−2​)1​j=1∑N​j(N+j2N​).
+
+Using
+j(2NN+j)=N ⁣((2N−1N+j−1)−(2N−1N+j)),
+j(N+j2N​)=N((N+j−12N−1​)−(N+j2N−1​)),
+
+the sum telescopes:
+∑j=1Nj(2NN+j)=N(2N−1N).
+j=1∑N​j(N+j2N​)=N(N2N−1​).
+
+Hence
+∑j=1N∣aj(N)∣=N(2N−1N)(2N−2N−1)=2N−1.
+j=1∑N​∣aj(N)​∣=N(N−12N−2​)(N2N−1​)​=2N−1.
+
+That already resolves the coefficient-growth worry on the zeta side. If
+Mk(N):=∑j=1Naj(N)jk,
+Mk(N)​:=j=1∑N​aj(N)​jk,
+
+then for every kk,
+∣Mk(N)∣≤(∑j=1N∣aj(N)∣)Nk=(2N−1)Nk.
+∣Mk(N)​∣≤(j=1∑N​∣aj(N)​∣)Nk=(2N−1)Nk.
+
+So in Proposition corrected-n-point, after the cancellation of the first N−1N−1 odd moments, the surviving tail is bounded by
+∣Ξζ(N)(m)∣≪L(m)S(m)2Q3(2N−1)∑r≥N−1(Nρ0Q)2r+1.
+∣Ξζ(N)​(m)∣≪Q3L(m)S(m)2​(2N−1)r≥N−1∑​(ρ0​QN​)2r+1.
+
+If N=⌊αQ⌋N=⌊αQ⌋ with α<ρ0α<ρ0​, then
+Nρ0Q≤αρ0<1,
+ρ0​QN​≤ρ0​α​<1,
+
+so this is
+≪L(m)S(m)2e−δQ
+≪L(m)S(m)2e−δQ
+
+for some δ>0δ>0. So the zeta-side “surviving moment factor is exponentially tame” can actually be made honest from this explicit coefficient formula and the exact ℓ1ℓ1-bound.
+
+So far, very good.
+
+The bad news is that this does not by itself fix the toy proof as written. The current toy argument says
+u4∑j=1Naj(N)ΦK(Ej(u,d))=O(u4)
+u4j=1∑N​aj(N)​ΦK​(Ej​(u,d))=O(u4)
+
+just from boundedness of EjEj​ and ∑aj(N)=1∑aj(N)​=1. That is still wrong. With only ℓ1ℓ1-control, the naive bound is
+u4∑j=1Naj(N)ΦK(Ej(u,d))=O ⁣((2N−1)u4),
+u4j=1∑N​aj(N)​ΦK​(Ej​(u,d))=O((2N−1)u4),
+
+which is O(Qu4)O(Qu4), not O(u4)O(u4), when N≍QN≍Q.
+
+But here there is also a clean repair. The point is that one should not bound the toy remainder by raw ℓ1ℓ1. One should use its analyticity in the microscopic node ss.
+
+Write
+Ru,d(s):=ΦK(E(u,d;s)).
+Ru,d​(s):=ΦK​(E(u,d;s)).
+
+From the appendix, E(u,d;s)E(u,d;s) is analytic in ss on a fixed disk ∣s∣<ρ\toy∣s∣<ρ\toy​, uniformly for d∈Dd∈D and ∣u∣<u0(D)∣u∣<u0​(D). So
+Ru,d(s)=∑n≥0bn(u,d)sn,∣bn(u,d)∣≪ρ\toy−n.
+Ru,d​(s)=n≥0∑​bn​(u,d)sn,∣bn​(u,d)∣≪ρ\toy−n​.
+
+Then
+∑j=1Naj(N)Ru,d(sj)=∑n≥0bn(u,d) Q−2n Mn(N),sj=jQ2.
+j=1∑N​aj(N)​Ru,d​(sj​)=n≥0∑​bn​(u,d)Q−2nMn(N)​,sj​=Q2j​.
+
+Now this splits very favorably.
+
+The constant term gives
+b0(u,d)∑j=1Naj(N)=b0(u,d).
+b0​(u,d)j=1∑N​aj(N)​=b0​(u,d).
+
+The odd terms up to order 2N−32N−3 vanish exactly:
+M2r+1(N)=0(0≤r≤N−2).
+M2r+1(N)​=0(0≤r≤N−2).
+
+The even terms are small because sj=j/Q2sj​=j/Q2 is tiny:
+∣Q−4ℓM2ℓ(N)∣≤Q−4ℓ(2N−1)N2ℓ≍Q1−2ℓ,
+∣Q−4ℓM2ℓ(N)​∣≤Q−4ℓ(2N−1)N2ℓ≍Q1−2ℓ,
+
+so the whole even contribution is
+O(Q−1)
+O(Q−1)
+
+uniformly.
+
+The odd tail beyond the killed range is exponentially small:
+∑r≥N−1∣b2r+1(u,d)∣Q−4r−2∣M2r+1(N)∣≪2N−1Q3∑r≥N−1(Nρ\toyQ)2r+1≪e−cQ
+r≥N−1∑​∣b2r+1​(u,d)∣Q−4r−2∣M2r+1(N)​∣≪Q32N−1​r≥N−1∑​(ρ\toy​QN​)2r+1≪e−cQ
+
+provided again N=αQN=αQ with α<ρ\toyα<ρ\toy​.
+
+So the correct toy estimate is
+∑j=1Naj(N)Ru,d(sj)=b0(u,d)+O(Q−1)+O(e−cQ),
+j=1∑N​aj(N)​Ru,d​(sj​)=b0​(u,d)+O(Q−1)+O(e−cQ),
+
+hence
+Ξ\toy(N)(u,d)=u2ΦK(M(d))+u4b0(u,d)+O ⁣(u4Q)+O(u4e−cQ).
+Ξ\toy(N)​(u,d)=u2ΦK​(M(d))+u4b0​(u,d)+O(Qu4​)+O(u4e−cQ).
+
+Since b0(u,d)b0​(u,d) is uniformly bounded on compact DD and ∣u∣<u0(D)∣u∣<u0​(D), this gives
+Ξ\toy(N)(u,d)=u2ΦK(M(d))+O(u4),
+Ξ\toy(N)​(u,d)=u2ΦK​(M(d))+O(u4),
+
+uniformly, exactly as desired.
+
+So my updated judgment is:
+
+The coefficient issue is not a death blow. In fact, the coefficient family is better behaved than expected:
+∥a(N)∥ℓ1=2N−1.
+∥a(N)∥ℓ1​=2N−1.
+
+That is enough to make the zeta-side exponential tail honest.
+
+The written toy proof is still wrong, but it can be repaired by reorganizing the remainder through the analytic ss-expansion, instead of bounding it termwise by ℓ1ℓ1.
+
+So the real conclusion is:
+
+    the “maybe the coefficients explode exponentially” fear seems gone;
+
+    the zeta-side NN-point estimate can be repaired cleanly;
+
+    the toy-side proposition also looks repairable, but by a different argument than the one currently written.
+
+This is much better than I feared.
+
+If you want, the next thing I can do is turn this into exact LaTeX edits: one lemma defining the explicit coefficients and proving ∑∣aj(N)∣=2N−1∑∣aj(N)​∣=2N−1, one corrected proof of Proposition corrected-n-point, and one corrected proof of Proposition toy-n-point-direct.
+
+proof_of_rh(115).tex
+File
+yes, please give me the exact latex edits to make, as well as the wip to remove (since I added your WIP from before)
+
+I’m pulling the actual TeX locations so I can give you surgical edits that match your current draft, including exactly which WIP remark to delete and where to splice the corrected arguments.
+
+I found the key structural point: the clean fix wants one small strengthening in the toy appendix too. Without that, the repaired toy proof is relying on analyticity that is only said informally in the appendix proof, not in the lemma statement.
+
+Yes. This one is ready to be turned into concrete paper edits.
+
+There are five edits to make.
+
+First, in the section \section{\texorpdfstring{$N$}{N}-point odd-moment cancellation}, replace the opening block that currently begins
+
+For $N\le \rho_0Q$, set
+\[
+s_j=\frac{j}{Q^2},
+\qquad j=1,\dots,N,
+\]
+and let $a_j^{(N)}$ be the explicit odd-moment-canceling coefficients satisfying
+...
+
+and ends at
+
+\begin{equation}\label{eq:Xi-zeta}
+\Xi_\zeta^{(N)}(m):=
+\sum_{j=1}^N a_j^{(N)}H_m(s_j).
+\end{equation}
+
+with this:
+
+For $N\le \rho_0Q$, set
+\[
+s_j=\frac{j}{Q^2},
+\qquad j=1,\dots,N,
+\]
+and define
+\[
+a_j^{(N)}
+:=
+(-1)^{j+1}\,
+\frac{j\binom{2N}{N+j}}{\binom{2N-2}{N-1}},
+\qquad 1\le j\le N.
+\]
+Define the corrected $N$-point transverse scalar
+\begin{equation}\label{eq:Xi-zeta}
+\Xi_\zeta^{(N)}(m):=
+\sum_{j=1}^N a_j^{(N)}H_m(s_j).
+\end{equation}
+
+\begin{lemma}[Explicit odd-moment-canceling coefficients and $\ell^1$ control]
+\label{lem:n-point-coefficients}
+The coefficients \(a_j^{(N)}\) satisfy
+\[
+\sum_{j=1}^N a_j^{(N)}=1,
+\qquad
+\sum_{j=1}^N a_j^{(N)}j^{2r+1}=0
+\quad (0\le r\le N-2).
+\]
+Moreover,
+\[
+\sum_{j=1}^N |a_j^{(N)}|=2N-1.
+\]
+Consequently, for every integer \(k\ge 0\),
+\[
+\left|\sum_{j=1}^N a_j^{(N)}j^k\right|
+\le
+(2N-1)N^k.
+\]
+\end{lemma}
+
+\begin{proof}
+Set
+\[
+D_N:=\binom{2N-2}{N-1}.
+\]
+
+We first prove the normalization. Writing
+\[
+j\binom{2N}{N+j}
+=
+N\!\left(\binom{2N-1}{N+j-1}-\binom{2N-1}{N+j}\right),
+\]
+one gets
+\[
+\sum_{j=1}^N (-1)^{j+1}j\binom{2N}{N+j}
+=
+N\sum_{j=1}^N (-1)^{j+1}
+\left(\binom{2N-1}{N+j-1}-\binom{2N-1}{N+j}\right).
+\]
+Using the partial alternating-binomial identity
+\[
+\sum_{k=0}^{m}(-1)^k\binom{n}{k}
+=
+(-1)^m\binom{n-1}{m},
+\]
+one finds
+\[
+\sum_{k=N}^{2N-1}(-1)^k\binom{2N-1}{k}
+=
+(-1)^N\binom{2N-2}{N-1}.
+\]
+Substituting this into the preceding display yields
+\[
+\sum_{j=1}^N (-1)^{j+1}j\binom{2N}{N+j}
+=
+\binom{2N-2}{N-1}
+=
+D_N,
+\]
+hence
+\[
+\sum_{j=1}^N a_j^{(N)}=1.
+\]
+
+Next, for \(0\le r\le N-2\), apply the standard finite-difference identity
+\[
+\sum_{k=0}^{2N}(-1)^k\binom{2N}{k}P(k)=0
+\]
+to the polynomial
+\[
+P(k)=(k-N)^{2r+2},
+\qquad
+\deg P=2r+2<2N.
+\]
+After the change of variables \(j=k-N\), this gives
+\[
+\sum_{j=-N}^{N}(-1)^j\binom{2N}{N+j}j^{2r+2}=0.
+\]
+Since \(2r+2\) is even and the \(j=0\) term vanishes,
+\[
+\sum_{j=1}^{N}(-1)^j\binom{2N}{N+j}j^{2r+2}=0.
+\]
+Dividing by \(D_N\) yields
+\[
+\sum_{j=1}^N a_j^{(N)}j^{2r+1}=0
+\qquad (0\le r\le N-2).
+\]
+
+Finally, since the signs alternate,
+\[
+\sum_{j=1}^N |a_j^{(N)}|
+=
+\frac{1}{D_N}\sum_{j=1}^N j\binom{2N}{N+j}.
+\]
+Using again
+\[
+j\binom{2N}{N+j}
+=
+N\!\left(\binom{2N-1}{N+j-1}-\binom{2N-1}{N+j}\right),
+\]
+this telescopes to
+\[
+\sum_{j=1}^N j\binom{2N}{N+j}
+=
+N\binom{2N-1}{N}.
+\]
+Therefore
+\[
+\sum_{j=1}^N |a_j^{(N)}|
+=
+N\frac{\binom{2N-1}{N}}{\binom{2N-2}{N-1}}
+=
+2N-1.
+\]
+The final moment bound is immediate from
+\[
+\left|\sum_{j=1}^N a_j^{(N)}j^k\right|
+\le
+\sum_{j=1}^N |a_j^{(N)}|\,j^k
+\le
+(2N-1)N^k.
+\qedhere
+\]
+\end{proof}
+
+Second, replace the entire proof of Proposition \ref{prop:corrected-n-point} with this:
+
+\begin{proof}
+By Proposition~\ref{prop:corrected-whitening}, the full corrected scalar
+\[
+H_m(s)=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
+\]
+is holomorphic on \(|s|<\rho_0/Q\). By
+Proposition~\ref{prop:cutoff-compatibility}, all cutoff-dependent tail,
+jet-correction, and estimation contributions are already internal to the full
+corrected scalar \(H_m(s)\); hence no external remainder is carried into
+\(\Xi_\zeta^{(N)}(m)\). By Proposition~\ref{prop:boundary-estimate},
+\[
+|H_m(s)|\ll_{\rho_0}\frac{L(m)S(m)^2}{Q^3}
+\qquad (|s|=\rho_0/Q).
+\]
+By Proposition~\ref{prop:odd-expansion}, it is odd and admits the expansion
+\[
+H_m(z/Q^2)
+=
+\sum_{r\ge 0} c_{2r+1}(m)\frac{z^{2r+1}}{Q^{2r+4}},
+\]
+with
+\[
+|c_{2r+1}(m)|\ll L(m)S(m)^2\,\rho_0^{-(2r+1)}.
+\]
+
+Define
+\[
+\mu_k^{(N)}:=\sum_{j=1}^N a_j^{(N)}j^k.
+\]
+Then
+\[
+\Xi_\zeta^{(N)}(m)
+=
+\sum_{r\ge 0} c_{2r+1}(m)\frac{\mu_{2r+1}^{(N)}}{Q^{2r+4}}.
+\]
+By Lemma~\ref{lem:n-point-coefficients},
+\[
+\mu_{2r+1}^{(N)}=0
+\qquad (0\le r\le N-2),
+\]
+so
+\[
+\Xi_\zeta^{(N)}(m)
+=
+\sum_{r\ge N-1} c_{2r+1}(m)\frac{\mu_{2r+1}^{(N)}}{Q^{2r+4}}.
+\]
+Using Lemma~\ref{lem:n-point-coefficients} again,
+\[
+|\mu_{2r+1}^{(N)}|
+\le
+(2N-1)N^{2r+1}.
+\]
+Hence
+\[
+|\Xi_\zeta^{(N)}(m)|
+\ll
+L(m)S(m)^2
+\sum_{r\ge N-1}
+\rho_0^{-(2r+1)}
+\frac{(2N-1)N^{2r+1}}{Q^{2r+4}}.
+\]
+Equivalently,
+\[
+|\Xi_\zeta^{(N)}(m)|
+\ll
+\frac{(2N-1)L(m)S(m)^2}{Q^3}
+\sum_{r\ge N-1}
+\left(\frac{N}{\rho_0Q}\right)^{2r+1}.
+\]
+
+Now take
+\[
+N=\lfloor \alpha Q\rfloor
+\]
+with \(0<\alpha<\rho_0\). Then
+\[
+\frac{N}{\rho_0Q}\le \frac{\alpha}{\rho_0}<1,
+\]
+so the tail is geometric and its first term is exponentially small in \(Q\).
+Thus, for some \(\delta>0\),
+\[
+\sum_{r\ge N-1}
+\left(\frac{N}{\rho_0Q}\right)^{2r+1}
+\ll e^{-\delta Q}.
+\]
+Since \((2N-1)/Q^3\ll 1\), it follows that
+\[
+|\Xi_\zeta^{(N)}(m)|
+\ll
+L(m)S(m)^2e^{-\delta Q},
+\]
+as claimed.
+\end{proof}
+
+Third, replace the entire statement and proof of Proposition \ref{prop:toy-n-point-direct} with this:
+
+\begin{proposition}[Toy $N$-point transverse preservation]
+\label{prop:toy-n-point-direct}
+Fix a compact interval
+\[
+D=[d_-,d_+]\subset(0,\infty),
+\]
+let \(\rho_{\toy}\) and \(u_0(D)\) be as in
+Lemma~\ref{lem:toy-microscopic-expansion}, and fix
+\[
+0<\alpha<\rho_{\toy}.
+\]
+For
+\[
+N=\lfloor \alpha Q\rfloor,
+\qquad
+s_j=\frac{j}{Q^2},
+\]
+define
+\[
+\Xi_{\toy}^{(N)}(u,d)
+:=
+\sum_{j=1}^N a_j^{(N)}\,
+\Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr).
+\]
+Then, for \(d\in D\) and \(|u|<u_0(D)\),
+\[
+\Xi_{\toy}^{(N)}(u,d)
+=
+u^2\Phi_K(M(d))+O(u^4),
+\]
+uniformly in \(d\in D\). In particular,
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2
+\]
+uniformly on compact \(d\)-ranges.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:toy-microscopic-expansion},
+\[
+\Delta_{\toy}(u,d;s)=u^2M(d)+u^4E(u,d;s),
+\]
+where \(E(u,d;s)\) is analytic in \(s\) on \(|s|<\rho_{\toy}\) and uniformly
+bounded there for \(d\in D\) and \(|u|<u_0(D)\). Applying the linear
+functional \(\Phi_K\), define
+\[
+R_{u,d}(s):=\Phi_K(E(u,d;s)).
+\]
+Then \(R_{u,d}(s)\) is analytic on \(|s|<\rho_{\toy}\), and by Cauchy's
+estimate its Taylor coefficients satisfy
+\[
+R_{u,d}(s)=\sum_{n\ge 0} b_n(u,d)s^n,
+\qquad
+|b_n(u,d)|\ll \rho_{\toy}^{-n},
+\]
+uniformly for \(d\in D\) and \(|u|<u_0(D)\).
+
+Therefore
+\[
+\Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr)
+=
+u^2\Phi_K(M(d))+u^4R_{u,d}(s_j),
+\]
+so
+\[
+\Xi_{\toy}^{(N)}(u,d)
+=
+u^2\Phi_K(M(d))
++
+u^4\sum_{j=1}^N a_j^{(N)}R_{u,d}(s_j).
+\]
+Expand \(R_{u,d}\) at the microscopic nodes \(s_j=j/Q^2\):
+\[
+\sum_{j=1}^N a_j^{(N)}R_{u,d}(s_j)
+=
+\sum_{n\ge 0} b_n(u,d)\frac{\mu_n^{(N)}}{Q^{2n}},
+\qquad
+\mu_n^{(N)}:=\sum_{j=1}^N a_j^{(N)}j^n.
+\]
+
+The constant term contributes
+\[
+b_0(u,d)\mu_0^{(N)}=b_0(u,d),
+\]
+since \(\mu_0^{(N)}=\sum_j a_j^{(N)}=1\) by
+Lemma~\ref{lem:n-point-coefficients}. For the remaining terms, split into
+even and odd parts.
+
+For the even terms, Lemma~\ref{lem:n-point-coefficients} gives
+\[
+|\mu_{2\ell}^{(N)}|
+\le
+(2N-1)N^{2\ell},
+\]
+so
+\[
+\sum_{\ell\ge 1}
+|b_{2\ell}(u,d)|\frac{|\mu_{2\ell}^{(N)}|}{Q^{4\ell}}
+\ll
+(2N-1)\sum_{\ell\ge 1}
+\rho_{\toy}^{-2\ell}\frac{N^{2\ell}}{Q^{4\ell}}
+\ll
+\frac{1}{Q},
+\]
+because \(N\asymp Q\).
+
+For the odd terms, Lemma~\ref{lem:n-point-coefficients} gives
+\[
+\mu_{2r+1}^{(N)}=0
+\qquad (0\le r\le N-2),
+\]
+so only the tail \(r\ge N-1\) remains. Again using
+Lemma~\ref{lem:n-point-coefficients},
+\[
+\sum_{r\ge N-1}
+|b_{2r+1}(u,d)|\frac{|\mu_{2r+1}^{(N)}|}{Q^{4r+2}}
+\ll
+\frac{2N-1}{Q}
+\sum_{r\ge N-1}
+\left(\frac{N}{\rho_{\toy}Q}\right)^{2r+1}.
+\]
+Since \(N=\lfloor \alpha Q\rfloor\) with \(0<\alpha<\rho_{\toy}\), this tail
+is exponentially small in \(Q\), hence in particular \(O(1)\).
+
+Combining the constant, even, and odd contributions,
+\[
+\sum_{j=1}^N a_j^{(N)}R_{u,d}(s_j)=O(1),
+\]
+uniformly for \(d\in D\) and \(|u|<u_0(D)\). Therefore
+\[
+\Xi_{\toy}^{(N)}(u,d)
+=
+u^2\Phi_K(M(d))+O(u^4),
+\]
+uniformly in \(d\in D\).
+
+Because \(\Phi_K(M(d))\neq 0\) for \(d>0\), and is bounded away from \(0\) on
+every compact interval \(D\subset(0,\infty)\), the final estimate
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2
+\]
+follows.
+\end{proof}
+
+Fourth, remove the now-obsolete WIP remark entirely. Delete the whole block
+
+\begin{remark}[Work in progress: coefficient control in toy $N$-point preservation]
+\label{rem:wip-toy-n-point-coefficients}
+...
+\end{remark}
+
+That WIP is no longer needed once the coefficient lemma and corrected toy proof are in.
+
+Fifth, strengthen the toy appendix lemma just enough to support the repaired proof. In Appendix \section{Toy microscopic expansion}, inside Lemma \ref{lem:toy-microscopic-expansion}, replace the part that currently reads
+
+one has the expansion
+\[
+\Delta_{\toy}(u,d;s)=u^2M(d)+u^4E(u,d;s),
+\]
+where $M(d)$ is the toy anomaly matrix and
+\[
+\sup_{\substack{d\in D\\ |s|<\rho_{\toy}\\ |u|<u_0(D)}} \|E(u,d;s)\|\ll 1.
+\]
+
+with
+
+one has the expansion
+\[
+\Delta_{\toy}(u,d;s)=u^2M(d)+u^4E(u,d;s),
+\]
+where \(M(d)\) is the toy anomaly matrix, \(E(u,d;s)\) is analytic in \(s\)
+for \(|s|<\rho_{\toy}\), and
+\[
+\sup_{\substack{d\in D\\ |s|<\rho_{\toy}\\ |u|<u_0(D)}} \|E(u,d;s)\|\ll 1.
+\]
+
+Then, in the proof of that lemma, replace the sentence
+
+and the expansion becomes
+\[
+\Delta_{\toy}(u,d;s)=u^2M(d)+u^4E(u,d;s),
+\]
+with $E$ uniformly bounded on compact parameter ranges.
+
+with
+
+and the expansion becomes
+\[
+\Delta_{\toy}(u,d;s)=u^2M(d)+u^4E(u,d;s),
+\]
+with \(E\) analytic in \(s\) and uniformly bounded on compact parameter
+ranges.
+
+That is the full repair.
+
+One small note: after these edits, the text right below Proposition \ref{prop:toy-n-point-direct}
+
+On the toy side, Proposition~\ref{prop:toy-n-point-direct} gives
+\begin{equation}\label{eq:Xi-toy}
+\Xi_{\toy}^{(N)}(u,d)=u^2\Phi_K(M(d))+O(u^4),
+\end{equation}
+
+can stay exactly as it is.
+
+The net effect is:
+
+    the coefficient family is now explicit and controlled,
+
+    the zeta-side exponential tail estimate is actually proved,
+
+    the toy-side proposition is repaired by analytic ss-expansion rather than the invalid raw ℓ1ℓ1 argument,
+
+    and the coefficient-control WIP remark should be removed.
+
+
+proof_of_rh(118).tex
+File
+check the latest draft, is everything there?
+
+I’m checking the actual TeX against the edits we discussed, not just the high-level structure. I’ll verify the coefficient lemma, the corrected zeta and toy proofs, the appendix strengthening, and whether the old coefficient-control WIP is gone.
+
+Yes — the coefficient-control repair is now in the draft in all the essential places.
+
+What is now present:
+
+    The explicit coefficient definition aj(N)aj(N)​, the moment-cancellation identities, and the exact ℓ1ℓ1-bound
+    ∑j=1N∣aj(N)∣=2N−1
+    j=1∑N​∣aj(N)​∣=2N−1
+
+    are all there in the new lemma.
+
+    The proof of Proposition prop:corrected-n-point has been rewritten to use that lemma and now honestly gets the exponential zeta-side tail.
+
+    The proof of Proposition prop:toy-n-point-direct has been rewritten the right way, via the analytic ss-expansion of Ru,d(s)Ru,d​(s), rather than the old invalid raw estimate.
+
+    The toy appendix lemma now explicitly says E(u,d;s)E(u,d;s) is analytic in ss, which the repaired toy proof needs.
+
+    The old WIP remark rem:wip-toy-n-point-coefficients is gone.
+
+So in substance: yes, the intended repair is there.
+
+I only see two small cleanup points.
+
+First, in Proposition prop:corrected-n-point, the statement still says
+N=⌊αQ⌋ with α>0 sufficiently small,
+N=⌊αQ⌋ with α>0 sufficiently small,
+
+while the proof actually uses the concrete condition
+0<α<ρ0.
+0<α<ρ0​.
+
+That is not a real gap, but I would make the statement match the proof exactly.
+
+Second, in the toy proof, you show the odd tail is exponentially small in QQ, but then only conclude “hence O(1)O(1).” That is logically fine for the final O(u4)O(u4), but a bit weaker-looking than necessary. I would probably leave the argument as is unless you want maximal sharpness.
+
+So my bottom line is:
+
+Yes, the coefficient-control fix is now fully represented in the draft.
+The only things I would still touch are minor polish/alignment, not substantive missing pieces.
+
+The one remaining WIP in this neighborhood is the appendix remark rem:wip-toy-microscopic-expansion, and that is still appropriate.
+
+gave you give me latex insertions for the two cleanup points
+
+I’m pulling the exact phrasing from the current draft so the edits match what is actually in the file, not just the intended structure.
+
+Yes. Here are the two exact cleanup edits.
+
+First, in Proposition \ref{prop:corrected-n-point}, replace the sentence
+
+For $N=\lfloor \alpha Q\rfloor$ with $\alpha>0$ sufficiently small,
+
+with
+
+For $N=\lfloor \alpha Q\rfloor$ with $0<\alpha<\rho_0$,
+
+That makes the proposition statement match the proof exactly.
+
+Second, in the proof of Proposition \ref{prop:toy-n-point-direct}, replace the sentence
+
+Since $N=\lfloor \alpha Q\rfloor$ with $0<\alpha<\rho_{\toy}$, this tail
+is exponentially small in $Q$, hence in particular $O(1)$.
+
+with
+
+Since $N=\lfloor \alpha Q\rfloor$ with $0<\alpha<\rho_{\toy}$, this tail
+is exponentially small in $Q$; in particular,
+\[
+\sum_{r\ge N-1}
+|b_{2r+1}(u,d)|\frac{|\mu_{2r+1}^{(N)}|}{Q^{4r+2}}
+\ll e^{-cQ}
+\]
+for some $c>0$.
+
+Optionally, if you want the proof to reflect that sharper bound one line later, replace
+
+Combining the constant, even, and odd contributions,
+\[
+\sum_{j=1}^N a_j^{(N)}R_{u,d}(s_j)=O(1),
+\]
+
+with
+
+Combining the constant, even, and odd contributions,
+\[
+\sum_{j=1}^N a_j^{(N)}R_{u,d}(s_j)
+=
+b_0(u,d)+O(Q^{-1})+O(e^{-cQ}),
+\]
+and in particular
+\[
+\sum_{j=1}^N a_j^{(N)}R_{u,d}(s_j)=O(1).
+\]
+
+That optional second replacement is not logically necessary, but it makes the proof read cleaner and shows you are actually using the stronger estimate you just derived.
+
+
+Activity · 7m 44s
+Thinking
+Reading documents
+
+Reading documents
+Inspecting LaTeX file for specific labels
+
+bash -lc grep -n "prop:toy-n-point-direct\|corrected-n-point\|wip-toy-n-point-coefficients\|a_j\^\{(N)\}\|Xi_\\toy\^\{(N)\}\|Xi_\\zeta\^\{(N)\}" -n /mnt/data/'proof_of_rh(115).tex' | sed -n '1,200p'
+
+grep: Invalid content of \{\}
+
+Extracting text with fixed string patterns
+
+bash -lc python - <<'PY'
+from pathlib import Path
+text=Path('/mnt/data/proof_of_rh(115).tex').read_text()
+for pat in ['prop:toy-n-point-direct','corrected-n-point','wip-toy-n-point-coefficients','Xi_{\\toy}^{(N)}','Xi_{\\zeta}^{(N)}']:
+    print('\nPAT',pat)
+    idx=text.find(pat)
+    print(idx)
+    if idx!=-1:
+        start=max(0,idx-500); end=min(len(text),idx+2500)
+        print(text[start:end])
+PY
+
+
+PAT prop:toy-n-point-direct
+70679
+ion with the coefficients
+$a_j^{(N)}$ kills the first $N-1$ odd terms of this full corrected
+expansion. The surviving moment factor is exponentially tame for
+$N=\alpha Q$, which gives
+\[
+|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}.
+\]
+\end{proof}
+
+We isolate the toy microscopic expansion in
+Appendix~\ref{app:toy-microscopic-expansion}; the only fact used in the main
+argument is the following $N$-point preservation statement.
+
+\begin{proposition}[Toy $N$-point transverse preservation]
+\label{prop:toy-n-point-direct}
+Fix a compact interval
+\[
+D=[d_-,d_+]\subset(0,\infty),
+\]
+and let
+\[
+\Xi_{\toy}^{(N)}(u,d)
+:=
+\sum_{j=1}^N a_j^{(N)}\,
+\Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr),
+\qquad
+s_j=\frac{j}{Q^2},
+\]
+where the coefficients satisfy
+\[
+\sum_{j=1}^N a_j^{(N)}=1.
+\]
+Then, for $d\in D$ and $|u|<u_0(D)$,
+\[
+\Xi_{\toy}^{(N)}(u,d)
+=
+u^2\Phi_K(M(d))+O(u^4),
+\]
+uniformly in $d\in D$. In particular,
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2
+\]
+uniformly on compact $d$-ranges.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:toy-microscopic-expansion}, one has
+\[
+\Delta_{\toy}(u,d;s_j)=u^2M(d)+u^4E_j(u,d),
+\qquad
+\sup_{1\le j\le N}\|E_j(u,d)\|\ll 1
+\]
+uniformly for $d\in D$. Applying $\Phi_K$ gives
+\[
+\Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr)
+=
+u^2\Phi_K(M(d))+u^4\Phi_K(E_j(u,d)).
+\]
+Summing over $j$ and using
+\[
+\sum_{j=1}^N a_j^{(N)}=1
+\]
+yields
+\[
+\Xi_{\toy}^{(N)}(u,d)
+=
+u^2\Phi_K(M(d))
++
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d)).
+\]
+Since $\Phi_K$ is bounded and $\sup_j\|E_j(u,d)\|\ll 1$, the error term is
+$O(u^4)$, uniformly for $d\in D$. This proves the expansion.
+
+Because $\Phi_K(M(d))\neq 0$ for $d>0$, and is bounded away from $0$ on every
+compact interval $D\subset(0,\infty)$, the final estimate
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2
+\]
+follows.
+\end{proof}
+
+\begin{remark}[Work in progress: coefficient control in toy $N$-point preservation]
+\label{rem:wip-toy-n-point-coefficients}
+As written, Proposition~\ref{prop:toy-n-point-direct} uses only the
+normalization
+\[
+\sum_{j=1}^N a_j^{(N)}=1,
+\]
+but this alone does not justify the estimate
+\[
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d))=O(u^4)
+\]
+uniformly in $N$ and $Q$.
+
+Indeed, from
+\[
+\sup_j \|E_j(u,d)\|\ll 1
+\]
+one only obtains
+\[
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d))
+=
+O\!\Bigl(u^4\sum_{j=1}^N |a_j^{(N)}|\Bigr),
+\]
+so a uniform $O(u^4)$ remainder requires additional control on the coefficient
+family, for example a bound of the form
+\[
+\sum_{j=1}^N |a_j^{(N)}|\ll 1
+\qquad\text{or more generally}\qquad
+\sum_{j=1}^N |a_j^{(N)}|\le e^{o(Q)},
+\]
+which would still be negligible against the zeta-side exponential decay.
+Alternatively, one could prove an exact cancellation identity for the
+$u^4$-error term itself.
+
+Thus the proposition should presently be read as conditional on a
+coefficient-control input not yet written explicitly in the draft.
+\end{remark}
+
+On the toy side, Proposition~\ref{prop:toy-n-point-direct} gives
+\begin{equation}\label{eq:Xi-toy}
+\Xi_{\toy}^{(N)}(u,d)=u^2\Phi_K(M(d))+O(u^4)
+
+PAT corrected-n-point
+68973
+or $N\le \rho_0Q$, set
+\[
+s_j=\frac{j}{Q^2},
+\qquad j=1,\dots,N,
+\]
+and let $a_j^{(N)}$ be the explicit odd-moment-canceling coefficients satisfying
+\[
+\sum_{j=1}^N a_j^{(N)}=1,
+\qquad
+\sum_{j=1}^N a_j^{(N)}j^{2r+1}=0
+\quad (0\le r\le N-2).
+\]
+Define the corrected $N$-point transverse scalar
+\begin{equation}\label{eq:Xi-zeta}
+\Xi_\zeta^{(N)}(m):=
+\sum_{j=1}^N a_j^{(N)}H_m(s_j).
+\end{equation}
+
+\begin{proposition}[Corrected $N$-point transverse estimate for the full corrected scalar]
+\label{prop:corrected-n-point}
+Let
+\[
+H_m(s):=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
+\]
+be the full corrected transverse scalar.
+For $N=\lfloor \alpha Q\rfloor$ with $\alpha>0$ sufficiently small,
+define
+\[
+s_j=\frac{j}{Q^2},
+\qquad
+\Xi_\zeta^{(N)}(m)
+:=
+\sum_{j=1}^N a_j^{(N)}\,H_m(s_j).
+\]
+Then
+\[
+|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}
+\]
+for some $\delta>0$.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:corrected-whitening}, the full corrected scalar
+\[
+H_m(s)=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
+\]
+is holomorphic on $|s|<\rho_0/Q$. By
+Proposition~\ref{prop:cutoff-compatibility}, all cutoff-dependent tail,
+jet-correction, and estimation contributions are already internal to the full
+corrected scalar $H_m(s)$; hence no external remainder is carried into
+$\Xi_\zeta^{(N)}(m)$. By Proposition~\ref{prop:boundary-estimate},
+it satisfies
+\[
+|H_m(s)|\ll_{\rho_0}\frac{L(m)S(m)^2}{Q^3}
+\qquad (|s|=\rho_0/Q).
+\]
+By Proposition~\ref{prop:odd-expansion}, it is odd and admits the expansion
+\[
+H_m(z/Q^2)
+=
+\sum_{r\ge 0} c_{2r+1}(m)\frac{z^{2r+1}}{Q^{2r+4}},
+\]
+with
+\[
+|c_{2r+1}(m)|\ll L(m)S(m)^2\,\rho_0^{-(2r+1)}.
+\]
+
+Applying the standard odd-moment cancellation with the coefficients
+$a_j^{(N)}$ kills the first $N-1$ odd terms of this full corrected
+expansion. The surviving moment factor is exponentially tame for
+$N=\alpha Q$, which gives
+\[
+|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}.
+\]
+\end{proof}
+
+We isolate the toy microscopic expansion in
+Appendix~\ref{app:toy-microscopic-expansion}; the only fact used in the main
+argument is the following $N$-point preservation statement.
+
+\begin{proposition}[Toy $N$-point transverse preservation]
+\label{prop:toy-n-point-direct}
+Fix a compact interval
+\[
+D=[d_-,d_+]\subset(0,\infty),
+\]
+and let
+\[
+\Xi_{\toy}^{(N)}(u,d)
+:=
+\sum_{j=1}^N a_j^{(N)}\,
+\Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr),
+\qquad
+s_j=\frac{j}{Q^2},
+\]
+where the coefficients satisfy
+\[
+\sum_{j=1}^N a_j^{(N)}=1.
+\]
+Then, for $d\in D$ and $|u|<u_0(D)$,
+\[
+\Xi_{\toy}^{(N)}(u,d)
+=
+u^2\Phi_K(M(d))+O(u^4),
+\]
+uniformly in $d\in D$. In particular,
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2
+\]
+uniformly on compact $d$-ranges.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:toy-microscopic-expansion}, one has
+\[
+\Delta_{\toy}(u,d;s_j)=u^2M(d)+u^4E_j(u,d),
+\qquad
+\sup_{1\le j\le N}\|E_j(u,d)\|\ll 1
+\]
+uniformly for $d\in D$. Applying $\Phi_K$ gives
+\[
+\Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr)
+=
+u^2\Phi_K(M(d))+u^4\Phi_K(E_j(u,d))
+
+PAT wip-toy-n-point-coefficients
+72064
+,d)
+=
+u^2\Phi_K(M(d))
++
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d)).
+\]
+Since $\Phi_K$ is bounded and $\sup_j\|E_j(u,d)\|\ll 1$, the error term is
+$O(u^4)$, uniformly for $d\in D$. This proves the expansion.
+
+Because $\Phi_K(M(d))\neq 0$ for $d>0$, and is bounded away from $0$ on every
+compact interval $D\subset(0,\infty)$, the final estimate
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2
+\]
+follows.
+\end{proof}
+
+\begin{remark}[Work in progress: coefficient control in toy $N$-point preservation]
+\label{rem:wip-toy-n-point-coefficients}
+As written, Proposition~\ref{prop:toy-n-point-direct} uses only the
+normalization
+\[
+\sum_{j=1}^N a_j^{(N)}=1,
+\]
+but this alone does not justify the estimate
+\[
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d))=O(u^4)
+\]
+uniformly in $N$ and $Q$.
+
+Indeed, from
+\[
+\sup_j \|E_j(u,d)\|\ll 1
+\]
+one only obtains
+\[
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d))
+=
+O\!\Bigl(u^4\sum_{j=1}^N |a_j^{(N)}|\Bigr),
+\]
+so a uniform $O(u^4)$ remainder requires additional control on the coefficient
+family, for example a bound of the form
+\[
+\sum_{j=1}^N |a_j^{(N)}|\ll 1
+\qquad\text{or more generally}\qquad
+\sum_{j=1}^N |a_j^{(N)}|\le e^{o(Q)},
+\]
+which would still be negligible against the zeta-side exponential decay.
+Alternatively, one could prove an exact cancellation identity for the
+$u^4$-error term itself.
+
+Thus the proposition should presently be read as conditional on a
+coefficient-control input not yet written explicitly in the draft.
+\end{remark}
+
+On the toy side, Proposition~\ref{prop:toy-n-point-direct} gives
+\begin{equation}\label{eq:Xi-toy}
+\Xi_{\toy}^{(N)}(u,d)=u^2\Phi_K(M(d))+O(u^4),
+\end{equation}
+so on compact $d$-ranges,
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2.
+\]
+Using \eqref{eq:u2-calibration},
+\begin{equation}\label{eq:Xi-toy-calibrated}
+|\Xi_{\toy}^{(N)}(u,d)|\asymp \frac{x_0}{B_\zeta(m)}S(m).
+\end{equation}
+
+\begin{remark}[Work in progress: calibrated size versus microscopic toy regime]
+\label{rem:wip-calibration-small-u}
+As presently written, the final calibration freezes the comparison scale at a
+fixed value $x=x_0(D)$, which yields
+\[
+u^2 \asymp \frac{x_0}{B_\zeta(m)}\,S(m).
+\]
+With only the crude global bounds used later in the contradiction,
+\[
+S(m)\ll Q^2,
+\qquad
+B_\zeta(m)\asymp Q,
+\]
+this gives at best
+\[
+u^2\ll x_0 Q,
+\]
+and therefore does not by itself force the calibrated toy parameter $u$ to
+lie in the microscopic toy regime $|u|<u_0(D)$ required by
+Proposition~\ref{prop:toy-n-point-direct}.
+
+A plausible repair is to avoid freezing the scale at $x_0(D)$, and instead
+to choose the comparison scale adaptively:
+\[
+x=x(m)\in (0,x_0(D)].
+\]
+Since the pairing and calibration statements are naturally formulated for
+$0<x\le x_0(D)$, one expects to choose $x(m)$ so that
+\[
+u^2 \asymp \frac{x(m)}{B_\zeta(m)}\,S(m)
+\]
+is forced to remain below the toy threshold $u_0(D)^2$.  For example, if
+the implicit upper bound
+\[
+u^2 \le C\,\frac{x}{B_\zeta(m)}\,S(m)
+\]
+is available uniformly, then one may try to take
+\[
+x(m):=
+\min\!\left\{
+x_0(D
+
+PAT Xi_{\toy}^{(N)}
+70775
+ansion. The surviving moment factor is exponentially tame for
+$N=\alpha Q$, which gives
+\[
+|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}.
+\]
+\end{proof}
+
+We isolate the toy microscopic expansion in
+Appendix~\ref{app:toy-microscopic-expansion}; the only fact used in the main
+argument is the following $N$-point preservation statement.
+
+\begin{proposition}[Toy $N$-point transverse preservation]
+\label{prop:toy-n-point-direct}
+Fix a compact interval
+\[
+D=[d_-,d_+]\subset(0,\infty),
+\]
+and let
+\[
+\Xi_{\toy}^{(N)}(u,d)
+:=
+\sum_{j=1}^N a_j^{(N)}\,
+\Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr),
+\qquad
+s_j=\frac{j}{Q^2},
+\]
+where the coefficients satisfy
+\[
+\sum_{j=1}^N a_j^{(N)}=1.
+\]
+Then, for $d\in D$ and $|u|<u_0(D)$,
+\[
+\Xi_{\toy}^{(N)}(u,d)
+=
+u^2\Phi_K(M(d))+O(u^4),
+\]
+uniformly in $d\in D$. In particular,
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2
+\]
+uniformly on compact $d$-ranges.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:toy-microscopic-expansion}, one has
+\[
+\Delta_{\toy}(u,d;s_j)=u^2M(d)+u^4E_j(u,d),
+\qquad
+\sup_{1\le j\le N}\|E_j(u,d)\|\ll 1
+\]
+uniformly for $d\in D$. Applying $\Phi_K$ gives
+\[
+\Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr)
+=
+u^2\Phi_K(M(d))+u^4\Phi_K(E_j(u,d)).
+\]
+Summing over $j$ and using
+\[
+\sum_{j=1}^N a_j^{(N)}=1
+\]
+yields
+\[
+\Xi_{\toy}^{(N)}(u,d)
+=
+u^2\Phi_K(M(d))
++
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d)).
+\]
+Since $\Phi_K$ is bounded and $\sup_j\|E_j(u,d)\|\ll 1$, the error term is
+$O(u^4)$, uniformly for $d\in D$. This proves the expansion.
+
+Because $\Phi_K(M(d))\neq 0$ for $d>0$, and is bounded away from $0$ on every
+compact interval $D\subset(0,\infty)$, the final estimate
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2
+\]
+follows.
+\end{proof}
+
+\begin{remark}[Work in progress: coefficient control in toy $N$-point preservation]
+\label{rem:wip-toy-n-point-coefficients}
+As written, Proposition~\ref{prop:toy-n-point-direct} uses only the
+normalization
+\[
+\sum_{j=1}^N a_j^{(N)}=1,
+\]
+but this alone does not justify the estimate
+\[
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d))=O(u^4)
+\]
+uniformly in $N$ and $Q$.
+
+Indeed, from
+\[
+\sup_j \|E_j(u,d)\|\ll 1
+\]
+one only obtains
+\[
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d))
+=
+O\!\Bigl(u^4\sum_{j=1}^N |a_j^{(N)}|\Bigr),
+\]
+so a uniform $O(u^4)$ remainder requires additional control on the coefficient
+family, for example a bound of the form
+\[
+\sum_{j=1}^N |a_j^{(N)}|\ll 1
+\qquad\text{or more generally}\qquad
+\sum_{j=1}^N |a_j^{(N)}|\le e^{o(Q)},
+\]
+which would still be negligible against the zeta-side exponential decay.
+Alternatively, one could prove an exact cancellation identity for the
+$u^4$-error term itself.
+
+Thus the proposition should presently be read as conditional on a
+coefficient-control input not yet written explicitly in the draft.
+\end{remark}
+
+On the toy side, Proposition~\ref{prop:toy-n-point-direct} gives
+\begin{equation}\label{eq:Xi-toy}
+\Xi_{\toy}^{(N)}(u,d)=u^2\Phi_K(M(d))+O(u^4),
+\end{equation}
+so on compact $d$-ranges,
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2.
+\]
+Using \eqref
+
+PAT Xi_{\zeta}^{(N)}
+237717
+local anomalies at
+arbitrarily large heights.
+
+A plausible repair is to split the endgame into an effective high-height
+theorem plus a separate finite low-height bridge.
+
+\smallskip
+
+\noindent
+\emph{Effective high-height step.}
+One should first replace the soft asymptotic comparison by an explicit
+inequality.  Concretely, the final contradiction compares a toy-side lower
+bound of the form
+\[
+|\Xi_{\toy}^{(N)}(u,d)|
+\ge
+c_{\toy}\,\mathcal{L}(m)
+\]
+against a zeta-side upper bound of the form
+\[
+|\Xi_{\zeta}^{(N)}(m)|
+\le
+C_{\zeta}\,\mathcal{U}(m)\,e^{-\delta Q},
+\]
+where in the present draft one has schematically
+\[
+\mathcal{L}(m)\asymp \frac{x}{B_\zeta(m)}S(m)
+\]
+(or its variable-$x$ replacement from
+Remark~\ref{rem:wip-calibration-small-u}),
+and
+\[
+\mathcal{U}(m)\asymp L(m)S(m)^2.
+\]
+To extract an actual threshold, every use of $O(\cdot)$, $\ll$, and
+$\asymp$ in the final comparison must be replaced by explicit constants.
+After substituting explicit bounds such as
+\[
+B_\zeta(m)\le C_B Q,\qquad
+L(m)\le C_L Q,\qquad
+S(m)\le C_S Q^2,
+\]
+the contradiction should reduce to an explicit scalar inequality of the form
+\[
+C_* Q^4 e^{-\delta Q}<1
+\qquad (Q\ge Q_*),
+\]
+for some computable constant $C_*>0$.  Any explicit $Q_*$ satisfying this
+inequality would then yield an \emph{effective} theorem excluding pair-like
+off-line anomalies for all $Q\ge Q_*$.
+
+\smallskip
+
+\noindent
+\emph{Height extraction.}
+Once $Q_*$ is known explicitly, one must convert it into an actual height
+threshold.  Since the draft works with a midpoint parameter $m$ satisfying
+\[
+Q\asymp \log |m|,
+\]
+this requires making the logarithmic comparability effective, for example in
+the form
+\[
+c_Q \log(3+|m|)\le Q\le C_Q \log(3+|m|).
+\]
+From such inequalities one obtains an explicit midpoint threshold $m_*$, and
+hence an explicit zero-height threshold $T_*$, since the local points under
+consideration satisfy
+\[
+t_\pm = m \pm \frac{\sigma}{2}
+\]
+with $|\sigma|$ microscopic relative to the height scale.  Thus one would
+arrive at a statement of the form:
+\[
+\text{no pair-like off-line zero can occur for } |\Im \rho|>T_*.
+\]
+
+\smallskip
+
+\noindent
+\emph{Finite low-height bridge.}
+The effective high-height theorem alone still does not imply the full Riemann
+Hypothesis unless one also excludes all potential off-line zeros below the
+threshold $T_*$.  A natural way to do this is to combine the structural
+argument above height $T_*$ with a rigorous finite verification of $\RH$
+up to height $T_*$.  Accordingly, if one can arrange that the explicit
+threshold $T_*$ lies below a rigorously verified range, then the final step
+would be:
+\[
+\text{high-height exclusion above }T_*
+\quad+\quad
+\text{rigorous verification below }T_*
+\quad\Longrightarrow\quad
+\RH.
+\]
+This would still be an unconditional proof, albeit a computer-assisted one
+rather than a purely internal asymptotic contradiction.
+
+\smallskip
+
+\noindent
+\emph{What still needs to be made explicit.}
+To implement this repair rigorously, the draft must
+
+Inspecting coefficient section for lemma edits
+
+bash -lc python - <<'PY'
+from pathlib import Path
+text=Path('/mnt/data/proof_of_rh(115).tex').read_text()
+for pat in ['explicit odd-moment-canceling coefficients','odd-moment-canceling','sum_{j=1}^N a_j^{(N)}j^{2r+1}','standard odd-moment cancellation']:
+    idx=text.find(pat)
+    print('PAT',pat,idx)
+    if idx!=-1:
+        print(text[max(0,idx-2500):min(len(text),idx+2500)])
+PY
+
+PAT explicit odd-moment-canceling coefficients 68568
+athcal S_k:=\{\rho:\ 2^kH<\Delta_\rho\le 2^{k+1}H\},
+\qquad
+\Delta_\rho:=|2m-\gamma_\rho|,
+\qquad
+k\ge 0.
+\]
+Then
+\[
+\#\mathcal S_k\ll Q\,(2^kH+1),
+\]
+where $Q\asymp \log|m|$.
+\end{lemma}
+
+\begin{proof}
+This is the local zero-counting estimate already used elsewhere in the draft,
+applied to the interval of ordinates
+\[
+[\,2m-2^{k+1}H,\;2m+2^{k+1}H\,].
+\]
+Its length is $O(2^kH+1)$, and the local zero density at height $m$ is
+$O(Q)$.
+\end{proof}
+
+\begin{corollary}[Exterior higher odd-jet bound]
+\label{cor:outside-higher-odd-jets}
+Let
+\[
+H_{\out}(z/Q^2)
+=
+\sum_{r\ge 0} a_{2r+1}^{\out}(m,H)\,\frac{z^{2r+1}}{Q^{2r+4}}
+\]
+be the corrected transverse scalar contributed by all zeros outside absolute
+radius $H$ from the local center. Then for each fixed $r\ge 0$,
+\[
+\boxed{
+|a_{2r+1}^{\out}(m,H)|\ll_r \frac{1}{H^{2r+3}}.
+}
+\]
+\end{corollary}
+
+\begin{proof}
+Decompose the exterior zeros into dyadic shells
+\[
+\mathcal S_k:=\{\rho:\ 2^kH<\Delta_\rho\le 2^{k+1}H\},
+\qquad k\ge 0.
+\]
+By Lemma~\ref{lem:dyadic-shell-count},
+\[
+\#\mathcal S_k\ll Q(2^kH+1).
+\]
+Applying Corollary~\ref{cor:single-pair-odd-jet} to each
+$\rho\in\mathcal S_k$,
+\[
+\sum_{\rho\in\mathcal S_k}|a_{2r+1}(\rho)|
+\ll_r
+Q(2^kH+1)\cdot \frac{1}{Q(2^kH)^{2r+4}}
+\ll_r
+\frac{1}{(2^kH)^{2r+3}},
+\]
+since $2r+4\ge 4$. Summing over $k\ge 0$,
+\[
+|a_{2r+1}^{\out}(m,H)|
+\ll_r
+\sum_{k\ge 0}\frac{1}{(2^kH)^{2r+3}}
+\ll_r
+\frac{1}{H^{2r+3}},
+\]
+as claimed.
+\end{proof}
+
+\begin{remark}[Status of the shell-summed $Q$-factor]
+\label{rem:status-outside-q-factor}
+Corollary~\ref{cor:single-pair-odd-jet} gives the single-pair bound
+\[
+|a_{2r+1}(\rho)|\ll_r \frac{1}{Q\,\Delta^{2r+4}}.
+\]
+After summing over dyadic shells using
+\[
+\#\mathcal S_k\ll Q(2^kH+1),
+\]
+the $Q^{-1}$ from the single-pair estimate is canceled by the $Q$-factor in
+the shell count. Thus the shell summation as presently written yields the
+stable bound
+\[
+|a_{2r+1}^{\out}(m,H)|\ll_r \frac{1}{H^{2r+3}},
+\]
+rather than
+\[
+|a_{2r+1}^{\out}(m,H)|\ll_r \frac{1}{Q\,H^{2r+3}}.
+\]
+
+Accordingly, the present draft records only the $H^{-(2r+3)}$ exterior decay
+as the unconditional shell-summed statement. A further $Q^{-1}$ gain would be
+a secondary strengthening obtainable only from a more precise differentiated
+scalar-normalization analysis, not a main obstruction to the current proof
+architecture.
+\end{remark}
+
+\section{\texorpdfstring{$N$}{N}-point odd-moment cancellation}
+
+For $N\le \rho_0Q$, set
+\[
+s_j=\frac{j}{Q^2},
+\qquad j=1,\dots,N,
+\]
+and let $a_j^{(N)}$ be the explicit odd-moment-canceling coefficients satisfying
+\[
+\sum_{j=1}^N a_j^{(N)}=1,
+\qquad
+\sum_{j=1}^N a_j^{(N)}j^{2r+1}=0
+\quad (0\le r\le N-2).
+\]
+Define the corrected $N$-point transverse scalar
+\begin{equation}\label{eq:Xi-zeta}
+\Xi_\zeta^{(N)}(m):=
+\sum_{j=1}^N a_j^{(N)}H_m(s_j).
+\end{equation}
+
+\begin{proposition}[Corrected $N$-point transverse estimate for the full corrected scalar]
+\label{prop:corrected-n-point}
+Let
+\[
+H_m(s):=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
+\]
+be the full corrected transverse scalar.
+For $N=\lfloor \alpha Q\rfloor$ with $\alpha>0$ sufficiently small,
+define
+\[
+s_j=\frac{j}{Q^2},
+\qquad
+\Xi_\zeta^{(N)}(m)
+:=
+\sum_{j=1}^N a_j^{(N)}\,H_m(s_j).
+\]
+Then
+\[
+|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}
+\]
+for some $\delta>0$.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:corrected-whitening}, the full corrected scalar
+\[
+H_m(s)=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
+\]
+is holomorphic on $|s|<\rho_0/Q$. By
+Proposition~\ref{prop:cutoff-compatibility}, all cutoff-dependent tail,
+jet-correction, and estimation contributions are already internal to the full
+corrected scalar $H_m(s)$; hence no external remainder is carried into
+$\Xi_\zeta^{(N)}(m)$. By Proposition~\ref{prop:boundary-estimate},
+it satisfies
+\[
+|H_m(s)|\ll_{\rho_0}\frac{L(m)S(m)^2}{Q^3}
+\qquad (|s|=\rho_0/Q).
+\]
+By Proposition~\ref{prop:odd-expansion}, it is odd and admits the expansion
+\[
+H_m(z/Q^2)
+=
+\sum_{r\ge 0} c_{2r+1}(m)\frac{z^{2r+1}}{Q^{2r+4}},
+\]
+with
+\[
+|c_{2r+1}(m)|\ll L(m)S(m)^2\,\rho_0^{-(2r+1)}.
+\]
+
+Applying the standard odd-moment cancellation with the coefficients
+$a_j^{(N)}$ kills the first $N-1$ odd terms of this full corrected
+expansion. The surviving moment factor is exponentially tame for
+$N=\alpha Q$, which gives
+\[
+|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}.
+\]
+\end{proof}
+
+We isolate the toy microscopic expansion in
+Appendix~\ref{app:toy-microscopic-expansion}; the only fact used in the main
+argument is the following $N$-point preservation statement.
+
+\begin{proposition}[Toy $N$-point transverse preservation]
+\label{prop:toy-n-point-direct}
+Fix a compact interval
+\[
+D=[d_-,d_+]\subset(0,\infty),
+\]
+and let
+\[
+\Xi_{\toy}^{(N)}(u,d)
+:=
+\sum_{j=1}^N a_j^{(N)}\,
+\Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr),
+\qquad
+s_j=\frac{j}{Q^2},
+\]
+where the coefficients satisfy
+\[
+\sum_{j=1}^N a_j^{(N)}=1.
+\]
+Then, for $d\in D$ and $|u|<u_0(D)$,
+\[
+\Xi_{\toy}^{(N)}(u,d)
+=
+u^2\Phi_K(M(d))+O(u^4),
+\]
+uniformly in $d\i
+PAT odd-moment-canceling 68577
+k:=\{\rho:\ 2^kH<\Delta_\rho\le 2^{k+1}H\},
+\qquad
+\Delta_\rho:=|2m-\gamma_\rho|,
+\qquad
+k\ge 0.
+\]
+Then
+\[
+\#\mathcal S_k\ll Q\,(2^kH+1),
+\]
+where $Q\asymp \log|m|$.
+\end{lemma}
+
+\begin{proof}
+This is the local zero-counting estimate already used elsewhere in the draft,
+applied to the interval of ordinates
+\[
+[\,2m-2^{k+1}H,\;2m+2^{k+1}H\,].
+\]
+Its length is $O(2^kH+1)$, and the local zero density at height $m$ is
+$O(Q)$.
+\end{proof}
+
+\begin{corollary}[Exterior higher odd-jet bound]
+\label{cor:outside-higher-odd-jets}
+Let
+\[
+H_{\out}(z/Q^2)
+=
+\sum_{r\ge 0} a_{2r+1}^{\out}(m,H)\,\frac{z^{2r+1}}{Q^{2r+4}}
+\]
+be the corrected transverse scalar contributed by all zeros outside absolute
+radius $H$ from the local center. Then for each fixed $r\ge 0$,
+\[
+\boxed{
+|a_{2r+1}^{\out}(m,H)|\ll_r \frac{1}{H^{2r+3}}.
+}
+\]
+\end{corollary}
+
+\begin{proof}
+Decompose the exterior zeros into dyadic shells
+\[
+\mathcal S_k:=\{\rho:\ 2^kH<\Delta_\rho\le 2^{k+1}H\},
+\qquad k\ge 0.
+\]
+By Lemma~\ref{lem:dyadic-shell-count},
+\[
+\#\mathcal S_k\ll Q(2^kH+1).
+\]
+Applying Corollary~\ref{cor:single-pair-odd-jet} to each
+$\rho\in\mathcal S_k$,
+\[
+\sum_{\rho\in\mathcal S_k}|a_{2r+1}(\rho)|
+\ll_r
+Q(2^kH+1)\cdot \frac{1}{Q(2^kH)^{2r+4}}
+\ll_r
+\frac{1}{(2^kH)^{2r+3}},
+\]
+since $2r+4\ge 4$. Summing over $k\ge 0$,
+\[
+|a_{2r+1}^{\out}(m,H)|
+\ll_r
+\sum_{k\ge 0}\frac{1}{(2^kH)^{2r+3}}
+\ll_r
+\frac{1}{H^{2r+3}},
+\]
+as claimed.
+\end{proof}
+
+\begin{remark}[Status of the shell-summed $Q$-factor]
+\label{rem:status-outside-q-factor}
+Corollary~\ref{cor:single-pair-odd-jet} gives the single-pair bound
+\[
+|a_{2r+1}(\rho)|\ll_r \frac{1}{Q\,\Delta^{2r+4}}.
+\]
+After summing over dyadic shells using
+\[
+\#\mathcal S_k\ll Q(2^kH+1),
+\]
+the $Q^{-1}$ from the single-pair estimate is canceled by the $Q$-factor in
+the shell count. Thus the shell summation as presently written yields the
+stable bound
+\[
+|a_{2r+1}^{\out}(m,H)|\ll_r \frac{1}{H^{2r+3}},
+\]
+rather than
+\[
+|a_{2r+1}^{\out}(m,H)|\ll_r \frac{1}{Q\,H^{2r+3}}.
+\]
+
+Accordingly, the present draft records only the $H^{-(2r+3)}$ exterior decay
+as the unconditional shell-summed statement. A further $Q^{-1}$ gain would be
+a secondary strengthening obtainable only from a more precise differentiated
+scalar-normalization analysis, not a main obstruction to the current proof
+architecture.
+\end{remark}
+
+\section{\texorpdfstring{$N$}{N}-point odd-moment cancellation}
+
+For $N\le \rho_0Q$, set
+\[
+s_j=\frac{j}{Q^2},
+\qquad j=1,\dots,N,
+\]
+and let $a_j^{(N)}$ be the explicit odd-moment-canceling coefficients satisfying
+\[
+\sum_{j=1}^N a_j^{(N)}=1,
+\qquad
+\sum_{j=1}^N a_j^{(N)}j^{2r+1}=0
+\quad (0\le r\le N-2).
+\]
+Define the corrected $N$-point transverse scalar
+\begin{equation}\label{eq:Xi-zeta}
+\Xi_\zeta^{(N)}(m):=
+\sum_{j=1}^N a_j^{(N)}H_m(s_j).
+\end{equation}
+
+\begin{proposition}[Corrected $N$-point transverse estimate for the full corrected scalar]
+\label{prop:corrected-n-point}
+Let
+\[
+H_m(s):=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
+\]
+be the full corrected transverse scalar.
+For $N=\lfloor \alpha Q\rfloor$ with $\alpha>0$ sufficiently small,
+define
+\[
+s_j=\frac{j}{Q^2},
+\qquad
+\Xi_\zeta^{(N)}(m)
+:=
+\sum_{j=1}^N a_j^{(N)}\,H_m(s_j).
+\]
+Then
+\[
+|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}
+\]
+for some $\delta>0$.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:corrected-whitening}, the full corrected scalar
+\[
+H_m(s)=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
+\]
+is holomorphic on $|s|<\rho_0/Q$. By
+Proposition~\ref{prop:cutoff-compatibility}, all cutoff-dependent tail,
+jet-correction, and estimation contributions are already internal to the full
+corrected scalar $H_m(s)$; hence no external remainder is carried into
+$\Xi_\zeta^{(N)}(m)$. By Proposition~\ref{prop:boundary-estimate},
+it satisfies
+\[
+|H_m(s)|\ll_{\rho_0}\frac{L(m)S(m)^2}{Q^3}
+\qquad (|s|=\rho_0/Q).
+\]
+By Proposition~\ref{prop:odd-expansion}, it is odd and admits the expansion
+\[
+H_m(z/Q^2)
+=
+\sum_{r\ge 0} c_{2r+1}(m)\frac{z^{2r+1}}{Q^{2r+4}},
+\]
+with
+\[
+|c_{2r+1}(m)|\ll L(m)S(m)^2\,\rho_0^{-(2r+1)}.
+\]
+
+Applying the standard odd-moment cancellation with the coefficients
+$a_j^{(N)}$ kills the first $N-1$ odd terms of this full corrected
+expansion. The surviving moment factor is exponentially tame for
+$N=\alpha Q$, which gives
+\[
+|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}.
+\]
+\end{proof}
+
+We isolate the toy microscopic expansion in
+Appendix~\ref{app:toy-microscopic-expansion}; the only fact used in the main
+argument is the following $N$-point preservation statement.
+
+\begin{proposition}[Toy $N$-point transverse preservation]
+\label{prop:toy-n-point-direct}
+Fix a compact interval
+\[
+D=[d_-,d_+]\subset(0,\infty),
+\]
+and let
+\[
+\Xi_{\toy}^{(N)}(u,d)
+:=
+\sum_{j=1}^N a_j^{(N)}\,
+\Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr),
+\qquad
+s_j=\frac{j}{Q^2},
+\]
+where the coefficients satisfy
+\[
+\sum_{j=1}^N a_j^{(N)}=1.
+\]
+Then, for $d\in D$ and $|u|<u_0([... ELLIPSIZATION ...]\,(2^kH+1),
+\]
+where $Q\asymp \log|m|$.
+\end{lemma}
+
+\begin{proof}
+This is the local zero-counting estimate already used elsewhere in the draft,
+applied to the interval of ordinates
+\[
+[\,2m-2^{k+1}H,\;2m+2^{k+1}H\,].
+\]
+Its length is $O(2^kH+1)$, and the local zero density at height $m$ is
+$O(Q)$.
+\end{proof}
+
+\begin{corollary}[Exterior higher odd-jet bound]
+\label{cor:outside-higher-odd-jets}
+Let
+\[
+H_{\out}(z/Q^2)
+=
+\sum_{r\ge 0} a_{2r+1}^{\out}(m,H)\,\frac{z^{2r+1}}{Q^{2r+4}}
+\]
+be the corrected transverse scalar contributed by all zeros outside absolute
+radius $H$ from the local center. Then for each fixed $r\ge 0$,
+\[
+\boxed{
+|a_{2r+1}^{\out}(m,H)|\ll_r \frac{1}{H^{2r+3}}.
+}
+\]
+\end{corollary}
+
+\begin{proof}
+Decompose the exterior zeros into dyadic shells
+\[
+\mathcal S_k:=\{\rho:\ 2^kH<\Delta_\rho\le 2^{k+1}H\},
+\qquad k\ge 0.
+\]
+By Lemma~\ref{lem:dyadic-shell-count},
+\[
+\#\mathcal S_k\ll Q(2^kH+1).
+\]
+Applying Corollary~\ref{cor:single-pair-odd-jet} to each
+$\rho\in\mathcal S_k$,
+\[
+\sum_{\rho\in\mathcal S_k}|a_{2r+1}(\rho)|
+\ll_r
+Q(2^kH+1)\cdot \frac{1}{Q(2^kH)^{2r+4}}
+\ll_r
+\frac{1}{(2^kH)^{2r+3}},
+\]
+since $2r+4\ge 4$. Summing over $k\ge 0$,
+\[
+|a_{2r+1}^{\out}(m,H)|
+\ll_r
+\sum_{k\ge 0}\frac{1}{(2^kH)^{2r+3}}
+\ll_r
+\frac{1}{H^{2r+3}},
+\]
+as claimed.
+\end{proof}
+
+\begin{remark}[Status of the shell-summed $Q$-factor]
+\label{rem:status-outside-q-factor}
+Corollary~\ref{cor:single-pair-odd-jet} gives the single-pair bound
+\[
+|a_{2r+1}(\rho)|\ll_r \frac{1}{Q\,\Delta^{2r+4}}.
+\]
+After summing over dyadic shells using
+\[
+\#\mathcal S_k\ll Q(2^kH+1),
+\]
+the $Q^{-1}$ from the single-pair estimate is canceled by the $Q$-factor in
+the shell count. Thus the shell summation as presently written yields the
+stable bound
+\[
+|a_{2r+1}^{\out}(m,H)|\ll_r \frac{1}{H^{2r+3}},
+\]
+rather than
+\[
+|a_{2r+1}^{\out}(m,H)|\ll_r \frac{1}{Q\,H^{2r+3}}.
+\]
+
+Accordingly, the present draft records only the $H^{-(2r+3)}$ exterior decay
+as the unconditional shell-summed statement. A further $Q^{-1}$ gain would be
+a secondary strengthening obtainable only from a more precise differentiated
+scalar-normalization analysis, not a main obstruction to the current proof
+architecture.
+\end{remark}
+
+\section{\texorpdfstring{$N$}{N}-point odd-moment cancellation}
+
+For $N\le \rho_0Q$, set
+\[
+s_j=\frac{j}{Q^2},
+\qquad j=1,\dots,N,
+\]
+and let $a_j^{(N)}$ be the explicit odd-moment-canceling coefficients satisfying
+\[
+\sum_{j=1}^N a_j^{(N)}=1,
+\qquad
+\sum_{j=1}^N a_j^{(N)}j^{2r+1}=0
+\quad (0\le r\le N-2).
+\]
+Define the corrected $N$-point transverse scalar
+\begin{equation}\label{eq:Xi-zeta}
+\Xi_\zeta^{(N)}(m):=
+\sum_{j=1}^N a_j^{(N)}H_m(s_j).
+\end{equation}
+
+\begin{proposition}[Corrected $N$-point transverse estimate for the full corrected scalar]
+\label{prop:corrected-n-point}
+Let
+\[
+H_m(s):=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
+\]
+be the full corrected transverse scalar.
+For $N=\lfloor \alpha Q\rfloor$ with $\alpha>0$ sufficiently small,
+define
+\[
+s_j=\frac{j}{Q^2},
+\qquad
+\Xi_\zeta^{(N)}(m)
+:=
+\sum_{j=1}^N a_j^{(N)}\,H_m(s_j).
+\]
+Then
+\[
+|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}
+\]
+for some $\delta>0$.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:corrected-whitening}, the full corrected scalar
+\[
+H_m(s)=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
+\]
+is holomorphic on $|s|<\rho_0/Q$. By
+Proposition~\ref{prop:cutoff-compatibility}, all cutoff-dependent tail,
+jet-correction, and estimation contributions are already internal to the full
+corrected scalar $H_m(s)$; hence no external remainder is carried into
+$\Xi_\zeta^{(N)}(m)$. By Proposition~\ref{prop:boundary-estimate},
+it satisfies
+\[
+|H_m(s)|\ll_{\rho_0}\frac{L(m)S(m)^2}{Q^3}
+\qquad (|s|=\rho_0/Q).
+\]
+By Proposition~\ref{prop:odd-expansion}, it is odd and admits the expansion
+\[
+H_m(z/Q^2)
+=
+\sum_{r\ge 0} c_{2r+1}(m)\frac{z^{2r+1}}{Q^{2r+4}},
+\]
+with
+\[
+|c_{2r+1}(m)|\ll L(m)S(m)^2\,\rho_0^{-(2r+1)}.
+\]
+
+Applying the standard odd-moment cancellation with the coefficients
+$a_j^{(N)}$ kills the first $N-1$ odd terms of this full corrected
+expansion. The surviving moment factor is exponentially tame for
+$N=\alpha Q$, which gives
+\[
+|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}.
+\]
+\end{proof}
+
+We isolate the toy microscopic expansion in
+Appendix~\ref{app:toy-microscopic-expansion}; the only fact used in the main
+argument is the following $N$-point preservation statement.
+
+\begin{proposition}[Toy $N$-point transverse preservation]
+\label{prop:toy-n-point-direct}
+Fix a compact interval
+\[
+D=[d_-,d_+]\subset(0,\infty),
+\]
+and let
+\[
+\Xi_{\toy}^{(N)}(u,d)
+:=
+\sum_{j=1}^N a_j^{(N)}\,
+\Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr),
+\qquad
+s_j=\frac{j}{Q^2},
+\]
+where the coefficients satisfy
+\[
+\sum_{j=1}^N a_j^{(N)}=1.
+\]
+Then, for $d\in D$ and $|u|<u_0(D)$,
+\[
+\Xi_{\toy}^{(N)}(u,d)
+=
+u^2\Phi_K(M(d))+O(u^4),
+\]
+uniformly in $d\in D$. In particular,
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2
+\]
+uniformly on compact $d$-range
+PAT standard odd-moment cancellation 70150
+ound
+\[
+|a_{2r+1}(\rho)|\ll_r \frac{1}{Q\,\Delta^{2r+4}}.
+\]
+After summing over dyadic shells using
+\[
+\#\mathcal S_k\ll Q(2^kH+1),
+\]
+the $Q^{-1}$ from the single-pair estimate is canceled by the $Q$-factor in
+the shell count. Thus the shell summation as presently written yields the
+stable bound
+\[
+|a_{2r+1}^{\out}(m,H)|\ll_r \frac{1}{H^{2r+3}},
+\]
+rather than
+\[
+|a_{2r+1}^{\out}(m,H)|\ll_r \frac{1}{Q\,H^{2r+3}}.
+\]
+
+Accordingly, the present draft records only the $H^{-(2r+3)}$ exterior decay
+as the unconditional shell-summed statement. A further $Q^{-1}$ gain would be
+a secondary strengthening obtainable only from a more precise differentiated
+scalar-normalization analysis, not a main obstruction to the current proof
+architecture.
+\end{remark}
+
+\section{\texorpdfstring{$N$}{N}-point odd-moment cancellation}
+
+For $N\le \rho_0Q$, set
+\[
+s_j=\frac{j}{Q^2},
+\qquad j=1,\dots,N,
+\]
+and let $a_j^{(N)}$ be the explicit odd-moment-canceling coefficients satisfying
+\[
+\sum_{j=1}^N a_j^{(N)}=1,
+\qquad
+\sum_{j=1}^N a_j^{(N)}j^{2r+1}=0
+\quad (0\le r\le N-2).
+\]
+Define the corrected $N$-point transverse scalar
+\begin{equation}\label{eq:Xi-zeta}
+\Xi_\zeta^{(N)}(m):=
+\sum_{j=1}^N a_j^{(N)}H_m(s_j).
+\end{equation}
+
+\begin{proposition}[Corrected $N$-point transverse estimate for the full corrected scalar]
+\label{prop:corrected-n-point}
+Let
+\[
+H_m(s):=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
+\]
+be the full corrected transverse scalar.
+For $N=\lfloor \alpha Q\rfloor$ with $\alpha>0$ sufficiently small,
+define
+\[
+s_j=\frac{j}{Q^2},
+\qquad
+\Xi_\zeta^{(N)}(m)
+:=
+\sum_{j=1}^N a_j^{(N)}\,H_m(s_j).
+\]
+Then
+\[
+|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}
+\]
+for some $\delta>0$.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:corrected-whitening}, the full corrected scalar
+\[
+H_m(s)=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
+\]
+is holomorphic on $|s|<\rho_0/Q$. By
+Proposition~\ref{prop:cutoff-compatibility}, all cutoff-dependent tail,
+jet-correction, and estimation contributions are already internal to the full
+corrected scalar $H_m(s)$; hence no external remainder is carried into
+$\Xi_\zeta^{(N)}(m)$. By Proposition~\ref{prop:boundary-estimate},
+it satisfies
+\[
+|H_m(s)|\ll_{\rho_0}\frac{L(m)S(m)^2}{Q^3}
+\qquad (|s|=\rho_0/Q).
+\]
+By Proposition~\ref{prop:odd-expansion}, it is odd and admits the expansion
+\[
+H_m(z/Q^2)
+=
+\sum_{r\ge 0} c_{2r+1}(m)\frac{z^{2r+1}}{Q^{2r+4}},
+\]
+with
+\[
+|c_{2r+1}(m)|\ll L(m)S(m)^2\,\rho_0^{-(2r+1)}.
+\]
+
+Applying the standard odd-moment cancellation with the coefficients
+$a_j^{(N)}$ kills the first $N-1$ odd terms of this full corrected
+expansion. The surviving moment factor is exponentially tame for
+$N=\alpha Q$, which gives
+\[
+|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}.
+\]
+\end{proof}
+
+We isolate the toy microscopic expansion in
+Appendix~\ref{app:toy-microscopic-expansion}; the only fact used in the main
+argument is the following $N$-point preservation statement.
+
+\begin{proposition}[Toy $N$-point transverse preservation]
+\label{prop:toy-n-point-direct}
+Fix a compact interval
+\[
+D=[d_-,d_+]\subset(0,\infty),
+\]
+and let
+\[
+\Xi_{\toy}^{(N)}(u,d)
+:=
+\sum_{j=1}^N a_j^{(N)}\,
+\Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr),
+\qquad
+s_j=\frac{j}{Q^2},
+\]
+where the coefficients satisfy
+\[
+\sum_{j=1}^N a_j^{(N)}=1.
+\]
+Then, for $d\in D$ and $|u|<u_0(D)$,
+\[
+\Xi_{\toy}^{(N)}(u,d)
+=
+u^2\Phi_K(M(d))+O(u^4),
+\]
+uniformly in $d\in D$. In particular,
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2
+\]
+uniformly on compact $d$-ranges.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:toy-microscopic-expansion}, one has
+\[
+\Delta_{\toy}(u,d;s_j)=u^2M(d)+u^4E_j(u,d),
+\qquad
+\sup_{1\le j\le N}\|E_j(u,d)\|\ll 1
+\]
+uniformly for $d\in D$. Applying $\Phi_K$ gives
+\[
+\Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr)
+=
+u^2\Phi_K(M(d))+u^4\Phi_K(E_j(u,d)).
+\]
+Summing over $j$ and using
+\[
+\sum_{j=1}^N a_j^{(N)}=1
+\]
+yields
+\[
+\Xi_{\toy}^{(N)}(u,d)
+=
+u^2\Phi_K(M(d))
++
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d)).
+\]
+Since $\Phi_K$ is bounded and $\sup_j\|E_j(u,d)\|\ll 1$, the error term is
+$O(u^4)$, uniformly for $d\in D$. This proves the expansion.
+
+Because $\Phi_K(M(d))\neq 0$ for $d>0$, and is bounded away from $0$ on every
+compact interval $D\subset(0,\infty)$, the final estimate
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2
+\]
+follows.
+\end{proof}
+
+\begin{remark}[Work in progress: coefficient control in toy $N$-point preservation]
+\label{rem:wip-toy-n-point-coefficients}
+As written, Proposition~\ref{prop:toy-n-point-direct} uses only the
+normalization
+\[
+\sum_{j=1}^N a_j^{(N)}=1,
+\]
+but this alone does not justify the estimate
+\[
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d))=O(u^4)
+\]
+uniformly in $N$ and $Q$.
+
+Indeed, from
+\[
+\sup_j \|E_j(u,d)\|\ll 1
+\]
+one only obtains
+\[
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d))
+=
+O\!\Bigl(u^4\sum_{j=1}^N |a_j^{(N)}|\Bigr),
+\]
+so a uniform $O(u^4)$ remainder requires additional control on the coefficient
+family, for example a bound of the form
+\[
+\sum_{j=1}^N |a_j^{(N)}|\ll 1
+\qquad\t
+
+Searching for terms in document
+
+bash -lc python - <<'PY'
+from pathlib import Path
+text=Path('/mnt/data/proof_of_rh(115).tex').read_text()
+for pat in ['lem:toy-microscopic-expansion','Delta_{\\toy}(u,d;s)','rho_{\\toy}','E(u,d;s)','Phi_K(E(u,d;s))','toy-microscopic-expansion']:
+    idx=text.find(pat)
+    print('\nPAT',pat,idx)
+    if idx!=-1:
+        print(text[max(0,idx-1800):min(len(text),idx+3000)])
+PY
+
+
+PAT lem:toy-microscopic-expansion 71209
+rected-whitening}, the full corrected scalar
+\[
+H_m(s)=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
+\]
+is holomorphic on $|s|<\rho_0/Q$. By
+Proposition~\ref{prop:cutoff-compatibility}, all cutoff-dependent tail,
+jet-correction, and estimation contributions are already internal to the full
+corrected scalar $H_m(s)$; hence no external remainder is carried into
+$\Xi_\zeta^{(N)}(m)$. By Proposition~\ref{prop:boundary-estimate},
+it satisfies
+\[
+|H_m(s)|\ll_{\rho_0}\frac{L(m)S(m)^2}{Q^3}
+\qquad (|s|=\rho_0/Q).
+\]
+By Proposition~\ref{prop:odd-expansion}, it is odd and admits the expansion
+\[
+H_m(z/Q^2)
+=
+\sum_{r\ge 0} c_{2r+1}(m)\frac{z^{2r+1}}{Q^{2r+4}},
+\]
+with
+\[
+|c_{2r+1}(m)|\ll L(m)S(m)^2\,\rho_0^{-(2r+1)}.
+\]
+
+Applying the standard odd-moment cancellation with the coefficients
+$a_j^{(N)}$ kills the first $N-1$ odd terms of this full corrected
+expansion. The surviving moment factor is exponentially tame for
+$N=\alpha Q$, which gives
+\[
+|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}.
+\]
+\end{proof}
+
+We isolate the toy microscopic expansion in
+Appendix~\ref{app:toy-microscopic-expansion}; the only fact used in the main
+argument is the following $N$-point preservation statement.
+
+\begin{proposition}[Toy $N$-point transverse preservation]
+\label{prop:toy-n-point-direct}
+Fix a compact interval
+\[
+D=[d_-,d_+]\subset(0,\infty),
+\]
+and let
+\[
+\Xi_{\toy}^{(N)}(u,d)
+:=
+\sum_{j=1}^N a_j^{(N)}\,
+\Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr),
+\qquad
+s_j=\frac{j}{Q^2},
+\]
+where the coefficients satisfy
+\[
+\sum_{j=1}^N a_j^{(N)}=1.
+\]
+Then, for $d\in D$ and $|u|<u_0(D)$,
+\[
+\Xi_{\toy}^{(N)}(u,d)
+=
+u^2\Phi_K(M(d))+O(u^4),
+\]
+uniformly in $d\in D$. In particular,
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2
+\]
+uniformly on compact $d$-ranges.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:toy-microscopic-expansion}, one has
+\[
+\Delta_{\toy}(u,d;s_j)=u^2M(d)+u^4E_j(u,d),
+\qquad
+\sup_{1\le j\le N}\|E_j(u,d)\|\ll 1
+\]
+uniformly for $d\in D$. Applying $\Phi_K$ gives
+\[
+\Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr)
+=
+u^2\Phi_K(M(d))+u^4\Phi_K(E_j(u,d)).
+\]
+Summing over $j$ and using
+\[
+\sum_{j=1}^N a_j^{(N)}=1
+\]
+yields
+\[
+\Xi_{\toy}^{(N)}(u,d)
+=
+u^2\Phi_K(M(d))
++
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d)).
+\]
+Since $\Phi_K$ is bounded and $\sup_j\|E_j(u,d)\|\ll 1$, the error term is
+$O(u^4)$, uniformly for $d\in D$. This proves the expansion.
+
+Because $\Phi_K(M(d))\neq 0$ for $d>0$, and is bounded away from $0$ on every
+compact interval $D\subset(0,\infty)$, the final estimate
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2
+\]
+follows.
+\end{proof}
+
+\begin{remark}[Work in progress: coefficient control in toy $N$-point preservation]
+\label{rem:wip-toy-n-point-coefficients}
+As written, Proposition~\ref{prop:toy-n-point-direct} uses only the
+normalization
+\[
+\sum_{j=1}^N a_j^{(N)}=1,
+\]
+but this alone does not justify the estimate
+\[
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d))=O(u^4)
+\]
+uniformly in $N$ and $Q$.
+
+Indeed, from
+\[
+\sup_j \|E_j(u,d)\|\ll 1
+\]
+one only obtains
+\[
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d))
+=
+O\!\Bigl(u^4\sum_{j=1}^N |a_j^{(N)}|\Bigr),
+\]
+so a uniform $O(u^4)$ remainder requires additional control on the coefficient
+family, for example a bound of the form
+\[
+\sum_{j=1}^N |a_j^{(N)}|\ll 1
+\qquad\text{or more generally}\qquad
+\sum_{j=1}^N |a_j^{(N)}|\le e^{o(Q)},
+\]
+which would still be negligible against the zeta-side exponential decay.
+Alternatively, one could prove an exact cancellation identity for the
+$u^4$-error term itself.
+
+Thus the proposition should presently be read as conditional on a
+coefficient-control input not yet written explicitly in the draft.
+\end{remark}
+
+On the toy side, Proposition~\ref{prop:toy-n-point-direct} gives
+\begin{equation}\label{eq:Xi-toy}
+\Xi_{\toy}^{(N)}(u,d)=u^2\Phi_K(M(d))+O(u^4),
+\end{equation}
+so on compact $d$-ranges,
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2.
+\]
+Using \eqref{eq:u2-calibration},
+\begin{equation}\label{eq:Xi-toy-calibrated}
+|\Xi_{\toy}^{(N)}(u,d)|\asymp \frac{x_0}{B_\zeta(m)}S(m).
+\end{equation}
+
+\begin{remark}[Work in progress: calibrated size versus microscopic toy regime]
+\label{rem:wip-calibration-small-u}
+As presently written, the final calibration freezes the comparison scale at a
+fixed value $x=x_0(D)$, which yields
+\[
+u^2 \asymp \frac{x_0}{B_\zeta(m)}\,S(m).
+\]
+With only the crude global bounds used later in the contradiction,
+\[
+S(m)\ll Q^2,
+\qquad
+B_\zeta(m)\asymp Q,
+\]
+this gives at best
+\[
+u^2\ll x_0 Q,
+\]
+and therefore does not by itself force the calibrated toy parameter $u$ to
+lie in the microscopic toy regime $|u|<u_0(D)$ required by
+Proposition~\ref{prop:toy-n-point-direct}.
+
+A plausible repair is to avoid freezing the scale at $x_0(D)$, and instead
+to choose the comparison scale adaptively:
+\[
+x=x(m)\in (0,x_0(D)].
+\]
+Since the pairing and calibration statem
+
+PAT Delta_{\toy}(u,d;s) 243848
+ontradiction}
+No fixed off-line toy anomaly can occur in the pair-like branch. Consequently,
+under the pair-like branch hypothesis, the calibrated contradiction closes.
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{prop:calibration-remainder-cutoff} and the canonical
+calibration theorem, in the fixed small-$x_0$ regime one has
+\[
+u^2\asymp \frac{x_0}{B_\zeta(m)}S(m).
+\]
+
+On the toy side, Proposition~\ref{prop:toy-n-point-direct} gives
+\[
+\Xi_{\toy}^{(N)}(u,d)=u^2\Phi_K(M(d))+O(u^4),
+\]
+hence on compact $d$-ranges,
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2
+\asymp
+\frac{x_0}{B_\zeta(m)}S(m).
+\]
+
+On the zeta side, Proposition~\ref{prop:corrected-n-point} gives
+\[
+|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}.
+\]
+
+By Lemma~\ref{lem:crude-S-bound}, one has $S(m)\ll Q^2$, $L(m)\ll Q$, and
+$B_\zeta(m)L(m)S(m)\ll Q^4$. Therefore
+\[
+\frac{L(m)S(m)^2e^{-\delta Q}}{(x_0/B_\zeta(m))S(m)}
+=
+\frac{B_\zeta(m)}{x_0}L(m)S(m)e^{-\delta Q}
+\ll
+Q^4e^{-\delta Q}\to 0.
+\]
+Hence for $Q$ sufficiently large,
+\[
+|\Xi_\zeta^{(N)}(m)|<|\Xi_{\toy}^{(N)}(u,d)|.
+\]
+
+This is impossible if the corrected local zeta deformation realizes the local
+off-line toy anomaly with parameter $d\in D$, because the calibrated $N$-point
+construction was set up so that the toy model is the jet-limit local avatar of
+an off-line zero configuration. Thus no off-line zero can occur. Since every
+violation of the Riemann Hypothesis would produce such an off-line local
+anomaly, all nontrivial zeros must lie on the critical line. Hence $\RH$
+holds.
+\end{proof}
+
+\appendix
+
+\section{Toy microscopic expansion}
+\label{app:toy-microscopic-expansion}
+
+\begin{lemma}[Uniform microscopic expansion of the toy local deformation]
+\label{lem:toy-microscopic-expansion}
+Fix a compact interval
+\[
+D=[d_-,d_+]\subset(0,\infty),
+\]
+and let
+\[
+\Delta_{\toy}(u,d;s)
+\]
+denote the toy local deformation matrix in the symmetric microscopic regime,
+with off-line parameter $u$, separation parameter $d$, and microscopic node
+$s$.
+
+Then there exist constants $\rho_{\toy}>0$ and $u_0(D)>0$ such that for all
+\[
+d\in D,
+\qquad
+|s|<\rho_{\toy},
+\qquad
+|u|<u_0(D),
+\]
+one has the expansion
+\[
+\Delta_{\toy}(u,d;s)=u^2M(d)+u^4E(u,d;s),
+\]
+where $M(d)$ is the toy anomaly matrix and
+\[
+\sup_{\substack{d\in D\\ |s|<\rho_{\toy}\\ |u|<u_0(D)}} \|E(u,d;s)\|\ll 1.
+\]
+In particular, for the microscopic nodes
+\[
+s_j=\frac{j}{Q^2},
+\qquad
+j=1,\dots,N,
+\]
+with $N\le \rho_{\toy}Q^2$, one has uniformly
+\[
+\Delta_{\toy}(u,d;s_j)=u^2M(d)+u^4E_j(u,d),
+\qquad
+\sup_j \|E_j(u,d)\|\ll 1.
+\]
+\end{lemma}
+
+\begin{proof}
+The toy local deformation is obtained from an explicit finite-dimensional
+off-line perturbation of the toy block. By construction it depends smoothly
+(in fact analytically) on the parameters $(u,s,d)$ in a neighborhood of
+\[
+(u,s,d)=(0,0,d_0),
+\qquad d_0\in D.
+\]
+At $u=0$, the deformation vanishes, and by the even symmetry of the off-line
+split there is no linear term in $u$. Hence the first nontrivial term is
+quadratic:
+\[
+\Delta_{\toy}(u,d;s)=u^2M(d,s)+O(u^4),
+\]
+uniformly on compact $d$-ranges and for $|s|$ in a fixed microscopic disk.
+
+By the jet-limit computation for the toy model, the leading quadratic
+coefficient is independent of the microscopic node $s$ and equals the toy
+anomaly matrix $M(d)$. Thus
+\[
+M(d,s)\equiv M(d),
+\]
+and the expansion becomes
+\[
+\Delta_{\toy}(u,d;s)=u^2M(d)+u^4E(u,d;s),
+\]
+with $E$ uniformly bounded on compact parameter ranges. Restricting to the
+microscopic nodes $s_j=j/Q^2$ gives the stated uniform bound for
+$E_j(u,d)$.
+\end{proof}
+
+\begin{remark}[Work in progress: toy microscopic expansion]
+\label{rem:wip-toy-microscopic-expansion}
+The proof above is schematic: it uses smoothness in $(u,s,d)$, vanishing at
+$u=0$, and even symmetry in the off-line split to obtain the quadratic
+leading term, and invokes the jet-limit computation to identify the
+coefficient as the toy anomaly matrix $M(d)$. A later pass should make the
+analyticity and uniform-bound steps quantitative by recording an explicit
+Taylor remainder with a constant depending only on $D$.
+\end{remark}
+
+\begin{thebibliography}{99}
+
+\bibitem{Riemann1859}
+B.~Riemann,
+\newblock Ueber die Anzahl der Primzahlen unter einer gegebenen Gr\"osse,
+\newblock \emph{Monatsberichte der Berliner Akademie}, 1859, 671--680.
+
+\bibitem{Bombieri2000}
+E.~Bombieri,
+\newblock \emph{Problems of the Millennium: The Riemann Hypothesis},
+\newblock Clay Mathematics Institute, 2000.
+
+\bibitem{Conrey2003}
+J.~B.~Conrey,
+\newblock The Riemann Hypothesis,
+\newblock \emph{Notices of the American Mathematical Society} \textbf{50} (2003), no.~3, 341--353.
+
+\bibitem{Edwards2001}
+H.~M.~Edwards,
+\newblock \emph{Riemann's Zeta Function},
+\newblock Dover Publications, Mineola, NY, 2001.
+
+\bibitem{Titchmarsh1986}
+E.~C.~Titchmarsh,
+\newblock \emph{The Theory of t
+
+PAT rho_{\toy} 244059
+n~\ref{prop:calibration-remainder-cutoff} and the canonical
+calibration theorem, in the fixed small-$x_0$ regime one has
+\[
+u^2\asymp \frac{x_0}{B_\zeta(m)}S(m).
+\]
+
+On the toy side, Proposition~\ref{prop:toy-n-point-direct} gives
+\[
+\Xi_{\toy}^{(N)}(u,d)=u^2\Phi_K(M(d))+O(u^4),
+\]
+hence on compact $d[... ELLIPSIZATION ...]ey2003}
+J.~B.~Conrey,
+\newblock The Riemann Hypothesis,
+\newblock \emph{Notices of the American Mathematical Society} \textbf{50} (2003), no.~3, 341--353.
+
+\bibitem{Edwards2001}
+H.~M.~Edwards,
+\newblock \emph{Riemann's Zeta Function},
+\newblock Dover Publications, Mineola, NY, 2001.
+
+\bibitem{Titchmarsh1986}
+E.~C.~Titchmarsh,
+\newblock \emph{The Theory of the Riemann Zeta-Function},
+\newblock 2nd ed., revised by D.~R.~Heath-Brown,
+\newblock Oxford University Press, Oxford, 1986.
+
+\end{thebibliography}
+
+\end{document}
+
+
+PAT E(u,d;s) 244220
+
+\]
+
+On the toy side, Proposition~\ref{prop:toy-n-point-direct} gives
+\[
+\Xi_{\toy}^{(N)}(u,d)=u^2\Phi_K(M(d))+O(u^4),
+\]
+hence on compact $d$-ranges,
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2
+\asymp
+\frac{x_0}{B_\zeta(m)}S(m).
+\]
+
+On the zeta side, Proposition~\ref{prop:corrected-n-point} gives
+\[
+|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}.
+\]
+
+By Lemma~\ref{lem:crude-S-bound}, one has $S(m)\ll Q^2$, $L(m)\ll Q$, and
+$B_\zeta(m)L(m)S(m)\ll Q^4$. Therefore
+\[
+\frac{L(m)S(m)^2e^{-\delta Q}}{(x_0/B_\zeta(m))S(m)}
+=
+\frac{B_\zeta(m)}{x_0}L(m)S(m)e^{-\delta Q}
+\ll
+Q^4e^{-\delta Q}\to 0.
+\]
+Hence for $Q$ sufficiently large,
+\[
+|\Xi_\zeta^{(N)}(m)|<|\Xi_{\toy}^{(N)}(u,d)|.
+\]
+
+This is impossible if the corrected local zeta deformation realizes the local
+off-line toy anomaly with parameter $d\in D$, because the calibrated $N$-point
+construction was set up so that the toy model is the jet-limit local avatar of
+an off-line zero configuration. Thus no off-line zero can occur. Since every
+violation of the Riemann Hypothesis would produce such an off-line local
+anomaly, all nontrivial zeros must lie on the critical line. Hence $\RH$
+holds.
+\end{proof}
+
+\appendix
+
+\section{Toy microscopic expansion}
+\label{app:toy-microscopic-expansion}
+
+\begin{lemma}[Uniform microscopic expansion of the toy local deformation]
+\label{lem:toy-microscopic-expansion}
+Fix a compact interval
+\[
+D=[d_-,d_+]\subset(0,\infty),
+\]
+and let
+\[
+\Delta_{\toy}(u,d;s)
+\]
+denote the toy local deformation matrix in the symmetric microscopic regime,
+with off-line parameter $u$, separation parameter $d$, and microscopic node
+$s$.
+
+Then there exist constants $\rho_{\toy}>0$ and $u_0(D)>0$ such that for all
+\[
+d\in D,
+\qquad
+|s|<\rho_{\toy},
+\qquad
+|u|<u_0(D),
+\]
+one has the expansion
+\[
+\Delta_{\toy}(u,d;s)=u^2M(d)+u^4E(u,d;s),
+\]
+where $M(d)$ is the toy anomaly matrix and
+\[
+\sup_{\substack{d\in D\\ |s|<\rho_{\toy}\\ |u|<u_0(D)}} \|E(u,d;s)\|\ll 1.
+\]
+In particular, for the microscopic nodes
+\[
+s_j=\frac{j}{Q^2},
+\qquad
+j=1,\dots,N,
+\]
+with $N\le \rho_{\toy}Q^2$, one has uniformly
+\[
+\Delta_{\toy}(u,d;s_j)=u^2M(d)+u^4E_j(u,d),
+\qquad
+\sup_j \|E_j(u,d)\|\ll 1.
+\]
+\end{lemma}
+
+\begin{proof}
+The toy local deformation is obtained from an explicit finite-dimensional
+off-line perturbation of the toy block. By construction it depends smoothly
+(in fact analytically) on the parameters $(u,s,d)$ in a neighborhood of
+\[
+(u,s,d)=(0,0,d_0),
+\qquad d_0\in D.
+\]
+At $u=0$, the deformation vanishes, and by the even symmetry of the off-line
+split there is no linear term in $u$. Hence the first nontrivial term is
+quadratic:
+\[
+\Delta_{\toy}(u,d;s)=u^2M(d,s)+O(u^4),
+\]
+uniformly on compact $d$-ranges and for $|s|$ in a fixed microscopic disk.
+
+By the jet-limit computation for the toy model, the leading quadratic
+coefficient is independent of the microscopic node $s$ and equals the toy
+anomaly matrix $M(d)$. Thus
+\[
+M(d,s)\equiv M(d),
+\]
+and the expansion becomes
+\[
+\Delta_{\toy}(u,d;s)=u^2M(d)+u^4E(u,d;s),
+\]
+with $E$ uniformly bounded on compact parameter ranges. Restricting to the
+microscopic nodes $s_j=j/Q^2$ gives the stated uniform bound for
+$E_j(u,d)$.
+\end{proof}
+
+\begin{remark}[Work in progress: toy microscopic expansion]
+\label{rem:wip-toy-microscopic-expansion}
+The proof above is schematic: it uses smoothness in $(u,s,d)$, vanishing at
+$u=0$, and even symmetry in the off-line split to obtain the quadratic
+leading term, and invokes the jet-limit computation to identify the
+coefficient as the toy anomaly matrix $M(d)$. A later pass should make the
+analyticity and uniform-bound steps quantitative by recording an explicit
+Taylor remainder with a constant depending only on $D$.
+\end{remark}
+
+\begin{thebibliography}{99}
+
+\bibitem{Riemann1859}
+B.~Riemann,
+\newblock Ueber die Anzahl der Primzahlen unter einer gegebenen Gr\"osse,
+\newblock \emph{Monatsberichte der Berliner Akademie}, 1859, 671--680.
+
+\bibitem{Bombieri2000}
+E.~Bombieri,
+\newblock \emph{Problems of the Millennium: The Riemann Hypothesis},
+\newblock Clay Mathematics Institute, 2000.
+
+\bibitem{Conrey2003}
+J.~B.~Conrey,
+\newblock The Riemann Hypothesis,
+\newblock \emph{Notices of the American Mathematical Society} \textbf{50} (2003), no.~3, 341--353.
+
+\bibitem{Edwards2001}
+H.~M.~Edwards,
+\newblock \emph{Riemann's Zeta Function},
+\newblock Dover Publications, Mineola, NY, 2001.
+
+\bibitem{Titchmarsh1986}
+E.~C.~Titchmarsh,
+\newblock \emph{The Theory of the Riemann Zeta-Function},
+\newblock 2nd ed., revised by D.~R.~Heath-Brown,
+\newblock Oxford University Press, Oxford, 1986.
+
+\end{thebibliography}
+
+\end{document}
+
+
+PAT Phi_K(E(u,d;s)) -1
+
+PAT toy-microscopic-expansion 70493
+uad (0\le r\le N-2).
+\]
+Define the corrected $N$-point transverse scalar
+\begin{equation}\label{eq:Xi-zeta}
+\Xi_\zeta^{(N)}(m):=
+\sum_{j=1}^N a_j^{(N)}H_m(s_j).
+\end{equation}
+
+\begin{proposition}[Corrected $N$-point transverse estimate for the full corrected scalar]
+\label{prop:corrected-n-point}
+Let
+\[
+H_m(s):=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
+\]
+be the full corrected transverse scalar.
+For $N=\lfloor \alpha Q\rfloor$ with $\alpha>0$ sufficiently small,
+define
+\[
+s_j=\frac{j}{Q^2},
+\qquad
+\Xi_\zeta^{(N)}(m)
+:=
+\sum_{j=1}^N a_j^{(N)}\,H_m(s_j).
+\]
+Then
+\[
+|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}
+\]
+for some $\delta>0$.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:corrected-whitening}, the full corrected scalar
+\[
+H_m(s)=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
+\]
+is holomorphic on $|s|<\rho_0/Q$. By
+Proposition~\ref{prop:cutoff-compatibility}, all cutoff-dependent tail,
+jet-correction, and estimation contributions are already internal to the full
+corrected scalar $H_m(s)$; hence no external remainder is carried into
+$\Xi_\zeta^{(N)}(m)$. By Proposition~\ref{prop:boundary-estimate},
+it satisfies
+\[
+|H_m(s)|\ll_{\rho_0}\frac{L(m)S(m)^2}{Q^3}
+\qquad (|s|=\rho_0/Q).
+\]
+By Proposition~\ref{prop:odd-expansion}, it is odd and admits the expansion
+\[
+H_m(z/Q^2)
+=
+\sum_{r\ge 0} c_{2r+1}(m)\frac{z^{2r+1}}{Q^{2r+4}},
+\]
+with
+\[
+|c_{2r+1}(m)|\ll L(m)S(m)^2\,\rho_0^{-(2r+1)}.
+\]
+
+Applying the standard odd-moment cancellation with the coefficients
+$a_j^{(N)}$ kills the first $N-1$ odd terms of this full corrected
+expansion. The surviving moment factor is exponentially tame for
+$N=\alpha Q$, which gives
+\[
+|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}.
+\]
+\end{proof}
+
+We isolate the toy microscopic expansion in
+Appendix~\ref{app:toy-microscopic-expansion}; the only fact used in the main
+argument is the following $N$-point preservation statement.
+
+\begin{proposition}[Toy $N$-point transverse preservation]
+\label{prop:toy-n-point-direct}
+Fix a compact interval
+\[
+D=[d_-,d_+]\subset(0,\infty),
+\]
+and let
+\[
+\Xi_{\toy}^{(N)}(u,d)
+:=
+\sum_{j=1}^N a_j^{(N)}\,
+\Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr),
+\qquad
+s_j=\frac{j}{Q^2},
+\]
+where the coefficients satisfy
+\[
+\sum_{j=1}^N a_j^{(N)}=1.
+\]
+Then, for $d\in D$ and $|u|<u_0(D)$,
+\[
+\Xi_{\toy}^{(N)}(u,d)
+=
+u^2\Phi_K(M(d))+O(u^4),
+\]
+uniformly in $d\in D$. In particular,
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2
+\]
+uniformly on compact $d$-ranges.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:toy-microscopic-expansion}, one has
+\[
+\Delta_{\toy}(u,d;s_j)=u^2M(d)+u^4E_j(u,d),
+\qquad
+\sup_{1\le j\le N}\|E_j(u,d)\|\ll 1
+\]
+uniformly for $d\in D$. Applying $\Phi_K$ gives
+\[
+\Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr)
+=
+u^2\Phi_K(M(d))+u^4\Phi_K(E_j(u,d)).
+\]
+Summing over $j$ and using
+\[
+\sum_{j=1}^N a_j^{(N)}=1
+\]
+yields
+\[
+\Xi_{\toy}^{(N)}(u,d)
+=
+u^2\Phi_K(M(d))
++
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d)).
+\]
+Since $\Phi_K$ is bounded and $\sup_j\|E_j(u,d)\|\ll 1$, the error term is
+$O(u^4)$, uniformly for $d\in D$. This proves the expansion.
+
+Because $\Phi_K(M(d))\neq 0$ for $d>0$, and is bounded away from $0$ on every
+compact interval $D\subset(0,\infty)$, the final estimate
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2
+\]
+follows.
+\end{proof}
+
+\begin{remark}[Work in progress: coefficient control in toy $N$-point preservation]
+\label{rem:wip-toy-n-point-coefficients}
+As written, Proposition~\ref{prop:toy-n-point-direct} uses only the
+normalization
+\[
+\sum_{j=1}^N a_j^{(N)}=1,
+\]
+but this alone does not justify the estimate
+\[
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d))=O(u^4)
+\]
+uniformly in $N$ and $Q$.
+
+Indeed, from
+\[
+\sup_j \|E_j(u,d)\|\ll 1
+\]
+one only obtains
+\[
+u^4\sum_{j=1}^N a_j^{(N)}\Phi_K(E_j(u,d))
+=
+O\!\Bigl(u^4\sum_{j=1}^N |a_j^{(N)}|\Bigr),
+\]
+so a uniform $O(u^4)$ remainder requires additional control on the coefficient
+family, for example a bound of the form
+\[
+\sum_{j=1}^N |a_j^{(N)}|\ll 1
+\qquad\text{or more generally}\qquad
+\sum_{j=1}^N |a_j^{(N)}|\le e^{o(Q)},
+\]
+which would still be negligible against the zeta-side exponential decay.
+Alternatively, one could prove an exact cancellation identity for the
+$u^4$-error term itself.
+
+Thus the proposition should presently be read as conditional on a
+coefficient-control input not yet written explicitly in the draft.
+\end{remark}
+
+On the toy side, Proposition~\ref{prop:toy-n-point-direct} gives
+\begin{equation}\label{eq:Xi-toy}
+\Xi_{\toy}^{(N)}(u,d)=u^2\Phi_K(M(d))+O(u^4),
+\end{equation}
+so on compact $d$-ranges,
+\[
+|\Xi_{\toy}^{(N)}(u,d)|\asymp u^2.
+\]
+Using \eqref{eq:u2-calibration},
+\begin{equation}\label{eq:Xi-toy-calibrated}
+|\Xi_{\toy}^{(N)}(u,d)|\asymp \frac{x_0}{B_\zeta(m)}S(m).
+\end{equation}
+
+\begin{remark}[Work in progress: calibrated size versus microscopic toy regime
+
+Verifying the coefficient formula
+
+I need to check the coefficient formula, considering whether ρ0ρ0​ vs. ρtoyρtoy​ should be used. It seems that for the toy tail, α<ρtoyα<ρtoy​ is required. I also want to make sure the coefficients are bounded using the uniform bound of EE and ΦKΦK​, as this will give me the necessary analytic properties.
+Crafting precise edits for the user
+
+I need to make stronger edits and remove WIP elements as per the user’s request. I’ll be adding a lemma after defining Ξ−ζΞ−ζ, replacing the proof of a proposition, and adjusting the toy proposition to align with previously mentioned coefficients. There might be a chance to simplify or remove conditions, like the sum=1, and I’ll focus on precise LaTeX edits.
+Refining the lemma statement
+
+The current lemma could be clearer
+Verifying and refining the lemma
+
+I’m wondering if I need to insert a remark instead of modifying the lemma. It might be enough just to replace the lemma statement and maybe add a sentence about E(u,d;s)E(u,d;s) being analytic in ss. I’ll check references and verify the coefficient formula, particularly for small NN.
+Verifying coefficient formula and testing for small N
+
+import math
+def coeffs(N):
+    den=math.comb(2*N-2,N-1)
+    return [((-1)**(j+1))*j*math.comb(2*N,N+j)/den for j in range(1,N+1)]
+for N in range(1,6):
+    a=coeffs(N)
+    print(N,a,sum(a),sum(abs(x) for x in a))
+    for r in range(0,N-1):
+        print(r,sum(a[j-1]*(j**(2*r+1)) for j in range(1,N+1)))
+    print()
+
+1 [1.0] 1.0 1.0
+
+2 [2.0, -1.0] 1.0 3.0
+0 0.0
+
+3 [2.5, -2.0, 0.5] 1.0 5.0
+0 0.0
+1 0.0
+
+4 [2.8, -2.8, 1.2, -0.2] 1.0 7.0
+0 -2.220446049250313e-16
+1 -8.881784197001252e-16
+2 -3.9968028886505635e-14
+
+5 [3.0, -3.4285714285714284, 1.9285714285714286, -0.5714285714285714, 0.07142857142857142] 1.0000000000000002 9.0
+0 3.3306690738754696e-16
+1 1.7763568394002505e-15
+2 4.263256414560601e-14
+3 2.8421709430404007e-13
+
+Refining and organizing the proof
+
+I’m thinking it might be good to express the formula as a rational function since there are no issues with that. I’ll check if the theorem environment supports the lemma, which is likely the case. The lemma could be inserted after the initial paragraph, with the definitions and boundedness explicitly mentioned. I'll focus on the O(u4)/QO(u4)/Q strategy to simplify the proof.
+Refining and clarifying the proposition
+
+I’m considering adjusting the proposition to keep it generic with N≤cQN≤cQ. For the toy proof, I think I can simplify the even/odd tails by ensuring α<ρtoyα<ρtoy​. This makes sense because we need exponential decay for the odd tail. As for the toy proposition, I'll clarify the relationship by adding N=⌊αQ⌋N=⌊αQ⌋ with αα sufficiently small.
+Organizing the proof for clarity
+
+It seems cleaner to start by replacing the opening paragraph with:
+For N≤ρ0QN≤ρ0​Q, set... Then, define aj(N)aj(N)​ explicitly. After that, define XiXi​. I’ll insert the lemma either before or after XiXi​, but it makes sense to place it before since XiXi​ relies on these coefficients. I’ll simplify the "explicit odd-moment-canceling" phrase for clarity and consider citing interpolation instead of giving the full proof for moment identities.
+Exploring Lagrange derivative weights and coefficients
+
+I’m working with Lagrange
+Deriving first-derivative formula and considering proof
+
+The centered first-derivative weights for symmetric nodes can be derived using this formula:
+f′(0)=∑j=1Ncj(f(j)−f(−j))
+f′(0)=j=1∑N​cj​(f(j)−f(−j))
+
+We then compute coefficients cjcj​, but our current choice doesn’t align with the expected values for N=3N=3. Instead of proving via generating functions, I’ll state that the unique solution follows from standard Lagrange interpolation, providing the formula as a lemma with proof for exactness.
+Analyzing alternating sum and telescoping series
+
+I’m working on the sum with alternating signs and binomial terms. The telescoping idea seems tricky since the signs alternate. For N=3N=3, I tried computing the sum but haven’t quite gotten a match. Maybe I can re-examine the identity using a shifted sum. I'll experiment with different approaches, especially focusing on the finite difference identity, and check if the sum simplifies to 1 using a specific m-value.
+Simplifying the alternating sum
+
+The sum I’ve been working on isn’t telescoping as expected. When I rewrite it, I essentially end up with alternating sums. I can simplify by recognizing that these sums are split into positive and negative parts. By leveraging the moments and focusing on deriving the sum, I suspect we can get the result as 1 using the right identities.
+Providing a concise proof
+
+I think the user might want a precise edit that’s self-contained. A short proof might be enough, like: "The closed form follows by differentiating the Lagrange interpolation formula for odd polynomials of degree ≤ 2N-1 at zero." I could also briefly mention its equivalence to a centered first-derivative stencil. That should work.
+Deriving conditions for the sum
+
+I’m thinking through the sum of ∣aj∣∣aj​∣. I know that using the identity leads to a telescoping sum, but I want to verify that for p(x)=x2r+1p(x)=x2r+1, we get p′(0)=0p′(0)=0, for the desired degree.
+
+Also, my identification of derivatives seems a bit off — our ajaj​ are more like 2jcj2jcj​.
+
+The sum should work for even polynomials, giving p(0)p(0) for the final result.
+Deriving finite difference identities and sum formula
+
+I'm thinking about the identity for ∑(−1)j+1j(2NN+j)∑(−1)j+1j(N+j2N​). It seems to relate to finite differences, but I’m not sure if the specific degree 1 polynomial form works with N/jN/j weights.
+
+I could just say the normalization follows from the r=-1 case of the same identity, after telescoping reduction. I'd also need to check if the alternating sum has a simple closed form.
+Analyzing sum expression for binomial identities
+
+I’m trying to compute a sum involving binomial coefficients and alternating signs. I’ve ended up with something like this:
+SN=N[(2N−1N)−2(2N−2N)]
+SN​=N[(N2N−1​)−2(N2N−2​)]
+
+I’m wondering if this expression equals (2N−2N−1)(N−12N−2​), but I need to be careful with the signs. It seems to require more careful symbolic manipulation.
+Evaluating binomial sum with symbolic computation
+
+import sympy as sp
+N=sp.symbols('N', positive=True, integer=True)
+j=sp.symbols('j', integer=True)
+expr = sp.summation((-1)**(j+1)*j*sp.binomial(2*N,N+j),(j,1,N))
+sp.simplify(expr)
+
+factorial(2*N)/(2*(2*N - 1)*factorial(N)*factorial(N - 1))
+
+Simplifying binomial expression
+
+I’m trying to simplify the expression and confirm if it equals the binomial coefficient C(2N−2,N−1)C(2N−2,N−1). A possible identity I’m considering is:
+j(2NN+j)=N2((2N−1N+j−1)−(2N−1N+j))
+j(N+j2N​)=2N​((N+j−12N−1​)−(N+j2N−1​))
+
+I’ll need to check the factor of 1/21/2 and possibly confirm this using symbolic computation tools.
+Verifying binomial identity with SymPy
+
+N,j=sp.symbols('N j', integer=True, positive=True)
+lhs=j*sp.binomial(2*N,N+j)
+rhs=N*(sp.binomial(2*N-1,N+j-1)-sp.binomial(2*N-1,N+j))
+sp.simplify(lhs-rhs)
+
+0
+
+Simplifying alternating sums
+
+I’m working through deriving a sum formula using partial alternating identities. The sum SS depends on alternating sums of binomial coefficients, and after breaking it down with some algebraic manipulations, I find that the expression simplifies to:
+S=N[2C(2N−2,N−1)−BN]
+S=N[2C(2N−2,N−1)−BN​]
+
+Where BN=C(2N−1,N)BN​=C(2N−1,N).
+Examining moment cancellations and defining moments
+
+I’m deriving an elegant proof for moment cancellations using a finite difference identity:
+0=∑k=02N(−1)k(2Nk)(k−N)2r+2.
+0=k=0∑2N​(−1)k(k2N​)(k−N)2r+2.
+
+By setting j=k−Nj=k−N, it simplifies to a double sum. Positive and negative contributions cancel out, leading me to a crucial zero result. Next, I’m thinking of defining moments Mk(N)Mk(N)​ for my zeta proof.
+Refining the toy proof and expansion
+
+I’m finalizing a proof with considerable complexity, where E(u,d;s)E(u,d;s) is analytic in ss and uniformly bounded. I’m expanding Ru,d(s)Ru,d​(s) and considering even and odd moments. The goal is to establish bounds that decay with QQ, and I’ll focus on showing that the error is small, especially in the tail terms.
+Clarifying terms and adjusting proposal
+
+I’m defining μn(N)μn(N)​ as a sum of weighted terms, which seems good for my proof. I also need to address contributions from even terms and constant terms that come into play, particularly with the toy and zeta sides. I want to ensure the proof's assumptions about analyticity and boundedness are clearly stated, and I may need some tweaks in the proposition for consistency.
+Adjusting proof structure and WIP remarks
+
+To tidy things up, I think I’ll replace the opening paragraph and add a new coefficient formula and lemma. For the proof of prop corrected-n-point and prop toy statement, I’ll make the necessary changes and remove the WIP remark. The appendix lemma needs strengthening too, with careful edits for labels and consistency.
+Thought for 7m 44s
+
+Done
