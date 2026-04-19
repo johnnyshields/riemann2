@@ -3341,6 +3341,69 @@ Hence Proposition~\ref{prop:first-residual-gauge-law} gives
 \]
 \end{proof}
 
+\begin{proposition}[Second-residual transformation law]
+\label{prop:second-residual-gauge-law}
+Let
+\[
+F(z)=A_3 z^3+A_5 z^5+A_7 z^7+O(z^9)
+\]
+be an odd matrix germ, and let
+\[
+F^{\new}(z):=a(z)\,P(z)\,F(z)\,P(z)^{-1}
+\]
+with $a,P$ as in Definition~\ref{def:normalization-gauge}. Then
+\[
+A_3^{\new}=A_3,
+\qquad
+A_5^{\new}=A_5+c_2A_3+[B_2,A_3],
+\]
+and the septic coefficient transforms by
+\[
+A_7^{\new}
+=
+A_7+c_2A_5+c_4A_3+[B_2,A_5]+[B_4,A_3]
++c_2[B_2,A_3]+A_3B_2^2-B_2A_3B_2.
+\]
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:first-residual-gauge-law}, the formulas for
+$A_3^{\new}$ and $A_5^{\new}$ are already known. It remains to compute the
+$z^7$-coefficient.
+
+Expand
+\[
+P(z)^{-1}=I-B_2 z^2+(B_2^2-B_4)z^4+O(z^6).
+\]
+Then
+\[
+P(z)F(z)P(z)^{-1}
+=
+(I+B_2 z^2+B_4 z^4)(A_3 z^3+A_5 z^5+A_7 z^7)
+(I-B_2 z^2+(B_2^2-B_4)z^4)+O(z^9).
+\]
+Collecting the $z^7$-terms gives
+\[
+A_7+[B_2,A_5]+[B_4,A_3]+A_3B_2^2-B_2A_3B_2.
+\]
+Multiplying by
+\[
+a(z)=1+c_2 z^2+c_4 z^4+O(z^6)
+\]
+adds the scalar contributions
+\[
+c_2A_5+c_4A_3+c_2[B_2,A_3].
+\]
+Hence
+\[
+A_7^{\new}
+=
+A_7+c_2A_5+c_4A_3+[B_2,A_5]+[B_4,A_3]
++c_2[B_2,A_3]+A_3B_2^2-B_2A_3B_2,
+\]
+as claimed.
+\end{proof}
+
 \begin{lemma}[Quintic trace witness]
 \label{lem:quintic-trace-witness}
 Let $J_{5,K_1}(h)$ denote the $K_1$-transport contribution to the quintic
@@ -4087,6 +4150,151 @@ These are nevertheless the natural variables for the geometric reformulation
 of the multi-pair problem.
 \end{remark}
 
+\begin{proposition}[Projected septic gauge law]
+\label{prop:projected-septic-gauge-law}
+Assume the normalization gauge is symmetry-preserving in the sense that
+\[
+B_2,B_4\in \mathfrak f,
+\qquad
+A_3\in \mathfrak a,
+\]
+with
+\[
+\mathfrak f=\operatorname{span}\{I,S\},
+\qquad
+\mathfrak a=\operatorname{span}\{D,J\}.
+\]
+Then the fixed-sector septic coefficient satisfies
+\[
+(A_7^{\mathfrak f})^{\new}=A_7^{\mathfrak f}+c_2A_5^{\mathfrak f}.
+\]
+Equivalently, the septic fixed-sector ambiguity is one-dimensional and lies
+along the quintic fixed-sector line.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:second-residual-gauge-law},
+\[
+A_7^{\new}
+=
+A_7+c_2A_5+c_4A_3+[B_2,A_5]+[B_4,A_3]
++c_2[B_2,A_3]+A_3B_2^2-B_2A_3B_2.
+\]
+Apply the fixed-sector projection $\pi_{\mathfrak f}$ term by term.
+
+Since $A_3\in\mathfrak a$, one has
+\[
+\pi_{\mathfrak f}(c_4A_3)=0.
+\]
+Because $B_4\in\mathfrak f$ and $A_3\in\mathfrak a$,
+\[
+[B_4,A_3]\in[\mathfrak f,\mathfrak a]\subset\mathfrak a,
+\]
+so
+\[
+\pi_{\mathfrak f}[B_4,A_3]=0.
+\]
+Likewise,
+\[
+[B_2,A_3]\in[\mathfrak f,\mathfrak a]\subset\mathfrak a,
+\]
+hence
+\[
+\pi_{\mathfrak f}\bigl(c_2[B_2,A_3]\bigr)=0.
+\]
+
+Now decompose
+\[
+A_5=A_5^{\mathfrak f}+A_5^{\mathfrak a}.
+\]
+Since $\mathfrak f=\operatorname{span}\{I,S\}$ is abelian,
+\[
+[B_2,A_5^{\mathfrak f}]=0.
+\]
+And since $B_2\in\mathfrak f$ and $A_5^{\mathfrak a}\in\mathfrak a$,
+\[
+[B_2,A_5^{\mathfrak a}]\in[\mathfrak f,\mathfrak a]\subset\mathfrak a,
+\]
+so
+\[
+\pi_{\mathfrak f}[B_2,A_5]=0.
+\]
+
+Finally, $B_2\in\mathfrak f$ implies $B_2^2\in\mathfrak f$. Therefore
+\[
+A_3B_2^2\in\mathfrak a\mathfrak f\subset\mathfrak a,
+\qquad
+B_2A_3B_2\in\mathfrak f\mathfrak a\mathfrak f\subset\mathfrak a,
+\]
+and hence
+\[
+\pi_{\mathfrak f}(A_3B_2^2-B_2A_3B_2)=0.
+\]
+
+Thus the only term surviving fixed projection is
+\[
+c_2A_5^{\mathfrak f},
+\]
+and we conclude
+\[
+(A_7^{\mathfrak f})^{\new}=A_7^{\mathfrak f}+c_2A_5^{\mathfrak f}.
+\qedhere
+\]
+\end{proof}
+
+\begin{corollary}[Gauge invariance of the second residual determinant]
+\label{cor:delta7-gauge-invariant}
+Under a symmetry-preserving normalization gauge, the scalar
+\[
+\Delta_7=u_7v_5-u_5v_7
+\]
+is invariant.
+\end{corollary}
+
+\begin{proof}
+By Proposition~\ref{prop:projected-septic-gauge-law},
+\[
+(A_7^{\mathfrak f})^{\new}=A_7^{\mathfrak f}+c_2A_5^{\mathfrak f}.
+\]
+Writing
+\[
+A_5^{\mathfrak f}=u_5I+v_5S,
+\qquad
+A_7^{\mathfrak f}=u_7I+v_7S,
+\]
+the new septic pair is
+\[
+(u_7^{\new},v_7^{\new})=(u_7,v_7)+c_2(u_5,v_5).
+\]
+Therefore
+\[
+\Delta_7^{\new}
+=
+(u_7+c_2u_5)v_5-u_5(v_7+c_2v_5)
+=
+u_7v_5-u_5v_7
+=
+\Delta_7.
+\]
+\end{proof}
+
+\begin{remark}[Order-$2$ gauge shadow and the septic $K_5$-sector]
+\label{rem:k5-gauge-shadow}
+Proposition~\ref{prop:projected-septic-gauge-law} shows that the only
+symmetry-preserving order-$2$ normalization shadow surviving in the fixed
+sector at septic order is the line
+\[
+\mathbf C\,A_5^{\mathfrak f}.
+\]
+Consequently, once the septic $K_5$-transport sector is identified with the
+realized order-$2$ symmetry-preserving normalization shadow, one obtains
+\[
+A_{7,K_5}^{\mathfrak f}\in \mathbf C\,A_5^{\mathfrak f}.
+\]
+Thus the remaining unresolved order-$7$ contribution is reduced to the
+lower/mixed remainder modulo the quintic fixed-sector line.
+\end{remark}
+
 \begin{proposition}[Explicit fixed-sector formulas at quintic order]
 \label{prop:explicit-quintic-fixed-sector}
 Write
@@ -4650,10 +4858,15 @@ commutator contribution to $A_5^{\mathfrak f}$ and for the septic
 $K_1$-transport contribution to $A_7^{\mathfrak f}$. What still needs to be
 audited is the contribution of the remaining order-$7$ sectors to the full
 total septic fixed-sector pair $(u_7,v_7)$, and hence to the full total
-second residual determinant $\Delta_7$. What remains open is therefore not
-the weight-one $q^{(7)}$-coefficient of $\Delta_7$, which is reduced to the
-direct $K_1$ slice by Corollary~\ref{cor:weight-one-septic-reduction}, but
-the lower/mixed septic contributions to the full total pair $(u_7,v_7)$.
+second residual determinant $\Delta_7$.
+
+What remains open is therefore not the gauge ambiguity of the septic
+fixed-sector coefficient, which is controlled by
+Proposition~\ref{prop:projected-septic-gauge-law}, nor the weight-one
+$q^{(7)}$-coefficient of $\Delta_7$, which is reduced to the direct $K_1$
+slice by Corollary~\ref{cor:weight-one-septic-reduction}. The remaining issue
+is the explicit lower/mixed septic completion of the total pair $(u_7,v_7)$
+modulo the quintic fixed-sector line $\mathbf C A_5^{\mathfrak f}$.
 \end{remark}
 
 \subsection{Normalized planar curve and curvature bridge}
