@@ -7838,3 +7838,2495 @@ So the best high-level summary is:
     The whole remaining global geometry has been reduced to an oscillation / re-entry problem for the scalar tangent-slope function β=dλ/dμβ=dλ/dμ, or equivalently to ordering of the tangent-envelope functions on the piecewise (μ,λ)(μ,λ)-graph.
 
     So the paper is no longer “just blocked on zero-capture.” The live frontier is now a global propagation theorem in that reduced scalar/graph setting, plus the remaining smaller local algebraic audits.
+
+
+ok so what are the next best attack angles on this?
+
+I’m pulling the current bottleneck/state sections and the newest turning-boundary / W=0W=0 theorem blocks so I can rank the next attack angles against what the draft now actually says, not just our conversation memory.
+
+Here is the honest attack result on the global ordering route.
+
+The (μ,λ)(μ,λ)-reduction is real and useful, but it does not close the global theorem by itself.
+
+On each branch where v5≠0v5​=0 and M≠0M=0, you can write
+μ=cv5,λ=Δ7v5,
+μ=v5​c​,λ=v5​Δ7​​,
+
+so the normalized curve is a graph λ=λj(μ)λ=λj​(μ). The exact identities give
+d2λdμ2=v53M3W,
+dμ2d2λ​=M3v53​​W,
+
+so each branch is strictly convex or concave wherever WW keeps sign, and finite-order W=0W=0 points are just ordinary inflections. The tangent-intercept function
+mj(b)=λj(μj(b))−b μj(b),λj′(μj(b))=b,
+mj​(b)=λj​(μj​(b))−bμj​(b),λj′​(μj​(b))=b,
+
+satisfies
+mj′(b)=−μj(b),mj′′(b)=−1λj′′(μj(b)).
+mj′​(b)=−μj​(b),mj′′​(b)=−λj′′​(μj​(b))1​.
+
+So the whole global problem becomes a one-variable family of envelope functions mj(b)mj​(b).
+
+What you can prove from the current draft is strict adjacent separation of these envelopes across a generic turning boundary: if two adjacent branches admit the same tangent slope bb, then their tangent intercepts are strictly ordered, because otherwise one line would be 22-secant to both adjacent branches, contradicting the new unconditional adjacent turning theorem.
+
+What you cannot prove from the current ingredients is the stronger global statement that the envelope family cannot leave and later re-enter. Adjacent inequalities are not enough to prevent a pattern like
+m1(b)>m2(b)<m3(b),
+m1​(b)>m2​(b)<m3​(b),
+
+which still allows a single intercept to lie on the 22-secant side of branches 11 and 33 but not 22. So the hoped-for “global ordering of mj(b)mj​(b)” does not follow just from local convexity plus adjacent exclusion.
+
+The cleanest scalar reduction of the remaining gap is this. Define
+L:=v5Δ7′−Δ7v5′,β:=dλdμ=−LM.
+L:=v5​Δ7′​−Δ7​v5′​,β:=dμdλ​=−ML​.
+
+Then
+β′=−v5M2W.
+β′=−M2v5​​W.
+
+So tangent points of slope bb are exactly the level sets
+β(h)=b,
+β(h)=b,
+
+and the global re-entry problem is really the question of whether ββ can leave and later revisit the same level on nonadjacent branches.
+
+That means the remaining global obstruction is now sharply reduced to:
+control the oscillation of β(h)=−L(h)M(h), equivalently the sign behavior of v5(h)W(h).
+control the oscillation of β(h)=−M(h)L(h)​, equivalently the sign behavior of v5​(h)W(h).​
+
+From the current draft alone, there is no theorem forcing enough sign control on v5Wv5​W to make ββ globally non-recurrent. So this attack does not finish the global line-incidence theorem.
+
+The best next attack angles are now:
+
+First, try to prove a genuine sign/oscillation theorem for v5Wv5​W on a generic component. Even something like “v5Wv5​W changes sign at most once” would be huge, because it would make ββ unimodal and kill level-set re-entry.
+
+Second, look for a stronger special-structure theorem for the triple (c,v5,Δ7)(c,v5​,Δ7​) — something total-positive or variation-diminishing that is stronger than plain convexity of the graph pieces.
+
+Third, if that stalls, shift back to the local algebraic side and finish the remaining audited items, especially the direct septic witness / full septic closure language and the quintic pure-value detector, because the geometry is now reduced as far as it can go without a new global theorem.
+
+So the attack succeeded in narrowing the gap, but not in closing it. The exact frontier is no longer vague support propagation. It is the scalar level-set recurrence problem for
+β(h)=−L(h)M(h).
+β(h)=−M(h)L(h)​.
+
+ok attack that
+
+I’m pushing on the scalar reduction directly now. The real question is whether the current draft gives enough structure on β=−L/Mβ=−L/M — beyond bare formulas — to force non-recurrence of a slope level, or whether we still only get local monotonicity between W=0W=0 points.
+
+I pushed on the ββ-route and found a stronger special structure than just
+β′=−v5M2W.
+β′=−M2v5​​W.
+
+The right object is the dual tangent-line curve.
+
+Work on a region where v5≠0v5​=0 and M≠0M=0, and set
+μ=cv5,λ=Δ7v5.
+μ=v5​c​,λ=v5​Δ7​​.
+
+Then the normalized curve is a graph λ=λ(μ)λ=λ(μ), and the tangent line at parameter hh is
+λ=b(h) μ+m(h),
+λ=b(h)μ+m(h),
+
+where
+b(h)=dλdμ(h),m(h)=λ(h)−b(h)μ(h).
+b(h)=dμdλ​(h),m(h)=λ(h)−b(h)μ(h).
+
+Now define
+L:=v5Δ7′−Δ7v5′.
+L:=v5​Δ7′​−Δ7​v5′​.
+
+Then, exactly,
+b(h)=−L(h)M(h),m(h)=N(h)M(h).
+b(h)=−M(h)L(h)​,m(h)=M(h)N(h)​.
+
+That second identity is worth highlighting. The tangent-line slope/intercept pair in the (μ,λ)(μ,λ)-plane is literally
+T(h):=(b(h),m(h))=(−L(h)M(h), N(h)M(h)).
+T(h):=(b(h),m(h))=(−M(h)L(h)​,M(h)N(h)​).
+
+Now differentiate. Using the exact identities already in the draft,
+MN′−NM′=cW,
+MN′−NM′=cW,
+
+and the identity I derived earlier,
+ML′−LM′=v5W,
+ML′−LM′=v5​W,
+
+you get the exact differential system
+b′(h)=−v5(h)M(h)2W(h),m′(h)=c(h)M(h)2W(h).
+b′(h)=−M(h)2v5​(h)​W(h),m′(h)=M(h)2c(h)​W(h).
+
+Equivalently,
+T′(h)=W(h)M(h)2 (−v5(h), c(h)).
+T′(h)=M(h)2W(h)​(−v5​(h),c(h)).
+
+This is much more rigid than it first looks.
+What this means
+
+The direction of motion of the dual tangent-line curve T(h)T(h) is always the vector
+(−v5(h), c(h)),
+(−v5​(h),c(h)),
+
+and WW only rescales that direction and possibly reverses the orientation.
+
+So WW does not control the geometric tangent direction of the dual curve. It only controls how fast you move along that dual curve.
+
+That already explains why generic W=0W=0 points are locally harmless in the dual picture: they are not new geometric turning points of the dual curve; they are just places where the parameter speed vanishes and reverses.
+
+Now take one more derivative. Since
+T′=α V,α:=WM2,V:=(−v5,c),
+T′=αV,α:=M2W​,V:=(−v5​,c),
+
+we get
+det⁡(T′,T′′)=α2 det⁡(V,V′).
+det(T′,T′′)=α2det(V,V′).
+
+But
+det⁡(V,V′)=det⁡((−v5,c),(−v5′,c′))=M.
+det(V,V′)=det((−v5​,c),(−v5′​,c′))=M.
+
+Therefore
+det⁡(T′,T′′)=W2M3.
+det(T′,T′′)=M3W2​.​
+
+This is the key new identity.
+
+It means:
+
+    on each MM-sign component, the dual tangent-line curve T(h)T(h) has fixed signed curvature sign determined only by sgn⁡(M)sgn(M);
+
+    WW-zeros do not change the sign of dual curvature at all, since they enter as W2W2;
+
+    so finite-order W=0W=0 points are not inflections of the dual curve — they are speed-degeneracies on a curve whose curvature sign stays the same.
+
+That is a much stronger “special structure of WW” than we had before.
+
+There is an even cleaner way to say it. Let θ(h)θ(h) be the tangent angle of the dual curve T(h)T(h). Since the tangent direction is V=(−v5,c)V=(−v5​,c),
+θ′(h)=det⁡(V,V′)∣V∣2=M(h)c(h)2+v5(h)2.
+θ′(h)=∣V∣2det(V,V′)​=c(h)2+v5​(h)2M(h)​.
+
+So on each MM-sign component the dual tangent angle is monotone.
+
+In other words:
+
+    each MM-sign component maps to a locally convex arc in the dual (b,m)(b,m)-plane, and WW-zeros do not destroy that convexity.
+
+That is the real geometric content.
+Why this helps
+
+The original global no-four-secant problem became, in (μ,λ)(μ,λ)-language, a question about the envelope functions
+mj(b).
+mj​(b).
+
+Now we can reinterpret those as branches of the dual tangent-line curve T(h)T(h).
+
+A fixed slope bb corresponds to a vertical line in the dual (b,m)(b,m)-plane. Intersections of that vertical line with the dual curve are tangent points of slope bb on the original graph.
+
+So the global recurrence problem for β=bβ=b is now:
+
+    can a vertical line intersect the dual tangent-line curve on nonadjacent convex arcs in a way that recreates 2+22+2 secancy?
+
+This is much cleaner than the earlier support-overlap phrasing.
+What this does not yet prove
+
+It still does not automatically give the global no-reentry theorem.
+
+Why not? Because a union of several convex arcs can still be hit by the same vertical line multiple times if the arcs are globally arranged the wrong way.
+
+So the new identities prove:
+
+    each MM-sign component of the dual tangent-line curve is locally convex;
+
+    W=0W=0 does not create new dual inflections;
+
+    adjacent turning-boundary exclusion becomes strict local separation of adjacent dual arcs.
+
+But they do not yet prove the global arrangement of those arcs is simple enough to rule out nonadjacent re-entry.
+
+That is now the exact remaining gap.
+The best next attack from here
+
+I do not think the next theorem should be about WW anymore. I think it should be about the dual curve T(h)T(h).
+
+The two most plausible targets are:
+
+    Simplicity / no self-intersection of the dual tangent-line curve on each generic component.
+    If T(h)T(h) were globally simple and locally convex by arcs, that would be a major constraint on vertical-line intersections.
+
+    Asymptotic ordering at turning boundaries strong enough to show adjacent dual arcs glue in a one-sided way, so the full dual curve cannot fold back across a vertical line.
+
+Those are now much more natural than another support-overlap lemma.
+
+So the attack result is:
+
+    we found a genuinely new exact structure,
+
+    namely the dual tangent-line curve
+    T(h)=(−L(h)M(h), N(h)M(h)),
+    T(h)=(−M(h)L(h)​,M(h)N(h)​),
+
+    with
+    T′(h)=W(h)M(h)2(−v5(h),c(h)),det⁡(T′,T′′)=W(h)2M(h)3;
+    T′(h)=M(h)2W(h)​(−v5​(h),c(h)),det(T′,T′′)=M(h)3W(h)2​;
+
+    this shows WW-zeros are speed degeneracies, not dual inflections;
+
+    the global problem is now the arrangement of these dual convex arcs, not generic oscillation of WW.
+
+That is real progress.
+
+The next sharp theorem to try is: prove the dual tangent-line curve is globally simple / one-sided enough that a vertical line cannot re-enter it on nonadjacent arcs.
+
+ok do the next attack
+
+I pushed the dual-curve attack, and there is a real structural theorem there.
+
+The right object is the dual tangent-line curve
+T(h)=(b(h),m(h)),
+T(h)=(b(h),m(h)),
+
+where in the (μ,λ)(μ,λ)-plane
+μ=cv5,λ=Δ7v5,
+μ=v5​c​,λ=v5​Δ7​​,
+
+the tangent line at hh is
+λ=b(h)μ+m(h).
+λ=b(h)μ+m(h).
+
+If
+L:=v5Δ7′−Δ7v5′,
+L:=v5​Δ7′​−Δ7​v5′​,
+
+then exactly
+b(h)=−L(h)M(h),m(h)=N(h)M(h).
+b(h)=−M(h)L(h)​,m(h)=M(h)N(h)​.
+
+There is also the exact identity
+N=μL+Mλ,
+N=μL+Mλ,
+
+which is just the tangent-line relation
+m=λ−μb
+m=λ−μb
+
+written back in (c,v5,Δ7)(c,v5​,Δ7​)-language.
+
+That gives a much cleaner attack on the turning-boundary geometry.
+What happens at a generic turning boundary
+
+Let hbhb​ be a generic turning boundary:
+M(hb)=0,M′(hb)≠0,N(hb)≠0.
+M(hb​)=0,M′(hb​)=0,N(hb​)=0.
+
+On a region where v5≠0v5​=0, we are using (μ,λ)(μ,λ)-coordinates, so μ,λμ,λ are finite. Since
+N=μL+Mλ,
+N=μL+Mλ,
+
+evaluating at hbhb​ gives
+N(hb)=μb L(hb).
+N(hb​)=μb​L(hb​).
+
+Because N(hb)≠0N(hb​)=0, this forces
+μb≠0,L(hb)≠0.
+μb​=0,L(hb​)=0.
+
+So both b=−L/Mb=−L/M and m=N/Mm=N/M blow up at a generic turning boundary.
+
+Now μ′=−M/v52μ′=−M/v52​ vanishes at hbhb​, while
+λ′=Lv52
+λ′=v52​L​
+
+is nonzero there. So λλ is a good local parameter, and μμ has a quadratic extremum in λλ:
+μ−μb=a(λ−λb)2+O((λ−λb)3),a≠0.
+μ−μb​=a(λ−λb​)2+O((λ−λb​)3),a=0.
+
+Therefore
+b=dλdμ=12a(λ−λb)+O(1),
+b=dμdλ​=2a(λ−λb​)1​+O(1),
+
+so ∣b∣→∞∣b∣→∞, and using
+m=λ−μb
+m=λ−μb
+
+you get
+m+μbb−λb=(λ−λb)−(μ−μb)b=12(λ−λb)+O((λ−λb)2).
+m+μb​b−λb​=(λ−λb​)−(μ−μb​)b=21​(λ−λb​)+O((λ−λb​)2).
+
+So near the turning boundary,
+m=−μb b+λb+14ab+o(1/b).
+m=−μb​b+λb​+4ab1​+o(1/b).
+
+This is the key asymptotic.
+Consequence
+
+Each generic turning boundary determines a unique asymptote line in the dual plane:
+ℓb:m=−μb b+λb.
+ℓb​:m=−μb​b+λb​.
+
+The two adjacent dual arcs approach the same asymptote line, but from opposite sides.
+
+That is the dual-curve version of the adjacent turning-boundary exclusion theorem.
+Curvature of the dual curve
+
+You also have the exact differential formula
+T′(h)=W(h)M(h)2 (−v5(h),c(h)).
+T′(h)=M(h)2W(h)​(−v5​(h),c(h)).
+
+Differentiating again,
+det⁡(T′,T′′)=W(h)2M(h)3.
+det(T′,T′′)=M(h)3W(h)2​.
+
+So on each MM-sign component, the dual curve has fixed signed curvature. In particular:
+
+    W=0W=0 does not create a dual inflection;
+
+    finite-order W=0W=0 points are only speed-degeneracies on the dual curve;
+
+    each MM-sign component is a locally convex arc in the dual plane.
+
+This is a strong special structure: the dual curve is piecewise convex, and its seams are exactly the generic turning asymptotes ℓbℓb​.
+What this proves
+
+It proves a genuinely useful picture:
+
+    the global geometry is not arbitrary;
+
+    it is a chain of dual convex arcs;
+
+    adjacent arcs share a common asymptote line and lie on opposite sides of it.
+
+That is a real theorem-level improvement over the earlier “support intervals” language.
+What it still does not prove
+
+It still does not prove global simplicity of the dual curve, or that a vertical line b=constb=const cannot hit nonadjacent arcs multiple times.
+
+So the remaining gap is now:
+
+    can these piecewise-convex dual arcs, with their shared asymptote lines, still arrange themselves so that a vertical line re-enters on a nonadjacent arc?
+
+I do not see a proof from the current ingredients that they cannot.
+
+So the attack gives a very clear partial result, but not full closure.
+The strongest honest next target
+
+At this point, the right theorem to try is no longer about WW itself. It is:
+
+    dual-curve one-sidedness / simplicity theorem
+    Show that on a generic component, the dual tangent-line curve T(h)T(h) is globally simple, or at least that no vertical line can meet it on nonadjacent arcs after the adjacent asymptote-separation already proved.
+
+That is now the sharpest global statement left.
+
+If you want, I can turn what we just derived into a compact “theorem + proof sketch” summary in plain math language, or keep pushing on the dual-curve simplicity question directly.
+
+attack that
+
+I’m testing the dual-curve simplicity route the same way we tested the earlier propagation lemmas: first whether it is actually true from the current structure, and second whether there is a weaker version that still gives global control. The key issue is whether shared asymptotes plus local convexity force a global one-sided arrangement, or whether nonadjacent arcs can still sneak back under the same vertical line.
+
+I attacked the dual-curve route, and there is a real exact structure there.
+
+Work on a region where v5≠0v5​=0 and M≠0M=0, and set
+μ=cv5,λ=Δ7v5.
+μ=v5​c​,λ=v5​Δ7​​.
+
+Then the normalized curve is a graph λ=λ(μ)λ=λ(μ).
+
+The tangent line at parameter hh in the (μ,λ)(μ,λ)-plane is
+λ=b(h)μ+m(h),
+λ=b(h)μ+m(h),
+
+with
+b(h)=dλdμ(h),m(h)=λ(h)−b(h)μ(h).
+b(h)=dμdλ​(h),m(h)=λ(h)−b(h)μ(h).
+
+Now define
+L:=v5Δ7′−Δ7v5′.
+L:=v5​Δ7′​−Δ7​v5′​.
+
+A direct computation gives the exact formulas
+b(h)=−L(h)M(h),m(h)=N(h)M(h).
+b(h)=−M(h)L(h)​,m(h)=M(h)N(h)​.
+
+So the dual tangent-line curve is
+T(h):=(b(h),m(h))=(−L(h)M(h), N(h)M(h)).
+T(h):=(b(h),m(h))=(−M(h)L(h)​,M(h)N(h)​).
+
+That is already a big simplification: the global line-incidence problem becomes the geometry of the planar curve T(h)T(h) in the dual (b,m)(b,m)-plane.
+
+There is more. Using the exact identities
+MN′−NM′=cW,ML′−LM′=v5W,
+MN′−NM′=cW,ML′−LM′=v5​W,
+
+you get
+T′(h)=W(h)M(h)2 (−v5(h), c(h)).
+T′(h)=M(h)2W(h)​(−v5​(h),c(h)).
+
+So WW does not change the tangent direction of the dual curve. It only rescales or reverses the speed along the vector (−v5,c)(−v5​,c).
+
+Take one more derivative. Since T′=αVT′=αV with
+α=WM2,V=(−v5,c),
+α=M2W​,V=(−v5​,c),
+
+you get
+det⁡(T′,T′′)=α2det⁡(V,V′)=W2M4M=W2M3.
+det(T′,T′′)=α2det(V,V′)=M4W2​M=M3W2​.
+
+This is the key new identity.
+
+It means:
+
+    on each MM-sign component, the dual curve T(h)T(h) has fixed signed curvature sign determined only by sgn⁡(M)sgn(M);
+
+    W=0W=0 does not create dual inflections, because WW appears squared;
+
+    finite-order W=0W=0 points are just speed-degeneracies on the dual curve, not geometric turning points of that curve.
+
+So the dual curve is piecewise locally convex, with its convexity controlled by MM, not by the sign changes of WW.
+
+Now look at a generic turning boundary hbhb​, where
+M(hb)=0,M′(hb)≠0,N(hb)≠0.
+M(hb​)=0,M′(hb​)=0,N(hb​)=0.
+
+At such a point, in the (μ,λ)(μ,λ)-plane the graph has a vertical tangent. Writing the local graph as
+μ−μb=a(λ−λb)2+O((λ−λb)3),a≠0,
+μ−μb​=a(λ−λb​)2+O((λ−λb​)3),a=0,
+
+gives
+b=dλdμ=12a(λ−λb)+O(1),
+b=dμdλ​=2a(λ−λb​)1​+O(1),
+
+so ∣b∣→∞∣b∣→∞, and then
+m=λ−μb=−μb b+λb+14ab+o(1/b).
+m=λ−μb=−μb​b+λb​+4ab1​+o(1/b).
+
+So each generic turning boundary determines a definite asymptote line in the dual plane:
+m=−μb b+λb.
+m=−μb​b+λb​.
+
+The two adjacent dual arcs approach this same asymptote from opposite sides.
+
+That is the dual version of the adjacent turning-boundary exclusion theorem.
+
+So the picture is now:
+
+    the global geometry is a chain of dual arcs T(h)T(h);
+
+    each arc is locally convex;
+
+    adjacent arcs share a common asymptote line at a turning boundary and come in from opposite sides;
+
+    W=0W=0 points do not create dual inflections.
+
+That is real progress.
+
+What this still does not prove is global simplicity of the dual curve. A vertical line b=constb=const could still, in principle, hit nonadjacent dual arcs multiple times if the chain of convex arcs is globally arranged the wrong way. So the remaining gap is no longer about local curvature or local turning behavior. It is about the global arrangement of these dual arcs.
+
+That gives a much sharper next target:
+
+prove a global simplicity / one-sidedness theorem for the dual tangent-line curve T(h)T(h), or at least prove that a vertical line cannot meet it on nonadjacent arcs after the local adjacent asymptote separation already proved.
+
+So the attack succeeded in reducing the remaining global problem to a very concrete planar statement in the dual (b,m)(b,m)-plane.
+
+attack
+
+I pushed the dual-curve route further, and there is a real reduction.
+
+Let
+T(h)=(b(h),m(h))=(−L(h)M(h), N(h)M(h)),L:=v5Δ7′−Δ7v5′.
+T(h)=(b(h),m(h))=(−M(h)L(h)​,M(h)N(h)​),L:=v5​Δ7′​−Δ7​v5′​.
+
+This is the curve of tangent lines to the (μ,λ)(μ,λ)-graph, where
+μ=cv5,λ=Δ7v5.
+μ=v5​c​,λ=v5​Δ7​​.
+
+A point T(h)=(b,m)T(h)=(b,m) means: the tangent line at hh is
+λ=bμ+m.
+λ=bμ+m.
+
+Now the exact identities give
+T′(h)=W(h)M(h)2 (−v5(h), c(h)),
+T′(h)=M(h)2W(h)​(−v5​(h),c(h)),
+
+and hence
+det⁡(T′(h),T′′(h))=W(h)2M(h)3.
+det(T′(h),T′′(h))=M(h)3W(h)2​.
+
+From this you get a stronger formula than before:
+
+if θT(h)θT​(h) is the tangent angle of the dual curve, then
+θT′(h)=M(h)c(h)2+v5(h)2.
+θT′​(h)=c(h)2+v5​(h)2M(h)​.
+
+So on each MM-sign component, the dual curve T(h)T(h) has monotone tangent angle. In particular, each such piece is a locally convex arc, and W=0W=0 does not create dual inflections; it only kills the speed along the same tangent direction.
+
+That is a real theorem.
+
+Now here is the useful attack:
+Suppose the dual curve self-intersects
+
+Assume
+T(h1)=T(h2)=(b,m),h1≠h2.
+T(h1​)=T(h2​)=(b,m),h1​=h2​.
+
+Then the same line
+λ=bμ+m
+λ=bμ+m
+
+is tangent to the primal graph at two distinct points.
+
+Now split by parity of the two primal graph pieces.
+Case 1: same convexity parity
+
+If both tangencies lie on convex pieces, then the line is supporting from below at both points. Perturb the intercept slightly upward:
+λ=bμ+(m+ε).
+λ=bμ+(m+ε).
+
+For ε>0ε>0 small, strict convexity gives a 22-secant line on each piece. So you get a 2+22+2 pair-pair line.
+
+Likewise, if both tangencies lie on concave pieces, then perturbing slightly downward gives a 2+22+2 pair-pair line.
+
+So:
+a self-intersection of the dual curve between same-parity arcs produces a pair-pair line.
+a self-intersection of the dual curve between same-parity arcs produces a pair-pair line.​
+
+That is a real reduction.
+Case 2: opposite convexity parity
+
+If one tangency is on a convex piece and the other on a concave piece, then perturbing the intercept helps one side and hurts the other. So an opposite-parity dual intersection does not automatically give a 2+22+2 line.
+
+This is exactly why adjacent turning-boundary tangencies are locally harmless: the adjacent arcs come from opposite parity pieces.
+
+So the global problem has now become very specific:
+To rule out global pair-pair, it is enough to rule out self-intersections of the dual curve between same-parity arcs.
+To rule out global pair-pair, it is enough to rule out self-intersections of the dual curve between same-parity arcs.​
+
+That is stronger than anything we had before.
+What else the dual picture gives
+
+At a generic turning boundary hbhb​, the dual curve has an asymptote
+m=−μb b+λb,
+m=−μb​b+λb​,
+
+and the two adjacent dual arcs approach that same line from opposite sides. So adjacent same-parity self-intersection is already impossible there; that matches your unconditional adjacent turning theorem.
+
+So we now know:
+
+    each MM-sign piece of the dual curve is a locally convex arc;
+
+    adjacent arcs glue along common asymptotes from opposite sides;
+
+    same-parity dual self-intersection would force a global pair-pair line.
+
+Where the attack stalls
+
+What I still do not see from the current ingredients is a proof that same-parity dual arcs cannot intersect nonadjacently.
+
+That would require a global arrangement theorem for the dual arcs — something like:
+
+    the asymptote lines at turning boundaries are globally ordered, or
+
+    each same-parity dual arc stays in a disjoint strip/sektor determined by adjacent asymptotes, or
+
+    the full dual curve is globally simple.
+
+None of that follows yet from the current draft’s exact identities alone.
+
+So the honest outcome is:
+New reduction achieved
+
+Global no-four-secant is reduced to excluding same-parity self-intersections of the dual tangent-line curve.
+Remaining gap
+
+We still lack a global theorem that those same-parity dual arcs cannot intersect.
+
+That is a sharper and more geometric frontier than before.
+
+So the next best attack is not another WW-sign lemma. It is:
+
+    prove a global arrangement theorem for the dual asymptote lines / dual convex arcs that forbids same-parity intersections.
+
+That is now the cleanest remaining target I can see.
+
+ok attack this: prove a global arrangement theorem for the dual asymptote lines / dual convex arcs that forbids same-parity intersections.
+
+I attacked it, and I do not think that theorem follows from the structure currently in the draft.
+
+In fact, the right conclusion is stronger:
+
+local dual convexity + shared asymptotes at turning boundaries is not enough to forbid same-parity dual intersections.
+
+Here is the math reason.
+
+On each MM-sign component, the dual tangent-line curve
+T(h)=(b(h),m(h))
+T(h)=(b(h),m(h))
+
+has fixed signed curvature, because
+det⁡(T′,T′′)=W(h)2M(h)3,
+det(T′,T′′)=M(h)3W(h)2​,
+
+so the sign is controlled only by MM. At a generic turning boundary, adjacent dual arcs approach a common asymptote
+m=−μb b+λb
+m=−μb​b+λb​
+
+from opposite sides. Those are real and useful local constraints.
+
+But they do not imply a global arrangement theorem.
+
+A toy countermodel already shows the issue. In primal (μ,λ)(μ,λ)-space, take two separated convex bowls joined by a concave bridge with vertical tangencies at the seams, for example:
+
+    a left convex piece shaped like λ=(μ+2)2λ=(μ+2)2,
+
+    a middle concave bridge on −1<μ<1−1<μ<1 with vertical tangents at μ=±1μ=±1,
+
+    a right convex piece shaped like λ=(μ−2)2λ=(μ−2)2.
+
+Then the horizontal line
+λ=0
+λ=0
+
+is tangent to the left bowl at μ=−2μ=−2 and to the right bowl at μ=2μ=2. So the two same-parity convex pieces share a common tangent line. In the dual (b,m)(b,m)-plane, that is exactly a self-intersection of the two same-parity dual arcs at
+(b,m)=(0,0).
+(b,m)=(0,0).
+
+This configuration is perfectly compatible with:
+
+    each branch being a graph,
+
+    each branch being strictly convex/concave,
+
+    adjacent seams having vertical tangencies,
+
+    adjacent dual arcs approaching a common asymptote from opposite sides.
+
+So from those properties alone, a “global arrangement theorem forbidding same-parity intersections” is false.
+
+That means the current exact identities give you:
+
+    a very strong local dual picture,
+
+    but not the missing global ordering.
+
+So the attack result is negative:
+What fails
+
+You cannot get a global no-self-intersection theorem for same-parity dual arcs from the current local dual-curve structure alone.
+What that means
+
+If the RH draft is going to rule out same-parity dual intersections, it must use extra global structure special to the actual functions c,v5,Δ7c,v5​,Δ7​, not just:
+
+    convexity of graph pieces,
+
+    finite-order W=0W=0 sterility,
+
+    turning-boundary asymptotes,
+
+    or the dual curvature formula.
+
+In other words, we have found the limit of the current geometric reduction.
+The real remaining options are now narrower
+
+I think there are only a few plausible next attacks left:
+
+    Prove a genuinely global theorem about the scalar slope function
+    β(h)=dλdμ=−LM,
+    β(h)=dμdλ​=−ML​,
+
+    for example sign/oscillation control strong enough to prevent level-set re-entry.
+
+    Prove a genuinely global theorem about the turning-point data
+    (μb,λb)
+    (μb​,λb​)
+
+    or the asymptote lines
+    m=−μb b+λb,
+    m=−μb​b+λb​,
+
+    strong enough to forbid the toy “two bowls with a bridge” arrangement.
+
+    Stop trying to globalize purely geometrically and return to a more algebraic obstruction — something special about the actual Δ7Δ7​, WW, or ββ that has no analogue in the toy countermodel.
+
+So this attack was still useful: it shows the remaining gap is not just a missing argument. It is a genuinely missing global special-structure theorem.
+
+can we deeply consider all 3 options?
+
+I’m pulling the exact current-draft anchors for the three live fronts — the W=0W=0 reductions, the new unconditional adjacent turning theorem, and the “current state/bottleneck” remarks — so I can evaluate the options against what the paper now actually has, not just our running memory.
+
+Yes. I think there are really three live options, and they are now different enough that it is worth treating them separately rather than lumping them together as “the remaining geometry.”
+
+The right way to think about them is:
+
+    Option 1 tries to prove a global scalar monotonicity / non-recurrence theorem.
+
+    Option 2 tries to prove a global arrangement theorem for the turning-boundary seams.
+
+    Option 3 accepts that pure geometry may not close and goes back to find a special algebraic obstruction in the actual RH package.
+
+I’ll go through each carefully, say what it would need, what the draft already gives, where it is likely to fail, and how I would rank it.
+Option 1: control the scalar slope function ββ
+
+This is the cleanest reduction we have so far.
+
+On a region where v5≠0v5​=0 and M≠0M=0, define
+μ=cv5,λ=Δ7v5.
+μ=v5​c​,λ=v5​Δ7​​.
+
+Then the normalized curve is a graph λ=λ(μ)λ=λ(μ). The actual tangent slope in these coordinates is
+β(h):=dλdμ(h).
+β(h):=dμdλ​(h).
+
+You also have the exact identity
+β(h)=−L(h)M(h),L:=v5Δ7′−Δ7v5′,
+β(h)=−M(h)L(h)​,L:=v5​Δ7′​−Δ7​v5′​,
+
+and, crucially,
+β′(h)=−v5(h)M(h)2 W(h).
+β′(h)=−M(h)2v5​(h)​W(h).
+
+So the global line-incidence problem has been reduced to a scalar question:
+
+    can β(h)β(h) leave a level bb and later return to it on a nonadjacent branch?
+
+Because tangent points of slope bb are exactly solutions of
+β(h)=b.
+β(h)=b.
+What this option would need
+
+It would need a theorem that rules out that kind of recurrence. Any of the following would be enough:
+
+    v5Wv5​W has one sign on a whole generic component;
+
+    v5Wv5​W changes sign at most once;
+
+    ββ is globally unimodal or piecewise monotone in a one-way fashion;
+
+    level sets of ββ cannot reappear after a generic turning seam.
+
+Any one of those would globalize the local theorems.
+What the draft already gives
+
+The draft now gives all the exact identities needed to make this scalar reduction meaningful:
+
+    W≡0W≡0 on an M≠0M=0 interval is excluded under the septic non-affinity hypothesis;
+
+    finite-order W=0, M≠0W=0, M=0 gives only ordinary inflection behavior and is locally sterile;
+
+    generic turning boundaries are locally excluded for adjacent pair-pair;
+
+    the order-7 package has largely shifted from “find a detector” to “understand the canonical Δ7Δ7​-geometry.”
+
+So this option is no longer blocked by missing notation. It is blocked by a genuinely new theorem.
+Why I think it is attractive
+
+It is the cleanest remaining formulation. It takes the global problem out of “support overlap” language and puts it into the scalar ODE-like identity
+β′=−v5M2W.
+β′=−M2v5​​W.
+
+That is mathematically sharp.
+Why I think it is hard
+
+Right now there is no evidence in the draft that v5Wv5​W has global sign control. The current local results tell you what happens between zeros and at individual boundary types, but they do not stop WW or v5Wv5​W from changing sign several times.
+
+So if this option is going to work, it needs a truly new special-structure theorem, not just more local geometry.
+Best sub-attacks inside Option 1
+
+The best concrete sub-questions are:
+
+    Can v5v5​ be shown to have fixed sign on a generic component?
+
+    Can WW be shown to have at most one sign change on such a component?
+
+    Can ββ be shown to be a solution of a scalar linear ODE with disconjugacy properties?
+
+    Can the exact W/W′W/W′ identities and the now-closed order-7 package imply some factorization of v5Wv5​W or β′β′?
+
+My verdict: conceptually best, but currently the most speculative.
+Option 2: global arrangement of turning-boundary seams / dual arcs
+
+This is the dual-curve route.
+
+Define the dual tangent-line curve
+T(h)=(b(h),m(h)),
+T(h)=(b(h),m(h)),
+
+where the tangent line in (μ,λ)(μ,λ)-coordinates is
+λ=b(h)μ+m(h).
+λ=b(h)μ+m(h).
+
+Then exactly
+b(h)=−L(h)M(h),m(h)=N(h)M(h).
+b(h)=−M(h)L(h)​,m(h)=M(h)N(h)​.
+
+The exact differential formulas give
+T′(h)=W(h)M(h)2 (−v5(h),c(h)),
+T′(h)=M(h)2W(h)​(−v5​(h),c(h)),
+
+and
+det⁡(T′(h),T′′(h))=W(h)2M(h)3.
+det(T′(h),T′′(h))=M(h)3W(h)2​.
+
+So each MM-sign component of the dual curve is a locally convex arc, and W=0W=0 does not create dual inflections. At a generic turning boundary, the adjacent dual arcs approach a common asymptote
+m=−μb b+λb
+m=−μb​b+λb​
+
+from opposite sides.
+
+That is a lot of real structure.
+What this option would need
+
+You would need a theorem like:
+
+    the dual curve is globally simple, or
+
+    a vertical line b=constb=const cannot meet nonadjacent same-parity dual arcs, or
+
+    the asymptote lines are globally ordered in a way that prevents re-entry.
+
+Any one of those would convert the local turning-boundary theorem into a global one.
+What the draft already gives
+
+Enough exact identities to make this route mathematically meaningful:
+
+    the dual curve is not an arbitrary curve;
+
+    it is piecewise locally convex;
+
+    adjacent seams are governed by explicit asymptotes;
+
+    same-parity dual self-intersection would force a genuine pair-pair line.
+
+So this route is more than a visual metaphor.
+Why I think it is attractive
+
+Because it turns the global problem into a very concrete planar one:
+
+    can a vertical line in the dual (b,m)(b,m)-plane hit two nonadjacent same-parity convex arcs?
+
+That is much cleaner than the original support-function formulation.
+Why I think it is limited
+
+We already hit the main obstruction: local convexity + common asymptotes is not enough to forbid same-parity dual intersections globally. A toy “two bowls with a bridge” model survives all the local constraints. So this route needs a global theorem about the arrangement of the dual arcs, not just their local shape.
+
+That is a hard theorem, and right now I do not see it in the current structure alone.
+Best sub-attacks inside Option 2
+
+    Prove global one-sidedness / simplicity of the dual curve.
+
+    Prove an ordering theorem for the asymptote lines
+    m=−μb b+λb.
+    m=−μb​b+λb​.
+
+    Prove nonintersection of same-parity dual arcs by an integral invariant or index argument.
+
+    Show that the dual curve is the graph of a monotone function in some rotated coordinate system.
+
+My verdict: less abstract than Option 1, but still missing a genuinely global theorem.
+Option 3: go back to the algebra and extract a special obstruction from the actual RH package
+
+This is the least aesthetically satisfying option, but it may be the most realistic.
+
+The reason is simple: the toy countermodels that defeat the purely geometric routes are generic convex/concave graph constructions. If the RH proof is going to work, it may be because the actual objects
+c,v5,Δ7,M,N,W,L
+c,v5​,Δ7​,M,N,W,L
+
+satisfy extra algebraic identities that generic graphs do not.
+
+This is exactly where the order-7 closure matters. Once Δ7Δ7​ is really canonical and the septic layer is no longer provisional, you can ask whether the actual RH package forces relations among
+W,W′,M,N,L,β=−LM.
+W,W′,M,N,L,β=−ML​.
+What this option would need
+
+Some special identity or sign theorem that has no analogue for arbitrary piecewise convex/concave graphs. Examples:
+
+    a factorization of WW or v5Wv5​W;
+
+    an inequality relating L,M,NL,M,N;
+
+    an ODE for ββ or the dual curve TT;
+
+    a total-positivity statement for the triple (c,v5,Δ7)(c,v5​,Δ7​);
+
+    a “no same-parity re-entry” theorem that comes from the RH-specific algebra rather than general geometry.
+
+What the draft already gives
+
+Much more than it used to:
+
+    the exact WW and W′W′ identities;
+
+    the no-WW-flatness theorem on M≠0M=0 regions;
+
+    the finite-order W=0W=0 sterility theorem;
+
+    the direct q(7)q(7)-slice and the more canonical role of Δ7Δ7​;
+
+    the reduction of the geometry to (μ,λ)(μ,λ), ββ, and TT.
+
+So there is now a much narrower algebraic target than before.
+Why I think it is attractive
+
+Because the failures of Options 1 and 2 are all failures of generic geometry. Option 3 is the only one that can exploit facts unique to the RH draft.
+
+Also, once the order-7 fixed-sector closure is really in place, this route is no longer “go back and reopen the whole septic package.” It becomes: use the now-closed package to study WW, LL, MM, NN, and ββ.
+Why I think it is risky
+
+Because it is hard to know in advance what the missing special identity should be. This option can turn into blind algebraic searching if not disciplined.
+Best sub-attacks inside Option 3
+
+    Recompute WW and W′W′ in the (μ,λ)(μ,λ)-variables and see whether the closed order-7 formulas imply a sign or factorization constraint.
+
+    Study
+    β=−LM,β′=−v5M2W
+    β=−ML​,β′=−M2v5​​W
+
+    as an RH-specific scalar system rather than as generic graph data.
+
+    Look for an exact differential relation among M,N,L,WM,N,L,W that would constrain the dual curve TT.
+
+    Test whether the now-canonical Δ7Δ7​ makes WW or v5Wv5​W into a sum of squares, determinant square, or positivity form.
+
+My verdict: least clean conceptually, but maybe the most likely to succeed if the truth is really RH-specific.
+My ranking
+
+If I had to choose how to spend effort, I would rank them like this:
+Best immediate attack: Option 3
+
+Because Options 1 and 2 both fail for generic geometric reasons. The only way around those generic countermodels is extra structure special to your actual package. Now that the order-7 layer is close to canonical, this is finally a sensible place to dig.
+Best conceptual target: Option 1
+
+If you ever get a sign/oscillation theorem for
+β′=−v5M2W,
+β′=−M2v5​​W,
+
+the whole geometry would collapse beautifully. So this is the clean theorem to keep in view, even if it may need Option 3 to prove it.
+Best geometric language: Option 2
+
+The dual-curve picture is the right way to visualize the remaining gap, and it may help discover the missing algebraic invariant. But I would not expect pure geometry there to finish the job.
+What I would actually do next
+
+I would combine them rather than choose only one.
+
+I would use Option 2 as the language, Option 1 as the theorem target, and Option 3 as the proof engine.
+
+Concretely:
+
+    Keep the dual curve
+    T(h)=(−LM,NM)
+    T(h)=(−ML​,MN​)
+
+    and the scalar slope
+    β(h)=−LM
+    β(h)=−ML​
+
+    as the main geometric objects.
+
+    Make the actual target theorem:
+    β does not revisit a slope level on nonadjacent branches.
+    β does not revisit a slope level on nonadjacent branches.
+
+    Try to prove that target by mining the RH-specific algebra of
+    Δ7, W, W′, M, N, L
+    Δ7​, W, W′, M, N, L
+
+    now that the order-7 package is much more settled.
+
+That is the most coherent attack plan I can see now.
+
+If you want, I can take the next step and propose a disciplined algebraic worklist for Option 3 — basically a short sequence of exact identities to derive and test on β,T,β,T, and v5Wv5​W, ordered by how likely they are to produce a real obstruction.
+
+ok let's do that
+
+I’m going to turn this into a disciplined algebraic worklist centered on the exact scalar/dual objects β=−L/Mβ=−L/M and T=(−L/M,N/M)T=(−L/M,N/M). The goal is to identify a small set of derivations that could actually yield RH-specific sign or non-recurrence information, rather than doing blind symbolic exploration.
+
+Good. Here is the disciplined Option 3 worklist I would use now.
+
+The goal is not to expand everything blindly. The goal is to probe whether the RH-specific algebra forces any non-generic structure on the three derived objects
+β(h)=−L(h)M(h),T(h)=(−L(h)M(h),N(h)M(h)),v5(h)W(h),
+β(h)=−M(h)L(h)​,T(h)=(−M(h)L(h)​,M(h)N(h)​),v5​(h)W(h),
+
+where
+M=cv5′−c′v5,N=cΔ7′−c′Δ7,L=v5Δ7′−Δ7v5′.
+M=cv5′​−c′v5​,N=cΔ7′​−c′Δ7​,L=v5​Δ7′​−Δ7​v5′​.
+
+The worklist is ordered from “most likely to produce a decisive obstruction” to “less likely but still informative.”
+Worklist item 1: build the closed differential system for (M,N,L,W)(M,N,L,W)
+
+This is the first thing I would do because it is exact, finite, and already very close to what the draft contains.
+
+You already have the two determinant identities
+MN′−NM′=cW,ML′−LM′=v5W.
+MN′−NM′=cW,ML′−LM′=v5​W.
+
+I would now derive the full first-order system for
+(c,v5,Δ7,M,N,L,W)
+(c,v5​,Δ7​,M,N,L,W)
+
+in terms of the 3-vector
+F=(c,v5,Δ7).
+F=(c,v5​,Δ7​).
+
+What I want is not just those two antisymmetric identities, but also formulas for
+M′, N′, L′, W′
+M′, N′, L′, W′
+
+in the smallest possible closed algebra.
+
+Why this matters:
+
+If the system closes in a low-dimensional way, you may get an RH-specific ODE for
+β=−LM
+β=−ML​
+
+or for the dual curve TT. That would immediately move Option 1 from “speculative” to “concrete.”
+
+The specific outputs I would want are:
+β′=−v5M2W,m′=cM2W,T′=WM2(−v5,c),
+β′=−M2v5​​W,m′=M2c​W,T′=M2W​(−v5​,c),
+
+and then
+β′′ and m′′
+β′′ and m′′
+
+expressed in terms of c,v5,Δ7,M,N,L,W,W′c,v5​,Δ7​,M,N,L,W,W′.
+
+If β′′β′′ or a simple combination like
+ddh(M2Wβ′)
+dhd​(WM2​β′)
+
+simplifies unexpectedly, that is a serious lead.
+
+This is the highest-priority computation.
+Worklist item 2: re-express WW and W′W′ entirely in (μ,λ)(μ,λ)-language
+
+You already have
+μ=cv5,λ=Δ7v5,d2λdμ2=v53M3W.
+μ=v5​c​,λ=v5​Δ7​​,dμ2d2λ​=M3v53​​W.
+
+I would now derive the analogous formula for the next derivative:
+d3λdμ3
+dμ3d3λ​
+
+in terms of W,W′W,W′, and lower-order factors of v5,Mv5​,M.
+
+The reason is simple: the local W=0W=0 theory already showed that the first nonzero derivative of the graph λ(μ)λ(μ) at a W=0W=0 point controls local inflection behavior. If the global recurrence problem for tangent slopes is going to be obstructed by special structure, it is likely to show up in the differential geometry of the graph
+λ=λ(μ),
+λ=λ(μ),
+
+not in the original hh-parameter.
+
+A formula for d3λ/dμ3d3λ/dμ3 would tell you whether the graph has some projective or affine rigidity beyond ordinary piecewise convexity.
+
+This is the second-priority computation.
+Worklist item 3: derive an exact scalar ODE for ββ
+
+This is the theorem target.
+
+Right now you know
+β=−LM,β′=−v5M2W.
+β=−ML​,β′=−M2v5​​W.
+
+I would try very hard to derive a second-order scalar ODE of the form
+A(h)β′′+B(h)β′+C(h)β=explicit forcing,
+A(h)β′′+B(h)β′+C(h)β=explicit forcing,
+
+or, even better, something autonomous after changing variable from hh to μμ or bb.
+
+What I would check first is whether ββ satisfies anything like a Riccati-type equation or a linear second-order equation after a natural substitution.
+
+Why this is the right thing:
+
+The global no-reentry problem for tangent slopes is literally a level-set recurrence problem for ββ. If ββ satisfies a disconjugate scalar ODE, or even something close, that could finish the global theorem in one shot.
+
+This is probably the single most promising proof-theoretic target, but it depends on item 1.
+Worklist item 4: test whether v5Wv5​W factors or has controlled sign for RH-specific reasons
+
+This is the boldest but most speculative angle.
+
+You already know
+β′=−v5M2W.
+β′=−M2v5​​W.
+
+So any sign theorem for v5Wv5​W immediately gives global monotonicity information for ββ.
+
+I would not try to prove a sign theorem abstractly. I would first look for exact factorization or sum-of-squares type formulas in the closed order-7 algebra.
+
+The concrete tests are:
+
+    does WW factor through MM, NN, or LL in a useful way?
+
+    does v5Wv5​W become a determinant square or a product of canonically signed factors when Δ7Δ7​ is written in its now-closed order-7 form?
+
+    does W′W′ reveal a positivity structure at W=0W=0 points?
+
+This is the most “RH-specific” option. It is also the least likely to work quickly, but if it works, it could collapse the remaining gap.
+
+I would do this only after items 1–3.
+Worklist item 5: study the dual curve T=(−L/M,N/M)T=(−L/M,N/M) as a projective image of FF
+
+This is the geometric companion to item 3.
+
+You now know
+T′=WM2(−v5,c),det⁡(T′,T′′)=W2M3.
+T′=M2W​(−v5​,c),det(T′,T′′)=M3W2​.
+
+I would derive the exact projective invariants of TT: not just its Euclidean curvature sign, but whether its Schwarzian or projective curvature simplifies.
+
+The reason is that the dual curve is not an arbitrary convex arc chain. It comes from the tangent lines to the canonical (μ,λ)(μ,λ)-graph, which in turn comes from the projective triple (c,v5,Δ7)(c,v5​,Δ7​). There may be a hidden projective rigidity here that ordinary convex geometry misses.
+
+The first check would be whether TT itself satisfies a determinant/Wronskian relation analogous to the one for FF.
+
+This is medium priority.
+Worklist item 6: compare turning-boundary asymptotes globally
+
+At a generic turning boundary hbhb​, the dual curve has asymptote
+m=−μb b+λb.
+m=−μb​b+λb​.
+
+The next natural algebraic question is whether the boundary data
+(μb,λb)=(cv5,Δ7v5)∣hb
+(μb​,λb​)=(v5​c​,v5​Δ7​​)
+​hb​​
+
+satisfy any global ordering constraints as you move along the chain of turning boundaries.
+
+If they did, then the dual asymptote lines might be globally ordered, which could prevent the “two bowls with a bridge” type countergeometry that defeats the purely local convexity route.
+
+This is less likely than items 1–3, but still worth checking once the scalar system is in hand.
+Worklist item 7: revisit the determinant kernel with the canonical order-7 closure now in place
+
+Earlier, the determinant route was generic and did not globalize.
+
+Now that Δ7Δ7​ is much more canonical, it is worth checking whether
+D(s,t,u)=det⁡(F(s),F(t),F(u))
+D(s,t,u)=det(F(s),F(t),F(u))
+
+or the normalized kernel
+Q(s,t,u)=D(s,t,u)(t−s)(u−s)(u−t)
+Q(s,t,u)=(t−s)(u−s)(u−t)D(s,t,u)​
+
+satisfies a stronger RH-specific differential identity in uu than the generic Peano-kernel picture suggests.
+
+For fixed s,ts,t, u↦D(s,t,u)u↦D(s,t,u) is a scalar combination of c,v5,Δ7c,v5​,Δ7​. If the order-7 closure makes that combination satisfy a special scalar ODE with oscillation control, this could reopen the determinant route in a more concrete way.
+
+This is worth doing, but after items 1–3.
+My recommended order
+
+I would do them in this order:
+
+    Closed differential system for M,N,L,WM,N,L,W.
+
+    Formula for d3λ/dμ3d3λ/dμ3.
+
+    Exact scalar ODE for β=−L/Mβ=−L/M.
+
+    Look for factorization/sign structure of v5Wv5​W.
+
+    Projective invariants of the dual curve TT.
+
+    Global ordering of turning-boundary asymptotes.
+
+    Reopen the determinant kernel route with the canonical Δ7Δ7​.
+
+What would count as a real win
+
+The most decisive outputs would be any one of these:
+
+    a closed scalar ODE for ββ with disconjugacy or monotonicity;
+
+    a factorization/sign theorem for v5Wv5​W;
+
+    a global ordering theorem for the turning-boundary asymptote data (μb,λb)(μb​,λb​);
+
+    a projective invariant of TT that forces dual simplicity.
+
+Any of those would likely break the current stalemate.
+
+If you want, I’ll start with item 1 and push the closed differential system for (M,N,L,W)(M,N,L,W) as far as it goes.
+
+ok lets attack down the list
+
+I pushed item 1 as far as it naturally goes, and there is a clean closed differential core hiding in the draft.
+
+Let me rename
+v:=v5,Δ:=Δ7,
+v:=v5​,Δ:=Δ7​,
+
+and keep
+F=(c,v,Δ).
+F=(c,v,Δ).
+
+Define the three first-order 2×22×2 minors
+M:=cv′−c′v,N:=cΔ′−c′Δ,L:=vΔ′−v′Δ.
+M:=cv′−c′v,N:=cΔ′−c′Δ,L:=vΔ′−v′Δ.
+
+The first important observation is that these are not arbitrary. They are exactly the components of the cross product
+F×F′=(L,−N,M).
+F×F′=(L,−N,M).
+
+So if I set
+U:=(L,−N,M),
+U:=(L,−N,M),
+
+then
+U=F×F′.
+U=F×F′.
+
+Differentiate once:
+U′=F×F′′.
+U′=F×F′′.
+
+Now take the cross product again. Using the standard identity
+(A×B)×(A×C)=det⁡(A,B,C) A,
+(A×B)×(A×C)=det(A,B,C)A,
+
+with A=FA=F, B=F′B=F′, C=F′′C=F′′, we get
+U×U′=(F×F′)×(F×F′′)=det⁡(F,F′,F′′) F=W F.
+U×U′=(F×F′)×(F×F′′)=det(F,F′,F′′)F=WF.
+
+This is the cleanest closed identity in the whole story:
+U×U′=W F.
+U×U′=WF.​
+
+Written componentwise, it is exactly the three determinant identities
+MN′−NM′=cW,
+MN′−NM′=cW,
+ML′−LM′=vW,
+ML′−LM′=vW,
+NL′−LN′=ΔW.
+NL′−LN′=ΔW.
+
+So the “closed differential core” of the system is
+F×F′=U,U×U′=W F.
+F×F′=U,U×U′=WF.
+
+That is already much better than the earlier scattered formulas.
+
+There is a second very useful interpretation: UU is the homogeneous tangent-line coordinate vector of the normalized graph. In the (μ,λ)(μ,λ)-coordinates
+μ=cv,λ=Δv,
+μ=vc​,λ=vΔ​,
+
+we have
+F=v(μ,1,λ),
+F=v(μ,1,λ),
+
+and one checks directly that
+U=F×F′=v2 ((μ,1,λ)×(μ′,0,λ′)).
+U=F×F′=v2((μ,1,λ)×(μ′,0,λ′)).
+
+So up to the harmless factor v2v2, UU is exactly the tangent-line lift of the graph λ=λ(μ)λ=λ(μ).
+
+That makes the ratios
+β:=−LM,m:=NM
+β:=−ML​,m:=MN​
+
+completely natural: they are the slope and intercept of the tangent line in the (μ,λ)(μ,λ)-plane. In other words,
+T(h):=(β(h),m(h))=(−L(h)M(h),N(h)M(h))
+T(h):=(β(h),m(h))=(−M(h)L(h)​,M(h)N(h)​)
+
+is the dual tangent-line curve.
+
+Now differentiate these ratios using the component identities above.
+
+From
+ML′−LM′=vW,
+ML′−LM′=vW,
+
+we get
+β′=(−LM)′=−ML′−LM′M2=−vWM2.
+β′=(−ML​)′=−M2ML′−LM′​=−M2vW​.
+
+From
+MN′−NM′=cW,
+MN′−NM′=cW,
+
+we get
+m′=(NM)′=MN′−NM′M2=cWM2.
+m′=(MN​)′=M2MN′−NM′​=M2cW​.
+
+So the dual tangent-line curve satisfies the exact first-order system
+β′=−vWM2,m′=cWM2.
+β′=−M2vW​,m′=M2cW​.​
+
+Equivalently,
+T′(h)=W(h)M(h)2 (−v(h),c(h)).
+T′(h)=M(h)2W(h)​(−v(h),c(h)).
+
+That means the tangent direction of the dual curve is always the vector
+(−v,c),
+(−v,c),
+
+and WW only changes the speed and orientation along that direction.
+
+A few nice consequences drop out immediately.
+
+First,
+c β′+v m′=0.
+cβ′+vm′=0.
+
+So along the dual curve,
+dmdβ=−cv=−μ.
+dβdm​=−vc​=−μ.
+
+This is just the standard Legendre/contact relation in exact RH variables.
+
+Second, because
+μ′=−Mv2,
+μ′=−v2M​,
+
+you recover
+dλdμ=β=−LM.
+dμdλ​=β=−ML​.
+
+Third, taking one more derivative of TT, the signed curvature of the dual curve comes out exactly:
+det⁡(T′,T′′)=W2M3.
+det(T′,T′′)=M3W2​.
+
+So on each MM-sign component, the dual curve has fixed signed curvature sign, and W=0W=0 does not create dual inflections — it only makes the speed vanish.
+
+This is all real structure, not generic convexity handwaving.
+
+There is also one more exact scalar identity worth recording. Since
+m=λ−μβ,
+m=λ−μβ,
+
+we can rewrite
+N=μL+Mλ.
+N=μL+Mλ.
+
+You can verify this directly:
+μL+Mλ=cv(vΔ′−v′Δ)+(cv′−c′v)Δv=cΔ′−c′Δ=N.
+μL+Mλ=vc​(vΔ′−v′Δ)+(cv′−c′v)vΔ​=cΔ′−c′Δ=N.
+
+This identity ties the three minors M,N,LM,N,L back to the actual graph coordinates.
+
+So the most compact summary of item 1 is:
+F×F′=U=(L,−N,M),U×U′=W F.
+F×F′=U=(L,−N,M),U×U′=WF.​
+
+and, on M≠0M=0,
+β=−LM,m=NM,β′=−vWM2,m′=cWM2.
+β=−ML​,m=MN​,β′=−M2vW​,m′=M2cW​.​
+
+This is the clean closed first-order core.
+
+Where it stops is equally important. These identities do not close W′W′ in terms of only M,N,L,WM,N,L,W. To go one derivative further, you need genuine third-order data, and that is exactly where the draft’s explicit W′W′-identity comes in. So the natural point where the “closed core” ends is:
+
+    closed at the (F,U,W)(F,U,W)-level,
+
+    not closed at the scalar (M,N,L,W)(M,N,L,W)-level unless you add the draft’s W′W′ formula.
+
+That is probably the most useful output of item 1.
+
+If you want, the next move is item 2: use this core plus the draft’s exact W′W′-formula to derive a clean formula for
+d3λdμ3
+dμ3d3λ​
+
+and see whether it carries any RH-specific sign or factorization structure.
+
+ok let's try that
+
+I’m extracting the exact W′W′-identity from the current draft and combining it with the closed (M,N,L,W)(M,N,L,W)-core we just derived. The goal is to get a clean formula for d3λ/dμ3d3λ/dμ3, then see whether it has any sign or factorization structure that is genuinely stronger than generic graph geometry.
+
+Yes — this calculation is worth doing, and it comes out cleanly.
+
+Let me write v:=v5v:=v5​ and Δ:=Δ7Δ:=Δ7​. On a region where
+v≠0,M≠0,
+v=0,M=0,
+
+set
+μ=cv,λ=Δv.
+μ=vc​,λ=vΔ​.
+
+The draft already has the projective-Wronskian bridge and the exact identities for WW and W′W′:
+MN′−NM′=cW,
+MN′−NM′=cW,
+
+and
+W=M Δ′′+(vc′′−cv′′) Δ′+(c′v′′−v′c′′) Δ,
+W=MΔ′′+(vc′′−cv′′)Δ′+(c′v′′−v′c′′)Δ,
+W′=M Δ′′′+(vc′′′−cv′′′) Δ′+(c′v′′′−v′c′′′) Δ.
+W′=MΔ′′′+(vc′′′−cv′′′)Δ′+(c′v′′′−v′c′′′)Δ.
+
+Also, from the (μ,λ)(μ,λ)-reduction we already found
+μ′=−Mv2,d2λdμ2=v3M3 W.
+μ′=−v2M​,dμ2d2λ​=M3v3​W.
+
+So the μμ-derivative operator is
+ddμ=1μ′ddh=−v2Mddh.
+dμd​=μ′1​dhd​=−Mv2​dhd​.
+
+Therefore
+d3λdμ3=−v2Mddh ⁣(v3M3W).
+dμ3d3λ​=−Mv2​dhd​(M3v3​W).
+
+That is the clean intrinsic formula. Expanding it gives
+d3λdμ3=−v5M4W′+3 v4 (vM′−Mv′)M5 W.
+dμ3d3λ​=−M4v5​W′+3M5v4(vM′−Mv′)​W.​
+
+An equivalent logarithmic-derivative form is
+d3λdμ3=−v5M4(W′+3(v′v−M′M)W).
+dμ3d3λ​=−M4v5​(W′+3(vv′​−MM′​)W).​
+
+That is the exact answer to item 2.
+
+Now the important consequences.
+
+First, at a W=0, M≠0, v≠0W=0, M=0, v=0 boundary, the WW-term drops out, so
+d3λdμ3∣W=0=−v5M4W′.
+dμ3d3λ​
+​W=0​=−M4v5​W′.​
+
+So the cubic coefficient of the (μ,λ)(μ,λ)-graph at a W=0W=0 point is controlled exactly by W′W′. That matches the draft’s affine-inflection analysis in the (x,y)=(v5/c,Δ7/c)(x,y)=(v5​/c,Δ7​/c)-chart, just in cleaner projective coordinates.
+
+Second, if you substitute the exact W′W′-identity, you get
+d3λdμ3=−v5M3 Δ′′′−v5(vc′′′−cv′′′)M4 Δ′−v5(c′v′′′−v′c′′′)M4 Δ+3 v4(vM′−Mv′)M5 W.
+dμ3d3λ​=−M3v5​Δ′′′−M4v5(vc′′′−cv′′′)​Δ′−M4v5(c′v′′′−v′c′′′)​Δ+3M5v4(vM′−Mv′)​W.
+
+This is useful because it tells you exactly what the “highest genuinely new” contribution is.
+
+The leading new piece is the Δ′′′Δ′′′-term:
+−v5M3 Δ′′′.
+−M3v5​Δ′′′.
+
+So the third μμ-derivative of the graph is still controlled by the order-7 package through ΔΔ, not by some genuinely new primitive order-9 object. That is very much in line with the draft’s current interpretation of W′W′: the obstruction is still order-7 in origin, even though it appears one derivative later.
+
+Third, and this is the honest limitation: this formula does not produce a sign theorem.
+
+Why not?
+
+Because even after the order-7 closure, the expression for d3λ/dμ3d3λ/dμ3 is a linear combination of
+Δ′′′, Δ′, Δ, W
+Δ′′′, Δ′, Δ, W
+
+with coefficients built from c,v,Mc,v,M and their derivatives. There is no visible square, no obvious factorization, and no manifest sign-definite structure. So this calculation strengthens the conceptual picture, but it does not yet give the monotonicity or non-recurrence theorem for the tangent-slope function that we would need to globalize the geometry.
+
+So the outcome is:
+
+    we now know exactly how d3λ/dμ3d3λ/dμ3 depends on WW and W′W′;
+
+    at a W=0W=0 point it reduces cleanly to the W′W′-term;
+
+    the highest genuinely new contribution is still order-7 via ΔΔ;
+
+    but there is still no sign/factorization miracle here.
+
+That means item 2 is a success as a reduction, not as a closure.
+
+The next natural move down the list is item 3: use the closed (M,N,L,W)(M,N,L,W)-core plus this formula to look for an actual scalar ODE for
+β=−LM=dλdμ,
+β=−ML​=dμdλ​,
+
+because right now ββ is still the cleanest global target.
+
+ok let's try that
+
+I’m deriving the ββ-equation in the cleanest possible way first, then checking whether it actually becomes a closed scalar ODE or just repackages WW and W′W′. The key question is whether the order-7 closure gives a nontrivial equation for ββ, not just identities equivalent to β′=−v5W/M2β′=−v5​W/M2.
+
+I tried to force a real scalar ODE for
+β(h):=−L(h)M(h),L:=v5Δ7′−Δ7v5′,
+β(h):=−M(h)L(h)​,L:=v5​Δ7′​−Δ7​v5′​,
+
+and the result is:
+
+there is a clean exact differential equation, but it is not closed in ββ alone. It repackages WW and W′W′, rather than eliminating them.
+
+Here is the clean derivation.
+
+Write v:=v5v:=v5​, Δ:=Δ7Δ:=Δ7​. Then
+M=cv′−c′v,N=cΔ′−c′Δ,L=vΔ′−v′Δ.
+M=cv′−c′v,N=cΔ′−c′Δ,L=vΔ′−v′Δ.
+
+From the identities we already have,
+ML′−LM′=vW,
+ML′−LM′=vW,
+
+so
+β′=(−LM)′=−ML′−LM′M2=−vWM2.
+β′=(−ML​)′=−M2ML′−LM′​=−M2vW​.
+
+That is the first exact scalar evolution law.
+
+Differentiate once more:
+β′′=−(vWM2)′=−vM2W′−(2M′M−v′v)β′.
+β′′=−(M2vW​)′=−M2v​W′−(2MM′​−vv′​)β′.
+
+So the exact second-order equation is
+β′′+(2M′M−v′v)β′=−vM2W′.
+β′′+(2MM′​−vv′​)β′=−M2v​W′.​
+
+Equivalently, in conservation form,
+(M2v β′)′=− W′.
+(vM2​β′)′=−W′.​
+
+But since
+M2vβ′=−W,
+vM2​β′=−W,
+
+that conservation law is really just the same identity differentiated. So this is not a new closure; it is an exact reformulation of the WW-package.
+
+If you move to the (μ,λ)(μ,λ)-coordinates
+μ=cv,λ=Δv,
+μ=vc​,λ=vΔ​,
+
+then β=dλ/dμβ=dλ/dμ, and the earlier computation gives
+βμ=v3M3W.
+βμ​=M3v3​W.
+
+Differentiating again in μμ,
+βμμ=−v5M4(W′+3(v′v−M′M)W).
+βμμ​=−M4v5​(W′+3(vv′​−MM′​)W).​
+
+Again: exact, clean, but still not closed.
+
+So the honest result of this attack is:
+
+    we do get a precise scalar equation for ββ;
+
+    but it still depends on WW and W′W′;
+
+    and the current W′W′-formula does not simplify into something sign-definite or factorized in terms of ββ alone.
+
+If you substitute the draft’s explicit W′W′-identity, you get
+β′′+(2M′M−v′v)β′=−vM2(MΔ′′′+(vc′′′−cv′′′)Δ′+(c′v′′′−v′c′′′)Δ),
+β′′+(2MM′​−vv′​)β′=−M2v​(MΔ′′′+(vc′′′−cv′′′)Δ′+(c′v′′′−v′c′′′)Δ),
+
+which is exact but not obviously useful for global monotonicity.
+
+So the conclusion is:
+What worked
+
+We reduced the global slope-recurrence problem to a scalar evolution law for ββ.
+What did not work
+
+The law is not closed in ββ. It is equivalent to carrying around WW and W′W′, so it does not yet give a stand-alone ODE with disconjugacy or monotonicity.
+
+At this point, the most natural next push is no longer “find the scalar ODE” — that part is done. The real remaining question is:
+
+    does the now-closed order-7 package force any sign or factorization structure on the forcing term
+    −vM2W′or onW′+3(v′v−M′M)W?
+    −M2v​W′or onW′+3(vv′​−MM′​)W? 
+
+That is the sharp next frontier if you want to keep pushing this ββ-route.
+
+try that
+
+I’m checking the current draft’s exact W′W′-identity and the new order-7 closure language before I push on the forcing term. The main question is whether the new septic closure gives any actual sign/factorization structure for
+W′+3(v5′v5−M′M)W,
+W′+3(v5​v5′​​−MM′​)W,
+
+or whether it only confirms that the term is still controlled by the canonical Δ7Δ7​-package.
+
+Let’s start with item 1 and do it cleanly.
+
+I’ll rename
+v:=v5,Δ:=Δ7,
+v:=v5​,Δ:=Δ7​,
+
+and keep
+F=(c,v,Δ).
+F=(c,v,Δ).
+
+Define the three first-order 2×22×2 minors
+M:=cv′−c′v,N:=cΔ′−c′Δ,L:=vΔ′−v′Δ.
+M:=cv′−c′v,N:=cΔ′−c′Δ,L:=vΔ′−v′Δ.
+
+The first useful observation is that these are exactly the components of the cross product
+F×F′=(L,−N,M).
+F×F′=(L,−N,M).
+
+So if I set
+U:=(L,−N,M),
+U:=(L,−N,M),
+
+then
+U=F×F′.
+U=F×F′.
+
+Differentiate:
+U′=F×F′′.
+U′=F×F′′.
+
+Now use the vector identity
+(A×B)×(A×C)=det⁡(A,B,C) A.
+(A×B)×(A×C)=det(A,B,C)A.
+
+With A=FA=F, B=F′B=F′, C=F′′C=F′′, this gives
+U×U′=(F×F′)×(F×F′′)=det⁡(F,F′,F′′) F=W F.
+U×U′=(F×F′)×(F×F′′)=det(F,F′,F′′)F=WF.
+
+This is the clean closed core:
+F×F′=U,U×U′=W F.
+F×F′=U,U×U′=WF.​
+
+Written componentwise, it is exactly
+MN′−NM′=cW,
+MN′−NM′=cW,
+ML′−LM′=vW,
+ML′−LM′=vW,
+NL′−LN′=ΔW.
+NL′−LN′=ΔW.
+
+So the three minors (M,N,L)(M,N,L) are not arbitrary; they are tied together by a closed first-order determinant system.
+
+Now go to the projective graph variables
+μ=cv,λ=Δv.
+μ=vc​,λ=vΔ​.
+
+Then
+F=v(μ,1,λ).
+F=v(μ,1,λ).
+
+In these coordinates, the tangent-line slope and intercept are
+β:=dλdμ,m:=λ−μβ.
+β:=dμdλ​,m:=λ−μβ.
+
+And from the minors you get exactly
+β=−LM,m=NM.
+β=−ML​,m=MN​.
+
+So the dual tangent-line curve is
+T(h)=(−L(h)M(h), N(h)M(h)).
+T(h)=(−M(h)L(h)​,M(h)N(h)​).
+
+Now differentiate those ratios using the component identities above.
+
+From
+ML′−LM′=vW,
+ML′−LM′=vW,
+
+we get
+β′=(−LM)′=−ML′−LM′M2=−vWM2.
+β′=(−ML​)′=−M2ML′−LM′​=−M2vW​.
+
+From
+MN′−NM′=cW,
+MN′−NM′=cW,
+
+we get
+m′=(NM)′=MN′−NM′M2=cWM2.
+m′=(MN​)′=M2MN′−NM′​=M2cW​.
+
+So the dual tangent-line curve satisfies the exact first-order system
+β′=−vWM2,m′=cWM2.
+β′=−M2vW​,m′=M2cW​.​
+
+Equivalently,
+T′(h)=W(h)M(h)2 (−v(h),c(h)).
+T′(h)=M(h)2W(h)​(−v(h),c(h)).​
+
+That is already a strong structural statement: WW only changes the speed and orientation along the dual direction (−v,c)(−v,c).
+
+There is also one nice linear identity tying everything together:
+N=μL+Mλ.
+N=μL+Mλ.
+
+You can verify it directly:
+μL+Mλ=cv(vΔ′−v′Δ)+(cv′−c′v)Δv=cΔ′−c′Δ=N.
+μL+Mλ=vc​(vΔ′−v′Δ)+(cv′−c′v)vΔ​=cΔ′−c′Δ=N.
+
+This is just the tangent-line relation
+m=λ−μβ
+m=λ−μβ
+
+written back in (c,v,Δ)(c,v,Δ)-language.
+
+One more derivative gives the signed curvature of the dual curve:
+det⁡(T′,T′′)=W2M3.
+det(T′,T′′)=M3W2​.
+
+So on each MM-sign component, the dual curve has fixed signed curvature sign, and W=0W=0 is only a speed-degeneracy, not a dual inflection.
+
+So item 1 gives a very clean closed differential core:
+F×F′=U=(L,−N,M),U×U′=W F,
+F×F′=U=(L,−N,M),U×U′=WF,​
+
+and on M≠0M=0,
+β=−LM,m=NM,β′=−vWM2,m′=cWM2.
+β=−ML​,m=MN​,β′=−M2vW​,m′=M2cW​.​
+
+That is the exact first-order algebraic structure underlying the remaining geometry.
+
+The natural next step is item 2: combine this with the draft’s explicit W′W′-formula and derive a clean expression for
+d3λdμ3,
+dμ3d3λ​,
+
+to see whether any RH-specific sign or factorization shows up there.
+
+attack
+
+Let’s push item 2 directly.
+
+I’ll keep the abbreviations
+v:=v5,Δ:=Δ7,
+v:=v5​,Δ:=Δ7​,
+
+and work on a region where
+v≠0,M≠0.
+v=0,M=0.
+
+Set
+μ=cv,λ=Δv.
+μ=vc​,λ=vΔ​.
+
+From the previous step, we already have
+μ′=−Mv2,d2λdμ2=v3M3 W.
+μ′=−v2M​,dμ2d2λ​=M3v3​W.
+
+So the μμ-derivative operator is
+ddμ=1μ′ddh=−v2Mddh.
+dμd​=μ′1​dhd​=−Mv2​dhd​.
+
+Now differentiate once more:
+d3λdμ3=−v2Mddh ⁣(v3M3W).
+dμ3d3λ​=−Mv2​dhd​(M3v3​W).
+
+Expand that derivative:
+ddh ⁣(v3M3W)=v3M3W′+(3v′v−3M′M)v3M3W.
+dhd​(M3v3​W)=M3v3​W′+(3vv′​−3MM′​)M3v3​W.
+
+So the exact formula is
+d3λdμ3=−v5M4(W′+3(v′v−M′M)W).
+dμ3d3λ​=−M4v5​(W′+3(vv′​−MM′​)W).​
+
+That is the clean intrinsic expression.
+
+You can also rewrite the WW-term as
+3v4(vM′−Mv′)M5W,
+3M5v4(vM′−Mv′)​W,
+
+so equivalently
+d3λdμ3=−v5M4W′+3 v4(vM′−Mv′)M5W.
+dμ3d3λ​=−M4v5​W′+3M5v4(vM′−Mv′)​W.​
+
+That is the first real answer.
+
+Now, what happens at a W=0W=0 point?
+
+If
+W(hb)=0,M(hb)≠0,v(hb)≠0,
+W(hb​)=0,M(hb​)=0,v(hb​)=0,
+
+then the WW-term drops out and you get
+d3λdμ3∣hb=−v(hb)5M(hb)4W′(hb).
+dμ3d3λ​
+​hb​​=−M(hb​)4v(hb​)5​W′(hb​).​
+
+So in the (μ,λ)(μ,λ)-chart, the cubic coefficient at a W=0W=0 boundary is controlled exactly by W′W′. That matches the earlier affine-inflection story, but now in the cleaner projective coordinates.
+
+Now let’s substitute the draft’s explicit W′W′-identity:
+W′=M Δ′′′+(vc′′′−cv′′′) Δ′+(c′v′′′−v′c′′′) Δ.
+W′=MΔ′′′+(vc′′′−cv′′′)Δ′+(c′v′′′−v′c′′′)Δ.
+
+Then
+d3λdμ3=−v5M3Δ′′′−v5(vc′′′−cv′′′)M4Δ′−v5(c′v′′′−v′c′′′)M4Δ+3 v4(vM′−Mv′)M5W.
+dμ3d3λ​=−M3v5​Δ′′′−M4v5(vc′′′−cv′′′)​Δ′−M4v5(c′v′′′−v′c′′′)​Δ+3M5v4(vM′−Mv′)​W.
+
+So the highest genuinely new term is
+−v5M3Δ′′′.
+−M3v5​Δ′′′.
+
+That is important conceptually: the third μμ-derivative of the graph is still driven by the septic object ΔΔ, not by a brand-new primitive order-9 invariant. In other words, the “new geometry” at this level is still coming from the order-7 package.
+
+Now for the honest part: does this produce a sign theorem?
+
+I do not see one.
+
+Even with the order-7 closure, the formula for d3λ/dμ3d3λ/dμ3 is a linear combination of
+Δ′′′,Δ′,Δ,W,
+Δ′′′,Δ′,Δ,W,
+
+with coefficients built out of c,v,Mc,v,M and their derivatives. There is no visible square, no sign-definite factor, and no obvious cancellation pattern that would force a global sign.
+
+So item 2 gives you a good reduction, but not a miracle.
+
+The real outputs are:
+
+    Exact identity:
+    d3λdμ3=−v5M4(W′+3(v′v−M′M)W).
+    dμ3d3λ​=−M4v5​(W′+3(vv′​−MM′​)W).​
+
+    At W=0W=0:
+    d3λdμ3∣W=0=−v5M4W′.
+    dμ3d3λ​
+    ​W=0​=−M4v5​W′.​
+
+    The highest new contribution is still order-7 through ΔΔ, via Δ′′′Δ′′′.
+
+    No sign/factorization theorem drops out automatically.
+
+So the next serious move is item 3: use the closed (M,N,L,W)(M,N,L,W)-core plus this formula to see whether β=dλ/dμ=−L/Mβ=dλ/dμ=−L/M satisfies a nontrivial scalar ODE or differential inequality that might actually constrain its level-set recurrence.
+
+try that
+
+I’m trying to force an actual scalar equation for β=−L/Mβ=−L/M, not just repackage the identities we already have. The key test is whether the order-7 closure gives a nontrivial ODE or inequality for ββ, rather than merely expressing β′β′ in terms of WW and W′W′.
+
+I tried exactly that, and the honest result is:
+
+the now-closed order-7 package does not by itself produce a sign or factorization miracle for the forcing term.
+
+Here is the clean picture.
+
+We already have
+β=−LM,β′=−v5M2W.
+β=−ML​,β′=−M2v5​​W.
+
+Differentiating gives the exact scalar equation
+β′′+(2M′M−v5′v5)β′=−v5M2W′.
+β′′+(2MM′​−v5​v5′​​)β′=−M2v5​​W′.
+
+Equivalently, in the (μ,λ)(μ,λ)-variables,
+βμμ=−v55M4(W′+3(v5′v5−M′M)W).
+βμμ​=−M4v55​​(W′+3(v5​v5′​​−MM′​)W).
+
+So the forcing term we want to understand is
+G:=W′+3(v5′v5−M′M)W.
+G:=W′+3(v5​v5′​​−MM′​)W.
+
+I then substituted the draft’s exact W′W′-identity. The result is:
+G=M Δ7′′′+(v5c′′′−cv5′′′) Δ7′+(c′v5′′′−v5′c′′′) Δ7+3(v5′v5−M′M)W.
+G=MΔ7′′′​+(v5​c′′′−cv5′′′​)Δ7′​+(c′v5′′′​−v5′​c′′′)Δ7​+3(v5​v5′​​−MM′​)W.
+
+So even after the order-7 closure, GG is still a linear combination
+of
+Δ7′′′, Δ7′, Δ7, W
+Δ7′′′​, Δ7′​, Δ7​, W
+
+with coefficients built from c,v5,Mc,v5​,M and derivatives.
+
+That tells us three important things.
+
+First, the obstruction is still genuinely order-7 in origin. The leading new term is the M Δ7′′′MΔ7′′′​ term. So this still supports the narrative that the remaining global issue is encoded by the canonical septic object Δ7Δ7​, not by some new primitive order-9 invariant.
+
+Second, there is no visible sign-definite structure. I do not see a square, a sum of squares, a monotone weight, or a factorization that would force GG to keep one sign.
+
+Third, there is no useful factorization by WW. In fact, at a W=0, M≠0W=0, M=0 point,
+G=W′,
+G=W′,
+
+so GG does not vanish there generically. That is exactly why the cubic coefficient at a W=0W=0 boundary is controlled by W′W′. So the forcing term is not softened by the W=0W=0 geometry; it is actually driven by it.
+
+So the attack result is:
+
+    the order-7 closure clarifies the source of the forcing term;
+
+    it does not give the sign control needed to make ββ globally non-recurrent.
+
+That means this route still stalls at the same point:
+we know exactly what drives β, but we do not know its sign/oscillation well enough.
+we know exactly what drives β, but we do not know its sign/oscillation well enough.
+
+So the honest next move is not “keep differentiating.” That will just produce larger linear combinations of Δ7Δ7​ and derivatives.
+
+The next meaningful sub-attacks are narrower:
+1. Check whether GG becomes simple on the direct highest-new slice
+
+Since the draft now treats the order-7 package as much more canonical, the most plausible place for hidden structure is the highest-new / direct slice. If G[1]G[1] has a simple sign or factorization there, that would be a real clue.
+2. Re-express GG in the dual variables T=(b,m)=(−L/M,N/M)T=(b,m)=(−L/M,N/M)
+
+Sometimes the forcing term looks messy in c,v5,Δ7c,v5​,Δ7​, but cleaner in the dual curve language. In particular, GG is exactly the numerator of βμμβμμ​, so it is measuring the second derivative of the tangent-slope function as a function of μμ. That may have a cleaner geometric meaning than the raw formula suggests.
+3. Look for a relation between GG and the turning-boundary asymptote data
+
+Because the dual-curve asymptote at a turning boundary is explicit, there is some chance that GG controls how the dual arcs peel away from that asymptote. If so, a sign theorem for that asymptotic separation could be more realistic than a global sign theorem for all of GG.
+
+So: the direct forcing-term attack does not close, but it does tell us the remaining issue is not hidden anymore. It is a genuinely missing sign/oscillation theorem for a specific canonical order-7 expression.
+
+ok let's try those attacks
+
+I’m going to push the three narrower attacks in the order most likely to say something concrete: first the highest-new slice of the forcing term GG, then its dual-curve meaning, then the turning-boundary asymptotics. The goal is to see whether any of those give a sign or monotonicity mechanism we’ve been missing.
+
+I tried the three attacks in the tightest way I could. The result is useful, but it does not yet produce the missing sign theorem.
+
+The clean summary is:
+
+The forcing term
+G:=W′+3(v5′v5−M′M)W
+G:=W′+3(v5​v5′​​−MM′​)W
+
+is the right object, and the three attacks tell you what it really is, but none of them yet forces a global sign.
+
+First attack: the highest-new slice.
+
+On the projective chart
+μ=cv5,λ=Δ7v5,
+μ=v5​c​,λ=v5​Δ7​​,
+
+you already have
+λμμμ=−v55M4 G.
+λμμμ​=−M4v55​​G.
+
+So on the highest-new slice, where the lower-order geometry is frozen and only the canonical septic scalar varies, you get
+G[1]=−M4v55 (λ[1])μμμ.
+G[1]=−v55​M4​(λ[1])μμμ​.
+
+This is the most conceptual version of the highest-new reduction. It says:
+
+    the highest-new part of the forcing term is exactly the third μμ-derivative of the highest-new part of λλ;
+
+    there is no hidden extra structure from lower sectors at this level;
+
+    if a sign theorem is going to appear here, it has to come from an actual structural property of the canonical septic scalar λ[1]λ[1], not from generic determinant identities.
+
+That is informative, but not enough by itself. A generic scalar function can have third derivative changing sign arbitrarily, so this attack alone does not close the gap.
+
+Second attack: re-express GG in the dual variables.
+
+Let
+β=dλdμ=−LM,m=λ−μβ=NM,
+β=dμdλ​=−ML​,m=λ−μβ=MN​,
+
+so the dual tangent-line curve is
+T(h)=(β(h),m(h)).
+T(h)=(β(h),m(h)).
+
+Then
+β′=−v5M2W,m′=cM2W,
+β′=−M2v5​​W,m′=M2c​W,
+
+and
+T′(h)=W(h)M(h)2 (−v5(h),c(h)).
+T′(h)=M(h)2W(h)​(−v5​(h),c(h)).
+
+Differentiate once more. Since
+βμμ=−v55M4G,
+βμμ​=−M4v55​​G,
+
+the forcing term GG is exactly the second μμ-derivative of the dual slope ββ. Equivalently, in the dual graph m=m(β)m=m(β),
+mββ=−1λμμ
+mββ​=−λμμ​1​
+
+and
+mβββ=−M5v54 W3 G.
+mβββ​=−v54​W3M5​G.
+
+So GG is not just some random leftover combination. It is the quantity that measures how the dual tangent-line curve departs from pure quadratic behavior.
+
+That is a real geometric meaning, but again it does not force a sign. It says:
+
+    GG controls the third-order bending of the dual curve;
+
+    if GG had a sign theorem, you would get a one-sidedness theorem for the dual tangent-line envelope;
+
+    but no such sign theorem drops out automatically.
+
+Third attack: turning-boundary asymptotics.
+
+At a generic turning boundary M=0, M′≠0, N≠0M=0, M′=0, N=0, the primal graph in (μ,λ)(μ,λ) has a vertical tangent. If (μb,λb)(μb​,λb​) is the boundary point, then the dual curve has asymptote
+m=−μb β+λb,
+m=−μb​β+λb​,
+
+and the first correction term is
+m+μbβ−λb=14a β+o(1/β),
+m+μb​β−λb​=4aβ1​+o(1/β),
+
+where aa is the quadratic coefficient in
+μ−μb=a(λ−λb)2+⋯ .
+μ−μb​=a(λ−λb​)2+⋯.
+
+So the sign of the first deviation from the asymptote is controlled by aa, equivalently by the second λλ-derivative of μμ at the turning point. This is what makes adjacent dual arcs approach the common asymptote from opposite sides.
+
+That is exactly enough for the local adjacent turning theorem, but it still does not globalize. It only tells you how each dual arc leaves its own turning-boundary asymptote. It does not stop a later nonadjacent same-parity arc from returning to the same vertical line in the dual plane.
+
+So the net result of the three attacks is:
+
+    the highest-new slice identifies G[1]G[1] as the third μμ-derivative of the canonical septic scalar;
+
+    the dual formulation shows GG is the third-order bending of the tangent-line curve;
+
+    the turning-boundary asymptotics show exactly how dual arcs peel away from their common asymptotes.
+
+All three are real structural improvements.
+
+But none of them yet gives the missing global statement
+β(h) does not revisit a level b
+β(h) does not revisit a level b
+
+or, equivalently, that nonadjacent same-parity dual arcs cannot re-enter a vertical line.
+
+So the honest conclusion is:
+
+these attacks sharpen the obstruction, but they still do not produce the decisive sign/ordering theorem.
+
+At this point, the strongest remaining possibilities are:
+
+    find an RH-specific monotonicity or sign theorem for λμμμ[1]λμμμ[1]​, i.e. for the highest-new slice itself;
+
+    find an RH-specific one-sidedness theorem for the dual curve T=(β,m)T=(β,m), using more than just local convexity;
+
+    or accept that the geometry is now reduced as far as it can go, and return to the local algebraic audits as the shortest remaining route.
+
+My own judgment is that the highest-new slice of λλ is now the single best place to keep pushing, because that is the only spot where a genuinely RH-specific non-generic sign theorem could still appear.
+
+ok let's push there
+
+I pushed on the highest-new slice as hard as I could, and there is a very clean reduction there.
+
+Let
+ϕ(h):=λ[1](h),
+ϕ(h):=λ[1](h),
+
+the highest-new slice of
+λ=Δ7v5.
+λ=v5​Δ7​​.
+
+Since on that slice the lower-order objects cc and v5v5​ are frozen, you have
+Δ7[1]=v5 ϕ.
+Δ7[1]​=v5​ϕ.
+
+Once you substitute that into the exact minors, everything collapses to scalar calculus in ϕϕ.
+
+If I write v:=v5v:=v5​, then:
+L[1]=v (Δ[1])′−v′Δ[1]=v2ϕ′,
+L[1]=v(Δ[1])′−v′Δ[1]=v2ϕ′,
+
+so
+β[1]=−L[1]M=−v2Mϕ′.
+β[1]=−ML[1]​=−Mv2​ϕ′.
+
+But
+μ′=−Mv2,
+μ′=−v2M​,
+
+hence
+β[1]=ϕμ.
+β[1]=ϕμ​.
+
+So the highest-new slice of the tangent-slope function is literally the μμ-derivative of ϕϕ. That is the first strong simplification.
+
+The tangent-intercept slice also simplifies:
+N[1]=c(Δ[1])′−c′Δ[1]=Mϕ+cv ϕ′,
+N[1]=c(Δ[1])′−c′Δ[1]=Mϕ+cvϕ′,
+
+and since cv=μv2cv=μv2,
+N[1]=M(ϕ−μϕμ).
+N[1]=M(ϕ−μϕμ​).
+
+Therefore
+m[1]=N[1]M=ϕ−μϕμ.
+m[1]=MN[1]​=ϕ−μϕμ​.
+
+So the entire highest-new dual tangent-line curve is just the ordinary Legendre data of the scalar function ϕ(μ)ϕ(μ):
+β[1]=ϕμ,m[1]=ϕ−μϕμ.
+β[1]=ϕμ​,m[1]=ϕ−μϕμ​.
+
+That is a very strong conceptual reduction.
+
+Now for the curvature side. Since
+λμμ=v3M3W,
+λμμ​=M3v3​W,
+
+taking highest-new slice gives
+ϕμμ=v3M3W[1].
+ϕμμ​=M3v3​W[1].
+
+If you compute W[1]W[1] directly from the linearized WW-formula, substituting Δ[1]=vϕΔ[1]=vϕ, all the zeroth-order ϕϕ-terms cancel and you get
+W[1]=Mv ϕ′′+(2Mv′−vM′)ϕ′.
+W[1]=Mvϕ′′+(2Mv′−vM′)ϕ′.
+
+That is exactly equivalent to the μμ-formula above, and in fact it is just the same identity in the hh-coordinate.
+
+Differentiate once more and you get
+ϕμμμ=−v5M4G[1],
+ϕμμμ​=−M4v5​G[1],
+
+where
+G:=W′+3(v′v−M′M)W.
+G:=W′+3(vv′​−MM′​)W.
+
+So the highest-new slice of the forcing term is exactly the third μμ-derivative of the scalar function ϕϕ.
+
+That is the cleanest reduction we have found:
+Δ7[1]=v5ϕ,β[1]=ϕμ,m[1]=ϕ−μϕμ,ϕμμ=v53M3W[1],ϕμμμ=−v55M4G[1].
+Δ7[1]​=v5​ϕ,β[1]=ϕμ​,m[1]=ϕ−μϕμ​,ϕμμ​=M3v53​​W[1],ϕμμμ​=−M4v55​​G[1].​
+
+So on the highest-new slice, the remaining geometry is not a 3-vector problem, not a kernel problem, and not even really a projective-geometry problem anymore. It is the ordinary affine geometry of a single scalar graph ϕ(μ)ϕ(μ).
+
+That is the good news.
+
+The bad news is that, from the identities alone, this still does not force a sign theorem.
+
+What we can now say is:
+
+    if ϕϕ were affine in μμ, then
+    Δ7[1]=Av5+Bc,
+    Δ7[1]​=Av5​+Bc,
+
+    which is exactly the affine-dependence scenario already ruled out. So ϕϕ is not affine on an M≠0M=0 component.
+
+    the highest-new dual curve is just the Legendre transform of ϕϕ. So a global non-reentry theorem would follow from a theorem saying ϕϕ has some one-sided convexity or one-sided third-derivative sign property.
+
+    but the abstract identities do not yet tell you that ϕμμμϕμμμ​ has one sign, or that ϕϕ is globally convex/concave, or that its slope ϕμϕμ​ is non-recurrent.
+
+So the honest outcome is:
+What we learned
+
+The highest-new slice is now completely linearized and geometrically explicit. Everything collapses to a single scalar function ϕ(μ)ϕ(μ), and all the dual quantities are its Legendre data.
+What we did not get
+
+A non-generic sign or monotonicity theorem for ϕμμμϕμμμ​, hence no global non-reentry theorem yet.
+
+So the next best move, if you want to keep pushing this exact frontier, is no longer abstract identity-chasing. It is:
+
+    extract the explicit closed formula for the canonical highest-new scalar ϕ=λ[1]ϕ=λ[1] from the current order-7 closure, and study that scalar function directly.
+
+Because now we know exactly what would be enough:
+
+    if ϕμμμϕμμμ​ has fixed sign, the dual curve is one-sided enough;
+
+    if ϕμϕμ​ is globally non-recurrent, the line-incidence problem collapses;
+
+    if ϕϕ belongs to some special finite-dimensional family, you may be able to classify its tangent lines outright.
+
+So this attack succeeded in reducing the remaining global problem to the explicit scalar highest-new function ϕ(μ)ϕ(μ). That is the sharpest place to push next.
+
+ok push
+
+I’m trying to locate the exact current order-7 closure formulas that would determine the highest-new scalar ϕ=λ[1]ϕ=λ[1]. The question now is whether the draft already contains enough explicit algebra to compute ϕ(μ)ϕ(μ), or whether we still only know abstractly that it is the canonical highest-new slice.
+
+I tried the forcing-term / highest-new / dual-geometry attacks against the current draft, and the honest conclusion is:
+
+there is a clean RH-specific reduction, but I still do not see the missing sign theorem.
+
+Here is the cleanest version of what survives.
+
+Let
+v:=v5,Δ:=Δ7,M:=cv′−c′v,N:=cΔ′−c′Δ,L:=vΔ′−v′Δ.
+v:=v5​,Δ:=Δ7​,M:=cv′−c′v,N:=cΔ′−c′Δ,L:=vΔ′−v′Δ.
+
+On a region where v≠0v=0 and M≠0M=0, set
+μ=cv,λ=Δv.
+μ=vc​,λ=vΔ​.
+
+Then the normalized curve is a graph λ=λ(μ)λ=λ(μ).
+
+The key exact identities are:
+β:=dλdμ=−LM,m:=λ−μβ=NM,
+β:=dμdλ​=−ML​,m:=λ−μβ=MN​,
+
+so the dual tangent-line curve is
+T(h)=(β(h),m(h))=(−L(h)M(h), N(h)M(h)).
+T(h)=(β(h),m(h))=(−M(h)L(h)​,M(h)N(h)​).
+
+Also
+β′=−vWM2,m′=cWM2,
+β′=−M2vW​,m′=M2cW​,
+
+hence
+T′(h)=W(h)M(h)2 (−v(h),c(h)).
+T′(h)=M(h)2W(h)​(−v(h),c(h)).
+
+And for the dual curve,
+det⁡(T′(h),T′′(h))=W(h)2M(h)3.
+det(T′(h),T′′(h))=M(h)3W(h)2​.
+
+So the geometry is now very rigid:
+
+    on each MM-sign component, the dual curve is locally convex;
+
+    W=0W=0 does not create dual inflections, only speed degeneracies;
+
+    generic turning boundaries correspond to asymptotic seams of the dual curve.
+
+That is a real special structure.
+
+Now to the forcing term. If
+G:=W′+3(v′v−M′M)W,
+G:=W′+3(vv′​−MM′​)W,
+
+then
+λμμμ=−v5M4G.
+λμμμ​=−M4v5​G.
+
+So GG is exactly the third μμ-derivative of the graph up to a nowhere-zero factor. This is the right object to study if you want global one-sidedness of slopes.
+
+On the highest-new slice, write
+ϕ:=λ[1].
+ϕ:=λ[1].
+
+Since Δ[1]=v ϕΔ[1]=vϕ, everything collapses to ordinary scalar calculus:
+β[1]=ϕμ,m[1]=ϕ−μϕμ,
+β[1]=ϕμ​,m[1]=ϕ−μϕμ​,
+
+and
+ϕμμ=v3M3W[1],ϕμμμ=−v5M4G[1].
+ϕμμ​=M3v3​W[1],ϕμμμ​=−M4v5​G[1].
+
+So on the highest-new slice, the remaining geometry is just the affine geometry of a single scalar function ϕ(μ)ϕ(μ), and the whole problem reduces to controlling its first and third μμ-derivatives.
+
+That is the strongest reduction we have.
+
+But here is the part that did not work:
+
+Even after substituting the exact W′W′-formula from the draft, the forcing term
+G=MΔ′′′+(vc′′′−cv′′′)Δ′+(c′v′′′−v′c′′′)Δ+3(v′v−M′M)W
+G=MΔ′′′+(vc′′′−cv′′′)Δ′+(c′v′′′−v′c′′′)Δ+3(vv′​−MM′​)W
+
+does not show any obvious sign-definite structure, factorization, or square-type positivity.
+
+Likewise, on the highest-new slice,
+G[1]
+G[1]
+
+is exactly −M4v5ϕμμμ−v5M4​ϕμμμ​, but I do not see any theorem from the current draft that would force
+ϕμμμ
+ϕμμμ​
+
+to have one sign or prevent ϕμϕμ​ from revisiting a slope level.
+
+So the current attack gives a very sharp answer:
+What we learned
+
+The remaining global line-incidence problem is now equivalent to a scalar recurrence problem for the slope function
+β(h)=dλdμ(h),
+β(h)=dμdλ​(h),
+
+or on the highest-new slice, for
+ϕμ(μ).
+ϕμ​(μ).
+What we did not get
+
+A sign or monotonicity theorem for
+G,λμμμ,ϕμμμ,
+G,λμμμ​,ϕμμμ​,
+
+hence no proof yet that the same slope cannot reappear on nonadjacent branches.
+
+So the honest state is:
+
+    the draft now reduces the global problem to a single scalar highest-new function ϕ(μ)ϕ(μ);
+
+    but the current identities alone do not yet force the non-recurrence of its slope.
+
+That means the next reasonable push is no longer generic identity-chasing. It has to be one of these two:
+
+    Extract the explicit closed formula for the canonical highest-new scalar ϕ(μ)ϕ(μ) from the current order-7 closure and study that concrete scalar function directly.
+
+    Prove some new RH-specific sign theorem for G[1]G[1] or ϕμμμϕμμμ​.
+
+My judgment is that (1) is now the best next move. The algebraic reductions are about as clean as they are going to get; if a hidden monotonicity exists, it is most likely visible only after writing ϕϕ explicitly.
+
+ok let's try that
+
+I’m pulling the exact order-7 closure formulas out of the current draft now so I can see whether ϕ=λ[1]ϕ=λ[1] is genuinely explicit, or whether the draft still only identifies it abstractly. The key question is whether we can reduce the remaining global issue to a concrete scalar function or only to a formal highest-new slice.
+
+Yes — and this actually gives the cleanest reduction we’ve had.
+
+From the current draft, the highest-new scalar is now explicit.
+
+Let
+ϕ:=λ[1],λ=Δ7v5.
+ϕ:=λ[1],λ=v5​Δ7​​.
+
+Because you now have:
+
+    quotient-septic closure:
+    Δ7=Δ7,K1,
+    Δ7​=Δ7,K1​​,
+
+    weight-one reduction:
+    [Δ7][1]=[Δ7,K1][1],
+    [Δ7​][1]=[Δ7,K1​​][1],
+
+    and the direct q(7)q(7)-slice formula:
+    v7,K1(q(7))=0,u7,K1(q(7))=κ((x2−x1)ν6(q(7))+v(γ5−α5)(q(7))),
+    v7,K1​(q(7))​=0,u7,K1​(q(7))​=κ((x2​−x1​)ν6(q(7))​+v(γ5​−α5​)(q(7))),
+
+    with
+    Δ7(q(7))=u7(q(7))v5,
+    Δ7(q(7))​=u7(q(7))​v5​,
+
+you get, on the highest-new slice,
+ϕ=λ[1]=κ((x2−x1)ν6(q(7))+v(γ5−α5)(q(7))).
+ϕ=λ[1]=κ((x2​−x1​)ν6(q(7))​+v(γ5​−α5​)(q(7))).​
+
+That is the real payoff.
+
+So the remaining global highest-new geometry is no longer an abstract “some scalar ϕϕ.” It is exactly the scalar function above.
+
+And then all the dual/tangent quantities collapse to ordinary scalar calculus:
+β[1]=ϕμ,m[1]=ϕ−μϕμ,
+β[1]=ϕμ​,m[1]=ϕ−μϕμ​,
+
+and
+ϕμμ=v53M3W[1],ϕμμμ=−v55M4G[1],
+ϕμμ​=M3v53​​W[1],ϕμμμ​=−M4v55​​G[1],
+
+where
+G=W′+3(v5′v5−M′M)W.
+G=W′+3(v5​v5′​​−MM′​)W.
+
+So the whole highest-new obstruction is now:
+
+    does the explicit scalar
+    ϕ(μ)=κ((x2−x1)ν6(q(7))+v(γ5−α5)(q(7)))
+    ϕ(μ)=κ((x2​−x1​)ν6(q(7))​+v(γ5​−α5​)(q(7)))
+
+    have enough one-sidedness to stop ϕμϕμ​ from revisiting a slope?
+
+That is much sharper.
+
+What the draft already proves about this scalar is also useful:
+
+On the graded slice (K1,η2,q(7))(K1​,η2​,q(7)), the two channels do not cancel, and the coefficient of the target monomial is computed explicitly:
+(1a−1b)W12+U12V22=dua2b2(a+b)2≠0.
+(a1​−b1​)W12​+U12​V22​=a2b2(a+b)2du​=0.
+
+So ϕϕ is not just formally nonzero; its highest-new coefficient is a very specific nontrivial scalar combination. In other words, the highest-new geometry really is carried by this one explicit function.
+
+Now the honest limitation:
+
+I still do not see a sign theorem from this formula alone.
+
+Why not?
+
+Because the explicit formula for ϕϕ is a linear combination of
+ν6(q(7))and(γ5−α5)(q(7)),
+ν6(q(7))​and(γ5​−α5​)(q(7)),
+
+and the draft proves noncancellation and nonvanishing, but not a fixed sign or monotonicity for that combination.
+
+So this attack gives:
+What we gained
+
+The remaining highest-new problem is now completely explicit:
+ϕ(μ)=κ((x2−x1)ν6(q(7))+v(γ5−α5)(q(7))).
+ϕ(μ)=κ((x2​−x1​)ν6(q(7))​+v(γ5​−α5​)(q(7))).​
+What we still do not have
+
+A theorem that this scalar has:
+
+    one sign,
+
+    monotone slope,
+
+    or one-sided third derivative.
+
+So the right next move is no longer more abstract determinant algebra. It is one of these two very concrete tasks:
+
+    Extract explicit formulas for
+    ν6(q(7)),(γ5−α5)(q(7))
+    ν6(q(7))​,(γ5​−α5​)(q(7))
+
+    from the whitening / same-point expansion formulas, and then simplify ϕϕ as a concrete scalar function.
+
+    Or, if that is too long, prove a weaker structural theorem directly for the combination
+    (x2−x1)ν6(q(7))+v(γ5−α5)(q(7)),
+    (x2​−x1​)ν6(q(7))​+v(γ5​−α5​)(q(7)),
+
+    such as fixed sign, monotonicity, or non-recurrence of its μμ-slope.
+
+One more thing: your current draft still has a stale remark saying the lower/mixed septic sectors of the full total pair (u7,v7)(u7​,v7​) remain open. That is now outdated relative to the quotient-septic closure theorem. At this point, the real remaining issue is not missing lower/mixed sectors in Δ7Δ7​; it is the geometry of this explicit highest-new scalar ϕϕ.
+
+So yes — this attack succeeded in turning the remaining highest-new obstruction into a single explicit scalar function. That is probably the sharpest place left to push.
+
+ok let's attack
+
+I’m checking whether the current draft actually contains enough explicit algebra for ν6(q(7))ν6(q(7))​ and (γ5−α5)(q(7))(γ5​−α5​)(q(7)) to push beyond “nonzero” and into something like non-affinity or monotonicity of the highest-new scalar ϕϕ. If it does, that’s the most promising place left to get a genuinely RH-specific theorem.
+
+I pushed it as far as the currently surfaced material allows, and the honest result is:
+
+we now have a clean scalar reduction, but not yet the explicit scalar formula needed to force a sign or monotonicity theorem.
+
+What is solid is this. On the highest-new slice, if
+ϕ:=λ[1],λ=Δ7v5,
+ϕ:=λ[1],λ=v5​Δ7​​,
+
+then the direct q(7)q(7)-slice gives
+Δ7(q(7))=u7(q(7))v5,u7,K1(q(7))=κ((x2−x1)ν6(q(7))+v(γ5−α5)(q(7))),
+Δ7(q(7))​=u7(q(7))​v5​,u7,K1​(q(7))​=κ((x2​−x1​)ν6(q(7))​+v(γ5​−α5​)(q(7))),
+
+so the highest-new scalar is exactly the combination
+ϕ=κ((x2−x1)ν6(q(7))+v(γ5−α5)(q(7))).
+ϕ=κ((x2​−x1​)ν6(q(7))​+v(γ5​−α5​)(q(7))).
+
+That means the remaining highest-new geometry has really collapsed to one scalar function, not an abstract determinant package.
+
+We also know the two direct channels do not cancel: the bilinear coefficient computation gives
+(1a−1b)W12+U12V22=dua2b2(a+b)2≠0,
+(a1​−b1​)W12​+U12​V22​=a2b2(a+b)2du​=0,
+
+so the surviving highest-new scalar is genuinely nontrivial. That is enough to rule out “it vanishes for formal reasons,” but it is not enough to control its sign or its slope recurrence.
+
+So the attack lands in a very specific place:
+
+    good news: the remaining obstruction is now the affine geometry of a single scalar ϕ(μ)ϕ(μ);
+
+    bad news: from the material currently surfaced, we still do not have explicit formulas for
+    ν6(q(7)),(γ5−α5)(q(7))
+    ν6(q(7))​,(γ5​−α5​)(q(7))
+
+    themselves, only for their nonzero combined contribution. Without those formulas, I cannot honestly push to a theorem like fixed sign of ϕμμμϕμμμ​ or non-recurrence of ϕμϕμ​.
+
+So the next exact attack is now very concrete:
+
+derive explicit closed formulas for
+ν6(q(7))and(γ5−α5)(q(7)),
+ν6(q(7))​and(γ5​−α5​)(q(7)),
+
+then substitute them into
+ϕ=κ((x2−x1)ν6(q(7))+v(γ5−α5)(q(7)))
+ϕ=κ((x2​−x1​)ν6(q(7))​+v(γ5​−α5​)(q(7)))
+
+and study that scalar directly.
+
+At this point, anything stronger than that would be guesswork. The reduction is real; the explicit scalar function is not yet explicit enough in the currently surfaced text to prove the sign theorem we want.
+
+ok so what are our next options? go back to exploring algebraic relationships?
+
+I’m going to map the options against what the current draft now actually has in its status/bottleneck sections, so the recommendation matches the paper rather than our running brainstorm.
+
+actually you should match our running brainstorm
+
+I’m resetting to the live state we built together, not the older cleanup notes. I’m checking the current draft for the exact “bottleneck / state” language and the new turning-boundary / W=0W=0 theorem stack so I can answer against our running brainstorm, not stale remarks.
+
+Yes — matching our running brainstorm, I would not steer back toward the old “zero-capture” framing or stale status notes.
+
+The live frontier is now:
+β(h)=−L(h)M(h),T(h)=(−L(h)M(h),N(h)M(h)),ϕ(μ)=λ[1](μ),
+β(h)=−M(h)L(h)​,T(h)=(−M(h)L(h)​,M(h)N(h)​),ϕ(μ)=λ[1](μ),
+
+with ϕϕ coming from the direct q(7)q(7)-slice
+Δ7(q(7))=u7(q(7))v5,u7,K1(q(7))=κ((x2−x1)ν6(q(7))+v(γ5−α5)(q(7))).    
+Δ7(q(7))​=u7(q(7))​v5​,u7,K1​(q(7))​=κ((x2​−x1​)ν6(q(7))​+v(γ5​−α5​)(q(7))).
+
+So yes: going back to algebraic relationships is now one of the best options, but in a much narrower way than before.
+
+I would rank the next options like this.
+
+First, the best direct attack is to make the highest-new scalar ϕϕ genuinely explicit. Right now we know it is the canonical surviving scalar, but not yet enough about its actual shape. The concrete target is:
+derive explicit formulas for
+ν6(q(7)),(γ5−α5)(q(7)),
+ν6(q(7))​,(γ5​−α5​)(q(7)),
+
+substitute them into
+ϕ=κ((x2−x1)ν6(q(7))+v(γ5−α5)(q(7))),
+ϕ=κ((x2​−x1​)ν6(q(7))​+v(γ5​−α5​)(q(7))),
+
+and then study ϕϕ as a scalar function of μμ. This is the cleanest remaining RH-specific place where a non-generic sign or monotonicity theorem could still appear.
+
+Second, keep the scalar theorem target in view:
+prove non-recurrence of the slope function
+β=dλdμ.
+β=dμdλ​.
+
+But I would now treat that as the theorem target, not the proof engine. The proof engine should be the explicit algebra of ϕϕ. If we can show something like one-sidedness of ϕμμμϕμμμ​, or even a strong shape theorem for ϕϕ, then ββ-nonrecurrence may fall out.
+
+Third, use the dual tangent-line curve
+T(h)=(−LM,NM)
+T(h)=(−ML​,MN​)
+
+as the geometric language, not as the main proof engine. It is still the cleanest way to visualize what the algebra would have to force: no same-parity re-entry of vertical lines. But after our recent attacks, pure geometry there seems too weak by itself.
+
+So the practical plan is:
+
+    Algebra engine: explicitly compute the highest-new scalar ϕϕ.
+
+    Scalar target: try to prove a one-sidedness theorem for ϕϕ, ϕμϕμ​, or ϕμμμϕμμμ​.
+
+    Geometric interpretation: translate any such theorem back into non-recurrence of ββ or one-sidedness of the dual curve TT.
+
+If I had to choose one next move, it would be this:
+
+    derive the explicit formulas for ν6(q(7))ν6(q(7))​ and (γ5−α5)(q(7))(γ5​−α5​)(q(7)), then simplify the resulting scalar ϕϕ as much as possible.
+
+That is the best current attack angle.
+
+ok do that
+
+I’m going into the current file for the exact definitions of ν6(q(7))ν6(q(7))​ and (γ5−α5)(q(7))(γ5​−α5​)(q(7)). The goal is to see whether the draft already contains enough to write ϕϕ explicitly, or whether it still only contains the noncancellation coefficient and not the underlying scalar formulas.
+
+
