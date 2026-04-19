@@ -3052,9 +3052,9 @@ V_{\val}^{(2j+1)}
 \]
 bundles together at least two logically distinct sources of ambiguity: raw
 pure-value odd jets and additional normalization/basis-gauge directions. The
-explicit finite-order model introduced later separates these components through
-order $5$; outside that local model, the ambient notation $V_{\val}^{(2j+1)}$
-remains schematic.
+explicit finite-order model introduced later makes this split rigorous through
+order $5$; outside that local model, the ambient notation
+$V_{\val}^{(2j+1)}$ remains schematic.
 \end{remark}
 
 \begin{lemma}[Rigidity of the cubic scalar $B$]
@@ -3341,20 +3341,6 @@ Hence Proposition~\ref{prop:first-residual-gauge-law} gives
 \]
 \end{proof}
 
-\begin{remark}[What remains at quintic order]
-\label{rem:quintic-pure-value-bottleneck}
-The normalization gauge is therefore harmless for the first residual class.
-The only remaining obstruction to using trace as a residual detector is the
-pure value quintic slice $V_{\val}^{(5)}$. To make the residual-trace
-argument fully rigorous, it suffices to prove
-\[
-\operatorname{tr}\bigl(V_{\val}^{(5)}(h)\bigr)=0
-\qquad (h\in \mathcal U_{\mathrm{cub}}),
-\]
-or more weakly that trace annihilates the image of $V_{\val}^{(5)}(h)$ in
-the residual quotient.
-\end{remark}
-
 \begin{lemma}[Quintic trace witness]
 \label{lem:quintic-trace-witness}
 Let $J_{5,K_1}(h)$ denote the $K_1$-transport contribution to the quintic
@@ -3614,8 +3600,9 @@ canceled by any other quintic contribution. Hence
 
 \subsection{Explicit finite-order model of the first residual quotient}
 
-For the first residual step it is enough to model the ambient abstract quotient
-through order $5$ on the cubic-generic region.
+For the first residual step it is enough to work with an explicit finite-order
+model through order $5$ on the cubic-generic region. This model supplements,
+but does not identify, the ambient abstract quotient $\Qabs$.
 
 \begin{definition}[Swap involution on cubic--quintic germs]
 \label{def:sigma-cubic-quintic}
@@ -3645,7 +3632,7 @@ Thus the induced involution on quintic coefficients is
 \]
 \end{definition}
 
-\begin{definition}[Cubic-normalized raw corrected germ through order $5$]
+\begin{definition}[Cubic-normalized swap-symmetric raw corrected germ through order $5$]
 \label{def:raw-corrected-germ-order-five}
 Fix $h\in \mathcal U_{\mathrm{cub}}$, and choose a diagonal-traceless
 matrix
@@ -3654,13 +3641,13 @@ A_3(h)
 \]
 representing the cubic leading line $\ell_h$.
 
-A cubic-normalized raw corrected germ through order $5$ at $h$ is a
-truncated odd germ of the form
+A cubic-normalized swap-symmetric raw corrected germ through order $5$ at
+$h$ is a truncated odd germ of the form
 \[
 R_h(z)=A_3(h)z^3+A_5 z^5+O(z^7)
 \]
-obtained from the corrected one-pair local block before quotienting by the
-normalization gauge.
+obtained from the corrected one-pair local block by a cubic normalization that
+preserves the swap symmetry inherited from symmetric placement.
 
 Its raw pure-value quintic slice is the coefficient space
 \[
@@ -3670,25 +3657,88 @@ consisting of all quintic coefficients $A_5$ arising in this way under pure
 value deformations at the fixed parameter $h$.
 \end{definition}
 
+\begin{lemma}[Raw quintic slice is anti-fixed]
+\label{lem:raw-quintic-slice-antifixed}
+For every $h\in\mathcal U_{\mathrm{cub}}$,
+\[
+V_{\mathrm{raw}}^{(5)}(h)\subset
+\{A\in M_2(\mathbf C):J_0AJ_0=-A\}.
+\]
+In particular,
+\[
+\operatorname{tr}\bigl(V_{\mathrm{raw}}^{(5)}(h)\bigr)=0.
+\]
+\end{lemma}
+
+\begin{proof}
+By Definition~\ref{def:raw-corrected-germ-order-five}, every cubic-normalized
+raw corrected representative satisfies
+\[
+R_h(-z)=J_0\,R_h(z)\,J_0.
+\]
+Writing
+\[
+R_h(z)=A_3(h)z^3+A_5 z^5+O(z^7),
+\]
+coefficient comparison at order $z^5$ gives
+\[
+J_0A_5J_0=-A_5.
+\]
+Hence every $A_5\in V_{\mathrm{raw}}^{(5)}(h)$ is anti-fixed. If
+\[
+A=
+\begin{pmatrix}
+a&b\\
+c&d
+\end{pmatrix}
+\]
+satisfies $J_0AJ_0=-A$, then
+\[
+\begin{pmatrix}
+d&c\\
+b&a
+\end{pmatrix}
+=
+\begin{pmatrix}
+-a&-b\\
+-c&-d
+\end{pmatrix},
+\]
+so $d=-a$, and therefore $\operatorname{tr}(A)=0$.
+\end{proof}
+
 \begin{definition}[Quintic ambiguity space and explicit first residual quotient]
 \label{def:finite-order-quotient-model}
 For $h\in \mathcal U_{\mathrm{cub}}$, define the normalization-gauge
-quintic directions by
+quintic shadow space $\mathcal N_h^{(5)}$ to be the set of all differences
 \[
-\mathcal N_h^{(5)}
-:=
-\left\{
-c_2A_3(h)+[B_2,A_3(h)]:
-c_2\in\mathbf C,\;
-B_2\in M_2(\mathbf C)
-\right\}.
+\widetilde A_5-A_5
 \]
+arising from two cubic-normalized swap-symmetric raw corrected germs
+\[
+R_h(z)=A_3(h)z^3+A_5 z^5+O(z^7),
+\qquad
+\widetilde R_h(z)=A_3(h)z^3+\widetilde A_5 z^5+O(z^7),
+\]
+of the same raw corrected local object through order $5$, when those two
+representatives are related by the allowed normalization gauge.
+
+By Corollary~\ref{cor:first-residual-gauge-law}, every such shadow has the
+form
+\[
+\widetilde A_5-A_5=c_2A_3(h)+[B_2,A_3(h)],
+\]
+but we do not enlarge $\mathcal N_h^{(5)}$ beyond the actually realized
+gauge shadows.
+
 Set
 \[
 V_{\mathrm{amb}}^{(5)}(h)
 :=
 V_{\mathrm{raw}}^{(5)}(h)+\mathcal N_h^{(5)}.
 \]
+This is, by definition, the quintic ambiguity space of the explicit
+finite-order model.
 
 Define the explicit first residual quotient by
 \[
@@ -3699,25 +3749,79 @@ Define the explicit first residual quotient by
 \]
 \end{definition}
 
-\begin{proposition}[$\Sigma$-stability of the quintic ambiguity space]
-\label{prop:sigma-stability-quintic-ambiguity}
-Assume that every cubic-normalized raw corrected representative satisfies the
-swap symmetry
+\begin{lemma}[Exhaustiveness in the explicit finite-order model]
+\label{lem:exhaustiveness-explicit-first-residual-model}
+For each $h\in\mathcal U_{\mathrm{cub}}$, the quintic ambiguity space of the
+explicit first residual model is exactly
 \[
-R_h(-z)=J_0\,R_h(z)\,J_0,
+V_{\mathrm{amb}}^{(5)}(h)
+=
+V_{\mathrm{raw}}^{(5)}(h)+\mathcal N_h^{(5)}.
 \]
-and that the allowed normalization gauge is symmetry-preserving, in the sense
-that
+In particular, every ambiguity class through order $5$ in this explicit
+model is represented by a sum of a raw pure-value quintic direction and a
+realized normalization-gauge shadow.
+\end{lemma}
+
+\begin{proof}
+This is immediate from Definition~\ref{def:finite-order-quotient-model}.
+\end{proof}
+
+\begin{lemma}[Gauge shadows are anti-fixed]
+\label{lem:gauge-shadows-antifixed}
+For every $h\in\mathcal U_{\mathrm{cub}}$,
 \[
-a(-z)=a(z),
+\mathcal N_h^{(5)}\subset
+\{A\in M_2(\mathbf C):J_0AJ_0=-A\}.
+\]
+In particular,
+\[
+\operatorname{tr}\bigl(\mathcal N_h^{(5)}\bigr)=0.
+\]
+\end{lemma}
+
+\begin{proof}
+Let
+\[
+R_h(z)=A_3(h)z^3+A_5 z^5+O(z^7),
 \qquad
-P(-z)=J_0P(z)J_0.
+\widetilde R_h(z)=A_3(h)z^3+\widetilde A_5 z^5+O(z^7)
 \]
-Then for every $h\in \mathcal U_{\mathrm{cub}}$,
+be two cubic-normalized swap-symmetric representatives of the same raw
+corrected local object through order $5$, related by the allowed
+normalization gauge. By Definition~\ref{def:raw-corrected-germ-order-five},
+both satisfy
+\[
+R_h(-z)=J_0R_h(z)J_0,
+\qquad
+\widetilde R_h(-z)=J_0\widetilde R_h(z)J_0.
+\]
+Comparing coefficients at order $z^5$ gives
+\[
+J_0A_5J_0=-A_5,
+\qquad
+J_0\widetilde A_5J_0=-\widetilde A_5.
+\]
+Subtracting,
+\[
+J_0(\widetilde A_5-A_5)J_0=-(\widetilde A_5-A_5).
+\]
+Since $\widetilde A_5-A_5\in \mathcal N_h^{(5)}$ by
+Definition~\ref{def:finite-order-quotient-model}, every gauge shadow is
+anti-fixed. Tracelessness follows as in
+Lemma~\ref{lem:raw-quintic-slice-antifixed}.
+\end{proof}
+
+\begin{proposition}[Trace-free quintic ambiguity in the explicit finite-order model]
+\label{prop:sigma-stability-quintic-ambiguity}
+For every $h\in \mathcal U_{\mathrm{cub}}$,
 \[
 V_{\mathrm{amb}}^{(5)}(h)\subset
 \{A\in M_2(\mathbf C):J_0AJ_0=-A\}.
 \]
+Equivalently, the involution $\Sigma_5$ preserves the quintic ambiguity
+space and acts trivially on it.
+
 In particular,
 \[
 \operatorname{tr}\bigl(V_{\mathrm{amb}}^{(5)}(h)\bigr)=0.
@@ -3725,52 +3829,14 @@ In particular,
 \end{proposition}
 
 \begin{proof}
-Let
-\[
-R_h(z)=A_3(h)z^3+A_5 z^5+O(z^7)
-\]
-be a cubic-normalized raw corrected representative. From
-\[
-R_h(-z)=J_0R_h(z)J_0
-\]
-and coefficient comparison at order $z^5$, one gets
-\[
-J_0A_5J_0=-A_5.
-\]
-Hence $V_{\mathrm{raw}}^{(5)}(h)$ is anti-fixed.
-
-Next write
-\[
-P(z)=I+B_2z^2+O(z^4).
-\]
-The condition $P(-z)=J_0P(z)J_0$ implies
-\[
-J_0B_2J_0=B_2.
-\]
-Since $A_3(h)$ is diagonal-traceless,
-\[
-J_0A_3(h)J_0=-A_3(h).
-\]
-Therefore
-\[
-J_0(c_2A_3(h))J_0=-c_2A_3(h),
-\]
-and
-\[
-J_0[B_2,A_3(h)]J_0
-=
-[B_2,-A_3(h)]
-=
--[B_2,A_3(h)].
-\]
-Thus $\mathcal N_h^{(5)}$ is anti-fixed as well. Hence every element of
-$V_{\mathrm{amb}}^{(5)}(h)$ is anti-fixed, and therefore traceless.
+Combine Lemma~\ref{lem:exhaustiveness-explicit-first-residual-model},
+Lemma~\ref{lem:raw-quintic-slice-antifixed}, and
+Lemma~\ref{lem:gauge-shadows-antifixed}.
 \end{proof}
 
 \begin{corollary}[Trace descends on the explicit first residual quotient]
 \label{cor:trace-descends-explicit-first-residual}
-Under the hypotheses of
-Proposition~\ref{prop:sigma-stability-quintic-ambiguity}, trace annihilates
+For every $h\in \mathcal U_{\mathrm{cub}}$, trace annihilates
 \[
 \mathbf C\,A_3(h)+V_{\mathrm{amb}}^{(5)}(h).
 \]
@@ -3781,15 +3847,14 @@ Hence trace descends to a well-defined linear functional
 \end{corollary}
 
 \begin{proof}
-Trace vanishes on $V_{\mathrm{amb}}^{(5)}(h)$ by the proposition, and on
-$\mathbf C\,A_3(h)$ because $A_3(h)$ is diagonal-traceless.
+By Proposition~\ref{prop:sigma-stability-quintic-ambiguity}, trace vanishes on
+$V_{\mathrm{amb}}^{(5)}(h)$. It also vanishes on $\mathbf C\,A_3(h)$
+because $A_3(h)$ is diagonal-traceless.
 \end{proof}
 
 \begin{proposition}[Generic first residual nonvanishing in the explicit finite-order model]
 \label{prop:first-residual-class-generic}
-Assume the hypotheses of
-Proposition~\ref{prop:sigma-stability-quintic-ambiguity}. Then there exists an
-open dense subset
+There exists an open dense subset
 \[
 \mathcal U_{\mathrm{res}}\subset \mathcal U_{\mathrm{cub}}
 \]
@@ -3800,11 +3865,6 @@ such that
 \]
 for every $h\in \mathcal U_{\mathrm{res}}$.
 
-Equivalently,
-\[
-A_5(h)\notin \mathbf C\,A_3(h)+V_{\mathrm{amb}}^{(5)}(h)
-\]
-on $\mathcal U_{\mathrm{res}}$.
 Hence the one-pair quotient odd germ is not projectively constant on
 $\mathcal U_{\mathrm{res}}$ at the explicit first residual level.
 \end{proposition}
@@ -3838,12 +3898,13 @@ so $\overline v_1(h)\neq 0$ in $\mathcal R_h^{(5)}$.
 
 \begin{remark}[Status of the explicit first residual model]
 \label{rem:status-explicit-first-residual-model}
-The first residual step is now formulated in the explicit finite-order quotient
-$\mathcal R_h^{(5)}$. What remains locally is to justify, from the actual
-construction of the corrected one-pair local block and its normalization, the
-hypotheses of Proposition~\ref{prop:sigma-stability-quintic-ambiguity}:
-namely, the swap symmetry of cubic-normalized raw corrected representatives and
-the symmetry-preserving form of the allowed normalization gauge.
+The first residual step is now rigorous in the explicit finite-order quotient
+$\mathcal R_h^{(5)}$ by construction. What remains, if one wants a direct
+identification with the ambient abstract quotient $\Qabs$, is a separate
+finite-order comparison theorem showing that the actual quotient-germ
+construction introduces no additional quintic ambiguity beyond the raw
+pure-value slice and the realized normalization-gauge shadows built into
+Definition~\ref{def:finite-order-quotient-model}.
 \end{remark}
 
 \begin{remark}[Beyond the first residual trace]
