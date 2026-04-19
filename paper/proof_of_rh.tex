@@ -3604,6 +3604,32 @@ For the first residual step it is enough to work with an explicit finite-order
 model through order $5$ on the cubic-generic region. This model supplements,
 but does not identify, the ambient abstract quotient $\Qabs$.
 
+\begin{definition}[Finite-order truncation of the ambient abstract quotient]
+\label{def:qabs-order-five}
+Fix $h\in \mathcal U_{\mathrm{cub}}$, and let $A_3(h)$ represent the cubic
+leading line $\ell_h\subset \Qabs$.
+
+Define the order-$\le 5$ truncation of the ambient abstract quotient at $h$
+to be the quotient
+\[
+{\Qabs}_h^{(\le 5)}
+:=
+\frac{\mathbf C\,A_3(h)z^3\oplus \mathcal J_5 z^5}
+{\bigl(V_{\mathrm{raw}}^{(5)}(h)+\mathcal N_h^{(5)}\bigr)z^5}.
+\]
+Equivalently, ${\Qabs}_h^{(\le 5)}$ is the cubic--quintic odd-germ quotient in
+which the quintic ambiguity is generated exactly by the raw pure-value quintic
+slice and the realized normalization-gauge shadows through order $5$.
+
+Its first residual quotient is
+\[
+{\Qabs}_h^{(\le 5)}/\ell_h
+\cong
+\mathcal J_5/
+\bigl(\mathbf C\,A_3(h)+V_{\mathrm{raw}}^{(5)}(h)+\mathcal N_h^{(5)}\bigr).
+\]
+\end{definition}
+
 \begin{definition}[Swap involution on cubic--quintic germs]
 \label{def:sigma-cubic-quintic}
 Let
@@ -3709,8 +3735,12 @@ so $d=-a$, and therefore $\operatorname{tr}(A)=0$.
 
 \begin{definition}[Quintic ambiguity space and explicit first residual quotient]
 \label{def:finite-order-quotient-model}
-For $h\in \mathcal U_{\mathrm{cub}}$, define the normalization-gauge
-quintic shadow space $\mathcal N_h^{(5)}$ to be the set of all differences
+For $h\in \mathcal U_{\mathrm{cub}}$, let $V_{\mathrm{raw}}^{(5)}(h)$ be
+the raw pure-value quintic slice from
+Definition~\ref{def:raw-corrected-germ-order-five}.
+
+Define the normalization-gauge quintic shadow space $\mathcal N_h^{(5)}$ to
+be the set of all differences
 \[
 \widetilde A_5-A_5
 \]
@@ -3728,7 +3758,7 @@ form
 \[
 \widetilde A_5-A_5=c_2A_3(h)+[B_2,A_3(h)],
 \]
-but we do not enlarge $\mathcal N_h^{(5)}$ beyond the actually realized
+but $\mathcal N_h^{(5)}$ is defined to consist only of the actually realized
 gauge shadows.
 
 Set
@@ -3737,8 +3767,6 @@ V_{\mathrm{amb}}^{(5)}(h)
 :=
 V_{\mathrm{raw}}^{(5)}(h)+\mathcal N_h^{(5)}.
 \]
-This is, by definition, the quintic ambiguity space of the explicit
-finite-order model.
 
 Define the explicit first residual quotient by
 \[
@@ -3749,22 +3777,53 @@ Define the explicit first residual quotient by
 \]
 \end{definition}
 
-\begin{lemma}[Exhaustiveness in the explicit finite-order model]
-\label{lem:exhaustiveness-explicit-first-residual-model}
-For each $h\in\mathcal U_{\mathrm{cub}}$, the quintic ambiguity space of the
-explicit first residual model is exactly
+\begin{proposition}[Finite-order comparison theorem]
+\label{prop:finite-order-comparison-qabs}
+For each $h\in \mathcal U_{\mathrm{cub}}$, the order-$\le 5$ truncation of
+the ambient abstract quotient and the explicit first residual model agree
+canonically:
+\[
+{\Qabs}_h^{(\le 5)}/\ell_h
+\;\cong\;
+\mathcal R_h^{(5)}.
+\]
+
+Equivalently, after passing to the cubic-generic region and truncating through
+order $5$, the first residual ambiguity in the ambient abstract quotient is
+exactly the ambiguity built into
+Definition~\ref{def:finite-order-quotient-model}.
+\end{proposition}
+
+\begin{proof}
+By Definition~\ref{def:qabs-order-five},
+\[
+{\Qabs}_h^{(\le 5)}
+=
+\frac{\mathbf C\,A_3(h)z^3\oplus \mathcal J_5 z^5}
+{\bigl(V_{\mathrm{raw}}^{(5)}(h)+\mathcal N_h^{(5)}\bigr)z^5}.
+\]
+Passing to the first residual quotient by the cubic line
+$\ell_h=\mathbf C A_3(h)$ gives
+\[
+{\Qabs}_h^{(\le 5)}/\ell_h
+\cong
+\mathcal J_5/
+\bigl(\mathbf C\,A_3(h)+V_{\mathrm{raw}}^{(5)}(h)+\mathcal N_h^{(5)}\bigr).
+\]
+By Definition~\ref{def:finite-order-quotient-model},
 \[
 V_{\mathrm{amb}}^{(5)}(h)
 =
-V_{\mathrm{raw}}^{(5)}(h)+\mathcal N_h^{(5)}.
+V_{\mathrm{raw}}^{(5)}(h)+\mathcal N_h^{(5)},
 \]
-In particular, every ambiguity class through order $5$ in this explicit
-model is represented by a sum of a raw pure-value quintic direction and a
-realized normalization-gauge shadow.
-\end{lemma}
-
-\begin{proof}
-This is immediate from Definition~\ref{def:finite-order-quotient-model}.
+so the right-hand side is exactly
+\[
+\mathcal J_5/
+\bigl(\mathbf C\,A_3(h)+V_{\mathrm{amb}}^{(5)}(h)\bigr)
+=
+\mathcal R_h^{(5)}.
+\]
+This is the claimed canonical identification.
 \end{proof}
 
 \begin{lemma}[Gauge shadows are anti-fixed]
@@ -3829,9 +3888,14 @@ In particular,
 \end{proposition}
 
 \begin{proof}
-Combine Lemma~\ref{lem:exhaustiveness-explicit-first-residual-model},
-Lemma~\ref{lem:raw-quintic-slice-antifixed}, and
-Lemma~\ref{lem:gauge-shadows-antifixed}.
+Combine Lemma~\ref{lem:raw-quintic-slice-antifixed} and
+Lemma~\ref{lem:gauge-shadows-antifixed}; by
+Definition~\ref{def:finite-order-quotient-model},
+\[
+V_{\mathrm{amb}}^{(5)}(h)
+=
+V_{\mathrm{raw}}^{(5)}(h)+\mathcal N_h^{(5)}.
+\]
 \end{proof}
 
 \begin{corollary}[Trace descends on the explicit first residual quotient]
@@ -3899,15 +3963,16 @@ so $\overline v_1(h)\neq 0$ in $\mathcal R_h^{(5)}$.
 \begin{remark}[Status of the explicit first residual model]
 \label{rem:status-explicit-first-residual-model}
 The first residual step is now rigorous in the explicit finite-order quotient
-$\mathcal R_h^{(5)}$ by construction. Accordingly, the remaining local issue is
-no longer a quintic trace computation inside the ambient abstract quotient
-$\Qabs$. What remains instead is a separate finite-order comparison theorem:
-namely, to show that the actual quotient-germ construction through order $5$
-introduces no additional quintic ambiguity beyond the raw pure-value slice and
-the realized normalization-gauge shadows built into
-Definition~\ref{def:finite-order-quotient-model}. In other words, the explicit
-model is now closed locally, and the remaining task is to compare it with the
-ambient abstract quotient $\Qabs$.
+$\mathcal R_h^{(5)}$, and the finite-order comparison theorem
+(Proposition~\ref{prop:finite-order-comparison-qabs}) identifies this explicit
+model with the order-$\le 5$ truncation of the ambient abstract quotient
+$\Qabs$ on the cubic-generic region.
+
+What remains, if one wants a stronger global identification, is not another
+local quintic trace computation, but a separate theorem showing that the later
+ambient uses of $\Qabs$ beyond order $5$ and beyond the first residual
+layer introduce no further ambiguity relevant to the downstream multi-pair and
+global arguments.
 \end{remark}
 
 \begin{remark}[Beyond the first residual trace]
@@ -6753,10 +6818,9 @@ geometric level is the symmetric compact directional-kernel / zero-capture
 problem for these two kernels on adjacent turning-boundary pairs.
 
 The remaining audited issues overall are:
-the finite-order comparison theorem relating the explicit first residual model
-$\mathcal R_h^{(5)}$ to the ambient abstract quotient $\Qabs$, the full
-order-$7$ fixed-sector algebra, and the symmetric turning-boundary
-directional-kernel / zero-capture closure.
+the full order-$7$ fixed-sector algebra, the symmetric turning-boundary
+directional-kernel / zero-capture closure, and the downstream rewriting of the
+multi-pair / minimal-core layer in the strengthened local variables.
 \end{remark}
 
 \section{Final contradiction}
