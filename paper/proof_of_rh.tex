@@ -4278,21 +4278,119 @@ u_7v_5-u_5v_7
 \]
 \end{proof}
 
-\begin{remark}[Order-$2$ gauge shadow and the septic $K_5$-sector]
-\label{rem:k5-gauge-shadow}
-Proposition~\ref{prop:projected-septic-gauge-law} shows that the only
-symmetry-preserving order-$2$ normalization shadow surviving in the fixed
-sector at septic order is the line
+\begin{definition}[Septic normalization-shadow sectors]
+\label{def:septic-shadow-sectors}
+In the notation of Proposition~\ref{prop:second-residual-gauge-law}, define
+the order-$2$ and order-$4$ septic normalization-shadow sectors by
 \[
-\mathbf C\,A_5^{\mathfrak f}.
+A_{7,K_5}:=c_2A_5+[B_2,A_5],
 \]
-Consequently, once the septic $K_5$-transport sector is identified with the
-realized order-$2$ symmetry-preserving normalization shadow, one obtains
+and
+\[
+A_{7,K_3}:=
+c_4A_3+[B_4,A_3]+c_2[B_2,A_3]+A_3B_2^2-B_2A_3B_2.
+\]
+Then the exact septic transformation law may be written
+\[
+A_7^{\new}=A_7+A_{7,K_5}+A_{7,K_3}.
+\]
+When the normalization gauge is symmetry-preserving, these are the septic
+$K_5$- and $K_3$-transport shadow sectors.
+\end{definition}
+
+\begin{proposition}[Projected septic $K_5$-shadow law]
+\label{prop:projected-k5-shadow-law}
+Assume the normalization gauge is symmetry-preserving in the sense of
+Proposition~\ref{prop:projected-septic-gauge-law}. Then
+\[
+A_{7,K_5}^{\mathfrak f}=c_2A_5^{\mathfrak f}.
+\]
+In particular,
 \[
 A_{7,K_5}^{\mathfrak f}\in \mathbf C\,A_5^{\mathfrak f}.
 \]
-Thus the remaining unresolved order-$7$ contribution is reduced to the
-lower/mixed remainder modulo the quintic fixed-sector line.
+\end{proposition}
+
+\begin{proof}
+By Definition~\ref{def:septic-shadow-sectors},
+\[
+A_{7,K_5}=c_2A_5+[B_2,A_5].
+\]
+Apply the fixed-sector projection $\pi_{\mathfrak f}$. Decompose
+\[
+A_5=A_5^{\mathfrak f}+A_5^{\mathfrak a}.
+\]
+Since $\mathfrak f=\operatorname{span}\{I,S\}$ is abelian,
+\[
+[B_2,A_5^{\mathfrak f}]=0.
+\]
+And since $B_2\in\mathfrak f$ and $A_5^{\mathfrak a}\in\mathfrak a$,
+\[
+[B_2,A_5^{\mathfrak a}]\in[\mathfrak f,\mathfrak a]\subset\mathfrak a,
+\]
+so its fixed-sector projection vanishes. Therefore
+\[
+A_{7,K_5}^{\mathfrak f}
+=
+\pi_{\mathfrak f}(c_2A_5+[B_2,A_5])
+=
+c_2A_5^{\mathfrak f}.
+\qedhere
+\]
+\end{proof}
+
+\begin{proposition}[Projected septic $K_3$-shadow vanishing]
+\label{prop:projected-k3-shadow-vanishing}
+Assume the normalization gauge is symmetry-preserving in the sense of
+Proposition~\ref{prop:projected-septic-gauge-law}. Then
+\[
+A_{7,K_3}^{\mathfrak f}=0.
+\]
+\end{proposition}
+
+\begin{proof}
+By Definition~\ref{def:septic-shadow-sectors},
+\[
+A_{7,K_3}
+=
+c_4A_3+[B_4,A_3]+c_2[B_2,A_3]+A_3B_2^2-B_2A_3B_2.
+\]
+Since $A_3\in\mathfrak a$, one has
+\[
+c_4A_3\in\mathfrak a.
+\]
+Because $B_4\in\mathfrak f$ and $A_3\in\mathfrak a$,
+\[
+[B_4,A_3]\in[\mathfrak f,\mathfrak a]\subset\mathfrak a.
+\]
+Likewise,
+\[
+[B_2,A_3]\in[\mathfrak f,\mathfrak a]\subset\mathfrak a,
+\]
+hence
+\[
+c_2[B_2,A_3]\in\mathfrak a.
+\]
+Finally, $B_2\in\mathfrak f$ implies $B_2^2\in\mathfrak f$, so
+\[
+A_3B_2^2\in\mathfrak a\mathfrak f\subset\mathfrak a,
+\qquad
+B_2A_3B_2\in\mathfrak f\mathfrak a\mathfrak f\subset\mathfrak a.
+\]
+Thus every term of $A_{7,K_3}$ is anti-fixed, and therefore
+\[
+A_{7,K_3}^{\mathfrak f}=\pi_{\mathfrak f}(A_{7,K_3})=0.
+\qedhere
+\]
+\end{proof}
+
+\begin{remark}[Interpretation of the septic shadow sectors]
+\label{rem:septic-shadow-interpretation}
+Propositions~\ref{prop:projected-k5-shadow-law} and
+\ref{prop:projected-k3-shadow-vanishing} show that the lower-order
+normalization shadows at septic order contribute no new canonical fixed-sector
+information beyond the already-known quintic line
+$\mathbf C A_5^{\mathfrak f}$.
 \end{remark}
 
 \begin{proposition}[Explicit fixed-sector formulas at quintic order]
@@ -4527,6 +4625,18 @@ Summing the three channels gives the stated formulas for
 $u_{7,K_1}$ and $v_{7,K_1}$.
 \end{proof}
 
+\begin{definition}[Septic $K_1$-residual determinant]
+\label{def:delta7-k1}
+If
+\[
+A_{7,K_1}^{\mathfrak f}(h)=u_{7,K_1}(h)\,I+v_{7,K_1}(h)\,S,
+\]
+define the corresponding septic $K_1$-residual determinant by
+\[
+\Delta_{7,K_1}(h):=u_{7,K_1}(h)v_5(h)-u_5(h)v_{7,K_1}(h).
+\]
+\end{definition}
+
 \begin{corollary}[Direct $q^{(7)}$-driven septic slice]
 \label{cor:direct-q7-septic-slice}
 On the direct linear $q^{(7)}$-driven slice, the septic $K_1$-transport
@@ -4726,7 +4836,7 @@ contribution to the septic determinant is carried by the $K_1$-channel, in
 parallel with the earlier quintic trace witness at order $5$.
 \end{remark}
 
-\begin{lemma}[Parity elimination of pure same-point septic terms]
+\begin{lemma}[Parity elimination of the pure same-point septic sector]
 \label{lem:parity-elimination-pure-septic}
 Let $t_\pm=h\pm s/2$, and let the odd two-point germ be defined as the odd
 part under the involution
@@ -4735,18 +4845,28 @@ s\longmapsto -s
 \qquad
 (\text{equivalently }t_+\leftrightarrow t_-).
 \]
-Then any pure same-point septic contribution is even in $s$, hence vanishes in
-the odd two-point germ.
+Let $A_{7,\mathrm{pure}}$ denote the pure same-point septic sector, i.e. the
+septic contribution built only from the same-point blocks and their whitening,
+with no transport factor coming from the ordered pair $(t_+,t_-)$.
 
-In particular, pure same-point septic terms do not contribute to the weight-one
-part $[\Delta_7]^{[1]}$ of the septic residual determinant.
+Then $A_{7,\mathrm{pure}}$ is even in $s$, hence vanishes in the odd
+two-point germ. In particular,
+\[
+A_{7,\mathrm{pure}}=0
+\quad\text{in the odd germ,}
+\qquad
+A_{7,\mathrm{pure}}^{\mathfrak f}=0.
+\]
+Consequently, pure same-point septic terms do not contribute to
+$\Delta_7$, and in particular do not contribute to the weight-one part
+$[\,\Delta_7\,]^{[1]}$.
 \end{lemma}
 
 \begin{proof}
-A pure same-point term depends only on midpoint jet data at $h$, i.e. on the
-local one-point expansion evaluated at the midpoint, and carries no transport
-factor coming from the ordered pair $(t_+,t_-)$. Therefore it is invariant
-under exchanging the two points:
+A pure same-point septic term depends only on midpoint jet data at $h$, i.e.
+on the same-point expansion at the midpoint, and carries no transport factor
+coming from the ordered pair $(t_+,t_-)$. Therefore it is invariant under
+exchanging the two points:
 \[
 t_+\leftrightarrow t_-.
 \]
@@ -4755,12 +4875,18 @@ same-point septic term is an even function of $s$.
 
 By definition, the odd two-point germ is obtained by projecting to the odd part
 under $s\mapsto -s$. Hence every even contribution vanishes in that
-projection. Therefore pure same-point septic terms do not survive into the odd
-pair germ.
-
-Finally, $\Delta_7$ is extracted from the odd pair germ after fixed-sector
-projection and quotient normalization. Since pure same-point septic terms are
-already zero in the odd germ, they cannot contribute to $[\Delta_7]^{[1]}$.
+projection. Therefore
+\[
+A_{7,\mathrm{pure}}=0
+\quad\text{in the odd germ.}
+\]
+Applying fixed-sector projection gives
+\[
+A_{7,\mathrm{pure}}^{\mathfrak f}=0.
+\]
+Since $\Delta_7$ is extracted from the odd pair germ after fixed-sector
+projection and quotient normalization, pure same-point septic terms contribute
+nothing to $\Delta_7$, and therefore nothing to $[\,\Delta_7\,]^{[1]}$.
 \end{proof}
 
 \begin{corollary}[Weight-one septic reduction to the direct $K_1$ slice]
@@ -4851,22 +4977,114 @@ Therefore
 as claimed.
 \end{proof}
 
-\begin{remark}[Audit: full septic fixed-sector coefficient]
-\label{rem:audit-full-septic-fixed-sector}
-The draft now contains explicit coefficient formulas for the quintic
-commutator contribution to $A_5^{\mathfrak f}$ and for the septic
-$K_1$-transport contribution to $A_7^{\mathfrak f}$. What still needs to be
-audited is the contribution of the remaining order-$7$ sectors to the full
-total septic fixed-sector pair $(u_7,v_7)$, and hence to the full total
-second residual determinant $\Delta_7$.
+\begin{theorem}[Quotient-septic closure]
+\label{thm:quotient-septic-closure}
+Let the septic odd-germ coefficient be decomposed as
+\[
+A_7=A_{7,K_1}+A_{7,K_5}+A_{7,K_3}+A_{7,\mathrm{pure}},
+\]
+where $A_{7,K_1}$ is the direct $K_1$-transport sector,
+$A_{7,K_5}$ and $A_{7,K_3}$ are the septic normalization-shadow sectors
+from Definition~\ref{def:septic-shadow-sectors}, and
+$A_{7,\mathrm{pure}}$ is the pure same-point septic sector from
+Lemma~\ref{lem:parity-elimination-pure-septic}.
 
-What remains open is therefore not the gauge ambiguity of the septic
-fixed-sector coefficient, which is controlled by
-Proposition~\ref{prop:projected-septic-gauge-law}, nor the weight-one
-$q^{(7)}$-coefficient of $\Delta_7$, which is reduced to the direct $K_1$
-slice by Corollary~\ref{cor:weight-one-septic-reduction}. The remaining issue
-is the explicit lower/mixed septic completion of the total pair $(u_7,v_7)$
-modulo the quintic fixed-sector line $\mathbf C A_5^{\mathfrak f}$.
+Then
+\[
+A_7^{\mathfrak f}
+=
+A_{7,K_1}^{\mathfrak f}+A_{7,K_5}^{\mathfrak f},
+\]
+with
+\[
+A_{7,K_5}^{\mathfrak f}\in \mathbf C\,A_5^{\mathfrak f}.
+\]
+Consequently,
+\[
+[A_7^{\mathfrak f}]
+=
+[A_{7,K_1}^{\mathfrak f}]
+\quad\text{in }\mathfrak f/\mathbf C A_5^{\mathfrak f},
+\]
+and
+\[
+\Delta_7=\Delta_{7,K_1}.
+\]
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{prop:projected-k3-shadow-vanishing},
+\[
+A_{7,K_3}^{\mathfrak f}=0.
+\]
+By Lemma~\ref{lem:parity-elimination-pure-septic},
+\[
+A_{7,\mathrm{pure}}^{\mathfrak f}=0.
+\]
+Therefore
+\[
+A_7^{\mathfrak f}
+=
+A_{7,K_1}^{\mathfrak f}+A_{7,K_5}^{\mathfrak f}.
+\]
+By Proposition~\ref{prop:projected-k5-shadow-law},
+\[
+A_{7,K_5}^{\mathfrak f}\in \mathbf C\,A_5^{\mathfrak f}.
+\]
+Hence $A_7^{\mathfrak f}$ and $A_{7,K_1}^{\mathfrak f}$ define the same
+class in the quotient
+\[
+\mathfrak f/\mathbf C A_5^{\mathfrak f}.
+\]
+Writing
+\[
+A_5^{\mathfrak f}=u_5I+v_5S,
+\qquad
+A_{7,K_1}^{\mathfrak f}=u_{7,K_1}I+v_{7,K_1}S,
+\]
+this quotient equality means precisely that
+\[
+A_7^{\mathfrak f}
+=
+A_{7,K_1}^{\mathfrak f}+\chi\,A_5^{\mathfrak f}
+\]
+for some scalar $\chi$. Therefore
+\[
+\Delta_7
+=
+(u_{7,K_1}+\chi u_5)v_5-u_5(v_{7,K_1}+\chi v_5)
+=
+u_{7,K_1}v_5-u_5v_{7,K_1}
+=
+\Delta_{7,K_1},
+\]
+where $\Delta_{7,K_1}$ is as in Definition~\ref{def:delta7-k1}.
+\end{proof}
+
+\begin{remark}[Status of the order-$7$ fixed-sector package]
+\label{rem:status-full-septic-fixed-sector}
+The order-$7$ fixed-sector analysis is now closed at the canonical quotient
+level. By Theorem~\ref{thm:quotient-septic-closure}, the full total septic
+fixed-sector class satisfies
+\[
+[A_7^{\mathfrak f}]
+=
+[A_{7,K_1}^{\mathfrak f}]
+\quad\text{in }\mathfrak f/\mathbf C A_5^{\mathfrak f},
+\]
+and the full total second residual determinant is
+\[
+\Delta_7=\Delta_{7,K_1}.
+\]
+
+What remains gauge-dependent is only the choice of raw representative of
+$A_7^{\mathfrak f}$ inside the affine line
+\[
+A_{7,K_1}^{\mathfrak f}+\mathbf C A_5^{\mathfrak f},
+\]
+as already recorded by Proposition~\ref{prop:projected-septic-gauge-law}.
+Thus no further order-$7$ local invariant is missing for the later geometric
+arguments.
 \end{remark}
 
 \subsection{Normalized planar curve and curvature bridge}
