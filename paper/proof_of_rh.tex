@@ -4847,6 +4847,32 @@ K(s,t)\neq 0
 \]
 \end{proof}
 
+\begin{remark}[Failure of the tangent-separator route at generic $W=0$ boundaries]
+\label{rem:w0-inflection-obstruction}
+The preceding adjacent tangent-separator argument is robust at generic turning
+boundaries
+\[
+M(h_b)=0,\qquad M'(h_b)\neq 0,\qquad N(h_b)\neq 0,
+\]
+but does not automatically extend across generic boundaries of type
+\[
+W(h_b)=0,\qquad M(h_b)\neq 0.
+\]
+In the affine chart
+\[
+x=\frac{v_5}{c},\qquad y=\frac{\Delta_7}{c},
+\]
+such a boundary is generically modeled by an ordinary affine inflection
+\[
+y=ax^3+O(x^4),\qquad a\neq 0,
+\]
+and the tangent line at a point $x=s$ on one side of the inflection meets the
+opposite side again at $x=-2s$ in the cubic model. Thus adjacent
+tangent-separator sign regularity, and hence the global no-secant theorem, are
+not presently justified across generic $W=0$, $M\neq 0$ boundaries without
+additional special structure of the actual triple $(c,v_5,\Delta_7)$.
+\end{remark}
+
 \begin{lemma}[Fixed-slope intercept sets for a strictly convex ECT branch]
 \label{lem:fixed-slope-intercept-sets}
 Let $I$ be an ECT interval in the affine chart
@@ -5024,67 +5050,51 @@ slope $m$ for which both are nonempty, and the side ordering is constant on
 the adjacent pair.
 \end{proof}
 
-\begin{theorem}[Global no-secant and no-four-secant theorem]
-\label{thm:global-no-secant}
-Assume every adjacent pair of ECT intervals satisfies the generic boundary
-hypotheses of Proposition~\ref{prop:adjacent-slope-range-separation}. Then for
-any two distinct ECT intervals $I_a\neq I_b$, and any affine line in the chart
+\begin{theorem}[Partial global no-secant theorem away from $W=0$ boundaries]
+\label{thm:partial-global-no-secant}
+Assume every adjacent pair of ECT intervals is separated by a generic turning
+boundary
+\[
+M(h_b)=0,\qquad M'(h_b)\neq 0,\qquad N(h_b)\neq 0,
+\]
+and that no adjacent pair is separated by a boundary of type
+\[
+W(h_b)=0,\qquad M(h_b)\neq 0.
+\]
+Then no affine line in the chart
 \[
 x=\frac{v_5}{c},
 \qquad
-y=\frac{\Delta_7}{c},
+y=\frac{\Delta_7}{c}
 \]
-that line cannot be $2$-secant to both $\Gamma(I_a)$ and $\Gamma(I_b)$. In
-particular, there is no global four-secant line for the normalized planar
-curve $\Gamma(h)$.
+is $2$-secant to two distinct ECT intervals. In particular, there is no
+global four-secant line for the normalized planar curve $\Gamma(h)$.
 \end{theorem}
 
 \begin{proof}
-Let $I_a<I_b$ be two distinct ECT intervals, and let $m\in\mathbf R$ be a
-slope such that both fixed-slope intercept sets
-\[
-\mathcal B_{I_a}(m),\qquad \mathcal B_{I_b}(m)
-\]
-are nonempty. Enumerate the adjacent ECT intervals between them as
-\[
-I_a=J_0<J_1<\cdots<J_r=I_b.
-\]
-By Lemma~\ref{lem:adjacent-support-ordering}, for each adjacent pair
-$J_{k}<J_{k+1}$, the fixed-slope intercept sets are disjoint, with a
-consistent ordering:
-\[
-\sup \mathcal B_{J_k}(m)<\inf \mathcal B_{J_{k+1}}(m)
-\qquad (k=0,\dots,r-1).
-\]
-Iterating these inequalities gives
-\[
-\sup \mathcal B_{I_a}(m)<\inf \mathcal B_{I_b}(m).
-\]
-Hence
-\[
-\mathcal B_{I_a}(m)\cap \mathcal B_{I_b}(m)=\varnothing.
-\]
-
-By Lemma~\ref{lem:fixed-slope-intercept-sets}, a line $y=mx+b$ is $2$-secant
-to $\Gamma(I)$ only if $b\in \operatorname{int}\mathcal B_I(m)$. Therefore
-no affine line can be $2$-secant to two distinct ECT intervals.
-
-In particular, a global four-secant line would have to be $2$-secant to two
-distinct ECT intervals, which is impossible.
+Under the stated hypotheses, every adjacent boundary is of turning-point type.
+For such adjacent pairs,
+Theorem~\ref{thm:adjacent-tangent-separator-sign-regularity} and
+Lemma~\ref{lem:adjacent-support-ordering} apply without encountering the
+generic $W=0$ inflection obstruction. Hence adjacent fixed-slope intercept
+sets are strictly ordered. Iterating this ordering over the $x=v_5/c$
+ordering of ECT intervals shows that no affine line can be $2$-secant to two
+distinct ECT intervals. Therefore no global four-secant line exists.
 \end{proof}
 
-\begin{corollary}[Exclusion of pair-pair branch configurations]
+\begin{corollary}[Partial exclusion of pair-pair branch configurations]
 \label{cor:pair-pair-exclusion}
-Under the hypotheses of Theorem~\ref{thm:global-no-secant}, a bad finite core
-cannot contain two distinct ECT intervals each contributing a pair of points.
+Under the hypotheses of Theorem~\ref{thm:partial-global-no-secant}, a bad
+finite core cannot contain two distinct ECT intervals each contributing a pair
+of points.
 \end{corollary}
 
 \begin{proof}
-By Corollary~\ref{cor:two-points-per-ect-interval}, each ECT interval
-contributes at most two points to the zero set of an affine line in the
-normalized chart. By Theorem~\ref{thm:global-no-secant}, no affine line can be
-$2$-secant to two different ECT intervals. Therefore a pair-pair
-configuration across two distinct ECT intervals is impossible.
+Each ECT interval contributes at most two points to the zero set of an affine
+line in the normalized chart, and by
+Theorem~\ref{thm:partial-global-no-secant} no affine line can be $2$-secant
+to two different ECT intervals. Therefore a pair-pair configuration across two
+distinct ECT intervals is impossible.
 \end{proof}
 
 \begin{remark}[Audit: direct septic witness]
@@ -5096,6 +5106,25 @@ audited is the passage from this nonzero $K_1$-transport witness to the full
 total direct $q^{(7)}$-driven slice of $\Delta_7$, i.e.\ the contribution of
 the remaining order-$7$ sectors and the resulting total noncancellation in
 $\Delta_7$.
+\end{remark}
+
+\begin{remark}[Audit: $W=0$ affine-inflection structure]
+\label{rem:audit-w0-affine-inflection}
+The current global endgame is blocked not by the turning-point boundaries
+$M=0$, but by generic boundaries of type
+\[
+W=0,\qquad M\neq 0.
+\]
+For an ordinary affine inflection
+\[
+y=ax^3+O(x^4),\qquad a\neq 0,
+\]
+the tangent line from one side meets the opposite side again, so adjacent
+tangent-separator sign regularity fails in general. The remaining audited
+global issue is therefore whether the actual triple $(c,v_5,\Delta_7)$
+satisfies additional jet constraints at $W=0$ boundaries that rule out this
+generic inflection behavior, or whether a different global invariant must be
+used there.
 \end{remark}
 
 \subsection{From the one-pair residual germ to two-pair and minimal-core rigidity}
@@ -5194,11 +5223,10 @@ M(h)\neq 0,
 M(h)N'(h)-N(h)M'(h)\neq 0.
 \]
 
-In this formulation, the geometric secant/tangent obstruction has been reduced
-to the adjacent tangent-separator theorem and the resulting global no-secant
-theorem. The remaining two-pair and minimal-core issues are therefore the
-algebraic interaction corrections and the extraction of the strengthened
-invariant package into the finite-core endgame.
+In this formulation, the geometric secant/tangent obstruction is well controlled
+on ECT intervals and across generic turning-point boundaries, but the behavior
+across boundaries of type $W=0,\ M\neq 0$ remains the main unresolved global
+issue.
 
 \begin{definition}[Two-pair decomposition]
 \label{def:two-pair-decomposition}
@@ -5398,16 +5426,28 @@ h\longmapsto \left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right).
 \]
 \end{remark}
 
-\begin{remark}[Current remaining bottlenecks]
+\begin{remark}[Current geometric bottleneck]
 \label{rem:current-geometric-bottleneck}
-Under the generic boundary hypotheses of
-Proposition~\ref{prop:adjacent-slope-range-separation}, the global
-secant/tangent obstruction is now excluded by
-Theorem~\ref{thm:adjacent-tangent-separator-sign-regularity} and
-Theorem~\ref{thm:global-no-secant}. The remaining audited issues are therefore
-local/algebraic rather than global/geometric: first-order surjectivity,
-quintic pure-value trace annihilation (or replacement detector), and full
-septic fixed-sector completion / full control of $\Delta_7$.
+The remaining generic obstruction is now concentrated at adjacent boundaries of
+type
+\[
+W(h_b)=0,\qquad M(h_b)\neq 0.
+\]
+At such points, the normalized planar curve
+\[
+\Gamma(h)=\left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right)
+\]
+has the local geometry of a generic affine inflection unless additional special
+structure is proved. In particular, the adjacent tangent-separator route does
+not by itself yield a global no-secant theorem across these boundaries.
+
+The turning-point boundaries
+\[
+M(h_b)=0,\qquad M'(h_b)\neq 0,\qquad N(h_b)\neq 0
+\]
+are substantially better behaved. The remaining audited global issue is
+therefore to understand what extra structure, if any, the actual triple
+$(c,v_5,\Delta_7)$ has at $W=0,\ M\neq 0$ boundaries.
 \end{remark}
 
 \begin{remark}[Current state of the argument]
@@ -5435,13 +5475,23 @@ c'&v_5'&\Delta_7'\\
 c''&v_5''&\Delta_7''
 \end{pmatrix}.
 \]
+
 On intervals where $c$, $M$, and $W$ do not vanish, the triple
-$(c,v_5,\Delta_7)$ is an ECT system. Under the generic boundary hypotheses of
-Proposition~\ref{prop:adjacent-slope-range-separation}, adjacent
-tangent-separator sign regularity and the global no-secant theorem are now in
-place. The remaining audited issues are therefore local: first-order
-surjectivity, the quintic pure-value quotient detector, and the completion of
-the order-$7$ fixed-sector algebra.
+$(c,v_5,\Delta_7)$ is an ECT system. The turning-point boundaries
+\[
+M=0,\qquad M'\neq 0,\qquad N\neq 0
+\]
+are comparatively well behaved. The remaining nonlocal geometric issue is the
+behavior of $\Gamma$ across boundaries of type
+\[
+W=0,\qquad M\neq 0,
+\]
+where generic inflection geometry shows that the tangent-separator route does
+not close without additional special structure. The remaining audited issues
+are therefore both local and global: first-order surjectivity, the quintic
+pure-value quotient detector, the completion of the order-$7$ fixed-sector
+algebra, and the special affine-jet structure of $\Gamma$ at $W=0$
+boundaries.
 \end{remark}
 
 \section{Final contradiction}
