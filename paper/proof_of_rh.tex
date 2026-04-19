@@ -3918,6 +3918,149 @@ the direct $q^{(7)}$-slice satisfies
 \]
 \end{proof}
 
+\begin{proposition}[Noncancellation of the direct septic $K_1$ witness]
+\label{prop:direct-q7-k1-witness-nonzero}
+On the graded slice
+\[
+(K_1,\eta_2,q^{(7)}),
+\]
+the only contributing channels to
+\[
+u_{7,K_1}^{(q^{(7)})}
+\]
+are
+\[
+\kappa(x_2-x_1)\nu_6^{(q^{(7)})}
+\qquad\text{and}\qquad
+\kappa\,v(\gamma_5-\alpha_5)^{(q^{(7)})},
+\]
+and their total coefficient of the monomial
+\[
+\kappa(h)\,\eta_2(h)\,q^{(7)}(h)
+\]
+is nonzero. Consequently,
+\[
+u_{7,K_1}^{(q^{(7)})}(h)\not\equiv 0
+\]
+on the generic one-pair region.
+\end{proposition}
+
+\begin{proof}
+Fix $h$ and isolate the graded slice
+\[
+\kappa(h)\,\eta_2(h)\,q^{(7)}(h).
+\]
+
+By Corollary~\ref{cor:direct-q7-septic-slice}, the direct $q^{(7)}$-driven
+slice is $I$-directional and is given by
+\[
+u_{7,K_1}^{(q^{(7)})}
+=
+\kappa\Bigl(
+(x_2-x_1)\nu_6^{(q^{(7)})}
++
+v(\gamma_5-\alpha_5)^{(q^{(7)})}
+\Bigr).
+\]
+Thus it remains only to show that the two displayed channels do not cancel.
+
+Now consider the same-point expansion. By the explicit formula
+\[
+G_{m,\pm}^{\corr}(s)
+=
+\frac1\pi
+\begin{pmatrix}
+2q(t_\pm) & \frac12 q'(t_\pm)\\[.5ex]
+\frac12 q'(t_\pm) & \frac1{12}(q''(t_\pm)+2q(t_\pm)^3)
+\end{pmatrix},
+\]
+the factor $q^{(7)}(h)$ first appears only in the quintic same-point
+coefficient $G_5$, and there only in the diagonal sector, namely through
+the quintic Taylor term of the $(2,2)$-entry coming from $q''(t_\pm)$.
+Therefore, by Lemma~\ref{lem:whitening-parity}, the linear
+$q^{(7)}$-contribution to $X_5$ is diagonal. In particular it contributes
+to $\gamma_5-\alpha_5$, but not to $\beta_5$.
+
+Likewise, the $\eta_2(h)$-slice of $X_1(h)$ is off-diagonal, because
+\[
+v(h)=-\frac{1}{4\pi(s_1+s_2)}\,\eta_2(h).
+\]
+Applying Lemma~\ref{lem:whitening-parity} again, the mixed
+$(\eta_2,q^{(7)})$-slice of $X_6$ is off-diagonal. Hence it contributes
+to $\nu_6$, but not to $\mu_6$ or $\lambda_6$.
+
+Thus the only contributing channels on the graded slice
+\[
+(K_1,\eta_2,q^{(7)})
+\]
+are exactly
+\[
+\kappa(x_2-x_1)\nu_6^{(q^{(7)})}
+\qquad\text{and}\qquad
+\kappa\,v(\gamma_5-\alpha_5)^{(q^{(7)})}.
+\]
+
+To compute their combined coefficient, it suffices by multilinearity to
+restrict to the two perturbation directions carrying the relevant tags:
+an off-diagonal first-order perturbation $A$ for the $\eta_2$-slice and
+a diagonal fifth-order perturbation $D$ for the $q^{(7)}$-slice.
+Accordingly, write
+\[
+G_0=\diag(a^2,b^2),
+\qquad
+A=
+\begin{pmatrix}
+0&u\\u&0
+\end{pmatrix},
+\qquad
+D=
+\begin{pmatrix}
+0&0\\0&d
+\end{pmatrix},
+\]
+and expand
+\[
+X(\varepsilon,\delta):=(G_0+\varepsilon A+\delta D)^{-1/2}
+=
+X_0+\varepsilon U+\delta V+\varepsilon\delta W+O(\varepsilon^2,\delta^2).
+\]
+Solving the identity
+\[
+X(\varepsilon,\delta)\,(G_0+\varepsilon A+\delta D)\,X(\varepsilon,\delta)=I
+\]
+order by order gives
+\[
+U_{12}=-\frac{u}{ab(a+b)},
+\qquad
+V_{22}=-\frac{d}{2b^3},
+\qquad
+W_{12}=\frac{du(a+2b)}{2ab^3(a+b)^2}.
+\]
+Here $U_{12}$ is the $\eta_2$-slice of $v$, $V_{22}$ is the
+$q^{(7)}$-slice of $\gamma_5-\alpha_5$, and $W_{12}$ is the mixed
+$(\eta_2,q^{(7)})$-slice of $\nu_6$. Therefore the total coefficient of the
+target slice inside
+\[
+(x_2-x_1)\nu_6+v(\gamma_5-\alpha_5)
+\]
+is
+\[
+\left(\frac1a-\frac1b\right)W_{12}+U_{12}V_{22}
+=
+\frac{du}{a^2b^2(a+b)^2},
+\]
+which is nonzero.
+
+Thus the monomial
+\[
+\kappa(h)\,\eta_2(h)\,q^{(7)}(h)
+\]
+occurs in $u_{7,K_1}^{(q^{(7)})}(h)$ with nonzero total coefficient, so
+\[
+u_{7,K_1}^{(q^{(7)})}(h)\not\equiv 0.
+\]
+\end{proof}
+
 \begin{remark}[Audit: full septic fixed-sector coefficient]
 \label{rem:audit-full-septic-fixed-sector}
 The draft now contains explicit coefficient formulas for the quintic
@@ -4201,6 +4344,85 @@ Equivalently, $K(s,t)=0$ is the tangent-separator incidence condition for
 the tangent at $s$ and the point at $t$.
 \end{definition}
 
+\begin{lemma}[Affine form of the tangent-separator kernel]
+\label{lem:affine-form-of-K}
+On the affine chart $c\neq 0$, write
+\[
+x(h):=\frac{v_5(h)}{c(h)},
+\qquad
+y(h):=\frac{\Delta_7(h)}{c(h)}.
+\]
+Then for every $s,t$ with $c(s)c(t)\neq 0$,
+\[
+K(s,t)
+=
+c(s)^2\,c(t)\,x'(s)
+\Bigl(
+\bigl(y(t)-m(s)x(t)\bigr)
+-
+\bigl(y(s)-m(s)x(s)\bigr)
+\Bigr),
+\]
+where
+\[
+m(s)=\frac{dy}{dx}(s)=\frac{N(s)}{M(s)}.
+\]
+Equivalently,
+\[
+K(s,t)
+=
+c(s)^2\,c(t)\,x'(s)\,
+\bigl(\phi_{m(s)}(t)-\tau_s\bigr),
+\]
+with
+\[
+\phi_{m(s)}(t):=y(t)-m(s)x(t),
+\qquad
+\tau_s:=y(s)-m(s)x(s).
+\]
+\end{lemma}
+
+\begin{proof}
+Write
+\[
+F(h)=\bigl(c(h),\,c(h)x(h),\,c(h)y(h)\bigr).
+\]
+Then
+\[
+F'(s)=\bigl(c'(s),\,c'(s)x(s)+c(s)x'(s),\,c'(s)y(s)+c(s)y'(s)\bigr).
+\]
+Subtracting $x(s)$ times the first column from the second and $y(s)$ times
+the first column from the third gives
+\[
+K(s,t)
+=
+\det\!
+\begin{pmatrix}
+c(s) & 0 & 0\\
+c'(s) & c(s)x'(s) & c(s)y'(s)\\
+c(t) & c(t)(x(t)-x(s)) & c(t)(y(t)-y(s))
+\end{pmatrix}.
+\]
+Expanding along the first row yields
+\[
+K(s,t)
+=
+c(s)^2c(t)\Bigl(x'(s)(y(t)-y(s))-y'(s)(x(t)-x(s))\Bigr).
+\]
+Since
+\[
+m(s)=\frac{y'(s)}{x'(s)},
+\]
+this becomes
+\[
+K(s,t)
+=
+c(s)^2c(t)x'(s)
+\Bigl((y(t)-m(s)x(t))-(y(s)-m(s)x(s))\Bigr),
+\]
+as claimed.
+\end{proof}
+
 \begin{lemma}[Basic properties of the tangent-separator kernel]
 \label{lem:tangent-separator-basic-properties}
 For every $s$ in the generic region,
@@ -4469,35 +4691,230 @@ K(s,t)\neq 0
 \]
 \end{proof}
 
-\begin{theorem}[Global no-secant and no-four-secant theorem]
-\label{thm:global-no-secant}
-Assume every adjacent pair of ECT intervals satisfies the generic boundary
-hypotheses of Proposition~\ref{prop:adjacent-slope-range-separation}. Then no
-affine line in the chart
+\begin{lemma}[Fixed-slope intercept sets for a strictly convex ECT branch]
+\label{lem:fixed-slope-intercept-sets}
+Let $I$ be an ECT interval in the affine chart
 \[
 x=\frac{v_5}{c},
 \qquad
-y=\frac{\Delta_7}{c}
+y=\frac{\Delta_7}{c},
 \]
-is $2$-secant to two distinct ECT intervals. In particular, there is no
-global four-secant line for the normalized planar curve $\Gamma(h)$.
+and suppose $\Gamma(I)$ is a strictly convex $C^2$ graph
+\[
+\Gamma(I)=\{(x,\psi_I(x)):x\in J_I\}
+\]
+over an open interval $J_I\subset\mathbf R$.
+
+For each slope $m\in\mathbf R$, define
+\[
+\mathcal B_I(m):=\{\psi_I(x)-mx:x\in J_I\}.
+\]
+
+Then:
+
+\begin{enumerate}
+\item $\mathcal B_I(m)$ is an interval.
+
+\item A line $y=mx+b$ meets $\Gamma(I)$ if and only if
+\[
+b\in \mathcal B_I(m).
+\]
+
+\item If $m$ lies in the interior tangent-slope range of $I$, there is a
+unique $x_I(m)\in J_I$ such that
+\[
+\psi_I'(x_I(m))=m,
+\]
+and the tangent line of slope $m$ has intercept
+\[
+\tau_I(m):=\psi_I(x_I(m))-m\,x_I(m).
+\]
+Moreover,
+\[
+\tau_I(m)=\inf \mathcal B_I(m).
+\]
+
+\item For such $m$, a line $y=mx+b$ is $2$-secant to $\Gamma(I)$ if and
+only if
+\[
+b\in \operatorname{int}\mathcal B_I(m).
+\]
+Equivalently, the $2$-secant intercepts of slope $m$ are exactly the
+interior points of the intercept interval.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For fixed $m$, put
+\[
+\phi_m(x):=\psi_I(x)-mx.
+\]
+Since $\phi_m$ is continuous on the interval $J_I$, its image
+\[
+\phi_m(J_I)=\mathcal B_I(m)
+\]
+is an interval. This proves (1), and (2) is immediate from
+\[
+(x,\psi_I(x))\in \{y=mx+b\}
+\iff
+\psi_I(x)-mx=b.
+\]
+
+If $m$ lies in the interior tangent-slope range, strict convexity implies
+that $\psi_I'$ is strictly monotone, hence there is a unique $x_I(m)$
+with $\psi_I'(x_I(m))=m$. At that point,
+\[
+\phi_m'(x_I(m))=\psi_I'(x_I(m))-m=0,
+\]
+and since
+\[
+\phi_m''(x)=\psi_I''(x)>0,
+\]
+the point $x_I(m)$ is the unique minimizer of $\phi_m$. Thus
+\[
+\tau_I(m)=\phi_m(x_I(m))=\inf \mathcal B_I(m),
+\]
+which proves (3).
+
+Finally, because $\phi_m$ is strictly convex with a unique minimum,
+a level $b$ is attained at two points exactly when it lies in the interior
+of the interval $\phi_m(J_I)=\mathcal B_I(m)$. This is precisely the
+$2$-secant condition, proving (4).
+\end{proof}
+
+\begin{lemma}[Adjacent support-ordering]
+\label{lem:adjacent-support-ordering}
+Let $I_1<I_2$ be adjacent ECT intervals under the hypotheses of
+Theorem~\ref{thm:adjacent-tangent-separator-sign-regularity}. Then, for every
+slope $m\in\mathbf R$ such that both fixed-slope intercept sets are nonempty,
+\[
+\mathcal B_{I_1}(m)\cap \mathcal B_{I_2}(m)=\varnothing.
+\]
+More precisely, one has one of the two strict alternatives
+\[
+\sup \mathcal B_{I_1}(m)<\inf \mathcal B_{I_2}(m)
+\qquad\text{or}\qquad
+\sup \mathcal B_{I_2}(m)<\inf \mathcal B_{I_1}(m),
+\]
+and the same alternative holds for all such $m$ on the adjacent pair.
+\end{lemma}
+
+\begin{proof}
+Fix $m$ such that both $\mathcal B_{I_1}(m)$ and $\mathcal B_{I_2}(m)$
+are nonempty.
+
+First assume $m$ lies in the interior tangent-slope range of $I_2$. Let
+$s\in I_2$ be the unique point with tangent slope $m$. Then by
+Lemma~\ref{lem:fixed-slope-intercept-sets},
+\[
+\tau_{I_2}(m)=\inf \mathcal B_{I_2}(m).
+\]
+By Theorem~\ref{thm:adjacent-tangent-separator-sign-regularity},
+\[
+K(s,t)\neq 0
+\qquad (t\in I_1).
+\]
+By Lemma~\ref{lem:affine-form-of-K},
+\[
+K(s,t)=c(s)^2c(t)x'(s)\bigl(\phi_m(t)-\tau_{I_2}(m)\bigr),
+\qquad
+\phi_m(t):=y(t)-mx(t).
+\]
+Since $c(s)^2c(t)x'(s)$ has fixed sign on $I_1$ and $K(s,t)$ is continuous
+and nowhere zero there, the quantity
+\[
+\phi_m(t)-\tau_{I_2}(m)
+\]
+has constant sign on $I_1$. To determine which sign occurs, move $s$ toward
+the common boundary point from inside $I_2$. By
+Lemma~\ref{lem:endpoint-tangent-exclusion}, the limiting boundary tangent line
+does not meet $I_1$, so $I_1$ lies entirely on one side of that tangent
+line. By continuity, the same side persists for nearby interior tangents.
+Indeed, if the side changed as the tangency point $s$ moved along $I_2$, then
+by the connectedness of $I_2$ and continuity of the tangent-line data there
+would exist an intermediate point $s_*\in I_2$ for which the tangent line at
+$\Gamma(s_*)$ meets $\Gamma(I_1)$. Equivalently, there would exist
+$t_*\in I_1$ such that
+\[
+K(s_*,t_*)=0,
+\]
+contradicting Theorem~\ref{thm:adjacent-tangent-separator-sign-regularity}.
+Hence the same side holds for all $s\in I_2$. Therefore either
+\[
+\phi_m(t)<\tau_{I_2}(m)\quad\text{for all }t\in I_1,
+\]
+or
+\[
+\phi_m(t)>\tau_{I_2}(m)\quad\text{for all }t\in I_1.
+\]
+In the first case,
+\[
+\sup\mathcal B_{I_1}(m)\le \tau_{I_2}(m)=\inf\mathcal B_{I_2}(m),
+\]
+and since equality would force an intersection with the tangent line, the
+inequality is strict. The second case is symmetric.
+
+Now suppose $m$ is not in the interior tangent-slope range of $I_2$, but
+both intercept sets are nonempty. Then $m$ lies on one side of the tangent
+slope range of $I_2$, so $\phi_m$ is strictly monotone on $I_2$, and
+$\mathcal B_{I_2}(m)$ is an interval with endpoint attained in the one-sided
+limit at the adjacent boundary. Passing to that boundary-support line and using
+Lemma~\ref{lem:endpoint-tangent-exclusion} again shows that $I_1$ lies
+strictly on one side of that boundary-support line. Hence the same strict
+ordering of intercept sets holds in this case as well.
+
+Thus $\mathcal B_{I_1}(m)$ and $\mathcal B_{I_2}(m)$ are disjoint for every
+slope $m$ for which both are nonempty, and the side ordering is constant on
+the adjacent pair.
+\end{proof}
+
+\begin{theorem}[Global no-secant and no-four-secant theorem]
+\label{thm:global-no-secant}
+Assume every adjacent pair of ECT intervals satisfies the generic boundary
+hypotheses of Proposition~\ref{prop:adjacent-slope-range-separation}. Then for
+any two distinct ECT intervals $I_a\neq I_b$, and any affine line in the chart
+\[
+x=\frac{v_5}{c},
+\qquad
+y=\frac{\Delta_7}{c},
+\]
+that line cannot be $2$-secant to both $\Gamma(I_a)$ and $\Gamma(I_b)$. In
+particular, there is no global four-secant line for the normalized planar
+curve $\Gamma(h)$.
 \end{theorem}
 
 \begin{proof}
-Let $I_1<I_2$ be adjacent ECT intervals. A tangent-support line to
-$\Gamma(I_2)$ at $\Gamma(s)$, $s\in I_2$, meets $\Gamma(I_1)$ exactly
-at the zeros of
+Let $I_a<I_b$ be two distinct ECT intervals, and let $m\in\mathbf R$ be a
+slope such that both fixed-slope intercept sets
 \[
-t\longmapsto K(s,t).
+\mathcal B_{I_a}(m),\qquad \mathcal B_{I_b}(m)
 \]
-By Theorem~\ref{thm:adjacent-tangent-separator-sign-regularity}, no such zero
-exists. Therefore $\Gamma(I_1)$ lies strictly on one side of every
-tangent-support line of $\Gamma(I_2)$, so the support intervals of adjacent
-ECT branches are disjoint.
+are nonempty. Enumerate the adjacent ECT intervals between them as
+\[
+I_a=J_0<J_1<\cdots<J_r=I_b.
+\]
+By Lemma~\ref{lem:adjacent-support-ordering}, for each adjacent pair
+$J_{k}<J_{k+1}$, the fixed-slope intercept sets are disjoint, with a
+consistent ordering:
+\[
+\sup \mathcal B_{J_k}(m)<\inf \mathcal B_{J_{k+1}}(m)
+\qquad (k=0,\dots,r-1).
+\]
+Iterating these inequalities gives
+\[
+\sup \mathcal B_{I_a}(m)<\inf \mathcal B_{I_b}(m).
+\]
+Hence
+\[
+\mathcal B_{I_a}(m)\cap \mathcal B_{I_b}(m)=\varnothing.
+\]
 
-By transitivity over the $x=v_5/c$ ordering, support intervals of any two
-distinct ECT intervals are disjoint. Hence no affine line can be $2$-secant
-to two different ECT intervals, and no global four-secant line exists.
+By Lemma~\ref{lem:fixed-slope-intercept-sets}, a line $y=mx+b$ is $2$-secant
+to $\Gamma(I)$ only if $b\in \operatorname{int}\mathcal B_I(m)$. Therefore
+no affine line can be $2$-secant to two distinct ECT intervals.
+
+In particular, a global four-secant line would have to be $2$-secant to two
+distinct ECT intervals, which is impossible.
 \end{proof}
 
 \begin{corollary}[Exclusion of pair-pair branch configurations]
@@ -4516,12 +4933,13 @@ distinct ECT intervals is impossible.
 
 \begin{remark}[Audit: direct septic witness]
 \label{rem:audit-direct-septic-witness}
-The use of Proposition~\ref{prop:rho2-not-affine-in-rho1} still depends on the
-claim that the direct $q^{(7)}$-driven slice of $\Delta_7$ is generically
-nonzero. The current draft contains the explicit $K_1$-transport formulas
-and the $I$-directionality of the direct $q^{(7)}$-slice, but the final
-generic noncancellation statement for that slice should still be audited as a
-standalone local theorem.
+The direct septic $K_1$ witness is now isolated and its
+$(K_1,\eta_2,q^{(7)})$-slice is proved generically nonzero by
+Proposition~\ref{prop:direct-q7-k1-witness-nonzero}. What still remains to be
+audited is the passage from this nonzero $K_1$-transport witness to the full
+total direct $q^{(7)}$-driven slice of $\Delta_7$, i.e.\ the contribution of
+the remaining order-$7$ sectors and the resulting total noncancellation in
+$\Delta_7$.
 \end{remark}
 
 \begin{remark}[Audit: ECT criterion usage]
