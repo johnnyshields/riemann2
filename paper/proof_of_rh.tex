@@ -8894,6 +8894,184 @@ then the displayed lower bound would force
 which is impossible for a nontrivial two-point core with $h_1\neq h_2$.
 \end{proof}
 
+\begin{proposition}[Conditional source-level quadratic interaction remainder]
+\label{prop:conditional-source-level-quadratic-interaction-remainder}
+Assume there exists a finite-dimensional corrected quotient-germ target
+$\mathcal G$ and an analytic map
+\[
+\mathfrak Q:\mu\longmapsto \mathfrak Q(\mu)\in\mathcal G
+\]
+defined on small finite atomic sources
+\[
+\mu=\sum_j a_j\delta_{h_j},
+\]
+such that the corrected one-pair and two-pair objects are given by
+\[
+\mathcal F_1(a,h):=\mathfrak Q(a\,\delta_h),
+\qquad
+\mathcal F_2(a_1,h_1;a_2,h_2):=\mathfrak Q(a_1\delta_{h_1}+a_2\delta_{h_2}).
+\]
+Define the raw interaction remainder by
+\[
+\mathcal I(a_1,h_1;a_2,h_2)
+:=
+\mathcal F_2(a_1,h_1;a_2,h_2)
+-\mathcal F_1(a_1,h_1)-\mathcal F_1(a_2,h_2).
+\]
+Then there exists an analytic germ-valued map $\mathcal J$ such that
+\[
+\boxed{
+\mathcal I(a_1,h_1;a_2,h_2)
+=
+a_1a_2\,(h_1-h_2)^2\,\mathcal J(a_1,h_1;a_2,h_2).
+}
+\]
+\end{proposition}
+
+\begin{proof}
+The source-level definition of $\mathcal F_2$ is symmetric in the two atoms,
+so
+\[
+\mathcal I(a_1,h_1;a_2,h_2)=\mathcal I(a_2,h_2;a_1,h_1).
+\]
+Also, if one amplitude is zero, then the two-pair source reduces to a one-pair
+source, hence
+\[
+\mathcal I(0,h_1;a_2,h_2)=\mathcal I(a_1,h_1;0,h_2)=0.
+\]
+Thus $\mathcal I$ is divisible by $a_1a_2$, so
+\[
+\mathcal I(a_1,h_1;a_2,h_2)=a_1a_2\,G(h_1,h_2)
+\]
+for some analytic $\mathcal G$-valued map $G$.
+
+Now if $h_1=h_2=h$, then
+\[
+a_1\delta_h+a_2\delta_h=(a_1+a_2)\delta_h,
+\]
+so
+\[
+\mathcal F_2(a_1,h;a_2,h)=\mathcal F_1(a_1+a_2,h),
+\]
+and therefore
+\[
+\mathcal I(a_1,h;a_2,h)=0.
+\]
+Equivalently,
+\[
+G(h,h)=0.
+\]
+
+Passing to midpoint/separation variables
+\[
+m=\frac{h_1+h_2}{2},
+\qquad
+s=h_2-h_1,
+\]
+the symmetry of $G$ means that
+\[
+\widetilde G(m,s):=G\!\left(m-\frac s2,m+\frac s2\right)
+\]
+is an even analytic function of $s$, and the diagonal vanishing gives
+\[
+\widetilde G(m,0)=0.
+\]
+Hence $\widetilde G(m,s)$ is divisible by $s^2$:
+\[
+\widetilde G(m,s)=s^2 H(m,s)
+\]
+for analytic $H$. Rewriting in $(h_1,h_2)$ gives the claimed
+factorization.
+\end{proof}
+
+\begin{corollary}[Conditional quadratic defect estimate and two-point exclusion]
+\label{cor:conditional-quadratic-defect-estimate-two-point-exclusion}
+Assume, in addition to
+Proposition~\ref{prop:conditional-source-level-quadratic-interaction-remainder},
+that the raw cubic, quintic, and septic quotient defects are obtained from the
+raw interaction remainder by linear coefficient-extraction maps
+\[
+\Pi_3:\mathcal G\to\mathbf C,
+\qquad
+\Pi_5:\mathcal G\to\mathfrak f,
+\qquad
+\bar\Pi_7:\mathcal G\to \mathfrak f/\mathbf C A_5^{\mathfrak f}.
+\]
+Then on compacta, the raw defects satisfy
+\[
+\mathcal E^{(3)}=a_1a_2\,O(\delta^2),\qquad
+\mathcal E^{(5)}=a_1a_2\,O(\delta^2),\qquad
+\overline{\mathcal E}^{(7)}=a_1a_2\,O(\delta^2),
+\qquad
+\delta:=|h_1-h_2|.
+\]
+If the normalized defects in the present two-pair section are obtained by
+dividing by $a_1$, then on normalized families with $|a_2|$ bounded one has
+\[
+E_{12}^{(3)}=O(\delta^2),\qquad
+E_{12}^{(5)}=O(\delta^2),\qquad
+\overline E_{12}^{(7;1)}=O(\delta^2).
+\]
+Consequently, the two-point bad-core branch is excluded on compact good patches
+\[
+J\Subset\{c\neq 0,\ M\neq 0\}.
+\]
+\end{corollary}
+
+\begin{proof}
+The first claim is immediate from the factorization in
+Proposition~\ref{prop:conditional-source-level-quadratic-interaction-remainder}
+and the linearity of the coefficient-extraction maps.
+
+For the normalized defects, divide by $a_1$ and use boundedness of $|a_2|$
+on normalized families. Then
+Theorem~\ref{thm:quantitative-defect-thickened-strengthened-coincidence}
+gives
+\[
+|\widehat\Psi(h_1)-\widehat\Psi(h_2)|
+\lesssim
+|E_{12}^{(3)}|+\|E_{12}^{(5)}\|+\bigl|\overline E_{12}^{(7;1)}\bigr|
+=
+O(\delta^2).
+\]
+On the other hand, on every compact good patch
+\[
+J\Subset\{c\neq 0,\ M\neq 0\},
+\]
+the second coordinate
+\[
+x(h)=\frac{v_5(h)}{c(h)}
+\]
+is bi-Lipschitz, since
+\[
+x'(h)=\frac{M(h)}{c(h)^2}\neq 0.
+\]
+Hence
+\[
+|\widehat\Psi(h_1)-\widehat\Psi(h_2)|\gtrsim \delta.
+\]
+Combining the two inequalities gives
+\[
+\delta\lesssim \delta^2,
+\]
+which is impossible for sufficiently small nonzero $\delta$. Thus the
+two-point branch is excluded on compact good patches.
+\end{proof}
+
+\begin{remark}[Work in progress: source-level reduction for the two-point branch]
+\label{rem:wip-source-level-reduction-two-point-branch}
+The preceding proposition and corollary isolate the exact structural input
+needed to finish the two-point branch. At present, the draft does not yet define
+a source-level corrected quotient-germ map $\mathfrak Q$ on finite atomic
+sources, so the factorization
+\[
+\mathcal I=a_1a_2(h_1-h_2)^2\mathcal J
+\]
+is not yet available formally from the present definitions. If such a
+source-level reformulation is supplied, then the two-point bad-core branch is
+finished on compact good patches.
+\end{remark}
+
 \begin{remark}[What remains in the two-pair rewrite]
 \label{rem:what-remains-two-pair-rewrite}
 Theorem~\ref{thm:quantitative-defect-thickened-strengthened-coincidence}
@@ -8905,19 +9083,17 @@ Proposition~\ref{prop:no-sublinear-two-pair-defects-good-patch} shows that the
 two-point branch is already excluded whenever the total defect is sublinear in
 the pair separation.
 
-What remains is to rewrite the actual interaction germ $\mathcal I_{12}$
-explicitly in the corrected finite-order model and control the defect terms
-\[
-E_{12}^{(3)},
-\qquad
-E_{12}^{(5)},
-\qquad
-\overline E_{12}^{(7;1)}.
-\]
-Once that is done, the finite-core endgame splits cleanly into two stages:
-first force bad cores into the close-point regime through
-$\widehat\Psi$, then attack that local regime using the lifted $v_5$-patch
-geometry and the determinants $K_v$ and $T_v$.
+The strongest remaining algebraic target for the two-point branch is now the
+source-level structural reduction isolated in
+Proposition~\ref{prop:conditional-source-level-quadratic-interaction-remainder}
+and Corollary~\ref{cor:conditional-quadratic-defect-estimate-two-point-exclusion}:
+if the corrected two-pair object is defined source-level and collapses on
+coincident atoms, then the normalized defects are automatically
+$O(|h_1-h_2|^2)$, and the two-point branch is excluded on good patches.
+
+What remains beyond that is the genuine multi-pair interaction bookkeeping
+through orders $3,5,7$, together with the local lifted $3/4$-point analysis
+for close-point branches on $v_5\neq 0$ patches.
 \end{remark}
 
 \begin{remark}[Minimal-core reformulation]
@@ -9546,7 +9722,367 @@ The Wronskian of the displayed quadruple is exactly $T_v$. If $T_v$ has
 fixed nonzero sign on $J$, the ECT criterion applies.
 \end{proof}
 
-\begin{remark}[Work in progress: interaction defects and zero-capture for the lifted order-$7$ geometry]
+\begin{proposition}[Shrinking exact lifted $3$-point circuits concentrate into $K_v=0$]
+\label{prop:shrinking-exact-lifted-three-point-circuits-force-Kv-zero}
+Let $P\Subset\{c\neq 0,\ v_5\neq 0,\ M\neq 0\}$ be compact, and use
+\[
+x=\frac{v_5}{c},
+\qquad
+S=\sigma_v=\frac{\Delta_7}{c\,v_5}.
+\]
+Suppose there is a sequence of distinct triples
+\[
+x_{1,n},x_{2,n},x_{3,n}\in x(P),
+\qquad
+x_{1,n},x_{2,n},x_{3,n}\to x_*,
+\]
+such that
+\[
+\det\!\begin{pmatrix}
+1&x_{1,n}&S(x_{1,n})\\
+1&x_{2,n}&S(x_{2,n})\\
+1&x_{3,n}&S(x_{3,n})
+\end{pmatrix}
+=0
+\qquad
+\text{for every }n.
+\]
+Then
+\[
+K_v(x_*)=0.
+\]
+\end{proposition}
+
+\begin{proof}
+Set
+\[
+\Delta_3(x_1,x_2,x_3):=
+\det\!\begin{pmatrix}
+1&x_1&S(x_1)\\
+1&x_2&S(x_2)\\
+1&x_3&S(x_3)
+\end{pmatrix}.
+\]
+By the standard divided-difference factorization,
+\[
+\Delta_3(x_1,x_2,x_3)
+=
+V_3(x_1,x_2,x_3)\,S[x_1,x_2,x_3],
+\]
+where
+\[
+V_3(x_1,x_2,x_3):=(x_2-x_1)(x_3-x_1)(x_3-x_2).
+\]
+Since the nodes are distinct, $V_3(x_{1,n},x_{2,n},x_{3,n})\neq 0$, so
+\[
+S[x_{1,n},x_{2,n},x_{3,n}]=0.
+\]
+As $x_{1,n},x_{2,n},x_{3,n}\to x_*$, the second divided difference converges
+to
+\[
+\frac12 S''(x_*).
+\]
+Hence $S''(x_*)=0$. Since on the $x$-patch the lifted curvature numerator
+$K_v$ is $S''$ up to a nowhere-zero factor, it follows that $K_v(x_*)=0$.
+\end{proof}
+
+\begin{corollary}[Uniform small-diameter exclusion away from $K_v=0$]
+\label{cor:uniform-small-diameter-exclusion-away-from-Kv-zero}
+Let $P_0\Subset\{c\neq 0,\ v_5\neq 0,\ M\neq 0\}$ be compact and assume
+\[
+P_0\cap\{K_v=0\}=\varnothing.
+\]
+Then there exists $\rho_3>0$ such that no exact lifted $3$-point circuit
+contained in $P_0$ has $x$-diameter $<\rho_3$.
+\end{corollary}
+
+\begin{proof}
+Otherwise there would exist a sequence of exact lifted $3$-point circuits in
+$P_0$ with diameters tending to $0$. By compactness, after passing to a
+subsequence the three nodes would converge to some $x_*\in x(P_0)$. This
+contradicts
+Proposition~\ref{prop:shrinking-exact-lifted-three-point-circuits-force-Kv-zero}.
+\end{proof}
+
+\begin{proposition}[Shrinking exact lifted $4$-point circuits concentrate into $T_v=0$]
+\label{prop:shrinking-exact-lifted-four-point-circuits-force-Tv-zero}
+Let $P\Subset\{c\neq 0,\ v_5\neq 0,\ M\neq 0\}$ be compact, and use
+\[
+x=\frac{v_5}{c},
+\qquad
+Y=\frac{u_5}{c},
+\qquad
+S=\sigma_v=\frac{\Delta_7}{c\,v_5}.
+\]
+Suppose there is a sequence of distinct quadruples
+\[
+x_{1,n},x_{2,n},x_{3,n},x_{4,n}\in x(P),
+\qquad
+x_{1,n},x_{2,n},x_{3,n},x_{4,n}\to x_*,
+\]
+such that
+\[
+\det\!\begin{pmatrix}
+1&Y(x_{1,n})&x_{1,n}&S(x_{1,n})\\
+1&Y(x_{2,n})&x_{2,n}&S(x_{2,n})\\
+1&Y(x_{3,n})&x_{3,n}&S(x_{3,n})\\
+1&Y(x_{4,n})&x_{4,n}&S(x_{4,n})
+\end{pmatrix}
+=0
+\qquad
+\text{for every }n.
+\]
+Then
+\[
+T_v(x_*)=0.
+\]
+\end{proposition}
+
+\begin{proof}
+Set
+\[
+\Delta_4(x_1,x_2,x_3,x_4):=
+\det\!\begin{pmatrix}
+1&Y(x_1)&x_1&S(x_1)\\
+1&Y(x_2)&x_2&S(x_2)\\
+1&Y(x_3)&x_3&S(x_3)\\
+1&Y(x_4)&x_4&S(x_4)
+\end{pmatrix}.
+\]
+Since $\Delta_4$ is alternating in the four nodes, it is divisible by the
+Vandermonde
+\[
+V_4(x_1,x_2,x_3,x_4):=\prod_{1\le i<j\le 4}(x_j-x_i).
+\]
+Write
+\[
+\Delta_4(x_1,x_2,x_3,x_4)
+=
+V_4(x_1,x_2,x_3,x_4)\,\mathcal D_4(x_1,x_2,x_3,x_4),
+\]
+where $\mathcal D_4$ is symmetric and analytic. By the standard
+Wronskian/divided-difference coalescence formula,
+\[
+\mathcal D_4(x_1,x_2,x_3,x_4)\longrightarrow
+\frac{1}{1!\,2!\,3!}\,W_x(1,Y,x,S)(x_*)
+=
+\frac1{12}T_v(x_*),
+\]
+as all four nodes tend to $x_*$. Since $V_4\neq 0$ for distinct nodes and
+$\Delta_4=0$ along the sequence, one has $\mathcal D_4=0$ along the
+sequence, so the limit forces $T_v(x_*)=0$.
+\end{proof}
+
+\begin{corollary}[Uniform small-diameter exclusion away from $T_v=0$]
+\label{cor:uniform-small-diameter-exclusion-away-from-Tv-zero}
+Let $P_0\Subset\{c\neq 0,\ v_5\neq 0,\ M\neq 0\}$ be compact and assume
+\[
+P_0\cap\{T_v=0\}=\varnothing.
+\]
+Then there exists $\rho_4>0$ such that no exact lifted $4$-point circuit
+contained in $P_0$ has $x$-diameter $<\rho_4$.
+\end{corollary}
+
+\begin{proof}
+Otherwise there would exist a sequence of exact lifted $4$-point circuits in
+$P_0$ with diameters tending to $0$. By compactness, after passing to a
+subsequence the four nodes would converge to some $x_*\in x(P_0)$. This
+contradicts
+Proposition~\ref{prop:shrinking-exact-lifted-four-point-circuits-force-Tv-zero}.
+\end{proof}
+
+\begin{definition}[Repeated-node tangent-contact determinants on a $v_5$-patch]
+\label{def:repeated-node-tangent-contact-determinants-vpatch}
+On a $v_5\neq 0$ patch with $x=v_5/c$, $Y=u_5/c$, and
+$S=\Delta_7/(c\,v_5)$, define
+\[
+H_3(a,u):=
+\det\!\begin{pmatrix}
+1&a&S(a)\\
+0&1&S'(a)\\
+1&u&S(u)
+\end{pmatrix}
+=
+S(u)-S(a)-S'(a)(u-a),
+\]
+and
+\[
+H_4(a,u,v):=
+\det\!\begin{pmatrix}
+1&Y(a)&a&S(a)\\
+0&Y'(a)&1&S'(a)\\
+1&Y(u)&u&S(u)\\
+1&Y(v)&v&S(v)
+\end{pmatrix}.
+\]
+Thus $H_3(a,u)=0$ means that $(u,S(u))$ lies on the tangent line to
+$\Lambda_v$ at $a$, while $H_4(a,u,v)=0$ means that $Q_v(u)$ and
+$Q_v(v)$ lie in the tangent plane to $Q_v$ at $a$.
+\end{definition}
+
+\begin{proposition}[Repeated-node limits of exact lifted determinants]
+\label{prop:repeated-node-limits-of-exact-lifted-determinants}
+For the exact lifted determinants
+\[
+\Delta_3(a,b,u):=
+\det\!\begin{pmatrix}
+1&a&S(a)\\
+1&b&S(b)\\
+1&u&S(u)
+\end{pmatrix},
+\]
+and
+\[
+\Delta_4(a,b,u,v):=
+\det\!\begin{pmatrix}
+1&Y(a)&a&S(a)\\
+1&Y(b)&b&S(b)\\
+1&Y(u)&u&S(u)\\
+1&Y(v)&v&S(v)
+\end{pmatrix},
+\]
+one has
+\[
+\frac{\Delta_3(a,b,u)}{b-a}\longrightarrow H_3(a,u)
+\qquad (b\to a),
+\]
+and
+\[
+\frac{\Delta_4(a,b,u,v)}{b-a}\longrightarrow H_4(a,u,v)
+\qquad (b\to a).
+\]
+\end{proposition}
+
+\begin{proof}
+Subtract the first row from the second row in each determinant and divide by
+$b-a$. The resulting second row is the first difference quotient of the
+corresponding row entries, and the limit $b\to a$ gives the derivative row.
+\end{proof}
+
+\begin{theorem}[Local classification of the lifted $3$-point branch near a finite-order $K_v$-zero]
+\label{thm:local-classification-lifted-three-point-branch-near-Kv-zero}
+Let $x=0$ be an isolated finite-order zero of $K_v$ on a good $v_5$-patch.
+After affine normalization of $\Lambda_v=(x,S)$, write
+\[
+S(x)=x^m+O(x^{m+1}),
+\qquad
+m=r+2\ge 3,
+\]
+where $r=\operatorname{ord}_0 K_v$. Then the repeated-node tangent-contact equation
+\[
+H_3(a,u)=0
+\]
+with $a<0<u$ has the following local classification:
+\begin{enumerate}
+\item if $r$ is even (equivalently $m$ is even), there is no
+opposite-side tangent-contact branch near $(a,u)=(0,0)$;
+\item if $r$ is odd (equivalently $m$ is odd), there exists a unique
+real-analytic opposite-side branch
+\[
+u=\Upsilon(a),
+\qquad
+a<0,\quad |a|\ll 1,
+\]
+with asymptotic expansion
+\[
+\Upsilon(a)=\lambda_m(-a)+O(a^2),
+\]
+where $\lambda_m>1$ is the unique positive root of
+\[
+P_m(\lambda):=\lambda^m-m\lambda-(m-1).
+\]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Set $a=-\alpha$ with $\alpha>0$, and write $u=\lambda\alpha$ with
+$\lambda>0$. For the model germ $S(x)=x^m$, the tangent-contact equation is
+\[
+H_3(-\alpha,\lambda\alpha)
+=
+\alpha^m
+\begin{cases}
+\lambda^m+m\lambda+(m-1),& m\ \text{even},\\[0.5ex]
+\lambda^m-m\lambda-(m-1),& m\ \text{odd}.
+\end{cases}
+\]
+If $m$ is even, the displayed factor is strictly positive for every
+$\lambda>0$, so no opposite-side branch exists.
+
+If $m$ is odd, define
+\[
+P_m(\lambda):=\lambda^m-m\lambda-(m-1).
+\]
+Then
+\[
+P_m(1)=-2(m-1)<0,
+\qquad
+P_m(\lambda)\to+\infty\ \text{as }\lambda\to+\infty,
+\]
+and
+\[
+P_m'(\lambda)=m(\lambda^{m-1}-1)
+\]
+is negative on $(0,1)$ and positive on $(1,\infty)$. Therefore $P_m$
+has a unique positive root $\lambda_m>1$.
+
+For the perturbed germ $S(x)=x^m+O(x^{m+1})$, divide $H_3(-\alpha,\lambda\alpha)$
+by $\alpha^m$. The resulting equation is
+\[
+P_m(\lambda)+O(\alpha)=0.
+\]
+If $m$ is even, positivity of the model factor persists for $\alpha$ small,
+so there is still no branch. If $m$ is odd, the root $\lambda_m$ is simple,
+so the implicit function theorem yields a unique analytic branch
+\[
+\lambda=\lambda(\alpha)=\lambda_m+O(\alpha),
+\]
+equivalently
+\[
+u=\lambda_m(-a)+O(a^2).
+\]
+This proves the classification.
+\end{proof}
+
+\begin{remark}[Nonmixed $4$-point zeros can carry preexisting close branches]
+\label{rem:nonmixed-four-point-zeros-can-carry-preexisting-branches}
+A blanket local theorem excluding preexisting close $4$-point branches near
+nonmixed finite-order $T_v$-zeros is false in generic lifted geometry.
+Indeed, the model
+\[
+Q(x)=(x^4,x,x^2)
+\]
+satisfies
+\[
+K_v\neq 0,
+\qquad
+T_v\sim x,
+\]
+yet the exact coplanarity determinant is the generalized Vandermonde for
+exponents
+\[
+0,\ 1,\ 2,\ 4,
+\]
+hence factors as
+\[
+\Delta_4=\pm V_4\,e_1,
+\qquad
+e_1(x_1,x_2,x_3,x_4)=x_1+x_2+x_3+x_4.
+\]
+Thus there are exact shrinking coplanar quadruples near $0$, for example any
+distinct
+\[
+x_1<x_2<x_3<0<x_4,
+\qquad
+x_1+x_2+x_3+x_4=0.
+\]
+So on the lifted $4$-point side, the strongest generic local statements are
+the shrinking-core concentration into $\{T_v=0\}$, the parity-based
+birth/crossing classification, and the mixed-locus analysis, not a blanket
+no-preexisting-branch theorem.
+\end{remark}
+
+\begin{remark}[Work in progress: interaction defects and global branch control for the lifted order-$7$ geometry]
 \label{rem:wip-lifted-order7-zero-capture}
 The results above isolate the correct local one-pair obstructions for the
 finite-core endgame, but two ingredients are still open.
@@ -9562,12 +10098,17 @@ the defect terms
 E_{\ge2}^{(3)},\qquad E_{\ge2}^{(5)},\qquad \overline E_{\ge2}^{(7)}.
 \]
 
-Second, Corollaries~\ref{cor:local-three-point-exclusion-lifted-vpatch}
-and~\ref{cor:local-four-point-exclusion-lifted-vpatch} are local ECT
-consequences on subintervals where the new lifted determinants $K_v$ and
-$T_v$ keep fixed nonzero sign. To globalize these exclusions one still needs
-a zero-capture / first-contact theorem for the lifted order-$7$ geometry,
-parallel to the turning-boundary zero-capture work elsewhere in the draft.
+Second, the lifted local analysis now gives exact shrinking-core concentration
+into the zero sets of $K_v$ and $T_v$, together with uniform
+small-diameter exclusion away from those zero sets. What is still missing is
+not a blanket zero-capture theorem near nonmixed zeros: generic lifted
+geometry already allows preexisting close branches near certain odd-order
+nonmixed zeros. The real missing input is a branch-continuation /
+non-recurrence theorem for the nonmixed lifted branches, together with the
+analysis of the mixed codimension-two locus
+\[
+K_v=T_v=0.
+\]
 
 The same discussion has a parallel $u_5\neq 0$ version obtained from the
 local gauge $u_7=0$, but the $v_5\neq 0$ patch is the natural first
@@ -9577,21 +10118,25 @@ the one-pair planar geometry.
 
 \begin{remark}[Work in progress: stratified lifted local picture]
 \label{rem:wip-stratified-lifted-local-picture}
-The lifted local obstruction now appears to split into three regimes.
+The lifted local obstruction now splits into three regimes.
 
-First, finite-order isolated zeros of $K_v$ should be locally sterile for
-lifted $3$-point birth on $v_5\neq 0$ patches, by the same
-first-contact / divided-difference mechanism as in the finite-order
-$W=0$ theorem.
-
-Second, finite-order isolated zeros of $T_v$ with $K_v\neq 0$ should be
-locally sterile for lifted $4$-point birth, since on such patches the lower
-triple
+First, exact shrinking lifted $3$-point circuits concentrate into
 \[
-1,\qquad \frac{v_5}{c},\qquad \frac{\Delta_7}{c\,v_5}
+K_v=0,
 \]
-is already an ECT system and the order-$4$ problem reduces to the next
-disconjugate layer.
+and near a finite-order isolated $K_v$-zero the repeated-node
+tangent-contact branch is completely classified: even order gives no
+opposite-side branch, while odd order gives exactly one opposite-side branch.
+
+Second, exact shrinking lifted $4$-point circuits concentrate into
+\[
+T_v=0.
+\]
+On the nonmixed side $K_v\neq 0$, finite-order $T_v$-zeros control local
+birth/crossing by parity, but generic models show that a preexisting close
+branch can still exist near certain odd-order nonmixed zeros. Thus the
+nonmixed $4$-point side is not governed by a blanket local-exclusion
+theorem.
 
 Third, the mixed case
 \[
@@ -9611,11 +10156,12 @@ Vandermonde for exponents
 0,\ 1,\ m,\ n.
 \]
 For some exponent patterns this model does admit opposite-side quadruples, so
-no blanket mixed local-sterility theorem should be expected.
+the mixed locus remains the genuinely new codimension-two local obstruction.
 
-Thus the remaining lifted local obstruction is concentrated in the mixed
-codimension-two case, together with possible infinite-order flatness and the
-global recurrence / re-entry problem.
+Thus the remaining lifted local issues are:
+the continuation / non-recurrence of the unique odd-order $3$-point branch,
+the continuation / non-recurrence of nonmixed $4$-point branches, possible
+infinite-order flatness, and the mixed codimension-two locus.
 \end{remark}
 
 \begin{remark}[Current geometric bottleneck]
@@ -9638,9 +10184,16 @@ K_v
 \qquad\text{and}\qquad
 T_v
 \]
-play the analogous role for defect-free three-point and four-point branches on
-$v_5\neq 0$ patches; the missing global ingredient there is likewise a
-zero-capture theorem.
+govern shrinking exact lifted $3$- and $4$-point circuits on
+$v_5\neq 0$ patches: exact shrinking $3$-point circuits concentrate into
+$\{K_v=0\}$, and exact shrinking $4$-point circuits concentrate into
+$\{T_v=0\}$, with uniform small-diameter exclusion away from those zero
+sets. Near finite-order isolated $K_v$-zeros, the $3$-point branch is
+completely classified by parity; on the $4$-point side, however, generic
+nonmixed odd-order $T_v$-zeros can still carry preexisting close branches.
+So the missing lifted ingredient is not a blanket zero-capture theorem, but a
+global branch-continuation / non-recurrence theorem for the nonmixed lifted
+branches, together with the analysis of the mixed locus $K_v=T_v=0$.
 
 What remains is a genuinely global propagation / recurrence problem for
 tangent-slope and tangent-line data. More precisely, the missing theorem is
@@ -9726,19 +10279,29 @@ no-reentry theorem for the scalar graph
 m^{[1]}=\phi-\mu\phi_\mu.
 \]
 
-In parallel, the finite-core endgame now splits into a global bridge and a
-local lifted problem. On the global side, the two-pair algebra forces
-quantitative near-coincidence of the strengthened invariant $\widehat\Psi$,
-and on good $M\neq 0$ patches this forces bad two-pair cores into a
-defect-scale close regime. On the local side, what remains is to extract the
-multi-pair interaction defects
+In parallel, the finite-core endgame now splits into a global bridge, a
+two-point algebraic branch, and a lifted $3/4$-point branch. On the global
+side, the two-pair algebra forces quantitative near-coincidence of the
+strengthened invariant $\widehat\Psi$, and on good $M\neq 0$ patches this
+forces bad two-pair cores into a defect-scale close regime. For the two-point
+branch, the sharp remaining algebraic target is the source-level structural
+reduction of the raw corrected interaction remainder: if the corrected
+two-pair object is defined source-level and collapses on coincident atoms,
+then the normalized defects are $O(|h_1-h_2|^2)$ and the two-point branch
+is excluded on compact good patches.
+
+On the lifted side, exact shrinking $3$- and $4$-point circuits now
+concentrate into the zero sets of $K_v$ and $T_v$, respectively, with
+uniform small-diameter exclusion away from those zero sets. Near finite-order
+isolated $K_v$-zeros, the $3$-point branch is completely classified by
+parity. On the $4$-point side, finite-order sterility controls local
+birth/crossing, but generic nonmixed odd-order zeros can still carry a
+preexisting close branch. Thus the remaining lifted local issues are the
+global continuation / non-recurrence of the nonmixed branches, possible
+infinite-order flatness, and the mixed codimension-two locus
 \[
-E_{\ge2}^{(3)},\qquad E_{\ge2}^{(5)},\qquad \overline E_{\ge2}^{(7)},
+K_v=T_v=0.
 \]
-and to prove the required zero-capture / first-contact statements for the
-lifted order-$7$ determinants $K_v$ and $T_v$ on $v_5\neq 0$ patches,
-with the mixed case $K_v=T_v=0$ isolated as the genuine codimension-two
-local obstruction.
 \end{remark}
 
 \section{Endgame architecture and remaining global propagation problem}
