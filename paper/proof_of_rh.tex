@@ -4679,36 +4679,35 @@ $\Gamma(s_*)$ and $\Gamma(t_*)$; that is, it is a common tangent line.
 \begin{proposition}[Adjacent slope-range separation]
 \label{prop:adjacent-slope-range-separation}
 Let $I_1<I_2$ be adjacent ECT intervals, meeting at a boundary point $h_b$.
-Assume one of the following boundary hypotheses holds:
 
 \begin{enumerate}
-\item $W(h_b)=0$, $M(h_b)\neq 0$, the slope
+\item If
 \[
-m(h):=\frac{N(h)}{M(h)}
+M(h_b)=0,\qquad M'(h_b)\neq 0,\qquad N(h_b)\neq 0,
 \]
-extends continuously across $h_b$, and $W$ changes sign across $h_b$;
+then the interior tangent-slope ranges of $I_1$ and $I_2$ are disjoint.
 
-\item $M(h_b)=0$, $M'(h_b)\neq 0$, and $N(h_b)\neq 0$.
+\item If
+\[
+W(h_b)=0,\qquad M(h_b)\neq 0,
+\]
+then $x=v_5/c$ remains a valid local parameter, but no adjacent tangent
+separation statement is asserted here. In that case the local affine jet is
+governed by
+\[
+\left.\frac{d^2y}{dx^2}\right|_{h_b}=0,
+\qquad
+\left.\frac{d^3y}{dx^3}\right|_{h_b}
+=
+\frac{c(h_b)^5}{M(h_b)^4}W'(h_b),
+\]
+so the generic behavior is an ordinary affine inflection unless further
+special structure forces $W'(h_b)=0$.
 \end{enumerate}
-
-Then the interior tangent-slope ranges of $I_1$ and $I_2$ are disjoint; in
-particular, adjacent ECT intervals cannot share an interior common tangent
-slope.
 \end{proposition}
 
 \begin{proof}
-In case (1), one has
-\[
-m'(h)=\frac{W(h)}{M(h)^2}.
-\]
-Since $M(h_b)\neq 0$, the slope $m$ is continuous at $h_b$. Because $W$
-changes sign across $h_b$, the one-sided restrictions of $m$ are monotone
-with opposite monotonicity, and the common boundary value $m(h_b)$ is an
-endpoint extremum on each side. Hence the interior slope ranges on $I_1$ and
-$I_2$ meet at most at the boundary endpoint value, so their interiors are
-disjoint.
-
-In case (2), $M(h_b)=0$ is a simple zero and $N(h_b)\neq 0$. Therefore
+In case (1), $M(h_b)=0$ is a simple zero and $N(h_b)\neq 0$. Therefore
 \[
 m(h)=\frac{N(h)}{M(h)}
 \]
@@ -4716,68 +4715,37 @@ has opposite one-sided blow-up:
 \[
 m(h)\to \pm\infty
 \]
-as $h\to h_b^\pm$. Hence the one-sided slope ranges are disjoint.
+as $h\to h_b^\pm$. Hence the interior tangent-slope ranges on the two sides
+are disjoint.
+
+Case (2) is the local affine-jet computation recorded in
+Remark~\ref{rem:w0-inflection-obstruction}; it identifies the cubic-inflection
+coefficient but does not produce a tangent-separation theorem.
 \end{proof}
 
-\begin{lemma}[Endpoint tangent exclusion at an adjacent generic boundary]
+\begin{lemma}[Endpoint tangent exclusion at a generic turning boundary]
 \label{lem:endpoint-tangent-exclusion}
 Let $I_1<I_2$ be adjacent ECT intervals meeting at a boundary point $h_b$,
-and assume one of the boundary hypotheses of
-Proposition~\ref{prop:adjacent-slope-range-separation} holds.
-
-Then the boundary tangent line at $\Gamma(h_b)$ meets neither adjacent
-interval in its interior.
-
-More precisely:
-
-\begin{enumerate}
-\item if $W(h_b)=0$, $M(h_b)\neq 0$, and
+and assume
 \[
-m(h):=\frac{N(h)}{M(h)}
+M(h_b)=0,\qquad M'(h_b)\neq 0,\qquad N(h_b)\neq 0.
 \]
-extends continuously across $h_b$, then the affine tangent line of slope
-$m(h_b)$ at $\Gamma(h_b)$ does not meet the interior of $I_1$ or $I_2$;
-
-\item if $M(h_b)=0$, $M'(h_b)\neq 0$, and $N(h_b)\neq 0$, then the
-boundary tangent line is vertical and meets neither adjacent interval in its
-interior.
-\end{enumerate}
+Then the boundary tangent line at $\Gamma(h_b)$ is vertical and meets
+neither adjacent interval in its interior.
 \end{lemma}
 
 \begin{proof}
-In case (1), put
+The boundary tangent line is
 \[
-m_b:=m(h_b),
+x=\rho_1(h_b),
 \qquad
-\phi_b(h):=\rho_2(h)-m_b\,\rho_1(h),
+\rho_1(h)=\frac{v_5(h)}{c(h)}.
 \]
-where
+Since $M(h_b)=0$ is a simple zero,
 \[
-\rho_1(h)=\frac{v_5(h)}{c(h)},
-\qquad
-\rho_2(h)=\frac{\Delta_7(h)}{c(h)}.
+\rho_1'(h_b)=0,\qquad \rho_1''(h_b)\neq 0,
 \]
-Then
-\[
-\phi_b'(h)=\rho_1'(h)\bigl(m(h)-m_b\bigr).
-\]
-On each adjacent interval, $\rho_1'$ has fixed sign because $M\neq 0$, and
-$m(h)-m_b$ has fixed sign because $m$ is strictly monotone there and
-$m_b$ is the boundary endpoint value. Hence $\phi_b$ is strictly monotone
-on each adjacent interval. The boundary tangent line is exactly the level set
-\[
-\phi_b(h)=\phi_b(h_b),
-\]
-so that level can be attained only at the boundary point itself, never in the
-interior of $I_1$ or $I_2$.
-
-In case (2), the tangent line is vertical:
-\[
-x=\rho_1(h_b).
-\]
-Since $M(h_b)=0$ is a simple zero, $\rho_1'(h_b)=0$ and
-$\rho_1''(h_b)\neq 0$, so $\rho_1$ has a strict local extremum at
-$h_b$. Therefore
+so $\rho_1$ has a strict local extremum at $h_b$. Therefore
 \[
 \rho_1(h)-\rho_1(h_b)
 \]
@@ -4786,11 +4754,14 @@ point. Hence the vertical tangent line meets neither adjacent interval in its
 interior.
 \end{proof}
 
-\begin{theorem}[Adjacent tangent-separator sign regularity under generic boundary hypotheses]
+\begin{theorem}[Adjacent tangent-separator sign regularity across turning boundaries]
 \label{thm:adjacent-tangent-separator-sign-regularity}
 Let $I_1<I_2$ be adjacent ECT intervals, and assume their common boundary
-point $h_b$ satisfies one of the generic boundary hypotheses of
-Proposition~\ref{prop:adjacent-slope-range-separation}. Then
+point $h_b$ is a generic turning boundary:
+\[
+M(h_b)=0,\qquad M'(h_b)\neq 0,\qquad N(h_b)\neq 0.
+\]
+Then
 \[
 K(s,t)\neq 0
 \qquad
@@ -4803,14 +4774,14 @@ K(s,t)=\det(F(s),F'(s),F(t)),
 F(h)=(c(h),v_5(h),\Delta_7(h)).
 \]
 Equivalently, tangent lines from the right interval do not meet the adjacent
-left interval.
+left interval across a generic turning boundary.
 \end{theorem}
 
 \begin{proof}
-By Lemma~\ref{lem:endpoint-tangent-exclusion}, there is a neighborhood of the
-boundary pair on which $K(s,t)\neq 0$ for $s\in I_2$, $t\in I_1$. Assume
-for contradiction that some zero $(s_0,t_0)\in I_2\times I_1$ exists. Choose
-compact subintervals
+By Lemma~\ref{lem:endpoint-tangent-exclusion}, for a generic turning boundary
+there is a neighborhood of the boundary pair on which $K(s,t)\neq 0$ for
+$s\in I_2$, $t\in I_1$. Assume for contradiction that some zero
+$(s_0,t_0)\in I_2\times I_1$ exists. Choose compact subintervals
 \[
 J_1\Subset I_1,\qquad J_2\Subset I_2
 \]
@@ -4829,16 +4800,10 @@ K(s_*,t_*)=0,
 \]
 so the tangent line at $\Gamma(s_*)$ is also tangent at $\Gamma(t_*)$.
 
-If both tangencies are interior tangencies, then the adjacent intervals share a
-common interior tangent slope, contradicting
-Proposition~\ref{prop:adjacent-slope-range-separation}.
-
-If one tangency occurs at the boundary endpoint slope, this contradicts
-Lemma~\ref{lem:endpoint-tangent-exclusion}, which rules out interior
-intersections with the boundary tangent line on the adjacent interval.
-
-Thus both possibilities are impossible, so no such zero $(s,t)$ exists.
-Hence
+Across a generic turning boundary, Proposition~\ref{prop:adjacent-slope-range-separation}
+shows that the interior tangent-slope ranges of the two adjacent intervals are
+disjoint. Hence no common interior tangent slope can occur. This contradicts
+the existence of $(s_*,t_*)$. Therefore no such zero exists, and
 \[
 K(s,t)\neq 0
 \qquad
@@ -4847,30 +4812,49 @@ K(s,t)\neq 0
 \]
 \end{proof}
 
-\begin{remark}[Failure of the tangent-separator route at generic $W=0$ boundaries]
+\begin{remark}[The $W=0$ obstruction and the cubic-inflection coefficient]
 \label{rem:w0-inflection-obstruction}
-The preceding adjacent tangent-separator argument is robust at generic turning
-boundaries
+Let
 \[
-M(h_b)=0,\qquad M'(h_b)\neq 0,\qquad N(h_b)\neq 0,
+x(h):=\frac{v_5(h)}{c(h)},
+\qquad
+y(h):=\frac{\Delta_7(h)}{c(h)}.
 \]
-but does not automatically extend across generic boundaries of type
+At a boundary point $h_b$ with
 \[
-W(h_b)=0,\qquad M(h_b)\neq 0.
+W(h_b)=0,\qquad M(h_b)\neq 0,
 \]
-In the affine chart
+the coordinate $x$ remains a valid local parameter. Since
 \[
-x=\frac{v_5}{c},\qquad y=\frac{\Delta_7}{c},
+\frac{d^2y}{dx^2}=\frac{c(h)^3W(h)}{M(h)^3},
 \]
-such a boundary is generically modeled by an ordinary affine inflection
+one has
 \[
-y=ax^3+O(x^4),\qquad a\neq 0,
+\left.\frac{d^2y}{dx^2}\right|_{h_b}=0.
 \]
-and the tangent line at a point $x=s$ on one side of the inflection meets the
-opposite side again at $x=-2s$ in the cubic model. Thus adjacent
-tangent-separator sign regularity, and hence the global no-secant theorem, are
-not presently justified across generic $W=0$, $M\neq 0$ boundaries without
-additional special structure of the actual triple $(c,v_5,\Delta_7)$.
+Differentiating once more with respect to $x$ gives
+\[
+\left.\frac{d^3y}{dx^3}\right|_{h_b}
+=
+\frac{c(h_b)^5}{M(h_b)^4}W'(h_b).
+\]
+Hence, after translating the point to the origin and subtracting the tangent
+line, the normalized curve has local expansion
+\[
+y
+=
+\frac{c(h_b)^5W'(h_b)}{6M(h_b)^4}\,x^3+O(x^4).
+\]
+
+Therefore a generic $W=0,\ M\neq 0$ boundary is an ordinary affine inflection
+unless additional special structure forces
+\[
+W'(h_b)=0.
+\]
+In particular, the tangent-separator route is not presently justified across
+such boundaries, and the real remaining geometric question is whether the
+actual triple $(c,v_5,\Delta_7)$ imposes any non-generic vanishing of
+$W'(h_b)$.
 \end{remark}
 
 \begin{lemma}[Fixed-slope intercept sets for a strictly convex ECT branch]
@@ -5050,16 +5034,12 @@ slope $m$ for which both are nonempty, and the side ordering is constant on
 the adjacent pair.
 \end{proof}
 
-\begin{theorem}[Partial global no-secant theorem away from $W=0$ boundaries]
+\begin{theorem}[Partial global no-secant theorem on turning-boundary generic blocks]
 \label{thm:partial-global-no-secant}
 Assume every adjacent pair of ECT intervals is separated by a generic turning
 boundary
 \[
-M(h_b)=0,\qquad M'(h_b)\neq 0,\qquad N(h_b)\neq 0,
-\]
-and that no adjacent pair is separated by a boundary of type
-\[
-W(h_b)=0,\qquad M(h_b)\neq 0.
+M(h_b)=0,\qquad M'(h_b)\neq 0,\qquad N(h_b)\neq 0.
 \]
 Then no affine line in the chart
 \[
@@ -5068,33 +5048,34 @@ x=\frac{v_5}{c},
 y=\frac{\Delta_7}{c}
 \]
 is $2$-secant to two distinct ECT intervals. In particular, there is no
-global four-secant line for the normalized planar curve $\Gamma(h)$.
+global four-secant line for the normalized planar curve $\Gamma(h)$ on such
+a turning-boundary generic block.
 \end{theorem}
 
 \begin{proof}
-Under the stated hypotheses, every adjacent boundary is of turning-point type.
+Under the stated hypotheses, every adjacent boundary is of turning type.
 For such adjacent pairs,
 Theorem~\ref{thm:adjacent-tangent-separator-sign-regularity} and
-Lemma~\ref{lem:adjacent-support-ordering} apply without encountering the
-generic $W=0$ inflection obstruction. Hence adjacent fixed-slope intercept
-sets are strictly ordered. Iterating this ordering over the $x=v_5/c$
-ordering of ECT intervals shows that no affine line can be $2$-secant to two
-distinct ECT intervals. Therefore no global four-secant line exists.
+Lemma~\ref{lem:adjacent-support-ordering} apply. Hence adjacent fixed-slope
+intercept sets are strictly ordered. Iterating this ordering over the
+$x=v_5/c$ ordering of ECT intervals shows that no affine line can be
+$2$-secant to two distinct ECT intervals. Therefore no global four-secant
+line exists on the block.
 \end{proof}
 
 \begin{corollary}[Partial exclusion of pair-pair branch configurations]
 \label{cor:pair-pair-exclusion}
 Under the hypotheses of Theorem~\ref{thm:partial-global-no-secant}, a bad
 finite core cannot contain two distinct ECT intervals each contributing a pair
-of points.
+of points on a turning-boundary generic block.
 \end{corollary}
 
 \begin{proof}
 Each ECT interval contributes at most two points to the zero set of an affine
 line in the normalized chart, and by
 Theorem~\ref{thm:partial-global-no-secant} no affine line can be $2$-secant
-to two different ECT intervals. Therefore a pair-pair configuration across two
-distinct ECT intervals is impossible.
+to two different ECT intervals on such a block. Therefore a pair-pair
+configuration across two distinct ECT intervals is impossible there.
 \end{proof}
 
 \begin{remark}[Audit: direct septic witness]
@@ -5125,6 +5106,27 @@ global issue is therefore whether the actual triple $(c,v_5,\Delta_7)$
 satisfies additional jet constraints at $W=0$ boundaries that rule out this
 generic inflection behavior, or whether a different global invariant must be
 used there.
+\end{remark}
+
+\begin{remark}[Audit: $W'(h_b)$ at $W=0,\ M\neq 0$]
+\label{rem:audit-wprime-at-w0}
+At a point $h_b$ with
+\[
+W(h_b)=0,\qquad M(h_b)\neq 0,
+\]
+the cubic-inflection coefficient of the normalized planar curve is proportional
+to
+\[
+W'(h_b).
+\]
+The present fixed-sector architecture does not yet prove that
+\[
+W'(h_b)=0
+\]
+on this boundary locus. Thus the current default expectation is ordinary affine
+inflection behavior unless the full leading coefficient of $W'$ can be shown
+to factor through additional special structure of the triple
+$(c,v_5,\Delta_7)$.
 \end{remark}
 
 \subsection{From the one-pair residual germ to two-pair and minimal-core rigidity}
@@ -5428,8 +5430,7 @@ h\longmapsto \left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right).
 
 \begin{remark}[Current geometric bottleneck]
 \label{rem:current-geometric-bottleneck}
-The remaining generic obstruction is now concentrated at adjacent boundaries of
-type
+The remaining geometric obstruction is now concentrated at boundaries of type
 \[
 W(h_b)=0,\qquad M(h_b)\neq 0.
 \]
@@ -5437,17 +5438,12 @@ At such points, the normalized planar curve
 \[
 \Gamma(h)=\left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right)
 \]
-has the local geometry of a generic affine inflection unless additional special
-structure is proved. In particular, the adjacent tangent-separator route does
-not by itself yield a global no-secant theorem across these boundaries.
-
-The turning-point boundaries
-\[
-M(h_b)=0,\qquad M'(h_b)\neq 0,\qquad N(h_b)\neq 0
-\]
-are substantially better behaved. The remaining audited global issue is
-therefore to understand what extra structure, if any, the actual triple
-$(c,v_5,\Delta_7)$ has at $W=0,\ M\neq 0$ boundaries.
+has cubic coefficient proportional to $W'(h_b)$. The current architecture
+does not yet force $W'(h_b)=0$, so the default local model is an ordinary
+affine inflection. Thus the turning-boundary part of the secant/tangent
+geometry is comparatively well controlled, while the real remaining issue is to
+find a $W=0$-specific replacement theorem or an additional structural
+identity forcing nongeneric affine-jet behavior there.
 \end{remark}
 
 \begin{remark}[Current state of the argument]
@@ -5477,21 +5473,17 @@ c''&v_5''&\Delta_7''
 \]
 
 On intervals where $c$, $M$, and $W$ do not vanish, the triple
-$(c,v_5,\Delta_7)$ is an ECT system. The turning-point boundaries
+$(c,v_5,\Delta_7)$ is an ECT system. The turning-boundary case
 \[
 M=0,\qquad M'\neq 0,\qquad N\neq 0
 \]
-are comparatively well behaved. The remaining nonlocal geometric issue is the
-behavior of $\Gamma$ across boundaries of type
-\[
-W=0,\qquad M\neq 0,
-\]
-where generic inflection geometry shows that the tangent-separator route does
-not close without additional special structure. The remaining audited issues
-are therefore both local and global: first-order surjectivity, the quintic
-pure-value quotient detector, the completion of the order-$7$ fixed-sector
-algebra, and the special affine-jet structure of $\Gamma$ at $W=0$
-boundaries.
+is comparatively well behaved. The remaining nonlocal geometric issue is the
+$W=0,\ M\neq 0$ case, where the cubic-inflection coefficient is controlled by
+$W'(h_b)$ and the current architecture does not yet force nongeneric
+vanishing. The remaining audited issues are therefore both local and global:
+first-order surjectivity, the quintic pure-value quotient detector, the
+completion of the order-$7$ fixed-sector algebra, and the special
+$W=0$-boundary structure of the actual triple $(c,v_5,\Delta_7)$.
 \end{remark}
 
 \section{Final contradiction}
