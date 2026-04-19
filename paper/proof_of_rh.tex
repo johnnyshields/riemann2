@@ -8593,24 +8593,269 @@ Since also $c(h_1)=\lambda c(h_2)$, it follows that
 Thus $\widehat\Psi(h_1)=\widehat\Psi(h_2)$.
 \end{proof}
 
+\begin{theorem}[Quantitative defect-thickened strengthened coincidence]
+\label{thm:quantitative-defect-thickened-strengthened-coincidence}
+Let $(a_1,h_1;a_2,h_2)$ be a normalized bad two-pair core, and write
+\[
+c_i:=c(h_i),
+\qquad
+A_{5,i}^{\mathfrak f}:=A_5^{\mathfrak f}(h_i)=u_{5,i}I+v_{5,i}S,
+\qquad
+\Delta_i:=\Delta_7(h_i).
+\]
+Assume
+\[
+a_1\neq 0,
+\qquad
+c_1c_2\neq 0.
+\]
+Suppose the cubic, quintic, and septic quotient defects are written as
+\[
+a_1c_1+a_2c_2+E_{12}^{(3)}=0,
+\]
+\[
+a_1A_{5,1}^{\mathfrak f}+a_2A_{5,2}^{\mathfrak f}+E_{12}^{(5)}=0,
+\]
+and
+\[
+a_1[A_{7,1}^{\mathfrak f}]+a_2[A_{7,2}^{\mathfrak f}]
++\overline E_{12}^{(7;1)}=0
+\qquad\text{in}\qquad
+\mathfrak f/\mathbf C A_{5,1}^{\mathfrak f}.
+\]
+Set
+\[
+\lambda:=-\frac{a_2}{a_1},
+\qquad
+e:=\frac{E_{12}^{(3)}}{a_1},
+\qquad
+E:=\frac{E_{12}^{(5)}}{a_1}=e_u I+e_v S.
+\]
+Choose any representative $R\in\mathfrak f$ of the quotient class
+\[
+-\frac{1}{a_1}\,\overline E_{12}^{(7;1)},
+\]
+so that
+\[
+A_{7,1}^{\mathfrak f}
+=
+\lambda A_{7,2}^{\mathfrak f}
++
+R
++
+\eta A_{5,1}^{\mathfrak f}
+\]
+for some $\eta\in\mathbf C$. Then the strengthened invariant
+\[
+\widehat\Psi(h)=
+\left(
+\frac{u_5(h)}{c(h)},
+\frac{v_5(h)}{c(h)},
+\frac{\Delta_7(h)}{c(h)^2}
+\right)
+\]
+satisfies the exact identities
+\[
+\frac{u_{5,1}}{c_1}-\frac{u_{5,2}}{c_2}
+=
+\frac{u_{5,2}e-c_2e_u}{c_1c_2},
+\]
+\[
+\frac{v_{5,1}}{c_1}-\frac{v_{5,2}}{c_2}
+=
+\frac{v_{5,2}e-c_2e_v}{c_1c_2},
+\]
+and
+\[
+\frac{\Delta_1}{c_1^2}-\frac{\Delta_2}{c_2^2}
+=
+\frac{
+-\lambda c_2^2\det(A_{7,2}^{\mathfrak f},E)
++
+c_2^2\det(R,A_{5,1}^{\mathfrak f})
++
+\Delta_2(2\lambda c_2 e-e^2)
+}{c_1^2c_2^2}.
+\]
+\end{theorem}
+
+\begin{proof}
+The cubic defect identity gives
+\[
+c_1=\lambda c_2-e.
+\]
+The quintic defect identity gives
+\[
+A_{5,1}^{\mathfrak f}=\lambda A_{5,2}^{\mathfrak f}-E,
+\]
+hence
+\[
+u_{5,1}=\lambda u_{5,2}-e_u,
+\qquad
+v_{5,1}=\lambda v_{5,2}-e_v.
+\]
+Therefore
+\[
+\frac{u_{5,1}}{c_1}-\frac{u_{5,2}}{c_2}
+=
+\frac{u_{5,1}c_2-u_{5,2}c_1}{c_1c_2}
+=
+\frac{(\lambda u_{5,2}-e_u)c_2-u_{5,2}(\lambda c_2-e)}{c_1c_2}
+=
+\frac{u_{5,2}e-c_2e_u}{c_1c_2},
+\]
+and similarly
+\[
+\frac{v_{5,1}}{c_1}-\frac{v_{5,2}}{c_2}
+=
+\frac{v_{5,2}e-c_2e_v}{c_1c_2}.
+\]
+
+For the third coordinate, by the choice of $R$ we have
+\[
+A_{7,1}^{\mathfrak f}
+=
+\lambda A_{7,2}^{\mathfrak f}
++
+R
++
+\eta A_{5,1}^{\mathfrak f}
+\]
+for some $\eta\in\mathbf C$. Using
+\[
+\Delta_i=\det(A_{7,i}^{\mathfrak f},A_{5,i}^{\mathfrak f}),
+\]
+we obtain
+\[
+\Delta_1
+=
+\det(A_{7,1}^{\mathfrak f},A_{5,1}^{\mathfrak f})
+=
+\lambda\det(A_{7,2}^{\mathfrak f},A_{5,1}^{\mathfrak f})
++
+\det(R,A_{5,1}^{\mathfrak f}),
+\]
+since the $\eta A_{5,1}^{\mathfrak f}$ term drops out. Substituting
+\[
+A_{5,1}^{\mathfrak f}=\lambda A_{5,2}^{\mathfrak f}-E
+\]
+gives
+\[
+\det(A_{7,2}^{\mathfrak f},A_{5,1}^{\mathfrak f})
+=
+\lambda\Delta_2-\det(A_{7,2}^{\mathfrak f},E),
+\]
+hence
+\[
+\Delta_1-\lambda^2\Delta_2
+=
+-\lambda\det(A_{7,2}^{\mathfrak f},E)
++
+\det(R,A_{5,1}^{\mathfrak f}).
+\]
+
+Also,
+\[
+c_1=\lambda c_2-e
+\]
+implies
+\[
+\lambda^2c_2^2-c_1^2=2\lambda c_2 e-e^2.
+\]
+Therefore
+\[
+\frac{\Delta_1}{c_1^2}-\frac{\Delta_2}{c_2^2}
+=
+\frac{c_2^2\Delta_1-c_1^2\Delta_2}{c_1^2c_2^2}
+=
+\frac{
+c_2^2(\Delta_1-\lambda^2\Delta_2)+\Delta_2(\lambda^2c_2^2-c_1^2)
+}{c_1^2c_2^2},
+\]
+which is exactly the claimed formula.
+
+Finally, the expression
+\[
+\det(R,A_{5,1}^{\mathfrak f})
+\]
+is independent of the chosen representative of the quotient defect, since
+replacing $R$ by $R+\xi A_{5,1}^{\mathfrak f}$ does not change the
+determinant.
+\end{proof}
+
+\begin{corollary}[Bad two-pair cores are defect-scale close on good $M\neq 0$ patches]
+\label{cor:bad-two-pair-cores-defect-scale-close}
+Let $J\Subset\{c\neq 0,\ M\neq 0\}$ be a compact interval. Assume
+\[
+|a_1|\ge a_*>0
+\]
+for the normalized bad two-pair core under consideration. Then there exists a
+constant $C_J>0$ such that whenever $h_1,h_2\in J$,
+\[
+|h_1-h_2|
+\le
+C_J\Bigl(|E_{12}^{(3)}|+\|E_{12}^{(5)}\|\Bigr).
+\]
+In particular, on good $M\neq 0$ patches, bad two-pair cores force the two
+parameters to be quantitatively close once the cubic/quintic interaction
+defects are small.
+\end{corollary}
+
+\begin{proof}
+The second coordinate of $\widehat\Psi$ is
+\[
+x(h):=\frac{v_5(h)}{c(h)},
+\qquad
+x'(h)=\frac{M(h)}{c(h)^2}.
+\]
+Since $J\Subset\{c\neq 0,\ M\neq 0\}$, there exists $\eta_J>0$ such that
+\[
+|x(h_1)-x(h_2)|\ge \eta_J\,|h_1-h_2|
+\qquad
+(h_1,h_2\in J).
+\]
+On the other hand, Theorem~\ref{thm:quantitative-defect-thickened-strengthened-coincidence}
+gives the exact identity
+\[
+x(h_1)-x(h_2)
+=
+\frac{v_{5,2}e-c_2e_v}{c_1c_2},
+\]
+with
+\[
+e=\frac{E_{12}^{(3)}}{a_1},
+\qquad
+e_v=\text{$S$-coefficient of } \frac{E_{12}^{(5)}}{a_1}.
+\]
+Since $J$ is compact and $a_1$ is bounded away from $0$, the right-hand
+side is bounded by
+\[
+C'_J\Bigl(|E_{12}^{(3)}|+\|E_{12}^{(5)}\|\Bigr)
+\]
+for some constant $C'_J$. Combining the two estimates yields the claim.
+\end{proof}
+
 \begin{remark}[What remains in the two-pair rewrite]
 \label{rem:what-remains-two-pair-rewrite}
-Proposition~\ref{prop:exact-strengthened-two-pair-coincidence} is the exact
-defect-free order-$\le 7$ coincidence statement. What remains is to rewrite
-the actual interaction germ $\mathcal I_{12}$ explicitly in the corrected
-finite-order model and extract the corresponding defect terms
+Theorem~\ref{thm:quantitative-defect-thickened-strengthened-coincidence}
+supplies the correct algebraic bridge from the two-pair core to the
+strengthened invariant $\widehat\Psi$. In particular, on good $M\neq 0$
+patches, bad two-pair cores are forced into a defect-scale close regime by
+Corollary~\ref{cor:bad-two-pair-cores-defect-scale-close}.
+
+What remains is to rewrite the actual interaction germ $\mathcal I_{12}$
+explicitly in the corrected finite-order model and control the defect terms
 \[
-E_{12}^{(3)}\in\mathbf C,
+E_{12}^{(3)},
 \qquad
-E_{12}^{(5)}\in\mathfrak f,
+E_{12}^{(5)},
 \qquad
-\overline E_{12}^{(7)}
-\in
-\mathfrak f/\mathbf C A_5^{\mathfrak f}.
+\overline E_{12}^{(7;1)}.
 \]
-Once this is done, the same proof yields a defect-thickened coincidence
-statement for $\widehat\Psi(h)$, replacing the older schematic language of
-the cubic leading line $\ell_h$ and first residual class $\overline v_1(h)$.
+Once that is done, the finite-core endgame splits cleanly into two stages:
+first force bad cores into the close-point regime through
+$\widehat\Psi$, then attack that local regime using the lifted $v_5$-patch
+geometry and the determinants $K_v$ and $T_v$.
 \end{remark}
 
 \begin{remark}[Minimal-core reformulation]
@@ -9268,6 +9513,49 @@ setting because $x=v_5/c$ is already the distinguished ECT coordinate in
 the one-pair planar geometry.
 \end{remark}
 
+\begin{remark}[Work in progress: stratified lifted local picture]
+\label{rem:wip-stratified-lifted-local-picture}
+The lifted local obstruction now appears to split into three regimes.
+
+First, finite-order isolated zeros of $K_v$ should be locally sterile for
+lifted $3$-point birth on $v_5\neq 0$ patches, by the same
+first-contact / divided-difference mechanism as in the finite-order
+$W=0$ theorem.
+
+Second, finite-order isolated zeros of $T_v$ with $K_v\neq 0$ should be
+locally sterile for lifted $4$-point birth, since on such patches the lower
+triple
+\[
+1,\qquad \frac{v_5}{c},\qquad \frac{\Delta_7}{c\,v_5}
+\]
+is already an ECT system and the order-$4$ problem reduces to the next
+disconjugate layer.
+
+Third, the mixed case
+\[
+K_v=T_v=0
+\]
+is genuinely different. After affine normalization with
+\[
+x=\frac{v_5}{c}
+\]
+as local coordinate, the lifted space curve is led to a monomial model
+\[
+Q_v(x)\sim (x^n,x,x^m),
+\]
+and the leading $4$-point coplanarity determinant becomes the generalized
+Vandermonde for exponents
+\[
+0,\ 1,\ m,\ n.
+\]
+For some exponent patterns this model does admit opposite-side quadruples, so
+no blanket mixed local-sterility theorem should be expected.
+
+Thus the remaining lifted local obstruction is concentrated in the mixed
+codimension-two case, together with possible infinite-order flatness and the
+global recurrence / re-entry problem.
+\end{remark}
+
 \begin{remark}[Current geometric bottleneck]
 \label{rem:current-geometric-bottleneck}
 The remaining geometric bottleneck is now split into two layers.
@@ -9376,11 +9664,19 @@ no-reentry theorem for the scalar graph
 m^{[1]}=\phi-\mu\phi_\mu.
 \]
 
-In parallel, the finite-core endgame is now locally reduced to two explicit
-tasks: extracting the multi-pair interaction defects
-$E_{\ge2}^{(3)},E_{\ge2}^{(5)},\overline E_{\ge2}^{(7)}$ in the corrected
-finite-order model, and proving zero-capture for the lifted order-$7$
-determinants $K_v$ and $T_v$ on $v_5\neq 0$ patches.
+In parallel, the finite-core endgame now splits into a global bridge and a
+local lifted problem. On the global side, the two-pair algebra forces
+quantitative near-coincidence of the strengthened invariant $\widehat\Psi$,
+and on good $M\neq 0$ patches this forces bad two-pair cores into a
+defect-scale close regime. On the local side, what remains is to extract the
+multi-pair interaction defects
+\[
+E_{\ge2}^{(3)},\qquad E_{\ge2}^{(5)},\qquad \overline E_{\ge2}^{(7)},
+\]
+and to prove the required zero-capture / first-contact statements for the
+lifted order-$7$ determinants $K_v$ and $T_v$ on $v_5\neq 0$ patches,
+with the mixed case $K_v=T_v=0$ isolated as the genuine codimension-two
+local obstruction.
 \end{remark}
 
 \section{Endgame architecture and remaining global propagation problem}
