@@ -4213,9 +4213,11 @@ M(h)\neq 0,
 \qquad
 M(h)N'(h)-N(h)M'(h)\neq 0,
 \]
-the normalized planar curve $\Gamma(h)$ is a strictly convex graph in the
-affine chart $(\rho_1,\rho_2)$. Thus the remaining global obstruction is a
-common four-secant line meeting two separated convex components twice each.
+the normalized planar curve $\Gamma(h)$ decomposes into $C^2$ branches in the
+affine chart $(\rho_1,\rho_2)$, each of which is strictly convex or strictly
+concave. Thus the remaining global obstruction is not same-branch secancy, but
+the possibility of a common four-secant line meeting two separated ECT
+branches twice each.
 \end{remark}
 
 \begin{definition}[Projective Wronskian of the strengthened one-pair triple]
@@ -4398,6 +4400,60 @@ has at most two zeros on $I$, counting multiplicity. This is exactly the ECT
 property for the triple $(c,v_5,\Delta_7)$. The affine-line statement is the
 same conclusion in the chart $(x,y)$.
 \end{proof}
+
+\begin{definition}[ECT interval]
+\label{def:ect-interval}
+An ECT interval is a connected interval
+\[
+I\subset\{h:\ c(h)\neq 0,\ M(h)\neq 0,\ W(h)\neq 0\}.
+\]
+Equivalently, by Proposition~\ref{prop:ect-intervals-c-v5-delta7}, it is a
+connected interval on which the triple
+\[
+(c,\ v_5,\ \Delta_7)
+\]
+is an extended complete Chebyshev system.
+\end{definition}
+
+\begin{corollary}[At most two points from one ECT interval]
+\label{cor:two-points-per-ect-interval}
+Let $I$ be an ECT interval. Then every affine line in the chart
+\[
+x=\frac{v_5}{c},
+\qquad
+y=\frac{\Delta_7}{c}
+\]
+meets $\Gamma(I)$ in at most two points, counting tangency with multiplicity.
+
+In particular, if a finite configuration is cut out by a single affine
+relation in the normalized chart, then its contribution from any fixed ECT
+interval has cardinality at most two.
+\end{corollary}
+
+\begin{proof}
+This is exactly the affine-line formulation of
+Proposition~\ref{prop:ect-intervals-c-v5-delta7}.
+\end{proof}
+
+\begin{remark}[Branch geometry on an ECT interval]
+\label{rem:branch-geometry-ect-interval}
+On an ECT interval $I$, the quantities $c$, $M$, and $W$ have fixed nonzero
+sign. Hence
+\[
+x=\frac{v_5}{c}
+\]
+is a monotone parameter on $I$, and in the affine chart
+\[
+\Gamma(I)=\left\{\left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right):h\in I\right\}
+\]
+is a single $C^2$ branch which is strictly convex or strictly concave
+according to the sign of
+\[
+\frac{c(h)^3W(h)}{M(h)^3}.
+\]
+The later tangent-separator analysis is therefore an adjacent-branch problem,
+not a same-branch secancy problem.
+\end{remark}
 
 \begin{definition}[Tangent-separator kernel]
 \label{def:tangent-separator-kernel}
@@ -5024,11 +5080,11 @@ cannot contain two distinct ECT intervals each contributing a pair of points.
 \end{corollary}
 
 \begin{proof}
-Each ECT interval contributes at most two points to the zero set of an affine
-line in the normalized chart, and by
-Theorem~\ref{thm:global-no-secant} no affine line can be $2$-secant to two
-different ECT intervals. Therefore a pair-pair configuration across two
-distinct ECT intervals is impossible.
+By Corollary~\ref{cor:two-points-per-ect-interval}, each ECT interval
+contributes at most two points to the zero set of an affine line in the
+normalized chart. By Theorem~\ref{thm:global-no-secant}, no affine line can be
+$2$-secant to two different ECT intervals. Therefore a pair-pair
+configuration across two distinct ECT intervals is impossible.
 \end{proof}
 
 \begin{remark}[Audit: direct septic witness]
