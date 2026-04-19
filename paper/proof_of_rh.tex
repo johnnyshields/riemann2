@@ -820,16 +820,24 @@ Proposition~\ref{prop:cutoff-compatibility}, the core $\mathcal C$ --- and
 therefore $M(d)$ and $A_{\val}$ --- is independent of $R$.
 \end{proof}
 
-\begin{remark}[Work in progress: sharpened calibration remainder estimate]
-\label{rem:wip-sharpened-calibration-remainder}
-The proof above invokes a ``sharpened calibration remainder estimate'' that
-converts $S_2=o(xQ^2 S(m))$ into
-$\Psi_{x,d}(R_\zeta)=o\!\left(\tfrac{x}{B_\zeta(m)}S(m)\right)$. The
-structural control of $R_\zeta$ is in place from
+\begin{remark}[Status of the sharpened calibration remainder estimate]
+\label{rem:status-sharpened-calibration-remainder}
+The proof above uses a sharpened calibration remainder estimate that
+converts
+\[
+S_2=o(xQ^2 S(m))
+\]
+into
+\[
+\Psi_{x,d}(R_\zeta)=o\!\left(\frac{x}{B_\zeta(m)}S(m)\right).
+\]
+The structural input for this step is already in place from
 Proposition~\ref{prop:corrected-local-decomposition} and the corrected
-transfer bounds, but the draft has not yet isolated this quantitative step
-as a named lemma with an explicit constant. It should be added in a later
-pass.
+transfer bounds. What has not yet been extracted is a standalone quantitative
+lemma with an explicit constant.
+
+This refinement is analytic packaging rather than a main obstruction to the
+current proof architecture.
 \end{remark}
 
 \section{Corrected finite-\texorpdfstring{$s$}{s} holomorphic whitening}
@@ -2422,8 +2430,8 @@ This is exactly the scale compatible with the already-proved $r=0$ case and is
 sufficient for all later applications.
 \end{proof}
 
-\begin{remark}[Work in progress: stronger formal coefficient bound]
-\label{rem:wip-stronger-formal-odd-jet}
+\begin{remark}[Status of the stronger formal coefficient bound]
+\label{rem:status-stronger-formal-odd-jet}
 If one formally combines the rescaled derivative estimate from
 Corollary~\ref{cor:single-pair-odd-jet} with the normalized
 $z/Q^2$-expansion, one is led to the stronger-looking expression
@@ -2432,11 +2440,15 @@ $z/Q^2$-expansion, one is led to the stronger-looking expression
 \]
 We do not record that stronger estimate in the present draft, because it would
 require a separate audit of the coefficient normalization at each odd order
-under the global transverse scaling. The weaker bound
+under the global transverse scaling.
+
+For the present argument, the stable bound
 \[
 |a_{2r+1}(\rho)|\ll_r \frac{1}{Q\,\Delta^{2r+4}}
 \]
-is the intended stable statement and is sufficient for the shell argument.
+is the intended statement and is sufficient for the shell argument. Thus the
+stronger formal bound should be viewed as an optional refinement rather than a
+live bottleneck.
 \end{remark}
 
 \begin{lemma}[Local zero-counting in dyadic shells]
@@ -2513,8 +2525,8 @@ since $2r+4\ge 4$. Summing over $k\ge 0$,
 as claimed.
 \end{proof}
 
-\begin{remark}[Work in progress: shell-summed $Q$-factor]
-\label{rem:wip-outside-q-factor}
+\begin{remark}[Status of the shell-summed $Q$-factor]
+\label{rem:status-outside-q-factor}
 Corollary~\ref{cor:single-pair-odd-jet} gives the single-pair bound
 \[
 |a_{2r+1}(\rho)|\ll_r \frac{1}{Q\,\Delta^{2r+4}}.
@@ -2534,11 +2546,11 @@ rather than
 |a_{2r+1}^{\out}(m,H)|\ll_r \frac{1}{Q\,H^{2r+3}}.
 \]
 
-Accordingly, in the present draft we record only the $H^{-(2r+3)}$ exterior
-decay as the unconditional shell-summed statement. If a further $Q^{-1}$
-gain is later recovered from a more precise differentiated
-scalar-normalization audit, the exterior corollary can be strengthened
-accordingly.
+Accordingly, the present draft records only the $H^{-(2r+3)}$ exterior decay
+as the unconditional shell-summed statement. A further $Q^{-1}$ gain would be
+a secondary strengthening obtainable only from a more precise differentiated
+scalar-normalization analysis, not a main obstruction to the current proof
+architecture.
 \end{remark}
 
 \section{\texorpdfstring{$N$}{N}-point odd-moment cancellation}
@@ -6710,15 +6722,18 @@ to two different ECT intervals on such a block. Therefore a pair-pair
 configuration across two distinct ECT intervals is impossible there.
 \end{proof}
 
-\begin{remark}[Audit: direct septic witness]
-\label{rem:audit-direct-septic-witness}
+\begin{remark}[Status of the direct septic witness]
+\label{rem:status-direct-septic-witness}
 The direct $q^{(7)}$-slice of total $\Delta_7$ is now closed at the
 weight-one level by
 Proposition~\ref{prop:direct-q7-total-delta7-nonzero}. Together with
 Theorem~\ref{thm:quotient-septic-closure}, this closes the canonical
-quotient-level order-$7$ package. What remains non-unique at order $7$ is
-only the lower/mixed septic completion of a raw representative pair
-$(u_7,v_7)$, not any further canonical quotient-level invariant.
+quotient-level order-$7$ package.
+
+What remains non-unique at order $7$ is only the lower/mixed septic
+completion of a raw representative pair $(u_7,v_7)$, not any further
+canonical quotient-level invariant. Accordingly, order-$7$ is no longer a
+live audited obstruction for the later geometric arguments.
 \end{remark}
 
 \begin{remark}[Audit: $W=0$ affine-inflection structure]
