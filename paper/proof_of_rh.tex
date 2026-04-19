@@ -4458,6 +4458,60 @@ the direct $K_1$-transport sector, and therefore
 \]
 \end{proof}
 
+\begin{proposition}[Generic nonvanishing of the direct septic slice under nontrivial quintic fixed-sector coefficient]
+\label{prop:direct-q7-total-delta7-nonzero}
+Let $J$ be a connected open interval contained in the quintic-generic region.
+Assume
+\[
+v_5\not\equiv 0
+\qquad\text{on }J.
+\]
+Then the direct $q^{(7)}$-driven slice of the full total septic residual
+determinant is generically nonzero on $J$. Equivalently,
+\[
+\Delta_7^{(q^{(7)})}\not\equiv 0
+\qquad\text{on }J.
+\]
+\end{proposition}
+
+\begin{proof}
+By Corollary~\ref{cor:weight-one-septic-reduction},
+\[
+[\Delta_7]^{[1]}=[\Delta_{7,K_1}]^{[1]}.
+\]
+Thus the highest genuinely new direct $q^{(7)}$-coefficient of the total
+septic residual determinant is the same as that of the direct $K_1$-transport
+slice.
+
+By Proposition~\ref{prop:direct-q7-k1-witness-nonzero}, the direct septic
+$K_1$ witness is generically nonzero on the quintic-generic region. In
+particular,
+\[
+u_{7,K_1}^{(q^{(7)})}\not\equiv 0
+\qquad\text{on }J.
+\]
+Moreover, by Corollary~\ref{cor:direct-q7-septic-slice}, on the direct
+$q^{(7)}$-driven slice one has
+\[
+v_{7,K_1}^{(q^{(7)})}=0,
+\qquad
+\Delta_{7,K_1}^{(q^{(7)})}
+=
+u_{7,K_1}^{(q^{(7)})}\,v_5.
+\]
+Since $v_5\not\equiv 0$ on $J$, it follows that
+\[
+\Delta_{7,K_1}^{(q^{(7)})}\not\equiv 0
+\qquad\text{on }J.
+\]
+Therefore
+\[
+\Delta_7^{(q^{(7)})}\not\equiv 0
+\qquad\text{on }J,
+\]
+as claimed.
+\end{proof}
+
 \begin{remark}[Audit: full septic fixed-sector coefficient]
 \label{rem:audit-full-septic-fixed-sector}
 The draft now contains explicit coefficient formulas for the quintic
@@ -4486,18 +4540,23 @@ and the associated planar invariant curve
 
 \begin{proposition}[Non-affinity of the second normalized residual scalar]
 \label{prop:rho2-not-affine-in-rho1}
-Assume that the direct $q^{(7)}$-driven slice of $\Delta_7(h)$ is
-generically nonzero on the quintic-generic region. Then there do not exist
-constants $A,B\in\mathbf C$ such that
+Let $J$ be a connected open interval contained in the quintic-generic region
+and in $\{h:c(h)\neq 0\}$. Assume
+\[
+v_5\not\equiv 0
+\qquad\text{on }J.
+\]
+Then there do not exist constants $A,B\in\mathbf C$ such that
 \[
 \rho_2(h)\equiv A\,\rho_1(h)+B
 \]
-on any connected component of $\{h:c(h)\neq 0\}$.
+on $J$.
 
 Equivalently,
 \[
-\Delta_7(h)\not\equiv A\,v_5(h)+B\,c(h).
+\Delta_7(h)\not\equiv A\,v_5(h)+B\,c(h)
 \]
+on $J$.
 \end{proposition}
 
 \begin{proof}
@@ -4505,11 +4564,14 @@ Suppose
 \[
 \Delta_7(h)\equiv A\,v_5(h)+B\,c(h)
 \]
-on a connected component of $\{c\neq 0\}$. Then the direct $q^{(7)}$-driven
-slice of the right-hand side vanishes, because $v_5$ and $c$ are governed
-by the cubic/quintic layers and carry no direct septic $q^{(7)}$-slice.
-But the direct $q^{(7)}$-driven slice of $\Delta_7$ is generically nonzero
-by hypothesis. This is a contradiction. Dividing by $c(h)$ yields
+on $J$. Then the direct $q^{(7)}$-driven slice of the right-hand side
+vanishes, because $v_5$ and $c$ are governed by the cubic/quintic layers
+and carry no direct septic $q^{(7)}$-slice.
+
+On the other hand, by
+Proposition~\ref{prop:direct-q7-total-delta7-nonzero}, the direct
+$q^{(7)}$-driven slice of $\Delta_7$ is generically nonzero on $J$.
+This is a contradiction. Dividing by $c(h)$ yields
 \[
 \rho_2(h)\not\equiv A\,\rho_1(h)+B.
 \qedhere
@@ -4543,14 +4605,21 @@ Then
 \[
 K_\Gamma(h)=\frac{M(h)N'(h)-N(h)M'(h)}{c(h)^4}.
 \]
-In particular, if $K_\Gamma\equiv 0$ on a connected open set on which
-$M\neq 0$, then $\rho_2$ is affine in $\rho_1$ on that set.
-Consequently, under the hypothesis of
-Proposition~\ref{prop:rho2-not-affine-in-rho1}, one has
+In particular, if $K_\Gamma\equiv 0$ on a connected open interval $J$ on
+which
 \[
-K_\Gamma\not\equiv 0
+c\neq 0,
+\qquad
+M\neq 0,
+\qquad
+v_5\not\equiv 0,
 \]
-on the generic region.
+then $\rho_2$ is affine in $\rho_1$ on $J$, contradicting
+Proposition~\ref{prop:rho2-not-affine-in-rho1}. Hence on every such interval
+one has
+\[
+K_\Gamma\not\equiv 0.
+\]
 \end{proposition}
 
 \begin{proof}
@@ -4597,8 +4666,14 @@ hence
 \[
 \rho_2=A\,\rho_1+B
 \]
-on that connected set. The final claim now follows from
-Proposition~\ref{prop:rho2-not-affine-in-rho1}.
+on that connected interval. If in addition
+\[
+c\neq 0,
+\qquad
+v_5\not\equiv 0,
+\]
+there, this contradicts Proposition~\ref{prop:rho2-not-affine-in-rho1}. The
+final claim follows.
 \end{proof}
 
 \begin{remark}[Geometric consequence]
@@ -4746,11 +4821,9 @@ W'=\det(F,F',F''').
 Expanding along the third column gives the second formula.
 \end{proof}
 
-\begin{proposition}[Exclusion of $W$-flat intervals under direct septic nonvanishing]
+\begin{proposition}[Exclusion of $W$-flat intervals on the $c\neq 0,\ M\neq 0$ region]
 \label{prop:no-W-flat-interval}
-Assume that the direct $q^{(7)}$-driven slice of $\Delta_7(h)$ is
-generically nonzero on the quintic-generic region. Let $J$ be a connected
-open interval on which
+Let $J$ be a connected open interval on which
 \[
 c(h)\neq 0,
 \qquad
@@ -4774,8 +4847,14 @@ By Proposition~\ref{prop:projective-wronskian-bridge},
 K_\Gamma(h)=\frac{W(h)}{c(h)^3}\equiv 0
 \qquad\text{on }J.
 \]
-Since $M\neq 0$ on $J$, Proposition~\ref{prop:curvature-bridge-normalized-curve}
-implies that
+Since
+\[
+M=c\,v_5'-c'v_5
+\]
+and $c\neq 0$ on $J$, the hypothesis $M\neq 0$ on $J$ rules out
+$v_5\equiv 0$ on $J$. Hence $v_5\not\equiv 0$ on $J$.
+
+By Proposition~\ref{prop:curvature-bridge-normalized-curve}, it follows that
 \[
 \rho_2(h)=A\,\rho_1(h)+B
 \]
@@ -4785,7 +4864,11 @@ for some constants $A,B\in\mathbf C$, i.e.
 \qquad\text{on }J.
 \]
 This contradicts Proposition~\ref{prop:rho2-not-affine-in-rho1}. Therefore
-$W$ cannot vanish identically on $J$.
+\[
+W\not\equiv 0
+\qquad\text{on }J.
+\qedhere
+\]
 \end{proof}
 
 \begin{remark}[Interpretation of the $\lambda$-reduction]
@@ -4796,8 +4879,11 @@ On the direct highest-new slice one has
 \]
 by Corollary~\ref{cor:direct-q7-septic-slice} together with
 Corollary~\ref{cor:weight-one-septic-reduction}. Thus if $W\equiv 0$ on a
-connected open interval with $c\neq 0$ and $M\neq 0$, then the affine
-dependence
+connected open interval with $c\neq 0$ and $M\neq 0$, then
+\[
+v_5\not\equiv 0
+\]
+on that interval, because $M=c\,v_5'-c'v_5$. The affine dependence
 \[
 \Delta_7=A\,v_5+B\,c
 \]
@@ -5324,9 +5410,10 @@ exists. By the zero-capture hypothesis, there are compact subintervals
 J_1\Subset I_1,\qquad J_2\Subset I_2
 \]
 such that every zero of $K$ on $I_2\times I_1$ lies in $J_2\times J_1$.
-Shrinking these intervals if necessary, using the boundary-near zero-free
-region furnished by Lemma~\ref{lem:endpoint-tangent-exclusion}, we may also
-assume that $J_2\times J_1$ is disjoint from that boundary-near region.
+Replacing them by smaller compact subintervals still containing the zero set,
+using the boundary-near zero-free region furnished by
+Lemma~\ref{lem:endpoint-tangent-exclusion}, we may also assume that
+$J_2\times J_1$ is disjoint from that boundary-near region.
 Then the zero set of $K$ in the compact set $J_2\times J_1$ is nonempty
 and closed, so by Lemma~\ref{lem:compact-first-zero-reduction} there exists a
 zero $(s_*,t_*)\in J_2\times J_1$ whose $s$-coordinate is minimal in the
