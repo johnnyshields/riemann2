@@ -7197,6 +7197,90 @@ M(h)\neq 0,
 M(h)N'(h)-N(h)M'(h)\neq 0.
 \]
 
+\begin{definition}[Amplitude-invariant strengthened datum]
+\label{def:amplitude-invariant-strengthened-datum}
+On the region where
+\[
+c(h)\neq 0,
+\]
+define
+\[
+\widehat\Psi(h):=
+\left(
+\frac{u_5(h)}{c(h)},
+\frac{v_5(h)}{c(h)},
+\frac{\Delta_7(h)}{c(h)^2}
+\right).
+\]
+\end{definition}
+
+\begin{lemma}[Scaling law for the strengthened package]
+\label{lem:scaling-law-strengthened-package}
+If the normalized one-pair odd germ is multiplied by a scalar $\lambda$, then
+\[
+c\longmapsto \lambda c,
+\qquad
+A_5^{\mathfrak f}\longmapsto \lambda A_5^{\mathfrak f},
+\qquad
+A_7^{\mathfrak f}\longmapsto \lambda A_7^{\mathfrak f},
+\]
+and hence
+\[
+\Delta_7\longmapsto \lambda^2 \Delta_7.
+\]
+Consequently the datum
+\[
+\widehat\Psi(h)=
+\left(
+\frac{u_5(h)}{c(h)},
+\frac{v_5(h)}{c(h)},
+\frac{\Delta_7(h)}{c(h)^2}
+\right)
+\]
+is invariant under scalar rescaling of the full one-pair germ.
+\end{lemma}
+
+\begin{proof}
+The cubic, quintic, and septic coefficients of the odd germ all scale linearly
+under multiplication of the germ by $\lambda$. Since
+\[
+A_5^{\mathfrak f}=u_5I+v_5S,
+\qquad
+A_7^{\mathfrak f}=u_7I+v_7S,
+\]
+it follows that
+\[
+u_5\mapsto \lambda u_5,\qquad v_5\mapsto \lambda v_5,
+\qquad
+u_7\mapsto \lambda u_7,\qquad v_7\mapsto \lambda v_7.
+\]
+Therefore
+\[
+\Delta_7=u_7v_5-u_5v_7
+\]
+scales as
+\[
+\Delta_7\mapsto \lambda^2\Delta_7,
+\]
+which gives the claim.
+\end{proof}
+
+\begin{remark}[Two normalizations: geometric versus projective]
+\label{rem:two-normalizations-geometric-vs-projective}
+The affine curve
+\[
+\Gamma(h)=\left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right)
+\]
+is the correct object for the one-pair differential geometry, because its
+derivatives are governed by the projective Wronskians $M$, $N$, and $W$.
+
+For the multi-pair coincidence problem, however, the natural scalar-invariant
+datum is $\widehat\Psi(h)$, not $\Gamma(h)$. The reason is exactly the
+scaling law in Lemma~\ref{lem:scaling-law-strengthened-package}: under scalar
+rescaling of the full one-pair germ, $\Delta_7/c$ is not invariant, whereas
+$\Delta_7/c^2$ is.
+\end{remark}
+
 In this formulation, the geometric secant/tangent obstruction is well controlled
 on ECT intervals and across generic turning-point boundaries, but the behavior
 across boundaries of type $W=0,\ M\neq 0$ remains the main unresolved global
@@ -7215,131 +7299,161 @@ where $\mathcal I_{12}(z)$ denotes the pair-interaction germ, quadratic in
 the pair amplitudes.
 \end{definition}
 
-\begin{lemma}[Two-pair cubic leading-line constraint]
-\label{lem:two-pair-cubic-leading-constraint}
-Assume
+\begin{proposition}[Exact strengthened two-pair coincidence through order $7$]
+\label{prop:exact-strengthened-two-pair-coincidence}
+Let $(a_1,h_1;a_2,h_2)$ be a normalized two-pair core with
 \[
 F_{(a_1,h_1;a_2,h_2)}(z)\equiv 0.
 \]
-Then the cubic coefficient satisfies
+Assume moreover that, after passage to the explicit corrected finite-order model
+through order $7$, the interaction contribution vanishes at the three
+relevant levels, namely:
 \[
-a_1v_0(h_1)+a_2v_0(h_2)+I_{12}^{(3)}=0,
+a_1c(h_1)+a_2c(h_2)=0,
 \]
-where $I_{12}^{(3)}$ denotes the cubic coefficient of the interaction germ
-$\mathcal I_{12}$. In particular, if $I_{12}^{(3)}$ vanishes or belongs to a
-controlled lower-order correction class on the normalized region, then the
-leading cubic lines must coincide projectively:
 \[
-\ell_{h_1}=\ell_{h_2}.
+a_1A_5^{\mathfrak f}(h_1)+a_2A_5^{\mathfrak f}(h_2)=0,
 \]
-\end{lemma}
-
-\begin{proof}
-Take the cubic coefficient of the identity
+and, after the second identity identifies the common quotient line
 \[
-a_1F_{h_1}(z)+a_2F_{h_2}(z)+\mathcal I_{12}(z)\equiv 0.
+\mathbf C A_5^{\mathfrak f}(h_1)=\mathbf C A_5^{\mathfrak f}(h_2),
 \]
-By definition of the cubic leading coefficient $v_0(h)$, this yields
+the second residual classes satisfy
 \[
-a_1v_0(h_1)+a_2v_0(h_2)+I_{12}^{(3)}=0.
+a_1\,[A_7^{\mathfrak f}](h_1)+a_2\,[A_7^{\mathfrak f}](h_2)=0
+\qquad\text{in}\qquad
+\mathfrak f/\mathbf C A_5^{\mathfrak f}(h_1).
 \]
-If the interaction cubic coefficient is absent or controlled as a lower-order
-perturbation in the normalized regime, then the first two terms must already
-be projectively dependent, which forces
+Then
 \[
-\ell_{h_1}=\ell_{h_2}.\qedhere
+\widehat\Psi(h_1)=\widehat\Psi(h_2).
 \]
-\end{proof}
-
-\begin{lemma}[Two-pair first residual constraint]
-\label{lem:two-pair-first-residual-constraint}
-Assume
+Equivalently,
 \[
-F_{(a_1,h_1;a_2,h_2)}(z)\equiv 0
-\]
-and that the cubic leading lines coincide:
-\[
-\ell_{h_1}=\ell_{h_2}=:\ell.
-\]
-Then, after passing to the corresponding first residual quotient by the common
-cubic line, the quintic coefficient satisfies
-\[
-a_1\overline v_1(h_1)+a_2\overline v_1(h_2)+\overline I_{12}^{(5)}=0,
-\]
-where $\overline I_{12}^{(5)}$ denotes the image of the quintic interaction
-coefficient in that first residual quotient. In the rigorous finite-order
-model, this quotient is $\mathcal R_h^{(5)}$. In particular, if
-$\overline I_{12}^{(5)}$ vanishes or is controlled as a lower-order
-perturbation on the normalized region, then the first residual classes must
-also coincide projectively.
-\end{lemma}
-
-\begin{proof}
-Subtract the cubic leading direction by passing to the corresponding first
-residual quotient by the common line $\ell$. Since the cubic terms are
-killed in the residual quotient, the first nontrivial coefficient is the
-quintic residual coefficient. Taking the quintic coefficient of the quotient
-identity gives
-\[
-a_1\overline v_1(h_1)+a_2\overline v_1(h_2)+\overline I_{12}^{(5)}=0.
-\]
-\end{proof}
-
-\begin{proposition}[Two-pair residual rigidity]
-\label{prop:two-pair-residual-rigidity}
-Assume the one-pair family has nontrivial cubic leading line and nontrivial
-first residual class on the generic normalized region. Then any normalized
-two-pair bad core with vanishing quotient odd germ must lie in the
-simultaneous coincidence locus determined by
-\[
-\ell_{h_1}=\ell_{h_2},
+\frac{u_5(h_1)}{c(h_1)}=\frac{u_5(h_2)}{c(h_2)},
 \qquad
-\overline v_1(h_1)=\overline v_1(h_2),
+\frac{v_5(h_1)}{c(h_1)}=\frac{v_5(h_2)}{c(h_2)},
+\qquad
+\frac{\Delta_7(h_1)}{c(h_1)^2}=\frac{\Delta_7(h_2)}{c(h_2)^2}.
 \]
-up to the quadratic interaction corrections $I_{12}^{(3)}$ and
-$\overline I_{12}^{(5)}$. In particular, bad two-pair cores are confined to a
-lower-dimensional exceptional set in the normalized parameter space.
 \end{proposition}
 
 \begin{proof}
-Combine Lemma~\ref{lem:two-pair-cubic-leading-constraint} and
-Lemma~\ref{lem:two-pair-first-residual-constraint}. The vanishing of the
-full two-pair germ forces projective coincidence first at the cubic leading
-level and then at the first residual level. These are two independent
-coincidence conditions on the normalized two-pair parameters, modulo the
-quadratic interaction corrections, so the bad locus is confined to the
-corresponding exceptional set.
+Set
+\[
+\lambda:=-\frac{a_2}{a_1}.
+\]
+The cubic identity gives
+\[
+c(h_1)=\lambda\,c(h_2).
+\]
+The quintic fixed-sector identity gives
+\[
+A_5^{\mathfrak f}(h_1)=\lambda\,A_5^{\mathfrak f}(h_2).
+\]
+Writing
+\[
+A_5^{\mathfrak f}(h_i)=u_5(h_i)I+v_5(h_i)S,
+\]
+we obtain
+\[
+u_5(h_1)=\lambda\,u_5(h_2),
+\qquad
+v_5(h_1)=\lambda\,v_5(h_2).
+\]
+Hence
+\[
+\frac{u_5(h_1)}{c(h_1)}=\frac{u_5(h_2)}{c(h_2)},
+\qquad
+\frac{v_5(h_1)}{c(h_1)}=\frac{v_5(h_2)}{c(h_2)}.
+\]
+
+Now the second identity implies
+\[
+\mathbf C A_5^{\mathfrak f}(h_1)=\mathbf C A_5^{\mathfrak f}(h_2),
+\]
+so the residual quotient spaces are canonically identified. The order-$7$
+residual identity therefore says
+\[
+[A_7^{\mathfrak f}](h_1)=\lambda\,[A_7^{\mathfrak f}](h_2)
+\]
+in the common quotient. Equivalently, there exists $\mu\in\mathbf C$ such
+that
+\[
+A_7^{\mathfrak f}(h_1)=\lambda\,A_7^{\mathfrak f}(h_2)+\mu\,A_5^{\mathfrak f}(h_2).
+\]
+Writing
+\[
+A_7^{\mathfrak f}(h_i)=u_7(h_i)I+v_7(h_i)S,
+\]
+and using
+\[
+\Delta_7(h)=u_7(h)v_5(h)-u_5(h)v_7(h),
+\]
+we obtain
+\[
+\Delta_7(h_1)
+=
+\det\!\bigl(A_7^{\mathfrak f}(h_1),A_5^{\mathfrak f}(h_1)\bigr)
+=
+\det\!\bigl(\lambda A_7^{\mathfrak f}(h_2)+\mu A_5^{\mathfrak f}(h_2),
+\lambda A_5^{\mathfrak f}(h_2)\bigr)
+=
+\lambda^2\Delta_7(h_2).
+\]
+Since also $c(h_1)=\lambda c(h_2)$, it follows that
+\[
+\frac{\Delta_7(h_1)}{c(h_1)^2}
+=
+\frac{\Delta_7(h_2)}{c(h_2)^2}.
+\]
+Thus $\widehat\Psi(h_1)=\widehat\Psi(h_2)$.
 \end{proof}
 
-\begin{remark}[Work in progress]
-\label{rem:wip-two-pair-residual-rigidity}
-At present this proposition should be read as a rigidity schema. The one-pair
-cubic leading line and first residual class indicate the correct projective
-coincidence conditions, but the treatment of the quadratic interaction
-corrections $I_{12}^{(3)}$ and $\overline I_{12}^{(5)}$ is not yet fully
-quantitative. Moreover, the later working analysis suggests that the more
-natural invariant map is the strengthened package
+\begin{remark}[What remains in the two-pair rewrite]
+\label{rem:what-remains-two-pair-rewrite}
+Proposition~\ref{prop:exact-strengthened-two-pair-coincidence} is the exact
+defect-free order-$\le 7$ coincidence statement. What remains is to rewrite
+the actual interaction germ $\mathcal I_{12}$ explicitly in the corrected
+finite-order model and extract the corresponding defect terms
 \[
-\Phi(h)=\bigl(c(h),u_5(h),v_5(h),\Delta_7(h)\bigr),
+E_{12}^{(3)}\in\mathbf C,
+\qquad
+E_{12}^{(5)}\in\mathfrak f,
+\qquad
+\overline E_{12}^{(7)}
+\in
+\mathfrak f/\mathbf C A_5^{\mathfrak f}.
 \]
-or its normalized form $\Psi(h)$, rather than only the first residual class.
+Once this is done, the same proof yields a defect-thickened coincidence
+statement for $\widehat\Psi(h)$, replacing the older schematic language of
+the cubic leading line $\ell_h$ and first residual class $\overline v_1(h)$.
 \end{remark}
 
-\begin{remark}[Work in progress: strengthened two-pair invariant]
-\label{rem:wip-strengthened-two-pair-invariant}
-The present two-pair rigidity statement is still phrased in terms of the cubic
-leading line and the first residual quotient class. The later working analysis
-suggests a stronger invariant map
+\begin{remark}[Minimal-core reformulation]
+\label{rem:minimal-core-reformulation}
+The proposition above shows that the correct projective datum for the downstream
+multi-pair and minimal-core extraction is the amplitude-invariant strengthened
+map
 \[
-\Phi(h):=\bigl(c(h),u_5(h),v_5(h),\Delta_7(h)\bigr),
+\widehat\Psi(h)=
+\left(
+\frac{u_5(h)}{c(h)},
+\frac{v_5(h)}{c(h)},
+\frac{\Delta_7(h)}{c(h)^2}
+\right),
 \]
-or in normalized form
+not merely the pair $(\ell_h,\overline v_1(h))$.
+
+By contrast, the affine curve
 \[
-\Psi(h):=\left(\frac{u_5(h)}{c(h)},\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right).
+\Gamma(h)=\left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right)
 \]
-The intended sharpened two-pair statement is that a genuine bad two-pair core
-forces coincidence of this normalized invariant data, up to the interaction
-corrections.
+remains the correct object for the one-pair secant/tangent geometry. The
+finite-core endgame should therefore be viewed as a two-stage problem:
+first extract defect-corrected coincidence information for $\widehat\Psi$,
+then convert that information into affine-line incidence constraints for
+$\Gamma$.
 \end{remark}
 
 \begin{definition}[Minimal bad core]
