@@ -4309,23 +4309,94 @@ tangency with multiplicity.
 \end{proposition}
 
 \begin{proof}
-On $I$, the successive initial Wronskians are
+Define
 \[
-c,\qquad
-\det\!\begin{pmatrix}c&v_5\\ c'&v_5'\end{pmatrix}=M,
+x(h):=\frac{v_5(h)}{c(h)},
 \qquad
-\det\!\begin{pmatrix}
-c&v_5&\Delta_7\\
-c'&v_5'&\Delta_7'\\
-c''&v_5''&\Delta_7''
-\end{pmatrix}=W.
+y(h):=\frac{\Delta_7(h)}{c(h)}.
 \]
-Since all three are nonvanishing on $I$, the standard ECT criterion applies.
-The affine-line statement follows by writing
+Since the one-pair family is real-analytic on the generic region, the
+functions $x$ and $y$ are $C^2$ on $I$.
+
+By Definition~\ref{def:MN-normalized-curve},
 \[
-A\,c+B\,v_5+C\,\Delta_7=0
+x'(h)=\frac{M(h)}{c(h)^2},
+\qquad
+y'(h)=\frac{N(h)}{c(h)^2}.
 \]
-as the equation of a line in the chart $(v_5/c,\Delta_7/c)$.
+Because $M(h)\neq 0$ and $c(h)\neq 0$ on $I$, one has
+\[
+x'(h)\neq 0
+\qquad (h\in I),
+\]
+so $x$ is strictly monotone on $I$ and may be used as a parameter on
+$\Gamma(I)$.
+
+Moreover,
+\[
+\frac{dy}{dx}=\frac{y'(h)}{x'(h)}=\frac{N(h)}{M(h)}.
+\]
+Differentiating with respect to $x$ gives
+\[
+\frac{d^2y}{dx^2}
+=
+\frac{\frac{d}{dh}\bigl(N/M\bigr)}{x'(h)}
+=
+\frac{(M N'-N M')/M^2}{M/c^2}.
+\]
+Using Proposition~\ref{prop:projective-wronskian-bridge},
+\[
+M N'-N M'=c\,W,
+\]
+hence
+\[
+\frac{d^2y}{dx^2}
+=
+\frac{c(h)^3\,W(h)}{M(h)^3}.
+\]
+Since $c(h)\neq 0$, $M(h)\neq 0$, and $W(h)\neq 0$ on $I$, it follows that
+\[
+\frac{d^2y}{dx^2}\neq 0
+\qquad (h\in I).
+\]
+Therefore $\Gamma(I)$ is the graph of a strictly convex or strictly concave
+$C^2$ function $y=y(x)$.
+
+Now let
+\[
+L(h):=A\,c(h)+B\,v_5(h)+C\,\Delta_7(h)
+\]
+be a nontrivial linear combination. Since $c(h)\neq 0$ on $I$,
+\[
+L(h)=0
+\quad\Longleftrightarrow\quad
+A+B\,x(h)+C\,y(h)=0.
+\]
+Thus zeros of $L$ correspond exactly to intersections of $\Gamma(I)$ with the
+affine line
+\[
+A+B\,x+C\,y=0.
+\]
+
+If $C=0$, then the equation is
+\[
+A+B\,x=0,
+\]
+which has at most one solution because $x$ is strictly monotone on $I$.
+If $C\neq 0$, the equation may be written as
+\[
+y=-\frac{A}{C}-\frac{B}{C}x,
+\]
+and a strictly convex or strictly concave graph meets an affine line in at
+most two points, counting tangency with multiplicity.
+
+Hence every nontrivial linear combination
+\[
+A\,c+B\,v_5+C\,\Delta_7
+\]
+has at most two zeros on $I$, counting multiplicity. This is exactly the ECT
+property for the triple $(c,v_5,\Delta_7)$. The affine-line statement is the
+same conclusion in the chart $(x,y)$.
 \end{proof}
 
 \begin{definition}[Tangent-separator kernel]
@@ -4483,8 +4554,10 @@ $t_*\in J_1$ such that $(s_*,t_*)$ is a zero of $K$.
 \begin{lemma}[First adjacent zero implies tangency]
 \label{lem:first-adjacent-zero-implies-tangency}
 In the setting of Lemma~\ref{lem:compact-first-zero-reduction}, let
-$(s_*,t_*)$ be a zero with minimal $s$-coordinate in the
-$x=v_5/c$ ordering. Then
+\[
+(s_*,t_*)\in J_2\times J_1
+\]
+be a zero with minimal $s$-coordinate in the $x=v_5/c$ ordering. Then
 \[
 \partial_t K(s_*,t_*)=0.
 \]
@@ -4499,16 +4572,43 @@ $\Gamma(t_*)$.
 \end{lemma}
 
 \begin{proof}
-If $\partial_tK(s_*,t_*)\neq 0$, the implicit function theorem gives a local
-$C^1$ zero curve
+Assume for contradiction that
+\[
+\partial_tK(s_*,t_*)\neq 0.
+\]
+Since
+\[
+(s_*,t_*)\in J_2\times J_1\Subset I_2\times I_1,
+\]
+the implicit function theorem applies in the open set $I_2\times I_1$ and
+gives a local $C^1$ zero curve
 \[
 t=t(s)
 \]
-through $(s_*,t_*)$. In particular, for $s$ sufficiently close to $s_*$,
-there are zeros of $K(s,t(s))$. This produces zeros with $s<s_*$,
-contradicting the minimality of $s_*$. Hence $\partial_tK(s_*,t_*)=0$.
+through $(s_*,t_*)$, defined for $s$ in a neighborhood of $s_*$, such that
+\[
+K(s,t(s))=0.
+\]
+For $s$ sufficiently close to $s_*$ with $s<s_*$, one still has
+\[
+(s,t(s))\in I_2\times I_1
+\]
+and
+\[
+K(s,t(s))=0.
+\]
+By the zero-capture hypothesis in
+Lemma~\ref{lem:compact-first-zero-reduction}, every zero of $K$ with
+$s\in I_2$ and $t\in I_1$ lies in $J_2\times J_1$. Hence these nearby zeros
+also lie in $J_2\times J_1$, contradicting the minimality of $s_*$ among all
+zeros of $K$ on $J_2\times J_1$.
 
-The identities
+Therefore
+\[
+\partial_tK(s_*,t_*)=0.
+\]
+
+Finally, the identities
 \[
 K(s,t)=\det(F(s),F'(s),F(t)),
 \qquad
@@ -4940,15 +5040,6 @@ audited is the passage from this nonzero $K_1$-transport witness to the full
 total direct $q^{(7)}$-driven slice of $\Delta_7$, i.e.\ the contribution of
 the remaining order-$7$ sectors and the resulting total noncancellation in
 $\Delta_7$.
-\end{remark}
-
-\begin{remark}[Audit: ECT criterion usage]
-\label{rem:audit-ect-criterion-usage}
-Proposition~\ref{prop:ect-intervals-c-v5-delta7} uses the standard ECT
-criterion for triples of $C^2$ functions with nonvanishing successive initial
-Wronskians. The current draft should retain an explicit audit note that the
-regularity and sign hypotheses needed for this criterion are satisfied on the
-intended generic intervals.
 \end{remark}
 
 \subsection{From the one-pair residual germ to two-pair and minimal-core rigidity}
