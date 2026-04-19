@@ -3035,27 +3035,26 @@ and so
 Thus the generic leading quotient order is at least $3$.
 \end{proof}
 
-\begin{remark}[Raw versus full first-order family]
-\label{rem:wip-raw-vs-full-first-order}
-The surjectivity statement above concerns the full first-order pure-value family
-as it appears in the three-input derivative
+\begin{remark}[Raw versus full value family]
+\label{rem:raw-vs-full-value-family}
+The first-order surjectivity statement concerns the full value family as it
+appears in the three-input derivative
 \[
 D\mathcal W_{(\bg)}[\dot G_-,\dot N,\dot G_+].
 \]
 This is larger than the raw swap-odd one-pair slice obtained by tying the left
-and right same-point variations together. The distinction is important in later
-bookkeeping, but it does not affect the present quotient-triviality statement.
-\end{remark}
-
-\begin{remark}[Structural split still to be made explicit]
-\label{rem:wip-raw-vs-full-value-family}
-At first order the family $V_{\val}^{(1)}$ fills $M_2(\mathbf C)$, while
-the odd coefficients of the raw corrected local block are expected to satisfy
-additional swap/parity constraints. This indicates that the present notation
-$V_{\val}^{(2j+1)}$ is bundling together at least two logically distinct
-sources of ambiguity: raw pure-value odd jets and normalization/basis-gauge
-directions. The current draft uses the combined family $V_{\val}^{(2j+1)}$.
-A later refinement should separate these components explicitly.
+and right same-point variations together. In particular, at first order the
+combined family $V_{\val}^{(1)}$ fills $M_2(\mathbf C)$, while the odd
+coefficients of the raw corrected local block are constrained by additional
+swap/parity structure. Thus the present notation
+\[
+V_{\val}^{(2j+1)}
+\]
+bundles together at least two logically distinct sources of ambiguity: raw
+pure-value odd jets and additional normalization/basis-gauge directions. The
+explicit finite-order model introduced later separates these components through
+order $5$; outside that local model, the ambient notation $V_{\val}^{(2j+1)}$
+remains schematic.
 \end{remark}
 
 \begin{lemma}[Rigidity of the cubic scalar $B$]
@@ -3837,13 +3836,14 @@ For such $h$,
 so $\overline v_1(h)\neq 0$ in $\mathcal R_h^{(5)}$.
 \end{proof}
 
-\begin{remark}[Audit: quintic pure-value trace annihilation]
-\label{rem:audit-quintic-pure-value-trace}
-The generic first residual theorem presently depends on the claim that trace
-annihilates the quintic pure-value slice $V_{\val}^{(5)}(h)$, or at least its
-image in the residual quotient. This remains the main local order-$5$
-structural statement to audit if one wants the first residual layer to be fully
-closed without additional hypotheses.
+\begin{remark}[Status of the explicit first residual model]
+\label{rem:status-explicit-first-residual-model}
+The first residual step is now formulated in the explicit finite-order quotient
+$\mathcal R_h^{(5)}$. What remains locally is to justify, from the actual
+construction of the corrected one-pair local block and its normalization, the
+hypotheses of Proposition~\ref{prop:sigma-stability-quintic-ambiguity}:
+namely, the swap symmetry of cubic-normalized raw corrected representatives and
+the symmetry-preserving form of the allowed normalization gauge.
 \end{remark}
 
 \begin{remark}[Beyond the first residual trace]
@@ -5316,16 +5316,20 @@ left interval across a generic turning boundary.
 \begin{proof}
 By Lemma~\ref{lem:endpoint-tangent-exclusion}, for a generic turning boundary
 there is a neighborhood of the boundary pair on which $K(s,t)\neq 0$ for
-$s\in I_2$, $t\in I_1$. Assume for contradiction that some zero
-$(s_0,t_0)\in I_2\times I_1$ exists. Choose compact subintervals
+$s\in I_2$, $t\in I_1$.
+
+Assume for contradiction that some zero $(s_0,t_0)\in I_2\times I_1$
+exists. By the zero-capture hypothesis, there are compact subintervals
 \[
 J_1\Subset I_1,\qquad J_2\Subset I_2
 \]
-such that $(s_0,t_0)\in J_2\times J_1$ and $J_2\times J_1$ is disjoint from
-the boundary-near region where $K\neq 0$. Then the zero set of $K$ in the
-compact set $J_2\times J_1$ is nonempty and closed, so by
-Lemma~\ref{lem:compact-first-zero-reduction} there exists a zero
-$(s_*,t_*)\in J_2\times J_1$ whose $s$-coordinate is minimal in the
+such that every zero of $K$ on $I_2\times I_1$ lies in $J_2\times J_1$.
+Shrinking these intervals if necessary, using the boundary-near zero-free
+region furnished by Lemma~\ref{lem:endpoint-tangent-exclusion}, we may also
+assume that $J_2\times J_1$ is disjoint from that boundary-near region.
+Then the zero set of $K$ in the compact set $J_2\times J_1$ is nonempty
+and closed, so by Lemma~\ref{lem:compact-first-zero-reduction} there exists a
+zero $(s_*,t_*)\in J_2\times J_1$ whose $s$-coordinate is minimal in the
 $x=v_5/c$ ordering among all zeros in $J_2\times J_1$.
 
 By Lemma~\ref{lem:first-adjacent-zero-implies-tangency},
@@ -5336,10 +5340,11 @@ K(s_*,t_*)=0,
 \]
 so the tangent line at $\Gamma(s_*)$ is also tangent at $\Gamma(t_*)$.
 
-Across a generic turning boundary, Proposition~\ref{prop:adjacent-slope-range-separation}
-shows that the interior tangent-slope ranges of the two adjacent intervals are
-disjoint. Hence no common interior tangent slope can occur. This contradicts
-the existence of $(s_*,t_*)$. Therefore no such zero exists, and
+Across a generic turning boundary,
+Proposition~\ref{prop:adjacent-slope-range-separation} shows that the
+interior tangent-slope ranges of the two adjacent intervals are disjoint.
+Hence no common interior tangent slope can occur. This contradicts the
+existence of $(s_*,t_*)$. Therefore no such zero exists, and
 \[
 K(s,t)\neq 0
 \qquad
@@ -5348,17 +5353,13 @@ K(s,t)\neq 0
 \]
 \end{proof}
 
-\begin{remark}[Audit: zero-capture in the turning-boundary adjacent theorem]
-\label{rem:audit-zero-capture-turning-boundary}
-The proof of Theorem~\ref{thm:adjacent-tangent-separator-sign-regularity}
-invokes Lemma~\ref{lem:compact-first-zero-reduction} after choosing a compact
-rectangle $J_2\times J_1\subset I_2\times I_1$ containing one zero and
-avoiding the boundary-near nonzero region. What remains to be justified fully is
-a genuine zero-capture statement on the whole adjacent pair, i.e. a theorem
-that all zeros of the tangent-separator kernel $K(s,t)$ on $I_2\times I_1$
-are captured in such a compact region under the stated turning-boundary
-hypotheses. This is a proof-organizational gap in the current turning-boundary
-argument, not an issue specific to the $W=0$ case.
+\begin{remark}[Status of the turning-boundary adjacent theorem]
+\label{rem:status-zero-capture-turning-boundary}
+Theorem~\ref{thm:adjacent-tangent-separator-sign-regularity} is now stated and
+proved conditionally on a zero-capture hypothesis for the tangent-separator
+kernel $K(s,t)$ on the adjacent pair $I_2\times I_1$. The remaining issue
+here is therefore not a gap in the local first-zero argument, but the separate
+theorem of proving zero-capture under the turning-boundary hypotheses.
 \end{remark}
 
 \begin{remark}[The $W=0$ obstruction and the cubic-inflection coefficient]
