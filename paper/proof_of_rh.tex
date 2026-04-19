@@ -4061,6 +4061,77 @@ u_{7,K_1}^{(q^{(7)})}(h)\not\equiv 0.
 \]
 \end{proof}
 
+\begin{lemma}[Parity elimination of pure same-point septic terms]
+\label{lem:parity-elimination-pure-septic}
+Let $t_\pm=h\pm s/2$, and let the odd two-point germ be defined as the odd
+part under the involution
+\[
+s\longmapsto -s
+\qquad
+(\text{equivalently }t_+\leftrightarrow t_-).
+\]
+Then any pure same-point septic contribution is even in $s$, hence vanishes in
+the odd two-point germ.
+
+In particular, pure same-point septic terms do not contribute to the weight-one
+part $[\Delta_7]^{[1]}$ of the septic residual determinant.
+\end{lemma}
+
+\begin{proof}
+A pure same-point term depends only on midpoint jet data at $h$, i.e. on the
+local one-point expansion evaluated at the midpoint, and carries no transport
+factor coming from the ordered pair $(t_+,t_-)$. Therefore it is invariant
+under exchanging the two points:
+\[
+t_+\leftrightarrow t_-.
+\]
+Since this exchange is exactly the involution $s\mapsto -s$, every pure
+same-point septic term is an even function of $s$.
+
+By definition, the odd two-point germ is obtained by projecting to the odd part
+under $s\mapsto -s$. Hence every even contribution vanishes in that
+projection. Therefore pure same-point septic terms do not survive into the odd
+pair germ.
+
+Finally, $\Delta_7$ is extracted from the odd pair germ after fixed-sector
+projection and quotient normalization. Since pure same-point septic terms are
+already zero in the odd germ, they cannot contribute to $[\Delta_7]^{[1]}$.
+\end{proof}
+
+\begin{corollary}[Weight-one septic reduction to the direct $K_1$ slice]
+\label{cor:weight-one-septic-reduction}
+Let $[\,\cdot\,]^{[1]}$ denote the part linear in the first genuinely new
+same-point $q^{(7)}$-slice. Then
+\[
+[\Delta_7]^{[1]}=[\Delta_{7,K_1}]^{[1]}.
+\]
+Equivalently, the highest genuinely new $q^{(7)}$-coefficient of the septic
+residual determinant comes only from the direct septic $K_1$-transport slice.
+\end{corollary}
+
+\begin{proof}
+The first genuinely new $q^{(7)}$-slice enters the same-point expansion at
+order $5$, so
+\[
+X_j^{[1]}=0
+\qquad (j<5).
+\]
+Hence every septic transport sector built only from lower same-point orders is
+weight zero; in particular, the $K_3$- and $K_5$-transport sectors do not
+contribute to $[\Delta_7]^{[1]}$.
+
+By Lemma~\ref{lem:parity-elimination-pure-septic}, pure same-point septic terms
+also do not contribute to $[\Delta_7]^{[1]}$, because they vanish already in
+the odd two-point germ.
+
+Thus the only septic sector that can see the weight-one $q^{(7)}$-slice is
+the direct $K_1$-transport sector, and therefore
+\[
+[\Delta_7]^{[1]}=[\Delta_{7,K_1}]^{[1]}.
+\qedhere
+\]
+\end{proof}
+
 \begin{remark}[Audit: full septic fixed-sector coefficient]
 \label{rem:audit-full-septic-fixed-sector}
 The draft now contains explicit coefficient formulas for the quintic
@@ -4068,7 +4139,10 @@ commutator contribution to $A_5^{\mathfrak f}$ and for the septic
 $K_1$-transport contribution to $A_7^{\mathfrak f}$. What still needs to be
 audited is the contribution of the remaining order-$7$ sectors to the full
 total septic fixed-sector pair $(u_7,v_7)$, and hence to the full total
-second residual determinant $\Delta_7$.
+second residual determinant $\Delta_7$. What remains open is therefore not
+the weight-one $q^{(7)}$-coefficient of $\Delta_7$, which is reduced to the
+direct $K_1$ slice by Corollary~\ref{cor:weight-one-septic-reduction}, but
+the lower/mixed septic contributions to the full total pair $(u_7,v_7)$.
 \end{remark}
 
 \subsection{Normalized planar curve and curvature bridge}
@@ -4279,6 +4353,71 @@ c\,W.
 \]
 The displayed formula for $K_\Gamma$ now follows from
 Proposition~\ref{prop:curvature-bridge-normalized-curve}.
+\end{proof}
+
+\begin{lemma}[Exact identities for $W$ and $W'$]
+\label{lem:exact-W-and-Wprime-identities}
+Let
+\[
+F(h):=(c(h),v_5(h),\Delta_7(h)),
+\qquad
+M(h):=c(h)v_5'(h)-c'(h)v_5(h).
+\]
+Then
+\[
+W(h)=\det(F(h),F'(h),F''(h))
+\]
+admits the exact expansion
+\[
+W
+=
+M\,\Delta_7''
++
+(v_5c''-cv_5'')\,\Delta_7'
++
+(c'v_5''-v_5'c'')\,\Delta_7,
+\]
+and
+\[
+W'(h)=\det(F(h),F'(h),F'''(h))
+\]
+admits the exact expansion
+\[
+W'
+=
+M\,\Delta_7'''
++
+(v_5c'''-cv_5''')\,\Delta_7'
++
+(c'v_5'''-v_5'c''')\,\Delta_7.
+\]
+\end{lemma}
+
+\begin{proof}
+Expand the determinant $\det(F,F',F'')$ along the third column. This gives
+\[
+W
+=
+\det\!\begin{pmatrix}
+c & v_5\\ c' & v_5'
+\end{pmatrix}\Delta_7''
+-
+\det\!\begin{pmatrix}
+c & v_5\\ c'' & v_5''
+\end{pmatrix}\Delta_7'
++
+\det\!\begin{pmatrix}
+c' & v_5'\\ c'' & v_5''
+\end{pmatrix}\Delta_7,
+\]
+which is exactly the first identity.
+
+For $W'$, differentiate $W=\det(F,F',F'')$. The terms
+$\det(F',F',F'')$ and $\det(F,F'',F'')$ vanish by repeated columns, so
+\[
+W'=\det(F,F',F''').
+\]
+Expanding along the third column gives the second formula.
 \end{proof}
 
 \begin{proposition}[ECT intervals for the strengthened one-pair triple]
@@ -4754,14 +4893,16 @@ point. Hence the vertical tangent line meets neither adjacent interval in its
 interior.
 \end{proof}
 
-\begin{theorem}[Adjacent tangent-separator sign regularity across turning boundaries]
+\begin{theorem}[Conditional adjacent tangent-separator sign regularity across turning boundaries]
 \label{thm:adjacent-tangent-separator-sign-regularity}
 Let $I_1<I_2$ be adjacent ECT intervals, and assume their common boundary
 point $h_b$ is a generic turning boundary:
 \[
 M(h_b)=0,\qquad M'(h_b)\neq 0,\qquad N(h_b)\neq 0.
 \]
-Then
+Assume in addition the zero-capture hypothesis of
+Lemma~\ref{lem:compact-first-zero-reduction} on the adjacent pair
+$I_2\times I_1$. Then
 \[
 K(s,t)\neq 0
 \qquad
@@ -5127,6 +5268,13 @@ on this boundary locus. Thus the current default expectation is ordinary affine
 inflection behavior unless the full leading coefficient of $W'$ can be shown
 to factor through additional special structure of the triple
 $(c,v_5,\Delta_7)$.
+
+By Lemma~\ref{lem:exact-W-and-Wprime-identities} and
+Corollary~\ref{cor:weight-one-septic-reduction}, the highest genuinely new
+jet contribution to $W'$ is already governed by the weight-one septic
+coefficient $[\Delta_7]^{[1]}$, so the present obstruction is not a new
+primitive order-$9$ invariant but a question about the full order-$7$
+package.
 \end{remark}
 
 \subsection{From the one-pair residual germ to two-pair and minimal-core rigidity}
@@ -5444,6 +5592,12 @@ affine inflection. Thus the turning-boundary part of the secant/tangent
 geometry is comparatively well controlled, while the real remaining issue is to
 find a $W=0$-specific replacement theorem or an additional structural
 identity forcing nongeneric affine-jet behavior there.
+
+Moreover, the exact identities for $W$ and $W'$ show that the highest
+genuinely new jet contribution to the $W=0$ obstruction is already governed by
+the septic residual determinant $\Delta_7$; thus the present issue is not the
+appearance of a fundamentally new order-$9$ invariant, but the full closure of
+the order-$7$ package at $W=0$.
 \end{remark}
 
 \begin{remark}[Current state of the argument]
@@ -5480,7 +5634,10 @@ M=0,\qquad M'\neq 0,\qquad N\neq 0
 is comparatively well behaved. The remaining nonlocal geometric issue is the
 $W=0,\ M\neq 0$ case, where the cubic-inflection coefficient is controlled by
 $W'(h_b)$ and the current architecture does not yet force nongeneric
-vanishing. The remaining audited issues are therefore both local and global:
+vanishing. The present evidence suggests that this $W=0$ obstruction is still
+encoded by the full septic coefficient of $\Delta_7$, via the exact identities
+for $W$ and $W'$, rather than by a genuinely new primitive order-$9$ scalar.
+The remaining audited issues are therefore both local and global:
 first-order surjectivity, the quintic pure-value quotient detector, the
 completion of the order-$7$ fixed-sector algebra, and the special
 $W=0$-boundary structure of the actual triple $(c,v_5,\Delta_7)$.
