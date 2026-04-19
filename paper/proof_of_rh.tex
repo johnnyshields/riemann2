@@ -8025,9 +8025,11 @@ $\Delta_7/c^2$ is.
 \end{remark}
 
 In this formulation, the geometric secant/tangent obstruction is well controlled
-on ECT intervals and across generic turning-point boundaries, but the behavior
-across boundaries of type $W=0,\ M\neq 0$ remains the main unresolved global
-issue.
+on ECT intervals and across generic turning-point boundaries. The remaining
+global issue is no longer a purely local $W=0,\ M\neq 0$ obstruction, but the
+global propagation / recurrence problem for the determinant-zero and tangent
+configurations that survive the local sterility results proved later in the
+paper.
 
 \begin{definition}[Two-pair decomposition]
 \label{def:two-pair-decomposition}
@@ -8383,6 +8385,113 @@ Substituting $u_7(h_j)=c(h_j)\sigma_v(h_j)$ gives
 \]
 Hence the points $Q_v(h_j)$ are affinely dependent.
 \end{proof}
+
+\begin{corollary}[Geometric meaning of defect-free lifted affine dependence]
+\label{cor:geometric-meaning-defect-free-lifted-affine-dependence-vpatch}
+Assume the hypotheses of
+Proposition~\ref{prop:defect-free-lifted-affine-dependence-vpatch}. Then:
+\begin{enumerate}
+\item if $k=2$, the two points $Q_v(h_1)$ and $Q_v(h_2)$ coincide;
+\item if $k=3$, the three points $Q_v(h_1),Q_v(h_2),Q_v(h_3)$ are
+collinear in $\mathbf C^3$;
+\item if $k=4$, the four points $Q_v(h_1),\dots,Q_v(h_4)$ are coplanar in
+$\mathbf C^3$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+By Proposition~\ref{prop:defect-free-lifted-affine-dependence-vpatch}, the
+points $Q_v(h_j)$ are affinely dependent. For $k=2$, affine dependence of
+two points is exactly coincidence. For $k=3$, affine dependence of three
+points is exactly collinearity. For $k=4$, affine dependence of four points
+is exactly coplanarity.
+\end{proof}
+
+\begin{corollary}[Explicit four-point determinant form on a $v_5$-patch]
+\label{cor:explicit-four-point-determinant-form-vpatch}
+Assume the hypotheses of
+Proposition~\ref{prop:defect-free-lifted-affine-dependence-vpatch} with
+$k=4$. Then the coplanarity of the four lifted points is equivalent to
+\[
+\det\!\begin{pmatrix}
+1 & y(h_1) & x(h_1) & \sigma_v(h_1)\\
+1 & y(h_2) & x(h_2) & \sigma_v(h_2)\\
+1 & y(h_3) & x(h_3) & \sigma_v(h_3)\\
+1 & y(h_4) & x(h_4) & \sigma_v(h_4)
+\end{pmatrix}
+=0.
+\]
+Equivalently,
+\[
+\det\!\begin{pmatrix}
+1 & \dfrac{u_5(h_1)}{c(h_1)} & \dfrac{v_5(h_1)}{c(h_1)} &
+\dfrac{\Delta_7(h_1)}{c(h_1)\,v_5(h_1)}\\[1.2ex]
+1 & \dfrac{u_5(h_2)}{c(h_2)} & \dfrac{v_5(h_2)}{c(h_2)} &
+\dfrac{\Delta_7(h_2)}{c(h_2)\,v_5(h_2)}\\[1.2ex]
+1 & \dfrac{u_5(h_3)}{c(h_3)} & \dfrac{v_5(h_3)}{c(h_3)} &
+\dfrac{\Delta_7(h_3)}{c(h_3)\,v_5(h_3)}\\[1.2ex]
+1 & \dfrac{u_5(h_4)}{c(h_4)} & \dfrac{v_5(h_4)}{c(h_4)} &
+\dfrac{\Delta_7(h_4)}{c(h_4)\,v_5(h_4)}
+\end{pmatrix}
+=0.
+\]
+Multiplying row $j$ by $v_5(h_j)$ gives the canonical determinant identity
+\[
+\det\!\begin{pmatrix}
+v_5(h_1) & u_5(h_1) & \dfrac{v_5(h_1)^2}{c(h_1)} &
+\dfrac{\Delta_7(h_1)}{c(h_1)}\\[1.2ex]
+v_5(h_2) & u_5(h_2) & \dfrac{v_5(h_2)^2}{c(h_2)} &
+\dfrac{\Delta_7(h_2)}{c(h_2)}\\[1.2ex]
+v_5(h_3) & u_5(h_3) & \dfrac{v_5(h_3)^2}{c(h_3)} &
+\dfrac{\Delta_7(h_3)}{c(h_3)}\\[1.2ex]
+v_5(h_4) & u_5(h_4) & \dfrac{v_5(h_4)^2}{c(h_4)} &
+\dfrac{\Delta_7(h_4)}{c(h_4)}
+\end{pmatrix}
+=0.
+\]
+Equivalently, multiplying instead row $j$ by $c(h_j)v_5(h_j)$ gives the
+fully polynomial version
+\[
+\det\!\begin{pmatrix}
+c(h_1)v_5(h_1) & u_5(h_1)v_5(h_1) & v_5(h_1)^2 & \Delta_7(h_1)\\
+c(h_2)v_5(h_2) & u_5(h_2)v_5(h_2) & v_5(h_2)^2 & \Delta_7(h_2)\\
+c(h_3)v_5(h_3) & u_5(h_3)v_5(h_3) & v_5(h_3)^2 & \Delta_7(h_3)\\
+c(h_4)v_5(h_4) & u_5(h_4)v_5(h_4) & v_5(h_4)^2 & \Delta_7(h_4)
+\end{pmatrix}
+=0.
+\]
+\end{corollary}
+
+\begin{proof}
+For $k=4$, Corollary~\ref{cor:geometric-meaning-defect-free-lifted-affine-dependence-vpatch}
+shows that the four lifted points
+\[
+Q_v(h_j)=\bigl(y(h_j),x(h_j),\sigma_v(h_j)\bigr)
+\]
+are coplanar. This is equivalent to the vanishing of the affine $4\times4$
+determinant with first column $1$. The displayed reformulations follow by
+substituting the definitions of $x,y,\sigma_v$ and multiplying rows by the
+indicated nonzero factors.
+\end{proof}
+
+\begin{remark}[Parallel $u_5$-patch version]
+\label{rem:parallel-u5-patch-version}
+There is a completely parallel local story on any connected interval in
+$\{c\neq 0,\ u_5\neq 0\}$, obtained by choosing the local septic gauge
+$u_7=0$ instead of $v_7=0$. Then one defines
+\[
+\tau_u(h):=-\frac{\Delta_7(h)}{c(h)\,u_5(h)},
+\qquad
+Q_u(h):=\left(\frac{u_5(h)}{c(h)},\frac{v_5(h)}{c(h)},\tau_u(h)\right),
+\]
+and the same defect-free affine-dependence conclusions hold with $Q_v$
+replaced by $Q_u$. Since the present one-pair geometry already uses
+\[
+x(h)=\frac{v_5(h)}{c(h)}
+\]
+as the distinguished ECT coordinate, the $v_5\neq 0$ patch is the natural
+first setting and will be used below.
+\end{remark}
 
 \begin{proposition}[Linear independence of $1,u_5/c,v_5/c$]
 \label{prop:linear-independence-one-u5-over-c-v5-over-c}
@@ -8970,31 +9079,156 @@ $[A_7^{\mathfrak f}]$ or the canonical second residual determinant
 $\Delta_7$.
 \end{remark}
 
-\begin{remark}[Work in progress: high-height contradiction versus full $\RH$]
+\begin{remark}[Work in progress: asymptotic contradiction versus full $\RH$]
 \label{rem:wip-high-height-only}
-The contradiction proved below is asymptotic in the height parameter $Q$:
-the comparison concludes only after reaching a stage at which
+As presently written, the final contradiction is only asymptotic in the height
+parameter $Q$: the comparison closes after reaching a regime in which the
+zeta-side upper bound is dominated by the toy-side lower bound, schematically
+because
 \[
-Q^4 e^{-\delta Q}\ll 1.
+Q^4 e^{-\delta Q}\to 0
+\qquad (Q\to\infty).
 \]
-Thus, as presently written, the argument rules out sufficiently large
-pair-like off-line anomalies, but does not yet by itself exclude a
-hypothetical low-lying off-line zero.
+Accordingly, the current argument excludes sufficiently large pair-like
+off-line anomalies, but does not yet by itself rule out a hypothetical
+low-lying off-line zero.  In particular, the present proof does not furnish a
+uniform-in-height contradiction, nor does it presently prove that a single
+off-line zero at one height would force corresponding bad local anomalies at
+arbitrarily large heights.
 
-To deduce the full Riemann Hypothesis from this asymptotic contradiction, one
-still needs an additional bridge, for example:
+A plausible repair is to split the endgame into an effective high-height
+theorem plus a separate finite low-height bridge.
+
+\smallskip
+
+\noindent
+\emph{Effective high-height step.}
+One should first replace the soft asymptotic comparison by an explicit
+inequality.  Concretely, the final contradiction compares a toy-side lower
+bound of the form
+\[
+|\Xi_{\toy}^{(N)}(u,d)|
+\ge
+c_{\toy}\,\mathcal{L}(m)
+\]
+against a zeta-side upper bound of the form
+\[
+|\Xi_{\zeta}^{(N)}(m)|
+\le
+C_{\zeta}\,\mathcal{U}(m)\,e^{-\delta Q},
+\]
+where in the present draft one has schematically
+\[
+\mathcal{L}(m)\asymp \frac{x}{B_\zeta(m)}S(m)
+\]
+(or its variable-$x$ replacement from
+Remark~\ref{rem:wip-calibration-small-u}),
+and
+\[
+\mathcal{U}(m)\asymp L(m)S(m)^2.
+\]
+To extract an actual threshold, every use of $O(\cdot)$, $\ll$, and
+$\asymp$ in the final comparison must be replaced by explicit constants.
+After substituting explicit bounds such as
+\[
+B_\zeta(m)\le C_B Q,\qquad
+L(m)\le C_L Q,\qquad
+S(m)\le C_S Q^2,
+\]
+the contradiction should reduce to an explicit scalar inequality of the form
+\[
+C_* Q^4 e^{-\delta Q}<1
+\qquad (Q\ge Q_*),
+\]
+for some computable constant $C_*>0$.  Any explicit $Q_*$ satisfying this
+inequality would then yield an \emph{effective} theorem excluding pair-like
+off-line anomalies for all $Q\ge Q_*$.
+
+\smallskip
+
+\noindent
+\emph{Height extraction.}
+Once $Q_*$ is known explicitly, one must convert it into an actual height
+threshold.  Since the draft works with a midpoint parameter $m$ satisfying
+\[
+Q\asymp \log |m|,
+\]
+this requires making the logarithmic comparability effective, for example in
+the form
+\[
+c_Q \log(3+|m|)\le Q\le C_Q \log(3+|m|).
+\]
+From such inequalities one obtains an explicit midpoint threshold $m_*$, and
+hence an explicit zero-height threshold $T_*$, since the local points under
+consideration satisfy
+\[
+t_\pm = m \pm \frac{\sigma}{2}
+\]
+with $|\sigma|$ microscopic relative to the height scale.  Thus one would
+arrive at a statement of the form:
+\[
+\text{no pair-like off-line zero can occur for } |\Im \rho|>T_*.
+\]
+
+\smallskip
+
+\noindent
+\emph{Finite low-height bridge.}
+The effective high-height theorem alone still does not imply the full Riemann
+Hypothesis unless one also excludes all potential off-line zeros below the
+threshold $T_*$.  A natural way to do this is to combine the structural
+argument above height $T_*$ with a rigorous finite verification of $\RH$
+up to height $T_*$.  Accordingly, if one can arrange that the explicit
+threshold $T_*$ lies below a rigorously verified range, then the final step
+would be:
+\[
+\text{high-height exclusion above }T_*
+\quad+\quad
+\text{rigorous verification below }T_*
+\quad\Longrightarrow\quad
+\RH.
+\]
+This would still be an unconditional proof, albeit a computer-assisted one
+rather than a purely internal asymptotic contradiction.
+
+\smallskip
+
+\noindent
+\emph{What still needs to be made explicit.}
+To implement this repair rigorously, the draft must still supply all of the
+following ingredients in effective form:
 \begin{enumerate}
-\item a theorem showing that any off-line zero forces a corresponding bad
-local anomaly at arbitrarily large heights;
-\item a finite verification excluding all low-lying off-line zeros below the
-threshold at which the asymptotic contradiction applies; or
-\item a reformulation of the endgame that yields a contradiction uniformly in
-height, without a ``for $Q$ sufficiently large'' clause.
+\item an explicit toy-side lower constant on the admissible compact
+$d$-range and microscopic $u$-range;
+\item an explicit zeta-side upper constant in the $N$-point cancellation
+estimate, including the exponential decay rate $\delta$;
+\item explicit growth bounds for the auxiliary quantities appearing in the
+final comparison, including $B_\zeta(m)$, $L(m)$, and $S(m)$;
+\item an explicit conversion between the logarithmic parameter $Q$ and the
+actual height variable;
+\item a final theorem stated as an effective exclusion above a concrete
+threshold $T_*$, rather than merely ``for $Q$ sufficiently large'';
+\item a separate low-height bridge, either by citing a rigorous finite
+verification result covering the range up to $T_*$, or by proving an
+alternative uniform-in-height contradiction.
 \end{enumerate}
 
-Accordingly, the theorem below should presently be interpreted as an
-asymptotic pair-like contradiction theorem rather than yet as a complete proof
-of $\RH$.
+\smallskip
+
+\noindent
+There is, in principle, a second possible repair: prove a propagation theorem
+showing that any off-line zero at one height would force corresponding bad
+local anomalies at arbitrarily large heights, so that the asymptotic
+contradiction would automatically apply.  However, no such propagation
+principle is currently established in the draft, and at present this appears
+to be a substantially stronger theorem than the effective-threshold route
+described above.
+
+Accordingly, the current endgame should be read as an asymptotic contradiction
+theorem in the pair-like branch.  A plausible route to a complete proof of
+$\RH$ is available, but it requires an effective extraction of the height
+threshold together with a finite low-height bridge, neither of which has yet
+been written out in the draft.
 \end{remark}
 
 \begin{theorem}[Final calibrated $N$-point contradiction in the pair-like branch]
