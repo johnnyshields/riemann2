@@ -2545,7 +2545,7 @@ Applying these to the homogeneous expansion and summing over all placements of
 the input coefficients gives the displayed triangular bound.
 \end{proof}
 
-\begin{proposition}[Symbolic one-pair coefficient decomposition]
+\begin{proposition}[Kernel-class decomposition for one-pair perturbations]
 \label{prop:one-pair-symbolic-coefficient-decomposition}
 Fix $0<c_0<\rho_0/4$ and put
 \[
@@ -2559,12 +2559,38 @@ from the local center, and set
 \[
 r_\Delta:=\min\{\Delta,R\}.
 \]
+
+Define the baseline class $\mathcal B_R$ to consist of scalar holomorphic
+germs $B(z)$ on $|z|<2R$ satisfying
+\[
+|B(z)|\ll 1
+\qquad (|z|\le 2R),
+\]
+and define the pair-kernel class $\mathcal K_{\Delta,R}$ to consist of scalar
+holomorphic germs $K(z)$ on $|z|<2r_\Delta$ satisfying
+\[
+|K(z)|\ll \Delta^{-4}
+\qquad (|z|\le 2r_\Delta).
+\]
+Further, let $\mathcal L_{\Delta,R}$ denote the class of finite sums of
+monomials
+\[
+P(z/Q)\,B(z)\,K(z),
+\]
+and let $\mathcal N_{\Delta,R}$ denote the class of finite sums of monomials
+\[
+P(z/Q)\,B(z)\,K_1(z)\cdots K_p(z),
+\qquad p\ge 2,
+\]
+where $P$ is a fixed polynomial, $B\in\mathcal B_R$, and each
+$K,K_i\in\mathcal K_{\Delta,R}$.
+
 Let $f_\rho(t)$ denote the one-pair phase-derivative contribution, and remove
 its midpoint affine jet:
 \[
 r_\rho(t):=f_\rho(t)-f_\rho(m)-f_\rho'(m)(t-m).
 \]
-Define
+Set
 \[
 t_\pm:=m\pm \frac{z}{2Q^2},
 \qquad
@@ -2588,33 +2614,20 @@ e_\pm(z)=\frac{z}{Q^2}E_\pm(z),
 \qquad
 g_\pm(z)=G_\pm(z),
 \qquad
-\eta(z)=\frac{z^3}{Q^6}V(z).
+\eta(z)=\frac{z^3}{Q^6}V(z),
 \]
-Moreover, for every fixed $H_*>1$, if $\Delta\ge H_*$, then these kernels
-are holomorphic on $|z|<2r_\Delta$ and satisfy
+and for every fixed $H_*>1$, if $\Delta\ge H_*$, then
 \[
-|U_\pm(z)|+|E_\pm(z)|+|G_\pm(z)|+|V(z)|
-\ll
-\Delta^{-4}
-\qquad (|z|\le 2r_\Delta).
+U_\pm,E_\pm,G_\pm,V\in \mathcal K_{\Delta,R}.
 \]
 
 Let $D_Q:=\mathrm{diag}(Q,1)$, and let $W_\rho(z)$ denote the triple of
 one-pair perturbation blocks entering
 Proposition~\ref{prop:differentiated-whitening-transfer}, after conjugation by
-$D_Q$ on each block. Then every entry of every block of $W_\rho(z)$ is a
-finite sum of monomials
+$D_Q$ on each block. Then every entry of every block of $W_\rho(z)$ lies in
 \[
-P(z/Q)\,B(z)\,K_1(z)\cdots K_p(z),
+\mathcal L_{\Delta,R}+\mathcal N_{\Delta,R}.
 \]
-where:
-\begin{enumerate}
-\item $P$ is a fixed polynomial,
-\item $B$ is a baseline holomorphic factor uniformly bounded on
-$|z|<2r_\Delta$,
-\item each $K_i$ is one of $U_+,U_-,E_+,E_-,G_+,G_-,V$,
-\item and $p\ge 1$.
-\end{enumerate}
 Consequently,
 \[
 \boxed{
@@ -2633,84 +2646,123 @@ R^{-n}\Delta^{-4}, & \Delta>R,
 The one-pair denominator poles are at distance $\asymp \Delta$ in the
 $s$-plane, hence at distance $\asymp Q^2\Delta$ in the $z$-plane. Since
 the midpoint affine jet has been removed, the displayed divisibilities by
-$z^2$, $z$, and $z^3$ follow immediately, and Cauchy on the disk
-$|z|<2r_\Delta$ gives the kernel bounds
+$z^2$, $z$, and $z^3$ are immediate, and Cauchy on the disk
+$|z|<2r_\Delta$ gives
 \[
-|U_\pm|+|E_\pm|+|G_\pm|+|V|\ll \Delta^{-4}.
+U_\pm,E_\pm,G_\pm,V\in \mathcal K_{\Delta,R}.
 \]
 
-All baseline factors appearing in the corrected same-point and mixed blocks are
-holomorphic and uniformly bounded on $|z|<2R$, hence also on
-$|z|<2r_\Delta$. The explicit one-pair formulas then show:
+Every baseline factor appearing in the corrected same-point and mixed formulas
+is holomorphic and uniformly bounded on $|z|<2R$, hence belongs to
+$\mathcal B_R$. Since $r_\Delta\le R=c_0Q$, every polynomial $P(z/Q)$ is
+uniformly bounded on $|z|\le 2r_\Delta$.
 
-\smallskip
-
-\noindent
-\emph{same-point block:}
-after conjugation by $D_Q$, the entries are finite sums built from
+For the corrected same-point block, after conjugation by $D_Q$, the entries
+are polynomial expressions in
 \[
-(z/Q)^2U_\pm,\qquad (z/Q)E_\pm,\qquad G_\pm,
+(z/Q)^2U_\pm,\qquad (z/Q)E_\pm,\qquad G_\pm
 \]
-together with higher-order terms such as
-\[
-B(z)(z/Q)^2U_\pm,\qquad B(z)(z/Q)^4U_\pm^2,\qquad (z/Q)^6U_\pm^3;
-\]
+with coefficients in $\mathcal B_R$. Therefore each same-point entry lies in
+$\mathcal L_{\Delta,R}+\mathcal N_{\Delta,R}$.
 
-\smallskip
-
-\noindent
-\emph{mixed block:}
-writing
+For the corrected mixed block, write
 \[
 q_\pm=q_{0,\pm}+d_\pm,
 \qquad
-\Delta=\Delta_0+\eta,
+\Delta=\Delta_0+\eta.
 \]
-the removable $1/s$, $1/s^2$, $1/s^3$ singularities are cancelled by the
-exact divisibilities $d_\pm\sim z^2$ and $\eta\sim z^3$. After conjugation
-by $D_Q$, the $(1,1)$-entry is a finite sum of terms of the form
-\[
-(z/Q)^2B(z)V
-\]
-plus higher pair order, the off-diagonal entries are finite sums of terms of
-the form
-\[
-(z/Q)B(z)(U_\pm+V)
-\]
-plus higher pair order, and the $(2,2)$-entry is a finite sum of terms of
-the form
-\[
-B(z)(U_-+U_++V)
-\]
-plus terms with at least two pair-kernel factors.
+The $(1,1)$-entry and off-diagonal entries are obtained from the explicit
+mixed-block formulas by dividing numerators that are respectively divisible by
+$s^3$ and $s^3$, because $d_\pm=s^2u_\pm$ and $\eta=s^3v$. Thus, after
+conjugation by $D_Q$, these entries are finite sums of baseline factors times
+$U_\pm$ and $V$, plus terms containing at least two pair kernels; hence they
+lie in $\mathcal L_{\Delta,R}+\mathcal N_{\Delta,R}$.
 
-Thus every weighted block entry has the stated monomial form. On
-$|z|\le 2r_\Delta$, the factor $P(z/Q)$ is uniformly bounded because
-$r_\Delta\le R=c_0Q$, and each baseline factor $B(z)$ is bounded. Hence a
-monomial with $p$ pair kernels satisfies
+For the mixed $(2,2)$-entry, define
 \[
-|P(z/Q)B(z)K_1\cdots K_p|
-\ll
-\Delta^{-4p}
-\qquad (|z|\le 2r_\Delta).
+F(q_-,q_+,\Delta;s)
+:=
+(q_-+q_+)s\cos\Delta+(2-q_-q_+s^2)\sin\Delta.
 \]
-Cauchy therefore gives
+Then the perturbation is
 \[
-[z^n]\bigl(P(z/Q)B(z)K_1\cdots K_p\bigr)
-\ll
-r_\Delta^{-n}\Delta^{-4p}.
+\frac{
+F(q_{0,-}+d_-,\,q_{0,+}+d_+,\,\Delta_0+\eta;s)
+-
+F(q_{0,-},\,q_{0,+},\,\Delta_0;s)
+}{s^3}.
 \]
-For the linear terms $p=1$, this is
+Taylor expansion in the increment vector
 \[
+\delta\mathbf x:=(d_-,d_+,\eta)
+\]
+around the baseline point
+\[
+(q_{0,-},q_{0,+},\Delta_0)
+\]
+gives
+\[
+F(\mathbf x_0+\delta\mathbf x)-F(\mathbf x_0)
+=
+\partial_{q_-}F_0\,d_-
++
+\partial_{q_+}F_0\,d_+
++
+\partial_\Delta F_0\,\eta
++
+R_2,
+\]
+where $R_2$ is quadratic and higher in $(d_-,d_+,\eta)$, and
+\[
+\partial_{q_-}F
+=
+s\cos\Delta-q_+s^2\sin\Delta,
+\]
+\[
+\partial_{q_+}F
+=
+s\cos\Delta-q_-s^2\sin\Delta,
+\]
+\[
+\partial_\Delta F
+=
+-(q_-+q_+)s\sin\Delta+(2-q_-q_+s^2)\cos\Delta.
+\]
+Dividing by $s^3$ and using $d_\pm=s^2u_\pm$, $\eta=s^3v$, the linear
+part becomes
+\[
+B_-(s)\,u_-(s)+B_+(s)\,u_+(s)+B_\Delta(s)\,v(s),
+\]
+with $B_-,B_+,B_\Delta\in\mathcal B_R$. Thus the linear part lies in
+$\mathcal L_{\Delta,R}$. Every monomial in $R_2$ contains at least two
+factors among $d_-,d_+,\eta$, hence after division by $s^3$ it contains at
+least two pair kernels; therefore $R_2/s^3\in \mathcal N_{\Delta,R}$. This
+proves that the mixed $(2,2)$-entry also lies in
+$\mathcal L_{\Delta,R}+\mathcal N_{\Delta,R}$.
+
+Thus every entry of every weighted one-pair perturbation block lies in
+$\mathcal L_{\Delta,R}+\mathcal N_{\Delta,R}$. If $H\in\mathcal L_{\Delta,R}$,
+then by Cauchy
+\[
+[z^n]H \ll r_\Delta^{-n}\Delta^{-4}.
+\]
+If $H\in\mathcal N_{\Delta,R}$, then
+\[
+[z^n]H \ll r_\Delta^{-n}\Delta^{-8},
+\]
+since every nonlinear monomial carries at least two pair kernels. Hence for
+$\Delta\ge H_*$, the nonlinear class is dominated by the linear one, and
+\[
+\|[z^n]W_\rho(z)\|
 \ll
+r_\Delta^{-n}\Delta^{-4}
+=
 \begin{cases}
-\Delta^{-(n+4)}, & \Delta\le R,\\[1ex]
+\Delta^{-(n+4)}, & H_*\le \Delta\le R,\\[1ex]
 R^{-n}\Delta^{-4}, & \Delta>R.
 \end{cases}
 \]
-Every term with $p\ge 2$ gains at least one extra factor $\Delta^{-4}$, so
-for $\Delta\ge H_*$ they are dominated by the linear terms. Taking the
-maximum over the finitely many entries and blocks gives the result.
+This is the claimed bound.
 \end{proof}
 
 \begin{corollary}[Single-pair exterior odd-coefficient bound]
@@ -2758,8 +2810,9 @@ for the normalized even germ
 \[
 \widehat g_\rho(z):=\frac{Q^3}{z}\,h_\rho(z/Q^2).
 \]
-Every nonlinear term in the Banach-algebra expansion carries at least one extra
-pair-kernel factor and is therefore smaller by an additional factor
+By Proposition~\ref{prop:one-pair-symbolic-coefficient-decomposition}, the
+input perturbation triple lies in $\mathcal L_{\Delta,R}+\mathcal
+N_{\Delta,R}$, and the nonlinear part is smaller by an additional factor
 $\Delta^{-4}$ once $\Delta\ge H_*$. Undoing the definition of
 $\widehat g_\rho$ gives the displayed bound for $a_{2r+1}(\rho)$.
 \end{proof}
@@ -16258,12 +16311,18 @@ coupled quintic--septic degeneration tower.
 
 So the missing lifted ingredient is no longer a vague analysis of the mixed
 locus. On the nonmixed side, what remains is the global/source-level control of
-which odd zeros of
+odd zeros of the canonical source-level Wronskian
 \[
-\mathcal R=\frac{T_v}{K_v^2}
+\mathcal W_{\mathrm{src}}=J_\lambda J_{u_5}'-J_{u_5}J_\lambda',
 \]
-can actually occur on genuine opened arcs, equivalently the sign behavior of
-the quadratic-envelope derivative or of the osculatory source determinant
+equivalently of odd zeros of
+\[
+\mathcal R=\frac{T_v}{K_v^2},
+\]
+along genuine opened nonmixed arcs. In repeated-source variables, the same
+burden can be phrased as exclusion of first-loss monotonicity for the
+quadratic-envelope scalar $\Gamma_a$, equivalently for the source quotient
+$\Psi_a$, or as sign control of the osculatory source determinant
 $\mathfrak D(a,h)$. On the mixed side, what remains is the effective use of
 the already-established punctured-arc quintic-patch dichotomy together with,
 as backup local algebra, exclusion of the remaining coupled quintic--septic
@@ -16420,9 +16479,14 @@ contacts, and the local geometry splits into a nonmixed and a mixed regime.
 On the nonmixed side, the local derivative-side theory is now explicit:
 exact contacts force zeros of $\mathcal R=T_v/K_v^2$, isolated zeros are
 classified by parity, one-sign $\mathcal R$-intervals are exactly-contact
-sterile, and recurrent exact contacts force affine-planar collapse. For fixed
-source point $a$, repeated-source exact contacts factor through the
-quadratic-envelope scalar
+sterile, and recurrent exact contacts force affine-planar collapse. At source
+level, the same structure is encoded by the gauge-invariant Wronskian
+\[
+\mathcal W_{\mathrm{src}}=J_\lambda J_{u_5}'-J_{u_5}J_\lambda',
+\]
+which differs from $\mathcal R$ only by a nonvanishing analytic factor on a
+nonmixed arc. For fixed source point $a$, repeated-source exact contacts
+factor through the quadratic-envelope scalar
 \[
 \Gamma_a(x)=
 \frac{Y(x)-Y(a)-Y'(a)(x-a)}
@@ -16434,8 +16498,8 @@ equivalently through the source quotient
 \]
 with derivative governed by the osculatory source determinant
 $\mathfrak D(a,h)$. So the remaining nonmixed burden is global/source-level
-control of which odd zeros of $\mathcal R$ occur on a genuine opened
-nonmixed arc.
+control of which odd zeros of $\mathcal W_{\mathrm{src}}$, equivalently of
+$\mathcal R$, occur on a genuine opened nonmixed arc.
 
 On the mixed side, the dangerous low-order obstruction list is the finite
 canonical set
