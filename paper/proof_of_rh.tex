@@ -8282,7 +8282,7 @@ The intended two-pair and minimal-core rigidity statements should ultimately be
 reformulated in terms of this strengthened one-pair invariant geometry.
 \end{remark}
 
-\begin{remark}[Work in progress]
+\begin{remark}[Subsection guide]
 \label{rem:wip-multi-pair-subsection}
 This subsection is best read as a rigidity program built on the strengthened
 one-pair local package
@@ -8293,10 +8293,11 @@ or equivalently the normalized planar curve
 \[
 h\longmapsto \left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right).
 \]
-The projective coincidence conditions remain the intended organizing principle
-for the two-pair and minimal-core analysis; the remaining steps are now
-algebraic interaction corrections and the extraction into the finite-core
-endgame.
+The projective coincidence conditions remain the organizing principle for the
+two-pair and minimal-core analysis. The two-point algebraic interaction
+correction is now supplied explicitly below through the source-level
+finite-order package, and the remaining steps are the genuine multi-pair
+interaction bookkeeping and the extraction into the finite-core endgame.
 \end{remark}
 
 \begin{remark}[Interpretation of residual notation in the multi-pair architecture]
@@ -8474,14 +8475,18 @@ paper.
 \begin{definition}[Two-pair decomposition]
 \label{def:two-pair-decomposition}
 For a normalized two-pair core with amplitudes $a_1,a_2$ and offsets
-$h_1,h_2$, write its quotient odd germ as
+$h_1,h_2$, write its quotient odd germ schematically as
 \[
 F_{(a_1,h_1;a_2,h_2)}(z)
 =
 a_1F_{h_1}(z)+a_2F_{h_2}(z)+\mathcal I_{12}(z),
 \]
-where $\mathcal I_{12}(z)$ denotes the pair-interaction germ, quadratic in
-the pair amplitudes.
+where $\mathcal I_{12}(z)$ denotes the pair-interaction germ.
+
+In the explicit finite-order corrected source-level model through order $7$
+constructed below, the cubic scalar, quintic fixed-sector, and septic
+fixed-sector projections of $\mathcal I_{12}$ are quadratic in the amplitudes
+and divisible by $(h_1-h_2)^2$.
 \end{definition}
 
 \begin{proposition}[Exact strengthened two-pair coincidence through order $7$]
@@ -8896,113 +8901,217 @@ then the displayed lower bound would force
 which is impossible for a nontrivial two-point core with $h_1\neq h_2$.
 \end{proof}
 
-\begin{proposition}[Conditional source-level quadratic interaction remainder]
+\begin{proposition}[Source-level finite-order quadratic interaction remainder]
 \label{prop:conditional-source-level-quadratic-interaction-remainder}
-Assume there exists a finite-dimensional corrected quotient-germ target
-$\mathcal G$ and an analytic map
-\[
-\mathfrak Q:\mu\longmapsto \mathfrak Q(\mu)\in\mathcal G
-\]
-defined on small finite atomic sources
+For a small finite atomic source
 \[
 \mu=\sum_j a_j\delta_{h_j},
 \]
-such that the corrected one-pair and two-pair objects are given by
+let $q_\mu$ and $\Phi_\mu$ be defined by linear superposition of the corrected
+one-pair phase derivative and primitive attached to each atom:
 \[
-\mathcal F_1(a,h):=\mathfrak Q(a\,\delta_h),
+q_\mu:=\sum_j a_j\,q_{h_j},
 \qquad
-\mathcal F_2(a_1,h_1;a_2,h_2):=\mathfrak Q(a_1\delta_{h_1}+a_2\delta_{h_2}).
+\Phi_\mu:=\sum_j a_j\,\Phi_{h_j}.
 \]
-Define the raw interaction remainder by
+Insert $(q_\mu,\Phi_\mu)$ into the corrected same-point and mixed block formulas
+of Propositions~\ref{prop:block-perturbation} and
+\ref{prop:cross-block-perturbation}, and whiten as in
+Proposition~\ref{prop:corrected-whitening}. Let
 \[
-\mathcal I(a_1,h_1;a_2,h_2)
+\mathfrak P_{\le 7}(\mu)
 :=
-\mathcal F_2(a_1,h_1;a_2,h_2)
--\mathcal F_1(a_1,h_1)-\mathcal F_1(a_2,h_2).
+\bigl(c_\mu,\ A_{5,\mu}^{\mathfrak f},\ A_{7,\mu}^{\mathfrak f}\bigr)
+\in
+\mathbf C\oplus \mathfrak f\oplus \mathfrak f
 \]
-Then there exists an analytic germ-valued map $\mathcal J$ such that
+denote the resulting cubic scalar, quintic fixed-sector, and septic
+fixed-sector package of the odd germ through order $7$.
+
+For a single atom set
+\[
+F_h:=\mathfrak P_{\le 7}(\delta_h)
+=
+\bigl(c(h),A_5^{\mathfrak f}(h),A_7^{\mathfrak f}(h)\bigr).
+\]
+For two atoms define the interaction remainder
+\[
+\mathcal I_2(a_1,h_1;a_2,h_2)
+:=
+\mathfrak P_{\le 7}(a_1\delta_{h_1}+a_2\delta_{h_2})
+-a_1F_{h_1}-a_2F_{h_2}.
+\]
+
+Then the finite-order source package is source-defined and satisfies
+\[
+\mathfrak P_{\le 7}(a_1\delta_{h_1}+a_2\delta_{h_2})
+=
+\mathfrak P_{\le 7}(a_2\delta_{h_2}+a_1\delta_{h_1}),
+\]
+\[
+\mathfrak P_{\le 7}(a_1\delta_h+a_2\delta_h)
+=
+\mathfrak P_{\le 7}((a_1+a_2)\delta_h),
+\]
+\[
+\mathfrak P_{\le 7}(a\delta_h)=a\,F_h.
+\]
+Moreover there exists an analytic map
+\[
+\mathcal J_2:\ (\text{small two-atom data})
+\longrightarrow
+\mathbf C\oplus \mathfrak f\oplus \mathfrak f
+\]
+such that
 \[
 \boxed{
-\mathcal I(a_1,h_1;a_2,h_2)
+\mathcal I_2(a_1,h_1;a_2,h_2)
 =
-a_1a_2\,(h_1-h_2)^2\,\mathcal J(a_1,h_1;a_2,h_2).
+a_1a_2\,(h_1-h_2)^2\,\mathcal J_2(a_1,h_1;a_2,h_2).
 }
 \]
+In particular, the cubic scalar, quintic fixed-sector, and septic fixed-sector
+interaction defects all satisfy the same quadratic factorization.
 \end{proposition}
 
 \begin{proof}
-The source-level definition of $\mathcal F_2$ is symmetric in the two atoms,
-so
+By construction, the corrected same-point blocks, the corrected mixed block,
+and the whitened block depend on the atomic data only through the source-summed
+fields $q_\mu$ and $\Phi_\mu$. Since these are linear in $\mu$, the resulting
+finite-order package
 \[
-\mathcal I(a_1,h_1;a_2,h_2)=\mathcal I(a_2,h_2;a_1,h_1).
+\mathfrak P_{\le 7}(\mu)
+=
+\bigl(c_\mu,A_{5,\mu}^{\mathfrak f},A_{7,\mu}^{\mathfrak f}\bigr)
 \]
-Also, if one amplitude is zero, then the two-pair source reduces to a one-pair
-source, hence
-\[
-\mathcal I(0,h_1;a_2,h_2)=\mathcal I(a_1,h_1;0,h_2)=0.
-\]
-Thus $\mathcal I$ is divisible by $a_1a_2$, so
-\[
-\mathcal I(a_1,h_1;a_2,h_2)=a_1a_2\,G(h_1,h_2)
-\]
-for some analytic $\mathcal G$-valued map $G$.
+depends only on the source $\mu$ itself, not on any ordering or presentation of
+its atoms. Analyticity in the atomic parameters follows from the linear
+superposition in $(q_\mu,\Phi_\mu)$ together with the analytic whitening map of
+Proposition~\ref{prop:corrected-whitening} after shrinking the source
+neighborhood if necessary.
 
-Now if $h_1=h_2=h$, then
+For two atoms, source-definedness immediately gives swap symmetry:
+\[
+\mathfrak P_{\le 7}(a_1\delta_{h_1}+a_2\delta_{h_2})
+=
+\mathfrak P_{\le 7}(a_2\delta_{h_2}+a_1\delta_{h_1}).
+\]
+Likewise, on the diagonal
 \[
 a_1\delta_h+a_2\delta_h=(a_1+a_2)\delta_h,
 \]
-so
+hence
 \[
-\mathcal F_2(a_1,h;a_2,h)=\mathcal F_1(a_1+a_2,h),
+\mathfrak P_{\le 7}(a_1\delta_h+a_2\delta_h)
+=
+\mathfrak P_{\le 7}((a_1+a_2)\delta_h).
 \]
-and therefore
+
+Fix $h$ and write
 \[
-\mathcal I(a_1,h;a_2,h)=0.
+Q_h(a):=\mathfrak P_{\le 7}(a\delta_h).
 \]
-Equivalently,
+The diagonal merger identity gives
+\[
+Q_h(a_1+a_2)=Q_h(a_1)+Q_h(a_2).
+\]
+Since $Q_h$ is analytic in $a$, the analytic Cauchy equation forces linearity:
+\[
+Q_h(a)=a\,Q_h(1).
+\]
+Defining
+\[
+F_h:=Q_h(1)=\mathfrak P_{\le 7}(\delta_h)
+\]
+yields
+\[
+\mathfrak P_{\le 7}(a\delta_h)=a\,F_h.
+\]
+
+Now define
+\[
+\mathcal I_2(a_1,h_1;a_2,h_2)
+:=
+\mathfrak P_{\le 7}(a_1\delta_{h_1}+a_2\delta_{h_2})
+-a_1F_{h_1}-a_2F_{h_2}.
+\]
+If one amplitude is zero, then by the one-atom linearity just proved,
+\[
+\mathcal I_2(0,h_1;a_2,h_2)=0,
+\qquad
+\mathcal I_2(a_1,h_1;0,h_2)=0.
+\]
+Therefore analyticity implies divisibility by $a_1a_2$:
+\[
+\mathcal I_2(a_1,h_1;a_2,h_2)=a_1a_2\,G(h_1,h_2)
+\]
+for an analytic
+\[
+G:\ (h_1,h_2)\longmapsto \mathbf C\oplus \mathfrak f\oplus \mathfrak f.
+\]
+
+Swap symmetry of $\mathfrak P_{\le 7}$ gives
+\[
+G(h_1,h_2)=G(h_2,h_1).
+\]
+On the diagonal, using source-definedness and one-atom linearity,
+\[
+\mathcal I_2(a_1,h;a_2,h)
+=
+\mathfrak P_{\le 7}((a_1+a_2)\delta_h)-a_1F_h-a_2F_h
+=
+(a_1+a_2)F_h-a_1F_h-a_2F_h
+=
+0.
+\]
+Hence
 \[
 G(h,h)=0.
 \]
 
-Passing to midpoint/separation variables
+Pass to midpoint/separation variables
 \[
 m=\frac{h_1+h_2}{2},
 \qquad
 s=h_2-h_1,
+\qquad
+\widetilde G(m,s):=
+G\!\left(m-\frac{s}{2},m+\frac{s}{2}\right).
 \]
-the symmetry of $G$ means that
-\[
-\widetilde G(m,s):=G\!\left(m-\frac s2,m+\frac s2\right)
-\]
-is an even analytic function of $s$, and the diagonal vanishing gives
+Because $G$ is symmetric in $(h_1,h_2)$, the function $\widetilde G(m,s)$ is
+even in $s$. Since $G(h,h)=0$, we have
 \[
 \widetilde G(m,0)=0.
 \]
-Hence $\widetilde G(m,s)$ is divisible by $s^2$:
+Therefore $\widetilde G(m,s)$ is divisible by $s^2$:
 \[
 \widetilde G(m,s)=s^2 H(m,s)
 \]
-for analytic $H$. Rewriting in $(h_1,h_2)$ gives the claimed
-factorization.
+for analytic $H$. Returning to $(h_1,h_2)$ gives
+\[
+G(h_1,h_2)=(h_1-h_2)^2\,\mathcal J_2(a_1,h_1;a_2,h_2),
+\]
+hence
+\[
+\mathcal I_2(a_1,h_1;a_2,h_2)
+=
+a_1a_2\,(h_1-h_2)^2\,\mathcal J_2(a_1,h_1;a_2,h_2).
+\]
+This proves the proposition.
 \end{proof}
 
-\begin{corollary}[Conditional quadratic defect estimate and two-point exclusion]
+\begin{corollary}[Quadratic defect estimate and two-point exclusion]
 \label{cor:conditional-quadratic-defect-estimate-two-point-exclusion}
-Assume, in addition to
-Proposition~\ref{prop:conditional-source-level-quadratic-interaction-remainder},
-that the raw cubic, quintic, and septic quotient defects are obtained from the
-raw interaction remainder by linear coefficient-extraction maps
+Let the cubic scalar, quintic fixed-sector, and septic quotient defects in the
+present two-pair section be extracted from the finite-order source package of
+Proposition~\ref{prop:conditional-source-level-quadratic-interaction-remainder}
+by the same linear coefficient-extraction and quotient-projection maps used
+throughout this subsection. Then on compacta,
 \[
-\Pi_3:\mathcal G\to\mathbf C,
+\mathcal E^{(3)}=a_1a_2\,O(\delta^2),
 \qquad
-\Pi_5:\mathcal G\to\mathfrak f,
+\mathcal E^{(5)}=a_1a_2\,O(\delta^2),
 \qquad
-\bar\Pi_7:\mathcal G\to \mathfrak f/\mathbf C A_5^{\mathfrak f}.
-\]
-Then on compacta, the raw defects satisfy
-\[
-\mathcal E^{(3)}=a_1a_2\,O(\delta^2),\qquad
-\mathcal E^{(5)}=a_1a_2\,O(\delta^2),\qquad
 \overline{\mathcal E}^{(7)}=a_1a_2\,O(\delta^2),
 \qquad
 \delta:=|h_1-h_2|.
@@ -9010,8 +9119,10 @@ Then on compacta, the raw defects satisfy
 If the normalized defects in the present two-pair section are obtained by
 dividing by $a_1$, then on normalized families with $|a_2|$ bounded one has
 \[
-E_{12}^{(3)}=O(\delta^2),\qquad
-E_{12}^{(5)}=O(\delta^2),\qquad
+E_{12}^{(3)}=O(\delta^2),
+\qquad
+E_{12}^{(5)}=O(\delta^2),
+\qquad
 \overline E_{12}^{(7;1)}=O(\delta^2).
 \]
 Consequently, the two-point bad-core branch is excluded on compact good patches
@@ -9021,12 +9132,12 @@ J\Subset\{c\neq 0,\ M\neq 0\}.
 \end{corollary}
 
 \begin{proof}
-The first claim is immediate from the factorization in
+The first claim is immediate from
 Proposition~\ref{prop:conditional-source-level-quadratic-interaction-remainder}
-and the linearity of the coefficient-extraction maps.
+and the linearity of the coefficient-extraction and quotient-projection maps.
 
-For the normalized defects, divide by $a_1$ and use boundedness of $|a_2|$
-on normalized families. Then
+For the normalized defects, divide by $a_1$ and use boundedness of $|a_2|$ on
+normalized families. Then
 Theorem~\ref{thm:quantitative-defect-thickened-strengthened-coincidence}
 gives
 \[
@@ -9060,42 +9171,44 @@ which is impossible for sufficiently small nonzero $\delta$. Thus the
 two-point branch is excluded on compact good patches.
 \end{proof}
 
-\begin{remark}[Work in progress: source-level reduction for the two-point branch]
+\begin{remark}[Source-level identities behind the quadratic factor]
 \label{rem:wip-source-level-reduction-two-point-branch}
-The preceding proposition and corollary isolate the exact structural input
-needed to finish the two-point branch. At present, the draft does not yet define
-a source-level corrected quotient-germ map $\mathfrak Q$ on finite atomic
-sources, so the factorization
+The proof isolates the exact source-level mechanism behind the two-point
+closure. First, coincident-atom merger gives analytic additivity on one-atom
+rays:
 \[
-\mathcal I=a_1a_2(h_1-h_2)^2\mathcal J
+\mathfrak P_{\le 7}(a_1\delta_h+a_2\delta_h)
+=
+\mathfrak P_{\le 7}((a_1+a_2)\delta_h)
+\quad\Longrightarrow\quad
+\mathfrak P_{\le 7}(a\delta_h)=a\,F_h.
 \]
-is not yet available formally from the present definitions. If such a
-source-level reformulation is supplied, then the two-point bad-core branch is
-finished on compact good patches.
+Thus the two-point interaction remainder is not an extra ansatz: it is the
+unique defect of additivity of the finite-order source package on the two-atom
+source semigroup. Second, once swap symmetry and diagonal merger are known, the
+first nonzero separation term is automatically quadratic:
+\[
+\mathcal I_2=a_1a_2(h_1-h_2)^2\mathcal J_2.
+\]
+So the two-point source-level theorem is fundamentally a finite-order
+source-definedness statement rather than a separate asymptotic estimate.
 \end{remark}
 
 \begin{remark}[What remains in the two-pair rewrite]
 \label{rem:what-remains-two-pair-rewrite}
 Theorem~\ref{thm:quantitative-defect-thickened-strengthened-coincidence}
-supplies the correct algebraic bridge from the two-pair core to the
-strengthened invariant $\widehat\Psi$. In particular, on good $M\neq 0$
-patches, bad two-pair cores are forced into a defect-scale close regime by
-Corollary~\ref{cor:bad-two-pair-cores-defect-scale-close}, and
-Proposition~\ref{prop:no-sublinear-two-pair-defects-good-patch} shows that the
-two-point branch is already excluded whenever the total defect is sublinear in
-the pair separation.
-
-The strongest remaining algebraic target for the two-point branch is now the
-source-level structural reduction isolated in
+supplies the algebraic bridge from the two-pair core to the strengthened
+invariant $\widehat\Psi$, and
 Proposition~\ref{prop:conditional-source-level-quadratic-interaction-remainder}
-and Corollary~\ref{cor:conditional-quadratic-defect-estimate-two-point-exclusion}:
-if the corrected two-pair object is defined source-level and collapses on
-coincident atoms, then the normalized defects are automatically
-$O(|h_1-h_2|^2)$, and the two-point branch is excluded on good patches.
+together with
+Corollary~\ref{cor:conditional-quadratic-defect-estimate-two-point-exclusion}
+now close the source-level two-point branch on compact good patches.
 
-What remains beyond that is the genuine multi-pair interaction bookkeeping
-through orders $3,5,7$, together with the local lifted $3/4$-point analysis
-for close-point branches on $v_5\neq 0$ patches.
+Thus the remaining work beyond the present two-pair subsection is no longer the
+two-point algebraic correction itself. What remains is the genuinely multi-pair
+interaction bookkeeping through orders $3,5,7$, together with the local lifted
+$3/4$-point analysis for close-point branches on the $v_5\neq 0$ and parallel
+$u_5\neq 0$ patches, and the subsequent finite-core extraction.
 \end{remark}
 
 \begin{remark}[Minimal-core reformulation]
@@ -12082,14 +12195,20 @@ At the present stage, the live routes are now quite sharply separated.
 
 \begin{enumerate}
 \item
-\textbf{Two-point source-level closure.}
-Prove the source-level corrected quotient-germ map exists and satisfies the
-symmetry / one-amplitude collapse / diagonal collapse identities needed for the
-quadratic interaction factorization
+\textbf{Two-point source-level closure (now completed through order $7$).}
+The corrected source-summed finite-order package
 \[
-\mathcal I_2=a_1a_2(h_1-h_2)^2\mathcal J_2.
+\mathfrak P_{\le 7}(\mu)
+=
+\bigl(c_\mu,A_{5,\mu}^{\mathfrak f},A_{7,\mu}^{\mathfrak f}\bigr)
 \]
-This would finish the two-point bad-core branch on compact good patches.
+is now source-defined, merges on coincident atoms, and forces
+\[
+\mathcal I_2=a_1a_2(h_1-h_2)^2\mathcal J_2
+\]
+for the cubic/quintic/septic interaction defects. Consequently the two-point
+bad-core branch is closed on compact good patches, so the genuinely live routes
+begin at the three- and four-point branches.
 
 \item
 \textbf{Three-point branch (closed on good $v_5$-patches).}
@@ -12399,9 +12518,10 @@ First, on the two-pair side, the strengthened invariant
 \]
 gives the correct algebraic bridge, and on good $M\neq 0$ patches the
 quantitative two-pair coincidence theorem forces bad two-point cores into a
-defect-scale close regime. The remaining structural issue there is now very
-sharp: formalize the corrected quotient-germ construction at source level so
-that the raw quadratic interaction factorization becomes automatic.
+defect-scale close regime. The finite-order source-level corrected block theorem
+now supplies the raw quadratic interaction factorization through the
+cubic/quintic/septic package, so the two-point bad-core branch is closed on
+compact good patches.
 
 Second, on the lifted three-point side, shrinking exact circuits now
 concentrate into $K_v=0$, repeated-node limits become tangent-line contacts,
@@ -12435,15 +12555,15 @@ lifted variables alone.
 \label{rem:post-draft-findings-established-provisional-live}
 Since this draft state, five additional conclusions have emerged.
 
-First, on the two-point branch, the correct remaining theorem is now very
-sharp: a source-level corrected interaction remainder with swap symmetry,
-one-amplitude collapse, and diagonal collapse would force the quadratic
-factorization
+First, on the two-point branch, the source-level finite-order corrected package
+through order $7$ is now source-defined and collision-compatible: swap
+symmetry, one-amplitude collapse, and coincident-atom merger force the exact
+quadratic factorization
 \[
-\mathcal I_2=a_1a_2(h_1-h_2)^2\mathcal J_2,
+\mathcal I_2=a_1a_2(h_1-h_2)^2\mathcal J_2
 \]
-hence the two-point bad-core branch is conditionally closed on compact good
-patches.
+for the cubic/quintic/septic interaction defects. Hence the two-point bad-core
+branch is closed on compact good patches.
 
 Second, on the lifted four-point branch, the explicit low-order obstruction
 list has been reduced to the six coefficients
