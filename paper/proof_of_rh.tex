@@ -9842,6 +9842,81 @@ hence
 Differentiating with respect to $x$ gives $\mathcal R\mapsto \mathcal R$.
 \end{proof}
 
+\begin{remark}[Below-lifted Wronskian-ratio reformulation]
+\label{rem:below-lifted-wronskian-ratio-reformulation}
+Let
+\[
+x=\frac{v_5}{c},
+\qquad
+Y=\frac{u_5}{c},
+\qquad
+S=\frac{\Delta_7}{c\,v_5},
+\qquad
+\lambda:=\frac{\Delta_7}{v_5},
+\qquad
+M:=cv_5'-c'v_5.
+\]
+For any scalar germ $f$, define
+\[
+J_f(h):=
+\det\!\begin{pmatrix}
+c(h)&v_5(h)&f(h)\\
+c'(h)&v_5'(h)&f'(h)\\
+c''(h)&v_5''(h)&f''(h)
+\end{pmatrix}.
+\]
+Then
+\[
+\frac{d^2}{dx^2}\!\left(\frac{f}{c}\right)
+=
+\frac{c^3}{M^3}\,J_f.
+\]
+Applying this to $f=u_5$ and $f=\lambda$ gives
+\[
+Y''=\frac{c^3}{M^3}J_{u_5},
+\qquad
+S''=\frac{c^3}{M^3}J_{\lambda},
+\]
+hence
+\[
+\boxed{
+\mathcal Z:=\frac{Y''}{S''}=\frac{J_{u_5}}{J_{\lambda}}.
+}
+\]
+Differentiating in the $x$-coordinate yields
+\[
+\boxed{
+\mathcal R:=\mathcal Z'=\frac{T_v}{K_v^2}
+=
+\frac{c^2}{M}\frac{d}{dh}\!\left(\frac{J_{u_5}}{J_{\lambda}}\right).
+}
+\]
+Thus the lifted $4$-point branch may be viewed equivalently as a
+parity/divisibility problem for the Wronskian ratio $J_{u_5}/J_{\lambda}$.
+\end{remark}
+
+\begin{remark}[A second below-lifted ratio does not add a new obstruction]
+\label{rem:second-below-lifted-ratio-no-new-obstruction}
+Let
+\[
+\Theta:=\frac{W_{u_5}}{W},
+\]
+where $W$ denotes the corresponding projective-chart Wronskian in the
+$(c,v_5,\cdot)$-frame. In the gauge $c\equiv 1$, $v_5=x$, one has the
+exact relation
+\[
+\Theta=\mathcal Z\,\frac{S''}{xS''+2S'},
+\qquad
+(\mathcal Z-x\Theta)S''=2\Theta S'.
+\]
+So $\Theta$ does not provide an independent local obstruction beyond
+$(\mathcal Z,\mathcal R)$: whenever $2\Theta/(\mathcal Z-x\Theta)$ is
+analytic, one can solve locally for $S$ and then recover $Y$ from
+$Y''=\mathcal Z S''$. In particular, attacks based only on a generic
+differential relation between $\mathcal Z$ and $\Theta$ are too weak to
+close the $4$-point branch.
+\end{remark}
+
 \begin{corollary}[Local defect-free four-point exclusion on lifted ECT subintervals]
 \label{cor:local-four-point-exclusion-lifted-vpatch}
 Let $J\subset\{c\neq 0,\ M\neq 0,\ v_5\neq 0\}$ be a connected interval on
@@ -10342,6 +10417,206 @@ obstruction list, now phrased in terms of the invariant pair
 \]
 \end{remark}
 
+\begin{remark}[Exact finite obstruction coefficients for the low-order $4$-point branch]
+\label{rem:exact-finite-obstruction-coefficients-low-order-four-point}
+The explicit low-order $4$-point obstruction list can be reduced to a finite
+jet package.
+
+\medskip
+
+\noindent
+\textbf{Nonmixed side.}
+Suppose $K_v(0)\neq 0$, and write
+\[
+s_k:=S^{(k)}(0),
+\qquad
+y_k:=Y^{(k)}(0),
+\qquad
+s_2\neq 0.
+\]
+Then the Taylor expansion
+\[
+\mathcal Z(x)=z_0+z_1x+z_2x^2+z_3x^3+z_4x^4+z_5x^5+z_6x^6+O(x^7)
+\]
+has canonical even coefficients
+\[
+z_2,\qquad z_4,\qquad z_6,
+\]
+and the dangerous nonmixed low-order cases are exactly:
+\[
+n=4 \iff z_2\neq 0,
+\qquad
+n=6 \iff z_2=0,\ z_4\neq 0,
+\qquad
+n=8 \iff z_2=z_4=0,\ z_6\neq 0.
+\]
+Explicitly,
+\[
+z_2=
+\frac{
+s_2^2y_4-2s_2s_3y_3+\bigl(2s_3^2-s_2s_4\bigr)y_2
+}{
+2\,s_2^3
+},
+\]
+\[
+z_4=
+\frac{
+s_2^4y_6
+-s_2^3(4s_3y_5+6s_4y_4+4s_5y_3+s_6y_2)
++2s_2^2(6s_3^2y_4+12s_3s_4y_3+4s_3s_5y_2+3s_4^2y_2)
+-12s_2s_3^2(2s_3y_3+3s_4y_2)
++24s_3^4y_2
+}{
+24\,s_2^5
+},
+\]
+and
+\[
+z_6=\frac{\mathcal P_8(s_2,\dots,s_8;y_2,\dots,y_8)}{720\,s_2^7},
+\]
+where $\mathcal P_8$ is the explicit degree-$8$ numerator polynomial obtained
+by Taylor division of $\mathcal Z=Y''/S''$.
+
+\medskip
+
+\noindent
+\textbf{Mixed side.}
+Suppose $K_v(0)=T_v(0)=0$, and let
+\[
+r:=\operatorname{ord}_0 K_v.
+\]
+For the two low-order mixed cases $r=1,2$, Taylor division of
+$\mathcal Z=Y''/S''$ gives the exact obstruction coefficients
+\[
+\kappa_{1,1},\qquad \kappa_{1,3},\qquad \kappa_{2,2},
+\]
+defined by the expansions
+\[
+\mathcal Z(x)
+=
+\frac{y_2}{s_3}\frac1x
++
+\left(\frac{y_3}{s_3}-\frac{s_4y_2}{2s_3^2}\right)
++
+\kappa_{1,1}x+\kappa_{1,2}x^2+\kappa_{1,3}x^3+O(x^4)
+\qquad (r=1),
+\]
+and
+\[
+\mathcal Z(x)
+=
+\frac{2y_2}{s_4}\frac1{x^2}
++
+\left(\frac{2y_3}{s_4}-\frac{2s_5y_2}{3s_4^2}\right)\frac1x
++
+\left(
+\frac{y_4}{s_4}
+-\frac{2s_5y_3}{3s_4^2}
+-\frac{s_6y_2}{6s_4^2}
++\frac{2s_5^2y_2}{9s_4^3}
+\right)
++\kappa_{2,1}x+\kappa_{2,2}x^2+O(x^3)
+\qquad (r=2).
+\]
+The dangerous mixed low-order list is then exactly:
+\[
+(m,n)=(3,4)\iff \kappa_{1,1}\neq 0,
+\]
+\[
+(m,n)=(3,6)\iff \kappa_{1,3}\neq 0,
+\]
+\[
+(m,n)=(4,6)\iff \kappa_{2,2}\neq 0.
+\]
+
+Thus the full currently explicit low-order $4$-point obstruction list is
+equivalent to the finite set of coefficients
+\[
+\boxed{
+z_2,\ z_4,\ z_6,\ \kappa_{1,1},\ \kappa_{1,3},\ \kappa_{2,2}.
+}
+\]
+Any RH-specific local closure theorem for the $4$-point branch must force
+these six quantities to vanish.
+\end{remark}
+
+\begin{remark}[Centered symmetric-placement Taylor package and diagonal-base local exclusion]
+\label{rem:centered-symmetric-placement-taylor-package}
+Let
+\[
+t_\pm=h\pm \frac{s}{2},
+\]
+and regard $s\mapsto -s$ as swapping the two microscopic points. For any
+symmetric $2\times 2$ coefficient matrix, the diagonal half-sums are even in
+$s$, the diagonal half-differences are odd in $s$, and the off-diagonal
+entries are even in $s$. Applying this to the explicit formulas already in the
+draft gives
+\[
+u_5(s),\ v_5(s)\ \text{odd},
+\qquad
+u_{7,K_1}(s),\ v_{7,K_1}(s)\ \text{odd},
+\]
+and therefore
+\[
+\Delta_7(s)=u_{7,K_1}(s)v_5(s)-u_5(s)v_{7,K_1}(s)
+\]
+is even in $s$, with Taylor expansion
+\[
+\Delta_7(s)=D_2s^2+D_4s^4+D_6s^6+\cdots,
+\]
+where
+\[
+D_2=\widehat U_1V_1-U_1\widehat V_1,
+\]
+\[
+D_4=\widehat U_1V_3+\widehat U_3V_1-U_1\widehat V_3-U_3\widehat V_1,
+\]
+\[
+D_6=\widehat U_1V_5+\widehat U_3V_3+\widehat U_5V_1-U_1\widehat V_5-U_3\widehat V_3-U_5\widehat V_1.
+\]
+
+If $x=v_5/c$ is used as the induced odd collision-side coordinate, then the
+centered diagonal germ has the odd/odd form
+\[
+Q(x)\sim (x^n,\ x,\ x^m),
+\qquad
+m,n\ \text{odd},\quad n>m\ge 3.
+\]
+In that regime one obtains the exact factorizations
+\[
+S''(x)=x^{m-2}\Sigma_m[A](x^2),
+\qquad
+\mathcal Z(x)=x^{n-m}H(x^2),
+\qquad
+\mathcal R(x)=x^{n-m-1}J(x^2),
+\]
+with $H(0)\neq 0$ and $J(0)\neq 0$. Hence there exists $\varepsilon>0$
+such that for
+\[
+0<|x|<\varepsilon
+\]
+one has
+\[
+K_v(x)\neq 0,\qquad T_v(x)\neq 0.
+\]
+
+So the centered diagonal base has a punctured neighborhood free of mixed and
+nonmixed $4$-point obstruction points. In particular, the currently explicit
+low-order dangerous patterns do not arise at the symmetric diagonal base itself.
+
+\medskip
+
+\noindent
+\textit{Work in progress.}
+The passage from this centered $s$-picture to the general $x=v_5/c$ good-patch
+geometry should be treated as a live attack route, not yet as a global
+theorem. The evidence strongly suggests that the entire explicit low-order mixed
+dangerous list is already incompatible with this centered parity package, but
+that translation should be checked line by line before being promoted beyond the
+diagonal-base local regime.
+\end{remark}
+
 \begin{proposition}[Realization lemma for lifted germs]
 \label{prop:realization-lemma-lifted-germs}
 Let $\widetilde Y(\xi)$ and $\widetilde S(\xi)$ be arbitrary analytic germs
@@ -10526,61 +10801,124 @@ of $(\mathcal Z,\mathcal R)$ than generic smooth geometry allows.
 
 \begin{remark}[Work in progress: what remains in the lifted order-$7$ geometry]
 \label{rem:wip-lifted-order7-zero-capture}
-The lifted $v_5$-patch geometry now splits more sharply than a blanket
-zero-capture problem.
+The lifted $v_5$-patch geometry is now significantly more stratified than a
+single zero-capture problem.
 
-First, Propositions~\ref{prop:shrinking-exact-lifted-three-point-circuits-force-Kv-zero}
-and~\ref{prop:shrinking-exact-lifted-four-point-circuits-force-Tv-zero} show
-that shrinking exact lifted three-point and four-point circuits can accumulate
+First, shrinking exact lifted three-point and four-point circuits can accumulate
 only at
 \[
 K_v=0
 \qquad\text{and}\qquad
 T_v=0,
 \]
-respectively, and give uniform small-diameter exclusion away from those zero
-sets.
+respectively, with uniform small-diameter exclusion away from those zero sets.
 
-Second, Proposition~\ref{prop:repeated-node-limits-of-exact-lifted-determinants}
-identifies the one-pair collapse limits as tangent-line and tangent-plane
-contact determinants for the lifted curves $\Lambda_v$ and $Q_v$.
+Second, repeated-node limits are now identified explicitly:
+three-point collapse limits become tangent-line contact determinants for the
+planar lifted curve $\Lambda_v=(x,S)$, and four-point collapse limits become
+tangent-plane contact determinants for the lifted space curve $Q_v=(Y,x,S)$.
 
-Third, the nonmixed and mixed four-point local pictures are genuinely
-different. On the nonmixed side, generic odd-order $T_v$-zeros can carry a
-preexisting close branch; on the mixed side $K_v=T_v=0$, the order
-bookkeeping is
+Third, the three-point branch is locally classified near a finite-order
+$K_v$-zero: even order gives no opposite-side branch, while odd order gives
+exactly one local tangent-contact branch.
+
+Fourth, the four-point side splits sharply into nonmixed and mixed regimes.
+On the nonmixed side, finite-order odd $T_v$-zeros already support genuine
+local exact branch sheets in the model geometry, so a blanket local
+no-branch theorem is false. On the mixed side, the dangerous low-order list is
+now finite and explicit:
 \[
-m=r+2,
-\qquad
-n=s-r+3,
-\qquad
-s\ge 2r,
+(m,n)=(3,4),\ (3,6),\ (4,6),
 \]
-and there is no generic parity obstruction beyond this order inequality.
+equivalently
+\[
+(r,s)=(1,2),\ (1,4),\ (2,5),
+\]
+equivalently
+\[
+(r,\operatorname{ord}_0\mathcal Z)=(1,1),\ (1,3),\ (2,2).
+\]
 
-Thus the missing global ingredient is no longer a single blanket first-contact
-lemma. It is a combination of:
+Fifth, below the lifted variables one has the exact Wronskian-ratio
+reformulation
+\[
+\mathcal Z=\frac{J_{u_5}}{J_\lambda},
+\qquad
+\mathcal R=\frac{c^2}{M}\frac{d}{dh}\!\left(\frac{J_{u_5}}{J_\lambda}\right),
+\qquad
+\lambda=\frac{\Delta_7}{v_5},
+\]
+but the current draft still provides no RH-specific source-/matrix-level
+identity strong enough to force the vanishing of the six low-order obstruction
+coefficients
+\[
+z_2,\ z_4,\ z_6,\ \kappa_{1,1},\ \kappa_{1,3},\ \kappa_{2,2}.
+\]
+
+So the missing global ingredient is no longer a blanket first-contact theorem.
+It is a combination of:
 \begin{itemize}
-\item source-level control of the multi-pair interaction defects
-\[
-E_{\ge2}^{(3)},\qquad E_{\ge2}^{(5)},\qquad \overline E_{\ge2}^{(7)};
-\]
-\item extra algebraic compatibility conditions for true bad four-point cores
-coming from a deeper source-level corrected quotient-germ construction, not from
-the present lifted coordinates alone;
-\item and, at the lifted $4$-point level, RH-specific restrictions forcing
-better behavior of the canonical invariant pair
-\[
-\mathcal Z=\frac{Y''}{S''},
-\qquad
-\mathcal R=\frac{T_v}{K_v^2},
-\]
-for example the nonmixed parity condition that $\mathcal R$ be even in the
-normalized local coordinate, or the mixed order-gap condition
-\[
-\operatorname{ord}_0\mathcal Z\ge 4.
-\]
+\item source-level control of multi-pair interaction defects for the two-point
+branch;
+\item global recurrence / continuation control for the unique odd-order
+three-point branch;
+\item a classification or RH-specific exclusion of nonmixed odd-order
+four-point branch sheets;
+\item and, on the mixed side, RH-specific jet restrictions excluding the
+explicit low-order obstruction list.
 \end{itemize}
+\end{remark}
+
+\begin{remark}[Live attack routes]
+\label{rem:live-attack-routes}
+At the present stage, the live routes are now quite sharply separated.
+
+\begin{enumerate}
+\item
+\textbf{Two-point source-level closure.}
+Prove the source-level corrected quotient-germ map exists and satisfies the
+symmetry / one-amplitude collapse / diagonal collapse identities needed for the
+quadratic interaction factorization
+\[
+\mathcal I_2=a_1a_2(h_1-h_2)^2\mathcal J_2.
+\]
+This would finish the two-point bad-core branch on compact good patches.
+
+\item
+\textbf{Three-point global continuation.}
+The local defect-free three-point branch is already classified. The remaining
+problem is to control the global recurrence / continuation of the unique
+odd-order branch and to exclude infinite-order flatness.
+
+\item
+\textbf{Four-point nonmixed classification.}
+Generic nonmixed odd-order $T_v$-zeros already support local exact branch
+sheets, so the next local theorem is not a blanket sterility statement but a
+classification / compatibility theorem for tangent-plane contact branches near a
+nonmixed odd-order $T_v$-zero.
+
+\item
+\textbf{Four-point mixed low-order exclusion.}
+The mixed low-order obstruction list is finite and explicit:
+\[
+(r,\operatorname{ord}_0\mathcal Z)=(1,1),\ (1,3),\ (2,2).
+\]
+The centered symmetric diagonal analysis suggests these patterns are already
+incompatible with the collision-side parity package, but that translation to
+the general $x=v_5/c$ patch geometry should be treated as a live attack route
+rather than settled theorem-level closure.
+
+\item
+\textbf{Below-lifted RH-specific identities.}
+Since the realization lemma shows that no obstruction can come from the lifted
+variables alone, any definitive four-point closure theorem must come from
+deeper source-level or matrix-level RH structure, for example an equivariant
+descent theorem for the normalization stack or an RH-specific divisibility /
+parity constraint on the Wronskian ratio
+\[
+\mathcal Z=\frac{J_{u_5}}{J_\lambda}.
+\]
+\end{enumerate}
 \end{remark}
 
 \begin{remark}[Work in progress: stratified lifted local picture]
@@ -10765,32 +11103,34 @@ First, on the two-pair side, the strengthened invariant
 \]
 gives the correct algebraic bridge, and on good $M\neq 0$ patches the
 quantitative two-pair coincidence theorem forces bad two-point cores into a
-defect-scale close regime. The remaining structural issue there is to
-formalize the corrected quotient-germ construction at source level so that the
-raw quadratic separation factorization becomes automatic.
+defect-scale close regime. The remaining structural issue there is now very
+sharp: formalize the corrected quotient-germ construction at source level so
+that the raw quadratic interaction factorization becomes automatic.
 
 Second, on the lifted three-point side, shrinking exact circuits now
 concentrate into $K_v=0$, repeated-node limits become tangent-line contacts,
 and finite-order $K_v$-zeros admit an explicit local branch classification:
 even-order zeros are sterile, while odd-order zeros carry exactly one local
-branch.
+branch. The remaining issue there is therefore global recurrence / continuation,
+not local first-contact ambiguity.
 
 Third, on the lifted four-point side, shrinking exact circuits now
-concentrate into $T_v=0$, repeated-node limits become tangent-plane
-contacts, and the local picture splits into the nonmixed and mixed regimes.
-Nonmixed odd-order $T_v$-zeros already support preexisting close branches in
-generic models, so blanket local exclusion is false there; the mixed case
+concentrate into $T_v=0$, repeated-node limits become tangent-plane contacts,
+and the local geometry splits into a nonmixed and a mixed regime. On the
+nonmixed side, odd-order $T_v$-zeros already support genuine local branch
+sheets in the model geometry, so generic local geometry does not close the
+branch. On the mixed side, the dangerous low-order obstruction list has been
+reduced to the finite set of coefficients
 \[
-K_v=T_v=0
+z_2,\ z_4,\ z_6,\ \kappa_{1,1},\ \kappa_{1,3},\ \kappa_{2,2},
 \]
-remains the genuine codimension-two obstruction, and generic lifted geometry
-imposes only the order inequality
+or equivalently to the explicit order patterns
 \[
-s\ge 2r.
+(r,\operatorname{ord}_0\mathcal Z)=(1,1),\ (1,3),\ (2,2).
 \]
-Thus any closure of the four-point branch must use extra algebraic
-compatibility conditions or RH-specific jet restrictions, not generic local
-geometry alone.
+Any further local closure on the four-point side must therefore come from
+deeper RH-specific source-/matrix-level structure rather than from the current
+lifted variables alone.
 \end{remark}
 
 \section{Endgame architecture and remaining global propagation problem}
