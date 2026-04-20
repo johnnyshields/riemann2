@@ -13774,18 +13774,357 @@ $\mathcal R$ has the same first-order reflection geometry across that zero as
 in the simple-zero case.
 \end{remark}
 
+\begin{proposition}[Quadratic-envelope factorization on a nonmixed interval]
+\label{prop:quadratic-envelope-factorization-nonmixed}
+Let $J$ be a connected open interval in a good $v_5$-patch such that
+\[
+K_v\neq 0
+\qquad\text{on }J.
+\]
+Write
+\[
+Q_v(h)=(Y(h),x(h),S(h)),
+\qquad
+\mathcal Z=\frac{Y''}{S''},
+\qquad
+\mathcal R=\mathcal Z'=\frac{T_v}{K_v^2}.
+\]
+For a fixed source point $a\in J$, define
+\[
+A_a(x):=Y(x)-Y(a)-Y'(a)(x-a),
+\]
+\[
+B_a(x):=S(x)-S(a)-S'(a)(x-a),
+\]
+and
+\[
+\Gamma_a(x):=\frac{A_a(x)}{B_a(x)}
+\qquad (x\neq a).
+\]
+
+Then:
+
+\smallskip
+
+\noindent
+\emph{(i) Tangent-contact denominator.}
+For $x\neq a$,
+\[
+B_a(x)=\int_a^x (x-t)\,S''(t)\,dt,
+\]
+so $B_a(x)\neq 0$ on $J\setminus\{a\}$.
+
+\smallskip
+
+\noindent
+\emph{(ii) Exact repeated-source factorization.}
+For distinct $a,u,v\in J$,
+\[
+H_4(a,u,v)
+=
+-\,B_a(u)\,B_a(v)\,\bigl(\Gamma_a(u)-\Gamma_a(v)\bigr).
+\]
+
+\smallskip
+
+\noindent
+\emph{(iii) Integral representation.}
+For $x\neq a$,
+\[
+\Gamma_a(x)
+=
+\frac{\displaystyle\int_a^x (x-t)\,\mathcal Z(t)\,S''(t)\,dt}
+{\displaystyle\int_a^x (x-t)\,S''(t)\,dt}.
+\]
+
+\smallskip
+
+\noindent
+\emph{(iv) Positive-kernel derivative formula.}
+For $x\neq a$,
+\[
+\Gamma_a'(x)
+=
+\frac{1}{B_a(x)^2}\int_a^x \Omega_{a,x}(r)\,\mathcal R(r)\,dr,
+\]
+where
+\[
+\Omega_{a,x}(r)
+:=
+\int_a^r\!\!\int_r^x (t-s)\,S''(s)\,S''(t)\,dt\,ds.
+\]
+Moreover, after orienting $x$ so that $S''$ has fixed sign on $J$,
+\[
+\Omega_{a,x}(r)>0
+\qquad (a<r<x).
+\]
+\end{proposition}
+
+\begin{proof}
+Since $K_v=(x')^3S''$ and $x'\neq 0$ on a good $v_5$-patch, the function
+$S''$ has fixed nonzero sign on $J$. Therefore
+\[
+B_a(x)=\int_a^x (x-t)\,S''(t)\,dt
+\]
+has fixed nonzero sign for $x\neq a$, proving (i).
+
+For (ii), use the repeated-node determinant
+\[
+H_4(a,u,v)=
+\det\!\begin{pmatrix}
+1&Y(a)&a&S(a)\\
+0&Y'(a)&1&S'(a)\\
+1&Y(u)&u&S(u)\\
+1&Y(v)&v&S(v)
+\end{pmatrix}.
+\]
+Subtract from the $u$-row and $v$-row the corresponding affine tangent data
+at $a$. This gives
+\[
+H_4(a,u,v)
+=
+\det\!\begin{pmatrix}
+1&Y(a)&a&S(a)\\
+0&Y'(a)&1&S'(a)\\
+0&A_a(u)&0&B_a(u)\\
+0&A_a(v)&0&B_a(v)
+\end{pmatrix}
+=
+A_a(u)B_a(v)-A_a(v)B_a(u),
+\]
+hence
+\[
+H_4(a,u,v)
+=
+-\,B_a(u)B_a(v)\bigl(\Gamma_a(u)-\Gamma_a(v)\bigr).
+\]
+
+For (iii), Taylor's integral formula gives
+\[
+A_a(x)=\int_a^x (x-t)\,Y''(t)\,dt
+=
+\int_a^x (x-t)\,\mathcal Z(t)\,S''(t)\,dt,
+\]
+while
+\[
+B_a(x)=\int_a^x (x-t)\,S''(t)\,dt.
+\]
+Dividing yields the formula for $\Gamma_a$.
+
+For (iv), set
+\[
+N_a(x):=\int_a^x (x-t)\,\mathcal Z(t)\,S''(t)\,dt,
+\qquad
+D_a(x):=\int_a^x (x-t)\,S''(t)\,dt=B_a(x).
+\]
+Then $\Gamma_a=N_a/D_a$, so
+\[
+\Gamma_a'(x)=\frac{N_a'(x)D_a(x)-N_a(x)D_a'(x)}{D_a(x)^2}.
+\]
+A symmetrization gives
+\[
+N_a'D_a-N_aD_a'
+=
+\frac12\int_a^x\!\!\int_a^x
+(\mathcal Z(t)-\mathcal Z(s))(t-s)\,S''(s)\,S''(t)\,ds\,dt.
+\]
+Since $\mathcal Z(t)-\mathcal Z(s)=\int_s^t \mathcal R(r)\,dr$, Fubini yields
+\[
+N_a'D_a-N_aD_a'
+=
+\int_a^x \Omega_{a,x}(r)\,\mathcal R(r)\,dr
+\]
+with
+\[
+\Omega_{a,x}(r)
+=
+\int_a^r\!\!\int_r^x (t-s)\,S''(s)\,S''(t)\,dt\,ds.
+\]
+Because $t-s>0$ on the region of integration and $S''$ has fixed sign on
+$J$, one has $\Omega_{a,x}(r)>0$ after orienting the $x$-coordinate.
+This proves (iv).
+\end{proof}
+
+\begin{corollary}[Repeated-source monotonicity on one-sign $\mathcal R$-blocks]
+\label{cor:repeated-source-monotonicity-one-sign-R}
+Let $I\subset J$ be a subinterval on which
+\[
+\mathcal R \text{ has fixed nonzero sign.}
+\]
+Then for every $a\in I$, the function $x\mapsto \Gamma_a(x)$ is strictly
+monotone on each component of $I\setminus\{a\}$. In particular, there do not
+exist points
+\[
+a<u<v \quad \text{in } I
+\]
+such that
+\[
+H_4(a,u,v)=0.
+\]
+\end{corollary}
+
+\begin{proof}
+This is immediate from Proposition~\ref{prop:quadratic-envelope-factorization-nonmixed}:
+the derivative $\Gamma_a'(x)$ is a positive-kernel average of $\mathcal R$,
+so it has the same sign as $\mathcal R$ on each one-sign block. The factorization
+of $H_4$ then excludes repeated-source exact contacts there.
+\end{proof}
+
+\begin{remark}[Below-lifted source-determinant reformulation of $\Gamma_a$]
+\label{rem:source-determinant-reformulation-Gammaa}
+Let
+\[
+\lambda:=\frac{\Delta_7}{v_5},
+\qquad
+x=\frac{v_5}{c},
+\qquad
+Y=\frac{u_5}{c},
+\qquad
+S=\frac{\lambda}{c}.
+\]
+For any scalar germ $f$, define
+\[
+D_f(a,h):=
+\det\!\begin{pmatrix}
+c(a)&v_5(a)&f(a)\\
+c'(a)&v_5'(a)&f'(a)\\
+c(h)&v_5(h)&f(h)
+\end{pmatrix}.
+\]
+A direct row reduction gives
+\[
+D_f(a,h)
+=
+c(a)^2c(h)\Bigl(
+x'(a)\bigl(F(h)-F(a)\bigr)-F'(a)\bigl(x(h)-x(a)\bigr)
+\Bigr),
+\qquad
+F=\frac{f}{c}.
+\]
+In particular,
+\[
+\Psi_a(h):=\frac{D_{u_5}(a,h)}{D_\lambda(a,h)}
+=
+\Gamma_{x(a)}(x(h)).
+\]
+Thus the repeated-source nonmixed $4$-point geometry is already encoded by a
+finite ratio of source determinants.
+
+Likewise, if one sets
+\[
+\mathfrak D(a,h):=
+\det\!\begin{pmatrix}
+c(a)&v_5(a)&\lambda(a)&u_5(a)\\
+c'(a)&v_5'(a)&\lambda'(a)&u_5'(a)\\
+c(h)&v_5(h)&\lambda(h)&u_5(h)\\
+c'(h)&v_5'(h)&\lambda'(h)&u_5'(h)
+\end{pmatrix},
+\]
+then a Pl\"ucker identity yields
+\[
+\frac{d}{dh}\Psi_a(h)
+=
+\frac{W_h(c,v_5)(a)\,\mathfrak D(a,h)}{D_\lambda(a,h)^2}.
+\]
+So the sign of the quadratic-envelope derivative is governed by one explicit
+$4\times 4$ source determinant.
+\end{remark}
+
+\begin{remark}[First-loss rigidification of the quadratic-envelope scalar]
+\label{rem:first-loss-rigidification-nonmixed}
+Set
+\[
+M(a,x):=B_a(x)^2\,\Gamma_a'(x)=A_a'(x)B_a(x)-A_a(x)B_a'(x).
+\]
+Then
+\[
+\partial_x M(a,x)=S''(x)\,B_a(x)\,\bigl(\mathcal Z(x)-\Gamma_a(x)\bigr).
+\]
+Moreover, at any point where $M(a,x)=0$,
+\[
+\partial_a M(a,x)=S''(a)\,C_a(x)\,\bigl(\mathcal Z(a)-\Gamma_a(x)\bigr),
+\]
+where
+\[
+C_a(x):=S(a)-S(x)+S'(x)(x-a)=\int_a^x (t-a)\,S''(t)\,dt.
+\]
+
+Thus any formally attained first loss of monotonicity for $\Gamma_a$ forces
+\[
+\Gamma_a(x)=\mathcal Z(a).
+\]
+After the affine shear
+\[
+\widetilde Y_\gamma:=Y-\gamma S,
+\qquad \gamma=\mathcal Z(a),
+\]
+this yields
+\[
+\widetilde Y_\gamma''(a)=0,
+\qquad
+\widetilde H_3(a,x)=0,
+\qquad
+\partial_x\widetilde H_3(a,x)=0.
+\]
+So a first loss of quadratic-envelope monotonicity can only occur through a
+sheared repeated-node tangent-contact configuration rooted at a curvature-zero
+point. In particular, the remaining nonmixed obstruction is diagonal in nature:
+it is governed by odd zeros of $\mathcal R$, not by an independent separated
+source-target mechanism.
+\end{remark}
+
+\begin{remark}[The nonmixed scalar is not constrained by $\Lambda_v=(x,S)$ alone]
+\label{rem:R-free-over-fixed-S}
+Fix an analytic function $S$ on an interval $I$ with $S''\neq 0$, and let
+$R$ be any analytic scalar on $I$. Choosing
+\[
+Z(x):=\gamma+\int_{x_0}^x R(t)\,dt
+\]
+and solving
+\[
+Y''(x)=Z(x)\,S''(x)
+\]
+produces an analytic $Y$ satisfying
+\[
+\frac{d}{dx}\!\left(\frac{Y''}{S''}\right)=R.
+\]
+Thus the planar derivative geometry of $\Lambda_v=(x,S)$ alone cannot exclude
+odd zeros of $\mathcal R$. Any such exclusion must use an additional
+source-level coupling between $Y$ and $S$ coming from the genuine RH data.
+\end{remark}
+
 \begin{remark}[What remains on the nonmixed $4$-point side]
 \label{rem:what-remains-nonmixed-after-R-zero-bridge}
-The preceding results now give a full local parity classification of isolated
-nonmixed zeros of $\mathcal R$. Exact nonmixed tangent-plane contacts force
-zeros of $\mathcal R$; intervals on which $\mathcal R$ has fixed nonzero
-sign are exactly-contact sterile; recurrent exact contacts force affine-planar
-collapse; and isolated odd-order zeros of $\mathcal R$ seed local exact
-nonmixed contacts, while isolated even-order zeros are sterile.
+The preceding results now give a full local derivative-side picture of the
+nonmixed exact-contact geometry. Exact nonmixed tangent-plane contacts force
+zeros of $\mathcal R$
+(Proposition~\ref{prop:exact-nonmixed-tangent-plane-contacts-force-R-zero});
+intervals on which $\mathcal R$ has fixed nonzero sign are exactly-contact
+sterile
+(Corollary~\ref{cor:sign-definite-R-excludes-exact-nonmixed-contacts});
+recurrent exact contacts force affine-planar collapse
+(Corollary~\ref{cor:recurrent-exact-nonmixed-contacts-force-affine-planarity});
+and isolated zeros of $\mathcal R$ are classified by parity
+(Proposition~\ref{prop:parity-classification-isolated-nonmixed-R-zeros}).
 
-Accordingly, the genuinely live nonmixed $4$-point problem is no longer local
-birth, but rather the global/source-level control of which odd zeros of the
-analytic scalar invariant
+In addition, for each fixed source point $a$, repeated-source exact contacts
+factor through the quadratic-envelope scalar
+\[
+\Gamma_a(x)=
+\frac{Y(x)-Y(a)-Y'(a)(x-a)}
+{S(x)-S(a)-S'(a)(x-a)},
+\]
+whose derivative is a positive-kernel average of $\mathcal R$. Equivalently,
+below the lifted variables the same mechanism is encoded by the source-determinant
+quotient
+\[
+\Psi_a(h)=\frac{D_{u_5}(a,h)}{D_\lambda(a,h)},
+\]
+with derivative controlled by the osculatory $4\times 4$ determinant
+$\mathfrak D(a,h)$.
+
+Accordingly, the genuinely live nonmixed $4$-point burden is no longer local
+birth. What remains is the global/source-level control of which odd zeros of
 \[
 \mathcal R=\frac12\,\widetilde Y'''
 \]
@@ -14016,15 +14355,29 @@ The dangerous mixed low-order list is then exactly:
 (m,n)=(4,6)\iff \kappa_{2,2}\neq 0.
 \]
 
-Thus the full currently explicit low-order $4$-point obstruction list is
+Thus the full currently explicit \emph{low-order} $4$-point obstruction list is
 equivalent to the finite set of coefficients
 \[
 \boxed{
 z_2,\ z_4,\ z_6,\ \kappa_{1,1},\ \kappa_{1,3},\ \kappa_{2,2}.
 }
 \]
-Any RH-specific local closure theorem for the $4$-point branch must force
-these six quantities to vanish.
+
+On the mixed side, the three coefficients
+\[
+\kappa_{1,1},\qquad \kappa_{1,3},\qquad \kappa_{2,2}
+\]
+exhaust the presently explicit low-order obstruction list.
+
+On the nonmixed side, however, the parity classification from
+Proposition~\ref{prop:parity-classification-isolated-nonmixed-R-zeros}
+shows that local exact-contact birth occurs at every isolated odd-order zero of
+$\mathcal R$. Accordingly,
+\[
+z_2,\qquad z_4,\qquad z_6
+\]
+should now be viewed only as the first three explicit low-order nonmixed
+obstruction coefficients, not as a complete local nonmixed list.
 \end{remark}
 
 \begin{remark}[Wronskian-order reformulation of the mixed low-order list]
@@ -14926,12 +15279,17 @@ or the mixed-branch exclusion
 \quad\text{at every mixed point.}
 \]
 
-In particular, the dangerous nonmixed models
+In particular, the nonmixed models
 \[
 Q_v(\xi)=(\xi^n,\xi,\xi^2),
-\qquad n=4,6,8,
+\qquad n\ge 4 \ \text{even},
 \]
-and the dangerous mixed models
+are all realizable at the present lifted level; the cases
+\[
+n=4,6,8
+\]
+are simply the first currently explicit low-order examples.
+The dangerous mixed models
 \[
 Q_v(\xi)=(\xi^n,\xi,\xi^m),
 \qquad (m,n)=(3,4),\ (3,6),\ (4,6),
@@ -14962,42 +15320,29 @@ for the mixed cases. These realize exactly the dangerous low-order patterns for
 $(\mathcal Z,\mathcal R)$ listed above.
 \end{proof}
 
-\begin{remark}[Work in progress: nonmixed parity route versus mixed patch route]
+\begin{remark}[Updated nonmixed status versus mixed patch route]
 \label{rem:wip-dream-parity-identity-four-point}
-There are now two genuinely distinct theorem-level routes on the lifted
-$4$-point branch.
-
-\medskip
-
-\noindent
-\textbf{Nonmixed route.}
-After nonmixed normalization
+The local nonmixed lifted route is now closed at the derivative-geometry level.
+Exact nonmixed contacts force zeros of $\mathcal R$; one-sign $\mathcal R$
+intervals are sterile; recurrent exact contacts force affine-planar collapse;
+and isolated zeros of $\mathcal R$ are classified by parity. Together with
+the quadratic-envelope scalar $\Gamma_a$ and its source-determinant
+reformulation, this shows that the remaining nonmixed burden is no longer a
+local parity theorem, but the global/source-level control of which odd zeros of
 \[
-Q_v(\xi)=\bigl(\widetilde Y(\xi),\,\xi,\,\xi^2\bigr),
+\mathcal R=\frac{T_v}{K_v^2}
 \]
-the natural dream identity remains:
-\[
-\mathcal R(\xi)=\frac12\,\widetilde Y'''(\xi)\ \text{is even in }\xi,
-\]
-equivalently $\mathcal Z$ is odd modulo the affine coplanarity gauge. This
-would eliminate the explicit nonmixed low-order bad list
-\[
-\operatorname{ord}_0\mathcal R\in\{1,3,5\}.
-\]
+can actually arise along opened nonmixed arcs.
 
-\medskip
-
-\noindent
-\textbf{Mixed route.}
-On the centered diagonal branch, the decisive pair-level object is now
+On the mixed side, the decisive pair-level object remains
 \[
 A_5^{\mathfrak f}(s)=u_5(s)I+v_5(s)S.
 \]
 By Corollary~\ref{cor:centered-quintic-fixed-sector-nontriviality}, this
 package is not identically zero, so after shrinking to one-sided punctured arcs
 the centered branch enters either a good $v_5$-patch or the parallel
-$u_5$-patch. If the $v_5$-patch opens, then the centered collision-side parity
-package from
+$u_5$-patch. If the $v_5$-patch opens, then the centered collision-side
+parity package from
 Remark~\ref{rem:centered-symmetric-placement-taylor-package} should transfer to
 the good-patch coordinate
 \[
@@ -15015,12 +15360,12 @@ excluding the explicit mixed low-order bad list
 \[
 (r,\operatorname{ord}_0\mathcal Z)\in\{(1,1),(1,3),(2,2)\}.
 \]
-If instead only the $u_5$-patch opens, the parallel $u_5$-patch geometry gives
-the natural fallback local setting.
+If instead only the $u_5$-patch opens, the parallel $u_5$-patch geometry
+gives the natural fallback local setting.
 
 Thus the centered parity package now points primarily at a mixed-branch patch
 dichotomy together with a finite-jet parity bridge on the $v_5$-side, while
-the nonmixed odd-order branch remains the deeper live $4$-point bottleneck.
+the nonmixed side has become a global/source-level odd-zero control problem.
 \end{remark}
 
 \begin{remark}[What the four-point branch now reduces to]
@@ -15038,16 +15383,41 @@ On the nonmixed side, after normalization to
 \[
 Q_v(\xi)=\bigl(\widetilde Y(\xi),\,\xi,\,\xi^2\bigr),
 \]
-the explicit low-order dangerous list is
+the local derivative-side picture is now explicit. Exact nonmixed contacts force
+zeros of
+\[
+\mathcal R=\frac12\,\widetilde Y''',
+\]
+isolated zeros are classified by parity, one-sign $\mathcal R$-intervals are
+exactly-contact sterile, and recurrent exact contacts force affine-planar
+collapse.
+
+The explicit low-order list
 \[
 \operatorname{ord}_0\mathcal R\in\{1,3,5\},
 \]
-equivalently the first nontrivial even Taylor coefficients of
-$\widetilde Y$ occur in degrees $4,6,8$. In an arbitrary nonmixed
-$x$-chart this is captured exactly by the three obstruction coefficients
+equivalently the coefficients
 \[
-z_2,\qquad z_4,\qquad z_6.
+z_2,\qquad z_4,\qquad z_6,
 \]
+should therefore now be regarded only as the first explicit low-order nonmixed
+odd-order cases, not as the full local nonmixed picture.
+
+For fixed source point $a$, repeated-source exact contacts factor through the
+quadratic-envelope scalar
+\[
+\Gamma_a(x)=
+\frac{Y(x)-Y(a)-Y'(a)(x-a)}
+{S(x)-S(a)-S'(a)(x-a)},
+\]
+equivalently through the below-lifted quotient
+\[
+\Psi_a(h)=\frac{D_{u_5}(a,h)}{D_\lambda(a,h)}.
+\]
+Its derivative is governed by the osculatory $4\times 4$ source determinant
+$\mathfrak D(a,h)$. Thus the remaining nonmixed burden is no longer local
+parity, but global/source-level control of which odd zeros of $\mathcal R$
+occur on genuine opened arcs.
 
 On the mixed side, the explicit low-order dangerous list is
 \[
@@ -15129,11 +15499,13 @@ low-order reparametrization check rather than a purely qualitative parity
 heuristic.
 
 What remains live is therefore sharply split:
-the nonmixed side still needs a deeper RH-specific divisibility / parity
-identity, while the mixed side now needs the \emph{effective use} of the
-already-established quintic-patch dichotomy: finite-jet parity transfer on the
-$v_5$-side when that patch opens, and a genuine fallback local analysis on the
-parallel $u_5$-patch when only that patch opens.
+the nonmixed side now needs global/source-level control of odd zeros of
+$\mathcal R$, equivalently of the sign behavior of the quadratic-envelope
+derivative or the source determinant $\mathfrak D(a,h)$; while the mixed side
+now needs the \emph{effective use} of the already-established quintic-patch
+dichotomy: finite-jet parity transfer on the $v_5$-side when that patch
+opens, and a genuine fallback local analysis on the parallel $u_5$-patch
+when only that patch opens.
 
 Near the centered diagonal base, this mixed-side picture is now sharper than a
 mere patch dichotomy. By
@@ -15260,11 +15632,15 @@ geometry as a genuine fallback local setting;
 \item as a backup local algebraic route, exclusion of the remaining coupled
 quintic--septic degeneration tower when the $v_5$-route fails;
 
-\item and, on the still-live nonmixed side, a deeper RH-specific source- or
-matrix-level identity imposing stronger parity / divisibility constraints on
+\item and, on the still-live nonmixed side, a global/source-level control
+theorem excluding the odd zeros of
 \[
-\mathcal R=\frac{T_v}{K_v^2}.
+\mathcal R=\frac{T_v}{K_v^2}
 \]
+that are not already absorbed into affine-planar collapse. Equivalently, one
+must control the sign of the quadratic-envelope derivative, or below the lifted
+variables the sign of the osculatory source determinant $\mathfrak D(a,h)$,
+along opened nonmixed arcs.
 \end{itemize}
 \end{remark}
 
@@ -15335,18 +15711,25 @@ transport channel $v_{7,K_1}$. Thus failure of the $v_5$-route is not a
 free local cancellation but a coupled quintic--septic degeneration scheme.
 
 \item
-\textbf{Four-point nonmixed branch via deeper RH-specific identities.}
-Generic local geometry already supports nonmixed odd-order exact branch sheets,
-so the next local theorem is not a blanket sterility statement but a deeper
-RH-specific parity / divisibility theorem strong enough to force extra
-vanishing of
+\textbf{Four-point nonmixed branch via source-level control of odd $\mathcal R$-zeros.}
+The local nonmixed derivative geometry is now explicit: exact contacts force
+zeros of $\mathcal R$, one-sign $\mathcal R$-intervals are sterile,
+recurrent exact contacts force affine-planar collapse, and isolated zeros are
+classified by parity. For fixed source point $a$, repeated-source exact
+contacts are controlled by the quadratic-envelope scalar
 \[
-\mathcal R=\frac{T_v}{K_v^2},
+\Gamma_a(x)=
+\frac{Y(x)-Y(a)-Y'(a)(x-a)}
+{S(x)-S(a)-S'(a)(x-a)},
 \]
-equivalently of the nonmixed obstruction coefficients
+equivalently by the source quotient
 \[
-z_2,\ z_4,\ z_6.
+\Psi_a(h)=\frac{D_{u_5}(a,h)}{D_\lambda(a,h)}.
 \]
+Its derivative is governed by the osculatory $4\times 4$ determinant
+$\mathfrak D(a,h)$. The remaining theorem-level task is therefore
+global/source-level exclusion of the odd zeros of $\mathcal R$ that are not
+already forced away by affine-planar collapse.
 \end{enumerate}
 \end{remark}
 
@@ -15371,9 +15754,16 @@ Second, exact shrinking lifted $4$-point circuits concentrate into
 \[
 T_v=0.
 \]
-On the nonmixed side $K_v\neq 0$, finite-order odd $T_v$-zeros can already
-support genuine local exact branch sheets, so the nonmixed $4$-point side is
-not governed by a blanket local sterility theorem.
+On the nonmixed side $K_v\neq 0$, the local derivative-side picture is now
+explicit. Exact contacts force zeros of
+\[
+\mathcal R=\frac{T_v}{K_v^2},
+\]
+isolated zeros are classified by parity, one-sign $\mathcal R$-intervals are
+exactly-contact sterile, and recurrent exact contacts force affine-planar
+collapse. So the nonmixed $4$-point side is no longer a vague local
+branching problem; what remains there is global/source-level control of which
+odd zeros of $\mathcal R$ actually occur on genuine opened arcs.
 
 Third, on the mixed side $K_v=T_v=0$, the low-order obstruction list is now
 finite and explicit:
@@ -15401,12 +15791,12 @@ parity transfer to the actual good-patch coordinate $x=v_5/c$; on the
 $u_5$-side, develop the parallel $u_5$-patch as the fallback local geometry.
 
 Thus the remaining lifted local issues are now:
-the continuation / non-recurrence of nonmixed odd-order $4$-point branches,
-the \emph{effective exploitation} of the already-available punctured-arc
+the global/source-level control of odd zeros of $\mathcal R$ on the nonmixed
+side, the \emph{effective exploitation} of the already-available punctured-arc
 quintic-patch dichotomy on the mixed side, the completion of the finite-jet
-centered-to-patch bridge on the actual $v_5$-patch together with the fallback
-local analysis on the $u_5$-patch, and the deeper RH-specific identities needed
-on the nonmixed $4$-point branch.
+centered-to-patch bridge on the actual $v_5$-patch together with the
+fallback local analysis on the $u_5$-patch, and the coupled quintic--septic
+backup tower when the $v_5$-route fails.
 \end{remark}
 
 \begin{remark}[Current geometric bottleneck]
@@ -15651,10 +16041,13 @@ lifted $k=3$ collinearity layer.
 
 Third, on the lifted four-point side, shrinking exact circuits now
 concentrate into $T_v=0$, repeated-node limits become tangent-plane contacts,
-and the local geometry splits into a nonmixed and a mixed regime. On the
-nonmixed side, odd-order $T_v$-zeros already support genuine local branch
-sheets in the model geometry, so generic local geometry does not close the
-branch. On the mixed side, the dangerous low-order obstruction list has been
+and the local geometry splits into a nonmixed and a mixed regime. On the nonmixed side, the local derivative-side theory is now explicit:
+exact contacts force zeros of $\mathcal R=T_v/K_v^2$, isolated zeros are
+classified by parity, one-sign $\mathcal R$-intervals are exactly-contact
+sterile, and recurrent exact contacts force affine-planar collapse. So the
+nonmixed side is no longer open at the level of local lifted calculus; what
+remains is the global/source-level control of which odd zeros of $\mathcal R$
+can occur on a genuine opened nonmixed arc. On the mixed side, the dangerous low-order obstruction list has been
 reduced to the finite set of coefficients
 \[
 z_2,\ z_4,\ z_6,\ \kappa_{1,1},\ \kappa_{1,3},\ \kappa_{2,2},
