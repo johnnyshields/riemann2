@@ -13223,6 +13223,188 @@ So the nonmixed $4$-point endgame has been reduced to a finite jet problem
 for the canonical invariant $\mathcal R$.
 \end{remark}
 
+\begin{lemma}[Repeated-node tangent-plane determinant in the normalized nonmixed chart]
+\label{lem:normalized-nonmixed-H4-divided-difference}
+In the normalized nonmixed chart of
+Remark~\ref{rem:nonmixed-four-point-zeros-can-carry-preexisting-branches},
+define
+\[
+\widetilde H_4(a,u,v):=
+\det\!\begin{pmatrix}
+1&\widetilde Y(a)&a&a^2\\
+0&\widetilde Y'(a)&1&2a\\
+1&\widetilde Y(u)&u&u^2\\
+1&\widetilde Y(v)&v&v^2
+\end{pmatrix}.
+\]
+Then
+\[
+\widetilde H_4(a,u,v)
+=
+(u-a)^2(v-a)^2\Bigl(\widetilde Y[a,a,v]-\widetilde Y[a,a,u]\Bigr),
+\]
+where
+\[
+\widetilde Y[a,a,t]
+:=
+\frac{\widetilde Y(t)-\widetilde Y(a)-\widetilde Y'(a)(t-a)}{(t-a)^2}
+\]
+is the repeated-node second divided difference.
+Equivalently, for $u\neq v$,
+\[
+\widetilde H_4(a,u,v)
+=
+(u-a)^2(v-a)^2(v-u)\,\widetilde Y[a,a,u,v].
+\]
+\end{lemma}
+
+\begin{proof}
+Subtract the first row from the third and fourth rows. Since
+\[
+u^2-a^2=(u-a)(u+a),
+\qquad
+v^2-a^2=(v-a)(v+a),
+\]
+this gives
+\[
+\widetilde H_4(a,u,v)
+=
+(u-a)(v-a)\,
+\det\!\begin{pmatrix}
+1&\widetilde Y(a)&a&a^2\\
+0&\widetilde Y'(a)&1&2a\\
+0&\dfrac{\widetilde Y(u)-\widetilde Y(a)}{u-a}&1&u+a\\
+0&\dfrac{\widetilde Y(v)-\widetilde Y(a)}{v-a}&1&v+a
+\end{pmatrix}.
+\]
+Expanding along the first column yields
+\[
+\widetilde H_4(a,u,v)
+=
+(u-a)(v-a)\,
+\det\!\begin{pmatrix}
+\widetilde Y'(a)&1&2a\\
+\dfrac{\widetilde Y(u)-\widetilde Y(a)}{u-a}&1&u+a\\
+\dfrac{\widetilde Y(v)-\widetilde Y(a)}{v-a}&1&v+a
+\end{pmatrix}.
+\]
+Now subtract the first row from the second and third rows:
+\[
+\widetilde H_4(a,u,v)
+=
+(u-a)(v-a)\,
+\det\!\begin{pmatrix}
+\widetilde Y'(a)&1&2a\\
+(u-a)\widetilde Y[a,a,u]&0&u-a\\
+(v-a)\widetilde Y[a,a,v]&0&v-a
+\end{pmatrix}.
+\]
+Expanding along the middle column gives
+\[
+\widetilde H_4(a,u,v)
+=
+(u-a)^2(v-a)^2\Bigl(\widetilde Y[a,a,v]-\widetilde Y[a,a,u]\Bigr),
+\]
+which is the first formula. Since
+\[
+\widetilde Y[a,a,u,v]
+=
+\frac{\widetilde Y[a,a,v]-\widetilde Y[a,a,u]}{v-u},
+\]
+the second formula follows for $u\neq v$.
+\end{proof}
+
+\begin{proposition}[Exact nonmixed tangent-plane contacts force nearby zeros of $\mathcal R$]
+\label{prop:exact-nonmixed-tangent-plane-contacts-force-R-zero}
+In the normalized nonmixed chart of
+Remark~\ref{rem:nonmixed-four-point-zeros-can-carry-preexisting-branches},
+assume $a,u,v\in\mathbf R$ are distinct and satisfy
+\[
+\widetilde H_4(a,u,v)=0.
+\]
+Then there exists
+\[
+w\in \operatorname{conv}\{a,u,v\}
+\]
+such that
+\[
+\mathcal R(w)=0.
+\]
+Equivalently,
+\[
+\widetilde Y'''(w)=0.
+\]
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:normalized-nonmixed-H4-divided-difference}, since
+$a,u,v$ are distinct,
+\[
+0=\widetilde H_4(a,u,v)
+=
+(u-a)^2(v-a)^2(v-u)\,\widetilde Y[a,a,u,v].
+\]
+Hence
+\[
+\widetilde Y[a,a,u,v]=0.
+\]
+By the Hermite--Genocchi formula for repeated-node divided differences, there
+exists
+\[
+w\in \operatorname{conv}\{a,u,v\}
+\]
+such that
+\[
+\widetilde Y[a,a,u,v]=\frac{\widetilde Y'''(w)}{3!}.
+\]
+Therefore
+\[
+\widetilde Y'''(w)=0.
+\]
+In the normalized nonmixed chart one has
+\[
+\mathcal R(\xi)=\frac12\,\widetilde Y'''(\xi),
+\]
+so $\mathcal R(w)=0$.
+\end{proof}
+
+\begin{corollary}[Sign-definite nonmixed intervals are exactly-contact sterile]
+\label{cor:sign-definite-R-excludes-exact-nonmixed-contacts}
+Let $J$ be an open interval in the normalized nonmixed chart such that
+\[
+\mathcal R \text{ has fixed nonzero sign on }J.
+\]
+Then there do not exist distinct points $a,u,v\in J$ such that
+\[
+\widetilde H_4(a,u,v)=0.
+\]
+Equivalently, there are no exact nonmixed tangent-plane contacts with all three
+nodes in $J$.
+\end{corollary}
+
+\begin{proof}
+If such $a,u,v$ existed, Proposition~\ref{prop:exact-nonmixed-tangent-plane-contacts-force-R-zero}
+would produce some
+\[
+w\in \operatorname{conv}\{a,u,v\}\subset J
+\]
+with $\mathcal R(w)=0$, contradicting the sign assumption.
+\end{proof}
+
+\begin{remark}[Derivative-side interpretation of exact nonmixed contacts]
+\label{rem:exact-nonmixed-contacts-are-R-zero-forcing}
+Proposition~\ref{prop:exact-nonmixed-tangent-plane-contacts-force-R-zero}
+strengthens the shrinking-circuit statement
+Proposition~\ref{prop:shrinking-exact-lifted-four-point-circuits-force-Tv-zero}.
+It is not merely a limit theorem: every exact nonmixed tangent-plane contact
+already forces an interior zero of the canonical derivative invariant
+\[
+\mathcal R=\frac12\,\widetilde Y'''.
+\]
+Thus the nonmixed $4$-point branch is controlled not only asymptotically by
+$T_v=0$, but pointwise by the zero set of a single analytic scalar.
+\end{remark}
+
 \begin{proposition}[Interval-persistent nonmixed $4$-point degeneracy forces affine planarity]
 \label{prop:interval-persistent-nonmixed-four-point-forces-affine-planarity}
 Let $J$ be a connected open interval in a good $v_5$-patch such that
@@ -13294,6 +13476,262 @@ Y-\gamma S-ax-b=0
 \]
 throughout $J$, so it lies in an affine plane.
 \end{proof}
+
+\begin{corollary}[Recurrent exact nonmixed contacts force affine-planar collapse]
+\label{cor:recurrent-exact-nonmixed-contacts-force-affine-planarity}
+Let $J$ be a connected open interval in a good $v_5$-patch such that
+\[
+K_v\neq 0
+\qquad\text{on }J.
+\]
+Assume that every nonempty open subinterval $I\subset J$ contains an exact
+nonmixed tangent-plane contact triple. Equivalently, after local nonmixed
+normalization on $I$, there exist distinct points $a,u,v\in I$ such that
+\[
+\widetilde H_4(a,u,v)=0.
+\]
+Then
+\[
+\mathcal R\equiv 0
+\qquad\text{on }J,
+\]
+hence
+\[
+T_v\equiv 0
+\qquad\text{on }J,
+\]
+and therefore the lifted curve is affine-planar on $J$:
+\[
+Y=\gamma S+ax+b
+\]
+for some constants $\gamma,a,b\in\mathbf C$.
+\end{corollary}
+
+\begin{proof}
+Let $I\subset J$ be any nonempty open subinterval. By assumption, $I$
+contains an exact nonmixed tangent-plane contact triple. After nonmixed
+normalization on $I$, Proposition~\ref{prop:exact-nonmixed-tangent-plane-contacts-force-R-zero}
+produces a point $w_I\in I$ such that
+\[
+\mathcal R(w_I)=0.
+\]
+Thus every nonempty open subinterval of $J$ contains a zero of $\mathcal R$.
+Since $\mathcal R$ is analytic, its zero set cannot have an accumulation point
+in $J$ unless
+\[
+\mathcal R\equiv 0
+\qquad\text{on }J.
+\]
+Because $K_v\neq 0$ on $J$ and
+\[
+\mathcal R=\frac{T_v}{K_v^2},
+\]
+it follows that
+\[
+T_v\equiv 0
+\qquad\text{on }J.
+\]
+Now apply
+Proposition~\ref{prop:interval-persistent-nonmixed-four-point-forces-affine-planarity}
+to conclude that
+\[
+Y=\gamma S+ax+b
+\]
+on $J$.
+\end{proof}
+
+\begin{remark}[What remains on the nonmixed $4$-point side]
+\label{rem:what-remains-nonmixed-after-R-zero-bridge}
+Corollary~\ref{cor:recurrent-exact-nonmixed-contacts-force-affine-planarity}
+shows that recurrent exact nonmixed tangent-plane contacts cannot persist away
+from the zero set of $\mathcal R$, and if they recur densely on an interval
+then the branch collapses to affine-planar geometry. Thus the genuinely live
+nonmixed $4$-point problem is reduced to the local analysis of isolated zeros
+of the analytic scalar invariant
+\[
+\mathcal R=\frac12\,\widetilde Y'''.
+\]
+\end{remark}
+
+\begin{lemma}[Derivative formula for the repeated-node nonmixed profile]
+\label{lem:Da-derivative-formula}
+In the normalized nonmixed chart, define
+\[
+D_a(t):=\widetilde Y[a,a,t]
+=
+\frac{\widetilde Y(t)-\widetilde Y(a)-\widetilde Y'(a)(t-a)}{(t-a)^2},
+\qquad
+D_a(a):=\frac12\,\widetilde Y''(a).
+\]
+Then $D_a(t)$ extends real-analytically across $t=a$, and
+\[
+D_a(t)=\int_0^1 (1-s)\,\widetilde Y''(a+s(t-a))\,ds.
+\]
+Moreover,
+\[
+D_a'(t)
+=
+\int_0^1 s(1-s)\,\widetilde Y'''(a+s(t-a))\,ds
+=
+2\int_0^1 s(1-s)\,\mathcal R(a+s(t-a))\,ds.
+\]
+\end{lemma}
+
+\begin{proof}
+Taylor's integral formula gives
+\[
+\widetilde Y(t)
+=
+\widetilde Y(a)+\widetilde Y'(a)(t-a)
++(t-a)^2\int_0^1 (1-s)\,\widetilde Y''(a+s(t-a))\,ds.
+\]
+Dividing by $(t-a)^2$ proves the first formula for $t\neq a$, and the
+analytic extension across $t=a$ is immediate. Differentiating under the
+integral sign gives
+\[
+D_a'(t)
+=
+\int_0^1 s(1-s)\,\widetilde Y'''(a+s(t-a))\,ds.
+\]
+Since $\mathcal R=\frac12\,\widetilde Y'''$ in the normalized nonmixed chart,
+the last formula follows.
+\end{proof}
+
+\begin{proposition}[Simple zeros of $\mathcal R$ seed local exact nonmixed contacts]
+\label{prop:simple-R-zero-seeds-local-exact-nonmixed-contacts}
+Assume $\xi_0\in\mathbf R$ is a simple zero of the nonmixed invariant:
+\[
+\mathcal R(\xi_0)=0,
+\qquad
+\mathcal R'(\xi_0)\neq 0.
+\]
+Equivalently,
+\[
+\widetilde Y'''(\xi_0)=0,
+\qquad
+\widetilde Y''''(\xi_0)\neq 0.
+\]
+Then there exists a neighborhood $U$ of $\xi_0$ and a real-analytic
+function $\tau:U\to U$ such that
+\[
+\tau(\xi_0)=\xi_0,
+\qquad
+D_a'(\tau(a))=0
+\quad (a\in U).
+\]
+Moreover,
+\[
+\tau'(\xi_0)=-1,
+\qquad
+D_a''(\tau(a))\neq 0
+\quad (a\in U),
+\]
+so for each $a\in U\setminus\{\xi_0\}$, the function $D_a$ has a strict
+local extremum at $t=\tau(a)$. Consequently, for each such $a$, there exist
+distinct points $u_-(a),u_+(a)\in U$ with
+\[
+u_-(a)<\tau(a)<u_+(a),
+\qquad
+D_a(u_-(a))=D_a(u_+(a)),
+\]
+and hence
+\[
+\widetilde H_4(a,u_-(a),u_+(a))=0.
+\]
+
+Thus every simple zero of $\mathcal R$ seeds a local family of exact
+nonmixed tangent-plane contacts.
+\end{proposition}
+
+\begin{proof}
+Set
+\[
+G(a,t):=D_a'(t).
+\]
+By Lemma~\ref{lem:Da-derivative-formula},
+\[
+G(a,t)=\int_0^1 s(1-s)\,\widetilde Y'''(a+s(t-a))\,ds.
+\]
+Hence
+\[
+G(\xi_0,\xi_0)=\frac16\,\widetilde Y'''(\xi_0)=0.
+\]
+
+Differentiate under the integral sign:
+\[
+\partial_t G(a,t)
+=
+\int_0^1 s^2(1-s)\,\widetilde Y''''(a+s(t-a))\,ds,
+\]
+\[
+\partial_a G(a,t)
+=
+\int_0^1 s(1-s)^2\,\widetilde Y''''(a+s(t-a))\,ds.
+\]
+At $(a,t)=(\xi_0,\xi_0)$, both integrals equal
+\[
+\frac{1}{12}\,\widetilde Y''''(\xi_0)
+=
+\frac{1}{6}\,\mathcal R'(\xi_0),
+\]
+which is nonzero by assumption. In particular,
+\[
+\partial_t G(\xi_0,\xi_0)\neq 0.
+\]
+Therefore the implicit function theorem yields a unique real-analytic function
+$\tau(a)$ near $\xi_0$ such that
+\[
+G(a,\tau(a))=0,
+\qquad
+\tau(\xi_0)=\xi_0.
+\]
+Differentiating $G(a,\tau(a))=0$ at $a=\xi_0$ gives
+\[
+\tau'(\xi_0)
+=
+-\frac{\partial_a G(\xi_0,\xi_0)}{\partial_t G(\xi_0,\xi_0)}
+=
+-1.
+\]
+
+Now
+\[
+D_a''(t)=\partial_t G(a,t),
+\]
+so by continuity and $\partial_t G(\xi_0,\xi_0)\neq 0$, one has
+\[
+D_a''(\tau(a))\neq 0
+\]
+for $a$ near $\xi_0$. Thus $t=\tau(a)$ is a strict local extremum of
+$D_a$. Hence, for each $a\neq \xi_0$ sufficiently close to $\xi_0$, there
+exist points $u_-(a)<\tau(a)<u_+(a)$ arbitrarily close to $\tau(a)$ such
+that
+\[
+D_a(u_-(a))=D_a(u_+(a)).
+\]
+By Lemma~\ref{lem:normalized-nonmixed-H4-divided-difference},
+\[
+\widetilde H_4(a,u_-(a),u_+(a))
+=
+(a-u_-(a))^2(a-u_+(a))^2\bigl(D_a(u_+(a))-D_a(u_-(a))\bigr)=0.
+\]
+This proves the claim.
+\end{proof}
+
+\begin{remark}[Reflection law at a simple $\mathcal R$-zero]
+\label{rem:reflection-law-simple-R-zero}
+The identity
+\[
+\tau'(\xi_0)=-1
+\]
+means that, to first order, the critical point $t=\tau(a)$ is the reflection
+of $a$ across the simple zero $\xi_0$. Equivalently,
+\[
+\tau(a)=2\xi_0-a+O((a-\xi_0)^2).
+\]
+Thus the local exact nonmixed contact family born at a simple $\mathcal R$-zero
+has a first-order reflection geometry across that zero.
+\end{remark}
 
 \begin{remark}[Derivative-geometry meaning of the nonmixed invariant $\mathcal R$]
 \label{rem:derivative-geometry-meaning-of-R}
@@ -14318,6 +14756,45 @@ mixed local branch left to study there is the clean branch
 \]
 \end{remark}
 
+\begin{corollary}[Right-pincer local reduction near the centered base]
+\label{cor:right-pincer-local-reduction-centered-base}
+Assume the centered scalar package from
+Remark~\ref{rem:centered-symmetric-placement-taylor-package}, together with the
+right-pincer trichotomy from
+Remark~\ref{rem:right-pincer-trichotomy-centered-base}. Then every
+sufficiently small nearby genuinely new mixed $4$-point obstruction point near
+the centered base must lie on the clean branch
+\[
+\operatorname{ord}_s v_5=1,
+\]
+equivalently
+\[
+V_1\neq 0.
+\]
+In particular, every late-$v_5$ branch near the centered base is either
+locally sterile on the $u_5$-patch or already absorbed into the defect-free
+quintic-circuit regime.
+\end{corollary}
+
+\begin{proof}
+Because $v_5$ is odd in the centered variable, either
+\[
+\operatorname{ord}_s v_5=1
+\qquad\text{or}\qquad
+\operatorname{ord}_s v_5\ge 3 \text{ odd}.
+\]
+If $\operatorname{ord}_s v_5\ge 3$, then by
+Remark~\ref{rem:right-pincer-trichotomy-centered-base} the branch is either
+locally sterile on the $u_5$-patch or planar-lift and hence already-quintic.
+So a sufficiently small nearby genuinely new mixed $4$-point obstruction
+cannot lie on such a late-$v_5$ branch. Therefore any such genuinely new
+mixed local branch must lie on the only remaining possibility,
+\[
+\operatorname{ord}_s v_5=1.
+\qedhere
+\]
+\end{proof}
+
 \begin{proposition}[Realization lemma for lifted germs]
 \label{prop:realization-lemma-lifted-germs}
 Let $\widetilde Y(\xi)$ and $\widetilde S(\xi)$ be arbitrary analytic germs
@@ -14586,6 +15063,19 @@ identity, while the mixed side now needs the \emph{effective use} of the
 already-established quintic-patch dichotomy: finite-jet parity transfer on the
 $v_5$-side when that patch opens, and a genuine fallback local analysis on the
 parallel $u_5$-patch when only that patch opens.
+
+Near the centered diagonal base, this mixed-side picture is now sharper than a
+mere patch dichotomy. By
+Corollary~\ref{cor:right-pincer-local-reduction-centered-base}, every
+sufficiently small nearby genuinely new mixed $4$-point obstruction must lie
+on the clean branch
+\[
+\operatorname{ord}_s v_5=1,
+\]
+while every late-$v_5$ branch is either locally sterile on the automatic
+$u_5$-patch or already absorbed into the defect-free planar
+quintic-circuit regime. Thus the genuinely new mixed local geometry near the
+centered base has been reduced to the single clean branch $V_1\neq 0$.
 \end{remark}
 
 \begin{remark}[Status of the lifted order-$7$ geometry]
@@ -14621,6 +15111,12 @@ maximal right monotone-slope block, with no interior common-tangent event, no
 source-side return, and no interior accumulation. Thus the three-point side is
 no longer a live internal recurrence problem on such patches; only boundary exit
 of the relevant source/target slope-overlap block can remain.
+
+On the mixed four-point side, the right-pincer package now gives an analogous
+local simplification near the centered base: every late-$v_5$ branch is either
+locally sterile on the $u_5$-patch or already absorbed into the planar
+quintic-circuit regime, so the only genuinely new mixed local branch left there
+is the clean branch $\operatorname{ord}_s v_5=1$.
 
 Fourth, the four-point side splits sharply into nonmixed and mixed regimes.
 On the nonmixed side, finite-order odd $T_v$-zeros already support genuine
@@ -15185,6 +15681,18 @@ already-known defect-free planar quintic-circuit regime for
 \]
 So every late-$v_5$ branch near the centered base is now understood as either
 locally sterile or already-quintic.
+
+Consequently, near the centered base the mixed local picture has been reduced to
+a single genuinely new branch:
+\[
+V_1\neq 0
+\quad\Longleftrightarrow\quad
+\operatorname{ord}_s v_5=1.
+\]
+Equivalently, every sufficiently small nearby genuinely new mixed $4$-point
+obstruction must already lie on the clean good $v_5$-patch branch, while the
+entire late-$v_5$ sector is either sterile on the $u_5$-patch or absorbed
+into the planar defect-free quintic-circuit regime.
 
 Fifth, on the lifted three-point side, the repeated-node tangent-contact
 equation
