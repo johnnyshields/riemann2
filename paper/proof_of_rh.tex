@@ -15613,6 +15613,129 @@ it follows that
 along the whole branch. This proves the final statement.
 \end{proof}
 
+\begin{remark}[No-go for the fixed-level chamber-exit route]
+\label{rem:no-go-fixed-level-chamber-exit-route}
+One might hope to strengthen
+Proposition~\ref{prop:uniform-fixed-level-nonrecurrence-sheared-three-point}
+as follows: if a fixed level $\gamma$ is chosen near a strict local extremum of
+$\mathcal Z$, so that
+\[
+J_\gamma=(\mathcal Z-\gamma)J_\lambda
+\]
+has two nearby simple zeros
+\[
+r_-<r_+,
+\]
+then the corresponding sheared opposite-side $3$-point branch should be unable
+to reach the chamber boundary $u=r_+$ without first encountering an interior
+common-tangent point
+\[
+\partial_u \widetilde H_{3,\gamma}=0.
+\]
+This is false already at the level of the local planar/sheared equations.
+
+Indeed, consider the model functions
+\[
+S_{\mathrm{mod}}(x):=x^2,
+\qquad
+\mathcal Z_{\mathrm{mod}}(x):=1-x^2,
+\qquad
+\mathcal R_{\mathrm{mod}}(x):=\mathcal Z_{\mathrm{mod}}'(x)=-2x,
+\]
+and fix the level
+\[
+\gamma:=0.
+\]
+Set
+\[
+F_{\mathrm{mod}}(x):=x^2-\frac{x^4}{6}.
+\]
+Then
+\[
+F_{\mathrm{mod}}''(x)=2(1-x^2)
+=
+(\mathcal Z_{\mathrm{mod}}(x)-\gamma)\,S_{\mathrm{mod}}''(x),
+\]
+so the two simple zeros of the sheared curvature are
+\[
+r_-=-1,
+\qquad
+r_+=1.
+\]
+
+Let
+\[
+H_{\mathrm{mod}}(a,u):=
+F_{\mathrm{mod}}(u)-F_{\mathrm{mod}}(a)-F_{\mathrm{mod}}'(a)(u-a).
+\]
+A direct computation gives
+\[
+H_{\mathrm{mod}}(a,u)
+=
+-\frac{(u-a)^2}{6}\,
+\bigl(3a^2+2au+u^2-6\bigr).
+\]
+Hence the nontrivial opposite-side branch issued from the odd zero $r_-=-1$ is
+\[
+u(a)=-a-\sqrt{6-2a^2},
+\qquad
+-\frac53<a<-1.
+\]
+Along this branch one has
+\[
+-1<u(a)<1,
+\qquad
+u(a)\uparrow 1
+\quad\text{as}\quad
+a\downarrow -\frac53,
+\]
+so the branch runs inside the chamber and stops by boundary exit at the second
+curvature zero.
+
+Moreover,
+\[
+\partial_u H_{\mathrm{mod}}(a,u)
+=
+F_{\mathrm{mod}}'(u)-F_{\mathrm{mod}}'(a)
+=
+-\frac{u-a}{3}\,\bigl(a^2+au+u^2-3\bigr).
+\]
+Substituting $u=u(a)$ yields
+\[
+a^2+a\,u(a)+u(a)^2-3
+=
+-a^2+a\sqrt{6-2a^2}+3<0
+\qquad
+\left(-\frac53<a<-1\right),
+\]
+and therefore
+\[
+\partial_u H_{\mathrm{mod}}(a,u(a))>0
+\qquad
+\left(-\frac53<a<-1\right).
+\]
+So there is \emph{no} interior common-tangent point anywhere on the branch
+before boundary exit. In fact, if one continues the same algebraic branch past
+the chamber boundary, the first common tangent occurs only later at
+\[
+(a,u)=(-\sqrt3,\sqrt3),
+\]
+strictly after the chamber has already been crossed.
+
+Thus fixed-level sheared nonrecurrence cannot be sharpened to a chamber-exit
+contradiction by planar arguments alone. The remaining obstruction is therefore
+genuinely source-coupled: any successful odd-zero exclusion must use the
+source-pinned moving shear
+\[
+f_a=u_5-\mathcal Z(a)\lambda
+\]
+or some equivalent RH-specific coupling, rather than only a frozen level
+$\gamma$ and the planar branch geometry of
+\[
+\widetilde Y_\gamma=Y-\gamma S.
+\]
+\end{remark}
+
 \begin{remark}[Source-level form of the shear transfer]
 \label{rem:source-level-form-of-shear-transfer}
 For fixed $a\in J$, set
@@ -15643,6 +15766,246 @@ Proposition~\ref{prop:sheared-repeated-node-forces-two-R-zeros} shows that such
 a source-level event forces either $J_{f_a}\equiv 0$ on the interval or at least
 two interior zeros of $J_{f_a}$, equivalently at least two interior zeros of
 $\mathcal R$ and hence of $\mathcal W_{\mathrm{src}}$.
+\end{remark}
+
+\begin{proposition}[Source-determinant form of the odd-zero unrooted defect]
+\label{prop:source-determinant-form-odd-zero-unrooted-defect}
+Let $J$ be a good nonmixed $v_5$-patch, and let $b\in J$ be an isolated
+odd-order zero of $\mathcal R$.  Use the local $x$-coordinate on $J$ centered
+at $b$, so that
+\[
+x(b)=0,
+\qquad
+\mathcal R(x)=x^m\rho(x),
+\qquad
+m\ge 1 \text{ odd},
+\qquad
+\rho(0)\neq 0.
+\]
+For each source point $a\in J$, set
+\[
+\Psi_a(h):=\frac{D_{u_5}(a,h)}{D_\lambda(a,h)},
+\qquad
+f_a:=u_5-\mathcal Z(x(a))\,\lambda.
+\]
+Then, after shrinking $J$ around $b$ if necessary, the following hold.
+
+\begin{enumerate}
+\item The critical locus
+\[
+\partial_h\Psi_a(h)=0
+\qquad\text{equivalently}\qquad
+\mathfrak D(a,h)=0
+\]
+is the graph of a unique real-analytic branch
+\[
+h=\sigma(a),
+\qquad
+\sigma(b)=b,
+\qquad
+\sigma(a)\neq a
+\quad (a\neq b).
+\]
+
+\item One has the exact identity
+\[
+D_{f_a}(a,h)
+=
+D_{u_5}(a,h)-\mathcal Z(x(a))\,D_\lambda(a,h)
+=
+D_\lambda(a,h)\,\bigl(\Psi_a(h)-\mathcal Z(x(a))\bigr).
+\]
+
+\item Along the critical branch,
+\[
+\Psi_a(\sigma(a))-\mathcal Z(x(a))
+=
+-\frac{\rho(0)}{2^{m+1}(m+2)}
+\bigl(x(\sigma(a))-x(a)\bigr)^{m+1}
++o\!\left(\bigl|x(\sigma(a))-x(a)\bigr|^{m+1}\right).
+\]
+
+\item Consequently,
+\[
+D_{f_a}(a,\sigma(a))
+=
+-\frac{c(b)^4J_\lambda(b)\rho(0)}{2^{m+2}(m+2)M(b)^2}
+\bigl(x(\sigma(a))-x(a)\bigr)^{m+3}
++o\!\left(\bigl|x(\sigma(a))-x(a)\bigr|^{m+3}\right).
+\]
+\end{enumerate}
+
+In particular, for all sufficiently small $a\neq b$ one has
+\[
+D_{f_a}(a,\sigma(a))\neq 0,
+\]
+and indeed
+\[
+\operatorname{sgn}D_{f_a}(a,\sigma(a))
+=
+-\operatorname{sgn}\!\bigl(J_\lambda(b)\rho(0)\bigr).
+\]
+So near an isolated odd zero of $\mathcal R$, the born repeated-source
+critical branch
+\[
+\mathfrak D(a,h)=0
+\]
+is uniformly unrooted in source-determinant language:
+\[
+D_{u_5}(a,h)-\mathcal Z(x(a))\,D_\lambda(a,h)\neq 0.
+\]
+\end{proposition}
+
+\begin{proof}
+By Remark~\ref{rem:source-determinant-reformulation-Gammaa},
+\[
+\Psi_a(h)=\Gamma_{x(a)}(x(h)).
+\]
+Therefore the critical locus
+\[
+\partial_h\Psi_a(h)=0
+\]
+is exactly the pullback through the source-to-$x$ coordinate of the local
+critical branch
+\[
+\partial_x\Gamma_{x(a)}(x)=0.
+\]
+So item (1) is the source-coordinate form of
+Proposition~\ref{prop:odd-zero-critical-branch-uniformly-unrooted}.
+
+For item (2), linearity of the determinant in the third column gives
+\[
+D_{f_a}(a,h)
+=
+D_{u_5}(a,h)-\mathcal Z(x(a))\,D_\lambda(a,h).
+\]
+Dividing by $D_\lambda(a,h)\neq 0$ on the nonmixed patch yields
+\[
+\frac{D_{f_a}(a,h)}{D_\lambda(a,h)}
+=
+\Psi_a(h)-\mathcal Z(x(a)).
+\]
+
+For item (3), apply
+Proposition~\ref{prop:odd-zero-critical-branch-uniformly-unrooted} to the
+$x$-coordinate pair
+\[
+\bigl(x(a),x(\sigma(a))\bigr).
+\]
+Since
+\[
+\Psi_a(\sigma(a))=\Gamma_{x(a)}(x(\sigma(a))),
+\]
+that proposition gives exactly
+\[
+\Psi_a(\sigma(a))-\mathcal Z(x(a))
+=
+-\frac{\rho(0)}{2^{m+1}(m+2)}
+\bigl(x(\sigma(a))-x(a)\bigr)^{m+1}
++o\!\left(\bigl|x(\sigma(a))-x(a)\bigr|^{m+1}\right).
+\]
+
+For item (4), apply the row-reduction identity from
+Remark~\ref{rem:source-determinant-reformulation-Gammaa} to
+\[
+f=f_a,
+\qquad
+F=\frac{f_a}{c}=Y-\mathcal Z(x(a))S.
+\]
+This gives
+\[
+D_{f_a}(a,h)
+=
+c(a)^2c(h)x'(a)\,
+\widetilde H_{3,\mathcal Z(x(a))}\bigl(x(a),x(h)\bigr),
+\]
+and since
+\[
+\widetilde H_{3,\mathcal Z(x(a))}(x(a),x(h))
+=
+B_{x(a)}(x(h))\bigl(\Psi_a(h)-\mathcal Z(x(a))\bigr),
+\]
+we obtain
+\[
+D_{f_a}(a,h)
+=
+c(a)^2c(h)x'(a)\,B_{x(a)}(x(h))
+\bigl(\Psi_a(h)-\mathcal Z(x(a))\bigr).
+\]
+
+Along the branch $h=\sigma(a)$, write
+\[
+\delta(a):=x(\sigma(a))-x(a).
+\]
+Then
+\[
+B_{x(a)}(x(\sigma(a)))
+=
+\frac12\,S''(b)\,\delta(a)^2
++
+o\!\left(|\delta(a)|^2\right),
+\]
+while
+\[
+x'(b)=\frac{M(b)}{c(b)^2},
+\qquad
+S''(b)=\frac{c(b)^3}{M(b)^3}J_\lambda(b)
+\]
+by Remark~\ref{rem:below-lifted-wronskian-ratio-reformulation}. Therefore
+\[
+c(a)^2c(\sigma(a))x'(a)B_{x(a)}(x(\sigma(a)))
+=
+\frac{c(b)^4J_\lambda(b)}{2M(b)^2}\,\delta(a)^2
++
+o\!\left(|\delta(a)|^2\right).
+\]
+Multiplying by item (3) gives
+\[
+D_{f_a}(a,\sigma(a))
+=
+-\frac{c(b)^4J_\lambda(b)\rho(0)}{2^{m+2}(m+2)M(b)^2}\,
+\delta(a)^{m+3}
++
+o\!\left(|\delta(a)|^{m+3}\right),
+\]
+which is the claimed asymptotic. Since $m+3$ is even, the leading term has
+fixed nonzero sign for all sufficiently small $a\neq b$.
+\end{proof}
+
+\begin{remark}[Ceiling of the local shear-transfer route]
+\label{rem:ceiling-local-shear-transfer-route}
+Proposition~\ref{prop:source-determinant-form-odd-zero-unrooted-defect} shows
+that near an isolated odd zero of $\mathcal R$, the genuinely born local
+repeated-source branch is the critical branch
+\[
+\mathfrak D(a,h)=0
+\qquad\text{equivalently}\qquad
+\partial_h\Psi_a(h)=0,
+\]
+but its rooted numerator
+\[
+D_{f_a}(a,h)
+=
+D_{u_5}(a,h)-\mathcal Z(x(a))\,D_\lambda(a,h)
+\]
+has a fixed nonzero leading term there.
+
+So the rooted sheared repeated-node tangent-contact condition is not the local
+source avatar of diagonal odd-zero birth.  In particular, no argument using
+only the local odd-zero model and the repeated-source critical-branch
+equations can prove an implication of the form
+\[
+\mathfrak D(a,h)=0 \Longrightarrow D_{f_a}(a,h)=0
+\]
+near odd zeros.
+
+This is a different obstruction from
+Remark~\ref{rem:ceiling-of-current-source-level-reduction}: the latter says the
+generic source-level Wronskian/$4\times4$ package is formally too free, while
+the present remark says that even along the \emph{actual local odd-zero branch},
+the rooted numerator fails to vanish with a universal signed defect.  Any
+successful shear-transfer theorem must therefore use genuinely additional RH
+source coupling beyond the local odd-zero critical-branch analysis.
 \end{remark}
 
 \begin{proposition}[Repeated-source first loss is exactly diagonal odd-zero birth]
@@ -15848,6 +16211,21 @@ level-selection step that would force the distinguished level
 \]
 arising from a hypothetical odd zero of $\mathcal W_{\mathrm{src}}$ to be hit
 by the relevant critical-value configuration of $\Gamma_a$.
+
+Remark~\ref{rem:no-go-fixed-level-chamber-exit-route} shows that this
+fixed-level route cannot be pushed further by planar chamber-exit arguments
+alone: even with two nearby roots of $\mathcal Z=\gamma$, the sheared
+opposite-side branch may run to the second curvature zero by boundary exit
+without any interior common-tangent event. Thus the remaining step must be
+genuinely source-coupled, involving the source-pinned moving shear
+\[
+f_a=u_5-\mathcal Z(a)\lambda
+\]
+or an equivalent RH-specific coupling, rather than only the frozen-level
+geometry of
+\[
+\widetilde Y_\gamma=Y-\gamma S.
+\]
 \end{remark}
 
 \begin{remark}[The repeated-source lane is now closed]
@@ -16286,51 +16664,104 @@ mean exactly that $V(a)$ lies strictly outside the endpoint-curvature interval
 \]
 \end{proof}
 
-\begin{remark}[Odd-zero connection reduction for the repeated-source branch]
-\label{rem:zero-connection-reduction-repeated-source}
-Let $b$ be an isolated odd-order zero of $\mathcal R$, and let
+\begin{proposition}[First rooting requires a second odd zero along the born repeated-source branch]
+\label{prop:first-rooting-requires-second-odd-zero-repeated-source}
+Let $b$ be an isolated odd-order zero of $\mathcal R$ on an opened nonmixed
+arc, and let
 \[
 t=\tau(a)
 \]
-denote the local born repeated-source critical branch supplied by
-Proposition~\ref{prop:parity-classification-isolated-nonmixed-R-zeros}.
-On any maximal continuation interval on which each segment
+denote an analytic continuation of the local born repeated-source critical
+branch, so that
+\[
+\tau(a)>a,
+\qquad
+D_a'(\tau(a))=0.
+\]
+Assume that $U$ is a connected continuation interval on which, for every
+$a\in U$, the segment
 \[
 [a,\tau(a)]
 \]
-contains exactly one sign change of $\mathcal R$,
-Corollary~\ref{cor:one-sign-change-chamber-no-return} shows that the branch
-remains simple, satisfies
+contains exactly one sign change of $\mathcal R$.
+
+Then for every $a\in U$ one has
 \[
-\tau'(a)<0,
+D_a(\tau(a))\neq \mathcal Z(a).
 \]
-and cannot realize the rigidified first-loss condition
+Equivalently, on the corresponding source branch
+\[
+h=\sigma(a),
+\qquad
+\mathfrak D(a,\sigma(a))=0,
+\]
+one has
+\[
+\Psi_a(\sigma(a))\neq \mathcal Z(x(a)),
+\]
+or in determinant form,
+\[
+D_{u_5}(a,\sigma(a))-\mathcal Z(x(a))\,D_\lambda(a,\sigma(a))\neq 0.
+\]
+
+Consequently, any first parameter at which the analytic continuation of the
+born repeated-source branch realizes a genuine repeated-source obstruction
+inside the opened nonmixed arc must occur only after the corresponding segment
+ceases to be one-sign-change. Internally, away from affine-planar collapse and
+without leaving the arc, this can happen only when the segment acquires a
+second odd-order zero of $\mathcal R$, equivalently of
+\[
+\mathcal W_{\mathrm{src}}.
+\]
+\end{proposition}
+
+\begin{proof}
+The first claim is exactly
+Corollary~\ref{cor:one-sign-change-chamber-no-return}(5): on any continuation
+interval on which each segment
+\[
+[a,\tau(a)]
+\]
+contains exactly one sign change of $\mathcal R$, the born critical branch
+cannot realize the rigidified first-loss condition
 \[
 D_a(\tau(a))=\mathcal Z(a).
 \]
 
-Thus the only internal way for such a branch to leave the one-sign-change
-chamber is for the sign-change count on the segment to change. Since even-order
-zeros of $\mathcal R$ do not change sign, this can occur only when an endpoint
-of the segment meets another \emph{odd-order zero} of $\mathcal R$
-(equivalently, unless the branch exits the local chart or the opened arc).
-Via Remark~\ref{rem:source-determinant-reformulation-Gammaa}, the same
-statement holds at source level for a local branch of
+Via Remark~\ref{rem:source-determinant-reformulation-Gammaa},
 \[
-\mathfrak D(a,h)=0.
+\Psi_a(h)=\Gamma_{x(a)}(x(h)),
 \]
-Accordingly, any genuine repeated-source obstruction branch must either leave
-the nonmixed chart/arc or connect one odd zero of
+so the same statement in source coordinates is
+\[
+\Psi_a(\sigma(a))\neq \mathcal Z(x(a)).
+\]
+Using
+Proposition~\ref{prop:source-determinant-form-odd-zero-unrooted-defect}(2),
+this is equivalent to
+\[
+D_{u_5}(a,\sigma(a))-\mathcal Z(x(a))\,D_\lambda(a,\sigma(a))\neq 0.
+\]
+
+For the final statement, as long as the continued branch remains inside the
+opened nonmixed arc and the corresponding segment remains one-sign-change,
+the first part shows that rooting cannot occur. Thus any first rooted point
+must be preceded by failure of the one-sign-change condition.
+
+Now even-order zeros of $\mathcal R$ do not change sign, so internally the
+sign-change count on the segment can change only when an endpoint of the
+segment meets another odd-order zero of $\mathcal R$ (unless the branch exits
+the arc or enters the affine-planar collapse case). Finally, on a nonmixed arc
+the functions $\mathcal R$ and
 \[
 \mathcal W_{\mathrm{src}}
+=
+J_\lambda J_{u_5}'-J_{u_5}J_\lambda'
 \]
-to a second odd zero of
-\[
-\mathcal W_{\mathrm{src}},
-\]
-equivalently one odd zero of $\mathcal R$ to a second odd zero of
-$\mathcal R$.
-\end{remark}
+differ only by a nonvanishing analytic factor
+(Proposition~\ref{prop:source-level-Wronskian-nonmixed-four-point}), so odd
+zeros of the two objects coincide.
+\end{proof}
 
 \begin{proposition}[At most one odd zero implies no genuine repeated-source obstruction]
 \label{prop:at-most-one-odd-zero-no-genuine-repeated-source-obstruction}
@@ -16471,16 +16902,27 @@ first-loss condition
 \[
 \Gamma_a(x)=\mathcal Z(a).
 \]
-Equivalently, at source level, a local branch of
+At source level, the same branch is characterized by
+\[
+\mathfrak D(a,h)=0,
+\]
+but
+Proposition~\ref{prop:source-determinant-form-odd-zero-unrooted-defect}
+shows that its rooted numerator
+\[
+D_{u_5}(a,h)-\mathcal Z(x(a))\,D_\lambda(a,h)
+\]
+has a fixed signed leading term near an isolated odd zero, so the local branch
+is uniformly unrooted there. Thus a local branch of
 \[
 \mathfrak D(a,h)=0
 \]
 cannot become a genuine obstruction until the source segment acquires a second
 odd zero (equivalently a second sign-changing zero) of
 \[
-\mathcal W_{\mathrm{src}}.
+\mathcal W_{\mathrm{src}},
 \]
-By
+or exits the local one-sign-change chamber. By
 Proposition~\ref{prop:at-most-one-odd-zero-no-genuine-repeated-source-obstruction},
 the positive-kernel route already excludes every opened nonmixed arc carrying
 at most one odd zero of $\mathcal W_{\mathrm{src}}$ (equivalently of
@@ -16514,9 +16956,20 @@ which differs from $\mathcal R$ only by a nonvanishing analytic factor.
 Repeated-source first loss is not a separate mechanism: it occurs if and only
 if one diagonally approaches an odd-order zero of $\mathcal R$, and the
 corresponding rooted sheared repeated-node event is locally absent near an
-isolated odd zero of $\mathcal R$. For each fixed shear level $\gamma$, the
-associated sheared opposite-side $3$-point branch is globally rigid on its
-maximal slope-overlap block. Moreover, the positive-kernel / source-determinant route now excludes every
+isolated odd zero of $\mathcal R$. Near such an isolated odd zero, the born
+repeated-source branch
+\[
+\mathfrak D(a,h)=0
+\]
+is uniformly unrooted at source level:
+\[
+D_{u_5}(a,h)-\mathcal Z(x(a))\,D_\lambda(a,h)\neq 0
+\]
+with a fixed signed leading term
+(Proposition~\ref{prop:source-determinant-form-odd-zero-unrooted-defect}).
+For each fixed shear level $\gamma$, the associated sheared opposite-side
+$3$-point branch is globally rigid on its maximal slope-overlap block.
+Moreover, the positive-kernel / source-determinant route now excludes every
 opened nonmixed arc carrying at most one odd zero of
 $\mathcal W_{\mathrm{src}}$:
 on any chamber where the repeated-source segment sees exactly one sign change of
