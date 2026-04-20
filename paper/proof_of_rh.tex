@@ -2438,6 +2438,16 @@ Q^{-2}x_{11} & Q^{-1}x_{12}\\
 Q^{-1}x_{21} & x_{22}
 \end{pmatrix}.
 \]
+For $R'>0$, let
+\[
+A_{R'}(M_2):=
+\left\{
+F(z)=\sum_{n\ge 0}F_n z^n:
+\|F\|_{A_{R'}}:=\sum_{n\ge 0}\|F_n\|\,R'^n<\infty
+\right\},
+\]
+and write $A_1(M_2)$ for the case $R'=1$. For scalar holomorphic germs,
+$A_{R'}(\mathbb C)$ is defined similarly.
 
 Write the baseline corrected same-point and mixed blocks on the $w$-disk as
 \[
@@ -2455,7 +2465,23 @@ define
 \qquad
 \delta N:=\mathfrak D_Q^{-1}Y,
 \]
-and
+and, whenever the corrected scalar perturbation
+\[
+\Phi_K\!\left(
+\mathcal W\bigl(
+G^{(0)}_{-;Q,R}+\delta G_-,
+N^{(0)}_{Q,R}+\delta N,
+G^{(0)}_{+;Q,R}+\delta G_+
+\bigr)
+-
+\mathcal W\bigl(
+G^{(0)}_{-;Q,R},
+N^{(0)}_{Q,R},
+G^{(0)}_{+;Q,R}
+\bigr)
+\right)
+\]
+vanishes at $w=0$, define
 \[
 \mathcal T_{Q,R}(X)(w)
 :=
@@ -2485,7 +2511,7 @@ X\in A_1(M_2)^3
 \qquad\text{with}\qquad
 \|X_-\|_{A_1}+\|Y\|_{A_1}+\|X_+\|_{A_1}\le \eta,
 \]
-the map $\mathcal T_{Q,R}(X)$ is holomorphic on $|w|<1$ and admits an
+the quotient $\mathcal T_{Q,R}(X)$ is holomorphic on $|w|<1$ and admits an
 absolutely convergent homogeneous expansion
 \[
 \mathcal T_{Q,R}(X)=\sum_{p\ge 1}\mathcal T_p(X),
@@ -2554,16 +2580,18 @@ G^{(0)}_{+;Q,R}+\delta G_+
 \bigr)
 \]
 is analytic on a fixed Banach neighborhood in $A_1(M_2)^3$, uniformly in
-$Q,R$. Since $\Phi_K$ is linear and the corrected perturbation is odd in
-$z$, the quotient by $w$ in the definition of $\mathcal T_{Q,R}$ is
-holomorphic. This gives the homogeneous expansion with uniform constants
-$C,B,\eta$.
+$Q,R$. Since $\Phi_K$ is linear, the corrected scalar perturbation depends
+analytically on the input triple. For those structured perturbations for which
+the corrected scalar perturbation vanishes at $w=0$, the quotient by $w$ in
+the definition of $\mathcal T_{Q,R}$ is holomorphic. This gives the
+homogeneous expansion with uniform constants $C,B,\eta$.
 
 The coefficient bound follows by testing the homogeneous maps on monomials in
-$A_1$ and using
+$A_1(M_2)$ and using the Wiener-algebra estimate
 \[
-|[w^n]F|\le \|F\|_{A_1}.
+|[w^n]F|\le \|F\|_{A_1}
 \]
+for scalar coefficients.
 \end{proof}
 
 \begin{proposition}[Pair-radius kernel-class decomposition for one-pair perturbations]
@@ -2642,7 +2670,7 @@ U_-,\ U_+,\ E_-,\ E_+,\ G_-,\ G_+,\ V
 \]
 modulo terms containing at least two such pair kernels. In particular,
 \[
-\|X_\rho(z/R_\rho)\|_{A_1}\ll \Delta_\rho^{-4}.
+\|X_\rho(R_\rho\cdot)\|_{A_1}\ll \Delta_\rho^{-4}.
 \]
 \end{proposition}
 
@@ -2713,7 +2741,10 @@ q_\pm=q_{0,\pm}+d_\pm,
 \Delta=\Delta_0+\eta.
 \]
 
-For the $(1,1)$-entry, since $\eta=s^3v$,
+For the $(1,1)$-entry, since
+\[
+\eta(z)=\frac{z^3}{Q^6}V(z)=s^3V(z),
+\]
 \[
 Q^2\frac{\sin(\Delta_0+\eta)-\sin\Delta_0}{s}
 \]
@@ -2747,10 +2778,10 @@ Taylor expansion in $(d_-,d_+,\eta)$ around the baseline gives
 plus a remainder quadratic in $(d_-,d_+,\eta)$. After dividing by $s^3$,
 the linear part is
 \[
-B_-(s)u_-(s)+B_+(s)u_+(s)+B_\Delta(s)v(s),
+\widetilde B_-(z)\,U_-(z)+\widetilde B_+(z)\,U_+(z)+\widetilde B_\Delta(z)\,V(z),
 \]
-with bounded baseline coefficients, and the remainder carries at least two pair
-kernels.
+with bounded baseline coefficients $\widetilde B_-,\widetilde B_+,\widetilde
+B_\Delta$, and the remainder carries at least two pair kernels.
 
 So every weighted mixed-block entry is also linear in the pair kernels modulo
 higher pair order.
@@ -2759,7 +2790,7 @@ Finally, on $|z|\le 2R_\rho$, every factor $z/Q$ is $O(1)$, every
 normalized baseline factor is $O(1)$, and each pair kernel has $A_{R_\rho}$
 norm $O(\Delta_\rho^{-4})$. Therefore
 \[
-\|X_\rho(z/R_\rho)\|_{A_1}\ll \Delta_\rho^{-4}.
+\|X_\rho(R_\rho\cdot)\|_{A_1}\ll \Delta_\rho^{-4}.
 \]
 \end{proof}
 
@@ -2797,10 +2828,13 @@ R_\rho:=c\,\min(\Delta_\rho,c_*Q).
 \]
 By Proposition~\ref{prop:one-pair-symbolic-coefficient-decomposition},
 \[
-\|X_\rho(z/R_\rho)\|_{A_1}\ll \Delta_\rho^{-4}.
+\|X_\rho(R_\rho\cdot)\|_{A_1}\ll \Delta_\rho^{-4}.
 \]
 For $H_*$ large enough, this lies inside the uniform small ball from
-Proposition~\ref{prop:differentiated-whitening-transfer}. Therefore the
+Proposition~\ref{prop:differentiated-whitening-transfer}. Since the one-pair
+corrected scalar $h_\rho(s)$ is odd in $s$, the corresponding corrected
+scalar perturbation vanishes at $w=0$, so the quotient map
+$\mathcal T_{Q,R_\rho}$ is holomorphic on the one-pair input. Therefore the
 normalized even germ
 \[
 g_\rho(z):=\frac{Q^3}{z}\,h_\rho(z/Q^2)
@@ -14741,14 +14775,25 @@ Thus the sheared repeated-node tangent-contact event is not ruled out by the
 planar derivative geometry of $\Lambda_v$ alone.
 \end{proof}
 
-\begin{remark}[What extra theorem is needed to use the $3$-point package]
-\label{rem:needed-shear-transfer-theorem-nonmixed}
-By Proposition~\ref{prop:three-point-package-not-enough-for-nonmixed-first-loss},
-the mature $3$-point theory for
+\begin{proposition}[A sheared repeated-node event forces two interior $\mathcal R$-zeros]
+\label{prop:sheared-repeated-node-forces-two-R-zeros}
+Let $J$ be a connected opened nonmixed arc, and let
 \[
-\Lambda_v=(x,S)
+a<x
+\qquad\text{lie in }J.
 \]
-does not by itself contradict the sheared rigidified event
+Set
+\[
+\gamma:=\mathcal Z(a),
+\qquad
+\widetilde Y_\gamma:=Y-\gamma S,
+\]
+and let
+\[
+\widetilde H_3(a,u):=
+\widetilde Y_\gamma(u)-\widetilde Y_\gamma(a)-\widetilde Y_\gamma'(a)(u-a).
+\]
+Assume
 \[
 \widetilde Y_\gamma''(a)=0,
 \qquad
@@ -14756,30 +14801,287 @@ does not by itself contradict the sheared rigidified event
 \qquad
 \partial_x\widetilde H_3(a,x)=0.
 \]
-So the remaining nonmixed bridge is not a purely planar statement about
-$\Lambda_v$.
-
-What is still needed is an additional transfer/coupling theorem showing that on
-a genuine opened nonmixed arc, any such sheared repeated-node tangent-contact
-configuration must force one of the following:
+Then one of the following holds:
 \begin{enumerate}
-\item affine-planar collapse, equivalently
+\item $\mathcal R\equiv 0$ on $[a,x]$;
+\item there exist points
+\[
+a<r_1<r_2<x
+\]
+such that
+\[
+\mathcal Z(r_1)=\mathcal Z(r_2)=\mathcal Z(a).
+\]
+Consequently there exist
+\[
+\xi_1\in(a,r_1),
+\qquad
+\xi_2\in(r_1,r_2)
+\]
+with
+\[
+\mathcal R(\xi_1)=\mathcal R(\xi_2)=0.
+\]
+\end{enumerate}
+In particular, every nontrivial sheared repeated-node event contains at least two
+interior zeros of $\mathcal R$.
+\end{proposition}
+
+\begin{proof}
+Since
+\[
+\widetilde Y_\gamma''=Y''-\gamma S''=(\mathcal Z-\gamma)S'',
+\]
+the choice $\gamma=\mathcal Z(a)$ gives
+\[
+\widetilde Y_\gamma''=(\mathcal Z-\mathcal Z(a))S''.
+\]
+Also,
+\[
+\partial_x\widetilde H_3(a,x)
+=
+\widetilde Y_\gamma'(x)-\widetilde Y_\gamma'(a)
+=
+\int_a^x \widetilde Y_\gamma''(t)\,dt,
+\]
+and
+\[
+\widetilde H_3(a,x)
+=
+\int_a^x (x-t)\,\widetilde Y_\gamma''(t)\,dt.
+\]
+Therefore the hypotheses imply
+\[
+\int_a^x (\mathcal Z(t)-\mathcal Z(a))\,S''(t)\,dt=0,
+\]
+and
+\[
+\int_a^x (x-t)(\mathcal Z(t)-\mathcal Z(a))\,S''(t)\,dt=0.
+\]
+
+Choose $\varepsilon\in\{\pm1\}$ so that
+\[
+\varepsilon S''>0
+\qquad\text{on }J,
+\]
+and define the positive measure
+\[
+d\mu(t):=\varepsilon S''(t)\,dt,
+\qquad
+\phi(t):=\mathcal Z(t)-\mathcal Z(a).
+\]
+Then
+\[
+\int_a^x \phi\,d\mu=0,
+\qquad
+\int_a^x (x-t)\phi\,d\mu=0.
+\]
+Hence also
+\[
+\int_a^x t\,\phi(t)\,d\mu(t)=0.
+\]
+
+If $\phi\equiv 0$ on $[a,x]$, then
+\[
+\mathcal R=\phi'\equiv 0
+\qquad\text{on }[a,x],
+\]
+which is alternative (1).
+
+Assume now that $\phi\not\equiv 0$. Then $\phi$ cannot have fixed sign on
+$[a,x]$, because $\mu$ is positive and
+\[
+\int_a^x \phi\,d\mu=0.
+\]
+It also cannot have exactly one sign change. Indeed, if $c\in(a,x)$ were the
+unique sign-change point, then
+\[
+(t-c)\phi(t)\ge 0
+\qquad\text{on }[a,x],
+\]
+with strict inequality on a set of positive $\mu$-measure. Therefore
+\[
+\int_a^x (t-c)\phi(t)\,d\mu(t)>0.
+\]
+But
+\[
+\int_a^x (t-c)\phi(t)\,d\mu(t)
+=
+\int_a^x t\,\phi(t)\,d\mu(t)
+-c\int_a^x \phi(t)\,d\mu(t)
+=0,
+\]
+a contradiction.
+
+So $\phi$ has at least two sign changes on $(a,x)$. Since $\phi(a)=0$ and
+$\phi$ is continuous, there exist
+\[
+a<r_1<r_2<x
+\]
+such that
+\[
+\phi(r_1)=\phi(r_2)=0,
+\]
+i.e.
+\[
+\mathcal Z(r_1)=\mathcal Z(r_2)=\mathcal Z(a).
+\]
+Applying Rolle's theorem to $\phi=\mathcal Z-\mathcal Z(a)$ on $[a,r_1]$ and on
+$[r_1,r_2]$ gives
+\[
+\mathcal R(\xi_1)=0
+\quad\text{for some }\xi_1\in(a,r_1),
+\qquad
+\mathcal R(\xi_2)=0
+\quad\text{for some }\xi_2\in(r_1,r_2).
+\]
+This proves (2).
+\end{proof}
+
+\begin{corollary}[Isolated $\mathcal R$-zeros are shear-sterile]
+\label{cor:isolated-R-zeros-are-shear-sterile}
+Let $b\in J$ be an isolated zero of $\mathcal R$. Then there exists a
+neighborhood $U\subset J$ of $b$ such that no pair
+\[
+a<x,
+\qquad
+a,x\in U,
+\]
+can satisfy
+\[
+\gamma=\mathcal Z(a),
+\qquad
+\widetilde Y_\gamma''(a)=0,
+\qquad
+\widetilde H_3(a,x)=0,
+\qquad
+\partial_x\widetilde H_3(a,x)=0.
+\]
+\end{corollary}
+
+\begin{proof}
+Choose $U$ so small that $b$ is the only zero of $\mathcal R$ in $U$. If such a
+pair $a<x$ existed in $U$, then
+Proposition~\ref{prop:sheared-repeated-node-forces-two-R-zeros} would produce
+two interior zeros of $\mathcal R$ in $(a,x)\subset U$, a contradiction.
+\end{proof}
+
+\begin{corollary}[Diagonal sheared recurrence forces affine-planar collapse]
+\label{cor:diagonal-sheared-recurrence-forces-affine-planar-collapse}
+Let $J$ be a connected opened nonmixed arc. Suppose there exists a sequence
+\[
+a_n<x_n,
+\qquad
+a_n,x_n\in J,
+\qquad
+a_n,x_n\to b,
+\qquad
+x_n-a_n\to 0,
+\]
+such that, with
+\[
+\gamma_n:=\mathcal Z(a_n),
+\qquad
+\widetilde Y_{\gamma_n}:=Y-\gamma_n S,
+\]
+one has
+\[
+\widetilde Y_{\gamma_n}''(a_n)=0,
+\qquad
+\widetilde H_{3,n}(a_n,x_n)=0,
+\qquad
+\partial_x\widetilde H_{3,n}(a_n,x_n)=0,
+\]
+where
+\[
+\widetilde H_{3,n}(a,u):=
+\widetilde Y_{\gamma_n}(u)-\widetilde Y_{\gamma_n}(a)-\widetilde Y_{\gamma_n}'(a)(u-a).
+\]
+Then
 \[
 \mathcal R\equiv 0
 \]
-on a nontrivial interval; or
-\item an actual repeated-node tangent-contact event for the original lifted
-curve $\Lambda_v=(x,S)$, i.e.
+on a neighborhood of $b$. Hence on some nontrivial interval containing $b$ one
+has
 \[
-H_3(a',u')=0,
-\qquad
-\partial_u H_3(a',u')=0,
+Y=\gamma S+\alpha x+\beta,
 \]
-contradicting
-Theorem~\ref{thm:global-continuation-nonrecurrence-odd-three-point-branch}.
-\end{enumerate}
-Without such a shear-transfer / source-coupling input, the current $3$-point
-package cannot kill the nonmixed branch on its own.
+so the lifted curve is locally affine-planar there.
+\end{corollary}
+
+\begin{proof}
+If for some $n$ the first alternative in
+Proposition~\ref{prop:sheared-repeated-node-forces-two-R-zeros} holds, then
+$\mathcal R\equiv 0$ on $[a_n,x_n]$ and we are done.
+
+Otherwise, for every $n$ the interval $(a_n,x_n)$ contains at least two zeros of
+$\mathcal R$. Since
+\[
+a_n,x_n\to b,
+\qquad
+x_n-a_n\to 0,
+\]
+these zeros accumulate at $b$. Because $\mathcal R$ is analytic, this implies
+\[
+\mathcal R\equiv 0
+\]
+on a neighborhood of $b$. Therefore $\mathcal Z$ is locally constant, so
+\[
+Y''=\gamma S''
+\]
+there, and integrating twice gives
+\[
+Y=\gamma S+\alpha x+\beta
+\]
+on a nontrivial interval around $b$.
+\end{proof}
+
+\begin{remark}[Source-level form of the shear transfer]
+\label{rem:source-level-form-of-shear-transfer}
+For fixed $a\in J$, set
+\[
+f_a:=u_5-\mathcal Z(a)\lambda.
+\]
+Then
+\[
+\widetilde Y_{\mathcal Z(a)}=\frac{f_a}{c},
+\qquad
+J_{f_a}=J_{u_5}-\mathcal Z(a)J_\lambda
+=(\mathcal Z-\mathcal Z(a))J_\lambda,
+\]
+and
+\[
+D_{f_a}(a,h)=D_{u_5}(a,h)-\mathcal Z(a)\,D_\lambda(a,h).
+\]
+Thus the sheared repeated-node conditions are exactly a repeated-node
+tangent-contact event for the source triple $(c,v_5,f_a)$:
+\[
+J_{f_a}(a)=0,
+\qquad
+D_{f_a}(a,h)=0,
+\qquad
+\partial_h D_{f_a}(a,h)=0.
+\]
+Proposition~\ref{prop:sheared-repeated-node-forces-two-R-zeros} shows that such
+a source-level event forces either $J_{f_a}\equiv 0$ on the interval or at least
+two interior zeros of $J_{f_a}$, equivalently at least two interior zeros of
+$\mathcal R$ and hence of $\mathcal W_{\mathrm{src}}$.
+\end{remark}
+
+\begin{remark}[Effect on the rigidified first-loss lane]
+\label{rem:effect-of-shear-transfer-on-first-loss}
+Corollary~\ref{cor:diagonal-sheared-recurrence-forces-affine-planar-collapse}
+shows that the rigidified sheared repeated-node event cannot be realized
+diagonally near an isolated odd zero of $\mathcal R$. Therefore, in the only
+diagonal regime allowed by
+Proposition~\ref{prop:first-loss-is-diagonal-odd-zero-birth}, any genuine
+diagonal realization of the sheared event already forces the affine-planar
+collapse case
+\[
+\mathcal R\equiv 0.
+\]
+So the sheared bottleneck closes in the collapse direction, not by a purely
+planar contradiction for $(x,S)$.
 \end{remark}
 
 \begin{proposition}[Repeated-source first loss is exactly diagonal odd-zero birth]
@@ -14964,6 +15266,154 @@ global/source-level control of odd zeros of $\mathcal R$, equivalently of the
 source-level Wronskian $\mathcal W_{\mathrm{src}}$.
 \end{remark}
 
+\begin{proposition}[Single-sign-change source segment cannot realize rigidified first loss]
+\label{prop:single-sign-change-cannot-realize-first-loss}
+Let $J$ be an opened nonmixed arc, and let $a<x$ in $J$.
+After local nonmixed normalization on $[a,x]$, write
+\[
+R_{a,x}(s):=\mathcal R(a+s(x-a)),
+\qquad 0\le s\le 1.
+\]
+Then
+\[
+\Gamma_a'(x)
+=
+2\int_0^1 s(1-s)\,R_{a,x}(s)\,ds,
+\]
+and
+\[
+\Gamma_a(x)-\mathcal Z(a)
+=
+(x-a)\int_0^1 (1-s)^2\,R_{a,x}(s)\,ds.
+\]
+
+Assume that $R_{a,x}$ has exactly one sign change on $(0,1)$.
+If
+\[
+\Gamma_a'(x)=0,
+\]
+then
+\[
+\operatorname{sgn}\bigl(\Gamma_a(x)-\mathcal Z(a)\bigr)
+\]
+is the sign of $R_{a,x}$ on the initial side of the sign change.
+In particular,
+\[
+\Gamma_a(x)\neq \mathcal Z(a).
+\]
+
+Equivalently, no pair $(a,x)$ for which $\mathcal R$ changes sign exactly once
+on $(a,x)$ can satisfy simultaneously
+\[
+\Gamma_a'(x)=0,
+\qquad
+\Gamma_a(x)=\mathcal Z(a).
+\]
+Hence any rigidified first-loss segment must cross at least two sign changes of
+$\mathcal R$.
+\end{proposition}
+
+\begin{proof}
+In the normalized nonmixed chart, $S(t)=t^2$, so
+$\Gamma_a = D_a$ with
+\[
+D_a(t)=\int_0^1 (1-s)\,\widetilde Y''(a+s(t-a))\,ds,
+\qquad
+D_a(a)=\mathcal Z(a).
+\]
+Differentiating in $t$ gives
+\[
+D_a'(t)=\int_0^1 s(1-s)\,\widetilde Y'''(a+s(t-a))\,ds
+=2\int_0^1 s(1-s)\,\mathcal R(a+s(t-a))\,ds,
+\]
+which is the first displayed formula at $t=x$. Integrating
+$\widetilde Y''(a+s(t-a))$ by parts in $s$ yields
+\[
+D_a(t)-D_a(a)
+=
+(t-a)\int_0^1 (1-s)^2\,\mathcal R(a+s(t-a))\,ds,
+\]
+which is the second displayed formula at $t=x$.
+
+Let
+\[
+k_1(s):=s(1-s),\qquad k_0(s):=(1-s)^2,
+\]
+so that
+\[
+\frac{k_0(s)}{k_1(s)}=\frac{1-s}{s}
+\]
+is strictly decreasing on $(0,1)$.
+
+Write $R_{a,x}=\sigma\rho$ with $\rho\ge 0$ and $\sigma$ changing sign exactly
+once at some $s_0\in(0,1)$. By hypothesis,
+\[
+0=\int_0^1 k_1(s)\,\sigma(s)\rho(s)\,ds.
+\]
+Split
+\[
+I:=\int_0^1 k_0(s)\,\sigma(s)\rho(s)\,ds
+=
+\int_0^{s_0}\frac{k_0}{k_1}(s)\,k_1(s)\sigma(s)\rho(s)\,ds
++
+\int_{s_0}^1\frac{k_0}{k_1}(s)\,k_1(s)\sigma(s)\rho(s)\,ds.
+\]
+Let $\epsilon:=\operatorname{sgn}(\sigma|_{(0,s_0)})$. Then
+$k_1\sigma\rho\ge 0$ with sign $\epsilon$ on $(0,s_0)$ and sign $-\epsilon$ on
+$(s_0,1)$. Because $k_0/k_1$ is strictly decreasing, it is bounded below by
+its value at $s_0$ on $(0,s_0)$ and bounded above by its value at $s_0$ on
+$(s_0,1)$. Using
+\[
+\int_0^{s_0}k_1\sigma\rho=-\int_{s_0}^1 k_1\sigma\rho
+\]
+and strict monotonicity on the support of $\rho$ gives
+\[
+\epsilon\,I>0.
+\]
+Hence
+\[
+\Gamma_a(x)-\mathcal Z(a)=(x-a)\,I\neq 0,
+\]
+with sign $\epsilon$ (after orienting $x>a$). This proves the claim.
+\end{proof}
+
+\begin{corollary}[Source-level two-sign-change obstruction]
+\label{cor:source-level-two-sign-change-obstruction}
+Let $a<h$ lie on an opened nonmixed arc in source coordinates.
+Assume
+\[
+\Psi_a'(h)=0.
+\]
+If the source-level Wronskian
+\[
+\mathcal W_{\mathrm{src}}
+=
+J_\lambda J_{u_5}'-J_{u_5}J_\lambda'
+\]
+changes sign exactly once on the source interval $[a,h]$, then
+\[
+\Psi_a(h)\neq \mathcal Z(a).
+\]
+Equivalently, the simultaneous source-level first-loss conditions
+\[
+\Psi_a'(h)=0,
+\qquad
+\Psi_a(h)=\mathcal Z(a)
+\]
+force at least two sign changes of $\mathcal W_{\mathrm{src}}$ on $[a,h]$.
+\end{corollary}
+
+\begin{proof}
+By Remark~\ref{rem:source-determinant-reformulation-Gammaa},
+$\Psi_a(h)=\Gamma_{x(a)}(x(h))$, and on the nonmixed arc
+$\mathcal W_{\mathrm{src}}$ and $\mathcal R$ differ only by a nonvanishing
+analytic factor
+(Proposition~\ref{prop:source-level-Wronskian-nonmixed-four-point}). So a
+single sign change of $\mathcal W_{\mathrm{src}}$ on $[a,h]$ pulls back to a
+single sign change of $\mathcal R$ on $[x(a),x(h)]$. Apply
+Proposition~\ref{prop:single-sign-change-cannot-realize-first-loss}.
+\end{proof}
+
 \begin{remark}[What remains on the nonmixed $4$-point side]
 \label{rem:what-remains-nonmixed-after-R-zero-bridge}
 The preceding results now give a full local derivative-side picture of the
@@ -15000,48 +15450,45 @@ W(c,v_5,\lambda,u_5),
 while Proposition~\ref{prop:source-level-Wronskian-package-not-enough} shows
 that, at the current source-level ratio/Wronskian/$4\times4$-determinant
 level, the odd-zero pattern of $\mathcal W_{\mathrm{src}}$ and $\mathcal R$
-is still formally unconstrained. In other words, generic determinant algebra
-alone is no longer enough to close the nonmixed branch.
+is still formally unconstrained. Thus generic determinant algebra alone is no
+longer enough to close the nonmixed branch.
 
-In addition, for each fixed source point $a$, repeated-source exact contacts
-factor through the quadratic-envelope scalar
+The repeated-source / first-loss lane is now also closed.  For each fixed
+source point $a$, repeated-source exact contacts factor through the
+quadratic-envelope scalar
 \[
 \Gamma_a(x)=
 \frac{Y(x)-Y(a)-Y'(a)(x-a)}
 {S(x)-S(a)-S'(a)(x-a)},
 \]
-whose derivative is a positive-kernel average of $\mathcal R$. Equivalently,
-below the lifted variables the same mechanism is encoded by the source-determinant
-quotient
+equivalently through the source-determinant quotient
 \[
 \Psi_a(h)=\frac{D_{u_5}(a,h)}{D_\lambda(a,h)},
 \]
-with derivative controlled by the osculatory $4\times4$ determinant
-$\mathfrak D(a,h)$. The formal first-loss event for this repeated-source
-geometry rigidifies to a sheared repeated-node tangent-contact configuration
-(Remark~\ref{rem:first-loss-rigidification-nonmixed}). By
-Proposition~\ref{prop:first-loss-is-diagonal-odd-zero-birth}, this
-repeated-source / first-loss mechanism is not an independent obstruction:
-no attained separated first loss can occur, every first-loss sequence is
-forced to the diagonal, and diagonal first loss occurs exactly at isolated
-odd-order zeros of $\mathcal R$. But by
-Proposition~\ref{prop:three-point-package-not-enough-for-nonmixed-first-loss}
-the already-established $3$-point package for
-\[
-\Lambda_v=(x,S)
-\]
-does \emph{not} by itself contradict the rigidified sheared event.
+with derivative controlled by the osculatory determinant
+$\mathfrak D(a,h)$.  The formal first-loss event rigidifies to a sheared
+repeated-node tangent-contact configuration
+(Remark~\ref{rem:first-loss-rigidification-nonmixed}), but
+Proposition~\ref{prop:first-loss-is-diagonal-odd-zero-birth} shows that this is
+not an independent obstruction: no attained separated first loss can occur,
+every first-loss sequence is forced to the diagonal, and diagonal first loss
+occurs exactly at isolated odd-order zeros of $\mathcal R$.  Furthermore,
+Proposition~\ref{prop:sheared-repeated-node-forces-two-R-zeros} and
+Corollary~\ref{cor:diagonal-sheared-recurrence-forces-affine-planar-collapse}
+show that the sheared lane closes in the collapse direction: any genuine
+diagonal realization of the rigidified sheared event already forces
+$\mathcal R\equiv 0$ locally, hence affine-planar collapse.
 
 Accordingly, the genuinely live nonmixed $4$-point burden is no longer local
-birth, nor generic determinant sign. It is a missing theorem linking the true
-RH source image to the canonical nonmixed scalars
+birth, nor repeated-source first loss, nor generic determinant sign.  It is the
+source-coupling problem of excluding odd zeros of
 \[
-\mathcal W_{\mathrm{src}},\qquad \Gamma_a,\qquad \Psi_a,\qquad \mathfrak D(a,h),
+\mathcal W_{\mathrm{src}},
 \]
-strong enough either to exclude odd zeros of $\mathcal W_{\mathrm{src}}$
-(equivalently of $\mathcal R$) on opened nonmixed arcs, or to transfer the
-rigidified sheared repeated-node event to the already-excluded $3$-point
-geometry of $\Lambda_v=(x,S)$.
+equivalently of $\mathcal R$, on genuine opened nonmixed arcs. Any stronger
+formulation involving $\Gamma_a$, $\Psi_a$, or $\mathfrak D(a,h)$ should
+now be regarded as a source-level route to that same odd-zero exclusion
+problem, not as an additional independent bottleneck.
 \end{remark}
 
 \begin{remark}[Compact status summary for the nonmixed $4$-point branch]
@@ -15051,16 +15498,19 @@ problem.  Locally, exact nonmixed contacts force zeros of $\mathcal R$, and
 isolated zeros are classified by parity: even-order zeros are sterile, while
 odd-order zeros seed local exact contacts.  Repeated-source first loss is not a
 separate mechanism: it occurs if and only if one diagonally approaches an
-odd-order zero of $\mathcal R$.  On a nonmixed arc, the same structure is
-encoded by the gauge-invariant source-level Wronskian
+odd-order zero of $\mathcal R$.  The sheared repeated-node lane is also closed
+in the collapse direction: any genuine diagonal realization of the rigidified
+sheared event already forces $\mathcal R\equiv 0$ locally, hence
+affine-planar collapse.
+
+On a nonmixed arc, the same structure is encoded by the gauge-invariant
+source-level Wronskian
 \[
 \mathcal W_{\mathrm{src}}=J_\lambda J_{u_5}'-J_{u_5}J_\lambda',
 \]
 which differs from $\mathcal R$ only by a nonvanishing analytic factor.
 Thus the genuinely remaining nonmixed burden is the source-coupling problem of
-excluding odd zeros of $\mathcal W_{\mathrm{src}}$ on opened nonmixed arcs,
-or equivalently transferring the rigidified sheared repeated-node event to an
-already-excluded configuration for the original $3$-point geometry.
+excluding odd zeros of $\mathcal W_{\mathrm{src}}$ on opened nonmixed arcs.
 \end{remark}
 
 \begin{remark}[Derivative-geometry meaning of the nonmixed invariant $\mathcal R$]
