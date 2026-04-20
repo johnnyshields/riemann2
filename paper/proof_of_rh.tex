@@ -10732,6 +10732,111 @@ The Wronskian of the displayed quadruple is exactly $T_v$. If $T_v$ has
 fixed nonzero sign on $J$, the ECT criterion applies.
 \end{proof}
 
+\begin{lemma}[Osculating determinant expansion for shrinking affine circuits]
+\label{lem:osculating-determinant-expansion}
+Let $Q:I\to \mathbf C^d$ be real-analytic on an interval $I$, and define
+\[
+\Delta_{d+1}(t_0,\dots,t_d)
+:=
+\det\!\begin{pmatrix}
+1 & Q(t_0)\\
+\vdots & \vdots\\
+1 & Q(t_d)
+\end{pmatrix}.
+\]
+Fix $h_*\in I$, and let
+\[
+t_j=h_*+\varepsilon \lambda_j
+\qquad (j=0,\dots,d),
+\]
+where the $\lambda_j$ are pairwise distinct and $\varepsilon\to 0$. Then
+\[
+\Delta_{d+1}(t_0,\dots,t_d)
+=
+\frac{\varepsilon^{d(d+1)/2}}{\prod_{k=1}^d k!}\,
+V(\lambda_0,\dots,\lambda_d)\,
+\det\!\bigl(Q'(h_*),Q''(h_*),\dots,Q^{(d)}(h_*)\bigr)
++
+O\!\left(\varepsilon^{d(d+1)/2+1}\right),
+\]
+where
+\[
+V(\lambda_0,\dots,\lambda_d):=\prod_{0\le i<j\le d}(\lambda_j-\lambda_i)
+\]
+is the Vandermonde determinant.
+
+In particular, if there is a sequence of exact affine $(d+1)$-circuits
+\[
+\Delta_{d+1}(t_{0,n},\dots,t_{d,n})=0
+\]
+with pairwise distinct nodes $t_{j,n}\to h_*$, then
+\[
+\det\!\bigl(Q'(h_*),Q''(h_*),\dots,Q^{(d)}(h_*)\bigr)=0.
+\]
+\end{lemma}
+
+\begin{proof}
+Write the Taylor expansion
+\[
+Q(h_*+\varepsilon\lambda)
+=
+Q(h_*)+\sum_{m=1}^d \frac{\varepsilon^m\lambda^m}{m!}\,Q^{(m)}(h_*)
++O(\varepsilon^{d+1}),
+\]
+uniformly for $\lambda$ in bounded sets. Subtract the first row
+$(1,Q(t_0))$ from each of the remaining rows. The first column then becomes
+$(1,0,\dots,0)^{\top}$, so $\Delta_{d+1}$ reduces to the determinant of the
+$d\times d$ matrix whose $j$-th row ($j=1,\dots,d$) is
+\[
+Q(t_j)-Q(t_0)
+=
+\sum_{m=1}^d \frac{\varepsilon^m(\lambda_j^m-\lambda_0^m)}{m!}\,Q^{(m)}(h_*)
++O(\varepsilon^{d+1}).
+\]
+Factor the column vectors $Q'(h_*),\dots,Q^{(d)}(h_*)$. This gives
+\[
+\Delta_{d+1}(t_0,\dots,t_d)
+=
+\det\!\bigl(Q'(h_*),\dots,Q^{(d)}(h_*)\bigr)\,
+\det\!\Bigl(\frac{\varepsilon^m(\lambda_j^m-\lambda_0^m)}{m!}\Bigr)_{1\le j,m\le d}
++O\!\left(\varepsilon^{d(d+1)/2+1}\right).
+\]
+Pulling $\varepsilon^m/m!$ from the $m$-th column yields the factor
+\[
+\frac{\varepsilon^{1+\cdots+d}}{\prod_{k=1}^d k!}
+=
+\frac{\varepsilon^{d(d+1)/2}}{\prod_{k=1}^d k!}.
+\]
+The remaining determinant is the standard Vandermonde determinant
+$V(\lambda_0,\dots,\lambda_d)$. This proves the expansion.
+
+If $\Delta_{d+1}(t_{0,n},\dots,t_{d,n})=0$ for a sequence of shrinking
+distinct-node circuits, divide by the nonzero Vandermonde factor and let
+$\varepsilon\to 0$. The leading term must vanish, giving
+\[
+\det\!\bigl(Q'(h_*),Q''(h_*),\dots,Q^{(d)}(h_*)\bigr)=0.
+\qedhere
+\]
+\end{proof}
+
+\begin{remark}[Planar curvature and lifted torsion as the first derivative obstructions]
+\label{rem:derivative-geometry-curvature-torsion-bridge}
+Lemma~\ref{lem:osculating-determinant-expansion} shows that shrinking exact
+affine circuits are controlled, at first nontrivial order, by derivative-side
+osculating determinants. For a planar curve $q$, shrinking exact collinear
+triples force
+\[
+\det(q',q'')=0,
+\]
+and for a space curve $Q$, shrinking exact coplanar quadruples force
+\[
+\det(Q',Q'',Q''')=0.
+\]
+Thus the defect-free lifted $3$-point and $4$-point branches are not merely
+incidence problems: they are rooted at curvature- and torsion-type derivative
+invariants of the corresponding lifted curves.
+\end{remark}
+
 \begin{proposition}[Shrinking exact lifted $3$-point circuits concentrate into $K_v=0$]
 \label{prop:shrinking-exact-lifted-three-point-circuits-force-Kv-zero}
 Let $P\Subset\{c\neq 0,\ v_5\neq 0,\ M\neq 0\}$ be compact, and use
@@ -10764,36 +10869,43 @@ K_v(x_*)=0.
 \end{proposition}
 
 \begin{proof}
-Set
+Apply Lemma~\ref{lem:osculating-determinant-expansion} with $d=2$ to the
+planar lifted curve
 \[
-\Delta_3(x_1,x_2,x_3):=
+q(x):=(x,S(x)).
+\]
+The exact collinearity condition in the statement is precisely the vanishing of
+\[
 \det\!\begin{pmatrix}
 1&x_1&S(x_1)\\
 1&x_2&S(x_2)\\
 1&x_3&S(x_3)
 \end{pmatrix}.
 \]
-By the standard divided-difference factorization,
+Hence shrinking exact lifted $3$-point circuits force
 \[
-\Delta_3(x_1,x_2,x_3)
-=
-V_3(x_1,x_2,x_3)\,S[x_1,x_2,x_3],
+\det(q'(x_*),q''(x_*))=0.
 \]
-where
+Since
 \[
-V_3(x_1,x_2,x_3):=(x_2-x_1)(x_3-x_1)(x_3-x_2).
+q'(x)=(1,S'(x)),
+\qquad
+q''(x)=(0,S''(x)),
 \]
-Since the nodes are distinct, $V_3(x_{1,n},x_{2,n},x_{3,n})\neq 0$, so
+one gets
 \[
-S[x_{1,n},x_{2,n},x_{3,n}]=0.
+\det(q'(x_*),q''(x_*))=S''(x_*).
 \]
-As $x_{1,n},x_{2,n},x_{3,n}\to x_*$, the second divided difference converges
-to
+On the $x$-patch, Proposition~\ref{prop:exact-x-coordinate-identities-lifted-four-point}
+gives
 \[
-\frac12 S''(x_*).
+K_v=(x')^3S'',
 \]
-Hence $S''(x_*)=0$. Since on the $x$-patch the lifted curvature numerator
-$K_v$ is $S''$ up to a nowhere-zero factor, it follows that $K_v(x_*)=0$.
+and $x'\neq 0$ on a good $v_5$-patch. Therefore $S''(x_*)=0$ implies
+\[
+K_v(x_*)=0.
+\qedhere
+\]
 \end{proof}
 
 \begin{corollary}[Uniform small-diameter exclusion away from $K_v=0$]
@@ -10849,9 +10961,13 @@ T_v(x_*)=0.
 \end{proposition}
 
 \begin{proof}
-Set
+Apply Lemma~\ref{lem:osculating-determinant-expansion} with $d=3$ to the
+lifted space curve
 \[
-\Delta_4(x_1,x_2,x_3,x_4):=
+Q(x):=(Y(x),x,S(x)).
+\]
+The exact coplanarity condition in the statement is precisely the vanishing of
+\[
 \det\!\begin{pmatrix}
 1&Y(x_1)&x_1&S(x_1)\\
 1&Y(x_2)&x_2&S(x_2)\\
@@ -10859,28 +10975,26 @@ Set
 1&Y(x_4)&x_4&S(x_4)
 \end{pmatrix}.
 \]
-Since $\Delta_4$ is alternating in the four nodes, it is divisible by the
-Vandermonde
+Hence shrinking exact lifted $4$-point circuits force
 \[
-V_4(x_1,x_2,x_3,x_4):=\prod_{1\le i<j\le 4}(x_j-x_i).
+\det(Q'(x_*),Q''(x_*),Q'''(x_*))=0.
 \]
-Write
+But
 \[
-\Delta_4(x_1,x_2,x_3,x_4)
+\det(Q'(x),Q''(x),Q'''(x))
 =
-V_4(x_1,x_2,x_3,x_4)\,\mathcal D_4(x_1,x_2,x_3,x_4),
+W_x(1,Y,x,S)(x),
 \]
-where $\mathcal D_4$ is symmetric and analytic. By the standard
-Wronskian/divided-difference coalescence formula,
+and Proposition~\ref{prop:exact-x-coordinate-identities-lifted-four-point}
+gives
 \[
-\mathcal D_4(x_1,x_2,x_3,x_4)\longrightarrow
-\frac{1}{1!\,2!\,3!}\,W_x(1,Y,x,S)(x_*)
-=
-\frac1{12}T_v(x_*),
+T_v=(x')^6\,W_x(1,Y,x,S).
 \]
-as all four nodes tend to $x_*$. Since $V_4\neq 0$ for distinct nodes and
-$\Delta_4=0$ along the sequence, one has $\mathcal D_4=0$ along the
-sequence, so the limit forces $T_v(x_*)=0$.
+Since $x'\neq 0$ on a good $v_5$-patch, it follows that
+\[
+T_v(x_*)=0.
+\qedhere
+\]
 \end{proof}
 
 \begin{corollary}[Uniform small-diameter exclusion away from $T_v=0$]
@@ -11554,6 +11668,97 @@ Equivalently, the dangerous nonmixed low-order list is
 
 So the nonmixed $4$-point endgame has been reduced to a finite jet problem
 for the canonical invariant $\mathcal R$.
+\end{remark}
+
+\begin{proposition}[Interval-persistent nonmixed $4$-point degeneracy forces affine planarity]
+\label{prop:interval-persistent-nonmixed-four-point-forces-affine-planarity}
+Let $J$ be a connected open interval in a good $v_5$-patch such that
+\[
+K_v\neq 0
+\qquad\text{on }J.
+\]
+Assume
+\[
+T_v\equiv 0
+\qquad\text{on }J.
+\]
+Then on $J$ one has
+\[
+\mathcal R\equiv 0,
+\qquad
+\mathcal Z\equiv \gamma
+\]
+for some constant $\gamma\in\mathbf C$, and hence
+\[
+Y=\gamma S+ax+b
+\]
+for some constants $a,b\in\mathbf C$. Equivalently, the lifted curve
+\[
+x\longmapsto (Y(x),x,S(x))
+\]
+lies in an affine plane on $J$.
+
+In particular, any interval-persistent nonmixed exact lifted $4$-point branch
+collapses to an affine-planar residual rather than remaining genuinely
+three-dimensional.
+\end{proposition}
+
+\begin{proof}
+On the nonmixed interval $J$, Proposition~\ref{prop:canonical-Z-R-invariants-lifted-four-point}
+gives
+\[
+\mathcal R=\frac{T_v}{K_v^2}.
+\]
+Since $T_v\equiv 0$ and $K_v\neq 0$ on $J$, it follows that
+\[
+\mathcal R\equiv 0
+\qquad\text{on }J.
+\]
+By definition,
+\[
+\mathcal R=\frac{d\mathcal Z}{dx},
+\]
+so $\mathcal Z$ is constant on $J$:
+\[
+\mathcal Z\equiv \gamma.
+\]
+Using
+\[
+\mathcal Z=\frac{Y''}{S''},
+\]
+we obtain
+\[
+Y''=\gamma S''.
+\]
+Integrating twice with respect to $x$ yields
+\[
+Y=\gamma S+ax+b
+\]
+for constants $a,b\in\mathbf C$. Therefore the lifted curve satisfies the
+affine linear equation
+\[
+Y-\gamma S-ax-b=0
+\]
+throughout $J$, so it lies in an affine plane.
+\end{proof}
+
+\begin{remark}[Derivative-geometry meaning of the nonmixed invariant $\mathcal R$]
+\label{rem:derivative-geometry-meaning-of-R}
+On a nonmixed patch,
+\[
+\mathcal R=\frac{T_v}{K_v^2}
+=
+\frac{d}{dx}\!\left(\frac{Y''}{S''}\right).
+\]
+Thus $\mathcal R$ measures the failure of the lifted space curve
+\[
+x\longmapsto (Y(x),x,S(x))
+\]
+to be affine-planar at the derivative level: $\mathcal R=0$ means the ratio
+$Y''/S''$ is locally constant, equivalently that the curve has vanishing
+affine torsion and lies in an affine plane after integrating twice. In this
+sense, the nonmixed $4$-point branch is controlled by a single scalar
+derivative invariant rather than by raw coplanarity alone.
 \end{remark}
 
 \begin{remark}[Exact mixed reduction in terms of $\mathcal Z$ and $\mathcal R$]
@@ -12625,7 +12830,12 @@ K_v=0
 \qquad\text{and}\qquad
 T_v=0,
 \]
-respectively, with uniform small-diameter exclusion away from those zero sets.
+respectively, with uniform small-diameter exclusion away from those zero sets;
+equivalently, they are rooted at the curvature- and torsion-type osculating
+determinants of the corresponding lifted planar and space curves
+(Lemma~\ref{lem:osculating-determinant-expansion},
+Propositions~\ref{prop:shrinking-exact-lifted-three-point-circuits-force-Kv-zero}
+and~\ref{prop:shrinking-exact-lifted-four-point-circuits-force-Tv-zero}).
 
 Second, repeated-node limits are now explicit:
 three-point collapse limits become tangent-line contact determinants for the
