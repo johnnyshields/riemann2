@@ -125,6 +125,23 @@ This approach is not aimed at discovering new direct relations among primes. Rat
 
 For orientation, it may be helpful to situate the present framework relative to earlier geometric viewpoints on $\RH$. One such direction is the Speiser--Levinson--Montgomery line, in which the geometry of zeros of $\zeta'(s)$ is used to encode information about zeros of $\zeta(s)$ \cite{Speiser1935,LevinsonMontgomery1974}. Another is the de~Branges Hilbert-space program, in which one seeks global kernel/positivity structures attached to entire functions related to $\zeta$ \cite{deBranges1986,ConreyLi2000}. The present approach appears to differ in emphasis: rather than working directly with raw derivative geometry or with a global positivity condition, it constructs a locally normalized transverse invariant after quotienting out the dominant value/gauge directions. This comparison is intended only as heuristic orientation for the reader; no claim is made here that the present framework subsumes those earlier viewpoints.
 
+\paragraph{A Mellin-side interpretation of the $N$-point layer.}
+A second point of orientation concerns the $N$-point cancellation operator
+introduced later in the proof.  The cancellation coefficients may be viewed as
+defining a discrete multiplicative distribution whose Mellin transform preserves
+the constant mode while annihilating the first $N-1$ odd jets.  In this
+sense, the $N$-point step is not merely a finite-difference device: it may be
+read as a local Mellin-side projector acting on the corrected transverse germ.
+This is formally reminiscent of the Weil/Connes test-function viewpoint, in
+which one probes the zero set through Mellin/Fourier transforms of
+multiplicative test functions and explicit- or trace-formula pairings
+\cite{Conrey2003,Connes1997,ConnesConsani2021}.  The present argument does
+\emph{not} invoke any global trace formula, positivity principle, or spectral
+realization theorem from that literature; the comparison is included only as
+heuristic orientation.  What is used here is a local, explicit, finite-support
+projector whose Mellin symbol can be written in closed form and whose odd part
+starts only at order $2N-1$.
+
 \section{Local kernel and jet normalization}
 
 \subsection{Phase kernel}
@@ -2863,6 +2880,136 @@ The final moment bound is immediate from
 \]
 \end{proof}
 
+\begin{lemma}[Closed-form Mellin symbol of the discrete $N$-point projector]
+\label{lem:n-point-mellin-symbol}
+Define
+\[
+A_N(t):=\sum_{j=1}^N a_j^{(N)}\,t^j,
+\qquad
+\widehat\mu_{N,Q}(z):=A_N(e^{z/Q^2}).
+\]
+Then
+\[
+A_N(t)
+=
+\frac{2(2N-1)}{N+1}\,
+t\,{}_2F_1(1-N,\,2;\,N+2;\,t),
+\]
+so in particular
+\[
+\widehat\mu_{N,Q}(z)
+=
+\frac{2(2N-1)}{N+1}\,
+e^{z/Q^2}\,
+{}_2F_1(1-N,\,2;\,N+2;\,e^{z/Q^2}).
+\]
+Moreover,
+\[
+A_N(t)-A_N(t^{-1})
+=
+\frac{N(-1)^N}{\binom{2N-2}{N-1}}\,
+t^{-N}(1-t)^{2N-1}(1+t),
+\]
+and hence
+\[
+\widehat\mu_{N,Q}(z)-\widehat\mu_{N,Q}(-z)
+=
+\frac{N(-1)^N}{\binom{2N-2}{N-1}}\,
+e^{-Nz/Q^2}\,
+\bigl(1-e^{z/Q^2}\bigr)^{2N-1}
+\bigl(1+e^{z/Q^2}\bigr).
+\]
+In particular,
+\[
+\widehat\mu_{N,Q}(0)=1,
+\qquad
+\partial_z^{\,2r+1}\widehat\mu_{N,Q}(0)=0
+\quad (0\le r\le N-2),
+\]
+and the odd part of $\widehat\mu_{N,Q}$ starts only at order $2N-1$.
+\end{lemma}
+
+\begin{proof}
+Let
+\[
+B_N(t):=
+\frac{2(2N-1)}{N+1}\,
+t\,{}_2F_1(1-N,\,2;\,N+2;\,t)
+=
+\sum_{j=1}^N b_j^{(N)}\,t^j.
+\]
+Its coefficients satisfy
+\[
+\frac{b_{j+1}^{(N)}}{b_j^{(N)}}
+=
+\frac{(1-N+j-1)(2+j-1)}{(N+2+j-1)j}
+=
+\frac{(j-N)(j+1)}{j(N+j+1)}.
+\]
+On the other hand, the coefficients $a_j^{(N)}$ satisfy
+\[
+\frac{a_{j+1}^{(N)}}{a_j^{(N)}}
+=
+\frac{(-1)^{j+2}(j+1)\binom{2N}{N+j+1}}
+     {(-1)^{j+1}j\binom{2N}{N+j}}
+=
+\frac{(j-N)(j+1)}{j(N+j+1)}.
+\]
+Thus $a_j^{(N)}$ and $b_j^{(N)}$ agree up to an overall constant.  Matching
+the $t^1$-coefficient gives
+\[
+b_1^{(N)}
+=
+\frac{2(2N-1)}{N+1}
+=
+\frac{\binom{2N}{N+1}}{\binom{2N-2}{N-1}}
+=
+a_1^{(N)},
+\]
+hence $A_N(t)=B_N(t)$.
+
+For the second identity, define
+\[
+F_N(t):=\sum_{j=-N}^{N}(-1)^j\binom{2N}{N+j}t^j.
+\]
+By the binomial theorem,
+\[
+F_N(t)=(-1)^N t^{-N}(1-t)^{2N}.
+\]
+Differentiating gives
+\[
+tF_N'(t)
+=
+\sum_{j=-N}^{N}j(-1)^j\binom{2N}{N+j}t^j
+=
+-N(-1)^N t^{-N}(1-t)^{2N-1}(1+t).
+\]
+Now
+\[
+A_N(t)-A_N(t^{-1})
+=
+-\frac{1}{\binom{2N-2}{N-1}}
+\sum_{j=1}^N j(-1)^j\binom{2N}{N+j}(t^j-t^{-j}),
+\]
+while the symmetry $j\mapsto -j$ in the preceding display shows
+\[
+tF_N'(t)
+=
+\sum_{j=1}^N j(-1)^j\binom{2N}{N+j}(t^j-t^{-j}).
+\]
+Substituting the closed form for $tF_N'(t)$ yields
+\[
+A_N(t)-A_N(t^{-1})
+=
+\frac{N(-1)^N}{\binom{2N-2}{N-1}}\,
+t^{-N}(1-t)^{2N-1}(1+t).
+\]
+Replacing $t$ by $e^{z/Q^2}$ gives the displayed formula for
+$\widehat\mu_{N,Q}(z)-\widehat\mu_{N,Q}(-z)$.  The normalization
+$\widehat\mu_{N,Q}(0)=1$ and the low odd-jet vanishing are equivalent to the
+moment identities in Lemma~\ref{lem:n-point-coefficients}.
+\end{proof}
+
 \begin{lemma}[Exact odd-moment generating function]
 \label{lem:n-point-odd-generating-function}
 Define
@@ -3006,6 +3153,33 @@ Finally,
 \]
 Substituting this identity yields the claimed formula.
 \end{proof}
+
+\begin{remark}[Structure of the surviving odd tail]
+\label{rem:surviving-odd-tail-structure}
+Expanding
+\[
+\frac{1}{\prod_{j=1}^N(1-j^2u^2)}
+=
+\sum_{k\ge 0} h_k(1^2,\dots,N^2)\,u^{2k},
+\]
+where $h_k$ denotes the complete homogeneous symmetric polynomial, the exact
+formula of Lemma~\ref{lem:n-point-odd-generating-function} yields
+\[
+\mu_{2N-1+2k}^{(N)}
+=
+(-1)^{N+1}(2N-1)N!(N-1)!\,
+h_k(1^2,\dots,N^2),
+\qquad k\ge 0.
+\]
+Thus the surviving odd moments are not merely bounded: they are explicit and
+have a fixed sign,
+\[
+(-1)^{N+1}\mu_{2r+1}^{(N)}\ge 0
+\qquad (r\ge N-1).
+\]
+This makes the post-cancellation odd tail completely structured rather than
+mysterious.
+\end{remark}
 
 \begin{proposition}[Kernel form and explicit corrected $N$-point transverse estimate]
 \label{prop:corrected-n-point}
@@ -3278,6 +3452,136 @@ choice is any
 \]
 and if $\rho_{\toy}>\rho_0/\sqrt2$, one may take the exact zeta-side optimum
 $\alpha=\rho_0/\sqrt2$.
+\end{remark}
+
+\begin{remark}[Sharper prefactor in the optimized zeta-side bound]
+\label{rem:optimized-zeta-prefactor}
+With the notation of Corollary~\ref{cor:optimized-zeta-cancellation-depth},
+set
+\[
+x:=\rho_0Q,
+\qquad
+N=\beta x+O(1),
+\qquad
+\beta=\frac{\alpha}{\rho_0}\in(0,1).
+\]
+A more precise Stirling expansion of the gamma-ratio factor in
+Proposition~\ref{prop:corrected-n-point} gives
+\[
+(2N-1)N!(N-1)!\,\frac{\Gamma(x-N)}{\Gamma(x+N+1)}
+=
+\frac{4\pi\beta}{\sqrt{1-\beta^2}}\,
+e^{-x f(\beta)}\,
+(1+o(1)),
+\]
+where
+\[
+f(\beta)
+=
+(1+\beta)\log(1+\beta)
+-2\beta\log\beta
+-(1-\beta)\log(1-\beta).
+\]
+Consequently,
+\[
+|\Xi_\zeta^{(N)}(m)|
+\ll
+2C_{\partial}(\rho_0)\rho_0\,
+\frac{4\pi\beta}{\sqrt{1-\beta^2}}\,
+\frac{L(m)S(m)^2}{Q^2}\,
+e^{-\delta_*(\alpha,\rho_0)Q}\,
+(1+o(1)).
+\]
+At the zeta-side optimum $\beta=1/\sqrt2$, the prefactor simplifies to
+$4\pi$, so
+\[
+|\Xi_\zeta^{(N_{\mathrm{opt}})}(m)|
+\ll
+8\pi\,C_{\partial}(\rho_0)\rho_0\,
+\frac{L(m)S(m)^2}{Q^2}\,
+e^{-2\rho_0\log(1+\sqrt2)\,Q}\,
+(1+o(1)).
+\]
+This sharper prefactor is not needed for the qualitative contradiction, but it
+records that, once the boundary constant $C_{\partial}(\rho_0)$ is made
+explicit, the zeta-side $N$-point estimate becomes effective with an
+explicit leading constant.
+\end{remark}
+
+\begin{remark}[Discrete Mellin projector and test-function viewpoint]
+\label{rem:discrete-mellin-projector}
+Define the additive operator
+\[
+(\mathcal P_{N,Q}F):=\sum_{j=1}^N a_j^{(N)}\,F\!\left(\frac{j}{Q^2}\right),
+\]
+and the associated multiplicative distribution on $\mathbb R_+^\times$,
+\[
+\mu_{N,Q}:=\sum_{j=1}^N a_j^{(N)}\,\delta_{e^{j/Q^2}}.
+\]
+Its Mellin symbol is precisely
+\[
+\widehat\mu_{N,Q}(z)=\sum_{j=1}^N a_j^{(N)}e^{zj/Q^2}.
+\]
+
+\medskip
+
+Equivalently, if $D:=\frac{d}{ds}$, then
+\[
+\mathcal P_{N,Q}
+=
+P_{N,Q}(D)\big|_{s=0},
+\qquad
+P_{N,Q}(D):=\sum_{j=1}^N a_j^{(N)}e^{(j/Q^2)D}.
+\]
+Thus $\mathcal P_{N,Q}$ is a polynomial in the translation semigroup,
+evaluated at the origin.  If
+\[
+F(s)=\sum_{n\ge 0} c_n s^n,
+\]
+then
+\[
+(\mathcal P_{N,Q}F)
+=
+\sum_{n\ge 0} c_n\,\frac{\mu_n^{(N)}}{Q^{2n}},
+\qquad
+\mu_n^{(N)}:=\sum_{j=1}^N a_j^{(N)}j^n.
+\]
+Accordingly, on a general analytic germ $\mathcal P_{N,Q}$ acts as
+evaluation at $0$ plus even leakage and a high odd tail, while on an odd
+germ it kills the first $N-1$ odd Taylor coefficients exactly.
+
+Lemma~\ref{lem:n-point-mellin-symbol} shows that this symbol preserves the
+constant mode and kills the first $N-1$ odd jets at $z=0$.  Thus
+$\mathcal P_{N,Q}$ acts on a general analytic germ as evaluation at $0$
+plus even leakage and a high odd tail, while on an odd germ it is a
+high-order odd-jet annihilator.
+
+In this sense, the $N$-point operator may be viewed as a local discrete
+Mellin-side projector.  This is formally reminiscent of the Weil/Connes
+test-function viewpoint, where one probes the zero set through Mellin/Fourier
+transforms of multiplicative test functions and explicit- or trace-formula
+pairings \cite{Conrey2003,Connes1997,ConnesConsani2021}.  The present paper
+does not use any global trace formula; the comparison is only structural.
+
+A natural smoothed version is obtained by fixing an even
+$\phi\in C_c^\infty(\mathbb R)$ with $\widehat\phi(0)=1$ and setting
+\[
+f_{N,Q,\eta}(x)
+:=
+\sum_{j=1}^N a_j^{(N)}
+\,\eta^{-1}\phi\!\left(\frac{\log x-j/Q^2}{\eta}\right).
+\]
+Its Mellin transform is
+\[
+\widehat f_{N,Q,\eta}(z)
+=
+\widehat\phi(\eta z)\,\widehat\mu_{N,Q}(z).
+\]
+Hence the same low odd-jet annihilation persists after smoothing, while the
+finite-support projector is replaced by an honest smooth multiplicative test
+function.  This observation is not used elsewhere in the proof, but it places
+the $N$-point cancellation layer in a more canonical operator-theoretic
+setting.
 \end{remark}
 
 We isolate the toy microscopic expansion in
@@ -13419,6 +13723,16 @@ J.~B.~Conrey and X.-J.~Li,
 \newblock A note on some positivity conditions related to zeta and L-functions,
 \newblock \emph{International Mathematics Research Notices} \textbf{2000}
 (2000), no.~18, 929--940.
+
+\bibitem{Connes1997}
+A.~Connes,
+\newblock Trace formula in noncommutative geometry and the zeros of the Riemann zeta function,
+\newblock \emph{Journ\'ees \'Equations aux d\'eriv\'ees partielles} (1997), Art.~No.~4, 1--28.
+
+\bibitem{ConnesConsani2021}
+A.~Connes and C.~Consani,
+\newblock Weil positivity and trace formula: the archimedean place,
+\newblock arXiv:2006.13771, 2021.
 
 \end{thebibliography}
 
