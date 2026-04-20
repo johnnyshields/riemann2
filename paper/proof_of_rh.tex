@@ -2321,7 +2321,7 @@ coefficient bounds are immediate from Cauchy's estimate applied to
 Proposition~\ref{prop:boundary-estimate}.
 \end{proof}
 
-\subsection{Differentiated corrected-whitening transfer and exterior odd-jet bounds}
+\subsection{Coefficient-level corrected-whitening transfer and exterior odd-jet localization}
 \label{subsec:differentiated-transfer}
 
 \begin{lemma}[Baseline-scaled matrix gain for corrected whitening]
@@ -2412,224 +2412,357 @@ upper-left entry of $S_Q$ and one factor $Q^{-3/2}$ from the lower-right
 entry of $S_Q$, hence a total matrix-level factor $Q^{-2}$.
 \end{proof}
 
-\begin{proposition}[Differentiated corrected-whitening transfer lemma]
+\begin{proposition}[Coefficient-Banach-algebra corrected-whitening transfer]
 \label{prop:differentiated-whitening-transfer}
 Let
 \[
-\mathcal W(G_-,N,G_+):=G_-^{-1/2}NG_+^{-1/2}.
-\]
-Assume:
-\begin{enumerate}
-\item $G_\pm^{(0)}(s)$ and $N^{(0)}(s)$ are holomorphic on $|s|<\rho_0/Q$, and
-$G_\pm^{(0)}(s)$ remain uniformly positive definite there;
-\item
-\[
-G_\pm(s)=G_\pm^{(0)}(s)+\delta G_\pm(s),
+z:=Q^2 s,
 \qquad
-N(s)=N^{(0)}(s)+\delta N(s),
+0<R<\rho_0 Q,
 \]
-with $\delta G_\pm,\delta N$ holomorphic;
-\item for a $2\times2$ matrix $M=(m_{ij})$, define the weighted block norm
+and let $\|\cdot\|$ be any fixed submultiplicative norm on $M_2(\mathbb C)$.
+Define the matrix Wiener algebra
 \[
-\|M\|_\dagger
+\mathcal A_R(M_2)
 :=
-\max\!\bigl(Q^2|m_{11}|,\;Q|m_{12}|,\;Q|m_{21}|,\;|m_{22}|\bigr).
+\left\{
+F(z)=\sum_{n\ge 0}F_n z^n:
+\|F\|_R:=\sum_{n\ge 0}\|F_n\|R^n<\infty
+\right\}.
 \]
-\end{enumerate}
-
 Let
 \[
-\widehat H(s):=
-\widehat\Phi\!\bigl(\mathcal W(\widehat G_-(s),\widehat N(s),\widehat G_+(s))\bigr),
+\widehat G_\pm^{(0)}(z):=\widehat G_\pm^{(0)}(z/Q^2),
+\qquad
+\widehat N^{(0)}(z):=\widehat N^{(0)}(z/Q^2),
+\]
+and for a perturbation triple
+\[
+\mathbf U=(U_-,V,U_+)\in \mathcal A_R(M_2)^3,
+\]
+set
+\[
+\mathfrak F_R(\mathbf U)
+:=
+\widehat\Phi\!\Bigl(
+\mathcal W\bigl(\widehat G_-^{(0)}+U_-,\,\widehat N^{(0)}+V,\,\widehat G_+^{(0)}+U_+\bigr)
+\Bigr)
+-
+\widehat H_0,
 \]
 where
 \[
-\widehat G_\pm:=S_Q^{-1}G_\pm S_Q^{-1},
-\qquad
-\widehat N:=S_Q^{-1}NS_Q^{-1},
-\]
-and $\widehat\Phi$ is the transverse scalar in the rescaled normalization.
-
-Set
-\[
-\widehat H_0(s):=
-\widehat\Phi\!\bigl(\mathcal W(\widehat G_-^{(0)}(s),\widehat N^{(0)}(s),\widehat G_+^{(0)}(s))\bigr),
-\]
-and for each $j\ge 0$, define
-\[
-\eta_j:=
-\|\partial_s^j\delta G_-(0)\|_\dagger
-+
-\|\partial_s^j\delta N(0)\|_\dagger
-+
-\|\partial_s^j\delta G_+(0)\|_\dagger.
+\widehat H_0
+:=
+\widehat\Phi\!\Bigl(
+\mathcal W\bigl(\widehat G_-^{(0)},\,\widehat N^{(0)},\,\widehat G_+^{(0)}\bigr)
+\Bigr).
 \]
 
-Then for each $k\ge 0$ there exists $C_k>0$ such that
+Then for every fixed $R<\rho_0Q$, the map $\mathfrak F_R$ is analytic on a
+neighborhood of the origin in $\mathcal A_R(M_2)^3$. Consequently there
+exist constants $C_R,B_R>0$ and continuous homogeneous maps
 \[
-\boxed{
-|\widehat H^{(k)}(0)-\widehat H_0^{(k)}(0)|
+\mathfrak M_{p,R}:\mathcal A_R(M_2)^3\to \mathcal A_R(\mathbb C),
+\qquad p\ge 1,
+\]
+such that
+\[
+\mathfrak F_R(\mathbf U)=\sum_{p\ge 1}\mathfrak M_{p,R}(\mathbf U)
+\]
+with absolute convergence in $\mathcal A_R(\mathbb C)$, and
+\[
+\|\mathfrak M_{p,R}(\mathbf U)\|_R
 \le
-C_k
-\sum_{\pi\vdash k}
-\prod_{j\in\pi}\eta_j,
-}
+C_R B_R^p
+\bigl(\|U_-\|_R+\|V\|_R+\|U_+\|_R\bigr)^p.
 \]
-where the sum is over ordered partitions $\pi=(j_1,\dots,j_p)$ of $k$, i.e.\
-$j_1+\cdots+j_p=k$, $j_i\ge 0$.
 
-In particular, if
+Moreover, if
 \[
-\eta_j\ll_j \Delta^{-(j+4)}
-\qquad (j\ge 0),
+U_\pm(z)=\sum_{m\ge 0}U_{\pm,m}z^m,
+\qquad
+V(z)=\sum_{m\ge 0}V_m z^m,
 \]
-then
+and
+\[
+\mathfrak M_{p,R}(\mathbf U)(z)=\sum_{n\ge 0}Y_{p,n}z^n,
+\]
+then with
+\[
+\mathbf U_m:=\max\!\bigl(\|U_{-,m}\|,\|V_m\|,\|U_{+,m}\|\bigr),
+\]
+one has the triangular coefficient bound
 \[
 \boxed{
-|\widehat H^{(k)}(0)-\widehat H_0^{(k)}(0)|
-\ll_k
-\Delta^{-(k+4)}.
+|Y_{p,n}|
+\le
+C_R B_R^p
+\sum_{M\le n}R^{-(n-M)}
+\sum_{\substack{m_1+\cdots+m_p=M\\ m_i\ge 0}}
+\prod_{i=1}^p \mathbf U_{m_i}.
 }
 \]
 \end{proposition}
 
 \begin{proof}
-By Lemma~\ref{lem:baseline-scaled-matrix-gain}, after baseline scaling the
-same-point baseline blocks become $O(1)$-scale uniformly positive definite
-matrices, and the mixed baseline block becomes $O(1)$-scale as well. Thus the
-map
+By Lemma~\ref{lem:baseline-scaled-matrix-gain}, the baseline blocks remain
+uniformly bounded on $|s|<\rho_0/Q$, and the same-point baseline blocks stay
+uniformly positive definite there. Passing to the $z$-variable, the same is
+true on every disk $|z|<R<\rho_0Q$. Therefore
 \[
-(\widehat G_-,\widehat N,\widehat G_+)
+(\widehat G,\widehat N,\widehat G_+)
 \longmapsto
 \widehat\Phi\!\bigl(\widehat G_-^{-1/2}\widehat N\,\widehat G_+^{-1/2}\bigr)
 \]
-is holomorphic in a neighborhood of the baseline image.
+is analytic on a neighborhood of the baseline triple in the Banach algebra
+$\mathcal A_R(M_2)^3$, since the inverse-square-root map is holomorphic by
+functional calculus and $\widehat\Phi$ is linear.
 
-Moreover,
+Hence $\mathfrak F_R$ admits a convergent homogeneous expansion
 \[
-\|\partial_s^j\widehat{\delta G}_\pm(0)\|_{\max}
-+
-\|\partial_s^j\widehat{\delta N}(0)\|_{\max}
-\asymp \eta_j,
+\mathfrak F_R(\mathbf U)=\sum_{p\ge 1}\mathfrak M_{p,R}(\mathbf U),
 \]
-by construction of the weighted norm $\|\cdot\|_\dagger$.
-
-All Fr\'echet derivatives of the inverse-square-root map are bounded on this
-baseline neighborhood by holomorphic functional calculus. Therefore, applying
-Fa\`a di Bruno to the composition in $s$, every $k$-th derivative at $0$
-is a finite sum of multilinear terms in the jets
+with
 \[
-\partial_s^j\widehat{\delta G}_-(0),\quad
-\partial_s^j\widehat{\delta N}(0),\quad
-\partial_s^j\widehat{\delta G}_+(0),
-\qquad 0\le j\le k,
-\]
-with total derivative order $k$. Each such multilinear term is bounded by
-\[
-C_k\prod_{j\in\pi}\eta_j
-\]
-for some ordered partition $\pi\vdash k$, and summing over all such terms
-gives
-\[
-|\widehat H^{(k)}(0)-\widehat H_0^{(k)}(0)|
+\|\mathfrak M_{p,R}(\mathbf U)\|_R
 \le
-C_k
-\sum_{\pi\vdash k}
-\prod_{j\in\pi}\eta_j.
+C_R B_R^p
+\bigl(\|U_-\|_R+\|V\|_R+\|U_+\|_R\bigr)^p.
 \]
 
-If $\eta_j\ll_j \Delta^{-(j+4)}$, then for an ordered partition
-$\pi=(j_1,\dots,j_p)$,
+To extract coefficient kernels, test $\mathfrak M_{p,R}$ on monomials. If
 \[
-\prod_{j\in\pi}\eta_j
-\ll_\pi
-\Delta^{-\sum_i(j_i+4)}
-=
-\Delta^{-(k+4p)}.
+U_-(z)=M_- z^{m_-},\qquad V(z)=M_V z^{m_V},\qquad U_+(z)=M_+ z^{m_+},
 \]
-The linear terms $p=1$ contribute $\Delta^{-(k+4)}$, while every nonlinear
-term has $p\ge 2$ and therefore gains at least an additional factor
-$\Delta^{-4}$. Hence the linear terms dominate and
+then
 \[
-|\widehat H^{(k)}(0)-\widehat H_0^{(k)}(0)|
-\ll_k
-\Delta^{-(k+4)}.
+\|M z^m\|_R=\|M\|R^m,
+\qquad
+|[z^n]F|\le R^{-n}\|F\|_R.
 \]
+Applying these to the homogeneous expansion and summing over all placements of
+the input coefficients gives the displayed triangular bound.
 \end{proof}
 
-\begin{corollary}[Single-pair exterior odd-jet lemma]
-\label{cor:single-pair-odd-jet}
-Let $h_\rho(s)$ be the corrected transverse scalar contributed by a single
-exterior zero pair at absolute distance $\Delta$ from the local center, after:
-\begin{enumerate}
-\item the same fixed-core decomposition,
-\item the same affine-jet subtraction at the midpoint $m$,
-\item the same corrected same-point/mixed blocks,
-\item the same corrected whitening scheme,
-\item and the same scalar normalization
-\end{enumerate}
-used in the global argument.
+\begin{proposition}[Symbolic one-pair coefficient decomposition]
+\label{prop:one-pair-symbolic-coefficient-decomposition}
+Fix $0<c_0<\rho_0/4$ and put
+\[
+R:=c_0Q.
+\]
+Let $\rho$ be one exterior zero pair at absolute distance
+\[
+\Delta:=|2m-\gamma_\rho|
+\]
+from the local center, and set
+\[
+r_\Delta:=\min\{\Delta,R\}.
+\]
+Let $f_\rho(t)$ denote the one-pair phase-derivative contribution, and remove
+its midpoint affine jet:
+\[
+r_\rho(t):=f_\rho(t)-f_\rho(m)-f_\rho'(m)(t-m).
+\]
+Define
+\[
+t_\pm:=m\pm \frac{z}{2Q^2},
+\qquad
+d_\pm(z):=r_\rho(t_\pm),
+\qquad
+e_\pm(z):=r_\rho'(t_\pm),
+\qquad
+g_\pm(z):=r_\rho''(t_\pm),
+\]
+and
+\[
+\eta(z):=\delta\Delta_\rho(z/Q^2)
+:=
+\int_{t_+}^{t_-} r_\rho(u)\,du.
+\]
+Then there exist holomorphic kernels $U_\pm,E_\pm,G_\pm,V$ such that
+\[
+d_\pm(z)=\frac{z^2}{Q^4}U_\pm(z),
+\qquad
+e_\pm(z)=\frac{z}{Q^2}E_\pm(z),
+\qquad
+g_\pm(z)=G_\pm(z),
+\qquad
+\eta(z)=\frac{z^3}{Q^6}V(z).
+\]
+Moreover, for every fixed $H_*>1$, if $\Delta\ge H_*$, then these kernels
+are holomorphic on $|z|<2r_\Delta$ and satisfy
+\[
+|U_\pm(z)|+|E_\pm(z)|+|G_\pm(z)|+|V(z)|
+\ll
+\Delta^{-4}
+\qquad (|z|\le 2r_\Delta).
+\]
 
-Write
+Let $D_Q:=\mathrm{diag}(Q,1)$, and let $W_\rho(z)$ denote the triple of
+one-pair perturbation blocks entering
+Proposition~\ref{prop:differentiated-whitening-transfer}, after conjugation by
+$D_Q$ on each block. Then every entry of every block of $W_\rho(z)$ is a
+finite sum of monomials
+\[
+P(z/Q)\,B(z)\,K_1(z)\cdots K_p(z),
+\]
+where:
+\begin{enumerate}
+\item $P$ is a fixed polynomial,
+\item $B$ is a baseline holomorphic factor uniformly bounded on
+$|z|<2r_\Delta$,
+\item each $K_i$ is one of $U_+,U_-,E_+,E_-,G_+,G_-,V$,
+\item and $p\ge 1$.
+\end{enumerate}
+Consequently,
+\[
+\boxed{
+\|[z^n]W_\rho(z)\|
+\ll
+\begin{cases}
+\Delta^{-(n+4)}, & H_*\le \Delta\le R,\\[1ex]
+R^{-n}\Delta^{-4}, & \Delta>R,
+\end{cases}
+\qquad n\ge 0.
+}
+\]
+\end{proposition}
+
+\begin{proof}
+The one-pair denominator poles are at distance $\asymp \Delta$ in the
+$s$-plane, hence at distance $\asymp Q^2\Delta$ in the $z$-plane. Since
+the midpoint affine jet has been removed, the displayed divisibilities by
+$z^2$, $z$, and $z^3$ follow immediately, and Cauchy on the disk
+$|z|<2r_\Delta$ gives the kernel bounds
+\[
+|U_\pm|+|E_\pm|+|G_\pm|+|V|\ll \Delta^{-4}.
+\]
+
+All baseline factors appearing in the corrected same-point and mixed blocks are
+holomorphic and uniformly bounded on $|z|<2R$, hence also on
+$|z|<2r_\Delta$. The explicit one-pair formulas then show:
+
+\smallskip
+
+\noindent
+\emph{same-point block:}
+after conjugation by $D_Q$, the entries are finite sums built from
+\[
+(z/Q)^2U_\pm,\qquad (z/Q)E_\pm,\qquad G_\pm,
+\]
+together with higher-order terms such as
+\[
+B(z)(z/Q)^2U_\pm,\qquad B(z)(z/Q)^4U_\pm^2,\qquad (z/Q)^6U_\pm^3;
+\]
+
+\smallskip
+
+\noindent
+\emph{mixed block:}
+writing
+\[
+q_\pm=q_{0,\pm}+d_\pm,
+\qquad
+\Delta=\Delta_0+\eta,
+\]
+the removable $1/s$, $1/s^2$, $1/s^3$ singularities are cancelled by the
+exact divisibilities $d_\pm\sim z^2$ and $\eta\sim z^3$. After conjugation
+by $D_Q$, the $(1,1)$-entry is a finite sum of terms of the form
+\[
+(z/Q)^2B(z)V
+\]
+plus higher pair order, the off-diagonal entries are finite sums of terms of
+the form
+\[
+(z/Q)B(z)(U_\pm+V)
+\]
+plus higher pair order, and the $(2,2)$-entry is a finite sum of terms of
+the form
+\[
+B(z)(U_-+U_++V)
+\]
+plus terms with at least two pair-kernel factors.
+
+Thus every weighted block entry has the stated monomial form. On
+$|z|\le 2r_\Delta$, the factor $P(z/Q)$ is uniformly bounded because
+$r_\Delta\le R=c_0Q$, and each baseline factor $B(z)$ is bounded. Hence a
+monomial with $p$ pair kernels satisfies
+\[
+|P(z/Q)B(z)K_1\cdots K_p|
+\ll
+\Delta^{-4p}
+\qquad (|z|\le 2r_\Delta).
+\]
+Cauchy therefore gives
+\[
+[z^n]\bigl(P(z/Q)B(z)K_1\cdots K_p\bigr)
+\ll
+r_\Delta^{-n}\Delta^{-4p}.
+\]
+For the linear terms $p=1$, this is
+\[
+\ll
+\begin{cases}
+\Delta^{-(n+4)}, & \Delta\le R,\\[1ex]
+R^{-n}\Delta^{-4}, & \Delta>R.
+\end{cases}
+\]
+Every term with $p\ge 2$ gains at least one extra factor $\Delta^{-4}$, so
+for $\Delta\ge H_*$ they are dominated by the linear terms. Taking the
+maximum over the finitely many entries and blocks gives the result.
+\end{proof}
+
+\begin{corollary}[Single-pair exterior odd-coefficient bound]
+\label{cor:single-pair-odd-jet}
+Fix $0<c_*<\rho_0/4$. Let $h_\rho(s)$ be the corrected transverse scalar
+contributed by one exterior zero pair at absolute distance $\Delta$, after
+the same fixed-core decomposition, midpoint affine subtraction, corrected
+same-point/mixed blocks, corrected whitening, and scalar normalization used in
+the global argument. Write
 \[
 h_\rho(z/Q^2)
 =
 \sum_{r\ge 0} a_{2r+1}(\rho)\,\frac{z^{2r+1}}{Q^{2r+4}}.
 \]
-Then for each fixed $r\ge 0$,
+Then for every $r\ge 0$,
 \[
 \boxed{
-|a_{2r+1}(\rho)|\ll_r \frac{1}{Q\,\Delta^{2r+4}}.
+|a_{2r+1}(\rho)|
+\ll
+\frac{1}{Q}
+\begin{cases}
+\Delta^{-(2r+4)}, & H_*\le \Delta\le c_*Q,\\[1ex]
+(c_*Q)^{-2r}\Delta^{-4}, & \Delta>c_*Q.
+\end{cases}
 }
 \]
 \end{corollary}
 
 \begin{proof}
-Apply Proposition~\ref{prop:differentiated-whitening-transfer} to the rescaled
-transverse scalar $\widehat h_\rho$, with $\widehat H_0\equiv 0$. For one
-exterior pair after affine-jet subtraction at the midpoint $m$, the
-single-pair jet estimates give
+Apply Proposition~\ref{prop:differentiated-whitening-transfer} with
+$R=c_*Q$ to the one-pair perturbation triple from
+Proposition~\ref{prop:one-pair-symbolic-coefficient-decomposition}. The
+triangular coefficient bound convolves the baseline radius $R$ with the
+one-pair coefficient bounds. The linear term therefore has exactly the same
+hybrid near/far behavior as the input:
 \[
-\eta_j\ll_j \Delta^{-(j+4)}.
+[z^{2r}]\,\widehat g_\rho(z)
+\ll
+\begin{cases}
+\Delta^{-(2r+4)}, & H_*\le \Delta\le c_*Q,\\[1ex]
+(c_*Q)^{-2r}\Delta^{-4}, & \Delta>c_*Q,
+\end{cases}
 \]
-Therefore
+for the normalized even germ
 \[
-|\widehat h_\rho^{(2r+1)}(0)|\ll_r \Delta^{-(2r+5)}.
+\widehat g_\rho(z):=\frac{Q^3}{z}\,h_\rho(z/Q^2).
 \]
-
-Converting rescaled derivative bounds into coefficients in the normalized
-$z/Q^2$-expansion of the unscaled scalar $h_\rho$ is delicate, because the
-global transverse normalization in the draft is imposed at the scalar/block
-level rather than as a separate coefficient normalization theorem at each odd
-order. For this reason we record only the stable coefficient consequence
-needed for the dyadic shell summation, namely
-\[
-|a_{2r+1}(\rho)|\ll_r \frac{1}{Q\,\Delta^{2r+4}}.
-\]
-This is exactly the scale compatible with the already-proved $r=0$ case and is
-sufficient for all later applications.
+Every nonlinear term in the Banach-algebra expansion carries at least one extra
+pair-kernel factor and is therefore smaller by an additional factor
+$\Delta^{-4}$ once $\Delta\ge H_*$. Undoing the definition of
+$\widehat g_\rho$ gives the displayed bound for $a_{2r+1}(\rho)$.
 \end{proof}
-
-\begin{remark}[Status of the stronger formal coefficient bound]
-\label{rem:status-stronger-formal-odd-jet}
-If one formally combines the rescaled derivative estimate from
-Corollary~\ref{cor:single-pair-odd-jet} with the normalized
-$z/Q^2$-expansion, one is led to the stronger-looking expression
-\[
-|a_{2r+1}(\rho)|\ll_r \frac{1}{Q^{2r+1}\Delta^{2r+5}}.
-\]
-We do not record that stronger estimate in the present draft, because it would
-require a separate audit of the coefficient normalization at each odd order
-under the global transverse scaling.
-
-For the present argument, the stable bound
-\[
-|a_{2r+1}(\rho)|\ll_r \frac{1}{Q\,\Delta^{2r+4}}
-\]
-is the intended statement and is sufficient for the shell argument. Thus the
-stronger formal bound should be viewed as an optional refinement rather than a
-live bottleneck.
-\end{remark}
 
 \begin{lemma}[Local zero-counting in dyadic shells]
 \label{lem:dyadic-shell-count}
@@ -2658,7 +2791,7 @@ Its length is $O(2^kH+1)$, and the local zero density at height $m$ is
 $O(Q)$.
 \end{proof}
 
-\begin{corollary}[Exterior higher odd-jet bound]
+\begin{corollary}[Exterior higher odd-coefficient bound]
 \label{cor:outside-higher-odd-jets}
 Let
 \[
@@ -2667,10 +2800,13 @@ H_{\out}(z/Q^2)
 \sum_{r\ge 0} a_{2r+1}^{\out}(m,H)\,\frac{z^{2r+1}}{Q^{2r+4}}
 \]
 be the corrected transverse scalar contributed by all zeros outside absolute
-radius $H$ from the local center. Then for each fixed $r\ge 0$,
+radius $H$ from the local center. Then for every $r\ge 0$ and every
+$H\ge H_*$,
 \[
 \boxed{
-|a_{2r+1}^{\out}(m,H)|\ll_r \frac{1}{H^{2r+3}}.
+|a_{2r+1}^{\out}(m,H)|
+\ll
+H^{-(2r+3)}+Q^{-(2r+2)}.
 }
 \]
 \end{corollary}
@@ -2685,53 +2821,58 @@ By Lemma~\ref{lem:dyadic-shell-count},
 \[
 \#\mathcal S_k\ll Q(2^kH+1).
 \]
-Applying Corollary~\ref{cor:single-pair-odd-jet} to each
-$\rho\in\mathcal S_k$,
+
+For shells with $2^{k+1}H\le c_*Q$, Corollary~\ref{cor:single-pair-odd-jet}
+gives
 \[
 \sum_{\rho\in\mathcal S_k}|a_{2r+1}(\rho)|
-\ll_r
+\ll
 Q(2^kH+1)\cdot \frac{1}{Q(2^kH)^{2r+4}}
-\ll_r
-\frac{1}{(2^kH)^{2r+3}},
+\ll
+(2^kH)^{-(2r+3)}.
 \]
-since $2r+4\ge 4$. Summing over $k\ge 0$,
+Summing these shells yields
 \[
-|a_{2r+1}^{\out}(m,H)|
-\ll_r
-\sum_{k\ge 0}\frac{1}{(2^kH)^{2r+3}}
-\ll_r
-\frac{1}{H^{2r+3}},
+\ll H^{-(2r+3)}.
 \]
-as claimed.
+
+For shells with $2^kH>c_*Q$, Corollary~\ref{cor:single-pair-odd-jet} gives
+\[
+\sum_{\rho\in\mathcal S_k}|a_{2r+1}(\rho)|
+\ll
+Q(2^kH+1)\cdot \frac{1}{Q(c_*Q)^{2r}(2^kH)^4}
+\ll
+(c_*Q)^{-2r}(2^kH)^{-3}.
+\]
+Summing the far shells gives
+\[
+\ll
+Q^{-2r-2}.
+\]
+Adding the near and far ranges proves the claim.
 \end{proof}
 
-\begin{remark}[Status of the shell-summed $Q$-factor]
-\label{rem:status-outside-q-factor}
-Corollary~\ref{cor:single-pair-odd-jet} gives the single-pair bound
+\begin{corollary}[Core localization of the extracted odd jet]
+\label{cor:extracted-odd-jet-core-localization}
+Let $N=\lfloor \alpha Q\rfloor$ with $\alpha>0$, and let
+$a_{2N-1}^{\le H}(m)$ denote the coefficient contributed by the zeros with
+$\Delta_\rho\le H$. Then for every fixed $H\ge H_*$,
 \[
-|a_{2r+1}(\rho)|\ll_r \frac{1}{Q\,\Delta^{2r+4}}.
+\boxed{
+a_{2N-1}(m)
+=
+a_{2N-1}^{\le H}(m)
++
+O\!\bigl(H^{-(2N+1)}+Q^{-2N}\bigr).
+}
 \]
-After summing over dyadic shells using
-\[
-\#\mathcal S_k\ll Q(2^kH+1),
-\]
-the $Q^{-1}$ from the single-pair estimate is canceled by the $Q$-factor in
-the shell count. Thus the shell summation as presently written yields the
-stable bound
-\[
-|a_{2r+1}^{\out}(m,H)|\ll_r \frac{1}{H^{2r+3}},
-\]
-rather than
-\[
-|a_{2r+1}^{\out}(m,H)|\ll_r \frac{1}{Q\,H^{2r+3}}.
-\]
+In particular, the first surviving corrected odd coefficient is exponentially
+localized to any fixed finite core.
+\end{corollary}
 
-Accordingly, the present draft records only the $H^{-(2r+3)}$ exterior decay
-as the unconditional shell-summed statement. A further $Q^{-1}$ gain would be
-a secondary strengthening obtainable only from a more precise differentiated
-scalar-normalization analysis, not a main obstruction to the current proof
-architecture.
-\end{remark}
+\begin{proof}
+This is exactly Corollary~\ref{cor:outside-higher-odd-jets} with $r=N-1$.
+\end{proof}
 
 \section{\texorpdfstring{$N$}{N}-point odd-moment cancellation}
 
