@@ -16763,6 +16763,346 @@ differ only by a nonvanishing analytic factor
 zeros of the two objects coincide.
 \end{proof}
 
+\begin{proposition}[Rooted-defect transport and stationary first root]
+\label{prop:rooted-defect-transport-stationary-first-root}
+In the setting of
+Proposition~\ref{prop:transport-equations-repeated-source-critical-branch},
+define
+\[
+L(a):=\tau(a)-a,
+\qquad
+G(a):=V(a)-\mathcal Z(a)=D_a(\tau(a))-\mathcal Z(a).
+\]
+Then
+\[
+G'(a)=\frac{2}{L(a)}\,G(a)-\mathcal R(a).
+\]
+Hence, if $a_*\in U$ satisfies
+\[
+G(a_*)=0,
+\]
+then
+\[
+G'(a_*)=-\mathcal R(a_*).
+\]
+
+If in addition
+\[
+\mathcal Z(\tau(a_*))\neq \mathcal Z(a_*),
+\]
+then
+\[
+D_{a_*}''(\tau(a_*))\neq 0,
+\qquad
+\tau'(a_*)=0,
+\qquad
+\tau''(a_*)=
+-\frac{\mathcal R(a_*)}{\mathcal Z(\tau(a_*))-\mathcal Z(a_*)}.
+\]
+\end{proposition}
+
+\begin{proof}
+Since
+\[
+G(a)=V(a)-\mathcal Z(a),
+\]
+Proposition~\ref{prop:transport-equations-repeated-source-critical-branch}(1)
+gives
+\[
+G'(a)=V'(a)-\mathcal R(a)
+=\frac{2}{\tau(a)-a}\,\bigl(V(a)-\mathcal Z(a)\bigr)-\mathcal R(a)
+=\frac{2}{L(a)}\,G(a)-\mathcal R(a).
+\]
+Evaluating at a root $a_*$ of $G$ gives
+\[
+G'(a_*)=-\mathcal R(a_*).
+\]
+
+Now assume also that
+\[
+\mathcal Z(\tau(a_*))\neq \mathcal Z(a_*).
+\]
+Since $G(a_*)=0$, this means
+\[
+\mathcal Z(\tau(a_*))\neq V(a_*).
+\]
+So Proposition~\ref{prop:transport-equations-repeated-source-critical-branch}(2)
+yields
+\[
+D_{a_*}''(\tau(a_*))
+=
+\frac{2}{(\tau(a_*)-a_*)^2}\,
+\bigl(\mathcal Z(\tau(a_*))-V(a_*)\bigr)
+\neq 0.
+\]
+Then Proposition~\ref{prop:transport-equations-repeated-source-critical-branch}(3)
+applies near $a_*$ and gives
+\[
+\tau'(a)
+=
+\frac{G(a)}{\mathcal Z(\tau(a))-V(a)}.
+\]
+Evaluating at $a_*$ gives
+\[
+\tau'(a_*)=0.
+\]
+
+Differentiate this identity once more. Since $G(a_*)=0$ and
+\[
+\mathcal Z(\tau(a_*))-V(a_*)=\mathcal Z(\tau(a_*))-\mathcal Z(a_*)\neq 0,
+\]
+one gets
+\[
+\tau''(a_*)
+=
+\frac{G'(a_*)}{\mathcal Z(\tau(a_*))-V(a_*)}
+=
+-\frac{\mathcal R(a_*)}{\mathcal Z(\tau(a_*))-\mathcal Z(a_*)},
+\]
+as claimed.
+\end{proof}
+
+\begin{proposition}[Nondegenerate rooted point is a fold of the moving-shear equation]
+\label{prop:nondegenerate-rooted-point-is-moving-shear-fold}
+Work in a local normalized nonmixed chart on which
+\[
+S(t)=t^2.
+\]
+Define
+\[
+\mathscr F(a,t):=A_a(t)-\mathcal Z(a)\,B_a(t)
+=(t-a)^2\bigl(D_a(t)-\mathcal Z(a)\bigr).
+\]
+Let
+\[
+a_*<t_*
+\]
+satisfy
+\[
+\mathscr F(a_*,t_*)=0,
+\qquad
+\partial_t\mathscr F(a_*,t_*)=0,
+\]
+and assume
+\[
+\mathcal R(a_*)\neq 0,
+\qquad
+\mathcal Z(t_*)\neq \mathcal Z(a_*).
+\]
+Then
+\[
+\partial_a\mathscr F(a_*,t_*)
+=
+-(t_*-a_*)^2\,\mathcal R(a_*),
+\]
+and
+\[
+\partial_{tt}\mathscr F(a_*,t_*)
+=
+2\bigl(\mathcal Z(t_*)-\mathcal Z(a_*)\bigr).
+\]
+In particular,
+\[
+\partial_a\mathscr F(a_*,t_*)\neq 0,
+\qquad
+\partial_{tt}\mathscr F(a_*,t_*)\neq 0.
+\]
+Hence near $(a_*,t_*)$ the zero set
+\[
+\mathscr F(a,t)=0
+\]
+is the graph of a unique real-analytic function
+\[
+a=\alpha(t)
+\]
+with
+\[
+\alpha(t_*)=a_*,
+\qquad
+\alpha'(t_*)=0,
+\qquad
+\alpha''(t_*)
+=
+\frac{2\bigl(\mathcal Z(t_*)-\mathcal Z(a_*)\bigr)}
+{(t_*-a_*)^2\,\mathcal R(a_*)}.
+\]
+Equivalently,
+\[
+a-a_*
+=
+\frac{\mathcal Z(t_*)-\mathcal Z(a_*)}
+{(t_*-a_*)^2\,\mathcal R(a_*)}(t-t_*)^2
++o\!\left((t-t_*)^2\right).
+\]
+\end{proposition}
+
+\begin{proof}
+Since
+\[
+\mathscr F(a,t)=(t-a)^2\bigl(D_a(t)-\mathcal Z(a)\bigr),
+\]
+the conditions
+\[
+\mathscr F(a_*,t_*)=0,
+\qquad
+\partial_t\mathscr F(a_*,t_*)=0
+\]
+imply
+\[
+D_{a_*}(t_*)=\mathcal Z(a_*),
+\qquad
+D_{a_*}'(t_*)=0.
+\]
+So $(a_*,t_*)$ is a rooted critical point.
+
+Differentiate $\mathscr F$ with respect to $a$:
+\[
+\partial_a\mathscr F(a,t)
+=
+-2(t-a)\bigl(D_a(t)-\mathcal Z(a)\bigr)
++(t-a)^2\bigl(\partial_aD_a(t)-\mathcal R(a)\bigr).
+\]
+At the rooted point,
+\[
+D_{a_*}(t_*)-\mathcal Z(a_*)=0,
+\]
+and by
+Proposition~\ref{prop:transport-equations-repeated-source-critical-branch},
+\[
+\partial_aD_a(t)=\frac{2}{t-a}\bigl(D_a(t)-\mathcal Z(a)\bigr),
+\]
+so
+\[
+\partial_a\mathscr F(a_*,t_*)
+=
+-(t_*-a_*)^2\,\mathcal R(a_*).
+\]
+
+Next,
+\[
+\partial_t\mathscr F(a,t)
+=
+2(t-a)\bigl(D_a(t)-\mathcal Z(a)\bigr)
++(t-a)^2D_a'(t),
+\]
+hence
+\[
+\partial_{tt}\mathscr F(a,t)
+=
+2\bigl(D_a(t)-\mathcal Z(a)\bigr)
++4(t-a)D_a'(t)
++(t-a)^2D_a''(t).
+\]
+At the rooted critical point this becomes
+\[
+\partial_{tt}\mathscr F(a_*,t_*)
+=
+(t_*-a_*)^2D_{a_*}''(t_*).
+\]
+Applying
+Proposition~\ref{prop:transport-equations-repeated-source-critical-branch}(2)
+and using
+\[
+D_{a_*}(t_*)=\mathcal Z(a_*),
+\]
+one gets
+\[
+\partial_{tt}\mathscr F(a_*,t_*)
+=
+2\bigl(\mathcal Z(t_*)-\mathcal Z(a_*)\bigr).
+\]
+
+By the two nonvanishing assumptions,
+\[
+\partial_a\mathscr F(a_*,t_*)\neq 0.
+\]
+So the implicit function theorem gives a unique real-analytic graph
+\[
+a=\alpha(t)
+\]
+for the zero set of $\mathscr F$ near $(a_*,t_*)$. Since
+\[
+\partial_t\mathscr F(a_*,t_*)=0,
+\]
+one has
+\[
+\alpha'(t_*)=0.
+\]
+Differentiating
+\[
+\mathscr F(\alpha(t),t)=0
+\]
+twice at $t=t_*$ gives
+\[
+\partial_a\mathscr F(a_*,t_*)\,\alpha''(t_*)
++
+\partial_{tt}\mathscr F(a_*,t_*)=0,
+\]
+hence
+\[
+\alpha''(t_*)
+=
+-\frac{\partial_{tt}\mathscr F(a_*,t_*)}
+{\partial_a\mathscr F(a_*,t_*)}
+=
+\frac{2\bigl(\mathcal Z(t_*)-\mathcal Z(a_*)\bigr)}
+{(t_*-a_*)^2\,\mathcal R(a_*)}.
+\]
+The Taylor expansion of $\alpha$ then yields the stated quadratic form.
+\end{proof}
+
+\begin{remark}[First rooted point as a post-birth fold problem]
+\label{rem:first-rooted-point-post-birth-fold-problem}
+Let $b$ be an isolated odd-order zero of $\mathcal R$, and let
+\[
+t=\tau(a)
+\]
+be an analytic continuation of the born repeated-source critical branch. By
+Proposition~\ref{prop:first-rooting-requires-second-odd-zero-repeated-source},
+any first rooted point along this continuation can occur only after the segment
+has acquired a second odd-order zero of $\mathcal R$.
+
+At such a rooted point, if
+\[
+\mathcal R(a_*)\neq 0,
+\qquad
+\mathcal Z(\tau(a_*))\neq \mathcal Z(a_*),
+\]
+then
+Proposition~\ref{prop:rooted-defect-transport-stationary-first-root} shows that
+the rooted defect
+\[
+G(a)=D_a(\tau(a))-\mathcal Z(a)
+\qquad
+\text{equivalently}\qquad
+G(a)=\Psi_a(\sigma(a))-\mathcal Z(a)
+\]
+crosses transversely and that the target map is stationary there:
+\[
+\tau'(a_*)=0.
+\]
+Moreover,
+Proposition~\ref{prop:nondegenerate-rooted-point-is-moving-shear-fold} shows
+that the moving-shear equation
+\[
+A_a(x)-\mathcal Z(a)\,B_a(x)=0
+\qquad\text{equivalently}\qquad
+D_{f_a}(a,h)=0,
+\quad
+f_a=u_5-\mathcal Z(a)\lambda,
+\]
+has a local fold at the first rooted point.
+
+Thus the unresolved adjacent-odd-zero issue is not another local odd-zero birth
+problem. It is a \emph{post-birth first-fold exclusion problem} for the
+source-pinned moving shear $f_a=u_5-\mathcal Z(a)\lambda$. The current fixed-level
+nonrecurrence results control frozen-$\gamma$ branches on their maximal
+slope-overlap blocks, and
+Proposition~\ref{prop:source-determinant-form-odd-zero-unrooted-defect}
+controls the diagonal birth chamber near the seeding odd zero, but neither yet
+excludes this first post-birth fold.
+\end{remark}
+
 \begin{proposition}[At most one odd zero implies no genuine repeated-source obstruction]
 \label{prop:at-most-one-odd-zero-no-genuine-repeated-source-obstruction}
 Let $J$ be an opened nonmixed arc. Assume that $\mathcal R$ has at most one
@@ -16820,6 +17160,450 @@ critical branch born at one odd zero of $\mathcal R$ and continuing until the
 segment acquires the next odd zero. Thus the sharpened source-coupling target
 is an adjacent-odd-zero connection exclusion theorem on genuine opened
 nonmixed arcs.
+\end{remark}
+
+\begin{remark}[No-go for a pure level-set / barrier theorem for $\mathcal Z$]
+\label{rem:no-go-pure-level-set-barrier-for-Z}
+A natural next guess would be that the remaining adjacent-odd-zero case could be
+excluded by a theorem depending only on the level geometry of
+\[
+\mathcal Z,\qquad \mathcal R=\mathcal Z',
+\]
+together with the first-root transport identities
+\[
+G(a_*):=V(a_*)-\mathcal Z(a_*)=0,
+\qquad
+G'(a_*)=-\mathcal R(a_*),
+\qquad
+\tau'(a_*)=0,
+\]
+and the fact that a rooted point forces two interior recrossings of the level
+\[
+\mathcal Z(r)=\mathcal Z(a_*).
+\]
+At the current level of abstraction this is false: the level-set geometry of
+$\mathcal Z$ alone is still too free.
+
+Indeed, already in the normalized planar determinant model one can realize all
+of the above with exactly two simple odd zeros of $\mathcal R$ and with a
+nondegenerate rooted critical pair. Take
+\[
+S(t)=t^2,
+\qquad
+\mathcal R(t)=5t^3+5t^2-7t+1,
+\qquad
+\mathcal Z(t)=\int_0^t \mathcal R(u)\,du
+=
+t-\frac72 t^2+\frac53 t^3+\frac54 t^4.
+\]
+Then $\mathcal R$ has exactly two simple zeros in $(0,1)$, numerically
+\[
+t\approx 0.165726,
+\qquad
+t\approx 0.660736,
+\]
+so on $[0,1]$ the sign pattern is $+,-,+$ with exactly two odd sign changes.
+Now choose an analytic function $\widetilde Y$ such that
+\[
+\frac12\,\widetilde Y''=\mathcal Z.
+\]
+For the normalized determinant function $D_a(x)$ associated to
+$(x,\widetilde Y)$, the rooted critical conditions at $(a,x)=(0,1)$ become
+\[
+D_0'(1)=2\int_0^1 s(1-s)\,\mathcal R(s)\,ds,
+\qquad
+D_0(1)-\mathcal Z(0)=\int_0^1 (1-s)^2\,\mathcal R(s)\,ds.
+\]
+For this $\mathcal R$, both moments vanish:
+\[
+\int_0^1 s(1-s)\,\mathcal R(s)\,ds=0,
+\qquad
+\int_0^1 (1-s)^2\,\mathcal R(s)\,ds=0.
+\]
+Hence
+\[
+D_0'(1)=0,
+\qquad
+D_0(1)=\mathcal Z(0),
+\]
+so $(0,1)$ is an exact rooted repeated-source critical pair.
+
+Moreover,
+\[
+D_0''(1)=2\int_0^1 s^2\,\mathcal R(s)\,ds=\frac56>0,
+\]
+so the critical branch is nondegenerate and the implicit-function theorem gives
+a real-analytic continuation
+\[
+x=\tau(a),
+\qquad
+\tau(0)=1,
+\qquad
+\tau'(0)=0.
+\]
+Also, with
+\[
+V(a):=D_a(\tau(a)),
+\qquad
+G(a):=V(a)-\mathcal Z(a),
+\]
+one has at the rooted point
+\[
+G(0)=0,
+\qquad
+G'(0)=-\mathcal R(0)=-1.
+\]
+
+Finally, the level equation
+\[
+\mathcal Z(t)=\mathcal Z(0)=0
+\]
+has two interior solutions,
+\[
+t\approx 0.368001,
+\qquad
+t\approx 0.851550,
+\]
+so the rooted point comes with exactly the two interior recrossings of the
+moving level demanded by the source-pinned shear picture.
+
+Thus a theorem using only the scalar level-set topology of $\mathcal Z$
+together with the first-root identities above cannot suffice to exclude the
+remaining adjacent-odd-zero configuration. Any successful next step must use
+additional structure: either the provenance of $(a,\tau(a))$ as the
+\emph{continued born branch}, or a genuinely source-coupled constraint such as
+the moving shear
+\[
+f_a=u_5-\mathcal Z(a)\lambda,
+\]
+rather than only the abstract level geometry of $\mathcal Z$.
+\end{remark}
+
+\begin{proposition}[Discriminant reduction for the moving-shear family]
+\label{prop:discriminant-reduction-moving-shear}
+Let $J$ be a good nonmixed $v_5$-patch. For $\gamma\in\mathbf R$, set
+\[
+f_\gamma:=u_5-\gamma\lambda.
+\]
+Define the sheared discriminant set
+\[
+\mathcal D:=
+\left\{
+(a,\gamma,h)\in J\times\mathbf R\times J:
+a<h,\
+D_{f_\gamma}(a,h)=0,\
+\partial_h D_{f_\gamma}(a,h)=0
+\right\}.
+\]
+
+Then on the region $a<h$ one has the exact equivalence
+\[
+(a,\gamma,h)\in\mathcal D
+\iff
+\gamma=\Psi_a(h),
+\qquad
+\mathfrak D(a,h)=0.
+\]
+Equivalently,
+\[
+\mathcal D
+=
+\left\{
+(a,\Psi_a(h),h):\ a<h,\ \mathfrak D(a,h)=0
+\right\}.
+\]
+
+In particular, on a nonmixed patch the sheared discriminant is not an
+independent two-dimensional catastrophe surface in $(a,\gamma,h)$-space:
+it is the graph of the repeated-source critical locus
+\[
+\mathfrak D(a,h)=0
+\]
+in the extra $\gamma$-direction.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:source-determinant-form-odd-zero-unrooted-defect}(2),
+for every $(a,h)$ with $a<h$ one has
+\[
+D_{f_\gamma}(a,h)
+=
+D_\lambda(a,h)\bigl(\Psi_a(h)-\gamma\bigr).
+\]
+Differentiating in $h$ gives
+\[
+\partial_h D_{f_\gamma}(a,h)
+=
+\partial_h D_\lambda(a,h)\bigl(\Psi_a(h)-\gamma\bigr)
++
+D_\lambda(a,h)\,\partial_h\Psi_a(h).
+\]
+
+On a good nonmixed patch,
+\[
+D_\lambda(a,h)\neq 0
+\qquad (a<h).
+\]
+Therefore
+\[
+D_{f_\gamma}(a,h)=0
+\iff
+\gamma=\Psi_a(h).
+\]
+At such a point the first term in the formula for $\partial_h D_{f_\gamma}$
+vanishes, so
+\[
+\partial_h D_{f_\gamma}(a,h)=0
+\iff
+D_\lambda(a,h)\,\partial_h\Psi_a(h)=0
+\iff
+\partial_h\Psi_a(h)=0.
+\]
+Finally, by
+Remark~\ref{rem:source-determinant-reformulation-Gammaa},
+\[
+\partial_h\Psi_a(h)
+=
+\frac{W_h(c,v_5)(a)\,\mathfrak D(a,h)}{D_\lambda(a,h)^2},
+\]
+and the prefactor is nonvanishing on the nonmixed patch. Hence
+\[
+\partial_h\Psi_a(h)=0
+\iff
+\mathfrak D(a,h)=0.
+\]
+Combining the two equivalences proves the result.
+\end{proof}
+
+\begin{proposition}[Generic rooted discriminant point is a transverse crossing]
+\label{prop:generic-rooted-discriminant-point-transverse-crossing}
+In the setting of
+Proposition~\ref{prop:discriminant-reduction-moving-shear},
+define the RH-selected slice
+\[
+\mathcal S_{\mathrm{RH}}
+:=
+\left\{
+(a,\gamma,h)\in J\times\mathbf R\times J:
+\gamma=\mathcal Z(x(a))
+\right\}.
+\]
+
+Let
+\[
+(a_*,\gamma_*,h_*)\in \mathcal D\cap \mathcal S_{\mathrm{RH}}
+\]
+and assume
+\[
+\partial_h^2 D_{f_{\gamma_*}}(a_*,h_*)\neq 0,
+\qquad
+\mathcal R(x(a_*))\neq 0.
+\]
+Then there is a neighborhood of $(a_*,\gamma_*,h_*)$ in which
+$\mathcal D$ is a unique real-analytic curve
+\[
+a\longmapsto \bigl(a,\gamma(a),h(a)\bigr),
+\]
+with
+\[
+\gamma(a)=\Psi_a(h(a)).
+\]
+
+Moreover one has
+\[
+\gamma'(a_*)=0,
+\qquad
+h'(a_*)=0,
+\]
+and
+\[
+\frac{d}{da}\Bigl(\gamma(a)-\mathcal Z(x(a))\Bigr)\Big|_{a=a_*}
+=
+-\mathcal R(x(a_*))\,x'(a_*)\neq 0.
+\]
+Hence the discriminant curve $\mathcal D$ meets the RH-selected slice
+$\mathcal S_{\mathrm{RH}}$ transversely at $(a_*,\gamma_*,h_*)$.
+
+In fact the $\gamma$-projection of the discriminant curve has a nondegenerate
+local extremum there:
+\[
+\gamma''(a_*)
+=
+-\frac{2\,x'(a_*)^2}{x(h_*)-x(a_*)}\,\mathcal R(x(a_*)).
+\]
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:discriminant-reduction-moving-shear},
+the discriminant is cut out by
+\[
+\partial_h\Psi_a(h)=0,
+\qquad
+\gamma=\Psi_a(h).
+\]
+At the given point,
+\[
+\partial_h^2 D_{f_{\gamma_*}}(a_*,h_*)\neq 0.
+\]
+Since
+\[
+D_{f_\gamma}(a,h)=D_\lambda(a,h)\bigl(\Psi_a(h)-\gamma\bigr),
+\]
+differentiating twice in $h$ and evaluating at a discriminant point gives
+\[
+\partial_h^2 D_{f_{\gamma_*}}(a_*,h_*)
+=
+D_\lambda(a_*,h_*)\,\partial_h^2\Psi_{a_*}(h_*).
+\]
+Because $D_\lambda(a_*,h_*)\neq 0$, this implies
+\[
+\partial_h^2\Psi_{a_*}(h_*)\neq 0.
+\]
+So by the implicit function theorem there is a unique real-analytic function
+\[
+h=h(a)
+\]
+with
+\[
+h(a_*)=h_*,
+\qquad
+\partial_h\Psi_a(h(a))=0.
+\]
+Setting
+\[
+\gamma(a):=\Psi_a(h(a))
+\]
+gives the asserted local parametrization of $\mathcal D$.
+
+Now pass to the local normalized nonmixed $x$-coordinate and write
+\[
+\alpha:=x(a),
+\qquad
+\tau(\alpha):=x(h(a)),
+\qquad
+V(\alpha):=D_\alpha(\tau(\alpha)).
+\]
+By Remark~\ref{rem:source-determinant-reformulation-Gammaa},
+\[
+\gamma(a)=\Psi_a(h(a))=V(\alpha).
+\]
+Since $(a_*,\gamma_*,h_*)\in\mathcal S_{\mathrm{RH}}$, one has
+\[
+V(\alpha_*)=\mathcal Z(\alpha_*),
+\qquad
+\alpha_*:=x(a_*).
+\]
+
+By Proposition~\ref{prop:transport-equations-repeated-source-critical-branch},
+at a rooted noncollapse point one has
+\[
+V'(\alpha_*)=0,
+\qquad
+\tau'(\alpha_*)=0.
+\]
+Therefore
+\[
+\gamma'(a_*)
+=
+V'(\alpha_*)\,x'(a_*)
+=
+0,
+\]
+and
+\[
+x'(h_*)\,h'(a_*)
+=
+\tau'(\alpha_*)\,x'(a_*)
+=
+0,
+\]
+hence
+\[
+h'(a_*)=0.
+\]
+
+For the transverse-crossing derivative, differentiate
+\[
+\gamma(a)-\mathcal Z(x(a))
+=
+V(\alpha)-\mathcal Z(\alpha)
+\]
+to get
+\[
+\frac{d}{da}\Bigl(\gamma(a)-\mathcal Z(x(a))\Bigr)
+=
+x'(a)\bigl(V'(\alpha)-\mathcal R(\alpha)\bigr).
+\]
+At $a=a_*$, since $V'(\alpha_*)=0$, this becomes
+\[
+\frac{d}{da}\Bigl(\gamma(a)-\mathcal Z(x(a))\Bigr)\Big|_{a=a_*}
+=
+-\mathcal R(\alpha_*)\,x'(a_*),
+\]
+which is nonzero by hypothesis. This proves transversality.
+
+Finally, differentiate
+\[
+V'(\alpha)=\frac{2}{\tau(\alpha)-\alpha}\bigl(V(\alpha)-\mathcal Z(\alpha)\bigr)
+\]
+from
+Proposition~\ref{prop:transport-equations-repeated-source-critical-branch}(1).
+At the rooted point,
+\[
+V(\alpha_*)-\mathcal Z(\alpha_*)=0,
+\qquad
+\tau'(\alpha_*)=0,
+\]
+so
+\[
+V''(\alpha_*)
+=
+\frac{2}{\tau(\alpha_*)-\alpha_*}\bigl(V'(\alpha_*)-\mathcal R(\alpha_*)\bigr)
+=
+-\frac{2}{\tau(\alpha_*)-\alpha_*}\,\mathcal R(\alpha_*).
+\]
+Hence
+\[
+\gamma''(a_*)
+=
+V''(\alpha_*)\,x'(a_*)^2
+=
+-\frac{2\,x'(a_*)^2}{x(h_*)-x(a_*)}\,\mathcal R(x(a_*)),
+\]
+as claimed.
+\end{proof}
+
+\begin{remark}[What the discriminant/catastrophe route actually reduces to]
+\label{rem:what-discriminant-catastrophe-route-actually-reduces-to}
+The discriminant reformulation sharpens the geometry, but it also shows the
+limit of purely local catastrophe arguments on this route.
+
+Indeed, by
+Proposition~\ref{prop:discriminant-reduction-moving-shear},
+the sheared discriminant on a nonmixed patch is already one-dimensional:
+it is the graph of the repeated-source critical locus
+\[
+\mathfrak D(a,h)=0
+\]
+in the $\gamma$-direction. And by
+Proposition~\ref{prop:generic-rooted-discriminant-point-transverse-crossing},
+a generic rooted point is not a tangential meeting of sheets, nor a local
+fold/cusp obstruction for the RH-selected slice
+\[
+\gamma=\mathcal Z(x(a)).
+\]
+It is a \emph{transverse crossing} of a smooth discriminant curve by that
+moving slice, with oriented crossing sign controlled by
+\[
+-\mathcal R(x(a_*)).
+\]
+
+Accordingly, the discriminant/catastrophe route does not reduce the adjacent
+odd-zero problem to a local singularity classification in
+$(a,\gamma,h)$-space. The remaining issue is global: to exclude the existence
+of such a transverse crossing along the continued born branch before the
+segment exits the arc, collapses affine-planarly, or acquires the next odd
+zero of $\mathcal W_{\mathrm{src}}$.
 \end{remark}
 
 \begin{remark}[What remains on the nonmixed $4$-point side]
@@ -16926,13 +17710,32 @@ or exits the local one-sign-change chamber. By
 Proposition~\ref{prop:at-most-one-odd-zero-no-genuine-repeated-source-obstruction},
 the positive-kernel route already excludes every opened nonmixed arc carrying
 at most one odd zero of $\mathcal W_{\mathrm{src}}$ (equivalently of
-$\mathcal R$). So the sharpened remaining nonmixed burden is a
-source-coupling / adjacent-odd-zero connection exclusion theorem for odd zeros
-of
+$\mathcal R$).
+
+Moreover, once one follows an analytic continuation of the born branch beyond
+the local birth chamber, the rooted defect
+\[
+G(a)=D_a(\tau(a))-\mathcal Z(a)
+\]
+satisfies an exact first-order transport equation, and any nondegenerate first
+root is forced to be a stationary point of the target map and a local fold of
+the moving-shear equation
+\[
+A_a(x)-\mathcal Z(a)\,B_a(x)=0
+\]
+(Propositions~\ref{prop:rooted-defect-transport-stationary-first-root}
+and~\ref{prop:nondegenerate-rooted-point-is-moving-shear-fold}).
+So the sharpened remaining nonmixed burden is no longer merely an odd-zero
+connection problem in the abstract; it is a source-coupling / adjacent-odd-zero
+\emph{first-fold exclusion theorem} for the moving shear
+\[
+f_a=u_5-\mathcal Z(a)\lambda,
+\]
+equivalently for odd zeros of
 \[
 \mathcal W_{\mathrm{src}},
 \]
-equivalently of $\mathcal R$, on genuine opened nonmixed arcs.
+on genuine opened nonmixed arcs.
 \end{remark}
 
 \begin{remark}[Compact status summary for the nonmixed $4$-point branch]
@@ -16974,11 +17777,17 @@ opened nonmixed arc carrying at most one odd zero of
 $\mathcal W_{\mathrm{src}}$:
 on any chamber where the repeated-source segment sees exactly one sign change of
 $\mathcal R$, the born critical branch is simple, has strictly negative slope,
-and cannot realize the rigidified first-loss condition; hence any genuine
-repeated-source obstruction would have to connect one odd zero of
-$\mathcal W_{\mathrm{src}}$ to a second odd zero of
-$\mathcal W_{\mathrm{src}}$. Thus the genuinely remaining nonmixed burden is
-the source-coupling / adjacent-odd-zero connection exclusion problem for odd
+and cannot realize the rigidified first-loss condition. Beyond that chamber, the
+rooted defect along the continued branch satisfies an exact transport equation,
+and any nondegenerate first root is forced to be a stationary point of the
+target map and a local fold of the moving-shear equation
+\[
+A_a(x)-\mathcal Z(a)\,B_a(x)=0.
+\]
+So any genuine repeated-source obstruction would have to connect adjacent odd
+zeros of $\mathcal W_{\mathrm{src}}$ and survive to a first post-birth fold of
+the moving source-pinned shear. Thus the genuinely remaining nonmixed burden is
+the source-coupling / adjacent-odd-zero first-fold exclusion problem for odd
 zeros of $\mathcal W_{\mathrm{src}}$ on opened nonmixed arcs.
 \end{remark}
 
