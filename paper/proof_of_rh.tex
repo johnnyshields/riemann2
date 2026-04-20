@@ -14599,6 +14599,188 @@ Without such a shear-transfer / source-coupling input, the current $3$-point
 package cannot kill the nonmixed branch on its own.
 \end{remark}
 
+\begin{proposition}[Repeated-source first loss is exactly diagonal odd-zero birth]
+\label{prop:first-loss-is-diagonal-odd-zero-birth}
+Let $J$ be a connected opened nonmixed arc, so
+\[
+K_v\neq 0
+\qquad\text{on }J.
+\]
+For $a<x$ in $J$, define
+\[
+A_a(x):=Y(x)-Y(a)-Y'(a)(x-a),
+\qquad
+B_a(x):=S(x)-S(a)-S'(a)(x-a),
+\]
+\[
+\Gamma_a(x):=\frac{A_a(x)}{B_a(x)},
+\qquad
+M(a,x):=B_a(x)^2\,\Gamma_a'(x).
+\]
+Equivalently,
+\[
+M(a,x)=A_a'(x)B_a(x)-A_a(x)B_a'(x).
+\]
+Let
+\[
+\Sigma_M:=\{(a,x)\in J^2:\ a<x,\ M(a,x)=0\}.
+\]
+
+Then the following hold.
+
+\begin{enumerate}
+\item \emph{No attained separated first loss.}
+There is no pair $(a_*,x_*)\in \Sigma_M$ such that
+\[
+x_*=\inf\{x:\exists\,a<x\text{ with }(a,x)\in \Sigma_M\}.
+\]
+
+\item \emph{Any first-loss sequence is diagonal.}
+If $(a_n,x_n)\in \Sigma_M$ and
+\[
+x_n\downarrow x_*:=\inf\{x:\exists\,a<x\text{ with }(a,x)\in \Sigma_M\},
+\]
+then
+\[
+x_n-a_n\to 0.
+\]
+
+\item \emph{Diagonal accumulation forces a zero of $\mathcal R$.}
+If $(a_n,x_n)\in\Sigma_M$ and
+\[
+a_n,x_n\to b,
+\qquad
+x_n-a_n\to 0,
+\]
+then
+\[
+\mathcal R(b)=0.
+\]
+
+\item \emph{Even-order zeros are diagonally sterile.}
+If $b$ is an isolated even-order zero of $\mathcal R$, then there exists a
+neighborhood $U$ of $b$ such that
+\[
+\Sigma_M\cap (U\times U)=\varnothing.
+\]
+
+\item \emph{Odd-order zeros seed diagonal first loss.}
+If $b$ is an isolated odd-order zero of $\mathcal R$, then every
+neighborhood $U$ of $b$ contains points
+\[
+(a,x)\in \Sigma_M
+\qquad\text{with}\qquad
+a<x,
+\qquad
+a,x\in U.
+\]
+\end{enumerate}
+
+Accordingly, repeated-source first loss on a nonmixed arc is not an
+independent obstruction mechanism: it occurs if and only if one diagonally
+approaches an odd-order zero of $\mathcal R$.
+\end{proposition}
+
+\begin{proof}
+For (1), suppose $(a_*,x_*)\in\Sigma_M$ were an attained separated first-loss
+pair. Then for fixed $a_*$ one has
+\[
+M(a_*,x)>0
+\qquad (a_*<x<x_*),
+\]
+by the definition of $x_*$. Since $B_{a_*}(x)\neq 0$ on a nonmixed arc,
+this implies
+\[
+\Gamma_{a_*}'(x)>0
+\qquad (a_*<x<x_*),
+\]
+so $\Gamma_{a_*}$ is strictly increasing on $(a_*,x_*)$. Therefore
+\[
+\Gamma_{a_*}(x_*)>\lim_{x\downarrow a_*}\Gamma_{a_*}(x)=\mathcal Z(a_*).
+\]
+But Remark~\ref{rem:first-loss-rigidification-nonmixed} shows that every
+formally attained first loss satisfies
+\[
+\Gamma_{a_*}(x_*)=\mathcal Z(a_*),
+\]
+a contradiction. Thus no attained separated first-loss pair exists.
+
+For (2), suppose $(a_n,x_n)\in\Sigma_M$ and $x_n\downarrow x_*$, but that
+$x_n-a_n\not\to 0$. Passing to a subsequence, we may assume
+\[
+a_n\to a_*<x_*.
+\]
+By continuity of $M$,
+\[
+M(a_*,x_*)=0,
+\]
+so $(a_*,x_*)\in\Sigma_M$, contradicting (1). Hence $x_n-a_n\to 0$.
+
+For (3), since $B_a(x)\neq 0$ on a nonmixed arc, the condition
+$(a_n,x_n)\in\Sigma_M$ is equivalent to
+\[
+\Gamma_{a_n}'(x_n)=0.
+\]
+In the quadratic-envelope notation from
+Proposition~\ref{prop:quadratic-envelope-factorization-nonmixed},
+\[
+\Gamma_a'(x)
+=
+\frac{1}{B_a(x)^2}\int_a^x \Omega_{a,x}(r)\,\mathcal R(r)\,dr.
+\]
+Equivalently, after local nonmixed normalization at $b$, this becomes the
+repeated-node profile derivative formula
+\[
+D_a'(x)=2\int_0^1 s(1-s)\,\mathcal R(a+s(x-a))\,ds.
+\]
+Letting $a_n,x_n\to b$ with $x_n-a_n\to 0$, continuity yields
+\[
+0=\lim_{n\to\infty}D_{a_n}'(x_n)
+=
+2\!\left(\int_0^1 s(1-s)\,ds\right)\mathcal R(b)
+=
+\frac13\,\mathcal R(b).
+\]
+Hence $\mathcal R(b)=0$.
+
+For (4), if $b$ is an isolated even-order zero of $\mathcal R$, then
+Proposition~\ref{prop:parity-classification-isolated-nonmixed-R-zeros} gives a
+neighborhood $U$ of $b$ on which every repeated-node profile $D_a$ is
+strictly monotone. Therefore $D_a'(x)\neq 0$ for $a\neq x$ in $U$, hence
+$\Gamma_a'(x)\neq 0$ and
+\[
+\Sigma_M\cap (U\times U)=\varnothing.
+\]
+
+For (5), if $b$ is an isolated odd-order zero of $\mathcal R$, then
+Proposition~\ref{prop:parity-classification-isolated-nonmixed-R-zeros} gives,
+after local normalization, a local repeated-node extremum branch for the
+profiles $D_a$. In particular, every neighborhood $U$ of $b$ contains
+points $a<x$ with
+\[
+D_a'(x)=0.
+\]
+Since $B_a(x)\neq 0$ on the nonmixed arc, this is equivalent to
+\[
+\Gamma_a'(x)=0,
+\]
+hence $(a,x)\in\Sigma_M\cap (U\times U)$.
+
+The final statement is the combination of (2), (4), and (5).
+\end{proof}
+
+\begin{remark}[The repeated-source lane is now closed]
+\label{rem:repeated-source-lane-closed}
+Proposition~\ref{prop:first-loss-is-diagonal-odd-zero-birth} shows that the
+repeated-source / first-loss mechanism does not define an additional nonmixed
+obstruction beyond the odd-zero problem for $\mathcal R$. No attained
+separated first loss can occur, every first-loss sequence is forced to the
+diagonal, and diagonal first loss occurs exactly at isolated odd-order zeros of
+$\mathcal R$. Thus the genuinely remaining nonmixed burden is purely the
+global/source-level control of odd zeros of $\mathcal R$, equivalently of the
+source-level Wronskian $\mathcal W_{\mathrm{src}}$.
+\end{remark}
+
 \begin{remark}[What remains on the nonmixed $4$-point side]
 \label{rem:what-remains-nonmixed-after-R-zero-bridge}
 The preceding results now give a full local derivative-side picture of the
@@ -14644,14 +14826,22 @@ with derivative controlled by the osculatory $4\times 4$ determinant
 $\mathfrak D(a,h)$.
 
 Accordingly, the genuinely live nonmixed $4$-point burden is no longer local
-birth. It is the global/source-level control of odd zeros of
+birth. By Proposition~\ref{prop:first-loss-is-diagonal-odd-zero-birth}, the
+repeated-source / first-loss mechanism is not an independent obstruction:
+no attained separated first loss can occur, every first-loss sequence is forced
+to the diagonal, and diagonal first loss occurs exactly at isolated odd-order
+zeros of $\mathcal R$.
+
+Thus the remaining nonmixed burden is purely the global/source-level control of
+odd zeros of
 \[
 \mathcal W_{\mathrm{src}},
 \]
-equivalently of odd zeros of $\mathcal R$, along an opened nonmixed arc in
-the genuine lifted $v_5$-geometry; and, in repeated-source variables, the
-equivalent problem of excluding first-loss monotonicity for $\Gamma_a$ or
-$\Psi_a$, equivalently of controlling the sign of $\mathfrak D(a,h)$.
+equivalently of odd zeros of
+\[
+\mathcal R,
+\]
+along opened nonmixed arcs in the genuine lifted $v_5$-geometry.
 
 Moreover, by
 Proposition~\ref{prop:three-point-package-not-enough-for-nonmixed-first-loss},
@@ -14659,12 +14849,9 @@ the already-established $3$-point package for
 \[
 \Lambda_v=(x,S)
 \]
-does \emph{not} by itself contradict the sheared repeated-node tangent-contact
-configuration forced by a formal first loss of monotonicity. Thus the remaining
-bridge is genuinely a transfer/source-coupling theorem: one must show that on a
-genuine opened nonmixed arc, the rigidified sheared event either collapses
-immediately to affine-planar geometry or transfers to an actual
-$S$-tangent-contact event already excluded by the global $3$-point theory.
+does \emph{not} by itself eliminate those odd zeros: it cannot rule out the
+rigidified sheared tangent-contact event without an additional transfer /
+source-coupling theorem.
 \end{remark}
 
 \begin{remark}[Derivative-geometry meaning of the nonmixed invariant $\mathcal R$]
@@ -15950,9 +16137,16 @@ equivalently through the below-lifted quotient
 \Psi_a(h)=\frac{D_{u_5}(a,h)}{D_\lambda(a,h)}.
 \]
 Its derivative is governed by the osculatory $4\times 4$ source determinant
-$\mathfrak D(a,h)$. Thus the remaining nonmixed burden is no longer local
-parity, but global/source-level control of which odd zeros of $\mathcal R$
-occur on genuine opened arcs.
+$\mathfrak D(a,h)$. By
+Proposition~\ref{prop:first-loss-is-diagonal-odd-zero-birth}, this
+repeated-source / first-loss mechanism is now completely reduced: no attained
+separated first loss can occur, and any first loss is exactly the diagonal
+birth at an isolated odd-order zero of $\mathcal R$.
+
+Thus the remaining nonmixed burden is no longer local parity, nor a separate
+first-loss geometry, but purely the global/source-level control of which odd
+zeros of $\mathcal W_{\mathrm{src}}$, equivalently of $\mathcal R$, occur
+on genuine opened arcs.
 
 On the mixed side, the explicit low-order dangerous list is
 \[
@@ -16246,12 +16440,20 @@ transport channel $v_{7,K_1}$. Thus failure of the $v_5$-route is not a
 free local cancellation but a coupled quintic--septic degeneration scheme.
 
 \item
-\textbf{Four-point nonmixed branch via source-level control of odd $\mathcal R$-zeros.}
+\textbf{Four-point nonmixed branch via source-level control of odd $\mathcal W_{\mathrm{src}}$-zeros.}
 The local nonmixed derivative geometry is now explicit: exact contacts force
 zeros of $\mathcal R$, one-sign $\mathcal R$-intervals are sterile,
 recurrent exact contacts force affine-planar collapse, and isolated zeros are
-classified by parity. For fixed source point $a$, repeated-source exact
-contacts are controlled by the quadratic-envelope scalar
+classified by parity. At source level, the same structure is encoded by the
+canonical Wronskian
+\[
+\mathcal W_{\mathrm{src}}=J_\lambda J_{u_5}'-J_{u_5}J_\lambda',
+\]
+which differs from $\mathcal R$ only by a nonvanishing analytic factor on a
+nonmixed arc.
+
+For fixed source point $a$, repeated-source exact contacts are controlled by
+the quadratic-envelope scalar
 \[
 \Gamma_a(x)=
 \frac{Y(x)-Y(a)-Y'(a)(x-a)}
@@ -16259,12 +16461,18 @@ contacts are controlled by the quadratic-envelope scalar
 \]
 equivalently by the source quotient
 \[
-\Psi_a(h)=\frac{D_{u_5}(a,h)}{D_\lambda(a,h)}.
+\Psi_a(h)=\frac{D_{u_5}(a,h)}{D_\lambda(a,h)},
 \]
-Its derivative is governed by the osculatory $4\times 4$ determinant
-$\mathfrak D(a,h)$. The remaining theorem-level task is therefore
-global/source-level exclusion of the odd zeros of $\mathcal R$ that are not
-already forced away by affine-planar collapse.
+with derivative governed by the osculatory $4\times 4$ determinant
+$\mathfrak D(a,h)$. By
+Proposition~\ref{prop:first-loss-is-diagonal-odd-zero-birth},
+this repeated-source / first-loss mechanism is not an independent obstruction:
+it occurs if and only if one diagonally approaches an odd-order zero of
+$\mathcal R$, equivalently of $\mathcal W_{\mathrm{src}}$.
+
+The remaining theorem-level task is therefore purely the global/source-level
+exclusion of odd zeros of $\mathcal W_{\mathrm{src}}$ on opened nonmixed
+arcs.
 \end{enumerate}
 \end{remark}
 
@@ -16433,11 +16641,12 @@ equivalently of odd zeros of
 \[
 \mathcal R=\frac{T_v}{K_v^2},
 \]
-along genuine opened nonmixed arcs. In repeated-source variables, the same
-burden can be phrased as exclusion of first-loss monotonicity for the
-quadratic-envelope scalar $\Gamma_a$, equivalently for the source quotient
-$\Psi_a$, or as sign control of the osculatory source determinant
-$\mathfrak D(a,h)$. On the mixed side, what remains is the effective use of
+along genuine opened nonmixed arcs. In repeated-source variables, the same burden is reflected in the quadratic-envelope
+scalar $\Gamma_a$, equivalently in the source quotient $\Psi_a$, and in the
+sign of the osculatory source determinant $\mathfrak D(a,h)$. By
+Proposition~\ref{prop:first-loss-is-diagonal-odd-zero-birth}, however, this
+repeated-source picture adds no independent obstruction beyond odd zeros of
+$\mathcal W_{\mathrm{src}}$, equivalently of $\mathcal R$. On the mixed side, what remains is the effective use of
 the already-established punctured-arc quintic-patch dichotomy together with,
 as backup local algebra, exclusion of the remaining coupled quintic--septic
 valuation tower if the $v_5$-patch fails.
