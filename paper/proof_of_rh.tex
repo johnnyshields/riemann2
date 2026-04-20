@@ -3181,6 +3181,66 @@ This makes the post-cancellation odd tail completely structured rather than
 mysterious.
 \end{remark}
 
+\begin{corollary}[Exact action of the $N$-point operator on odd germs]
+\label{cor:n-point-exact-odd-action}
+Let
+\[
+F(s)=\sum_{r\ge 0} b_{2r+1}s^{2r+1}
+\]
+be an odd analytic germ at $s=0$. Then
+\[
+(\mathcal P_{N,Q}F)
+:=
+\sum_{j=1}^N a_j^{(N)}\,F\!\left(\frac{j}{Q^2}\right)
+=
+\sum_{r\ge 0} b_{2r+1}\frac{\mu_{2r+1}^{(N)}}{Q^{4r+2}}.
+\]
+Hence, by Remark~\ref{rem:surviving-odd-tail-structure},
+\[
+(\mathcal P_{N,Q}F)
+=
+(-1)^{N+1}(2N-1)N!(N-1)!
+\sum_{k\ge 0}
+b_{2N-1+2k}\,
+h_k(1^2,\dots,N^2)\,
+Q^{-(4N+4k-2)}.
+\]
+Thus the $N$-point operator does not merely annihilate the first $N-1$
+odd jets: on odd germs it acts as an explicit shifted complete-homogeneous
+transform of the surviving odd Taylor coefficients.
+\end{corollary}
+
+\begin{remark}[Finite-order recurrence of the normalized surviving tail]
+\label{rem:n-point-tail-recurrence}
+Define
+\[
+\nu_k
+:=
+\frac{(-1)^{N+1}\mu_{2N-1+2k}^{(N)}}{(2N-1)N!(N-1)!}
+=
+h_k(1^2,\dots,N^2),
+\qquad k\ge 0.
+\]
+Then
+\[
+\sum_{k\ge 0}\nu_k t^k
+=
+\frac{1}{\prod_{j=1}^N(1-j^2t)}
+=
+\frac{1}{1-e_1 t+e_2 t^2-\cdots+(-1)^N e_N t^N},
+\]
+where $e_r=e_r(1^2,\dots,N^2)$ is the $r$-th elementary symmetric
+polynomial in $1^2,\dots,N^2$. Consequently,
+\[
+\nu_k
+=
+e_1\nu_{k-1}-e_2\nu_{k-2}+\cdots+(-1)^{N+1}e_N\nu_{k-N}
+\qquad (k\ge 1),
+\]
+with the conventions $\nu_0=1$ and $\nu_{k}=0$ for $k<0$. Thus the
+surviving odd tail is governed by an exact order-$N$ linear recurrence.
+\end{remark}
+
 \begin{proposition}[Kernel form and explicit corrected $N$-point transverse estimate]
 \label{prop:corrected-n-point}
 Let
@@ -3310,12 +3370,23 @@ Therefore
 =
 \sum_{r\ge 0} c_{2r+1}(m)\frac{\mu_{2r+1}^{(N)}}{Q^{2r+4}}.
 \]
-By Lemma~\ref{lem:n-point-coefficients},
+By Lemma~\ref{lem:n-point-coefficients} and
+Remark~\ref{rem:surviving-odd-tail-structure}, this becomes the exact
+surviving expansion
 \[
-\mu_{2r+1}^{(N)}=0
-\qquad (0\le r\le N-2),
+\Xi_\zeta^{(N)}(m)
+=
+(-1)^{N+1}(2N-1)N!(N-1)!
+\sum_{k\ge 0}
+c_{2N-1+2k}(m)\,
+h_k(1^2,\dots,N^2)\,
+Q^{-(2N+2k+2)}.
 \]
-hence
+In particular, the $N$-point operation isolates the first surviving
+corrected odd coefficient $c_{2N-1}(m)$ and propagates the higher odd
+coefficients through an explicit universal positive tail.
+
+For the bound, the coefficient estimate yields
 \[
 |\Xi_\zeta^{(N)}(m)|
 \ll_{\rho_0}
@@ -3334,6 +3405,49 @@ gives
 \]
 Substituting this proves the stated bound.
 \end{proof}
+
+\begin{remark}[Exact surviving-coefficient expansion on the zeta side]
+\label{rem:xi-zeta-exact-surviving-expansion}
+With the notation of the proof of
+Proposition~\ref{prop:corrected-n-point},
+\[
+\Xi_\zeta^{(N)}(m)
+=
+\sum_{r\ge 0} c_{2r+1}(m)\frac{\mu_{2r+1}^{(N)}}{Q^{2r+4}}
+=
+(-1)^{N+1}(2N-1)N!(N-1)!
+\sum_{k\ge 0}
+c_{2N-1+2k}(m)\,
+h_k(1^2,\dots,N^2)\,
+Q^{-(2N+2k+2)}.
+\]
+Thus the $N$-point step does not merely remove the first $N-1$ odd jets:
+it converts the corrected odd Taylor expansion into an explicit universal tail
+whose leading term is the first surviving corrected odd coefficient
+$c_{2N-1}(m)$.
+\end{remark}
+
+\begin{remark}[Exact Laurent tail of the contour kernel]
+\label{rem:n-point-kernel-laurent-tail}
+The kernel in Proposition~\ref{prop:corrected-n-point} has an exact large-
+$\xi$ Laurent expansion. Indeed, using
+Lemma~\ref{lem:n-point-odd-generating-function} and
+Remark~\ref{rem:surviving-odd-tail-structure},
+\[
+K_{N,Q}(\xi)
+=
+\frac{2}{\xi}\,
+\mathcal M_N\!\left(\frac{1}{Q^2\xi}\right)
+=
+2(-1)^{N+1}(2N-1)N!(N-1)!\,
+Q^{-4N+2}\xi^{-2N}
+\sum_{k\ge 0}
+h_k(1^2,\dots,N^2)\,
+Q^{-4k}\xi^{-2k}.
+\]
+So the contour kernel is not merely small: its entire post-cancellation odd
+tail is explicit, universal, and sign-rigid term-by-term.
+\end{remark}
 
 \begin{corollary}[Optimized zeta-side cancellation depth]
 \label{cor:optimized-zeta-cancellation-depth}
@@ -3443,15 +3557,17 @@ which gives the stated value of $\delta_{\mathrm{opt}}$.
 
 \begin{remark}
 Corollary~\ref{cor:optimized-zeta-cancellation-depth} optimizes the
-\emph{zeta-side} cancellation depth. In the full zeta--toy comparison one must
-also satisfy the toy-side restriction $0<\alpha<\rho_{\toy}$ from
-Proposition~\ref{prop:toy-n-point-direct}. Accordingly, the common admissible
-choice is any
+\emph{zeta-side} cancellation depth. After the exact odd-tail evaluation is
+imported into Proposition~\ref{prop:toy-n-point-direct}, the toy side imposes
+no asymptotic upper restriction on the linear choice $N=\lfloor \alpha
+Q\rfloor$: for every fixed $\alpha>0$, the toy microscopic nodes
+$s_j=j/Q^2$ remain inside the toy analyticity disk for all sufficiently
+large $Q$, and the residual odd toy tail is in fact super-exponentially
+small on the $Q$-scale. Accordingly one may take the exact zeta-side
+optimum
 \[
-\alpha<\min\!\left\{\rho_{\toy},\frac{\rho_0}{\sqrt2}\right\},
+\alpha=\frac{\rho_0}{\sqrt2}.
 \]
-and if $\rho_{\toy}>\rho_0/\sqrt2$, one may take the exact zeta-side optimum
-$\alpha=\rho_0/\sqrt2$.
 \end{remark}
 
 \begin{remark}[Sharper prefactor in the optimized zeta-side bound]
@@ -3534,7 +3650,7 @@ P_{N,Q}(D)\big|_{s=0},
 P_{N,Q}(D):=\sum_{j=1}^N a_j^{(N)}e^{(j/Q^2)D}.
 \]
 Thus $\mathcal P_{N,Q}$ is a polynomial in the translation semigroup,
-evaluated at the origin.  If
+evaluated at the origin. If
 \[
 F(s)=\sum_{n\ge 0} c_n s^n,
 \]
@@ -3546,21 +3662,18 @@ then
 \qquad
 \mu_n^{(N)}:=\sum_{j=1}^N a_j^{(N)}j^n.
 \]
-Accordingly, on a general analytic germ $\mathcal P_{N,Q}$ acts as
-evaluation at $0$ plus even leakage and a high odd tail, while on an odd
-germ it kills the first $N-1$ odd Taylor coefficients exactly.
-
-Lemma~\ref{lem:n-point-mellin-symbol} shows that this symbol preserves the
-constant mode and kills the first $N-1$ odd jets at $z=0$.  Thus
-$\mathcal P_{N,Q}$ acts on a general analytic germ as evaluation at $0$
-plus even leakage and a high odd tail, while on an odd germ it is a
-high-order odd-jet annihilator.
+Lemma~\ref{lem:n-point-mellin-symbol} shows that
+$\widehat\mu_{N,Q}(0)=1$ and that the odd part of
+$\widehat\mu_{N,Q}$ starts only at order $2N-1$; meanwhile,
+Corollary~\ref{cor:n-point-exact-odd-action} identifies the exact action of
+$\mathcal P_{N,Q}$ on odd germs as a shifted complete-homogeneous transform
+of the surviving odd Taylor coefficients.
 
 In this sense, the $N$-point operator may be viewed as a local discrete
-Mellin-side projector.  This is formally reminiscent of the Weil/Connes
+Mellin-side projector. This is formally reminiscent of the Weil/Connes
 test-function viewpoint, where one probes the zero set through Mellin/Fourier
 transforms of multiplicative test functions and explicit- or trace-formula
-pairings \cite{Conrey2003,Connes1997,ConnesConsani2021}.  The present paper
+pairings \cite{Conrey2003,Connes1997,ConnesConsani2021}. The present paper
 does not use any global trace formula; the comparison is only structural.
 
 A natural smoothed version is obtained by fixing an even
@@ -3579,7 +3692,7 @@ Its Mellin transform is
 \]
 Hence the same low odd-jet annihilation persists after smoothing, while the
 finite-support projector is replaced by an honest smooth multiplicative test
-function.  This observation is not used elsewhere in the proof, but it places
+function. This observation is not used elsewhere in the proof, but it places
 the $N$-point cancellation layer in a more canonical operator-theoretic
 setting.
 \end{remark}
@@ -3597,7 +3710,7 @@ D=[d_-,d_+]\subset(0,\infty),
 let $\rho_{\toy}$ and $u_0(D)$ be as in
 Lemma~\ref{lem:toy-microscopic-expansion}, and fix
 \[
-0<\alpha<\rho_{\toy}.
+\alpha>0.
 \]
 For
 \[
@@ -3612,7 +3725,8 @@ define
 \sum_{j=1}^N a_j^{(N)}\,
 \Phi_K\!\bigl(\Delta_{\toy}(u,d;s_j)\bigr).
 \]
-Then, for $d\in D$ and $|u|<u_0(D)$,
+Then, for all sufficiently large $Q$ (depending on $D$ and $\alpha$),
+for $d\in D$ and $|u|<u_0(D)$,
 \[
 \Xi_{\toy}^{(N)}(u,d)
 =
@@ -3699,24 +3813,43 @@ For the odd terms, Lemma~\ref{lem:n-point-coefficients} gives
 \mu_{2r+1}^{(N)}=0
 \qquad (0\le r\le N-2),
 \]
-so only the tail $r\ge N-1$ remains. Again using
-Lemma~\ref{lem:n-point-coefficients},
+so only the tail $r\ge N-1$ remains. Using the coefficient bound
+$|b_{2r+1}(u,d)|\ll \rho_{\toy}^{-(2r+1)}$, we obtain
 \[
 \sum_{r\ge N-1}
 |b_{2r+1}(u,d)|\frac{|\mu_{2r+1}^{(N)}|}{Q^{4r+2}}
 \ll
-\frac{2N-1}{Q}
 \sum_{r\ge N-1}
-\left(\frac{N}{\rho_{\toy}Q}\right)^{2r+1}.
+|\mu_{2r+1}^{(N)}|\,(\rho_{\toy}Q^2)^{-(2r+1)}.
 \]
-Since $N=\lfloor \alpha Q\rfloor$ with $0<\alpha<\rho_{\toy}$, this tail
-is exponentially small in $Q$; in particular,
+Now apply Lemma~\ref{lem:n-point-odd-generating-function} with
+\[
+x=\rho_{\toy}Q^2.
+\]
+For all sufficiently large $Q$, one has $x>N$, and therefore
+\[
+\sum_{r\ge N-1}
+|\mu_{2r+1}^{(N)}|\,(\rho_{\toy}Q^2)^{-(2r+1)}
+=
+(2N-1)N!(N-1)!(\rho_{\toy}Q^2)^2
+\frac{\Gamma(\rho_{\toy}Q^2-N)}{\Gamma(\rho_{\toy}Q^2+N+1)}.
+\]
+Since $N=\lfloor \alpha Q\rfloor$ and $x=\rho_{\toy}Q^2$, Stirling's
+formula gives
+\[
+(2N-1)N!(N-1)!(\rho_{\toy}Q^2)^2
+\frac{\Gamma(\rho_{\toy}Q^2-N)}{\Gamma(\rho_{\toy}Q^2+N+1)}
+=
+\exp\!\bigl(-2\alpha Q\log Q+O(Q)\bigr).
+\]
+In particular, the residual odd toy tail is super-exponentially small on the
+$Q$-scale:
 \[
 \sum_{r\ge N-1}
 |b_{2r+1}(u,d)|\frac{|\mu_{2r+1}^{(N)}|}{Q^{4r+2}}
-\ll e^{-cQ}
+\ll
+\exp\!\bigl(-2\alpha Q\log Q+O(Q)\bigr).
 \]
-for some $c>0$.
 
 Combining the constant, even, and odd contributions,
 \[
@@ -3743,6 +3876,18 @@ every compact interval $D\subset(0,\infty)$, the final estimate
 \]
 follows.
 \end{proof}
+
+\begin{remark}[The toy odd tail is negligible beyond all $e^{-cQ}$-scales]
+\label{rem:toy-odd-tail-superexp}
+The proof of Proposition~\ref{prop:toy-n-point-direct} shows more than the
+$O(u^4)$ preservation statement used later: after $N$-point cancellation,
+the residual odd toy tail is of size
+\[
+\exp\!\bigl(-2\alpha Q\log Q+O(Q)\bigr).
+\]
+Thus on the toy side the $N$-point odd leakage is not merely exponentially
+small in $Q$; it is negligible beyond every $e^{-cQ}$-scale.
+\end{remark}
 
 On the toy side, Proposition~\ref{prop:toy-n-point-direct} gives
 \begin{equation}\label{eq:Xi-toy}
