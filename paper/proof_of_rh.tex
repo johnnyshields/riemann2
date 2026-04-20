@@ -2299,7 +2299,7 @@ admits an expansion
 H_m(z/Q^2)
 =
 \sum_{r\ge 0} c_{2r+1}(m)\frac{z^{2r+1}}{Q^{2r+4}},
-\qquad |z|<\rho_0,
+\qquad |z|<\rho_0Q,
 \]
 with
 \[
@@ -2412,188 +2412,181 @@ upper-left entry of $S_Q$ and one factor $Q^{-3/2}$ from the lower-right
 entry of $S_Q$, hence a total matrix-level factor $Q^{-2}$.
 \end{proof}
 
-\begin{proposition}[Coefficient-Banach-algebra corrected-whitening transfer]
+\begin{proposition}[Uniform scaled corrected-whitening transfer]
 \label{prop:differentiated-whitening-transfer}
-Let
+Fix $0<c_*<\rho_0/8$. For every $Q$ and every radius $R$ satisfying
 \[
-z:=Q^2 s,
-\qquad
-0<R<\rho_0 Q,
-\]
-and let $\|\cdot\|$ be any fixed submultiplicative norm on $M_2(\mathbb C)$.
-Define the matrix Wiener algebra
-\[
-\mathcal A_R(M_2)
-:=
-\left\{
-F(z)=\sum_{n\ge 0}F_n z^n:
-\|F\|_R:=\sum_{n\ge 0}\|F_n\|R^n<\infty
-\right\}.
-\]
-Let
-\[
-\widehat G_\pm^{(0)}(z):=\widehat G_\pm^{(0)}(z/Q^2),
-\qquad
-\widehat N^{(0)}(z):=\widehat N^{(0)}(z/Q^2),
-\]
-and for a perturbation triple
-\[
-\mathbf U=(U_-,V,U_+)\in \mathcal A_R(M_2)^3,
+0<R\le c_*Q,
 \]
 set
 \[
-\mathfrak F_R(\mathbf U)
-:=
-\widehat\Phi\!\Bigl(
-\mathcal W\bigl(\widehat G_-^{(0)}+U_-,\,\widehat N^{(0)}+V,\,\widehat G_+^{(0)}+U_+\bigr)
-\Bigr)
--
-\widehat H_0,
-\]
-where
-\[
-\widehat H_0
-:=
-\widehat\Phi\!\Bigl(
-\mathcal W\bigl(\widehat G_-^{(0)},\,\widehat N^{(0)},\,\widehat G_+^{(0)}\bigr)
-\Bigr).
-\]
-
-Then for every fixed $R<\rho_0Q$, the map $\mathfrak F_R$ is analytic on a
-neighborhood of the origin in $\mathcal A_R(M_2)^3$. Consequently there
-exist constants $C_R,B_R>0$ and continuous homogeneous maps
-\[
-\mathfrak M_{p,R}:\mathcal A_R(M_2)^3\to \mathcal A_R(\mathbb C),
-\qquad p\ge 1,
-\]
-such that
-\[
-\mathfrak F_R(\mathbf U)=\sum_{p\ge 1}\mathfrak M_{p,R}(\mathbf U)
-\]
-with absolute convergence in $\mathcal A_R(\mathbb C)$, and
-\[
-\|\mathfrak M_{p,R}(\mathbf U)\|_R
-\le
-C_R B_R^p
-\bigl(\|U_-\|_R+\|V\|_R+\|U_+\|_R\bigr)^p.
-\]
-
-Moreover, if
-\[
-U_\pm(z)=\sum_{m\ge 0}U_{\pm,m}z^m,
+w:=\frac{z}{R},
 \qquad
-V(z)=\sum_{m\ge 0}V_m z^m,
+s=\frac{z}{Q^2}=\frac{Rw}{Q^2}.
+\]
+Let
+\[
+\mathfrak D_Q(M):=
+\begin{pmatrix}
+Q^2 m_{11} & Q m_{12}\\
+Q m_{21} & m_{22}
+\end{pmatrix},
+\qquad
+\mathfrak D_Q^{-1}(X)=
+\begin{pmatrix}
+Q^{-2}x_{11} & Q^{-1}x_{12}\\
+Q^{-1}x_{21} & x_{22}
+\end{pmatrix}.
+\]
+
+Write the baseline corrected same-point and mixed blocks on the $w$-disk as
+\[
+G^{(0)}_{\pm;Q,R}(w):=G_\pm^{(0)}(Rw/Q^2),
+\qquad
+N^{(0)}_{Q,R}(w):=N^{(0)}(Rw/Q^2).
+\]
+For a weighted perturbation triple
+\[
+X=(X_-,Y,X_+)\in A_1(M_2)^3,
+\]
+define
+\[
+\delta G_\pm:=\mathfrak D_Q^{-1}X_\pm,
+\qquad
+\delta N:=\mathfrak D_Q^{-1}Y,
 \]
 and
 \[
-\mathfrak M_{p,R}(\mathbf U)(z)=\sum_{n\ge 0}Y_{p,n}z^n,
+\mathcal T_{Q,R}(X)(w)
+:=
+\frac{Q}{Rw}\,
+\Phi_K\!\left(
+\mathcal W\bigl(
+G^{(0)}_{-;Q,R}+\delta G_-,
+N^{(0)}_{Q,R}+\delta N,
+G^{(0)}_{+;Q,R}+\delta G_+
+\bigr)
+-
+\mathcal W\bigl(
+G^{(0)}_{-;Q,R},
+N^{(0)}_{Q,R},
+G^{(0)}_{+;Q,R}
+\bigr)
+\right).
+\]
+
+Then there exist absolute constants
+\[
+\eta>0,\qquad C>0,\qquad B>0
+\]
+such that for every $Q$, every $0<R\le c_*Q$, and every
+\[
+X\in A_1(M_2)^3
+\qquad\text{with}\qquad
+\|X_-\|_{A_1}+\|Y\|_{A_1}+\|X_+\|_{A_1}\le \eta,
+\]
+the map $\mathcal T_{Q,R}(X)$ is holomorphic on $|w|<1$ and admits an
+absolutely convergent homogeneous expansion
+\[
+\mathcal T_{Q,R}(X)=\sum_{p\ge 1}\mathcal T_p(X),
+\]
+with
+\[
+\|\mathcal T_p(X)\|_{A_1}
+\le
+C B^p
+\bigl(\|X_-\|_{A_1}+\|Y\|_{A_1}+\|X_+\|_{A_1}\bigr)^p.
+\]
+The constants $C,B,\eta$ are independent of $Q$ and $R$.
+
+Moreover, if
+\[
+X_\pm(w)=\sum_{m\ge 0}X_{\pm,m}w^m,
+\qquad
+Y(w)=\sum_{m\ge 0}Y_m w^m,
+\]
+and
+\[
+\mathcal T_p(X)(w)=\sum_{n\ge 0} T_{p,n}w^n,
 \]
 then with
 \[
-\mathbf U_m:=\max\!\bigl(\|U_{-,m}\|,\|V_m\|,\|U_{+,m}\|\bigr),
+\mathbf X_m:=\max\!\bigl(\|X_{-,m}\|,\|Y_m\|,\|X_{+,m}\|\bigr),
 \]
-one has the triangular coefficient bound
+one has the coefficient bound
 \[
 \boxed{
-|Y_{p,n}|
+|T_{p,n}|
 \le
-C_R B_R^p
-\sum_{M\le n}R^{-(n-M)}
+C B^p
+\sum_{M\le n}
 \sum_{\substack{m_1+\cdots+m_p=M\\ m_i\ge 0}}
-\prod_{i=1}^p \mathbf U_{m_i}.
+\prod_{i=1}^p \mathbf X_{m_i}.
 }
 \]
 \end{proposition}
 
 \begin{proof}
-By Lemma~\ref{lem:baseline-scaled-matrix-gain}, the baseline blocks remain
-uniformly bounded on $|s|<\rho_0/Q$, and the same-point baseline blocks stay
-uniformly positive definite there. Passing to the $z$-variable, the same is
-true on every disk $|z|<R<\rho_0Q$. Therefore
+On $|w|\le 2$,
 \[
-(\widehat G,\widehat N,\widehat G_+)
+\left|\frac{Rw}{Q^2}\right|
+\le \frac{2R}{Q^2}
+\le \frac{2c_*}{Q}
+<\frac{\rho_0}{Q},
+\]
+so the baseline blocks
+\[
+G^{(0)}_{\pm;Q,R}(w),\qquad N^{(0)}_{Q,R}(w)
+\]
+are holomorphic and uniformly bounded on $|w|\le 2$, with bounds
+independent of $Q$ and $R$. By
+Lemma~\ref{lem:baseline-scaled-matrix-gain}, the same-point baseline blocks
+remain uniformly positive definite there.
+
+Therefore the corrected-whitening map
+\[
+(\delta G_-,\delta N,\delta G_+)
 \longmapsto
-\widehat\Phi\!\bigl(\widehat G_-^{-1/2}\widehat N\,\widehat G_+^{-1/2}\bigr)
+\mathcal W\bigl(
+G^{(0)}_{-;Q,R}+\delta G_-,
+N^{(0)}_{Q,R}+\delta N,
+G^{(0)}_{+;Q,R}+\delta G_+
+\bigr)
 \]
-is analytic on a neighborhood of the baseline triple in the Banach algebra
-$\mathcal A_R(M_2)^3$, since the inverse-square-root map is holomorphic by
-functional calculus and $\widehat\Phi$ is linear.
+is analytic on a fixed Banach neighborhood in $A_1(M_2)^3$, uniformly in
+$Q,R$. Since $\Phi_K$ is linear and the corrected perturbation is odd in
+$z$, the quotient by $w$ in the definition of $\mathcal T_{Q,R}$ is
+holomorphic. This gives the homogeneous expansion with uniform constants
+$C,B,\eta$.
 
-Hence $\mathfrak F_R$ admits a convergent homogeneous expansion
+The coefficient bound follows by testing the homogeneous maps on monomials in
+$A_1$ and using
 \[
-\mathfrak F_R(\mathbf U)=\sum_{p\ge 1}\mathfrak M_{p,R}(\mathbf U),
+|[w^n]F|\le \|F\|_{A_1}.
 \]
-with
-\[
-\|\mathfrak M_{p,R}(\mathbf U)\|_R
-\le
-C_R B_R^p
-\bigl(\|U_-\|_R+\|V\|_R+\|U_+\|_R\bigr)^p.
-\]
-
-To extract coefficient kernels, test $\mathfrak M_{p,R}$ on monomials. If
-\[
-U_-(z)=M_- z^{m_-},\qquad V(z)=M_V z^{m_V},\qquad U_+(z)=M_+ z^{m_+},
-\]
-then
-\[
-\|M z^m\|_R=\|M\|R^m,
-\qquad
-|[z^n]F|\le R^{-n}\|F\|_R.
-\]
-Applying these to the homogeneous expansion and summing over all placements of
-the input coefficients gives the displayed triangular bound.
 \end{proof}
 
-\begin{proposition}[Kernel-class decomposition for one-pair perturbations]
+\begin{proposition}[Pair-radius kernel-class decomposition for one-pair perturbations]
 \label{prop:one-pair-symbolic-coefficient-decomposition}
-Fix $0<c_0<\rho_0/4$ and put
+Fix $0<c_*<\rho_0/8$ and $0<c\ll 1$. For one exterior zero pair $\rho$,
+set
 \[
-R:=c_0Q.
+\Delta_\rho:=|2m-\gamma_\rho|,
+\qquad
+R_\rho:=c\,\min(\Delta_\rho,c_*Q).
 \]
-Let $\rho$ be one exterior zero pair at absolute distance
-\[
-\Delta:=|2m-\gamma_\rho|
-\]
-from the local center, and set
-\[
-r_\Delta:=\min\{\Delta,R\}.
-\]
-
-Define the baseline class $\mathcal B_R$ to consist of scalar holomorphic
-germs $B(z)$ on $|z|<2R$ satisfying
-\[
-|B(z)|\ll 1
-\qquad (|z|\le 2R),
-\]
-and define the pair-kernel class $\mathcal K_{\Delta,R}$ to consist of scalar
-holomorphic germs $K(z)$ on $|z|<2r_\Delta$ satisfying
-\[
-|K(z)|\ll \Delta^{-4}
-\qquad (|z|\le 2r_\Delta).
-\]
-Further, let $\mathcal L_{\Delta,R}$ denote the class of finite sums of
-monomials
-\[
-P(z/Q)\,B(z)\,K(z),
-\]
-and let $\mathcal N_{\Delta,R}$ denote the class of finite sums of monomials
-\[
-P(z/Q)\,B(z)\,K_1(z)\cdots K_p(z),
-\qquad p\ge 2,
-\]
-where $P$ is a fixed polynomial, $B\in\mathcal B_R$, and each
-$K,K_i\in\mathcal K_{\Delta,R}$.
 
 Let $f_\rho(t)$ denote the one-pair phase-derivative contribution, and remove
 its midpoint affine jet:
 \[
 r_\rho(t):=f_\rho(t)-f_\rho(m)-f_\rho'(m)(t-m).
 \]
-Set
+With
 \[
 t_\pm:=m\pm \frac{z}{2Q^2},
-\qquad
+\]
+define
+\[
 d_\pm(z):=r_\rho(t_\pm),
 \qquad
 e_\pm(z):=r_\rho'(t_\pm),
@@ -2602,9 +2595,7 @@ g_\pm(z):=r_\rho''(t_\pm),
 \]
 and
 \[
-\eta(z):=\delta\Delta_\rho(z/Q^2)
-:=
-\int_{t_+}^{t_-} r_\rho(u)\,du.
+\eta(z):=\delta\Delta_\rho(z/Q^2):=\int_{t_+}^{t_-} r_\rho(u)\,du.
 \]
 Then there exist holomorphic kernels $U_\pm,E_\pm,G_\pm,V$ such that
 \[
@@ -2614,207 +2605,227 @@ e_\pm(z)=\frac{z}{Q^2}E_\pm(z),
 \qquad
 g_\pm(z)=G_\pm(z),
 \qquad
-\eta(z)=\frac{z^3}{Q^6}V(z),
-\]
-and for every fixed $H_*>1$, if $\Delta\ge H_*$, then
-\[
-U_\pm,E_\pm,G_\pm,V\in \mathcal K_{\Delta,R}.
+\eta(z)=\frac{z^3}{Q^6}V(z).
 \]
 
-Let $D_Q:=\mathrm{diag}(Q,1)$, and let $W_\rho(z)$ denote the triple of
-one-pair perturbation blocks entering
-Proposition~\ref{prop:differentiated-whitening-transfer}, after conjugation by
-$D_Q$ on each block. Then every entry of every block of $W_\rho(z)$ lies in
+For every fixed $H_*>1$, if $\Delta_\rho\ge H_*$, then
 \[
-\mathcal L_{\Delta,R}+\mathcal N_{\Delta,R}.
+U_\pm,\ E_\pm,\ G_\pm,\ V
 \]
-Consequently,
+are holomorphic on $|z|<2R_\rho$ and satisfy
 \[
-\boxed{
-\|[z^n]W_\rho(z)\|
+\|U_\pm\|_{A_{R_\rho}}+
+\|E_\pm\|_{A_{R_\rho}}+
+\|G_\pm\|_{A_{R_\rho}}+
+\|V\|_{A_{R_\rho}}
 \ll
-\begin{cases}
-\Delta^{-(n+4)}, & H_*\le \Delta\le R,\\[1ex]
-R^{-n}\Delta^{-4}, & \Delta>R,
-\end{cases}
-\qquad n\ge 0.
-}
+\Delta_\rho^{-4}.
+\]
+
+Let
+\[
+X_\rho:=(X_{\rho,-},Y_\rho,X_{\rho,+})
+\]
+be the weighted one-pair perturbation triple
+\[
+X_{\rho,\pm}:=\mathfrak D_Q(\delta G_{\rho,\pm}),
+\qquad
+Y_\rho:=\mathfrak D_Q(\delta N_\rho),
+\]
+where $\delta G_{\rho,\pm}$ and $\delta N_\rho$ are the actual one-pair
+perturbations of the corrected same-point and mixed blocks in the draft.
+
+Then, on $|z|<2R_\rho$, every entry of every block of $X_\rho(z)$ is
+linear in
+\[
+U_-,\ U_+,\ E_-,\ E_+,\ G_-,\ G_+,\ V
+\]
+modulo terms containing at least two such pair kernels. In particular,
+\[
+\|X_\rho(z/R_\rho)\|_{A_1}\ll \Delta_\rho^{-4}.
 \]
 \end{proposition}
 
 \begin{proof}
-The one-pair denominator poles are at distance $\asymp \Delta$ in the
-$s$-plane, hence at distance $\asymp Q^2\Delta$ in the $z$-plane. Since
-the midpoint affine jet has been removed, the displayed divisibilities by
-$z^2$, $z$, and $z^3$ are immediate, and Cauchy on the disk
-$|z|<2r_\Delta$ gives
+The one-pair poles lie at distance $\asymp \Delta_\rho$ in the $s$-plane,
+hence at distance $\asymp Q^2\Delta_\rho$ in the $z$-plane. Since
 \[
-U_\pm,E_\pm,G_\pm,V\in \mathcal K_{\Delta,R}.
+R_\rho\ll \min(\Delta_\rho,Q),
 \]
+the kernels $U_\pm,E_\pm,G_\pm,V$ are holomorphic on $|z|<2R_\rho$, and
+Cauchy gives the displayed $A_{R_\rho}$-bounds.
 
-Every baseline factor appearing in the corrected same-point and mixed formulas
-is holomorphic and uniformly bounded on $|z|<2R$, hence belongs to
-$\mathcal B_R$. Since $r_\Delta\le R=c_0Q$, every polynomial $P(z/Q)$ is
-uniformly bounded on $|z|\le 2r_\Delta$.
+Now check the actual corrected formulas.
 
-For the corrected same-point block, after conjugation by $D_Q$, the entries
-are polynomial expressions in
+For the corrected same-point block,
 \[
-(z/Q)^2U_\pm,\qquad (z/Q)E_\pm,\qquad G_\pm
+G_{m,\pm}^{\corr}(s)=\frac1\pi
+\begin{pmatrix}
+2q(t_\pm) & \frac12 q'(t_\pm)\\[1ex]
+\frac12 q'(t_\pm) & \frac1{12}\bigl(q''(t_\pm)+2q(t_\pm)^3\bigr)
+\end{pmatrix}.
 \]
-with coefficients in $\mathcal B_R$. Therefore each same-point entry lies in
-$\mathcal L_{\Delta,R}+\mathcal N_{\Delta,R}$.
+Subtracting the baseline and using
+\[
+q=q_0+d_\pm,\qquad q'=q_0'+e_\pm,\qquad q''=q_0''+g_\pm,
+\]
+the weighted perturbation entries are:
+\[
+(1,1)\sim (z/Q)^2U_\pm,
+\qquad
+(1,2),(2,1)\sim (z/Q)E_\pm,
+\]
+and
+\[
+(2,2)\sim
+G_\pm
++
+\Bigl(\frac{q_0}{Q}\Bigr)^2 (z/Q)^2U_\pm
++
+\Bigl(\frac{q_0}{Q}\Bigr)(z/Q)^4U_\pm^2
++
+(z/Q)^6U_\pm^3.
+\]
+On $|z|\le 2R_\rho$, the normalized baseline factors
+\[
+\frac{q_0 z}{Q^2},\qquad \frac{q_0^2 z^2}{Q^4}
+\]
+are $O(1)$, so the same-point block is linear in the pair kernels modulo
+terms with at least two pair kernels.
 
-For the corrected mixed block, write
+For the corrected mixed block,
+\[
+N_m^{\corr}(s)=\frac1\pi
+\begin{pmatrix}
+-\dfrac{2\sin\Delta}{s}
+&
+\dfrac{\sin\Delta+q(t_+)s\cos\Delta}{s^2}
+\\[2ex]
+-\dfrac{\sin\Delta+q(t_-)s\cos\Delta}{s^2}
+&
+\dfrac{(q(t_-)+q(t_+))s\cos\Delta+(2-q(t_-)q(t_+)s^2)\sin\Delta}{2s^3}
+\end{pmatrix}.
+\]
+Write
 \[
 q_\pm=q_{0,\pm}+d_\pm,
 \qquad
 \Delta=\Delta_0+\eta.
 \]
-The $(1,1)$-entry and off-diagonal entries are obtained from the explicit
-mixed-block formulas by dividing numerators that are respectively divisible by
-$s^3$ and $s^3$, because $d_\pm=s^2u_\pm$ and $\eta=s^3v$. Thus, after
-conjugation by $D_Q$, these entries are finite sums of baseline factors times
-$U_\pm$ and $V$, plus terms containing at least two pair kernels; hence they
-lie in $\mathcal L_{\Delta,R}+\mathcal N_{\Delta,R}$.
 
-For the mixed $(2,2)$-entry, define
+For the $(1,1)$-entry, since $\eta=s^3v$,
 \[
-F(q_-,q_+,\Delta;s)
-:=
-(q_-+q_+)s\cos\Delta+(2-q_-q_+s^2)\sin\Delta.
+Q^2\frac{\sin(\Delta_0+\eta)-\sin\Delta_0}{s}
+\]
+is linear in $V$ modulo higher pair order.
+
+For the off-diagonal entries, the numerator difference is
+\[
+(\sin(\Delta_0+\eta)-\sin\Delta_0)
++d_\pm s\cos(\Delta_0+\eta)
++q_{0,\pm}s(\cos(\Delta_0+\eta)-\cos\Delta_0),
+\]
+and after multiplying by $Q/s^2$ the linear terms are bounded-baseline times
+$U_\pm$ and $V$.
+
+For the $(2,2)$-entry, define
+\[
+F(q_-,q_+,\Delta;s):=(q_-+q_+)s\cos\Delta+(2-q_-q_+s^2)\sin\Delta.
 \]
 Then the perturbation is
 \[
 \frac{
-F(q_{0,-}+d_-,\,q_{0,+}+d_+,\,\Delta_0+\eta;s)
+F(q_{0,-}+d_-,q_{0,+}+d_+,\Delta_0+\eta;s)
 -
-F(q_{0,-},\,q_{0,+},\,\Delta_0;s)
+F(q_{0,-},q_{0,+},\Delta_0;s)
 }{s^3}.
 \]
-Taylor expansion in the increment vector
+Taylor expansion in $(d_-,d_+,\eta)$ around the baseline gives
 \[
-\delta\mathbf x:=(d_-,d_+,\eta)
+\partial_{q_-}F_0\,d_-+\partial_{q_+}F_0\,d_++\partial_\Delta F_0\,\eta
 \]
-around the baseline point
+plus a remainder quadratic in $(d_-,d_+,\eta)$. After dividing by $s^3$,
+the linear part is
 \[
-(q_{0,-},q_{0,+},\Delta_0)
+B_-(s)u_-(s)+B_+(s)u_+(s)+B_\Delta(s)v(s),
 \]
-gives
-\[
-F(\mathbf x_0+\delta\mathbf x)-F(\mathbf x_0)
-=
-\partial_{q_-}F_0\,d_-
-+
-\partial_{q_+}F_0\,d_+
-+
-\partial_\Delta F_0\,\eta
-+
-R_2,
-\]
-where $R_2$ is quadratic and higher in $(d_-,d_+,\eta)$, and
-\[
-\partial_{q_-}F
-=
-s\cos\Delta-q_+s^2\sin\Delta,
-\]
-\[
-\partial_{q_+}F
-=
-s\cos\Delta-q_-s^2\sin\Delta,
-\]
-\[
-\partial_\Delta F
-=
--(q_-+q_+)s\sin\Delta+(2-q_-q_+s^2)\cos\Delta.
-\]
-Dividing by $s^3$ and using $d_\pm=s^2u_\pm$, $\eta=s^3v$, the linear
-part becomes
-\[
-B_-(s)\,u_-(s)+B_+(s)\,u_+(s)+B_\Delta(s)\,v(s),
-\]
-with $B_-,B_+,B_\Delta\in\mathcal B_R$. Thus the linear part lies in
-$\mathcal L_{\Delta,R}$. Every monomial in $R_2$ contains at least two
-factors among $d_-,d_+,\eta$, hence after division by $s^3$ it contains at
-least two pair kernels; therefore $R_2/s^3\in \mathcal N_{\Delta,R}$. This
-proves that the mixed $(2,2)$-entry also lies in
-$\mathcal L_{\Delta,R}+\mathcal N_{\Delta,R}$.
+with bounded baseline coefficients, and the remainder carries at least two pair
+kernels.
 
-Thus every entry of every weighted one-pair perturbation block lies in
-$\mathcal L_{\Delta,R}+\mathcal N_{\Delta,R}$. If $H\in\mathcal L_{\Delta,R}$,
-then by Cauchy
+So every weighted mixed-block entry is also linear in the pair kernels modulo
+higher pair order.
+
+Finally, on $|z|\le 2R_\rho$, every factor $z/Q$ is $O(1)$, every
+normalized baseline factor is $O(1)$, and each pair kernel has $A_{R_\rho}$
+norm $O(\Delta_\rho^{-4})$. Therefore
 \[
-[z^n]H \ll r_\Delta^{-n}\Delta^{-4}.
+\|X_\rho(z/R_\rho)\|_{A_1}\ll \Delta_\rho^{-4}.
 \]
-If $H\in\mathcal N_{\Delta,R}$, then
-\[
-[z^n]H \ll r_\Delta^{-n}\Delta^{-8},
-\]
-since every nonlinear monomial carries at least two pair kernels. Hence for
-$\Delta\ge H_*$, the nonlinear class is dominated by the linear one, and
-\[
-\|[z^n]W_\rho(z)\|
-\ll
-r_\Delta^{-n}\Delta^{-4}
-=
-\begin{cases}
-\Delta^{-(n+4)}, & H_*\le \Delta\le R,\\[1ex]
-R^{-n}\Delta^{-4}, & \Delta>R.
-\end{cases}
-\]
-This is the claimed bound.
 \end{proof}
 
 \begin{corollary}[Single-pair exterior odd-coefficient bound]
 \label{cor:single-pair-odd-jet}
-Fix $0<c_*<\rho_0/4$. Let $h_\rho(s)$ be the corrected transverse scalar
-contributed by one exterior zero pair at absolute distance $\Delta$, after
-the same fixed-core decomposition, midpoint affine subtraction, corrected
-same-point/mixed blocks, corrected whitening, and scalar normalization used in
-the global argument. Write
+Fix $0<c_*<\rho_0/8$. Let $h_\rho(s)$ be the corrected transverse scalar
+contributed by one exterior zero pair at absolute distance
+\[
+\Delta_\rho:=|2m-\gamma_\rho|,
+\]
+and write
 \[
 h_\rho(z/Q^2)
 =
 \sum_{r\ge 0} a_{2r+1}(\rho)\,\frac{z^{2r+1}}{Q^{2r+4}}.
 \]
-Then for every $r\ge 0$,
+Then for every fixed $H_*>1$, if $\Delta_\rho\ge H_*$, one has
 \[
 \boxed{
 |a_{2r+1}(\rho)|
 \ll
 \frac{1}{Q}
 \begin{cases}
-\Delta^{-(2r+4)}, & H_*\le \Delta\le c_*Q,\\[1ex]
-(c_*Q)^{-2r}\Delta^{-4}, & \Delta>c_*Q.
+\Delta_\rho^{-(2r+4)}, & \Delta_\rho\le c_*Q,\\[1ex]
+(c_*Q)^{-2r}\Delta_\rho^{-4}, & \Delta_\rho>c_*Q.
 \end{cases}
 }
 \]
 \end{corollary}
 
 \begin{proof}
-Apply Proposition~\ref{prop:differentiated-whitening-transfer} with
-$R=c_*Q$ to the one-pair perturbation triple from
-Proposition~\ref{prop:one-pair-symbolic-coefficient-decomposition}. The
-triangular coefficient bound convolves the baseline radius $R$ with the
-one-pair coefficient bounds. The linear term therefore has exactly the same
-hybrid near/far behavior as the input:
+Let
 \[
-[z^{2r}]\,\widehat g_\rho(z)
-\ll
-\begin{cases}
-\Delta^{-(2r+4)}, & H_*\le \Delta\le c_*Q,\\[1ex]
-(c_*Q)^{-2r}\Delta^{-4}, & \Delta>c_*Q,
-\end{cases}
+R_\rho:=c\,\min(\Delta_\rho,c_*Q).
 \]
-for the normalized even germ
+By Proposition~\ref{prop:one-pair-symbolic-coefficient-decomposition},
 \[
-\widehat g_\rho(z):=\frac{Q^3}{z}\,h_\rho(z/Q^2).
+\|X_\rho(z/R_\rho)\|_{A_1}\ll \Delta_\rho^{-4}.
 \]
-By Proposition~\ref{prop:one-pair-symbolic-coefficient-decomposition}, the
-input perturbation triple lies in $\mathcal L_{\Delta,R}+\mathcal
-N_{\Delta,R}$, and the nonlinear part is smaller by an additional factor
-$\Delta^{-4}$ once $\Delta\ge H_*$. Undoing the definition of
-$\widehat g_\rho$ gives the displayed bound for $a_{2r+1}(\rho)$.
+For $H_*$ large enough, this lies inside the uniform small ball from
+Proposition~\ref{prop:differentiated-whitening-transfer}. Therefore the
+normalized even germ
+\[
+g_\rho(z):=\frac{Q^3}{z}\,h_\rho(z/Q^2)
+\]
+satisfies
+\[
+\|g_\rho(R_\rho\cdot)\|_{A_1}\ll \Delta_\rho^{-4}.
+\]
+Hence
+\[
+[z^{2r}]\,g_\rho(z)\ll R_\rho^{-2r}\Delta_\rho^{-4}.
+\]
+Since
+\[
+g_\rho(z)=\sum_{r\ge 0}\frac{a_{2r+1}(\rho)}{Q^{2r+1}}\,z^{2r},
+\]
+this gives
+\[
+|a_{2r+1}(\rho)|\ll Q^{2r+1}R_\rho^{-2r}\Delta_\rho^{-4}.
+\]
+Using
+\[
+R_\rho\asymp \min(\Delta_\rho,c_*Q)
+\]
+yields the displayed hybrid bound.
 \end{proof}
 
 \begin{lemma}[Local zero-counting in dyadic shells]
