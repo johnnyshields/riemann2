@@ -9596,28 +9596,33 @@ u_5=\alpha\,v_5+\beta\,c.
 This proves the claim.
 \end{proof}
 
-\begin{corollary}[Automatic $u_5$-patch nontriviality on good $M$-intervals]
-\label{cor:automatic-u5-patch-nontriviality-good-M-intervals}
-On every connected interval
+\begin{corollary}[Automatic $u_5$-patch on a good $M\neq 0$ interval]
+\label{cor:automatic-u5-patch-on-good-M-interval}
+Let $J$ be a connected open interval on which
 \[
-J\subset\{c\neq 0,\ M\neq 0\},
+c\neq 0,
+\qquad
+M\neq 0.
 \]
-one has
+Then $u_5\not\equiv 0$ on $J$. Consequently, every connected component of
 \[
-u_5\not\equiv 0
-\qquad\text{on }J.
+J\setminus u_5^{-1}(0)
 \]
-Hence, after removing the isolated zeros of $u_5$, the parallel $u_5$-patch is
-always available on smaller subintervals of $J$.
+is a valid local $u_5$-patch in the sense of
+Remark~\ref{rem:parallel-u5-patch-version}.
 \end{corollary}
 
 \begin{proof}
-If $u_5\equiv 0$ on $J$, then
+If $u_5\equiv 0$ on $J$, then the three functions
 \[
 1,\qquad \frac{u_5}{c},\qquad \frac{v_5}{c}
 \]
-would be linearly dependent on $J$, contradicting
-Proposition~\ref{prop:linear-independence-one-u5-over-c-v5-over-c}.
+would be linearly dependent, contradicting
+Proposition~\ref{prop:linear-independence-one-u5-over-c-v5-over-c}. Thus
+$u_5\not\equiv 0$ on $J$, so its zeros are isolated and each connected
+component of $J\setminus u_5^{-1}(0)$ lies in $\{c\neq 0,\ u_5\neq 0\}$.
+The parallel $u_5$-patch geometry then follows from
+Remark~\ref{rem:parallel-u5-patch-version}.
 \end{proof}
 
 \begin{proposition}[Non-affinity of the lifted septic scalar]
@@ -10004,6 +10009,40 @@ Differentiating in the $x$-coordinate yields
 \]
 Thus the lifted $4$-point branch may be viewed equivalently as a
 parity/divisibility problem for the Wronskian ratio $J_{u_5}/J_{\lambda}$.
+\end{remark}
+
+\begin{remark}[Determinant-level parity on a centered good patch]
+\label{rem:determinant-level-parity-centered-good-patch}
+Assume the centered scalar package from
+Remark~\ref{rem:centered-symmetric-placement-taylor-package} and suppose that
+$x=v_5/c$ is being used as the induced odd collision-side coordinate.
+Then
+\[
+u_5,\ \lambda:=\frac{\Delta_7}{v_5}\ \text{are odd in }s,
+\qquad
+c\ \text{is even in }s,
+\qquad
+v_5\ \text{is odd in }s.
+\]
+Hence the rows of the defining determinants for $J_{u_5}$ and $J_\lambda$
+have parities
+\[
+(e,o,o),\qquad (o,e,e),\qquad (e,o,o),
+\]
+so each determinant monomial is odd. Therefore
+\[
+J_{u_5}(s)\ \text{and}\ J_\lambda(s)\ \text{are odd in }s.
+\]
+Consequently,
+\[
+\mathcal Z=\frac{J_{u_5}}{J_\lambda}
+\]
+is even and
+\[
+\mathcal R=\mathcal Z'
+\]
+is odd, in agreement with the parity package obtained from the direct
+$Y''/S''$-analysis.
 \end{remark}
 
 \begin{remark}[A second below-lifted ratio does not add a new obstruction]
@@ -11012,6 +11051,36 @@ solution is $\delta u=\delta\alpha\equiv 0$. If its determinant vanishes
 identically, then $\Delta_5\equiv 0$.
 \end{proof}
 
+\begin{corollary}[Total centered quintic collapse forces total canonical transport collapse]
+\label{cor:total-centered-quintic-collapse-forces-total-transport-collapse}
+If
+\[
+u_5\equiv 0,
+\qquad
+v_5\equiv 0
+\]
+on the centered branch, then
+\[
+A_5^{\mathfrak f}\equiv 0,
+\qquad
+\Delta_7\equiv 0.
+\]
+In particular, total centered quintic collapse forces collapse of the canonical
+quintic/septic transport package on that branch.
+\end{corollary}
+
+\begin{proof}
+The identity
+\[
+A_5^{\mathfrak f}=u_5 I+v_5 S
+\]
+gives $A_5^{\mathfrak f}\equiv 0$ immediately. Likewise
+\[
+\Delta_7=u_{7,K_1}v_5-u_5v_{7,K_1}
+\]
+vanishes identically when $u_5\equiv v_5\equiv 0$.
+\end{proof}
+
 \begin{lemma}[Centered tagged quintic witness survives specialization]
 \label{lem:centered-tagged-quintic-witness-survives-specialization}
 On the tagged slice
@@ -11085,9 +11154,9 @@ U_{12}=-\frac{u}{ab(a+b)}\neq 0,
 \qquad
 V_{22}=-\frac{d}{2b^3}\neq 0.
 \]
-Here $U_{12}$ is exactly the tagged $\eta_2$-slice of the off-diagonal channel
-$v_0$, while $V_{22}$ is exactly the tagged $q^{(5)}$-slice of the diagonal
-difference $\gamma-\alpha=2\delta\alpha_1$. Thus the tagged coefficient of
+Here $U_{12}$ supplies the tagged $\eta_2$-contribution to the off-diagonal
+channel $v_0$, while $V_{22}$ supplies the tagged $q^{(5)}$-contribution
+to the diagonal-difference channel $\gamma-\alpha=2\delta\alpha_1$. Thus the tagged coefficient of
 $v_0\,\delta\alpha_1$ is nonzero. Therefore the tagged coefficient of $U_1$
 is nonzero as well.
 \end{proof}
@@ -11537,11 +11606,11 @@ E_{\ge2}^{(3)},\qquad E_{\ge2}^{(5)},\qquad \overline E_{\ge2}^{(7)};
 \item global continuation / recurrence control for the unique odd-order
 three-point branch;
 
-\item a theorem-level promotion of the centered quintic nontriviality
-\[
-A_5^{\mathfrak f}(s)\not\equiv 0
-\]
-to a punctured-arc quintic-patch dichotomy on the mixed side;
+\item exploitation of the now-established punctured-arc quintic-patch
+dichotomy on the mixed side: if the $v_5$-patch opens, carry out the
+finite-jet parity transfer there; if instead only the $u_5$-patch opens,
+develop the parallel $u_5$-patch geometry as a genuine fallback local
+setting;
 
 \item a centered-to-patch bridge strong enough to promote the centered
 collision-side parity package to the good-patch $x=v_5/c$ geometry on the
@@ -11580,16 +11649,25 @@ problem is to control global recurrence / continuation of the unique odd-order
 branch and to exclude infinite-order flatness.
 
 \item
-\textbf{Four-point mixed branch via quintic-patch dichotomy.}
+\textbf{Four-point mixed branch via established quintic-patch dichotomy.}
 The centered fixed-sector quintic package
 \[
 A_5^{\mathfrak f}(s)=u_5(s)I+v_5(s)S
 \]
-is now the correct pair-level object on the mixed branch. Since it does not
-vanish identically on the centered diagonal branch, the next theorem-level step
-is to promote this centered nontriviality into a punctured-arc patch dichotomy:
-after shrinking, the centered branch should enter either a good $v_5$-patch or
-the parallel $u_5$-patch.
+is now known not to vanish identically on the centered diagonal branch, and
+Proposition~\ref{prop:centered-quintic-patch-dichotomy} already yields a
+punctured-arc patch dichotomy: after shrinking, the centered branch enters
+either a good $v_5$-patch or the parallel $u_5$-patch. The remaining
+mixed-side theorem-level tasks are therefore:
+\begin{itemize}
+\item on the $v_5$-side, carry out the finite-jet centered-to-patch parity
+transfer strong enough to exclude
+\[
+(r,\operatorname{ord}_0\mathcal Z)\in\{(1,1),(1,3),(2,2)\};
+\]
+\item on the $u_5$-side, exploit the parallel $u_5$-patch as a genuine
+fallback local geometry rather than merely a conceptual alternative.
+\end{itemize}
 
 \item
 \textbf{Four-point mixed branch via finite-jet parity transfer on the $v_5$-patch.}
@@ -11667,12 +11745,13 @@ At the pair level, however, the centered quintic fixed-sector package
 A_5^{\mathfrak f}(s)=u_5(s)I+v_5(s)S
 \]
 is now known not to vanish identically on the centered diagonal branch.
-Accordingly, the mixed-side theorem-level target is no longer a single
-coefficient nonvanishing statement, but a punctured-arc quintic-patch
-dichotomy: after shrinking, the centered branch should enter either a good
-$v_5$-patch or the parallel $u_5$-patch. On the $v_5$-side, the remaining
-finite-jet parity bridge should then exclude the entire explicit mixed
-low-order bad list.
+So the theorem-level mixed target is no longer a coefficient-level statement
+such as $V_1\neq 0$. The punctured-arc quintic-patch dichotomy is now
+available from Proposition~\ref{prop:centered-quintic-patch-dichotomy}. What
+remains is to use that dichotomy: on the $v_5$-side, perform the finite-jet
+parity transfer to the actual good-patch coordinate $x=v_5/c$; on the
+$u_5$-side, develop the parallel $u_5$-patch as the fallback local
+geometry.
 
 Thus the remaining lifted local issues are now:
 the continuation / non-recurrence of the unique odd-order $3$-point branch,
@@ -11837,8 +11916,12 @@ and the tagged quintic witness now shows that
 A_5^{\mathfrak f}(s)\not\equiv 0
 \]
 on the centered diagonal branch. Consequently the mixed-side theorem-level
-target is best viewed as a punctured-arc patch dichotomy: promote the centered
-branch into either a good $v_5$-patch or the parallel $u_5$-patch. On the
+picture is now organized by an already-available punctured-arc patch dichotomy:
+Proposition~\ref{prop:centered-quintic-patch-dichotomy} places the centered
+branch into either a good $v_5$-patch or the parallel $u_5$-patch on
+one-sided punctured arcs. The remaining work is to exploit this dichotomy
+effectively: finite-jet parity transfer on the $v_5$-side, and a genuine
+fallback local analysis on the $u_5$-side. On the
 backup algebraic side, if
 \[
 \operatorname{ord}_s u_5=2m+1,
@@ -11947,9 +12030,12 @@ u_5(s)\not\equiv 0,
 \qquad
 A_5^{\mathfrak f}(s)\not\equiv 0.
 \]
-Thus the mixed-side theorem-level target is now most naturally phrased as a
-quintic-patch dichotomy on the centered branch rather than a pointwise
-nonvanishing statement for $V_1$.
+Accordingly, the centered quintic pair cannot totally collapse, and
+Proposition~\ref{prop:centered-quintic-patch-dichotomy} now gives a genuine
+punctured-arc quintic-patch dichotomy on the mixed side. So the mixed-side
+theorem-level problem is no longer pointwise nonvanishing of $V_1$, but the
+effective use of that dichotomy: finite-jet parity transfer on the $v_5$-side
+and fallback local geometry on the $u_5$-side.
 
 Fifth, on the backup algebraic side, the valuation form of the septic transport
 constraint shows that if
