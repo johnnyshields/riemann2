@@ -14137,6 +14137,211 @@ $\mathcal R$ has the same first-order reflection geometry across that zero as
 in the simple-zero case.
 \end{remark}
 
+\begin{proposition}[Odd-zero critical branch is uniformly unrooted]
+\label{prop:odd-zero-critical-branch-uniformly-unrooted}
+Let $\xi_0$ be an isolated odd-order zero of
+\[
+\mathcal R(\xi)=\frac12\,\widetilde Y'''(\xi),
+\]
+and, after translation, write
+\[
+\xi_0=0,
+\qquad
+\mathcal R(\xi)=\xi^m\rho(\xi),
+\qquad
+m\ge 1 \text{ odd},
+\qquad
+\rho(0)\neq 0.
+\]
+Let
+\[
+D_a(t):=\widetilde Y[a,a,t],
+\qquad
+D_a(a)=\frac12\,\widetilde Y''(a)=\mathcal Z(a).
+\]
+
+Then there exists $\varepsilon>0$ and a unique real-analytic function
+\[
+\mu:(-\varepsilon,\varepsilon)\to\mathbf R,
+\qquad
+\mu(0)=0,
+\]
+such that for every sufficiently small $h>0$ the unique nontrivial critical pair
+\[
+a(h):=h(\mu(h)-1),
+\qquad
+x(h):=h(\mu(h)+1)
+\]
+satisfies
+\[
+D_{a(h)}'(x(h))=0,
+\]
+and every critical pair
+\[
+a<x,\qquad |a|+|x|<\varepsilon,\qquad D_a'(x)=0
+\]
+is of this form.
+
+Moreover,
+\[
+D_{a(h)}(x(h))-D_{a(h)}(a(h))
+=
+-\frac{\rho(0)}{m+2}\,h^{m+1}+O(h^{m+2}).
+\]
+Equivalently,
+\[
+D_{a(h)}(x(h))-D_{a(h)}(a(h))
+=
+-\frac{\rho(0)}{2^{m+1}(m+2)}(x(h)-a(h))^{m+1}
++o\!\left((x(h)-a(h))^{m+1}\right).
+\]
+
+In particular, after shrinking $\varepsilon$ if needed, every nontrivial nearby
+critical pair satisfies
+\[
+D_a(x)\neq D_a(a),
+\]
+indeed
+\[
+\operatorname{sgn}\bigl(D_a(x)-D_a(a)\bigr)=-\operatorname{sgn}\rho(0).
+\]
+So no sheared repeated-node tangent-contact event can occur in a sufficiently
+small neighborhood of an isolated odd zero of $\mathcal R$.
+\end{proposition}
+
+\begin{proof}
+Write every nearby pair as
+\[
+a=c-h,\qquad x=c+h,\qquad h=\frac{x-a}{2}>0,\qquad \mu=\frac{c}{h}.
+\]
+
+By Lemma~\ref{lem:Da-derivative-formula},
+\[
+D_a'(x)
+=
+2\int_0^1 s(1-s)\,\mathcal R(a+s(x-a))\,ds.
+\]
+With the change of variables $u=2s-1$, this becomes
+\[
+D_{c-h}'(c+h)
+=
+\frac14\int_{-1}^1 (1-u^2)\,\mathcal R(c+hu)\,du
+=
+h^m F(h,\mu),
+\]
+where
+\[
+F(h,\mu)
+:=
+\frac14\int_{-1}^1 (1-u^2)(\mu+u)^m
+\rho\!\bigl(h(\mu+u)\bigr)\,du.
+\]
+This is real-analytic in $(h,\mu)$ near $(0,0)$. At $h=0$,
+\[
+F(0,\mu)=\frac{\rho(0)}{4}K_m(\mu),
+\qquad
+K_m(\mu):=\int_{-1}^1 (1-u^2)(\mu+u)^m\,du.
+\]
+Since $m$ is odd,
+\[
+K_m(0)=0,
+\]
+and
+\[
+K_m'(\mu)
+=
+m\int_{-1}^1 (1-u^2)(\mu+u)^{m-1}\,du>0
+\]
+for all real $\mu$, because $m-1$ is even. Hence $\mu=0$ is the unique real
+root of $K_m$, and it is simple. Therefore
+\[
+\partial_\mu F(0,0)\neq 0,
+\]
+so the implicit function theorem gives a unique real-analytic branch
+\[
+\mu=\mu(h),\qquad \mu(0)=0,
+\]
+parameterizing all nearby critical pairs.
+
+Now write
+\[
+\mathcal Z(\xi)=\mathcal Z(0)+\xi^{m+1}\eta(\xi),
+\qquad
+\eta(0)=\frac{\rho(0)}{m+1},
+\]
+since $\mathcal Z'=\mathcal R=\xi^m\rho(\xi)$.
+Using
+\[
+D_a(x)-D_a(a)
+=
+\frac12\int_{-1}^1 (1-u)\bigl(\mathcal Z(c+hu)-\mathcal Z(c-h)\bigr)\,du,
+\]
+we obtain
+\[
+D_{c-h}(c+h)-D_{c-h}(c-h)=h^{m+1}G(h,\mu),
+\]
+where
+\[
+G(h,\mu):=
+\frac12\int_{-1}^1 (1-u)\Bigl(
+(\mu+u)^{m+1}\eta\!\bigl(h(\mu+u)\bigr)
+-(\mu-1)^{m+1}\eta\!\bigl(h(\mu-1)\bigr)
+\Bigr)\,du.
+\]
+Again $G$ is real-analytic. Evaluating at $(0,0)$ gives
+\[
+G(0,0)
+=
+\frac{\eta(0)}{2}\int_{-1}^1 (1-u)(u^{m+1}-1)\,du
+=
+-\frac{\rho(0)}{m+2}\neq 0.
+\]
+Therefore along the critical branch,
+\[
+D_{a(h)}(x(h))-D_{a(h)}(a(h))
+=
+h^{m+1}G(h,\mu(h))
+=
+-\frac{\rho(0)}{m+2}h^{m+1}+O(h^{m+2}),
+\]
+which has fixed nonzero sign for $h$ sufficiently small. This proves the claim.
+\end{proof}
+
+\begin{corollary}[Sheared repeated-node tangent-contact is impossible near an isolated odd $\mathcal R$-zero]
+\label{cor:sheared-event-impossible-near-isolated-odd-R-zero}
+Let $b$ be an isolated odd-order zero of $\mathcal R$ on a genuine opened
+nonmixed arc. Then there exists a neighborhood $U$ of $b$ such that no pair
+\[
+a<x,\qquad a,x\in U,
+\]
+can satisfy
+\[
+\widetilde Y_{\mathcal Z(a)}''(a)=0,
+\qquad
+\widetilde H_3(a,x)=0,
+\qquad
+\partial_x\widetilde H_3(a,x)=0.
+\]
+Equivalently, no rooted sheared repeated-node tangent-contact event occurs in
+a sufficiently small neighborhood of an isolated odd zero of $\mathcal R$.
+\end{corollary}
+
+\begin{proof}
+In the normalized nonmixed chart centered at $b$, the rooted sheared event is
+exactly the conjunction
+\[
+D_a'(x)=0,
+\qquad
+D_a(x)=D_a(a)=\mathcal Z(a).
+\]
+Proposition~\ref{prop:odd-zero-critical-branch-uniformly-unrooted} shows that
+for every sufficiently small nontrivial critical pair one has
+\[
+D_a(x)-D_a(a)\neq 0.
+\]
+So the rooted sheared event is impossible near $b$.
+\end{proof}
+
 \begin{proposition}[Quadratic-envelope factorization on a nonmixed interval]
 \label{prop:quadratic-envelope-factorization-nonmixed}
 Let $J$ be a connected open interval in a good $v_5$-patch such that
@@ -15036,6 +15241,224 @@ Y=\gamma S+\alpha x+\beta
 on a nontrivial interval around $b$.
 \end{proof}
 
+\begin{proposition}[Uniform fixed-level nonrecurrence for the sheared $3$-point branch]
+\label{prop:uniform-fixed-level-nonrecurrence-sheared-three-point}
+Let $J$ be a connected opened nonmixed arc, fix a real scalar $\gamma$, and set
+\[
+\widetilde Y_\gamma:=Y-\gamma S=\frac{u_5-\gamma\lambda}{c},
+\qquad
+f_\gamma:=u_5-\gamma\lambda,
+\qquad
+J_\gamma:=J_{f_\gamma}=J_{u_5}-\gamma J_\lambda.
+\]
+Then
+\[
+\widetilde Y_\gamma''=\frac{c^3}{M^3}J_\gamma.
+\]
+
+Assume that $b\in J$ is an isolated finite-order odd zero of $J_\gamma$.
+After affine normalization of the planar curve
+\[
+(x,\widetilde Y_\gamma)
+\]
+at $b$, let
+\[
+I_-=(\alpha,0)
+\]
+be the source interval on which
+\[
+\widetilde Y_\gamma''<0,
+\]
+and let
+\[
+I_+=(0,\beta)
+\]
+be the maximal open interval to the right of $0$ on which
+\[
+\widetilde Y_\gamma'
+\]
+is strictly increasing. Set
+\[
+\mathcal J_\gamma:=\widetilde Y_\gamma'(I_-)\cap \widetilde Y_\gamma'(I_+).
+\]
+For
+\[
+m\in\mathcal J_\gamma,
+\]
+write
+\[
+a_\gamma(m):=(\widetilde Y_\gamma'|_{I_-})^{-1}(m),
+\]
+and define
+\[
+\widetilde H_{3,\gamma}(a,u):=
+\widetilde Y_\gamma(u)-\widetilde Y_\gamma(a)-\widetilde Y_\gamma'(a)(u-a).
+\]
+
+Then there exists a unique maximal open interval
+\[
+\mathcal J_{\gamma,\mathrm{br}}=(0,m_{\gamma,*})\subset \mathcal J_\gamma
+\]
+and a unique real-analytic function
+\[
+u_\gamma:\mathcal J_{\gamma,\mathrm{br}}\to I_+
+\]
+such that
+\[
+\widetilde H_{3,\gamma}(a_\gamma(m),u_\gamma(m))=0
+\qquad
+(m\in\mathcal J_{\gamma,\mathrm{br}}),
+\]
+and this branch agrees near $m=0$ with the unique local opposite-side branch
+born at the odd zero $b$.
+
+Moreover, along the whole branch one has
+\[
+\partial_u\widetilde H_{3,\gamma}(a_\gamma(m),u_\gamma(m))
+=
+\widetilde Y_\gamma'(u_\gamma(m))-m
+\neq 0,
+\]
+so there is no interior common-tangent event, no interior recurrence, and no
+interior accumulation. If
+\[
+m_{\gamma,*}<\sup\mathcal J_\gamma,
+\]
+then
+\[
+u_\gamma(m)\longrightarrow \beta
+\qquad (m\uparrow m_{\gamma,*}),
+\]
+so the branch can stop only by boundary exit of the relevant slope-overlap
+block.
+
+Equivalently, using
+\[
+\widetilde H_{3,\gamma}(a,u)=A_a(u)-\gamma B_a(u)
+=
+B_a(u)\bigl(\Gamma_a(u)-\gamma\bigr),
+\]
+one has along the branch
+\[
+\Gamma_{a_\gamma(m)}(u_\gamma(m))=\gamma,
+\qquad
+\Gamma_{a_\gamma(m)}'(u_\gamma(m))\neq 0.
+\]
+In particular, for every fixed $\gamma$, the distinguished level $\gamma$ of
+the repeated-source scalar $\Gamma_a$ has no interior critical point on the
+sheared odd-zero branch.
+\end{proposition}
+
+\begin{proof}
+By Remark~\ref{rem:below-lifted-wronskian-ratio-reformulation}, for any scalar
+germ $f$ one has
+\[
+\frac{d^2}{dx^2}\!\left(\frac{f}{c}\right)=\frac{c^3}{M^3}J_f.
+\]
+Applying this with
+\[
+f=f_\gamma=u_5-\gamma\lambda
+\]
+gives
+\[
+\widetilde Y_\gamma''=\frac{c^3}{M^3}J_\gamma.
+\]
+Hence $b$ is an isolated finite-order odd zero of $J_\gamma$ if and only if it
+is an isolated finite-order odd zero of the planar curvature
+\[
+\widetilde Y_\gamma''.
+\]
+
+Now apply
+Theorem~\ref{thm:local-classification-lifted-three-point-branch-near-Kv-zero}
+and
+Theorem~\ref{thm:global-continuation-nonrecurrence-odd-three-point-branch}
+with the affine-normalized analytic function
+\[
+\widetilde Y_\gamma
+\]
+playing the role of the planar graphing function $S$. The proofs of those
+results use only the planar repeated-node tangent-contact equation for the
+chosen analytic function, its curvature parity at the base point, and the
+maximal monotone-slope block on the opposite side. Therefore they apply
+verbatim to
+\[
+\widetilde H_{3,\gamma}(a,u)
+=
+\widetilde Y_\gamma(u)-\widetilde Y_\gamma(a)-\widetilde Y_\gamma'(a)(u-a),
+\]
+and yield the unique local opposite-side branch, its unique continuation on the
+maximal slope-overlap block, the nonvanishing of
+\[
+\partial_u\widetilde H_{3,\gamma},
+\]
+and the boundary-exit alternative. This proves the first part.
+
+For the reformulation in terms of $\Gamma_a$, note from the definitions of
+$A_a$, $B_a$, and $\Gamma_a$ that
+\[
+\widetilde H_{3,\gamma}(a,u)
+=
+\bigl(Y(u)-Y(a)-Y'(a)(u-a)\bigr)
+-\gamma\bigl(S(u)-S(a)-S'(a)(u-a)\bigr)
+=
+A_a(u)-\gamma B_a(u).
+\]
+Since
+\[
+A_a(u)=\Gamma_a(u)\,B_a(u),
+\]
+this becomes
+\[
+\widetilde H_{3,\gamma}(a,u)
+=
+B_a(u)\bigl(\Gamma_a(u)-\gamma\bigr).
+\]
+By Proposition~\ref{prop:quadratic-envelope-factorization-nonmixed},
+\[
+B_a(u)\neq 0
+\qquad (u\neq a),
+\]
+so along the branch
+\[
+\widetilde H_{3,\gamma}(a_\gamma(m),u_\gamma(m))=0
+\iff
+\Gamma_{a_\gamma(m)}(u_\gamma(m))=\gamma.
+\]
+
+Differentiating
+\[
+\widetilde H_{3,\gamma}(a,u)=B_a(u)\bigl(\Gamma_a(u)-\gamma\bigr)
+\]
+with respect to $u$ gives
+\[
+\partial_u\widetilde H_{3,\gamma}(a,u)
+=
+B_a'(u)\bigl(\Gamma_a(u)-\gamma\bigr)+B_a(u)\Gamma_a'(u).
+\]
+On the branch, where
+\[
+\Gamma_a(u)=\gamma,
+\]
+this simplifies to
+\[
+\partial_u\widetilde H_{3,\gamma}(a,u)=B_a(u)\Gamma_a'(u).
+\]
+Since the first part already gives
+\[
+\partial_u\widetilde H_{3,\gamma}(a_\gamma(m),u_\gamma(m))\neq 0
+\]
+and
+\[
+B_{a_\gamma(m)}(u_\gamma(m))\neq 0,
+\]
+it follows that
+\[
+\Gamma_{a_\gamma(m)}'(u_\gamma(m))\neq 0
+\]
+along the whole branch. This proves the final statement.
+\end{proof}
+
 \begin{remark}[Source-level form of the shear transfer]
 \label{rem:source-level-form-of-shear-transfer}
 For fixed $a\in J$, set
@@ -15082,6 +15505,17 @@ collapse case
 \]
 So the sheared bottleneck closes in the collapse direction, not by a purely
 planar contradiction for $(x,S)$.
+
+Proposition~\ref{prop:uniform-fixed-level-nonrecurrence-sheared-three-point}
+shows that for each fixed shear level $\gamma$, the corresponding sheared
+opposite-side $3$-point branch is already globally rigid on its maximal
+slope-overlap block: it has no interior common-tangent event, no interior
+recurrence, and no interior accumulation. Thus the remaining issue is not
+sheared $3$-point recurrence at fixed $\gamma$, but the source-coupling /
+level-selection step that would force the distinguished level
+$\gamma=\mathcal Z(b)$ arising from a hypothetical odd zero of
+$\mathcal W_{\mathrm{src}}$ to be hit by the relevant critical-value
+configuration of $\Gamma_a$.
 \end{remark}
 
 \begin{proposition}[Repeated-source first loss is exactly diagonal odd-zero birth]
@@ -15414,6 +15848,323 @@ single sign change of $\mathcal R$ on $[x(a),x(h)]$. Apply
 Proposition~\ref{prop:single-sign-change-cannot-realize-first-loss}.
 \end{proof}
 
+\begin{proposition}[Transport equations for a repeated-source critical branch]
+\label{prop:transport-equations-repeated-source-critical-branch}
+Let $J$ be an opened nonmixed arc, and work in a local normalized nonmixed
+chart on which
+\[
+S(t)=t^2,
+\qquad
+\Gamma_a=D_a.
+\]
+Let $U\subset J$ be an interval, and let
+\[
+\tau:U\to J
+\]
+be a real-analytic function such that
+\[
+\tau(a)>a,
+\qquad
+D_a'(\tau(a))=0
+\qquad (a\in U).
+\]
+Set
+\[
+V(a):=D_a(\tau(a)).
+\]
+Then:
+\begin{enumerate}
+\item
+\[
+V'(a)=\frac{2}{\tau(a)-a}\,\bigl(V(a)-\mathcal Z(a)\bigr).
+\]
+
+\item
+\[
+D_a''(\tau(a))
+=
+\frac{2}{(\tau(a)-a)^2}\,\bigl(\mathcal Z(\tau(a))-V(a)\bigr).
+\]
+
+\item
+At any point $a\in U$ where $D_a''(\tau(a))\neq 0$,
+\[
+\tau'(a)
+=
+\frac{V(a)-\mathcal Z(a)}
+{\mathcal Z(\tau(a))-V(a)}.
+\]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Write
+\[
+D_a(t)
+=
+\frac{\widetilde Y(t)-\widetilde Y(a)-\widetilde Y'(a)(t-a)}{(t-a)^2}.
+\]
+Differentiating in $a$ gives
+\[
+\partial_a D_a(t)
+=
+\frac{2}{t-a}\,\bigl(D_a(t)-\mathcal Z(a)\bigr).
+\]
+Evaluating at $t=\tau(a)$ and using $D_a'(\tau(a))=0$ yields
+\[
+V'(a)
+=
+\frac{d}{da}D_a(\tau(a))
+=
+\partial_a D_a(\tau(a))
+=
+\frac{2}{\tau(a)-a}\,\bigl(V(a)-\mathcal Z(a)\bigr),
+\]
+which proves (1).
+
+Now use the rigidification scalar
+\[
+M(a,t):=B_a(t)^2\,\Gamma_a'(t).
+\]
+In the normalized chart,
+\[
+B_a(t)=(t-a)^2,
+\qquad
+\Gamma_a=D_a,
+\qquad
+M(a,t)=(t-a)^4\,D_a'(t).
+\]
+By Remark~\ref{rem:first-loss-rigidification-nonmixed},
+\[
+\partial_t M(a,t)
+=
+2(t-a)^2\,\bigl(\mathcal Z(t)-D_a(t)\bigr).
+\]
+At $t=\tau(a)$ we have $D_a'(\tau(a))=0$, so
+\[
+\partial_t M(a,\tau(a))
+=
+(\tau(a)-a)^4\,D_a''(\tau(a)).
+\]
+Comparing the two formulas gives
+\[
+(\tau(a)-a)^4\,D_a''(\tau(a))
+=
+2(\tau(a)-a)^2\,\bigl(\mathcal Z(\tau(a))-V(a)\bigr),
+\]
+hence (2).
+
+Finally, still by Remark~\ref{rem:first-loss-rigidification-nonmixed},
+at points where $M(a,t)=0$ one has
+\[
+\partial_a M(a,t)
+=
+2(t-a)^2\,\bigl(\mathcal Z(a)-D_a(t)\bigr),
+\]
+in the normalized chart. Since
+\[
+M(a,\tau(a))=0,
+\]
+differentiating in $a$ gives
+\[
+0=\frac{d}{da}M(a,\tau(a))
+=
+\partial_a M(a,\tau(a))
++
+\partial_t M(a,\tau(a))\,\tau'(a).
+\]
+Substituting the formulas above yields
+\[
+0
+=
+2(\tau(a)-a)^2\,\bigl(\mathcal Z(a)-V(a)\bigr)
++
+2(\tau(a)-a)^2\,\bigl(\mathcal Z(\tau(a))-V(a)\bigr)\tau'(a).
+\]
+If $D_a''(\tau(a))\neq 0$, then by (2),
+\[
+\mathcal Z(\tau(a))-V(a)\neq 0,
+\]
+so solving for $\tau'(a)$ gives (3).
+\end{proof}
+
+\begin{corollary}[One-sign-change chamber is no-return for the born critical branch]
+\label{cor:one-sign-change-chamber-no-return}
+In the setting of
+Proposition~\ref{prop:transport-equations-repeated-source-critical-branch},
+assume moreover that for every $a\in U$ the segment
+\[
+[a,\tau(a)]
+\]
+contains exactly one sign change of $\mathcal R$.
+
+Then for every $a\in U$:
+\begin{enumerate}
+\item
+\[
+\operatorname{sgn}\bigl(V(a)-\mathcal Z(a)\bigr)
+\]
+is the sign of the initial lobe of $\mathcal R$ on $[a,\tau(a)]$;
+
+\item
+\[
+\operatorname{sgn}\bigl(\mathcal Z(\tau(a))-V(a)\bigr)
+\]
+is the sign of the terminal lobe of $\mathcal R$ on $[a,\tau(a)]$;
+
+\item
+\[
+\bigl(V(a)-\mathcal Z(a)\bigr)\bigl(\mathcal Z(\tau(a))-V(a)\bigr)<0;
+\]
+
+\item
+\[
+D_a''(\tau(a))\neq 0,
+\qquad
+\tau'(a)<0;
+\]
+
+\item
+\[
+V(a)\notin [\,\mathcal Z(a),\mathcal Z(\tau(a))\,].
+\]
+In particular,
+\[
+V(a)\neq \mathcal Z(a),
+\]
+so the branch cannot realize the rigidified first-loss condition anywhere on
+$U$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+The first sign statement is exactly
+Proposition~\ref{prop:single-sign-change-cannot-realize-first-loss} applied to
+the critical pair $(a,\tau(a))$.
+
+For the second sign statement, write
+\[
+R_{a,\tau(a)}(s):=\mathcal R(a+s(\tau(a)-a)).
+\]
+Since
+\[
+\mathcal Z(\tau(a))-\mathcal Z(a)
+=
+(\tau(a)-a)\int_0^1 R_{a,\tau(a)}(s)\,ds
+\]
+and
+\[
+V(a)-\mathcal Z(a)
+=
+(\tau(a)-a)\int_0^1 (1-s)^2\,R_{a,\tau(a)}(s)\,ds,
+\]
+one gets
+\[
+\mathcal Z(\tau(a))-V(a)
+=
+(\tau(a)-a)\int_0^1 (2s-s^2)\,R_{a,\tau(a)}(s)\,ds.
+\]
+At the critical pair,
+\[
+0=D_a'(\tau(a))
+=
+2\int_0^1 s(1-s)\,R_{a,\tau(a)}(s)\,ds,
+\]
+so
+\[
+\int_0^1 (2s-s^2)\,R_{a,\tau(a)}(s)\,ds
+=
+\int_0^1 s^2\,R_{a,\tau(a)}(s)\,ds.
+\]
+Hence
+\[
+\mathcal Z(\tau(a))-V(a)
+=
+(\tau(a)-a)\int_0^1 s^2\,R_{a,\tau(a)}(s)\,ds.
+\]
+Now set
+\[
+k_1(s):=s(1-s),
+\qquad
+k_2(s):=s^2.
+\]
+Then
+\[
+\frac{k_2(s)}{k_1(s)}=\frac{s}{1-s}
+\]
+is strictly increasing on $(0,1)$. Repeating the weighted signed-mass argument
+from the proof of
+Proposition~\ref{prop:single-sign-change-cannot-realize-first-loss} shows that
+\[
+\operatorname{sgn}\bigl(\mathcal Z(\tau(a))-V(a)\bigr)
+\]
+is the sign of the terminal lobe of $\mathcal R$.
+
+The two signs are therefore opposite, which proves (3). Then
+Proposition~\ref{prop:transport-equations-repeated-source-critical-branch}(2)
+gives
+\[
+D_a''(\tau(a))\neq 0,
+\]
+and
+Proposition~\ref{prop:transport-equations-repeated-source-critical-branch}(3)
+gives
+\[
+\tau'(a)<0.
+\]
+Finally, opposite signs of
+\[
+V(a)-\mathcal Z(a)
+\quad\text{and}\quad
+\mathcal Z(\tau(a))-V(a)
+\]
+mean exactly that $V(a)$ lies strictly outside the endpoint-curvature interval
+\[
+[\,\mathcal Z(a),\mathcal Z(\tau(a))\,].
+\]
+\end{proof}
+
+\begin{remark}[Zero-connection reduction for the repeated-source branch]
+\label{rem:zero-connection-reduction-repeated-source}
+Let $b$ be an isolated odd-order zero of $\mathcal R$, and let
+\[
+t=\tau(a)
+\]
+denote the local born repeated-source critical branch supplied by
+Proposition~\ref{prop:parity-classification-isolated-nonmixed-R-zeros}.
+On any maximal continuation interval on which each segment
+\[
+[a,\tau(a)]
+\]
+contains exactly one sign change of $\mathcal R$,
+Corollary~\ref{cor:one-sign-change-chamber-no-return} shows that the branch
+remains simple, satisfies
+\[
+\tau'(a)<0,
+\]
+and cannot realize the rigidified first-loss condition
+\[
+D_a(\tau(a))=\mathcal Z(a).
+\]
+
+Thus the only internal way for such a branch to leave the one-sign-change
+chamber is for the sign-change count on the segment to change; for analytic
+$\mathcal R$, this occurs only when an endpoint of the segment meets another
+zero of $\mathcal R$ (equivalently, unless the branch exits the local chart or
+the opened arc). Via
+Remark~\ref{rem:source-determinant-reformulation-Gammaa},
+the same statement holds at source level for a local branch of
+\[
+\mathfrak D(a,h)=0.
+\]
+Accordingly, any genuine repeated-source obstruction branch must either leave
+the nonmixed chart/arc or connect one odd zero of
+\[
+\mathcal W_{\mathrm{src}}
+\]
+to a second zero of $\mathcal W_{\mathrm{src}}$.
+\end{remark}
+
 \begin{remark}[What remains on the nonmixed $4$-point side]
 \label{rem:what-remains-nonmixed-after-R-zero-bridge}
 The preceding results now give a full local derivative-side picture of the
@@ -15480,15 +16231,29 @@ diagonal realization of the rigidified sheared event already forces
 $\mathcal R\equiv 0$ locally, hence affine-planar collapse.
 
 Accordingly, the genuinely live nonmixed $4$-point burden is no longer local
-birth, nor repeated-source first loss, nor generic determinant sign.  It is the
-source-coupling problem of excluding odd zeros of
+birth, nor repeated-source first loss, nor generic determinant sign.  The
+positive-kernel route now shows more: on any chamber where the repeated-source
+segment sees exactly one sign change of $\mathcal R$, the born critical branch
+is simple, has strictly negative slope, and cannot realize the rigidified
+first-loss condition
+\[
+\Gamma_a(x)=\mathcal Z(a).
+\]
+Equivalently, at source level, a local branch of
+\[
+\mathfrak D(a,h)=0
+\]
+cannot become a genuine obstruction until the source segment acquires a second
+zero of
+\[
+\mathcal W_{\mathrm{src}}.
+\]
+So the sharpened remaining nonmixed burden is a source-coupling / zero-connection
+exclusion theorem for odd zeros of
 \[
 \mathcal W_{\mathrm{src}},
 \]
-equivalently of $\mathcal R$, on genuine opened nonmixed arcs. Any stronger
-formulation involving $\Gamma_a$, $\Psi_a$, or $\mathfrak D(a,h)$ should
-now be regarded as a source-level route to that same odd-zero exclusion
-problem, not as an additional independent bottleneck.
+equivalently of $\mathcal R$, on genuine opened nonmixed arcs.
 \end{remark}
 
 \begin{remark}[Compact status summary for the nonmixed $4$-point branch]
@@ -15509,8 +16274,13 @@ source-level Wronskian
 \mathcal W_{\mathrm{src}}=J_\lambda J_{u_5}'-J_{u_5}J_\lambda',
 \]
 which differs from $\mathcal R$ only by a nonvanishing analytic factor.
-Thus the genuinely remaining nonmixed burden is the source-coupling problem of
-excluding odd zeros of $\mathcal W_{\mathrm{src}}$ on opened nonmixed arcs.
+Moreover, on any chamber where the repeated-source segment sees exactly one
+sign change of $\mathcal R$, the born critical branch is simple, has strictly
+negative slope, and cannot realize rigidified first loss; so any genuine
+repeated-source obstruction would have to continue until the segment acquires a
+second zero of $\mathcal W_{\mathrm{src}}$. Thus the genuinely remaining
+nonmixed burden is the source-coupling / zero-connection exclusion problem for
+odd zeros of $\mathcal W_{\mathrm{src}}$ on opened nonmixed arcs.
 \end{remark}
 
 \begin{remark}[Derivative-geometry meaning of the nonmixed invariant $\mathcal R$]
