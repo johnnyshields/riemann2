@@ -4036,6 +4036,160 @@ whose leading term is the first surviving corrected odd coefficient
 $c_{2N-1}(m)$.
 \end{remark}
 
+\begin{corollary}[Finite-core localization of the transformed zeta-side scalar]
+\label{cor:xi-zeta-finite-core-localization}
+With the notation of Proposition~\ref{prop:corrected-n-point} and
+Corollary~\ref{cor:outside-higher-odd-jets}, let
+\[
+H_{\out}(z/Q^2)
+=
+\sum_{r\ge 0} a_{2r+1}^{\out}(m,H)\,\frac{z^{2r+1}}{Q^{2r+4}}
+\]
+be the corrected transverse scalar contributed by all zero pairs with
+$\Delta_\rho>H$, and define
+\[
+\Xi_{\zeta,\out}^{(N)}(m;H)
+:=
+\sum_{j=1}^N a_j^{(N)}\,H_{\out}(s_j),
+\qquad
+\Xi_{\zeta,\le H}^{(N)}(m)
+:=
+\Xi_\zeta^{(N)}(m)-\Xi_{\zeta,\out}^{(N)}(m;H).
+\]
+If $HQ>N$, then
+\[
+\boxed{
+|\Xi_{\zeta,\out}^{(N)}(m;H)|
+\ll
+\frac{(2N-1)N!(N-1)!}{Q}\,
+\frac{\Gamma(HQ-N)}{\Gamma(HQ+N+1)}
++
+(2N-1)N!(N-1)!\,
+\frac{\Gamma(Q^2-N)}{\Gamma(Q^2+N+1)}.
+}
+\]
+Consequently,
+\[
+\boxed{
+\Xi_\zeta^{(N)}(m)
+=
+\Xi_{\zeta,\le H}^{(N)}(m)
++
+O\!\left(
+\frac{(2N-1)N!(N-1)!}{Q}\,
+\frac{\Gamma(HQ-N)}{\Gamma(HQ+N+1)}
+\right)
++
+O\!\left(
+(2N-1)N!(N-1)!\,
+\frac{\Gamma(Q^2-N)}{\Gamma(Q^2+N+1)}
+\right).
+}
+\]
+\end{corollary}
+
+\begin{proof}
+By the exact $N$-point action on odd germs used in the proof of
+Proposition~\ref{prop:corrected-n-point},
+\[
+\Xi_{\zeta,\out}^{(N)}(m;H)
+=
+\sum_{r\ge 0} a_{2r+1}^{\out}(m,H)\frac{\mu_{2r+1}^{(N)}}{Q^{2r+4}}.
+\]
+Since $\mu_{2r+1}^{(N)}=0$ for $0\le r\le N-2$,
+\[
+\Xi_{\zeta,\out}^{(N)}(m;H)
+=
+\sum_{r\ge N-1} a_{2r+1}^{\out}(m,H)\frac{\mu_{2r+1}^{(N)}}{Q^{2r+4}}.
+\]
+Taking absolute values and applying
+Corollary~\ref{cor:outside-higher-odd-jets},
+\[
+|\Xi_{\zeta,\out}^{(N)}(m;H)|
+\ll
+\sum_{r\ge N-1}
+|\mu_{2r+1}^{(N)}|
+\left(
+\frac{H^{-(2r+3)}}{Q^{2r+4}}
++
+\frac{Q^{-(2r+2)}}{Q^{2r+4}}
+\right).
+\]
+Thus
+\[
+|\Xi_{\zeta,\out}^{(N)}(m;H)|
+\ll
+\frac{1}{H^2Q^3}
+\sum_{r\ge N-1}
+|\mu_{2r+1}^{(N)}|(HQ)^{-(2r+1)}
++
+\frac{1}{Q^4}
+\sum_{r\ge N-1}
+|\mu_{2r+1}^{(N)}|(Q^2)^{-(2r+1)}.
+\]
+Now apply Lemma~\ref{lem:n-point-odd-generating-function} first with
+$x=HQ$ and then with $x=Q^2$. Since $HQ>N$, both evaluations are valid
+for all sufficiently large $Q$, and one obtains
+\[
+\sum_{r\ge N-1}
+|\mu_{2r+1}^{(N)}|(HQ)^{-(2r+1)}
+=
+(2N-1)N!(N-1)!(HQ)^2
+\frac{\Gamma(HQ-N)}{\Gamma(HQ+N+1)},
+\]
+and
+\[
+\sum_{r\ge N-1}
+|\mu_{2r+1}^{(N)}|(Q^2)^{-(2r+1)}
+=
+(2N-1)N!(N-1)!Q^4
+\frac{\Gamma(Q^2-N)}{\Gamma(Q^2+N+1)}.
+\]
+Substituting these identities proves the displayed bound for
+$\Xi_{\zeta,\out}^{(N)}(m;H)$, and the decomposition
+\[
+\Xi_\zeta^{(N)}(m)=\Xi_{\zeta,\le H}^{(N)}(m)+\Xi_{\zeta,\out}^{(N)}(m;H)
+\]
+gives the second display.
+\end{proof}
+
+\begin{remark}[Asymptotic finite-core localization at linear depth]
+\label{rem:xi-zeta-finite-core-localization-asymptotic}
+Let
+\[
+N=\lfloor \alpha Q\rfloor,
+\qquad
+0<\alpha<\rho_0,
+\]
+and fix $H>\alpha$. Then Corollary~\ref{cor:xi-zeta-finite-core-localization}
+and Stirling's formula give
+\[
+|\Xi_{\zeta,\out}^{(N)}(m;H)|
+\ll
+\exp\!\bigl(-H f(\alpha/H)\,Q+O(\log Q)\bigr)
++
+\exp\!\bigl(-2\alpha Q\log Q+O(Q)\bigr),
+\]
+where
+\[
+f(\beta)
+=
+(1+\beta)\log(1+\beta)-2\beta\log\beta-(1-\beta)\log(1-\beta).
+\]
+In particular,
+\[
+\Xi_\zeta^{(N)}(m)
+=
+\Xi_{\zeta,\le H}^{(N)}(m)
++
+O\!\bigl(e^{-Hf(\alpha/H)Q+O(\log Q)}\bigr)
++
+O\!\bigl(e^{-2\alpha Q\log Q+O(Q)}\bigr).
+\]
+Thus the full transformed zeta-side scalar is determined, up to exponentially
+small error, by a fixed finite core.
+\end{remark}
+
 \begin{remark}[Exact Laurent tail of the contour kernel]
 \label{rem:n-point-kernel-laurent-tail}
 The kernel in Proposition~\ref{prop:corrected-n-point} has an exact large-
