@@ -10148,6 +10148,45 @@ substituting the definitions of $x,y,\sigma_v$ and multiplying rows by the
 indicated nonzero factors.
 \end{proof}
 
+\begin{remark}[Finite-core meaning of the lifted $v_5$-patch geometry]
+\label{rem:finite-core-meaning-lifted-vpatch-geometry}
+The defect-free finite-core reduction now places the lifted $v_5$-patch
+geometry into a sharp global context.
+
+Indeed, by
+Theorem~\ref{thm:defect-free-quintic-circuit-reduction},
+Corollary~\ref{cor:defect-free-minimal-quintic-circuits}, and
+Proposition~\ref{prop:defect-free-lifted-affine-dependence-vpatch},
+defect-free bad cores on a good $v_5$-patch reduce to affine dependence of the
+lifted points
+\[
+Q_v(h)=\bigl(y(h),x(h),\sigma_v(h)\bigr),
+\]
+with effective ceiling
+\[
+k\le 4.
+\]
+Thus the three low core sizes have the following exact lifted meanings:
+\[
+k=2 \Longleftrightarrow Q_v(h_1)=Q_v(h_2),
+\]
+\[
+k=3 \Longleftrightarrow Q_v(h_1),Q_v(h_2),Q_v(h_3)
+\ \text{are collinear},
+\]
+\[
+k=4 \Longleftrightarrow Q_v(h_1),\dots,Q_v(h_4)
+\ \text{are coplanar}.
+\]
+
+So the lifted $3$-point and $4$-point analyses are not auxiliary side
+computations: they are exactly the $k=3$ and $k=4$ geometric layers in the
+finite-core program. In particular, once the lifted $3$-point branch is
+globally rigid on good $v_5$-patches, the remaining finite-core burden shifts
+upward to the two-point source-level merger problem and to the mixed/nonmixed
+lifted $4$-point mechanisms.
+\end{remark}
+
 \begin{remark}[Parallel $u_5$-patch version]
 \label{rem:parallel-u5-patch-version}
 There is a completely parallel local story on any connected interval in
@@ -11751,6 +11790,41 @@ organized blockwise through these monotone intercept-gap functions rather than
 through a hidden recurrence mechanism inside a block.
 \end{remark}
 
+\begin{remark}[Derivative-geometric meaning of the lifted $3$-point branch]
+\label{rem:derivative-geometry-meaning-global-three-point-branch}
+The lifted $3$-point branch is now best viewed as a derivative-geometric
+propagation theorem for the planar lifted curve
+\[
+\Lambda_v=(x,S).
+\]
+
+By Lemma~\ref{lem:osculating-determinant-expansion} and
+Proposition~\ref{prop:shrinking-exact-lifted-three-point-circuits-force-Kv-zero},
+shrinking exact lifted $3$-point circuits are detected by the osculating
+determinant and therefore concentrate into the lifted curvature-zero set
+\[
+K_v=(x')^3S''(x)=0.
+\]
+Theorem~\ref{thm:local-classification-lifted-three-point-branch-near-Kv-zero}
+then identifies the local repeated-node branch structure at those curvature
+zeros, and
+Theorem~\ref{thm:global-continuation-nonrecurrence-odd-three-point-branch}
+shows that the odd-order branch propagates globally on each monotone-slope
+target block by the slope--intercept envelope identities
+\[
+\tau_-'(m)=-a(m),
+\qquad
+\tau_+'(m)=-u_+(m),
+\qquad
+D'(m)=u_+(m)-a(m)>0.
+\]
+
+So the lifted $3$-point theory is no longer an ad hoc repeated-node analysis.
+It is the global propagation of an osculating-contact defect for the curve
+$\Lambda_v$, organized by the derivative geometry of its tangent lines and
+curvature.
+\end{remark}
+
 \begin{remark}[Exact nonmixed reduction in terms of $\mathcal Z$ and $\mathcal R$]
 \label{rem:nonmixed-four-point-zeros-can-carry-preexisting-branches}
 At a nonmixed lifted point
@@ -13098,13 +13172,21 @@ and the exclusion of the two-point bad-core branch on compact good patches
 follow formally.
 
 \item
-\textbf{Three-point branch (blockwise closed on good $v_5$-patches).}
-The lifted three-point side is no longer a live internal bottleneck:
-infinite-order flatness is excluded, the unique odd-order branch continues
+\textbf{Three-point branch (derivative-geometric layer now stabilized).}
+The lifted three-point side is now the most mature local branch. Shrinking
+exact lifted $3$-point circuits are tied to the osculating determinant and
+hence to
+\[
+K_v=0,
+\]
+the local branch structure at finite-order $K_v$-zeros is completely
+classified by parity, and the odd-order branch is blockwise globally rigid on
+good $v_5$-patches: infinite-order flatness is excluded, the branch continues
 uniquely on the maximal right monotone-slope block, and there is no interior
-common-tangent recurrence or source-side return. Any residual issue there is
-only boundary exit of the relevant source/target slope-overlap block, not an
-internal three-point propagation mechanism.
+common-tangent recurrence or source-side return. Inside the finite-core
+program this stabilizes the lifted $k=3$ collinearity layer; any residual
+issue there is only boundary exit of the relevant source/target slope-overlap
+block, not an internal three-point propagation mechanism.
 
 \item
 \textbf{Four-point mixed branch via established quintic-patch dichotomy.}
@@ -13223,18 +13305,39 @@ On the turning-boundary side,
 Theorem~\ref{thm:adjacent-pair-pair-exclusion-turning} removes actual adjacent
 pair-pair lines unconditionally.
 
-At the lifted order-$7$ level, the new local determinants
+At the lifted order-$7$ level, the canonical derivative-geometric determinants
 \[
 K_v
 \qquad\text{and}\qquad
 T_v
 \]
 govern shrinking exact lifted $3$- and $4$-point circuits on
-$v_5\neq 0$ patches: exact shrinking $3$-point circuits concentrate into
-$\{K_v=0\}$, and exact shrinking $4$-point circuits concentrate into
-$\{T_v=0\}$, with uniform small-diameter exclusion away from those zero
-sets. Near finite-order isolated $K_v$-zeros, the $3$-point branch is
-completely classified by parity.
+$v_5\neq 0$ patches. On the $3$-point side,
+Lemma~\ref{lem:osculating-determinant-expansion} and
+Proposition~\ref{prop:shrinking-exact-lifted-three-point-circuits-force-Kv-zero}
+show that shrinking exact lifted $3$-point circuits are detected by the
+osculating determinant of the planar lifted curve
+\[
+\Lambda_v=(x,S)
+\]
+and therefore concentrate into
+\[
+\{K_v=0\},
+\]
+with uniform small-diameter exclusion away from that zero set. Near
+finite-order isolated $K_v$-zeros, the local branch structure is completely
+classified by parity, and on good $v_5$-patches the odd-order branch is now
+blockwise globally rigid by
+Theorem~\ref{thm:global-continuation-nonrecurrence-odd-three-point-branch}.
+So the lifted $3$-point side is no longer a vague recurrence problem: it is
+the stabilized derivative-geometric $k=3$ layer in the finite-core program.
+
+On the $4$-point side, exact shrinking lifted $4$-point circuits concentrate
+into
+\[
+\{T_v=0\},
+\]
+again with uniform small-diameter exclusion away from that zero set.
 
 On the $4$-point side, generic nonmixed odd-order $T_v$-zeros can still
 carry preexisting close branches, so the nonmixed branch remains genuinely
@@ -13413,13 +13516,20 @@ two-point bad-core branch; the remaining structural issue there is the
 verification of that criterion for the actual corrected two-atom package.
 
 Second, on the lifted three-point side, shrinking exact circuits now
-concentrate into $K_v=0$, repeated-node limits become tangent-line contacts,
-and this side is blockwise globally controlled on good $v_5$-patches: $K_v$ has no
-infinite-order zeros; even-order zeros are sterile; odd-order zeros carry
-exactly one local branch; and that branch continues uniquely on the maximal
-right monotone-slope block with no interior common-tangent event or source-side
-return. So the three-point side is reduced to boundary exit of the relevant
-slope-overlap block, not an internal recurrence mechanism.
+concentrate into $K_v=0$, and this concentration is explicitly
+derivative-geometric: by the osculating-determinant expansion, repeated-node
+limits become tangent-line contacts for the planar lifted curve
+\[
+\Lambda_v=(x,S).
+\]
+On good $v_5$-patches this side is now blockwise globally controlled:
+$K_v$ has no infinite-order zeros; even-order zeros are sterile; odd-order
+zeros carry exactly one local branch; and that branch continues uniquely on
+the maximal right monotone-slope block with no interior common-tangent event
+or source-side return. So the three-point side is reduced to boundary exit of
+the relevant slope-overlap block, not an internal recurrence mechanism.
+Inside the finite-core reduction, this is exactly the stabilization of the
+lifted $k=3$ collinearity layer.
 
 Third, on the lifted four-point side, shrinking exact circuits now
 concentrate into $T_v=0$, repeated-node limits become tangent-plane contacts,
@@ -13508,8 +13618,19 @@ equation
 \[
 H_3(a,u)=S(u)-S(a)-S'(a)(u-a)
 \]
-is now globally rigid on each monotone-slope target block of a good $v_5$-patch.
-The correct global parameter is the source tangent slope
+is now understood as a derivative-geometric propagation law for the planar
+lifted curve
+\[
+\Lambda_v=(x,S).
+\]
+Shrinking exact lifted $3$-point circuits are tied to the osculating
+determinant and hence to
+\[
+K_v=(x')^3S''(x)=0,
+\]
+so the odd-order branch is born at a lifted curvature zero rather than at an
+ad hoc repeated-node coincidence. Globally, on each monotone-slope target
+block of a good $v_5$-patch, the correct parameter is the source tangent slope
 \[
 m=S'(a),
 \]
@@ -13528,7 +13649,8 @@ D'(m)=u_+(m)-a(m)>0.
 Consequently $K_v$ has no infinite-order flat points on a good $v_5$-patch,
 interior common tangency is excluded, and the unique odd-order lifted
 $3$-point branch continues uniquely on the maximal right monotone-slope block
-with no source-side return.
+with no source-side return. In the finite-core picture, this stabilizes the
+lifted $k=3$ collinearity layer.
 
 Sixth, on the backup algebraic side, the valuation form of the septic transport
 constraint shows that if
