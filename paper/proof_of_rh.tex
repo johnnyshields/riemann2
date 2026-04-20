@@ -10961,6 +10961,44 @@ invisible to it except as isolated points where $S''$ vanishes without changing
 the monotone-slope block.
 \end{remark}
 
+\begin{remark}[Target-block form of the intercept-gap monotonicity]
+\label{rem:target-block-intercept-gap-monotonicity}
+The slope--intercept monotonicity from
+Lemma~\ref{lem:slope-intercept-parametrization-lifted-three-point}
+is not special to the first right-hand target block.
+
+Let $I$ be any open interval to the right of the source interval $I_-$
+on which $S'$ is monotone and hence invertible. For
+\[
+m\in S'(I_-)\cap S'(I),
+\]
+define
+\[
+u_I(m):=(S'|_I)^{-1}(m),
+\qquad
+\tau_I(m):=S(u_I(m))-m\,u_I(m),
+\]
+and
+\[
+D_I(m):=\tau_-(m)-\tau_I(m).
+\]
+Then exactly the same envelope calculation gives
+\[
+\tau_I'(m)=-u_I(m),
+\qquad
+D_I'(m)=u_I(m)-a(m)>0.
+\]
+
+Thus for any monotone-slope target block, interior common tangency against the
+fixed source interval $I_-$ is again the scalar equation
+\[
+D_I(m)=0.
+\]
+So any future continuation across successive odd-order $K_v$-zeros must be
+organized blockwise through these monotone intercept-gap functions rather than
+through a hidden recurrence mechanism inside a block.
+\end{remark}
+
 \begin{remark}[Exact nonmixed reduction in terms of $\mathcal Z$ and $\mathcal R$]
 \label{rem:nonmixed-four-point-zeros-can-carry-preexisting-branches}
 At a nonmixed lifted point
@@ -12101,7 +12139,8 @@ three-point collapse limits become tangent-line contact determinants for the
 planar lifted curve $\Lambda_v=(x,S)$, and four-point collapse limits become
 tangent-plane contact determinants for the lifted space curve $Q_v=(Y,x,S)$.
 
-Third, the three-point side is now globally controlled on good $v_5$-patches.
+Third, the three-point side is now blockwise globally controlled on good
+$v_5$-patches.
 The curvature zero set $K_v=0$ has no infinite-order flat points; even-order
 $K_v$-zeros are sterile; odd-order $K_v$-zeros carry exactly one local
 opposite-side tangent-contact branch; and that branch continues uniquely on the
@@ -12211,7 +12250,7 @@ bad-core branch is closed on compact good patches, so the genuinely live routes
 begin at the three- and four-point branches.
 
 \item
-\textbf{Three-point branch (closed on good $v_5$-patches).}
+\textbf{Three-point branch (blockwise closed on good $v_5$-patches).}
 The lifted three-point side is no longer a live internal bottleneck:
 infinite-order flatness is excluded, the unique odd-order branch continues
 uniquely on the maximal right monotone-slope block, and there is no interior
@@ -12272,7 +12311,7 @@ First, exact shrinking lifted $3$-point circuits concentrate into
 \[
 K_v=0.
 \]
-On good $v_5$-patches, this side is now globally controlled: there is no
+On good $v_5$-patches, this side is now blockwise globally controlled: there is no
 infinite-order flatness, even-order $K_v$-zeros are sterile, odd-order
 $K_v$-zeros seed exactly one local opposite-side branch, and that branch
 continues uniquely on the maximal right monotone-slope block with no interior
@@ -12525,7 +12564,7 @@ compact good patches.
 
 Second, on the lifted three-point side, shrinking exact circuits now
 concentrate into $K_v=0$, repeated-node limits become tangent-line contacts,
-and this side is globally controlled on good $v_5$-patches: $K_v$ has no
+and this side is blockwise globally controlled on good $v_5$-patches: $K_v$ has no
 infinite-order zeros; even-order zeros are sterile; odd-order zeros carry
 exactly one local branch; and that branch continues uniquely on the maximal
 right monotone-slope block with no interior common-tangent event or source-side
@@ -12553,7 +12592,7 @@ lifted variables alone.
 
 \begin{remark}[Post-draft findings: established, provisional, and live]
 \label{rem:post-draft-findings-established-provisional-live}
-Since this draft state, five additional conclusions have emerged.
+Since this draft state, six additional conclusions have emerged.
 
 First, on the two-point branch, the source-level finite-order corrected package
 through order $7$ is now source-defined and collision-compatible: swap
@@ -12613,7 +12652,34 @@ theorem-level problem is no longer pointwise nonvanishing of $V_1$, but the
 effective use of that dichotomy: finite-jet parity transfer on the $v_5$-side
 and fallback local geometry on the $u_5$-side.
 
-Fifth, on the backup algebraic side, the valuation form of the septic transport
+Fifth, on the lifted three-point side, the repeated-node tangent-contact
+equation
+\[
+H_3(a,u)=S(u)-S(a)-S'(a)(u-a)
+\]
+is now globally rigid on each monotone-slope target block of a good $v_5$-patch.
+The correct global parameter is the source tangent slope
+\[
+m=S'(a),
+\]
+with source/target tangent intercepts
+\[
+\tau_-(m)=S(a(m))-m\,a(m),
+\qquad
+\tau_+(m)=S(u_+(m))-m\,u_+(m),
+\]
+and intercept gap
+\[
+D(m)=\tau_-(m)-\tau_+(m),
+\qquad
+D'(m)=u_+(m)-a(m)>0.
+\]
+Consequently $K_v$ has no infinite-order flat points on a good $v_5$-patch,
+interior common tangency is excluded, and the unique odd-order lifted
+$3$-point branch continues uniquely on the maximal right monotone-slope block
+with no source-side return.
+
+Sixth, on the backup algebraic side, the valuation form of the septic transport
 constraint shows that if
 \[
 \operatorname{ord}_s u_5=2m+1,\qquad
@@ -12632,10 +12698,11 @@ So failure of the $v_5$-route is forced into a coupled quintic--septic
 degeneration tower rather than an isolated coefficient cancellation.
 
 So the present frontier is no longer a generic local geometry problem. It is
-the combination of a source-level two-point structure theorem, the effective
-use of the already-established quintic-patch dichotomy together with the
-finite-jet parity bridge on the mixed four-point side, and a deeper
-RH-specific identity on the nonmixed four-point branch.
+the combination of the source-level multi-pair / finite-core interaction
+problem above the now-closed two-point branch, the effective use of the
+already-established quintic-patch dichotomy together with the finite-jet parity
+bridge on the mixed four-point side, and a deeper RH-specific identity on the
+nonmixed four-point branch.
 \end{remark}
 
 \section{Endgame architecture and remaining global propagation problem}
