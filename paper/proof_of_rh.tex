@@ -11009,6 +11009,132 @@ present proof using
 Theorem~\ref{thm:quantitative-defect-thickened-strengthened-coincidence}.
 \end{proof}
 
+\begin{proposition}[Conditional exact two-point exclusion from quotient diagonal collapse]
+\label{prop:conditional-exact-two-point-exclusion-qabs}
+Let
+\[
+J\Subset\{c\neq 0\}
+\]
+be a compact interval. Assume there exists an actual corrected two-atom quotient
+map
+\[
+\mathcal F_2(a_1,h_1;a_2,h_2)\in \Qabs[[z^2]]
+\]
+defined on normalized two-pair data, with the following properties:
+
+\begin{enumerate}
+\item \textbf{Continuity.}
+The map $\mathcal F_2$ is continuous in the normalized two-pair parameters.
+
+\item \textbf{Diagonal collapse.}
+For every $h\in J$ and every normalized amplitude pair $(a_1,a_2)$,
+\[
+\mathcal F_2(a_1,h;a_2,h)=F_h,
+\]
+where $F_h$ is the normalized one-pair quotient odd germ.
+
+\item \textbf{Precompactness of normalized amplitudes.}
+Every sequence of normalized two-pair data with
+\[
+h_{1,n},h_{2,n}\in J,
+\qquad
+|h_{1,n}-h_{2,n}|\to 0
+\]
+admits a subsequence along which the full normalized parameter tuple converges.
+\end{enumerate}
+
+Then there is no sequence of nontrivial normalized bad two-pair cores
+\[
+(a_{1,n},h_{1,n};a_{2,n},h_{2,n})
+\]
+with
+\[
+h_{1,n},h_{2,n}\in J,
+\qquad
+0<|h_{1,n}-h_{2,n}|\to 0.
+\]
+Equivalently, under the three assumptions above, the exact close two-point
+bad-core branch is excluded on compact subsets of $\{c\neq 0\}$.
+\end{proposition}
+
+\begin{proof}
+Assume for contradiction that there exists a sequence of nontrivial normalized
+bad two-pair cores
+\[
+(a_{1,n},h_{1,n};a_{2,n},h_{2,n})
+\]
+with
+\[
+h_{1,n},h_{2,n}\in J,
+\qquad
+0<|h_{1,n}-h_{2,n}|\to 0.
+\]
+Since each core is bad, its quotient odd germ vanishes identically, so
+\[
+\mathcal F_2(a_{1,n},h_{1,n};a_{2,n},h_{2,n})=0
+\qquad
+\text{for all }n.
+\]
+
+By the precompactness assumption, after passing to a subsequence we may assume
+that the full normalized parameter tuple converges:
+\[
+a_{1,n}\to a_1^*,
+\qquad
+a_{2,n}\to a_2^*,
+\qquad
+h_{1,n}\to m,
+\qquad
+h_{2,n}\to m
+\]
+for some $m\in J$. By continuity of $\mathcal F_2$,
+\[
+0
+=
+\lim_{n\to\infty}
+\mathcal F_2(a_{1,n},h_{1,n};a_{2,n},h_{2,n})
+=
+\mathcal F_2(a_1^*,m;a_2^*,m).
+\]
+Applying diagonal collapse gives
+\[
+0=\mathcal F_2(a_1^*,m;a_2^*,m)=F_m.
+\]
+
+But $m\in J\Subset\{c\neq 0\}$, so the normalized one-pair quotient germ
+$F_m$ is nonzero: its cubic leading coefficient is nonzero on $\{c\neq 0\}$.
+This contradiction proves the claim.
+\end{proof}
+
+\begin{remark}[A weaker exact two-point route]
+\label{rem:weaker-exact-two-point-route}
+Proposition~\ref{prop:conditional-exact-two-point-exclusion-qabs} is strictly
+weaker than the quadratic defect-factorization route of
+Lemma~\ref{lem:minimal-source-level-two-point-criterion}. It does not produce
+\[
+\mathcal I_2=a_1a_2(h_1-h_2)^2\mathcal J_2
+\]
+and does not yield the quantitative defect estimates used in
+Theorem~\ref{thm:quantitative-defect-thickened-strengthened-coincidence}.
+Instead, it isolates a smaller alternative input: a genuine corrected two-atom
+quotient map, continuity in normalized parameters, and exact diagonal collapse
+to the one-pair quotient class.
+
+Thus there are now two distinct two-point routes in the draft:
+
+\begin{enumerate}
+\item the stronger finite-order source-level route, which would force quadratic
+defect bounds and hence quantitative defect-scale closeness;
+
+\item the weaker quotient-diagonal route, which would already exclude exact
+close two-point bad cores on compact subsets of $\{c\neq 0\}$.
+\end{enumerate}
+
+At present, the draft does not prove either route outright. The first remains a
+finite-order source-level merger problem; the second remains a continuity and
+diagonal-collapse problem for the actual corrected two-atom quotient germ.
+\end{remark}
+
 \begin{remark}[Exact remaining source-level input on the two-point branch]
 \label{rem:wip-source-level-reduction-two-point-branch}
 Lemma~\ref{lem:minimal-source-level-two-point-criterion} isolates the exact
@@ -11043,9 +11169,15 @@ finite-order source criterion that would close the two-point branch on compact
 good patches.
 
 Thus the remaining issue beyond the present two-pair subsection is no longer a
-vague interaction heuristic. On the two-point side it is specifically the
+vague interaction heuristic. There are now two precise conditional routes on the
+two-point side: the stronger finite-order source-level merger route, which
+would force quadratic defect estimates, and the weaker quotient-diagonal route,
+which would already exclude exact close two-point bad cores on compact subsets
+of $\{c\neq 0\}$. On the two-point side, the remaining work is either the
 verification of the source-level merger statement for the corrected two-atom
-cubic/quintic/septic package. Beyond that lie the genuinely multi-pair
+cubic/quintic/septic package, or the construction of the actual corrected
+two-atom quotient germ with continuity and exact diagonal collapse. Beyond
+that lie the genuinely multi-pair
 interaction bookkeeping through orders $3,5,7$, the local lifted $3/4$-point
 analysis for close-point branches on the $v_5\neq 0$ and parallel $u_5\neq 0$
 patches, and the subsequent finite-core extraction.
