@@ -3210,6 +3210,84 @@ odd jets: on odd germs it acts as an explicit shifted complete-homogeneous
 transform of the surviving odd Taylor coefficients.
 \end{corollary}
 
+\begin{proposition}[Exact finite-difference factorization on odd germs]
+\label{prop:n-point-odd-finite-difference-factorization}
+Let
+\[
+T_Q:=e^{Q^{-2}D},
+\qquad
+D:=\frac{d}{ds},
+\]
+so that $T_QF(s)=F(s+Q^{-2})$. Then for every odd analytic germ
+$F$ at $s=0$,
+\[
+(\mathcal P_{N,Q}F)
+=
+\frac{N(-1)^N}{2\binom{2N-2}{N-1}}
+\left[
+T_Q^{-N}(1-T_Q)^{2N-1}(1+T_Q)F
+\right]_{s=0}.
+\]
+Equivalently,
+\[
+(\mathcal P_{N,Q}F)
+=
+\frac{(-1)^{N+1}N}{2\binom{2N-2}{N-1}}
+\left[
+T_Q^{-N}(T_Q-1)^{2N-1}(1+T_Q)F
+\right]_{s=0}.
+\]
+In particular, on odd germs the $N$-point operator factors exactly through
+the $(2N-1)$-st forward difference.
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+P_{N,Q}(D):=\sum_{j=1}^N a_j^{(N)}e^{(j/Q^2)D}
+=\sum_{j=1}^N a_j^{(N)}T_Q^j.
+\]
+Then
+\[
+(\mathcal P_{N,Q}F)=\bigl(P_{N,Q}(D)F\bigr)\big|_{s=0}.
+\]
+By Lemma~\ref{lem:n-point-mellin-symbol}, with $t=T_Q$,
+\[
+P_{N,Q}(D)-P_{N,Q}(-D)
+=
+\frac{N(-1)^N}{\binom{2N-2}{N-1}}\,
+T_Q^{-N}(1-T_Q)^{2N-1}(1+T_Q).
+\]
+If $F$ is odd, then
+\[
+\bigl(P_{N,Q}(-D)F\bigr)\big|_{s=0}
+=
+\sum_{j=1}^N a_j^{(N)}F(-j/Q^2)
+=
+-\sum_{j=1}^N a_j^{(N)}F(j/Q^2)
+=
+-(\mathcal P_{N,Q}F).
+\]
+Hence
+\[
+2(\mathcal P_{N,Q}F)
+=
+\bigl((P_{N,Q}(D)-P_{N,Q}(-D))F\bigr)\big|_{s=0},
+\]
+which gives the claimed formula. The second form follows from
+$(1-T_Q)^{2N-1}=-(T_Q-1)^{2N-1}$.
+\end{proof}
+
+\begin{remark}[Why the odd tail begins at order $2N-1$]
+\label{rem:n-point-odd-tail-begins-by-factorization}
+Proposition~\ref{prop:n-point-odd-finite-difference-factorization} shows that
+the disappearance of the first $N-1$ odd jets is not merely a moment
+identity. It is built into the operator itself: on odd germs, the
+$N$-point projector contains the factor $(T_Q-1)^{2N-1}$. The surviving
+odd tail therefore begins at order $2N-1$ for operator-theoretic reasons,
+not only by coefficient cancellation.
+\end{remark}
+
 \begin{remark}[Finite-order recurrence of the normalized surviving tail]
 \label{rem:n-point-tail-recurrence}
 Define
@@ -3239,6 +3317,139 @@ e_1\nu_{k-1}-e_2\nu_{k-2}+\cdots+(-1)^{N+1}e_N\nu_{k-N}
 \]
 with the conventions $\nu_0=1$ and $\nu_{k}=0$ for $k<0$. Thus the
 surviving odd tail is governed by an exact order-$N$ linear recurrence.
+\end{remark}
+
+\begin{proposition}[Partial-fraction form of the surviving odd tail]
+\label{prop:n-point-tail-partial-fractions}
+Let
+\[
+G_N(t):=\frac{1}{\prod_{m=1}^N(1-m^2 t)}.
+\]
+Then $G_N$ has the exact partial-fraction decomposition
+\[
+G_N(t)
+=
+\sum_{j=1}^N \frac{B_{N,j}}{1-j^2 t},
+\]
+where
+\[
+B_{N,j}
+=
+\frac{2(-1)^{N-j}j^{2N}}{(N-j)!(N+j)!}.
+\]
+Equivalently,
+\[
+\frac{1}{\prod_{m=1}^N(1-m^2u^2)}
+=
+\sum_{j=1}^N
+\frac{2(-1)^{N-j}j^{2N}}{(N-j)!(N+j)!}\,
+\frac{1}{1-j^2u^2}.
+\]
+
+Consequently, for every $k\ge 0$,
+\[
+h_k(1^2,\dots,N^2)
+=
+\sum_{j=1}^N
+\frac{2(-1)^{N-j}j^{2N+2k}}{(N-j)!(N+j)!},
+\]
+and hence
+\[
+\mu_{2N-1+2k}^{(N)}
+=
+(-1)^{N+1}(2N-1)N!(N-1)!
+\sum_{j=1}^N
+\frac{2(-1)^{N-j}j^{2N+2k}}{(N-j)!(N+j)!}.
+\]
+\end{proposition}
+
+\begin{proof}
+Since the poles of $G_N(t)$ are simple and located at $t=j^{-2}$
+($1\le j\le N$), one has
+\[
+G_N(t)=\sum_{j=1}^N \frac{B_{N,j}}{1-j^2 t}
+\]
+for uniquely determined coefficients $B_{N,j}$. Multiplying by
+$(1-j^2 t)$ and evaluating at $t=j^{-2}$ gives
+\[
+B_{N,j}
+=
+\left.
+\frac{1}{\prod_{m\ne j}(1-m^2 t)}
+\right|_{t=j^{-2}}
+=
+\frac{1}{\prod_{m\ne j}(1-m^2/j^2)}.
+\]
+Now
+\[
+\prod_{m\ne j}\left(1-\frac{m^2}{j^2}\right)
+=
+j^{-2N+2}\prod_{m\ne j}(j^2-m^2),
+\]
+and
+\[
+\prod_{m\ne j}(j^2-m^2)
+=
+\prod_{m\ne j}(j-m)\prod_{m\ne j}(j+m).
+\]
+Here
+\[
+\prod_{m\ne j}(j-m)
+=
+(j-1)! \,(-1)^{N-j}(N-j)!,
+\]
+while
+\[
+\prod_{m\ne j}(j+m)
+=
+\frac{(N+j)!}{2j\,j!}.
+\]
+Therefore
+\[
+\prod_{m\ne j}(j^2-m^2)
+=
+(-1)^{N-j}\frac{(N-j)!(N+j)!}{2j^2},
+\]
+and hence
+\[
+B_{N,j}
+=
+\frac{2(-1)^{N-j}j^{2N}}{(N-j)!(N+j)!}.
+\]
+Expanding each geometric series
+\[
+\frac{1}{1-j^2u^2}=\sum_{k\ge 0} j^{2k}u^{2k}
+\]
+and comparing coefficients of $u^{2k}$ yields the formula for
+$h_k(1^2,\dots,N^2)$. The identity for
+$\mu_{2N-1+2k}^{(N)}$ then follows from
+Remark~\ref{rem:surviving-odd-tail-structure}.
+\end{proof}
+
+\begin{remark}[Dominance of the outermost pole for fixed $N$]
+\label{rem:n-point-tail-dominant-outer-pole}
+For fixed $N$, the explicit decomposition in
+Proposition~\ref{prop:n-point-tail-partial-fractions} shows that the surviving
+tail is asymptotically dominated by the outermost node $j=N$. Indeed,
+\[
+h_k(1^2,\dots,N^2)
+=
+\frac{2N^{2N+2k}}{(2N)!}
++
+O_N\!\bigl((N-1)^{2k}\bigr)
+\qquad (k\to\infty),
+\]
+and therefore
+\[
+\mu_{2N-1+2k}^{(N)}
+=
+(-1)^{N+1}\frac{N^{2N+2k}}{\binom{2N-2}{N-1}}
++
+O_N\!\bigl((N-1)^{2k}\bigr)
+\qquad (k\to\infty).
+\]
+So for fixed $N$, the far odd tail is eventually controlled by the single
+outermost pole $u=\pm 1/N$.
 \end{remark}
 
 \begin{proposition}[Kernel form and explicit corrected $N$-point transverse estimate]
