@@ -10557,6 +10557,88 @@ u_5(s),\ v_5(s)\ \text{odd},
 \qquad
 u_{7,K_1}(s),\ v_{7,K_1}(s)\ \text{odd},
 \]
+Writing
+\[
+u_5(s)=U_1s+U_3s^3+U_5s^5+\cdots,
+\qquad
+v_5(s)=V_1s+V_3s^3+V_5s^5+\cdots,
+\]
+the first coefficients are
+\[
+U_1=2\bigl(v_0\,\delta\alpha_1+\beta_0\,\delta u_1\bigr),
+\]
+\[
+U_3=2\bigl(v_0\,\delta\alpha_3+v_2\,\delta\alpha_1+\beta_0\,\delta u_3+\beta_2\,\delta u_1\bigr),
+\]
+\[
+U_5=2\bigl(v_0\,\delta\alpha_5+v_2\,\delta\alpha_3+v_4\,\delta\alpha_1+\beta_0\,\delta u_5+\beta_2\,\delta u_3+\beta_4\,\delta u_1\bigr),
+\]
+and
+\[
+V_1=2\bigl(\bar\alpha_0\,\delta u_1+\delta\alpha_1\,\bar u_0\bigr),
+\]
+\[
+V_3=2\bigl(\bar\alpha_0\,\delta u_3+\bar\alpha_2\,\delta u_1+\delta\alpha_1\,\bar u_2+\delta\alpha_3\,\bar u_0\bigr),
+\]
+\[
+V_5=2\bigl(\bar\alpha_0\,\delta u_5+\bar\alpha_2\,\delta u_3+\bar\alpha_4\,\delta u_1+\delta\alpha_1\,\bar u_4+\delta\alpha_3\,\bar u_2+\delta\alpha_5\,\bar u_0\bigr).
+\]
+
+Likewise, writing
+\[
+u_{7,K_1}(s)=\widehat U_1s+\widehat U_3s^3+\cdots,
+\qquad
+v_{7,K_1}(s)=\widehat V_1s+\widehat V_3s^3+\cdots,
+\]
+one gets
+\[
+\widehat U_1
+=
+2\kappa\bigl(
+\delta x_1\,\nu_{6,0}
++\beta_{5,0}\,\delta u_1
++v_0\,\delta\alpha_{5,1}
++b_0\,\delta p_1
++r_0\,\delta a_1
+\bigr),
+\]
+\[
+\widehat V_1
+=
+2\kappa\bigl(
+\delta x_1\,\bar\mu_{6,0}
+-\bar x_0\,\delta\mu_{6,1}
++\bar\alpha_{5,0}\,\delta u_1
++\delta\alpha_{5,1}\,\bar u_0
++\bar a_0\,\delta p_1
++\delta a_1\,\bar p_0
+\bigr),
+\]
+and
+\[
+\widehat U_3
+=
+2\kappa\bigl(
+\delta x_1\nu_{6,2}+\delta x_3\nu_{6,0}
++\beta_{5,0}\delta u_3+\beta_{5,2}\delta u_1
++v_0\delta\alpha_{5,3}+v_2\delta\alpha_{5,1}
++b_0\delta p_3+b_2\delta p_1
++r_0\delta a_3+r_2\delta a_1
+\bigr),
+\]
+\[
+\widehat V_3
+=
+2\kappa\bigl(
+\delta x_1\bar\mu_{6,2}+\delta x_3\bar\mu_{6,0}
+-\bar x_0\delta\mu_{6,3}-\bar x_2\delta\mu_{6,1}
++\bar\alpha_{5,0}\delta u_3+\bar\alpha_{5,2}\delta u_1
++\delta\alpha_{5,1}\bar u_2+\delta\alpha_{5,3}\bar u_0
++\bar a_0\delta p_3+\bar a_2\delta p_1
++\delta a_1\bar p_2+\delta a_3\bar p_0
+\bigr).
+\]
+
 and therefore
 \[
 \Delta_7(s)=u_{7,K_1}(s)v_5(s)-u_5(s)v_{7,K_1}(s)
@@ -10671,9 +10753,9 @@ and their derivatives can force either of the two dream conclusions:
 \[
 \mathcal R \text{ is even in the normalized nonmixed coordinate},
 \]
-or
+or the mixed-branch exclusion
 \[
-\operatorname{ord}_0\mathcal Z\ge 4
+(r,\operatorname{ord}_0\mathcal Z)\notin\{(1,1),(1,3),(2,2)\}
 \quad\text{at every mixed point.}
 \]
 
@@ -11025,40 +11107,34 @@ Second, exact shrinking lifted $4$-point circuits concentrate into
 \[
 T_v=0.
 \]
-On the nonmixed side $K_v\neq 0$, finite-order $T_v$-zeros control local
-birth/crossing by parity, but generic models show that a preexisting close
-branch can still exist near certain odd-order nonmixed zeros. Thus the
-nonmixed $4$-point side is not governed by a blanket local-exclusion
-theorem.
+On the nonmixed side $K_v\neq 0$, finite-order odd $T_v$-zeros can already
+support genuine local exact branch sheets, so the nonmixed $4$-point side is
+not governed by a blanket local sterility theorem.
 
-Third, the mixed case
+Third, on the mixed side $K_v=T_v=0$, the low-order obstruction list is now
+finite and explicit:
 \[
-K_v=T_v=0
+(m,n)=(3,4),\ (3,6),\ (4,6),
 \]
-is genuinely different. After affine normalization with
+equivalently
 \[
-x=\frac{v_5}{c}
+(r,s)=(1,2),\ (1,4),\ (2,5),
 \]
-as local coordinate, the lifted space curve is led to a monomial model
+equivalently
 \[
-Q_v(x)\sim (x^n,x,x^m),
+(r,\operatorname{ord}_0\mathcal Z)=(1,1),\ (1,3),\ (2,2).
 \]
-with order bookkeeping
-\[
-m=r+2,
-\qquad
-n=s-r+3,
-\qquad
-s\ge 2r.
-\]
-No generic parity obstruction is available at this level, so the mixed locus
-remains the genuinely new codimension-two local obstruction.
+Moreover, the centered symmetric-placement Taylor package suggests that this
+entire explicit low-order mixed list is already incompatible with the local
+collision-side parity structure, once that parity is transferred carefully to
+the good-patch coordinate $x=v_5/c$. At present this should still be treated
+as a live attack route rather than theorem-level closure.
 
-Thus the remaining lifted local issues are:
+Thus the remaining lifted local issues are now:
 the continuation / non-recurrence of the unique odd-order $3$-point branch,
-the continuation / non-recurrence of nonmixed $4$-point branches, possible
-infinite-order flatness, and the mixed codimension-two locus together with the
-extra bad-core compatibility conditions needed there.
+the continuation / non-recurrence of nonmixed odd-order $4$-point branches,
+possible infinite-order flatness, and the completion of the centered-to-patch
+bridge on the mixed $4$-point side.
 \end{remark}
 
 \begin{remark}[Current geometric bottleneck]
@@ -11086,36 +11162,29 @@ $v_5\neq 0$ patches: exact shrinking $3$-point circuits concentrate into
 $\{K_v=0\}$, and exact shrinking $4$-point circuits concentrate into
 $\{T_v=0\}$, with uniform small-diameter exclusion away from those zero
 sets. Near finite-order isolated $K_v$-zeros, the $3$-point branch is
-completely classified by parity; on the $4$-point side, however, generic
-nonmixed odd-order $T_v$-zeros can still carry preexisting close branches.
-So the missing lifted ingredient is not a blanket zero-capture theorem, but a
-global branch-continuation / non-recurrence theorem for the nonmixed lifted
-branches, together with the analysis of the mixed locus $K_v=T_v=0$ and the
-extra algebraic compatibility conditions required for true bad four-point
-cores there.
+completely classified by parity.
 
-What remains is a genuinely global propagation / recurrence problem for
-tangent-slope and tangent-line data. More precisely, the missing theorem is
-best viewed as a non-recurrence theorem for the slope function
+On the $4$-point side, generic nonmixed odd-order $T_v$-zeros can still
+carry preexisting close branches, so the nonmixed branch remains genuinely
+live. By contrast, the mixed low-order branch is no longer just a vague
+codimension-two obstruction: its explicit dangerous list is
 \[
-\beta(h):=-\frac{L(h)}{M(h)},
+(r,\operatorname{ord}_0\mathcal Z)\in\{(1,1),(1,3),(2,2)\},
 \]
-equivalently as a no-reentry theorem for the dual tangent-line curve
+equivalently
 \[
-T(h):=\left(-\frac{L(h)}{M(h)},\frac{N(h)}{M(h)}\right),
+(r,s)=(1,2),(1,4),(2,5),
 \]
-or, on the highest-new slice, as a no-reentry theorem for the scalar graph
-\[
-\phi=\lambda^{[1]},
-\qquad
-\beta^{[1]}=\phi_\mu,
-\qquad
-m^{[1]}=\phi-\mu\phi_\mu.
-\]
-The local theorems proved above resolve the creation of bad $2+2$ geometry at
-generic $W=0,\ M\neq 0$ and generic turning boundaries; what is missing is a
-global theorem preventing reappearance of the same line-incidence data on
-nonadjacent branches.
+and the centered symmetric-placement Taylor package strongly suggests that this
+whole list is already incompatible with the collision-side parity structure.
+What remains there is to promote that local diagonal-based calculation to a
+theorem-level bridge in the good-patch coordinate $x=v_5/c$.
+
+So the missing lifted ingredient is not a blanket zero-capture theorem. It is:
+a global branch-continuation / non-recurrence theorem for the nonmixed lifted
+$4$-point branches; a theorem-level centered-to-patch parity bridge for the
+mixed branch; and, more generally, a global theorem preventing reappearance of
+the same line-incidence data on nonadjacent branches.
 
 Moreover, the exact identities for $W$ and $W'$ show that this remaining
 obstruction is still encoded by the canonical order-$7$ package through
