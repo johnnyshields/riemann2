@@ -4123,6 +4123,68 @@ Moreover, since $\kappa_N$ is strictly decreasing on $(N,\infty)$, the
 kernel factor is largest at the smallest admissible boundary radius.
 \end{remark}
 
+\begin{proposition}[Positive smoothing preserves the real kernel profile]
+\label{prop:smoothed-real-kernel-profile}
+Let $\psi\in C_c^\infty(\mathbf R)$ be even, nonnegative, and normalized by
+\[
+\int_{\mathbf R}\psi(u)\,du=1.
+\]
+Set
+\[
+U_\psi:=\sup\{|u|:u\in \operatorname{supp}\psi\}.
+\]
+For $x>N+\eta Q^2U_\psi$, define the smoothed real profile
+\[
+\kappa_{N,\eta}^{\psi}(x)
+:=
+\int_{\mathbf R}\psi(u)\,\kappa_N(x+\eta Q^2u)\,du,
+\]
+where
+\[
+\kappa_N(x):=x\,\frac{\Gamma(x-N)}{\Gamma(x+N+1)}
+=\frac{1}{\prod_{j=1}^N(x^2-j^2)}.
+\]
+Then
+\[
+\kappa_{N,\eta}^{\psi}(x)>0
+\qquad\text{and}\qquad
+\frac{d}{dx}\kappa_{N,\eta}^{\psi}(x)<0
+\]
+for all $x>N+\eta Q^2U_\psi$.
+\end{proposition}
+
+\begin{proof}
+For $x>N+\eta Q^2U_\psi$ and $u\in \operatorname{supp}\psi$, one has
+\[
+x+\eta Q^2u>N.
+\]
+By Proposition~\ref{prop:exact-kernel-real-profile},
+\[
+\kappa_N(x+\eta Q^2u)>0
+\qquad\text{and}\qquad
+\kappa_N'(x+\eta Q^2u)<0.
+\]
+Since $\psi\ge 0$ and $\int \psi=1$, averaging preserves positivity:
+\[
+\kappa_{N,\eta}^{\psi}(x)>0.
+\]
+Differentiating under the integral sign gives
+\[
+\frac{d}{dx}\kappa_{N,\eta}^{\psi}(x)
+=
+\int_{\mathbf R}\psi(u)\,\kappa_N'(x+\eta Q^2u)\,du<0.
+\]
+\end{proof}
+
+\begin{remark}[Smoothed real profile]
+\label{rem:smoothed-real-kernel-profile}
+Proposition~\ref{prop:smoothed-real-kernel-profile} shows that nonnegative
+smoothing preserves the qualitative real-axis behavior of the exact kernel:
+positivity and strict monotonic decay survive averaging. Thus the Mellin-side
+smoothing introduced later does not destroy the basic real-profile structure of
+the $N$-point kernel.
+\end{remark}
+
 \begin{remark}[Discrete Mellin projector and test-function viewpoint]
 \label{rem:discrete-mellin-projector}
 Define the additive operator
@@ -4550,6 +4612,291 @@ so
 Thus microscopic smoothing preserves the same zeta-side exponential scale while
 replacing the discrete projector by a genuinely smooth Mellin-side test
 function.
+\end{remark}
+
+\begin{lemma}[Higher-order smoothed Mellin projector]
+\label{lem:higher-order-smoothed-mellin-projector}
+Fix an integer $M\ge 1$. Let $\phi_M\in C_c^\infty(\mathbf R)$ be even and
+satisfy
+\[
+\int_{\mathbf R}\phi_M(u)\,du=1,
+\qquad
+\int_{\mathbf R}u^{2\ell}\phi_M(u)\,du=0
+\quad (1\le \ell\le M-1).
+\]
+Define its bilateral Laplace transform by
+\[
+\widehat\phi_M(w):=\int_{\mathbf R}\phi_M(u)e^{wu}\,du.
+\]
+For $\eta>0$, define
+\[
+(\mathcal P_{N,Q,\eta}^{(M)}F)
+:=
+\sum_{j=1}^N a_j^{(N)}
+\int_{\mathbf R}\phi_M(u)\,
+F\!\left(\frac{j}{Q^2}+\eta u\right)\,du,
+\]
+whenever $F$ is holomorphic on a neighborhood of the integration region.
+
+Then:
+
+\begin{enumerate}
+\item for every exponential mode $F(s)=e^{zs}$,
+\[
+\mathcal P_{N,Q,\eta}^{(M)}(e^{zs})
+=
+\widehat\phi_M(\eta z)\,\widehat\mu_{N,Q}(z),
+\qquad
+\widehat\mu_{N,Q}(z)=\sum_{j=1}^N a_j^{(N)}e^{zj/Q^2};
+\]
+
+\item one has
+\[
+\widehat\phi_M(0)=1,
+\qquad
+\widehat\phi_M^{(k)}(0)=0
+\quad (1\le k\le 2M-1);
+\]
+
+\item the smoothed symbol preserves the exact low odd-jet annihilation:
+\[
+\partial_z^{\,2r+1}\!\bigl(\widehat\phi_M(\eta z)\widehat\mu_{N,Q}(z)\bigr)\Big|_{z=0}=0
+\qquad (0\le r\le N-2);
+\]
+
+\item if $F$ is holomorphic on a neighborhood $\Omega$ containing all points
+\[
+\frac{j}{Q^2}+\eta u
+\qquad
+(1\le j\le N,\ u\in \operatorname{supp}\phi_M),
+\]
+then
+\[
+\bigl|\mathcal P_{N,Q,\eta}^{(M)}F-\mathcal P_{N,Q}F\bigr|
+\le
+\frac{\eta^{2M}}{(2M)!}\,(2N-1)\,m_{2M}(\phi_M)\,
+\sup_{\Omega}|F^{(2M)}|,
+\]
+where
+\[
+m_{2M}(\phi_M):=\int_{\mathbf R}|u|^{2M}|\phi_M(u)|\,du.
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For $F(s)=e^{zs}$,
+\[
+\mathcal P_{N,Q,\eta}^{(M)}(e^{zs})
+=
+\sum_{j=1}^N a_j^{(N)}e^{zj/Q^2}
+\int_{\mathbf R}\phi_M(u)e^{\eta zu}\,du
+=
+\widehat\phi_M(\eta z)\,\widehat\mu_{N,Q}(z),
+\]
+which proves the first statement.
+
+Since $\phi_M$ is even, all odd moments vanish. By the imposed even-moment
+conditions, one also has
+\[
+\int_{\mathbf R}u^k\phi_M(u)\,du=0
+\qquad (1\le k\le 2M-1).
+\]
+Differentiating $\widehat\phi_M$ at $0$ gives
+\[
+\widehat\phi_M^{(k)}(0)=\int_{\mathbf R}u^k\phi_M(u)\,du,
+\]
+so
+\[
+\widehat\phi_M(0)=1,
+\qquad
+\widehat\phi_M^{(k)}(0)=0
+\quad (1\le k\le 2M-1).
+\]
+This proves the second statement.
+
+By Lemma~\ref{lem:n-point-mellin-symbol},
+\[
+\widehat\mu_{N,Q}(0)=1,
+\qquad
+\partial_z^{\,2r+1}\widehat\mu_{N,Q}(0)=0
+\quad (0\le r\le N-2).
+\]
+Applying Leibniz' rule to
+$\widehat\phi_M(\eta z)\widehat\mu_{N,Q}(z)$ shows that all odd derivatives
+up to order $2N-3$ vanish at $z=0$, proving the third statement.
+
+For the quantitative comparison, expand $F$ to order $2M-1$ at $j/Q^2$:
+\[
+F\!\left(\frac{j}{Q^2}+\eta u\right)
+=
+\sum_{k=0}^{2M-1}
+\frac{(\eta u)^k}{k!}\,
+F^{(k)}\!\left(\frac{j}{Q^2}\right)
++
+\frac{(\eta u)^{2M}}{(2M)!}\,F^{(2M)}(\xi_{j,u})
+\]
+for some $\xi_{j,u}\in\Omega$. Integrating against $\phi_M$, all terms of
+order $1$ through $2M-1$ vanish by the moment conditions, while the
+constant term survives because $\int\phi_M=1$. Hence
+\[
+\int_{\mathbf R}\phi_M(u)\,
+F\!\left(\frac{j}{Q^2}+\eta u\right)\,du
+-
+F\!\left(\frac{j}{Q^2}\right)
+=
+\frac{\eta^{2M}}{(2M)!}
+\int_{\mathbf R}\phi_M(u)\,u^{2M}F^{(2M)}(\xi_{j,u})\,du.
+\]
+Summing against $a_j^{(N)}$ and using
+Lemma~\ref{lem:n-point-coefficients},
+\[
+\sum_{j=1}^N |a_j^{(N)}|=2N-1,
+\]
+gives the claimed bound.
+\qedhere
+\end{proof}
+
+\begin{proposition}[Higher-order smoothed comparison for the corrected $N$-point zeta scalar]
+\label{prop:higher-order-smoothed-zeta-n-point-comparison}
+Fix an integer $M\ge 1$, and let $\phi_M\in C_c^\infty(\mathbf R)$ be even,
+normalized, and moment-corrected as in
+Lemma~\ref{lem:higher-order-smoothed-mellin-projector}. Set
+\[
+U_M:=\sup\{|u|:u\in \operatorname{supp}\phi_M\},
+\qquad
+m_{2M}(\phi_M):=\int_{\mathbf R}|u|^{2M}|\phi_M(u)|\,du.
+\]
+Fix $0<\alpha<\rho_0$, let
+\[
+N=\lfloor \alpha Q\rfloor,
+\]
+and assume
+\[
+0<\eta\le \frac{\rho_0-\alpha}{2U_M\,Q}.
+\]
+Define
+\[
+H_{m,\eta}^{(M)}(s):=\int_{\mathbf R}\phi_M(u)\,H_m(s+\eta u)\,du,
+\]
+and
+\[
+\Xi_{\zeta,\eta}^{(N,M)}(m)
+:=
+\sum_{j=1}^N a_j^{(N)}\,H_{m,\eta}^{(M)}\!\left(\frac{j}{Q^2}\right).
+\]
+Then:
+
+\begin{enumerate}
+\item $H_{m,\eta}^{(M)}$ is odd and holomorphic on
+\[
+|s|<\frac{\rho_{M,\eta}}{Q},
+\qquad
+\rho_{M,\eta}:=\rho_0-U_M\eta Q>\alpha;
+\]
+
+\item one has
+\[
+|\Xi_{\zeta,\eta}^{(N,M)}(m)|
+\ll_{\phi_M,\rho_0,\alpha}
+\frac{L(m)S(m)^2}{Q}\,
+e^{-\delta_*(\alpha,\rho_{M,\eta})Q};
+\]
+
+\item the smoothed and discrete $N$-point scalars satisfy
+\[
+|\Xi_{\zeta,\eta}^{(N,M)}(m)-\Xi_{\zeta}^{(N)}(m)|
+\le
+C_{\partial}(\rho_0)\,(2N-1)\,m_{2M}(\phi_M)\,
+\left(\frac{2}{\rho_0-\alpha}\right)^{2M}
+\eta^{2M}Q^{2M-3}\,
+L(m)S(m)^2,
+\]
+and hence
+\[
+|\Xi_{\zeta,\eta}^{(N,M)}(m)-\Xi_{\zeta}^{(N)}(m)|
+\ll_{\phi_M,\rho_0,\alpha}
+(\eta Q)^{2M}\,\frac{L(m)S(m)^2}{Q^2}.
+\]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The proof of oddness and holomorphy is identical to that of
+Proposition~\ref{prop:smoothed-zeta-n-point-comparison}, with $\phi$ replaced
+by $\phi_M$. Likewise, on $|s|=\rho_{M,\eta}/Q$,
+\[
+|H_{m,\eta}^{(M)}(s)|
+\le
+\|\phi_M\|_{L^1}\,C_{\partial}(\rho_0)\,\frac{L(m)S(m)^2}{Q^3}.
+\]
+Therefore the proof of
+Corollary~\ref{cor:optimized-zeta-cancellation-depth} applies verbatim with
+$\rho_0$ replaced by $\rho_{M,\eta}$, giving the stated exponential bound.
+
+For the comparison estimate,
+\[
+\Xi_{\zeta,\eta}^{(N,M)}(m)-\Xi_{\zeta}^{(N)}(m)
+=
+\bigl(\mathcal P_{N,Q,\eta}^{(M)}-\mathcal P_{N,Q}\bigr)H_m.
+\]
+Apply Lemma~\ref{lem:higher-order-smoothed-mellin-projector} with $F=H_m$.
+Exactly as in the proof of
+Proposition~\ref{prop:smoothed-zeta-n-point-comparison}, all relevant points
+lie at distance at least
+\[
+\frac{\rho_0-\alpha}{2Q}
+\]
+from the boundary circle $|s|=\rho_0/Q$. Hence Cauchy's derivative estimate
+and Proposition~\ref{prop:boundary-estimate} give
+\[
+\sup_{\Omega}|H_m^{(2M)}|
+\le
+(2M)!\,C_{\partial}(\rho_0)\,
+\left(\frac{2Q}{\rho_0-\alpha}\right)^{2M}
+\frac{L(m)S(m)^2}{Q^3}.
+\]
+Substituting this into Lemma~\ref{lem:higher-order-smoothed-mellin-projector}
+yields
+\[
+|\Xi_{\zeta,\eta}^{(N,M)}(m)-\Xi_{\zeta}^{(N)}(m)|
+\le
+C_{\partial}(\rho_0)\,(2N-1)\,m_{2M}(\phi_M)\,
+\left(\frac{2}{\rho_0-\alpha}\right)^{2M}
+\eta^{2M}Q^{2M-3}\,
+L(m)S(m)^2,
+\]
+as claimed. Since $N\asymp Q$, the final big-Oh form follows.
+\end{proof}
+
+\begin{remark}[Saturation at the natural $Q^{-1}$ smoothing scale]
+\label{rem:higher-order-smoothing-saturation}
+Proposition~\ref{prop:higher-order-smoothed-zeta-n-point-comparison} shows that
+higher-order moment correction improves the comparison error to order
+$2M$, but under the largest admissible smoothing scale
+\[
+\eta\asymp Q^{-1},
+\]
+one still has
+\[
+|\Xi_{\zeta,\eta}^{(N,M)}(m)-\Xi_{\zeta}^{(N)}(m)|
+\ll
+\frac{L(m)S(m)^2}{Q^2}.
+\]
+Thus higher-order smoothing does not improve the $Q$-power at the natural
+admissible scale; its gain is in canonicity and in the ability to make the
+smoothed projector arbitrarily close to the discrete one once one works at a
+smaller scale. For example, if
+\[
+\eta=Q^{-1-\sigma}
+\qquad (\sigma>0),
+\]
+then
+\[
+|\Xi_{\zeta,\eta}^{(N,M)}(m)-\Xi_{\zeta}^{(N)}(m)|
+\ll
+Q^{-2-2M\sigma}\,L(m)S(m)^2.
+\]
 \end{remark}
 
 We isolate the toy microscopic expansion in
