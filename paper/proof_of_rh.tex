@@ -9416,6 +9416,68 @@ as the distinguished ECT coordinate, the $v_5\neq 0$ patch is the natural
 first setting and will be used below.
 \end{remark}
 
+\begin{proposition}[Centered quintic-patch dichotomy]
+\label{prop:centered-quintic-patch-dichotomy}
+Assume the centered diagonal family is a genuine analytic branch in the
+underlying $h$-geometry, and that the centered scalar package from
+Remark~\ref{rem:centered-symmetric-placement-taylor-package} holds on that
+branch. If
+\[
+A_5^{\mathfrak f}(s)\not\equiv 0,
+\]
+then after shrinking there exist one-sided punctured subarcs on which at least
+one of the following holds:
+\begin{enumerate}
+\item
+\[
+c\neq 0,\qquad M\neq 0,\qquad v_5\neq 0,
+\]
+so the branch enters a good $v_5$-patch;
+\item
+\[
+c\neq 0,\qquad u_5\neq 0,
+\]
+so the parallel $u_5$-patch of
+Remark~\ref{rem:parallel-u5-patch-version} applies.
+\end{enumerate}
+In particular, the centered diagonal branch enters some quintic patch on
+one-sided punctured arcs.
+\end{proposition}
+
+\begin{proof}
+By Corollary~\ref{cor:centered-quintic-fixed-sector-nontriviality},
+at least one of $u_5$ or $v_5$ is a nonzero analytic germ on the centered
+branch.
+
+If $v_5\not\equiv 0$, then its zeros are isolated. Since
+\[
+c(s)=C_0+C_2s^2+\cdots,\qquad C_0\neq 0,
+\]
+we also have $c\neq 0$ near the basepoint. On any one-sided punctured arc
+where $v_5\neq 0$, define
+\[
+x=\frac{v_5}{c}.
+\]
+This is a nonconstant analytic germ. If $M\equiv 0$ on such an arc, then
+\[
+x'=\left(\frac{v_5}{c}\right)'=\frac{M}{c^2}\equiv 0,
+\]
+so $x$ would be constant, contradiction. Hence $M$ is not identically zero on
+that arc, and by analyticity its zeros are isolated. After shrinking again, one
+obtains
+\[
+c\neq 0,\qquad M\neq 0,\qquad v_5\neq 0,
+\]
+i.e. a good $v_5$-patch.
+
+If instead $v_5\equiv 0$, then $u_5\not\equiv 0$. Its zeros are isolated, so
+after shrinking to a one-sided punctured arc one has
+\[
+c\neq 0,\qquad u_5\neq 0,
+\]
+and the $u_5$-patch of Remark~\ref{rem:parallel-u5-patch-version} applies.
+\end{proof}
+
 \begin{proposition}[Linear independence of $1,u_5/c,v_5/c$]
 \label{prop:linear-independence-one-u5-over-c-v5-over-c}
 Let $J$ be a connected open interval on which
@@ -9509,6 +9571,30 @@ $v_5$ nor $c$, contradicting
 u_5=\alpha\,v_5+\beta\,c.
 \]
 This proves the claim.
+\end{proof}
+
+\begin{corollary}[Automatic $u_5$-patch nontriviality on good $M$-intervals]
+\label{cor:automatic-u5-patch-nontriviality-good-M-intervals}
+On every connected interval
+\[
+J\subset\{c\neq 0,\ M\neq 0\},
+\]
+one has
+\[
+u_5\not\equiv 0
+\qquad\text{on }J.
+\]
+Hence, after removing the isolated zeros of $u_5$, the parallel $u_5$-patch is
+always available on smaller subintervals of $J$.
+\end{corollary}
+
+\begin{proof}
+If $u_5\equiv 0$ on $J$, then
+\[
+1,\qquad \frac{u_5}{c},\qquad \frac{v_5}{c}
+\]
+would be linearly dependent on $J$, contradicting
+Proposition~\ref{prop:linear-independence-one-u5-over-c-v5-over-c}.
 \end{proof}
 
 \begin{proposition}[Non-affinity of the lifted septic scalar]
@@ -10543,6 +10629,74 @@ Any RH-specific local closure theorem for the $4$-point branch must force
 these six quantities to vanish.
 \end{remark}
 
+\begin{remark}[Wronskian-order reformulation of the mixed low-order list]
+\label{rem:wronskian-order-reformulation-mixed-list}
+On a good $v_5$-patch one has
+\[
+Y''=\frac{c^3}{M^3}J_{u_5},
+\qquad
+S''=\frac{c^3}{M^3}J_\lambda,
+\qquad
+\mathcal Z=\frac{J_{u_5}}{J_\lambda},
+\qquad
+\lambda=\frac{\Delta_7}{v_5}.
+\]
+Thus, if
+\[
+r:=\operatorname{ord}_0 J_\lambda=\operatorname{ord}_0 K_v,
+\qquad
+q:=\operatorname{ord}_0 J_{u_5}=\operatorname{ord}_0 Y'',
+\]
+then
+\[
+m=r+2,
+\qquad
+n=q+2,
+\qquad
+\operatorname{ord}_0\mathcal Z=q-r.
+\]
+Hence the dangerous mixed models
+\[
+(m,n)=(3,4),\ (3,6),\ (4,6)
+\]
+are exactly the Wronskian order-pairs
+\[
+(\operatorname{ord}_0J_\lambda,\operatorname{ord}_0J_{u_5})=(1,2),\ (1,4),\ (2,4).
+\]
+
+If
+\[
+J_\lambda(x)=x^rA(x),
+\qquad
+J_{u_5}(x)=x^rB(x),
+\qquad
+A(0)\neq 0,
+\]
+then
+\[
+\mathcal Z(x)=\frac{B(x)}{A(x)}.
+\]
+For $r=1$, the coefficients $\kappa_{1,1}$ and $\kappa_{1,3}$ are exactly the
+$x^1$- and $x^3$-coefficients of the regularized ratio $B/A$; for $r=2$,
+$\kappa_{2,2}$ is exactly the $x^2$-coefficient of $B/A$.
+
+Moreover, since
+\[
+J_c=J_{v_5}=0,
+\]
+replacing
+\[
+u_5\longmapsto u_5+a\,c+b\,v_5+\gamma\,\lambda
+\]
+changes $J_{u_5}$ only by
+\[
+J_{u_5}\longmapsto J_{u_5}+\gamma J_\lambda.
+\]
+Thus the nonconstant Taylor coefficients of $\mathcal Z$ are canonical. In
+particular, the currently explicit mixed low-order list is already a finite
+Wronskian-ratio obstruction list.
+\end{remark}
+
 \begin{remark}[Centered symmetric-placement Taylor package and diagonal-base local exclusion]
 \label{rem:centered-symmetric-placement-taylor-package}
 Let
@@ -10776,20 +10930,246 @@ low-order dangerous patterns do not arise at the symmetric diagonal base itself.
 
 \noindent
 \textit{Work in progress.}
-The passage from this centered $s$-picture to the general $x=v_5/c$ good-patch
-geometry should be treated as a live attack route, not yet as a global
-theorem. The evidence strongly suggests that, once this odd-coordinate transfer
-is valid, the explicit low-order mixed dangerous list
+The odd/even transfer from the centered microscopic variable $s$ to a general
+good-patch coordinate $x=v_5/c$ should still be treated as a live theorem-level
+bridge outside the diagonal-based local regime. What is no longer open at the
+same level is total quintic collapse on the centered branch: by
+Lemma~\ref{lem:centered-tagged-quintic-witness-survives-specialization} and
+Corollary~\ref{cor:centered-quintic-fixed-sector-nontriviality}, one already
+has
 \[
-(r,\operatorname{ord}_0\mathcal Z)\in\{(1,1),(1,3),(2,2)\}
+u_5(s)\not\equiv 0,
+\qquad
+A_5^{\mathfrak f}(s)\not\equiv 0.
 \]
-is already incompatible with the induced parity package
-\[
-\mathcal Z \text{ even},\qquad K_v \text{ odd}.
-\]
-But that translation should still be checked line by line before being promoted
-beyond the diagonal-based local regime.
+So the remaining mixed-side task is not to prove that some quintic channel
+survives, but to promote this centered quintic nontriviality into an actual
+punctured $v_5$- or $u_5$-patch.
 \end{remark}
+
+\begin{lemma}[Total centered quintic collapse forces source-level degeneration]
+\label{lem:total-centered-quintic-collapse}
+On the centered symmetric-placement branch one has
+\[
+u_5=2\bigl(v\,\delta\alpha+\beta\,\delta u\bigr),
+\qquad
+v_5=2\bigl(\bar\alpha\,\delta u+\bar u\,\delta\alpha\bigr).
+\]
+If
+\[
+u_5\equiv 0,
+\qquad
+v_5\equiv 0,
+\]
+then
+\[
+\begin{pmatrix}
+\beta(s) & v(s)\\
+\bar\alpha(s) & \bar u(s)
+\end{pmatrix}
+\binom{\delta u(s)}{\delta\alpha(s)}
+=0
+\]
+as an identity of analytic germs. Consequently, either
+\[
+\Delta_5(s):=\beta(s)\bar u(s)-v(s)\bar\alpha(s)\equiv 0,
+\]
+or
+\[
+\delta u(s)\equiv 0,
+\qquad
+\delta\alpha(s)\equiv 0.
+\]
+\end{lemma}
+
+\begin{proof}
+This is immediate from the displayed formulas for $u_5$ and $v_5$.
+If the $2\times 2$ coefficient matrix has nonzero determinant, then the only
+solution is $\delta u=\delta\alpha\equiv 0$. If its determinant vanishes
+identically, then $\Delta_5\equiv 0$.
+\end{proof}
+
+\begin{lemma}[Centered tagged quintic witness survives specialization]
+\label{lem:centered-tagged-quintic-witness-survives-specialization}
+On the tagged slice
+\[
+(K_1,\eta_2,q^{(5)}),
+\]
+the first centered odd coefficient
+\[
+U_1
+\]
+of
+\[
+u_5(s)=U_1s+U_3s^3+U_5s^5+\cdots
+\]
+has a nonzero $\kappa\,\eta_2\,q^{(5)}$-coefficient. In particular
+\[
+U_1\neq 0
+\]
+on that tagged slice, and hence
+\[
+u_5(s)\not\equiv 0
+\]
+as a centered germ.
+\end{lemma}
+
+\begin{proof}
+The centered coefficient formula is
+\[
+U_1=2\bigl(v_0\,\delta\alpha_1+\beta_0\,\delta u_1\bigr).
+\]
+By the tagged-slice analysis already used in the proof of
+Lemma~\ref{lem:no-cancellation-quintic-trace}, the $\eta_2$-slice of $X_1$
+is off-diagonal, so
+\[
+\delta u_1=0,
+\]
+and the $q^{(5)}$-slice of $X_3$ is diagonal, so
+\[
+\beta_0=0.
+\]
+Hence
+\[
+U_1=2v_0\,\delta\alpha_1
+\]
+on the tagged slice.
+
+Now use the explicit two-direction computation from the proof of
+Lemma~\ref{lem:no-cancellation-quintic-trace}. There one writes
+\[
+G_0=\operatorname{diag}(a^2,b^2),
+\qquad
+A=
+\begin{pmatrix}
+0&u\\u&0
+\end{pmatrix},
+\qquad
+D=
+\begin{pmatrix}
+0&0\\0&d
+\end{pmatrix},
+\]
+and expands
+\[
+X(\varepsilon,\delta)
+=
+X_0+\varepsilon U+\delta V+\varepsilon\delta W+O(\varepsilon^2,\delta^2).
+\]
+The proof gives
+\[
+U_{12}=-\frac{u}{ab(a+b)}\neq 0,
+\qquad
+V_{22}=-\frac{d}{2b^3}\neq 0.
+\]
+Here $U_{12}$ is exactly the tagged $\eta_2$-slice of the off-diagonal channel
+$v_0$, while $V_{22}$ is exactly the tagged $q^{(5)}$-slice of the diagonal
+difference $\gamma-\alpha=2\delta\alpha_1$. Thus the tagged coefficient of
+$v_0\,\delta\alpha_1$ is nonzero. Therefore the tagged coefficient of $U_1$
+is nonzero as well.
+\end{proof}
+
+\begin{corollary}[Centered quintic fixed-sector nontriviality]
+\label{cor:centered-quintic-fixed-sector-nontriviality}
+On the centered diagonal branch,
+\[
+A_5^{\mathfrak f}(s)=u_5(s)I+v_5(s)S
+\]
+is not identically zero. Equivalently,
+\[
+(u_5(s),v_5(s))\not\equiv (0,0).
+\]
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{lem:centered-tagged-quintic-witness-survives-specialization},
+one has $u_5(s)\not\equiv 0$. Since $I$ and $S$ are linearly independent,
+the fixed-sector package $A_5^{\mathfrak f}(s)=u_5(s)I+v_5(s)S$ cannot vanish
+identically.
+\end{proof}
+
+\begin{lemma}[Valuation form of the septic transport constraint]
+\label{lem:valuation-form-septic-transport-constraint}
+Assume on the centered branch that
+\[
+\lambda=\frac{\Delta_7}{v_5}
+\]
+is analytic odd. Write
+\[
+\operatorname{ord}_s u_5=2m+1,
+\qquad
+\operatorname{ord}_s v_5=2r+1,
+\qquad
+r\ge m.
+\]
+Then
+\[
+\operatorname{ord}_s v_{7,K_1}\ge \operatorname{ord}_s v_5-\operatorname{ord}_s u_5+1=2(r-m)+1.
+\]
+Equivalently, if
+\[
+U_1=\cdots=U_{2m-1}=0,\qquad U_{2m+1}\neq 0,
+\]
+and
+\[
+V_1=\cdots=V_{2r-1}=0,\qquad V_{2r+1}\neq 0,
+\]
+then
+\[
+\widehat V_1=\widehat V_3=\cdots=\widehat V_{2(r-m)-1}=0,
+\]
+and the first potentially surviving even coefficient of $\Delta_7$ is
+\[
+D_{2r+2}=\widehat U_1V_{2r+1}-U_{2m+1}\widehat V_{2(r-m)+1}.
+\]
+\end{lemma}
+
+\begin{proof}
+Since $\lambda$ is analytic odd and
+\[
+\Delta_7=\lambda\,v_5,
+\]
+one has
+\[
+\operatorname{ord}_s\Delta_7\ge \operatorname{ord}_s v_5+1=2r+2.
+\]
+Suppose
+\[
+\operatorname{ord}_s v_{7,K_1}=2d+1<2(r-m)+1.
+\]
+Then
+\[
+\operatorname{ord}_s(u_5v_{7,K_1})=(2m+1)+(2d+1)\le 2r,
+\]
+whereas
+\[
+\operatorname{ord}_s(u_{7,K_1}v_5)\ge 1+(2r+1)=2r+2
+\]
+because $u_{7,K_1}$ is odd. Therefore the leading term of
+\[
+\Delta_7=u_{7,K_1}v_5-u_5v_{7,K_1}
+\]
+would occur at order at most $2r$, contradicting $\operatorname{ord}_s\Delta_7\ge 2r+2$.
+So
+\[
+\operatorname{ord}_s v_{7,K_1}\ge 2(r-m)+1.
+\]
+
+The coefficient statement is the corresponding triangular coefficient form:
+vanishing of
+\[
+D_2,D_4,\dots,D_{2r}
+\]
+forces
+\[
+\widehat V_1,\widehat V_3,\dots,\widehat V_{2(r-m)-1}
+\]
+to vanish successively, and the first potentially surviving coefficient is
+\[
+D_{2r+2}=\widehat U_1V_{2r+1}-U_{2m+1}\widehat V_{2(r-m)+1}.
+\qedhere
+\]
+\end{proof}
 
 \begin{proposition}[Realization lemma for lifted germs]
 \label{prop:realization-lemma-lifted-germs}
@@ -11263,8 +11643,10 @@ completely classified by parity.
 
 On the $4$-point side, generic nonmixed odd-order $T_v$-zeros can still
 carry preexisting close branches, so the nonmixed branch remains genuinely
-live. By contrast, the mixed low-order branch is no longer just a vague
-codimension-two obstruction: its explicit dangerous list is
+live. By contrast, the mixed low-order branch is now organized by four sharper
+pieces of structure.
+
+First, its explicit dangerous list is finite:
 \[
 (r,\operatorname{ord}_0\mathcal Z)\in\{(1,1),(1,3),(2,2)\},
 \]
@@ -11272,16 +11654,37 @@ equivalently
 \[
 (r,s)=(1,2),(1,4),(2,5),
 \]
-and the centered symmetric-placement Taylor package strongly suggests that this
-whole list is already incompatible with the collision-side parity structure.
-What remains there is to promote that local diagonal-based calculation to a
-theorem-level bridge in the good-patch coordinate $x=v_5/c$.
+or
+\[
+(m,n)=(3,4),(3,6),(4,6).
+\]
 
-So the missing lifted ingredient is not a blanket zero-capture theorem. It is:
-a global branch-continuation / non-recurrence theorem for the nonmixed lifted
-$4$-point branches; a theorem-level centered-to-patch parity bridge for the
-mixed branch; and, more generally, a global theorem preventing reappearance of
-the same line-incidence data on nonadjacent branches.
+Second, in the centered diagonal local regime the centered odd/even Taylor
+package gives a punctured-neighborhood exclusion once the induced odd
+collision-side coordinate is valid: no $K_v=0$ or $T_v=0$ points occur
+arbitrarily close to the diagonal base there.
+
+Third, the centered quintic fixed-sector package is now known not to vanish
+identically on the centered diagonal branch. Indeed the tagged quintic witness
+survives centered specialization and forces
+\[
+A_5^{\mathfrak f}(s)=u_5(s)I+v_5(s)S\not\equiv 0.
+\]
+So the theorem-level mixed target is no longer a coefficient-level statement
+such as $V_1\neq 0$; it is a punctured-arc quintic-patch dichotomy: after
+shrinking to one-sided punctured arcs, the centered branch should enter either
+a good $v_5$-patch or the parallel $u_5$-patch.
+
+Fourth, if the $v_5$-patch fails and $v_5$ starts late, the valuation form of
+the septic transport constraint forces matching late vanishing of
+$v_{7,K_1}$. Thus failure of the $v_5$-route is not isolated but part of a
+coupled quintic--septic degeneration tower.
+
+So the missing lifted ingredient is no longer a vague analysis of the mixed
+locus. It is: a global branch-continuation / non-recurrence theorem for the
+nonmixed lifted $4$-point branches; a theorem-level punctured-arc patch
+dichotomy on the mixed side; and, as backup local algebra, exclusion of the
+remaining coupled quintic--septic valuation tower if the $v_5$-patch fails.
 
 Moreover, the exact identities for $W$ and $W'$ show that this remaining
 obstruction is still encoded by the canonical order-$7$ package through
@@ -11343,6 +11746,49 @@ no-reentry theorem for the scalar graph
 \qquad
 m^{[1]}=\phi-\mu\phi_\mu.
 \]
+
+On the lifted $4$-point side, the mixed low-order obstruction list is now both
+finite and canonical:
+\[
+(r,\operatorname{ord}_0\mathcal Z)\in\{(1,1),(1,3),(2,2)\},
+\]
+equivalently
+\[
+(r,s)=(1,2),(1,4),(2,5),
+\]
+or
+\[
+(m,n)=(3,4),(3,6),(4,6).
+\]
+The centered Taylor package already provides the explicit coefficients
+\[
+U_j,\ V_j,\ \widehat U_j,\ \widehat V_j,\ D_2,\ D_4,\ D_6,
+\]
+and the tagged quintic witness now shows that
+\[
+A_5^{\mathfrak f}(s)\not\equiv 0
+\]
+on the centered diagonal branch. Consequently the mixed-side theorem-level
+target is best viewed as a punctured-arc patch dichotomy: promote the centered
+branch into either a good $v_5$-patch or the parallel $u_5$-patch. On the
+backup algebraic side, if
+\[
+\operatorname{ord}_s u_5=2m+1,
+\qquad
+\operatorname{ord}_s v_5=2r+1,
+\qquad
+r\ge m,
+\]
+and
+\[
+\lambda=\frac{\Delta_7}{v_5}
+\]
+remains analytic odd, then
+\[
+\operatorname{ord}_s v_{7,K_1}\ge 2(r-m)+1,
+\]
+so failure of the $v_5$-patch is forced into a coupled quintic--septic
+degeneration tower rather than an isolated coefficient cancellation.
 
 In parallel, the finite-core endgame now splits into three layers.
 
