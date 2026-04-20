@@ -12326,7 +12326,11 @@ Differentiating in the $x$-coordinate yields
 }
 \]
 Thus the lifted $4$-point branch may be viewed equivalently as a
-parity/divisibility problem for the Wronskian ratio $J_{u_5}/J_{\lambda}$.
+parity/divisibility problem for the Wronskian ratio $J_{u_5}/J_\lambda$.
+On the nonmixed side, however, the later source-level no-go results show that
+the ratio/Wronskian package by itself is not yet restrictive enough: the
+remaining burden is a genuine source-coupling theorem, not a generic
+Wronskian-ratio argument.
 \end{remark}
 
 \begin{proposition}[Source-level Wronskian for the nonmixed $4$-point branch]
@@ -14428,11 +14432,179 @@ If this pair were a Chebyshev pair on an opened nonmixed arc, i.e.
 \mathcal W_{\mathrm{src}}\neq 0
 \]
 throughout that arc, then the entire nonmixed $4$-point branch would be
-sterile there. Accordingly, the remaining nonmixed theorem-level burden can be
-posed as a source-level one-sign / odd-zero problem for the Wronskian
+sterile there. Thus a one-sign theorem for $\mathcal W_{\mathrm{src}}$ would
+still be sufficient. However, the later source-level no-go theorem shows that
+generic Wronskian algebra alone is not enough to force such a statement. The
+actual remaining burden is therefore a source-coupling theorem that excludes
+the analytically possible odd zeros of $\mathcal W_{\mathrm{src}}$ on genuine
+opened nonmixed arcs.
+\end{remark}
+
+\begin{proposition}[Lift of the source-level Wronskian to a $4\times4$ Wronskian]
+\label{prop:source-level-Wronskian-lifts-to-4x4}
+With
 \[
-\mathcal W_{\mathrm{src}}.
+J_\lambda=W(c,v_5,\lambda),
+\qquad
+J_{u_5}=W(c,v_5,u_5),
+\qquad
+M=W(c,v_5)=cv_5'-c'v_5,
 \]
+one has the exact identity
+\[
+\boxed{
+\mathcal W_{\mathrm{src}}
+=
+J_\lambda J_{u_5}'-J_{u_5}J_\lambda'
+=
+W(J_\lambda,J_{u_5})
+=
+M\,W(c,v_5,\lambda,u_5).
+}
+\]
+Thus, on a nonmixed arc where $M\neq 0$, the odd-zero problem for
+$\mathcal W_{\mathrm{src}}$ is equivalent to the odd-zero problem for the
+source-level $4\times4$ Wronskian
+\[
+\mathcal U_{\mathrm{src}}:=W(c,v_5,\lambda,u_5).
+\]
+\end{proposition}
+
+\begin{proof}
+By definition,
+\[
+\mathcal W_{\mathrm{src}}=W(J_\lambda,J_{u_5}).
+\]
+Now apply the Sylvester--Wronski identity
+\[
+W\!\bigl(W(f_1,f_2,f_3),\,W(f_1,f_2,f_4)\bigr)
+=
+W(f_1,f_2)\,W(f_1,f_2,f_3,f_4)
+\]
+with
+\[
+(f_1,f_2,f_3,f_4)=(c,v_5,\lambda,u_5).
+\]
+This gives
+\[
+W(J_\lambda,J_{u_5})
+=
+W(c,v_5)\,W(c,v_5,\lambda,u_5)
+=
+M\,W(c,v_5,\lambda,u_5),
+\]
+which is exactly the claimed identity.
+\end{proof}
+
+\begin{proposition}[The current source-level Wronskian package is not yet a contradiction engine for nonmixed odd zeros]
+\label{prop:source-level-Wronskian-package-not-enough}
+Let $I$ be an interval on which
+\[
+c\neq 0,
+\qquad
+M=W(c,v_5)\neq 0,
+\qquad
+J_\lambda=W(c,v_5,\lambda)\neq 0.
+\]
+Then:
+
+\begin{enumerate}
+\item for every analytic forcing $F:I\to\mathbf C$, there exists an analytic
+function $u_5$ on $I$ such that
+\[
+W(c,v_5,\lambda,u_5)=F;
+\]
+
+\item consequently, for every analytic forcing $G:I\to\mathbf C$, there exists
+an analytic function $u_5$ on $I$ such that
+\[
+\mathcal W_{\mathrm{src}}=G;
+\]
+
+\item equivalently, for every analytic forcing $R:I\to\mathbf C$, there exists
+an analytic function $u_5$ on $I$ such that
+\[
+\mathcal R=R.
+\]
+\end{enumerate}
+
+In particular, at the current source-level ratio/Wronskian/$4\times4$-determinant
+level, the zero set, parity, and odd/even vanishing pattern of
+$\mathcal W_{\mathrm{src}}$ and $\mathcal R$ are formally unconstrained.
+\end{proposition}
+
+\begin{proof}
+Expand the $4\times4$ Wronskian along the $u_5$-column. Since the highest
+derivative of $u_5$ appearing in $W(c,v_5,\lambda,u_5)$ is $u_5'''$, with
+coefficient exactly
+\[
+W(c,v_5,\lambda)=J_\lambda,
+\]
+there exist analytic coefficients $a_0,a_1,a_2$ on $I$ such that
+\[
+W(c,v_5,\lambda,u_5)
+=
+J_\lambda\,u_5'''+a_2u_5''+a_1u_5'+a_0u_5.
+\]
+Because $J_\lambda\neq 0$ on $I$, this is a third-order linear analytic ODE
+for $u_5$ with nonvanishing leading coefficient. Standard analytic ODE
+existence therefore gives an analytic solution $u_5$ on $I$ for every
+analytic forcing $F$. This proves (1).
+
+For (2), given analytic $G$, set
+\[
+F:=\frac{G}{M}.
+\]
+Since $M\neq 0$ on $I$, $F$ is analytic. By (1), choose $u_5$ such that
+\[
+W(c,v_5,\lambda,u_5)=F.
+\]
+Then Proposition~\ref{prop:source-level-Wronskian-lifts-to-4x4} gives
+\[
+\mathcal W_{\mathrm{src}}
+=
+M\,W(c,v_5,\lambda,u_5)
+=
+G.
+\]
+
+For (3), given analytic $R$, set
+\[
+G:=\frac{M J_\lambda^2}{c^2}\,R.
+\]
+Since $c\neq 0$, $M\neq 0$, and $J_\lambda\neq 0$ on $I$, this is
+analytic. By (2), choose $u_5$ such that $\mathcal W_{\mathrm{src}}=G$.
+Then Proposition~\ref{prop:source-level-Wronskian-nonmixed-four-point} gives
+\[
+\mathcal R
+=
+\frac{c^2}{M}\frac{\mathcal W_{\mathrm{src}}}{J_\lambda^2}
+=
+\frac{c^2}{M}\frac{G}{J_\lambda^2}
+=
+R.
+\qedhere
+\]
+\end{proof}
+
+\begin{remark}[Ceiling of the current source-level reduction]
+\label{rem:ceiling-of-current-source-level-reduction}
+Propositions~\ref{prop:source-level-Wronskian-lifts-to-4x4} and
+\ref{prop:source-level-Wronskian-package-not-enough} show that the current
+source-level reduction has been pushed to its natural ceiling.  The nonmixed
+$4$-point branch is indeed equivalent to an odd-zero problem for the
+gauge-invariant source-level Wronskian
+\[
+\mathcal W_{\mathrm{src}},
+\]
+and even to the $4\times4$ Wronskian $W(c,v_5,\lambda,u_5)$.  But at that
+level the odd-zero pattern is still formally free.
+
+Accordingly, the missing ingredient can no longer be a generic Wronskian or
+determinant argument.  It must be a genuine \emph{source-coupling theorem}:
+one that uses additional identities coming from the actual RH source structure
+to show that the analytically possible $u_5$-freedom exhibited above is not
+realizable on a genuine opened nonmixed arc.
 \end{remark}
 
 \begin{remark}[First-loss rigidification of the quadratic-envelope scalar]
@@ -14809,6 +14981,17 @@ $\mathcal W_{\mathrm{src}}$-intervals are sterile, and recurrent contacts
 force $\mathcal W_{\mathrm{src}}\equiv 0$
 (Corollary~\ref{cor:source-level-Wronskian-consequences-nonmixed}).
 
+Moreover, Proposition~\ref{prop:source-level-Wronskian-lifts-to-4x4} lifts
+$\mathcal W_{\mathrm{src}}$ to the $4\times4$ Wronskian
+\[
+W(c,v_5,\lambda,u_5),
+\]
+while Proposition~\ref{prop:source-level-Wronskian-package-not-enough} shows
+that, at the current source-level ratio/Wronskian/$4\times4$-determinant
+level, the odd-zero pattern of $\mathcal W_{\mathrm{src}}$ and $\mathcal R$
+is still formally unconstrained. In other words, generic determinant algebra
+alone is no longer enough to close the nonmixed branch.
+
 In addition, for each fixed source point $a$, repeated-source exact contacts
 factor through the quadratic-envelope scalar
 \[
@@ -14822,36 +15005,51 @@ quotient
 \[
 \Psi_a(h)=\frac{D_{u_5}(a,h)}{D_\lambda(a,h)},
 \]
-with derivative controlled by the osculatory $4\times 4$ determinant
-$\mathfrak D(a,h)$.
-
-Accordingly, the genuinely live nonmixed $4$-point burden is no longer local
-birth. By Proposition~\ref{prop:first-loss-is-diagonal-odd-zero-birth}, the
+with derivative controlled by the osculatory $4\times4$ determinant
+$\mathfrak D(a,h)$. The formal first-loss event for this repeated-source
+geometry rigidifies to a sheared repeated-node tangent-contact configuration
+(Remark~\ref{rem:first-loss-rigidification-nonmixed}). By
+Proposition~\ref{prop:first-loss-is-diagonal-odd-zero-birth}, this
 repeated-source / first-loss mechanism is not an independent obstruction:
-no attained separated first loss can occur, every first-loss sequence is forced
-to the diagonal, and diagonal first loss occurs exactly at isolated odd-order
-zeros of $\mathcal R$.
-
-Thus the remaining nonmixed burden is purely the global/source-level control of
-odd zeros of
-\[
-\mathcal W_{\mathrm{src}},
-\]
-equivalently of odd zeros of
-\[
-\mathcal R,
-\]
-along opened nonmixed arcs in the genuine lifted $v_5$-geometry.
-
-Moreover, by
-Proposition~\ref{prop:three-point-package-not-enough-for-nonmixed-first-loss},
+no attained separated first loss can occur, every first-loss sequence is
+forced to the diagonal, and diagonal first loss occurs exactly at isolated
+odd-order zeros of $\mathcal R$. But by
+Proposition~\ref{prop:three-point-package-not-enough-for-nonmixed-first-loss}
 the already-established $3$-point package for
 \[
 \Lambda_v=(x,S)
 \]
-does \emph{not} by itself eliminate those odd zeros: it cannot rule out the
-rigidified sheared tangent-contact event without an additional transfer /
-source-coupling theorem.
+does \emph{not} by itself contradict the rigidified sheared event.
+
+Accordingly, the genuinely live nonmixed $4$-point burden is no longer local
+birth, nor generic determinant sign. It is a missing theorem linking the true
+RH source image to the canonical nonmixed scalars
+\[
+\mathcal W_{\mathrm{src}},\qquad \Gamma_a,\qquad \Psi_a,\qquad \mathfrak D(a,h),
+\]
+strong enough either to exclude odd zeros of $\mathcal W_{\mathrm{src}}$
+(equivalently of $\mathcal R$) on opened nonmixed arcs, or to transfer the
+rigidified sheared repeated-node event to the already-excluded $3$-point
+geometry of $\Lambda_v=(x,S)$.
+\end{remark}
+
+\begin{remark}[Compact status summary for the nonmixed $4$-point branch]
+\label{rem:compact-status-summary-nonmixed-four-point}
+The nonmixed $4$-point branch is now reduced to a source-level odd-zero
+problem.  Locally, exact nonmixed contacts force zeros of $\mathcal R$, and
+isolated zeros are classified by parity: even-order zeros are sterile, while
+odd-order zeros seed local exact contacts.  Repeated-source first loss is not a
+separate mechanism: it occurs if and only if one diagonally approaches an
+odd-order zero of $\mathcal R$.  On a nonmixed arc, the same structure is
+encoded by the gauge-invariant source-level Wronskian
+\[
+\mathcal W_{\mathrm{src}}=J_\lambda J_{u_5}'-J_{u_5}J_\lambda',
+\]
+which differs from $\mathcal R$ only by a nonvanishing analytic factor.
+Thus the genuinely remaining nonmixed burden is the source-coupling problem of
+excluding odd zeros of $\mathcal W_{\mathrm{src}}$ on opened nonmixed arcs,
+or equivalently transferring the rigidified sheared repeated-node event to an
+already-excluded configuration for the original $3$-point geometry.
 \end{remark}
 
 \begin{remark}[Derivative-geometry meaning of the nonmixed invariant $\mathcal R$]
@@ -16045,14 +16243,19 @@ $(\mathcal Z,\mathcal R)$ listed above.
 \begin{remark}[Updated nonmixed status versus mixed patch route]
 \label{rem:wip-dream-parity-identity-four-point}
 The local nonmixed lifted route is now closed at the derivative-geometry level.
-Exact nonmixed contacts force zeros of $\mathcal R$; one-sign $\mathcal R$
-intervals are sterile; recurrent exact contacts force affine-planar collapse;
-and isolated zeros of $\mathcal R$ are classified by parity. Together with
-the quadratic-envelope scalar $\Gamma_a$ and its source-determinant
-reformulation, this shows that the remaining nonmixed burden is no longer a
-local parity theorem, but the global/source-level control of which odd zeros of
+Exact nonmixed contacts force zeros of $\mathcal R$; one-sign
+$\mathcal R$-intervals are sterile; recurrent exact contacts force
+affine-planar collapse; and isolated zeros of $\mathcal R$ are classified by
+parity. In addition, the repeated-source / first-loss mechanism is now fully
+reduced: no attained separated first loss can occur, every first-loss sequence
+is forced to the diagonal, and diagonal first loss occurs exactly at odd zeros
+of $\mathcal R$. Thus the nonmixed burden is no longer a local parity theorem
+or a separate repeated-source obstruction. It is the global/source-level
+control of which odd zeros of
 \[
-\mathcal R=\frac{T_v}{K_v^2}
+\mathcal R=\frac{T_v}{K_v^2},
+\qquad\text{equivalently}\qquad
+\mathcal W_{\mathrm{src}}=J_\lambda J_{u_5}'-J_{u_5}J_\lambda',
 \]
 can actually arise along opened nonmixed arcs.
 
