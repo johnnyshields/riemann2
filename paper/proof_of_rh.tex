@@ -9421,12 +9421,8 @@ first setting and will be used below.
 Assume the centered diagonal family is a genuine analytic branch in the
 underlying $h$-geometry, and that the centered scalar package from
 Remark~\ref{rem:centered-symmetric-placement-taylor-package} holds on that
-branch. If
-\[
-A_5^{\mathfrak f}(s)\not\equiv 0,
-\]
-then after shrinking there exist one-sided punctured subarcs on which at least
-one of the following holds:
+branch. Then, after shrinking, there exist one-sided punctured subarcs on which
+at least one of the following holds:
 \begin{enumerate}
 \item
 \[
@@ -9446,7 +9442,10 @@ one-sided punctured arcs.
 
 \begin{proof}
 By Corollary~\ref{cor:centered-quintic-fixed-sector-nontriviality},
-at least one of $u_5$ or $v_5$ is a nonzero analytic germ on the centered
+\[
+A_5^{\mathfrak f}(s)\not\equiv 0,
+\]
+so at least one of $u_5$ or $v_5$ is a nonzero analytic germ on the centered
 branch.
 
 If $v_5\not\equiv 0$, then its zeros are isolated. Since
@@ -9476,6 +9475,30 @@ after shrinking to a one-sided punctured arc one has
 c\neq 0,\qquad u_5\neq 0,
 \]
 and the $u_5$-patch of Remark~\ref{rem:parallel-u5-patch-version} applies.
+\end{proof}
+
+\begin{corollary}[Conditional punctured $v_5$-patch promotion]
+\label{cor:conditional-punctured-v5-patch-promotion}
+Under the hypotheses of
+Proposition~\ref{prop:centered-quintic-patch-dichotomy}, if
+\[
+v_5\not\equiv 0
+\]
+on the centered diagonal branch, then after shrinking there exist one-sided
+punctured subarcs contained in
+\[
+\{c\neq 0,\ M\neq 0,\ v_5\neq 0\}.
+\]
+Hence on such arcs
+\[
+x=\frac{v_5}{c}
+\]
+is automatically a valid local coordinate.
+\end{corollary}
+
+\begin{proof}
+This is exactly the first branch of the proof of
+Proposition~\ref{prop:centered-quintic-patch-dichotomy}.
 \end{proof}
 
 \begin{proposition}[Linear independence of $1,u_5/c,v_5/c$]
@@ -11267,9 +11290,10 @@ for the mixed cases. These realize exactly the dangerous low-order patterns for
 $(\mathcal Z,\mathcal R)$ listed above.
 \end{proof}
 
-\begin{remark}[Work in progress: two distinct parity routes on the $4$-point branch]
+\begin{remark}[Work in progress: nonmixed parity route versus mixed patch route]
 \label{rem:wip-dream-parity-identity-four-point}
-There are now two distinct parity mechanisms on the lifted $4$-point branch.
+There are now two genuinely distinct theorem-level routes on the lifted
+$4$-point branch.
 
 \medskip
 
@@ -11292,36 +11316,39 @@ would eliminate the explicit nonmixed low-order bad list
 \medskip
 
 \noindent
-\textbf{Centered collision-side route.}
-In the centered symmetric-placement variable $s$, the explicit Taylor package
-gives
+\textbf{Mixed route.}
+On the centered diagonal branch, the decisive pair-level object is now
 \[
-u_5,\ v_5,\ u_{7,K_1},\ v_{7,K_1}\ \text{odd},
-\qquad
-\Delta_7\ \text{even}.
+A_5^{\mathfrak f}(s)=u_5(s)I+v_5(s)S.
 \]
-If this parity transfers through the local coordinate change
+By Corollary~\ref{cor:centered-quintic-fixed-sector-nontriviality}, this
+package is not identically zero, so after shrinking to one-sided punctured arcs
+the centered branch enters either a good $v_5$-patch or the parallel
+$u_5$-patch. If the $v_5$-patch opens, then the centered collision-side parity
+package from
+Remark~\ref{rem:centered-symmetric-placement-taylor-package} should transfer to
+the good-patch coordinate
 \[
 x=\frac{v_5}{c},
 \]
-then in the $x$-chart one obtains
+and thereby force
 \[
-Y(x)\ \text{odd},\qquad
-S(x)\ \text{odd},
+\mathcal Z(x)\ \text{even},
 \qquad
-\mathcal Z(x)\ \text{even},\qquad
-\mathcal R(x)\ \text{odd},\qquad
-K_v(x)\ \text{odd}.
+\mathcal R(x)\ \text{odd},
+\qquad
+K_v(x)\ \text{odd},
 \]
-This would eliminate the entire explicit low-order mixed bad list
+excluding the explicit mixed low-order bad list
 \[
 (r,\operatorname{ord}_0\mathcal Z)\in\{(1,1),(1,3),(2,2)\}.
 \]
+If instead only the $u_5$-patch opens, the parallel $u_5$-patch geometry gives
+the natural fallback local setting.
 
-Thus the centered collision-side parity package appears to point primarily at
-the mixed branch, while the nonmixed odd-order branch remains the live
-$4$-point bottleneck. At present, the centered-to-patch transfer should still
-be treated as provisional outside the diagonal-based local regime.
+Thus the centered parity package now points primarily at a mixed-branch patch
+dichotomy together with a finite-jet parity bridge on the $v_5$-side, while
+the nonmixed odd-order branch remains the deeper live $4$-point bottleneck.
 \end{remark}
 
 \begin{remark}[What the four-point branch now reduces to]
@@ -11343,13 +11370,12 @@ the explicit low-order dangerous list is
 \[
 \operatorname{ord}_0\mathcal R\in\{1,3,5\},
 \]
-equivalently the first nontrivial even Taylor coefficients of $\widetilde Y$
-occur in degrees $4,6,8$. In an arbitrary nonmixed $x$-chart this is
-captured exactly by the three obstruction coefficients
+equivalently the first nontrivial even Taylor coefficients of
+$\widetilde Y$ occur in degrees $4,6,8$. In an arbitrary nonmixed
+$x$-chart this is captured exactly by the three obstruction coefficients
 \[
-z_2,\qquad z_4,\qquad z_6
+z_2,\qquad z_4,\qquad z_6.
 \]
-in the expansion of $\mathcal Z$.
 
 On the mixed side, the explicit low-order dangerous list is
 \[
@@ -11373,8 +11399,8 @@ obstruction coefficients
 \kappa_{1,1},\qquad \kappa_{1,3},\qquad \kappa_{2,2}.
 \]
 
-Thus the currently explicit low-order $4$-point obstruction list is
-equivalent to the finite set of six quantities
+Thus the full currently explicit low-order $4$-point obstruction list is
+equivalent to the finite set
 \[
 \boxed{
 z_2,\ z_4,\ z_6,\ \kappa_{1,1},\ \kappa_{1,3},\ \kappa_{2,2}.
@@ -11385,24 +11411,43 @@ By the realization lemma, no identity involving only
 \[
 (c,v_5,u_5,\Delta_7)
 \]
-and their derivatives can force these six quantities to vanish in general.
-So any definitive local closure theorem for the four-point branch must come
-from deeper RH-specific source- or matrix-level structure.
+and their derivatives can eliminate these patterns in general.
 
-The most promising new development is the centered symmetric-placement Taylor
-package, which gives explicit septic coefficients
+At the pair level, the centered fixed-sector quintic package
 \[
-D_2,\qquad D_4,\qquad D_6
+A_5^{\mathfrak f}(s)=u_5(s)I+v_5(s)S
 \]
-and a punctured-neighborhood exclusion at the diagonal base. What remains
-unclear is whether that collision-side parity package transfers all the way to
-the general good-patch $x=v_5/c$ geometry strongly enough to close the mixed
-branch globally.
-At the coefficient level, the centered package now includes the explicit bridge
-coefficients $X_1,X_3,X_5$ for $x(s)=v_5/c$ and $L_1,L_3,L_5$ for
-$\lambda(s)=\Delta_7/v_5$, so the centered-to-patch translation problem has
-been reduced to a finite low-order reparametrization check rather than a purely
-qualitative parity heuristic.
+is now the natural object controlling whether any quintic patch opens at all.
+By Corollary~\ref{cor:centered-quintic-fixed-sector-nontriviality},
+\[
+A_5^{\mathfrak f}(s)\not\equiv 0,
+\]
+so the centered branch cannot suffer total quintic collapse.
+
+The most promising mixed-side route is therefore no longer a pointwise
+coefficient nonvanishing statement such as $V_1\neq 0$. It is a quintic-patch
+dichotomy together with a finite-jet centered-to-patch bridge on the actual
+$v_5$-patch when that patch opens. At the coefficient level, the centered
+package already includes the explicit bridge coefficients
+\[
+X_1,X_3,X_5
+\qquad\text{for}\qquad
+x(s)=\frac{v_5(s)}{c(s)},
+\]
+and
+\[
+L_1,L_3,L_5
+\qquad\text{for}\qquad
+\lambda(s)=\frac{\Delta_7(s)}{v_5(s)},
+\]
+so the remaining mixed-side transfer problem has been reduced to a finite
+low-order reparametrization check rather than a purely qualitative parity
+heuristic.
+
+What remains live is therefore sharply split:
+the nonmixed side still needs a deeper RH-specific divisibility / parity
+identity, while the mixed side needs the theorem-level opening of a quintic
+patch together with the finite-jet parity transfer on the $v_5$-side.
 \end{remark}
 
 \begin{remark}[Work in progress: what remains in the lifted order-$7$ geometry]
@@ -11488,11 +11533,23 @@ It is a combination of:
 \[
 E_{\ge2}^{(3)},\qquad E_{\ge2}^{(5)},\qquad \overline E_{\ge2}^{(7)};
 \]
+
 \item global continuation / recurrence control for the unique odd-order
 three-point branch;
+
+\item a theorem-level promotion of the centered quintic nontriviality
+\[
+A_5^{\mathfrak f}(s)\not\equiv 0
+\]
+to a punctured-arc quintic-patch dichotomy on the mixed side;
+
 \item a centered-to-patch bridge strong enough to promote the centered
-collision-side parity package to the good-patch $x=v_5/c$ geometry, at least
-on the mixed four-point side;
+collision-side parity package to the good-patch $x=v_5/c$ geometry on the
+mixed $4$-point side, at least through the finite jet order needed to exclude
+\[
+(r,\operatorname{ord}_0\mathcal Z)\in\{(1,1),(1,3),(2,2)\};
+\]
+
 \item and, on the still-live nonmixed side, a deeper RH-specific source- or
 matrix-level identity imposing stronger parity / divisibility constraints on
 \[
@@ -11523,15 +11580,38 @@ problem is to control global recurrence / continuation of the unique odd-order
 branch and to exclude infinite-order flatness.
 
 \item
-\textbf{Four-point mixed branch via centered parity.}
-The centered symmetric-placement Taylor package suggests that the explicit
-low-order mixed bad list
+\textbf{Four-point mixed branch via quintic-patch dichotomy.}
+The centered fixed-sector quintic package
 \[
-(r,\operatorname{ord}_0\mathcal Z)\in\{(1,1),(1,3),(2,2)\}
+A_5^{\mathfrak f}(s)=u_5(s)I+v_5(s)S
 \]
-is already incompatible with the collision-side parity picture. The next step is
-to turn that local diagonal-based calculation into a theorem-level bridge for
-the good-patch coordinate $x=v_5/c$.
+is now the correct pair-level object on the mixed branch. Since it does not
+vanish identically on the centered diagonal branch, the next theorem-level step
+is to promote this centered nontriviality into a punctured-arc patch dichotomy:
+after shrinking, the centered branch should enter either a good $v_5$-patch or
+the parallel $u_5$-patch.
+
+\item
+\textbf{Four-point mixed branch via finite-jet parity transfer on the $v_5$-patch.}
+If the $v_5$-patch opens, the centered symmetric-placement Taylor package should
+transfer to the good-patch coordinate $x=v_5/c$, at least through the finite
+jet order needed to force
+\[
+\mathcal Z \text{ even},\qquad
+\mathcal R \text{ odd},\qquad
+K_v \text{ odd},
+\]
+and thereby exclude the explicit mixed bad list
+\[
+(r,\operatorname{ord}_0\mathcal Z)\in\{(1,1),(1,3),(2,2)\}.
+\]
+
+\item
+\textbf{Route B backup degeneration tower.}
+If the $v_5$-patch fails and $v_5$ starts late, the valuation form of the
+septic transport constraint forces matching late vanishing of the septic
+transport channel $v_{7,K_1}$. Thus failure of the $v_5$-route is not a
+free local cancellation but a coupled quintic--septic degeneration scheme.
 
 \item
 \textbf{Four-point nonmixed branch via deeper RH-specific identities.}
@@ -11545,25 +11625,6 @@ vanishing of
 equivalently of the nonmixed obstruction coefficients
 \[
 z_2,\ z_4,\ z_6.
-\]
-
-\item
-\textbf{Equivariant descent through the normalization stack.}
-The most conceptual remaining route is to descend the raw swap/reflection
-symmetry through the one-pair normalization stack and determine the parity of
-the canonical residual package. The decisive fork appears to be the parity
-behavior of the cubic matrix coefficient $X_3$ in the commutator-channel
-formula for $A_5^{\mathfrak f}$.
-
-\item
-\textbf{Below-lifted RH-specific identities.}
-Since the realization lemma shows that no obstruction can come from the lifted
-variables alone, any definitive four-point closure theorem must ultimately come
-from deeper source-level or matrix-level RH structure, for example an
-equivariant descent theorem or an RH-specific divisibility / parity constraint
-on the Wronskian ratio
-\[
-\mathcal Z=\frac{J_{u_5}}{J_\lambda}.
 \]
 \end{enumerate}
 \end{remark}
@@ -11601,17 +11662,24 @@ equivalently
 \[
 (r,\operatorname{ord}_0\mathcal Z)=(1,1),\ (1,3),\ (2,2).
 \]
-Moreover, the centered symmetric-placement Taylor package suggests that this
-entire explicit low-order mixed list is already incompatible with the local
-collision-side parity structure, once that parity is transferred carefully to
-the good-patch coordinate $x=v_5/c$. At present this should still be treated
-as a live attack route rather than theorem-level closure.
+At the pair level, however, the centered quintic fixed-sector package
+\[
+A_5^{\mathfrak f}(s)=u_5(s)I+v_5(s)S
+\]
+is now known not to vanish identically on the centered diagonal branch.
+Accordingly, the mixed-side theorem-level target is no longer a single
+coefficient nonvanishing statement, but a punctured-arc quintic-patch
+dichotomy: after shrinking, the centered branch should enter either a good
+$v_5$-patch or the parallel $u_5$-patch. On the $v_5$-side, the remaining
+finite-jet parity bridge should then exclude the entire explicit mixed
+low-order bad list.
 
 Thus the remaining lifted local issues are now:
 the continuation / non-recurrence of the unique odd-order $3$-point branch,
 the continuation / non-recurrence of nonmixed odd-order $4$-point branches,
-possible infinite-order flatness, and the completion of the centered-to-patch
-bridge on the mixed $4$-point side.
+possible infinite-order flatness, the punctured-arc quintic-patch dichotomy on
+the mixed side, and the completion of the finite-jet centered-to-patch bridge
+on the actual $v_5$-patch.
 \end{remark}
 
 \begin{remark}[Current geometric bottleneck]
@@ -11835,7 +11903,7 @@ lifted variables alone.
 
 \begin{remark}[Post-draft findings: established, provisional, and live]
 \label{rem:post-draft-findings-established-provisional-live}
-Since this draft state, three additional conclusions have emerged.
+Since this draft state, five additional conclusions have emerged.
 
 First, on the two-point branch, the correct remaining theorem is now very
 sharp: a source-level corrected interaction remainder with swap symmetry,
@@ -11862,24 +11930,49 @@ or equivalently to the order patterns
 Third, the centered symmetric-placement Taylor package now gives explicit septic
 coefficients
 \[
-D_2,\qquad D_4,\qquad D_6
+D_2,\qquad D_4,\qquad D_6,
+\]
+explicit bridge coefficients
+\[
+X_1,X_3,X_5,\qquad L_1,L_3,L_5,
 \]
 and a punctured-neighborhood exclusion at the diagonal base.
-It also gives explicit low-order bridge coefficients for
+
+Fourth, the tagged quintic witness now survives centered specialization strongly
+enough to show
 \[
-x(s)=\frac{v_5(s)}{c(s)}
-\qquad\text{and}\qquad
-\lambda(s)=\frac{\Delta_7(s)}{v_5(s)},
+U_1\neq 0,
+\qquad
+u_5(s)\not\equiv 0,
+\qquad
+A_5^{\mathfrak f}(s)\not\equiv 0.
 \]
-which reduce the centered-to-patch transfer to a concrete finite Taylor check.
-What remains to be
-checked carefully is the transfer of that collision-side parity package into the
-general good-patch coordinate $x=v_5/c$.
+Thus the mixed-side theorem-level target is now most naturally phrased as a
+quintic-patch dichotomy on the centered branch rather than a pointwise
+nonvanishing statement for $V_1$.
+
+Fifth, on the backup algebraic side, the valuation form of the septic transport
+constraint shows that if
+\[
+\operatorname{ord}_s u_5=2m+1,\qquad
+\operatorname{ord}_s v_5=2r+1,\qquad
+r\ge m,
+\]
+and
+\[
+\lambda=\frac{\Delta_7}{v_5}
+\]
+stays analytic odd, then
+\[
+\operatorname{ord}_s v_{7,K_1}\ge 2(r-m)+1.
+\]
+So failure of the $v_5$-route is forced into a coupled quintic--septic
+degeneration tower rather than an isolated coefficient cancellation.
 
 So the present frontier is no longer a generic local geometry problem. It is
-the combination of a source-level two-point structure theorem, a centered-to-patch
-parity bridge for the mixed four-point branch, and a deeper RH-specific
-identity on the nonmixed four-point branch.
+the combination of a source-level two-point structure theorem, a theorem-level
+quintic-patch dichotomy and finite-jet parity bridge on the mixed four-point
+side, and a deeper RH-specific identity on the nonmixed four-point branch.
 \end{remark}
 
 \section{Endgame architecture and remaining global propagation problem}
