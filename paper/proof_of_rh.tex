@@ -10658,6 +10658,88 @@ D_4=\widehat U_1V_3+\widehat U_3V_1-U_1\widehat V_3-U_3\widehat V_1,
 D_6=\widehat U_1V_5+\widehat U_3V_3+\widehat U_5V_1-U_1\widehat V_5-U_3\widehat V_3-U_5\widehat V_1.
 \]
 
+\medskip
+
+Assume now that
+\[
+c(s)=C_0+C_2s^2+C_4s^4+\cdots,
+\qquad C_0\neq 0.
+\]
+Then
+\[
+x(s)=\frac{v_5(s)}{c(s)}
+\]
+is an odd series
+\[
+x(s)=X_1s+X_3s^3+X_5s^5+\cdots
+\]
+with
+\[
+X_1=\frac{V_1}{C_0},
+\]
+\[
+X_3=\frac{V_3C_0-V_1C_2}{C_0^2},
+\]
+\[
+X_5=\frac{V_5C_0^2-V_3C_0C_2+V_1(C_2^2-C_0C_4)}{C_0^3}.
+\]
+In particular, if $V_1\neq 0$, then $x$ is an odd local coordinate with odd
+inverse
+\[
+s(x)=\sigma_1x+\sigma_3x^3+\sigma_5x^5+\cdots,
+\]
+where
+\[
+\sigma_1=\frac{C_0}{V_1},
+\qquad
+\sigma_3=-\frac{C_0(V_3C_0-V_1C_2)}{V_1^4},
+\]
+and so on.
+
+Similarly,
+\[
+\lambda(s):=\frac{\Delta_7(s)}{v_5(s)}
+\]
+is an odd series
+\[
+\lambda(s)=L_1s+L_3s^3+L_5s^5+\cdots
+\]
+with
+\[
+L_1=\frac{D_2}{V_1},
+\]
+\[
+L_3=\frac{D_4V_1-D_2V_3}{V_1^2},
+\]
+\[
+L_5=\frac{D_6V_1^2-D_4V_1V_3+D_2(V_3^2-V_1V_5)}{V_1^3}.
+\]
+
+So, whenever $x$ is used as the induced odd collision-side coordinate, parity
+in $s$ transfers to parity in $x$, and one obtains
+\[
+Y(x)=\frac{u_5}{c}(x)\ \text{odd},
+\qquad
+\lambda(x)=\frac{\Delta_7}{v_5}(x)\ \text{odd},
+\qquad
+S(x)=\frac{\lambda}{c}(x)\ \text{odd}.
+\]
+Consequently,
+\[
+Y''(x)\ \text{odd},\qquad
+S''(x)\ \text{odd},
+\]
+hence
+\[
+\mathcal Z(x)=\frac{Y''}{S''}\ \text{even},
+\qquad
+\mathcal R(x)=\mathcal Z'(x)\ \text{odd},
+\qquad
+K_v=(x')^3S''\ \text{odd}.
+\]
+This is the parity package underlying the provisional mixed-branch exclusion
+discussed below.
+
 If $x=v_5/c$ is used as the induced odd collision-side coordinate, then the
 centered diagonal germ has the odd/odd form
 \[
@@ -10683,8 +10765,9 @@ one has
 K_v(x)\neq 0,\qquad T_v(x)\neq 0.
 \]
 
-So the centered diagonal base has a punctured neighborhood free of mixed and
-nonmixed $4$-point obstruction points. In particular, the currently explicit
+So, in the diagonal-based local regime where this odd collision-side coordinate
+description is valid, the centered diagonal base has a punctured neighborhood
+free of $K_v=0$ and $T_v=0$ points. In particular, the currently explicit
 low-order dangerous patterns do not arise at the symmetric diagonal base itself.
 
 \medskip
@@ -10693,10 +10776,17 @@ low-order dangerous patterns do not arise at the symmetric diagonal base itself.
 \textit{Work in progress.}
 The passage from this centered $s$-picture to the general $x=v_5/c$ good-patch
 geometry should be treated as a live attack route, not yet as a global
-theorem. The evidence strongly suggests that the entire explicit low-order mixed
-dangerous list is already incompatible with this centered parity package, but
-that translation should be checked line by line before being promoted beyond the
-diagonal-base local regime.
+theorem. The evidence strongly suggests that, once this odd-coordinate transfer
+is valid, the explicit low-order mixed dangerous list
+\[
+(r,\operatorname{ord}_0\mathcal Z)\in\{(1,1),(1,3),(2,2)\}
+\]
+is already incompatible with the induced parity package
+\[
+\mathcal Z \text{ even},\qquad K_v \text{ odd}.
+\]
+But that translation should still be checked line by line before being promoted
+beyond the diagonal-based local regime.
 \end{remark}
 
 \begin{proposition}[Realization lemma for lifted germs]
@@ -10926,6 +11016,11 @@ and a punctured-neighborhood exclusion at the diagonal base. What remains
 unclear is whether that collision-side parity package transfers all the way to
 the general good-patch $x=v_5/c$ geometry strongly enough to close the mixed
 branch globally.
+At the coefficient level, the centered package now includes the explicit bridge
+coefficients $X_1,X_3,X_5$ for $x(s)=v_5/c$ and $L_1,L_3,L_5$ for
+$\lambda(s)=\Delta_7/v_5$, so the centered-to-patch translation problem has
+been reduced to a finite low-order reparametrization check rather than a purely
+qualitative parity heuristic.
 \end{remark}
 
 \begin{remark}[Work in progress: what remains in the lifted order-$7$ geometry]
@@ -11321,7 +11416,15 @@ coefficients
 \[
 D_2,\qquad D_4,\qquad D_6
 \]
-and a punctured-neighborhood exclusion at the diagonal base. What remains to be
+and a punctured-neighborhood exclusion at the diagonal base.
+It also gives explicit low-order bridge coefficients for
+\[
+x(s)=\frac{v_5(s)}{c(s)}
+\qquad\text{and}\qquad
+\lambda(s)=\frac{\Delta_7(s)}{v_5(s)},
+\]
+which reduce the centered-to-patch transfer to a concrete finite Taylor check.
+What remains to be
 checked carefully is the transfer of that collision-side parity package into the
 general good-patch coordinate $x=v_5/c$.
 
