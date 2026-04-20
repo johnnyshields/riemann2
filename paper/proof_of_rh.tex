@@ -14478,24 +14478,125 @@ it is governed by odd zeros of $\mathcal R$, not by an independent separated
 source-target mechanism.
 \end{remark}
 
-\begin{remark}[The nonmixed scalar is not constrained by $\Lambda_v=(x,S)$ alone]
-\label{rem:R-free-over-fixed-S}
-Fix an analytic function $S$ on an interval $I$ with $S''\neq 0$, and let
-$R$ be any analytic scalar on $I$. Choosing
+\begin{proposition}[The current $3$-point package is not by itself a contradiction engine for nonmixed first loss]
+\label{prop:three-point-package-not-enough-for-nonmixed-first-loss}
+Fix an analytic function $S$ on an interval $I$ with
 \[
-Z(x):=\gamma+\int_{x_0}^x R(t)\,dt
+S''\neq 0
+\qquad\text{on }I.
 \]
-and solving
+Let $a<x$ be two points of $I$. Then there exist an analytic function $Y$ on
+$I$ and a constant $\gamma\in\mathbf R$ such that, with
 \[
-Y''(x)=Z(x)\,S''(x)
+\widetilde Y_\gamma:=Y-\gamma S,
 \]
-produces an analytic $Y$ satisfying
+one has
 \[
-\frac{d}{dx}\!\left(\frac{Y''}{S''}\right)=R.
+\widetilde Y_\gamma''(a)=0,
+\qquad
+\widetilde H_3(a,x)=0,
+\qquad
+\partial_x\widetilde H_3(a,x)=0,
 \]
-Thus the planar derivative geometry of $\Lambda_v=(x,S)$ alone cannot exclude
-odd zeros of $\mathcal R$. Any such exclusion must use an additional
-source-level coupling between $Y$ and $S$ coming from the genuine RH data.
+where
+\[
+\widetilde H_3(a,u):=
+\widetilde Y_\gamma(u)-\widetilde Y_\gamma(a)-\widetilde Y_\gamma'(a)(u-a).
+\]
+In particular, the rigidified repeated-node tangent-contact event from
+Remark~\ref{rem:first-loss-rigidification-nonmixed} is formally compatible with
+an arbitrary fixed nonmixed planar curve
+\[
+\Lambda_v=(x,S),
+\]
+so the established $3$-point package for $\Lambda_v$ alone cannot exclude that
+event.
+\end{proposition}
+
+\begin{proof}
+Define
+\[
+T_{a,x}(t):=(t-a)^3(t-x)^2.
+\]
+Then
+\[
+T_{a,x}(a)=0,
+\qquad
+T_{a,x}'(a)=0,
+\qquad
+T_{a,x}''(a)=0,
+\qquad
+T_{a,x}(x)=0,
+\qquad
+T_{a,x}'(x)=0.
+\]
+Hence
+\[
+T_{a,x}(x)-T_{a,x}(a)-T_{a,x}'(a)(x-a)=0,
+\qquad
+T_{a,x}'(x)-T_{a,x}'(a)=0.
+\]
+Now fix any $\gamma\in\mathbf R$ and set
+\[
+Y:=\gamma S+T_{a,x}.
+\]
+Then
+\[
+\widetilde Y_\gamma=Y-\gamma S=T_{a,x},
+\]
+so
+\[
+\widetilde Y_\gamma''(a)=0,
+\qquad
+\widetilde H_3(a,x)=0,
+\qquad
+\partial_x\widetilde H_3(a,x)=0.
+\]
+Since $S$ itself has not changed and $S''\neq 0$ on $I$, the original
+$3$-point geometry of $\Lambda_v=(x,S)$ on $I$ is exactly the same as before.
+Thus the sheared repeated-node tangent-contact event is not ruled out by the
+planar derivative geometry of $\Lambda_v$ alone.
+\end{proof}
+
+\begin{remark}[What extra theorem is needed to use the $3$-point package]
+\label{rem:needed-shear-transfer-theorem-nonmixed}
+By Proposition~\ref{prop:three-point-package-not-enough-for-nonmixed-first-loss},
+the mature $3$-point theory for
+\[
+\Lambda_v=(x,S)
+\]
+does not by itself contradict the sheared rigidified event
+\[
+\widetilde Y_\gamma''(a)=0,
+\qquad
+\widetilde H_3(a,x)=0,
+\qquad
+\partial_x\widetilde H_3(a,x)=0.
+\]
+So the remaining nonmixed bridge is not a purely planar statement about
+$\Lambda_v$.
+
+What is still needed is an additional transfer/coupling theorem showing that on
+a genuine opened nonmixed arc, any such sheared repeated-node tangent-contact
+configuration must force one of the following:
+\begin{enumerate}
+\item affine-planar collapse, equivalently
+\[
+\mathcal R\equiv 0
+\]
+on a nontrivial interval; or
+\item an actual repeated-node tangent-contact event for the original lifted
+curve $\Lambda_v=(x,S)$, i.e.
+\[
+H_3(a',u')=0,
+\qquad
+\partial_u H_3(a',u')=0,
+\]
+contradicting
+Theorem~\ref{thm:global-continuation-nonrecurrence-odd-three-point-branch}.
+\end{enumerate}
+Without such a shear-transfer / source-coupling input, the current $3$-point
+package cannot kill the nonmixed branch on its own.
 \end{remark}
 
 \begin{remark}[What remains on the nonmixed $4$-point side]
@@ -14551,6 +14652,19 @@ equivalently of odd zeros of $\mathcal R$, along an opened nonmixed arc in
 the genuine lifted $v_5$-geometry; and, in repeated-source variables, the
 equivalent problem of excluding first-loss monotonicity for $\Gamma_a$ or
 $\Psi_a$, equivalently of controlling the sign of $\mathfrak D(a,h)$.
+
+Moreover, by
+Proposition~\ref{prop:three-point-package-not-enough-for-nonmixed-first-loss},
+the already-established $3$-point package for
+\[
+\Lambda_v=(x,S)
+\]
+does \emph{not} by itself contradict the sheared repeated-node tangent-contact
+configuration forced by a formal first loss of monotonicity. Thus the remaining
+bridge is genuinely a transfer/source-coupling theorem: one must show that on a
+genuine opened nonmixed arc, the rigidified sheared event either collapses
+immediately to affine-planar geometry or transfers to an actual
+$S$-tangent-contact event already excluded by the global $3$-point theory.
 \end{remark}
 
 \begin{remark}[Derivative-geometry meaning of the nonmixed invariant $\mathcal R$]
