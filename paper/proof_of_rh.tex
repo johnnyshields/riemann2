@@ -13397,7 +13397,8 @@ Proposition~\ref{prop:exact-nonmixed-tangent-plane-contacts-force-R-zero}
 strengthens the shrinking-circuit statement
 Proposition~\ref{prop:shrinking-exact-lifted-four-point-circuits-force-Tv-zero}.
 It is not merely a limit theorem: every exact nonmixed tangent-plane contact
-already forces an interior zero of the canonical derivative invariant
+already forces a zero of the canonical derivative invariant inside the convex
+hull of the three nodes,
 \[
 \mathcal R=\frac12\,\widetilde Y'''.
 \]
@@ -13540,19 +13541,6 @@ Y=\gamma S+ax+b
 on $J$.
 \end{proof}
 
-\begin{remark}[What remains on the nonmixed $4$-point side]
-\label{rem:what-remains-nonmixed-after-R-zero-bridge}
-Corollary~\ref{cor:recurrent-exact-nonmixed-contacts-force-affine-planarity}
-shows that recurrent exact nonmixed tangent-plane contacts cannot persist away
-from the zero set of $\mathcal R$, and if they recur densely on an interval
-then the branch collapses to affine-planar geometry. Thus the genuinely live
-nonmixed $4$-point problem is reduced to the local analysis of isolated zeros
-of the analytic scalar invariant
-\[
-\mathcal R=\frac12\,\widetilde Y'''.
-\]
-\end{remark}
-
 \begin{lemma}[Derivative formula for the repeated-node nonmixed profile]
 \label{lem:Da-derivative-formula}
 In the normalized nonmixed chart, define
@@ -13597,34 +13585,54 @@ Since $\mathcal R=\frac12\,\widetilde Y'''$ in the normalized nonmixed chart,
 the last formula follows.
 \end{proof}
 
-\begin{proposition}[Simple zeros of $\mathcal R$ seed local exact nonmixed contacts]
-\label{prop:simple-R-zero-seeds-local-exact-nonmixed-contacts}
-Assume $\xi_0\in\mathbf R$ is a simple zero of the nonmixed invariant:
+\begin{proposition}[Parity classification of isolated nonmixed zeros of $\mathcal R$]
+\label{prop:parity-classification-isolated-nonmixed-R-zeros}
+Let $\xi_0\in\mathbf R$ be an isolated zero of the nonmixed invariant
 \[
-\mathcal R(\xi_0)=0,
-\qquad
-\mathcal R'(\xi_0)\neq 0.
+\mathcal R(\xi)=\frac12\,\widetilde Y'''(\xi),
 \]
-Equivalently,
+and write
 \[
-\widetilde Y'''(\xi_0)=0,
+\mathcal R(\xi)=(\xi-\xi_0)^m\,\rho(\xi),
 \qquad
-\widetilde Y''''(\xi_0)\neq 0.
+m\ge 1,
+\qquad
+\rho(\xi_0)\neq 0.
 \]
-Then there exists a neighborhood $U$ of $\xi_0$ and a real-analytic
-function $\tau:U\to U$ such that
+
+\smallskip
+
+\noindent
+\emph{(i) Even-order sterility.}
+If $m$ is even, then there exists a neighborhood $U$ of $\xi_0$ such that
+for every $a\in U$, the function
+\[
+D_a(t):=\widetilde Y[a,a,t]
+\]
+is strictly monotone on $U$. In particular, there do not exist distinct
+$a,u,v\in U$ such that
+\[
+\widetilde H_4(a,u,v)=0.
+\]
+
+\smallskip
+
+\noindent
+\emph{(ii) Odd-order birth.}
+If $m$ is odd, then there exists a neighborhood $U$ of $\xi_0$ and a
+real-analytic function $\tau:U\to U$ such that
 \[
 \tau(\xi_0)=\xi_0,
+\qquad
+\tau'(\xi_0)=-1,
 \qquad
 D_a'(\tau(a))=0
 \quad (a\in U).
 \]
 Moreover,
 \[
-\tau'(\xi_0)=-1,
-\qquad
 D_a''(\tau(a))\neq 0
-\quad (a\in U),
+\quad (a\in U\setminus\{\xi_0\}),
 \]
 so for each $a\in U\setminus\{\xi_0\}$, the function $D_a$ has a strict
 local extremum at $t=\tau(a)$. Consequently, for each such $a$, there exist
@@ -13638,99 +13646,151 @@ and hence
 \[
 \widetilde H_4(a,u_-(a),u_+(a))=0.
 \]
-
-Thus every simple zero of $\mathcal R$ seeds a local family of exact
-nonmixed tangent-plane contacts.
 \end{proposition}
 
 \begin{proof}
-Set
+By translation in the normalized chart, we may assume $\xi_0=0$. Thus
 \[
-G(a,t):=D_a'(t).
-\]
-By Lemma~\ref{lem:Da-derivative-formula},
-\[
-G(a,t)=\int_0^1 s(1-s)\,\widetilde Y'''(a+s(t-a))\,ds.
-\]
-Hence
-\[
-G(\xi_0,\xi_0)=\frac16\,\widetilde Y'''(\xi_0)=0.
-\]
-
-Differentiate under the integral sign:
-\[
-\partial_t G(a,t)
-=
-\int_0^1 s^2(1-s)\,\widetilde Y''''(a+s(t-a))\,ds,
-\]
-\[
-\partial_a G(a,t)
-=
-\int_0^1 s(1-s)^2\,\widetilde Y''''(a+s(t-a))\,ds.
-\]
-At $(a,t)=(\xi_0,\xi_0)$, both integrals equal
-\[
-\frac{1}{12}\,\widetilde Y''''(\xi_0)
-=
-\frac{1}{6}\,\mathcal R'(\xi_0),
-\]
-which is nonzero by assumption. In particular,
-\[
-\partial_t G(\xi_0,\xi_0)\neq 0.
-\]
-Therefore the implicit function theorem yields a unique real-analytic function
-$\tau(a)$ near $\xi_0$ such that
-\[
-G(a,\tau(a))=0,
+\mathcal R(\xi)=\xi^m\rho(\xi),
 \qquad
-\tau(\xi_0)=\xi_0.
-\]
-Differentiating $G(a,\tau(a))=0$ at $a=\xi_0$ gives
-\[
-\tau'(\xi_0)
-=
--\frac{\partial_a G(\xi_0,\xi_0)}{\partial_t G(\xi_0,\xi_0)}
-=
--1.
+\rho(0)\neq 0.
 \]
 
-Now
+For the even-order case, shrink to a neighborhood $U$ on which $\rho$ has
+fixed nonzero sign. Since $m$ is even, $\xi^m\ge 0$, so $\mathcal R$ has
+fixed sign on $U$, vanishing only at $0$. By
+Lemma~\ref{lem:Da-derivative-formula},
 \[
-D_a''(t)=\partial_t G(a,t),
+D_a'(t)=2\int_0^1 s(1-s)\,\mathcal R(a+s(t-a))\,ds.
 \]
-so by continuity and $\partial_t G(\xi_0,\xi_0)\neq 0$, one has
+For $a\neq t$, the affine segment $a+s(t-a)$ is not identically zero, so the
+integrand has fixed sign and is not identically zero. Hence $D_a'(t)$ has
+fixed nonzero sign for all $a\neq t$ in $U$, and therefore each $D_a$ is
+strictly monotone on $U$. Thus $D_a$ is injective on $U$, and by
+Lemma~\ref{lem:normalized-nonmixed-H4-divided-difference} there are no exact
+contacts $\widetilde H_4(a,u,v)=0$ with distinct $a,u,v\in U$.
+
+Now assume $m$ is odd. Write $a=h$ and $t=\lambda h$. Then
+Lemma~\ref{lem:Da-derivative-formula} gives
 \[
-D_a''(\tau(a))\neq 0
+D_h'(\lambda h)
+=
+2h^m\,G(h,\lambda),
 \]
-for $a$ near $\xi_0$. Thus $t=\tau(a)$ is a strict local extremum of
-$D_a$. Hence, for each $a\neq \xi_0$ sufficiently close to $\xi_0$, there
-exist points $u_-(a)<\tau(a)<u_+(a)$ arbitrarily close to $\tau(a)$ such
-that
+where
 \[
-D_a(u_-(a))=D_a(u_+(a)).
+G(h,\lambda)
+:=
+\int_0^1 s(1-s)\bigl(1+s(\lambda-1)\bigr)^m
+\rho\!\bigl(h(1+s(\lambda-1))\bigr)\,ds.
+\]
+This is real-analytic in $(h,\lambda)$, and
+\[
+G(0,\lambda)=\rho(0)\,J_m(\lambda),
+\qquad
+J_m(\lambda):=\int_0^1 s(1-s)\bigl(1+s(\lambda-1)\bigr)^m\,ds.
+\]
+Since $m$ is odd,
+\[
+J_m(-1)=\int_0^1 s(1-s)(1-2s)^m\,ds=0
+\]
+by the symmetry $s\mapsto 1-s$, while
+\[
+J_m'(-1)
+=
+m\int_0^1 s^2(1-s)(1-2s)^{m-1}\,ds>0
+\]
+because $m-1$ is even. Thus
+\[
+\partial_\lambda G(0,-1)=\rho(0)J_m'(-1)\neq 0.
+\]
+By the implicit function theorem, there exists a unique real-analytic function
+$\lambda(h)$ near $0$ such that
+\[
+\lambda(0)=-1,
+\qquad
+G(h,\lambda(h))=0.
+\]
+Define
+\[
+\tau(h):=\lambda(h)h.
+\]
+Then
+\[
+\tau(0)=0,
+\qquad
+\tau'(0)=\lambda(0)=-1,
+\]
+and
+\[
+D_h'(\tau(h))=0.
+\]
+
+It remains to show that this critical point is a strict local extremum. By
+Lemma~\ref{lem:Da-derivative-formula},
+\[
+D_a''(t)=2\int_0^1 s^2(1-s)\,\mathcal R'(a+s(t-a))\,ds.
+\]
+Substituting $a=h$, $t=\lambda(h)h$, and using
+\[
+\mathcal R'(\xi)=m\xi^{m-1}\rho(\xi)+\xi^m\rho'(\xi),
+\]
+one obtains
+\[
+D_h''(\tau(h))
+=
+2h^{m-1}\rho(0)\,J_m'(-1)+O(h^m).
+\]
+Since $\rho(0)J_m'(-1)\neq 0$, it follows that
+\[
+D_h''(\tau(h))\neq 0
+\]
+for $h\neq 0$ sufficiently small. Therefore $t=\tau(h)$ is a strict local
+extremum of $D_h$. Hence there exist distinct points $u_-(h)$, $u_+(h)$
+arbitrarily close to $\tau(h)$ such that
+\[
+D_h(u_-(h))=D_h(u_+(h)).
 \]
 By Lemma~\ref{lem:normalized-nonmixed-H4-divided-difference},
 \[
-\widetilde H_4(a,u_-(a),u_+(a))
+\widetilde H_4(h,u_-(h),u_+(h))
 =
-(a-u_-(a))^2(a-u_+(a))^2\bigl(D_a(u_+(a))-D_a(u_-(a))\bigr)=0.
+(h-u_-(h))^2(h-u_+(h))^2
+\bigl(D_h(u_+(h))-D_h(u_-(h))\bigr)=0.
 \]
-This proves the claim.
+This proves the odd-order birth statement.
 \end{proof}
 
-\begin{remark}[Reflection law at a simple $\mathcal R$-zero]
-\label{rem:reflection-law-simple-R-zero}
-The identity
-\[
-\tau'(\xi_0)=-1
-\]
-means that, to first order, the critical point $t=\tau(a)$ is the reflection
-of $a$ across the simple zero $\xi_0$. Equivalently,
+\begin{remark}[Reflection law for odd-order birth]
+\label{rem:reflection-law-odd-order-R-zero}
+In the odd-order case of
+Proposition~\ref{prop:parity-classification-isolated-nonmixed-R-zeros},
+the critical-point branch satisfies
 \[
 \tau(a)=2\xi_0-a+O((a-\xi_0)^2).
 \]
-Thus the local exact nonmixed contact family born at a simple $\mathcal R$-zero
-has a first-order reflection geometry across that zero.
+Thus the local exact nonmixed contact family born at any odd-order zero of
+$\mathcal R$ has the same first-order reflection geometry across that zero as
+in the simple-zero case.
+\end{remark}
+
+\begin{remark}[What remains on the nonmixed $4$-point side]
+\label{rem:what-remains-nonmixed-after-R-zero-bridge}
+The preceding results now give a full local parity classification of isolated
+nonmixed zeros of $\mathcal R$. Exact nonmixed tangent-plane contacts force
+zeros of $\mathcal R$; intervals on which $\mathcal R$ has fixed nonzero
+sign are exactly-contact sterile; recurrent exact contacts force affine-planar
+collapse; and isolated odd-order zeros of $\mathcal R$ seed local exact
+nonmixed contacts, while isolated even-order zeros are sterile.
+
+Accordingly, the genuinely live nonmixed $4$-point problem is no longer local
+birth, but rather the global/source-level control of which odd zeros of the
+analytic scalar invariant
+\[
+\mathcal R=\frac12\,\widetilde Y'''
+\]
+can actually arise along an opened nonmixed arc in the genuine lifted
+$v_5$-geometry.
 \end{remark}
 
 \begin{remark}[Derivative-geometry meaning of the nonmixed invariant $\mathcal R$]
@@ -14727,8 +14787,8 @@ Corollary~\ref{cor:defect-free-minimal-quintic-circuits}. Hence this residual
 corner is already-quintic rather than a genuinely new mixed septic branch.
 \end{proof}
 
-\begin{remark}[Right-pincer trichotomy near the centered base]
-\label{rem:right-pincer-trichotomy-centered-base}
+\begin{corollary}[Right-pincer trichotomy near the centered base]
+\label{cor:right-pincer-trichotomy-centered-base}
 Near the centered diagonal base, the mixed local picture is reduced to the
 following three cases:
 \[
@@ -14754,14 +14814,23 @@ mixed local branch left to study there is the clean branch
 \[
 \operatorname{ord}_s v_5=1.
 \]
-\end{remark}
+\end{corollary}
+
+\begin{proof}
+Combine Lemma~\ref{lem:late-v5-u5-patch-transplant} and
+Lemma~\ref{lem:planar-lift-absorption-u5-patch}, together with the fact that
+$v_5$ is odd in the centered variable.
+\end{proof}
 
 \begin{corollary}[Right-pincer local reduction near the centered base]
 \label{cor:right-pincer-local-reduction-centered-base}
 Assume the centered scalar package from
-Remark~\ref{rem:centered-symmetric-placement-taylor-package}, together with the
-right-pincer trichotomy from
-Remark~\ref{rem:right-pincer-trichotomy-centered-base}. Then every
+Remark~\ref{rem:centered-symmetric-placement-taylor-package}, and assume also
+that the centered tagged quintic witness gives
+\[
+U_1\neq 0.
+\]
+Then every
 sufficiently small nearby genuinely new mixed $4$-point obstruction point near
 the centered base must lie on the clean branch
 \[
@@ -14783,12 +14852,14 @@ Because $v_5$ is odd in the centered variable, either
 \qquad\text{or}\qquad
 \operatorname{ord}_s v_5\ge 3 \text{ odd}.
 \]
-If $\operatorname{ord}_s v_5\ge 3$, then by
-Remark~\ref{rem:right-pincer-trichotomy-centered-base} the branch is either
-locally sterile on the $u_5$-patch or planar-lift and hence already-quintic.
-So a sufficiently small nearby genuinely new mixed $4$-point obstruction
-cannot lie on such a late-$v_5$ branch. Therefore any such genuinely new
-mixed local branch must lie on the only remaining possibility,
+If $\operatorname{ord}_s v_5\ge 3$, then
+Lemma~\ref{lem:late-v5-u5-patch-transplant} and
+Lemma~\ref{lem:planar-lift-absorption-u5-patch}
+show that the branch is either locally sterile on the $u_5$-patch or
+planar-lift and hence already-quintic. So a sufficiently small nearby
+genuinely new mixed $4$-point obstruction cannot lie on such a late-$v_5$
+branch. Therefore any such genuinely new mixed local branch must lie on the
+only remaining possibility,
 \[
 \operatorname{ord}_s v_5=1.
 \qedhere
