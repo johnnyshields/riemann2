@@ -10448,6 +10448,406 @@ u=\lambda_m(-a)+O(a^2).
 This proves the classification.
 \end{proof}
 
+\begin{corollary}[No infinite-order flatness for $K_v$ on a good $v_5$-patch]
+\label{cor:no-infinite-order-flatness-Kv-good-vpatch}
+On a good $v_5$-patch, every zero of $K_v$ has finite order.
+Equivalently, the lifted curvature $S''(x)$ has no infinite-order zero on such a
+patch.
+\end{corollary}
+
+\begin{proof}
+By Proposition~\ref{prop:exact-x-coordinate-identities-lifted-four-point},
+\[
+K_v=(x')^3S''(x),
+\]
+and on a good $v_5$-patch one has $x'\neq 0$. Thus $K_v$ and $S''$ have the
+same zero set and the same vanishing order.
+
+If $K_v$ had an infinite-order zero at some interior point $x_*$, then so would
+$S''$. Since $S''$ is analytic in the local coordinate $x$, this would force
+\[
+S''\equiv 0
+\]
+on a neighborhood of $x_*$. Hence $S$ would be affine in $x$ there, contrary to
+Proposition~\ref{prop:sigmav-not-affine-in-x}.
+\end{proof}
+
+\begin{lemma}[Slope--intercept parametrization for the lifted $3$-point branch]
+\label{lem:slope-intercept-parametrization-lifted-three-point}
+Assume the affine normalization from
+Theorem~\ref{thm:local-classification-lifted-three-point-branch-near-Kv-zero},
+so that
+\[
+S(0)=S'(0)=0,
+\qquad
+S''<0\ \text{on the source side }I_-=(\alpha,0).
+\]
+Let
+\[
+I_+=(0,\beta)
+\]
+be the maximal open interval to the right of $0$ on which $S'$ is strictly
+increasing. Equivalently, $S''$ does not change sign on $I_+$, and any zeros of
+$S''$ there are isolated even-order zeros.
+
+For
+\[
+m\in J_-:=S'(I_-),
+\]
+define the inverse source point
+\[
+a=a(m):=(S'|_{I_-})^{-1}(m),
+\]
+and the source tangent intercept
+\[
+\tau_-(m):=S(a(m))-m\,a(m).
+\]
+For
+\[
+m\in J_+:=S'(I_+),
+\]
+define the inverse target tangent point
+\[
+u_+(m):=(S'|_{I_+})^{-1}(m),
+\]
+and the target tangent intercept
+\[
+\tau_+(m):=S(u_+(m))-m\,u_+(m).
+\]
+Then
+\[
+\tau_-'(m)=-a(m),
+\qquad
+\tau_+'(m)=-u_+(m).
+\]
+Hence on
+\[
+J:=J_-\cap J_+
+\]
+the intercept gap
+\[
+D(m):=\tau_-(m)-\tau_+(m)
+\]
+satisfies
+\[
+D'(m)=u_+(m)-a(m)>0.
+\]
+\end{lemma}
+
+\begin{proof}
+Differentiate
+\[
+\tau_-(m)=S(a(m))-m\,a(m)
+\]
+to obtain
+\[
+\tau_-'(m)=S'(a(m))a'(m)-a(m)-m\,a'(m)=-a(m),
+\]
+because $S'(a(m))=m$. The same computation gives
+\[
+\tau_+'(m)=-u_+(m).
+\]
+Subtracting yields
+\[
+D'(m)=u_+(m)-a(m).
+\]
+Since $a(m)<0<u_+(m)$, the derivative is strictly positive.
+\end{proof}
+
+\begin{theorem}[Global continuation / nonrecurrence of the odd-order lifted $3$-point branch]
+\label{thm:global-continuation-nonrecurrence-odd-three-point-branch}
+Assume the hypotheses and affine normalization of
+Theorem~\ref{thm:local-classification-lifted-three-point-branch-near-Kv-zero},
+and suppose that $r=\operatorname{ord}_0K_v$ is odd, so the unique local
+opposite-side branch exists.
+
+Let
+\[
+I_-=(\alpha,0)
+\]
+be the source interval on which $S''<0$, and let
+\[
+I_+=(0,\beta)
+\]
+be the maximal open interval to the right of $0$ on which $S'$ is strictly
+increasing. Set
+\[
+J:=S'(I_-)\cap S'(I_+).
+\]
+Then there exists a unique maximal open interval
+\[
+J_{\mathrm{br}}=(0,m_*)\subset J
+\]
+and a unique real-analytic function
+\[
+u:J_{\mathrm{br}}\to I_+
+\]
+such that
+\[
+H_3(a(m),u(m))=0,
+\qquad
+a(m):=(S'|_{I_-})^{-1}(m),
+\qquad
+u(m)>0,
+\]
+and for small $m>0$ this branch agrees with the local branch from
+Theorem~\ref{thm:local-classification-lifted-three-point-branch-near-Kv-zero}.
+
+Moreover:
+\begin{enumerate}
+\item the intercept gap
+\[
+D(m):=\tau_-(m)-\tau_+(m)
+\]
+is strictly positive on all of $J$, and
+\[
+D'(m)=u_+(m)-a(m)>0;
+\]
+
+\item along the branch one has
+\[
+\partial_u H_3(a(m),u(m))
+=
+S'(u(m))-m
+\neq 0,
+\]
+so there is no interior common-tangent event;
+
+\item the branch is uniquely continued on $J_{\mathrm{br}}$, with
+\[
+u'(m)=\frac{u(m)-a(m)}{S'(u(m))-m},
+\]
+and the source coordinate is strictly monotone,
+\[
+a'(m)=\frac{1}{S''(a(m))}<0;
+\]
+
+\item if $m_*<\sup J$, then
+\[
+u(m)\longrightarrow \beta
+\qquad (m\uparrow m_*).
+\]
+Hence the branch cannot end in the interior of $I_+$; it can stop only when it
+reaches the boundary of the source/target slope-overlap block.
+
+In particular, the odd-order lifted $3$-point branch has no interior
+recurrence, no self-return, no interior accumulation, and no infinite-order
+flatness. Its only remaining endpoint mechanism is boundary exit of the
+relevant good-patch / monotone-slope block.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+For
+\[
+m\in J,
+\]
+set
+\[
+\Phi(m,u):=S(u)-m\,u-\tau_-(m).
+\]
+Then
+\[
+\Phi(m,u)=H_3(a(m),u).
+\]
+
+\smallskip
+
+\noindent
+\textbf{Step 1: positivity of the intercept gap.}
+By the odd-order local classification theorem, for all sufficiently small
+$m>0$ there exists a point $u(m)\in I_+$ such that
+\[
+\Phi(m,u(m))=0.
+\]
+Fix such a small $m$. Since $S'$ is strictly increasing on $I_+$, the function
+\[
+u\longmapsto \Phi(m,u)
+\]
+has strictly increasing derivative
+\[
+\partial_u\Phi(m,u)=S'(u)-m,
+\]
+hence a unique critical point, namely $u_+(m)$, and that critical point is its
+unique minimum on $I_+$. Therefore
+\[
+\Phi(m,u_+(m))<0.
+\]
+But
+\[
+\Phi(m,u_+(m))
+=
+S(u_+(m))-m\,u_+(m)-\tau_-(m)
+=
+\tau_+(m)-\tau_-(m)
+=
+-D(m),
+\]
+so $D(m)>0$ for all sufficiently small $m>0$.
+
+By Lemma~\ref{lem:slope-intercept-parametrization-lifted-three-point},
+\[
+D'(m)=u_+(m)-a(m)>0
+\]
+on all of $J$. Hence $D(m)>0$ for every $m\in J$.
+
+\smallskip
+
+\noindent
+\textbf{Step 2: no interior common tangency.}
+Suppose
+\[
+\Phi(m,u)=0
+\]
+for some $m\in J$ and $u\in I_+$. If also
+\[
+\partial_u\Phi(m,u)=S'(u)-m=0,
+\]
+then by uniqueness of the inverse point on $I_+$ one has $u=u_+(m)$, and thus
+\[
+0=\Phi(m,u_+(m))=-D(m),
+\]
+contrary to $D(m)>0$. Therefore every branch point satisfies
+\[
+\partial_u\Phi(m,u)\neq 0.
+\]
+Equivalently, there is no interior common-tangent point on the odd-order
+branch.
+
+\smallskip
+
+\noindent
+\textbf{Step 3: uniqueness and analytic continuation.}
+For fixed $m\in J$, the derivative
+\[
+u\longmapsto \partial_u\Phi(m,u)=S'(u)-m
+\]
+is strictly increasing on $I_+$, and
+\[
+\partial_u\Phi(m,0)=S'(0)-m=-m<0.
+\]
+Hence $\Phi(m,\cdot)$ first decreases and then increases, so it has at most one
+zero on $I_+$. Thus the local branch from
+Theorem~\ref{thm:local-classification-lifted-three-point-branch-near-Kv-zero}
+is unique on every connected continuation interval.
+
+Let
+\[
+E:=\{m\in J:\exists\,u\in I_+\ \text{with}\ \Phi(m,u)=0\}.
+\]
+By Step 2, every zero is simple in the $u$-variable, so the implicit function
+theorem shows that $E$ is open and that the zero depends real-analytically on
+$m$. Let
+\[
+J_{\mathrm{br}}=(0,m_*)
+\]
+be the connected component of $E$ containing all sufficiently small positive
+$m$. This gives the unique maximal analytic continuation
+\[
+u=u(m),
+\qquad
+m\in J_{\mathrm{br}}.
+\]
+
+Differentiating
+\[
+\Phi(m,u(m))=0
+\]
+gives
+\[
+\bigl(S'(u(m))-m\bigr)u'(m)-u(m)+a(m)=0,
+\]
+hence
+\[
+u'(m)=\frac{u(m)-a(m)}{S'(u(m))-m}.
+\]
+Also
+\[
+a'(m)=\frac{1}{S''(a(m))}<0
+\]
+because $S''<0$ on the source interval $I_-$. So the source coordinate is
+strictly monotone and cannot return to a previous value.
+
+\smallskip
+
+\noindent
+\textbf{Step 4: endpoint control.}
+Assume that
+\[
+m_*<\sup J
+\]
+but that $u(m)$ does not approach $\beta$ as $m\uparrow m_*$. Then there exists
+a compact subinterval
+\[
+K\Subset I_+
+\]
+and a sequence $m_n\uparrow m_*$ with
+\[
+u(m_n)\in K.
+\]
+After passing to a subsequence,
+\[
+u(m_n)\to u_*\in K.
+\]
+By continuity,
+\[
+\Phi(m_*,u_*)=0.
+\]
+Since $m_*<\sup J$, one has $m_*\in J$, so by Step 2,
+\[
+\partial_u\Phi(m_*,u_*)\neq 0.
+\]
+The implicit function theorem therefore extends the branch analytically past
+$m_*$, contradicting maximality of $J_{\mathrm{br}}$.
+
+Hence
+\[
+u(m)\to\beta
+\qquad (m\uparrow m_*).
+\]
+This proves that the branch cannot terminate by an interior fold, interior
+common tangency, or interior accumulation.
+
+Finally, by
+Corollary~\ref{cor:no-infinite-order-flatness-Kv-good-vpatch}, every zero of
+$K_v$ has finite order. Since even-order zeros do not change the sign of $S''$,
+they do not break the strict increase of $S'$ on $I_+$. Therefore the endpoint
+$\beta$ can only be the ambient boundary of the good patch or the first
+odd-order zero of $K_v$ to the right.
+\end{proof}
+
+\begin{remark}[Structural package for the global lifted $3$-point branch]
+\label{rem:structural-package-global-lifted-three-point-branch}
+The correct global parameter on the odd-order lifted $3$-point branch is the
+source tangent slope
+\[
+m=S'(a).
+\]
+In that parameter, the branch is governed by the source/target tangent
+intercepts
+\[
+\tau_-(m)=S(a(m))-m\,a(m),
+\qquad
+\tau_+(m)=S(u_+(m))-m\,u_+(m),
+\]
+and their gap
+\[
+D(m)=\tau_-(m)-\tau_+(m),
+\qquad
+D'(m)=u_+(m)-a(m)>0.
+\]
+Thus interior common tangency is exactly the equation
+\[
+D(m)=0,
+\]
+but this never occurs on the odd-order continuation branch because $D>0$ there.
+So the global $3$-point problem is not a hidden recurrence problem inside the
+patch: once born at an odd-order $K_v$-zero, the branch is a one-parameter
+analytic graph with monotone source coordinate, and even-order $K_v$-zeros are
+invisible to it except as isolated points where $S''$ vanishes without changing
+the monotone-slope block.
+\end{remark}
+
 \begin{remark}[Exact nonmixed reduction in terms of $\mathcal Z$ and $\mathcal R$]
 \label{rem:nonmixed-four-point-zeros-can-carry-preexisting-branches}
 At a nonmixed lifted point
@@ -11569,7 +11969,7 @@ $v_5$-side when that patch opens, and a genuine fallback local analysis on the
 parallel $u_5$-patch when only that patch opens.
 \end{remark}
 
-\begin{remark}[Work in progress: what remains in the lifted order-$7$ geometry]
+\begin{remark}[Status of the lifted order-$7$ geometry]
 \label{rem:wip-lifted-order7-zero-capture}
 The lifted geometry is now substantially more stratified than a single
 zero-capture problem.
@@ -11588,11 +11988,14 @@ three-point collapse limits become tangent-line contact determinants for the
 planar lifted curve $\Lambda_v=(x,S)$, and four-point collapse limits become
 tangent-plane contact determinants for the lifted space curve $Q_v=(Y,x,S)$.
 
-Third, the three-point branch is locally classified near a finite-order
-$K_v$-zero: even order gives no opposite-side branch, while odd order gives
-exactly one local tangent-contact branch. Thus the remaining issue there is
-global recurrence / continuation and infinite-order flatness, not local
-first-contact ambiguity.
+Third, the three-point side is now globally controlled on good $v_5$-patches.
+The curvature zero set $K_v=0$ has no infinite-order flat points; even-order
+$K_v$-zeros are sterile; odd-order $K_v$-zeros carry exactly one local
+opposite-side tangent-contact branch; and that branch continues uniquely on the
+maximal right monotone-slope block, with no interior common-tangent event, no
+source-side return, and no interior accumulation. Thus the three-point side is
+no longer a live internal recurrence problem on such patches; only boundary exit
+of the relevant source/target slope-overlap block can remain.
 
 Fourth, the four-point side splits sharply into nonmixed and mixed regimes.
 On the nonmixed side, finite-order odd $T_v$-zeros already support genuine
@@ -11645,16 +12048,13 @@ one gets a punctured neighborhood free of $K_v=0$ and $T_v=0$ points.
 Thus the explicit low-order dangerous $4$-point patterns do not arise at the
 symmetric diagonal base itself.
 
-So the missing global ingredient is no longer a generic local geometry theorem.
-It is a combination of:
+So the remaining missing ingredients are no longer generic local geometry for
+the lifted $3$-point branch. They are:
 \begin{itemize}
 \item source-level control of the multi-pair interaction defects
 \[
 E_{\ge2}^{(3)},\qquad E_{\ge2}^{(5)},\qquad \overline E_{\ge2}^{(7)};
 \]
-
-\item global continuation / recurrence control for the unique odd-order
-three-point branch;
 
 \item exploitation of the now-established punctured-arc quintic-patch
 dichotomy on the mixed side: if the $v_5$-patch opens, carry out the
@@ -11692,10 +12092,13 @@ quadratic interaction factorization
 This would finish the two-point bad-core branch on compact good patches.
 
 \item
-\textbf{Three-point global continuation.}
-The local defect-free three-point branch is already classified. The remaining
-problem is to control global recurrence / continuation of the unique odd-order
-branch and to exclude infinite-order flatness.
+\textbf{Three-point branch (closed on good $v_5$-patches).}
+The lifted three-point side is no longer a live internal bottleneck:
+infinite-order flatness is excluded, the unique odd-order branch continues
+uniquely on the maximal right monotone-slope block, and there is no interior
+common-tangent recurrence or source-side return. Any residual issue there is
+only boundary exit of the relevant source/target slope-overlap block, not an
+internal three-point propagation mechanism.
 
 \item
 \textbf{Four-point mixed branch via established quintic-patch dichotomy.}
@@ -11741,17 +12144,22 @@ z_2,\ z_4,\ z_6.
 \end{enumerate}
 \end{remark}
 
-\begin{remark}[Work in progress: stratified lifted local picture]
+\begin{remark}[Stratified lifted local picture]
 \label{rem:wip-stratified-lifted-local-picture}
-The lifted local obstruction now splits into three regimes.
+The lifted local obstruction now splits into one closed regime and two genuinely
+live regimes.
 
 First, exact shrinking lifted $3$-point circuits concentrate into
 \[
-K_v=0,
+K_v=0.
 \]
-and near a finite-order isolated $K_v$-zero the repeated-node
-tangent-contact branch is completely classified: even order gives no
-opposite-side branch, while odd order gives exactly one opposite-side branch.
+On good $v_5$-patches, this side is now globally controlled: there is no
+infinite-order flatness, even-order $K_v$-zeros are sterile, odd-order
+$K_v$-zeros seed exactly one local opposite-side branch, and that branch
+continues uniquely on the maximal right monotone-slope block with no interior
+common tangent, no source-side return, and no interior accumulation. So the
+three-point side contributes only possible boundary exit, not an internal
+recurrence mechanism.
 
 Second, exact shrinking lifted $4$-point circuits concentrate into
 \[
@@ -11784,16 +12192,15 @@ such as $V_1\neq 0$. The punctured-arc quintic-patch dichotomy is now
 available from Proposition~\ref{prop:centered-quintic-patch-dichotomy}. What
 remains is to use that dichotomy: on the $v_5$-side, perform the finite-jet
 parity transfer to the actual good-patch coordinate $x=v_5/c$; on the
-$u_5$-side, develop the parallel $u_5$-patch as the fallback local
-geometry.
+$u_5$-side, develop the parallel $u_5$-patch as the fallback local geometry.
 
 Thus the remaining lifted local issues are now:
-the continuation / non-recurrence of the unique odd-order $3$-point branch,
 the continuation / non-recurrence of nonmixed odd-order $4$-point branches,
-possible infinite-order flatness, the \emph{effective exploitation} of the
-already-available punctured-arc quintic-patch dichotomy on the mixed side, and
-the completion of the finite-jet centered-to-patch bridge on the actual
-$v_5$-patch together with the fallback local analysis on the $u_5$-patch.
+the \emph{effective exploitation} of the already-available punctured-arc
+quintic-patch dichotomy on the mixed side, the completion of the finite-jet
+centered-to-patch bridge on the actual $v_5$-patch together with the fallback
+local analysis on the $u_5$-patch, and the deeper RH-specific identities needed
+on the nonmixed $4$-point branch.
 \end{remark}
 
 \begin{remark}[Current geometric bottleneck]
@@ -11998,10 +12405,12 @@ that the raw quadratic interaction factorization becomes automatic.
 
 Second, on the lifted three-point side, shrinking exact circuits now
 concentrate into $K_v=0$, repeated-node limits become tangent-line contacts,
-and finite-order $K_v$-zeros admit an explicit local branch classification:
-even-order zeros are sterile, while odd-order zeros carry exactly one local
-branch. The remaining issue there is therefore global recurrence / continuation,
-not local first-contact ambiguity.
+and this side is globally controlled on good $v_5$-patches: $K_v$ has no
+infinite-order zeros; even-order zeros are sterile; odd-order zeros carry
+exactly one local branch; and that branch continues uniquely on the maximal
+right monotone-slope block with no interior common-tangent event or source-side
+return. So the three-point side is reduced to boundary exit of the relevant
+slope-overlap block, not an internal recurrence mechanism.
 
 Third, on the lifted four-point side, shrinking exact circuits now
 concentrate into $T_v=0$, repeated-node limits become tangent-plane contacts,
