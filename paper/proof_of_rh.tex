@@ -2863,15 +2863,158 @@ The final moment bound is immediate from
 \]
 \end{proof}
 
-\begin{proposition}[Corrected $N$-point transverse estimate for the full corrected scalar]
+\begin{lemma}[Exact odd-moment generating function]
+\label{lem:n-point-odd-generating-function}
+Define
+\[
+\mu_k^{(N)}:=\sum_{j=1}^N a_j^{(N)}j^k,
+\]
+and, for $|u|<1/N$,
+\[
+\mathcal M_N(u)
+:=
+\sum_{r\ge 0}\mu_{2r+1}^{(N)}u^{2r+1}
+=
+\sum_{j=1}^N \frac{a_j^{(N)}\,j\,u}{1-j^2u^2}.
+\]
+Then
+\[
+\mathcal M_N(u)
+=
+(-1)^{N+1}(2N-1)N!(N-1)!
+\frac{u^{2N-1}}{\prod_{j=1}^N(1-j^2u^2)}.
+\]
+In particular, for every real $x>N$,
+\[
+\sum_{r\ge N-1} |\mu_{2r+1}^{(N)}|\,x^{-(2r+1)}
+=
+(2N-1)N!(N-1)!\,x^2\,
+\frac{\Gamma(x-N)}{\Gamma(x+N+1)}.
+\]
+\end{lemma}
+
+\begin{proof}
+The identity
+\[
+\mathcal M_N(u)
+=
+\sum_{j=1}^N \frac{a_j^{(N)}\,j\,u}{1-j^2u^2}
+\]
+is immediate from summing the geometric series
+\[
+\frac{j\,u}{1-j^2u^2}
+=
+\sum_{r\ge 0} j^{2r+1}u^{2r+1}
+\qquad (|u|<1/j).
+\]
+
+Set
+\[
+D_N(u):=
+\prod_{j=1}^N(1-j^2u^2)\,\mathcal M_N(u).
+\]
+Since $\mathcal M_N$ is a sum of simple fractions, $D_N(u)$ is an odd
+polynomial of degree at most $2N-1$. By
+Lemma~\ref{lem:n-point-coefficients},
+\[
+\mu_{2r+1}^{(N)}=0
+\qquad (0\le r\le N-2),
+\]
+so $\mathcal M_N(u)=O(u^{2N-1})$ as $u\to 0$. Hence
+\[
+D_N(u)=C_N\,u^{2N-1}
+\]
+for some constant $C_N$.
+
+To determine $C_N$, compare residues at $u=1/N$. The residue of
+$\mathcal M_N(u)$ there comes only from the $j=N$ term and equals
+\[
+\operatorname*{Res}_{u=1/N}\mathcal M_N(u)
+=
+-\frac{a_N^{(N)}}{2N}.
+\]
+On the other hand,
+\[
+\operatorname*{Res}_{u=1/N}
+\frac{C_Nu^{2N-1}}{\prod_{j=1}^N(1-j^2u^2)}
+=
+-\frac{C_N}{2N^2\prod_{k=1}^{N-1}(1-k^2/N^2)}.
+\]
+Equating these residues gives
+\[
+C_N
+=
+a_N^{(N)}\,N\prod_{k=1}^{N-1}(N^2-k^2).
+\]
+Now
+\[
+a_N^{(N)}
+=
+(-1)^{N+1}\frac{N}{\binom{2N-2}{N-1}},
+\]
+and
+\[
+\prod_{k=1}^{N-1}(N^2-k^2)
+=
+\prod_{k=1}^{N-1}(N-k)\prod_{k=1}^{N-1}(N+k)
+=
+(N-1)!\,\frac{(2N-1)!}{N!}
+=
+\frac{(2N-1)!}{N}.
+\]
+Therefore
+\[
+C_N
+=
+(-1)^{N+1}\frac{N(2N-1)!}{\binom{2N-2}{N-1}}
+=
+(-1)^{N+1}(2N-1)N!(N-1)!.
+\]
+This proves the first formula.
+
+For the tail identity, note that
+\[
+(-1)^{N+1}\mathcal M_N(u)
+=
+(2N-1)N!(N-1)!
+\frac{u^{2N-1}}{\prod_{j=1}^N(1-j^2u^2)}
+\]
+has nonnegative Taylor coefficients for $0<u<1/N$. Hence
+\[
+(-1)^{N+1}\mu_{2r+1}^{(N)}\ge 0
+\qquad (r\ge N-1),
+\]
+and therefore, for $x>N$,
+\[
+\sum_{r\ge N-1} |\mu_{2r+1}^{(N)}|\,x^{-(2r+1)}
+=
+\left|\mathcal M_N\!\left(\frac1x\right)\right|
+=
+(2N-1)N!(N-1)!\,
+\frac{x^2}{\prod_{j=1}^N(x^2-j^2)}.
+\]
+Finally,
+\[
+\prod_{j=1}^N(x^2-j^2)
+=
+\prod_{j=1}^N(x-j)\prod_{j=1}^N(x+j)
+=
+\frac{\Gamma(x)}{\Gamma(x-N)}\cdot
+\frac{\Gamma(x+N+1)}{\Gamma(x+1)}
+=
+\frac{1}{x}\frac{\Gamma(x+N+1)}{\Gamma(x-N)}.
+\]
+Substituting this identity yields the claimed formula.
+\end{proof}
+
+\begin{proposition}[Kernel form and explicit corrected $N$-point transverse estimate]
 \label{prop:corrected-n-point}
 Let
 \[
 H_m(s):=\Phi_K\!\bigl(\widehat\Omega_\zeta^{\corr}(s;m)\bigr)
 \]
 be the full corrected transverse scalar.
-For $N=\lfloor \alpha Q\rfloor$ with $0<\alpha<\rho_0$,
-define
+For $N=\lfloor \alpha Q\rfloor$ with $0<\alpha<\rho_0$, define
 \[
 s_j=\frac{j}{Q^2},
 \qquad
@@ -2881,9 +3024,30 @@ s_j=\frac{j}{Q^2},
 \]
 Then
 \[
-|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}
+\Xi_\zeta^{(N)}(m)
+=
+\frac{1}{2\pi i}
+\oint_{|\xi|=\rho_0/Q}
+H_m(\xi)\,K_{N,Q}(\xi)\,d\xi,
 \]
-for some $\delta>0$.
+where
+\[
+K_{N,Q}(\xi)
+:=
+2\sum_{j=1}^N a_j^{(N)}\frac{s_j}{\xi^2-s_j^2}
+=
+2(-1)^{N+1}(2N-1)N!(N-1)! \, Q^4\xi\,
+\frac{\Gamma(Q^2\xi-N)}{\Gamma(Q^2\xi+N+1)}.
+\]
+Moreover, writing $x:=\rho_0Q$, one has the explicit bound
+\[
+|\Xi_\zeta^{(N)}(m)|
+\ll_{\rho_0}
+\rho_0^2\,
+\frac{(2N-1)N!(N-1)!}{Q}\,
+\frac{\Gamma(x-N)}{\Gamma(x+N+1)}\,
+L(m)S(m)^2.
+\]
 \end{proposition}
 
 \begin{proof}
@@ -2895,27 +3059,78 @@ is holomorphic on $|s|<\rho_0/Q$. By
 Proposition~\ref{prop:cutoff-compatibility}, all cutoff-dependent tail,
 jet-correction, and estimation contributions are already internal to the full
 corrected scalar $H_m(s)$; hence no external remainder is carried into
-$\Xi_\zeta^{(N)}(m)$. By Proposition~\ref{prop:boundary-estimate},
+$\Xi_\zeta^{(N)}(m)$.
+
+Since $H_m$ is odd, the odd Cauchy formula gives
+\[
+H_m(s)
+=
+\frac{1}{2\pi i}\oint_{|\xi|=\rho_0/Q}
+H_m(\xi)\,\frac{2s}{\xi^2-s^2}\,d\xi.
+\]
+Summing this identity against the coefficients $a_j^{(N)}$ at
+$s=s_j=j/Q^2$ yields
+\[
+\Xi_\zeta^{(N)}(m)
+=
+\frac{1}{2\pi i}\oint_{|\xi|=\rho_0/Q}
+H_m(\xi)\,K_{N,Q}(\xi)\,d\xi
+\]
+with
+\[
+K_{N,Q}(\xi)
+=
+2\sum_{j=1}^N a_j^{(N)}\frac{s_j}{\xi^2-s_j^2}.
+\]
+
+Now
+\[
+\frac{s_j}{\xi^2-s_j^2}
+=
+\frac{1}{\xi}\,
+\frac{j/(Q^2\xi)}{1-j^2/(Q^4\xi^2)},
+\]
+so, using Lemma~\ref{lem:n-point-odd-generating-function},
+\[
+K_{N,Q}(\xi)
+=
+\frac{2}{\xi}\,
+\mathcal M_N\!\left(\frac{1}{Q^2\xi}\right)
+=
+2(-1)^{N+1}(2N-1)N!(N-1)!\,
+\frac{Q^2}{\prod_{j=1}^N(Q^4\xi^2-j^2)}.
+\]
+Finally,
+\[
+\prod_{j=1}^N(Q^4\xi^2-j^2)
+=
+\prod_{j=1}^N(Q^2\xi-j)\prod_{j=1}^N(Q^2\xi+j)
+=
+\frac{1}{Q^2\xi}\,
+\frac{\Gamma(Q^2\xi+N+1)}{\Gamma(Q^2\xi-N)},
+\]
+which gives
+\[
+K_{N,Q}(\xi)
+=
+2(-1)^{N+1}(2N-1)N!(N-1)! \, Q^4\xi\,
+\frac{\Gamma(Q^2\xi-N)}{\Gamma(Q^2\xi+N+1)}.
+\]
+
+For the size bound, Proposition~\ref{prop:boundary-estimate} gives
 \[
 |H_m(s)|\ll_{\rho_0}\frac{L(m)S(m)^2}{Q^3}
 \qquad (|s|=\rho_0/Q).
 \]
-By Proposition~\ref{prop:odd-expansion}, it is odd and admits the expansion
+By Proposition~\ref{prop:odd-expansion}, one may write
 \[
 H_m(z/Q^2)
 =
 \sum_{r\ge 0} c_{2r+1}(m)\frac{z^{2r+1}}{Q^{2r+4}},
-\]
-with
-\[
+\qquad
 |c_{2r+1}(m)|\ll L(m)S(m)^2\,\rho_0^{-(2r+1)}.
 \]
-
-Define
-\[
-\mu_k^{(N)}:=\sum_{j=1}^N a_j^{(N)}j^k.
-\]
-Then
+Therefore
 \[
 \Xi_\zeta^{(N)}(m)
 =
@@ -2926,59 +3141,144 @@ By Lemma~\ref{lem:n-point-coefficients},
 \mu_{2r+1}^{(N)}=0
 \qquad (0\le r\le N-2),
 \]
-so
+hence
 \[
-\Xi_\zeta^{(N)}(m)
-=
-\sum_{r\ge N-1} c_{2r+1}(m)\frac{\mu_{2r+1}^{(N)}}{Q^{2r+4}}.
+|\Xi_\zeta^{(N)}(m)|
+\ll_{\rho_0}
+\frac{L(m)S(m)^2}{Q^3}
+\sum_{r\ge N-1}
+|\mu_{2r+1}^{(N)}|\,(\rho_0Q)^{-(2r+1)}.
 \]
-Using Lemma~\ref{lem:n-point-coefficients} again,
+Applying Lemma~\ref{lem:n-point-odd-generating-function} with $x=\rho_0Q$
+gives
 \[
-|\mu_{2r+1}^{(N)}|
-\le
-(2N-1)N^{2r+1}.
+\sum_{r\ge N-1}
+|\mu_{2r+1}^{(N)}|\,(\rho_0Q)^{-(2r+1)}
+=
+(2N-1)N!(N-1)!(\rho_0Q)^2
+\frac{\Gamma(\rho_0Q-N)}{\Gamma(\rho_0Q+N+1)}.
+\]
+Substituting this proves the stated bound.
+\end{proof}
+
+\begin{corollary}[Optimized zeta-side cancellation depth]
+\label{cor:optimized-zeta-cancellation-depth}
+Let
+\[
+N=\lfloor \alpha Q\rfloor,
+\qquad
+0<\alpha<\rho_0,
+\qquad
+\beta:=\frac{\alpha}{\rho_0}\in(0,1).
+\]
+Then
+\[
+|\Xi_\zeta^{(N)}(m)|
+\ll_{\rho_0,\alpha}
+\frac{L(m)S(m)^2}{Q}\,
+e^{-\delta_*(\alpha,\rho_0)Q},
+\]
+where
+\[
+\delta_*(\alpha,\rho_0)
+=
+\rho_0\Bigl(
+(1+\beta)\log(1+\beta)
+-2\beta\log\beta
+-(1-\beta)\log(1-\beta)
+\Bigr).
+\]
+Moreover, $\delta_*(\alpha,\rho_0)$ is maximized uniquely at
+\[
+\beta=\frac{1}{\sqrt2},
+\qquad\text{i.e.}\qquad
+\alpha_{\mathrm{opt}}=\frac{\rho_0}{\sqrt2},
+\]
+so the optimal zeta-side cancellation depth is
+\[
+N_{\mathrm{opt}}
+=
+\left\lfloor \frac{\rho_0}{\sqrt2}\,Q\right\rfloor,
+\]
+and the corresponding exponential rate is
+\[
+\delta_{\mathrm{opt}}
+=
+2\rho_0\log(1+\sqrt2).
+\]
+\end{corollary}
+
+\begin{proof}
+Set $x:=\rho_0Q$, so that $N=\beta x+O(1)$ with $\beta\in(0,1)$ fixed.
+By Proposition~\ref{prop:corrected-n-point}, it suffices to estimate
+\[
+(2N-1)N!(N-1)!\,\frac{\Gamma(x-N)}{\Gamma(x+N+1)}.
+\]
+A Stirling expansion gives
+\[
+\log\!\left(
+(2N-1)N!(N-1)!\,\frac{\Gamma(x-N)}{\Gamma(x+N+1)}
+\right)
+=
+-x\,f(\beta)+O(\log x),
+\]
+where
+\[
+f(\beta)
+=
+(1+\beta)\log(1+\beta)
+-2\beta\log\beta
+-(1-\beta)\log(1-\beta).
 \]
 Hence
 \[
-|\Xi_\zeta^{(N)}(m)|
-\ll
-L(m)S(m)^2
-\sum_{r\ge N-1}
-\rho_0^{-(2r+1)}
-\frac{(2N-1)N^{2r+1}}{Q^{2r+4}}.
+(2N-1)N!(N-1)!\,\frac{\Gamma(x-N)}{\Gamma(x+N+1)}
+\ll_{\rho_0,\alpha}
+e^{-x f(\beta)},
 \]
-Equivalently,
+and therefore
 \[
 |\Xi_\zeta^{(N)}(m)|
-\ll
-\frac{(2N-1)L(m)S(m)^2}{Q^3}
-\sum_{r\ge N-1}
-\left(\frac{N}{\rho_0Q}\right)^{2r+1}.
+\ll_{\rho_0,\alpha}
+\frac{L(m)S(m)^2}{Q}\,
+e^{-\rho_0 f(\beta)Q}.
 \]
+This proves the first claim.
 
-Now take
+For the optimization, differentiate:
 \[
-N=\lfloor \alpha Q\rfloor
+f'(\beta)
+=
+\log\!\left(\frac{1-\beta^2}{\beta^2}\right).
 \]
-with $0<\alpha<\rho_0$. Then
+Thus $f'(\beta)=0$ exactly when $\beta=1/\sqrt2$. Since
 \[
-\frac{N}{\rho_0Q}\le \frac{\alpha}{\rho_0}<1,
+f''(\beta)
+=
+-\frac{2\beta}{1-\beta^2}-\frac{2}{\beta}<0
+\qquad (0<\beta<1),
 \]
-so the tail is geometric and its first term is exponentially small in $Q$.
-Thus, for some $\delta>0$,
+this critical point is the unique maximizer. Finally,
 \[
-\sum_{r\ge N-1}
-\left(\frac{N}{\rho_0Q}\right)^{2r+1}
-\ll e^{-\delta Q}.
+f\!\left(\frac{1}{\sqrt2}\right)
+=
+2\log(1+\sqrt2),
 \]
-Since $(2N-1)/Q^3\ll 1$, it follows that
-\[
-|\Xi_\zeta^{(N)}(m)|
-\ll
-L(m)S(m)^2e^{-\delta Q},
-\]
-as claimed.
+which gives the stated value of $\delta_{\mathrm{opt}}$.
 \end{proof}
+
+\begin{remark}
+Corollary~\ref{cor:optimized-zeta-cancellation-depth} optimizes the
+\emph{zeta-side} cancellation depth. In the full zeta--toy comparison one must
+also satisfy the toy-side restriction $0<\alpha<\rho_{\toy}$ from
+Proposition~\ref{prop:toy-n-point-direct}. Accordingly, the common admissible
+choice is any
+\[
+\alpha<\min\!\left\{\rho_{\toy},\frac{\rho_0}{\sqrt2}\right\},
+\]
+and if $\rho_{\toy}>\rho_0/\sqrt2$, one may take the exact zeta-side optimum
+$\alpha=\rho_0/\sqrt2$.
+\end{remark}
 
 We isolate the toy microscopic expansion in
 Appendix~\ref{app:toy-microscopic-expansion}; the only fact used in the main
@@ -12804,7 +13104,9 @@ against a zeta-side upper bound of the form
 \[
 |\Xi_{\zeta}^{(N)}(m)|
 \le
-C_{\zeta}\,\mathcal{U}(m)\,e^{-\delta Q},
+C_{\zeta}(\rho_0,\alpha)\,
+\frac{\mathcal{U}(m)}{Q}\,
+e^{-\delta_*(\alpha,\rho_0)Q},
 \]
 where in the present draft one has schematically
 \[
@@ -12826,7 +13128,7 @@ S(m)\le C_S Q^2,
 \]
 the contradiction should reduce to an explicit scalar inequality of the form
 \[
-C_* Q^4 e^{-\delta Q}<1
+C_*(\rho_0,\alpha)\,Q^3 e^{-\delta_*(\alpha,\rho_0)Q}<1
 \qquad (Q\ge Q_*),
 \]
 for some computable constant $C_*>0$.  Any explicit $Q_*$ satisfying this
@@ -12944,19 +13246,24 @@ hence on compact $d$-ranges,
 \frac{x_0}{B_\zeta(m)}S(m).
 \]
 
-On the zeta side, Proposition~\ref{prop:corrected-n-point} gives
+On the zeta side, Corollary~\ref{cor:optimized-zeta-cancellation-depth} gives
 \[
-|\Xi_\zeta^{(N)}(m)|\ll L(m)S(m)^2e^{-\delta Q}.
+|\Xi_\zeta^{(N)}(m)|
+\ll_{\rho_0,\alpha}
+\frac{L(m)S(m)^2}{Q}\,
+e^{-\delta_*(\alpha,\rho_0)Q}.
 \]
 
 By Lemma~\ref{lem:crude-S-bound}, one has $S(m)\ll Q^2$, $L(m)\ll Q$, and
 $B_\zeta(m)L(m)S(m)\ll Q^4$. Therefore
 \[
-\frac{L(m)S(m)^2e^{-\delta Q}}{(x_0/B_\zeta(m))S(m)}
+\frac{(L(m)S(m)^2/Q)e^{-\delta_*(\alpha,\rho_0)Q}}
+{(x_0/B_\zeta(m))S(m)}
 =
-\frac{B_\zeta(m)}{x_0}L(m)S(m)e^{-\delta Q}
+\frac{B_\zeta(m)}{x_0}\,\frac{L(m)S(m)}{Q}\,
+e^{-\delta_*(\alpha,\rho_0)Q}
 \ll
-Q^4e^{-\delta Q}\to 0.
+Q^3 e^{-\delta_*(\alpha,\rho_0)Q}\to 0.
 \]
 Hence for $Q$ sufficiently large,
 \[
