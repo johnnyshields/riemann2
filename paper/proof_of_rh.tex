@@ -12135,6 +12135,88 @@ Thus the lifted $4$-point branch may be viewed equivalently as a
 parity/divisibility problem for the Wronskian ratio $J_{u_5}/J_{\lambda}$.
 \end{remark}
 
+\begin{proposition}[Source-level Wronskian for the nonmixed $4$-point branch]
+\label{prop:source-level-Wronskian-nonmixed-four-point}
+Define
+\[
+\mathcal W_{\mathrm{src}}
+:=
+J_{\lambda}\,J_{u_5}'-J_{u_5}\,J_{\lambda}'.
+\]
+Then
+\[
+\boxed{
+\mathcal R
+=
+\frac{c^2}{M}\,\frac{\mathcal W_{\mathrm{src}}}{J_\lambda^2}.
+}
+\]
+In particular, on every nonmixed arc on which $J_\lambda\neq 0$, the analytic
+scalars $\mathcal R$ and $\mathcal W_{\mathrm{src}}$ differ only by a
+nonvanishing analytic factor. Hence:
+
+\begin{enumerate}
+\item $\mathcal R=0\iff \mathcal W_{\mathrm{src}}=0$;
+\item $\operatorname{ord}\mathcal R=\operatorname{ord}\mathcal W_{\mathrm{src}}$;
+\item the local parity classification of isolated zeros of $\mathcal R$
+transfers verbatim to $\mathcal W_{\mathrm{src}}$.
+\end{enumerate}
+
+Moreover, under the affine gauge change
+\[
+u_5\longmapsto u_5+\alpha c+\beta v_5+\gamma \lambda
+\]
+one has
+\[
+J_{u_5}\longmapsto J_{u_5}+\gamma J_\lambda,
+\]
+and therefore
+\[
+\mathcal W_{\mathrm{src}}\longmapsto \mathcal W_{\mathrm{src}}.
+\]
+So $\mathcal W_{\mathrm{src}}$ is the canonical source-level gauge-invariant
+nonmixed scalar.
+\end{proposition}
+
+\begin{proof}
+Differentiate the ratio
+\[
+\mathcal Z=\frac{J_{u_5}}{J_\lambda}
+\]
+from Remark~\ref{rem:below-lifted-wronskian-ratio-reformulation}:
+\[
+\frac{d}{dh}\!\left(\frac{J_{u_5}}{J_\lambda}\right)
+=
+\frac{J_\lambda J_{u_5}'-J_{u_5}J_\lambda'}{J_\lambda^2}
+=
+\frac{\mathcal W_{\mathrm{src}}}{J_\lambda^2}.
+\]
+Substituting this into
+\[
+\mathcal R
+=
+\frac{c^2}{M}\frac{d}{dh}\!\left(\frac{J_{u_5}}{J_\lambda}\right)
+\]
+gives the displayed identity.
+
+On a nonmixed arc, $J_\lambda\neq 0$ and $c^2/M\neq 0$, so $\mathcal R$
+and $\mathcal W_{\mathrm{src}}$ differ by a nonvanishing analytic factor.
+This proves the zero-set and parity statements.
+
+For gauge invariance, the terms $\alpha c$ and $\beta v_5$ do not change
+$J_{u_5}$, while $\gamma\lambda$ adds $\gamma J_\lambda$. Therefore
+\[
+(J_{u_5}+\gamma J_\lambda)'=J_{u_5}'+\gamma J_\lambda',
+\]
+and
+\[
+J_\lambda(J_{u_5}'+\gamma J_\lambda')-(J_{u_5}+\gamma J_\lambda)J_\lambda'
+=
+J_\lambda J_{u_5}'-J_{u_5}J_\lambda'.
+\qedhere
+\]
+\end{proof}
+
 \begin{remark}[Determinant-level parity on a centered good patch]
 \label{rem:determinant-level-parity-centered-good-patch}
 Assume the centered scalar package from
@@ -12168,6 +12250,44 @@ is even and
 is odd, in agreement with the parity package obtained from the direct
 $Y''/S''$-analysis.
 \end{remark}
+
+\begin{corollary}[Centered parity of the source-level Wronskian]
+\label{cor:centered-parity-source-level-Wronskian}
+Under the hypotheses of
+Remark~\ref{rem:determinant-level-parity-centered-good-patch}, the source-level
+Wronskian
+\[
+\mathcal W_{\mathrm{src}}(s)
+=
+J_\lambda(s)\,J_{u_5}'(s)-J_{u_5}(s)\,J_\lambda'(s)
+\]
+is odd in the centered variable $s$.
+
+Consequently, any isolated centered zero of $\mathcal W_{\mathrm{src}}$ has
+odd order if and only if it is a potentially branch-seeding zero for the
+nonmixed $4$-point geometry; even-order centered zeros are locally sterile.
+\end{corollary}
+
+\begin{proof}
+By Remark~\ref{rem:determinant-level-parity-centered-good-patch},
+\[
+J_{u_5}(s)\ \text{and}\ J_\lambda(s)\ \text{are odd in }s.
+\]
+Hence
+\[
+J_{u_5}'(s)\ \text{and}\ J_\lambda'(s)\ \text{are even in }s.
+\]
+Therefore
+\[
+\mathcal W_{\mathrm{src}}(s)
+=
+J_\lambda(s)\,J_{u_5}'(s)-J_{u_5}(s)\,J_\lambda'(s)
+\]
+is odd in $s$. The final statement follows from
+Proposition~\ref{prop:source-level-Wronskian-nonmixed-four-point}, which
+transfers the parity classification from $\mathcal R$ to
+$\mathcal W_{\mathrm{src}}$.
+\end{proof}
 
 \begin{corollary}[Mixed low-order exclusion on a centered good $v_5$-patch]
 \label{cor:mixed-low-order-exclusion-centered-good-v5-patch}
@@ -14052,6 +14172,75 @@ is osculatory-ECT in the sense that $\mathfrak D(a,h)$ has fixed nonzero sign
 for $a<h$.
 \end{remark}
 
+\begin{corollary}[Source-level Wronskian consequences for the nonmixed branch]
+\label{cor:source-level-Wronskian-consequences-nonmixed}
+On a good nonmixed $v_5$-patch, the following hold.
+
+\begin{enumerate}
+\item If there is an exact nonmixed tangent-plane contact, then there exists a
+source point $h_*$ in the source convex hull of the contact nodes such that
+\[
+\mathcal W_{\mathrm{src}}(h_*)=0.
+\]
+
+\item If $\mathcal W_{\mathrm{src}}$ has fixed nonzero sign on an open
+nonmixed interval, then there are no exact nonmixed tangent-plane contacts on
+that interval.
+
+\item If every nonempty open subinterval of a nonmixed interval contains an
+exact nonmixed tangent-plane contact, then
+\[
+\mathcal W_{\mathrm{src}}\equiv 0
+\]
+on that interval, hence
+\[
+\mathcal R\equiv 0,
+\]
+and therefore the lifted curve collapses to affine-planar geometry.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+For (1), Proposition~\ref{prop:exact-nonmixed-tangent-plane-contacts-force-R-zero}
+produces a point in the convex hull of the three normalized nodes where
+$\mathcal R=0$. Pulling back through the monotone source-to-$x$ coordinate
+on the nonmixed patch and using
+Proposition~\ref{prop:source-level-Wronskian-nonmixed-four-point} gives
+$\mathcal W_{\mathrm{src}}=0$ at the corresponding source point.
+
+For (2), by
+Proposition~\ref{prop:source-level-Wronskian-nonmixed-four-point},
+$\mathcal W_{\mathrm{src}}$ and $\mathcal R$ have the same sign on a
+nonmixed arc. So Corollary~\ref{cor:repeated-source-monotonicity-one-sign-R}
+applies.
+
+For (3), every nonempty open subinterval contains a zero of
+$\mathcal W_{\mathrm{src}}$ by (1), so analyticity forces
+$\mathcal W_{\mathrm{src}}\equiv 0$. Proposition~\ref{prop:source-level-Wronskian-nonmixed-four-point}
+then gives $\mathcal R\equiv 0$, and
+Corollary~\ref{cor:recurrent-exact-nonmixed-contacts-force-affine-planarity}
+gives affine-planar collapse.
+\end{proof}
+
+\begin{remark}[Chebyshev formulation of the nonmixed burden]
+\label{rem:Chebyshev-formulation-nonmixed}
+Corollary~\ref{cor:source-level-Wronskian-consequences-nonmixed} shows that the
+nonmixed $4$-point branch is controlled source-level by the pair
+\[
+(J_\lambda,\ J_{u_5}).
+\]
+If this pair were a Chebyshev pair on an opened nonmixed arc, i.e.
+\[
+\mathcal W_{\mathrm{src}}\neq 0
+\]
+throughout that arc, then the entire nonmixed $4$-point branch would be
+sterile there. Accordingly, the remaining nonmixed theorem-level burden can be
+posed as a source-level one-sign / odd-zero problem for the Wronskian
+\[
+\mathcal W_{\mathrm{src}}.
+\]
+\end{remark}
+
 \begin{remark}[First-loss rigidification of the quadratic-envelope scalar]
 \label{rem:first-loss-rigidification-nonmixed}
 Set
@@ -14129,6 +14318,20 @@ recurrent exact contacts force affine-planar collapse
 and isolated zeros of $\mathcal R$ are classified by parity
 (Proposition~\ref{prop:parity-classification-isolated-nonmixed-R-zeros}).
 
+At source level, the same structure is encoded by the gauge-invariant Wronskian
+\[
+\mathcal W_{\mathrm{src}}
+=
+J_\lambda J_{u_5}'-J_{u_5}J_\lambda',
+\]
+which differs from $\mathcal R$ only by a nonvanishing analytic factor on a
+nonmixed arc
+(Proposition~\ref{prop:source-level-Wronskian-nonmixed-four-point}). Thus exact
+nonmixed contacts force zeros of $\mathcal W_{\mathrm{src}}$, one-sign
+$\mathcal W_{\mathrm{src}}$-intervals are sterile, and recurrent contacts
+force $\mathcal W_{\mathrm{src}}\equiv 0$
+(Corollary~\ref{cor:source-level-Wronskian-consequences-nonmixed}).
+
 In addition, for each fixed source point $a$, repeated-source exact contacts
 factor through the quadratic-envelope scalar
 \[
@@ -14146,12 +14349,14 @@ with derivative controlled by the osculatory $4\times 4$ determinant
 $\mathfrak D(a,h)$.
 
 Accordingly, the genuinely live nonmixed $4$-point burden is no longer local
-birth. What remains is the global/source-level control of which odd zeros of
+birth. It is the global/source-level control of odd zeros of
 \[
-\mathcal R=\frac12\,\widetilde Y'''
+\mathcal W_{\mathrm{src}},
 \]
-can actually arise along an opened nonmixed arc in the genuine lifted
-$v_5$-geometry.
+equivalently of odd zeros of $\mathcal R$, along an opened nonmixed arc in
+the genuine lifted $v_5$-geometry; and, in repeated-source variables, the
+equivalent problem of excluding first-loss monotonicity for $\Gamma_a$ or
+$\Psi_a$, equivalently of controlling the sign of $\mathfrak D(a,h)$.
 \end{remark}
 
 \begin{remark}[Derivative-geometry meaning of the nonmixed invariant $\mathcal R$]
