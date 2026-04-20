@@ -3288,6 +3288,165 @@ odd tail therefore begins at order $2N-1$ for operator-theoretic reasons,
 not only by coefficient cancellation.
 \end{remark}
 
+\begin{lemma}[Integral form of a forward difference]
+\label{lem:forward-difference-integral-form}
+For $m\ge 1$, $h>0$, and an analytic germ $f$, one has
+\[
+(e^{hD}-1)^m f(x)
+=
+h^m\int_0^m f^{(m)}(x+hu)\,\omega_m(u)\,du,
+\]
+where
+\[
+\omega_m(u)
+:=
+\frac{1}{(m-1)!}
+\sum_{r=0}^{m}(-1)^r\binom{m}{r}(u-r)_+^{m-1},
+\qquad
+(u-r)_+:=\max\{u-r,0\}.
+\]
+The function $\omega_m$ is nonnegative, supported on $[0,m]$, and
+satisfies the symmetry
+\[
+\omega_m(u)=\omega_m(m-u).
+\]
+\end{lemma}
+
+\begin{proof}
+The identity
+\[
+(e^{hD}-1)f(x)=f(x+h)-f(x)=\int_0^h f'(x+t)\,dt
+\]
+iterates to
+\[
+(e^{hD}-1)^m f(x)
+=
+\int_{[0,h]^m}
+f^{(m)}(x+t_1+\cdots+t_m)\,dt_1\cdots dt_m.
+\]
+Rescaling $t_i=hu_i$ gives
+\[
+(e^{hD}-1)^m f(x)
+=
+h^m
+\int_{[0,1]^m}
+f^{(m)}(x+h(u_1+\cdots+u_m))\,du_1\cdots du_m.
+\]
+Pushing forward Lebesgue measure on $[0,1]^m$ under
+\[
+(u_1,\dots,u_m)\mapsto u_1+\cdots+u_m
+\]
+yields the density $\omega_m$, namely the classical Irwin--Hall density,
+which has the stated explicit formula, support, and symmetry. This proves the
+claim.
+\end{proof}
+
+\begin{proposition}[Positive-kernel representation of the odd projector]
+\label{prop:n-point-odd-positive-kernel}
+Set
+\[
+m:=2N-1,
+\qquad
+h:=Q^{-2},
+\]
+and define, for $0\le u\le N$,
+\[
+\kappa_N(u):=\omega_{2N-1}(N-u)+\omega_{2N-1}(N-1-u),
+\]
+where $\omega_{2N-1}$ is the density from
+Lemma~\ref{lem:forward-difference-integral-form}, extended by $0$ outside
+$[0,2N-1]$. Then $\kappa_N(u)\ge 0$ on $[0,N]$, and for every odd
+analytic germ $F$,
+\[
+(\mathcal P_{N,Q}F)
+=
+\frac{N(-1)^{N+1}}{\binom{2N-2}{N-1}}\,
+Q^{-(4N-2)}
+\int_0^N
+\kappa_N(u)\,
+F^{(2N-1)}\!\left(\frac{u}{Q^2}\right)\,du.
+\]
+Moreover, $\kappa_N(u)>0$ for $0<u<N$.
+\end{proposition}
+
+\begin{proof}
+Apply Proposition~\ref{prop:n-point-odd-finite-difference-factorization} and
+Lemma~\ref{lem:forward-difference-integral-form} with $m=2N-1$ and
+$h=Q^{-2}$. This gives
+\[
+(\mathcal P_{N,Q}F)
+=
+\frac{N(-1)^{N+1}}{2\binom{2N-2}{N-1}}
+h^{2N-1}
+\int_0^{2N-1}
+\omega_{2N-1}(v)\,
+\Bigl[
+F^{(2N-1)}\bigl((v-N)h\bigr)
++
+F^{(2N-1)}\bigl((v-N+1)h\bigr)
+\Bigr]\,dv.
+\]
+Since $F$ is odd, $F^{(2N-1)}$ is even. Using this evenness together with
+the symmetry
+\[
+\omega_{2N-1}(v)=\omega_{2N-1}(2N-1-v),
+\]
+the two terms may be folded onto $[0,N]$, yielding
+\[
+(\mathcal P_{N,Q}F)
+=
+\frac{N(-1)^{N+1}}{\binom{2N-2}{N-1}}\,
+h^{2N-1}
+\int_0^N
+\bigl[
+\omega_{2N-1}(N-u)+\omega_{2N-1}(N-1-u)
+\bigr]
+F^{(2N-1)}(uh)\,du.
+\]
+This is exactly the stated formula. The strict positivity on $0<u<N$
+follows because $N-u\in(0,2N-1)$ there, and
+$\omega_{2N-1}$ is strictly positive on the interior of its support.
+\end{proof}
+
+\begin{corollary}[Sign transfer from the first surviving derivative]
+\label{cor:n-point-sign-transfer}
+Let $F$ be an odd analytic germ. If for some $\sigma\in\{\pm1\}$,
+\[
+\sigma\,F^{(2N-1)}(s)\ge 0
+\qquad
+\text{for all } 0\le s\le \frac{N}{Q^2},
+\]
+then
+\[
+\sigma\,(-1)^{N+1}(\mathcal P_{N,Q}F)\ge 0.
+\]
+If moreover $F^{(2N-1)}\not\equiv 0$ on $[0,N/Q^2]$, then the inequality
+is strict.
+\end{corollary}
+
+\begin{proof}
+This is immediate from Proposition~\ref{prop:n-point-odd-positive-kernel},
+since the kernel $\kappa_N$ is nonnegative and strictly positive on
+$(0,N)$.
+\end{proof}
+
+\begin{remark}[Why this is the right downstream target]
+\label{rem:n-point-positive-kernel-target}
+Proposition~\ref{prop:n-point-odd-positive-kernel} shows that the $N$-point
+layer is not merely an odd-moment cancellation device: on odd germs it is a
+positive average of the first surviving derivative
+$F^{(2N-1)}$ over the microscopic interval $[0,N/Q^2]$. Accordingly, any
+source-level argument that gives a fixed sign, one-sided lower bound, or
+variation control for
+\[
+H_m^{(2N-1)}(s)
+\qquad
+\left(0\le s\le \frac{N}{Q^2}\right)
+\]
+would transfer directly to the sign or size of $\Xi_\zeta^{(N)}(m)$.
+This isolates the next natural analytic target in the $N$-point route.
+\end{remark}
+
 \begin{remark}[Finite-order recurrence of the normalized surviving tail]
 \label{rem:n-point-tail-recurrence}
 Define
@@ -3835,6 +3994,135 @@ explicit, the zeta-side $N$-point estimate becomes effective with an
 explicit leading constant.
 \end{remark}
 
+\begin{proposition}[Real profile of the exact $N$-point kernel]
+\label{prop:exact-kernel-real-profile}
+Let
+\[
+C_N:=(2N-1)N!(N-1)!,
+\qquad
+\kappa_N(x):=
+x\,\frac{\Gamma(x-N)}{\Gamma(x+N+1)}
+\qquad (x>N).
+\]
+Then
+\[
+\kappa_N(x)=\frac{1}{\prod_{j=1}^N(x^2-j^2)},
+\]
+and for real $x>N$,
+\[
+K_{N,Q}\!\left(\frac{x}{Q^2}\right)
+=
+2(-1)^{N+1}C_NQ^2\,\kappa_N(x).
+\]
+Moreover:
+
+\begin{enumerate}
+\item $\kappa_N(x)>0$ for all $x>N$;
+\item $\kappa_N'(x)<0$ for all $x>N$;
+\item for every $x>N$,
+\[
+\sup_{|\xi|=x/Q^2}|K_{N,Q}(\xi)|
+=
+2C_NQ^2\,\kappa_N(x)
+=
+\left|K_{N,Q}\!\left(\frac{x}{Q^2}\right)\right|.
+\]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+From Proposition~\ref{prop:corrected-n-point},
+\[
+K_{N,Q}(\xi)
+=
+2(-1)^{N+1}C_NQ^4\xi\,
+\frac{\Gamma(Q^2\xi-N)}{\Gamma(Q^2\xi+N+1)}.
+\]
+Substituting $\xi=x/Q^2$ gives
+\[
+K_{N,Q}\!\left(\frac{x}{Q^2}\right)
+=
+2(-1)^{N+1}C_NQ^2\,
+x\,\frac{\Gamma(x-N)}{\Gamma(x+N+1)}
+=
+2(-1)^{N+1}C_NQ^2\,\kappa_N(x).
+\]
+
+Now
+\[
+\Gamma(x+N+1)
+=
+(x+N)(x+N-1)\cdots x\,\Gamma(x),
+\]
+and
+\[
+\Gamma(x)
+=
+(x-1)(x-2)\cdots (x-N)\,\Gamma(x-N).
+\]
+Hence
+\[
+x\,\frac{\Gamma(x-N)}{\Gamma(x+N+1)}
+=
+\frac{1}{(x-N)\cdots(x-1)(x+1)\cdots(x+N)}
+=
+\frac{1}{\prod_{j=1}^N(x^2-j^2)},
+\]
+which proves the product formula. Positivity is immediate for $x>N$.
+
+For monotonicity, differentiate the logarithm:
+\[
+\frac{d}{dx}\log\kappa_N(x)
+=
+-\sum_{j=1}^N \frac{2x}{x^2-j^2}.
+\]
+Since $x>N$, each denominator is positive, so
+\[
+\frac{d}{dx}\log\kappa_N(x)<0,
+\]
+hence $\kappa_N'(x)<0$.
+
+Finally, using the product form of the kernel,
+\[
+K_{N,Q}(\xi)
+=
+2(-1)^{N+1}C_NQ^2\,
+\frac{1}{\prod_{j=1}^N(Q^4\xi^2-j^2)},
+\]
+if $|\xi|=x/Q^2$ then
+\[
+|Q^4\xi^2-j^2|
+\ge \bigl||Q^2\xi|^2-j^2\bigr|
+=
+x^2-j^2
+\qquad (1\le j\le N),
+\]
+so
+\[
+|K_{N,Q}(\xi)|
+\le
+2C_NQ^2\,
+\frac{1}{\prod_{j=1}^N(x^2-j^2)}
+=
+2C_NQ^2\,\kappa_N(x).
+\]
+Equality is attained at $\xi=x/Q^2$, proving the final claim.
+\end{proof}
+
+\begin{remark}[No contour loss in the kernel factor]
+\label{rem:no-contour-loss-kernel-factor}
+Proposition~\ref{prop:exact-kernel-real-profile} shows that the kernel factor
+in Proposition~\ref{prop:corrected-n-point} is controlled exactly by its
+positive real value on the boundary circle.  Thus the boundary estimate used in
+the zeta-side $N$-point bound carries no hidden contour-loss from the kernel
+itself: the worst point is the positive real boundary point
+\[
+\xi=\frac{\rho_0}{Q}.
+\]
+Moreover, since $\kappa_N$ is strictly decreasing on $(N,\infty)$, the
+kernel factor is largest at the smallest admissible boundary radius.
+\end{remark}
+
 \begin{remark}[Discrete Mellin projector and test-function viewpoint]
 \label{rem:discrete-mellin-projector}
 Define the additive operator
@@ -3906,6 +4194,362 @@ finite-support projector is replaced by an honest smooth multiplicative test
 function. This observation is not used elsewhere in the proof, but it places
 the $N$-point cancellation layer in a more canonical operator-theoretic
 setting.
+\end{remark}
+
+\begin{lemma}[Smoothed Mellin projector]
+\label{lem:smoothed-mellin-projector}
+Let $\phi\in C_c^\infty(\mathbf R)$ be even and normalized by
+\[
+\int_{\mathbf R}\phi(u)\,du=1.
+\]
+Define its bilateral Laplace transform by
+\[
+\widehat\phi(w):=\int_{\mathbf R}\phi(u)e^{wu}\,du.
+\]
+For $\eta>0$, define the smoothed additive projector
+\[
+(\mathcal P_{N,Q,\eta}^{\phi}F)
+:=
+\sum_{j=1}^N a_j^{(N)}
+\int_{\mathbf R}\phi(u)\,
+F\!\left(\frac{j}{Q^2}+\eta u\right)\,du,
+\]
+whenever $F$ is holomorphic on a neighborhood of the integration region.
+
+Then:
+
+\begin{enumerate}
+\item for every exponential mode $F(s)=e^{zs}$,
+\[
+\mathcal P_{N,Q,\eta}^{\phi}(e^{zs})
+=
+\widehat\phi(\eta z)\,\widehat\mu_{N,Q}(z),
+\qquad
+\widehat\mu_{N,Q}(z)=\sum_{j=1}^N a_j^{(N)}e^{zj/Q^2};
+\]
+
+\item the smoothed symbol preserves the exact low odd-jet annihilation:
+\[
+\widehat\phi(0)\widehat\mu_{N,Q}(0)=1,
+\qquad
+\partial_z^{\,2r+1}\!\bigl(\widehat\phi(\eta z)\widehat\mu_{N,Q}(z)\bigr)\Big|_{z=0}=0
+\quad (0\le r\le N-2);
+\]
+
+\item if $F$ is holomorphic on a neighborhood $\Omega$ containing all points
+\[
+\frac{j}{Q^2}+\eta u
+\qquad
+(1\le j\le N,\ u\in \operatorname{supp}\phi),
+\]
+then
+\[
+\bigl|\mathcal P_{N,Q,\eta}^{\phi}F-\mathcal P_{N,Q}F\bigr|
+\le
+\frac{\eta^2}{2}\,(2N-1)\,m_2(\phi)\,
+\sup_{\Omega}|F''|,
+\]
+where
+\[
+m_2(\phi):=\int_{\mathbf R}|u|^2\,|\phi(u)|\,du.
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For $F(s)=e^{zs}$,
+\[
+\mathcal P_{N,Q,\eta}^{\phi}(e^{zs})
+=
+\sum_{j=1}^N a_j^{(N)}e^{zj/Q^2}
+\int_{\mathbf R}\phi(u)e^{\eta zu}\,du
+=
+\widehat\phi(\eta z)\,\widehat\mu_{N,Q}(z),
+\]
+which proves the first statement.
+
+Since $\phi$ is even, $\widehat\phi$ is an even entire function. In
+particular,
+\[
+\widehat\phi(0)=\int_{\mathbf R}\phi(u)\,du=1,
+\qquad
+\widehat\phi^{(2r+1)}(0)=0
+\quad (r\ge 0).
+\]
+Lemma~\ref{lem:n-point-mellin-symbol} gives
+\[
+\widehat\mu_{N,Q}(0)=1,
+\qquad
+\partial_z^{\,2r+1}\widehat\mu_{N,Q}(0)=0
+\quad (0\le r\le N-2).
+\]
+Applying Leibniz' rule to the product
+$\widehat\phi(\eta z)\widehat\mu_{N,Q}(z)$ shows that all odd derivatives up
+to order $2N-3$ vanish at $z=0$, proving the second statement.
+
+For the quantitative comparison, expand $F$ at $j/Q^2$:
+\[
+F\!\left(\frac{j}{Q^2}+\eta u\right)
+=
+F\!\left(\frac{j}{Q^2}\right)
++
+\eta u\,F'\!\left(\frac{j}{Q^2}\right)
++
+\frac{\eta^2u^2}{2}\,F''(\xi_{j,u})
+\]
+for some $\xi_{j,u}\in\Omega$. Since $\phi$ is even,
+\[
+\int_{\mathbf R}\phi(u)\,u\,du=0.
+\]
+Also $\int \phi(u)\,du=1$. Therefore
+\[
+\int_{\mathbf R}\phi(u)\,
+F\!\left(\frac{j}{Q^2}+\eta u\right)\,du
+-
+F\!\left(\frac{j}{Q^2}\right)
+=
+\frac{\eta^2}{2}
+\int_{\mathbf R}\phi(u)\,u^2\,F''(\xi_{j,u})\,du.
+\]
+Summing against $a_j^{(N)}$ and using
+Lemma~\ref{lem:n-point-coefficients},
+\[
+\sum_{j=1}^N |a_j^{(N)}|=2N-1,
+\]
+gives
+\[
+\bigl|\mathcal P_{N,Q,\eta}^{\phi}F-\mathcal P_{N,Q}F\bigr|
+\le
+\frac{\eta^2}{2}\,(2N-1)\,m_2(\phi)\,
+\sup_{\Omega}|F''|.
+\qedhere
+\]
+\end{proof}
+
+\begin{remark}[Smoothing scale]
+\label{rem:smoothing-scale-mellin-projector}
+Since $N\asymp Q$, Lemma~\ref{lem:smoothed-mellin-projector} gives
+\[
+\mathcal P_{N,Q,\eta}^{\phi}F
+=
+\mathcal P_{N,Q}F
++
+O\!\bigl(Q\eta^2\sup|F''|\bigr).
+\]
+Thus any choice $\eta=o(Q^{-1/2})$ makes the smoothing error $o(1)$ while
+preserving the exact low odd-jet annihilation. This does not enter the present
+proof, but it shows that the discrete $N$-point projector admits a genuinely
+smooth Mellin-side avatar with the same exact cancellation pattern.
+\end{remark}
+
+\begin{proposition}[Smoothed comparison for the corrected $N$-point zeta scalar]
+\label{prop:smoothed-zeta-n-point-comparison}
+Let $\phi\in C_c^\infty(\mathbf R)$ be even, normalized by
+\[
+\int_{\mathbf R}\phi(u)\,du=1,
+\]
+and set
+\[
+U_\phi:=\sup\{|u|:u\in \operatorname{supp}\phi\},
+\qquad
+m_2(\phi):=\int_{\mathbf R}|u|^2\,|\phi(u)|\,du.
+\]
+Fix $0<\alpha<\rho_0$, let
+\[
+N=\lfloor \alpha Q\rfloor,
+\]
+and assume
+\[
+0<\eta\le \frac{\rho_0-\alpha}{2U_\phi\,Q}.
+\]
+Define the smoothed corrected scalar
+\[
+H_{m,\eta}(s):=\int_{\mathbf R}\phi(u)\,H_m(s+\eta u)\,du,
+\]
+and the corresponding smoothed $N$-point scalar
+\[
+\Xi_{\zeta,\eta}^{(N)}(m)
+:=
+\sum_{j=1}^N a_j^{(N)}\,H_{m,\eta}\!\left(\frac{j}{Q^2}\right).
+\]
+Then:
+
+\begin{enumerate}
+\item $H_{m,\eta}$ is odd and holomorphic on
+\[
+|s|<\frac{\rho_\eta}{Q},
+\qquad
+\rho_\eta:=\rho_0-U_\phi \eta Q>\alpha.
+\]
+
+\item One has the zeta-side exponential estimate
+\[
+|\Xi_{\zeta,\eta}^{(N)}(m)|
+\ll_{\phi,\rho_0,\alpha}
+\frac{L(m)S(m)^2}{Q}\,
+e^{-\delta_*(\alpha,\rho_\eta)Q},
+\]
+where
+\[
+\delta_*(\alpha,\rho_\eta)
+=
+\rho_\eta\Bigl(
+(1+\beta_\eta)\log(1+\beta_\eta)
+-2\beta_\eta\log\beta_\eta
+-(1-\beta_\eta)\log(1-\beta_\eta)
+\Bigr),
+\qquad
+\beta_\eta:=\frac{\alpha}{\rho_\eta}.
+\]
+
+\item The smoothed and discrete $N$-point scalars satisfy
+\[
+|\Xi_{\zeta,\eta}^{(N)}(m)-\Xi_{\zeta}^{(N)}(m)|
+\le
+\frac{4\,C_{\partial}(\rho_0)\,m_2(\phi)}{(\rho_0-\alpha)^2}\,
+\frac{2N-1}{Q}\,
+\eta^2\,L(m)S(m)^2.
+\]
+In particular,
+\[
+|\Xi_{\zeta,\eta}^{(N)}(m)-\Xi_{\zeta}^{(N)}(m)|
+\ll_{\phi,\rho_0,\alpha}
+\eta^2\,L(m)S(m)^2.
+\]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Since $H_m$ is odd and $\phi$ is even,
+\[
+H_{m,\eta}(-s)
+=
+\int_{\mathbf R}\phi(u)\,H_m(-s+\eta u)\,du
+=
+\int_{\mathbf R}\phi(u)\,H_m(-(s+\eta u))\,du
+=
+-H_{m,\eta}(s),
+\]
+so $H_{m,\eta}$ is odd. If $|s|<\rho_\eta/Q$ and $u\in \operatorname{supp}\phi$,
+then
+\[
+|s+\eta u|
+\le
+|s|+\eta U_\phi
+<
+\frac{\rho_0-U_\phi\eta Q}{Q}+\eta U_\phi
+=
+\frac{\rho_0}{Q}.
+\]
+Since $H_m$ is holomorphic on $|s|<\rho_0/Q$, it follows that
+$H_{m,\eta}$ is holomorphic on $|s|<\rho_\eta/Q$. This proves (1).
+
+For $|s|=\rho_\eta/Q$ and $u\in \operatorname{supp}\phi$, the same estimate gives
+\[
+|s+\eta u|\le \frac{\rho_0}{Q}.
+\]
+Hence Proposition~\ref{prop:boundary-estimate} implies
+\[
+|H_m(s+\eta u)|
+\le
+C_{\partial}(\rho_0)\,\frac{L(m)S(m)^2}{Q^3}.
+\]
+Therefore
+\[
+|H_{m,\eta}(s)|
+\le
+\|\phi\|_{L^1}\,C_{\partial}(\rho_0)\,\frac{L(m)S(m)^2}{Q^3}
+\qquad
+\left(|s|=\frac{\rho_\eta}{Q}\right).
+\]
+Since $H_{m,\eta}$ is odd and holomorphic on $|s|<\rho_\eta/Q$, the proof of
+Corollary~\ref{cor:optimized-zeta-cancellation-depth} applies verbatim with
+$\rho_0$ replaced by $\rho_\eta$. This gives
+\[
+|\Xi_{\zeta,\eta}^{(N)}(m)|
+\ll_{\phi,\rho_0,\alpha}
+\frac{L(m)S(m)^2}{Q}\,
+e^{-\delta_*(\alpha,\rho_\eta)Q},
+\]
+proving (2).
+
+For (3), note that
+\[
+\Xi_{\zeta,\eta}^{(N)}(m)-\Xi_{\zeta}^{(N)}(m)
+=
+\bigl(\mathcal P_{N,Q,\eta}^{\phi}-\mathcal P_{N,Q}\bigr)H_m.
+\]
+Apply Lemma~\ref{lem:smoothed-mellin-projector} with $F=H_m$. It remains to
+bound $H_m''$ on the relevant region. Since
+\[
+\frac{j}{Q^2}\le \frac{N}{Q^2}\le \frac{\alpha}{Q},
+\qquad
+\eta U_\phi\le \frac{\rho_0-\alpha}{2Q},
+\]
+all points
+\[
+\frac{j}{Q^2}+\eta u
+\qquad
+(1\le j\le N,\ u\in\operatorname{supp}\phi)
+\]
+lie in the disk
+\[
+|s|\le \frac{\alpha}{Q}+\eta U_\phi
+\le
+\frac{\rho_0+\alpha}{2Q}.
+\]
+Thus their distance to the boundary circle $|s|=\rho_0/Q$ is at least
+\[
+\frac{\rho_0-\alpha}{2Q}.
+\]
+By Cauchy's derivative estimate and Proposition~\ref{prop:boundary-estimate},
+\[
+\sup_{\Omega}|H_m''|
+\le
+\frac{2\,C_{\partial}(\rho_0)\,L(m)S(m)^2/Q^3}
+{\bigl((\rho_0-\alpha)/(2Q)\bigr)^2}
+=
+\frac{8\,C_{\partial}(\rho_0)}{(\rho_0-\alpha)^2}\,
+\frac{L(m)S(m)^2}{Q}.
+\]
+Lemma~\ref{lem:smoothed-mellin-projector} therefore yields
+\[
+|\Xi_{\zeta,\eta}^{(N)}(m)-\Xi_{\zeta}^{(N)}(m)|
+\le
+\frac{\eta^2}{2}\,(2N-1)\,m_2(\phi)\,
+\frac{8\,C_{\partial}(\rho_0)}{(\rho_0-\alpha)^2}\,
+\frac{L(m)S(m)^2}{Q},
+\]
+which is exactly the stated bound.
+\end{proof}
+
+\begin{remark}[Microscopic smoothing regime]
+\label{rem:microscopic-smoothing-zeta-n-point}
+If
+\[
+\eta\ll Q^{-2},
+\]
+then Proposition~\ref{prop:smoothed-zeta-n-point-comparison} gives
+\[
+\Xi_{\zeta,\eta}^{(N)}(m)
+=
+\Xi_{\zeta}^{(N)}(m)
++
+O\!\left(\frac{L(m)S(m)^2}{Q^4}\right).
+\]
+At the same time,
+\[
+\rho_\eta=\rho_0+O(Q^{-1}),
+\]
+so
+\[
+\delta_*(\alpha,\rho_\eta)
+=
+\delta_*(\alpha,\rho_0)+O(Q^{-1}).
+\]
+Thus microscopic smoothing preserves the same zeta-side exponential scale while
+replacing the discrete projector by a genuinely smooth Mellin-side test
+function.
 \end{remark}
 
 We isolate the toy microscopic expansion in
@@ -12978,6 +13622,223 @@ D_{2r+2}=\widehat U_1V_{2r+1}-U_{2m+1}\widehat V_{2(r-m)+1}.
 \]
 \end{proof}
 
+\begin{lemma}[Late-$v_5$ $u_5$-patch affine-normalization transplant]
+\label{lem:late-v5-u5-patch-transplant}
+Assume the centered scalar package from
+Remark~\ref{rem:centered-symmetric-placement-taylor-package}, and assume
+\[
+U_1\neq 0.
+\]
+Then
+\[
+y:=\frac{u_5}{c}
+\]
+is an odd local coordinate near the centered base. Suppose in addition that
+\[
+\operatorname{ord}_s v_5=2r+1\ge 3.
+\]
+On the corresponding $u_5$-patch write
+\[
+x(y):=\frac{v_5}{c},
+\qquad
+\tau_u(y):=-\frac{\Delta_7}{c\,u_5},
+\qquad
+\widetilde\tau_u(y):=\tau_u(y)-\tau_u'(0)\,y.
+\]
+Then:
+\begin{enumerate}
+\item $x(y)$ is odd and satisfies
+\[
+x(y)=O(y^{2r+1});
+\]
+in particular $\operatorname{ord}_0 x\ge 3$;
+\item $\widetilde\tau_u(y)$ is odd and either vanishes identically or has odd
+order at least $3$;
+\item if $\widetilde\tau_u\not\equiv 0$, then after an ambient affine
+normalization consisting of a coordinate permutation and subtraction of a
+suitable odd multiple of one higher-order channel from the other, the germ
+$Q_u$ is carried to the same odd/odd local normal form
+\[
+(y^n,\ y,\ y^m),
+\qquad
+n>m\ge 3,\quad m,n\ \text{odd},
+\]
+already analyzed in
+Remark~\ref{rem:centered-symmetric-placement-taylor-package}.
+\end{enumerate}
+Consequently, in the subcase $\widetilde\tau_u\not\equiv 0$, the late-$v_5$
+corner is locally sterile on punctured $u_5$-patch arcs: no genuinely new
+mixed low-order $4$-point branch is born there.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:centered-tagged-quintic-witness-survives-specialization},
+\[
+u_5(s)=U_1s+O(s^3),
+\qquad
+c(s)=C_0+O(s^2),
+\qquad
+C_0\neq 0,
+\]
+so
+\[
+y(s)=\frac{u_5(s)}{c(s)}
+\]
+is an odd local coordinate with odd inverse $s=s(y)$.
+
+Since $v_5$ is odd and $c$ is even in $s$,
+\[
+x(y)=\frac{v_5}{c}
+\]
+is odd in $y$. Because $\operatorname{ord}_s u_5=1$ and
+$\operatorname{ord}_s v_5=2r+1$, one has
+\[
+x(y)=O(y^{2r+1}),
+\]
+so $\operatorname{ord}_0x\ge 3$.
+
+Likewise $\Delta_7$ is even while $c$ is even and $u_5$ is odd, hence
+\[
+\tau_u(y)=-\frac{\Delta_7}{c\,u_5}
+\]
+is odd in $y$. Therefore
+\[
+\widetilde\tau_u(y):=\tau_u(y)-\tau_u'(0)\,y
+\]
+is odd and either identically zero or of odd order at least $3$.
+
+Assume now that $\widetilde\tau_u\not\equiv 0$. Then the normalized germ is
+\[
+Q_u(y)=\bigl(y,\ x(y),\ \widetilde\tau_u(y)\bigr),
+\]
+with the last two channels odd and of order at least $3$. Apply the ambient
+coordinate permutation
+\[
+(Y,X,Z)\longmapsto (X,Y,Z).
+\]
+This preserves affine dependence/coplanarity geometry. If the two higher-order
+odd channels have the same leading odd order, subtract a suitable odd multiple
+of one from the other to separate those leading orders. After this affine
+normalization one reaches a germ of the form
+\[
+(y^nB(y^2),\ y,\ y^mA(y^2)),
+\qquad
+n>m\ge 3,\quad m,n\ \text{odd},
+\]
+with $A(0)B(0)\neq 0$, i.e. the same odd/odd local normal form analyzed in
+Remark~\ref{rem:centered-symmetric-placement-taylor-package}. The same local
+calculation then gives a punctured neighborhood free of nearby mixed and
+nonmixed $4$-point obstruction points.
+\end{proof}
+
+\begin{lemma}[Planar-lift absorption on the $u_5$-patch]
+\label{lem:planar-lift-absorption-u5-patch}
+Assume the hypotheses of
+Lemma~\ref{lem:late-v5-u5-patch-transplant}, and suppose
+\[
+\widetilde\tau_u\equiv 0.
+\]
+Equivalently, there is a constant $a\in\mathbf C$ such that
+\[
+\Delta_7=-a\,u_5^2
+\]
+locally on the $u_5$-patch. Then after an ambient affine shear one has
+\[
+Q_u\sim (y,x,0),
+\qquad
+y=\frac{u_5}{c},
+\quad
+x=\frac{v_5}{c}.
+\]
+In particular, the lifted curve is affine-planar, and the remaining local
+content is only the planar affine dependence of
+\[
+\Xi(h):=\left(\frac{u_5(h)}{c(h)},\frac{v_5(h)}{c(h)}\right).
+\]
+
+Moreover, in the defect-free order-$\le 5$ finite-core setting of
+Theorem~\ref{thm:defect-free-quintic-circuit-reduction}, this residual corner is
+absorbed into the already-known quintic-circuit regime: it does not define a
+genuinely new mixed/septic $4$-point branch.
+\end{lemma}
+
+\begin{proof}
+The identity $\widetilde\tau_u\equiv 0$ means exactly that
+\[
+\tau_u(y)=a\,y
+\]
+for some constant $a$. Since
+\[
+\tau_u=-\frac{\Delta_7}{c\,u_5},
+\qquad
+y=\frac{u_5}{c},
+\]
+this is equivalent to
+\[
+-\frac{\Delta_7}{c\,u_5}=a\,\frac{u_5}{c},
+\]
+hence
+\[
+\Delta_7=-a\,u_5^2.
+\]
+Thus
+\[
+Q_u=(y,x,ay).
+\]
+Applying the ambient affine shear
+\[
+(Y,X,Z)\longmapsto (Y,X,Z-aY)
+\]
+gives
+\[
+Q_u\sim (y,x,0).
+\]
+So the lifted curve is affine-planar.
+
+Now assume additionally the defect-free order-$\le 5$ finite-core hypotheses
+from Theorem~\ref{thm:defect-free-quintic-circuit-reduction}. By
+Remark~\ref{rem:parallel-u5-patch-version}, the same defect-free
+affine-dependence conclusions hold with $Q_v$ replaced by $Q_u$. Since the
+third coordinate of $Q_u$ vanishes after the shear, affine dependence of the
+lifted points is equivalent to affine dependence of the planar points
+\[
+\Xi(h_j)=\left(\frac{u_5(h_j)}{c(h_j)},\frac{v_5(h_j)}{c(h_j)}\right)\in\mathbf C^2.
+\]
+But this is exactly the planar quintic-circuit geometry organized by
+Theorem~\ref{thm:defect-free-quintic-circuit-reduction} and
+Corollary~\ref{cor:defect-free-minimal-quintic-circuits}. Hence this residual
+corner is already-quintic rather than a genuinely new mixed septic branch.
+\end{proof}
+
+\begin{remark}[Right-pincer trichotomy near the centered base]
+\label{rem:right-pincer-trichotomy-centered-base}
+Near the centered diagonal base, the mixed local picture is reduced to the
+following three cases:
+\[
+V_1\neq 0
+\Longrightarrow
+\text{clean }v_5\text{-patch branch;}
+\]
+\[
+V_1=0,\ \widetilde\tau_u\not\equiv 0
+\Longrightarrow
+\text{late-}v_5\text{ branch locally sterile on }Q_u;
+\]
+\[
+V_1=0,\ \widetilde\tau_u\equiv 0
+\Longleftrightarrow
+\Delta_7=-a\,u_5^2
+\Longrightarrow
+\text{planar-lift corner, hence already-quintic.}
+\]
+So every late-$v_5$ branch near the centered base is either locally sterile
+or already absorbed into the quintic-circuit regime. The only genuinely new
+mixed local branch left to study there is the clean branch
+\[
+\operatorname{ord}_s v_5=1.
+\]
+\end{remark}
+
 \begin{proposition}[Realization lemma for lifted germs]
 \label{prop:realization-lemma-lifted-germs}
 Let $\widetilde Y(\xi)$ and $\widetilde S(\xi)$ be arbitrary analytic germs
@@ -13823,6 +14684,28 @@ So the mixed-side
 theorem-level problem is no longer pointwise nonvanishing of $V_1$, but the
 effective use of that dichotomy: finite-jet parity transfer on the $v_5$-side
 and fallback local geometry on the $u_5$-side.
+
+On the fallback side, the late-$v_5$ branch on the automatic $u_5$-patch now
+admits a sharp local trichotomy: if the normalized third channel
+\[
+\widetilde\tau_u(y):=\tau_u(y)-\tau_u'(0)\,y
+\]
+is nonzero, the branch is affine-normalizable to the same odd/odd local model
+already known to be punctured-neighborhood sterile; if
+\[
+\widetilde\tau_u\equiv 0,
+\]
+equivalently
+\[
+\Delta_7=-a\,u_5^2,
+\]
+then the lift is affine-planar and the residual corner is absorbed into the
+already-known defect-free planar quintic-circuit regime for
+\[
+\Xi=\left(\frac{u_5}{c},\frac{v_5}{c}\right).
+\]
+So every late-$v_5$ branch near the centered base is now understood as either
+locally sterile or already-quintic.
 
 Fifth, on the lifted three-point side, the repeated-node tangent-contact
 equation
