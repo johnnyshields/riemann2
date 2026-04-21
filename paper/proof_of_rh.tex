@@ -12389,6 +12389,57 @@ or equivalently in any affine chart on which the projective limit has nonzero
 coordinate, rather than as an exact frozen-$\lambda$ repeated-source branch.
 \end{remark}
 
+\begin{remark}[Collision-cancellation chart for close two-point cores]
+\label{rem:wip-collision-cancellation-chart-two-point}
+On a compact good patch
+\[
+J\Subset\{c\neq 0\},
+\]
+a close exact two-point bad core is naturally studied not in the raw diagonal
+chart $(h_1,h_2)\to(h,h)$, but in the cancellation chart
+\[
+m:=\frac{h_1+h_2}{2},
+\qquad
+\delta:=h_2-h_1,
+\qquad
+\lambda:=-\frac{a_2}{a_1},
+\qquad
+\mu:=\lambda-1.
+\]
+Indeed, the cubic equation
+\[
+a_1c(h_1)+a_2c(h_2)=0
+\]
+forces $\lambda\to 1$ whenever $\delta\to 0$ on $J$.
+
+Writing
+\[
+\mathcal D_h:=(c(h),u_5(h),v_5(h)),
+\]
+one has the first-order expansion
+\[
+\mathcal D_{h_1}-\lambda \mathcal D_{h_2}
+=
+-\mu\,\mathcal D_m-\delta\,\mathcal D_m'
++
+O\!\bigl((|\mu|+|\delta|)^2\bigr).
+\]
+After polar blow-up
+\[
+(\mu,\delta)=\rho(\cos\theta,\sin\theta),
+\]
+the leading cancellation datum is therefore the projective source direction
+\[
+\Theta_{m,\theta}
+:=
+\cos\theta\,\mathcal D_m+\sin\theta\,\mathcal D_m'.
+\]
+
+So any future cubic/quintic limit theorem for close cancelling two-point cores
+should be phrased in this blown-up collision-cancellation chart rather than as a
+Taylor expansion through the singular zero-source point.
+\end{remark}
+
 \begin{remark}[What remains in the two-pair rewrite]
 \label{rem:what-remains-two-pair-rewrite}
 Theorem~\ref{thm:quantitative-defect-thickened-strengthened-coincidence}
@@ -21401,23 +21452,30 @@ Thus the only genuinely residual exact fixed-shear mixed corner is
 \[
 \{S=0\}\cap\{K_v=0\}.
 \]
-On that corner, the parity reduction of
-Remark~\ref{rem:conditional-parity-reduction-fixed-shear-Kv-zero}, the quotient
-transport scalar ladder of
-Proposition~\ref{prop:quotient-transport-scalar-residual-ladder-fixed-shear-Kv-zero},
-and the quartic--sextic injectivity statement of
-Corollary~\ref{cor:quartic-sextic-quotient-injectivity-local-no-reentry}
-show that the residual branch is quotient-diagonal / involutive rather than a
-new mixed local carrier.
+On that corner,
+Proposition~\ref{prop:finite-transport-jet-quotient-descent-fixed-shear-corner}
+shows that every finite parity-normalized transport jet descends analytically to
+the quotient variable $u=t^2$. In the quartic--sextic case,
+Corollary~\ref{cor:rank-one-transport-state-quartic-sextic-fixed-shear} shows
+that every finite quotient-visible transport state is locally an analytic
+function of $Q$ alone, and
+Corollary~\ref{cor:no-finite-order-hidden-reset-quartic-sextic-fixed-shear}
+rules out any third local reset beyond the involution symmetry. So the residual
+branch is no longer merely quotient-diagonal / involutive; its finite
+transport state has local rank $1$.
 
-Finally,
-Proposition~\ref{prop:residual-involutive-defect-criterion-fixed-shear-corner}
-shows that on this residual corner it is enough to prove package-level evenness
-and diagonal vanishing of the actual cubic/quintic two-pair defects. So the
-remaining mixed two-point burden is now best understood as one of three
-package-level alternatives: finite-order source-level merger, quotient-diagonal
-continuity/diagonal collapse, or a no-hidden-reset theorem for the transported
-overlap state on the quotient transport side.
+If the actual corrected cubic/quintic defects are state-local in this descended
+transport state, then
+Proposition~\ref{prop:conditional-state-local-defect-closure-fixed-shear-corner}
+already excludes the corner. Under the stronger natural merger law,
+Corollary~\ref{cor:stronger-state-local-package-collapse-fixed-shear-corner}
+shows that the interaction remainder dies identically along the involutive
+branch. Thus any still-live mixed two-point obstruction on
+\[
+\{S=0\}\cap\{K_v=0\}
+\]
+must come from genuinely relational or provenance-sensitive two-atom data
+beyond the descended transport state.
 \end{remark}
 
 \begin{remark}[Conditional parity reduction on the exact fixed-shear $K_v=0$ slice]
@@ -21671,6 +21729,232 @@ the analytic inverse function theorem implies that $\widehat Q$ is a local
 diffeomorphism in $u=t^2$.
 \end{proof}
 
+\begin{proposition}[Finite transport-jet quotient descent on the exact fixed-shear corner]
+\label{prop:finite-transport-jet-quotient-descent-fixed-shear-corner}
+Assume the additional conditional exact fixed-shear overlap lane from
+Remark~\ref{rem:conditional-parity-reduction-fixed-shear-Kv-zero}, and work
+along a local involutive branch
+\[
+(h_1,h_2)=(h(t),h(-t)).
+\]
+For each $k\ge 0$, define the parity-normalized transport jet
+\[
+\Theta_k(t):=
+\begin{cases}
+Q^{(k)}(t),& k\ \text{even},\\[4pt]
+t^{-1}Q^{(k)}(t),& k\ \text{odd},
+\end{cases}
+\]
+where
+\[
+Q(t)=\frac{J_{u_5}(t)}{J_\lambda(t)}=\widehat Q(t^2).
+\]
+Then every $\Theta_k$ is even analytic. Equivalently, for each $k\ge 0$
+there exists a unique analytic quotient germ $\widetilde\Theta_k(u)$ such that
+\[
+\Theta_k(t)=\widetilde\Theta_k(t^2).
+\]
+In particular, the canonical descended scalar
+\[
+X(t):=\frac{Q'(t)}{t}
+\]
+is even analytic and satisfies
+\[
+X(t)=2\,\widehat Q'(t^2)=2\,\widehat{\mathcal D}(t^2).
+\]
+\end{proposition}
+
+\begin{proof}
+Since $Q(t)=\widehat Q(t^2)$ is even, $Q^{(k)}$ has the usual parity:
+$Q^{(k)}$ is even for $k$ even and odd for $k$ odd. Every odd analytic
+germ is divisible by $t$, so $\Theta_k$ is analytic for odd $k$. In both
+cases $\Theta_k$ is even, hence factors uniquely through $u=t^2$. The final
+identity is immediate from
+\[
+Q'(t)=2t\,\widehat Q'(t^2)=2t\,\widehat{\mathcal D}(t^2).
+\]
+\end{proof}
+
+\begin{corollary}[Rank-one quotient-visible transport state on the quartic--sextic rung]
+\label{cor:rank-one-transport-state-quartic-sextic-fixed-shear}
+Assume the quartic--sextic residual case
+\[
+(m,n)=(4,6).
+\]
+For every $N\ge 0$, set
+\[
+\mathcal T_N(t):=(\Theta_0(t),\dots,\Theta_N(t)).
+\]
+Then there exists an analytic map
+\[
+\mathbf F_N
+\]
+defined near $Q(0)$ such that
+\[
+\mathcal T_N(t)=\mathbf F_N(Q(t)).
+\]
+Equivalently, every finite quotient-visible transport state is locally an
+analytic function of the single scalar $Q$ alone.
+\end{corollary}
+
+\begin{proof}
+By
+Corollary~\ref{cor:quartic-sextic-quotient-injectivity-local-no-reentry},
+$\widehat Q$ is a local analytic coordinate in $u=t^2$. Since each
+$\Theta_k(t)=\widetilde\Theta_k(t^2)$, each descended jet
+$\widetilde\Theta_k(u)$ can be re-expressed analytically as a function of
+$\widehat Q(u)$, hence of $Q(t)$. Stacking these functions gives
+$\mathbf F_N$.
+\end{proof}
+
+\begin{corollary}[No finite-order hidden reset on the quartic--sextic residual corner]
+\label{cor:no-finite-order-hidden-reset-quartic-sextic-fixed-shear}
+Assume the quartic--sextic residual case. Let
+\[
+\mathcal T_N(t):=(\Theta_0(t),\dots,\Theta_N(t))
+\]
+be any finite quotient-visible transport state. Then
+\[
+\mathcal T_N(t_1)=\mathcal T_N(t_2)
+\qquad\Longrightarrow\qquad
+t_2=\pm t_1.
+\]
+In particular, no finite quotient-visible transport state produces a third local
+reset beyond the involution symmetry $t\leftrightarrow -t$.
+\end{corollary}
+
+\begin{proof}
+By
+Corollary~\ref{cor:rank-one-transport-state-quartic-sextic-fixed-shear},
+equality of $\mathcal T_N$ implies equality of $Q$. But
+\[
+Q(t)=\widehat Q(t^2),
+\]
+and
+Corollary~\ref{cor:quartic-sextic-quotient-injectivity-local-no-reentry}
+shows that $\widehat Q$ is locally injective in $u=t^2$. Hence
+$t_1^2=t_2^2$, so $t_2=\pm t_1$.
+\end{proof}
+
+\begin{proposition}[Conditional state-local defect closure on the residual exact fixed-shear corner]
+\label{prop:conditional-state-local-defect-closure-fixed-shear-corner}
+Assume the setup of
+Proposition~\ref{prop:residual-involutive-defect-criterion-fixed-shear-corner}.
+Suppose there exists $N\ge 0$ and analytic functionals
+\[
+\mathfrak e_3,\mathfrak e_5
+\]
+defined near $\mathcal T_N(0)$ such that along the involutive branch
+\[
+E_{12}^{(3)}(t)=\mathfrak e_3(\mathcal T_N(t)),
+\qquad
+E_{12}^{(5)}(t)=\mathfrak e_5(\mathcal T_N(t)),
+\]
+and
+\[
+\mathfrak e_3(\mathcal T_N(0))=\mathfrak e_5(\mathcal T_N(0))=0.
+\]
+Then
+\[
+E_{12}^{(3)}(t)=O(t^2),
+\qquad
+E_{12}^{(5)}(t)=O(t^2),
+\]
+hence
+\[
+E_{12}^{(3)}=O((h_1-h_2)^2),
+\qquad
+E_{12}^{(5)}=O((h_1-h_2)^2),
+\]
+and no such nontrivial exact residual fixed-shear involutive bad branch can
+persist on a compact good patch
+\[
+J\Subset\{c\neq 0,\ M\neq 0\}.
+\]
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:finite-transport-jet-quotient-descent-fixed-shear-corner},
+each $\Theta_k$ is even analytic, so
+\[
+\mathcal T_N(t)=\mathcal T_N(0)+O(t^2).
+\]
+Analyticity of $\mathfrak e_3,\mathfrak e_5$ and vanishing at $\mathcal T_N(0)$
+therefore give
+\[
+E_{12}^{(3)}(t)=O(t^2),
+\qquad
+E_{12}^{(5)}(t)=O(t^2).
+\]
+Since
+\[
+h_1-h_2=h(t)-h(-t)=2h'(0)t+O(t^3),
+\]
+this becomes
+\[
+E_{12}^{(3)}=O((h_1-h_2)^2),
+\qquad
+E_{12}^{(5)}=O((h_1-h_2)^2).
+\]
+Now apply Corollary~\ref{cor:bad-two-pair-cores-defect-scale-close}.
+\end{proof}
+
+\begin{corollary}[Stronger conditional package collapse on the involutive branch]
+\label{cor:stronger-state-local-package-collapse-fixed-shear-corner}
+Assume the setup of
+Proposition~\ref{prop:residual-involutive-defect-criterion-fixed-shear-corner}.
+Suppose that for some $N\ge 0$ the corrected two-pair package along the
+involutive branch is state-local in the sense that
+\[
+\mathcal P_2(t)
+=
+\mathfrak P_2\bigl(a_1(t),a_2(t);\mathcal T_N(t),\mathcal T_N(t)\bigr),
+\]
+and the corresponding one-pair package is
+\[
+F_{h_1(t)}=F_{h_2(t)}=\mathfrak F(\mathcal T_N(t)).
+\]
+Assume moreover the natural merger law
+\[
+\mathfrak P_2(a_1,a_2;Y,Y)=(a_1+a_2)\mathfrak F(Y).
+\]
+Then the interaction remainder
+\[
+\mathcal I_2(t):=
+\mathcal P_2(t)-a_1(t)F_{h_1(t)}-a_2(t)F_{h_2(t)}
+\]
+vanishes identically along the involutive branch:
+\[
+\mathcal I_2(t)\equiv 0.
+\]
+\end{corollary}
+
+\begin{proof}
+Substitute the displayed state-local forms into the definition of
+$\mathcal I_2(t)$, then apply the merger law with $Y=\mathcal T_N(t)$.
+\end{proof}
+
+\begin{remark}[Any remaining residual obstruction is genuinely relational]
+\label{rem:any-remaining-residual-obstruction-is-genuinely-relational}
+The preceding results show that on the quartic--sextic residual corner the
+finite quotient-visible transport state has local rank $1$ and no finite-order
+hidden reset. Therefore, if the exact fixed-shear residual corner is still
+genuinely live, the obstruction cannot come from:
+\begin{itemize}
+\item a second local transport variable on the quartic--sextic rung;
+\item a third local reset inside any finite quotient-visible transport state; or
+\item a two-pair model built only from the descended one-atom transport state,
+assuming the natural merger law.
+\end{itemize}
+So any still-live obstruction on
+\[
+\{S=0\}\cap\{K_v=0\}
+\]
+must come from the first genuinely relational or provenance-sensitive two-atom
+input that survives after quotient-visible transport descent, or else from
+non-finite-order dependence.
+\end{remark}
+
 \begin{remark}[Quotient-cusp interpretation and the no-reset issue]
 \label{rem:quotient-cusp-interpretation-no-reset-Kv-zero}
 The involutive quotient picture on the residual exact fixed-shear
@@ -21720,31 +22004,44 @@ classification problem.
 
 \begin{remark}[What the quotient-transport package does and does not prove]
 \label{rem:what-quotient-transport-package-does-and-does-not-prove}
-The quotient-transport package gives a sharp \emph{pointwise} reduction of the
-residual exact fixed-shear $K_v=0$ slice. In particular,
-Proposition~\ref{prop:quotient-transport-scalar-residual-ladder-fixed-shear-Kv-zero}
-shows that the pointwise residual geometry is organized by the one-dimensional
-quotient transport scalar
+The quotient-transport package now does more than give a single pointwise
+scalar compression of the residual exact fixed-shear $K_v=0$ slice.
+
+First,
+Proposition~\ref{prop:finite-transport-jet-quotient-descent-fixed-shear-corner}
+shows that every finite parity-normalized transport jet descends analytically to
+the quotient variable
 \[
-\widehat{\mathcal D}(u)=\widehat Q'(u),
-\qquad
-u=t^2,
+u=t^2.
 \]
-and
-Corollary~\ref{cor:quartic-sextic-quotient-injectivity-local-no-reentry}
-shows that in the quartic--sextic rung the quotient branch is locally
-one-sheeted.
 
-What is \emph{not} proved here is any global barrier / critical-value-ordering
-theorem for the residual $K_v=0$ lane. In particular, the present draft does
-not yet show that the full transported overlap state relevant to the later
-finite-core problem is already visible in the quotient branch data, nor that
-global no-reentry follows from pointwise quotient compression alone.
+Second, on the quartic--sextic rung,
+Corollary~\ref{cor:rank-one-transport-state-quartic-sextic-fixed-shear}
+shows that every finite quotient-visible transport state is locally an analytic
+function of the single scalar
+\[
+Q(t)=\widehat Q(t^2)
+\]
+alone, and
+Corollary~\ref{cor:no-finite-order-hidden-reset-quartic-sextic-fixed-shear}
+rules out any third local reset inside that descended state beyond the
+involution symmetry $t\leftrightarrow -t$.
 
-Accordingly, the quotient-transport package should be read as a reduction of
-the mixed residual problem to a global quotient-visible transport /
-no-hidden-reset theorem, not as an already completed closure of the residual
-exact fixed-shear lane.
+What is \emph{not} proved here is that the actual corrected two-pair defect
+package is already state-local in this descended transport state. If that
+state-locality held, then
+Proposition~\ref{prop:conditional-state-local-defect-closure-fixed-shear-corner}
+would already exclude the residual branch, and under the stronger natural merger
+law
+Corollary~\ref{cor:stronger-state-local-package-collapse-fixed-shear-corner}
+would make the interaction remainder vanish identically.
+
+Accordingly, the present residual mixed burden should now be read as follows:
+the exact fixed-shear corner is no longer blocked by a missing local branch
+classification or by hidden finite-order transport dynamics. Any remaining
+obstruction must come from genuinely relational or provenance-sensitive two-atom
+structure, or from non-finite-order dependence, not from the descended
+transport state alone.
 \end{remark}
 
 \begin{proposition}[Residual involutive defect criterion on the exact fixed-shear corner]
@@ -23893,27 +24190,24 @@ cannot prove it: along a weighted one-atom path the extracted finite-order
 coefficients are even analytic in the source weight. So the remaining two-point
 issue now splits into three conditional lanes: the finite-order source-level
 merger route, the weaker quotient-diagonal exact exclusion route, and the exact
-projective $\lambda$-shear / secant-shadow route on good overlap patches. In
-the last route, a close exact mixed two-point bad branch can accumulate only on
-\[
-\{S=0\}\cup\{K_v=0\},
-\qquad
-S=\frac{\Delta_7}{c\,v_5}.
-\]
-Moreover, the off-septic-zero part of $K_v=0$ is already absorbed by the
-existing mixed low-order obstruction package, while in the conditional exact
-fixed-shear overlap lane the complementary slice
-\[
-\{S=0\}\cap\{K_v\neq 0\}
-\]
-transfers into the established nonmixed $4$-point geometry. So the only
-genuinely residual exact fixed-shear mixed corner is now
-\[
-\{S=0\}\cap\{K_v=0\}.
-\]
+projective $\lambda$-shear / secant-shadow route on good overlap patches.
 
-On that residual corner, the parity reduction and quotient transport scalar
-ladder show that the branch is quotient-diagonal / involutive:
+In the last route, the overlap bad set is now fully split:
+\[
+(K_v=0,\ S\neq 0)
+\]
+is already absorbed by the mixed low-order obstruction package,
+\[
+(S=0,\ K_v\neq 0)
+\]
+is already transferred into the established nonmixed $4$-point geometry,
+and only the exact fixed-shear residual corner
+\[
+\{S=0\}\cap\{K_v=0\}
+\]
+remains genuinely live.
+
+On that residual corner the branch is quotient-diagonal / involutive:
 \[
 \Phi(t)=\Phi(-t),
 \qquad
@@ -23921,26 +24215,25 @@ Q(t)=\widehat Q(t^2),
 \qquad
 \widehat{\mathcal D}(u)=\widehat Q'(u).
 \]
-Its local type is organized by the even-support ladder
-\[
-(m,n)=(r+2,\ r+2e+4),
-\qquad
-r=\operatorname{ord}_0K_v\in 2\mathbf Z_{\ge 0},
-\qquad
-e=\operatorname{ord}_0\widehat{\mathcal D},
-\]
-and the quartic--sextic case is the first rung
-\[
-(4,6)\iff (r,e)=(2,0),
-\]
-where the quotient branch is already locally one-sheeted. So the residual exact
-fixed-shear burden is no longer a search for another local mixed carrier or a
-second pointwise highest-new field. Rather, it has become a package-level
-collapse question: either exact finite-order merger, or diagonal-vanishing of
-the actual finite-order defects as in
-Proposition~\ref{prop:residual-involutive-defect-criterion-fixed-shear-corner},
-or else a no-hidden-reset theorem for the quotient-visible transported overlap
-state.
+Moreover,
+Proposition~\ref{prop:finite-transport-jet-quotient-descent-fixed-shear-corner}
+shows that every finite parity-normalized transport jet descends to the
+quotient variable $u=t^2$, while
+Corollary~\ref{cor:rank-one-transport-state-quartic-sextic-fixed-shear} shows
+that on the first live quartic--sextic rung the entire finite quotient-visible
+transport state is locally a function of $Q$ alone. Then
+Corollary~\ref{cor:no-finite-order-hidden-reset-quartic-sextic-fixed-shear}
+shows that no third local reset survives inside that descended state.
+
+So the residual exact fixed-shear burden is no longer a search for another
+local mixed carrier or hidden finite-order transport variable. Rather, it has
+become a package-level / provenance-level question: either exact finite-order
+merger, or quotient-diagonal continuity/diagonal collapse, or a theorem that
+the actual corrected defect/package is already state-local in the descended
+transport state. If none of those holds, any still-live obstruction must come
+from the first genuinely relational or provenance-sensitive two-atom input that
+survives after quotient-visible transport descent, or from non-finite-order
+dependence.
 
 Moreover, by
 Corollary~\ref{cor:one-sided-exclusion-repeated-node-tangent-contact},
@@ -24121,89 +24414,89 @@ T_v=0
 \mathcal R=0,
 \]
 the mixed two-point side should no longer be read as an independent frontier of
-mixed local geometry. The remaining two-point closure mechanisms --- finite-order
-source-level merger, quotient-diagonal collapse, and source-coupled control of
-the overlap exceptional loci --- already point toward the same scalar bad set
-\[
-\{K_v=0\}\cup\{\mathcal R=0\},
-\]
-up to already-absorbed three-point / lower-core handoffs. So any genuinely new
-input now needed on the two-point side is most naturally expected to be
-source-level or quotient-provenance structure, not another mixed local
-classification theorem.
+mixed local geometry.
 
-In the additional conditional exact fixed-shear overlap lane, this perspective
-becomes especially sharp: off $K_v=0$, the remaining task is best understood as
-absorption into the existing nonmixed odd-zero $\mathcal R$-package, while on
-the overlap exceptional slice the pointwise quotient structure has already
-compressed to the single source-level scalar
+The overlap bad set has already split as follows:
 \[
-\mathcal D=\frac{\mathcal W_{\mathrm{src}}}{J_\lambda^2},
+(K_v=0,\ S\neq 0)
 \]
-or equivalently after quotienting the involution $t\leftrightarrow -t$ to the
-quotient transport field
+is absorbed by the mixed low-order obstruction package,
 \[
-\widehat{\mathcal D}(u)=\widehat Q'(u),
-\qquad
-u=t^2.
+(S=0,\ K_v\neq 0)
 \]
-Thus the residual $K_v=0$ lane is no longer best viewed as an unresolved mixed
-local curvature-branch problem, but as a one-dimensional quotient-diagonal
-transport problem.
+is transferred into the established nonmixed $4$-point geometry,
+and only the exact fixed-shear residual corner
+\[
+\{S=0\}\cap\{K_v=0\}
+\]
+remains genuinely live.
 
-In particular, the quartic--sextic case is the first rung of the even-support
-residual ladder and is locally one-sheeted on the quotient branch:
-\[
-(4,6)\iff (r,e)=(2,0),
-\qquad
-\widehat{\mathcal D}(0)=\kappa_{2,2}\neq 0.
-\]
-So the remaining live burden on this overlap slice is a global
-quotient-visible transport / no-reentry theorem whose pointwise carrier is
-\[
-\widehat{\mathcal D}(u)=\widehat Q'(u),
-\qquad
-u=t^2,
-\]
-not another local mixed classification theorem.
+On that residual corner, the quotient-visible transport package is now much
+more rigid than a single pointwise scalar. By
+Proposition~\ref{prop:finite-transport-jet-quotient-descent-fixed-shear-corner},
+every finite parity-normalized transport jet descends to the quotient variable
+$u=t^2$. On the quartic--sextic rung,
+Corollary~\ref{cor:rank-one-transport-state-quartic-sextic-fixed-shear} shows
+that every finite quotient-visible transport state is locally a function of
+$Q$ alone, and
+Corollary~\ref{cor:no-finite-order-hidden-reset-quartic-sextic-fixed-shear}
+shows that no third local reset survives there.
 
-What is still missing is exactly the corresponding global visibility theorem:
-one must show that the full transported overlap state relevant to the later
-finite-core problem is already visible in this quotient transport scalar. In that sense,
-the live issue on the mixed residual side is now a no-hidden-reset problem at
-$K_v=0$, not a new local branch-classification problem.
+So the residual exact fixed-shear corner is no longer best viewed as an
+unresolved mixed local curvature-branch problem. If the actual corrected
+defect/package is state-local in the descended transport state, then the corner
+closes by
+Proposition~\ref{prop:conditional-state-local-defect-closure-fixed-shear-corner}
+or even by
+Corollary~\ref{cor:stronger-state-local-package-collapse-fixed-shear-corner}.
+Accordingly, any still-live input on the two-point side must come from the
+first genuinely relational or provenance-sensitive two-atom datum that survives
+after quotient-visible transport descent, or else from non-finite-order
+dependence.
 \end{remark}
 
 \begin{remark}[Residual mixed two-point lane: structural gain and present limitation]
 \label{rem:residual-mixed-two-point-lane-structural-gain-limitation}
-The present two-point picture has two genuine structural gains.
+The present two-point picture now has three genuine structural gains on the
+exact fixed-shear residual corner.
 
 First, after the off-$K_v=0$ absorption results and the transfer of the
 simple-septic-zero slice into the nonmixed $4$-point theory, the
-derivative-geometric mixed residue is sharply concentrated on the overlap
-exceptional set
+derivative-geometric mixed residue is sharply concentrated on the exceptional
+corner
 \[
-K_v=0
+\{S=0\}\cap\{K_v=0\}.
 \]
-itself.
 
-Second, on the additional exact fixed-shear overlap lane this residual slice is
-already organized by a single quotient transport scalar
+Second, by
+Proposition~\ref{prop:finite-transport-jet-quotient-descent-fixed-shear-corner},
+every finite parity-normalized transport jet is quotient-visible in the
+variable
 \[
-\widehat{\mathcal D}(u)=\widehat Q'(u),
-\qquad
-u=t^2,
+u=t^2.
 \]
-with the even-support ladder from
-Proposition~\ref{prop:quotient-transport-scalar-residual-ladder-fixed-shear-Kv-zero}.
-So the residual lane has become one-dimensional at the pointwise quotient level.
+So the residual corner is no longer a free two-sided $t$-state even at the
+finite transport-jet level.
 
-What is \emph{not} yet proved is the corresponding global quotient-visible
-transport theorem. The quartic--sextic case is locally one-sheeted on the
-quotient branch, but one still needs a theorem showing that the full transported
-overlap state relevant to the later minimal-core problem is already visible in
-this quotient scalar. Thus the live issue on the mixed residual side is now not
-local classification but global quotient-visible transport / no-hidden-reset.
+Third, on the quartic--sextic rung,
+Corollary~\ref{cor:rank-one-transport-state-quartic-sextic-fixed-shear} shows
+that this descended finite transport state has local rank $1$, and
+Corollary~\ref{cor:no-finite-order-hidden-reset-quartic-sextic-fixed-shear}
+shows that no finite-order hidden reset survives beyond the involution pair
+$t\leftrightarrow -t$.
+
+What is \emph{not} yet proved is that the actual corrected two-pair defect or
+package is already state-local in this descended transport state. If that
+state-locality held, then the residual branch would already be excluded by
+Proposition~\ref{prop:conditional-state-local-defect-closure-fixed-shear-corner},
+or would collapse identically by
+Corollary~\ref{cor:stronger-state-local-package-collapse-fixed-shear-corner}.
+
+Thus the live issue on the mixed residual side is now no longer local
+classification and no longer hidden finite-order transport dynamics. It is
+whether the first surviving obstruction is already quotient-visible, or instead
+comes from genuinely relational / provenance-sensitive two-atom structure or
+from non-finite-order dependence.
 \end{remark}
 
 \begin{proposition}[$u_5$-chart exceptional-point handoff]
