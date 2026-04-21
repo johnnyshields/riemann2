@@ -18609,9 +18609,10 @@ affine-planar collapse. Moreover,
 Proposition~\ref{prop:odd-anchor-passage-no-reset} shows that no rooted crossing
 can occur at that anchor odd zero itself or immediately after passage, and
 Corollary~\ref{cor:first-post-anchor-chamber-dangerous} shows that the
-subsequent post-anchor chambers alternate dangerous and safe. Thus the true
-residual obstruction is a delayed crossing on a dangerous post-anchor chamber,
-not the raw adjacent-two-odd-zero chamber itself.
+subsequent post-anchor chambers alternate dangerous and safe. Thus the true residual obstruction is no longer the raw adjacent-two-odd-zero
+chamber itself. But by the universality threshold for the current route-2
+package, even the delayed post-anchor scenario cannot be excluded inside that
+package alone.
 \end{remark}
 
 \begin{proposition}[Odd-anchor passage has no sign reset]
@@ -18876,9 +18877,9 @@ so $I_1$ is the first \emph{dangerous} post-anchor chamber;
 alternate dangerous/safe/dangerous/safe\ldots\ .
 \end{enumerate}
 In particular, the first chamber in which a rooted crossing is even eligible
-after the anchor-sign-preservation interval is the first post-anchor chamber,
-namely the chamber in which the active segment carries three odd zeros of
-$\mathcal R$.
+after the anchor-sign-preservation interval is the first post-anchor chamber.
+Without an additional diagonal-capture theorem, however, this eligibility does
+not by itself determine the odd-zero count on the active segment.
 \end{corollary}
 
 \begin{proof}
@@ -18897,7 +18898,7 @@ types then follows from
 Proposition~\ref{prop:weighted-defect-recursion-post-anchor-chambers}(3).
 \end{proof}
 
-\begin{remark}[No-go for purely local scalar exclusion in the first dangerous chamber]
+\begin{remark}[No-go for purely local scalar exclusion on the first dangerous post-anchor chamber]
 \label{rem:no-go-local-scalar-first-dangerous-chamber}
 At a rooted critical point, after normalizing the active interval to
 \[
@@ -18917,56 +18918,47 @@ satisfies the two local scalar moment identities
 \qquad
 \int_0^1 s(1-s)\,R_a(s)\,ds=0.
 \]
-In the first dangerous post-anchor chamber, the sign pattern of $R_a$ on
-$[0,1]$ has four lobes:
-\[
-+,-,+,-
-\]
-or its global negative. At the purely local scalar level, these conditions are
-still formally too weak to force contradiction.
 
-Indeed, for parameters $A,B\in\mathbf R$, define the quarter-piece profile
+Once nonlocal-target landing is admitted, the first dangerous post-anchor
+chamber need not correspond to a fixed odd-zero count or to a rigid four-lobe
+pattern on the active segment. Even in the simplest three-lobe sign pattern
 \[
-R_{A,B}(s):=
++,-,+
+\]
+(or its global negative), the local scalar rooted equations are already
+formally realizable.
+
+Indeed, for any $A>0$, define
+\[
+R_A(s):=
 \begin{cases}
-A, & 0<s<\frac14,\\[4pt]
--B, & \frac14<s<\frac12,\\[4pt]
-\frac{-15A+7B}{2}, & \frac12<s<\frac34,\\[4pt]
--\frac{-31A+11B}{2}, & \frac34<s<1.
+A, & 0<s<\frac13,\\[4pt]
+-\frac72 A, & \frac13<s<\frac23,\\[4pt]
+\frac{11}{2}A, & \frac23<s<1.
 \end{cases}
 \]
 A direct calculation gives
 \[
-\int_0^1 (1-s)^2\,R_{A,B}(s)\,ds=0,
+\int_0^1 (1-s)^2\,R_A(s)\,ds=0,
 \qquad
-\int_0^1 s(1-s)\,R_{A,B}(s)\,ds=0
+\int_0^1 s(1-s)\,R_A(s)\,ds=0,
 \]
-for every $A,B$.
-
-Moreover, if
+and also
 \[
-B>\frac{31}{11}A>0,
-\]
-then the four quarter-lobes have signs
-\[
-+,-,+,-.
-\]
-For this family one also has
-\[
-\int_0^1 R_{A,B}(s)\,ds
+\int_0^1 R_A(s)\,ds
 =
-\int_0^1 s\,R_{A,B}(s)\,ds
+\int_0^1 s\,R_A(s)\,ds
 =
-\int_0^1 s^2\,R_{A,B}(s)\,ds
+\int_0^1 s^2\,R_A(s)\,ds
 =
-\frac34(3A-B),
+A.
 \]
-so both signs of the nondegenerate fold data occur already inside this formal
-four-lobe family.
+So the local rooted-point equations and the nondegenerate fold data are already
+formally compatible with a three-lobe profile.
 
 Thus no argument using only the local normalized rooted profile, the two
 vanishing scalar moments, and the local transversality/fold signs can exclude
-rooting in the first dangerous post-anchor chamber. Any successful next step
+rooting on the first dangerous post-anchor chamber. Any successful next step
 must use genuinely source-coupled structure invisible in the planar normalized
 $D_a$ model.
 \end{remark}
@@ -18986,24 +18978,263 @@ keeps a fixed sign, the RH-selected slice
 \]
 cannot cross the discriminant curve at all.
 
-The new odd-anchor analysis sharpens this again. When the anchor itself passes
+The odd-anchor analysis sharpened this further: when the anchor itself passes
 through an odd-order zero of $\mathcal R$, the integrating-factor defect
 \[
 \mathscr G(a)=e^{-\mathcal A(a)}\bigl(D_a(\tau(a))-\mathcal Z(a)\bigr)
 \]
-keeps its incoming sign across the odd anchor zero, so a rooted crossing cannot
-occur at the anchor zero itself, nor immediately after passage. The subsequent
-post-anchor chambers then alternate dangerous and safe, beginning with a
-dangerous first post-anchor chamber in which the active segment carries three
-odd zeros of $\mathcal R$
+keeps its incoming sign across that odd anchor zero, so a rooted crossing cannot
+occur there or immediately after passage. The subsequent post-anchor chambers
+then alternate dangerous and safe, beginning with a dangerous first post-anchor
+chamber
 (Corollary~\ref{cor:first-post-anchor-chamber-dangerous}).
 
-However, Remark~\ref{rem:no-go-local-scalar-first-dangerous-chamber} shows that
-already in that first dangerous chamber the local normalized rooted equations
-and fold data are formally realizable in the planar scalar model. So route 2 no
-longer reduces merely to an anchor-sign-change crossing problem in the abstract.
-It reduces to a genuinely source-coupled \emph{delayed no-crossing /
-profile-realizability problem} on dangerous post-anchor chambers.
+However, two no-go facts are now clear. First,
+Remark~\ref{rem:no-go-local-scalar-first-dangerous-chamber} shows that already
+on that first dangerous post-anchor chamber, the local normalized rooted
+equations and fold data are formally realizable in the planar scalar model.
+Second, the current route-2 source package itself is still universal under the
+normalized lift
+\[
+c=1,\qquad v_5=t,\qquad \lambda=t^2,\qquad u_5''=2\mathcal Z
+\]
+(Proposition~\ref{prop:universality-threshold-current-route-two-package} below),
+so even the source-level objects
+\[
+\Psi_a,\qquad \mathfrak D,\qquad \mathcal W_{\mathrm{src}},\qquad D_{f_a}
+\]
+do not yet distinguish the RH branch from an arbitrary analytic normalized
+model.
+
+So route 2 no longer reduces merely to a delayed no-crossing /
+profile-realizability problem \emph{within the current package}. It reduces to
+finding the first genuinely \emph{non-universal} source-coupled input, i.e. an
+ingredient not already captured by the normalized planar $D_a$ model.
+\end{remark}
+
+\begin{proposition}[Universality threshold for the current route-2 package]
+\label{prop:universality-threshold-current-route-two-package}
+Let $I\subset\mathbf R$ be an interval, let
+\[
+\mathcal Z:I\to\mathbf R
+\]
+be real-analytic, and set
+\[
+\mathcal R:=\mathcal Z'.
+\]
+Define analytic source functions on $I$ by
+\[
+c(t):=1,\qquad v_5(t):=t,\qquad \lambda(t):=t^2,
+\]
+and choose $u_5$ so that
+\[
+u_5''(t)=2\mathcal Z(t).
+\]
+Then:
+\begin{enumerate}
+\item
+\[
+x=\frac{v_5}{c}=t,
+\qquad
+S=\frac{\lambda}{c}=t^2,
+\qquad
+Y=\frac{u_5}{c}=u_5;
+\]
+
+\item for every analytic $f$,
+\[
+J_f=W(c,v_5,f)=W(1,t,f)=f'',
+\]
+hence
+\[
+J_\lambda=2,
+\qquad
+J_{u_5}=2\mathcal Z,
+\qquad
+\mathcal W_{\mathrm{src}}
+=
+J_\lambda J_{u_5}'-J_{u_5}J_\lambda'
+=
+4\mathcal R;
+\]
+
+\item the repeated-source ratio is exactly the normalized planar one:
+\[
+\Psi_a(h)=\Gamma_a(h)=D_a(h);
+\]
+
+\item the critical determinant equation is exactly the normalized planar
+critical-point equation:
+\[
+\mathfrak D(a,h)=0
+\iff
+\partial_h \Psi_a(h)=0
+\iff
+\partial_h D_a(h)=0;
+\]
+
+\item for the source-pinned moving shear
+\[
+f_a:=u_5-\mathcal Z(a)\lambda,
+\]
+one has
+\[
+J_{f_a}=2(\mathcal Z-\mathcal Z(a)),
+\]
+and
+\[
+D_{f_a}(a,h)=D_\lambda(a,h)\bigl(\Psi_a(h)-\mathcal Z(a)\bigr).
+\]
+\end{enumerate}
+Thus every analytic normalized planar model $(\mathcal Z,\mathcal R,D_a)$
+lifts to a genuine analytic source model for the entire current route-2 package.
+\end{proposition}
+
+\begin{proof}
+The identities
+\[
+x=\frac{v_5}{c}=t,\qquad
+S=\frac{\lambda}{c}=t^2,\qquad
+Y=\frac{u_5}{c}=u_5
+\]
+are immediate. Also,
+\[
+J_f=W(c,v_5,f)=W(1,t,f)=f'',
+\]
+so
+\[
+J_\lambda=2,\qquad J_{u_5}=2\mathcal Z.
+\]
+Hence
+\[
+\mathcal W_{\mathrm{src}}
+=
+J_\lambda J_{u_5}'-J_{u_5}J_\lambda'
+=
+2(2\mathcal Z')-2\mathcal Z\cdot 0
+=
+4\mathcal R.
+\]
+
+Because the source coordinate and the normalized planar coordinate coincide,
+\[
+x(t)=t,
+\]
+the source repeated-source quotient is exactly the planar normalized quadratic
+envelope:
+\[
+\Psi_a(h)=\Gamma_a(h)=D_a(h).
+\]
+Therefore the source critical determinant equation is exactly the planar
+critical-point equation
+\[
+\mathfrak D(a,h)=0
+\iff
+\partial_h D_a(h)=0.
+\]
+
+Finally,
+\[
+f_a=u_5-\mathcal Z(a)\lambda
+\]
+satisfies
+\[
+J_{f_a}=u_5''-2\mathcal Z(a)=2(\mathcal Z-\mathcal Z(a)),
+\]
+and
+Proposition~\ref{prop:source-determinant-form-odd-zero-unrooted-defect}(2)
+gives
+\[
+D_{f_a}(a,h)=D_\lambda(a,h)\bigl(\Psi_a(h)-\mathcal Z(a)\bigr).
+\]
+So all route-2 source objects reduce exactly to the normalized planar ones.
+\end{proof}
+
+\begin{corollary}[The current route-2 package is universal under normalization]
+\label{cor:current-route-two-package-universal-under-normalization}
+Any configuration formally realizable by an analytic normalized planar model
+\[
+(\mathcal Z,\mathcal R,D_a)
+\]
+is also formally realizable by a genuine analytic source model for the current
+route-2 package
+\[
+(c,v_5,\lambda,u_5),\qquad
+\Psi_a,\qquad
+\mathfrak D,\qquad
+\mathcal W_{\mathrm{src}},\qquad
+D_{f_a}.
+\]
+Accordingly, no contradiction theorem phrased only in terms of the current
+route-2 package can distinguish the RH branch from an arbitrary analytic
+normalized planar model.
+\end{corollary}
+
+\begin{proof}
+This is immediate from
+Proposition~\ref{prop:universality-threshold-current-route-two-package}.
+\end{proof}
+
+\begin{remark}[Explicit source-level countermodel to the current route-2 package]
+\label{rem:explicit-source-level-countermodel-current-route-two}
+Take
+\[
+\mathcal R(t):=t(t-1)(t^2-4t-2)
+\]
+and
+\[
+\mathcal Z(t):=\int_0^t \mathcal R(u)\,du
+=
+\frac15 t^5-\frac54 t^4+\frac23 t^3+t^2,
+\]
+and realize this normalized planar model by
+\[
+c(t)=1,\qquad v_5(t)=t,\qquad \lambda(t)=t^2,\qquad u_5''(t)=2\mathcal Z(t).
+\]
+Let
+\[
+q:=2-\sqrt6.
+\]
+In this genuine analytic source model, the unique born repeated-source critical
+branch from the odd zero $0$ continues analytically down to $a=q$, lands
+there with a nonlocal target
+\[
+\tau(q)\approx 0.3540339256\neq q,
+\]
+satisfies the anchor-sign safe relation on $(q,0)$, crosses the odd anchor
+zero $q$ with no sign reset, and then undergoes a delayed rooted crossing at
+\[
+a_*\approx -0.5805673462,
+\qquad
+\tau(a_*)\approx 0.3888336023.
+\]
+Thus diagonal capture fails, and the whole delayed-crossing scenario is
+realized inside a genuine analytic source model for the current route-2
+package.
+\end{remark}
+
+\begin{remark}[The next live target must be non-universal]
+\label{rem:next-live-target-must-be-non-universal}
+By
+Corollary~\ref{cor:current-route-two-package-universal-under-normalization},
+the present route-2 package is exhausted: any further progress must use a
+genuinely non-universal source-coupled input, i.e. an ingredient not already
+absorbed by the normalized planar model $(\mathcal Z,\mathcal R,D_a)$.
+
+Within the current draft, the first canonical candidates for such genuinely
+non-universal input lie above the present route-2 package, for example at the
+quotient-septic / mixed level through invariants such as
+\[
+[A_7^{\mathfrak f}]
+\qquad\text{or}\qquad
+\Delta_7.
+\]
+So any viable continuation of route 2 must hybridize the repeated-source moving
+shear
+\[
+f_a=u_5-\mathcal Z(a)\lambda
+\]
+with higher non-universal data of that kind.
 \end{remark}
 
 \begin{remark}[What remains on the nonmixed $4$-point side]
@@ -19141,24 +19372,31 @@ Beyond that, Proposition~\ref{prop:odd-anchor-passage-no-reset} shows that even
 after the anchor crosses an odd-order zero of $\mathcal R$, no rooted crossing
 can occur at that odd anchor zero itself or immediately after passage, while
 Corollary~\ref{cor:first-post-anchor-chamber-dangerous} shows that the ensuing
-post-anchor chambers alternate dangerous and safe, beginning with a dangerous
-first post-anchor chamber. However,
+post-anchor chambers alternate dangerous and safe. However,
 Remark~\ref{rem:no-go-local-scalar-first-dangerous-chamber} shows that the local
 normalized rooted equations and fold data are already formally compatible with
-rooting in that first dangerous chamber.
+rooting on the first dangerous post-anchor chamber. More strongly,
+Proposition~\ref{prop:universality-threshold-current-route-two-package} and
+Corollary~\ref{cor:current-route-two-package-universal-under-normalization}
+show that the entire current route-2 source package is universal under
+normalization, and
+Remark~\ref{rem:explicit-source-level-countermodel-current-route-two}
+exhibits a genuine analytic source model realizing safe adjacent-two-odd-zero
+behavior, nonlocal-target landing at the next odd anchor zero, odd-anchor
+no-reset, and delayed rooted crossing.
 
-So the sharpened remaining nonmixed burden is no longer merely an
-anchor-sign-change no-crossing theorem in the abstract. It is a genuinely
-source-coupled \emph{delayed no-crossing / profile-realizability theorem} for
-the moving shear
+So the sharpened remaining nonmixed burden is no longer a delayed no-crossing /
+profile-realizability theorem \emph{within the current route-2 package}. The
+current package is already exhausted. Any further progress must use a genuinely
+non-universal source-coupled ingredient, i.e. structure not already absorbed by
+the normalized planar model $(\mathcal Z,\mathcal R,D_a)$. In the present
+draft, the first canonical candidates for such input lie at the quotient-septic
+/ mixed level, for example through
 \[
-f_a=u_5-\mathcal Z(a)\lambda,
+[A_7^{\mathfrak f}]
+\qquad\text{or}\qquad
+\Delta_7.
 \]
-equivalently for odd zeros of
-\[
-\mathcal W_{\mathrm{src}},
-\]
-on dangerous post-anchor chambers of genuine opened nonmixed arcs.
 \end{remark}
 
 \begin{remark}[Compact status summary for the nonmixed $4$-point branch]
@@ -19209,22 +19447,27 @@ crossing on a continuation interval where the anchor-side value
 \]
 keeps a fixed sign.
 
-The new odd-anchor passage theorem shows that once the anchor itself crosses an
+The odd-anchor passage theorem shows that once the anchor itself crosses an
 odd-order zero of $\mathcal R$, the integrating-factor defect keeps its incoming
 sign across that odd anchor zero, so no rooted crossing can occur there or
 immediately after it. The subsequent post-anchor chambers alternate dangerous
-and safe, beginning with a dangerous first post-anchor chamber. However, the
-local normalized rooted equations and the local fold/transversality data are
-already formally realizable in that first dangerous chamber. Thus the genuinely
-remaining nonmixed burden is no longer just local fold shape or abstract
-anchor-sign change. It is a source-coupling / delayed no-crossing /
-profile-realizability problem for odd zeros of $\mathcal W_{\mathrm{src}}$ on
-dangerous post-anchor chambers, to be solved by a genuinely source-coupled
-constraint on the moving source-pinned shear
+and safe. However, the local normalized rooted equations and the local
+fold/transversality data are already formally realizable on the first dangerous
+post-anchor chamber, and more strongly the entire current route-2 source package
+is universal under normalization. An explicit analytic source-level countermodel
+realizes safe adjacent-two-odd-zero behavior, nonlocal-target landing at the
+next odd anchor zero, odd-anchor no-reset, and delayed rooted crossing inside
+that package. Thus the genuinely remaining nonmixed burden is no longer a
+problem inside the current route-2 package at all: any further progress must use
+a genuinely non-universal source-coupled ingredient, not already absorbed by
+the normalized planar model. In the present draft, the first canonical
+candidates for such input lie at the quotient-septic / mixed level, for example
+through
 \[
-f_a=u_5-\mathcal Z(a)\lambda
+[A_7^{\mathfrak f}]
+\qquad\text{or}\qquad
+\Delta_7.
 \]
-that is invisible in the planar normalized $D_a$ model.
 \end{remark}
 
 \begin{remark}[Derivative-geometry meaning of the nonmixed invariant $\mathcal R$]
@@ -19543,7 +19786,7 @@ particular, the currently explicit mixed low-order list is already a finite
 Wronskian-ratio obstruction list.
 \end{remark}
 
-\begin{proposition}[Conditional mixed $\lambda$-shear reduction on an overlap patch]
+\begin{proposition}[Projective secant-shadow reduction on an overlap patch]
 \label{prop:conditional-mixed-lambda-shear-projective-shadow-reduction}
 Let
 \[
@@ -19570,42 +19813,61 @@ h_{1,n},h_{2,n}\in U,
 \qquad
 h_{1,n},h_{2,n}\to m\in U,
 \]
-and that along a subsequence the branch-generated $\lambda$-shears
+and let $(\eta_n,\xi_n,\gamma_n)$ be the branch-generated moving
+$\lambda$-shears, so that
 \[
-\eta_n:=\frac{e_n}{e_{\lambda,n}},
-\qquad
-\xi_n:=\frac{e_{v,n}}{e_{\lambda,n}},
-\qquad
-\gamma_n:=\frac{e_{u,n}}{e_{\lambda,n}}
+(c-\eta_n\lambda)(h_{1,n})=\Lambda_n(c-\eta_n\lambda)(h_{2,n}),
 \]
-converge to
 \[
-(\eta_*,\xi_*,\gamma_*).
+(v_5-\xi_n\lambda)(h_{1,n})=\Lambda_n(v_5-\xi_n\lambda)(h_{2,n}),
 \]
-Set
 \[
-A:=c-\eta_*\lambda,
+(u_5-\gamma_n\lambda)(h_{1,n})=\Lambda_n(u_5-\gamma_n\lambda)(h_{2,n}).
+\]
+For each $n$, set
+\[
+A_n:=c-\eta_n\lambda,
 \qquad
-B:=v_5-\xi_*\lambda,
+B_n:=v_5-\xi_n\lambda,
 \qquad
-F:=u_5-\gamma_*\lambda.
+F_n:=u_5-\gamma_n\lambda.
 \]
 
-Then the frozen branch satisfies repeated-source transport
+Then, after discarding finitely many terms, the branch determines the exact
+projective secant shadow
 \[
-A(h_{1,n})=\Lambda_nA(h_{2,n}),
-\qquad
-B(h_{1,n})=\Lambda_nB(h_{2,n}),
-\qquad
-F(h_{1,n})=\Lambda_nF(h_{2,n}).
-\]
-Moreover the branch determines the projective secant shadow
-\[
-\mathbf\Sigma(h_1,h_2)
+\mathbf\Sigma(h_{1,n},h_{2,n})
 :=
 [x_1S_2-x_2S_1:\ Y_1S_2-Y_2S_1:\ S_2-S_1],
 \]
-and as $h_2\to h_1=a$ this converges to the projective tangent shadow
+where
+\[
+x_i=x(h_{i,n}),
+\qquad
+Y_i=Y(h_{i,n}),
+\qquad
+S_i=S(h_{i,n}).
+\]
+More precisely, for all large $n$ one has the exact identity
+\[
+[B_n(h_{1,n}):F_n(h_{1,n}):A_n(h_{1,n})]
+=
+[B_n(h_{2,n}):F_n(h_{2,n}):A_n(h_{2,n})]
+=
+\mathbf\Sigma(h_{1,n},h_{2,n}).
+\]
+In particular, the secant shadow is independent of the moving shears
+$(\eta_n,\xi_n,\gamma_n)$ and of $\Lambda_n$.
+
+Equivalently, in raw coordinates,
+\[
+\mathbf\Sigma(h_1,h_2)
+=
+[v_{5,1}\lambda_2-v_{5,2}\lambda_1:\ u_{5,1}\lambda_2-u_{5,2}\lambda_1:\ c_1\lambda_2-c_2\lambda_1].
+\]
+
+As $h_2\to h_1=a$, the secant shadow converges projectively to the tangent
+shadow
 \[
 \mathbf\Pi(a)
 :=
@@ -19637,43 +19899,101 @@ any such close exact mixed two-point bad branch can accumulate only on
 \end{proposition}
 
 \begin{proof}
-The exact mixed two-point equations in $\lambda$-sheared form are
+Since
 \[
-(c-\eta_n\lambda)(h_{1,n})=\Lambda_n(c-\eta_n\lambda)(h_{2,n}),
+x'=\left(\frac{v_5}{c}\right)'=\frac{M}{c^2},
 \]
+the hypothesis $M\neq 0$ implies that $x=v_5/c$ is a local coordinate near
+$m$. After discarding finitely many terms we may therefore assume
 \[
-(v_5-\xi_n\lambda)(h_{1,n})=\Lambda_n(v_5-\xi_n\lambda)(h_{2,n}),
+x(h_{1,n})\neq x(h_{2,n}).
 \]
-\[
-(u_5-\gamma_n\lambda)(h_{1,n})=\Lambda_n(u_5-\gamma_n\lambda)(h_{2,n}).
-\]
-Passing to the frozen subsequence gives the transport system for $A,B,F$.
 
-Now
+Fix such an $n$, and abbreviate
 \[
-A=c(1-\eta_*S),
-\qquad
-B=c(x-\xi_*S),
-\qquad
-F=c(Y-\gamma_*S),
+\eta=\eta_n,\qquad \xi=\xi_n,\qquad \gamma=\gamma_n.
 \]
-so the branch equations imply repeated nearby values of the pair of affine
-coordinates
+Write
 \[
-\left(\frac{B}{A},\frac{F}{A}\right).
+p_i:=(x_i,Y_i,1)\in\mathbf R^3,
+\qquad
+V:=(\xi,\gamma,\eta)\in\mathbf R^3,
+\qquad
+i=1,2.
 \]
-Eliminating $\eta_*,\xi_*,\gamma_*$ gives the standard secant-shadow formulas
+Since
 \[
-\frac{B}{A}
+A_n=c(1-\eta S),
+\qquad
+B_n=c(x-\xi S),
+\qquad
+F_n=c(Y-\gamma S),
+\]
+the exact repeated-source equations imply
+\[
+[B_n(h_{1,n}):F_n(h_{1,n}):A_n(h_{1,n})]
 =
-\frac{x_1S_2-x_2S_1}{S_2-S_1},
-\qquad
-\frac{F}{A}
-=
-\frac{Y_1S_2-Y_2S_1}{S_2-S_1},
+[p_1-S_1V]
 \]
-hence the projective secant shadow $\mathbf\Sigma(h_1,h_2)$. Its limit as
-$h_2\to h_1=a$ is the projective tangent shadow $\mathbf\Pi(a)$.
+and
+\[
+[B_n(h_{2,n}):F_n(h_{2,n}):A_n(h_{2,n})]
+=
+[p_2-S_2V].
+\]
+Because these two projective points are equal, there is a common projective
+value.
+
+If $S_1=S_2$, then
+\[
+[p_1-S_1V]=[p_2-S_1V]
+\]
+forces $p_1=p_2$, hence $x_1=x_2$, contradicting the choice of local
+coordinate. Therefore
+\[
+S_1\neq S_2.
+\]
+Subtracting
+\[
+p_1-S_1V=p_2-S_2V
+\]
+gives
+\[
+p_1-p_2=(S_1-S_2)V,
+\]
+hence
+\[
+V=\frac{p_1-p_2}{S_1-S_2}.
+\]
+Substituting back,
+\[
+p_1-S_1V
+=
+p_1-S_1\frac{p_1-p_2}{S_1-S_2}
+=
+\frac{S_2p_1-S_1p_2}{S_2-S_1}.
+\]
+Therefore the common projective value is exactly
+\[
+[S_2p_1-S_1p_2]
+=
+[x_1S_2-x_2S_1:\ Y_1S_2-Y_2S_1:\ S_2-S_1],
+\]
+which is the asserted secant shadow and is independent of
+$(\eta_n,\xi_n,\gamma_n)$ and of $\Lambda_n$. The raw-coordinate formula is the
+same identity multiplied through by $c_1c_2$.
+
+Now divide the homogeneous secant vector by $x_2-x_1$ and let $h_2\to h_1=a$.
+The three components converge to
+\[
+xS_x-S,\qquad YS_x-SY_x,\qquad S_x,
+\]
+so the secant shadow converges projectively to
+\[
+\mathbf\Pi(a)
+=
+[xS_x-S:\ YS_x-SY_x:\ S_x].
+\]
 
 Differentiating $\mathbf\Pi$ in the local $x$-coordinate gives
 \[
@@ -19684,7 +20004,7 @@ S(x)\,
 S_xY_{xx}-S_{xx}Y_x,\ S_{xx},\ -S_{xx}
 \bigr).
 \]
-Therefore $\mathbf\Pi$ is projectively immersive whenever $S\neq 0$ and
+Therefore $\mathbf\Pi$ is projectively immersive wherever $S\neq 0$ and
 $S_{xx}\neq 0$. On a close bad branch the secant shadows converge to tangent
 shadows, so accumulation is possible only where immersion fails, i.e. on
 \[
@@ -19736,22 +20056,214 @@ genuinely nontrivial $Y$-$S$ overlap coupling scalar exposed by the current
 attack.
 \end{remark}
 
-\begin{remark}[Status of the mixed $\lambda$-shear route]
-\label{rem:wip-mixed-lambda-shear-route-status}
-Proposition~\ref{prop:conditional-mixed-lambda-shear-projective-shadow-reduction}
-shows that, modulo a frozen $\lambda$-shear subsequence, a close exact mixed
-two-point bad branch can accumulate only on the explicit loci
+\begin{proposition}[Exact fixed-shear overlap branches off $K_v=0$ force a fold at $S=0$]
+\label{prop:fixed-shear-overlap-branch-off-Kv-forces-fold-at-S-zero}
+Work on the overlap patch of
+Proposition~\ref{prop:conditional-mixed-lambda-shear-projective-shadow-reduction},
+and write
 \[
-\{S=0\}\cup\{K_v=0\},
+\Phi(x):=
+\left(
+\frac{x-\xi_* S}{1-\eta_* S},
+\frac{Y-\gamma_* S}{1-\eta_* S}
+\right),
 \qquad
 S=\frac{\Delta_7}{c\,v_5}.
 \]
-Thus the generic mixed two-point branch is already reduced either to the
-septic-zero slice $S=0$ or to the lifted curvature locus $K_v=0$. The
-remaining unresolved work is to show that accumulation on $S=0$ either falls
-into the existing mixed low-order obstruction types or transfers into a
-lower-core tangency mechanism, while accumulation on $K_v=0$ is absorbed by
-the existing lifted three-point branch machinery.
+Assume there is a close exact fixed-shear mixed $2$-point branch
+\[
+x_{1,n}\neq x_{2,n},
+\qquad
+x_{1,n},x_{2,n}\to a,
+\qquad
+\Phi(x_{1,n})=\Phi(x_{2,n})
+\quad(n\ge 1).
+\]
+If
+\[
+K_v(a)\neq 0,
+\]
+then
+\[
+S(a)=0,
+\qquad
+\Phi'(a)=0,
+\qquad
+S_x(a)\neq 0.
+\]
+More precisely,
+\[
+0=\Phi_1'(a)=1-(\xi_*-\eta_* x(a))S_x(a),
+\]
+\[
+0=\Phi_2'(a)=Y_x(a)-(\gamma_*-\eta_* Y(a))S_x(a).
+\]
+In particular, setting
+\[
+\beta:=\xi_*-\eta_* x(a)=\frac{1}{S_x(a)},
+\]
+the first-coordinate fold model
+\[
+U(x):=x-\beta S(x)
+\]
+satisfies
+\[
+U(a)=0,
+\qquad
+U_x(a)=0,
+\qquad
+U_{xx}(a)=-\beta S_{xx}(a)\neq 0.
+\]
+Hence, after analytic source reparametrization, the first coordinate of the
+fixed-shear projected germ is
+\[
+t^2.
+\]
+So any exact fixed-shear mixed branch away from $K_v=0$ is already forced into
+the same fold regime that underlies the nonmixed odd-zero analysis; the only
+remaining issue there is the second-coordinate parity package.
+\end{proposition}
+
+\begin{proof}
+A fixed-shear branch is, in particular, a close exact mixed two-point bad branch
+on the same overlap patch. By
+Proposition~\ref{prop:conditional-mixed-lambda-shear-projective-shadow-reduction},
+any accumulation point of such a branch lies in
+\[
+\{S=0\}\cup\{K_v=0\}.
+\]
+So if $K_v(a)\neq 0$, then necessarily
+\[
+S(a)=0.
+\]
+
+Because
+\[
+\Phi(x_{1,n})=\Phi(x_{2,n}),
+\qquad
+x_{1,n}\neq x_{2,n},
+\qquad
+x_{1,n},x_{2,n}\to a,
+\]
+the mean value theorem applied to each coordinate of $\Phi$ gives points
+\[
+\zeta_{1,n},\zeta_{2,n}\in(x_{1,n},x_{2,n})
+\]
+such that
+\[
+\Phi_1'(\zeta_{1,n})=0,
+\qquad
+\Phi_2'(\zeta_{2,n})=0.
+\]
+Passing to the limit yields
+\[
+\Phi'(a)=0.
+\]
+
+Differentiating the two coordinates of $\Phi$ gives
+\[
+\Phi_1'
+=
+\frac{1-(\xi_*-\eta_* x)S_x-\eta_* S}{(1-\eta_* S)^2},
+\]
+\[
+\Phi_2'
+=
+\frac{Y_x-(\gamma_*-\eta_* Y)S_x-\eta_* S\,Y_x}{(1-\eta_* S)^2}.
+\]
+Evaluating at $x=a$ and using $S(a)=0$ yields the displayed identities
+\[
+0=\Phi_1'(a)=1-(\xi_*-\eta_* x(a))S_x(a),
+\]
+\[
+0=\Phi_2'(a)=Y_x(a)-(\gamma_*-\eta_* Y(a))S_x(a).
+\]
+The first identity implies
+\[
+S_x(a)\neq 0
+\qquad\text{and}\qquad
+\beta:=\xi_*-\eta_* x(a)=\frac{1}{S_x(a)}.
+\]
+
+Now set
+\[
+U(x):=x-\beta S(x).
+\]
+Then
+\[
+U(a)=a-\beta S(a)=a,
+\]
+so after translating the source coordinate we may assume $U(a)=0$, and
+\[
+U_x(a)=1-\beta S_x(a)=0.
+\]
+Moreover,
+\[
+U_{xx}(a)=-\beta S_{xx}(a).
+\]
+Since on the $v_5$-patch
+\[
+K_v=(x')^3S_{xx},
+\qquad
+x'=\frac{M}{c^2}\neq 0,
+\]
+the hypothesis $K_v(a)\neq 0$ implies
+\[
+S_{xx}(a)\neq 0.
+\]
+Hence
+\[
+U_{xx}(a)\neq 0.
+\]
+By the analytic Morse lemma in one variable, after analytic source
+reparametrization the first coordinate is $t^2$.
+\end{proof}
+
+\begin{remark}[Status of the mixed $\lambda$-shear route]
+\label{rem:wip-mixed-lambda-shear-route-status}
+Proposition~\ref{prop:conditional-mixed-lambda-shear-projective-shadow-reduction}
+shows that the downstream secant-shadow reduction is already exact and fully
+projective: a close exact mixed two-point bad branch determines the projective
+secant shadow
+\[
+\mathbf\Sigma(h_1,h_2)
+=
+[x_1S_2-x_2S_1:\ Y_1S_2-Y_2S_1:\ S_2-S_1],
+\qquad
+S=\frac{\Delta_7}{c\,v_5},
+\]
+independently of any affine freezing of the branch-generated $\lambda$-shears.
+
+Proposition~\ref{prop:fixed-shear-overlap-branch-off-Kv-forces-fold-at-S-zero}
+sharpens the \emph{conditional exact fixed-shear} lane: if one does obtain an
+exact fixed-shear overlap reduction and the accumulation point lies off
+\[
+K_v=0,
+\]
+then the complementary slice
+\[
+\{S=0\}\cap\{K_v\neq 0\}
+\]
+is already forced into a fold-type projection regime. So, in that fixed-shear
+lane, the only missing step is to identify the second-coordinate parity with
+the existing nonmixed odd-zero $\mathcal R$-package. In particular, the only
+clearly genuinely mixed accumulation locus already visible on the overlap patch
+is
+\[
+K_v=0.
+\]
+
+What remains unresolved on the two-point side as a whole is therefore:
+the finite-order source-level merger route;
+the quotient-diagonal continuity/diagonal-collapse route; and, on the
+derivative-geometric side, either a projective control of the
+\[
+S=0
+\]
+slice without exact freezing, or a proof that the exact fixed-shear overlap
+lane is absorbed by the nonmixed odd-zero package. The explicit mixed low-order
+obstruction list remains the finite Wronskian-order list recorded in
+Remark~\ref{rem:wronskian-order-reformulation-mixed-list}.
 \end{remark}
 
 \noindent\emph{Frame convention for the scalar block.}
@@ -21191,7 +21703,24 @@ S=\frac{\Delta_7}{c\,v_5}.
 \]
 So the remaining two-point work is either finite-order source-level merger,
 quotient-diagonal continuity/diagonal collapse, or source-coupled control of
-the mixed $\lambda$-shear exceptional loci.
+the mixed $\lambda$-shear exceptional loci. In the conditional exact
+fixed-shear overlap lane,
+Proposition~\ref{prop:fixed-shear-overlap-branch-off-Kv-forces-fold-at-S-zero}
+shows that the slice
+\[
+\{S=0\}\cap\{K_v\neq 0\}
+\]
+is already forced into a fold-type projection regime. Thus the only clearly
+genuinely mixed fixed-shear locus left on the overlap patch is
+\[
+K_v=0,
+\]
+while the missing step off $K_v=0$ is the identification of the resulting
+second-coordinate parity with the existing nonmixed odd-zero
+\[
+\mathcal R=\frac{T_v}{K_v^2}
+\]
+package.
 
 \item
 \textbf{Three-point branch (derivative-geometric layer now stabilized).}
