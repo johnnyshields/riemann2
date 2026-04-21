@@ -10378,7 +10378,41 @@ canonical quotient-level invariant. Accordingly, order-$7$ is no longer a
 live audited obstruction for the later geometric arguments.
 \end{remark}
 
-\begin{remark}[Work in progress: highest-new scalar on the direct septic slice]
+\begin{remark}[Canonical quotient-septic closure is still locally free]
+\label{rem:canonical-quotient-septic-closure-still-locally-free}
+The canonical quotient-level order-$7$ package is now closed, but that does not
+yet make the quotient-septic geometry rigid.
+
+Indeed, once the lower one-pair data $(c,u_5,v_5)$ are fixed, the canonical
+septic residual
+\[
+\Delta_7=u_7v_5-u_5v_7
+\]
+is still locally free. On a region where $v_5\neq 0$ one may gauge-fix
+\[
+v_7^{\new}=0,
+\qquad
+u_7^{\new}=\frac{\Delta_7}{v_5},
+\]
+while on a region where $u_5\neq 0$ one may gauge-fix
+\[
+u_7^{\new}=0,
+\qquad
+v_7^{\new}=-\frac{\Delta_7}{u_5}.
+\]
+So after the lower one-pair data are fixed, the canonical quotient-septic curve
+\[
+\Gamma(h)=\left(\frac{v_5(h)}{c(h)},\frac{\Delta_7(h)}{c(h)}\right)
+\]
+is still locally determined by an arbitrary analytic choice of $\Delta_7$.
+
+Accordingly, no theorem using only arbitrary canonical quotient-septic geometry
+of $(c,v_5,\Delta_7)$ can by itself close the later repeated-source /
+discriminant branch. Any successful higher-order hybrid must therefore be
+provenance-sensitive, not merely quotient-septic.
+\end{remark}
+
+\begin{remark}[Status and ceiling of the highest-new direct provenance slice]
 \label{rem:wip-highest-new-scalar-direct-slice}
 On the region $v_5\neq 0$, set
 \[
@@ -10404,15 +10438,49 @@ v(\gamma_5-\alpha_5)^{(q^{(7)})}
 \Bigr).
 \]
 
-In the minimal graded model explored in the present worklog, the combined
-coefficient is proportional to
+On the subregion where $M\neq 0$, the direct highest-new dual variables are
 \[
-\frac{eu\,(a^2+ab-b^2)}{a^2b^4(a+b)^2},
+\beta^{[1]}=\phi_\mu,
+\qquad
+m^{[1]}=\phi-\mu\phi_\mu,
 \]
-so the highest-new slice is generically nonzero but not manifestly one-signed.
-Thus the remaining order-$7$ issue is no longer survival of the canonical
-quotient-level witness, but the global line-incidence / slope-recurrence
-geometry of the resulting scalar graph.
+and by Corollary~\ref{cor:mu-lambda-curvature-identities},
+\[
+\phi_{\mu\mu}=\frac{v_5^3}{M^3}W^{[1]}.
+\]
+Thus the direct highest-new quotient-septic geometry is exactly the ordinary
+tangent-line geometry of the scalar graph
+\[
+y=\phi(\mu).
+\]
+
+In particular, any bitangent line or four-secant line for the graph
+$y=\phi(\mu)$, and any nonadjacent slope re-entry for
+\[
+\beta^{[1]}=\phi_\mu,
+\]
+forces at least two zeros of
+\[
+\phi_{\mu\mu},
+\]
+equivalently of
+\[
+W^{[1]}.
+\]
+So the global direct-slice propagation problem may be viewed as a no-recurrence
+problem for the scalar graph $\phi$.
+
+However, the explicit direct provenance formula only shows that
+\[
+\phi=A\,q^{(7)}
+\qquad
+(A:=\kappa\,\eta_2),
+\]
+with $A$ generically nonvanishing on a generic one-pair block. By
+Proposition~\ref{prop:full-block-universality-direct-provenance-slice} below,
+this still leaves $\phi$ fully universal on each such block. So the direct
+graph picture is now a precise dictionary, not by itself a live rigidity
+theorem.
 \end{remark}
 
 \begin{remark}[Status of the $W=0,\ M\neq 0$ side]
@@ -18634,8 +18702,13 @@ can occur at that anchor odd zero itself or immediately after passage, and
 Corollary~\ref{cor:first-post-anchor-chamber-dangerous} shows that the
 subsequent post-anchor chambers alternate dangerous and safe. Thus the true residual obstruction is no longer the raw adjacent-two-odd-zero
 chamber itself. But by the universality threshold for the current route-2
-package, even the delayed post-anchor scenario cannot be excluded inside that
-package alone.
+package, by the local freedom of arbitrary canonical quotient-septic geometry,
+and by the full-block universality of the direct provenance slice
+\[
+\phi=A\,q^{(7)},
+\]
+even the delayed post-anchor scenario cannot be excluded inside those packages
+alone.
 \end{remark}
 
 \begin{proposition}[Odd-anchor passage has no sign reset]
@@ -19240,24 +19313,31 @@ package.
 \label{rem:next-live-target-must-be-non-universal}
 By
 Corollary~\ref{cor:current-route-two-package-universal-under-normalization},
-the present route-2 package is exhausted: any further progress must use a
+the present lower route-2 package is exhausted: any further progress must use a
 genuinely non-universal source-coupled input, i.e. an ingredient not already
 absorbed by the normalized planar model $(\mathcal Z,\mathcal R,D_a)$.
 
-Within the current draft, the first canonical candidates for such genuinely
-non-universal input lie above the present route-2 package, for example at the
-quotient-septic / mixed level through invariants such as
+However, the thread analysis shows that this non-universal input cannot be
+identified merely with arbitrary canonical quotient-septic geometry, nor even
+with the explicit direct $q^{(7)}$-slice by itself. Indeed,
+Remark~\ref{rem:canonical-quotient-septic-closure-still-locally-free} shows
+that arbitrary canonical $\Delta_7$ is still locally free once the lower
+one-pair data are fixed, and
+Proposition~\ref{prop:full-block-universality-direct-provenance-slice} together
+with Corollary~\ref{cor:finite-linear-provenance-too-weak} show that the direct
+highest-new provenance slice
 \[
-[A_7^{\mathfrak f}]
-\qquad\text{or}\qquad
-\Delta_7.
+\phi=A\,q^{(7)}
 \]
-So any viable continuation of route 2 must hybridize the repeated-source moving
-shear
-\[
-f_a=u_5-\mathcal Z(a)\lambda
-\]
-with higher non-universal data of that kind.
+is fully universal on each generic one-pair block, even after any finite family
+of linear provenance/matching conditions on $q$.
+
+So any viable continuation must use something stronger: either a
+\emph{continuum-strength provenance law} for $q$ on a whole block, or an
+external mixed/canonical theorem that constrains $q$ beyond finite jet data.
+Within the present draft, the first plausible places for such genuinely
+non-universal input lie in the mixed / canonical package above arbitrary
+quotient-septic geometry.
 \end{remark}
 
 \begin{remark}[What remains on the nonmixed $4$-point side]
@@ -19410,16 +19490,20 @@ no-reset, and delayed rooted crossing.
 
 So the sharpened remaining nonmixed burden is no longer a delayed no-crossing /
 profile-realizability theorem \emph{within the current route-2 package}. The
-current package is already exhausted. Any further progress must use a genuinely
-non-universal source-coupled ingredient, i.e. structure not already absorbed by
-the normalized planar model $(\mathcal Z,\mathcal R,D_a)$. In the present
-draft, the first canonical candidates for such input lie at the quotient-septic
-/ mixed level, for example through
+current lower package is already exhausted, and the thread analysis shows that
+arbitrary canonical quotient-septic geometry is still too free, while even the
+explicit direct provenance slice
 \[
-[A_7^{\mathfrak f}]
-\qquad\text{or}\qquad
-\Delta_7.
+\phi=A\,q^{(7)}
 \]
+is fully universal on each generic one-pair block. More strongly, any finite
+family of linear provenance or matching conditions on $q$ is still too weak to
+exclude direct-slice recurrence geometry.
+
+Accordingly, any further progress must use a genuinely non-universal
+continuum-strength provenance law for $q$, or else an external mixed/canonical
+input that constrains $q$ on a whole block and is not already absorbed by the
+normalized planar model $(\mathcal Z,\mathcal R,D_a)$.
 \end{remark}
 
 \begin{remark}[Compact status summary for the nonmixed $4$-point branch]
@@ -19477,20 +19561,19 @@ immediately after it. The subsequent post-anchor chambers alternate dangerous
 and safe. However, the local normalized rooted equations and the local
 fold/transversality data are already formally realizable on the first dangerous
 post-anchor chamber, and more strongly the entire current route-2 source package
-is universal under normalization. An explicit analytic source-level countermodel
-realizes safe adjacent-two-odd-zero behavior, nonlocal-target landing at the
-next odd anchor zero, odd-anchor no-reset, and delayed rooted crossing inside
-that package. Thus the genuinely remaining nonmixed burden is no longer a
-problem inside the current route-2 package at all: any further progress must use
-a genuinely non-universal source-coupled ingredient, not already absorbed by
-the normalized planar model. In the present draft, the first canonical
-candidates for such input lie at the quotient-septic / mixed level, for example
-through
+is universal under normalization. Even arbitrary canonical quotient-septic
+geometry remains too free, and the explicit direct provenance slice
 \[
-[A_7^{\mathfrak f}]
-\qquad\text{or}\qquad
-\Delta_7.
+\phi=A\,q^{(7)}
 \]
+is fully universal on each generic one-pair block; indeed, even after any
+finite family of linear provenance/matching conditions on $q$, direct-slice
+recurrence geometry is still realizable. Thus the genuinely remaining nonmixed
+burden is no longer a problem inside the current route-2 or arbitrary
+quotient-septic package at all. Any further progress must use a genuinely
+non-universal continuum-strength provenance law for $q$, or an external
+mixed/canonical theorem that constrains $q$ on a whole block and is not already
+absorbed by the normalized planar model.
 \end{remark}
 
 \begin{remark}[Derivative-geometry meaning of the nonmixed invariant $\mathcal R$]
@@ -21542,9 +21625,40 @@ i.e. a below-lifted avatar of
 \mathcal Z=\frac{J_{u_5}}{J_\lambda}.
 \]
 
-Thus the new nonmixed/source-level machinery functions primarily as a strategic
-constraint and as a backup language for the mixed side, rather than as a
-replacement for the local mixed exhaustion theorem near the centered base.
+Thus the new nonmixed/source-level machinery functions not only as a strategic
+constraint and as a backup language for the mixed side, but also as the
+correct external handoff target for the $A=0$ planar collapse; see
+Remark~\ref{rem:A-zero-is-nonmixed-handoff}. It does not replace the local
+mixed exhaustion theorem near the centered base, but it does absorb the
+nonmixed affine-planar lane that remains after the local mixed reduction.
+\end{remark}
+
+\begin{remark}[The $A=0$ collapse is already the nonmixed $\mathcal R$-lane]
+\label{rem:A-zero-is-nonmixed-handoff}
+Work on a good $v_5$-patch and write an exact lifted $4$-point relation in the
+form
+\[
+A\,Y+B\,x+C\,S+D=0,
+\qquad
+Y=\frac{u_5}{c},\quad x=\frac{v_5}{c},\quad S=\frac{\Delta_7}{c\,v_5}.
+\]
+If $A=0$, then the relation reduces to
+\[
+B\,x+C\,S+D=0,
+\]
+so the four nodes lie on an affine line in the planar $(x,S)$-curve. Thus the
+positive-dimensional $A=0$ regime is not a separate mixed branch at all: it is
+precisely the nonmixed affine-planar exact-contact regime. In particular, the
+relevant theorem-strength input is already on the nonmixed side: exact
+nonmixed contacts force zeros of $\mathcal R$
+(Proposition~\ref{prop:exact-nonmixed-tangent-plane-contacts-force-R-zero}),
+one-sign $\mathcal R$-intervals are sterile
+(Corollary~\ref{cor:sign-definite-R-excludes-exact-nonmixed-contacts}), and
+interval-persistent / recurrent exact contacts force affine-planar collapse
+(Corollary~\ref{cor:recurrent-exact-nonmixed-contacts-force-affine-planarity}).
+Accordingly, $A=0$ should be viewed as the external handoff from the mixed side
+into the already-handled nonmixed $\mathcal R$-package, not as a fourth
+independent mixed-global lane.
 \end{remark}
 
 \begin{remark}[Status of the lifted order-$7$ geometry]
@@ -21578,8 +21692,10 @@ $K_v$-zeros are sterile; odd-order $K_v$-zeros carry exactly one local
 opposite-side tangent-contact branch; and that branch continues uniquely on the
 maximal right monotone-slope block, with no interior common-tangent event, no
 source-side return, and no interior accumulation. Thus the three-point side is
-no longer a live internal recurrence problem on such patches; only boundary exit
-of the relevant source/target slope-overlap block can remain.
+no longer a live internal recurrence problem on such
+patches; only boundary exit of the relevant source/target slope-overlap block
+can remain, and in the four-point mixed-to-scalar picture this is used only as
+an external lower-core handoff target rather than as a new mixed carrier lane.
 
 On the mixed four-point side, the right-pincer package now gives an analogous
 local simplification near the centered base: every late-$v_5$ branch is either
@@ -21638,31 +21754,23 @@ one gets a punctured neighborhood free of $K_v=0$ and $T_v=0$ points.
 Thus the explicit low-order dangerous $4$-point patterns do not arise at the
 symmetric diagonal base itself.
 
-So the missing global ingredient is no longer a generic local geometry theorem.
-It is a combination of:
-\begin{itemize}
-\item source-level control of the multi-pair interaction defects
+So the mixed four-point side is no longer waiting for a new local geometry
+theorem. On the mixed side, the sufficiently small problem is now organized by
+the mixed-to-scalar capture principle: after the source-coupled and patch-loss
+reductions, no sufficiently small genuinely mixed branch on a nonplanar good
+patch can persist entirely inside
 \[
-E_{\ge2}^{(3)},\qquad E_{\ge2}^{(5)},\qquad \overline E_{\ge2}^{(7)};
+\{T_v\neq 0\}\cap\{\mathcal R\neq 0\},
 \]
-
-\item global continuation / recurrence control for the unique odd-order
-three-point branch;
-
-\item on the mixed side, no new local bridge theorem remains near the centered
-base; what remains is only the finite scalar descent on the clean branch
-together with any global capture needed to force bad mixed branches into the
-local exhaustion theorem
-\[
-\text{Theorem~\ref{thm:local-exhaustion-mixed-four-point-centered-base}};
-\]
-
-\item and, on the still-live nonmixed side, a deeper RH-specific source- or
-matrix-level identity imposing stronger parity / divisibility constraints on
+except after entry into already-absorbed planar, lower-core, repeated-node,
+repeated-source, or quintic-collapse regimes. This is formalized below by the
+local clean continuation proposition, the positive-scale endpoint corollary, and
+Theorem~\ref{thm:global-mixed-to-scalar-capture-clean-patch}. On the still-live
+nonmixed side, any genuinely new input would have to be RH-specific source- or
+matrix-level structure imposing stronger constraints on
 \[
 \mathcal R=\frac{T_v}{K_v^2}.
 \]
-\end{itemize}
 \end{remark}
 
 \begin{remark}[Live attack routes]
@@ -21729,17 +21837,19 @@ shows that the slice
 \[
 \{S=0\}\cap\{K_v\neq 0\}
 \]
-is already forced into a fold-type projection regime. Thus the only clearly
-genuinely mixed fixed-shear locus left on the overlap patch is
+is already forced into a fold-type projection regime. Thus the only clearly genuinely mixed fixed-shear locus left on the overlap
+patch is
 \[
 K_v=0,
 \]
-while the missing step off $K_v=0$ is the identification of the resulting
-second-coordinate parity with the existing nonmixed odd-zero
+while the missing step off $K_v=0$ is its absorption into the existing
+nonmixed odd-zero
 \[
 \mathcal R=\frac{T_v}{K_v^2}
 \]
-package.
+package. This mirrors the four-point mixed-to-scalar picture, where the only
+live scalar exits are likewise funneled into the established $K_v$- and
+$\mathcal R$-packages rather than into new mixed carrier lanes.
 
 \item
 \textbf{Three-point branch (derivative-geometric layer now stabilized).}
@@ -21759,23 +21869,36 @@ issue there is only boundary exit of the relevant source/target slope-overlap
 block, not an internal three-point propagation mechanism.
 
 \item
-\textbf{Four-point mixed branch: local route exhausted, global capture remains.}
-Near the centered diagonal base, the mixed $4$-point branch is now locally
-exhausted by
-Theorem~\ref{thm:local-exhaustion-mixed-four-point-centered-base}: the clean
-branch $V_1\neq 0$ is excluded by the canonical scalar descent and the
-centered good-$v_5$-patch parity package, while every late-$v_5$ branch is
-already removed on the $u_5$-patch as either locally sterile or
-already-quintic. So the remaining mixed-side issue is no longer a new local jet
-mechanism, but only any global capture needed to force bad mixed branches into
-that centered-base local regime.
+\textbf{Four-point branch (mixed side now captured by scalar exits).}
+On the nonmixed side, the exact-contact and repeated-source / first-loss
+packages are now organized by the scalar
+\[
+\mathcal R=\frac{T_v}{K_v^2},
+\]
+with one-sign intervals sterile and interval-persistent exact contacts forcing
+affine-planar collapse. On the mixed side, the centered-base local route is
+exhausted up to the clean branch, and the source-coupled and patch-loss
+frontiers are now reduced to lower-core / shifted-$3$-point /
+already-quintic handoffs. Accordingly, the sufficiently small mixed-global
+problem is no longer a search for new local mixed geometry: by
+Theorem~\ref{thm:global-mixed-to-scalar-capture-clean-patch}, a genuinely mixed
+clean branch on a nonplanar good patch cannot persist entirely inside
+\[
+\{T_v\neq 0\}\cap\{\mathcal R\neq 0\},
+\]
+except after entry into already-absorbed regimes. So the four-point side is now
+best viewed as captured by the centered mixed local theorem, the three-point
+$K_v$-package, and the nonmixed $\mathcal R$-package, rather than as an
+independent mixed-global carrier problem.
 
 \item
-\textbf{Route B backup degeneration tower.}
+\textbf{Late-$v_5$ degeneration is now only a handoff mechanism.}
 If the $v_5$-patch fails and $v_5$ starts late, the valuation form of the
 septic transport constraint forces matching late vanishing of the septic
-transport channel $v_{7,K_1}$. Thus failure of the $v_5$-route is not a
-free local cancellation but a coupled quintic--septic degeneration scheme.
+transport channel $v_{7,K_1}$. Thus failure of the $v_5$-route is not a free
+local cancellation but a coupled quintic--septic degeneration scheme, and in
+the current architecture it should be read only as a handoff into lower-core or
+already-quintic geometry, not as an independent mixed branch lane.
 
 \item
 \textbf{Four-point nonmixed branch via source-level control of odd $\mathcal W_{\mathrm{src}}$-zeros.}
@@ -21808,9 +21931,11 @@ this repeated-source / first-loss mechanism is not an independent obstruction:
 it occurs if and only if one diagonally approaches an odd-order zero of
 $\mathcal R$, equivalently of $\mathcal W_{\mathrm{src}}$.
 
-The remaining theorem-level task is therefore purely the global/source-level
-exclusion of odd zeros of $\mathcal W_{\mathrm{src}}$ on opened nonmixed
-arcs.
+The remaining theorem-level task on this side is therefore the
+global/source-level exclusion or absorption of odd zeros of
+$\mathcal W_{\mathrm{src}}$ on opened nonmixed arcs. In the unified mixed /
+nonmixed picture, this is exactly the scalar $\mathcal R$-lane that absorbs the
+interval-persistent $A=0$ collapse from the mixed side.
 \end{enumerate}
 \end{remark}
 
@@ -21879,8 +22004,11 @@ side, the finite scalar descent
 \[
 c(-s)=c(s)\pmod{s^6}
 \]
-on the clean mixed branch, and beyond that the global capture problem forcing
-every relevant mixed branch into the centered-base local exhaustion theorem.
+on the clean mixed branch, and beyond that the mixed-to-scalar capture problem:
+every sufficiently small relevant mixed branch should be forced either into the
+centered-base local exhaustion theorem or into the already-handled nonmixed
+$\mathcal R$-package, with all source-coupled and patch-loss events read only
+as lower-core / already-quintic handoffs.
 \end{remark}
 
 \begin{remark}[Current geometric bottleneck]
@@ -21942,10 +22070,24 @@ on that clean branch, together with the global capture problem of forcing every
 relevant mixed branch into this centered-base local regime.
 
 So the missing lifted ingredient is no longer another generic local geometric
-exclusion theorem. It is: global/source-level control of odd zeros of
-$\mathcal R$ on the nonmixed side; finite scalar descent on the clean mixed
-branch; and beyond that the global/nonlocal capture problem linking the finite-core
-endgame to this local exhaustion package.
+exclusion theorem. On the mixed side, the centered-base local package, the
+source-coupled exclusion, the patch-loss reductions, and the nonmixed
+$\mathcal R$-handoff now combine to give the clean theorem-level conclusion
+formalized below in
+Theorem~\ref{thm:global-mixed-to-scalar-capture-clean-patch}: every maximal
+genuinely mixed clean branch on a nonplanar good patch is forced either into
+the centered-base scalar exit
+\[
+T_v=0
+\]
+or into the nonmixed scalar exit
+\[
+\mathcal R=0,
+\]
+up to already-absorbed planar, lower-core, repeated-node, repeated-source, and
+quintic-collapse regimes. Thus the still-live frontiers are no longer mixed
+four-point geometry, but rather the nonmixed/source-level control of odd zeros
+of $\mathcal R$ and the separate two-point program.
 \end{remark}
 
 \begin{remark}[Current state of the argument]
@@ -21991,18 +22133,24 @@ unconditionally. The stronger symmetric directional-kernel theorem remains
 available only conditionally on zero-capture and now serves as a sharper but
 nonessential alternative route.
 
-Accordingly, the remaining gap is no longer local boundary geometry. It is the
-global propagation theorem linking these local facts: no fixed finite-slope line
-should be able to leave and later re-enter the tangent-slope / tangent-line
-data on nonadjacent branches. On the highest-new slice, this is the same as a
-no-reentry theorem for the scalar graph
+Accordingly, the equivalent slope/tangent/dual direct-slice formulations remain
+the correct geometric dictionary, but they are no longer themselves the live
+theorem target. The explicit direct provenance formula gives
 \[
-\phi=\lambda^{[1]},
+\phi=A\,q^{(7)}
 \qquad
-\beta^{[1]}=\phi_\mu,
-\qquad
-m^{[1]}=\phi-\mu\phi_\mu.
+(A=\kappa\,\eta_2),
 \]
+and on any generic one-pair block this direct slice is fully universal
+(Proposition~\ref{prop:full-block-universality-direct-provenance-slice}).
+Moreover, even after imposing any finite family of linear provenance or
+matching conditions on $q$, direct-slice recurrence geometry remains formally
+realizable (Corollary~\ref{cor:finite-linear-provenance-too-weak}).
+
+Thus the remaining gap is not an abstract global no-reentry theorem for the
+scalar graph $\phi$ by itself. It is the search for a genuinely non-universal
+provenance law for $q$, or an external mixed/canonical input, that cuts down
+the allowed direct-slice graphs on an entire block.
 
 On the lifted $4$-point side, the mixed low-order obstruction list is now both
 finite and canonical:
@@ -22028,15 +22176,34 @@ A_5^{\mathfrak f}(s)\not\equiv 0
 on the centered diagonal branch.
 
 On the mixed side, however, the local theorem picture is now sharper than a
-mere punctured-arc patch dichotomy. Near the centered base, the late-$v_5$
+mere punctured-arc patch dichotomy, and the global side is correspondingly
+compressed. Near the centered base, the late-$v_5$
 sector is already removed by the $u_5$-patch right-pincer package as either
 locally sterile or planar-lift and hence already absorbed into the
 defect-free quintic-circuit regime. The only genuinely new mixed local branch
 there is the clean branch $V_1\neq 0$, and that branch is excluded by the
 canonical scalar descent together with the centered good-$v_5$-patch parity
-package. Consequently, any remaining mixed $4$-point issue is no longer a new
-local mixed septic mechanism, but only a possible global/nonlocal escape from
-the centered-base local exhaustion theorem.
+package. Moreover, after the source-coupled and patch-loss reductions, the
+sufficiently small mixed-global problem is no longer a search for a new mixed
+carrier lane. Every apparent mixed exit is now absorbed into one of three
+existing packages:
+\[
+T_v=0
+\quad\text{(centered-base local exhaustion),}
+\]
+\[
+K_v=0
+\quad\text{(lifted three-point / repeated-node package),}
+\]
+\[
+\mathcal R=0
+\quad\text{(nonmixed affine-planarity package).}
+\]
+The right-pincer/source-coupled lower-core lane is locally non-carrying in the
+sufficiently small regime, while patch-loss phenomena reduce only to lower-core
+quotient or already-quintic handoffs. Thus the genuinely mixed small-branch
+problem is best read as mixed-to-scalar capture rather than as another
+independent branch geometry.
 
 In parallel, the finite-core endgame now splits into three layers.
 
@@ -22169,7 +22336,7 @@ current lifted variables alone.
 
 \begin{remark}[Post-draft findings: established, provisional, and live]
 \label{rem:post-draft-findings-established-provisional-live}
-Since this draft state, six additional conclusions have emerged.
+Since this draft state, nine additional conclusions have emerged.
 
 First, on the two-point branch, the exact finite-order source criterion remains
 the clean algebraic route, but the naive source-summed corrected block model
@@ -22214,8 +22381,10 @@ parity with the existing nonmixed odd-zero
 \[
 \mathcal R=\frac{T_v}{K_v^2}
 \]
-package. So the remaining two-point issue is no longer a single broad
-interaction ansatz, but a choice among these three explicit closure mechanisms.
+package. So the remaining two-point issue is no longer a single broad interaction
+ansatz, but a choice among these three explicit closure mechanisms, each of
+which already points toward the same scalar bad set $\{K_v=0\}\cup\{\mathcal
+R=0\}$ that now governs the mixed four-point side as well.
 
 Second, on the lifted four-point branch, the explicit low-order obstruction
 list has been reduced to the six coefficients
@@ -22284,17 +22453,301 @@ bad list
 \]
 is excluded there.
 
-So the present frontier is no longer a generic local geometry problem. It is
-the combination of either a source-level or quotient-diagonal two-point closure
-theorem, or else a source-coupled $\lambda$-shear control on the explicit mixed
-exceptional loci
+Seventh, the relation between the mixed and nonmixed $4$-point sides is now
+structurally sharper. On a good $v_5$-patch, an exact mixed relation
 \[
-\{S=0\}\cup\{K_v=0\},
-\qquad
-S=\frac{\Delta_7}{c\,v_5},
+A\,Y+B\,x+C\,S+D=0
 \]
-together with a finite scalar descent theorem on the clean mixed four-point
-branch and a deeper RH-specific identity on the nonmixed four-point branch.
+with
+\[
+Y=\frac{u_5}{c},
+\qquad
+x=\frac{v_5}{c},
+\qquad
+S=\frac{\Delta_7}{c\,v_5}
+\]
+and $A=0$ is already exact affine-planarity for the planar curve $(x,S)$; by
+Remark~\ref{rem:A-zero-is-nonmixed-handoff}, this is precisely the nonmixed
+$\mathcal R$-lane. More generally, the sheared four-zero reduction shows that
+every exact genuinely mixed $4$-point circuit on a good $v_5$-patch already
+forces either
+\[
+K_v=0
+\qquad\text{or}\qquad
+\mathcal R=0
+\]
+in its convex hull. So the mixed-global problem should now be viewed as a
+mixed-to-scalar capture problem rather than as a separate branch geometry.
+
+Eighth, the source-coupled and patch-loss frontiers have both been demoted to
+handoff mechanisms. In the sufficiently small regime, the source-coupled
+lower-core walls
+\[
+D_\lambda=0,
+\qquad
+\mathfrak D=0
+\]
+are not pass-through points. On the patch side, the quintic projective lifts
+\[
+\widetilde Q_v=[c v_5:u_5v_5:v_5^2:\Delta_7],
+\qquad
+\widetilde Q_u=[c u_5:u_5^2:u_5v_5:-\Delta_7]
+\]
+show that single-chart failures are removable after recharting, while the
+genuine common boundary
+\[
+u_5=v_5=0
+\]
+drops either to pure quintic-direction collapse or to lower-core $3$-point /
+repeated-node quotient geometry. Thus
+\[
+cMv_5=0
+\]
+should be read as lower-core handoff, not as a fourth independent mixed-global
+lane.
+
+Ninth, after the centered-base local exhaustion theorem and the preceding
+handoffs are combined, the sufficiently small nonplanar mixed branch has no
+independent carrier away from
+\[
+T_v=0
+\quad\text{and}\quad
+\mathcal R=0.
+\]
+Equivalently, there is no sufficiently small genuinely mixed $4$-point branch
+contained entirely in
+\[
+\{T_v\neq 0\}\cap\{\mathcal R\neq 0\}
+\]
+on a nonplanar good patch, except after entry into already-absorbed
+affine-planar or lower-core regimes.
+
+So the present frontier is now best viewed as follows. On the two-point side,
+the remaining issue is still a choice among the finite-order source-level
+merger route, the quotient-diagonal exact exclusion route, and the mixed
+$\lambda$-shear / projective-shadow route on good overlap patches. On the
+four-point side, however, the geometry is now compressed all the way to the
+scalar exits: by
+Theorem~\ref{thm:global-mixed-to-scalar-capture-clean-patch}, every maximal
+genuinely mixed clean branch on a nonplanar good patch is forced into
+\[
+T_v=0
+\qquad\text{or}\qquad
+\mathcal R=0,
+\]
+up to already-absorbed planar, lower-core, repeated-node, repeated-source, and
+quintic-collapse regimes.
+\end{remark}
+
+\begin{proposition}[$u_5$-chart exceptional-point handoff]
+\label{prop:u5-chart-exceptional-point-handoff}
+Work near a collapsing configuration with $u_5\neq 0$, and use the projective
+lift
+\[
+\widetilde Q_u=[c u_5:u_5^2:u_5v_5:-\Delta_7].
+\]
+Let
+\[
+q_\nu=[0:1:0:\nu]
+\]
+be an exceptional limiting point on the exceptional line. Then every limiting
+hyperplane through $q_\nu$ induces the exact lower-core relation
+\[
+D\,c+B\,v_5+C(\lambda-\nu u_5)=0,
+\qquad
+\lambda=-\frac{\Delta_7}{u_5}.
+\]
+Accordingly:
+\begin{itemize}
+\item one-node collapse hands off to exact shifted lower-core $3$-point
+geometry;
+\item two-node collapse hands off to a repeated-node lower-core wall;
+\item if $u_5=0$ as well, one is on the common quintic-collapse locus already
+treated separately.
+\end{itemize}
+So the $u_5$-chart side of patch loss contributes no independent mixed-global
+carrier lane.
+\end{proposition}
+
+\begin{remark}[Shifted lower-core invariance on the $u_5$-side]
+\label{rem:shifted-lower-core-invariance-u5}
+The shift
+\[
+\lambda\longmapsto \lambda-\nu u_5
+\]
+does not alter the derivative-geometric lower-core package: it changes only the
+zeroth-order affine offset, not the relevant repeated-node/tangent-contact
+derivative structure. Thus the handoff in
+Proposition~\ref{prop:u5-chart-exceptional-point-handoff} is genuinely into the
+existing lower-core package, not into new geometry.
+\end{remark}
+
+\begin{proposition}[Local clean continuation off the explicit walls]
+\label{prop:local-clean-continuation-off-explicit-walls}
+Work on a nonplanar good $v_5$-patch and write
+\[
+Y=\frac{u_5}{c},\qquad x=\frac{v_5}{c},\qquad S=\frac{\Delta_7}{c\,v_5}.
+\]
+Let
+\[
+\Phi_\gamma:=Y-\gamma S,
+\qquad
+F_{\alpha,\beta,\gamma}(x):=\Phi_\gamma(x)-\alpha-\beta x.
+\]
+Suppose
+\[
+h_1<h_2<h_3<h_4
+\]
+is an exact genuinely mixed clean $4$-point configuration, so
+\[
+F_{\alpha,\beta,\gamma}(x(h_i))=0
+\qquad (i=1,2,3,4),
+\]
+the four roots $x(h_i)$ are distinct and simple, and the carrying hyperplane is
+genuinely mixed ($A\neq 0$). Assume moreover that the configuration does not
+lie on any of the walls
+\[
+A=0,\qquad D_\lambda=0,\qquad \mathfrak D=0,\qquad cMv_5=0,\qquad
+T_v=0,\qquad \mathcal R=0.
+\]
+Then this configuration is an interior point of a smooth local solution
+manifold of exact genuinely mixed clean $4$-point configurations. In
+particular, it cannot be a terminal point of a maximal clean mixed branch.
+
+\begin{proof}
+For
+\[
+\mathcal F_i(h_1,h_2,h_3,h_4,\alpha,\beta,\gamma)
+:=
+Y(h_i)-\gamma S(h_i)-\alpha-\beta x(h_i),
+\]
+the Jacobian with respect to $(h_1,h_2,h_3,h_4)$ is diagonal:
+\[
+\frac{\partial \mathcal F_i}{\partial h_j}
+=
+\delta_{ij}\bigl(Y'(h_i)-\gamma S'(h_i)-\beta x'(h_i)\bigr).
+\]
+Since
+\[
+Y'(h_i)-\gamma S'(h_i)-\beta x'(h_i)
+=
+x'(h_i)\,F'_{\alpha,\beta,\gamma}(x(h_i)),
+\]
+the diagonal entries are nonzero on a good $v_5$-patch and at simple roots.
+So the Jacobian is invertible, and the claim follows from the implicit
+function theorem.
+\end{proof}
+\end{proposition}
+
+\begin{corollary}[Positive-scale endpoints lie on an absorbed wall or a scalar exit]
+\label{cor:positive-scale-endpoint-absorbed-or-scalar}
+Let $\Gamma$ be a maximal connected genuinely mixed clean $4$-point branch on a
+nonplanar good $v_5$-patch. Suppose $p\in\overline{\Gamma}$ is a terminal point
+at which the relevant node scale stays bounded below by a positive constant.
+Then $p$ lies on one of
+\[
+A=0,\qquad D_\lambda=0,\qquad \mathfrak D=0,\qquad cMv_5=0,\qquad
+T_v=0,\qquad \mathcal R=0.
+\]
+In particular, after the previously established handoffs are invoked, a
+positive-scale terminal point must either lie in the centered-base capture set
+$\{T_v=0\}$, lie in the nonmixed affine-planar scalar set $\{\mathcal R=0\}$,
+or already belong to one of the absorbed planar/lower-core/quintic-collapse
+regimes.
+\end{corollary}
+
+\begin{proof}
+If $p$ lay off the listed wall set, then the limiting exact genuinely mixed clean
+configuration at $p$ would satisfy the hypotheses of
+Proposition~\ref{prop:local-clean-continuation-off-explicit-walls}. Hence the
+branch would extend smoothly through $p$, contradicting maximality. Therefore a
+positive-scale terminal point must lie on one of
+\[
+A=0,\qquad D_\lambda=0,\qquad \mathfrak D=0,\qquad cMv_5=0,\qquad
+T_v=0,\qquad \mathcal R=0.
+\]
+The final sentence is then exactly the previously established absorption
+package: $A=0$ is the nonmixed affine-planar handoff
+(Remark~\ref{rem:A-zero-is-nonmixed-handoff}), the source-coupled walls
+$D_\lambda=0$ and $\mathfrak D=0$ are locally non-carrying in the sufficiently
+small regime (Remark~\ref{rem:post-draft-findings-established-provisional-live}),
+and patch loss $cMv_5=0$ is absorbed into lower-core / shifted-$3$-point /
+quintic-collapse geometry
+(Proposition~\ref{prop:u5-chart-exceptional-point-handoff} and the surrounding
+post-draft findings package).
+\end{proof}
+
+\begin{theorem}[Global mixed-to-scalar capture on the clean patch]
+\label{thm:global-mixed-to-scalar-capture-clean-patch}
+Let $\Gamma$ be a maximal connected genuinely mixed clean $4$-point branch on a
+nonplanar good $v_5$-patch. Then $\Gamma$ cannot persist as an independent
+genuinely mixed branch entirely inside
+\[
+\{T_v\neq 0\}\cap\{\mathcal R\neq 0\}.
+\]
+Equivalently, every such maximal branch is forced either into
+\[
+T_v=0
+\]
+or into
+\[
+\mathcal R=0,
+\]
+up to the already-absorbed planar, lower-core, repeated-node, repeated-source,
+and quintic-collapse regimes.
+\end{theorem}
+
+\begin{proof}
+Assume $\Gamma$ is a maximal connected genuinely mixed clean $4$-point branch on
+a nonplanar good $v_5$-patch and that
+\[
+\Gamma\cap\{T_v=0\}=\varnothing,
+\qquad
+\Gamma\cap\{\mathcal R=0\}=\varnothing.
+\]
+We show that $\Gamma$ cannot persist as an independent genuinely mixed branch.
+
+If a terminal point of $\Gamma$ has positive scale, then
+Corollary~\ref{cor:positive-scale-endpoint-absorbed-or-scalar} places it on one
+of
+\[
+A=0,\qquad D_\lambda=0,\qquad \mathfrak D=0,\qquad cMv_5=0,\qquad
+T_v=0,\qquad \mathcal R=0.
+\]
+The last two are excluded by hypothesis. The remaining three are already
+absorbed: $A=0$ is the nonmixed affine-planar $\mathcal R$-lane
+(Remark~\ref{rem:A-zero-is-nonmixed-handoff}), the source-coupled walls
+$D_\lambda=0$ and $\mathfrak D=0$ are locally dead as pass-through mechanisms
+in the sufficiently small regime, and patch loss $cMv_5=0$ is absorbed into the
+lower-core / shifted-$3$-point / quintic-collapse package recorded in
+Remark~\ref{rem:post-draft-findings-established-provisional-live} and
+Proposition~\ref{prop:u5-chart-exceptional-point-handoff}. So no positive-scale
+terminal point yields an independent mixed continuation lane.
+
+If instead the relevant scale along $\Gamma$ shrinks, then the sufficiently
+small mixed-to-scalar capture package applies: by
+Remark~\ref{rem:post-draft-findings-established-provisional-live}, no
+sufficiently small genuinely mixed branch on a nonplanar good patch can remain
+entirely inside
+\[
+\{T_v\neq 0\}\cap\{\mathcal R\neq 0\},
+\]
+except after entry into already-absorbed planar, lower-core, repeated-node,
+repeated-source, or quintic-collapse regimes.
+
+Thus in all cases $\Gamma$ is forced either into $T_v=0$, into $\mathcal R=0$,
+or into one of the already-absorbed regimes. This contradicts the assumption
+that $\Gamma$ persists as an independent genuinely mixed clean branch inside
+\[
+\{T_v\neq 0\}\cap\{\mathcal R\neq 0\}.
+\]
+\end{proof}
+
+\begin{remark}
+The theorem should be read as the mixed-global four-point closure statement on a
+nonplanar good patch: after the source-coupled and patch-loss absorptions, no
+independent genuinely mixed clean carrier remains away from the scalar exits
+$T_v=0$ and $\mathcal R=0$.
 \end{remark}
 
 \section{Endgame architecture and remaining global propagation problem}
@@ -22369,6 +22822,173 @@ RH-specific structure.
 
 Accordingly, the remaining gap is now a genuinely global special-structure
 theorem, not a missing local lemma.
+\end{remark}
+
+\begin{proposition}[Full-block universality of the direct provenance slice]
+\label{prop:full-block-universality-direct-provenance-slice}
+Let $J$ be a connected generic one-pair block on which
+\[
+A(h):=\kappa(h)\eta_2(h)
+\]
+is analytic and nowhere zero. On $J$, the direct provenance slice has the form
+\[
+\phi(h)=A(h)\,q^{(7)}(h).
+\]
+Then for every analytic function
+\[
+\psi:J\to\mathbf C
+\]
+there exists an analytic function
+\[
+q:J\to\mathbf C
+\]
+such that
+\[
+\phi(h)=\psi(h)
+\qquad (h\in J).
+\]
+
+More explicitly, for any basepoint $h_0\in J$ and any constants
+\[
+a_0,\dots,a_6\in\mathbf C,
+\]
+the function
+\[
+q_\psi(h)
+:=
+\sum_{j=0}^6 \frac{a_j}{j!}(h-h_0)^j
++
+\int_{h_0}^h \frac{(h-s)^6}{6!}\,\frac{\psi(s)}{A(s)}\,ds
+\]
+is analytic on $J$ and satisfies
+\[
+q_\psi^{(7)}(h)=\frac{\psi(h)}{A(h)},
+\qquad
+\phi(h)=A(h)\,q_\psi^{(7)}(h)=\psi(h).
+\]
+In particular, on any generic one-pair block, the direct highest-new scalar
+graph $\phi$ is an arbitrary analytic scalar graph.
+\end{proposition}
+
+\begin{proof}
+Since $A$ is analytic and nowhere zero on $J$, the function
+\[
+\frac{\psi}{A}
+\]
+is analytic on $J$. The displayed formula for $q_\psi$ is the standard
+variation-of-constants solution of
+\[
+q^{(7)}=\frac{\psi}{A},
+\]
+with arbitrary initial data at $h_0$. Differentiating seven times gives
+\[
+q_\psi^{(7)}(h)=\frac{\psi(h)}{A(h)},
+\]
+hence
+\[
+\phi(h)=A(h)\,q_\psi^{(7)}(h)=\psi(h).
+\]
+\end{proof}
+
+\begin{corollary}[Finite linear provenance constraints are too weak]
+\label{cor:finite-linear-provenance-too-weak}
+Let $J$ be as in
+Proposition~\ref{prop:full-block-universality-direct-provenance-slice}.
+Fix finitely many linear functionals
+\[
+\Lambda_r(q)=c_r,
+\qquad r=1,\dots,N,
+\]
+on analytic functions $q$ on $J$, where each $\Lambda_r$ is built from finitely
+many point-evaluation jets and/or finitely many linear integral functionals
+with analytic kernels.
+
+Fix also two distinct points
+\[
+\mu_1\neq \mu_2\in J
+\]
+and an affine line
+\[
+\ell(\mu)=s\mu+b.
+\]
+Then there exists a polynomial $q$ on $J$ such that:
+
+\begin{enumerate}
+\item all the prescribed linear provenance conditions
+\[
+\Lambda_r(q)=c_r
+\qquad (r=1,\dots,N)
+\]
+hold;
+
+\item the direct-slice graph
+\[
+\phi(\mu)=A(\mu)\,q^{(7)}(\mu)
+\]
+is tangent to the line $y=\ell(\mu)$ at both $\mu_1$ and $\mu_2$, i.e.
+\[
+\phi(\mu_j)=\ell(\mu_j),
+\qquad
+\phi_\mu(\mu_j)=s
+\qquad (j=1,2).
+\]
+\end{enumerate}
+
+Accordingly, no theorem using only the explicit direct formula
+\[
+\phi=A\,q^{(7)}
+\]
+together with any finite family of linear provenance or matching conditions on
+$q$ can exclude bitangent, four-secant, or same-slope recurrence geometry on
+the direct slice.
+\end{corollary}
+
+\begin{proof}
+The tangency conditions at $\mu_j$ are linear jet conditions on $q$:
+\[
+A(\mu_j)\,q^{(7)}(\mu_j)=\ell(\mu_j),
+\]
+and, since
+\[
+\phi_\mu=(Aq^{(7)})'=A' q^{(7)}+A q^{(8)},
+\]
+also
+\[
+A'(\mu_j)\,q^{(7)}(\mu_j)+A(\mu_j)\,q^{(8)}(\mu_j)=s.
+\]
+Because $A(\mu_j)\neq 0$, these are legitimate linear conditions on the jets of
+$q$ at the two points $\mu_1,\mu_2$.
+
+Together with the prescribed finitely many provenance constraints
+\[
+\Lambda_r(q)=c_r,
+\]
+this is a finite linear system on the coefficients of a polynomial $q$. For a
+polynomial of sufficiently large degree, the coefficient space has dimension
+larger than the number of imposed linear conditions. Standard Hermite
+interpolation / finite-dimensional linear algebra therefore gives a polynomial
+$q$ satisfying all of them simultaneously.
+\end{proof}
+
+\begin{remark}[What the direct-slice no-go results actually leave open]
+\label{rem:what-direct-slice-no-go-results-leave-open}
+Proposition~\ref{prop:full-block-universality-direct-provenance-slice} shows
+that on a generic one-pair block the direct highest-new scalar graph
+\[
+\phi
+\]
+is fully universal. Corollary~\ref{cor:finite-linear-provenance-too-weak} shows
+more: even after imposing any finite family of linear provenance / matching
+conditions on $q$, the direct slice remains flexible enough to realize
+bitangent, four-secant, and same-slope recurrence geometry.
+
+So the next live theorem cannot be another sign/convexity statement about the
+graph of $\phi$, nor any theorem using only finitely many endpoint jets or
+finitely many linear integral conditions on $q$. Any successful continuation of
+the direct-slice lane must instead use a genuinely
+\emph{continuum-strength provenance law} for $q$ on a whole block, such as a
+lower-order ODE, a sign-definite integral identity, a nonlinear transport law,
+or some other infinite-codimension constraint.
 \end{remark}
 
 \begin{lemma}[Crude polynomial bound for the local value scale]
