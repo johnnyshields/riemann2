@@ -11839,70 +11839,31 @@ two-point bad cores on compact subsets of $\{c\neq 0\}$ if one had a genuine
 corrected two-atom quotient germ with continuity and exact diagonal collapse.
 
 Third, on a good overlap patch in the mixed regime, the derivative-geometric
-attack now naturally passes through the moving $\lambda$-sheared source
-transport system
-\[
-(c-\eta_n\lambda)(h_{1,n})=\Lambda_n(c-\eta_n\lambda)(h_{2,n}),
-\qquad
-(v_5-\xi_n\lambda)(h_{1,n})=\Lambda_n(v_5-\xi_n\lambda)(h_{2,n}),
-\qquad
-(u_5-\gamma_n\lambda)(h_{1,n})=\Lambda_n(u_5-\gamma_n\lambda)(h_{2,n}),
-\]
-with
-\[
-\lambda=\frac{\Delta_7}{v_5},
-\qquad
-\Lambda_n=-\frac{a_{2,n}}{a_{1,n}}.
-\]
-By Proposition~\ref{prop:projective-compactness-moving-lambda-shear-two-point},
-what is automatic from an exact close mixed branch is not affine freezing of
-\[
-(\eta_n,\xi_n,\gamma_n),
-\]
-but projective compactness of the defect directions
-\[
-[\delta_n(c):\delta_n(v_5):\delta_n(u_5):\delta_n(\lambda)],
-\qquad
-\delta_n(f):=f(h_{1,n})-\Lambda_n f(h_{2,n}).
-\]
-On any subsequence whose projective limit lies in the affine $\lambda$-chart,
-one obtains a convergent affine $\lambda$-shear subsequence; in general the
-exact frozen repeated-source reduction is not automatic. The associated
-projective secant shadow can nevertheless accumulate only on
+attack passes through the exact projective secant-shadow reduction of
+Proposition~\ref{prop:conditional-mixed-lambda-shear-projective-shadow-reduction}.
+This shows unconditionally that a close exact mixed two-point bad branch can
+accumulate only on
 \[
 \{S=0\}\cup\{K_v=0\},
 \qquad
 S=\frac{\Delta_7}{c\,v_5}.
 \]
-In the additional conditional exact fixed-shear overlap lane,
-Proposition~\ref{prop:fixed-shear-overlap-branch-off-Kv-forces-fold-at-S-zero}
-shows that the slice
+Moreover,
+Proposition~\ref{prop:off-septic-zero-Kv-accumulation-is-mixed-low-order}
+shows that the part of the $K_v=0$ locus with $S\neq 0$ is already in the
+existing mixed low-order obstruction regime, while
+Corollary~\ref{cor:fixed-shear-simple-septic-zero-off-Kv-transfers-to-nonmixed-four-point}
+shows that in the conditional exact fixed-shear overlap lane the slice
 \[
 \{S=0\}\cap\{K_v\neq 0\}
 \]
-is already forced into a fold-type projection regime. Thus the only clearly
-genuinely mixed fixed-shear locus left on the overlap patch is
-\[
-K_v=0,
-\]
-while the remaining off-$K_v=0$ step is to match the resulting second-coordinate
-parity with the existing nonmixed odd-zero
-\[
-\mathcal R=\frac{T_v}{K_v^2}
-\]
-package.
+transfers into the established nonmixed $4$-point geometry rather than
+remaining a genuinely mixed $2$-point carrier lane.
 
-So the genuinely remaining two-point work is either the verification of the
-finite-order source-level merger criterion, the construction of the actual
-corrected two-atom quotient germ with continuity and exact diagonal collapse,
-or the source-coupling analysis of the mixed $\lambda$-shear route on those
-explicit exceptional loci. More precisely, on the derivative-geometric side one
-now needs either projective control of the
-\[
-S=0
-\]
-slice without exact freezing, or a proof that the conditional exact fixed-shear
-overlap lane is absorbed by the nonmixed odd-zero package.
+So the genuinely remaining derivative-geometric two-point burden is now the
+$K_v=0$ lane itself, together with the two algebraic alternatives already
+present on the source side: finite-order source-level merger, or
+quotient-diagonal continuity/diagonal collapse.
 
 At the same time, the later centered-base mixed local exhaustion theorem
 (Theorem~\ref{thm:local-exhaustion-mixed-four-point-centered-base}) shows that
@@ -20348,6 +20309,151 @@ By the analytic Morse lemma in one variable, after analytic source
 reparametrization the first coordinate is $t^2$.
 \end{proof}
 
+\begin{proposition}[Off-septic-zero $K_v$-accumulation is already mixed low-order]
+\label{prop:off-septic-zero-Kv-accumulation-is-mixed-low-order}
+Work on the overlap patch of
+Proposition~\ref{prop:conditional-mixed-lambda-shear-projective-shadow-reduction}.
+Assume there exists a close exact mixed two-point bad branch accumulating at a
+point $a$ such that
+\[
+K_v(a)=0,
+\qquad
+S(a)\neq 0.
+\]
+Then
+\[
+Y_{xx}(a)=0.
+\]
+Equivalently, on the $v_5$-patch one has
+\[
+J_\lambda(a)=0,
+\qquad
+J_{u_5}(a)=0.
+\]
+So any such accumulation already lies in the existing mixed low-order
+obstruction regime.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:conditional-mixed-lambda-shear-projective-shadow-reduction},
+any close exact mixed two-point bad branch determines the tangent shadow
+\[
+\mathbf\Pi(x)=[xS_x-S:\ YS_x-SY_x:\ S_x]
+\]
+with projective immersion defect
+\[
+\mathbf\Pi(x)\wedge \partial_x\mathbf\Pi(x)
+=
+S(x)\bigl(S_xY_{xx}-S_{xx}Y_x,\ S_{xx},\ -S_{xx}\bigr).
+\]
+At a point $a$ with $K_v(a)=0$, one has $S_{xx}(a)=0$ on the $v_5$-patch,
+so this simplifies to
+\[
+\mathbf\Pi(a)\wedge \partial_x\mathbf\Pi(a)
+=
+S(a)\,Y_{xx}(a)\,\bigl(S_x(a),\,0,\,S(a)-x(a)S_x(a)\bigr).
+\]
+If $S(a)\neq 0$ and $Y_{xx}(a)\neq 0$, then the vector on the right is
+nonzero, so $\mathbf\Pi$ is projectively immersive at $a$, contradicting
+accumulation of secant shadows there. Hence
+\[
+Y_{xx}(a)=0.
+\]
+On the $v_5$-patch,
+\[
+J_\lambda=\frac{M^3}{c^3}S_{xx},
+\qquad
+J_{u_5}=\frac{M^3}{c^3}Y_{xx},
+\]
+so $K_v(a)=0$ implies $J_\lambda(a)=0$, and the displayed vanishing of
+$Y_{xx}(a)$ gives $J_{u_5}(a)=0$.
+\end{proof}
+
+\begin{corollary}[Simple septic-zero fixed-shear branches off $K_v=0$ transfer to nonmixed four-point geometry]
+\label{cor:fixed-shear-simple-septic-zero-off-Kv-transfers-to-nonmixed-four-point}
+Work on the overlap patch of
+Proposition~\ref{prop:fixed-shear-overlap-branch-off-Kv-forces-fold-at-S-zero}.
+Assume there is a close exact fixed-shear mixed $2$-point branch
+\[
+x_{1,n}\neq x_{2,n},
+\qquad
+x_{1,n},x_{2,n}\to a,
+\qquad
+\Phi(x_{1,n})=\Phi(x_{2,n}),
+\]
+and
+\[
+K_v(a)\neq 0.
+\]
+Then, after shrinking to a sufficiently small neighborhood of $a$, this lane
+produces a local interval-persistent nonmixed $4$-point family for the lifted
+curve
+\[
+Q(x)=(x,Y(x),S(x)).
+\]
+Consequently it is absorbed by the existing nonmixed $4$-point theory;
+in particular, it is not a surviving genuinely mixed $2$-point
+derivative-geometric obstruction.
+\end{corollary}
+
+\begin{proof}
+By Proposition~\ref{prop:fixed-shear-overlap-branch-off-Kv-forces-fold-at-S-zero},
+\[
+S(a)=0,
+\qquad
+S_x(a)\neq 0,
+\]
+and the first coordinate of the fixed-shear projected germ is in fold normal
+form. Thus, after analytic source reparametrization, there is a local parameter
+$t$ with
+\[
+\Phi(x(t))=(t^2,\mathcal V(t))
+\]
+and repeated nearby values force
+\[
+\mathcal V(t)=\mathcal V(-t)
+\]
+for all sufficiently small $t$. Equivalently, in the actual local septic
+coordinate $s:=S$, there are even analytic germs $E_x,E_Y$ such that
+\[
+\frac{x(s)-\xi_*s}{1-\eta_*s}=E_x(s),
+\qquad
+\frac{Y(s)-\gamma_*s}{1-\eta_*s}=E_Y(s),
+\qquad
+E_x(-s)=E_x(s),\quad E_Y(-s)=E_Y(s).
+\]
+
+Define
+\[
+Q(s):=(x(s),Y(s),s).
+\]
+If $\eta_*\neq 0$, set
+\[
+P:=\left(\frac{\xi_*}{\eta_*},\frac{\gamma_*}{\eta_*},\frac1{\eta_*}\right).
+\]
+Then the parity formulas imply that $Q(s),Q(-s),P$ are collinear for all
+small $s$. If $\eta_*=0$, then
+\[
+Q(s)-Q(-s)=2s(\xi_*,\gamma_*,1),
+\]
+so all symmetric secants are parallel to one fixed direction, which is the same
+projective statement with a point at infinity. Hence for every small
+$0<s_1<s_2$, the four points
+\[
+Q(-s_2),\ Q(-s_1),\ Q(s_1),\ Q(s_2)
+\]
+are coplanar.
+
+Finally, by Proposition~\ref{prop:fixed-shear-overlap-branch-off-Kv-forces-fold-at-S-zero},
+\[
+x_s(a)=\frac{1}{S_x(a)}\neq 0,
+\]
+so $x$ is monotone in $s$ near $a$. Thus the four coplanar points above
+lie on one local $x$-arc in the nonmixed ordered pattern, yielding a local
+interval-persistent nonmixed $4$-point family. The final claim follows from
+Proposition~\ref{prop:interval-persistent-nonmixed-four-point-forces-affine-planarity}.
+\end{proof}
+
 \begin{remark}[Status of the mixed $\lambda$-shear route]
 \label{rem:wip-mixed-lambda-shear-route-status}
 Proposition~\ref{prop:conditional-mixed-lambda-shear-projective-shadow-reduction}
@@ -20363,60 +20469,46 @@ S=\frac{\Delta_7}{c\,v_5},
 \]
 independently of any affine freezing of the branch-generated $\lambda$-shears.
 
-Proposition~\ref{prop:fixed-shear-overlap-branch-off-Kv-forces-fold-at-S-zero}
-sharpens the \emph{conditional exact fixed-shear} lane: if one does obtain an
-exact fixed-shear overlap reduction and the accumulation point lies off
+There are now two useful sharpenings.
+
+First,
+Proposition~\ref{prop:off-septic-zero-Kv-accumulation-is-mixed-low-order}
+shows that if a close mixed branch accumulates at a point with
 \[
 K_v=0,
+\qquad
+S\neq 0,
 \]
-then the complementary slice
+then
+\[
+J_\lambda=J_{u_5}=0,
+\]
+so that off the septic-zero slice the $K_v=0$ accumulation is already
+absorbed by the existing mixed low-order obstruction package.
+
+Second,
+Corollary~\ref{cor:fixed-shear-simple-septic-zero-off-Kv-transfers-to-nonmixed-four-point}
+shows that in the conditional exact fixed-shear overlap lane, the slice
 \[
 \{S=0\}\cap\{K_v\neq 0\}
 \]
-is already forced into a fold-type projection regime. So, in that fixed-shear lane, the remaining off-$K_v=0$ parity step is now
-best read as an absorption statement into the existing nonmixed odd-zero
-$\mathcal R$-package, rather than as a search for a new mixed carrier.
-This matches the mixed four-point closure: on the clean mixed side, the
-small-branch geometry is already funneled into the scalar exits
-\[
-T_v=0
-\qquad\text{or}\qquad
-\mathcal R=0,
-\]
-with the $K_v=0$ side absorbed by the lifted three-point package rather than
-surviving as an independent mixed lane. Thus any successful closure of the
-exact fixed-shear overlap route off $K_v=0$ would not open a new mixed local
-geometry, but would simply hand the branch into the same scalar
-$\mathcal R$-package that now governs the mixed four-point side.
-In particular, the only
-clearly genuinely mixed accumulation locus already visible on the overlap patch
-is
-\[
-K_v=0.
-\]
+is not a surviving mixed $2$-point carrier lane: it transfers into a local
+interval-persistent nonmixed $4$-point family and is therefore absorbed by
+the existing nonmixed $4$-point theory.
 
-What remains unresolved on the two-point side as a whole is therefore:
+Thus the derivative-geometric burden on the mixed two-point side is now sharply
+concentrated on the genuinely mixed residual locus
+\[
+K_v=0
+\]
+itself. The remaining unresolved work is therefore:
 the finite-order source-level merger route;
 the quotient-diagonal continuity/diagonal-collapse route; and, on the
-derivative-geometric side, either a projective control of the
+derivative-geometric side, a proof that close mixed $2$-point accumulation on
 \[
-S=0
+K_v=0
 \]
-slice without exact freezing, or a proof that the exact fixed-shear overlap
-lane is absorbed by the nonmixed odd-zero package. The explicit mixed low-order
-obstruction list remains the finite Wronskian-order list recorded in
-Remark~\ref{rem:wronskian-order-reformulation-mixed-list}.
-
-In particular, the mixed two-point overlap problem should no longer be viewed
-as a broad search for a new mixed geometric obstruction. After the mixed
-four-point closure, all three remaining two-point closure lanes already point
-toward the same scalar bad set
-\[
-\{K_v=0\}\cup\{\mathcal R=0\},
-\]
-up to already-absorbed lower-core / three-point handoffs. So the residual
-two-point burden is now best understood as a source-level or quotient-diagonal
-closure problem, not as an open mixed local branch-classification problem.
+is absorbed by the existing lifted $3$-point curvature/osculating machinery.
 \end{remark}
 
 \noindent\emph{Frame convention for the scalar block.}
@@ -21850,62 +21942,35 @@ What is now ruled out is the naive source-summed corrected-block route: its
 extracted one-atom finite-order coefficients are even in the source weight and
 therefore cannot supply the required linear merger law. On the mixed side,
 determinant-only and quotient-only arguments are likewise shear-blind. The
-genuinely new derivative-geometric lane is the $\lambda$-shear route on a
-good overlap patch, where
-\[
-\lambda=\frac{\Delta_7}{v_5}
-\]
-and an exact mixed branch generates moving shears
-\[
-(\eta_n,\xi_n,\gamma_n)
-\]
-for which
-\[
-A_n:=c-\eta_n\lambda,\qquad
-B_n:=v_5-\xi_n\lambda,\qquad
-F_n:=u_5-\gamma_n\lambda
-\]
-satisfy exact repeated-source transport along the branch. By
-Proposition~\ref{prop:projective-compactness-moving-lambda-shear-two-point},
-the automatic compactness is projective:
-\[
-[\delta_n(c):\delta_n(v_5):\delta_n(u_5):\delta_n(\lambda)]
-\]
-admits a convergent subsequence, and only on a subsequence whose limit lies in
-the affine $\lambda$-chart does one obtain a convergent affine
-$\lambda$-shear. Even then the frozen triple yields only asymptotic, not exact,
-fixed-shear transport. The associated projective secant shadow can nevertheless
-accumulate only on
+genuinely new derivative-geometric lane is the exact projective
+$\lambda$-shear / secant-shadow route on a good overlap patch.
+
+By
+Proposition~\ref{prop:conditional-mixed-lambda-shear-projective-shadow-reduction},
+a close exact mixed two-point bad branch can accumulate only on
 \[
 \{S=0\}\cup\{K_v=0\},
 \qquad
 S=\frac{\Delta_7}{c\,v_5}.
 \]
-So the remaining two-point work is either finite-order source-level merger,
-quotient-diagonal continuity/diagonal collapse, or source-coupled control of
-the mixed $\lambda$-shear exceptional loci. In the conditional exact
-fixed-shear overlap lane,
-Proposition~\ref{prop:fixed-shear-overlap-branch-off-Kv-forces-fold-at-S-zero}
-shows that the slice
+By
+Proposition~\ref{prop:off-septic-zero-Kv-accumulation-is-mixed-low-order},
+the part of $K_v=0$ with $S\neq 0$ is already absorbed by the existing
+mixed low-order obstruction package. By
+Corollary~\ref{cor:fixed-shear-simple-septic-zero-off-Kv-transfers-to-nonmixed-four-point},
+the conditional exact fixed-shear overlap lane on
 \[
 \{S=0\}\cap\{K_v\neq 0\}
 \]
-is already forced into a fold-type projection regime. Thus the only clearly genuinely mixed fixed-shear locus left on the overlap
-patch is
+transfers into the established nonmixed $4$-point geometry.
+
+So the remaining two-point work is either finite-order source-level merger,
+quotient-diagonal continuity/diagonal collapse, or a proof that close mixed
+two-point accumulation on
 \[
-K_v=0,
+K_v=0
 \]
-while the missing step off $K_v=0$ is its absorption into the existing
-nonmixed odd-zero
-\[
-\mathcal R=\frac{T_v}{K_v^2}
-\]
-package. This mirrors the four-point mixed-to-scalar picture, where the only
-live scalar exits are likewise funneled into the established $K_v$- and
-$\mathcal R$-packages rather than into new mixed carrier lanes.
-Accordingly, any eventual closure of the mixed two-point overlap route should
-be expected to land inside the same scalar architecture, rather than to produce
-a separate mixed-global endpoint.
+is absorbed by the existing lifted $3$-point curvature/osculating machinery.
 
 \item
 \textbf{Three-point branch (derivative-geometric layer now stabilized).}
@@ -22420,48 +22485,23 @@ the clean algebraic route, but the naive source-summed corrected block model
 cannot prove it: along a weighted one-atom path the extracted finite-order
 coefficients are even analytic in the source weight. So the remaining two-point
 issue now splits into three conditional lanes: the finite-order source-level
-merger route, the weaker quotient-diagonal exact exclusion route, and the mixed
-$\lambda$-shear / projective-shadow route on good overlap patches. In the last
-route, a close exact mixed two-point bad branch generates moving shears through
-\[
-\lambda=\frac{\Delta_7}{v_5},
-\]
-and
-Proposition~\ref{prop:projective-compactness-moving-lambda-shear-two-point}
-shows that the automatic compactness is projective:
-\[
-[\delta_n(c):\delta_n(v_5):\delta_n(u_5):\delta_n(\lambda)]
-\]
-admits a convergent subsequence. Only when the projective limit lies in the
-affine $\lambda$-chart does one obtain a convergent affine $\lambda$-shear
-subsequence, and even then the limiting triple yields only asymptotic, not
-exact, fixed-shear transport. The associated projective secant shadow can
-nevertheless accumulate only on
+merger route, the weaker quotient-diagonal exact exclusion route, and the exact
+projective $\lambda$-shear / secant-shadow route on good overlap patches. In
+the last route, a close exact mixed two-point bad branch can accumulate only on
 \[
 \{S=0\}\cup\{K_v=0\},
 \qquad
 S=\frac{\Delta_7}{c\,v_5}.
 \]
-In the additional conditional exact fixed-shear overlap lane,
-Proposition~\ref{prop:fixed-shear-overlap-branch-off-Kv-forces-fold-at-S-zero}
-shows that the slice
+Moreover, the off-septic-zero part of $K_v=0$ is already absorbed by the
+existing mixed low-order obstruction package, while in the conditional exact
+fixed-shear overlap lane the complementary slice
 \[
 \{S=0\}\cap\{K_v\neq 0\}
 \]
-is already forced into a fold-type projection regime. Thus the only clearly
-genuinely mixed fixed-shear locus left on the overlap patch is
-\[
-K_v=0,
-\]
-while the off-$K_v=0$ missing step is to match the resulting second-coordinate
-parity with the existing nonmixed odd-zero
-\[
-\mathcal R=\frac{T_v}{K_v^2}
-\]
-package. So the remaining two-point issue is no longer a single broad interaction
-ansatz, but a choice among these three explicit closure mechanisms, each of
-which already points toward the same scalar bad set $\{K_v=0\}\cup\{\mathcal
-R=0\}$ that now governs the mixed four-point side as well.
+transfers into the established nonmixed $4$-point geometry. So the genuinely
+remaining derivative-geometric two-point residue is now the $K_v=0$ lane
+itself, rather than the full union $\{S=0\}\cup\{K_v=0\}$.
 
 Second, on the lifted four-point branch, the explicit low-order obstruction
 list has been reduced to the six coefficients
@@ -22599,21 +22639,15 @@ contained entirely in
 on a nonplanar good patch, except after entry into already-absorbed
 affine-planar or lower-core regimes.
 
-So the present frontier is now best viewed as follows. On the two-point side,
-the remaining issue is still a choice among the finite-order source-level
-merger route, the quotient-diagonal exact exclusion route, and the mixed
-$\lambda$-shear / projective-shadow route on good overlap patches. On the
-four-point side, however, the geometry is now compressed all the way to the
-scalar exits: by
-Theorem~\ref{thm:global-mixed-to-scalar-capture-clean-patch}, every maximal
-genuinely mixed clean branch on a nonplanar good patch is forced into
+So the present frontier is no longer a generic local geometry problem. It is
+the combination of either a source-level or quotient-diagonal two-point closure
+theorem, or else a proof that close mixed two-point accumulation on
 \[
-T_v=0
-\qquad\text{or}\qquad
-\mathcal R=0,
+K_v=0
 \]
-up to already-absorbed planar, lower-core, repeated-node, repeated-source, and
-quintic-collapse regimes.
+is absorbed by the existing lifted $3$-point curvature/osculating machinery,
+together with the already-separated remaining issues on the higher-core
+branches.
 \end{remark}
 
 \begin{remark}[Two-point burden after mixed four-point closure]
@@ -22635,6 +22669,13 @@ up to already-absorbed three-point / lower-core handoffs. So any genuinely new
 input now needed on the two-point side is most naturally expected to be
 source-level or quotient-provenance structure, not another mixed local
 classification theorem.
+
+In the additional conditional exact fixed-shear overlap lane, this perspective
+becomes especially sharp: off $K_v=0$, the remaining task is best understood as
+absorption into the existing nonmixed odd-zero $\mathcal R$-package, while on
+the overlap exceptional slice the residual burden is naturally read as
+quotient-diagonal or source-provenance control rather than as a new mixed local
+classification problem.
 \end{remark}
 
 \begin{proposition}[$u_5$-chart exceptional-point handoff]
