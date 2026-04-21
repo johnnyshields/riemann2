@@ -1,0 +1,1656 @@
+proof_of_rh(211).tex
+File
+YOUR TASK: "source-coupling / odd-zero exclusion on opened nonmixed arcs"
+
+We are trying to prove the Riemann Hypothesis. Please see attached paper draft.
+
+Current status, in one paragraph:
+
+On the **nonmixed (4)-point side**, the local derivative-geometry story is essentially finished. Exact nonmixed contacts force zeros of (\mathcal R); one-sign (\mathcal R)-intervals are sterile; recurrent exact contacts force affine-planar collapse; isolated zeros of (\mathcal R) are classified by parity; and the repeated-source / first-loss mechanism is now fully reduced: first loss occurs **iff** one diagonally approaches an odd zero of (\mathcal R). So there is no separate first-loss obstruction left beyond odd-zero birth. Equivalently, on a nonmixed arc the whole burden is to exclude odd zeros of the source-level Wronskian
+[
+\mathcal W_{\mathrm{src}}=J_\lambda J_{u_5}'-J_{u_5}J_\lambda'.
+]
+At the same time, two no-go results are now clear: the current (3)-point package for the original planar curve ((x,S)) does **not** by itself contradict the sheared repeated-node tangent-contact event, and the current source-level ratio/Wronskian/(4\times4)-Wronskian package is still formally too free. So the missing ingredient is now a genuine **source-coupling / shear-transfer theorem**, not more local parity analysis. The repeated-source lane is closed cleanly by the theorem that first loss is exactly diagonal odd-zero birth.
+
+Your task: source-coupling / odd-zero exclusion on opened nonmixed arcs
+
+Read the latest draft and work only on the **source-level exclusion of odd zeros of**
+[
+\mathcal W_{\mathrm{src}}=J_\lambda J_{u_5}'-J_{u_5}J_\lambda'.
+]
+Please assume all currently established nonmixed local results, especially:
+
+* exact nonmixed contacts force zeros of (\mathcal R),
+* parity classification of isolated zeros of (\mathcal R),
+* recurrent exact contacts force affine-planar collapse,
+* (\mathcal W_{\mathrm{src}}) differs from (\mathcal R) by a nonvanishing analytic factor on a nonmixed arc,
+* first loss is exactly diagonal odd-zero birth for (\mathcal R),
+* and the current source-level ratio/Wronskian/(4\times4)-Wronskian package is formally too free.
+
+Your task is to find a genuinely **RH-specific source-coupling theorem** showing that odd zeros of (\mathcal W_{\mathrm{src}}) cannot actually occur on a genuine opened nonmixed arc, or at least that the **first odd zero** is impossible. Please do not spend time reproving the local parity/birth/sterility results. I want you to search for an extra identity or coupling in the genuine source data (c,v_5,\lambda,u_5) that is invisible from the generic ratio/Wronskian viewpoint and that kills odd zeros of (\mathcal W_{\mathrm{src}}).
+
+A good outcome would be any theorem of one of these forms:
+[
+\mathcal W_{\mathrm{src}}\neq 0 \text{ on opened nonmixed arcs,}
+]
+or
+[
+\text{the first odd zero of }\mathcal W_{\mathrm{src}}\text{ is impossible,}
+]
+or
+[
+\text{an odd zero of }\mathcal W_{\mathrm{src}}\text{ forces affine-planar collapse or a contradiction with another established package.}
+]
+
+I’m going into the draft to hunt for a source-level identity that couples (c,v5,λ,u5)(c,v5​,λ,u5​) more rigidly than the current ratio/Wronskian package, with special attention to what a first odd zero of WsrcWsrc​ would force.
+
+I’ve isolated the most promising latent structure in the draft so far: the closed minor system for (c,v5,Δ7)(c,v5​,Δ7​) and the dual tangent-line curve T=(β,m)T=(β,m). I’m checking whether a first odd zero of WsrcWsrc​ would force a forbidden re-entry or common-tangent phenomenon in that source geometry.
+
+I do not see a finished contradiction already latent in the current (Jλ,Ju5)(Jλ​,Ju5​​) package. The draft itself is honest about that: WsrcWsrc​ is the right scalar, but generic Wronskian algebra is still too free, so the missing step has to be a new coupling theorem rather than another parity computation (see the source-level Wronskian reduction around lines 12336–12416, the source-determinant reformulation around 14303–14370, and the explicit “what extra theorem is needed” remark around 14751–14770).
+
+The cleanest reduction I found is this:
+
+For each constant γγ, define the gauge/shear family
+fγ:=u5−γλ,Yγ:=Y−γS,Jγ:=W(c,v5,fγ)=Ju5−γJλ.
+fγ​:=u5​−γλ,Yγ​:=Y−γS,Jγ​:=W(c,v5​,fγ​)=Ju5​​−γJλ​.
+
+Because the draft already proves the affine gauge law
+u5↦u5+αc+βv5+γλ
+u5​↦u5​+αc+βv5​+γλ
+
+and the invariance of WsrcWsrc​ under it (lines 12363–12376), this is not an artificial deformation: it is exactly the natural gauge family already built into the source data.
+
+Then the key identities are:
+Yγ′′=c3M3Jγ,
+Yγ′′​=M3c3​Jγ​,
+
+so zeros of JγJγ​ are exactly curvature-zero points of the sheared planar curve
+Λγ=(x,Yγ).
+Λγ​=(x,Yγ​).
+
+Also,
+Jγ(h)=0  ⟺  γ=Ju5(h)Jλ(h)=Z(h).
+Jγ​(h)=0⟺γ=Jλ​(h)Ju5​​(h)​=Z(h).
+
+So the zero set of the family JγJγ​ is literally the graph
+γ=Z(h).
+γ=Z(h).
+
+And at a point with Jγ=0Jγ​=0,
+Jγ′=Ju5′−γJλ′=JλJu5′−Ju5Jλ′Jλ=WsrcJλ.
+Jγ′​=Ju5​′​−γJλ′​=Jλ​Jλ​Ju5​′​−Ju5​​Jλ′​​=Jλ​Wsrc​​.
+
+Hence
+Wsrc(b)=0
+Wsrc​(b)=0
+
+means exactly that the curvature-zero graph γ=Z(h)γ=Z(h) has a turning at h=bh=b. More sharply: an odd zero of WsrcWsrc​ is an odd-order turning of that graph.
+
+That gives the right reformulation of the nonmixed burden:
+
+    Odd-zero exclusion for WsrcWsrc​ is equivalent to excluding interior odd turnings of the curvature-zero locus of the sheared family Λγ=(x,Y−γS)Λγ​=(x,Y−γS).
+
+This is much better than attacking WsrcWsrc​ directly, because the rigidified first-loss event is already exactly a repeated-node tangent-contact event for one of these sheared curves. In source determinant language, if
+Dγ(a,h):=Du5(a,h)−γDλ(a,h),
+Dγ​(a,h):=Du5​​(a,h)−γDλ​(a,h),
+
+then Dγ(a,h)=0Dγ​(a,h)=0 is the secant/tangent incidence for ΛγΛγ​, and ∂hDγ(a,h)=0∂h​Dγ​(a,h)=0 is the repeated-node tangency condition. This is the source-level version of the sheared event the draft isolates around lines 14620–14770.
+
+So the theorem I would now target is:
+Uniform sheared 3-point nonrecurrence:
+Uniform sheared 3-point nonrecurrence:​
+
+For every constant γγ, on a genuine opened nonmixed arc, the repeated-node tangent branch for the sheared curve
+Λγ=(x,Y−γS)
+Λγ​=(x,Y−γS)
+
+cannot form a compact interior branch between two interior odd zeros of JγJγ​, unless Jγ≡0Jγ​≡0 on an interval (equivalently Y−γSY−γS is affine in xx, i.e. affine-planar collapse).
+
+Why this would kill odd zeros of WsrcWsrc​:
+
+Let bb be a first odd zero of WsrcWsrc​, and set
+γ∗:=Z(b).
+γ∗​:=Z(b).
+
+Then
+Jγ∗=Jλ(Z−γ∗)
+Jγ∗​​=Jλ​(Z−γ∗​)
+
+has an even-order zero at bb. Therefore for γγ on one side of γ∗γ∗​, arbitrarily close to γ∗γ∗​, the equation
+Jγ=0
+Jγ​=0
+
+has two nearby simple roots
+aγ<bγ
+aγ​<bγ​
+
+on the same nonmixed arc. At each simple root, the existing local 33-point theory for a planar curve gives the local repeated-node tangent branch for ΛγΛγ​. Since JγJγ​ keeps one sign on (aγ,bγ)(aγ​,bγ​), that branch is forced to live inside a compact interior block and terminate at the second root. That is exactly the compact interior sheared branch the theorem forbids. So the odd turning at bb cannot exist.
+
+In other words, the missing nonmixed theorem is not “WsrcWsrc​ never changes sign” in the abstract. It is this more structural statement:
+the gauge/shear family u5−γλ cannot support an interior two-ended repeated-node tangent branch.
+the gauge/shear family u5​−γλ cannot support an interior two-ended repeated-node tangent branch.​
+
+That is the RH-specific source-coupling theorem I would now pursue. It is stronger and sharper than the current remark at 14751–14770: it does not just say “transfer the sheared event somehow”; it says exactly what transfer is needed and in what family.
+
+I also think this meshes well with the draft’s existing global source geometry for
+(μ,λ)=(cv5,Δ7v5)
+(μ,λ)=(v5​c​,v5​Δ7​​)
+
+and the dual tangent-line curve
+T=(β,m)
+T=(β,m)
+
+from lines 8215–8414, plus the global no-reentry formulation around 17212–17253. My guess is that the eventual proof will have to show that the sheared family ΛγΛγ​ inherits a no-reentry principle from that genuine source graph, uniformly in γγ. That would be the real “source-coupling” bridge.
+
+So my bottom line is:
+
+    I do not think there is already a finished odd-zero exclusion hidden in the current determinant package.
+
+    I do think the right next theorem is a uniform sheared 33-point nonrecurrence theorem for
+    fγ=u5−γλ.
+    fγ​=u5​−γλ.
+
+    If you prove that theorem, the first odd zero of WsrcWsrc​ dies immediately, and in fact all odd zeros die on opened nonmixed arcs.
+
+If useful, I can turn this into a precise LaTeX insertion as a new proposition/remark package for the draft.
+
+attack the uniform sheared 3-point nonrecurrence theorem
+
+I’m drilling into the source-level sections around the sheared family and the no-reentry/global-contact parts, trying to see whether the compact two-ended branch can be ruled out directly or whether it only reduces to a sharper auxiliary lemma.
+
+I’ve now got the key reformulation in view: the problem is not a raw sign statement about WsrcWsrc​, but whether a sheared curvature-zero pair can generate a compact repeated-node branch that survives source transport. I’m reading the sheared rigidification section against the global tangent-line framework to see whether those two languages actually meet.
+
+I think this theorem is basically already available once you phrase it as a theorem about the sheared planar family itself rather than about the original Λv=(x,S)Λv​=(x,S).
+
+Set
+Fγ:=Y−γS,Jγ:=Ju5−γJλ.
+Fγ​:=Y−γS,Jγ​:=Ju5​​−γJλ​.
+
+Then on a nonmixed good v5v5​-patch,
+Fγ′′=Y′′−γS′′=c3M3(Ju5−γJλ)=c3M3Jγ.
+Fγ′′​=Y′′−γS′′=M3c3​(Ju5​​−γJλ​)=M3c3​Jγ​.
+
+So odd zeros of JγJγ​ are exactly odd curvature zeros of the sheared curve
+Λγ=(x,Fγ).
+Λγ​=(x,Fγ​).
+
+Now define the sheared repeated-node function
+H3,γ(a,u):=Fγ(u)−Fγ(a)−Fγ′(a)(u−a).
+H3,γ​(a,u):=Fγ​(u)−Fγ​(a)−Fγ′​(a)(u−a).
+
+Using
+Aa(u)=Y(u)−Y(a)−Y′(a)(u−a),Ba(u)=S(u)−S(a)−S′(a)(u−a),
+Aa​(u)=Y(u)−Y(a)−Y′(a)(u−a),Ba​(u)=S(u)−S(a)−S′(a)(u−a),
+
+and
+Γa(u)=Aa(u)Ba(u),
+Γa​(u)=Ba​(u)Aa​(u)​,
+
+one gets the exact factorization
+H3,γ(a,u)=Aa(u)−γBa(u)=Ba(u)(Γa(u)−γ).
+H3,γ​(a,u)=Aa​(u)−γBa​(u)=Ba​(u)(Γa​(u)−γ).
+
+Since Ba(u)≠0Ba​(u)=0 on an opened nonmixed arc,
+H3,γ(a,u)=0  ⟺  Γa(u)=γ.
+H3,γ​(a,u)=0⟺Γa​(u)=γ.
+
+Differentiating in uu,
+∂uH3,γ(a,u)=Ba′(u)(Γa(u)−γ)+Ba(u)Γa′(u),
+∂u​H3,γ​(a,u)=Ba′​(u)(Γa​(u)−γ)+Ba​(u)Γa′​(u),
+
+so on the zero set H3,γ=0H3,γ​=0,
+∂uH3,γ(a,u)=0  ⟺  Γa′(u)=0.
+∂u​H3,γ​(a,u)=0⟺Γa′​(u)=0.
+
+Thus the sheared repeated-node tangent-contact event is exactly
+Γa(u)=γ,Γa′(u)=0.
+Γa​(u)=γ,Γa′​(u)=0.
+
+That already tells you the right theorem to state:
+For every fixed γ, the sheared curve Λγ=(x,Fγ) has no interior repeated-node tangent-contact on its odd-zero branch.
+For every fixed γ, the sheared curve Λγ​=(x,Fγ​) has no interior repeated-node tangent-contact on its odd-zero branch.​
+
+A precise version is:
+
+Proposition (uniform sheared 33-point nonrecurrence).
+Let JJ be an opened nonmixed arc, fix γ∈Rγ∈R, and set
+Fγ=Y−γS.
+Fγ​=Y−γS.
+
+Let b∈Jb∈J be an odd-order zero of
+Jγ=Ju5−γJλ,
+Jγ​=Ju5​​−γJλ​,
+
+equivalently of Fγ′′Fγ′′​. Let I−γI−γ​ be the adjacent source interval on one side of bb where Fγ′′Fγ′′​ has fixed sign, and let I+γI+γ​ be the maximal interval to the other side on which Fγ′Fγ′​ is strictly monotone. Then the opposite-side branch of solutions to
+H3,γ(a,u)=0,a∈I−γ, u∈I+γ,
+H3,γ​(a,u)=0,a∈I−γ​, u∈I+γ​,
+
+born at bb, continues uniquely on the maximal slope-overlap block, and along that branch one has
+∂uH3,γ(a,u)≠0.
+∂u​H3,γ​(a,u)=0.
+
+Equivalently, on that branch there is no interior point with
+Γa(u)=γ,Γa′(u)=0.
+Γa​(u)=γ,Γa′​(u)=0.
+
+And the proof is just: apply your existing lifted 33-point theorems to the planar function FγFγ​ in place of SS.
+
+Nothing in the local odd-zero classification or in the global continuation / nonrecurrence theorem is special to the original channel SS. Those arguments are planar and use only:
+analyticity,odd-order zero of curvature,monotone-slope block.
+analyticity,odd-order zero of curvature,monotone-slope block.
+
+All of that holds verbatim for FγFγ​, because its curvature is exactly Fγ′′Fγ′′​, and its odd curvature zeros are exactly the odd zeros of JγJγ​.
+
+So the proof is:
+
+    Replace SS everywhere by FγFγ​.
+
+    Replace KvKv​ by JγJγ​ via
+    Fγ′′=c3M3Jγ.
+    Fγ′′​=M3c3​Jγ​.
+
+    Apply the existing local odd-order branch theorem.
+
+    Apply the existing global continuation / nonrecurrence theorem.
+
+    Translate back using
+    H3,γ=Ba(Γa−γ).
+    H3,γ​=Ba​(Γa​−γ).
+
+The key translated consequence is:
+H3,γ(a,u)=0, ∂uH3,γ(a,u)=0
+H3,γ​(a,u)=0, ∂u​H3,γ​(a,u)=0
+
+cannot occur in the interior of the branch block.
+
+So, in my view, the “uniform sheared 33-point nonrecurrence theorem” is not actually open. It is already a formal corollary of the current 33-point package once you let the planar function vary through the shear family FγFγ​.
+
+What remains open is narrower:
+
+you still need the source-coupling lemma that turns a first odd zero of
+Wsrc=JλJu5′−Ju5Jλ′
+Wsrc​=Jλ​Ju5​′​−Ju5​​Jλ′​
+
+into an actual point on one of these sheared branch curves satisfying
+Γa(u)=γ,Γa′(u)=0
+Γa​(u)=γ,Γa′​(u)=0
+
+for the relevant γγ.
+
+That is, the real unresolved step is no longer the sheared 33-point nonrecurrence itself. It is the level-hitting transfer
+from a critical point of ΓaΓa​ to a critical point at the distinguished level γγ.
+
+The clean takeaway is:
+
+    the γγ-family 33-point nonrecurrence is already in hand;
+
+    the missing theorem is now purely the source-level level-selection / coupling step.
+
+If you want, I’ll write this as an exact LaTeX proposition-plus-proof block that fits the draft.
+
+proof_of_rh(217).tex
+File
+yes, here's the latest draft, give me the latex+proof package
+yes, here's the latest draft, give me the latex insertion for the proposition-plus-proof block
+
+I’m checking the latest TeX for the exact surrounding notation and theorem names so the insertion matches your draft’s labels and doesn’t collide with existing symbols.
+
+Insert this immediately after Corollary~\ref{cor:diagonal-sheared-recurrence-forces-affine-planar-collapse} and before Remark~\ref{rem:source-level-form-of-shear-transfer}.
+
+\begin{proposition}[Uniform fixed-level nonrecurrence for the sheared $3$-point branch]
+\label{prop:uniform-fixed-level-nonrecurrence-sheared-three-point}
+Let $J$ be a connected opened nonmixed arc, fix a real scalar $\gamma$, and set
+\[
+\widetilde Y_\gamma:=Y-\gamma S=\frac{u_5-\gamma\lambda}{c},
+\qquad
+f_\gamma:=u_5-\gamma\lambda,
+\qquad
+J_\gamma:=J_{f_\gamma}=J_{u_5}-\gamma J_\lambda.
+\]
+Then
+\[
+\widetilde Y_\gamma''=\frac{c^3}{M^3}J_\gamma.
+\]
+
+Assume that $b\in J$ is an isolated finite-order odd zero of $J_\gamma$.
+After affine normalization of the planar curve
+\[
+(x,\widetilde Y_\gamma)
+\]
+at $b$, let
+\[
+I_-=(\alpha,0)
+\]
+be the source interval on which
+\[
+\widetilde Y_\gamma''<0,
+\]
+and let
+\[
+I_+=(0,\beta)
+\]
+be the maximal open interval to the right of $0$ on which
+\[
+\widetilde Y_\gamma'
+\]
+is strictly increasing. Set
+\[
+\mathcal J_\gamma:=\widetilde Y_\gamma'(I_-)\cap \widetilde Y_\gamma'(I_+).
+\]
+For
+\[
+m\in\mathcal J_\gamma,
+\]
+write
+\[
+a_\gamma(m):=(\widetilde Y_\gamma'|_{I_-})^{-1}(m),
+\]
+and define
+\[
+\widetilde H_{3,\gamma}(a,u):=
+\widetilde Y_\gamma(u)-\widetilde Y_\gamma(a)-\widetilde Y_\gamma'(a)(u-a).
+\]
+
+Then there exists a unique maximal open interval
+\[
+\mathcal J_{\gamma,\mathrm{br}}=(0,m_{\gamma,*})\subset \mathcal J_\gamma
+\]
+and a unique real-analytic function
+\[
+u_\gamma:\mathcal J_{\gamma,\mathrm{br}}\to I_+
+\]
+such that
+\[
+\widetilde H_{3,\gamma}(a_\gamma(m),u_\gamma(m))=0
+\qquad
+(m\in\mathcal J_{\gamma,\mathrm{br}}),
+\]
+and this branch agrees near $m=0$ with the unique local opposite-side branch
+born at the odd zero $b$.
+
+Moreover, along the whole branch one has
+\[
+\partial_u\widetilde H_{3,\gamma}(a_\gamma(m),u_\gamma(m))
+=
+\widetilde Y_\gamma'(u_\gamma(m))-m
+\neq 0,
+\]
+so there is no interior common-tangent event, no interior recurrence, and no
+interior accumulation. If
+\[
+m_{\gamma,*}<\sup\mathcal J_\gamma,
+\]
+then
+\[
+u_\gamma(m)\longrightarrow \beta
+\qquad (m\uparrow m_{\gamma,*}),
+\]
+so the branch can stop only by boundary exit of the relevant slope-overlap
+block.
+
+Equivalently, using
+\[
+\widetilde H_{3,\gamma}(a,u)=A_a(u)-\gamma B_a(u)
+=
+B_a(u)\bigl(\Gamma_a(u)-\gamma\bigr),
+\]
+one has along the branch
+\[
+\Gamma_{a_\gamma(m)}(u_\gamma(m))=\gamma,
+\qquad
+\Gamma_{a_\gamma(m)}'(u_\gamma(m))\neq 0.
+\]
+In particular, for every fixed $\gamma$, the distinguished level $\gamma$ of
+the repeated-source scalar $\Gamma_a$ has no interior critical point on the
+sheared odd-zero branch.
+\end{proposition}
+
+\begin{proof}
+By Remark~\ref{rem:below-lifted-wronskian-ratio-reformulation}, for any scalar
+germ $f$ one has
+\[
+\frac{d^2}{dx^2}\!\left(\frac{f}{c}\right)=\frac{c^3}{M^3}J_f.
+\]
+Applying this with
+\[
+f=f_\gamma=u_5-\gamma\lambda
+\]
+gives
+\[
+\widetilde Y_\gamma''=\frac{c^3}{M^3}J_\gamma.
+\]
+Hence $b$ is an isolated finite-order odd zero of $J_\gamma$ if and only if it
+is an isolated finite-order odd zero of the planar curvature
+\[
+\widetilde Y_\gamma''.
+\]
+
+Now apply
+Theorem~\ref{thm:local-classification-lifted-three-point-branch-near-Kv-zero}
+and
+Theorem~\ref{thm:global-continuation-nonrecurrence-odd-three-point-branch}
+with the affine-normalized analytic function
+\[
+\widetilde Y_\gamma
+\]
+playing the role of the planar graphing function $S$. The proofs of those
+results use only the planar repeated-node tangent-contact equation for the
+chosen analytic function, its curvature parity at the base point, and the
+maximal monotone-slope block on the opposite side. Therefore they apply
+verbatim to
+\[
+\widetilde H_{3,\gamma}(a,u)
+=
+\widetilde Y_\gamma(u)-\widetilde Y_\gamma(a)-\widetilde Y_\gamma'(a)(u-a),
+\]
+and yield the unique local opposite-side branch, its unique continuation on the
+maximal slope-overlap block, the nonvanishing of
+\[
+\partial_u\widetilde H_{3,\gamma},
+\]
+and the boundary-exit alternative. This proves the first part.
+
+For the reformulation in terms of $\Gamma_a$, note from the definitions of
+$A_a$, $B_a$, and $\Gamma_a$ that
+\[
+\widetilde H_{3,\gamma}(a,u)
+=
+\bigl(Y(u)-Y(a)-Y'(a)(u-a)\bigr)
+-\gamma\bigl(S(u)-S(a)-S'(a)(u-a)\bigr)
+=
+A_a(u)-\gamma B_a(u).
+\]
+Since
+\[
+A_a(u)=\Gamma_a(u)\,B_a(u),
+\]
+this becomes
+\[
+\widetilde H_{3,\gamma}(a,u)
+=
+B_a(u)\bigl(\Gamma_a(u)-\gamma\bigr).
+\]
+By Proposition~\ref{prop:quadratic-envelope-factorization-nonmixed},
+\[
+B_a(u)\neq 0
+\qquad (u\neq a),
+\]
+so along the branch
+\[
+\widetilde H_{3,\gamma}(a_\gamma(m),u_\gamma(m))=0
+\iff
+\Gamma_{a_\gamma(m)}(u_\gamma(m))=\gamma.
+\]
+
+Differentiating
+\[
+\widetilde H_{3,\gamma}(a,u)=B_a(u)\bigl(\Gamma_a(u)-\gamma\bigr)
+\]
+with respect to $u$ gives
+\[
+\partial_u\widetilde H_{3,\gamma}(a,u)
+=
+B_a'(u)\bigl(\Gamma_a(u)-\gamma\bigr)+B_a(u)\Gamma_a'(u).
+\]
+On the branch, where
+\[
+\Gamma_a(u)=\gamma,
+\]
+this simplifies to
+\[
+\partial_u\widetilde H_{3,\gamma}(a,u)=B_a(u)\Gamma_a'(u).
+\]
+Since the first part already gives
+\[
+\partial_u\widetilde H_{3,\gamma}(a_\gamma(m),u_\gamma(m))\neq 0
+\]
+and
+\[
+B_{a_\gamma(m)}(u_\gamma(m))\neq 0,
+\]
+it follows that
+\[
+\Gamma_{a_\gamma(m)}'(u_\gamma(m))\neq 0
+\]
+along the whole branch. This proves the final statement.
+\end{proof}
+
+One small follow-up edit I’d make after inserting this: in Remark~\ref{rem:effect-of-shear-transfer-on-first-loss}, add one sentence referencing Proposition~\ref{prop:uniform-fixed-level-nonrecurrence-sheared-three-point} to make explicit that the fixed-γγ sheared branch itself is already globally rigid, and that the remaining issue is only the level-selection/source-coupling step.
+
+give me that extra sentence in latex form
+
+Add this sentence near the end of Remark~\ref{rem:effect-of-shear-transfer-on-first-loss}:
+
+Proposition~\ref{prop:uniform-fixed-level-nonrecurrence-sheared-three-point}
+shows that for each fixed shear level $\gamma$, the corresponding sheared
+opposite-side $3$-point branch is already globally rigid on its maximal
+slope-overlap block: it has no interior common-tangent event, no interior
+recurrence, and no interior accumulation. Thus the remaining issue is not
+sheared $3$-point recurrence at fixed $\gamma$, but the source-coupling /
+level-selection step that would force the distinguished level
+$\gamma=\mathcal Z(b)$ arising from a hypothetical odd zero of
+$\mathcal W_{\mathrm{src}}$ to be hit by the relevant critical-value
+configuration of $\Gamma_a$.
+
+
+anything more we can do on this line of attack?
+
+I’m checking whether this line can be pushed one more step past the fixed-γγ nonrecurrence corollary—either by extracting a level-selection lemma from the current ΓaΓa​-geometry, or by identifying the exact new statement the draft still lacks.
+
+Yes. There is one more real move here, and it is much narrower now.
+
+What the fixed-γγ package buys you is this: once γγ is frozen, the sheared branch itself is no longer the problem. The only remaining issue is whether the distinguished level
+γ=Z(a)
+γ=Z(a)
+
+can be forced into the bad configuration. So the next attack should be a two-root chamber lemma near a first odd zero.
+
+Assume bb is a first odd zero of WsrcWsrc​, equivalently of R=Z′R=Z′, on an opened nonmixed arc. Then bb is a strict local extremum of ZZ. For γγ close to Z(b)Z(b) on the admissible side, there are exactly two nearby points
+r−(γ)<b<r+(γ)
+r−​(γ)<b<r+​(γ)
+
+with
+Z(r−(γ))=Z(r+(γ))=γ,
+Z(r−​(γ))=Z(r+​(γ))=γ,
+
+and on the chamber
+(r−(γ),r+(γ))
+(r−​(γ),r+​(γ))
+
+the function
+ϕγ(t):=Z(t)−γ
+ϕγ​(t):=Z(t)−γ
+
+has a fixed sign.
+
+That gives two very useful identities for the sheared family
+Y~γ:=Y−γS.
+Y
+γ​:=Y−γS.
+
+For any source point aa and target u>au>a,
+∂uH~3,γ(a,u)=∫auϕγ(t) S′′(t) dt,
+∂u​H
+3,γ​(a,u)=∫au​ϕγ​(t)S′′(t)dt,
+
+and
+H~3,γ(a,u)=∫au(u−t) ϕγ(t) S′′(t) dt.
+H
+3,γ​(a,u)=∫au​(u−t)ϕγ​(t)S′′(t)dt.
+
+So inside a two-root chamber, where ϕγϕγ​ has one sign and S′′S′′ has one sign on the opened nonmixed arc, both of these quantities have controlled sign. In particular, a sheared repeated-node event
+H~3,γ(a,u)=0,∂uH~3,γ(a,u)=0
+H
+3,γ​(a,u)=0,∂u​H
+3,γ​(a,u)=0
+
+cannot occur entirely inside the chamber.
+
+That means the next target is not another parity theorem. It is this:
+chamber-escape ⟹ interior common tangent.
+chamber-escape ⟹ interior common tangent.​
+
+A clean version to try proving is:
+
+    Candidate chamber-escape lemma.
+    Fix γγ near Z(b)Z(b), and let r−(γ)<b<r+(γ)r−​(γ)<b<r+​(γ) be the two nearby roots of Z=γZ=γ. Let uγuγ​ be the fixed-γγ opposite-side 33-point branch from Proposition~\ref{prop:uniform-fixed-level-nonrecurrence-sheared-three-point}. If that branch ever exits the chamber (r−(γ),r+(γ))(r−​(γ),r+​(γ)), then for some parameter value it must satisfy
+    H~3,γ(a,u)=0,∂uH~3,γ(a,u)=0.
+    H
+    3,γ​(a,u)=0,∂u​H
+    3,γ​(a,u)=0.
+
+    Hence, by Proposition~\ref{prop:sheared-repeated-node-forces-two-R-zeros}, a first odd zero is impossible.
+
+That would finish the first-odd-zero exclusion, because near a first odd zero there are no other RR-zeros available for the “two interior zeros” alternative.
+
+There are two concrete ways to attack that lemma.
+
+First, work with
+M(a,u):=Ba(u)2 Γa′(u).
+M(a,u):=Ba​(u)2Γa′​(u).
+
+On the fixed-γγ branch, where Γa(u)=γΓa​(u)=γ, you have
+M(a,u)=Ba(u) ∂uH~3,γ(a,u),
+M(a,u)=Ba​(u)∂u​H
+3,γ​(a,u),
+
+and
+∂uM(a,u)=S′′(u) Ba(u) (Z(u)−γ).
+∂u​M(a,u)=S′′(u)Ba​(u)(Z(u)−γ).
+
+Inside the two-root chamber, Z(u)−γZ(u)−γ has fixed sign, so MM is monotone along the branch there. If you can compute the sign of MM near branch birth and compare it to the sign forced at chamber exit, then the intermediate value theorem gives an interior zero of MM, i.e. an interior common tangent.
+
+Second, parameterize the fixed-γγ branch by slope mm, exactly as in the ordinary 33-point theorem, but now for
+Fγ:=Y~γ.
+Fγ​:=Y
+γ​.
+
+Then compare the branch target uγ(m)uγ​(m) with the chamber boundary r+(γ)r+​(γ). If you can show the branch cannot stay entirely on one side of r+(γ)r+​(γ) as mm varies from birth to maximal continuation, then some intermediate parameter must hit the boundary. Combined with the sign formulas above, that should force a common tangent before exit.
+
+So yes: there is more to do on this line, but it is now very specific. I would not keep attacking WsrcWsrc​ abstractly. I would attack this exact statement:
+fixed-γ sheared branch cannot escape a two-root chamber without first losing monotonicity.
+fixed-γ sheared branch cannot escape a two-root chamber without first losing monotonicity.
+
+That is the sharpest remaining bridge between the sheared 33-point package and first odd-zero exclusion.
+
+If you want, I can turn that into a precise LaTeX “next theorem / next lemma” package for the draft.
+
+attack that statement
+
+I’m checking the exact branch parameterizations and the sheared two-Z=γZ=γ chamber identities in the draft, so I can see whether the chamber-escape claim truly follows or whether there’s still a hidden gap.
+
+I attacked it, and the honest result is a no-go:
+
+the proposed “two-root chamber escape forces an interior common tangent” statement is false at the current fixed-γγ sheared 33-point level.
+
+The reason is structural. If γγ is fixed and
+Jγ=(Z−γ)Jλ
+Jγ​=(Z−γ)Jλ​
+
+has two simple zeros
+r−<r+,
+r−​<r+​,
+
+then for the sheared planar function
+Fγ:=Y−γS
+Fγ​:=Y−γS
+
+one has
+Fγ′′=(Z−γ)S′′,
+Fγ′′​=(Z−γ)S′′,
+
+so the maximal opposite-side monotone target block issued from r−r−​ is typically just
+I+=(r−,r+).
+I+​=(r−​,r+​).
+
+Your global 33-point theorem already allows the branch to stop by boundary exit
+u→r+,
+u→r+​,
+
+and nothing in that theorem forces
+∂uH3,γ=0
+∂u​H3,γ​=0
+
+at that boundary.
+
+There is an explicit local normal-form model showing this.
+
+Take the normalized nonmixed planar model
+S(x)=x2,Z(x)=1−x2,R(x)=Z′(x)=−2x.
+S(x)=x2,Z(x)=1−x2,R(x)=Z′(x)=−2x.
+
+Then x=0x=0 is an isolated odd zero of RR, and for the fixed level
+γ=0
+γ=0
+
+the sheared curvature is
+F′′(x)=(Z(x)−γ)S′′(x)=2(1−x2),
+F′′(x)=(Z(x)−γ)S′′(x)=2(1−x2),
+
+so the two γγ-roots are
+r−=−1,r+=1.
+r−​=−1,r+​=1.
+
+Choose
+F(x)=x2−x46,
+F(x)=x2−6x4​,
+
+so that indeed
+F′′(x)=2(1−x2).
+F′′(x)=2(1−x2).
+
+Then the repeated-node equation
+H(a,u):=F(u)−F(a)−F′(a)(u−a)=0
+H(a,u):=F(u)−F(a)−F′(a)(u−a)=0
+
+factorizes exactly as
+H(a,u)=−(u−a)26 (3a2+2au+u2−6).
+H(a,u)=−6(u−a)2​(3a2+2au+u2−6).
+
+Hence the nontrivial opposite-side branch born at r−=−1r−​=−1 is
+u(a)=−a−6−2a2,−53<a<−1.
+u(a)=−a−6−2a2
+​,−35​<a<−1.
+
+This is the branch that starts at (a,u)=(−1,−1)(a,u)=(−1,−1) and runs inside the chamber
+−1<u(a)<1.
+−1<u(a)<1.
+
+Now
+∂uH(a,u)=F′(u)−F′(a)=−u−a3 (a2+au+u2−3).
+∂u​H(a,u)=F′(u)−F′(a)=−3u−a​(a2+au+u2−3).
+
+Along the branch u=u(a)u=u(a), one checks that
+a2+au+u2−3<0(−53<a<−1),
+a2+au+u2−3<0(−35​<a<−1),
+
+so
+∂uH(a,u(a))>0(−53<a<−1).
+∂u​H(a,u(a))>0(−35​<a<−1).
+
+Thus there is no interior common tangent anywhere on the branch.
+
+But as a↓−53a↓−35​,
+u(a)↑1=r+.
+u(a)↑1=r+​.
+
+So the branch simply runs from the left odd zero to the right chamber boundary and stops there by boundary exit, with
+∂uH≠0
+∂u​H=0
+
+all the way.
+
+In fact, if one ignores the monotone-block restriction and keeps following the same algebraic branch, the first common tangent occurs only later at
+(a,u)=(−3,3),
+(a,u)=(−3
+​,3
+​),
+
+strictly after the chamber boundary has already been crossed. So even the stronger fantasy statement
+“once the branch leaves the chamber, it must already have hit ∂uH=0”
+“once the branch leaves the chamber, it must already have hit ∂u​H=0”
+
+is false in the model.
+
+So this attack route does not close the odd-zero problem. It shows something important instead:
+fixed-γ sheared 3-point geometry is still too free.
+fixed-γ sheared 3-point geometry is still too free.​
+
+The surviving gap is therefore more specific than “chamber escape.” The missing theorem has to use the source-pinned moving shear
+fa=u5−Z(a)λ,
+fa​=u5​−Z(a)λ,
+
+not a frozen γγ. In the rigidified first-loss event, the source point aa itself satisfies
+Jfa(a)=0,Γa(x)=Z(a),Γa′(x)=0,
+Jfa​​(a)=0,Γa​(x)=Z(a),Γa′​(x)=0,
+
+and that source pinning is exactly what the fixed-γγ model above does not encode.
+
+So the right conclusion is:
+
+    the uniform fixed-γγ nonrecurrence theorem is fine;
+
+    the proposed chamber-escape lemma is false;
+
+    the next theorem has to be genuinely source-coupled, not just a stronger frozen-level planar statement.
+
+A clean thing to add to the draft would be a short no-go remark recording this normal-form counterexample, so you do not keep trying to prove a false intermediate lemma.
+
+proof_of_rh(225).tex
+File
+ok please give me the latex insertion to add to this draft
+
+I’m finding the exact neighborhood around the new sheared-branch proposition and the first-loss/source-coupling remarks so the no-go remark lands in the right place and points at the right labels.
+
+Insert this immediately after Proposition~\ref{prop:uniform-fixed-level-nonrecurrence-sheared-three-point} and its proof, and before Remark~\ref{rem:source-level-form-of-shear-transfer}.
+
+\begin{remark}[No-go for the fixed-level chamber-exit route]
+\label{rem:no-go-fixed-level-chamber-exit-route}
+One might hope to strengthen
+Proposition~\ref{prop:uniform-fixed-level-nonrecurrence-sheared-three-point}
+as follows: if a fixed level $\gamma$ is chosen near a strict local extremum of
+$\mathcal Z$, so that
+\[
+J_\gamma=(\mathcal Z-\gamma)J_\lambda
+\]
+has two nearby simple zeros
+\[
+r_-<r_+,
+\]
+then the corresponding sheared opposite-side $3$-point branch should be unable
+to reach the chamber boundary $u=r_+$ without first encountering an interior
+common-tangent point
+\[
+\partial_u \widetilde H_{3,\gamma}=0.
+\]
+This is false already at the level of the local planar/sheared equations.
+
+Indeed, consider the model functions
+\[
+S_{\mathrm{mod}}(x):=x^2,
+\qquad
+\mathcal Z_{\mathrm{mod}}(x):=1-x^2,
+\qquad
+\mathcal R_{\mathrm{mod}}(x):=\mathcal Z_{\mathrm{mod}}'(x)=-2x,
+\]
+and fix the level
+\[
+\gamma:=0.
+\]
+Set
+\[
+F_{\mathrm{mod}}(x):=x^2-\frac{x^4}{6}.
+\]
+Then
+\[
+F_{\mathrm{mod}}''(x)=2(1-x^2)
+=
+(\mathcal Z_{\mathrm{mod}}(x)-\gamma)\,S_{\mathrm{mod}}''(x),
+\]
+so the two simple zeros of the sheared curvature are
+\[
+r_-=-1,
+\qquad
+r_+=1.
+\]
+
+Let
+\[
+H_{\mathrm{mod}}(a,u):=
+F_{\mathrm{mod}}(u)-F_{\mathrm{mod}}(a)-F_{\mathrm{mod}}'(a)(u-a).
+\]
+A direct computation gives
+\[
+H_{\mathrm{mod}}(a,u)
+=
+-\frac{(u-a)^2}{6}\,
+\bigl(3a^2+2au+u^2-6\bigr).
+\]
+Hence the nontrivial opposite-side branch issued from the odd zero $r_-=-1$ is
+\[
+u(a)=-a-\sqrt{6-2a^2},
+\qquad
+-\frac53<a<-1.
+\]
+Along this branch one has
+\[
+-1<u(a)<1,
+\qquad
+u(a)\uparrow 1
+\quad\text{as}\quad
+a\downarrow -\frac53,
+\]
+so the branch runs inside the chamber and stops by boundary exit at the second
+curvature zero.
+
+Moreover,
+\[
+\partial_u H_{\mathrm{mod}}(a,u)
+=
+F_{\mathrm{mod}}'(u)-F_{\mathrm{mod}}'(a)
+=
+-\frac{u-a}{3}\,\bigl(a^2+au+u^2-3\bigr).
+\]
+Substituting $u=u(a)$ yields
+\[
+a^2+a\,u(a)+u(a)^2-3
+=
+-a^2+a\sqrt{6-2a^2}+3<0
+\qquad
+\left(-\frac53<a<-1\right),
+\]
+and therefore
+\[
+\partial_u H_{\mathrm{mod}}(a,u(a))>0
+\qquad
+\left(-\frac53<a<-1\right).
+\]
+So there is \emph{no} interior common-tangent point anywhere on the branch
+before boundary exit. In fact, if one continues the same algebraic branch past
+the chamber boundary, the first common tangent occurs only later at
+\[
+(a,u)=(-\sqrt3,\sqrt3),
+\]
+strictly after the chamber has already been crossed.
+
+Thus fixed-level sheared nonrecurrence cannot be sharpened to a chamber-exit
+contradiction by planar arguments alone. The remaining obstruction is therefore
+genuinely source-coupled: any successful odd-zero exclusion must use the
+source-pinned moving shear
+\[
+f_a=u_5-\mathcal Z(a)\lambda
+\]
+or some equivalent RH-specific coupling, rather than only a frozen level
+$\gamma$ and the planar branch geometry of
+\[
+\widetilde Y_\gamma=Y-\gamma S.
+\]
+\end{remark}
+
+A useful follow-up is to add one sentence to Remark~\ref{rem:effect-of-shear-transfer-on-first-loss} pointing back to this no-go remark, so the draft explicitly records that the fixed-γγ route has been exhausted.
+
+A useful follow-up is to add one sentence to Remark~\ref{rem:effect-of-shear-transfer-on-first-loss} pointing back to this no-go remark, so the draft explicitly records that the fixed-γ route has been exhausted.
+
+give me the latex for this too
+
+Add this sentence near the end of Remark~\ref{rem:effect-of-shear-transfer-on-first-loss}, after the sentence referencing Proposition~\ref{prop:uniform-fixed-level-nonrecurrence-sheared-three-point}:
+
+Remark~\ref{rem:no-go-fixed-level-chamber-exit-route} shows that this fixed-level route cannot be pushed further by planar chamber-exit arguments alone: even with two nearby roots of $\mathcal Z=\gamma$, the sheared opposite-side branch may run to the second curvature zero by boundary exit without any interior common-tangent event. Thus the remaining step must be genuinely source-coupled, involving the source-pinned moving shear
+\[
+f_a=u_5-\mathcal Z(a)\lambda
+\]
+or an equivalent RH-specific coupling, rather than only the frozen-level geometry of
+\[
+\widetilde Y_\gamma=Y-\gamma S.
+\]
+
+
+proof_of_rh(231).tex
+File
+Pasted markdown(48).md
+File
+here's the latest draft. we're now doing the described attack. You attack the 1. A level-set / barrier theorem for Z
+
+I’m going after the level-set/barrier route directly: looking at the first-root transport identities and the current ZZ-level geometry between adjacent odd zeros, to see whether the first rooted point can be excluded by a counting or monotonicity obstruction rather than another sheared-planar argument.
+
+I attacked it, and I do not think the bare level-set / barrier theorem for ZZ is true in the form suggested by the note. The note’s proposed input data were exactly the first-root identities
+G(a∗)=0,G′(a∗)=−R(a∗),τ′(a∗)=0,
+G(a∗​)=0,G′(a∗​)=−R(a∗​),τ′(a∗​)=0,
+
+together with the fact that a rooted event forces two interior recrossings of the level
+Z(r)=Z(a∗).
+Z(r)=Z(a∗​).
+
+That is the right bottleneck to inspect, but it is still too weak by itself.
+
+Here is an explicit normalized polynomial model showing that this level-set geometry can occur with exactly two simple odd zeros of RR and with a nondegenerate rooted critical pair.
+
+Work on the normalized interval [a,x]=[0,1][a,x]=[0,1], with
+S(t)=t2,Γa=Da,
+S(t)=t2,Γa​=Da​,
+
+and prescribe
+R(t):=5t3+5t2−7t+1.
+R(t):=5t3+5t2−7t+1.
+
+This cubic has exactly two simple zeros in (0,1)(0,1), numerically
+t≈0.165726,t≈0.660736,
+t≈0.165726,t≈0.660736,
+
+and one third real zero outside the interval, at
+t≈−1.826462.
+t≈−1.826462.
+
+So on [0,1][0,1] the sign pattern is
++,−,+,
++,−,+,
+
+with exactly two odd sign changes.
+
+Now set
+Z(t):=∫0tR(u) du=t−72t2+53t3+54t4,
+Z(t):=∫0t​R(u)du=t−27​t2+35​t3+45​t4,
+
+so that
+Z′(t)=R(t),Z(0)=0.
+Z′(t)=R(t),Z(0)=0.
+
+Choose any analytic Y~Y
+with
+12 Y~′′=Z,
+21​Y
+′′=Z,
+
+equivalently
+Y~′′(t)=2Z(t).
+Y
+′′(t)=2Z(t).
+
+Then, exactly as in the normalized draft formulas, the rooted critical conditions at the pair (a,x)=(0,1)(a,x)=(0,1) are
+D0′(1)=2∫01s(1−s) R(s) ds,
+D0′​(1)=2∫01​s(1−s)R(s)ds,
+
+and
+D0(1)−Z(0)=∫01(1−s)2 R(s) ds.
+D0​(1)−Z(0)=∫01​(1−s)2R(s)ds.
+
+For this RR, both moments vanish:
+∫01s(1−s) R(s) ds=0,∫01(1−s)2 R(s) ds=0.
+∫01​s(1−s)R(s)ds=0,∫01​(1−s)2R(s)ds=0.
+
+So
+D0′(1)=0,D0(1)=Z(0).
+D0′​(1)=0,D0​(1)=Z(0).
+
+That is an exact rooted repeated-source critical pair.
+
+It is also nondegenerate. Indeed,
+D0′′(1)=2∫01s2 R(s) ds=2⋅512=56>0.
+D0′′​(1)=2∫01​s2R(s)ds=2⋅125​=65​>0.
+
+So the implicit function theorem gives a real-analytic critical branch
+x=τ(a)
+x=τ(a)
+
+through
+τ(0)=1,Da′(τ(a))=0,
+τ(0)=1,Da′​(τ(a))=0,
+
+and at the rooted point one gets the stationary-target behavior
+τ′(0)=0.
+τ′(0)=0.
+
+Also, since G(a)=V(a)−Z(a)G(a)=V(a)−Z(a) with V(a)=Da(τ(a))V(a)=Da​(τ(a)), one has
+G(0)=0,G′(0)=−R(0)=−1.
+G(0)=0,G′(0)=−R(0)=−1.
+
+So even the sharp first-root transport identities from the note are realized here.
+
+The level-set recrossing also happens exactly as desired. Since
+Z(t)=t−72t2+53t3+54t4,
+Z(t)=t−27​t2+35​t3+45​t4,
+
+the equation
+Z(t)=Z(0)=0
+Z(t)=Z(0)=0
+
+has two interior solutions:
+t≈0.368001,t≈0.851550.
+t≈0.368001,t≈0.851550.
+
+So the rooted point comes with precisely the kind of “two interior recrossings of the moving level” that the proposed barrier theorem wanted to forbid.
+
+That means the honest conclusion is:
+adjacent-odd-zero level geometry of Z does not by itself exclude a first rooted point.
+adjacent-odd-zero level geometry of Z does not by itself exclude a first rooted point.​
+
+What this kills is not the entire adjacent-odd-zero program, but the pure ZZ-level-set version of it. A theorem using only:
+Z′(t)=R(t),G(a∗)=0,G′(a∗)=−R(a∗),τ′(a∗)=0,
+Z′(t)=R(t),G(a∗​)=0,G′(a∗​)=−R(a∗​),τ′(a∗​)=0,
+
+plus “there are two interior solutions of Z(r)=Z(a∗)Z(r)=Z(a∗​),”
+
+cannot be enough. This model satisfies all of that.
+
+So the route is not dead, but it has to be strengthened. The surviving possibility is a theorem that uses more than level topology—for example:
+
+    the fact that (a,τ(a))(a,τ(a)) lies on the continued born branch, not just on some local critical branch;
+
+    the sign information already proved on the one-sign-change chamber, especially the transport law for GG and the monotonicity τ′(a)<0τ′(a)<0 before the second odd zero enters;
+
+    or a genuinely source-level restriction involving ΨaΨa​ or the source-pinned shear fa=u5−Z(a)λfa​=u5​−Z(a)λ, rather than only the scalar graph of ZZ.
+
+So this attack produced a useful no-go: the next theorem cannot be a bare “level-set/barrier theorem for ZZ” alone. It must remember the branch provenance or the source coupling.
+
+can you write a quick no-go latex insertion for the paper?
+
+I’m just checking the latest label neighborhood so the no-go remark points at the right propositions and doesn’t collide with what’s already in the draft.
+
+Insert this immediately after Remark~\ref{rem:minimal-unresolved-configuration-repeated-source}.
+
+\begin{remark}[No-go for a pure level-set / barrier theorem for $\mathcal Z$]
+\label{rem:no-go-pure-level-set-barrier-for-Z}
+A natural next guess would be that the remaining adjacent-odd-zero case could be
+excluded by a theorem depending only on the level geometry of
+\[
+\mathcal Z,\qquad \mathcal R=\mathcal Z',
+\]
+together with the first-root transport identities
+\[
+G(a_*):=V(a_*)-\mathcal Z(a_*)=0,
+\qquad
+G'(a_*)=-\mathcal R(a_*),
+\qquad
+\tau'(a_*)=0,
+\]
+and the fact that a rooted point forces two interior recrossings of the level
+\[
+\mathcal Z(r)=\mathcal Z(a_*).
+\]
+At the current level of abstraction this is false: the level-set geometry of
+$\mathcal Z$ alone is still too free.
+
+Indeed, already in the normalized planar determinant model one can realize all
+of the above with exactly two simple odd zeros of $\mathcal R$ and with a
+nondegenerate rooted critical pair. Take
+\[
+S(t)=t^2,
+\qquad
+\mathcal R(t)=5t^3+5t^2-7t+1,
+\qquad
+\mathcal Z(t)=\int_0^t \mathcal R(u)\,du
+=
+t-\frac72 t^2+\frac53 t^3+\frac54 t^4.
+\]
+Then $\mathcal R$ has exactly two simple zeros in $(0,1)$, numerically
+\[
+t\approx 0.165726,
+\qquad
+t\approx 0.660736,
+\]
+so on $[0,1]$ the sign pattern is $+,-,+$ with exactly two odd sign changes.
+Now choose an analytic function $\widetilde Y$ such that
+\[
+\frac12\,\widetilde Y''=\mathcal Z.
+\]
+For the normalized determinant function $D_a(x)$ associated to
+$(x,\widetilde Y)$, the rooted critical conditions at $(a,x)=(0,1)$ become
+\[
+D_0'(1)=2\int_0^1 s(1-s)\,\mathcal R(s)\,ds,
+\qquad
+D_0(1)-\mathcal Z(0)=\int_0^1 (1-s)^2\,\mathcal R(s)\,ds.
+\]
+For this $\mathcal R$, both moments vanish:
+\[
+\int_0^1 s(1-s)\,\mathcal R(s)\,ds=0,
+\qquad
+\int_0^1 (1-s)^2\,\mathcal R(s)\,ds=0.
+\]
+Hence
+\[
+D_0'(1)=0,
+\qquad
+D_0(1)=\mathcal Z(0),
+\]
+so $(0,1)$ is an exact rooted repeated-source critical pair.
+
+Moreover,
+\[
+D_0''(1)=2\int_0^1 s^2\,\mathcal R(s)\,ds=\frac56>0,
+\]
+so the critical branch is nondegenerate and the implicit-function theorem gives
+a real-analytic continuation
+\[
+x=\tau(a),
+\qquad
+\tau(0)=1,
+\qquad
+\tau'(0)=0.
+\]
+Also, with
+\[
+V(a):=D_a(\tau(a)),
+\qquad
+G(a):=V(a)-\mathcal Z(a),
+\]
+one has at the rooted point
+\[
+G(0)=0,
+\qquad
+G'(0)=-\mathcal R(0)=-1.
+\]
+
+Finally, the level equation
+\[
+\mathcal Z(t)=\mathcal Z(0)=0
+\]
+has two interior solutions,
+\[
+t\approx 0.368001,
+\qquad
+t\approx 0.851550,
+\]
+so the rooted point comes with exactly the two interior recrossings of the
+moving level demanded by the source-pinned shear picture.
+
+Thus a theorem using only the scalar level-set topology of $\mathcal Z$
+together with the first-root identities above cannot suffice to exclude the
+remaining adjacent-odd-zero configuration. Any successful next step must use
+additional structure: either the provenance of $(a,\tau(a))$ as the
+\emph{continued born branch}, or a genuinely source-coupled constraint such as
+the moving shear
+\[
+f_a=u_5-\mathcal Z(a)\lambda,
+\]
+rather than only the abstract level geometry of $\mathcal Z$.
+\end{remark}
+
+If you want a slightly shorter version for the draft’s style, I can compress this by about a third without losing the point.
+
+attack branch provenance
+
+I’m switching from pure level topology to the extra datum the counterexample lacked: that (a,τ(a))(a,τ(a)) is not just any rooted critical pair, but the continuation of the born branch from the earlier odd zero. I’m checking whether that provenance forces a sign or monotonicity invariant that the abstract countermodels cannot satisfy.
+
+I’ve narrowed the real question: does being the continued branch born at the first odd zero impose an extra invariant beyond the transport ODE and two-sign-change geometry? I’m testing the strongest possibility—whether even that provenance can still be realized in a planar model—because if so, this route needs a genuinely source-level input, not just branch continuation.
+
+I attacked it, and my honest read is: branch provenance alone is still not enough, at least at the planar normalized DaDa​-level. This directly hits the “continued born branch / first rooted point” bottleneck from your note.
+
+The strongest thing I found is a concrete normalized polynomial no-go model.
+
+Take the planar normalized setting
+S(t)=t2,Γa=Da,Z′=R,
+S(t)=t2,Γa​=Da​,Z′=R,
+
+with
+R(t):=t(t−1)(t2−4t−2)=t4−5t3+2t2+2t.
+R(t):=t(t−1)(t2−4t−2)=t4−5t3+2t2+2t.
+
+Then the odd zeros of RR are
+2−6≈−0.44949,0,1,2+6.
+2−6
+​≈−0.44949,0,1,2+6
+​.
+
+So 00 is an odd zero, and its adjacent odd zero on the left is 2−62−6
+​.
+
+Now set
+Z(t):=∫0tR(u) du=15t5−54t4+23t3+t2.
+Z(t):=∫0t​R(u)du=51​t5−45​t4+32​t3+t2.
+
+Let DaDa​ be the normalized determinant/divided-difference function for the planar graph (x,Y~)(x,Y
+) with
+12 Y~′′=Z.
+21​Y
+′′=Z.
+
+Then
+Da′(x)=2∫01s(1−s) R(a+s(x−a)) ds,
+Da′​(x)=2∫01​s(1−s)R(a+s(x−a))ds,
+
+and
+Da(x)−Z(a)=(x−a)∫01(1−s)2 R(a+s(x−a)) ds.
+Da​(x)−Z(a)=(x−a)∫01​(1−s)2R(a+s(x−a))ds.
+
+Near the odd zero 00, there is the usual born critical branch
+x=τ(a),a<0<x,Da′(τ(a))=0,
+x=τ(a),a<0<x,Da′​(τ(a))=0,
+
+with
+τ(a)=−a+O(a2).
+τ(a)=−a+O(a2).
+
+Because here
+R(t)=t ρ(t),ρ(0)=2>0,
+R(t)=tρ(t),ρ(0)=2>0,
+
+your existing odd-zero unrooted theorem gives
+G(a):=Da(τ(a))−Z(a)<0
+G(a):=Da​(τ(a))−Z(a)<0
+
+for a<0a<0 sufficiently close to 00.
+
+What is new is that, following this same connected born branch numerically to the left, GG changes sign. More precisely, on that branch:
+G(−0.5801)≈−2.82×10−4,G(−0.5901)≈5.99×10−3.
+G(−0.5801)≈−2.82×10−4,G(−0.5901)≈5.99×10−3.
+
+So by continuity there is a rooted point
+a∗∈(−0.5901,−0.5801)
+a∗​∈(−0.5901,−0.5801)
+
+on the same continued branch with
+G(a∗)=0.
+G(a∗​)=0.
+
+Numerically this occurs at about
+a∗≈−0.5805673462,τ(a∗)≈0.3888336023.
+a∗​≈−0.5805673462,τ(a∗​)≈0.3888336023.
+
+At that point,
+Da∗′(τ(a∗))=0,Da∗(τ(a∗))=Z(a∗),
+Da∗​′​(τ(a∗​))=0,Da∗​​(τ(a∗​))=Z(a∗​),
+
+and
+Da∗′′(τ(a∗))≈0.2387646>0,
+Da∗​′′​(τ(a∗​))≈0.2387646>0,
+
+so it is nondegenerate and
+τ′(a∗)=0
+τ′(a∗​)=0
+
+as predicted by the transport system.
+
+Most importantly, the segment
+[a∗,τ(a∗)]
+[a∗​,τ(a∗​)]
+
+contains exactly the two adjacent odd zeros
+2−6∈(a∗,τ(a∗)),0∈(a∗,τ(a∗)),
+2−6
+​∈(a∗​,τ(a∗​)),0∈(a∗​,τ(a∗​)),
+
+and no others.
+
+So this is precisely the phenomenon you were hoping branch provenance might forbid:
+
+    the branch is not an arbitrary rooted critical pair;
+
+    it is the continued born branch from the odd zero 00;
+
+    its rooted point is a first rooted point candidate;
+
+    and the segment contains exactly the born odd zero together with the adjacent odd zero.
+
+That means the following is not true at the planar normalized DaDa​-level:
+“continued born-branch provenance + adjacent odd-zero geometry already excludes rooting.”
+“continued born-branch provenance + adjacent odd-zero geometry already excludes rooting.”​
+
+So the payoff is a sharp no-go:
+branch provenance, by itself, is still too weak unless it uses genuinely source-level data.
+branch provenance, by itself, is still too weak unless it uses genuinely source-level data.​
+
+What survives after this no-go is narrower. A successful theorem now seems to need at least one ingredient that this planar model does not know about, for example:
+
+    the actual source quotient
+    Ψa(h)=Du5(a,h)Dλ(a,h),
+    Ψa​(h)=Dλ​(a,h)Du5​​(a,h)​,
+
+    not just its planar shadow DaDa​;
+
+    a monotonicity or positivity property involving DλDλ​ and Du5Du5​​ separately;
+
+    or a discriminant statement for the full source-pinned moving shear
+    fa=u5−Z(a)λ,
+    fa​=u5​−Z(a)λ,
+
+    not merely the scalar continued branch of Da′(x)=0Da′​(x)=0.
+
+So my recommendation is: treat “branch provenance” as exhausted unless it is upgraded to a genuinely source-coupled provenance theorem. The next live theorem should not be about the abstract continued branch Da′(τ(a))=0Da′​(τ(a))=0 alone; it should be about the continued branch together with the extra RH-specific source structure.
+
+If you want, I’ll turn this into a compact no-go remark for the draft.
+
+yes please
+
+I’m placing the new no-go remark next to the other “this tempting route is insufficient” remarks, and making it explicitly stronger than the pure ZZ-level no-go: even the continued born branch can root in a planar normalized model.
+
+Insert this immediately after Remark~\ref{rem:no-go-pure-level-set-barrier-for-Z}. It records the stronger no-go: even requiring the rooted point to lie on the continued born branch does not suffice at the planar normalized DaDa​-level.
+
+\begin{remark}[No-go for branch provenance alone]
+\label{rem:no-go-branch-provenance-alone}
+One might try to strengthen
+Remark~\ref{rem:no-go-pure-level-set-barrier-for-Z}
+by using not just the scalar level geometry of $\mathcal Z$, but also the
+\emph{provenance} of the rooted point: namely, that $(a,\tau(a))$ lies on the
+continued branch born at an earlier odd zero of $\mathcal R$.
+At the planar normalized $D_a$-level, this is still not enough. There are
+explicit analytic models in which the born branch from one odd zero continues to
+a genuine rooted point before leaving the interval bounded by the adjacent odd
+zeros.
+
+A concrete example is obtained by taking
+\[
+S(t)=t^2,
+\qquad
+\mathcal R(t):=t(t-1)(t^2-4t-2)
+=
+t^4-5t^3+2t^2+2t,
+\]
+and
+\[
+\mathcal Z(t):=\int_0^t \mathcal R(u)\,du
+=
+\frac15 t^5-\frac54 t^4+\frac23 t^3+t^2.
+\]
+Then the odd zeros of $\mathcal R$ are
+\[
+2-\sqrt6,\qquad 0,\qquad 1,\qquad 2+\sqrt6,
+\]
+so $0$ is an odd zero and its adjacent odd zero on the left is $2-\sqrt6$.
+
+Now choose an analytic function $\widetilde Y$ such that
+\[
+\frac12\,\widetilde Y''=\mathcal Z,
+\]
+and let $D_a(x)$ denote the normalized determinant/divided-difference function
+for the planar graph $(x,\widetilde Y)$. Near the odd zero $0$ there is the
+usual born critical branch
+\[
+x=\tau(a),
+\qquad
+a<0<x,
+\qquad
+D_a'(\tau(a))=0,
+\]
+with
+\[
+\tau(a)=-a+O(a^2),
+\]
+and the local odd-zero analysis gives
+\[
+G(a):=D_a(\tau(a))-\mathcal Z(a)<0
+\]
+for $a<0$ sufficiently close to $0$.
+
+However, along this same connected born branch one finds
+\[
+G(-0.5801)<0,
+\qquad
+G(-0.5901)>0,
+\]
+so by continuity there exists
+\[
+a_*\in(-0.5901,-0.5801)
+\]
+such that
+\[
+G(a_*)=0.
+\]
+Thus the \emph{continued born branch} reaches a rooted point
+\[
+D_{a_*}'(\tau(a_*))=0,
+\qquad
+D_{a_*}(\tau(a_*))=\mathcal Z(a_*).
+\]
+Numerically,
+\[
+a_*\approx -0.5805673462,
+\qquad
+\tau(a_*)\approx 0.3888336023,
+\]
+and
+\[
+D_{a_*}''(\tau(a_*))>0,
+\]
+so this rooted point is nondegenerate; in particular,
+\[
+\tau'(a_*)=0
+\]
+as predicted by the transport system.
+
+Moreover, the segment
+\[
+[a_*,\tau(a_*)]
+\]
+contains exactly the born odd zero $0$ together with the adjacent odd zero
+$2-\sqrt6$, and no others. So even the strengthened statement
+\[
+\text{``continued born-branch provenance plus adjacent-odd-zero geometry
+already excludes rooting''}
+\]
+is false in the planar normalized model.
+
+Therefore the remaining exclusion cannot depend only on abstract branch
+continuation data for
+\[
+D_a'(\tau(a))=0
+\]
+together with the scalar geometry of $\mathcal Z$. Any successful next step
+must use genuinely source-coupled structure, such as the actual quotient
+\[
+\Psi_a(h)=\frac{D_{u_5}(a,h)}{D_\lambda(a,h)},
+\]
+the moving shear
+\[
+f_a=u_5-\mathcal Z(a)\lambda,
+\]
+or some equivalent RH-specific relation invisible in the planar $D_a$ model.
+\end{remark}
+
+
+Pasted markdown(53).md
+File
+from the attached, try attack 1
+
+I’m testing whether the moving-shear family really collapses to one fixed third-order inhomogeneous ODE in a way that gives more than formal repackaging—specifically, whether it creates an actual Chebyshev/disconjugacy obstruction to repeated-node boundary data.
+
+I’ve found the first structural pressure point. The ODE recast is real, but the boundary event it needs to rule out is not a simple “three zeros of one solution” statement. It becomes a mixed Hermite-type interpolation condition after subtracting cc and v5v5​, so plain disconjugacy may still be too soft.
+
+I attacked route 1, and the honest outcome is a no-go for the bare disconjugacy / ECT version.
+
+The attached note proposes defining
+L[y]:=W(c,v5,λ,y)Jλ
+L[y]:=Jλ​W(c,v5​,λ,y)​
+
+on a nonmixed arc and then trying to prove that LL is disconjugate / ECT / sign-regular strongly enough to rule out rooted moving-shear events for
+fa=u5−Z(a)λ.
+fa​=u5​−Z(a)λ.
+
+That is the right structural recast, but it is not sufficient by itself.
+
+Here is the clean counterattack.
+
+Take the normalized source model
+c(t)=1,v5(t)=t,λ(t)=t2.
+c(t)=1,v5​(t)=t,λ(t)=t2.
+
+Then
+Jf=W(c,v5,f)=f′′,Jλ=2,
+Jf​=W(c,v5​,f)=f′′,Jλ​=2,
+
+and
+L[y]=W(c,v5,λ,y)Jλ=y′′′2.
+L[y]=Jλ​W(c,v5​,λ,y)​=2y′′′​.
+
+So the homogeneous equation L[y]=0L[y]=0 has basis
+1, t, t2,
+1, t, t2,
+
+which is as disconjugate / ECT as one could hope for on every interval.
+
+Now let
+R(t):=t(t−1)(t2−4t−2)=t4−5t3+2t2+2t,
+R(t):=t(t−1)(t2−4t−2)=t4−5t3+2t2+2t,
+
+and define
+Z(t):=∫0tR(u) du=15t5−54t4+23t3+t2.
+Z(t):=∫0t​R(u)du=51​t5−45​t4+32​t3+t2.
+
+Choose u5=Y~u5​=Y
+so that
+12 Y~′′=Z.
+21​Y
+′′=Z.
+
+Then indeed
+Z=Ju5Jλ,L[u5]=u5′′′2=Z′=R.
+Z=Jλ​Ju5​​​,L[u5​]=2u5′′′​​=Z′=R.
+
+For the source-pinned moving shear
+fa:=u5−Z(a)λ=Y~−Z(a)t2,
+fa​:=u5​−Z(a)λ=Y
+−Z(a)t2,
+
+one has
+L[fa]=L[u5]=R,
+L[fa​]=L[u5​]=R,
+
+exactly as route 1 predicts. Also
+Jfa(a)=u5′′(a)−2Z(a)=0
+Jfa​​(a)=u5′′​(a)−2Z(a)=0
+
+identically by construction.
+
+In this normalized model the repeated-node determinant is just
+Dy(a,h)=y(h)−y(a)−y′(a)(h−a),
+Dy​(a,h)=y(h)−y(a)−y′(a)(h−a),
+
+with
+∂hDy(a,h)=y′(h)−y′(a).
+∂h​Dy​(a,h)=y′(h)−y′(a).
+
+So a rooted moving-shear event is exactly
+Jfa(a)=0,Dfa(a,h)=0,∂hDfa(a,h)=0.
+Jfa​​(a)=0,Dfa​​(a,h)=0,∂h​Dfa​​(a,h)=0.
+
+But the earlier continued-born-branch countermodel fits this framework exactly: along the born branch from the odd zero 00, there is a rooted point
+a∗≈−0.5805673462,h∗=τ(a∗)≈0.3888336023
+a∗​≈−0.5805673462,h∗​=τ(a∗​)≈0.3888336023
+
+such that
+Dfa∗(a∗,h∗)=0,∂hDfa∗(a∗,h∗)=0,
+Dfa∗​​​(a∗​,h∗​)=0,∂h​Dfa∗​​​(a∗​,h∗​)=0,
+
+with
+Dfa∗′′(a∗,h∗)>0
+Dfa∗​​′′​(a∗​,h∗​)>0
+
+in the corresponding nondegeneracy sense. So the bad rooted event occurs even though the governing operator is the maximally simple disconjugate operator
+L=12 ∂t3.
+L=21​∂t3​.
+
+So the conclusion is:
+Disconjugacy / ECT / sign-regularity of L alone cannot exclude rooted moving-shear events.
+Disconjugacy / ECT / sign-regularity of L alone cannot exclude rooted moving-shear events.​
+
+That kills the most optimistic form of route 1.
+
+What survives is narrower. The ODE recast is still useful, but any successful theorem has to use more than “LL is disconjugate.” It must exploit some extra RH-specific structure that the polynomial model above does not see. The natural possibilities are:
+(i) a source-specific positivity statement for Dλ, Du5,
+(i) a source-specific positivity statement for Dλ​, Du5​​,
+
+or
+(ii) a special Green-kernel sign property for the anchored boundary problem,
+(ii) a special Green-kernel sign property for the anchored boundary problem,
+
+or
+(iii) a rigidity statement for the very special slice fa=u5−Z(a)λ,
+(iii) a rigidity statement for the very special slice fa​=u5​−Z(a)λ,
+
+not for arbitrary solutions of L[y]=L[u5]L[y]=L[u5​].
+
+So route 1 does produce something real, but it is a negative theorem:
+
+    the remaining obstruction is not “prove LL is disconjugate/ECT.”
+    Even L=12∂3L=21​∂3 allows the rooted event.
+
+The next natural draft addition is a short no-go remark recording exactly that.
+
+proof_of_rh(237).tex
+File
+ok give me the short no-go remark for the paper
+
+Yes — here is a compact version you can insert immediately after Remark~\ref{rem:no-go-branch-provenance-alone}. It records the stronger point that even the ODE/disconjugacy recast is too weak on its own. This is based on the route-1 note you attached.
+
+\begin{remark}[No-go for disconjugacy/ECT alone]
+\label{rem:no-go-disconjugacy-alone}
+A further natural idea is to recast the moving-shear family through the
+third-order operator
+\[
+L[y]:=\frac{W(c,v_5,\lambda,y)}{J_\lambda},
+\]
+and try to exclude rooted moving-shear events by proving that $L$ is
+disconjugate, Chebyshev, or sign-regular on opened nonmixed arcs.
+At the present level of abstraction this is still not enough.
+
+Indeed, already in the normalized source model
+\[
+c(t)=1,\qquad v_5(t)=t,\qquad \lambda(t)=t^2,
+\]
+one has
+\[
+J_f=W(c,v_5,f)=f'',
+\qquad
+J_\lambda=2,
+\qquad
+L[y]=\frac{W(c,v_5,\lambda,y)}{J_\lambda}=\frac12\,y'''.
+\]
+So the homogeneous equation $L[y]=0$ has basis
+\[
+1,\ t,\ t^2,
+\]
+hence is maximally disconjugate / ECT on every interval. Nevertheless, the
+planar normalized counterexample from
+Remark~\ref{rem:no-go-branch-provenance-alone}
+fits exactly into this framework: for a suitable analytic $u_5$ and the
+source-pinned family
+\[
+f_a:=u_5-\mathcal Z(a)\lambda,
+\]
+one has
+\[
+L[f_a]=L[u_5],
+\qquad
+J_{f_a}(a)=0,
+\]
+and along the continued born branch there is still a rooted point
+\[
+D_{f_a}(a,h)=0,
+\qquad
+\partial_h D_{f_a}(a,h)=0.
+\]
+
+Thus disconjugacy, ECT, or sign-regularity of the operator $L$ by itself
+cannot exclude the remaining rooted moving-shear configuration. Any successful
+next step must use additional source-coupled structure beyond the abstract
+third-order ODE viewpoint, such as special positivity or monotonicity for the
+distinguished quotient
+\[
+\Psi_a(h)=\frac{D_{u_5}(a,h)}{D_\lambda(a,h)}
+\]
+or for the particular slice
+\[
+f_a=u_5-\mathcal Z(a)\lambda.
+\]
+\end{remark}
+
+
