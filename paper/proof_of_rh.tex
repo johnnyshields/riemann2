@@ -16763,6 +16763,225 @@ differ only by a nonvanishing analytic factor
 zeros of the two objects coincide.
 \end{proof}
 
+\begin{proposition}[Adjacent-odd-zero entrance is not a rooted discriminant point]
+\label{prop:adjacent-odd-zero-entrance-not-rooted-discriminant-point}
+Let $J$ be an opened nonmixed arc, and work in a local normalized nonmixed
+chart on which
+\[
+S(t)=t^2,
+\qquad
+\Gamma_a=D_a.
+\]
+Let
+\[
+\tau:(a_-,a_0]\to J
+\]
+be a real-analytic continuation of the born repeated-source critical branch,
+so that
+\[
+\tau(a)>a,
+\qquad
+D_a'(\tau(a))=0
+\qquad (a\in(a_-,a_0]).
+\]
+Assume:
+
+\begin{enumerate}
+\item for every $a\in(a_-,a_0)$, the segment
+\[
+[a,\tau(a)]
+\]
+contains exactly one sign change of $\mathcal R$;
+
+\item the target endpoint reaches the next adjacent odd zero at $a=a_0$, i.e.
+\[
+q:=\tau(a_0)
+\]
+is an odd-order zero of $\mathcal R$, there are no odd zeros of $\mathcal R$
+in $(\tau(a),q)$ for $a<a_0$ close to $a_0$, and the segment
+\[
+[a_0,q]
+\]
+still contains exactly one sign change of $\mathcal R$.
+\end{enumerate}
+
+Set
+\[
+V(a):=D_a(\tau(a)).
+\]
+Define the sheared discriminant and the RH-selected slice by
+\[
+\mathcal D:=
+\left\{
+(a,\gamma,h):a<h,\ D_{f_\gamma}(a,h)=0,\ \partial_h D_{f_\gamma}(a,h)=0
+\right\},
+\]
+\[
+\mathcal S_{\mathrm{RH}}
+:=
+\left\{
+(a,\gamma,h):\gamma=\mathcal Z(a)
+\right\}.
+\]
+
+Then
+\[
+P(a):=(a,V(a),\tau(a))\in\mathcal D
+\qquad (a\in(a_-,a_0]),
+\]
+but at the adjacent-odd-zero entrance point one has
+\[
+V(a_0)-\mathcal Z(a_0)\neq 0.
+\]
+More precisely,
+\[
+V(a_0)-\mathcal Z(a_0)
+=
+(q-a_0)\int_0^1 (1-s)^2\,
+\mathcal R(a_0+s(q-a_0))\,ds,
+\]
+and this quantity has the sign of the initial lobe of $\mathcal R$ on
+$[a_0,q]$.
+
+Consequently,
+\[
+P(a_0)\notin \mathcal S_{\mathrm{RH}},
+\]
+and there exists a neighborhood $N$ of $P(a_0)$ in
+\[
+J\times\mathbf R\times J
+\]
+such that
+\[
+N\cap\mathcal D\cap\mathcal S_{\mathrm{RH}}=\varnothing.
+\]
+
+In particular, a first rooted point cannot be created at the moment when the
+next adjacent odd zero first enters the active segment. If rooting occurs at
+all, it must occur only after the branch has moved into a genuine two-sign-change
+chamber of positive width.
+\end{proposition}
+
+\begin{proof}
+By Remark~\ref{rem:source-determinant-reformulation-Gammaa},
+\[
+\Psi_a(h)=\Gamma_{x(a)}(x(h)),
+\]
+and on a nonmixed patch
+\[
+D_{f_\gamma}(a,h)=D_\lambda(a,h)\bigl(\Psi_a(h)-\gamma\bigr).
+\]
+Since
+\[
+D_\lambda(a,h)\neq 0
+\qquad (a<h),
+\]
+we have
+\[
+D_{f_\gamma}(a,h)=0,\ \partial_hD_{f_\gamma}(a,h)=0
+\iff
+\gamma=\Psi_a(h),\ \partial_h\Psi_a(h)=0.
+\]
+Along the continued born branch,
+\[
+\partial_h\Psi_a(\tau(a))=0,
+\qquad
+\Psi_a(\tau(a))=V(a),
+\]
+so indeed
+\[
+P(a)=(a,V(a),\tau(a))\in\mathcal D.
+\]
+
+At $a=a_0$, the integral formula for $D_a$ gives
+\[
+V(a_0)-\mathcal Z(a_0)
+=
+(q-a_0)\int_0^1 (1-s)^2\,
+\mathcal R(a_0+s(q-a_0))\,ds.
+\]
+Also, since $D_{a_0}'(q)=0$,
+\[
+0
+=
+D_{a_0}'(q)
+=
+2\int_0^1 s(1-s)\,
+\mathcal R(a_0+s(q-a_0))\,ds.
+\]
+
+Set
+\[
+R_0(s):=\mathcal R(a_0+s(q-a_0)),
+\qquad
+k_0(s):=(1-s)^2,
+\qquad
+k_1(s):=s(1-s).
+\]
+Then
+\[
+\frac{k_0(s)}{k_1(s)}=\frac{1-s}{s}
+\]
+is strictly decreasing on $(0,1)$. Because $R_0$ has exactly one sign change on
+$(0,1)$, the same weighted signed-mass argument used in
+Proposition~\ref{prop:single-sign-change-cannot-realize-first-loss} implies
+that
+\[
+\int_0^1 k_0(s)R_0(s)\,ds
+\]
+has the sign of the initial lobe of $R_0$, hence is nonzero. Therefore
+\[
+V(a_0)-\mathcal Z(a_0)\neq 0.
+\]
+
+Thus
+\[
+P(a_0)=(a_0,V(a_0),q)\in\mathcal D
+\quad\text{but}\quad
+P(a_0)\notin\mathcal S_{\mathrm{RH}}.
+\]
+Since both $\mathcal D$ along the continued branch and the function
+\[
+(a,\gamma,h)\longmapsto \gamma-\mathcal Z(a)
+\]
+are continuous, there is a neighborhood $N$ of $P(a_0)$ on which
+\[
+\gamma-\mathcal Z(a)
+\]
+keeps the sign of
+\[
+V(a_0)-\mathcal Z(a_0).
+\]
+Hence
+\[
+N\cap\mathcal D\cap\mathcal S_{\mathrm{RH}}=\varnothing.
+\]
+
+The final statement is immediate: a rooted point is exactly a point of
+\[
+\mathcal D\cap\mathcal S_{\mathrm{RH}},
+\]
+so no such point can be born at the adjacent-odd-zero entrance.
+\end{proof}
+
+\begin{remark}[What the discriminant analysis still leaves open]
+\label{rem:what-discriminant-adjacent-odd-zero-analysis-still-leaves-open}
+Proposition~\ref{prop:adjacent-odd-zero-entrance-not-rooted-discriminant-point}
+shows that the RH-selected slice does not create a first rooted point
+\emph{locally} when the next adjacent odd zero first enters the active segment.
+So the adjacent-two-odd-zero case is not a boundary-birth catastrophe for the
+discriminant.
+
+What remains open is genuinely global: whether, after entering a true
+two-sign-change chamber of positive width, the RH-selected slice can later cross
+the continued discriminant curve
+\[
+(a,\Psi_a(\tau(a)),\tau(a)).
+\]
+Thus the unresolved nonmixed bottleneck is a global no-crossing theorem inside
+the adjacent-two-odd-zero chamber, not a local entry-point singularity.
+\end{remark}
+
 \begin{proposition}[Rooted-defect transport and stationary first root]
 \label{prop:rooted-defect-transport-stationary-first-root}
 In the setting of
@@ -17279,6 +17498,247 @@ f_a=u_5-\mathcal Z(a)\lambda,
 rather than only the abstract level geometry of $\mathcal Z$.
 \end{remark}
 
+\begin{remark}[No-go for branch provenance alone]
+\label{rem:no-go-branch-provenance-alone}
+One might try to strengthen
+Remark~\ref{rem:no-go-pure-level-set-barrier-for-Z}
+by using not just the scalar level geometry of $\mathcal Z$, but also the
+\emph{provenance} of the rooted point: namely, that $(a,\tau(a))$ lies on the
+continued branch born at an earlier odd zero of $\mathcal R$.
+At the planar normalized $D_a$-level, this is still not enough. There are
+explicit analytic models in which the born branch from one odd zero continues to
+a genuine rooted point before leaving the interval bounded by the adjacent odd
+zeros.
+
+A concrete example is obtained by taking
+\[
+S(t)=t^2,
+\qquad
+\mathcal R(t):=t(t-1)(t^2-4t-2)
+=
+t^4-5t^3+2t^2+2t,
+\]
+and
+\[
+\mathcal Z(t):=\int_0^t \mathcal R(u)\,du
+=
+\frac15 t^5-\frac54 t^4+\frac23 t^3+t^2.
+\]
+Then the odd zeros of $\mathcal R$ are
+\[
+2-\sqrt6,\qquad 0,\qquad 1,\qquad 2+\sqrt6,
+\]
+so $0$ is an odd zero and its adjacent odd zero on the left is $2-\sqrt6$.
+
+Now choose an analytic function $\widetilde Y$ such that
+\[
+\frac12\,\widetilde Y''=\mathcal Z,
+\]
+and let $D_a(x)$ denote the normalized determinant/divided-difference function
+for the planar graph $(x,\widetilde Y)$. Near the odd zero $0$ there is the
+usual born critical branch
+\[
+x=\tau(a),
+\qquad
+a<0<x,
+\qquad
+D_a'(\tau(a))=0,
+\]
+with
+\[
+\tau(a)=-a+O(a^2),
+\]
+and the local odd-zero analysis gives
+\[
+G(a):=D_a(\tau(a))-\mathcal Z(a)<0
+\]
+for $a<0$ sufficiently close to $0$.
+
+However, along this same connected born branch one finds
+\[
+G(-0.5801)<0,
+\qquad
+G(-0.5901)>0,
+\]
+so by continuity there exists
+\[
+a_*\in(-0.5901,-0.5801)
+\]
+such that
+\[
+G(a_*)=0.
+\]
+Thus the \emph{continued born branch} reaches a rooted point
+\[
+D_{a_*}'(\tau(a_*))=0,
+\qquad
+D_{a_*}(\tau(a_*))=\mathcal Z(a_*).
+\]
+Numerically,
+\[
+a_*\approx -0.5805673462,
+\qquad
+\tau(a_*)\approx 0.3888336023,
+\]
+and
+\[
+D_{a_*}''(\tau(a_*))>0,
+\]
+so this rooted point is nondegenerate; in particular,
+\[
+\tau'(a_*)=0
+\]
+as predicted by the transport system.
+
+Moreover, the segment
+\[
+[a_*,\tau(a_*)]
+\]
+contains exactly the born odd zero $0$ together with the adjacent odd zero
+$2-\sqrt6$, and no others. So even the strengthened statement
+\[
+\text{``continued born-branch provenance plus adjacent-odd-zero geometry
+already excludes rooting''}
+\]
+is false in the planar normalized model.
+
+Therefore the remaining exclusion cannot depend only on abstract branch
+continuation data for
+\[
+D_a'(\tau(a))=0
+\]
+together with the scalar geometry of $\mathcal Z$. Any successful next step
+must use genuinely source-coupled structure, such as the actual quotient
+\[
+\Psi_a(h)=\frac{D_{u_5}(a,h)}{D_\lambda(a,h)},
+\]
+the moving shear
+\[
+f_a=u_5-\mathcal Z(a)\lambda,
+\]
+or some equivalent RH-specific relation invisible in the planar $D_a$ model.
+\end{remark}
+
+\begin{remark}[No-go for disconjugacy/ECT alone]
+\label{rem:no-go-disconjugacy-alone}
+A further natural idea is to recast the moving-shear family through the
+third-order operator
+\[
+L[y]:=\frac{W(c,v_5,\lambda,y)}{J_\lambda},
+\]
+and try to exclude rooted moving-shear events by proving that $L$ is
+disconjugate, Chebyshev, or sign-regular on opened nonmixed arcs.
+At the present level of abstraction this is still not enough.
+
+Indeed, already in the normalized source model
+\[
+c(t)=1,\qquad v_5(t)=t,\qquad \lambda(t)=t^2,
+\]
+one has
+\[
+J_f=W(c,v_5,f)=f'',
+\qquad
+J_\lambda=2,
+\qquad
+L[y]=\frac{W(c,v_5,\lambda,y)}{J_\lambda}=\frac12\,y'''.
+\]
+So the homogeneous equation $L[y]=0$ has basis
+\[
+1,\ t,\ t^2,
+\]
+hence is maximally disconjugate / ECT on every interval. Nevertheless, the
+planar normalized counterexample from
+Remark~\ref{rem:no-go-branch-provenance-alone}
+fits exactly into this framework: for a suitable analytic $u_5$ and the
+source-pinned family
+\[
+f_a:=u_5-\mathcal Z(a)\lambda,
+\]
+one has
+\[
+L[f_a]=L[u_5],
+\qquad
+J_{f_a}(a)=0,
+\]
+and along the continued born branch there is still a rooted point
+\[
+D_{f_a}(a,h)=0,
+\qquad
+\partial_h D_{f_a}(a,h)=0.
+\]
+
+Thus disconjugacy, ECT, or sign-regularity of the operator $L$ by itself
+cannot exclude the remaining rooted moving-shear configuration. Any successful
+next step must use additional source-coupled structure beyond the abstract
+third-order ODE viewpoint, such as special positivity or monotonicity for the
+distinguished quotient
+\[
+\Psi_a(h)=\frac{D_{u_5}(a,h)}{D_\lambda(a,h)}
+\]
+or for the particular slice
+\[
+f_a=u_5-\mathcal Z(a)\lambda.
+\]
+\end{remark}
+
+\begin{remark}[Ceiling of the present scalar/discriminant analysis]
+\label{rem:ceiling-present-scalar-discriminant-analysis}
+The preceding results sharply delimit what can and cannot be obtained from the
+current planar/scalar reformulation.
+
+On the positive-kernel side, one-sign-change chambers are sterile for genuine
+repeated-source first loss:
+the born critical branch is simple, has strictly negative slope, and cannot
+satisfy
+\[
+D_a(\tau(a))=\mathcal Z(a)
+\]
+before the active segment acquires another odd zero of $\mathcal R$
+(Proposition~\ref{prop:first-rooting-requires-second-odd-zero-repeated-source}).
+On the discriminant side, the adjacent-odd-zero entrance itself cannot create
+the first rooted point
+(Proposition~\ref{prop:adjacent-odd-zero-entrance-not-rooted-discriminant-point}).
+
+However, Remarks~\ref{rem:no-go-pure-level-set-barrier-for-Z}
+and~\ref{rem:no-go-branch-provenance-alone} show that these facts already reach
+the ceiling of the present scalar/discriminant package. In the planar
+normalized $D_a$ model, neither the scalar level-set topology of $\mathcal Z$
+nor the abstract provenance of a point on the continued born branch suffices to
+exclude a later rooted crossing inside a genuine two-sign-change chamber.
+
+Equivalently, after the adjacent-odd-zero entrance, the obstruction is no
+longer local. The sheared discriminant
+\[
+\mathcal D
+=
+\{(a,\Psi_a(h),h):\ a<h,\ \mathfrak D(a,h)=0\}
+\]
+is already a one-dimensional curve, and the RH-selected condition
+\[
+\gamma=\mathcal Z(a)
+\]
+meets that curve generically by transverse crossing, with crossing sign
+controlled by
+\[
+-\mathcal R(a_*).
+\]
+So beyond the entrance analysis, the remaining problem is a genuinely
+\emph{global no-crossing problem} for the continued discriminant curve against
+the RH-selected slice.
+
+Accordingly, any further progress on the nonmixed repeated-source branch must
+use structure invisible in the planar normalized model, namely a genuinely
+source-coupled constraint linking
+\[
+\Psi_a(h),\qquad
+\mathfrak D(a,h),\qquad
+\mathcal Z(a),\qquad
+f_a=u_5-\mathcal Z(a)\lambda
+\]
+along the actual RH branch, rather than only the abstract scalar geometry of
+$D_a$ and $\mathcal Z$.
+\end{remark}
+
 \begin{proposition}[Discriminant reduction for the moving-shear family]
 \label{prop:discriminant-reduction-moving-shear}
 Let $J$ be a good nonmixed $v_5$-patch. For $\gamma\in\mathbf R$, set
@@ -17606,6 +18066,203 @@ segment exits the arc, collapses affine-planarly, or acquires the next odd
 zero of $\mathcal W_{\mathrm{src}}$.
 \end{remark}
 
+\begin{proposition}[Discriminant entry into the adjacent-two-odd-zero chamber is not a first rooted point]
+\label{prop:discriminant-entry-not-first-root}
+Let $J$ be an opened nonmixed arc, and work in a local normalized nonmixed
+chart on which
+\[
+S(t)=t^2,
+\qquad
+\Gamma_a=D_a.
+\]
+Let
+\[
+\tau:(a_-,a_0]\to J
+\]
+be a real-analytic continuation of the born repeated-source critical branch,
+so that
+\[
+\tau(a)>a,
+\qquad
+D_a'(\tau(a))=0
+\qquad (a\in(a_-,a_0]).
+\]
+Assume:
+
+\begin{enumerate}
+\item for every $a\in(a_-,a_0)$, the segment
+\[
+[a,\tau(a)]
+\]
+contains exactly one sign change of $\mathcal R$;
+
+\item at $a=a_0$, the target first reaches the next adjacent odd zero
+\[
+q:=\tau(a_0)
+\]
+of $\mathcal R$, and the segment
+\[
+[a_0,q]
+\]
+still contains exactly one sign change of $\mathcal R$.
+\end{enumerate}
+
+Set
+\[
+V(a):=D_a(\tau(a)).
+\]
+Define the sheared discriminant and the RH-selected slice by
+\[
+\mathcal D:=
+\left\{
+(a,\gamma,h):a<h,\ D_{f_\gamma}(a,h)=0,\ \partial_h D_{f_\gamma}(a,h)=0
+\right\},
+\]
+\[
+\mathcal S_{\mathrm{RH}}
+:=
+\left\{
+(a,\gamma,h):\gamma=\mathcal Z(a)
+\right\}.
+\]
+
+Then
+\[
+P(a):=(a,V(a),\tau(a))\in\mathcal D
+\qquad (a\in(a_-,a_0]),
+\]
+but
+\[
+P(a_0)\notin \mathcal S_{\mathrm{RH}}.
+\]
+More precisely,
+\[
+V(a_0)-\mathcal Z(a_0)
+=
+(q-a_0)\int_0^1 (1-s)^2\,
+\mathcal R(a_0+s(q-a_0))\,ds,
+\]
+and this quantity has the sign of the initial lobe of $\mathcal R$ on
+$[a_0,q]$, hence is nonzero.
+
+Consequently, there exists a neighborhood $N$ of $P(a_0)$ in
+\[
+J\times\mathbf R\times J
+\]
+such that
+\[
+N\cap\mathcal D\cap\mathcal S_{\mathrm{RH}}=\varnothing.
+\]
+
+In particular, a first rooted point cannot be created at the instant when the
+continued born branch first enters the adjacent-two-odd-zero regime.
+If rooting occurs at all, it must occur only later, after the branch has moved
+into a genuine two-sign-change chamber of positive width.
+\end{proposition}
+
+\begin{proof}
+On a nonmixed patch one has
+\[
+D_{f_\gamma}(a,h)=D_\lambda(a,h)\bigl(\Psi_a(h)-\gamma\bigr),
+\]
+with
+\[
+D_\lambda(a,h)\neq 0
+\qquad (a<h).
+\]
+Hence
+\[
+D_{f_\gamma}(a,h)=0,\ \partial_hD_{f_\gamma}(a,h)=0
+\iff
+\gamma=\Psi_a(h),\ \partial_h\Psi_a(h)=0.
+\]
+Along the repeated-source critical branch,
+\[
+\partial_h\Psi_a(\tau(a))=0,
+\qquad
+\Psi_a(\tau(a))=V(a),
+\]
+so indeed
+\[
+P(a)=(a,V(a),\tau(a))\in\mathcal D.
+\]
+
+At $a=a_0$, the integral representation for $D_a$ gives
+\[
+V(a_0)-\mathcal Z(a_0)
+=
+(q-a_0)\int_0^1 (1-s)^2\,
+\mathcal R(a_0+s(q-a_0))\,ds.
+\]
+Also, since $D_{a_0}'(q)=0$,
+\[
+0
+=
+2\int_0^1 s(1-s)\,\mathcal R(a_0+s(q-a_0))\,ds.
+\]
+
+Now
+\[
+\frac{(1-s)^2}{s(1-s)}=\frac{1-s}{s}
+\]
+is strictly decreasing on $(0,1)$. Because the segment $[a_0,q]$ carries
+exactly one sign change of $\mathcal R$, the same weighted signed-mass
+comparison used in the one-sign-change chamber implies that
+\[
+\int_0^1 (1-s)^2\,\mathcal R(a_0+s(q-a_0))\,ds
+\]
+has the sign of the initial lobe of $\mathcal R$, hence is nonzero. Therefore
+\[
+V(a_0)-\mathcal Z(a_0)\neq 0,
+\]
+so
+\[
+P(a_0)\notin\mathcal S_{\mathrm{RH}}.
+\]
+
+Continuity then gives a neighborhood $N$ of $P(a_0)$ on which
+\[
+\gamma-\mathcal Z(a)
+\]
+keeps the sign of
+\[
+V(a_0)-\mathcal Z(a_0),
+\]
+hence
+\[
+N\cap\mathcal D\cap\mathcal S_{\mathrm{RH}}=\varnothing.
+\]
+\end{proof}
+
+\begin{remark}[What route 2 actually reduces to]
+\label{rem:route-two-reduces-to-global-no-crossing}
+The discriminant analysis rules out a \emph{local birth} of the first rooted
+point at the adjacent-odd-zero entrance, but it does not by itself exclude a
+later crossing inside a genuine two-sign-change chamber.
+
+Indeed, on a nonmixed patch the sheared discriminant is already
+one-dimensional:
+\[
+\mathcal D
+=
+\{(a,\Psi_a(h),h):\ \mathfrak D(a,h)=0\},
+\]
+so the RH-selected condition
+\[
+\gamma=\mathcal Z(a)
+\]
+meets a discriminant \emph{curve}, not a catastrophe surface. At a generic
+rooted point this meeting is transverse, with crossing sign controlled by
+\[
+-\mathcal R(a_*).
+\]
+Accordingly, route 2 does not reduce the problem to a local fold/cusp
+classification in $(a,\gamma,h)$-space. The remaining issue is global:
+to exclude any later transverse crossing of the continued discriminant curve by
+the RH-selected slice before affine-planar collapse, branch exit, or completion
+of the adjacent-odd-zero connection.
+\end{remark}
+
 \begin{remark}[What remains on the nonmixed $4$-point side]
 \label{rem:what-remains-nonmixed-after-R-zero-bridge}
 The preceding results now give a full local derivative-side picture of the
@@ -17717,25 +18374,44 @@ the local birth chamber, the rooted defect
 \[
 G(a)=D_a(\tau(a))-\mathcal Z(a)
 \]
-satisfies an exact first-order transport equation, and any nondegenerate first
-root is forced to be a stationary point of the target map and a local fold of
+satisfies an exact first-order transport equation, and any nondegenerate rooted
+point is forced to be a stationary point of the target map and a local fold of
 the moving-shear equation
 \[
 A_a(x)-\mathcal Z(a)\,B_a(x)=0
 \]
 (Propositions~\ref{prop:rooted-defect-transport-stationary-first-root}
 and~\ref{prop:nondegenerate-rooted-point-is-moving-shear-fold}).
-So the sharpened remaining nonmixed burden is no longer merely an odd-zero
-connection problem in the abstract; it is a source-coupling / adjacent-odd-zero
-\emph{first-fold exclusion theorem} for the moving shear
+At the same time,
+Proposition~\ref{prop:adjacent-odd-zero-entrance-not-rooted-discriminant-point}
+shows that the first rooted point cannot be created at the instant when the
+next adjacent odd zero first enters the active segment, while
+Remarks~\ref{rem:no-go-pure-level-set-barrier-for-Z}
+and~\ref{rem:no-go-branch-provenance-alone} show that neither scalar level-set
+topology nor abstract born-branch provenance excludes a later rooted crossing
+inside a genuine two-sign-change chamber.
+
+Thus the sharpened remaining nonmixed burden is not a local first-fold
+classification theorem. It is a genuinely global source-coupling / no-crossing
+theorem: one must exclude any later transverse meeting of the continued
+discriminant curve
 \[
-f_a=u_5-\mathcal Z(a)\lambda,
+\mathcal D
+=
+\{(a,\Psi_a(h),h):\ a<h,\ \mathfrak D(a,h)=0\}
 \]
-equivalently for odd zeros of
+with the RH-selected slice
 \[
-\mathcal W_{\mathrm{src}},
+\gamma=\mathcal Z(a)
 \]
-on genuine opened nonmixed arcs.
+before affine-planar collapse, branch exit, or completion of the adjacent-odd-zero
+connection. Equivalently, the remaining task is to find a genuinely
+source-coupled constraint on the moving shear
+\[
+f_a=u_5-\mathcal Z(a)\lambda
+\]
+that is invisible in the planar normalized $D_a$ model but forbids such a
+global crossing on genuine opened nonmixed arcs.
 \end{remark}
 
 \begin{remark}[Compact status summary for the nonmixed $4$-point branch]
@@ -17779,16 +18455,33 @@ on any chamber where the repeated-source segment sees exactly one sign change of
 $\mathcal R$, the born critical branch is simple, has strictly negative slope,
 and cannot realize the rigidified first-loss condition. Beyond that chamber, the
 rooted defect along the continued branch satisfies an exact transport equation,
-and any nondegenerate first root is forced to be a stationary point of the
+and any nondegenerate rooted point is forced to be a stationary point of the
 target map and a local fold of the moving-shear equation
 \[
 A_a(x)-\mathcal Z(a)\,B_a(x)=0.
 \]
-So any genuine repeated-source obstruction would have to connect adjacent odd
-zeros of $\mathcal W_{\mathrm{src}}$ and survive to a first post-birth fold of
-the moving source-pinned shear. Thus the genuinely remaining nonmixed burden is
-the source-coupling / adjacent-odd-zero first-fold exclusion problem for odd
-zeros of $\mathcal W_{\mathrm{src}}$ on opened nonmixed arcs.
+The adjacent-odd-zero entrance itself cannot create the first rooted point, but
+the present scalar/discriminant package already reaches its ceiling there:
+explicit planar normalized models show that neither pure level-set topology of
+$\mathcal Z$ nor abstract continued born-branch provenance excludes a later
+rooted crossing inside a genuine two-sign-change chamber. Thus the genuinely
+remaining nonmixed burden is a global source-coupling / no-crossing problem for
+the continued discriminant curve
+\[
+\mathcal D
+=
+\{(a,\Psi_a(h),h):\ a<h,\ \mathfrak D(a,h)=0\}
+\]
+against the RH-selected slice
+\[
+\gamma=\mathcal Z(a),
+\]
+to be solved by a genuinely source-coupled constraint on the moving
+source-pinned shear
+\[
+f_a=u_5-\mathcal Z(a)\lambda
+\]
+that is invisible in the planar normalized $D_a$ model.
 \end{remark}
 
 \begin{remark}[Derivative-geometry meaning of the nonmixed invariant $\mathcal R$]
