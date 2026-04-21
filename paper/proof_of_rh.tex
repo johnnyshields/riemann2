@@ -10364,6 +10364,41 @@ to two different ECT intervals on such a block. Therefore a pair-pair
 configuration across two distinct ECT intervals is impossible there.
 \end{proof}
 
+\begin{remark}[Strip picture and clean-block compression]
+\label{rem:strip-picture-clean-block-compression}
+For each ECT interval $I$ in the normalized affine chart
+\[
+x=\frac{v_5}{c},
+\qquad
+y=\frac{\Delta_7}{c},
+\]
+it is convenient to package the fixed-slope $2$-secant data by the open
+secant strip
+\[
+\mathcal S_I
+:=
+\{(m,b): b\in \operatorname{int}\mathcal B_I(m)\},
+\]
+where $\mathcal B_I(m)$ is the intercept interval from
+Lemma~\ref{lem:fixed-slope-intercept-sets}. Thus
+\[
+(m,b)\in \mathcal S_I
+\]
+if and only if the affine line $y=mx+b$ is $2$-secant to $\Gamma(I)$.
+
+Under the hypotheses of
+Theorem~\ref{thm:partial-global-no-secant}, these strips are pairwise disjoint
+across distinct ECT intervals on the block:
+\[
+\mathcal S_{I_i}\cap \mathcal S_{I_j}=\varnothing
+\qquad(i\neq j).
+\]
+Equivalently, a pair-pair state can use at most one ECT interval from such a
+turning-boundary generic block. In the later finite-core language, every such
+block behaves as a single transport chamber rather than as an independent
+source of $2+2$ combinatorics.
+\end{remark}
+
 \begin{remark}[Status of the direct septic witness]
 \label{rem:status-direct-septic-witness}
 The direct $q^{(7)}$-slice of total $\Delta_7$ is now closed at the
@@ -10662,6 +10697,35 @@ configurations. Combined with Proposition~\ref{prop:no-W-flat-interval}, this
 means the remaining issue on the $W=0$ side is genuinely global: continuation
 or recurrence of determinant-zero / tangent-slope data across multiple
 intervals, not local creation of a second opposite-side zero branch.
+\end{remark}
+
+\begin{remark}[Endpoint purification for bounded strip-overlap components]
+\label{rem:endpoint-purification-bounded-strip-overlap}
+Let
+\[
+\mathcal P
+:=
+\bigcup_{i<j-1}(\mathcal S_{I_i}\cap \mathcal S_{I_j})
+\]
+denote the nonadjacent pair-pair strip-overlap set on a compact patch, where
+the union runs over the ECT intervals in the normalized affine chart.
+Then Theorem~\ref{thm:partial-global-no-secant} and
+Theorem~\ref{thm:finite-order-w-zero-local-sterility} together show that a
+bounded connected component
+\[
+U\subset \mathcal P
+\]
+cannot be created or destroyed inside a turning-boundary generic block, and
+cannot have a first entrance or last exit at a finite-order boundary of type
+\[
+W=0,\qquad M\neq 0.
+\]
+
+So any surviving bounded strip-overlap component must enter and leave through a
+finite exceptional set: non-generic turning defects, the repeated-source
+odd-order zeros of $\mathcal R$, or the residual mixed overlap loci
+concentrated on $K_v=0$. In particular, the remaining pair-pair problem is a
+finite-gate problem rather than a diffuse local-birth problem.
 \end{remark}
 
 \begin{remark}[Audit: residual $W=0$ pathology]
@@ -11827,16 +11891,16 @@ finite-order source criterion that would close the two-point branch on compact
 good patches.
 
 Thus the remaining issue beyond the present two-pair subsection is no longer a
-vague interaction heuristic. There are now three precise conditional routes on
-the two-point side.
+vague interaction heuristic. There are now three precise routes on the
+two-point side.
 
 First, the stronger finite-order source-level merger route would force the
 quadratic defect estimates and hence the defect-scale closeness theorem on good
 patches.
 
-Second, the weaker quotient-diagonal route would already exclude exact close
-two-point bad cores on compact subsets of $\{c\neq 0\}$ if one had a genuine
-corrected two-atom quotient germ with continuity and exact diagonal collapse.
+Second, the quotient-diagonal route would already exclude exact close two-point
+bad cores on compact subsets of $\{c\neq 0\}$ if one had a genuine corrected
+two-atom quotient germ with continuity and exact diagonal collapse.
 
 Third, on a good overlap patch in the mixed regime, the derivative-geometric
 attack passes through the exact projective secant-shadow reduction of
@@ -11870,10 +11934,17 @@ At the same time, the later centered-base mixed local exhaustion theorem
 no sufficiently small nearby genuinely new mixed $4$-point obstruction remains
 near the centered diagonal base. Thus any surviving mixed contribution is not a
 new local mixed septic-jet phenomenon near that base; it is genuinely
-global/nonlocal. Beyond that lie the genuinely multi-pair interaction
-bookkeeping through orders $3,5,7$, the local lifted $3/4$-point analysis for
-close-point branches on the $v_5\neq 0$ and parallel $u_5\neq 0$ patches, and
-the subsequent finite-core extraction.
+global/nonlocal.
+
+From the later finite-core point of view, this means that the mixed two-point
+branch should no longer be read as a search for another local carrier
+configuration. The live issues are instead:
+\begin{itemize}
+\item finite-order source-level merger;
+\item quotient-diagonal continuity / exact diagonal collapse;
+\item and the global finite-core extraction on the residual overlap exceptional
+set, concentrated on $K_v=0$ up to the already-absorbed $S=0$ handoffs.
+\end{itemize}
 \end{remark}
 
 \begin{remark}[Minimal-core reformulation]
@@ -11900,6 +11971,43 @@ finite-core endgame should therefore be viewed as a two-stage problem:
 first extract defect-corrected coincidence information for $\widehat\Psi$,
 then convert that information into affine-line incidence constraints for
 $\Gamma$.
+\end{remark}
+
+\begin{remark}[Finite-core compression to a defect-gate graph]
+\label{rem:finite-core-compression-defect-gate-graph}
+The two-stage reformulation above suggests a useful downstream combinatorial
+compression.
+
+Fix a compact relevant patch $J$. Collapse every maximal
+turning-boundary-generic block on which
+Theorem~\ref{thm:partial-global-no-secant} applies to a single transport edge,
+and record as vertices the remaining defect gates:
+\begin{itemize}
+\item non-generic turning defects;
+\item isolated finite-order boundaries $W=0,\ M\neq 0$;
+\item repeated-source odd-order zeros of $\mathcal R$;
+\item and, on the mixed side, the residual exact fixed-shear $K_v=0$ overlap
+points.
+\end{itemize}
+Call the resulting finite graph $\mathfrak G_{\mathrm{def}}(J)$.
+
+Then any surviving minimal bad core should be viewed as giving a finite walk on
+$\mathfrak G_{\mathrm{def}}(J)$. The point is that the clean blocks
+contribute no pair-pair geometry by
+Theorem~\ref{thm:partial-global-no-secant}, while
+Theorem~\ref{thm:finite-order-w-zero-local-sterility} shows that the isolated
+finite-order $W=0$ gates are locally sterile. Moreover, on the repeated-source side,
+Proposition~\ref{prop:first-rooting-requires-second-odd-zero-repeated-source},
+Corollary~\ref{cor:no-crossing-adjacent-two-odd-zero-under-anchor-sign-preservation},
+Proposition~\ref{prop:odd-anchor-passage-no-reset}, and
+Corollary~\ref{cor:first-post-anchor-chamber-dangerous} show that odd-order
+$\mathcal R$-gates are relay-type rather than arbitrary first-root gates.
+
+Thus, after contracting the locally sterile and relay-type vertices, the
+remaining cycle rank of a genuine minimal bad core should be carried only by a
+smaller reduced graph of non-generic turning defects. This is the cleanest
+current finite-core reformulation of the remaining global nonadjacent
+recurrence problem.
 \end{remark}
 
 \begin{definition}[Minimal bad core]
@@ -13098,9 +13206,15 @@ package as either locally sterile or already-quintic.
 \begin{remark}[What remains after local mixed exhaustion]
 \label{rem:what-remains-after-local-mixed-exhaustion}
 Theorem~\ref{thm:local-exhaustion-mixed-four-point-centered-base} exhausts the
-mixed $4$-point branch only in the centered-base local regime. Any remaining
-mixed $4$-point escape must therefore be genuinely global/nonlocal: it cannot
-come from a new local mixed septic jet pattern near the centered diagonal base.
+mixed $4$-point branch in the centered-base local regime. Any remaining mixed
+$4$-point escape must therefore be genuinely global/nonlocal: it cannot come
+from a new local mixed septic-jet pattern near the centered diagonal base.
+
+Equivalently, the later mixed/global problem is no longer a local normal-form
+problem. It is a finite-core / global propagation problem for the normalized
+line-incidence geometry, with the residual mixed two-point derivative geometry
+concentrated on the overlap exceptional set and, after the off-$K_v=0$
+handoffs, sharply focused on the exact fixed-shear $K_v=0$ slice.
 \end{remark}
 
 \begin{remark}[How mixed local exhaustion constrains later hybrid routes]
@@ -13594,6 +13708,56 @@ equivalently
 u=\lambda_m(-a)+O(a^2).
 \]
 This proves the classification.
+\end{proof}
+
+\begin{corollary}[One-sided exclusion for repeated-node tangent contact]
+\label{cor:one-sided-exclusion-repeated-node-tangent-contact}
+Under the hypotheses of
+Theorem~\ref{thm:local-classification-lifted-three-point-branch-near-Kv-zero},
+there exists $\varepsilon>0$ such that
+\[
+H_3(a,u)\neq 0
+\]
+for every same-side pair with
+\[
+-\varepsilon<a<u<0
+\qquad\text{or}\qquad
+0<a<u<\varepsilon.
+\]
+Equivalently, every sufficiently small off-diagonal solution of
+\[
+H_3(a,u)=0
+\]
+is necessarily opposite-side.
+\end{corollary}
+
+\begin{proof}
+Using
+\[
+H_3(a,u)=S(u)-S(a)-S'(a)(u-a),
+\]
+one has the exact integral identity
+\[
+H_3(a,u)=\int_a^u (u-t)\,S''(t)\,dt.
+\]
+Since $x=0$ is an isolated finite-order zero of $K_v=(x')^3S''$ on a good
+$v_5$-patch, the analytic function $S''$ has constant nonzero sign on each
+punctured one-sided interval
+\[
+(-\varepsilon,0),
+\qquad
+(0,\varepsilon)
+\]
+after shrinking. If $a<u$ lie on the same side of $0$, then
+\[
+u-t>0
+\]
+for all $t\in(a,u)$, and $S''(t)$ has fixed nonzero sign on the whole interval.
+So the integrand has fixed nonzero sign, and therefore
+\[
+H_3(a,u)\neq 0.
+\qedhere
+\]
 \end{proof}
 
 \begin{corollary}[No infinite-order flatness for $K_v$ on a good $v_5$-patch]
@@ -19564,6 +19728,62 @@ $4$-point septic-jet phenomenon near the diagonal base; it must be genuinely
 global/nonlocal or come from deeper canonical/multi-pair structure.
 \end{remark}
 
+\begin{remark}[Fixed-slope interval graphs, Monge support law, and the remaining global nonmixed burden]
+\label{rem:fixed-slope-interval-graph-monge-support-global-burden}
+There is a useful combinatorial reformulation of the nonadjacent
+pair-pair geometry on a nonmixed patch.
+
+For fixed slope $m$, Lemma~\ref{lem:fixed-slope-intercept-sets} shows that
+each ECT interval $I$ contributes an intercept interval
+\[
+\mathcal B_I(m)=\{\psi_I(x)-mx:x\in J_I\},
+\]
+and that a line $y=mx+b$ is $2$-secant to $\Gamma(I)$ exactly when
+\[
+b\in \operatorname{int}\mathcal B_I(m).
+\]
+So for fixed $m$, the same-slope pair-pair incidence graph is an interval
+graph on the $b$-axis. In particular, any genuinely minimal surviving
+nonadjacent recurrence cannot live at one fixed slope; it must be
+slope-changing.
+
+There is also a useful support-function reformulation. If $m$ lies in the
+interior tangent-slope range of $I$, write
+\[
+\tau_I(m):=\psi_I(x_I(m))-m\,x_I(m),
+\qquad
+\psi_I'(x_I(m))=m.
+\]
+Then
+\[
+\tau_I'(m)=-x_I(m).
+\]
+Hence if $I<J$ in the $x=v_5/c$ ordering, then on any common slope window
+\[
+(\tau_J-\tau_I)'(m)=-(x_J(m)-x_I(m))<0.
+\]
+So each ordered pair of ECT intervals has at most one common interior tangent
+slope. Equivalently, any minimal slope-changing recurrence must be
+pair-nonrepeating.
+
+These two observations give a clean qualitative picture of the remaining
+nonmixed global burden: any surviving bad core must be slope-changing and
+pair-nonrepeating, and after the clean-block compression above it should be
+forced onto a finite defect-gate graph.
+
+However, it is important to record the limitation of this combinatorial
+reduction. Abstract strip/support arrangements with single-crossing support
+curves can still carry bounded fixed-rank overlap components or bounded cells.
+So pure planarity, parity, or pseudoline combinatorics by itself is \emph{not}
+enough to close the remaining branch. Any final contradiction must therefore
+use RH-specific source/provenance structure, not only abstract secant-strip or
+support-curve geometry.
+
+Accordingly, the natural next global target is not another local normal-form
+analysis, but a no-repeated-defect-gate / global no-reentry theorem on the
+reduced turning-defect graph.
+\end{remark}
+
 \begin{remark}[Derivative-geometry meaning of the nonmixed invariant $\mathcal R$]
 \label{rem:derivative-geometry-meaning-of-R}
 On a nonmixed patch,
@@ -19880,6 +20100,74 @@ particular, the currently explicit mixed low-order list is already a finite
 Wronskian-ratio obstruction list.
 \end{remark}
 
+\begin{remark}[Regularized source scalar for the mixed residual quotient]
+\label{rem:regularized-source-scalar-mixed-residual}
+In the notation of Remark~\ref{rem:wronskian-order-reformulation-mixed-list},
+write locally
+\[
+J_\lambda(x)=x^rA(x),
+\qquad
+J_{u_5}(x)=x^rB(x),
+\qquad
+A(0)\neq 0,
+\]
+and set
+\[
+Q(x):=\frac{B(x)}{A(x)}=\frac{J_{u_5}(x)}{J_\lambda(x)}.
+\]
+Then
+\[
+Q'(x)
+=
+\frac{J_\lambda J_{u_5}'-J_{u_5}J_\lambda'}{J_\lambda^2}
+=
+\frac{\mathcal W_{\mathrm{src}}}{J_\lambda^2},
+\]
+where
+\[
+\mathcal W_{\mathrm{src}}
+=
+J_\lambda J_{u_5}'-J_{u_5}J_\lambda'
+\]
+is the source-level Wronskian from
+Proposition~\ref{prop:source-level-Wronskian-nonmixed-four-point}.
+
+Moreover, under the affine gauge change
+\[
+u_5\longmapsto u_5+\alpha c+\beta v_5+\gamma\lambda
+\]
+one has
+\[
+J_{u_5}\longmapsto J_{u_5}+\gamma J_\lambda,
+\qquad
+Q\longmapsto Q+\gamma,
+\]
+so
+\[
+Q'(x)
+=
+\frac{\mathcal W_{\mathrm{src}}}{J_\lambda^2}
+\]
+is gauge-invariant. Thus, modulo the trivial additive constant in the
+regularized ratio $Q$, the mixed residual quotient germ is already controlled
+by the single scalar
+\[
+\mathcal D:=Q'=\frac{\mathcal W_{\mathrm{src}}}{J_\lambda^2}.
+\]
+
+On the nonmixed complement of $K_v=0$,
+Remark~\ref{rem:below-lifted-wronskian-ratio-reformulation} and
+Proposition~\ref{prop:source-level-Wronskian-nonmixed-four-point} give
+\[
+\mathcal D
+=
+\frac{M}{c^2}\,\mathcal R.
+\]
+So the exact fixed-shear residual lane is governed by the same regularized
+source scalar already present on the nonmixed side, rather than by a second
+primitive pointwise highest-new field.
+\end{remark}
+
 \begin{proposition}[Projective secant-shadow reduction on an overlap patch]
 \label{prop:conditional-mixed-lambda-shear-projective-shadow-reduction}
 Let
@@ -20148,6 +20436,25 @@ which is incompatible with the direct septic slice carried by $\Delta_7$.
 This does not yet exclude the mixed two-point branch, but it records the first
 genuinely nontrivial $Y$-$S$ overlap coupling scalar exposed by the current
 attack.
+
+At highest-new weight, this scalar remains in the same differential tower as
+the direct septic source field:
+\[
+\mathcal G^{[1]}
+=
+-\frac{W(u_5,v_5)}{c^2u_5^2}\,W(u_5,A\,q^{(7)}),
+\qquad
+A=\kappa\eta_2.
+\]
+So $\mathcal G$ does not produce a second primitive pointwise highest-new
+generator. It does, however, provide the first useful external-looking rank-$2$
+pointwise coupling on the overlap patch: together,
+\[
+\lambda^{[1]}=A\,q^{(7)}
+\qquad\text{and}\qquad
+\mathcal G^{[1]}
+\]
+recover $(q^{(7)},(q^{(7)})')$ generically.
 \end{remark}
 
 \begin{proposition}[Exact fixed-shear overlap branches off $K_v=0$ force a fold at $S=0$]
@@ -20562,10 +20869,19 @@ K_v=0
 \]
 itself. In the additional exact fixed-shear overlap lane, this residual slice is
 best viewed as quotient-diagonal / involutive rather than as a new mixed local
-carrier: the remaining unresolved work is therefore the finite-order
+carrier: modulo constant shear, its pointwise quotient germ is already governed
+by the single source-level scalar
+\[
+\mathcal D=\frac{\mathcal W_{\mathrm{src}}}{J_\lambda^2},
+\]
+or equivalently on the involution quotient $u=t^2$ by the transport field
+\[
+\widehat{\mathcal D}(u)=\widehat Q'(u).
+\]
+So the remaining unresolved work is best understood as the finite-order
 source-level merger route, the quotient-diagonal continuity/diagonal-collapse
-route, or a source-coupled provenance theorem controlling the residual
-fixed-shear $K_v=0$ overlap configurations.
+route, or a global critical-value / no-reentry theorem for the quotient
+transport scalar on the residual fixed-shear $K_v=0$ overlap configurations.
 \end{remark}
 
 \begin{remark}[Conditional parity reduction on the exact fixed-shear $K_v=0$ slice]
@@ -20598,7 +20914,272 @@ only the quartic--sextic case
 \[
 (4,6)
 \]
-can survive on the exact fixed-shear overlap $K_v=0$ slice.
+can survive on the exact fixed-shear overlap $K_v=0$ slice. The subsequent
+quotient-transport reformulation will show that this is the first rung of an
+even-support residual ladder
+\[
+(m,n)=(r+2,\ r+2e+4),
+\qquad
+r\in 2\mathbf Z_{\ge 0},
+\qquad
+e=\operatorname{ord}_0\widehat{\mathcal D}.
+\]
+\end{remark}
+
+\begin{proposition}[Quotient transport scalar and residual ladder on the exact fixed-shear $K_v=0$ slice]
+\label{prop:quotient-transport-scalar-residual-ladder-fixed-shear-Kv-zero}
+Assume the additional conditional exact fixed-shear overlap lane from
+Remark~\ref{rem:conditional-parity-reduction-fixed-shear-Kv-zero}. Let
+\[
+r:=\operatorname{ord}_0J_\lambda=\operatorname{ord}_0K_v,
+\qquad
+q:=\operatorname{ord}_0J_{u_5},
+\]
+and write in the centered involutive source coordinate $t$
+\[
+J_\lambda(t)=t^rA(t),
+\qquad
+J_{u_5}(t)=t^rB(t),
+\qquad
+A(0)\neq 0.
+\]
+Set
+\[
+Q(t):=\frac{B(t)}{A(t)}=\frac{J_{u_5}(t)}{J_\lambda(t)}.
+\]
+Then the following hold.
+
+\begin{enumerate}
+\item $Q$ is even:
+\[
+Q(-t)=Q(t).
+\]
+Hence there exists a unique analytic germ $\widehat Q$ in
+\[
+u:=t^2
+\]
+such that
+\[
+Q(t)=\widehat Q(t^2).
+\]
+
+\item If
+\[
+\widehat{\mathcal D}(u):=\widehat Q'(u),
+\]
+then
+\[
+\frac{\mathcal W_{\mathrm{src}}(t)}{J_\lambda(t)^2}
+=
+Q'(t)
+=
+2t\,\widehat{\mathcal D}(t^2),
+\]
+and therefore
+\[
+\mathcal W_{\mathrm{src}}(t)
+=
+2\,t^{2r+1}A(t)^2\,\widehat{\mathcal D}(t^2).
+\]
+
+\item If
+\[
+e:=\operatorname{ord}_0\widehat{\mathcal D}\in\mathbf Z_{\ge 0},
+\]
+then
+\[
+q-r=2e+2,
+\qquad
+m=r+2,
+\qquad
+n=r+2e+4,
+\]
+and
+\[
+\operatorname{ord}_0\mathcal W_{\mathrm{src}}=2r+1+2e.
+\]
+
+\item In particular,
+\[
+r\ \text{is even},
+\qquad
+q-r\in 2\mathbf Z_{\ge 2},
+\qquad
+\operatorname{ord}_0\mathcal W_{\mathrm{src}}\ \text{is odd}.
+\]
+So the exact fixed-shear residual lane lies on an even-support ladder over
+$K_v=0$, while the associated source-level Wronskian vanishes to odd order.
+
+\item The currently surviving quartic--sextic residual model is exactly the
+first rung of this ladder:
+\[
+(m,n)=(4,6)
+\iff
+(r,e)=(2,0).
+\]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+By Remark~\ref{rem:conditional-parity-reduction-fixed-shear-Kv-zero}, the
+projected germ has the form
+\[
+\Phi(t)=(t^m,G(t)),
+\qquad
+m\ \text{even},
+\qquad
+G(-t)=G(t).
+\]
+Thus the quotient-diagonal mixed residue is even/even, so the regularized ratio
+$Q=B/A$ is even, giving the factorization
+\[
+Q(t)=\widehat Q(t^2).
+\]
+Differentiating yields
+\[
+Q'(t)=2t\,\widehat Q'(t^2)=2t\,\widehat{\mathcal D}(t^2).
+\]
+On the other hand,
+Remark~\ref{rem:regularized-source-scalar-mixed-residual} gives
+\[
+Q'(t)=\frac{\mathcal W_{\mathrm{src}}(t)}{J_\lambda(t)^2}.
+\]
+Since
+\[
+J_\lambda(t)^2=t^{2r}A(t)^2,
+\]
+this gives
+\[
+\mathcal W_{\mathrm{src}}(t)
+=
+2\,t^{2r+1}A(t)^2\,\widehat{\mathcal D}(t^2).
+\]
+If $e=\operatorname{ord}_0\widehat{\mathcal D}$, then
+\[
+\widehat Q(u)-\widehat Q(0)\sim u^{e+1},
+\]
+so
+\[
+Q(t)-Q(0)\sim t^{2e+2}.
+\]
+Hence
+\[
+q-r=\operatorname{ord}_0(Q(t)-Q(0))=2e+2.
+\]
+Now
+Remark~\ref{rem:wronskian-order-reformulation-mixed-list} gives
+\[
+m=r+2,
+\qquad
+n=q+2,
+\]
+so
+\[
+n=r+2e+4.
+\]
+Also
+\[
+\operatorname{ord}_0\mathcal W_{\mathrm{src}}=2r+1+2e.
+\]
+Since $m$ is even, $r=m-2$ is even. The final statements follow immediately.
+\end{proof}
+
+\begin{corollary}[Quartic--sextic quotient injectivity and local no-reentry]
+\label{cor:quartic-sextic-quotient-injectivity-local-no-reentry}
+Assume the quartic--sextic residual case
+\[
+(m,n)=(4,6).
+\]
+Then
+\[
+Q(t)=Q(0)+\kappa_{2,2}t^2+O(t^4),
+\qquad
+\widehat Q(u)=Q(0)+\kappa_{2,2}u+O(u^2),
+\]
+so
+\[
+\widehat{\mathcal D}(0)=\kappa_{2,2}\neq 0.
+\]
+Equivalently,
+\[
+\kappa_{2,2}
+=
+\frac12\left(\frac{\mathcal W_{\mathrm{src}}}{J_\lambda^2}\right)'(0)
+=
+\frac{\mathcal W_{\mathrm{src}}^{(5)}(0)}{60\,(J_\lambda''(0))^2}.
+\]
+
+Hence $\widehat Q$ is a local analytic diffeomorphism in the quotient variable
+$u=t^2$. In particular, after quotienting the involution
+$t\leftrightarrow -t$, there is no local exact fixed-shear re-entry: every
+nearby fixed-shear level is attained by at most one quotient point.
+\end{corollary}
+
+\begin{proof}
+In the quartic--sextic case, Proposition~\ref{prop:quotient-transport-scalar-residual-ladder-fixed-shear-Kv-zero}
+gives
+\[
+(r,e)=(2,0).
+\]
+So $\widehat{\mathcal D}(0)\neq 0$, which is exactly the displayed coefficient
+$\kappa_{2,2}$. The explicit formulas follow from
+Remark~\ref{rem:wronskian-order-reformulation-mixed-list} and the identity
+\[
+Q'(t)=\frac{\mathcal W_{\mathrm{src}}}{J_\lambda^2}.
+\]
+Since
+\[
+\widehat Q'(0)=\widehat{\mathcal D}(0)\neq 0,
+\]
+the analytic inverse function theorem implies that $\widehat Q$ is a local
+diffeomorphism in $u=t^2$.
+\end{proof}
+
+\begin{remark}[Quotient-cusp interpretation and the no-reset issue]
+\label{rem:quotient-cusp-interpretation-no-reset-Kv-zero}
+The involutive quotient picture on the residual exact fixed-shear
+$K_v=0$ slice is best read as a one-branched quotient singularity rather than
+as a new branching mixed carrier.
+
+Indeed, in the notation of
+Remark~\ref{rem:conditional-parity-reduction-fixed-shear-Kv-zero}, one has
+\[
+\Phi(t)=(t^m,G(t)),
+\qquad
+m\ \text{even},
+\qquad
+G(-t)=G(t),
+\]
+so after passing to the quotient parameter
+\[
+u=t^2
+\]
+the projected germ descends to a single analytic quotient branch
+\[
+\bar\Phi(u)=\bigl(u^{m/2},\bar G(u)\bigr).
+\]
+In particular, in the quartic--sextic case
+\[
+(m,n)=(4,6),
+\]
+the quotient branch is cusp-like:
+\[
+\bar\Phi(u)\sim (u^2,u^3+\cdots).
+\]
+
+Thus any local quantity that genuinely factors through the quotient-diagonal
+projected germ --- equivalently through the quotient-visible fixed-shear
+transport data --- is single-valued in $u$ and has trivial local monodromy at
+the involutive point. In this sense, the residual exact fixed-shear
+$K_v=0$ locus is best viewed as a quotient-cusp splice rather than as a new
+local source of cycle rank.
+
+At the same time, this does \emph{not} yet by itself prove global no-reentry on
+the $K_v=0$ lane: one still has to show that the full transported overlap /
+critical-value state relevant to the later finite-core problem is indeed
+quotient-visible. So the live mixed residual question is now a
+\emph{no-hidden-reset} question at $K_v=0$, not another local branch
+classification problem.
 \end{remark}
 
 \noindent\emph{Frame convention for the scalar block.}
@@ -22412,13 +22993,26 @@ T_v=0
 \quad\text{or}\quad
 \mathcal R=0.
 \]
-Here the $K_v=0$ side no longer survives as an independent mixed carrier: it is
-already absorbed by the lifted three-point / repeated-node package, while the
-right-pincer/source-coupled lower-core lane is locally non-carrying in the
-sufficiently small regime and patch-loss phenomena reduce only to lower-core
-quotient or already-quintic handoffs. Thus the genuinely mixed small-branch
-problem is best read as mixed-to-scalar capture rather than as another
-independent branch geometry.
+Here the $K_v=0$ side no longer survives as an independent mixed carrier on the
+clean small-branch four-point side, but on the additional conditional exact
+fixed-shear overlap slice it still leaves a narrower residual two-point burden.
+That residual slice is not a new mixed local carrier: modulo constant shear,
+its pointwise quotient germ is already governed by
+\[
+\mathcal D=\frac{\mathcal W_{\mathrm{src}}}{J_\lambda^2},
+\]
+or equivalently on the involution quotient by
+\[
+\widehat{\mathcal D}(u)=\widehat Q'(u).
+\]
+Moreover, by
+Corollary~\ref{cor:one-sided-exclusion-repeated-node-tangent-contact},
+the ordinary local repeated-node tangent-contact mechanism on a good
+$v_5$-patch is necessarily opposite-side, so this quotient-diagonal residual
+lane cannot locally merge with the standard lifted $3$-point branch geometry.
+Thus the genuinely mixed small-branch problem is best read as mixed-to-scalar
+capture together with a separate quotient-diagonal residual transport problem,
+not as another free mixed carrier geometry.
 
 In parallel, the finite-core endgame now splits into three layers.
 
@@ -22480,8 +23074,9 @@ K_v=0.
 \]
 So the remaining structural issue on the two-point side is one of three
 things: verification of the finite-order merger criterion; the
-quotient-diagonal continuity/diagonal-collapse route; or source-coupled
-control of these explicit mixed exceptional loci.
+quotient-diagonal continuity/diagonal-collapse route; or a global
+critical-value / no-reentry theorem for the involution-quotiented transport
+scalar governing these explicit mixed exceptional loci.
 
 Second, on the lifted three-point side, shrinking exact circuits now
 concentrate into $K_v=0$, and this concentration is explicitly
@@ -22567,7 +23162,7 @@ rather than a new local mixed septic-jet pattern.
 
 \begin{remark}[Post-draft findings: established, provisional, and live]
 \label{rem:post-draft-findings-established-provisional-live}
-Since this draft state, nine additional conclusions have emerged, several of
+Since this draft state, several additional conclusions have emerged, many of
 which are now formalized below as propositions, corollaries, and theorems.
 
 First, on the two-point branch, the exact finite-order source criterion remains
@@ -22592,6 +23187,56 @@ fixed-shear overlap lane the complementary slice
 transfers into the established nonmixed $4$-point geometry. So the genuinely
 remaining derivative-geometric two-point residue is now the $K_v=0$ lane
 itself, rather than the full union $\{S=0\}\cup\{K_v=0\}$.
+
+More precisely, the current new-generator audit on this residual exact
+fixed-shear $K_v=0$ lane is negative at the pointwise level. Modulo the
+trivial additive constant coming from the exact fixed-shear gauge
+\[
+u_5\longmapsto u_5+\gamma\lambda,
+\]
+the regularized quotient germ is already controlled by the single source-level
+scalar
+\[
+\mathcal D
+=
+\frac{\mathcal W_{\mathrm{src}}}{J_\lambda^2}.
+\]
+After quotienting the involution $t\leftrightarrow -t$ on the residual slice,
+this becomes the quotient transport scalar
+\[
+\widehat{\mathcal D}(u)=\widehat Q'(u),
+\qquad
+u=t^2,
+\]
+and the residual local type is organized by the even-support ladder
+\[
+(m,n)=(r+2,\ r+2e+4),
+\qquad
+r=\operatorname{ord}_0K_v\in 2\mathbf Z_{\ge 0},
+\qquad
+e=\operatorname{ord}_0\widehat{\mathcal D}.
+\]
+In particular, the quartic--sextic case is the first rung
+\[
+(4,6)\iff (r,e)=(2,0),
+\]
+and on the quotient branch it is locally one-sheeted:
+\[
+\widehat Q'(0)=\widehat{\mathcal D}(0)=\kappa_{2,2}\neq 0.
+\]
+So the residual exact fixed-shear burden is no longer a search for a second
+pointwise highest-new field or another local mixed branch classification.
+Rather, it has become a global critical-value / no-reentry problem for the
+single quotient transport scalar $\widehat{\mathcal D}$, together with the
+still-open question whether the full transported overlap state is already
+quotient-visible there.
+
+Moreover, by
+Corollary~\ref{cor:one-sided-exclusion-repeated-node-tangent-contact},
+every sufficiently small off-diagonal repeated-node tangent-contact branch on a
+good $v_5$-patch is necessarily opposite-side. Thus the quotient-diagonal exact
+fixed-shear residual lane cannot locally merge with the ordinary lifted
+$3$-point branch mechanism.
 
 Second, on the lifted four-point branch, the explicit low-order obstruction
 list has been reduced to the six coefficients
@@ -22729,15 +23374,31 @@ contained entirely in
 on a nonplanar good patch, except after entry into already-absorbed
 affine-planar or lower-core regimes.
 
-So the present frontier is no longer a generic local geometry problem. It is
-the combination of either a source-level or quotient-diagonal two-point closure
-theorem, or else a source-coupled provenance theorem for the residual exact
-fixed-shear overlap configurations on
+So the present frontier is no longer a generic local geometry problem. On the
+residual exact fixed-shear overlap slice
 \[
 K_v=0,
 \]
-together with the already-separated remaining issues on the higher-core
-branches.
+the pointwise quotient structure has already compressed to the single
+transport scalar
+\[
+\widehat{\mathcal D}(u)=\widehat Q'(u),
+\qquad
+u=t^2.
+\]
+The quartic--sextic rung is the first explicit case, and there the quotient
+branch is locally one-sheeted. Thus the residual $K_v=0$ lane is best viewed
+as a quotient-diagonal / involutive transport problem rather than as a new
+mixed local carrier.
+
+At the same time, this pointwise compression does \emph{not} yet by itself
+settle the global overlap problem: one still needs a no-hidden-reset theorem
+showing that the full transported overlap / critical-value state is already
+visible in the quotient branch data. Accordingly, the live two-point burden on
+the $K_v=0$ slice is best read as a global critical-value / no-reentry
+problem for $\widehat{\mathcal D}$, together with the alternative
+source-level merger route and the already-separated remaining issues on the
+higher-core branches.
 \end{remark}
 
 \begin{remark}[Two-point burden after mixed four-point closure]
@@ -22763,13 +23424,70 @@ classification theorem.
 In the additional conditional exact fixed-shear overlap lane, this perspective
 becomes especially sharp: off $K_v=0$, the remaining task is best understood as
 absorption into the existing nonmixed odd-zero $\mathcal R$-package, while on
-the overlap exceptional slice the residual burden is naturally read as
-quotient-diagonal or source-provenance control rather than as a new mixed local
-classification problem.
+the overlap exceptional slice the pointwise quotient structure has already
+compressed to the single source-level scalar
+\[
+\mathcal D=\frac{\mathcal W_{\mathrm{src}}}{J_\lambda^2},
+\]
+or equivalently after quotienting the involution $t\leftrightarrow -t$ to the
+quotient transport field
+\[
+\widehat{\mathcal D}(u)=\widehat Q'(u),
+\qquad
+u=t^2.
+\]
+Thus the residual $K_v=0$ lane is no longer best viewed as an unresolved mixed
+local curvature-branch problem, but as a one-dimensional quotient-diagonal
+transport problem.
 
-In particular, on the additional exact fixed-shear overlap slice, the residual
-$K_v=0$ lane is most naturally read as quotient-diagonal / involutive
-provenance rather than as an unresolved mixed local curvature-branch problem.
+In particular, the quartic--sextic case is the first rung of the even-support
+residual ladder and is locally one-sheeted on the quotient branch:
+\[
+(4,6)\iff (r,e)=(2,0),
+\qquad
+\widehat{\mathcal D}(0)=\kappa_{2,2}\neq 0.
+\]
+So the remaining live burden on this overlap slice is a global critical-value /
+no-reentry theorem for $\widehat{\mathcal D}$, not another local mixed
+classification theorem.
+
+What is still missing is the corresponding global visibility theorem: one must
+show that the full transported overlap state relevant to the later finite-core
+problem is already visible in this quotient transport scalar. In that sense,
+the live issue on the mixed residual side is now a no-hidden-reset problem at
+$K_v=0$, not a new local branch-classification problem.
+\end{remark}
+
+\begin{remark}[Residual mixed two-point lane: structural gain and present limitation]
+\label{rem:residual-mixed-two-point-lane-structural-gain-limitation}
+The present two-point picture has two genuine structural gains.
+
+First, after the off-$K_v=0$ absorption results and the transfer of the
+simple-septic-zero slice into the nonmixed $4$-point theory, the
+derivative-geometric mixed residue is sharply concentrated on the overlap
+exceptional set
+\[
+K_v=0
+\]
+itself.
+
+Second, on the additional exact fixed-shear overlap lane this residual slice is
+already organized by a single quotient transport scalar
+\[
+\widehat{\mathcal D}(u)=\widehat Q'(u),
+\qquad
+u=t^2,
+\]
+with the even-support ladder from
+Proposition~\ref{prop:quotient-transport-scalar-residual-ladder-fixed-shear-Kv-zero}.
+So the residual lane has become one-dimensional at the pointwise quotient level.
+
+What is \emph{not} yet proved is the corresponding global no-reentry theorem.
+The quartic--sextic case is locally one-sheeted on the quotient branch, but one
+still needs a theorem showing that the full transported overlap state relevant
+to the later minimal-core problem is already visible in this quotient scalar.
+Thus the live issue on the mixed residual side is now not local classification
+but global quotient-visible transport.
 \end{remark}
 
 \begin{proposition}[$u_5$-chart exceptional-point handoff]
@@ -23083,15 +23801,27 @@ repeated-node, or already-quintic handoffs.
 After
 Theorem~\ref{thm:global-mixed-to-scalar-capture-clean-patch},
 the clean mixed four-point case is no longer an independent global frontier.
-What remains genuinely open is only the scalar/source-level control of the
-nonmixed side --- namely the global behavior of odd zeros of
+What remains genuinely open is the global propagation problem for the
+nonmixed/source-level side --- equivalently the nonadjacent recurrence problem
+for the normalized line-incidence geometry --- together with the separate
+two-point program.
+
+More concretely, on a generic component the remaining theorem may be read as the
+absence of nonadjacent $2$-secant recurrence in the affine chart, equivalently
+as no nonadjacent level re-entry for
 \[
-\mathcal R=\frac{T_v}{K_v^2}
+\beta(h)=-\frac{L(h)}{M(h)},
 \]
-on opened arcs --- together with the separate two-point program. In
-particular, the mixed four-point route should no longer be read as requiring
-new branch geometry beyond the centered-base local theorem and the already
-existing lower-core and nonmixed handoff packages.
+equivalently as no same-parity vertical-line re-entry for the dual curve
+\[
+T(h)=\left(-\frac{L(h)}{M(h)},\frac{N(h)}{M(h)}\right).
+\]
+The current local theory already resolves the finite-order $W=0,\ M\neq 0$
+boundary behavior and the turning-boundary generic blocks, and it also shows
+that the mixed residual overlap lane is concentrated on $K_v=0$ and should be
+read there as a quotient-diagonal transport problem rather than as a new mixed
+carrier. Thus the remaining burden is global/nonlocal and finite-core in
+nature, not another local mixed branch-geometry theorem.
 \end{remark}
 
 \section{Endgame architecture and remaining propagation problem outside the clean mixed four-point case}
@@ -23142,6 +23872,23 @@ tangent-line data on nonadjacent branches. In the three equivalent languages
 above, this is a theorem about the level sets of $\beta$, about vertical-line
 re-entry for the dual curve $T$, or about nonadjacent slope re-entry for the
 highest-new scalar graph $\phi$.
+\end{remark}
+
+\begin{remark}[What the present global reduction does and does not buy]
+\label{rem:what-global-reduction-does-and-does-not-buy}
+The results above now force the remaining propagation problem into a much
+smaller combinatorial class: fixed-slope incidence is interval-graph geometry,
+support functions satisfy a strict Monge law, and turning-boundary generic
+blocks contribute no pair-pair geometry at all. So any surviving bad core must
+be slope-changing, pair-nonrepeating, and carried by a finite defect-gate
+skeleton.
+
+However, it is important to record a limitation. Abstract strip/support
+arrangements with single-crossing support curves can still admit bounded
+fixed-rank overlap components. Thus pure planarity, parity, or pseudoline
+combinatorics does \emph{not} by itself close the remaining branch. Any final
+contradiction must therefore use RH-specific source/provenance structure, not
+only generic secant-strip geometry.
 \end{remark}
 
 \begin{remark}[Warning: what the current local theory does \emph{not} imply]
