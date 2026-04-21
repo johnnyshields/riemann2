@@ -17064,9 +17064,10 @@ Thus the adjacent-two-odd-zero chamber is not itself the residual obstruction.
 What remains open is narrower and genuinely global: whether a rooted crossing
 can occur only after the anchor passes through an odd-order zero of
 $\mathcal R$ (equivalently of $\mathcal W_{\mathrm{src}}$), or after branch
-exit, or after affine-planar collapse. In other words, the remaining
-discriminant-theoretic bottleneck is an \emph{anchor-sign-change no-crossing
-problem}, not an entry-point singularity problem.
+exit, or after affine-planar collapse. In other words, the remaining discriminant-theoretic bottleneck is a
+\emph{delayed post-anchor no-crossing problem}: not an entry-point singularity
+problem, and not crossing at the anchor odd zero itself, but a later crossing on
+a dangerous post-anchor chamber.
 \end{remark}
 
 \begin{proposition}[Rooted-defect transport and stationary first root]
@@ -17455,21 +17456,31 @@ equivalent to the planar formulation
 \begin{remark}[Minimal unresolved configuration on this route]
 \label{rem:minimal-unresolved-configuration-repeated-source}
 Proposition~\ref{prop:at-most-one-odd-zero-no-genuine-repeated-source-obstruction}
-shows that the positive-kernel / source-determinant route has already ruled out
-every opened nonmixed arc carrying at most one odd zero of $\mathcal R$.
-Moreover,
+rules out every opened nonmixed arc carrying at most one odd zero of
+$\mathcal R$, and
 Corollary~\ref{cor:no-crossing-adjacent-two-odd-zero-under-anchor-sign-preservation}
-shows that even after the segment acquires the next adjacent odd zero, no
-rooted crossing can occur as long as the anchor-side value $\mathcal R(a)$
-keeps a fixed sign along the continued branch.
+rules out rooted crossing on the standard adjacent-two-odd-zero chamber as long
+as the anchor-side value $\mathcal R(a)$ keeps a fixed sign.
 
-Accordingly, the first genuinely unresolved configuration is now narrower:
-a repeated-source critical branch born at one odd zero of $\mathcal R$,
-continued past acquisition of the next adjacent odd zero, and then surviving
-until the anchor itself reaches an odd zero of $\mathcal R$ (or until the
-branch exits the arc, or affine-planar collapse occurs).  Thus the sharpened
-source-coupling target is an anchor-sign-change / odd-zero-connection
-exclusion theorem on genuine opened nonmixed arcs.
+The new odd-anchor passage theorem
+(Proposition~\ref{prop:odd-anchor-passage-no-reset})
+shows that no rooted crossing can occur at the anchor odd zero itself or
+immediately after it is crossed, while
+Corollary~\ref{cor:first-post-anchor-chamber-dangerous}
+shows that the subsequent post-anchor chambers alternate dangerous and safe,
+beginning with a dangerous first post-anchor chamber.
+
+Remark~\ref{rem:no-go-local-scalar-first-dangerous-chamber} shows that the
+first dangerous chamber is already formally compatible with the local scalar
+rooted equations and fold data. Accordingly, the first genuinely unresolved
+configuration is no longer the adjacent-two-odd-zero chamber itself, nor the
+anchor odd zero passage, but a \emph{delayed} crossing on a dangerous
+post-anchor chamber. Thus the sharpened source-coupling target is a delayed
+no-crossing / profile-realizability exclusion theorem for the moving shear
+\[
+f_a=u_5-\mathcal Z(a)\lambda
+\]
+on genuine opened nonmixed arcs.
 \end{remark}
 
 \begin{remark}[No-go for a pure level-set / barrier theorem for $\mathcal Z$]
@@ -17797,8 +17808,8 @@ neither the scalar level-set topology of $\mathcal Z$ nor the abstract
 provenance of a point on the continued born branch suffices by itself to exclude
 a later rooted crossing.
 
-The new anchor-sign argument removes a substantial part of that freedom:
-on any continuation interval on which the anchor-side value
+The new anchor-sign and odd-anchor-passage arguments remove a substantial part
+of that freedom. On any continuation interval on which the anchor-side value
 \[
 \mathcal R(a)
 \]
@@ -17806,15 +17817,22 @@ keeps a fixed sign, the RH-selected slice
 \[
 \gamma=\mathcal Z(a)
 \]
-cannot cross the continued discriminant curve. Accordingly, any residual
-planar/scalar crossing must occur only after an anchor-sign change (or after
-branch exit, or after affine-planar collapse). So beyond the entrance analysis,
-the remaining problem is not arbitrary global crossing, but a genuinely global
-\emph{anchor-sign-change no-crossing problem} for the continued discriminant
-curve against the RH-selected slice.
+cannot cross the continued discriminant curve. When the anchor itself passes
+through an odd-order zero of $\mathcal R$, the integrating-factor defect keeps
+its incoming sign across that odd anchor zero, so a rooted crossing cannot occur
+there or immediately after it. The post-anchor chambers then alternate
+dangerous and safe, beginning with a dangerous first post-anchor chamber.
 
-Accordingly, any further progress on the nonmixed repeated-source branch must
-use structure invisible in the planar normalized model, namely a genuinely
+However, Remark~\ref{rem:no-go-local-scalar-first-dangerous-chamber} shows that
+already in that first dangerous chamber the local normalized rooted equations
+and local fold/transversality data are formally realizable in the planar scalar
+model. Accordingly, the present scalar/discriminant package still has a genuine
+ceiling: beyond the fixed-sign analysis, the remaining problem is not arbitrary
+global crossing, but a genuinely source-coupled \emph{delayed no-crossing /
+profile-realizability problem} on dangerous post-anchor chambers.
+
+So any further progress on the nonmixed repeated-source branch must use
+structure invisible in the planar normalized model, namely a genuinely
 source-coupled constraint linking
 \[
 \Psi_a(h),\qquad
@@ -18343,20 +18361,381 @@ value
 \]
 keep a fixed sign along the continuation interval.
 
-Accordingly, the remaining unresolved possibility on this route is narrower:
-a first rooted point could occur only after the anchor itself crosses an
-odd-order zero of $\mathcal R$, or after the branch exits the arc, or after
-affine-planar collapse. Thus the true residual obstruction is no longer the
-standard adjacent-two-odd-zero chamber itself, but the transition in which the
-anchor-side sign of $\mathcal R$ changes along the continued branch.
+Accordingly, the remaining unresolved possibility on this route is narrower, but
+it is not yet exhausted. A rooted point can occur only after the anchor itself
+passes through an odd-order zero of $\mathcal R$, or after branch exit, or after
+affine-planar collapse. Moreover,
+Proposition~\ref{prop:odd-anchor-passage-no-reset} shows that no rooted crossing
+can occur at that anchor odd zero itself or immediately after passage, and
+Corollary~\ref{cor:first-post-anchor-chamber-dangerous} shows that the
+subsequent post-anchor chambers alternate dangerous and safe. Thus the true
+residual obstruction is a delayed crossing on a dangerous post-anchor chamber,
+not the raw adjacent-two-odd-zero chamber itself.
+\end{remark}
+
+\begin{proposition}[Odd-anchor passage has no sign reset]
+\label{prop:odd-anchor-passage-no-reset}
+Let $J$ be an opened nonmixed arc, and work in a local normalized nonmixed
+chart on which
+\[
+S(t)=t^2,
+\qquad
+\Gamma_a=D_a.
+\]
+Let
+\[
+q\in J
+\]
+be an isolated odd-order zero of $\mathcal R$, and let
+\[
+\tau:(q-\delta,q+\delta)\to J
+\]
+be a real-analytic continuation of the repeated-source critical branch such that
+\[
+\tau(a)>a,
+\qquad
+D_a'(\tau(a))=0
+\qquad (a\in(q-\delta,q+\delta)).
+\]
+Set
+\[
+G(a):=D_a(\tau(a))-\mathcal Z(a),
+\qquad
+L(a):=\tau(a)-a,
+\]
+and define
+\[
+\mathcal A'(a):=\frac{2}{L(a)},
+\qquad
+\mathscr G(a):=e^{-\mathcal A(a)}G(a).
+\]
+Assume that there exists $\epsilon\in\{\pm1\}$ such that
+\[
+\epsilon\,\mathcal R(a)>0,
+\qquad
+\epsilon\,G(a)>0
+\qquad\text{for every }a\in(q,q+\delta).
+\]
+Then
+\[
+\epsilon\,G(q)>0.
+\]
+In particular, $G(q)\neq 0$. Hence, after possibly shrinking $\delta$,
+\[
+\epsilon\,G(a)>0
+\qquad\text{for every }a\in(q-\delta,q+\delta).
+\]
+Since $q$ is an odd-order zero of $\mathcal R$, the sign of $\mathcal R$ flips
+across $q$; therefore on the outgoing side
+\[
+\operatorname{sgn}G(a)=-\operatorname{sgn}\mathcal R(a)
+\qquad (a\in(q-\delta,q)).
+\]
+So a rooted crossing cannot occur at the anchor odd zero itself, nor
+immediately after passage across it.
+\end{proposition}
+
+\begin{proof}
+By
+Proposition~\ref{prop:rooted-defect-transport-stationary-first-root},
+\[
+G'(a)=\frac{2}{L(a)}\,G(a)-\mathcal R(a),
+\]
+hence
+\[
+\mathscr G'(a)=-e^{-\mathcal A(a)}\mathcal R(a).
+\]
+Assume for contradiction that $G(q)=0$. Then $\mathscr G(q)=0$, and for
+$a\in(q,q+\delta)$,
+\[
+\mathscr G(a)
+=
+\mathscr G(q)+\int_q^a \mathscr G'(s)\,ds
+=
+-\int_q^a e^{-\mathcal A(s)}\mathcal R(s)\,ds.
+\]
+Since $e^{-\mathcal A(s)}>0$ and $\epsilon\,\mathcal R(s)>0$ on $(q,q+\delta)$,
+this gives
+\[
+\epsilon\,\mathscr G(a)<0
+\qquad (a\in(q,q+\delta)),
+\]
+hence
+\[
+\epsilon\,G(a)<0
+\qquad (a\in(q,q+\delta)),
+\]
+contradicting the hypothesis. Therefore $G(q)\neq 0$. Since
+\[
+\epsilon\,G(a)>0
+\qquad (a\in(q,q+\delta)),
+\]
+continuity yields
+\[
+\epsilon\,G(q)\ge 0,
+\]
+and the nonvanishing just proved forces
+\[
+\epsilon\,G(q)>0.
+\]
+A second continuity argument then gives
+\[
+\epsilon\,G(a)>0
+\qquad (a\in(q-\delta,q+\delta))
+\]
+after shrinking $\delta$ if necessary. Finally, because $q$ is an odd-order zero
+of $\mathcal R$, its sign flips across $q$, so on $(q-\delta,q)$ one has
+\[
+\operatorname{sgn}G(a)=-\operatorname{sgn}\mathcal R(a).
+\]
+In particular $G$ cannot vanish there.
+\end{proof}
+
+\begin{proposition}[Weighted-defect recursion on post-anchor chambers]
+\label{prop:weighted-defect-recursion-post-anchor-chambers}
+Assume the setting of
+Proposition~\ref{prop:odd-anchor-passage-no-reset}. Let
+\[
+q_1>q_2>\cdots>q_N
+\]
+be successive odd-order zeros of $\mathcal R$ crossed by the anchor along the
+continued branch after the adjacent-two-odd-zero chamber, and set
+\[
+I_j:=(q_{j+1},q_j)
+\qquad (1\le j\le N-1).
+\]
+Assume that the continued branch exists real-analytically on
+\[
+\bigcup_{j=1}^{N-1} I_j.
+\]
+For each $j$, let
+\[
+\epsilon_j:=\operatorname{sgn}(\mathcal R|_{I_j})\in\{\pm1\},
+\qquad
+m_j(a):=\int_a^{q_j} e^{-\mathcal A(s)}|\mathcal R(s)|\,ds
+\qquad (a\in I_j),
+\]
+and
+\[
+M_j:=m_j(q_{j+1})>0.
+\]
+Then on each $I_j$,
+\[
+\mathscr G(a)=\mathscr G(q_j)+\epsilon_j\,m_j(a).
+\]
+Consequently:
+\begin{enumerate}
+\item if
+\[
+\operatorname{sgn}\mathscr G(q_j)=\epsilon_j,
+\]
+then $\mathscr G$ has no zero on $I_j$;
+
+\item if
+\[
+\operatorname{sgn}\mathscr G(q_j)=-\epsilon_j,
+\]
+then $\mathscr G$ has a zero on $I_j$ if and only if
+\[
+M_j>|\mathscr G(q_j)|,
+\]
+and in that case the zero is unique;
+
+\item if $\mathscr G$ has no zero on $I_j$, then
+\[
+\operatorname{sgn}\mathscr G(q_{j+1})
+=
+\operatorname{sgn}\mathscr G(q_j).
+\]
+\end{enumerate}
+Since $\epsilon_{j+1}=-\epsilon_j$, the chamber type
+\[
+\operatorname{sgn}\mathscr G(q_j)\ \text{ versus }\ \epsilon_j
+\]
+alternates from one post-anchor chamber to the next as long as no rooted
+crossing has yet occurred.
+\end{proposition}
+
+\begin{proof}
+On $I_j$ one has
+\[
+\mathscr G'(a)=-e^{-\mathcal A(a)}\mathcal R(a)
+=-\epsilon_j e^{-\mathcal A(a)}|\mathcal R(a)|.
+\]
+Hence for $a\in I_j$,
+\[
+\mathscr G(a)
+=
+\mathscr G(q_j)+\int_{q_j}^a \mathscr G'(s)\,ds
+=
+\mathscr G(q_j)+\epsilon_j\int_a^{q_j}e^{-\mathcal A(s)}|\mathcal R(s)|\,ds,
+\]
+which is the stated formula.
+
+Now $m_j(a)$ is strictly increasing as $a$ decreases from $q_j$ to $q_{j+1}$,
+with
+\[
+m_j(q_j)=0,
+\qquad
+m_j(q_{j+1})=M_j.
+\]
+So if
+\[
+\operatorname{sgn}\mathscr G(q_j)=\epsilon_j,
+\]
+then
+\[
+\mathscr G(a)=\epsilon_j\bigl(|\mathscr G(q_j)|+m_j(a)\bigr)
+\]
+has fixed sign on $I_j$ and no zero. If instead
+\[
+\operatorname{sgn}\mathscr G(q_j)=-\epsilon_j,
+\]
+then
+\[
+\mathscr G(a)=\epsilon_j\bigl(-|\mathscr G(q_j)|+m_j(a)\bigr),
+\]
+so a zero occurs precisely when $m_j(a)=|\mathscr G(q_j)|$, which happens if
+and only if
+\[
+M_j>|\mathscr G(q_j)|.
+\]
+Because $m_j$ is strictly monotone, that zero is unique.
+
+Finally, if no zero occurs on $I_j$, then $\mathscr G$ keeps one sign
+throughout the interval, so in particular
+\[
+\operatorname{sgn}\mathscr G(q_{j+1})
+=
+\operatorname{sgn}\mathscr G(q_j).
+\]
+Since the $\epsilon_j$ alternate at successive odd zeros, the relative chamber
+type alternates as claimed.
+\end{proof}
+
+\begin{corollary}[The first post-anchor chamber is dangerous]
+\label{cor:first-post-anchor-chamber-dangerous}
+Let $q_1$ be the first odd-order zero of $\mathcal R$ crossed by the anchor
+after the adjacent-two-odd-zero chamber, and let
+\[
+I_1:=(q_2,q_1)
+\]
+be the first post-anchor chamber. Assume the continued born branch extends
+real-analytically across $q_1$ and on $I_1$. Then:
+\begin{enumerate}
+\item no rooted crossing occurs at $q_1$ or immediately after crossing it;
+
+\item on $I_1$ one has
+\[
+\operatorname{sgn}\mathscr G(q_1)=-\epsilon_1,
+\]
+so $I_1$ is the first \emph{dangerous} post-anchor chamber;
+
+\item as long as no rooted crossing has yet occurred, the post-anchor chambers
+alternate dangerous/safe/dangerous/safe\ldots\ .
+\end{enumerate}
+In particular, the first chamber in which a rooted crossing is even eligible
+after the anchor-sign-preservation interval is the first post-anchor chamber,
+namely the chamber in which the active segment carries three odd zeros of
+$\mathcal R$.
+\end{corollary}
+
+\begin{proof}
+The adjacent-two-odd-zero chamber is root-free by
+Corollary~\ref{cor:no-crossing-adjacent-two-odd-zero-under-anchor-sign-preservation}.
+At its left endpoint $q_1$, the anchor crosses an odd-order zero of
+$\mathcal R$. Proposition~\ref{prop:odd-anchor-passage-no-reset} shows that
+$\mathscr G$ keeps its incoming sign across $q_1$, while $\mathcal R$ changes
+sign there. Thus on the outgoing chamber $I_1$ the signs are opposite:
+\[
+\operatorname{sgn}\mathscr G(q_1)=-\epsilon_1.
+\]
+The no-root statement at and immediately after $q_1$ is also exactly
+Proposition~\ref{prop:odd-anchor-passage-no-reset}. The alternation of chamber
+types then follows from
+Proposition~\ref{prop:weighted-defect-recursion-post-anchor-chambers}(3).
+\end{proof}
+
+\begin{remark}[No-go for purely local scalar exclusion in the first dangerous chamber]
+\label{rem:no-go-local-scalar-first-dangerous-chamber}
+At a rooted critical point, after normalizing the active interval to
+\[
+x=a+sL,
+\qquad
+0\le s\le 1,
+\qquad
+L=\tau(a)-a,
+\]
+the profile
+\[
+R_a(s):=\mathcal R(a+sL)
+\]
+satisfies the two local scalar moment identities
+\[
+\int_0^1 (1-s)^2\,R_a(s)\,ds=0,
+\qquad
+\int_0^1 s(1-s)\,R_a(s)\,ds=0.
+\]
+In the first dangerous post-anchor chamber, the sign pattern of $R_a$ on
+$[0,1]$ has four lobes:
+\[
++,-,+,-
+\]
+or its global negative. At the purely local scalar level, these conditions are
+still formally too weak to force contradiction.
+
+Indeed, for parameters $A,B\in\mathbf R$, define the quarter-piece profile
+\[
+R_{A,B}(s):=
+\begin{cases}
+A, & 0<s<\frac14,\\[4pt]
+-B, & \frac14<s<\frac12,\\[4pt]
+\frac{-15A+7B}{2}, & \frac12<s<\frac34,\\[4pt]
+-\frac{-31A+11B}{2}, & \frac34<s<1.
+\end{cases}
+\]
+A direct calculation gives
+\[
+\int_0^1 (1-s)^2\,R_{A,B}(s)\,ds=0,
+\qquad
+\int_0^1 s(1-s)\,R_{A,B}(s)\,ds=0
+\]
+for every $A,B$.
+
+Moreover, if
+\[
+B>\frac{31}{11}A>0,
+\]
+then the four quarter-lobes have signs
+\[
++,-,+,-.
+\]
+For this family one also has
+\[
+\int_0^1 R_{A,B}(s)\,ds
+=
+\int_0^1 s\,R_{A,B}(s)\,ds
+=
+\int_0^1 s^2\,R_{A,B}(s)\,ds
+=
+\frac34(3A-B),
+\]
+so both signs of the nondegenerate fold data occur already inside this formal
+four-lobe family.
+
+Thus no argument using only the local normalized rooted profile, the two
+vanishing scalar moments, and the local transversality/fold signs can exclude
+rooting in the first dangerous post-anchor chamber. Any successful next step
+must use genuinely source-coupled structure invisible in the planar normalized
+$D_a$ model.
 \end{remark}
 
 \begin{remark}[What route 2 now reduces to]
 \label{rem:route-two-reduces-to-global-no-crossing}
 The discriminant analysis first showed that a rooted point is not born
-\emph{at the entry} into the adjacent-two-odd-zero chamber.  The stronger
-anchor-sign argument shows more: as long as the continued born branch remains
-in a continuation interval on which the anchor-side value
+\emph{at the entry} into the adjacent-two-odd-zero chamber. The stronger
+anchor-sign argument showed more: on any continuation interval on which the
+anchor-side value
 \[
 \mathcal R(a)
 \]
@@ -18366,15 +18745,24 @@ keeps a fixed sign, the RH-selected slice
 \]
 cannot cross the discriminant curve at all.
 
-Thus route 2 no longer leaves open the standard adjacent-two-odd-zero chamber
-itself.  What remains is narrower and genuinely global: whether a rooted
-crossing can occur only after the anchor passes through an odd-order zero of
-$\mathcal R$ (equivalently of $\mathcal W_{\mathrm{src}}$), or after branch
-exit, or after affine-planar collapse.
+The new odd-anchor analysis sharpens this again. When the anchor itself passes
+through an odd-order zero of $\mathcal R$, the integrating-factor defect
+\[
+\mathscr G(a)=e^{-\mathcal A(a)}\bigl(D_a(\tau(a))-\mathcal Z(a)\bigr)
+\]
+keeps its incoming sign across the odd anchor zero, so a rooted crossing cannot
+occur at the anchor zero itself, nor immediately after passage. The subsequent
+post-anchor chambers then alternate dangerous and safe, beginning with a
+dangerous first post-anchor chamber in which the active segment carries three
+odd zeros of $\mathcal R$
+(Corollary~\ref{cor:first-post-anchor-chamber-dangerous}).
 
-So the residual route-2 problem is not a local catastrophe and not even a
-generic two-odd-zero chamber crossing problem.  It is an
-\emph{anchor-sign-change crossing problem} for the continued discriminant curve.
+However, Remark~\ref{rem:no-go-local-scalar-first-dangerous-chamber} shows that
+already in that first dangerous chamber the local normalized rooted equations
+and fold data are formally realizable in the planar scalar model. So route 2 no
+longer reduces merely to an anchor-sign-change crossing problem in the abstract.
+It reduces to a genuinely source-coupled \emph{delayed no-crossing /
+profile-realizability problem} on dangerous post-anchor chambers.
 \end{remark}
 
 \begin{remark}[What remains on the nonmixed $4$-point side]
@@ -18499,8 +18887,8 @@ and~\ref{prop:nondegenerate-rooted-point-is-moving-shear-fold}).
 The discriminant analysis rules out birth of such a rooted point at entry into
 the adjacent-two-odd-zero chamber
 (Proposition~\ref{prop:discriminant-entry-not-first-root}),
-and the anchor-sign argument shows more: no rooted crossing can occur on any
-continuation interval on which the anchor-side value
+and the anchor-sign argument rules out any rooted crossing on a continuation
+interval on which the anchor-side value
 \[
 \mathcal R(a)
 \]
@@ -18508,10 +18896,20 @@ keeps a fixed sign
 (Proposition~\ref{prop:anchor-sign-preservation-excludes-first-rooting} and
 Corollary~\ref{cor:no-crossing-adjacent-two-odd-zero-under-anchor-sign-preservation}).
 
+Beyond that, Proposition~\ref{prop:odd-anchor-passage-no-reset} shows that even
+after the anchor crosses an odd-order zero of $\mathcal R$, no rooted crossing
+can occur at that odd anchor zero itself or immediately after passage, while
+Corollary~\ref{cor:first-post-anchor-chamber-dangerous} shows that the ensuing
+post-anchor chambers alternate dangerous and safe, beginning with a dangerous
+first post-anchor chamber. However,
+Remark~\ref{rem:no-go-local-scalar-first-dangerous-chamber} shows that the local
+normalized rooted equations and fold data are already formally compatible with
+rooting in that first dangerous chamber.
+
 So the sharpened remaining nonmixed burden is no longer merely an
-adjacent-odd-zero first-fold problem in the abstract. It is a genuinely global
-source-coupling / \emph{anchor-sign-change no-crossing theorem} for the moving
-shear
+anchor-sign-change no-crossing theorem in the abstract. It is a genuinely
+source-coupled \emph{delayed no-crossing / profile-realizability theorem} for
+the moving shear
 \[
 f_a=u_5-\mathcal Z(a)\lambda,
 \]
@@ -18519,9 +18917,7 @@ equivalently for odd zeros of
 \[
 \mathcal W_{\mathrm{src}},
 \]
-on genuine opened nonmixed arcs. The transport/fold analysis explains the local
-shape of any prospective rooted crossing, but the remaining obstruction is now
-to exclude such a crossing once the anchor-side sign of $\mathcal R$ changes.
+on dangerous post-anchor chambers of genuine opened nonmixed arcs.
 \end{remark}
 
 \begin{remark}[Compact status summary for the nonmixed $4$-point branch]
@@ -18570,26 +18966,24 @@ crossing on a continuation interval where the anchor-side value
 \[
 \mathcal R(a)
 \]
-keeps a fixed sign. The rooted defect along the continued branch satisfies an
-exact transport equation, and any nondegenerate rooted point is forced to be a
-stationary point of the target map and a local fold of the moving-shear
-equation
-\[
-A_a(x)-\mathcal Z(a)\,B_a(x)=0.
-\]
-So any genuine repeated-source obstruction would have to connect adjacent odd
-zeros of $\mathcal W_{\mathrm{src}}$, survive entry into the two-odd-zero
-chamber, and persist until an anchor-sign change or equivalent global escape.
-Thus the genuinely remaining nonmixed burden is the source-coupling /
-anchor-sign-change no-crossing problem for odd zeros of
-$\mathcal W_{\mathrm{src}}$ on opened nonmixed arcs, to be solved by a
-genuinely source-coupled constraint on the moving source-pinned shear
+keeps a fixed sign.
+
+The new odd-anchor passage theorem shows that once the anchor itself crosses an
+odd-order zero of $\mathcal R$, the integrating-factor defect keeps its incoming
+sign across that odd anchor zero, so no rooted crossing can occur there or
+immediately after it. The subsequent post-anchor chambers alternate dangerous
+and safe, beginning with a dangerous first post-anchor chamber. However, the
+local normalized rooted equations and the local fold/transversality data are
+already formally realizable in that first dangerous chamber. Thus the genuinely
+remaining nonmixed burden is no longer just local fold shape or abstract
+anchor-sign change. It is a source-coupling / delayed no-crossing /
+profile-realizability problem for odd zeros of $\mathcal W_{\mathrm{src}}$ on
+dangerous post-anchor chambers, to be solved by a genuinely source-coupled
+constraint on the moving source-pinned shear
 \[
 f_a=u_5-\mathcal Z(a)\lambda
 \]
-that is invisible in the planar normalized $D_a$ model. The first-fold
-transport analysis remains part of the local package, but the unresolved step is
-now global crossing after anchor-sign change, not the local fold shape itself.
+that is invisible in the planar normalized $D_a$ model.
 \end{remark}
 
 \begin{remark}[Derivative-geometry meaning of the nonmixed invariant $\mathcal R$]
