@@ -1457,4 +1457,1434 @@ I do not see another substantive three-point theorem still missing in this updat
 
 Those are the main remaining worthwhile changes.
 
+proof_of_rh(169).tex
+File
+Pasted text(55).txt
+Document
+there have been some important (beneficial) structural updates/findings on the base structure of the proof. here is a note of what to check--there may even be more. please check if this new ammo is relevant to your current attack.
+
+I’m checking the note against the three-point/global branch specifically, not the whole paper. The main question is whether the new base-structure results strengthen the three-point continuation theorem itself, or mostly change how it plugs into the larger RH endgame.
+
+Yes. Some of this new ammo is genuinely relevant to the current three-point attack, but not all of it in the same way.
+
+The short version is:
+
+    the lifted vv-patch curvature / osculating package is directly relevant and strengthens the conceptual presentation of the three-point theorem itself;
+
+    the finite-core / minimal-core reduction is strategically relevant because it raises the value of the three-point theorem inside the global RH architecture;
+
+    the nonmixed four-point RR-planarity package is only indirectly relevant to the three-point attack;
+
+    the NN-point Mellin / sign-definite odd-tail package is mostly downstream infrastructure, not something I would insert into the proof of the three-point global theorem itself.
+
+Here is the more exact read.
+
+The most relevant new structural update for the current attack is the note’s emphasis that the three-point branch should now be viewed through the derivative geometry of the lifted curve: the key block is the lifted vv-patch geometry, and in particular the fact that shrinking exact lifted three-point circuits are tied explicitly to the osculating determinant and hence to Kv=0Kv​=0. That makes the three-point branch “much more derivative-geometric and less ad hoc,” which is exactly right for the theorem we just proved: local birth at odd-order KvKv​-zeros, then slope–intercept continuation on monotone-slope blocks. So this is not new ammunition for the proof steps themselves so much as new ammunition for the structural interpretation of those proof steps.
+
+The finite-core reduction is also relevant, but at a different level. The note says the current reduction of defect-free bad cores is now to lifted affine dependence with an effective ceiling at core size ≤4≤4. That matters because it makes the three-point theorem more central in the overall architecture: once three-point propagation is blockwise rigid, the remaining live bad-core mechanisms are pushed upward into the two-pair and four-point layers rather than being allowed to linger as a vague “global three-point recurrence” problem. So I would use this not inside the proof of the three-point theorem, but in the surrounding roadmap/status remarks to explain why the theorem matters more now than it did a few drafts ago.
+
+By contrast, the nonmixed four-point update is mostly not part of the current three-point attack. The note’s point is that interval-persistent nonmixed four-point degeneracy is now controlled by the scalar derivative invariant
+R=ddx ⁣(Y′′S′′),
+R=dxd​(S′′Y′′​),
+
+which kills genuinely three-dimensional interval-persistent nonmixed branches, though not isolated local sheets. That is important globally, but I would treat it as a neighboring branch result, not as input to the three-point continuation theorem. It belongs in cross-references and status summaries, not in the three-point proof itself.
+
+The NN-point cancellation package is even further away from the current attack. The note emphasizes that the NN-point layer now has a discrete Mellin-side projector, exact low odd-jet annihilation, an explicit gamma-ratio kernel, and a sign-definite surviving odd tail. That is powerful infrastructure for the corrected odd channel and probably very important in the eventual endgame, but it is not something I would force into the three-point continuation section unless you are explicitly adding a high-level “global infrastructure” remark. It strengthens the paper’s stabilized backbone, not the local-to-global geometry of the odd KvKv​-branch.
+
+So my honest answer is:
+
+Directly relevant to the current attack
+
+    the lifted curvature / osculating viewpoint;
+
+    the fact that the three-point branch is now the “most mature” branch.
+
+Strategically relevant, but not proof-local
+
+    finite-core reduction to lifted affine dependence with ceiling ≤4≤4.
+
+Mostly separate
+
+    nonmixed four-point RR-planarity;
+
+    the Mellin / projector / odd-tail sign package;
+
+    the calibration-small-uu and high-height-only status issues.
+
+What I would change in the draft because of this is fairly specific.
+
+First, I would strengthen the surrounding prose near the three-point theorem so it explicitly says that the global three-point branch is now understood as the global propagation of a local osculating-contact defect on the lifted curve Λv=(x,S)Λv​=(x,S), rather than as an abstract repeated-node coincidence problem. That is a genuine conceptual improvement from the new note.
+
+Second, in the status/roadmap remarks, I would now describe the three-point side as one of the stabilized branches of the proof architecture, with the remaining burden shifted to the source-level two-point bottleneck and the mixed/nonmixed four-point mechanisms. The note is explicit that the 3-point chat should use the lifted curvature/osculating package and the global continuation theorem, and that this branch is now the most mature. That is worth reflecting in the paper’s “what remains” remarks.
+
+Third, I would not insert the NN-point sign package into the three-point theorem section itself. At most I would add one short cross-reference in a later global-summary remark saying that the three-point branch closure now sits alongside an independently strengthened corrected odd-channel infrastructure.
+
+So yes: this new ammo is relevant, but mainly by sharpening the interpretation and positioning of the current three-point attack, not by changing the core proof we already extracted. The strongest concrete takeaway is that the three-point theorem should now be presented as part of a coherent derivative-geometry spine of the proof, not as an isolated branch argument.
+
+If you want, I can now give exact LaTeX insertions to fold this new structural perspective into the updated draft.
+
+yes please give me the exact latex insertions
+
+I’m locating the exact insertion points in the new draft now so the edits land where the current structure already talks about three-point status and derivative geometry.
+
+Yes. I’d make five targeted edits.
+
+They do two things: they fold the new derivative-geometric interpretation into the three-point section itself, and they update the downstream status remarks so the draft reflects that the three-point branch is now both structurally cleaner and more important inside the finite-core program.
+1) Add the finite-core meaning of the lifted 3/43/4-point stratification
+
+Insert this immediately after the proof of
+Corollary~\ref{cor:explicit-four-point-determinant-form-vpatch}
+and before
+Remark~\ref{rem:parallel-u5-patch-version}.
+
+\begin{remark}[Finite-core meaning of the lifted $v_5$-patch geometry]
+\label{rem:finite-core-meaning-lifted-vpatch-geometry}
+The defect-free finite-core reduction now places the lifted $v_5$-patch
+geometry into a sharp global context.
+
+Indeed, by
+Theorem~\ref{thm:defect-free-quintic-circuit-reduction},
+Corollary~\ref{cor:defect-free-minimal-quintic-circuits}, and
+Proposition~\ref{prop:defect-free-lifted-affine-dependence-vpatch},
+defect-free bad cores on a good $v_5$-patch reduce to affine dependence of the
+lifted points
+\[
+Q_v(h)=\bigl(y(h),x(h),\sigma_v(h)\bigr),
+\]
+with effective ceiling
+\[
+k\le 4.
+\]
+Thus the three low core sizes have the following exact lifted meanings:
+\[
+k=2 \Longleftrightarrow Q_v(h_1)=Q_v(h_2),
+\]
+\[
+k=3 \Longleftrightarrow Q_v(h_1),Q_v(h_2),Q_v(h_3)
+\ \text{are collinear},
+\]
+\[
+k=4 \Longleftrightarrow Q_v(h_1),\dots,Q_v(h_4)
+\ \text{are coplanar}.
+\]
+
+So the lifted $3$-point and $4$-point analyses are not auxiliary side
+computations: they are exactly the $k=3$ and $k=4$ geometric layers in the
+finite-core program. In particular, once the lifted $3$-point branch is
+globally rigid on good $v_5$-patches, the remaining finite-core burden shifts
+upward to the two-point source-level merger problem and to the mixed/nonmixed
+lifted $4$-point mechanisms.
+\end{remark}
+
+2) Add the derivative-geometric interpretation of the global 33-point theorem
+
+Insert this immediately after
+Remark~\ref{rem:target-block-intercept-gap-monotonicity}
+and before
+Remark~\ref{rem:nonmixed-four-point-zeros-can-carry-preexisting-branches}.
+
+\begin{remark}[Derivative-geometric meaning of the lifted $3$-point branch]
+\label{rem:derivative-geometry-meaning-global-three-point-branch}
+The lifted $3$-point branch is now best viewed as a derivative-geometric
+propagation theorem for the planar lifted curve
+\[
+\Lambda_v=(x,S).
+\]
+
+By Lemma~\ref{lem:osculating-determinant-expansion} and
+Proposition~\ref{prop:shrinking-exact-lifted-three-point-circuits-force-Kv-zero},
+shrinking exact lifted $3$-point circuits are detected by the osculating
+determinant and therefore concentrate into the lifted curvature-zero set
+\[
+K_v=(x')^3S''(x)=0.
+\]
+Theorem~\ref{thm:local-classification-lifted-three-point-branch-near-Kv-zero}
+then identifies the local repeated-node branch structure at those curvature
+zeros, and
+Theorem~\ref{thm:global-continuation-nonrecurrence-odd-three-point-branch}
+shows that the odd-order branch propagates globally on each monotone-slope
+target block by the slope--intercept envelope identities
+\[
+\tau_-'(m)=-a(m),
+\qquad
+\tau_+'(m)=-u_+(m),
+\qquad
+D'(m)=u_+(m)-a(m)>0.
+\]
+
+So the lifted $3$-point theory is no longer an ad hoc repeated-node analysis.
+It is the global propagation of an osculating-contact defect for the curve
+$\Lambda_v$, organized by the derivative geometry of its tangent lines and
+curvature.
+\end{remark}
+
+3) Strengthen the “live routes” three-point item
+
+In Remark~\ref{rem:live-attack-routes}, replace item 2
+
+\item
+\textbf{Three-point branch (blockwise closed on good $v_5$-patches).}
+The lifted three-point side is no longer a live internal bottleneck:
+infinite-order flatness is excluded, the unique odd-order branch continues
+uniquely on the maximal right monotone-slope block, and there is no interior
+common-tangent recurrence or source-side return. Any residual issue there is
+only boundary exit of the relevant source/target slope-overlap block, not an
+internal three-point propagation mechanism.
+
+with
+
+\item
+\textbf{Three-point branch (derivative-geometric layer now stabilized).}
+The lifted three-point side is now the most mature local branch. Shrinking
+exact lifted $3$-point circuits are tied to the osculating determinant and
+hence to
+\[
+K_v=0,
+\]
+the local branch structure at finite-order $K_v$-zeros is completely
+classified by parity, and the odd-order branch is blockwise globally rigid on
+good $v_5$-patches: infinite-order flatness is excluded, the branch continues
+uniquely on the maximal right monotone-slope block, and there is no interior
+common-tangent recurrence or source-side return. Inside the finite-core
+program this stabilizes the lifted $k=3$ collinearity layer; any residual
+issue there is only boundary exit of the relevant source/target slope-overlap
+block, not an internal three-point propagation mechanism.
+
+4) Update the “current geometric bottleneck” remark
+
+In Remark~\ref{rem:current-geometric-bottleneck}, replace this paragraph
+
+At the lifted order-$7$ level, the new local determinants
+\[
+K_v
+\qquad\text{and}\qquad
+T_v
+\]
+govern shrinking exact lifted $3$- and $4$-point circuits on
+$v_5\neq 0$ patches: exact shrinking $3$-point circuits concentrate into
+$\{K_v=0\}$, and exact shrinking $4$-point circuits concentrate into
+$\{T_v=0\}$, with uniform small-diameter exclusion away from those zero
+sets. Near finite-order isolated $K_v$-zeros, the $3$-point branch is
+completely classified by parity.
+
+with
+
+At the lifted order-$7$ level, the canonical derivative-geometric determinants
+\[
+K_v
+\qquad\text{and}\qquad
+T_v
+\]
+govern shrinking exact lifted $3$- and $4$-point circuits on
+$v_5\neq 0$ patches. On the $3$-point side,
+Lemma~\ref{lem:osculating-determinant-expansion} and
+Proposition~\ref{prop:shrinking-exact-lifted-three-point-circuits-force-Kv-zero}
+show that shrinking exact lifted $3$-point circuits are detected by the
+osculating determinant of the planar lifted curve
+\[
+\Lambda_v=(x,S)
+\]
+and therefore concentrate into
+\[
+\{K_v=0\},
+\]
+with uniform small-diameter exclusion away from that zero set. Near
+finite-order isolated $K_v$-zeros, the local branch structure is completely
+classified by parity, and on good $v_5$-patches the odd-order branch is now
+blockwise globally rigid by
+Theorem~\ref{thm:global-continuation-nonrecurrence-odd-three-point-branch}.
+So the lifted $3$-point side is no longer a vague recurrence problem: it is
+the stabilized derivative-geometric $k=3$ layer in the finite-core program.
+
+On the $4$-point side, exact shrinking lifted $4$-point circuits concentrate
+into
+\[
+\{T_v=0\},
+\]
+again with uniform small-diameter exclusion away from that zero set.
+
+5) Update the three-point paragraph in the “current state” remark
+
+In Remark~\ref{rem:current-state-of-argument}, replace the paragraph beginning
+
+Second, on the lifted three-point side, shrinking exact circuits now
+concentrate into $K_v=0$,
+
+and ending
+
+not an internal recurrence mechanism.
+
+with this:
+
+Second, on the lifted three-point side, shrinking exact circuits now
+concentrate into $K_v=0$, and this concentration is explicitly
+derivative-geometric: by the osculating-determinant expansion, repeated-node
+limits become tangent-line contacts for the planar lifted curve
+\[
+\Lambda_v=(x,S).
+\]
+On good $v_5$-patches this side is now blockwise globally controlled:
+$K_v$ has no infinite-order zeros; even-order zeros are sterile; odd-order
+zeros carry exactly one local branch; and that branch continues uniquely on
+the maximal right monotone-slope block with no interior common-tangent event
+or source-side return. So the three-point side is reduced to boundary exit of
+the relevant slope-overlap block, not an internal recurrence mechanism.
+Inside the finite-core reduction, this is exactly the stabilization of the
+lifted $k=3$ collinearity layer.
+
+6) Tighten the fifth “post-draft findings” item
+
+In Remark~\ref{rem:post-draft-findings-established-provisional-live}, replace the current fifth item
+
+Fifth, on the lifted three-point side, the repeated-node tangent-contact
+equation
+\[
+H_3(a,u)=S(u)-S(a)-S'(a)(u-a)
+\]
+is now globally rigid on each monotone-slope target block of a good $v_5$-patch.
+The correct global parameter is the source tangent slope
+\[
+m=S'(a),
+\]
+with source/target tangent intercepts
+\[
+\tau_-(m)=S(a(m))-m\,a(m),
+\qquad
+\tau_+(m)=S(u_+(m))-m\,u_+(m),
+\]
+and intercept gap
+\[
+D(m)=\tau_-(m)-\tau_+(m),
+\qquad
+D'(m)=u_+(m)-a(m)>0.
+\]
+Consequently $K_v$ has no infinite-order flat points on a good $v_5$-patch,
+interior common tangency is excluded, and the unique odd-order lifted
+$3$-point branch continues uniquely on the maximal right monotone-slope block
+with no source-side return.
+
+with
+
+Fifth, on the lifted three-point side, the repeated-node tangent-contact
+equation
+\[
+H_3(a,u)=S(u)-S(a)-S'(a)(u-a)
+\]
+is now understood as a derivative-geometric propagation law for the planar
+lifted curve
+\[
+\Lambda_v=(x,S).
+\]
+Shrinking exact lifted $3$-point circuits are tied to the osculating
+determinant and hence to
+\[
+K_v=(x')^3S''(x)=0,
+\]
+so the odd-order branch is born at a lifted curvature zero rather than at an
+ad hoc repeated-node coincidence. Globally, on each monotone-slope target
+block of a good $v_5$-patch, the correct parameter is the source tangent slope
+\[
+m=S'(a),
+\]
+with source/target tangent intercepts
+\[
+\tau_-(m)=S(a(m))-m\,a(m),
+\qquad
+\tau_+(m)=S(u_+(m))-m\,u_+(m),
+\]
+and intercept gap
+\[
+D(m)=\tau_-(m)-\tau_+(m),
+\qquad
+D'(m)=u_+(m)-a(m)>0.
+\]
+Consequently $K_v$ has no infinite-order flat points on a good $v_5$-patch,
+interior common tangency is excluded, and the unique odd-order lifted
+$3$-point branch continues uniquely on the maximal right monotone-slope block
+with no source-side return. In the finite-core picture, this stabilizes the
+lifted $k=3$ collinearity layer.
+
+These are the main insertions I’d make from the new note. The biggest gain is that the draft will stop presenting the three-point theorem as merely “one more branch result” and instead present it as part of a coherent derivative-geometric spine, with a precise role inside the finite-core reduction.
+
+proof_of_rh(174).tex
+File
+Pasted text(60).txt
+Document
+here's the latest draft. since you've wrapped up your work, the non-mixed 4-point branch is going to delegate a task to you. here's you're task attached
+
+I’m isolating the exact nonmixed ingredients in the updated draft now: the B-spline determinant formula, the affine-planarity theorem, and where the three-point global theorem can actually bite.
+
+I can give you the sharp reduced theorem, and it is genuinely the right 4-point analogue of the 3-point slope–intercept monotonicity. I do not see a proof of first-odd-zero exclusion from the current ingredients alone. The exact remaining gap is narrower: it is an actual-source theorem preventing the first loss of monotonicity of a quadratic-envelope scalar attached to a fixed source point. That is exactly the route your note asked for.
+
+Here is the theorem.
+Reduced theorem: the nonmixed 4-point quadratic-envelope monotonicity
+
+Let JJ be a connected open interval in a good v5v5​-patch such that
+Kv≠0on J.
+Kv​=0on J.
+
+Write
+Qv(h)=(Y(h),x(h),S(h)),Z=Y′′S′′,R=Z′=TvKv2,
+Qv​(h)=(Y(h),x(h),S(h)),Z=S′′Y′′​,R=Z′=Kv2​Tv​​,
+
+as in the draft’s nonmixed 44-point package. For a fixed source point a∈Ja∈J, define for x∈J∖{a}x∈J∖{a}
+Ba(x):=H3(a,x):=S(x)−S(a)−S′(a)(x−a),
+Ba​(x):=H3​(a,x):=S(x)−S(a)−S′(a)(x−a),
+
+and
+Aa(x):=Y(x)−Y(a)−Y′(a)(x−a),
+Aa​(x):=Y(x)−Y(a)−Y′(a)(x−a),
+
+and set
+Γa(x):=Aa(x)Ba(x).
+Γa​(x):=Ba​(x)Aa​(x)​.
+
+Then:
+Theorem
+
+On every nonmixed interval JJ,
+
+    Ba(x)≠0Ba​(x)=0 for x≠ax=a in JJ;
+
+    the repeated-node lifted 44-point determinant factors exactly as
+    H4(a,u,v)=− Ba(u) Ba(v) (Γa(u)−Γa(v));
+    H4​(a,u,v)=−Ba​(u)Ba​(v)(Γa​(u)−Γa​(v));
+
+    ΓaΓa​ admits the integral representation
+    Γa(x)=∫ax(x−t) Z(t) S′′(t) dt∫ax(x−t) S′′(t) dt;
+    Γa​(x)=∫ax​(x−t)S′′(t)dt∫ax​(x−t)Z(t)S′′(t)dt​;
+
+    its derivative has the exact positive-kernel form
+    Γa′(x)=1Ba(x)2∫axΩa,x(r) R(r) dr,
+    Γa′​(x)=Ba​(x)21​∫ax​Ωa,x​(r)R(r)dr,
+
+    where
+    Ωa,x(r):=∫ar ⁣ ⁣∫rx(t−s) S′′(s) S′′(t) dt ds,
+    Ωa,x​(r):=∫ar​∫rx​(t−s)S′′(s)S′′(t)dtds,
+
+    and Ωa,x(r)>0Ωa,x​(r)>0 for a<r<xa<r<x whenever S′′S′′ has fixed sign on JJ;
+
+    in particular, if RR has fixed nonzero sign on a subinterval I⊂JI⊂J, then for every a∈Ia∈I the function x↦Γa(x)x↦Γa​(x) is strictly monotone on x∈(a,sup⁡I)x∈(a,supI). Hence
+    H4(a,u,v)=0,a<u<v∈I
+    H4​(a,u,v)=0,a<u<v∈I
+
+    is impossible.
+
+So ΓaΓa​ is the exact nonmixed 44-point analogue of the 3-point tangent-envelope scalar: exact repeated-source nonmixed 44-point coplanarity is equivalent to equality of two values of ΓaΓa​, and one-sign control of RR forces strict monotonicity of ΓaΓa​. This is the ordered-quadruple monotonicity theorem the task asked for.
+Proof
+
+I will use only the draft’s nonmixed identities and the repeated-node determinant setup.
+1. The denominator is the 3-point tangent-contact remainder
+
+By definition,
+Ba(x)=S(x)−S(a)−S′(a)(x−a)=H3(a,x).
+Ba​(x)=S(x)−S(a)−S′(a)(x−a)=H3​(a,x).
+
+On a nonmixed interval Kv≠0Kv​=0, Proposition prop:exact-x-coordinate-identities-lifted-four-point gives
+Kv=(x′)3S′′.
+Kv​=(x′)3S′′.
+
+Since x′≠0x′=0 on a good v5v5​-patch, S′′S′′ has fixed nonzero sign on JJ. Therefore SS is strictly convex or strictly concave in the xx-coordinate on JJ, so
+Ba(x)≠0(x≠a).
+Ba​(x)=0(x=a).
+
+This is the same tangent-contact denominator that drives the 3-point branch.
+2. Exact factorization of the repeated-node 44-point determinant
+
+The draft’s repeated-node determinant is
+H4(a,u,v)=det⁡ ⁣(1Y(a)aS(a)0Y′(a)1S′(a)1Y(u)uS(u)1Y(v)vS(v)).
+H4​(a,u,v)=det
+​1011​Y(a)Y′(a)Y(u)Y(v)​a1uv​S(a)S′(a)S(u)S(v)​
+​.
+
+Subtract from the uu-row the combination
+(1,Y(a),a,S(a))+(u−a)(0,Y′(a),1,S′(a)),
+(1,Y(a),a,S(a))+(u−a)(0,Y′(a),1,S′(a)),
+
+and similarly for the vv-row. Then the determinant becomes
+H4(a,u,v)=det⁡ ⁣(1Y(a)aS(a)0Y′(a)1S′(a)0Aa(u)0Ba(u)0Aa(v)0Ba(v))=Aa(u)Ba(v)−Aa(v)Ba(u).
+H4​(a,u,v)=det
+​1000​Y(a)Y′(a)Aa​(u)Aa​(v)​a100​S(a)S′(a)Ba​(u)Ba​(v)​
+​=Aa​(u)Ba​(v)−Aa​(v)Ba​(u).
+
+Hence
+H4(a,u,v)=− Ba(u)Ba(v)(Aa(u)Ba(u)−Aa(v)Ba(v)),
+H4​(a,u,v)=−Ba​(u)Ba​(v)(Ba​(u)Aa​(u)​−Ba​(v)Aa​(v)​),
+
+that is,
+H4(a,u,v)=− Ba(u) Ba(v) (Γa(u)−Γa(v)).
+H4​(a,u,v)=−Ba​(u)Ba​(v)(Γa​(u)−Γa​(v)).​
+
+So exact repeated-source 44-point coplanarity is exactly the scalar equality
+Γa(u)=Γa(v).
+Γa​(u)=Γa​(v).
+3. Integral representation of ΓaΓa​
+
+Since
+Y′′=Z S′′,
+Y′′=ZS′′,
+
+Taylor’s integral remainder gives
+Aa(x)=∫ax(x−t) Y′′(t) dt=∫ax(x−t) Z(t) S′′(t) dt,
+Aa​(x)=∫ax​(x−t)Y′′(t)dt=∫ax​(x−t)Z(t)S′′(t)dt,
+
+and
+Ba(x)=∫ax(x−t) S′′(t) dt.
+Ba​(x)=∫ax​(x−t)S′′(t)dt.
+
+Therefore
+Γa(x)=∫ax(x−t) Z(t) S′′(t) dt∫ax(x−t) S′′(t) dt.
+Γa​(x)=∫ax​(x−t)S′′(t)dt∫ax​(x−t)Z(t)S′′(t)dt​.​
+
+So Γa(x)Γa​(x) is a weighted average of ZZ over [a,x][a,x], with the same second-order remainder kernel that comes from the 3-point tangent-contact denominator.
+4. Derivative of ΓaΓa​
+
+Set
+Na(x):=∫ax(x−t) Z(t) S′′(t) dt,Da(x):=∫ax(x−t) S′′(t) dt.
+Na​(x):=∫ax​(x−t)Z(t)S′′(t)dt,Da​(x):=∫ax​(x−t)S′′(t)dt.
+
+Then Γa=Na/DaΓa​=Na​/Da​, and
+Na′(x)=∫axZ(t) S′′(t) dt,Da′(x)=∫axS′′(t) dt.
+Na′​(x)=∫ax​Z(t)S′′(t)dt,Da′​(x)=∫ax​S′′(t)dt.
+
+Hence
+Γa′(x)=Na′Da−NaDa′Da2.
+Γa′​(x)=Da2​Na′​Da​−Na​Da′​​.
+
+Now symmetrize the numerator:
+Na′Da−NaDa′=12∫ax ⁣ ⁣∫ax(Z(t)−Z(s))(t−s) S′′(t) S′′(s) ds dt.
+Na′​Da​−Na​Da′​=21​∫ax​∫ax​(Z(t)−Z(s))(t−s)S′′(t)S′′(s)dsdt.
+
+Equivalently, since
+Z(t)−Z(s)=∫stR(r) dr,
+Z(t)−Z(s)=∫st​R(r)dr,
+
+one gets
+Na′Da−NaDa′=∫axΩa,x(r) R(r) dr,
+Na′​Da​−Na​Da′​=∫ax​Ωa,x​(r)R(r)dr,
+
+with
+Ωa,x(r):=∫ar ⁣ ⁣∫rx(t−s) S′′(s) S′′(t) dt ds.
+Ωa,x​(r):=∫ar​∫rx​(t−s)S′′(s)S′′(t)dtds.
+
+Because S′′S′′ has fixed nonzero sign on JJ, the product S′′(s)S′′(t)S′′(s)S′′(t) has fixed positive sign after factoring out the global sign, and
+t−s>0(a≤s<r<t≤x),
+t−s>0(a≤s<r<t≤x),
+
+so
+Ωa,x(r)>0.
+Ωa,x​(r)>0.
+
+Thus
+Γa′(x)=1Ba(x)2∫axΩa,x(r) R(r) dr,Ωa,x(r)>0.
+Γa′​(x)=Ba​(x)21​∫ax​Ωa,x​(r)R(r)dr,Ωa,x​(r)>0.​
+
+This is the exact positive-kernel monotonicity formula.
+5. Consequence on one-sign RR-blocks
+
+If RR has fixed nonzero sign on I⊂JI⊂J, then the kernel formula shows Γa′(x)Γa′​(x) has that same sign for every a<xa<x in II. Hence ΓaΓa​ is strictly monotone on (a,sup⁡I)(a,supI). By the factorization of H4H4​, one cannot have
+H4(a,u,v)=0,a<u<v∈I.
+H4​(a,u,v)=0,a<u<v∈I.
+
+That proves the theorem.
+What this does and does not finish
+
+This theorem is strong, but it does not yet exclude the first odd zero of RR.
+
+What it proves is:
+
+    before the first odd zero, on the whole one-sign nonmixed block, there is a strict quadratic-envelope monotonicity;
+
+    repeated-source exact nonmixed 44-point branches cannot recur or self-return inside that block;
+
+    the only place such a branch can first appear is exactly where the positive-kernel average of RR can begin to cancel, namely after the first sign change of RR.
+
+So the remaining nonmixed gap is now very sharp.
+Sharp bottleneck theorem still needed
+
+Let J=(x0,b)J=(x0​,b) be the opened nonmixed arc from the centered side to the first odd zero bb of RR. The centered parity package gives a punctured neighborhood near the base with no nonmixed Tv=0Tv​=0 points, so bb is genuinely the first candidate birth point.
+
+To exclude bb, it is enough to prove the following.
+
+Bottleneck theorem.
+For every source a<ba<b on the opened nonmixed arc, the quadratic-envelope scalar
+Γa(x)=Y(x)−Y(a)−Y′(a)(x−a)S(x)−S(a)−S′(a)(x−a)
+Γa​(x)=S(x)−S(a)−S′(a)(x−a)Y(x)−Y(a)−Y′(a)(x−a)​
+
+cannot lose monotonicity as xx passes the first odd zero bb, unless R≡0R≡0 on a nontrivial interval and hence the lifted curve is affine-planar by Proposition prop:interval-persistent-nonmixed-four-point-forces-affine-planarity.
+
+Equivalently, one must show that the positive-kernel averages
+∫axΩa,x(r) R(r) dr
+∫ax​Ωa,x​(r)R(r)dr
+
+cannot vanish for a<xa<x on the actual-source opened nonmixed arc before affine-planarity sets in.
+
+That is the sharp reduced theorem.
+
+It is sharp because:
+
+    local odd-order nonmixed birth at bb is exactly the first place where Γa′Γa′​ can in principle change sign;
+
+    everything before bb is already rigid by the theorem above;
+
+    if R≡0R≡0 on an interval, the draft already collapses the branch to affine planarity.
+
+So the nonmixed branch is now reduced to one actual-source statement: rule out the first zero of the quadratic-envelope derivative kernel average.
+Which draft ingredients this used
+
+Directly used:
+
+    prop:exact-x-coordinate-identities-lifted-four-point,
+
+    prop:canonical-Z-R-invariants-lifted-four-point,
+
+    prop:repeated-node-limits-of-exact-lifted-determinants,
+
+    the 3-point tangent-contact scalar H3(a,x)H3​(a,x) and its nonvanishing on a nonmixed block,
+
+    prop:interval-persistent-nonmixed-four-point-forces-affine-planarity for the final bottleneck formulation.
+
+Used only for locating the global first-zero problem:
+
+    prop:shrinking-exact-lifted-four-point-circuits-force-Tv-zero,
+
+    rem:centered-symmetric-placement-taylor-package,
+
+    and the already established 3-point global rigidity package as the model for this new ΓaΓa​-monotonicity mechanism.
+
+This is the cleanest reduction I can honestly justify from the current draft.
+
+proof_of_rh(181).tex
+File
+another delegation: Work only on this narrow task from the attached draft.
+
+We are on a connected opened nonmixed (v_5)-arc, so (K_v\neq 0). For a fixed source point (a), define
+[
+A_a(x)=Y(x)-Y(a)-Y'(a)(x-a),\qquad
+B_a(x)=S(x)-S(a)-S'(a)(x-a),
+]
+and
+[
+\Gamma_a(x)=\frac{A_a(x)}{B_a(x)}.
+]
+The draft now gives
+[
+H_4(a,u,v)=-B_a(u)B_a(v)\bigl(\Gamma_a(u)-\Gamma_a(v)\bigr),
+]
+and
+[
+\Gamma_a'(x)=\frac{1}{B_a(x)^2}\int_a^x \Omega_{a,x}(r),\mathcal R(r),dr,
+\qquad \Omega_{a,x}(r)>0,
+]
+where
+[
+\mathcal R=\frac{d}{dx}!\left(\frac{Y''}{S''}\right)=\frac{T_v}{K_v^2}.
+]
+
+Please do NOT work on mixed 4-point, 2-point, or general local nonmixed classification. That part is already reduced.
+
+Task:
+Assume there is a first loss of monotonicity of (\Gamma_a), i.e. a first pair ((a_*,x_*)) on the opened nonmixed arc with
+[
+\Gamma_{a_*}'(x_*)=0.
+]
+Derive the sharpest necessary conditions you can from this first-zero hypothesis by differentiating with respect to (x) and (a), and try to prove that they force either:
+
+1. affine-planar collapse ((\mathcal R\equiv 0) on an interval), or
+2. a lower-core / 3-point tangency mechanism already ruled out by the global 3-point theorem.
+
+I want a theorem or reduced bottleneck, not a broad summary.
+
+I’m focusing only on the first-loss-of-monotonicity system now: the kernel formula for Γa′Γa′​, then the consequences of imposing the earliest zero in both the xx- and aa-directions. The goal is to squeeze out a boundary-value system that either collapses to planarity or reduces to a 3-point tangency-type obstruction.
+
+I do not see a proof of full exclusion from the current ingredients alone. But the first-loss hypothesis does force a very sharp lower-core reduction, and it comes directly from differentiating in xx and aa. It reduces the remaining nonmixed gap to a repeated-node 33-point tangency mechanism on an affinely sheared planar curve. That is the sharpest bottleneck I can justify honestly from the present package. The task’s standing assumptions are exactly the nonmixed setup Kv≠0Kv​=0, the scalar Z=Y′′/S′′Z=Y′′/S′′, R=Z′R=Z′, the factorization of H4(a,u,v)H4​(a,u,v) through ΓaΓa​, the positive-kernel formula for Γa′Γa′​, and the existing affine-planarity theorem when R≡0R≡0 on an interval.
+
+Set
+M(a,x):=Ba(x)2 Γa′(x).
+M(a,x):=Ba​(x)2Γa′​(x).
+
+Then by the quotient formula,
+M(a,x)=Aa′(x)Ba(x)−Aa(x)Ba′(x).
+M(a,x)=Aa′​(x)Ba​(x)−Aa​(x)Ba′​(x).
+
+Assume
+x∗:=inf⁡{x:∃ a<x with M(a,x)=0},
+x∗​:=inf{x:∃a<x with M(a,x)=0},
+
+and choose (a∗,x∗)(a∗​,x∗​) in this first-zero set. On the opened nonmixed arc, S′′S′′ has fixed sign because Kv≠0Kv​=0, so Ba(x)≠0Ba​(x)=0 for a<xa<x. Thus M=0M=0 is exactly the first loss of monotonicity of ΓaΓa​.
+
+Here is the theorem.
+
+Theorem (first-loss rigidification for the nonmixed quadratic-envelope scalar).
+On a connected opened nonmixed v5v5​-arc, let (a∗,x∗)(a∗​,x∗​) be a first-loss pair in the sense above. Then:
+M(a∗,x∗)=0,
+M(a∗​,x∗​)=0,
+
+and the following differentiated identities hold:
+∂xM(a,x)=S′′(x) Ba(x) (Z(x)−Γa(x)),
+∂x​M(a,x)=S′′(x)Ba​(x)(Z(x)−Γa​(x)),
+∂aM(a,x)=S′′(a) Ca(x) (Z(a)−Γa(x)),
+∂a​M(a,x)=S′′(a)Ca​(x)(Z(a)−Γa​(x)),
+
+where
+Ca(x):=S(a)−S(x)+S′(x)(x−a)=∫ax(t−a)S′′(t) dt.
+Ca​(x):=S(a)−S(x)+S′(x)(x−a)=∫ax​(t−a)S′′(t)dt.
+
+In particular, at a first-loss pair one has
+∂aM(a∗,x∗)=0,∂xM(a∗,x∗)≤0,
+∂a​M(a∗​,x∗​)=0,∂x​M(a∗​,x∗​)≤0,
+
+hence
+Γa∗(x∗)=Z(a∗),Z(x∗)≤Z(a∗).
+Γa∗​​(x∗​)=Z(a∗​),Z(x∗​)≤Z(a∗​).
+
+Define the affine shear
+Y~γ:=Y−γS,γ:=Γa∗(x∗)=Z(a∗).
+Y
+γ​:=Y−γS,γ:=Γa∗​​(x∗​)=Z(a∗​).
+
+Then
+Y~γ′′(a∗)=0,
+Y
+γ′′​(a∗​)=0,
+
+and
+Y~γ(x∗)−Y~γ(a∗)−Y~γ′(a∗)(x∗−a∗)=0,
+Y
+γ​(x∗​)−Y
+γ​(a∗​)−Y
+γ′​(a∗​)(x∗​−a∗​)=0,
+Y~γ′(x∗)−Y~γ′(a∗)=0.
+Y
+γ′​(x∗​)−Y
+γ′​(a∗​)=0.
+
+So the first loss of monotonicity forces a repeated-node tangent-contact configuration for the planar sheared curve
+Λ~γ=(x,Y~γ),
+Λ
+γ​=(x,Y
+γ​),
+
+rooted at a curvature-zero point a∗a∗​ of that curve.
+
+Moreover, either Z≡γZ≡γ on [a∗,x∗][a∗​,x∗​], in which case R≡0R≡0 on that interval and the draft’s interval-persistent theorem yields affine-planar collapse, or else there is a genuine lower-core mechanism: Y~γ′′Y
+γ′′​ changes sign on (a∗,x∗)(a∗​,x∗​), so the sheared planar curve carries a nontrivial curvature-zero/tangent-contact configuration between a∗a∗​ and x∗x∗​. That is the sharp reduced bottleneck.
+
+Proof.
+Start from
+M=A′B−AB′.
+M=A′B−AB′.
+
+Differentiate in xx. Since A′′=Y′′=ZS′′A′′=Y′′=ZS′′ and B′′=S′′B′′=S′′,
+∂xM=A′′B−AB′′=S′′(x)(Z(x)Ba(x)−Aa(x))=S′′(x)Ba(x)(Z(x)−Γa(x)).
+∂x​M=A′′B−AB′′=S′′(x)(Z(x)Ba​(x)−Aa​(x))=S′′(x)Ba​(x)(Z(x)−Γa​(x)).
+
+Differentiate in aa. One has
+∂aAa(x)=−(x−a)Y′′(a),∂aBa(x)=−(x−a)S′′(a),
+∂a​Aa​(x)=−(x−a)Y′′(a),∂a​Ba​(x)=−(x−a)S′′(a),
+∂aAa′(x)=−Y′′(a),∂aBa′(x)=−S′′(a).
+∂a​Aa′​(x)=−Y′′(a),∂a​Ba′​(x)=−S′′(a).
+
+Substituting into ∂a(A′B−AB′)∂a​(A′B−AB′) and simplifying gives
+∂aM=S′′(a)((x−a)Ba′(x)−Ba(x))(Z(a)−Γa(x)).
+∂a​M=S′′(a)((x−a)Ba′​(x)−Ba​(x))(Z(a)−Γa​(x)).
+
+But
+(x−a)Ba′(x)−Ba(x)=S(a)−S(x)+S′(x)(x−a)=Ca(x),
+(x−a)Ba′​(x)−Ba​(x)=S(a)−S(x)+S′(x)(x−a)=Ca​(x),
+
+so
+∂aM(a,x)=S′′(a) Ca(x) (Z(a)−Γa(x)).
+∂a​M(a,x)=S′′(a)Ca​(x)(Z(a)−Γa​(x)).
+
+Now use firstness. If ∂aM(a∗,x∗)≠0∂a​M(a∗​,x∗​)=0, then by the implicit function theorem the zero set M=0M=0 is locally a graph a=a(x)a=a(x) through (a∗,x∗)(a∗​,x∗​), which would produce zeros for x<x∗x<x∗​ close to x∗x∗​, contradicting the definition of x∗x∗​. Hence
+∂aM(a∗,x∗)=0.
+∂a​M(a∗​,x∗​)=0.
+
+Since S′′(a∗)≠0S′′(a∗​)=0 and Ca∗(x∗)≠0Ca∗​​(x∗​)=0 on a nonmixed arc, this forces
+Γa∗(x∗)=Z(a∗).
+Γa∗​​(x∗​)=Z(a∗​).
+
+Also, for fixed a∗a∗​, the point x∗x∗​ is the first zero of x↦M(a∗,x)x↦M(a∗​,x), so
+M(a∗,x)>0(a∗<x<x∗),
+M(a∗​,x)>0(a∗​<x<x∗​),
+
+and therefore
+∂xM(a∗,x∗)≤0.
+∂x​M(a∗​,x∗​)≤0.
+
+Because S′′S′′ and Ba∗(x∗)Ba∗​​(x∗​) have the same sign, the factor S′′(x∗)Ba∗(x∗)S′′(x∗​)Ba∗​​(x∗​) is positive, so
+Z(x∗)−Γa∗(x∗)≤0,
+Z(x∗​)−Γa∗​​(x∗​)≤0,
+
+that is,
+Z(x∗)≤Z(a∗).
+Z(x∗​)≤Z(a∗​).
+
+Now set γ=Z(a∗)γ=Z(a∗​) and Y~γ=Y−γSY
+γ​=Y−γS. Then
+Y~γ′′=(Z−γ)S′′,
+Y
+γ′′​=(Z−γ)S′′,
+
+so
+Y~γ′′(a∗)=0.
+Y
+γ′′​(a∗​)=0.
+
+Also
+Aa∗(x∗)−γBa∗(x∗)=0
+Aa∗​​(x∗​)−γBa∗​​(x∗​)=0
+
+because γ=Γa∗(x∗)=A/Bγ=Γa∗​​(x∗​)=A/B, and
+Aa∗′(x∗)−γBa∗′(x∗)=0
+Aa∗​′​(x∗​)−γBa∗​′​(x∗​)=0
+
+because M(a∗,x∗)=0M(a∗​,x∗​)=0 implies A′/B′=A/B=γA′/B′=A/B=γ. These are exactly
+Y~γ(x∗)−Y~γ(a∗)−Y~γ′(a∗)(x∗−a∗)=0
+Y
+γ​(x∗​)−Y
+γ​(a∗​)−Y
+γ′​(a∗​)(x∗​−a∗​)=0
+
+and
+Y~γ′(x∗)−Y~γ′(a∗)=0.
+Y
+γ′​(x∗​)−Y
+γ′​(a∗​)=0.
+
+So x∗x∗​ is a repeated-node tangent-contact point for the planar sheared curve (x,Y~γ)(x,Y
+γ​), rooted at a curvature-zero point a∗a∗​.
+
+Finally,
+0=Aa∗(x∗)−γBa∗(x∗)=∫a∗x∗(x∗−t)(Z(t)−γ)S′′(t) dt.
+0=Aa∗​​(x∗​)−γBa∗​​(x∗​)=∫a∗​x∗​​(x∗​−t)(Z(t)−γ)S′′(t)dt.
+
+The weight (x∗−t)S′′(t)(x∗​−t)S′′(t) has fixed sign on the nonmixed arc. Therefore either Z(t)−γ≡0Z(t)−γ≡0 on [a∗,x∗][a∗​,x∗​], which gives R≡0R≡0 there and hence affine-planar collapse by the draft’s interval-persistent theorem, or else Z−γZ−γ changes sign inside (a∗,x∗)(a∗​,x∗​). In the latter case the sheared curvature
+Y~γ′′=(Z−γ)S′′
+Y
+γ′′​=(Z−γ)S′′
+
+has a nontrivial zero/sign-change pattern between a∗a∗​ and x∗x∗​, so first loss reduces to a genuine lower-core curvature-zero/tangent-contact mechanism. ∎
+
+This is the bottleneck I would state explicitly:
+
+Reduced bottleneck theorem.
+Exclude the following configuration on an opened nonmixed v5v5​-arc: there exist a<xa<x and γ∈Rγ∈R such that for the sheared planar curve
+Λ~γ=(x,Y−γS)
+Λ
+γ​=(x,Y−γS)
+
+one has
+Y~γ′′(a)=0,H~3(a,x)=0,∂xH~3(a,x)=0,
+Y
+γ′′​(a)=0,H
+3​(a,x)=0,∂x​H
+3​(a,x)=0,
+
+unless Y~γ′′≡0Y
+γ′′​≡0 on an interval, equivalently R≡0R≡0 there, in which case affine-planar collapse already occurs.
+
+That is sharp because the first-loss hypothesis forces exactly this sheared repeated-node 33-point tangency mechanism, and I do not see a further contradiction from the current nonmixed package alone. The centered parity package only tells you the first nonmixed trouble is away from the diagonal base, and the interval-persistent theorem handles the R≡0R≡0 branch; the remaining obstruction is precisely this sheared lower-core mechanism.
+
+proof_of_rh(197).tex
+File
+check the latest draft. another chat has suggested this delegation of labor. YOU are the "3-point worker"
+
+---
+
+The key is to avoid overlap. One person should push the **source-level nonmixed scalar**, one should push the **nonmixed repeated-source / first-loss mechanism**, and one should push the **3-point package as the contradiction engine**.
+
+## 1. My (other chat's) task
+
+I should attack the **source-level Wronskian / Chebyshev formulation**.
+
+Target:
+[
+\mathcal W_{\mathrm{src}}=J_\lambda J_{u_5}'-J_{u_5}J_\lambda'.
+]
+
+What I should try to prove:
+
+* Pull the full nonmixed (4)-point story back to (\mathcal W_{\mathrm{src}}) cleanly.
+* Prove a one-sign / Chebyshev theorem for ((J_\lambda,J_{u_5})) on opened nonmixed arcs, or at least prove that the **first odd zero** of (\mathcal W_{\mathrm{src}}) is impossible.
+* Failing that, prove a theorem of the form:
+  “if (\mathcal W_{\mathrm{src}}) has a first odd zero on an opened nonmixed arc, then one gets a source-level determinant/sign contradiction.”
+
+Concrete objects to use:
+
+* (\mathcal W_{\mathrm{src}}),
+* (\Psi_a(h)=D_{u_5}(a,h)/D_\lambda(a,h)),
+* the determinant (\mathfrak D(a,h)),
+* the first-loss monotonicity picture already in the draft.
+
+Deliverable:
+a theorem or proposition that kills odd zeros of (\mathcal W_{\mathrm{src}}) on opened nonmixed arcs, or reduces them to a contradiction in the source determinant language.
+
+---
+
+## 2. Nonmixed 4-point worker’s task
+
+They should push the **first-loss monotonicity / repeated-source geometry** all the way.
+
+Target:
+show that a first loss of monotonicity of (\Gamma_a) or (\Psi_a) is impossible on a genuine opened nonmixed arc.
+
+What they should try to prove:
+
+* Starting from the current quadratic-envelope factorization, show that if (\Gamma_a) first loses monotonicity, then the rigidified event in the draft
+  [
+  \widetilde Y_\gamma''(a)=0,\qquad \widetilde H_3(a,x)=0,\qquad \partial_x\widetilde H_3(a,x)=0
+  ]
+  cannot actually occur on an opened nonmixed arc.
+* Or weaker: show that the first-loss event forces affine-planar collapse immediately, so it cannot be the start of a genuine nonmixed (4)-point branch.
+* Push the repeated-node profile (D_a) and the (\Gamma_a)-monotonicity formula with positive kernel as hard as possible.
+
+Concrete objects to use:
+
+* (\Gamma_a(x)),
+* (\Psi_a(h)),
+* (\mathfrak D(a,h)),
+* the positive-kernel formula for (\Gamma_a'),
+* rem:first-loss-rigidification-nonmixed.
+
+Deliverable:
+a theorem like
+“opened nonmixed arcs cannot exhibit first loss of monotonicity,”
+or
+“first loss of monotonicity forces lower-core collapse.”
+
+That would nearly kill the nonmixed (4)-point side.
+
+---
+
+## 3. 3-point worker’s task
+
+They should treat the new nonmixed rigidification as an **input** and use the mature (3)-point machinery as the contradiction engine.
+
+Target:
+show that the rigidified repeated-node tangent-contact event forced by nonmixed first-loss is incompatible with the existing (3)-point global package.
+
+What they should try to prove:
+
+* Convert the rigidified event
+  [
+  \widetilde Y_\gamma''(a)=0,\qquad \widetilde H_3(a,x)=0,\qquad \partial_x\widetilde H_3(a,x)=0
+  ]
+  into the language of the current (3)-point branch classification.
+* Prove that such a repeated-node tangent-contact at a curvature-zero point cannot occur on an opened arc without violating:
+
+  * the global continuation / nonrecurrence theorem,
+  * the no-infinite-order-flatness package,
+  * or the ECT / slope-intercept structure already in the draft.
+* In other words: weaponize the existing (3)-point results against the exact rigidified event coming from nonmixed (4)-point first loss.
+
+Concrete objects to use:
+
+* the lifted (3)-point branch section,
+* the (K_v)-zero local classification,
+* the global continuation / nonrecurrence theorem,
+* the tangent-contact / repeated-node geometry now appearing from the nonmixed side.
+
+Deliverable:
+a theorem of the form
+“the repeated-node tangent-contact geometry forced by nonmixed first-loss is incompatible with the established (3)-point package.”
+
+If they get that, it plugs directly into the nonmixed (4)-point worker’s attack.
+
+---
+
+## Best division of labor
+
+In one line:
+
+* **Me:** kill odd zeros of (\mathcal W_{\mathrm{src}}) or the first odd zero source-level.
+* **Nonmixed 4-point worker:** kill first-loss monotonicity of (\Gamma_a/\Psi_a).
+* **3-point worker:** show the rigidified first-loss event is incompatible with the (3)-point global theory.
+
+## What success would look like
+
+The cleanest possible combined outcome is:
+
+1. nonmixed first-loss rigidifies to a repeated-node tangent (3)-point event;
+2. the 3-point worker proves that event cannot occur on an opened arc;
+3. I prove the source-level Wronskian / Chebyshev formulation, so the whole nonmixed (4)-point branch dies source-level.
+
+That is the most coherent three-way attack I see right now.
+
+I’m checking the updated draft against that division of labor and focusing only on the “3-point worker” question: whether the rigidified nonmixed first-loss event is already incompatible with the established three-point package, or whether one more sharp lemma is still needed.
+
+ok attack!
+
+I’m pushing directly on the exact rigidified first-loss event now: whether the sheared repeated-node tangent-contact forced by the nonmixed side can already be ruled out by the current 3-point package, or whether one extra 3-point lemma is still genuinely needed.
+
+I attacked it as the 3-point worker, and the honest result is a no-go theorem, not a contradiction.
+
+The reason is structural. The current nonmixed first-loss rigidification produces a repeated-node tangent-contact event not for the original lifted curve
+Λv=(x,S),
+Λv​=(x,S),
+
+but for the sheared planar curve
+Λ~γ=(x,Y~γ),Y~γ:=Y−γS.
+Λ
+γ​=(x,Y
+γ​),Y
+γ​:=Y−γS.
+
+That rigidified event is exactly
+Y~γ′′(a)=0,H~3(a,x)=0,∂xH~3(a,x)=0,
+Y
+γ′′​(a)=0,H
+3​(a,x)=0,∂x​H
+3​(a,x)=0,
+
+as the current first-loss package records. The whole assignment for the 3-point worker was then to try to make the established 33-point theory for Λv=(x,S)Λv​=(x,S) contradict that sheared event. The problem is that the mature 33-point package controls tangent-contact for SS, while the rigidified nonmixed event lives on Y−γSY−γS. Those are different planar curves.
+
+Here is the precise theorem.
+
+Theorem (the current 3-point package is not yet a contradiction engine for nonmixed first-loss).
+Fix an analytic function SS on an interval II with
+S′′≠0on I.
+S′′=0on I.
+
+Let a<xa<x be two points of II. Then there exist an analytic function YY on II and a constant γ∈Rγ∈R such that, with
+Y~γ:=Y−γS,
+Y
+γ​:=Y−γS,
+
+one has
+Y~γ′′(a)=0,H~3(a,x)=0,∂xH~3(a,x)=0,
+Y
+γ′′​(a)=0,H
+3​(a,x)=0,∂x​H
+3​(a,x)=0,
+
+while the original 33-point package for Λ=(x,S)Λ=(x,S) is unchanged on II. In particular, no contradiction can be extracted from the derivative geometry of Λ=(x,S)Λ=(x,S) alone.
+
+Proof.
+After an affine change of the xx-coordinate, reduce to a=0a=0, x=1x=1. Define
+T(t):=(t−0)3(t−1)2=t3(t−1)2.
+T(t):=(t−0)3(t−1)2=t3(t−1)2.
+
+Then
+T′′(0)=0,T(1)−T(0)−T′(0)(1−0)=0,T′(1)−T′(0)=0.
+T′′(0)=0,T(1)−T(0)−T′(0)(1−0)=0,T′(1)−T′(0)=0.
+
+So TT already satisfies the repeated-node tangent-contact conditions at (0,1)(0,1).
+
+Now choose any constant γγ and set
+Y:=γS+T.
+Y:=γS+T.
+
+Then
+Y~γ=Y−γS=T,
+Y
+γ​=Y−γS=T,
+
+hence
+Y~γ′′(0)=0,H~3(0,1)=0,∂xH~3(0,1)=0.
+Y
+γ′′​(0)=0,H
+3​(0,1)=0,∂x​H
+3​(0,1)=0.
+
+Meanwhile SS itself has not changed. Since S′′≠0S′′=0 on II, the original 33-point geometry of Λ=(x,S)Λ=(x,S) on that interval is exactly what it was before: a nonmixed interval with no KvKv​-zero there. Thus the sheared repeated-node event is formally compatible with the full current 33-point package for SS. ∎
+
+This matches the sharpened realization point already recorded in the attached notes: at the current lifted/ZZ-level one can realize arbitrary analytic ZZ over a fixed SS, so attacks that try to kill the nonmixed branch from the planar derivative geometry of SS alone cannot work. The notes explicitly say that this kills attacks of that type at the current Ju5/JλJu5​​/Jλ​ level.
+
+So the sharp conclusion is:
+
+the 3-point package by itself cannot rule out the rigidified nonmixed first-loss event.
+
+What it can do is tell you the exact missing transfer theorem.
+
+Reduced bottleneck theorem needed.
+Assume on a genuine opened nonmixed arc there exist a<xa<x and γγ such that
+Y~γ′′(a)=0,H~3(a,x)=0,∂xH~3(a,x)=0.
+Y
+γ′′​(a)=0,H
+3​(a,x)=0,∂x​H
+3​(a,x)=0.
+
+Then prove one of the following:
+
+    Y~γ′′≡0Y
+    γ′′​≡0 on a nontrivial interval, equivalently R≡0R≡0 there, so affine-planar collapse applies; or
+
+    this sheared repeated-node tangency transfers to an actual repeated-node tangent-contact event for the original lifted curve Λv=(x,S)Λv​=(x,S), meaning there exist a′<u′a′<u′ in the relevant source/target block with
+    H3(a′,u′)=0,∂uH3(a′,u′)=0,
+    H3​(a′,u′)=0,∂u​H3​(a′,u′)=0,
+
+    contradicting the global 33-point theorem.
+
+That is the exact theorem the 3-point worker needs but does not yet have. Without such a transfer principle, the mature 33-point machinery never fires, because it speaks about SS-tangent lines, while first-loss rigidification produces tangent-contact for Y−γSY−γS. The current draft itself is already pointing in that direction: the nonmixed scalar is controlled by R=d(Y′′/S′′)/dxR=d(Y′′/S′′)/dx, and the live problem is no longer generic local geometry but the extra coupling that ties YY to SS in the genuine RH source structure.
+
+So my attack result, in one line, is:
+The present 3-point package cannot by itself kill nonmixed first-loss; the missing ingredient is a shear-transfer/source-coupling theorem.
+The present 3-point package cannot by itself kill nonmixed first-loss; the missing ingredient is a shear-transfer/source-coupling theorem.​
+
+If you want, I’ll turn that into exact LaTeX insertions: one no-go proposition plus one “remaining bottleneck” remark for the nonmixed 44-point section.
+
+yes, please give the latex insertion
+
+I’m finding the cleanest landing spot in the nonmixed 4-point section so this reads as a genuine theorem-status update rather than a detached caveat.
+
+I would make two edits.
+
+The first is a real replacement: upgrade the current “RR is free over fixed SS” remark into a precise no-go proposition with proof.
+The second is a short update to the “what remains” remark so the draft explicitly records the exact missing theorem.
+1) Replace the current remark rem:R-free-over-fixed-S
+
+Replace this entire block
+
+\begin{remark}[The nonmixed scalar is not constrained by $\Lambda_v=(x,S)$ alone]
+\label{rem:R-free-over-fixed-S}
+Fix an analytic function $S$ on an interval $I$ with $S''\neq 0$, and let
+$R$ be any analytic scalar on $I$. Choosing
+\[
+Z(x):=\gamma+\int_{x_0}^x R(t)\,dt
+\]
+and solving
+\[
+Y''(x)=Z(x)\,S''(x)
+\]
+produces an analytic $Y$ satisfying
+\[
+\frac{d}{dx}\!\left(\frac{Y''}{S''}\right)=R.
+\]
+Thus the planar derivative geometry of $\Lambda_v=(x,S)$ alone cannot exclude
+odd zeros of $\mathcal R$. Any such exclusion must use an additional
+source-level coupling between $Y$ and $S$ coming from the genuine RH data.
+\end{remark}
+
+with this:
+
+\begin{proposition}[The current $3$-point package is not by itself a contradiction engine for nonmixed first loss]
+\label{prop:three-point-package-not-enough-for-nonmixed-first-loss}
+Fix an analytic function $S$ on an interval $I$ with
+\[
+S''\neq 0
+\qquad\text{on }I.
+\]
+Let $a<x$ be two points of $I$. Then there exist an analytic function $Y$ on
+$I$ and a constant $\gamma\in\mathbf R$ such that, with
+\[
+\widetilde Y_\gamma:=Y-\gamma S,
+\]
+one has
+\[
+\widetilde Y_\gamma''(a)=0,
+\qquad
+\widetilde H_3(a,x)=0,
+\qquad
+\partial_x\widetilde H_3(a,x)=0,
+\]
+where
+\[
+\widetilde H_3(a,u):=
+\widetilde Y_\gamma(u)-\widetilde Y_\gamma(a)-\widetilde Y_\gamma'(a)(u-a).
+\]
+In particular, the rigidified repeated-node tangent-contact event from
+Remark~\ref{rem:first-loss-rigidification-nonmixed} is formally compatible with
+an arbitrary fixed nonmixed planar curve
+\[
+\Lambda_v=(x,S),
+\]
+so the established $3$-point package for $\Lambda_v$ alone cannot exclude that
+event.
+\end{proposition}
+
+\begin{proof}
+Define
+\[
+T_{a,x}(t):=(t-a)^3(t-x)^2.
+\]
+Then
+\[
+T_{a,x}(a)=0,
+\qquad
+T_{a,x}'(a)=0,
+\qquad
+T_{a,x}''(a)=0,
+\qquad
+T_{a,x}(x)=0,
+\qquad
+T_{a,x}'(x)=0.
+\]
+Hence
+\[
+T_{a,x}(x)-T_{a,x}(a)-T_{a,x}'(a)(x-a)=0,
+\qquad
+T_{a,x}'(x)-T_{a,x}'(a)=0.
+\]
+Now fix any $\gamma\in\mathbf R$ and set
+\[
+Y:=\gamma S+T_{a,x}.
+\]
+Then
+\[
+\widetilde Y_\gamma=Y-\gamma S=T_{a,x},
+\]
+so
+\[
+\widetilde Y_\gamma''(a)=0,
+\qquad
+\widetilde H_3(a,x)=0,
+\qquad
+\partial_x\widetilde H_3(a,x)=0.
+\]
+Since $S$ itself has not changed and $S''\neq 0$ on $I$, the original
+$3$-point geometry of $\Lambda_v=(x,S)$ on $I$ is exactly the same as before.
+Thus the sheared repeated-node tangent-contact event is not ruled out by the
+planar derivative geometry of $\Lambda_v$ alone.
+\end{proof}
+
+\begin{remark}[What extra theorem is needed to use the $3$-point package]
+\label{rem:needed-shear-transfer-theorem-nonmixed}
+By Proposition~\ref{prop:three-point-package-not-enough-for-nonmixed-first-loss},
+the mature $3$-point theory for
+\[
+\Lambda_v=(x,S)
+\]
+does not by itself contradict the sheared rigidified event
+\[
+\widetilde Y_\gamma''(a)=0,
+\qquad
+\widetilde H_3(a,x)=0,
+\qquad
+\partial_x\widetilde H_3(a,x)=0.
+\]
+So the remaining nonmixed bridge is not a purely planar statement about
+$\Lambda_v$.
+
+What is still needed is an additional transfer/coupling theorem showing that on
+a genuine opened nonmixed arc, any such sheared repeated-node tangent-contact
+configuration must force one of the following:
+\begin{enumerate}
+\item affine-planar collapse, equivalently
+\[
+\mathcal R\equiv 0
+\]
+on a nontrivial interval; or
+\item an actual repeated-node tangent-contact event for the original lifted
+curve $\Lambda_v=(x,S)$, i.e.
+\[
+H_3(a',u')=0,
+\qquad
+\partial_u H_3(a',u')=0,
+\]
+contradicting
+Theorem~\ref{thm:global-continuation-nonrecurrence-odd-three-point-branch}.
+\end{enumerate}
+Without such a shear-transfer / source-coupling input, the current $3$-point
+package cannot kill the nonmixed branch on its own.
+\end{remark}
+
+2) Update Remark~\ref{rem:what-remains-nonmixed-after-R-zero-bridge}
+
+In that remark, replace the final paragraph
+
+Accordingly, the genuinely live nonmixed $4$-point burden is no longer local
+birth. It is the global/source-level control of odd zeros of
+\[
+\mathcal W_{\mathrm{src}},
+\]
+equivalently of odd zeros of $\mathcal R$, along an opened nonmixed arc in
+the genuine lifted $v_5$-geometry; and, in repeated-source variables, the
+equivalent problem of excluding first-loss monotonicity for $\Gamma_a$ or
+$\Psi_a$, equivalently of controlling the sign of $\mathfrak D(a,h)$.
+
+with this:
+
+Accordingly, the genuinely live nonmixed $4$-point burden is no longer local
+birth. It is the global/source-level control of odd zeros of
+\[
+\mathcal W_{\mathrm{src}},
+\]
+equivalently of odd zeros of $\mathcal R$, along an opened nonmixed arc in
+the genuine lifted $v_5$-geometry; and, in repeated-source variables, the
+equivalent problem of excluding first-loss monotonicity for $\Gamma_a$ or
+$\Psi_a$, equivalently of controlling the sign of $\mathfrak D(a,h)$.
+
+Moreover, by
+Proposition~\ref{prop:three-point-package-not-enough-for-nonmixed-first-loss},
+the already-established $3$-point package for
+\[
+\Lambda_v=(x,S)
+\]
+does \emph{not} by itself contradict the sheared repeated-node tangent-contact
+configuration forced by a formal first loss of monotonicity. Thus the remaining
+bridge is genuinely a transfer/source-coupling theorem: one must show that on a
+genuine opened nonmixed arc, the rigidified sheared event either collapses
+immediately to affine-planar geometry or transfers to an actual
+$S$-tangent-contact event already excluded by the global $3$-point theory.
+
+Those are the only edits I’d make for this delegation result. They record the negative result cleanly, and they isolate the exact theorem the nonmixed side still needs.
+
+proof_of_rh(200).tex
+File
+note this reaction. would you like to review your edit at all?
+
+This is a **good result**, and I think it really sharpens the division of labor. 
+
+My read is:
+
+The nonmixed 4-point worker has now essentially **closed the repeated-source / first-loss lane**. The theorem says first-loss is not a separate phenomenon at all; it is exactly the diagonal incarnation of odd-zero birth for (\mathcal R). That is a real simplification.
+
+The key consequences are:
+
+* there is **no attained separated first-loss**;
+* any first-loss sequence is **forced to the diagonal**;
+* diagonal accumulation can only occur at a **zero of (\mathcal R)**;
+* even-order zeros are sterile;
+* odd-order zeros seed the branch.
+
+So the nonmixed repeated-source geometry is no longer an independent obstruction. It is completely reduced to the odd-zero problem for (\mathcal R), equivalently for
+[
+\mathcal W_{\mathrm{src}}=J_\lambda J_{u_5}'-J_{u_5}J_\lambda'.
+]
+
+That means the labor split should now tighten:
+
+The **nonmixed 4-point worker’s lane is basically finished**, except perhaps for polishing the theorem and making sure the draft’s “what remains” language reflects it cleanly.
+
+The **3-point worker’s no-go theorem** becomes even more important conceptually, because it confirms that the sheared repeated-node tangent-contact is not an extra contradiction engine; it is just the rigidified avatar of odd-zero birth.
+
+And my lane becomes even sharper:
+
+[
+\boxed{
+\text{The remaining nonmixed theorem is source-level exclusion of odd zeros of }\mathcal W_{\mathrm{src}}
+\text{ on opened nonmixed arcs.}
+}
+]
+
+So I would now stop trying to get more mileage out of first-loss geometry itself. That part has done its job. The right next push is purely source-level:
+
+* either prove a one-sign / Chebyshev theorem for ((J_\lambda,J_{u_5}));
+* or prove that a **first odd zero** of (\mathcal W_{\mathrm{src}}) is impossible on an opened nonmixed arc.
+
+That is the clean reduced bottleneck now.
+
+One small caution in wording for the paper: I would state this as “first-loss is exactly diagonal odd-zero birth” rather than “the nonmixed 4-point side is done,” because the actual-source odd-zero exclusion is still open. But mathematically, this is a strong closure result for that worker’s lane.
+
+I’m checking the latest draft against that reaction now. My suspicion is the math of the no-go proposition is still fine, but the surrounding wording may now be too negative given that first-loss has been further reduced to diagonal odd-zero birth.
+
+Yes. I would revise it.
+
+The proposition itself is still mathematically useful, but the surrounding remarks are now too pessimistic for the current state of the nonmixed branch. The reaction you quoted is the right read: once first-loss has been identified as a diagonal avatar of odd-zero birth, the repeated-source lane is no longer a separate live obstruction. The remaining nonmixed burden is the source-level exclusion of odd zeros of
+Wsrc,
+Wsrc​,
+
+equivalently of odd zeros of RR on an opened nonmixed arc. That matches the current division of labor and the draft’s own strategic reduction.
+
+So I would keep the no-go proposition, but I would replace the two follow-up remarks so they do not suggest that a shear-transfer theorem is the main remaining bottleneck. The point of the proposition is narrower: it says the mature 33-point package is not an independent contradiction engine for nonmixed first-loss. That is good to know, but it no longer means first-loss itself remains a separate active lane. The active lane is the odd-zero/Wronskian problem.
+
+Here is exactly how I would edit it.
+
+Replace the title line of the proposition
+
+\begin{proposition}[The current $3$-point package is not by itself a contradiction engine for nonmixed first loss]
+
+with
+
+\begin{proposition}[The current $3$-point package is not an independent contradiction engine for nonmixed first loss]
+
+Then replace the entire remark
+
+\begin{remark}[What extra theorem is needed to use the $3$-point package]
+\label{rem:needed-shear-transfer-theorem-nonmixed}
+...
+\end{remark}
+
+with this:
+
+\begin{remark}[Meaning of the no-go proposition for the nonmixed division of labor]
+\label{rem:needed-shear-transfer-theorem-nonmixed}
+Proposition~\ref{prop:three-point-package-not-enough-for-nonmixed-first-loss}
+does \emph{not} say that repeated-source first-loss remains an independent live
+obstruction. Rather, it says something narrower and cleaner: the already-mature
+$3$-point theory for
+\[
+\Lambda_v=(x,S)
+\]
+is not, by itself, an \emph{independent} contradiction engine for the sheared
+rigidified event
+\[
+\widetilde Y_\gamma''(a)=0,
+\qquad
+\widetilde H_3(a,x)=0,
+\qquad
+\partial_x\widetilde H_3(a,x)=0.
+\]
+
+Combined with the first-loss rigidification and the diagonal birth picture, the
+correct conclusion is that repeated-source first-loss is not a separate theorem-level
+lane: it is simply the diagonal incarnation of odd-zero birth for
+\[
+\mathcal R
+\qquad\text{equivalently}\qquad
+\mathcal W_{\mathrm{src}}.
+\]
+So the remaining nonmixed burden is no longer to extract an additional
+contradiction from the sheared repeated-node geometry itself. It is to exclude
+odd zeros of
+\[
+\mathcal W_{\mathrm{src}}
+\]
+on genuine opened nonmixed arcs.
+
+A future shear-transfer / source-coupling theorem would still be valuable as an
+alternative contradiction route, but it is no longer the clean reduced
+bottleneck of the nonmixed branch.
+\end{remark}
+
+Then replace the final two paragraphs of
+
+\begin{remark}[What remains on the nonmixed $4$-point side]
+\label{rem:what-remains-nonmixed-after-R-zero-bridge}
+
+starting from
+
+Accordingly, the genuinely live nonmixed $4$-point burden is no longer local
+birth.
+
+through the end of the remark, with this:
+
+Accordingly, the genuinely live nonmixed $4$-point burden is no longer local
+birth, nor an independent repeated-source first-loss mechanism. The local and
+repeated-source geometry has now done its job: exact nonmixed contacts are
+reduced to zeros of
+\[
+\mathcal R,
+\]
+the repeated-source monotonicity picture rigidifies first loss to a diagonal
+event, and the parity classification shows that even-order zeros are sterile
+while odd-order zeros seed the branch.
+
+So the remaining theorem-level burden is the global/source-level exclusion of
+odd zeros of
+\[
+\mathcal W_{\mathrm{src}},
+\]
+equivalently of odd zeros of $\mathcal R$, along a genuine opened nonmixed arc
+in the lifted $v_5$-geometry. In repeated-source variables, the same burden can
+still be phrased as control of the sign of $\mathfrak D(a,h)$ or exclusion of
+first-loss monotonicity for $\Gamma_a$ or $\Psi_a$, but these are now best
+understood as equivalent diagonal avatars of the same odd-zero problem, not as
+separate surviving branches of the argument.
+
+Finally,
+Proposition~\ref{prop:three-point-package-not-enough-for-nonmixed-first-loss}
+shows that the already-established $3$-point package for
+\[
+\Lambda_v=(x,S)
+\]
+does not supply an additional standalone contradiction for that odd-zero birth.
+Its role is therefore clarificatory rather than bottleneck-closing: it confirms
+that the nonmixed branch will be finished by the source-level Wronskian /
+Chebyshev theorem, not by a separate sheared $3$-point contradiction.
+
+That
+
 
