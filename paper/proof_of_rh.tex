@@ -8612,6 +8612,118 @@ which expands to the displayed formula. The last statement is the specialisation
 $W=0$.
 \end{proof}
 
+\begin{proposition}[Projectivized tangent-angle flow and contact identity]
+\label{prop:projectivized-angle-contact-identity}
+On any simply connected subinterval of the region
+\[
+v_5\neq 0,
+\qquad
+M\neq 0,
+\]
+choose a local lift $\Theta$ of the projectivized tangent direction by
+\[
+(\cos\Theta,\sin\Theta)
+=
+\frac{1}{\sqrt{M^2+L^2}}\,(M,-L).
+\]
+Then
+\[
+\Theta'=-\frac{v_5W}{M^2+L^2}.
+\]
+
+Moreover, with
+\[
+\mu=\frac{c}{v_5},
+\qquad
+\beta=-\frac{L}{M},
+\qquad
+m=\frac{N}{M},
+\]
+one has the exact contact identity
+\[
+dm+\mu\,d\beta=0.
+\]
+Equivalently, on every interval where $\beta'$ does not vanish,
+\[
+\frac{dm}{d\beta}=-\mu.
+\]
+
+In particular, at a generic turning boundary with
+\[
+M(h_b)=0,
+\qquad
+N(h_b)\neq 0,
+\qquad
+v_5(h_b)\neq 0,
+\]
+the projectivized slope direction is regular: one has
+\[
+L(h_b)\neq 0,
+\]
+so the compactified tangent direction extends smoothly across the boundary.
+Thus the only critical points of the compactified tangent-direction map are the
+zeros of $W$.
+\end{proposition}
+
+\begin{proof}
+Differentiate the angle of the vector $(M,-L)$:
+\[
+\Theta'
+=
+\frac{M(-L)'-(-L)M'}{M^2+L^2}
+=
+-\frac{ML'-LM'}{M^2+L^2}.
+\]
+By Proposition~\ref{prop:closed-minor-system-dual-curve},
+\[
+ML'-LM'=v_5W,
+\]
+hence
+\[
+\Theta'=-\frac{v_5W}{M^2+L^2}.
+\]
+
+Next, by Definition~\ref{def:mu-lambda-beta-m},
+\[
+m=\lambda-\mu\beta.
+\]
+Since $\beta=d\lambda/d\mu$, one has
+\[
+d\lambda=\beta\,d\mu,
+\]
+and therefore
+\[
+dm=d\lambda-\beta\,d\mu-\mu\,d\beta=-\mu\,d\beta.
+\]
+This is exactly
+\[
+dm+\mu\,d\beta=0.
+\]
+
+Finally, at a generic turning boundary with $v_5(h_b)\neq 0$, one has
+\[
+\mu(h_b)=\frac{c(h_b)}{v_5(h_b)}\neq 0.
+\]
+Using
+\[
+N=\mu L+M\lambda
+\]
+from Proposition~\ref{prop:closed-minor-system-dual-curve}, and evaluating at
+$h_b$ where $M(h_b)=0$, gives
+\[
+N(h_b)=\mu(h_b)L(h_b).
+\]
+Since $N(h_b)\neq 0$ and $\mu(h_b)\neq 0$, it follows that
+\[
+L(h_b)\neq 0.
+\]
+Hence
+\[
+M(h_b)^2+L(h_b)^2\neq 0,
+\]
+so the projectivized tangent direction is regular there.
+\end{proof}
+
 \begin{remark}[Determinant interpretation on a fixed-sign $W$-interval]
 \label{rem:determinant-interpretation-fixed-sign-W}
 On any connected interval where $c$, $M$, and $W$ are nonzero and $W$
@@ -9706,6 +9818,272 @@ of the interval $\phi_m(J_I)=\mathcal B_I(m)$. This is precisely the
 $2$-secant condition, proving (4).
 \end{proof}
 
+\begin{proposition}[Support-curve calculus on an ECT branch]
+\label{prop:support-curve-calculus-ect}
+Let $I$ be as in Lemma~\ref{lem:fixed-slope-intercept-sets}, and assume $m$
+lies in the interior tangent-slope range of $I$. Then
+\[
+x_I'(m)=\frac{1}{\psi_I''(x_I(m))}>0,
+\]
+\[
+\tau_I'(m)=-x_I(m),
+\]
+and
+\[
+\tau_I''(m)=-\frac{1}{\psi_I''(x_I(m))}<0.
+\]
+In particular, the tangent-intercept function $m\mapsto \tau_I(m)$ is strictly
+concave on the interior tangent-slope range.
+\end{proposition}
+
+\begin{proof}
+The defining relation
+\[
+\psi_I'(x_I(m))=m
+\]
+implies, by differentiation in $m$,
+\[
+\psi_I''(x_I(m))\,x_I'(m)=1,
+\]
+hence
+\[
+x_I'(m)=\frac{1}{\psi_I''(x_I(m))}>0.
+\]
+
+Now
+\[
+\tau_I(m)=\psi_I(x_I(m))-m\,x_I(m).
+\]
+Differentiate:
+\[
+\tau_I'(m)
+=
+\psi_I'(x_I(m))\,x_I'(m)-x_I(m)-m\,x_I'(m)
+=
+m\,x_I'(m)-x_I(m)-m\,x_I'(m)
+=
+-x_I(m).
+\]
+Differentiating once more gives
+\[
+\tau_I''(m)=-x_I'(m)=-\frac{1}{\psi_I''(x_I(m))}<0.
+\]
+\end{proof}
+
+\begin{corollary}[Single crossing and betweenness of support curves]
+\label{cor:single-crossing-betweenness-support-curves}
+Let $I_i<I_j$ be two ordered strict convex ECT branches in the affine chart.
+On every common interior tangent-slope interval,
+\[
+(\tau_{I_j}-\tau_{I_i})'(m)=-(x_{I_j}(m)-x_{I_i}(m))<0.
+\]
+Hence $\tau_{I_i}$ and $\tau_{I_j}$ cross at most once; equivalently, the two
+ordered branches admit at most one common interior tangent slope.
+
+More generally, let
+\[
+I_i<I_j<I_k
+\]
+be three ordered strict convex ECT branches, active on a common interior slope
+interval. If $\tau_{I_i}$ and $\tau_{I_j}$ cross at $m_{ij}$ and
+$\tau_{I_j}$ and $\tau_{I_k}$ cross at $m_{jk}$ with
+\[
+m_{ij}<m_{jk},
+\]
+then there is a unique
+\[
+m_{ik}\in(m_{ij},m_{jk})
+\]
+such that
+\[
+\tau_{I_i}(m_{ik})=\tau_{I_k}(m_{ik}).
+\]
+So the support curves
+\[
+b=\tau_I(m)
+\]
+form a pseudoline arrangement on every common slope window.
+\end{corollary}
+
+\begin{proof}
+Since the branches are ordered in the $x=v_5/c$ coordinate, one has
+\[
+x_{I_i}(m)<x_{I_j}(m)
+\]
+whenever both tangencies exist. Therefore
+\[
+(\tau_{I_j}-\tau_{I_i})'(m)=-(x_{I_j}(m)-x_{I_i}(m))<0,
+\]
+so $\tau_{I_j}-\tau_{I_i}$ is strictly decreasing and can vanish at most once.
+
+For the betweenness statement, set
+\[
+\delta_{ab}(m):=\tau_{I_b}(m)-\tau_{I_a}(m).
+\]
+Each $\delta_{ab}$ is strictly decreasing. If
+\[
+\delta_{ij}(m_{ij})=0,\qquad \delta_{jk}(m_{jk})=0,\qquad m_{ij}<m_{jk},
+\]
+then
+\[
+\delta_{ik}(m_{ij})
+=
+\delta_{ij}(m_{ij})+\delta_{jk}(m_{ij})
+=
+\delta_{jk}(m_{ij})>0,
+\]
+because $\delta_{jk}$ vanishes later at $m_{jk}$, and similarly
+\[
+\delta_{ik}(m_{jk})
+=
+\delta_{ij}(m_{jk})+\delta_{jk}(m_{jk})
+=
+\delta_{ij}(m_{jk})<0.
+\]
+By strict monotonicity, $\delta_{ik}$ has a unique zero in $(m_{ij},m_{jk})$.
+\end{proof}
+
+\begin{proposition}[Ordered-pair overlap windows are one-shot]
+\label{prop:ordered-pair-overlap-windows-one-shot}
+Let $I_1<I_2$ be two ordered strict convex ECT branches in the affine chart,
+with
+\[
+\Gamma(I_j)=\{(x,\psi_j(x)):x\in J_j\},
+\qquad
+J_1<J_2.
+\]
+For $j=1,2$, let
+\[
+\mathcal B_{I_j}(m)=\{\psi_j(x)-mx:x\in J_j\},
+\qquad
+u_j(m):=\sup \mathcal B_{I_j}(m),
+\]
+and let $\tau_j(m)$ be the tangent intercept on the interior tangent-slope
+range.
+
+Then the directional overlap window
+\[
+\Sigma_{2\to 1}
+:=
+\{\,m:\tau_1(m)\le \tau_2(m)\le u_1(m)\,\}
+\]
+is an interval, possibly empty.
+
+Likewise the pair-pair overlap window
+\[
+\Sigma^{\mathrm{pp}}_{12}
+:=
+\{\,m:\operatorname{int}\mathcal B_{I_1}(m)\cap
+\operatorname{int}\mathcal B_{I_2}(m)\neq\varnothing\,\}
+\]
+is an interval, possibly empty.
+
+More precisely:
+
+\begin{enumerate}
+\item on every slope subinterval where one fixed endpoint support line
+\[
+m\longmapsto y_\xi-m\xi
+\]
+realizes $u_1(m)$, one has
+\[
+\frac{d}{dm}\bigl(u_1(m)-\tau_2(m)\bigr)=x_{I_2}(m)-\xi>0;
+\]
+
+\item on every slope subinterval where one fixed endpoint support line
+\[
+m\longmapsto y_\eta-m\eta
+\]
+realizes $u_2(m)$, one has
+\[
+\frac{d}{dm}\bigl(u_2(m)-\tau_1(m)\bigr)=x_{I_1}(m)-\eta<0.
+\]
+\end{enumerate}
+
+In particular, for a fixed ordered pair, directional or pair-pair overlap
+cannot disappear and later reappear.
+\end{proposition}
+
+\begin{proof}
+By Corollary~\ref{cor:single-crossing-betweenness-support-curves},
+\[
+\tau_2(m)-\tau_1(m)
+\]
+is strictly decreasing on the common interior slope range. Therefore the set
+\[
+\{m:\tau_1(m)\le \tau_2(m)\}
+\]
+is an interval.
+
+Now fix a slope subinterval on which one endpoint support line
+\[
+m\mapsto y_\xi-m\xi
+\]
+realizes $u_1(m)$. Then
+\[
+u_1(m)=y_\xi-m\xi,
+\]
+so
+\[
+\frac{d}{dm}\bigl(u_1(m)-\tau_2(m)\bigr)
+=
+-\xi-(-x_{I_2}(m))
+=
+x_{I_2}(m)-\xi.
+\]
+Because every point of $J_2$ lies strictly to the right of every endpoint of
+$J_1$, one has
+\[
+x_{I_2}(m)-\xi>0.
+\]
+Hence
+\[
+u_1(m)-\tau_2(m)
+\]
+is strictly increasing on that piece. Therefore the set
+\[
+\{m:\tau_2(m)\le u_1(m)\}
+\]
+is an interval after patching across the finitely many endpoint-switch slopes.
+Thus
+\[
+\Sigma_{2\to 1}
+=
+\{m:\tau_1(m)\le \tau_2(m)\}\cap \{m:\tau_2(m)\le u_1(m)\}
+\]
+is an interval.
+
+Similarly, on a slope subinterval where one endpoint support line
+\[
+m\mapsto y_\eta-m\eta
+\]
+realizes $u_2(m)$,
+\[
+\frac{d}{dm}\bigl(u_2(m)-\tau_1(m)\bigr)
+=
+-\eta-(-x_{I_1}(m))
+=
+x_{I_1}(m)-\eta<0,
+\]
+because every point of $J_1$ lies strictly to the left of every endpoint of
+$J_2$.
+
+Finally, by Lemma~\ref{lem:fixed-slope-intercept-sets},
+\[
+\operatorname{int}\mathcal B_{I_1}(m)\cap
+\operatorname{int}\mathcal B_{I_2}(m)\neq\varnothing
+\]
+is equivalent to
+\[
+\tau_2(m)<u_1(m)
+\qquad\text{and}\qquad
+\tau_1(m)<u_2(m).
+\]
+The first inequality holds on an interval because $u_1-\tau_2$ is piecewise
+strictly increasing; the second holds on an interval because $u_2-\tau_1$ is
+piecewise strictly decreasing. Their intersection is therefore an interval.
+\end{proof}
+
 \begin{lemma}[Support-overlap truncation across a generic turning boundary]
 \label{lem:support-overlap-truncation-turning}
 Let $I_1<I_2$ be adjacent ECT intervals meeting at a generic turning boundary
@@ -10556,7 +10934,8 @@ $(\mu,\lambda)$-coordinates is proportional to
 \[
 W'(h_b).
 \]
-So $W'(h_b)$ still governs the local simple-inflection jet.
+So $W'(h_b)$ governs only the simplest local inflection jet, but no longer the
+main obstruction analysis on the $W=0,\ M\neq 0$ side.
 
 But proving $W'(h_b)=0$ is no longer the main target, because simple
 $W=0,\ M\neq 0$ boundaries are already locally benign for pair-pair birth.
@@ -10689,15 +11068,139 @@ and $c$ is nonzero on a small neighborhood of $h_b$, so the zero set of $D$
 is exactly the zero set of $\widehat D$. The theorem follows.
 \end{proof}
 
-\begin{remark}[Consequence for the $W=0,\ M\neq 0$ endgame]
+\begin{remark}[Consequence for the $W=0,\ M\neq 0$ side]
 \label{rem:consequence-finite-order-w-zero-local-sterility}
 Theorem~\ref{thm:finite-order-w-zero-local-sterility} shows that finite-order
 $W=0,\ M\neq 0$ boundaries are not local birthplaces of pair-pair
-configurations. Combined with Proposition~\ref{prop:no-W-flat-interval}, this
-means the remaining issue on the $W=0$ side is genuinely global: continuation
-or recurrence of determinant-zero / tangent-slope data across multiple
-intervals, not local creation of a second opposite-side zero branch.
+configurations. Combined with
+Lemma~\ref{lem:endpoint-gap-monotonicity-ordered-target} and
+Corollary~\ref{cor:turning-boundary-inertness-endpoint-contacts}, this yields a
+sharper reduction of the one-pair propagation problem.
+
+Namely, after removing local births at generic turning boundaries and at
+finite-order isolated $W=0,\ M\neq 0$ boundaries, any surviving nonadjacent
+pair-pair obstruction must come from a \emph{remote} interior zero of one of
+the endpoint-gap functions
+\[
+G_{\xi,J}(h)=y_\xi-y(h)-m(h)\bigl(\xi-x(h)\bigr),
+\]
+where $(\xi,y_\xi)$ is an endpoint support point and $J$ is an ordered target
+branch.
+
+Since each $G_{\xi,J}$ is strictly monotone on $J$, each endpoint/branch pair
+can contribute at most one such tangency. Thus the remaining obstruction on the
+$W=0$ side is no longer local birth at an affine inflection seam, but a finite
+remote-incidence problem.
 \end{remark}
+
+\begin{lemma}[Endpoint-gap monotonicity on an ordered target branch]
+\label{lem:endpoint-gap-monotonicity-ordered-target}
+Let $J$ be an ECT interval in the affine chart
+\[
+x=\frac{v_5}{c},
+\qquad
+y=\frac{\Delta_7}{c},
+\]
+and let $(\xi,y_\xi)$ be a fixed support point with
+\[
+\xi< x(h)\qquad (h\in J).
+\]
+Define
+\[
+G_{\xi,J}(h):=y_\xi-y(h)-m(h)\bigl(\xi-x(h)\bigr),
+\qquad
+m(h)=\frac{N(h)}{M(h)}.
+\]
+Then
+\[
+G_{\xi,J}'(h)
+=
+\frac{c(h)W(h)}{M(h)^2}\,\bigl(x(h)-\xi\bigr).
+\]
+In particular, $G_{\xi,J}$ is strictly monotone on $J$.
+
+Equivalently, a fixed support point strictly to the left of $J$ lies on at most
+one tangent line to $\Gamma(J)$. The symmetric statement holds for a fixed
+support point strictly to the right of $J$.
+\end{lemma}
+
+\begin{proof}
+Using
+\[
+y'(h)=m(h)x'(h),
+\]
+differentiate:
+\[
+G_{\xi,J}'(h)
+=
+-y'(h)-m'(h)(\xi-x(h))+m(h)x'(h)
+=
+m'(h)\bigl(x(h)-\xi\bigr).
+\]
+By Proposition~\ref{prop:closed-minor-system-dual-curve},
+\[
+m'(h)=\frac{c(h)W(h)}{M(h)^2},
+\]
+so
+\[
+G_{\xi,J}'(h)
+=
+\frac{c(h)W(h)}{M(h)^2}\,\bigl(x(h)-\xi\bigr).
+\]
+On an ECT interval, $c$, $W$, and $M$ have fixed nonzero sign, and by
+assumption $x(h)-\xi>0$ on $J$, so $G_{\xi,J}'$ has fixed nonzero sign.
+Therefore $G_{\xi,J}$ is strictly monotone.
+\end{proof}
+
+\begin{corollary}[Turning-boundary inertness for endpoint contacts]
+\label{cor:turning-boundary-inertness-endpoint-contacts}
+Let $J$ be an ECT interval ending at a generic turning boundary $h_b$ with
+\[
+M(h_b)=0,
+\qquad
+M'(h_b)\neq 0,
+\qquad
+N(h_b)\neq 0,
+\qquad
+c(h_b)\neq 0.
+\]
+Assume $v_5(h_b)\neq 0$, and let
+\[
+x_b:=\frac{v_5(h_b)}{c(h_b)}.
+\]
+If $(\xi,y_\xi)$ is a fixed support point with $\xi<x_b$, then
+\[
+G_{\xi,J}(h)\to \pm\infty
+\qquad\text{as } h\to h_b \text{ from within } J.
+\]
+In particular, endpoint-support contact cannot be created or destroyed at a
+generic turning-boundary end of an ordered branch.
+\end{corollary}
+
+\begin{proof}
+By Proposition~\ref{prop:closed-minor-system-dual-curve},
+\[
+m(h)=\frac{N(h)}{M(h)}\to \pm\infty
+\qquad (h\to h_b),
+\]
+while
+\[
+x(h)\to x_b,
+\qquad
+y(h)\to y_b:=\frac{\Delta_7(h_b)}{c(h_b)}.
+\]
+Hence
+\[
+G_{\xi,J}(h)
+=
+\bigl(y_\xi-y(h)\bigr)+m(h)\bigl(x(h)-\xi\bigr).
+\]
+Since $x(h)-\xi\to x_b-\xi>0$, the second term dominates and has fixed sign
+for $h$ sufficiently close to $h_b$. Therefore
+\[
+G_{\xi,J}(h)\to \pm\infty.
+\]
+\end{proof}
 
 \begin{remark}[Endpoint purification for bounded strip-overlap components]
 \label{rem:endpoint-purification-bounded-strip-overlap}
@@ -10709,23 +11212,28 @@ Let
 \]
 denote the nonadjacent pair-pair strip-overlap set on a compact patch, where
 the union runs over the ECT intervals in the normalized affine chart.
-Then Theorem~\ref{thm:partial-global-no-secant} and
-Theorem~\ref{thm:finite-order-w-zero-local-sterility} together show that a
-bounded connected component
+
+By Theorem~\ref{thm:adjacent-pair-pair-exclusion-turning} and
+Theorem~\ref{thm:finite-order-w-zero-local-sterility}, a bounded connected
+component
 \[
 U\subset \mathcal P
 \]
-cannot be created or destroyed inside a turning-boundary generic block, and
-cannot have a first entrance or last exit at a finite-order boundary of type
+cannot be created or destroyed at a generic turning boundary, and cannot have a
+first entrance or last exit at a finite-order boundary of type
 \[
 W=0,\qquad M\neq 0.
 \]
 
-So any surviving bounded strip-overlap component must enter and leave through a
-finite exceptional set: non-generic turning defects, the repeated-source
-odd-order zeros of $\mathcal R$, or the residual mixed overlap loci
-concentrated on $K_v=0$. In particular, the remaining pair-pair problem is a
-finite-gate problem rather than a diffuse local-birth problem.
+Moreover, by
+Lemma~\ref{lem:endpoint-gap-monotonicity-ordered-target}, each fixed endpoint
+support point can meet a given ordered target branch at most once. Thus any
+surviving bounded strip-overlap component is controlled by a finite collection
+of isolated remote endpoint/branch tangencies, rather than by diffuse local
+birth along a seam.
+
+So the remaining nonadjacent pair-pair problem is best viewed as a finite
+remote-incidence problem, not merely as a finite-gate problem.
 \end{remark}
 
 \begin{remark}[Audit: residual $W=0$ pathology]
@@ -19747,41 +20255,49 @@ graph on the $b$-axis. In particular, any genuinely minimal surviving
 nonadjacent recurrence cannot live at one fixed slope; it must be
 slope-changing.
 
-There is also a useful support-function reformulation. If $m$ lies in the
-interior tangent-slope range of $I$, write
+There is also a sharper support-curve reformulation. By
+Proposition~\ref{prop:support-curve-calculus-ect},
+Corollary~\ref{cor:single-crossing-betweenness-support-curves}, and
+Proposition~\ref{prop:ordered-pair-overlap-windows-one-shot}, the support
+curves
 \[
-\tau_I(m):=\psi_I(x_I(m))-m\,x_I(m),
-\qquad
-\psi_I'(x_I(m))=m.
+b=\tau_I(m)
 \]
-Then
-\[
-\tau_I'(m)=-x_I(m).
-\]
-Hence if $I<J$ in the $x=v_5/c$ ordering, then on any common slope window
-\[
-(\tau_J-\tau_I)'(m)=-(x_J(m)-x_I(m))<0.
-\]
-So each ordered pair of ECT intervals has at most one common interior tangent
-slope. Equivalently, any minimal slope-changing recurrence must be
-pair-nonrepeating.
+are strictly concave pseudolines on common slope windows: each ordered pair has
+at most one common interior tangent slope, triple crossings obey the usual
+betweenness law, and each ordered pair has at most one directional or pair-pair
+overlap window in slope.
 
-These two observations give a clean qualitative picture of the remaining
-nonmixed global burden: any surviving bad core must be slope-changing and
-pair-nonrepeating, and after the clean-block compression above it should be
-forced onto a finite defect-gate graph.
+Thus any genuinely minimal surviving nonadjacent recurrence cannot be fixed
+slope, cannot be pair-repeating, and cannot disappear and later reappear on the
+same ordered pair.
 
-However, it is important to record the limitation of this combinatorial
-reduction. Abstract strip/support arrangements with single-crossing support
-curves can still carry bounded fixed-rank overlap components or bounded cells.
-So pure planarity, parity, or pseudoline combinatorics by itself is \emph{not}
-enough to close the remaining branch. Any final contradiction must therefore
-use RH-specific source/provenance structure, not only abstract secant-strip or
-support-curve geometry.
+There is also a useful endpoint-gap reformulation. For every endpoint support
+point $(\xi,y_\xi)$ and every ordered target branch $J$, the endpoint-gap
+function
+\[
+G_{\xi,J}(h):=y_\xi-y(h)-m(h)\bigl(\xi-x(h)\bigr)
+\]
+is strictly monotone on $J$ by
+Lemma~\ref{lem:endpoint-gap-monotonicity-ordered-target}. So each
+endpoint/branch pair can contribute at most one remote tangent incidence.
+
+These observations give a sharper qualitative picture of the remaining nonmixed
+global burden: any surviving bad core must be slope-changing, pair-nonrepeating,
+and supported by a finite table of remote endpoint/branch incidences.
+
+However, it is important to record the limitation of this reduction. By
+Remark~\ref{rem:intrinsic-affine-plane-universality}, abstract analytic plane
+curves can still realize bounded strip-overlap cells and nonadjacent recurrence
+patterns compatible with single-crossing support geometry. So pure planarity,
+parity, interval-graph combinatorics, or pseudoline combinatorics by itself is
+\emph{not} enough to close the remaining branch. Any final contradiction must
+therefore use RH-specific source/provenance/canonical structure, not only
+abstract secant-strip or support-curve geometry.
 
 Accordingly, the natural next global target is not another local normal-form
-analysis, but a no-repeated-defect-gate / global no-reentry theorem on the
-reduced turning-defect graph.
+analysis, but an RH-specific sign theorem for the remote endpoint-gap functions
+$G_{\xi,J}$.
 \end{remark}
 
 \begin{remark}[Derivative-geometry meaning of the nonmixed invariant $\mathcal R$]
@@ -23820,8 +24336,13 @@ The current local theory already resolves the finite-order $W=0,\ M\neq 0$
 boundary behavior and the turning-boundary generic blocks, and it also shows
 that the mixed residual overlap lane is concentrated on $K_v=0$ and should be
 read there as a quotient-diagonal transport problem rather than as a new mixed
-carrier. Thus the remaining burden is global/nonlocal and finite-core in
-nature, not another local mixed branch-geometry theorem.
+carrier. Thus the remaining burden is global/nonlocal, but the one-pair
+derivative geometry now compresses it much further: interior common-tangent
+structure is pseudoline-ordered, local birth at generic turning and
+finite-order $W=0,\ M\neq 0$ boundaries is already sterile, and the only
+remaining one-pair obstruction is a finite table of remote endpoint/branch
+tangencies, equivalently zeros of the monotone endpoint-gap functions
+$G_{\xi,J}$.
 \end{remark}
 
 \section{Endgame architecture and remaining propagation problem outside the clean mixed four-point case}
@@ -23865,30 +24386,40 @@ $(b,m)$-plane;
 has no nonadjacent re-entry of its slope $\phi_\mu$.
 \end{enumerate}
 The results proved above resolve the local behavior at finite-order
-$W=0,\ M\neq 0$ boundaries and at generic turning boundaries. Thus the
-remaining theorem target is not local boundary geometry but global non-recurrence:
-a fixed finite slope should not leave and later re-enter the tangent-slope /
-tangent-line data on nonadjacent branches. In the three equivalent languages
-above, this is a theorem about the level sets of $\beta$, about vertical-line
-re-entry for the dual curve $T$, or about nonadjacent slope re-entry for the
-highest-new scalar graph $\phi$.
+$W=0,\ M\neq 0$ boundaries and at generic turning boundaries. More precisely,
+the one-pair support geometry now shows that fixed-slope overlap windows are
+one-shot on each ordered pair, interior common-tangent crossings are
+pseudoline-ordered, and endpoint-support incidence is controlled by the
+strictly monotone endpoint-gap functions
+\[
+G_{\xi,J}(h)=y_\xi-y(h)-m(h)\bigl(\xi-x(h)\bigr).
+\]
+Thus the remaining theorem target is no longer an arbitrary global recurrence
+statement. It is the exclusion of remote zeros of these endpoint-gap functions,
+equivalently an RH-specific sign theorem for endpoint-support incidence on
+ordered nonadjacent branches.
 \end{remark}
 
 \begin{remark}[What the present global reduction does and does not buy]
 \label{rem:what-global-reduction-does-and-does-not-buy}
 The results above now force the remaining propagation problem into a much
-smaller combinatorial class: fixed-slope incidence is interval-graph geometry,
-support functions satisfy a strict Monge law, and turning-boundary generic
-blocks contribute no pair-pair geometry at all. So any surviving bad core must
-be slope-changing, pair-nonrepeating, and carried by a finite defect-gate
-skeleton.
+smaller combinatorial and analytic class.
 
-However, it is important to record a limitation. Abstract strip/support
-arrangements with single-crossing support curves can still admit bounded
-fixed-rank overlap components. Thus pure planarity, parity, or pseudoline
-combinatorics does \emph{not} by itself close the remaining branch. Any final
-contradiction must therefore use RH-specific source/provenance structure, not
-only generic secant-strip geometry.
+On the positive side, fixed-slope incidence is interval-graph geometry,
+support curves are strictly concave pseudolines with single-crossing and
+betweenness, each ordered pair has at most one directional or pair-pair overlap
+window in slope, and each endpoint support point meets a given ordered target
+branch at most once. Thus any surviving bad core must be slope-changing,
+pair-nonrepeating, and supported by a finite table of remote endpoint/branch
+incidences.
+
+However, it is important to record a limitation. By
+Remark~\ref{rem:intrinsic-affine-plane-universality}, intrinsic one-pair affine
+geometry is still universal for analytic plane curves. So pure planarity,
+parity, interval-graph combinatorics, pseudoline support geometry, or any
+similar abstract strip/support formalism does \emph{not} by itself close the
+remaining branch. Any final contradiction must therefore use RH-specific
+source/provenance/canonical structure, not only generic secant-strip geometry.
 \end{remark}
 
 \begin{remark}[Warning: what the current local theory does \emph{not} imply]
@@ -23910,10 +24441,85 @@ to forbid nonadjacent same-parity re-entry in the dual $(\beta,m)$-plane.
 noncancellation, but not generically one-signed. Thus no trivial sign theorem
 for the scalar graph $\phi=\lambda^{[1]}$ should be expected without further
 RH-specific structure.
+
+\item By Remark~\ref{rem:intrinsic-affine-plane-universality}, the intrinsic
+one-pair affine geometry is universal for analytic plane curves. So no theorem
+using only planarity, parity, pseudoline support order, interval-graph overlap,
+or similar abstract strip/support data can by itself exclude nonadjacent
+recurrence.
 \end{enumerate}
 
 Accordingly, the remaining gap is now a genuinely global special-structure
-theorem, not a missing local lemma.
+theorem: not another local birth lemma, but an RH-specific sign/ordering law
+for the remote endpoint-gap incidences.
+\end{remark}
+
+\begin{remark}[Intrinsic affine-plane universality and the ceiling of pure planar arguments]
+\label{rem:intrinsic-affine-plane-universality}
+It is useful to record a sharp ceiling on what can be proved from the intrinsic
+one-pair affine geometry alone.
+
+Indeed, given any real-analytic plane curve
+\[
+h\longmapsto (x(h),y(h))
+\]
+on an interval, setting
+\[
+c\equiv 1,
+\qquad
+v_5=x,
+\qquad
+\Delta_7=y
+\]
+gives
+\[
+M=x',
+\qquad
+N=y',
+\qquad
+W=x'y''-y'x''.
+\]
+So the normalized affine chart, the ECT/curvature data, the tangent-separator
+kernel, and the dual/support geometry reduce exactly to the usual tangent
+geometry of the analytic plane curve $(x,y)$.
+
+Accordingly, no theorem using only planarity, parity, support-curve
+single-crossing, strip-overlap combinatorics, or any other intrinsic one-pair
+affine-topological datum can by itself exclude nonadjacent recurrence. Any
+final contradiction must therefore use RH-specific source/provenance/canonical
+structure, not only abstract plane-curve or secant-strip geometry.
+\end{remark}
+
+\begin{remark}[Remote endpoint-gap reduction of the remaining nonadjacent problem]
+\label{rem:remote-endpoint-gap-reduction}
+Combine Lemma~\ref{lem:endpoint-gap-monotonicity-ordered-target},
+Theorem~\ref{thm:adjacent-pair-pair-exclusion-turning}, and
+Theorem~\ref{thm:finite-order-w-zero-local-sterility}. Then every local
+boundary-creation mechanism on the generic one-pair region is already sterile:
+adjacent generic turning blocks contribute no pair-pair geometry, and
+finite-order isolated boundaries of type
+\[
+W=0,
+\qquad
+M\neq 0
+\]
+do not create a new opposite-side pair-pair branch.
+
+Therefore any surviving nonadjacent pair-pair obstruction must appear as a
+\emph{remote} interior zero of one of the monotone endpoint-gap functions
+\[
+G_{\xi,J}(h)=y_\xi-y(h)-m(h)\bigl(\xi-x(h)\bigr),
+\]
+where $(\xi,y_\xi)$ ranges over endpoint support points of ECT branches and
+$J$ ranges over ordered nonadjacent target branches.
+
+Since each $G_{\xi,J}$ is strictly monotone on $J$, each endpoint/branch pair
+can contribute at most one such tangency. Thus the remaining propagation
+problem reduces to a finite remote-incidence table.
+
+Accordingly, the natural next global target is an RH-specific sign theorem for
+the endpoint-gap functions $G_{\xi,J}$, not another local boundary-birth
+analysis.
 \end{remark}
 
 \begin{proposition}[Full-block universality of the direct provenance slice]
