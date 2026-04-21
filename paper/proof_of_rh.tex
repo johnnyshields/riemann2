@@ -12508,41 +12508,40 @@ then convert that information into affine-line incidence constraints for
 $\Gamma$.
 \end{remark}
 
-\begin{remark}[Finite-core compression to a defect-gate graph]
+\begin{remark}[Finite-core compression to a remote endpoint/branch incidence problem]
 \label{rem:finite-core-compression-defect-gate-graph}
 The two-stage reformulation above suggests a useful downstream combinatorial
 compression.
 
-Fix a compact relevant patch $J$. Collapse every maximal
-turning-boundary-generic block on which
-Theorem~\ref{thm:partial-global-no-secant} applies to a single transport edge,
-and record as vertices the remaining defect gates:
-\begin{itemize}
-\item non-generic turning defects;
-\item isolated finite-order boundaries $W=0,\ M\neq 0$;
-\item repeated-source odd-order zeros of $\mathcal R$;
-\item and, on the mixed side, the residual exact fixed-shear $K_v=0$ overlap
-points.
-\end{itemize}
-Call the resulting finite graph $\mathfrak G_{\mathrm{def}}(J)$.
-
-Then any surviving minimal bad core should be viewed as giving a finite walk on
-$\mathfrak G_{\mathrm{def}}(J)$. The point is that the clean blocks
-contribute no pair-pair geometry by
-Theorem~\ref{thm:partial-global-no-secant}, while
-Theorem~\ref{thm:finite-order-w-zero-local-sterility} shows that the isolated
-finite-order $W=0$ gates are locally sterile. Moreover, on the repeated-source side,
+Fix a compact relevant patch $J$. By
+Theorem~\ref{thm:partial-global-no-secant}, every maximal
+turning-boundary-generic block contributes no pair-pair geometry, so such a
+block behaves as a single transport chamber. By
+Theorem~\ref{thm:finite-order-w-zero-local-sterility}, the isolated
+finite-order $W=0,\ M\neq 0$ boundaries are locally sterile for pair-pair
+birth. Moreover, on the repeated-source side,
 Proposition~\ref{prop:first-rooting-requires-second-odd-zero-repeated-source},
 Corollary~\ref{cor:no-crossing-adjacent-two-odd-zero-under-anchor-sign-preservation},
 Proposition~\ref{prop:odd-anchor-passage-no-reset}, and
 Corollary~\ref{cor:first-post-anchor-chamber-dangerous} show that odd-order
-$\mathcal R$-gates are relay-type rather than arbitrary first-root gates.
+$\mathcal R$-boundaries are relay-type rather than arbitrary first-root events.
 
-Thus, after contracting the locally sterile and relay-type vertices, the
-remaining cycle rank of a genuine minimal bad core should be carried only by a
-smaller reduced graph of non-generic turning defects. This is the cleanest
-current finite-core reformulation of the remaining global nonadjacent
-recurrence problem.
+After these absorptions, any surviving minimal bad core contribution from
+one-pair incidence must come through the finite remote endpoint/branch
+tangencies of
+Lemma~\ref{lem:endpoint-gap-monotonicity-ordered-target} and
+Remark~\ref{rem:remote-endpoint-gap-reduction}, equivalently through isolated
+interior zeros of the strictly monotone endpoint-gap functions
+\[
+G_{\xi,J}(h)=y_\xi-y(h)-m(h)\bigl(\xi-x(h)\bigr).
+\]
+On the mixed side, the only residual contribution is the exact fixed-shear
+corner $\{S=0\}\cap\{K_v=0\}$, already treated separately as a
+quotient-diagonal transport problem.
+
+Thus the remaining global nonadjacent recurrence problem is cleanly a finite
+remote-incidence problem for the $G_{\xi,J}$, not a diffuse local-birth problem
+on a graph of generic gates.
 \end{remark}
 
 \begin{definition}[Minimal bad core]
@@ -20282,13 +20281,13 @@ $4$-point septic-jet phenomenon near the diagonal base; it must be genuinely
 global/nonlocal or come from deeper canonical/multi-pair structure.
 \end{remark}
 
-\begin{remark}[Fixed-slope interval graphs, Monge support law, and the remaining global nonmixed burden]
+\begin{remark}[Fixed-slope interval graphs, support pseudolines, and the remaining nonmixed global burden]
 \label{rem:fixed-slope-interval-graph-monge-support-global-burden}
-There is a useful combinatorial reformulation of the nonadjacent
-pair-pair geometry on a nonmixed patch.
+There is a useful combinatorial reformulation of the nonadjacent pair-pair
+geometry on a nonmixed patch.
 
-For fixed slope $m$, Lemma~\ref{lem:fixed-slope-intercept-sets} shows that
-each ECT interval $I$ contributes an intercept interval
+For fixed slope $m$, Lemma~\ref{lem:fixed-slope-intercept-sets} shows that each
+ECT interval $I$ contributes an intercept interval
 \[
 \mathcal B_I(m)=\{\psi_I(x)-mx:x\in J_I\},
 \]
@@ -20328,18 +20327,17 @@ is strictly monotone on $J$ by
 Lemma~\ref{lem:endpoint-gap-monotonicity-ordered-target}. So each
 endpoint/branch pair can contribute at most one remote tangent incidence.
 
-These observations give a sharper qualitative picture of the remaining nonmixed
+These observations give the sharp current picture of the remaining nonmixed
 global burden: any surviving bad core must be slope-changing, pair-nonrepeating,
 and supported by a finite table of remote endpoint/branch incidences.
 
-However, it is important to record the limitation of this reduction. By
-Remark~\ref{rem:intrinsic-affine-plane-universality}, abstract analytic plane
-curves can still realize bounded strip-overlap cells and nonadjacent recurrence
-patterns compatible with single-crossing support geometry. So pure planarity,
-parity, interval-graph combinatorics, or pseudoline combinatorics by itself is
-\emph{not} enough to close the remaining branch. Any final contradiction must
-therefore use RH-specific source/provenance/canonical structure, not only
-abstract secant-strip or support-curve geometry.
+It is equally important to record the ceiling of this reduction. By
+Remark~\ref{rem:intrinsic-affine-plane-universality}, intrinsic one-pair affine
+geometry is universal for analytic plane curves. Thus pure planarity, parity,
+interval-graph combinatorics, fixed-slope support order, or pseudoline
+combinatorics by itself cannot close the remaining branch. Any final
+contradiction must therefore use RH-specific source/provenance/canonical
+structure, not only abstract strip/support geometry.
 
 Accordingly, the natural next global target is not another local normal-form
 analysis, but an RH-specific sign theorem for the remote endpoint-gap functions
@@ -25169,14 +25167,12 @@ repeated-node, or already-quintic handoffs.
 After
 Theorem~\ref{thm:global-mixed-to-scalar-capture-clean-patch},
 the clean mixed four-point case is no longer an independent global frontier.
-What remains genuinely open is the global propagation problem for the
-nonmixed/source-level side --- equivalently the nonadjacent recurrence problem
-for the normalized line-incidence geometry --- together with the separate
-two-point program.
+What remains genuinely open is the global nonadjacent propagation problem on the
+nonmixed/source-level side, together with the separate two-point program.
 
-More concretely, on a generic component the remaining theorem may be read as the
-absence of nonadjacent $2$-secant recurrence in the affine chart, equivalently
-as no nonadjacent level re-entry for
+More concretely, on a generic component the remaining one-pair theorem may be
+read as the absence of nonadjacent $2$-secant recurrence in the affine chart,
+equivalently as no nonadjacent level re-entry for
 \[
 \beta(h)=-\frac{L(h)}{M(h)},
 \]
@@ -25184,17 +25180,23 @@ equivalently as no same-parity vertical-line re-entry for the dual curve
 \[
 T(h)=\left(-\frac{L(h)}{M(h)},\frac{N(h)}{M(h)}\right).
 \]
-The current local theory already resolves the finite-order $W=0,\ M\neq 0$
-boundary behavior and the turning-boundary generic blocks, and it also shows
-that the mixed residual overlap lane is concentrated on $K_v=0$ and should be
-read there as a quotient-diagonal transport problem rather than as a new mixed
-carrier. Thus the remaining burden is global/nonlocal, but the one-pair
-derivative geometry now compresses it much further: interior common-tangent
-structure is pseudoline-ordered, local birth at generic turning and
-finite-order $W=0,\ M\neq 0$ boundaries is already sterile, and the only
-remaining one-pair obstruction is a finite table of remote endpoint/branch
-tangencies, equivalently zeros of the monotone endpoint-gap functions
-$G_{\xi,J}$.
+
+The current local theory already resolves the finite-order
+$W=0,\ M\neq 0$ boundary behavior and the generic turning-boundary blocks.
+On the mixed side it also shows that the residual overlap contribution is
+concentrated on $K_v=0$ and should be read there as a quotient-diagonal
+transport problem rather than as a new local mixed carrier.
+
+Thus the remaining burden is global/nonlocal, but the one-pair derivative
+geometry now compresses it substantially: interior common-tangent structure is
+pseudoline-ordered, local birth at generic turning and finite-order
+$W=0,\ M\neq 0$ boundaries is already sterile, and the only remaining one-pair
+obstruction is a finite table of remote endpoint/branch tangencies,
+equivalently zeros of the monotone endpoint-gap functions $G_{\xi,J}$.
+
+On the mixed residual $K_v=0$ lane, what remains is not another local
+branch-classification problem, but the separate quotient-transport /
+no-hidden-reset question discussed in the fixed-shear section.
 \end{remark}
 
 \section{Endgame architecture and remaining propagation problem outside the clean mixed four-point case}
@@ -25205,8 +25207,8 @@ line-incidence geometry rather than a local boundary-creation problem.
 \begin{remark}[Equivalent formulations of the remaining propagation problem outside the clean mixed four-point case]
 \label{rem:equivalent-global-propagation-problem}
 After Theorem~\ref{thm:global-mixed-to-scalar-capture-clean-patch}, the
-remaining missing theorem on a generic component may be formulated in any of the
-following equivalent ways:
+remaining missing one-pair theorem on a generic component may be formulated in
+any of the following equivalent ways:
 \begin{enumerate}
 \item no finite-slope affine line in the chart
 \[
@@ -25281,8 +25283,8 @@ strong in generic models and should not be assumed without further RH-specific
 input.
 
 \begin{enumerate}
-\item Naive support propagation is not enough: exclusion of adjacent pair-pair
-lines does not by itself force exclusion for nonadjacent pairs.
+\item Adjacent exclusion is not enough: exclusion of adjacent pair-pair lines
+does not by itself force exclusion for nonadjacent pairs.
 
 \item Local convexity of the dual tangent-line curve, even together with the
 shared asymptote structure of
