@@ -11621,6 +11621,134 @@ the remaining mixed two-point burden is genuinely source-coupled rather than
 quotient-determinantal.
 \end{remark}
 
+\begin{proposition}[Projective compactness of the moving $\lambda$-shear defects]
+\label{prop:projective-compactness-moving-lambda-shear-two-point}
+Assume a close exact mixed two-point bad branch on a compact good overlap patch
+\[
+U\Subset\{c\neq 0,\ v_5\neq 0,\ M\neq 0\},
+\]
+and write
+\[
+\Lambda_n:=-\frac{a_{2,n}}{a_{1,n}},
+\qquad
+\delta_n f:=f(h_{1,n})-\Lambda_n f(h_{2,n}),
+\qquad
+\lambda=\frac{\Delta_7}{v_5}.
+\]
+Then the mixed branch equations are equivalent to the existence of branch-generated
+moving shears $(\eta_n,\xi_n,\gamma_n)$ such that
+\[
+\delta_n(c)=\eta_n\,\delta_n(\lambda),\qquad
+\delta_n(v_5)=\xi_n\,\delta_n(\lambda),\qquad
+\delta_n(u_5)=\gamma_n\,\delta_n(\lambda).
+\]
+
+Set
+\[
+d_n:=\bigl(\delta_n(c),\delta_n(v_5),\delta_n(u_5),\delta_n(\lambda)\bigr)\in\mathbf R^4.
+\]
+Then, after passing to a subsequence, exactly one of the following holds.
+
+\begin{enumerate}
+\item
+$d_n=0$ for all $n$ in the subsequence. Equivalently, along that subsequence one already has exact repeated-source transport simultaneously for
+\[
+c,\qquad v_5,\qquad u_5,\qquad \lambda.
+\]
+
+\item
+$d_n\neq 0$ for all $n$ in the subsequence, and the normalized defect directions
+\[
+\widehat d_n:=\frac{d_n}{\|d_n\|}\in S^3
+\]
+converge. Equivalently, the projective classes
+\[
+[d_n]
+=
+[\delta_n(c):\delta_n(v_5):\delta_n(u_5):\delta_n(\lambda)]
+\in \mathbf P^3
+\]
+admit a convergent subsequence.
+\end{enumerate}
+
+Moreover, on any subsequence for which $\delta_n(\lambda)\neq 0$ and the projective
+limit lies in the affine chart with nonzero $\lambda$-coordinate, the affine
+$\lambda$-shears converge:
+\[
+\eta_n=\frac{\delta_n(c)}{\delta_n(\lambda)}\to\eta_*,
+\qquad
+\xi_n=\frac{\delta_n(v_5)}{\delta_n(\lambda)}\to\xi_*,
+\qquad
+\gamma_n=\frac{\delta_n(u_5)}{\delta_n(\lambda)}\to\gamma_*.
+\]
+
+For the limiting affine shear one has only the asymptotic fixed-shear identities
+\[
+\delta_n(c-\eta_*\lambda)=(\eta_n-\eta_*)\,\delta_n(\lambda),
+\]
+\[
+\delta_n(v_5-\xi_*\lambda)=(\xi_n-\xi_*)\,\delta_n(\lambda),
+\]
+\[
+\delta_n(u_5-\gamma_*\lambda)=(\gamma_n-\gamma_*)\,\delta_n(\lambda).
+\]
+Hence a close exact mixed branch automatically reduces only to a
+\emph{projectively frozen secant-shadow problem}. In general it does \emph{not}
+reduce to exact repeated-source transport for a single fixed triple
+\[
+(\eta_*,\xi_*,\gamma_*).
+\]
+\end{proposition}
+
+\begin{proof}
+The identities
+\[
+\delta_n(c)=\eta_n\,\delta_n(\lambda),\qquad
+\delta_n(v_5)=\xi_n\,\delta_n(\lambda),\qquad
+\delta_n(u_5)=\gamma_n\,\delta_n(\lambda)
+\]
+are just a rewriting of the branch equations. If $d_n=0$ infinitely often, pass
+to that subsequence. Otherwise $d_n\neq 0$ for all large $n$, and compactness of
+the unit sphere gives a convergent subsequence of $\widehat d_n$, equivalently
+of the associated projective classes in $\mathbf P^3$.
+
+On the affine chart $\delta_n(\lambda)\neq 0$, the projective coordinates are
+exactly
+\[
+\eta_n=\frac{\delta_n(c)}{\delta_n(\lambda)},\qquad
+\xi_n=\frac{\delta_n(v_5)}{\delta_n(\lambda)},\qquad
+\gamma_n=\frac{\delta_n(u_5)}{\delta_n(\lambda)},
+\]
+so convergence in that chart is precisely convergence of the affine
+$\lambda$-shears. The last three identities are immediate from the definitions.
+\end{proof}
+
+\begin{remark}[Affine freezing is stronger than projective freezing on the mixed two-point branch]
+\label{rem:affine-freezing-stronger-than-projective-two-point}
+Proposition~\ref{prop:projective-compactness-moving-lambda-shear-two-point}
+shows that the automatic compactness on the mixed two-point branch is
+projective, not affine. Even on a good overlap patch, the affine
+$\lambda$-shears can diverge if $\delta_n(\lambda)$ vanishes to higher order
+than $\delta_n(c),\delta_n(v_5),\delta_n(u_5)$. And even when
+\[
+(\eta_n,\xi_n,\gamma_n)\to(\eta_*,\xi_*,\gamma_*),
+\]
+one gets only asymptotic transport for
+\[
+c-\eta_*\lambda,\qquad
+v_5-\xi_*\lambda,\qquad
+u_5-\gamma_*\lambda,
+\]
+not exact transport at each stage of the branch. Therefore the downstream
+derivative-geometric reduction should be formulated in terms of the projective
+defect direction
+\[
+[\delta_n(c):\delta_n(v_5):\delta_n(u_5):\delta_n(\lambda)],
+\]
+or equivalently in any affine chart on which the projective limit has nonzero
+coordinate, rather than as an exact frozen-$\lambda$ repeated-source branch.
+\end{remark}
+
 \begin{remark}[What remains in the two-pair rewrite]
 \label{rem:what-remains-two-pair-rewrite}
 Theorem~\ref{thm:quantitative-defect-thickened-strengthened-coincidence}
@@ -11643,23 +11771,36 @@ two-point bad cores on compact subsets of $\{c\neq 0\}$ if one had a genuine
 corrected two-atom quotient germ with continuity and exact diagonal collapse.
 
 Third, on a good overlap patch in the mixed regime, the derivative-geometric
-attack now naturally passes through the $\lambda$-sheared source transport
-system
+attack now naturally passes through the moving $\lambda$-sheared source
+transport system
 \[
-(c-\eta\lambda)(h_1)=\Lambda(c-\eta\lambda)(h_2),
+(c-\eta_n\lambda)(h_{1,n})=\Lambda_n(c-\eta_n\lambda)(h_{2,n}),
 \qquad
-(v_5-\xi\lambda)(h_1)=\Lambda(v_5-\xi\lambda)(h_2),
+(v_5-\xi_n\lambda)(h_{1,n})=\Lambda_n(v_5-\xi_n\lambda)(h_{2,n}),
 \qquad
-(u_5-\gamma\lambda)(h_1)=\Lambda(u_5-\gamma\lambda)(h_2),
+(u_5-\gamma_n\lambda)(h_{1,n})=\Lambda_n(u_5-\gamma_n\lambda)(h_{2,n}),
 \]
 with
 \[
 \lambda=\frac{\Delta_7}{v_5},
 \qquad
-\Lambda=-\frac{a_2}{a_1},
+\Lambda_n=-\frac{a_{2,n}}{a_{1,n}}.
 \]
-and, after freezing a $\lambda$-shear subsequence, the associated projective
-secant shadow can accumulate only on
+By Proposition~\ref{prop:projective-compactness-moving-lambda-shear-two-point},
+what is automatic from an exact close mixed branch is not affine freezing of
+\[
+(\eta_n,\xi_n,\gamma_n),
+\]
+but projective compactness of the defect directions
+\[
+[\delta_n(c):\delta_n(v_5):\delta_n(u_5):\delta_n(\lambda)],
+\qquad
+\delta_n(f):=f(h_{1,n})-\Lambda_n f(h_{2,n}).
+\]
+On any subsequence whose projective limit lies in the affine $\lambda$-chart,
+one obtains a convergent affine $\lambda$-shear subsequence; in general the
+exact frozen repeated-source reduction is not automatic. The associated
+projective secant shadow can nevertheless accumulate only on
 \[
 \{S=0\}\cup\{K_v=0\},
 \qquad
@@ -21017,17 +21158,31 @@ What is now ruled out is the naive source-summed corrected-block route: its
 extracted one-atom finite-order coefficients are even in the source weight and
 therefore cannot supply the required linear merger law. On the mixed side,
 determinant-only and quotient-only arguments are likewise shear-blind. The
-genuinely new derivative-geometric lane is the $\lambda$-shear route on a good
-overlap patch, where
+genuinely new derivative-geometric lane is the $\lambda$-shear route on a
+good overlap patch, where
 \[
-\lambda=\frac{\Delta_7}{v_5},
-\qquad
-A=c-\eta\lambda,\quad
-B=v_5-\xi\lambda,\quad
-F=u_5-\gamma\lambda
+\lambda=\frac{\Delta_7}{v_5}
 \]
-satisfy exact repeated-source transport along the branch. After freezing a
-$\lambda$-shear subsequence, the associated projective secant shadow can
+and an exact mixed branch generates moving shears
+\[
+(\eta_n,\xi_n,\gamma_n)
+\]
+for which
+\[
+A_n:=c-\eta_n\lambda,\qquad
+B_n:=v_5-\xi_n\lambda,\qquad
+F_n:=u_5-\gamma_n\lambda
+\]
+satisfy exact repeated-source transport along the branch. By
+Proposition~\ref{prop:projective-compactness-moving-lambda-shear-two-point},
+the automatic compactness is projective:
+\[
+[\delta_n(c):\delta_n(v_5):\delta_n(u_5):\delta_n(\lambda)]
+\]
+admits a convergent subsequence, and only on a subsequence whose limit lies in
+the affine $\lambda$-chart does one obtain a convergent affine
+$\lambda$-shear. Even then the frozen triple yields only asymptotic, not exact,
+fixed-shear transport. The associated projective secant shadow can nevertheless
 accumulate only on
 \[
 \{S=0\}\cup\{K_v=0\},
@@ -21362,14 +21517,21 @@ Lemma~\ref{lem:minimal-source-level-two-point-criterion}, the weaker
 quotient-diagonal exact exclusion route of
 Proposition~\ref{prop:conditional-exact-two-point-exclusion-qabs}, and the
 mixed $\lambda$-shear / projective-shadow route on good overlap patches. In the
-last route, after freezing a $\lambda$-shear subsequence the mixed branch
-becomes repeated-source transport for
+last route, an exact mixed branch generates moving $\lambda$-shears through
 \[
-c-\eta\lambda,\qquad v_5-\xi\lambda,\qquad u_5-\gamma\lambda,
-\qquad
 \lambda=\frac{\Delta_7}{v_5},
 \]
-and its projective secant shadow can accumulate only on
+and
+Proposition~\ref{prop:projective-compactness-moving-lambda-shear-two-point}
+shows that the automatic compactness is projective:
+\[
+[\delta_n(c):\delta_n(v_5):\delta_n(u_5):\delta_n(\lambda)]
+\]
+admits a convergent subsequence. Only when the projective limit lies in the
+affine $\lambda$-chart does one obtain a convergent affine $\lambda$-shear
+subsequence, and even then the frozen triple gives only asymptotic, not exact,
+fixed-shear transport. The associated projective secant shadow can nevertheless
+accumulate only on
 \[
 \{S=0\}\cup\{K_v=0\},
 \qquad
@@ -21456,17 +21618,21 @@ coefficients are even analytic in the source weight. So the remaining two-point
 issue now splits into three conditional lanes: the finite-order source-level
 merger route, the weaker quotient-diagonal exact exclusion route, and the mixed
 $\lambda$-shear / projective-shadow route on good overlap patches. In the last
-route, a close exact mixed two-point bad branch becomes repeated-source
-transport for
+route, a close exact mixed two-point bad branch generates moving shears through
 \[
-c-\eta\lambda,\qquad
-v_5-\xi\lambda,\qquad
-u_5-\gamma\lambda,
-\qquad
 \lambda=\frac{\Delta_7}{v_5},
 \]
-and, after freezing a $\lambda$-shear subsequence, its projective secant shadow
-can accumulate only on
+and
+Proposition~\ref{prop:projective-compactness-moving-lambda-shear-two-point}
+shows that the automatic compactness is projective:
+\[
+[\delta_n(c):\delta_n(v_5):\delta_n(u_5):\delta_n(\lambda)]
+\]
+admits a convergent subsequence. Only when the projective limit lies in the
+affine $\lambda$-chart does one obtain a convergent affine $\lambda$-shear
+subsequence, and even then the limiting triple yields only asymptotic, not
+exact, fixed-shear transport. The associated projective secant shadow can
+nevertheless accumulate only on
 \[
 \{S=0\}\cup\{K_v=0\},
 \qquad
