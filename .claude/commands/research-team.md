@@ -63,7 +63,13 @@ named teammates. Each teammate's spawn prompt MUST contain:
     / [candidate] before merging."
   - Verifiers: "Give me the honest verdict." + "Qualify any
     impossibility claim with 'from [scope] alone.'"
-- Explicit **non-goals** for this teammate (what NOT to pursue).
+- Explicit **non-goals** for this teammate (what NOT to pursue). If the
+  user did not supply them, the coordinator synthesizes them from
+  context per `CLAUDE.md` §3 (coordinator autonomy): adjacent UV
+  entries being worked in parallel, other in-flight task dirs, topics
+  explicitly deferred in recent lore, and anything the cycle theme
+  implies should wait. Do not dispatch without non-goals — an
+  unscoped teammate drifts onto adjacent problems.
 - The teammate's specific assignment:
   - Gap-closers: target label/UV-NNN, routes A/B/C, fallback to
     minimal finite reduction. **Per `CLAUDE.md` §7 exception**, paste

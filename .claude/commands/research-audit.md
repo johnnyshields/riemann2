@@ -51,8 +51,12 @@ Each auditor's briefing MUST include:
   - "Give me the honest verdict" as the closing line of the report.
   - "`unsupported`, `blocked`, `no progress` are acceptable returns."
 - The **self-deposit checklist**.
-- Explicit non-goals from `$ARGUMENTS` (or the default: "audit only, do
-  not propose new lemmas or restructure the subsection").
+- Explicit non-goals from `$ARGUMENTS` — or, if the user did not
+  supply any, the coordinator synthesizes them from context per
+  `CLAUDE.md` §3 (coordinator autonomy). At minimum, include the
+  default: "audit only, do not propose new lemmas or restructure the
+  subsection." Augment with any adjacent topic being worked in
+  parallel so auditors don't drift.
 
 Adversary checkers read the corresponding auditor's report once landed
 and return a 7-field report whose `Status` is `rejected` or `blocked` if

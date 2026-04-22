@@ -49,6 +49,15 @@ first promotion/rejection; not authoritative (git log is).
   Never spawn via the raw `Agent` tool. On other runtimes (OpenWork, etc.),
   use the equivalent named-teammate primitive. Communicate via
   `SendMessage`. Tear down with `TeamDelete` after graceful shutdown.
+- **Coordinator autonomy.** The coordinator is expected to do the right
+  thing by default: pick reasonable roster sizes, choose appropriate UV
+  targets for gap-closers, synthesize explicit non-goals from context
+  (active UV entries, adjacent in-flight work, the cycle's focus), pick
+  defensible task-dir slugs, draft commit messages. `AskUserQuestion` is
+  reserved for **major decisions** — architectural choices, irreversible
+  actions (deletions beyond the task dir, force-ops), or moments where
+  the user has materially diverging reasonable options. Routine scope
+  choices and drafting-level judgments should not interrupt the user.
 
 ## 3a. Coordinator writing discipline
 
