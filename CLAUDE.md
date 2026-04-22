@@ -54,26 +54,53 @@ first promotion/rejection; not authoritative (git log is).
 
 When the coordinator edits `paper/proof_of_rh.tex`, apply a
 **quasi-referee** standard to the coordinator's own text. Not a hardass
-— just the same caution a good referee would apply:
+— just the same caution a good referee would apply. Share this
+discipline with every delegated agent in their briefing.
 
-- State facts directly. No AI tells ("it is worth noting," "we
-  leverage / utilize / employ," "to the best of our knowledge,"
-  "interestingly," "remarkable").
-- Do not overclaim. If a result is only computationally verified, say
-  so. If a theorem holds "for tested configurations," do not write
-  "for all." If a bound is effective, say so; if it isn't, do not
-  imply it.
-- Do not hedge for tone. Unnecessary qualifiers muddy the proof state.
-- Scope disclaimers are welcome — they are honest, not timid. "This
-  closes the pair-like branch; the finite-core branch remains open"
-  beats "this closes the pair-like branch (modulo some subtleties)."
-- When in doubt, quarantine (UV entry) rather than promote.
+**State facts directly.**
+No AI tells ("it is worth noting," "we leverage / utilize / employ,"
+"to the best of our knowledge," "interestingly," "remarkable").
 
-Share this discipline with every delegated agent as part of their
-briefing. The briefing should remind them: state findings directly, no
-overclaim, no hedge, honest scope disclaimers welcome. This applies
-uniformly to gap-closers, explorers, verifiers, auditors, and
-synthesis analysts.
+**Do not overclaim.**
+If a result is only computationally verified, say so. If a theorem
+holds "for tested configurations," do not write "for all." If a bound
+is effective, say so; if it isn't, do not imply it.
+
+**Three-bin separation is mandatory.**
+On any audit, synthesis, or status memo, explicitly separate claims
+into: `proved` / `conditional on [hypothesis X]` / `missing`. Never blur
+these. Never write a stronger conclusion than the hypotheses support.
+
+**Gap reduction over closure.**
+When a proof has gaps, do not patch with "further analysis needed."
+Reduce to the smallest concrete list of missing sub-statements — each
+stated as a precise missing theorem, identity, or estimate. Vague
+gaps become UV entries, not paragraph cover.
+
+**Scoped negation.**
+Never state impossibility without scope. "Ruled out" must always
+carry a "from [scope] alone" qualifier. Example: "The topological
+route is exhausted from intrinsic one-pair affine geometry alone"
+— NOT "the topological route is exhausted." This preserves room for
+non-obvious breakthroughs via a different path.
+
+**Caution-labeled synthesis.**
+When merging outputs from multiple agents, chats, or sessions, pre-label
+each source with `[confirmed]`, `[conditional on X]`, or `[candidate,
+not yet verified]`. Only `[confirmed]` items may be written into the
+paper; others go to `unverified.tex` or `findings.md`.
+
+**Honest-verdict closure.**
+End audits and status memos with a "Honest verdict:" line stating what
+is and isn't closed. This licenses candor and prevents sycophantic drift
+at chat end.
+
+**Scope-disclaimer welcome, not timid.**
+"This closes the pair-like branch; the finite-core branch remains open"
+beats "this closes the pair-like branch (modulo some subtleties)."
+
+**When in doubt, quarantine.**
+UV entry first, promote later.
 
 ## 4. 3+3+2 roster principle
 
@@ -191,6 +218,28 @@ receive **findings.md only**.
 A skill that dispatches without the required fields, or that
 over-shares `unverified.tex` against this rule, is broken. Fix the
 skill.
+
+### 7a. Briefing idioms that license candor
+
+These phrases should appear in agent briefings; they have an outsized
+effect on honest output (distilled from the prior manual ChatGPT
+workflow):
+
+- **"Separate three things: proved / conditional / missing."** Open
+  audit briefings with this. Forces the three-bin discipline from §3a.
+- **"What is the cleanest target here?"** Before pivoting mid-audit,
+  restate the theorem in its cleanest form. Prevents drift to adjacent
+  questions.
+- **"Give me the honest verdict."** Use at closure time to license
+  "this does not yet close" answers.
+- **"If full closure is too hard, reduce to the smallest list of
+  concrete unresolved sub-statements."** For lemma-closure briefings.
+- **"Qualify any impossibility claim with 'from [scope] alone.'"**
+  Required for negative findings and adversarial reports.
+- **"Label each claim with a confidence tag before merging."** For
+  synthesis roles.
+- **"`unsupported`, `blocked`, and `no progress` are acceptable
+  returns."** Explicit anti-sycophancy. Re-state in every briefing.
 
 ## 8. Agent report schema + self-deposit
 

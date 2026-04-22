@@ -49,9 +49,20 @@ named teammates. Each teammate's spawn prompt MUST contain:
 - The **self-deposit checklist**: write the final report to
   `tasks/<role-dir>/reports/<teammate-name>.md`; scripts to
   `tasks/<role-dir>/scripts/`; do not write elsewhere.
-- The **writing-discipline reminder** from `CLAUDE.md` §3a: state
-  findings directly; no overclaim; no hedge; honest scope disclaimers
-  welcome.
+- The **writing-discipline reminder** from `CLAUDE.md` §3a (three-bin
+  separation, gap reduction over closure, scoped negation, caution-
+  labeled synthesis, honest-verdict closure).
+- The **briefing idioms** from `CLAUDE.md` §7a — paste the subset
+  relevant to the teammate's role. In particular:
+  - Every teammate: "`unsupported`, `blocked`, `no progress` are
+    acceptable returns."
+  - Gap-closers: "If full closure is too hard, reduce to the smallest
+    list of concrete unresolved sub-statements." + "What is the
+    cleanest target here?"
+  - Explorers: "Separate observations into [confirmed] / [conditional]
+    / [candidate] before merging."
+  - Verifiers: "Give me the honest verdict." + "Qualify any
+    impossibility claim with 'from [scope] alone.'"
 - Explicit **non-goals** for this teammate (what NOT to pursue).
 - The teammate's specific assignment:
   - Gap-closers: target label/UV-NNN, routes A/B/C, fallback to

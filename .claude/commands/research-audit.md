@@ -45,7 +45,11 @@ Each auditor's briefing MUST include:
 - The **7-field report schema** (`CLAUDE.md` §8).
 - The **writing-discipline reminder** (`CLAUDE.md` §3a): state
   findings directly; no overclaim; no hedge; honest scope disclaimers
-  welcome.
+  welcome; three-bin separation mandatory.
+- The **briefing idioms** (`CLAUDE.md` §7a):
+  - "Separate three things: proved / conditional / missing."
+  - "Give me the honest verdict" as the closing line of the report.
+  - "`unsupported`, `blocked`, `no progress` are acceptable returns."
 - The **self-deposit checklist**.
 - Explicit non-goals from `$ARGUMENTS` (or the default: "audit only, do
   not propose new lemmas or restructure the subsection").

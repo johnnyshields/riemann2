@@ -7,8 +7,10 @@ Alphabetize, verify, and clean up the bibliography of a LaTeX paper.
 The user's arguments are: $ARGUMENTS
 
 Parse the arguments:
-- If empty: housekeep the main paper (most recent `paper/*.tex` not in `paper/old/`)
-- If a file path (e.g., `paper/paper15-c.tex`): housekeep that paper
+- If empty: housekeep `paper/proof_of_rh.tex` (the canonical draft per
+  `CLAUDE.md` §1). Do not use an mtime heuristic: `paper/unverified.tex`
+  has a more recent mtime but is not the main paper.
+- If a file path (e.g., `paper/proof_of_rh.tex`): housekeep that paper
 - If `--skip-external`: skip web verification of unconfirmed entries
 - If `--force-recheck`: ignore the known-good cache and re-verify everything
 

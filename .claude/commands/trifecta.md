@@ -46,6 +46,9 @@ parallel: `analyst-deep-insights`, `analyst-lit-search`,
 - The 7-field report schema.
 - The writing-discipline reminder (`CLAUDE.md` §3a): state findings
   directly, no overclaim, no hedge, honest scope disclaimers welcome.
+- Briefing idioms (`CLAUDE.md` §7a): "Label each connection with a
+  confidence tag before merging" + "`unsupported`, `blocked`, `no
+  progress` are acceptable returns."
 - The self-deposit checklist: final report in
   `tasks/<dir>/reports/<teammate>.md`; no standalone per-teammate
   lore file (the coordinator will write one consolidated lore).
