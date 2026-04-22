@@ -1,0 +1,978 @@
+proof_of_rh(305).tex
+File
+convo14-2point(4).txt
+Document
+Please retrace the entire conversation and rebuild the full mathematical argument which is not in the paper draft yet. audit it and verify everything is corrrect.
+
+I’m reconstructing the argument from the transcript and cross-checking it against the current TeX, then I’ll separate what is genuinely proved from what was only asserted so the audit is clean.
+
+I’ve pinned down the current state in the TeX: the draft does not claim an unconditional two-point closure anymore; it keeps only the minimal finite-order criterion, the weaker quotient-diagonal route, and the mixed λλ-shear route. I’m now checking which earlier “closure” claims from the transcript survive the actual formulas and which do not.
+
+I retraced the two-point/source-level line all the way through. The clean conclusion is:
+
+The unconditional source-summed two-point closure is not correct. What is correct is a sharper, smaller package:
+
+    a formal quadratic divisibility lemma for any analytic two-atom package with swap symmetry, axis collapse, and diagonal merger;
+
+    a real obstruction showing the naive source-summed corrected-block/whitening route cannot supply the needed linear-in-amplitude one-atom law;
+
+    a real quotient-level gain: the weighted one-atom path is already trivial in the ambient quotient \Qabs\Qabs to all orders;
+
+    a weaker exact two-atom quotient route that would exclude exact close bad two-point cores if continuity and diagonal collapse of the actual two-atom quotient germ are proved;
+
+    and, beyond that, the genuinely live issue is now purely two-atom, not one-atom.
+
+Here is the rebuilt argument, with the audit.
+1. The formal lemma is sound
+
+Let VV be any finite-dimensional complex vector space, let Fh∈VFh​∈V, and let
+P2(a1,h1;a2,h2)∈V
+P2​(a1​,h1​;a2​,h2​)∈V
+
+be analytic near small two-atom data. Assume:
+P2(a1,h1;a2,h2)=P2(a2,h2;a1,h1),
+P2​(a1​,h1​;a2​,h2​)=P2​(a2​,h2​;a1​,h1​),
+P2(0,h1;a2,h2)=a2Fh2,P2(a1,h1;0,h2)=a1Fh1,
+P2​(0,h1​;a2​,h2​)=a2​Fh2​​,P2​(a1​,h1​;0,h2​)=a1​Fh1​​,
+P2(a1,h;a2,h)=(a1+a2)Fh.
+P2​(a1​,h;a2​,h)=(a1​+a2​)Fh​.
+
+Define the interaction remainder
+I2(a1,h1;a2,h2):=P2(a1,h1;a2,h2)−a1Fh1−a2Fh2.
+I2​(a1​,h1​;a2​,h2​):=P2​(a1​,h1​;a2​,h2​)−a1​Fh1​​−a2​Fh2​​.
+
+Then
+I2(0,h1;a2,h2)=I2(a1,h1;0,h2)=0,
+I2​(0,h1​;a2​,h2​)=I2​(a1​,h1​;0,h2​)=0,
+
+so analyticity gives
+I2=a1a2 G(h1,h2).
+I2​=a1​a2​G(h1​,h2​).
+
+Swap symmetry gives G(h1,h2)=G(h2,h1)G(h1​,h2​)=G(h2​,h1​). Diagonal merger gives G(h,h)=0G(h,h)=0. Writing
+m=h1+h22,s=h2−h1,G~(m,s):=G ⁣(m−s2,m+s2),
+m=2h1​+h2​​,s=h2​−h1​,G
+(m,s):=G(m−2s​,m+2s​),
+
+the symmetry makes G~G
+even in ss, and G~(m,0)=0G
+(m,0)=0. Therefore G~(m,s)G
+(m,s) is divisible by s2s2, hence
+I2=a1a2(h1−h2)2J2
+I2​=a1​a2​(h1​−h2​)2J2​
+
+for analytic J2J2​. This part is mathematically correct. It is the right abstract engine behind the two-point theorem.
+
+So the real question was never the divisibility argument itself. The real question was whether the actual corrected two-atom object satisfies the three hypotheses above.
+2. The downstream exclusion mechanism is also sound
+
+The conversation correctly reduced the two-point branch to quadratic control of the three finite-order defects:
+E12(3),E12(5),E‾12(7;1).
+E12(3)​,E12(5)​,E12(7;1)​.
+
+Once those are O((h1−h2)2)O((h1​−h2​)2), the strengthened coincidence theorem forces
+Ψ^(h1)−Ψ^(h2)=O((h1−h2)2),
+Ψ
+(h1​)−Ψ
+(h2​)=O((h1​−h2​)2),
+
+while on a compact good patch J⋐{c≠0, M≠0}J⋐{c=0, M=0}, the map h↦v5(h)/c(h)h↦v5​(h)/c(h) is bi-Lipschitz, so ∣Ψ^(h1)−Ψ^(h2)∣≳∣h1−h2∣∣Ψ
+(h1​)−Ψ
+(h2​)∣≳∣h1​−h2​∣. That contradiction rules out nontrivial close two-point bad cores on such a patch. This reduction was identified early and remains correct.
+
+So the entire source-level problem really is: produce the quadratic (h1−h2)2(h1​−h2​)2 defect factor in a legitimate way.
+3. The unconditional source-summed theorem is not correct
+
+This is the key audit point.
+
+A midpoint proposal in the conversation claimed that one could define a source-summed corrected finite-order package by inserting
+qμ=∑jajqhj,Φμ=∑jajΦhj
+qμ​=j∑​aj​qhj​​,Φμ​=j∑​aj​Φhj​​
+
+into the corrected same-point and mixed blocks, then whitening, then extracting cubic/quintic/septic coefficients, and that this would give a source-defined package with
+P≤7(aδh)=aFh,P≤7(a1δh+a2δh)=P≤7((a1+a2)δh).
+P≤7​(aδh​)=aFh​,P≤7​(a1​δh​+a2​δh​)=P≤7​((a1​+a2​)δh​).
+
+That claim does not survive audit. It is incompatible with the actual amplitude dependence of the corrected blocks.
+
+The obstruction is explicit. For a weighted one-atom datum
+qa,h=a qh,Φa,h=a Φh,
+qa,h​=aqh​,Φa,h​=aΦh​,
+
+the corrected same-point and mixed blocks have the form
+Ga,h,±\corr(s)=a Gh,±(a2;s),Na,h\corr(s)=a Nh(a2;s).
+Ga,h,±\corr​(s)=aGh,±​(a2;s),Na,h\corr​(s)=aNh​(a2;s).
+
+After whitening,
+Ω^a,h\corr(s)=Gh,−(a2;s)−1/2 Nh(a2;s) Gh,+(a2;s)−1/2,
+Ω
+a,h\corr​(s)=Gh,−​(a2;s)−1/2Nh​(a2;s)Gh,+​(a2;s)−1/2,
+
+so the overall factor of aa cancels. Therefore every fixed finite-order coefficient extracted from the whitened block is an even analytic function of aa. In particular, the naive linear law
+P2(aδh)=aFh
+P2​(aδh​)=aFh​
+
+cannot hold on any nonzero patch unless the package vanishes identically. The diagonal additivity
+Qh(a1+a2)=Qh(a1)+Qh(a2)
+Qh​(a1​+a2​)=Qh​(a1​)+Qh​(a2​)
+
+also fails for a nonzero even analytic function.
+
+So the source-summed corrected-block route is not just unproved. In the strong linear form, it is the wrong theorem.
+4. What does survive from the one-atom analysis
+
+The conversation then found the right correction: the weighted one-atom path is not linear in the raw representative, but it is trivial in the ambient quotient.
+
+At fixed hh, varying a≠0a=0 changes only the local value data:
+(qh,Φh)↦(aqh,aΦh).
+(qh​,Φh​)↦(aqh​,aΦh​).
+
+By the quotient definition used in the draft, \Qabs\Qabs is the odd-germ quotient by the value/gauge family. So the weighted one-atom amplitude path lies entirely inside the modded-out family. Hence, on each connected nonzero amplitude interval,
+Fa,h=Fa0,hin \Qabs[[z2]].
+Fa,h​=Fa0​,h​in \Qabs[[z2]].
+
+That is, the one-atom source-weight path is quotient-trivial to all orders.
+
+This reconciles the earlier obstruction:
+
+    at the raw block level, the representative can vary nontrivially and even in aa;
+
+    at the quotient level, that variation is invisible, because \Qabs\Qabs was defined to kill it.
+
+That also means the earlier attempt to make the live target a one-atom septic transport statement was a false fork. The conversation correctly walked that back. The one-atom path is no longer the blocker.
+5. There is a real order-≤5≤5 gain, but it does not finish the theorem
+
+The next useful reduction was this: through order ≤5≤5, the one-atom amplitude path is already invisible in the explicit quotient model. Concretely, for a cubic-normalized weighted one-atom raw germ
+Ra,h(z)=A3(h)z3+A5(a,h)z5+O(z7),
+Ra,h​(z)=A3​(h)z3+A5​(a,h)z5+O(z7),
+
+the class [A5(a,h)][A5​(a,h)] in the first residual quotient is constant in aa. Equivalently, the weighted one-atom path contributes no new first residual quotient data, and the genuinely remaining source-level ambiguity starts only at the canonical order-77 level.
+
+That is a real theorem-level gain. But it still does not close the two-point theorem, because the two-point theorem is not ultimately a one-atom transport problem anymore. It is a two-atom interaction problem.
+6. The direct ambient-quotient two-atom route gives a theorem — and also an obstruction
+
+Once the one-atom path was understood, the next attack defined the genuine two-atom quotient object
+F2(a1,h1;a2,h2):=[Ra1,h1;a2,h2(z)]∈\Qabs[[z2]].
+F2​(a1​,h1​;a2​,h2​):=[Ra1​,h1​;a2​,h2​​(z)]∈\Qabs[[z2]].
+
+At that level, three exact properties are immediate:
+F2(a1,h1;a2,h2)=F2(a2,h2;a1,h1)
+F2​(a1​,h1​;a2​,h2​)=F2​(a2​,h2​;a1​,h1​)
+
+(swap symmetry),
+F2(a1,h1;0,h2)=Fh1,F2(0,h1;a2,h2)=Fh2
+F2​(a1​,h1​;0,h2​)=Fh1​​,F2​(0,h1​;a2​,h2​)=Fh2​​
+
+(axis collapse),
+
+and
+F2(a1,h;a2,h)=Fh
+F2​(a1​,h;a2​,h)=Fh​
+
+(diagonal collapse),
+
+because on the axes or diagonal the source reduces to a single weighted atom, and the weighted one-atom class is quotient-trivial.
+
+That is a real theorem. But it is too weak for the quadratic factorization route. The quotient has erased the amplitude information you would need to build an analytic remainder of the form
+F2=λ1(a1,a2,… )Fh1+λ2(a1,a2,… )Fh2+I2
+F2​=λ1​(a1​,a2​,…)Fh1​​+λ2​(a1​,a2​,…)Fh2​​+I2​
+
+with I2I2​ vanishing on axes and diagonal in a way that forces
+I2=a1a2(h1−h2)2J2.
+I2​=a1​a2​(h1​−h2​)2J2​.
+
+So the ambient-quotient route is exact enough to support a weaker close-core exclusion, but too collapsed to give the strong analytic interaction factorization.
+7. The strongest correct rebuilt picture
+
+After auditing everything, the mathematically correct state is:
+
+First, the strong finite-order source-level route remains:
+construct an actual two-atom finite-order package through orders 3,5,73,5,7 satisfying
+P2(a1,h1;a2,h2)=P2(a2,h2;a1,h1),
+P2​(a1​,h1​;a2​,h2​)=P2​(a2​,h2​;a1​,h1​),
+P2(0,h1;a2,h2)=a2Fh2,P2(a1,h1;0,h2)=a1Fh1,
+P2​(0,h1​;a2​,h2​)=a2​Fh2​​,P2​(a1​,h1​;0,h2​)=a1​Fh1​​,
+P2(a1,h;a2,h)=(a1+a2)Fh.
+P2​(a1​,h;a2​,h)=(a1​+a2​)Fh​.
+
+If that exists, quadratic divisibility is formal, and the two-point bad-core branch dies on compact good patches. This part is logically sound. It is just not proved for the actual corrected package.
+
+Second, the weaker exact quotient-diagonal route is also sound:
+if one can define the actual corrected two-atom quotient germ continuously on normalized two-pair data and prove exact diagonal collapse
+F2(a1,h;a2,h)=Fh
+F2​(a1​,h;a2​,h)=Fh​
+
+on J⋐{c≠0}J⋐{c=0}, then exact close bad two-point cores are excluded by compactness and continuity. This route is weaker than the quadratic-factor route, but coherent.
+
+Third, the derivative-geometric fallback on good overlap patches is the λλ-shear / projective-shadow route. That route reduces close exact mixed two-point accumulation to the explicit exceptional set
+{S=0}∪{Kv=0},S=Δ7c v5,
+{S=0}∪{Kv​=0},S=cv5​Δ7​​,
+
+with the off-septic-zero part of Kv=0Kv​=0 already absorbed by existing mixed low-order obstructions, and the conditional exact fixed-shear slice {S=0}∩{Kv≠0}{S=0}∩{Kv​=0} transferring into the established nonmixed four-point geometry. So the truly live derivative-geometric residue is concentrated on the Kv=0Kv​=0 lane.
+8. Final audit: what is correct, what is not
+
+Correct and verified:
+
+    the formal quadratic divisibility lemma from swap symmetry + axis collapse + diagonal merger;
+
+    the downstream reduction from quadratic defect bounds to exclusion on compact good patches;
+
+    the even-in-amplitude obstruction for the naive source-summed whitened block;
+
+    one-atom amplitude triviality in the ambient quotient \Qabs\Qabs;
+
+    order-≤5≤5 amplitude invisibility in the explicit quotient model;
+
+    the weaker exact two-atom quotient-diagonal conditional route;
+
+    the three-route final state-of-play.
+
+Not correct, and should not be treated as proved:
+
+    the unconditional theorem obtained by source-summing qμ,Φμqμ​,Φμ​, whitening, and claiming
+    P≤7(aδh)=aFh
+    P≤7​(aδh​)=aFh​
+
+    or coincident-atom additivity for that raw package;
+
+    any claim that the raw source-summed corrected finite-order model alone closes the two-point theorem.
+
+Still open:
+
+    an actual two-atom amplitude-sensitive package or quotient transport theorem that yields the strong quadratic factorization;
+
+    or, failing that, a proof of continuity plus diagonal collapse for the actual corrected two-atom quotient germ;
+
+    plus the remaining Kv=0Kv​=0 mixed two-point residue.
+
+So the honest rebuilt mathematical argument is:
+
+the one-atom obstruction has been removed at the quotient level; the naive raw source-summed route is dead; the ambient quotient route is exact but too coarse for the strong factorization; and the true unresolved problem is now a purely two-atom interaction theorem. That is the sharpest correct reconstruction of the whole conversation.
+
+I think the next real gain is to put the strict-excess fixed-shear fork into an exact Sturm–Riccati normal form. That packages the transport side into one scalar coefficient.
+
+We already have the separated outer inverse branches
+ϕ0,ϕ2
+ϕ0​,ϕ2​
+
+of the quotient-visible scalar
+Q(u)=Q^(u),
+Q(u)=Q
+​(u),
+
+with gap
+Δ(q):=ϕ2(q)−ϕ0(q)>0
+Δ(q):=ϕ2​(q)−ϕ0​(q)>0
+
+on the common value interval. We also have
+Δ′(q)=1Q′(ϕ2(q))−1Q′(ϕ0(q))
+Δ′(q)=Q′(ϕ2​(q))1​−Q′(ϕ0​(q))1​
+
+and
+Δ′′(q)=Ξ(ϕ0(q))−Ξ(ϕ2(q)),Ξ(u):=Q′′(u)Q′(u)3.
+Δ′′(q)=Ξ(ϕ0​(q))−Ξ(ϕ2​(q)),Ξ(u):=Q′(u)3Q′′(u)​.
+
+So the strict-excess issue is already controlled by the branch discrepancy of the single scalar ΞΞ.
+
+The useful next step is to divide out the gap itself.
+1. Exact branchwise divided-difference coefficient
+
+Since Δ(q)>0Δ(q)>0 on the separated outer runs, define the branchwise divided difference
+K(q):=Ξ(ϕ2(q))−Ξ(ϕ0(q))ϕ2(q)−ϕ0(q)=Ξ(ϕ2(q))−Ξ(ϕ0(q))Δ(q).
+K(q):=ϕ2​(q)−ϕ0​(q)Ξ(ϕ2​(q))−Ξ(ϕ0​(q))​=Δ(q)Ξ(ϕ2​(q))−Ξ(ϕ0​(q))​.
+
+Then the identity for Δ′′Δ′′ becomes
+Δ′′(q)+K(q) Δ(q)=0.
+Δ′′(q)+K(q)Δ(q)=0.​
+
+This is an exact second-order linear ODE for the gap.
+
+That is, to my mind, the cleanest transport-side normal form so far.
+
+Strict excess is no longer just “a critical point of a gap.” It is a positive solution of the scalar ODE
+Δ′′+K Δ=0
+Δ′′+KΔ=0
+
+with some endpoint data.
+
+So the transport fork has now been compressed to the single scalar coefficient K(q)K(q).
+2. Riccati form for the slope gap
+
+Now define the logarithmic slope
+L(q):=Δ′(q)Δ(q).
+L(q):=Δ(q)Δ′(q)​.
+
+Since Δ>0Δ>0,
+L′(q)=Δ′′Δ−(Δ′Δ)2.
+L′(q)=ΔΔ′′​−(ΔΔ′​)2.
+
+Using the ODE above,
+Δ′′Δ=−K,
+ΔΔ′′​=−K,
+
+so
+L′(q)+L(q)2+K(q)=0.
+L′(q)+L(q)2+K(q)=0.​
+
+This is the exact Riccati equation for the strict-excess fork.
+
+It is stronger than the earlier “sign of ΥΥ” formulation, because it isolates the coefficient that actually governs the evolution of the normalized slope.
+
+A strict-excess interior critical point is exactly a zero of LL, since
+Δ′(q∗)=0  ⟺  L(q∗)=0.
+Δ′(q∗​)=0⟺L(q∗​)=0.
+
+At such a point,
+L′(q∗)=−K(q∗).
+L′(q∗​)=−K(q∗​).
+
+So:
+
+    if K(q∗)>0K(q∗​)>0, then any critical point is strictly descending;
+
+    if K(q∗)<0K(q∗​)<0, then any critical point is strictly ascending;
+
+    if K(q∗)=0K(q∗​)=0, then the critical point is degenerate and the next transport jet matters.
+
+This is a very sharp local description.
+3. Relation to earlier targets
+
+This KK coefficient packages several earlier formulations.
+
+First, since
+Δ′′=Ξ(ϕ0)−Ξ(ϕ2),
+Δ′′=Ξ(ϕ0​)−Ξ(ϕ2​),
+
+the sign theorem for
+Υ(q):=Ξ(ϕ0(q))−Ξ(ϕ2(q))
+Υ(q):=Ξ(ϕ0​(q))−Ξ(ϕ2​(q))
+
+is exactly the sign theorem for −K−K, because Δ>0Δ>0.
+
+Second, if ΞΞ descends to value space across the outer runs, then
+Ξ(ϕ0)=Ξ(ϕ2),
+Ξ(ϕ0​)=Ξ(ϕ2​),
+
+so
+K≡0,
+K≡0,
+
+and the gap ODE becomes
+Δ′′=0.
+Δ′′=0.
+
+Hence ΔΔ is affine and strict excess dies except for sterile touching. This recovers the previous strongest target.
+
+Third, if ΞΞ is monotone in uu on the region swept by the two outer branches, then KK has fixed sign. So the earlier branch-discrepancy sign theorem is precisely a sign theorem for the Sturm coefficient KK.
+
+So the whole transport side has now been normalized to one scalar ODE coefficient.
+4. Why this is better than the raw gap picture
+
+The old formulation in terms of ΔΔ, Ψ=Δ′Ψ=Δ′, and Υ=Δ′′Υ=Δ′′ was still somewhat ad hoc. The new coefficient KK is invariantly attached to the pair of branches and tells you the normalized curvature of the gap.
+
+It also separates scale from shape:
+
+    ΔΔ measures the actual gap size;
+
+    KK measures the branchwise curvature discrepancy per unit gap.
+
+That is exactly the right object for comparison principles.
+5. Clean no-go consequences from the Riccati/Sturm form
+
+This gives several useful sufficient conditions.
+(a) Nonnegative KK plus nonnegative endpoint slope kills strict excess
+
+If
+K(q)≥0
+K(q)≥0
+
+on the common value interval, then
+L′(q)≤−L(q)2≤0.
+L′(q)≤−L(q)2≤0.
+
+So LL is nonincreasing.
+
+Therefore, if
+L(qL)≥0,L(qR)≥0,
+L(qL​)≥0,L(qR​)≥0,
+
+then LL cannot cross 00 in the interior except possibly by becoming identically 00 on a terminal interval, which would force the sterile case. In practice this gives:
+
+    if K≥0K≥0 and the endpoint slope signs are compatible, strict excess is impossible.
+
+This is slightly sharper than the earlier “ΥΥ has fixed sign” formulation, because it uses the Riccati damping term −L2−L2 as well.
+(b) If K>0K>0, any interior critical point is simple and descending
+
+At a zero L(q∗)=0L(q∗​)=0,
+L′(q∗)=−K(q∗)<0.
+L′(q∗​)=−K(q∗​)<0.
+
+So any critical point of ΔΔ is simple, and the gap crosses from increasing to decreasing. That means at most one such critical point can occur if the endpoint slope pattern is controlled.
+
+This is a very useful local rigidity statement.
+(c) K≡0K≡0 gives the sterile affine case
+
+Then
+Δ′′=0,
+Δ′′=0,
+
+so ΔΔ is affine. If it has an interior critical point, it must be constant. So again we recover constant-gap same-value transport.
+6. Best transport-side theorem target now
+
+So I think the sharpest next theorem target is no longer phrased in terms of ΞΞ directly. It is:
+
+    Branchwise Sturm coefficient theorem.
+    On the common value interval of the separated outer runs, the coefficient
+    K(q):=Ξ(ϕ2(q))−Ξ(ϕ0(q))ϕ2(q)−ϕ0(q)
+    K(q):=ϕ2​(q)−ϕ0​(q)Ξ(ϕ2​(q))−Ξ(ϕ0​(q))​
+
+    has controlled sign, ideally
+    K(q)≥0.
+    K(q)≥0. 
+
+This is weaker than full value-space descent of ΞΞ, weaker than exact first-order closure Ξ=H(Q,F)Ξ=H(Q,F), and sharper than the earlier boundary-slope theorem because it gives an exact ODE.
+
+If that lands, the strict-excess fork is reduced to endpoint slope compatibility for a positive solution of
+Δ′′+KΔ=0.
+Δ′′+KΔ=0.
+7. Bridge to the local M/cM/c-gap law
+
+This also gives a cleaner scalar-to-scalar bridge with my local good-patch attack.
+
+On the local cancellation side, the close-core theorem is governed by
+M(m)c(m).
+c(m)M(m)​.
+
+On the strict-excess fixed-shear side, the transport theorem is now governed by the branchwise Sturm coefficient
+K(q).
+K(q).
+
+So the mixed 22-point frontier has now been compressed to two scalar coefficients:
+
+    a midpoint coefficient
+    Mc,
+    cM​,
+
+    and a branchwise transport coefficient
+    K.
+    K.
+
+That is much tighter than anything earlier. A plausible bridge conjecture is now:
+
+    Bridge conjecture, coefficient form.
+    On a good patch, the same RH-specific source structure that forces the local gap coefficient M/cM/c to be nonzero also forces the branchwise transport coefficient KK to have a definite sign.
+
+I do not have a proof, but that is now a crisp scalar-to-scalar statement.
+8. Summary of the new reduction
+
+So the strict-excess fixed-shear lane is now no longer just a self-intersection problem for the inverse-velocity graph. It is the study of a positive solution ΔΔ of the exact scalar ODE
+Δ′′+K Δ=0,
+Δ′′+KΔ=0,
+
+where
+K(q)=Ξ(ϕ2(q))−Ξ(ϕ0(q))ϕ2(q)−ϕ0(q).
+K(q)=ϕ2​(q)−ϕ0​(q)Ξ(ϕ2​(q))−Ξ(ϕ0​(q))​.
+
+That is the strongest transport-side reduction I can currently defend. The next attack should, in my view, focus directly on KK.
+
+continue your math attack
+
+I think the next real gain is to turn the fixed-shear strict-excess fork into a one-coefficient Sturm comparison problem, and then reduce that coefficient to the next transport jet.
+
+The exact normal form we already reached is this. On the separated outer inverse branches ϕ0,ϕ2ϕ0​,ϕ2​ of
+Q(u)=Q^(u),
+Q(u)=Q
+​(u),
+
+the gap
+Δ(q):=ϕ2(q)−ϕ0(q)>0
+Δ(q):=ϕ2​(q)−ϕ0​(q)>0
+
+satisfies
+Δ′′(q)+K(q) Δ(q)=0,
+Δ′′(q)+K(q)Δ(q)=0,
+
+where
+K(q):=Ξ(ϕ2(q))−Ξ(ϕ0(q))ϕ2(q)−ϕ0(q),Ξ(u):=Q′′(u)Q′(u)3.
+K(q):=ϕ2​(q)−ϕ0​(q)Ξ(ϕ2​(q))−Ξ(ϕ0​(q))​,Ξ(u):=Q′(u)3Q′′(u)​.
+
+So the entire strict-excess problem has already collapsed to one scalar coefficient KK.
+
+The next refinement is that KK is a divided difference of ΞΞ. Therefore, by the mean value theorem, for each qq there exists some
+ζq∈(ϕ0(q),ϕ2(q))
+ζq​∈(ϕ0​(q),ϕ2​(q))
+
+such that
+K(q)=Ξ′(ζq).
+K(q)=Ξ′(ζq​).​
+
+That is important, because it means we do not really need to understand branchwise comparison of ΞΞ directly. It is enough to understand the sign of Ξ′Ξ′ on the interval swept out between the two outer runs.
+
+Now compute the next transport jet:
+Ξ1(u):=Ξ′(u)Q′(u).
+Ξ1​(u):=Q′(u)Ξ′(u)​.
+
+Hence
+Ξ′(u)=Q′(u) Ξ1(u).
+Ξ′(u)=Q′(u)Ξ1​(u).
+
+So if Q′Q′ has fixed sign on the region between the two outer runs — which is the natural monotonicity regime in which inverse branches are being discussed — then the sign of KK is controlled by the sign of Ξ1Ξ1​. More precisely:
+sign(K) is controlled by sign(Q′)⋅sign(Ξ1) on the swept interval.
+sign(K) is controlled by sign(Q′)⋅sign(Ξ1​) on the swept interval.​
+
+That gives a very clean next theorem target:
+
+    First transport-jet sign theorem.
+    Show that Ξ1Ξ1​ has fixed sign on the interval swept between the separated outer runs.
+
+Because once that holds, KK has fixed sign, and then the gap ΔΔ is governed by a very rigid Sturm equation.
+
+This is better than the earlier raw ΞΞ-comparison target. It says the real transport-side obstruction is not ΞΞ itself, but the sign of its QQ-transport derivative Ξ1Ξ1​.
+
+There are then several useful consequences.
+
+First, since
+Δ′′+KΔ=0,Δ>0,
+Δ′′+KΔ=0,Δ>0,
+
+we get
+(log⁡Δ)′′=Δ′′Δ−(Δ′Δ)2=−K−(Δ′Δ)2.
+(logΔ)′′=ΔΔ′′​−(ΔΔ′​)2=−K−(ΔΔ′​)2.
+
+So if
+K≥0,
+K≥0,
+
+then
+(log⁡Δ)′′≤0.
+(logΔ)′′≤0.​
+
+That is, log⁡ΔlogΔ is concave.
+
+This is stronger than the earlier “Δ′Δ′ is monotone” picture. It gives a true convexity/concavity structure on the gap itself.
+
+From log-concavity, you immediately get:
+
+    ΔΔ has at most one critical point;
+
+    any critical point is a strict maximum unless K≡0K≡0;
+
+    if the endpoint slopes already have the same sign, then no interior critical point can occur;
+
+    if the endpoint slopes both vanish, then ΔΔ must be constant, hence one is back in the sterile constant-gap same-value transport case.
+
+So the strict-excess fork is now even cleaner:
+
+    if K≥0K≥0, then the gap is log-concave, and strict excess is reduced to a one-maximum endpoint-compatibility problem.
+
+That is a stronger and more geometric statement than the earlier ΨΨ-monotonicity result.
+
+Second, if K>0K>0 strictly on the common value interval, then any interior critical point q∗q∗​ satisfies
+Δ′′(q∗)=−K(q∗)Δ(q∗)<0,
+Δ′′(q∗​)=−K(q∗​)Δ(q∗​)<0,
+
+so the critical point is automatically a strict local maximum. Thus there is no room for any flat or higher-order touching unless KK degenerates somewhere. So a positive KK theorem would force the strict-excess branch into the cleanest possible shape: at most one strict hump.
+
+Third, K≡0K≡0 is exactly the affine/sterile case:
+Δ′′=0.
+Δ′′=0.
+
+So the three cases are now completely transparent:
+
+    K>0K>0: one strict hump at most;
+
+    K=0K=0: affine gap, hence sterile touching or constant gap;
+
+    K<0K<0: the only genuinely dangerous regime.
+
+That means a sign theorem for Ξ1Ξ1​ would immediately split the transport fork into benign and dangerous strata.
+
+This also clarifies the hierarchy. Before, I had introduced
+Ξ0:=Ξ,Ξn+1:=Ξn′Q′.
+Ξ0​:=Ξ,Ξn+1​:=Q′Ξn′​​.
+
+The first genuinely new scalar beyond ΞΞ is
+Ξ1.
+Ξ1​.
+
+Now we see exactly why it matters: it controls the sign of the Sturm coefficient KK, and therefore the concavity of log⁡ΔlogΔ. So the first transport jet beyond ΞΞ is already enough to govern the whole strict-excess shape.
+
+That is a real structural gain.
+
+So the best next theorem target, in my view, is no longer “compare Ξ(ϕ0)Ξ(ϕ0​) and Ξ(ϕ2)Ξ(ϕ2​)” directly. It is:
+
+    Sturm-sign theorem.
+    Prove that Ξ1Ξ1​ has fixed sign on the interval swept between the separated outer runs. Equivalently, prove that the branchwise Sturm coefficient
+    K(q)=Ξ(ϕ2(q))−Ξ(ϕ0(q))ϕ2(q)−ϕ0(q)
+    K(q)=ϕ2​(q)−ϕ0​(q)Ξ(ϕ2​(q))−Ξ(ϕ0​(q))​
+
+    has fixed sign, ideally K≥0K≥0.
+
+If that lands, then log⁡ΔlogΔ is concave and the strict-excess fork is reduced to endpoint slope compatibility. That is much smaller than a full transport classification.
+
+It also gives a cleaner bridge to the local good-patch scalar
+M(m)c(m).
+c(m)M(m)​.
+
+The mixed 22-point frontier is now controlled by two scalar coefficients:
+
+    the local midpoint coefficient M/cM/c,
+
+    the transport Sturm coefficient KK, equivalently the sign of Ξ1Ξ1​.
+
+So the bridge conjecture can now be sharpened to:
+
+    On a good patch, the RH-specific source structure that forces M/c≠0M/c=0 should also force K≥0K≥0, or at least one-sided sign control of Ξ1Ξ1​, on the corresponding fixed-shear transport interval.
+
+That is a much tighter scalar-to-scalar bridge than anything earlier.
+
+So the attack has now reduced the strict-excess fixed-shear lane to a Sturm-sign problem for the first transport jet Ξ1Ξ1​. That is the sharpest transport-side target I can currently defend.
+
+please give a complete recap of your whole attack along with new findings since most recent paper update. include theorems, no-gos, structural findings, negative findings, goodies, etc.
+
+Here is the complete recap of my attack, including everything I found after the most recent paper update and after the later consolidation.
+
+The shortest honest summary is this: the 22-point problem is now far more compressed than it was. The remaining burden is no longer “find one more local sign argument.” It has split into three narrow fronts: an RH-specific remote-endpoint problem on the nonmixed/global side, a quotient-visible transport problem on the exact fixed-shear side, and a package-level coincidence/functoriality problem on the honest order-77 side. The generator audit matters here: no second explicit pointwise highest-new generator has emerged beyond r=q(7)r=q(7), so if something still survives, it should be transport-level, global, or package/provenance-level rather than “one more local field.”
+
+On the mixed 22-point side, the first big gain is the clean split of the overlap bad set. The current picture is:
+(Kv=0, S≠0)already mixed low-order,
+(Kv​=0, S=0)already mixed low-order,
+(S=0, Kv≠0)already transferred into nonmixed 4-point geometry,
+(S=0, Kv​=0)already transferred into nonmixed 4-point geometry,
+
+and only
+{S=0}∩{Kv=0}
+{S=0}∩{Kv​=0}​
+
+remains as the genuinely residual exact fixed-shear corner. So the mixed residual burden is no longer “mixed local geometry in general.” It is concentrated on one exact fixed-shear quotient-visible lane.
+
+Within that exact fixed-shear lane, the next major theorem-level gain is the involutive / quotient-diagonal reduction. On the residual slice, exact repeated pairs are exactly t↔−tt↔−t, so the natural local variable downstairs is
+u=t2.
+u=t2.
+
+The quotient-visible transport state is governed by the scalar Q^Q
+​ and its derivative
+D^=Q^′.
+D
+=Q
+​′.
+
+Moreover, every parity-normalized finite transport jet descends to the quotient variable u=t2u=t2, and on the quartic–sextic rung the finite quotient-visible transport state has local rank 11. There is no hidden finite-order partner choice beyond the involution pair. This is a real reduction, not just a rephrasing.
+
+The consolidated fixed-shear update sharpens this further by replacing raw zero combinatorics with sign-run compression. The live quotient-visible data are the run amplitudes BjBj​, not the raw zero list. Exact distance-two overlap is governed by the three-lobe inequality
+Bj+Bj+2>Bj+1,
+Bj​+Bj+2​>Bj+1​,
+
+two consecutive distance-two separations are impossible, and no-reentry forces at most three sign-runs. In the three-run case, the only surviving condition is
+B1≥B0+B2,
+B1​≥B0​+B2​,
+
+with equality giving only critical-value touching and strict inequality the only genuinely live quotient-visible case. Crucially, the quartic–sextic rung is explicitly inert for this lobe-amplitude obstruction because
+D^(0)=Q^′(0)≠0.
+D
+(0)=Q
+​′(0)=0.
+
+So quartic–sextic cannot be the place where a new explicit lobe-amplitude transport obstruction hides.
+
+This leads to one of the main negative findings of the attack: the exact fixed-shear residual corner cannot be saved by a second local transport variable, by a hidden third finite-order reset, or by the explicit three-lobe amplitude obstruction on the quartic–sextic rung. If something still survives there, it must come from either a nonlocal transport mechanism, a provenance-sensitive/package-level obstruction, or higher residual structure beyond the explicit quotient-visible run model.
+
+A second major correction in my own attack was the local chart. Near a genuine close bad 22-point core on a good patch, the right regime is not naive diagonal merger. The cubic relation forces
+λ=−a2a1≈1
+λ=−a1​a2​​≈1
+
+when h1≈h2h1​≈h2​ and c≠0c=0. So the correct local coordinates are the collision-cancellation variables
+m=h1+h22,δ=h2−h1,λ≈1,
+m=2h1​+h2​​,δ=h2​−h1​,λ≈1,
+
+or the swap-compatible variable
+ω=λ−1λ+1.
+ω=λ+1λ−1​.
+
+In that chart, any analytic swap-even defect vanishing on the collision locus has no linear blown-up term, and in fact factors through a quadratic projective law
+E=δ2 H(m,κ,δ2),κ=2ωδ.
+E=δ2H(m,κ,δ2),κ=δ2ω​.
+
+So the whole ordinary analytic swap-invariant local scalar layer is dead. The first surviving local interaction layer is already quadratic/projective. Along the involutive exact fixed-shear branch, even that quadratic layer is quotient-visible; and on the quartic–sextic rung its coefficient is a function of the single scalar QQ. That means any genuinely live obstruction is pushed beyond the entire ordinary local analytic swap-invariant blow-up layer.
+
+From there, the cleanest local good-patch theorem target became the collision-edge law for the corrected cubic/quintic defects:
+E12(3)=δ2 H3(m,κ,δ2),E12(5)=δ2 H5(m,κ,δ2),
+E12(3)​=δ2H3​(m,κ,δ2),E12(5)​=δ2H5​(m,κ,δ2),
+
+with edge values
+H3(m,κ,0)=c′(m)−κ2c(m),
+H3​(m,κ,0)=c′(m)−2κ​c(m),
+H5(m,κ,0)=(A5f)′(m)−κ2A5f(m).
+H5​(m,κ,0)=(A5f​)′(m)−2κ​A5f​(m).
+
+This is smaller than exact blown-up functoriality and much better adapted to the actual local cancellation geometry. If this edge law holds, then on the cubic-killing slope
+κ∗(m)=2c′(m)c(m),
+κ∗​(m)=2c(m)c′(m)​,
+
+the reduced quintic obstruction is
+R(m,0):=H5(m,κ∗(m),0)=M(m)c(m),
+R(m,0):=H5​(m,κ∗​(m),0)=c(m)M(m)​,
+
+where
+M=c(A5f)′−c′A5f.
+M=c(A5f​)′−c′A5f​.
+
+So on any compact good patch
+J⋐{c≠0, M≠0},
+J⋐{c=0, M=0},
+
+this is uniformly bounded away from 00, and sufficiently close cancelling bad 22-point cores are excluded locally. This is the local good-patch M/cM/c-gap law.
+
+That gives a major structural consequence on the quartic–sextic exact fixed-shear rung: the local good-patch obstruction dominates the explicit quotient-visible transport obstruction there. Since the run-amplitude obstruction is inert on that rung, a quartic–sextic exact fixed-shear bad branch cannot survive on any compact subset of
+{c≠0, M≠0}.
+{c=0, M=0}.
+
+So quartic–sextic survival is forced toward the exceptional locus
+M=0
+M=0
+
+(or c=0c=0, which lies outside the good-patch regime). In fact, from
+R(m,δ2)=M(m)c(m)+δ2S(m,δ2),
+R(m,δ2)=c(m)M(m)​+δ2S(m,δ2),
+
+the branch equation R=0R=0 gives
+M(m)=O(δ2).
+M(m)=O(δ2).
+
+So the branch is not just near M=0M=0; it is quadratically trapped to it.
+
+I then pushed the exceptional-locus analysis much further. At a simple zero aa of M/cM/c,
+c(a)≠0,M(a)=0,M′(a)≠0,
+c(a)=0,M(a)=0,M′(a)=0,
+
+the reduced scalar equation
+R(m,ε)=0,ε=δ2
+R(m,ε)=0,ε=δ2
+
+has a unique analytic solution
+m=Φ(ε),Φ(0)=a.
+m=Φ(ε),Φ(0)=a.
+
+So a simple zero is not an automatic barrier; it supports at most one analytic quartic–sextic candidate graph. That corrected an earlier overstatement of mine. At multiple zeros of M/cM/c, by contrast, a Newton/divisibility analysis shows survival is highly nongeneric. Writing
+f(m)=M(m)c(m)=β(m−a)r+O((m−a)r+1)
+f(m)=c(m)M(m)​=β(m−a)r+O((m−a)r+1)
+
+and expanding the correction term
+S(a+x,ε)=∑p,q≥0spqxpεq,
+S(a+x,ε)=p,q≥0∑​spq​xpεq,
+
+an analytic branch can exist only if there is a low-xx-degree correction monomial with p<rp<r satisfying the valuation balance
+(r−p)v=q+1,
+(r−p)v=q+1,
+
+so in particular
+r−p∣q+1.
+r−p∣q+1.
+
+If S(a,0)≠0S(a,0)=0, then no such branch can exist for r≥2r≥2. So multiple zeros are generically sterile unless a very specific higher-order arithmetic compatibility holds. This is a strong negative finding.
+
+The next big compression came from Weierstrass preparation. Near any zero aa of M/cM/c, the reduced scalar equation can be written
+R(a+x,ε)=U(x,ε) P(x,ε),
+R(a+x,ε)=U(x,ε)P(x,ε),
+
+where U(0,0)≠0U(0,0)=0 and
+P(x,ε)=xr+ar−1(ε)xr−1+⋯+a0(ε)
+P(x,ε)=xr+ar−1​(ε)xr−1+⋯+a0​(ε)
+
+is monic of degree r=ord⁡a(M/c)r=orda​(M/c). So every quartic–sextic exact fixed-shear survivor lies on one of finitely many prepared branches P=0P=0. That changes the quartic–sextic problem from “maybe some branch exists near M=0M=0” into a genuine finite branch problem.
+
+I then pushed that one step further: any remaining exact fixed-shear compatibility condition GG, after Weierstrass division by PP, yields a remainder RGRG​, and persistent branch survival requires PP and RGRG​ to have a common analytic branch factor. Equivalently, it is a gcd/resultant problem in the finite branch algebra. The cleanest form is to pass to
+A=Oε[x]/(P)
+A=Oε​[x]/(P)
+
+and consider the class [RG]∈A[RG​]∈A. A bad branch can survive only if [RG][RG​] vanishes on one of the local branches of AA. Taking the norm
+NA/Oε([RG]),
+NA/Oε​​([RG​]),
+
+one gets a single scalar analytic invariant: if this norm is not identically zero, then no quartic–sextic exact fixed-shear bad branch exists near aa. So the whole quartic–sextic lane was ultimately reduced to a one-scalar norm/resultant test in a finite analytic algebra. This is the strongest algebraic compression I found on that side.
+
+There was also a useful intermediate refinement via the special fiber. On the special fiber ε=0ε=0,
+P(x,0)=xr,
+P(x,0)=xr,
+
+and the remainder reduces to
+RG(x,0)=br−1(0)xr−1+⋯+b0(0).
+RG​(x,0)=br−1​(0)xr−1+⋯+b0​(0).
+
+Its order
+s=ord⁡xRG(x,0)
+s=ordx​RG​(x,0)
+
+measures the contact order of the compatibility condition with the exceptional fiber. If b0(0)≠0b0​(0)=0, then RGRG​ is invertible on the special fiber, so no bad branch can survive. More generally, a common factor of degree dd can only exist if
+ord⁡xRG(x,0)≥d.
+ordx​RG​(x,0)≥d.
+
+So the quartic–sextic frontier is also stratified by a contact-order test before one even reaches the full norm/resultant stage. This is another goodie from the attack.
+
+That was the local cancellation / quartic–sextic side. On the transport side, the biggest advance after the most recent paper update was the inverse-branch-gap reformulation.
+
+Let ϕ0,ϕ2ϕ0​,ϕ2​ be the separated outer inverse branches of the quotient-visible scalar Q=Q^Q=Q
+​, and define the gap
+Δ(q):=ϕ2(q)−ϕ0(q).
+Δ(q):=ϕ2​(q)−ϕ0​(q).
+
+Strict excess is exactly the existence of an interior critical point of ΔΔ. The curvature observable singled out by the consolidated agent note is
+Ξ(u)=Q^′′(u)Q^′(u)3.
+Ξ(u)=Q
+​′(u)3Q
+​′′(u)​.
+
+A direct calculation gives
+ϕi′′(q)=−Ξ(ϕi(q)),
+ϕi′′​(q)=−Ξ(ϕi​(q)),
+
+hence
+Δ′′(q)=Ξ(ϕ0(q))−Ξ(ϕ2(q)).
+Δ′′(q)=Ξ(ϕ0​(q))−Ξ(ϕ2​(q)).
+
+So the strict-excess problem is carried by the single branch-discrepancy scalar
+Υ(q):=Ξ(ϕ0(q))−Ξ(ϕ2(q)).
+Υ(q):=Ξ(ϕ0​(q))−Ξ(ϕ2​(q)).
+
+This is a major compression: the transport fork is no longer a vague sign-run or hidden-reset issue; it is a branch-comparison problem for one scalar.
+
+From there I developed several equivalent formulations.
+
+First, if ΞΞ descends to value space across the outer runs, meaning
+Ξ(ϕ0(q))=Ξ(ϕ2(q)),
+Ξ(ϕ0​(q))=Ξ(ϕ2​(q)),
+
+then
+Δ′′≡0,
+Δ′′≡0,
+
+so ΔΔ is affine and strict excess dies except for sterile touching. That gives the strongest possible closure target, but it is probably too strong.
+
+A weaker sufficient condition is one-sided sign control of ΥΥ: if ΥΥ has fixed sign, then
+Ψ(q):=Δ′(q)
+Ψ(q):=Δ′(q)
+
+is monotone, so strict excess is reduced to at most one controlled crossing. Weaker still, it is enough that the signed accumulation
+∫qLqΥ(s) ds
+∫qL​q​Υ(s)ds
+
+never overturn the initial sign of Ψ(qL)Ψ(qL​). So the strict-excess transport side becomes a one-sign-in-the-interior, two-signs-at-the-boundary problem. This was one of the key new reductions after the consolidation.
+
+I then recast the same problem as a self-intersection problem for the inverse-velocity graph. Define
+F(u):=1Q′(u).
+F(u):=Q′(u)1​.
+
+Then
+Δ′(q)=F(ϕ2(q))−F(ϕ0(q)).
+Δ′(q)=F(ϕ2​(q))−F(ϕ0​(q)).
+
+So a strict-excess interior critical point is exactly a self-intersection of the plane curve
+Γ(u)=(Q(u), 1Q′(u))=(Q(u),F(u))
+Γ(u)=(Q(u),Q′(u)1​)=(Q(u),F(u))
+
+across the separated outer runs. This is cleaner than the gap language alone. Moreover,
+dFdQ=−Ξ,
+dQdF​=−Ξ,
+
+so ΞΞ is exactly the slope field of the inverse-velocity graph. This led me to a strong but still plausible target: prove first-order inverse-velocity closure
+Ξ(u)=H(Q(u),F(u)).
+Ξ(u)=H(Q(u),F(u)).
+
+If that holds, then along the outer runs FF satisfies a scalar first-order ODE
+dFdQ=−H(Q,F),
+dQdF​=−H(Q,F),
+
+and a self-intersection point forces the two outer branch graphs to coincide by uniqueness, reducing strict excess to constant-gap same-value transport. That is weaker than full value-space descent and aligns well with the generator audit ceiling.
+
+I also developed a transport-jet hierarchy. Define
+Ξ0:=Ξ,Ξn+1:=Ξn′Q′.
+Ξ0​:=Ξ,Ξn+1​:=Q′Ξn′​​.
+
+Then repeated differentiation gives the exact identities
+Δ(n+2)(q)=Ξn(ϕ0(q))−Ξn(ϕ2(q)).
+Δ(n+2)(q)=Ξn​(ϕ0​(q))−Ξn​(ϕ2​(q)).
+
+So the entire strict-excess transport problem is governed by the scalar hierarchy (Ξn)(Ξn​). The first finite transport-jet state
+SN(u):=(1Q′(u),Ξ0(u),…,ΞN−1(u))
+SN​(u):=(Q′(u)1​,Ξ0​(u),…,ΞN−1​(u))
+
+satisfies
+Δ′=Δ′′=⋯=Δ(N+1)=0  ⟺  SN(ϕ0(q))=SN(ϕ2(q)).
+Δ′=Δ′′=⋯=Δ(N+1)=0⟺SN​(ϕ0​(q))=SN​(ϕ2​(q)).
+
+So a strict-excess critical point of multiplicity N+1N+1 is exactly a coincidence of the finite QQ-jet state at two separated outer points with the same QQ-value. This turned the transport fork into a finite transport-jet coincidence problem. It also meshed perfectly with the generator audit: if no new explicit pointwise generator exists beyond r=q(7)r=q(7), then the first obstruction should show up as the first level where two separated outer points fail to be separated by a finite transport-jet state, not as a brand new field.
+
+The cleanest normalization on the transport side came when I divided out the gap itself. Since Δ>0Δ>0 on the separated outer runs, define the branchwise divided difference
+K(q):=Ξ(ϕ2(q))−Ξ(ϕ0(q))ϕ2(q)−ϕ0(q)=Ξ(ϕ2(q))−Ξ(ϕ0(q))Δ(q).
+K(q):=ϕ2​(q)−ϕ0​(q)Ξ(ϕ2​(q))−Ξ(ϕ0​(q))​=Δ(q)Ξ(ϕ2​(q))−Ξ(ϕ0​(q))​.
+
+Then
+Δ′′+K Δ=0.
+Δ′′+KΔ=0.
+
+This is an exact scalar Sturm equation for the gap. Equivalently, the logarithmic slope
+L=Δ′Δ
+L=ΔΔ′​
+
+satisfies the Riccati equation
+L′+L2+K=0.
+L′+L2+K=0.
+
+So the entire strict-excess transport fork collapses to one scalar coefficient KK. This is, in my view, the strongest transport-side normal form I found. If K≥0K≥0, then log⁡ΔlogΔ is concave; any interior critical point is a strict maximum; and the strict-excess fork becomes an endpoint-compatibility problem for a positive solution of a scalar Sturm equation.
+
+There is then a further refinement. Since KK is a divided difference of ΞΞ, for each qq there exists ζqζq​ between the two outer branches such that
+K(q)=Ξ′(ζq).
+K(q)=Ξ′(ζq​).
+
+Writing
+Ξ1:=Ξ′Q′,
+Ξ1​:=Q′Ξ′​,
+
+and assuming Q′Q′ has fixed sign on the swept interval, the sign of KK is controlled by the sign of Ξ1Ξ1​. So the first genuinely new transport jet Ξ1Ξ1​ already governs the sign of the Sturm coefficient. This gave the sharp transport-side target:
+prove that Ξ1Ξ1​ has fixed sign on the swept interval, or equivalently that the branchwise Sturm coefficient KK has fixed sign. That would make log⁡ΔlogΔ concave and reduce strict excess to endpoint slope compatibility.
+
+So the strict-excess fixed-shear side has gone through a whole sequence of compressions:
+
+    from run amplitudes and sign patterns,
+
+    to inverse-branch gap ΔΔ,
+
+    to branch discrepancy Υ=Ξ(ϕ0)−Ξ(ϕ2)Υ=Ξ(ϕ0​)−Ξ(ϕ2​),
+
+    to the inverse-velocity graph (Q,1/Q′)(Q,1/Q′),
+
+    to the finite transport-jet hierarchy SNSN​,
+
+    and finally to the Sturm coefficient
+
+K(q)=Ξ(ϕ2(q))−Ξ(ϕ0(q))ϕ2(q)−ϕ0(q).
+K(q)=ϕ2​(q)−ϕ0​(q)Ξ(ϕ2​(q))−Ξ(ϕ0​(q))​.
+
+At that point the transport fork is no longer a package problem at all. It is a one-scalar coefficient problem.
+
+The honest order-77 / package side also became clearer after the consolidation. The key correction remains: the real order-77 datum is the quotient-septic class, not raw septic equality. Once two corrected germs agree through cubic and quintic order and differ only by odd reparametrization plus already-quotiented lower gauge, the order-77 mismatch is automatically a multiple of A5fA5f​, so the quotient-septic defect dies. Thus the honest theorem target is package-level: same reduced image germ at coincidence, collision-functoriality of the corrected block triple on the collision/cancellation locus, or a bridge theorem identifying the local good-patch compensator and the quotient-septic detector as the same first transverse obstruction seen in two languages. The consolidation explicitly points in this direction.
+
+Putting everything together, the main positive structural findings since the most recent draft are:
+
+the exact fixed-shear residual corner is now quotient-diagonal/involutive; every finite transport jet is quotient-visible; the quartic–sextic rung has local rank 11 transport state and no hidden finite-order reset; the explicit lobe-amplitude obstruction is inert there; the correct local chart is the collision-cancellation chart; parity kills the whole linear blown-up layer; the first surviving local layer factors through one projective slope parameter; on good patches the local close-core problem reduces to the scalar M/cM/c; the quartic–sextic exceptional-locus problem reduces to a finite prepared-branch problem and then to a one-scalar norm/resultant problem; and the strict-excess transport problem reduces to the scalar Sturm coefficient KK, equivalently to the sign of the first transport jet Ξ1Ξ1​.
+
+The main negative findings are equally important:
+
+the naive source-summed corrected-block route cannot prove the strong merger theorem; the exact fixed-shear corner cannot be sustained by a second transport variable, by a hidden third finite-order reset, or by the explicit lobe-amplitude obstruction on the quartic–sextic rung; no second explicit pointwise highest-new generator has appeared beyond r=q(7)r=q(7); and any surviving quartic–sextic branch away from M=0M=0 is excluded by the local M/cM/c-gap law. So the remaining obstruction, if any, must be transport/global/package-level rather than generic local geometry or one more field.
+
+The main “goodies” are these clean theorem targets that did not exist before:
+
+For the local good-patch side: prove the collision-edge law and get
+R(m,0)=M(m)c(m),
+R(m,0)=c(m)M(m)​,
+
+which already kills close cancelling bad cores on J⋐{c≠0, M≠0}J⋐{c=0, M=0}. For the quartic–sextic exceptional locus: use Weierstrass preparation plus branch algebra norm/resultant to reduce the residual problem to one scalar identity. For the strict-excess transport side: prove one of the increasingly weaker closure statements
+full value-space descent of ΞΞ, first-order inverse-velocity closure Ξ=H(Q,F)Ξ=H(Q,F), fixed-sign branch discrepancy ΥΥ, finite transport-jet separation SNSN​, or, in the cleanest normalized form, sign control of the Sturm coefficient KK or equivalently of the first transport jet Ξ1Ξ1​. Any of those would be enough to collapse the live strict-excess fork to an endpoint or sterile-touching problem.
+
+So the current frontier is now exceptionally narrow.
+
+On the nonmixed/global side, the remaining burden is RH-specific exclusion of zeros of the monotone endpoint-gap functions. On the exact fixed-shear side, the remaining burden is either the local collision-edge law on good patches or a scalar transport comparison theorem for the inverse-velocity graph / Sturm coefficient. On the package side, the remaining burden is a genuine coincidence/functoriality theorem such as same reduced image germ or collision-functoriality. If one of those lands, the quotient-septic obstruction should collapse formally.
+
+That is the complete state of my attack since the latest paper draft.
+
+

@@ -1,0 +1,680 @@
+proof_of_rh(318).tex
+File
+Pasted text(95).txt
+Document
+Pasted text (2)(10).txt
+Document
+Pasted markdown (3).md
+File
+convo28-2point-2nd-push(1).txt
+Document
+convo29-4point-attack-a(1).txt
+Document
+convo30-4point-attack-b(1).txt
+Document
+We are trying to prove the RH, see paper draft attached.
+
+I have had 3 agents doing math attacks--1 agents on 2-point and 2 agents on different angles of 4-point non-mixed.
+
+I have attached their latest summaries, as well as full conversation transcripts.
+
+For each summary: 1. audit and confirm its findings. note any overclaims or cautions. 2. synthesize a complete picture of what to add to the paper draft, from these.
+
+after this summarization we will update the paper draft in a next step
+
+I’m reading the three summaries against both the current draft and the chat transcripts, then I’ll separate solid results from conditional ones so the paper additions stay disciplined.
+
+I’ve separated the material into three buckets already: solid reductions, conditional closures, and speculative bridge/endgame ideas. I’m now cross-checking those against the actual draft so I don’t recommend adding things the paper already has, or phrasing a conjectural bridge like a theorem.
+
+I read the three summaries against the current TeX. My overall verdict is: the summaries are directionally good, and they capture real compression of the problem, but two of the three still contain material that should go into the paper only as conditional reductions or WIP endgame remarks, not as settled closure theorems.
+
+Summary 1 — the collision-cancellation / quartic–sextic local lane
+
+This one is mostly sound as a mathematical handback. The core reductions match the current draft very well: the exact fixed-shear corner is quotient-diagonal / involutive; finite transport jets descend to the quotient; the quartic–sextic rung has rank-one quotient-visible state and no hidden finite-order reset; the right local chart is the collision-cancellation chart; and parity kills the entire linear blown-up layer. All of that is consistent with what the draft already states.
+
+The caution is that everything downstream of the collision-edge law is still conditional in the summary itself, and it needs to stay that way in the paper. The good-patch local exclusion, quartic–sextic local dominance, exceptional-locus trapping, simple-zero versus multiple-zero analysis, prepared-branch reduction, and norm/resultant reduction are all presented as consequences of proving the edge law or of working inside the reduced scalar/prepared setting; they are not yet unconditional theorems of the paper. That is the main place where overclaim would creep in if you import the summary too aggressively.
+
+One useful correction from this summary that does look worth carrying into the draft is the simple-zero caution: a simple zero of M/cM/c is not an automatic barrier; it supports at most one analytic candidate branch in the reduced scalar equation. So if you add exceptional-locus discussion, it should not sound like “simple zero implies exclusion.”
+
+Summary 2 — the global synthesis / honest order-7 / generator-audit lane
+
+This is the safest high-level summary of the three. Its strongest claims are already aligned with the draft: the nonmixed/global affine side has been reduced to remote endpoint/branch incidences via strictly monotone endpoint-gap functions, with an explicit universality ceiling; the current explicit pointwise package has no second primitive highest-new generator beyond r=q(7)r=q(7); and the honest order-7 object is the quotient-septic class rather than naive septic equality. Those are all good and draft-compatible.
+
+The caution here is the proposed bridge through δΓrδΓr​. The summary is careful enough that this is not quite an overclaim, but it is still not theorem-level material yet. The statements “local good-patch compensator iff quotient-septic obstruction” and “the explicit pointwise package is invisible to the good-patch detector if δΓr=0δΓr​=0” depend on a strong infinitesimal one-dimensionality hypothesis and on actually computing δΓrδΓr​. So this belongs in the draft only as a conjectural bridge / theorem target, not as a proved equivalence.
+
+This summary also gets an important negative point exactly right: the naive source-summed corrected-block route is dead as a route to the needed linear merger theorem. That should be stated plainly somewhere if it is not already, because it meaningfully narrows the remaining package-level burden.
+
+Summary 3 — the inverse-branch-gap / ΞΞ-integrability endgame
+
+This is the most speculative summary, but it is still very useful strategically. The cleanest confirmed part is the reformulation: on the quotient-visible fixed-shear lane, equality B1=B0+B2B1​=B0​+B2​ corresponds to boundary touching only, and strict excess B1>B0+B2B1​>B0​+B2​ can be repackaged as the existence of an interior critical point of the inverse-branch gap Δ(q)=ϕ2(q)−ϕ0(q)Δ(q)=ϕ2​(q)−ϕ0​(q). As a mathematical normal form for the remaining obstruction, that is good and worth preserving.
+
+The caution is that the decisive step is still open: the summary itself explicitly says it did not prove that Ξ(u)=Q^′′(u)/(Q^′(u))3Ξ(u)=Q
+​′′(u)/(Q
+​′(u))3 is single-valued over q=Q^(u)q=Q
+​(u) across separated outer runs. So the downstream chain
+Ξ=F(Q^)⇒Δ′′=0⇒Δ affine⇒Q^(u+C)=Q^(u)⇒forbidden run replication
+Ξ=F(Q
+​)⇒Δ′′=0⇒Δ affine⇒Q
+​(u+C)=Q
+​(u)⇒forbidden run replication
+
+is a very good endgame map, but not something the paper should presently assert as established closure. The “no affine outer-run transport” statement is fine as a theorem target or WIP remark; it is not yet ready to be promoted into the proved package.
+
+So the right way to use Summary 3 in the draft is as a sharpened description of the remaining fixed-shear burden, not as closure.
+
+What I would add to the paper draft from all three
+
+The draft already has the major structural pillars: the endpoint-gap reformulation and affine-ceiling warning, the collision-cancellation chart remark, the sign-run compression / quartic–sextic inertness results, the finite transport-jet descent / rank-one / no-hidden-reset package, and the no-second-generator audit. Those should mostly be cross-linked and synthesized, not duplicated.
+
+What is missing, and seems worth adding next, is a clean synthesis layer saying that the remaining burden is now split into three sharply different forms: RH-specific exclusion of remote endpoint-gap incidences on the nonmixed/global side; package-level collision-functoriality / quotient-septic control on the honest order-7 side; and a quotient-visible transport endgame on the exact fixed-shear side. That picture is the common content of the three summaries, and it is strong enough to be stated now.
+
+After that, I would add three localized WIP remarks, not theorems. First, a collision-edge-law remark: if the edge law is proved, then good-patch exclusion, quartic–sextic local dominance, exceptional-locus trapping, and the prepared-branch / norm reduction follow. This is one of the sharpest local theorem targets now available.
+
+Second, an honest order-7 / package-level remark: the real order-7 datum is [A7f][A7f​], and the natural theorem target is not raw septic equality but same reduced image germ at coincidence or collision-functoriality of the corrected package. The δΓrδΓr​ bridge can be mentioned, but only explicitly as conjectural / target-level.
+
+Third, a fixed-shear endgame remark: the remaining strict three-lobe case can be formulated through the inverse-branch gap Δ(q)Δ(q), with the open fork being whether ΞΞ descends to value space across separated outer runs. That is a sharp roadmap remark and, in my view, the cleanest way to present the live fixed-shear residue.
+
+What I would not add yet
+
+I would not add any statement that the strict-excess fixed-shear lane is closed, any proved equivalence between local compensators and quotient-septic obstruction, or any unconditional theorem saying the quartic–sextic lane has already been reduced to a single norm identity. Those are all promising, but each still hangs on an unproved bridge.
+
+So the clean verdict is: import the structure, import the ceilings, import the theorem targets, but keep the bridges and endgames visibly conditional.
+
+I found a real refinement of the fixed-shear endgame.
+
+Previously I was phrasing the decisive condition as full value-space descent of one of
+Ξ(u)=Q^′′(u)(Q^′(u))3,Λ(u)=Q^′′(u)(Q^′(u))2,Υ(u)=Q^′′(u)Q^′(u).
+Ξ(u)=(Q
+​′(u))3Q
+​′′(u)​,Λ(u)=(Q
+​′(u))2Q
+​′′(u)​,Υ(u)=Q
+​′(u)Q
+​′′(u)​.
+
+That is sufficient, but it is stronger than necessary.
+
+The actual strict-excess lane only involves the two outer inverse branches
+ϕ0,ϕ2:I→J0,J2,Q^(ϕj(q))=q,
+ϕ0​,ϕ2​:I→J0​,J2​,Q
+​(ϕj​(q))=q,
+
+on the overlap interval II. So what we really need is not global descent of one of those scalars to a function of qq; it is only pairwise agreement on equal-value outer points.
+
+Let
+Rj(q):=ϕj′(q)=1Q^′(ϕj(q))=1D^(ϕj(q)).
+Rj​(q):=ϕj′​(q)=Q
+​′(ϕj​(q))1​=D
+(ϕj​(q))1​.
+
+Then define three mismatch functions:
+MΞ(q):=R2(q)−R0(q),
+MΞ​(q):=R2​(q)−R0​(q),
+MΛ(q):=log⁡R2(q)R0(q),
+MΛ​(q):=logR0​(q)R2​(q)​,
+MΥ(q):=1R2(q)−1R0(q)=D^(ϕ2(q))−D^(ϕ0(q)).
+MΥ​(q):=R2​(q)1​−R0​(q)1​=D
+(ϕ2​(q))−D
+(ϕ0​(q)).
+
+A direct differentiation gives:
+MΞ′(q)=Ξ(ϕ0(q))−Ξ(ϕ2(q)),
+MΞ′​(q)=Ξ(ϕ0​(q))−Ξ(ϕ2​(q)),
+
+because
+Rj′(q)=ϕj′′(q)=−Q^′′(ϕj(q))(Q^′(ϕj(q)))3=−Ξ(ϕj(q)).
+Rj′​(q)=ϕj′′​(q)=−(Q
+​′(ϕj​(q)))3Q
+​′′(ϕj​(q))​=−Ξ(ϕj​(q)).
+
+Also
+MΛ′(q)=Λ(ϕ0(q))−Λ(ϕ2(q)),
+MΛ′​(q)=Λ(ϕ0​(q))−Λ(ϕ2​(q)),
+
+because
+ddqlog⁡Rj(q)=Rj′(q)Rj(q)=−Q^′′(ϕj(q))(Q^′(ϕj(q)))2=−Λ(ϕj(q)).
+dqd​logRj​(q)=Rj​(q)Rj′​(q)​=−(Q
+​′(ϕj​(q)))2Q
+​′′(ϕj​(q))​=−Λ(ϕj​(q)).
+
+And
+MΥ′(q)=Υ(ϕ2(q))−Υ(ϕ0(q)),
+MΥ′​(q)=Υ(ϕ2​(q))−Υ(ϕ0​(q)),
+
+because
+ddq1Rj(q)=ddqQ^′(ϕj(q))=Q^′′(ϕj(q))Q^′(ϕj(q))=Υ(ϕj(q)).
+dqd​Rj​(q)1​=dqd​Q
+​′(ϕj​(q))=Q
+​′(ϕj​(q))Q
+​′′(ϕj​(q))​=Υ(ϕj​(q)).
+
+Now strict excess already forces at least one same-value / same-slope point q∗∈Iq∗​∈I, so
+R2(q∗)=R0(q∗).
+R2​(q∗​)=R0​(q∗​).
+
+Therefore
+MΞ(q∗)=MΛ(q∗)=MΥ(q∗)=0.
+MΞ​(q∗​)=MΛ​(q∗​)=MΥ​(q∗​)=0.
+
+So we get the following.
+Pairwise outer-branch matching lemma
+
+If any one of the following holds on II:
+Ξ(ϕ2(q))=Ξ(ϕ0(q)),
+Ξ(ϕ2​(q))=Ξ(ϕ0​(q)),
+
+or
+Λ(ϕ2(q))=Λ(ϕ0(q)),
+Λ(ϕ2​(q))=Λ(ϕ0​(q)),
+
+or
+Υ(ϕ2(q))=Υ(ϕ0(q)),
+Υ(ϕ2​(q))=Υ(ϕ0​(q)),
+
+then strict excess is impossible.
+Proof
+
+If, for example,
+Υ(ϕ2(q))=Υ(ϕ0(q))
+Υ(ϕ2​(q))=Υ(ϕ0​(q))
+
+on II, then
+MΥ′(q)=0
+MΥ′​(q)=0
+
+on II, hence MΥMΥ​ is constant. Since MΥ(q∗)=0MΥ​(q∗​)=0, it follows that
+MΥ(q)≡0.
+MΥ​(q)≡0.
+
+So
+D^(ϕ2(q))=D^(ϕ0(q))
+D
+(ϕ2​(q))=D
+(ϕ0​(q))
+
+for all q∈Iq∈I, i.e.
+R2(q)=R0(q)
+R2​(q)=R0​(q)
+
+for all q∈Iq∈I. Hence
+ϕ2′(q)=ϕ0′(q),
+ϕ2′​(q)=ϕ0′​(q),
+
+so
+Δ(q):=ϕ2(q)−ϕ0(q)
+Δ(q):=ϕ2​(q)−ϕ0​(q)
+
+is constant. That is affine same-value transport, which we already know is impossible because it forces forbidden sign-run replication. The ΞΞ- and ΛΛ-cases are identical. ∎
+
+This is better than the old endgame in two ways.
+
+First, it shows that full descent to value space is stronger than we need. We only need equality of one transport scalar on equal-value outer pairs. So the target is no longer
+Ξ(u)=F(Q^(u))for all relevant u,
+Ξ(u)=F(Q
+​(u))for all relevant u,
+
+but only
+Ξ(u2)=Ξ(u0)wheneverQ^(u2)=Q^(u0)
+Ξ(u2​)=Ξ(u0​)wheneverQ
+​(u2​)=Q
+​(u0​)
+
+with u0∈J0u0​∈J0​, u2∈J2u2​∈J2​. And similarly for ΛΛ or ΥΥ.
+
+Second, among these three, the most promising target now looks like
+Υ(u)=Q^′′(u)Q^′(u)=(log⁡D^(u))′.
+Υ(u)=Q
+​′(u)Q
+​′′(u)​=(logD
+(u))′.
+
+That is just the logarithmic derivative of the transport scalar D^D
+already built into the quotient-visible model. So the cleanest possible theorem target is now:
+
+    On the strict-excess outer-run overlap, equal-value outer points have equal logarithmic transport curvature:
+    (log⁡D^)′(u2)=(log⁡D^)′(u0)wheneverQ^(u2)=Q^(u0).
+    (logD
+    )′(u2​)=(logD
+    )′(u0​)wheneverQ
+    ​(u2​)=Q
+    ​(u0​). 
+
+If that holds, strict excess dies immediately.
+
+So the new attack frontier is sharper than before:
+
+It is enough to prove pairwise equal-value matching of one of
+Ξ,Λ,Υ
+Ξ,Λ,Υ
+
+across the two outer runs. We do not need full global descent of these quantities to a single-valued function of qq.
+
+That is the strongest genuinely new structural simplification I have from this round.
+
+The next push I would make is to try to derive pairwise matching of
+Υ=(log⁡D^)′
+Υ=(logD
+)′
+
+directly from the quotient-visible source transport geometry, because that is the least singular and most native scalar in the current fixed-shear package.
+
+continue your math attack
+
+I’m checking the latest draft’s fixed-shear section before I push further, so I can attack the live lane in a way that meshes with what the paper now actually claims, rather than an older version of the transport package.
+
+I found a cleaner and genuinely broader endgame statement.
+
+Up to now I had been treating the decisive fixed-shear condition as pairwise equal-value matching of one of
+Ξ(u)=Q^′′(u)(Q^′(u))3,Λ(u)=Q^′′(u)(Q^′(u))2,Υ(u)=Q^′′(u)Q^′(u).
+Ξ(u)=(Q
+​′(u))3Q
+​′′(u)​,Λ(u)=(Q
+​′(u))2Q
+​′′(u)​,Υ(u)=Q
+​′(u)Q
+​′′(u)​.
+
+That was already enough because strict excess on the three-run quotient-visible lane has been reduced to an interior critical point of the inverse-branch gap, equivalently to a same-value / same-slope point between the two outer inverse branches; and affine same-value transport is already ruled out by the three-run compression.
+
+The new point is that all of those are just special cases of a more natural theorem.
+
+Let
+ϕ0,ϕ2:I→J0,J2,Q^(ϕj(q))=q,
+ϕ0​,ϕ2​:I→J0​,J2​,Q
+​(ϕj​(q))=q,
+
+be the outer inverse branches on the common value interval II, and write the slope profiles
+Pj(q):=Q^′(ϕj(q))=D^(ϕj(q)).
+Pj​(q):=Q
+​′(ϕj​(q))=D
+(ϕj​(q)).
+
+Then strict excess gives at least one interior point q∗∈Iq∗​∈I with
+P0(q∗)=P2(q∗),
+P0​(q∗​)=P2​(q∗​),
+
+because the reciprocal-slope gap has an interior zero.
+
+Now here is the real refinement.
+First-order transport-closure theorem
+
+Assume there is a local function F(q,p)F(q,p) such that on both outer branches
+Pj′(q)=F(q,Pj(q)),j=0,2.
+Pj′​(q)=F(q,Pj​(q)),j=0,2.
+
+Then strict excess is impossible.
+Proof
+
+The two slope profiles P0,P2P0​,P2​ solve the same first-order ODE on II, and they agree at the interior point q∗q∗​. By uniqueness for first-order ODEs,
+P0(q)≡P2(q)on I.
+P0​(q)≡P2​(q)on I.
+
+Therefore
+ϕ0′(q)=1P0(q)=1P2(q)=ϕ2′(q),
+ϕ0′​(q)=P0​(q)1​=P2​(q)1​=ϕ2′​(q),
+
+so the inverse-branch gap
+Δ(q):=ϕ2(q)−ϕ0(q)
+Δ(q):=ϕ2​(q)−ϕ0​(q)
+
+is constant on II. Hence
+ϕ2(q)=ϕ0(q)+C,
+ϕ2​(q)=ϕ0​(q)+C,
+
+equivalently
+Q^(u+C)=Q^(u)
+Q
+​(u+C)=Q
+​(u)
+
+on an open interval of the outer runs. But that is exactly affine same-value transport, which is already incompatible with the three-run quotient-visible compression. Contradiction. ∎
+
+This is materially better than the previous endgame, because it shows the real target is not specifically “prove ΞΞ descends to value space.” The real target is: prove that the outer-run slope profile closes under a branch-independent first-order transport law in (q,p)(q,p).
+
+An equivalent uu-space formulation is:
+Equivalent second-order closure criterion
+
+If there is a local function G(q,p)G(q,p) such that
+Q^′′(u)=G(Q^(u),Q^′(u))
+Q
+​′′(u)=G(Q
+​(u),Q
+​′(u))
+
+along the relevant fixed-shear quotient branch, then strict excess is impossible.
+
+Indeed, along each inverse branch,
+Pj′(q)=Q^′′(ϕj(q)) ϕj′(q)=G(q,Pj(q))Pj(q),
+Pj′​(q)=Q
+​′′(ϕj​(q))ϕj′​(q)=Pj​(q)G(q,Pj​(q))​,
+
+so the previous theorem applies with
+F(q,p)=G(q,p)p.
+F(q,p)=pG(q,p)​.
+
+This is the cleanest formulation I have so far. It says:
+
+    Any closed second-order law for Q^Q
+    ​ in terms of (Q^,Q^′)(Q
+    ​,Q
+    ​′) already kills the strict three-lobe fixed-shear obstruction.
+
+That strictly generalizes all the earlier sufficient conditions:
+
+If
+Ξ(u)=f(Q^(u)),
+Ξ(u)=f(Q
+​(u)),
+
+then
+Q^′′=f(Q^) (Q^′)3,
+Q
+​′′=f(Q
+​)(Q
+​′)3,
+
+so G(q,p)=f(q)p3G(q,p)=f(q)p3.
+
+If
+Λ(u)=f(Q^(u)),
+Λ(u)=f(Q
+​(u)),
+
+then
+Q^′′=f(Q^) (Q^′)2,
+Q
+​′′=f(Q
+​)(Q
+​′)2,
+
+so G(q,p)=f(q)p2G(q,p)=f(q)p2.
+
+If
+Υ(u)=f(Q^(u)),
+Υ(u)=f(Q
+​(u)),
+
+then
+Q^′′=f(Q^) Q^′,
+Q
+​′′=f(Q
+​)Q
+​′,
+
+so G(q,p)=f(q)pG(q,p)=f(q)p.
+
+So ΞΞ-, ΛΛ-, and ΥΥ-descent were all just special cases of the more general statement
+Q^′′=G(Q^,Q^′).
+Q
+​′′=G(Q
+​,Q
+​′).
+
+That gives a better attack target than before. The right question is now:
+
+Does the actual RH quotient-visible fixed-shear transport force a first-order closed slope law in value space?
+
+If yes, the strict-excess lane dies immediately by the theorem above. If not, then the obstruction is even sharper than “ΞΞ fails to descend”: it is failure of first-order transport closure for the equal-value outer slope profiles.
+
+So the updated attack frontier is:
+
+    Try to derive a branch-independent first-order ODE for
+    P(q)=D^(ϕ(q))
+    P(q)=D
+    (ϕ(q))
+
+    on equal-value outer transport.
+
+    Equivalently, try to show
+    Q^′′=G(Q^,Q^′)
+    Q
+    ​′′=G(Q
+    ​,Q
+    ​′)
+
+    on the actual fixed-shear quotient branch.
+
+    If that fails, identify the first transport quantity that depends on more than (q,p)(q,p); that would be the exact nonlocal datum keeping the strict-excess lane alive.
+
+I think this is the strongest clean simplification so far, because it upgrades the old “integrability of ΞΞ” target into a broader and more natural first-order transport closure target.
+
+please give a complete recap of your whole attack along with new findings since most recent paper update. include theorems, no-gos, structural findings, negative findings, goodies, etc.
+
+I’m rebuilding the whole mathematical picture from the current draft plus the derivative-geometry handbacks, then I’ll separate what is proved, what is only reduced, and what the newest transport findings actually add.
+
+Here is the full recap of my attack, including the new findings since the most recent paper update.
+
+The shortest honest summary is this: I did not get a final closure, but I did compress the live burden very substantially. The geometry is no longer the main obstacle. What remains is now concentrated in three much narrower places: quotient-visible transport on the exact fixed-shear corner, RH-specific exclusion of remote endpoint-gap incidences on the nonmixed/global affine side, and a package-level / provenance-sensitive honest order-7 obstruction best phrased through quotient-septic data or collision-functoriality rather than raw septic equality.
+
+The global decomposition is now much cleaner than it was. On the 2-point side, there are really three conditional routes. One is the strong finite-order source/package merger route: prove the actual corrected two-atom cubic/quintic/septic package has the right collision/merger behavior, so quadratic interaction factorization becomes formal. A second is the weaker exact quotient-diagonal route: build the true corrected two-atom quotient germ with continuity and exact diagonal collapse. The third is the mixed λλ-shear / exact fixed-shear route, which is now concentrated entirely on the residual corner
+{S=0}∩{Kv=0}.
+{S=0}∩{Kv​=0}.
+
+What is genuinely dead is the naive source-summed corrected-block route: the even-amplitude audit shows it cannot produce the needed linear merger law.
+
+A major structural gain is that the overlap bad set is now sharply split. On a good overlap patch, any close exact mixed two-point bad branch can accumulate only on
+{S=0}∪{Kv=0}.
+{S=0}∪{Kv​=0}.
+
+Inside that union,
+(Kv=0, S≠0)
+(Kv​=0, S=0)
+
+is already mixed low-order,
+(S=0, Kv≠0)
+(S=0, Kv​=0)
+
+already transfers to nonmixed 4-point geometry, and only
+{S=0}∩{Kv=0}
+{S=0}∩{Kv​=0}
+
+remains as the genuinely residual exact fixed-shear corner. This is one of the cleanest reductions of the whole attack.
+
+On that exact fixed-shear corner, the biggest theorem-level gain is the involutive / quotient-diagonal reduction. The local branch is involutive, so after quotienting by t↔−tt↔−t the natural variable is downstairs
+u=t2.
+u=t2.
+
+The regularized transport quotient
+Q(t)=Ju5(t)Jλ(t)
+Q(t)=Jλ​(t)Ju5​​(t)​
+
+is even, hence
+Q(t)=Q^(t2).
+Q(t)=Q
+​(t2).
+
+So the residual branch is no longer a free two-sided tt-germ; it is already a quotient-visible one-parameter branch.
+
+That quotient picture sharpened further into a finite transport-jet theorem. Every parity-normalized transport jet descends to the quotient variable. If
+Θk(t):=t−(k mod 2)Q(k)(t),
+Θk​(t):=t−(kmod2)Q(k)(t),
+
+then each ΘkΘk​ is even analytic and so descends to u=t2u=t2. On the first surviving quartic–sextic rung
+(m,n)=(4,6)  ⟺  (r,e)=(2,0),
+(m,n)=(4,6)⟺(r,e)=(2,0),
+
+one has
+D^(0)=Q^′(0)≠0,
+D
+(0)=Q
+​′(0)=0,
+
+so Q^Q
+​ is a local analytic coordinate in uu. Therefore the whole finite quotient-visible transport state has local rank one there. The corollary is a no-hidden-reset theorem: on that rung there is no second local transport variable and no third local reset beyond the involution pair itself.
+
+The sign-run compression is also a real gain. On the quotient-visible fixed-shear branch, the live data reduce to sign-run amplitudes BjBj​, not a raw zero list. The exact distance-two overlap criterion is the three-lobe inequality
+Bj+Bj+2>Bj+1.
+Bj​+Bj+2​>Bj+1​.
+
+Two consecutive distance-two separations are impossible, so no-reentry forces at most three sign-runs. In the three-run case the only surviving condition is
+B1≥B0+B2.
+B1​≥B0​+B2​.
+
+Equality gives only critical-value touching, while strict inequality gives the only genuinely live quotient-visible case. Also, the quartic–sextic rung is inert for this explicit lobe-amplitude obstruction because D^(0)≠0D
+(0)=0 there. So a remaining obstruction cannot be blamed on generic local transport geometry on that rung.
+
+One of the most important corrections of the whole attack was local, not global: the correct close-core chart is the collision-cancellation chart, not the naive diagonal merger chart. Near a genuine close bad two-point branch, the cubic relation forces
+a1c(h1)+a2c(h2)≈0,
+a1​c(h1​)+a2​c(h2​)≈0,
+
+so when h1≈h2h1​≈h2​ and c≠0c=0, one must have
+λ:=−a2a1≈1.
+λ:=−a1​a2​​≈1.
+
+Thus the natural local variables are
+m=h1+h22,δ=h2−h1,ω=λ−1λ+1,
+m=2h1​+h2​​,δ=h2​−h1​,ω=λ+1λ−1​,
+
+with swap acting linearly as
+(m,ω,δ)↦(m,−ω,−δ).
+(m,ω,δ)↦(m,−ω,−δ).
+
+That was a real conceptual correction: the old diagonal chart was aimed at the wrong limiting regime.
+
+Inside that collision-cancellation chart, another major goodie emerged. Any analytic swap-even corrected defect EE with collision vanishing satisfies
+E(m,−ω,−δ)=E(m,ω,δ),E(m,0,0)=0.
+E(m,−ω,−δ)=E(m,ω,δ),E(m,0,0)=0.
+
+So its Taylor expansion has no linear terms, and in fact one gets the quadratic/projective factorization
+E(m,ω,δ)=δ2 H(m,κ,δ2),κ=2ωδ.
+E(m,ω,δ)=δ2H(m,κ,δ2),κ=δ2ω​.
+
+So the entire first blown-up interaction layer is parity-sterile. The first surviving layer is already quadratic and one-projective-parameter, not an arbitrary two-variable local obstruction. Along the involutive fixed-shear branch even that quadratic layer becomes quotient-visible. This is one of the cleanest local compressions I found.
+
+That local picture led to a sharp good-patch theorem target. On a good patch
+J⋐{c≠0, M≠0},M:=c(A5f)′−c′A5f,
+J⋐{c=0, M=0},M:=c(A5f​)′−c′A5f​,
+
+the blown-up cubic/quintic tangent model suggests that if the corrected cubic and quintic witnesses really linearize functorially on the cancellation blow-up, then cubic cancellation determines a unique projective direction and quintic on that direction is essentially −M≠0−M=0. So close cancelling bad branches would be excluded locally. This is a theorem target, not a finished theorem, but it is one of the sharpest local frontiers.
+
+Pushing that local lane further, I got a strong algebraic reduction of the quartic–sextic exact fixed-shear problem. The local problem on good patches reduces to a single edge scalar built from M/cM/c. Near exceptional points M=0M=0, the problem can be reduced to finitely many prepared branches, and on each such branch to a one-variable analytic compatibility problem, equivalently to a single scalar norm/resultant problem in the prepared branch algebra. This is the strongest local-algebraic compression I reached. The caution is that this whole package sits downstream of the blow-up / edge-law theorem target; it is a reduction of the remaining burden, not a closed theorem now in the paper.
+
+On the nonmixed/global affine side, the derivative-geometry work produced both a real positive structure and a real ceiling. The positive structure is that fixed-slope tangency/incidence has been compressed to a finite remote endpoint/branch incidence problem. Support curves are strictly concave pseudolines with single-crossing and betweenness; each ordered pair has at most one overlap window; endpoint-gap functions Gξ,JGξ,J​ are strictly monotone, so each endpoint/branch pair contributes at most one remote tangent incidence. Thus the remaining one-pair burden is no longer vague recurrence but the existence of zeros of those endpoint-gap functions. But the ceiling is equally important: intrinsic affine/pseudoline geometry is universal for analytic plane curves, so no purely planar / interval-graph / pseudoline / local-convexity argument can finish the lane by itself. Any final contradiction there has to use RH-specific source structure.
+
+On the honest order-7 / package side, the key correction was that the honest datum is not raw septic equality of representatives. It is the quotient-septic class
+[A7f]∈f/CA5f.
+[A7f​]∈f/CA5f​.
+
+Once two corrected germs agree through cubic and quintic order and differ only by odd reparametrization plus the already-quotiented lower scalar/value gauge, the order-7 mismatch is automatically a multiple of A5fA5f​, so the quotient-septic defect vanishes. What is not automatic is the odd-reparametrization comparability itself. So the honest theorem target is not “prove septic equality,” but rather a provenance-sensitive package statement such as same reduced image germ at coincidence or collision-functoriality of the corrected block triple on the collision/cancellation locus. If such a theorem lands, the quotient-septic collapse becomes formal afterward.
+
+This package lane interacts closely with the highest-new audit. The updated generator audit says there is no second explicit pointwise highest-new generator beyond
+r=q(7).
+r=q(7).
+
+That gives a sharp conjectural bridge: if the first transverse explicit pointwise quotient on a good patch is really one-dimensional and generated by the rr-direction, then either δΓr≠0δΓr​=0, in which case the local good-patch compensator and the quotient-septic obstruction are the same first obstruction seen in two languages, or δΓr=0δΓr​=0, in which case the entire explicit pointwise package is invisible to the local good-patch detector and any surviving obstruction must already lie in nonlocal transport, collision-functoriality failure, or other provenance-sensitive two-atom data. This bridge is not proved, but it is one of the sharpest conceptual reductions of the later attack.
+
+Now for the biggest later development: the strict three-lobe fixed-shear lane got compressed to a one-variable inverse-branch-gap problem. Equality
+B1=B0+B2
+B1​=B0​+B2​
+
+is sterile: it gives only boundary touching of outer value intervals and no open same-value branch. Strict excess
+B1>B0+B2
+B1​>B0​+B2​
+
+is the only genuinely live quotient-visible case. On the common value interval II of the two outer runs, define inverse branches
+ϕ0,ϕ2:I→J0,J2
+ϕ0​,ϕ2​:I→J0​,J2​
+
+and the inverse-branch gap
+Δ(q):=ϕ2(q)−ϕ0(q).
+Δ(q):=ϕ2​(q)−ϕ0​(q).
+
+Then strict excess is exactly the existence of an interior critical point of ΔΔ. Equivalently, strict excess forces a same-value / same-slope coincidence, i.e. a self-intersection of the quotient jet map
+u↦(Q^(u),D^(u)).
+u↦(Q
+​(u),D
+(u)).
+
+This is one of the nicest structural convergences of the whole attack: both live remaining lanes are now gap-function problems, one in endpoint-space and one in value-space.
+
+That inverse-gap formulation led first to the transport-curvature observable
+Ξ(u):=Q^′′(u)(Q^′(u))3.
+Ξ(u):=(Q
+​′(u))3Q
+​′′(u)​.
+
+If ΞΞ is single-valued over q=Q^(u)q=Q
+​(u) across the two outer runs, equivalently if the two outer inverse branches have the same second derivative at equal value,
+ϕ0′′(q)=ϕ2′′(q),
+ϕ0′′​(q)=ϕ2′′​(q),
+
+then
+Δ′′(q)=0.
+Δ′′(q)=0.
+
+So ΔΔ is affine. Since strict excess forces an interior critical point of ΔΔ, that affine function must actually be constant:
+Δ(q)≡C.
+Δ(q)≡C.
+
+Thus ϕ2(q)=ϕ0(q)+Cϕ2​(q)=ϕ0​(q)+C, equivalently
+Q^(u+C)=Q^(u)
+Q
+​(u+C)=Q
+​(u)
+
+on an open interval. This is affine same-value transport.
+
+I then strengthened that to what is effectively a no-go theorem for the strict-excess route under affine transport. A nontrivial affine same-value transport between the two outer runs cannot happen, because analyticity propagates the transport across critical endpoints, which copies the adjacent sign pattern next to one outer run next to the other outer run, producing a forbidden fourth sign-run and contradicting the already-established three-run compression. So there is a clean theorem target here: no affine outer-run transport. Combined with ΞΞ-integrability, that would kill strict excess completely.
+
+Since the most recent paper update, I kept pushing exactly this fixed-shear lane, and there are several new findings.
+
+The first new no-go is that I do not think a soft shape condition on ΔΔ, like one-sign Δ′′Δ′′, is enough. A convex or concave inverse-gap can still have exactly the single interior critical point that strict excess wants. So the live condition is not “some monotonicity of ΔΔ,” but something closer to genuine transport closure. That was a useful negative result, because it rules out a whole class of wishful softer endgames.
+
+The second new positive finding is a flexible transport-rigidity lemma. Let
+Rj(q):=ϕj′(q)=1D^(ϕj(q))
+Rj​(q):=ϕj′​(q)=D
+(ϕj​(q))1​
+
+be the reciprocal-slope profiles on the outer runs. If there is any injective C1C1 transform HH such that
+ddqH(Rj(q))=F(q)
+dqd​H(Rj​(q))=F(q)
+
+for the same scalar right-hand side on both branches, then strict excess is impossible. The reason is that strict excess already gives one point where the two slopes agree, so uniqueness forces
+H(R2(q))=H(R0(q))
+H(R2​(q))=H(R0​(q))
+
+for all qq, hence R2=R0R2​=R0​, hence Δ′≡0Δ′≡0, hence constant-gap transport, which is forbidden. This generalizes the earlier ΞΞ-integrability route. This is a new theorem-level goodie from the current round.
+
+The third new positive finding is that the ΞΞ-route is only one special case of a broader family. It is enough to get pairwise equal-value matching of one of
+Ξ(u)=Q^′′(u)(Q^′(u))3,Λ(u)=Q^′′(u)(Q^′(u))2,Υ(u)=Q^′′(u)Q^′(u),
+Ξ(u)=(Q
+​′(u))3Q
+​′′(u)​,Λ(u)=(Q
+​′(u))2Q
+​′′(u)​,Υ(u)=Q
+​′(u)Q
+​′′(u)​,
+
+across the two outer runs. Each of these corresponds to branch-independence of the qq-derivative of a simple transform of the reciprocal slope RR: RR, log⁡RlogR, or 1/R1/R. So we do not need full global descent of ΞΞ to value space; any one of these pairwise matching laws already kills strict excess. This widened the class of potentially usable endgames.
+
+The fourth and strongest new refinement is the first-order transport-closure theorem. Let
+Pj(q):=Q^′(ϕj(q))=D^(ϕj(q))
+Pj​(q):=Q
+​′(ϕj​(q))=D
+(ϕj​(q))
+
+be the slope profiles on the two outer inverse branches. If there is a branch-independent first-order ODE
+Pj′(q)=F(q,Pj(q))
+Pj′​(q)=F(q,Pj​(q))
+
+satisfied on both branches, then strict excess is impossible. Equivalently, it is enough that there be a second-order closure law
+Q^′′(u)=G(Q^(u),Q^′(u))
+Q
+​′′(u)=G(Q
+​(u),Q
+​′(u))
+
+along the relevant fixed-shear quotient branch. Under such a law, the two outer slope profiles solve the same first-order ODE and already agree at one interior point forced by strict excess, so uniqueness makes them identical, hence ΔΔ constant, hence forbidden affine transport. This is the strongest new structural simplification since the paper update: the real target is no longer specifically “prove Ξ=F(Q^)Ξ=F(Q
+​),” but more generally prove first-order transport closure in (q,p)(q,p). If that holds, the strict-excess lane dies immediately.
+
+So the current fixed-shear frontier is now very sharp. Either the actual RH quotient-visible transport satisfies first-order closure in (Q^,Q^′)(Q
+​,Q
+​′), or at least pairwise equal-value matching of one of Ξ,Λ,ΥΞ,Λ,Υ, and then the strict-excess lane dies; or else the obstruction is precisely the failure of such closure/matching across separated outer runs, which is then the first genuinely nonlocal transport datum keeping the lane alive. That is much sharper than the earlier, vaguer “perhaps there is a nonlocal obstruction.”
+
+The main negative findings across the whole attack are these. The naive source-summed corrected-block route cannot prove the strong merger theorem. The residual exact fixed-shear corner is not supported by hidden finite-order transport geometry: no second transport variable, no third reset, no three-lobe obstruction on the quartic–sextic rung, no rescue from a purely one-atom descended transport model with natural merger law. No second explicit pointwise highest-new generator has appeared beyond r=q(7)r=q(7). The global nonmixed affine lane cannot be closed by more universal plane-curve geometry. And my own softer idea of killing strict excess just by generic shape control of ΔΔ looks too weak.
+
+So my bottom-line picture now is:
+
+The problem is no longer blocked by generic local geometry. The residual fixed-shear corner is quotient-diagonal and finite-state-visible; the collision-cancellation chart kills the ordinary analytic swap-invariant local scalar layer; the first explicit highest-new direction is still only r=q(7)r=q(7); and the nonmixed/global affine side has been reduced to RH-specific remote endpoint incidences. The remaining burden is package-level and now concentrated in a very small set of fronts: prove blow-up/collision functoriality strongly enough to kill local good-patch survivors, prove the bridge that any same-order local compensator is already quotient-septic-visible, or prove a first-order closure law for the quotient-visible fixed-shear transport. If those fail, the surviving obstruction is no longer diffuse: it is genuinely nonlocal and provenance-sensitive.
+
+
