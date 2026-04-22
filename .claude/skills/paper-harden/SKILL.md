@@ -5,79 +5,41 @@ description: Read-only 4-agent quality review of paper/proof_of_rh.tex — rigor
 
 # Paper Harden
 
-Read-only quality review of `paper/proof_of_rh.tex` from four angles:
-rigor / consistency / formatting / voice. See `CLAUDE.md` §7, §8.
-All reviewers are read-only and deposit reports in the task dir.
+Four-angle read-only quality review.
 
-## Mandatory preamble
+## Preamble
 
-1. Read the briefing packet (for the coordinator):
-   - `paper/findings.md` — especially **Negative** and **Recurring
-     open gaps** (so reviewers can catch overclaims).
-   - `paper/unverified.tex` — coordinator reference only; shared with
-     `reviewer-rigor` per `CLAUDE.md` §7 (they need it to detect
-     claims that should be quarantined but aren't). NOT shared with
-     `reviewer-consistency`, `reviewer-formatting`, or `reviewer-voice`.
-   - `paper/proof_of_rh.tex` — the target (read as needed per role).
-2. Create task dir `tasks/<ts>-audit-harden-<slug>/` with `reports/`,
-   `scripts/`, `notes/`. `<slug>` may be an empty string if the run is
-   untargeted, or a theme like `post-referee` / `pre-submission`.
-   Announce the path.
+Read `findings.md` (especially Negative + Recurring-open-gaps, for
+overclaim detection). Create `tasks/<ts>-audit-harden-<slug>/` with
+`reports/`, `scripts/`, `notes/`. `<slug>` may be `post-referee`,
+`pre-submission`, or generic.
 
 ## Dispatch
 
-`TeamCreate team_name: "paper-harden-<ts>"`, spawn 4 named reviewers.
-Each briefing includes full `findings.md` + the 7-field schema + the
-writing-discipline reminder (`CLAUDE.md` §3a) + the self-deposit
-checklist + explicit non-goals: "report only, do not edit the paper."
-`reviewer-rigor` additionally receives full `unverified.tex` per
-`CLAUDE.md` §7 (overclaim detection); the other three do not.
+`TeamCreate team_name: "paper-harden-<ts>"`. Spawn four reviewers with
+the standard briefing and non-goal "report only, do not edit the
+paper." Only `reviewer-rigor` additionally receives full
+`unverified.tex` (for overclaim detection — narrow exception); the
+others do not.
 
-### `reviewer-rigor`
-- Read the full paper.
-- For each proof: verify every claim is justified; flag handwavy
-  arguments, missing hypotheses, mismatches between theorem and proof.
-- Cross-check against `findings.md` Negative — flag any argument that
-  silently retries a ruled-out move.
-- Cross-check against `unverified.tex` — flag claims that should be
-  quarantined but aren't, or promoted claims that still have UV entries.
-- No hedging flagging: no "it is worth noting," "we are unaware of";
-  state facts or remove.
+- **`reviewer-rigor`** — every claim justified, every hypothesis
+  present, theorem-vs-proof match, no handwaving. Cross-checks
+  `findings.md` Negative for silently-retried dead ends and
+  `unverified.tex` for claims that should be quarantined but aren't.
+- **`reviewer-consistency`** — notation consistency, stale renames,
+  label/ref integrity, abstract/intro/conclusion counts match, frozen-
+  macro compliance.
+- **`reviewer-formatting`** — compile warnings, undefined refs,
+  multiply-defined labels, substantive overfull/underfull boxes,
+  `\texorpdfstring` on math-in-titles, bibliography consistency.
+- **`reviewer-voice`** — AI tells ("it is worth noting,"
+  "interestingly," "we leverage / utilize / employ"), templated-remark
+  patterns, voice switches within paragraphs, marketing language,
+  overclaims. Rank HIGH / MEDIUM / LOW.
 
-### `reviewer-consistency`
-- Read the full paper.
-- Notation consistency; stale renames; label/reference integrity
-  (`\label`/`\ref` pairs resolve).
-- Counts that must match across abstract/intro/conclusion.
-- Frozen-macro compliance (no redefinitions, no fresh
-  `\newcommand`s).
+## Post-cycle
 
-### `reviewer-formatting`
-- Compile via `pdflatex` (twice); report any warnings beyond cosmetic
-  hyperref issues.
-- Undefined references, multiply-defined labels, overfull/underfull
-  boxes (substantive only).
-- `\texorpdfstring` on math-in-titles.
-- Blank-line and environment-pair sanity.
-- Bibliography abbreviation consistency.
-
-### `reviewer-voice`
-- Read the full paper.
-- AI tells ("it is worth noting," "interestingly," "we
-  leverage/utilize/employ," "to the best of our knowledge"): flag each.
-- Structural AI patterns (identically-templated remarks, perfectly
-  parallel bullets).
-- Voice switches (we/passive) within paragraphs.
-- Marketing language, self-congratulation, overclaims.
-- Rank HIGH / MEDIUM / LOW.
-
-## After completion
-
-1. Read all 4 reports from `tasks/<dir>/reports/`.
-2. Write a consolidated summary at
-   `tasks/<dir>/reports/_summary.md` ranked HIGH / MEDIUM / LOW.
-3. Issue findings to `paper/findings.md` via `research-capture` only if
-   they're reusable observations; otherwise keep inside the task dir.
-4. No paper edits from this skill.
-5. `SendMessage` each reviewer `{type:"shutdown_request"}` and
-   `TeamDelete`. Commit the task dir. Cite it in the commit body.
+Verify deposits. Write `reports/_summary.md` ranked HIGH / MEDIUM /
+LOW. Issue reusable observations into `findings.md` via
+`research-capture`; otherwise keep in the task dir. No paper edits.
+Shut down, `TeamDelete`, commit with the task dir named.

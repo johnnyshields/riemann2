@@ -1,409 +1,229 @@
 # Riemann2 — Coordinator Policy
 
-This file is the single authoritative policy for the Riemann Hypothesis
-project. Every delegated agent is briefed with this document. Rules here
-override default Claude Code behavior.
+Main chat is the coordinator / team lead. Delegates research, exploration, and
+verification; collates; edits canonical files. Delegates are read-only by
+default. Every agent is briefed with this file.
 
-## 1. Project
-
-Canonical paper: `C:\workspace\riemann2\paper\proof_of_rh.tex` (WSL path
-`/mnt/c/workspace/riemann2/paper/proof_of_rh.tex`). Monolithic LaTeX
-(\texttt{amsart}, frozen macro namespace). Treat it as the canonical source
-of record.
-
-The main chat window is the **coordinator / team lead**. It delegates
-research, exploration, and verification to agent teams; collates results;
-edits canonical files. Delegates are read-only by default (see §3).
-
-## 2. File map
+## 1. Files
 
 | Path | Role |
 |---|---|
 | `paper/proof_of_rh.tex` | Canonical draft. Coordinator-only edits. |
-| `paper/unverified.tex` | Quarantine ledger (UV-NNN entries — "UV" = "unverified") for unpromoted claims. Bidirectional links to `rem:wip-*` labels in the main paper. |
-| `paper/findings.md` | Active shared knowledge base (Structural / Negative / Goodies / Open-gaps). ≤200 lines. Pasted in full into every delegation prompt. |
-| `lore/` | Workflow plans, cross-session syntheses, design decisions. Permanent session artifacts. |
-| `tasks/yyyymmdd-hhmmss-<type>-<slug>/` | Per-dispatch work bundle where `<type>` ∈ `attack-gap \| attack-fund \| audit \| verify \| other`. Chat backup, agent reports, scripts, notes. See §5. |
-| `paper/chats/` | Historical ChatGPT session archives. Read-only reference; do not edit. |
-| `scripts/` and `scripts/wip/` | Computation code. |
-| `final-scripts/paper/` | Hardened verification scripts promoted from `scripts/wip/` with provenance. |
+| `paper/unverified.tex` | Quarantine ledger — UV-NNN entries ("UV" = "unverified") linked to `rem:wip-*` labels in the paper. |
+| `paper/findings.md` | Shared knowledge base (Structural / Negative / Goodies / Open-gaps). \(\le 200\) lines. Pasted in full into every delegation. |
+| `lore/` | Workflow plans, syntheses, decisions. Permanent. |
+| `tasks/yyyymmdd-hhmmss-<type>-<slug>/` | Per-dispatch bundle. `<type>` \(\in\) `attack-gap \| attack-fund \| audit \| verify \| other`. |
+| `paper/chats/` | Historical ChatGPT archives. Read-only. |
+| `scripts/` + `scripts/wip/` | Computation. `final-scripts/paper/` for hardened ones. |
 
-Optional companion files may appear as grep indexes once first used:
-`paper/findings-in-paper.md`, `paper/unverified-rejected.md`. Lazy-create on
-first promotion/rejection; not authoritative (git log is).
+Optional grep indexes (`findings-in-paper.md`, `unverified-rejected.md`) are
+lazy-created on first use. Not authoritative — git log is.
 
-## 3. Roles and dispatch
+Canonical paper path: `C:\workspace\riemann2\paper\proof_of_rh.tex` (WSL
+`/mnt/c/workspace/riemann2/...`). Monolithic `amsart`, frozen macro namespace.
 
-- **Coordinator** (main chat): sole editor of `paper/proof_of_rh.tex`,
-  `paper/unverified.tex`, `paper/findings.md`, `CLAUDE.md`, `lore/`. Selects
-  and briefs teams. Reviews handbacks. Commits.
-- **Delegates**: read-only by default. *May* write to their session's
-  `tasks/<dir>/` and nowhere else (§5 and §8). Must not edit canonical
-  files unless a specific skill explicitly grants wider scope (e.g.,
-  `fix-paper` Phase 1 fixers are scoped to edit the paper).
-- **Dispatch mechanism**: every delegation goes through `TeamCreate` with
-  **named teammates** (e.g., `gap-closer-mixed4pt`, `explorer-deriv-geo`,
-  `verifier-adversarial`) so each agent is visible in its own tmux pane.
-  Never spawn via the raw `Agent` tool. On other runtimes (OpenWork, etc.),
-  use the equivalent named-teammate primitive. Communicate via
-  `SendMessage`. Tear down with `TeamDelete` after graceful shutdown.
-- **Coordinator autonomy.** The coordinator is expected to do the right
-  thing by default and NOT ask the user about the minutia of research
-  directions. Autonomously: pick roster sizes, choose UV targets for
-  gap-closers, choose explorer topics, synthesize non-goals from context
-  (active UV entries, adjacent in-flight work, recent lore, the cycle's
-  focus), pick task-dir slugs, draft commit messages, decide which
-  subsection to audit next, decide when to demote, decide which `findings.md`
-  sections to paste where. `AskUserQuestion` is reserved for **major
-  decisions**: architectural choices about the project itself,
-  irreversible actions (deletions beyond the task dir, force-ops),
-  or moments where the user has materially diverging reasonable
-  options with meaningfully different consequences. Never ask for
-  permission on routine research direction, scope, or drafting-level
-  judgment.
+## 2. Dispatch
 
-## 3a. Coordinator writing discipline
+Every delegation goes through `TeamCreate` with named teammates
+(e.g. `gap-closer-mixed4pt`) so each is tmux-visible. Never the raw `Agent`
+tool. Communicate via `SendMessage`; `TeamDelete` on shutdown.
 
-When the coordinator edits `paper/proof_of_rh.tex`, apply a
-**quasi-referee** standard to the coordinator's own text. Not a hardass
-— just the same caution a good referee would apply. Share this
-discipline with every delegated agent in their briefing.
+**3+3+2 roster** for a balanced cycle: 3 gap-closers (each on a specific
+UV-NNN / `rem:wip-*`, with routes A/B/C and fallback to minimal finite
+reduction) + 3 explorers (derivative geometry, fundamentals, cross-cutting
+structure that *redirects* how gaps are attacked) + 2 verifiers (adversarial
++ source auditor). 8 is a target, not a cap — preserve the balance.
 
-**State facts directly.**
-No AI tells ("it is worth noting," "we leverage / utilize / employ,"
-"to the best of our knowledge," "interestingly," "remarkable").
+### Dispatch selector
 
-**Do not overclaim.**
-If a result is only computationally verified, say so. If a theorem
-holds "for tested configurations," do not write "for all." If a bound
-is effective, say so; if it isn't, do not imply it.
+| Intent | Skill |
+|---|---|
+| balanced cycle, no fixed target | `research-team` |
+| focused push on one UV / label | `research-attack` |
+| grade a subsection or three | `research-audit` |
+| post-work synthesis, literature, hidden links | `trifecta` |
+| systematic compactness rewrite | `paper-rewrite` |
+| referee-issue fix loop | `paper-referee` |
+| quality review (report-only) | `paper-harden` |
+| UV ↔ `rem:wip-*` reconcile | `uv-sync` |
+| dependency-graph validate | `dep-graph` |
+| log one finding | `research-capture` |
+| orient / resume | `cycle-status` |
+| end-of-session writeup | `session-handoff` |
+| back up transcript | `chat-backup` |
+| weaken / reverse-promote | `paper-demote` |
+| prune `findings.md` | `findings-prune` |
+| move prose to `cut-for-time.md` | `paper-cut` |
+| dedupe content | `paper-dedupe` |
+| harden a script | `script-promote` |
+| bibliography | `paper-biblio` |
 
-**Three-bin separation is mandatory.**
-On any audit, synthesis, or status memo, explicitly separate claims
-into: `proved` / `conditional on [hypothesis X]` / `missing`. Never blur
-these. Never write a stronger conclusion than the hypotheses support.
+When in doubt between `research-team` and `research-attack`, prefer
+`research-attack` — cheaper to spin up and cheaper to get wrong.
 
-**Gap reduction over closure.**
-When a proof has gaps, do not patch with "further analysis needed."
-Reduce to the smallest concrete list of missing sub-statements — each
-stated as a precise missing theorem, identity, or estimate. Vague
-gaps become UV entries, not paragraph cover.
+## 3. Coordinator autonomy
 
-**Scoped negation.**
-Never state impossibility without scope. "Ruled out" must always
-carry a "from [scope] alone" qualifier. Example: "The topological
-route is exhausted from intrinsic one-pair affine geometry alone"
-— NOT "the topological route is exhausted." This preserves room for
-non-obvious breakthroughs via a different path.
+The coordinator decides roster sizes, UV targets, explorer topics, non-goals
+(synthesized from adjacent in-flight work and recent lore), task-dir slugs,
+commit messages, subsection selection, demote timing, `findings.md` slicing
+— without asking. `AskUserQuestion` is for architectural or irreversible
+decisions only. Never interrupt over research-direction minutia.
 
-**Caution-labeled synthesis.**
-When merging outputs from multiple agents, chats, or sessions, pre-label
-each source with `[confirmed]`, `[conditional on X]`, or `[candidate,
-not yet verified]`. Only `[confirmed]` items may be written into the
-paper; others go to `unverified.tex` or `findings.md`.
+## 4. Writing discipline
 
-**Honest-verdict closure.**
-End audits and status memos with a "Honest verdict:" line stating what
-is and isn't closed. This licenses candor and prevents sycophantic drift
-at chat end.
+Applies to the coordinator's paper edits and to every agent briefing. Not
+a hardass — a good-referee standard.
 
-**Scope-disclaimer welcome, not timid.**
-"This closes the pair-like branch; the finite-core branch remains open"
-beats "this closes the pair-like branch (modulo some subtleties)."
+- **State facts directly.** No AI tells ("it is worth noting," "interestingly,"
+  "we leverage / utilize / employ," "to the best of our knowledge").
+- **No overclaim.** Computational ≠ proved. "For tested configurations" ≠
+  "for all." If a bound isn't effective, don't imply it.
+- **Three-bin separation** on every audit / synthesis / status memo:
+  `proved` / `conditional on [X]` / `missing`. Never blur.
+- **Gap reduction over closure.** A gap is a precise missing sub-statement,
+  not "further analysis needed." Vague gaps become UV entries.
+- **Scoped negation.** "Ruled out" always carries a "from [scope] alone"
+  qualifier.
+- **Caution-labeled synthesis.** When merging sources, pre-tag each
+  `[confirmed]` / `[conditional on X]` / `[candidate]`. Only `[confirmed]`
+  reaches the paper.
+- **Honest-verdict closure.** End audits with "Honest verdict:" + what is
+  and isn't closed.
+- **When in doubt, quarantine.** UV entry first, promote later.
 
-**When in doubt, quarantine.**
-UV entry first, promote later.
+## 5. Briefing rule
 
-## 4. 3+3+2 roster principle
+Every delegation includes: full `findings.md`, the 7-field schema (§7),
+explicit non-goals, the task-dir path + self-deposit checklist, and the §4
+writing-discipline reminder.
 
-Default shape for a full research-cycle dispatch is ~8 agents, balanced:
+**`unverified.tex` is NOT in the default briefing.** Sharing tentative
+claims poisons independent agents. Exceptions, narrow: the gap-closer
+attacking that specific UV; the adversarial verifier reviewing exactly that
+claim; the source auditor whose range contains the matching `rem:wip-*`;
+the Phase-1 fixer whose issue touches it. In every exception share only the
+individual entries, not the ledger.
 
-- **3 gap-closers** — each targeting a specific UV-NNN or `rem:wip-*` item.
-  Use the lemma-closure pattern: exact target statement, routes A/B/C,
-  explicit non-goals, fallback to "minimal finite reduction" if closure
-  fails.
-- **3 explorers** — derivative geometry, fundamentals (normal forms,
-  universality, invariants), and cross-cutting structural questions that
-  can *redirect how gaps are attacked*. Return observations, candidate
-  goodies, candidate negative findings.
-- **2 verifiers** — (i) adversarial checker reading the 6 other reports
-  for circularity, missing hypotheses, overclaims; (ii) source auditor
-  cross-checking that cited labels/lines exist and are used as claimed.
+### Briefing idioms that license candor
 
-"8" is a target, not a cap. Preserve the **balance**: no all-gap or
-all-explore cycles. Exploration exists to direct gap attack.
+Distilled from prior manual sessions; paste the relevant ones verbatim.
 
-### 4a. Dispatch selection (which cycle for what)
+- "Separate three things: proved / conditional / missing."
+- "What is the cleanest target here?"
+- "Give me the honest verdict."
+- "If full closure is too hard, reduce to the smallest list of concrete
+  unresolved sub-statements."
+- "Qualify any impossibility claim with 'from [scope] alone.'"
+- "Label each claim with a confidence tag before merging."
+- "`unsupported`, `blocked`, `no progress` are acceptable returns."
 
-Coordinator guidance for mapping user intent to the right skill.
-
-| If the user wants... | Use | Why |
-|---|---|---|
-| a balanced cycle, no specific target | `research-team` | 3+3+2 keeps gap-closers pushing while explorers generate new angles and verifiers keep it honest. |
-| a focused push on one UV-NNN or label | `research-attack` | 1-2 gap-closers + 1 verifier; cheaper than the full roster when scope is narrow. |
-| to audit / grade a subsection or three | `research-audit` | read-only, three-tier proved/conditional/missing, no new lemmas. |
-| to explore hidden connections / literature | `trifecta` | the 3-analyst post-work synthesis; `findings.md` only (no spoilers). |
-| to systematically tighten prose | `paper-rewrite` | compactness pass with 11 invariants locked. Heavy; reserve for deliberate milestones. |
-| to fix referee-reported issues | `paper-referee` | 2-phase (fixers edit + fresh referees re-review). Phase 1 is the edit-capable exception. |
-| a quality review, no paper edits | `paper-harden` | 4-agent rigor / consistency / formatting / voice. Reports only. |
-| to reconcile UV vs rem:wip- | `uv-sync` | synchronous, no delegation. |
-| to validate UV dependency graph | `dep-graph` | cycles, orphans, critical-path — reports only. |
-| a single-bullet finding logged | `research-capture` | synchronous append to `findings.md`. |
-| to orient / resume | `cycle-status` | one-call dashboard; read-only. |
-| to close out the session | `session-handoff` | lore entry summarizing movements + open threads; auto-pushes. |
-| to back up the session transcript | `chat-backup` | dumps structured summary into the current task dir. |
-| to weaken / reverse-promote a claim | `paper-demote` | atomic: paper edit + UV reinstatement + optional negative-capture. |
-| to prune `findings.md` > 200 lines | `findings-prune` | promote / archive / remove per criteria. |
-| to move prose into `cut-for-time.md` | `paper-cut` | single-passage move with provenance. |
-| to de-dup content | `paper-dedupe` | merge unique content; redirect refs. |
-| to harden a computation into `final-scripts/paper/` | `script-promote` | single-agent; provenance + lore note. |
-| to clean the bibliography | `paper-biblio` | alphabetize / de-dupe / verify / cache decisions. |
-
-When the user's request doesn't fit any cell cleanly, default to the
-smallest-scoped skill that covers the intent. When in doubt between
-`research-team` and `research-attack`, prefer `research-attack`:
-cheaper to spin up, cheaper to get wrong.
-
-## 5. Per-task directory convention
+## 6. Task dirs and self-deposit
 
 Every multi-agent dispatch creates `tasks/yyyymmdd-hhmmss-<type>-<slug>/`
-at repo root. The coordinator announces the task dir path upfront and
-includes it in every teammate's briefing. Types:
+with `reports/`, `scripts/`, `notes/`, and eventually `chat.md`. A full
+`research-team` cycle creates three siblings sharing the timestamp prefix
+(attack-gap, attack-fund, verify).
 
-- `attack-gap` — focused closure on a specific UV-NNN or `rem:wip-*` item.
-- `attack-fund` — attacking fundamentals / derivative geometry / normal
-  forms / cross-cutting structure that will redirect gap attacks.
-- `audit` — read-only inspection of a paper subsection or a claim batch.
-- `verify` — adversarial or source-auditing pass over prior work.
-- `other` — catch-all (e.g., tooling, maintenance, reorganization).
+Teammates deposit to `tasks/<dir>/reports/<teammate>.md` (7-field report),
+`scripts/` (anything created), `notes/<teammate>/` (optional scratch). They
+do **not** write to `proof_of_rh.tex`, `unverified.tex`, `findings.md`,
+`CLAUDE.md`, or `lore/` unless a skill grants an explicit exception
+(e.g. `paper-referee` Phase 1).
 
-A full `research-team` cycle (the 3+3+2 roster; §4) typically creates
-**three sibling task dirs with the same `yyyymmdd-hhmmss-` prefix**: one
-`attack-gap-<slug>/` for the 3 gap-closers, one `attack-fund-<slug>/` for
-the 3 explorers, and one `verify-<slug>/` for the 2 verifiers. The shared
-timestamp ties them together without a nesting layer.
+## 7. Report schema
 
-Minimum contents per task dir:
-
-```
-tasks/20260423-020000-attack-gap-mixed-4-point/
-├── chat.md                          # periodic backup of this session
-├── reports/
-│   ├── gap-closer-mixed4pt.md       # 7-field report per teammate
-│   └── ...
-├── scripts/                          # any .py / .sh produced
-└── notes/                            # optional per-teammate scratch
-```
-
-Every commit made during the session names the task dir(s) in its commit
-body. This is the primary provenance anchor (§6 and §10).
-
-## 6. Claim lifecycle (git-as-archive)
-
-Six states: **intake → quarantine → research → adversarial → promote |
-demote | reject**.
-
-- **Intake**: idea, repair, objection from coordinator / agent / paper.
-- **Quarantine**: coordinator adds a UV-NNN entry to `unverified.tex` with
-  all six fields (Title / Status / Source / Claim / Why unverified /
-  Needed for promotion), OR a bullet to the appropriate section of
-  `findings.md`.
-- **Research**: delegates work the item in read-only mode.
-- **Adversarial**: a different agent (or the coordinator) attacks the
-  claim looking for circularity, missing hypotheses, numerics
-  masquerading as proof, stale citations.
-- **Promote**: coordinator edits `proof_of_rh.tex` AND deletes the
-  `unverified.tex` / `findings.md` entry **in the same commit**. Commit
-  subject: `promote UV-NNN: <one-line>` (or `promote <finding>: ...`).
-- **Demote**: coordinator edits `proof_of_rh.tex` (remove or weaken) AND
-  reinstates entry in `unverified.tex` in the same commit. Subject:
-  `demote <label>: <reason>`.
-- **Reject**: coordinator deletes the `unverified.tex` entry in a commit
-  whose body explains rejection. Subject: `reject UV-NNN: <reason>`.
-  If the rejection produced a reusable negative lesson, a
-  `capture-finding negative` edit is included in the same commit.
-
-**No status annotations in active files.** Active files stay small and
-fully brief-able. Git log is the audit trail.
-
-## 7. Downstream-briefing rule (non-negotiable)
-
-Every delegation prompt MUST include:
-
-1. Full `paper/findings.md` (pasted verbatim).
-2. The 7-field agent report schema (§8).
-3. Explicit non-goals for this teammate.
-4. The task dir path (from §5) and the self-deposit checklist (§8).
-
-**`paper/unverified.tex` is NOT included in the default briefing.**
-Sharing tentative claims broadly spoils, poisons, or distracts
-independent agents — exploration and audit should happen against the
-*verified* state of the proof, not the hopeful state. Wait until
-verification is complete before circulating a claim.
-
-**Exceptions** (narrow, named, and logged):
-
-- A gap-closer attacking a specific UV-NNN entry receives that one
-  entry verbatim.
-- An adversarial verifier reviewing a specific claim (either a UV
-  entry or prior teammate output) receives exactly what they're
-  verifying.
-- A source auditor whose assigned subsection contains a `rem:wip-*`
-  label tied to a UV entry receives that entry.
-- Phase-1 paper fixers whose assigned issues touch a UV entry receive
-  those entries.
-
-In every exception, share only the individual UV entries involved —
-never the full ledger. Generic explorers, content auditors, formatters,
-voice reviewers, literature searchers, and "under-the-nose" analysts
-receive **findings.md only**.
-
-A skill that dispatches without the required fields, or that
-over-shares `unverified.tex` against this rule, is broken. Fix the
-skill.
-
-### 7a. Briefing idioms that license candor
-
-These phrases should appear in agent briefings; they have an outsized
-effect on honest output (distilled from the prior manual ChatGPT
-workflow):
-
-- **"Separate three things: proved / conditional / missing."** Open
-  audit briefings with this. Forces the three-bin discipline from §3a.
-- **"What is the cleanest target here?"** Before pivoting mid-audit,
-  restate the theorem in its cleanest form. Prevents drift to adjacent
-  questions.
-- **"Give me the honest verdict."** Use at closure time to license
-  "this does not yet close" answers.
-- **"If full closure is too hard, reduce to the smallest list of
-  concrete unresolved sub-statements."** For lemma-closure briefings.
-- **"Qualify any impossibility claim with 'from [scope] alone.'"**
-  Required for negative findings and adversarial reports.
-- **"Label each claim with a confidence tag before merging."** For
-  synthesis roles.
-- **"`unsupported`, `blocked`, and `no progress` are acceptable
-  returns."** Explicit anti-sycophancy. Re-state in every briefing.
-
-## 8. Agent report schema + self-deposit
-
-Every teammate returns a report with these **7 fields**:
+Every teammate report has seven fields:
 
 - **Claim**
-- **Status** ∈ `proved | computational | heuristic | open | rejected`
+- **Status** \(\in\) `proved | computational | heuristic | open | rejected`
 - **Evidence**
-- **Exact refs** — file paths, line numbers, `rem:wip-*` labels, chat
-  paths, script paths + commit SHA, UV-NNN IDs
+- **Exact refs** — file paths, line numbers, `rem:wip-*`, chat paths, scripts
+  + SHAs, UV-NNN
 - **Dependencies**
-- **Strongest objection** — not optional, not empty, not "none"
+- **Strongest objection** — never empty, never "none"
 - **Needed for promotion**
 
-Acceptable returns also include `unsupported`, `blocked`, `no progress` —
-these are honest signals, not failures.
+`unsupported` / `blocked` / `no progress` are honest signals, not failures.
 
-**Self-deposit checklist** (every teammate executes before shutdown):
+## 8. Claim lifecycle (git-as-archive)
 
-- Write the final 7-field report to
-  `tasks/<dir>/reports/<teammate-name>.md`.
-- Put any scripts you created or used in `tasks/<dir>/scripts/`.
-- Put any intermediate notes in `tasks/<dir>/notes/<teammate-name>/`
-  (optional).
-- Do NOT write to `proof_of_rh.tex`, `unverified.tex`, `findings.md`,
-  `CLAUDE.md`, or `lore/`.
+**Intake → quarantine → research → adversarial → promote | demote | reject.**
 
-## 9. Adversarial pass requirement
+- **Quarantine**: add UV-NNN to `unverified.tex` or a bullet to the right
+  section of `findings.md`.
+- **Adversarial pass is non-negotiable** before any proof-state change.
+- **Promote**: edit paper AND delete UV/findings entry in the *same* commit.
+  Subject: `promote UV-NNN: <one-line>`.
+- **Demote**: edit paper + reinstate UV entry in the same commit. Subject:
+  `demote <label>: <reason>`.
+- **Reject**: delete UV entry; commit body explains; if a reusable lesson
+  surfaced, include `research-capture negative` in the same commit.
+  Subject: `reject UV-NNN: <reason>`.
 
-Any claim that would change proof state requires at least one independent
-adversarial checker before promotion. No exceptions.
+No status annotations in active files — they stay brief-size. Git log is
+the audit trail.
 
-### 9a. Broadcast-correction duty
+**Broadcast corrections immediately.** If something already in the paper is
+found false, `SendMessage` every active teammate before doing anything else,
+then demote + optional negative-capture in one commit. Cost of a delayed
+correction >> cost of a brief interruption.
 
-When the coordinator discovers that something already in
-`paper/proof_of_rh.tex` is false, imprecise, or over-claimed, it is an
-IMMEDIATE coordinator responsibility to:
+## 9. Provenance
 
-1. `SendMessage` every active teammate with a brief correction notice
-   so they stop working under the flawed assumption. Broadcast across
-   all active teams (`to: "*"` where available).
-2. Demote the offending claim per §6: edit the paper to remove or weaken
-   and reinstate a UV entry in `unverified.tex` in the same commit.
-3. If the correction produces a reusable negative lesson, call
-   `research-capture negative` in the same commit with `Do-not-retry:`
-   describing the specific flawed move.
-4. In the commit body, use `correction:` or `demote:` as the subject
-   prefix so the audit trail is obvious. Cite any active task dirs.
+Every `findings.md` entry, UV entry, agent report, commit message, lore
+entry, and task dir carries provenance to its source: chat path, `rem:wip-*`
+label, paper line number, script + SHA, UV-NNN, or task-dir report. A claim
+without provenance is a defect — reviewers must flag it.
 
-The cost of a delayed correction — teammates running hours on a false
-premise and writing it into new findings — is much higher than the cost
-of a brief interruption. Broadcast first, explain later.
+## 10. Git workflow
 
-## 10. Provenance is non-negotiable, everywhere
+- **Auto-commit** after each finished logical unit (remark rewrite, new
+  proof block, structural reorg, task-dir with reports). Not every
+  in-progress touch.
+- **Stage by name.** Never `git add -A` / `.`. Subjects imperative-mood;
+  promote/demote/reject subjects cite UV-NNN; commit bodies mention the
+  task dir if the work happened inside one.
+- **Auto-push ~1 per 3 commits** (drift 2–4 fine) and always at session end.
+  This reverses the global default and applies only to this project.
+- **Never force-push, never amend without instruction, never skip hooks.**
+  On push rejection, fetch and investigate.
 
-Every entry in `findings.md`, every UV entry, every agent report, every
-commit message, every lore entry, every task dir carries explicit
-provenance to its source: `paper/chats/<file>`, `rem:wip-*` label,
-`proof_of_rh.tex` line number, script path + commit SHA, UV-NNN,
-`tasks/<dir>/reports/<teammate>.md`. A claim without provenance is a
-defect — adversarial reviewers must flag it.
+### Compile-check
 
-## 11. Git workflow
+Enforced by `.githooks/pre-commit` (bootstrap: `git config core.hooksPath
+.githooks`). When `paper/proof_of_rh.tex` is staged, the hook runs
+`pdflatex -interaction=nonstopmode -draftmode` and aborts on lines
+matching `!` / `Undefined` / `Error` / `Warning: .* undefined` / `Warning:
+.* multiply`. `--no-verify` is discouraged — don't bypass just because
+auto-push creates ship pressure.
 
-- **Auto-commit after each major edit.** A "major edit" is a finished
-  logical unit (a remark rewrite, a new proof block, a structural
-  reorganization, a task-dir creation with reports). Minor in-progress
-  touches during an ongoing edit do not each need their own commit.
-- **Stage files by name.** Never `git add -A` or `git add .`.
-- Commit messages: imperative-mood subject. On promote/demote/reject,
-  cite UV-NNN in the subject and explain in the body. When a session
-  worked inside a task dir, mention the dir in the body.
-- **Auto-push every ~3 commits.** This project specifically wants the
-  coordinator to periodically commit AND push without asking. Cadence:
-  roughly one `git push` per 3 commits (drift to 2-4 is fine). At the
-  end of a session, push any trailing commits so the remote is current.
-  This reverses the usual "commit only, never push" default — it applies
-  ONLY to this project.
-- **Never** force-push (`--force`, `+refspec`), even under the
-  auto-push rule. If push is rejected as non-fast-forward, fetch and
-  investigate — do not clobber.
-- Do not skip hooks (`--no-verify`), do not amend without explicit
-  instruction, do not force-push.
+## 11. Skill authoring — "let the model cook"
 
-### 11a. Compile-check before committing paper edits
+Skills are pointers, not recipes. The model is capable; the skill gives it
+the shape of the job, the non-negotiable invariants, and the outputs
+expected. Step-by-step bash recipes, exhaustive "don't do X" lists,
+duplicated writing-discipline text, and tutorial-length preambles are noise
+that crowds out judgment.
 
-Every commit that modifies `paper/proof_of_rh.tex` goes through a
-compile-check. Enforced by `.githooks/pre-commit`:
+When writing or revising a skill:
 
-```sh
-# One-time setup per clone:
-git config core.hooksPath .githooks
-```
-
-The hook runs `pdflatex -interaction=nonstopmode -draftmode` on the
-paper when it's staged and aborts the commit if any of these patterns
-appear in the log:
-
-- lines beginning with `!`
-- `Undefined`, `Error`
-- `Warning: ... undefined`, `Warning: ... multiply`
-
-Catches LaTeX syntax errors, undefined `\ref{}` / `\cite{}`, and
-multiply-defined labels — failure modes that would otherwise not
-surface until `paper-harden`.
-
-Bypass (`--no-verify`) is discouraged. Use only with an explicit
-justification — the coordinator should NOT bypass routinely even if
-the auto-push rule creates pressure to ship.
+- Name the goal, the invariants, and the outputs. Trust the model with the
+  path between them.
+- Refer to CLAUDE.md sections rather than repeating their content. A skill
+  saying "follow §4 writing discipline" is stronger than re-listing the
+  seven bullets.
+- Include a bash snippet only when the exact command is load-bearing or
+  non-obvious. Otherwise describe the action.
+- Anti-pattern lists are for things that would reasonably be tried and
+  shouldn't be — not for restating positive rules in negative form.
+- Keep each skill under ~80 lines. Skills above that are doing too much or
+  explaining too much.
 
 ## 12. LaTeX conventions
 
-- LaTeX-native math delimiters EVERYWHERE: `\(...\)` inline and
-  `\[...\]` display — in `.tex`, `.md`, `.txt`, commit messages, lore,
-  and any other prose. Do **not** convert to `$...$` / `$$...$$` for
-  GitHub rendering.
-- When extracting/cleaning prose from external sources (ChatGPT exports,
-  agent transcripts), preserve `\(...\)` / `\[...\]` as-is.
-- Frozen macro namespace in `proof_of_rh.tex` preamble (30 custom
-  `\newcommand`s). Do not redefine or invent new macros without
-  coordinator approval.
-- `rem:wip-*` label convention marks in-paper WIP items that should have
-  a matching UV-NNN in `unverified.tex`.
-
+- Math delimiters everywhere are `\(...\)` / `\[...\]`, including `.md`,
+  commit messages, lore. Never convert to `$...$`; preserve on extraction
+  from chat exports.
+- Frozen macro namespace in the preamble (\(\sim 30\) `\newcommand`s). Don't
+  redefine or invent without coordinator approval.
+- `rem:wip-*` labels mark in-paper WIP; each should have a matching UV-NNN.

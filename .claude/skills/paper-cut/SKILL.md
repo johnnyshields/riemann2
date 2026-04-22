@@ -8,48 +8,31 @@ description: Move a passage from paper/proof_of_rh.tex to paper/cut-for-time.md 
 Move a passage from `paper/proof_of_rh.tex` to `paper/cut-for-time.md`
 with provenance.
 
-## Steps
+Read the passage. Grep for `\ref{...}` / `\eqref{...}` pointing at any
+`\label{...}` inside — note each (redirect or record as broken in the
+provenance block). Remove the passage from the paper; fix surrounding
+transitions.
 
-1. **Identify the passage.** The user specifies by description, line
-   numbers, or `\label`.
+Append to `paper/cut-for-time.md`:
 
-2. **Read the passage** in `paper/proof_of_rh.tex`. Note exact content
-   and surrounding context.
+```markdown
+---
 
-3. **Check references.** Before cutting, grep `\ref{...}` and
-   `\eqref{...}` for any `\label{...}` inside the passage. If references
-   exist, note them — either redirect or record as broken in the
-   provenance block.
+## From: [Section name] ([context])
 
-4. **Remove the passage** from `paper/proof_of_rh.tex`. Ensure the
-   surrounding text flows; adjust transitions if needed.
+**Cut date:** YYYY-MM-DD
+**Original location:** paper/proof_of_rh.tex, [line range or label]
+**Reason:** [brief reason]
+**Broken refs:** [list, if any]
 
-5. **Append to `paper/cut-for-time.md`** with this format:
+\`\`\`latex
+[exact LaTeX cut]
+\`\`\`
+```
 
-   ```markdown
-   ---
+If the passage contained a `rem:wip-*` label cited by a UV entry, update
+that UV's `Source in paper:` to the new home, or mark it `blocked` with
+an explanation.
 
-   ## From: [Section name] ([context: after/before what])
-
-   **Cut date:** [YYYY-MM-DD]
-   **Original location:** paper/proof_of_rh.tex, [line range or label]
-   **Reason:** [brief reason for cutting]
-   **Broken refs:** [list of `\ref{}` sites that now point nowhere, if any]
-
-   \`\`\`latex
-   [exact LaTeX content that was cut]
-   \`\`\`
-   ```
-
-6. **Commit** the paper edit and `cut-for-time.md` update together.
-   Stage by name. Subject: `cut: <one-line summary of what moved>`.
-
-## Notes
-
-- Preserve LaTeX verbatim so the passage can be restored by copy-paste.
-- If the passage contains a `rem:wip-*` label tied to a UV-NNN entry in
-  `unverified.tex`, update that UV entry (either redirect its `Source in
-  paper:` line to the new home or mark the UV as `blocked` with
-  explanation). See `CLAUDE.md` §6.
-- If the user provides a reason, use it; otherwise infer (redundant, too
-  detailed, process documentation, etc.).
+Commit paper edit + `cut-for-time.md` update together, stage by name.
+Subject: `cut: <one-line of what moved>`.

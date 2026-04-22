@@ -5,141 +5,57 @@ description: Validate the UV dependency graph in paper/unverified.tex. Detects c
 
 # Dep Graph
 
-Structural validator for the `Depends on:` fields in
-`paper/unverified.tex`. The fields make the UV dependency graph
-explicit (`CLAUDE.md` §6 / the UV schema); this skill checks that
-the graph is well-formed and flags the highest-leverage nodes.
+Validate the `Depends on:` graph in `paper/unverified.tex`. Read-only
+coordinator action; reports only.
 
-## When to run
+## Protocol
 
-- After `uv-sync` reports any change.
-- Before starting a `research-team` / `research-attack` cycle, so the
-  coordinator picks gap-closers with awareness of blocking chains.
-- Periodically (e.g., once per week) as hygiene.
-- Invoked by `cycle-status` when it detects possible cycles.
+Parse each UV-NNN into (title, status, depends_on, source_label,
+source_line). A malformed `Depends on:` (prose instead of UV IDs) is a
+reportable defect — flag and stop until fixed.
 
-## Protocol (synchronous, read-only)
+Build the graph (nodes = UV IDs, edge `U → V` if V is in U's
+`Depends on`). Check:
 
-### Step 1: Parse
+- **Cycles** — DFS; any cycle is a hard error. Report each cycle
+  ordered.
+- **Orphan dependencies** — `U` cites `V` but `V` doesn't exist in the
+  ledger.
+- **Dead-end dependencies** — `U` cites a `rejected` V, silently
+  blocking `U`.
+- **Label cross-check** — `source_label` missing from `proof_of_rh.tex`
+  flags a `uv-sync` follow-up (not this skill's job to fix).
 
-Parse `paper/unverified.tex` into a list of records:
+For critical-path ranking, compute per UV: **in-degree** (how many
+entries depend on it) and **reachable-from-open** (count of `open` /
+`heuristic` entries transitively depending on it). Rank by
+reachable-from-open descending.
 
-```
-UV-NNN:
-  title: "..."
-  status: open | heuristic | computational | blocked | rejected | promoted
-  depends_on: [UV-XXX, UV-YYY] or []
-  source_label: rem:wip-...
-  source_line: N
-```
-
-Every `Depends on:` entry must be parseable. Malformed entries
-(e.g. `Depends on: See UV-002`, prose instead of UV IDs) are a
-**reportable defect** — flag and stop validation until the entry is
-fixed.
-
-### Step 2: Build the graph
-
-Nodes: UV-NNN IDs.
-Edges: `U -> V` if `V` appears in `U`'s `Depends on:` list.
-
-### Step 3: Validate
-
-#### 3a. Cycle detection
-
-Run a standard DFS cycle-finding pass. Any cycle is a **hard error**:
-no research can close a cycle of mutual dependencies; one of the
-edges is wrong. Report each cycle as an ordered list of UV IDs and
-surface to the user.
-
-#### 3b. Orphan detection (dangling dependencies)
-
-For every UV ID cited in some `Depends on:`, verify that UV ID exists
-in the ledger. Missing targets are a defect: they reference a UV that
-was rejected or never created. Report each as
-`UV-AAA depends on UV-BBB (not found)`.
-
-#### 3c. Dead-end detection
-
-UV entries with `status: rejected` that still appear in others'
-`Depends on:` lists — these are silently blocking downstream work that
-thinks they're live. Report as `UV-AAA depends on rejected UV-BBB —
-update UV-AAA`.
-
-#### 3d. Contradiction with the paper
-
-Cross-check `source_label` against the paper. If the `rem:wip-*` label
-no longer exists in `proof_of_rh.tex`, flag for `uv-sync` (out of
-scope for this skill, but mention it in the report).
-
-### Step 4: Critical-path analysis
-
-For each UV, compute:
-
-- **In-degree**: how many other UV entries depend on it. High
-  in-degree → closing this unblocks many downstream.
-- **Reachable-from-open**: the number of `status: open` or `heuristic`
-  entries that transitively depend on this UV.
-
-Rank UVs by `reachable-from-open` descending. The top 3 are the
-**critical-path entries** — closing them produces the biggest unblock.
-
-### Step 5: Report
-
-Output format:
+## Report
 
 ```
-## Dep-Graph Validation — <yyyymmdd-hhmmss>
+## Dep-Graph — <yyyymmdd-hhmmss>
+Entries: N   Malformed: 0
 
-### Parse
-- Entries: N
-- Malformed Depends-on lines: 0  (or list)
+Structural defects:
+- Cycles: 0 (or list)
+- Orphan deps: 0 (or list)
+- Dead-end deps on rejected: 0 (or list)
 
-### Structural defects
-- Cycles: 0  (or list each cycle)
-- Orphan dependencies: 0  (or list each UV-AAA → UV-BBB)
-- Dead-end dependencies (on rejected UVs): 0  (or list)
+Critical path (by reachable-from-open):
+| UV | Status | In-deg | Reach | Title |
 
-### Critical path (by reachable-from-open)
-| Rank | UV   | Status | In-deg | Reachable-from-open | Title |
-|------|------|--------|--------|---------------------|-------|
-| 1    | UV-002 | open  | 2      | 3                   | Pair-like vs finite-core |
-| 2    | ...    | ...   | ...    | ...                 | ...   |
-
-### Leaves
-(UVs with depends_on = [] — candidate starting points for a
-research cycle, since they can be attacked independently)
-- UV-001: Calibration small-u (status: open)
-- UV-003: Parity/projective factorization (status: heuristic)
-- ...
-
-### Root blockers
-(UVs whose closure would cascade the most)
-- UV-002 closes 3 downstream (UV-007, ...)
-
-### Cross-check notes (for uv-sync, not this skill)
-- UV-004 cites rem:wip-... which is absent from proof_of_rh.tex
-- ...
+Leaves (depends_on = []): attackable independently
+Root blockers: UV closing would cascade the most
+Cross-check for uv-sync: labels missing from paper
 ```
 
-### Step 6: Commit (only if report is generated for record)
+Archive as `lore/<yyyymmdd>-dep-graph.md` + commit only if requested;
+otherwise print-and-exit.
 
-This skill is primarily for on-demand inspection. If the user wants
-the report archived, save as `lore/<yyyymmdd>-dep-graph.md` and
-commit:
+## Don't
 
-```
-dep-graph: snapshot <yyyymmdd> — <N UVs, M defects>
-```
-
-Otherwise, print-and-exit is fine.
-
-## Anti-patterns
-
-- Do NOT auto-edit `unverified.tex`. Fixes are the coordinator's call
-  (and structural issues should probably route through `uv-sync` or
-  `paper-demote`).
-- Do NOT infer dependencies from prose — only trust the explicit
-  `Depends on:` field. If the field is missing, flag and stop.
-- Do NOT rank by raw in-degree alone — reachable-from-open is the
-  better signal for where to attack next.
+Auto-edit `unverified.tex` — fixes go through `uv-sync` or
+`paper-demote`. Infer deps from prose — only trust the explicit
+`Depends on:` field. Rank by raw in-degree (reachable-from-open is the
+right signal).

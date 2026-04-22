@@ -5,149 +5,64 @@ description: End-of-session writeup producing a lore entry that summarizes task 
 
 # Session Handoff
 
-Structured end-of-session lore entry. See `CLAUDE.md` §2 (lore role),
-§5 (task dirs), §6 (claim lifecycle), §11 (auto-push — trailing commits
-get pushed at session end).
+Structured end-of-session lore entry. Pairs with the auto-push rule so
+the next session starts current.
 
-## When to run
+`$ARGUMENTS`: empty → cover since the last handoff; `--since <ref>` →
+git ref or ISO date; `--note "<text>"` → free-text addendum.
 
-- End of a working session.
-- Before a planned long gap (overnight, over-weekend, travel).
-- Before a major model-context switch (if switching between
-  Opus/Sonnet/etc. mid-project).
-- After a milestone cycle completes (even if session continues — a
-  handoff at the milestone is a clean commit boundary).
+## Gather
 
-## Arguments
+Commits since `<since>` (`git log --since=... --oneline`). Task dirs
+opened or touched (`find tasks/ -maxdepth 1 -type d -newer <marker>`).
+Changes to `unverified.tex` and `findings.md`. Paper edits with stats.
+Active teams (should be none — close any that survived).
 
-`$ARGUMENTS` (optional):
+## Write
 
-- **empty** — full auto-summary covering everything since the last
-  handoff.
-- `--since <ref>` — start point: a git ref or ISO date. Default is the
-  most recent prior `session-handoff` lore entry, or start-of-day if
-  none.
-- `--note "<text>"` — free-text addendum from the user (something they
-  want recorded that isn't captured automatically).
-
-## Protocol
-
-### Step 1: Gather session state
-
-```sh
-# Commits this session
-git log --since="<since>" --oneline
-
-# Task dirs opened or touched this session
-find tasks/ -maxdepth 1 -type d -newer "<since-marker>"
-
-# UV entries changed
-git log --since="<since>" -- paper/unverified.tex | head -40
-
-# Findings entries changed
-git log --since="<since>" -- paper/findings.md | head -40
-
-# Paper edits
-git log --since="<since>" -- paper/proof_of_rh.tex --stat | head -20
-```
-
-Also inspect:
-
-- Active teams via `TeamList` (if any survived the session — usually
-  none should).
-- Pending `unverified.tex` entries whose status changed (open ↔
-  heuristic, or newly added, or removed / promoted).
-- Any `rem:wip-*` label that moved (renamed or relocated).
-
-### Step 2: Draft the lore entry
-
-Path: `lore/<yyyymmdd>-session-handoff.md` (today's date; if a prior
-handoff exists on the same date, append `-N` suffix).
-
-Structure:
+Path: `lore/<yyyymmdd>-session-handoff.md` (append `-N` if a handoff
+already exists today). Structure:
 
 ```markdown
 # Session Handoff — <yyyymmdd>
 
-Since: <git-ref or ISO date>
-Commits: <N>  (range `<first>..<last>`)
-Pushed: <yes / no — count of commits pushed>
+Since: <ref>   Commits: N (<first>..<last>)   Pushed: yes / N
 
 ## What happened
-
-<one-paragraph natural-language summary of the session's main
-theme — not a commit-by-commit recap>
+<one-paragraph theme — not a commit recap>
 
 ## Task dirs opened / touched
-
 | Path | Type | Status |
-|---|---|---|
-| tasks/<ts>-<type>-<slug>/ | attack-gap | closed — promoted UV-003 |
-| ... | ... | ... |
 
 ## UV ledger changes
-
-- **Added**: UV-NNN (title, one-line why).
-- **Promoted**: UV-NNN → §<ref> (landed at commit <SHA>).
-- **Demoted**: <paper label> → UV-NNN.
-- **Rejected**: UV-NNN (short reason).
-- **Refined**: UV-NNN (what changed).
+- Added / Promoted / Demoted / Rejected / Refined: one bullet each
 
 ## findings.md changes
-
-- **Added**: Structural / Negative / Goodies / Gap bullets.
-- **Removed**: (on promotion or rejection).
+- Added / Removed
 
 ## Paper edits
-
-- <§ref> — one-line what changed (add / revise / remove / demote).
+- <§ref> — one line
 
 ## Open threads (for next session)
-
-- <thread 1 with enough context to resume>
-- <thread 2>
-
 ## Queued follow-ups
-
-- <concrete TODO for next session, with pointer to a task dir or UV if
-  applicable>
-
 ## Coordinator notes
-
-- <any ambient observation worth preserving — working patterns, model
-  quirks observed, adjacent ideas to explore>
-
-<-- end lore entry -->
 ```
 
-### Step 3: Commit + push
+Don't produce a commit-by-commit recap (git log is that already).
+Capture synthesis: themes, decisions, open threads. Never omit "Open
+threads" even when nothing is blocked — small continuity notes matter.
 
-```sh
-git add lore/<yyyymmdd>-session-handoff.md
-git commit -m "lore: session handoff <yyyymmdd> — <one-line theme>"
-```
+## Commit + push
 
-Per `CLAUDE.md` §11 auto-push rule: push trailing commits now if any
-are unpushed. Handoff entries should always hit the remote.
+Stage by name, commit `lore: session handoff <yyyymmdd> — <theme>`, and
+push any trailing unpushed commits (handoff should always hit the
+remote).
 
-### Step 4: Broadcast (if any team is still active)
+## Close teams
 
-If `TeamList` shows active teammates, `SendMessage` each a short
-"session ending" notice and gracefully `TeamDelete`. No zombie teams
-across sessions.
+If any team is still alive, `SendMessage` each a brief "session ending"
+notice and `TeamDelete`. No zombie teams across sessions unless the
+user explicitly wants a background watcher.
 
-### Step 5: Report to the user
-
-Short summary (≤ 10 lines) covering the handoff theme and any
-queued follow-up that benefits from user attention before the session
-ends.
-
-## Anti-patterns
-
-- Do NOT produce a commit-by-commit recap — git log is already that.
-  The lore entry captures synthesis: themes, decisions, open threads.
-- Do NOT leave active teams running across sessions unless the user
-  explicitly wants a background watcher.
-- Do NOT omit the "Open threads" section just because nothing is
-  blocked — next-session-you will thank you for writing down even small
-  continuity notes.
+Finish with a ≤10-line summary to the user covering the handoff theme
+and any follow-up needing attention before session end.

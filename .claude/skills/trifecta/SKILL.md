@@ -3,107 +3,53 @@ name: trifecta
 description: Post-work synthesis — three parallel analysts covering deep internal insights, external literature, and hidden connections to fundamental math. Produces one consolidated lore entry.
 ---
 
-# Trifecta: Deep Insights, Literature, and Hidden Connections
+# Trifecta
 
-Post-work synthesis across three complementary angles:
+Three-angle post-work synthesis: deep internal insights, external
+literature, hidden links to fundamental math.
 
-1. **deep-insights** — connect recent findings to each section of the
-   paper (internal structural analysis).
-2. **lit-search** — search external literature for connections to open
-   problems (web search).
-3. **under-nose** — find hidden connections to fundamental mathematics
-   (bold, speculative, honest about proven-vs-conjectured).
+`$ARGUMENTS`: empty → analyze most recent work (git log + recent lore);
+topic phrase → focus all three; lore file path → analyze that file.
 
-Answers: "what does it mean for the paper", "what does the field know",
-and "what are we missing." See `CLAUDE.md` §5, §7, §8.
+## Preamble
 
-## Arguments
-
-`$ARGUMENTS`:
-- **empty** — analyze the most recent work (check git log + recent lore).
-- **topic phrase** — focus all three on that topic.
-- **lore file path** — analyze the findings in that specific lore file.
-
-## Mandatory preamble
-
-1. Read the briefing packet:
-   - `paper/findings.md` in full.
-   - `paper/unverified.tex` in full.
-   - `paper/proof_of_rh.tex` — section structure (grep `\\(sub\\)*section`)
-     plus any sections relevant to `$ARGUMENTS`.
-   - Recent `lore/` entries (last 3–5 by date).
-   - Recent `git log --oneline -n 20` for context on what's new.
-2. Produce a short **key-findings summary** (≤30 lines) that will be
-   pasted into all three teammate prompts.
-3. Create task dir `tasks/<ts>-other-trifecta-<slug>/` with `reports/`,
-   `scripts/`, `notes/`. Announce it.
+Read `findings.md`, recent `lore/` entries, and `git log --oneline -n
+20`. Skim relevant paper sections. Write a ≤30-line key-findings
+summary; it's pasted into all three briefings. Create
+`tasks/<ts>-other-trifecta-<slug>/`.
 
 ## Dispatch
 
-`TeamCreate team_name: "trifecta-<slug>"`, spawn 3 named teammates in
-parallel: `analyst-deep-insights`, `analyst-lit-search`,
-`analyst-under-nose`. Each briefing MUST include:
-- Full `paper/findings.md` (pasted).
-- **NO `paper/unverified.tex` content.** Trifecta analysts are the
-  textbook spoiler-prone case per `CLAUDE.md` §7; they work against
-  the verified proof state only.
-- The key-findings summary from step 2.
-- The 7-field report schema.
-- The writing-discipline reminder (`CLAUDE.md` §3a): state findings
-  directly, no overclaim, no hedge, honest scope disclaimers welcome.
-- Briefing idioms (`CLAUDE.md` §7a): "Label each connection with a
-  confidence tag before merging" + "`unsupported`, `blocked`, `no
-  progress` are acceptable returns."
-- The self-deposit checklist: final report in
-  `tasks/<dir>/reports/<teammate>.md`; no standalone per-teammate
-  lore file (the coordinator will write one consolidated lore).
-- Explicit non-goals per role below.
+`TeamCreate team_name: "trifecta-<slug>"`. Spawn three parallel
+teammates with the standard briefing (full `findings.md`, 7-field
+schema, writing-discipline reminder, self-deposit checklist),
+**no `unverified.tex` content** (trifecta analysts are the textbook
+spoiler-prone case), and the key-findings summary. Paste: "Label each
+connection with a confidence tag before merging" and
+"`unsupported`/`blocked`/`no progress` are acceptable returns."
 
-### analyst-deep-insights
-**Focus**: Internal structural analysis. For each section of the paper,
-ask:
-- What do the recent findings REVEAL about this section's content?
-- Hidden connections missed?
-- New "WHY" explanations?
-- New directions opening up?
-Look for: hidden beauty, structural insights, sign/magnitude dualities,
-algebraic vs. topological distinctions.
-Non-goals: do not propose new theorems; observations only.
+- **`analyst-deep-insights`** — internal structural analysis per
+  section: what recent findings reveal, hidden connections, new
+  directions. Observations only, no new theorems.
+- **`analyst-lit-search`** — external literature via WebSearch. For each
+  connection: problem, how our result connects, whether it provides
+  progress, key refs with URLs/DOIs. No paper-change proposals.
+- **`analyst-under-nose`** — bold / speculative connections to
+  fundamental math. Before proposing, must check `findings.md`
+  §Negative and flag any match instead of re-proposing a ruled-out
+  route.
 
-### analyst-lit-search
-**Focus**: External literature connections — WebSearch-based.
-For each connection: describe the problem, how our result connects,
-whether it provides progress, cite key references (with URLs or DOIs).
-Broad buckets to probe (not exhaustive): nearby analytic number theory,
-recent zeta / L-function advances, any active program that touches the
-specific findings in the briefing.
-Non-goals: do not propose changes to the paper; return a connections
-report.
+Individual per-teammate lore files are forbidden; the coordinator writes
+one consolidated entry.
 
-### analyst-under-nose
-**Focus**: Hidden / bold connections to fundamental mathematics.
-**Critical constraint**: before proposing any connection, check
-`findings.md` §Negative. If a proposal is materially similar to an
-entry listed there (especially with a `Do-not-retry:` line), do NOT
-propose it — flag the Negative match in your report so the coordinator
-can confirm the veto is current.
-Bold / speculative welcome, but label `proved` vs `conjectured`
-honestly.
+## Post-cycle
 
-## After teammates report
+Verify deposits. Write ONE lore file
+`lore/<yyyymmdd>-trifecta-<slug>.md`: top-level summary,
+section-by-section, literature ranked by strength, under-the-nose
+connections ranked by actionability (with Negative overlaps resolved),
+suggested paper additions, new references.
 
-1. Read all 3 reports from `tasks/<dir>/reports/`.
-2. Write ONE consolidated lore file at
-   `lore/<yyyymmdd>-trifecta-<slug>.md` with sections:
-   - Top-level summary of deepest findings.
-   - Section-by-section (from deep-insights).
-   - Literature connections ranked by strength (from lit-search).
-   - "Under our nose" connections ranked by actionability (from
-     under-nose), with Negative-overlap flags resolved.
-   - Suggested paper additions (remarks, open questions, references).
-   - Key new references to add.
-3. Emit `findings.md` deltas via `research-capture` for any reusable
-   new goodies / structural observations / recurring gaps that surfaced.
-4. `SendMessage` each teammate `{type:"shutdown_request"}`, `TeamDelete`.
-5. Commit the lore file + task dir + any `findings.md` updates. Cite
-   the task dir in the body. Stage by name.
+Emit `findings.md` deltas via `research-capture` for reusable
+goodies / structural observations / recurring gaps. Shut down,
+`TeamDelete`, commit lore + task dir + findings edits, cite the dir.

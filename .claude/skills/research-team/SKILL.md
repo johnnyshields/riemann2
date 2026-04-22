@@ -5,146 +5,62 @@ description: Primary workhorse. Dispatches a 3+3+2 roster (3 gap-closers + 3 exp
 
 # Research Team (3+3+2)
 
-Primary workhorse for a balanced research dispatch. Spawns \(\approx 8\)
-named teammates via `TeamCreate` in a \(3+3+2\) roster: 3 gap-closers,
-3 explorers, 2 verifiers. See `CLAUDE.md` §4 for the rationale; §5 for
-task-dir conventions; §7 for the non-negotiable briefing rule.
+Balanced research dispatch: 3 gap-closers + 3 explorers + 2 verifiers via
+`TeamCreate`. Follows the project's briefing rule and writing discipline.
 
-## Arguments
+`$ARGUMENTS`: empty → general balance (coordinator picks most-blocking UV
+items + three broad explorer topics); topic phrase → oriented around it;
+UV-NNN → at least one gap-closer locked on it.
 
-The focus is: `$ARGUMENTS`
+## Preamble
 
-Parse:
-- **empty** — general balance; coordinator picks 3 most-blocking UV items +
-  3 broad explorer topics + 2 standard verifiers.
-- **topic phrase** (e.g., `mixed 4-point`) — all gap-closers and at least
-  one explorer oriented around the theme.
-- **UV-NNN** — at least one gap-closer locked on that ID.
+Read `findings.md`, `unverified.tex`, current `rem:wip-*` labels, and the
+last 2–3 lore entries. Pick roster. Create three sibling dirs sharing
+one `yyyymmdd-hhmmss` prefix: `tasks/<ts>-attack-gap-<slug>/`,
+`-attack-fund-<slug>/`, `-verify-<slug>/`, each with `reports/`,
+`scripts/`, `notes/`. Announce paths.
 
-## Mandatory preamble (every run)
+## Dispatch
 
-1. **Read the briefing packet** in full:
-   - `paper/findings.md`
-   - `paper/unverified.tex`
-   - Current WIP labels: `grep -n 'rem:wip-' paper/proof_of_rh.tex`
-   - Most recent 2–3 entries in `lore/`
-2. **Choose the roster**. Write down upfront:
-   - 3 gap-closers: each assigned a specific UV-NNN or `rem:wip-*` item,
-     with target statement and routes A/B/C + fallback to "minimal finite
-     reduction."
-   - 3 explorers: each assigned one of {derivative geometry,
-     fundamentals/normal forms, cross-cutting structure}.
-   - 2 verifiers: `verifier-adversarial`, `verifier-source`.
-3. **Create 3 sibling task dirs** with same timestamp prefix:
-   - `tasks/<ts>-attack-gap-<slug>/`
-   - `tasks/<ts>-attack-fund-<slug>/`
-   - `tasks/<ts>-verify-<slug>/`
-   where `<ts>` = `date +%Y%m%d-%H%M%S` and `<slug>` is the cycle theme
-   (e.g., `mixed-4-point` or `general-<yyyymmdd>`). Inside each, create
-   `reports/`, `scripts/`, `notes/` subdirs.
-4. **Announce the task dir paths** before spawning any teammate.
+`TeamCreate team_name: "research-team-<ts>"`. Spawn 8 named teammates
+(e.g. `gap-closer-mixed4pt`, `explorer-deriv-geo`, `verifier-source`).
+Every briefing gets: full `findings.md`, the 7-field report schema,
+non-goals, the task-dir path + self-deposit checklist, the writing-
+discipline reminder (three-bin proved/conditional/missing, gap reduction
+over closure, scoped negation, caution-labeled synthesis,
+honest-verdict closure), and role-specific idioms:
 
-## Spawn protocol
+- **Gap-closers** — their specific UV entry verbatim (narrow exception
+  to the no-`unverified.tex`-sharing rule); "What is the cleanest target
+  here?"; "If full closure is too hard, reduce to the smallest list of
+  concrete unresolved sub-statements"; routes A/B/C; fallback to minimal
+  finite reduction.
+- **Explorers** — no `unverified.tex` content (spoiler risk); mandate is
+  observations + candidate goodies + candidate negative findings,
+  each pre-tagged `[confirmed]`/`[conditional]`/`[candidate]`; "Label
+  each claim with a confidence tag before merging."
+- **Verifiers** — wait for the 6 research reports, then attack. The
+  adversarial verifier may see specific UV entries cited in the reports;
+  the source auditor may see UV entries whose labels appear in the
+  audited sections. "Give me the honest verdict." "Qualify any
+  impossibility claim with 'from [scope] alone.'"
 
-Use `TeamCreate` with `team_name: "research-team-<ts>"`, then spawn 8
-named teammates. Each teammate's spawn prompt MUST contain:
+Every teammate is also told: `unsupported` / `blocked` / `no progress`
+are acceptable returns. Synthesize non-goals from context (adjacent UV
+entries, in-flight work, deferred topics). Never dispatch without
+non-goals — an unscoped teammate drifts.
 
-- The full contents of `paper/findings.md` (pasted verbatim).
-- The **7-field report schema** from `CLAUDE.md` §8.
-- The **self-deposit checklist**: write the final report to
-  `tasks/<role-dir>/reports/<teammate-name>.md`; scripts to
-  `tasks/<role-dir>/scripts/`; do not write elsewhere.
-- The **writing-discipline reminder** from `CLAUDE.md` §3a (three-bin
-  separation, gap reduction over closure, scoped negation, caution-
-  labeled synthesis, honest-verdict closure).
-- The **briefing idioms** from `CLAUDE.md` §7a — paste the subset
-  relevant to the teammate's role. In particular:
-  - Every teammate: "`unsupported`, `blocked`, `no progress` are
-    acceptable returns."
-  - Gap-closers: "If full closure is too hard, reduce to the smallest
-    list of concrete unresolved sub-statements." + "What is the
-    cleanest target here?"
-  - Explorers: "Separate observations into [confirmed] / [conditional]
-    / [candidate] before merging."
-  - Verifiers: "Give me the honest verdict." + "Qualify any
-    impossibility claim with 'from [scope] alone.'"
-- Explicit **non-goals** for this teammate (what NOT to pursue). If the
-  user did not supply them, the coordinator synthesizes them from
-  context per `CLAUDE.md` §3 (coordinator autonomy): adjacent UV
-  entries being worked in parallel, other in-flight task dirs, topics
-  explicitly deferred in recent lore, and anything the cycle theme
-  implies should wait. Do not dispatch without non-goals — an
-  unscoped teammate drifts onto adjacent problems.
-- The teammate's specific assignment:
-  - Gap-closers: target label/UV-NNN, routes A/B/C, fallback to
-    minimal finite reduction. **Per `CLAUDE.md` §7 exception**, paste
-    the *specific* UV-NNN entry the closer is attacking — but no other
-    UV entries. Do not share the full ledger.
-  - Explorers: topic scope, reusable-artifact mandate (observations +
-    candidate goodies + candidate negative findings). **No
-    `unverified.tex` content at all** — explorers work against the
-    verified state only.
-  - Verifiers: read the 6 research reports once they land; flag
-    circularity / missing hypotheses / overclaims / stale citations.
-    The adversarial verifier may be shown specific UV entries that
-    directly correspond to a reviewed report's claim; the source
-    auditor may be shown UV entries whose `rem:wip-*` labels appear
-    in the audited sections.
+## Post-cycle
 
-Teammate names (examples):
-`gap-closer-uv002`, `gap-closer-mixed4pt`, `gap-closer-uv005`,
-`explorer-deriv-geo`, `explorer-fundamentals`, `explorer-crosscut`,
-`verifier-adversarial`, `verifier-source`.
+Before anything: verify every `reports/<teammate>.md` exists across the
+three dirs. Chase missing deposits via `SendMessage`; if unanswered, note
+at `notes/_missing-deposit.md`. Do not commit with silent misses.
 
-## Self-deposit audit (coordinator, immediately after teammates report)
+Then: cross-check handbacks against cited paper lines, emit
+`findings.md` deltas via `research-capture`, refine `unverified.tex`
+(add new UV entries where surfaced), write one lore entry
+`lore/<yyyymmdd>-research-team-<slug>.md`. No `proof_of_rh.tex` edits —
+promotion is a separate deliberate step after review.
 
-Before any collation or commit, verify every spawned teammate deposited
-a report:
-
-```sh
-for dir in tasks/<ts>-attack-gap-<slug>/reports \
-           tasks/<ts>-attack-fund-<slug>/reports \
-           tasks/<ts>-verify-<slug>/reports; do
-    ls "$dir/" 2>&1
-done
-```
-
-Expected file count: 3 in `attack-gap/reports/`, 3 in
-`attack-fund/reports/`, 2 in `verify/reports/` (or whatever the actual
-roster size was). If any teammate's file is missing:
-
-1. `SendMessage` that teammate asking for the deposit.
-2. If no response within a reasonable window, record a note at
-   `tasks/<role-dir>/notes/_missing-deposit.md` listing teammate + role
-   + suspected cause.
-3. Do NOT proceed to findings.md edits or commits until every report is
-   either present or documented as missing. A silent missing report
-   is worse than an explicit absence.
-
-## Collation (coordinator)
-
-After self-deposit audit passes (or missing deposits are documented):
-
-1. Read every report from `tasks/<role-dir>/reports/*.md`.
-2. Cross-check handbacks against the paper source they cite (open the
-   `rem:wip-*` label or line range before trusting the claim).
-3. Draft a **findings delta**:
-   - New `Negative` entries from ruled-out routes (with `Do-not-retry:`).
-   - New `Goodies` from reusable artifacts with exact `Location:`.
-   - New `Open gaps` discovered.
-4. Apply the delta via the `research-capture` skill (one call per entry)
-   or by direct edit to `paper/findings.md`.
-5. Update `paper/unverified.tex` (refine "Needed for promotion" fields,
-   add new UV-NNN entries for newly surfaced claims).
-6. Write a single lore entry: `lore/<yyyymmdd>-research-team-<slug>.md`
-   summarizing the cycle outcome, which roles moved proof state, and
-   which follow-ups are queued.
-7. **Do not edit `paper/proof_of_rh.tex`** from this skill. Promotion is
-   a separate deliberate coordinator step after review.
-
-## Shutdown
-
-`SendMessage` each teammate `{type:"shutdown_request"}`, then
-`TeamDelete`. Commit the task dir contents + `findings.md` /
-`unverified.tex` edits + lore entry in logical commits. Commit bodies
-must name all three task dirs.
+Shut down teammates, `TeamDelete`, commit with all three task dirs named
+in the body.
