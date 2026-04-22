@@ -20,7 +20,7 @@ edits canonical files. Delegates are read-only by default (see §3).
 | Path | Role |
 |---|---|
 | `paper/proof_of_rh.tex` | Canonical draft. Coordinator-only edits. |
-| `paper/unverified.tex` | Quarantine ledger (UV-NNN entries) for unpromoted claims. Bidirectional links to `rem:wip-*` labels in the main paper. |
+| `paper/unverified.tex` | Quarantine ledger (UV-NNN entries — "UV" = "unverified") for unpromoted claims. Bidirectional links to `rem:wip-*` labels in the main paper. |
 | `paper/findings.md` | Active shared knowledge base (Structural / Negative / Goodies / Open-gaps). ≤200 lines. Pasted in full into every delegation prompt. |
 | `lore/` | Workflow plans, cross-session syntheses, design decisions. Permanent session artifacts. |
 | `tasks/yyyymmdd-hhmmss-<type>-<slug>/` | Per-dispatch work bundle where `<type>` ∈ `attack-gap \| attack-fund \| audit \| verify \| other`. Chat backup, agent reports, scripts, notes. See §5. |
