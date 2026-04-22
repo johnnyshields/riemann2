@@ -328,6 +328,25 @@ defect — adversarial reviewers must flag it.
 - Do not skip hooks (`--no-verify`), do not amend without explicit
   instruction, do not force-push.
 
+### 11a. Compile-check before committing paper edits
+
+Before any commit that modifies `paper/proof_of_rh.tex`, the coordinator
+must run a compile-check:
+
+```sh
+cd paper && pdflatex -interaction=nonstopmode -draftmode proof_of_rh.tex \
+    2>&1 | grep -E '^(!|Undefined|Error|Warning:.*undefined|Warning:.*multiply)' \
+    | head -50
+```
+
+If the grep returns any lines, the edit introduced a defect — fix before
+committing. `-draftmode` skips the PDF for speed; two passes are only
+needed when you explicitly need cross-references resolved.
+
+This catches LaTeX syntax errors, undefined `\ref{}` / `\cite{}`, and
+multiply-defined labels — the failure modes that won't surface until
+`paper-harden` otherwise. Five-second habit, big save.
+
 ## 12. LaTeX conventions
 
 - LaTeX-native math delimiters EVERYWHERE: `\(...\)` inline and
