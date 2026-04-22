@@ -45,20 +45,29 @@ Use `TeamCreate` with `team_name: "research-team-<ts>"`, then spawn 8
 named teammates. Each teammate's spawn prompt MUST contain:
 
 - The full contents of `paper/findings.md` (pasted verbatim).
-- The full contents of `paper/unverified.tex` (or the relevant
-  UV-NNN entries when scope is narrow).
 - The **7-field report schema** from `CLAUDE.md` §8.
 - The **self-deposit checklist**: write the final report to
   `tasks/<role-dir>/reports/<teammate-name>.md`; scripts to
   `tasks/<role-dir>/scripts/`; do not write elsewhere.
+- The **writing-discipline reminder** from `CLAUDE.md` §3a: state
+  findings directly; no overclaim; no hedge; honest scope disclaimers
+  welcome.
 - Explicit **non-goals** for this teammate (what NOT to pursue).
 - The teammate's specific assignment:
   - Gap-closers: target label/UV-NNN, routes A/B/C, fallback to
-    minimal finite reduction.
+    minimal finite reduction. **Per `CLAUDE.md` §7 exception**, paste
+    the *specific* UV-NNN entry the closer is attacking — but no other
+    UV entries. Do not share the full ledger.
   - Explorers: topic scope, reusable-artifact mandate (observations +
-    candidate goodies + candidate negative findings).
+    candidate goodies + candidate negative findings). **No
+    `unverified.tex` content at all** — explorers work against the
+    verified state only.
   - Verifiers: read the 6 research reports once they land; flag
     circularity / missing hypotheses / overclaims / stale citations.
+    The adversarial verifier may be shown specific UV entries that
+    directly correspond to a reviewed report's claim; the source
+    auditor may be shown UV entries whose `rem:wip-*` labels appear
+    in the audited sections.
 
 Teammate names (examples):
 `gap-closer-uv002`, `gap-closer-mixed4pt`, `gap-closer-uv005`,

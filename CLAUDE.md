@@ -50,6 +50,31 @@ first promotion/rejection; not authoritative (git log is).
   use the equivalent named-teammate primitive. Communicate via
   `SendMessage`. Tear down with `TeamDelete` after graceful shutdown.
 
+## 3a. Coordinator writing discipline
+
+When the coordinator edits `paper/proof_of_rh.tex`, apply a
+**quasi-referee** standard to the coordinator's own text. Not a hardass
+— just the same caution a good referee would apply:
+
+- State facts directly. No AI tells ("it is worth noting," "we
+  leverage / utilize / employ," "to the best of our knowledge,"
+  "interestingly," "remarkable").
+- Do not overclaim. If a result is only computationally verified, say
+  so. If a theorem holds "for tested configurations," do not write
+  "for all." If a bound is effective, say so; if it isn't, do not
+  imply it.
+- Do not hedge for tone. Unnecessary qualifiers muddy the proof state.
+- Scope disclaimers are welcome — they are honest, not timid. "This
+  closes the pair-like branch; the finite-core branch remains open"
+  beats "this closes the pair-like branch (modulo some subtleties)."
+- When in doubt, quarantine (UV entry) rather than promote.
+
+Share this discipline with every delegated agent as part of their
+briefing. The briefing should remind them: state findings directly, no
+overclaim, no hedge, honest scope disclaimers welcome. This applies
+uniformly to gap-closers, explorers, verifiers, auditors, and
+synthesis analysts.
+
 ## 4. 3+3+2 roster principle
 
 Default shape for a full research-cycle dispatch is ~8 agents, balanced:
@@ -136,13 +161,36 @@ fully brief-able. Git log is the audit trail.
 Every delegation prompt MUST include:
 
 1. Full `paper/findings.md` (pasted verbatim).
-2. The relevant slice of `paper/unverified.tex` (full file by default; a
-   narrower subset only when `$ARGUMENTS` is narrow).
-3. The 7-field agent report schema (§8).
-4. Explicit non-goals for this teammate.
-5. The task dir path (from §5) and the self-deposit checklist (§8).
+2. The 7-field agent report schema (§8).
+3. Explicit non-goals for this teammate.
+4. The task dir path (from §5) and the self-deposit checklist (§8).
 
-A skill that dispatches without these is broken. Fix the skill.
+**`paper/unverified.tex` is NOT included in the default briefing.**
+Sharing tentative claims broadly spoils, poisons, or distracts
+independent agents — exploration and audit should happen against the
+*verified* state of the proof, not the hopeful state. Wait until
+verification is complete before circulating a claim.
+
+**Exceptions** (narrow, named, and logged):
+
+- A gap-closer attacking a specific UV-NNN entry receives that one
+  entry verbatim.
+- An adversarial verifier reviewing a specific claim (either a UV
+  entry or prior teammate output) receives exactly what they're
+  verifying.
+- A source auditor whose assigned subsection contains a `rem:wip-*`
+  label tied to a UV entry receives that entry.
+- Phase-1 paper fixers whose assigned issues touch a UV entry receive
+  those entries.
+
+In every exception, share only the individual UV entries involved —
+never the full ledger. Generic explorers, content auditors, formatters,
+voice reviewers, literature searchers, and "under-the-nose" analysts
+receive **findings.md only**.
+
+A skill that dispatches without the required fields, or that
+over-shares `unverified.tex` against this rule, is broken. Fix the
+skill.
 
 ## 8. Agent report schema + self-deposit
 
@@ -174,6 +222,27 @@ these are honest signals, not failures.
 
 Any claim that would change proof state requires at least one independent
 adversarial checker before promotion. No exceptions.
+
+### 9a. Broadcast-correction duty
+
+When the coordinator discovers that something already in
+`paper/proof_of_rh.tex` is false, imprecise, or over-claimed, it is an
+IMMEDIATE coordinator responsibility to:
+
+1. `SendMessage` every active teammate with a brief correction notice
+   so they stop working under the flawed assumption. Broadcast across
+   all active teams (`to: "*"` where available).
+2. Demote the offending claim per §6: edit the paper to remove or weaken
+   and reinstate a UV entry in `unverified.tex` in the same commit.
+3. If the correction produces a reusable negative lesson, call
+   `research-capture negative` in the same commit with `Do-not-retry:`
+   describing the specific flawed move.
+4. In the commit body, use `correction:` or `demote:` as the subject
+   prefix so the audit trail is obvious. Cite any active task dirs.
+
+The cost of a delayed correction — teammates running hours on a false
+premise and writing it into new findings — is much higher than the cost
+of a brief interruption. Broadcast first, explain later.
 
 ## 10. Provenance is non-negotiable, everywhere
 

@@ -32,14 +32,20 @@ per subsection, in parallel. With `--adversarial`, also spawn
 
 Each auditor's briefing MUST include:
 - Full `paper/findings.md`.
-- Relevant `paper/unverified.tex` entries (default: the full file).
 - The exact subsection text from `paper/proof_of_rh.tex` (read and paste
   or paste a path + line range).
+- **UV entries only under `CLAUDE.md` §7 exceptions**: include a UV-NNN
+  verbatim ONLY when the audited subsection contains its matching
+  `rem:wip-*` label (source-auditor exception). Otherwise, do not share
+  `unverified.tex` content — spoiler risk per §7.
 - The **fixed grading framework** (per claim in the subsection):
   1. `proved as written`,
   2. `conditional but honestly stated`,
   3. `still a real gap`.
 - The **7-field report schema** (`CLAUDE.md` §8).
+- The **writing-discipline reminder** (`CLAUDE.md` §3a): state
+  findings directly; no overclaim; no hedge; honest scope disclaimers
+  welcome.
 - The **self-deposit checklist**.
 - Explicit non-goals from `$ARGUMENTS` (or the default: "audit only, do
   not propose new lemmas or restructure the subsection").

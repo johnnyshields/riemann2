@@ -1,88 +1,95 @@
-# Fix Paper
+# Paper Referee
 
-Two-phase process to fix proof gaps and get referee review on a paper draft.
+Two-phase review loop on the canonical paper: Phase 1 fixers edit the paper
+in response to known issues; Phase 2 fresh referees re-review. See
+`CLAUDE.md` §3, §7 (briefing rule), §5 (task dirs). Phase 1 fixers are an
+explicit edit-capable exception to the read-only-delegate default.
 
 ## Arguments
 
-The user's arguments are: $ARGUMENTS
+`$ARGUMENTS`:
+- **empty** — fix `paper/proof_of_rh.tex` using the latest referee
+  feedback found in `lore/` (search for recent `referee` entries).
+- **file path** — fix that file instead.
+- **`--no-referee`** — fix only, skip Phase 2.
+- **`--referee-only`** — skip Phase 1 fixes, just run referees.
+- **specific issues** (e.g. `epsilon exponent, label drift`) — fix only
+  those issues.
+- Combinations work.
 
-Parse the arguments as follows:
-- If empty: fix `paper/paper9-petz-rh.tex` using the latest referee feedback in lore
-- If a file path (e.g., `paper/paper1-nine-faces.tex`): fix that paper instead
-- If `--no-referee`: fix only, skip Phase 2 referee review
-- If `--referee-only`: skip Phase 1 fixes, just run referees on current state
-- If specific issues listed (e.g., `epsilon exponent, GORZ remark, Paulsen citations`): fix only those issues
-- Combinations work: `paper/paper3-grand-unification.tex epsilon exponent --no-referee`
+## Mandatory preamble
 
-## Context
+1. Read the briefing packet in full:
+   - `paper/findings.md`
+   - `paper/unverified.tex`
+   - Most recent `lore/` referee report(s)
+   - The target paper (default `paper/proof_of_rh.tex`)
+2. Resolve `<slug>` from the issues being addressed (e.g.
+   `referee-round-3`).
+3. Create the task dirs:
+   - `tasks/<ts>-attack-gap-referee-<slug>/` (Phase 1 fixers — they will
+     edit the paper)
+   - `tasks/<ts>-verify-referee-<slug>/` (Phase 2 fresh referees)
+   Subdirs `reports/`, `scripts/`, `notes/`. Announce paths upfront.
 
-Read ALL lore files in `/mnt/c/workspace/riemann/lore/`, especially:
-- `20260319-referee-reports-and-next-fixes.md` — latest referee feedback and fix list
-- `20260319-paper9-referee-readiness.md` — known issues
-- `20260319-paper9-honest-reassessment.md` — honest assessment of claims
+## Phase 1: Fix Team
 
-## Phase 1: Fix Team (3 agents)
+`TeamCreate team_name: "paper-referee-fix-<ts>"`, spawn up to 3 named
+fixers whose expertise matches the current issues. Examples of named
+teammates (pick per content):
+`fixer-local-geometry`, `fixer-finite-s-algebra`, `fixer-analysis`,
+`fixer-projective-rigidity`, `fixer-endgame`.
 
-Create a team called `paper-fix` and spawn three agents:
+Each fixer's briefing MUST include:
+- Full `paper/findings.md`.
+- Per `CLAUDE.md` §7 exception: the specific UV-NNN entries that their
+  assigned issues touch, pasted verbatim. Fixers editing the paper
+  need to know which nearby claims are already quarantined so they
+  don't solidify a conditional claim by accident. Do not share UV
+  entries unrelated to their issues.
+- The specific referee issues assigned to them.
+- The 7-field report schema.
+- The writing-discipline reminder (`CLAUDE.md` §3a): state facts
+  directly, no overclaim, no hedge, honest scope disclaimers welcome.
+- The self-deposit checklist (`tasks/<fix-dir>/reports/<teammate>.md`).
+- **Edit-capable exception**: fixers may edit `paper/proof_of_rh.tex`
+  directly for the assigned issues. They may not edit
+  `paper/unverified.tex` or `paper/findings.md` — surface new findings in
+  their report for coordinator review.
 
-### 1. Operator Algebraist (`operator-algebraist`)
-Expert in von Neumann algebras, CP maps, Schur multipliers, Bost-Connes system, Takesaki duality.
-Handles: proof rigor for CP semigroup, trace positivity, spectral projection, Petz recovery arguments.
-Reads the referee reports and fixes all operator algebra issues.
+Non-goals: do not rewrite beyond the assigned issues; do not introduce
+new lemmas without a UV entry.
 
-### 2. Analyst (`analyst`)
-Expert in Riemann zeta, Mellin transforms, de Bruijn-Newman constant, explicit formula, zero-counting.
-Handles: Mellin transform calculations, forward/backward heat flow, zero-free region bounds, analytical estimates.
-Reads the referee reports and fixes all analytic number theory issues.
+When Phase 1 completes, `SendMessage` each fixer `{type:"shutdown_request"}`
+and `TeamDelete` the fix team.
 
-### 3. QI Expert (`qi-expert`)
-Expert in Petz recovery, quantum Markov chains, SDP methods, entanglement, Fawzi-Renner.
-Handles: SDP hierarchy computation, quantum Markov section, approximate recovery bounds, QI correctness.
-Reads the referee reports and fixes all quantum information issues.
+## Phase 2: Referee Team (skip if `--no-referee`)
 
-### Fix team instructions
+`TeamCreate team_name: "paper-referee-review-<ts>"`, spawn 2 fresh
+referees:
+- `referee-math` — reviews as for a pure-math journal; checks proofs,
+  hypotheses, circularity, citations. Verdict: accept / minor revision
+  / major revision / reject.
+- `referee-general` — reviews for clarity, accessibility, narrative
+  flow; flags overclaims and unexplained jargon. Same verdict set.
 
-Each agent should:
-1. Read the paper and ALL lore files (especially referee reports)
-2. Claim their tasks from the task list
-3. Edit the paper directly using the Edit tool
-4. Mark tasks complete when done
-5. Send a summary to team-lead
-
-Create tasks from the referee reports and/or user arguments. Common issues:
-- Mathematical errors (wrong exponents, incorrect inequalities)
-- Proof gaps (missing steps, unjustified claims)
-- Incorrect citations
-- Missing definitions
-- Claims that need to be weakened or made conditional
-- Missing numerical computations
-- Notation inconsistencies
-
-### Critical: Forward/backward heat flow
-
-The CP semigroup S_t is FORWARD heat (smoothing, t > 0). De Bruijn's theorem applies to BACKWARD heat (dBN Ξ_λ, λ > 0). The correspondence is λ = -t/2. Any proof that cites de Bruijn for the forward-evolved ζ_t is WRONG. The Petz recovery map bridges forward to backward.
-
-## Phase 2: Referee Team (2 agents)
-
-After ALL fix tasks are complete, shut down the fix team and spawn two referees:
-
-### 4. Pure Math Referee (`referee-math`)
-Reviews as a referee for Communications in Mathematical Physics. Checks every proof, identifies gaps, circular reasoning, incorrect citations. Writes a formal referee report with verdict: accept, minor revision, major revision, reject.
-
-### 5. Physics Referee (`referee-physics`)
-Reviews as a referee for Letters in Mathematical Physics. Checks physical meaning, QI correctness, accessibility to both communities, computational actionability. Writes a formal referee report with verdict.
-
-### Referee instructions
-
-Each referee should:
-1. Read the FULL paper after fixes
-2. Read the previous referee reports in lore (to check if issues were addressed)
-3. Write a complete referee report
-4. Send the report to team-lead
-5. Be ruthless but fair
+Referee briefing MUST include:
+- Full `paper/findings.md`.
+- Full `paper/unverified.tex` (referees are adversarial verifiers per
+  `CLAUDE.md` §7 exception — they need to know what's conditional
+  versus what's promoted).
+- The 7-field report schema.
+- The writing-discipline reminder (`CLAUDE.md` §3a).
+- The self-deposit checklist (`tasks/<verify-dir>/reports/<referee>.md`).
+- Explicit non-goals: referees do not edit the paper; they return a
+  formal report with verdict and an issues list.
+- Read ALL prior referee reports in `lore/` and check whether each old
+  issue is now addressed.
 
 ## After completion
 
-1. Commit the fixed paper
-2. Write referee reports to lore
-3. Summarize the verdicts to the user
+1. Commit the paper edits from Phase 1 (stage `paper/proof_of_rh.tex`
+   by name). Cite the attack-gap task dir in the body.
+2. Commit referee reports (they sit in the verify task dir). Cite the
+   verify task dir in the body.
+3. Summarize verdicts to the user.

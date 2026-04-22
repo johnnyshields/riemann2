@@ -1,35 +1,50 @@
-# Cut from Paper
+# Paper Cut
 
-Move a passage from the paper to the cut-for-time document, tracking provenance.
+Move a passage from `paper/proof_of_rh.tex` to `paper/cut-for-time.md`
+with provenance.
 
 ## Steps
 
-1. **Identify the passage to cut.** The user will specify what to cut (by description, line numbers, or label).
+1. **Identify the passage.** The user specifies by description, line
+   numbers, or `\label`.
 
-2. **Read the passage** in paper/paper15-c.tex. Note the exact content and surrounding context (what comes before and after).
+2. **Read the passage** in `paper/proof_of_rh.tex`. Note exact content
+   and surrounding context.
 
-3. **Remove the passage** from paper/paper15-c.tex. Ensure the surrounding text still flows naturally — adjust transitions if needed.
+3. **Check references.** Before cutting, grep `\ref{...}` and
+   `\eqref{...}` for any `\label{...}` inside the passage. If references
+   exist, note them — either redirect or record as broken in the
+   provenance block.
 
-4. **Append to the cut-for-time document** at `paper/paper15-c-cut-for-time.md`. Use this format:
+4. **Remove the passage** from `paper/proof_of_rh.tex`. Ensure the
+   surrounding text flows; adjust transitions if needed.
 
-```markdown
----
+5. **Append to `paper/cut-for-time.md`** with this format:
 
-## From: [Section name] ([context: after/before what])
+   ```markdown
+   ---
 
-**Cut date:** [YYYY-MM-DD]
-**Original location:** paper/paper15-c.tex, [line range or description]
-**Reason:** [Brief reason for cutting]
+   ## From: [Section name] ([context: after/before what])
 
-\`\`\`latex
-[exact LaTeX content that was cut]
-\`\`\`
-```
+   **Cut date:** [YYYY-MM-DD]
+   **Original location:** paper/proof_of_rh.tex, [line range or label]
+   **Reason:** [brief reason for cutting]
+   **Broken refs:** [list of `\ref{}` sites that now point nowhere, if any]
 
-5. **Commit** the paper edit and the cut-for-time update together with a descriptive message.
+   \`\`\`latex
+   [exact LaTeX content that was cut]
+   \`\`\`
+   ```
+
+6. **Commit** the paper edit and `cut-for-time.md` update together.
+   Stage by name. Subject: `cut: <one-line summary of what moved>`.
 
 ## Notes
 
-- Always preserve the exact LaTeX so it can be restored later by copy-paste.
-- If the cut passage contains `\label{}` or `\ref{}`, note any broken references in the reason field.
-- If the user provides a reason, use it. Otherwise infer from context (redundant, too detailed, process documentation, etc.).
+- Preserve LaTeX verbatim so the passage can be restored by copy-paste.
+- If the passage contains a `rem:wip-*` label tied to a UV-NNN entry in
+  `unverified.tex`, update that UV entry (either redirect its `Source in
+  paper:` line to the new home or mark the UV as `blocked` with
+  explanation). See `CLAUDE.md` §6.
+- If the user provides a reason, use it; otherwise infer (redundant, too
+  detailed, process documentation, etc.).

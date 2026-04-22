@@ -1,109 +1,101 @@
 # Trifecta: Deep Insights, Literature, and Hidden Connections
 
-Spawn three parallel research agents to analyze recent work from three complementary angles:
+Post-work synthesis across three complementary angles:
 
-1. **deep-insights** — Connect findings to each section of the paper (internal structural analysis)
-2. **lit-search** — Search the literature for connections to open problems (web search)
-3. **under-nose** — Find hidden connections to fundamental mathematics (bold/speculative)
+1. **deep-insights** — connect recent findings to each section of the
+   paper (internal structural analysis).
+2. **lit-search** — search external literature for connections to open
+   problems (web search).
+3. **under-nose** — find hidden connections to fundamental mathematics
+   (bold, speculative, honest about proven-vs-conjectured).
 
-The trifecta of "what does it mean for the paper", "what does the field know", and "what are we missing."
+Answers: "what does it mean for the paper", "what does the field know",
+and "what are we missing." See `CLAUDE.md` §5, §7, §8.
 
 ## Arguments
 
-The user's focus is: $ARGUMENTS
+`$ARGUMENTS`:
+- **empty** — analyze the most recent work (check git log + recent lore).
+- **topic phrase** — focus all three on that topic.
+- **lore file path** — analyze the findings in that specific lore file.
 
-Parse the arguments:
-- If empty: analyze the most recent work (check git log for recent commits, read recent lore files)
-- If a topic (e.g., `continuous II theorem`): focus all three agents on that specific topic
-- If a lore file path: analyze the findings in that specific lore file
-- Examples:
-  - `/trifecta` — analyze whatever was just done
-  - `/trifecta continuous II theorem` — focus on the continuous extension
-  - `/trifecta lore/20260321-proof-e-DEFINITIVE.md` — analyze Proof E findings
+## Mandatory preamble
 
-## Setup
+1. Read the briefing packet:
+   - `paper/findings.md` in full.
+   - `paper/unverified.tex` in full.
+   - `paper/proof_of_rh.tex` — section structure (grep `\\(sub\\)*section`)
+     plus any sections relevant to `$ARGUMENTS`.
+   - Recent `lore/` entries (last 3–5 by date).
+   - Recent `git log --oneline -n 20` for context on what's new.
+2. Produce a short **key-findings summary** (≤30 lines) that will be
+   pasted into all three teammate prompts.
+3. Create task dir `tasks/<ts>-other-trifecta-<slug>/` with `reports/`,
+   `scripts/`, `notes/`. Announce it.
 
-1. **Determine what to analyze**: Read recent git log, recent lore files, and/or the user's argument to identify:
-   - What was recently proved/discovered
-   - Which paper(s) are relevant (check `paper/` directory)
-   - What the key findings and structural facts are
+## Dispatch
 
-2. **Read the paper**: Identify the main paper (most recent `paper/*.tex` that isn't in `paper/old/`). Read it to understand sections, structure, and existing connections.
+`TeamCreate team_name: "trifecta-<slug>"`, spawn 3 named teammates in
+parallel: `analyst-deep-insights`, `analyst-lit-search`,
+`analyst-under-nose`. Each briefing MUST include:
+- Full `paper/findings.md` (pasted).
+- **NO `paper/unverified.tex` content.** Trifecta analysts are the
+  textbook spoiler-prone case per `CLAUDE.md` §7; they work against
+  the verified proof state only.
+- The key-findings summary from step 2.
+- The 7-field report schema.
+- The writing-discipline reminder (`CLAUDE.md` §3a): state findings
+  directly, no overclaim, no hedge, honest scope disclaimers welcome.
+- The self-deposit checklist: final report in
+  `tasks/<dir>/reports/<teammate>.md`; no standalone per-teammate
+  lore file (the coordinator will write one consolidated lore).
+- Explicit non-goals per role below.
 
-3. **Read recent lore**: Read the most recent lore files (by date) to understand the current state of the work.
-
-4. **Summarize the key findings** in a compact bullet list that will be shared with all three agents.
-
-## Agent Prompts
-
-**IMPORTANT**: Always use the **TeamCreate** tool first to create a team named `trifecta-{topic}` (e.g., `trifecta-continuous-ii`). Then spawn all three agents as teammates using the **Agent** tool with `team_name` set to the team name. This enables task tracking and inter-agent messaging.
-
-Spawn all three agents **in parallel** using the Agent tool. Each agent MUST:
-- Read the full paper
-- Read the relevant lore files
-- Produce a structured analysis
-- **Write their own lore file** to the current branch (e.g., `lore/YYYYMMDD-trifecta-{agent}-{topic}.md`) and commit it
-- Send a summary of their findings to team-lead
-
-### Agent 1: deep-insights
-
-**Focus**: Internal structural analysis — connect recent findings to every section of the paper.
-
-For each section of the paper, ask:
+### analyst-deep-insights
+**Focus**: Internal structural analysis. For each section of the paper,
+ask:
 - What do the recent findings REVEAL about this section's content?
-- Are there hidden connections we missed?
-- What new "WHY" explanations emerge?
-- What new directions open up?
+- Hidden connections missed?
+- New "WHY" explanations?
+- New directions opening up?
+Look for: hidden beauty, structural insights, sign/magnitude dualities,
+algebraic vs. topological distinctions.
+Non-goals: do not propose new theorems; observations only.
 
-Look for: hidden beauty, structural insights, "the discrete proof was secretly continuous all along" type revelations, sign/magnitude dualities, algebraic vs. topological distinctions.
+### analyst-lit-search
+**Focus**: External literature connections — WebSearch-based.
+For each connection: describe the problem, how our result connects,
+whether it provides progress, cite key references (with URLs or DOIs).
+Broad buckets to probe (not exhaustive): nearby analytic number theory,
+recent zeta / L-function advances, any active program that touches the
+specific findings in the briefing.
+Non-goals: do not propose changes to the paper; return a connections
+report.
 
-### Agent 2: lit-search
+### analyst-under-nose
+**Focus**: Hidden / bold connections to fundamental mathematics.
+**Critical constraint**: before proposing any connection, check
+`findings.md` §Negative. If a proposal is materially similar to an
+entry listed there (especially with a `Do-not-retry:` line), do NOT
+propose it — flag the Negative match in your report so the coordinator
+can confirm the veto is current.
+Bold / speculative welcome, but label `proved` vs `conjectured`
+honestly.
 
-**Focus**: External literature connections — search the web for connections to open problems.
+## After teammates report
 
-Search for connections to active research programs:
-- KLS conjecture and log-concave geometry
-- Spectral/entropic independence (Anari, Gharan, Oveis)
-- Approximate tensorization of entropy
-- Strong data processing inequalities (Polyanskiy, Wu)
-- Stochastic localization (Eldan, Chen, Klartag)
-- Mixing times for Gibbs samplers on structured measures
-- Partial information decomposition
-- Entropy power inequalities for log-concave distributions
-- Optimal transport and displacement convexity
-- Any other relevant open problems discovered during search
-
-For each connection: explain the problem, how our result connects, whether it provides progress, and cite key references.
-
-### Agent 3: under-nose
-
-**Focus**: Hidden connections to fundamental mathematics — bold, speculative, "under our nose" links.
-
-Look for connections to:
-- The Riemann Hypothesis (via Bost-Connes, Jensen-Polya, zeta zeros)
-- Random matrix theory (spectral universality, eigenvalue statistics)
-- Algebraic geometry / Hodge theory (Lorentzian polynomials, matroid LC)
-- Representation theory (orthogonal polynomials, Bochner classification)
-- Quantum information (quantum Gibbs samplers, strong subadditivity)
-- Convex geometry (Brunn-Minkowski lineage, displacement convexity)
-- Phase transitions and universality (rigidity, topological protection)
-- Free probability (non-commutative analogs)
-- Any other fundamental areas the findings might touch
-
-Be bold. Be speculative where warranted but honest about what's proven vs. conjectured. The goal is to find connections that could elevate the paper or open entirely new research directions.
-
-## After Agents Report
-
-1. **Consolidate**: Write a single comprehensive lore file `lore/YYYYMMDD-trifecta-{topic}.md` combining all three agents' findings, with:
-   - Top-level summary of deepest findings
-   - Section-by-section connections (from deep-insights)
-   - Literature connections ranked by strength (from lit-search)
-   - "Under our nose" connections ranked by actionability (from under-nose)
-   - Suggested paper additions (remarks, open questions, references)
-   - Key new references to add
-
-2. **Cross-check agent lores**: Read each agent's **individual lore file** (they committed their own) and compare against the consolidated lore. Add any findings that were missed in the consolidation. This is critical — agents often include details in their lore files that they didn't include in their team-lead message.
-
-3. **Commit**: Commit the consolidated lore file with a descriptive message listing the key findings.
-
-4. **Report** to the user with the highlights.
+1. Read all 3 reports from `tasks/<dir>/reports/`.
+2. Write ONE consolidated lore file at
+   `lore/<yyyymmdd>-trifecta-<slug>.md` with sections:
+   - Top-level summary of deepest findings.
+   - Section-by-section (from deep-insights).
+   - Literature connections ranked by strength (from lit-search).
+   - "Under our nose" connections ranked by actionability (from
+     under-nose), with Negative-overlap flags resolved.
+   - Suggested paper additions (remarks, open questions, references).
+   - Key new references to add.
+3. Emit `findings.md` deltas via `research-capture` for any reusable
+   new goodies / structural observations / recurring gaps that surfaced.
+4. `SendMessage` each teammate `{type:"shutdown_request"}`, `TeamDelete`.
+5. Commit the lore file + task dir + any `findings.md` updates. Cite
+   the task dir in the body. Stage by name.
