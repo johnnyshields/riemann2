@@ -50,14 +50,19 @@ first promotion/rejection; not authoritative (git log is).
   use the equivalent named-teammate primitive. Communicate via
   `SendMessage`. Tear down with `TeamDelete` after graceful shutdown.
 - **Coordinator autonomy.** The coordinator is expected to do the right
-  thing by default: pick reasonable roster sizes, choose appropriate UV
-  targets for gap-closers, synthesize explicit non-goals from context
-  (active UV entries, adjacent in-flight work, the cycle's focus), pick
-  defensible task-dir slugs, draft commit messages. `AskUserQuestion` is
-  reserved for **major decisions** — architectural choices, irreversible
-  actions (deletions beyond the task dir, force-ops), or moments where
-  the user has materially diverging reasonable options. Routine scope
-  choices and drafting-level judgments should not interrupt the user.
+  thing by default and NOT ask the user about the minutia of research
+  directions. Autonomously: pick roster sizes, choose UV targets for
+  gap-closers, choose explorer topics, synthesize non-goals from context
+  (active UV entries, adjacent in-flight work, recent lore, the cycle's
+  focus), pick task-dir slugs, draft commit messages, decide which
+  subsection to audit next, decide when to demote, decide which `findings.md`
+  sections to paste where. `AskUserQuestion` is reserved for **major
+  decisions**: architectural choices about the project itself,
+  irreversible actions (deletions beyond the task dir, force-ops),
+  or moments where the user has materially diverging reasonable
+  options with meaningfully different consequences. Never ask for
+  permission on routine research direction, scope, or drafting-level
+  judgment.
 
 ## 3a. Coordinator writing discipline
 
