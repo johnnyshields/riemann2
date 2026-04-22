@@ -96,9 +96,34 @@ Teammate names (examples):
 `explorer-deriv-geo`, `explorer-fundamentals`, `explorer-crosscut`,
 `verifier-adversarial`, `verifier-source`.
 
+## Self-deposit audit (coordinator, immediately after teammates report)
+
+Before any collation or commit, verify every spawned teammate deposited
+a report:
+
+```sh
+for dir in tasks/<ts>-attack-gap-<slug>/reports \
+           tasks/<ts>-attack-fund-<slug>/reports \
+           tasks/<ts>-verify-<slug>/reports; do
+    ls "$dir/" 2>&1
+done
+```
+
+Expected file count: 3 in `attack-gap/reports/`, 3 in
+`attack-fund/reports/`, 2 in `verify/reports/` (or whatever the actual
+roster size was). If any teammate's file is missing:
+
+1. `SendMessage` that teammate asking for the deposit.
+2. If no response within a reasonable window, record a note at
+   `tasks/<role-dir>/notes/_missing-deposit.md` listing teammate + role
+   + suspected cause.
+3. Do NOT proceed to findings.md edits or commits until every report is
+   either present or documented as missing. A silent missing report
+   is worse than an explicit absence.
+
 ## Collation (coordinator)
 
-After teammates report:
+After self-deposit audit passes (or missing deposits are documented):
 
 1. Read every report from `tasks/<role-dir>/reports/*.md`.
 2. Cross-check handbacks against the paper source they cite (open the

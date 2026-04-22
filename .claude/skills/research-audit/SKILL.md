@@ -67,6 +67,22 @@ Adversary checkers read the corresponding auditor's report once landed
 and return a 7-field report whose `Status` is `rejected` or `blocked` if
 they can break the audit's verdicts, otherwise `verified`.
 
+## Self-deposit audit (coordinator, immediately after teammates report)
+
+Before collation or commit, verify every auditor (and adversary, if
+`--adversarial`) deposited a report:
+
+```sh
+ls tasks/<ts>-audit-<slug>/reports/
+```
+
+Expected: one file per spawned teammate. If any are missing:
+
+1. `SendMessage` the teammate asking for the deposit.
+2. If unanswered, record a note at `tasks/<dir>/notes/_missing-deposit.md`.
+3. Do NOT proceed to commit until every report is present or the
+   absence is documented — silent misses are worse than explicit gaps.
+
 ## Collation
 
 1. Read every report from `tasks/<dir>/reports/*.md`.
