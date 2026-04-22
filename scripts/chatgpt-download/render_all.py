@@ -1,0 +1,149 @@
+"""Convert every saved .html in html/ into a markdown file under paper/chats/
+with the naming convention `YYYYMMDD-HHMM-<slug>.md`.
+
+Also emits `paper/chats/_index.md` with chat-id ↔ filename mapping, and
+appends to `paper/chats/_convo_mapping.md` any existing `paper/convoNN.*`
+file whose first user message matches one of the downloaded chats.
+
+Usage:
+    python3 render_all.py \
+        [--html-dir html] \
+        [--list chats_to_fetch.json] \
+        [--out-dir ../../paper/chats] \
+        [--repo-root ../..]
+"""
+import argparse, json, os, re, sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+from parse_turbostream import extract_conversation  # type: ignore
+from render_md import render, slugify, fmt_ts  # type: ignore
+
+def iso_to_yyyymmdd_hhmm(iso_or_epoch):
+    if iso_or_epoch is None:
+        return '00000000-0000'
+    if isinstance(iso_or_epoch, (int, float)):
+        dt = datetime.fromtimestamp(float(iso_or_epoch), tz=timezone.utc)
+    else:
+        s = str(iso_or_epoch).rstrip('Z')
+        try:
+            dt = datetime.fromisoformat(s)
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+        except Exception:
+            return '00000000-0000'
+    return dt.strftime('%Y%m%d-%H%M')
+
+def content_based_slug(conv, max_len=60):
+    """Prefer the conversation title; fall back to first user message."""
+    title = (conv.get('title') or '').strip()
+    if title and title.lower() != 'new chat':
+        return slugify(title, max_len)
+    mp = conv.get('mapping') or {}
+    # Walk in order and find first user text message
+    for nid, n in mp.items():
+        m = (n or {}).get('message') or {}
+        if ((m.get('author') or {}).get('role')) != 'user':
+            continue
+        parts = (m.get('content') or {}).get('parts') or []
+        for p in parts:
+            if isinstance(p, str) and p.strip():
+                return slugify(p, max_len)
+    return 'untitled'
+
+def first_user_message(conv):
+    mp = conv.get('mapping') or {}
+    for nid, n in mp.items():
+        m = (n or {}).get('message') or {}
+        if ((m.get('author') or {}).get('role')) != 'user':
+            continue
+        parts = (m.get('content') or {}).get('parts') or []
+        for p in parts:
+            if isinstance(p, str) and p.strip():
+                return p.strip()
+    return ''
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--html-dir', default=str(HERE / 'html'))
+    ap.add_argument('--list', default=str(HERE / 'chats_to_fetch.json'))
+    ap.add_argument('--out-dir', default=str(HERE.parent.parent / 'paper' / 'chats'))
+    ap.add_argument('--repo-root', default=str(HERE.parent.parent))
+    args = ap.parse_args()
+
+    list_path = Path(args.list)
+    html_dir = Path(args.html_dir)
+    out_dir = Path(args.out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    chats = json.loads(list_path.read_text()) if list_path.exists() else []
+    index_rows = []  # for _index.md
+    first_user_by_id = {}  # id -> first user text (for convo## matching)
+
+    for c in chats:
+        cid = c['id']
+        html_path = html_dir / f'{cid}.html'
+        if not html_path.exists():
+            print(f'MISSING: {html_path}', file=sys.stderr)
+            continue
+        try:
+            conv = extract_conversation(html_path.read_text(encoding='utf-8'))
+        except Exception as e:
+            print(f'PARSE FAILED {cid}: {e}', file=sys.stderr)
+            continue
+        stamp = iso_to_yyyymmdd_hhmm(c.get('create_time') or conv.get('create_time'))
+        slug = content_based_slug(conv)
+        out_path = out_dir / f'{stamp}-{slug}.md'
+        md = render(conv, source_url=c.get('url') or f'https://chatgpt.com/c/{cid}')
+        out_path.write_text(md, encoding='utf-8')
+        print(f'wrote {out_path}')
+        index_rows.append((out_path.name, cid, conv.get('title') or ''))
+        first_user_by_id[cid] = first_user_message(conv)
+
+    # Write _index.md
+    idx_path = out_dir / '_index.md'
+    lines = ['# Chat index', '',
+             f'_{len(index_rows)} chats rendered at {datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")}_',
+             '', '| File | Chat ID | Title |', '|---|---|---|']
+    for fname, cid, title in sorted(index_rows):
+        safe_title = (title or '').replace('|', '\\|')
+        lines.append(f'| [{fname}]({fname}) | `{cid}` | {safe_title} |')
+    idx_path.write_text('\n'.join(lines) + '\n', encoding='utf-8')
+    print(f'wrote {idx_path}')
+
+    # Build convo## → new-file mapping by matching first-user-message bytes
+    repo_root = Path(args.repo_root)
+    paper = repo_root / 'paper'
+    convo_files = sorted([p for p in paper.glob('convo*.*') if p.is_file()])
+    mapping_lines = ['# convo## ↔ downloaded chat mapping', '',
+                     '_Generated by render_all.py — check before deleting `paper/convo*.{txt,md}`._',
+                     '',
+                     '| convo file | matched new file | chat id | confidence |', '|---|---|---|---|']
+    for cf in convo_files:
+        try:
+            text = cf.read_text(encoding='utf-8', errors='replace')
+        except Exception:
+            continue
+        best = (None, 0)  # (cid, score)
+        for cid, fu in first_user_by_id.items():
+            if not fu:
+                continue
+            # Score: longest contiguous substring of fu (first 200 chars) that appears in text
+            needle = fu[:200]
+            if needle and needle in text:
+                score = len(needle)
+                if score > best[1]:
+                    best = (cid, score)
+        if best[0]:
+            # Find the new file for this cid
+            new_file = next((fn for fn, cid, _ in index_rows if cid == best[0]), '?')
+            mapping_lines.append(f'| {cf.name} | {new_file} | `{best[0]}` | exact ({best[1]} ch) |')
+        else:
+            mapping_lines.append(f'| {cf.name} | _no match_ | — | — |')
+    (out_dir / '_convo_mapping.md').write_text('\n'.join(mapping_lines) + '\n', encoding='utf-8')
+    print(f'wrote {out_dir / "_convo_mapping.md"}')
+
+if __name__ == '__main__':
+    main()
