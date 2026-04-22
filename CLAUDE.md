@@ -324,7 +324,15 @@ defect — adversarial reviewers must flag it.
 - Commit messages: imperative-mood subject. On promote/demote/reject,
   cite UV-NNN in the subject and explain in the body. When a session
   worked inside a task dir, mention the dir in the body.
-- **Commit only**; never push unless the user asks.
+- **Auto-push every ~3 commits.** This project specifically wants the
+  coordinator to periodically commit AND push without asking. Cadence:
+  roughly one `git push` per 3 commits (drift to 2-4 is fine). At the
+  end of a session, push any trailing commits so the remote is current.
+  This reverses the usual "commit only, never push" default — it applies
+  ONLY to this project.
+- **Never** force-push (`--force`, `+refspec`), even under the
+  auto-push rule. If push is rejected as non-fast-forward, fetch and
+  investigate — do not clobber.
 - Do not skip hooks (`--no-verify`), do not amend without explicit
   instruction, do not force-push.
 
