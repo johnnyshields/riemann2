@@ -27,7 +27,6 @@ edits canonical files. Delegates are read-only by default (see §3).
 | `paper/chats/` | Historical ChatGPT session archives. Read-only reference; do not edit. |
 | `scripts/` and `scripts/wip/` | Computation code. |
 | `final-scripts/paper/` | Hardened verification scripts promoted from `scripts/wip/` with provenance. |
-| `.claude/skills/<name>/SKILL.md` | Active skills. Each skill is a directory with a `SKILL.md` carrying YAML frontmatter (`name`, `description`) plus body. Retired skills are deleted outright; git history is the archive. |
 
 Optional companion files may appear as grep indexes once first used:
 `paper/findings-in-paper.md`, `paper/unverified-rejected.md`. Lazy-create on
@@ -343,26 +342,3 @@ defect — adversarial reviewers must flag it.
 - `rem:wip-*` label convention marks in-paper WIP items that should have
   a matching UV-NNN in `unverified.tex`.
 
-## 13. Skill index
-
-| Skill | Purpose |
-|---|---|
-| `research-team` | Primary workhorse: dispatches 3+3+2 roster (gap-closers / explorers / verifiers) via `TeamCreate` into sibling `tasks/<dir>/`s. |
-| `research-audit` | N disjoint read-only audits on specified paper subsections; optional `--adversarial` pairs each with a checker. |
-| `research-capture` | Coordinator-only synchronous append to `paper/findings.md` (section ∈ structural / negative / goodie / gap). Commits. |
-| `trifecta` | 3-agent post-work synthesis (deep insights / literature / hidden connections). |
-| `paper-referee` | Referee-issue fix loop (Phase 1 fixers edit the paper; Phase 2 new referees). |
-| `paper-harden` | 4-agent read-only quality review (rigor / consistency / formatting / voice). |
-| `paper-biblio` | Alphabetize, de-dupe, verify the bibliography. |
-| `paper-dedupe` | Remove duplicated content while preserving meaning. |
-| `paper-cut` | Move a passage to `paper/cut-for-time.md` with provenance. |
-| `script-promote` | Harden a `scripts/wip/` verification script into `final-scripts/paper/` with a lore note. |
-
-Retired skills are deleted; `git log -- .claude/skills/` recovers them if ever needed.
-
-## 14. When not to use a skill
-
-Small / obvious edits, single-file tweaks, and specific user-directed
-commands should go directly — not through a multi-agent skill. Skills
-are for multi-agent dispatch or repeatable multi-step procedures where
-their structure pays off.
