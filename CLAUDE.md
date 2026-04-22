@@ -23,7 +23,7 @@ edits canonical files. Delegates are read-only by default (see §3).
 | `paper/unverified.tex` | Quarantine ledger (UV-NNN entries) for unpromoted claims. Bidirectional links to `rem:wip-*` labels in the main paper. |
 | `paper/findings.md` | Active shared knowledge base (Structural / Negative / Goodies / Open-gaps). ≤200 lines. Pasted in full into every delegation prompt. |
 | `lore/` | Workflow plans, cross-session syntheses, design decisions. Permanent session artifacts. |
-| `tasks/yyyymmdd-hhmmss-<type>-<slug>/` | Per-dispatch work bundle: chat backup, agent reports, scripts, notes. See §5. |
+| `tasks/yyyymmdd-hhmmss-<type>-<slug>/` | Per-dispatch work bundle where `<type>` ∈ `attack-gap \| attack-fund \| audit \| verify \| other`. Chat backup, agent reports, scripts, notes. See §5. |
 | `paper/chats/` | Historical ChatGPT session archives. Read-only reference; do not edit. |
 | `scripts/` and `scripts/wip/` | Computation code. |
 | `final-scripts/paper/` | Hardened verification scripts promoted from `scripts/wip/` with provenance. |
@@ -72,24 +72,35 @@ all-explore cycles. Exploration exists to direct gap attack.
 ## 5. Per-task directory convention
 
 Every multi-agent dispatch creates `tasks/yyyymmdd-hhmmss-<type>-<slug>/`
-at repo root, where `<type>` ∈ `cycle | attack | audit | explore | verify
-| other`. The coordinator announces the task dir path upfront and includes
-it in every teammate's briefing.
+at repo root. The coordinator announces the task dir path upfront and
+includes it in every teammate's briefing. Types:
 
-Minimum contents:
+- `attack-gap` — focused closure on a specific UV-NNN or `rem:wip-*` item.
+- `attack-fund` — attacking fundamentals / derivative geometry / normal
+  forms / cross-cutting structure that will redirect gap attacks.
+- `audit` — read-only inspection of a paper subsection or a claim batch.
+- `verify` — adversarial or source-auditing pass over prior work.
+- `other` — catch-all (e.g., tooling, maintenance, reorganization).
+
+A full `research-team` cycle (the 3+3+2 roster; §4) typically creates
+**three sibling task dirs with the same `yyyymmdd-hhmmss-` prefix**: one
+`attack-gap-<slug>/` for the 3 gap-closers, one `attack-fund-<slug>/` for
+the 3 explorers, and one `verify-<slug>/` for the 2 verifiers. The shared
+timestamp ties them together without a nesting layer.
+
+Minimum contents per task dir:
 
 ```
-tasks/20260423-020000-cycle-mixed-4-point/
+tasks/20260423-020000-attack-gap-mixed-4-point/
 ├── chat.md                          # periodic backup of this session
 ├── reports/
-│   ├── gap-closer-mixed4pt.md       # 7-field report
-│   ├── explorer-deriv-geo.md
-│   └── ... (one per teammate)
+│   ├── gap-closer-mixed4pt.md       # 7-field report per teammate
+│   └── ...
 ├── scripts/                          # any .py / .sh produced
 └── notes/                            # optional per-teammate scratch
 ```
 
-Every commit made during the session names the task dir in its commit
+Every commit made during the session names the task dir(s) in its commit
 body. This is the primary provenance anchor (§6 and §10).
 
 ## 6. Claim lifecycle (git-as-archive)
@@ -205,16 +216,16 @@ defect — adversarial reviewers must flag it.
 
 | Skill | Purpose |
 |---|---|
-| `research-cycle` | Primary workhorse: dispatches 3+3+2 roster (gap-closers / explorers / verifiers) via `TeamCreate` into a `tasks/<dir>/`. |
-| `parallel-audit` | N disjoint read-only audits on specified paper subsections; optional `--adversarial` pairs each with a checker. |
-| `capture-finding` | Coordinator-only synchronous append to `paper/findings.md` (section ∈ structural / negative / goodie / gap). Commits. |
+| `research-team` | Primary workhorse: dispatches 3+3+2 roster (gap-closers / explorers / verifiers) via `TeamCreate` into sibling `tasks/<dir>/`s. |
+| `research-audit` | N disjoint read-only audits on specified paper subsections; optional `--adversarial` pairs each with a checker. |
+| `research-capture` | Coordinator-only synchronous append to `paper/findings.md` (section ∈ structural / negative / goodie / gap). Commits. |
 | `trifecta` | 3-agent post-work synthesis (deep insights / literature / hidden connections). |
-| `fix-paper` | Referee-issue fix loop (Phase 1 fixers edit the paper; Phase 2 new referees). |
+| `paper-referee` | Referee-issue fix loop (Phase 1 fixers edit the paper; Phase 2 new referees). |
 | `paper-harden` | 4-agent read-only quality review (rigor / consistency / formatting / voice). |
-| `housekeep-biblio` | Alphabetize, de-dupe, verify the bibliography. |
+| `paper-biblio` | Alphabetize, de-dupe, verify the bibliography. |
 | `paper-dedupe` | Remove duplicated content while preserving meaning. |
-| `cut-from-paper` | Move a passage to `paper/cut-for-time.md` with provenance. |
-| `promote-script` | Harden a `scripts/wip/` verification script into `final-scripts/paper/` with a lore note. |
+| `paper-cut` | Move a passage to `paper/cut-for-time.md` with provenance. |
+| `script-promote` | Harden a `scripts/wip/` verification script into `final-scripts/paper/` with a lore note. |
 
 Retired skills live in `.claude/commands/archive/`.
 
