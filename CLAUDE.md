@@ -133,6 +133,37 @@ Default shape for a full research-cycle dispatch is ~8 agents, balanced:
 "8" is a target, not a cap. Preserve the **balance**: no all-gap or
 all-explore cycles. Exploration exists to direct gap attack.
 
+### 4a. Dispatch selection (which cycle for what)
+
+Coordinator guidance for mapping user intent to the right skill.
+
+| If the user wants... | Use | Why |
+|---|---|---|
+| a balanced cycle, no specific target | `research-team` | 3+3+2 keeps gap-closers pushing while explorers generate new angles and verifiers keep it honest. |
+| a focused push on one UV-NNN or label | `research-attack` | 1-2 gap-closers + 1 verifier; cheaper than the full roster when scope is narrow. |
+| to audit / grade a subsection or three | `research-audit` | read-only, three-tier proved/conditional/missing, no new lemmas. |
+| to explore hidden connections / literature | `trifecta` | the 3-analyst post-work synthesis; `findings.md` only (no spoilers). |
+| to systematically tighten prose | `paper-rewrite` | compactness pass with 11 invariants locked. Heavy; reserve for deliberate milestones. |
+| to fix referee-reported issues | `paper-referee` | 2-phase (fixers edit + fresh referees re-review). Phase 1 is the edit-capable exception. |
+| a quality review, no paper edits | `paper-harden` | 4-agent rigor / consistency / formatting / voice. Reports only. |
+| to reconcile UV vs rem:wip- | `uv-sync` | synchronous, no delegation. |
+| to validate UV dependency graph | `dep-graph` | cycles, orphans, critical-path — reports only. |
+| a single-bullet finding logged | `research-capture` | synchronous append to `findings.md`. |
+| to orient / resume | `cycle-status` | one-call dashboard; read-only. |
+| to close out the session | `session-handoff` | lore entry summarizing movements + open threads; auto-pushes. |
+| to back up the session transcript | `chat-backup` | dumps structured summary into the current task dir. |
+| to weaken / reverse-promote a claim | `paper-demote` | atomic: paper edit + UV reinstatement + optional negative-capture. |
+| to prune `findings.md` > 200 lines | `findings-prune` | promote / archive / remove per criteria. |
+| to move prose into `cut-for-time.md` | `paper-cut` | single-passage move with provenance. |
+| to de-dup content | `paper-dedupe` | merge unique content; redirect refs. |
+| to harden a computation into `final-scripts/paper/` | `script-promote` | single-agent; provenance + lore note. |
+| to clean the bibliography | `paper-biblio` | alphabetize / de-dupe / verify / cache decisions. |
+
+When the user's request doesn't fit any cell cleanly, default to the
+smallest-scoped skill that covers the intent. When in doubt between
+`research-team` and `research-attack`, prefer `research-attack`:
+cheaper to spin up, cheaper to get wrong.
+
 ## 5. Per-task directory convention
 
 Every multi-agent dispatch creates `tasks/yyyymmdd-hhmmss-<type>-<slug>/`
