@@ -22639,29 +22639,96 @@ Any remaining obstruction must therefore be genuinely nonlocal on the transport
 side, or package/provenance-sensitive on the two-atom side.
 \end{remark}
 
-\begin{remark}[Work in progress: scalar-local picture on the close exact fixed-shear lane]
-\label{rem:wip-scalar-local-picture-close-fixed-shear}
-Lemma~\ref{lem:local-exact-repeated-value-locus-involutive-fixed-shear} already
-shows that the exact local repeated-value relation on the involutive
-fixed-shear corner is only the involution
+\begin{proposition}[Local scalar repeated-value classification]
+\label{prop:local-scalar-repeated-value-classification}
+Let $f$ be a real-analytic function on an open neighborhood of
+$a\in\mathbb R$ with $f'(a)=0$, and let $m\ge 2$ be the order of vanishing of
+$f-f(a)$ at $a$, so
 \[
-t\longleftrightarrow -t,
+f(u)-f(a)=c_m(u-a)^m+O((u-a)^{m+1}),
+\qquad c_m\neq 0.
 \]
-so the natural visible variable is the quotient parameter
+Then there exist a sign $\sigma\in\{+1,-1\}$ and a local real-analytic chart
+$x$ near $a$ with $x(a)=0$ and $x'(a)\neq 0$ such that
 \[
-u=t^2.
+f(u)=f(a)+\sigma\,x(u)^m.
 \]
+The local repeated-value locus
+\[
+\{(u_1,u_2):u_1\neq u_2,\ f(u_1)=f(u_2)\}
+\]
+near $(a,a)$ is:
+\begin{itemize}
+\item \emph{(Even $m$.)} If $m$ is even, it is the involution graph
+\[
+u_2=\iota(u_1):=x^{-1}(-x(u_1)),
+\]
+together with $u_1=u_2$. The involution $\iota$ fixes $a$ and is analytic with
+$\iota'(a)=-1$; the repeated-value branch is a single local fold half-arc
+attached to $a$.
+\item \emph{(Odd $m$.)} If $m$ is odd, then $f$ is a local analytic
+homeomorphism near $a$ and the nondiagonal repeated-value locus is empty near
+$(a,a)$; the point $a$ is sterile.
+\end{itemize}
 
-The next expected reduction is that on a compact nonconstant quotient branch
-the close exact repeated-value locus should localize entirely at odd zeros of
-\[
-\widehat{\mathcal D}=\widehat Q'.
-\]
-Equivalently, the close exact fixed-shear carrier should be a finite union of
-local fold half-arcs, one attached to each odd zero of
-$\widehat{\mathcal D}$, with even zeros sterile. In particular, no connected
-nonlocal close carrier should remain on that branch.
+\begin{proof}
+By the Malgrange/Morse-type preparation for analytic functions of one variable
+with an isolated critical point, one may write
+$f(u)-f(a)=\sigma\,h(u)^m$ for a local analytic chart $h$ with $h(a)=0$ and
+$h'(a)\neq 0$, where $\sigma=\operatorname{sgn}(c_m)$ when $m$ is even and
+$\sigma=+1$ absorbing the sign into $h$ when $m$ is odd. Setting $x:=h$ gives
+the stated normal form.
 
+For even $m$, $f(u_1)=f(u_2)$ near $(a,a)$ is equivalent to
+$x(u_1)^m=x(u_2)^m$, i.e.\ $x(u_2)=\pm x(u_1)$; the plus sign is the diagonal,
+the minus sign is $u_2=x^{-1}(-x(u_1))=\iota(u_1)$. That $\iota$ is involutive
+with $\iota(a)=a$ and $\iota'(a)=-1$ is immediate from $x'(a)\neq 0$ and
+$x(a)=0$.
+
+For odd $m$, $x(u_1)^m=x(u_2)^m$ forces $x(u_1)=x(u_2)$, hence $u_1=u_2$ near
+$a$ since $x$ is a local homeomorphism.
+\end{proof}
+\end{proposition}
+
+\begin{corollary}[Local scalar-bud decomposition on the close exact fixed-shear lane]
+\label{cor:local-scalar-bud-decomposition-close-fixed-shear}
+Apply
+Proposition~\ref{prop:local-scalar-repeated-value-classification} to
+$f=\widehat Q$ on the nonconstant quotient branch in the exact fixed-shear
+corner $\{S=0\}\cap\{K_v=0\}$. Let $a$ be a zero of
+$\widehat{\mathcal D}=\widehat Q'$ of order $m-1\ge 1$. Then:
+\begin{itemize}
+\item If $m$ is even (i.e.\ $a$ is an odd-order zero of $\widehat{\mathcal D}$),
+the local close exact repeated-value carrier at $a$ is exactly one fold
+half-arc, namely the involution graph $\{u_2=\iota(u_1)\}$ of
+Proposition~\ref{prop:local-scalar-repeated-value-classification}.
+\item If $m$ is odd (i.e.\ $a$ is an even-order zero of $\widehat{\mathcal D}$),
+the local close exact repeated-value carrier at $a$ is empty; the basepoint is
+sterile.
+\end{itemize}
+In particular, on a compact nonconstant quotient branch in the exact
+fixed-shear corner, the close exact repeated-value carrier is a finite
+disjoint union of local fold half-arcs, one per odd zero of
+$\widehat{\mathcal D}$, with even zeros sterile. No connected nonlocal close
+carrier remains on that branch.
+
+\begin{proof}
+By
+Lemma~\ref{lem:local-exact-repeated-value-locus-involutive-fixed-shear}, away
+from zeros of $\widehat Q'$ the close exact repeated-value locus is empty, so
+any close carrier accumulates only at zeros of $\widehat{\mathcal D}$. At each
+such zero $a$ the local structure is dictated by
+Proposition~\ref{prop:local-scalar-repeated-value-classification} applied to
+$\widehat Q$, with $m=\operatorname{ord}_a(\widehat Q-\widehat Q(a))
+=\operatorname{ord}_a\widehat{\mathcal D}+1$; the two cases transcribe to odd
+vs.\ even order of $\widehat{\mathcal D}$. Compactness then bounds the number
+of such basepoints, and the carrier is their finite disjoint union of local
+fold half-arcs.
+\end{proof}
+\end{corollary}
+
+\begin{remark}[Constant-branch scalarization and the scalar ceiling]
+\label{rem:constant-branch-scalarization-and-scalar-ceiling}
 There is also a constant-quotient branch. If
 \[
 \widehat{\mathcal D}\equiv 0,
@@ -22672,28 +22739,31 @@ Y_{xx}=\gamma_0 S_{xx},
 \qquad
 Y=\gamma_0 S+\beta_0 x+\alpha_0.
 \]
-After affine gauge one may reduce to
-\[
-Y\equiv 0,
-\]
-and the exact fixed-shear overlap equations then force
-\[
-\gamma_*=0.
-\]
-So the constant branch should reduce to the repeated-value problem for the
-single planar scalar
+After affine gauge one may reduce to $Y\equiv 0$, and the exact fixed-shear
+overlap equations then force $\gamma_*=0$. So the constant branch reduces to
+the repeated-value problem for the single planar scalar
 \[
 V(t):=U_{\xi_*,\eta_*}(x(t),S(t)),
 \qquad
-U_{\xi,\eta}(x,S):=\frac{x-\xi S}{1-\eta S}.
+U_{\xi,\eta}(x,S):=\frac{x-\xi S}{1-\eta S},
 \]
-Thus the constant exact fixed-shear branch should also contribute only local
-fold half-arcs.
+to which
+Proposition~\ref{prop:local-scalar-repeated-value-classification} applies
+pointwise in $t$. At basepoints with
+$V'(t_0)\neq 0$, $V$ is a local homeomorphism and close exact repeated-value
+pairs are excluded;
+Corollary~\ref{cor:quartic-sextic-quotient-injectivity-local-no-reentry}
+rules out the basepoint case $\widehat{\mathcal D}(0)\neq 0$, and at basepoints
+where $V$ has a critical point the local carrier is again a single fold
+half-arc. Thus the constant exact fixed-shear branch also contributes only
+local fold half-arcs.
 
-In this form the close exact fixed-shear lane would contribute no connected
-nonlocal close carrier, only local scalar fold arcs. The remaining intrinsic
-scalar ceiling would then be equality of consecutive lobe amplitudes. This is a
-sharp local compression, not yet a proved global exclusion theorem.
+In this form the close exact fixed-shear lane contributes no connected
+nonlocal close carrier, only local scalar fold half-arcs.
+Corollary~\ref{cor:local-scalar-bud-decomposition-close-fixed-shear} is the
+theorem-level scalar ceiling on that lane: the remaining intrinsic obstruction
+on the close exact fixed-shear side is now equality of consecutive lobe
+amplitudes across these local fold half-arcs, not a hidden nonlocal carrier.
 \end{remark}
 
 \begin{remark}[Work in progress: inverse-branch-gap endgame in the overlap regime on the strict three-run lane]
@@ -24415,20 +24485,27 @@ There the branch is quotient-diagonal / involutive, the quartic--sextic first
 rung is already quotient-injective, and the remaining exact fixed-shear burden
 is now best viewed as split into two sublanes.
 
-The \emph{close} exact fixed-shear lane is expected to be scalar-local:
-on a nonconstant quotient branch, sufficiently close exact repeated-value pairs
-should localize at odd zeros of
+The \emph{close} exact fixed-shear lane is now scalar-local at theorem level:
+by
+Corollary~\ref{cor:local-scalar-bud-decomposition-close-fixed-shear}, on a
+compact nonconstant quotient branch the close exact repeated-value carrier is
+a finite disjoint union of local fold half-arcs, one per odd zero of
 \[
 \widehat{\mathcal D}=\widehat Q',
 \]
-giving only local fold half-arcs, with even zeros sterile; on the constant
-branch the problem should reduce, after affine gauge, to repeated values of a
-single planar scalar. So this lane should contribute only local fold half-arcs,
-not a connected nonlocal close carrier.
+with even zeros sterile; by
+Remark~\ref{rem:constant-branch-scalarization-and-scalar-ceiling}, the
+constant-quotient branch reduces, after affine gauge, to repeated values of a
+single planar scalar and also contributes only local fold half-arcs, with
+Corollary~\ref{cor:quartic-sextic-quotient-injectivity-local-no-reentry}
+ruling out the $\widehat{\mathcal D}(0)\neq 0$ basepoint. So this lane no
+longer admits a connected nonlocal close carrier; the remaining intrinsic
+obstruction there is equality of consecutive lobe amplitudes across these
+local fold half-arcs.
 
-The \emph{three-run overlap} fixed-shear lane should now be read conditionally
-as an inverse-branch-gap transport problem on an actual outer-overlap interval,
-namely in the regime
+The \emph{three-run overlap} fixed-shear lane should still be read
+conditionally as an inverse-branch-gap transport problem on an actual
+outer-overlap interval, namely in the regime
 \[
 B_0+B_2>B_1.
 \]
@@ -24440,13 +24517,15 @@ Any interior critical point of $\Delta$ then yields a same-value / same-slope
 witness, and the current endgame fork is: either the transport-curvature scalar
 fails to descend across the outer runs, giving the first explicit nonlocal
 transport obstruction, or descent holds and the outer shells rigidify to exact
-translated replication.
+translated replication. What is not yet settled at theorem level is an
+unconditional activation theorem from open overlap alone.
 
-Thus the remaining two-point work is now concentrated in four very specific
+Thus the remaining two-point work is now concentrated in three very specific
 targets: finite-order source-level merger, quotient-diagonal
-continuity/diagonal collapse, a scalar-local theorem on the close exact
-fixed-shear lane, or a transport/package theorem on the three-run overlap
-fixed-shear lane.
+continuity/diagonal collapse, and a transport/package theorem on the three-run
+overlap fixed-shear lane; the scalar-local ceiling on the close exact
+fixed-shear lane is already captured by
+Corollary~\ref{cor:local-scalar-bud-decomposition-close-fixed-shear}.
 
 \item
 \textbf{Three-point branch (derivative-geometric layer now stabilized).}
@@ -25009,18 +25088,25 @@ exact fixed-shear residual lane cannot locally merge with the ordinary lifted
 $3$-point branch mechanism.
 
 There is now also a sharper internal split of the exact fixed-shear residual
-lane itself. On the close exact side, the expected next compression is
-scalar-local: on a compact nonconstant quotient branch, sufficiently close exact
-repeated-value pairs should localize only at odd zeros of
+lane itself, and one side of that split has now been promoted to theorem
+level. On the close exact side, the scalar-local compression is no longer a
+work-in-progress expectation: by
+Corollary~\ref{cor:local-scalar-bud-decomposition-close-fixed-shear}, on a
+compact nonconstant quotient branch the close exact repeated-value carrier is
+a finite disjoint union of local fold half-arcs, one per odd zero of
 \[
 \widehat{\mathcal D}=\widehat Q',
 \]
-with one local fold half-arc per odd zero and even zeros sterile, while the
-constant-quotient branch should reduce after affine gauge to repeated values of
-a single planar scalar. So the close exact carrier should contribute only local
-fold half-arcs, not a connected nonlocal close carrier.
+with even zeros sterile; by
+Remark~\ref{rem:constant-branch-scalarization-and-scalar-ceiling}, the
+constant-quotient branch also reduces, after affine gauge, to repeated values
+of a single planar scalar and contributes only local fold half-arcs. So the
+close exact carrier no longer admits a connected nonlocal close carrier, and
+the remaining intrinsic obstruction on that sublane is equality of
+consecutive lobe amplitudes across these local fold half-arcs.
 
-On the strict three-run side, the residual overlap regime is
+On the three-run overlap side, by contrast, the endgame is still conditional.
+The residual overlap regime is
 \[
 B_0+B_2>B_1,
 \]
@@ -25028,8 +25114,9 @@ not
 \[
 B_1>B_0+B_2.
 \]
-In that actual outer-overlap regime, the quotient-visible problem may be reduced
-to the inverse-branch-gap transport problem on the two outer runs. Writing
+In that actual outer-overlap regime, the quotient-visible problem may be
+reduced to the inverse-branch-gap transport problem on the two outer runs.
+Writing
 \[
 \Delta(q):=\phi_2(q)-\phi_0(q),
 \]
@@ -25037,9 +25124,13 @@ any interior critical point of $\Delta$ gives a same-value / same-slope
 witness, and the live endgame fork becomes: either the transport-curvature
 scalar fails to descend across the outer runs, giving the first explicit
 nonlocal transport obstruction, or descent holds and the outer shells rigidify
-to exact translated replication. So the residual exact fixed-shear lane is no longer a vague hidden branch
-problem; it has split into a close scalar-local lane and a separate three-run
-overlap-transport lane.
+to exact translated replication. An unconditional activation theorem from open
+overlap alone has not yet been established. So the residual exact fixed-shear
+lane is no longer a vague hidden branch problem; it has split into a close
+scalar-local lane, now controlled at theorem level by
+Corollary~\ref{cor:local-scalar-bud-decomposition-close-fixed-shear}, and a
+separate three-run overlap-transport lane that remains the live conditional
+target.
 
 Second, on the lifted four-point branch, the explicit low-order obstruction
 list has been reduced to the six coefficients
