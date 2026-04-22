@@ -338,22 +338,29 @@ defect — adversarial reviewers must flag it.
 
 ### 11a. Compile-check before committing paper edits
 
-Before any commit that modifies `paper/proof_of_rh.tex`, the coordinator
-must run a compile-check:
+Every commit that modifies `paper/proof_of_rh.tex` goes through a
+compile-check. Enforced by `.githooks/pre-commit`:
 
 ```sh
-cd paper && pdflatex -interaction=nonstopmode -draftmode proof_of_rh.tex \
-    2>&1 | grep -E '^(!|Undefined|Error|Warning:.*undefined|Warning:.*multiply)' \
-    | head -50
+# One-time setup per clone:
+git config core.hooksPath .githooks
 ```
 
-If the grep returns any lines, the edit introduced a defect — fix before
-committing. `-draftmode` skips the PDF for speed; two passes are only
-needed when you explicitly need cross-references resolved.
+The hook runs `pdflatex -interaction=nonstopmode -draftmode` on the
+paper when it's staged and aborts the commit if any of these patterns
+appear in the log:
 
-This catches LaTeX syntax errors, undefined `\ref{}` / `\cite{}`, and
-multiply-defined labels — the failure modes that won't surface until
-`paper-harden` otherwise. Five-second habit, big save.
+- lines beginning with `!`
+- `Undefined`, `Error`
+- `Warning: ... undefined`, `Warning: ... multiply`
+
+Catches LaTeX syntax errors, undefined `\ref{}` / `\cite{}`, and
+multiply-defined labels — failure modes that would otherwise not
+surface until `paper-harden`.
+
+Bypass (`--no-verify`) is discouraged. Use only with an explicit
+justification — the coordinator should NOT bypass routinely even if
+the auto-push rule creates pressure to ship.
 
 ## 12. LaTeX conventions
 

@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+#
+# pre-commit hook — enforces CLAUDE.md §11a.
+# Runs a LaTeX compile-check when paper/proof_of_rh.tex is part of the commit.
+#
+# One-time setup per clone:
+#   git config core.hooksPath .githooks
+#
+# Bypass (only with explicit justification — CLAUDE.md discourages):
+#   git commit --no-verify
+
+set -u
+
+STAGED=$(git diff --cached --name-only)
+
+if ! echo "$STAGED" | grep -qE '^paper/proof_of_rh\.tex$'; then
+    # No paper edits staged; skip compile-check.
+    exit 0
+fi
+
+echo "pre-commit: paper/proof_of_rh.tex is staged — running compile-check (CLAUDE.md §11a)..."
+
+REPO_ROOT=$(git rev-parse --show-toplevel)
+cd "$REPO_ROOT/paper" || exit 2
+
+if ! command -v pdflatex >/dev/null 2>&1; then
+    echo "pre-commit: pdflatex not found on PATH; skipping compile-check with a warning."
+    echo "pre-commit: (install texlive-basic or adjust PATH to enable)"
+    exit 0
+fi
+
+LOG=$(mktemp)
+pdflatex -interaction=nonstopmode -draftmode proof_of_rh.tex >"$LOG" 2>&1
+STATUS=$?
+
+ERRORS=$(grep -E '^(!|Undefined|Error|Warning:.*undefined|Warning:.*multiply)' "$LOG" | head -50)
+
+if [ -n "$ERRORS" ]; then
+    echo "pre-commit: compile-check FAILED"
+    echo "-----"
+    echo "$ERRORS"
+    echo "-----"
+    echo "Full log: $LOG"
+    echo "Fix before committing. Do NOT use --no-verify unless you have a real reason (see CLAUDE.md §11)."
+    exit 1
+fi
+
+if [ $STATUS -ne 0 ]; then
+    echo "pre-commit: pdflatex exited non-zero (no errors matched the grep) — inspecting $LOG"
+    tail -30 "$LOG"
+    exit 1
+fi
+
+echo "pre-commit: compile-check passed"
+rm -f "$LOG"
+exit 0
