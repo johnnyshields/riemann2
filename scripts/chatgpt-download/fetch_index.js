@@ -34,15 +34,45 @@ const OUT = args.out || path.join(__dirname, 'recent.json');
 // point at your Chrome install.
 const EXE = process.env.CHROME_PATH || null;
 
+// Attach modes:
+//   1. CDP attach (preferred when user launched Chrome with
+//      --remote-debugging-port=9222 --user-data-dir="<non-default-path>").
+//      Set CHROME_CDP_URL=http://localhost:9222 to use.
+//   2. launchPersistentContext against CHROME_USER_DATA_DIR (requires Chrome
+//      fully closed beforehand). Less reliable on real profiles.
+//   3. Plain chromium.launch (Playwright's bundled browser) — default.
+const CDP_URL = process.env.CHROME_CDP_URL || null;
+const USER_DATA_DIR = process.env.CHROME_USER_DATA_DIR || null;
+const PROFILE = process.env.CHROME_PROFILE || 'Default';
+
 (async () => {
   const useState = fs.existsSync(STATE);
-  const browser = await chromium.launch(Object.assign(
-    { headless: false },
-    EXE ? { executablePath: EXE } : {}
-  ));
-  const ctx = await browser.newContext(useState ? { storageState: STATE } : {});
-  const page = await ctx.newPage();
-  await page.goto('https://chatgpt.com/', { waitUntil: 'domcontentloaded' });
+  let browser = null;
+  let ctx;
+  if (CDP_URL) {
+    console.log(`Connecting over CDP: ${CDP_URL}`);
+    browser = await chromium.connectOverCDP(CDP_URL);
+    ctx = browser.contexts()[0] || await browser.newContext();
+  } else if (USER_DATA_DIR) {
+    console.log(`Using real Chrome profile: ${USER_DATA_DIR} (profile: ${PROFILE})`);
+    ctx = await chromium.launchPersistentContext(USER_DATA_DIR, {
+      channel: 'chrome',
+      headless: false,
+      args: [`--profile-directory=${PROFILE}`],
+      viewport: null,
+    });
+  } else {
+    browser = await chromium.launch(Object.assign(
+      { headless: false },
+      EXE ? { executablePath: EXE } : {}
+    ));
+    ctx = await browser.newContext(useState ? { storageState: STATE } : {});
+  }
+  // Prefer an existing chatgpt.com tab if one is already open (CDP attach).
+  let page = ctx.pages().find(p => /chatgpt\.com|openai\.com/.test(p.url())) || ctx.pages()[0] || await ctx.newPage();
+  if (!/chatgpt\.com/.test(page.url())) {
+    await page.goto('https://chatgpt.com/', { waitUntil: 'domcontentloaded' });
+  }
 
   console.log('Browser launched. Complete any login / CF challenges in the window.');
 
@@ -68,8 +98,12 @@ const EXE = process.env.CHROME_PATH || null;
     }
     await new Promise(r => setTimeout(r, 2000));
   }
-  if (!token) { console.error('Timed out waiting for login.'); await browser.close(); process.exit(1); }
-  await ctx.storageState({ path: STATE });
+  if (!token) {
+    console.error('Timed out waiting for login.');
+    if (!CDP_URL) { if (browser) await browser.close(); else await ctx.close(); }
+    process.exit(1);
+  }
+  if (!USER_DATA_DIR && !CDP_URL) await ctx.storageState({ path: STATE });
 
   const cutoff = FETCH_ALL ? 0 : (Date.now() / 1000 - DAYS * 86400);
   const kept = [];
@@ -104,6 +138,7 @@ const EXE = process.env.CHROME_PATH || null;
   fs.writeFileSync(OUT, JSON.stringify(kept, null, 2));
   console.log(`Wrote ${kept.length} to ${OUT}`);
   console.log('Leave the browser open if you plan to run fetch_pages.js next.');
+  if (CDP_URL) { process.exit(0); }
   // Do NOT close — next script reuses the same browser session.
   await new Promise(() => {});
 })().catch(e => { console.error(e); process.exit(1); });

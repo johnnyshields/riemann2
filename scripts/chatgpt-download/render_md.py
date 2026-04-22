@@ -23,7 +23,7 @@ def fmt_ts(ts):
         ts = float(ts)
     except (TypeError, ValueError):
         return ''
-    return datetime.fromtimestamp(ts, tz=timezone.utc).strftime('%Y-%m-%d %H:%M')
+    return datetime.fromtimestamp(ts, tz=timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
 
 def fmt_day(ts):
     try:
