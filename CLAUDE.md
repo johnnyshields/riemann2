@@ -1,29 +1,226 @@
-# Project notes
+# Riemann2 — Coordinator Policy
 
-- The main paper lives at `C:\workspace\riemann2\paper\proof_of_rh.tex` (WSL path: `/mnt/c/workspace/riemann2/paper/proof_of_rh.tex`). Treat it as the canonical source of record.
+This file is the single authoritative policy for the Riemann Hypothesis
+project. Every delegated agent is briefed with this document. Rules here
+override default Claude Code behavior.
 
-## LaTeX conventions
+## 1. Project
 
-- This is a LaTeX-first project. Use LaTeX-native math delimiters everywhere — `\(...\)` for inline and `\[...\]` for display math — in `.tex`, `.md`, `.txt`, commit messages, lore notes, and any other prose. Do not convert to `$...$` / `$$...$$` for GitHub rendering.
-- When extracting or cleaning prose from external sources (ChatGPT exports, agent transcripts, etc.) for this repo, preserve `\(...\)` / `\[...\]` as-is.
+Canonical paper: `C:\workspace\riemann2\paper\proof_of_rh.tex` (WSL path
+`/mnt/c/workspace/riemann2/paper/proof_of_rh.tex`). Monolithic LaTeX
+(\texttt{amsart}, frozen macro namespace). Treat it as the canonical source
+of record.
 
-## Git workflow
+The main chat window is the **coordinator / team lead**. It delegates
+research, exploration, and verification to agent teams; collates results;
+edits canonical files. Delegates are read-only by default (see §3).
 
-- **Auto-commit after each major edit.** When a meaningful edit to the paper (or other tracked source) is complete and self-contained, stage the relevant files and create a commit without asking. Use a concise imperative-mood subject summarizing what changed and why. Do not push — commit only.
-- A "major edit" means a finished logical unit: a remark rewrite, an insertion of one or more new blocks, a proof change, a structural reorganization. Minor in-progress touches during an ongoing edit do not each need their own commit.
-- Stage files by name; do not use `git add -A` or `git add .`.
-- Follow the existing commit-message style (see `git log`).
+## 2. File map
 
-## Coordinator protocol
+| Path | Role |
+|---|---|
+| `paper/proof_of_rh.tex` | Canonical draft. Coordinator-only edits. |
+| `paper/unverified.tex` | Quarantine ledger (UV-NNN entries) for unpromoted claims. Bidirectional links to `rem:wip-*` labels in the main paper. |
+| `paper/findings.md` | Active shared knowledge base (Structural / Negative / Goodies / Open-gaps). ≤200 lines. Pasted in full into every delegation prompt. |
+| `lore/` | Workflow plans, cross-session syntheses, design decisions. Permanent session artifacts. |
+| `tasks/yyyymmdd-hhmmss-<type>-<slug>/` | Per-dispatch work bundle: chat backup, agent reports, scripts, notes. See §5. |
+| `paper/chats/` | Historical ChatGPT session archives. Read-only reference; do not edit. |
+| `scripts/` and `scripts/wip/` | Computation code. |
+| `final-scripts/paper/` | Hardened verification scripts promoted from `scripts/wip/` with provenance. |
+| `.claude/commands/` | Active skills (slash commands). |
+| `.claude/commands/archive/` | Retired skills kept for reference. |
 
-- The main chat is the team lead and the only default editor of `paper/proof_of_rh.tex`.
-- Treat `paper/proof_of_rh.tex` as the canonical draft and `paper/unverified.tex` as the quarantine ledger for claims, repairs, and endgame steps that are not yet verified.
-- Use `lore/` for workflow plans, agent syntheses, verification notes, and session summaries.
-- When a native team tool is unavailable, use `Task` subagents as the team members. Prefer separate research and verification agents over a single persuasive agent.
-- Delegated agents are read-only by default. They must not edit `paper/proof_of_rh.tex`, `CLAUDE.md`, or commit unless the coordinator explicitly asks for that exact action.
-- Every delegated report must separate `proved`, `computational`, `heuristic`, `open`, and `rejected` claims.
-- Every delegated report must include exact provenance: file paths, line references, cited lemmas, scripts, or calculations actually used.
-- Every delegated report must include a strongest objection or failure mode. Agents should prefer `unsupported` over confident speculation.
-- Any new claim, repair, or conjectural bridge goes to `paper/unverified.tex` first unless it is already fully grounded and independently checked.
-- Promotion from `paper/unverified.tex` into `paper/proof_of_rh.tex` requires one adversarial verification pass plus coordinator review.
-- When a quarantined item is promoted, rejected, or reframed, update `paper/unverified.tex` immediately so the proof state stays synchronized.
+Optional companion files may appear as grep indexes once first used:
+`paper/findings-in-paper.md`, `paper/unverified-rejected.md`. Lazy-create on
+first promotion/rejection; not authoritative (git log is).
+
+## 3. Roles and dispatch
+
+- **Coordinator** (main chat): sole editor of `paper/proof_of_rh.tex`,
+  `paper/unverified.tex`, `paper/findings.md`, `CLAUDE.md`, `lore/`. Selects
+  and briefs teams. Reviews handbacks. Commits.
+- **Delegates**: read-only by default. *May* write to their session's
+  `tasks/<dir>/` and nowhere else (§5 and §8). Must not edit canonical
+  files unless a specific skill explicitly grants wider scope (e.g.,
+  `fix-paper` Phase 1 fixers are scoped to edit the paper).
+- **Dispatch mechanism**: every delegation goes through `TeamCreate` with
+  **named teammates** (e.g., `gap-closer-mixed4pt`, `explorer-deriv-geo`,
+  `verifier-adversarial`) so each agent is visible in its own tmux pane.
+  Never spawn via the raw `Agent` tool. On other runtimes (OpenWork, etc.),
+  use the equivalent named-teammate primitive. Communicate via
+  `SendMessage`. Tear down with `TeamDelete` after graceful shutdown.
+
+## 4. 3+3+2 roster principle
+
+Default shape for a full research-cycle dispatch is ~8 agents, balanced:
+
+- **3 gap-closers** — each targeting a specific UV-NNN or `rem:wip-*` item.
+  Use the lemma-closure pattern: exact target statement, routes A/B/C,
+  explicit non-goals, fallback to "minimal finite reduction" if closure
+  fails.
+- **3 explorers** — derivative geometry, fundamentals (normal forms,
+  universality, invariants), and cross-cutting structural questions that
+  can *redirect how gaps are attacked*. Return observations, candidate
+  goodies, candidate negative findings.
+- **2 verifiers** — (i) adversarial checker reading the 6 other reports
+  for circularity, missing hypotheses, overclaims; (ii) source auditor
+  cross-checking that cited labels/lines exist and are used as claimed.
+
+"8" is a target, not a cap. Preserve the **balance**: no all-gap or
+all-explore cycles. Exploration exists to direct gap attack.
+
+## 5. Per-task directory convention
+
+Every multi-agent dispatch creates `tasks/yyyymmdd-hhmmss-<type>-<slug>/`
+at repo root, where `<type>` ∈ `cycle | attack | audit | explore | verify
+| other`. The coordinator announces the task dir path upfront and includes
+it in every teammate's briefing.
+
+Minimum contents:
+
+```
+tasks/20260423-020000-cycle-mixed-4-point/
+├── chat.md                          # periodic backup of this session
+├── reports/
+│   ├── gap-closer-mixed4pt.md       # 7-field report
+│   ├── explorer-deriv-geo.md
+│   └── ... (one per teammate)
+├── scripts/                          # any .py / .sh produced
+└── notes/                            # optional per-teammate scratch
+```
+
+Every commit made during the session names the task dir in its commit
+body. This is the primary provenance anchor (§6 and §10).
+
+## 6. Claim lifecycle (git-as-archive)
+
+Six states: **intake → quarantine → research → adversarial → promote |
+demote | reject**.
+
+- **Intake**: idea, repair, objection from coordinator / agent / paper.
+- **Quarantine**: coordinator adds a UV-NNN entry to `unverified.tex` with
+  all six fields (Title / Status / Source / Claim / Why unverified /
+  Needed for promotion), OR a bullet to the appropriate section of
+  `findings.md`.
+- **Research**: delegates work the item in read-only mode.
+- **Adversarial**: a different agent (or the coordinator) attacks the
+  claim looking for circularity, missing hypotheses, numerics
+  masquerading as proof, stale citations.
+- **Promote**: coordinator edits `proof_of_rh.tex` AND deletes the
+  `unverified.tex` / `findings.md` entry **in the same commit**. Commit
+  subject: `promote UV-NNN: <one-line>` (or `promote <finding>: ...`).
+- **Demote**: coordinator edits `proof_of_rh.tex` (remove or weaken) AND
+  reinstates entry in `unverified.tex` in the same commit. Subject:
+  `demote <label>: <reason>`.
+- **Reject**: coordinator deletes the `unverified.tex` entry in a commit
+  whose body explains rejection. Subject: `reject UV-NNN: <reason>`.
+  If the rejection produced a reusable negative lesson, a
+  `capture-finding negative` edit is included in the same commit.
+
+**No status annotations in active files.** Active files stay small and
+fully brief-able. Git log is the audit trail.
+
+## 7. Downstream-briefing rule (non-negotiable)
+
+Every delegation prompt MUST include:
+
+1. Full `paper/findings.md` (pasted verbatim).
+2. The relevant slice of `paper/unverified.tex` (full file by default; a
+   narrower subset only when `$ARGUMENTS` is narrow).
+3. The 7-field agent report schema (§8).
+4. Explicit non-goals for this teammate.
+5. The task dir path (from §5) and the self-deposit checklist (§8).
+
+A skill that dispatches without these is broken. Fix the skill.
+
+## 8. Agent report schema + self-deposit
+
+Every teammate returns a report with these **7 fields**:
+
+- **Claim**
+- **Status** ∈ `proved | computational | heuristic | open | rejected`
+- **Evidence**
+- **Exact refs** — file paths, line numbers, `rem:wip-*` labels, chat
+  paths, script paths + commit SHA, UV-NNN IDs
+- **Dependencies**
+- **Strongest objection** — not optional, not empty, not "none"
+- **Needed for promotion**
+
+Acceptable returns also include `unsupported`, `blocked`, `no progress` —
+these are honest signals, not failures.
+
+**Self-deposit checklist** (every teammate executes before shutdown):
+
+- Write the final 7-field report to
+  `tasks/<dir>/reports/<teammate-name>.md`.
+- Put any scripts you created or used in `tasks/<dir>/scripts/`.
+- Put any intermediate notes in `tasks/<dir>/notes/<teammate-name>/`
+  (optional).
+- Do NOT write to `proof_of_rh.tex`, `unverified.tex`, `findings.md`,
+  `CLAUDE.md`, or `lore/`.
+
+## 9. Adversarial pass requirement
+
+Any claim that would change proof state requires at least one independent
+adversarial checker before promotion. No exceptions.
+
+## 10. Provenance is non-negotiable, everywhere
+
+Every entry in `findings.md`, every UV entry, every agent report, every
+commit message, every lore entry, every task dir carries explicit
+provenance to its source: `paper/chats/<file>`, `rem:wip-*` label,
+`proof_of_rh.tex` line number, script path + commit SHA, UV-NNN,
+`tasks/<dir>/reports/<teammate>.md`. A claim without provenance is a
+defect — adversarial reviewers must flag it.
+
+## 11. Git workflow
+
+- **Auto-commit after each major edit.** A "major edit" is a finished
+  logical unit (a remark rewrite, a new proof block, a structural
+  reorganization, a task-dir creation with reports). Minor in-progress
+  touches during an ongoing edit do not each need their own commit.
+- **Stage files by name.** Never `git add -A` or `git add .`.
+- Commit messages: imperative-mood subject. On promote/demote/reject,
+  cite UV-NNN in the subject and explain in the body. When a session
+  worked inside a task dir, mention the dir in the body.
+- **Commit only**; never push unless the user asks.
+- Do not skip hooks (`--no-verify`), do not amend without explicit
+  instruction, do not force-push.
+
+## 12. LaTeX conventions
+
+- LaTeX-native math delimiters EVERYWHERE: `\(...\)` inline and
+  `\[...\]` display — in `.tex`, `.md`, `.txt`, commit messages, lore,
+  and any other prose. Do **not** convert to `$...$` / `$$...$$` for
+  GitHub rendering.
+- When extracting/cleaning prose from external sources (ChatGPT exports,
+  agent transcripts), preserve `\(...\)` / `\[...\]` as-is.
+- Frozen macro namespace in `proof_of_rh.tex` preamble (30 custom
+  `\newcommand`s). Do not redefine or invent new macros without
+  coordinator approval.
+- `rem:wip-*` label convention marks in-paper WIP items that should have
+  a matching UV-NNN in `unverified.tex`.
+
+## 13. Skill index
+
+| Skill | Purpose |
+|---|---|
+| `research-cycle` | Primary workhorse: dispatches 3+3+2 roster (gap-closers / explorers / verifiers) via `TeamCreate` into a `tasks/<dir>/`. |
+| `parallel-audit` | N disjoint read-only audits on specified paper subsections; optional `--adversarial` pairs each with a checker. |
+| `capture-finding` | Coordinator-only synchronous append to `paper/findings.md` (section ∈ structural / negative / goodie / gap). Commits. |
+| `trifecta` | 3-agent post-work synthesis (deep insights / literature / hidden connections). |
+| `fix-paper` | Referee-issue fix loop (Phase 1 fixers edit the paper; Phase 2 new referees). |
+| `paper-harden` | 4-agent read-only quality review (rigor / consistency / formatting / voice). |
+| `housekeep-biblio` | Alphabetize, de-dupe, verify the bibliography. |
+| `paper-dedupe` | Remove duplicated content while preserving meaning. |
+| `cut-from-paper` | Move a passage to `paper/cut-for-time.md` with provenance. |
+| `promote-script` | Harden a `scripts/wip/` verification script into `final-scripts/paper/` with a lore note. |
+
+Retired skills live in `.claude/commands/archive/`.
+
+## 14. When not to use a skill
+
+Small / obvious edits, single-file tweaks, and specific user-directed
+commands should go directly — not through a multi-agent skill. Skills
+are for multi-agent dispatch or repeatable multi-step procedures where
+their structure pays off.
