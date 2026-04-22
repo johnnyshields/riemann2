@@ -1,3 +1,8 @@
+---
+name: paper-cut
+description: Move a passage from paper/proof_of_rh.tex to paper/cut-for-time.md with full provenance (original location, reason, broken refs), then commit.
+---
+
 # Paper Cut
 
 Move a passage from `paper/proof_of_rh.tex` to `paper/cut-for-time.md`

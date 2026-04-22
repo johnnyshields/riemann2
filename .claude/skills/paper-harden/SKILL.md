@@ -1,3 +1,8 @@
+---
+name: paper-harden
+description: Read-only 4-agent quality review of paper/proof_of_rh.tex — rigor, consistency, formatting, voice. Reviewers return reports only; the coordinator consolidates.
+---
+
 # Paper Harden
 
 Read-only quality review of `paper/proof_of_rh.tex` from four angles:

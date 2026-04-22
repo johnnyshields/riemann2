@@ -1,3 +1,8 @@
+---
+name: paper-referee
+description: Two-phase review loop on paper/proof_of_rh.tex — Phase 1 fixers edit the paper to address known issues, Phase 2 fresh referees re-review. Phase 1 is an explicit edit-capable exception.
+---
+
 # Paper Referee
 
 Two-phase review loop on the canonical paper: Phase 1 fixers edit the paper

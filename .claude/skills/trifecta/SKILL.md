@@ -1,3 +1,8 @@
+---
+name: trifecta
+description: Post-work synthesis — three parallel analysts covering deep internal insights, external literature, and hidden connections to fundamental math. Produces one consolidated lore entry.
+---
+
 # Trifecta: Deep Insights, Literature, and Hidden Connections
 
 Post-work synthesis across three complementary angles:

@@ -1,3 +1,8 @@
+---
+name: paper-biblio
+description: Alphabetize, de-dupe, verify, and clean up the bibliography of paper/proof_of_rh.tex. Caches user decisions in papers/<name>-biblio-known.md.
+---
+
 # Housekeep Bibliography
 
 Alphabetize, verify, and clean up the bibliography of a LaTeX paper.

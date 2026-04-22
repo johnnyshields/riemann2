@@ -1,3 +1,8 @@
+---
+name: script-promote
+description: Harden a verification script from scripts/wip/ into final-scripts/paper/ with a clean docstring, paper cross-reference, and a lore note.
+---
+
 # Script Promote
 
 Promote a computation or verification script to a hardened version in

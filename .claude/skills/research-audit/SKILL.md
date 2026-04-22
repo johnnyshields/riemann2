@@ -1,3 +1,8 @@
+---
+name: research-audit
+description: N disjoint read-only audits on specified paper/proof_of_rh.tex subsections, each graded with the fixed proved/conditional/missing framework. Optional --adversarial pairs each auditor with a checker.
+---
+
 # Research Audit
 
 N disjoint read-only audits on specified paper subsections. Captures the

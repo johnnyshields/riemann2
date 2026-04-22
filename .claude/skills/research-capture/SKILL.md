@@ -1,3 +1,8 @@
+---
+name: research-capture
+description: Synchronous coordinator append of a single structural / negative / goodie / gap entry to paper/findings.md, with provenance, then commit.
+---
+
 # Research Capture
 
 Synchronous coordinator action: append one entry to

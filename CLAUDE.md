@@ -27,8 +27,8 @@ edits canonical files. Delegates are read-only by default (see §3).
 | `paper/chats/` | Historical ChatGPT session archives. Read-only reference; do not edit. |
 | `scripts/` and `scripts/wip/` | Computation code. |
 | `final-scripts/paper/` | Hardened verification scripts promoted from `scripts/wip/` with provenance. |
-| `.claude/commands/` | Active skills (slash commands). |
-| `.claude/commands/archive/` | Retired skills kept for reference. |
+| `.claude/skills/<name>/SKILL.md` | Active skills. Each skill is a directory with a `SKILL.md` carrying YAML frontmatter (`name`, `description`) plus body. |
+| `.claude/skills/archive/<name>/SKILL.md` | Retired skills kept for reference. Do not invoke. |
 
 Optional companion files may appear as grep indexes once first used:
 `paper/findings-in-paper.md`, `paper/unverified-rejected.md`. Lazy-create on
@@ -359,7 +359,7 @@ defect — adversarial reviewers must flag it.
 | `paper-cut` | Move a passage to `paper/cut-for-time.md` with provenance. |
 | `script-promote` | Harden a `scripts/wip/` verification script into `final-scripts/paper/` with a lore note. |
 
-Retired skills live in `.claude/commands/archive/`.
+Retired skills live in `.claude/skills/archive/`.
 
 ## 14. When not to use a skill
 

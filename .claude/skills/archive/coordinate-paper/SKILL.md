@@ -1,3 +1,8 @@
+---
+name: archive-coordinate-paper
+description: RETIRED. Policy content merged into CLAUDE.md. Kept for reference only — do not invoke.
+---
+
 # Coordinate Paper
 
 Coordinate the RH research loop without letting speculative agent output flow directly into the canonical draft.

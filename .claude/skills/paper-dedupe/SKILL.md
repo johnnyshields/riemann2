@@ -1,3 +1,8 @@
+---
+name: paper-dedupe
+description: Remove duplicate content from paper/proof_of_rh.tex while preserving every unique observation. Tracks provenance in paper/cut-for-time.md and fixes cross-references.
+---
+
 # Paper De-dupe
 
 Remove duplicate content from `paper/proof_of_rh.tex` while preserving

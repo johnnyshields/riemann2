@@ -1,3 +1,8 @@
+---
+name: research-team
+description: Primary workhorse. Dispatches a 3+3+2 roster (3 gap-closers + 3 explorers + 2 verifiers) via TeamCreate into three sibling task dirs under tasks/. Use for a full balanced research cycle on the RH project.
+---
+
 # Research Team (3+3+2)
 
 Primary workhorse for a balanced research dispatch. Spawns \(\approx 8\)
