@@ -179,3 +179,6 @@ Source anchor:
   `psi(t)=(cos t cos 2t, cos t sin 2t, sin t)`. Its ambient `A_1` angle data is
   locally richer than overlap alone; current evidence is Jacobian-based rather
   than witness-based.
+- That spherical-twist family now has a simple exact witness: `(0, pi/4)` and
+  `(0, pi/2)` have the same overlap `0` but different `A_1` and `O_1`
+  principal-angle data.

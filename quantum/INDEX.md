@@ -42,6 +42,8 @@ Quick map of the strongest current results and where they live.
   `quantum/20260423-144313-attack-quartit-O2/reports/gap-quartit-O2.md`
 - Non-Veronese spherical benchmark:
   `quantum/20260423-204337-attack-nonveronese/reports/gap-spherical-twist.md`
+- Spherical exact witness:
+  `quantum/20260423-215017-attack-spherical-witness/reports/gap-spherical-witness.md`
 
 ## Family theorems
 

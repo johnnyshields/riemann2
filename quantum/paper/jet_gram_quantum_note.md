@@ -88,41 +88,10 @@ Interpretation:
 - This does not identify the source paper's full two-point whitened matrix with
   standard quantum geometry.
 
-## Conditional Two-Point Construction
+## First-Order Two-Point Package
 
 If one wants a quantum-side analogue of the source paper's two-point mixed and
 whitened block, one must insert extra structure.
-
-For two nearby parameters \(\lambda_1,\lambda_2\), choose a transport rule
-between rays, for example Berry parallel transport \(U_{1\leftarrow 2}\).
-Then define a first-order transported mixed block
-
-\[
-C_{ab}(\lambda_1,\lambda_2):=
-\langle D_a\psi(\lambda_1)\mid U_{1\leftarrow 2}D_b\psi(\lambda_2)\rangle.
-\]
-
-When the retained same-point horizontal Gram blocks are positive definite, one
-may whiten:
-
-\[
-\Omega^{(1)}(\lambda_1,\lambda_2)
-:=
-Q(\lambda_1)^{-1/2}
-C(\lambda_1,\lambda_2)
-Q(\lambda_2)^{-1/2}.
-\]
-
-Current status:
-
-- This is a legitimate transported-frame construction.
-- It is not yet a canonical quantum-geometric matrix invariant.
-- Without extra structure, the honest invariant content may be only the
-  singular values or principal angles of transported horizontal-jet subspaces.
-
-## Proved One-Parameter Theorem
-
-There is one exact two-point theorem in the current draft scope.
 
 Let \(\lambda \mapsto |\psi(\lambda)\rangle\) be a \(C^1\) normalized local
 lift of a one-parameter pure-state family, and define the first horizontal jet
@@ -132,7 +101,7 @@ lift of a one-parameter pure-state family, and define the first horizontal jet
 \partial_\lambda|\psi(\lambda)\rangle.
 \]
 
-Choose a fixed two-point transport rule \(U_{1\leftarrow 2}\). In the frame
+Choose a two-point transport rule \(U_{-\leftarrow +}\). In the frame
 \((|\psi\rangle,|h_\lambda\rangle)\), define
 
 \[
@@ -141,9 +110,7 @@ M_\lambda(\lambda_i)=
 1 & 0 \\
 0 & \langle h_{\lambda_i}\mid h_{\lambda_i}\rangle
 \end{pmatrix},
-\]
-
-\[
+\qquad
 N_\lambda(\lambda_-,\lambda_+)=
 \begin{pmatrix}
 \langle\psi_-\mid U_{-\leftarrow +}\psi_+\rangle &
@@ -161,110 +128,55 @@ N_\lambda
 M_\lambda(\lambda_+)^{-1/2}.
 \]
 
-If \(\mu=\phi(\lambda)\) is orientation-preserving, then
+This is a legitimate transported-frame construction, but not yet a canonical
+matrix invariant.
 
-\[
-\Omega_\mu=\Omega_\lambda.
-\]
+The exact theorem at first order is:
 
-Reason: \(h_\mu=(d\lambda/d\mu)h_\lambda\), so the derivative channel rescales
-by positive endpoint factors, and those factors cancel exactly under bilateral
-whitening because the same-point first-horizontal-jet block is diagonal.
+- if \(\mu=\phi(\lambda)\) is orientation-preserving, then
+  \(\Omega_\mu=\Omega_\lambda\);
+- if the reparameterization reverses orientation, then
+  \[
+  \Omega_\mu=E\,\Omega_\lambda\,E,
+  \qquad
+  E=\operatorname{diag}(1,-1),
+  \]
+  provided one keeps the original ordered pair of endpoints fixed.
 
-This theorem is exact but narrow.
+So the derivative channel is the only part that changes sign under orientation
+reversal.
 
-- It is first-order only.
-- It is one-parameter only.
-- It becomes independent of the choice of local lift once the transport rule is
-  itself chosen gauge-covariantly on the ray curve.
-- It still does not produce a transport-independent endpoint invariant.
-
-If the reparameterization reverses orientation, the exact replacement for
-equality is
-
-\[
-\Omega_\mu = E\,\Omega_\lambda\,E,
-\qquad
-E=\operatorname{diag}(1,-1),
-\]
-
-provided one keeps the original ordered pair of endpoints fixed. So reversal
-changes only the derivative channel sign.
-
-## Gauge Upgrade
-
-The first-horizontal-jet theorem can be upgraded one step further.
-
-Under a local phase change \(|\psi(\lambda)\rangle \mapsto e^{i\chi(\lambda)}
-|\psi(\lambda)\rangle\), the projector \(P=I-|\psi\rangle\langle\psi|\) is
-unchanged and the first horizontal jet transforms covariantly:
-
-\[
-h_\lambda \mapsto e^{i\chi(\lambda)} h_\lambda.
-\]
-
-So the same-point block is unchanged by phase gauge. If the two-point transport
-rule is itself gauge-covariant on the ray curve, then the transported mixed
-block is also unchanged by change of local lift. Therefore the bilaterally
-whitened first-horizontal-jet block is well defined on:
+Under a local phase change \(|\psi(\lambda)\rangle\mapsto e^{i\chi(\lambda)}
+|\psi(\lambda)\rangle\), the projector is unchanged and
+\(h_\lambda\mapsto e^{i\chi(\lambda)}h_\lambda\). Therefore, if the transport
+rule is itself gauge-covariant on the ray curve, the first-horizontal-jet block
+is well defined on:
 
 - a one-parameter ray curve,
 - together with a chosen gauge-covariant transport rule,
 - up to orientation-preserving reparameterization.
 
-This is stronger than a fixed-lift statement, but weaker than a canonical
-endpoint invariant. The remaining unresolved issue is transport dependence.
+This is stronger than a fixed-lift statement, but weaker than a
+transport-independent endpoint invariant.
 
-At the current level of generality, that dependence can be larger than a single
-global phase on the whole matrix. With only a bare gauge-covariant transport
-rule, different admissible transports can change derivative-channel entries
-entrywise. So the present theorem should still be read as:
-
-- a ray-curve-with-chosen-transport invariant,
-- not a transport-independent endpoint invariant,
-- and not yet a canonical matrix on ray space.
-
-There is, however, a useful reduced class. If one explicitly restricts to
+There is one useful reduced class. If one explicitly restricts to
 **scalar-phase transports** on the endpoint first-jet pair,
 
 \[
 U_{-\leftarrow +}=e^{i\alpha(\gamma)}I,
 \]
 
-then the whole whitened first-horizontal-jet block changes only by one global
-phase. In that restricted class, Berry transport and Pancharatnam transport
-(when \(\langle\psi_-\mid\psi_+\rangle\neq 0\)) lie in the same phase class, so
-they produce blocks differing only by a unit scalar factor.
+then the whole first-horizontal-jet block changes only by one global phase.
+Berry transport and Pancharatnam transport (when
+\(\langle\psi_-\mid\psi_+\rangle\neq 0\)) lie in this same phase class.
 
-This is useful, but still conditional:
+The strongest exact derived output at first order is therefore the singular-value
+package:
 
-- it depends on restricting the admissible transport class;
-- it does not show that the scalar-phase class is canonical;
-- it does not remove the zero-overlap issue for Pancharatnam transport.
-
-## Singular-Value Output
-
-The first-order block also has a more stable derived quantity than the raw
-matrix itself.
-
-For a fixed gauge-covariant transport rule, the singular values of the
-bilaterally whitened first-horizontal-jet block are:
-
-- independent of local lift,
-- invariant under orientation-preserving reparameterization,
-- invariant under orientation reversal, because
-  \(\Omega \mapsto E\Omega E\) with unitary \(E=\operatorname{diag}(1,-1)\).
-
-If one further restricts to the reduced scalar-phase transport class, then the
-singular values are also independent of the chosen transport inside that class,
-because \(\Omega\mapsto e^{i\theta}\Omega\) does not change singular values.
-
-So the singular values are a stronger candidate for a first-order canonical
-quantity than the full matrix. But this is still only a partial resolution:
-
-- for fixed transport, they are reparameterization- and lift-invariant;
-- in the scalar-phase transport class, they are transport-class invariant;
-- outside that reduced class, transport-independence is still open.
+- for fixed gauge-covariant transport, the singular values are lift-invariant
+  and invariant under all one-parameter reparameterizations, including
+  orientation reversal;
+- in the scalar-phase transport class, they are also transport-class invariant.
 
 At first order there is also a useful split interpretation. Define the ambient
 plane
@@ -277,9 +189,9 @@ Its principal angles with \(\mathcal A_1(\lambda_+)\) are canonical ambient
 invariants. The singular values of the whitened first-horizontal-jet block
 coincide with those principal-angle cosines exactly when the block is realized
 in the common ambient space, for example in the identity/scalar-phase transport
-setting. For a general transport convention, the same singular values instead
-describe the principal angles between \(\mathcal A_1(\lambda_-)\) and the
-transported plane \(U\mathcal A_1(\lambda_+)\).
+setting. For a general transport convention, the same singular values describe
+the principal angles between \(\mathcal A_1(\lambda_-)\) and the transported
+plane \(U\mathcal A_1(\lambda_+)\).
 
 ## Higher-Jet Delimitation
 
@@ -483,6 +395,8 @@ both.
 
 ## Benchmarks
 
+### Oscillator
+
 The best current small stress test is the harmonic-oscillator ground-state
 family with variable frequency:
 
@@ -531,6 +445,8 @@ At present this should be read narrowly:
 - it is an exact fact for this benchmark;
 - it is not yet a general theorem for arbitrary one-parameter families;
 - it says nothing yet about higher jets or multiparameter families.
+
+### Qutrit
 
 There is also now a better finite-dimensional benchmark for the singular-value
 side. Consider the real qutrit curve
@@ -596,6 +512,8 @@ but the second singular values are different.
 
 This is still a benchmark-level observation, not a transport-independent
 general theorem.
+
+### Quartit And Veronese
 
 These low-dimensional polynomial benchmarks are not isolated accidents. They are
 the first two cases of a clean order-\(n-1\) Veronese-family statement for
@@ -680,6 +598,8 @@ Unsafe claims, for now:
 - `quantum/20260423-190226-attack-veronese/reports/`
 - `quantum/20260423-192859-attack-Or-veronese/reports/`
 - `quantum/20260423-194242-attack-veronese-richness/reports/`
+- `quantum/20260423-194725-attack-Or-richness/reports/`
 - `quantum/20260423-195245-attack-lower-order-veronese/reports/`
 - `quantum/20260423-201939-attack-krylov/reports/`
 - `quantum/20260423-204337-attack-nonveronese/reports/`
+- `quantum/20260423-215017-attack-spherical-witness/reports/`
