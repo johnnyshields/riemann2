@@ -1,0 +1,153 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+
+\title{An Abstract Odd-Projector Layer Extracted from the RH Draft}
+\author{Working note in \texttt{grh/}}
+\date{2026-04-23}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}{Remark}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This note isolates the strongest source-light local statement that the current
+RH draft appears to support. It is deliberately narrower than any GRH, ERH, or
+Dirichlet portability claim. The theorem here stops at an odd holomorphic
+transverse scalar and the universal \(N\)-point odd-moment projector. It does
+not include the family-specific realization of that scalar, and it does not
+include the later RH-specific endgame.
+\end{abstract}
+
+\section{Scope}
+
+The current RH draft mixes a generic local phase package with a zeta-side
+realization package. The safest common core is the odd-germ/projector layer.
+This note records only that layer.
+
+\section{Setup}
+
+Fix a midpoint \(m\) and a microscopic variable \(s\). Suppose one is given:
+
+\begin{enumerate}
+\item a real critical-line phase \(\Phi\) with derivative \(q=\Phi'\);
+\item same-point and mixed finite-\(s\) jet blocks
+\[
+G_{m,\pm}(s),\qquad N_m(s),
+\]
+defined and holomorphic on \(|s|<\rho_0/Q\);
+\item positive-definite same-point blocks on that disk, so that the whitened
+block
+\[
+\widehat\Omega(s;m)=G_{m,-}(s)^{-1/2}N_m(s)G_{m,+}(s)^{-1/2}
+\]
+is holomorphic there;
+\item a real linear functional \(\Phi_K\) on the whitened block space such that
+the extracted scalar
+\[
+H_m(s):=\Phi_K\bigl(\widehat\Omega(s;m)\bigr)
+\]
+is odd under symmetric placement;
+\item a microscopic boundary estimate
+\[
+|H_m(s)|\le \frac{\mathcal B(m)}{Q^3}
+\qquad\text{for } |s|=\rho_0/Q.
+\]
+\end{enumerate}
+
+No family realization is assumed here beyond the existence of this package.
+
+\section{Abstract theorem}
+
+\begin{theorem}[Odd-germ projector layer]
+Under the setup above:
+
+\begin{enumerate}
+\item \(H_m\) is odd and holomorphic on \(|s|<\rho_0/Q\);
+\item if
+\[
+H_m(z/Q^2)=\sum_{r\ge 0} c_{2r+1}(m)\frac{z^{2r+1}}{Q^{2r+4}},
+\]
+then the coefficients satisfy Cauchy bounds of size \(\ll \mathcal B(m)\)
+with constants depending only on \(\rho_0\);
+\item for the universal coefficients \(a_j^{(N)}\) from the RH draft,
+\[
+\Xi^{(N)}(m):=\sum_{j=1}^N a_j^{(N)}H_m(j/Q^2)
+\]
+annihilates odd jets through order \(2N-3\).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+This is exactly the layer extracted by the follow-up attack in
+\texttt{tasks/20260423-052540-attack-gap-local-package-portability/}.
+
+Oddness is part of the setup. Holomorphy follows from the holomorphic block and
+whitening hypotheses. The coefficient bounds are then immediate from Cauchy's
+estimate on the microscopic disk. The final claim uses only the universal
+odd-moment identities satisfied by the coefficients \(a_j^{(N)}\). No further
+source-specific arithmetic input enters at this stage.
+\end{proof}
+
+\section{What is not included}
+
+The theorem above does \emph{not} include:
+
+\begin{enumerate}
+\item a completed-\(L\) realization theorem producing the package in the setup;
+\item the calibration comparison
+\[
+u^2\asymp \frac{x}{B}S(m),
+\]
+which needs extra family-specific hypotheses;
+\item any RH-specific remote-incidence, provenance, or global propagation
+argument;
+\item any GRH- or ERH-style conclusion.
+\end{enumerate}
+
+\section{Conditional calibration layer}
+
+The research cycle and its adversarial check indicate that calibration should
+be treated separately.
+
+To add calibration, one needs at least:
+
+\begin{enumerate}
+\item a realized value-channel derivative in the same family;
+\item a real sign-compatible amplitude replacing \(S(m)\);
+\item a nonzero toy pairing in the same channel;
+\item a preserved corrected-whitening scale strong enough to keep the remainder
+small in the calibration functional.
+\end{enumerate}
+
+So calibration is not part of the unconditional odd-projector theorem.
+
+\section{Use}
+
+This note is meant to separate two tasks that had been blurred together:
+
+\begin{enumerate}
+\item isolate the truly abstract local odd-germ / projector mechanism;
+\item separately solve the realization problem for each target family.
+\end{enumerate}
+
+That separation is the safest route for later work on primitive Dirichlet
+\(L\)-functions or the Ramanujan \(\tau\) \(L\)-function.
+
+\section{Provenance}
+
+This note was distilled from:
+
+\begin{enumerate}
+\item \texttt{grh/20260423-050630-research-team-grh-dirichlet-tau/synthesis.md};
+\item \texttt{grh/20260423-050630-research-team-grh-dirichlet-tau/notes/local_package_theorem.md};
+\item \texttt{tasks/20260423-052540-attack-gap-local-package-portability/reports/gap-local-package-routeA.md};
+\item \texttt{tasks/20260423-052540-attack-gap-local-package-portability/reports/gap-local-package-routeB.md};
+\item \texttt{tasks/20260423-052540-attack-gap-local-package-portability/reports/verifier-adversarial-local-package.md}.
+\end{enumerate}
+
+\end{document}

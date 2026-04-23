@@ -1,0 +1,151 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+
+\title{A Scattering-Candidate Reading of the Local Value Scale}
+\author{Working note in \texttt{grh/}}
+\date{2026-04-23}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This note records a candidate-object refinement suggested by the current RH
+draft. The positive scalar \(S(m)\) used in the local value channel is more
+naturally read as a positive strip-edge zero kernel than as a surrogate for a
+raw critical-line value. This suggests that future Dirichlet and Ramanujan-
+\(\tau\) generalizations should target a completed-object scattering package,
+not merely a real critical-line observable. The note does not claim that the
+draft already proves the full completed-quotient identity for \(q\), nor that
+any non-zeta realization is currently available.
+\end{abstract}
+
+\section{The kernel}
+
+The draft uses the positive kernel
+\[
+f_{\beta,\gamma}(m)=
+\frac{1-\beta}{(1-\beta)^2+(2m-\gamma)^2}
++
+\frac{\beta}{\beta^2+(2m-\gamma)^2}.
+\]
+
+For a zero \(\rho=\beta+i\gamma\), this can be rewritten as
+\[
+f_{\beta,\gamma}(m)
+=
+\Re\left(\frac{1}{1+2im-\rho}-\frac{1}{2im-\rho}\right).
+\]
+
+So the manuscript scalar
+\[
+S(m)=\sum_\rho f_{\beta_\rho,\gamma_\rho}(m)
+\]
+is a positive strip-edge zero contribution.
+
+\section{Interpretation}
+
+This kernel strongly suggests a completed-object logarithmic-derivative
+difference, heuristically of strip-edge type,
+\[
+\Re\sum_\rho\left(\frac{1}{1+2im-\rho}-\frac{1}{2im-\rho}\right).
+\]
+
+Equivalently, one is led toward a scattering-style phase derivative attached to
+a completed object, rather than toward a raw critical-line value or a mere
+reality normalization.
+
+The honest boundary is important: this note does \emph{not} claim that the
+current manuscript already proves the exact formula-level identity
+\[
+q(t)=\frac12\Im\left(\frac{d}{dt}\log \mathcal Q(t)\right)
+\]
+for some explicitly named completed quotient \(\mathcal Q(t)\). The present
+point is narrower. The zero kernel behind \(S(m)\) has the right strip-edge
+shape to make such a reading natural.
+
+\section{Archive provenance for the quotient candidate}
+
+The repository's chat archive contains a precise candidate source formula for
+this interpretation, although it is not yet promoted into the canonical RH
+draft. In
+
+\begin{quote}
+\texttt{paper/chats/20260410-043629-69d87e03-a5c8-83a5-9f21-1062e8b6d064-riemann-hypothesis-insight.md:5528-5598}
+\end{quote}
+
+the proposed quotient is
+\[
+\phi(s)=\frac{\Lambda(2s-1)}{\Lambda(2s)},
+\qquad
+\phi\!\left(\tfrac12+it\right)=e^{-2i\Phi(t)}.
+\]
+
+In that archived derivation, a zero \(\rho=\beta+i\gamma\) contributes a pole at
+\(\rho/2\) and a zero at \((1+\rho)/2\), which produces exactly the strip-edge
+kernel used in the present note.
+
+This is valuable provenance for future work in \texttt{grh/}, but it should still be
+treated as a candidate source theorem rather than as an already-canonical part
+of \texttt{paper/proof_of_rh.tex}.
+
+\section{Why this matters for GRH work}
+
+The earlier GRH notes treated candidate objects mainly as channel-choice
+problems: real critical-line scalar, paired scalar, or matrix package. The
+kernel identity sharpens that discussion.
+
+What the non-zeta program should try to reproduce is not merely a real
+observable. It should try to reproduce a background-subtracted scalar with the
+same structural role as \(S(m)\):
+
+\begin{enumerate}
+\item real;
+\item nonnegative;
+\item built from strip-edge zero data of a completed object;
+\item serving as the coefficient of the leading local value channel.
+\end{enumerate}
+
+That is a more faithful target than a raw rotated completed value.
+
+\section{Dirichlet and \texorpdfstring{$\tau$}{tau}}
+
+For primitive Dirichlet \(L\)-functions, this viewpoint sharpens the earlier
+channel discussion. The real question is not only which object is real on the
+critical line. The sharper question is which completed-object package can supply
+a positive scalar analogue of \(S(m)\) inside the local deformation.
+
+For Ramanujan-\(\tau\), the same viewpoint says that self-duality helps only at
+the level of candidate-object selection. The actual localization package is
+still missing.
+
+\section{What remains missing}
+
+The scattering reading does not by itself provide any of the hard realization
+work. In particular, it does not yet supply:
+
+\begin{enumerate}
+\item an explicit completed-quotient theorem for the manuscript's \(q(t)\);
+\item a Dirichlet realization of the corrected local block;
+\item a Ramanujan-\(\tau\) realization of the corrected local block;
+\item microscopic denominator comparability in those families;
+\item preserved whitening hierarchy and boundary control in those families.
+\end{enumerate}
+
+So the gain here is conceptual but still real: better candidate-object
+selection.
+
+\section{Use}
+
+This note should be read together with the other \texttt{grh/} notes as follows:
+
+\begin{enumerate}
+\item \texttt{local_odd_projector_note.tex} isolates the unconditional odd-germ layer;
+\item \texttt{portability_note.tex} records the broader conservative portability view;
+\item the present note sharpens the correct candidate object for the missing
+realization theorem.
+\end{enumerate}
+
+\end{document}

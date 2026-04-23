@@ -1,0 +1,216 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+
+\title{A Portability Note for the Local Phase Package Beyond Zeta}
+\author{Working note in \texttt{grh/}}
+\date{2026-04-23}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This note records a conservative portability template extracted from the current
+RH draft. It does not claim a proof of GRH, ERH, or a Ramanujan-\(\tau\)
+analogue. The main conclusion is narrower: the draft appears to contain a
+source-light local package based on a real phase, jet normalization,
+whitening, an odd transverse scalar template, and an \(N\)-point odd-moment
+projector, while the actual zeta-side realization, calibration amplitude,
+microscopic denominator control, and late contradiction remain source-specific.
+\end{abstract}
+
+\section{Verdict}
+
+The current RH draft appears to split into two layers.
+
+\begin{enumerate}
+\item An abstract odd-germ / odd-projector package that is genuinely
+source-light.
+\item A separate realization and calibration package that is still
+source-specific.
+\end{enumerate}
+
+The strongest honest theorem boundary is therefore two-layered:
+
+\begin{enumerate}
+\item Once a real odd holomorphic transverse scalar with the required
+microscopic boundary control exists, the odd expansion and the universal
+\(N\)-point odd-moment projector follow.
+\item Calibration enters only as a separate conditional interface, after one has
+a real sign-compatible amplitude, a realized value-channel derivative, and a
+nonzero toy pairing in the same channel.
+\end{enumerate}
+
+The safe portability statement is therefore conditional even locally:
+
+\medskip
+\noindent
+If a completed \(L\)-function supplies the same real critical-line channel,
+corrected odd holomorphic transverse scalar, microscopic denominator control,
+and preserved whitening scales, then the same odd-projector machinery should
+apply. If it also supplies a real sign-compatible amplitude and a nonzero toy
+pairing, then the same calibration interface should apply.
+\medskip
+
+This note does not claim that those hypotheses have been proved for primitive
+Dirichlet \(L\)-functions, for complex characters, or for the Ramanujan
+\(\tau\) \(L\)-function.
+
+\section{Portable Local Layer}
+
+The strongest candidate portable layer is:
+
+\begin{enumerate}
+\item the phase kernel built from a real phase \(\Phi\);
+\item jet normalization and the finite-\(s\) local block package;
+\item whitening of same-point and mixed blocks;
+\item the odd transverse scalar template;
+\item the discrete \(N\)-point odd-moment projector.
+\end{enumerate}
+
+In the current draft, these are the parts that look most abstraction-friendly.
+The follow-up attack sharpened the stopping point: the unconditional local
+theorem should stop at the odd-germ/projector layer.
+
+\section{Conditional Calibration Interface}
+
+The value-channel derivative, the small-\(x\) pairing against the toy anomaly,
+and the comparison
+\[
+u^2\asymp \frac{x}{B}S(m)
+\]
+should be treated as a second conditional layer, not as part of the
+unconditional source-light theorem. Keeping this separation avoids hiding the
+family-specific need for a real sign-compatible amplitude and a nonvanishing
+pairing denominator.
+
+\section{Nonportable Source Layer}
+
+The first explicitly zeta-side layer begins where the draft introduces the
+split
+\[
+q(t)=B_\zeta(t)+S(t).
+\]
+From that point on, the argument uses source-specific data:
+
+\begin{enumerate}
+\item the real calibration amplitude \(S(m)\) or its replacement;
+\item curvature control of the form \(|S''(m)|\ll L(m)S(m)^2\);
+\item microscopic denominator comparability for omitted zeros;
+\item zeta-side boundary control for the corrected odd scalar;
+\item the late RH-specific provenance / endpoint / propagation package.
+\end{enumerate}
+
+The research cycle found no support for claiming that this package already
+exists outside zeta.
+
+At the same time, a later focused attack sharpened the role of the scalar
+\(S(m)\): from the manuscript formulas alone, it is naturally a positive
+strip-edge zero kernel,
+\[
+S(m)=\sum_\rho \Re\left(\frac{1}{1+2im-\rho}-\frac{1}{2im-\rho}\right),
+\]
+which strongly suggests a completed-object scattering interpretation. This is
+best read as a candidate-object refinement, not as a proved formula-level
+theorem of the manuscript.
+
+\section{Dirichlet Cases}
+
+For primitive Dirichlet \(L\)-functions, the most plausible first route is to
+work on a completed-object package that produces a positive scalar analogue of
+\(S(m)\), not directly on raw complex values \(L(\tfrac12+it,\chi)\).
+
+A later focused attack sharpened this further at the phase level: the quotient
+\[
+\phi_F(s)=\frac{\Lambda_F(2s-1)}{\Lambda_F(2s)}
+\]
+is naturally unimodular on the critical line under the standard completed-
+\(L\) functional equation and conjugation package. So the single completed
+quotient is now best viewed as a serious \emph{phase-channel candidate}. That
+upgrade is still only a front-end improvement. It does not by itself produce
+the positive scalar analogue of \(S(m)\) needed later.
+
+Two cases should be kept separate.
+
+\begin{enumerate}
+\item Real or otherwise self-dual cases, where the local phase package may be
+closer to the zeta situation.
+\item Genuinely non-self-dual complex characters, where a rotated single-channel
+realization may still be insufficient and a paired or matrix-valued package may
+be needed to recover a positive scalar analogue of \(S(m)\).
+\end{enumerate}
+
+The research team and verifier agreed that the non-self-dual case is the least
+supported by the present draft.
+
+\section{Ramanujan \texorpdfstring{$\tau$}{tau} Test Case}
+
+The \(\tau\) \(L\)-function looks like a cleaner test object than complex
+Dirichlet characters at the self-duality level. The conservative reading is:
+
+\begin{enumerate}
+\item degree \(2\) does not obviously break the local matrix algebra;
+\item degree \(2\) does change the archimedean background and analytic-conductor
+bookkeeping;
+\item the present draft does not show that the same microscopic denominator,
+boundary, and whitening-scale package survives unchanged.
+\end{enumerate}
+
+So \(\tau\) looks like a good local test object, not a proved extension. The
+later scattering attack suggests a cleaner target object here too: not merely a
+real channel, but a completed-object package whose background-subtracted zero
+part plays the role of \(S(m)\). A later quotient-phase attack sharpens this in
+the same narrow way: the self-dual quotient is the cleanest \emph{phase}
+candidate, but none of the five localization checkpoints is discharged by that
+alone.
+
+\section{The Missing Realization Theorem}
+
+The main missing theorem suggested by the cycle is a completed-\(L\)
+realization theorem with hypotheses of the following kind:
+
+\begin{enumerate}
+\item a real local phase on the critical line;
+\item a background/value split \(q=B+S\);
+\item a real, sign-compatible amplitude replacing \(S(m)\);
+\item a corrected odd holomorphic transverse scalar on a microscopic disk;
+\item denominator comparability and tail control on that disk;
+\item preserved whitening scales strong enough to recover the same
+\(Q^{-3}\)-type boundary hierarchy.
+\end{enumerate}
+
+Only after that theorem exists does it become reasonable to discuss GRH-style
+extensions of the current package. The follow-up attack also shows that one
+should not describe the calibration layer as source-light from local scope
+alone.
+
+\section{What Can Be Ported Back Immediately}
+
+Even before any completed-\(L\) realization theorem is written, the main RH
+draft would benefit from a sharper internal boundary:
+
+\begin{enumerate}
+\item present the opening local package in neutral phase language;
+\item mark the first zeta-side input layer explicitly;
+\item present the \(N\)-point projector as universal on odd holomorphic germs;
+\item keep the final contradiction and provenance remarks explicitly zeta-side.
+\end{enumerate}
+
+This is the strongest safe takeaway from the present cycle.
+
+\section{Near-Term Program In \texttt{grh/}}
+
+The next steps suggested by the cycle are:
+
+\begin{enumerate}
+\item a family-agnostic note isolating the local phase package and its minimal
+hypotheses;
+\item a Dirichlet note that decides the correct critical-line object and tracks
+where sign-compatibility of the amplitude is used;
+\item a \(\tau\) note that checks the degree-\(2\) archimedean background,
+microscopic radius, and whitening power counting.
+\end{enumerate}
+
+\end{document}

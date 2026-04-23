@@ -1,0 +1,138 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+
+\title{Candidate Source Theorem for the Zeta Scattering Phase}
+\author{Working note in \texttt{grh/}}
+\date{2026-04-23}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This note records the exact source theorem one would want in order to close the
+gap between the current RH draft's notation \(q=B_\zeta+S\) and the archive-
+backed scattering quotient candidate
+\[
+\phi(s)=\frac{\Lambda(2s-1)}{\Lambda(2s)}.
+\]
+The note does not claim that this theorem has already been proved in the
+canonical draft. Its purpose is to separate what is already safe at kernel
+level from what still remains conditional at source level.
+\end{abstract}
+
+\section{The desired theorem}
+
+The clean source theorem would read as follows.
+
+\medskip
+\noindent
+Let
+\[
+\phi(s)=\frac{\Lambda(2s-1)}{\Lambda(2s)}
+\]
+and let \(I\subset\mathbb R\) be a compact interval avoiding the real
+singularities contributed by the gamma factor, trivial zeros, and pole terms.
+Choose a continuous phase \(\Phi\) on \(I\) such that
+\[
+\phi\!\left(\tfrac12+it\right)=e^{-2i\Phi(t)},
+\qquad q(t):=\Phi'(t).
+\]
+Then on \(I\),
+\[
+q(t)=B_{\mathrm{aut}}(t)+\sum_\rho f_{\beta_\rho,\gamma_\rho}(t),
+\]
+where the sum runs over nontrivial zeros \(\rho=\beta_\rho+i\gamma_\rho\),
+counted with multiplicity, and
+\[
+f_{\beta,\gamma}(t)=
+\frac{1-\beta}{(1-\beta)^2+(2t-\gamma)^2}
++
+\frac{\beta}{\beta^2+(2t-\gamma)^2}.
+\]
+
+This would justify the paper's source split
+\[
+q(t)=B_\zeta(t)+S(t),
+\qquad
+S(m)=q_\zeta(m)-B_\zeta(m),
+\]
+and identify \(S(m)\) as a positive strip-edge zero density.
+
+\section{What is already safe}
+
+The current repository already supports the following conservative layers.
+
+\begin{enumerate}
+\item The single-zero strip-edge kernel identity.
+\item The manuscript-level formula
+\[
+S(m)=\sum_\rho f_{\beta_\rho,\gamma_\rho}(m)
+\]
+at the level of the displayed kernel formulas.
+\item The conditional omitted-tail curvature theorem once the shell-convergence
+package is stated.
+\end{enumerate}
+
+These are the layers isolated in \texttt{strip_edge_kernel_note.tex}.
+
+\section{Archive provenance}
+
+The repository's chat archive contains a direct derivation of the candidate
+source theorem. In
+
+\begin{quote}
+\texttt{paper/chats/20260410-043629-69d87e03-a5c8-83a5-9f21-1062e8b6d064-riemann-hypothesis-insight.md:5528-5598}
+\end{quote}
+
+the proposed source quotient is written explicitly as
+\[
+\phi(s)=\frac{\Lambda(2s-1)}{\Lambda(2s)},
+\qquad
+\phi\!\left(\tfrac12+it\right)=e^{-2i\Phi(t)}.
+\]
+
+That archived derivation also records the single-zero pole/zero bookkeeping and
+the factor-of-\(2\) normalization
+\[
+\partial_s\log\phi\!\left(\tfrac12+it\right)=2q(t).
+\]
+
+This is strong provenance, but it remains archive provenance until promoted into
+the canonical draft.
+
+\section{What is still missing}
+
+The verifier concluded that the gap is not yet ``bookkeeping only.'' The paper
+still lacks the theorem identifying its own abstract phase derivative
+\(q=\Phi'\) with the specific quotient above.
+
+The remaining conditional checklist is:
+
+\begin{enumerate}
+\item fix the quotient object \(\phi(s)=\Lambda(2s-1)/\Lambda(2s)\);
+\item prove the branch/sign/factor-of-\(2\) normalization for the manuscript
+phase;
+\item prove the single-zero contribution identity inside the canonical draft;
+\item state the multiplicity convention explicitly;
+\item prove the compact-interval convergence/regularization statement;
+\item identify and unify the full background term behind \(B_\zeta\),
+\(B_{\Aut}\), and \(B_{\bg}\).
+\end{enumerate}
+
+Only after that checklist is closed does the source theorem become canonical.
+
+\section{Use}
+
+This note should be read as a bridge between:
+
+\begin{enumerate}
+\item the safe kernel theorem already isolated in \texttt{strip_edge_kernel_note.tex};
+\item the broader candidate-object discussion in \texttt{scattering_candidate_note.tex};
+\item the future task of promoting an explicit source theorem back into the main
+RH draft.
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,148 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+
+\title{A Positive Strip-Edge Kernel Extracted from the RH Draft}
+\author{Working note in \texttt{grh/}}
+\date{2026-04-23}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This note isolates a conservative theorem that is genuinely supported by the
+current RH draft: each strip zero contributes a positive strip-edge kernel,
+and omitted-zero tails built from these kernels admit the curvature bound used
+in the manuscript once the stated shell-convergence hypotheses are imposed. The
+note does not claim a fully normalized completed-function identity for the
+phase derivative \(q\); that stronger source-level reading remains conditional
+on a separate theorem.
+\end{abstract}
+
+\section{Single-zero kernel}
+
+\begin{lemma}[Positive strip-edge kernel]
+Let \(\rho=\beta+i\gamma\) with \(0\le \beta\le 1\). Define
+\[
+K_\rho(t):=\Re\left(\frac{1}{1+2it-\rho}-\frac{1}{2it-\rho}\right).
+\]
+Then for every real \(t\),
+\[
+K_\rho(t)=
+\frac{1-\beta}{(1-\beta)^2+(2t-\gamma)^2}
++
+\frac{\beta}{\beta^2+(2t-\gamma)^2},
+\]
+and in particular \(K_\rho(t)>0\).
+\end{lemma}
+
+\begin{proof}
+Write
+\[
+\frac{1}{1+2it-\rho}=
+\frac{1-\beta-i(2t-\gamma)}{(1-\beta)^2+(2t-\gamma)^2},
+\qquad
+\frac{1}{2it-\rho}=
+\frac{-\beta-i(2t-\gamma)}{\beta^2+(2t-\gamma)^2}.
+\]
+Taking real parts and subtracting gives the displayed identity. Both summands
+are nonnegative when \(0\le \beta\le 1\), and at least one is strictly
+positive.
+\end{proof}
+
+\section{Summed tail layer}
+
+Suppose now that one has an omitted-zero set and forms the strip-edge tail
+\[
+T_{\mathrm{far}}(t)=\sum_{\rho\notin \mathcal L} K_\rho(t).
+\]
+
+The manuscript uses this object under explicit local shell-convergence
+hypotheses. In that setting, the single-zero kernel lemma feeds the curvature
+bound.
+
+\begin{lemma}[Conditional omitted-tail curvature]
+Assume the omitted-zero shell sums converge strongly enough to justify termwise
+differentiation up to order two, and let
+\[
+\Delta_\rho:=\operatorname{dist}(2I,\gamma_\rho)
+\]
+for a fixed real interval \(I\). Then on \(I\), each omitted zero satisfies
+\[
+|K_\rho''(t)|\ll \Delta_\rho^{-4},
+\]
+and therefore
+\[
+\sum_{\rho\notin \mathcal L}|K_\rho''(t)|
+\ll
+\sum_{\rho\notin \mathcal L}\Delta_\rho^{-4}.
+\]
+\end{lemma}
+
+\begin{proof}
+Each summand of \(K_\rho\) has the form
+\[
+g_a(u)=\frac{a}{a^2+u^2}
+\qquad (a\in[0,1]).
+\]
+Direct differentiation shows \(|g_a''(u)|\ll |u|^{-4}\) away from \(u=0\).
+Since omitted zeros satisfy \(|2t-\gamma_\rho|\ge \Delta_\rho\) on \(I\), the
+bound follows termwise. Summation is justified by the stated convergence
+hypothesis.
+\end{proof}
+
+\section{What this note does not claim}
+
+This note stops deliberately before the stronger source-level statement. In
+particular, it does \emph{not} claim from the current manuscript formulas alone
+that
+\[
+q(t)=B_\zeta(t)+S(t)
+\]
+has already been proved as a fully normalized completed-log-derivative identity
+with all gamma, pole, trivial-zero, and Hadamard bookkeeping supplied.
+
+The safe statement is narrower:
+
+\begin{enumerate}
+\item the single-zero strip-edge kernel is positive;
+\item the omitted-zero tail built from these kernels has the curvature bound used
+in the manuscript once the local shell-convergence package is stated;
+\item this isolates a positive strip-edge scalar candidate for later completed-
+\(L\) generalization work.
+\end{enumerate}
+
+\section{Why this matters}
+
+The GRH notes in \texttt{grh/} now separate three layers:
+
+\begin{enumerate}
+\item an unconditional odd-germ / odd-projector layer;
+\item a candidate-object refinement saying the zeta scalar \(S(m)\) should be
+viewed as a positive strip-edge zero kernel;
+\item a still-missing completed-\(L\) realization theorem for Dirichlet or
+Ramanujan-\(\tau\).
+\end{enumerate}
+
+This note belongs only to the second layer.
+
+\section{Provenance}
+
+This note was distilled from:
+
+\begin{enumerate}
+\item \texttt{grh/20260423-050630-research-team-grh-dirichlet-tau/notes/scattering_generalization.md};
+\item \texttt{tasks/20260423-130548-attack-gap-scattering-generalization/reports/gap-scattering-generalization-routeA.md};
+\item \texttt{tasks/20260423-130548-attack-gap-scattering-generalization/reports/gap-scattering-generalization-routeB.md};
+\item \texttt{tasks/20260423-130548-attack-gap-scattering-generalization/reports/verifier-adversarial-scattering-generalization.md};
+\item \texttt{tasks/20260423-131531-attack-gap-strip-edge-kernel/reports/gap-strip-edge-kernel-routeA.md};
+\item \texttt{tasks/20260423-131531-attack-gap-strip-edge-kernel/reports/gap-strip-edge-kernel-routeB.md};
+\item \texttt{tasks/20260423-131531-attack-gap-strip-edge-kernel/reports/verifier-adversarial-strip-edge-kernel.md}.
+\end{enumerate}
+
+\end{document}

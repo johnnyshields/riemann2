@@ -1,0 +1,79 @@
+# GRH / Dirichlet / Tau Research Cycle
+
+Date: 2026-04-23
+Timestamp: `20260423-050630`
+
+## Scope
+
+Explore how the current RH draft architecture might extend to:
+
+- primitive Dirichlet \(L\)-functions / ERH;
+- broader GRH-style completed \(L\)-function settings;
+- the Ramanujan \(\tau\) \(L\)-function as a higher-degree test case.
+
+Primary goal: identify insights that can be ported back into
+`paper/proof_of_rh.tex`, especially hidden zeta-specific assumptions and any
+cleaner completed-\(L\)-function abstractions.
+
+## Task dirs
+
+- `tasks/20260423-050630-attack-gap-grh-dirichlet-tau/`
+- `tasks/20260423-050630-attack-fund-grh-dirichlet-tau/`
+- `tasks/20260423-050630-verify-grh-dirichlet-tau/`
+
+## Deliverables
+
+- teammate reports in the task dirs;
+- coordinator synthesis in this `grh/` subtree.
+
+## Key files
+
+- `synthesis.md` — conservative three-bin synthesis of the research-team cycle.
+- `notes/local_package_theorem.md` — sharpened boundary from the follow-up
+  attack: unconditional odd-germ/projector layer, calibration only conditional.
+- `notes/dirichlet_channel.md` — current honest stance on primitive Dirichlet
+  channels: paired scalar as the more conservative first target, no realized
+  portability claim yet.
+- `notes/tau_localization.md` — current honest stance on the Ramanujan `\tau`
+  case: cleaner self-dual channel candidate, but no realized localization
+  package yet.
+- `notes/scattering_generalization.md` — sharpened candidate-object note:
+  `S(m)` behaves like a positive strip-edge zero kernel, suggesting a completed
+  scattering-style target rather than a raw critical-line-value target.
+- `notes/source_theorem_gap.md` — precise boundary after the archive-backed
+  quotient discovery: kernel theorem proved, source theorem still conditional.
+- `notes/quotient_phase.md` — quotient unimodularity update: serious phase
+  candidate for Dirichlet and tau, but only at the phase-channel level.
+- `notes/positive_s_implication.md` — scoped roadmap update: once a family
+  theorem yields the exact `S(m)`-slot scalar, the leading-channel coefficient
+  theorem is already in place; the next bottlenecks are remainder dominance and
+  the odd/transverse package.
+- `notes/remainder_dominance.md` — narrower version of that roadmap: remainder
+  dominance is the next bottleneck only for the calibrated value-channel
+  subchain, not for the whole program.
+- `notes/odd_package_transport.md` — third-stage bottleneck note: after exact
+  scalar-slot identification and value-channel remainder dominance, the next
+  independent target is the corrected odd/transverse realization-and-boundary
+  theorem.
+- `notes/universal_source_kernel.md` — scoped simplification note: once a
+  family-specific quotient/source theorem exists, the one-zero strip-edge
+  kernel is universal upstairs, but the manuscript `S(m)` slot remains
+  family-specific.
+- `notes/priority.md` — two-criterion roadmap: best first non-zeta realization
+  target is the primitive Dirichlet paired-scalar source theorem; best value
+  back to the RH draft is the canonical zeta source theorem for `q` and `S`.
+- `notes/dirichlet_paired_source.md` — exact statement of that top non-zeta
+  target, with scope tightened after the later quotient and universal-kernel
+  refinements.
+- `paper/portability_note.tex` — broad portability note for Dirichlet,
+  GRH-style settings, and the Ramanujan `\tau` test case.
+- `paper/local_odd_projector_note.tex` — standalone note isolating the
+  source-light odd-projector layer.
+- `paper/scattering_candidate_note.tex` — candidate-object memo: `S(m)` behaves
+  like a positive strip-edge zero kernel, suggesting a completed scattering
+  package as the right non-zeta target.
+- `paper/strip_edge_kernel_note.tex` — conservative theorem note: positive
+  single-zero strip-edge kernel plus conditional omitted-tail curvature layer.
+- `paper/source_theorem_candidate_note.tex` — exact target theorem for porting
+  the archive-backed quotient formula into a canonical source theorem for `q`
+  and `S`.
