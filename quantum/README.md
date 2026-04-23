@@ -15,7 +15,7 @@ Scope:
 - Primary source object: `paper/proof_of_rh.tex` lines 114, 171--259.
 
 Current bundle:
-- `20260423-043347-research-team-jet-gram-qm/`
+- `teams/20260423-043347-research-team-jet-gram-qm/`
 
 Navigation:
 - Current theorem/results index: `quantum/INDEX.md`

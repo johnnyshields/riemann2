@@ -95,6 +95,26 @@ cleaner completed-\(L\)-function abstractions.
 - `notes/paired_slot_realization.md` — current sharpest non-zeta theorem target:
   paired source-plus-slot realization, with upstairs/downstairs split explicit
   and downstream remainder/odd-package burdens left separate.
+- `notes/paired_slot_hypotheses.md` — refinement of that target: the exact slot
+  theorem already needs minimal local analytic admissibility, not just the
+  upstairs paired source theorem.
+- `notes/whitening_interface.md` — theorem-facing local hypothesis block for the
+  paired exact-slot theorem: microscopic holomorphy, same-point
+  positivity/nondegeneracy, holomorphic whitening, and first value-channel
+  derivative.
+- `notes/paired_aval.md` — theorem-facing note for the paired first-order value
+  direction: locally formal once admissibility is in place, but still
+  conditional on a paired-family local setup.
+- `notes/paired_value_channel.md` — theorem-facing note for the paired one-
+  scalar value deformation: still viable, but only after the paired source slot
+  and local whitening interface are fixed.
+- `notes/paired_normalization_compatibility.md` — theorem-facing note for the
+  exact scalar match: the paired source scalar must be the very coefficient in
+  the local slot identity, not a renormalized or upstairs-only surrogate.
+- `notes/same_point_positivity.md` — local whitening blueprint note: the
+  manuscript uses a real perturbative same-point positivity package, but it is
+  only safely extractable as a transport blueprint, not yet as a standalone
+  cross-family lemma package.
 - `notes/aval_transport.md` — narrow transport note: once the local symmetric
   normal form and corrected decomposition are realized, the explicit `A_val`
   matrix and `Phi_K(A_val)=0` are first-order local algebra, but the full
@@ -118,6 +138,12 @@ cleaner completed-\(L\)-function abstractions.
 - `notes/paired_compact_theorem.md` — theorem-facing shape note for the non-zeta
   side: the paired target should first be stated as a compact-interval source
   package blueprint, not as a global or endgame-strength theorem.
+- `notes/paired_source_package.md` — sharpening of that shape: the compact
+  paired source theorem must stop before exact slot realization and local
+  whitening-interface claims.
+- `notes/paired_proof_plan.md` — scoped milestone note: the paired source-plus-
+  slot target is now a theorem-facing blueprint with explicit missing burdens,
+  not a near-closed theorem.
 - `paper/portability_note.tex` — broad portability note for Dirichlet,
   GRH-style settings, and the Ramanujan `\tau` test case.
 - `paper/local_odd_projector_note.tex` — standalone note isolating the

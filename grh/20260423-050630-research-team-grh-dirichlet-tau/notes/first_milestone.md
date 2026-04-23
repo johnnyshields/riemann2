@@ -20,7 +20,9 @@ with explicit scope:
 The later patch-order attack sharpens this wording further:
 
 - the theorem-facing milestone is a 2-step paired patch order;
-- it should not be read as swallowing remainder dominance or odd/transverse work.
+- it should not be read as swallowing remainder dominance or odd/transverse work;
+- the 2-step statement is safest only if the local positivity/whitening
+  interface is named explicitly in the theorem hypotheses.
 
 ## Why
 

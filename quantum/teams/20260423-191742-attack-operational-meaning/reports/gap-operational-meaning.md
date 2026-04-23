@@ -1,0 +1,9 @@
+# gap-operational-meaning
+
+- **Claim**: The strongest exact operational reading currently justified is at the projector/subspace level: if \(\Pi_\pm\) are the orthogonal projectors onto the canonical endpoint ambient subspaces \(\mathcal A_r(x_\pm)\) (or analogously onto \(O_r(x_\pm)\) when ranks match), then \(K_-:=\Pi_-\Pi_+\Pi_-|_{\mathcal A_r(x_-)}\) is exactly the effect operator for the two-step sharp yes/no test “is the state in the `-` endpoint subspace?” followed by “is the post-measurement state in the `+` endpoint subspace?”. Its eigenvalues are the squared principal-angle cosines, so each \(\cos^2\theta_i\) is an achievable conditional acceptance probability for that sequential subspace-membership test.
+- **Status**: proved
+- **Evidence**: The note already proves that the canonical transport-free two-point invariant is the pair of endpoint subspaces, with principal angles between them, and that the compression \(K_-\) has spectrum equal to the squared principal-angle cosines. For any density operator supported on the `-` subspace, the sequential yes/yes probability is \(\mathrm{tr}(\rho K_-)\); on a principal eigenvector it is exactly the corresponding eigenvalue. This is an exact measurement statement for the canonical subspace invariant, not for raw matrix entries.
+- **Exact refs**: `quantum/paper/jet_gram_quantum_note.md:356-372`; `quantum/findings.md:83-86`; `quantum/teams/20260423-191742-attack-operational-meaning/notes/coordinator-brief.md:3-13`.
+- **Dependencies**: Canonical endpoint subspaces in a fixed ambient Hilbert space; standard projective-measurement/Lüders update rule.
+- **Strongest objection**: This is mathematically exact but physically thin: it is a subspace-membership test interpretation, not a theorem about fidelity, scattering, or a privileged observable.
+- **Needed for promotion**: Keep it as a short operator-level corollary, not as a new physical pillar.

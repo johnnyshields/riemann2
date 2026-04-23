@@ -86,6 +86,9 @@ Source anchor:
   partial isometry on the nonzero-overlap sector. This is stronger than the
   simple-spectrum frame corollary, but still not a full canonical matrix
   package.
+- The complete exact operator package of a canonical subspace pair is now
+  explicit: cross-contraction, positive compressions, polar partial isometry,
+  simple-spectrum frame corollary, and repeated-spectrum no-go.
 - On the current qutrit/quartit/Veronese benchmark families, this simple-spectrum
   corollary is genuinely usable on a nonempty open set; it is not just a formal
   edge case.
@@ -102,6 +105,11 @@ Source anchor:
 - Exact unitary orbits avoid rank-jump issues entirely: `A_r(t)` and `O_r(t)`
   move by unitary conjugation, so their ranks are constant and the local
   projector metrics are globally well defined along the orbit.
+- If the cyclic space of `(H, psi_0)` has finite dimension `m`, then the exact
+  two-point invariants of `A_r` and `O_r` stabilize once `r >= m-1`.
+- In that same finite-cyclic exact unitary setting, the full ambient package has
+  a canonical finite Jacobi/Lanczos normal form, with the two-point ambient
+  operator package realized by `e^{-iΔJ}`.
 - For exact unitary subspace orbits `S(t)=e^{-itH}S(0)`, the local projector
   metric has the exact commutator/leakage form
   `1/2 ||dot Pi_t||_HS^2 = 1/2 ||[H,Pi_t]||_HS^2 = ||(I-Pi_t) H Pi_t||_HS^2`.
@@ -112,6 +120,8 @@ Source anchor:
   value-channel-removed object; `A_r` is the ambient subspace that currently
   supports the strongest transport-free two-point theorem. The present record
   does not justify a unique global winner between them.
+- Equivalently, `O_r` is canonically the quotient of `A_r` by the state line
+  via the restricted orthogonal projector.
 - On the current qutrit/quartit benchmarks, `O_r` already carries richer
   two-point geometry than overlap alone. On the quartit second-order benchmark,
   `O_2` is actually finer than `A_2` at the level of principal-angle data.
@@ -224,3 +234,7 @@ Source anchor:
 - That spherical-twist family now has a simple exact witness: `(0, pi/4)` and
   `(0, pi/2)` have the same overlap `0` but different `A_1` and `O_1`
   principal-angle data.
+- More generally, the spherical twist family
+  `psi_k(t) = (cos t cos kt, cos t sin kt, sin t)` has an exact equal-overlap
+  witness for every integer `k >= 2`, so the non-Veronese richer-than-overlap
+  phenomenon comes in a family, not just a single example.
