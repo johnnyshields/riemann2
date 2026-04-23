@@ -63,6 +63,13 @@ Source anchor:
   canonical ambient subspaces give canonical operators whose spectra are the
   squared principal-angle cosines. This is a clean reformulation, not stronger
   invariant content.
+- The strongest exact operational reading so far is only this: the projector
+  compression `Pi_- Pi_+ Pi_-` is the effect operator for the ideal sequential
+  yes/yes subspace-membership test, and its eigenvalues are the corresponding
+  optimal success probabilities `cos^2(theta_i)`.
+- For exact unitary orbits `psi(t)=e^{-itH} psi_0`, the ambient spaces `A_r(t)`
+  are transported Krylov spaces and the `O_r(t)` are their exact
+  value-channel-removed / compressed Krylov counterparts.
 - The exact relation is `A_r = span{psi} \oplus O_r`. `O_r` is the faithful
   value-channel-removed object; `A_r` is the ambient subspace that currently
   supports the strongest transport-free two-point theorem. The present record
@@ -70,6 +77,13 @@ Source anchor:
 - On the current qutrit/quartit benchmarks, `O_r` already carries richer
   two-point geometry than overlap alone. On the quartit second-order benchmark,
   `O_2` is actually finer than `A_2` at the level of principal-angle data.
+- For the quartit benchmark, `O_2` now has a compact exact `2x2` representative
+  whose singular values are the two nontrivial `O_2` principal-angle cosines,
+  and the same overlap-equal witness pair used for `A_2` also separates the
+  `O_2` data.
+- The qutrit `O_1` benchmark also now has an explicit equal-overlap /
+  different-`O_1` witness, so the value-channel-free first-order geometry is
+  citation-ready rather than only Jacobian-based.
 
 ## Conditional
 
@@ -122,38 +136,46 @@ Source anchor:
   exactly `(1, 1, sigma_3(u,v))`, where `sigma_3` is the cosine between the
   endpoint osculating-plane normals. There is also an explicit equal-overlap /
   different-`sigma_3` witness pair.
+- The qutrit/quartit ambient benchmarks are the first two cases of an exact
+  order-`n-1` Veronese-family theorem for `v_n(t)=(1,t,...,t^n)`: the ambient
+  osculating subspace is a codimension-`1` hyperplane with normal given by the
+  coefficient vector of `(x-t)^n`, and the nontrivial principal-angle cosine is
+  the normalized binomial-square polynomial in `uv`.
+- For every `n >= 2` in that ambient Veronese family, the nontrivial
+  principal-angle cosine is generically not a function of endpoint overlap
+  alone; a direct Jacobian calculation at `(u,v)=(0,1)` is already nonzero.
+- On the value-channel-free side, there is a parallel order-`n-1` Veronese
+  benchmark-family corollary: `O_{n-1}(t)^\perp = span{psi_n(t), nu_n(t)}` and
+  the full two-point `O_{n-1}` data is captured by an explicit `2x2` complement
+  matrix recovering the qutrit `O_1` and quartit `O_2` cases.
+- For every `n >= 2` in that value-channel-free Veronese family, the full
+  `O_{n-1}` two-point data is generically not determined by overlap alone, since
+  the determinant of the `2x2` complement matrix is already the ambient
+  nontrivial cosine `c_n`.
+- More generally, the lower-order ambient Veronese osculating complement has an
+  exact polynomial description:
+  `A_r(t)^\perp = Coeff((x-t)^{r+1} R_{<= n-r-1}[x])`.
+  This is a clean side corollary, though not yet a source of equally sharp
+  all-`(n,r)` principal-angle formulas.
 
 ## Missing
 
-- Exact gauge-invariant definition of the quantum-side jet vectors.
-- Higher-jet covariantization that survives phase gauge and reparameterization
-  without hidden coordinate leakage.
-- Precise reduction of the first nontrivial jet level to known quantum geometry.
-- Proof that any matrix-valued two-point object, rather than only singular
-  values / principal angles of transported jet subspaces, is canonical.
-- Operational interpretation: fidelity, adiabatic response, scattering, or
-  another measurable quantity.
-- Worked examples beyond analogy.
-- A nonconstant, asymmetric example that better matches the paper's left/right
-  whitening pattern.
-- Canonical transport, higher-jet covariantization, and frame-selection results
-  strong enough to justify a matrix-valued two-point invariant.
-- A general theorem explaining when one-parameter first-jet bilateral
-  whitening is reparameterization invariant, and when that phenomenon fails.
-- A phase-gauge/transport theorem strong enough to turn the narrow first-jet
-  reparameterization result into a transport-independent canonical ray-space
-  statement.
-- A principled restriction of the admissible transport class. With only a bare
-  gauge-covariant transport rule, remaining ambiguity can be larger than a
-  global phase on the matrix.
-- If one explicitly restricts to scalar-phase transports of the endpoint
-  first-jet pair, the remaining ambiguity drops to a single global phase on the
-  whitened first-horizontal-jet block. Berry and Pancharatnam fall into this
-  same phase class when endpoint overlap is nonzero.
-- The singular values of the bilaterally whitened first-horizontal-jet block are
-  already invariant under lift change and all reparameterizations for a fixed
-  gauge-covariant transport. In the reduced scalar-phase transport class they
-  are also transport-class invariant.
-- In the identity/scalar-phase setting, those first-order singular values are
-  exactly the principal-angle cosines of the ambient planes
-  `A_1(λ)=span{ψ(λ), h_λ}`.
+- A canonical higher-order covariant-jet hierarchy if one wants a transport-based
+  matrix language beyond the raw ambient-subspace picture.
+- A principled transport/frame theorem strong enough to justify any
+  transport-independent matrix-valued two-point invariant beyond subspace data.
+- A sharper decision criterion for when `O_r` versus `A_r` is the physically or
+  mathematically preferred object outside the current benchmark families.
+- A concrete worked model tying the projector/principal-angle invariants to a
+  naturally arising protocol rather than abstract subspace tests alone.
+- General lower-order (`r < n-1`) Veronese-family formulas, especially on the
+  value-channel-free `O_r` side.
+- Any non-benchmark family theorem showing the richer-than-overlap behavior is
+  structurally generic outside the polynomial/Veronese setting.
+
+## Candidate expansions
+
+- A simple non-Veronese benchmark family is the spherical-twist curve
+  `psi(t)=(cos t cos 2t, cos t sin 2t, sin t)`. Its ambient `A_1` angle data is
+  locally richer than overlap alone; current evidence is Jacobian-based rather
+  than witness-based.

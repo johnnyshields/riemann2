@@ -1,0 +1,142 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+
+\title{Candidate Paired Source-and-Slot Theorem for Primitive Dirichlet Characters}
+\author{Working note in \texttt{grh/}}
+\date{2026-04-23}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This note records the current best non-zeta theorem target identified in the
+\texttt{grh/} program: an exact paired source-and-slot theorem for primitive
+Dirichlet characters. The target is conservative. It does not claim a realized
+theorem. It isolates the exact paired object, the upstairs source burden, and
+the downstream local-slot identification burden.
+\end{abstract}
+
+\section{The paired object}
+
+For a primitive Dirichlet character \(\chi\), define the paired completed
+object
+\[
+\Xi_\chi(s):=\Lambda(s,\chi)\Lambda(s,\overline\chi)
+\]
+and the strip-edge quotient
+\[
+\Phi_\chi^{\mathrm{pair}}(s):=\frac{\Xi_\chi(2s-1)}{\Xi_\chi(2s)}.
+\]
+
+This is the cleanest theorem-facing paired object from current scope alone. It
+packages the contragredient pair into one self-dual scalar object and removes
+the residual root-number asymmetry at the boundary phase level.
+
+\section{Why this object}
+
+Three features motivate this choice.
+
+\begin{enumerate}
+\item It mirrors the zeta strip-edge quotient form directly.
+\item Its boundary phase law is cleaner than the single-channel quotient law.
+\item Conditional on an exact paired-source theorem, the one-zero strip-edge
+kernel and its positivity are automatic upstairs.
+\end{enumerate}
+
+From current scope alone, this does not yet imply the exact local scalar used by
+the manuscript's value channel.
+
+\section{Candidate theorem}
+
+The cleanest current theorem target is a two-stage statement.
+
+\subsection*{Stage 1: paired source theorem}
+
+On singularity-free compact intervals, prove a source theorem of the form
+\[
+q_\chi^{\mathrm{pair}}(t)=B_\chi^{\mathrm{pair}}(t)+S_\chi^{\mathrm{pair}}(t),
+\]
+where:
+
+\begin{enumerate}
+\item \(q_\chi^{\mathrm{pair}}\) is the phase derivative coming from
+\(\Phi_\chi^{\mathrm{pair}}\);
+\item \(B_\chi^{\mathrm{pair}}\) is one unified paired background term,
+containing conductor/scaling, gamma derivatives, and any trivial-zero or pole
+corrections;
+\item \(S_\chi^{\mathrm{pair}}\) is the background-subtracted paired strip-edge
+zero scalar.
+\end{enumerate}
+
+\subsection*{Stage 2: slot realization}
+
+Prove that this exact paired scalar occupies the manuscript's local value slot:
+\[
+\Delta_\chi^{\mathrm{pair}}(m,\sigma)
+=
+S_\chi^{\mathrm{pair}}(m)
+A_{\mathrm{val},\chi}^{\mathrm{pair}}(m,\sigma)
++
+R_\chi^{\mathrm{pair}}(m,\sigma).
+\]
+
+Only after this second step does the paired scalar become the exact analogue of
+the manuscript's \(S(m)\).
+
+\section{What becomes automatic after slot realization}
+
+If the paired theorem yields the exact local slot above, then the manuscript's
+existing local algebra already supplies the leading-channel interface. No second
+coefficient theorem is needed beyond the slot-realization theorem itself.
+
+\section{What remains after slot realization}
+
+Even then, the following remain separate burdens:
+
+\begin{enumerate}
+\item remainder dominance in the calibrated value-channel subchain;
+\item corrected odd/transverse realization;
+\item denominator and whitening control;
+\item boundary estimates for the odd scalar;
+\item any variable-\(x\) or calibration-uniformity issues.
+\end{enumerate}
+
+So this note identifies the first non-zeta exact-source target, not the whole
+portability theorem.
+
+\section{Safe scope}
+
+The strongest safe wording at present is:
+
+\begin{quote}
+From current scope alone, the paired source-and-slot theorem is the cleanest
+first non-zeta exact-source target.
+\end{quote}
+
+It is not yet safe to call it the uniquely correct or fully realized non-zeta
+theorem.
+
+\section{Provenance}
+
+This note is distilled from:
+
+\begin{enumerate}
+\item \texttt{grh/20260423-050630-research-team-grh-dirichlet-tau/notes/dirichlet\_paired\_source.md};
+\item \texttt{grh/20260423-050630-research-team-grh-dirichlet-tau/notes/paired\_slot\_realization.md};
+\item \texttt{tasks/20260423-141819-attack-gap-dirichlet-paired-source/reports/gap-dirichlet-paired-source-routeA.md};
+\item \texttt{tasks/20260423-141819-attack-gap-dirichlet-paired-source/reports/gap-dirichlet-paired-source-routeB.md};
+\item \texttt{tasks/20260423-143207-attack-gap-paired-object-candidate/reports/gap-paired-object-routeA.md};
+\item \texttt{tasks/20260423-143207-attack-gap-paired-object-candidate/reports/gap-paired-object-routeB.md};
+\item \texttt{tasks/20260423-144416-attack-gap-paired-quotient-properties/reports/gap-paired-quotient-routeA.md};
+\item \texttt{tasks/20260423-144416-attack-gap-paired-quotient-properties/reports/gap-paired-quotient-routeB.md};
+\item \texttt{tasks/20260423-184608-attack-gap-paired-background/reports/gap-paired-background-routeA.md};
+\item \texttt{tasks/20260423-184608-attack-gap-paired-background/reports/gap-paired-background-routeB.md};
+\item \texttt{tasks/20260423-194735-attack-gap-paired-slot-realization/reports/gap-paired-slot-routeA.md};
+\item \texttt{tasks/20260423-194735-attack-gap-paired-slot-realization/reports/gap-paired-slot-routeB.md};
+\item \texttt{tasks/20260423-194735-attack-gap-paired-slot-realization/reports/verifier-adversarial-paired-slot-realization.md}.
+\end{enumerate}
+
+\end{document}

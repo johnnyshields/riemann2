@@ -16,3 +16,8 @@ Scope:
 
 Current bundle:
 - `20260423-043347-research-team-jet-gram-qm/`
+
+Navigation:
+- Current theorem/results index: `quantum/INDEX.md`
+- Current draft note: `quantum/paper/jet_gram_quantum_note.md`
+- Current findings ledger: `quantum/findings.md`

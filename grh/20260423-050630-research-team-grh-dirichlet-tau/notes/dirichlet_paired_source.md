@@ -37,11 +37,31 @@ with
 That is cleaner than speaking only about the raw product, because it mirrors the
 zeta strip-edge quotient form directly.
 
+The later paired-quotient-properties attack sharpened this further:
+
+- at the boundary-phase level, `Phi_chi^pair` is cleaner than the single-channel
+  quotient because the residual root number disappears;
+- conditional on an exact paired-source theorem, the one-zero strip-edge kernel
+  and its positivity are automatic upstairs;
+- positivity of the manuscript's paired `S(m)` slot becomes automatic only if
+  that theorem also provides exact local-slot identification.
+
+The paired-background attack sharpened the source side one step further:
+
+- the clean theorem-facing decomposition should use one unified
+  `B_chi^pair` containing conductor/scaling, gamma-derivative, and any
+  trivial-zero or pole corrections;
+- pairing removes the residual root-number/front-end asymmetry, but not the
+  need for exact source-to-slot background identification on compact intervals.
+
 ## What pairing fixes
 
 - scalar reality / sign safety at the front end;
 - a more conservative route to the exact `S(m)` slot than the current
   single-channel Dirichlet path.
+- cleaner boundary-phase packaging than the single-channel quotient.
+- a cleaner front-end background story once one passes to a unified
+  `B_chi^pair`.
 
 ## What pairing does not fix
 
@@ -74,3 +94,7 @@ Safe replacement:
 - `tasks/20260423-143207-attack-gap-paired-object-candidate/reports/gap-paired-object-routeA.md`
 - `tasks/20260423-143207-attack-gap-paired-object-candidate/reports/gap-paired-object-routeB.md`
 - `tasks/20260423-143207-attack-gap-paired-object-candidate/reports/verifier-adversarial-paired-object-candidate.md`
+- `tasks/20260423-144416-attack-gap-paired-quotient-properties/reports/gap-paired-quotient-routeA.md`
+- `tasks/20260423-144416-attack-gap-paired-quotient-properties/reports/gap-paired-quotient-routeB.md`
+- `tasks/20260423-184608-attack-gap-paired-background/reports/gap-paired-background-routeA.md`
+- `tasks/20260423-184608-attack-gap-paired-background/reports/gap-paired-background-routeB.md`

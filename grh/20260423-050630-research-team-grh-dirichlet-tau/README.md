@@ -65,6 +65,30 @@ cleaner completed-\(L\)-function abstractions.
 - `notes/dirichlet_paired_source.md` — exact statement of that top non-zeta
   target, with scope tightened after the later quotient and universal-kernel
   refinements.
+- `notes/zeta_source_package.md` — best value-back-to-RH target, now reduced to
+  one localized source-theorem package with three theorem-level parts plus two
+  explicit identification/convention items.
+- `notes/source_package_transfer.md` — bridge note from the canonical zeta
+  source package to the paired Dirichlet target: useful blueprint upstairs, but
+  the theorem burden remains exact paired `S(m)`-slot realization plus paired
+  background/convergence/multiplicity work.
+- `notes/paired_slot_realization.md` — current sharpest non-zeta theorem target:
+  paired source-plus-slot realization, with upstairs/downstairs split explicit
+  and downstream remainder/odd-package burdens left separate.
+- `notes/aval_transport.md` — narrow transport note: once the local symmetric
+  normal form and corrected decomposition are realized, the explicit `A_val`
+  matrix and `Phi_K(A_val)=0` are first-order local algebra, but the full
+  calibration chain is still separate.
+- `notes/variable_x.md` — UV-001 refinement: one theorem-sized gap in the main
+  paper, but two-layered for transport work, with shrinking-scale source control
+  and cutoff compatibility made explicit.
+- `notes/denominator_theorem.md` — corrected-whitening subtarget note:
+  denominator comparability is necessary and explicit, but it should be treated
+  as one named subtheorem inside the larger transport package.
+- `notes/corrected_whitening_transport.md` — narrow intermediate-bundle note:
+  holomorphic corrected whitening plus preserved post-`Phi_K` transfer scale,
+  with value-slot realization, boundary control, odd-channel transport, and
+  remainder dominance still separate.
 - `paper/portability_note.tex` — broad portability note for Dirichlet,
   GRH-style settings, and the Ramanujan `\tau` test case.
 - `paper/local_odd_projector_note.tex` — standalone note isolating the
@@ -77,3 +101,6 @@ cleaner completed-\(L\)-function abstractions.
 - `paper/source_theorem_candidate_note.tex` — exact target theorem for porting
   the archive-backed quotient formula into a canonical source theorem for `q`
   and `S`.
+- `paper/dirichlet_paired_source_candidate.tex` — theorem-facing note for the
+  current best non-zeta target: exact paired source-and-slot realization for
+  primitive Dirichlet characters.
