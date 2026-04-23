@@ -80,6 +80,8 @@ Source anchor:
 - Repeated nonzero principal values give the opposite exact result: there is no
   canonical principal frame from the subspace pair alone on a degenerate block;
   only the block partial isometry is canonical there.
+- Equivalently: on the nonzero-overlap sector, canonical principal frames exist
+  from the subspace pair alone exactly when the nonzero spectrum is simple.
 - More generally, the canonical cross-contraction admits a canonical polar
   partial isometry on the nonzero-overlap sector. This is stronger than the
   simple-spectrum frame corollary, but still not a full canonical matrix

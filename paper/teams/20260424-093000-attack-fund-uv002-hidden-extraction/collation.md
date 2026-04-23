@@ -67,4 +67,12 @@ Refined blocker:
   extra package variation lies in `\ker \Phi_K` through the first surviving odd order.
 - The currently uncontrolled `\Phi_K`-invisible directions are the diagonal/value
   modes plus the antisymmetric off-diagonal shear direction.
+- New sharp obstruction:
+  the septic gauge direction is not automatically `\Phi_K`-invisible because
+  `\Phi_K(A_5^{\mathfrak f})=2v_5` generically. So reduced-`\widehat\Psi` alone is
+  not enough.
+- Best current larger package candidate:
+  `\bigl(\widehat\Psi,[\delta c:\delta v_5:\delta u_5:\delta\lambda]\bigr)`
+  i.e. the amplitude-invariant strengthened datum plus the projectivized hidden
+  `\lambda`-shear class.
 - Latest deposit sharpens the package-side obstacle further: equal reduced-package fibers must force agreement of the corrected block modulo `\Phi_K`-invisible directions up to the first surviving odd order. This hidden-state lemma is now the deepest exact blocker.

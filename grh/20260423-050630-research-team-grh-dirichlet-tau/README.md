@@ -76,6 +76,9 @@ cleaner completed-\(L\)-function abstractions.
   highest-value, lowest-risk patch.
 - `notes/rh_first_actions.md` — condensed action order for an RH agent: the
   exact 4-step sequence to patch the zeta source package with minimal churn.
+- `notes/zeta_source_proof_plan.md` — RH-facing proof-plan note for the source
+  patch: same 2-step unit, but with the theorem endpoint kept narrower than the
+  current surrounding prose.
 - `notes/quotient_normalization.md` — source-normalization action item for the
   RH draft: the factor-of-2 is fine, the sign is the real mismatch, and the
   clean fix is a front-loaded quotient/phase-normalization subsection.

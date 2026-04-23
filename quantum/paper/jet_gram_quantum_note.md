@@ -401,6 +401,12 @@ nonzero-overlap sector, while \(|C|\) carries the principal-angle spectrum. This
 is the strongest exact operator-level transport presently justified, but it is
 still not a canonical full matrix package.
 
+On that nonzero-overlap sector, canonical principal frames exist from the
+subspace pair alone exactly when the nonzero spectrum is simple. In the simple
+case one gets canonical matched principal vectors up to phase/sign; in repeated
+nonzero blocks the strongest exact canonical object remains the block partial
+isometry coming from the polar factor, not a frame.
+
 If the nonzero spectrum of this compression is simple, then the corresponding
 principal directions are canonical up to independent phase/sign choices. In that
 nondegenerate sector one may therefore choose canonical principal frames and a
