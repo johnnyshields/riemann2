@@ -69,6 +69,56 @@ commit messages, subsection selection, demote timing, `findings.md` slicing
 — without asking. `AskUserQuestion` is for architectural or irreversible
 decisions only. Never interrupt over research-direction minutia.
 
+## 3a. Auto-run — default for research work
+
+Research work (gap-closing, exploration, verification, synthesis,
+audit cycles) runs in a continuous auto-loop. The coordinator does not
+ask "should I keep going?" or "is this a good stopping point?" between
+cycles. The user is likely away and expects work to continue
+indefinitely until a real terminal condition is hit or the user
+manually interrupts.
+
+**Loop:**
+
+1. Read state — recent `lore/`, `findings.md`, `unverified.tex`, the
+   last task dir, the last cycle's verdicts and commits.
+2. Pick the next move — a UV target, an explorer topic, a redirect, an
+   audit, a synthesis. Default to `research-attack` over `research-team`
+   per §2.
+3. Dispatch via the §2 selector. Brief per §5.
+4. Collate returns. Promote / demote / quarantine / reject per §8.
+   Commit by logical unit; auto-push per §10.
+5. Go to 1.
+
+**Decide without asking:** which UV, which explorer topic, roster size,
+task-dir slug, commit wording, whether to redirect, when to synthesize.
+§3 autonomy covers this.
+
+**Pause only for:** architectural or irreversible decisions (macro
+namespace changes, canonical-file reorgs, abandoning a proof strategy
+wholesale); a hard blocker the coordinator cannot work around; explicit
+user interruption.
+
+**Terminal conditions** (stop the loop): zero open UV entries and no
+outstanding `rem:wip-*` labels; or the targeted synthesis fully closes
+with `paper-harden` / `paper-referee` clean; or explicit user halt.
+If context is compacted or a handoff occurs, immediately resume the
+active agenda from the last recorded state — do not treat that as a
+terminal condition.
+
+**When stuck (out of obvious moves), think harder — do not stop.**
+Re-read `findings.md` and recent `lore/` for a missed angle. Combine
+previous near-misses; two open UVs with related structure often admit a
+hybrid attack. Try a more radical redirect — different function space,
+different local model, structurally different route. Consult
+`paper/chats/` for historical threads that were parked. Spin up
+`trifecta` for fresh literature and cross-discipline pointers.
+"No progress this cycle" is an acceptable report; "I ran out of ideas"
+is not — the archive has the ideas.
+
+(Loop pattern adapted from Karpathy's
+[autoresearch/program.md](https://github.com/karpathy/autoresearch).)
+
 ## 4. Writing discipline
 
 Applies to the coordinator's paper edits and to every agent briefing. Not
@@ -90,6 +140,9 @@ a hardass — a good-referee standard.
 - **Honest-verdict closure.** End audits with "Honest verdict:" + what is
   and isn't closed.
 - **When in doubt, quarantine.** UV entry first, promote later.
+- **Compute before asserting.** For any computational claim (bound, identity,
+  inequality, convergence rate), a 10-line sympy/numpy/mpmath check beats
+  prose. Deposit the script in the task dir; cite it in the report.
 
 ## 5. Briefing rule
 
