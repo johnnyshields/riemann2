@@ -72,6 +72,8 @@ Quick map of the strongest current results and where they live.
   `quantum/20260423-142558-attack-Or-vs-Ar-benchmarks/reports/gap-Or-vs-Ar.md`
 - Simple-spectrum principal-frame corollary:
   `quantum/20260424-003729-attack-canonical-frames/reports/gap-canonical-frames.md`
+- Degenerate-sector no-go theorem:
+  `quantum/20260424-023315-attack-degenerate-nogo/reports/gap-degenerate-nogo.md`
 - Polar operator transport corollary:
   `quantum/20260424-020810-attack-polar-transport/reports/gap-polar-transport.md`
 
@@ -83,5 +85,7 @@ Quick map of the strongest current results and where they live.
   `quantum/20260423-201939-attack-krylov/reports/gap-krylov-theorem.md`
 - Unitary commutator / leakage corollary:
   `quantum/20260424-001425-attack-commutator-metric/reports/gap-commutator-metric.md`
+- Unitary short-time projector-compression expansion:
+  `quantum/20260424-024026-attack-short-time-expansion/reports/gap-short-time-expansion.md`
 - Unitary propagator-compression corollary:
   `quantum/20260424-002612-attack-propagator-subspaces/reports/gap-propagator-subspaces.md`

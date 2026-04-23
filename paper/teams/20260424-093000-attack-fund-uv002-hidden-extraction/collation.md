@@ -26,6 +26,11 @@ Need: a package-level coincidence theorem on the residual exact fixed-shear corn
 Refined blocker:
 - On the quartic--sextic rung, quotient-visible transport already collapses to the single scalar `Q`, so if the actual corrected defects were finite-state-local then swap-evenness would be automatic.
 - The narrow live blocker is therefore diagonal value-zero / diagonal-collapse of the actual corrected cubic/quintic defect germ at coincidence on the involutive quotient branch.
+- Sharpest exact form so far: the missing package law is the coincident-atom diagonal merger
+  `\mathfrak P_2(a_1,h;a_2,h)=(a_1+a_2)F_h`,
+  since that is exactly what forces
+  `E_{12}^{(3)}(0)=E_{12}^{(5)}(0)=0`.
+- Latest deposit confirms the current naive source-summed corrected-block model cannot supply this, because its whitened coefficients are even in source weight and therefore cannot produce the required linear diagonal value.
 
 ### Local front A
 
@@ -43,6 +48,7 @@ Refined blocker:
 - The exact narrow blocker is a `\kappa`-independent diagonal-collapse value at `\delta=0` for the actual corrected reduced two-atom package in the collision/cancellation blow-up chart.
 - Once that is proved, reduced-`\widehat\Psi` coincidence is formal from the existing strengthened coincidence algebra.
 - More precisely: if the actual corrected reduced two-atom package germ is analytic and swap-even in `(m,\omega,\delta)`, then Bottleneck C is equivalent to the single exact condition that its diagonal value at `\delta=0` be independent of `\kappa=2\omega/\delta` and agree with the one-pair reduced package.
+- Latest deposit confirms no stronger local obstruction remains on this front: current hypotheses allow the diagonal value to be an arbitrary analytic function of `\kappa` unless diagonal merger is proved.
 
 ### Extraction front D
 
@@ -52,3 +58,13 @@ Refined blocker:
 - The exact blocker is a factorization / jet-detection theorem: the odd scalar germ `H_m` must depend on the finite-core collision package only through the reduced coincidence germ of `\widehat\Psi` (or a slightly larger reduced package state), strongly enough to determine the first nonzero odd jet.
 - The extractor side is otherwise complete: once that package-side factorization exists, the already-proved finite-core localization and `N`-point surviving-expansion machinery fire immediately.
 - Sharpened version: the hidden bridge can be phrased as a package-to-transform theorem for the first nonzero `\Xi_{\zeta,\le H}^{(N)}` before recovering the coefficient `c_{2N-1}`; the `H_m`-side extractor is already theorem-shaped.
+- Sharpest exact form so far: prove fiber-invariance/package-to-transform factorization
+  `H_{\core}=\mathfrak H(\mathcal P_{\mathrm{red}})`
+  or at minimum constancy of the first surviving odd jet on reduced-package fibers.
+- Latest deposit sharpens this further:
+  equal reduced-`\widehat\Psi` fibers are not enough on the present draft; the
+  missing theorem must either enlarge the reduced package state or prove that any
+  extra package variation lies in `\ker \Phi_K` through the first surviving odd order.
+- The currently uncontrolled `\Phi_K`-invisible directions are the diagonal/value
+  modes plus the antisymmetric off-diagonal shear direction.
+- Latest deposit sharpens the package-side obstacle further: equal reduced-package fibers must force agreement of the corrected block modulo `\Phi_K`-invisible directions up to the first surviving odd order. This hidden-state lemma is now the deepest exact blocker.

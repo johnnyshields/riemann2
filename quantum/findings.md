@@ -77,6 +77,9 @@ Source anchor:
 - Under the extra hypothesis that the nonzero projector spectrum is simple, the
   corresponding principal directions are canonical up to phases/signs, giving a
   diagonal normal form on that simple spectral sector.
+- Repeated nonzero principal values give the opposite exact result: there is no
+  canonical principal frame from the subspace pair alone on a degenerate block;
+  only the block partial isometry is canonical there.
 - More generally, the canonical cross-contraction admits a canonical polar
   partial isometry on the nonzero-overlap sector. This is stronger than the
   simple-spectrum frame corollary, but still not a full canonical matrix
@@ -100,6 +103,9 @@ Source anchor:
 - For exact unitary subspace orbits `S(t)=e^{-itH}S(0)`, the local projector
   metric has the exact commutator/leakage form
   `1/2 ||dot Pi_t||_HS^2 = 1/2 ||[H,Pi_t]||_HS^2 = ||(I-Pi_t) H Pi_t||_HS^2`.
+- For exact unitary orbits, the finite-separation projector compression has the
+  exact short-time expansion `I - Δ^2 L_t^* L_t + O(Δ^3)`, so the local leakage
+  operator is the leading defect from identity in the two-point data.
 - The exact relation is `A_r = span{psi} \oplus O_r`. `O_r` is the faithful
   value-channel-removed object; `A_r` is the ambient subspace that currently
   supports the strongest transport-free two-point theorem. The present record

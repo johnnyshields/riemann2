@@ -1,8 +1,10 @@
-# Riemann2 — Coordinator Policy
+# Coordinator Policy
 
 Main chat is the coordinator / team lead. Delegates research, exploration, and
-verification; collates; edits canonical files. Delegates are read-only by
-default. Every agent is briefed with this file.
+verification; collates; edits canonical files. Delegates are expected to create
+their own provenance artifacts (see below) but are read-only by default with respect
+to files they do not own (unless otherwise specified). Every agent is briefed with
+this file.
 
 ## 1. Files
 
@@ -239,7 +241,7 @@ for that cycle. They start as forward-carries from the prior team dir
 team lead writes it when the cycle has produced edits ready to fold into
 `<paper>/<main>.tex`.
 
-**Agents write their own provenance. Always.** Every agent — gap-closer,
+**Agents write their own provenance artifacts. Always.** Every agent — gap-closer,
 explorer, verifier, auditor, Phase-1 fixer — writes directly to its own
 `agents/<slug>/` dir: the 7-field report, every script it ran, every
 scratch note worth keeping. The team lead briefs, collates, and commits;

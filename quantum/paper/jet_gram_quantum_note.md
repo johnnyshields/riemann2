@@ -365,6 +365,18 @@ value-channel-free side it is the analogous compression to the initial
 compressed Krylov space. This is a dynamical corollary of the subspace theorem,
 not a stronger matrix result.
 
+At small \(\Delta\), this finite-separation data has an exact leakage expansion:
+if \(\Pi_t\) is the orthogonal projector onto the moving subspace and
+\(L_t=(I-\Pi_t)H\Pi_t\), then the endpoint compression satisfies
+
+\[
+\Pi_t\Pi_{t+\Delta}\Pi_t\big|_{S(t)}=I-\Delta^2 L_t^*L_t+O(\Delta^3).
+\]
+
+So the leading defect from identity is exactly the positive leakage operator.
+Its trace is the local projector-metric density, and in rank one it reduces to
+the usual Hamiltonian variance.
+
 This ambient-subspace theorem also extends cleanly to several parameters. If the
 parameter space is a manifold and one includes **all mixed partials of total
 order at most \(r\)**, then the resulting ambient osculating subspace is still
@@ -395,6 +407,14 @@ nondegenerate sector one may therefore choose canonical principal frames and a
 diagonal comparison matrix with entries \(\cos\theta_i\). This is a conditional
 normal form for the already-known principal-angle data, not a stronger general
 matrix theorem.
+
+The converse boundary is also sharp. If a nonzero principal value has
+multiplicity \(m\ge2\), then the corresponding principal block carries an
+unavoidable internal \(U(m)\) freedom, so no canonical orthonormal principal
+frame can be recovered from the subspace pair alone. In that degenerate sector,
+the strongest exact canonical object is the block partial isometry coming from
+the polar decomposition of the canonical cross-contraction, not a frame or an
+entrywise matrix representative.
 
 On the current benchmark families this conditional normal form is genuinely
 usable on a nonempty open set. For the qutrit first-order benchmark there is
