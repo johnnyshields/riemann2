@@ -27,8 +27,9 @@ The safest patch is now 2-step:
 1. one source-normalization subsection fixing the quotient, boundary phase
    convention, and bridge from `phi'/phi` to `q`;
 2. one bundled localized zeta-source theorem covering the single-zero formula,
-   compact-interval summation / regularization, explicit background
-   identification, and multiplicity.
+   compact-interval summation / regularization;
+3. immediately after that theorem, one scoped convention/corollary block fixing
+   background identification and multiplicity.
 
 ## Why this patch is high value
 

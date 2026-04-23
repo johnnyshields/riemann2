@@ -77,6 +77,10 @@ Source anchor:
 - Under the extra hypothesis that the nonzero projector spectrum is simple, the
   corresponding principal directions are canonical up to phases/signs, giving a
   diagonal normal form on that simple spectral sector.
+- More generally, the canonical cross-contraction admits a canonical polar
+  partial isometry on the nonzero-overlap sector. This is stronger than the
+  simple-spectrum frame corollary, but still not a full canonical matrix
+  package.
 - On the current qutrit/quartit/Veronese benchmark families, this simple-spectrum
   corollary is genuinely usable on a nonempty open set; it is not just a formal
   edge case.

@@ -382,6 +382,13 @@ K_-:=\Pi_-\Pi_+\Pi_-\big|_{\mathcal A_r(x_-)}
 has spectrum equal to the squared principal-angle cosines. This is a clean
 operator reformulation of the same subspace data, not a stronger invariant.
 
+Equivalently, the canonical cross-contraction
+\(C=\Pi_-|_{S_+}:S_+\to S_-\) has a canonical polar decomposition
+\(C=V|C|\). The partial isometry \(V\) gives a basis-free transport on the
+nonzero-overlap sector, while \(|C|\) carries the principal-angle spectrum. This
+is the strongest exact operator-level transport presently justified, but it is
+still not a canonical full matrix package.
+
 If the nonzero spectrum of this compression is simple, then the corresponding
 principal directions are canonical up to independent phase/sign choices. In that
 nondegenerate sector one may therefore choose canonical principal frames and a

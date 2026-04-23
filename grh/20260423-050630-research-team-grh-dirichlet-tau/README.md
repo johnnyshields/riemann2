@@ -74,6 +74,8 @@ cleaner completed-\(L\)-function abstractions.
 - `notes/rh_patch_plan.md` — practical handoff note for an RH agent: where the
   canonical zeta source theorem should be inserted and why that is the
   highest-value, lowest-risk patch.
+- `notes/rh_first_actions.md` — condensed action order for an RH agent: the
+  exact 4-step sequence to patch the zeta source package with minimal churn.
 - `notes/quotient_normalization.md` — source-normalization action item for the
   RH draft: the factor-of-2 is fine, the sign is the real mismatch, and the
   clean fix is a front-loaded quotient/phase-normalization subsection.
@@ -110,6 +112,9 @@ cleaner completed-\(L\)-function abstractions.
 - `notes/first_milestone.md` — resolves the milestone question: the first
   non-zeta exact-source milestone is still paired source-plus-slot realization,
   while corrected-whitening transport remains an earlier partial bundle.
+- `notes/paired_compact_theorem.md` — theorem-facing shape note for the non-zeta
+  side: the paired target should first be stated as a compact-interval source
+  package blueprint, not as a global or endgame-strength theorem.
 - `paper/portability_note.tex` — broad portability note for Dirichlet,
   GRH-style settings, and the Ramanujan `\tau` test case.
 - `paper/local_odd_projector_note.tex` — standalone note isolating the

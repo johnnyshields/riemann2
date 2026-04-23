@@ -13,6 +13,14 @@ It is best phrased as two linked theorem burdens:
 1. upstairs paired source realization;
 2. downstairs exact local-slot identification.
 
+The later patch-order attack makes the theorem-facing order explicit:
+
+1. compact-interval paired source-package theorem;
+2. exact paired local `S(m)`-slot identification.
+
+That `2-step` order is safe only as the theorem-facing patch order, not as the
+whole program order.
+
 ## Clean theorem candidate
 
 The theorem-facing target is:
@@ -34,6 +42,8 @@ paired local value-channel derivative in
 - denominator/whitening control;
 - boundary estimates;
 - any calibration uniformity issues.
+
+These remain downstream and should not be collapsed into the 2-step paired patch.
 
 ## Scoped warning
 

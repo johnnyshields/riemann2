@@ -16,14 +16,16 @@ The canonical zeta source gap is now best described as a 2-step package:
 2. bundled localized source theorem covering:
    - single-zero contribution;
    - compact-interval summation / regularization;
-   - explicit background identification;
-   - multiplicity convention.
+   with background identification and multiplicity handled as scoped
+   post-theorem convention/corollary material.
 
 The later component-priority and source-bundle attacks sharpened this ordering:
 
 - the only cleanly independent first target is quotient / phase normalization;
 - after that bridge is fixed, the safe paper-facing granularity is one bundled
-  localized source theorem, not several separate paper-facing mini-theorems.
+  localized source theorem, not several separate paper-facing mini-theorems;
+- but even there, the safest patch keeps background identification and
+  multiplicity just after the theorem, not overloaded into the theorem body.
 
 ## Safe wording
 
@@ -49,3 +51,6 @@ Do not say:
 - `tasks/20260424-005013-attack-gap-zeta-source-bundle/reports/gap-zeta-source-bundle-routeA.md`
 - `tasks/20260424-005013-attack-gap-zeta-source-bundle/reports/gap-zeta-source-bundle-routeB.md`
 - `tasks/20260424-005013-attack-gap-zeta-source-bundle/reports/verifier-adversarial-zeta-source-bundle.md`
+- `tasks/20260424-015132-attack-gap-compact-source-bundle/reports/gap-compact-source-bundle-routeA.md`
+- `tasks/20260424-015132-attack-gap-compact-source-bundle/reports/gap-compact-source-bundle-routeB.md`
+- `tasks/20260424-015132-attack-gap-compact-source-bundle/reports/verifier-adversarial-compact-source-bundle.md`

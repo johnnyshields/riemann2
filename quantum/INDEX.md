@@ -72,6 +72,8 @@ Quick map of the strongest current results and where they live.
   `quantum/20260423-142558-attack-Or-vs-Ar-benchmarks/reports/gap-Or-vs-Ar.md`
 - Simple-spectrum principal-frame corollary:
   `quantum/20260424-003729-attack-canonical-frames/reports/gap-canonical-frames.md`
+- Polar operator transport corollary:
+  `quantum/20260424-020810-attack-polar-transport/reports/gap-polar-transport.md`
 
 ## Interpretation
 

@@ -23,14 +23,32 @@
 
 Need: a package-level coincidence theorem on the residual exact fixed-shear corner strong enough to imply swap invariance and vanishing on coincident atoms for the actual corrected cubic/quintic defects.
 
+Refined blocker:
+- On the quartic--sextic rung, quotient-visible transport already collapses to the single scalar `Q`, so if the actual corrected defects were finite-state-local then swap-evenness would be automatic.
+- The narrow live blocker is therefore diagonal value-zero / diagonal-collapse of the actual corrected cubic/quintic defect germ at coincidence on the involutive quotient branch.
+
 ### Local front A
 
 Need: the actual corrected edge-law theorem on good patches, minimally the quadratic/projective factorization with edge traces.
+
+Refined blocker:
+- The true remaining obstruction is the first diagonal coefficient of the actual corrected cubic/quintic defects in the blown-up chart, not just proving `O(\delta^2)`.
+- If the theorem lands, the local detector is canonically `M/c` on the cubic-killing slope and close cancelling bad cores are excluded on `J\Subset\{c\neq 0, M\neq 0\}`.
 
 ### Package front C
 
 Need: reduced-`\widehat\Psi` coincidence / same reduced image germ at coincidence for the actual corrected two-atom package.
 
+Refined blocker:
+- The exact narrow blocker is a `\kappa`-independent diagonal-collapse value at `\delta=0` for the actual corrected reduced two-atom package in the collision/cancellation blow-up chart.
+- Once that is proved, reduced-`\widehat\Psi` coincidence is formal from the existing strengthened coincidence algebra.
+- More precisely: if the actual corrected reduced two-atom package germ is analytic and swap-even in `(m,\omega,\delta)`, then Bottleneck C is equivalent to the single exact condition that its diagonal value at `\delta=0` be independent of `\kappa=2\omega/\delta` and agree with the one-pair reduced package.
+
 ### Extraction front D
 
 Need: a theorem that package-side coincidence/control determines the first surviving odd coefficient of `H_m`, or equivalently the first nonzero finite-core transformed scalar `\Xi_{\zeta,\le H}^{(N)}`.
+
+Refined blocker:
+- The exact blocker is a factorization / jet-detection theorem: the odd scalar germ `H_m` must depend on the finite-core collision package only through the reduced coincidence germ of `\widehat\Psi` (or a slightly larger reduced package state), strongly enough to determine the first nonzero odd jet.
+- The extractor side is otherwise complete: once that package-side factorization exists, the already-proved finite-core localization and `N`-point surviving-expansion machinery fire immediately.
+- Sharpened version: the hidden bridge can be phrased as a package-to-transform theorem for the first nonzero `\Xi_{\zeta,\le H}^{(N)}` before recovering the coefficient `c_{2N-1}`; the `H_m`-side extractor is already theorem-shaped.

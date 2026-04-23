@@ -17,6 +17,11 @@ with explicit scope:
 - `first non-zeta exact-source realization milestone`;
 - not `smallest honest milestone` in every sense.
 
+The later patch-order attack sharpens this wording further:
+
+- the theorem-facing milestone is a 2-step paired patch order;
+- it should not be read as swallowing remainder dominance or odd/transverse work.
+
 ## Why
 
 Corrected-whitening transport still stops before the manuscript-style paired
@@ -40,3 +45,6 @@ Do not let this milestone swallow downstream work. It does not make automatic:
 - `tasks/20260423-234813-attack-gap-first-nonzeta-milestone/reports/gap-first-nonzeta-milestone-routeA.md`
 - `tasks/20260423-234813-attack-gap-first-nonzeta-milestone/reports/gap-first-nonzeta-milestone-routeB.md`
 - `tasks/20260423-234813-attack-gap-first-nonzeta-milestone/reports/verifier-adversarial-first-nonzeta-milestone.md`
+- `tasks/20260424-021403-attack-gap-paired-patch-order/reports/gap-paired-patch-order-routeA.md`
+- `tasks/20260424-021403-attack-gap-paired-patch-order/reports/gap-paired-patch-order-routeB.md`
+- `tasks/20260424-021403-attack-gap-paired-patch-order/reports/verifier-adversarial-paired-patch-order.md`
