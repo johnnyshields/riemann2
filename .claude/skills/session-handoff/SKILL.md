@@ -13,10 +13,11 @@ git ref or ISO date; `--note "<text>"` → free-text addendum.
 
 ## Gather
 
-Commits since `<since>` (`git log --since=... --oneline`). Task dirs
-opened or touched (`find <paper>/teams/ -maxdepth 1 -type d -newer <marker>`).
-Changes to `unverified.tex` and `findings.md`. Paper edits with stats.
-Active teams (should be none — close any that survived).
+Commits since `<since>` (`git log --since=... --oneline`). Team dirs
+opened or touched (`find <paper>/teams/ -maxdepth 1 -type d -newer
+<marker>`). UV and findings changes across the team dirs' `uv.md`
+and `findings.md`. Paper edits to `<main>.tex` with stats. Active
+teams (should be none — close any that survived).
 
 ## Write
 
@@ -31,8 +32,8 @@ Since: <ref>   Commits: N (<first>..<last>)   Pushed: yes / N
 ## What happened
 <one-paragraph theme — not a commit recap>
 
-## Task dirs opened / touched
-| Path | Type | Status |
+## Team dirs opened / touched
+| Path | Team-slug | Status |
 
 ## UV ledger changes
 - Added / Promoted / Demoted / Rejected / Refined: one bullet each

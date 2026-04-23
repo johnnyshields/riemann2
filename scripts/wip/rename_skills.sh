@@ -4,7 +4,7 @@
 # Semantic restructuring (e.g. research-team's "three sibling dirs" → one team
 # dir) is handled by manual follow-up edits, not this script.
 #
-# Safe to re-run (idempotent on strings that only appear once).
+# Idempotent — safe to re-run.
 
 set -euo pipefail
 
@@ -27,6 +27,9 @@ for f in */SKILL.md; do
     -e 's|paper/tasks/|<paper>/teams/|g' \
     -e 's|\btasks/|<paper>/teams/|g' \
     -e 's|\bpaper/|<paper>/|g' \
+    -e 's|`proof_of_rh\.tex`|`<paper>/<main>.tex`|g' \
+    -e 's|`unverified\.tex`|`<team-dir>/uv.md`|g' \
+    -e 's|\\texttt{unverified\.tex}|\\texttt{<team-dir>/uv.md}|g' \
     "$f"
 done
 

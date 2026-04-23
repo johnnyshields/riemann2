@@ -22,7 +22,7 @@ negative-capture, all in one commit.
 broadcast the correction first (`SendMessage to: "*"`) BEFORE editing.
 Delayed corrections are the high-cost failure.
 
-Edit `proof_of_rh.tex`. With `--weaken`, replace the stronger statement
+Edit `<paper>/<main>.tex`. With `--weaken`, replace the stronger statement
 with the scoped form and keep the label if still apt; otherwise delete
 the claim + proof and fix every `\ref{<deleted-label>}` site. Add a new
 `rem:wip-demoted-<slug>` remark pointing at the new UV entry, e.g.:
@@ -31,11 +31,11 @@ the claim + proof and fix every `\ref{<deleted-label>}` site. Add a new
 \begin{remark}\label{rem:wip-demoted-foo}
 \emph{Work in progress.} The previous unconditional statement of
 Theorem~\thetheorem has been demoted to conditional; see UV-010 in
-\texttt{unverified.tex}.
+\texttt{<team-dir>/uv.md}.
 \end{remark}
 ```
 
-Add the new UV-NNN (next available, monotonic) to `unverified.tex` with
+Add the new UV-NNN (next available, monotonic) to `<team-dir>/uv.md` with
 the standard schema, including `Depends on:`. Put the original stronger
 claim in the `Claim` field so future work can retry; `Why unverified`
 records the `--reason` plus any adversarial finding that triggered the
@@ -49,7 +49,7 @@ Compile-check runs via the pre-commit hook.
 
 ## Commit
 
-Single atomic commit. Stage `proof_of_rh.tex`, `unverified.tex`, and
+Single atomic commit. Stage `<paper>/<main>.tex`, `<team-dir>/uv.md`, and
 (if applicable) `findings.md` by name. Subject
 `demote <label-or-UV>: <reason>`. Body: what was removed/weakened, the
 new UV-NNN, and any team dir whose adversarial report triggered it.

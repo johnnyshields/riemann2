@@ -5,9 +5,9 @@ description: Full-paper compactness rewrite of <paper>/<main>.tex (or a specifie
 
 # Paper Rewrite
 
-Compactness pass on `proof_of_rh.tex` (or a scope). Rewriters are
-edit-capable for their own team dir only; assembly into the paper is
-gated behind integrity checks.
+Compactness pass on `<paper>/<main>.tex` (or a scope). Rewriters
+(`subagent_type: rewriter`) are edit-capable for their own agent dir
+only; assembly into the paper is gated behind integrity checks.
 
 `$ARGUMENTS`: empty → full paper; `§<N>` or `§<N>.<M>` → that section;
 `--line-range <from>-<to>` → specific range; `--target-ratio <N>` →
@@ -57,13 +57,13 @@ subsections → up to 19 rewriters; scoped = by subsection,
 ## Dispatch (unless `--no-agents`)
 
 `TeamCreate team_name: "paper-rewrite-<ts>"`. Spawn one
-`rewriter-<slug>` per partition. Standard briefing plus: the full
-invariant list (verbatim — not suggestions), `notes/frozen-macros.txt`,
-the input region, the labels/cites/refs present in it, the target
-compaction ratio, and the output contract — the replacement block at
-`scripts/section-<slug>.tex`, a 7-field report with a "Compaction notes"
-field, and do NOT edit `proof_of_rh.tex` directly (assembly is the
-coordinator's).
+`rewriter-<slug>` (`subagent_type: rewriter`) per partition. Standard
+briefing plus: the full invariant list (verbatim — not suggestions),
+`notes/frozen-macros.txt`, the input region, the labels/cites/refs
+present in it, the target compaction ratio, and the output contract —
+the replacement block at `agents/<slug>/rewrite.tex`, a 7-field report
+with a "Compaction notes" field, and do NOT edit `<main>.tex` directly
+(assembly is the coordinator's).
 
 Non-goals: no proof restructuring, no removed conditionals, no
 reordering within a subsection, no `rem:wip-*` promotion, no new
@@ -88,7 +88,7 @@ Any failure → do NOT assemble that rewriter's output.
 ## Assembly
 
 Replace each input region with the corresponding
-`scripts/section-<slug>.tex`. Run the full compile-check. Diff the
+`agents/<slug>/rewrite.tex`. Run the full compile-check. Diff the
 paper's label set and cite-key set against baselines; both diffs must
 be empty. Any failure → revert. Record the achieved line-count
 reduction.

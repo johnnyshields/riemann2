@@ -183,6 +183,9 @@ Source anchor:
   `A_r(t)^\perp = Coeff((x-t)^{r+1} R_{<= n-r-1}[x])`.
   This is a clean side corollary, though not yet a source of equally sharp
   all-`(n,r)` principal-angle formulas.
+- The same lower-order complement description now extends to the value-channel-
+  free side as well:
+  `O_r(t)^\perp = span{psi_n(t)} \oplus Coeff((x-t)^{r+1} R_{<= n-r-1}[x])`.
 
 ## Missing
 

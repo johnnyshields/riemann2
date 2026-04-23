@@ -17,8 +17,9 @@ Current theorem stack:
 1. Immediate local theorem target.
    Best current candidate: exact fixed-shear / quotient-diagonal package theorem
    on the residual corner `\{S=0\}\cap\{K_v=0\}`.
-   Best current shape: package-level coincidence/state-local theorem for the
-   actual corrected cubic/quintic defects on the involutive branch.
+   Best current shape: package-level coincidence theorem for the actual corrected
+   cubic/quintic defects on the involutive branch; state-locality is the strongest
+   sufficient form, not the minimal statement.
 
 2. Parallel local support theorem.
    Actual corrected edge-law theorem on good patches
@@ -33,7 +34,9 @@ Current theorem stack:
 4. Hidden extraction theorem.
    Best current candidate: package-side control identifies the first surviving
    odd coefficient of `H_m`, after which the existing `\Xi_\zeta^{(N)}`
-   extractor machinery is already ready.
+   extractor machinery is already ready. A sharpened version is: package-side
+   control identifies the first nonzero finite-core transformed scalar
+   `\Xi_{\zeta,\le H}^{(N)}` directly.
 
 5. Full finite-core contradiction theorem.
 
@@ -52,6 +55,9 @@ Current theorem stack:
 4. The residual exact fixed-shear mixed corner is already compressed to a
    quotient-diagonal / involutive package problem. Any still-live obstruction is
    likely relational / provenance-sensitive or non-finite-order.
+5. The reduced-`\widehat\Psi` coincidence theorem is now the cleanest package
+   theorem candidate. It is strong enough to matter and is the best visible
+   bridge to the hidden extraction theorem.
 
 5. The good-patch edge-law theorem and the exact fixed-shear package theorem are
    distinct fronts. Do not silently merge them.
@@ -130,6 +136,9 @@ leading coefficient strongly enough to feed the already-built
    and exact fixed-shear closure unless a genuinely new theorem-level dependency
    is found. Keep the centered clean-branch theorem as support/diagnostic, and
    exact fixed-shear closure as the immediate local theorem target.
+7. Treat UV-004 as a bridge/diagnostic lane unless it yields an exact
+   detector-slice theorem. Do not let it displace the package/coincidence or
+   hidden extraction fronts.
 
 ## What agents should do
 

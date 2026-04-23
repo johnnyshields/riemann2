@@ -10,7 +10,7 @@ Alphabetize, de-dupe, verify, and clean up the bibliography of
 `papers/<name>-biblio-known.md` so nothing gets re-flagged across runs.
 
 `$ARGUMENTS`: empty → `<paper>/<main>.tex` (do NOT use an mtime
-heuristic — `unverified.tex` is more recent); file path → that paper;
+heuristic — `<team-dir>/uv.md` is more recent); file path → that paper;
 `--skip-external` → no web verification; `--force-recheck` → ignore
 cache.
 

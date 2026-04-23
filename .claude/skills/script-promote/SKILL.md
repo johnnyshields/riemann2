@@ -29,7 +29,7 @@ state what the script proves cleanly, no overclaim.
 
 Promoter's job:
 
-1. Find the claim in `proof_of_rh.tex` — exact wording, line number,
+1. Find the claim in `<paper>/<main>.tex` — exact wording, line number,
    math.
 2. Search the repo for existing scripts: `scripts/`, `scripts/wip/`,
    `final-scripts/<paper>/`, `<paper>/teams/*/scripts/`. Grep with keywords; check

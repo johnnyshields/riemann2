@@ -389,6 +389,13 @@ diagonal comparison matrix with entries \(\cos\theta_i\). This is a conditional
 normal form for the already-known principal-angle data, not a stronger general
 matrix theorem.
 
+On the current benchmark families this conditional normal form is genuinely
+usable on a nonempty open set. For the qutrit first-order benchmark there is
+only one nontrivial principal angle, so simplicity is automatic. For the
+quartit `O_2` and, more generally, the Veronese `O_{n-1}` benchmarks, the
+nontrivial singular block is generically simple, so the diagonal principal-frame
+normal form is available on an open dense set of endpoint pairs.
+
 If the nonzero spectrum of this compression is simple, then the corresponding
 principal directions are canonical up to independent phase/sign choices. In that
 simple spectral sector one may therefore choose canonical principal frames and a
@@ -720,3 +727,8 @@ Unsafe claims, for now:
 - `quantum/20260423-215017-attack-spherical-witness/reports/`
 - `quantum/20260423-234645-attack-covariant-jets/reports/`
 - `quantum/20260423-235606-attack-multiparameter-covariant-jets/reports/`
+- `quantum/20260424-001425-attack-commutator-metric/reports/`
+- `quantum/20260424-002612-attack-propagator-subspaces/reports/`
+- `quantum/20260424-003729-attack-canonical-frames/reports/`
+- `quantum/20260424-004443-attack-simple-spectrum-benchmarks/reports/`
+- `quantum/20260424-004954-attack-constant-rank/reports/`

@@ -7,7 +7,7 @@ description: Reconcile rem:wip-* labels in <paper>/<main>.tex with UV-NNN entrie
 
 Reconcile the two quarantine anchors. `rem:wip-*` labels in the paper
 mark conditional / open / in-progress claims; `UV-NNN` entries in
-`unverified.tex` ledger them with status, promotion condition, deps.
+`<team-dir>/uv.md` ledger them with status, promotion condition, deps.
 They should be 1:1. Drift happens.
 
 ## Protocol
@@ -53,8 +53,8 @@ Orphan UV (need redirect/reject/promote): R
   redirect; silent promotions or deletions need coordinator judgment.
   Don't auto-act without clear git-history evidence.
 
-Stage `unverified.tex` by name. Commit
-`uv-sync: <counts> — <summary>`. No `proof_of_rh.tex` edits.
+Stage `<team-dir>/uv.md` by name. Commit
+`uv-sync: <counts> — <summary>`. No `<paper>/<main>.tex` edits.
 
 ## When
 

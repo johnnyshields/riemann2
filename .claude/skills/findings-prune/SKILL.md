@@ -16,7 +16,7 @@ Read the file. For each bullet, assign one of:
   retry avoidance, Goodie still reused, Structural still informing
   cycles.
 - **Promote** — matured into a theorem / remark belonging in
-  `proof_of_rh.tex`. This skill does NOT promote; draft a TODO in the
+  `<paper>/<main>.tex`. This skill does NOT promote; draft a TODO in the
   next session-handoff or a lore note.
 - **Archive** — still useful reference but no longer needs briefing-
   paste. Move to `<paper>/findings-in-paper.md` (create if absent)

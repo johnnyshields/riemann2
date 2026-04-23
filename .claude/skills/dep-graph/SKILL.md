@@ -23,7 +23,7 @@ Build the graph (nodes = UV IDs, edge `U → V` if V is in U's
   ledger.
 - **Dead-end dependencies** — `U` cites a `rejected` V, silently
   blocking `U`.
-- **Label cross-check** — `source_label` missing from `proof_of_rh.tex`
+- **Label cross-check** — `source_label` missing from `<paper>/<main>.tex`
   flags a `uv-sync` follow-up (not this skill's job to fix).
 
 For critical-path ranking, compute per UV: **in-degree** (how many
@@ -55,7 +55,7 @@ otherwise print-and-exit.
 
 ## Don't
 
-Auto-edit `unverified.tex` — fixes go through `uv-sync` or
+Auto-edit `<team-dir>/uv.md` — fixes go through `uv-sync` or
 `paper-demote`. Infer deps from prose — only trust the explicit
 `Depends on:` field. Rank by raw in-degree (reachable-from-open is the
 right signal).

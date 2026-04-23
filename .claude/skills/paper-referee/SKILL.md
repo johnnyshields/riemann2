@@ -5,51 +5,66 @@ description: Two-phase review loop on <paper>/<main>.tex — Phase 1 fixers edit
 
 # Paper Referee
 
-Two-phase: Phase 1 fixers edit the paper against known issues, Phase 2
-fresh referees re-review. Phase 1 is an explicit edit-capable exception
-to the read-only default.
+Two phases in one team dir: Phase 1 fixers edit the paper against known
+issues; Phase 2 fresh referees re-review without seeing what Phase 1
+touched. Phase 1 is the explicit edit-capable exception to the
+read-only default. Follows CLAUDE.md §5, §6, §8a.
 
 `$ARGUMENTS`: empty → fix against latest referee feedback in `lore/`;
 file path → target that; `--no-referee` → skip Phase 2;
-`--referee-only` → skip Phase 1; specific issues listed → fix only those.
+`--referee-only` → skip Phase 1; specific issues listed → fix only
+those.
 
-## Preamble
+## Preamble (forward-carry first — §8a)
 
-Read `findings.md`, recent referee reports in `lore/`, and the paper
-region at issue. Create two team dirs sharing one timestamp:
-`<paper>/teams/<ts>-attack-gap-referee-<slug>/` (Phase 1) and
-`<paper>/teams/<ts>-verify-referee-<slug>/` (Phase 2). Announce paths.
+1. Read the most recent team dir's `findings.md` and `uv.md`, recent
+   referee reports in `lore/`, and the paper region at issue.
+2. Create `<paper>/teams/<ts>-referee-<slug>/`. Copy prior
+   `findings.md` + `uv.md` in; prune; add any uncaptured material.
+3. Write `dispatch.md` describing target region, issues, phases.
 
-## Phase 1
+## Phase 1 (fix)
 
-`TeamCreate team_name: "paper-referee-fix-<ts>"`. Spawn up to 3 fixers
-named for their content area (e.g. `fixer-local-geometry`,
-`fixer-finite-s-algebra`, `fixer-endgame`). Standard briefing plus the
-specific UV entries their issues touch (narrow exception only, not the
-whole ledger) and their assigned issues.
+`TeamCreate team_name: "paper-referee-fix-<ts>"`. Spawn up to 3
+fixers (`subagent_type: fixer`) named for their content area
+(e.g. `fixer-local-geometry`, `fixer-finite-s-algebra`,
+`fixer-endgame`). Each gets its own `agents/<ts>-fixer-<slug>/`
+subdir.
 
-**Edit-capable exception**: fixers may edit `proof_of_rh.tex`; may NOT
-edit `unverified.tex` or `findings.md` — surface new findings in their
-reports for coordinator review. Non-goals: no rewrite beyond assigned
+Briefing per fixer: the current team dir's `findings.md`, the specific
+UV entries for their region (narrow §5 exception), the issue list,
+the self-deposit checklist. Non-goals: no rewrite beyond assigned
 issues; no new lemmas without a UV entry.
 
-Shut down and `TeamDelete` when Phase 1 completes.
+**Edit-capable exception.** Fixers may edit `<paper>/<main>.tex`
+within their scoped region. They still do **not** edit the team dir's
+`findings.md` / `uv.md` / `paper-updates.md` — surface new findings in
+their reports, the team lead handles capture (§8a).
 
-## Phase 2 (unless `--no-referee`)
+Shut down the fix team, `TeamDelete`, commit paper edits (pre-commit
+compile-check applies). Process fixer reports through §8 capture.
 
-`TeamCreate team_name: "paper-referee-review-<ts>"`. Spawn two referees
-read-only:
+## Phase 2 (re-review, unless `--no-referee`)
+
+`TeamCreate team_name: "paper-referee-review-<ts>"` (same team dir,
+new TeamCreate). Spawn two referees read-only (`subagent_type:
+referee`):
 
 - **`referee-math`** — pure-math standard: proofs, hypotheses,
   circularity, citations.
-- **`referee-general`** — clarity, accessibility, flow, overclaims.
+- **`referee-general`** — clarity, accessibility, flow, overclaim.
 
-Both return verdict \(\in\) `accept | minor | major | reject`. Both
-receive full `unverified.tex` (referees are adversarial verifiers —
-narrow exception). Both read all prior referee reports in `lore/` and
-track which old issues are now addressed.
+Briefing: the paper region post-fix (do NOT tell them which issues
+Phase 1 addressed — that biases them toward rubber-stamping). Both
+receive specific UV entries that land in their region (adversarial §5
+exception). Both read prior referee reports in `lore/` and track which
+old issues remain.
 
-## Post-cycle
+Each returns a verdict ∈ `accept | minor | major | reject`.
 
-Commit Phase 1 paper edits (pre-commit compile-check applies). Commit
-Phase 2 reports. Summarize verdicts to the user.
+## Post-cycle (capture before shutdown — §8a)
+
+Process Phase 2 reports through §8. Update `uv.md` with new issues,
+demote any claim that a referee killed, file new UVs where they
+sharpened a gap. Summarize verdicts in `collation.md`. Final commit
+naming the team dir.

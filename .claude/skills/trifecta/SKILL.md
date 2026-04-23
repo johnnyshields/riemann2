@@ -5,51 +5,56 @@ description: Post-work synthesis — three parallel analysts covering deep inter
 
 # Trifecta
 
-Three-angle post-work synthesis: deep internal insights, external
-literature, hidden links to fundamental math.
+Three-angle post-work synthesis via `subagent_type: trifecta-analyst`.
+Follows CLAUDE.md §5, §6, §8a.
 
-`$ARGUMENTS`: empty → analyze most recent work (git log + recent lore);
-topic phrase → focus all three; lore file path → analyze that file.
+`$ARGUMENTS`: empty → analyze most recent work (git log + recent
+lore); topic phrase → focus all three; lore file path → analyze that
+file.
 
-## Preamble
+## Preamble (forward-carry first — §8a)
 
-Read `findings.md`, recent `lore/` entries, and `git log --oneline -n
-20`. Skim relevant paper sections. Write a ≤30-line key-findings
-summary; it's pasted into all three briefings. Create
-`<paper>/teams/<ts>-other-trifecta-<slug>/`.
+1. Read the most recent team dir's `findings.md` and `uv.md`, recent
+   `lore/` entries, and `git log --oneline -n 20`. Skim relevant paper
+   sections.
+2. Write a ≤30-line key-findings summary; it's pasted into all three
+   briefings.
+3. Create `<paper>/teams/<ts>-trifecta-<slug>/`. Copy forward
+   `findings.md`; prune.
 
 ## Dispatch
 
-`TeamCreate team_name: "trifecta-<slug>"`. Spawn three parallel
-agents with the standard briefing (full `findings.md`, 7-field
-schema, writing-discipline reminder, self-deposit checklist),
-**no `unverified.tex` content** (trifecta analysts are the textbook
-spoiler-prone case), and the key-findings summary. Paste: "Label each
-connection with a confidence tag before merging" and
-"`unsupported`/`blocked`/`no progress` are acceptable returns."
+`TeamCreate team_name: "trifecta-<slug>"`. Spawn three analysts
+(`subagent_type: trifecta-analyst`) with the standard briefing (full
+`findings.md`, 7-field schema, writing-discipline reminder, self-
+deposit checklist), **no `uv.md` content** (trifecta analysts are the
+textbook spoiler-prone case), and the key-findings summary.
 
 - **`analyst-deep-insights`** — internal structural analysis per
   section: what recent findings reveal, hidden connections, new
   directions. Observations only, no new theorems.
-- **`analyst-lit-search`** — external literature via WebSearch. For each
-  connection: problem, how our result connects, whether it provides
-  progress, key refs with URLs/DOIs. No paper-change proposals.
+- **`analyst-lit-search`** — external literature via WebSearch. For
+  each connection: problem, how our result connects, whether it
+  provides progress, key refs with URLs/DOIs. No paper-change
+  proposals.
 - **`analyst-under-nose`** — bold / speculative connections to
   fundamental math. Before proposing, must check `findings.md`
   §Negative and flag any match instead of re-proposing a ruled-out
   route.
 
-Individual per-agent lore files are forbidden; the coordinator writes
-one consolidated entry.
+Individual per-analyst lore files are forbidden — the coordinator
+writes one consolidated entry.
 
-## Post-cycle
+## Post-cycle (capture before shutdown — §8a)
 
-Verify deposits. Write ONE lore file
-`lore/<yyyymmdd>-trifecta-<slug>.md`: top-level summary,
-section-by-section, literature ranked by strength, under-the-nose
-connections ranked by actionability (with Negative overlaps resolved),
-suggested paper additions, new references.
+Verify deposits. Walk each report, process findings through §8 —
+append Negative / Goodie / Open-gap bullets to this team dir's
+`findings.md`, file new UVs where speculative connections reveal
+gaps, stage paper-ready additions in `paper-updates.md`.
 
-Emit `findings.md` deltas via `research-capture` for reusable
-goodies / structural observations / recurring gaps. Shut down,
-`TeamDelete`, commit lore + team dir + findings edits, cite the dir.
+Write ONE lore file `lore/<yyyymmdd>-trifecta-<slug>.md`: top-level
+summary, section-by-section, literature ranked by strength, under-
+the-nose connections ranked by actionability (with Negative overlaps
+resolved), suggested paper additions, new references.
+
+Shut down, `TeamDelete`, commit lore + team dir, cite the dir.
