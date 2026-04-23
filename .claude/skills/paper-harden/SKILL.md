@@ -1,6 +1,6 @@
 ---
 name: paper-harden
-description: Read-only 4-agent quality review of paper/proof_of_rh.tex — rigor, consistency, formatting, voice. Reviewers return reports only; the coordinator consolidates.
+description: Read-only 4-agent quality review of <paper>/<main>.tex — rigor, consistency, formatting, voice. Reviewers return reports only; the coordinator consolidates.
 ---
 
 # Paper Harden
@@ -10,7 +10,7 @@ Four-angle read-only quality review.
 ## Preamble
 
 Read `findings.md` (especially Negative + Recurring-open-gaps, for
-overclaim detection). Create `tasks/<ts>-audit-harden-<slug>/` with
+overclaim detection). Create `<paper>/teams/<ts>-audit-harden-<slug>/` with
 `reports/`, `scripts/`, `notes/`. `<slug>` may be `post-referee`,
 `pre-submission`, or generic.
 
@@ -41,5 +41,5 @@ others do not.
 
 Verify deposits. Write `reports/_summary.md` ranked HIGH / MEDIUM /
 LOW. Issue reusable observations into `findings.md` via
-`research-capture`; otherwise keep in the task dir. No paper edits.
-Shut down, `TeamDelete`, commit with the task dir named.
+`research-capture`; otherwise keep in the team dir. No paper edits.
+Shut down, `TeamDelete`, commit with the team dir named.

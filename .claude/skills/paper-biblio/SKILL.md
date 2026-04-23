@@ -1,15 +1,15 @@
 ---
 name: paper-biblio
-description: Alphabetize, de-dupe, verify, and clean up the bibliography of paper/proof_of_rh.tex. Caches user decisions in papers/<name>-biblio-known.md.
+description: Alphabetize, de-dupe, verify, and clean up the bibliography of <paper>/<main>.tex. Caches user decisions in papers/<name>-biblio-known.md.
 ---
 
 # Paper Biblio
 
 Alphabetize, de-dupe, verify, and clean up the bibliography of
-`paper/proof_of_rh.tex`. Cache user decisions in
+`<paper>/<main>.tex`. Cache user decisions in
 `papers/<name>-biblio-known.md` so nothing gets re-flagged across runs.
 
-`$ARGUMENTS`: empty → `paper/proof_of_rh.tex` (do NOT use an mtime
+`$ARGUMENTS`: empty → `<paper>/<main>.tex` (do NOT use an mtime
 heuristic — `unverified.tex` is more recent); file path → that paper;
 `--skip-external` → no web verification; `--force-recheck` → ignore
 cache.

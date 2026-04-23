@@ -1,6 +1,6 @@
 ---
 name: session-handoff
-description: End-of-session writeup producing a lore entry that summarizes task dirs opened, UV movements, findings changes, queued follow-ups, and open threads. Makes cross-session handoff clean so the next session can resume without reconstructing state.
+description: End-of-session writeup producing a lore entry that summarizes team dirs opened, UV movements, findings changes, queued follow-ups, and open threads. Makes cross-session handoff clean so the next session can resume without reconstructing state.
 ---
 
 # Session Handoff
@@ -14,7 +14,7 @@ git ref or ISO date; `--note "<text>"` → free-text addendum.
 ## Gather
 
 Commits since `<since>` (`git log --since=... --oneline`). Task dirs
-opened or touched (`find tasks/ -maxdepth 1 -type d -newer <marker>`).
+opened or touched (`find <paper>/teams/ -maxdepth 1 -type d -newer <marker>`).
 Changes to `unverified.tex` and `findings.md`. Paper edits with stats.
 Active teams (should be none — close any that survived).
 

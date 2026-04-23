@@ -1,11 +1,11 @@
 ---
 name: research-capture
-description: Synchronous coordinator append of a single structural / negative / goodie / gap entry to paper/findings.md, with provenance, then commit.
+description: Synchronous coordinator append of a single structural / negative / goodie / gap entry to <team-dir>/findings.md, with provenance, then commit.
 ---
 
 # Research Capture
 
-Synchronous append of one entry to `paper/findings.md`. No delegation.
+Synchronous append of one entry to `<team-dir>/findings.md`. No delegation.
 Provenance is mandatory.
 
 `$ARGUMENTS` format: `<section> <one-line summary>`, section \(\in\)
@@ -29,7 +29,7 @@ If the file exceeds 200 lines after this append, run `findings-prune`.
 
 Stage `findings.md` by name and commit
 `findings: capture <section> — <summary>`. If the entry came out of a
-task-dir session, cite the dir in the body.
+team-dir session, cite the dir in the body.
 
 ## Don't
 

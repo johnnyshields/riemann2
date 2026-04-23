@@ -1,6 +1,6 @@
 ---
 name: paper-demote
-description: Structured reverse-promotion. Remove or weaken a claim currently in paper/proof_of_rh.tex, reinstate a UV-NNN entry in paper/unverified.tex, and optionally capture a negative finding — all in one atomic commit. Use when a promoted claim turns out to be wrong or weaker than stated.
+description: Structured reverse-promotion. Remove or weaken a claim currently in <paper>/<main>.tex, reinstate a UV-NNN entry in <team-dir>/uv.md, and optionally capture a negative finding — all in one atomic commit. Use when a promoted claim turns out to be wrong or weaker than stated.
 ---
 
 # Paper Demote
@@ -52,7 +52,7 @@ Compile-check runs via the pre-commit hook.
 Single atomic commit. Stage `proof_of_rh.tex`, `unverified.tex`, and
 (if applicable) `findings.md` by name. Subject
 `demote <label-or-UV>: <reason>`. Body: what was removed/weakened, the
-new UV-NNN, and any task dir whose adversarial report triggered it.
+new UV-NNN, and any team dir whose adversarial report triggered it.
 
 If teams are still active, `SendMessage` each a short correction notice
 so they don't build on the demoted claim.

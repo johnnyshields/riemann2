@@ -1,11 +1,11 @@
 ---
 name: dep-graph
-description: Validate the UV dependency graph in paper/unverified.tex. Detects cycles, orphans, broken references, and identifies critical-path UV entries that unblock the most downstream work. Reports only — no auto-edits.
+description: Validate the UV dependency graph in <team-dir>/uv.md. Detects cycles, orphans, broken references, and identifies critical-path UV entries that unblock the most downstream work. Reports only — no auto-edits.
 ---
 
 # Dep Graph
 
-Validate the `Depends on:` graph in `paper/unverified.tex`. Read-only
+Validate the `Depends on:` graph in `<team-dir>/uv.md`. Read-only
 coordinator action; reports only.
 
 ## Protocol

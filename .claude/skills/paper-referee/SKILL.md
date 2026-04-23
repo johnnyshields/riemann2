@@ -1,6 +1,6 @@
 ---
 name: paper-referee
-description: Two-phase review loop on paper/proof_of_rh.tex — Phase 1 fixers edit the paper to address known issues, Phase 2 fresh referees re-review. Phase 1 is an explicit edit-capable exception.
+description: Two-phase review loop on <paper>/<main>.tex — Phase 1 fixers edit the paper to address known issues, Phase 2 fresh referees re-review. Phase 1 is an explicit edit-capable exception.
 ---
 
 # Paper Referee
@@ -16,9 +16,9 @@ file path → target that; `--no-referee` → skip Phase 2;
 ## Preamble
 
 Read `findings.md`, recent referee reports in `lore/`, and the paper
-region at issue. Create two task dirs sharing one timestamp:
-`tasks/<ts>-attack-gap-referee-<slug>/` (Phase 1) and
-`tasks/<ts>-verify-referee-<slug>/` (Phase 2). Announce paths.
+region at issue. Create two team dirs sharing one timestamp:
+`<paper>/teams/<ts>-attack-gap-referee-<slug>/` (Phase 1) and
+`<paper>/teams/<ts>-verify-referee-<slug>/` (Phase 2). Announce paths.
 
 ## Phase 1
 

@@ -1,6 +1,6 @@
 ---
 name: uv-sync
-description: Reconcile rem:wip-* labels in paper/proof_of_rh.tex with UV-NNN entries in paper/unverified.tex. Reports missing UV entries (label without UV) and orphan UVs (UV without matching label). Synchronous coordinator action, no delegation.
+description: Reconcile rem:wip-* labels in <paper>/<main>.tex with UV-NNN entries in <team-dir>/uv.md. Reports missing UV entries (label without UV) and orphan UVs (UV without matching label). Synchronous coordinator action, no delegation.
 ---
 
 # UV Sync
@@ -15,8 +15,8 @@ They should be 1:1. Drift happens.
 Enumerate:
 
 ```sh
-grep -n '\\label{rem:wip-' paper/proof_of_rh.tex
-grep -nE '\\item\[UV-[0-9]+\]|Source in paper' paper/unverified.tex
+grep -n '\\label{rem:wip-' <paper>/<main>.tex
+grep -nE '\\item\[UV-[0-9]+\]|Source in paper' <team-dir>/uv.md
 ```
 
 Build the mapping: for each `rem:wip-<slug>`, find the UV whose

@@ -1,11 +1,11 @@
 ---
 name: paper-cut
-description: Move a passage from paper/proof_of_rh.tex to paper/cut-for-time.md with full provenance (original location, reason, broken refs), then commit.
+description: Move a passage from <paper>/<main>.tex to <paper>/cut-for-time.md with full provenance (original location, reason, broken refs), then commit.
 ---
 
 # Paper Cut
 
-Move a passage from `paper/proof_of_rh.tex` to `paper/cut-for-time.md`
+Move a passage from `<paper>/<main>.tex` to `<paper>/cut-for-time.md`
 with provenance.
 
 Read the passage. Grep for `\ref{...}` / `\eqref{...}` pointing at any
@@ -13,7 +13,7 @@ Read the passage. Grep for `\ref{...}` / `\eqref{...}` pointing at any
 provenance block). Remove the passage from the paper; fix surrounding
 transitions.
 
-Append to `paper/cut-for-time.md`:
+Append to `<paper>/cut-for-time.md`:
 
 ```markdown
 ---
@@ -21,7 +21,7 @@ Append to `paper/cut-for-time.md`:
 ## From: [Section name] ([context])
 
 **Cut date:** YYYY-MM-DD
-**Original location:** paper/proof_of_rh.tex, [line range or label]
+**Original location:** <paper>/<main>.tex, [line range or label]
 **Reason:** [brief reason]
 **Broken refs:** [list, if any]
 

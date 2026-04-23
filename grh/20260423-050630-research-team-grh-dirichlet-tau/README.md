@@ -29,6 +29,9 @@ cleaner completed-\(L\)-function abstractions.
 ## Key files
 
 - `synthesis.md` — conservative three-bin synthesis of the research-team cycle.
+- `birds-eye-view-for-rh-agent.md` — handoff-style Markdown brief explaining the
+  GRH/ERH/RH map, where the current zeta draft sits inside it, and what the
+  current non-zeta theorem targets actually are.
 - `notes/local_package_theorem.md` — sharpened boundary from the follow-up
   attack: unconditional odd-germ/projector layer, calibration only conditional.
 - `notes/dirichlet_channel.md` — current honest stance on primitive Dirichlet
@@ -68,6 +71,18 @@ cleaner completed-\(L\)-function abstractions.
 - `notes/zeta_source_package.md` — best value-back-to-RH target, now reduced to
   one localized source-theorem package with three theorem-level parts plus two
   explicit identification/convention items.
+- `notes/rh_patch_plan.md` — practical handoff note for an RH agent: where the
+  canonical zeta source theorem should be inserted and why that is the
+  highest-value, lowest-risk patch.
+- `notes/quotient_normalization.md` — source-normalization action item for the
+  RH draft: the factor-of-2 is fine, the sign is the real mismatch, and the
+  clean fix is a front-loaded quotient/phase-normalization subsection.
+- `notes/background_unification.md` — RH-facing notation note: use one
+  canonical background symbol with scoped role-level aliases, not a claimed
+  identity of `B_zeta`, `B_Aut`, and `B_bg` from the current text alone.
+- `notes/q_notation.md` — RH-facing notation blocker: the `q` / `q_zeta` clash
+  is localized but still needs a small source-normalization subsection rather
+  than a one-line patch.
 - `notes/source_package_transfer.md` — bridge note from the canonical zeta
   source package to the paired Dirichlet target: useful blueprint upstairs, but
   the theorem burden remains exact paired `S(m)`-slot realization plus paired
@@ -89,6 +104,12 @@ cleaner completed-\(L\)-function abstractions.
   holomorphic corrected whitening plus preserved post-`Phi_K` transfer scale,
   with value-slot realization, boundary control, odd-channel transport, and
   remainder dominance still separate.
+- `notes/boundary_package.md` — post-whitening refinement: the right standalone
+  target is the corrected transverse realization-and-boundary package, not the
+  bare boundary theorem in isolation.
+- `notes/first_milestone.md` — resolves the milestone question: the first
+  non-zeta exact-source milestone is still paired source-plus-slot realization,
+  while corrected-whitening transport remains an earlier partial bundle.
 - `paper/portability_note.tex` — broad portability note for Dirichlet,
   GRH-style settings, and the Ramanujan `\tau` test case.
 - `paper/local_odd_projector_note.tex` — standalone note isolating the

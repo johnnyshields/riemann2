@@ -1,6 +1,6 @@
 ---
 name: research-audit
-description: N disjoint read-only audits on specified paper/proof_of_rh.tex subsections, each graded with the fixed proved/conditional/missing framework. Optional --adversarial pairs each auditor with a checker.
+description: N disjoint read-only audits on specified <paper>/<main>.tex subsections, each graded with the fixed proved/conditional/missing framework. Optional --adversarial pairs each auditor with a checker.
 ---
 
 # Research Audit
@@ -15,7 +15,7 @@ checker; `--non-goals: "..."` to pin specific bans.
 
 Read `findings.md`. Resolve each argument to a concrete line range (or
 `\section` block) in `proof_of_rh.tex`. Create
-`tasks/<ts>-audit-<slug>/` with `reports/`, `scripts/`, `notes/`.
+`<paper>/teams/<ts>-audit-<slug>/` with `reports/`, `scripts/`, `notes/`.
 
 ## Dispatch
 
@@ -50,4 +50,4 @@ Verify every expected report exists; chase missing deposits. Write
 `research-capture` for any surfaced Negative / Goodie / Open-gap. Lore
 entry only if proof state changed. No `proof_of_rh.tex` edits.
 
-Shut down, `TeamDelete`, commit with the task dir named.
+Shut down, `TeamDelete`, commit with the team dir named.

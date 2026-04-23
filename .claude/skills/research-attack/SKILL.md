@@ -15,7 +15,7 @@ resolves to the best match). Optional `--double`.
 
 Read `findings.md`, the target's UV entry, and the paper region around
 the target's `rem:wip-*` label (±200 lines). Create
-`tasks/<ts>-attack-gap-<slug>/` where `<slug>` = UV-ID or short
+`<paper>/teams/<ts>-attack-gap-<slug>/` where `<slug>` = UV-ID or short
 descriptor.
 
 ## Dispatch
@@ -44,5 +44,5 @@ cross-check against cited paper lines. Update the UV entry (refine
 `Needed for promotion`, or close it if the verifier confirmed). Call
 `research-capture` for any new findings. No `proof_of_rh.tex` edits.
 
-Shut down, `TeamDelete`, commit with the task dir named and UV-NNN in
+Shut down, `TeamDelete`, commit with the team dir named and UV-NNN in
 the subject.

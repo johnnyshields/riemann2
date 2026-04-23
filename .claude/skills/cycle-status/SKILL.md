@@ -1,6 +1,6 @@
 ---
 name: cycle-status
-description: Snapshot of the current research state — active teams, recent task dirs, UV entries with status + dependencies, open threads from recent lore. Run at session start or mid-session to orient without re-reading everything.
+description: Snapshot of the current research state — active teams, recent team dirs, UV entries with status + dependencies, open threads from recent lore. Run at session start or mid-session to orient without re-reading everything.
 ---
 
 # Cycle Status
@@ -14,7 +14,7 @@ days (default 7); `--uv-only` / `--tasks-only` → filter.
 
 - **Active teams** via `TeamList` (or equivalent) — name, members, last
   message time.
-- **Recent task dirs** — `ls -1t tasks/ | grep -E '^[0-9]{8}-' | head -10`.
+- **Recent team dirs** — `ls -1t <paper>/teams/ | grep -E '^[0-9]{8}-' | head -10`.
   For each: type, role, report count (landed vs expected), status from
   `reports/_summary.md` if present.
 - **UV ledger** — one line per UV: `UV-NNN <status> "<title>" deps:
@@ -45,5 +45,5 @@ RECENT COMMITS
 Empty sections: emit "none" — don't suppress the heading.
 
 If anything looks action-worthy (`findings.md` at 195 lines, orphan
-UV, task dir with missing reports, unpushed commits > 3), add a
+UV, team dir with missing reports, unpushed commits > 3), add a
 "NEXT ACTIONS" footer (≤5 bullets).

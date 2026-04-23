@@ -16,12 +16,12 @@ topic phrase → focus all three; lore file path → analyze that file.
 Read `findings.md`, recent `lore/` entries, and `git log --oneline -n
 20`. Skim relevant paper sections. Write a ≤30-line key-findings
 summary; it's pasted into all three briefings. Create
-`tasks/<ts>-other-trifecta-<slug>/`.
+`<paper>/teams/<ts>-other-trifecta-<slug>/`.
 
 ## Dispatch
 
 `TeamCreate team_name: "trifecta-<slug>"`. Spawn three parallel
-teammates with the standard briefing (full `findings.md`, 7-field
+agents with the standard briefing (full `findings.md`, 7-field
 schema, writing-discipline reminder, self-deposit checklist),
 **no `unverified.tex` content** (trifecta analysts are the textbook
 spoiler-prone case), and the key-findings summary. Paste: "Label each
@@ -39,7 +39,7 @@ connection with a confidence tag before merging" and
   §Negative and flag any match instead of re-proposing a ruled-out
   route.
 
-Individual per-teammate lore files are forbidden; the coordinator writes
+Individual per-agent lore files are forbidden; the coordinator writes
 one consolidated entry.
 
 ## Post-cycle
@@ -52,4 +52,4 @@ suggested paper additions, new references.
 
 Emit `findings.md` deltas via `research-capture` for reusable
 goodies / structural observations / recurring gaps. Shut down,
-`TeamDelete`, commit lore + task dir + findings edits, cite the dir.
+`TeamDelete`, commit lore + team dir + findings edits, cite the dir.

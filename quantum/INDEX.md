@@ -5,6 +5,8 @@ Quick map of the strongest current results and where they live.
 ## Main note
 
 - `quantum/paper/jet_gram_quantum_note.md`
+- Benchmark map:
+  `quantum/paper/benchmark_map.md`
 
 ## Core findings
 
@@ -27,6 +29,10 @@ Quick map of the strongest current results and where they live.
   `quantum/20260423-140111-attack-transport-free-subspaces/reports/gap-transport-free-subspaces.md`
 - Multiparameter extension:
   `quantum/20260423-140931-attack-multiparameter-osculating/reports/gap-multiparameter-theorem.md`
+- One-parameter higher-order covariant jets:
+  `quantum/20260423-234645-attack-covariant-jets/reports/gap-covariant-jets.md`
+- Multiparameter covariant jets:
+  `quantum/20260423-235606-attack-multiparameter-covariant-jets/reports/gap-multiparameter-covariant-jets.md`
 - Projector-operator corollary:
   `quantum/20260423-141619-attack-projector-operator/reports/gap-projector-operator.md`
 
@@ -64,6 +70,8 @@ Quick map of the strongest current results and where they live.
   `quantum/20260423-141906-attack-Ar-vs-Or/reports/gap-Ar-vs-Or.md`
 - Benchmark comparison of `O_r` versus `A_r`:
   `quantum/20260423-142558-attack-Or-vs-Ar-benchmarks/reports/gap-Or-vs-Ar.md`
+- Simple-spectrum principal-frame corollary:
+  `quantum/20260424-003729-attack-canonical-frames/reports/gap-canonical-frames.md`
 
 ## Interpretation
 
@@ -71,3 +79,7 @@ Quick map of the strongest current results and where they live.
   `quantum/20260423-191742-attack-operational-meaning/reports/gap-operational-meaning.md`
 - Krylov specialization for unitary orbits:
   `quantum/20260423-201939-attack-krylov/reports/gap-krylov-theorem.md`
+- Unitary commutator / leakage corollary:
+  `quantum/20260424-001425-attack-commutator-metric/reports/gap-commutator-metric.md`
+- Unitary propagator-compression corollary:
+  `quantum/20260424-002612-attack-propagator-subspaces/reports/gap-propagator-subspaces.md`

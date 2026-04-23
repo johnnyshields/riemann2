@@ -1,12 +1,12 @@
 ---
 name: paper-rewrite
-description: Full-paper compactness rewrite of paper/proof_of_rh.tex (or a specified scope). Tightens prose, combines redundancy, and removes unnecessary qualifiers while RIGOROUSLY preserving every convention — macros, labels, cite keys, theorem statements, notation, mathematical content. Agent-per-section parallel dispatch with heavy compile-check gating.
+description: Full-paper compactness rewrite of <paper>/<main>.tex (or a specified scope). Tightens prose, combines redundancy, and removes unnecessary qualifiers while RIGOROUSLY preserving every convention — macros, labels, cite keys, theorem statements, notation, mathematical content. Agent-per-section parallel dispatch with heavy compile-check gating.
 ---
 
 # Paper Rewrite
 
 Compactness pass on `proof_of_rh.tex` (or a scope). Rewriters are
-edit-capable for their own task dir only; assembly into the paper is
+edit-capable for their own team dir only; assembly into the paper is
 gated behind integrity checks.
 
 `$ARGUMENTS`: empty → full paper; `§<N>` or `§<N>.<M>` → that section;
@@ -47,7 +47,7 @@ stale cross-references.
 
 ## Preamble
 
-Create `tasks/<ts>-other-rewrite-<slug>/`. Capture invariants into
+Create `<paper>/teams/<ts>-other-rewrite-<slug>/`. Capture invariants into
 `notes/`: macros, theorem envs, labels, cite keys, cross-refs, baseline
 line count (grep + `wc -l`). Baseline compile-check must be clean before
 starting. Partition scope (full = 14 top-level sections + §12's 6
@@ -97,7 +97,7 @@ reduction.
 
 Atomic: only this rewrite in the commit. Subject
 `paper: compactness rewrite <scope> (-<N>%)`. Body: scope, reduction,
-rewriters, task dir, any `--preserve-extra` tokens confirmed.
+rewriters, team dir, any `--preserve-extra` tokens confirmed.
 
 Follow up with `paper-harden` (at minimum rigor + consistency) on the
 rewritten scope. Drift surfaced → `paper-demote`.
