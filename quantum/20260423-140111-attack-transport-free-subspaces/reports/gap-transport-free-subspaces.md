@@ -1,0 +1,23 @@
+# gap-transport-free-subspaces
+
+- **Claim**: Let \(\lambda \mapsto [\psi(\lambda)]\) be a \(C^r\) one-parameter pure-state ray curve in a fixed Hilbert space \(\mathcal H\), and let \(|\psi(\lambda)\rangle\) be any normalized local lift. Define
+  \[
+  P(\lambda)=I-|\psi(\lambda)\rangle\langle\psi(\lambda)|,
+  \qquad
+  j_k(\lambda)=P(\lambda)\partial_\lambda^k\psi(\lambda)\quad(1\le k\le r),
+  \]
+  and the ambient order-\(r\) osculating subspace
+  \[
+  \mathcal A_r(\lambda):=\operatorname{span}\{\psi(\lambda),j_1(\lambda),\dots,j_r(\lambda)\}.
+  \]
+  Then \(\mathcal A_r(\lambda)\) is exactly invariant under local phase gauge and under any \(C^r\) reparameterization \(\mu=\phi(\lambda)\) with \(\phi'(\lambda)\neq0\). Equivalently,
+  \[
+  \mathcal A_r(\lambda)=\operatorname{span}\{\psi,\partial_\lambda\psi,\dots,\partial_\lambda^r\psi\},
+  \]
+  and this span depends only on the ray curve, not on the chosen lift or parameter. Consequently, for any two endpoints in the same ambient Hilbert space, the principal angles between \(\mathcal A_r(\lambda_-)\) and \(\mathcal A_r(\lambda_+)\) are canonical transport-free two-point invariants. At first order this gives the exact transport-free object \(\mathcal A_1(\lambda)=\operatorname{span}\{\psi(\lambda),h_\lambda\}=\operatorname{span}\{\psi(\lambda),\partial_\lambda\psi(\lambda)\}\), where \(h_\lambda=P\partial_\lambda\psi\). This removes transport only at the subspace/principal-angle level, not at the matrix-entry level.
+- **Status**: proved
+- **Evidence**: Proved: the higher-jet report already establishes that \(O_r(\lambda):=\operatorname{span}\{j_1,\dots,j_r\}\) is invariant under phase gauge and reparameterization because the ordered jet list changes by an invertible upper-triangular law in both cases. Adding \(\psi\) preserves that conclusion, so \(\mathcal A_r=\operatorname{span}\{\psi\}\oplus O_r\) as a span is likewise invariant. Proved: since \(j_k=P\partial_\lambda^k\psi=\partial_\lambda^k\psi-\psi\langle\psi,\partial_\lambda^k\psi\rangle\), one has \(\mathcal A_r=\operatorname{span}\{\psi,\partial_\lambda\psi,\dots,\partial_\lambda^r\psi\}\). Under phase gauge \(\tilde\psi=e^{i\chi}\psi\), the derivatives \(\partial_\lambda^k\tilde\psi\) are linear combinations of \(\partial_\lambda^m\psi\) for \(m\le k\) with invertible upper-triangular leading term \(e^{i\chi}\); under reparameterization, Faà di Bruno gives the same upper-triangular structure with diagonal entries \((d\lambda/d\mu)^k\). Hence the ambient osculating span is unchanged. Proved: principal angles between finite-dimensional subspaces of a fixed Hilbert space are intrinsic to the pair of subspaces, so once the endpoint subspaces themselves are canonical, no transport is needed to define those angles. Conditional: if one insists on a bilaterally whitened cross-Gram matrix rather than just the subspaces or their principal angles, extra frame/transport choices return and no transport-free matrix theorem is proved. Missing: any theorem identifying a canonical matrix representative whose entries are transport-independent beyond the principal-angle data.
+- **Exact refs**: `quantum/20260423-140111-attack-transport-free-subspaces/notes/coordinator-brief.md:5-16`; `quantum/paper/jet_gram_quantum_note.md:174-247`; `quantum/paper/jet_gram_quantum_note.md:249-299`; `quantum/findings.md:35-54`; `quantum/20260423-134344-attack-higher-jets/reports/gap-higher-jet-theorem.md:3-23`; `quantum/20260423-135052-attack-quartit-osculating/reports/gap-quartit-principal-angles.md:3-43`.
+- **Dependencies**: A fixed ambient Hilbert space \(\mathcal H\); a \(C^r\) one-parameter ray curve with normalized local lift; the projector identity \(P\psi=0\); upper-triangular gauge/reparameterization laws for higher jets or, equivalently, for ordinary derivatives of the lift; standard Hilbert-space theory of principal angles for finite-dimensional subspaces.
+- **Strongest objection**: This theorem wins only by moving from transported matrices to ambient subspaces. It does not prove that the paper-style bilaterally whitened two-point matrix is canonical, and it does not apply once the endpoints live only as abstract rays without a common ambient \(\mathcal H\). If one wants matrix entries rather than principal angles, transport/frame dependence is still unresolved.
+- **Needed for promotion**: Promote exactly this subspace-level theorem, with the explicit statement that transport is unnecessary only for principal angles between the canonical ambient osculating subspaces \(\mathcal A_r(\lambda_\pm)\). Do not promote any stronger transport-free matrix claim.
