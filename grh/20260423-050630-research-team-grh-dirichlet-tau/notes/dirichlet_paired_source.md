@@ -46,6 +46,20 @@ The later paired-quotient-properties attack sharpened this further:
 - positivity of the manuscript's paired `S(m)` slot becomes automatic only if
   that theorem also provides exact local-slot identification.
 
+The later paired-quotient-normalization attack clarifies the front-end sign/factor convention:
+
+- factor `2` is fine here too;
+- safest theorem-facing choice, if an explicit phase is introduced, is to mirror
+  the repaired zeta-side convention and write
+  `Phi_chi^pair(1/2+it)=e^{2 i Theta_chi^pair(t)}` with
+  `q_chi^pair=(Theta_chi^pair)'`.
+
+The later paired `q`-normalization attack stabilizes that further:
+
+- this front-end sign/factor issue no longer needs to remain open in the notes;
+- but it is still only a source-normalized interface convention, not yet a
+  theorem-closing canonical normalization.
+
 The paired-background attack sharpened the source side one step further:
 
 - the clean theorem-facing decomposition should use one unified

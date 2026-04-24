@@ -159,3 +159,6 @@ cleaner completed-\(L\)-function abstractions.
 - `paper/dirichlet_paired_source_candidate.tex` — theorem-facing note for the
   current best non-zeta target: exact paired source-and-slot realization for
   primitive Dirichlet characters.
+- `paper/dirichlet_paired_source_package_candidate.tex` — theorem-facing note
+  for the first step only: the compact paired source-package blueprint that
+  precedes exact slot realization.

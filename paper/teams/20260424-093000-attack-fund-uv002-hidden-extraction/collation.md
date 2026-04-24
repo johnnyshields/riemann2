@@ -22,6 +22,7 @@ Support/diagnostic lanes still active beneath the main queue:
 - The good-patch edge-law theorem and the exact fixed-shear package theorem are distinct support fronts.
 - `UV-004` is a bridge/diagnostic lane, currently negative-leaning, not the main queue head.
 - The queue now compresses to `C -> D -> contradiction`: once the corrected reduced-package diagonal-collapse theorem lands, Bottleneck B becomes formal and Bottleneck D is the only substantive remaining theorem blocker before the finite-core contradiction.
+- Queue lock: do not reopen the queue-order question unless a new theorem-level dependency appears. Immediate active theorem is `C`.
 - No current theorem-shaped route to universal pair-like exhaustion is visible.
 
 ## Open theorem bottlenecks
@@ -69,6 +70,12 @@ Refined blocker:
 - The sole remaining blocker on C is therefore the free analytic exceptional-divisor trace `B(m,\kappa)`, removable only by a genuine diagonal-merger / collision-functoriality theorem for the actual corrected two-atom package.
 - Latest theorem wave confirms this is final on the current draft:
   weak quotient-diagonal continuity is too weak, source-level merger alone is not enough, and collision-chart analyticity/swap-evenness alone is not enough. The only theorem that removes the free exceptional-divisor term is a genuine diagonal-merger / collision-functoriality theorem for the actual corrected two-atom package.
+- New exact decomposition of C from the latest deposits:
+  1. define the corrected reduced two-atom package object
+     `\widetilde\Psi^{\corr}_{\mathrm{red}}=\mathcal R\circ\mathfrak P^{\corr}_2`;
+  2. prove `\kappa`-independence of its exceptional-divisor trace at `\delta=0`;
+  3. identify that diagonal value with `\widehat\Psi(m)`.
+- The real blocker among these is step 2: killing the free exceptional-divisor term `B(m,\kappa)` by a genuine collision-functoriality / diagonal-merger theorem for the actual corrected package.
 
 ### Extraction front D
 
@@ -156,3 +163,7 @@ Refined blocker:
 - Best current proxy theorem beneath D remains `\widetilde\Psi_{\min}`-fiber invariance:
   equal germs of `\widetilde\Psi_{\min}=(x,Y,S,T)` should force the same first surviving odd order and leading coefficient, equivalently the same first nonzero `\Xi_{\zeta,\le H}^{(N)}`.
 - Therefore the active queue after C is conceptually just D: the hidden-state/package-to-transform factorization theorem for the first surviving odd jet / first nonzero `\Xi_{\zeta,\le H}^{(N)}`.
+- New exact decomposition of D from the latest deposits:
+  1. assume C in the sharp form `\widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0)=\widehat\Psi(m)`;
+  2. prove equal reduced-`\widehat\Psi` fibers force the corrected block difference into `\ker\Phi_K` through the first surviving odd order;
+  3. conclude the first nonzero `\Xi_{\zeta,\le H}^{(N)}` is package-determined.

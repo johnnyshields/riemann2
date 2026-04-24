@@ -42,6 +42,12 @@ not yet the cleanest exact `S(m)`-slot candidate unconditionally. The safe claim
 is only `cleanest self-dual phase-channel candidate`; any exact-`S` wording
 remains conditional on a missing tau-specific quotient/source theorem.
 
+The later tau-source-package attack keeps the same ranking even on an
+apples-to-apples theorem-facing comparison:
+
+- tau currently has only a conditional compact source-package blueprint;
+- paired Dirichlet still has the sharper source-plus-slot 2-step blueprint.
+
 ## Five degree-sensitive checkpoints
 
 The focused attack isolated five places that need fresh degree-2 work:

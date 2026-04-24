@@ -89,6 +89,9 @@ Source anchor:
 - The complete exact operator package of a canonical subspace pair is now
   explicit: cross-contraction, positive compressions, polar partial isometry,
   simple-spectrum frame corollary, and repeated-spectrum no-go.
+- In finite dimension, that package is complete up to ambient unitary
+  equivalence: the endpoint dimensions together with the principal-angle
+  multiset classify the subspace pair.
 - On the current qutrit/quartit/Veronese benchmark families, this simple-spectrum
   corollary is genuinely usable on a nonempty open set; it is not just a formal
   edge case.
@@ -113,6 +116,12 @@ Source anchor:
 - For exact unitary subspace orbits `S(t)=e^{-itH}S(0)`, the local projector
   metric has the exact commutator/leakage form
   `1/2 ||dot Pi_t||_HS^2 = 1/2 ||[H,Pi_t]||_HS^2 = ||(I-Pi_t) H Pi_t||_HS^2`.
+- Every smooth projector path also has an exact pathwise Kato transport
+  realization `H_K(t)=i[dot Pi(t), Pi(t)]`; this is a pathwise dynamical model,
+  not an endpoint-canonical matrix package.
+- In several parameters, the exact obstruction to endpoint-independent Kato
+  transport is the Kato curvature `R^K = Pi(dPi ∧ dPi)Pi`; in rank one this is
+  exactly Berry curvature.
 - For exact unitary orbits, the finite-separation projector compression has the
   exact short-time expansion `I - Δ^2 L_t^* L_t + O(Δ^3)`, so the local leakage
   operator is the leading defect from identity in the two-point data.

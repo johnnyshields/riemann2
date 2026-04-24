@@ -447,6 +447,12 @@ sector, the simple-spectrum diagonal-frame corollary, and the repeated-spectrum
 no-go. This is the strongest exact operator-level refinement now available, and
 it still does not amount to a canonical full matrix package.
 
+In finite dimension, this package is also complete up to ambient unitary
+equivalence: the dimensions of the two endpoint subspaces together with the
+principal-angle multiset determine the subspace pair up to unitary conjugacy.
+So the current operator package is not only canonical; it is complete at the
+subspace-pair level.
+
 On the current benchmark families this conditional normal form is genuinely
 usable on a nonempty open set. For the qutrit first-order benchmark there is
 only one nontrivial principal angle, so simplicity is automatic. For the
@@ -484,6 +490,32 @@ local dynamical corollary. If \(\Pi_t\) is the orthogonal projector onto
 So the local Grassmannian speed is exactly the Hilbert-Schmidt size of the
 Hamiltonian block leaking the subspace into its orthogonal complement. This is
 an infinitesimal corollary of the projector formalism, not a new invariant.
+
+More generally, every smooth projector path has an exact Kato transport
+realization:
+
+\[
+H_K(t)=i[\dot\Pi(t),\Pi(t)],
+\qquad
+\Pi(t)=U_K(t)\Pi(0)U_K(t)^*.
+\]
+
+This is the unique realizing Hamiltonian with vanishing instantaneous
+block-diagonal part relative to the moving projector. It gives a canonical
+pathwise dynamical model of the subspace path, but it is path-dependent and does
+not by itself solve the endpoint matrix-canonicity problem.
+
+In several parameters, that path dependence has an exact curvature obstruction.
+The Kato connection on the projector bundle has curvature
+
+\[
+R^K=\Pi(d\Pi\wedge d\Pi)\Pi.
+\]
+
+Nonzero curvature forces local holonomy, hence rules out endpoint-independent
+Kato transport. In rank one this reduces exactly to Berry curvature. So the
+Kato picture gives an exact pathwise transport, but generically not an
+endpoint-only matrix package.
 
 The cleanest current second-order benchmark is the real quartit cubic curve
 
@@ -733,7 +765,9 @@ Safe claims:
    with the same `O_r` subspaces.
 6. In a fixed ambient Hilbert space, the endpoint osculating subspaces define
    canonical transport-free principal-angle and projector-spectrum data.
-7. There are now explicit benchmark families on both the ambient `A_r` side and
+7. In finite dimension, the resulting principal-angle/operator package is
+   complete up to ambient unitary equivalence.
+8. There are now explicit benchmark families on both the ambient `A_r` side and
    the value-channel-free `O_r` side where the surviving two-point data is not
    determined by overlap alone.
 
@@ -802,6 +836,10 @@ Unsafe claims, for now:
 - `quantum/teams/20260424-024026-attack-short-time-expansion/reports/`
 - `quantum/teams/20260424-030000-attack-operator-package/reports/`
 - `quantum/teams/20260424-030928-attack-smooth-polar/reports/`
+- `quantum/teams/20260424-032829-attack-saturation/reports/`
+- `quantum/teams/20260424-033611-attack-twist-family/reports/`
+- `quantum/teams/20260424-034240-attack-quotient/reports/`
+- `quantum/teams/20260424-054845-attack-cs-normal-form/reports/`
 - `quantum/teams/20260424-032829-attack-saturation/reports/`
 - `quantum/teams/20260424-033611-attack-twist-family/reports/`
 - `quantum/teams/20260424-034240-attack-quotient/reports/`

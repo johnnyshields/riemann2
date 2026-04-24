@@ -86,6 +86,8 @@ Quick map of the strongest current results and where they live.
   `quantum/teams/20260424-030928-attack-smooth-polar/reports/gap-smooth-polar.md`
 - Complete canonical operator package:
   `quantum/teams/20260424-030000-attack-operator-package/reports/gap-operator-package.md`
+- Finite-dimensional CS normal form / completeness:
+  `quantum/teams/20260424-054845-attack-cs-normal-form/reports/gap-cs-normal-form.md`
 
 ## Interpretation
 
@@ -107,5 +109,7 @@ Quick map of the strongest current results and where they live.
   `quantum/teams/20260424-032829-attack-saturation/reports/gap-saturation.md`
 - Finite-cyclic Jacobi/Lanczos normal form:
   `quantum/teams/20260424-043520-attack-jacobi-normal-form/reports/gap-jacobi-normal-form.md`
+- Kato transport realization:
+  `quantum/teams/20260424-055506-attack-kato-transport/reports/gap-kato-transport.md`
 - Finite-cyclic saturation corollary:
   `quantum/teams/20260424-032829-attack-saturation/reports/gap-saturation.md`

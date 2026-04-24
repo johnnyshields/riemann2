@@ -28,6 +28,18 @@ The later parity attack leaves this unchanged: parity should stay neutral in the
 priority note, since it freezes the archimedean case split but does not
 materially reduce the paired source-to-`S(m)` burden from current scope alone.
 
+The later tau-vs-dirichlet comparison also leaves the ranking unchanged:
+
+- paired Dirichlet still wins as the first non-zeta exact-source target,
+  but only as a scoped 2-step theorem-facing blueprint;
+- tau remains cleaner only at the self-dual phase-channel front end, not as the
+  first exact-`S(m)` realization target.
+
+The later tau-source-package attack reinforces the same conclusion on a
+theorem-facing comparison: tau currently has only a conditional compact
+source-package blueprint, while paired Dirichlet already has the sharper
+source-plus-slot 2-step blueprint.
+
 ## Criterion 2: maximum value back to the main RH draft
 
 The best next theorem target is:

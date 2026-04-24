@@ -23,6 +23,13 @@ The later paired-source-priority attack sharpened the internal emphasis:
 - step 2 should be read together with source-normalized scalar compatibility,
   not as a purely local algebraic afterthought.
 
+The later paired-source-proof-plan verifier tightened the scope one step more:
+
+- step 1 should be described only as a compact-interval source-package
+  blueprint/schema with attached bookkeeping burdens, not as a closed theorem;
+- `B_chi^pair` and multiplicity still belong just after that step as explicit
+  bookkeeping, not as settled theorem-body content.
+
 ## What must remain marked missing
 
 - compact-source closure itself;
@@ -40,7 +47,7 @@ The later paired-source-priority attack sharpened the internal emphasis:
 
 ## Safe handoff sentence
 
-`the first non-zeta exact-source milestone should now be described as a paired theorem-facing 2-step blueprint, with explicit local positivity/whitening interface hypotheses and explicit missing burdens, not as a near-closed theorem.`
+`the first non-zeta exact-source milestone should now be described as a paired theorem-facing 2-step blueprint, with explicit local positivity/whitening interface hypotheses and explicit missing burdens, not as a near-closed theorem; step 1 is only a compact-interval source-package blueprint/schema, not yet a closed theorem.`
 
 ## Report refs
 
