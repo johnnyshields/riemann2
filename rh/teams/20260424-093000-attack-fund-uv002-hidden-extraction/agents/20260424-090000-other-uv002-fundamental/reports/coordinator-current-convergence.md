@@ -4,8 +4,8 @@
 
 The current RH research queue should be `UV-002`-first. The strongest present convergence is not to a completed RH theorem, but to a theorem stack:
 
-1. a local support theorem on the mixed/two-point side;
-2. an exact fixed-shear / quotient-diagonal package theorem on the residual corner;
+1. an exact fixed-shear / quotient-diagonal package theorem on the residual corner;
+2. a local good-patch support theorem on the mixed/two-point side;
 3. a provenance-sensitive bridge theorem for the actual corrected two-atom package;
 4. a hidden extraction theorem from finite-core package data to the first surviving odd coefficient of `H_m`;
 5. the first-nonzero-odd-jet finite-core contradiction theorem.
@@ -22,6 +22,9 @@ heuristic
 - The zeta-side odd-jet extractor is already complete: `H_m`, its odd coefficients, the `N`-point projector, and finite-core localization are all in place.
 - The order-7 package is already canonically closed at quotient level; what remains is package-level/provenance-sensitive coincidence, not raw septic equality.
 - The mixed residual side has been compressed to local good-patch edge-law, exact fixed-shear package closure, and provenance-sensitive package coincidence/functoriality.
+- The exact fixed-shear closure route is genuinely independent of the full edge-law theorem: the draft already supports a weaker package-level closure theorem there from swap-evenness plus coincidence vanishing of the actual corrected cubic/quintic defects.
+- The strongest current package theorem candidate is reduced-`\widehat\Psi` coincidence / same reduced image germ at coincidence.
+- The hidden extraction theorem is now sharp on the extractor side: the remaining blocker is package-to-coefficient/package-to-transform identification, not zeta-side odd-jet algebra.
 - No current theorem-shaped route to universal pair-like exhaustion is supported by the draft’s current objects.
 
 ## Exact refs
@@ -56,7 +59,7 @@ The queue still has one unresolved ordering conflict between the centered clean-
 ## Needed for promotion
 
 1. State and prove one actual corrected two-atom theorem on a live residual lane.
-2. State and prove one package-level coincidence theorem on the actual corrected two-atom package.
+2. State and prove one package-level coincidence theorem on the actual corrected two-atom package, best currently shaped as reduced-`\widehat\Psi` coincidence / same reduced image germ at coincidence.
 3. State and prove the hidden extraction theorem from package data to the first surviving odd coefficient of `H_m`.
 4. Then use the existing `\Xi_\zeta^{(N)}` machinery to formulate the full finite-core contradiction.
 

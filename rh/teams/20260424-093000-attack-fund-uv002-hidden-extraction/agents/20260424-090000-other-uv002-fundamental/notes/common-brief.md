@@ -39,7 +39,7 @@ The cleanest fundamental theorem candidate is a reduced-`\widehat\Psi` coinciden
 
 ## Provenance refs
 
-- `tasks/20260424-090000-other-uv002-fundamental/reports/coordinator-current-convergence.md`
+- `paper/tasks/20260424-090000-other-uv002-fundamental/reports/coordinator-current-convergence.md`
 - `paper/findings.md`
 - `paper/unverified.tex`
 - `paper/chats/` for prior agent attempts and theorem sketches.
