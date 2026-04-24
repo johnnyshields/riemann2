@@ -66,6 +66,9 @@ Working forward-carry of the current open UV items relevant to the active queue.
   Parallel subtarget: classify `L_3N_0R_0` and `L_0N_0R_3` via actual
   third-Frechet inverse-square-root coefficient identities or a source-class
   theorem.
+  Parallel subtarget: classify `L_2YR_0` and `L_0YR_2` via actual
+  second-Frechet inverse-square-root coefficient identities coupled to the
+  grade-one/grade-five mixed input.
 
 - **UV-004** — `rem:wip-explicit-pointwise-bridge-good-patch-detector`
   Claim: the local detector either sees the same-tower source `r=q^{(7)}` or the explicit pointwise package is invisible.

@@ -904,3 +904,16 @@ Captured takeaway: the current draft now records the tagged source block and the
 - **Keep:** the recurrence/convolution gate is strong enough to drive a script once coefficient tables exist.
 - **Discard:** treating the recurrence itself as a positive gauge proof.
 - **Next:** find or derive the order-`<=7` baseline square-root, source-linear same-point, and normalized grade-5 mixed coefficient tables.
+
+### `20260424-231056-explorer-UV026-next-cubic-L2YR0/report.md`
+
+Signal: UV-026 `L_2YR_0` / `L_0YR_2` classification, keep.
+
+Captured takeaway: these second-Frechet-with-mixed-input families remain open. Current source does not classify them as source-trivial, one-pair `K_5`/`K_3`, pure same-point, or `A_5^{\mathfrak f}`-gauge. The exact missing theorem is a coefficient identity for the second-Frechet outputs `\mathcal L_{-,ab}^{\{1,1\}}`, `\mathcal L_{-,ab}^{\{1,5\}}` and right analogues, coupled to `M_i^{[1]}` and `M_i^{[5]}` in the same `B_7^{\mathfrak f}` normalization. The formal witness script reruns with determinant `3/4` against `A_5=(2,5)`, so generic matrix algebra does not force gauge.
+
+### Frontier after `L_2YR_0` classification
+
+- **Current best:** three of seven UV-026 cubic families are now sharp coefficient-theorem gates rather than vague source support gaps.
+- **Keep:** `L_2YR_0` needs second-Frechet plus mixed-input coefficient data; it is not pure simply because it has only one explicit `Y`.
+- **Discard:** one-pair `K_5/K_3` or pure-sector closure before source-class identification.
+- **Next:** either derive shared first/second/third-Frechet coefficient tables or classify the remaining `L_2N_0R_1` / `L_1N_0R_2` families.
