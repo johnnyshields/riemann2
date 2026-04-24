@@ -227,3 +227,25 @@ hypotheses, or for holomorphic complex-Zariski genericity.
 Honest verdict: all UV entries in the quantum ledger are now closed. A
 subsequent hardening/audit pass should check the note globally before declaring
 the whole quantum side track final.
+
+## Hardening sweep - post-UV ledger
+
+The first coordinator hardening sweep found stale global language left over from
+the pre-promotion state. In `quantum/paper/jet_gram_quantum_note.md`, the
+opening package summary still framed the matrix question as open, and the
+multiparameter section still said the matrix story remained unresolved. These
+were updated to match the promoted UV-011/UV-012 state: the canonical object is
+the subspace/operator/principal-angle package; fixed-frame matrices are
+classified only up to a biunitary orbit; and entrywise representatives require
+extra frame-selecting structure.
+
+`findings.md` had grown to 263 lines, past the briefing-size limit. I pruned it
+to 110 lines, kept only active briefing material, and created
+`quantum/findings-in-paper.md` as a grep index for matured findings absorbed
+into `quantum/paper/jet_gram_quantum_note.md`.
+
+Grep check after the edit found no remaining `matrix story remains unresolved`,
+`## Missing`, or live `UV-`/`rem:wip` marker in the active note and UV ledger.
+The remaining post-prune work is an independent hardening read focused on stale
+scope language, proof-state consistency, and whether any precise new UV should
+be filed rather than treating this as closed.

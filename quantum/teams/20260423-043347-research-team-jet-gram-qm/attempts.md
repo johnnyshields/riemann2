@@ -13,6 +13,7 @@
 | `20260424-192735-verifier-natural-protocol` | UV-014 | Adversarially test the reflection/phase-estimation protocol, access assumptions, exceptional sectors, and overclaim boundaries. | terminal | `agents/20260424-192735-verifier-natural-protocol/report.md` accepts promotion with coherent-reflection access, sampling, and exceptional-sector caveats. | Promoted to `quantum/paper/jet_gram_quantum_note.md`; UV-014 removed from `uv.md`. | Verification required before changing UV-014 proof state. |
 | `20260424-193527-gap-nonbenchmark-genericity` | UV-015 | Prove a structural genericity theorem for richer-than-overlap behavior, or reduce it to a sharp transversality/rank condition. | terminal | `agents/20260424-193527-gap-nonbenchmark-genericity/report.md` proves a finite endpoint-2-jet genericity theorem for first-order `O_1` line-angle data; script output verifies seed `C=1/2`, `Delta=1/4*sqrt(2)`. | Promoted to `quantum/paper/jet_gram_quantum_note.md`; UV-015 removed from `uv.md`. | This was the final live UV in the quantum ledger. |
 | `20260424-194246-verifier-nonbenchmark-genericity` | UV-015 | Adversarially test the endpoint 2-jet determinant theorem, density/interpolation step, and scope caveats. | terminal | `agents/20260424-194246-verifier-nonbenchmark-genericity/report.md` accepts promotion with first-order real finite-jet `O_1` scope; independent script also verifies `Delta=1/4*sqrt(2)`. | Promoted to `quantum/paper/jet_gram_quantum_note.md`; UV-015 removed from `uv.md`. | Verification required before final quantum UV proof-state change. |
+| `coordinator-20260424-200536-post-UV-hardening` | post-UV hardening | Remove stale open/matrix language after UV-011 through UV-015 promotions and restore `findings.md` to briefing size. | keep | `quantum/paper/jet_gram_quantum_note.md`, `findings.md`, and `quantum/findings-in-paper.md`; grep found no remaining `matrix story remains unresolved`, `## Missing`, or live `UV-`/`rem:wip` marker in the active note/ledger. | Stale note wording fixed; `findings.md` pruned to 110 lines and matured facts archived in `quantum/findings-in-paper.md`. | This is the first hardening sweep after the final quantum UV closure. |
 
 ## Frontier summaries
 
@@ -38,5 +39,5 @@
   `agents/20260424-040334-attack-biunitary-classification/` has only a
   coordinator brief and no deposited report. This has now been superseded by
   the deposited UV-012 gap and verifier reports.
-- **Next:** No live UV remains in this quantum ledger. Run a hardening/audit
-  pass before treating the quantum note as closed.
+- **Next:** No live UV remains in this quantum ledger. Run independent
+  post-prune hardening audits before treating the quantum note as closed.

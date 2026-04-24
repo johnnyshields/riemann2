@@ -196,3 +196,51 @@ Ground-truth check:
   supports the cleanest ambient transport-free theorem.
 - Do not argue from taste. State an operational/mathematical criterion or the
   exact no-global-winner theorem.
+
+## Resume dispatch 20260424-200536 - post-UV hardening
+
+Current commit before dispatch: `9673a4a`.
+
+State:
+- UV-011 through UV-015 have all been promoted or closed, and `uv.md` has no
+  live entries.
+- `rg -n "rem:wip|UV-[0-9]+|^- \*\*UV" quantum/paper/jet_gram_quantum_note.md
+  quantum/teams/20260423-043347-research-team-jet-gram-qm/uv.md` returns no
+  active markers.
+- The first coordinator sweep repaired stale matrix/open language and pruned
+  `findings.md` below the briefing-size limit.
+
+Roster:
+- Coordinator: maintain the canonical note, ledgers, and prune/archive files.
+- `agents/20260424-200536-audit-stale-language/`: independent stale-language
+  audit of the note after UV closure.
+- `agents/20260424-200536-audit-proof-scope/`: independent proof-scope audit of
+  the promoted package and final safe statement.
+
+In-scope files and ranges:
+- `quantum/paper/jet_gram_quantum_note.md`, especially lines 35--60, 220--250,
+  415--435, 470--505, 840--882.
+- `quantum/teams/20260423-043347-research-team-jet-gram-qm/findings.md`.
+- `quantum/teams/20260423-043347-research-team-jet-gram-qm/uv.md`.
+- `quantum/teams/20260423-043347-research-team-jet-gram-qm/attempts.md`.
+- `quantum/teams/20260423-043347-research-team-jet-gram-qm/collation.md`.
+- Prior reports for UV-011 through UV-015 under this team dir.
+
+Protected surfaces:
+- Agents may write only under their own `agents/20260424-200536-*` directories.
+- They must not edit `jet_gram_quantum_note.md`, `findings.md`, `uv.md`,
+  `attempts.md`, `collation.md`, `dispatch.md`, `AGENTS.md`, `lore/`, or any
+  other agent directory.
+
+Non-goals:
+- Do not reopen a closed UV unless the audit finds a precise false or
+  unsupported claim.
+- Do not add benchmark examples or a new physical-protocol target.
+- Do not promote stronger higher-order genericity or complex-Zariski claims.
+
+Ground-truth checks:
+- Three bins: proved / conditional on explicit hypotheses / missing.
+- A finding counts only if it identifies a concrete stale claim, scope error,
+  internal contradiction, missing provenance, or precise new UV candidate.
+- If no such issue is found, deposit a clean hardening report with residual
+  risks and no-action rationale.

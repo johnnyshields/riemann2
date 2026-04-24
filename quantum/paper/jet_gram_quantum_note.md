@@ -47,10 +47,21 @@ The strongest exact results currently established in this note are:
    benchmark family, show that the surviving two-point data is generically
    richer than overlap alone on both the ambient `A_r` side and the
    value-channel-free `O_r` side.
+6. For fixed endpoint subspaces, orthonormal-frame comparison matrices have a
+   complete biunitary-orbit classification by the same principal-angle
+   singular values, so entrywise matrices require extra frame-selecting
+   structure.
+7. In several parameters, raw, covariant, and symmetrized jet hierarchies
+   determine the `O_r`/`A_r` filtrations and the corresponding
+   operator/principal-angle package, but not an ordered matrix or frame from
+   ray-field data alone.
+8. With coherent reflection access, the principal-angle spectrum has a natural
+   phase-estimation protocol for the product of endpoint reflections.
 
-What remains open is not whether there is canonical subspace-level data, but
-whether there is any comparably canonical matrix-valued refinement beyond that
-data without additional frame-selecting structure.
+The boundary is now explicit: the canonical output is the subspace/operator
+package and its principal-angle spectrum. Entrywise matrix representatives,
+global `A_r` versus `O_r` selection rules, and stronger physical implementations
+need extra structure beyond the scoped note.
 
 ## Established First-Order Bridge
 
@@ -417,7 +428,9 @@ parameter space is a manifold and one includes **all mixed partials of total
 order at most \(r\)**, then the resulting ambient osculating subspace is still
 independent of local phase gauge and of chart choice. So the multiparameter
 extension survives exactly at the subspace/principal-angle level, while the
-matrix story remains unresolved.
+entrywise matrix story resolves only to the same biunitary-orbit statement:
+without extra frame-selecting structure, the canonical output is the
+operator/principal-angle package.
 
 As a basis-free corollary, if \(\Pi_\pm\) are the orthogonal projectors onto the
 canonical endpoint subspaces, then the compression
