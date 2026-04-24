@@ -161,12 +161,11 @@ Active, compact knowledge base shared with every delegated agent.
   `L_h` candidate is the pre-whitening pair-kernel-linear derivative supported
   by one-pair formulas. The best `Q_7^q` target is
   `[B_7^{\mathfrak f}(C)]\in\mathfrak f/\mathbf C A_5^{\mathfrak f}(m)`.
-  UV-025 has source/adversarial verification for a guarded `paper-updates.md`
-  source-block definition. UV-026 reduces to seven cubic pre-`\Phi_K` whitening
-  families; current source only gives gauge/vanishing once a term is identified
-  as one-pair `K_5`, `K_3`, or pure. First target `L_1YR_1` is narrowed to
-  missing `[z^r]\Lambda_{i,\pm}` Frechet-output coefficients, grade-5
-  `[z^s]M_i^{[5]}` mixed coefficients, and determinant identities.
+  The guarded tagged source block is now canonical in `proof_of_rh.tex`.
+  UV-026 reduces to seven cubic pre-`\Phi_K` whitening families; current source
+  only gives gauge/vanishing after one-pair `K_5`/`K_3`/pure identification.
+  `L_1YR_1` needs `\Lambda`/`M^{[5]}` lists; `L_3N_0R_0` and mirror need
+  third-Frechet coefficient identities.
 
 ## Recurring open gaps
 

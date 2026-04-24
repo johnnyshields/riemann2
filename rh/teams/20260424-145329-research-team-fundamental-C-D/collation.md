@@ -878,3 +878,29 @@ Proof gate: first pass `L_1YR_1` by deriving `[z^r]\Lambda_{i,\pm}` and
 `[z^s]M_i^{[5]}` and proving the two determinant identities against
 `A_5^{\mathfrak f}(m)`.  In parallel, classify `L_3N_0R_0` and `L_0N_0R_3`.
 Do not promote scalarized, determinant-level, or post-`\Phi_K` arguments.
+
+### `20260424-225250-explorer-UV026-next-cubic-L3N0R0-v2/report.md`
+
+Signal: UV-026 all-left/all-right cubic family classification, keep.
+
+Captured takeaway: `L_3N_0R_0` and `L_0N_0R_3` are not closed by source support, one-pair `K_5`/`K_3`, or pure-sector arguments from current source. They reduce to actual third-Frechet inverse-square-root coefficient identities for the \(112\) and \(122\) source-tag components, before `\Phi_K`. The formal witness script `agents/20260424-225250-explorer-UV026-next-cubic-L3N0R0-v2/scripts/l3_r3_formal_witness.py` reruns with determinant `-75/8` against `A_5=(2,5)`, so formal matrix algebra alone does not force gauge.
+
+### Frontier after all-left/all-right classification
+
+- **Current best:** UV-026 now has two explicit coefficient-theorem gates: `L_1YR_1` needs `\Lambda`/`M^{[5]}` lists, and `L_3N_0R_0`/mirror need third-Frechet coefficient identities.
+- **Keep:** do not call `L_3N_0R_0` pure merely because the mixed perturbation is absent; the ordered-pair baseline factor still matters.
+- **Discard:** any all-left/all-right closure using scalarization, determinant charts, or generic matrix algebra.
+- **Next:** derive actual third-Frechet coefficients or move to the remaining `L_2YR_0`, `L_0YR_2`, `L_2N_0R_1`, `L_1N_0R_2` families.
+
+### `20260424-225250-gap-closer-UV026-L1YR1-Lambda-M5-coefficients-v2/report.md`
+
+Signal: UV-026 `L_1YR_1` coefficient gate, keep.
+
+Captured takeaway: the current draft now records the tagged source block and the `L_1YR_1` WIP target. The agent derived the raw source-linear same-point matrix, raw mixed linearization, the Sylvester recurrence for `[z^r]\Lambda_{i,\pm}`, and the exact `r+s+t=7` convolution for `C_{112}^{L_1YR_1}` and `C_{122}^{L_1YR_1}`. The script `agents/20260424-225250-gap-closer-UV026-L1YR1-Lambda-M5-coefficients-v2/scripts/l1yr1_coefficient_gate.py` reruns and records the finite bookkeeping. The actual determinant identities remain untestable until order-`<=7` coefficient tables and the `M_i^{[5]}` normalization are supplied.
+
+### Frontier after `L_1YR_1` coefficient gate
+
+- **Current best:** `L_1YR_1` is reduced to a finite auditable computation: coefficient tables, Sylvester recurrence, convolution, determinant tests.
+- **Keep:** the recurrence/convolution gate is strong enough to drive a script once coefficient tables exist.
+- **Discard:** treating the recurrence itself as a positive gauge proof.
+- **Next:** find or derive the order-`<=7` baseline square-root, source-linear same-point, and normalized grade-5 mixed coefficient tables.

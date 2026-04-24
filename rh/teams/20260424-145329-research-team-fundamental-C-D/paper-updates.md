@@ -1,13 +1,14 @@
 # Paper Updates
 
-Staged candidate edits for `rh/proof_of_rh.tex`. These are coordinator-owned
-and not yet applied to the canonical paper.
+Staged and applied candidate edits for `rh/proof_of_rh.tex`. These are
+coordinator-owned provenance notes; when applied, the live proof text is
+canonical.
 
 ## UV-025 tagged pre-whitening source block
 
-Suggested placement: after the one-pair weighted corrected-block bookkeeping
-around `proof_of_rh.tex:2659--2787`, before downstream quotient-output package
-language.
+Applied placement: after the one-pair weighted corrected-block bookkeeping in
+`proof_of_rh.tex`, before downstream quotient-output package language. User
+applied the guarded block to the canonical paper on 2026-04-24.
 
 Verification:
 

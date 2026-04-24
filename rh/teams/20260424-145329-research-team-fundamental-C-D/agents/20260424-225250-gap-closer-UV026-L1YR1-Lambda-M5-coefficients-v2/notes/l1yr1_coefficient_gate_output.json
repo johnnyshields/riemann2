@@ -1,0 +1,306 @@
+{
+  "script_sha1": "375C2F718E82A95888440EC63FE20C2B550445BC",
+  "order": 7,
+  "ordinary_z_coefficients_needed": {
+    "Lambda_indices": {
+      "i": [
+        1,
+        2
+      ],
+      "sign": [
+        "-",
+        "+"
+      ],
+      "r": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    "M5_indices": {
+      "i": [
+        1,
+        2
+      ],
+      "s": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    "matrix_counts": {
+      "Lambda": 32,
+      "M5": 16,
+      "total": 48
+    }
+  },
+  "convolution_triples_r_s_t_for_z7": [
+    [
+      0,
+      0,
+      7
+    ],
+    [
+      0,
+      1,
+      6
+    ],
+    [
+      0,
+      2,
+      5
+    ],
+    [
+      0,
+      3,
+      4
+    ],
+    [
+      0,
+      4,
+      3
+    ],
+    [
+      0,
+      5,
+      2
+    ],
+    [
+      0,
+      6,
+      1
+    ],
+    [
+      0,
+      7,
+      0
+    ],
+    [
+      1,
+      0,
+      6
+    ],
+    [
+      1,
+      1,
+      5
+    ],
+    [
+      1,
+      2,
+      4
+    ],
+    [
+      1,
+      3,
+      3
+    ],
+    [
+      1,
+      4,
+      2
+    ],
+    [
+      1,
+      5,
+      1
+    ],
+    [
+      1,
+      6,
+      0
+    ],
+    [
+      2,
+      0,
+      5
+    ],
+    [
+      2,
+      1,
+      4
+    ],
+    [
+      2,
+      2,
+      3
+    ],
+    [
+      2,
+      3,
+      2
+    ],
+    [
+      2,
+      4,
+      1
+    ],
+    [
+      2,
+      5,
+      0
+    ],
+    [
+      3,
+      0,
+      4
+    ],
+    [
+      3,
+      1,
+      3
+    ],
+    [
+      3,
+      2,
+      2
+    ],
+    [
+      3,
+      3,
+      1
+    ],
+    [
+      3,
+      4,
+      0
+    ],
+    [
+      4,
+      0,
+      3
+    ],
+    [
+      4,
+      1,
+      2
+    ],
+    [
+      4,
+      2,
+      1
+    ],
+    [
+      4,
+      3,
+      0
+    ],
+    [
+      5,
+      0,
+      2
+    ],
+    [
+      5,
+      1,
+      1
+    ],
+    [
+      5,
+      2,
+      0
+    ],
+    [
+      6,
+      0,
+      1
+    ],
+    [
+      6,
+      1,
+      0
+    ],
+    [
+      7,
+      0,
+      0
+    ]
+  ],
+  "triple_count_per_ordered_product": 36,
+  "ordered_product_count_per_tag_vector": 3,
+  "matrix_products_per_tag_vector": 108,
+  "C112_ordered_products": [
+    [
+      "Lambda_1,-",
+      "M_1^[5]",
+      "Lambda_2,+"
+    ],
+    [
+      "Lambda_1,-",
+      "M_2^[5]",
+      "Lambda_1,+"
+    ],
+    [
+      "Lambda_2,-",
+      "M_1^[5]",
+      "Lambda_1,+"
+    ]
+  ],
+  "C122_ordered_products": [
+    [
+      "Lambda_1,-",
+      "M_2^[5]",
+      "Lambda_2,+"
+    ],
+    [
+      "Lambda_2,-",
+      "M_1^[5]",
+      "Lambda_2,+"
+    ],
+    [
+      "Lambda_2,-",
+      "M_2^[5]",
+      "Lambda_1,+"
+    ]
+  ],
+  "C112_formula": "pi_f sum_{r+s+t=7}(Lambda_{1,-,r} M_{1,s}^{[5]} Lambda_{2,+,t} + Lambda_{1,-,r} M_{2,s}^{[5]} Lambda_{1,+,t} + Lambda_{2,-,r} M_{1,s}^{[5]} Lambda_{1,+,t})",
+  "C122_formula": "pi_f sum_{r+s+t=7}(Lambda_{1,-,r} M_{2,s}^{[5]} Lambda_{2,+,t} + Lambda_{2,-,r} M_{1,s}^{[5]} Lambda_{2,+,t} + Lambda_{2,-,r} M_{2,s}^{[5]} Lambda_{1,+,t})",
+  "Lambda_recurrence": {
+    "-": [
+      "solve Sylvester(S_{-,0} Lambda_{i,-,0} + Lambda_{i,-,0} S_{-,0} = - sum_{a+b+c=0} B_{-,a} H_{i,-,b} B_{-,c})",
+      "solve Sylvester(S_{-,0} Lambda_{i,-,1} + Lambda_{i,-,1} S_{-,0} = - sum_{a+b+c=1} B_{-,a} H_{i,-,b} B_{-,c} - sum_{a=1..1}(S_{-,a} Lambda_{i,-,r-a} + Lambda_{i,-,r-a} S_{-,a}))",
+      "solve Sylvester(S_{-,0} Lambda_{i,-,2} + Lambda_{i,-,2} S_{-,0} = - sum_{a+b+c=2} B_{-,a} H_{i,-,b} B_{-,c} - sum_{a=1..2}(S_{-,a} Lambda_{i,-,r-a} + Lambda_{i,-,r-a} S_{-,a}))",
+      "solve Sylvester(S_{-,0} Lambda_{i,-,3} + Lambda_{i,-,3} S_{-,0} = - sum_{a+b+c=3} B_{-,a} H_{i,-,b} B_{-,c} - sum_{a=1..3}(S_{-,a} Lambda_{i,-,r-a} + Lambda_{i,-,r-a} S_{-,a}))",
+      "solve Sylvester(S_{-,0} Lambda_{i,-,4} + Lambda_{i,-,4} S_{-,0} = - sum_{a+b+c=4} B_{-,a} H_{i,-,b} B_{-,c} - sum_{a=1..4}(S_{-,a} Lambda_{i,-,r-a} + Lambda_{i,-,r-a} S_{-,a}))",
+      "solve Sylvester(S_{-,0} Lambda_{i,-,5} + Lambda_{i,-,5} S_{-,0} = - sum_{a+b+c=5} B_{-,a} H_{i,-,b} B_{-,c} - sum_{a=1..5}(S_{-,a} Lambda_{i,-,r-a} + Lambda_{i,-,r-a} S_{-,a}))",
+      "solve Sylvester(S_{-,0} Lambda_{i,-,6} + Lambda_{i,-,6} S_{-,0} = - sum_{a+b+c=6} B_{-,a} H_{i,-,b} B_{-,c} - sum_{a=1..6}(S_{-,a} Lambda_{i,-,r-a} + Lambda_{i,-,r-a} S_{-,a}))",
+      "solve Sylvester(S_{-,0} Lambda_{i,-,7} + Lambda_{i,-,7} S_{-,0} = - sum_{a+b+c=7} B_{-,a} H_{i,-,b} B_{-,c} - sum_{a=1..7}(S_{-,a} Lambda_{i,-,r-a} + Lambda_{i,-,r-a} S_{-,a}))"
+    ],
+    "+": [
+      "solve Sylvester(S_{+,0} Lambda_{i,+,0} + Lambda_{i,+,0} S_{+,0} = - sum_{a+b+c=0} B_{+,a} H_{i,+,b} B_{+,c})",
+      "solve Sylvester(S_{+,0} Lambda_{i,+,1} + Lambda_{i,+,1} S_{+,0} = - sum_{a+b+c=1} B_{+,a} H_{i,+,b} B_{+,c} - sum_{a=1..1}(S_{+,a} Lambda_{i,+,r-a} + Lambda_{i,+,r-a} S_{+,a}))",
+      "solve Sylvester(S_{+,0} Lambda_{i,+,2} + Lambda_{i,+,2} S_{+,0} = - sum_{a+b+c=2} B_{+,a} H_{i,+,b} B_{+,c} - sum_{a=1..2}(S_{+,a} Lambda_{i,+,r-a} + Lambda_{i,+,r-a} S_{+,a}))",
+      "solve Sylvester(S_{+,0} Lambda_{i,+,3} + Lambda_{i,+,3} S_{+,0} = - sum_{a+b+c=3} B_{+,a} H_{i,+,b} B_{+,c} - sum_{a=1..3}(S_{+,a} Lambda_{i,+,r-a} + Lambda_{i,+,r-a} S_{+,a}))",
+      "solve Sylvester(S_{+,0} Lambda_{i,+,4} + Lambda_{i,+,4} S_{+,0} = - sum_{a+b+c=4} B_{+,a} H_{i,+,b} B_{+,c} - sum_{a=1..4}(S_{+,a} Lambda_{i,+,r-a} + Lambda_{i,+,r-a} S_{+,a}))",
+      "solve Sylvester(S_{+,0} Lambda_{i,+,5} + Lambda_{i,+,5} S_{+,0} = - sum_{a+b+c=5} B_{+,a} H_{i,+,b} B_{+,c} - sum_{a=1..5}(S_{+,a} Lambda_{i,+,r-a} + Lambda_{i,+,r-a} S_{+,a}))",
+      "solve Sylvester(S_{+,0} Lambda_{i,+,6} + Lambda_{i,+,6} S_{+,0} = - sum_{a+b+c=6} B_{+,a} H_{i,+,b} B_{+,c} - sum_{a=1..6}(S_{+,a} Lambda_{i,+,r-a} + Lambda_{i,+,r-a} S_{+,a}))",
+      "solve Sylvester(S_{+,0} Lambda_{i,+,7} + Lambda_{i,+,7} S_{+,0} = - sum_{a+b+c=7} B_{+,a} H_{i,+,b} B_{+,c} - sum_{a=1..7}(S_{+,a} Lambda_{i,+,r-a} + Lambda_{i,+,r-a} S_{+,a}))"
+    ]
+  },
+  "source_formulas": {
+    "deltaG_lin": "H_{i,pm}=delta G_{i,pm}^{lin}=(1/pi)[[2 d_{i,pm}, (1/2)e_{i,pm}], [(1/2)e_{i,pm}, (1/12)(g_{i,pm}+6 q_{0,pm}^2 d_{i,pm})]]",
+    "mixed_linear_before_grade_projection": "Let s=z/Q^2, c0=cos(Delta_0), s0=sin(Delta_0). delta N_i^{lin}=(1/pi)[[ -2 c0 eta_i/s, (c0 eta_i + s c0 d_{i,+} - s q_{0,+} s0 eta_i)/s^2 ], [ -(c0 eta_i + s c0 d_{i,-} - s q_{0,-} s0 eta_i)/s^2, ((s c0-s^2 q_{0,+} s0)d_{i,-} + (s c0-s^2 q_{0,-} s0)d_{i,+} + (-(q_{0,-}+q_{0,+})s s0 + (2-q_{0,-}q_{0,+}s^2)c0) eta_i)/(2s^3) ]]",
+    "M5_definition_needed": "M_i^{[5]} must be the grade-5 component of the mixed input in the same normalization used in B_7^f.  If the weighted input Y=mathfrak D_Q(delta N) is intended, apply mathfrak D_Q before taking grade 5; if the actual matrix delta N is intended, do not.  The present source names M_i^{[5]} but does not fix this coefficient list."
+  },
+  "missing_source_data_for_positive_gate": [
+    "[z^0..z^7] coefficients B_{pm,a} of G_pm^(0)(z)^(-1/2)",
+    "[z^0..z^7] coefficients S_{pm,a} of G_pm^(0)(z)^(1/2)",
+    "[z^0..z^7] coefficients of H_{i,pm}=delta G_{i,pm}^{lin} after substituting the tagged one-atom kernels",
+    "[z^0..z^7] coefficients of the grade-5 mixed input M_i^{[5]} in the B_7^f normalization",
+    "coordinates u_5,v_5 of A_5^f(m) in the same fixed-sector basis"
+  ],
+  "determinant_tests_after_coefficients_exist": [
+    "write C112=u112 I+v112 S and check u112*v5-u5*v112=0",
+    "write C122=u122 I+v122 S and check u122*v5-u5*v122=0"
+  ]
+}

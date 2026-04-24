@@ -53,16 +53,6 @@ Working forward-carry of the current open UV items relevant to the active queue.
   Current role: coefficient-map subtarget of UV-023; needed before the
   quotient-invisibility theorem can be promoted.
 
-- **UV-025** -- `rem:wip-parity-projective-factorization-collision-blow-up`
-  Claim: define the actual two-atom corrected pre-whitening block triple
-  `\mathcal B_2(a_1,h_1;a_2,h_2)` with source tags, define the pair-kernel
-  filtration `\mathcal K`, and prove
-  `\operatorname{Lin}_{\mathcal K}\mathfrak D_Q(\mathcal B_2-\mathcal B_0)
-  =a_1L_{h_1}+a_2L_{h_2}`.
-  Current role: upstream source-provenance subtarget for UV-024; needed before
-  `C_{\mathcal W}` can be identified with an actual corrected-whitening
-  two-atom package.
-
 - **UV-026** -- `rem:wip-parity-projective-factorization-collision-blow-up`
   Claim: for the actual source-linear corrected-whitening matrix cross-effect,
   every non-`(1,1)` cubic finite-order source term `T` of type `(1,1,5)`
@@ -73,6 +63,9 @@ Working forward-carry of the current open UV items relevant to the active queue.
   for Frechet inverse-square-root outputs and `[z^s]M_i^{[5]}` for the grade-5
   mixed block, then compute the two `L_1YR_1` tag vectors and their determinant
   identities against `A_5^{\mathfrak f}(m)`.
+  Parallel subtarget: classify `L_3N_0R_0` and `L_0N_0R_3` via actual
+  third-Frechet inverse-square-root coefficient identities or a source-class
+  theorem.
 
 - **UV-004** — `rem:wip-explicit-pointwise-bridge-good-patch-detector`
   Claim: the local detector either sees the same-tower source `r=q^{(7)}` or the explicit pointwise package is invisible.
