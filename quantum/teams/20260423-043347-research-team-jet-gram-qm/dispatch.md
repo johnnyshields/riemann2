@@ -124,3 +124,23 @@ Non-goals:
 Verifier:
 - `agents/20260424-191018-verifier-multiparameter-frame-finality/` checks the
   `20260424-190708` gap report before any UV-011 promotion or UV removal.
+
+## Follow-on dispatch 20260424-191454 - UV-013
+
+UV-011 and UV-012 are promoted. The remaining structural target is UV-013:
+clarify the roles of `O_r` and `A_r`.
+
+Focused target:
+- Gap closer:
+  `agents/20260424-191454-gap-Ar-Or-role-split/` targets UV-013.
+
+Ground-truth check:
+- Decide whether the archive already proves a role criterion or only a scoped
+  negative: no unique global winner is forced by the current invariant package.
+- A useful closure should use the exact decomposition
+  `A_r = span{psi} \oplus O_r`, the quotient theorem
+  `O_r \cong A_r/span{psi}`, the benchmark evidence where `O_r` is already
+  richer-than-overlap and sometimes finer than `A_r`, and the reason `A_r`
+  supports the cleanest ambient transport-free theorem.
+- Do not argue from taste. State an operational/mathematical criterion or the
+  exact no-global-winner theorem.
