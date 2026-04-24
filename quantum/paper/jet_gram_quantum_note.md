@@ -509,6 +509,22 @@ therefore the corresponding optimal success probabilities \(\cos^2\theta_i\).
 This is an operator interpretation of the same subspace-overlap data, not a new
 physical theorem.
 
+There is also a coherent protocol under an explicit access hypothesis. If the
+endpoint projectors can be implemented as reflections
+\[
+R_\pm=2\Pi_\pm-I,
+\]
+then the alternating-reflection unitary \(R_-R_+\) acts on each nontrivial
+principal two-plane with eigenphases \(\pm 2\theta_i\). The intersection and
+orthogonal residual sectors give the expected exceptional phases \(+1\) and
+\(-1\), and unequal-dimensional padding must be tracked with the endpoint
+dimensions and preparation support. Thus controlled phase estimation estimates
+the principal angles when coherent reflection access and adequate
+state-preparation or sampling are available. This is a protocol for reading the
+existing principal-angle/operator package, not a new invariant, not a canonical
+matrix representative, and not a substitute for the exact unitary/Krylov or
+pathwise Kato specializations below.
+
 For exact unitary subspace orbits \(S(t)=e^{-itH}S(0)\), there is also a short
 local dynamical corollary. If \(\Pi_t\) is the orthogonal projector onto
 \(S(t)\), then
@@ -814,7 +830,10 @@ Safe claims:
     is the ambient extension when the state line belongs in the endpoint
     subspace package. No unique global winner is forced by the current
     invariants.
-11. There are now explicit benchmark families on both the ambient `A_r` side and
+11. With coherent reflection access to endpoint projectors, phase estimation on
+    \((2\Pi_- - I)(2\Pi_+ - I)\) gives a natural protocol for estimating the
+    already-canonical principal-angle spectrum.
+12. There are now explicit benchmark families on both the ambient `A_r` side and
     the value-channel-free `O_r` side where the surviving two-point data is not
     determined by overlap alone.
 
@@ -829,8 +848,8 @@ Unsafe claims, for now:
 
 ## Open Problems
 
-1. Go beyond the current exact unitary/Krylov and projector-test specializations
-   to a more natural dynamical or experimental model.
+1. Prove a structural genericity theorem for richer-than-overlap behavior beyond
+   the current polynomial/Veronese and spherical-twist benchmark families.
 
 ## Provenance
 
@@ -885,6 +904,8 @@ Unsafe claims, for now:
 - `quantum/teams/20260423-043347-research-team-jet-gram-qm/agents/20260424-191018-verifier-multiparameter-frame-finality/report.md`
 - `quantum/teams/20260423-043347-research-team-jet-gram-qm/agents/20260424-191454-gap-Ar-Or-role-split/report.md`
 - `quantum/teams/20260423-043347-research-team-jet-gram-qm/agents/20260424-191817-verifier-Ar-Or-role-split/report.md`
+- `quantum/teams/20260423-043347-research-team-jet-gram-qm/agents/20260424-192133-gap-natural-protocol/report.md`
+- `quantum/teams/20260423-043347-research-team-jet-gram-qm/agents/20260424-192735-verifier-natural-protocol/report.md`
 - `quantum/teams/20260424-032829-attack-saturation/reports/`
 - `quantum/teams/20260424-033611-attack-twist-family/reports/`
 - `quantum/teams/20260424-034240-attack-quotient/reports/`

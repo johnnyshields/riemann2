@@ -167,3 +167,20 @@ Provisional verdict: keep pending adversarial verification. The verifier should
 check the coherent-reflection access assumption, the principal-plane sign
 convention, and the wording boundary between "natural protocol" and "new
 invariant."
+
+## Verifier return and promotion - UV-014
+
+`agents/20260424-192735-verifier-natural-protocol/report.md` accepts the
+two-reflection protocol for promotion. The verifier checked the principal
+two-plane calculation, the \(\theta=0\) and \(\theta=\pi/2\) exceptional
+sectors, the common orthogonal-complement padding, and the unequal-dimensional
+bookkeeping. The promoted claim is conditional on coherent reflection access and
+adequate state preparation or sampling.
+
+Promoted the reflection/phase-estimation paragraph into
+`quantum/paper/jet_gram_quantum_note.md`, updated `findings.md`, and removed
+UV-014 from `uv.md`. The text states that this is a protocol for reading the
+existing principal-angle/operator package, not a new invariant, matrix
+representative, or universal Hamiltonian model.
+
+Remaining open UV: UV-015 (nonbenchmark genericity).

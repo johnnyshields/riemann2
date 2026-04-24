@@ -106,10 +106,12 @@ Source anchor:
 - On the current qutrit/quartit/Veronese benchmark families, this simple-spectrum
   corollary is genuinely usable on a nonempty open set; it is not just a formal
   edge case.
-- The strongest exact operational reading so far is only this: the projector
-  compression `Pi_- Pi_+ Pi_-` is the effect operator for the ideal sequential
-  yes/yes subspace-membership test, and its eigenvalues are the corresponding
-  optimal success probabilities `cos^2(theta_i)`.
+- The exact operational package now has two levels. The projector compression
+  `Pi_- Pi_+ Pi_-` is the effect operator for the ideal sequential yes/yes
+  subspace-membership test, with eigenvalues `cos^2(theta_i)`. Under coherent
+  reflection access to `R_\pm=2Pi_\pm-I`, phase estimation on `R_-R_+` reads
+  the principal angles as phases `\pm 2 theta_i`, with endpoint-dimension and
+  preparation-support bookkeeping for exceptional sectors.
 - For exact unitary orbits `psi(t)=e^{-itH} psi_0`, the ambient spaces `A_r(t)`
   are transported Krylov spaces and the `O_r(t)` are their exact
   value-channel-removed / compressed Krylov counterparts.
@@ -236,8 +238,6 @@ Source anchor:
 
 ## Missing
 
-- A concrete worked model tying the projector/principal-angle invariants to a
-  naturally arising protocol rather than abstract subspace tests alone.
 - General lower-order (`r < n-1`) Veronese-family formulas, especially on the
   value-channel-free `O_r` side.
 - Any non-benchmark family theorem showing the richer-than-overlap behavior is
