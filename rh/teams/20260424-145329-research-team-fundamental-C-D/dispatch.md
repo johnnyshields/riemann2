@@ -891,6 +891,37 @@ Ground-truth checks:
 
 Protected surfaces and report contract are unchanged.
 
+## Resume dispatch 20260424-235843
+
+Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260424-235843`.
+
+Base commit: `2fa6569`.
+
+Coordinator status: UV-026 Stage 1 now has verified table-generator
+infrastructure and source-supported ungraded one-pair derivative formulas.  The
+active blocker is the scalar grade-projection theorem defining `Gr_1 r_i` and
+`Gr_5 r_i` before `\Phi_K`.
+
+Roster:
+
+1. `gap-closer-UV026-scalar-grade-projection` writes only under
+   `agents/20260424-235843-gap-closer-UV026-scalar-grade-projection/`.
+   Task: attack the scalar `Gr_1/Gr_5` theorem directly; decide whether grade
+   `5` is `q^{(5)}/X_3`, `q^{(7)}/X_5`, another mixed-block grading, or missing.
+2. `verifier-source-UV026-grade-convention` writes only under
+   `agents/20260424-235843-verifier-source-UV026-grade-convention/`.
+   Task: source-audit those candidate conventions and reject shortcut imports
+   from matrix witness slices unless the scalar projection is defined
+   pre-`\Phi_K` in the `B_7^{\mathfrak f}` normalization.
+
+Ground-truth checks:
+
+- A positive return must define or reduce the scalar grade projection, not
+  merely cite witness-region matrix slices.
+- A negative return must qualify the scope: missing from current source, or
+  rejected from a stated shortcut only.
+- No paper promotion unless a verified theorem statement emerges.
+
 ## Resume dispatch 20260424-233157
 
 Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260424-233157`.

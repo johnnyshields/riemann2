@@ -1056,3 +1056,14 @@ matrix-level evidence only and do not define the scalar grading by themselves.
 - **Blocked:** scalar `Gr_1/Gr_5` projection, grade-5 convention, affine-removal
   compatibility, and baseline `q_0^{(0..9)}(m)` formulas.
 - **Next:** attack the scalar grade-projection theorem directly.
+
+### Dispatch 20260424-235843
+
+Issued the scalar grade-projection wave.  Hilbert owns the positive/reduction
+lane under `agents/20260424-235843-gap-closer-UV026-scalar-grade-projection/`.
+Harvey owns the source-audit convention lane under
+`agents/20260424-235843-verifier-source-UV026-grade-convention/`.
+
+Expected ledger destinations: a valid projection definition or sharper missing
+theorem goes to `uv.md`/`attempts.md`; a reusable shortcut rejection goes to
+`findings.md` if it should brief future agents; otherwise route attempts only.
