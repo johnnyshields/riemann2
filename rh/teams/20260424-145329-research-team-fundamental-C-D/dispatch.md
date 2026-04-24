@@ -855,6 +855,63 @@ their owned dirs, do not edit ledgers or the paper, use the 9-field report
 schema plus autoresearch closing block and `Ledger destination`, and separate
 proved / conditional / missing.
 
+## Resume dispatch 20260424-232207
+
+Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260424-232207`.
+
+Base commit: `d997fc2`.
+
+Coordinator status: UV-026 has three sharp coefficient gates already captured:
+`L_1YR_1`, all-left/all-right, and second-Frechet-with-mixed-input.  The
+remaining unclassified cubic families from the seven-family inventory are
+`L_2N_0R_1` and `L_1N_0R_2`.  In parallel, the shared positive route is the
+finite normalized source coefficient-table theorem.
+
+Roster:
+
+1. `gap-closer-UV026-finite-table-theorem` writes only under
+   `agents/20260424-232207-gap-closer-UV026-finite-table-theorem/`.
+   Task: formulate a minimal theorem/proof route that would supply the
+   normalized coefficient tables now required across the first/second/third
+   Frechet gates.  If a derivation is possible from current source, give it;
+   otherwise draft the exact staged theorem statement and dependencies.
+2. `explorer-UV026-final-cubic-L2N0R1` writes only under
+   `agents/20260424-232207-explorer-UV026-final-cubic-L2N0R1/`.
+   Task: classify `L_2N_0R_1` and `L_1N_0R_2` as source-trivial, one-pair
+   `K_5`/`K_3`, `A_5^{\mathfrak f}`-gauge, or reduce to the exact missing
+   coefficient theorem.
+
+Verifier queue: none until an actual coefficient vector, table theorem, or
+source-class theorem is deposited.
+
+In-scope files and prior reports:
+
+- `rh/proof_of_rh.tex` lines 1392--2048, 2324--2587, 2607--2899,
+  6976--7409, 7742--8048, 12098--12331, and 12617--12714.
+- `findings.md`, `uv.md` UV-026, and `collation.md` recent UV-026 sections.
+- `agents/20260424-231056-gap-closer-UV026-L1YR1-coefficient-tables/report.md`.
+- `agents/20260424-231056-explorer-UV026-next-cubic-L2YR0/report.md`.
+- `agents/20260424-225250-explorer-UV026-next-cubic-L3N0R0-v2/report.md`.
+- `agents/20260424-200220-gap-closer-UV026-cubic-source-terms/report.md`.
+
+Ground-truth checks:
+
+- Stay before `\Phi_K`, determinant scalarization, quotient extraction, and
+  diagonal merger.
+- The table-theorem lane must improve on "tables are missing" by giving a
+  theorem statement/proof route, exact dependencies, or a source-based rejection
+  of this route.
+- The final cubic-family lane must identify the actual source class or reduce
+  to a precise missing coefficient theorem. Do not invoke one-pair laws without
+  source identification.
+- Computational claims require scripts deposited before running in the owned
+  `scripts/` dir and cited with output in `report.md`.
+
+Protected surfaces and report contract are unchanged: agents write only under
+their owned dirs, do not edit ledgers or the paper, use the 9-field report
+schema plus autoresearch closing block and `Ledger destination`, and separate
+proved / conditional / missing.
+
 ## Resume dispatch 20260424-231056
 
 Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260424-231056`.
