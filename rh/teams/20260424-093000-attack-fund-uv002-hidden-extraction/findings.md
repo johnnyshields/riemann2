@@ -8,7 +8,7 @@ Active, compact knowledge base shared with every delegated agent.
   produced a reusable lesson.
 - Git log + commit messages are the audit trail. No status annotations here.
 - Keep this file \(\le 200\) lines. Paste it in full into every delegated
-  agent prompt (see `CLAUDE.md` §6).
+  agent prompt (see `AGENTS.md` `Briefing rule`).
 
 ## Structural
 
@@ -89,6 +89,11 @@ Active, compact knowledge base shared with every delegated agent.
 - **Mixed 4-point source-level factorization.** Touches: UV-002 (pair-like
   vs finite-core), and `rem:wip-dream-parity-identity-four-point` (line
   24167). Blocks the general finite-core endgame (UV-007).
+- **Exact finite-s zeta/scattering effective constants.** Touches: UV-008
+  (asymptotic \(\to\) full RH upgrade requires effective high-height \(T_*\)
+  plus a low-height bridge).
+- **Provenance-q / highest-new pointwise bridge.** Touches: UV-004
+  (`rem:wip-explicit-pointwise-bridge-good-patch-detector`, line 21277).
 - **Package-level coincidence for the actual corrected two-atom package.**
   Touches: the residual exact fixed-shear corner and the honest order-7 lane;
   best current shape is same reduced image germ / collision-functoriality.
@@ -98,8 +103,6 @@ Active, compact knowledge base shared with every delegated agent.
 - **Exceptional-locus `M=0` reduction after good-patch edge law.**
   Touches: UV-003 and the finite-core residual two-point lane; current route is
   Weierstrass/prepared-branch reduction, still heuristic.
-- **Provenance-q / highest-new pointwise bridge.** Touches: UV-004
-  (`rem:wip-explicit-pointwise-bridge-good-patch-detector`, line 21277).
 - **Remote endpoint / branch-incidence theorems.** Touches: UV-005
   (inverse-branch gap endgame) and UV-006 (same-parity compression).
 - **Variable-\(x\) calibration uniformity.** Touches: UV-001
