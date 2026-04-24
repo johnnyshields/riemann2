@@ -129,3 +129,29 @@ mixed-block removable singularities, the same-point determinant condition
 \(q>0\), \(2qq''+4q^4-3(q')^2>0\), the conditional whitening implication, and
 whether the updated `paper-updates.md` wording overclaims. Deposit target:
 `report-uv017-holomorphy-positivity-audit.md`.
+
+## Follow-up determinant-gap attack 20260424-2021
+
+Base commit: `64030ed`.
+
+The verified UV-017 local-admissibility reduction narrows same-point positivity
+to the determinant/spectral-gap inequality
+\[
+\mathcal D[q]:=2qq''+4q^4-3(q')^2>0.
+\]
+
+- Noether (`019dbf02-0a72-7c51-8106-50d5e29b27fa`):
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/` - exact one-zero
+  kernel attack for
+  \(K_{\beta,\gamma}(t)\). Deposit target:
+  `report-uv017-one-zero-determinant-gap.md`.
+- Jason (`019dbeda-2c40-7ed0-a5ba-a9076f939fc7`):
+  `agents/20260424-183416-explorer-background-multiplicity/` - multi-zero and
+  tail stability / counterexample search for positive sums of paired
+  strip-edge kernels. Deposit target:
+  `report-uv017-determinant-gap-stability.md`.
+
+Ground truth: produce an exact one-zero proof/counterexample, a script-backed
+few-zero counterexample, or a sharply scoped stability condition. Determinant
+gap failure is a useful negative; determinant gap success still needs
+adversarial verification before any UV-017 promotion.
