@@ -7,7 +7,8 @@ description: Full-paper compactness rewrite of <paper>/<main>.tex (or a specifie
 
 Compactness pass on `<paper>/<main>.tex` (or a scope). Rewriters
 (`subagent_type: rewriter`) are edit-capable for their own agent dir
-only; assembly into the paper is gated behind integrity checks.
+only; assembly into the paper is gated behind integrity checks. Use
+`model: "opus"` for every rewriter, always.
 
 `$ARGUMENTS`: empty → full paper; `§<N>` or `§<N>.<M>` → that section;
 `--line-range <from>-<to>` → specific range; `--target-ratio <N>` →
@@ -57,11 +58,11 @@ subsections → up to 19 rewriters; scoped = by subsection,
 ## Dispatch (unless `--no-agents`)
 
 `TeamCreate team_name: "paper-rewrite-<ts>"`. Spawn one
-`rewriter-<slug>` (`subagent_type: rewriter`) per partition. Standard
+`rewriter-<slug>` (`subagent_type: rewriter`, `model: "opus"`) per partition. Standard
 briefing plus: the full invariant list (verbatim — not suggestions),
 `notes/frozen-macros.txt`, the input region, the labels/cites/refs
 present in it, the target compaction ratio, and the output contract —
-the replacement block at `agents/<slug>/rewrite.tex`, a 7-field report
+the replacement block at `agents/<slug>/rewrite.tex`, a 9-field report
 with a "Compaction notes" field, and do NOT edit `<main>.tex` directly
 (assembly is the coordinator's).
 

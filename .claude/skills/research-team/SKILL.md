@@ -9,8 +9,8 @@ Balanced research dispatch: 3 gap-closers + 3 explorers + 2 verifiers via
 `TeamCreate`. One long-lived team dir with eight agent subdirs. Follows `Dispatch`
 long-lived-agent rules, `.claude/agents/_autoresearch.md`, `Briefing rule`,
 `Writing discipline`, `Team dirs and agent self-deposit` deposit structure, `Capture before shutdown, forward-carry at dispatch` forward-carry. Use
-`model: "opus"` for every research agent; never spawn research teammates on
-Sonnet or Haiku unless the user explicitly overrides this dispatch.
+`model: "opus"` for every research agent, always. Never spawn research
+teammates on Sonnet or Haiku.
 
 `$ARGUMENTS`: empty → general balance (coordinator picks most-blocking
 UV items + three broad explorer topics); topic phrase → oriented around
@@ -21,12 +21,14 @@ it; UV-NNN → at least one gap-closer locked on it.
 1. Read the most recent team dir's `findings.md`, `uv.md`, and current
    `rem:wip-*` labels, plus the last 2–3 lore entries.
 2. Create the new team dir `<paper>/teams/<ts>-<team-slug>/`. Copy the
-   prior team dir's `findings.md`, `uv.md`, and open `attempts.tsv` context in;
+   prior team dir's `findings.md`, `uv.md`, and open `attempts.md` context in;
    prune dead entries; add anything from the just-closed cycle not yet
-   captured. Initialize `attempts.tsv` with
-   `timestamp\tagent\ttarget\troute\tdecision\tevidence\tnext`. Commit.
-3. Pick the roster. Write `dispatch.md` with roster, targets, non-goals,
-   fixed-harness criteria, and any run budgets/timeouts.
+   captured. Initialize `attempts.md` with a markdown attempts table and
+   `Frontier summaries` block. Commit.
+3. Confirm no existing team dir has the same timestamp/slug. Pick the roster.
+   Write `dispatch.md` with the originating commit, roster, targets, exact
+   in-scope files/lines/reports, protected surfaces, non-goals, fixed-harness
+   criteria, ground-truth checks, and any run budgets/timeouts.
 
 ## Dispatch
 
@@ -45,7 +47,7 @@ sharper reductions, redirect routes, and redelegate the next task before any
 shutdown.
 
 Every briefing gets: the full `.claude/agents/_autoresearch.md` metaprompt,
-the team dir's full `findings.md`, the 7-field report schema (`Report schema`), non-goals,
+the team dir's full `findings.md`, the 9-field report schema (`Report schema`), non-goals,
 the agent's `agents/<slug>/` path + the self-deposit checklist, and the `Writing discipline`
 writing-discipline reminder (three-bin proved/conditional/missing, gap
 reduction over closure, scoped negation, caution-labeled synthesis,
@@ -80,8 +82,9 @@ agent drifts.
 2. Walk each report. Process through `Claim lifecycle (git-as-archive)` — promote, demote, file new
    UV-NNN in this team dir's `uv.md`, append findings bullets, reject
    with negative capture, or explicitly mark "no action" in
-   `collation.md`. Append an `attempts.tsv` row for every substantial route
-   with `keep`, `discard`, or `crash`. Commit per deposit where possible
+   `collation.md`. Append an `attempts.md` row for every substantial route
+   with `keep`, `discard`, or `crash`; periodically summarize counts and the
+   current frontier in `collation.md`. Commit per deposit where possible
    (`Git workflow`).
 3. Respond to the agent. Ask one concrete follow-up, adversarial challenge,
    or clarification when the report has a live thread; otherwise assign the

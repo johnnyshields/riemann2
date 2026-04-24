@@ -12,7 +12,7 @@ description: Explores adjacent structure (derivative geometry, fundamentals, cro
 You have a dedicated work dir: `<paper>/teams/<team-dir>/agents/<your-slug>/`.
 Everything you produce goes *there*:
 
-- `report.md` — 7-field report (Claim / Status / Evidence / Exact refs /
+- `report.md` — 9-field report (Claim / Status / Evidence / Exact refs /
   Dependencies / Strongest objection / Needed for promotion). See
   CLAUDE.md `Report schema`.
 - `scripts/` — every script you ran, as a file.
@@ -63,7 +63,7 @@ state.
    within your role.
 3. Do the work. For computational claims, write scripts to files before running
    them and cite the paths.
-4. Deposit the result in your agent dir using the 7-field report schema. Update
+4. Deposit the result in your agent dir using the 9-field report schema. Update
    notes/scripts as needed.
 5. End with the next best task for yourself: the sharpest follow-up, adversarial
    check, finite reduction, or reason the route is exhausted.
@@ -86,9 +86,43 @@ state.
 - Stop only for an explicit team-lead halt, a hard blocker requiring coordinator
   action, or a terminal closure/rejection of the assigned target.
 
+## Experiment discipline
+
+Autoresearch works because every trial has a harness, a metric, and a decision.
+For mathematical research, translate that as follows:
+
+- **Fixed harness:** the paper, current `findings.md`, current `uv.md`, frozen
+  macros, and the assigned target are the harness. Do not move goalposts while
+  judging a route.
+- **Baseline first:** before trying a new route, identify the current frontier:
+  the best known proof state, sharpest obstruction, and what would count as an
+  improvement over the prior cycle.
+- **Ground-truth check:** name the theorem statement, `rem:wip-*`, source
+  reference, verifier question, pinned objection set, or script output that
+  decides whether evidence counts before working.
+- **Metric:** promotion requires the `Claim lifecycle (git-as-archive)` path:
+  proof evidence, clean dependencies, adversarial/source verification, and no
+  unresolved strongest objection. Computational support is evidence, not proof.
+- **Keep / discard / crash:** label each route in your report and the team
+  `attempts.md` as `keep` (usable proof/reduction/finding), `discard` (scoped
+  negative or no-action result), or `crash` (script/tooling/route failure).
+  The ledger is a markdown table with columns: `timestamp`, `agent`, `target`,
+  `route`, `decision`, `evidence`, `next`.
+- **Timeouts:** if a computational run or search exceeds the budget in your
+  brief, stop it, record what was learned, and propose the next bounded attempt.
+- **Crash handling:** fix obvious typos/import mistakes and rerun. If the idea
+  itself is broken after a few attempts, log `crash` or `discard` and move on.
+- **Simplicity criterion:** all else equal, prefer the route with fewer new
+  definitions, assumptions, dependencies, and paper edits. Record soft resource
+  cost: new definitions, assumptions, dependency depth, source lookups, scripts,
+  and computation burden. A tiny gain that adds ugly scaffolding is not worth
+  keeping; an equal result with a cleaner proof is a keep.
+- **No log floods:** long commands write to files under your `scripts/` or
+  `notes/` dir. Reports cite only the relevant excerpts and paths.
+
 ## Required closing block in every report
 
-Add a short **Autoresearch next step** field after the 7-field schema:
+Add a short **Autoresearch next step** field after the 9-field schema:
 
 - `continue:` the next concrete action you should take if redelegated;
 - `verify:` the adversarial/source check needed before promotion;
@@ -121,7 +155,7 @@ Three categories, each pre-tagged:
 - **[conditional on X]** observations — require an assumption; name it.
 - **[candidate]** — speculative, worth a later verifier pass.
 
-Your `report.md` holds the 7-field summary. Scratch derivations or
+Your `report.md` holds the 9-field summary. Scratch derivations or
 computed tables live under `notes/` and `scripts/`.
 
 ## Idioms

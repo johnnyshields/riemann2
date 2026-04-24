@@ -164,3 +164,101 @@ Captured takeaway: the exceptional-divisor convention is itself theorem-shaping.
 Signal: live verifier posture.
 
 Captured takeaway: adversarial and source verifiers reloaded autoresearch instructions and remain live. Their next checks are fixed: C scalar-normalization/diagonal-value claims, D-min or `T`/`\lambda` patch-to-global claims, and finite-core lower-model theorem E claims.
+
+### `20260424-160000-verifier-adversarial-CDE/report.md`
+
+Signal: continuation verifier setup, blocked.
+
+Captured takeaway: adversarial verifier created the C/D/E continuation checklist and is waiting for the five missing continuation research reports. No proof-state change. The first-wave open verdict remains controlling: C dies if `B(m,\kappa)` survives behind scalar normalization; D dies if a patchwise septic proxy is substituted for a transform-level modulo-`\ker\Phi_K` theorem; E dies if no contradiction-driving lower theorem replaces the pair-like lower model.
+
+### `20260424-160000-gap-closer-C-fiber-selection/report.md`
+
+Signal: C reduction, open.
+
+Captured takeaway: C fiber selection should not be phrased as choosing the one-pair raw affine septic lift. The C object already reduces by `\mathcal R(C,UI+VS,\Delta)=(U/C,V/C,\Delta/C^2)`, so the live obstruction is the exceptional-divisor trace `B(m,\kappa)=\widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0)`. The report reduces C to C-FS1--C-FS4: construct the corrected exceptional-divisor package, prove no extra C-codomain state, prove diagonal merger / `\kappa`-independence, and identify the value with `\widehat\Psi(m)`. Live blockers are C-FS2 and C-FS3.
+
+### `20260424-160000-gap-closer-D-odd-block-state/report.md`
+
+Signal: D-min functional isolation, open.
+
+Captured takeaway: the replacement D-min functional is transform-level: the first `\Phi_K`-visible odd coefficient of a corrected package-fiber difference in `\widehat\Omega^{\corr}`, equivalently its existing `N`-point transformed scalar. Corrected-whitening analyticity proves analytic dependence on block inputs, but not finite descended state-locality. The missing theorem is affine-bundle transport/holonomy modulo `\ker\Phi_K` through the first surviving odd order, not a new cubic/quintic defect channel and not raw equality of the patchwise septic proxy `T=v_7/c`.
+
+### `20260424-160000-explorer-affine-bundle-holonomy/report.md`
+
+Signal: D holonomy negative, keep.
+
+Captured takeaway: ordinary two-section affine-bundle holonomy is not the missing D state. The transition between `v_7=0` and `u_7=0` sections is base-controlled by `\widehat\Psi` via gauge parameter `-\Delta/(Yx)`. The exceptional loci `u_5=0` or `v_5=0` are chart failures handled by the complementary chart; the codimension-two locus `u_5=v_5=0` needs a separate prepared chart if it matters. Any surviving finite-order `\Phi_K`-visible obstruction compatible with fixed-shear descent must be genuine corrected two-atom relational/provenance data or non-finite-order dependence.
+
+### `20260424-160000-gap-closer-E-finite-core-transfer/report.md`
+
+Signal: E1 reduction, open.
+
+Captured takeaway: `E_1` reduces to projected total low-order interaction vanishing for genuine corrected finite cores: `D_3=0`, `D_5^{\mathfrak f}=0`, and septic quotient defect `\overline D_7=0`. The quintic lane needs the first two; the lifted lane needs all three. If these projected defects do not vanish, the next theorem must be an inhomogeneous rank/incidence theorem, not reuse of the existing defect-free affine-incidence lanes.
+
+### `20260424-160000-explorer-incidence-lower-model/report.md`
+
+Signal: E2 obstruction/candidate, keep.
+
+Captured takeaway: the positive-kernel machinery gives a clean sufficient `E_2` target: weighted-average, pointwise one-sided, or direct-`\Xi` lower control. Existing incidence geometry only supplies affine-dependence and zero-forcing/exclusion; it does not supply sign or tail control. Any coefficient-side lower route must add no-cancellation, variation, or tail-domination because the exact `\Xi^{(N)}` tail has positive universal weights and can cancel.
+
+### Continuation wave status
+
+Six-report adversarial review is still waiting on `20260424-160000-explorer-corrected-package-object/report.md`. Once that lands, send the six research deposits to both verifiers for claim-by-claim C/D/E review.
+
+### `20260424-160000-verifier-adversarial-CDE/report.md` update
+
+Signal: continuation verifier waiting update, blocked.
+
+Captured takeaway: adversarial verifier read the five landed continuation deposits and updated attack order. Final review remains blocked on `20260424-160000-explorer-corrected-package-object/report.md`. Attack order is now: C package object plus C-FS2/C-FS3 first, then D transform-level state-locality/holonomy modulo `\ker\Phi_K`, then E projected defects and lower-control/no-cancellation.
+
+### `20260424-160000-verifier-source-CDE/report.md`
+
+Signal: continuation source verifier setup, blocked.
+
+Captured takeaway: source verifier deposited setup/waiting posture. Final source audit remains blocked on `20260424-160000-explorer-corrected-package-object/report.md` because C package-object definitions control whether C fiber claims and downstream D/E dependencies are source-supported or cycle shorthand. Preserved checks: define corrected reduced-package fibers explicitly; do not use `\widehat\Psi` scaling as diagonal collapse; keep `T=v_7/c` patchwise unless globalized; keep D transform-level modulo `\ker\Phi_K`; require E to supply a real first-nonzero-odd-jet finite-core endgame theorem; flag basis drift between `(I,S,D,J)` and `(I,D,S,K)`.
+
+### `20260424-160000-explorer-corrected-package-object/report.md`
+
+Signal: C object map, open.
+
+Captured takeaway: current sources fix the theorem-ready C codomain `\mathbf C\times\mathfrak f\times\mathbf C` and reduction map `\mathcal R(C,UI+VS,\Delta)=(U/C,V/C,\Delta/C^2)`, but the actual corrected two-atom object is still only a schema, not constructed in the draft. Scalar normalization is not diagonal collapse; local raw affine-lift gauges belong to D/hidden-state analysis, not C. C-FS2 no-extra-state and C-FS3 diagonal merger / slope-independence are both missing, while C-FS4 is conditional on merger plus one-amplitude collapse / merged one-pair compatibility.
+
+### Continuation verifier unblock
+
+All six continuation research reports now exist. Send `gap-closer-C-fiber-selection`, `gap-closer-D-odd-block-state`, `gap-closer-E-finite-core-transfer`, `explorer-corrected-package-object`, `explorer-affine-bundle-holonomy`, and `explorer-incidence-lower-model` to `verifier-adversarial-CDE` and `verifier-source-CDE` for final claim-by-claim review.
+
+### `20260424-160000-verifier-adversarial-CDE/report.md` final review
+
+Signal: final adversarial review, open / keep.
+
+Captured takeaway: no continuation report closes C, D, E, or `UV-002`. C is now sharply an actual-corrected-package diagonal-merger problem: construct `\mathfrak P^{\corr}_2`, prove C-FS2 no-extra-state, C-FS3 `B(m,\kappa)=B_0(m)`, and C-FS4 identification with `\widehat\Psi`. D is now sharply a transform-level modulo-`\ker\Phi_K` state-locality problem for the first `\Phi_K`-visible corrected odd block, not a `T=v_7/c` patch problem. E is now sharply projected-defect vanishing or inhomogeneous rank plus sign/no-cancellation/tail lower control. False subroutes: scalar normalization as C; raw affine-lift patching as D; incidence-only as E lower control.
+
+### `20260424-160000-verifier-source-CDE/report.md` final audit
+
+Signal: final source audit, open / keep.
+
+Captured takeaway: source audit agrees the six continuation deposits are source-honest reductions, not promotions. Source-supported: one-pair fixed-sector package, `\widehat\Psi` scaling, transform-level `H_m` / `\Xi_\zeta^{(N)}`, fixed-shear quotient-visible descent within scope, and defect-free incidence lanes under their hypotheses. Missing: actual corrected two-atom fixed-codomain package construction and exceptional-divisor extension; C-FS2/C-FS3 no-extra-state and diagonal merger for `B(m,\kappa)`; D transform-level transport modulo `\ker\Phi_K`; E projected-defect vanishing or inhomogeneous rank plus lower/no-cancellation theorem. Should-fix/nit: define “corrected reduced-package fiber” before reuse, keep C codomain separate from D lift state, state patch hypotheses, and announce basis switches `(I,S,D,J)` vs `(I,D,S,K)`.
+
+### Verified frontier after six-report review
+
+- **Next primary attack:** C-FS2/C-FS3. Try either to construct an explicit formal model with fixed C codomain and nonconstant `B(m,\kappa)`, or inspect actual corrected two-atom order-3/5/7 formulas for the first relational/provenance datum not represented by `(C^{\corr},A^{\mathfrak f,\corr},\Delta^{\corr})`.
+- **Next secondary attack:** D transform-level state-locality, specifically the package-to-odd-block transport/holonomy lemma modulo `\ker\Phi_K` for `\mathscr O_D^{(N)}`.
+- **Next tertiary attack:** E low-order projected defects and E2 sign/tail lower control.
+
+### `20260424-160000-gap-closer-C-fiber-selection/report-cfs23-followup.md`
+
+Signal: C-FS3 scoped negative, keep.
+
+Captured takeaway: C-FS3 cannot be derived from the currently audited formal C properties. The agent constructed a fixed-codomain toy package in `\mathbf C\times\mathfrak f\times\mathbf C` with reduction `\mathcal R`, blow-up analyticity in `(m,\kappa,t=\delta^2)`, swap-evenness, scalar normalization, and central-slope value `\widehat\Psi(m)`, but with exceptional trace `B(m,\kappa)=(Y,X,Z+\varepsilon\kappa)`. The script `agents/20260424-160000-gap-closer-C-fiber-selection/scripts/formal_countermodel.py` verifies `R=(Y,X,Z+eps*kappa+r*t)`, `swap_invariant=True`, and `dB3/dkappa=eps`. Reusable negative: scalar normalization / fixed codomain / blow-up symmetry do not kill the free slope trace; C needs an actual diagonal-merger or collision-functoriality theorem. C-FS2 remains open as actual-formula inspection.
+
+### `20260424-160000-verifier-adversarial-CDE/report-cfs3-countermodel-review.md`
+
+Signal: C-FS3 countermodel adversarial verification, keep.
+
+Captured takeaway: adversarial verifier confirms the `B_3=Z+\varepsilon\kappa` model is a valid scoped negative. It satisfies fixed C codomain, `\mathcal R`, blow-up analyticity, swap-evenness, scalar normalization, and central-slope `\widehat\Psi`; no checked paper assumption forbids the `\varepsilon\kappa` term. The negative is terminal only for the formal-properties-only route to C-FS3. It does not disprove C-FS3 for the actual corrected package; a real diagonal-merger/collision-functoriality theorem would exclude the model, but that theorem remains missing.
+
+### `20260424-160000-verifier-source-CDE/report-cfs23-countermodel-source-check.md`
+
+Signal: C-FS3 countermodel source verification, keep.
+
+Captured takeaway: source verifier confirms the countermodel stays within the currently audited weak formal properties. No paper line beyond the explicitly missing diagonal merger / same reduced image germ / collision-functoriality family forbids adding `c^2\varepsilon\kappa` to the formal `\Delta` coordinate. Any C-FS3 proof must explicitly kill `\partial_\kappa B`; do not cite `\widehat\Psi` scaling, `\Delta_7` gauge invariance, quotient-level order-7 closure, fixed codomain, or scalar normalization as forbidding the deformation.

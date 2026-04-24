@@ -9,7 +9,7 @@ Four-angle read-only quality review via `subagent_type: harden-reviewer`.
 Follows `.claude/agents/_autoresearch.md`, CLAUDE.md `Dispatch`
 long-lived-agent rules, `Briefing rule`, `Team dirs and agent self-deposit`,
 `Capture before shutdown, forward-carry at dispatch`. Use `model: "opus"` for
-every reviewer unless the user explicitly overrides this dispatch.
+every reviewer, always.
 
 ## Preamble (forward-carry first — `Capture before shutdown, forward-carry at dispatch`)
 

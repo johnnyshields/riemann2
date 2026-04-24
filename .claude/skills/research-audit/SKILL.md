@@ -9,8 +9,7 @@ N disjoint read-only audits on subsections via
 `subagent_type: auditor`. Follows `.claude/agents/_autoresearch.md`, CLAUDE.md
 `Dispatch` long-lived-agent rules, `Briefing rule`, `Team dirs and agent
 self-deposit`, `Capture before shutdown, forward-carry at dispatch`. Use
-`model: "opus"` for every research auditor / checker unless the user explicitly
-overrides this dispatch.
+`model: "opus"` for every research auditor / checker, always.
 
 `$ARGUMENTS`: `<subsection-list>` (e.g. `Section 12.3,`LaTeX conventions`.4,`LaTeX conventions`.5`, labels, or
 line ranges); append `--adversarial` to pair each auditor with a
@@ -33,7 +32,7 @@ with `--adversarial`, also a paired `adversary-<sub>`
 auditor's report once landed.
 
 Each auditor's briefing: current team dir's `findings.md`, the exact
-subsection text, 7-field schema, writing-discipline reminder (three-
+subsection text, 9-field schema, writing-discipline reminder (three-
 bin mandatory), self-deposit checklist, non-goals (user-supplied or
 synthesized — at minimum "audit only, no new lemmas, no
 restructuring").

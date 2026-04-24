@@ -19,8 +19,8 @@ Read `findings.md` (cross-reference with any relevant goodie). Create
 
 ## Dispatch
 
-`TeamCreate team_name: "script-promote-<ts>"`. Spawn `promoter-<slug>`.
-Standard briefing plus the specific UV-NNN entry the script verifies,
+`TeamCreate team_name: "script-promote-<ts>"`. Spawn `promoter-<slug>` with
+`subagent_type: general-purpose` and `model: "opus"`, always. Standard briefing plus the specific UV-NNN entry the script verifies,
 if any (narrow exception). Writing discipline: docstrings and lore
 state what the script proves cleanly, no overclaim.
 
@@ -44,7 +44,7 @@ Promoter's job:
 5. Write a lore file `lore/YYYYMMDD-script-<slug>.md` — claim, paper
    ref, provenance (base script or scratch), pass/fail, any issues,
    team dir pointer.
-6. Deposit the 7-field report and `SendMessage` team-lead; stay idle.
+6. Deposit the 9-field report and `SendMessage` team-lead; stay idle.
 
 ## Post-cycle
 

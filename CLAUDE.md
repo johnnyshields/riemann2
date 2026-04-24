@@ -14,6 +14,7 @@ this file.
 | `<paper>/teams/YYYYMMDD-HHMMSS-<team-slug>/` | Per-dispatch team dir. `<paper>` \(\in\) `paper \| grh \| quantum \| ...`. `<team-slug>` typically encodes intent (`attack-gap-uv017-mixed4pt`, `audit-sec3`, `verify-tau`). |
 | `<paper>/teams/.../findings.md` | In-cycle knowledge base (Structural / Negative / Goodies / Open-gaps). \(\le 200\) lines. Pasted in full into every delegation in that cycle. |
 | `<paper>/teams/.../uv.md` | In-cycle UV ledger (markdown). UV-NNN entries ("UV" = "unverified") linked to `rem:wip-*` labels in the paper. UV-NNN is globally unique across cycles. |
+| `<paper>/teams/.../attempts.md` | Autoresearch route ledger. One row per substantial route with `keep` / `discard` / `crash`, evidence, and next action. |
 | `<paper>/teams/.../paper-updates.md` | Team-lead-authored staged edits for `<paper>/<main>.tex`. Created when the team has paper-ready changes; applied by the coordinator then deleted or archived. |
 | `<paper>/teams/.../agents/YYYYMMDD-HHMMSS-<agent-slug>/` | Per-agent work dir — nested inside the team dir. Each agent writes its own report, scripts, and notes here. |
 | `lore/` | Workflow plans, syntheses, decisions. Permanent. |
@@ -58,12 +59,11 @@ the next concrete move, work, deposit, state the next step, and wait for
 redelegation. They do not ask whether to continue and they do not stop at
 ordinary cycle boundaries.
 
-**Use Opus for research.** Every research task and research agent uses Opus.
-When spawning teammates for `research-team`, `research-attack`,
-`research-audit`, `trifecta`, `paper-harden`, `paper-referee`, or any other
-research workflow, pass `model: "opus"` on each `Agent` tool call. Do not use
-Sonnet or Haiku for research delegation unless the user explicitly overrides
-this instruction for that dispatch.
+**Use Opus for research.** Every research task and research agent uses Opus,
+always. When spawning teammates for `research-team`, `research-attack`,
+`research-audit`, `trifecta`, `paper-harden`, `paper-referee`, `paper-rewrite`,
+`script-promote`, or any other research workflow, pass `model: "opus"` on each
+`Agent` tool call. Do not use Sonnet or Haiku for research delegation.
 
 **3+3+2 roster** for a balanced cycle: 3 gap-closers (each on a specific
 UV-NNN / `rem:wip-*`, with routes A/B/C and fallback to minimal finite
@@ -77,6 +77,7 @@ structure that *redirects* how gaps are attacked) + 2 verifiers (adversarial
 |---|---|
 | balanced cycle, no fixed target | `research-team` |
 | focused push on one UV / label | `research-attack` |
+| resume / recover existing team dir in place | `research-resume` |
 | grade a subsection or three | `research-audit` |
 | post-work synthesis, literature, hidden links | `trifecta` |
 | systematic compactness rewrite | `paper-rewrite` |
@@ -205,9 +206,19 @@ a hardass — a good-referee standard.
 
 Every delegation includes: the full current `findings.md` from the team
 dir (freshly updated per `Capture before shutdown, forward-carry at dispatch` — stale briefings are worse than late ones),
-the 7-field schema (`Report schema`), explicit non-goals, the agent's own
-`agents/<slug>/` path + self-deposit checklist, and the `Writing discipline` writing-
-discipline reminder.
+the `Report schema`, explicit non-goals, the agent's own `agents/<slug>/` path +
+self-deposit checklist, and the `Writing discipline` reminder.
+
+Every brief also names:
+
+- the exact in-scope paper lines, team files, source files, and prior agent
+  reports the agent must read before acting;
+- the protected surfaces the agent must not edit (`<main>.tex`, `findings.md`,
+  `uv.md`, `attempts.md`, `paper-updates.md`, `CLAUDE.md`, `lore/`, and other
+  agents' dirs unless an explicit role exception applies);
+- the ground-truth check for the task: theorem statement, `rem:wip-*`, source
+  reference, verifier question, pinned objection set, or script output that
+  decides whether evidence counts.
 
 **The full `uv.md` is NOT in the default briefing.** Sharing tentative
 claims poisons independent agents. Exceptions — all narrow, all
@@ -253,13 +264,13 @@ Every multi-agent dispatch creates one team dir under the relevant paper:
 ├── uv.md                        — in-cycle UV ledger, markdown (`Capture before shutdown, forward-carry at dispatch` forward-carried + updated)
 ├── paper-updates.md             — team-lead staged edits for <main>.tex (optional, created when ready)
 ├── dispatch.md                  — team-lead brief, roster, non-goals
-├── attempts.tsv                 — route ledger: ts, agent, target, route, decision, evidence, next
+├── attempts.md                  — route ledger: ts, agent, target, route, decision, evidence, next
 ├── collation.md                 — team-lead synthesis as reports land
 ├── chat.md                      — transcript backup (chat-backup skill)
 ├── scripts/                     — team-lead scripts, if any
 └── agents/
     ├── YYYYMMDD-HHMMSS-<agent-slug>/
-    │   ├── report.md            — agent's 7-field report (`Report schema`)
+    │   ├── report.md            — agent's 9-field report (`Report schema`)
     │   ├── scripts/             — every script the agent ran (written before run)
     │   └── notes/               — agent's scratch, intermediates worth keeping
     └── YYYYMMDD-HHMMSS-<other-agent-slug>/
@@ -273,16 +284,34 @@ legible from the filesystem.
 
 `findings.md` and `uv.md` in each team dir are the authoritative state
 for that cycle. They start as forward-carries from the prior team dir
-(`Capture before shutdown, forward-carry at dispatch`) and evolve as reports land. `attempts.tsv` is the run
-ledger for the cycle: append one row per attempted route with
-`timestamp`, `agent`, `target`, `route`, `decision` (`keep` / `discard` /
-`crash`), `evidence`, and `next`. `paper-updates.md` is optional: the team
-lead writes it when the cycle has produced edits ready to fold into
+(`Capture before shutdown, forward-carry at dispatch`) and evolve as reports land. `attempts.md` is the run
+ledger for the cycle. It contains a markdown attempts table plus a frontier
+summary:
+
+```
+# Attempts
+
+| Agent | Target | Claim / route | Status | Evidence | Action | Description |
+|---|---|---|---|---|---|---|
+
+## Frontier summaries
+
+- **Current best:** <sharpest target / best evidence / strongest obstruction>
+- **Keep:** <routes worth carrying forward>
+- **Discard:** <scoped negatives that should not be retried unchanged>
+- **Blocked:** <coordinator actions or missing source checks>
+- **Next:** <highest-leverage next move>
+```
+
+Periodically summarize the frontier in `collation.md`: total attempts,
+keep/discard/crash/blocked/terminal counts, current best kept routes, biggest
+blockers, and next queued moves. `paper-updates.md` is optional: the team lead
+writes it when the cycle has produced edits ready to fold into
 `<paper>/<main>.tex`.
 
 **Agents write their own provenance artifacts. Always.** Every agent — gap-closer,
 explorer, verifier, auditor, Phase-1 fixer — writes directly to its own
-`agents/<slug>/` dir: the 7-field report, every script it ran, every
+`agents/<slug>/` dir: the 9-field report, every script it ran, every
 scratch note worth keeping. The team lead briefs, collates, and commits;
 the team lead does **not** transcribe an agent's findings into a fresh
 file on the agent's behalf. If an agent returns only a chat message with
@@ -299,11 +328,14 @@ changes in their reports.
 
 ## Report schema
 
-Every agent report has seven fields:
+Every agent report has nine fields:
 
 - **Claim**
 - **Status** \(\in\) `proved | computational | heuristic | open | rejected`
 - **Evidence**
+- **Baseline / delta** — current best route or obstruction, and whether this
+  attempt improves, matches, weakens, rejects, or leaves it unchanged.
+- **Attempt status** \(\in\) `keep | discard | blocked | terminal | crash`
 - **Exact refs** — file paths, line numbers, `rem:wip-*`, chat paths, scripts
   + SHAs, UV-NNN
 - **Dependencies**
@@ -322,6 +354,10 @@ across all `teams/*/uv.md`) + 1` when filing a new one.
 
 - **Quarantine**: add UV-NNN to the current team dir's `uv.md`, or a
   bullet to the right section of its `findings.md`.
+- **Advance / discard routes**: a route advances only if it sharpens a target,
+  closes a substatement, produces a reusable negative, improves evidence, or
+  reduces dependency depth. Otherwise mark it `discard` in `attempts.md`; do
+  not let stale failed routes pollute `findings.md`.
 - **Adversarial pass is non-negotiable** before any proof-state change.
 - **Promote**: edit paper (directly, or stage via `paper-updates.md`)
   AND remove the UV / findings entry from the team dir's `uv.md` /
@@ -372,21 +408,26 @@ agents:
 1. Create the new team dir with its timestamp and slug.
 2. Copy the most recent team dir's `findings.md` and `uv.md` into the
    new team dir.
-3. Prune dead entries (closed UVs, resolved findings). Keep the file
+3. Initialize `attempts.md` with the header row. Carry forward only open
+   next-actions from the prior `attempts.md` into `dispatch.md` or
+   `collation.md`; do not bulk-copy stale discarded routes into the new
+   live ledger.
+4. Prune dead entries (closed UVs, resolved findings). Keep the file
    briefing-size (≤ 200 lines for `findings.md`). This is the team
    lead's active judgment call — no skill needed.
-4. Add anything surfaced by the just-completed prior cycle that wasn't
+5. Add anything surfaced by the just-completed prior cycle that wasn't
    yet captured (capture-before-shutdown should already have done this;
    this is the final sweep).
-5. Commit the new team dir's `findings.md` / `uv.md` with a subject
-   like `carry forward: <prior-ts> → <new-ts>`. *Now* brief the agents.
+6. Commit the new team dir's `findings.md` / `uv.md` / `attempts.md`
+   with a subject like `carry forward: <prior-ts> → <new-ts>`. *Now*
+   brief the agents.
 
 The chain of team dirs is the history — each is a snapshot in time. Git
 log across them is the cross-cycle audit trail.
 
 ## Provenance
 
-Every `findings.md` entry, `uv.md` entry, `attempts.tsv` row, agent report,
+Every `findings.md` entry, `uv.md` entry, `attempts.md` row, agent report,
 commit message, lore entry, `paper-updates.md` line, and team dir carries
 provenance to its source: chat path, `rem:wip-*` label, paper line number,
 script + SHA, UV-NNN, or agent report path. A claim without provenance is a
@@ -442,6 +483,14 @@ matching `!` / `Undefined` / `Error` / `Warning: .* undefined` / `Warning:
 live in team-dir `uv.md` files, outside the LaTeX build. `--no-verify`
 is discouraged — don't bypass just because auto-push creates ship
 pressure.
+
+## Prompt and skill iteration
+
+Treat `.claude/agents/_autoresearch.md`, research skills, and agent role files
+as research-org code. After several cycles, do a short retrospective in
+`collation.md` or `lore/`: which briefing clauses produced useful deposits,
+which caused noise, and what should be simplified or sharpened. Keep changes
+small and evidence-driven; don't accrete policy because it sounds good.
 
 ## Skill authoring — "let the model cook"
 

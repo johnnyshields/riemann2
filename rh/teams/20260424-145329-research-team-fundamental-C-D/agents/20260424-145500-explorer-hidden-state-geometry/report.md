@@ -10,6 +10,8 @@ So the hidden-state fiber is locally trivial as an affine line bundle, and the c
 
 [confirmed] On the exact fixed-shear involutive corner, the quotient-visible transport side already has trivial local monodromy: every finite parity-normalized transport jet descends to the quotient variable `u=t^2`, and on the quartic--sextic rung every finite quotient-visible transport state is locally a function of the single scalar `Q(t)=\widehat Q(t^2)` with no third local reset beyond `t\leftrightarrow -t`. So the remaining hidden state cannot come from extra finite-order monodromy inside the descended quotient-visible transport state.
 
+[confirmed] The paper does not already prove state-locality of the actual corrected two-pair defects/package in that descended transport state. What it proves is a sharp conditional bridge: if the actual corrected cubic/quintic defects factor as `E_{12}^{(3)}=\mathfrak e_3(\mathcal T_N)` and `E_{12}^{(5)}=\mathfrak e_5(\mathcal T_N)`, then evenness plus diagonal vanishing excludes the residual branch; under the stronger state-local package law `\mathcal P_2=\mathfrak P_2(a_1,a_2;\mathcal T_N,\mathcal T_N)` plus the merger identity, the interaction remainder vanishes identically. So no existing formula in the draft yet expresses the actual corrected two-pair package as a function of the descended quotient-visible transport state.
+
 [conditional on `u_5v_5\neq 0`] The overlap cocycle shows exactly why quotient geometry alone does not determine the `\Phi_K`-visible lift. In the `v_7=0` gauge the visible septic coefficient is `0`, while in the `u_7=0` gauge it is `-\Delta_7/u_5`; these differ by the gauge translation `-(\Delta_7/(u_5v_5))A_5^{\mathfrak f}`. Therefore a D-min theorem must control these affine translations, not just the quotient class `\Delta_7`.
 
 [conditional on state-locality of the actual corrected two-atom package] The fixed-shear package section suggests the cleanest bridge from the affine-lift picture to the existing endgame machinery: if the corrected two-pair defect/package is state-local in the descended transport state `\mathcal T_N`, then evenness plus vanishing on coincidence forces quadratic defect closure, and under the natural merger law the interaction remainder vanishes identically on the involutive branch.
@@ -36,6 +38,7 @@ Evidence
   which is the explicit overlap translation between the local sections.
 - [confirmed] Applying `\Phi_K` to that translation changes the visible scalar by `c_2v_5`. Hence quotienting by `\mathbf C A_5^{\mathfrak f}` does not automatically kill `\Phi_K`-visibility.
 - [confirmed] On the exact fixed-shear corner, every finite parity-normalized transport jet descends analytically to `u=t^2`. On the quartic--sextic rung, every finite quotient-visible transport state is a function of the single scalar `Q`, and there is no finite-order hidden reset beyond the involution.
+- [confirmed] The paper proves only conditional state-locality consequences for the actual corrected defects/package: if `E_{12}^{(3)}` and `E_{12}^{(5)}` factor through `\mathcal T_N`, then quadratic defect closure follows; if the full corrected package factors through `\mathcal T_N` and satisfies the natural merger law, then the interaction remainder vanishes identically.
 - [confirmed] The fixed-shear section explicitly says what is not yet proved: the actual corrected two-pair defect/package is not yet shown to be state-local in this descended transport state. Any still-live obstruction must therefore be genuinely relational/provenance-sensitive or non-finite-order, not another quotient-visible transport coordinate.
 - [conditional on Bottleneck C] Once the corrected reduced package is canonically identified with `\widehat\Psi` on the exceptional divisor, D becomes the statement that the affine lift-coordinate cannot vary in any `\Phi_K`-visible way along a corrected reduced-package fiber through the first surviving odd order.
 - [candidate] The smallest obstruction scalar suggested by the overlap analysis is `\tau:=\Delta_7/(u_5v_5)` on `u_5v_5\neq 0`. If the corrected coincidence package forces `\tau` to be constant, vanish, or transfer only through `\ker\Phi_K`, then the hidden visible lift-coordinate would collapse. This is only a diagnostic candidate, not a promoted invariant.
@@ -62,6 +65,7 @@ Exact refs
 - `/mnt/c/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/agents/20260424-145500-explorer-hidden-state-geometry/notes/geometry-summary.md` — initial affine-line interpretation.
 - `/mnt/c/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/agents/20260424-145500-explorer-hidden-state-geometry/notes/transport-formulations.md` — overlap cocycle and transport/connection formulations.
 - `/mnt/c/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/agents/20260424-145500-explorer-hidden-state-geometry/notes/fixed-shear-state-locality-bridge.md` — bridge from affine-lift geometry to the fixed-shear descended transport state.
+- `/mnt/c/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/agents/20260424-145500-explorer-hidden-state-geometry/notes/state-locality-audit.md` — audit of exactly what the paper proves and does not prove about state-locality of the actual corrected two-pair defects/package.
 
 Dependencies
 
@@ -78,7 +82,7 @@ Needed for promotion
 
 1. Formulate the corrected order-`7` package over a fixed reduced-package fiber as an affine line of lifts parallel to `\mathbf C A_5^{\mathfrak f}`.
 2. Identify the corrected analogue of the local overlap translation for the actual two-atom package on the collision/cancellation chart.
-3. Prove that the actual corrected two-atom defect/package is state-local in the descended fixed-shear transport state, or isolate the first relational term preventing such state-locality.
+3. Derive an actual formula or first-order factorization expressing the corrected cubic/quintic two-pair defects in terms of the descended fixed-shear state, or isolate the first relational term preventing such state-locality.
 4. Prove that the corrected package-to-transform map sends differences of lifts in a common fiber to `\ker\Phi_K` through order `2N-1`, or equivalently that the first visible odd coefficient is constant on that fiber.
 5. If direct constancy is too hard, isolate the smallest missing statement as a transport/holonomy lemma for the affine lift line.
 

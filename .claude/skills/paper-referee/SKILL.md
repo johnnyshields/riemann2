@@ -11,8 +11,7 @@ touched. Phase 1 is the explicit edit-capable exception to the
 read-only default. Follows `.claude/agents/_autoresearch.md`, CLAUDE.md
 `Dispatch` long-lived-agent rules, `Briefing rule`, `Team dirs and agent
 self-deposit`, `Capture before shutdown, forward-carry at dispatch`. Use
-`model: "opus"` for every fixer/referee unless the user explicitly overrides
-this dispatch.
+`model: "opus"` for every fixer/referee, always.
 
 `$ARGUMENTS`: empty → fix against latest referee feedback in `lore/`;
 file path → target that; `--no-referee` → skip Phase 2;

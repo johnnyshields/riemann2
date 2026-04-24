@@ -66,11 +66,14 @@ Active, compact knowledge base shared with every delegated agent.
   Do-not-retry: generic local-pointwise detector nonvanishing from the present
   same-tower formulas alone without a new provenance-sensitive theorem.
 - **Current reduced-package blow-up hypotheses do not force diagonal collapse.**
-  Provenance: prior-cycle `agents/20260424-133500-C-failure/report.md` and current
-  `agents/20260424-145500-explorer-prior-treasure-hunt/report.md`. Do-not-retry:
-  deriving `\widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0)=\widehat\Psi(m)` from
-  analyticity, swap-evenness, or reduced-package blow-up coordinates alone; these
-  still allow a free exceptional-divisor trace `B(m,\kappa)`.
+  Provenance: prior-cycle `agents/20260424-133500-C-failure/report.md`, current
+  `agents/20260424-145500-explorer-prior-treasure-hunt/report.md`, and formal
+  countermodel `agents/20260424-160000-gap-closer-C-fiber-selection/report-cfs23-followup.md`
+  with script `scripts/formal_countermodel.py`. Do-not-retry: deriving
+  `\widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0)=\widehat\Psi(m)` from fixed
+  codomain, `\mathcal R`, analyticity, swap-evenness, scalar normalization, or a
+  central-slope match alone; the toy package with `B_3=Z+\varepsilon\kappa` satisfies
+  those formal properties and keeps `\partial_\kappa B_3=\varepsilon`.
 
 ## Goodies
 

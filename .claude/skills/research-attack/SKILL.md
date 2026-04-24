@@ -9,8 +9,7 @@ Focused push on one gap. 1 gap-closer + 1 adversarial verifier by
 default; `--double` for 2 gap-closers on different routes. Follows
 `.claude/agents/_autoresearch.md`, CLAUDE.md `Dispatch` long-lived-agent rules,
 `Briefing rule`, `Team dirs and agent self-deposit` deposit, `Capture before shutdown, forward-carry at dispatch` forward-carry. Use `model: "opus"` for every
-research agent; never spawn research teammates on Sonnet or Haiku unless the
-user explicitly overrides this dispatch.
+research agent, always. Never spawn research teammates on Sonnet or Haiku.
 
 `$ARGUMENTS`: `UV-NNN`, `rem:wip-<label>`, or free text (coordinator
 resolves to the best match). Optional `--double`.
@@ -22,10 +21,12 @@ resolves to the best match). Optional `--double`.
 2. Create `<paper>/teams/<ts>-attack-gap-<slug>/` where `<slug>` is
    UV-ID or short descriptor. Copy prior `findings.md` + `uv.md` in;
    prune dead entries; add anything surfaced last cycle not yet
-   captured. Initialize `attempts.tsv` with
-   `timestamp\tagent\ttarget\troute\tdecision\tevidence\tnext`. Commit.
-3. Write `dispatch.md` with target, routes, non-goals, fixed-harness criteria,
-   and any run budgets/timeouts.
+   captured. Initialize `attempts.md` with a markdown attempts table and
+   `Frontier summaries` block. Commit.
+3. Confirm no existing team dir has the same timestamp/slug. Write
+   `dispatch.md` with the originating commit, target, current baseline/frontier,
+   exact in-scope files/lines/reports, protected surfaces, routes, non-goals,
+   fixed-harness criteria, ground-truth checks, and any run budgets/timeouts.
 
 ## Dispatch
 
@@ -55,8 +56,9 @@ closed lemmas, no new conjectures outside scope.
 2. Walk each report. Refine the target UV entry in this team dir's
    `uv.md` (sharpen `Needed for promotion`, or remove it if the verifier
    confirmed closure). File any new UV candidates. Add any new findings.
-   Append an `attempts.tsv` row for every substantial route with `keep`,
-   `discard`, or `crash`.
+   Append an `attempts.md` row for every substantial route with `keep`,
+   `discard`, or `crash`; periodically summarize counts and the current
+   frontier in `collation.md`.
 3. Respond to the agents. Ask the verifier to attack the strongest new claim;
    ask the gap-closer to reduce the sharpest remaining obstruction; or assign
    the next adjacent target to the same named teammate.

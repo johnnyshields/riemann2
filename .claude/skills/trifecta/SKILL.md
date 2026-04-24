@@ -9,7 +9,7 @@ Three-angle post-work synthesis via `subagent_type: trifecta-analyst`.
 Follows `.claude/agents/_autoresearch.md`, CLAUDE.md `Dispatch`
 long-lived-agent rules, `Briefing rule`, `Team dirs and agent self-deposit`,
 `Capture before shutdown, forward-carry at dispatch`. Use `model: "opus"` for
-every analyst unless the user explicitly overrides this dispatch.
+every analyst, always.
 
 `$ARGUMENTS`: empty → analyze most recent work (git log + recent
 lore); topic phrase → focus all three; lore file path → analyze that
@@ -30,7 +30,7 @@ file.
 `TeamCreate team_name: "trifecta-<slug>"`. Spawn three analysts
 (`subagent_type: trifecta-analyst`, `model: "opus"`) with the standard briefing,
 the full `.claude/agents/_autoresearch.md` metaprompt, full `findings.md`,
-7-field schema, writing-discipline reminder, self-deposit checklist, **no
+9-field schema, writing-discipline reminder, self-deposit checklist, **no
 `uv.md` content** (trifecta analysts are the textbook spoiler-prone case), and
 the key-findings summary.
 

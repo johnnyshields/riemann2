@@ -17,7 +17,7 @@ description: NOT AN INVOCABLE AGENT — meta rules included at the top of every 
 You have a dedicated work dir: `<paper>/teams/<team-dir>/agents/<your-slug>/`.
 Everything you produce goes *there*:
 
-- `report.md` — 7-field report (Claim / Status / Evidence / Exact refs /
+- `report.md` — 9-field report (Claim / Status / Evidence / Exact refs /
   Dependencies / Strongest objection / Needed for promotion). See
   CLAUDE.md `Report schema`.
 - `scripts/` — every script you ran, as a file.
@@ -80,7 +80,7 @@ source material verbatim.
 ## Acceptable returns
 
 `unsupported`, `blocked`, `no progress` are honest signals, not
-failures. File the 7-field report with that status. Do not pad with
+failures. File the 9-field report with that status. Do not pad with
 speculation.
 
 # End of shared provenance
