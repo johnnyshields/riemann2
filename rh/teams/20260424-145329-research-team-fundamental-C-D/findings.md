@@ -165,7 +165,7 @@ Active, compact knowledge base shared with every delegated agent.
   `\mathcal J_2^{(7)}` / `\mathfrak O_7`.
 - **UV-023/UV-024 source-bidegree quotient package is missing from current source.**
   Provenance: UV-023/UV-026 reports in `agents/20260424-190438-*` through
-  `agents/20260424-194309-*/report.md`.
+  `agents/20260424-194928-verifier-source-UV025-package-language/report.md`.
   Usage: `(1,1)` projection kills `\mathcal T_{p\ge3}` formally, and the best
   `L_h` candidate is the pre-whitening pair-kernel-linear derivative supported
   by one-pair formulas. The best `Q_7^q` target is
@@ -173,7 +173,8 @@ Active, compact knowledge base shared with every delegated agent.
   Conditional matrix `C_{\mathcal W}` and `B_7^{\mathfrak f}` are definition-ready
   once the actual source-linear two-atom block exists. UV-025 asks for that
   block; UV-026 asks for cubic `(1,1,5)` `A_5^{\mathfrak f}`-gauge. Promotion
-  still needs actual-package source, `\Pi_{1,1}`, and quotient-gauge.
+  still needs actual-package source, `\Pi_{1,1}`, and quotient-gauge; current
+  `\mathfrak P_2` language is quotient-output, not pre-whitening `\mathcal B_2`.
 
 ## Recurring open gaps
 

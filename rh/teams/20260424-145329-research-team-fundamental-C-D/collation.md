@@ -726,3 +726,16 @@ Captured takeaway: the inspected source constraints do not force a cubic `(1,1,5
 - **Keep:** conditional matrix-cross-effect definition path; formal cubic obstruction as a verifier harness.
 - **Discard:** proving UV-024 from one-pair gauge law, swap compatibility, scalar hiding, determinant scalarization, or generic fixed quotient linearity alone.
 - **Next:** dispatch UV-025 source-block construction first; UV-026 should wait for actual-package structure or run only as adversarial pressure.
+
+### `20260424-194928-verifier-source-UV025-package-language/report.md`
+
+Signal: UV-025 source-language verifier, keep.
+
+Captured takeaway: existing `\mathfrak P_2` language is quotient-output package language in `\mathbf C\oplus\mathfrak f\oplus(\mathfrak f/\mathbf C A_5^{\mathfrak f})`; it does not define the pre-whitening source-tagged block `\mathcal B_2`. The missing work splits cleanly: add a definition of `\mathcal B_2` and `\mathcal K`, then prove the source/block computation `\operatorname{Lin}_{\mathcal K}\mathfrak D_Q(\mathcal B_2-\mathcal B_0)=a_1L_{h_1}+a_2L_{h_2}`.
+
+### Frontier after UV-025 source-language audit
+
+- **Current best:** UV-025 is not closed by existing wording; definition skeleton and derivative theorem should be handled separately.
+- **Keep:** output-package phrasing for later, after pre-whitening provenance exists.
+- **Discard:** treating assumed quotient-output identities as a pre-whitening source proof.
+- **Next:** wait for constructive `\mathcal B_2` skeleton, then decide whether to stage it in `paper-updates.md` or keep it as a UV-only target.
