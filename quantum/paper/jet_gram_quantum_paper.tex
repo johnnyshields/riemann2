@@ -1,0 +1,1040 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+
+\setlength{\emergencystretch}{2em}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{gap}[theorem]{Research gap}
+
+\newcommand{\C}{\mathbb C}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Hilb}{\mathcal H}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Ran}{\operatorname{Ran}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\Id}{I}
+\newcommand{\Proj}{\Pi}
+\newcommand{\dd}{\mathrm d}
+\newcommand{\FS}{\mathrm{FS}}
+\newcommand{\QGT}{\mathrm{QGT}}
+\newcommand{\Gr}{\mathrm{Gr}}
+\newcommand{\diag}{\operatorname{diag}}
+
+\title[Jet-Gram structures and higher quantum geometry]{Jet-Gram structures,
+canonical subspace invariants, and higher quantum geometry}
+
+\author{Draft}
+
+\date{\today}
+
+\begin{document}
+
+\begin{abstract}
+The quantum geometric tensor is the first-order Gram matrix of horizontal
+derivatives of a pure-state family. Motivated by the local jet cross-Gram
+pattern in the Riemann-side construction, we ask whether this first-order
+geometric object has a higher-order, two-point matrix analogue for quantum
+state families. The answer is sharply mixed. At first order the same-point
+horizontal Gram matrix is exactly the usual quantum geometric tensor, and a
+transported two-point first-jet block has a precise reparameterization law. From
+second order onward, however, ordered jet matrices transform by non-unitary
+triangular laws under phase gauge and coordinate change. Their entries are not
+canonical. The surviving objects are the horizontal osculating subspaces
+\(O_r\), together with the ambient extensions
+\(A_r=\Span\{\psi\}\oplus O_r\). Endpoint comparison is then governed by
+cross-contractions, projector compressions, polar partial isometries, and
+principal angles. We prove that all orthonormal-frame comparison matrices for a
+fixed endpoint subspace pair form one biunitary orbit, classified by the same
+principal-angle singular values; a canonical entrywise matrix therefore
+requires extra frame-selecting structure. We give polynomial and non-polynomial
+benchmarks where the resulting higher-order subspace data is richer than
+ordinary overlap, record a finite-jet genericity statement for the first
+horizontal line invariant, and describe a coherent reflection protocol that
+reads the principal angles under explicit access assumptions. Research gaps are
+isolated where stronger physics-facing claims would require new input.
+\end{abstract}
+
+\maketitle
+
+\tableofcontents
+
+\section{Introduction}
+
+The usual quantum geometric tensor is a first-order object. Given a smooth
+family of normalized pure states, one removes the component of a derivative in
+the state direction and forms the Gram matrix of the resulting horizontal
+derivatives. The real part is the quantum metric; the imaginary part is Berry
+curvature. This paper asks what survives when the same Gramian idea is pushed
+to higher jets and to two endpoint comparisons.
+
+The motivating algebraic pattern is a local jet cross-Gram block. One has
+same-point Gram matrices at two nearby points, a mixed cross block between the
+two local jet frames, and a bilateral whitening. In abstract notation this has
+the form
+\[
+        \Omega=M_-^{-1/2}N_{-+}M_+^{-1/2}.
+\]
+The question is not whether a particular kernel-theoretic object is literally a
+standard quantum tensor. The question is narrower and more structural:
+
+\begin{quote}
+Which parts of a higher-jet Gram construction are canonical for quantum state
+families, and which parts depend on phase, coordinates, frames, or transport?
+\end{quote}
+
+The answer is the main message of the paper. At first order one obtains the
+standard quantum geometric tensor and a controlled two-point transported block.
+At higher order the matrix entries do not survive. The ordered derivative list
+mixes by upper-triangular, non-unitary transformations under ordinary changes
+of phase and parameter. Whitening does not repair this. The canonical survivor
+is the subspace spanned by the derivatives. Comparing endpoints means comparing
+subspaces.
+
+Thus the central object is not a higher quantum geometric matrix, but the
+endpoint operator package of two osculating subspaces:
+\[
+        C=\Proj_-|_{S_+},\qquad K_+=C^*C,\qquad
+        K_-=CC^*,\qquad C=V|C|.
+\]
+Its spectra give the squared cosines of principal angles. The polar factor
+gives a canonical partial isometry on the nonzero-overlap sector. The
+principal-angle multiset classifies finite-dimensional subspace pairs up to
+ambient unitary equivalence.
+
+This package has two uses. First, it gives a higher-order geometric fingerprint
+of a state family. In explicit qutrit, quartit, Veronese, and spherical-twist
+families it distinguishes endpoint pairs with the same ordinary overlap.
+Second, it gives a no-go criterion. A proposed higher-jet comparison matrix is
+not canonical unless the extra structure selecting its frames is stated.
+
+\subsection{Main contributions}
+
+The paper proves or records the following claims.
+
+\begin{enumerate}
+\item The same-point first horizontal Gram matrix is exactly the pure-state
+quantum geometric tensor.
+\item A one-parameter first-horizontal two-point block is invariant under
+orientation-preserving reparameterization after a fixed gauge-covariant
+transport choice, and transforms by derivative-channel sign conjugation under
+orientation reversal.
+\item Raw higher projected jets transform by upper-triangular laws under phase
+gauge and reparameterization. Therefore their Gram and whitened matrices are
+not canonical.
+\item The horizontal osculating spaces \(O_r\) and the ambient spaces \(A_r\)
+are canonical subspace-valued invariants.
+\item Berry-covariant one- and multi-parameter jet hierarchies generate the
+same \(O_r\) filtrations as raw projected jets. Symmetrized covariant jets
+generate the same multiparameter filtration.
+\item Endpoint comparison is controlled by cross-contractions, projector
+compressions, polar partial isometries, and principal angles.
+\item Every orthonormal-frame comparison matrix for a fixed subspace pair lies
+in a single biunitary orbit; the rectangular singular values are exactly the
+principal-angle cosines.
+\item Canonical principal frames exist from the subspace pair alone exactly on
+simple nonzero principal spectra. Repeated principal values have an unavoidable
+internal unitary freedom.
+\item Exact unitary orbits identify the ambient and horizontal spaces with
+transported Krylov and compressed-Krylov spaces. Kato transport gives a
+pathwise realization but not endpoint-independent transport in nonzero
+curvature.
+\item With coherent reflection access to endpoint projectors, phase estimation
+on \((2\Proj_- - \Id)(2\Proj_+ - \Id)\) reads the same principal angles.
+\item Benchmark families show richer-than-overlap behavior. A finite-jet
+genericity criterion gives a first-order mechanism behind this behavior.
+\end{enumerate}
+
+\subsection{What is not claimed}
+
+The paper does not claim the discovery of new fundamental particles. It does
+not claim that higher jets define a canonical matrix. It does not claim that the
+construction is fundamental for all quantum mechanics. It proves a mathematical
+invariant package and marks the additional work needed to turn that package
+into a physics-facing diagnostic in concrete systems.
+
+\section{Background and notation}
+
+Let \(\Hilb\) be a complex Hilbert space. Most statements below are cleanest in
+finite dimension; the subspace and projector statements extend to closed
+finite-rank subspaces in a Hilbert space with the usual domain qualifications.
+The inner product is linear in the second variable only if a convention is
+chosen; the formulas below are invariant after conjugating consistently. We
+write \(|\psi\rangle\) only in informal passages and use \(\psi\) in formulas.
+
+A smooth pure-state family is a smooth map \(x\mapsto \psi(x)\in \Hilb\) with
+\(\|\psi(x)\|=1\). The physical state is the ray \([\psi(x)]\), so the local
+lift is defined only up to a phase \(e^{i\chi(x)}\). The orthogonal projector
+onto the horizontal space at \(\psi\) is
+\[
+        P_\psi=\Id-|\psi\rangle\langle \psi|.
+\]
+For a coordinate vector \(\partial_a\) on parameter space, define the horizontal
+derivative
+\[
+        D_a\psi=P_\psi\partial_a\psi .
+\]
+
+\begin{definition}[Quantum geometric tensor]
+The pure-state quantum geometric tensor of the family \(x\mapsto \psi(x)\) is
+\[
+        Q_{ab}(x)=\langle D_a\psi(x),D_b\psi(x)\rangle
+        =\langle\partial_a\psi,
+          (\Id-|\psi\rangle\langle\psi|)\partial_b\psi\rangle .
+\]
+Its real part is the Fubini-Study metric tensor and twice its imaginary part is
+the Berry curvature in the convention used here:
+\[
+        g_{ab}=\Re Q_{ab},\qquad F_{ab}=2\Im Q_{ab}.
+\]
+\end{definition}
+
+We also need the elementary geometry of two subspaces. If \(S_-\) and \(S_+\)
+are finite-dimensional subspaces with orthogonal projectors \(\Proj_-\) and
+\(\Proj_+\), the canonical cross-contraction is
+\[
+        C=\Proj_-|_{S_+}:S_+\to S_-.
+\]
+The positive compressions are
+\[
+        K_+=C^*C=\Proj_+\Proj_-\Proj_+|_{S_+},
+        \qquad
+        K_-=CC^*=\Proj_-\Proj_+\Proj_-|_{S_-}.
+\]
+The singular values of \(C\) are the cosines of the principal angles between
+\(S_-\) and \(S_+\).
+
+\section{First-order quantum jet-Gram geometry}
+
+\subsection{The same-point bridge}
+
+The first-order same-point part of the construction is exactly standard quantum
+geometry.
+
+\begin{theorem}[First-order QGT bridge]
+Let \(x\mapsto \psi(x)\) be a smooth normalized pure-state family. The
+same-point horizontal derivative Gram matrix
+\[
+        \bigl(\langle P_\psi\partial_a\psi,
+                    P_\psi\partial_b\psi\rangle\bigr)_{a,b}
+\]
+is the pure-state quantum geometric tensor.
+\end{theorem}
+
+\begin{proof}
+The statement is the definition after horizontal projection. Since
+\(\|\psi\|^2=1\), the derivative \(\partial_a\psi\) decomposes into the state
+line and its orthogonal complement. Removing the state-line component gives
+\[
+        D_a\psi=(\Id-|\psi\rangle\langle\psi|)\partial_a\psi.
+\]
+Taking the Gram matrix of these horizontal derivatives gives
+\[
+        \langle D_a\psi,D_b\psi\rangle
+        =
+        \langle\partial_a\psi,
+        (\Id-|\psi\rangle\langle\psi|)\partial_b\psi\rangle,
+\]
+which is the usual expression for the pure-state quantum geometric tensor.
+\end{proof}
+
+This theorem is the exact first-order contact with established physics. It does
+not identify the full two-point whitened block with the quantum geometric
+tensor; it identifies the same-point horizontal block.
+
+\subsection{A transported first-order two-point block}
+
+Let \(t\mapsto \psi(t)\) be a one-parameter normalized lift. Define
+\[
+        h_t=P_t\dot\psi(t),\qquad P_t=\Id-|\psi(t)\rangle\langle\psi(t)|.
+\]
+Choose a two-point transport rule \(U_{-\leftarrow +}\) from the endpoint
+fiber at \(t_+\) to the endpoint fiber at \(t_-\). In the ordered pair
+\((\psi,h)\), define
+\[
+M(t_i)=
+\begin{pmatrix}
+1&0\\
+0&\langle h_{t_i},h_{t_i}\rangle
+\end{pmatrix}
+\]
+and
+\[
+N(t_-,t_+)=
+\begin{pmatrix}
+\langle\psi_-,U_{-\leftarrow +}\psi_+\rangle&
+\langle\psi_-,U_{-\leftarrow +}h_+\rangle\\
+\langle h_-,U_{-\leftarrow +}\psi_+\rangle&
+\langle h_-,U_{-\leftarrow +}h_+\rangle
+\end{pmatrix}.
+\]
+The whitened first-order block is
+\[
+        \Omega_t=M(t_-)^{-1/2}N(t_-,t_+)M(t_+)^{-1/2}.
+\]
+
+\begin{proposition}[First-order reparameterization law]
+Let \(\mu=\phi(t)\) be a smooth reparameterization with nonzero derivative at
+the endpoints. For a fixed transported endpoint comparison as above,
+\[
+        \Omega_\mu=\Omega_t
+\]
+when \(\phi\) is orientation-preserving at both endpoints. If the orientation is
+reversed at both endpoints and the ordered endpoint pair is kept fixed, then
+\[
+        \Omega_\mu=E\Omega_tE,\qquad E=\diag(1,-1).
+\]
+\end{proposition}
+
+\begin{proof}
+Under reparameterization,
+\[
+        h_\mu=P_\psi\frac{\partial\psi}{\partial\mu}
+        =
+        \frac{\dd t}{\dd\mu}h_t.
+\]
+The derivative channel at each endpoint is therefore multiplied by the real
+scalar \(\dd t/\dd\mu\). The corresponding same-point derivative norm in
+\(M(t_i)\) is multiplied by its square, while the mixed entries involving one
+derivative channel are multiplied by the endpoint derivative factor. Bilateral
+whitening cancels the positive magnitudes. Only the signs remain. If both signs
+are positive, nothing changes. If both endpoint orientations reverse, the
+derivative channel is conjugated by the diagonal sign matrix
+\(E=\diag(1,-1)\).
+\end{proof}
+
+\begin{remark}[Transport is part of the data]
+This proposition is not an endpoint-only theorem. The transport rule is part of
+the input. If the transport is gauge-covariant, the construction descends from
+a fixed lift to the corresponding ray curve. In the restricted scalar-phase
+class \(U_{-\leftarrow +}=e^{i\alpha}\Id\), the whole block changes by a global
+phase and its singular values are transport-class invariant. Outside such
+restricted classes, no transport-independent matrix is claimed.
+\end{remark}
+
+\begin{gap}[GAP-3A: first-order transport classification]
+The current draft uses the fixed-transport and scalar-phase statements because
+they are enough for the main message. A stronger version would classify all
+transport choices under which the first-order singular-value package is
+invariant. This is not needed for the paper's core theorem spine.
+\end{gap}
+
+\section{Higher jets: matrix failure and subspace survival}
+
+The first-order matrix behavior is exceptional. Higher derivatives mix under
+ordinary changes of phase and parameter.
+
+\subsection{Triangular transformation laws}
+
+For a one-parameter curve define raw projected jets
+\[
+        j_k(t)=P_t\partial_t^k\psi(t),\qquad 1\le k\le r.
+\]
+
+\begin{lemma}[Phase triangularity]
+Under a phase change \(\psi(t)\mapsto e^{i\chi(t)}\psi(t)\), the ordered list
+\((j_1,\ldots,j_r)\) is transformed by multiplication by \(e^{i\chi(t)}\) and
+an invertible upper-triangular linear combination of the lower jets. In
+particular,
+\[
+        j_2\mapsto e^{i\chi}(j_2+2i\chi'j_1).
+\]
+\end{lemma}
+
+\begin{proof}
+Differentiate \(e^{i\chi}\psi\) repeatedly. The \(k\)-th derivative is
+\[
+        \partial_t^k(e^{i\chi}\psi)
+        =
+        e^{i\chi}\partial_t^k\psi
+        +\sum_{\ell<k} b_{k\ell}(\chi',\ldots,\chi^{(k-\ell)})
+             e^{i\chi}\partial_t^\ell\psi
+        +b_{k0}e^{i\chi}\psi .
+\]
+The final state-line term is killed by the horizontal projector. The coefficient
+of \(j_k\) is \(e^{i\chi}\), so the transformation is triangular with invertible
+diagonal. The displayed \(k=2\) formula follows by direct differentiation and
+projection.
+\end{proof}
+
+\begin{lemma}[Coordinate triangularity]
+Let \(\mu=\phi(t)\) be a one-parameter coordinate change with
+\(\dd t/\dd\mu\ne0\). Then the ordered list \((j_1,\ldots,j_r)\) transforms by
+an invertible upper-triangular combination. In particular,
+\[
+        j_2^{(\mu)}
+        =
+        \left(\frac{\dd t}{\dd\mu}\right)^2j_2^{(t)}
+        +
+        \frac{\dd^2 t}{\dd\mu^2}j_1^{(t)} .
+\]
+\end{lemma}
+
+\begin{proof}
+This is the chain rule. The \(k\)-th \(\mu\)-derivative contains
+\((\dd t/\dd\mu)^k\partial_t^k\psi\) plus lower \(t\)-derivatives. Projecting
+horizontally kills only the state-line term, not the lower horizontal jets. The
+diagonal coefficients are nonzero, so the transformation is invertible and
+triangular.
+\end{proof}
+
+\begin{theorem}[Higher-jet matrix no-go]
+For \(r\ge2\), the raw higher-jet Gram matrices and their bilaterally whitened
+two-point matrix analogues are not canonical under phase gauge and
+reparameterization. Their entries depend on the ordered jet representatives.
+\end{theorem}
+
+\begin{proof}
+The transformation laws above are generally non-unitary triangular changes of
+ordered jet coordinates. A Gram matrix transforms by congruence under such a
+change, and bilateral whitening only normalizes the endpoint same-point Gram
+matrices. It does not make the mixed block invariant under arbitrary non-unitary
+triangular coordinate changes. Hence the entries of the ordered matrices depend
+on gauge and coordinate choices.
+\end{proof}
+
+\subsection{Subspace survival}
+
+\begin{theorem}[Osculating subspace survival]
+For a one-parameter ray curve, the subspace
+\[
+        O_r(t)=\Span\{j_1(t),\ldots,j_r(t)\}
+\]
+is invariant under local phase gauge and under reparameterization with nonzero
+derivative. In a fixed ambient Hilbert space the ambient space
+\[
+        A_r(t)=\Span\{\psi(t),\partial_t\psi(t),\ldots,\partial_t^r\psi(t)\}
+              =\Span\{\psi(t)\}\oplus O_r(t)
+\]
+is also invariant.
+\end{theorem}
+
+\begin{proof}
+The ordered jets transform by an invertible triangular matrix. Such a matrix
+changes the generating list but not its span. Adding the state line gives the
+ambient space \(A_r\). The equality
+\(A_r=\Span\{\psi\}\oplus O_r\) follows because
+\(\partial_t^k\psi=j_k+\langle\psi,\partial_t^k\psi\rangle\psi\).
+\end{proof}
+
+This theorem is the pivot of the paper. The failed matrix is replaced by a
+canonical subspace.
+
+\subsection{Covariant jets}
+
+The subspace theorem can be generated by covariant derivatives rather than raw
+projected coordinate derivatives. In one parameter define
+\[
+        a(t)=\langle\psi(t),\dot\psi(t)\rangle,\qquad
+        \nabla_t\xi=P_t(\dot\xi-a(t)\xi).
+\]
+Set
+\[
+        h_{[1]}=\nabla_t\psi,\qquad h_{[k+1]}=\nabla_t h_{[k]}.
+\]
+
+\begin{proposition}[One-parameter covariant hierarchy]
+The vectors \(h_{[k]}\) are gauge-covariant, and
+\[
+        \Span\{h_{[1]},\ldots,h_{[r]}\}=O_r(t).
+\]
+\end{proposition}
+
+\begin{proof}
+Under \(\psi\mapsto e^{i\chi}\psi\), a horizontal vector
+\(\xi\mapsto e^{i\chi}\xi\) is sent by \(\nabla_t\) to
+\(e^{i\chi}\nabla_t\xi\). Thus the hierarchy is gauge-covariant. Expanding
+\(\nabla_t h_{[k]}\) shows that \(h_{[k+1]}\) equals \(j_{k+1}\) plus a
+linear combination of lower \(j_\ell\)'s. The change of generators is again
+triangular with nonzero diagonal, so the spans agree.
+\end{proof}
+
+In several parameters, write
+\[
+        a_a=\langle\psi,\partial_a\psi\rangle,\qquad
+        \nabla_a\xi=P(\partial_a\xi-a_a\xi).
+\]
+Ordered iterated covariant derivatives
+\(\nabla_{a_k}\cdots\nabla_{a_1}\psi\) generate the same \(O_r\) spaces as raw
+mixed projected partial derivatives of total order at most \(r\). Since
+commutators of the \(\nabla_a\)'s contribute only lower-order terms on the
+horizontal bundle, symmetrized covariant derivatives generate the same
+filtration. Thus the multiparameter hierarchy determines filtered subspaces,
+not a canonical ordered frame.
+
+\begin{gap}[GAP-4A: associated-graded symbols]
+The multiparameter no-go leaves room for a basis-free associated-graded or
+tensor-symbol package. Such an object would not be an endpoint comparison
+matrix, but it might be a useful local invariant. A future version should either
+define this object and prove its transformation law, or explicitly leave it out
+of scope.
+\end{gap}
+
+\section{Endpoint operator package}
+
+Once the canonical objects are endpoint subspaces, the comparison problem is
+classical and rigid.
+
+\subsection{Canonical contractions}
+
+\begin{theorem}[Endpoint operator package]
+Let \(S_-\) and \(S_+\) be finite-dimensional subspaces of \(\Hilb\), with
+orthogonal projectors \(\Proj_-\) and \(\Proj_+\). The following data are
+canonical:
+\[
+        C=\Proj_-|_{S_+}:S_+\to S_-,
+\]
+\[
+        K_+=C^*C=\Proj_+\Proj_-\Proj_+|_{S_+},
+        \qquad
+        K_-=CC^*=\Proj_-\Proj_+\Proj_-|_{S_-},
+\]
+and the polar decomposition
+\[
+        C=V|C|
+\]
+on the nonzero-overlap sector. The nonzero spectra of \(K_+\) and \(K_-\) are
+the squared cosines of the principal angles between \(S_-\) and \(S_+\).
+\end{theorem}
+
+\begin{proof}
+The projectors are determined by the subspaces, so \(C\), \(K_+\), and \(K_-\)
+are determined by the subspace pair. The nonzero singular values of \(C\) are
+the square roots of the nonzero eigenvalues of \(C^*C\) and \(CC^*\). By the
+standard definition of principal angles, these singular values are
+\(\cos\theta_i\). The polar decomposition of a bounded finite-rank operator is
+unique on \((\Ker C)^\perp\), so the partial isometry \(V\) is canonical on the
+nonzero-overlap sector.
+\end{proof}
+
+\begin{corollary}[Projector test]
+For a state prepared in \(S_-\), the operator
+\[
+        \Proj_-\Proj_+\Proj_-|_{S_-}
+\]
+is the effect operator for the sequential yes/yes subspace-membership test. Its
+eigenvalues are \(\cos^2\theta_i\).
+\end{corollary}
+
+\subsection{Frame matrices are orbit representatives}
+
+The operator package is often written as a matrix after choosing endpoint
+frames. The next theorem says exactly what that matrix means.
+
+\begin{theorem}[Biunitary matrix finality]
+Let \(U_-:\C^p\to S_-\) and \(U_+:\C^q\to S_+\) be orthonormal frame
+isometries. The comparison matrix
+\[
+        A=U_-^*U_+
+\]
+is the matrix of \(C=\Proj_-|_{S_+}\) in those frames. Replacing the frames by
+\(U_-L\) and \(U_+R\), with \(L\in U(p)\) and \(R\in U(q)\), changes the
+matrix by
+\[
+        A\mapsto L^*AR.
+\]
+Conversely, every orthonormal-frame comparison matrix for the same pair arises
+in this way. Therefore the singular values of \(A\), equivalently the
+principal-angle cosines, are the complete frame-independent content of such a
+matrix.
+\end{theorem}
+
+\begin{proof}
+Since \(U_-\) is an isometry onto \(S_-\), \(U_-U_-^*=\Proj_-\) on the ambient
+space. For \(z\in\C^q\),
+\[
+        U_-^*C(U_+z)=U_-^*\Proj_-U_+z=U_-^*U_+z,
+\]
+so \(A\) is the frame matrix of \(C\). If the frames are replaced by \(U_-L\)
+and \(U_+R\), the new matrix is
+\[
+        (U_-L)^*(U_+R)=L^*U_-^*U_+R=L^*AR.
+\]
+All orthonormal frames of a fixed finite-dimensional subspace differ by a
+unitary on the coordinate space, so the converse follows. The rectangular SVD
+classifies the biunitary orbit by singular values, including rank-deficient
+zeros and rectangular padding.
+\end{proof}
+
+\begin{corollary}[No canonical entrywise matrix without frames]
+From a fixed subspace pair alone, a sorted diagonal SVD representative is an
+orbit normal form, not an endpoint-selected matrix. Any entrywise matrix
+requires an additional frame-selection rule.
+\end{corollary}
+
+\subsection{When principal frames exist}
+
+\begin{theorem}[Simple-spectrum frame criterion]
+On the nonzero-overlap sector, canonical matched principal frames can be
+selected from the subspace pair alone exactly on simple nonzero principal
+spectra. If a nonzero principal value has multiplicity \(m\ge2\), no natural
+orthonormal principal frame is determined by the subspace pair alone.
+\end{theorem}
+
+\begin{proof}
+If the nonzero eigenvalues of \(K_+\) are simple, their eigenspaces are complex
+lines. Choosing unit vectors in these lines is unique up to phase. Applying the
+polar partial isometry gives the matched principal lines in \(S_-\). Thus
+principal frames are canonical up to independent phases.
+
+If a nonzero eigenvalue has multiplicity \(m\ge2\), the corresponding
+eigenspace carries an internal \(U(m)\) freedom. In the model block where
+\(C=\sigma\Id\) on an \(m\)-dimensional principal block, every orthonormal basis
+is equally compatible with the same subspace-pair data. A natural frame rule
+depending only on the subspace pair would have to be fixed by all of \(U(m)\),
+which is impossible for an ordered orthonormal basis when \(m\ge2\).
+\end{proof}
+
+\begin{corollary}[Finite-dimensional completeness]
+For finite-dimensional subspace pairs, the endpoint dimensions and the
+principal-angle multiset classify the pair up to ambient unitary equivalence.
+\end{corollary}
+
+\begin{proof}
+This is the finite-dimensional CS decomposition. The pair splits into common,
+orthogonal, residual, and principal two-plane blocks. The dimensions and
+principal angles determine the block model, and any pair with the same data is
+unitarily equivalent to that model.
+\end{proof}
+
+\begin{gap}[GAP-5A: theorem packaging]
+The endpoint operator package is now mathematically stable, but the final paper
+should package it as one clean theorem with named corollaries: projector test,
+polar transport, frame criterion, biunitary finality, and CS completeness. This
+is mainly an exposition gap, not a proof gap.
+\end{gap}
+
+\section{\texorpdfstring{\(A_r\) versus \(O_r\)}{A r versus O r}}
+
+Two related subspace filtrations occur throughout the paper:
+\[
+        O_r=\Span\{P\partial^\alpha\psi:1\le|\alpha|\le r\},
+\]
+and
+\[
+        A_r=\Span\{\psi,\partial^\alpha\psi:1\le|\alpha|\le r\}.
+\]
+The first is horizontal and value-channel-free. The second keeps the state line
+and is often the cleaner ambient object.
+
+\begin{proposition}[Role split]
+For each endpoint,
+\[
+        A_r=\Span\{\psi\}\oplus O_r.
+\]
+The orthogonal projector \(P=\Id-|\psi\rangle\langle\psi|\) restricts to a
+surjection \(A_r\to O_r\) with kernel \(\Span\{\psi\}\). Thus \(O_r\) is
+canonically the quotient of \(A_r\) by the state line.
+\end{proposition}
+
+\begin{proof}
+Each derivative decomposes into its horizontal projection plus a state-line
+component. This gives \(A_r\subseteq \Span\{\psi\}+O_r\), while the reverse
+inclusion is immediate from the definition of \(O_r\). Orthogonality of
+\(\Span\{\psi\}\) and \(O_r\) follows from the horizontal projection. The
+kernel and quotient statement follow from the restriction of \(P\).
+\end{proof}
+
+There is no global winner between these two objects. \(O_r\) is the faithful
+horizontal object, closest to the value-channel-removed QGT pattern. \(A_r\) is
+the ambient extension and supports the cleanest transport-free endpoint theorem
+when all endpoints live in a common Hilbert space. Applications should state
+which role is being used.
+
+\begin{gap}[GAP-6A: physical selection principle]
+The current theorem is a role split, not a selection principle. A stronger
+physics-facing paper would identify settings where \(A_r\) or \(O_r\) is forced
+by an operational or dynamical criterion. For now, the paper keeps both and
+states the distinction explicitly.
+\end{gap}
+
+\section{Dynamics and operational readout}
+
+\subsection{Exact unitary orbits and Krylov spaces}
+
+Let \(\psi(t)=e^{-itH}\psi_0\). Then
+\(\partial_t^k\psi(t)=(-iH)^ke^{-itH}\psi_0\), so
+\[
+        A_r(t)=e^{-itH}\Span\{\psi_0,H\psi_0,\ldots,H^r\psi_0\}.
+\]
+The horizontal space \(O_r(t)\) is the value-channel-removed counterpart:
+\[
+        O_r(t)=e^{-itH}\bigl(\Span\{\psi_0,H\psi_0,\ldots,H^r\psi_0\}
+                 \cap \psi_0^\perp\bigr).
+\]
+Thus exact unitary dynamics turns the abstract osculating spaces into
+transported Krylov and compressed-Krylov spaces.
+
+If the cyclic space of \((H,\psi_0)\) has dimension \(m\), then the spaces
+stabilize once \(r\ge m-1\). In a finite-cyclic case, the spectral measure of
+\((H,\psi_0)\) gives an orthogonal-polynomial basis and a finite Jacobi matrix
+\(J\). In that basis, the full ambient unitary package is represented by
+\(e^{-i\Delta J}\). This is a specialization of the subspace theorem, not a
+general matrix theorem.
+
+\subsection{Projector speed and leakage}
+
+For a unitary subspace orbit \(S(t)=e^{-itH}S(0)\), let \(\Proj_t\) be the
+orthogonal projector onto \(S(t)\). Then
+\[
+        \dot\Proj_t=-i[H,\Proj_t]
+\]
+and
+\[
+        \frac12\|\dot\Proj_t\|_{HS}^2
+        =
+        \frac12\|[H,\Proj_t]\|_{HS}^2
+        =
+        \|(\Id-\Proj_t)H\Proj_t\|_{HS}^2 .
+\]
+The Grassmannian speed is the Hilbert-Schmidt size of the Hamiltonian leakage
+block. At finite separation,
+\[
+        \Proj_t\Proj_{t+\Delta}\Proj_t|_{S(t)}
+        =
+        \Id-\Delta^2L_t^*L_t+O(\Delta^3),
+        \qquad L_t=(\Id-\Proj_t)H\Proj_t.
+\]
+
+\subsection{Kato transport and curvature}
+
+Every smooth constant-rank projector path admits the Kato Hamiltonian
+\[
+        H_K(t)=i[\dot\Proj(t),\Proj(t)].
+\]
+Its unitary propagator realizes the path:
+\[
+        \Proj(t)=U_K(t)\Proj(0)U_K(t)^*.
+\]
+This gives a canonical pathwise model. It is not an endpoint-only comparison.
+In several parameters the Kato connection has curvature
+\[
+        R^K=\Proj(\dd\Proj\wedge\dd\Proj)\Proj.
+\]
+Nonzero curvature produces holonomy and obstructs endpoint-independent Kato
+transport. In rank one this reduces to Berry curvature.
+
+\subsection{Reflection protocol}
+
+The endpoint operator package also has a coherent readout under an explicit
+access model.
+
+\begin{proposition}[Alternating reflections read principal angles]
+Let \(S_\pm\) be finite-dimensional endpoint subspaces with projectors
+\(\Proj_\pm\). Suppose the reflections
+\[
+        R_\pm=2\Proj_\pm-\Id
+\]
+can be implemented coherently. On each nontrivial principal two-plane of the
+pair, the unitary \(W=R_-R_+\) has eigenphases \(\pm2\theta_i\), where
+\(\theta_i\) is the corresponding principal angle.
+\end{proposition}
+
+\begin{proof}
+On a principal two-plane choose an orthonormal basis \(e,f\) with
+\[
+        e\in S_-,\qquad
+        S_+\cap\Span\{e,f\}
+        =
+        \Span\{\cos\theta\,e+\sin\theta\,f\}.
+\]
+In this basis
+\[
+        R_-=
+        \begin{pmatrix}
+        1&0\\0&-1
+        \end{pmatrix},
+        \qquad
+        R_+=
+        \begin{pmatrix}
+        \cos2\theta&\sin2\theta\\
+        \sin2\theta&-\cos2\theta
+        \end{pmatrix}.
+\]
+Thus
+\[
+        R_-R_+=
+        \begin{pmatrix}
+        \cos2\theta&\sin2\theta\\
+        -\sin2\theta&\cos2\theta
+        \end{pmatrix},
+\]
+whose eigenvalues are \(e^{\pm 2i\theta}\), up to the convention for rotation
+orientation.
+\end{proof}
+
+Intersection sectors give phase \(+1\), one-sided orthogonal residual sectors
+give phase \(-1\), and ambient padding must be separated from the endpoint
+principal-angle data. Controlled phase estimation on \(W\) estimates the
+principal angles when coherent reflection access and adequate state preparation
+or sampling are available. This is a protocol for reading the existing
+operator package. It is not a new invariant and not a universal Hamiltonian
+model for arbitrary jet families.
+
+\begin{gap}[GAP-7A: beyond reflection access]
+The reflection protocol is natural in quantum algorithmic settings with
+coherent membership tests, code-space reflections, symmetry-sector reflections,
+or phase-kickback access. It may be too strong for arbitrary jet-derived
+subspaces. A stronger physics paper should find a concrete Hamiltonian,
+measurement, or response model where the same principal angles arise without
+assuming arbitrary projector reflections.
+\end{gap}
+
+\section{Benchmark families}
+
+The theory is not only a no-go theorem. The surviving subspace data can be
+richer than endpoint overlap.
+
+\subsection{Oscillator sanity check}
+
+For the harmonic-oscillator ground state
+\[
+        \psi_\omega(x)=
+        \left(\frac{\omega}{\pi}\right)^{1/4}e^{-\omega x^2/2},
+        \qquad \omega>0,
+\]
+the same-point first-jet block in the \(\omega\)-coordinate is
+\[
+        M(\omega)=
+        \begin{pmatrix}
+        1&0\\
+        0&\frac{1}{8\omega^2}
+        \end{pmatrix}.
+\]
+The endpoint overlap is
+\[
+        I(\omega_-,\omega_+)=
+        \frac{\sqrt2(\omega_-\omega_+)^{1/4}}
+             {\sqrt{\omega_-+\omega_+}}.
+\]
+The raw first-jet blocks change under the squeeze parameter
+\(r=\frac12\log\omega\), but the bilaterally whitened first-jet block stays
+unchanged in this benchmark. Its singular values collapse to a function of
+overlap alone, so the oscillator is a sanity check rather than a
+richer-than-overlap example.
+
+\subsection{Qutrit polynomial curve}
+
+Consider
+\[
+        \psi(t)=\frac{(1,t,t^2)^T}{\sqrt{1+t^2+t^4}}.
+\]
+Writing
+\[
+        D(t)=1+t^2+t^4,\qquad J(t)=1+4t^2+t^4,
+\]
+the identity-transport representative of the first-horizontal whitened block is
+\[
+\Omega(u,v)=
+\begin{pmatrix}
+\frac{1+uv+u^2v^2}{\sqrt{D(u)D(v)}} &
+\frac{(u-v)(1+2v^2+2uv+uv^3)}{\sqrt{D(u)D(v)J(v)}}\\[1.2ex]
+\frac{(v-u)(1+2u^2+2uv+u^3v)}{\sqrt{D(u)D(v)J(u)}} &
+\frac{1-u^4-v^4+5uv+4u^3v+4uv^3+5u^3v^3+u^4v^4}
+{\sqrt{D(u)D(v)J(u)J(v)}}
+\end{pmatrix}.
+\]
+Its singular values are \(1\) and
+\[
+        \frac{|1+4uv+u^2v^2|}
+        {\sqrt{(1+4u^2+u^4)(1+4v^2+v^4)}}.
+\]
+The pairs
+\[
+        (u,v)=\left(-5,\frac65\right),
+        \qquad
+        (u',v')=\left(-\frac52,-\frac35\right)
+\]
+have the same overlap
+\[
+        I(u,v)=I(u',v')=\frac{25\sqrt{39}}{273},
+\]
+but different second singular values. Thus the first-order endpoint geometry
+sees more than ordinary overlap in this benchmark.
+
+\subsection{\texorpdfstring{Quartit cubic and \(O_2\)}{Quartit cubic and O2}}
+
+For
+\[
+        \psi(t)=\frac{(1,t,t^2,t^3)^T}
+        {\sqrt{1+t^2+t^4+t^6}},
+\]
+the ambient second osculating space is a varying \(3\)-plane in \(\R^4\), with
+normal
+\[
+        n(t)=(-t^3,3t^2,-3t,1)^T.
+\]
+The surviving ambient singular values are
+\[
+        1,\qquad 1,\qquad
+        \frac{|1+9uv+9u^2v^2+u^3v^3|}
+        {\sqrt{(1+9u^2+9u^4+u^6)(1+9v^2+9v^4+v^6)}}.
+\]
+There are endpoint pairs with the same overlap and different final singular
+value.
+
+The value-channel-free side is more informative. For
+\[
+        O_2(t)=\Span\{j_1(t),j_2(t)\},
+\]
+the principal-angle cosines of \(O_2(u)\) and \(O_2(v)\) are the singular
+values of
+\[
+M_{O_2}(u,v)=
+\begin{pmatrix}
+\frac{1+uv+u^2v^2+u^3v^3}{\sqrt{D_4(u)D_4(v)}} &
+\frac{(u-v)^3}{\sqrt{D_4(u)N_4(v)}}\\[1.2ex]
+-\frac{(u-v)^3}{\sqrt{N_4(u)D_4(v)}} &
+\frac{1+9uv+9u^2v^2+u^3v^3}{\sqrt{N_4(u)N_4(v)}}
+\end{pmatrix},
+\]
+where
+\[
+        D_4(t)=1+t^2+t^4+t^6,\qquad
+        N_4(t)=1+9t^2+9t^4+t^6.
+\]
+On this benchmark \(O_2\) is strictly finer than \(A_2\): the ambient invariant
+keeps only the product of the two \(O_2\) singular values, while \(O_2\) keeps
+both.
+
+\subsection{Veronese family}
+
+Let
+\[
+        v_n(t)=(1,t,\ldots,t^n).
+\]
+At top order \(r=n-1\), the ambient osculating subspace is a codimension-one
+hyperplane. Its normal is the coefficient vector of \((x-t)^n\). Therefore the
+single nontrivial principal-angle cosine is the normalized binomial-square
+polynomial in \(uv\). For every \(n\ge2\), this quantity is generically not a
+function of endpoint overlap alone.
+
+On the value-channel-free side, \(O_{n-1}\) has a codimension-two complement
+description. The corresponding \(2\times2\) complement matrix recovers the
+qutrit \(O_1\) and quartit \(O_2\) cases and is generically richer than overlap.
+Lower-order \(r<n-1\) complements are known structurally, but closed spectral
+formulas are not yet part of the paper.
+
+\subsection{Spherical twist family}
+
+The phenomenon is not confined to polynomial curves. For
+\[
+        \psi_k(t)=(\cos t\cos kt,\cos t\sin kt,\sin t),
+        \qquad k\ge2,
+\]
+there are exact equal-overlap endpoint pairs with different \(A_1\) and \(O_1\)
+principal-angle data. For \(k=2\), the pairs \((0,\pi/4)\) and \((0,\pi/2)\)
+both have overlap \(0\), but the corresponding \(A_1\) and \(O_1\) angle data
+differ.
+
+\subsection{\texorpdfstring{Finite-jet genericity for \(O_1\)}{Finite-jet genericity for O1}}
+
+The examples above have a local generic mechanism. For normalized real \(C^2\)
+curves in finite dimension at least \(3\), fix two distinct parameter values
+with nonzero endpoint velocities. Define
+\[
+        I(u,v)=\langle\psi(u),\psi(v)\rangle,\qquad
+        T(t)=\frac{\psi'(t)}{\|\psi'(t)\|},\qquad
+        C(u,v)=\langle T(u),T(v)\rangle .
+\]
+On a branch where \(C\ne0\), the first value-channel-free line-angle observable
+is locally independent of overlap whenever
+\[
+        \det\frac{\partial(I,C)}{\partial(u,v)}\ne0.
+\]
+After clearing the nonzero velocity denominators, this determinant is a
+polynomial in the endpoint \(2\)-jets and is not identically zero on the
+admissible jet chart. Thus nonvanishing is an open dense finite-jet condition.
+Consequently, for smooth curve families whose endpoint \(2\)-jet map is
+submersive onto such a chart, and for real-analytic families where the pulled
+back determinant is not identically zero, there is an open dense locus where the
+\(O_1\) line-angle data is not locally determined by overlap alone.
+
+\begin{gap}[GAP-8A: higher-order genericity]
+The finite-jet theorem is first-order and value-channel-free. A stronger paper
+would prove generic richer-than-overlap behavior for higher \(O_r\) and \(A_r\)
+principal-angle spectra, and would identify the sharp dimension and regularity
+hypotheses.
+\end{gap}
+
+\begin{gap}[GAP-8B: lower-order Veronese spectra]
+The lower-order Veronese complement spaces have structural descriptions, but
+closed or conceptual formulas for their full principal-angle spectra remain to
+be written. This is a concrete algebraic target for the next research cycle.
+\end{gap}
+
+\section{Limits and research program}
+
+The theory has a clean core and clear boundaries.
+
+\begin{enumerate}
+\item It does not produce a canonical full matrix from higher jets. It explains
+why such a matrix is absent without extra frame-selecting structure.
+\item It does not give endpoint-independent Kato transport in nonzero
+curvature. Kato transport is pathwise.
+\item It does not choose principal frames in repeated-spectrum sectors.
+\item It does not yet supply a physics case study where higher osculating
+subspace angles reveal a new material, algorithmic, or dynamical effect beyond
+known QGT/fidelity diagnostics.
+\end{enumerate}
+
+The next research program is therefore concrete.
+
+\begin{gap}[GAP-10A: physics case study]
+Find a concrete quantum system where the \(O_r/A_r\) principal-angle package
+reveals information not visible to ordinary overlap, fidelity susceptibility,
+or the first-order quantum geometric tensor. Candidate settings include Bloch
+state families, flat-band geometry, topological phase boundaries, variational
+ansatz manifolds, and Krylov dynamics.
+\end{gap}
+
+\begin{gap}[GAP-10B: mixed states and degenerate bands]
+Extend, or sharply fail to extend, the osculating-subspace package to density
+matrices, purification bundles, or degenerate Bloch bands. This must be compared
+with non-Abelian quantum geometry and Wilczek-Zee transport before any novelty
+claim is made.
+\end{gap}
+
+\begin{gap}[GAP-10C: numerical invariant library]
+Build a stable numerical pipeline that takes a sampled state family, estimates
+the \(O_r\) and \(A_r\) endpoint subspaces, and computes principal-angle spectra
+with conditioning diagnostics. This would turn the theory into a usable
+diagnostic tool.
+\end{gap}
+
+\section{Conclusion}
+
+The attempted higher-order matrix generalization of the quantum geometric
+tensor fails for principled reasons. Higher projected jets mix by non-unitary
+triangular laws under phase and coordinate changes, so raw matrix entries are
+not canonical. The failure identifies the correct invariant object: the
+osculating subspace filtration and the endpoint principal-angle/operator
+package.
+
+This object is mathematically rigid. Its frame matrices form a biunitary orbit,
+its singular values are principal-angle cosines, its polar factor is canonical
+on the nonzero-overlap sector, and its finite-dimensional classification is the
+CS decomposition. It is also useful: explicit benchmarks show it can distinguish
+endpoint pairs with the same ordinary overlap, and coherent alternating
+reflections read it under standard access assumptions.
+
+The remaining work is not to force a noncanonical matrix into the theory. It is
+to use the canonical subspace/operator package in serious physics examples.
+
+\section*{Provenance note}
+
+This draft is assembled from the working note, the paper skeleton, and the
+reports in the active quantum team directory. The most important deposits are
+the reports on the first-order QGT bridge, the higher-jet no-go, covariant jets,
+the endpoint operator package, biunitary matrix finality, the reflection
+protocol, and nonbenchmark genericity.
+
+\end{document}

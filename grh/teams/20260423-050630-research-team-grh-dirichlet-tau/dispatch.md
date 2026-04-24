@@ -155,3 +155,14 @@ Ground truth: produce an exact one-zero proof/counterexample, a script-backed
 few-zero counterexample, or a sharply scoped stability condition. Determinant
 gap failure is a useful negative; determinant gap success still needs
 adversarial verification before any UV-017 promotion.
+
+## Follow-up scaled one-zero attack 20260424-2032
+
+Base commit: `92ec379`.
+
+Noether (`019dbf02-0a72-7c51-8106-50d5e29b27fa`) is redelegated inside
+`agents/20260424-192025-gap-uv017-coefficient-freeze/` to analyze
+\(\mathcal D[\lambda K_{\beta,\gamma}]\), especially \(\lambda=2\), after the
+unscaled one-zero route failed. Ground truth: exact algebra or a reproducible
+script-backed counterexample/threshold for scaled one-zero positivity. Deposit
+target: `report-uv017-scaled-one-zero-determinant-gap.md`.

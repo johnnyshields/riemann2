@@ -1,0 +1,740 @@
+\documentclass[11pt,a4paper]{amsart}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
+\usepackage[margin=1in]{geometry}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
+\newtheorem{gap}[theorem]{GAP}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\RH}{\mathrm{RH}}
+\newcommand{\GRH}{\mathrm{GRH}}
+\newcommand{\ERH}{\mathrm{ERH}}
+\newcommand{\Real}{\operatorname{Re}}
+\newcommand{\Imag}{\operatorname{Im}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\pair}{\mathrm{pair}}
+\newcommand{\comp}{\mathrm{comp}}
+\newcommand{\raw}{\mathrm{raw}}
+\newcommand{\val}{\mathrm{val}}
+\newcommand{\corr}{\mathrm{corr}}
+\newcommand{\rem}{\mathrm{rem}}
+\newcommand{\bg}{\mathrm{bg}}
+\newcommand{\loc}{\mathrm{loc}}
+\newcommand{\calF}{\mathcal F}
+\newcommand{\calC}{\mathcal C}
+\newcommand{\C}{\mathbb C}
+\newcommand{\R}{\mathbb R}
+
+\title{A Paired Dirichlet Source Package and the GRH Transfer Skeleton}
+\author{Working draft}
+\date{April 2026}
+
+\subjclass[2020]{11M06, 11M26, 11M35}
+\keywords{Dirichlet \(L\)-functions, generalized Riemann hypothesis,
+completed \(L\)-functions, source package, local transfer}
+
+\begin{document}
+
+\begin{abstract}
+This is a proof skeleton for the GRH transfer program suggested by the current
+RH manuscript and the GRH Dirichlet-tau research cycle.  The paper separates
+three layers.  First, it proves a completed-Hadamard source package for
+primitive nonprincipal Dirichlet pairs, in the normalization currently cleared
+by the verifier lane.  Second, it records the local source-to-slot mechanism
+as a conditional theorem whose missing input is the paired unit-coordinate
+local normal form.  Third, it states the formal GRH-family transfer theorem
+with every currently missing analytic or local step marked as a GAP.  The
+zeta-specific source theorem is treated as an input from the RH manuscript,
+not reproved here.
+\end{abstract}
+
+\maketitle
+\tableofcontents
+
+\section{Introduction}
+
+The target of this draft is not to claim \(\GRH\).  The target is to make the
+current proof shape editable: every claimed step is written as a theorem or a
+lemma, and every missing step is marked as a GAP with its current UV label.
+
+The message is the following.  The RH manuscript appears to contain a local
+phase, jet, whitening, and odd-projector package which is largely independent
+of zeta once a source scalar has been supplied.  The first non-zeta source
+target is the primitive Dirichlet pair
+\[
+  \Xi_\chi(s):=\Lambda(s,\chi)\Lambda(s,\overline\chi),
+  \qquad
+  \Phi_\chi^{\pair}(s):=\frac{\Xi_\chi(2s-1)}{\Xi_\chi(2s)}.
+\]
+For this object, the completed-zero source package can be written cleanly on
+regular compact boundary intervals.  The remaining obstruction is not the
+source sign or a hidden factor of \(2\).  It is the local normal-form question:
+does the paired local block use the same scalar as its zeroth value
+coordinate?
+
+\subsection{What this draft proves}
+
+The unconditional theorem in this draft is the completed paired source package
+for primitive nonprincipal characters; see Theorem~\ref{thm:paired-source}.
+It proves the sign-audited identity
+\[
+  q_\chi^{\pair}(t)
+  =
+  \Real\sum_{\rho\in Z(\Xi_\chi)}
+  m_\rho
+  \left(
+    \frac{1}{1+2it-\rho}
+    -
+    \frac{1}{2it-\rho}
+  \right)
+\]
+on regular compact intervals, with the completed-Hadamard normalization
+\[
+  B_{\chi,\comp}^{\pair}=0,
+  \qquad
+  S_{\chi,\comp}^{\pair}=q_\chi^{\pair}.
+\]
+
+\subsection{What this draft does not prove}
+
+This draft does not prove \(\GRH\), \(\ERH\), or a tau-family analogue.  Those
+statements require the source-to-slot, odd/transverse, remainder, and final
+contradiction layers listed in Sections~\ref{sec:slot}--\ref{sec:transfer}.
+They are recorded as GAPs rather than hidden in prose.
+
+\section{The zeta-side input}
+\label{sec:zeta-input}
+
+The zeta case is treated as special in this paper.  The RH manuscript is the
+place where the zeta source theorem, local slot theorem, odd transverse
+package, and final contradiction are meant to be proved.  This draft only
+records the interface required from that manuscript.
+
+\begin{hypothesis}[Zeta source interface]
+\label{hyp:zeta-source}
+Let
+\[
+  \phi_\zeta(s)=\frac{\Lambda_\zeta(2s-1)}{\Lambda_\zeta(2s)}.
+\]
+On each regular compact boundary interval, the RH manuscript supplies a
+phase convention, a source derivative \(q_\zeta\), a background term
+\(B_\zeta\), and a positive strip-edge source scalar \(S_\zeta\) such that
+\[
+  q_\zeta(t)=B_\zeta(t)+S_\zeta(t).
+\]
+The source scalar is the same scalar that enters the RH local value slot.
+\end{hypothesis}
+
+\begin{gap}[UV-019: zeta source theorem]
+\label{gap:zeta-source}
+The canonical zeta source theorem for \(q_\zeta\), \(B_\zeta\), and
+\(S_\zeta\) is delegated to the RH paper.  The GRH transfer draft should not
+reprove it and should not use it without the phase convention, compact
+summation, background naming, and multiplicity convention fixed there.
+\end{gap}
+
+\section{Primitive Dirichlet completed functions}
+\label{sec:dirichlet-input}
+
+Let \(\chi\) be a primitive nonprincipal Dirichlet character modulo \(r\), and
+put
+\[
+  a_\chi:=\frac{1-\chi(-1)}{2}.
+\]
+We use the completed \(L\)-function normalization
+\[
+  \Lambda(s,\chi)
+  :=
+  \left(\frac{r}{\pi}\right)^{(s+a_\chi)/2}
+  \Gamma\!\left(\frac{s+a_\chi}{2}\right)L(s,\chi).
+\]
+
+\begin{proposition}[Standard completed Dirichlet input]
+\label{prop:standard-input}
+For primitive nonprincipal \(\chi\), the completed function
+\(\Lambda(s,\chi)\) is entire of order at most one and satisfies the standard
+primitive functional equation relating \(\chi\) and \(\overline\chi\).  The
+paired product
+\[
+  \Xi_\chi(s):=\Lambda(s,\chi)\Lambda(s,\overline\chi)
+\]
+is entire of order at most one.  Its zeros carry analytic multiplicities, and
+the nonzero zeros satisfy
+\[
+  \sum_{\rho\neq 0}m_\rho |\rho|^{-2}<\infty.
+\]
+\end{proposition}
+
+\begin{proof}
+The continuation, primitive functional equation, trivial-zero locations, and
+\(L(1,\chi)\neq 0\) input are the standard Dirichlet \(L\)-function facts,
+for example in DLMF Section~25.15.  The displayed completed normalization is
+obtained from the primitive functional equation by the parity choice
+\(a_\chi=(1-\chi(-1))/2\).  The gamma poles are cancelled by the corresponding
+trivial zeros, so the completed primitive nonprincipal function is entire.
+
+For this working draft, the order-one input is taken in the standard bounded
+form: combine the DLMF growth formulae for \(L(s,\chi)\), the primitive
+functional equation, and Stirling's formula for \(\Gamma\).  This gives finite
+order at most one for \(\Lambda(s,\chi)\), hence also for
+\(\Xi_\chi\).  Hadamard factorization for entire functions of finite order then
+gives a genus-one product, analytic zero multiplicities, and the summability
+\(\sum m_\rho|\rho|^{-2}<\infty\).  A final publication draft should replace
+this paragraph by exact textbook page or theorem references.
+\end{proof}
+
+\begin{gap}[Bibliography upgrade for Proposition~\ref{prop:standard-input}]
+\label{gap:bibliography}
+The working citation stack is DLMF Section~25.15, DLMF Section~5.11 for
+Stirling, and a standard Hadamard factorization theorem such as Conway,
+Chapter XI, Section~3.  A final draft should verify exact Davenport or
+Montgomery--Vaughan page and equation references.
+\end{gap}
+
+\section{The completed paired source package}
+\label{sec:source}
+
+\begin{definition}[Paired quotient]
+For primitive nonprincipal \(\chi\), define
+\[
+  \Phi_\chi^{\pair}(s)
+  :=
+  \frac{\Xi_\chi(2s-1)}{\Xi_\chi(2s)}.
+\]
+Let \(I\subset \R\) be compact and assume that
+\[
+  2it\notin Z(\Xi_\chi),
+  \qquad
+  1+2it\notin Z(\Xi_\chi)
+\]
+for every \(t\in I\).  Such an interval is called regular.
+\end{definition}
+
+\begin{definition}[Boundary phase and source derivative]
+\label{def:boundary-phase}
+On a regular compact interval \(I\), choose a real \(C^1\) boundary phase
+\(\Theta_\chi^{\pair}\) by
+\[
+  \Phi_\chi^{\pair}\!\left(\frac12+it\right)
+  =
+  e^{-2i\Theta_\chi^{\pair}(t)}.
+\]
+Set
+\[
+  q_\chi^{\pair}(t):=
+  \Theta_\chi^{\pair\,\prime}(t).
+\]
+\end{definition}
+
+\begin{lemma}[Sign bridge]
+\label{lem:sign-bridge}
+On a regular compact interval,
+\[
+  q_\chi^{\pair}(t)
+  =
+  -\frac12
+  \frac{\Phi_\chi^{\pair\,\prime}}{\Phi_\chi^{\pair}}
+  \!\left(\frac12+it\right).
+\]
+Equivalently, if
+\[
+  D_\chi(t):=
+  \frac{\Xi_\chi'}{\Xi_\chi}(1+2it)
+  -
+  \frac{\Xi_\chi'}{\Xi_\chi}(2it),
+\]
+then \(q_\chi^{\pair}(t)=D_\chi(t)\).  In particular \(D_\chi(t)\) is real on
+the chosen boundary branch.
+\end{lemma}
+
+\begin{proof}
+Differentiate
+\[
+  \Phi_\chi^{\pair}\!\left(\frac12+it\right)
+  =
+  e^{-2i\Theta_\chi^{\pair}(t)}
+\]
+with respect to \(t\).  Since \(s=1/2+it\), the left side contributes
+\[
+  i\frac{\Phi_\chi^{\pair\,\prime}}{\Phi_\chi^{\pair}}
+  \!\left(\frac12+it\right),
+\]
+while the right side contributes \(-2i\Theta_\chi^{\pair\,\prime}(t)\).  Hence
+\[
+  \frac{\Phi_\chi^{\pair\,\prime}}{\Phi_\chi^{\pair}}
+  \!\left(\frac12+it\right)
+  =
+  -2q_\chi^{\pair}(t).
+\]
+The chain rule for
+\(\Phi_\chi^{\pair}(s)=\Xi_\chi(2s-1)/\Xi_\chi(2s)\) gives
+\[
+  \frac{\Phi_\chi^{\pair\,\prime}}{\Phi_\chi^{\pair}}(s)
+  =
+  2\frac{\Xi_\chi'}{\Xi_\chi}(2s-1)
+  -
+  2\frac{\Xi_\chi'}{\Xi_\chi}(2s).
+\]
+Putting \(s=1/2+it\) yields
+\[
+  -\frac12
+  \frac{\Phi_\chi^{\pair\,\prime}}{\Phi_\chi^{\pair}}
+  \!\left(\frac12+it\right)
+  =
+  \frac{\Xi_\chi'}{\Xi_\chi}(1+2it)
+  -
+  \frac{\Xi_\chi'}{\Xi_\chi}(2it)
+  =
+  D_\chi(t).
+\]
+\end{proof}
+
+\begin{theorem}[Completed paired source package]
+\label{thm:paired-source}
+Let \(\chi\) be primitive nonprincipal, and let \(I\subset\R\) be a regular
+compact interval.  Then
+\[
+  q_\chi^{\pair}(t)
+  =
+  \Real\sum_{\rho\in Z(\Xi_\chi)}
+  m_\rho
+  \left(
+    \frac{1}{1+2it-\rho}
+    -
+    \frac{1}{2it-\rho}
+  \right),
+  \qquad t\in I,
+\]
+where the sum runs over distinct completed zeros of \(\Xi_\chi\), and
+\(m_\rho\) is analytic multiplicity in
+\(\Xi_\chi=\Lambda(\cdot,\chi)\Lambda(\cdot,\overline\chi)\).  The series
+converges absolutely and uniformly on \(I\), and the same is true after any
+fixed number of \(t\)-derivatives.
+
+Thus, in completed-Hadamard normalization,
+\[
+  q_{\chi,\comp}^{\pair}(t)
+  =
+  B_{\chi,\comp}^{\pair}(t)
+  +
+  S_{\chi,\comp}^{\pair}(t),
+  \qquad
+  B_{\chi,\comp}^{\pair}(t)=0,
+\]
+with
+\[
+  S_{\chi,\comp}^{\pair}(t)
+  :=
+  \Real\sum_{\rho\in Z(\Xi_\chi)}
+  m_\rho
+  \left(
+    \frac{1}{1+2it-\rho}
+    -
+    \frac{1}{2it-\rho}
+  \right).
+\]
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{prop:standard-input}, \(\Xi_\chi\) is entire of order at
+most one.  On any simply connected region avoiding its zeros, the genus-one
+Hadamard product gives the logarithmic derivative in the form
+\[
+  \frac{\Xi_\chi'}{\Xi_\chi}(w)
+  =
+  b_\chi+
+  \sum_{\rho\in Z(\Xi_\chi)}
+  m_\rho
+  \left(
+    \frac{1}{w-\rho}+\frac{1}{\rho}
+  \right),
+\]
+with locally uniform convergence after the usual regularization.  If a zero at
+\(\rho=0\) is admitted by a broader convention, it is separated as a finite
+factor.  In the primitive nonprincipal setting used here, the boundary edge
+points in \(I\) avoid zeros by regularity.
+
+Take the edge difference at \(w=1+2it\) and \(w=2it\).  The constant
+\(b_\chi\) cancels, and the regularizing \(1/\rho\) terms cancel term by term.
+Hence
+\[
+  D_\chi(t)
+  =
+  \sum_{\rho\in Z(\Xi_\chi)}
+  m_\rho
+  \left(
+    \frac{1}{1+2it-\rho}
+    -
+    \frac{1}{2it-\rho}
+  \right).
+\]
+For \(t\in I\), regularity gives a positive distance from the two moving edge
+points to the zero set.  For large \(|\rho|\), each summand is
+\[
+  O_I(|\rho|^{-2}),
+\]
+because it is the difference of two resolvents whose arguments differ by
+\(1\).  The zero summability from Proposition~\ref{prop:standard-input} then
+gives absolute and uniform convergence on \(I\).  After \(k\) derivatives in
+\(t\), the summand is a constant multiple of the difference of two
+\((k+1)\)-st powers of the same resolvents, hence is
+\(O_{I,k}(|\rho|^{-k-2})\).  This proves uniform convergence after every fixed
+number of derivatives.
+
+By Lemma~\ref{lem:sign-bridge}, \(q_\chi^{\pair}=D_\chi\), and the boundary
+phase makes this quantity real.  Keeping \(\Real\) in the display records the
+scalar source identity.  Since the completed-zero theorem already sums every
+completed zero of \(\Xi_\chi\) with analytic multiplicity, there is no further
+completed background term.  This is exactly
+\(B_{\chi,\comp}^{\pair}=0\).
+\end{proof}
+
+\begin{remark}[Raw \(L\)-factor bookkeeping]
+The theorem uses completed zeros of
+\(\Xi_\chi\).  In this normalization there is no additional gamma,
+trivial-zero, pole, conductor, or Hadamard-exponential background term.  If one
+rewrites the same identity using raw zeros of \(L(s,\chi)\) and
+\(L(s,\overline\chi)\), those raw background pieces must be placed in a
+separate raw bookkeeping term.  They must not be added to
+Theorem~\ref{thm:paired-source}.
+\end{remark}
+
+\begin{gap}[UV-016: final promotion bookkeeping]
+\label{gap:uv016}
+The mathematical wording of Theorem~\ref{thm:paired-source} follows the
+verifier-cleared staged source theorem.  The remaining UV-016 work for a final
+paper is bibliographic polish and any decision about whether to keep the
+completed normalization \(B_{\chi,\comp}^{\pair}=0\) as the main theorem or add
+a separate raw-normalization corollary.
+\end{gap}
+
+\begin{gap}[UV-021: sign convention installed here]
+\label{gap:uv021}
+The sign convention is installed in Definition~\ref{def:boundary-phase} and
+Lemma~\ref{lem:sign-bridge}: fixed quotient, negative boundary exponent,
+\(q=\Theta'\), and
+\[
+  q_\chi^{\pair}
+  =
+  -\frac12
+  (\Phi_\chi^{\pair\,\prime}/\Phi_\chi^{\pair})(1/2+it).
+\]
+Older positive-exponent text should be treated as obsolete unless the quotient
+is inverted or \(q\) is redefined.
+\end{gap}
+
+\section{The source-to-slot layer}
+\label{sec:slot}
+
+The source package is not yet a \(\GRH\) theorem.  It must feed the same local
+value channel used by the RH manuscript.  The following theorem records the
+exact conditional mechanism.
+
+\begin{hypothesis}[Paired unit-coordinate local chart]
+\label{hyp:unit-coordinate}
+For each \(m\in I\), the corrected paired local block is represented near the
+background by a holomorphic map
+\[
+  \calF_{\chi,m,\sigma}(a,\eta),
+\]
+where \(a\) is the zeroth value coordinate
+\[
+  a=q_\chi^{\pair}(m)-B_\chi^{\pair}(m)
+\]
+and \(\eta\) contains all non-value local coordinates: derivative, mixed-jet,
+curvature, background, cutoff, correction, multiplicity, and normalization
+data.  In the completed normalization of Theorem~\ref{thm:paired-source},
+\[
+  a=S_{\chi,\comp}^{\pair}(m)=q_\chi^{\pair}(m).
+\]
+The pure value path is
+\[
+  (a,\eta)=(\alpha,\eta_0),
+\]
+so all non-value coordinates are frozen.
+\end{hypothesis}
+
+\begin{hypothesis}[Holomorphic whitening]
+\label{hyp:whitening}
+The corrected paired same-point and mixed blocks are holomorphic in
+\((a,\eta)\) near the background, the same-point blocks are positive and
+nondegenerate there, and the inverse-square-root whitening map is holomorphic.
+\end{hypothesis}
+
+\begin{theorem}[Conditional paired source-to-slot realization]
+\label{thm:conditional-slot}
+Assume Theorem~\ref{thm:paired-source},
+Hypothesis~\ref{hyp:unit-coordinate}, and
+Hypothesis~\ref{hyp:whitening}.  Define
+\[
+  A_{\val,\chi}^{\pair}(m,\sigma)
+  :=
+  \partial_a\calF_{\chi,m,\sigma}(0,\eta_0)
+\]
+and
+\[
+  R_\chi^{\pair}(m,\sigma)
+  :=
+  \calF_{\chi,m,\sigma}
+  \bigl(S_{\chi,\comp}^{\pair}(m),\eta_\chi(m)\bigr)
+  -
+  \calF_{\chi,m,\sigma}(0,\eta_0)
+  -
+  S_{\chi,\comp}^{\pair}(m)
+  A_{\val,\chi}^{\pair}(m,\sigma).
+\]
+Then
+\[
+  \Delta_\chi^{\pair}(m,\sigma)
+  =
+  S_{\chi,\comp}^{\pair}(m)
+  A_{\val,\chi}^{\pair}(m,\sigma)
+  +
+  R_\chi^{\pair}(m,\sigma).
+\]
+Moreover, along the pure value path the remainder has zero first derivative
+after subtracting the value term:
+\[
+  \left.
+  \frac{\partial}{\partial \alpha}
+  \left(
+    \calF_{\chi,m,\sigma}(\alpha,\eta_0)
+    -
+    \calF_{\chi,m,\sigma}(0,\eta_0)
+    -
+    \alpha A_{\val,\chi}^{\pair}(m,\sigma)
+  \right)
+  \right|_{\alpha=0}
+  =
+  0.
+\]
+\end{theorem}
+
+\begin{proof}
+This is the local algebra of a holomorphic coordinate chart.  By
+Hypothesis~\ref{hyp:unit-coordinate}, the source scalar from
+Theorem~\ref{thm:paired-source} is the value coordinate \(a\).  By
+Hypothesis~\ref{hyp:whitening}, the corrected whitened block is holomorphic in
+that coordinate and in the frozen non-value coordinates.  The pure value
+derivative at the background is therefore
+\[
+  \partial_a\calF_{\chi,m,\sigma}(0,\eta_0)
+  =
+  A_{\val,\chi}^{\pair}(m,\sigma).
+\]
+The displayed definition of \(R_\chi^{\pair}\) is then an identity.  The last
+display follows by differentiating the same expression along
+\((a,\eta)=(\alpha,\eta_0)\) at \(\alpha=0\).  The proof is non-tautological
+only because the value coordinate was fixed before \(R_\chi^{\pair}\) was
+defined.
+\end{proof}
+
+\begin{corollary}[No hidden scalar if the tested value derivative is nonzero]
+\label{cor:no-hidden-scalar}
+Assume the hypotheses of Theorem~\ref{thm:conditional-slot} and suppose the
+tested value derivative \(A_{\val,\chi}^{\pair}(m,\sigma)\) is nonzero in the
+slot under consideration.  A replacement
+\[
+  c_\chi(m)S_{\chi,\comp}^{\pair}(m)
+\]
+can satisfy the same pure value derivative test only if \(c_\chi(m)=1\).
+\end{corollary}
+
+\begin{proof}
+If the coordinate were
+\[
+  a=c_\chi(m)S_{\chi,\comp}^{\pair}(m)+O(S^2),
+\]
+then the first derivative of the pure value path with respect to the source
+scalar would be
+\[
+  c_\chi(m)A_{\val,\chi}^{\pair}(m,\sigma).
+\]
+Equality with the unit coefficient derivative from
+Theorem~\ref{thm:conditional-slot} forces \(c_\chi(m)=1\) when the tested
+derivative is nonzero.
+\end{proof}
+
+\begin{gap}[UV-017: paired unit-coordinate normal form]
+\label{gap:uv017}
+The missing proof is Hypothesis~\ref{hyp:unit-coordinate}.  One must construct
+the paired corrected local blocks from the same boundary phase
+\(\Theta_\chi^{\pair}\) and prove that their zeroth coordinate is exactly
+\[
+  q_\chi^{\pair}(m)-B_\chi^{\pair}(m),
+\]
+not \(c_\chi(m)(q-B)\) and not an upstairs-only surrogate.  The paired
+holomorphic-whitening hypotheses and the scalar readout normalization also
+belong to UV-017 unless the theorem is deliberately stated with them as
+assumptions.
+\end{gap}
+
+\section{Odd/transverse and remainder layers}
+\label{sec:odd}
+
+The RH manuscript also uses a corrected odd transverse scalar, boundary
+control, and an \(N\)-point odd-moment projector.  The paired Dirichlet source
+package does not supply these ingredients.
+
+\begin{hypothesis}[Odd/transverse package]
+\label{hyp:odd}
+For the family under consideration, the corrected local source-to-slot block
+produces an odd holomorphic transverse germ with the same kind of boundary
+control used in the RH manuscript.  The discrete \(N\)-point odd projector
+annihilates the lower odd jets and leaves only the controlled high-order
+transverse tail.
+\end{hypothesis}
+
+\begin{hypothesis}[Remainder dominance]
+\label{hyp:remainder}
+The local remainder \(R_\chi^{\pair}\) is smaller than the leading value-channel
+term in the calibrated regime required by the RH contradiction argument.
+\end{hypothesis}
+
+\begin{gap}[UV-018: corrected odd/transverse realization]
+\label{gap:uv018}
+The corrected odd transverse scalar, boundary estimate, and \(N\)-point
+projector input have not been constructed for primitive Dirichlet pairs.  This
+is downstream from UV-017 and should not be folded into the source theorem.
+\end{gap}
+
+\begin{gap}[Remainder dominance]
+\label{gap:remainder}
+The current GRH team ledger does not yet close the paired remainder dominance
+needed to compare the leading value term with the transverse/projected error
+terms.  This is a separate analytic estimate, not a source-normalization
+problem.
+\end{gap}
+
+\section{Formal transfer theorem}
+\label{sec:transfer}
+
+This section states the paper's long target in a form that can be revised as
+gaps close.
+
+\begin{hypothesis}[RH local contradiction template]
+\label{hyp:rh-template}
+The RH manuscript supplies the following local contradiction template.  If a
+family has:
+\begin{enumerate}
+\item a source scalar occupying the exact local value slot;
+\item holomorphic whitening and same-point positivity;
+\item odd/transverse realization and boundary control;
+\item remainder dominance in the calibrated regime;
+\item the same off-line toy anomaly comparison;
+\end{enumerate}
+then an off-line zero in that family produces an incompatible transverse local
+configuration.
+\end{hypothesis}
+
+\begin{theorem}[Conditional primitive Dirichlet GRH transfer]
+\label{thm:conditional-grh}
+Let \(\chi\) be primitive nonprincipal.  Assume the completed paired source
+package of Theorem~\ref{thm:paired-source}, the paired source-to-slot
+realization of Theorem~\ref{thm:conditional-slot}, the odd/transverse package
+Hypothesis~\ref{hyp:odd}, the remainder dominance
+Hypothesis~\ref{hyp:remainder}, and the RH local contradiction template
+Hypothesis~\ref{hyp:rh-template}.  Then the paired local model admits no
+off-line zero configuration for \(L(s,\chi)\) and \(L(s,\overline\chi)\) in the
+scope covered by those hypotheses.
+\end{theorem}
+
+\begin{proof}
+Theorem~\ref{thm:paired-source} supplies the completed source scalar with the
+correct sign and normalization.  Theorem~\ref{thm:conditional-slot} identifies
+that scalar with the local value slot.  Hypothesis~\ref{hyp:odd} supplies the
+odd transverse channel and the finite projector.  Hypothesis~\ref{hyp:remainder}
+makes the residual terms subordinate to the leading calibrated comparison.
+Hypothesis~\ref{hyp:rh-template} then applies the RH manuscript's local
+contradiction argument to the paired Dirichlet local model.  Therefore the
+off-line configuration is excluded inside the stated scope.
+\end{proof}
+
+\begin{gap}[Not yet a proof of GRH]
+\label{gap:not-grh}
+Theorem~\ref{thm:conditional-grh} is conditional.  It becomes a GRH-family
+theorem only after UV-017, UV-018, remainder dominance, and the RH contradiction
+template are promoted without assumptions.
+\end{gap}
+
+\section{Tau and other families}
+\label{sec:tau}
+
+The Ramanujan tau \(L\)-function remains a useful stress test because it is
+self-dual, but the current source and local realization package is weaker than
+the paired Dirichlet package.
+
+\begin{gap}[UV-020: tau compact source and localization package]
+\label{gap:uv020}
+For tau, one still needs a compact source decomposition, microscopic
+denominator and holomorphy control, the correct block scaling hierarchy,
+whitening gain and boundary estimates, and growth bookkeeping.  This draft
+does not attempt to prove those statements.
+\end{gap}
+
+\section{Current proof ledger}
+\label{sec:ledger}
+
+\begin{itemize}
+\item Completed paired source theorem: proved for the working draft in
+Theorem~\ref{thm:paired-source}; final citation polish is
+GAP~\ref{gap:bibliography}.
+\item Paired sign convention: installed in Lemma~\ref{lem:sign-bridge};
+GAP~\ref{gap:uv021} records the obsolete convention risk.
+\item Zeta source theorem: delegated to the RH manuscript via
+Hypothesis~\ref{hyp:zeta-source} and GAP~\ref{gap:zeta-source}.
+\item Source-to-slot realization: conditional in
+Theorem~\ref{thm:conditional-slot}; the missing local normal form is
+GAP~\ref{gap:uv017}.
+\item Odd/transverse package: missing, as recorded by
+Hypothesis~\ref{hyp:odd} and GAP~\ref{gap:uv018}.
+\item Remainder dominance: missing, as recorded by
+Hypothesis~\ref{hyp:remainder} and GAP~\ref{gap:remainder}.
+\item GRH-family conclusion: conditional only; see
+Theorem~\ref{thm:conditional-grh} and GAP~\ref{gap:not-grh}.
+\item Tau: exploratory; see GAP~\ref{gap:uv020}.
+\end{itemize}
+
+\section{Provenance}
+
+This skeleton is based on the current GRH team directory under
+\path{grh/teams/}, with timestamp \path{20260423-050630} and slug
+\path{research-team-grh-dirichlet-tau}.
+The core source theorem is drawn from \path{paper-updates.md}, the compact
+regularization reports, the background-multiplicity reports, and the Sartre
+verifier reports in the same team directory.  The UV-017 reduction is drawn
+from Noether's coefficient-freeze report and its
+\path{coefficient_freeze_reduction.md} note.  The live UV references are
+UV-016 through UV-021 in \path{uv.md}.
+
+\begin{thebibliography}{9}
+
+\bibitem{DLMF25}
+NIST Digital Library of Mathematical Functions, Section 25.15,
+\emph{Dirichlet \(L\)-functions}.
+\url{https://dlmf.nist.gov/25.15}
+
+\bibitem{DLMF5}
+NIST Digital Library of Mathematical Functions, Section 5.11,
+\emph{Gamma function asymptotics}.
+\url{https://dlmf.nist.gov/5.11}
+
+\bibitem{Conway}
+J. B. Conway,
+\emph{Functions of One Complex Variable I}, second edition,
+Springer, Chapter XI, Section 3.
+
+\end{thebibliography}
+
+\end{document}

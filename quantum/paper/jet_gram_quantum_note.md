@@ -566,7 +566,8 @@ H_K(t)=i[\dot\Pi(t),\Pi(t)],
 This is the unique realizing Hamiltonian with vanishing instantaneous
 block-diagonal part relative to the moving projector. It gives a canonical
 pathwise dynamical model of the subspace path, but it is path-dependent and does
-not by itself solve the endpoint matrix-canonicity problem.
+not supply an endpoint-selected comparison matrix beyond the
+operator/principal-angle package and the biunitary-orbit boundary above.
 
 In several parameters, that path dependence has an exact curvature obstruction.
 The Kato connection on the projector bundle has curvature
@@ -695,11 +696,11 @@ two-point block stays unchanged. So the oscillator family is not only a warning
 about coordinate sensitivity; it is also evidence that whitening can remove at
 least some parameterization artifacts.
 
-At present this should be read narrowly:
+This is a benchmark instance of the general first-order reparameterization
+theorem above. It should still be read narrowly:
 
-- it is an exact fact for this benchmark;
-- it is not yet a general theorem for arbitrary one-parameter families;
-- it says nothing yet about higher jets or multiparameter families.
+- it is an oscillator stress test;
+- it says nothing about higher jets or multiparameter families.
 
 ### Qutrit
 
@@ -872,9 +873,10 @@ Safe claims:
 11. With coherent reflection access to endpoint projectors, phase estimation on
     \((2\Pi_- - I)(2\Pi_+ - I)\) gives a natural protocol for estimating the
     already-canonical principal-angle spectrum.
-12. First-order value-channel-free richer-than-overlap behavior is generic in
-    the finite-jet sense for normalized curves in dimension at least \(3\),
-    under the stated endpoint \(2\)-jet rank condition.
+12. First-order value-channel-free `O_1` richer-than-overlap behavior is
+    generic in the finite-jet sense for normalized real \(C^2\) curves in finite
+    dimension at least \(3\), with nonzero endpoint velocities and under the
+    stated endpoint \(2\)-jet rank condition.
 13. There are now explicit benchmark families on both the ambient `A_r` side and
     the value-channel-free `O_r` side where the surviving two-point data is not
     determined by overlap alone.
@@ -888,11 +890,11 @@ Unsafe claims, for now:
    forced in all roles.
 4. The construction is fundamental for quantum mechanics.
 
-## Open Problems
+## Future Extensions
 
-No open problem remains in the scoped quantum note. Stronger variants would
-require new targets, such as higher-order `O_r/A_r` genericity or a
-source-specific physical implementation of the reflection protocol.
+No scoped open problem remains in this note. Stronger variants would require
+new targets, such as higher-order `O_r/A_r` genericity or a source-specific
+physical implementation of the reflection protocol.
 
 ## Provenance
 
