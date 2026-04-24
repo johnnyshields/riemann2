@@ -31,6 +31,7 @@
 | coordinator | UV-017 | Demoted finite-\(s\) staged text to chart hypothesis/definition | keep | `paper-updates.md`; `agents/20260424-183416-verifier-slot-skeleton/report-uv017-construction-draft-audit.md` | display correction maps next | Added pathwise `S_{chi,alpha}`, baseline clause, phase-notation disambiguation, and kept remaining hypotheses explicit. |
 | Noether | UV-017 | Displayed paired finite-\(s\) `G`, `N`, and whitened block formulas as local chart package | keep | `agents/20260424-192025-gap-uv017-coefficient-freeze/report-paired-finite-s-formulas.md`; `agents/20260424-192025-gap-uv017-coefficient-freeze/notes/paired_finite_s_formula_package.md` | decide literal definition vs correction maps | Formula-display subtask closed; actual paired construction still open unless chart is adopted as definition/hypothesis. |
 | coordinator | UV-017 | Inserted paired finite-\(s\) formulas into staged chart hypothesis | keep | `paper-updates.md`; `agents/20260424-192025-gap-uv017-coefficient-freeze/report-paired-finite-s-formulas.md` | verifier pass | The staged text now displays the chart formulas; it remains a hypothesis/definition, not a construction theorem. |
+| Sartre | UV-017 | Displayed paired finite-\(s\) formulas match RH finite-\(s\) entries | keep | `agents/20260424-183416-verifier-slot-skeleton/report-uv017-finite-s-formula-audit.md` | correction-map / holomorphy attack | No entry correction needed for `G`, `N`, or whitened block; chart remains a hypothesis until actual paired construction is proved. |
 
 ## Frontier summaries
 
@@ -55,6 +56,6 @@
   UV-017 lacks paired symmetric normal form, value-parameter holomorphy, stable
   local positivity, exact freeze rules, and source-to-slot coefficient
   identification.
-- **Next:** adversarially verify the displayed paired finite-\(s\) chart
-  formulas, then decide whether to adopt them as a definition/hypothesis or
-  name correction maps.
+- **Next:** decide whether the displayed finite-\(s\) chart is adopted as the
+  paired local definition/hypothesis, or name any intended correction maps;
+  then attack holomorphy/positivity/whitening.

@@ -416,3 +416,18 @@ Capture action: inserted the displayed formulas into `paper-updates.md`,
 refined `findings.md`, UV-017, and `attempts.md`. Next move is an adversarial
 formula check and a decision whether the chart is a definition/hypothesis or
 whether correction maps must be tracked.
+
+## Sartre UV-017 Finite-\(s\) Formula Audit 20260424
+
+Report:
+`agents/20260424-183416-verifier-slot-skeleton/report-uv017-finite-s-formula-audit.md`.
+
+Verdict: keep, formula audit passed. Sartre finds the displayed paired `G`,
+`N`, and `Omega_hat` formulas faithful to the RH finite-\(s\) same-point,
+mixed, and whitening formulas. Signs, endpoint convention \(t_\pm=m\pm s/2\),
+phase-gap orientation, `q_+`/`q_-` placement, powers of `s`, global `1/pi`,
+and left/right whitening order all match. No matrix-entry correction is needed.
+
+Capture action: refined `findings.md`, UV-017, and `attempts.md`. UV-017
+remains open because the chart is still a definition/hypothesis until the
+actual paired construction, or any correction maps, are specified and checked.

@@ -136,14 +136,16 @@ is the supplied team dir unless another path is named.
   corrected blocks are given by the RH finite-\(s\) formulas with the RH phase
   function replaced by \(\Theta_\chi^{pair}\), the paired `G`, `N`, and
   whitened block formulas are displayed, and the pure value path gives
-  `da/dS|0=1`. Sartre's audit required this demotion because the actual paired
-  correction maps may still mean more than literal substitution. Holomorphy /
-  whitening, freeze-rule remainder, and scalar readout checks remain open.
-  Provenance:
+  `da/dS|0=1`. Sartre's formula audit finds no sign, endpoint, phase-gap,
+  `q_+`/`q_-`, `s`-power, `1/pi`, or whitening-order correction in those
+  displays. The actual paired correction maps may still mean more than literal
+  substitution, so holomorphy/whitening, freeze-rule remainder, and scalar
+  readout checks remain open. Provenance:
   `paper-updates.md`,
   `agents/20260424-192025-gap-uv017-coefficient-freeze/report-unit-coordinate-chart.md`,
   `agents/20260424-183416-verifier-slot-skeleton/report-uv017-construction-draft-audit.md`,
-  `agents/20260424-192025-gap-uv017-coefficient-freeze/report-paired-finite-s-formulas.md`.
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/report-paired-finite-s-formulas.md`,
+  `agents/20260424-183416-verifier-slot-skeleton/report-uv017-finite-s-formula-audit.md`.
 - **Tau is a self-dual phase-channel stress test, not the first exact `S(m)`
   target.** Tau has only a conditional compact source-package blueprint; paired
   Dirichlet remains sharper for exact source-plus-slot work. Provenance:
