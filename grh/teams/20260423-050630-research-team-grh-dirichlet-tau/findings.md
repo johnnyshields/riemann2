@@ -64,6 +64,16 @@ is the supplied team dir unless another path is named.
   `agents/20260424-183416-gap-compact-regularization/report.md`,
   `agents/20260424-183416-gap-compact-regularization/notes/compact_regularization_reduction.md`,
   `agents/20260424-183416-verifier-slot-skeleton/report-compact-convergence-audit.md`.
+- **The `B_chi^pair` split reduces to a normalization choice.** Jason's
+  background-split pass proposes that, in the completed-Hadamard normalization
+  summing all completed zeros of
+  `Xi_chi=Lambda_chi Lambda_bar_chi`, the edge difference has
+  `B_chi,comp^pair=0`; gamma, trivial-zero, pole, and raw Hadamard terms belong
+  only to a separate raw `L`-factor bookkeeping convention. This needs
+  adversarial source-normalization review before promotion to avoid
+  double-counting completed zeros and raw background terms. Provenance:
+  `agents/20260424-183416-explorer-background-multiplicity/report-background-split.md`,
+  `agents/20260424-183416-explorer-background-multiplicity/notes/background_split_derivation.md`.
 - **Tau is a self-dual phase-channel stress test, not the first exact `S(m)`
   target.** Tau has only a conditional compact source-package blueprint; paired
   Dirichlet remains sharper for exact source-plus-slot work. Provenance:
@@ -98,6 +108,11 @@ is the supplied team dir unless another path is named.
 - **Do not use the old paired positive-exponent convention as written.** It is
   sign-reversed for the positive source kernel under the fixed quotient.
   Provenance: `agents/20260424-183416-verifier-slot-skeleton/report-sign-audit.md`.
+- **Do not mix completed-zero and raw-background source conventions.** If the
+  source theorem sums all completed zeros of `Xi_chi`, adding gamma/trivial-zero
+  terms again would double-count them; those terms belong only in a separately
+  declared raw `L`-factor remark. Provenance:
+  `agents/20260424-183416-explorer-background-multiplicity/report-background-split.md`.
 
 ## Goodies
 

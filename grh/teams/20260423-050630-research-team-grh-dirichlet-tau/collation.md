@@ -130,3 +130,23 @@ Queued:
 Reason: these two lanes are independent. Jason attacks the remaining
 normalization/source identity content of UV-016, while Beauvoir hardens the
 source citations behind the convergence lemma Sartre accepted.
+
+## Jason Background-Split Deposit 20260424
+
+Report:
+`agents/20260424-183416-explorer-background-multiplicity/report-background-split.md`.
+Note:
+`agents/20260424-183416-explorer-background-multiplicity/notes/background_split_derivation.md`.
+
+Verdict: keep, not promoted. In the sign-audited fixed-quotient convention,
+Jason reduces the clean source-package formulation to completed-Hadamard
+normalization: after summing all completed zeros of
+`Xi_chi=Lambda_chi Lambda_bar_chi` with multiplicity, the residual background
+is `B_chi,comp^pair=0`. The older gamma/trivial-zero/pole/Hadamard component
+list is still meaningful only as a separate raw `L`-factor bookkeeping
+convention. Mixing the two would double-count background structure.
+
+Capture action: refined `findings.md`, UV-016 in `uv.md`, and `attempts.md`.
+Next verifier question: cite the standard primitive completed-\(L\) package and
+adversarially check that the completed-zero theorem wording does not also add
+raw gamma/trivial-zero terms.

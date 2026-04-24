@@ -14,15 +14,15 @@
 | Beauvoir | UV-016 | Compact zero-regularization reduces to Hadamard edge-difference cancellation | keep | `agents/20260424-183416-gap-compact-regularization/report.md`; `agents/20260424-183416-gap-compact-regularization/notes/compact_regularization_reduction.md` | adversarial/source audit | Candidate proof gives `O_I(|rho|^{-2})` summability after edge subtraction; full UV-016 still needs sign convention and explicit `B_chi^pair`. |
 | Sartre | UV-021 | Sign audit confirms fixed quotient needs negative boundary exponent for positive source | keep | `agents/20260424-183416-verifier-slot-skeleton/report-sign-audit.md`; `agents/20260424-183416-verifier-slot-skeleton/scripts/audit_one_zero_sign.py` | rewrite source normalization | Older positive-exponent route is inconsistent as written; use `e^{-2iTheta}`, `q=Theta'`, or explicitly change `q`/invert quotient. |
 | Sartre | UV-016 | Compact edge-difference convergence proof is sound in scoped form | keep | `agents/20260424-183416-verifier-slot-skeleton/report-compact-convergence-audit.md` | source-audit standard inputs | Completed zero-regularization is no longer the blocker under standard primitive nonprincipal inputs; explicit `B_chi^pair` split remains. |
+| Jason | UV-016 | Completed-Hadamard source split gives `B_chi,comp^pair=0`; raw `L`-factor background is separate bookkeeping | keep | `agents/20260424-183416-explorer-background-multiplicity/report-background-split.md`; `agents/20260424-183416-explorer-background-multiplicity/notes/background_split_derivation.md` | adversarial source-normalization audit | Need source citations and a double-counting check before promoting a completed-zero theorem statement. |
 
 ## Frontier summaries
 
 - **Current best:** UV-016, the primitive Dirichlet paired compact source
   package, is the live non-zeta bottleneck. The compact zero-regularization
-  subproblem is adversarially checked in the completed-function setting. The
-  remaining UV-016 burdens are the explicit theorem-ready `B_chi^pair` split in
-  the negative-exponent convention and source citations for the standard
-  completed-\(L\) inputs.
+  subproblem is adversarially checked in the completed-function setting, and
+  Jason's current best `B` split is the completed-Hadamard convention
+  `B_chi,comp^pair=0` after summing all completed zeros with multiplicity.
 - **Keep:** paired object `Phi_chi^pair`, positive upstairs strip-edge kernel,
   immediate post-theorem bookkeeping placement, and the conditional UV-017
   slot skeleton after Sartre's coefficient-lemma caveat.
@@ -30,12 +30,12 @@
   claims that denominator comparability alone gives whitening positivity;
   claims that single-channel Dirichlet or tau already supplies the manuscript
   exact `S(m)` slot.
-- **Blocked:** UV-016 lacks theorem-strength unified `B_chi^pair`,
-  source-cited completed-\(L\) inputs, and a final compact source statement in
-  the verified sign convention.
+- **Blocked:** UV-016 lacks source-cited completed-\(L\) inputs, adversarial
+  review of the completed-zeros versus raw-background normalization, and final
+  compact source wording in the verified sign convention.
   UV-017 lacks paired symmetric normal form, value-parameter holomorphy, stable
   local positivity, exact freeze rules, and source-to-slot coefficient
   identification.
-- **Next:** attack the explicit `B_chi^pair` background split in the
-  negative-exponent convention and source-audit the standard nonprincipal
-  completed-\(L\) inputs.
+- **Next:** finish Beauvoir's completed-\(L\) source-audit report, then send
+  Jason's completed-Hadamard `B=0` proposal for adversarial
+  source-normalization review.

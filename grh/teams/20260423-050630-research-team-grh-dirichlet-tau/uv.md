@@ -14,12 +14,15 @@
   `agents/20260424-183416-explorer-background-multiplicity/report.md`;
   `agents/20260424-183416-gap-compact-regularization/report.md`;
   `agents/20260424-183416-verifier-slot-skeleton/report-sign-audit.md`;
-  `agents/20260424-183416-verifier-slot-skeleton/report-compact-convergence-audit.md`.
+  `agents/20260424-183416-verifier-slot-skeleton/report-compact-convergence-audit.md`;
+  `agents/20260424-183416-explorer-background-multiplicity/report-background-split.md`.
   Current role: immediate non-zeta frontier.
   Current reduction: compact zero-regularization is adversarially checked under
-  standard primitive nonprincipal completed-function inputs; the remaining
-  burden is the explicit `B_chi^pair` split in the sign-audited convention plus
-  source citations for those standard inputs.
+  standard primitive nonprincipal completed-function inputs; the current
+  `B_chi^pair` candidate is completed-Hadamard normalization with
+  `B_chi,comp^pair=0`. Remaining burden: source citations for the standard
+  inputs and adversarial source-normalization review that this completed-zero
+  statement does not double-count raw gamma/trivial-zero bookkeeping.
 
 - **UV-017** - exact paired local `S(m)`-slot realization.
   Prove that the scalar `S_chi^pair(m)=q_chi^pair(m)-B_chi^pair(m)` from
