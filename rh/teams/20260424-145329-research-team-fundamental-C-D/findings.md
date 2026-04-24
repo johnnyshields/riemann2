@@ -162,11 +162,10 @@ Active, compact knowledge base shared with every delegated agent.
   by one-pair formulas. The best `Q_7^q` target is
   `[B_7^{\mathfrak f}(C)]\in\mathfrak f/\mathbf C A_5^{\mathfrak f}(m)`.
   The guarded tagged source block is now canonical in `proof_of_rh.tex`.
-  UV-026 reduces to seven cubic pre-`\Phi_K` whitening families; current source
-  only gives gauge/vanishing after one-pair `K_5`/`K_3`/pure identification.
-  Current gates: `L_1YR_1` needs normalized finite coefficient tables,
-  `L_3N_0R_0`/mirror need third-Frechet identities, and `L_2YR_0`/mirror need
-  second-Frechet plus mixed-input identities.
+  UV-026 has a complete seven-family cubic inventory, but no family is
+  promoted: `L_1YR_1`, all-left/all-right, second-Frechet-with-`Y`, and
+  second-Frechet-with-`N_0` gates all reduce to the same finite normalized
+  source-table theorem plus fixed-sector determinant tests.
 
 ## Recurring open gaps
 

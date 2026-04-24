@@ -59,17 +59,17 @@ Working forward-carry of the current open UV items relevant to the active queue.
   satisfies `B_7^{\mathfrak f}(T)\in\mathbf C A_5^{\mathfrak f}(m)`.
   Current role: narrowed cubic gauge subtarget for UV-024; needed before the
   full non-`(1,1)` quotient-invisibility theorem can be promoted.
-  Immediate subtarget: display the coefficient lists `[z^r]\Lambda_{i,\pm}`
-  for Frechet inverse-square-root outputs and normalized
-  `[z^s]\operatorname{Gr}_5(\mathfrak D_Q\delta N_i^{\lin})` for the grade-5
-  mixed input, then compute the two `L_1YR_1` tag vectors and determinant
-  identities against `A_5^{\mathfrak f}(m)`.
-  Parallel subtarget: classify `L_3N_0R_0` and `L_0N_0R_3` via actual
-  third-Frechet inverse-square-root coefficient identities or a source-class
-  theorem.
-  Parallel subtarget: classify `L_2YR_0` and `L_0YR_2` via actual
-  second-Frechet inverse-square-root coefficient identities coupled to the
-  grade-one/grade-five mixed input.
+  Shared table subtarget: prove a finite normalized source-table theorem in
+  ordinary `z`, before `\Phi_K`, with source tags retained and
+  `M_i^{[a]}=\operatorname{Gr}_a(\mathfrak D_Q\delta N_i^{\lin})`; the theorem
+  must display order-`<=7` tables for `G_\pm^{(0)}`, `N_0`,
+  `\delta G_{i,\pm}^{\lin,[1/5]}`, and `M_i^{[1/5]}`, then derive the
+  first/second/third Frechet inverse-square-root tables from `S^2=G` and
+  `BS=I`.
+  Gate subtargets: compute determinant identities against
+  `A_5^{\mathfrak f}(m)` for all seven classified cubic families:
+  `L_1YR_1`; `L_3N_0R_0` and `L_0N_0R_3`; `L_2YR_0` and `L_0YR_2`;
+  `L_2N_0R_1` and `L_1N_0R_2`.
 
 - **UV-004** — `rem:wip-explicit-pointwise-bridge-good-patch-detector`
   Claim: the local detector either sees the same-tower source `r=q^{(7)}` or the explicit pointwise package is invisible.

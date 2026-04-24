@@ -930,3 +930,22 @@ Captured takeaway: the inspected paper windows and prior reports do not contain 
 - **Keep:** the table contract can validate any future coefficient-table JSON before rerunning the Sylvester/convolution gate.
 - **Discard:** treating raw linear-in-kernel estimates or bounded-baseline placeholders as coefficient tables.
 - **Next:** derive the actual finite source-normal-form tables or open the remaining mixed cubic families.
+
+### `20260424-232207-gap-closer-UV026-finite-table-theorem/report.md`
+
+Signal: UV-026 shared finite-table theorem route, keep.
+
+Captured takeaway: the formal inverse-square-root algebra is not the hard part once normalized source jets are fixed.  The missing theorem is a tagged order-`<=7` source-jet normal form, in ordinary `z`, before `\Phi_K`, with `M_i^{[a]}=\operatorname{Gr}_a(\mathfrak D_Q\delta N_i^{\lin})`, for `G_\pm^{(0)}`, `N_0`, `\delta G_{i,\pm}^{\lin,[1/5]}`, and `M_i^{[1/5]}`.  After those tables exist, `S^2=G` and `BS=I` give the first/second/third Frechet tables by finite algebra.
+
+### `20260424-232207-explorer-UV026-final-cubic-L2N0R1/report.md`
+
+Signal: UV-026 final two cubic-family classification, keep.
+
+Captured takeaway: `L_2N_0R_1` and `L_1N_0R_2` are not source-trivial, pure same-point, or one-pair `K_5`/`K_3` from current source.  They reduce to second-Frechet plus baseline `N_0` plus first-Frechet coefficient identities.  The script `agents/20260424-232207-explorer-UV026-final-cubic-L2N0R1/scripts/l2n0r1_formal_witness.py` reruns with determinant `-3/8` against `A_5=(2,5)`, so formal matrix algebra alone does not force gauge.
+
+### Frontier after seven-family inventory
+
+- **Current best:** all seven UV-026 cubic families are classified into explicit coefficient-theorem gates; the shared bottleneck is the finite normalized source-table theorem.
+- **Keep:** the finite square-root algebra route is valid only after actual source tables are supplied; it is not itself an `A_5`-gauge proof.
+- **Discard:** calling `L_2N_0R_1` or `L_1N_0R_2` pure same-point because `Y` is absent; the baseline mixed block `N_0` is an ordered matrix factor.
+- **Next:** derive the Stage 1 tagged source tables, feed the finite square-root algebra, and run determinant tests for all seven gates.
