@@ -416,3 +416,39 @@ Ground-truth checks:
 Protected surfaces are unchanged: agents write only to their own
 `agents/20260424-190438-<slug>/` directory and must not edit ledgers, paper,
 `lore/`, `.agents/`, or sibling agent dirs.
+
+## UV-023 bidegree / grading attack 20260424-190928
+
+Base commit: `c23af1b0f502e588c6797858e2f4ff78c3bf71fc`.
+
+Current target: UV-023 remains open. Source and gap audit agree that the paper
+does not prove septic homogeneous-transfer filtration from the analytic
+expansion alone. The next positive routes are:
+
+- define a source-weight bidegree `(1,1)` projection for the actual corrected
+  two-atom input `X^{[1]}` and prove the order-7 quotient extraction is
+  invariant under it; or
+- use `\mathfrak D_Q` scaling / finite-order grading to prove
+  `\mathcal T_{p\ge3}` cannot reach the septic quotient first-collision channel.
+
+Roster:
+
+1. `gap-closer-UV023-bidegree-projection`: attempt the bidegree `(1,1)`
+   projection route. Find a source-defined projection or prove the smallest
+   missing source statement needed to make it theorem-ready.
+2. `explorer-UV023-DQ-scaling`: mine `\mathfrak D_Q`, finite-order grading,
+   and coefficient-order bookkeeping for a positive exclusion of
+   `\mathcal T_{p\ge3}` in the septic quotient component.
+
+Ground-truth checks:
+
+- A positive result must define the object before quotient extraction and cite
+  the lines proving invariance/visibility.
+- A negative result must name the exact missing source statement: bidegree
+  projection, grading bound, quotient invisibility, or source-weight-linear
+  actual input.
+- Do not assume diagonal merger, same-reduced-image collapse, determinant
+  scalarization, or package coincidence.
+
+Protected surfaces are unchanged: agents write only to
+`agents/20260424-190928-<slug>/`.
