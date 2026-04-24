@@ -603,3 +603,40 @@ Ground-truth checks:
 
 Protected surfaces are unchanged: agents write only to
 `agents/20260424-194309-<slug>/`.
+
+## UV-025 actual source-block attack 20260424-194928
+
+Base commit: `01ffe31`.
+
+Current target: UV-025. Define or reject the actual two-atom corrected
+pre-whitening block triple
+
+`\mathcal B_2(a_1,h_1;a_2,h_2)=(G_{2,-}^{\corr},N_2^{\corr},G_{2,+}^{\corr})`
+
+with source tags and prove its pair-kernel-linear derivative theorem
+
+`\operatorname{Lin}_{\mathcal K}\mathfrak D_Q(\mathcal B_2-\mathcal B_0)
+=a_1L_{h_1}+a_2L_{h_2}`.
+
+Roster:
+
+1. `gap-closer-UV025-B2-definition`: attempt the constructive definition of
+   `\mathcal B_2`, `\mathcal K`, and `L_h` from the corrected block formulas.
+   If promotion is impossible, write the minimal definition/theorem block that
+   would be paper-ready after verification.
+2. `verifier-source-UV025-package-language`: audit whether existing "actual
+   corrected two-pair finite-order package" language already supplies enough
+   source content for `\mathcal B_2`, or only assumes quotient-output data.
+
+Ground-truth checks:
+
+- The object must be before whitening and before `\Phi_K`.
+- The theorem must preserve source tags and must not reintroduce the rejected
+  post-whitening signed source lift.
+- The derivative theorem must identify the actual pair-kernel-linear part,
+  not merely define a formal input variable.
+- A negative return must state whether UV-025 is a definition addition, a
+  theorem gap, or a genuine obstruction from current corrected block formulas.
+
+Protected surfaces are unchanged: agents write only to
+`agents/20260424-194928-<slug>/`.
