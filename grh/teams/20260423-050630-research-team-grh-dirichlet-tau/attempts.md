@@ -25,6 +25,8 @@
 | Sartre | UV-016 | Patched staged theorem is mathematically promotion-ready modulo citation quality | terminal | `agents/20260424-183416-verifier-slot-skeleton/report-paper-updates-final-check.md`; `paper-updates.md` | coordinator promotion decision | No wording or normalization blocker remains from verifier lane; UV-017 remains separate. |
 | Noether | UV-017 | Exact slot realization reduces to paired unit-coordinate local normal-form lemma | keep | `agents/20260424-192025-gap-uv017-coefficient-freeze/report.md`; `agents/20260424-192025-gap-uv017-coefficient-freeze/notes/coefficient_freeze_reduction.md` | adversarial verifier / attack unit-coordinate chart | If `a=S_chi^pair(m)` in the local jet chart, RH algebra gives unit coefficient; missing proof is that paired corrected blocks use that coordinate and no scalar readout renormalization. |
 | Sartre | UV-017 | Noether's reduction is sound, scoped to matrix-level unit-coordinate chart | keep | `agents/20260424-183416-verifier-slot-skeleton/report-uv017-coefficient-reduction-audit.md` | attack `da/dS=1` chart | Pure freeze rule must test actual `a(S,eta(S))=S+O(S^2)` and scalar readout must be included in `A_val` or separately normalized. |
+| Noether | UV-017 | Universal RH finite-\(s\) phase-kernel chart has `da/dS|0=1` | keep | `agents/20260424-192025-gap-uv017-coefficient-freeze/report-unit-coordinate-chart.md`; `agents/20260424-192025-gap-uv017-coefficient-freeze/notes/unit_coordinate_chart_attack.md` | install paired finite-\(s\) construction | Direct formula chase proves unit coordinate for literal substitution; actual paired corrected blocks still need construction, holomorphy/whitening, freeze-rule, and scalar-readout checks. |
+| coordinator | UV-017 | Staged paired finite-\(s\) unit-coordinate construction lemma | keep | `paper-updates.md`; `agents/20260424-192025-gap-uv017-coefficient-freeze/report-unit-coordinate-chart.md` | verifier pass | Draft is a construction/hypothesis layer, not exact slot realization; needs review for overclaim and compatibility with RH finite-\(s\) formulas. |
 
 ## Frontier summaries
 
@@ -49,6 +51,5 @@
   UV-017 lacks paired symmetric normal form, value-parameter holomorphy, stable
   local positivity, exact freeze rules, and source-to-slot coefficient
   identification.
-- **Next:** adversarially verify Noether's UV-017 reduction, then attack the
-  paired unit-coordinate jet chart directly from the RH finite-\(s\) block
-  formulas, with `da/dS|0=1` as the harness.
+- **Next:** stage the paired finite-\(s\) construction lemma and verify that it
+  is only a construction/hypothesis layer, not a hidden UV-017 closure.

@@ -50,7 +50,8 @@
   `agents/20260424-175245-paired-slot-proof-skeleton-routeA/report.md`;
   `agents/20260424-183416-verifier-slot-skeleton/report.md`;
   `agents/20260424-192025-gap-uv017-coefficient-freeze/report.md`;
-  `agents/20260424-183416-verifier-slot-skeleton/report-uv017-coefficient-reduction-audit.md`.
+  `agents/20260424-183416-verifier-slot-skeleton/report-uv017-coefficient-reduction-audit.md`;
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/report-unit-coordinate-chart.md`.
   Current role: second-step non-zeta frontier after UV-016.
   Current reduction: source normalization and whitening linearization are not
   the remaining scalar-renormalization sites; UV-017 is now the paired
@@ -60,7 +61,10 @@
   `a(S,eta(S))=S+O(S^2)` and non-value coordinates frozen on the pure value
   path. Also prove paired holomorphy/whitening and define any downstream scalar
   readout at the same level as `A_val` or prove that it does not rescale the
-  slot.
+  slot. The universal RH finite-\(s\) phase-kernel chart has the unit
+  coordinate by direct calculation; the missing statement is that the actual
+  paired corrected finite-\(s\) blocks are literally this chart with
+  `Theta=Theta_chi^pair` and `q=q_chi^pair`.
 
 - **UV-018** - corrected odd/transverse realization and boundary package.
   After paired slot realization, construct the corrected odd/transverse scalar,

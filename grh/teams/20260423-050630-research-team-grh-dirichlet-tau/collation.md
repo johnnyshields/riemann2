@@ -340,3 +340,39 @@ be checked not to rescale the slot.
 
 Capture action: refined `findings.md`, UV-017, and `attempts.md`. Next move is
 to attack `da/dS|0=1` directly from the paired local block coordinates.
+
+## Noether Unit-Coordinate Chart Deposit 20260424
+
+Report:
+`agents/20260424-192025-gap-uv017-coefficient-freeze/report-unit-coordinate-chart.md`.
+Note:
+`agents/20260424-192025-gap-uv017-coefficient-freeze/notes/unit_coordinate_chart_attack.md`.
+
+Verdict: keep, not closed. Noether proves `da/dS|0=1` for the universal RH
+finite-\(s\) phase-kernel chart: a pure value deformation
+\(\Theta_\alpha=\Theta_0+\alpha(t-m)\) gives \(q_\alpha=q_0+\alpha\), freezes
+derivative/curvature coordinates, and changes the phase gap by \(-\alpha s\).
+Thus the RH finite-\(s\) formulas themselves do not introduce a scalar
+renormalization. The actual paired theorem still lacks the construction
+statement identifying the paired corrected finite-\(s\) blocks with those
+universal formulas after substituting
+\(\Theta_\chi^{pair}\) and \(q_\chi^{pair}\).
+
+Capture action: refined `findings.md`, UV-017, and `attempts.md`. Next move is
+to stage and verify the paired finite-\(s\) construction lemma, keeping
+holomorphy/whitening and scalar readout as explicit remaining hypotheses.
+
+## Coordinator UV-017 Construction Draft 20260424
+
+File: `paper-updates.md`.
+
+Verdict: keep as staged text only. Added a paired finite-\(s\)
+unit-coordinate construction lemma: if the corrected paired same-point and
+mixed blocks are literal substitutions of
+\(\Theta_\chi^{pair}\) and \(q_\chi^{pair}\) into the RH finite-\(s\) formulas,
+then the pure value path gives `da/dS|0=1`. The draft explicitly leaves actual
+paired block construction, holomorphy/whitening, freeze-rule remainder, and
+scalar-readout normalization as remaining hypotheses.
+
+Capture action: recorded the draft in `findings.md` and `attempts.md`. Next
+step is adversarial review for overclaim and formula compatibility.

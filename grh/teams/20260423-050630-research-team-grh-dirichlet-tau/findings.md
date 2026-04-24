@@ -119,6 +119,26 @@ is the supplied team dir unless another path is named.
   `agents/20260424-192025-gap-uv017-coefficient-freeze/report.md`,
   `agents/20260424-192025-gap-uv017-coefficient-freeze/notes/coefficient_freeze_reduction.md`,
   `agents/20260424-183416-verifier-slot-skeleton/report-uv017-coefficient-reduction-audit.md`.
+- **The unit coordinate is proved for the universal finite-\(s\) phase-kernel
+  chart, not yet for the actual paired construction.** Noether's direct formula
+  chase shows that for a local phase \(\Theta_\alpha=\Theta_0+\alpha(t-m)\),
+  one has \(q_\alpha=q_0+\alpha\), frozen \(q'\) and \(q''\), phase-gap
+  variation \(-\alpha s\), and hence `da/dS|0=1` when
+  `a=q(m)-B(m)` with `B` frozen. The remaining paired theorem burden is to
+  install corrected paired finite-\(s\) blocks as literal RH finite-\(s\)
+  formulas with \(\Theta=\Theta_\chi^{pair}\), followed by holomorphy /
+  whitening, freeze-rule, and scalar-readout checks. Provenance:
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/report-unit-coordinate-chart.md`,
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/notes/unit_coordinate_chart_attack.md`.
+- **A UV-017 paired finite-\(s\) construction draft is staged, not promoted.**
+  `paper-updates.md` now contains a lemma saying that literal substitution of
+  \(\Theta_\chi^{pair}\) and \(q_\chi^{pair}\) into the RH finite-\(s\) local
+  formulas gives the unit coordinate along the pure value path. It remains a
+  construction/hypothesis layer: actual paired corrected blocks,
+  holomorphy/whitening, freeze-rule remainder, and scalar readout checks are
+  still open. Provenance:
+  `paper-updates.md`,
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/report-unit-coordinate-chart.md`.
 - **Tau is a self-dual phase-channel stress test, not the first exact `S(m)`
   target.** Tau has only a conditional compact source-package blueprint; paired
   Dirichlet remains sharper for exact source-plus-slot work. Provenance:

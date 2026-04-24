@@ -133,3 +133,71 @@ Provenance:
 `agents/20260424-183416-verifier-slot-skeleton/report-source-normalization-audit.md`;
 `agents/20260424-183416-gap-compact-regularization/report-textbook-citation-pass.md`;
 `agents/20260424-183416-gap-compact-regularization/report-citation-fallback-plan.md`.
+
+## Paired Finite-\(s\) Unit-Coordinate Construction Draft
+
+Staged UV-017 text. Not promoted. This is a construction/hypothesis layer for
+the paired local chart, not exact slot realization.
+
+```tex
+\begin{lemma}[Paired finite-\(s\) unit-coordinate chart]
+Fix \(m\in I\) and use the sign-audited boundary phase
+\[
+\Phi_\chi^{\mathrm{pair}}\!\left(\tfrac12+it\right)
+=e^{-2i\Theta_\chi^{\mathrm{pair}}(t)},
+\qquad
+q_\chi^{\mathrm{pair}}(t)
+=\Theta_\chi^{\mathrm{pair}\,\prime}(t).
+\]
+Assume that the corrected paired same-point and mixed blocks
+\[
+G_{\chi,m,\pm}^{\mathrm{pair},\mathrm{corr}}(s),
+\qquad
+N_{\chi,m}^{\mathrm{pair},\mathrm{corr}}(s)
+\]
+are obtained from the finite-\(s\) block formulas of the zeta-side local model
+by replacing \(\Phi\) with \(\Theta_\chi^{\mathrm{pair}}\) and \(q\) with
+\(q_\chi^{\mathrm{pair}}\), and by using the local value coordinate
+\[
+a=q_\chi^{\mathrm{pair}}(m)
+-B_\chi^{\mathrm{pair}}(m).
+\]
+Let the pure value path on the microscopic window be
+\[
+\Theta_{\chi,\alpha}^{\mathrm{pair}}(t)
+=\Theta_{\chi,0}^{\mathrm{pair}}(t)+\alpha(t-m),
+\qquad
+q_{\chi,\alpha}^{\mathrm{pair}}(t)
+=q_{\chi,0}^{\mathrm{pair}}(t)+\alpha,
+\]
+with derivative, curvature, background, correction, multiplicity, cutoff, and
+normalization-gauge coordinates frozen. Then the coordinate
+\(a(\alpha)=q_{\chi,\alpha}^{\mathrm{pair}}(m)-B_\chi^{\mathrm{pair}}(m)\)
+satisfies
+\[
+\left.\frac{d a}{d S_{\chi}^{\mathrm{pair}}}\right|_{\alpha=0}=1.
+\]
+The phase-gap variation along this path is
+\[
+\Theta_{\chi,\alpha}^{\mathrm{pair}}(m-s/2)
+-\Theta_{\chi,\alpha}^{\mathrm{pair}}(m+s/2)
+=
+\Delta_{\chi,0}^{\mathrm{pair}}(s)-\alpha s.
+\]
+\end{lemma}
+```
+
+Remaining hypotheses before UV-017 promotion:
+
+- construct the paired corrected finite-\(s\) blocks literally as above;
+- prove microscopic holomorphy, same-point positivity/nondegeneracy, and
+  holomorphic inverse-square-root whitening for those paired blocks;
+- state the freeze-rule remainder criterion as a derivative condition, not
+  only as the definition of \(R_\chi^{\mathrm{pair}}\);
+- if a downstream scalar readout is used, prove its derivative is normalized
+  consistently with the matrix value slot.
+
+Provenance:
+`agents/20260424-192025-gap-uv017-coefficient-freeze/report.md`;
+`agents/20260424-183416-verifier-slot-skeleton/report-uv017-coefficient-reduction-audit.md`;
+`agents/20260424-192025-gap-uv017-coefficient-freeze/report-unit-coordinate-chart.md`.
