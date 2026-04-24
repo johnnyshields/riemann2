@@ -452,3 +452,37 @@ Ground-truth checks:
 
 Protected surfaces are unchanged: agents write only to
 `agents/20260424-190928-<slug>/`.
+
+## UV-023 source-bidegree compatibility attack 20260424-191517
+
+Base commit: `2cea6fc9f872b62605a9d3df35cea0eb9d6f9017`.
+
+Current target: prove or sharply reduce the source-bidegree
+quotient-compatibility lemma:
+
+`Q_7^q(C)=Q_7^q(\Pi_{1,1}C)`
+
+for the corrected-whitening cross-effect `C` built from the actual
+source-weight-linear corrected-block input `X^{[1]}`.
+
+Roster:
+
+1. `gap-closer-UV023-source-tags`: construct the source-tagged input
+   `X^{[1]}` and projector `\Pi_{1,1}` as source objects, or identify the exact
+   missing definition that blocks them.
+2. `verifier-adversarial-UV023-projection`: attack any proposed
+   source-bidegree projection against cubic homogeneous transfer witnesses,
+   quotient extraction nonlinearity, determinant scalarization, and hidden use
+   of package coincidence.
+
+Ground-truth checks:
+
+- The projector must be defined before quotient extraction, not after a scalar
+  determinant chart.
+- The proof must show compatibility with the fixed-target order-7 quotient
+  extraction `Q_7^q`.
+- Any negative return must name the smallest missing object among
+  `X^{[1]}`, `\Pi_{1,1}`, `Q_7^q`, and the compatibility lemma.
+
+Protected surfaces are unchanged: agents write only to
+`agents/20260424-191517-<slug>/`.
