@@ -169,9 +169,10 @@ Active, compact knowledge base shared with every delegated agent.
   `agents/20260424-190438-verifier-source-UV023-filtration/report.md`, sharpened
   by `agents/20260424-190928-gap-closer-UV023-bidegree-projection/report.md`.
   Usage: `(1,1)` projection kills `\mathcal T_{p\ge3}` formally, but promotion
-  needs source-defined `X^{[1]}`, projector `\Pi_{1,1}`, fixed-target `Q_7^q`,
-  and proof that quotient extraction commutes with the projection; `\mathfrak D_Q`
-  scaling and finite-order grading alone still allow cubic witnesses.
+  needs source-defined pair-kernel-linear `L_h` / `X^{[1]}`, projector
+  `\Pi_{1,1}`, fixed-target `Q_7^q`, and proof that `Q_7^q` kills non-`(1,1)`
+  source bidegrees; `\mathfrak D_Q` scaling and finite-order grading alone
+  still allow cubic witnesses.
 
 ## Recurring open gaps
 

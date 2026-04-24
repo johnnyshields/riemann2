@@ -628,3 +628,15 @@ Captured takeaway: `\mathfrak D_Q` scaling and finite-order grading do not close
 - **Keep:** formal `(1,1)` projection mechanism; negative against `\mathfrak D_Q` scaling or finite-order grading alone.
 - **Discard:** proving UV-023 from coefficient bounds, scaling, finite-order grading, diagonal counterterms, or determinant scalarization alone.
 - **Next:** construct the actual source-tagged `X^{[1]}` and projector `\Pi_{1,1}`, define `Q_7^q`, and prove `Q_7^q(C)=Q_7^q(\Pi_{1,1}C)`.
+
+### `20260424-191517-gap-closer-UV023-source-tags/report.md`
+
+Signal: UV-023 source-tags construction, keep.
+
+Captured takeaway: source tags and `\Pi_{1,1}` are formally clean once a source-linear corrected-block input `L_h` exists, but current paper source does not define `L_h` / `X^{[1]}` for actual corrected two-atom blocks before whitening. The harness confirms `\Pi_{1,1}` alone does not imply quotient compatibility: a generic `Q_7^q` can still see non-`(1,1)` source bidegrees. The missing theorem is `Q_7^q((1-\Pi_{1,1})C)=0`, with `Q_7^q` defined before determinant scalarization.
+
+### Frontier after source-tags pass
+
+- **Current best:** UV-023 reduces to defining `L_h` as the pair-kernel-linear corrected-block perturbation functor before whitening, then proving source-bidegree quotient compatibility.
+- **Keep:** formal source tags / `\Pi_{1,1}` mechanism.
+- **Next:** wait for the adversarial projection verifier, then attack the definition-level lemma for `L_h`.
