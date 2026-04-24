@@ -947,6 +947,32 @@ Roster:
 Ground-truth checks: no scale estimates as coefficient tables; stay
 pre-`\Phi_K`; no paper promotion.
 
+## Resume dispatch 20260425-001243
+
+Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260425-001243`.
+
+Base commit: `7b3dfb7`.
+
+Coordinator status: mixed-order filtration is the current candidate.  Grade
+`1` corresponds to `r^{(3)}` and grade `5` to `r^{(7)}` if grade means
+pre-whitening matrix order.  Two stress points remain before determinant
+work: baseline dependence of the `L_1YR_1` Frechet gate and grade-0 handling.
+
+Roster:
+
+1. `gap-closer-UV026-L1YR1-mixed-order-prototype` writes only under
+   `agents/20260425-001243-gap-closer-UV026-L1YR1-mixed-order-prototype/`.
+   Task: instantiate or reduce the `L_1YR_1` gate using homogeneous mixed-order
+   source placeholders; determine whether baseline `q_0` specialization is a
+   hard blocker.
+2. `verifier-source-UV026-grade0-sector` writes only under
+   `agents/20260425-001243-verifier-source-UV026-grade0-sector/`.
+   Task: audit whether the grade-0 `r^{(2)}` sector is already excluded,
+   killed, or handled by current UV-026/cubic-family source inventory.
+
+Ground-truth checks: stay pre-`\Phi_K`; scripts before run; no promotion from
+prototypes or absence of source alone.
+
 ## Resume dispatch 20260424-233157
 
 Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260424-233157`.

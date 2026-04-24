@@ -1155,3 +1155,15 @@ means pre-whitening matrix order and must handle the grade-0 `r^{(2)}` sector.
 - **Next:** instantiate the generator with the homogeneous mixed-order source
   placeholders and see whether the first `L_1YR_1` fixed-sector vectors can be
   expressed before full baseline specialization.
+
+### Dispatch 20260425-001243
+
+Issued two stress-test follow-ups.  Hilbert owns the `L_1YR_1` mixed-order
+prototype lane under
+`agents/20260425-001243-gap-closer-UV026-L1YR1-mixed-order-prototype/`.  Harvey
+owns the grade-0 source audit under
+`agents/20260425-001243-verifier-source-UV026-grade0-sector/`.
+
+Expected ledger destinations: prototype or baseline-blocker result to
+`attempts.md`/`uv.md`; grade-0 exclusion or missing theorem to
+`attempts.md`/`uv.md`, with `findings.md` only for durable guardrails.
