@@ -111,9 +111,19 @@ When in doubt between `research-team` and `research-attack`, prefer
 The coordinator decides roster sizes, UV targets, explorer topics, non-goals
 (synthesized from adjacent in-flight work and recent lore), team-dir slugs,
 commit messages, subsection selection, demote timing, forward-carry
-filtering for findings.md / uv.md — without asking. Ask the user directly only
-for architectural or irreversible decisions. Never interrupt over
-research-direction minutia.
+filtering for findings.md / uv.md — without asking. Never interrupt over
+research-direction minutia or approval checks.
+
+## No approval prompts
+
+Do not ask the user for approval before routine coordinator actions: choosing
+the next target, dispatching or resuming agents, editing workflow files, staging
+named paths, committing logical units, pushing, promoting, demoting, rejecting,
+or filing UV entries. If a decision would be architectural or irreversible, do
+the safest reversible action available: quarantine the claim, file a UV, record
+the blocker in `collation.md` or `lore/`, and continue adjacent work. Stop only
+for an explicit user halt, a hard runtime/tooling blocker, or a genuine terminal
+condition.
 
 ## Auto-run — default for research work
 
@@ -146,10 +156,9 @@ manually interrupts.
 team-dir slug, commit wording, whether to redirect, when to synthesize.
 `Coordinator autonomy` covers this.
 
-**Pause only for:** architectural or irreversible decisions (macro
-namespace changes, canonical-file reorgs, abandoning a proof strategy
-wholesale); a hard blocker the coordinator cannot work around; explicit
-user interruption.
+**Pause only for:** an explicit user halt, a hard blocker the coordinator
+cannot work around, or a genuine terminal condition. Architectural or
+irreversible choices become blockers to record, not approval prompts.
 
 **Terminal conditions** (stop the loop): zero open UV entries and no
 outstanding `rem:wip-*` labels; or the targeted synthesis fully closes
@@ -536,6 +545,7 @@ When writing or revising a skill:
   commit messages, lore. Never convert to `$...$`; preserve on extraction
   from chat exports.
 - Frozen macro namespace in the preamble (\(\sim 30\) `\newcommand`s). Don't
-  redefine or invent without coordinator approval.
+  redefine or invent macros; quarantine any need for a new macro as a UV or
+  coordinator note.
 - `rem:wip-*` labels mark in-paper WIP; each should have a matching
   UV-NNN in the current team dir's `uv.md`.

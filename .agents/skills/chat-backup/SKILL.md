@@ -20,8 +20,8 @@ fresh `<paper>/teams/<ts>-other-chat-backup/`.
 ## Protocol
 
 Resolve destination. If ambiguous (empty argument + multiple candidate
-team dirs), this is worth asking about â€” choosing the wrong dir loses
-provenance. With `--session`, create
+team dirs), choose the most recent active-looking team dir and record the
+rationale in `chat.md`; do not ask for approval. With `--session`, create
 `<paper>/teams/$(date +%Y%m%d-%H%M%S)-other-chat-backup/`.
 
 Write a structured summary to `<target-dir>/chat.md`:

@@ -21,7 +21,7 @@ cache.
 ## What this skill does
 
 Never adds `\bibitem` entries or `\cite` references. May remove exact
-duplicates and fix formatting with user approval. Works only inside
+duplicates and fix conservative formatting issues. Works only inside
 `\begin{thebibliography}...\end{thebibliography}`.
 
 - **Alphabetize** by cite key (case-insensitive), preserving blank
@@ -44,7 +44,7 @@ duplicates and fix formatting with user approval. Works only inside
   search for title + author + year, confirm venue/volume/pages. Batch
   5, brief pauses. `--skip-external` skips this step.
 - **arXiv-to-journal upgrade** â€” for arXiv-only citations, search for
-  a published journal version; if found, replace (user-confirmed). If
+  a published journal version; if found and unambiguous, replace. If
   both are present, keep the journal citation only.
 
 ## Cache format â€” `papers/<name>-biblio-known.md`

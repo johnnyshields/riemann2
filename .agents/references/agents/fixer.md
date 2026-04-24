@@ -155,7 +155,7 @@ label). Do not stray outside that scope.
 1. Fix the issue. Prefer the minimum edit that addresses the referee's
    concern. Do not rewrite adjacent proofs for aesthetics.
 2. Preserve the frozen macro namespace. Never redefine a `\newcommand`.
-   New macros require coordinator approval (not you).
+   Do not introduce new macros; report the need instead.
 3. Preserve labels. If you must move text across a label, move the
    `\label{...}` with it â€” don't orphan or duplicate.
 4. Keep the compile green. A fixer whose edits break `pdflatex` is a
