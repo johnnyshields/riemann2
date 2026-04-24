@@ -24,10 +24,10 @@ Working forward-carry of the current open UV items relevant to the active queue.
   and merger normalization are downstream, not part of this definition target.
 
 - **UV-011** — `rem:wip-parity-projective-factorization-collision-blow-up`
-  Claim: define an invariant source-weight linearization functor for the
-  corrected block triple through order 7, giving exact one-amplitude collapse
-  and commuting with whitening / quotient extraction, or prove the higher
-  `a^3,a^5,\dots` source-weight terms are quotient-invisible.
+  Claim: define an invariant source-weight-linear input for corrected blocks
+  through order 7 and an analytic corrected-whitening cross-effect package with
+  exact one-amplitude collapse, then prove its order-7 quotient component is
+  collision-vanishing in the UV-010 chart.
   Current role: package-definition subtarget for UV-010; needed before the
   actual two-atom `\mathcal J_2^{(7)}` / `\mathfrak O_7` construction can be
   promoted.

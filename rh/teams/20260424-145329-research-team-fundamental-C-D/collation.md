@@ -532,3 +532,32 @@ the source-weight-linear actual two-atom input `X^{[1]}` and a proof that
 - **Next:** construct or source-mine `X^{[1]}` in the collision-cancellation
   chart, then feed it through `\mathcal T_1` and test the septic quotient
   component against the free `P(m,\kappa)` model.
+
+### `20260424-184202-explorer-UV011-cross-effect-package/report.md`
+
+Signal: UV-011 cross-effect package, keep.
+
+Captured takeaway: the actual package layer should use the analytic
+cross-effect of the corrected-whitening transfer:
+`\mathcal T(a_1X_1+a_2X_2)-\mathcal T(a_1X_1)-\mathcal T(a_2X_2)`. The harness
+`agents/20260424-184202-explorer-UV011-cross-effect-package/scripts/cross_effect_harness.js`
+shows that this construction has exact one-amplitude collapse, is symmetric in
+the two inputs, and begins with an `a_1a_2` interaction term. It also shows the
+new obstruction: the diagonal cross-effect need not vanish. Thus the next
+theorem is not merely "find `X^{[1]}`"; it is "find `X^{[1]}` and prove/canonically
+subtract the diagonal order-7 quotient component so the collision edge is
+`\delta^2`."
+
+### Resume frontier after cross-effect pass
+
+- **Current best:** UV-011 has the right analytic package shape: source-weight
+  linear inputs plus corrected-whitening cross-effect. The unresolved point is
+  diagonal/collision vanishing of the order-7 quotient component.
+- **Keep:** cross-effect package route, `\mathcal T_1` as its linear tangent,
+  determinant good-patch chart for the eventual quotient output, and the free
+  `P(m,\kappa)` pressure test.
+- **Discard:** package definitions using only `\mathcal T_1`, signed-lift-only
+  finite-amplitude whitening, or unsourced diagonal subtraction.
+- **Next:** source-mine same-reduced-image germ, collision-functoriality, or a
+  canonical polarization counterterm that kills the diagonal quotient
+  cross-effect without assuming the downstream merger normalization.
