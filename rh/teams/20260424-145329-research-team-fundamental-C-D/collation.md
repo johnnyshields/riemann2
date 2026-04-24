@@ -112,7 +112,7 @@ Signal: C2a reduction, open.
 
 Captured takeaway: C2 now splits into a state-locality step and a diagonal-coincidence step. The quotient-visible route has a ceiling: current fixed-shear material rules out another finite quotient-visible transport scalar or finite hidden reset from the tested scope. The live split is therefore C2a(qv) vs C2a(rel): either the actual corrected package is already state-local in the descended quotient-visible collision state, or the first surviving dependence is genuinely relational/provenance-sensitive two-atom data (or non-finite-order).
 
-Latest refinement: the extra one-dimensional state should not be phrased as raw `T=v_7/c`; the better local candidate is the affine lift coordinate selected by gauge fixing, `\lambda/c=\Delta_7/(cv_5)` on `v_5\neq0`. Strongest objection: this is still a good-patch/local-section model, not a full-chart corrected two-atom exceptional-divisor state.
+Latest refinement: the extra one-dimensional state should not be phrased as raw `T=v_7/c`; the better local candidate is the affine lift coordinate selected by gauge fixing, `\lambda/c=\Delta_7/(cv_5)` on `v_5\neq0`. Follow-up shows the local patch cocycle is base-controlled: on overlap, `S_u=-(x/Y)S` and `\tau=\Delta_7/(u_5v_5)` is determined by `\widehat\Psi`. Thus patching is not the hidden obstruction; the remaining C target is fiber selection: construct the corrected exceptional-divisor package as an affine fiber over the reduced base and prove diagonal merger kills that fiber. Strongest objection: this remains a one-pair good-patch model, not yet a full corrected two-atom divisor theorem.
 
 ### `gap-closer-D-kerphik` follow-ups
 

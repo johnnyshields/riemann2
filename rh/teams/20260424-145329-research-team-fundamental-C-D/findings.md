@@ -112,7 +112,10 @@ Active, compact knowledge base shared with every delegated agent.
   exceptional-divisor convention fixed: `\widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0)`
   means analytic continuation after `2\omega=\kappa\delta`, not a raw diagonal restriction.
   The current C2a split is quotient-visible state-locality vs genuinely relational /
-  provenance-sensitive two-atom data.
+  provenance-sensitive two-atom data. Patch transitions for the affine lift are
+  base-controlled (`S_u=-(x/Y)S`), so the remaining C obstruction is fiber selection:
+  show the corrected exceptional-divisor package has only this affine fiber over the
+  reduced base and diagonal merger kills it.
 - **Hidden extraction theorem from finite-core package data to the first surviving odd coefficient of `H_m`.**
   Touches: UV-002 / UV-007; this is the bridge from `\widehat\Psi`-side control
   to the already-built `\Xi_\zeta^{(N)}` extractor. Current sharp obstruction:
