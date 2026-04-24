@@ -100,103 +100,27 @@ Active, compact knowledge base shared with every delegated agent.
 
 ## Goodies
 
-- **Archived reusable background:** quintic/septic normal forms, ECT interval
-  geometry, affine normal forms, and the toy microscopic expansion remain in
-  the April chat audits and `rem:wip-toy-microscopic-expansion` (line 26692).
-- **Best current explicit bridge data are already compressed to one source tower.**
-  Provenance: same-tower closure and rank-two coupling on the overlap patch
-  (`proof_of_rh.tex` lines 21142--21275). Usage: if the bridge theorem is local,
-  it must run through the single explicit source `r=q^{(7)}` via
-  `\lambda^{[1]}` / `\mathcal G^{[1]}`; no second primitive pointwise field remains.
-- **Hidden `\Phi_K`-visible state is an affine lift-coordinate.** Provenance:
-  `agents/20260424-145500-explorer-hidden-state-geometry/report.md` and
-  `agents/20260424-112500-phik-kernel-structure/report.md`. Usage: frame D as
-  affine-bundle descent / `\ker\Phi_K` transport along
-  `A_7^{\mathfrak f}+\mathbf C A_5^{\mathfrak f}`, not raw representative equality.
-- **C determinant slot is exactly the septic quotient-defect class on good patches.**
-  Provenance: `agents/20260424-165509-gap-closer-C-R-determinant-control/report.md`
-  and `agents/20260424-165509-verifier-source-C-R-channel/report.md`. Usage: on
-  `A_5^{\mathfrak f}\neq0`, `[R]\mapsto\det(R,A_5^{\mathfrak f})` identifies
-  the quotient with `\mathbf C`; control the actual quotient class, not a representative.
-- **Exceptional-divisor `[R]` first needs a septic quotient edge package.**
-  Provenance: `agents/20260424-165509-explorer-C-actual-package-construction/report-R-definition-followup.md`.
-  Usage: finite-delta `[R]` is conditional on `\overline E_{12}^{(7;1)}`;
-  the divisor object needs `\delta^2\mathcal H_7^q` plus midpoint quotient
-  trivialization. Descent, `\kappa`-independence, and merger are downstream.
-- **UV-010 statement language should avoid "quotient-septic closure."**
-  Provenance:
-  `agents/20260424-173642-explorer-UV010-source-language/report.md`. Usage:
-  native paper terms are "septic quotient defect", "collision-cancellation
-  chart", "swap-compatible amplitude coordinate", and "edge law"; the existing
-  "quotient-septic closure" theorem is one-pair canonical closure, not the
-  two-atom order-7 edge package.
-- **UV-010 midpoint quotient trivialization is locally solved on the good patch.**
-  Provenance:
-  `agents/20260424-173642-gap-closer-UV010-quotient-trivialization/report.md`
-  and `agents/20260424-173642-explorer-UV010-quotient-geometry/report.md`, both
-  with `scripts/quotient_trivialization_check.js`. Usage: determinant pairing
-  gives a representative-independent chart from the moving quotient to the
-  midpoint quotient when `A_5^{\mathfrak f}(m)\neq0`; the `A_5^{\mathfrak f}=0`
-  locus is a rank jump and needs exclusion or a separate exceptional convention.
-- **UV-010 first-wave reports sharpen the theorem boundary but do not close the edge law.**
-  Provenance: first-wave reports plus source/adversarial verifiers
-  `agents/20260424-182546-verifier-*/report.md`. Usage: state the target as a
-  normalized fixed-midpoint quotient edge law with
-  `[R]_{\mathrm{edge}}=-\mathcal H_7^q(m,\kappa,0)`. Current sources expose
-  centered `D_2` and one-pair quotient closure, but no actual two-atom
-  `\mathcal J_2^{(7)}` / `\mathfrak O_7`; determinant scalarization is only
-  good-patch bookkeeping and `A_5^{\mathfrak f}=0` needs a convention.
-- **UV-022 whitening-side candidate is the first homogeneous transfer `\mathcal T_1`.**
-  Provenance:
-  `agents/20260424-184004-gap-closer-UV022-linearized-whitening-functor/report.md`.
-  Usage: the corrected-whitening transfer already supplies a canonical linear
-  functor once a perturbation triple `X` is fixed. The missing package input is
-  the source-weight-linear actual two-atom block perturbation `X^{[1]}` and a
-  proof that its order-7 quotient output is the UV-010
-  `\mathcal J_2^{(7)}` / `\mathfrak O_7`.
-- **UV-023/UV-026 source-bidegree quotient package is missing from current source.**
-  Provenance: UV-023/UV-026 reports in `agents/20260424-190438-*` through
-  `agents/20260425-000623-verifier-source-UV026-baseline-q0-jets/report.md`.
-  Usage: `(1,1)` projection, tagged `L_h`, and
-  `[B_7^{\mathfrak f}(C)]\in\mathfrak f/\mathbf C A_5^{\mathfrak f}(m)` are
-  the right package layer; the guarded source block is canonical.  UV-026 has a
-  complete seven-family inventory and verified Stage 1 generator infrastructure,
-  but promotion still needs ordinary-`z` tagged tables, explicit `\mathfrak D_Q`,
-  removable mixed-block expansions, baseline `q_0^{(0..9)}(m)` jets, scalar
-  `Gr_1/Gr_5` projections, and determinant gates.  Ungraded `f_{\beta,\gamma}`
-  source jets are available; `q^{(5)}/X_3` is rejected for `M^{[5]}` if grade
-  means finite mixed order, leaving `q^{(7)}/X_5` only as an unpromoted candidate.
-  Mixed-order candidate: `Gr_a r` is the homogeneous Taylor piece `r^{(a+2)}`,
-  compatible with same-point and mixed leading order, pending grade-0 handling:
-  affine removal does not kill `r^{(2)}`, and omission needs exclusion/gauge/source-class proof.
-  For `L_1YR_1`, the pure homogeneous convention fails because odd source pieces
-  miss odd mixed orders; `[z^5]M^{[5]}=0` for the `r^{(7)}` candidate.
+- **Archived reusable background:** quintic/septic normal forms, ECT interval geometry, affine normal forms, and the toy microscopic expansion remain in the April chat audits and `rem:wip-toy-microscopic-expansion`.
+- **Best explicit bridge data are compressed to one source tower.** Provenance: same-tower closure and rank-two coupling (`proof_of_rh.tex` lines 21142--21275). Usage: a local bridge must run through `r=q^{(7)}` via `\lambda^{[1]}` / `\mathcal G^{[1]}`; no second primitive pointwise field remains.
+- **Hidden `\Phi_K`-visible state is an affine lift-coordinate.** Provenance: `agents/20260424-145500-explorer-hidden-state-geometry/report.md` and `agents/20260424-112500-phik-kernel-structure/report.md`. Usage: frame D as affine-bundle descent / `\ker\Phi_K` transport along `A_7^{\mathfrak f}+\mathbf C A_5^{\mathfrak f}`.
+- **C determinant slot is the septic quotient-defect class on good patches.** Provenance: `agents/20260424-165509-gap-closer-C-R-determinant-control/report.md` and `agents/20260424-165509-verifier-source-C-R-channel/report.md`. Usage: on `A_5^{\mathfrak f}\neq0`, `[R]\mapsto\det(R,A_5^{\mathfrak f})` charts the quotient with `\mathbf C`; control the quotient class, not a representative.
+- **Exceptional-divisor `[R]` first needs a septic quotient edge package.** Provenance: `agents/20260424-165509-explorer-C-actual-package-construction/report-R-definition-followup.md`. Usage: finite-delta `[R]` needs `\overline E_{12}^{(7;1)}=\delta^2\mathcal H_7^q` plus midpoint quotient trivialization; descent, `\kappa`-independence, and merger are downstream.
+- **UV-010 statement language:** use "septic quotient defect", "collision-cancellation chart", "swap-compatible amplitude coordinate", "edge law", and midpoint quotient after analytic trivialization. Provenance: `agents/20260424-173642-explorer-UV010-source-language/report.md`.
+- **UV-010 midpoint quotient trivialization is locally solved on the good patch.** Provenance: `agents/20260424-173642-gap-closer-UV010-quotient-trivialization/report.md` and `agents/20260424-173642-explorer-UV010-quotient-geometry/report.md`. The `A_5^{\mathfrak f}=0` locus remains a rank jump needing exclusion or a separate convention.
+- **UV-010 first-wave boundary:** state the target as a normalized fixed-midpoint quotient edge law with `[R]_{\mathrm{edge}}=-\mathcal H_7^q(m,\kappa,0)`. Current sources expose centered `D_2` and one-pair quotient closure, but no actual two-atom `\mathcal J_2^{(7)}` / `\mathfrak O_7`; determinant scalarization is good-patch bookkeeping.
+- **UV-022 whitening-side candidate is the first homogeneous transfer `\mathcal T_1`.** Provenance: `agents/20260424-184004-gap-closer-UV022-linearized-whitening-functor/report.md`. Missing input: source-weight-linear actual two-atom block perturbation `X^{[1]}` and proof that its order-7 quotient output is the UV-010 edge package.
+- **UV-023/UV-026 source-bidegree quotient package is missing from current source.** Provenance: UV-023/UV-026 reports in `agents/20260424-190438-*` through `agents/20260425-002114-*`. Usage: `(1,1)` projection, tagged `L_h`, and `[B_7^{\mathfrak f}(C)]\in\mathfrak f/\mathbf C A_5^{\mathfrak f}(m)` are the right package layer; the guarded source block is canonical.
+- **UV-026 coefficient frontier:** seven cubic families and a verified Stage 1 generator exist, but promotion still needs ordinary-`z` tagged tables, explicit `\mathfrak D_Q`, removable mixed-block expansions, baseline `q_0^{(0..9)}(m)` jets, scalar `Gr_1/Gr_5`, grade-0 handling, and determinant gates. Ungraded `f_{\beta,\gamma}` source jets are available; `q^{(5)}/X_3` is rejected for `M^{[5]}` if grade means finite mixed order.
+- **UV-026 mixed-input parity:** `M(-z)=M(z)^T`; diagonal entries are even, and `[z^5]M` lives only in the off-diagonal antisymmetric channel from even source derivatives `r^{(2)},r^{(4)},r^{(6)}`. Provenance: `agents/20260425-002114-gap-closer-UV026-mixed-parity-theorem/report.md`. `M_i^{[5]}` is therefore a conditional placeholder until a parity-corrected scalar/mixed grade theorem is supplied.
 
 ## Recurring open gaps
 
-- **Mixed 4-point source-level factorization.** Touches: UV-002 (pair-like
-  vs finite-core), and `rem:wip-dream-parity-identity-four-point` (line
-  24167). Blocks the general finite-core endgame (UV-007).
-- **Package-level coincidence for the actual corrected two-atom package.**
-  Touches the fixed-shear corner and honest order-7 lane. Reduced C does not
-  imply package theorem B without scalar normalization and the exceptional-divisor
-  convention. Current order: construct `\mathcal H_7^q` / `[R]` (UV-010), prove
-  state-locality/descent, then prove diagonal merger kills slope/provenance data.
-- **Hidden extraction theorem from finite-core package data to the first surviving odd coefficient of `H_m`.**
-  Touches UV-002 / UV-007. `T=v_7/c` is only normalized septic data; finite
-  determination from `(x,Y,S,T)` and `N\le4` are not in the draft. Minimal D
-  target: affine-bundle descent / `\ker\Phi_K` transport for higher freedom.
-- **Finite-core lower-model transfer theorem E.** Touches UV-002 / UV-007:
-  control `\Xi_{\core}^{(N)}` or a one-sided lower law for
-  `H_{\core}^{(2N-1)}`, then use the positive-kernel `N`-point formula.
-- **Exceptional-locus `M=0` reduction after good-patch edge law.**
-  Touches: UV-003 and the finite-core residual two-point lane; current route is
-  Weierstrass/prepared-branch reduction, still heuristic.
-- **Provenance-q / highest-new pointwise bridge.** Touches: UV-004
-  (`rem:wip-explicit-pointwise-bridge-good-patch-detector`, line 21277).
-- **Remote endpoint / branch-incidence theorems.** Touches: UV-005
-  (inverse-branch gap endgame) and UV-006 (same-parity compression).
-- **Variable-\(x\) calibration uniformity.** Touches: UV-001
-  (`rem:wip-calibration-small-u`, line 5500).
-- **Quantitative toy expansion with explicit remainder.** Touches: UV-009
-  (`rem:wip-toy-microscopic-expansion`, line 26692).
+- **Mixed 4-point source-level factorization.** Touches UV-002 and `rem:wip-dream-parity-identity-four-point` (line 24167); blocks the general finite-core endgame.
+- **Actual corrected two-atom package coincidence.** Construct `\mathcal H_7^q` / `[R]` (UV-010), prove state-locality/descent, then prove diagonal merger kills slope/provenance data.
+- **Hidden extraction theorem.** Convert finite-core package data to the first surviving odd coefficient of `H_m`; `T=v_7/c` and finite determination from `(x,Y,S,T)` are not yet enough.
+- **Finite-core lower-model transfer theorem E.** Control `\Xi_{\core}^{(N)}` or a one-sided lower law for `H_{\core}^{(2N-1)}`, then use the positive-kernel `N`-point formula.
+- **Exceptional-locus `M=0` reduction.** After good-patch edge law, use Weierstrass/prepared-branch reduction or a separate exceptional convention.
+- **Provenance-q / highest-new pointwise bridge.** Touches UV-004 (`rem:wip-explicit-pointwise-bridge-good-patch-detector`, line 21277).
+- **Remote endpoint / branch-incidence theorems.** Touches UV-005 and UV-006.
+- **Variable-\(x\) calibration uniformity.** Touches UV-001 (`rem:wip-calibration-small-u`, line 5500).
+- **Quantitative toy expansion with explicit remainder.** Touches UV-009 (`rem:wip-toy-microscopic-expansion`, line 26692).

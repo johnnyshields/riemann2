@@ -1216,3 +1216,42 @@ the `M_i^{[5]}` source-language audit under
 Expected ledger destinations: parity theorem or obstruction to `uv.md` /
 `attempts.md`; wording ambiguity or required definition clarification to
 `uv.md` / `attempts.md`; durable guardrail to `findings.md` only if compact.
+
+### `20260425-002114-verifier-source-UV026-M5-language/report.md`
+
+Signal: UV-026 `M_i^{[5]}` source-language blocker, keep.
+
+Captured takeaway: the current WIP language names a "grade-five mixed input"
+but does not define the scalar grade projection.  The notation
+`M_i^{[5]}` therefore cannot be used as a nonzero ordinary-`z` order-5
+middle factor until the source theorem states whether `[5]` is a source-grade
+label, an actual mixed-order projection, or a temporary placeholder.  This
+goes to UV-026 because it is a precise promotion blocker, not a paper-ready
+claim.
+
+### `20260425-002114-gap-closer-UV026-mixed-parity-theorem/report.md`
+
+Signal: UV-026 mixed-input parity theorem, keep.
+
+Captured takeaway: the full source-linear scaled mixed input satisfies
+`M(-z)=M(z)^T`, not even-only parity.  Diagonal entries are even; odd powers
+live in the off-diagonal antisymmetric channel.  Through order `7`, `[z^5]M`
+depends only on even source derivatives `r^{(2)},r^{(4)},r^{(6)}` and not on
+the homogeneous `r^{(7)}` candidate.  The script
+`agents/20260425-002114-gap-closer-UV026-mixed-parity-theorem/scripts/mixed_parity_audit.py`
+has SHA1 `5922070D51A1E2B3A4841D90317BD7A0A0727015`, and the output manifest
+has SHA1 `1C227B17F1EDFBED6D8A9E74A9D7C11AB9D4BAD1`.
+
+### Frontier after mixed-input parity
+
+- **Current best:** UV-026 no longer has a viable homogeneous `r^{(7)}` route
+  for the `L_1YR_1` middle input.  A nonzero `[z^5]M_i^{[5]}` requires a
+  parity-corrected/non-homogeneous source projection using even derivative
+  data, or the family must be declared absent at `B_7`.
+- **Keep:** the source formula gives an exact transpose-parity theorem
+  pre-`\Phi_K`, before determinant scalarization or quotient extraction.
+- **Blocked:** define the scalar/mixed grade convention for `M_i^{[5]}` and
+  verify compatibility with same-point `\Lambda^{[1]}` factors.
+- **Next:** send one lane to build the parity-corrected grade convention and
+  one lane to adversarially test whether moving `r^{(2)},r^{(4)},r^{(6)}` into
+  grade five conflicts with grade-0/2/4 bookkeeping.

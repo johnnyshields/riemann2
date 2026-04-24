@@ -91,8 +91,14 @@ Working forward-carry of the current open UV items relevant to the active queue.
   determinant inventory.  The pure homogeneous candidate fails for `L_1YR_1`:
   exact mixed-block parity makes odd scalar pieces `r^{(3)}` and `r^{(7)}` first
   appear in mixed orders `2` and `6`, so `[z^5]M^{[5]}=0` for the `r^{(7)}`
-  candidate.  UV-026 now needs a parity-corrected source-grade theorem or a
-  convention change explaining why the `L_1YR_1` middle input is absent at `B_7`.
+  candidate.  The full source-linear mixed input has transpose parity
+  `M(-z)=M(z)^T`; through order `7`, `[z^5]M` is off-diagonal antisymmetric and
+  source-supported only by even derivatives `r^{(2)},r^{(4)},r^{(6)}`.  Hence
+  `M_i^{[5]}` is a conditional placeholder until a theorem states whether `[5]`
+  is a source-grade label whose mixed series may start away from `z^5`, an
+  actual ordinary-`z` order-5 projection, or a parity-corrected non-homogeneous
+  source projection.  UV-026 now needs that convention or a proof that the
+  `L_1YR_1` middle input is absent at `B_7`.
   Gate subtargets: compute determinant identities against
   `A_5^{\mathfrak f}(m)` for all seven classified cubic families:
   `L_1YR_1`; `L_3N_0R_0` and `L_0N_0R_3`; `L_2YR_0` and `L_0YR_2`;
