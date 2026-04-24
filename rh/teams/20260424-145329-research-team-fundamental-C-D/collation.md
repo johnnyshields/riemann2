@@ -790,3 +790,17 @@ Captured takeaway: the cubic `(1,1,5)` witness remains a formal countermodel to 
 - **Keep:** adversarial harness as required stress test.
 - **Discard:** all shortcut routes listed above.
 - **Next:** wait for the source-terms lane to compute or isolate actual cubic `(1,1,5)` contributions.
+
+### `20260424-200220-gap-closer-UV026-cubic-source-terms/report.md`
+
+Signal: UV-026 cubic source inventory, keep.
+
+Captured takeaway: using the staged UV-025 source block, cubic `(1,1,5)` terms can arise from seven pre-`\Phi_K` homogeneous whitening families:
+`L_3N_0R_0`, `L_0N_0R_3`, `L_2YR_0`, `L_0YR_2`, `L_2N_0R_1`, `L_1N_0R_2`, and `L_1YR_1`. Current source proves \(A_5^{\mathfrak f}\)-gauge or `\pi_{\mathfrak f}`-vanishing only after a term is identified as one-pair `K_5`, `K_3`, or pure; it does not classify these general cubic whitening families.
+
+### Frontier after UV-026 cubic inventory
+
+- **Current best:** UV-026 is reduced to computing or source-classifying seven explicit cubic whitening families.
+- **Keep:** start with `L_1YR_1`, the most directly source-coupled family.
+- **Discard:** claiming one-pair `K_5/K_3` laws cover these families without an identification theorem.
+- **Next:** dispatch an actual coefficient computation for `L_1YR_1` and an adversarial determinant/gauge checker.

@@ -170,10 +170,11 @@ Active, compact knowledge base shared with every delegated agent.
   `L_h` candidate is the pre-whitening pair-kernel-linear derivative supported
   by one-pair formulas. The best `Q_7^q` target is
   `[B_7^{\mathfrak f}(C)]\in\mathfrak f/\mathbf C A_5^{\mathfrak f}(m)`.
-  Conditional matrix `C_{\mathcal W}` and `B_7^{\mathfrak f}` are definition-ready
-  once the actual source-linear two-atom block exists. UV-025 has source and
-  adversarial verification for a guarded `paper-updates.md` definition block;
-  UV-026 asks for cubic `(1,1,5)` `A_5^{\mathfrak f}`-gauge.
+  UV-025 has source/adversarial verification for a guarded `paper-updates.md`
+  source-block definition. UV-026 reduces to seven cubic pre-`\Phi_K` whitening
+  families; current source only gives gauge/vanishing once a term is identified
+  as one-pair `K_5`, `K_3`, or pure. Actual `B_7^{\mathfrak f}` coefficients
+  must be computed or source-classified.
 
 ## Recurring open gaps
 
