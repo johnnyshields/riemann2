@@ -798,3 +798,59 @@ Report contract: use the 9-field schema from `AGENTS.md`, include the
 autoresearch closing block and `Ledger destination`, and separate proved /
 conditional / missing. Non-goal: do not promote UV-024, UV-025, or UV-026, and
 do not edit the canonical paper.
+
+## Resume dispatch 20260424-202309
+
+Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260424-202309`.
+
+Base commit: `8ce42e3`.
+
+Current target: UV-026 after the `L_1YR_1` actual-matrix reduction. The first
+family is sharpened to a coefficient-list theorem for
+`\Lambda_{i,\pm}=D(G_\pm^{(0)}(z)^{-1/2})[\delta G_{i,\pm}^{\lin}(z)]`,
+the grade-5 mixed block `M_i^{[5]}`, and determinant identities for the two
+non-`(1,1)` source-tag vectors. In parallel, open the next cubic-family
+classification lane so the team is not blocked on one coefficient theorem.
+
+Roster:
+
+1. `gap-closer-UV026-L1YR1-Lambda-M5-coefficients` writes only under
+   `agents/20260424-202309-gap-closer-UV026-L1YR1-Lambda-M5-coefficients/`.
+   Task: derive or source-reduce the coefficient lists `[z^r]\Lambda_{i,\pm}`
+   and grade-5 `[z^s]M_i^{[5]}` needed for `C_{112}^{L_1YR_1}` and
+   `C_{122}^{L_1YR_1}`.
+2. `explorer-UV026-next-cubic-L3N0R0` writes only under
+   `agents/20260424-202309-explorer-UV026-next-cubic-L3N0R0/`.
+   Task: classify the next cubic whitening family `L_3N_0R_0` together with
+   its right-side mirror `L_0N_0R_3`: prove it is pure / one-pair
+   `K_5`/`K_3` / `A_5^{\mathfrak f}`-gauge, or reduce it to the smallest
+   missing actual coefficient theorem.
+
+In-scope files and prior reports:
+
+- `rh/proof_of_rh.tex` lines 1392--2048, 2324--2587, 2607--2787,
+  6976--7295, and 7742--8033.
+- `rh/teams/20260424-145329-research-team-fundamental-C-D/findings.md`.
+- `rh/teams/20260424-145329-research-team-fundamental-C-D/uv.md`, UV-026 only.
+- `rh/teams/20260424-145329-research-team-fundamental-C-D/paper-updates.md`
+  lines 21, 97, and 131.
+- `agents/20260424-200220-gap-closer-UV026-cubic-source-terms/report.md`.
+- `agents/20260424-201525-gap-closer-UV026-L1YR1-actual-matrices/report.md`.
+- `agents/20260424-201525-source-auditor-UV026-L1YR1-matrix-provenance/report.md`.
+
+Ground-truth checks:
+
+- Work before `\Phi_K`, determinant scalarization, quotient extraction, and
+  diagonal merger.
+- `L_1YR_1` progress requires actual coefficient lists or a minimal missing
+  coefficient theorem, not another formal witness.
+- `L_3N_0R_0` progress requires a source classification or exact missing
+  coefficient theorem; left/right symmetry may be used only after it is stated
+  at the matrix/fixed-sector level.
+- Computational claims require scripts deposited before running in the owned
+  `scripts/` dir and cited with output in `report.md`.
+
+Protected surfaces and report contract are unchanged: agents write only under
+their owned dirs, do not edit ledgers or the paper, use the 9-field report
+schema plus autoresearch closing block and `Ledger destination`, and separate
+proved / conditional / missing.
