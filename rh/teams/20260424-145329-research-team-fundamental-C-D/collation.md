@@ -804,3 +804,16 @@ Captured takeaway: using the staged UV-025 source block, cubic `(1,1,5)` terms c
 - **Keep:** start with `L_1YR_1`, the most directly source-coupled family.
 - **Discard:** claiming one-pair `K_5/K_3` laws cover these families without an identification theorem.
 - **Next:** dispatch an actual coefficient computation for `L_1YR_1` and an adversarial determinant/gauge checker.
+
+### `20260424-200718-verifier-adversarial-UV026-L1YR1-gauge/report.md`
+
+Signal: UV-026 `L_1YR_1` gauge checker, keep.
+
+Captured takeaway: no actual `L_1YR_1` fixed-sector coefficient vector is available yet, so the claim is neither proved gauge nor proved obstructive. The checker fixes the acceptance standard: once `\pi_{\mathfrak f}[z^7](L_1YR_1)=uI+vS` is supplied for a relevant non-`(1,1)` tag, it must satisfy `uv_5-u_5v=0` against the same-basis `A_5^{\mathfrak f}(m)=u_5I+v_5S`.
+
+### Frontier after `L_1YR_1` gauge checker
+
+- **Current best:** exact verifier harness for the first cubic family; coefficient still missing.
+- **Keep:** determinant test only after explicit fixed-sector vector exists.
+- **Discard:** accepting scalar invisibility or source support without vector data.
+- **Next:** wait for coefficient lane to produce or reduce the missing vector.
