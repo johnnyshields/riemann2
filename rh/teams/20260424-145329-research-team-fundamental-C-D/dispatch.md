@@ -81,3 +81,42 @@ Every report must use exactly these fields:
 End with `Honest verdict:`.
 
 `unsupported`, `blocked`, and `no progress` are acceptable returns. If full closure is too hard, reduce to the smallest list of concrete unresolved sub-statements.
+
+## Continuation wave — 2026-04-24
+
+User instruction: reuse this existing team dir and create only new agent subdirectories under `agents/`. Do not forward-carry into a new team dir for this continuation.
+
+### Frontier after first wave
+
+- **C fiber selection.** Patch transitions for the local affine septic-lift coordinate are base-controlled: on overlap, `S_u=-(x/Y)S` and `\tau=\Delta_7/(u_5v_5)` is determined by `\widehat\Psi`. Patching is not the hidden obstruction. The live target is fiber selection: show the actual corrected two-atom exceptional-divisor package has only this affine fiber over the reduced base and diagonal merger kills it.
+- **D affine-bundle transport.** On `\{c\neq0,v_5\neq0\}`, equal reduced-package fibers leave exactly one `\Phi_K`-visible local septic scalar, `T=v_7/c`, but the source audit forbids promoting `T` to a global theorem object. The live target is transform-level state-locality / affine-bundle descent through the first surviving odd order modulo `\ker\Phi_K`.
+- **E finite-core transfer.** After C and D, `UV-002` still needs a real first-nonzero-odd-jet finite-core lower-model theorem. The current sharp split is `E_1` descent from genuine corrected finite-core data to the defect-free affine-incidence lanes, then `E_2` weighted-average or direct-`\Xi` lower control.
+- **Verifier posture.** C dies if `B(m,\kappa)` survives; D dies if hidden `\Phi_K`-visible state survives beyond a patchwise septic proxy; E dies if it only restates the queue without replacing the pair-like lower model.
+
+### Continuation roster
+
+Gap closers:
+
+1. `gap-closer-C-fiber-selection`: attack the final C local-model issue: construct or refute the theorem that the actual corrected two-atom exceptional-divisor package has only the one-dimensional affine septic-lift fiber over `\widehat\Psi`, and that diagonal merger selects the fiber point.
+2. `gap-closer-D-odd-block-state`: identify the exact D-min-visible corrected odd-block functional that should replace cubic/quintic defect channels in the fixed-shear state-locality proposition; test whether corrected whitening analyticity puts it in a finite descended transport-state framework.
+3. `gap-closer-E-finite-core-transfer`: attack `E_1` first, the descent from corrected finite-core package data to the defect-free affine-incidence lanes; if blocked, reduce to the weakest low-order interaction-vanishing theorem needed.
+
+Explorers:
+
+4. `explorer-corrected-package-object`: mine paper and prior reports for the most explicit definition of `\mathfrak P^{\corr}_2=(C^{\corr},A^{\mathfrak f,\corr},\Delta^{\corr})`, its codomain, and exactly what is missing for swap symmetry, one-amplitude collapse, and diagonal merger.
+5. `explorer-affine-bundle-holonomy`: study the affine lift line as a bundle over the reduced base, including local sections, overlaps, exceptional loci `u_5=0` / `v_5=0`, and whether any corrected two-atom holonomy term can survive while remaining compatible with the fixed-shear descent.
+6. `explorer-incidence-lower-model`: mine the finite-core incidence geometry and positive-kernel sections for a direct route from `\widehat\Psi`-side incidence constraints to weighted-average/direct-`\Xi` lower control, including no-cancellation or tail-domination alternatives.
+
+Verifiers:
+
+7. `verifier-adversarial-CDE`: wait for the six research deposits, then attack C fiber-selection, D odd-block state-locality, and E lower-transfer claims against the pinned objections above.
+8. `verifier-source-CDE`: wait for the six research deposits, then source-audit line refs, definitions, basis conventions, patch hypotheses, and whether claims are paper-proved, conditional, or missing.
+
+### Exact current label lines
+
+- `rem:wip-pairlike-finitecore`: `rh/proof_of_rh.tex:5605`.
+- `rem:wip-highest-new-scalar-direct-slice`: `rh/proof_of_rh.tex:10847`.
+- `rem:wip-parity-projective-factorization-collision-blow-up`: `rh/proof_of_rh.tex:12448`.
+- `rem:minimal-core-reformulation`: `rh/proof_of_rh.tex:12587`.
+- `rem:wip-explicit-pointwise-bridge-good-patch-detector`: `rh/proof_of_rh.tex:21278`.
+- `rem:wip-final-endgame-status`: `rh/proof_of_rh.tex:26370`.

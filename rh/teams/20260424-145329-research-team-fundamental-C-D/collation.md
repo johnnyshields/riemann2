@@ -88,6 +88,21 @@ Captured takeaway: the current reports cite the right paper neighborhoods, but s
 
 Source-audit instruction for future briefs: define corrected reduced-package fibers explicitly, keep D at transform level modulo `\ker\Phi_K`, state patch hypotheses for `T`, and use current label lines (`rem:wip-explicit-pointwise-bridge-good-patch-detector` at 21278; `rem:wip-final-endgame-status` at 26370).
 
+## Continuation wave — 2026-04-24
+
+User requested a continuation attack reusing this team dir, with new agent subdirectories only. The continuation brief is appended to `dispatch.md`.
+
+### Frontier summary before continuation dispatch
+
+- **Current best C target:** prove corrected two-atom exceptional-divisor fiber selection. The local affine-lift patch cocycle is base-controlled, so the remaining issue is not patching but whether the actual corrected package has only the affine septic-lift fiber over `\widehat\Psi` and diagonal merger kills it.
+- **Current best D target:** identify the transform-level corrected odd-block functional governed by state-locality / affine-bundle descent. The local scalar `T=v_7/c` is a patchwise proxy, not a global theorem object.
+- **Current best E target:** split finite-core transfer into `E_1` descent from genuine corrected finite-core data to defect-free affine-incidence lanes and `E_2` weighted-average/direct-`\Xi` lower control. Bare coefficient nonvanishing is insufficient without no-cancellation or tail domination.
+- **Keep:** first-wave C/D/E reductions and affine-lift geometry.
+- **Discard:** routes that try to prove C from analyticity, swap-evenness, scalar normalization, or reduced-package blow-up coordinates alone; routes that treat `\widetilde\Psi_{\min}` or `T` as a canonical global theorem object without a hidden-state lemma.
+- **Blocked:** no coordinator blocker; next step is continuation dispatch.
+
+Source-audit instruction for future briefs: define corrected reduced-package fibers explicitly, keep D at transform level modulo `\ker\Phi_K`, state patch hypotheses for `T`, distinguish bases `(I,S,D,J)` vs `(I,D,S,K)`, and use current label lines (`rem:wip-pairlike-finitecore` at 5605; `rem:wip-parity-projective-factorization-collision-blow-up` at 12448; `rem:minimal-core-reformulation` at 12587; `rem:wip-explicit-pointwise-bridge-good-patch-detector` at 21278; `rem:wip-final-endgame-status` at 26370).
+
 ### `20260424-145500-explorer-package-functoriality/notes/followup-b-vs-c-scalar-law.md`
 
 Signal: B-vs-C distinction, proved relative to current formulation.
