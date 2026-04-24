@@ -134,6 +134,10 @@ Focused target:
 - Gap closer:
   `agents/20260424-191454-gap-Ar-Or-role-split/` targets UV-013.
 
+Verifier:
+- `agents/20260424-191817-verifier-Ar-Or-role-split/` checks the UV-013 role
+  criterion and no-global-winner theorem before promotion.
+
 Ground-truth check:
 - Decide whether the archive already proves a role criterion or only a scoped
   negative: no unique global winner is forced by the current invariant package.
