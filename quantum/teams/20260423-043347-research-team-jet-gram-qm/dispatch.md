@@ -138,6 +138,27 @@ Verifier:
 - `agents/20260424-191817-verifier-Ar-Or-role-split/` checks the UV-013 role
   criterion and no-global-winner theorem before promotion.
 
+## Follow-on dispatch 20260424-192133 - UV-014
+
+UV-013 is promoted. The next target is UV-014: find a natural
+dynamical/experimental protocol for the principal-angle/operator package, or
+prove that the existing candidates are only repackagings.
+
+Focused target:
+- Gap closer:
+  `agents/20260424-192133-gap-natural-protocol/` targets UV-014.
+
+Ground-truth check:
+- Test a positive route through two-subspace projective measurements,
+  alternating projections, or product-of-reflections phase estimation: can the
+  principal-angle cosines be read as directly observable probabilities or
+  phases in a natural protocol, beyond the thin yes/yes projector test already
+  recorded?
+- Compare against exact unitary/Krylov, compressed propagator, Kato transport,
+  commutator/leakage, and short-time expansion deposits.
+- If positive, state the protocol and its hypotheses. If negative, state the
+  exact scope in which existing models are only reformulations.
+
 Ground-truth check:
 - Decide whether the archive already proves a role criterion or only a scoped
   negative: no unique global winner is forced by the current invariant package.

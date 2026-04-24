@@ -9,6 +9,7 @@
 | `20260424-191018-verifier-multiparameter-frame-finality` | UV-011 | Adversarially test the scoped no-go for multiparameter ordered frames/matrices and the associated-graded tensor caveat. | terminal | `agents/20260424-191018-verifier-multiparameter-frame-finality/report.md` accepts the no-go for promotion with scope caveats around extra structure and tensor-valued objects. | Promoted to `quantum/paper/jet_gram_quantum_note.md`; UV-011 removed from `uv.md`. | Verification required before changing UV-011 proof state. |
 | `20260424-191454-gap-Ar-Or-role-split` | UV-013 | Decide whether `O_r` versus `A_r` has a role criterion or only a no-global-winner theorem. | terminal | `agents/20260424-191454-gap-Ar-Or-role-split/report.md` gives a role criterion: `O_r` for horizontal/value-channel-removed geometry, `A_r` for ambient state-line endpoint packages; no global winner is forced. | Promoted to `quantum/paper/jet_gram_quantum_note.md`; UV-013 removed from `uv.md`. | This is the next structural target after closing matrix/frame finality. |
 | `20260424-191817-verifier-Ar-Or-role-split` | UV-013 | Adversarially test the `O_r`/`A_r` role criterion and no-global-winner theorem. | terminal | `agents/20260424-191817-verifier-Ar-Or-role-split/report.md` accepts promotion with caveats against state-line recovery and universal `O_r` dominance wording. | Promoted to `quantum/paper/jet_gram_quantum_note.md`; UV-013 removed from `uv.md`. | Verification required before changing UV-013 proof state. |
+| `20260424-192133-gap-natural-protocol` | UV-014 | Test whether principal-angle/operator data has a natural two-projector/reflection measurement protocol beyond the thin yes/yes test, or only existing reformulations. | running | Follow-on dispatch in `dispatch.md`; prior operational, Krylov, propagator, Kato, commutator, and leakage reports are in scope. | Await report; if terminal, send to verifier before promotion or UV removal. | This is the remaining protocol target after structural UV closures. |
 
 ## Frontier summaries
 
@@ -34,5 +35,4 @@
   coordinator brief and no deposited report. This has now been superseded by
   the deposited UV-012 gap and verifier reports.
 - **Next:** Per user redirection on 2026-04-24, do not default to a 3+3+2
-  roster. With UV-011, UV-012, and UV-013 closed, attack UV-014 (natural
-  protocol) or UV-015 (nonbenchmark genericity) next.
+  roster. Attack UV-014 (natural protocol) next.
