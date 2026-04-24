@@ -152,6 +152,25 @@ Verifier:
 - `agents/20260424-192735-verifier-natural-protocol/` checks the
   two-reflection protocol before any UV-014 promotion.
 
+## Follow-on dispatch 20260424-193527 - UV-015
+
+UV-014 is promoted. The remaining live target is UV-015: nonbenchmark
+genericity of richer-than-overlap behavior.
+
+Focused target:
+- Gap closer:
+  `agents/20260424-193527-gap-nonbenchmark-genericity/` targets UV-015.
+
+Ground-truth check:
+- Produce a clean theorem, or reduce to the smallest precise finite-dimensional
+  transversality/rank condition still missing.
+- Existing benchmark families (Veronese and spherical twists) are evidence, not
+  closure by themselves. A closure should explain why overlap and at least one
+  principal-angle observable are generically functionally independent for a
+  meaningful class of nonbenchmark curves, or state exactly why that theorem is
+  not yet justified.
+- Do not add another isolated example unless it proves the genericity route.
+
 Ground-truth check:
 - Test a positive route through two-subspace projective measurements,
   alternating projections, or product-of-reflections phase estimation: can the
