@@ -97,6 +97,12 @@ Next focused target:
 - Gap closer:
   `agents/20260424-184452-gap-multiparameter-frame-finality/` targets UV-011.
 
+Replacement:
+- The `20260424-184452` agent handle never initialized and left no report.
+- Gap closer:
+  `agents/20260424-190708-gap-multiparameter-frame-finality/` replaces it on
+  the same UV-011 target.
+
 Ground-truth check:
 - Decide whether the multiparameter covariant-jet structure supplies any
   natural ordered matrix/frame package beyond the already-proved subspace
