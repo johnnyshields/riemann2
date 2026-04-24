@@ -777,3 +777,16 @@ Captured takeaway: the `\mathcal B_2` candidate is safe as a UV-025 paper-update
 - **Keep:** staged definition/theorem only; do not remove UV-025 until the canonical paper edit is applied and checked.
 - **Discard:** any wording that treats `\mathcal B_2` as already supplied by quotient-output package language or claims UV-024/UV-026 progress.
 - **Next:** apply/review the staged paper update in the next coordinator edit pass, then return to UV-026.
+
+### `20260424-200220-verifier-adversarial-UV026-cubic-witness/report.md`
+
+Signal: UV-026 adversarial witness verifier, keep.
+
+Captured takeaway: the cubic `(1,1,5)` witness remains a formal countermodel to shortcut proofs after the UV-025 staged block. The harness rejects `\Phi_K` scalar hiding, determinant scalarization, swap symmetry, one-pair gauge, and UV-025 pre-whitening linearity as UV-026 proofs. The witness is not yet a genuine actual-package obstruction because no actual `B_7^{\mathfrak f}` cubic coefficient has been computed.
+
+### Frontier after UV-026 adversarial witness
+
+- **Current best:** UV-026 proof standard is fixed-sector proportionality to `A_5^{\mathfrak f}(m)` for the actual cubic coefficient.
+- **Keep:** adversarial harness as required stress test.
+- **Discard:** all shortcut routes listed above.
+- **Next:** wait for the source-terms lane to compute or isolate actual cubic `(1,1,5)` contributions.
