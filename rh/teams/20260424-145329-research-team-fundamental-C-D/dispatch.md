@@ -855,6 +855,65 @@ their owned dirs, do not edit ledgers or the paper, use the 9-field report
 schema plus autoresearch closing block and `Ledger destination`, and separate
 proved / conditional / missing.
 
+## Resume dispatch 20260424-231056
+
+Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260424-231056`.
+
+Base commit: `8474dad`.
+
+Coordinator status: UV-025 is promoted to the canonical draft.  UV-026 remains
+the active local test for the source-bidegree corrected-whitening gauge theorem.
+The two current coefficient gates are:
+
+- `L_1YR_1`: Sylvester recurrence and `r+s+t=7` convolution are explicit, but
+  order-`<=7` coefficient tables and `M_i^{[5]}` normalization are missing.
+- `L_3N_0R_0` / `L_0N_0R_3`: reduced to actual third-Frechet coefficient
+  identities.
+
+Roster:
+
+1. `gap-closer-UV026-L1YR1-coefficient-tables` writes only under
+   `agents/20260424-231056-gap-closer-UV026-L1YR1-coefficient-tables/`.
+   Task: find, derive, or source-reject the order-`<=7` coefficient tables for
+   `G_\pm^{(0)\pm1/2}`, `\delta G_{i,\pm}^{\lin}`, and the normalized
+   `M_i^{[5]}` input needed by the `L_1YR_1` Sylvester/convolution gate.
+2. `explorer-UV026-next-cubic-L2YR0` writes only under
+   `agents/20260424-231056-explorer-UV026-next-cubic-L2YR0/`.
+   Task: classify `L_2YR_0` and `L_0YR_2` as source-trivial, one-pair
+   `K_5`/`K_3`, `A_5^{\mathfrak f}`-gauge, or reduce to the exact missing
+   coefficient theorem.
+
+Verifier queue: none until an actual vector, determinant identity, source-class
+theorem, or coefficient table is deposited.
+
+In-scope files and prior reports:
+
+- `rh/proof_of_rh.tex` lines 1392--2048, 2324--2587, 2607--2899,
+  6976--7409, 7742--8048, and 12617--12714.
+- `rh/teams/20260424-145329-research-team-fundamental-C-D/findings.md`.
+- `rh/teams/20260424-145329-research-team-fundamental-C-D/uv.md`, UV-026 only.
+- `agents/20260424-225250-gap-closer-UV026-L1YR1-Lambda-M5-coefficients-v2/report.md`.
+- `agents/20260424-225250-explorer-UV026-next-cubic-L3N0R0-v2/report.md`.
+- `agents/20260424-201525-gap-closer-UV026-L1YR1-actual-matrices/report.md`.
+
+Ground-truth checks:
+
+- Stay before `\Phi_K`, determinant scalarization, quotient extraction, and
+  diagonal merger.
+- A coefficient-table lane must either produce usable tables in the same
+  `B_7^{\mathfrak f}` normalization or state the exact missing finite-order
+  normal-form theorem. Do not restate the recurrence as progress.
+- A cubic-family lane must identify the actual source class or reduce to a
+  precise missing coefficient theorem. Do not use one-pair laws without source
+  identification.
+- Computational claims require scripts deposited before running in the owned
+  `scripts/` dir and cited with output in `report.md`.
+
+Protected surfaces and report contract are unchanged: agents write only under
+their owned dirs, do not edit ledgers or the paper, use the 9-field report
+schema plus autoresearch closing block and `Ledger destination`, and separate
+proved / conditional / missing.
+
 ## Resume dispatch 20260424-225250
 
 Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260424-225250`.
