@@ -170,6 +170,8 @@ Active, compact knowledge base shared with every delegated agent.
   mixed-block removable-singularity expansions before coefficient extraction.
   The Stage 1 generator reduces the table input to a 42-scalar source-jet
   theorem: baseline `q_0^{(0..9)}(m)` plus tagged grades `r_i^{[1/5](2..9)}(m)`.
+  Verifier reruns reproduce the manifest exactly and accept the generator only
+  as infrastructure; actual source jets and determinant gates remain missing.
 
 ## Recurring open gaps
 

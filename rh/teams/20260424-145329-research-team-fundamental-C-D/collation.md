@@ -1018,3 +1018,15 @@ Expected ledger destinations: generator verifier findings go to `attempts.md`
 and possibly `findings.md` if they are reusable guardrails; source-jet formulas
 or a sharper missing split go to `uv.md`/`attempts.md`; no paper update unless a
 verified theorem statement emerges.
+
+### `20260424-234737-verifier-adversarial-UV026-stage1-generator/report.md`
+
+Signal: UV-026 Stage 1 generator verification, keep.
+
+Captured takeaway: the generator is accepted as source-faithful infrastructure
+under conditional scope.  The verifier script reruns the generator and exactly
+reproduces manifest SHA1 `66EF80F8260752880035C7075F279E2FE01EBFB1`; all
+normalization, tag/grade, mixed `\mathfrak D_Q`, shape, and demo
+removable-singularity checks pass.  The accepted scope is infrastructure only:
+actual finite-grade split, scalar source jets, square-root/Frechet tables, and
+seven determinant identities remain missing.
