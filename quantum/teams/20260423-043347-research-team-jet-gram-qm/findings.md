@@ -142,6 +142,11 @@ Source anchor:
   does not justify a unique global winner between them.
 - Equivalently, `O_r` is canonically the quotient of `A_r` by the state line
   via the restricted orthogonal projector.
+- The `O_r`/`A_r` decision is a role split, not a global selection rule:
+  `O_r` is the horizontal value-channel-removed quotient object, while `A_r` is
+  the ambient extension when the state line belongs in the endpoint subspace
+  package. Benchmark evidence shows `O_r` can be finer, but not that it
+  universally dominates `A_r`.
 - On the current qutrit/quartit benchmarks, `O_r` already carries richer
   two-point geometry than overlap alone. On the quartit second-order benchmark,
   `O_2` is actually finer than `A_2` at the level of principal-angle data.
@@ -231,8 +236,6 @@ Source anchor:
 
 ## Missing
 
-- A sharper decision criterion for when `O_r` versus `A_r` is the physically or
-  mathematically preferred object outside the current benchmark families.
 - A concrete worked model tying the projector/principal-angle invariants to a
   naturally arising protocol rather than abstract subspace tests alone.
 - General lower-order (`r < n-1`) Veronese-family formulas, especially on the

@@ -349,11 +349,11 @@ O_r(\lambda)=\mathrm{span}\{j_1(\lambda),\dots,j_r(\lambda)\},
 A_r(\lambda)=\mathrm{span}\{\psi(\lambda)\}\oplus O_r(\lambda).
 \]
 
-`O_r` is the value-channel-removed object and stays closest to the original
-horizontal/jet-normalized motivation. `A_r` is the ambient object on which the
-strongest transport-free two-point principal-angle theorem is currently stated.
-The present record does not justify declaring one of them uniquely canonical in
-all roles.
+`O_r` is the horizontal, value-channel-removed object and stays closest to the
+original jet-normalized motivation. `A_r` is the ambient extension used when the
+state line is intended to remain part of the endpoint subspace package. The
+current invariant package gives this role split, not a global rule selecting one
+object for every purpose.
 
 There is also a precise quotient relation: the orthogonal projector
 \(P=I-|\psi\rangle\langle\psi|\) restricts to a surjection \(A_r\to O_r\) with
@@ -363,9 +363,11 @@ quotient of `A_r` by the state line.
 Current benchmarks sharpen this split. On the qutrit first-order and quartit
 second-order families, `O_r` already carries richer two-point geometry than
 overlap alone. On the quartit benchmark, `O_2` is actually finer than `A_2` at
-the level of principal-angle data. So the present note keeps both objects on
-purpose: `O_r` for the value-channel-free geometry, `A_r` for the cleanest
-transport-free ambient theorem.
+the level of principal-angle data. This does not make `O_r` universally
+dominant, and the unlabeled principal-angle data of an `A_r` endpoint pair does
+not by itself identify the state line inside `A_r`. The note keeps both objects
+on purpose: `O_r` for value-channel-free horizontal geometry, and `A_r` for
+ambient subspace, Krylov, and full-subspace projector packages.
 
 There is also one useful dynamical specialization. For a unitary orbit
 \(\psi(t)=e^{-itH}\psi_0\), the ambient space \(A_r(t)\) is exactly the
@@ -807,9 +809,14 @@ Safe claims:
    determine the canonical `O_r` and `A_r` filtrations and the corresponding
    operator/principal-angle package, but no ordered matrix/frame from the
    ray-field data alone.
-10. There are now explicit benchmark families on both the ambient `A_r` side and
-   the value-channel-free `O_r` side where the surviving two-point data is not
-   determined by overlap alone.
+10. The relation \(A_r=\mathrm{span}\{\psi\}\oplus O_r\) gives a role split:
+    `O_r` is the horizontal/value-channel-removed quotient object, while `A_r`
+    is the ambient extension when the state line belongs in the endpoint
+    subspace package. No unique global winner is forced by the current
+    invariants.
+11. There are now explicit benchmark families on both the ambient `A_r` side and
+    the value-channel-free `O_r` side where the surviving two-point data is not
+    determined by overlap alone.
 
 Unsafe claims, for now:
 
@@ -822,9 +829,7 @@ Unsafe claims, for now:
 
 ## Open Problems
 
-1. Clarify when `O_r` versus `A_r` is the right object outside the current
-   benchmark families.
-2. Go beyond the current exact unitary/Krylov and projector-test specializations
+1. Go beyond the current exact unitary/Krylov and projector-test specializations
    to a more natural dynamical or experimental model.
 
 ## Provenance
@@ -878,6 +883,8 @@ Unsafe claims, for now:
 - `quantum/teams/20260423-043347-research-team-jet-gram-qm/agents/20260424-183451-verifier-biunitary-finality/report.md`
 - `quantum/teams/20260423-043347-research-team-jet-gram-qm/agents/20260424-190708-gap-multiparameter-frame-finality/report.md`
 - `quantum/teams/20260423-043347-research-team-jet-gram-qm/agents/20260424-191018-verifier-multiparameter-frame-finality/report.md`
+- `quantum/teams/20260423-043347-research-team-jet-gram-qm/agents/20260424-191454-gap-Ar-Or-role-split/report.md`
+- `quantum/teams/20260423-043347-research-team-jet-gram-qm/agents/20260424-191817-verifier-Ar-Or-role-split/report.md`
 - `quantum/teams/20260424-032829-attack-saturation/reports/`
 - `quantum/teams/20260424-033611-attack-twist-family/reports/`
 - `quantum/teams/20260424-034240-attack-quotient/reports/`

@@ -136,3 +136,19 @@ principal-angle level, while `A_r` keeps state-line information.
 Provisional verdict: keep pending adversarial verification. The verifier should
 check that the role criterion does not imply `A_r` principal-angle data alone
 identifies the state line, and does not imply `O_r` universally dominates `A_r`.
+
+## Verifier return and promotion - UV-013
+
+`agents/20260424-191817-verifier-Ar-Or-role-split/report.md` accepts the UV-013
+role split for promotion. The verifier confirmed the decomposition and quotient
+criterion, and narrowed the wording: `A_r` contains the state line by
+definition, but unlabeled `A_r` principal-angle data does not identify that line;
+benchmark refinements show `O_r` can be finer in some roles, not that it
+universally dominates.
+
+Promoted the role criterion into `quantum/paper/jet_gram_quantum_note.md` and
+removed UV-013 from `uv.md`. Stronger physical selection is deferred to UV-014,
+not treated as a blocker for UV-013.
+
+Remaining open UVs: UV-014 (natural dynamical/experimental protocol) and UV-015
+(nonbenchmark genericity).
