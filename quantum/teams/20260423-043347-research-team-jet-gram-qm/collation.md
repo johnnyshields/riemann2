@@ -104,3 +104,20 @@ Provisional verdict: keep pending adversarial verification. The main wording
 risk is scope: the theorem must say "from the ray-field/subspace data alone" and
 must not exclude tensor-valued associated-graded objects or matrices built after
 adding a source metric, connection, dynamics, protocol, or symmetry breaking.
+
+## Verifier return and promotion - UV-011
+
+`agents/20260424-191018-verifier-multiparameter-frame-finality/report.md`
+accepts the UV-011 gap report for promotion with scope fixes. The verifier
+confirmed that raw mixed-partial arrays fail as ordered canonical data under
+block-upper-triangular phase/chart laws; Berry-covariant and symmetrized jets
+repair gauge covariance and span generation but do not choose bases; and UV-012
+is applied only after reduction to endpoint subspaces `O_r` or `A_r`.
+
+Promoted the scoped no-go into `quantum/paper/jet_gram_quantum_note.md` and
+removed UV-011 from `uv.md`. The promoted wording leaves room for matrices
+after adding explicit frame-selecting structure and for associated-graded or
+tensor-valued jet symbols as separate basis-free objects.
+
+Remaining open UVs: UV-013 (`O_r` versus `A_r`), UV-014 (natural
+dynamical/experimental protocol), and UV-015 (nonbenchmark genericity).

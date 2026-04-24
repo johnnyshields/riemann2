@@ -120,3 +120,7 @@ Non-goals:
 - Do not reopen UV-012 unless the new argument finds a real flaw in the
   promoted theorem.
 - Do not broaden the target to arbitrary dynamics or experimental protocols.
+
+Verifier:
+- `agents/20260424-191018-verifier-multiparameter-frame-finality/` checks the
+  `20260424-190708` gap report before any UV-011 promotion or UV removal.

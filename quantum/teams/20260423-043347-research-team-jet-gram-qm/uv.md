@@ -1,14 +1,8 @@
 # UV Ledger
 
 Current quantum-track open targets. Provenance is the open-problem block in
-`quantum/paper/jet_gram_quantum_note.md:783-794` plus the handoff frontier in
+`quantum/paper/jet_gram_quantum_note.md` plus the handoff frontier in
 `quantum/teams/20260423-043347-research-team-jet-gram-qm/HANDOFF-20260424.md`.
-
-- **UV-011** - `quantum-open-multiparameter-matrix-frame`
-  Determine whether a multiparameter covariant-jet hierarchy admits a canonical
-  ordered matrix/frame package beyond the already-proved subspace theorem. A
-  closure can be positive under explicit natural extra hypotheses, or negative
-  as a unitary-equivariant no-go with the exact surviving basis-free object.
 
 - **UV-013** - `quantum-open-Ar-vs-Or-selection`
   Clarify when `O_r` versus `A_r` is the right object outside the current
