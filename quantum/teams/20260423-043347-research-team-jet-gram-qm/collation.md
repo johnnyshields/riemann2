@@ -121,3 +121,18 @@ tensor-valued jet symbols as separate basis-free objects.
 
 Remaining open UVs: UV-013 (`O_r` versus `A_r`), UV-014 (natural
 dynamical/experimental protocol), and UV-015 (nonbenchmark genericity).
+
+## Gap return - UV-013
+
+`agents/20260424-191454-gap-Ar-Or-role-split/report.md` proposes closing UV-013
+with a role criterion plus no-global-winner theorem. The exact relation
+\(A_r=\operatorname{span}\{\psi\}\oplus O_r\) and the quotient theorem identify
+`O_r` as the horizontal/value-channel-removed object. `A_r` is the ambient
+extension when the state line belongs in the endpoint package, including the
+transport-free ambient theorem, unitary/Krylov specialization, and projector
+tests. Benchmark reports show `O_r` is not merely weaker and can be finer at the
+principal-angle level, while `A_r` keeps state-line information.
+
+Provisional verdict: keep pending adversarial verification. The verifier should
+check that the role criterion does not imply `A_r` principal-angle data alone
+identifies the state line, and does not imply `O_r` universally dominates `A_r`.
