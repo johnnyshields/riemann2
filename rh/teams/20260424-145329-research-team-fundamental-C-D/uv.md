@@ -60,8 +60,9 @@ Working forward-carry of the current open UV items relevant to the active queue.
   Current role: narrowed cubic gauge subtarget for UV-024; needed before the
   full non-`(1,1)` quotient-invisibility theorem can be promoted.
   Immediate subtarget: display the coefficient lists `[z^r]\Lambda_{i,\pm}`
-  for Frechet inverse-square-root outputs and `[z^s]M_i^{[5]}` for the grade-5
-  mixed block, then compute the two `L_1YR_1` tag vectors and their determinant
+  for Frechet inverse-square-root outputs and normalized
+  `[z^s]\operatorname{Gr}_5(\mathfrak D_Q\delta N_i^{\lin})` for the grade-5
+  mixed input, then compute the two `L_1YR_1` tag vectors and determinant
   identities against `A_5^{\mathfrak f}(m)`.
   Parallel subtarget: classify `L_3N_0R_0` and `L_0N_0R_3` via actual
   third-Frechet inverse-square-root coefficient identities or a source-class

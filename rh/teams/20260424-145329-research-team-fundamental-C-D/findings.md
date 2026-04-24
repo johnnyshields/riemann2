@@ -164,9 +164,9 @@ Active, compact knowledge base shared with every delegated agent.
   The guarded tagged source block is now canonical in `proof_of_rh.tex`.
   UV-026 reduces to seven cubic pre-`\Phi_K` whitening families; current source
   only gives gauge/vanishing after one-pair `K_5`/`K_3`/pure identification.
-  Current gates: `L_1YR_1` needs coefficient tables, `L_3N_0R_0`/mirror need
-  third-Frechet identities, and `L_2YR_0`/mirror need second-Frechet plus
-  mixed-input identities.
+  Current gates: `L_1YR_1` needs normalized finite coefficient tables,
+  `L_3N_0R_0`/mirror need third-Frechet identities, and `L_2YR_0`/mirror need
+  second-Frechet plus mixed-input identities.
 
 ## Recurring open gaps
 

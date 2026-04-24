@@ -1,0 +1,207 @@
+{
+  "script": "C:\\workspace\\riemann2\\rh\\teams\\20260424-145329-research-team-fundamental-C-D\\agents\\20260424-231056-gap-closer-UV026-L1YR1-coefficient-tables\\scripts\\l1yr1_table_contract.py",
+  "script_sha1": "206663C05A1B307A06619137B3069CEB3D7D58BC",
+  "order": 7,
+  "schema": {
+    "normalization": {
+      "coordinate": "ordinary z coefficients before Phi_K",
+      "fixed_sector_basis": [
+        "I",
+        "S"
+      ],
+      "B7_fixed_sector": "pi_f [z^7]",
+      "mixed_input_required": "scaled_Y = mathfrak D_Q(delta N_i^{lin}) before grade extraction",
+      "order": 7
+    },
+    "required_tables": {
+      "G_sqrt": {
+        "signs": [
+          "-",
+          "+"
+        ],
+        "coefficients": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7"
+        ],
+        "matrix_shape": [
+          2,
+          2
+        ]
+      },
+      "G_invsqrt": {
+        "signs": [
+          "-",
+          "+"
+        ],
+        "coefficients": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7"
+        ],
+        "matrix_shape": [
+          2,
+          2
+        ]
+      },
+      "deltaG_lin": {
+        "tags": [
+          "1",
+          "2"
+        ],
+        "signs": [
+          "-",
+          "+"
+        ],
+        "coefficients": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7"
+        ],
+        "matrix_shape": [
+          2,
+          2
+        ]
+      },
+      "M5": {
+        "tags": [
+          "1",
+          "2"
+        ],
+        "coefficients": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7"
+        ],
+        "matrix_shape": [
+          2,
+          2
+        ]
+      },
+      "A5_fixed": {
+        "coordinates": [
+          "u5",
+          "v5"
+        ]
+      }
+    },
+    "derived_outputs_enabled": [
+      "Lambda_{i,pm}^{[0..7]} by the Sylvester equation",
+      "C112^{L_1YR_1} and C122^{L_1YR_1} by the r+s+t=7 convolution",
+      "determinants u112*v5-u5*v112 and u122*v5-u5*v122"
+    ]
+  },
+  "source_audit": {
+    "paper_sha1": "18495A9DB62A22895B2C44D926E7D0B9271A34E4",
+    "window_hits": {
+      "baseline_scaled_input": {
+        "path": "rh\\proof_of_rh.tex",
+        "line_range": [
+          2429,
+          2466
+        ],
+        "mentions": {
+          "D_Q": true,
+          "Y_scaled_input": true,
+          "bounded_baseline": false,
+          "M_i_5": false,
+          "missing_lists": false,
+          "even_weight_negative": false
+        }
+      },
+      "kernel_linearity": {
+        "path": "rh\\proof_of_rh.tex",
+        "line_range": [
+          2628,
+          2784
+        ],
+        "mentions": {
+          "D_Q": true,
+          "Y_scaled_input": true,
+          "bounded_baseline": true,
+          "M_i_5": false,
+          "missing_lists": false,
+          "even_weight_negative": false
+        }
+      },
+      "wip_target": {
+        "path": "rh\\proof_of_rh.tex",
+        "line_range": [
+          12617,
+          12714
+        ],
+        "mentions": {
+          "D_Q": false,
+          "Y_scaled_input": false,
+          "bounded_baseline": false,
+          "M_i_5": true,
+          "missing_lists": true,
+          "even_weight_negative": false
+        }
+      },
+      "source_level_negative": {
+        "path": "rh\\proof_of_rh.tex",
+        "line_range": [
+          12098,
+          12331
+        ],
+        "mentions": {
+          "D_Q": false,
+          "Y_scaled_input": false,
+          "bounded_baseline": false,
+          "M_i_5": false,
+          "missing_lists": false,
+          "even_weight_negative": true
+        }
+      }
+    },
+    "explicit_table_checks": {
+      "G_baseline_sqrt_or_invsqrt_order_le_7": false,
+      "deltaG_lin_order_le_7": false,
+      "M_i_5_order_le_7": false,
+      "Lambda_order_le_7": false
+    },
+    "table_block_found": false,
+    "source_reduction": {
+      "proved_from_source": [
+        "The pre-whitening transfer uses the weighted input Y with delta N = mathfrak D_Q^{-1}Y.",
+        "The source displays exact same-point and mixed block formulas and linear-in-kernel estimates.",
+        "The WIP L_1YR_1 target names Lambda_{i,pm} and M_i^{[5]} and explicitly lists their coefficient arrays as missing."
+      ],
+      "conditional": [
+        "The only normalization compatible with the transfer variables is M_i^{[5]} = Gr_5(mathfrak D_Q(delta N_i^{lin})), unless a later theorem overrides the symbol."
+      ],
+      "missing": [
+        "[z^0..z^7] G_pm^{(0)}(z)^{1/2} and G_pm^{(0)}(z)^{-1/2}.",
+        "[z^0..z^7] delta G_{i,pm}^{lin}(z) after the tagged one-atom kernels are fixed.",
+        "[z^0..z^7] M_i^{[5]}(z) in the same B_7^f pre-Phi normalization.",
+        "The two determinant identities against A_5^f(m)."
+      ]
+    }
+  },
+  "exact_missing_theorem": "Finite-order normalized L_1YR_1 coefficient-table theorem: for the UV-025 tagged pre-whitening block B_2, in ordinary z and before Phi_K, display matrices S_{pm,r}, B_{pm,r}, H_{i,pm,r}, and M_{i,r}^{[5]} for 0<=r<=7 such that G_pm^{(0)1/2}=sum S_{pm,r}z^r+O(z^8), G_pm^{(0)-1/2}=sum B_{pm,r}z^r+O(z^8), delta G_{i,pm}^{lin}=sum H_{i,pm,r}z^r+O(z^8), and M_i^{[5]}=Gr_5(mathfrak D_Q delta N_i^{lin})=sum M_{i,r}^{[5]}z^r+O(z^8). Using these tables, the Sylvester outputs Lambda_{i,pm}^{[0..7]} must give pi_f[z^7] of the two L_1YR_1 tag products in C A_5^f(m).",
+  "table_validation": {
+    "valid": false,
+    "reason": "no coefficient-table JSON was supplied"
+  }
+}

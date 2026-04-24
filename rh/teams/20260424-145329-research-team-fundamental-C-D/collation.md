@@ -917,3 +917,16 @@ Captured takeaway: these second-Frechet-with-mixed-input families remain open. C
 - **Keep:** `L_2YR_0` needs second-Frechet plus mixed-input coefficient data; it is not pure simply because it has only one explicit `Y`.
 - **Discard:** one-pair `K_5/K_3` or pure-sector closure before source-class identification.
 - **Next:** either derive shared first/second/third-Frechet coefficient tables or classify the remaining `L_2N_0R_1` / `L_1N_0R_2` families.
+
+### `20260424-231056-gap-closer-UV026-L1YR1-coefficient-tables/report.md`
+
+Signal: UV-026 `L_1YR_1` coefficient-table audit, keep.
+
+Captured takeaway: the inspected paper windows and prior reports do not contain usable order-`<=7` coefficient tables for `G_\pm^{(0)\pm1/2}`, `\delta G_{i,\pm}^{\lin}`, or the normalized mixed input. The report fixes the intended normalization as `M_i^{[5]}=\operatorname{Gr}_5(\mathfrak D_Q\delta N_i^{\lin})` for the pre-`\Phi_K`, `B_7^{\mathfrak f}=\pi_{\mathfrak f}[z^7]` gate. The script `agents/20260424-231056-gap-closer-UV026-L1YR1-coefficient-tables/scripts/l1yr1_table_contract.py` reruns and records a schema/validator; it reports `table_block_found=false`.
+
+### Frontier after coefficient-table audit
+
+- **Current best:** `L_1YR_1` is blocked on a finite normalized coefficient-table theorem, not on further source search in the inspected windows.
+- **Keep:** the table contract can validate any future coefficient-table JSON before rerunning the Sylvester/convolution gate.
+- **Discard:** treating raw linear-in-kernel estimates or bounded-baseline placeholders as coefficient tables.
+- **Next:** derive the actual finite source-normal-form tables or open the remaining mixed cubic families.
