@@ -187,6 +187,16 @@ is the supplied team dir unless another path is named.
   `notes/paired_slot_hypotheses.md`, `notes/whitening_interface.md`,
   `agents/20260424-192025-gap-uv017-coefficient-freeze/report-uv017-holomorphy-positivity-whitening.md`,
   `agents/20260424-183416-verifier-slot-skeleton/report-uv017-holomorphy-positivity-audit.md`.
+- **One-zero strip-edge positivity does not imply the UV-017 determinant
+  gap.** For the positive one-zero kernel \(K_{\beta,\gamma}\), Noether's exact
+  calculation gives \(\mathcal D[K]\equiv0\) at \(\beta=1/2\), and
+  \(\mathcal D[K](\gamma/2)<0\) plus negative tails when \(\beta\ne1/2\).
+  Thus no one-zero determinant-positivity lemma can supply same-point
+  whitening; any positive route must use aggregate completed-source structure
+  or leave the determinant/spectral gap as an explicit hypothesis. Provenance:
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/report-uv017-one-zero-determinant-gap.md`,
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/notes/one_zero_determinant_gap.md`,
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/scripts/check_one_zero_determinant_gap.py`.
 - **A paired slot identity can be tautological unless the coefficient is fixed
   independently.** Defining `R_chi^pair` after subtracting a chosen linear term
   does not prove source-to-slot realization; UV-017 needs an independent

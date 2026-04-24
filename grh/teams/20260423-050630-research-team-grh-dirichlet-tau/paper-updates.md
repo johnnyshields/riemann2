@@ -366,7 +366,8 @@ Remaining open work before UV-017 closure:
 - prove a uniform microscopic pole-clearance radius if the later theorem needs
   one;
 - prove the same-point determinant/spectral gap, or keep it as an explicit
-  local whitening hypothesis;
+  local whitening hypothesis; do not cite one-zero strip-edge positivity as
+  that proof, since the one-zero determinant gap fails;
 - derive holomorphic inverse-square-root whitening from that gap;
 - prove the derivative-form freeze-rule remainder criterion for the actual
   local object, not only inside the conditional chart theorem;

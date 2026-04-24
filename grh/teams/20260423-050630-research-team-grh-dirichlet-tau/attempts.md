@@ -35,6 +35,7 @@
 | Sartre | UV-017 | Clean conditional matrix value-slot theorem is supportable only with explicit chart/admissibility hypotheses | keep | `agents/20260424-183416-verifier-slot-skeleton/report-uv017-conditional-theorem-framing-audit.md`; `paper-updates.md` | holomorphy/positivity attack | Added guardrails to staged text: completed-source aliases, no-extra-map clause, chart-realization/local-admissibility hypothesis, and derivative-form remainder theorem. |
 | Noether | UV-017 | Fixed-\(m\) chart holomorphy is formal; positivity reduces to determinant/spectral gap | keep | `agents/20260424-192025-gap-uv017-coefficient-freeze/report-uv017-holomorphy-positivity-whitening.md`; `agents/20260424-192025-gap-uv017-coefficient-freeze/notes/holomorphy_positivity_whitening_reduction.md` | adversarial determinant/removable-pole audit | Source package does not imply same-point positivity; the sharp gap is \(q>0\), \(2qq''+4q^4-3(q')^2>0\), plus uniform radius, freeze remainder, and scalar readout. |
 | Sartre | UV-017 | Removable poles and same-point determinant gap are exact for the displayed chart | keep | `agents/20260424-183416-verifier-slot-skeleton/report-uv017-holomorphy-positivity-audit.md`; `agents/20260424-183416-verifier-slot-skeleton/scripts/check_uv017_local_admissibility.py` | attack determinant gap for actual source | Exact rational script verifies mixed-block orders and determinant formula; whitening follows conditionally from a spectral gap by functional calculus. |
+| Noether | UV-017 | One-zero strip-edge kernel fails the determinant gap | keep | `agents/20260424-192025-gap-uv017-coefficient-freeze/report-uv017-one-zero-determinant-gap.md`; `agents/20260424-192025-gap-uv017-coefficient-freeze/notes/one_zero_determinant_gap.md`; `agents/20260424-192025-gap-uv017-coefficient-freeze/scripts/check_one_zero_determinant_gap.py` | aggregate stability / reject route | Exact factorization gives \(\mathcal D[K]\equiv0\) at \(\beta=1/2\), and negative center/tail regions off the critical line; positivity must come from aggregate structure or stay hypothetical. |
 
 ## Frontier summaries
 
@@ -59,8 +60,7 @@
   UV-017 lacks paired symmetric normal form, value-parameter holomorphy, stable
   local positivity, exact freeze rules, and source-to-slot coefficient
   identification.
-- **Next:** attack the paired determinant/spectral gap
-  \(2qq''+4q^4-3(q')^2>0\) for the actual completed strip-edge source,
-  starting with the one-zero kernel and then testing tail stability. If the
-  gap cannot be proved from paired Dirichlet data, keep it as an explicit
-  local whitening hypothesis.
+- **Next:** use Jason's stability lane to decide whether aggregate completed
+  source structure can repair the one-zero determinant failure. If it cannot,
+  reject determinant-gap-from-source and keep same-point positivity as an
+  explicit local whitening hypothesis.

@@ -499,3 +499,26 @@ Capture action: marked the local-admissibility reduction as adversarially
 checked in `findings.md`, refined UV-017 and `attempts.md`, and added the
 script to provenance. UV-017 remains open on the actual determinant/spectral
 gap, uniform radius, freeze-rule remainder, and scalar readout.
+
+## Noether UV-017 One-Zero Determinant Gap 20260424
+
+Report:
+`agents/20260424-192025-gap-uv017-coefficient-freeze/report-uv017-one-zero-determinant-gap.md`.
+Note:
+`agents/20260424-192025-gap-uv017-coefficient-freeze/notes/one_zero_determinant_gap.md`.
+Script:
+`agents/20260424-192025-gap-uv017-coefficient-freeze/scripts/check_one_zero_determinant_gap.py`
+with SHA256
+`B21EF132AC193F05054DED87A76C39B0CA96DD655C1FFB49DFF40EFD54C0156D`.
+
+Verdict: keep as a scoped negative, route rejected. Noether's exact
+factorization shows that the positive one-zero strip-edge kernel does not
+satisfy the UV-017 determinant gap. At \(\beta=1/2\),
+\(\mathcal D[K]\equiv0\); for \(\beta\ne1/2\),
+\(\mathcal D[K](\gamma/2)<0\) and the far tails are negative. Strict
+same-point positivity therefore cannot be proved from one-zero source
+positivity alone.
+
+Capture action: added a negative finding, redirected UV-017 from one-zero
+determinant positivity to aggregate-source structure or explicit local
+whitening hypothesis, and notified Jason's stability lane. UV-017 remains open.
