@@ -95,6 +95,8 @@ Active, compact knowledge base shared with every delegated agent.
   be framed as affine-bundle descent / `\ker\Phi_K` transport along the septic
   lift line `A_7^{\mathfrak f}+\mathbf C A_5^{\mathfrak f}`, not raw representative
   equality; on `v_5\neq0`, `\widehat\Psi` alone does not determine the visible lift.
+  Current local sections are `v_7=0` on `v_5\neq0` and `u_7=0` on `u_5\neq0`,
+  with overlap translation `-\Delta_7/(u_5v_5)`.
 
 ## Recurring open gaps
 
@@ -106,14 +108,25 @@ Active, compact knowledge base shared with every delegated agent.
   best current shape is same reduced image germ / collision-functoriality.
   Current sharp obstruction: reduced C does not imply fixed-shear package theorem B
   without a scalar-normalization law fixing the raw representative; reduced equality
-  still permits common scalar freedom in the cubic/quintic defects.
+  still permits common scalar freedom in the cubic/quintic defects. C also needs the
+  exceptional-divisor convention fixed: `\widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0)`
+  means analytic continuation after `2\omega=\kappa\delta`, not a raw diagonal restriction.
+  The current C2a split is quotient-visible state-locality vs genuinely relational /
+  provenance-sensitive two-atom data.
 - **Hidden extraction theorem from finite-core package data to the first surviving odd coefficient of `H_m`.**
   Touches: UV-002 / UV-007; this is the bridge from `\widehat\Psi`-side control
   to the already-built `\Xi_\zeta^{(N)}` extractor. Current sharp obstruction:
   the `T=v_7/c` proxy is normalized septic data only, and neither finite
   determination from `(x,Y,S,T)` nor a bound `N\le4` is in the current draft. The
   minimal D target is affine-bundle descent / `\ker\Phi_K` transport for higher-order
-  freedom above the normalized septic lift.
+  freedom above the normalized septic lift. Same-tower closure rules out a second
+  primitive pointwise highest-new scalar; the live obstruction is relational/nonlocal
+  transport state or state-locality of the D-min visible odd block.
+- **Finite-core lower-model transfer theorem E.** Touches: UV-002 / UV-007.
+  After C and D, the remaining endgame theorem is not another package theorem but
+  a lower-model transfer replacing the pair-like toy law: either direct control of
+  `\Xi_{\core}^{(N)}` or a one-sided lower law for `H_{\core}^{(2N-1)}` on the
+  microscopic interval, then the already-proved positive-kernel `N`-point formula.
 - **Exceptional-locus `M=0` reduction after good-patch edge law.**
   Touches: UV-003 and the finite-core residual two-point lane; current route is
   Weierstrass/prepared-branch reduction, still heuristic.

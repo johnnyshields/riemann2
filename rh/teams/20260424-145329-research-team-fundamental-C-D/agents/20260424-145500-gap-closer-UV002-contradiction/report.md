@@ -1,19 +1,55 @@
 Claim
 
-Assuming Bottleneck C and Bottleneck D in their current sharp forms, the finite-core contradiction for `UV-002` becomes formal: if a genuine finite same-scale core has first surviving odd order `2N-1`, then C identifies its corrected coincidence package with the reduced one-pair datum `\widehat\Psi`, D makes the first nonzero transformed scalar `\Xi_{\zeta,\le H}^{(N)}` constant on that corrected package fiber, and the already-built zeta-side extractor/localization converts this into the same contradiction pattern as the present pair-like endgame, but with `N` replacing the fixed first-odd-jet branch. The smallest remaining theorem list is therefore:
+Assuming Bottleneck C and Bottleneck D in their current sharp forms, the finite-core contradiction for `UV-002` reduces to one smallest new theorem: a **finite-core lower-model transfer theorem** replacing the pair-like toy estimate in the current final contradiction theorem.
+
+More precisely, the present pair-like endgame uses
+\[
+\Xi_{\toy}^{(N)}(u,d)=u^2\Phi_K(M(d))+O(u^4)
+\]
+and then calibrates `u^2 \asymp (x/B_\zeta(m))S(m)` to obtain a lower bound of size `\asymp (x/B_\zeta(m))S(m)`. For the genuine finite-core branch, the smallest replacement is not a new package theorem between C and D. It is a lower theorem on the first surviving odd finite-core channel.
+
+The cleanest exact formulation is the following weighted-average theorem:
+
+**Finite-core weighted-derivative transfer theorem.** If the actual same-scale core has first surviving odd order `2N-1`, and if C and D identify the corrected coincidence package fiber and its first nonzero transformed scalar, then there exists `\sigma\in\{\pm1\}` such that
+\[
+\sigma\int_0^N \kappa_N(u)
+H_{\core}^{(2N-1)}\!\left(\frac{u}{Q^2}\right)du
+\ge c_N\,Q^{4N-2}\,\frac{x(m)}{B_\zeta(m)}S(m),
+\]
+with `c_N>0` depending only on the finite-core package fiber and the fixed `N`-point kernel. By Proposition `prop:n-point-odd-positive-kernel`, this is exactly the lower-input needed to force
+\[
+|\Xi_{\core}^{(N)}(m)|\gtrsim \frac{x(m)}{B_\zeta(m)}S(m).
+\]
+
+A stronger but easier-to-state sufficient theorem is the pointwise version
+\[
+\sigma\,H_{\core}^{(2N-1)}(s)
+\ge c_N\,Q^{4N-2}\,\frac{x(m)}{B_\zeta(m)}S(m)
+\qquad
+\left(0\le s\le \frac{N}{Q^2}\right),
+\]
+which implies the weighted-average statement because `\kappa_N\ge 0` and is strictly positive on `(0,N)`.
+
+Equivalently, one may phrase the same target one coefficient lower: if
+\[
+H_{\core}(z/Q^2)=\sum_{r\ge 0} c_{2r+1}^{\core}(m)\frac{z^{2r+1}}{Q^{2r+4}},
+\]
+then it is enough to prove
+\[
+|c_{2N-1}^{\core}(m)|\gtrsim Q^{2N+2}\,\frac{x(m)}{B_\zeta(m)}S(m),
+\]
+with sign determined by the corrected package fiber. By the exact surviving expansion for `\Xi^{(N)}`, this coefficient statement already yields the contradiction-scale lower bound.
+
+So the endgame stack is now sharp:
 
 1. **C**: corrected reduced-package diagonal-collapse / collision-functoriality
    \[
    \widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0)=\widehat\Psi(m).
    \]
 2. **D**: corrected package fibers determine the first surviving odd order and leading transformed scalar, equivalently constancy of the first nonzero `\Xi_{\zeta,\le H}^{(N)}` on corrected reduced-package fibers modulo `\ker\Phi_K`.
-3. **Finite-core comparison rewrite**: restate the final contradiction theorem with the pair-like input
-   \[
-   \Xi_{\toy}^{(N)}(u,d)=u^2\Phi_K(M(d))+O(u^4)
-   \]
-   replaced by the genuine finite-core first-nonzero-odd-jet lower input attached to the package fiber supplied by C and D.
+3. **E**: finite-core lower-model transfer theorem as above.
 
-So the composition does not reveal a hidden fourth theorem. It reduces `UV-002` to C + D + one explicit endgame rewrite that plugs the first-nonzero-odd-jet finite-core datum into the existing `\Xi_\zeta^{(N)}` framework. Since `UV-007` is exactly the remark recording that this rewrite has not been carried out, `UV-007` stays downstream of `UV-002` and does not add independent mathematical content beyond item 3.
+This shows that `UV-007` is not an extra independent package theorem. It is the in-paper placeholder for E: rewriting the final contradiction from the pair-like toy lower model to a first-nonzero-odd-jet finite-core lower model.
 
 Status
 
@@ -21,22 +57,32 @@ open
 
 Evidence
 
-The paper already states the fork precisely: the pair-like branch is governed by the first odd jet, while the genuine finite-core branch must be governed by the first nonzero odd jet. Separately, the zeta-side machinery already proves that `\Xi_\zeta^{(N)}` isolates the first surviving odd coefficient and is determined, up to exponentially small error, by a fixed finite core. The minimal-core reformulation then identifies `\widehat\Psi` as the correct package datum for the downstream finite-core extraction problem.
+The current final contradiction theorem is structurally a comparison between a lower model on the anomaly side and an exponentially small upper bound on the zeta side. On the zeta side, the machinery is already fully general in `N`: the `N`-point operator isolates the first surviving odd coefficient, admits a positive-kernel representation in terms of the first surviving derivative, and localizes the transformed scalar to a fixed finite core. So the zeta side is already written in the right finite-core language.
 
-From the prior cycle and current dispatch, C is the theorem that turns the corrected two-atom coincidence package into the canonical reduced datum `\widehat\Psi(m)` on the collision divisor, while D is the theorem that makes the first surviving odd transform depend only on that package fiber. Once those are granted, the only remaining mathematical step is to replace the present pair-like lower model in the final contradiction theorem by the corresponding finite-core lower model at the actual first surviving odd order. Nothing in the current paper indicates an additional independent obstruction between D and the contradiction: Remark `rem:wip-final-endgame-status` says exactly that the missing general branch is the reformulation in terms of the first nonzero odd jet.
+What remains pair-like is only the lower side. The current proof inserts the toy expansion `\Xi_{\toy}^{(N)}(u,d)=u^2\Phi_K(M(d))+O(u^4)` and the calibration theorem producing `u^2\asymp (x/B_\zeta)S(m)`. That is exactly where the argument still assumes first-odd-jet nondegeneracy of a pair-core normal form. The paper itself says so in `rem:wip-pairlike-finitecore` and `rem:wip-final-endgame-status`.
 
-The composition also shows what does **not** suffice. C alone only identifies the reduced package at coincidence; without D there is no route from package equality to the first surviving odd coefficient of `H_m`. D alone is also not enough, because without C there is no canonical corrected coincidence package fiber on which to apply D. So the finite-core contradiction really is a serial stack `C -> D -> endgame rewrite`, not two parallel inputs plus a hidden package theorem.
+The positive-kernel representation sharpens the missing target. For any odd analytic germ `F`, the `N`-point scalar is a positive average of `F^{(2N-1)}` over the microscopic interval. Therefore a theorem giving one-sided lower control of the actual finite-core corrected scalar at the first surviving odd order would transfer directly to a contradiction-driving lower bound for `\Xi^{(N)}`. This means the smallest replacement for the pair-like toy theorem is not a full new toy model from scratch; it is enough to prove a finite-core first-surviving-derivative lower law, or any equivalent lower model that implies it.
+
+C and D fit exactly into this picture. C supplies the canonical corrected coincidence package fiber. D says that on that fiber the first surviving odd order and leading transformed scalar are fixed. Once those are granted, E is the only remaining theorem: extract from that package fiber a nontrivial lower model at order `2N-1` strong enough to dominate the exponentially small zeta-side upper bound.
+
+Separate three things:
+
+- **proved:** the `N`-point operator isolates the first surviving odd order and has a positive-kernel formula; the zeta-side transformed scalar is finite-core localized; the current contradiction theorem works in the pair-like branch.
+- **conditional on C and D:** the finite-core branch reduces to one new lower-model theorem E; no extra package/extraction theorem remains between D and the contradiction.
+- **missing:** a theorem turning the finite-core package fiber into a lower bound for `H_{\core}^{(2N-1)}` or directly for `\Xi_{\core}^{(N)}`.
 
 Exact refs
 
-- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:5604-5643` — `rem:wip-pairlike-finitecore`; the genuine finite-core branch must be formulated in terms of the first nonzero odd jet.
-- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:3978-4190` — exact surviving expansion for `\Xi_\zeta^{(N)}` and finite-core localization of `\Xi_{\zeta,\le H}^{(N)}`.
+- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:5300-5473` — Proposition `prop:toy-n-point-direct`; current pair-like lower model.
+- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:739-839` — canonical calibration theorem and remainder-cutoff theorem yielding `u^2\asymp (x/B_\zeta(m))S(m)` in the pair-like route.
+- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:3520-3687` — odd-projector factorization, positive-kernel representation, and sign transfer from the first surviving derivative.
+- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:3853-4190` — Proposition `prop:corrected-n-point`, exact surviving expansion, and finite-core localization of `\Xi_{\zeta,\le H}^{(N)}`.
 - `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:12586-12610` — `rem:minimal-core-reformulation`; downstream finite-core extraction should first use `\widehat\Psi`.
-- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:24985-25030` — finite-core endgame split; the live burden is package-level coincidence / functoriality, not another local lane.
-- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:26369-26398` — `rem:wip-final-endgame-status`; the general finite-core branch still needs reformulation in terms of the first nonzero odd jet.
+- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:24985-25030` — finite-core endgame split; live burden is package-level coincidence / functoriality plus downstream reformulation.
+- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:5604-5643` — `rem:wip-pairlike-finitecore`; genuine finite-core branch must use the first nonzero odd jet.
+- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:26369-26398` — `rem:wip-final-endgame-status`; general finite-core branch still needs reformulation in terms of the first nonzero odd jet.
 - `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:26554-26609` — current final contradiction theorem is pair-like only.
-- `/mnt/c/workspace/riemann2/rh/teams/20260424-093000-attack-fund-uv002-hidden-extraction/summary.md:90-203` — prior-cycle formulation of C and D as the sharp theorem queue.
-- `/mnt/c/workspace/riemann2/rh/teams/20260424-093000-attack-fund-uv002-hidden-extraction/handoff.md:164-299` — prior-cycle statement that the queue has collapsed to `C -> D -> finite-core contradiction`.
+- `/mnt/c/workspace/riemann2/rh/teams/20260424-093000-attack-fund-uv002-hidden-extraction/handoff.md:164-299` — prior-cycle reduction to `C -> D -> finite-core contradiction`.
 - `/mnt/c/workspace/riemann2/rh/teams/20260424-093000-attack-fund-uv002-hidden-extraction/agents/20260424-145000-kerphik-hidden-state/report.md:1-90` — current sharp form of D.
 - `/mnt/c/workspace/riemann2/rh/teams/20260424-093000-attack-fund-uv002-hidden-extraction/agents/20260424-143000-C-proof-obligations/report.md:1-76` and `/mnt/c/workspace/riemann2/rh/teams/20260424-093000-attack-fund-uv002-hidden-extraction/agents/20260424-145000-corrected-package-object/report.md:1-68` — current sharp form of C.
 
@@ -44,18 +90,27 @@ Dependencies
 
 - Bottleneck C in the diagonal-specialization form `\widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0)=\widehat\Psi(m)`.
 - Bottleneck D in the transform-level form: corrected package fibers force equality of first surviving odd order and leading transformed scalar modulo `\ker\Phi_K`.
-- A finite-core lower model/theorem at the actual first surviving odd order, strong enough to replace the pair-like toy lower bound used in the current final contradiction theorem.
-- The existing zeta-side `N`-point extractor and finite-core localization machinery.
+- A finite-core lower-model transfer theorem E, stated either directly for `\Xi_{\core}^{(N)}` or via a one-sided lower law for `H_{\core}^{(2N-1)}` on the microscopic interval.
+- The existing zeta-side `N`-point extractor, positive-kernel, and finite-core localization machinery.
 
 Strongest objection
 
-The composition argument identifies the theorem stack but does not prove item 3. The current final contradiction theorem uses the pair-like toy anomaly matrix and a quadratic `u^2` lower law. A genuine finite-core branch may not admit a lower model of the same shape, and the paper does not yet provide a theorem translating the package-side first nonzero odd datum into a contradiction-driving lower bound comparable to `\Xi_{\zeta,\le H}^{(N)}`. So one cannot honestly say that C and D alone finish `UV-002`; they finish the package/extraction bridge but still leave the endgame rewrite itself.
+The reduction to E still leaves open what analytic object should play the role of the pair-like toy anomaly matrix `M(d)`. In the pair-like route, calibration and the toy `u^2` law are explicit. In the genuine finite-core branch, the package fiber may determine the first surviving odd order and leading transformed scalar abstractly without yet giving a usable lower model on the microscopic interval. So E is a real theorem, not just a rewriting exercise. The present paper does not yet construct the finite-core analogue of `M(d)` or prove that its first surviving odd contribution has controlled sign or modulus across the required interval.
 
 Needed for promotion
 
 - Prove C.
 - Prove D.
-- State and prove a finite-core contradiction theorem that replaces the current pair-like toy lower input by a lower bound attached to the actual first surviving odd order `2N-1` of the finite core.
-- Then rewrite `rem:wip-pairlike-finitecore` and `rem:wip-final-endgame-status` to remove the pair-like fork and promote the resulting endgame.
+- State and prove E in one of two equivalent forms:
+  1. **Direct transformed-scalar form:** `|\Xi_{\core}^{(N)}(m)|\asymp (x(m)/B_\zeta(m))S(m)` with sign or modulus determined by the corrected package fiber; or
+  2. **Derivative-transfer form:** a one-sided lower law for `H_{\core}^{(2N-1)}` on `0\le s\le N/Q^2`, then invoke the positive-kernel `N`-point formula.
+- Rewrite `rem:wip-pairlike-finitecore`, `rem:wip-final-endgame-status`, and the final contradiction theorem to replace the pair-like toy lower input by E.
 
-Honest verdict: the composition target is now sharp. There is no hidden theorem between C, D, and the contradiction. But C and D do **not** by themselves close `UV-002`; they reduce it to one final explicit theorem-writing task: produce the genuine finite-core first-nonzero-odd-jet contradiction theorem that replaces the current pair-like endgame.
+Honest verdict: the next concrete attack after C and D is no longer vague. The smallest missing theorem is a finite-core lower-model transfer theorem E. The cleanest formulation is probably derivative-side, because the paper already proves that the `N`-point operator is a positive average of the first surviving derivative. What is missing is not another package theorem, but a proof that the corrected finite-core package fiber forces a nontrivial first-surviving-odd lower law strong enough to drive the same final comparison.
+
+Autoresearch next step
+
+continue: attack theorem E directly by mining the fixed-core decomposition and the positive-kernel `N`-point formula for the weakest sufficient hypothesis on `H_{\core}^{(2N-1)}`; try to reduce E to a package-fiber statement about the sign or modulus of the first surviving derivative on `0\le s\le N/Q^2`.
+verify: adversarially check whether the positive-kernel route really avoids needing a full finite-core toy model, or whether hidden oscillation of `H_{\core}^{(2N-1)}` on the microscopic interval breaks the transfer.
+blocked: no coordinator action needed yet.
+terminal: not terminal; target sharpened from “rewrite the endgame” to the single theorem E above.

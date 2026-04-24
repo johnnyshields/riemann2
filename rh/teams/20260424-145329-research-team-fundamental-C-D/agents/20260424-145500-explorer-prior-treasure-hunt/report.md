@@ -27,6 +27,7 @@ Compact treasure map from the prior cycle:
   - [candidate] The exact no-go from `20260424-133500-C-failure/report.md` does not seem cleanly captured in `collation.md`/`summary.md` as a reusable negative theorem: current reduced-package analyticity plus swap-evenness still leaves `B(m,\kappa)` free.
   - [candidate] The exact distinction from `20260424-121500-bc-shared-blocker/report.md` that B and C differ by one scalar-normalization law also looks only partially captured.
   - [candidate] The precise obstruction from `20260424-123500-T-fiber/report.md` — that `\widetilde\Psi_{\min}` is exactly normalized septic data and therefore still needs finite determination or an odd-order bound — also looks under-captured.
+  - [candidate] The exceptional-divisor convention itself looks under-captured: `\widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0)` should mean the analytically continued blow-up value after `2\omega=\kappa\delta`, not a raw diagonal restriction. Relatedly, the queue slogan `C \Rightarrow B` is safe only under this sharp normalization, not under weaker reduced-coincidence wording.
 
 Status
 
@@ -80,5 +81,11 @@ Needed for promotion
 2. Decide whether current team state should explicitly record the B-vs-C scalar-normalization distinction from `20260424-121500-bc-shared-blocker/report.md`.
 3. If D shifts toward the `T`-proxy, explicitly carry forward the sharper obstruction from `20260424-123500-T-fiber/report.md`: `\widetilde\Psi_{\min}` is normalized septic data only, so one still needs finite determination or a bound `N\le 4`.
 4. Keep support-only 2/4-point mixed subordinate unless a theorem explicitly folds the edge-law and fixed-shear support fronts into the package theorem.
+5. Freeze the exceptional-divisor convention sharply if C is restated again: `\widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0)` must mean the analytically continued blow-up value after `2\omega=\kappa\delta`, not a raw diagonal restriction. Prior-cycle refs: `20260424-124500-convention-blocker/report.md`, `20260424-130500-exceptional-divisor-convention/report.md`.
+6. If the queue is rewritten post-C, retain the normalization caveat from `20260424-130500-post-C/report.md`: `C \Rightarrow B` is immediate only in the sharp exceptional-divisor normalization, not from a weaker coincidence slogan.
 
-Honest verdict: the prior cycle’s main queue compression was captured correctly, but the richest leftover treasure is in three sharpened negatives: (i) C really fails because the exceptional-divisor trace `B(m,\kappa)` is still free under current hypotheses; (ii) B and C still differ by one scalar-normalization law; and (iii) the `T`-enlarged proxy is exactly normalized septic data, so D still needs finite determination, not just a better coordinate choice.
+Honest verdict: the prior cycle’s main queue compression was captured correctly, but the richest leftover treasure is in four sharpened negatives/obligations: (i) C really fails because the exceptional-divisor trace `B(m,\kappa)` is still free under current hypotheses; (ii) B and C still differ by one scalar-normalization law; (iii) the `T`-enlarged proxy is exactly normalized septic data, so D still needs finite determination, not just a better coordinate choice; and (iv) the exceptional-divisor convention itself is a real theorem-shaping obligation that should stay explicit in any C restatement.
+
+Autoresearch next step
+
+continue: Mine the prior-cycle convention and post-C reports for the sharpest wording of the exceptional-divisor normalization and the exact caveat on when `C \Rightarrow B` is valid, then ping team lead with that narrower capture proposal.

@@ -1,36 +1,41 @@
 Claim
 
-Bottleneck C does not close from the present draft, but it reduces to one exact package-side axiom set. Let
+Fifth follow-up attack on Bottleneck C: the patch-transition problem for the local affine lift coordinate is not itself the hidden obstruction. On the two canonical good-patch gauges one has local section values
 \[
-\widetilde\Psi^{\corr}_{\mathrm{red}}=\mathcal R\circ \mathfrak P^{\corr}_2
+S:=\frac{\lambda}{c}=\frac{\Delta_7}{c v_5}
+\qquad (v_5\neq 0),
 \]
-be the corrected reduced two-atom package in the blow-up chart \(2\omega=\kappa\delta\). Then
+and
 \[
-\widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0)=\widehat\Psi(m)
+S_u:=-\frac{\Delta_7}{c u_5}
+\qquad (u_5\neq 0).
 \]
-is forced once the actual corrected package satisfies the same three merger axioms already isolated abstractly in the source-level lemma, transported to the corrected reduced package:
+On the overlap \(u_5v_5\neq 0\), these satisfy
+\[
+S_u=-\frac{v_5}{u_5}S=-\frac{x}{Y}S,
+\qquad
+Y=\frac{u_5}{c},\ x=\frac{v_5}{c}.
+\]
+Equivalently, the overlap scalar
+\[
+\tau:=\frac{\Delta_7}{u_5v_5}=\frac{\Delta_7/c^2}{(u_5/c)(v_5/c)}
+\]
+is already determined by the reduced datum
+\[
+\widehat\Psi=\left(\frac{u_5}{c},\frac{v_5}{c},\frac{\Delta_7}{c^2}\right).
+\]
+So the patch cocycle of the one-dimensional affine lift coordinate is controlled by reduced-package data and is **not** an additional hidden state.
 
-1. swap symmetry;
-2. one-amplitude collapse;
-3. diagonal merger / collision-functoriality at coincidence.
+This sharpens the current reduction of C once more. The hidden obstruction is not patching of the local lift coordinate; it is the unresolved choice of a point in the affine fiber itself. Therefore the best present theorem shape for C is:
 
-More precisely, the smallest honest unresolved sub-statements are:
-
-- **C1. Well-posed blow-up object.** Define the actual corrected package \(\mathfrak P^{\corr}_2\) on the collision/cancellation chart with analytic extension of \(\widetilde\Psi^{\corr}_{\mathrm{red}}\) to \(\delta=0\).
-- **C2. Diagonal merger on the corrected package.** For coincident atoms,
+- base data = descended quotient-visible collision state together with reduced package data \(\widehat\Psi\);
+- residual fiber = a one-dimensional affine septic-lift coordinate whose transition law is already determined by the base;
+- Bottleneck C must canonically select or collapse that affine fiber at coincidence, thereby forcing
   \[
-  \mathfrak P^{\corr}_2(a_1,m;a_2,m)
-  =
-  \mathfrak P^{\corr}_1(a_1+a_2,m),
+  \widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0)=\widehat\Psi(m).
   \]
-  equivalently after reduction,
-  \[
-  \widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0)
-  \text{ is independent of }\kappa.
-  \]
-- **C3. Reduced identification.** The merged one-pair package reduces to \(\widehat\Psi(m)\).
 
-Among these, only C2 is genuinely open on the current draft; C1 and C3 are mostly formalization/normalization once the corrected package object is fixed. Route B gives a narrower conditional form: on the involutive fixed-shear branch, state-locality plus the natural merger law already imply package collapse, so the unresolved issue is extending that merger law from the descended-state model to the actual corrected package on the full collision chart.
+So after this pass, the cleanest target is not “patch the local lift coordinate globally,” but “prove that diagonal merger canonically fixes the affine septic-lift fiber over the reduced base.”
 
 Status
 
@@ -38,59 +43,66 @@ open
 
 Evidence
 
-The paper already proves an abstract finite-dimensional lemma: any analytic two-atom package with swap symmetry, one-amplitude collapse, and diagonal merger has interaction remainder divisible by \(a_1a_2(h_1-h_2)^2\). So the structural theorem shape is known. The draft also states explicitly that the live two-point burden is to verify these identities for the actual corrected package, and separately offers a weaker quotient-diagonal route requiring continuity plus exact diagonal collapse.
+The fixed-shear package still provides the ceiling: from that tested scope alone, no extra finite quotient-visible transport scalar or finite hidden reset survives. So if C remains open, the obstruction must live in extra package-side fiber data, not in another transport invariant.
 
-For Bottleneck C, the prior cycle already sharpened the target from vague “same reduced image germ” to the exact exceptional-divisor identity
+The local septic gauge-fixing remarks give two canonical local sections of the affine line of raw septic representatives. On \(v_5\neq 0\), one sets \(v_7^{\new}=0\) and gets \(u_7^{\new}=\Delta_7/v_5\). On \(u_5\neq 0\), one sets \(u_7^{\new}=0\) and gets \(v_7^{\new}=-\Delta_7/u_5\). Dividing by \(c\) gives the two local section values above.
+
+Now the key new point: their overlap relation depends only on reduced package coordinates. Since
 \[
-\widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0)=\widehat\Psi(m),
+S=\frac{\Delta_7}{c v_5},\qquad Y=\frac{u_5}{c},\qquad x=\frac{v_5}{c},
 \]
-with the obstruction named as the free analytic trace
+one has
 \[
-B(m,\kappa):=\widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0).
+S_u=-\frac{\Delta_7}{c u_5}=-\frac{x}{Y}S,
 \]
-The blow-up parity/projective factorization remark only yields \(\delta^2\)-divisibility for corrected defects; it does not constrain the value of \(B(m,\kappa)\). So analyticity and swap-evenness alone are too weak.
+and the overlap scalar
+\[
+\tau=\frac{\Delta_7}{u_5v_5}=\frac{\Delta_7/c^2}{(u_5/c)(v_5/c)}
+\]
+is a function of \(\widehat\Psi\) alone. So the cocycle for changing local section is already visible in the reduced base. This means the cocycle itself is not the hidden state. What remains hidden is which point of the affine fiber the actual corrected two-atom package chooses on the exceptional divisor.
 
-The cleanest reduction is therefore: prove the actual corrected package enjoys the same diagonal merger principle already isolated abstractly. Then \(\kappa\)-independence is formal, and identification with \(\widehat\Psi\) is the normalization of the merged one-pair package. Without that theorem, the current hypotheses leave a completely free analytic exceptional-divisor function.
-
-A useful partial redirect appears later on the involutive fixed-shear branch: if the corrected package is state-local in a descended state \(\mathcal T_N\) and obeys the natural merger law \(\mathfrak P_2(a_1,a_2;Y,Y)=(a_1+a_2)\mathfrak F(Y)\), then package collapse is formal there. This supports the diagnosis that the true missing ingredient is merger/functoriality, not further local blow-up algebra.
+That makes the theorem target more precise than before. The affine-bundle picture remains right, but the hard part is no longer transition control; it is diagonal fiber-collapse / canonical section selection at coincidence.
 
 Exact refs
 
-- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:11888-12040` — abstract source-level lemma: swap symmetry + one-amplitude collapse + diagonal merger imply quadratic two-point factorization.
-- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:12042-12088` — weaker exact route via continuity plus diagonal collapse of the actual corrected two-atom quotient germ.
-- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:12139-12165` — the weaker exact route is explicitly a continuity/diagonal-collapse problem.
-- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:12168-12189` — exact remaining source-level input: swap symmetry, one-amplitude collapse, diagonal merger for the actual corrected two-atom package.
-- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:12447-12511` — blow-up parity/projective factorization only gives \(\delta^2\mathcal H(m,\kappa,\delta^2)\), not diagonal-value rigidity.
-- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:12513-12559` — remaining burden compressed to exact fixed-shear quotient transport, package-level coincidence/functoriality, and related fronts.
-- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:12586-12610` — downstream reduced target datum is \(\widehat\Psi\).
-- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:11303-11307` — what remains architectural is verification for the actual corrected two-atom package and extension to multi-pair/minimal-core.
-- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:24524-24536` — current live route restated: verify the three identities for the actual corrected package, or else the weaker quotient route.
-- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:22472-22490` — on the involutive branch, state-locality plus natural merger law imply stronger package collapse.
-- `/mnt/c/workspace/riemann2/rh/teams/20260424-093000-attack-fund-uv002-hidden-extraction/collation.md:53-78` — prior-cycle sharpening of C to the exact identity with free exceptional-divisor term \(B(m,\kappa)\).
-- `/mnt/c/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/dispatch.md:20-24` — current cycle briefing: real blocker is \(\kappa\)-independence / diagonal merger for \(\mathfrak P_2^{\corr}\).
+- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:7992-8033` — affine line of raw septic representatives and the two local gauge-fixing sections.
+- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:8414-8429` — definition of `\lambda=\Delta_7/v_5` on `v_5\neq 0`.
+- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:10790-10844` — order-7 target is provenance-sensitive; quotient-septic closure remains locally free.
+- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:11368-11408` — reduced datum `\widehat\Psi`.
+- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:22380-22618` — quotient-visible finite transport state exhausted on the tested fixed-shear scope.
+- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:23098-23108` — residual exact fixed-shear corner reduced to package-level collapse / no-hidden-reset question.
+- `/mnt/c/workspace/riemann2/rh/proof_of_rh.tex:24380-24385` — good `v_5`-patch reduced coordinates `Y=u_5/c`, `x=v_5/c`, `S=\Delta_7/(c v_5)`.
+- `/mnt/c/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/agents/20260424-145500-explorer-hidden-state-geometry/notes/transport-formulations.md:1-60` — affine-line/lift geometry and overlap cocycle `-\Delta_7/(u_5v_5)`.
+- `/mnt/c/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/collation.md:63-65` — affine lift-coordinate interpretation.
+- `/mnt/c/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/agents/20260424-145500-gap-closer-C-diagonal-merger/notes/20260424-followup-patch-transition-controlled.md` — present calculation that the cocycle is reduced-data-controlled.
 - UV refs: `UV-002`, `UV-003`, `UV-007`; labels `rem:wip-pairlike-finitecore`, `rem:wip-parity-projective-factorization-collision-blow-up`, `rem:wip-final-endgame-status`.
 
 Dependencies
 
-- A precise definition of the corrected two-atom package object \(\mathfrak P^{\corr}_2\) and of its reduction map \(\mathcal R\).
-- Analytic extension of \(\widetilde\Psi^{\corr}_{\mathrm{red}}\) to the exceptional divisor in the blow-up chart.
-- A theorem transferring diagonal merger / collision-functoriality from coincident atoms to the corrected reduced package.
-- Identification of the merged one-pair package with the amplitude-invariant datum \(\widehat\Psi(m)\).
-- For the narrower Route B variant: state-locality on the involutive branch and the natural merger law there.
+- The quotient-visible/state-local ceiling from the fixed-shear package analysis.
+- The affine-line interpretation of raw septic representatives over the reduced package base.
+- A corrected two-atom theorem showing that the exceptional-divisor package really is an affine fiber over the reduced base with this local model.
+- A diagonal-merger theorem canonically selecting the fiber point at coincidence.
 
 Strongest objection
 
-This reduction still relies on a nontrivial inference: that once the corrected package is formalized, C1 and C3 are merely bookkeeping while C2 is the only real theorem. If the actual corrected package carries extra hidden gauge/state not removed by \(\mathcal R\), then diagonal merger at the unreduced level may not descend cleanly, and the split “formalization vs real blocker” could be too optimistic. The involutive-branch corollary supports the diagnosis but does not prove the full collision-chart statement.
+The new calculation is still derived from one-pair local gauge sections, not from a constructed corrected two-atom exceptional-divisor object. So it proves only that the candidate local cocycle is base-controlled in the one-pair model. The actual corrected two-atom package might still carry extra hidden dependence that is invisible in this local affine-lift picture.
 
 Needed for promotion
 
-- Define \(\mathfrak P^{\corr}_2\) and \(\widetilde\Psi^{\corr}_{\mathrm{red}}\) canonically on the collision/cancellation chart.
-- Prove the exact corrected-package diagonal merger theorem
+- Construct or isolate the corrected two-atom exceptional-divisor state as an affine fiber over the reduced base, with local sections modeled by the current septic gauge-fixing formulas.
+- Prove that no extra package-side datum survives beyond this affine fiber.
+- Prove diagonal merger / collision-functoriality canonically selects the fiber point at coincidence.
+- Conclude the exceptional-divisor trace is unique:
   \[
-  \mathfrak P^{\corr}_2(a_1,m;a_2,m)=\mathfrak P^{\corr}_1(a_1+a_2,m)
+  \widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0)=\widehat\Psi(m).
   \]
-  or an equivalent collision-functoriality statement strong enough to force \(\kappa\)-independence of the exceptional-divisor trace.
-- Show that the merged one-pair reduction is exactly \(\widehat\Psi(m)\).
-- Failing full closure, it is enough to prove a descended-state version on the full collision chart, not just on the involutive branch, together with a theorem that the actual corrected package factors through that descended state.
 
-Honest verdict: I do not see a direct proof of Bottleneck C from the present draft. The honest gain is a sharper reduction: C is equivalent to a concrete diagonal-merger / collision-functoriality theorem for the actual corrected package, with the smallest unresolved list now C1–C3 above and the only genuinely hard item appearing to be C2.
+Honest verdict: I still do not see a proof of C. But the hidden structure is now cleaner. The patch-transition scalar for the local lift coordinate is already controlled by reduced data \(\widehat\Psi\), so patching is not the real gap. The real remaining theorem is fiber selection: prove the actual corrected two-atom package has only this one-dimensional affine lift freedom over the reduced base, and that diagonal merger kills it.
+
+Autoresearch next step
+
+- continue: attack the final remaining issue in this local model — whether the actual corrected two-atom exceptional-divisor package can be shown to have only a one-dimensional affine fiber over the reduced base, with no further hidden package datum.
+- verify: adversarially test whether the local affine-lift picture misses any extra two-atom datum not visible in the one-pair septic gauge model.
+- blocked: coordinator may want the package-functoriality explorer to cross-check whether prior chats already identified a secant-shadow / collision state whose fiber over `\widehat\Psi` is exactly affine one-dimensional.
+- terminal: not terminal; the next concrete move is to test whether the affine fiber is the whole hidden state.

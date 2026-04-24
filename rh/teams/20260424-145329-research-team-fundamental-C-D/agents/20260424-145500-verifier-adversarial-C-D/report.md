@@ -93,3 +93,10 @@ Needed for promotion
 3. For `UV-002`, after C and D, prove the actual finite-core contradiction theorem replacing the current pair-like lower model.
 
 Honest verdict: none of the current-cycle deposits proves a theorem that closes C, D, or `UV-002`. The best outputs are: C sharpened to the missing diagonal-merger theorem with a conditional `C1/C2/C3` split; D sharpened to a local one-scalar septic proxy `T=v_7/c`; and `UV-002` sharpened to the serial queue `C -> D -> endgame rewrite`. Those are useful reductions, not closures.
+
+Autoresearch next step
+
+- continue: attack the next incoming claims in three buckets. For C, test any scalar-normalization or diagonal-value argument against the surviving free trace `B(m,\kappa)` and ask whether it truly proves corrected-package diagonal merger or only fixes notation/convention. For D, attack any `D-min` or `T=v_7/c` claim by checking patch dependence, higher-odd-order leakage, and whether the argument is transform-level or only septic-order algebra on `v_5\neq 0`. For `UV-002`, attack any finite-core rewrite claim by checking whether it actually supplies a contradiction-driving lower theorem replacing the pair-like model, rather than only restating the queue `C -> D -> rewrite`.
+- verify: before promotion of any future claim, require an explicit theorem that kills `B(m,\kappa)` for C, a global package-to-transform hidden-state theorem for D, and an actual lower-bound contradiction theorem for the finite-core branch.
+- blocked: none; I am ready to continue adversarial review on the next deposits.
+- terminal: not terminal. The target remains open and the next concrete checks are listed above.

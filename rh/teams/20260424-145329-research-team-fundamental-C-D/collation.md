@@ -103,3 +103,49 @@ Signal: D-min reduction, open.
 Captured takeaway: neither finite determination from `\widetilde\Psi_{\min}=(x,Y,S,T)` nor a uniform bound `N\le4` is derivable from the current draft. The tuple is exactly normalized fixed-sector septic data; `rem:wip-final-endgame-status` explicitly leaves room for first odd cancellation and survival at higher odd order.
 
 New minimal D target: affine-bundle descent / `\ker\Phi_K` transport saying that higher-order freedom above the normalized septic lift is invisible through the first surviving odd order. This is weaker than full finite determination and is now the smallest isolated hidden-state theorem.
+
+## Autoresearch reload wave
+
+### `gap-closer-C-diagonal-merger` follow-ups
+
+Signal: C2a reduction, open.
+
+Captured takeaway: C2 now splits into a state-locality step and a diagonal-coincidence step. The quotient-visible route has a ceiling: current fixed-shear material rules out another finite quotient-visible transport scalar or finite hidden reset from the tested scope. The live split is therefore C2a(qv) vs C2a(rel): either the actual corrected package is already state-local in the descended quotient-visible collision state, or the first surviving dependence is genuinely relational/provenance-sensitive two-atom data (or non-finite-order).
+
+Latest refinement: the extra one-dimensional state should not be phrased as raw `T=v_7/c`; the better local candidate is the affine lift coordinate selected by gauge fixing, `\lambda/c=\Delta_7/(cv_5)` on `v_5\neq0`. Strongest objection: this is still a good-patch/local-section model, not a full-chart corrected two-atom exceptional-divisor state.
+
+### `gap-closer-D-kerphik` follow-ups
+
+Signal: D-min reduction, open.
+
+Captured takeaway: D-min is not a missing pointwise highest-new scalar problem. Same-tower closure rules out a second primitive pointwise highest-new generator beyond the affine lift; the remaining obstruction is relational/nonlocal transport state. The smallest theorem-shaped axiom is state-locality of the D-min-visible odd block in a finite descended transport state plus normalized septic lift, with diagonal vanishing. Merger law is stronger than necessary for D-min.
+
+### `gap-closer-UV002-contradiction` autoresearch update
+
+Signal: finite-core endgame theorem E, open.
+
+Captured takeaway: after C and D, the smallest missing theorem is finite-core lower-model transfer E. Direct form: control `\Xi_{\core}^{(N)}` at size comparable to `(x/B_\zeta)S`; derivative form: prove a one-sided lower law for `H_{\core}^{(2N-1)}` on the microscopic interval, then use the positive-kernel `N`-point formula already in the paper. This makes UV-007 the placeholder for E, not a separate package theorem.
+
+### `explorer-hidden-state-geometry` follow-ups
+
+Signal: affine-bundle geometry plus fixed-shear bridge, heuristic with confirmed local ingredients.
+
+Captured takeaway: the paper already contains two local sections of the affine septic lift line (`v_7=0` on `v_5\neq0`, `u_7=0` on `u_5\neq0`) with overlap translation `-\Delta_7/(u_5v_5)`. The fixed-shear section supplies the quotient-visible descended base: all finite transport jets descend to `u=t^2`, and the quartic--sextic rung is rank one with no third local reset. The missing theorem is whether the actual corrected two-atom package is state-local in that descended base, or whether a genuinely relational/provenance-sensitive lift variable survives.
+
+### `explorer-support-lanes` autoresearch update
+
+Signal: support-lane sharpening, confirmed negative guidance.
+
+Captured takeaway: the quartic--sextic rung is inert for the quotient-visible three-run lobe-amplitude obstruction because `\widehat{\mathcal D}(0)=\kappa_{2,2}\neq0`; the first possible quotient-visible bad core begins only at a higher-rung critical point of `\widehat{\mathcal D}`, not at the first quartic--sextic rung.
+
+### `explorer-prior-treasure-hunt` convention caveat
+
+Signal: convention capture, heuristic but actionable.
+
+Captured takeaway: the exceptional-divisor convention is itself theorem-shaping. `\widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0)` must mean the analytically continued blow-up value after `2\omega=\kappa\delta`; without this convention, weaker coincidence slogans can hide the free `B(m,\kappa)`. The slogan `C \Rightarrow B` is safe only under the sharp normalization, not weaker reduced-coincidence language.
+
+### Verifier autoresearch reloads
+
+Signal: live verifier posture.
+
+Captured takeaway: adversarial and source verifiers reloaded autoresearch instructions and remain live. Their next checks are fixed: C scalar-normalization/diagonal-value claims, D-min or `T`/`\lambda` patch-to-global claims, and finite-core lower-model theorem E claims.
