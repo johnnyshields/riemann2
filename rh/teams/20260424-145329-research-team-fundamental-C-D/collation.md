@@ -294,3 +294,28 @@ Captured takeaway: source verifier confirms the same scoped negative. The one-pa
 Signal: C `R` determinant-channel adversarial harness, keep.
 
 Captured takeaway: the resumed adversarial verifier packages the C-FS2/C-FS3 negatives into an acceptance test. A future C closure must explicitly exclude a quotient-defect perturbation `R_\kappa` with `\det(R_\kappa,A_5^{\mathfrak f})=c^2\varepsilon\kappa`, since the reduced third coordinate shifts by `\varepsilon\kappa`. Representative-gauge invariance only kills additions parallel to `A_5^{\mathfrak f}`; it does not kill determinant-changing quotient-defect data. The agent's script `agents/20260424-165509-verifier-adversarial-C-R-channel/scripts/r_channel_pressure_test.js` reruns cleanly and also records the centered channel `D_2=2\kappa(AV_1-BU_1)`. This is terminal for the subroutes "formal C properties force C-FS3" and "the displayed order-3/5/7 formulas already forbid slope deformation," but not terminal for a stronger actual-package construction/control theorem.
+
+### `20260424-165509-gap-closer-C-R-determinant-control/report.md`
+
+Signal: C `R` determinant-control reduction, keep.
+
+Captured takeaway: the determinant slot is exactly the one-dimensional quotient-defect class on every `A_5^{\mathfrak f}\neq0` patch. The map `[R]\mapsto\det(R,A_5^{\mathfrak f})` identifies `\mathfrak f/\mathbf C A_5^{\mathfrak f}` with `\mathbf C`, so representative gauge control cannot kill the deformation. The positive target is now sharper: construct the actual corrected exceptional-divisor quotient class `[R]`, prove it descends/state-localizes to the collision state with no independent slope/provenance parameter, and then prove merger normalization. The script `agents/20260424-165509-gap-closer-C-R-determinant-control/scripts/determinant_slot_linear_algebra.js` reruns cleanly.
+
+### `20260424-165509-explorer-C-actual-package-construction/report.md`
+
+Signal: C actual-package construction map, open / keep.
+
+Captured takeaway: the draft supports a clean C codomain and reduction schema `V_C=\mathbf C\times\mathfrak f\times\mathbf C` with `\mathcal R_C(C,UI+VS,\Delta)=(U/C,V/C,\Delta/C^2)`, but not a theorem-ready construction of the actual corrected two-atom fixed triple `\mathfrak P_{2,C}^{\corr}`. The conditional fiber definition is clear once that object exists, but the current paper still lacks: actual `\mathfrak P_{2,C}^{\corr}` construction, analytic reduced-fiber extension to `t=0`, determinant descent/control for `R`, diagonal merger / slope independence, and one-pair identification with `\widehat\Psi`. The report also preserves the C/D separation: raw affine-lift gauges and `T=v_7/c` are D data, not C-codomain coordinates.
+
+### `20260424-165509-verifier-source-C-R-channel/report.md`
+
+Signal: C `R` determinant-channel source audit, open / keep.
+
+Captured takeaway: the source verifier confirms the current proof state. Source-supported: one-pair fixed package, quotient-septic/gauge invariance, the representative-independent scalar `\det(R,A_{5,1}^{\mathfrak f})`, and the centered template `D_2=2\kappa(AV_1-BU_1)`. Missing: actual corrected two-atom fixed triple, corrected reduced-package fibers, exceptional-divisor computation/control of `R`, determinant independence from slope/provenance data, and a diagonal-merger / same-reduced-image / collision-functoriality theorem strong enough to promote C. Basis and notation drift flags: `(I,S,D,J)` vs `(I,D,S,K)` with `K=-J`; overloaded `\kappa`; overloaded `R`; scalar `D_2` vs matrix `D`.
+
+### Resume frontier after four C deposits
+
+- **Current best C target:** construct the actual exceptional-divisor quotient class `[R]` for the corrected two-atom package and prove it descends/state-localizes to the collision state; then prove merger normalization to `\widehat\Psi`.
+- **Keep:** linear-algebra reduction that `\det(R,A_5^{\mathfrak f})` is the quotient-defect class; adversarial `R_\kappa` pressure harness; C codomain/fiber schema; source map of missing package construction and merger theorem.
+- **Discard:** representative-gauge control as a route to C, fixed-codomain/schema-only promotion, and displayed-formula-only claims that the slope channel is already killed.
+- **Next:** redelegate the C gap-closer/explorer pair toward a source-level edge law for `\overline E_{12}^{(7;1)}` or an actual package state-locality theorem for `[R]`; keep both verifiers alive for any proposed positive claim.

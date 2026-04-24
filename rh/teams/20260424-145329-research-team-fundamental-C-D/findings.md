@@ -107,6 +107,15 @@ Active, compact knowledge base shared with every delegated agent.
   equality; on `v_5\neq0`, `\widehat\Psi` alone does not determine the visible lift.
   Current local sections are `v_7=0` on `v_5\neq0` and `u_7=0` on `u_5\neq0`,
   with overlap translation `-\Delta_7/(u_5v_5)`.
+- **C determinant slot is exactly the septic quotient-defect class on good patches.**
+  Provenance:
+  `agents/20260424-165509-gap-closer-C-R-determinant-control/report.md` with
+  script `scripts/determinant_slot_linear_algebra.js`; source audit
+  `agents/20260424-165509-verifier-source-C-R-channel/report.md`. Usage: on
+  `A_5^{\mathfrak f}\neq0`, the map
+  `[R]\mapsto\det(R,A_5^{\mathfrak f})` identifies
+  `\mathfrak f/\mathbf C A_5^{\mathfrak f}` with `\mathbf C`; C-FS2/C-FS3 must
+  control the actual quotient class `[R]`, not only a representative.
 
 ## Recurring open gaps
 
@@ -124,8 +133,9 @@ Active, compact knowledge base shared with every delegated agent.
   The current C2a split is quotient-visible state-locality vs genuinely relational /
   provenance-sensitive two-atom data. Patch transitions for the affine lift are
   base-controlled (`S_u=-(x/Y)S`), so the remaining C obstruction is fiber selection:
-  show the corrected exceptional-divisor package has only this affine fiber over the
-  reduced base and diagonal merger kills it.
+  construct the actual corrected C package, prove state-locality/descent for the
+  quotient-defect class `[R]`, then show diagonal merger kills the exceptional
+  slope/provenance fiber.
 - **Hidden extraction theorem from finite-core package data to the first surviving odd coefficient of `H_m`.**
   Touches: UV-002 / UV-007; this is the bridge from `\widehat\Psi`-side control
   to the already-built `\Xi_\zeta^{(N)}` extractor. Current sharp obstruction:
