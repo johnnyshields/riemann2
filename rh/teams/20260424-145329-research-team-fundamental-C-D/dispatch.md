@@ -855,6 +855,64 @@ their owned dirs, do not edit ledgers or the paper, use the 9-field report
 schema plus autoresearch closing block and `Ledger destination`, and separate
 proved / conditional / missing.
 
+## Resume dispatch 20260425-010000
+
+Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260425-010000`.
+
+Base commit: `1f94603`.
+
+Coordinator-owned theorem target: UV-026 homogeneous cubic gate reduction.
+Under the clean homogeneous scalar grade, `L_1YR_1` is now source/adversarially
+verified absent at `B_7`.  `L_2YR_0`/`L_0YR_2` have a deposited order-count
+absence pending verifier.  The research lane moves to the first non-`Y` gate:
+`L_2N_0R_1`/`L_1N_0R_2`.
+
+Roster:
+
+1. Harvey continues as `verifier-adversarial-UV026-L2YR0-order`, writing only
+   under `agents/20260425-010000-verifier-adversarial-UV026-L2YR0-order/`.
+   Task: verify or reject the order-count absence for
+   `L_2YR_0`/`L_0YR_2`, especially the claim that second-Frechet inverse-square
+   root terms cannot lower ordinary `z`-order.
+2. Hilbert continues as `gap-closer-UV026-L2N0R1-homogeneous-gate`, writing only
+   under `agents/20260425-010000-gap-closer-UV026-L2N0R1-homogeneous-gate/`.
+   Task: under homogeneous scalar grade, test `L_2N_0R_1` and `L_1N_0R_2`.
+   Determine whether order counting alone removes them at `B_7`, or whether
+   baseline `N_0` lower coefficients allow a live order-7 term requiring actual
+   first/second-Frechet coefficient identities.
+
+In-scope files and prior reports:
+
+- `rh/proof_of_rh.tex` lines 1392--1458, 2429--2466, 2607--2787,
+  2797--2899, and 12617--12714.
+- `rh/teams/20260424-145329-research-team-fundamental-C-D/findings.md`.
+- `rh/teams/20260424-145329-research-team-fundamental-C-D/uv.md`, UV-026 only.
+- `agents/20260425-005100-gap-closer-UV026-L2YR0-homogeneous-gate/report.md`.
+- `agents/20260425-005100-verifier-source-UV026-L1YR1-absence/report.md`.
+- `agents/20260425-003100-gap-closer-UV026-parity-corrected-grade/report.md`.
+- `agents/20260424-232207-explorer-UV026-final-cubic-L2N0R1/report.md`.
+- `agents/20260424-231056-explorer-UV026-next-cubic-L2YR0/report.md`.
+
+Ground-truth checks:
+
+- Evidence stays before `\Phi_K`, determinant scalarization, quotient
+  extraction, and diagonal merger.
+- `L_2YR_0` verification must explicitly address holomorphic functional
+  calculus / Frechet order non-lowering.
+- `L_2N_0R_1` progress requires either an order-count absence, an exact missing
+  coefficient theorem, or a live determinant-test vector; do not restate the
+  older reduction unchanged.
+- Any closure remains scoped to homogeneous scalar grade; alternative
+  matrix-output `M^{[5]}` conventions remain quarantined.
+
+Non-goals: do not edit `rh/proof_of_rh.tex`; do not promote UV-024 or UV-026;
+do not use post-`\Phi_K`, determinant, quotient, or diagonal-merger facts.
+
+Protected surfaces and report contract are unchanged: agents write only under
+their owned dirs, do not edit ledgers or the paper, use the 9-field report
+schema plus autoresearch closing block and `Ledger destination`, and separate
+proved / conditional / missing.
+
 ## Resume dispatch 20260425-005100
 
 Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260425-005100`.
