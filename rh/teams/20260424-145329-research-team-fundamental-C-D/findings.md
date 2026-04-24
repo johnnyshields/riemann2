@@ -104,11 +104,16 @@ Active, compact knowledge base shared with every delegated agent.
 - **Package-level coincidence for the actual corrected two-atom package.**
   Touches: the residual exact fixed-shear corner and the honest order-7 lane;
   best current shape is same reduced image germ / collision-functoriality.
+  Current sharp obstruction: reduced C does not imply fixed-shear package theorem B
+  without a scalar-normalization law fixing the raw representative; reduced equality
+  still permits common scalar freedom in the cubic/quintic defects.
 - **Hidden extraction theorem from finite-core package data to the first surviving odd coefficient of `H_m`.**
   Touches: UV-002 / UV-007; this is the bridge from `\widehat\Psi`-side control
   to the already-built `\Xi_\zeta^{(N)}` extractor. Current sharp obstruction:
-  the `T=v_7/c` proxy is normalized septic data only, so D still needs finite
-  determination or an odd-order bound; coordinates alone do not close it.
+  the `T=v_7/c` proxy is normalized septic data only, and neither finite
+  determination from `(x,Y,S,T)` nor a bound `N\le4` is in the current draft. The
+  minimal D target is affine-bundle descent / `\ker\Phi_K` transport for higher-order
+  freedom above the normalized septic lift.
 - **Exceptional-locus `M=0` reduction after good-patch edge law.**
   Touches: UV-003 and the finite-core residual two-point lane; current route is
   Weierstrass/prepared-branch reduction, still heuristic.

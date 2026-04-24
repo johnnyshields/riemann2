@@ -87,3 +87,19 @@ Signal: source audit of current deposits, open.
 Captured takeaway: the current reports cite the right paper neighborhoods, but status discipline needs tightening. `C1/C2/C3` is an audit decomposition, not a paper-stated theorem stack; `T=v_7/c` is a patchwise derived scalar on `\{c\neq0,v_5\neq0\}`, not a canonical global package coordinate; and `C -> D -> endgame rewrite` still leaves a real theorem obligation, not a formal edit.
 
 Source-audit instruction for future briefs: define corrected reduced-package fibers explicitly, keep D at transform level modulo `\ker\Phi_K`, state patch hypotheses for `T`, and use current label lines (`rem:wip-explicit-pointwise-bridge-good-patch-detector` at 21278; `rem:wip-final-endgame-status` at 26370).
+
+### `20260424-145500-explorer-package-functoriality/notes/followup-b-vs-c-scalar-law.md`
+
+Signal: B-vs-C distinction, proved relative to current formulation.
+
+Captured takeaway: C does not currently imply the fixed-shear package theorem B. C is reduced coincidence after homogeneous reduction to `\widehat\Psi`; B is raw package collapse / defect-zero on the fixed-shear corner. The exact strengthened-coincidence identities permit residual common scalar freedom at coincidence, e.g. `E^{(5)}=(e/c)A_5^{\mathfrak f}`, so reduced equality does not force `E^{(3)}=E^{(5)}=0`.
+
+New support theorem needed if B is to follow from C: a scalar-normalization law fixing the raw representative compatibly with collision/fixed-shear descent.
+
+### `20260424-145500-gap-closer-D-kerphik/notes/followup-finite-determination.md`
+
+Signal: D-min reduction, open.
+
+Captured takeaway: neither finite determination from `\widetilde\Psi_{\min}=(x,Y,S,T)` nor a uniform bound `N\le4` is derivable from the current draft. The tuple is exactly normalized fixed-sector septic data; `rem:wip-final-endgame-status` explicitly leaves room for first odd cancellation and survival at higher odd order.
+
+New minimal D target: affine-bundle descent / `\ker\Phi_K` transport saying that higher-order freedom above the normalized septic lift is invisible through the first surviving odd order. This is weaker than full finite determination and is now the smallest isolated hidden-state theorem.
