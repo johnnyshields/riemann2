@@ -297,3 +297,28 @@ Verifiers:
 
 Do not attack D, E, pair-like quantitative cleanup, finite-core lower transfer,
 or paper promotion in this wave. This wave is UV-010 only.
+
+## Verifier pass 20260424-182546
+
+Base commit: `518b43bc6c71026abcc9bf08b1c6f8de2a0ad3b9`.
+
+The first six UV-010 deposits are captured in `attempts.md`, `attempts.tsv`,
+`findings.md`, and `collation.md`. Because the runtime allows only six live
+Codex subagent threads, the coordinator may close completed first-wave agents
+after their committed deposits solely to free capacity for the two verifier
+roles.
+
+Verifier scope:
+
+- `verifier-adversarial-UV010-first-wave`: attack the first-wave UV-010
+  formulation, determinant trivialization, good-patch hypotheses, and hidden
+  scalarization assumptions. Ground-truth pressure test is the formal
+  `a_1a_2\delta^2P(m,\kappa)` septic quotient perturbation plus the `A_5=0`
+  rank-jump objection.
+- `verifier-source-UV010-first-wave`: source-audit the same claims against
+  `rh/proof_of_rh.tex:7004-7062`, `7065-7191`, `7892-8033`, `11603-11775`,
+  `11888-12189`, `12385-12510`, `24520-24610`, and `24990-25030`.
+
+Both verifiers own only their assigned `agents/20260424-182546-<slug>/`
+directory. They must not edit team ledgers, `rh/proof_of_rh.tex`, `lore/`,
+`.agents/`, or another agent directory.
