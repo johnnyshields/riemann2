@@ -37,3 +37,22 @@ Decision: revise the resume from a default balanced roster to a focused UV-012
 attack with one gap-closer and one adversarial verifier. UV-011, UV-013,
 UV-014, and UV-015 remain open, but they are lower leverage until UV-012 is
 settled.
+
+## Gap return - 20260424-183451
+
+`agents/20260424-183451-gap-biunitary-matrix-finality/report.md` gives the
+missing finite-dimensional orbit theorem for UV-012. For fixed endpoint
+subspaces with orthonormal frame maps \(U_-:\mathbb C^p\to S_-\) and
+\(U_+:\mathbb C^q\to S_+\), the comparison matrix
+\(A=U_-^*U_+\) is the matrix of the canonical cross-contraction
+\(C=\Pi_-|_{S_+}\). Changing frames gives exactly \(A\mapsto L^*AR\), and
+every orthonormal-frame comparison matrix for the same pair arises in this way.
+The rectangular SVD classifies the orbit by singular values, including
+rank-deficient and unequal-dimensional cases. These singular values are the
+principal-angle cosines.
+
+Provisional verdict: keep. If an adversarial verifier accepts the naturality
+wording, UV-012 should close negatively from the fixed subspace-pair data alone:
+the canonical object is the operator/principal-angle package, while an entrywise
+matrix requires extra frame-selecting structure except in the already qualified
+simple-spectrum diagonal-frame sector.

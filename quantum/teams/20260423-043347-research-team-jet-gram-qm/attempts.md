@@ -2,7 +2,7 @@
 
 | Agent | Target | Claim / route | Status | Evidence | Action | Description |
 |---|---|---|---|---|---|---|
-| `20260424-183451-gap-biunitary-matrix-finality` | UV-012 | Prove fixed-subspace frame comparison matrices are exactly one biunitary orbit; singular values/principal angles are complete orbit data. | running | Dispatch brief in `dispatch.md`; target recovered from no-report `20260424-040334-attack-biunitary-classification` subdir. | Await report, then adversarial verification. | This is the focused matrix-finality route selected after the deep read. |
+| `20260424-183451-gap-biunitary-matrix-finality` | UV-012 | Prove fixed-subspace frame comparison matrices are exactly one biunitary orbit; singular values/principal angles are complete orbit data. | terminal pending verification | `agents/20260424-183451-gap-biunitary-matrix-finality/report.md` proves the frame-change law and rectangular SVD orbit classification; no scripts needed. | Send to adversarial verifier before paper promotion or UV rejection. | This is the focused matrix-finality route selected after the deep read. |
 
 ## Frontier summaries
 
@@ -24,5 +24,6 @@
   coordinator brief and no deposited report. The biunitary-orbit classification
   target should be reassigned under UV-012.
 - **Next:** Per user redirection on 2026-04-24, do not default to a 3+3+2
-  roster. Run a focused UV-012 matrix-finality attack first: one gap-closer for
-  the biunitary-orbit theorem and one adversarial verifier for closure.
+  roster. Run a focused UV-012 matrix-finality attack first. The gap-closer has
+  returned a terminal proof claim; next is adversarial verification of closure
+  wording.
