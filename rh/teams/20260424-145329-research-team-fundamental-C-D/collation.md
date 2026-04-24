@@ -55,3 +55,19 @@ Captured takeaway: neither C nor D is proved in the draft. Incoming C claims mus
 Signal: verifier setup, open.
 
 Captured takeaway: adversarial kill conditions are sharp. C dies if an argument leaves the free exceptional-divisor trace `B(m,\kappa)`. D dies if an argument leaves the hidden `\Phi_K`-visible septic direction alive. The verifier should now be sent the current C/D reports for claim-by-claim attack.
+
+### `20260424-145500-explorer-hidden-state-geometry/report.md`
+
+Signal: D geometry, heuristic with confirmed fixed-sector geometry.
+
+Captured takeaway: the hidden `\Phi_K`-visible scalar is the affine lift-coordinate of the canonical order-7 quotient class inside `\mathfrak f=\operatorname{span}\{I,S\}`. The septic gauge translates along `\mathbf C A_5^{\mathfrak f}`, and `\Phi_K` sees that translation through the `S`-component; on `v_5\neq0`, `\widehat\Psi` alone does not determine the visible lift.
+
+D redirect: formulate the hidden-state theorem as affine-bundle descent or a `\ker\Phi_K`-valued transport law along corrected reduced-package fibers, not as raw septic representative equality. No closure: the report does not prove the lift-coordinate is constrained.
+
+### `20260424-145500-explorer-prior-treasure-hunt/report.md` and `notes/treasure-map.md`
+
+Signal: prior-cycle capture audit, heuristic with confirmed missed sharp negatives.
+
+Captured takeaway: the prior queue compression was correct, but three sharp items needed explicit carry-forward: (i) current reduced-package blow-up hypotheses still allow a free `B(m,\kappa)`, so analyticity/swap-evenness are a do-not-retry route for C; (ii) B and C differ by one scalar-normalization law, so support-package closure does not automatically equal C; (iii) `\widetilde\Psi_{\min}=(x,Y,S,T)` is normalized septic data only, so D still needs finite determination or an odd-order bound.
+
+Action: captured (i) as a Negative finding, captured the affine-lift/D warning as a Goodie/open-gap refinement, and left (ii) in collation pending sharper theorem use.

@@ -65,6 +65,12 @@ Active, compact knowledge base shared with every delegated agent.
   (`proof_of_rh.tex` lines 16116--16225, 26134--26299), plus recent bridge audits.
   Do-not-retry: generic local-pointwise detector nonvanishing from the present
   same-tower formulas alone without a new provenance-sensitive theorem.
+- **Current reduced-package blow-up hypotheses do not force diagonal collapse.**
+  Provenance: prior-cycle `agents/20260424-133500-C-failure/report.md` and current
+  `agents/20260424-145500-explorer-prior-treasure-hunt/report.md`. Do-not-retry:
+  deriving `\widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0)=\widehat\Psi(m)` from
+  analyticity, swap-evenness, or reduced-package blow-up coordinates alone; these
+  still allow a free exceptional-divisor trace `B(m,\kappa)`.
 
 ## Goodies
 
@@ -83,6 +89,12 @@ Active, compact knowledge base shared with every delegated agent.
   (`proof_of_rh.tex` lines 21142--21275). Usage: if the bridge theorem is local,
   it must run through the single explicit source `r=q^{(7)}` via
   `\lambda^{[1]}` / `\mathcal G^{[1]}`; no second primitive pointwise field remains.
+- **Hidden `\Phi_K`-visible state is an affine lift-coordinate.** Provenance:
+  current `agents/20260424-145500-explorer-hidden-state-geometry/report.md` and
+  prior `agents/20260424-112500-phik-kernel-structure/report.md`. Usage: D should
+  be framed as affine-bundle descent / `\ker\Phi_K` transport along the septic
+  lift line `A_7^{\mathfrak f}+\mathbf C A_5^{\mathfrak f}`, not raw representative
+  equality; on `v_5\neq0`, `\widehat\Psi` alone does not determine the visible lift.
 
 ## Recurring open gaps
 
@@ -94,7 +106,9 @@ Active, compact knowledge base shared with every delegated agent.
   best current shape is same reduced image germ / collision-functoriality.
 - **Hidden extraction theorem from finite-core package data to the first surviving odd coefficient of `H_m`.**
   Touches: UV-002 / UV-007; this is the bridge from `\widehat\Psi`-side control
-  to the already-built `\Xi_\zeta^{(N)}` extractor.
+  to the already-built `\Xi_\zeta^{(N)}` extractor. Current sharp obstruction:
+  the `T=v_7/c` proxy is normalized septic data only, so D still needs finite
+  determination or an odd-order bound; coordinates alone do not close it.
 - **Exceptional-locus `M=0` reduction after good-patch edge law.**
   Touches: UV-003 and the finite-core residual two-point lane; current route is
   Weierstrass/prepared-branch reduction, still heuristic.
