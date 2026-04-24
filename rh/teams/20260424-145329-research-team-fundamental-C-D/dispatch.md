@@ -527,3 +527,42 @@ Ground-truth checks:
 
 Protected surfaces are unchanged: agents write only to
 `agents/20260424-192320-<slug>/`.
+
+## UV-024 coefficient-map attack 20260424-193725
+
+Base commit: `b20a80b`.
+
+Current target: UV-024. Construct or reject the pre-determinant fixed-sector
+order-7 coefficient map
+
+`C\mapsto B_7^{\mathfrak f}(C)\in\mathfrak f`
+
+for the actual source-linear corrected-whitening cross-effect before `\Phi_K`
+or determinant scalarization, then test whether non-`(1,1)` source bidegrees
+land in `\mathbf C A_5^{\mathfrak f}(m)`.
+
+Roster:
+
+1. `gap-closer-UV024-matrix-cross-effect`: build the matrix-level
+   corrected-whitening cross-effect from the whitening map before applying
+   `\Phi_K`, then attempt to define
+   `B_7^{\mathfrak f}(C)=\pi_{\mathfrak f}[z^7]C`.
+2. `verifier-source-UV024-prePhi-coefficient`: source-audit whether the paper
+   already contains enough pre-`\Phi_K` corrected-whitening machinery and
+   fixed-sector projection language to support `B_7^{\mathfrak f}(C)` without
+   adding a new definition.
+
+Ground-truth checks:
+
+- The coefficient map must be matrix/fixed-sector level before scalar
+  extraction.
+- `Q_{7,m}^q(C)=[B_7^{\mathfrak f}(C)]` may use determinant pairing only as a
+  good-patch coordinate after the quotient object exists.
+- A positive result must test the cubic `(1,1,5)` witness and show it is
+  `A_5^{\mathfrak f}`-gauge, not merely scalar-invisible.
+- A negative result must state whether the missing object is the actual
+  two-atom block, matrix-level cross-effect, fixed-sector projection,
+  `B_7^{\mathfrak f}`, or quotient-invisibility theorem.
+
+Protected surfaces are unchanged: agents write only to
+`agents/20260424-193725-<slug>/`.
