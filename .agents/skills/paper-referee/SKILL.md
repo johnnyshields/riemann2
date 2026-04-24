@@ -27,7 +27,7 @@ Phase 1; specific issues listed -> fix only those.
 2. Create `<paper>/teams/<ts>-referee-<slug>/`. Copy prior `findings.md` and
    `uv.md`, initialize `attempts.md`, prune, and add uncaptured material.
 3. Write `dispatch.md` describing target region, issues, phases, protected
-   surfaces, and fixed-harness criteria.
+   surfaces, fixed-harness criteria, and the ledger contract.
 
 ## Phase 1: Fix
 
@@ -44,7 +44,8 @@ their reports, and the team lead captures them.
 Keep fixers alive while paper edits and report capture are reviewed. Use
 `send_input` for follow-up fixes or narrowed objections. Commit paper edits
 with compile-check. Process fixer reports through `State ledger separation` and
-`Claim lifecycle (git-as-archive)`.
+`Claim lifecycle (git-as-archive)`; every scoped fix route gets an
+`attempts.md` row or `collation.md` no-action note.
 
 ## Phase 2: Re-review, unless `--no-referee`
 
@@ -62,7 +63,7 @@ Each returns a verdict in `accept | minor | major | reject`.
 Process Phase 2 reports through `State ledger separation` and `Claim lifecycle
 (git-as-archive)`: new issues to `uv.md`, durable lessons to `findings.md`,
 route/verdict outcomes to `attempts.md`, demotions for killed claims, and
-synthesis to `collation.md`.
+synthesis to `collation.md`. Every verdict row cites the referee report.
 
 Keep fixers/referees alive for follow-up objections, narrowed repairs, and
 adjacent referee passes while their context is fresh. Use `send_input` to

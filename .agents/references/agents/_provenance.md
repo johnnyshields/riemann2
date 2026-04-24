@@ -62,8 +62,10 @@ You do **not** write to:
 - `AGENTS.md`, `lore/`,
 - another agent's `agents/<other-slug>/` dir.
 
-Propose changes through your `report.md`. The team lead handles
-canonical files. An exception applies only if your *role* block below
+Propose changes through your `report.md`. The team lead handles canonical files.
+Name the intended ledger destination for each material signal; do not leave the
+team lead to infer whether something is a UV, finding, route outcome, paper
+edit, or no-action note. An exception applies only if your *role* block below
 explicitly grants it (e.g. the `fixer` role edits the paper).
 
 ## Writing discipline (AGENTS.md `Writing discipline`)

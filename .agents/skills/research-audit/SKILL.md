@@ -25,7 +25,8 @@ append `--adversarial` to pair each auditor with a checker; `--non-goals:
 2. Resolve each argument to a concrete line range or `\section` block in
    `<paper>/<main>.tex`.
 3. Create `<paper>/teams/<ts>-audit-<slug>/`. Copy prior `findings.md` and
-   `uv.md`, initialize `attempts.md`, prune, and write `dispatch.md`.
+   `uv.md`, initialize `attempts.md`, prune, run the ledger gate, and write
+   `dispatch.md` with the ledger contract.
 
 ## Dispatch
 
@@ -49,8 +50,10 @@ Verify every expected `agents/<slug>/report.md` exists; chase missing deposits.
 Write `collation.md` with per-subsection verdicts. Process each report by
 `State ledger separation`: reusable audit lessons to `findings.md`, new proof
 obligations to `uv.md`, audit outcomes to `attempts.md`, and paper-ready edits
-to `paper-updates.md`. Apply `Claim lifecycle (git-as-archive)` to proof-state
-changes. Lore entry only if proof state changed. No direct `<main>.tex` edits.
+to `paper-updates.md`. Every audit/verifier verdict gets a route row citing the
+report or a `collation.md` no-action note. Apply `Claim lifecycle
+(git-as-archive)` to proof-state changes. Lore entry only if proof state
+changed. No direct `<main>.tex` edits.
 
 Keep auditors and paired adversaries alive for follow-up audits, source checks,
 and adjacent ranges while their context is fresh. Use `send_input` to redelegate

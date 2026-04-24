@@ -61,6 +61,21 @@ several signals, file each one in the right place with the same provenance.
 Legacy `attempts.tsv` is read-only context when resuming old teams; new and
 resumed work uses `attempts.md`.
 
+Ledger invariants are hard gates:
+
+- Every `attempts.md` row cites the producing agent report and records exactly
+  one route outcome. If the same report produced a UV or finding, cite that id
+  instead of restating the claim.
+- Every live `uv.md` entry is a precise missing sub-statement with source label
+  or source report, needed-for-promotion condition, and provenance. Presence is
+  the status; do not add status tags.
+- Every `findings.md` bullet is durable briefing material. Failed route logs,
+  stale guesses, and per-agent summaries belong elsewhere.
+- Every `collation.md` decision that chooses "no action" states why the signal
+  was not filed to `uv.md`, `findings.md`, `attempts.md`, or `paper-updates.md`.
+- No claim may be promoted, demoted, rejected, or forwarded into a new cycle
+  while its ledger destination is ambiguous.
+
 ## Dispatch
 
 Delegation uses Codex subagents. Use
@@ -368,6 +383,15 @@ blockers, and next queued moves. `paper-updates.md` is optional: the team lead
 writes it when the cycle has produced edits ready to fold into
 `<paper>/<main>.tex`.
 
+Route status meanings are fixed:
+
+- `keep`: reusable proof step, reduction, computation, source check, or negative
+  lesson worth carrying.
+- `discard`: scoped route failure that should not be retried unchanged.
+- `blocked`: coordinator action or missing source/check is required.
+- `terminal`: the assigned target is closed, rejected, or superseded.
+- `crash`: tooling or execution failure; distinguish from mathematical failure.
+
 **Agents write their own provenance artifacts. Always.** Every agent — gap-closer,
 explorer, verifier, auditor, Phase-1 fixer — writes directly to its own
 `agents/<slug>/` dir: the 9-field report, every script it ran, every
@@ -456,6 +480,11 @@ Process reports as they land, not in an end-of-cycle batch. `Git workflow` alrea
 asks for per-deposit commits; the capture edit (UV append, findings
 bullet, demote) goes in the *same* commit as the report it came from
 when the signal is clear enough.
+
+Before each dispatch, resume, promotion, demotion, rejection, or shutdown, run a
+ledger gate: every landed report has a corresponding route row or explicit
+`collation.md` no-action note; every new UV/finding cites its source report;
+every paper-ready edit is either in `paper-updates.md` or deliberately deferred.
 
 **Be aggressive about UV creation.** A precise missing sub-statement is
 a UV entry; a vague "needs more work" is not. When an agent report flags

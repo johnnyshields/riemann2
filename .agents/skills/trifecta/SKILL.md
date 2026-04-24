@@ -24,7 +24,8 @@ analysts; lore file path -> analyze that file.
    entries, `git log --oneline -n 20`, and relevant paper sections.
 2. Write a <=30-line key-findings summary for all briefings.
 3. Create `<paper>/teams/<ts>-trifecta-<slug>/`. Copy forward `findings.md` and
-   `uv.md`, initialize `attempts.md`, prune, and write `dispatch.md`.
+   `uv.md`, initialize `attempts.md`, prune, run the ledger gate, and write
+   `dispatch.md` with the ledger contract.
 
 ## Dispatch
 
@@ -51,7 +52,8 @@ consolidated entry.
 Verify deposits. Walk each report by `State ledger separation`: reusable
 synthesis to `findings.md`, new proof obligations to `uv.md`, route outcomes to
 `attempts.md`, paper-ready additions to `paper-updates.md`, and consolidated
-synthesis to lore.
+synthesis to lore. Every proposed connection gets a route row citing the report
+or a `collation.md` no-action note.
 
 Write ONE lore file `lore/<yyyymmdd>-trifecta-<slug>.md`: top-level summary,
 section-by-section notes, literature ranked by strength, under-the-nose

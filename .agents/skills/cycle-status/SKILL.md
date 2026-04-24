@@ -31,7 +31,8 @@ Single-call orientation. Read-only. No delegation, no edits, no commits.
 - **Ledger health** for the most recent team dir: `attempts.md` exists, uses the
   markdown route table, and has a short frontier summary. Flag legacy
   `attempts.tsv`, top-level `<paper>/findings.md`, `<paper>/unverified.tex`, or
-  parallel ledgers as migration work, not authoritative state.
+  parallel ledgers as migration work, not authoritative state. Also flag report
+  deposits with no `attempts.md` row and no `collation.md` no-action note.
 - **Uncaptured agent material**: reports whose claims do not appear in
   `findings.md`, `uv.md`, `attempts.md`, or `collation.md`. This is the capture
   miss surface.
@@ -57,5 +58,5 @@ RECENT COMMITS
 
 Empty sections: emit "none"; do not suppress the heading. If anything looks
 action-worthy (`findings.md` at 195 lines, orphan UV, legacy ledger still
-active, missing reports, unpushed commits > 3, uncaptured material), add a
-`NEXT ACTIONS` footer with at most 5 bullets.
+active, missing report-route capture, unpushed commits > 3, uncaptured
+material), add a `NEXT ACTIONS` footer with at most 5 bullets.

@@ -36,7 +36,9 @@ to interpreters, `/tmp/` throwaways. Cite path + output excerpt.
 You do **not** write to the team dir's `findings.md` / `uv.md` /
 `attempts.md` / `collation.md` / `dispatch.md` / `paper-updates.md`,
 `AGENTS.md`, `lore/`, or another agent's dir.
-Propose changes through your `report.md`.
+Propose changes through your `report.md`. Name the intended ledger destination
+for each material signal; do not leave the team lead to infer whether something
+is a UV, finding, route outcome, paper edit, or no-action note.
 
 ## Writing discipline (AGENTS.md `Writing discipline`)
 
@@ -69,7 +71,9 @@ state.
 3. Do the work. For computational claims, write scripts to files before running
    them and cite the paths.
 4. Deposit the result in your agent dir using the 9-field report schema. Update
-   notes/scripts as needed.
+   notes/scripts as needed. Include enough route/outcome detail for the team
+   lead to file `attempts.md`, `uv.md`, `findings.md`, or a `collation.md`
+   no-action note without reconstructing your reasoning from chat.
 5. End with the next best task for yourself: the sharpest follow-up, adversarial
    check, finite reduction, or reason the route is exhausted.
 6. Wait for the team lead. If redelegated, continue from your prior context
@@ -116,6 +120,9 @@ For mathematical research, translate that as follows:
   The team lead logs the `attempts.md` row with columns `Agent | Target |
   Route | Status | Evidence | Action | Reason`; do not edit the ledger
   yourself.
+- **Ledger destination:** if you propose a UV, finding, paper edit, route
+  discard, or no-action decision, name that destination explicitly in the
+  report and cite the evidence path. Ambiguous ledger destination is a defect.
 - **Timeouts:** if a computational run or search exceeds the budget in your
   brief, stop it, record what was learned, and propose the next bounded attempt.
 - **Crash handling:** fix obvious typos/import mistakes and rerun. If the idea
@@ -136,6 +143,10 @@ Add a short **Autoresearch next step** field after the 9-field schema:
 - `verify:` the adversarial/source check needed before promotion;
 - `blocked:` the exact coordinator action needed;
 - `terminal:` why this target is closed or rejected.
+
+Also add a **Ledger destination** line: `uv.md`, `findings.md`, `attempts.md`,
+`paper-updates.md`, `collation.md/no-action`, or `none`, with one sentence
+explaining why.
 
 # End of shared autoresearch
 

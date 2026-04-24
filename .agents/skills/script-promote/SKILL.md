@@ -18,7 +18,8 @@ Promote a verification script to a hardened version in `final-scripts/<paper>/`.
 
 Read the current team dir's `findings.md`, `uv.md`, and relevant reports. Create
 `<paper>/teams/<ts>-other-script-<slug>/` with copy-forward `findings.md` and
-`uv.md`, fresh `attempts.md`, and an `agents/<ts>-promoter-<slug>/` deposit dir.
+`uv.md`, fresh `attempts.md`, run the ledger gate, and create an
+`agents/<ts>-promoter-<slug>/` deposit dir.
 
 ## Dispatch
 
@@ -50,5 +51,6 @@ Promoter's job:
 
 Coordinator reviews the script and report by `State ledger separation`: new
 findings to `findings.md`, new obligations to `uv.md`, promotion route outcome
-to `attempts.md`, and synthesis to `collation.md`. Commit
-`final-scripts/<paper>/NN_*.py`, lore file, and team dir by named paths.
+to `attempts.md` with report provenance, and synthesis/no-action rationale to
+`collation.md`. Commit `final-scripts/<paper>/NN_*.py`, lore file, and team dir
+by named paths.

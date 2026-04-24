@@ -27,10 +27,11 @@ match. Optional `--double`.
    `uv.md`, prune dead entries, add uncaptured material, initialize a fresh
    `attempts.md`, carry only target-relevant open next-actions into
    `dispatch.md` or `collation.md`, and commit.
-3. Write `dispatch.md` with the originating commit, target, current
+3. Run the AGENTS.md ledger gate for the target before assigning new work.
+4. Write `dispatch.md` with the originating commit, target, current
    baseline/frontier, exact in-scope files/lines/reports, protected surfaces,
    routes, verifier queue if any, non-goals, fixed-harness criteria,
-   ground-truth checks, and budgets/timeouts.
+   ground-truth checks, budgets/timeouts, and the ledger contract.
 
 ## Dispatch
 
@@ -60,7 +61,8 @@ lemmas, no new conjectures outside scope.
    exists; chase missing deposits via `send_input`.
 2. Walk each report. Classify by `State ledger separation`: refine or file UVs,
    append only reusable lessons to `findings.md`, log route outcomes in
-   `attempts.md`, and put synthesis/no-action rationale in `collation.md`.
+   `attempts.md` with report provenance, and put synthesis/no-action rationale
+   in `collation.md`.
 3. Maintain one-ahead flow: send independent next attacks to gap-closers while
    any verifier checks the previous stable claim. Wait only when the next attack
    depends on that check.

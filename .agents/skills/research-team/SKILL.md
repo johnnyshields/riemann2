@@ -29,10 +29,12 @@ forward-carry at dispatch`.
    `uv.md`, prune dead entries, add uncaptured material, initialize a fresh
    `attempts.md`, carry only open next-actions into `dispatch.md` or
    `collation.md`, and commit.
-3. Pick the initial roster and one-ahead cadence. Write `dispatch.md` with the
+3. Run the AGENTS.md ledger gate: every prior landed report is filed to the
+   right ledger or has a `collation.md` no-action note.
+4. Pick the initial roster and one-ahead cadence. Write `dispatch.md` with the
    originating commit, roster, verifier queue if any, targets, exact in-scope
    files/lines/reports, protected surfaces, non-goals, fixed-harness criteria,
-   ground-truth checks, and budgets/timeouts.
+   ground-truth checks, budgets/timeouts, and the ledger contract.
 
 ## Dispatch
 
@@ -76,9 +78,10 @@ returns.
 2. Walk each report. Classify by `State ledger separation`: UV candidates to
    `uv.md`, reusable lessons to `findings.md`, route outcomes to `attempts.md`,
    synthesis/no-action notes to `collation.md`, and paper-ready text to
-   `paper-updates.md`. Process proof-state changes through `Claim lifecycle
-   (git-as-archive)`, refresh frontier summaries, and commit per deposit where
-   possible.
+   `paper-updates.md`. Every substantial route gets either an `attempts.md`
+   row citing the report or an explicit `collation.md` no-action note. Process
+   proof-state changes through `Claim lifecycle (git-as-archive)`, refresh
+   frontier summaries, and commit per deposit where possible.
 3. Maintain the one-ahead pipeline: queue verifier work for stable claims that
    need checking, but immediately redelegate independent next attacks or
    explorations to the research lane. Wait only when the next move depends on

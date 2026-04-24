@@ -32,12 +32,13 @@ most blocking frontier from the existing dir without asking for approval.
    `findings.md`, route outcomes to `attempts.md`, and no-action rationale to
    `collation.md`. Treat `attempts.tsv` as legacy context; import only live
    next-actions, not old rows.
-4. Initialize missing stubs only inside the existing team dir.
-5. Append `## Resume dispatch <timestamp>` to `dispatch.md` with the current
+4. Run the AGENTS.md ledger gate before assigning new work.
+5. Initialize missing stubs only inside the existing team dir.
+6. Append `## Resume dispatch <timestamp>` to `dispatch.md` with the current
    commit, roster, verifier queue if any, targets, exact in-scope
    files/lines/reports, protected surfaces, non-goals, fixed-harness criteria,
-   ground-truth checks, and budgets/timeouts. Commit the resume checkpoint by
-   named paths.
+   ground-truth checks, budgets/timeouts, and the ledger contract. Commit the
+   resume checkpoint by named paths.
 
 ## Dispatch
 
@@ -69,8 +70,9 @@ Same as `research-team`, but all capture stays in the existing team dir.
    `collation.md`.
 2. Walk each report. Classify by `State ledger separation`, process proof-state
    changes through `Claim lifecycle (git-as-archive)`, update `attempts.md`
-   only with route rows, refresh `Frontier summaries`, and commit logical
-   units by named paths.
+   only with route rows citing reports, write `collation.md` no-action notes
+   where needed, refresh `Frontier summaries`, and commit logical units by
+   named paths.
 3. Maintain the one-ahead pipeline: queue verification for stable claims that
    need checking while independent research/exploration teammates continue the
    next attack. Wait only when the next move depends on the verifier's answer.

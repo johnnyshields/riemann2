@@ -19,9 +19,9 @@ or ISO date; `--note "<text>"` -> free-text addendum.
 
 Commits since `<since>`. Team dirs opened or touched. UV and findings changes
 across team dirs. Route/frontier changes from `attempts.md`; no-action
-rationale, verifier queue, and one-ahead lane from `collation.md`. Paper edits
-to `<main>.tex` with stats. Active teams, which should be closed unless the
-user explicitly wants them left running.
+rationale, verifier queue, one-ahead lane, and ledger-gate defects from
+`collation.md`. Paper edits to `<main>.tex` with stats. Active teams, which
+should be closed unless the user explicitly wants them left running.
 
 ## Write
 
@@ -49,6 +49,7 @@ Since: <ref>   Commits: N (<first>..<last>)   Pushed: yes / N
 
 ## Collation notes
 - No-action rationale / verifier queue / one-ahead research lane
+- Ledger-gate defects or "clean"
 
 ## Paper edits
 - <section ref> - one line

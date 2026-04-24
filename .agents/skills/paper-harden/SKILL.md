@@ -20,7 +20,8 @@ dispatch`. Use the inherited Codex model by default.
 1. Read the most recent team dir's `findings.md` and `uv.md`, especially
    Negative and Open-gaps for overclaim detection.
 2. Create `<paper>/teams/<ts>-harden-<slug>/`; copy forward `findings.md` and
-   `uv.md`, initialize `attempts.md`, prune, and write `dispatch.md`.
+   `uv.md`, initialize `attempts.md`, prune, run the ledger gate, and write
+   `dispatch.md` with the ledger contract.
 
 ## Dispatch
 
@@ -45,8 +46,9 @@ Only the rigor reviewer receives current `uv.md`.
 Verify deposits. Walk each report by `State ledger separation`: durable issues
 to `findings.md`, proof obligations to `uv.md`, review outcomes to
 `attempts.md`, paper-ready suggestions to `paper-updates.md`, and ranked
-synthesis to `collation.md`. Apply `Claim lifecycle (git-as-archive)` to any
-proof-state change. No direct paper edits here.
+synthesis to `collation.md`. Every reviewer issue gets a route row citing the
+report or a `collation.md` no-action note. Apply `Claim lifecycle
+(git-as-archive)` to any proof-state change. No direct paper edits here.
 
 Keep reviewers alive for follow-up passes and adjacent scopes while their
 context is fresh. Use `send_input` to push back, ask for narrowed findings, or
