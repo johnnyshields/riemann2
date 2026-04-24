@@ -501,20 +501,20 @@ order 7.
   immediate constructive subproblem.
 - **Discard:** signed-lift-only package definitions and any route that keeps the
   higher `a^3,a^5,\dots` terms while claiming exact one-amplitude collapse.
-- **Next:** attack UV-011 by mining the corrected whitening transfer for a
+- **Next:** attack UV-022 by mining the corrected whitening transfer for a
   canonical `a`-linear coefficient functor or a theorem making the higher
   source-weight terms quotient-invisible.
 
-### `20260424-184004-gap-closer-UV011-linearized-whitening-functor/report.md`
+### `20260424-184004-gap-closer-UV022-linearized-whitening-functor/report.md`
 
-Signal: UV-011 whitening linearization, keep.
+Signal: UV-022 whitening linearization, keep.
 
-Captured takeaway: UV-011 has a credible whitening-side candidate. The paper's
+Captured takeaway: UV-022 has a credible whitening-side candidate. The paper's
 corrected-whitening transfer defines an analytic map, a first-order Frechet
 term, and the scaled homogeneous expansion
 `\mathcal T_{Q,R}(X)=\sum_{p\ge1}\mathcal T_p(X)`. The first homogeneous term
 `\mathcal T_1` is the right linearized whitening functor once a perturbation
-triple `X` is fixed. This does not close UV-011 because the paper still lacks
+triple `X` is fixed. This does not close UV-022 because the paper still lacks
 the source-weight-linear actual two-atom input `X^{[1]}` and a proof that
 `\mathcal T_1(X^{[1]})` has the required order-7 quotient component.
 
@@ -523,7 +523,7 @@ the source-weight-linear actual two-atom input `X^{[1]}` and a proof that
 - **Current best:** the missing source-weight linearization has split into a
   solved whitening-side functor (`\mathcal T_1`) and an unsolved source-side
   input (`X^{[1]}` for actual corrected two-atom blocks).
-- **Keep:** `\mathcal T_1` as candidate UV-011 functor; previous negatives
+- **Keep:** `\mathcal T_1` as candidate UV-022 functor; previous negatives
   against finite-amplitude whitening, signed-lift-only packages, and direct
   `D_2 -> \mathfrak O_7` promotion.
 - **Blocked:** no process blocker. Mathematical blocker is the missing
@@ -533,14 +533,14 @@ the source-weight-linear actual two-atom input `X^{[1]}` and a proof that
   chart, then feed it through `\mathcal T_1` and test the septic quotient
   component against the free `P(m,\kappa)` model.
 
-### `20260424-184202-explorer-UV011-cross-effect-package/report.md`
+### `20260424-184202-explorer-UV022-cross-effect-package/report.md`
 
-Signal: UV-011 cross-effect package, keep.
+Signal: UV-022 cross-effect package, keep.
 
 Captured takeaway: the actual package layer should use the analytic
 cross-effect of the corrected-whitening transfer:
 `\mathcal T(a_1X_1+a_2X_2)-\mathcal T(a_1X_1)-\mathcal T(a_2X_2)`. The harness
-`agents/20260424-184202-explorer-UV011-cross-effect-package/scripts/cross_effect_harness.js`
+`agents/20260424-184202-explorer-UV022-cross-effect-package/scripts/cross_effect_harness.js`
 shows that this construction has exact one-amplitude collapse, is symmetric in
 the two inputs, and begins with an `a_1a_2` interaction term. It also shows the
 new obstruction: the diagonal cross-effect need not vanish. Thus the next
@@ -550,7 +550,7 @@ subtract the diagonal order-7 quotient component so the collision edge is
 
 ### Resume frontier after cross-effect pass
 
-- **Current best:** UV-011 has the right analytic package shape: source-weight
+- **Current best:** UV-022 has the right analytic package shape: source-weight
   linear inputs plus corrected-whitening cross-effect. The unresolved point is
   diagonal/collision vanishing of the order-7 quotient component.
 - **Keep:** cross-effect package route, `\mathcal T_1` as its linear tangent,

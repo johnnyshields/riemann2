@@ -8,7 +8,7 @@ Active, compact knowledge base shared with every delegated agent.
   produced a reusable lesson.
 - Git log + commit messages are the audit trail. No status annotations here.
 - Keep this file \(\le 200\) lines. Paste it in full into every delegated
-  agent prompt (see `CLAUDE.md` §6).
+  agent prompt (see `AGENTS.md` `Briefing rule`).
 
 ## Structural
 
@@ -103,7 +103,7 @@ Active, compact knowledge base shared with every delegated agent.
   with script `scripts/source_weight_linearization_toy.js`. Do-not-retry:
   multiplying the even whitened source package by the source amplitude and
   treating the result as the needed two-atom package. It restores oddness but
-  leaves higher `a^3,a^5,\dots` terms; UV-011 asks for an invariant
+  leaves higher `a^3,a^5,\dots` terms; UV-022 asks for an invariant
   source-weight linear projection or a theorem that those higher terms are
   quotient-invisible.
 
@@ -155,17 +155,17 @@ Active, compact knowledge base shared with every delegated agent.
   centered `D_2` and one-pair quotient closure, but no actual two-atom
   `\mathcal J_2^{(7)}` / `\mathfrak O_7`; determinant scalarization is only
   good-patch bookkeeping and `A_5^{\mathfrak f}=0` needs a convention.
-- **UV-011 whitening-side candidate is the first homogeneous transfer `\mathcal T_1`.**
+- **UV-022 whitening-side candidate is the first homogeneous transfer `\mathcal T_1`.**
   Provenance:
-  `agents/20260424-184004-gap-closer-UV011-linearized-whitening-functor/report.md`.
+  `agents/20260424-184004-gap-closer-UV022-linearized-whitening-functor/report.md`.
   Usage: the corrected-whitening transfer already supplies a canonical linear
   functor once a perturbation triple `X` is fixed. The missing package input is
   the source-weight-linear actual two-atom block perturbation `X^{[1]}` and a
   proof that its order-7 quotient output is the UV-010
   `\mathcal J_2^{(7)}` / `\mathfrak O_7`.
-- **UV-011 package should be a corrected-whitening cross-effect, not just `\mathcal T_1`.**
+- **UV-022 package should be a corrected-whitening cross-effect, not just `\mathcal T_1`.**
   Provenance:
-  `agents/20260424-184202-explorer-UV011-cross-effect-package/report.md` with
+  `agents/20260424-184202-explorer-UV022-cross-effect-package/report.md` with
   script `scripts/cross_effect_harness.js`. Usage: the analytic cross-effect
   `\mathcal T(a_1X_1+a_2X_2)-\mathcal T(a_1X_1)-\mathcal T(a_2X_2)` gives
   exact one-amplitude collapse and an `a_1a_2` interaction channel. The missing

@@ -23,7 +23,7 @@ Working forward-carry of the current open UV items relevant to the active queue.
   Current role: immediate C-FS2/C-FS3 definition target under UV-003; descent
   and merger normalization are downstream, not part of this definition target.
 
-- **UV-011** — `rem:wip-parity-projective-factorization-collision-blow-up`
+- **UV-022** — `rem:wip-parity-projective-factorization-collision-blow-up`
   Claim: define an invariant source-weight-linear input for corrected blocks
   through order 7 and an analytic corrected-whitening cross-effect package with
   exact one-amplitude collapse, then prove its order-7 quotient component is

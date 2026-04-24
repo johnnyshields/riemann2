@@ -1,6 +1,6 @@
 # Claim
 
-UV-011 has a credible candidate functor: the first homogeneous term
+UV-022 has a credible candidate functor: the first homogeneous term
 \(\mathcal T_1\) of the corrected-whitening transfer. The paper already proves
 that corrected whitening admits a linear term in block perturbations, and the
 scaled transfer package defines a homogeneous expansion
@@ -8,7 +8,7 @@ scaled transfer package defines a homogeneous expansion
 \mathcal T_{Q,R}(X)=\sum_{p\ge 1}\mathcal T_p(X).
 \]
 
-This does not close UV-011. The missing input is the actual source-weight
+This does not close UV-022. The missing input is the actual source-weight
 linear perturbation triple \(X^{[1]}\) for the corrected two-atom order-7 block
 package, together with a proof that applying \(\mathcal T_1\) and extracting the
 septic quotient output gives the UV-010 object.
@@ -45,7 +45,7 @@ Three-bin separation:
   \]
   at `C:/workspace/riemann2/rh/proof_of_rh.tex:2504-2526`.
 - **Candidate:** \(\mathcal T_1\) is exactly the invariant linearized-whitening
-  functor UV-011 was asking for at the analytic whitening layer. It is canonical
+  functor UV-022 was asking for at the analytic whitening layer. It is canonical
   once the baseline blocks and the perturbation triple \(X\) are fixed.
 - **Missing:** the paper does not provide the source-weight linear perturbation
   triple \(X^{[1]}\) for an actual corrected two-atom order-7 package. The
@@ -89,7 +89,7 @@ keep
 - `C:/workspace/riemann2/rh/proof_of_rh.tex:12192-12227` - finite-amplitude
   source-summed route fails, so the linearized route must be a new lift.
 - `C:/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/agents/20260424-183713-explorer-UV010-source-weight-linearization/report.md`
-  - prior UV-011 source-weight obstruction.
+  - prior UV-022 source-weight obstruction.
 
 # Dependencies
 
@@ -105,7 +105,7 @@ keep
 # Strongest objection
 
 \(\mathcal T_1\) is a scalar/whitened transfer functor, not yet a
-quotient-valued two-atom package. It can only solve UV-011 if the source-weight
+quotient-valued two-atom package. It can only solve UV-022 if the source-weight
 linear block input \(X^{[1]}\) is defined canonically and if its order-7 output
 matches the UV-010 quotient target. The current source proves the transfer
 technology, not that match.
@@ -133,6 +133,6 @@ block perturbations, not on the finite-amplitude even whitened package.
 blocked: no process blocker. Mathematical blocker is the missing
 source-weight-linear two-atom perturbation triple \(X^{[1]}\).
 
-terminal: terminal for the subroute "UV-011 has no whitening-side candidate."
-It does have one: \(\mathcal T_1\). Not terminal for UV-011, because the input
+terminal: terminal for the subroute "UV-022 has no whitening-side candidate."
+It does have one: \(\mathcal T_1\). Not terminal for UV-022, because the input
 and order-7 quotient extraction are missing.

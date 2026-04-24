@@ -1,6 +1,6 @@
 # Claim
 
-The next viable UV-011 construction is a cross-effect package built from the
+The next viable UV-022 construction is a cross-effect package built from the
 analytic corrected-whitening transfer:
 \[
 \mathcal I_{\mathcal T}(a_1X_1,a_2X_2)
@@ -40,7 +40,7 @@ Source support:
   `C:/workspace/riemann2/rh/proof_of_rh.tex:12192-12227`.
 
 I wrote and ran
-`C:/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/agents/20260424-184202-explorer-UV011-cross-effect-package/scripts/cross_effect_harness.js`.
+`C:/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/agents/20260424-184202-explorer-UV022-cross-effect-package/scripts/cross_effect_harness.js`.
 It models an analytic transfer \(T=T_1+T_2+T_3\) and the cross-effect
 \(T(a_1x_1+a_2x_2)-T(a_1x_1)-T(a_2x_2)\). Output:
 
@@ -60,7 +60,7 @@ Three-bin separation:
 - **proved/computational:** analytic cross-effects have exact one-amplitude
   collapse and an \(a_1a_2\) factor by construction; they are symmetric if the
   underlying transfer is evaluated on \(a_1X_1+a_2X_2\).
-- **candidate:** for UV-011, take \(X_i=X^{[1]}(h_i)\), the missing
+- **candidate:** for UV-022, take \(X_i=X^{[1]}(h_i)\), the missing
   source-weight-linear corrected block input, and define the package interaction
   by the cross-effect of \(\mathcal T_{Q,R}\) or its order-7 coefficient.
 - **missing:** collision/diagonal vanishing is not automatic. The harness shows
@@ -70,7 +70,7 @@ Three-bin separation:
 
 # Baseline / delta
 
-Baseline: UV-011 had a whitening-side linear functor candidate
+Baseline: UV-022 had a whitening-side linear functor candidate
 \(\mathcal T_1\), but the source-weight-linear input \(X^{[1]}\) was still
 missing. A purely linear package would be additive and have no two-atom
 interaction.
@@ -95,9 +95,9 @@ keep
   swap, one-amplitude collapse, diagonal merger.
 - `C:/workspace/riemann2/rh/proof_of_rh.tex:12192-12227` - naive
   finite-amplitude source-summed route fails.
-- `C:/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/agents/20260424-184004-gap-closer-UV011-linearized-whitening-functor/report.md`
+- `C:/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/agents/20260424-184004-gap-closer-UV022-linearized-whitening-functor/report.md`
   - \(\mathcal T_1\) candidate.
-- `C:/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/agents/20260424-184202-explorer-UV011-cross-effect-package/scripts/cross_effect_harness.js`
+- `C:/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/agents/20260424-184202-explorer-UV022-cross-effect-package/scripts/cross_effect_harness.js`
   - cross-effect harness.
 
 # Dependencies
