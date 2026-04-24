@@ -150,3 +150,21 @@ Capture action: refined `findings.md`, UV-016 in `uv.md`, and `attempts.md`.
 Next verifier question: cite the standard primitive completed-\(L\) package and
 adversarially check that the completed-zero theorem wording does not also add
 raw gamma/trivial-zero terms.
+
+## Beauvoir Source-Audit Deposit 20260424
+
+Report:
+`agents/20260424-183416-gap-compact-regularization/report-source-audit.md`.
+Note:
+`agents/20260424-183416-gap-compact-regularization/notes/source_audit_standard_inputs.md`.
+
+Verdict: keep. The completed-\(L\) input layer for the compact
+edge-difference proof is mathematically standard for primitive nonprincipal
+characters: parity-normalized completed functions, entire order one, paired
+self-dual product, analytic multiplicity, genus-one Hadamard/log-derivative
+regularization, and square-summability of nonzero zeros. The remaining source
+problem is bibliographic precision rather than a new analytic theorem.
+
+Capture action: refined `findings.md`, UV-016 in `uv.md`, and `attempts.md`.
+Next source task: replace web-level locators with exact textbook citations
+before any paper promotion.

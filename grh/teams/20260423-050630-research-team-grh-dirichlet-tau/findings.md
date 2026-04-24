@@ -74,6 +74,17 @@ is the supplied team dir unless another path is named.
   double-counting completed zeros and raw background terms. Provenance:
   `agents/20260424-183416-explorer-background-multiplicity/report-background-split.md`,
   `agents/20260424-183416-explorer-background-multiplicity/notes/background_split_derivation.md`.
+- **The compact convergence source inputs are standard for primitive
+  nonprincipal characters.** Beauvoir's source audit gives a theorem-ready
+  input block: parity-normalized `Lambda(s,chi)`, entire order-one completed
+  functions, paired self-dual product, analytic zero multiplicity, genus-one
+  Hadamard/log-derivative regularization, and
+  `sum m_rho |rho|^{-2}<infty`. The remaining source issue is bibliographic
+  precision, not a new analytic sublemma: replace web-level locators with
+  exact Davenport/Montgomery-Vaughan and complex-analysis citations before
+  paper promotion. Provenance:
+  `agents/20260424-183416-gap-compact-regularization/report-source-audit.md`,
+  `agents/20260424-183416-gap-compact-regularization/notes/source_audit_standard_inputs.md`.
 - **Tau is a self-dual phase-channel stress test, not the first exact `S(m)`
   target.** Tau has only a conditional compact source-package blueprint; paired
   Dirichlet remains sharper for exact source-plus-slot work. Provenance:

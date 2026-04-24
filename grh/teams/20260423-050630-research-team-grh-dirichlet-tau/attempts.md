@@ -15,6 +15,7 @@
 | Sartre | UV-021 | Sign audit confirms fixed quotient needs negative boundary exponent for positive source | keep | `agents/20260424-183416-verifier-slot-skeleton/report-sign-audit.md`; `agents/20260424-183416-verifier-slot-skeleton/scripts/audit_one_zero_sign.py` | rewrite source normalization | Older positive-exponent route is inconsistent as written; use `e^{-2iTheta}`, `q=Theta'`, or explicitly change `q`/invert quotient. |
 | Sartre | UV-016 | Compact edge-difference convergence proof is sound in scoped form | keep | `agents/20260424-183416-verifier-slot-skeleton/report-compact-convergence-audit.md` | source-audit standard inputs | Completed zero-regularization is no longer the blocker under standard primitive nonprincipal inputs; explicit `B_chi^pair` split remains. |
 | Jason | UV-016 | Completed-Hadamard source split gives `B_chi,comp^pair=0`; raw `L`-factor background is separate bookkeeping | keep | `agents/20260424-183416-explorer-background-multiplicity/report-background-split.md`; `agents/20260424-183416-explorer-background-multiplicity/notes/background_split_derivation.md` | adversarial source-normalization audit | Need source citations and a double-counting check before promoting a completed-zero theorem statement. |
+| Beauvoir | UV-016 | Standard primitive nonprincipal completed-\(L\) inputs suffice for compact convergence | keep | `agents/20260424-183416-gap-compact-regularization/report-source-audit.md`; `agents/20260424-183416-gap-compact-regularization/notes/source_audit_standard_inputs.md` | exact textbook citation pass | Mathematical input layer is standard; promotion still needs direct Davenport/Montgomery-Vaughan and Hadamard theorem citations. |
 
 ## Frontier summaries
 
@@ -30,12 +31,13 @@
   claims that denominator comparability alone gives whitening positivity;
   claims that single-channel Dirichlet or tau already supplies the manuscript
   exact `S(m)` slot.
-- **Blocked:** UV-016 lacks source-cited completed-\(L\) inputs, adversarial
-  review of the completed-zeros versus raw-background normalization, and final
-  compact source wording in the verified sign convention.
+- **Blocked:** UV-016 lacks exact textbook citations for the standard
+  completed-\(L\) inputs, adversarial review of the completed-zeros versus
+  raw-background normalization, and final compact source wording in the
+  verified sign convention.
   UV-017 lacks paired symmetric normal form, value-parameter holomorphy, stable
   local positivity, exact freeze rules, and source-to-slot coefficient
   identification.
-- **Next:** finish Beauvoir's completed-\(L\) source-audit report, then send
-  Jason's completed-Hadamard `B=0` proposal for adversarial
-  source-normalization review.
+- **Next:** send Jason's completed-Hadamard `B=0` proposal and Beauvoir's
+  source-audit block for adversarial source-normalization review; in parallel,
+  locate exact textbook citations.
