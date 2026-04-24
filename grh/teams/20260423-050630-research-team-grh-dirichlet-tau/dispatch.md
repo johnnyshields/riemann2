@@ -85,3 +85,37 @@ Budgets/timeouts:
   sharp obstruction, or smallest missing substatements.
 - Any computation must be written to a file under the agent's `scripts/` before
   execution and cited in the report.
+
+## Follow-up dispatch 20260424-200209
+
+Base commit: `d03489a`.
+
+Reason: Sartre's finite-\(s\) formula audit cleared the displayed paired
+`G`/`N`/whitened-block entries, so UV-017 has moved from formula display to
+local admissibility and theorem-framing.
+
+Live assignments:
+
+- Noether (`019dbf02-0a72-7c51-8106-50d5e29b27fa`):
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/` - attack
+  microscopic holomorphy/removable singularities, same-point
+  positivity/nondegeneracy, holomorphic inverse-square-root whitening, and
+  preservation of the unit value-coordinate derivative for the displayed
+  paired finite-\(s\) chart. Deposit target:
+  `report-uv017-holomorphy-positivity-whitening.md`.
+- Sartre (`019dbeda-2d23-7ed0-a5ba-a9076f939fc7`):
+  `agents/20260424-183416-verifier-slot-skeleton/` - adversarially audit the
+  strongest honest conditional UV-017 theorem-framing supported by
+  `paper-updates.md` after the formula audit. Deposit target:
+  `report-uv017-conditional-theorem-framing-audit.md`.
+
+Ground truth: the displayed finite-\(s\) formulas are verified only as a local
+chart definition/hypothesis. A report advances the ledger only if it proves
+part of local admissibility from the displayed formulas, or reduces the
+remaining burden to a precise hypothesis list. Exact paired construction,
+holomorphy/positivity/whitening, freeze-rule remainder, and scalar-readout
+normalization remain open unless explicitly proved and adversarially checked.
+
+Orientation note: `grh/grh_transfer_skeleton.tex` exists in the worktree but
+is untracked and is not an authoritative team artifact. Treat it as
+background orientation only until the coordinator decides to own or discard it.
