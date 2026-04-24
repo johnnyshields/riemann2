@@ -144,7 +144,7 @@ keep
 
 - `CLAUDE.md`: coordinator policy, protected surfaces, report schema, and
   writing discipline read before acting.
-- `.agents/references/agents/_autoresearch.md`: autoresearch loop and required
+- `.agents/agents/_autoresearch.md`: autoresearch loop and required
   closing field read before acting.
 - `rh/teams/20260424-145329-research-team-fundamental-C-D/findings.md`: current
   UV-010 findings, especially exceptional-divisor `[R]` requiring

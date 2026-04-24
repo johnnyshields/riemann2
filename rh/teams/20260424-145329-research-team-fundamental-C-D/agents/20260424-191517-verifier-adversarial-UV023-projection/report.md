@@ -126,7 +126,7 @@ keep
 # Exact refs
 
 - Brief base commit supplied by coordinator: `91a9a71`.
-- `C:/workspace/riemann2/.agents/references/agents/_autoresearch.md` - read
+- `C:/workspace/riemann2/.agents/agents/_autoresearch.md` - read
   before acting.
 - `C:/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/findings.md`
   - UV-023 source-bidegree frontier.

@@ -127,7 +127,7 @@ keep
 ## Exact refs
 
 - `C:/workspace/riemann2/CLAUDE.md` and
-  `C:/workspace/riemann2/.agents/references/agents/_autoresearch.md` for
+  `C:/workspace/riemann2/.agents/agents/_autoresearch.md` for
   writing discipline and deposit requirements.
 - `C:/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/findings.md`
   C package-level coincidence and negative C-FS2/C-FS3 entries.

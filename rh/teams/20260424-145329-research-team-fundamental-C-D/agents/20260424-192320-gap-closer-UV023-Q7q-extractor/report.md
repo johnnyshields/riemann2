@@ -143,7 +143,7 @@ keep
 
 # Exact refs
 
-- `C:/workspace/riemann2/.agents/references/agents/_autoresearch.md` - read
+- `C:/workspace/riemann2/.agents/agents/_autoresearch.md` - read
   before acting.
 - `C:/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/uv.md:35`
   - UV-023 target.

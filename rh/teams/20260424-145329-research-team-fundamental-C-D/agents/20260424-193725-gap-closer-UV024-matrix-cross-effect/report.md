@@ -163,7 +163,7 @@ keep
 
 # Exact refs
 
-- `C:/workspace/riemann2/.agents/references/agents/_autoresearch.md` - read
+- `C:/workspace/riemann2/.agents/agents/_autoresearch.md` - read
   before acting.
 - `C:/workspace/riemann2/rh/proof_of_rh.tex:1392-2048` - matrix whitening,
   analytic expansion, and first-order matrix transfer before \(\Phi_K\).

@@ -1,4 +1,4 @@
----
+﻿---
 name: research-attack
 description: Small-cycle variant of research-team for a focused push on one UV-NNN or rem:wip-* target. Starts with one or two gap-closers and adds lagging verification only when a stable claim is ready or risk demands it.
 ---
@@ -12,7 +12,7 @@ Follow `AGENTS.md` for coordinator policy, provenance, dispatch, and git rules. 
 Focused push on one gap. Start with one gap-closer by default; use `--double`
 for two independent routes. Add an adversarial verifier or source auditor only
 when a stable claim is ready to check, the target is high-risk, or promotion is
-being considered. Follow `.agents/references/agents/_autoresearch.md`,
+being considered. Follow `.agents/agents/_autoresearch.md`,
 AGENTS.md `Dispatch`, `Briefing rule`, `Team dirs and agent self-deposit`, and
 `Capture before shutdown, forward-carry at dispatch`.
 

@@ -1,6 +1,6 @@
 # Codex reference
 
-Active Codex reference at `.agents/references/agents/_autoresearch.md`. Keep synchronized with `AGENTS.md`.
+Active Codex reference at `.agents/agents/_autoresearch.md`. Keep synchronized with `AGENTS.md`.
 
 ---
 name: _autoresearch

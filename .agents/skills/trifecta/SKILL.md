@@ -10,7 +10,7 @@ Follow `AGENTS.md` for coordinator policy, provenance, dispatch, and git rules. 
 # Trifecta
 
 Post-work synthesis via `role prompt: trifecta-analyst`. Follow
-`.agents/references/agents/_autoresearch.md`, AGENTS.md `Dispatch`
+`.agents/agents/_autoresearch.md`, AGENTS.md `Dispatch`
 long-lived-agent rules, `Briefing rule`, `Team dirs and agent self-deposit`,
 `State ledger separation`, and `Capture before shutdown, forward-carry at
 dispatch`. Use the inherited Codex model by default.

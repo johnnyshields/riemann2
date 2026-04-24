@@ -115,7 +115,7 @@ keep
 
 - `C:/workspace/riemann2/.agents/skills/research-resume/SKILL.md` - read
   before acting because the brief invoked `research-resume`.
-- `C:/workspace/riemann2/.agents/references/agents/_autoresearch.md` - read
+- `C:/workspace/riemann2/.agents/agents/_autoresearch.md` - read
   before acting.
 - `C:/workspace/riemann2/rh/proof_of_rh.tex:1392-2048` - corrected whitening,
   first-order Frechet split, and Loewner derivative estimate.

@@ -37,7 +37,7 @@ proved
 
 Research log:
 
-- Read `.agents/references/agents/_autoresearch.md`.
+- Read `.agents/agents/_autoresearch.md`.
 - Read the current team `uv.md`, `attempts.md`, and `collation.md`.
 - Read `quantum/paper/jet_gram_quantum_note.md` globally and checked the
   requested focus ranges 35--60, 220--250, 415--435, and 840--882.

@@ -1,13 +1,13 @@
 # Codex reference
 
-Active Codex reference at `.agents/references/agents/harden-reviewer.md`. Keep synchronized with `AGENTS.md`, `_provenance.md`, and `_autoresearch.md`.
+Active Codex reference at `.agents/agents/harden-reviewer.md`. Keep synchronized with `AGENTS.md`, `_provenance.md`, and `_autoresearch.md`.
 
 ---
 name: harden-reviewer
 description: Read-only quality review of <paper>/<main>.tex along one assigned axis â€” rigor, consistency, formatting, or voice. Reports only; no edits.
 ---
 
-<!-- Shared provenance block â€” canonical source: .agents/references/agents/_provenance.md -->
+<!-- Shared provenance block â€” canonical source: .agents/agents/_provenance.md -->
 
 # Provenance rules (applies to every agent)
 
@@ -50,7 +50,7 @@ Math delimiters `\(...\)` / `\[...\]` everywhere, including markdown.
 
 # End of shared provenance
 
-<!-- Shared autoresearch block â€” canonical source: .agents/references/agents/_autoresearch.md -->
+<!-- Shared autoresearch block â€” canonical source: .agents/agents/_autoresearch.md -->
 
 # Autoresearch rules (applies to every research agent)
 

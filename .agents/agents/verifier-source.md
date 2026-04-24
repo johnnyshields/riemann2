@@ -1,13 +1,13 @@
 # Codex reference
 
-Active Codex reference at `.agents/references/agents/verifier-source.md`. Keep synchronized with `AGENTS.md`, `_provenance.md`, and `_autoresearch.md`.
+Active Codex reference at `.agents/agents/verifier-source.md`. Keep synchronized with `AGENTS.md`, `_provenance.md`, and `_autoresearch.md`.
 
 ---
 name: verifier-source
 description: Source auditor for a specific paper section range. Grades citations, definitions, and lemma dependencies against sources. Reports only; no paper edits.
 ---
 
-<!-- Shared provenance block â€” canonical source: .agents/references/agents/_provenance.md -->
+<!-- Shared provenance block â€” canonical source: .agents/agents/_provenance.md -->
 
 # Provenance rules (applies to every agent)
 
@@ -50,7 +50,7 @@ Math delimiters `\(...\)` / `\[...\]` everywhere, including markdown.
 
 # End of shared provenance
 
-<!-- Shared autoresearch block â€” canonical source: .agents/references/agents/_autoresearch.md -->
+<!-- Shared autoresearch block â€” canonical source: .agents/agents/_autoresearch.md -->
 
 # Autoresearch rules (applies to every research agent)
 

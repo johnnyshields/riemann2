@@ -8,7 +8,7 @@ Owned path:
 ## Read state
 
 - `CLAUDE.md`
-- `.agents/references/agents/_autoresearch.md`
+- `.agents/agents/_autoresearch.md`
 - Current `findings.md` in full.
 - `uv.md` entries `UV-002`, `UV-003`, `UV-004` only.
 - `dispatch.md` at `Resume dispatch 20260424-165509`.

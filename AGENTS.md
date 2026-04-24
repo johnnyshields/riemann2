@@ -103,7 +103,7 @@ ask for sharper UV reductions, then assign the next task without tearing down
 the team.
 
 **Autoresearch everywhere.** Every research workflow and every research agent
-runs under the shared metaprompt `.agents/references/agents/_autoresearch.md`, adapted from
+runs under the shared metaprompt `.agents/agents/_autoresearch.md`, adapted from
 Andrei Karpathy's autoresearch pattern. Include that metaprompt in research
 briefs and agent definitions. Research agents keep looping: read state, choose
 the next concrete move, work, deposit, state the next step, and wait for
@@ -586,7 +586,7 @@ pressure.
 
 ## Prompt and skill iteration
 
-Treat `.agents/references/agents/_autoresearch.md`, research skills, and agent role files
+Treat `.agents/agents/_autoresearch.md`, research skills, and agent role files
 as research-org code. After several cycles, do a short retrospective in
 `collation.md` or `lore/`: which briefing clauses produced useful deposits,
 which caused noise, and what should be simplified or sharpened. Keep changes

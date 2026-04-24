@@ -14,7 +14,7 @@ authorized. The coordinator chooses the live roster from the frontier: gap
 closers for concrete UVs, explorers for redirects, verifiers or source auditors
 when there is something specific to check. Verification is risk-based and
 usually one step behind the research lane. Follow `Dispatch`,
-`.agents/references/agents/_autoresearch.md`, `Briefing rule`, `Writing
+`.agents/agents/_autoresearch.md`, `Briefing rule`, `Writing
 discipline`, `Team dirs and agent self-deposit`, and `Capture before shutdown,
 forward-carry at dispatch`.
 
@@ -49,7 +49,7 @@ availability for the next assignment, not completion. Use `send_input` to reuse
 context; spawn fresh agents for new roles, independence checks, blocked
 teammates, or stale long-idle teams.
 
-Every briefing gets the full `.agents/references/agents/_autoresearch.md`
+Every briefing gets the full `.agents/agents/_autoresearch.md`
 metaprompt, the team dir's full `findings.md`, the 9-field report schema,
 non-goals, the agent's exact deposit path, self-deposit checklist, and
 `Writing discipline`. Synthesize non-goals from context.

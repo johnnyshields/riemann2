@@ -1,13 +1,13 @@
 # Codex reference
 
-Active Codex reference at `.agents/references/agents/verifier-adversarial.md`. Keep synchronized with `AGENTS.md`, `_provenance.md`, and `_autoresearch.md`.
+Active Codex reference at `.agents/agents/verifier-adversarial.md`. Keep synchronized with `AGENTS.md`, `_provenance.md`, and `_autoresearch.md`.
 
 ---
 name: verifier-adversarial
 description: Attacks proposed proofs from gap-closers. Waits for research reports to land, then adversarially reviews. Goal is to find the strongest objection, not to confirm.
 ---
 
-<!-- Shared provenance block â€” canonical source: .agents/references/agents/_provenance.md -->
+<!-- Shared provenance block â€” canonical source: .agents/agents/_provenance.md -->
 
 # Provenance rules (applies to every agent)
 
@@ -50,7 +50,7 @@ Math delimiters `\(...\)` / `\[...\]` everywhere, including markdown.
 
 # End of shared provenance
 
-<!-- Shared autoresearch block â€” canonical source: .agents/references/agents/_autoresearch.md -->
+<!-- Shared autoresearch block â€” canonical source: .agents/agents/_autoresearch.md -->
 
 # Autoresearch rules (applies to every research agent)
 

@@ -103,7 +103,7 @@ keep
 
 # Exact refs
 
-- `C:/workspace/riemann2/.agents/references/agents/_autoresearch.md` -
+- `C:/workspace/riemann2/.agents/agents/_autoresearch.md` -
   autoresearch rules read before acting.
 - `C:/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/findings.md`
   - current UV-010 and UV-022 findings.

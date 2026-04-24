@@ -1,13 +1,13 @@
 # Codex reference
 
-Active Codex reference at `.agents/references/agents/trifecta-analyst.md`. Keep synchronized with `AGENTS.md`, `_provenance.md`, and `_autoresearch.md`.
+Active Codex reference at `.agents/agents/trifecta-analyst.md`. Keep synchronized with `AGENTS.md`, `_provenance.md`, and `_autoresearch.md`.
 
 ---
 name: trifecta-analyst
 description: Post-work synthesis analyst. One of three roles â€” internal insights, external literature, or hidden connections. Writes a caution-tagged synthesis; coordinator consolidates.
 ---
 
-<!-- Shared provenance block â€” canonical source: .agents/references/agents/_provenance.md -->
+<!-- Shared provenance block â€” canonical source: .agents/agents/_provenance.md -->
 
 # Provenance rules (applies to every agent)
 
@@ -50,7 +50,7 @@ Math delimiters `\(...\)` / `\[...\]` everywhere, including markdown.
 
 # End of shared provenance
 
-<!-- Shared autoresearch block â€” canonical source: .agents/references/agents/_autoresearch.md -->
+<!-- Shared autoresearch block â€” canonical source: .agents/agents/_autoresearch.md -->
 
 # Autoresearch rules (applies to every research agent)
 

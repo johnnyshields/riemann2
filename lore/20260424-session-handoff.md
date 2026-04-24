@@ -41,4 +41,4 @@ Resumed `rh/teams/20260424-145329-research-team-fundamental-C-D` in place and pu
 ## Coordinator notes
 
 - All Codex subagents from this resume were notified and closed. One gap-closer was still running and was stopped before depositing the last requested formulation report; the explorer confirmed it made no new deposit for that last prompt.
-- Dirty working-tree files outside this handoff remain: `.agents/references/agents/fixer.md`, `.agents/skills/chat-backup/SKILL.md`, `.agents/skills/paper-biblio/SKILL.md`, `.agents/skills/research-resume/SKILL.md`, `.agents/skills/research-resume/agents/openai.yaml`, and `CLAUDE.md`. They were not part of the UV-010 capture.
+- Dirty working-tree files outside this handoff remain: `.agents/agents/fixer.md`, `.agents/skills/chat-backup/SKILL.md`, `.agents/skills/paper-biblio/SKILL.md`, `.agents/skills/research-resume/SKILL.md`, `.agents/skills/research-resume/agents/openai.yaml`, and `CLAUDE.md`. They were not part of the UV-010 capture.

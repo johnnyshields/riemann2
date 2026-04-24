@@ -1,4 +1,4 @@
----
+﻿---
 name: paper-referee
 description: Two-phase review loop on a paper main TeX file. Phase 1 fixers edit scoped known issues, Phase 2 fresh referees re-review. Phase 1 is an explicit edit-capable exception.
 ---
@@ -12,7 +12,7 @@ Follow `AGENTS.md` for coordinator policy, provenance, dispatch, and git rules. 
 Two phases in one team dir: Phase 1 fixers edit the paper against known issues;
 Phase 2 fresh referees re-review without seeing what Phase 1 touched. Phase 1
 is the explicit edit-capable exception to the read-only default. Follow
-`.agents/references/agents/_autoresearch.md`, AGENTS.md `Dispatch`,
+`.agents/agents/_autoresearch.md`, AGENTS.md `Dispatch`,
 `Briefing rule`, `Team dirs and agent self-deposit`, `State ledger separation`,
 and `Capture before shutdown, forward-carry at dispatch`.
 

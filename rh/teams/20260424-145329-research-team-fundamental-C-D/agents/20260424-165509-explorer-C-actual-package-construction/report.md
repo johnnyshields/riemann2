@@ -191,7 +191,7 @@ keep
 
 - `C:/workspace/riemann2/CLAUDE.md` - agent provenance, writing discipline, and
   report schema.
-- `C:/workspace/riemann2/.agents/references/agents/_autoresearch.md` -
+- `C:/workspace/riemann2/.agents/agents/_autoresearch.md` -
   autoresearch loop and required next-step field.
 - `C:/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/findings.md` - current C obstruction and C/D separation.
 - `C:/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/uv.md:11` - UV-002.

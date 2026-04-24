@@ -116,7 +116,7 @@ keep
 
 - `C:/workspace/riemann2/CLAUDE.md` - coordinator policy, protected surfaces,
   report schema, writing discipline, and provenance rules.
-- `C:/workspace/riemann2/.agents/references/agents/_autoresearch.md` -
+- `C:/workspace/riemann2/.agents/agents/_autoresearch.md` -
   autoresearch loop and required closing block.
 - `C:/workspace/riemann2/rh/teams/20260424-145329-research-team-fundamental-C-D/findings.md`
   - current C/UV-010 frontier.

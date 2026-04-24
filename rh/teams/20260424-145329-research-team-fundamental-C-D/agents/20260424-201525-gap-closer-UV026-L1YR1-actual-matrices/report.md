@@ -122,7 +122,7 @@ keep
 
 # Exact refs
 
-- `C:/workspace/riemann2/.agents/references/agents/_autoresearch.md` - read
+- `C:/workspace/riemann2/.agents/agents/_autoresearch.md` - read
   before acting.
 - `C:/workspace/riemann2/.agents/skills/research-resume/SKILL.md` - read
   because the brief invoked `research-resume`.
