@@ -56,3 +56,18 @@ wording, UV-012 should close negatively from the fixed subspace-pair data alone:
 the canonical object is the operator/principal-angle package, while an entrywise
 matrix requires extra frame-selecting structure except in the already qualified
 simple-spectrum diagonal-frame sector.
+
+## Verifier return - 20260424-183451
+
+`agents/20260424-183451-verifier-biunitary-finality/report.md` accepts the
+gap report for promotion. The verifier checked the frame-coordinate identity
+\(U_-^*CU_+=U_-^*U_+\), the exact left-right frame-change law, rectangular SVD
+classification including rank-deficient and unequal-dimensional cases, and the
+normal-form caveat. A sorted SVD diagonal is only an orbit representative
+encoding dimensions and singular values; it is not an endpoint-selected
+comparison matrix.
+
+Decision: promote UV-012 with scoped wording. The theorem closes the
+frame-comparison matrix question for data determined by the fixed subspace pair
+alone. It does not rule out matrices built from extra dynamical, transport,
+ordering, or symmetry-breaking structure.
