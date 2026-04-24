@@ -22,6 +22,7 @@
 | Sartre | UV-016 | Staged theorem is close but first draft had multiplicity wording double-count risk | keep | `agents/20260424-183416-verifier-slot-skeleton/report-paper-updates-audit.md` | apply wording fixes | Sign, derivative bridge, convergence, scope, and raw/completed split are right; fix multiplicity convention, real `C^1` phase, and `D_chi` projection sentence. |
 | coordinator | UV-016 | Applied Sartre's three wording fixes to staged theorem draft | keep | `paper-updates.md`; `agents/20260424-183416-verifier-slot-skeleton/report-paper-updates-audit.md` | final verifier pass | The staged draft now uses distinct zeros plus `m_rho`, real `C^1` phase, and explicit `D_chi` real/projection wording. |
 | Beauvoir | UV-016 | DLMF plus standard Hadamard theorem is acceptable citation fallback for working draft | keep | `agents/20260424-183416-gap-compact-regularization/report-citation-fallback-plan.md` | final citation wording | Clean Davenport is not a hard working-draft blocker if order one is derived from DLMF and Stirling; final bibliography upgrade remains open. |
+| Sartre | UV-016 | Patched staged theorem is mathematically promotion-ready modulo citation quality | terminal | `agents/20260424-183416-verifier-slot-skeleton/report-paper-updates-final-check.md`; `paper-updates.md` | coordinator promotion decision | No wording or normalization blocker remains from verifier lane; UV-017 remains separate. |
 
 ## Frontier summaries
 
@@ -46,6 +47,6 @@
   UV-017 lacks paired symmetric normal form, value-parameter holomorphy, stable
   local positivity, exact freeze rules, and source-to-slot coefficient
   identification.
-- **Next:** run one final wording verifier pass on the patched
-  `paper-updates.md` and finish the citation fallback/clean-copy decision
-  before any promotion.
+- **Next:** decide whether to promote the completed-Hadamard source package as
+  a working theorem using the DLMF/Hadamard fallback citation stack, or wait
+  for clean-copy Davenport/Montgomery-Vaughan citations.

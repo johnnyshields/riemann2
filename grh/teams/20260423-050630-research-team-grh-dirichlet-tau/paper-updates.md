@@ -1,8 +1,9 @@
 # Paper Updates
 
 Staged coordinator text for the GRH Dirichlet-tau resume team. Not applied to
-any canonical paper. Current status: draft only; do not promote until the
-clean-copy citation check is complete.
+any canonical paper. Current status: mathematically verifier-cleared for the
+completed-Hadamard source package, with citation quality still requiring a
+coordinator promotion decision.
 
 ## Completed-Hadamard Paired Source Package Draft
 

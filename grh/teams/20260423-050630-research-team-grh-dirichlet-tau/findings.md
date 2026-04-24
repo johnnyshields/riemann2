@@ -99,12 +99,13 @@ is the supplied team dir unless another path is named.
   multiplicity double-counting risk in the first draft; the staged text now
   uses distinct completed zeros with analytic multiplicity supplied by
   `m_rho`, declares the boundary phase real `C^1`, and adds the realness /
-  projection sentence for `D_chi`. It remains citation-blocked and must not be
-  applied to a canonical paper until clean-copy citations and final wording
-  review are done. Provenance:
+  projection sentence for `D_chi`. Sartre's final check clears the staged
+  theorem's mathematical wording and normalization. Remaining issue is citation
+  quality and coordinator promotion choice, not theorem wording. Provenance:
   `paper-updates.md`,
   `agents/20260424-183416-verifier-slot-skeleton/report-source-normalization-audit.md`,
-  `agents/20260424-183416-verifier-slot-skeleton/report-paper-updates-audit.md`.
+  `agents/20260424-183416-verifier-slot-skeleton/report-paper-updates-audit.md`,
+  `agents/20260424-183416-verifier-slot-skeleton/report-paper-updates-final-check.md`.
 - **Tau is a self-dual phase-channel stress test, not the first exact `S(m)`
   target.** Tau has only a conditional compact source-package blueprint; paired
   Dirichlet remains sharper for exact source-plus-slot work. Provenance:

@@ -20,7 +20,8 @@
   `agents/20260424-183416-verifier-slot-skeleton/report-source-normalization-audit.md`;
   `agents/20260424-183416-gap-compact-regularization/report-textbook-citation-pass.md`;
   `agents/20260424-183416-verifier-slot-skeleton/report-paper-updates-audit.md`;
-  `agents/20260424-183416-gap-compact-regularization/report-citation-fallback-plan.md`.
+  `agents/20260424-183416-gap-compact-regularization/report-citation-fallback-plan.md`;
+  `agents/20260424-183416-verifier-slot-skeleton/report-paper-updates-final-check.md`.
   Current role: immediate non-zeta frontier.
   Current reduction: compact zero-regularization is adversarially checked under
   standard primitive nonprincipal completed-function inputs; the current
@@ -30,9 +31,12 @@
   draft exists in `paper-updates.md` and has been patched after Sartre's
   multiplicity/realness wording audit. Citation burden is reduced for a
   working-paper draft by the DLMF-plus-Hadamard fallback stack; final textbook
-  citations remain a bibliography upgrade. Remaining burden: run final wording
-  review and then decide whether to promote as a working source package or keep
-  waiting for clean-copy textbook citations.
+  citations remain a bibliography upgrade. Final wording review is clear from
+  the verifier lane. Remaining burden: coordinator decision whether to promote
+  as a working source package using the fallback citation stack or keep waiting
+  for clean-copy textbook citations. Do not remove this UV yet: this GRH
+  directory has no canonical `grh/<main>.tex` promotion target, so the current
+  endpoint remains a staged team theorem in `paper-updates.md`.
 
 - **UV-017** - exact paired local `S(m)`-slot realization.
   Prove that the scalar `S_chi^pair(m)=q_chi^pair(m)-B_chi^pair(m)` from

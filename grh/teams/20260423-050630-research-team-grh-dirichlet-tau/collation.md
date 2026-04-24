@@ -250,3 +250,41 @@ realness/projection sentence for `D_chi`.
 Capture action: patched `paper-updates.md` with the three requested wording
 fixes, then refined `findings.md`, UV-016, and `attempts.md`. A final wording
 pass is still needed before promotion.
+
+## Beauvoir Citation-Fallback Plan 20260424
+
+Report:
+`agents/20260424-183416-gap-compact-regularization/report-citation-fallback-plan.md`.
+
+Verdict: keep. Clean Davenport verification is not a hard blocker for a
+working-paper draft if the source-input lemma uses stable DLMF references for
+Dirichlet facts, includes a short order-one derivation from DLMF plus
+Stirling, and cites a standard complex-analysis Hadamard factorization theorem.
+Clean Davenport/Montgomery-Vaughan references remain a final bibliography
+upgrade.
+
+Capture action: updated `paper-updates.md` citation placeholders, refined
+`findings.md`, UV-016, and `attempts.md`. Full UV-016 still waits on final
+wording review and a promotion decision.
+
+## Sartre Final Paper-Updates Check 20260424
+
+Report:
+`agents/20260424-183416-verifier-slot-skeleton/report-paper-updates-final-check.md`.
+
+Verdict: terminal for the wording lane. After the coordinator's fixes, Sartre
+clears the staged completed-Hadamard source theorem as mathematically
+promotion-ready modulo citation quality. The distinct-zero multiplicity
+convention, real `C^1` phase, real/projection wording for `D_chi`, sign bridge,
+compact convergence, primitive nonprincipal scope, edge exclusions, and
+raw/completed separation all pass. The staged text does not claim UV-017 slot
+realization or any GRH consequence.
+
+Capture action: refined `paper-updates.md`, `findings.md`, UV-016, and
+`attempts.md`. Remaining decision: promote as a working source theorem with the
+DLMF/Hadamard fallback citation stack, or wait for clean-copy textbook
+citations.
+
+Coordinator decision: keep UV-016 live for now. The GRH directory currently has
+no canonical `grh/<main>.tex` promotion target, so the verified theorem remains
+staged in `paper-updates.md` rather than promoted/removed from `uv.md`.
