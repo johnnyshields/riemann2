@@ -159,7 +159,75 @@ are given, in a local chart, by the finite-\(s\) block formulas of the
 zeta-side local model after replacing the RH phase function \(\Ph(t)\) by
 \(\Theta_\chi^{\mathrm{pair}}(t)\) and \(q\) by
 \(q_\chi^{\mathrm{pair}}\). The quotient remains
-\(\Phi_\chi^{\mathrm{pair}}(s)\). Use the local value coordinate
+\(\Phi_\chi^{\mathrm{pair}}(s)\). More explicitly, for
+\(t_\pm=m\pm s/2\), put
+\[
+q_{\chi,\pm}^{\mathrm{pair}}(s):=
+q_\chi^{\mathrm{pair}}(t_\pm),
+\qquad
+\Delta_{\chi,m}^{\mathrm{pair}}(s):=
+\Theta_\chi^{\mathrm{pair}}(t_-)
+-\Theta_\chi^{\mathrm{pair}}(t_+).
+\]
+The local chart uses
+\[
+G_{\chi,m,\pm}^{\mathrm{pair},\mathrm{corr}}(s)
+:=
+\frac1\pi
+\begin{pmatrix}
+2q_{\chi,\pm}^{\mathrm{pair}}(s)
+&
+\frac12 q_\chi^{\mathrm{pair}\,\prime}(t_\pm)
+\\[1ex]
+\frac12 q_\chi^{\mathrm{pair}\,\prime}(t_\pm)
+&
+\frac1{12}
+\left(
+q_\chi^{\mathrm{pair}\,\prime\prime}(t_\pm)
++2q_{\chi,\pm}^{\mathrm{pair}}(s)^3
+\right)
+\end{pmatrix}
+\]
+and
+\[
+N_{\chi,m}^{\mathrm{pair},\mathrm{corr}}(s)
+:=
+\frac1\pi
+\begin{pmatrix}
+-\dfrac{2\sin \Delta_{\chi,m}^{\mathrm{pair}}(s)}{s}
+&
+\dfrac{
+\sin \Delta_{\chi,m}^{\mathrm{pair}}(s)
++q_{\chi,+}^{\mathrm{pair}}(s)s
+\cos \Delta_{\chi,m}^{\mathrm{pair}}(s)
+}{s^2}
+\\[2ex]
+-\dfrac{
+\sin \Delta_{\chi,m}^{\mathrm{pair}}(s)
++q_{\chi,-}^{\mathrm{pair}}(s)s
+\cos \Delta_{\chi,m}^{\mathrm{pair}}(s)
+}{s^2}
+&
+\dfrac{
+\left(q_{\chi,-}^{\mathrm{pair}}(s)+q_{\chi,+}^{\mathrm{pair}}(s)\right)
+s\cos \Delta_{\chi,m}^{\mathrm{pair}}(s)
++\left(
+2-q_{\chi,-}^{\mathrm{pair}}(s)q_{\chi,+}^{\mathrm{pair}}(s)s^2
+\right)
+\sin \Delta_{\chi,m}^{\mathrm{pair}}(s)
+}{2s^3}
+\end{pmatrix}.
+\]
+When the same-point blocks are positive definite, define the paired whitened
+block by
+\[
+\widehat\Omega_{\chi}^{\mathrm{pair},\mathrm{corr}}(s;m)
+:=
+G_{\chi,m,-}^{\mathrm{pair},\mathrm{corr}}(s)^{-1/2}
+N_{\chi,m}^{\mathrm{pair},\mathrm{corr}}(s)
+G_{\chi,m,+}^{\mathrm{pair},\mathrm{corr}}(s)^{-1/2}.
+\]
+Use the local value coordinate
 \[
 a=q_\chi^{\mathrm{pair}}(m)
 -B_\chi^{\mathrm{pair}}(m).
@@ -218,4 +286,5 @@ Remaining hypotheses before UV-017 promotion:
 Provenance:
 `agents/20260424-192025-gap-uv017-coefficient-freeze/report.md`;
 `agents/20260424-183416-verifier-slot-skeleton/report-uv017-coefficient-reduction-audit.md`;
-`agents/20260424-192025-gap-uv017-coefficient-freeze/report-unit-coordinate-chart.md`.
+`agents/20260424-192025-gap-uv017-coefficient-freeze/report-unit-coordinate-chart.md`;
+`agents/20260424-192025-gap-uv017-coefficient-freeze/report-paired-finite-s-formulas.md`.

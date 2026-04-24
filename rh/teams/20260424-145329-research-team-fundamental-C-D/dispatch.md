@@ -640,3 +640,35 @@ Ground-truth checks:
 
 Protected surfaces are unchanged: agents write only to
 `agents/20260424-194928-<slug>/`.
+
+## UV-025 B2 definition verifier pass 20260424-195414
+
+Base commit: `c90a9a1`.
+
+Current target: verify the exact candidate block
+`agents/20260424-194928-gap-closer-UV025-B2-definition/notes/B2-definition-block.md`
+before any `paper-updates.md` staging.
+
+Roster:
+
+1. `verifier-source-UV025-B2-block`: source-check that the proposed tagged
+   substitutions use the same corrected phase variables and block formulas as
+   `proof_of_rh.tex:2659--2787`, and that the `\mathcal K`-linear theorem
+   follows from the cited Taylor-linear bookkeeping.
+2. `verifier-adversarial-UV025-B2-overclaim`: attack the block for hidden
+   overclaim: post-whitening source lift, premature tag-forgetting, quotient
+   package coincidence, or downstream UV-024/UV-026 closure smuggled into the
+   definition.
+
+Ground-truth checks:
+
+- Verification is limited to UV-025. Do not promote UV-024 or UV-026.
+- A positive verifier must say exactly which lines support the tagged
+  substitution and the `\mathcal K`-linear identity.
+- An adversarial objection must be reduced to a concrete wording fix or a
+  missing theorem.
+- If both verifiers pass, the coordinator may stage a definition-only block in
+  `paper-updates.md`; no canonical paper edit yet.
+
+Protected surfaces are unchanged: agents write only to
+`agents/20260424-195414-<slug>/`.

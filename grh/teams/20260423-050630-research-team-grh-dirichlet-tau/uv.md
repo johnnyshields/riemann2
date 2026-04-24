@@ -65,8 +65,10 @@
   coordinate by direct calculation; the missing statement is that the actual
   paired corrected finite-\(s\) blocks are literally this chart with
   `Theta=Theta_chi^pair` and `q=q_chi^pair`. The staged `paper-updates.md`
-  text is therefore a chart hypothesis/definition, not a proved paired
-  construction lemma, until the correction maps are displayed.
+  text now displays the paired `G`, `N`, and whitened block formulas as a chart
+  hypothesis/definition, not a proved paired construction lemma. If "corrected"
+  means anything beyond this literal chart, the correction maps must be named
+  and checked for unit value-coordinate derivative.
 
 - **UV-018** - corrected odd/transverse realization and boundary package.
   After paired slot realization, construct the corrected odd/transverse scalar,

@@ -396,3 +396,23 @@ Capture action: demoted the `paper-updates.md` UV-017 block to a
 hypothesis/definition, added the pathwise source coordinate and baseline
 language, disambiguated phase notation, and refined `findings.md`, UV-017, and
 `attempts.md`.
+
+## Noether Paired Finite-\(s\) Formula Deposit 20260424
+
+Report:
+`agents/20260424-192025-gap-uv017-coefficient-freeze/report-paired-finite-s-formulas.md`.
+Note:
+`agents/20260424-192025-gap-uv017-coefficient-freeze/notes/paired_finite_s_formula_package.md`.
+
+Verdict: keep, open. Noether displays the paired same-point matrix `G`, mixed
+matrix `N`, and whitened block `Omega_hat` by literal substitution from the RH
+finite-\(s\) model using the sign-audited paired phase. This closes the
+formula-display subtask raised by Sartre, but not UV-017: the formulas are safe
+only as a definition or explicit local chart hypothesis unless "corrected"
+is declared to mean literal substitution or additional correction maps are
+named and checked.
+
+Capture action: inserted the displayed formulas into `paper-updates.md`,
+refined `findings.md`, UV-017, and `attempts.md`. Next move is an adversarial
+formula check and a decision whether the chart is a definition/hypothesis or
+whether correction maps must be tracked.

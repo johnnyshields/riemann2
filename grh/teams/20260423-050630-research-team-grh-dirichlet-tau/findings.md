@@ -134,13 +134,16 @@ is the supplied team dir unless another path is named.
   `paper-updates.md` now contains a UV-017 finite-\(s\) unit-coordinate chart
   hypothesis/definition, not a theorem: in a local chart where the paired
   corrected blocks are given by the RH finite-\(s\) formulas with the RH phase
-  function replaced by \(\Theta_\chi^{pair}\), the pure value path gives
+  function replaced by \(\Theta_\chi^{pair}\), the paired `G`, `N`, and
+  whitened block formulas are displayed, and the pure value path gives
   `da/dS|0=1`. Sartre's audit required this demotion because the actual paired
-  correction maps are not displayed. Holomorphy/whitening, freeze-rule
-  remainder, and scalar readout checks remain open. Provenance:
+  correction maps may still mean more than literal substitution. Holomorphy /
+  whitening, freeze-rule remainder, and scalar readout checks remain open.
+  Provenance:
   `paper-updates.md`,
   `agents/20260424-192025-gap-uv017-coefficient-freeze/report-unit-coordinate-chart.md`,
-  `agents/20260424-183416-verifier-slot-skeleton/report-uv017-construction-draft-audit.md`.
+  `agents/20260424-183416-verifier-slot-skeleton/report-uv017-construction-draft-audit.md`,
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/report-paired-finite-s-formulas.md`.
 - **Tau is a self-dual phase-channel stress test, not the first exact `S(m)`
   target.** Tau has only a conditional compact source-package blueprint; paired
   Dirichlet remains sharper for exact source-plus-slot work. Provenance:
