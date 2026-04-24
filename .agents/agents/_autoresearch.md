@@ -1,114 +1,49 @@
-# Codex reference
-
-Active Codex reference at `.agents/agents/_autoresearch.md`. Keep synchronized with `AGENTS.md`.
-
 ---
 name: _autoresearch
-description: NOT AN INVOCABLE AGENT — shared auto-run/autoresearch rules for all research agents and research skills. Include in every research brief.
+description: NOT INVOCABLE — shared autoresearch rules included in every research brief.
 ---
 
-<!--
-  Canonical source for the autoresearch block copied or referenced by research
-  skills and agent definitions. Adapted from Andrei Karpathy's autoresearch
-  prompt pattern: run continuously, keep a research log, decide the next move,
-  and stop only at a real terminal condition.
--->
+# Autoresearch (every research agent)
 
-# Autoresearch rules (applies to every research agent)
-
-You are part of a continuous autoresearch loop. Do not treat a single report as
-the end of your job unless the team lead explicitly releases you. Expect a
-running dialogue with the team lead and be ready to continue from your own prior
-state. If runtime limits, compaction, or session boundaries interrupt the loop,
-leave a concrete next action in your report so the next coordinator can resume
-without re-discovery.
+Continuous loop. A single report does not end your job; expect dialogue and redelegation. If runtime/compaction interrupts you, leave a concrete next action so the next coordinator resumes without re-discovery.
 
 ## Loop
 
-1. Read the current brief, `findings.md`, your own prior `report.md` / `notes/`
-   / `scripts/`, and any targeted UV entry the team lead supplied.
-2. Choose the next concrete research action without asking over direction
-   minutia: prove, reduce, compute, search adjacent structure, verify, or reject
-   within your role.
-3. Do the work. For computational claims, write scripts to files before running
-   them and cite the paths.
-4. Deposit the result in your agent dir using the 9-field report schema. Update
-   notes/scripts as needed. Include enough route/outcome detail for the team
-   lead to file `attempts.md`, `uv.md`, `findings.md`, or a `collation.md`
-   no-action note without reconstructing your reasoning from chat.
-5. End with the next best task for yourself: the sharpest follow-up, adversarial
-   check, finite reduction, or reason the route is exhausted.
-6. Wait for the team lead. If redelegated, continue from your prior context
-   rather than starting over.
+1. Read brief, `findings.md`, your prior `report.md` / `notes/` / `scripts/`, and any UV entry the team lead supplied.
+2. Pick the next concrete move — prove, reduce, compute, search adjacent structure, verify, or reject — without asking.
+3. Do the work. Computational claims = scripts written to files first, paths cited.
+4. Deposit a 9-field report (`AGENTS.md` `Report schema`) plus updated notes/scripts. Include enough route detail for the lead to file `attempts.md`/`uv.md`/`findings.md`/`collation.md` without rereading your reasoning.
+5. Close with the next best task for yourself: sharpest follow-up, adversarial check, finite reduction, or why the route is exhausted.
+6. Wait. If redelegated, continue from prior context — don't restart.
 
-## Operating posture
+## Posture
 
-- Keep going by default. `no progress` is acceptable only after you have reduced
-  the obstacle to the smallest concrete missing statement or explained why the
-  route is exhausted from the tested scope.
-- Do not ask whether to continue, which UV to pick, or whether a stopping point
-  is good. Make the best local research move inside the brief.
-- Separate `proved` / `conditional on X` / `missing`. Do not blur evidence
-  levels.
-- Treat hypotheses as disposable. Keep useful results, discard failed routes
-  with scoped negative findings, then try another route.
-- Maintain continuity: cite your earlier notes, reuse your scripts, and respond
-  directly to the team lead's challenges.
-- Stop only for an explicit team-lead halt, a hard blocker requiring coordinator
-  action, or a terminal closure/rejection of the assigned target. A quiet cycle
-  is not a stop signal; reduce the obstruction, record it, and name the next
-  bounded attempt.
+- Keep going. `no progress` is acceptable only after reducing the obstacle to its sharpest missing sub-statement or explaining why the route is exhausted from the tested scope.
+- Don't ask whether to continue, which UV to pick, or whether a stopping point is good.
+- Treat hypotheses as disposable. Keep useful results, discard failed routes with scoped negatives.
+- Stop only for explicit team-lead halt, hard blocker requiring coordinator action, or terminal closure/rejection.
 
 ## Experiment discipline
 
-Autoresearch works because every trial has a harness, a metric, and a decision.
-For mathematical research, translate that as follows:
+- **Fixed harness:** paper, current `findings.md`/`uv.md`, frozen macros, assigned target. Don't move goalposts mid-route.
+- **Baseline first:** name the current frontier (best proof state, sharpest obstruction) and what would count as improvement.
+- **Ground-truth check:** before working, name the theorem statement, `rem:wip-*`, source ref, verifier question, pinned objection, or script output that decides whether evidence counts.
+- **Promotion bar:** proof evidence + clean dependencies + adversarial/source verification + no unresolved strongest objection. Computational support is evidence, not proof.
+- **Route status** in your report — exactly one of:
+  - `keep` — usable proof / reduction / finding / negative
+  - `discard` — scoped failure, do not retry unchanged
+  - `blocked` — needs coordinator action
+  - `terminal` — target closed or rejected
+  - `crash` — tooling/execution failure (not mathematical)
+- **Ledger destination:** name it explicitly (`uv.md`, `findings.md`, `attempts.md`, `paper-updates.md`, `collation.md/no-action`, or `none`) with one sentence why. Ambiguous destination = defect.
+- **Timeouts:** if a run exceeds the briefed budget, stop, record what was learned, propose the next bounded attempt.
+- **Crash handling:** fix typos/imports and rerun. If the idea itself is broken after a few attempts, log `crash`/`discard` and move on.
+- **Simplicity:** at equal proof value, prefer fewer new definitions, assumptions, dependencies, scripts, and paper edits.
+- **No log floods:** long output goes to files under your `scripts/` or `notes/`. Reports cite path + relevant excerpts.
 
-- **Fixed harness:** the paper, current `findings.md`, current `uv.md`, frozen
-  macros, and the assigned target are the harness. Do not move goalposts while
-  judging a route.
-- **Baseline first:** before trying a new route, identify the current frontier:
-  the best known proof state, sharpest obstruction, and what would count as an
-  improvement over the prior cycle.
-- **Ground-truth check:** name the theorem statement, `rem:wip-*`, source
-  reference, verifier question, pinned objection set, or script output that
-  decides whether evidence counts before working.
-- **Metric:** promotion requires the `Claim lifecycle (git-as-archive)` path:
-  proof evidence, clean dependencies, adversarial/source verification, and no
-  unresolved strongest objection. Computational support is evidence, not proof.
-- **Keep / discard / blocked / terminal / crash:** label each route in your
-  report as `keep` (usable proof/reduction/finding), `discard` (scoped
-  negative or no-action result), `blocked` (needs coordinator action),
-  `terminal` (target closed/rejected), or `crash` (script/tooling/route
-  failure).
-  The team lead logs the `attempts.md` row with columns `Agent | Target |
-  Route | Status | Evidence | Action | Reason`; do not edit the ledger
-  yourself.
-- **Ledger destination:** if you propose a UV, finding, paper edit, route
-  discard, or no-action decision, name that destination explicitly in the
-  report and cite the evidence path. Ambiguous ledger destination is a defect.
-- **Timeouts:** if a computational run or search exceeds the budget in your
-  brief, stop it, record what was learned, and propose the next bounded attempt.
-- **Crash handling:** fix obvious typos/import mistakes and rerun. If the idea
-  itself is broken after a few attempts, log `crash` or `discard` and move on.
-- **Simplicity criterion:** all else equal, prefer the route with fewer new
-  definitions, assumptions, dependencies, and paper edits. Record soft resource
-  cost: new definitions, assumptions, dependency depth, source lookups, scripts,
-  and computation burden. A tiny gain that adds ugly scaffolding is not worth
-  keeping; an equal result with a cleaner proof is a keep.
-- **No log floods:** long commands write to files under your `scripts/` or
-  `notes/` dir. Reports cite only the relevant excerpts and paths.
+## Required closing block
 
-## Required closing block in every report
+After the 9-field report, add:
 
-Add a short **Autoresearch next step** field after the 9-field schema:
-
-- `continue:` the next concrete action you should take if redelegated;
-- `verify:` the adversarial/source check needed before promotion;
-- `blocked:` the exact coordinator action needed;
-- `terminal:` why this target is closed or rejected.
-
-Also add a **Ledger destination** line: `uv.md`, `findings.md`, `attempts.md`,
-`paper-updates.md`, `collation.md/no-action`, or `none`, with one sentence
-explaining why.
-
+- **Autoresearch next step:** one of `continue:` / `verify:` / `blocked:` / `terminal:` with the concrete action.
+- **Ledger destination:** one of the values above + one sentence why.

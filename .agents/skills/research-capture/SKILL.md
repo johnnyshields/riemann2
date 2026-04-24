@@ -3,20 +3,11 @@ name: research-capture
 description: Synchronous coordinator append of a single structural, negative, goodie, or gap entry to a team findings.md, with provenance, then commit.
 ---
 
-## Codex workflow
-
-Follow `AGENTS.md` for coordinator policy, provenance, dispatch, and git rules. Work locally unless the user requested a delegated/team workflow or invoked a multi-agent skill. For delegated work, use Codex subagents (`spawn_agent`, `send_input`, `wait_agent`, `close_agent`) with concrete ownership, bounded prompts, and on-disk report/deposit requirements. Use the inherited Codex model by default; override only when the user asks or the task clearly requires it. Keep canonical paper edits coordinator-owned unless this skill explicitly grants an edit-capable phase.
-
 # Research Capture
 
-Synchronous append of one entry to `<team-dir>/findings.md`. No delegation.
-Provenance is mandatory. Use this only for durable briefable knowledge; route
-history belongs in `attempts.md`, live missing sub-statements in `uv.md`, and
-no-action rationale in `collation.md`.
+Synchronous append of one entry to `<team-dir>/findings.md`. No delegation. Provenance mandatory. Use only for durable briefable knowledge — route history → `attempts.md`, live missing sub-statements → `uv.md`, no-action rationale → `collation.md`.
 
-`$ARGUMENTS` format: `<section> <one-line summary>`, section in
-`structural | negative | goodie | gap`. The entry body is provided inline or in
-a follow-up message.
+`$ARGUMENTS` format: `<section> <one-line summary>`, section in `structural | negative | goodie | gap`. Body inline or in a follow-up message.
 
 Examples:
 - `/research-capture negative tangent-separator fails at W=0 inflections`
@@ -25,17 +16,12 @@ Examples:
 
 ## Protocol
 
-Read current `findings.md`. If the same claim already exists, refine its
-`Provenance:` instead of adding a duplicate. Append under the right `##`
-heading with `Provenance:` always, plus `Do-not-retry:` for Negative entries.
+Read current `findings.md`. If the same claim already exists, refine its `Provenance:` instead of duplicating. Append under the right `##` heading with `Provenance:` always, plus `Do-not-retry:` for Negative entries.
 
-If the file exceeds 200 lines after this append, run `findings-prune`.
+If the file exceeds 200 lines after the append, run `findings-prune`.
 
-Stage `findings.md` by name and commit `findings: capture <section> - <summary>`.
-If the entry came out of a team-dir session, cite the dir in the body.
+Stage `findings.md` by name and commit `findings: capture <section> - <summary>`. Cite the team dir if applicable.
 
 ## Don't
 
-Add entries without provenance. Add a Negative without `Do-not-retry:`. Add
-route-history rows or duplicate UV text. Add status annotations inside entries:
-presence is the signal, removal is promotion or rejection.
+No entries without provenance. No Negative without `Do-not-retry:`. No route-history rows or duplicate UV text. No status annotations — presence is the signal.
