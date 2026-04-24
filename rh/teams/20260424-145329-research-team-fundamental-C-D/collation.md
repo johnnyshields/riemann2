@@ -1385,3 +1385,30 @@ has SHA1 `3E96FEB9304BD6AAF3F1FE3547D10E058BBB766E`; output
 - **Blocked:** paper promotion should wait for clean convention wording and
   possibly a compact absence lemma; baseline `q_0` and grade-0 handling remain
   independent Stage 1 blockers.
+
+### `20260425-010000-gap-closer-UV026-L2N0R1-homogeneous-gate/report.md`
+
+Signal: UV-026 `L_2N_0R_1` / `L_1N_0R_2` homogeneous live-gate reduction, keep.
+
+Captured takeaway: order counting does not remove the first non-Y cubic gate.
+Because the baseline mixed block has `N_0[0]`, the allowed placements land
+exactly at order `7`: `{1,1}` second Frechet plus grade-5 first Frechet gives
+`2+0+5=7`, and `{1,5}` second Frechet plus grade-1 first Frechet gives
+`6+0+1=7`, with left/right mirrors.  The old broad coefficient-table theorem
+is reduced to leading matrices only:
+`[z^2]\mathcal L^{\{1,1\}}`, `[z^6]\mathcal L^{\{1,5\}}`, `N_0[0]`,
+`[z^5]\Lambda^{[5]}`, `[z^1]\Lambda^{[1]}`, and mirrored right-side terms.
+Script
+`agents/20260425-010000-gap-closer-UV026-L2N0R1-homogeneous-gate/scripts/l2n0r1_homogeneous_order_gate.py`
+has SHA1 `6F5F28BFEB3E76D0E59ED5FFA0853B092CB2D5AC`; output
+`notes/l2n0r1_homogeneous_order_gate.json` has SHA1
+`998EE7824AB3C332892AB7FACB8E0F8857347785`.
+
+### Frontier after first non-Y gate
+
+- **Current best:** all Y-slot homogeneous gates are absent; the first non-Y
+  gate remains live but is reduced to a finite leading-coefficient theorem.
+- **Verifier queue:** verify the `N_0[0]` live-gate reduction for
+  `L_2N_0R_1`/`L_1N_0R_2`.
+- **Research lane next:** compute the leading Frechet matrices or attack
+  `L_3N_0R_0`/`L_0N_0R_3` by the same order-count method.

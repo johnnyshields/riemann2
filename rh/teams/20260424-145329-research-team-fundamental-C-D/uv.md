@@ -112,7 +112,12 @@ Working forward-carry of the current open UV items relevant to the active queue.
   cannot lower order.  If a future theorem instead defines `M^{[5]}` as
   matrix-output order `5`, reopen all `Y`-slot gates.  The active homogeneous
   cubic gates are now the non-`Y` families `L_2N_0R_1`/`L_1N_0R_2` and
-  `L_3N_0R_0`/`L_0N_0R_3`.
+  `L_3N_0R_0`/`L_0N_0R_3`.  For `L_2N_0R_1`/`L_1N_0R_2`, order counting does
+  not close the gate: `N_0[0]` is available and the two homogeneous placements
+  land exactly at order `7` (`2+0+5` and `6+0+1`).  The missing theorem is now
+  only the leading-coefficient fixed-sector test using `[z^2]`/`[z^6]`
+  second-Frechet outputs, `N_0[0]`, and `[z^1]`/`[z^5]` first-Frechet outputs,
+  plus mirrors.
   Gate subtargets: compute determinant identities against
   `A_5^{\mathfrak f}(m)` for all seven classified cubic families:
   `L_1YR_1`; `L_3N_0R_0` and `L_0N_0R_3`; `L_2YR_0` and `L_0YR_2`;
