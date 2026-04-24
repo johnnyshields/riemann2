@@ -486,3 +486,44 @@ Ground-truth checks:
 
 Protected surfaces are unchanged: agents write only to
 `agents/20260424-191517-<slug>/`.
+
+## UV-023 definition-first compatibility attack 20260424-192320
+
+Base commit: `671a94e`.
+
+Current target: build the missing source-bidegree quotient-compatibility
+package instead of trying to infer it from downstream scalar data:
+
+`Q_7^q((1-\Pi_{1,1})C)=0`.
+
+The previous pass kept the formal `(1,1)` projection mechanism but rejected
+post-quotient projection, determinant scalarization, finite-order grading
+alone, diagonal merger, and downstream package coincidence as justifications.
+
+Roster:
+
+1. `gap-closer-UV023-Q7q-extractor`: define or sharply reduce the fixed-target
+   quotient-valued coefficient extractor `Q_7^q` before determinant
+   scalarization. Read `rh/proof_of_rh.tex` lines 2415--2587, 2659--2787,
+   7742--8033, 10790--10810, 11888--12255, 12385--12584, 21293--21330, and
+   23072--23109; also read the UV-010 first-wave reports and the UV-023
+   reports from `20260424-190438-*`, `20260424-190928-*`, and
+   `20260424-191517-*`.
+2. `explorer-UV023-Lh-source-input`: define or reject the source-linear
+   corrected-block input `L_h` / `X^{[1]}` before whitening. Decide whether it
+   can be obtained as a pair-kernel-linear derivative of the actual corrected
+   two-atom block, and list the exact source lines or missing theorem needed.
+
+Ground-truth checks:
+
+- `Q_7^q` must be quotient-valued and fixed-target before determinant
+  scalarization.
+- `L_h` / `X^{[1]}` must be a source object before the corrected-whitening
+  transfer, not a post-hoc amplitude multiplier of an even source sum.
+- A positive route must explicitly test cubic finite-order witnesses of type
+  `(1,1,5)` and quotient-extraction nonlinearity.
+- A negative route must reduce to the smallest missing definition or theorem:
+  `L_h`, `X^{[1]}`, `\Pi_{1,1}`, `Q_7^q`, or the compatibility statement.
+
+Protected surfaces are unchanged: agents write only to
+`agents/20260424-192320-<slug>/`.
