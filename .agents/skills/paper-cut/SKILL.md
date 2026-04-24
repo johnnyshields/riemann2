@@ -1,6 +1,6 @@
 ---
 name: paper-cut
-description: Move a passage from <paper>/<main>.tex to <paper>/cut-for-time.md with full provenance (original location, reason, broken refs), then commit.
+description: Move a passage from a paper main TeX file to that paper's cut-for-time.md with full provenance, then commit.
 ---
 
 ## Codex workflow
@@ -9,17 +9,16 @@ Follow `AGENTS.md` for coordinator policy, provenance, dispatch, and git rules. 
 
 # Paper Cut
 
-Move a passage from `<paper>/<main>.tex` to `<paper>/cut-for-time.md`
-with provenance.
+Move a passage from `<paper>/<main>.tex` to `<paper>/cut-for-time.md` with
+provenance.
 
-Read the passage. Grep for `\ref{...}` / `\eqref{...}` pointing at any
-`\label{...}` inside â€” note each (redirect or record as broken in the
-provenance block). Remove the passage from the paper; fix surrounding
-transitions.
+Read the passage. Search for references pointing at labels inside it. Record
+each redirect or broken reference in the provenance block. Remove the passage
+from the paper and fix surrounding transitions.
 
 Append to `<paper>/cut-for-time.md`:
 
-```markdown
+````markdown
 ---
 
 ## From: [Section name] ([context])
@@ -29,16 +28,14 @@ Append to `<paper>/cut-for-time.md`:
 **Reason:** [brief reason]
 **Broken refs:** [list, if any]
 
-\`\`\`latex
+```latex
 [exact LaTeX cut]
-\`\`\`
 ```
+````
 
-If the passage contained a `rem:wip-*` label cited by a UV entry, update
-that UV's `Source in paper:` to the new home, or record the blocker in
+If the passage contained a `rem:wip-*` label cited by a UV entry, update that
+UV's `Source in paper:` to the new home, or record the blocker in
 `collation.md` while keeping the UV live.
 
-Commit paper edit + `cut-for-time.md` update together, stage by name.
+Commit paper edit plus `cut-for-time.md` update together, staging by name.
 Subject: `cut: <one-line of what moved>`.
-
-

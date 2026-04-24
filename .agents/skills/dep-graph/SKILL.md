@@ -1,6 +1,6 @@
 ---
 name: dep-graph
-description: Validate the UV dependency graph in <team-dir>/uv.md. Detects cycles, orphans, broken references, missing explicit deps, and critical-path UV entries. Reports only; no auto-edits.
+description: Validate the UV dependency graph in a team directory uv.md. Detects cycles, orphans, broken references, missing explicit deps, and critical-path UV entries. Reports only; no auto-edits.
 ---
 
 ## Codex workflow

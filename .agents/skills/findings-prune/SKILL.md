@@ -1,6 +1,6 @@
 ---
 name: findings-prune
-description: When <team-dir>/findings.md exceeds 200 lines, prune. Promote stale-but-proven bullets into the paper, move grep-worthy entries to <paper>/findings-in-paper.md, and remove noise. Keeps findings.md briefing-size.
+description: When a team findings.md exceeds 200 lines, prune. Promote stale-but-proven bullets into the paper, move grep-worthy entries to a paper findings-in-paper.md, and remove noise. Keeps findings.md briefing-size.
 ---
 
 ## Codex workflow

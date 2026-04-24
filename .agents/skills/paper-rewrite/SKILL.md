@@ -1,6 +1,6 @@
-﻿---
+---
 name: paper-rewrite
-description: Full-paper compactness rewrite of <paper>/<main>.tex (or a specified scope). Tightens prose, combines redundancy, and removes unnecessary qualifiers while RIGOROUSLY preserving every convention â€” macros, labels, cite keys, theorem statements, notation, mathematical content. Agent-per-section parallel dispatch with heavy compile-check gating.
+description: Compactness rewrite of a paper main TeX file or specified scope. Tightens prose and removes redundancy while preserving macros, labels, cite keys, theorem statements, notation, and mathematical content. Uses coordinator-selected parallel rewriters when useful.
 ---
 
 ## Codex workflow
@@ -9,98 +9,80 @@ Follow `AGENTS.md` for coordinator policy, provenance, dispatch, and git rules. 
 
 # Paper Rewrite
 
-Compactness pass on `<paper>/<main>.tex` (or a scope). Rewriters
-(`role prompt: rewriter`) are edit-capable for their own agent dir
-only; assembly into the paper is gated behind integrity checks. Use the inherited Codex model by default.
+Compactness pass on `<paper>/<main>.tex` or a scope. Rewriters edit only their
+own agent dirs; assembly into the paper is coordinator-owned and gated by
+integrity checks.
 
 `$ARGUMENTS`: empty -> full paper; section or line range -> scoped pass;
-`--target-ratio <N>` sets compaction target (default 15%); `--no-agents`
-means coordinator-only for small scopes; `--preserve-extra "<list>"` adds
-locked identifiers.
+`--target-ratio <N>` sets compaction target (default 15%); `--no-agents` means
+coordinator-only for small scopes; `--preserve-extra "<list>"` adds locked
+identifiers.
 
-## Non-negotiable invariants
+## Non-negotiable Invariants
 
 Any violation aborts assembly.
 
-1. **Frozen macro namespace**: no new / renamed / removed `\newcommand`s.
-2. **Labels, cites, refs**: every `\label{...}`, `\cite{...}`, `\ref{...}`,
-   and `\eqref{...}` is preserved and resolvable.
-3. **Theorem / Proposition / Lemma / Corollary / Remark STATEMENTS**
-   byte-identical (whitespace-only changes allowed). Tighten surrounding
-   prose and proof text only.
-4. **Mathematical content** (equations, constants, identities) untouched.
-   Math mode copied verbatim.
-5. **Notation**: every symbol keeps its meaning; no symbol-family swaps.
-6. **Section / subsection order and titles** preserved; no merges or splits.
-7. **`rem:wip-*` labels and their claim-state** preserved: a `[conditional]`
-   remark must not become `[proved]`.
-8. **Scope disclaimers** (`from [scope] alone`, `conditional on [X]`)
-   preserved. Compactness does not override honesty.
-9. **Bibliography** untouched (use `paper-biblio` instead).
-10. **`--preserve-extra` list**, if supplied.
+1. Frozen macro namespace: no new, renamed, or removed `\newcommand`s.
+2. Labels, cites, refs: every `\label`, `\cite`, `\ref`, and `\eqref` is
+   preserved and resolvable.
+3. Theorem/proposition/lemma/corollary/remark statements are byte-identical
+   except whitespace.
+4. Mathematical content, equations, constants, identities, and math mode are
+   copied verbatim.
+5. Notation keeps the same meaning; no symbol-family swaps.
+6. Section order and titles are preserved; no merges or splits.
+7. `rem:wip-*` labels and claim state are preserved; no implicit promotion.
+8. Scope disclaimers and conditional language are preserved.
+9. Bibliography is untouched; use `paper-biblio` instead.
+10. `--preserve-extra` tokens are preserved.
 
 Fair game: AI tells, redundant transitions, repeated setups, overlapping
-remarks, unnecessary hedging, long prose redundant with an equation,
-stale cross-references.
+remarks, unnecessary hedging, prose redundant with an equation, stale
+cross-references.
 
 ## Preamble
 
-Create `<paper>/teams/<ts>-other-rewrite-<slug>/`. Capture invariants into
-`notes/`: macros, theorem envs, labels, cite keys, cross-refs, baseline
-line count. Baseline compile-check must be clean before starting. Partition by
-section/subsection, aiming for no more than 2000 lines per rewriter.
+Create `<paper>/teams/<ts>-other-rewrite-<slug>/` with standard team files:
+copy-forward `findings.md` and `uv.md`, fresh `attempts.md`, `dispatch.md`,
+`collation.md`, and `agents/`. Capture invariants into `notes/`: macros,
+theorem envs, labels, cite keys, cross-refs, and baseline line count. Baseline
+compile-check must be clean. Partition only when parallelism is useful and
+scopes can be kept disjoint.
 
-## Dispatch (unless `--no-agents`)
+## Dispatch
 
-When delegated teamwork is authorized, record team name `paper-rewrite-<ts>` in `dispatch.md`. Spawn one
-`rewriter-<slug>` (`role prompt: rewriter`, inherited Codex model) per partition. Standard
-briefing plus: the full invariant list (verbatim â€” not suggestions),
-`notes/frozen-macros.txt`, the input region, the labels/cites/refs
-present in it, the target compaction ratio, and the output contract â€”
-the replacement block at `agents/<slug>/rewrite.tex`, a 9-field report
-with a "Compaction notes" field, and do NOT edit `<main>.tex` directly
-(assembly is the coordinator's).
+When delegated teamwork is authorized, record team name `paper-rewrite-<ts>` in
+`dispatch.md`. Spawn the smallest useful set of `rewriter-<slug>` agents. Brief
+with the invariant list, `notes/frozen-macros.txt`, input region,
+labels/cites/refs present, target compaction ratio, exact deposit path, and the
+contract: replacement block at `agents/<slug>/rewrite.tex`, 9-field report with
+"Compaction notes", and no direct `<main>.tex` edits.
 
-Non-goals: no proof restructuring, no removed conditionals, no
-reordering within a subsection, no `rem:wip-*` promotion, no new
-labels / macros / cite keys.
+Non-goals: no proof restructuring, removed conditionals, `rem:wip-*`
+promotion, new labels/macros/cite keys, or ordering changes within scope. With
+`--no-agents`, the coordinator applies the same invariants directly.
 
-With `--no-agents`: coordinator applies the same invariants directly.
+## Integrity Checks
 
-## Integrity checks (per rewriter)
-
-Diff every output against its input notes:
-
-- Label set identical â†’ else hard failure.
-- Cite-key set identical â†’ else hard failure.
-- Every cross-reference still resolves.
-- Every macro used in input still used in output (or a semantic
-  equivalent using existing macros).
-- Every theorem-env body byte-identical to input.
-- Isolated compile-check (output + paper preamble) passes.
-
-Any failure â†’ do NOT assemble that rewriter's output.
+For each output, diff against its input notes: label set identical, cite-key set
+identical, cross-references resolvable, macros preserved, theorem-env bodies
+byte-identical, and isolated compile-check passes. Any failure blocks assembly
+and is recorded in `collation.md` and `attempts.md`.
 
 ## Assembly
 
-Replace each input region with the corresponding
-`agents/<slug>/rewrite.tex`. Run the full compile-check. Diff the
-paper's label set and cite-key set against baselines; both diffs must
-be empty. Any failure â†’ revert. Record the achieved line-count
-reduction.
+Replace each input region with the corresponding `agents/<slug>/rewrite.tex`.
+Run full compile-check. Diff paper label and cite-key sets against baselines;
+both diffs must be empty. Any failure is reverted by the coordinator and logged
+as `crash` or `blocked` in `attempts.md`.
 
 ## Commit
 
-Atomic: only this rewrite in the commit. Subject
-`paper: compactness rewrite <scope> (-<N>%)`. Body: scope, reduction,
-rewriters, team dir, any `--preserve-extra` tokens confirmed.
-
-Follow up with `paper-harden` (at minimum rigor + consistency) on the
-rewritten scope. Drift surfaced â†’ `paper-demote`.
+Atomic: only this rewrite. Subject `paper: compactness rewrite <scope> (-<N>%)`.
+Body: scope, reduction, rewriters, team dir, and preserved tokens. Follow up
+with `paper-harden` on the rewritten scope, at least rigor and consistency.
 
 ## Don't
 
-Rewrite during an active research cycle. Skip integrity checks. Combine
-with a content edit. Rename or reorder anything.
-
-
+Rewrite during an active research cycle. Skip integrity checks. Combine with a
+content edit. Rename or reorder anything.

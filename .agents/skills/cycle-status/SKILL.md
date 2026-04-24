@@ -1,6 +1,6 @@
 ---
 name: cycle-status
-description: Snapshot of the current research state: active teams, recent team dirs, UV entries with status and dependencies, ledger health, and open threads from recent lore. Run at session start or mid-session to orient without re-reading everything.
+description: Snapshot of the current research state including active teams, recent team dirs, UV entries with dependencies, ledger health, and open threads from recent lore. Run at session start or mid-session to orient without re-reading everything.
 ---
 
 ## Codex workflow

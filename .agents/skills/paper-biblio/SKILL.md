@@ -1,6 +1,6 @@
 ---
 name: paper-biblio
-description: Alphabetize, de-dupe, verify, and clean up the bibliography of <paper>/<main>.tex. Caches user decisions in papers/<name>-biblio-known.md.
+description: Alphabetize, de-dupe, verify, and clean up the bibliography of a paper main TeX file. Caches coordinator decisions in paper-specific biblio-known notes.
 ---
 
 ## Codex workflow
@@ -10,47 +10,41 @@ Follow `AGENTS.md` for coordinator policy, provenance, dispatch, and git rules. 
 # Paper Biblio
 
 Alphabetize, de-dupe, verify, and clean up the bibliography of
-`<paper>/<main>.tex`. Cache user decisions in
-`papers/<name>-biblio-known.md` so nothing gets re-flagged across runs.
+`<paper>/<main>.tex`. Cache decisions in `papers/<name>-biblio-known.md` so
+nothing gets re-flagged across runs.
 
-`$ARGUMENTS`: empty â†’ `<paper>/<main>.tex` (do NOT use an mtime
-heuristic â€” `<team-dir>/uv.md` is more recent); file path â†’ that paper;
-`--skip-external` â†’ no web verification; `--force-recheck` â†’ ignore
-cache.
+`$ARGUMENTS`: empty -> current paper; file path -> that paper;
+`--skip-external` -> no web verification; `--force-recheck` -> ignore cache.
 
-## What this skill does
+## Scope
 
-Never adds `\bibitem` entries or `\cite` references. May remove exact
-duplicates and fix conservative formatting issues. Works only inside
-`\begin{thebibliography}...\end{thebibliography}`.
+Never add `\bibitem` entries or `\cite` references. May remove exact duplicates
+and fix conservative formatting issues. Work only inside
+`\begin{thebibliography}...\end{thebibliography}` unless reporting a dangling
+cite location.
 
-- **Alphabetize** by cite key (case-insensitive), preserving blank
-  lines.
-- **Orphan / dangling detection** â€” bibitems never cited, cites without
-  a bibitem. Report only, no auto-fix.
-- **Duplicate detection** â€” exact-key dupes auto-removed (keep first);
-  near-dupes (same first-author surname + year) surfaced as batched
-  user questions only when the conservative choice is unclear; cache
-  the decision.
-- **Formatting** â€” title emphasis consistency, journal abbreviation
-  consistency, year placement, page-range dashes (`--`), trailing
-  periods, arXiv format, URLs for online sources. Batch unclear issues
-  into concise user questions and cache decisions.
-- **Citation-context audit** â€” for each `\cite{key}`, verify the
-  surrounding text accurately describes what the cited paper proves.
-  Common errors: wrong attribution, conjecture vs theorem, year
-  mismatch, survey-vs-original. Cached decisions skipped.
-- **Existence verification** â€” cached (â‰¤ 90 days) skipped; else web
-  search for title + author + year, confirm venue/volume/pages. Batch
-  5, brief pauses. `--skip-external` skips this step.
-- **arXiv-to-journal upgrade** â€” for arXiv-only citations, search for
-  a published journal version; if found and unambiguous, replace. If
-  both are present, keep the journal citation only.
+- **Alphabetize** by cite key, case-insensitive, preserving blank lines.
+- **Orphan / dangling detection**: bibitems never cited, cites without a
+  bibitem. Report only, no auto-fix unless the correction is exact.
+- **Duplicate detection**: exact-key dupes auto-removed, keeping first.
+  Near-dupes are not removed unless unambiguous; otherwise cache a
+  coordinator decision and leave them.
+- **Formatting**: title emphasis, journal abbreviations, year placement,
+  page-range dashes, trailing periods, arXiv format, and online URLs. Apply only
+  conservative fixes; cache unclear decisions.
+- **Citation-context audit**: for each `\cite{key}`, verify the surrounding text
+  accurately describes what the cited paper proves. Report wrong attribution,
+  conjecture/theorem confusion, year mismatch, and survey-vs-original issues.
+- **Existence verification**: cached checks newer than 90 days are skipped.
+  Otherwise use web search for title + author + year unless `--skip-external`.
+- **arXiv-to-journal upgrade**: for arXiv-only citations, search for a published
+  version. Replace only when the match is unambiguous; if both are present, keep
+  the journal citation.
 
-## Cache format â€” `papers/<name>-biblio-known.md`
+## Cache Format
 
 ```markdown
-# Bibliography â€” Known Good (<name>)
+# Bibliography Known Good (<name>)
 Last updated: YYYY-MM-DD
 
 ## Verified Entries
@@ -66,12 +60,12 @@ Last updated: YYYY-MM-DD
 | Key | Section | Line(s) | Issue | Decision | Date |
 ```
 
-Always check the cache before flagging; always write back after new
-decisions; sort tables by key.
+Always check the cache before flagging; always write back after new decisions;
+sort tables by key.
 
 ## Report
 
-```
+```markdown
 ## Bibliography Report: <name>
 - Entries: N / alphabetized: yes-no / reordered: M
 - Orphans: N / Dangling: N / Duplicates: N
@@ -82,9 +76,6 @@ decisions; sort tables by key.
 
 ## Rules
 
-- Preserve blank lines between `\bibitem` entries on reorder.
-- Be conservative with "not found" â€” older papers may not be indexed;
-  flag `unverifiable` rather than `nonexistent`.
-- Touch only the bibliography block â€” nothing outside.
-
-
+Preserve blank lines between `\bibitem` entries on reorder. Be conservative
+with "not found"; older papers may not be indexed. Touch only the bibliography
+block except for read-only citation-context checks. Stage changed files by name.

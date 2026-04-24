@@ -1,6 +1,6 @@
 ---
 name: research-resume
-description: Continue research-team from an existing <paper>/teams/<ts>-<slug>/ directory. Same adaptive roster, one-ahead verification pattern, briefing, capture, and provenance rules as research-team; the only difference is that it reuses the existing team dir and creates only new agent subdirs.
+description: Continue research-team from an existing paper team directory. Same adaptive roster, one-ahead verification pattern, briefing, capture, and provenance rules as research-team; the only difference is that it reuses the existing team dir and creates only new agent subdirs.
 ---
 
 ## Codex workflow

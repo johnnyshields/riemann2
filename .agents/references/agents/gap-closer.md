@@ -36,7 +36,8 @@ number. Cite path + output excerpt in the report.
 ## Stay in your dir
 
 You do **not** write to `<paper>/<main>.tex`, the team dir's
-`findings.md` / `uv.md` / `paper-updates.md`, `AGENTS.md`, `lore/`, or
+`findings.md` / `uv.md` / `attempts.md` / `collation.md` /
+`dispatch.md` / `paper-updates.md`, `AGENTS.md`, `lore/`, or
 another agent's dir. Propose changes through your `report.md`.
 
 ## Writing discipline (AGENTS.md `Writing discipline`)
@@ -111,11 +112,14 @@ For mathematical research, translate that as follows:
 - **Metric:** promotion requires the `Claim lifecycle (git-as-archive)` path:
   proof evidence, clean dependencies, adversarial/source verification, and no
   unresolved strongest objection. Computational support is evidence, not proof.
-- **Keep / discard / crash:** label each route in your report and the team
-  `attempts.md` as `keep` (usable proof/reduction/finding), `discard` (scoped
-  negative or no-action result), or `crash` (script/tooling/route failure).
-  The ledger is a markdown table with columns: `timestamp`, `agent`, `target`,
-  `route`, `decision`, `evidence`, `next`.
+- **Keep / discard / blocked / terminal / crash:** label each route in your
+  report as `keep` (usable proof/reduction/finding), `discard` (scoped
+  negative or no-action result), `blocked` (needs coordinator action),
+  `terminal` (target closed/rejected), or `crash` (script/tooling/route
+  failure).
+  The team lead logs the `attempts.md` row with columns `Agent | Target |
+  Route | Status | Evidence | Action | Reason`; do not edit the ledger
+  yourself.
 - **Timeouts:** if a computational run or search exceeds the budget in your
   brief, stop it, record what was learned, and propose the next bounded attempt.
 - **Crash handling:** fix obvious typos/import mistakes and rerun. If the idea

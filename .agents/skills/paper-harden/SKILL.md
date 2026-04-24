@@ -1,6 +1,6 @@
 ---
 name: paper-harden
-description: Adaptive read-only quality review of <paper>/<main>.tex for rigor, consistency, formatting, and voice. Reviewers return reports only; the coordinator consolidates.
+description: Adaptive read-only quality review of a paper main TeX file for rigor, consistency, formatting, and voice. Reviewers return reports only; the coordinator consolidates.
 ---
 
 ## Codex workflow

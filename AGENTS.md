@@ -270,8 +270,9 @@ Every brief also names:
 - the exact in-scope paper lines, team files, source files, and prior agent
   reports the agent must read before acting;
 - the protected surfaces the agent must not edit (`<main>.tex`, `findings.md`,
-  `uv.md`, `attempts.md`, `paper-updates.md`, `AGENTS.md`, `lore/`, and other
-  agents' dirs unless an explicit role exception applies);
+  `uv.md`, `attempts.md`, `collation.md`, `dispatch.md`, `paper-updates.md`,
+  `AGENTS.md`, `lore/`, and other agents' dirs unless an explicit role
+  exception applies);
 - the ground-truth check for the task: theorem statement, `rem:wip-*`, source
   reference, verifier question, pinned objection set, or script output that
   decides whether evidence counts.
@@ -379,10 +380,11 @@ provenance is laundered provenance.
 
 Agents do **not** write outside their own `agents/<slug>/` dir, and in
 particular do **not** touch `<main>.tex`, the team dir's `findings.md` /
-`uv.md` / `paper-updates.md`, `AGENTS.md`, `lore/`, or another agent's
-dir — unless a skill grants an explicit exception (e.g. `paper-referee`
+`uv.md` / `attempts.md` / `collation.md` / `dispatch.md` /
+`paper-updates.md`, `AGENTS.md`, `lore/`, or another agent's dir —
+unless a skill grants an explicit exception (e.g. `paper-referee`
 Phase 1). Those team-dir files belong to the team lead; agents suggest
-changes in their reports.
+changes and route outcomes in their reports.
 
 ## Report schema
 

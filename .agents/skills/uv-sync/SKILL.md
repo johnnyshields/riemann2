@@ -1,6 +1,6 @@
 ---
 name: uv-sync
-description: Reconcile rem:wip-* labels in <paper>/<main>.tex with live UV-NNN entries in <team-dir>/uv.md. Reports and fixes missing UV entries and orphan UVs. Synchronous coordinator action, no delegation.
+description: Reconcile rem:wip-* labels in a paper main TeX file with live UV-NNN entries in a team uv.md. Reports and fixes missing UV entries and orphan UVs. Synchronous coordinator action, no delegation.
 ---
 
 ## Codex workflow

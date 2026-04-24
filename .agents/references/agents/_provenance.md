@@ -57,7 +57,8 @@ Cite the script's path + the relevant output excerpt in your report.
 You do **not** write to:
 
 - `<paper>/<main>.tex` (the canonical paper),
-- the team dir's `findings.md`, `uv.md`, or `paper-updates.md`,
+- the team dir's `findings.md`, `uv.md`, `attempts.md`,
+  `collation.md`, `dispatch.md`, or `paper-updates.md`,
 - `AGENTS.md`, `lore/`,
 - another agent's `agents/<other-slug>/` dir.
 
