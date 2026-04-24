@@ -89,6 +89,14 @@ Active, compact knowledge base shared with every delegated agent.
   axioms alone; a formal package can add an arbitrary
   `a_1a_2\delta^2P(m,\kappa)` septic quotient term while preserving those
   lower constraints.
+- **Existing one-pair order-7 and centered `D_2` formulas do not construct the UV-010 Hessian.**
+  Provenance:
+  `agents/20260424-183418-gap-closer-UV010-actual-hessian-construction/report.md`.
+  Do-not-retry: promoting the one-pair `K_1` / `\Delta_7` / centered `D_2`
+  material directly to a two-atom `\mathcal J_2^{(7)}` / `\mathfrak O_7`.
+  The next positive layer is an actual corrected two-atom package
+  `\mathfrak P_{2,7}^{\corr}` with linear one-amplitude collapse before
+  determinant scalarization.
 
 ## Goodies
 

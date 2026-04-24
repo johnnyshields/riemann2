@@ -442,3 +442,34 @@ properties.
 - **Next:** redelegate a positive construction attempt for the actual corrected
   order-7 quotient Hessian `\mathcal J_2^{(7)}` / `\mathfrak O_7`, using the
   determinant chart only as good-patch bookkeeping.
+
+### `20260424-183418-gap-closer-UV010-actual-hessian-construction/report.md`
+
+Signal: UV-010 positive Hessian construction attempt, open / keep.
+
+Captured takeaway: the obvious positive source reconstruction fails in a useful
+way. The one-pair quotient-septic closure, `K_1` transport formulas, and
+centered `D_2` package are comparison data, not an actual two-atom order-7
+quotient interaction Hessian. Source lines `10780-10843` already warn that
+one-pair order-7 closure leaves quotient-septic geometry locally free and
+requires a provenance-sensitive package statement. Lines `12192-12255` rule out
+the naive source-summed route and determinant-only routes. The next constructive
+target is therefore not another determinant formula; it is the package-definition
+layer: define `\mathfrak P_{2,7}^{\corr}` with linear one-amplitude collapse,
+extract its quotient interaction remainder, and then apply the good-patch
+determinant chart.
+
+### Resume frontier after positive construction pass
+
+- **Current best:** UV-010 is reduced to constructing an actual corrected
+  two-atom order-7 package object before diagonal merger. Good-patch determinant
+  scalarization is available only after that object exists.
+- **Keep:** first-wave theorem boundary, verifier pass, determinant chart,
+  free `P(m,\kappa)` pressure test, and the new source negative against direct
+  promotion of one-pair `K_1` / `D_2` material.
+- **Discard:** direct `D_2 -> \mathfrak O_7` promotion, one-pair
+  quotient-septic closure as a two-atom theorem, scalar-only quotient packages,
+  and naive source-summed whitened block construction.
+- **Next:** attack the corrected block/package definition itself: find or build
+  `\mathfrak P_{2,7}^{\corr}` with linear one-amplitude collapse and a quotient
+  interaction remainder, then source/adversarial verify it.
