@@ -186,3 +186,49 @@ Queued:
 
 Reason: UV-016 now has a plausible compact source-package core, but promotion
 still needs adversarial normalization review and citation-grade source support.
+
+## Sartre Source-Normalization Audit 20260424
+
+Report:
+`agents/20260424-183416-verifier-slot-skeleton/report-source-normalization-audit.md`.
+
+Verdict: keep, still open. Sartre accepts the completed-Hadamard
+`B_chi,comp^pair=0` subclaim inside explicit completed normalization, but not
+as an unqualified `B_chi^pair` theorem statement. The theorem text must state
+the real-part projection, the negative-exponent boundary convention, regular
+compact edge exclusions, and the rule that raw gamma/trivial-zero/pole
+bookkeeping belongs only in a separate raw `L`-factor remark.
+
+Capture action: refined `findings.md`, UV-016, UV-021, and `attempts.md`.
+Next writing task: draft the completed-source theorem wording without claiming
+UV-017 slot realization.
+
+## Beauvoir Textbook-Citation Pass 20260424
+
+Report:
+`agents/20260424-183416-gap-compact-regularization/report-textbook-citation-pass.md`.
+
+Verdict: keep, citation burden narrowed. Davenport's `Multiplicative Number
+Theory`, chapters 9, 11, 12, and 17, gives strong OCR locators for primitive
+Dirichlet completed functions, order-one Hadamard products, zero summability,
+and Dirichlet log-derivative formulae. The OCR is too symbol-corrupted for
+final paper citations; exact page/equation references must be checked against
+a clean copy or replaced by Montgomery-Vaughan/Apostol-level references.
+
+Capture action: refined `findings.md`, UV-016, and `attempts.md`. The
+remaining source task is clean-copy citation verification, not a new analytic
+lemma.
+
+## Coordinator Paper-Updates Draft 20260424
+
+File: `paper-updates.md`.
+
+Verdict: keep as staged text only. The draft states the completed-Hadamard
+paired source package with `B_chi,comp^pair=0`, makes the real-part projection
+and edge exclusions explicit, and separates raw `L`-factor gamma/trivial-zero
+bookkeeping into a remark. It carries citation placeholders rather than final
+book citations.
+
+Capture action: recorded the staged draft in `findings.md`, UV-016, and
+`attempts.md`. Do not promote until clean-copy citations and final wording
+review are complete.

@@ -69,22 +69,35 @@ is the supplied team dir unless another path is named.
   summing all completed zeros of
   `Xi_chi=Lambda_chi Lambda_bar_chi`, the edge difference has
   `B_chi,comp^pair=0`; gamma, trivial-zero, pole, and raw Hadamard terms belong
-  only to a separate raw `L`-factor bookkeeping convention. This needs
-  adversarial source-normalization review before promotion to avoid
-  double-counting completed zeros and raw background terms. Provenance:
+  only to a separate raw `L`-factor bookkeeping convention. Sartre's
+  adversarial audit accepts the subclaim inside explicit completed
+  normalization, but rejects promoting it as unqualified `B_chi^pair` language:
+  theorem text must include the real-part projection, edge exclusions, and
+  no-double-counting separation from raw terms. Provenance:
   `agents/20260424-183416-explorer-background-multiplicity/report-background-split.md`,
-  `agents/20260424-183416-explorer-background-multiplicity/notes/background_split_derivation.md`.
+  `agents/20260424-183416-explorer-background-multiplicity/notes/background_split_derivation.md`,
+  `agents/20260424-183416-verifier-slot-skeleton/report-source-normalization-audit.md`.
 - **The compact convergence source inputs are standard for primitive
   nonprincipal characters.** Beauvoir's source audit gives a theorem-ready
   input block: parity-normalized `Lambda(s,chi)`, entire order-one completed
   functions, paired self-dual product, analytic zero multiplicity, genus-one
   Hadamard/log-derivative regularization, and
-  `sum m_rho |rho|^{-2}<infty`. The remaining source issue is bibliographic
-  precision, not a new analytic sublemma: replace web-level locators with
-  exact Davenport/Montgomery-Vaughan and complex-analysis citations before
-  paper promotion. Provenance:
+  `sum m_rho |rho|^{-2}<infty`. The remaining source issue is clean-copy
+  bibliographic precision, not a new analytic sublemma: Davenport chapters 9,
+  11, 12, and 17 give strong OCR locators, but exact page/equation references
+  must be checked against a clean copy or replaced by Montgomery-Vaughan or
+  another stable textbook before paper promotion. Provenance:
   `agents/20260424-183416-gap-compact-regularization/report-source-audit.md`,
-  `agents/20260424-183416-gap-compact-regularization/notes/source_audit_standard_inputs.md`.
+  `agents/20260424-183416-gap-compact-regularization/notes/source_audit_standard_inputs.md`,
+  `agents/20260424-183416-gap-compact-regularization/report-textbook-citation-pass.md`.
+- **A completed-source theorem draft is staged, not promoted.**
+  `paper-updates.md` now contains a proposed completed-Hadamard source package
+  with `B_chi,comp^pair=0`, explicit real-part projection, edge exclusions, and
+  a separate raw `L`-factor bookkeeping remark. It remains citation-blocked and
+  must not be applied to a canonical paper until the clean-copy citation check
+  and a final wording review are done. Provenance:
+  `paper-updates.md`,
+  `agents/20260424-183416-verifier-slot-skeleton/report-source-normalization-audit.md`.
 - **Tau is a self-dual phase-channel stress test, not the first exact `S(m)`
   target.** Tau has only a conditional compact source-package blueprint; paired
   Dirichlet remains sharper for exact source-plus-slot work. Provenance:
@@ -123,7 +136,8 @@ is the supplied team dir unless another path is named.
   source theorem sums all completed zeros of `Xi_chi`, adding gamma/trivial-zero
   terms again would double-count them; those terms belong only in a separately
   declared raw `L`-factor remark. Provenance:
-  `agents/20260424-183416-explorer-background-multiplicity/report-background-split.md`.
+  `agents/20260424-183416-explorer-background-multiplicity/report-background-split.md`,
+  `agents/20260424-183416-verifier-slot-skeleton/report-source-normalization-audit.md`.
 
 ## Goodies
 

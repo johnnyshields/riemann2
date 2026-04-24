@@ -16,6 +16,9 @@
 | Sartre | UV-016 | Compact edge-difference convergence proof is sound in scoped form | keep | `agents/20260424-183416-verifier-slot-skeleton/report-compact-convergence-audit.md` | source-audit standard inputs | Completed zero-regularization is no longer the blocker under standard primitive nonprincipal inputs; explicit `B_chi^pair` split remains. |
 | Jason | UV-016 | Completed-Hadamard source split gives `B_chi,comp^pair=0`; raw `L`-factor background is separate bookkeeping | keep | `agents/20260424-183416-explorer-background-multiplicity/report-background-split.md`; `agents/20260424-183416-explorer-background-multiplicity/notes/background_split_derivation.md` | adversarial source-normalization audit | Need source citations and a double-counting check before promoting a completed-zero theorem statement. |
 | Beauvoir | UV-016 | Standard primitive nonprincipal completed-\(L\) inputs suffice for compact convergence | keep | `agents/20260424-183416-gap-compact-regularization/report-source-audit.md`; `agents/20260424-183416-gap-compact-regularization/notes/source_audit_standard_inputs.md` | exact textbook citation pass | Mathematical input layer is standard; promotion still needs direct Davenport/Montgomery-Vaughan and Hadamard theorem citations. |
+| Sartre | UV-016 | Completed-Hadamard `B=0` is valid only with explicit completed normalization | keep | `agents/20260424-183416-verifier-slot-skeleton/report-source-normalization-audit.md` | draft theorem wording | Must state real-part projection, edge exclusions, completed/raw separation, and no double-counting before promotion. |
+| Beauvoir | UV-016 | Davenport gives strong OCR locators for completed-\(L\) and Hadamard inputs, but clean-copy citations remain missing | keep | `agents/20260424-183416-gap-compact-regularization/report-textbook-citation-pass.md` | clean-copy citation check | Citation burden narrowed to exact page/equation checks in Davenport or replacement textbook references. |
+| coordinator | UV-016 | Staged completed-source theorem draft with raw-bookkeeping remark | keep | `paper-updates.md` | final wording and citation review | Draft includes `B_chi,comp^pair=0`, real-part projection, edge exclusions, and raw/completed separation; not promoted. |
 
 ## Frontier summaries
 
@@ -23,7 +26,9 @@
   package, is the live non-zeta bottleneck. The compact zero-regularization
   subproblem is adversarially checked in the completed-function setting, and
   Jason's current best `B` split is the completed-Hadamard convention
-  `B_chi,comp^pair=0` after summing all completed zeros with multiplicity.
+  `B_chi,comp^pair=0` after summing all completed zeros with multiplicity;
+  Sartre has accepted that subclaim only under explicit completed-normalization
+  wording.
 - **Keep:** paired object `Phi_chi^pair`, positive upstairs strip-edge kernel,
   immediate post-theorem bookkeeping placement, and the conditional UV-017
   slot skeleton after Sartre's coefficient-lemma caveat.
@@ -32,12 +37,11 @@
   claims that single-channel Dirichlet or tau already supplies the manuscript
   exact `S(m)` slot.
 - **Blocked:** UV-016 lacks exact textbook citations for the standard
-  completed-\(L\) inputs, adversarial review of the completed-zeros versus
-  raw-background normalization, and final compact source wording in the
-  verified sign convention.
+  completed-\(L\) inputs and final compact source wording in the verified sign
+  convention, including real-part projection, edge exclusions, and raw
+  bookkeeping separation.
   UV-017 lacks paired symmetric normal form, value-parameter holomorphy, stable
   local positivity, exact freeze rules, and source-to-slot coefficient
   identification.
-- **Next:** send Jason's completed-Hadamard `B=0` proposal and Beauvoir's
-  source-audit block for adversarial source-normalization review; in parallel,
-  locate exact textbook citations.
+- **Next:** perform clean-copy textbook citation check and final wording review
+  on `paper-updates.md` before any promotion.

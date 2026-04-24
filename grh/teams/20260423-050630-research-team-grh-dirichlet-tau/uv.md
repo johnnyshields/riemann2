@@ -16,15 +16,18 @@
   `agents/20260424-183416-verifier-slot-skeleton/report-sign-audit.md`;
   `agents/20260424-183416-verifier-slot-skeleton/report-compact-convergence-audit.md`;
   `agents/20260424-183416-explorer-background-multiplicity/report-background-split.md`;
-  `agents/20260424-183416-gap-compact-regularization/report-source-audit.md`.
+  `agents/20260424-183416-gap-compact-regularization/report-source-audit.md`;
+  `agents/20260424-183416-verifier-slot-skeleton/report-source-normalization-audit.md`;
+  `agents/20260424-183416-gap-compact-regularization/report-textbook-citation-pass.md`.
   Current role: immediate non-zeta frontier.
   Current reduction: compact zero-regularization is adversarially checked under
   standard primitive nonprincipal completed-function inputs; the current
-  `B_chi^pair` candidate is completed-Hadamard normalization with
-  `B_chi,comp^pair=0`. Remaining burden: replace source locators with exact
-  textbook citations and get adversarial source-normalization review that this
-  completed-zero statement does not double-count raw gamma/trivial-zero
-  bookkeeping.
+  accepted subclaim is completed-Hadamard normalization with
+  `B_chi,comp^pair=0`, provided `S_chi,comp^pair` sums all completed zeros and
+  raw gamma/trivial-zero/pole terms are kept in a separate remark. A staged
+  draft exists in `paper-updates.md`. Remaining burden: replace OCR/web source
+  locators with exact clean-copy textbook citations and run final wording
+  review before promotion.
 
 - **UV-017** - exact paired local `S(m)`-slot realization.
   Prove that the scalar `S_chi^pair(m)=q_chi^pair(m)-B_chi^pair(m)` from
@@ -76,5 +79,5 @@
   `agents/20260424-183416-verifier-slot-skeleton/report-sign-audit.md`;
   `notes/dirichlet_paired_source.md`;
   `paper/dirichlet_paired_source_candidate.tex`.
-  Current role: subgap of UV-016; convention chosen, source package rewrite
-  still needed.
+  Current role: subgap of UV-016; convention chosen and adversarially checked,
+  but live until the source-package rewrite actually installs the convention.
