@@ -949,3 +949,16 @@ Captured takeaway: `L_2N_0R_1` and `L_1N_0R_2` are not source-trivial, pure same
 - **Keep:** the finite square-root algebra route is valid only after actual source tables are supplied; it is not itself an `A_5`-gauge proof.
 - **Discard:** calling `L_2N_0R_1` or `L_1N_0R_2` pure same-point because `Y` is absent; the baseline mixed block `N_0` is an ordered matrix factor.
 - **Next:** derive the Stage 1 tagged source tables, feed the finite square-root algebra, and run determinant tests for all seven gates.
+
+### Dispatch 20260424-233157
+
+Issued two live follow-ups against the Stage 1 bottleneck.  Hilbert owns the
+derivation/table-generation lane under
+`agents/20260424-233157-gap-closer-UV026-stage1-source-tables/`.  Harvey owns
+the independent source/normalization audit under
+`agents/20260424-233157-verifier-source-UV026-stage1-normalization/`.
+
+Expected ledger destinations: actual source tables or a table-generation
+procedure go to `uv.md`/`attempts.md` and may seed `paper-updates.md` after
+verification; a normalization/source gap goes to `uv.md`; reusable guardrails go
+to `findings.md`; failed shortcuts go only to `attempts.md` unless reusable.

@@ -855,6 +855,57 @@ their owned dirs, do not edit ledgers or the paper, use the 9-field report
 schema plus autoresearch closing block and `Ledger destination`, and separate
 proved / conditional / missing.
 
+## Resume dispatch 20260424-233157
+
+Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260424-233157`.
+
+Base commit: `fe12710`.
+
+Coordinator status: UV-026 now has a complete seven-family cubic inventory.  No
+family is promoted.  The shared bottleneck is the Stage 1 finite normalized
+source-table theorem: ordinary `z`, pre-`\Phi_K`, source tags retained,
+`M_i^{[a]}=\operatorname{Gr}_a(\mathfrak D_Q\delta N_i^{\lin})`, and order-`<=7`
+tables for `G_\pm^{(0)}`, `N_0`, `\delta G_{i,\pm}^{\lin,[1/5]}`, and
+`M_i^{[1/5]}`.
+
+Roster:
+
+1. `gap-closer-UV026-stage1-source-tables` writes only under
+   `agents/20260424-233157-gap-closer-UV026-stage1-source-tables/`.
+   Task: derive, generate, or reduce the Stage 1 normalized source tables.  If
+   full tables are too large, produce the exact recurrence/input schema and the
+   smallest list of missing source coefficients.
+2. `verifier-source-UV026-stage1-normalization` writes only under
+   `agents/20260424-233157-verifier-source-UV026-stage1-normalization/`.
+   Task: independently source-audit the normalization, removable singularity
+   requirements, `\mathfrak D_Q` scaling, `N_0` availability, and acceptance
+   criteria for any claimed table theorem.
+
+Verifier queue: the source/normalization audit is running in parallel with the
+derivation lane.  Add an adversarial checker only after actual tables, a
+table-generation script, or a source-normal-form theorem is deposited.
+
+Ground-truth checks:
+
+- Evidence must stay before `\Phi_K`, determinant scalarization, quotient
+  extraction, and diagonal merger.
+- Stage 1 progress requires actual source-jet data, a source-supported
+  table-generation procedure, or a sharp source gap.  Formal square-root algebra
+  alone is already known and is not new progress.
+- Any proposed table package must feed `B_7^{\mathfrak f}=\pi_{\mathfrak f}[z^7]`
+  and the finite equations `S^2=G`, `BS=I` through order `7`.
+- Computational claims require scripts deposited before running in the owned
+  `scripts/` dir and cited with output in `report.md`.
+
+Non-goals: do not edit `rh/proof_of_rh.tex`; do not promote UV-024 or UV-026;
+do not replace the source-table theorem by a post-`\Phi_K` scalar or determinant
+chart argument.
+
+Protected surfaces and report contract are unchanged: agents write only under
+their owned dirs, do not edit ledgers or the paper, use the 9-field report
+schema plus autoresearch closing block and `Ledger destination`, and separate
+proved / conditional / missing.
+
 ## Resume dispatch 20260424-232207
 
 Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260424-232207`.
