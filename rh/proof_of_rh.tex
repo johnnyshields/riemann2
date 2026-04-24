@@ -2898,6 +2898,82 @@ diagonal merger, the coefficient \(B_7^{\mathfrak f}\), the quotient
 UV-024 and UV-026 obligations.
 \end{remark}
 
+\begin{remark}[Corrected package map for the two-point and mixed four-point frontiers]
+\label{rem:corrected-package-map-two-point-four-point}
+The current local frontier is best viewed as a single corrected package
+problem, not as two independent mixed-geometry problems.  The two-point mixed
+branch and the mixed four-point branch both require the same source-provenance
+package:
+\[
+\mathcal B_2
+\longrightarrow
+C_{\mathcal W}
+\longrightarrow
+B_7^{\mathfrak f}
+\longrightarrow
+Q_{7,m}^q
+\longrightarrow
+\mathcal H_7^q .
+\]
+Here \(\mathcal B_2\) is the tagged two-atom pre-whitening source block of
+Definition~\ref{def:tagged-two-atom-prewhitening-source-block},
+\(C_{\mathcal W}\) is the corrected-whitening matrix cross-effect before
+\(\Phi_K\) of
+Definition~\ref{def:raw-corrected-whitening-cross-effect},
+\(B_7^{\mathfrak f}\) is the pre-determinant fixed-sector order-\(7\)
+coefficient of
+Definition~\ref{def:package-level-order-7-quotient-extractor}, and
+\[
+Q_{7,m}^q(C):=[B_7^{\mathfrak f}(C)]
+\in
+\mathfrak f/\mathbf C A_5^{\mathfrak f}(m)
+\]
+is the fixed midpoint quotient class.  The normalized corrected package
+representative \(C_{\mathcal W}^{\corr}\) and its moving fixed-sector
+representative \(B_{\mathrm{pkg}}^{\mathfrak f}\) are defined in
+Section~\ref{sec:corrected-fixed-target-quotient-package}.
+
+For the two-point branch, the remaining source input is finite: prove swap
+symmetry, one-amplitude collapse, and diagonal merger for the actual corrected
+two-atom package.  Once these hold, the quadratic collision factorization
+\[
+\mathcal I_2=a_1a_2(h_1-h_2)^2\mathcal J_2
+\]
+is formal.  The role of the order-\(7\) quotient package is to make the
+corresponding septic quotient defect an actual fixed-target object rather than
+an uncontrolled two-atom mixed representative.
+
+For the mixed four-point branch, the current reduction says that a genuinely
+mixed clean branch cannot persist independently in the region
+\[
+\{T_v\ne0\}\cap\{\mathcal R\ne0\}.
+\]
+Thus every clean mixed branch must exit through one of the scalar walls
+\[
+T_v=0
+\qquad\text{or}\qquad
+\mathcal R=0.
+\]
+The package theorem is needed to prevent the corrected source cross-effect
+from creating a new non-scalar fixed-sector direction in the quotient
+\[
+\mathfrak f/\mathbf C A_5^{\mathfrak f}(m).
+\]
+
+Consequently, the local target is not a scalarized identity after \(\Phi_K\).
+It is the pre-\(\Phi_K\), pre-determinant quotient-gauge statement
+\[
+B_7^{\mathfrak f}
+\bigl((1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\corr}\bigr)
+\in
+\mathbf C A_5^{\mathfrak f}(m).
+\]
+If this package theorem is proved, the residual two-point mixed obstruction is
+absorbed into the midpoint quotient edge package, and the mixed four-point
+source-coupled walls have no independent clean local carrier beyond the scalar
+exits above.
+\end{remark}
+
 \begin{corollary}[Single-pair exterior odd-coefficient bound]
 \label{cor:single-pair-odd-jet}
 Fix $0<c_*<\rho_0/8$. Let $h_\rho(s)$ be the corrected transverse scalar
@@ -12711,6 +12787,170 @@ the missing data are the coefficient lists
 [z^s]M_i^{[5]},
 \]
 together with the two displayed determinant identities.
+\end{remark}
+
+\begin{definition}[Homogeneous scalar grade]
+\label{def:homogeneous-scalar-grade}
+For a residual scalar source \(r\), define
+\[
+\operatorname{Gr}_a r
+:=
+\frac{r^{(a+2)}(m)}{(a+2)!}(t-m)^{a+2}.
+\]
+Thus grade \(1\) corresponds to the cubic scalar jet \(r^{(3)}(m)\), and
+grade \(5\) corresponds to the septic scalar jet \(r^{(7)}(m)\).
+\end{definition}
+
+\begin{lemma}[\(Y\)-slot families are absent at \(B_7\) under homogeneous grade]
+\label{lem:y-slot-families-absent-homogeneous-grade}
+Under Definition~\ref{def:homogeneous-scalar-grade}, the \(Y\)-slot cubic
+families
+\[
+L_1YR_1,\qquad
+L_2YR_0,\qquad
+L_0YR_2
+\]
+do not contribute to \(B_7^{\mathfrak f}\).
+
+More precisely, the homogeneous grade-five mixed input associated to
+\(\operatorname{Gr}_5 r\) has no ordinary \(z^5\) middle coefficient in the
+mixed block; its first possible mixed contribution occurs too late to combine
+with the corresponding first- or second-Fr\'echet same-point factors at total
+ordinary order \(7\).  Consequently the three \(Y\)-slot families above start
+at ordinary order at least \(8\).
+\end{lemma}
+
+\begin{remark}[Scope of Lemma~\ref{lem:y-slot-families-absent-homogeneous-grade}]
+\label{rem:scope-y-slot-absence-homogeneous-grade}
+Lemma~\ref{lem:y-slot-families-absent-homogeneous-grade} is an order-count
+absence theorem, not a determinant-proportionality theorem.  It is scoped to
+the homogeneous scalar grade convention.  If a future theorem defines
+\(M^{[5]}\) instead as an ordinary matrix-output order-\(5\) projection, or
+as a parity-corrected non-homogeneous source projection, then the \(Y\)-slot
+families must be reopened and audited separately.  Such a convention also
+requires a no-double-counting theorem against the natural grade \(0,2,4\)
+same-point shadows.
+\end{remark}
+
+\begin{remark}[Quarantined matrix-output \(M^{[5]}\) convention]
+\label{rem:quarantined-matrix-output-M5-convention}
+A nonzero ordinary matrix-output order-\(5\) convention for \(M^{[5]}\) is
+not the active homogeneous scalar-grade convention.  If such a convention is
+later introduced, then the \(Y\)-slot families
+\[
+L_1YR_1,\qquad L_2YR_0,\qquad L_0YR_2
+\]
+must be reopened.  That route requires a no-double-counting theorem
+separating the ordinary matrix-output order-\(5\) contribution from the
+natural homogeneous scalar grades \(0,2,4\), whose source derivatives also
+have same-point shadows.  The earlier raw-seven-family numerical failure
+recorded in Remark~\ref{rem:computational-status-raw-package} rejects the raw
+matrix-output shortcut; it does not reject the homogeneous scalar-grade gate
+of Lemma~\ref{lem:y-slot-families-absent-homogeneous-grade} or the
+corrected package representative of
+Section~\ref{sec:corrected-fixed-target-quotient-package}.
+\end{remark}
+
+\begin{remark}[First live non-\(Y\) cubic gate]
+\label{rem:first-live-non-y-cubic-gate}
+After Lemma~\ref{lem:y-slot-families-absent-homogeneous-grade}, the first live
+homogeneous cubic gate is
+\[
+L_2N_0R_1
+\qquad\text{and}\qquad
+L_1N_0R_2.
+\]
+Order counting does not remove this gate, because the baseline mixed block
+has a nonzero zeroth coefficient \(N_0[0]\).  The two relevant placements
+land exactly at ordinary order \(7\):
+\[
+2+0+5=7,
+\qquad
+6+0+1=7.
+\]
+
+The required leading coefficients are
+\[
+[z^2]\mathcal L_-^{\{1,1\}},
+\qquad
+[z^6]\mathcal L_-^{\{1,5\}},
+\]
+\[
+[z^2]\mathcal R_+^{\{1,1\}},
+\qquad
+[z^6]\mathcal R_+^{\{1,5\}},
+\]
+\[
+N_0[0],
+\qquad
+[z^1]\Lambda_\pm^{[1]},
+\qquad
+[z^5]\Lambda_\pm^{[5]}.
+\]
+From these one forms the four tag vectors
+\[
+C_{112}^{L_2N_0R_1},
+\qquad
+C_{122}^{L_2N_0R_1},
+\qquad
+C_{112}^{L_1N_0R_2},
+\qquad
+C_{122}^{L_1N_0R_2}.
+\]
+If a candidate fixed-sector vector is \(uI+vS\), its quotient-gauge test is
+\[
+uv_5-u_5v=0,
+\qquad
+A_5^{\mathfrak f}(m)=u_5I+v_5S.
+\]
+These four determinant identities are the leading-coefficient fixed-sector
+test for the live \(L_2N_0R_1/L_1N_0R_2\) gate.
+\end{remark}
+
+\begin{remark}[Current UV chain and status]
+\label{rem:current-uv-chain-and-status}
+The current package chain is as follows.
+
+\begin{enumerate}
+\item \textbf{UV-022.} Define an invariant source-weight-linear input for the
+corrected block and obtain exact one-amplitude collapse at the package level.
+
+\item \textbf{UV-023.} Prove the order-\(7\) quotient component of the
+corrected-whitening cross-effect has zero first collision derivative after
+source-weight linearization, either because only the quadratic homogeneous
+transfer contributes or because higher homogeneous transfers are quotient
+invisible through order \(7\).
+
+\item \textbf{UV-024.} Define the pre-determinant fixed-sector coefficient
+\[
+B_7^{\mathfrak f}(C)
+\]
+for the actual corrected-whitening matrix cross-effect before \(\Phi_K\), and
+define
+\[
+Q_{7,m}^q(C):=[B_7^{\mathfrak f}(C)]
+\in
+\mathfrak f/\mathbf C A_5^{\mathfrak f}(m).
+\]
+
+\item \textbf{UV-025.} Supply the tagged pre-whitening source block of
+Definition~\ref{def:tagged-two-atom-prewhitening-source-block}.  This is now
+a guarded source-level input, not a quotient theorem.
+
+\item \textbf{UV-026.} Prove the non-\((1,1)\) cubic fixed-sector gauge
+theorem for the actual corrected package.  Under the homogeneous scalar
+grade, the \(Y\)-slot families are absent at \(B_7\)
+(Lemma~\ref{lem:y-slot-families-absent-homogeneous-grade}); the active gate
+is the non-\(Y\) leading-coefficient test for \(L_2N_0R_1/L_1N_0R_2\) of
+Remark~\ref{rem:first-live-non-y-cubic-gate}, followed by the
+all-left/all-right \(L_3N_0R_0/L_0N_0R_3\) audit.
+\end{enumerate}
+
+Shortcut proofs using \(\Phi_K\)-scalar hiding, determinant scalarization,
+swap symmetry, one-pair gauge, or the UV-025 source block alone do not prove
+UV-026.  The theorem must be proved at the pre-\(\Phi_K\), pre-determinant
+fixed-sector quotient level of
+Section~\ref{sec:corrected-fixed-target-quotient-package}.
 \end{remark}
 
 \begin{remark}[What remains in the two-pair rewrite]
