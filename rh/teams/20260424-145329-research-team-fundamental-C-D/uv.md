@@ -97,8 +97,14 @@ Working forward-carry of the current open UV items relevant to the active queue.
   `M_i^{[5]}` is a conditional placeholder until a theorem states whether `[5]`
   is a source-grade label whose mixed series may start away from `z^5`, an
   actual ordinary-`z` order-5 projection, or a parity-corrected non-homogeneous
-  source projection.  UV-026 now needs that convention or a proof that the
-  `L_1YR_1` middle input is absent at `B_7`.
+  source projection.  The scalar-grade shortcut that moves
+  `r^{(2)},r^{(4)},r^{(6)}` into grade `5` is rejected from current bookkeeping:
+  those pieces naturally occupy grades `0,2,4` and have same-point shadows in
+  those orders.  A surviving convention must either define `M_i^{[5]}` as a
+  mixed matrix order-5 projection, or prove a no-double-counting
+  parity-corrected source projection compatible with the seven-family inventory.
+  UV-026 now needs that convention or a proof that the `L_1YR_1` middle input is
+  absent at `B_7`.
   Gate subtargets: compute determinant identities against
   `A_5^{\mathfrak f}(m)` for all seven classified cubic families:
   `L_1YR_1`; `L_3N_0R_0` and `L_0N_0R_3`; `L_2YR_0` and `L_0YR_2`;

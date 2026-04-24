@@ -1,0 +1,120 @@
+{
+  "scope": "pre-Phi_K ordinary-z grade conflict audit for UV-026 M_i^[5]",
+  "input_facts": {
+    "transpose_parity": "M(-z)=M(z)^T",
+    "z5_M_support": [
+      "r^2",
+      "r^4",
+      "r^6"
+    ],
+    "homogeneous_r7_candidate": "[z^5]M=0; first mixed order is 6"
+  },
+  "derivative_rows": [
+    {
+      "source_derivative": "r^2",
+      "natural_grade_if_grade_is_lowest_order": 0,
+      "same_point_deltaG_lowest_order": 0,
+      "mixed_M_lowest_order": 0,
+      "mixed_lowest_channel": "diagonal M22",
+      "can_contribute_to_z5_M_by_parity_theorem": true,
+      "odd_mixed_powers_possible_for_this_derivative": true,
+      "conflict_if_assigned_to_M_grade_5": true
+    },
+    {
+      "source_derivative": "r^3",
+      "natural_grade_if_grade_is_lowest_order": 1,
+      "same_point_deltaG_lowest_order": 1,
+      "mixed_M_lowest_order": 2,
+      "mixed_lowest_channel": "off-diagonal after M22 cancellation",
+      "can_contribute_to_z5_M_by_parity_theorem": false,
+      "odd_mixed_powers_possible_for_this_derivative": false,
+      "conflict_if_assigned_to_M_grade_5": false
+    },
+    {
+      "source_derivative": "r^4",
+      "natural_grade_if_grade_is_lowest_order": 2,
+      "same_point_deltaG_lowest_order": 2,
+      "mixed_M_lowest_order": 2,
+      "mixed_lowest_channel": "diagonal M22",
+      "can_contribute_to_z5_M_by_parity_theorem": true,
+      "odd_mixed_powers_possible_for_this_derivative": true,
+      "conflict_if_assigned_to_M_grade_5": true
+    },
+    {
+      "source_derivative": "r^5",
+      "natural_grade_if_grade_is_lowest_order": 3,
+      "same_point_deltaG_lowest_order": 3,
+      "mixed_M_lowest_order": 4,
+      "mixed_lowest_channel": "off-diagonal after M22 cancellation",
+      "can_contribute_to_z5_M_by_parity_theorem": false,
+      "odd_mixed_powers_possible_for_this_derivative": false,
+      "conflict_if_assigned_to_M_grade_5": false
+    },
+    {
+      "source_derivative": "r^6",
+      "natural_grade_if_grade_is_lowest_order": 4,
+      "same_point_deltaG_lowest_order": 4,
+      "mixed_M_lowest_order": 4,
+      "mixed_lowest_channel": "diagonal M22",
+      "can_contribute_to_z5_M_by_parity_theorem": true,
+      "odd_mixed_powers_possible_for_this_derivative": true,
+      "conflict_if_assigned_to_M_grade_5": true
+    },
+    {
+      "source_derivative": "r^7",
+      "natural_grade_if_grade_is_lowest_order": 5,
+      "same_point_deltaG_lowest_order": 5,
+      "mixed_M_lowest_order": 6,
+      "mixed_lowest_channel": "off-diagonal after M22 cancellation",
+      "can_contribute_to_z5_M_by_parity_theorem": false,
+      "odd_mixed_powers_possible_for_this_derivative": false,
+      "conflict_if_assigned_to_M_grade_5": false
+    }
+  ],
+  "even_derivatives_supporting_z5M": [
+    "r^2",
+    "r^4",
+    "r^6"
+  ],
+  "conflicting_assignments_to_scalar_grade5": [
+    {
+      "source_derivative": "r^2",
+      "natural_grade": 0,
+      "same_point_lowest_order": 0,
+      "mixed_lowest_order": 0
+    },
+    {
+      "source_derivative": "r^4",
+      "natural_grade": 2,
+      "same_point_lowest_order": 2,
+      "mixed_lowest_order": 2
+    },
+    {
+      "source_derivative": "r^6",
+      "natural_grade": 4,
+      "same_point_lowest_order": 4,
+      "mixed_lowest_order": 4
+    }
+  ],
+  "readings": {
+    "source_grade_label": {
+      "verdict": "conflict unless a new non-homogeneous grade theorem moves or duplicates lower natural grades",
+      "reason": "r^2,r^4,r^6 naturally occupy grades 0,2,4 and their same-point deltaG pieces start in orders 0,2,4, not grade 5."
+    },
+    "actual_ordinary_z_order_5_projection": {
+      "verdict": "conditionally coherent as a matrix-output projection, not as a scalar source grade",
+      "reason": "It may define the coefficient [z^5] of the full scaled mixed input, but then M^[5] is not Gr_5 r and cannot supply deltaG^[5] source data."
+    },
+    "parity_corrected_nonhomogeneous_source_projection": {
+      "verdict": "possible only with explicit compatibility conditions",
+      "reason": "A projection using r^2,r^4,r^6 must state how it avoids double-counting grades 0,2,4 and how its same-point low-order shadows are excluded or reclassified."
+    }
+  },
+  "acceptance_checklist": [
+    "State whether [5] is a source-grade label, an actual z^5 matrix projection, or a non-homogeneous parity-corrected projection.",
+    "If [5] is scalar source grade, prove r^2,r^4,r^6 are removed from or consistently shared with grades 0,2,4.",
+    "If [5] is z^5 matrix projection, rename or define it as a mixed-output coefficient, not Gr_5 r.",
+    "If non-homogeneous, prove source tags remain linear and same-point low-order shadows do not enter Lambda^[1] or unlisted cubic families.",
+    "Update or prove compatibility with the seven-family inventory before determinant/gauge tests."
+  ]
+}

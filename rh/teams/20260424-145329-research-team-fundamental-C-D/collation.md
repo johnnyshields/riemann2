@@ -1255,3 +1255,31 @@ has SHA1 `1C227B17F1EDFBED6D8A9E74A9D7C11AB9D4BAD1`.
 - **Next:** send one lane to build the parity-corrected grade convention and
   one lane to adversarially test whether moving `r^{(2)},r^{(4)},r^{(6)}` into
   grade five conflicts with grade-0/2/4 bookkeeping.
+
+### `20260425-003100-verifier-adversarial-UV026-parity-grade-conflicts/report.md`
+
+Signal: UV-026 parity-grade conflict audit, keep.
+
+Captured takeaway: moving `r^{(2)},r^{(4)},r^{(6)}` into scalar grade five is
+not source-supported under current bookkeeping.  Those derivatives naturally
+occupy grades `0,2,4` and have same-point `\delta G` shadows in those orders.
+The route survives only if `M_i^{[5]}` is explicitly redefined as an actual
+ordinary-`z` mixed-output order-5 projection, or as a new parity-corrected
+non-homogeneous projection with a no-double-counting theorem and a revised
+seven-family inventory.  The audit script
+`agents/20260425-003100-verifier-adversarial-UV026-parity-grade-conflicts/scripts/parity_grade_conflict_audit.py`
+has SHA1 `33F181B288C21217D5394F4D71AC694F6A3DB578`; output
+`notes/parity_grade_conflict_audit.json` has SHA1
+`687BDDB4A41B5F95C41BDA778F7572F4F8C20C7F`.
+
+### Frontier after parity-grade conflict audit
+
+- **Current best:** positive route is no longer "define scalar `Gr_5` from even
+  derivatives."  The clean surviving theorem is a matrix-output order-5
+  projection for `M_i^{[5]}`, with separate scalar source grades for same-point
+  factors, or else `L_1YR_1` must be declared absent at `B_7`.
+- **Keep:** no-double-counting and seven-family inventory compatibility are
+  now explicit acceptance gates.
+- **Next:** wait for Hilbert's constructive convention attempt, then classify
+  it as matrix-order projection, non-homogeneous source projection, or absence
+  theorem.
