@@ -77,6 +77,8 @@ Working forward-carry of the current open UV items relevant to the active queue.
   for `k>=2`, but still lacks a scalar grade-projection theorem defining
   `Gr_1 r_i`, `Gr_5 r_i`, its compatibility with affine removal, and whether
   grade `5` means the `q^{(5)}/X_3`, `q^{(7)}/X_5`, or another mixed-block slice.
+  Do not import `\eta_2/X_1`, `q^{(5)}/X_3`, or `q^{(7)}/X_5` matrix witnesses
+  as scalar grades without that source theorem.
   Gate subtargets: compute determinant identities against
   `A_5^{\mathfrak f}(m)` for all seven classified cubic families:
   `L_1YR_1`; `L_3N_0R_0` and `L_0N_0R_3`; `L_2YR_0` and `L_0YR_2`;

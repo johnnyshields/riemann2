@@ -173,7 +173,9 @@ Active, compact knowledge base shared with every delegated agent.
   Verifier reruns reproduce the manifest exactly and accept the generator only
   as infrastructure.  Ungraded rational source jets are available from the
   displayed `f_{\beta,\gamma}` formula, but the scalar `Gr_1/Gr_5` projection
-  and actual determinant gates remain missing.
+  and actual determinant gates remain missing; matrix witness slices
+  `\eta_2/X_1`, `q^{(5)}/X_3`, and `q^{(7)}/X_5` cannot define scalar grades
+  without a source theorem.
 
 ## Recurring open gaps
 

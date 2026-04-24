@@ -1067,3 +1067,16 @@ Harvey owns the source-audit convention lane under
 Expected ledger destinations: a valid projection definition or sharper missing
 theorem goes to `uv.md`/`attempts.md`; a reusable shortcut rejection goes to
 `findings.md` if it should brief future agents; otherwise route attempts only.
+
+### `20260424-235843-verifier-source-UV026-grade-convention/report.md`
+
+Signal: UV-026 scalar grade-convention source audit, keep.
+
+Captured takeaway: current source does not justify identifying scalar
+`Gr_5 r_i` with either the `q^{(5)}/X_3` quintic witness slice or the
+`q^{(7)}/X_5` direct septic slice, and does not justify scalar `Gr_1 r_i` as
+the `\eta_2/X_1` off-diagonal slice before whitening.  These are matrix-slice
+facts in witness computations, not scalar grade projections in the pre-`\Phi_K`,
+`B_7^{\mathfrak f}` normalization.  Future use requires a scalar projection
+theorem proving compatibility with affine removal, `\mathfrak D_Q`, and
+`M_i^{[5]}`.
