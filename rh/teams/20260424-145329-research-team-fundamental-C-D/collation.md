@@ -764,3 +764,16 @@ Captured takeaway: the candidate `\mathcal B_2` block passes source check within
 - **Current best:** source-verified candidate block; adversarial overclaim check still pending.
 - **Keep:** exact source refs for `paper-updates.md`.
 - **Next:** wait for adversarial verifier before staging the guarded definition block.
+
+### `20260424-195414-verifier-adversarial-UV025-B2-overclaim/report.md`
+
+Signal: UV-025 adversarial overclaim verifier, keep.
+
+Captured takeaway: the `\mathcal B_2` candidate is safe as a UV-025 paper-updates block if caveated precisely. It must be called a new tagged pre-whitening source-block definition; tags `\tau_1,\tau_2` must remain until after `\operatorname{Lin}_{\mathcal K}`; `\mathcal K` is pair-kernel degree, not `\Pi_{1,1}` or a source-bidegree quotient theorem; and no UV-024/UV-026 closure is claimed. Required wording fix: replace "Forgetting the tags gives..." with "After the tagged `\mathcal K`-linear projection is taken, applying the augmentation `\tau_1,\tau_2\mapsto1` gives..."
+
+### Frontier after UV-025 verifier pair
+
+- **Current best:** UV-025 has a guarded source/adversarial-verified `paper-updates.md` block.
+- **Keep:** staged definition/theorem only; do not remove UV-025 until the canonical paper edit is applied and checked.
+- **Discard:** any wording that treats `\mathcal B_2` as already supplied by quotient-output package language or claims UV-024/UV-026 progress.
+- **Next:** apply/review the staged paper update in the next coordinator edit pass, then return to UV-026.

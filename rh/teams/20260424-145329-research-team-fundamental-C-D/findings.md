@@ -171,9 +171,9 @@ Active, compact knowledge base shared with every delegated agent.
   by one-pair formulas. The best `Q_7^q` target is
   `[B_7^{\mathfrak f}(C)]\in\mathfrak f/\mathbf C A_5^{\mathfrak f}(m)`.
   Conditional matrix `C_{\mathcal W}` and `B_7^{\mathfrak f}` are definition-ready
-  once the actual source-linear two-atom block exists. UV-025 has a source-
-  verified tagged pre-whitening `\mathcal B_2` block awaiting adversarial
-  overclaim review; UV-026 asks for cubic `(1,1,5)` `A_5^{\mathfrak f}`-gauge.
+  once the actual source-linear two-atom block exists. UV-025 has source and
+  adversarial verification for a guarded `paper-updates.md` definition block;
+  UV-026 asks for cubic `(1,1,5)` `A_5^{\mathfrak f}`-gauge.
 
 ## Recurring open gaps
 
