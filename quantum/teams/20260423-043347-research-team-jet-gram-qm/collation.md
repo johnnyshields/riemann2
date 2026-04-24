@@ -152,3 +152,18 @@ not treated as a blocker for UV-013.
 
 Remaining open UVs: UV-014 (natural dynamical/experimental protocol) and UV-015
 (nonbenchmark genericity).
+
+## Gap return - UV-014
+
+`agents/20260424-192133-gap-natural-protocol/report.md` proposes a positive
+closure for UV-014 under coherent reflection access. For endpoint projectors
+\(\Pi_\pm\), define \(R_\pm=2\Pi_\pm-I\). On each principal two-plane, the
+unitary \(R_-R_+\) has eigenphases \(\pm2\theta_i\), so phase estimation or
+alternating-reflection dynamics estimates the principal-angle spectrum. This is
+stronger operationally than the one-shot yes/yes test, but it recovers the same
+canonical endpoint operator data rather than a new invariant or matrix.
+
+Provisional verdict: keep pending adversarial verification. The verifier should
+check the coherent-reflection access assumption, the principal-plane sign
+convention, and the wording boundary between "natural protocol" and "new
+invariant."
