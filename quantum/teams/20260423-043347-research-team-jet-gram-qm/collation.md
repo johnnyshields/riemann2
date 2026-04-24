@@ -184,3 +184,24 @@ existing principal-angle/operator package, not a new invariant, matrix
 representative, or universal Hamiltonian model.
 
 Remaining open UV: UV-015 (nonbenchmark genericity).
+
+## Gap return - UV-015
+
+`agents/20260424-193527-gap-nonbenchmark-genericity/report.md` gives a
+finite-jet genericity theorem for first-order value-channel-free data. For
+normalized \(C^2\) curves in dimension at least \(3\), the local independence of
+endpoint overlap and the `O_1` line-angle scalar is detected by an endpoint
+2-jet determinant \(\Delta\). The report proves that \(\Delta\ne0\) is an open
+dense condition on the admissible endpoint 2-jet chart, with pullback versions
+for submersive finite-dimensional curve families and non-identically-zero
+analytic/algebraic families.
+
+The report includes `scripts/verify_o1_jet_determinant.py`; rerun locally, it
+checks the normalized seed constraints and returns `C = 1/2`,
+`Delta = 1/4*sqrt(2)`, with SHA256
+`9290A89C67780A4D35DC3B5E19892B1135E39B643170D2B55F55D2CA6680FD13`.
+
+Provisional verdict: keep pending adversarial verification. The verifier should
+check the determinant formula, the endpoint-jet interpolation/density step, and
+the scope caveats: first-order `O_1`, real-open-dense complex interpretation,
+and no blanket claim for all higher `O_r/A_r` observables.
