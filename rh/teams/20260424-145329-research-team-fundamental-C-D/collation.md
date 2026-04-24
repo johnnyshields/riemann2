@@ -1106,3 +1106,15 @@ pre-whitening formulas.
 - **Next:** test a mixed-order filtration where grade `a` means first scaled
   mixed order `a`, then audit whether it also supplies the same-point Frechet
   grade inputs.
+
+### Dispatch 20260425-000623
+
+Issued two follow-ups.  Hilbert owns the mixed-order filtration compatibility
+test under `agents/20260425-000623-gap-closer-UV026-mixed-order-filtration/`.
+Harvey owns the independent baseline `q_0` jet source audit under
+`agents/20260425-000623-verifier-source-UV026-baseline-q0-jets/`.
+
+Expected ledger destinations: a mixed-order theorem or obstruction goes to
+`uv.md`/`attempts.md`; a baseline `q_0` source theorem or missing substatement
+goes to `uv.md`/`attempts.md`; reusable negatives may require compacting
+`findings.md` first because it is near the 200-line limit.

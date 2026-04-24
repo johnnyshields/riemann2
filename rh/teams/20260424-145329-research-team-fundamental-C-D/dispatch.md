@@ -922,6 +922,31 @@ Ground-truth checks:
   rejected from a stated shortcut only.
 - No paper promotion unless a verified theorem statement emerges.
 
+## Resume dispatch 20260425-000623
+
+Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260425-000623`.
+
+Base commit: `2e29dc0`.
+
+Coordinator status: `q^{(5)}/X_3` is rejected for UV-026 `M^{[5]}` if grade
+means finite mixed order; `q^{(7)}/X_5` is the only source-compatible
+grade-five candidate, still unpromoted.  Stage 1 now has two independent
+blockers: the scalar mixed-order projection and the baseline `q_0` jet theorem.
+
+Roster:
+
+1. `gap-closer-UV026-mixed-order-filtration` writes only under
+   `agents/20260425-000623-gap-closer-UV026-mixed-order-filtration/`.
+   Task: test whether the mixed-order scalar filtration also supplies the
+   same-point Frechet grade inputs consistently.
+2. `verifier-source-UV026-baseline-q0-jets` writes only under
+   `agents/20260425-000623-verifier-source-UV026-baseline-q0-jets/`.
+   Task: independently source-audit whether the baseline derivatives
+   `q_0^{(k)}(m)`, `0<=k<=9`, are defined/formulaic in the same normalization.
+
+Ground-truth checks: no scale estimates as coefficient tables; stay
+pre-`\Phi_K`; no paper promotion.
+
 ## Resume dispatch 20260424-233157
 
 Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260424-233157`.
