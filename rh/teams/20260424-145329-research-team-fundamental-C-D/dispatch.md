@@ -737,3 +737,64 @@ Ground-truth checks:
 
 Protected surfaces are unchanged: agents write only to
 `agents/20260424-200718-<slug>/`.
+
+## Resume dispatch 20260424-201525
+
+Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260424-201525`.
+
+Base commit: `c32c5cc`.
+
+Current target: UV-026, immediate `L_1YR_1` subtarget. The last lane reduced
+`L_1YR_1=D(G_-^{-1/2})[X_-]\,Y\,D(G_+^{-1/2})[X_+]` to the actual grade
+`1/5/1` pre-`\Phi_K` fixed-sector product data. Formal Loewner algebra alone
+does not force proportionality to `A_5^{\mathfrak f}(m)`.
+
+Roster:
+
+1. `gap-closer-UV026-L1YR1-actual-matrices` writes only under
+   `agents/20260424-201525-gap-closer-UV026-L1YR1-actual-matrices/`.
+   Task: extract the actual matrix entries, or reduce to the smallest missing
+   displayed source formula, for
+   `L_{-,1}^{[1]}Y_1^{[5]}R_{+,2}^{[1]}+
+   L_{-,1}^{[1]}Y_2^{[5]}R_{+,1}^{[1]}+
+   L_{-,2}^{[1]}Y_1^{[5]}R_{+,1}^{[1]}` and the swapped tag expression.
+2. `source-auditor-UV026-L1YR1-matrix-provenance` writes only under
+   `agents/20260424-201525-source-auditor-UV026-L1YR1-matrix-provenance/`.
+   Task: independently audit whether the needed grade `1/5/1` source matrices
+   are already encoded in the cited paper sections or staged UV-025 block under
+   different notation, and state proved / conditional / missing.
+
+In-scope files and prior reports:
+
+- `rh/proof_of_rh.tex` lines 1392--2048, 2324--2587, 2659--2787,
+  6976--7295, and 7742--8033.
+- `rh/teams/20260424-145329-research-team-fundamental-C-D/findings.md`.
+- `rh/teams/20260424-145329-research-team-fundamental-C-D/uv.md`, UV-026 only.
+- `rh/teams/20260424-145329-research-team-fundamental-C-D/paper-updates.md`
+  lines 21, 97, and 131.
+- `agents/20260424-200220-gap-closer-UV026-cubic-source-terms/report.md`.
+- `agents/20260424-200718-gap-closer-UV026-L1YR1-coefficient/report.md`.
+- `agents/20260424-200718-verifier-adversarial-UV026-L1YR1-gauge/report.md`.
+
+Ground-truth checks:
+
+- Evidence must stay before `\Phi_K`, determinant scalarization, quotient
+  extraction, and diagonal merger.
+- A positive return needs an explicit fixed-sector vector
+  `\pi_{\mathfrak f}[z^7](L_1YR_1)=uI+vS` for the actual non-`(1,1)` source
+  tags, plus the determinant check `uv_5-u_5v=0` against the matching
+  `A_5^{\mathfrak f}(m)=u_5I+v_5S`.
+- A negative or blocked return must identify the exact source formula or
+  coefficient theorem missing; `unsupported` is acceptable if precise.
+- Computational claims require scripts deposited before running in the owned
+  `scripts/` dir and cited with output in `report.md`.
+
+Protected surfaces: agents must not edit `rh/proof_of_rh.tex`, `findings.md`,
+`uv.md`, `attempts.md`, `attempts.tsv`, `paper-updates.md`, `dispatch.md`,
+`collation.md`, `AGENTS.md`, `lore/`, or another agent's directory. Reports,
+scripts, and notes go only in the owned agent dirs above.
+
+Report contract: use the 9-field schema from `AGENTS.md`, include the
+autoresearch closing block and `Ledger destination`, and separate proved /
+conditional / missing. Non-goal: do not promote UV-024, UV-025, or UV-026, and
+do not edit the canonical paper.
