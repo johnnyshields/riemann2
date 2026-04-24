@@ -640,3 +640,16 @@ Captured takeaway: source tags and `\Pi_{1,1}` are formally clean once a source-
 - **Current best:** UV-023 reduces to defining `L_h` as the pair-kernel-linear corrected-block perturbation functor before whitening, then proving source-bidegree quotient compatibility.
 - **Keep:** formal source tags / `\Pi_{1,1}` mechanism.
 - **Next:** wait for the adversarial projection verifier, then attack the definition-level lemma for `L_h`.
+
+### `20260424-191517-verifier-adversarial-UV023-projection/report.md`
+
+Signal: UV-023 adversarial projection verifier, keep.
+
+Captured takeaway: UV-023 cannot be promoted by applying `(1,1)` projection after quotient extraction or determinant scalarization. The verifier's harness shows source tags are lost after determinant scalarization, a nonlinear quotient/scalar extraction need not commute with projection, finite-order grading still admits cubic septic witnesses of type `(1,1,5)`, and diagonal value cancellation does not imply `\delta^2` divisibility. The positive target is therefore the full source-bidegree quotient-compatibility package: source-linear `X^{[1]}`, pre-quotient `\Pi_{1,1}`, fixed-target pre-determinant `Q_7^q`, and `Q_7^q((1-\Pi_{1,1})C)=0`.
+
+### Frontier after adversarial projection pass
+
+- **Current best:** the formal `(1,1)` projection route survives only as a pre-quotient, pre-determinant theorem.
+- **Keep:** define the source-linear corrected-block input and fixed-target quotient extractor before any scalarization.
+- **Discard:** post-hoc projection, determinant scalarization as a definition, finite-order grading alone, diagonal merger, and downstream package coincidence as UV-023 proofs.
+- **Next:** attack `Q_7^q` itself as a quotient-valued coefficient extractor and test linearity over the source-tag decomposition.

@@ -167,12 +167,15 @@ Active, compact knowledge base shared with every delegated agent.
   Provenance: UV-022 cross-effect reports plus
   `agents/20260424-190438-gap-closer-UV023-transfer-filtration/report.md` and
   `agents/20260424-190438-verifier-source-UV023-filtration/report.md`, sharpened
-  by `agents/20260424-190928-gap-closer-UV023-bidegree-projection/report.md`.
+  by `agents/20260424-190928-gap-closer-UV023-bidegree-projection/report.md`,
+  `agents/20260424-191517-gap-closer-UV023-source-tags/report.md`, and
+  `agents/20260424-191517-verifier-adversarial-UV023-projection/report.md`.
   Usage: `(1,1)` projection kills `\mathcal T_{p\ge3}` formally, but promotion
   needs source-defined pair-kernel-linear `L_h` / `X^{[1]}`, projector
-  `\Pi_{1,1}`, fixed-target `Q_7^q`, and proof that `Q_7^q` kills non-`(1,1)`
-  source bidegrees; `\mathfrak D_Q` scaling and finite-order grading alone
-  still allow cubic witnesses.
+  `\Pi_{1,1}`, fixed-target pre-determinant `Q_7^q`, and proof that
+  `Q_7^q` kills non-`(1,1)` source bidegrees; post-hoc projection, determinant
+  scalarization, `\mathfrak D_Q` scaling, and finite-order grading alone still
+  allow cubic witnesses.
 
 ## Recurring open gaps
 
