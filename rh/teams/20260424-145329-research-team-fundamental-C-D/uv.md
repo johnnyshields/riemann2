@@ -65,7 +65,9 @@ Working forward-carry of the current open UV items relevant to the active queue.
   must display order-`<=7` tables for `G_\pm^{(0)}`, `N_0`,
   `\delta G_{i,\pm}^{\lin,[1/5]}`, and `M_i^{[1/5]}`, then derive the
   first/second/third Frechet inverse-square-root tables from `S^2=G` and
-  `BS=I`.
+  `BS=I`.  The source theorem must state the raw-vs-`\mathfrak D_Q` convention
+  for same-point Frechet inputs and prove the mixed-block removable-singularity
+  expansion before coefficient extraction.
   Gate subtargets: compute determinant identities against
   `A_5^{\mathfrak f}(m)` for all seven classified cubic families:
   `L_1YR_1`; `L_3N_0R_0` and `L_0N_0R_3`; `L_2YR_0` and `L_0YR_2`;

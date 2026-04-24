@@ -165,7 +165,9 @@ Active, compact knowledge base shared with every delegated agent.
   UV-026 has a complete seven-family cubic inventory, but no family is
   promoted: `L_1YR_1`, all-left/all-right, second-Frechet-with-`Y`, and
   second-Frechet-with-`N_0` gates all reduce to the same finite normalized
-  source-table theorem plus fixed-sector determinant tests.
+  source-table theorem plus fixed-sector determinant tests.  Acceptance requires
+  ordinary-`z` tagged tables, explicit `\mathfrak D_Q` conventions, and
+  mixed-block removable-singularity expansions before coefficient extraction.
 
 ## Recurring open gaps
 

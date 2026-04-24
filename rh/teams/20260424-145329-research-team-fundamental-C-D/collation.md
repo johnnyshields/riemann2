@@ -962,3 +962,19 @@ Expected ledger destinations: actual source tables or a table-generation
 procedure go to `uv.md`/`attempts.md` and may seed `paper-updates.md` after
 verification; a normalization/source gap goes to `uv.md`; reusable guardrails go
 to `findings.md`; failed shortcuts go only to `attempts.md` unless reusable.
+
+### `20260424-233157-verifier-source-UV026-stage1-normalization/report.md`
+
+Signal: UV-026 Stage 1 source-normalization audit, keep.
+
+Captured takeaway: the exact same-point and mixed pre-whitening formulas are a
+valid starting point for the Stage 1 table theorem, but the inspected source
+does not already prove it.  Acceptance criteria are now explicit: ordinary `z`
+after `s=z/Q^2`, source tags retained through `112`/`122` extraction, declared
+raw-vs-`\mathfrak D_Q` same-point conversion, mixed input
+`M_i^{[a]}=\operatorname{Gr}_a(\mathfrak D_Q\delta N_i^{\lin})`, exact `N_0`
+tables in the same matrix normalization, and removable-singularity expansions
+of the mixed block before coefficient extraction.
+
+No action to `paper-updates.md`: this is a guardrail/source audit, not a paper
+theorem.  The parallel derivation lane remains open.
