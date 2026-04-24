@@ -207,3 +207,93 @@ assigned `agents/20260424-165509-<slug>/` directory.
 Do not open pair-like quantitative cleanup (`UV-009 -> UV-001 -> UV-008`), pure
 planar refinements, endpoint-gap work, three-run overlap work, or a D/E proof
 attempt unless it directly resolves the C determinant-slot target.
+
+## Resume dispatch 20260424-173642
+
+Team name: `research-resume-research-team-fundamental-C-D-20260424-173642`.
+Resume path: `rh/teams/20260424-145329-research-team-fundamental-C-D`.
+Current commit at dispatch: `cb27adcccd4be054172832d04b6c5ad1a9047ea9`.
+New deposits go only under `agents/20260424-173642-*/`.
+
+### Baseline / frontier
+
+- **Immediate target:** UV-010, definition-only. Construct the actual corrected
+  order-7 quotient-defect edge package `\mathcal H_7^q` for
+  `\overline E_{12}^{(7;1)}` with quotient-line trivialization to the midpoint
+  quotient, without assuming diagonal merger.
+- **Ordering:** edge package first; state-locality/descent second; diagonal
+  merger normalization third. Do not merge these targets.
+- **Pinned obstruction:** lower cubic/quintic edge laws plus abstract source
+  axioms allow a formal `a_1a_2\delta^2P(m,\kappa)` septic quotient term.
+  Any positive UV-010 proof must identify the actual formula or theorem that
+  defines or forbids this freedom.
+
+### In-scope files and lines
+
+- Team files: `findings.md`, `uv.md`, `attempts.md`, `attempts.tsv`,
+  `collation.md`, and this `dispatch.md`.
+- Recent deposits:
+  `agents/20260424-165509-explorer-C-actual-package-construction/report-R-definition-followup.md`,
+  `agents/20260424-165509-gap-closer-C-R-determinant-control/report-edge-law-followup.md`,
+  `agents/20260424-165509-verifier-adversarial-C-R-channel/report-UV010-adversarial.md`,
+  and `agents/20260424-165509-verifier-source-C-R-channel/report-UV010-source.md`.
+- Paper source ranges:
+  `rh/proof_of_rh.tex:11587-11775`, `11888-12189`, `12385-12584`,
+  `24520-24610`, and `24990-25030`.
+- Current labels:
+  `rem:wip-parity-projective-factorization-collision-blow-up` at
+  `rh/proof_of_rh.tex:12448`.
+
+### Protected surfaces
+
+Agents must not edit `rh/proof_of_rh.tex`, `findings.md`, `uv.md`,
+`attempts.tsv`, `attempts.md`, `collation.md`, `dispatch.md`, `CLAUDE.md`,
+`lore/`, `.agents/`, or another agent's directory. Each agent owns only its
+assigned `agents/20260424-173642-<slug>/` directory.
+
+### Ground-truth checks
+
+- A UV-010 positive result must define the actual order-7 quotient defect as an
+  analytic section in a fixed quotient bundle and prove the edge law
+  `\overline E_{12}^{(7;1)}=\delta^2\mathcal H_7^q(m,\kappa,\delta^2)`.
+- It must state the quotient target, moving-line-to-midpoint trivialization,
+  amplitude convention for `-a_1^{-1}`, and patch hypotheses, especially
+  `A_5^{\mathfrak f}(m)\neq0` or an explicit replacement convention.
+- It must not prove UV-010 by assuming diagonal merger, state-locality, descent,
+  or `\kappa`-independence.
+- If full closure is too hard, reduce to the smallest concrete missing
+  substatement. `unsupported`, `blocked`, and `no progress` are acceptable.
+
+### Roster
+
+Gap closers:
+
+1. `gap-closer-UV010-theorem-formulation`: formulate the paper-ready UV-010
+   theorem and test what current mechanisms prove.
+2. `gap-closer-UV010-quotient-trivialization`: attack the analytic
+   moving-quotient-to-midpoint trivialization and patch hypotheses.
+3. `gap-closer-UV010-septic-hessian`: source-mine or compute the actual
+   order-7 quotient interaction Hessian `\mathcal J_2^{(7)}` / `\mathfrak O_7`.
+
+Explorers:
+
+4. `explorer-UV010-source-language`: mine exact paper language and notation for
+   a clean definition block and for hidden existing equivalents.
+5. `explorer-UV010-quotient-geometry`: study quotient-bundle geometry,
+   constant-rank patches, exceptional `A_5^{\mathfrak f}=0`, and determinant
+   trivializations.
+6. `explorer-UV010-prior-miner`: mine prior reports/chats and later summaries
+   for any parked order-7 edge package, quotient transport, or `H_7` analogue.
+
+Verifiers:
+
+7. `verifier-adversarial-UV010`: wait for the six research deposits, then
+   pressure-test against `a_1a_2\delta^2P(m,\kappa)` and hidden merger/descent.
+8. `verifier-source-UV010`: wait for the six research deposits, then source
+   audit definitions, line refs, quotient target, patch hypotheses, and proof
+   status.
+
+### Non-goals
+
+Do not attack D, E, pair-like quantitative cleanup, finite-core lower transfer,
+or paper promotion in this wave. This wave is UV-010 only.
