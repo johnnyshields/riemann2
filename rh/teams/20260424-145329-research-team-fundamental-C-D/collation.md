@@ -288,3 +288,9 @@ Captured takeaway: source verifier confirms the same scoped negative. The one-pa
 - Preflight: existing team dir contains `findings.md`, `uv.md`, `dispatch.md`, `collation.md`, `agents/`, and legacy `attempts.tsv`. `attempts.md` was absent and has been initialized as a markdown resume ledger while preserving `attempts.tsv`.
 - Capture sweep: the stranded C-FS2 source-audit report was captured in `attempts.tsv`, `attempts.md`, this collation, and the negative finding provenance.
 - Current frontier: resume should attack C-FS2/C-FS3 first. The pinned target is actual construction/control of the septic quotient-defect representative `R`, or a theorem that `\det(R,A_5^{\mathfrak f})` factors through the descended collision state and kills independent exceptional slope/provenance dependence.
+
+### `20260424-165509-verifier-adversarial-C-R-channel/report.md`
+
+Signal: C `R` determinant-channel adversarial harness, keep.
+
+Captured takeaway: the resumed adversarial verifier packages the C-FS2/C-FS3 negatives into an acceptance test. A future C closure must explicitly exclude a quotient-defect perturbation `R_\kappa` with `\det(R_\kappa,A_5^{\mathfrak f})=c^2\varepsilon\kappa`, since the reduced third coordinate shifts by `\varepsilon\kappa`. Representative-gauge invariance only kills additions parallel to `A_5^{\mathfrak f}`; it does not kill determinant-changing quotient-defect data. The agent's script `agents/20260424-165509-verifier-adversarial-C-R-channel/scripts/r_channel_pressure_test.js` reruns cleanly and also records the centered channel `D_2=2\kappa(AV_1-BU_1)`. This is terminal for the subroutes "formal C properties force C-FS3" and "the displayed order-3/5/7 formulas already forbid slope deformation," but not terminal for a stronger actual-package construction/control theorem.
