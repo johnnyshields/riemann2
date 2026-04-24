@@ -978,3 +978,30 @@ of the mixed block before coefficient extraction.
 
 No action to `paper-updates.md`: this is a guardrail/source audit, not a paper
 theorem.  The parallel derivation lane remains open.
+
+### `20260424-233157-gap-closer-UV026-stage1-source-tables/report.md`
+
+Signal: UV-026 Stage 1 source-table generator/reduction, keep.
+
+Captured takeaway: the exact source formulas reduce Stage 1 to a finite
+42-scalar midpoint-jet theorem plus a runnable pre-`\Phi_K` table generator.
+Inputs are `q_0^{(k)}(m)` for `0<=k<=9` and
+`(r_i^{[a]})^{(k)}(m)` for `i=1,2`, `a in {1,5}`, `2<=k<=9`.  The script
+`agents/20260424-233157-gap-closer-UV026-stage1-source-tables/scripts/stage1_source_table_generator.py`
+reruns with manifest SHA1 `66EF80F8260752880035C7075F279E2FE01EBFB1` and
+passes the demo removable-singularity check for the mixed `1/s`, `1/s^2`,
+`1/s^3` formulas.  This is not an actual zeta-source table yet: the finite-grade
+split and actual scalar derivative formulas remain missing.
+
+### Frontier after Stage 1 generator
+
+- **Current best:** UV-026 has moved from "tables missing" to a concrete
+  source-jet theorem: finite-grade split plus 42 scalar midpoint derivatives,
+  then generated tables, then finite square-root algebra, then seven determinant
+  gates.
+- **Keep:** the generator and manifest are useful infrastructure; the source
+  audit checklist must verify any actual-input run before promotion.
+- **Blocked:** actual `r_i^{[1]}`, `r_i^{[5]}` split and the 42 scalar derivative
+  formulas/values are not in the inspected source.
+- **Next:** send the generator through source/normalization verification, and
+  in parallel attack the finite-grade scalar split.

@@ -168,6 +168,8 @@ Active, compact knowledge base shared with every delegated agent.
   source-table theorem plus fixed-sector determinant tests.  Acceptance requires
   ordinary-`z` tagged tables, explicit `\mathfrak D_Q` conventions, and
   mixed-block removable-singularity expansions before coefficient extraction.
+  The Stage 1 generator reduces the table input to a 42-scalar source-jet
+  theorem: baseline `q_0^{(0..9)}(m)` plus tagged grades `r_i^{[1/5](2..9)}(m)`.
 
 ## Recurring open gaps
 
