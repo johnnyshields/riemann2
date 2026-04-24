@@ -1,4 +1,4 @@
-﻿---
+---
 name: trifecta
 description: Post-work synthesis with parallel analysts covering deep internal insights, external literature, and hidden connections to fundamental math. Produces one consolidated lore entry.
 ---

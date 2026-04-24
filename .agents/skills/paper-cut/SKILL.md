@@ -1,4 +1,4 @@
-﻿---
+---
 name: paper-cut
 description: Move a passage from <paper>/<main>.tex to <paper>/cut-for-time.md with full provenance (original location, reason, broken refs), then commit.
 ---

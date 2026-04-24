@@ -1,4 +1,4 @@
-﻿---
+---
 name: research-team
 description: Primary workhorse. Dispatches a coordinator-selected live roster via Codex subagents when delegated teamwork is authorized, with one team dir and per-agent subdirs under <paper>/teams/. Uses a one-ahead pattern: researchers keep attacking while verifiers review prior stable deposits.
 ---

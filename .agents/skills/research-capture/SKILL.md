@@ -1,4 +1,4 @@
-﻿---
+---
 name: research-capture
 description: Synchronous coordinator append of a single structural / negative / goodie / gap entry to <team-dir>/findings.md, with provenance, then commit.
 ---

@@ -1,4 +1,4 @@
-﻿---
+---
 name: paper-dedupe
 description: Remove duplicate content from <paper>/<main>.tex while preserving every unique observation. Tracks provenance in <paper>/cut-for-time.md and fixes cross-references.
 ---

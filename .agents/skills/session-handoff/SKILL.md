@@ -1,4 +1,4 @@
-﻿---
+---
 name: session-handoff
 description: End-of-session writeup producing a lore entry that summarizes team dirs opened, UV movements, findings changes, attempts/frontier changes, queued follow-ups, and open threads. Makes cross-session handoff clean.
 ---

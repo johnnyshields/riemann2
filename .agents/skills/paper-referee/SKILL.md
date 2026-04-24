@@ -1,4 +1,4 @@
-﻿---
+---
 name: paper-referee
 description: Two-phase review loop on <paper>/<main>.tex: Phase 1 fixers edit scoped known issues, Phase 2 fresh referees re-review. Phase 1 is an explicit edit-capable exception.
 ---

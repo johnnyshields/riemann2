@@ -1,4 +1,4 @@
-﻿---
+---
 name: research-attack
 description: Small-cycle variant of research-team for a focused push on one UV-NNN or rem:wip-* target. Starts with one or two gap-closers and adds lagging verification only when a stable claim is ready or risk demands it.
 ---

@@ -1,4 +1,4 @@
-﻿---
+---
 name: paper-harden
 description: Adaptive read-only quality review of <paper>/<main>.tex for rigor, consistency, formatting, and voice. Reviewers return reports only; the coordinator consolidates.
 ---

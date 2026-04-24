@@ -1,4 +1,4 @@
-﻿---
+---
 name: paper-demote
 description: Structured reverse-promotion. Remove or weaken a claim currently in <paper>/<main>.tex, reinstate a UV-NNN entry in <team-dir>/uv.md, and optionally capture a negative finding â€” all in one atomic commit. Use when a promoted claim turns out to be wrong or weaker than stated.
 ---

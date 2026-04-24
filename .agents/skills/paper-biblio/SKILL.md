@@ -1,4 +1,4 @@
-﻿---
+---
 name: paper-biblio
 description: Alphabetize, de-dupe, verify, and clean up the bibliography of <paper>/<main>.tex. Caches user decisions in papers/<name>-biblio-known.md.
 ---
