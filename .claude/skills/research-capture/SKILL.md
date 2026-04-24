@@ -14,9 +14,9 @@ inline or in a follow-up message.
 
 Examples:
 - `/research-capture negative tangent-separator fails at W=0 inflections`
-- `/research-capture goodie reusable quintic normal form at §12.3.2`
+- `/research-capture goodie reusable quintic normal form at Section 12.3.2`
 - `/research-capture gap mixed 4-point factorization still open`
-- `/research-capture structural same-tower closure proved in §10.2`
+- `/research-capture structural same-tower closure proved in `Git workflow`.2`
 
 ## Protocol
 

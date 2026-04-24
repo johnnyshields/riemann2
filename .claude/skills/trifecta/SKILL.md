@@ -6,13 +6,13 @@ description: Post-work synthesis — three parallel analysts covering deep inter
 # Trifecta
 
 Three-angle post-work synthesis via `subagent_type: trifecta-analyst`.
-Follows CLAUDE.md §5, §6, §8a.
+Follows CLAUDE.md `Briefing rule`, `Team dirs and agent self-deposit`, `Capture before shutdown, forward-carry at dispatch`.
 
 `$ARGUMENTS`: empty → analyze most recent work (git log + recent
 lore); topic phrase → focus all three; lore file path → analyze that
 file.
 
-## Preamble (forward-carry first — §8a)
+## Preamble (forward-carry first — `Capture before shutdown, forward-carry at dispatch`)
 
 1. Read the most recent team dir's `findings.md` and `uv.md`, recent
    `lore/` entries, and `git log --oneline -n 20`. Skim relevant paper
@@ -45,9 +45,9 @@ textbook spoiler-prone case), and the key-findings summary.
 Individual per-analyst lore files are forbidden — the coordinator
 writes one consolidated entry.
 
-## Post-cycle (capture before shutdown — §8a)
+## Post-cycle (capture before shutdown — `Capture before shutdown, forward-carry at dispatch`)
 
-Verify deposits. Walk each report, process findings through §8 —
+Verify deposits. Walk each report, process findings through `Claim lifecycle (git-as-archive)` —
 append Negative / Goodie / Open-gap bullets to this team dir's
 `findings.md`, file new UVs where speculative connections reveal
 gaps, stage paper-ready additions in `paper-updates.md`.

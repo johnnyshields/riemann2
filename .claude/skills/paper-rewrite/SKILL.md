@@ -50,7 +50,7 @@ stale cross-references.
 Create `<paper>/teams/<ts>-other-rewrite-<slug>/`. Capture invariants into
 `notes/`: macros, theorem envs, labels, cite keys, cross-refs, baseline
 line count (grep + `wc -l`). Baseline compile-check must be clean before
-starting. Partition scope (full = 14 top-level sections + §12's 6
+starting. Partition scope (full = 14 top-level sections + `LaTeX conventions`' six
 subsections → up to 19 rewriters; scoped = by subsection,
 ≤2000 lines per rewriter).
 

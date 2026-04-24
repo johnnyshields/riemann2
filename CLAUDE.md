@@ -6,7 +6,7 @@ their own provenance artifacts (see below) but are read-only by default with res
 to files they do not own (unless otherwise specified). Every agent is briefed with
 this file.
 
-## 1. Files
+## Files
 
 | Path | Role |
 |---|---|
@@ -23,7 +23,7 @@ this file.
 **Authoritative state lives in the most recent team dir.** There is no
 top-level `<paper>/findings.md` or `<paper>/unverified.tex`; those were
 migrated into per-cycle files under `teams/`. Cross-cycle persistence is
-achieved by *forward-carry*: §8a describes the mechanic.
+achieved by *forward-carry*: `Capture before shutdown, forward-carry at dispatch` describes the mechanic.
 
 Optional grep indexes (`findings-in-paper.md`, `unverified-rejected.md`) are
 lazy-created on first use. Not authoritative — git log is.
@@ -32,11 +32,38 @@ Canonical paper paths live at `C:\workspace\riemann2\<paper>\<main>.tex`
 (WSL `/mnt/c/workspace/riemann2/<paper>/<main>.tex`). Each paper is a
 monolithic `amsart` with a frozen macro namespace.
 
-## 2. Dispatch
+## Dispatch
 
 Every delegation goes through `TeamCreate` with named agents
 (e.g. `gap-closer-mixed4pt`) so each is tmux-visible. Never the raw `Agent`
-tool. Communicate via `SendMessage`; `TeamDelete` on shutdown.
+tool. Communicate via `SendMessage`; `TeamDelete` only at a real terminal
+condition, explicit user halt, or when the team has gone stale after a long
+idle window.
+
+**Keep TeamCreate agents alive.** A research team is a live research group, not
+a one-shot batch. After an agent deposits a report, keep the teammate around for
+follow-up questions, adversarial back-and-forth, and the next adjacent task.
+Prefer redelegating to the same named agent when the new task builds on its
+context or expertise; spawn a replacement only when the role changes, the agent
+is blocked, or fresh independence matters. Maintain a continuous dialogue with
+active agents through `SendMessage`: clarify reports, push back on weak claims,
+ask for sharper UV reductions, then assign the next task without tearing down
+the team.
+
+**Autoresearch everywhere.** Every research workflow and every research agent
+runs under the shared metaprompt `.claude/agents/_autoresearch.md`, adapted from
+Andrei Karpathy's autoresearch pattern. Include that metaprompt in research
+briefs and agent definitions. Research agents keep looping: read state, choose
+the next concrete move, work, deposit, state the next step, and wait for
+redelegation. They do not ask whether to continue and they do not stop at
+ordinary cycle boundaries.
+
+**Use Opus for research.** Every research task and research agent uses Opus.
+When spawning teammates for `research-team`, `research-attack`,
+`research-audit`, `trifecta`, `paper-harden`, `paper-referee`, or any other
+research workflow, pass `model: "opus"` on each `Agent` tool call. Do not use
+Sonnet or Haiku for research delegation unless the user explicitly overrides
+this instruction for that dispatch.
 
 **3+3+2 roster** for a balanced cycle: 3 gap-closers (each on a specific
 UV-NNN / `rem:wip-*`, with routes A/B/C and fallback to minimal finite
@@ -71,7 +98,7 @@ structure that *redirects* how gaps are attacked) + 2 verifiers (adversarial
 When in doubt between `research-team` and `research-attack`, prefer
 `research-attack` — cheaper to spin up and cheaper to get wrong.
 
-## 3. Coordinator autonomy
+## Coordinator autonomy
 
 The coordinator decides roster sizes, UV targets, explorer topics, non-goals
 (synthesized from adjacent in-flight work and recent lore), team-dir slugs,
@@ -80,7 +107,7 @@ filtering for findings.md / uv.md — without asking. `AskUserQuestion` is
 for architectural or irreversible decisions only. Never interrupt over
 research-direction minutia.
 
-## 3a. Auto-run — default for research work
+## Auto-run — default for research work
 
 Research work (gap-closing, exploration, verification, synthesis,
 audit cycles) runs in a continuous auto-loop. The coordinator does not
@@ -96,20 +123,20 @@ manually interrupts.
    (walk *every* one, not just the collation), plus the last cycle's
    verdicts and commits. Any UV candidate, finding, or negative result
    still sitting only in an agent report is a capture miss — fix it
-   (§8a) before dispatching the next cycle, because the next briefing
+   (`Capture before shutdown, forward-carry at dispatch`) before dispatching the next cycle, because the next briefing
    reads the team-dir `findings.md` / `uv.md`, not 30 subdirs of
    deposits.
 2. Pick the next move — a UV target, an explorer topic, a redirect, an
    audit, a synthesis. Default to `research-attack` over `research-team`
-   per §2.
-3. Dispatch via the §2 selector. Brief per §5.
-4. Collate returns. Promote / demote / quarantine / reject per §8.
-   Commit by logical unit; auto-push per §10.
+   per `Dispatch`.
+3. Dispatch via the `Dispatch selector`. Brief per `Briefing rule`.
+4. Collate returns. Promote / demote / quarantine / reject per `Claim lifecycle (git-as-archive)`.
+   Commit by logical unit; auto-push per `Git workflow`.
 5. Go to 1.
 
 **Decide without asking:** which UV, which explorer topic, roster size,
 team-dir slug, commit wording, whether to redirect, when to synthesize.
-§3 autonomy covers this.
+`Coordinator autonomy` covers this.
 
 **Pause only for:** architectural or irreversible decisions (macro
 namespace changes, canonical-file reorgs, abandoning a proof strategy
@@ -137,7 +164,7 @@ is not — the archive has the ideas.
 (Loop pattern adapted from Karpathy's
 [autoresearch/program.md](https://github.com/karpathy/autoresearch).)
 
-## 4. Writing discipline
+## Writing discipline
 
 Applies to the coordinator's paper edits and to every agent briefing. Not
 a hardass — a good-referee standard.
@@ -166,12 +193,12 @@ a hardass — a good-referee standard.
   the agent's `scripts/` dir and cite the path + relevant output in the
   report.
 
-## 5. Briefing rule
+## Briefing rule
 
 Every delegation includes: the full current `findings.md` from the team
-dir (freshly updated per §8a — stale briefings are worse than late ones),
-the 7-field schema (§7), explicit non-goals, the agent's own
-`agents/<slug>/` path + self-deposit checklist, and the §4 writing-
+dir (freshly updated per `Capture before shutdown, forward-carry at dispatch` — stale briefings are worse than late ones),
+the 7-field schema (`Report schema`), explicit non-goals, the agent's own
+`agents/<slug>/` path + self-deposit checklist, and the `Writing discipline` writing-
 discipline reminder.
 
 **The full `uv.md` is NOT in the default briefing.** Sharing tentative
@@ -193,7 +220,7 @@ pointer to the agent reports that produced it.
 
 **Ensure `findings.md` / `uv.md` are updated before launching the next
 wave.** The team lead carries forward and revises these files at dispatch
-time; §8a gives the mechanic. An out-of-date briefing is the handoff bug.
+time; `Capture before shutdown, forward-carry at dispatch` gives the mechanic. An out-of-date briefing is the handoff bug.
 
 ### Briefing idioms that license candor
 
@@ -208,14 +235,14 @@ Distilled from prior manual sessions; paste the relevant ones verbatim.
 - "Label each claim with a confidence tag before merging."
 - "`unsupported`, `blocked`, `no progress` are acceptable returns."
 
-## 6. Team dirs and agent self-deposit
+## Team dirs and agent self-deposit
 
 Every multi-agent dispatch creates one team dir under the relevant paper:
 
 ```
 <paper>/teams/YYYYMMDD-HHMMSS-<team-slug>/
-├── findings.md                  — in-cycle knowledge base (§8a forward-carried + updated)
-├── uv.md                        — in-cycle UV ledger, markdown (§8a forward-carried + updated)
+├── findings.md                  — in-cycle knowledge base (`Capture before shutdown, forward-carry at dispatch` forward-carried + updated)
+├── uv.md                        — in-cycle UV ledger, markdown (`Capture before shutdown, forward-carry at dispatch` forward-carried + updated)
 ├── paper-updates.md             — team-lead staged edits for <main>.tex (optional, created when ready)
 ├── dispatch.md                  — team-lead brief, roster, non-goals
 ├── collation.md                 — team-lead synthesis as reports land
@@ -223,7 +250,7 @@ Every multi-agent dispatch creates one team dir under the relevant paper:
 ├── scripts/                     — team-lead scripts, if any
 └── agents/
     ├── YYYYMMDD-HHMMSS-<agent-slug>/
-    │   ├── report.md            — agent's 7-field report (§7)
+    │   ├── report.md            — agent's 7-field report (`Report schema`)
     │   ├── scripts/             — every script the agent ran (written before run)
     │   └── notes/               — agent's scratch, intermediates worth keeping
     └── YYYYMMDD-HHMMSS-<other-agent-slug>/
@@ -237,7 +264,7 @@ legible from the filesystem.
 
 `findings.md` and `uv.md` in each team dir are the authoritative state
 for that cycle. They start as forward-carries from the prior team dir
-(§8a) and evolve as reports land. `paper-updates.md` is optional: the
+(`Capture before shutdown, forward-carry at dispatch`) and evolve as reports land. `paper-updates.md` is optional: the
 team lead writes it when the cycle has produced edits ready to fold into
 `<paper>/<main>.tex`.
 
@@ -258,7 +285,7 @@ dir — unless a skill grants an explicit exception (e.g. `paper-referee`
 Phase 1). Those team-dir files belong to the team lead; agents suggest
 changes in their reports.
 
-## 7. Report schema
+## Report schema
 
 Every agent report has seven fields:
 
@@ -273,7 +300,7 @@ Every agent report has seven fields:
 
 `unsupported` / `blocked` / `no progress` are honest signals, not failures.
 
-## 8. Claim lifecycle (git-as-archive)
+## Claim lifecycle (git-as-archive)
 
 **Intake → quarantine → research → adversarial → promote | demote | reject.**
 
@@ -302,7 +329,7 @@ found false, `SendMessage` every active agent before doing anything else,
 then demote + optional negative-capture in one commit. Cost of a delayed
 correction >> cost of a brief interruption.
 
-## 8a. Capture before shutdown, forward-carry at dispatch
+## Capture before shutdown, forward-carry at dispatch
 
 The handoff bug is: an agent surfaces a UV candidate or finding, it
 lands in `agents/<slug>/report.md`, and then it dies there — the next
@@ -310,13 +337,13 @@ cycle's briefing doesn't see it. Two mechanics prevent this.
 
 **Capture before shutdown.** Before `TeamDelete`, the team lead walks
 *every* `agents/<slug>/report.md` in the cycle and processes each claim
-through §8 — promote, demote, file a new UV-NNN in the team dir's
+through `Claim lifecycle (git-as-archive)` — promote, demote, file a new UV-NNN in the team dir's
 `uv.md`, add a bullet to `findings.md`, log a negative result, or
 explicitly note "no action: reason X" in `collation.md`. Default is
 capture, not archive. Material left only in an agent report is invisible
 to the next briefing.
 
-Process reports as they land, not in an end-of-cycle batch. §10 already
+Process reports as they land, not in an end-of-cycle batch. `Git workflow` already
 asks for per-deposit commits; the capture edit (UV append, findings
 bullet, demote) goes in the *same* commit as the report it came from
 when the signal is clear enough.
@@ -345,7 +372,7 @@ agents:
 The chain of team dirs is the history — each is a snapshot in time. Git
 log across them is the cross-cycle audit trail.
 
-## 9. Provenance
+## Provenance
 
 Every `findings.md` entry, `uv.md` entry, agent report, commit message,
 lore entry, `paper-updates.md` line, and team dir carries provenance to
@@ -370,7 +397,7 @@ the expected workflow — edits are cheap, citations must be possible. No
 inline `python -c "..."`, no heredocs piped to an interpreter, no
 ephemeral `/tmp/` scripts for anything that produces a cited number.
 
-## 10. Git workflow
+## Git workflow
 
 - **Auto-commit** after each finished logical unit (remark rewrite, new
   proof block, structural reorg, team dir with reports). Not every
@@ -404,7 +431,7 @@ live in team-dir `uv.md` files, outside the LaTeX build. `--no-verify`
 is discouraged — don't bypass just because auto-push creates ship
 pressure.
 
-## 11. Skill authoring — "let the model cook"
+## Skill authoring — "let the model cook"
 
 Skills are pointers, not recipes. The model is capable; the skill gives it
 the shape of the job, the non-negotiable invariants, and the outputs
@@ -417,7 +444,7 @@ When writing or revising a skill:
 - Name the goal, the invariants, and the outputs. Trust the model with the
   path between them.
 - Refer to CLAUDE.md sections rather than repeating their content. A skill
-  saying "follow §4 writing discipline" is stronger than re-listing the
+  saying "follow `Writing discipline`" is stronger than re-listing the
   seven bullets.
 - Include a bash snippet only when the exact command is load-bearing or
   non-obvious. Otherwise describe the action.
@@ -426,7 +453,7 @@ When writing or revising a skill:
 - Keep each skill under ~80 lines. Skills above that are doing too much or
   explaining too much.
 
-## 12. LaTeX conventions
+## LaTeX conventions
 
 - Math delimiters everywhere are `\(...\)` / `\[...\]`, including `.md`,
   commit messages, lore. Never convert to `$...$`; preserve on extraction

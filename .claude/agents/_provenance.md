@@ -19,7 +19,7 @@ Everything you produce goes *there*:
 
 - `report.md` — 7-field report (Claim / Status / Evidence / Exact refs /
   Dependencies / Strongest objection / Needed for promotion). See
-  CLAUDE.md §7.
+  CLAUDE.md `Report schema`.
 - `scripts/` — every script you ran, as a file.
 - `notes/` — scratch and intermediates worth keeping.
 
@@ -52,7 +52,7 @@ Propose changes through your `report.md`. The team lead handles
 canonical files. An exception applies only if your *role* block below
 explicitly grants it (e.g. the `fixer` role edits the paper).
 
-## Writing discipline (CLAUDE.md §4)
+## Writing discipline (CLAUDE.md `Writing discipline`)
 
 - State facts directly. No AI tells ("it is worth noting,"
   "interestingly," "we leverage / utilize / employ," "to the best of

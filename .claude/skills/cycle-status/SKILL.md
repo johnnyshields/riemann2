@@ -31,7 +31,7 @@ paper; `--recent <N>` → limit to last N days (default 7);
   prune next cycle).
 - **Uncaptured agent material** — for the most recent team dir, list
   any `agents/*/report.md` whose claims don't yet appear in
-  `findings.md` or `uv.md`. That's the §8a capture miss surface.
+  `findings.md` or `uv.md`. That's the `Capture before shutdown, forward-carry at dispatch` capture miss surface.
 - **Recent lore** — last 5–10 `lore/*.md` by date, one-line titles.
   If a recent `session-handoff` exists, quote its "Open threads" and
   "Queued follow-ups" sections verbatim.
