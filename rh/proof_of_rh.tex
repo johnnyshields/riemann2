@@ -26902,6 +26902,768 @@ analyticity and uniform-bound steps quantitative by recording an explicit
 Taylor remainder with a constant depending only on $D$.
 \end{remark}
 
+\section{Finite Fr\'echet coefficient calculus for the corrected-whitening block}
+\label{sec:finite-frechet-coefficient-calculus}
+
+This appendix collects the finite Fr\'echet/Sylvester coefficient recurrences
+and finite gates used by the corrected-whitening package frontier of
+Remark~\ref{rem:wip-first-cubic-source-transfer-target}.  The contents are a
+coefficient-level toolkit: source-constrained primitives, baseline mixed
+block, three Fr\'echet/Sylvester recursions, midpoint parity, fixed-sector
+projection rules, and the computed finite raw gates.  The recurrences
+themselves do not prove quotient gauge; the closing subsection records the
+status of the raw seven-family shortcut and points forward to the corrected
+package representative.
+
+\subsection{Source-linear same-point primitives}
+\label{subsec:source-linear-same-point-primitives}
+
+For \(\varepsilon\in\{-,+\}\), identified with \(\varepsilon=-1,+1\), write
+\[
+X_{\varepsilon,n}
+:=
+[z^n]\mathfrak D_Q(\delta G_\varepsilon^{\lin})
+=
+\sum_{a=2}^{6}X_{\varepsilon,n}^a r_a.
+\]
+For \(n\le2\), the nonzero source-constrained coefficients are
+\[
+X_{\varepsilon,0}^2=\frac{1}{24\pi}(I-D),
+\]
+\[
+X_{\varepsilon,1}^2=\frac{\varepsilon}{4\pi Q}S,
+\qquad
+X_{\varepsilon,1}^3=\frac{\varepsilon}{48\pi Q^2}(I-D),
+\]
+\[
+X_{\varepsilon,2}^2
+=
+\left(
+\frac{1}{8\pi Q^2}
++
+\frac{q^2}{32\pi Q^4}
+\right)I
++
+\left(
+\frac{1}{8\pi Q^2}
+-
+\frac{q^2}{32\pi Q^4}
+\right)D,
+\]
+\[
+X_{\varepsilon,2}^3=\frac{1}{16\pi Q^3}S,
+\qquad
+X_{\varepsilon,2}^4=\frac{1}{192\pi Q^4}(I-D).
+\]
+All other \(X_{\varepsilon,n}^a\) with \(n\le2\), \(2\le a\le6\), vanish.
+
+\begin{remark}
+\label{rem:source-linear-primitives-residual-normal-form}
+These coefficients are not free symbolic inputs.  They are the residual-source
+normal form of the source-linear same-point perturbation.
+\end{remark}
+
+\subsection{Baseline mixed block coefficients}
+\label{subsec:baseline-mixed-block-coefficients}
+
+Let
+\[
+s=\frac{z}{Q^2},\qquad
+q_\pm(z)=q_0\left(m\pm\frac{z}{2Q^2}\right),
+\]
+\[
+\Delta_0(z)=\Phi_0(t_-)-\Phi_0(t_+),
+\qquad
+C(z)=\cos\Delta_0(z),\quad S(z)=\sin\Delta_0(z).
+\]
+The baseline mixed block is
+\[
+N^{(0)}(z)=\frac1\pi
+\begin{pmatrix}
+-\dfrac{2S}{s}
+&
+\dfrac{S+q_+sC}{s^2}
+\\[1.4ex]
+-\dfrac{S+q_-sC}{s^2}
+&
+\dfrac{(q_-+q_+)sC+(2-q_-q_+s^2)S}{2s^3}
+\end{pmatrix}.
+\]
+For \(j\ge0\), write
+\[
+N^{(0)}_j=[z^j]N^{(0)}(z).
+\]
+Then \(N^{(0)}_{0..4}\) are obtained entrywise from the coefficient formulas
+\[
+(N^{(0)}_j)_{11}
+=
+-\frac{2Q^2}{\pi}[z^{j+1}]S(z),
+\]
+\[
+(N^{(0)}_j)_{12}
+=
+\frac{Q^4}{\pi}
+\left(
+[z^{j+2}]S(z)
++
+\frac1{Q^2}[z^{j+1}](q_+(z)C(z))
+\right),
+\]
+\[
+(N^{(0)}_j)_{21}
+=
+-\frac{Q^4}{\pi}
+\left(
+[z^{j+2}]S(z)
++
+\frac1{Q^2}[z^{j+1}](q_-(z)C(z))
+\right),
+\]
+\[
+(N^{(0)}_j)_{22}
+=
+\frac{Q^6}{2\pi}
+\left(
+\frac1{Q^2}[z^{j+2}]((q_-+q_+)C)
++
+2[z^{j+3}]S
+-
+\frac1{Q^4}[z^{j+1}](q_-q_+S)
+\right).
+\]
+
+\subsection{First Fr\'echet coefficient table}
+\label{subsec:first-frechet-coefficient-table}
+
+Let \(P_{\varepsilon,0}\) be the zeroth square-root coefficient of
+\(G_\varepsilon^{(0)}\), and let \(\Sigma_\varepsilon(C)\) denote the unique
+solution of
+\[
+P_{\varepsilon,0}Z+ZP_{\varepsilon,0}=C.
+\]
+For each source index \(a\), define \(S_{\varepsilon,n}^a\) recursively by
+\[
+S_{\varepsilon,n}^a
+=
+\Sigma_\varepsilon
+\left(
+X_{\varepsilon,n}^a
+-
+\sum_{j=1}^{n}
+\bigl(
+P_{\varepsilon,j}S_{\varepsilon,n-j}^a
++
+S_{\varepsilon,n-j}^aP_{\varepsilon,j}
+\bigr)
+\right).
+\]
+Then
+\[
+\Lambda_{\varepsilon,n}^{a}
+=
+-\sum_{i+j+k=n}
+W_{\varepsilon,i}S_{\varepsilon,j}^aW_{\varepsilon,k}.
+\]
+The required ranges used below include
+\[
+\Lambda^-_{2,0..4},\qquad
+\Lambda^-_{3,1..5},\qquad
+\Lambda^-_{4,2..6}.
+\]
+
+\subsection{Second Fr\'echet coefficient table}
+\label{subsec:second-frechet-coefficient-table}
+
+For an ordered source pair \((a,b)\), define \(T_{\varepsilon,n}^{ab}\) by
+\[
+T_{\varepsilon,n}^{ab}
+=
+\Sigma_\varepsilon
+\left(
+-\sum_{i+j=n}
+(S_{\varepsilon,i}^aS_{\varepsilon,j}^b+
+ S_{\varepsilon,i}^bS_{\varepsilon,j}^a)
+-
+\sum_{j=1}^{n}
+(P_{\varepsilon,j}T_{\varepsilon,n-j}^{ab}
++
+T_{\varepsilon,n-j}^{ab}P_{\varepsilon,j})
+\right).
+\]
+The corresponding second Fr\'echet coefficient is
+\[
+H_{\varepsilon,n}^{ab}
+=
+\sum_{i+j+k+\ell+m=n}
+\left(
+W_{\varepsilon,i}S_{\varepsilon,j}^bW_{\varepsilon,k}
+S_{\varepsilon,\ell}^aW_{\varepsilon,m}
++
+W_{\varepsilon,i}S_{\varepsilon,j}^aW_{\varepsilon,k}
+S_{\varepsilon,\ell}^bW_{\varepsilon,m}
+\right)
+-
+\sum_{i+j+k=n}
+W_{\varepsilon,i}T_{\varepsilon,j}^{ab}W_{\varepsilon,k}.
+\]
+The five-family endpoint gate uses
+\[
+H^-_{32,1..5},\qquad
+H^-_{34,3..7},\qquad
+H^-_{24,2..6}.
+\]
+
+\subsection{Third Fr\'echet coefficient table}
+\label{subsec:third-frechet-coefficient-table}
+
+For source triple \((a,b,c)\), define \(U_{\varepsilon,n}^{abc}\) by the third
+Sylvester recursion
+\[
+P_{\varepsilon,0}U_{\varepsilon,n}^{abc}
++
+U_{\varepsilon,n}^{abc}P_{\varepsilon,0}
+=
+-\sum_{i+j=n}
+\Bigl(
+S_{\varepsilon,i}^{a}T_{\varepsilon,j}^{bc}
++S_{\varepsilon,i}^{b}T_{\varepsilon,j}^{ac}
++S_{\varepsilon,i}^{c}T_{\varepsilon,j}^{ab}
++
+T_{\varepsilon,i}^{bc}S_{\varepsilon,j}^{a}
++T_{\varepsilon,i}^{ac}S_{\varepsilon,j}^{b}
++T_{\varepsilon,i}^{ab}S_{\varepsilon,j}^{c}
+\Bigr)
+-
+\sum_{j=1}^{n}
+\bigl(
+P_{\varepsilon,j}U_{\varepsilon,n-j}^{abc}
++
+U_{\varepsilon,n-j}^{abc}P_{\varepsilon,j}
+\bigr).
+\]
+The all-left third Fr\'echet coefficient \(G^-_{abc,n}\) is then obtained from
+the coefficient of the cubic source monomial in
+\[
+(G_-^{(0)}+\text{source})^{-1/2},
+\]
+equivalently by the coefficient recursion determined by
+\(U_{\varepsilon,n}^{abc}\), the lower \(S\)- and \(T\)-coefficients, and the
+inverse coefficients \(W_{\varepsilon,n}\).
+
+The seven-family audit for the first surviving residual requires
+\[
+G^-_{324,3..7}
+\quad\text{and}\quad
+G^+_{324,3..7}.
+\]
+
+\subsection{Midpoint parity}
+\label{subsec:midpoint-parity}
+
+\begin{lemma}[Midpoint parity of Fr\'echet coefficients]
+\label{lem:midpoint-parity-frechet-coefficients}
+In the midpoint chart,
+\[
+t_\pm=m\pm\frac{z}{2Q^2},
+\]
+the plus-side and minus-side coefficients satisfy
+\[
+\Lambda^+_{a,n}=(-1)^n\Lambda^-_{a,n},
+\]
+and
+\[
+H^+_{ab,n}=(-1)^nH^-_{ab,n},
+\]
+for the source indices used in the finite coefficient tables.  The same
+parity convention applies to the third Fr\'echet coefficients once the
+corresponding \(G^\pm_{abc,n}\) table is defined.
+\end{lemma}
+
+\subsection{Fixed-sector projection rule}
+\label{subsec:fixed-sector-projection-rule}
+
+\begin{lemma}[Fixed-sector projection of a \(J\)-middle product]
+\label{lem:fixed-sector-projection-j-middle-product}
+Let
+\[
+H=aI+bS+cD,\qquad W=pI+qS+rD.
+\]
+Then
+\[
+\pi_{\mathfrak f}(HJW)
+=
+(cq-br)I+(cp-ar)S,
+\]
+and
+\[
+\pi_{\mathfrak f}(WJH)
+=
+-(cq-br)I-(cp-ar)S.
+\]
+Consequently,
+\[
+\pi_{\mathfrak f}(WJH)=-\pi_{\mathfrak f}(HJW).
+\]
+\end{lemma}
+
+\subsection{Computed finite gates}
+\label{subsec:computed-finite-gates}
+
+\begin{remark}[Source-coefficient parity in the \(Y\)-slot]
+\label{rem:y-slot-source-coefficient-parity}
+For the grade-five mixed slot \(Y^a\), the source-coefficient table gives
+\[
+Y^5=0,
+\]
+while
+\[
+Y^6=y_6J,\qquad y_6=\frac{1}{53760\pi Q^9}.
+\]
+Thus the \(Y^5\)-slot residuals vanish individually, and the \(Y^6\)-slot
+residuals cancel in left-right pairs by
+Lemma~\ref{lem:fixed-sector-projection-j-middle-product}.
+\end{remark}
+
+\begin{remark}[First invisible endpoint residual]
+\label{rem:first-invisible-endpoint-residual}
+For the invisible endpoint pair \((3,4)\) with middle source \(q=2\), the
+three-family \(C_2\) gate reduces to one scalar
+\[
+d^-_{324}
+=
+y_4\Xi_{324},
+\qquad
+y_4=-\frac{q^2}{640\pi Q^9},
+\]
+where
+\[
+\Xi_{324}
+=
+\mathcal D(H^-_{2;32}JW_0-H^-_{1;32}JW_1).
+\]
+The accompanying \(d^+_{324}\) term vanishes by \(Y^3=0\), and the
+\(d^+_{234}\) term vanishes by source-degree support
+\(H^-_{0..2;34}=0\).
+\end{remark}
+
+\begin{remark}[Five-family \(N^{(0)}\)-weighted endpoint gate]
+\label{rem:five-family-n0-weighted-endpoint-gate}
+The \(N_0\)-middle families do not collapse to the \(r+t=2\) range.  They
+involve the full baseline middle factor and hence the convolution
+\[
+n+s+t=7.
+\]
+For the first endpoint residual define
+\[
+E^-_{324}
+=
+\mathcal D
+\sum_{\substack{1\le n\le5\\2\le t\le6\\n+t\le7}}
+(-1)^tH^-_{32,n}N^{(0)}_{7-n-t}\Lambda^-_{4,t},
+\]
+\[
+E^+_{234}
+=
+\mathcal D
+\sum_{\substack{0\le n\le4\\3\le t\le7\\n+t\le7}}
+(-1)^t\Lambda^-_{2,n}N^{(0)}_{7-n-t}H^-_{34,t},
+\]
+\[
+E^+_{324}
+=
+\mathcal D
+\sum_{\substack{1\le n\le5\\2\le t\le6\\n+t\le7}}
+(-1)^t\Lambda^-_{3,n}N^{(0)}_{7-n-t}H^-_{24,t}.
+\]
+The five-family residuals are
+\[
+R^{(A)}_5=2y_4\Xi_{324}+2E^-_{324}+E^+_{234},
+\]
+\[
+R^{(C)}_5=y_4\Xi_{324}+E^-_{324}+2E^+_{324}.
+\]
+These are finite coefficient identities, not consequences of support or
+generic Fr\'echet algebra.
+\end{remark}
+
+\subsection{Raw-package failure status}
+\label{subsec:raw-package-failure-status}
+
+\begin{remark}[Computational status of the raw package]
+\label{rem:computational-status-raw-package}
+Source-constrained nonconstant baseline tests show that the raw five-family and
+raw seven-family packages are not generally quotient-gauge under the provisional
+fixed-sector line.  The constant baseline is quotient-inconclusive because
+\(A_5^{\mathfrak f}=0\).  Nonconstant linear baselines give nonzero determinant
+residuals.  These tests reject the raw seven-family shortcut, but they do not
+test the corrected package representative
+\(B_{\mathrm{pkg}}^{\mathfrak f}(h)\), whose lower moving coefficients
+\(B_j[M]\) remain undefined.  The corrected package representative is the
+object whose definition the package frontier of
+Remark~\ref{rem:wip-first-cubic-source-transfer-target} is targeting; the
+finite recurrences and gates above are the coefficient toolkit, not a closure
+of that target.  The package object itself is defined in
+Section~\ref{sec:corrected-fixed-target-quotient-package}.
+\end{remark}
+
+\section{Corrected fixed-target quotient package}
+\label{sec:corrected-fixed-target-quotient-package}
+
+This appendix defines the corrected package object targeted by the package
+frontier of Remark~\ref{rem:wip-first-cubic-source-transfer-target}.  The
+sequence of definitions is: raw matrix cross-effect before \(\Phi_K\),
+source-bidegree projection, amplitude normalization, representative-level
+midpoint trivialization, the normalized package representative, the order-\(7\)
+quotient extractor, and the lower moving package coefficients with the
+order-\(7\) connection correction.  The closing remark separates definition
+material from the theorem obligations that remain.  Throughout this section,
+the shorthand \(\mathrm{raw}\) labels the pre-projection cross-effect and
+\(\mathrm{amp}\) labels the amplitude-normalized package; these are not
+new macros, only superscripts.
+
+\begin{definition}[Raw corrected-whitening matrix cross-effect before \(\Phi_K\)]
+\label{def:raw-corrected-whitening-cross-effect}
+Let
+\[
+\mathcal B_0=(G_-^{(0)},N^{(0)},G_+^{(0)})
+\]
+be the baseline corrected block, and let
+\[
+\mathcal B_1(a_i,h_i)
+\]
+denote the one-source tagged corrected block obtained by substituting only the
+\(i\)-th tagged source perturbation into the corrected same-point and mixed
+block formulae.  Let
+\[
+\mathcal B_2(a_1,h_1;a_2,h_2)
+\]
+be the tagged two-source corrected block.
+
+Let
+\[
+\mathcal W(G_-,N,G_+):=G_-^{-1/2}NG_+^{-1/2}
+\]
+be the corrected-whitening transfer, defined on the good analytic patch where
+the inverse square roots are holomorphic.
+
+Define the matrix cross-effect before applying \(\Phi_K\), determinant
+scalarization, or quotient extraction by
+\[
+\begin{aligned}
+C_{\mathcal W}^{\mathrm{raw}}(a_1,h_1;a_2,h_2)
+:={}&
+\mathcal W(\mathcal B_2(a_1,h_1;a_2,h_2))
+-\mathcal W(\mathcal B_1(a_1,h_1))
+\\
+&-\mathcal W(\mathcal B_1(a_2,h_2))
++\mathcal W(\mathcal B_0).
+\end{aligned}
+\]
+\end{definition}
+
+\begin{definition}[Source-bidegree projection before quotient extraction]
+\label{def:source-bidegree-projection-before-quotient}
+Work with formal source tags \(\tau_1,\tau_2\) retained through the matrix
+cross-effect.  For a tagged matrix series
+\[
+F(\tau_1,\tau_2)=\sum_{p,q\ge0}\tau_1^p\tau_2^qF_{p,q},
+\]
+define
+\[
+\Pi_{1,1}F:=F_{1,1}.
+\]
+The non-\((1,1)\) mixed source component is
+\[
+(1-\Pi_{1,1})_{\mathrm{mix}}F
+:=
+\sum_{\substack{p,q\ge1\\(p,q)\ne(1,1)}}F_{p,q}.
+\]
+This projection is applied before fixed-sector extraction, before
+\(B_7^{\mathfrak f}\), before determinant pairing, and before quotienting.
+\end{definition}
+
+\begin{definition}[Amplitude-normalized non-\((1,1)\) package]
+\label{def:amplitude-normalized-non-11-package}
+On the collision chart
+\[
+h_1=h-\frac{\delta}{2},
+\qquad
+h_2=h+\frac{\delta}{2},
+\qquad
+a_2=-a_1(1+\kappa\delta),
+\]
+define the formally amplitude-normalized package by
+\[
+\widehat C_{\mathcal W}^{\mathrm{amp}}
+:=
+-a_1^{-1}\delta^{-2}
+(1-\Pi_{1,1})_{\mathrm{mix}}
+C_{\mathcal W}^{\mathrm{raw}}
+\!\left(a_1,h-\frac{\delta}{2};
+        -a_1(1+\kappa\delta),h+\frac{\delta}{2}\right).
+\]
+This is a matrix-valued object before \(\Phi_K\), before determinant
+scalarization, and before quotient extraction.  Its use below is conditional
+on holomorphic extension to \(\delta=0\).
+\end{definition}
+
+\begin{definition}[Representative-level midpoint trivialization]
+\label{def:representative-level-midpoint-trivialization}
+Let
+\[
+A(h):=A_5^{\mathfrak f}(h)\in\mathfrak f_h
+\]
+be the moving quintic fixed-sector line.  Fix a good patch on which
+\[
+A(m)\ne0.
+\]
+Fix an analytic identification
+\[
+\tau_{h\to m}:\mathfrak f_h\longrightarrow\mathfrak f_m.
+\]
+Write
+\[
+A_h^m:=\tau_{h\to m}A(h),
+\qquad
+A_m:=A(m).
+\]
+Let
+\[
+\omega_m:\mathfrak f_m\times\mathfrak f_m\to\mathbf C
+\]
+be the fixed determinant form in the \(I,S\)-basis.
+
+Choose a local transverse section \(E_m\in\mathfrak f_m\) satisfying
+\[
+\omega_m(E_m,A_m)=1,
+\]
+and an analytic linear functional
+\[
+\ell_h:\mathfrak f_m\to\mathbf C
+\]
+satisfying
+\[
+\ell_h(A_h^m)=1.
+\]
+For \(Z(h)\in\mathfrak f_h\), set
+\[
+\widetilde Z(h):=\tau_{h\to m}Z(h),
+\]
+and define
+\[
+\operatorname{Triv}_{h\to m}Z(h)
+:=
+\ell_h(\widetilde Z(h))A_m
++
+\omega_m(\widetilde Z(h),A_h^m)E_m.
+\]
+Then
+\[
+\omega_m\!\left(\operatorname{Triv}_{h\to m}Z(h),A_m\right)
+=
+\omega_m(\widetilde Z(h),A_h^m).
+\]
+Changing \(E_m\) or \(\ell_h\) changes the representative only by a multiple of
+\(A_m\), and hence does not change its class in
+\[
+\mathfrak f_m/\mathbf C A_m.
+\]
+\end{definition}
+
+\begin{definition}[Normalized corrected-whitening package representative]
+\label{def:normalized-corrected-whitening-package-representative}
+Assume the amplitude-normalized package
+\[
+\widehat C_{\mathcal W}^{\mathrm{amp}}
+\]
+extends holomorphically to \(\delta=0\).  Define the normalized fixed-target
+corrected-whitening package by
+\[
+C_{\mathcal W}^{\corr}(h)
+:=
+\operatorname{Triv}_{h\to m}
+\left(
+\widehat C_{\mathcal W}^{\mathrm{amp}}(h)
+\right).
+\]
+Define its moving fixed-sector representative through order \(7\) by
+\[
+B_{\mathrm{pkg}}^{\mathfrak f}(h)
+:=
+\pi_{\mathfrak f_m}[z^{\le7}]\,C_{\mathcal W}^{\corr}(h).
+\]
+Equivalently,
+\[
+B_{\mathrm{pkg}}^{\mathfrak f}(h)
+=
+\sum_{j=0}^{7}(h-m)^jB_j+O((h-m)^8),
+\qquad
+B_j\in\mathfrak f_m.
+\]
+\end{definition}
+
+\begin{definition}[Package-level order-\(7\) quotient extractor]
+\label{def:package-level-order-7-quotient-extractor}
+For the normalized package representative, define
+\[
+B_7^{\mathfrak f}(C_{\mathcal W}^{\corr})
+:=
+[z^7]\,B_{\mathrm{pkg}}^{\mathfrak f}(m).
+\]
+The quotient-valued order-\(7\) extractor is
+\[
+Q_{7,m}^q(C_{\mathcal W}^{\corr})
+:=
+\left[
+B_7^{\mathfrak f}(C_{\mathcal W}^{\corr})
+\right]
+\in
+\mathfrak f_m/\mathbf C A_5^{\mathfrak f}(m).
+\]
+\end{definition}
+
+\begin{definition}[Lower moving package coefficients]
+\label{def:lower-moving-package-coefficients}
+Let \(M\) be a residual-source monomial.  Define
+\[
+B_{\mathrm{pkg}}^{\mathfrak f}(h;M)
+\]
+to be the coefficient of \(M\) in \(B_{\mathrm{pkg}}^{\mathfrak f}(h)\).
+For
+\[
+M_A:=\dot r_3r_2\dot r_4,
+\qquad
+M_C:=\dot r_3\dot r_2r_4,
+\]
+write
+\[
+B_{\mathrm{pkg}}^{\mathfrak f}(h;M)
+=
+\sum_{j\ge0}(h-m)^jB_j[M].
+\]
+Thus
+\[
+B_j[M]:=[(h-m)^jM]B_{\mathrm{pkg}}^{\mathfrak f}(h),
+\qquad
+0\le j\le6.
+\]
+
+If
+\[
+B_j[M]=u_j^B[M]I+v_j^B[M]S
+\]
+and
+\[
+A_5^{\mathfrak f}(h)=\sum_{i\ge0}(h-m)^iA_i,
+\qquad
+A_i=u_i^AI+v_i^AS,
+\]
+then the order-\(7\) quotient-line connection correction on \(M\) is
+\[
+q_{\mathrm{conn},7}[M]
+=
+\sum_{i=1}^{7}
+\omega_m(B_{7-i}[M],A_i).
+\]
+In coordinates,
+\[
+q_{\mathrm{conn},7}[M]
+=
+\sum_{i=1}^{7}
+\left(
+u_{7-i}^B[M]v_i^A
+-
+u_i^Av_{7-i}^B[M]
+\right).
+\]
+If \(A_i,B_j\) are derivative-normalized rather than coefficient-normalized,
+replace this formula by
+\[
+q_{\mathrm{conn},7}[M]
+=
+\sum_{i=1}^{7}\binom{7}{i}
+\omega_m(B_{7-i}[M],A_i).
+\]
+\end{definition}
+
+\begin{remark}[Definition-level material and theorem obligations]
+\label{rem:definition-level-material-and-theorem-obligations}
+Definitions~\ref{def:raw-corrected-whitening-cross-effect}--\ref{def:lower-moving-package-coefficients}
+specify the intended corrected package object.  They do not prove its
+quotient-gauge property.
+
+The following are theorem obligations.
+
+\begin{enumerate}
+\item \textbf{Edge divisibility.}
+One must prove
+\[
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}
+=
+O(a_1\delta^2)
+\]
+on the collision chart, so that
+\[
+-a_1^{-1}\delta^{-2}
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}
+\]
+extends holomorphically to \(\delta=0\).
+
+\item \textbf{Source-bidegree compatibility.}
+The source-bidegree projector must be compatible with the pre-determinant
+fixed-sector coefficient extraction.  It is not valid to define
+\(\Pi_{1,1}\) after determinant scalarization or after quotienting.
+
+\item \textbf{Midpoint trivialization independence.}
+The quotient class in
+\[
+\mathfrak f_m/\mathbf C A_5^{\mathfrak f}(m)
+\]
+must be independent of the auxiliary representative choices \(E_m,\ell_h\).
+
+\item \textbf{Connection cancellation.}
+For the residual monomials
+\[
+M_A=\dot r_3r_2\dot r_4,
+\qquad
+M_C=\dot r_3\dot r_2r_4,
+\]
+one must prove
+\[
+R_7^{(A)}
++
+\sum_{i=1}^{7}\omega_m(B_{7-i}[M_A],A_i)
+=
+0,
+\]
+and
+\[
+R_7^{(C)}
++
+\sum_{i=1}^{7}\omega_m(B_{7-i}[M_C],A_i)
+=
+0.
+\]
+
+\item \textbf{Corrected UV-026.}
+The final corrected quotient-gauge statement is
+\[
+B_7^{\mathfrak f}
+\left(
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\corr}
+\right)
+\in
+\mathbf C A_5^{\mathfrak f}(m),
+\]
+equivalently
+\[
+Q_{7,m}^q(C_{\mathcal W}^{\corr})
+=
+Q_{7,m}^q(\Pi_{1,1}C_{\mathcal W}^{\corr}).
+\]
+\end{enumerate}
+\end{remark}
+
 \begin{thebibliography}{99}
 
 \bibitem{Riemann1859}
