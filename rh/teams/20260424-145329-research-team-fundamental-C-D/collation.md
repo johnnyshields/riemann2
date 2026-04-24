@@ -1131,3 +1131,27 @@ pre-`\Phi_K` Stage 1 normalization.  A valid theorem must define the scalar
 baseline germ, give the ten derivatives or reduce them to named baseline
 objects, and state how `E_{\est}` participates or is removed.  Scale estimates
 cannot be substituted for coefficient tables.
+
+### `20260425-000623-gap-closer-UV026-mixed-order-filtration/report.md`
+
+Signal: UV-026 mixed-order filtration theorem candidate, keep.
+
+Captured takeaway: defining `Gr_a r` as the homogeneous Taylor projection
+`r^{(a+2)}(m)(t-m)^{a+2}/(a+2)!` is order-compatible with both same-point
+`\delta G^{\lin}` and scaled mixed `M=\mathfrak D_Q\delta N^{\lin}`.  The
+same scalar derivative order `k` first appears in both inputs at finite order
+`k-2`; hence grade `1` is `r^{(3)}` and grade `5` is `r^{(7)}`.  This remains
+a theorem candidate, not source proof: it must declare that UV-026 finite grade
+means pre-whitening matrix order and must handle the grade-0 `r^{(2)}` sector.
+
+### Frontier after mixed-order candidate
+
+- **Current best:** Stage 1 has a verified generator and a plausible
+  source-grade theorem candidate.  Open proof obligations are now baseline
+  `q_0` ten-jet, mixed-order projection promotion, grade-0 handling, and
+  determinant tests.
+- **Keep:** same-point and mixed source-linear inputs agree on the order rule
+  `k -> k-2`.
+- **Next:** instantiate the generator with the homogeneous mixed-order source
+  placeholders and see whether the first `L_1YR_1` fixed-sector vectors can be
+  expressed before full baseline specialization.

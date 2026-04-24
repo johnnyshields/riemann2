@@ -84,6 +84,9 @@ Working forward-carry of the current open UV items relevant to the active queue.
   Baseline subtarget: prove a `q_0`-jet theorem giving exact
   `q_0^{(k)}(m)`, `0<=k<=9`, or reducing them to named baseline objects in the
   same ordinary-`z`, pre-`\Phi_K` normalization; scale estimates are not tables.
+  Candidate projection subtarget: if finite grade means lowest pre-whitening
+  ordinary-`z` matrix order, prove `Gr_a r = r^{(a+2)}(m)(t-m)^{a+2}/(a+2)!`
+  for `a in {1,5}`, and separately handle/exclude the grade-0 `r^{(2)}(m)` sector.
   Gate subtargets: compute determinant identities against
   `A_5^{\mathfrak f}(m)` for all seven classified cubic families:
   `L_1YR_1`; `L_3N_0R_0` and `L_0N_0R_3`; `L_2YR_0` and `L_0YR_2`;
