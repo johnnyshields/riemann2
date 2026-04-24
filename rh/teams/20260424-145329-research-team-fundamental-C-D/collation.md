@@ -1030,3 +1030,29 @@ normalization, tag/grade, mixed `\mathfrak D_Q`, shape, and demo
 removable-singularity checks pass.  The accepted scope is infrastructure only:
 actual finite-grade split, scalar source jets, square-root/Frechet tables, and
 seven determinant identities remain missing.
+
+### `20260424-234737-gap-closer-UV026-source-jet-split/report.md`
+
+Signal: UV-026 scalar source-jet split, keep.
+
+Captured takeaway: the ungraded one-pair source derivatives are source-supported
+by the displayed rational formula
+`f_{\beta,\gamma}^{(k)}(m)=F_{1-\beta}^{(k)}(m)+F_\beta^{(k)}(m)` after
+midpoint affine removal, so the source scalars are not arbitrary.  The missing
+statement is now sharper: define scalar projections `Gr_1 r_i` and `Gr_5 r_i`
+before `\Phi_K`, prove compatibility with affine removal, choose the grade-5
+convention (`q^{(5)}/X_3`, `q^{(7)}/X_5`, or another mixed-block grading), and
+provide baseline `q_0^{(0..9)}(m)` formulas.  Witness-region slice labels are
+matrix-level evidence only and do not define the scalar grading by themselves.
+
+### Frontier after source-jet split
+
+- **Current best:** Stage 1 is now blocked by a scalar grade-projection theorem,
+  not by generic table extraction.  Ungraded rational source jets are available;
+  graded source jets are not.
+- **Keep:** plus/minus point samples are one midpoint jet with parity signs, and
+  the `\eta`/`\Delta_0` integrals only use even derivatives through the needed
+  order.
+- **Blocked:** scalar `Gr_1/Gr_5` projection, grade-5 convention, affine-removal
+  compatibility, and baseline `q_0^{(0..9)}(m)` formulas.
+- **Next:** attack the scalar grade-projection theorem directly.

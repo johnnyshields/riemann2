@@ -171,7 +171,9 @@ Active, compact knowledge base shared with every delegated agent.
   The Stage 1 generator reduces the table input to a 42-scalar source-jet
   theorem: baseline `q_0^{(0..9)}(m)` plus tagged grades `r_i^{[1/5](2..9)}(m)`.
   Verifier reruns reproduce the manifest exactly and accept the generator only
-  as infrastructure; actual source jets and determinant gates remain missing.
+  as infrastructure.  Ungraded rational source jets are available from the
+  displayed `f_{\beta,\gamma}` formula, but the scalar `Gr_1/Gr_5` projection
+  and actual determinant gates remain missing.
 
 ## Recurring open gaps
 

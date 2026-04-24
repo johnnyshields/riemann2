@@ -72,7 +72,11 @@ Working forward-carry of the current open UV items relevant to the active queue.
   `r_i=r_i^{[1]}+r_i^{[5]}+\cdots` in this normalization and supply the 42
   scalar midpoint derivatives consumed by the Stage 1 generator:
   `q_0^{(k)}(m)` for `0<=k<=9` and
-  `(r_i^{[a]})^{(k)}(m)` for `i=1,2`, `a in {1,5}`, `2<=k<=9`.
+  `(r_i^{[a]})^{(k)}(m)` for `i=1,2`, `a in {1,5}`, `2<=k<=9`.  Current source
+  supports the ungraded one-pair formula `r_\rho^{(k)}(m)=f_{\beta,\gamma}^{(k)}(m)`
+  for `k>=2`, but still lacks a scalar grade-projection theorem defining
+  `Gr_1 r_i`, `Gr_5 r_i`, its compatibility with affine removal, and whether
+  grade `5` means the `q^{(5)}/X_3`, `q^{(7)}/X_5`, or another mixed-block slice.
   Gate subtargets: compute determinant identities against
   `A_5^{\mathfrak f}(m)` for all seven classified cubic families:
   `L_1YR_1`; `L_3N_0R_0` and `L_0N_0R_3`; `L_2YR_0` and `L_0YR_2`;
