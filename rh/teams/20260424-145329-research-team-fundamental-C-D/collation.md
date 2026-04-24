@@ -752,3 +752,15 @@ Captured takeaway: UV-025 is likely a definition addition plus short theorem, no
 - **Keep:** tagged pre-whitening source block and `\mathcal K` filtration definition.
 - **Verification needed:** source/adversarial check that the tagged substitution uses the same corrected phase variables as the source formulas and does not claim quotient package coincidence.
 - **Next:** dispatch a verifier on the exact `B2-definition-block.md` before writing `paper-updates.md`.
+
+### `20260424-195414-verifier-source-UV025-B2-block/report.md`
+
+Signal: UV-025 source verifier, keep.
+
+Captured takeaway: the candidate `\mathcal B_2` block passes source check within UV-025's pre-whitening scope. The verifier confirms the tagged substitutions use the one-pair variables at `proof_of_rh.tex:2617--2636`, the same-point formulas at `2688--2722`, and the mixed-block Taylor expansion at `2724--2787`; the `\mathcal K`-linear identity follows because all mixed source products have degree at least two. Guardrail: call it a tagged pre-whitening corrected source lift, not the downstream quotient package.
+
+### Frontier after UV-025 source verifier
+
+- **Current best:** source-verified candidate block; adversarial overclaim check still pending.
+- **Keep:** exact source refs for `paper-updates.md`.
+- **Next:** wait for adversarial verifier before staging the guarded definition block.
