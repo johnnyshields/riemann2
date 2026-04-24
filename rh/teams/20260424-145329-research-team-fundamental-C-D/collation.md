@@ -1356,3 +1356,32 @@ the second Frechet inverse-square-root term.  Output
 - **Verifier queue:** check `L_2YR_0`/`L_0YR_2` second-Frechet order closure.
 - **Research lane next:** move to non-Y cubic gates, starting with
   `L_2N_0R_1`/`L_1N_0R_2`; all-left/all-right can run after or in parallel.
+
+### `20260425-010000-verifier-adversarial-UV026-L2YR0-order/report.md`
+
+Signal: UV-026 `L_2YR_0` / `L_0YR_2` homogeneous order verifier, keep.
+
+Captured takeaway: the order-count closure survives the weak point.  The
+second-Frechet inverse-square-root coefficients are holomorphic ordinary-`z`
+series and cannot lower input order.  Under homogeneous grade, all allowed
+placements for `L_2YR_0`/`L_0YR_2` start at order `8`, so these families are
+absent at `B_7^{\mathfrak f}`.  This verifies all Y-slot homogeneous families
+as absent (`L_1YR_1`, `L_2YR_0`, `L_0YR_2`), with the explicit caveat that a
+matrix-output `M^{[5]}` convention would reopen them.  Script
+`agents/20260425-010000-verifier-adversarial-UV026-L2YR0-order/scripts/l2yr0_order_verifier.py`
+has SHA1 `3E96FEB9304BD6AAF3F1FE3547D10E058BBB766E`; output
+`notes/l2yr0_order_verifier.json` has SHA1
+`9447540DC0DE5BF6D7DE3C0E9A4FC6F00AF7D641`.
+
+### Frontier after verified Y-slot absence
+
+- **Current best:** under the clean homogeneous scalar grade, the three
+  Y-containing cubic families do not reach `B_7`; UV-026's active homogeneous
+  gates are now the non-Y families.
+- **Keep:** absence is scoped to the grade convention and is not a determinant
+  proportionality theorem.
+- **Research lane next:** `L_2N_0R_1`/`L_1N_0R_2`, then
+  `L_3N_0R_0`/`L_0N_0R_3`.
+- **Blocked:** paper promotion should wait for clean convention wording and
+  possibly a compact absence lemma; baseline `q_0` and grade-0 handling remain
+  independent Stage 1 blockers.
