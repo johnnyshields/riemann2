@@ -473,3 +473,34 @@ determinant chart.
 - **Next:** attack the corrected block/package definition itself: find or build
   `\mathfrak P_{2,7}^{\corr}` with linear one-amplitude collapse and a quotient
   interaction remainder, then source/adversarial verify it.
+
+### `20260424-183713-explorer-UV010-source-weight-linearization/report.md`
+
+Signal: UV-010 source-weight linearization check, keep.
+
+Captured takeaway: the natural signed-lift workaround is not enough. The source
+obstruction at `proof_of_rh.tex:12192-12227` says whitening cancels the overall
+source amplitude and leaves finite-order coefficients even in \(a\). The
+explorer's toy script
+`agents/20260424-183713-explorer-UV010-source-weight-linearization/scripts/source_weight_linearization_toy.js`
+confirms the local algebra: \(W(a)\) is even, \(aW(a)\) is odd but still fails
+exact one-amplitude collapse because of higher `a^3,a^5,\dots` terms, while the
+formal `a`-linear projection has exact collapse but is not a paper-defined
+package. The next construction target is an invariant source-weight
+linearization functor commuting with whitening and quotient extraction through
+order 7.
+
+### Resume frontier after source-weight check
+
+- **Current best:** actual-package construction is reduced one level further:
+  find a source-weight linear projection/lift for corrected blocks that is
+  invariant, functorial through whitening, and compatible with quotient
+  extraction.
+- **Keep:** determinant good-patch chart, free `P(m,\kappa)` pressure test,
+  actual package-definition target, and source-weight linearization as the
+  immediate constructive subproblem.
+- **Discard:** signed-lift-only package definitions and any route that keeps the
+  higher `a^3,a^5,\dots` terms while claiming exact one-amplitude collapse.
+- **Next:** attack UV-011 by mining the corrected whitening transfer for a
+  canonical `a`-linear coefficient functor or a theorem making the higher
+  source-weight terms quotient-invisible.

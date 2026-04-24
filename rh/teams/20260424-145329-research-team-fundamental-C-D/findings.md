@@ -97,6 +97,15 @@ Active, compact knowledge base shared with every delegated agent.
   The next positive layer is an actual corrected two-atom package
   `\mathfrak P_{2,7}^{\corr}` with linear one-amplitude collapse before
   determinant scalarization.
+- **Signed source-weight lift alone does not give exact one-amplitude collapse.**
+  Provenance:
+  `agents/20260424-183713-explorer-UV010-source-weight-linearization/report.md`
+  with script `scripts/source_weight_linearization_toy.js`. Do-not-retry:
+  multiplying the even whitened source package by the source amplitude and
+  treating the result as the needed two-atom package. It restores oddness but
+  leaves higher `a^3,a^5,\dots` terms; UV-011 asks for an invariant
+  source-weight linear projection or a theorem that those higher terms are
+  quotient-invisible.
 
 ## Goodies
 

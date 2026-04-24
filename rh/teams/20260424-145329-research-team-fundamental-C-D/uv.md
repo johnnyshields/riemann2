@@ -23,6 +23,15 @@ Working forward-carry of the current open UV items relevant to the active queue.
   Current role: immediate C-FS2/C-FS3 definition target under UV-003; descent
   and merger normalization are downstream, not part of this definition target.
 
+- **UV-011** — `rem:wip-parity-projective-factorization-collision-blow-up`
+  Claim: define an invariant source-weight linearization functor for the
+  corrected block triple through order 7, giving exact one-amplitude collapse
+  and commuting with whitening / quotient extraction, or prove the higher
+  `a^3,a^5,\dots` source-weight terms are quotient-invisible.
+  Current role: package-definition subtarget for UV-010; needed before the
+  actual two-atom `\mathcal J_2^{(7)}` / `\mathfrak O_7` construction can be
+  promoted.
+
 - **UV-004** — `rem:wip-explicit-pointwise-bridge-good-patch-detector`
   Claim: the local detector either sees the same-tower source `r=q^{(7)}` or the explicit pointwise package is invisible.
   Current role: bridge/diagnostic theorem beneath the package theorem.
