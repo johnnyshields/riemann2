@@ -168,3 +168,21 @@ problem is bibliographic precision rather than a new analytic theorem.
 Capture action: refined `findings.md`, UV-016 in `uv.md`, and `attempts.md`.
 Next source task: replace web-level locators with exact textbook citations
 before any paper promotion.
+
+## Verifier Wave 20260424
+
+Queued:
+
+- Sartre continues in
+  `agents/20260424-183416-verifier-slot-skeleton/` with
+  `report-source-normalization-audit.md`: adversarially check Jason's
+  completed-Hadamard `B_chi,comp^pair=0` proposal against sign, real-part,
+  edge-exclusion, and double-counting risks.
+- Beauvoir continues in
+  `agents/20260424-183416-gap-compact-regularization/` with
+  `report-textbook-citation-pass.md`: replace the completed-\(L\) input
+  locators with exact textbook citations where possible, or mark the remaining
+  bibliographic checks precisely.
+
+Reason: UV-016 now has a plausible compact source-package core, but promotion
+still needs adversarial normalization review and citation-grade source support.
