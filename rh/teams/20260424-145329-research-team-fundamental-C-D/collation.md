@@ -392,3 +392,16 @@ Captured takeaway: no prior report, summary, or narrow `rh/chats` search contain
 - **Keep:** theorem boundary, determinant-pairing trivialization, native terminology, prior-mining negative, and centered `D_2` as an adversarial pressure target.
 - **Discard:** scalar-only edge package substitutes, one-pair quotient-septic closure as a two-atom theorem, and derivations from lower edge laws plus abstract source axioms alone.
 - **Next:** run adversarial and source verifiers against the first-wave formulation and the determinant-trivialization good-patch claim; then redelegate a positive source construction for `\mathcal J_2^{(7)}` / `\mathfrak O_7`.
+
+### `20260424-182546-verifier-adversarial-UV010-first-wave/report.md`
+
+Signal: UV-010 first-wave adversarial review, keep.
+
+Captured takeaway: adversarial verifier validates the first-wave split as a reduction, not closure. The determinant chart is good on `A_5^{\mathfrak f}(m)\neq0` and only kills representative changes, not a free quotient scalar. The `A_5^{\mathfrak f}=0` locus is a rank jump requiring explicit exclusion or a prepared/projectivized convention. The centered `D_2` computation remains pressure-only. Scalar-only UV-010 routes fail the formal `a_1a_2\delta^2P(m,\kappa)` perturbation test, rerun in `agents/20260424-182546-verifier-adversarial-UV010-first-wave/scripts/uv010_first_wave_adversarial_check.js`.
+
+### Frontier after adversarial verifier
+
+- **Current best:** UV-010 theorem boundary and good-patch quotient trivialization are adversarially supported; UV-010 still needs the actual corrected two-atom order-7 quotient Hessian.
+- **Keep:** determinant chart only after quotient-valued defect exists; explicit good-patch or exceptional-convention requirement; formal perturbation as acceptance test.
+- **Discard:** scalar-only edge package definitions and any proof that promotes centered `D_2` to `\mathfrak O_7` without a source construction.
+- **Next:** wait for source verifier, then assign a positive construction pass for `\mathcal J_2^{(7)}` / `\mathfrak O_7`.
