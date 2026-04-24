@@ -653,3 +653,16 @@ Captured takeaway: UV-023 cannot be promoted by applying `(1,1)` projection afte
 - **Keep:** define the source-linear corrected-block input and fixed-target quotient extractor before any scalarization.
 - **Discard:** post-hoc projection, determinant scalarization as a definition, finite-order grading alone, diagonal merger, and downstream package coincidence as UV-023 proofs.
 - **Next:** attack `Q_7^q` itself as a quotient-valued coefficient extractor and test linearity over the source-tag decomposition.
+
+### `20260424-192320-explorer-UV023-Lh-source-input/report.md`
+
+Signal: UV-023 `L_h` source-input exploration, keep.
+
+Captured takeaway: the best current `L_h` candidate is the pre-whitening pair-kernel-linear derivative of the weighted corrected block perturbation. The one-pair source formulas support this separation and the harness shows it avoids the signed source-weight lift failure: the linear derivative has zero one-amplitude error while the signed lift leaves higher odd amplitude terms. The paper still does not define an actual two-atom corrected block before whitening, nor prove that its pair-kernel-linear derivative is the source functor compatible with `Q_7^q`.
+
+### Frontier after `L_h` source-input pass
+
+- **Current best:** use `L_h=\operatorname{Lin}_{\mathcal K}\mathfrak D_Q(\delta G_{h,-},\delta N_h,\delta G_{h,+})` as the candidate source functor, but treat it as a definition-level target rather than a proved paper theorem.
+- **Keep:** one-pair pre-whitening linear-kernel bookkeeping as support for the definition.
+- **Discard:** post-whitening signed source-weight lift as an exact one-amplitude collapse route.
+- **Next:** wait for the `Q_7^q` extractor lane, then test the combined package `L_h` + pre-determinant `Q_7^q` against cubic non-`(1,1)` source bidegrees.
