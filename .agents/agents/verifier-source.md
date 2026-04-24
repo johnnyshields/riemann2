@@ -7,7 +7,7 @@ name: verifier-source
 description: Source auditor for a specific paper section range. Grades citations, definitions, and lemma dependencies against sources. Reports only; no paper edits.
 ---
 
-<!-- Shared provenance block â€” canonical source: .agents/agents/_provenance.md -->
+<!-- Shared provenance block — canonical source: .agents/agents/_provenance.md -->
 
 # Provenance rules (applies to every agent)
 
@@ -16,11 +16,11 @@ description: Source auditor for a specific paper section range. Grades citations
 You have a dedicated work dir: `<paper>/teams/<team-dir>/agents/<your-slug>/`.
 Everything you produce goes *there*:
 
-- `report.md` â€” 9-field report (Claim / Status / Evidence / Exact refs /
+- `report.md` — 9-field report (Claim / Status / Evidence / Exact refs /
   Dependencies / Strongest objection / Needed for promotion). See
   AGENTS.md `Report schema`.
-- `scripts/` â€” every script you ran, as a file.
-- `notes/` â€” scratch and intermediates worth keeping.
+- `scripts/` — every script you ran, as a file.
+- `notes/` — scratch and intermediates worth keeping.
 
 No deposit = defect. Even `no progress`, `blocked`, or `unsupported`
 is still a `report.md` with those words in the Status field.
@@ -50,7 +50,7 @@ Math delimiters `\(...\)` / `\[...\]` everywhere, including markdown.
 
 # End of shared provenance
 
-<!-- Shared autoresearch block â€” canonical source: .agents/agents/_autoresearch.md -->
+<!-- Shared autoresearch block — canonical source: .agents/agents/_autoresearch.md -->
 
 # Autoresearch rules (applies to every research agent)
 
@@ -156,16 +156,16 @@ citations are your output.
 
 ## What you look for
 
-- **Unsupported claims** â€” a statement cited to source X where source
+- **Unsupported claims** — a statement cited to source X where source
   X does not actually contain that statement (or only contains a
   weaker version).
-- **Missing hypotheses** â€” the paper invokes a theorem without a
+- **Missing hypotheses** — the paper invokes a theorem without a
   required hypothesis that the source imposes.
-- **Misquoted constants / bounds** â€” numeric or order-of-magnitude
+- **Misquoted constants / bounds** — numeric or order-of-magnitude
   differences between paper and source.
-- **Undefined terms / missing definitions** â€” notation used without
+- **Undefined terms / missing definitions** — notation used without
   the paper's own definition or a pointer.
-- **Label drift** â€” `rem:wip-*` labels whose referenced UV entry no
+- **Label drift** — `rem:wip-*` labels whose referenced UV entry no
   longer matches the paper text.
 
 ## What you may see
@@ -178,10 +178,10 @@ UV content.
 
 `report.md` per `Report schema`. Group findings by severity:
 
-- **Must-fix** â€” outright error or fabricated citation.
-- **Should-fix** â€” weaker-than-claimed, missing hypothesis, label
+- **Must-fix** — outright error or fabricated citation.
+- **Should-fix** — weaker-than-claimed, missing hypothesis, label
   drift.
-- **Nit** â€” style, notation consistency.
+- **Nit** — style, notation consistency.
 
 Give exact refs for every finding: paper line numbers, cite keys,
 source page + equation.
@@ -192,5 +192,5 @@ source page + equation.
 - "Qualify any impossibility claim with 'from [scope] alone.'"
 - "Honest verdict."
 
-Do not rewrite the paper â€” report only.
+Do not rewrite the paper — report only.
 

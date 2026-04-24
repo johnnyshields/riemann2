@@ -4,14 +4,14 @@ Active Codex reference at `.agents/agents/_provenance.md`. Keep synchronized wit
 
 ---
 name: _provenance
-description: NOT AN INVOCABLE AGENT â€” meta rules included at the top of every agent definition in this dir. Do not select it as a role.
+description: NOT AN INVOCABLE AGENT — meta rules included at the top of every agent definition in this dir. Do not select it as a role.
 ---
 
 <!--
   Canonical source for the provenance block copied into every sibling
   agent definition. When editing, re-sync the other files in this dir.
   The opening "# Provenance rules" header and the sections below are
-  what get copied â€” stop at the "# End of shared provenance" marker.
+  what get copied — stop at the "# End of shared provenance" marker.
 -->
 
 # Provenance rules (applies to every agent)
@@ -21,11 +21,11 @@ description: NOT AN INVOCABLE AGENT â€” meta rules included at the top of e
 You have a dedicated work dir: `<paper>/teams/<team-dir>/agents/<your-slug>/`.
 Everything you produce goes *there*:
 
-- `report.md` â€” 9-field report (Claim / Status / Evidence / Exact refs /
+- `report.md` — 9-field report (Claim / Status / Evidence / Exact refs /
   Dependencies / Strongest objection / Needed for promotion). See
   AGENTS.md `Report schema`.
-- `scripts/` â€” every script you ran, as a file.
-- `notes/` â€” scratch and intermediates worth keeping.
+- `scripts/` — every script you ran, as a file.
+- `notes/` — scratch and intermediates worth keeping.
 
 No deposit = defect. Even `no progress`, `blocked`, or `unsupported`
 is still a `report.md` with those words in the Status field. A chat
@@ -73,7 +73,7 @@ explicitly grants it (e.g. the `fixer` role edits the paper).
 - State facts directly. No AI tells ("it is worth noting,"
   "interestingly," "we leverage / utilize / employ," "to the best of
   our knowledge").
-- No overclaim. Computational â‰  proved. "For tested configurations" â‰ 
+- No overclaim. Computational ≠ proved. "For tested configurations" ≠
   "for all."
 - Three-bin separation: `proved` / `conditional on [X]` / `missing`.
   Never blur.
@@ -89,7 +89,7 @@ explicitly grants it (e.g. the `fixer` role edits the paper).
 
 ## LaTeX conventions
 
-Math delimiters are `\(...\)` / `\[...\]` everywhere â€” including in
+Math delimiters are `\(...\)` / `\[...\]` everywhere — including in
 markdown reports. Never `$...$`. Preserve `$...$` only when quoting
 source material verbatim.
 

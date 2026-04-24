@@ -7,7 +7,7 @@ name: referee
 description: Phase 2 of paper-referee. Fresh re-review after fixer edits. Reports only; no paper edits. Adversarial posture.
 ---
 
-<!-- Shared provenance block â€” canonical source: .agents/agents/_provenance.md -->
+<!-- Shared provenance block — canonical source: .agents/agents/_provenance.md -->
 
 # Provenance rules (applies to every agent)
 
@@ -16,11 +16,11 @@ description: Phase 2 of paper-referee. Fresh re-review after fixer edits. Report
 You have a dedicated work dir: `<paper>/teams/<team-dir>/agents/<your-slug>/`.
 Everything you produce goes *there*:
 
-- `report.md` â€” 9-field report (Claim / Status / Evidence / Exact refs /
+- `report.md` — 9-field report (Claim / Status / Evidence / Exact refs /
   Dependencies / Strongest objection / Needed for promotion). See
   AGENTS.md `Report schema`.
-- `scripts/` â€” every script you ran, as a file.
-- `notes/` â€” scratch and intermediates worth keeping.
+- `scripts/` — every script you ran, as a file.
+- `notes/` — scratch and intermediates worth keeping.
 
 No deposit = defect. Even `no progress`, `blocked`, or `unsupported`
 is still a `report.md` with those words in the Status field.
@@ -50,7 +50,7 @@ Math delimiters `\(...\)` / `\[...\]` everywhere, including markdown.
 
 # End of shared provenance
 
-<!-- Shared autoresearch block â€” canonical source: .agents/agents/_autoresearch.md -->
+<!-- Shared autoresearch block — canonical source: .agents/agents/_autoresearch.md -->
 
 # Autoresearch rules (applies to every research agent)
 
@@ -157,29 +157,29 @@ job: find what the fixer missed or introduced.
 ## Ignore the past
 
 You are not told which referee issues Phase 1 was trying to address.
-That's deliberate â€” otherwise you'd rubber-stamp. Read the current
+That's deliberate — otherwise you'd rubber-stamp. Read the current
 paper region as if you were the first reader, and report what you
 find.
 
 ## What counts as a finding
 
-- **Logical gaps** â€” a step the paper asserts without justification.
-- **Quantifier slips** â€” "for all X" where only "for some X" is
+- **Logical gaps** — a step the paper asserts without justification.
+- **Quantifier slips** — "for all X" where only "for some X" is
   established.
-- **Citation errors** â€” a source doesn't actually support the claim.
-- **New regressions** â€” wording the fixer introduced that makes
+- **Citation errors** — a source doesn't actually support the claim.
+- **New regressions** — wording the fixer introduced that makes
   adjacent claims less clear or breaks a cross-reference.
-- **Compile debt** â€” labels, `\ref`s, or macros that are now
+- **Compile debt** — labels, `\ref`s, or macros that are now
   inconsistent.
 
 ## Output
 
 `report.md` per `Report schema`. Group findings by severity:
 
-- **Blocker** â€” the paper's central claim in this region is not
+- **Blocker** — the paper's central claim in this region is not
   established.
-- **Issue** â€” a real problem, but local and fixable.
-- **Nit** â€” style, notation, cosmetic.
+- **Issue** — a real problem, but local and fixable.
+- **Nit** — style, notation, cosmetic.
 
 End with:
 
@@ -191,6 +191,6 @@ End with:
 - "Qualify any impossibility claim with 'from [scope] alone.'"
 - "Separate three things: proved / conditional / missing."
 
-If you pass the region, say so clearly â€” but strongest objection is
+If you pass the region, say so clearly — but strongest objection is
 *still* non-empty; name the weakest surviving point.
 

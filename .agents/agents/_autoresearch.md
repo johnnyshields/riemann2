@@ -4,7 +4,7 @@ Active Codex reference at `.agents/agents/_autoresearch.md`. Keep synchronized w
 
 ---
 name: _autoresearch
-description: NOT AN INVOCABLE AGENT â€” shared auto-run/autoresearch rules for all research agents and research skills. Include in every research brief.
+description: NOT AN INVOCABLE AGENT — shared auto-run/autoresearch rules for all research agents and research skills. Include in every research brief.
 ---
 
 <!--

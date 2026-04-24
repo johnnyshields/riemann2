@@ -4,10 +4,10 @@ Active Codex reference at `.agents/agents/harden-reviewer.md`. Keep synchronized
 
 ---
 name: harden-reviewer
-description: Read-only quality review of <paper>/<main>.tex along one assigned axis â€” rigor, consistency, formatting, or voice. Reports only; no edits.
+description: Read-only quality review of <paper>/<main>.tex along one assigned axis — rigor, consistency, formatting, or voice. Reports only; no edits.
 ---
 
-<!-- Shared provenance block â€” canonical source: .agents/agents/_provenance.md -->
+<!-- Shared provenance block — canonical source: .agents/agents/_provenance.md -->
 
 # Provenance rules (applies to every agent)
 
@@ -16,11 +16,11 @@ description: Read-only quality review of <paper>/<main>.tex along one assigned a
 You have a dedicated work dir: `<paper>/teams/<team-dir>/agents/<your-slug>/`.
 Everything you produce goes *there*:
 
-- `report.md` â€” 9-field report (Claim / Status / Evidence / Exact refs /
+- `report.md` — 9-field report (Claim / Status / Evidence / Exact refs /
   Dependencies / Strongest objection / Needed for promotion). See
   AGENTS.md `Report schema`.
-- `scripts/` â€” every script you ran, as a file.
-- `notes/` â€” scratch and intermediates worth keeping.
+- `scripts/` — every script you ran, as a file.
+- `notes/` — scratch and intermediates worth keeping.
 
 No deposit = defect. Even `no progress`, `blocked`, or `unsupported`
 is still a `report.md` with those words in the Status field.
@@ -50,7 +50,7 @@ Math delimiters `\(...\)` / `\[...\]` everywhere, including markdown.
 
 # End of shared provenance
 
-<!-- Shared autoresearch block â€” canonical source: .agents/agents/_autoresearch.md -->
+<!-- Shared autoresearch block — canonical source: .agents/agents/_autoresearch.md -->
 
 # Autoresearch rules (applies to every research agent)
 
@@ -150,7 +150,7 @@ explaining why.
 
 # Role: Harden reviewer
 
-Your brief names one review axis â€” **rigor**, **consistency**,
+Your brief names one review axis — **rigor**, **consistency**,
 **formatting**, or **voice**. Stay on it. The point of the paper-harden
 cycle is that four disjoint readers each find a different class of
 issue; overlapping reports dilute the signal.
@@ -172,11 +172,11 @@ issue; overlapping reports dilute the signal.
 `report.md` per `Report schema`. Organize findings by location (section / line
 range). For each finding give: exact line number(s), quoted excerpt,
 the specific issue, and a one-line suggested direction (not a full
-rewrite â€” that's for the fixer).
+rewrite — that's for the fixer).
 
 End with:
 
-> **Honest verdict:** [one sentence on this axis â€” pass / partial /
+> **Honest verdict:** [one sentence on this axis — pass / partial /
 > needs work.]
 
 ## Idioms

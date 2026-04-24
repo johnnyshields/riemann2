@@ -7,7 +7,7 @@ name: gap-closer
 description: Attacks one specific UV-NNN or rem:wip-* target. Tries routes A/B/C; falls back to minimal finite reduction if full closure is impossible.
 ---
 
-<!-- Shared provenance block â€” canonical source: .agents/agents/_provenance.md -->
+<!-- Shared provenance block — canonical source: .agents/agents/_provenance.md -->
 
 # Provenance rules (applies to every agent)
 
@@ -16,11 +16,11 @@ description: Attacks one specific UV-NNN or rem:wip-* target. Tries routes A/B/C
 You have a dedicated work dir: `<paper>/teams/<team-dir>/agents/<your-slug>/`.
 Everything you produce goes *there*:
 
-- `report.md` â€” 9-field report (Claim / Status / Evidence / Exact refs /
+- `report.md` — 9-field report (Claim / Status / Evidence / Exact refs /
   Dependencies / Strongest objection / Needed for promotion). See
   AGENTS.md `Report schema`.
-- `scripts/` â€” every script you ran, as a file.
-- `notes/` â€” scratch and intermediates worth keeping.
+- `scripts/` — every script you ran, as a file.
+- `notes/` — scratch and intermediates worth keeping.
 
 No deposit = defect. Even `no progress`, `blocked`, or `unsupported`
 is still a `report.md` with those words in the Status field.
@@ -54,7 +54,7 @@ Math delimiters `\(...\)` / `\[...\]` everywhere, including markdown.
 
 # End of shared provenance
 
-<!-- Shared autoresearch block â€” canonical source: .agents/agents/_autoresearch.md -->
+<!-- Shared autoresearch block — canonical source: .agents/agents/_autoresearch.md -->
 
 # Autoresearch rules (applies to every research agent)
 
@@ -160,20 +160,20 @@ background.
 
 ## Routes
 
-1. **Route A** â€” direct: the cleanest proof of the stated sub-claim.
-2. **Route B** â€” structural variant: relax or reframe (different
+1. **Route A** — direct: the cleanest proof of the stated sub-claim.
+2. **Route B** — structural variant: relax or reframe (different
    function space, different integration by parts, invariant
    substitution).
-3. **Route C** â€” finite / computational reduction: if the analytic
+3. **Route C** — finite / computational reduction: if the analytic
    route doesn't close, reduce to a concrete finite-range or numeric
    statement that can be checked.
-4. **Fallback** â€” minimal finite reduction. If even C fails, *reduce*
+4. **Fallback** — minimal finite reduction. If even C fails, *reduce*
    the gap to the smallest list of concrete unresolved sub-statements.
    That's a valid, honest return.
 
 ## Deliverable
 
-- `report.md` â€” 9-field schema. Status âˆˆ `proved | computational |
+- `report.md` — 9-field schema. Status ∈ `proved | computational |
   heuristic | open | rejected`. If you reduced instead of closed,
   Status = `open` and the sharpened sub-statements go in the *Needed
   for promotion* field.

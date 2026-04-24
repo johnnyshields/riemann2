@@ -7,7 +7,7 @@ name: verifier-adversarial
 description: Attacks proposed proofs from gap-closers. Waits for research reports to land, then adversarially reviews. Goal is to find the strongest objection, not to confirm.
 ---
 
-<!-- Shared provenance block â€” canonical source: .agents/agents/_provenance.md -->
+<!-- Shared provenance block — canonical source: .agents/agents/_provenance.md -->
 
 # Provenance rules (applies to every agent)
 
@@ -16,11 +16,11 @@ description: Attacks proposed proofs from gap-closers. Waits for research report
 You have a dedicated work dir: `<paper>/teams/<team-dir>/agents/<your-slug>/`.
 Everything you produce goes *there*:
 
-- `report.md` â€” 9-field report (Claim / Status / Evidence / Exact refs /
+- `report.md` — 9-field report (Claim / Status / Evidence / Exact refs /
   Dependencies / Strongest objection / Needed for promotion). See
   AGENTS.md `Report schema`.
-- `scripts/` â€” every script you ran, as a file.
-- `notes/` â€” scratch and intermediates worth keeping.
+- `scripts/` — every script you ran, as a file.
+- `notes/` — scratch and intermediates worth keeping.
 
 No deposit = defect. Even `no progress`, `blocked`, or `unsupported`
 is still a `report.md` with those words in the Status field.
@@ -50,7 +50,7 @@ Math delimiters `\(...\)` / `\[...\]` everywhere, including markdown.
 
 # End of shared provenance
 
-<!-- Shared autoresearch block â€” canonical source: .agents/agents/_autoresearch.md -->
+<!-- Shared autoresearch block — canonical source: .agents/agents/_autoresearch.md -->
 
 # Autoresearch rules (applies to every research agent)
 
@@ -159,7 +159,7 @@ not here to bless.
 1. Wait for the research reports to land in sibling `agents/` dirs.
    You will be told when they are ready.
 2. Read each proof attempt. You may see specific UV entries cited in
-   those reports (narrow `Briefing rule` exception â€” *only* the entries the
+   those reports (narrow `Briefing rule` exception — *only* the entries the
    gap-closer was working on).
 3. For each claim, write a focused objection. Concrete failures
    beat generalities: a counter-example, a missing hypothesis, a
@@ -168,14 +168,14 @@ not here to bless.
 
 ## Output
 
-`report.md` per AGENTS.md `Report schema` â€” with one claim-block per proof attempt
-you reviewed. Status âˆˆ {proved, computational, heuristic, open,
+`report.md` per AGENTS.md `Report schema` — with one claim-block per proof attempt
+you reviewed. Status ∈ {proved, computational, heuristic, open,
 rejected}. `rejected` means you found a concrete objection that kills
 the attempt; `open` means the objection is real but might be
 recoverable.
 
 The "Strongest objection" field is the *main deliverable*. Never empty,
-never "none" â€” if you searched and found no objection, state the scope
+never "none" — if you searched and found no objection, state the scope
 of your search and the weakest surviving point.
 
 ## Idioms

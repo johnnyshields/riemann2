@@ -4,10 +4,10 @@ Active Codex reference at `.agents/agents/rewriter.md`. Keep synchronized with `
 
 ---
 name: rewriter
-description: Compactness rewrite of one paper section. Tightens prose, combines redundancy, removes unnecessary qualifiers while preserving every convention â€” macros, labels, cite keys, theorem statements, notation, math content.
+description: Compactness rewrite of one paper section. Tightens prose, combines redundancy, removes unnecessary qualifiers while preserving every convention — macros, labels, cite keys, theorem statements, notation, math content.
 ---
 
-<!-- Shared provenance block â€” canonical source: .agents/agents/_provenance.md -->
+<!-- Shared provenance block — canonical source: .agents/agents/_provenance.md -->
 
 # Provenance rules (applies to every agent)
 
@@ -16,11 +16,11 @@ description: Compactness rewrite of one paper section. Tightens prose, combines 
 You have a dedicated work dir: `<paper>/teams/<team-dir>/agents/<your-slug>/`.
 Everything you produce goes *there*:
 
-- `report.md` â€” 9-field report (Claim / Status / Evidence / Exact refs /
+- `report.md` — 9-field report (Claim / Status / Evidence / Exact refs /
   Dependencies / Strongest objection / Needed for promotion). See
   AGENTS.md `Report schema`.
-- `scripts/` â€” every script you ran, as a file.
-- `notes/` â€” scratch and intermediates worth keeping.
+- `scripts/` — every script you ran, as a file.
+- `notes/` — scratch and intermediates worth keeping.
 
 No deposit = defect. Even `no progress`, `blocked`, or `unsupported`
 is still a `report.md` with those words in the Status field.
@@ -56,7 +56,7 @@ Math delimiters `\(...\)` / `\[...\]` everywhere, including markdown.
 
 # End of shared provenance
 
-<!-- Shared autoresearch block â€” canonical source: .agents/agents/_autoresearch.md -->
+<!-- Shared autoresearch block — canonical source: .agents/agents/_autoresearch.md -->
 
 # Autoresearch rules (applies to every research agent)
 
@@ -160,7 +160,7 @@ Compactness rewrite of ONE section, scope defined by the brief. Your
 output goes in `agents/<your-slug>/rewrite.tex` (or `.patch`), NOT
 directly in the canonical paper.
 
-## Hard invariants â€” do not touch
+## Hard invariants — do not touch
 
 - **Macros.** Frozen namespace. No new `\newcommand`, no redefinitions.
   Use only macros already defined in the preamble.
@@ -174,7 +174,7 @@ directly in the canonical paper.
   game.
 - **Notation.** Do not introduce new symbols or rename existing ones.
 - **Mathematical content.** A rewrite that changes what is being
-  *proved* is not a rewrite â€” it's a reprise. Do not do that here.
+  *proved* is not a rewrite — it's a reprise. Do not do that here.
 
 ## What you may do
 
@@ -189,8 +189,8 @@ directly in the canonical paper.
 
 ## Output
 
-- `agents/<your-slug>/rewrite.tex` â€” your rewritten section.
-- `report.md` per `Report schema` â€” diff summary, word count delta, list of cuts,
+- `agents/<your-slug>/rewrite.tex` — your rewritten section.
+- `report.md` per `Report schema` — diff summary, word count delta, list of cuts,
   list of invariants preserved (spot-check macros / labels / cite
   keys), strongest objection (what the assembler might fault).
 

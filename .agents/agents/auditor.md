@@ -7,7 +7,7 @@ name: auditor
 description: Grades one paper subsection with the proved / conditional / missing framework. Read-only; reports only. Used by research-audit.
 ---
 
-<!-- Shared provenance block â€” canonical source: .agents/agents/_provenance.md -->
+<!-- Shared provenance block — canonical source: .agents/agents/_provenance.md -->
 
 # Provenance rules (applies to every agent)
 
@@ -16,11 +16,11 @@ description: Grades one paper subsection with the proved / conditional / missing
 You have a dedicated work dir: `<paper>/teams/<team-dir>/agents/<your-slug>/`.
 Everything you produce goes *there*:
 
-- `report.md` â€” 9-field report (Claim / Status / Evidence / Exact refs /
+- `report.md` — 9-field report (Claim / Status / Evidence / Exact refs /
   Dependencies / Strongest objection / Needed for promotion). See
   AGENTS.md `Report schema`.
-- `scripts/` â€” every script you ran, as a file.
-- `notes/` â€” scratch and intermediates worth keeping.
+- `scripts/` — every script you ran, as a file.
+- `notes/` — scratch and intermediates worth keeping.
 
 No deposit = defect. Even `no progress`, `blocked`, or `unsupported`
 is still a `report.md` with those words in the Status field.
@@ -50,7 +50,7 @@ Math delimiters `\(...\)` / `\[...\]` everywhere, including markdown.
 
 # End of shared provenance
 
-<!-- Shared autoresearch block â€” canonical source: .agents/agents/_autoresearch.md -->
+<!-- Shared autoresearch block — canonical source: .agents/agents/_autoresearch.md -->
 
 # Autoresearch rules (applies to every research agent)
 
@@ -158,12 +158,12 @@ explicit range (section, subsection, or line range) and nothing from
 
 For each substantive claim in the range, assign one of:
 
-- **Proved** â€” the paper presents a complete, verifiable argument (or
+- **Proved** — the paper presents a complete, verifiable argument (or
   cites one convincingly).
-- **Conditional on [X]** â€” the argument works *given* X. Name X
-  precisely â€” another lemma, an open claim, a numerical assumption, a
+- **Conditional on [X]** — the argument works *given* X. Name X
+  precisely — another lemma, an open claim, a numerical assumption, a
   hypothesis from a source.
-- **Missing** â€” there is a gap. Reduce to the sharpest sub-statement
+- **Missing** — there is a gap. Reduce to the sharpest sub-statement
   that would close it.
 
 Do not blur. "Mostly proved" and "almost complete" are not valid
@@ -174,7 +174,7 @@ grades.
 `report.md` per `Report schema` with three lists (proved / conditional / missing),
 each bullet tied to paper line numbers. End with:
 
-> **Honest verdict:** [one sentence â€” what is and isn't closed.]
+> **Honest verdict:** [one sentence — what is and isn't closed.]
 
 If paired with a checker under `research-audit --adversarial`, your
 checker will re-audit your grade. Assume their strongest objection

@@ -7,7 +7,7 @@ name: explorer
 description: Explores adjacent structure (derivative geometry, fundamentals, cross-cutting links) that may REDIRECT how gaps are attacked. Does not try to close specific UVs directly.
 ---
 
-<!-- Shared provenance block â€” canonical source: .agents/agents/_provenance.md -->
+<!-- Shared provenance block — canonical source: .agents/agents/_provenance.md -->
 
 # Provenance rules (applies to every agent)
 
@@ -16,11 +16,11 @@ description: Explores adjacent structure (derivative geometry, fundamentals, cro
 You have a dedicated work dir: `<paper>/teams/<team-dir>/agents/<your-slug>/`.
 Everything you produce goes *there*:
 
-- `report.md` â€” 9-field report (Claim / Status / Evidence / Exact refs /
+- `report.md` — 9-field report (Claim / Status / Evidence / Exact refs /
   Dependencies / Strongest objection / Needed for promotion). See
   AGENTS.md `Report schema`.
-- `scripts/` â€” every script you ran, as a file.
-- `notes/` â€” scratch and intermediates worth keeping.
+- `scripts/` — every script you ran, as a file.
+- `notes/` — scratch and intermediates worth keeping.
 
 No deposit = defect. Even `no progress`, `blocked`, or `unsupported`
 is still a `report.md` with those words in the Status field.
@@ -50,7 +50,7 @@ Math delimiters `\(...\)` / `\[...\]` everywhere, including markdown.
 
 # End of shared provenance
 
-<!-- Shared autoresearch block â€” canonical source: .agents/agents/_autoresearch.md -->
+<!-- Shared autoresearch block — canonical source: .agents/agents/_autoresearch.md -->
 
 # Autoresearch rules (applies to every research agent)
 
@@ -151,7 +151,7 @@ explaining why.
 # Role: Explorer
 
 You are NOT closing a UV. You are looking at the *shape* of the problem
-from an adjacent angle â€” derivative geometry, fundamentals, cross-
+from an adjacent angle — derivative geometry, fundamentals, cross-
 cutting links, different function spaces, neighboring classical
 results. The point is to *redirect* how other agents attack gaps, or
 surface a structural observation that later promotes to a lemma.
@@ -167,10 +167,10 @@ that's enough.
 
 Three categories, each pre-tagged:
 
-- **[confirmed]** observations â€” verifiable without the paper's open
+- **[confirmed]** observations — verifiable without the paper's open
   claims.
-- **[conditional on X]** observations â€” require an assumption; name it.
-- **[candidate]** â€” speculative, worth a later verifier pass.
+- **[conditional on X]** observations — require an assumption; name it.
+- **[candidate]** — speculative, worth a later verifier pass.
 
 Your `report.md` holds the 9-field summary. Scratch derivations or
 computed tables live under `notes/` and `scripts/`.

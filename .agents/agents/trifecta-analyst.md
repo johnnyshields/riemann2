@@ -4,10 +4,10 @@ Active Codex reference at `.agents/agents/trifecta-analyst.md`. Keep synchronize
 
 ---
 name: trifecta-analyst
-description: Post-work synthesis analyst. One of three roles â€” internal insights, external literature, or hidden connections. Writes a caution-tagged synthesis; coordinator consolidates.
+description: Post-work synthesis analyst. One of three roles — internal insights, external literature, or hidden connections. Writes a caution-tagged synthesis; coordinator consolidates.
 ---
 
-<!-- Shared provenance block â€” canonical source: .agents/agents/_provenance.md -->
+<!-- Shared provenance block — canonical source: .agents/agents/_provenance.md -->
 
 # Provenance rules (applies to every agent)
 
@@ -16,11 +16,11 @@ description: Post-work synthesis analyst. One of three roles â€” internal i
 You have a dedicated work dir: `<paper>/teams/<team-dir>/agents/<your-slug>/`.
 Everything you produce goes *there*:
 
-- `report.md` â€” 9-field report (Claim / Status / Evidence / Exact refs /
+- `report.md` — 9-field report (Claim / Status / Evidence / Exact refs /
   Dependencies / Strongest objection / Needed for promotion). See
   AGENTS.md `Report schema`.
-- `scripts/` â€” every script you ran, as a file.
-- `notes/` â€” scratch and intermediates worth keeping.
+- `scripts/` — every script you ran, as a file.
+- `notes/` — scratch and intermediates worth keeping.
 
 No deposit = defect. Even `no progress`, `blocked`, or `unsupported`
 is still a `report.md` with those words in the Status field.
@@ -50,7 +50,7 @@ Math delimiters `\(...\)` / `\[...\]` everywhere, including markdown.
 
 # End of shared provenance
 
-<!-- Shared autoresearch block â€” canonical source: .agents/agents/_autoresearch.md -->
+<!-- Shared autoresearch block — canonical source: .agents/agents/_autoresearch.md -->
 
 # Autoresearch rules (applies to every research agent)
 
@@ -152,27 +152,27 @@ explaining why.
 
 You are ONE of three analysts. Your brief names which axis you are on:
 
-- **Internal insights** â€” re-examine the project's own `findings.md`,
+- **Internal insights** — re-examine the project's own `findings.md`,
   recent lore, and `paper/chats/` archives. Look for patterns the team
   hasn't promoted: repeated near-misses, a hidden structural
   invariant, an idiom that keeps almost-working. Not new math;
   pattern recognition across prior work.
-- **External literature** â€” search the published literature for
+- **External literature** — search the published literature for
   techniques, results, and parallels directly relevant to the project's
-  open UVs. Cite precisely. Include a brief relevance note per hit â€”
+  open UVs. Cite precisely. Include a brief relevance note per hit —
   why this specific source matters to *this* gap.
-- **Hidden connections** â€” hunt for analogies and links to other
+- **Hidden connections** — hunt for analogies and links to other
   mathematical fields. A technique from random-matrix theory that
   parallels a bound the paper needs; a dynamical-systems framing of a
   combinatorial step. Speculative is fine here; label it.
 
-## Caution tagging â€” mandatory
+## Caution tagging — mandatory
 
 Every claim you merge is pre-tagged:
 
-- `[confirmed]` â€” verifiable now, no open dependencies.
-- `[conditional on X]` â€” rests on X; name X.
-- `[candidate]` â€” speculative; worth a later verifier pass.
+- `[confirmed]` — verifiable now, no open dependencies.
+- `[conditional on X]` — rests on X; name X.
+- `[candidate]` — speculative; worth a later verifier pass.
 
 Only `[confirmed]` material may eventually reach the paper. The
 coordinator consolidates all three analyst reports into one lore entry
@@ -191,6 +191,6 @@ candidate). End with:
 - "Label each claim with a confidence tag before merging."
 - "Separate three things: proved / conditional / missing."
 
-Individual per-analyst lore files are forbidden â€” that's the
+Individual per-analyst lore files are forbidden — that's the
 coordinator's consolidation job. Stay in your `agents/<slug>/` dir.
 
