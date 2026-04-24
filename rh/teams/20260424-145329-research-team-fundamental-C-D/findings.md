@@ -109,48 +109,29 @@ Active, compact knowledge base shared with every delegated agent.
 
 ## Goodies
 
-- **Quintic/septic local algebra --- reusable normal forms.** Provenance:
-  `paper/chats/20260418-202600-*quintic-septic-algebra-audit` and §12
-  explicit-finite-order-model subsection.
-- **ECT interval geometry** --- reusable tangent/separator hooks.
-  Provenance: `paper/chats/20260418-202557-*audit-ect-geometry`.
-- **Affine normal forms** --- reusable across pair-level and multi-pair
-  reductions. Provenance: `paper/chats/20260419-052654-*affine-normal-form-audit`.
-- **Toy microscopic expansion schema** --- quadratic expansion template
-  (currently schematic). Location: `rem:wip-toy-microscopic-expansion`
-  (line 26692) and §14 appendix.
+- **Archived reusable background:** quintic/septic normal forms, ECT interval
+  geometry, affine normal forms, and the toy microscopic expansion remain in
+  the April chat audits and `rem:wip-toy-microscopic-expansion` (line 26692).
 - **Best current explicit bridge data are already compressed to one source tower.**
   Provenance: same-tower closure and rank-two coupling on the overlap patch
   (`proof_of_rh.tex` lines 21142--21275). Usage: if the bridge theorem is local,
   it must run through the single explicit source `r=q^{(7)}` via
   `\lambda^{[1]}` / `\mathcal G^{[1]}`; no second primitive pointwise field remains.
 - **Hidden `\Phi_K`-visible state is an affine lift-coordinate.** Provenance:
-  current `agents/20260424-145500-explorer-hidden-state-geometry/report.md` and
-  prior `agents/20260424-112500-phik-kernel-structure/report.md`. Usage: D should
-  be framed as affine-bundle descent / `\ker\Phi_K` transport along the septic
-  lift line `A_7^{\mathfrak f}+\mathbf C A_5^{\mathfrak f}`, not raw representative
-  equality; on `v_5\neq0`, `\widehat\Psi` alone does not determine the visible lift.
-  Current local sections are `v_7=0` on `v_5\neq0` and `u_7=0` on `u_5\neq0`,
-  with overlap translation `-\Delta_7/(u_5v_5)`.
+  `agents/20260424-145500-explorer-hidden-state-geometry/report.md` and
+  `agents/20260424-112500-phik-kernel-structure/report.md`. Usage: frame D as
+  affine-bundle descent / `\ker\Phi_K` transport along
+  `A_7^{\mathfrak f}+\mathbf C A_5^{\mathfrak f}`, not raw representative equality.
 - **C determinant slot is exactly the septic quotient-defect class on good patches.**
-  Provenance:
-  `agents/20260424-165509-gap-closer-C-R-determinant-control/report.md` with
-  script `scripts/determinant_slot_linear_algebra.js`; source audit
-  `agents/20260424-165509-verifier-source-C-R-channel/report.md`. Usage: on
-  `A_5^{\mathfrak f}\neq0`, the map
-  `[R]\mapsto\det(R,A_5^{\mathfrak f})` identifies
-  `\mathfrak f/\mathbf C A_5^{\mathfrak f}` with `\mathbf C`; C-FS2/C-FS3 must
-  control the actual quotient class `[R]`, not only a representative.
+  Provenance: `agents/20260424-165509-gap-closer-C-R-determinant-control/report.md`
+  and `agents/20260424-165509-verifier-source-C-R-channel/report.md`. Usage: on
+  `A_5^{\mathfrak f}\neq0`, `[R]\mapsto\det(R,A_5^{\mathfrak f})` identifies
+  the quotient with `\mathbf C`; control the actual quotient class, not a representative.
 - **Exceptional-divisor `[R]` first needs a septic quotient edge package.**
-  Provenance:
-  `agents/20260424-165509-explorer-C-actual-package-construction/report-R-definition-followup.md`.
-  Usage: finite-delta `[R]` is conditional on an existing
-  `\overline E_{12}^{(7;1)}`; the actual divisor object requires
-  `\overline E_{12}^{(7;1)}=\delta^2\mathcal H_7^q(m,\kappa,\delta^2)` plus
-  analytic quotient-line trivialization to the midpoint quotient. UV-010 is a
-  definition target only: descent, `\kappa`-independence, and merger
-  normalization are downstream claims. Source audit found no existing
-  `\mathcal H_7^q` under another name.
+  Provenance: `agents/20260424-165509-explorer-C-actual-package-construction/report-R-definition-followup.md`.
+  Usage: finite-delta `[R]` is conditional on `\overline E_{12}^{(7;1)}`;
+  the divisor object needs `\delta^2\mathcal H_7^q` plus midpoint quotient
+  trivialization. Descent, `\kappa`-independence, and merger are downstream.
 - **UV-010 statement language should avoid "quotient-septic closure."**
   Provenance:
   `agents/20260424-173642-explorer-UV010-source-language/report.md`. Usage:
@@ -167,21 +148,13 @@ Active, compact knowledge base shared with every delegated agent.
   midpoint quotient when `A_5^{\mathfrak f}(m)\neq0`; the `A_5^{\mathfrak f}=0`
   locus is a rank jump and needs exclusion or a separate exceptional convention.
 - **UV-010 first-wave reports sharpen the theorem boundary but do not close the edge law.**
-  Provenance:
-  `agents/20260424-173642-gap-closer-UV010-theorem-formulation/report.md`,
-  `agents/20260424-173642-gap-closer-UV010-septic-hessian/report.md`, and
-  `agents/20260424-173642-explorer-UV010-prior-miner/report.md`; verified by
-  `agents/20260424-182546-verifier-source-UV010-first-wave/report.md` and
-  `agents/20260424-182546-verifier-adversarial-UV010-first-wave/report.md` with
-  `scripts/uv010_first_wave_adversarial_check.js`. Usage: state the
-  target as a fixed-midpoint quotient edge law for a normalized
-  `a_1^{-1}\overline{\mathcal E}_{12}^{(7;1)}` class and
-  `[R]_{\mathrm{edge}}=-\mathcal H_7^q(m,\kappa,0)`. Current sources expose the
-  centered `D_2` pressure target and one-pair quotient closure, but no actual
-  two-atom `\mathcal J_2^{(7)}` / `\mathfrak O_7` construction. Determinant
-  scalarization is only good-patch bookkeeping; it does not kill the free septic
-  quotient coordinate, and `A_5^{\mathfrak f}=0` needs exclusion or a separate
-  prepared/projectivized convention.
+  Provenance: first-wave reports plus source/adversarial verifiers
+  `agents/20260424-182546-verifier-*/report.md`. Usage: state the target as a
+  normalized fixed-midpoint quotient edge law with
+  `[R]_{\mathrm{edge}}=-\mathcal H_7^q(m,\kappa,0)`. Current sources expose
+  centered `D_2` and one-pair quotient closure, but no actual two-atom
+  `\mathcal J_2^{(7)}` / `\mathfrak O_7`; determinant scalarization is only
+  good-patch bookkeeping and `A_5^{\mathfrak f}=0` needs a convention.
 - **UV-011 whitening-side candidate is the first homogeneous transfer `\mathcal T_1`.**
   Provenance:
   `agents/20260424-184004-gap-closer-UV011-linearized-whitening-functor/report.md`.
@@ -205,33 +178,17 @@ Active, compact knowledge base shared with every delegated agent.
   vs finite-core), and `rem:wip-dream-parity-identity-four-point` (line
   24167). Blocks the general finite-core endgame (UV-007).
 - **Package-level coincidence for the actual corrected two-atom package.**
-  Touches: the residual exact fixed-shear corner and the honest order-7 lane;
-  best current shape is same reduced image germ / collision-functoriality.
-  Current sharp obstruction: reduced C does not imply fixed-shear package theorem B
-  without a scalar-normalization law fixing the raw representative; reduced equality
-  still permits common scalar freedom in the cubic/quintic defects. C also needs the
-  exceptional-divisor convention fixed: `\widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0)`
-  means analytic continuation after `2\omega=\kappa\delta`, not a raw diagonal restriction.
-  The current C2a split is quotient-visible state-locality vs genuinely relational /
-  provenance-sensitive two-atom data. Patch transitions for the affine lift are
-  base-controlled (`S_u=-(x/Y)S`), so the remaining C obstruction is fiber selection:
-  first construct the septic quotient edge package `\mathcal H_7^q` for `[R]`
-  (UV-010), then prove state-locality/descent for `[R]`, then show diagonal
-  merger kills the exceptional slope/provenance fiber.
+  Touches the fixed-shear corner and honest order-7 lane. Reduced C does not
+  imply package theorem B without scalar normalization and the exceptional-divisor
+  convention. Current order: construct `\mathcal H_7^q` / `[R]` (UV-010), prove
+  state-locality/descent, then prove diagonal merger kills slope/provenance data.
 - **Hidden extraction theorem from finite-core package data to the first surviving odd coefficient of `H_m`.**
-  Touches: UV-002 / UV-007; this is the bridge from `\widehat\Psi`-side control
-  to the already-built `\Xi_\zeta^{(N)}` extractor. Current sharp obstruction:
-  the `T=v_7/c` proxy is normalized septic data only, and neither finite
-  determination from `(x,Y,S,T)` nor a bound `N\le4` is in the current draft. The
-  minimal D target is affine-bundle descent / `\ker\Phi_K` transport for higher-order
-  freedom above the normalized septic lift. Same-tower closure rules out a second
-  primitive pointwise highest-new scalar; the live obstruction is relational/nonlocal
-  transport state or state-locality of the D-min visible odd block.
-- **Finite-core lower-model transfer theorem E.** Touches: UV-002 / UV-007.
-  After C and D, the remaining endgame theorem is not another package theorem but
-  a lower-model transfer replacing the pair-like toy law: either direct control of
-  `\Xi_{\core}^{(N)}` or a one-sided lower law for `H_{\core}^{(2N-1)}` on the
-  microscopic interval, then the already-proved positive-kernel `N`-point formula.
+  Touches UV-002 / UV-007. `T=v_7/c` is only normalized septic data; finite
+  determination from `(x,Y,S,T)` and `N\le4` are not in the draft. Minimal D
+  target: affine-bundle descent / `\ker\Phi_K` transport for higher freedom.
+- **Finite-core lower-model transfer theorem E.** Touches UV-002 / UV-007:
+  control `\Xi_{\core}^{(N)}` or a one-sided lower law for
+  `H_{\core}^{(2N-1)}`, then use the positive-kernel `N`-point formula.
 - **Exceptional-locus `M=0` reduction after good-patch edge law.**
   Touches: UV-003 and the finite-core residual two-point lane; current route is
   Weierstrass/prepared-branch reduction, still heuristic.
