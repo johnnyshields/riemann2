@@ -855,6 +855,42 @@ their owned dirs, do not edit ledgers or the paper, use the 9-field report
 schema plus autoresearch closing block and `Ledger destination`, and separate
 proved / conditional / missing.
 
+## Resume dispatch 20260424-234737
+
+Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260424-234737`.
+
+Base commit: `b5d2230`.
+
+Coordinator status: the Stage 1 source-table bottleneck is now reduced to a
+runnable generator plus a missing 42-scalar source-jet theorem.  The next wave
+splits verification of the generator from the upstream finite-grade/source-jet
+attack.
+
+Roster:
+
+1. `verifier-adversarial-UV026-stage1-generator` writes only under
+   `agents/20260424-234737-verifier-adversarial-UV026-stage1-generator/`.
+   Task: source/adversarial verify the generator and manifest against the
+   normalization checklist: ordinary `z`, tags/grades retained,
+   `\mathfrak D_Q` mixed input, removable-singularity check, and 42-scalar
+   count.
+2. `gap-closer-UV026-source-jet-split` writes only under
+   `agents/20260424-234737-gap-closer-UV026-source-jet-split/`.
+   Task: source the finite-grade split `r_i^{[1]}`, `r_i^{[5]}` and the
+   baseline/source midpoint derivatives, or reduce them to the smallest exact
+   missing substatements.
+
+Ground-truth checks:
+
+- Generator verification may confirm infrastructure, reject a specific bug, or
+  narrow conditional scope.  It must not promote UV-026.
+- Source-jet progress must provide formulas/relations for some of the 42
+  scalars, reduce the independent scalar count, or source-reject the split from
+  current paper.
+- Both lanes stay pre-`\Phi_K`, pre-determinant, and pre-quotient.
+
+Protected surfaces and report contract are unchanged.
+
 ## Resume dispatch 20260424-233157
 
 Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260424-233157`.

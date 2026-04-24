@@ -1005,3 +1005,16 @@ split and actual scalar derivative formulas remain missing.
   formulas/values are not in the inspected source.
 - **Next:** send the generator through source/normalization verification, and
   in parallel attack the finite-grade scalar split.
+
+### Dispatch 20260424-234737
+
+Issued two follow-ups from the Stage 1 generator result.  Harvey owns generator
+verification under
+`agents/20260424-234737-verifier-adversarial-UV026-stage1-generator/`.  Hilbert
+owns the source-jet split attack under
+`agents/20260424-234737-gap-closer-UV026-source-jet-split/`.
+
+Expected ledger destinations: generator verifier findings go to `attempts.md`
+and possibly `findings.md` if they are reusable guardrails; source-jet formulas
+or a sharper missing split go to `uv.md`/`attempts.md`; no paper update unless a
+verified theorem statement emerges.
