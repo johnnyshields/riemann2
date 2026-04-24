@@ -361,8 +361,8 @@ Remaining open work before UV-017 closure:
 
 - prove that the actual paired corrected finite-\(s\) blocks realize the
   displayed chart, rather than assume it;
-- adversarially check and then promote the fixed-\(m\)
-  holomorphy/removable-singularity lemma for the literal chart;
+- promote the fixed-\(m\) holomorphy/removable-singularity lemma for the
+  literal chart if the paper needs that lemma stated separately;
 - prove a uniform microscopic pole-clearance radius if the later theorem needs
   one;
 - prove the same-point determinant/spectral gap, or keep it as an explicit
@@ -380,4 +380,6 @@ Provenance:
 `agents/20260424-192025-gap-uv017-coefficient-freeze/report-paired-finite-s-formulas.md`;
 `agents/20260424-183416-verifier-slot-skeleton/report-uv017-finite-s-formula-audit.md`;
 `agents/20260424-183416-verifier-slot-skeleton/report-uv017-conditional-theorem-framing-audit.md`;
-`agents/20260424-192025-gap-uv017-coefficient-freeze/report-uv017-holomorphy-positivity-whitening.md`.
+`agents/20260424-192025-gap-uv017-coefficient-freeze/report-uv017-holomorphy-positivity-whitening.md`;
+`agents/20260424-183416-verifier-slot-skeleton/report-uv017-holomorphy-positivity-audit.md`;
+`agents/20260424-183416-verifier-slot-skeleton/scripts/check_uv017_local_admissibility.py`.

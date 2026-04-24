@@ -149,15 +149,18 @@ is the supplied team dir unless another path is named.
   `agents/20260424-183416-verifier-slot-skeleton/report-uv017-finite-s-formula-audit.md`,
   `agents/20260424-183416-verifier-slot-skeleton/report-uv017-conditional-theorem-framing-audit.md`.
 - **For the literal UV-017 chart, fixed-\(m\) holomorphy is formal but
-  positivity is a determinant gap.** Noether's local-admissibility reduction
-  proves fixed-midpoint holomorphy/removable singularities from the local
-  holomorphic edge logarithmic derivative and a primitive of
-  \(q_\chi^{pair}\). Same-point positivity does not follow from formula shape:
-  at \(s=0\) it is exactly the finite gap
+  positivity is exactly a determinant gap.** Noether's local-admissibility
+  reduction proves fixed-midpoint holomorphy/removable singularities from the
+  local holomorphic edge logarithmic derivative \(D_\chi\) and a primitive of
+  \(q_\chi^{pair}\); Sartre's exact-algebra audit verifies the removable-pole
+  orders, including the \(s^{-3}\) mixed-block entry. Same-point positivity
+  does not follow from formula shape: at \(s=0\) it is exactly the finite gap
   \(q>0\) and \(2qq''+4q^4-3(q')^2>0\), with a uniform spectral version needed
   for holomorphic whitening on a microscopic disk. Provenance:
   `agents/20260424-192025-gap-uv017-coefficient-freeze/report-uv017-holomorphy-positivity-whitening.md`,
-  `agents/20260424-192025-gap-uv017-coefficient-freeze/notes/holomorphy_positivity_whitening_reduction.md`.
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/notes/holomorphy_positivity_whitening_reduction.md`,
+  `agents/20260424-183416-verifier-slot-skeleton/report-uv017-holomorphy-positivity-audit.md`,
+  `agents/20260424-183416-verifier-slot-skeleton/scripts/check_uv017_local_admissibility.py`.
 - **Tau is a self-dual phase-channel stress test, not the first exact `S(m)`
   target.** Tau has only a conditional compact source-package blueprint; paired
   Dirichlet remains sharper for exact source-plus-slot work. Provenance:
@@ -182,7 +185,8 @@ is the supplied team dir unless another path is named.
   \(2qq''+4q^4-3(q')^2>0\); a general local phase such as
   \(q(t)=1+K(t-m)\) violates it for large \(K\). Provenance:
   `notes/paired_slot_hypotheses.md`, `notes/whitening_interface.md`,
-  `agents/20260424-192025-gap-uv017-coefficient-freeze/report-uv017-holomorphy-positivity-whitening.md`.
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/report-uv017-holomorphy-positivity-whitening.md`,
+  `agents/20260424-183416-verifier-slot-skeleton/report-uv017-holomorphy-positivity-audit.md`.
 - **A paired slot identity can be tautological unless the coefficient is fixed
   independently.** Defining `R_chi^pair` after subtracting a chosen linear term
   does not prove source-to-slot realization; UV-017 needs an independent

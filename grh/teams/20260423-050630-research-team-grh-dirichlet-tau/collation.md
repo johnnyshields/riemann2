@@ -473,3 +473,29 @@ added a reusable finding and negative, refined UV-017 and `attempts.md`. Next
 move is adversarial verification of the removable-pole and determinant
 reduction, then a direct attack on the determinant gap from the completed
 strip-edge source.
+
+## Sartre UV-017 Holomorphy / Positivity Audit 20260424
+
+Report:
+`agents/20260424-183416-verifier-slot-skeleton/report-uv017-holomorphy-positivity-audit.md`.
+Script:
+`agents/20260424-183416-verifier-slot-skeleton/scripts/check_uv017_local_admissibility.py`
+with SHA256
+`E47E7D5809B297ADF83EDEA8CAE1EDE168F144C6F7871FB0565E5AAF1D239DCA`.
+
+Verdict: keep, proved as a reduction. Sartre's exact rational script verifies
+Noether's mixed-block removable orders, including the \(s^{-3}\) entry, and
+confirms the same-point determinant condition:
+\[
+q>0,\qquad 2qq''+4q^4-3(q')^2>0.
+\]
+The audit also clarifies that the holomorphic object is \(D_\chi\); the
+real-part notation is only the real-boundary scalar projection. Holomorphic
+whitening follows conditionally from holomorphic same-point blocks plus a
+spectral gap, and matrix-level whitening does not rescale the source
+coefficient when \(A_{\mathrm{val}}\) is defined after whitening.
+
+Capture action: marked the local-admissibility reduction as adversarially
+checked in `findings.md`, refined UV-017 and `attempts.md`, and added the
+script to provenance. UV-017 remains open on the actual determinant/spectral
+gap, uniform radius, freeze-rule remainder, and scalar readout.

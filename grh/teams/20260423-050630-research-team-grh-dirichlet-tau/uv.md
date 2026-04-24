@@ -77,10 +77,14 @@
   microscopic radius as a pole-clearance/derivative-control hypothesis.
   Same-point positivity reduces to the explicit determinant/spectral gap
   \(q>0\) and \(2qq''+4q^4-3(q')^2>0\), with holomorphic whitening conditional
-  on that gap. If "corrected" means anything beyond this literal chart, the
-  correction maps must be named and checked for unit value-coordinate
-  derivative; determinant/spectral gap, freeze-rule remainder, and scalar
-  readout remain open unless assumed.
+  on that gap. Sartre's exact-algebra audit verifies the removable-pole orders
+  and determinant formula for the displayed chart. The next sharp target is to
+  prove or refute this determinant/spectral gap for the actual completed paired
+  source, starting with the one-zero strip-edge kernel and tail stability. If
+  "corrected" means anything beyond this literal chart, the correction maps
+  must be named and checked for unit value-coordinate derivative; determinant
+  gap, uniform radius, freeze-rule remainder, and scalar readout remain open
+  unless assumed.
 
 - **UV-018** - corrected odd/transverse realization and boundary package.
   After paired slot realization, construct the corrected odd/transverse scalar,
