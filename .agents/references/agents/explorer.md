@@ -1,6 +1,6 @@
-# Codex-adapted reference
+# Codex reference
 
-Active Codex reference at `.agents/references/agents/explorer.md`. Adapted from the historical Claude agent; treat Claude-specific tool names as historical source wording if any remain.
+Active Codex reference at `.agents/references/agents/explorer.md`. Keep synchronized with `AGENTS.md`, `_provenance.md`, and `_autoresearch.md`.
 
 ---
 name: explorer

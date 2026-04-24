@@ -18,7 +18,7 @@ this file.
 | `<paper>/teams/.../paper-updates.md` | Team-lead-authored staged edits for `<paper>/<main>.tex`. Created when the team has paper-ready changes; applied by the coordinator then deleted or archived. |
 | `<paper>/teams/.../agents/YYYYMMDD-HHMMSS-<agent-slug>/` | Per-agent work dir — nested inside the team dir. Each agent writes its own report, scripts, and notes here. |
 | `lore/` | Workflow plans, syntheses, decisions. Permanent. |
-| `<paper>/chats/` | Historical ChatGPT archives. Read-only. |
+| `<paper>/chats/` | Historical ChatGPT/Codex exports. Read-only. |
 | `scripts/` + `scripts/wip/` | Computation. `final-scripts/<paper>/` for hardened ones. |
 
 **Authoritative state lives in the most recent team dir.** There is no
@@ -35,19 +35,27 @@ monolithic `amsart` with a frozen macro namespace.
 
 ## Dispatch
 
-Every delegation goes through `TeamCreate` with named agents
-(e.g. `gap-closer-mixed4pt`) so each is tmux-visible. Never the raw `Agent`
-tool. Communicate via `SendMessage`; `TeamDelete` only at a real terminal
-condition, explicit user halt, or when the team has gone stale after a long
-idle window.
+Delegation uses Codex subagents. Use
+`spawn_agent` for new teammates, `send_input` for follow-up, `wait_agent` only
+when the coordinator is blocked on a result, and `close_agent` only at a real
+terminal condition, explicit user halt, or stale long-idle team. Do not write
+legacy team-tool names, raw-agent invocations, model-pin shims, or tmux-only
+instructions into new briefs or skills.
 
-**Keep TeamCreate agents alive.** A research team is a live research group, not
-a one-shot batch. After an agent deposits a report, keep the teammate around for
+Spawn Codex subagents only when the user explicitly asks for delegated,
+parallel, or team-style work, or invokes a skill whose purpose is multi-agent
+dispatch (`research-team`, `research-attack`, `research-audit`, `trifecta`,
+`paper-harden`, `paper-referee`, `paper-rewrite`, `script-promote`). Otherwise
+the coordinator runs the workflow locally in the main chat: read state, edit
+canonical files, run checks, and write the required provenance artifacts.
+
+**Keep Codex teammates alive.** A research team is a live research group, not a
+one-shot batch. After an agent deposits a report, keep the teammate around for
 follow-up questions, adversarial back-and-forth, and the next adjacent task.
 Prefer redelegating to the same named agent when the new task builds on its
 context or expertise; spawn a replacement only when the role changes, the agent
 is blocked, or fresh independence matters. Maintain a continuous dialogue with
-active agents through `SendMessage`: clarify reports, push back on weak claims,
+active agents through `send_input`: clarify reports, push back on weak claims,
 ask for sharper UV reductions, then assign the next task without tearing down
 the team.
 
@@ -59,11 +67,10 @@ the next concrete move, work, deposit, state the next step, and wait for
 redelegation. They do not ask whether to continue and they do not stop at
 ordinary cycle boundaries.
 
-**Use Opus for research.** Every research task and research agent uses Opus,
-always. When spawning teammates for `research-team`, `research-attack`,
-`research-audit`, `trifecta`, `paper-harden`, `paper-referee`, `paper-rewrite`,
-`script-promote`, or any other research workflow, pass `model: "opus"` on each
-`Agent` tool call. Do not use Sonnet or Haiku for research delegation.
+**Model choice.** Use the inherited Codex model by default for research
+delegation. Override the model only when the user explicitly asks or a bounded
+task has a clear task-specific reason; record that reason in `dispatch.md`.
+Do not hard-code vendor model names in skills, briefs, or agent definitions.
 
 **3+3+2 roster** for a balanced cycle: 3 gap-closers (each on a specific
 UV-NNN / `rem:wip-*`, with routes A/B/C and fallback to minimal finite
@@ -104,8 +111,8 @@ When in doubt between `research-team` and `research-attack`, prefer
 The coordinator decides roster sizes, UV targets, explorer topics, non-goals
 (synthesized from adjacent in-flight work and recent lore), team-dir slugs,
 commit messages, subsection selection, demote timing, forward-carry
-filtering for findings.md / uv.md — without asking. `AskUserQuestion` is
-for architectural or irreversible decisions only. Never interrupt over
+filtering for findings.md / uv.md — without asking. Ask the user directly only
+for architectural or irreversible decisions. Never interrupt over
 research-direction minutia.
 
 ## Auto-run — default for research work
@@ -214,7 +221,7 @@ Every brief also names:
 - the exact in-scope paper lines, team files, source files, and prior agent
   reports the agent must read before acting;
 - the protected surfaces the agent must not edit (`<main>.tex`, `findings.md`,
-  `uv.md`, `attempts.md`, `paper-updates.md`, `CLAUDE.md`, `lore/`, and other
+  `uv.md`, `attempts.md`, `paper-updates.md`, `AGENTS.md`, `lore/`, and other
   agents' dirs unless an explicit role exception applies);
 - the ground-truth check for the task: theorem statement, `rem:wip-*`, source
   reference, verifier question, pinned objection set, or script output that
@@ -321,7 +328,7 @@ provenance is laundered provenance.
 
 Agents do **not** write outside their own `agents/<slug>/` dir, and in
 particular do **not** touch `<main>.tex`, the team dir's `findings.md` /
-`uv.md` / `paper-updates.md`, `CLAUDE.md`, `lore/`, or another agent's
+`uv.md` / `paper-updates.md`, `AGENTS.md`, `lore/`, or another agent's
 dir — unless a skill grants an explicit exception (e.g. `paper-referee`
 Phase 1). Those team-dir files belong to the team lead; agents suggest
 changes in their reports.
@@ -373,7 +380,7 @@ No status annotations in the live `uv.md` / `findings.md` — they stay
 brief-size. Git log across team dirs is the audit trail.
 
 **Broadcast corrections immediately.** If something already in the paper is
-found false, `SendMessage` every active agent before doing anything else,
+found false, `send_input` every active agent before doing anything else,
 then demote + optional negative-capture in one commit. Cost of a delayed
 correction >> cost of a brief interruption.
 
@@ -383,7 +390,8 @@ The handoff bug is: an agent surfaces a UV candidate or finding, it
 lands in `agents/<slug>/report.md`, and then it dies there — the next
 cycle's briefing doesn't see it. Two mechanics prevent this.
 
-**Capture before shutdown.** Before `TeamDelete`, the team lead walks
+**Capture before shutdown.** Before closing, replacing, or abandoning a team,
+the team lead walks
 *every* `agents/<slug>/report.md` in the cycle and processes each claim
 through `Claim lifecycle (git-as-archive)` — promote, demote, file a new UV-NNN in the team dir's
 `uv.md`, add a bullet to `findings.md`, log a negative result, or
@@ -433,6 +441,14 @@ provenance to its source: chat path, `rem:wip-*` label, paper line number,
 script + SHA, UV-NNN, or agent report path. A claim without provenance is a
 defect — reviewers must flag it.
 
+**Codex chat logs are secondary provenance.** The authoritative record is still
+on disk: team dirs, reports, scripts, ledgers, lore, commits, and exported chat
+summaries. Use `chat-backup` to write a structured `chat.md` / `chat-N.md`
+summary because Codex does not expose a stable raw-transcript API in every
+runtime. If a Codex or ChatGPT export is available under `<paper>/chats/`, cite
+that file path. Do not let an app-only hidden chat log be the sole support for a
+mathematical or computational claim.
+
 **Provenance is written by the agent that produced it — never by the team
 lead after the fact.** When an agent finishes, its evidence must already
 be on disk under `agents/<slug>/`: the report, the scripts that produced
@@ -462,7 +478,7 @@ ephemeral `/tmp/` scripts for anything that produces a cited number.
   agent subdirs into one end-of-cycle commit; a crash or compact erases
   everything unstaged. Cadence while agents are live: commit after each
   agent's deposit lands, or every few minutes of active collation,
-  whichever comes first. Use the slack between `SendMessage` returns —
+  whichever comes first. Use the slack between `send_input` / `wait_agent` returns —
   that's the natural commit window.
 - **Stage by name.** Never `git add -A` / `.`. Subjects imperative-mood;
   promote/demote/reject subjects cite UV-NNN; commit bodies mention the
@@ -504,7 +520,7 @@ When writing or revising a skill:
 
 - Name the goal, the invariants, and the outputs. Trust the model with the
   path between them.
-- Refer to CLAUDE.md sections rather than repeating their content. A skill
+- Refer to AGENTS.md sections rather than repeating their content. A skill
   saying "follow `Writing discipline`" is stronger than re-listing the
   seven bullets.
 - Include a bash snippet only when the exact command is load-bearing or

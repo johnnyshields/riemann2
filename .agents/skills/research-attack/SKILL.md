@@ -3,21 +3,15 @@ name: research-attack
 description: Small-cycle variant of research-team. 1-2 gap-closers + 1 verifier for a focused push on one UV-NNN or rem:wip-* target. Cheaper than the 3+3+2 full cycle.
 ---
 
-## Codex adaptation
+## Codex workflow
 
-This skill was adapted from the workspace Claude skill of the same name and should now be used as a Codex skill. Use it as procedural guidance inside Codex.
-
-- Prefer doing coordinator work directly in this thread: read files, edit with `apply_patch`, run focused checks, and summarize outcomes.
-- When the original skill calls for Claude-only mechanisms such as `TeamCreate`, `SendMessage`, `TeamDelete`, `subagent_type`, or `model: the original Claude research model`, translate that into Codex behavior. Spawn Codex subagents only when the user explicitly asks for delegation, parallel agents, or team-style work; otherwise run the workflow locally.
-- For any spawned Codex worker/explorer, give a concrete, bounded task, an owned work area, the relevant files to read, and the same report/deposit expectations the skill describes.
-- Preserve repository policy from `CLAUDE.md` where it describes paper state, team directories, UV ledgers, findings, writing discipline, and provenance. Treat Claude-specific tool names as historical wording, not callable tools.
-- Keep canonical paper edits coordinator-owned unless this skill explicitly authorizes an edit-capable phase.
+Follow `AGENTS.md` for coordinator policy, provenance, dispatch, and git rules. Work locally unless the user requested a delegated/team workflow or invoked a multi-agent skill. For delegated work, use Codex subagents (`spawn_agent`, `send_input`, `wait_agent`, `close_agent`) with concrete ownership, bounded prompts, and on-disk report/deposit requirements. Use the inherited Codex model by default; override only when the user asks or the task clearly requires it. Keep canonical paper edits coordinator-owned unless this skill explicitly grants an edit-capable phase.
 
 # Research Attack
 
 Focused push on one gap. 1 gap-closer + 1 adversarial verifier by
 default; `--double` for 2 gap-closers on different routes. Follows
-`.agents/references/agents/_autoresearch.md`, CLAUDE.md `Dispatch` long-lived-agent rules,
+`.agents/references/agents/_autoresearch.md`, AGENTS.md `Dispatch` long-lived-agent rules,
 `Briefing rule`, `Team dirs and agent self-deposit` deposit, `Capture before shutdown, forward-carry at dispatch` forward-carry. Use the inherited Codex model by default for every
 research agent, always. Do not override Codex model selection unless explicitly needed.
 
@@ -40,15 +34,14 @@ resolves to the best match). Optional `--double`.
 
 ## Dispatch
 
-`Codex subagent delegation when explicitly requested team_name: "research-attack-<ts>"`. Spawn with the inherited Codex model by default on
-every `Agent` call:
+When delegated teamwork is authorized, record team name `research-attack-<ts>` in `dispatch.md`. Spawn Codex subagents with the inherited Codex model by default:
 
-- **Gap-closer(s)** (`Codex agent role: gap-closer`) â€” `gap-<slug>` (or
+- **Gap-closer(s)** (`role prompt: gap-closer`) â€” `gap-<slug>` (or
   `-routeA` / `-routeB` under `--double`). Briefing: full
   `.agents/references/agents/_autoresearch.md`, current team dir's `findings.md`, the
   specific UV entry verbatim (narrow `Briefing rule` exception), target in cleanest form,
   routes A/B/C, the `agents/<slug>/` path + self-deposit checklist.
-- **`verifier-adversarial`** (`Codex agent role: verifier-adversarial`) â€”
+- **`verifier-adversarial`** (`role prompt: verifier-adversarial`) â€”
   same briefing skeleton plus the UV entry (`Briefing rule` adversarial exception).
   Waits for gap-closer(s) to deposit, then attacks.
 

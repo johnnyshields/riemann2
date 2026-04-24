@@ -3,15 +3,9 @@ name: paper-demote
 description: Structured reverse-promotion. Remove or weaken a claim currently in <paper>/<main>.tex, reinstate a UV-NNN entry in <team-dir>/uv.md, and optionally capture a negative finding â€” all in one atomic commit. Use when a promoted claim turns out to be wrong or weaker than stated.
 ---
 
-## Codex adaptation
+## Codex workflow
 
-This skill was adapted from the workspace Claude skill of the same name and should now be used as a Codex skill. Use it as procedural guidance inside Codex.
-
-- Prefer doing coordinator work directly in this thread: read files, edit with `apply_patch`, run focused checks, and summarize outcomes.
-- When the original skill calls for Claude-only mechanisms such as `TeamCreate`, `SendMessage`, `TeamDelete`, `subagent_type`, or `model: the original Claude research model`, translate that into Codex behavior. Spawn Codex subagents only when the user explicitly asks for delegation, parallel agents, or team-style work; otherwise run the workflow locally.
-- For any spawned Codex worker/explorer, give a concrete, bounded task, an owned work area, the relevant files to read, and the same report/deposit expectations the skill describes.
-- Preserve repository policy from `CLAUDE.md` where it describes paper state, team directories, UV ledgers, findings, writing discipline, and provenance. Treat Claude-specific tool names as historical wording, not callable tools.
-- Keep canonical paper edits coordinator-owned unless this skill explicitly authorizes an edit-capable phase.
+Follow `AGENTS.md` for coordinator policy, provenance, dispatch, and git rules. Work locally unless the user requested a delegated/team workflow or invoked a multi-agent skill. For delegated work, use Codex subagents (`spawn_agent`, `send_input`, `wait_agent`, `close_agent`) with concrete ownership, bounded prompts, and on-disk report/deposit requirements. Use the inherited Codex model by default; override only when the user asks or the task clearly requires it. Keep canonical paper edits coordinator-owned unless this skill explicitly grants an edit-capable phase.
 
 # Paper Demote
 
@@ -29,7 +23,7 @@ negative-capture, all in one commit.
 ## Protocol
 
 **Before anything**: if an active team is running on the affected claim,
-broadcast the correction first (`send_input to: "*"`) BEFORE editing.
+broadcast the correction first with one `send_input` per active agent BEFORE editing.
 Delayed corrections are the high-cost failure.
 
 Edit `<paper>/<main>.tex`. With `--weaken`, replace the stronger statement

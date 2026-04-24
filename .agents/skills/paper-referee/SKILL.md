@@ -3,24 +3,18 @@ name: paper-referee
 description: Two-phase review loop on <paper>/<main>.tex â€” Phase 1 fixers edit the paper to address known issues, Phase 2 fresh referees re-review. Phase 1 is an explicit edit-capable exception.
 ---
 
-## Codex adaptation
+## Codex workflow
 
-This skill was adapted from the workspace Claude skill of the same name and should now be used as a Codex skill. Use it as procedural guidance inside Codex.
-
-- Prefer doing coordinator work directly in this thread: read files, edit with `apply_patch`, run focused checks, and summarize outcomes.
-- When the original skill calls for Claude-only mechanisms such as `TeamCreate`, `SendMessage`, `TeamDelete`, `subagent_type`, or `model: the original Claude research model`, translate that into Codex behavior. Spawn Codex subagents only when the user explicitly asks for delegation, parallel agents, or team-style work; otherwise run the workflow locally.
-- For any spawned Codex worker/explorer, give a concrete, bounded task, an owned work area, the relevant files to read, and the same report/deposit expectations the skill describes.
-- Preserve repository policy from `CLAUDE.md` where it describes paper state, team directories, UV ledgers, findings, writing discipline, and provenance. Treat Claude-specific tool names as historical wording, not callable tools.
-- Keep canonical paper edits coordinator-owned unless this skill explicitly authorizes an edit-capable phase.
+Follow `AGENTS.md` for coordinator policy, provenance, dispatch, and git rules. Work locally unless the user requested a delegated/team workflow or invoked a multi-agent skill. For delegated work, use Codex subagents (`spawn_agent`, `send_input`, `wait_agent`, `close_agent`) with concrete ownership, bounded prompts, and on-disk report/deposit requirements. Use the inherited Codex model by default; override only when the user asks or the task clearly requires it. Keep canonical paper edits coordinator-owned unless this skill explicitly grants an edit-capable phase.
 
 # Paper Referee
 
 Two phases in one team dir: Phase 1 fixers edit the paper against known
 issues; Phase 2 fresh referees re-review without seeing what Phase 1
 touched. Phase 1 is the explicit edit-capable exception to the
-read-only default. Follows `.agents/references/agents/_autoresearch.md`, CLAUDE.md
+read-only default. Follows `.agents/references/agents/_autoresearch.md`, AGENTS.md
 `Dispatch` long-lived-agent rules, `Briefing rule`, `Team dirs and agent
-self-deposit`, `Capture before shutdown, forward-carry at dispatch`. For Codex, use the inherited model by default; only override the model if the user explicitly asks or the task clearly requires it. Original Claude note: use the original Claude research model for every fixer/referee, always.
+self-deposit`, and `Capture before shutdown, forward-carry at dispatch`. Use the inherited Codex model by default.
 
 `$ARGUMENTS`: empty â†’ fix against latest referee feedback in `lore/`;
 file path â†’ target that; `--no-referee` â†’ skip Phase 2;
@@ -37,8 +31,8 @@ those.
 
 ## Phase 1 (fix)
 
-`Codex subagent delegation when explicitly requested team_name: "paper-referee-fix-<ts>"`. Spawn up to 3
-fixers (`Codex agent role: fixer`, the inherited Codex model by default) named for their content area
+When delegated teamwork is authorized, record team name `paper-referee-fix-<ts>` in `dispatch.md`. Spawn up to 3
+fixers (`role prompt: fixer`, inherited Codex model) named for their content area
 (e.g. `fixer-local-geometry`, `fixer-finite-s-algebra`,
 `fixer-endgame`). Each gets its own `agents/<ts>-fixer-<slug>/`
 subdir and the full `.agents/references/agents/_autoresearch.md` metaprompt.
@@ -60,9 +54,9 @@ user halt, stale long-idle team, or when Phase 2 needs fresh independence.
 
 ## Phase 2 (re-review, unless `--no-referee`)
 
-`Codex subagent delegation when explicitly requested team_name: "paper-referee-review-<ts>"` (same team dir,
-new Codex subagent delegation when explicitly requested). Spawn two referees read-only (`Codex agent role: referee`,
-the inherited Codex model by default) with the full `.agents/references/agents/_autoresearch.md` metaprompt:
+When delegated teamwork is authorized, record team name `paper-referee-review-<ts>` in `dispatch.md` (same team dir,
+new Codex subagents). Spawn two referees read-only (`role prompt: referee`,
+inherited Codex model) with the full `.agents/references/agents/_autoresearch.md` metaprompt:
 
 - **`referee-math`** â€” pure-math standard: proofs, hypotheses,
   circularity, citations.

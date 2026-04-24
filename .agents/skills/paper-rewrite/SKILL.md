@@ -3,21 +3,15 @@ name: paper-rewrite
 description: Full-paper compactness rewrite of <paper>/<main>.tex (or a specified scope). Tightens prose, combines redundancy, and removes unnecessary qualifiers while RIGOROUSLY preserving every convention â€” macros, labels, cite keys, theorem statements, notation, mathematical content. Agent-per-section parallel dispatch with heavy compile-check gating.
 ---
 
-## Codex adaptation
+## Codex workflow
 
-This skill was adapted from the workspace Claude skill of the same name and should now be used as a Codex skill. Use it as procedural guidance inside Codex.
-
-- Prefer doing coordinator work directly in this thread: read files, edit with `apply_patch`, run focused checks, and summarize outcomes.
-- When the original skill calls for Claude-only mechanisms such as `TeamCreate`, `SendMessage`, `TeamDelete`, `subagent_type`, or `model: the original Claude research model`, translate that into Codex behavior. Spawn Codex subagents only when the user explicitly asks for delegation, parallel agents, or team-style work; otherwise run the workflow locally.
-- For any spawned Codex worker/explorer, give a concrete, bounded task, an owned work area, the relevant files to read, and the same report/deposit expectations the skill describes.
-- Preserve repository policy from `CLAUDE.md` where it describes paper state, team directories, UV ledgers, findings, writing discipline, and provenance. Treat Claude-specific tool names as historical wording, not callable tools.
-- Keep canonical paper edits coordinator-owned unless this skill explicitly authorizes an edit-capable phase.
+Follow `AGENTS.md` for coordinator policy, provenance, dispatch, and git rules. Work locally unless the user requested a delegated/team workflow or invoked a multi-agent skill. For delegated work, use Codex subagents (`spawn_agent`, `send_input`, `wait_agent`, `close_agent`) with concrete ownership, bounded prompts, and on-disk report/deposit requirements. Use the inherited Codex model by default; override only when the user asks or the task clearly requires it. Keep canonical paper edits coordinator-owned unless this skill explicitly grants an edit-capable phase.
 
 # Paper Rewrite
 
 Compactness pass on `<paper>/<main>.tex` (or a scope). Rewriters
-(`Codex agent role: rewriter`) are edit-capable for their own agent dir
-only; assembly into the paper is gated behind integrity checks. For Codex, use the inherited model by default; only override the model if the user explicitly asks or the task clearly requires it. Original Claude note: use the original Claude research model for every rewriter, always.
+(`role prompt: rewriter`) are edit-capable for their own agent dir
+only; assembly into the paper is gated behind integrity checks. Use the inherited Codex model by default.
 
 `$ARGUMENTS`: empty â†’ full paper; `Â§<N>` or `Â§<N>.<M>` â†’ that section;
 `--line-range <from>-<to>` â†’ specific range; `--target-ratio <N>` â†’
@@ -66,8 +60,8 @@ subsections â†’ up to 19 rewriters; scoped = by subsection,
 
 ## Dispatch (unless `--no-agents`)
 
-`Codex subagent delegation when explicitly requested team_name: "paper-rewrite-<ts>"`. Spawn one
-`rewriter-<slug>` (`Codex agent role: rewriter`, the inherited Codex model by default) per partition. Standard
+When delegated teamwork is authorized, record team name `paper-rewrite-<ts>` in `dispatch.md`. Spawn one
+`rewriter-<slug>` (`role prompt: rewriter`, inherited Codex model) per partition. Standard
 briefing plus: the full invariant list (verbatim â€” not suggestions),
 `notes/frozen-macros.txt`, the input region, the labels/cites/refs
 present in it, the target compaction ratio, and the output contract â€”

@@ -1,6 +1,6 @@
-# Codex-adapted reference
+# Codex reference
 
-Active Codex reference at `.agents/references/agents/_autoresearch.md`. Adapted from the historical Claude agent; treat Claude-specific tool names as historical source wording if any remain.
+Active Codex reference at `.agents/references/agents/_autoresearch.md`. Keep synchronized with `AGENTS.md`.
 
 ---
 name: _autoresearch
@@ -19,7 +19,9 @@ description: NOT AN INVOCABLE AGENT â€” shared auto-run/autoresearch rules 
 You are part of a continuous autoresearch loop. Do not treat a single report as
 the end of your job unless the team lead explicitly releases you. Expect a
 running dialogue with the team lead and be ready to continue from your own prior
-state.
+state. If runtime limits, compaction, or session boundaries interrupt the loop,
+leave a concrete next action in your report so the next coordinator can resume
+without re-discovery.
 
 ## Loop
 
@@ -51,7 +53,9 @@ state.
 - Maintain continuity: cite your earlier notes, reuse your scripts, and respond
   directly to the team lead's challenges.
 - Stop only for an explicit team-lead halt, a hard blocker requiring coordinator
-  action, or a terminal closure/rejection of the assigned target.
+  action, or a terminal closure/rejection of the assigned target. A quiet cycle
+  is not a stop signal; reduce the obstruction, record it, and name the next
+  bounded attempt.
 
 ## Experiment discipline
 

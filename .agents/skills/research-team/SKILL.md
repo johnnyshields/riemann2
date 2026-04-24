@@ -1,24 +1,18 @@
 ---
 name: research-team
-description: Primary workhorse. Dispatches a 3+3+2 roster (3 gap-closers + 3 explorers + 2 verifiers) via Codex subagent delegation when explicitly requested into one team dir with eight agent subdirs under <paper>/teams/. Use for a full balanced research cycle.
+description: Primary workhorse. Dispatches a 3+3+2 roster (3 gap-closers + 3 explorers + 2 verifiers) via Codex subagents when delegated teamwork is authorized, with one team dir and eight agent subdirs under <paper>/teams/. Use for a full balanced research cycle.
 ---
 
-## Codex adaptation
+## Codex workflow
 
-This skill was adapted from the workspace Claude skill of the same name and should now be used as a Codex skill. Use it as procedural guidance inside Codex.
-
-- Prefer doing coordinator work directly in this thread: read files, edit with `apply_patch`, run focused checks, and summarize outcomes.
-- When the original skill calls for Claude-only mechanisms such as `TeamCreate`, `SendMessage`, `TeamDelete`, `subagent_type`, or `model: the original Claude research model`, translate that into Codex behavior. Spawn Codex subagents only when the user explicitly asks for delegation, parallel agents, or team-style work; otherwise run the workflow locally.
-- For any spawned Codex worker/explorer, give a concrete, bounded task, an owned work area, the relevant files to read, and the same report/deposit expectations the skill describes.
-- Preserve repository policy from `CLAUDE.md` where it describes paper state, team directories, UV ledgers, findings, writing discipline, and provenance. Treat Claude-specific tool names as historical wording, not callable tools.
-- Keep canonical paper edits coordinator-owned unless this skill explicitly authorizes an edit-capable phase.
+Follow `AGENTS.md` for coordinator policy, provenance, dispatch, and git rules. Work locally unless the user requested a delegated/team workflow or invoked a multi-agent skill. For delegated work, use Codex subagents (`spawn_agent`, `send_input`, `wait_agent`, `close_agent`) with concrete ownership, bounded prompts, and on-disk report/deposit requirements. Use the inherited Codex model by default; override only when the user asks or the task clearly requires it. Keep canonical paper edits coordinator-owned unless this skill explicitly grants an edit-capable phase.
 
 # Research Team (3+3+2)
 
 Balanced research dispatch: 3 gap-closers + 3 explorers + 2 verifiers via
-`Codex subagent delegation when explicitly requested`. One long-lived team dir with eight agent subdirs. Follows `Dispatch`
+Codex subagents when delegated teamwork is authorized. One long-lived team dir with eight agent subdirs. Follows `Dispatch`
 long-lived-agent rules, `.agents/references/agents/_autoresearch.md`, `Briefing rule`,
-`Writing discipline`, `Team dirs and agent self-deposit` deposit structure, `Capture before shutdown, forward-carry at dispatch` forward-carry. For Codex, use the inherited model by default; only override the model if the user explicitly asks or the task clearly requires it. Original Claude note: use the original Claude research model for every research agent, always. Do not override Codex model selection unless explicitly needed.
+`Writing discipline`, `Team dirs and agent self-deposit` deposit structure, and `Capture before shutdown, forward-carry at dispatch`.
 
 `$ARGUMENTS`: empty â†’ general balance (coordinator picks most-blocking
 UV items + three broad explorer topics); topic phrase â†’ oriented around
@@ -40,9 +34,9 @@ it; UV-NNN â†’ at least one gap-closer locked on it.
 
 ## Dispatch
 
-`Codex subagent delegation when explicitly requested team_name: "research-team-<ts>"`. Spawn 8 named agents
+When delegated teamwork is authorized, record team name `research-team-<ts>` in `dispatch.md`. Spawn 8 named Codex subagents
 (e.g. `gap-closer-mixed4pt`, `explorer-deriv-geo`, `verifier-source`), and
-use the inherited Codex model by default for any spawned agent. Each agent's slug gets its own
+use the inherited Codex model by default. Each agent's slug gets its own
 `agents/<ts>-<agent-slug>/` subdir.
 
 Keep those teammates alive after their first deposit. Treat idle notifications
@@ -97,7 +91,7 @@ agent drifts.
 3. Respond to the agent. Ask one concrete follow-up, adversarial challenge,
    or clarification when the report has a live thread; otherwise assign the
    next adjacent task to the same named teammate. Use `send_input`, not a new
-   `Agent`, when the existing teammate's context is useful.
+   `spawn_agent`, when the existing teammate's context is useful.
 4. Write `paper-updates.md` if the cycle produced paper-ready edits;
    otherwise skip.
 5. One lore entry at `lore/<yyyymmdd>-research-team-<slug>.md` for major
@@ -105,7 +99,7 @@ agent drifts.
 6. No direct `<main>.tex` edits here â€” promotion is a separate deliberate
    step after review.
 
-Do not shut down agents at ordinary cycle boundaries. Keep the `Codex subagent delegation when explicitly requested`
+Do not shut down agents at ordinary cycle boundaries. Keep the delegated Codex
 team alive for a good while so the lead and teammates maintain continuity.
 Only use `close_agent` at a terminal condition, explicit user halt, stale
 long-idle team, or when a replacement team is clearly better than continued

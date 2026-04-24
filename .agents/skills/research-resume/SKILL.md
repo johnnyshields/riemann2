@@ -1,25 +1,18 @@
 ---
 name: research-resume
-description: Resume or recover an existing research team dir in place after a crash or interruption. Reuses the existing team dir, mines prior deposits, and spawns new the original Claude research model agents into new agents/<ts>-<slug>/ subdirs without creating a new team dir.
+description: Resume or recover an existing research team dir in place after a crash or interruption. Reuses the existing team dir, mines prior deposits, and spawns new Codex subagents into new agents/<ts>-<slug>/ subdirs without creating a new team dir.
 ---
 
-## Codex adaptation
+## Codex workflow
 
-This skill was adapted from the workspace Claude skill of the same name and should now be used as a Codex skill. Use it as procedural guidance inside Codex.
-
-- Prefer doing coordinator work directly in this thread: read files, edit with `apply_patch`, run focused checks, and summarize outcomes.
-- When the original skill calls for Claude-only mechanisms such as `TeamCreate`, `SendMessage`, `TeamDelete`, `subagent_type`, or `model: the original Claude research model`, translate that into Codex behavior. Spawn Codex subagents only when the user explicitly asks for delegation, parallel agents, or team-style work; otherwise run the workflow locally.
-- For any spawned Codex worker/explorer, give a concrete, bounded task, an owned work area, the relevant files to read, and the same report/deposit expectations the skill describes.
-- Preserve repository policy from `CLAUDE.md` where it describes paper state, team directories, UV ledgers, findings, writing discipline, and provenance. Treat Claude-specific tool names as historical wording, not callable tools.
-- Keep canonical paper edits coordinator-owned unless this skill explicitly authorizes an edit-capable phase.
+Follow `AGENTS.md` for coordinator policy, provenance, dispatch, and git rules. Work locally unless the user requested a delegated/team workflow or invoked a multi-agent skill. For delegated work, use Codex subagents (`spawn_agent`, `send_input`, `wait_agent`, `close_agent`) with concrete ownership, bounded prompts, and on-disk report/deposit requirements. Use the inherited Codex model by default; override only when the user asks or the task clearly requires it. Keep canonical paper edits coordinator-owned unless this skill explicitly grants an edit-capable phase.
 
 # Research Resume
 
 Recover an existing team attack in place. Use this when the user gives an
 existing `<paper>/teams/<ts>-<slug>/` path and asks to continue, resume, recover,
 or take over. Do **not** create a new team dir. Spawn only new agent subdirs
-inside the existing team dir. For Codex, use the inherited model by default; only override the model if the user explicitly asks or the task clearly requires it. Original Claude note: use the original Claude research model for every research agent,
-always. Do not override Codex model selection unless explicitly needed.
+inside the existing team dir. Use the inherited Codex model by default.
 
 `$ARGUMENTS`: existing team dir path; optional extra context paths; optional
 focus text such as `UV-NNN`, `rem:wip-*`, or a route name.
@@ -64,8 +57,8 @@ relevant UV entries per `Briefing rule`.
 
 ## Dispatch in place
 
-`Codex subagent delegation when explicitly requested team_name: "research-resume-<existing-ts-or-slug>-<resume-ts>"`.
-Spawn new named agents with the inherited Codex model by default on every `Agent` call. Each agent's
+When delegated teamwork is authorized, record team name `research-resume-<existing-ts-or-slug>-<resume-ts>` in `dispatch.md`.
+Spawn new named Codex subagents with the inherited Codex model by default. Each agent's
 work dir is a new subdir under the existing team dir:
 
 `<existing-team-dir>/agents/<resume-ts>-<agent-slug>/`

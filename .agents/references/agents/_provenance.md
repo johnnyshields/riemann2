@@ -1,10 +1,10 @@
-# Codex-adapted reference
+# Codex reference
 
-Active Codex reference at `.agents/references/agents/_provenance.md`. Adapted from the historical Claude agent; treat Claude-specific tool names as historical source wording if any remain.
+Active Codex reference at `.agents/references/agents/_provenance.md`. Keep synchronized with `AGENTS.md`.
 
 ---
 name: _provenance
-description: NOT AN INVOCABLE AGENT â€” meta rules included at the top of every agent definition in this dir. If Codex Code offers this as an agent type, do not select it.
+description: NOT AN INVOCABLE AGENT â€” meta rules included at the top of every agent definition in this dir. Do not select it as a role.
 ---
 
 <!--
@@ -30,6 +30,15 @@ Everything you produce goes *there*:
 No deposit = defect. Even `no progress`, `blocked`, or `unsupported`
 is still a `report.md` with those words in the Status field. A chat
 message with nothing on disk will get you sent back.
+
+## Chat logs are secondary
+
+Codex/ChatGPT chat exports and `chat.md` summaries help reconstruct decisions,
+but they do not replace deposits. Cite an exported chat path when it explains
+why a route was chosen or why a decision was made. Do not cite an app-only
+hidden thread as the sole evidence for a mathematical claim, computation, or
+source check; turn the relevant content into a report, script, note, UV entry,
+finding, lore entry, or `chat.md` summary.
 
 ## Scripts are files
 

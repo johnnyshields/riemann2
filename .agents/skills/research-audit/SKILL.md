@@ -3,22 +3,16 @@ name: research-audit
 description: N disjoint read-only audits on specified <paper>/<main>.tex subsections, each graded with the fixed proved/conditional/missing framework. Optional --adversarial pairs each auditor with a checker.
 ---
 
-## Codex adaptation
+## Codex workflow
 
-This skill was adapted from the workspace Claude skill of the same name and should now be used as a Codex skill. Use it as procedural guidance inside Codex.
-
-- Prefer doing coordinator work directly in this thread: read files, edit with `apply_patch`, run focused checks, and summarize outcomes.
-- When the original skill calls for Claude-only mechanisms such as `TeamCreate`, `SendMessage`, `TeamDelete`, `subagent_type`, or `model: the original Claude research model`, translate that into Codex behavior. Spawn Codex subagents only when the user explicitly asks for delegation, parallel agents, or team-style work; otherwise run the workflow locally.
-- For any spawned Codex worker/explorer, give a concrete, bounded task, an owned work area, the relevant files to read, and the same report/deposit expectations the skill describes.
-- Preserve repository policy from `CLAUDE.md` where it describes paper state, team directories, UV ledgers, findings, writing discipline, and provenance. Treat Claude-specific tool names as historical wording, not callable tools.
-- Keep canonical paper edits coordinator-owned unless this skill explicitly authorizes an edit-capable phase.
+Follow `AGENTS.md` for coordinator policy, provenance, dispatch, and git rules. Work locally unless the user requested a delegated/team workflow or invoked a multi-agent skill. For delegated work, use Codex subagents (`spawn_agent`, `send_input`, `wait_agent`, `close_agent`) with concrete ownership, bounded prompts, and on-disk report/deposit requirements. Use the inherited Codex model by default; override only when the user asks or the task clearly requires it. Keep canonical paper edits coordinator-owned unless this skill explicitly grants an edit-capable phase.
 
 # Research Audit
 
 N disjoint read-only audits on subsections via
-`Codex agent role: auditor`. Follows `.agents/references/agents/_autoresearch.md`, CLAUDE.md
+`role prompt: auditor`. Follows `.agents/references/agents/_autoresearch.md`, AGENTS.md
 `Dispatch` long-lived-agent rules, `Briefing rule`, `Team dirs and agent
-self-deposit`, `Capture before shutdown, forward-carry at dispatch`. For Codex, use the inherited model by default; only override the model if the user explicitly asks or the task clearly requires it. Original Claude note: use the original Claude research model for every research auditor / checker, always.
+self-deposit`, and `Capture before shutdown, forward-carry at dispatch`. Use the inherited Codex model by default.
 
 `$ARGUMENTS`: `<subsection-list>` (e.g. `Section 12.3,`LaTeX conventions`.4,`LaTeX conventions`.5`, labels, or
 line ranges); append `--adversarial` to pair each auditor with a
@@ -34,10 +28,10 @@ checker; `--non-goals: "..."` to pin specific bans.
 
 ## Dispatch
 
-`Codex subagent delegation when explicitly requested team_name: "research-audit-<ts>"`. Spawn one
-`auditor-<sub>` (`Codex agent role: auditor`, the inherited Codex model by default) per subsection;
+When delegated teamwork is authorized, record team name `research-audit-<ts>` in `dispatch.md`. Spawn one
+`auditor-<sub>` (`role prompt: auditor`, inherited Codex model) per subsection;
 with `--adversarial`, also a paired `adversary-<sub>`
-(`Codex agent role: verifier-adversarial`, the inherited Codex model by default) that reads the
+(`role prompt: verifier-adversarial`, inherited Codex model) that reads the
 auditor's report once landed.
 
 Each auditor's briefing: current team dir's `findings.md`, the exact

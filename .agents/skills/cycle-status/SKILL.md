@@ -3,15 +3,9 @@ name: cycle-status
 description: Snapshot of the current research state â€” active teams, recent team dirs, UV entries with status + dependencies, open threads from recent lore. Run at session start or mid-session to orient without re-reading everything.
 ---
 
-## Codex adaptation
+## Codex workflow
 
-This skill was adapted from the workspace Claude skill of the same name and should now be used as a Codex skill. Use it as procedural guidance inside Codex.
-
-- Prefer doing coordinator work directly in this thread: read files, edit with `apply_patch`, run focused checks, and summarize outcomes.
-- When the original skill calls for Claude-only mechanisms such as `TeamCreate`, `SendMessage`, `TeamDelete`, `subagent_type`, or `model: the original Claude research model`, translate that into Codex behavior. Spawn Codex subagents only when the user explicitly asks for delegation, parallel agents, or team-style work; otherwise run the workflow locally.
-- For any spawned Codex worker/explorer, give a concrete, bounded task, an owned work area, the relevant files to read, and the same report/deposit expectations the skill describes.
-- Preserve repository policy from `CLAUDE.md` where it describes paper state, team directories, UV ledgers, findings, writing discipline, and provenance. Treat Claude-specific tool names as historical wording, not callable tools.
-- Keep canonical paper edits coordinator-owned unless this skill explicitly authorizes an edit-capable phase.
+Follow `AGENTS.md` for coordinator policy, provenance, dispatch, and git rules. Work locally unless the user requested a delegated/team workflow or invoked a multi-agent skill. For delegated work, use Codex subagents (`spawn_agent`, `send_input`, `wait_agent`, `close_agent`) with concrete ownership, bounded prompts, and on-disk report/deposit requirements. Use the inherited Codex model by default; override only when the user asks or the task clearly requires it. Keep canonical paper edits coordinator-owned unless this skill explicitly grants an edit-capable phase.
 
 # Cycle Status
 
@@ -24,8 +18,9 @@ paper; `--recent <N>` â†’ limit to last N days (default 7);
 
 ## Gather
 
-- **Active teams** via `TeamList` (or equivalent) â€” name, members,
-  last message time.
+- **Active teams** via current Codex subagent handles when available;
+  otherwise infer live work from the newest `dispatch.md` / `collation.md`
+  and unclosed agent reports.
 - **Recent team dirs** â€” for each `<paper>` in the repo, run
   `ls -1t <paper>/teams/ 2>/dev/null | grep -E '^[0-9]{8}-' | head -5`.
   For each dir: paper, team-slug, agent count (landed vs expected
