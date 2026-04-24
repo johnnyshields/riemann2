@@ -1,0 +1,101 @@
+{
+  "L1YR1_consequence": {
+    "C112_z7": "zero for the prototype because [z^5]M(r^(7))=0",
+    "C122_z7": "zero for the prototype because [z^5]M(r^(7))=0",
+    "interpretation": "This is not a positive determinant-gate computation. It shows the homogeneous mixed-order convention fails to supply the intended M_i^[5] input.",
+    "needed_for_z7": "[z]Lambda^[1], [z^5]M^[5], [z]Lambda^[1]",
+    "under_candidate_M5_z5": "zero"
+  },
+  "baseline_status": {
+    "baseline_coefficients_needed_after_fixing_grade": "If a nonzero M^[5] source convention is supplied, Lambda leading terms still need the Frechet inverse-square-root operator at G0(0), hence q0(m), q0'(m), q0''(m).",
+    "full_q0_specialization_is_hard_blocker": false,
+    "hard_blocker": "exact mixed-block parity: odd k=a+2 pieces miss odd mixed grades"
+  },
+  "homogeneous_candidate": {
+    "grade1": {
+      "compatible": false,
+      "mixed_M_order": 2,
+      "obstruction": "grade 1 same-point input exists at z^1, but mixed input first appears at z^2",
+      "same_point_deltaG_order": 1,
+      "source": "r^(3)(m) only"
+    },
+    "grade5": {
+      "M_z5": "zero by odd plus/minus cancellation",
+      "compatible": false,
+      "mixed_M_order": 6,
+      "obstruction": "grade 5 same-point input exists at z^5, but mixed input first appears at z^6",
+      "same_point_deltaG_order": 5,
+      "source": "r^(7)(m) only"
+    }
+  },
+  "minimal_compatibility_list": [
+    "Decide whether M_i^[5] is allowed to be zero under this homogeneous source convention.",
+    "If not, abandon grade a = derivative order k-2 for odd k in the mixed input.",
+    "Supply a different scalar grade-five source piece or a non-homogeneous projection that has nonzero [z^5]M.",
+    "Then compute Lambda leading coefficients using the baseline constant same-point block G0(0)."
+  ],
+  "rows": [
+    {
+      "mixed_M_first_order": 0,
+      "mixed_leading_channel": "M22 via eta/s^3 and (d_-+d_+)/s^2",
+      "same_and_mixed_orders_match": true,
+      "same_point_deltaG_first_order": 0,
+      "scalar_derivative_order_k": 2
+    },
+    {
+      "mixed_M_first_order": 2,
+      "mixed_leading_channel": "M12/M21 via d_+/s and d_-/s after M22 leading cancellation",
+      "same_and_mixed_orders_match": false,
+      "same_point_deltaG_first_order": 1,
+      "scalar_derivative_order_k": 3
+    },
+    {
+      "mixed_M_first_order": 2,
+      "mixed_leading_channel": "M22 via eta/s^3 and (d_-+d_+)/s^2",
+      "same_and_mixed_orders_match": true,
+      "same_point_deltaG_first_order": 2,
+      "scalar_derivative_order_k": 4
+    },
+    {
+      "mixed_M_first_order": 4,
+      "mixed_leading_channel": "M12/M21 via d_+/s and d_-/s after M22 leading cancellation",
+      "same_and_mixed_orders_match": false,
+      "same_point_deltaG_first_order": 3,
+      "scalar_derivative_order_k": 5
+    },
+    {
+      "mixed_M_first_order": 4,
+      "mixed_leading_channel": "M22 via eta/s^3 and (d_-+d_+)/s^2",
+      "same_and_mixed_orders_match": true,
+      "same_point_deltaG_first_order": 4,
+      "scalar_derivative_order_k": 6
+    },
+    {
+      "mixed_M_first_order": 6,
+      "mixed_leading_channel": "M12/M21 via d_+/s and d_-/s after M22 leading cancellation",
+      "same_and_mixed_orders_match": false,
+      "same_point_deltaG_first_order": 5,
+      "scalar_derivative_order_k": 7
+    },
+    {
+      "mixed_M_first_order": 6,
+      "mixed_leading_channel": "M22 via eta/s^3 and (d_-+d_+)/s^2",
+      "same_and_mixed_orders_match": true,
+      "same_point_deltaG_first_order": 6,
+      "scalar_derivative_order_k": 8
+    },
+    {
+      "mixed_M_first_order": 8,
+      "mixed_leading_channel": "M12/M21 via d_+/s and d_-/s after M22 leading cancellation",
+      "same_and_mixed_orders_match": false,
+      "same_point_deltaG_first_order": 7,
+      "scalar_derivative_order_k": 9
+    }
+  ],
+  "scope": "pre-Phi_K exact order/parity audit for homogeneous mixed-order L_1YR_1 prototype",
+  "source_formula_reason": {
+    "mixed_even_k": "eta is nonzero and d_-+d_+ is nonzero, so M_22 appears at z^(k-2)",
+    "mixed_odd_k": "eta=0 and d_-+d_+=0; M_22 leading channel cancels and off-diagonal d/s appears at z^(k-1)",
+    "same_point": "deltaG_22 has the linear g=r'' channel, so derivative order k appears at z^(k-2)"
+  }
+}

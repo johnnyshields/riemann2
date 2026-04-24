@@ -88,7 +88,11 @@ Working forward-carry of the current open UV items relevant to the active queue.
   ordinary-`z` matrix order, prove `Gr_a r = r^{(a+2)}(m)(t-m)^{a+2}/(a+2)!`
   for `a in {1,5}`, and separately handle/exclude the grade-0 `r^{(2)}(m)`
   sector by exclusion, gauge, source-class identification, or expanded
-  determinant inventory.
+  determinant inventory.  The pure homogeneous candidate fails for `L_1YR_1`:
+  exact mixed-block parity makes odd scalar pieces `r^{(3)}` and `r^{(7)}` first
+  appear in mixed orders `2` and `6`, so `[z^5]M^{[5]}=0` for the `r^{(7)}`
+  candidate.  UV-026 now needs a parity-corrected source-grade theorem or a
+  convention change explaining why the `L_1YR_1` middle input is absent at `B_7`.
   Gate subtargets: compute determinant identities against
   `A_5^{\mathfrak f}(m)` for all seven classified cubic families:
   `L_1YR_1`; `L_3N_0R_0` and `L_0N_0R_3`; `L_2YR_0` and `L_0YR_2`;

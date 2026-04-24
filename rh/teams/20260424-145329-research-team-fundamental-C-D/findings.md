@@ -169,6 +169,8 @@ Active, compact knowledge base shared with every delegated agent.
   Mixed-order candidate: `Gr_a r` is the homogeneous Taylor piece `r^{(a+2)}`,
   compatible with same-point and mixed leading order, pending grade-0 handling:
   affine removal does not kill `r^{(2)}`, and omission needs exclusion/gauge/source-class proof.
+  For `L_1YR_1`, the pure homogeneous convention fails because odd source pieces
+  miss odd mixed orders; `[z^5]M^{[5]}=0` for the `r^{(7)}` candidate.
 
 ## Recurring open gaps
 

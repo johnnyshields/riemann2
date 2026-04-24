@@ -1180,3 +1180,28 @@ grade-0-containing cubic terms cannot leak into `B_7^{\mathfrak f}`, nor that
 they are already source-trivial, pure, one-pair `K_5/K_3`, or
 `A_5^{\mathfrak f}`-gauge.  Promotion needs exclusion, gauge, source-class
 identification, or expanded inventory for grade-0 terms.
+
+### `20260425-001243-gap-closer-UV026-L1YR1-mixed-order-prototype/report.md`
+
+Signal: UV-026 `L_1YR_1` mixed-order prototype obstruction, keep.
+
+Captured takeaway: the pure homogeneous mixed-order convention fails for the
+`L_1YR_1` middle input.  Same-point pieces from `r^{(3)}` and `r^{(7)}` appear
+in orders `1` and `5`, but exact mixed-block parity shifts those odd source
+pieces to mixed orders `2` and `6`; in particular `[z^5]M^{[5]}=0` for the
+`r^{(7)}` candidate.  The resulting zero `L_1YR_1` convolution is not a gauge
+proof; it means the proposed source-grade convention does not supply the
+intended grade-five mixed input.  The next theorem must be parity-corrected,
+reinterpret `M^{[5]}` as absent at `B_7`, or use a non-homogeneous projection
+with nonzero `[z^5]M`.
+
+### Frontier after `L_1YR_1` prototype
+
+- **Current best:** UV-026 Stage 1 no longer has a viable naive homogeneous
+  scalar grading.  The actual target is parity-corrected scalar grading plus
+  baseline `q_0` jets and grade-0 handling.
+- **Keep:** odd scalar Taylor pieces miss odd mixed orders in `M` because the
+  leading `(2,2)` channel cancels.
+- **Next:** decide whether `M^{[5]}` is a source label rather than actual mixed
+  order, or construct a non-homogeneous `Gr_5` projection with nonzero
+  `[z^5]M`.
