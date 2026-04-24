@@ -27,6 +27,8 @@
 | Sartre | UV-017 | Noether's reduction is sound, scoped to matrix-level unit-coordinate chart | keep | `agents/20260424-183416-verifier-slot-skeleton/report-uv017-coefficient-reduction-audit.md` | attack `da/dS=1` chart | Pure freeze rule must test actual `a(S,eta(S))=S+O(S^2)` and scalar readout must be included in `A_val` or separately normalized. |
 | Noether | UV-017 | Universal RH finite-\(s\) phase-kernel chart has `da/dS|0=1` | keep | `agents/20260424-192025-gap-uv017-coefficient-freeze/report-unit-coordinate-chart.md`; `agents/20260424-192025-gap-uv017-coefficient-freeze/notes/unit_coordinate_chart_attack.md` | install paired finite-\(s\) construction | Direct formula chase proves unit coordinate for literal substitution; actual paired corrected blocks still need construction, holomorphy/whitening, freeze-rule, and scalar-readout checks. |
 | coordinator | UV-017 | Staged paired finite-\(s\) unit-coordinate construction lemma | keep | `paper-updates.md`; `agents/20260424-192025-gap-uv017-coefficient-freeze/report-unit-coordinate-chart.md` | verifier pass | Draft is a construction/hypothesis layer, not exact slot realization; needs review for overclaim and compatibility with RH finite-\(s\) formulas. |
+| Sartre | UV-017 | Construction draft must be hypothesis/definition unless correction maps are displayed | keep | `agents/20260424-183416-verifier-slot-skeleton/report-uv017-construction-draft-audit.md` | demote wording / define formulas | Draft matches Noether's calculation but overclaimed if read as actual paired construction. |
+| coordinator | UV-017 | Demoted finite-\(s\) staged text to chart hypothesis/definition | keep | `paper-updates.md`; `agents/20260424-183416-verifier-slot-skeleton/report-uv017-construction-draft-audit.md` | display correction maps next | Added pathwise `S_{chi,alpha}`, baseline clause, phase-notation disambiguation, and kept remaining hypotheses explicit. |
 
 ## Frontier summaries
 
@@ -51,5 +53,6 @@
   UV-017 lacks paired symmetric normal form, value-parameter holomorphy, stable
   local positivity, exact freeze rules, and source-to-slot coefficient
   identification.
-- **Next:** stage the paired finite-\(s\) construction lemma and verify that it
-  is only a construction/hypothesis layer, not a hidden UV-017 closure.
+- **Next:** display the actual paired corrected finite-\(s\) block formulas or
+  keep the chart as an explicit hypothesis; then attack holomorphy/whitening
+  and scalar-readout normalization.

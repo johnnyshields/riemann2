@@ -376,3 +376,23 @@ scalar-readout normalization as remaining hypotheses.
 
 Capture action: recorded the draft in `findings.md` and `attempts.md`. Next
 step is adversarial review for overclaim and formula compatibility.
+
+## Sartre UV-017 Construction Draft Audit 20260424
+
+Report:
+`agents/20260424-183416-verifier-slot-skeleton/report-uv017-construction-draft-audit.md`.
+
+Verdict: keep, open. Sartre accepts the finite-\(s\) unit-coordinate
+calculation but flags the staged text as too theorem-like unless the actual
+paired correction maps are displayed. The safe wording is a
+chart hypothesis/definition: assume a local chart in which the paired corrected
+blocks are given by the RH finite-\(s\) formulas after replacing the RH phase
+function \(\Ph(t)\) by \(\Theta_\chi^{pair}(t)\). Sartre also required a
+pathwise definition of \(S_{\chi,\alpha}^{pair}\), a frozen-background clause,
+baseline clarification if \(S_\alpha=\alpha\) is stated, and explicit phase-gap
+notation.
+
+Capture action: demoted the `paper-updates.md` UV-017 block to a
+hypothesis/definition, added the pathwise source coordinate and baseline
+language, disambiguated phase notation, and refined `findings.md`, UV-017, and
+`attempts.md`.

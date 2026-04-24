@@ -64,7 +64,9 @@
   slot. The universal RH finite-\(s\) phase-kernel chart has the unit
   coordinate by direct calculation; the missing statement is that the actual
   paired corrected finite-\(s\) blocks are literally this chart with
-  `Theta=Theta_chi^pair` and `q=q_chi^pair`.
+  `Theta=Theta_chi^pair` and `q=q_chi^pair`. The staged `paper-updates.md`
+  text is therefore a chart hypothesis/definition, not a proved paired
+  construction lemma, until the correction maps are displayed.
 
 - **UV-018** - corrected odd/transverse realization and boundary package.
   After paired slot realization, construct the corrected odd/transverse scalar,

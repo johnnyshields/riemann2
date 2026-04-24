@@ -134,13 +134,13 @@ Provenance:
 `agents/20260424-183416-gap-compact-regularization/report-textbook-citation-pass.md`;
 `agents/20260424-183416-gap-compact-regularization/report-citation-fallback-plan.md`.
 
-## Paired Finite-\(s\) Unit-Coordinate Construction Draft
+## Paired Finite-\(s\) Unit-Coordinate Chart Hypothesis Draft
 
 Staged UV-017 text. Not promoted. This is a construction/hypothesis layer for
 the paired local chart, not exact slot realization.
 
 ```tex
-\begin{lemma}[Paired finite-\(s\) unit-coordinate chart]
+\begin{definition}[Paired finite-\(s\) unit-coordinate chart hypothesis]
 Fix \(m\in I\) and use the sign-audited boundary phase
 \[
 \Phi_\chi^{\mathrm{pair}}\!\left(\tfrac12+it\right)
@@ -155,9 +155,11 @@ G_{\chi,m,\pm}^{\mathrm{pair},\mathrm{corr}}(s),
 \qquad
 N_{\chi,m}^{\mathrm{pair},\mathrm{corr}}(s)
 \]
-are obtained from the finite-\(s\) block formulas of the zeta-side local model
-by replacing \(\Phi\) with \(\Theta_\chi^{\mathrm{pair}}\) and \(q\) with
-\(q_\chi^{\mathrm{pair}}\), and by using the local value coordinate
+are given, in a local chart, by the finite-\(s\) block formulas of the
+zeta-side local model after replacing the RH phase function \(\Ph(t)\) by
+\(\Theta_\chi^{\mathrm{pair}}(t)\) and \(q\) by
+\(q_\chi^{\mathrm{pair}}\). The quotient remains
+\(\Phi_\chi^{\mathrm{pair}}(s)\). Use the local value coordinate
 \[
 a=q_\chi^{\mathrm{pair}}(m)
 -B_\chi^{\mathrm{pair}}(m).
@@ -171,20 +173,36 @@ q_{\chi,\alpha}^{\mathrm{pair}}(t)
 =q_{\chi,0}^{\mathrm{pair}}(t)+\alpha,
 \]
 with derivative, curvature, background, correction, multiplicity, cutoff, and
-normalization-gauge coordinates frozen. Then the coordinate
-\(a(\alpha)=q_{\chi,\alpha}^{\mathrm{pair}}(m)-B_\chi^{\mathrm{pair}}(m)\)
-satisfies
+normalization-gauge coordinates frozen. Define the pathwise source coordinate
+\[
+S_{\chi,\alpha}^{\mathrm{pair}}(m)
+:=q_{\chi,\alpha}^{\mathrm{pair}}(m)-B_\chi^{\mathrm{pair}}(m),
+\]
+with \(B_\chi^{\mathrm{pair}}(m)\) frozen on the path. If the baseline is
+chosen so that \(q_{\chi,0}^{\mathrm{pair}}(m)=B_\chi^{\mathrm{pair}}(m)\),
+then \(S_{\chi,\alpha}^{\mathrm{pair}}(m)=\alpha\). In any case, the local
+coordinate
+\[
+a(\alpha)=q_{\chi,\alpha}^{\mathrm{pair}}(m)-B_\chi^{\mathrm{pair}}(m)
+\]
+satisfies the unit derivative relation
 \[
 \left.\frac{d a}{d S_{\chi}^{\mathrm{pair}}}\right|_{\alpha=0}=1.
 \]
-The phase-gap variation along this path is
+Writing
+\[
+\Delta_{\chi,0}^{\mathrm{pair}}(s)
+:=\Theta_{\chi,0}^{\mathrm{pair}}(m-s/2)
+-\Theta_{\chi,0}^{\mathrm{pair}}(m+s/2),
+\]
+the phase-gap variation along this path is
 \[
 \Theta_{\chi,\alpha}^{\mathrm{pair}}(m-s/2)
 -\Theta_{\chi,\alpha}^{\mathrm{pair}}(m+s/2)
 =
 \Delta_{\chi,0}^{\mathrm{pair}}(s)-\alpha s.
 \]
-\end{lemma}
+\end{definition}
 ```
 
 Remaining hypotheses before UV-017 promotion:
