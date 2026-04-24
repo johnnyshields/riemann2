@@ -86,3 +86,31 @@ Run budget:
   directory before execution and cited from the report.
 - If full closure is too hard, reduce to the smallest list of concrete
   unresolved sub-statements.
+
+## Follow-on dispatch 20260424-184452 - UV-011
+
+UV-012 is promoted: fixed-subspace orthonormal-frame comparison matrices are
+now classified up to the biunitary orbit, with singular values/principal angles
+as the complete content from the subspace pair alone.
+
+Next focused target:
+- Gap closer:
+  `agents/20260424-184452-gap-multiparameter-frame-finality/` targets UV-011.
+
+Ground-truth check:
+- Decide whether the multiparameter covariant-jet structure supplies any
+  natural ordered matrix/frame package beyond the already-proved subspace
+  hierarchy.
+- A negative closure should not merely repeat "subspaces are invariant." It
+  should combine the known block-upper-triangular chart/gauge laws,
+  symmetrized-covariant span theorem, and UV-012 matrix-finality theorem to
+  state the exact obstruction to an entrywise ordered matrix or frame from the
+  ray-field data alone.
+- A positive closure must name the extra structure that selects a frame/order
+  and state its invariance class.
+
+Non-goals:
+- Do not add new benchmark examples.
+- Do not reopen UV-012 unless the new argument finds a real flaw in the
+  promoted theorem.
+- Do not broaden the target to arbitrary dynamics or experimental protocols.
