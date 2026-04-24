@@ -6,11 +6,13 @@
   Prove a compact-interval source package for primitive Dirichlet pairs built
   from `Phi_chi^pair(s)=Xi_chi(2s-1)/Xi_chi(2s)`: compact-interval
   convergence/regularization of the paired zero contribution, one unified
-  theorem-ready `B_chi^pair`, and multiplicity bookkeeping compatible with the
-  same compact identity. Provenance:
+  theorem-ready `B_chi^pair`, multiplicity bookkeeping compatible with the
+  same compact identity, and a sign convention compatible with the positive
+  strip-edge kernel. Provenance:
   `notes/paired_source_package.md`;
   `agents/20260424-160512-paired-regularization-package-verifier/report.md`;
-  `agents/20260424-171036-paired-bookkeeping-block-verifier/report.md`.
+  `agents/20260424-171036-paired-bookkeeping-block-verifier/report.md`;
+  `agents/20260424-183416-explorer-background-multiplicity/report.md`.
   Current role: immediate non-zeta frontier.
 
 - **UV-017** - exact paired local `S(m)`-slot realization.
@@ -49,3 +51,15 @@
   Provenance: `notes/tau_localization.md`;
   `agents/20260424-140954-tau-source-package-routeA/report.md`.
   Current role: secondary self-dual stress test behind paired Dirichlet.
+
+- **UV-021** - paired quotient sign normalization.
+  Resolve the sign convention for the fixed paired quotient
+  `Phi_chi^pair(s)=Xi_chi(2s-1)/Xi_chi(2s)` against the positive strip-edge
+  kernel and the desired source split `q_chi^pair=B_chi^pair+S_chi^pair`.
+  Current evidence says the positive one-zero kernel is the contribution to
+  `-1/2 Phi'/Phi`, not `+1/2 Phi'/Phi`; choose and verify one convention
+  among negative boundary exponent with `q=Theta'`, positive exponent with
+  `q=-Theta'`, or inverse quotient. Provenance:
+  `agents/20260424-183416-explorer-background-multiplicity/report.md`;
+  `agents/20260424-183416-explorer-background-multiplicity/scripts/check_one_zero_sign.py`.
+  Current role: subgap of UV-016; adversarial sign audit queued with Sartre.

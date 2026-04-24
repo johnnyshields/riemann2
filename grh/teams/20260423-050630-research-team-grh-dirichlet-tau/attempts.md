@@ -10,6 +10,7 @@
 | old cycle | UV-017 | Paired slot proof skeleton is clean but conditional | keep | `agents/20260424-175245-paired-slot-proof-skeleton-routeA/report.md` | verify then reuse | Needs adversarial/source pass before promotion as stable roadmap. |
 | old cycle | tau comparison | Tau remains self-dual phase stress test, not first exact `S(m)` target | keep | `notes/tau_localization.md`; `agents/20260424-140954-tau-source-package-routeA/report.md` | defer | Revisit after paired Dirichlet source package advances. |
 | Sartre | UV-017 | Paired slot skeleton passes only as conditional roadmap; coefficient lemma still missing | keep | `agents/20260424-183416-verifier-slot-skeleton/report.md` | reduce to normalization/freeze-rule lemma | Need value-parameter holomorphy, stable positivity, exact freeze rules, and a check excluding scalar renormalization before any source-to-slot promotion. |
+| Jason | UV-016 / UV-021 | Fixed paired quotient gives positive kernel from `-1/2 Phi'/Phi`, not `+1/2` | keep | `agents/20260424-183416-explorer-background-multiplicity/report.md`; `agents/20260424-183416-explorer-background-multiplicity/scripts/check_one_zero_sign.py` | adversarial sign audit | Either use negative boundary exponent with `q=Theta'`, redefine `q`, or invert the quotient before theorem wording. |
 
 ## Frontier summaries
 
@@ -17,7 +18,7 @@
   package, is the live non-zeta bottleneck. The exact theorem is not closed; the
   useful next move is to attack compact-interval regularization directly and
   make the background/multiplicity block theorem-ready without claiming slot
-  realization.
+  realization. UV-021 is now a sign-normalization subgap inside UV-016.
 - **Keep:** paired object `Phi_chi^pair`, positive upstairs strip-edge kernel,
   immediate post-theorem bookkeeping placement, and the conditional UV-017
   slot skeleton after Sartre's coefficient-lemma caveat.
@@ -26,9 +27,10 @@
   claims that single-channel Dirichlet or tau already supplies the manuscript
   exact `S(m)` slot.
 - **Blocked:** UV-016 lacks theorem-strength paired compact
-  convergence/regularization, unified `B_chi^pair`, and multiplicity closure.
+  convergence/regularization, unified `B_chi^pair`, multiplicity closure, and a
+  verified sign convention for the fixed paired quotient.
   UV-017 lacks paired symmetric normal form, value-parameter holomorphy, stable
   local positivity, exact freeze rules, and source-to-slot coefficient
   identification.
-- **Next:** dispatch one UV-016 gap-closer, one UV-016 source/bookkeeping
-  explorer, and one adversarial verifier for the UV-017 slot skeleton.
+- **Next:** keep Beauvoir on UV-016 regularization and get Sartre's adversarial
+  sign audit on UV-021 before any normalization language is promoted.

@@ -53,3 +53,21 @@ stable same-point positivity, explicit freeze rules, and no hidden
 renormalization.
 
 Capture action: refined `findings.md`, UV-017 in `uv.md`, and `attempts.md`.
+
+## Jason Deposit 20260424
+
+Report:
+`agents/20260424-183416-explorer-background-multiplicity/report.md`.
+Script:
+`agents/20260424-183416-explorer-background-multiplicity/scripts/check_one_zero_sign.py`.
+
+Verdict: keep. UV-016 remains open and now has a precise sign-normalization
+subgap, filed as UV-021. Jason's chain-rule and one-zero sanity check say that
+for the fixed quotient `Xi_chi(2s-1)/Xi_chi(2s)`, the positive strip-edge
+kernel contributes to `-1/2 Phi'/Phi`, not `+1/2 Phi'/Phi`. This conflicts
+with earlier positive-exponent normalization unless the team changes the phase
+sign, defines `q=-Theta'`, or inverts the quotient.
+
+Capture action: refined `findings.md`, UV-016 in `uv.md`, filed UV-021, and
+logged the attempt. Sartre was redelegated to adversarially audit the sign
+claim before any promotion.

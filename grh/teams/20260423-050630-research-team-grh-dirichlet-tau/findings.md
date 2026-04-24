@@ -44,6 +44,13 @@ is the supplied team dir unless another path is named.
   scoped notation aliases; it may not claim exact slot realization, canonical
   source-free coefficient matching, or whitening closure. Provenance:
   `agents/20260424-171036-paired-bookkeeping-block-verifier/report.md`.
+- **The paired quotient sign convention is now an explicit subgap.** For the
+  fixed quotient `Xi_chi(2s-1)/Xi_chi(2s)`, Jason's one-zero check finds the
+  positive strip-edge kernel as `-1/2 Phi'/Phi`, not `+1/2 Phi'/Phi`; this
+  conflicts with earlier positive-exponent wording unless `q`, the phase, or
+  the quotient orientation is changed. Provenance:
+  `agents/20260424-183416-explorer-background-multiplicity/report.md`,
+  `agents/20260424-183416-explorer-background-multiplicity/scripts/check_one_zero_sign.py`.
 - **Tau is a self-dual phase-channel stress test, not the first exact `S(m)`
   target.** Tau has only a conditional compact source-package blueprint; paired
   Dirichlet remains sharper for exact source-plus-slot work. Provenance:
@@ -75,6 +82,10 @@ is the supplied team dir unless another path is named.
   Provenance:
   `agents/20260424-143617-paired-regularization-plan-verifier/report.md`,
   `agents/20260424-160512-paired-regularization-package-verifier/report.md`.
+- **Do not promote the paired positive-exponent convention yet.** It needs an
+  adversarial sign audit against the fixed quotient, boundary phase, and
+  `q=B+S` orientation. Provenance:
+  `agents/20260424-183416-explorer-background-multiplicity/report.md`.
 
 ## Goodies
 
@@ -97,3 +108,4 @@ is the supplied team dir unless another path is named.
 - **Corrected odd/transverse realization and boundary package.** See UV-018.
 - **Canonical zeta source theorem for `q` and `S`.** See UV-019.
 - **Tau compact source/localization package.** See UV-020.
+- **Paired quotient sign normalization.** See UV-021.
