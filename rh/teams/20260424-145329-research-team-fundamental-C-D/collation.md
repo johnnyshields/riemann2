@@ -1316,3 +1316,43 @@ has SHA1 `6C6560D7F02ACF0BC1A2FDCC7B2ECCFF4646270B`; output
   family, under the homogeneous convention; check whether second-Frechet
   lower-order factors can still reach order `7` with the mixed input starting
   at `z^6`.
+
+### `20260425-005100-verifier-source-UV026-L1YR1-absence/report.md`
+
+Signal: UV-026 `L_1YR_1` homogeneous absence verifier, keep.
+
+Captured takeaway: under the homogeneous scalar grade, `\Lambda^{[1]}` starts
+at ordinary order `1` and `M^{[5]}` from `r^{(7)}` starts at mixed order `6`.
+Thus each `\Lambda^{[1]}M^{[5]}\Lambda^{[1]}` product starts at order `8`, so
+the `[z^7]` coefficient vanishes.  The report marks this `proved` within that
+scope, with the explicit caveat that matrix-output or parity-corrected
+non-homogeneous readings of `M^{[5]}` are not covered.  Script
+`agents/20260425-005100-verifier-source-UV026-L1YR1-absence/scripts/homogeneous_l1yr1_absence_audit.py`
+has SHA1 `4EB3C1ECBBE13F4E6563EA343CFC4A2B7000C5E2`; output has SHA1
+`213464FED96AFD7B888CF9EC124815CF819710CE`.
+
+### `20260425-005100-gap-closer-UV026-L2YR0-homogeneous-gate/report.md`
+
+Signal: UV-026 `L_2YR_0` / `L_0YR_2` homogeneous order gate, keep pending
+verifier.
+
+Captured takeaway: under the homogeneous scalar grade, the second-Frechet
+placements from the prior `L_2YR_0` reduction start too late:
+`{1,1}` with `M^{[5]}` gives `2+6+0=8`, and `{1,5}` with `M^{[1]}` gives
+`6+2+0=8`, with mirrored right-hand versions for `L_0YR_2`.  Therefore no
+`[z^7]` term appears in these Y-slot families under the clean convention.
+This needs a verifier check, especially on the order-non-lowering claim for
+the second Frechet inverse-square-root term.  Output
+`notes/l2yr0_homogeneous_order_gate.json` has SHA1
+`2F7B720ADDBC1771FB6FAA517B252D8CEB37DB56`.
+
+### Frontier after Y-slot homogeneous gates
+
+- **Current best:** all Y-containing cubic families appear absent at `B_7`
+  under the clean homogeneous scalar grade: `L_1YR_1` is verified; `L_2YR_0`
+  and `L_0YR_2` are pending verifier.
+- **Keep:** absence is order-count/grade-convention closure, not determinant
+  proportionality.
+- **Verifier queue:** check `L_2YR_0`/`L_0YR_2` second-Frechet order closure.
+- **Research lane next:** move to non-Y cubic gates, starting with
+  `L_2N_0R_1`/`L_1N_0R_2`; all-left/all-right can run after or in parallel.

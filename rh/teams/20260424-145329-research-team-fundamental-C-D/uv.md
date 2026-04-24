@@ -105,9 +105,12 @@ Working forward-carry of the current open UV items relevant to the active queue.
   parity-corrected source projection compatible with the seven-family inventory.
   Under the clean homogeneous scalar grade convention
   `Gr_a r=r^{(a+2)}(m)(t-m)^{a+2}/(a+2)!`, the `L_1YR_1` middle input is absent
-  at `B_7`; promote this only after a source/adversarial pass confirms the
-  convention choice, then redirect the next `Y`-slot gate to
-  `L_2YR_0`/`L_0YR_2`.
+  at `B_7`; the source/adversarial verifier confirms this as a scoped absence
+  theorem, not a determinant identity.  Under the same convention,
+  `L_2YR_0`/`L_0YR_2` have a reported order-count absence because the allowed
+  placements start at ordinary order `8`; this still needs verifier pass before
+  promotion.  If a future theorem instead defines `M^{[5]}` as matrix-output
+  order `5`, reopen all `Y`-slot gates.
   Gate subtargets: compute determinant identities against
   `A_5^{\mathfrak f}(m)` for all seven classified cubic families:
   `L_1YR_1`; `L_3N_0R_0` and `L_0N_0R_3`; `L_2YR_0` and `L_0YR_2`;
