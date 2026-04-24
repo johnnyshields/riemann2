@@ -88,3 +88,19 @@ Next move: use this theorem as leverage on UV-011. The remaining matrix problem
 is narrower: whether multiparameter covariant-jet structure adds a genuine
 natural frame/order beyond the already-safe subspace hierarchy, or whether the
 same frame-selection obstruction closes it negatively.
+
+## Gap return - UV-011
+
+`agents/20260424-190708-gap-multiparameter-frame-finality/report.md` argues for
+a scoped negative closure of UV-011. The proof combines the existing
+block-upper-triangular chart/gauge laws for raw mixed partials, the
+Berry-covariant and symmetrized-jet span theorems, and the promoted UV-012
+biunitary-orbit theorem. The claimed survivor is the filtered subspace data
+\(O_r,A_r\), endpoint projectors, cross-contractions, polar partial isometries,
+and principal-angle spectra. Ordered frames and entrywise matrices require
+extra frame-selecting structure.
+
+Provisional verdict: keep pending adversarial verification. The main wording
+risk is scope: the theorem must say "from the ray-field/subspace data alone" and
+must not exclude tensor-valued associated-graded objects or matrices built after
+adding a source metric, connection, dynamics, protocol, or symmetry breaking.
