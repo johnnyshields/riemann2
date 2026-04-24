@@ -41,6 +41,18 @@ Working forward-carry of the current open UV items relevant to the active queue.
   Current role: sharp subtarget of UV-022; required before the cross-effect
   package can yield the `\delta^2\mathcal H_7^q` edge law for UV-010.
 
+- **UV-024** -- `rem:wip-parity-projective-factorization-collision-blow-up`
+  Claim: define the pre-determinant fixed-sector order-7 coefficient
+  `B_7^{\mathfrak f}(C)` for the actual source-linear corrected-whitening
+  cross-effect before `\Phi_K` / determinant scalarization, define
+  `Q_{7,m}^q(C)=[B_7^{\mathfrak f}(C)]` in
+  `\mathfrak f/\mathbf C A_5^{\mathfrak f}(m)`, and prove
+  `B_7^{\mathfrak f}((1-\Pi_{1,1})C)\in
+  \mathbf C A_5^{\mathfrak f}(m)`, equivalently
+  `Q_7^q((1-\Pi_{1,1})C)=0`.
+  Current role: coefficient-map subtarget of UV-023; needed before the
+  quotient-invisibility theorem can be promoted.
+
 - **UV-004** — `rem:wip-explicit-pointwise-bridge-good-patch-detector`
   Claim: the local detector either sees the same-tower source `r=q^{(7)}` or the explicit pointwise package is invisible.
   Current role: bridge/diagnostic theorem beneath the package theorem.

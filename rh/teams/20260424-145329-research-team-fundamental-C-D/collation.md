@@ -666,3 +666,18 @@ Captured takeaway: the best current `L_h` candidate is the pre-whitening pair-ke
 - **Keep:** one-pair pre-whitening linear-kernel bookkeeping as support for the definition.
 - **Discard:** post-whitening signed source-weight lift as an exact one-amplitude collapse route.
 - **Next:** wait for the `Q_7^q` extractor lane, then test the combined package `L_h` + pre-determinant `Q_7^q` against cubic non-`(1,1)` source bidegrees.
+
+### `20260424-192320-gap-closer-UV023-Q7q-extractor/report.md`
+
+Signal: UV-023 extractor pass, keep; filed UV-024.
+
+Captured takeaway: the right fixed-target extractor is quotient-valued before determinant scalarization:
+`Q_{7,m}^q(C)=[B_7^{\mathfrak f}(C)]\in\mathfrak f/\mathbf C A_5^{\mathfrak f}(m)`.
+The paper does not define the required pre-determinant fixed-sector coefficient map `C\mapsto B_7^{\mathfrak f}(C)` for the actual corrected-whitening cross-effect. The harness shows the fixed quotient is linear and representative-independent once `B_7^{\mathfrak f}(C)` exists, but a cubic `(1,1,5)` witness survives generically unless non-`(1,1)` bidegrees are proved `A_5^{\mathfrak f}`-gauge.
+
+### Frontier after `Q_7^q` extractor pass
+
+- **Current best:** UV-023 has been sharpened to UV-024: build the matrix/fixed-sector order-7 cross-effect coefficient and prove quotient-invisibility of non-`(1,1)` source bidegrees.
+- **Keep:** fixed-target quotient `\mathfrak f/\mathbf C A_5^{\mathfrak f}(m)` as the pre-determinant extractor codomain.
+- **Discard:** determinant scalarization as the definition of `Q_7^q`, and any claim that the fixed quotient automatically kills cubic `(1,1,5)` witnesses.
+- **Next:** dispatch a source/coefficient construction lane for `B_7^{\mathfrak f}(C)` before `\Phi_K`, with an adversarial cubic-witness checker once a candidate exists.

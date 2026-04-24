@@ -163,15 +163,16 @@ Active, compact knowledge base shared with every delegated agent.
   the source-weight-linear actual two-atom block perturbation `X^{[1]}` and a
   proof that its order-7 quotient output is the UV-010
   `\mathcal J_2^{(7)}` / `\mathfrak O_7`.
-- **UV-023 homogeneous-transfer filtration is missing from current source.**
+- **UV-023/UV-024 source-bidegree quotient package is missing from current source.**
   Provenance: UV-023 reports in `agents/20260424-190438-*`,
   `agents/20260424-190928-*`, `agents/20260424-191517-*`, and
-  `agents/20260424-192320-explorer-UV023-Lh-source-input/report.md`.
+  `agents/20260424-192320-*/report.md`.
   Usage: `(1,1)` projection kills `\mathcal T_{p\ge3}` formally, and the best
   `L_h` candidate is the pre-whitening pair-kernel-linear derivative supported
-  by one-pair formulas. Promotion still needs the actual two-atom corrected
-  block, source projector `\Pi_{1,1}`, fixed-target pre-determinant `Q_7^q`,
-  and proof that `Q_7^q` kills non-`(1,1)` source bidegrees.
+  by one-pair formulas. The best `Q_7^q` target is
+  `[B_7^{\mathfrak f}(C)]\in\mathfrak f/\mathbf C A_5^{\mathfrak f}(m)`.
+  Promotion still needs the actual two-atom block, `B_7^{\mathfrak f}(C)`,
+  `\Pi_{1,1}`, and proof that non-`(1,1)` source bidegrees are quotient-gauge.
 
 ## Recurring open gaps
 
