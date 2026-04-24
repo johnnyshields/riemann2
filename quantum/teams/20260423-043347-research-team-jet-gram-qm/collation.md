@@ -205,3 +205,25 @@ Provisional verdict: keep pending adversarial verification. The verifier should
 check the determinant formula, the endpoint-jet interpolation/density step, and
 the scope caveats: first-order `O_1`, real-open-dense complex interpretation,
 and no blanket claim for all higher `O_r/A_r` observables.
+
+## Verifier return and promotion - UV-015
+
+`agents/20260424-194246-verifier-nonbenchmark-genericity/report.md` accepts the
+finite-jet genericity theorem for promotion. The verifier independently checked
+the endpoint formulas, the admissible seed jet, the nonzero determinant, the
+local sphere-chart interpolation of endpoint 2-jets, and the finite-family
+pullback hypotheses. It also added
+`agents/20260424-194246-verifier-nonbenchmark-genericity/scripts/verify_uv015_seed.py`,
+whose SHA256 is
+`85F3F3E3A40A74F2DD851727C78FCEC67417C02FE263D06AC0601BB4C9949D5D` and whose
+output again gives `C = 1/2`, `Delta = 1/4*sqrt(2)`.
+
+Promoted the scoped first-order real finite-jet `O_1` genericity theorem into
+`quantum/paper/jet_gram_quantum_note.md`, updated `findings.md`, and removed
+UV-015 from `uv.md`. The text does not claim genericity for all higher
+`O_r/A_r` observables, for arbitrary finite-dimensional families without rank
+hypotheses, or for holomorphic complex-Zariski genericity.
+
+Honest verdict: all UV entries in the quantum ledger are now closed. A
+subsequent hardening/audit pass should check the note globally before declaring
+the whole quantum side track final.

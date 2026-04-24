@@ -795,6 +795,32 @@ In fact this persists for the whole twist family
 \(\psi_k(t)=(\cos t\cos kt,\cos t\sin kt,\sin t)\), \(k\ge2\), with exact
 equal-overlap witnesses for every integer \(k\).
 
+There is also a local genericity theorem behind these examples. For normalized
+real \(C^2\) curves in a finite-dimensional Hilbert space of dimension at least
+\(3\), fix two distinct parameter values and assume the endpoint velocities are
+nonzero. Let
+\[
+I(u,v)=\langle\psi(u),\psi(v)\rangle,\qquad
+T(t)=\frac{\psi'(t)}{\|\psi'(t)\|},\qquad
+C(u,v)=\langle T(u),T(v)\rangle .
+\]
+On a branch where \(C\ne0\), the first value-channel-free `O_1` line-angle
+observable is locally independent of endpoint overlap whenever
+\[
+\det\frac{\partial(I,C)}{\partial(u,v)}\ne0 .
+\]
+This determinant depends only on the endpoint \(2\)-jets. On the admissible
+endpoint \(2\)-jet chart it is a nonzero polynomial after clearing the nonzero
+velocity denominators, so its nonvanishing is an open dense finite-jet
+condition. Consequently any smooth finite-dimensional curve family whose
+endpoint \(2\)-jet map is submersive onto such a chart, and any connected
+real-analytic family for which the pulled-back determinant is not identically
+zero, has an open dense locus where the `O_1` line-angle data is not locally
+determined by overlap alone. The same finite-jet statement applies to complex
+Hilbert spaces after realification and on a smooth branch of the absolute
+principal-angle observable. This is a first-order `O_1` genericity theorem, not
+a blanket claim for all higher `O_r` or `A_r` observables.
+
 ## What Can Be Claimed Now
 
 Safe claims:
@@ -833,7 +859,10 @@ Safe claims:
 11. With coherent reflection access to endpoint projectors, phase estimation on
     \((2\Pi_- - I)(2\Pi_+ - I)\) gives a natural protocol for estimating the
     already-canonical principal-angle spectrum.
-12. There are now explicit benchmark families on both the ambient `A_r` side and
+12. First-order value-channel-free richer-than-overlap behavior is generic in
+    the finite-jet sense for normalized curves in dimension at least \(3\),
+    under the stated endpoint \(2\)-jet rank condition.
+13. There are now explicit benchmark families on both the ambient `A_r` side and
     the value-channel-free `O_r` side where the surviving two-point data is not
     determined by overlap alone.
 
@@ -848,8 +877,9 @@ Unsafe claims, for now:
 
 ## Open Problems
 
-1. Prove a structural genericity theorem for richer-than-overlap behavior beyond
-   the current polynomial/Veronese and spherical-twist benchmark families.
+No open problem remains in the scoped quantum note. Stronger variants would
+require new targets, such as higher-order `O_r/A_r` genericity or a
+source-specific physical implementation of the reflection protocol.
 
 ## Provenance
 
@@ -906,6 +936,10 @@ Unsafe claims, for now:
 - `quantum/teams/20260423-043347-research-team-jet-gram-qm/agents/20260424-191817-verifier-Ar-Or-role-split/report.md`
 - `quantum/teams/20260423-043347-research-team-jet-gram-qm/agents/20260424-192133-gap-natural-protocol/report.md`
 - `quantum/teams/20260423-043347-research-team-jet-gram-qm/agents/20260424-192735-verifier-natural-protocol/report.md`
+- `quantum/teams/20260423-043347-research-team-jet-gram-qm/agents/20260424-193527-gap-nonbenchmark-genericity/report.md`
+- `quantum/teams/20260423-043347-research-team-jet-gram-qm/agents/20260424-193527-gap-nonbenchmark-genericity/scripts/verify_o1_jet_determinant.py`
+- `quantum/teams/20260423-043347-research-team-jet-gram-qm/agents/20260424-194246-verifier-nonbenchmark-genericity/report.md`
+- `quantum/teams/20260423-043347-research-team-jet-gram-qm/agents/20260424-194246-verifier-nonbenchmark-genericity/scripts/verify_uv015_seed.py`
 - `quantum/teams/20260424-032829-attack-saturation/reports/`
 - `quantum/teams/20260424-033611-attack-twist-family/reports/`
 - `quantum/teams/20260424-034240-attack-quotient/reports/`

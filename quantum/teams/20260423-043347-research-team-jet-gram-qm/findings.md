@@ -235,13 +235,18 @@ Source anchor:
 - The same lower-order complement description now extends to the value-channel-
   free side as well:
   `O_r(t)^\perp = span{psi_n(t)} \oplus Coeff((x-t)^{r+1} R_{<= n-r-1}[x])`.
+- For normalized real `C^2` curves in dimension at least `3`, first-order
+  value-channel-free richer-than-overlap behavior is generic in a finite-jet
+  sense: local independence of endpoint overlap and the `O_1` line-angle scalar
+  is detected by a nonzero endpoint `2`-jet determinant, and that nonvanishing
+  is open dense on the admissible endpoint-jet chart. This extends to
+  submersive finite-dimensional curve families and to connected real-analytic
+  families where the pulled-back determinant is not identically zero.
 
 ## Missing
 
 - General lower-order (`r < n-1`) Veronese-family formulas, especially on the
   value-channel-free `O_r` side.
-- Any non-benchmark family theorem showing the richer-than-overlap behavior is
-  structurally generic outside the polynomial/Veronese setting.
 
 ## Candidate expansions
 
