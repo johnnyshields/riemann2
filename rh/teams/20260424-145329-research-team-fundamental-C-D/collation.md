@@ -319,3 +319,21 @@ Captured takeaway: the source verifier confirms the current proof state. Source-
 - **Keep:** linear-algebra reduction that `\det(R,A_5^{\mathfrak f})` is the quotient-defect class; adversarial `R_\kappa` pressure harness; C codomain/fiber schema; source map of missing package construction and merger theorem.
 - **Discard:** representative-gauge control as a route to C, fixed-codomain/schema-only promotion, and displayed-formula-only claims that the slope channel is already killed.
 - **Next:** redelegate the C gap-closer/explorer pair toward a source-level edge law for `\overline E_{12}^{(7;1)}` or an actual package state-locality theorem for `[R]`; keep both verifiers alive for any proposed positive claim.
+
+### `20260424-165509-explorer-C-actual-package-construction/report-R-definition-followup.md`
+
+Signal: `[R]` definition dependency graph, keep.
+
+Captured takeaway: the current paper has only a finite-delta algebraic placeholder for `[R]` once the septic quotient defect `\overline E_{12}^{(7;1)}` already exists. The actual exceptional-divisor object needs a new septic quotient edge law `\overline E_{12}^{(7;1)}=\delta^2\mathcal H_7^q(m,\kappa,\delta^2)` plus analytic quotient-line trivialization from the moving `h_1` quotient to the midpoint quotient. The conditional package route imports diagonal merger and only proves `O(\delta^2)`; the quotient-diagonal route is too coarse to define finite-order septic defects; the collision edge-law WIP has the right chart but only cubic/quintic edge laws. Filed UV-010 for this missing edge package. State-locality/descent for `[R]` and diagonal-merger normalization are downstream of UV-010.
+
+### `20260424-165509-gap-closer-C-R-determinant-control/report-edge-law-followup.md`
+
+Signal: UV-010 septic edge-law obstruction, keep.
+
+Captured takeaway: the gap-closer identifies the first obstruction term as the septic quotient component of the quadratic interaction Hessian, `\mathfrak O_7=[\mathcal J_2^{(7)}]_{\delta=0}`. The abstract source criterion provides the `\delta^2` divisibility mechanism, but it does not compute `\mathfrak O_7`, prove descent, or force determinant fiber constancy. A formal model adding `a_1a_2\delta^2P(m,\kappa)` in the septic quotient coordinate preserves swap symmetry, one-amplitude collapse, diagonal merger, and lower cubic/quintic edge data while introducing nonzero `\partial_\kappa` in the order-7 edge. The script `agents/20260424-165509-gap-closer-C-R-determinant-control/scripts/septic_edge_obstruction_model.js` reruns cleanly. This is terminal for deriving UV-010 from lower edge laws plus the abstract source criterion alone, but not terminal for an actual-package computation/descent theorem for `\mathcal J_2^{(7)}`.
+
+### UV-010 frontier
+
+- **Current best:** UV-010 is the immediate C target. Define or compute the actual corrected order-7 quotient interaction Hessian `\mathfrak O_7`, with quotient-line trivialization to the midpoint quotient.
+- **Keep:** explorer dependency graph for `\mathcal H_7^q`; gap-closer obstruction model showing lower laws do not force it.
+- **Next:** ask source/adversarial verifiers to audit UV-010 specifically, then redelegate a positive source-mining attempt on actual order-7 formulas / quotient-septic closure.

@@ -81,6 +81,14 @@ Active, compact knowledge base shared with every delegated agent.
   `agents/20260424-160000-verifier-adversarial-CDE/report-cfs2-actual-formula-review.md`
   and
   `agents/20260424-160000-verifier-source-CDE/report-cfs2-actual-formulas-source-check.md`.
+- **Cubic/quintic edge laws plus the abstract source criterion do not determine the septic quotient edge.**
+  Provenance:
+  `agents/20260424-165509-gap-closer-C-R-determinant-control/report-edge-law-followup.md`
+  with script `scripts/septic_edge_obstruction_model.js`. Do-not-retry:
+  deriving UV-010 from lower edge laws or formal swap / one-amplitude / diagonal
+  axioms alone; a formal package can add an arbitrary
+  `a_1a_2\delta^2P(m,\kappa)` septic quotient term while preserving those
+  lower constraints.
 
 ## Goodies
 
@@ -116,6 +124,13 @@ Active, compact knowledge base shared with every delegated agent.
   `[R]\mapsto\det(R,A_5^{\mathfrak f})` identifies
   `\mathfrak f/\mathbf C A_5^{\mathfrak f}` with `\mathbf C`; C-FS2/C-FS3 must
   control the actual quotient class `[R]`, not only a representative.
+- **Exceptional-divisor `[R]` first needs a septic quotient edge package.**
+  Provenance:
+  `agents/20260424-165509-explorer-C-actual-package-construction/report-R-definition-followup.md`.
+  Usage: finite-delta `[R]` is conditional on an existing
+  `\overline E_{12}^{(7;1)}`; the actual divisor object requires
+  `\overline E_{12}^{(7;1)}=\delta^2\mathcal H_7^q(m,\kappa,\delta^2)` plus
+  analytic quotient-line trivialization to the midpoint quotient. This is UV-010.
 
 ## Recurring open gaps
 
@@ -133,9 +148,9 @@ Active, compact knowledge base shared with every delegated agent.
   The current C2a split is quotient-visible state-locality vs genuinely relational /
   provenance-sensitive two-atom data. Patch transitions for the affine lift are
   base-controlled (`S_u=-(x/Y)S`), so the remaining C obstruction is fiber selection:
-  construct the actual corrected C package, prove state-locality/descent for the
-  quotient-defect class `[R]`, then show diagonal merger kills the exceptional
-  slope/provenance fiber.
+  first construct the septic quotient edge package `\mathcal H_7^q` for `[R]`
+  (UV-010), then prove state-locality/descent for `[R]`, then show diagonal
+  merger kills the exceptional slope/provenance fiber.
 - **Hidden extraction theorem from finite-core package data to the first surviving odd coefficient of `H_m`.**
   Touches: UV-002 / UV-007; this is the bridge from `\widehat\Psi`-side control
   to the already-built `\Xi_\zeta^{(N)}` extractor. Current sharp obstruction:

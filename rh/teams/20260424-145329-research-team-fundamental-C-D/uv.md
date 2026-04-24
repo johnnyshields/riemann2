@@ -16,6 +16,12 @@ Working forward-carry of the current open UV items relevant to the active queue.
   Claim: actual corrected edge-law / local good-patch package on the collision-cancellation chart.
   Current role: support theorem for UV-002.
 
+- **UV-010** — `rem:wip-parity-projective-factorization-collision-blow-up`
+  Claim: construct the actual corrected order-7 quotient-defect edge package
+  `\mathcal H_7^q` for `\overline E_{12}^{(7;1)}` with quotient-line
+  trivialization to the midpoint quotient, without assuming diagonal merger.
+  Current role: immediate C-FS2/C-FS3 definition target under UV-003.
+
 - **UV-004** — `rem:wip-explicit-pointwise-bridge-good-patch-detector`
   Claim: the local detector either sees the same-tower source `r=q^{(7)}` or the explicit pointwise package is invisible.
   Current role: bridge/diagnostic theorem beneath the package theorem.
