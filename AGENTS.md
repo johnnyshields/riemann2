@@ -72,11 +72,20 @@ delegation. Override the model only when the user explicitly asks or a bounded
 task has a clear task-specific reason; record that reason in `dispatch.md`.
 Do not hard-code vendor model names in skills, briefs, or agent definitions.
 
-**3+3+2 roster** for a balanced cycle: 3 gap-closers (each on a specific
-UV-NNN / `rem:wip-*`, with routes A/B/C and fallback to minimal finite
-reduction) + 3 explorers (derivative geometry, fundamentals, cross-cutting
-structure that *redirects* how gaps are attacked) + 2 verifiers (adversarial
-+ source auditor). 8 is a target, not a cap — preserve the balance.
+**Adaptive roster.** Research teams do not have a fixed headcount. The
+coordinator chooses the smallest live roster that keeps the frontier moving:
+gap-closers for concrete UVs, explorers for redirects, source auditors or
+adversarial verifiers when there is something specific to check, and fresh
+independent agents only when independence is useful. Balance is a judgment,
+not a quota.
+
+**One-ahead verification.** Keep at least one research or exploration lane
+moving while verifiers review the previous stable deposit. Verification is
+risk-based: exploratory notes, failed routes, and low-impact bookkeeping do
+not need an immediate verifier. Claims that would change proof state, remove a
+UV, alter the paper, or become a durable finding still require an adversarial
+or source pass before promotion. Do not idle researchers behind verifier work
+unless their next assignment depends on that verifier's answer.
 
 ### Dispatch selector
 
@@ -148,7 +157,9 @@ manually interrupts.
    audit, a synthesis. Default to `research-attack` over `research-team`
    per `Dispatch`.
 3. Dispatch via the `Dispatch selector`. Brief per `Briefing rule`.
-4. Collate returns. Promote / demote / quarantine / reject per `Claim lifecycle (git-as-archive)`.
+4. Collate returns as they land. Queue verification only for claims that need
+   it, keep research agents one step ahead when their next move is independent,
+   and promote / demote / quarantine / reject per `Claim lifecycle (git-as-archive)`.
    Commit by logical unit; auto-push per `Git workflow`.
 5. Go to 1.
 
@@ -294,8 +305,9 @@ Every multi-agent dispatch creates one team dir under the relevant paper:
 ```
 
 `<paper>` is the canonical paper dir (`paper`, `grh`, `quantum`, ...). A
-full `research-team` 3+3+2 cycle produces one team dir with eight agent
-subdirs. Each agent gets its own timestamp in its slug so spawn order is
+`research-team` cycle produces one team dir and however many agent subdirs the
+coordinator selected or reused. Agent-subdir count records the live roster; it
+is not a quota. Each agent gets its own timestamp in its slug so spawn order is
 legible from the filesystem.
 
 `findings.md` and `uv.md` in each team dir are the authoritative state
@@ -483,7 +495,7 @@ ephemeral `/tmp/` scripts for anything that produces a cited number.
 - **Commit while agents are still working.** Team leads should land
   in-flight material as it arrives — each agent's deposit as soon as its
   `report.md` and `scripts/` are on disk, the dispatch brief when the
-  team goes live, the collation draft as it fills in. Don't batch eight
+  team goes live, the collation draft as it fills in. Don't batch all
   agent subdirs into one end-of-cycle commit; a crash or compact erases
   everything unstaged. Cadence while agents are live: commit after each
   agent's deposit lands, or every few minutes of active collation,

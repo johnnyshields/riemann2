@@ -1,6 +1,6 @@
 ---
 name: research-attack
-description: Small-cycle variant of research-team. 1-2 gap-closers + 1 verifier for a focused push on one UV-NNN or rem:wip-* target. Cheaper than the 3+3+2 full cycle.
+description: Small-cycle variant of research-team for a focused push on one UV-NNN or rem:wip-* target. Starts with one or two gap-closers and adds lagging verification only when a stable claim is ready or risk demands it.
 ---
 
 ## Codex workflow
@@ -9,68 +9,63 @@ Follow `AGENTS.md` for coordinator policy, provenance, dispatch, and git rules. 
 
 # Research Attack
 
-Focused push on one gap. 1 gap-closer + 1 adversarial verifier by
-default; `--double` for 2 gap-closers on different routes. Follows
-`.agents/references/agents/_autoresearch.md`, AGENTS.md `Dispatch` long-lived-agent rules,
-`Briefing rule`, `Team dirs and agent self-deposit` deposit, `Capture before shutdown, forward-carry at dispatch` forward-carry. Use the inherited Codex model by default for every
-research agent, always. Do not override Codex model selection unless explicitly needed.
+Focused push on one gap. Start with one gap-closer by default; use `--double`
+for two independent routes. Add an adversarial verifier or source auditor only
+when a stable claim is ready to check, the target is high-risk, or promotion is
+being considered. Follow `.agents/references/agents/_autoresearch.md`,
+AGENTS.md `Dispatch`, `Briefing rule`, `Team dirs and agent self-deposit`, and
+`Capture before shutdown, forward-carry at dispatch`.
 
-`$ARGUMENTS`: `UV-NNN`, `rem:wip-<label>`, or free text (coordinator
-resolves to the best match). Optional `--double`.
+`$ARGUMENTS`: `UV-NNN`, `rem:wip-<label>`, or free text resolved to the best
+match. Optional `--double`.
 
-## Preamble (forward-carry first â€” `Capture before shutdown, forward-carry at dispatch`)
+## Preamble
 
-1. Read the most recent team dir's `findings.md` and `uv.md`, plus the
-   paper region around the target's `rem:wip-*` label (Â±200 lines).
-2. Create `<paper>/teams/<ts>-attack-gap-<slug>/` where `<slug>` is
-   UV-ID or short descriptor. Copy prior `findings.md` + `uv.md` in;
-   prune dead entries; add anything surfaced last cycle not yet
-   captured. Initialize `attempts.md` with a markdown attempts table and
-   `Frontier summaries` block. Commit.
-3. Confirm no existing team dir has the same timestamp/slug. Write
-   `dispatch.md` with the originating commit, target, current baseline/frontier,
-   exact in-scope files/lines/reports, protected surfaces, routes, non-goals,
-   fixed-harness criteria, ground-truth checks, and any run budgets/timeouts.
+1. Read the most recent team dir's `findings.md` and `uv.md`, plus the paper
+   region around the target's `rem:wip-*` label.
+2. Create `<paper>/teams/<ts>-attack-gap-<slug>/`. Copy prior `findings.md` and
+   `uv.md`, prune dead entries, add uncaptured material, initialize
+   `attempts.md`, and commit.
+3. Write `dispatch.md` with the originating commit, target, current
+   baseline/frontier, exact in-scope files/lines/reports, protected surfaces,
+   routes, verifier queue if any, non-goals, fixed-harness criteria,
+   ground-truth checks, and budgets/timeouts.
 
 ## Dispatch
 
-When delegated teamwork is authorized, record team name `research-attack-<ts>` in `dispatch.md`. Spawn Codex subagents with the inherited Codex model by default:
+When delegated teamwork is authorized, record team name `research-attack-<ts>`
+in `dispatch.md`. Spawn the coordinator-selected small roster with the inherited
+Codex model:
 
-- **Gap-closer(s)** (`role prompt: gap-closer`) â€” `gap-<slug>` (or
-  `-routeA` / `-routeB` under `--double`). Briefing: full
-  `.agents/references/agents/_autoresearch.md`, current team dir's `findings.md`, the
-  specific UV entry verbatim (narrow `Briefing rule` exception), target in cleanest form,
-  routes A/B/C, the `agents/<slug>/` path + self-deposit checklist.
-- **`verifier-adversarial`** (`role prompt: verifier-adversarial`) â€”
-  same briefing skeleton plus the UV entry (`Briefing rule` adversarial exception).
-  Waits for gap-closer(s) to deposit, then attacks.
+- **Gap-closer(s)** (`role prompt: gap-closer`) -> `gap-<slug>` or
+  `gap-<slug>-routeA` / `gap-<slug>-routeB` under `--double`. Brief with the
+  autoresearch metaprompt, full `findings.md`, the specific UV entry verbatim,
+  clean target, routes A/B/C, exact deposit path, and self-deposit checklist.
+- **Verifier/source auditor** (`role prompt: verifier-adversarial` or
+  `verifier-source`) -> spawn only when there is a concrete prior deposit to
+  attack or source-check. Give the specific UV entry and report path needed for
+  that check, not the whole ledger.
 
-Keep those teammates alive after deposit. Use `send_input` for follow-up
-challenges, verifier objections, sharpened reductions, and the next adjacent
-attack before spawning replacements.
+Keep teammates alive after deposit. Use `send_input` for follow-up challenges,
+verifier objections, sharpened reductions, and the next adjacent attack before
+spawning replacements.
 
-Non-goals (coordinator-synthesized): no adjacent UVs, no re-proving
-closed lemmas, no new conjectures outside scope.
+Non-goals are coordinator-synthesized: no adjacent UVs, no re-proving closed
+lemmas, no new conjectures outside scope.
 
-## Continuing cycle (capture, redelegate, keep alive â€” `Capture before shutdown, forward-carry at dispatch`)
+## Continuing Cycle
 
-1. Verify every `agents/<slug>/report.md` + `scripts/` deposited; chase
-   missing via `send_input`.
-2. Walk each report. Refine the target UV entry in this team dir's
-   `uv.md` (sharpen `Needed for promotion`, or remove it if the verifier
-   confirmed closure). File any new UV candidates. Add any new findings.
-   Append an `attempts.md` row for every substantial route with `keep`,
-   `discard`, or `crash`; periodically summarize counts and the current
-   frontier in `collation.md`.
-3. Respond to the agents. Ask the verifier to attack the strongest new claim;
-   ask the gap-closer to reduce the sharpest remaining obstruction; or assign
-   the next adjacent target to the same named teammate.
-4. Write `paper-updates.md` only if the cycle produced paper-ready edits.
-5. No direct `<main>.tex` edits here.
+1. Verify every `agents/<slug>/report.md` plus cited `scripts/` and `notes/`
+   exists; chase missing deposits via `send_input`.
+2. Walk each report. Refine the target UV entry in this team dir's `uv.md`, file
+   new UV candidates, add findings, append `attempts.md` rows, and refresh
+   `collation.md`.
+3. Maintain one-ahead flow: send independent next attacks to gap-closers while
+   any verifier checks the previous stable claim. Wait only when the next attack
+   depends on that check.
+4. Write `paper-updates.md` only for paper-ready edits. No direct `<main>.tex`
+   edits here.
 
-Do not shut down at ordinary attack boundaries. Keep the team alive for a good
-while, continue the dialogue, and redelegate through `send_input`. Use
-`close_agent` only at a terminal condition, explicit user halt, stale long-idle
-team, or when replacing the team is clearly better than continuing it.
-
-
+Do not shut down at ordinary attack boundaries. Keep the team alive for
+continuity. Use `close_agent` only at a terminal condition, explicit user halt,
+stale long-idle team, or when replacement is clearly better.

@@ -1,108 +1,91 @@
 ---
 name: research-team
-description: Primary workhorse. Dispatches a 3+3+2 roster (3 gap-closers + 3 explorers + 2 verifiers) via Codex subagents when delegated teamwork is authorized, with one team dir and eight agent subdirs under <paper>/teams/. Use for a full balanced research cycle.
+description: Primary workhorse. Dispatches a coordinator-selected live roster via Codex subagents when delegated teamwork is authorized, with one team dir and per-agent subdirs under <paper>/teams/. Uses a one-ahead pattern: researchers keep attacking while verifiers review prior stable deposits.
 ---
 
 ## Codex workflow
 
 Follow `AGENTS.md` for coordinator policy, provenance, dispatch, and git rules. Work locally unless the user requested a delegated/team workflow or invoked a multi-agent skill. For delegated work, use Codex subagents (`spawn_agent`, `send_input`, `wait_agent`, `close_agent`) with concrete ownership, bounded prompts, and on-disk report/deposit requirements. Use the inherited Codex model by default; override only when the user asks or the task clearly requires it. Keep canonical paper edits coordinator-owned unless this skill explicitly grants an edit-capable phase.
 
-# Research Team (3+3+2)
+# Research Team
 
-Balanced research dispatch: 3 gap-closers + 3 explorers + 2 verifiers via
-Codex subagents when delegated teamwork is authorized. One long-lived team dir with eight agent subdirs. Follows `Dispatch`
-long-lived-agent rules, `.agents/references/agents/_autoresearch.md`, `Briefing rule`,
-`Writing discipline`, `Team dirs and agent self-deposit` deposit structure, and `Capture before shutdown, forward-carry at dispatch`.
+Adaptive research dispatch via Codex subagents when delegated teamwork is
+authorized. The coordinator chooses the live roster from the frontier: gap
+closers for concrete UVs, explorers for redirects, verifiers or source auditors
+when there is something specific to check. Verification is risk-based and
+usually one step behind the research lane. Follow `Dispatch`,
+`.agents/references/agents/_autoresearch.md`, `Briefing rule`, `Writing
+discipline`, `Team dirs and agent self-deposit`, and `Capture before shutdown,
+forward-carry at dispatch`.
 
-`$ARGUMENTS`: empty â†’ general balance (coordinator picks most-blocking
-UV items + three broad explorer topics); topic phrase â†’ oriented around
-it; UV-NNN â†’ at least one gap-closer locked on it.
+`$ARGUMENTS`: empty -> coordinator picks the most useful frontier; topic phrase
+-> orient around it; `UV-NNN` -> assign at least one gap-closer to it.
 
-## Preamble (forward-carry first â€” `Capture before shutdown, forward-carry at dispatch`)
+## Preamble
 
-1. Read the most recent team dir's `findings.md`, `uv.md`, and current
-   `rem:wip-*` labels, plus the last 2â€“3 lore entries.
-2. Create the new team dir `<paper>/teams/<ts>-<team-slug>/`. Copy the
-   prior team dir's `findings.md`, `uv.md`, and open `attempts.md` context in;
-   prune dead entries; add anything from the just-closed cycle not yet
-   captured. Initialize `attempts.md` with a markdown attempts table and
-   `Frontier summaries` block. Commit.
-3. Confirm no existing team dir has the same timestamp/slug. Pick the roster.
-   Write `dispatch.md` with the originating commit, roster, targets, exact
-   in-scope files/lines/reports, protected surfaces, non-goals, fixed-harness
-   criteria, ground-truth checks, and any run budgets/timeouts.
+1. Read the most recent team dir's `findings.md`, `uv.md`, current
+   `rem:wip-*` labels, last 2-3 lore entries, and recent agent reports.
+2. Create `<paper>/teams/<ts>-<team-slug>/`. Copy the prior `findings.md` and
+   `uv.md`, carry forward open `attempts.md` context, prune dead entries, add
+   uncaptured material, initialize `attempts.md`, and commit.
+3. Pick the initial roster and one-ahead cadence. Write `dispatch.md` with the
+   originating commit, roster, verifier queue if any, targets, exact in-scope
+   files/lines/reports, protected surfaces, non-goals, fixed-harness criteria,
+   ground-truth checks, and budgets/timeouts.
 
 ## Dispatch
 
-When delegated teamwork is authorized, record team name `research-team-<ts>` in `dispatch.md`. Spawn 8 named Codex subagents
-(e.g. `gap-closer-mixed4pt`, `explorer-deriv-geo`, `verifier-source`), and
-use the inherited Codex model by default. Each agent's slug gets its own
-`agents/<ts>-<agent-slug>/` subdir.
+When delegated teamwork is authorized, record team name `research-team-<ts>` in
+`dispatch.md`. Spawn the coordinator-selected initial roster, not a fixed quota.
+Start enough research/exploration lanes to keep work moving; add verifier or
+source-auditor lanes when a prior deposit is ready to check or risk demands an
+early check. Each agent's slug gets its own `agents/<ts>-<agent-slug>/` subdir.
 
-Keep those teammates alive after their first deposit. Treat idle notifications
-as availability for the next assignment, not as completion. When a follow-up or
-adjacent task depends on an agent's context, send it to the same named teammate
-with `send_input` instead of spawning a fresh agent. Use new agents only for a
-new role, an independence check, a blocked teammate, or a stale long-idle team.
-The team lead should keep a running dialogue: clarify weak points, ask for
-sharper reductions, redirect routes, and redelegate the next task before any
-shutdown.
+Keep teammates alive after their first deposit. Treat idle notifications as
+availability for the next assignment, not completion. Use `send_input` to reuse
+context; spawn fresh agents for new roles, independence checks, blocked
+teammates, or stale long-idle teams.
 
-Every briefing gets: the full `.agents/references/agents/_autoresearch.md` metaprompt,
-the team dir's full `findings.md`, the 9-field report schema (`Report schema`), non-goals,
-the agent's `agents/<slug>/` path + the self-deposit checklist, and the `Writing discipline`
-writing-discipline reminder (three-bin proved/conditional/missing, gap
-reduction over closure, scoped negation, caution-labeled synthesis,
-honest-verdict closure).
+Every briefing gets the full `.agents/references/agents/_autoresearch.md`
+metaprompt, the team dir's full `findings.md`, the 9-field report schema,
+non-goals, the agent's exact deposit path, self-deposit checklist, and
+`Writing discipline`. Synthesize non-goals from context.
+
 Role-specific idioms:
 
-- **Gap-closers** â€” their specific UV entry verbatim from `uv.md`
-  (narrow exception per `Briefing rule`); "What is the cleanest target here?"; "If
-  full closure is too hard, reduce to the smallest list of concrete
-  unresolved sub-statements"; routes A/B/C; fallback to minimal finite
-  reduction.
-- **Explorers** â€” no `uv.md` content (spoiler risk); mandate is
-  observations + candidate goodies + candidate negative findings, each
-  pre-tagged `[confirmed]` / `[conditional]` / `[candidate]`; "Label
-  each claim with a confidence tag before merging."
-- **Verifiers** â€” wait for the 6 research reports, then attack. The
-  adversarial verifier may see specific UV entries cited in the
-  reports; the source auditor may see UV entries whose labels appear in
-  the audited sections. "Give me the honest verdict." "Qualify any
-  impossibility claim with 'from [scope] alone.'"
+- **Gap-closers** receive their specific UV entry verbatim from `uv.md`;
+  include "What is the cleanest target here?", smallest concrete unresolved
+  sub-statements, routes A/B/C, and fallback to minimal finite reduction.
+- **Explorers** receive no `uv.md` content by default; they return observations
+  and candidate findings tagged `[confirmed]`, `[conditional]`, or
+  `[candidate]`.
+- **Verifiers/source auditors** review specific prior deposits, not the whole
+  frontier by default. If no verification target is ready, do not spawn them
+  yet. Give only the UV entries and reports needed for the check, then ask for
+  the honest verdict and scoped objections.
 
-Every agent is told: `unsupported` / `blocked` / `no progress` are
-acceptable returns. Synthesize non-goals from context â€” an unscoped
-agent drifts.
+Every agent is told: `unsupported`, `blocked`, and `no progress` are acceptable
+returns.
 
-## Continuing cycle (capture, redelegate, keep alive â€” `Capture before shutdown, forward-carry at dispatch`)
+## Continuing Cycle
 
-1. Verify each returning agent's `agents/<agent-slug>/report.md` +
-   `scripts/` exists. Chase missing deposits via `send_input`; if
-   unanswered, note in `collation.md` under "missing deposits". Do not
-   shut down silently.
-2. Walk each report. Process through `Claim lifecycle (git-as-archive)` â€” promote, demote, file new
-   UV-NNN in this team dir's `uv.md`, append findings bullets, reject
-   with negative capture, or explicitly mark "no action" in
-   `collation.md`. Append an `attempts.md` row for every substantial route
-   with `keep`, `discard`, or `crash`; periodically summarize counts and the
-   current frontier in `collation.md`. Commit per deposit where possible
-   (`Git workflow`).
-3. Respond to the agent. Ask one concrete follow-up, adversarial challenge,
-   or clarification when the report has a live thread; otherwise assign the
-   next adjacent task to the same named teammate. Use `send_input`, not a new
-   `spawn_agent`, when the existing teammate's context is useful.
-4. Write `paper-updates.md` if the cycle produced paper-ready edits;
-   otherwise skip.
-5. One lore entry at `lore/<yyyymmdd>-research-team-<slug>.md` for major
-   shifts in direction or team-level decisions.
-6. No direct `<main>.tex` edits here â€” promotion is a separate deliberate
-   step after review.
+1. Verify each returning agent deposited `agents/<agent-slug>/report.md` plus
+   cited `scripts/` and `notes/`. Chase missing deposits via `send_input`; log
+   unanswered gaps in `collation.md`.
+2. Walk each report. Process through `Claim lifecycle (git-as-archive)`: promote,
+   demote, file new UV-NNNs, append findings, reject with negative capture, or
+   mark "no action" in `collation.md`. Append `attempts.md` rows and refresh
+   frontier summaries. Commit per deposit where possible.
+3. Maintain the one-ahead pipeline: queue verifier work for stable claims that
+   need checking, but immediately redelegate independent next attacks or
+   explorations to the research lane. Wait only when the next move depends on
+   the verifier's answer.
+4. Respond to each agent with one concrete follow-up, challenge, clarification,
+   or next adjacent task. Use `send_input` when context is useful.
+5. Write `paper-updates.md` only for paper-ready edits. No direct `<main>.tex`
+   edits here; promotion is a separate deliberate step after review.
+6. Write a lore entry for major direction changes or team-level decisions.
 
 Do not shut down agents at ordinary cycle boundaries. Keep the delegated Codex
-team alive for a good while so the lead and teammates maintain continuity.
-Only use `close_agent` at a terminal condition, explicit user halt, stale
-long-idle team, or when a replacement team is clearly better than continued
-redelegation.
-
-
+team alive for continuity. Use `close_agent` only at a terminal condition,
+explicit user halt, stale long-idle team, or when replacement is clearly better.
