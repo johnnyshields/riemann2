@@ -165,13 +165,14 @@ Active, compact knowledge base shared with every delegated agent.
   `\mathcal J_2^{(7)}` / `\mathfrak O_7`.
 - **UV-023/UV-024 source-bidegree quotient package is missing from current source.**
   Provenance: UV-023/UV-024 reports in `agents/20260424-190438-*` through
-  `agents/20260424-193725-verifier-source-UV024-prePhi-coefficient/report.md`.
+  `agents/20260424-193725-*/report.md`.
   Usage: `(1,1)` projection kills `\mathcal T_{p\ge3}` formally, and the best
   `L_h` candidate is the pre-whitening pair-kernel-linear derivative supported
   by one-pair formulas. The best `Q_7^q` target is
   `[B_7^{\mathfrak f}(C)]\in\mathfrak f/\mathbf C A_5^{\mathfrak f}(m)`.
-  Promotion still needs the actual two-atom block, `B_7^{\mathfrak f}(C)`,
-  `\Pi_{1,1}`, and proof that non-`(1,1)` source bidegrees are quotient-gauge.
+  Conditional matrix `C_{\mathcal W}` and `B_7^{\mathfrak f}` are definition-ready
+  once the actual source-linear two-atom block exists. Promotion still needs
+  `\Pi_{1,1}` and proof that non-`(1,1)` source bidegrees are quotient-gauge.
 
 ## Recurring open gaps
 

@@ -693,3 +693,17 @@ Captured takeaway: current source does not already define `B_7^{\mathfrak f}(C)`
 - **Current best:** source supports drafting a minimal definition block for `C`, `B_7^{\mathfrak f}`, and `Q_{7,m}^q`, but no promotion until quotient-gauge is proved.
 - **Keep:** matrix whitening before `\Phi_K`; one-pair fixed-sector projection; fixed quotient target.
 - **Next:** wait for matrix-cross-effect construction, then decide whether to stage a definition-only `paper-updates.md` block or keep UV-024 as open.
+
+### `20260424-193725-gap-closer-UV024-matrix-cross-effect/report.md`
+
+Signal: UV-024 matrix cross-effect construction, keep.
+
+Captured takeaway: the conditional matrix cross-effect
+`C_{\mathcal W}=W(B+a_1L_1+a_2L_2)-W(B+a_1L_1)-W(B+a_2L_2)+W(B)` gives a clean definition template before `\Phi_K`, and `B_7^{\mathfrak f}(C_{\mathcal W})=\pi_{\mathfrak f}[z^7]C_{\mathcal W}` is the right coefficient map once the actual source-linear input exists. The harness rejects scalar hiding as a shortcut: a vector can vanish under a scalar functional and still be nonzero in `\mathfrak f/\mathbf C A_5^{\mathfrak f}(m)`. Cubic `(1,1,5)` witnesses remain quotient-visible generically.
+
+### Frontier after UV-024 matrix pass
+
+- **Current best:** conditional definition of `C_{\mathcal W}`, `B_7^{\mathfrak f}`, and `Q_{7,m}^q`; no proof-state promotion.
+- **Keep:** use existing matrix whitening and fixed-sector projection to draft a compact definition block later, after source-linear input provenance is settled.
+- **Discard:** any proof via `\Phi_K` scalar invisibility, determinant scalarization, or generic fixed quotient linearity alone.
+- **Next:** attack the actual two-atom source-linear block and the `A_5^{\mathfrak f}`-gauge theorem for non-`(1,1)` source bidegrees.
