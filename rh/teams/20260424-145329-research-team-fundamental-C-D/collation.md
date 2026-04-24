@@ -1080,3 +1080,29 @@ facts in witness computations, not scalar grade projections in the pre-`\Phi_K`,
 `B_7^{\mathfrak f}` normalization.  Future use requires a scalar projection
 theorem proving compatibility with affine removal, `\mathfrak D_Q`, and
 `M_i^{[5]}`.
+
+### `20260424-235843-gap-closer-UV026-scalar-grade-projection/report.md`
+
+Signal: UV-026 scalar grade-projection reduction, keep.
+
+Captured takeaway: the `q^{(5)}/X_3` convention is rejected for `M_i^{[5]}` if
+grade means finite mixed order.  The mixed-order audit gives scalar derivative
+order `k -> M` order `k-2`; hence `q^{(5)}` lands in order `3`, while
+`q^{(7)}` lands in order `5`.  Therefore `q^{(7)}/X_5` is the only
+source-compatible grade-five candidate, but it is not promoted: a scalar
+filtration/projection theorem is still needed to define `Gr_5 r_i`,
+define `Gr_1 r_i`, and prove compatibility with affine removal and the
+pre-whitening formulas.
+
+### Frontier after scalar grade-projection reduction
+
+- **Current best:** UV-026 Stage 1 is reduced to a mixed-order scalar
+  projection theorem.  The grade-five candidate is `q^{(7)}/X_5`; `q^{(5)}/X_3`
+  is a quintic witness, not `M^{[5]}`.
+- **Keep:** scalar derivative order `k` first contributes to scaled mixed input
+  order `k-2` through the `(2,2)` entry.
+- **Blocked:** define `Gr_1 r_i` consistently with the `L_1/R_1` same-point
+  factors and prove the scalar projection theorem.
+- **Next:** test a mixed-order filtration where grade `a` means first scaled
+  mixed order `a`, then audit whether it also supplies the same-point Frechet
+  grade inputs.

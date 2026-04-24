@@ -174,8 +174,9 @@ Active, compact knowledge base shared with every delegated agent.
   as infrastructure.  Ungraded rational source jets are available from the
   displayed `f_{\beta,\gamma}` formula, but the scalar `Gr_1/Gr_5` projection
   and actual determinant gates remain missing; matrix witness slices
-  `\eta_2/X_1`, `q^{(5)}/X_3`, and `q^{(7)}/X_5` cannot define scalar grades
-  without a source theorem.
+  cannot define scalar grades without a source theorem.  If grade means finite
+  mixed order, `q^{(5)}/X_3` is rejected for `M^{[5]}` and `q^{(7)}/X_5` is the
+  only source-compatible unpromoted candidate.
 
 ## Recurring open gaps
 
