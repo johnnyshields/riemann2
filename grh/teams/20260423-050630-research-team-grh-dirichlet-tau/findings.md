@@ -51,6 +51,14 @@ is the supplied team dir unless another path is named.
   the quotient orientation is changed. Provenance:
   `agents/20260424-183416-explorer-background-multiplicity/report.md`,
   `agents/20260424-183416-explorer-background-multiplicity/scripts/check_one_zero_sign.py`.
+- **[candidate] Compact zero-regularization may reduce to Hadamard
+  edge-difference cancellation.** Beauvoir's proof note argues that subtracting
+  the two edge logarithmic-derivative sums cancels the genus-one constants and
+  `1/rho` terms, leaving an `O_I(|rho|^{-2})` summand with uniform compact
+  convergence and fixed derivative convergence. This still needs adversarial
+  and source audit before promotion. Provenance:
+  `agents/20260424-183416-gap-compact-regularization/report.md`,
+  `agents/20260424-183416-gap-compact-regularization/notes/compact_regularization_reduction.md`.
 - **Tau is a self-dual phase-channel stress test, not the first exact `S(m)`
   target.** Tau has only a conditional compact source-package blueprint; paired
   Dirichlet remains sharper for exact source-plus-slot work. Provenance:

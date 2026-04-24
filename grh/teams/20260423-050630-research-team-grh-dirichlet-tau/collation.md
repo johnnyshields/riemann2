@@ -71,3 +71,21 @@ sign, defines `q=-Theta'`, or inverts the quotient.
 Capture action: refined `findings.md`, UV-016 in `uv.md`, filed UV-021, and
 logged the attempt. Sartre was redelegated to adversarially audit the sign
 claim before any promotion.
+
+## Beauvoir Deposit 20260424
+
+Report:
+`agents/20260424-183416-gap-compact-regularization/report.md`.
+Proof note:
+`agents/20260424-183416-gap-compact-regularization/notes/compact_regularization_reduction.md`.
+
+Verdict: keep candidate. Beauvoir reduces the compact zero-regularization part
+of UV-016 to Hadamard edge-difference cancellation: subtracting the two edge
+logarithmic-derivative sums cancels the genus-one constant and `1/rho`
+regularizers, leaving an `O_I(|rho|^{-2})` summand and uniform convergence on
+compact intervals away from edge zeros. This is not promoted yet because it
+requires adversarial/source audit and standard completed-\(L\) source checks.
+
+Capture action: recorded the candidate reduction in `findings.md`, UV-016, and
+`attempts.md`. Sartre was queued to audit the convergence proof after the sign
+audit.

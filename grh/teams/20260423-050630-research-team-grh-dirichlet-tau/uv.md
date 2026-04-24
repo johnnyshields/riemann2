@@ -12,8 +12,11 @@
   `notes/paired_source_package.md`;
   `agents/20260424-160512-paired-regularization-package-verifier/report.md`;
   `agents/20260424-171036-paired-bookkeeping-block-verifier/report.md`;
-  `agents/20260424-183416-explorer-background-multiplicity/report.md`.
+  `agents/20260424-183416-explorer-background-multiplicity/report.md`;
+  `agents/20260424-183416-gap-compact-regularization/report.md`.
   Current role: immediate non-zeta frontier.
+  Current candidate reduction: compact zero-regularization may follow from
+  Hadamard edge-difference cancellation; adversarial/source audit pending.
 
 - **UV-017** - exact paired local `S(m)`-slot realization.
   Prove that the scalar `S_chi^pair(m)=q_chi^pair(m)-B_chi^pair(m)` from
