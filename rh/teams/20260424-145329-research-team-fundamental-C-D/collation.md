@@ -1118,3 +1118,16 @@ Expected ledger destinations: a mixed-order theorem or obstruction goes to
 `uv.md`/`attempts.md`; a baseline `q_0` source theorem or missing substatement
 goes to `uv.md`/`attempts.md`; reusable negatives may require compacting
 `findings.md` first because it is near the 200-line limit.
+
+### `20260425-000623-verifier-source-UV026-baseline-q0-jets/report.md`
+
+Signal: UV-026 baseline `q_0` jet source audit, keep.
+
+Captured takeaway: the current source defines `q=\Phi'`, names baseline objects
+`q_0,\Phi_0`, builds baseline same-point/mixed blocks from `q_0(t_\pm)`,
+`q_0'(t_\pm)`, `q_0''(t_\pm)`, and supplies scales, but it does not display
+exact formulas or values for `q_0^{(k)}(m)`, `0<=k<=9`, in the ordinary-`z`,
+pre-`\Phi_K` Stage 1 normalization.  A valid theorem must define the scalar
+baseline germ, give the ten derivatives or reduce them to named baseline
+objects, and state how `E_{\est}` participates or is removed.  Scale estimates
+cannot be substituted for coefficient tables.

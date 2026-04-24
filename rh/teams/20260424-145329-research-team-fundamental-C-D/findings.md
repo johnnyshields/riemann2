@@ -154,29 +154,18 @@ Active, compact knowledge base shared with every delegated agent.
   the source-weight-linear actual two-atom block perturbation `X^{[1]}` and a
   proof that its order-7 quotient output is the UV-010
   `\mathcal J_2^{(7)}` / `\mathfrak O_7`.
-- **UV-023/UV-024 source-bidegree quotient package is missing from current source.**
+- **UV-023/UV-026 source-bidegree quotient package is missing from current source.**
   Provenance: UV-023/UV-026 reports in `agents/20260424-190438-*` through
-  `agents/20260424-201525-source-auditor-UV026-L1YR1-matrix-provenance/report.md`.
-  Usage: `(1,1)` projection kills `\mathcal T_{p\ge3}` formally, and the best
-  `L_h` candidate is the pre-whitening pair-kernel-linear derivative supported
-  by one-pair formulas. The best `Q_7^q` target is
-  `[B_7^{\mathfrak f}(C)]\in\mathfrak f/\mathbf C A_5^{\mathfrak f}(m)`.
-  The guarded tagged source block is now canonical in `proof_of_rh.tex`.
-  UV-026 has a complete seven-family cubic inventory, but no family is
-  promoted: `L_1YR_1`, all-left/all-right, second-Frechet-with-`Y`, and
-  second-Frechet-with-`N_0` gates all reduce to the same finite normalized
-  source-table theorem plus fixed-sector determinant tests.  Acceptance requires
-  ordinary-`z` tagged tables, explicit `\mathfrak D_Q` conventions, and
-  mixed-block removable-singularity expansions before coefficient extraction.
-  The Stage 1 generator reduces the table input to a 42-scalar source-jet
-  theorem: baseline `q_0^{(0..9)}(m)` plus tagged grades `r_i^{[1/5](2..9)}(m)`.
-  Verifier reruns reproduce the manifest exactly and accept the generator only
-  as infrastructure.  Ungraded rational source jets are available from the
-  displayed `f_{\beta,\gamma}` formula, but the scalar `Gr_1/Gr_5` projection
-  and actual determinant gates remain missing; matrix witness slices
-  cannot define scalar grades without a source theorem.  If grade means finite
-  mixed order, `q^{(5)}/X_3` is rejected for `M^{[5]}` and `q^{(7)}/X_5` is the
-  only source-compatible unpromoted candidate.
+  `agents/20260425-000623-verifier-source-UV026-baseline-q0-jets/report.md`.
+  Usage: `(1,1)` projection, tagged `L_h`, and
+  `[B_7^{\mathfrak f}(C)]\in\mathfrak f/\mathbf C A_5^{\mathfrak f}(m)` are
+  the right package layer; the guarded source block is canonical.  UV-026 has a
+  complete seven-family inventory and verified Stage 1 generator infrastructure,
+  but promotion still needs ordinary-`z` tagged tables, explicit `\mathfrak D_Q`,
+  removable mixed-block expansions, baseline `q_0^{(0..9)}(m)` jets, scalar
+  `Gr_1/Gr_5` projections, and determinant gates.  Ungraded `f_{\beta,\gamma}`
+  source jets are available; `q^{(5)}/X_3` is rejected for `M^{[5]}` if grade
+  means finite mixed order, leaving `q^{(7)}/X_5` only as an unpromoted candidate.
 
 ## Recurring open gaps
 

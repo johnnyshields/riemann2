@@ -81,6 +81,9 @@ Working forward-carry of the current open UV items relevant to the active queue.
   as scalar grades without that source theorem.  The `q^{(5)}/X_3` convention is
   rejected for `M_i^{[5]}` if grade means finite mixed order; the only
   source-compatible candidate then is `q^{(7)}/X_5`, still unpromoted.
+  Baseline subtarget: prove a `q_0`-jet theorem giving exact
+  `q_0^{(k)}(m)`, `0<=k<=9`, or reducing them to named baseline objects in the
+  same ordinary-`z`, pre-`\Phi_K` normalization; scale estimates are not tables.
   Gate subtargets: compute determinant identities against
   `A_5^{\mathfrak f}(m)` for all seven classified cubic families:
   `L_1YR_1`; `L_3N_0R_0` and `L_0N_0R_3`; `L_2YR_0` and `L_0YR_2`;
