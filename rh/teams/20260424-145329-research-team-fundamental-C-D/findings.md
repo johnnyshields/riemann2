@@ -164,9 +164,9 @@ Active, compact knowledge base shared with every delegated agent.
   UV-025 has source/adversarial verification for a guarded `paper-updates.md`
   source-block definition. UV-026 reduces to seven cubic pre-`\Phi_K` whitening
   families; current source only gives gauge/vanishing once a term is identified
-  as one-pair `K_5`, `K_3`, or pure. Source audit confirms first target
-  `L_1YR_1` lacks the actual grade `1/5/1` fixed-sector matrices for the three
-  ordered source-tag products; formal Loewner algebra alone does not force gauge.
+  as one-pair `K_5`, `K_3`, or pure. First target `L_1YR_1` is narrowed to
+  missing `[z^r]\Lambda_{i,\pm}` Frechet-output coefficients, grade-5
+  `[z^s]M_i^{[5]}` mixed coefficients, and determinant identities.
 
 ## Recurring open gaps
 

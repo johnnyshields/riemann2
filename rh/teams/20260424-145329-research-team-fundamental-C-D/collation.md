@@ -844,3 +844,16 @@ Captured takeaway: the audited paper ranges and staged UV-025 update contain not
 - **Keep:** translation dictionary from paper notation to `L_{-,i}^{[1]}`, `Y_i^{[5]}`, `R_{+,i}^{[1]}`.
 - **Discard:** claiming the staged UV-025 block already supplies the cubic fixed-sector coefficient.
 - **Next:** wait for direct extraction; if it also returns missing, move UV-026 pressure to another one of the seven cubic families.
+
+### `20260424-201525-gap-closer-UV026-L1YR1-actual-matrices/report.md`
+
+Signal: UV-026 `L_1YR_1` actual-matrix reduction, keep.
+
+Captured takeaway: the source displays the first-order same-point matrix `\delta G_{i,\pm}^{\lin}` and the linear mixed matrix `\delta N_i^{\lin}` before whitening, but not the coefficient-level Frechet outputs or grade-5 mixed block needed for the actual vector. The immediate subtarget is now the coefficient list `[z^r]\Lambda_{i,\pm}` for `\Lambda_{i,\pm}=D(G_\pm^{(0)}(z)^{-1/2})[\delta G_{i,\pm}^{\lin}(z)]`, the grade-5 `[z^s]M_i^{[5]}`, and the two determinant identities for `C_{112}^{L_1YR_1}` and `C_{122}^{L_1YR_1}` against `A_5^{\mathfrak f}(m)`.
+
+### Frontier after actual-matrix reduction
+
+- **Current best:** `L_1YR_1` is no longer a vague missing vector; it is a coefficient-list theorem for `\Lambda_{i,\pm}` and `M_i^{[5]}` plus two fixed-sector determinant identities.
+- **Keep:** first-order source matrices extracted from the paper are usable input for a staged theorem or script-backed symbolic expansion.
+- **Discard:** trying to run the gauge checker before those coefficient lists exist.
+- **Next:** derive the `\Lambda` and `M^{[5]}` coefficient lists, while opening the next cubic family if this lane stalls.
