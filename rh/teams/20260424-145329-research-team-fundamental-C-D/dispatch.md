@@ -705,3 +705,35 @@ Ground-truth checks:
 
 Protected surfaces are unchanged: agents write only to
 `agents/20260424-200220-<slug>/`.
+
+## UV-026 L1YR1 coefficient attack 20260424-200718
+
+Base commit: `88b21eb`.
+
+Current target: the first explicit UV-026 cubic family,
+`L_1YR_1=D(G_-^{-1/2})[X_-]\,Y\,D(G_+^{-1/2})[X_+]`.
+Compute or symbolically reduce its order-7 fixed-sector coefficient
+`B_7^{\mathfrak f}` for non-`(1,1)` source tags of finite-grade type
+`(1,1,5)`.
+
+Roster:
+
+1. `gap-closer-UV026-L1YR1-coefficient`: derive a concrete coefficient model
+   for the `L_1YR_1` family using the staged UV-025 source variables. Decide
+   whether its non-`(1,1)` order-7 fixed-sector part is forced into
+   `\mathbf C A_5^{\mathfrak f}(m)`.
+2. `verifier-adversarial-UV026-L1YR1-gauge`: build/check a determinant-gauge
+   harness for the proposed `L_1YR_1` coefficient. Reject scalar invisibility
+   and accept only fixed-sector proportionality to `A_5^{\mathfrak f}(m)`.
+
+Ground-truth checks:
+
+- Work at pre-`\Phi_K` matrix/fixed-sector level.
+- Any computational claim must leave a script in the agent `scripts/` dir.
+- If the exact coefficient cannot be computed, reduce to the smallest missing
+  symbolic input or source identity.
+- A positive result must prove `B_7^{\mathfrak f}(L_1YR_1)` is
+  `A_5^{\mathfrak f}`-gauge for actual non-`(1,1)` `(1,1,5)` terms.
+
+Protected surfaces are unchanged: agents write only to
+`agents/20260424-200718-<slug>/`.
