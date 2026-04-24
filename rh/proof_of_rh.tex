@@ -2963,11 +2963,14 @@ from creating a new non-scalar fixed-sector direction in the quotient
 Consequently, the local target is not a scalarized identity after \(\Phi_K\).
 It is the pre-\(\Phi_K\), pre-determinant quotient-gauge statement
 \[
-B_7^{\mathfrak f}
-\bigl((1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\corr}\bigr)
+B_7^{\mathfrak f}(C_{\mathcal W}^{\corr})
 \in
 \mathbf C A_5^{\mathfrak f}(m).
 \]
+If one keeps a full corrected package before source-bidegree projection, the
+equivalent full-package formulation is obtained by applying
+\((1-\Pi_{1,1})_{\mathrm{mix}}\) before fixed-sector extraction and
+quotienting.
 This implication does not by itself prove that the scalar exits
 \[
 T_v=0
@@ -12743,14 +12746,17 @@ representative of
 Definition~\ref{def:normalized-corrected-whitening-package-representative},
 not the raw seven-family Fr\'echet package.
 
-If one works instead with the unprojected raw cross-effect, the same target
-is written
+At the raw cross-effect stage, the source-bidegree component feeding this
+target is
 \[
 Q_{7,m}^q
 \left(
 (1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}
 \right)=0.
 \]
+This becomes the UV-026 package statement only after edge divisibility,
+amplitude normalization, midpoint trivialization, and fixed-sector
+extraction have been performed.
 
 Under the homogeneous scalar-grade convention of
 Definition~\ref{def:homogeneous-scalar-grade}, the \(Y\)-slot families
@@ -27385,15 +27391,12 @@ Taylor remainder with a constant depending only on $D$.
 \section{Finite Fr\'echet coefficient calculus for the corrected-whitening block}
 \label{sec:finite-frechet-coefficient-calculus}
 
-This appendix collects the finite Fr\'echet/Sylvester coefficient recurrences
+This section records the finite Fr\'echet/Sylvester coefficient recurrences
 and finite gates used by the corrected-whitening package frontier of
-Remark~\ref{rem:wip-first-cubic-source-transfer-target}.  The contents are a
-coefficient-level toolkit: source-constrained primitives, baseline mixed
-block, three Fr\'echet/Sylvester recursions, midpoint parity, fixed-sector
-projection rules, and the computed finite raw gates.  The recurrences
-themselves do not prove quotient gauge; the closing subsection records the
-status of the raw seven-family shortcut and points forward to the corrected
-package representative.
+Remark~\ref{rem:wip-first-cubic-source-transfer-target}.  These are table
+contracts, not completed source tables.  Their role is to make the finite
+computations auditable by agents and scripts without re-opening convention
+choices already fixed in the main text.
 
 \begin{remark}[Fr\'echet coefficient normalization]
 \label{rem:frechet-coefficient-normalization}
@@ -27850,6 +27853,14 @@ The corrected package representative is the object defined in
 Definition~\ref{def:normalized-corrected-whitening-package-representative};
 the finite recurrences and raw gates are a coefficient toolkit, not a
 closure of the package theorem.
+
+The word ``inconclusive'' for the constant baseline is meant in the precise
+sense of Remark~\ref{rem:good-patch-convention-quotient-coordinate}: when
+\(A_5^{\mathfrak f}=0\), the determinant coordinate does not define the
+fixed-target quotient.  The nonconstant baseline failures occur on
+nondegenerate good patches and therefore reject the raw Fr\'echet shortcut
+under the tested convention.  They do not replace the corrected package
+theorem, whose object is \(C_{\mathcal W}^{\corr}\).
 \end{remark}
 
 \section{Corrected fixed-target quotient package}
@@ -28122,6 +28133,32 @@ B_7^{\mathfrak f}(C_{\mathcal W}^{\corr})
 \]
 \end{definition}
 
+\begin{remark}[Good-patch convention for the quotient coordinate]
+\label{rem:good-patch-convention-quotient-coordinate}
+The quotient
+\[
+Q_{7,m}^q(C_{\mathcal W}^{\corr})
+\in
+\mathfrak f_m/\mathbf C A_5^{\mathfrak f}(m)
+\]
+is the invariant object.  On a good patch where
+\[
+A_5^{\mathfrak f}(m)=u_5I+v_5S\ne0,
+\]
+the determinant coordinate
+\[
+\mathcal D_m(Z):=(v_5\pi_I-u_5\pi_S)\pi_{\mathfrak f_m}(Z)
+\]
+identifies this one-dimensional quotient with \(\mathbf C\).  This
+coordinate is not available on the rank-jump locus
+\[
+A_5^{\mathfrak f}(m)=0.
+\]
+Consequently, baseline tests for which \(A_5^{\mathfrak f}(m)=0\) are
+quotient-inconclusive, not evidence for or against the quotient-gauge
+theorem.
+\end{remark}
+
 \begin{remark}[Two coefficient indices]
 \label{rem:two-coefficient-indices-package}
 The subscript \(7\) in \(B_7^{\mathfrak f}\) denotes the ordinary \(z\)-order
@@ -28289,6 +28326,24 @@ shortcut in which multiplying an even whitened package by the source
 amplitude leaves higher \(a^3,a^5,\ldots\) terms.  The package input must be
 invariant, functorial through the corrected-whitening transfer, and
 compatible with the quotient extractor \(Q_{7,m}^q\).
+
+\item \textbf{Homogeneous scalar-grade source theorem.}
+One must prove that the residual scalar source convention
+\[
+\operatorname{Gr}_a r
+=
+\frac{r^{(a+2)}(m)}{(a+2)!}(t-m)^{a+2}
+\]
+is the correct source-grade decomposition for the actual corrected package.
+In particular, the absence of the \(Y\)-slot families at
+\(B_7^{\mathfrak f}\) relies on this homogeneous scalar-grade convention.
+If a different convention defines \(M^{[5]}\) as an ordinary matrix-output
+order-\(5\) projection, then the \(Y\)-slot families
+\[
+L_1YR_1,\qquad L_2YR_0,\qquad L_0YR_2
+\]
+must be reopened and audited separately, as noted in
+Remark~\ref{rem:quarantined-matrix-output-M5-convention}.
 
 \item \textbf{Edge divisibility.}
 One must prove
@@ -28524,22 +28579,27 @@ For a homogeneous scalar source grade
 =
 \frac{r^{(a+2)}(m)}{(a+2)!}(t-m)^{a+2},
 \]
-the same-point and mixed inputs first appear at ordinary pre-whitening
-order
-\[
-a.
-\]
-Thus the active grades \(a=1,5\) have support:
+the same-point input first appears at ordinary pre-whitening order \(a\).
+The mixed input must also respect the transpose-parity table above, and
+need not have a nonzero coefficient at ordinary order \(a\).
 \[
 \begin{array}{c|c|c}
 \text{Source grade} & \text{same-point input} & \text{mixed input}
 \\
 \hline
-1 & \delta G_\pm^{[1]}\text{ starts at }z^1
-& \mathfrak D_Q\delta N^{[1]}\text{ starts at the matching grade-one order}
+1
+&
+\delta G_\pm^{[1]}\text{ starts at }z^1
+&
+\text{use Lemma~\ref{lem:transpose-parity-source-linear-mixed-input}
+for the corresponding mixed coefficient}
 \\
-5 & \delta G_\pm^{[5]}\text{ starts at }z^5
-& \mathfrak D_Q\delta N^{[5]}\text{ starts too late for the }Y\text{-slot at }B_7
+5
+&
+\delta G_\pm^{[5]}\text{ starts at }z^5
+&
+[z^5]\mathfrak D_Q\delta N^{[5]}=0
+\text{ under the homogeneous convention}
 \end{array}
 \]
 
