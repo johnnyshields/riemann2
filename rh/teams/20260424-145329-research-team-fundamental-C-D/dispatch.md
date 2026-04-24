@@ -566,3 +566,40 @@ Ground-truth checks:
 
 Protected surfaces are unchanged: agents write only to
 `agents/20260424-193725-<slug>/`.
+
+## UV-024 source-block and gauge attack 20260424-194309
+
+Base commit: `5a8ca9c`.
+
+Current target: UV-024 remains open after the matrix cross-effect pass. The
+definition template
+
+`C_{\mathcal W}=W(B+a_1L_1+a_2L_2)-W(B+a_1L_1)-W(B+a_2L_2)+W(B)`
+
+is available conditionally, but promotion needs actual source provenance and
+the non-`(1,1)` `A_5^{\mathfrak f}`-gauge theorem.
+
+Roster:
+
+1. `gap-closer-UV024-actual-source-block`: define or reject the actual
+   two-atom source-linear corrected-block input before whitening. Connect it
+   to the one-pair pair-kernel-linear `L_h` supported by lines 2659--2787.
+2. `gap-closer-UV024-A5-gauge`: attack the theorem
+   `B_7^{\mathfrak f}((1-\Pi_{1,1})C)\in
+   \mathbf C A_5^{\mathfrak f}(m)` for the conditional matrix cross-effect.
+   Determine whether actual source constraints can kill the cubic `(1,1,5)`
+   witness or whether it is a real obstruction.
+
+Ground-truth checks:
+
+- The source-block lane must define objects before whitening and before
+  `\Phi_K`; post-whitening signed source lifts are ruled out.
+- The gauge lane must prove proportionality to `A_5^{\mathfrak f}(m)`, not
+  determinant or scalar invisibility.
+- Any positive claim must cite the source lines that force the needed
+  proportionality or source-linear block identity.
+- Any negative claim must state the smallest precise obstruction and whether
+  UV-024 should remain as-is or split again.
+
+Protected surfaces are unchanged: agents write only to
+`agents/20260424-194309-<slug>/`.
