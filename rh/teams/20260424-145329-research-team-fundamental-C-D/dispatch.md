@@ -855,6 +855,69 @@ their owned dirs, do not edit ledgers or the paper, use the 9-field report
 schema plus autoresearch closing block and `Ledger destination`, and separate
 proved / conditional / missing.
 
+## Resume dispatch 20260425-003100
+
+Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260425-003100`.
+
+Base commit: `4177106`.
+
+Coordinator-owned theorem target: UV-026 parity-corrected scalar/mixed grade.
+The latest reports prove that the full source-linear scaled mixed input has
+transpose parity `M(-z)=M(z)^T`, and that `[z^5]M` is off-diagonal
+antisymmetric and source-supported by even derivative data
+`r^{(2)},r^{(4)},r^{(6)}`, not by the homogeneous `r^{(7)}` candidate.  The
+dispatch now splits the decision point: either define a parity-corrected
+`M_i^{[5]}` convention compatible with same-point `\Lambda^{[1]}` factors, or
+prove that `L_1YR_1` is absent from `B_7` and adjust the seven-family inventory.
+
+Roster:
+
+1. Hilbert continues as `gap-closer-UV026-parity-corrected-grade`, writing only
+   under `agents/20260425-003100-gap-closer-UV026-parity-corrected-grade/`.
+   Task: formulate and test the cleanest parity-corrected definition of
+   `M_i^{[5]}` using the even-derivative `[z^5]M` support, then decide whether
+   it can coexist with `\Lambda^{[1]}` from the same scalar grade convention.
+2. Harvey continues as `verifier-adversarial-UV026-parity-grade-conflicts`,
+   writing only under
+   `agents/20260425-003100-verifier-adversarial-UV026-parity-grade-conflicts/`.
+   Task: stress-test the proposed move of `r^{(2)},r^{(4)},r^{(6)}` data into a
+   grade-five mixed input.  Look for conflicts with grade-0/2/4 bookkeeping,
+   source tags, same-point factors, and the seven-family inventory.
+
+In-scope files and prior reports:
+
+- `rh/proof_of_rh.tex` lines 2429--2466, 2607--2787, 2797--2899, and
+  12617--12714.
+- `rh/teams/20260424-145329-research-team-fundamental-C-D/findings.md`.
+- `rh/teams/20260424-145329-research-team-fundamental-C-D/uv.md`, UV-026 only.
+- `agents/20260425-002114-gap-closer-UV026-mixed-parity-theorem/report.md`.
+- `agents/20260425-002114-gap-closer-UV026-mixed-parity-theorem/scripts/mixed_parity_audit.py`.
+- `agents/20260425-002114-verifier-source-UV026-M5-language/report.md`.
+- `agents/20260425-001243-gap-closer-UV026-L1YR1-mixed-order-prototype/report.md`.
+- `agents/20260425-001243-verifier-source-UV026-grade0-sector/report.md`.
+
+Ground-truth checks:
+
+- Evidence stays before `\Phi_K`, determinant scalarization, quotient
+  extraction, and diagonal merger.
+- A positive grade convention must state whether `[5]` is a source-grade label,
+  an actual ordinary-`z` order-5 projection, or a parity-corrected
+  non-homogeneous source projection.
+- If the convention makes `[z^5]M_i^{[5]}` nonzero, it must explain why even
+  source derivatives are allowed in that grade without silently consuming
+  grade-0/2/4 sectors.
+- If the convention keeps `M_i^{[5]}` homogeneous, it must state that
+  `L_1YR_1` is absent at `B_7` and name the next affected cubic-family gate.
+
+Non-goals: do not edit `rh/proof_of_rh.tex`; do not promote UV-024 or UV-026;
+do not use post-`\Phi_K`, determinant, quotient, or diagonal-merger facts; do
+not assert a global source-grade theorem without the local `M_i^{[5]}` gate.
+
+Protected surfaces and report contract are unchanged: agents write only under
+their owned dirs, do not edit ledgers or the paper, use the 9-field report
+schema plus autoresearch closing block and `Ledger destination`, and separate
+proved / conditional / missing.
+
 ## Resume dispatch 20260424-234737
 
 Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260424-234737`.
