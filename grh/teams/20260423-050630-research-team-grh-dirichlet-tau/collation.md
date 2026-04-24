@@ -38,3 +38,18 @@ Live roster:
 Report-processing note: no old agent deposit is being rewritten. The live
 briefing state is now captured in `findings.md`, `uv.md`, and `attempts.md`;
 old report paths remain the provenance.
+
+## Sartre Deposit 20260424
+
+Report:
+`agents/20260424-183416-verifier-slot-skeleton/report.md`.
+
+Verdict: keep. UV-017 remains open. The paired slot skeleton is usable as a
+conditional roadmap, but not promotable as a theorem. Sartre sharpened the
+missing statement from broad "paired admissibility" to a precise
+coefficient-normalization problem: prove that the paired source scalar is the
+pure local value parameter to first order, with value-parameter holomorphy,
+stable same-point positivity, explicit freeze rules, and no hidden
+renormalization.
+
+Capture action: refined `findings.md`, UV-017 in `uv.md`, and `attempts.md`.

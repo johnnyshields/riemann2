@@ -9,6 +9,7 @@
 | old cycle | UV-016 bookkeeping | Immediate post-theorem `B_chi^pair` / multiplicity block has correct scope | keep | `agents/20260424-171036-paired-bookkeeping-block-verifier/report.md` | use in statements | Keep sub-theoremic; defer exact slot/whitening claims. |
 | old cycle | UV-017 | Paired slot proof skeleton is clean but conditional | keep | `agents/20260424-175245-paired-slot-proof-skeleton-routeA/report.md` | verify then reuse | Needs adversarial/source pass before promotion as stable roadmap. |
 | old cycle | tau comparison | Tau remains self-dual phase stress test, not first exact `S(m)` target | keep | `notes/tau_localization.md`; `agents/20260424-140954-tau-source-package-routeA/report.md` | defer | Revisit after paired Dirichlet source package advances. |
+| Sartre | UV-017 | Paired slot skeleton passes only as conditional roadmap; coefficient lemma still missing | keep | `agents/20260424-183416-verifier-slot-skeleton/report.md` | reduce to normalization/freeze-rule lemma | Need value-parameter holomorphy, stable positivity, exact freeze rules, and a check excluding scalar renormalization before any source-to-slot promotion. |
 
 ## Frontier summaries
 
@@ -19,14 +20,15 @@
   realization.
 - **Keep:** paired object `Phi_chi^pair`, positive upstairs strip-edge kernel,
   immediate post-theorem bookkeeping placement, and the conditional UV-017
-  slot skeleton.
+  slot skeleton after Sartre's coefficient-lemma caveat.
 - **Discard:** claims that compact regularization is already a theorem endpoint;
   claims that denominator comparability alone gives whitening positivity;
   claims that single-channel Dirichlet or tau already supplies the manuscript
   exact `S(m)` slot.
 - **Blocked:** UV-016 lacks theorem-strength paired compact
   convergence/regularization, unified `B_chi^pair`, and multiplicity closure.
-  UV-017 lacks paired symmetric normal form, local admissibility, and exact
-  source-to-slot coefficient identification.
+  UV-017 lacks paired symmetric normal form, value-parameter holomorphy, stable
+  local positivity, exact freeze rules, and source-to-slot coefficient
+  identification.
 - **Next:** dispatch one UV-016 gap-closer, one UV-016 source/bookkeeping
   explorer, and one adversarial verifier for the UV-017 slot skeleton.

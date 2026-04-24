@@ -33,9 +33,11 @@ is the supplied team dir unless another path is named.
   paired source package, symmetric local normal form, microscopic holomorphy,
   same-point positivity/nondegeneracy, and holomorphic whitening exist, the RH
   manuscript's local algebra gives the value-channel expansion. The missing
-  point is proving the same scalar `S_chi^pair(m)` is exactly the first-order
-  slot coefficient. Provenance:
+  point is a non-tautological coefficient lemma: `S_chi^pair(m)` must be the
+  pure local value parameter to first order, with value-parameter holomorphy,
+  explicit freeze rules, and no hidden scalar renormalization. Provenance:
   `agents/20260424-175245-paired-slot-proof-skeleton-routeA/report.md`,
+  `agents/20260424-183416-verifier-slot-skeleton/report.md`,
   `notes/paired_slot_hypotheses.md`, `notes/paired_value_channel.md`.
 - **The post-theorem bookkeeping block has the right scope.** It may name
   unified `B_chi^pair`, its safe component list, multiplicity bookkeeping, and
@@ -63,6 +65,11 @@ is the supplied team dir unless another path is named.
   Positivity/nondegeneracy must stay as an explicit local whitening hypothesis
   until a separate spectral-gap stability argument is proved. Provenance:
   `notes/paired_slot_hypotheses.md`, `notes/whitening_interface.md`.
+- **A paired slot identity can be tautological unless the coefficient is fixed
+  independently.** Defining `R_chi^pair` after subtracting a chosen linear term
+  does not prove source-to-slot realization; UV-017 needs an independent
+  normalization/freeze-rule check. Provenance:
+  `agents/20260424-183416-verifier-slot-skeleton/report.md`.
 - **Compact regularization is not yet a theorem endpoint.** The safe promoted
   endpoint today is still the broader compact paired source-package blueprint.
   Provenance:

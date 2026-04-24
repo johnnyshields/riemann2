@@ -17,10 +17,13 @@
   Prove that the scalar `S_chi^pair(m)=q_chi^pair(m)-B_chi^pair(m)` from
   UV-016 is exactly the coefficient in
   `Delta_chi^pair=S_chi^pair A_val,chi^pair+R_chi^pair`, with symmetric local
-  normal form, microscopic holomorphy, same-point positivity/nondegeneracy, and
-  holomorphic whitening stated or proved in the paired family. Provenance:
+  normal form, microscopic holomorphy, value-parameter differentiability or
+  joint holomorphy, same-point positivity/nondegeneracy, holomorphic whitening,
+  explicit freeze rules, and a normalization check excluding
+  `c_chi(m) S_chi^pair` or an upstairs-only surrogate. Provenance:
   `notes/paired_slot_hypotheses.md`;
-  `agents/20260424-175245-paired-slot-proof-skeleton-routeA/report.md`.
+  `agents/20260424-175245-paired-slot-proof-skeleton-routeA/report.md`;
+  `agents/20260424-183416-verifier-slot-skeleton/report.md`.
   Current role: second-step non-zeta frontier after UV-016.
 
 - **UV-018** - corrected odd/transverse realization and boundary package.
