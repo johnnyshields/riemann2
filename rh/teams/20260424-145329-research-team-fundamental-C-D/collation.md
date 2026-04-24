@@ -1167,3 +1167,16 @@ owns the grade-0 source audit under
 Expected ledger destinations: prototype or baseline-blocker result to
 `attempts.md`/`uv.md`; grade-0 exclusion or missing theorem to
 `attempts.md`/`uv.md`, with `findings.md` only for durable guardrails.
+
+### `20260425-001243-verifier-source-UV026-grade0-sector/report.md`
+
+Signal: UV-026 grade-0 sector source audit, keep.
+
+Captured takeaway: current source does not justify ignoring the grade-0
+`r^{(2)}(m)` sector under the mixed-order filtration.  Affine removal deletes
+only the `0` and `1` jets, so `r^{(2)}` remains a real pre-`\Phi_K` source
+input.  The seven-family `(1,1,5)` inventory does not by itself prove that
+grade-0-containing cubic terms cannot leak into `B_7^{\mathfrak f}`, nor that
+they are already source-trivial, pure, one-pair `K_5/K_3`, or
+`A_5^{\mathfrak f}`-gauge.  Promotion needs exclusion, gauge, source-class
+identification, or expanded inventory for grade-0 terms.

@@ -167,7 +167,8 @@ Active, compact knowledge base shared with every delegated agent.
   source jets are available; `q^{(5)}/X_3` is rejected for `M^{[5]}` if grade
   means finite mixed order, leaving `q^{(7)}/X_5` only as an unpromoted candidate.
   Mixed-order candidate: `Gr_a r` is the homogeneous Taylor piece `r^{(a+2)}`,
-  compatible with same-point and mixed leading order, pending grade-0 handling.
+  compatible with same-point and mixed leading order, pending grade-0 handling:
+  affine removal does not kill `r^{(2)}`, and omission needs exclusion/gauge/source-class proof.
 
 ## Recurring open gaps
 
