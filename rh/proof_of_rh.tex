@@ -2974,6 +2974,23 @@ source-coupled walls have no independent clean local carrier beyond the scalar
 exits above.
 \end{remark}
 
+\begin{remark}[Conditional role of the corrected package in the mixed branches]
+\label{rem:conditional-role-corrected-package-mixed-branches}
+The corrected package theorem does not by itself prove \(\RH\).  Its role is
+to remove the residual local mixed carrier.  If the package theorem closes,
+then the two-point mixed obstruction reduces to the fixed midpoint quotient
+edge package, and the mixed four-point branch has no independent clean local
+carrier outside the scalar exits
+\[
+T_v=0
+\qquad\text{or}\qquad
+\mathcal R=0.
+\]
+The remaining global proof still requires the finite-core lower-model
+transfer, hidden-state/odd-block extraction, and the downstream endgame
+reductions.
+\end{remark}
+
 \begin{corollary}[Single-pair exterior odd-coefficient bound]
 \label{cor:single-pair-odd-jet}
 Fix $0<c_*<\rho_0/8$. Let $h_\rho(s)$ be the corrected transverse scalar
@@ -12690,103 +12707,67 @@ branches and then to a one-variable compatibility / resultant / norm test.
 This is a reduction of the remaining burden, not a closed theorem at present.
 \end{remark}
 
-\begin{remark}[Work in progress: first cubic source-transfer target]
+\begin{remark}[Current cubic source-transfer frontier]
 \label{rem:wip-first-cubic-source-transfer-target}
 After the tagged pre-whitening source block of
-Definition~\ref{def:tagged-two-atom-prewhitening-source-block}, the next
-order-seven obstruction is not a scalar \(\Phi_K\)-statement and not a
-determinant-scalarization statement.  It is a matrix/fixed-sector statement
-before applying \(\Phi_K\), before determinant trivialization, and before
-diagonal merger.
+Definition~\ref{def:tagged-two-atom-prewhitening-source-block}, the order-seven
+source-transfer problem is a fixed-sector quotient problem before applying
+\(\Phi_K\), before determinant scalarization, and before diagonal merger.
 
-The narrowed target is the following.  For the actual source-linear
-corrected-whitening matrix cross-effect, every non-\((1,1)\) cubic finite-order
-source term \(T\) of type \((1,1,5)\) should satisfy
+The working target is the corrected package statement
 \[
-B_7^{\mathfrak f}(T):=\pi_{\mathfrak f}[z^7]T
-\in \mathbf C A_5^{\mathfrak f}(m),
+B_7^{\mathfrak f}(C_{\mathcal W}^{\corr})
+\in
+\mathbf C A_5^{\mathfrak f}(m),
 \]
 or equivalently
 \[
-[B_7^{\mathfrak f}(T)]=0
-\quad\text{in}\quad
-\mathfrak f/\mathbf C A_5^{\mathfrak f}(m).
+Q_{7,m}^q(C_{\mathcal W}^{\corr})=0.
 \]
-This is the current UV-026 quotient-gauge target.
+Here \(C_{\mathcal W}^{\corr}\) is the normalized corrected-whitening package
+representative of
+Definition~\ref{def:normalized-corrected-whitening-package-representative};
+it has already been formed from the non-\((1,1)\) mixed source component.
 
-The first live cubic family is
+If one instead works with the unprojected raw cross-effect
+\(C_{\mathcal W}^{\mathrm{raw}}\), the equivalent unprojected formulation is
 \[
-L_1YR_1
-=
-D(G_-^{(0)}{}^{-1/2})[X_-]\,
-Y\,
-D(G_+^{(0)}{}^{-1/2})[X_+],
+Q_{7,m}^q
+\left(
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}
+\right)=0.
 \]
-with source tags distributed in finite grade \(1/5/1\).  Write
-\[
-\Lambda_{i,\pm}(z)
-:=
-D(G_\pm^{(0)}(z)^{-1/2})[\delta G_{i,\pm}^{\lin}(z)]
-=
-\sum_{r\ge0}\Lambda_{i,\pm}^{[r]}z^r,
-\]
-and write the grade-five mixed input as
-\[
-M_i^{[5]}(z)=\sum_{s\ge0}M_{i,s}^{[5]}z^s.
-\]
-The two non-\((1,1)\) source-tag coefficients to compute are
-\[
-C_{112}^{L_1YR_1}
-:=
-\pi_{\mathfrak f}[z^7]\Bigl(
-\Lambda_{1,-}M_1^{[5]}\Lambda_{2,+}
-+
-\Lambda_{1,-}M_2^{[5]}\Lambda_{1,+}
-+
-\Lambda_{2,-}M_1^{[5]}\Lambda_{1,+}
-\Bigr),
-\]
-and
-\[
-C_{122}^{L_1YR_1}
-:=
-\pi_{\mathfrak f}[z^7]\Bigl(
-\Lambda_{1,-}M_2^{[5]}\Lambda_{2,+}
-+
-\Lambda_{2,-}M_1^{[5]}\Lambda_{2,+}
-+
-\Lambda_{2,-}M_2^{[5]}\Lambda_{1,+}
-\Bigr).
-\]
-If
-\[
-A_5^{\mathfrak f}(m)=u_5I+v_5S,
-\qquad
-C_{112}^{L_1YR_1}=u_{112}I+v_{112}S,
-\qquad
-C_{122}^{L_1YR_1}=u_{122}I+v_{122}S,
-\]
-then the required fixed-sector gauge identities are
-\[
-u_{112}v_5-u_5v_{112}=0,
-\qquad
-u_{122}v_5-u_5v_{122}=0.
-\]
-Equivalently,
-\[
-C_{112}^{L_1YR_1},\,C_{122}^{L_1YR_1}
-\in
-\mathbf C A_5^{\mathfrak f}(m).
-\]
+The projection must be applied before fixed-sector extraction, determinant
+pairing, or quotienting.
 
-At present this is a coefficient-level target, not a proved statement:
-the missing data are the coefficient lists
+Under the homogeneous scalar grade convention of
+Definition~\ref{def:homogeneous-scalar-grade}, the \(Y\)-slot cubic families
 \[
-[z^r]\Lambda_{i,\pm}
-\quad\text{and}\quad
-[z^s]M_i^{[5]},
+L_1YR_1,\qquad L_2YR_0,\qquad L_0YR_2
 \]
-together with the two displayed determinant identities.
+are absent at \(B_7^{\mathfrak f}\) by
+Lemma~\ref{lem:y-slot-families-absent-homogeneous-grade}.  Thus the active
+homogeneous UV-026 gate is no longer the old \(L_1YR_1\) determinant test.
+
+The first live non-\(Y\) gate is
+\[
+L_2N_0R_1
+\qquad\text{and}\qquad
+L_1N_0R_2,
+\]
+because the baseline mixed block contributes \(N_0[0]\), giving exact order
+\[
+2+0+5=7,
+\qquad
+6+0+1=7.
+\]
+This live gate is stated in
+Remark~\ref{rem:first-live-non-y-cubic-gate}.  The all-left/all-right
+families
+\[
+L_3N_0R_0,\qquad L_0N_0R_3
+\]
+remain to be checked under the same homogeneous order convention.
 \end{remark}
 
 \begin{definition}[Homogeneous scalar grade]
@@ -12800,6 +12781,23 @@ For a residual scalar source \(r\), define
 Thus grade \(1\) corresponds to the cubic scalar jet \(r^{(3)}(m)\), and
 grade \(5\) corresponds to the septic scalar jet \(r^{(7)}(m)\).
 \end{definition}
+
+\begin{lemma}[Transpose parity of the source-linear mixed input]
+\label{lem:transpose-parity-source-linear-mixed-input}
+For the full source-linear scaled mixed input \(M(z)\) before \(\Phi_K\), one
+has
+\[
+M(-z)=M(z)^T.
+\]
+Consequently the diagonal entries of \(M(z)\) are even in \(z\), while the
+odd ordinary powers occur in the off-diagonal antisymmetric channel.  Through
+ordinary order \(7\), the coefficient \([z^5]M\) is off-diagonal
+antisymmetric and is supported by the even source derivatives
+\[
+r^{(2)}(m),\qquad r^{(4)}(m),\qquad r^{(6)}(m),
+\]
+not by the homogeneous grade-five source \(r^{(7)}(m)\).
+\end{lemma}
 
 \begin{lemma}[\(Y\)-slot families are absent at \(B_7\) under homogeneous grade]
 \label{lem:y-slot-families-absent-homogeneous-grade}
@@ -12830,6 +12828,23 @@ as a parity-corrected non-homogeneous source projection, then the \(Y\)-slot
 families must be reopened and audited separately.  Such a convention also
 requires a no-double-counting theorem against the natural grade \(0,2,4\)
 same-point shadows.
+\end{remark}
+
+\begin{remark}[Grade-zero sector remains open]
+\label{rem:grade-zero-sector-remains-open}
+The homogeneous scalar grade convention
+\[
+\operatorname{Gr}_a r
+=
+\frac{r^{(a+2)}(m)}{(a+2)!}(t-m)^{a+2}
+\]
+does not by itself justify discarding the grade-zero component corresponding
+to \(r^{(2)}(m)\).  Affine removal eliminates the \(0\)- and \(1\)-jets, but
+\(r^{(2)}(m)\) remains a genuine pre-\(\Phi_K\) source input.  Thus any proof
+of the non-\((1,1)\) cubic gauge theorem must either exclude the grade-zero
+sector, identify it as source-trivial or one-pair/pure, prove it is
+\(A_5^{\mathfrak f}\)-gauge, or expand the determinant inventory to include
+its possible contributions.
 \end{remark}
 
 \begin{remark}[Quarantined matrix-output \(M^{[5]}\) convention]
@@ -12907,6 +12922,66 @@ These four determinant identities are the leading-coefficient fixed-sector
 test for the live \(L_2N_0R_1/L_1N_0R_2\) gate.
 \end{remark}
 
+\begin{remark}[Leading coefficient test for the first non-\(Y\) cubic gate]
+\label{target:leading-coefficient-test-first-non-y-cubic-gate}
+For the live homogeneous gate
+\[
+L_2N_0R_1+L_1N_0R_2,
+\]
+compute the four fixed-sector tag vectors
+\[
+C_{112}^{L_2N_0R_1},\qquad
+C_{122}^{L_2N_0R_1},\qquad
+C_{112}^{L_1N_0R_2},\qquad
+C_{122}^{L_1N_0R_2}.
+\]
+The required inputs are
+\[
+[z^2]\mathcal L_-^{\{1,1\}},\qquad
+[z^6]\mathcal L_-^{\{1,5\}},\qquad
+[z^2]\mathcal R_+^{\{1,1\}},\qquad
+[z^6]\mathcal R_+^{\{1,5\}},
+\]
+\[
+N_0[0],
+\qquad
+[z^1]\Lambda_\pm^{[1]},
+\qquad
+[z^5]\Lambda_\pm^{[5]}.
+\]
+If
+\[
+A_5^{\mathfrak f}(m)=u_5I+v_5S
+\]
+and a candidate vector is
+\[
+C=uI+vS,
+\]
+then the quotient-gauge test is
+\[
+uv_5-u_5v=0.
+\]
+The live gate closes only if all four tag vectors pass this determinant
+test.
+\end{remark}
+
+\begin{remark}[All-left/all-right cubic families remain pending]
+\label{rem:all-left-all-right-families-remain-pending}
+The all-left and all-right families
+\[
+L_3N_0R_0,
+\qquad
+L_0N_0R_3
+\]
+remain to be audited under the homogeneous scalar grade convention.  They
+are not closed by source support, one-pair \(K_5/K_3\) classification,
+pure-sector arguments, determinant scalarization, or generic Fr\'echet
+algebra.  If they remain live by order count, they require actual
+third-Fr\'echet inverse-square-root coefficient identities before
+\(\Phi_K\), followed by the same fixed-sector determinant test against
+\(A_5^{\mathfrak f}(m)\).
+\end{remark}
+
 \begin{remark}[Current UV chain and status]
 \label{rem:current-uv-chain-and-status}
 The current package chain is as follows.
@@ -12951,6 +13026,96 @@ swap symmetry, one-pair gauge, or the UV-025 source block alone do not prove
 UV-026.  The theorem must be proved at the pre-\(\Phi_K\), pre-determinant
 fixed-sector quotient level of
 Section~\ref{sec:corrected-fixed-target-quotient-package}.
+\end{remark}
+
+\begin{remark}[Relation to the package-to-jet bridge]
+\label{rem:relation-to-package-to-jet-bridge}
+The corrected package program above is not an alternative to the zeta-side
+odd-jet extractor.  The extractor side is already available; the missing
+bridge is the package-to-jet theorem identifying the first surviving
+corrected odd coefficient from finite-core package data.  In the
+fixed-shear corner, the finite quotient-visible transport has already been
+compressed to the remaining package-level data.  Thus any surviving
+obstruction after the corrected package quotient theorem must be treated as
+a package-to-transform or hidden-state problem, not as another planar or
+scalarized local detector.
+\end{remark}
+
+\begin{remark}[Negative shortcuts not to reuse]
+\label{rem:negative-shortcuts-not-to-reuse-package-frontier}
+The following routes do not prove the corrected package quotient theorem.
+
+\begin{enumerate}
+\item Vanishing after \(\Phi_K\) does not imply vanishing in
+\[
+\mathfrak f/\mathbf C A_5^{\mathfrak f}(m).
+\]
+
+\item Determinant scalarization is only a local coordinate on the good
+patch \(A_5^{\mathfrak f}(m)\ne0\); it is not the definition of
+\(Q_{7,m}^q\).
+
+\item One-pair \(K_5/K_3\) gauge identities do not classify the general
+two-source cubic whitening families without an identification theorem.
+
+\item The tagged source block of
+Definition~\ref{def:tagged-two-atom-prewhitening-source-block} is
+pre-whitening source data only.  It does not imply
+\(B_7^{\mathfrak f}\)-gauge, diagonal merger, quotient-output package
+coincidence, or UV-026.
+
+\item The raw seven-family Fr\'echet package is not quotient-gauge in the
+tested source-constrained nonconstant baselines.  The theorem object is
+the corrected package representative
+\[
+C_{\mathcal W}^{\corr},
+\]
+not the raw seven-family sum.
+\end{enumerate}
+\end{remark}
+
+\begin{remark}[Shortcut routes excluded for the current package theorem]
+\label{rem:shortcut-routes-excluded-current-package-theorem}
+The following routes do not prove the current quotient-gauge target:
+\begin{enumerate}
+\item \(\Phi_K\)-scalar invisibility or scalar hiding after \(\Phi_K\).
+\item Determinant scalarization used as the definition of the quotient
+class.
+\item Swap symmetry or one-pair gauge laws applied before the actual
+two-atom package object is constructed.
+\item The tagged pre-whitening source block alone.
+\item Cubic/quintic edge laws plus the abstract source criterion alone;
+those do not determine the septic quotient edge.
+\item Existing one-pair order-\(7\) or centered \(D_2\) formulas promoted
+directly to a two-atom order-\(7\) Hessian.
+\item Signed source-weight lift alone; it restores oddness but leaves
+higher \(a^3,a^5,\ldots\) source-amplitude terms.
+\end{enumerate}
+Each positive route must work before \(\Phi_K\), before determinant
+scalarization, and inside the fixed-target quotient package.
+\end{remark}
+
+\begin{remark}[UV-010 boundary: edge law before descent]
+\label{rem:uv010-boundary-edge-law-before-descent}
+The midpoint quotient trivialization is available on the good patch
+\[
+A_5^{\mathfrak f}(m)\ne0,
+\]
+but this does not construct the order-\(7\) two-atom edge package.  The
+UV-010 target is the normalized fixed-midpoint quotient edge law
+\[
+\overline E_{12}^{(7;1)}
+=
+\delta^2\mathcal H_7^q(m,\kappa,\delta^2),
+\]
+with
+\[
+[R]_{\mathrm{edge}}=-\mathcal H_7^q(m,\kappa,0).
+\]
+Descent, \(\kappa\)-independence, and diagonal merger are downstream of
+this edge-law construction.  Determinant scalarization is good-patch
+bookkeeping after the quotient-valued edge object exists; it is not a
+substitute for the edge package.
 \end{remark}
 
 \begin{remark}[What remains in the two-pair rewrite]
@@ -27155,6 +27320,28 @@ themselves do not prove quotient gauge; the closing subsection records the
 status of the raw seven-family shortcut and points forward to the corrected
 package representative.
 
+\begin{remark}[Stage 1 source-table status]
+\label{rem:stage-one-source-table-status}
+The finite Fr\'echet recurrences in this section become a proof tool only
+after the required source tables are supplied in the same ordinary-\(z\),
+pre-\(\Phi_K\), tagged normalization.  The current Stage 1 infrastructure
+reduces the needed source input to a finite midpoint-jet theorem:
+\[
+q_0^{(k)}(m),\qquad 0\le k\le9,
+\]
+and
+\[
+(r_i^{[a]})^{(k)}(m),
+\qquad
+i=1,2,\quad a\in\{1,5\},\quad 2\le k\le9.
+\]
+The table generator is infrastructure, not a zeta-source proof.  A promotion
+requires a source theorem supplying these jets, or a reduction of them to
+named baseline objects, in the same normalization used for
+\(B_7^{\mathfrak f}\).  Scale estimates are not a substitute for these
+finite coefficient tables.
+\end{remark}
+
 \subsection{Source-linear same-point primitives}
 \label{subsec:source-linear-same-point-primitives}
 
@@ -27397,6 +27584,18 @@ G^-_{324,3..7}
 G^+_{324,3..7}.
 \]
 
+\begin{remark}[Status of the third-Fr\'echet table]
+\label{rem:status-third-frechet-table}
+The recursion above defines the finite third-Fr\'echet coefficient table
+that a raw seven-family audit would require.  It does not assert that the
+raw \(L_3N_0R_0/L_0N_0R_3\) completion is quotient-gauge.  Under the
+current package architecture, this table is a diagnostic tool for raw local
+coefficients.  The theorem object is the normalized corrected package
+\(C_{\mathcal W}^{\corr}\) of
+Definition~\ref{def:normalized-corrected-whitening-package-representative},
+not the raw seven-family Fr\'echet sum.
+\end{remark}
+
 \subsection{Midpoint parity}
 \label{subsec:midpoint-parity}
 
@@ -27531,19 +27730,34 @@ generic Fr\'echet algebra.
 
 \begin{remark}[Computational status of the raw package]
 \label{rem:computational-status-raw-package}
-Source-constrained nonconstant baseline tests show that the raw five-family and
-raw seven-family packages are not generally quotient-gauge under the provisional
-fixed-sector line.  The constant baseline is quotient-inconclusive because
-\(A_5^{\mathfrak f}=0\).  Nonconstant linear baselines give nonzero determinant
-residuals.  These tests reject the raw seven-family shortcut, but they do not
-test the corrected package representative
-\(B_{\mathrm{pkg}}^{\mathfrak f}(h)\), whose lower moving coefficients
-\(B_j[M]\) remain undefined.  The corrected package representative is the
-object whose definition the package frontier of
-Remark~\ref{rem:wip-first-cubic-source-transfer-target} is targeting; the
-finite recurrences and gates above are the coefficient toolkit, not a closure
-of that target.  The package object itself is defined in
-Section~\ref{sec:corrected-fixed-target-quotient-package}.
+Source-constrained nonconstant baseline tests show that the raw five-family
+and raw seven-family packages are not generally quotient-gauge under the
+provisional fixed-sector line.  The constant baseline is quotient-inconclusive
+because \(A_5^{\mathfrak f}=0\).  Nonconstant linear baselines give nonzero
+determinant residuals.
+
+The possible Fr\'echet-normalization rescue has also been checked: both the
+derivative-normalized weights
+\[
+(\lambda_2,\lambda_3)=(1,1)
+\]
+and the homogeneous Taylor weights
+\[
+(\lambda_2,\lambda_3)=\left(\frac12,\frac16\right)
+\]
+leave nonzero residuals in the tested nonconstant baselines.
+
+These tests reject the raw seven-family shortcut.  They do not test the
+corrected package representative
+\[
+B_{\mathrm{pkg}}^{\mathfrak f}(h),
+\]
+whose lower moving coefficients \(B_j[M]\) are part of the package
+definition and remain theorem-level data.  The corrected package
+representative is the object defined in
+Section~\ref{sec:corrected-fixed-target-quotient-package}; the finite
+recurrences and raw gates above are a coefficient toolkit, not a closure of
+that target.
 \end{remark}
 
 \section{Corrected fixed-target quotient package}
@@ -27560,6 +27774,11 @@ material from the theorem obligations that remain.  Throughout this section,
 the shorthand \(\mathrm{raw}\) labels the pre-projection cross-effect and
 \(\mathrm{amp}\) labels the amplitude-normalized package; these are not
 new macros, only superscripts.
+
+The definitions in this section are conditional package definitions.  They
+are not a proof of edge divisibility, source-bidegree compatibility, or
+quotient gauge.  Those obligations are listed in
+Remark~\ref{rem:definition-level-material-and-theorem-obligations}.
 
 \begin{definition}[Raw corrected-whitening matrix cross-effect before \(\Phi_K\)]
 \label{def:raw-corrected-whitening-cross-effect}
@@ -27726,7 +27945,7 @@ C_{\mathcal W}^{\corr}(h)
 \widehat C_{\mathcal W}^{\mathrm{amp}}(h)
 \right).
 \]
-Define its moving fixed-sector representative through order \(7\) by
+Define its fixed-target fixed-sector representative through order \(7\) by
 \[
 B_{\mathrm{pkg}}^{\mathfrak f}(h)
 :=
@@ -27740,6 +27959,9 @@ B_{\mathrm{pkg}}^{\mathfrak f}(h)
 \qquad
 B_j\in\mathfrak f_m.
 \]
+Although the coefficients still depend on the moving parameter \(h\), the
+representatives themselves have already been transported to the fixed
+midpoint fiber \(\mathfrak f_m\).
 \end{definition}
 
 \begin{definition}[Package-level order-\(7\) quotient extractor]
@@ -27826,6 +28048,46 @@ q_{\mathrm{conn},7}[M]
 \]
 \end{definition}
 
+\begin{remark}[Next package table required for the connection correction]
+\label{rem:next-package-table-connection-correction}
+The next computable package table is not a raw Fr\'echet-family table.  It
+is the moving lower-representative table
+\[
+A_i=[(h-m)^i]A_5^{\mathfrak f}(h),
+\qquad
+1\le i\le7,
+\]
+together with
+\[
+B_j[M_A],\quad B_j[M_C],
+\qquad
+0\le j\le6,
+\]
+for
+\[
+M_A=\dot r_3r_2\dot r_4,
+\qquad
+M_C=\dot r_3\dot r_2r_4.
+\]
+The connection-cancellation identities to prove are
+\[
+R_7^{(A)}
++
+\sum_{i=1}^{7}
+\omega_m(B_{7-i}[M_A],A_i)=0,
+\]
+and
+\[
+R_7^{(C)}
++
+\sum_{i=1}^{7}
+\omega_m(B_{7-i}[M_C],A_i)=0.
+\]
+These \(B_j[M]\) must be extracted from
+\(B_{\mathrm{pkg}}^{\mathfrak f}(h)\), not from the raw seven-family
+coefficient table.
+\end{remark}
+
 \begin{remark}[Definition-level material and theorem obligations]
 \label{rem:definition-level-material-and-theorem-obligations}
 Definitions~\ref{def:raw-corrected-whitening-cross-effect}--\ref{def:lower-moving-package-coefficients}
@@ -27886,23 +28148,413 @@ R_7^{(C)}
 \]
 
 \item \textbf{Corrected UV-026.}
-The final corrected quotient-gauge statement is
+Since the normalized package representative
+\(C_{\mathcal W}^{\corr}\) has already been formed from
 \[
-B_7^{\mathfrak f}
-\left(
-(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\corr}
-\right)
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}},
+\]
+the corrected quotient-gauge statement is
+\[
+B_7^{\mathfrak f}(C_{\mathcal W}^{\corr})
 \in
 \mathbf C A_5^{\mathfrak f}(m),
 \]
 equivalently
 \[
-Q_{7,m}^q(C_{\mathcal W}^{\corr})
-=
-Q_{7,m}^q(\Pi_{1,1}C_{\mathcal W}^{\corr}).
+Q_{7,m}^q(C_{\mathcal W}^{\corr})=0.
 \]
+
+If instead one works with the unprojected raw cross-effect
+\(C_{\mathcal W}^{\mathrm{raw}}\), the equivalent full-package formulation
+is
+\[
+Q_{7,m}^q
+\left(
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}
+\right)=0.
+\]
+The projection must be applied before fixed-sector extraction, determinant
+pairing, or quotienting.
 \end{enumerate}
 \end{remark}
+
+\section{Finite coefficient table contracts for the corrected-whitening package}
+\label{app:finite-coefficient-table-contracts}
+
+This appendix records the finite coefficient tables needed by the current
+corrected-whitening package frontier.  These are table contracts, not
+completed source tables.  Their role is to make the finite computations
+auditable by agents and scripts without re-opening convention choices
+already fixed in the main text.
+
+All tables below are understood:
+\begin{enumerate}
+\item before \(\Phi_K\);
+\item before determinant scalarization;
+\item in ordinary \(z\);
+\item with source tags retained through the relevant \(112/122\) extraction;
+\item in the same fixed-sector normalization used for
+\(B_7^{\mathfrak f}\) and \(Q_{7,m}^q\).
+\end{enumerate}
+
+The finite Fr\'echet recurrences in
+Section~\ref{sec:finite-frechet-coefficient-calculus} become proof tools
+only after the source tables in this appendix are supplied.  They are not,
+by themselves, quotient-gauge proofs.
+
+\subsection{Stage 1 source-table contract}
+\label{app:stage-one-source-table-contract}
+
+The Stage 1 source-table generator requires the following scalar midpoint
+jets:
+\[
+q_0^{(k)}(m),
+\qquad
+0\le k\le9,
+\]
+and
+\[
+(r_i^{[a]})^{(k)}(m),
+\qquad
+i=1,2,\quad a\in\{1,5\},\quad 2\le k\le9.
+\]
+Thus the input table is
+\[
+\mathsf{Jet}_{\mathrm{Stage1}}
+=
+\left\{
+q_0^{(0)},\ldots,q_0^{(9)};
+(r_1^{[1]})^{(2)},\ldots,(r_1^{[1]})^{(9)};
+(r_1^{[5]})^{(2)},\ldots,(r_1^{[5]})^{(9)};
+(r_2^{[1]})^{(2)},\ldots,(r_2^{[1]})^{(9)};
+(r_2^{[5]})^{(2)},\ldots,(r_2^{[5]})^{(9)}
+\right\}_{m}.
+\]
+
+The current source supports ungraded one-pair source jets after affine
+removal, but it does not yet supply the graded source jets above as a
+proved theorem.  In particular, the baseline \(q_0\)-jet theorem
+\[
+q_0^{(k)}(m),\qquad 0\le k\le9,
+\]
+is still a separate source obligation.  Scale estimates do not substitute
+for this finite table.
+
+\subsection{Homogeneous scalar-grade status table}
+\label{app:homogeneous-scalar-grade-status-table}
+
+Under the homogeneous scalar-grade convention
+\[
+\operatorname{Gr}_a r
+=
+\frac{r^{(a+2)}(m)}{(a+2)!}(t-m)^{a+2},
+\]
+the current \(B_7^{\mathfrak f}\)-status of the seven cubic families is:
+\[
+\begin{array}{c|c|c}
+\text{Family} & \text{Status at }B_7^{\mathfrak f}
+& \text{Reason / remaining input}
+\\
+\hline
+L_1YR_1 & \text{absent} &
+\text{middle homogeneous grade-five input starts too late}
+\\
+L_2YR_0 & \text{absent} &
+\text{second Fr\'echet terms cannot lower ordinary }z\text{-order}
+\\
+L_0YR_2 & \text{absent} &
+\text{right-hand mirror of }L_2YR_0
+\\
+L_2N_0R_1 & \text{live} &
+N_0[0]\text{ gives }2+0+5=7,\ 6+0+1=7
+\\
+L_1N_0R_2 & \text{live} &
+\text{right-hand mirror of }L_2N_0R_1
+\\
+L_3N_0R_0 & \text{pending} &
+\text{requires third Fr\'echet coefficient audit}
+\\
+L_0N_0R_3 & \text{pending} &
+\text{right-hand mirror of }L_3N_0R_0
+\end{array}
+\]
+
+The three \(Y\)-slot absences are order-count statements, not determinant
+proportionality statements.  If a future theorem defines \(M^{[5]}\) as an
+ordinary matrix-output order-\(5\) projection, then the \(Y\)-slot families
+must be reopened.  That route requires a no-double-counting theorem against
+the natural homogeneous scalar grades \(0,2,4\).
+
+\subsection{Mixed-input parity table}
+\label{app:mixed-input-parity-table}
+
+The full source-linear scaled mixed input satisfies
+\[
+M(-z)=M(z)^T.
+\]
+Consequently:
+\[
+\begin{array}{c|c}
+\text{Component of }M(z) & \text{ordinary }z\text{-parity}
+\\
+\hline
+\text{diagonal entries} & \text{even}
+\\
+\text{off-diagonal symmetric channel} & \text{even}
+\\
+\text{off-diagonal antisymmetric channel} & \text{odd}
+\end{array}
+\]
+
+Through ordinary order \(7\), the coefficient \([z^5]M\) lies in the
+off-diagonal antisymmetric channel and is source-supported by
+\[
+r^{(2)}(m),\qquad r^{(4)}(m),\qquad r^{(6)}(m),
+\]
+not by the homogeneous grade-five source \(r^{(7)}(m)\).  Therefore
+\([z^5]M\) should not be identified with homogeneous
+\(\operatorname{Gr}_5 r\) without a separate parity-corrected
+source-projection theorem.
+
+\subsection{Source primitive support table}
+\label{app:source-primitive-support-table}
+
+For a homogeneous scalar source grade
+\[
+\operatorname{Gr}_a r
+=
+\frac{r^{(a+2)}(m)}{(a+2)!}(t-m)^{a+2},
+\]
+the same-point and mixed inputs first appear at ordinary pre-whitening
+order
+\[
+a.
+\]
+Thus the active grades \(a=1,5\) have support:
+\[
+\begin{array}{c|c|c}
+\text{Source grade} & \text{same-point input} & \text{mixed input}
+\\
+\hline
+1 & \delta G_\pm^{[1]}\text{ starts at }z^1
+& \mathfrak D_Q\delta N^{[1]}\text{ starts at the matching grade-one order}
+\\
+5 & \delta G_\pm^{[5]}\text{ starts at }z^5
+& \mathfrak D_Q\delta N^{[5]}\text{ starts too late for the }Y\text{-slot at }B_7
+\end{array}
+\]
+
+The grade-zero sector corresponding to \(r^{(2)}(m)\) is not removed by
+affine normalization.  It remains an independent source obligation: one
+must exclude it, identify it as source-trivial or pure/one-pair, prove it
+is \(A_5^{\mathfrak f}\)-gauge, or expand the determinant inventory.
+
+\subsection{Baseline coefficient table contract}
+\label{app:baseline-coefficient-table-contract}
+
+The baseline tables needed for the current cubic gates are:
+\[
+G_\pm^{(0)}(z),\qquad
+W_\pm(z):=G_\pm^{(0)}(z)^{-1/2},
+\qquad
+N_0(z):=N^{(0)}(z).
+\]
+Write
+\[
+W_\pm(z)=\sum_{n\ge0}W_{\pm,n}z^n,
+\qquad
+N_0(z)=\sum_{n\ge0}N_0[n]z^n.
+\]
+
+For the first live non-\(Y\) gate only the following baseline mixed
+coefficient is needed at leading order:
+\[
+N_0[0].
+\]
+For the Stage 1 generator and later all-left/all-right audits, one needs
+the ordinary-\(z\) baseline tables through the ranges specified in
+Appendix~\ref{app:frechet-table-range-contract}.
+
+\subsection{Fr\'echet table range contract}
+\label{app:frechet-table-range-contract}
+
+The finite Fr\'echet recurrences of
+Section~\ref{sec:finite-frechet-coefficient-calculus} require the following
+coefficient ranges for the active UV-026 gates.
+
+\[
+\begin{array}{c|c|c}
+\text{Object} & \text{Range} & \text{Use}
+\\
+\hline
+\Lambda_\pm^{[1]} & [z^1] & \text{grade-one first Fr\'echet input}
+\\
+\Lambda_\pm^{[5]} & [z^5] & \text{grade-five first Fr\'echet input}
+\\
+\mathcal L_-^{\{1,1\}} & [z^2] &
+L_2N_0R_1\text{ with }(1,1)\text{ on the left}
+\\
+\mathcal L_-^{\{1,5\}} & [z^6] &
+L_2N_0R_1\text{ with }(1,5)\text{ on the left}
+\\
+\mathcal R_+^{\{1,1\}} & [z^2] &
+L_1N_0R_2\text{ with }(1,1)\text{ on the right}
+\\
+\mathcal R_+^{\{1,5\}} & [z^6] &
+L_1N_0R_2\text{ with }(1,5)\text{ on the right}
+\\
+G^-_{324} & [z^3],\ldots,[z^7] &
+L_3N_0R_0\text{ audit, pending}
+\\
+G^+_{324} & [z^3],\ldots,[z^7] &
+L_0N_0R_3\text{ audit, pending}
+\end{array}
+\]
+
+Here \(\mathcal L\) and \(\mathcal R\) denote the left and right second
+Fr\'echet inverse-square-root outputs in the same fixed
+\(B_7^{\mathfrak f}\) normalization.  The third-Fr\'echet rows are
+diagnostic until the all-left/all-right homogeneous order audit is
+completed.
+
+\subsection{Leading table for \(L_2N_0R_1/L_1N_0R_2\)}
+\label{app:l2n0r1-leading-table}
+
+The first live homogeneous non-\(Y\) gate is
+\[
+L_2N_0R_1
+\qquad\text{and}\qquad
+L_1N_0R_2.
+\]
+The leading table is:
+\[
+\begin{array}{c|c}
+\text{Tag vector} & \text{leading fixed-sector coefficient}
+\\
+\hline
+C_{112}^{L_2N_0R_1}
+&
+\pi_{\mathfrak f}
+\left(
+[z^2]\mathcal L_-^{\{1,1\}}\,
+N_0[0]\,
+[z^5]\Lambda_+^{[5]}
+\right)
+\\[1.2ex]
+C_{122}^{L_2N_0R_1}
+&
+\pi_{\mathfrak f}
+\left(
+[z^6]\mathcal L_-^{\{1,5\}}\,
+N_0[0]\,
+[z^1]\Lambda_+^{[1]}
+\right)
+\\[1.2ex]
+C_{112}^{L_1N_0R_2}
+&
+\pi_{\mathfrak f}
+\left(
+[z^1]\Lambda_-^{[1]}\,
+N_0[0]\,
+[z^6]\mathcal R_+^{\{1,5\}}
+\right)
+\\[1.2ex]
+C_{122}^{L_1N_0R_2}
+&
+\pi_{\mathfrak f}
+\left(
+[z^5]\Lambda_-^{[5]}\,
+N_0[0]\,
+[z^2]\mathcal R_+^{\{1,1\}}
+\right)
+\end{array}
+\]
+
+Each entry is a fixed-sector vector in
+\[
+\mathfrak f=\operatorname{span}\{I,S\}.
+\]
+If an entry is
+\[
+C=uI+vS
+\]
+and
+\[
+A_5^{\mathfrak f}(m)=u_5I+v_5S,
+\]
+then the quotient-gauge test is
+\[
+uv_5-u_5v=0.
+\]
+The gate closes only if all four tag vectors pass this test.
+
+\subsection{Pending all-left/all-right cubic table}
+\label{app:pending-all-left-all-right-cubic-table}
+
+The all-left and all-right families
+\[
+L_3N_0R_0,
+\qquad
+L_0N_0R_3
+\]
+remain pending under the homogeneous scalar-grade convention.  If order
+counting leaves them live, the table to compute is:
+\[
+\begin{array}{c|c}
+\text{Family} & \text{required third Fr\'echet table}
+\\
+\hline
+L_3N_0R_0 & G^-_{abc,n}\text{ in the relevant source triples, }3\le n\le7
+\\
+L_0N_0R_3 & G^+_{abc,n}\text{ in the relevant source triples, }3\le n\le7
+\end{array}
+\]
+The corresponding fixed-sector vector must again be tested by
+\[
+uv_5-u_5v=0.
+\]
+
+Generic matrix algebra, one-pair \(K_5/K_3\) identities, determinant
+scalarization, or \(\Phi_K\)-scalar invisibility do not close this table.
+Actual third-Fr\'echet coefficient identities are required.
+
+\subsection{Validation checklist for coefficient agents}
+\label{app:validation-checklist-coefficient-agents}
+
+A valid coefficient-table submission must specify:
+\[
+\begin{array}{c|c}
+\text{Item} & \text{Required declaration}
+\\
+\hline
+\text{ordinary variable} & z\text{ after }s=z/Q^2
+\\
+\text{stage} & \text{pre-}\Phi_K
+\\
+\text{source tags} & \tau_1,\tau_2\text{ retained through }112/122
+\\
+\text{same-point input} & \text{raw vs. }\mathfrak D_Q\text{ convention stated}
+\\
+\text{mixed input} & M_i^{[a]}=\operatorname{Gr}_a(\mathfrak D_Q\delta N_i^{\lin})
+\\
+\text{baseline table} & N_0[0]\text{ and needed }W_{\pm,n}
+\\
+\text{projection} & \pi_{\mathfrak f}\text{ before determinant test}
+\\
+\text{determinant test} & uv_5-u_5v=0
+\end{array}
+\]
+
+A submission is not valid if it:
+\begin{enumerate}
+\item argues after \(\Phi_K\);
+\item uses determinant scalarization as the definition of the quotient;
+\item replaces the active homogeneous grade by a matrix-output \(M^{[5]}\)
+without the no-double-counting theorem;
+\item treats recurrence formulas as quotient-gauge proofs without
+computing the fixed-sector vectors;
+\item omits the baseline \(q_0\)-jet convention or the grade-zero sector.
+\end{enumerate}
 
 \begin{thebibliography}{99}
 
