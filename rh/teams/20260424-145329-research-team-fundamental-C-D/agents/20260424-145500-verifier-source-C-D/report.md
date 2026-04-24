@@ -1,6 +1,6 @@
 Claim
 
-Source-audit map for Bottlenecks C and D: the exact paper loci, internal dependencies, and the citation / definition assumptions most likely to fail when research reports claim closure.
+Second-pass source audit of the current C/D research deposits. The reports mostly cite the right paper neighborhoods, but two recurrent source-discipline failures remain: theorem-shaping reductions are sometimes stated as if they were already formalized in the draft, and patchwise derived coordinates are sometimes spoken of as canonical global package data.
 
 Status
 
@@ -8,70 +8,75 @@ open
 
 Evidence
 
-## Must-fix before any promotion
+## Must-fix
 
-- **C is not yet a sourced theorem; it is only a theorem target.** The paper does not currently contain a proved statement of
+- **`gap-closer-C-diagonal-merger/report.md`: the C1/C2/C3 split is an audit decomposition, not a paper-stated theorem stack.** The cited draft lines support: the abstract merger lemma; the weaker quotient-diagonal route; the exact remaining source-level input; and the collision/cancellation blow-up setup. They do not define named obligations `C1`, `C2`, `C3` in the paper. So this split is useful, but it must be labeled as a derived reduction. In particular, the further claim that only C2 is “genuinely open” is stronger than the cited draft support, because C1 still depends on a corrected package object and analytic extension that are not theorem-level in the current text.
+- **`gap-closer-D-kerphik/report.md`: `T=v_7/c` is a patchwise hidden scalar, not a canonical draft definition.** The cited paper lines do support the algebra
   \[
-  \widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0)=\widehat\Psi(m).
+  A_5^{\mathfrak f}=u_5I+v_5S,
+  \qquad
+  A_7^{\mathfrak f}=u_7I+v_7S,
+  \qquad
+  \Delta_7=u_7v_5-u_5v_7,
   \]
-  The source-audit burden is therefore internal: any report claiming C must cite a new theorem, not only the existing blow-up regularity / parity passages. The present text around the collision chart only yields defect factorization and the statement that package-level coincidence / collision-functoriality remains open.
-- **D likewise has no proved package-to-transform theorem in the current draft.** The draft already defines the visible scalar side \(H_m\), the extractor \(\Xi^{(N)}_{\zeta,\le H}\), and the fixed-sector basis containing the \(S\)-direction seen by \(\Phi_K\), but it does not prove that equal corrected reduced-package fibers force odd corrected-block differences into
+  and the gauge law, as well as the amplitude-invariant datum \(\widehat\Psi\). But the reduction to a single visible scalar
   \[
-  \ker\Phi_K=\mathbf C I\oplus \mathbf C D\oplus \mathbf C K
+  T:=v_7/c
   \]
-  through the first surviving odd order. Any report that claims D from the existing text alone is overstating what the paper proves.
+  is a local algebraic reduction on a \(v_5\)-patch, not a canonical global package theorem presently stated in the draft. The report is honest later about this, but the source basis does not justify treating `T` as already formalized package data.
+- **`gap-closer-UV002-contradiction/report.md`: “becomes formal” overstates the current source support.** The cited lines do support the queue `C \to D \to` finite-core endgame rewrite. But the rewrite itself is still a real theorem obligation, not mere bookkeeping: `rem:wip-final-endgame-status` says the general branch still needs reformulation in terms of the first nonzero odd jet. So C and D do not yet make the contradiction formal in the ordinary proof sense.
 
-## Should-fix / vulnerable assumptions to audit in incoming reports
+## Should-fix
 
-- **C depends on three distinct obligations that should not be conflated:**
-  1. well-posed analytic extension of the corrected reduced two-atom package to the exceptional divisor \(\delta=0\) after \(2\omega=\kappa\delta\);
-  2. \(\kappa\)-independence / diagonal-collapse of that exceptional-divisor trace;
-  3. identification of the common diagonal value with the one-pair datum \(\widehat\Psi(m)\).
-  A report that proves only (1) has not closed C.
-- **The strongest current paper support for C is negative/scoping, not positive closure.** The draft explicitly says the honest remaining order-7 burden is package-level coincidence / collision-functoriality rather than more raw septic algebra or another pointwise field. That is useful provenance for non-goals, but not evidence of closure.
-- **D must be audited at transform level, not raw-septic level.** The fixed-sector package gives canonical \(A_5^{\mathfrak f}\) and gauge-sensitive septic representatives, while \(\Delta_7\) is gauge-invariant. So reports that assert literal equality of raw order-7 data are suspect unless they also prove a gauge choice is canonical. The source-audit target should instead be constancy modulo \(\ker\Phi_K\), equivalently constancy of the first nonzero odd \(\Xi^{(N)}_{\zeta,\le H}\).
-- **Definitions are spread across distant sections.** A valid D argument must tie together: \(\Phi_K\) and the visible direction; the odd expansion of \(H_m\); the finite-core localization of the first surviving odd coefficient; the fixed-sector basis / gauge law; and the later package-level queue remarks. Missing any one of these usually means a hidden definitional gap.
-- **There is line-drift risk in prior summaries.** The current file places `rem:wip-explicit-pointwise-bridge-good-patch-detector` at line 21278 and `rem:wip-final-endgame-status` at line 26370, not 21277 / 26369. Use the actual label lines from the draft when citing.
+- **`explorer-package-functoriality/report.md` is structurally plausible but partly unsourced as a paper claim.** The cited lines support the target datum \(\widehat\Psi\), the abstract merger-axiom template, and the statement that the live burden is package-level / provenance-sensitive. They do not yet support the proposed “universal property” or “projective descent” reformulation as a theorem already latent in the paper. Those parts should remain tagged as candidate structure.
+- **`explorer-support-lanes/report.md` cites the mixed residual corner correctly, but its D-language is theorem-shaping.** The residual-corner lines support the claim that quotient-visible finite transport is already compressed and that any still-live obstruction must be provenance-sensitive or non-finite-order. They do not yet prove that the first surviving `\Phi_K`-visible odd coefficient is fiber-constant modulo `\ker\Phi_K`; that remains the proposed D theorem.
+- **Across the reports, “corrected reduced-package fiber” still lacks one canonical theorem-definition in the draft.** Several reports use it coherently, but source-audit wise it remains a cycle term of art. Any promotion path must define the package / fiber object explicitly rather than rely on shared team shorthand.
 
 ## Nit
 
-- The phrase "corrected reduced-package fiber" is now standard in cycle reports, but I do not yet see a single canonical theorem-statement definition of that exact phrase in the draft. Incoming reports should define the fiber they use, not assume the phrase is already formalized.
-- For C, reports should distinguish the corrected two-atom package object itself from its reduced image; some prior notes slide between these.
+- The line references for current draft labels should use the actual current lines, e.g. `rem:wip-explicit-pointwise-bridge-good-patch-detector` at line 21278 and `rem:wip-final-endgame-status` at line 26370.
+- In the fixed-sector basis, the one-pair package section uses `(I,S,D,J)`, while later coefficient extraction for D uses `(I,D,S,K)`. Reports should signal this basis translation explicitly to avoid accidental symbol drift between `J` and `K`.
 
 Exact refs
 
-- `rh/proof_of_rh.tex:406-423` — definition of \(\Phi_K\) and visible direction.
-- `rh/proof_of_rh.tex:2214-2307` — definition / odd expansion of \(H_m\).
-- `rh/proof_of_rh.tex:2953-2969` — first surviving odd coefficient localized to finite cores.
-- `rh/proof_of_rh.tex:3984-4190` — exact surviving expansion and \(\Xi^{(N)}_{\zeta,\le H}\) extraction machinery.
-- `rh/proof_of_rh.tex:6988-7190` — fixed-sector basis, \(A_5^{\mathfrak f}\), \(A_7^{\mathfrak f}\), \(\Delta_7\), and septic gauge law.
-- `rh/proof_of_rh.tex:10780-10809` — honest remaining order-7 target is same reduced image germ / collision-functoriality, not raw septic equality.
-- `rh/proof_of_rh.tex:11368-11585` — one-pair strengthened package and exact two-pair coincidence target \(\widehat\Psi\).
-- `rh/proof_of_rh.tex:12139-12189` — weaker exact route (continuity + diagonal collapse) versus stronger source-level diagonal-merger route.
-- `rh/proof_of_rh.tex:12385-12610` — collision/cancellation chart, blow-up variables, and package-level coincidence queue.
-- `rh/proof_of_rh.tex:21277-21329` — explicit pointwise bridge remark: remaining burden is package-level / provenance-sensitive, not another pointwise field.
-- `rh/proof_of_rh.tex:23123-23155` — `I,D,S,K` basis used for coefficient extraction.
-- `rh/proof_of_rh.tex:26370-26398` — finite-core branch must use the first nonzero odd jet; current endgame still pair-like.
-- `rh/teams/20260424-093000-attack-fund-uv002-hidden-extraction/agents/20260424-143000-C-proof-obligations/report.md`
-- `rh/teams/20260424-093000-attack-fund-uv002-hidden-extraction/agents/20260424-145000-corrected-package-object/report.md`
-- `rh/teams/20260424-093000-attack-fund-uv002-hidden-extraction/agents/20260424-145000-Bmkappa-killer/report.md`
-- `rh/teams/20260424-093000-attack-fund-uv002-hidden-extraction/agents/20260424-145000-kerphik-hidden-state/report.md`
+- `rh/proof_of_rh.tex:7004-7190` — fixed-sector quintic/septic coefficients, `\Delta_7`, septic gauge law.
+- `rh/proof_of_rh.tex:11368-11585` — amplitude-invariant strengthened datum `\widehat\Psi` and exact strengthened two-pair coincidence.
+- `rh/proof_of_rh.tex:11888-12040` — abstract merger lemma for quadratic two-point factorization.
+- `rh/proof_of_rh.tex:12042-12166` — weaker quotient-diagonal route.
+- `rh/proof_of_rh.tex:12168-12228` — exact remaining source-level input and naive source-summed obstruction.
+- `rh/proof_of_rh.tex:12777-12792` — lifted `v_5`-patch coordinates.
+- `rh/proof_of_rh.tex:10780-10809` — honest order-7 target is package-level coincidence / collision-functoriality, not raw septic equality.
+- `rh/proof_of_rh.tex:24166-24210` — mixed local exhaustion and `C_1=C_3=C_5=0` finite scalar descent target on the clean branch.
+- `rh/proof_of_rh.tex:24518-24612` — live attack routes; actual package merger vs weaker quotient route; residual exact fixed-shear corner.
+- `rh/proof_of_rh.tex:24985-25030` — finite-core split; local blow-up regularity + quotient transport + package-level coincidence.
+- `rh/proof_of_rh.tex:25420-25485` — residual corner compressed to quotient-visible finite transport; remaining issue is provenance-sensitive or non-finite-order.
+- `rh/proof_of_rh.tex:26370-26398` — present endgame still pair-like; general branch still needs first-nonzero-odd-jet reformulation.
+- Audited deposits:
+  - `rh/teams/20260424-145329-research-team-fundamental-C-D/agents/20260424-145500-explorer-package-functoriality/report.md`
+  - `rh/teams/20260424-145329-research-team-fundamental-C-D/agents/20260424-145500-gap-closer-C-diagonal-merger/report.md`
+  - `rh/teams/20260424-145329-research-team-fundamental-C-D/agents/20260424-145500-gap-closer-D-kerphik/report.md`
+  - `rh/teams/20260424-145329-research-team-fundamental-C-D/agents/20260424-145500-gap-closer-UV002-contradiction/report.md`
+  - `rh/teams/20260424-145329-research-team-fundamental-C-D/agents/20260424-145500-explorer-support-lanes/report.md`
+- Supporting note deposited here:
+  - `rh/teams/20260424-145329-research-team-fundamental-C-D/agents/20260424-145500-verifier-source-C-D/notes/second-pass-audit-current-deposits.md`
 
 Dependencies
 
-- For C: a canonical corrected two-atom package object on the collision/cancellation chart; analytic extension to \(\delta=0\); a diagonal-merger / collision-functoriality theorem; identification of the diagonal value with \(\widehat\Psi\).
-- For D: Bottleneck C in a precise fiber form; a canonical notion of corrected reduced-package fiber; the existing \(H_m\) / \(\Xi^{(N)}_{\zeta,\le H}\) extractor stack; and a theorem that same fibers force odd corrected-block differences into \(\ker\Phi_K\) through the first surviving odd order.
+- A clear distinction between (i) what the draft currently proves, (ii) what current cycle reports derive as the sharpest reduction, and (iii) what remains only candidate structure.
+- For C: a theorem-level corrected package object and diagonal-merger / collision-functoriality statement.
+- For D: a theorem-level package-to-transform bridge modulo `\ker\Phi_K`, not only patchwise septic algebra.
 
 Strongest objection
 
-The present map is mostly an internal source audit because C and D are not yet backed by external bibliography claims; they are theorem obligations inside the draft. So the key risk is not mis-citing outside literature, but promoting a heuristic package theorem as if the existing internal line stack already proved it.
+The current deposits are generally careful, but they lean on a real temptation: once a reduction is sharp and repeated across cycles, it begins to read like an existing theorem. Source-audit wise that is still a defect. The present draft does not yet contain theorem-level definitions of the corrected reduced-package fiber or a canonical global hidden scalar `T`; those are report-level reductions, not yet paper-level facts.
 
 Needed for promotion
 
-- For any claimed closure of C: cite a new precise theorem establishing all three parts (extension, \(\kappa\)-independence, identification with \(\widehat\Psi\)).
-- For any claimed closure of D: cite a new precise theorem phrased modulo \(\ker\Phi_K\) or equivalently in terms of constancy of the first nonzero \(\Xi^{(N)}_{\zeta,\le H}\) on corrected reduced-package fibers.
-- In both cases: define the package / fiber objects used, and do not rely on queue remarks as if they were proved lemmas.
+- When using `C1/C2/C3`, label them explicitly as a verifier / report decomposition unless and until the paper states them as named subtheorems.
+- When using `T=v_7/c`, state the patch hypothesis `\{c\neq 0, v_5\neq 0\}` and treat `T` as a local derived scalar, not a canonical package coordinate.
+- Keep D phrased at transform level: constancy modulo `\ker\Phi_K`, equivalently constancy of the first nonzero `\Xi_{\zeta,\le H}^{(N)}` on corrected reduced-package fibers.
+- Keep the UV-002 stack phrased honestly as `C + D + finite-core endgame rewrite`, where the third item is still a genuine theorem obligation.
 
 Honest verdict:
 
-The source-audit posture for this cycle is clear: C and D are not currently supported by proved paper theorems, only by a sharp internal dependency stack and accurate theorem targets. When the research reports land, I should audit them against this map and reject any closure claim that uses blow-up regularity, pointwise same-tower facts, or raw septic algebra as a substitute for the missing package-level theorems.
+The deposits are useful and mostly source-aware. The main corrections are about status discipline, not line-hunting: `T=v_7/c` is sourced only as a patchwise derived scalar, and the `C1/C2/C3` split is sourced only as a sharp audit decomposition. Neither is yet a theorem-level object of the draft. So the right verdict is: the reports sharpen the queue correctly, but they do not convert those sharpenings into already-proved paper content.

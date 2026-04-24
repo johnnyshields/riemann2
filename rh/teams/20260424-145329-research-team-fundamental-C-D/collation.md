@@ -71,3 +71,19 @@ Signal: prior-cycle capture audit, heuristic with confirmed missed sharp negativ
 Captured takeaway: the prior queue compression was correct, but three sharp items needed explicit carry-forward: (i) current reduced-package blow-up hypotheses still allow a free `B(m,\kappa)`, so analyticity/swap-evenness are a do-not-retry route for C; (ii) B and C differ by one scalar-normalization law, so support-package closure does not automatically equal C; (iii) `\widetilde\Psi_{\min}=(x,Y,S,T)` is normalized septic data only, so D still needs finite determination or an odd-order bound.
 
 Action: captured (i) as a Negative finding, captured the affine-lift/D warning as a Goodie/open-gap refinement, and left (ii) in collation pending sharper theorem use.
+
+### `20260424-145500-verifier-adversarial-C-D/report.md` second pass
+
+Signal: adversarial review of current deposits, open.
+
+Captured takeaway: no current-cycle report closes C, D, or UV-002. C1/C2/C3 is only a conditional decomposition; C2 remains open and C1/C3 are not discharged. The `T=v_7/c` reduction is a local septic-model reduction on `v_5\neq0`, not the global transform-level hidden-state theorem. The UV-002 composition leaves a real finite-core contradiction theorem, not just formatting.
+
+Verifier kill conditions remain unchanged: C dies on the free exceptional-divisor trace `B(m,\kappa)`; D dies on surviving `\Phi_K`-visible hidden state through the first surviving odd order.
+
+### `20260424-145500-verifier-source-C-D/report.md` second pass
+
+Signal: source audit of current deposits, open.
+
+Captured takeaway: the current reports cite the right paper neighborhoods, but status discipline needs tightening. `C1/C2/C3` is an audit decomposition, not a paper-stated theorem stack; `T=v_7/c` is a patchwise derived scalar on `\{c\neq0,v_5\neq0\}`, not a canonical global package coordinate; and `C -> D -> endgame rewrite` still leaves a real theorem obligation, not a formal edit.
+
+Source-audit instruction for future briefs: define corrected reduced-package fibers explicitly, keep D at transform level modulo `\ker\Phi_K`, state patch hypotheses for `T`, and use current label lines (`rem:wip-explicit-pointwise-bridge-good-patch-detector` at 21278; `rem:wip-final-endgame-status` at 26370).
