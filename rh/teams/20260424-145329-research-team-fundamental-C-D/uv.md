@@ -103,8 +103,11 @@ Working forward-carry of the current open UV items relevant to the active queue.
   those orders.  A surviving convention must either define `M_i^{[5]}` as a
   mixed matrix order-5 projection, or prove a no-double-counting
   parity-corrected source projection compatible with the seven-family inventory.
-  UV-026 now needs that convention or a proof that the `L_1YR_1` middle input is
-  absent at `B_7`.
+  Under the clean homogeneous scalar grade convention
+  `Gr_a r=r^{(a+2)}(m)(t-m)^{a+2}/(a+2)!`, the `L_1YR_1` middle input is absent
+  at `B_7`; promote this only after a source/adversarial pass confirms the
+  convention choice, then redirect the next `Y`-slot gate to
+  `L_2YR_0`/`L_0YR_2`.
   Gate subtargets: compute determinant identities against
   `A_5^{\mathfrak f}(m)` for all seven classified cubic families:
   `L_1YR_1`; `L_3N_0R_0` and `L_0N_0R_3`; `L_2YR_0` and `L_0YR_2`;

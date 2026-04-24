@@ -1283,3 +1283,36 @@ has SHA1 `33F181B288C21217D5394F4D71AC694F6A3DB578`; output
 - **Next:** wait for Hilbert's constructive convention attempt, then classify
   it as matrix-order projection, non-homogeneous source projection, or absence
   theorem.
+
+### `20260425-003100-gap-closer-UV026-parity-corrected-grade/report.md`
+
+Signal: UV-026 parity-corrected grade convention reduction, keep.
+
+Captured takeaway: the clean source-compatible convention is the common
+homogeneous scalar grade
+`Gr_a r=r^{(a+2)}(m)(t-m)^{a+2}/(a+2)!`.  It coexists with
+`\Lambda^{[1]}` because grade `1` is `r^{(3)}`, but it makes
+`M^{[5]}` come from `r^{(7)}`, whose mixed series has no `[z^5]` term.
+Therefore `L_1YR_1` is absent at `B_7` under this convention.  A nonzero
+parity-corrected `[z^5]M^{[5]}` remains possible only as a separate
+block-dependent mixed-output projection theorem, not from current scalar
+source grading.  Script
+`agents/20260425-003100-gap-closer-UV026-parity-corrected-grade/scripts/parity_corrected_grade_test.py`
+has SHA1 `6C6560D7F02ACF0BC1A2FDCC7B2ECCFF4646270B`; output
+`notes/parity_corrected_grade_test.json` has SHA1
+`1E9F99AB5B5BB1E02C8E8C374860C293075002E7`.
+
+### Frontier after homogeneous-grade reduction
+
+- **Current best:** `L_1YR_1` is likely not a determinant-identity problem at
+  all under the clean source-supported scalar grade; it vanishes/has no
+  `B_7` contribution because its middle `[z^5]M^{[5]}` coefficient is absent.
+- **Keep:** nonzero mixed-order-5 projection is quarantined as a possible new
+  theorem, not current-source proof.
+- **Verifier queue:** source/adversarial confirmation of the homogeneous
+  absence theorem before removing `L_1YR_1` from the active determinant-gate
+  list or changing paper language.
+- **Research lane next:** attack `L_2YR_0`/`L_0YR_2`, the next Y-containing
+  family, under the homogeneous convention; check whether second-Frechet
+  lower-order factors can still reach order `7` with the mixed input starting
+  at `z^6`.
