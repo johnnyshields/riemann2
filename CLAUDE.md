@@ -192,6 +192,14 @@ a hardass — a good-referee standard.
   heredoc a throwaway; there must be a cited file left behind. Deposit in
   the agent's `scripts/` dir and cite the path + relevant output in the
   report.
+- **Simplicity criterion.** Between two routes with the same proof value,
+  keep the one with fewer definitions, assumptions, dependencies, scripts,
+  and paper edits. A tiny gain that adds awkward scaffolding is usually not
+  worth promotion; an equal result with a cleaner proof is a keep.
+- **Fixed-harness evaluation.** Judge each route against the same target,
+  current paper state, `findings.md`, `uv.md`, and verification standard it
+  was briefed with. Do not change the target mid-run to make a route look
+  successful.
 
 ## Briefing rule
 
@@ -245,6 +253,7 @@ Every multi-agent dispatch creates one team dir under the relevant paper:
 ├── uv.md                        — in-cycle UV ledger, markdown (`Capture before shutdown, forward-carry at dispatch` forward-carried + updated)
 ├── paper-updates.md             — team-lead staged edits for <main>.tex (optional, created when ready)
 ├── dispatch.md                  — team-lead brief, roster, non-goals
+├── attempts.tsv                 — route ledger: ts, agent, target, route, decision, evidence, next
 ├── collation.md                 — team-lead synthesis as reports land
 ├── chat.md                      — transcript backup (chat-backup skill)
 ├── scripts/                     — team-lead scripts, if any
@@ -264,8 +273,11 @@ legible from the filesystem.
 
 `findings.md` and `uv.md` in each team dir are the authoritative state
 for that cycle. They start as forward-carries from the prior team dir
-(`Capture before shutdown, forward-carry at dispatch`) and evolve as reports land. `paper-updates.md` is optional: the
-team lead writes it when the cycle has produced edits ready to fold into
+(`Capture before shutdown, forward-carry at dispatch`) and evolve as reports land. `attempts.tsv` is the run
+ledger for the cycle: append one row per attempted route with
+`timestamp`, `agent`, `target`, `route`, `decision` (`keep` / `discard` /
+`crash`), `evidence`, and `next`. `paper-updates.md` is optional: the team
+lead writes it when the cycle has produced edits ready to fold into
 `<paper>/<main>.tex`.
 
 **Agents write their own provenance artifacts. Always.** Every agent — gap-closer,
@@ -374,10 +386,10 @@ log across them is the cross-cycle audit trail.
 
 ## Provenance
 
-Every `findings.md` entry, `uv.md` entry, agent report, commit message,
-lore entry, `paper-updates.md` line, and team dir carries provenance to
-its source: chat path, `rem:wip-*` label, paper line number, script +
-SHA, UV-NNN, or agent report path. A claim without provenance is a
+Every `findings.md` entry, `uv.md` entry, `attempts.tsv` row, agent report,
+commit message, lore entry, `paper-updates.md` line, and team dir carries
+provenance to its source: chat path, `rem:wip-*` label, paper line number,
+script + SHA, UV-NNN, or agent report path. A claim without provenance is a
 defect — reviewers must flag it.
 
 **Provenance is written by the agent that produced it — never by the team

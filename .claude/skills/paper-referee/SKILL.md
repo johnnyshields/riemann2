@@ -8,7 +8,11 @@ description: Two-phase review loop on <paper>/<main>.tex — Phase 1 fixers edit
 Two phases in one team dir: Phase 1 fixers edit the paper against known
 issues; Phase 2 fresh referees re-review without seeing what Phase 1
 touched. Phase 1 is the explicit edit-capable exception to the
-read-only default. Follows CLAUDE.md `Briefing rule`, `Team dirs and agent self-deposit`, `Capture before shutdown, forward-carry at dispatch`.
+read-only default. Follows `.claude/agents/_autoresearch.md`, CLAUDE.md
+`Dispatch` long-lived-agent rules, `Briefing rule`, `Team dirs and agent
+self-deposit`, `Capture before shutdown, forward-carry at dispatch`. Use
+`model: "opus"` for every fixer/referee unless the user explicitly overrides
+this dispatch.
 
 `$ARGUMENTS`: empty → fix against latest referee feedback in `lore/`;
 file path → target that; `--no-referee` → skip Phase 2;
@@ -26,10 +30,10 @@ those.
 ## Phase 1 (fix)
 
 `TeamCreate team_name: "paper-referee-fix-<ts>"`. Spawn up to 3
-fixers (`subagent_type: fixer`) named for their content area
+fixers (`subagent_type: fixer`, `model: "opus"`) named for their content area
 (e.g. `fixer-local-geometry`, `fixer-finite-s-algebra`,
 `fixer-endgame`). Each gets its own `agents/<ts>-fixer-<slug>/`
-subdir.
+subdir and the full `.claude/agents/_autoresearch.md` metaprompt.
 
 Briefing per fixer: the current team dir's `findings.md`, the specific
 UV entries for their region (narrow `Briefing rule` exception), the issue list,
@@ -41,14 +45,16 @@ within their scoped region. They still do **not** edit the team dir's
 `findings.md` / `uv.md` / `paper-updates.md` — surface new findings in
 their reports, the team lead handles capture (`Capture before shutdown, forward-carry at dispatch`).
 
-Shut down the fix team, `TeamDelete`, commit paper edits (pre-commit
-compile-check applies). Process fixer reports through `Claim lifecycle (git-as-archive)` capture.
+Keep the fix team alive while paper edits and report capture are reviewed; use
+`SendMessage` for follow-up fixes or narrowed objections. Commit paper edits
+(pre-commit compile-check applies). Process fixer reports through `Claim lifecycle (git-as-archive)` capture. Use `TeamDelete` only at a terminal condition, explicit
+user halt, stale long-idle team, or when Phase 2 needs fresh independence.
 
 ## Phase 2 (re-review, unless `--no-referee`)
 
 `TeamCreate team_name: "paper-referee-review-<ts>"` (same team dir,
-new TeamCreate). Spawn two referees read-only (`subagent_type:
-referee`):
+new TeamCreate). Spawn two referees read-only (`subagent_type: referee`,
+`model: "opus"`) with the full `.claude/agents/_autoresearch.md` metaprompt:
 
 - **`referee-math`** — pure-math standard: proofs, hypotheses,
   circularity, citations.
@@ -62,9 +68,14 @@ old issues remain.
 
 Each returns a verdict ∈ `accept | minor | major | reject`.
 
-## Post-cycle (capture before shutdown — `Capture before shutdown, forward-carry at dispatch`)
+## Continuing cycle (capture, redelegate, keep alive — `Capture before shutdown, forward-carry at dispatch`)
 
 Process Phase 2 reports through `Claim lifecycle (git-as-archive)`. Update `uv.md` with new issues,
 demote any claim that a referee killed, file new UVs where they
-sharpened a gap. Summarize verdicts in `collation.md`. Final commit
-naming the team dir.
+sharpened a gap. Summarize verdicts in `collation.md`.
+
+Keep fixers/referees alive for follow-up objections, narrowed repairs, and
+adjacent referee passes while their context is fresh. Use `SendMessage` to
+continue the dialogue. Use `TeamDelete` only at a terminal condition, explicit
+user halt, stale long-idle team, or when replacement is clearly better. Commit
+logical units naming the team dir.

@@ -6,7 +6,10 @@ description: Post-work synthesis — three parallel analysts covering deep inter
 # Trifecta
 
 Three-angle post-work synthesis via `subagent_type: trifecta-analyst`.
-Follows CLAUDE.md `Briefing rule`, `Team dirs and agent self-deposit`, `Capture before shutdown, forward-carry at dispatch`.
+Follows `.claude/agents/_autoresearch.md`, CLAUDE.md `Dispatch`
+long-lived-agent rules, `Briefing rule`, `Team dirs and agent self-deposit`,
+`Capture before shutdown, forward-carry at dispatch`. Use `model: "opus"` for
+every analyst unless the user explicitly overrides this dispatch.
 
 `$ARGUMENTS`: empty → analyze most recent work (git log + recent
 lore); topic phrase → focus all three; lore file path → analyze that
@@ -25,10 +28,11 @@ file.
 ## Dispatch
 
 `TeamCreate team_name: "trifecta-<slug>"`. Spawn three analysts
-(`subagent_type: trifecta-analyst`) with the standard briefing (full
-`findings.md`, 7-field schema, writing-discipline reminder, self-
-deposit checklist), **no `uv.md` content** (trifecta analysts are the
-textbook spoiler-prone case), and the key-findings summary.
+(`subagent_type: trifecta-analyst`, `model: "opus"`) with the standard briefing,
+the full `.claude/agents/_autoresearch.md` metaprompt, full `findings.md`,
+7-field schema, writing-discipline reminder, self-deposit checklist, **no
+`uv.md` content** (trifecta analysts are the textbook spoiler-prone case), and
+the key-findings summary.
 
 - **`analyst-deep-insights`** — internal structural analysis per
   section: what recent findings reveal, hidden connections, new
@@ -45,7 +49,7 @@ textbook spoiler-prone case), and the key-findings summary.
 Individual per-analyst lore files are forbidden — the coordinator
 writes one consolidated entry.
 
-## Post-cycle (capture before shutdown — `Capture before shutdown, forward-carry at dispatch`)
+## Continuing cycle (capture, redelegate, keep alive — `Capture before shutdown, forward-carry at dispatch`)
 
 Verify deposits. Walk each report, process findings through `Claim lifecycle (git-as-archive)` —
 append Negative / Goodie / Open-gap bullets to this team dir's
@@ -57,4 +61,8 @@ summary, section-by-section, literature ranked by strength, under-
 the-nose connections ranked by actionability (with Negative overlaps
 resolved), suggested paper additions, new references.
 
-Shut down, `TeamDelete`, commit lore + team dir, cite the dir.
+Keep analysts alive for follow-up synthesis and adjacent angles while their
+context is fresh. Use `SendMessage` to push promising threads or ask for scoped
+negative checks. Use `TeamDelete` only at a terminal condition, explicit user
+halt, stale long-idle team, or when replacement is clearly better. Commit lore +
+team dir, cite the dir.

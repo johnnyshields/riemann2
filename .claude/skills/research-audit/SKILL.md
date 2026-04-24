@@ -6,7 +6,11 @@ description: N disjoint read-only audits on specified <paper>/<main>.tex subsect
 # Research Audit
 
 N disjoint read-only audits on subsections via
-`subagent_type: auditor`. Follows CLAUDE.md `Briefing rule`, `Team dirs and agent self-deposit`, `Capture before shutdown, forward-carry at dispatch`.
+`subagent_type: auditor`. Follows `.claude/agents/_autoresearch.md`, CLAUDE.md
+`Dispatch` long-lived-agent rules, `Briefing rule`, `Team dirs and agent
+self-deposit`, `Capture before shutdown, forward-carry at dispatch`. Use
+`model: "opus"` for every research auditor / checker unless the user explicitly
+overrides this dispatch.
 
 `$ARGUMENTS`: `<subsection-list>` (e.g. `Section 12.3,`LaTeX conventions`.4,`LaTeX conventions`.5`, labels, or
 line ranges); append `--adversarial` to pair each auditor with a
@@ -23,10 +27,10 @@ checker; `--non-goals: "..."` to pin specific bans.
 ## Dispatch
 
 `TeamCreate team_name: "research-audit-<ts>"`. Spawn one
-`auditor-<sub>` (`subagent_type: auditor`) per subsection; with
-`--adversarial`, also a paired `adversary-<sub>`
-(`subagent_type: verifier-adversarial`) that reads the auditor's
-report once landed.
+`auditor-<sub>` (`subagent_type: auditor`, `model: "opus"`) per subsection;
+with `--adversarial`, also a paired `adversary-<sub>`
+(`subagent_type: verifier-adversarial`, `model: "opus"`) that reads the
+auditor's report once landed.
 
 Each auditor's briefing: current team dir's `findings.md`, the exact
 subsection text, 7-field schema, writing-discipline reminder (three-
@@ -43,7 +47,7 @@ Fixed grading framework: each claim in the subsection is
 real gap`. Adversary checkers return `verified`, or
 `rejected` / `blocked` with concrete breaks.
 
-## Post-cycle (capture before shutdown — `Capture before shutdown, forward-carry at dispatch`)
+## Continuing cycle (capture, redelegate, keep alive — `Capture before shutdown, forward-carry at dispatch`)
 
 Verify every expected `agents/<slug>/report.md` exists; chase missing
 deposits. Write `collation.md` with per-subsection verdicts. Process
@@ -52,4 +56,7 @@ each auditor's findings through `Claim lifecycle (git-as-archive)` — append to
 `uv.md`, or stage text-edits in `paper-updates.md`. Lore entry only
 if proof state changed. No direct `<main>.tex` edits.
 
-Shut down, `TeamDelete`, commit with the team dir named.
+Keep auditors and paired adversaries alive for follow-up audits, source checks,
+and adjacent ranges while their context is fresh. Use `SendMessage` to redelegate
+instead of spawning replacements. Use `TeamDelete` only at a terminal condition,
+explicit user halt, stale long-idle team, or when replacement is clearly better.

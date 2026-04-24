@@ -6,7 +6,10 @@ description: Read-only 4-agent quality review of <paper>/<main>.tex — rigor, c
 # Paper Harden
 
 Four-angle read-only quality review via `subagent_type: harden-reviewer`.
-Follows CLAUDE.md `Briefing rule`, `Team dirs and agent self-deposit`, `Capture before shutdown, forward-carry at dispatch`.
+Follows `.claude/agents/_autoresearch.md`, CLAUDE.md `Dispatch`
+long-lived-agent rules, `Briefing rule`, `Team dirs and agent self-deposit`,
+`Capture before shutdown, forward-carry at dispatch`. Use `model: "opus"` for
+every reviewer unless the user explicitly overrides this dispatch.
 
 ## Preamble (forward-carry first — `Capture before shutdown, forward-carry at dispatch`)
 
@@ -20,10 +23,11 @@ Follows CLAUDE.md `Briefing rule`, `Team dirs and agent self-deposit`, `Capture 
 ## Dispatch
 
 `TeamCreate team_name: "paper-harden-<ts>"`. Spawn four reviewers
-(`subagent_type: harden-reviewer`) with the standard briefing and
-non-goal "report only, do not edit the paper." Only `reviewer-rigor`
-additionally receives the current `uv.md` (for overclaim detection —
-narrow `Briefing rule` exception); the others do not.
+(`subagent_type: harden-reviewer`, `model: "opus"`) with the standard briefing,
+the full `.claude/agents/_autoresearch.md` metaprompt, and non-goal "report only,
+do not edit the paper." Only `reviewer-rigor` additionally receives the current
+`uv.md` (for overclaim detection — narrow `Briefing rule` exception); the others
+do not.
 
 - **`reviewer-rigor`** — every claim justified, every hypothesis
   present, theorem-vs-proof match, no handwaving. Cross-checks
@@ -39,7 +43,7 @@ narrow `Briefing rule` exception); the others do not.
   switches within paragraphs, marketing language, overclaim. Rank
   HIGH / MEDIUM / LOW.
 
-## Post-cycle (capture before shutdown — `Capture before shutdown, forward-carry at dispatch`)
+## Continuing cycle (capture, redelegate, keep alive — `Capture before shutdown, forward-carry at dispatch`)
 
 Verify deposits. Walk each report, process findings through `Claim lifecycle (git-as-archive)` —
 append bullets to this team dir's `findings.md`, file new UVs in
@@ -47,4 +51,7 @@ append bullets to this team dir's `findings.md`, file new UVs in
 `collation.md` summary ranked HIGH / MEDIUM / LOW. No direct paper
 edits here.
 
-Shut down, `TeamDelete`, commit with the team dir named.
+Keep reviewers alive for follow-up passes and adjacent scopes while their context
+is fresh. Use `SendMessage` to push back, ask for narrowed findings, or assign the
+next review. Use `TeamDelete` only at a terminal condition, explicit user halt,
+stale long-idle team, or when replacement is clearly better.

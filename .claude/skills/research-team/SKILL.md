@@ -21,9 +21,12 @@ it; UV-NNN → at least one gap-closer locked on it.
 1. Read the most recent team dir's `findings.md`, `uv.md`, and current
    `rem:wip-*` labels, plus the last 2–3 lore entries.
 2. Create the new team dir `<paper>/teams/<ts>-<team-slug>/`. Copy the
-   prior team dir's `findings.md` and `uv.md` in; prune dead entries;
-   add anything from the just-closed cycle not yet captured. Commit.
-3. Pick the roster. Write `dispatch.md` with roster, targets, non-goals.
+   prior team dir's `findings.md`, `uv.md`, and open `attempts.tsv` context in;
+   prune dead entries; add anything from the just-closed cycle not yet
+   captured. Initialize `attempts.tsv` with
+   `timestamp\tagent\ttarget\troute\tdecision\tevidence\tnext`. Commit.
+3. Pick the roster. Write `dispatch.md` with roster, targets, non-goals,
+   fixed-harness criteria, and any run budgets/timeouts.
 
 ## Dispatch
 
@@ -77,7 +80,9 @@ agent drifts.
 2. Walk each report. Process through `Claim lifecycle (git-as-archive)` — promote, demote, file new
    UV-NNN in this team dir's `uv.md`, append findings bullets, reject
    with negative capture, or explicitly mark "no action" in
-   `collation.md`. Commit per deposit where possible (`Git workflow`).
+   `collation.md`. Append an `attempts.tsv` row for every substantial route
+   with `keep`, `discard`, or `crash`. Commit per deposit where possible
+   (`Git workflow`).
 3. Respond to the agent. Ask one concrete follow-up, adversarial challenge,
    or clarification when the report has a live thread; otherwise assign the
    next adjacent task to the same named teammate. Use `SendMessage`, not a new

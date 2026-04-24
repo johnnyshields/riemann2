@@ -22,8 +22,10 @@ resolves to the best match). Optional `--double`.
 2. Create `<paper>/teams/<ts>-attack-gap-<slug>/` where `<slug>` is
    UV-ID or short descriptor. Copy prior `findings.md` + `uv.md` in;
    prune dead entries; add anything surfaced last cycle not yet
-   captured. Commit.
-3. Write `dispatch.md` with target, routes, non-goals.
+   captured. Initialize `attempts.tsv` with
+   `timestamp\tagent\ttarget\troute\tdecision\tevidence\tnext`. Commit.
+3. Write `dispatch.md` with target, routes, non-goals, fixed-harness criteria,
+   and any run budgets/timeouts.
 
 ## Dispatch
 
@@ -53,6 +55,8 @@ closed lemmas, no new conjectures outside scope.
 2. Walk each report. Refine the target UV entry in this team dir's
    `uv.md` (sharpen `Needed for promotion`, or remove it if the verifier
    confirmed closure). File any new UV candidates. Add any new findings.
+   Append an `attempts.tsv` row for every substantial route with `keep`,
+   `discard`, or `crash`.
 3. Respond to the agents. Ask the verifier to attack the strongest new claim;
    ask the gap-closer to reduce the sharpest remaining obstruction; or assign
    the next adjacent target to the same named teammate.

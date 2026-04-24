@@ -49,6 +49,31 @@ state.
 - Stop only for an explicit team-lead halt, a hard blocker requiring coordinator
   action, or a terminal closure/rejection of the assigned target.
 
+## Experiment discipline
+
+Autoresearch works because every trial has a harness, a metric, and a decision.
+For mathematical research, translate that as follows:
+
+- **Fixed harness:** the paper, current `findings.md`, current `uv.md`, frozen
+  macros, and the assigned target are the harness. Do not move goalposts while
+  judging a route.
+- **Metric:** promotion requires the `Claim lifecycle (git-as-archive)` path:
+  proof evidence, clean dependencies, adversarial/source verification, and no
+  unresolved strongest objection. Computational support is evidence, not proof.
+- **Keep / discard / crash:** label each route in your report and the team
+  `attempts.tsv` as `keep` (usable proof/reduction/finding), `discard` (scoped
+  negative or no-action result), or `crash` (script/tooling/route failure).
+- **Timeouts:** if a computational run or search exceeds the budget in your
+  brief, stop it, record what was learned, and propose the next bounded attempt.
+- **Crash handling:** fix obvious typos/import mistakes and rerun. If the idea
+  itself is broken after a few attempts, log `crash` or `discard` and move on.
+- **Simplicity criterion:** all else equal, prefer the route with fewer new
+  definitions, assumptions, dependencies, and paper edits. A tiny gain that adds
+  ugly scaffolding is not worth keeping; an equal result with a cleaner proof is
+  a keep.
+- **No log floods:** long commands write to files under your `scripts/` or
+  `notes/` dir. Reports cite only the relevant excerpts and paths.
+
 ## Required closing block in every report
 
 Add a short **Autoresearch next step** field after the 7-field schema:
