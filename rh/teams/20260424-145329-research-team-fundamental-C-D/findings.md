@@ -130,7 +130,10 @@ Active, compact knowledge base shared with every delegated agent.
   Usage: finite-delta `[R]` is conditional on an existing
   `\overline E_{12}^{(7;1)}`; the actual divisor object requires
   `\overline E_{12}^{(7;1)}=\delta^2\mathcal H_7^q(m,\kappa,\delta^2)` plus
-  analytic quotient-line trivialization to the midpoint quotient. This is UV-010.
+  analytic quotient-line trivialization to the midpoint quotient. UV-010 is a
+  definition target only: descent, `\kappa`-independence, and merger
+  normalization are downstream claims. Source audit found no existing
+  `\mathcal H_7^q` under another name.
 
 ## Recurring open gaps
 

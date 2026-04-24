@@ -337,3 +337,15 @@ Captured takeaway: the gap-closer identifies the first obstruction term as the s
 - **Current best:** UV-010 is the immediate C target. Define or compute the actual corrected order-7 quotient interaction Hessian `\mathfrak O_7`, with quotient-line trivialization to the midpoint quotient.
 - **Keep:** explorer dependency graph for `\mathcal H_7^q`; gap-closer obstruction model showing lower laws do not force it.
 - **Next:** ask source/adversarial verifiers to audit UV-010 specifically, then redelegate a positive source-mining attempt on actual order-7 formulas / quotient-septic closure.
+
+### `20260424-165509-verifier-adversarial-C-R-channel/report-UV010-adversarial.md`
+
+Signal: UV-010 adversarial audit, keep.
+
+Captured takeaway: adversarial verifier confirms UV-010 is the cleanest next target only in a narrow definition-only form. It must construct `\mathcal H_7^q` and quotient-line trivialization without asserting descent, `\kappa`-independence, or merger normalization. The formal `a_1a_2\delta^2P(m,\kappa)` model is the acceptance test: lower cubic/quintic edge laws, one-amplitude collapse, swap symmetry, and diagonal conditions do not forbid an arbitrary septic quotient Hessian. The verifier script `agents/20260424-165509-verifier-adversarial-C-R-channel/scripts/uv010_formal_model_audit.js` reruns cleanly.
+
+### `20260424-165509-verifier-source-C-R-channel/report-UV010-source.md`
+
+Signal: UV-010 source audit, open / keep.
+
+Captured takeaway: source verifier confirms the paper supports the dependency split but does not already contain `\mathcal H_7^q` under another name. The finite-order criterion is conditional and imports diagonal merger; the quotient-diagonal route is too coarse; the collision chart gives a generic edge template and cubic/quintic edge laws only. UV-010 needs an actual order-7 quotient defect as an analytic section of a fixed quotient bundle, a trivialization from the moving `h_1` quotient to the midpoint quotient, constant-rank or exceptional-locus patch hypotheses, and a proof of the edge law. Descent/state-locality and merger normalization remain separate downstream targets.
