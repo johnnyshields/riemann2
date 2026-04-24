@@ -164,9 +164,8 @@ Active, compact knowledge base shared with every delegated agent.
   proof that its order-7 quotient output is the UV-010
   `\mathcal J_2^{(7)}` / `\mathfrak O_7`.
 - **UV-023/UV-024 source-bidegree quotient package is missing from current source.**
-  Provenance: UV-023 reports in `agents/20260424-190438-*`,
-  `agents/20260424-190928-*`, `agents/20260424-191517-*`, and
-  `agents/20260424-192320-*/report.md`.
+  Provenance: UV-023/UV-024 reports in `agents/20260424-190438-*` through
+  `agents/20260424-193725-verifier-source-UV024-prePhi-coefficient/report.md`.
   Usage: `(1,1)` projection kills `\mathcal T_{p\ge3}` formally, and the best
   `L_h` candidate is the pre-whitening pair-kernel-linear derivative supported
   by one-pair formulas. The best `Q_7^q` target is

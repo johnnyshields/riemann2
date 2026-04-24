@@ -681,3 +681,15 @@ The paper does not define the required pre-determinant fixed-sector coefficient 
 - **Keep:** fixed-target quotient `\mathfrak f/\mathbf C A_5^{\mathfrak f}(m)` as the pre-determinant extractor codomain.
 - **Discard:** determinant scalarization as the definition of `Q_7^q`, and any claim that the fixed quotient automatically kills cubic `(1,1,5)` witnesses.
 - **Next:** dispatch a source/coefficient construction lane for `B_7^{\mathfrak f}(C)` before `\Phi_K`, with an adversarial cubic-witness checker once a candidate exists.
+
+### `20260424-193725-verifier-source-UV024-prePhi-coefficient/report.md`
+
+Signal: UV-024 source verifier, keep.
+
+Captured takeaway: current source does not already define `B_7^{\mathfrak f}(C)`. It does contain matrix-level corrected whitening before `\Phi_K` and one-pair fixed-sector extraction / quotient geometry, so UV-024 is a narrow missing definition/theorem rather than a missing infrastructure layer. The exact missing objects are the actual source-linear two-atom matrix cross-effect `C`, the coefficient `B_7^{\mathfrak f}(C)=\pi_{\mathfrak f}[z^7]C`, and the non-`(1,1)` quotient-gauge theorem.
+
+### Frontier after UV-024 source audit
+
+- **Current best:** source supports drafting a minimal definition block for `C`, `B_7^{\mathfrak f}`, and `Q_{7,m}^q`, but no promotion until quotient-gauge is proved.
+- **Keep:** matrix whitening before `\Phi_K`; one-pair fixed-sector projection; fixed quotient target.
+- **Next:** wait for matrix-cross-effect construction, then decide whether to stage a definition-only `paper-updates.md` block or keep UV-024 as open.
