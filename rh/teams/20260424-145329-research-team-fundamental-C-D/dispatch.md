@@ -120,3 +120,90 @@ Verifiers:
 - `rem:minimal-core-reformulation`: `rh/proof_of_rh.tex:12587`.
 - `rem:wip-explicit-pointwise-bridge-good-patch-detector`: `rh/proof_of_rh.tex:21278`.
 - `rem:wip-final-endgame-status`: `rh/proof_of_rh.tex:26370`.
+
+## Resume dispatch 20260424-165509
+
+Resume path: `rh/teams/20260424-145329-research-team-fundamental-C-D`.
+Do not create a sibling team dir. New deposits go only under
+`agents/20260424-165509-*/`.
+
+### Baseline / frontier
+
+- **Primary C target:** C-FS2/C-FS3. The current paper and verified deposits do
+  not construct the actual two-atom fixed triple
+  `\mathfrak P_2^{\corr}=(C^{\corr},A^{\mathfrak f,\corr},\Delta^{\corr})`
+  as an analytic germ. They leave the C-visible determinant slot
+  `\det(R,A_5^{\mathfrak f})` and centered `D_2=2\kappa(AV_1-BU_1)` channel
+  uncontrolled.
+- **Secondary D target:** transform-level state-locality modulo `\ker\Phi_K`
+  for the first `\Phi_K`-visible corrected odd block. Do not substitute raw
+  affine-lift patching for this theorem.
+- **Tertiary E target:** projected low-order defect vanishing or inhomogeneous
+  rank plus sign/no-cancellation lower control.
+
+### In-scope files and lines
+
+- Team files: `findings.md`, `uv.md`, `attempts.tsv`, `attempts.md`,
+  `collation.md`, and this `dispatch.md`.
+- C reports: `agents/20260424-160000-gap-closer-C-fiber-selection/report.md`,
+  `report-cfs23-followup.md`, `report-cfs2-actual-formulas.md`, notes, and
+  scripts in that same agent dir.
+- C verifications:
+  `agents/20260424-160000-verifier-adversarial-CDE/report-cfs3-countermodel-review.md`,
+  `report-cfs2-actual-formula-review.md`,
+  `agents/20260424-160000-verifier-source-CDE/report-cfs23-countermodel-source-check.md`,
+  and `report-cfs2-actual-formulas-source-check.md`.
+- Paper source lines: `rh/proof_of_rh.tex:7004-7191`, `7540-7924`,
+  `11587-11775`, `12192-12255`, `12385-12511`, `12448`, `21278`,
+  `23294-23409`, and `26370`.
+
+### Protected surfaces
+
+Agents must not edit `rh/proof_of_rh.tex`, `findings.md`, `uv.md`,
+`attempts.tsv`, `attempts.md`, `collation.md`, `dispatch.md`, `CLAUDE.md`,
+`lore/`, `.agents/`, or another agent's directory. Each new agent owns only its
+assigned `agents/20260424-165509-<slug>/` directory.
+
+### Targeted UV entries
+
+- `UV-002` / `rem:wip-pairlike-finitecore`: package-side bridge to first
+  nonzero odd jet remains the queue head.
+- `UV-003` / `rem:wip-parity-projective-factorization-collision-blow-up`: C
+  package construction and diagonal-merger support theorem.
+- `UV-004` / `rem:wip-explicit-pointwise-bridge-good-patch-detector`: source
+  support for any detector or quotient-defect control claim.
+
+### Ground-truth checks and pinned objections
+
+- A positive C-FS2/C-FS3 route must construct or source-identify the actual
+  corrected two-atom fixed triple and control `R` on the exceptional divisor.
+- Any proof must survive the deformation test
+  `R -> R+R_\kappa` with
+  `\det(R_\kappa,A_5^{\mathfrak f})=c^2\varepsilon\kappa`.
+- Do not cite fixed codomain, scalar normalization, blow-up analyticity,
+  swap-evenness, one-pair gauge invariance, or displayed order-3/5/7 formulas
+  alone as killing `\partial_\kappa B`.
+- Separate proved / conditional / missing. `unsupported`, `blocked`, and
+  `no progress` are acceptable if the return sharpens the missing statement.
+
+### Resume roster
+
+1. `gap-closer-C-R-determinant-control`: attack the smallest positive C target:
+   compute/control the quotient-defect representative `R`, or prove that
+   `\det(R,A_5^{\mathfrak f})` descends to the collision state and has no
+   exceptional slope/provenance dependence.
+2. `explorer-C-actual-package-construction`: mine the source and prior reports
+   for the most economical construction of the actual corrected two-atom fixed
+   triple and its fiber definition; return a theorem-ready statement or a proof
+   that the draft only has a schema.
+3. `verifier-adversarial-C-R-channel`: adversarially pressure-test any C route
+   against the `R_\kappa` determinant deformation, the formal countermodel, and
+   the centered `D_2` channel.
+4. `verifier-source-C-R-channel`: source-audit the same target with line refs,
+   basis conventions, and proved/conditional/missing separation.
+
+### Non-goals
+
+Do not open pair-like quantitative cleanup (`UV-009 -> UV-001 -> UV-008`), pure
+planar refinements, endpoint-gap work, three-run overlap work, or a D/E proof
+attempt unless it directly resolves the C determinant-slot target.

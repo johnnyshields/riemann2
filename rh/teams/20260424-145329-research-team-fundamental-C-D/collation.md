@@ -262,3 +262,29 @@ Captured takeaway: adversarial verifier confirms the `B_3=Z+\varepsilon\kappa` m
 Signal: C-FS3 countermodel source verification, keep.
 
 Captured takeaway: source verifier confirms the countermodel stays within the currently audited weak formal properties. No paper line beyond the explicitly missing diagonal merger / same reduced image germ / collision-functoriality family forbids adding `c^2\varepsilon\kappa` to the formal `\Delta` coordinate. Any C-FS3 proof must explicitly kill `\partial_\kappa B`; do not cite `\widehat\Psi` scaling, `\Delta_7` gauge invariance, quotient-level order-7 closure, fixed codomain, or scalar normalization as forbidding the deformation.
+
+### `20260424-160000-gap-closer-C-fiber-selection/report-cfs2-actual-formulas.md`
+
+Signal: C-FS2 actual-formula negative, keep.
+
+Captured takeaway: the actual order-3/5/7 formula neighborhoods do not close C-FS2 and do not forbid the verified `c^2\varepsilon\kappa` deformation. The paper still does not define the actual two-atom fixed triple as an analytic germ. The defect-thickened third-coordinate identity exposes the C-visible determinant slot `\det(R,A_{5,1}^{\mathfrak f})`, where `R` represents the septic quotient defect; `R` is not computed on the exceptional divisor. The centered order-7 determinant template has `D_2=2\kappa(AV_1-BU_1)`, and the check script verifies generic `\kappa`-linear dependence. Smallest next target: compute/control the quotient-defect representative `R`, or prove `\det(R,A_5^{\mathfrak f})` factors through the descended collision state / diagonal merger.
+
+### `20260424-160000-verifier-adversarial-CDE/report-cfs2-actual-formula-review.md`
+
+Signal: C-FS2 actual-formula adversarial verification, keep.
+
+Captured takeaway: adversarial verifier confirms the C-FS2 formula inspection is a valid scoped negative. The checked formula neighborhoods do not control `R` or force `AV_1-BU_1=0`; `\det(R,A_5^{\mathfrak f})` is a legitimate C-visible determinant slot, and centered `D_2=2\kappa(AV_1-BU_1)` is generically nonzero. The result is terminal only for the subroute that displayed order-3/5/7 formulas already forbid slope dependence. Live target remains compute/control `R` by actual package construction, state-locality, or diagonal merger.
+
+### `20260424-160000-verifier-source-CDE/report-cfs2-actual-formulas-source-check.md`
+
+Signal: C-FS2 actual-formula source verification, keep.
+
+Captured takeaway: source verifier confirms the same scoped negative. The one-pair fixed package and quotient/determinant gauge invariance are source-supported, but the draft still has no actual two-atom fixed triple `\mathfrak P_2^{\corr}`, no corrected reduced-package fiber definition for that triple, no computation of `R` on the exceptional divisor, and no identity killing the centered `D_2=2\kappa(AV_1-BU_1)` channel. Future C-FS2/C-FS3 promotion must construct the actual fixed triple and either compute/control `R` or prove `\det(R,A_5^{\mathfrak f})` descends with no independent slope/provenance dependence.
+
+## Resume checkpoint 20260424-165509
+
+- Originating team commit: `e97c2d5282807ef0d941a544dd79bd53215dde24` (`carry forward: 20260424-093000 -> 20260424-145329`).
+- Current commit at resume: `214fa97c8cbbd75bbeab40c32d20940b025f1f0e`.
+- Preflight: existing team dir contains `findings.md`, `uv.md`, `dispatch.md`, `collation.md`, `agents/`, and legacy `attempts.tsv`. `attempts.md` was absent and has been initialized as a markdown resume ledger while preserving `attempts.tsv`.
+- Capture sweep: the stranded C-FS2 source-audit report was captured in `attempts.tsv`, `attempts.md`, this collation, and the negative finding provenance.
+- Current frontier: resume should attack C-FS2/C-FS3 first. The pinned target is actual construction/control of the septic quotient-defect representative `R`, or a theorem that `\det(R,A_5^{\mathfrak f})` factors through the descended collision state and kills independent exceptional slope/provenance dependence.

@@ -67,13 +67,20 @@ Active, compact knowledge base shared with every delegated agent.
   same-tower formulas alone without a new provenance-sensitive theorem.
 - **Current reduced-package blow-up hypotheses do not force diagonal collapse.**
   Provenance: prior-cycle `agents/20260424-133500-C-failure/report.md`, current
-  `agents/20260424-145500-explorer-prior-treasure-hunt/report.md`, and formal
+  `agents/20260424-145500-explorer-prior-treasure-hunt/report.md`, formal
   countermodel `agents/20260424-160000-gap-closer-C-fiber-selection/report-cfs23-followup.md`
-  with script `scripts/formal_countermodel.py`. Do-not-retry: deriving
+  with script `scripts/formal_countermodel.py`, and actual-formula inspection
+  `agents/20260424-160000-gap-closer-C-fiber-selection/report-cfs2-actual-formulas.md`
+  with script `scripts/centered_delta_kappa_check.py`. Do-not-retry: deriving
   `\widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0)=\widehat\Psi(m)` from fixed
   codomain, `\mathcal R`, analyticity, swap-evenness, scalar normalization, or a
   central-slope match alone; the toy package with `B_3=Z+\varepsilon\kappa` satisfies
-  those formal properties and keeps `\partial_\kappa B_3=\varepsilon`.
+  those formal properties, and the displayed order-7 formula language leaves a
+  C-visible determinant slot `\det(R,A_5^{\mathfrak f})` / `D_2=2\kappa(AV_1-BU_1)`
+  unless an actual diagonal-merger or quotient-defect theorem kills it. Verified by
+  `agents/20260424-160000-verifier-adversarial-CDE/report-cfs2-actual-formula-review.md`
+  and
+  `agents/20260424-160000-verifier-source-CDE/report-cfs2-actual-formulas-source-check.md`.
 
 ## Goodies
 
