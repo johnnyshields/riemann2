@@ -855,6 +855,70 @@ their owned dirs, do not edit ledgers or the paper, use the 9-field report
 schema plus autoresearch closing block and `Ledger destination`, and separate
 proved / conditional / missing.
 
+## Resume dispatch 20260425-005100
+
+Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260425-005100`.
+
+Base commit: `c9a1981`.
+
+Coordinator-owned theorem target: UV-026 homogeneous-grade reduction and next
+Y-slot gate.  The live claim is now conditional but sharp: under the common
+homogeneous scalar grade `Gr_a r=r^{(a+2)}(m)(t-m)^{a+2}/(a+2)!`,
+`L_1YR_1` contributes no `B_7^{\mathfrak f}` term because the required middle
+coefficient `[z^5]M^{[5]}` is zero.  This must be source/adversarially
+verified before it is promoted into paper language or removed from the active
+determinant-gate list.  The one-ahead research lane attacks the next
+Y-containing family, `L_2YR_0`/`L_0YR_2`, under the same convention.
+
+Roster:
+
+1. Harvey continues as `verifier-source-UV026-L1YR1-absence`, writing only under
+   `agents/20260425-005100-verifier-source-UV026-L1YR1-absence/`.
+   Task: source/adversarially verify the homogeneous-grade absence theorem:
+   if `Gr_5 r` is the homogeneous `r^{(7)}` scalar piece, then
+   `[z^7]\Lambda^{[1]}M^{[5]}\Lambda^{[1]}=0` for `L_1YR_1`.  State whether
+   this is promotable as an absence theorem, still conditional, or blocked by
+   source language.
+2. Hilbert continues as `gap-closer-UV026-L2YR0-homogeneous-gate`, writing only
+   under `agents/20260425-005100-gap-closer-UV026-L2YR0-homogeneous-gate/`.
+   Task: under the homogeneous scalar grade, test the next Y-containing
+   families `L_2YR_0` and `L_0YR_2`.  Determine whether the mixed input starts
+   too late to contribute at `B_7`, or whether second-Frechet lower-order
+   factors can still reach order `7`.  Reduce to the exact missing coefficient
+   theorem if not closed.
+
+In-scope files and prior reports:
+
+- `rh/proof_of_rh.tex` lines 1392--1458, 2429--2466, 2607--2787,
+  2797--2899, and 12617--12714.
+- `rh/teams/20260424-145329-research-team-fundamental-C-D/findings.md`.
+- `rh/teams/20260424-145329-research-team-fundamental-C-D/uv.md`, UV-026 only.
+- `agents/20260425-003100-gap-closer-UV026-parity-corrected-grade/report.md`.
+- `agents/20260425-003100-verifier-adversarial-UV026-parity-grade-conflicts/report.md`.
+- `agents/20260425-002114-gap-closer-UV026-mixed-parity-theorem/report.md`.
+- `agents/20260424-231056-explorer-UV026-next-cubic-L2YR0/report.md`.
+- `agents/20260424-225250-gap-closer-UV026-L1YR1-Lambda-M5-coefficients-v2/report.md`.
+
+Ground-truth checks:
+
+- Evidence stays before `\Phi_K`, determinant scalarization, quotient
+  extraction, and diagonal merger.
+- Verification of `L_1YR_1` absence must distinguish proved under homogeneous
+  scalar grade from missing under alternative matrix-output `M^{[5]}`.
+- `L_2YR_0` progress requires an order-count closure, actual second-Frechet
+  coefficient data, or a minimal missing coefficient theorem.  Do not count
+  generic recurrence restatement as progress.
+- If the seven-family inventory changes, state whether this is a UV update,
+  paper update, or still verifier-queued.
+
+Non-goals: do not edit `rh/proof_of_rh.tex`; do not promote UV-024 or UV-026;
+do not use post-`\Phi_K`, determinant, quotient, or diagonal-merger facts.
+
+Protected surfaces and report contract are unchanged: agents write only under
+their owned dirs, do not edit ledgers or the paper, use the 9-field report
+schema plus autoresearch closing block and `Ledger destination`, and separate
+proved / conditional / missing.
+
 ## Resume dispatch 20260425-003100
 
 Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260425-003100`.
