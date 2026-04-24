@@ -288,3 +288,18 @@ citations.
 Coordinator decision: keep UV-016 live for now. The GRH directory currently has
 no canonical `grh/<main>.tex` promotion target, so the verified theorem remains
 staged in `paper-updates.md` rather than promoted/removed from `uv.md`.
+
+## UV-017 Coefficient-Lemma Lane 20260424
+
+Queued:
+
+- Noether (`019dbf02-0a72-7c51-8106-50d5e29b27fa`) in
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/`:
+  attack the exact paired local `S(m)`-slot realization after the staged
+  UV-016 source theorem. Ground truth is a theorem-ready coefficient /
+  freeze-rule lemma, or the smallest concrete substatements blocking one.
+
+Reason: UV-016 now has a verifier-cleared staged source theorem, but no
+canonical GRH promotion target. The next proof-state frontier is UV-017: the
+source scalar must be shown to be the pure local value parameter rather than a
+renormalized or upstairs-only surrogate.

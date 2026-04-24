@@ -20,6 +20,9 @@ Roster:
 - Sartre (`019dbeda-2d23-7da1-adf1-a557dccad97b`):
   `agents/20260424-183416-verifier-slot-skeleton/` - UV-017 adversarial
   verifier for the current paired slot skeleton.
+- Noether (`019dbf02-0a72-7c51-8106-50d5e29b27fa`):
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/` - UV-017 gap-closer
+  for the coefficient/freeze-rule lemma after the staged UV-016 source theorem.
 
 Verifier queue: the UV-017 skeleton in
 `agents/20260424-175245-paired-slot-proof-skeleton-routeA/report.md` is useful
@@ -34,6 +37,9 @@ Current targets:
 - UV-017: verify the paired slot proof skeleton against hidden assumptions.
   Ground truth: decide whether the skeleton cleanly separates manuscript-local
   algebra from the genuinely missing paired-family content.
+- UV-017 follow-up: prove, reduce, or sharply obstruct the coefficient /
+  freeze-rule lemma saying the source scalar is the pure local value parameter
+  to first order, with no hidden `c_chi(m) S_chi^pair` renormalization.
 
 In-scope files and lines:
 
