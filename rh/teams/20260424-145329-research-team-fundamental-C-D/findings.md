@@ -134,6 +134,31 @@ Active, compact knowledge base shared with every delegated agent.
   definition target only: descent, `\kappa`-independence, and merger
   normalization are downstream claims. Source audit found no existing
   `\mathcal H_7^q` under another name.
+- **UV-010 statement language should avoid "quotient-septic closure."**
+  Provenance:
+  `agents/20260424-173642-explorer-UV010-source-language/report.md`. Usage:
+  native paper terms are "septic quotient defect", "collision-cancellation
+  chart", "swap-compatible amplitude coordinate", and "edge law"; the existing
+  "quotient-septic closure" theorem is one-pair canonical closure, not the
+  two-atom order-7 edge package.
+- **UV-010 midpoint quotient trivialization is locally solved on the good patch.**
+  Provenance:
+  `agents/20260424-173642-gap-closer-UV010-quotient-trivialization/report.md`
+  and `agents/20260424-173642-explorer-UV010-quotient-geometry/report.md`, both
+  with `scripts/quotient_trivialization_check.js`. Usage: determinant pairing
+  gives a representative-independent chart from the moving quotient to the
+  midpoint quotient when `A_5^{\mathfrak f}(m)\neq0`; the `A_5^{\mathfrak f}=0`
+  locus is a rank jump and needs exclusion or a separate exceptional convention.
+- **UV-010 first-wave reports sharpen the theorem boundary but do not close the edge law.**
+  Provenance:
+  `agents/20260424-173642-gap-closer-UV010-theorem-formulation/report.md`,
+  `agents/20260424-173642-gap-closer-UV010-septic-hessian/report.md`, and
+  `agents/20260424-173642-explorer-UV010-prior-miner/report.md`. Usage: state the
+  target as a fixed-midpoint quotient edge law for a normalized
+  `a_1^{-1}\overline{\mathcal E}_{12}^{(7;1)}` class and
+  `[R]_{\mathrm{edge}}=-\mathcal H_7^q(m,\kappa,0)`. Current sources expose the
+  centered `D_2` pressure target and one-pair quotient closure, but no actual
+  two-atom `\mathcal J_2^{(7)}` / `\mathfrak O_7` construction.
 
 ## Recurring open gaps
 

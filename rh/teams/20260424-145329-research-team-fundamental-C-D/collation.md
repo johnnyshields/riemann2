@@ -349,3 +349,46 @@ Captured takeaway: adversarial verifier confirms UV-010 is the cleanest next tar
 Signal: UV-010 source audit, open / keep.
 
 Captured takeaway: source verifier confirms the paper supports the dependency split but does not already contain `\mathcal H_7^q` under another name. The finite-order criterion is conditional and imports diagonal merger; the quotient-diagonal route is too coarse; the collision chart gives a generic edge template and cubic/quintic edge laws only. UV-010 needs an actual order-7 quotient defect as an analytic section of a fixed quotient bundle, a trivialization from the moving `h_1` quotient to the midpoint quotient, constant-rank or exceptional-locus patch hypotheses, and a proof of the edge law. Descent/state-locality and merger normalization remain separate downstream targets.
+
+### `20260424-173642-explorer-UV010-source-language/report.md`
+
+Signal: UV-010 source-language map, keep.
+
+Captured takeaway: the source-language explorer recommends native wording for a paper-ready UV-010 block: "septic quotient defect" for `\overline E_{12}^{(7;1)}`, "collision-cancellation chart", "swap-compatible amplitude coordinate", "edge law", and "midpoint quotient after analytic trivialization." It confirms `\mathcal H_7^q` is not present under another notation. The existing "quotient-septic closure" theorem is one-pair canonical closure of `[A_7^{\mathfrak f}]`, not the two-atom order-7 interaction edge package, so do not reuse that heading for UV-010.
+
+### `20260424-173642-gap-closer-UV010-theorem-formulation/report.md`
+
+Signal: UV-010 theorem formulation, keep.
+
+Captured takeaway: the proposed positive theorem should be narrow and definition-only. Work on the good patch `c\neq0`, `M\neq0`, `A_5^{\mathfrak f}(m)\neq0`, `a_1\neq0`, bounded `\kappa`. Define a fixed-target normalized quotient class by applying the moving-to-midpoint trivialization to `a_1^{-1}\overline{\mathcal E}_{12}^{(7;1)}`, then prove only the edge law `\overline E_{12}^{(7;1)}=\delta^2\mathcal H_7^q(m,\kappa,\delta^2)`. The edge representative is `[R]_{\mathrm{edge}}=-\mathcal H_7^q(m,\kappa,0)`. Do not assert descent, `\kappa`-independence, determinant constancy, or identification with `\widehat\Psi` in UV-010.
+
+### `20260424-173642-gap-closer-UV010-quotient-trivialization/report.md`
+
+Signal: UV-010 quotient-line trivialization, keep.
+
+Captured takeaway: determinant pairing supplies the local moving-to-midpoint quotient chart on `A_5^{\mathfrak f}(m)\neq0`. The representative test script returns `representative_independent = true`, preserves the determinant scalar at the midpoint target, and flags `zero_midpoint_line_error = true` at the rank-jump locus. This closes the trivialization subproblem only on the good patch; it does not construct `\mathcal H_7^q`.
+
+### `20260424-173642-gap-closer-UV010-septic-hessian/report.md`
+
+Signal: UV-010 septic Hessian source mine, keep.
+
+Captured takeaway: the current source windows do not expose the actual order-7 two-atom quotient Hessian `\mathcal J_2^{(7)}` / `\mathfrak O_7`. They expose the centered one-pair determinant coefficient `D_2=2\kappa(AV_1-BU_1)`, which the agent's script verifies against a compressed determinant expression. That scalar is a comparison/pressure target, not closure for UV-010.
+
+### `20260424-173642-explorer-UV010-quotient-geometry/report.md`
+
+Signal: UV-010 quotient-bundle geometry, keep.
+
+Captured takeaway: the quotient geometry check matches the trivialization result. On `A_5^{\mathfrak f}(m)\neq0`, determinant scalarization is invariant under source-line representative changes and agrees after lifting from either moving quotient patch to the midpoint quotient. At `A_5^{\mathfrak f}=0`, the quotient is two-dimensional without a line convention, so the theorem must exclude the locus or add a prepared exceptional convention.
+
+### `20260424-173642-explorer-UV010-prior-miner/report.md`
+
+Signal: UV-010 prior mining, keep.
+
+Captured takeaway: no prior report, summary, or narrow `rh/chats` search contains a parked actual `\mathcal H_7^q` / order-7 quotient edge package. The useful prior lead is determinant scalarization of the moving quotient class, which supports a local scalar chart after the quotient-valued edge object exists. It does not replace the missing edge construction. The next source task is to state the theorem in two layers: quotient-valued edge law first, optional determinant scalar chart second.
+
+### Resume frontier after first UV-010 wave
+
+- **Current best:** UV-010 is split into a solved good-patch quotient trivialization and an unsolved actual order-7 quotient edge package.
+- **Keep:** theorem boundary, determinant-pairing trivialization, native terminology, prior-mining negative, and centered `D_2` as an adversarial pressure target.
+- **Discard:** scalar-only edge package substitutes, one-pair quotient-septic closure as a two-atom theorem, and derivations from lower edge laws plus abstract source axioms alone.
+- **Next:** run adversarial and source verifiers against the first-wave formulation and the determinant-trivialization good-patch claim; then redelegate a positive source construction for `\mathcal J_2^{(7)}` / `\mathfrak O_7`.
