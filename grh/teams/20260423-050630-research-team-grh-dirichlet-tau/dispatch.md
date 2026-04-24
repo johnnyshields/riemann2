@@ -119,3 +119,13 @@ normalization remain open unless explicitly proved and adversarially checked.
 Orientation note: `grh/grh_transfer_skeleton.tex` exists in the worktree but
 is untracked and is not an authoritative team artifact. Treat it as
 background orientation only until the coordinator decides to own or discard it.
+
+## Follow-up verifier 20260424-2010
+
+Sartre (`019dbeda-2d23-7da1-adf1-a557dccad97b`) is redelegated inside
+`agents/20260424-183416-verifier-slot-skeleton/` to adversarially audit
+Noether's UV-017 holomorphy/positivity/whitening reduction, especially the
+mixed-block removable singularities, the same-point determinant condition
+\(q>0\), \(2qq''+4q^4-3(q')^2>0\), the conditional whitening implication, and
+whether the updated `paper-updates.md` wording overclaims. Deposit target:
+`report-uv017-holomorphy-positivity-audit.md`.

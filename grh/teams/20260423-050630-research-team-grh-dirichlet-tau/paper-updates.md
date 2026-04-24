@@ -134,13 +134,13 @@ Provenance:
 `agents/20260424-183416-gap-compact-regularization/report-textbook-citation-pass.md`;
 `agents/20260424-183416-gap-compact-regularization/report-citation-fallback-plan.md`.
 
-## Paired Finite-\(s\) Unit-Coordinate Chart Hypothesis Draft
+## Paired Finite-\(s\) Unit-Coordinate Chart and Conditional Slot Draft
 
-Staged UV-017 text. Not promoted. This is a construction/hypothesis layer for
-the paired local chart, not exact slot realization.
+Staged UV-017 text. Not promoted. This is a conditional matrix-level local
+chart package, not exact paired construction and not UV-017 closure.
 
 ```tex
-\begin{definition}[Paired finite-\(s\) unit-coordinate chart hypothesis]
+\begin{definition}[Paired finite-\(s\) unit-coordinate chart]
 Fix \(m\in I\) and use the sign-audited boundary phase
 \[
 \Phi_\chi^{\mathrm{pair}}\!\left(\tfrac12+it\right)
@@ -149,17 +149,19 @@ Fix \(m\in I\) and use the sign-audited boundary phase
 q_\chi^{\mathrm{pair}}(t)
 =\Theta_\chi^{\mathrm{pair}\,\prime}(t).
 \]
-Assume that the corrected paired same-point and mixed blocks
+Define the abstract paired same-point and mixed chart blocks
 \[
 G_{\chi,m,\pm}^{\mathrm{pair},\mathrm{corr}}(s),
 \qquad
 N_{\chi,m}^{\mathrm{pair},\mathrm{corr}}(s)
 \]
-are given, in a local chart, by the finite-\(s\) block formulas of the
-zeta-side local model after replacing the RH phase function \(\Ph(t)\) by
+by the finite-\(s\) block formulas of the zeta-side local model after
+replacing the RH phase function \(\Ph(t)\) by
 \(\Theta_\chi^{\mathrm{pair}}(t)\) and \(q\) by
 \(q_\chi^{\mathrm{pair}}\). The quotient remains
-\(\Phi_\chi^{\mathrm{pair}}(s)\). More explicitly, for
+\(\Phi_\chi^{\mathrm{pair}}(s)\). No further correction map is included in
+this local chart; any additional correction must be named and checked for unit
+value-coordinate derivative. More explicitly, for
 \(t_\pm=m\pm s/2\), put
 \[
 q_{\chi,\pm}^{\mathrm{pair}}(s):=
@@ -271,15 +273,103 @@ the phase-gap variation along this path is
 \Delta_{\chi,0}^{\mathrm{pair}}(s)-\alpha s.
 \]
 \end{definition}
+
+\begin{hypothesis}[Paired chart realization and local admissibility]
+Interpret \(B_\chi^{\mathrm{pair}}\) and \(S_\chi^{\mathrm{pair}}\) in the
+completed-Hadamard normalization of the paired source package:
+\[
+B_\chi^{\mathrm{pair}}=B_{\chi,\mathrm{comp}}^{\mathrm{pair}}=0,
+\qquad
+S_\chi^{\mathrm{pair}}=S_{\chi,\mathrm{comp}}^{\mathrm{pair}}.
+\]
+Assume that the actual paired corrected finite-\(s\) local object is
+represented by the preceding chart, with no further correction map. Assume a
+local holomorphic paired phase on the required microscopic disk; if the theorem
+is used uniformly in \(m\), assume the corresponding pole-clearance and
+derivative-control radius. Assume same-point positivity and nondegeneracy,
+for example the real-window spectral gap
+\[
+q_\chi^{\mathrm{pair}}(t)>0,\qquad
+2q_\chi^{\mathrm{pair}}(t)q_\chi^{\mathrm{pair}\,\prime\prime}(t)
++4q_\chi^{\mathrm{pair}}(t)^4
+-3q_\chi^{\mathrm{pair}\,\prime}(t)^2
+\ge \kappa>0,
+\]
+or an equivalent lower spectral bound for the same-point blocks. Assume
+holomorphic inverse-square-root whitening from this gap. Along the pure value
+path, all
+non-value coordinates--derivative, curvature, mixed-jet, background,
+correction, multiplicity, cutoff, and normalization-gauge data--are frozen to
+first order. If a scalar readout is taken after the matrix-level whitened
+block, define the value derivative after that readout or separately prove that
+the readout has unit derivative on the matrix value slot.
+\end{hypothesis}
+
+\begin{theorem}[Conditional paired matrix value-slot]
+Assume the completed-Hadamard paired source package and the preceding paired
+chart-realization and local-admissibility hypothesis. Let
+\[
+\mathcal F_{\chi,m,\sigma}(a,\eta)
+\]
+denote the post-whitened matrix-level local deformation in this chart, where
+\[
+a=q_\chi^{\mathrm{pair}}(m)-B_\chi^{\mathrm{pair}}(m)
+\]
+is the value coordinate and \(\eta\) denotes the frozen non-value coordinates.
+Define
+\[
+A_{\mathrm{val},\chi}^{\mathrm{pair}}(m,\sigma)
+:=
+\partial_a\mathcal F_{\chi,m,\sigma}(0,\eta_0).
+\]
+For the actual paired data, put
+\[
+R_\chi^{\mathrm{pair}}(m,\sigma)
+:=
+\mathcal F_{\chi,m,\sigma}
+\bigl(S_\chi^{\mathrm{pair}}(m),\eta_\chi(m)\bigr)
+-\mathcal F_{\chi,m,\sigma}(0,\eta_0)
+-S_\chi^{\mathrm{pair}}(m)
+A_{\mathrm{val},\chi}^{\mathrm{pair}}(m,\sigma).
+\]
+Then the matrix-level corrected local deformation satisfies
+\[
+\Delta_\chi^{\mathrm{pair}}(m,\sigma)
+=
+S_\chi^{\mathrm{pair}}(m)
+A_{\mathrm{val},\chi}^{\mathrm{pair}}(m,\sigma)
++R_\chi^{\mathrm{pair}}(m,\sigma).
+\]
+Moreover, along the pure value path \((a,\eta)=(\alpha,\eta_0)\), the
+remainder has zero first derivative after the displayed value term is
+subtracted:
+\[
+\left.
+\frac{\partial}{\partial\alpha}
+\left(
+\mathcal F_{\chi,m,\sigma}(\alpha,\eta_0)
+-\mathcal F_{\chi,m,\sigma}(0,\eta_0)
+-\alpha A_{\mathrm{val},\chi}^{\mathrm{pair}}(m,\sigma)
+\right)
+\right|_{\alpha=0}
+=0.
+\]
+\end{theorem}
 ```
 
-Remaining hypotheses before UV-017 promotion:
+Remaining open work before UV-017 closure:
 
-- construct the paired corrected finite-\(s\) blocks literally as above;
-- prove microscopic holomorphy, same-point positivity/nondegeneracy, and
-  holomorphic inverse-square-root whitening for those paired blocks;
-- state the freeze-rule remainder criterion as a derivative condition, not
-  only as the definition of \(R_\chi^{\mathrm{pair}}\);
+- prove that the actual paired corrected finite-\(s\) blocks realize the
+  displayed chart, rather than assume it;
+- adversarially check and then promote the fixed-\(m\)
+  holomorphy/removable-singularity lemma for the literal chart;
+- prove a uniform microscopic pole-clearance radius if the later theorem needs
+  one;
+- prove the same-point determinant/spectral gap, or keep it as an explicit
+  local whitening hypothesis;
+- derive holomorphic inverse-square-root whitening from that gap;
+- prove the derivative-form freeze-rule remainder criterion for the actual
+  local object, not only inside the conditional chart theorem;
 - if a downstream scalar readout is used, prove its derivative is normalized
   consistently with the matrix value slot.
 
@@ -287,4 +377,7 @@ Provenance:
 `agents/20260424-192025-gap-uv017-coefficient-freeze/report.md`;
 `agents/20260424-183416-verifier-slot-skeleton/report-uv017-coefficient-reduction-audit.md`;
 `agents/20260424-192025-gap-uv017-coefficient-freeze/report-unit-coordinate-chart.md`;
-`agents/20260424-192025-gap-uv017-coefficient-freeze/report-paired-finite-s-formulas.md`.
+`agents/20260424-192025-gap-uv017-coefficient-freeze/report-paired-finite-s-formulas.md`;
+`agents/20260424-183416-verifier-slot-skeleton/report-uv017-finite-s-formula-audit.md`;
+`agents/20260424-183416-verifier-slot-skeleton/report-uv017-conditional-theorem-framing-audit.md`;
+`agents/20260424-192025-gap-uv017-coefficient-freeze/report-uv017-holomorphy-positivity-whitening.md`.

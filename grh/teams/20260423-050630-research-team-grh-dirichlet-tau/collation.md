@@ -431,3 +431,45 @@ and left/right whitening order all match. No matrix-entry correction is needed.
 Capture action: refined `findings.md`, UV-017, and `attempts.md`. UV-017
 remains open because the chart is still a definition/hypothesis until the
 actual paired construction, or any correction maps, are specified and checked.
+
+## Sartre UV-017 Conditional Theorem Framing Audit 20260424
+
+Report:
+`agents/20260424-183416-verifier-slot-skeleton/report-uv017-conditional-theorem-framing-audit.md`.
+
+Verdict: keep, open. Sartre says the verified formula display now supports a
+clean conditional matrix value-slot theorem, but only with explicit guardrails:
+the UV-017 `B` and `S` must be the completed-Hadamard quantities, the finite
+\(s\) chart definition must be split from the hypothesis that actual paired
+corrected blocks realize it, no further correction map may be hidden, local
+holomorphy/positivity/whitening must remain hypotheses, and the freeze-rule
+remainder must be stated as a derivative criterion. Any scalar readout must be
+included in the value derivative or separately normalized.
+
+Capture action: staged the conditional theorem and guard clauses in
+`paper-updates.md`, refined `findings.md`, UV-017, and `attempts.md`. UV-017
+is still open: this captures the strongest honest conditional theorem-facing
+text, not an exact paired construction theorem.
+
+## Noether UV-017 Holomorphy / Positivity / Whitening Reduction 20260424
+
+Report:
+`agents/20260424-192025-gap-uv017-coefficient-freeze/report-uv017-holomorphy-positivity-whitening.md`.
+Note:
+`agents/20260424-192025-gap-uv017-coefficient-freeze/notes/holomorphy_positivity_whitening_reduction.md`.
+
+Verdict: keep, open. For the literal finite-\(s\) paired chart, Noether proves
+fixed-\(m\) holomorphy and removable singularities from the local holomorphic
+edge logarithmic derivative and a local primitive for
+\(q_\chi^{pair}\). A uniform microscopic radius still needs a pole-clearance
+and derivative-control hypothesis. Same-point positivity is not formal: at
+\(s=0\) the displayed \(G\) block is positive exactly under the finite
+determinant/spectral gap \(q>0\) and \(2qq''+4q^4-3(q')^2>0\), with
+holomorphic whitening following conditionally by functional calculus once that
+gap is available.
+
+Capture action: sharpened `paper-updates.md` local-admissibility hypotheses,
+added a reusable finding and negative, refined UV-017 and `attempts.md`. Next
+move is adversarial verification of the removable-pole and determinant
+reduction, then a direct attack on the determinant gap from the completed
+strip-edge source.

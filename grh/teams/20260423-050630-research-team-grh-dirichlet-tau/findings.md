@@ -132,20 +132,32 @@ is the supplied team dir unless another path is named.
   `agents/20260424-192025-gap-uv017-coefficient-freeze/notes/unit_coordinate_chart_attack.md`.
 - **A UV-017 paired finite-\(s\) construction draft is staged, not promoted.**
   `paper-updates.md` now contains a UV-017 finite-\(s\) unit-coordinate chart
-  hypothesis/definition, not a theorem: in a local chart where the paired
-  corrected blocks are given by the RH finite-\(s\) formulas with the RH phase
-  function replaced by \(\Theta_\chi^{pair}\), the paired `G`, `N`, and
-  whitened block formulas are displayed, and the pure value path gives
-  `da/dS|0=1`. Sartre's formula audit finds no sign, endpoint, phase-gap,
-  `q_+`/`q_-`, `s`-power, `1/pi`, or whitening-order correction in those
-  displays. The actual paired correction maps may still mean more than literal
-  substitution, so holomorphy/whitening, freeze-rule remainder, and scalar
-  readout checks remain open. Provenance:
+  plus a conditional matrix value-slot theorem, not an exact paired
+  construction theorem. In the displayed chart, the paired `G`, `N`, and
+  whitened block formulas are literal RH finite-\(s\) substitutions using
+  \(\Theta_\chi^{pair}\), and the pure value path gives `da/dS|0=1`. Sartre's
+  formula audit finds no entry-level correction. Sartre's framing audit says
+  the safe theorem-facing endpoint is conditional only: use the
+  completed-Hadamard aliases for `B` and `S`, split chart definition from
+  actual realization, add a no-extra-correction-map guard, and keep
+  holomorphy/positivity/whitening, freeze-rule remainder, and scalar readout
+  as explicit hypotheses until proved. Provenance:
   `paper-updates.md`,
   `agents/20260424-192025-gap-uv017-coefficient-freeze/report-unit-coordinate-chart.md`,
   `agents/20260424-183416-verifier-slot-skeleton/report-uv017-construction-draft-audit.md`,
   `agents/20260424-192025-gap-uv017-coefficient-freeze/report-paired-finite-s-formulas.md`,
-  `agents/20260424-183416-verifier-slot-skeleton/report-uv017-finite-s-formula-audit.md`.
+  `agents/20260424-183416-verifier-slot-skeleton/report-uv017-finite-s-formula-audit.md`,
+  `agents/20260424-183416-verifier-slot-skeleton/report-uv017-conditional-theorem-framing-audit.md`.
+- **For the literal UV-017 chart, fixed-\(m\) holomorphy is formal but
+  positivity is a determinant gap.** Noether's local-admissibility reduction
+  proves fixed-midpoint holomorphy/removable singularities from the local
+  holomorphic edge logarithmic derivative and a primitive of
+  \(q_\chi^{pair}\). Same-point positivity does not follow from formula shape:
+  at \(s=0\) it is exactly the finite gap
+  \(q>0\) and \(2qq''+4q^4-3(q')^2>0\), with a uniform spectral version needed
+  for holomorphic whitening on a microscopic disk. Provenance:
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/report-uv017-holomorphy-positivity-whitening.md`,
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/notes/holomorphy_positivity_whitening_reduction.md`.
 - **Tau is a self-dual phase-channel stress test, not the first exact `S(m)`
   target.** Tau has only a conditional compact source-package blueprint; paired
   Dirichlet remains sharper for exact source-plus-slot work. Provenance:
@@ -163,10 +175,14 @@ is the supplied team dir unless another path is named.
   It is a serious phase-channel candidate, but paired remains the conservative
   scalar-amplitude target from current scope alone. Provenance:
   `notes/dirichlet_channel.md`, `notes/dirichlet_paired_source.md`.
-- **Denominator comparability does not by itself give same-point positivity.**
+- **The source package does not by itself give same-point positivity.**
   Positivity/nondegeneracy must stay as an explicit local whitening hypothesis
-  until a separate spectral-gap stability argument is proved. Provenance:
-  `notes/paired_slot_hypotheses.md`, `notes/whitening_interface.md`.
+  until a separate spectral-gap stability argument is proved. For the displayed
+  chart the \(s=0\) test is \(q>0\) and
+  \(2qq''+4q^4-3(q')^2>0\); a general local phase such as
+  \(q(t)=1+K(t-m)\) violates it for large \(K\). Provenance:
+  `notes/paired_slot_hypotheses.md`, `notes/whitening_interface.md`,
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/report-uv017-holomorphy-positivity-whitening.md`.
 - **A paired slot identity can be tautological unless the coefficient is fixed
   independently.** Defining `R_chi^pair` after subtracting a chosen linear term
   does not prove source-to-slot realization; UV-017 needs an independent

@@ -67,10 +67,20 @@
   `Theta=Theta_chi^pair` and `q=q_chi^pair`. The staged `paper-updates.md`
   text now displays the paired `G`, `N`, and whitened block formulas as a chart
   hypothesis/definition; Sartre's formula audit found no entry-level mismatch
-  with the RH finite-\(s\) formulas. This is still not a proved paired
-  construction lemma. If "corrected" means anything beyond this literal chart,
-  the correction maps must be named and checked for unit value-coordinate
-  derivative.
+  with the RH finite-\(s\) formulas. `paper-updates.md` now also stages a
+  conditional matrix value-slot theorem using the completed-Hadamard aliases
+  for `B` and `S`, a no-extra-correction-map guard, explicit local
+  admissibility hypotheses, and a derivative-form remainder criterion. This is
+  still not a proved paired construction lemma. Noether's local-admissibility
+  reduction proves fixed-\(m\) holomorphy/removable singularities for the
+  literal chart from a local holomorphic paired phase, but leaves uniform
+  microscopic radius as a pole-clearance/derivative-control hypothesis.
+  Same-point positivity reduces to the explicit determinant/spectral gap
+  \(q>0\) and \(2qq''+4q^4-3(q')^2>0\), with holomorphic whitening conditional
+  on that gap. If "corrected" means anything beyond this literal chart, the
+  correction maps must be named and checked for unit value-coordinate
+  derivative; determinant/spectral gap, freeze-rule remainder, and scalar
+  readout remain open unless assumed.
 
 - **UV-018** - corrected odd/transverse realization and boundary package.
   After paired slot realization, construct the corrected odd/transverse scalar,
