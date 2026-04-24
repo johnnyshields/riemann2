@@ -28051,39 +28051,54 @@ Assume the amplitude-normalized package
 \]
 extends holomorphically to \(\delta=0\) through ordinary order \(7\).
 
-First extract the moving fixed-sector representative
+First extract the moving fixed-sector \(z\)-polynomial
 \[
-Z_{\mathcal W}^{\mathfrak f}(h)
+Z_{\mathcal W}^{\mathfrak f}(h;z)
 :=
 \pi_{\mathfrak f_h}[z^{\le7}]
 \widehat C_{\mathcal W}^{\mathrm{amp}}(h)
-\in\mathfrak f_h .
+\in
+\mathfrak f_h[z]_{\le7}.
 \]
-Then define the normalized fixed-target package representative by
+Write
 \[
-B_{\mathrm{pkg}}^{\mathfrak f}(h)
-:=
-\operatorname{Triv}_{h\to m}
-\left(
-Z_{\mathcal W}^{\mathfrak f}(h)
-\right)
-\in\mathfrak f_m .
-\]
-Equivalently,
-\[
-B_{\mathrm{pkg}}^{\mathfrak f}(h)
+Z_{\mathcal W}^{\mathfrak f}(h;z)
 =
-\sum_{j=0}^{7}(h-m)^jB_j+O((h-m)^8),
+\sum_{n=0}^{7}z^nZ_n(h),
 \qquad
-B_j\in\mathfrak f_m.
+Z_n(h)\in\mathfrak f_h .
+\]
+The midpoint trivialization is applied coefficientwise:
+\[
+B_{\mathrm{pkg}}^{\mathfrak f}(h;z)
+:=
+\sum_{n=0}^{7}
+z^n\operatorname{Triv}_{h\to m}Z_n(h)
+\in
+\mathfrak f_m[z]_{\le7}.
+\]
+Thus ordinary \(z\)-coefficients are extracted only after fixed-target
+trivialization.
+
+Equivalently, expand the fixed-target \(z\)-polynomial in the moving
+midpoint parameter:
+\[
+B_{\mathrm{pkg}}^{\mathfrak f}(h;z)
+=
+\sum_{j=0}^{7}(h-m)^j\mathcal B_j(z)
++
+O((h-m)^8),
+\qquad
+\mathcal B_j(z)\in\mathfrak f_m[z]_{\le7}.
 \]
 Although the coefficients still depend on the moving parameter \(h\), the
 representatives themselves have already been transported to the fixed
 midpoint fiber \(\mathfrak f_m\).
 
 When we write \(C_{\mathcal W}^{\corr}\) below, we mean this normalized
-fixed-sector package representative \(B_{\mathrm{pkg}}^{\mathfrak f}\), not
-the full unprojected matrix cross-effect.
+fixed-target fixed-sector package representative
+\(B_{\mathrm{pkg}}^{\mathfrak f}(h;z)\), not the full unprojected matrix
+cross-effect.
 \end{definition}
 
 \begin{definition}[Package-level order-\(7\) quotient extractor]
@@ -28092,7 +28107,7 @@ For the normalized fixed-target package representative, define
 \[
 B_7^{\mathfrak f}(C_{\mathcal W}^{\corr})
 :=
-[z^7]\,B_{\mathrm{pkg}}^{\mathfrak f}(m)
+[z^7]\,B_{\mathrm{pkg}}^{\mathfrak f}(m;z)
 \in \mathfrak f_m .
 \]
 The quotient-valued order-\(7\) extractor is
@@ -28109,21 +28124,29 @@ B_7^{\mathfrak f}(C_{\mathcal W}^{\corr})
 
 \begin{remark}[Two coefficient indices]
 \label{rem:two-coefficient-indices-package}
-The subscript \(7\) in \(B_7^{\mathfrak f}\) denotes the ordinary
-\(z\)-order coefficient extracted before quotienting.  By contrast, the
-coefficients \(B_j[M]\) below are coefficients in the moving midpoint
-expansion in \((h-m)^j\) of a fixed residual monomial \(M\).  These are
-different indices: the connection correction uses lower moving coefficients
-\(B_{7-i}[M]\) to correct the quotient line at ordinary order \(7\).
+The subscript \(7\) in \(B_7^{\mathfrak f}\) denotes the ordinary \(z\)-order
+coefficient extracted from the fixed-target package polynomial
+\(B_{\mathrm{pkg}}^{\mathfrak f}(h;z)\).  By contrast, the index \(j\) in
+\(B_j[M]\) denotes the coefficient of \((h-m)^j\) in the moving midpoint
+expansion of a fixed residual monomial \(M\), after the ordinary \(z^7\)
+coefficient has been extracted:
+\[
+B_j[M]=[z^7][(h-m)^jM]\,B_{\mathrm{pkg}}^{\mathfrak f}(h;z).
+\]
+These are different indices.  The connection correction uses lower moving
+coefficients \(B_{7-i}[M]\) to correct the quotient line at ordinary order
+\(7\).
 \end{remark}
 
 \begin{definition}[Lower moving package coefficients]
 \label{def:lower-moving-package-coefficients}
 Let \(M\) be a residual-source monomial.  Define
 \[
-B_{\mathrm{pkg}}^{\mathfrak f}(h;M)
+B_{\mathrm{pkg}}^{\mathfrak f}(h;z;M)
 \]
-to be the coefficient of \(M\) in \(B_{\mathrm{pkg}}^{\mathfrak f}(h)\).
+to be the coefficient of \(M\) in the fixed-target polynomial
+\(B_{\mathrm{pkg}}^{\mathfrak f}(h;z)\).
+
 For
 \[
 M_A:=\dot r_3r_2\dot r_4,
@@ -28132,13 +28155,16 @@ M_C:=\dot r_3\dot r_2r_4,
 \]
 write
 \[
-B_{\mathrm{pkg}}^{\mathfrak f}(h;M)
+B_{\mathrm{pkg}}^{\mathfrak f}(h;z;M)
 =
-\sum_{j\ge0}(h-m)^jB_j[M].
+\sum_{j\ge0}(h-m)^j\mathcal B_j[M](z),
+\qquad
+\mathcal B_j[M](z)\in\mathfrak f_m[z]_{\le7}.
 \]
-Thus
+The lower moving representatives entering the order-\(7\) quotient-line
+connection are the ordinary order-\(7\) coefficients
 \[
-B_j[M]:=[(h-m)^jM]B_{\mathrm{pkg}}^{\mathfrak f}(h),
+B_j[M]:=[z^7]\mathcal B_j[M](z)\in\mathfrak f_m,
 \qquad
 0\le j\le6.
 \]
@@ -28171,7 +28197,7 @@ u_{7-i}^B[M]v_i^A
 u_i^Av_{7-i}^B[M]
 \right).
 \]
-If \(A_i,B_j\) are derivative-normalized rather than coefficient-normalized,
+If \(A_i,B_j[M]\) are derivative-normalized rather than coefficient-normalized,
 replace this formula by
 \[
 q_{\mathrm{conn},7}[M]
@@ -28183,15 +28209,19 @@ q_{\mathrm{conn},7}[M]
 
 \begin{remark}[Representative choices and lower coefficient tables]
 \label{rem:representative-choices-lower-coefficient-tables}
-The lower coefficients \(B_j[M]\) are representative-dependent as elements
-of \(\mathfrak f_m\), but the order-\(7\) connection coordinate
+The lower coefficients \(B_j[M]\) are representative-dependent.  The
+connection expression is meaningful only after a single analytic
+representative and midpoint trivialization convention have been fixed.  It
+is not invariant under arbitrary termwise replacements
 \[
-\sum_{i=1}^{7}\omega_m(B_{7-i}[M],A_i)
+B_j[M]\longmapsto B_j[M]+c_jA_m
 \]
-is independent of changes of \(B_j[M]\) by multiples of \(A_m\).  Therefore
-coefficient tables may choose any analytic section used by
+unless the direct term and the moving-line expansion are transformed
+coherently as part of the same representative change.
+
+Thus coefficient tables may choose any analytic section from
 Definition~\ref{def:representative-level-midpoint-trivialization}, but they
-must keep that section fixed until the final quotient-coordinate
+must keep that section fixed through the final quotient-coordinate
 calculation.  Changing representatives in the middle of a finite table is
 not a valid simplification.
 \end{remark}
@@ -28207,11 +28237,17 @@ A_i=[(h-m)^i]A_5^{\mathfrak f}(h),
 \]
 together with
 \[
-B_j[M_A],\quad B_j[M_C],
+B_j[M_A]=[z^7][(h-m)^jM_A]\,
+B_{\mathrm{pkg}}^{\mathfrak f}(h;z),
+\]
+and
+\[
+B_j[M_C]=[z^7][(h-m)^jM_C]\,
+B_{\mathrm{pkg}}^{\mathfrak f}(h;z),
 \qquad
 0\le j\le6,
 \]
-for
+where
 \[
 M_A=\dot r_3r_2\dot r_4,
 \qquad
@@ -28232,7 +28268,7 @@ R_7^{(C)}
 \omega_m(B_{7-i}[M_C],A_i)=0.
 \]
 These \(B_j[M]\) must be extracted from
-\(B_{\mathrm{pkg}}^{\mathfrak f}(h)\), not from the raw seven-family
+\(B_{\mathrm{pkg}}^{\mathfrak f}(h;z)\), not from the raw seven-family
 coefficient table.
 \end{remark}
 
