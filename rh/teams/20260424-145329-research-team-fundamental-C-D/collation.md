@@ -504,3 +504,31 @@ order 7.
 - **Next:** attack UV-011 by mining the corrected whitening transfer for a
   canonical `a`-linear coefficient functor or a theorem making the higher
   source-weight terms quotient-invisible.
+
+### `20260424-184004-gap-closer-UV011-linearized-whitening-functor/report.md`
+
+Signal: UV-011 whitening linearization, keep.
+
+Captured takeaway: UV-011 has a credible whitening-side candidate. The paper's
+corrected-whitening transfer defines an analytic map, a first-order Frechet
+term, and the scaled homogeneous expansion
+`\mathcal T_{Q,R}(X)=\sum_{p\ge1}\mathcal T_p(X)`. The first homogeneous term
+`\mathcal T_1` is the right linearized whitening functor once a perturbation
+triple `X` is fixed. This does not close UV-011 because the paper still lacks
+the source-weight-linear actual two-atom input `X^{[1]}` and a proof that
+`\mathcal T_1(X^{[1]})` has the required order-7 quotient component.
+
+### Resume frontier after `T_1` identification
+
+- **Current best:** the missing source-weight linearization has split into a
+  solved whitening-side functor (`\mathcal T_1`) and an unsolved source-side
+  input (`X^{[1]}` for actual corrected two-atom blocks).
+- **Keep:** `\mathcal T_1` as candidate UV-011 functor; previous negatives
+  against finite-amplitude whitening, signed-lift-only packages, and direct
+  `D_2 -> \mathfrak O_7` promotion.
+- **Blocked:** no process blocker. Mathematical blocker is the missing
+  source-weight-linear actual two-atom block perturbation and its order-7
+  quotient extraction.
+- **Next:** construct or source-mine `X^{[1]}` in the collision-cancellation
+  chart, then feed it through `\mathcal T_1` and test the septic quotient
+  component against the free `P(m,\kappa)` model.

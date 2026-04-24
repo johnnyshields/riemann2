@@ -182,6 +182,14 @@ Active, compact knowledge base shared with every delegated agent.
   scalarization is only good-patch bookkeeping; it does not kill the free septic
   quotient coordinate, and `A_5^{\mathfrak f}=0` needs exclusion or a separate
   prepared/projectivized convention.
+- **UV-011 whitening-side candidate is the first homogeneous transfer `\mathcal T_1`.**
+  Provenance:
+  `agents/20260424-184004-gap-closer-UV011-linearized-whitening-functor/report.md`.
+  Usage: the corrected-whitening transfer already supplies a canonical linear
+  functor once a perturbation triple `X` is fixed. The missing package input is
+  the source-weight-linear actual two-atom block perturbation `X^{[1]}` and a
+  proof that its order-7 quotient output is the UV-010
+  `\mathcal J_2^{(7)}` / `\mathfrak O_7`.
 
 ## Recurring open gaps
 
