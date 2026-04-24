@@ -161,6 +161,10 @@ Focused target:
 - Gap closer:
   `agents/20260424-193527-gap-nonbenchmark-genericity/` targets UV-015.
 
+Verifier:
+- `agents/20260424-194246-verifier-nonbenchmark-genericity/` checks the
+  endpoint 2-jet determinant theorem before any final UV-015 promotion.
+
 Ground-truth check:
 - Produce a clean theorem, or reduce to the smallest precise finite-dimensional
   transversality/rank condition still missing.
