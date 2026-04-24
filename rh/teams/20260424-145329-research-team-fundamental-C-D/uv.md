@@ -53,6 +53,23 @@ Working forward-carry of the current open UV items relevant to the active queue.
   Current role: coefficient-map subtarget of UV-023; needed before the
   quotient-invisibility theorem can be promoted.
 
+- **UV-025** -- `rem:wip-parity-projective-factorization-collision-blow-up`
+  Claim: define the actual two-atom corrected pre-whitening block triple
+  `\mathcal B_2(a_1,h_1;a_2,h_2)` with source tags, define the pair-kernel
+  filtration `\mathcal K`, and prove
+  `\operatorname{Lin}_{\mathcal K}\mathfrak D_Q(\mathcal B_2-\mathcal B_0)
+  =a_1L_{h_1}+a_2L_{h_2}`.
+  Current role: upstream source-provenance subtarget for UV-024; needed before
+  `C_{\mathcal W}` can be identified with an actual corrected-whitening
+  two-atom package.
+
+- **UV-026** -- `rem:wip-parity-projective-factorization-collision-blow-up`
+  Claim: for the actual source-linear corrected-whitening matrix cross-effect,
+  every non-`(1,1)` cubic finite-order source term `T` of type `(1,1,5)`
+  satisfies `B_7^{\mathfrak f}(T)\in\mathbf C A_5^{\mathfrak f}(m)`.
+  Current role: narrowed cubic gauge subtarget for UV-024; needed before the
+  full non-`(1,1)` quotient-invisibility theorem can be promoted.
+
 - **UV-004** — `rem:wip-explicit-pointwise-bridge-good-patch-detector`
   Claim: the local detector either sees the same-tower source `r=q^{(7)}` or the explicit pointwise package is invisible.
   Current role: bridge/diagnostic theorem beneath the package theorem.

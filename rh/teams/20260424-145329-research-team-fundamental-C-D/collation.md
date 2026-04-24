@@ -707,3 +707,22 @@ Captured takeaway: the conditional matrix cross-effect
 - **Keep:** use existing matrix whitening and fixed-sector projection to draft a compact definition block later, after source-linear input provenance is settled.
 - **Discard:** any proof via `\Phi_K` scalar invisibility, determinant scalarization, or generic fixed quotient linearity alone.
 - **Next:** attack the actual two-atom source-linear block and the `A_5^{\mathfrak f}`-gauge theorem for non-`(1,1)` source bidegrees.
+
+### `20260424-194309-gap-closer-UV024-actual-source-block/report.md`
+
+Signal: UV-024 source-block provenance, keep; filed UV-025.
+
+Captured takeaway: the one-pair pair-kernel-linear `L_h` is source-supported as a candidate, but current source does not define the actual two-atom pre-whitening block triple `\mathcal B_2(a_1,h_1;a_2,h_2)` or prove `\operatorname{Lin}_{\mathcal K}\mathfrak D_Q(\mathcal B_2-\mathcal B_0)=a_1L_{h_1}+a_2L_{h_2}`. UV-025 isolates that upstream source-provenance theorem.
+
+### `20260424-194309-gap-closer-UV024-A5-gauge/report.md`
+
+Signal: UV-024 cubic gauge attack, keep; filed UV-026.
+
+Captured takeaway: the inspected source constraints do not force a cubic `(1,1,5)` fixed-sector witness into `\mathbf C A_5^{\mathfrak f}(m)`. The harness tests source support, total order \(1+1+5=7\), one-pair gauge invariance, and swap symmetrization; a witness `(3,7)` against `A_5=(2,5)` still has determinant `1`. UV-026 isolates the actual-package cubic gauge theorem needed before UV-024 can promote.
+
+### Frontier after UV-025/UV-026 split
+
+- **Current best:** UV-024 reduces to two sharp subtargets: UV-025 actual source-linear block provenance, then UV-026 actual-package cubic `A_5^{\mathfrak f}`-gauge.
+- **Keep:** conditional matrix-cross-effect definition path; formal cubic obstruction as a verifier harness.
+- **Discard:** proving UV-024 from one-pair gauge law, swap compatibility, scalar hiding, determinant scalarization, or generic fixed quotient linearity alone.
+- **Next:** dispatch UV-025 source-block construction first; UV-026 should wait for actual-package structure or run only as adversarial pressure.

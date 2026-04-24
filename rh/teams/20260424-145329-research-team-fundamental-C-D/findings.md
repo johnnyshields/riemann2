@@ -164,15 +164,16 @@ Active, compact knowledge base shared with every delegated agent.
   proof that its order-7 quotient output is the UV-010
   `\mathcal J_2^{(7)}` / `\mathfrak O_7`.
 - **UV-023/UV-024 source-bidegree quotient package is missing from current source.**
-  Provenance: UV-023/UV-024 reports in `agents/20260424-190438-*` through
-  `agents/20260424-193725-*/report.md`.
+  Provenance: UV-023/UV-026 reports in `agents/20260424-190438-*` through
+  `agents/20260424-194309-*/report.md`.
   Usage: `(1,1)` projection kills `\mathcal T_{p\ge3}` formally, and the best
   `L_h` candidate is the pre-whitening pair-kernel-linear derivative supported
   by one-pair formulas. The best `Q_7^q` target is
   `[B_7^{\mathfrak f}(C)]\in\mathfrak f/\mathbf C A_5^{\mathfrak f}(m)`.
   Conditional matrix `C_{\mathcal W}` and `B_7^{\mathfrak f}` are definition-ready
-  once the actual source-linear two-atom block exists. Promotion still needs
-  `\Pi_{1,1}` and proof that non-`(1,1)` source bidegrees are quotient-gauge.
+  once the actual source-linear two-atom block exists. UV-025 asks for that
+  block; UV-026 asks for cubic `(1,1,5)` `A_5^{\mathfrak f}`-gauge. Promotion
+  still needs actual-package source, `\Pi_{1,1}`, and quotient-gauge.
 
 ## Recurring open gaps
 
