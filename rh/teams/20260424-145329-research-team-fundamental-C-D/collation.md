@@ -831,3 +831,16 @@ Captured takeaway: current sources do not compute the actual pre-`\Phi_K` fixed-
 - **Keep:** the exact determinant acceptance test from the verifier and the formal algebra-only rejection from the gap-closer.
 - **Discard:** any UV-026 proof that skips the actual fixed-sector vector or argues only after scalarization.
 - **Next:** redeploy a source/coefficient lane on the actual grade `1/5/1` matrices; keep a verifier ready only when a concrete vector or cancellation theorem appears.
+
+### `20260424-201525-source-auditor-UV026-L1YR1-matrix-provenance/report.md`
+
+Signal: UV-026 `L_1YR_1` source provenance audit, keep.
+
+Captured takeaway: the audited paper ranges and staged UV-025 update contain notation near the target but not the actual grade `1/5/1` cubic matrices. The closest dictionary is `L_{-,i}^{[1]}` as the grade-1 left inverse-square-root derivative output, `Y_i^{[5]}` as the grade-5 scaled mixed input before `\Phi_K`, and `R_{+,i}^{[1]}` as the grade-1 right derivative output. No audited line forms the three ordered products, computes `\pi_{\mathfrak f}[z^7]`, or proves `\mathbf C A_5^{\mathfrak f}` membership.
+
+### Frontier after source provenance audit
+
+- **Current best:** source absence for `L_1YR_1` is independently confirmed in the audited ranges; direct extraction lane is the remaining live path.
+- **Keep:** translation dictionary from paper notation to `L_{-,i}^{[1]}`, `Y_i^{[5]}`, `R_{+,i}^{[1]}`.
+- **Discard:** claiming the staged UV-025 block already supplies the cubic fixed-sector coefficient.
+- **Next:** wait for direct extraction; if it also returns missing, move UV-026 pressure to another one of the seven cubic families.

@@ -156,7 +156,7 @@ Active, compact knowledge base shared with every delegated agent.
   `\mathcal J_2^{(7)}` / `\mathfrak O_7`.
 - **UV-023/UV-024 source-bidegree quotient package is missing from current source.**
   Provenance: UV-023/UV-026 reports in `agents/20260424-190438-*` through
-  `agents/20260424-200718-gap-closer-UV026-L1YR1-coefficient/report.md`.
+  `agents/20260424-201525-source-auditor-UV026-L1YR1-matrix-provenance/report.md`.
   Usage: `(1,1)` projection kills `\mathcal T_{p\ge3}` formally, and the best
   `L_h` candidate is the pre-whitening pair-kernel-linear derivative supported
   by one-pair formulas. The best `Q_7^q` target is
@@ -164,9 +164,9 @@ Active, compact knowledge base shared with every delegated agent.
   UV-025 has source/adversarial verification for a guarded `paper-updates.md`
   source-block definition. UV-026 reduces to seven cubic pre-`\Phi_K` whitening
   families; current source only gives gauge/vanishing once a term is identified
-  as one-pair `K_5`, `K_3`, or pure. First target `L_1YR_1` needs the actual
-  grade `1/5/1` fixed-sector matrices for the three ordered source-tag products;
-  formal Loewner algebra alone does not force `A_5^{\mathfrak f}`-gauge.
+  as one-pair `K_5`, `K_3`, or pure. Source audit confirms first target
+  `L_1YR_1` lacks the actual grade `1/5/1` fixed-sector matrices for the three
+  ordered source-tag products; formal Loewner algebra alone does not force gauge.
 
 ## Recurring open gaps
 
