@@ -163,13 +163,14 @@ Active, compact knowledge base shared with every delegated agent.
   the source-weight-linear actual two-atom block perturbation `X^{[1]}` and a
   proof that its order-7 quotient output is the UV-010
   `\mathcal J_2^{(7)}` / `\mathfrak O_7`.
-- **UV-022 cross-effect route needs a homogeneous-transfer filtration theorem.**
-  Provenance: `agents/20260424-184202-explorer-UV022-cross-effect-package/report.md`
-  and `agents/20260424-185740-*-UV022-*/report.md` with scripts. Usage: the
-  analytic cross-effect gives one-amplitude collapse and an `a_1a_2` channel,
-  but diagonal self-subtraction alone does not imply `\delta^2` divisibility;
-  promotion needs the order-7 quotient channel governed by `\mathcal T_2` only,
-  or a proof that `\mathcal T_{p\ge3}` first-collision terms are quotient-invisible.
+- **UV-023 homogeneous-transfer filtration is missing from current source.**
+  Provenance: UV-022 cross-effect reports plus
+  `agents/20260424-190438-gap-closer-UV023-transfer-filtration/report.md` and
+  `agents/20260424-190438-verifier-source-UV023-filtration/report.md`. Usage:
+  the analytic cross-effect has the right package shape, but diagonal
+  self-subtraction and coefficient bounds do not prove `\delta^2` divisibility;
+  promotion needs a bidegree `(1,1)` projection or a theorem that
+  `\mathcal T_{p\ge3}` is quotient-invisible through septic order.
 
 ## Recurring open gaps
 
