@@ -1,4 +1,4 @@
----
+﻿---
 name: research-team
 description: Primary workhorse. Dispatches a coordinator-selected live roster via Codex subagents when delegated teamwork is authorized, with one team dir and per-agent subdirs under <paper>/teams/. Uses a one-ahead pattern: researchers keep attacking while verifiers review prior stable deposits.
 ---
@@ -26,8 +26,9 @@ forward-carry at dispatch`.
 1. Read the most recent team dir's `findings.md`, `uv.md`, current
    `rem:wip-*` labels, last 2-3 lore entries, and recent agent reports.
 2. Create `<paper>/teams/<ts>-<team-slug>/`. Copy the prior `findings.md` and
-   `uv.md`, carry forward open `attempts.md` context, prune dead entries, add
-   uncaptured material, initialize `attempts.md`, and commit.
+   `uv.md`, prune dead entries, add uncaptured material, initialize a fresh
+   `attempts.md`, carry only open next-actions into `dispatch.md` or
+   `collation.md`, and commit.
 3. Pick the initial roster and one-ahead cadence. Write `dispatch.md` with the
    originating commit, roster, verifier queue if any, targets, exact in-scope
    files/lines/reports, protected surfaces, non-goals, fixed-harness criteria,
@@ -72,10 +73,12 @@ returns.
 1. Verify each returning agent deposited `agents/<agent-slug>/report.md` plus
    cited `scripts/` and `notes/`. Chase missing deposits via `send_input`; log
    unanswered gaps in `collation.md`.
-2. Walk each report. Process through `Claim lifecycle (git-as-archive)`: promote,
-   demote, file new UV-NNNs, append findings, reject with negative capture, or
-   mark "no action" in `collation.md`. Append `attempts.md` rows and refresh
-   frontier summaries. Commit per deposit where possible.
+2. Walk each report. Classify by `State ledger separation`: UV candidates to
+   `uv.md`, reusable lessons to `findings.md`, route outcomes to `attempts.md`,
+   synthesis/no-action notes to `collation.md`, and paper-ready text to
+   `paper-updates.md`. Process proof-state changes through `Claim lifecycle
+   (git-as-archive)`, refresh frontier summaries, and commit per deposit where
+   possible.
 3. Maintain the one-ahead pipeline: queue verifier work for stable claims that
    need checking, but immediately redelegate independent next attacks or
    explorations to the research lane. Wait only when the next move depends on

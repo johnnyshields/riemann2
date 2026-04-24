@@ -1,4 +1,4 @@
----
+﻿---
 name: research-resume
 description: Continue research-team from an existing <paper>/teams/<ts>-<slug>/ directory. Same adaptive roster, one-ahead verification pattern, briefing, capture, and provenance rules as research-team; the only difference is that it reuses the existing team dir and creates only new agent subdirs.
 ---
@@ -23,11 +23,15 @@ most blocking frontier from the existing dir without asking for approval.
 
 1. Resolve the existing team dir. It must be the working team snapshot for this
    cycle. Do not create a new team dir.
-2. Read `findings.md`, `uv.md`, `attempts.md` if present, `dispatch.md`,
-   `collation.md`, `paper-updates.md` if present, current `rem:wip-*` labels,
-   last 2-3 relevant lore entries, and every `agents/*/report.md`.
-3. Capture useful material stranded only in reports before dispatch: update
-   `findings.md`, `uv.md`, `attempts.md`, or `collation.md`.
+2. Read `findings.md`, `uv.md`, `attempts.md` if present, legacy
+   `attempts.tsv` if present, `dispatch.md`, `collation.md`,
+   `paper-updates.md` if present, current `rem:wip-*` labels, last 2-3
+   relevant lore entries, and every `agents/*/report.md`.
+3. Capture useful material stranded only in reports before dispatch via
+   `State ledger separation`: UVs to `uv.md`, reusable lessons to
+   `findings.md`, route outcomes to `attempts.md`, and no-action rationale to
+   `collation.md`. Treat `attempts.tsv` as legacy context; import only live
+   next-actions, not old rows.
 4. Initialize missing stubs only inside the existing team dir.
 5. Append `## Resume dispatch <timestamp>` to `dispatch.md` with the current
    commit, roster, verifier queue if any, targets, exact in-scope
@@ -63,9 +67,10 @@ Same as `research-team`, but all capture stays in the existing team dir.
 1. Verify each returning agent deposited `report.md` plus cited `scripts/` and
    `notes/`. Chase missing deposits via `send_input`; record unanswered gaps in
    `collation.md`.
-2. Walk each report. Process through `Claim lifecycle (git-as-archive)`,
-   update `attempts.md`, refresh `Frontier summaries`, and commit logical units
-   by named paths.
+2. Walk each report. Classify by `State ledger separation`, process proof-state
+   changes through `Claim lifecycle (git-as-archive)`, update `attempts.md`
+   only with route rows, refresh `Frontier summaries`, and commit logical
+   units by named paths.
 3. Maintain the one-ahead pipeline: queue verification for stable claims that
    need checking while independent research/exploration teammates continue the
    next attack. Wait only when the next move depends on the verifier's answer.

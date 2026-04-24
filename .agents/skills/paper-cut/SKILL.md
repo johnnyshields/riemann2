@@ -35,8 +35,8 @@ Append to `<paper>/cut-for-time.md`:
 ```
 
 If the passage contained a `rem:wip-*` label cited by a UV entry, update
-that UV's `Source in paper:` to the new home, or mark it `blocked` with
-an explanation.
+that UV's `Source in paper:` to the new home, or record the blocker in
+`collation.md` while keeping the UV live.
 
 Commit paper edit + `cut-for-time.md` update together, stage by name.
 Subject: `cut: <one-line of what moved>`.

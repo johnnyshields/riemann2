@@ -1,4 +1,4 @@
----
+﻿---
 name: research-attack
 description: Small-cycle variant of research-team for a focused push on one UV-NNN or rem:wip-* target. Starts with one or two gap-closers and adds lagging verification only when a stable claim is ready or risk demands it.
 ---
@@ -24,8 +24,9 @@ match. Optional `--double`.
 1. Read the most recent team dir's `findings.md` and `uv.md`, plus the paper
    region around the target's `rem:wip-*` label.
 2. Create `<paper>/teams/<ts>-attack-gap-<slug>/`. Copy prior `findings.md` and
-   `uv.md`, prune dead entries, add uncaptured material, initialize
-   `attempts.md`, and commit.
+   `uv.md`, prune dead entries, add uncaptured material, initialize a fresh
+   `attempts.md`, carry only target-relevant open next-actions into
+   `dispatch.md` or `collation.md`, and commit.
 3. Write `dispatch.md` with the originating commit, target, current
    baseline/frontier, exact in-scope files/lines/reports, protected surfaces,
    routes, verifier queue if any, non-goals, fixed-harness criteria,
@@ -57,9 +58,9 @@ lemmas, no new conjectures outside scope.
 
 1. Verify every `agents/<slug>/report.md` plus cited `scripts/` and `notes/`
    exists; chase missing deposits via `send_input`.
-2. Walk each report. Refine the target UV entry in this team dir's `uv.md`, file
-   new UV candidates, add findings, append `attempts.md` rows, and refresh
-   `collation.md`.
+2. Walk each report. Classify by `State ledger separation`: refine or file UVs,
+   append only reusable lessons to `findings.md`, log route outcomes in
+   `attempts.md`, and put synthesis/no-action rationale in `collation.md`.
 3. Maintain one-ahead flow: send independent next attacks to gap-closers while
    any verifier checks the previous stable claim. Wait only when the next attack
    depends on that check.

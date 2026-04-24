@@ -14,7 +14,7 @@ this file.
 | `<paper>/teams/YYYYMMDD-HHMMSS-<team-slug>/` | Per-dispatch team dir. `<paper>` \(\in\) `paper \| grh \| quantum \| ...`. `<team-slug>` typically encodes intent (`attack-gap-uv017-mixed4pt`, `audit-sec3`, `verify-tau`). |
 | `<paper>/teams/.../findings.md` | In-cycle knowledge base (Structural / Negative / Goodies / Open-gaps). \(\le 200\) lines. Pasted in full into every delegation in that cycle. |
 | `<paper>/teams/.../uv.md` | In-cycle UV ledger (markdown). UV-NNN entries ("UV" = "unverified") linked to `rem:wip-*` labels in the paper. UV-NNN is globally unique across cycles. |
-| `<paper>/teams/.../attempts.md` | Autoresearch route ledger. One row per substantial route with `keep` / `discard` / `crash`, evidence, and next action. |
+| `<paper>/teams/.../attempts.md` | Mechanical route ledger. One row per substantial route with `keep` / `discard` / `blocked` / `terminal` / `crash`, evidence, action, and one-line reason. |
 | `<paper>/teams/.../paper-updates.md` | Team-lead-authored staged edits for `<paper>/<main>.tex`. Created when the team has paper-ready changes; applied by the coordinator then deleted or archived. |
 | `<paper>/teams/.../agents/YYYYMMDD-HHMMSS-<agent-slug>/` | Per-agent work dir — nested inside the team dir. Each agent writes its own report, scripts, and notes here. |
 | `lore/` | Workflow plans, syntheses, decisions. Permanent. |
@@ -32,6 +32,34 @@ lazy-created on first use. Not authoritative — git log is.
 Canonical paper paths live at `C:\workspace\riemann2\<paper>\<main>.tex`
 (WSL `/mnt/c/workspace/riemann2/<paper>/<main>.tex`). Each paper is a
 monolithic `amsart` with a frozen macro namespace.
+
+## State ledger separation
+
+Keep team-dir state files non-overlapping:
+
+- `uv.md` is the live proof-obligation ledger: precise missing
+  sub-statements, open `rem:wip-*` obligations, dependencies, and promotion
+  conditions. It is not route history.
+- `findings.md` is the briefable knowledge base: durable Structural /
+  Negative / Goodie / Open-gap bullets that future agents should see. It is
+  not a per-attempt log and stays at briefing size.
+- `attempts.md` is the mechanical route ledger for the current cycle. It
+  records what was tried, by whom, against which target, with status,
+  evidence, action, and the one-line reason. It prevents blind retries; it is
+  not authoritative proof state and is not pasted wholesale into briefings.
+- `collation.md` is the team-lead narrative: synthesis, no-action rationales,
+  rolling verifier queue, one-ahead research lane, and decisions as reports
+  land. It may summarize `attempts.md`, but does not replace `uv.md` or
+  `findings.md`.
+- `paper-updates.md` is staged paper text only.
+
+Classify every material signal from an agent report into the narrowest live
+surface: missing proof obligation -> `uv.md`; reusable lesson -> `findings.md`;
+route outcome -> `attempts.md`; synthesis or no-action rationale ->
+`collation.md`; paper-ready edit -> `paper-updates.md`. If one report produces
+several signals, file each one in the right place with the same provenance.
+Legacy `attempts.tsv` is read-only context when resuming old teams; new and
+resumed work uses `attempts.md`.
 
 ## Dispatch
 
@@ -157,10 +185,11 @@ manually interrupts.
    audit, a synthesis. Default to `research-attack` over `research-team`
    per `Dispatch`.
 3. Dispatch via the `Dispatch selector`. Brief per `Briefing rule`.
-4. Collate returns as they land. Queue verification only for claims that need
-   it, keep research agents one step ahead when their next move is independent,
-   and promote / demote / quarantine / reject per `Claim lifecycle (git-as-archive)`.
-   Commit by logical unit; auto-push per `Git workflow`.
+4. Collate returns as they land. Classify each material signal per `State
+   ledger separation`, queue verification only for claims that need it, keep
+   research agents one step ahead when their next move is independent, and
+   promote / demote / quarantine / reject per `Claim lifecycle
+   (git-as-archive)`. Commit by logical unit; auto-push per `Git workflow`.
 5. Go to 1.
 
 **Decide without asking:** which UV, which explorer topic, roster size,
@@ -291,7 +320,7 @@ Every multi-agent dispatch creates one team dir under the relevant paper:
 ├── uv.md                        — in-cycle UV ledger, markdown (`Capture before shutdown, forward-carry at dispatch` forward-carried + updated)
 ├── paper-updates.md             — team-lead staged edits for <main>.tex (optional, created when ready)
 ├── dispatch.md                  — team-lead brief, roster, non-goals
-├── attempts.md                  — route ledger: ts, agent, target, route, decision, evidence, next
+├── attempts.md                  — route ledger: agent, target, route, status, evidence, action, reason
 ├── collation.md                 — team-lead synthesis as reports land
 ├── chat.md                      — transcript backup (chat-backup skill)
 ├── scripts/                     — team-lead scripts, if any
@@ -313,22 +342,23 @@ legible from the filesystem.
 `findings.md` and `uv.md` in each team dir are the authoritative state
 for that cycle. They start as forward-carries from the prior team dir
 (`Capture before shutdown, forward-carry at dispatch`) and evolve as reports land. `attempts.md` is the run
-ledger for the cycle. It contains a markdown attempts table plus a frontier
-summary:
+ledger for the cycle. It contains a markdown attempts table plus a short
+frontier summary. Do not duplicate `uv.md` entries or `findings.md` bullets
+here; cite them by id or path and record the attempted route:
 
 ```
 # Attempts
 
-| Agent | Target | Claim / route | Status | Evidence | Action | Description |
+| Agent | Target | Route | Status | Evidence | Action | Reason |
 |---|---|---|---|---|---|---|
 
 ## Frontier summaries
 
 - **Current best:** <sharpest target / best evidence / strongest obstruction>
-- **Keep:** <routes worth carrying forward>
-- **Discard:** <scoped negatives that should not be retried unchanged>
+- **Verifier queue:** <stable deposits waiting on adversarial/source checks>
+- **Research lane next:** <highest-leverage independent next move>
+- **Discarded do-not-retry:** <scoped negatives that should not be repeated>
 - **Blocked:** <coordinator actions or missing source checks>
-- **Next:** <highest-leverage next move>
 ```
 
 Periodically summarize the frontier in `collation.md`: total attempts,
@@ -385,7 +415,7 @@ across all `teams/*/uv.md`) + 1` when filing a new one.
 - **Advance / discard routes**: a route advances only if it sharpens a target,
   closes a substatement, produces a reusable negative, improves evidence, or
   reduces dependency depth. Otherwise mark it `discard` in `attempts.md`; do
-  not let stale failed routes pollute `findings.md`.
+  not let stale failed routes pollute `findings.md` or duplicate `uv.md`.
 - **Adversarial pass is non-negotiable** before any proof-state change.
 - **Promote**: edit paper (directly, or stage via `paper-updates.md`)
   AND remove the UV / findings entry from the team dir's `uv.md` /
@@ -414,11 +444,11 @@ cycle's briefing doesn't see it. Two mechanics prevent this.
 **Capture before shutdown.** Before closing, replacing, or abandoning a team,
 the team lead walks
 *every* `agents/<slug>/report.md` in the cycle and processes each claim
-through `Claim lifecycle (git-as-archive)` — promote, demote, file a new UV-NNN in the team dir's
-`uv.md`, add a bullet to `findings.md`, log a negative result, or
-explicitly note "no action: reason X" in `collation.md`. Default is
-capture, not archive. Material left only in an agent report is invisible
-to the next briefing.
+through `Claim lifecycle (git-as-archive)` and `State ledger separation`:
+promote, demote, file a new UV-NNN in the team dir's `uv.md`, add a reusable
+bullet to `findings.md`, log the route in `attempts.md`, or explicitly note
+"no action: reason X" in `collation.md`. Default is capture, not archive.
+Material left only in an agent report is invisible to the next briefing.
 
 Process reports as they land, not in an end-of-cycle batch. `Git workflow` already
 asks for per-deposit commits; the capture edit (UV append, findings
@@ -437,10 +467,12 @@ agents:
 1. Create the new team dir with its timestamp and slug.
 2. Copy the most recent team dir's `findings.md` and `uv.md` into the
    new team dir.
-3. Initialize `attempts.md` with the header row. Carry forward only open
-   next-actions from the prior `attempts.md` into `dispatch.md` or
-   `collation.md`; do not bulk-copy stale discarded routes into the new
-   live ledger.
+3. Initialize a fresh `attempts.md` with the header row and empty frontier
+   summary. Carry forward only open next-actions from the prior `attempts.md`
+   into `dispatch.md` or `collation.md`; do not bulk-copy old route rows into
+   the new live ledger. If resuming a legacy team with `attempts.tsv`, import
+   only live/open next-actions or cite the TSV as legacy context; do not
+   maintain parallel ledgers.
 4. Prune dead entries (closed UVs, resolved findings). Keep the file
    briefing-size (≤ 200 lines for `findings.md`). This is the team
    lead's active judgment call — no skill needed.

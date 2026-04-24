@@ -19,6 +19,9 @@
 | Sartre | UV-016 | Completed-Hadamard `B=0` is valid only with explicit completed normalization | keep | `agents/20260424-183416-verifier-slot-skeleton/report-source-normalization-audit.md` | draft theorem wording | Must state real-part projection, edge exclusions, completed/raw separation, and no double-counting before promotion. |
 | Beauvoir | UV-016 | Davenport gives strong OCR locators for completed-\(L\) and Hadamard inputs, but clean-copy citations remain missing | keep | `agents/20260424-183416-gap-compact-regularization/report-textbook-citation-pass.md` | clean-copy citation check | Citation burden narrowed to exact page/equation checks in Davenport or replacement textbook references. |
 | coordinator | UV-016 | Staged completed-source theorem draft with raw-bookkeeping remark | keep | `paper-updates.md` | final wording and citation review | Draft includes `B_chi,comp^pair=0`, real-part projection, edge exclusions, and raw/completed separation; not promoted. |
+| Sartre | UV-016 | Staged theorem is close but first draft had multiplicity wording double-count risk | keep | `agents/20260424-183416-verifier-slot-skeleton/report-paper-updates-audit.md` | apply wording fixes | Sign, derivative bridge, convergence, scope, and raw/completed split are right; fix multiplicity convention, real `C^1` phase, and `D_chi` projection sentence. |
+| coordinator | UV-016 | Applied Sartre's three wording fixes to staged theorem draft | keep | `paper-updates.md`; `agents/20260424-183416-verifier-slot-skeleton/report-paper-updates-audit.md` | final verifier pass | The staged draft now uses distinct zeros plus `m_rho`, real `C^1` phase, and explicit `D_chi` real/projection wording. |
+| Beauvoir | UV-016 | DLMF plus standard Hadamard theorem is acceptable citation fallback for working draft | keep | `agents/20260424-183416-gap-compact-regularization/report-citation-fallback-plan.md` | final citation wording | Clean Davenport is not a hard working-draft blocker if order one is derived from DLMF and Stirling; final bibliography upgrade remains open. |
 
 ## Frontier summaries
 
@@ -43,5 +46,6 @@
   UV-017 lacks paired symmetric normal form, value-parameter holomorphy, stable
   local positivity, exact freeze rules, and source-to-slot coefficient
   identification.
-- **Next:** perform clean-copy textbook citation check and final wording review
-  on `paper-updates.md` before any promotion.
+- **Next:** run one final wording verifier pass on the patched
+  `paper-updates.md` and finish the citation fallback/clean-copy decision
+  before any promotion.

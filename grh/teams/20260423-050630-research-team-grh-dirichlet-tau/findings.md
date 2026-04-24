@@ -82,22 +82,29 @@ is the supplied team dir unless another path is named.
   input block: parity-normalized `Lambda(s,chi)`, entire order-one completed
   functions, paired self-dual product, analytic zero multiplicity, genus-one
   Hadamard/log-derivative regularization, and
-  `sum m_rho |rho|^{-2}<infty`. The remaining source issue is clean-copy
-  bibliographic precision, not a new analytic sublemma: Davenport chapters 9,
-  11, 12, and 17 give strong OCR locators, but exact page/equation references
-  must be checked against a clean copy or replaced by Montgomery-Vaughan or
-  another stable textbook before paper promotion. Provenance:
+  `sum m_rho |rho|^{-2}<infty`. For a working-paper draft, Beauvoir's fallback
+  citation plan permits stable DLMF \(25.15\) for Dirichlet facts, DLMF
+  \(5.11\) plus a short derivation for order one, and a standard
+  complex-analysis Hadamard theorem; clean Davenport/Montgomery-Vaughan
+  references remain a bibliography upgrade rather than a hard draft blocker.
+  Provenance:
   `agents/20260424-183416-gap-compact-regularization/report-source-audit.md`,
   `agents/20260424-183416-gap-compact-regularization/notes/source_audit_standard_inputs.md`,
-  `agents/20260424-183416-gap-compact-regularization/report-textbook-citation-pass.md`.
+  `agents/20260424-183416-gap-compact-regularization/report-textbook-citation-pass.md`,
+  `agents/20260424-183416-gap-compact-regularization/report-citation-fallback-plan.md`.
 - **A completed-source theorem draft is staged, not promoted.**
   `paper-updates.md` now contains a proposed completed-Hadamard source package
   with `B_chi,comp^pair=0`, explicit real-part projection, edge exclusions, and
-  a separate raw `L`-factor bookkeeping remark. It remains citation-blocked and
-  must not be applied to a canonical paper until the clean-copy citation check
-  and a final wording review are done. Provenance:
+  a separate raw `L`-factor bookkeeping remark. Sartre's wording audit found a
+  multiplicity double-counting risk in the first draft; the staged text now
+  uses distinct completed zeros with analytic multiplicity supplied by
+  `m_rho`, declares the boundary phase real `C^1`, and adds the realness /
+  projection sentence for `D_chi`. It remains citation-blocked and must not be
+  applied to a canonical paper until clean-copy citations and final wording
+  review are done. Provenance:
   `paper-updates.md`,
-  `agents/20260424-183416-verifier-slot-skeleton/report-source-normalization-audit.md`.
+  `agents/20260424-183416-verifier-slot-skeleton/report-source-normalization-audit.md`,
+  `agents/20260424-183416-verifier-slot-skeleton/report-paper-updates-audit.md`.
 - **Tau is a self-dual phase-channel stress test, not the first exact `S(m)`
   target.** Tau has only a conditional compact source-package blueprint; paired
   Dirichlet remains sharper for exact source-plus-slot work. Provenance:

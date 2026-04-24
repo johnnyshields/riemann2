@@ -232,3 +232,21 @@ book citations.
 Capture action: recorded the staged draft in `findings.md`, UV-016, and
 `attempts.md`. Do not promote until clean-copy citations and final wording
 review are complete.
+
+## Sartre Paper-Updates Audit 20260424
+
+Report:
+`agents/20260424-183416-verifier-slot-skeleton/report-paper-updates-audit.md`.
+
+Verdict: keep, still open. Sartre found the staged theorem mathematically close
+to promotion modulo citations. Signs, derivative bridge, compact convergence,
+edge exclusions, primitive nonprincipal scope, raw/completed separation, and
+nonclaim of UV-017/GRH are all in the right shape. The blocking wording issue
+was multiplicity: the first draft said `Z(Xi_chi)` was a zero multiset while
+also multiplying by `m_rho`, which could double-count. Two smaller fixes were
+also requested: state the boundary phase is real `C^1`, and add a
+realness/projection sentence for `D_chi`.
+
+Capture action: patched `paper-updates.md` with the three requested wording
+fixes, then refined `findings.md`, UV-016, and `attempts.md`. A final wording
+pass is still needed before promotion.

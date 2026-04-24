@@ -18,16 +18,21 @@
   `agents/20260424-183416-explorer-background-multiplicity/report-background-split.md`;
   `agents/20260424-183416-gap-compact-regularization/report-source-audit.md`;
   `agents/20260424-183416-verifier-slot-skeleton/report-source-normalization-audit.md`;
-  `agents/20260424-183416-gap-compact-regularization/report-textbook-citation-pass.md`.
+  `agents/20260424-183416-gap-compact-regularization/report-textbook-citation-pass.md`;
+  `agents/20260424-183416-verifier-slot-skeleton/report-paper-updates-audit.md`;
+  `agents/20260424-183416-gap-compact-regularization/report-citation-fallback-plan.md`.
   Current role: immediate non-zeta frontier.
   Current reduction: compact zero-regularization is adversarially checked under
   standard primitive nonprincipal completed-function inputs; the current
   accepted subclaim is completed-Hadamard normalization with
   `B_chi,comp^pair=0`, provided `S_chi,comp^pair` sums all completed zeros and
   raw gamma/trivial-zero/pole terms are kept in a separate remark. A staged
-  draft exists in `paper-updates.md`. Remaining burden: replace OCR/web source
-  locators with exact clean-copy textbook citations and run final wording
-  review before promotion.
+  draft exists in `paper-updates.md` and has been patched after Sartre's
+  multiplicity/realness wording audit. Citation burden is reduced for a
+  working-paper draft by the DLMF-plus-Hadamard fallback stack; final textbook
+  citations remain a bibliography upgrade. Remaining burden: run final wording
+  review and then decide whether to promote as a working source package or keep
+  waiting for clean-copy textbook citations.
 
 - **UV-017** - exact paired local `S(m)`-slot realization.
   Prove that the scalar `S_chi^pair(m)=q_chi^pair(m)-B_chi^pair(m)` from
