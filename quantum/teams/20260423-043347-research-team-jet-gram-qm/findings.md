@@ -92,6 +92,11 @@ Source anchor:
 - In finite dimension, that package is complete up to ambient unitary
   equivalence: the endpoint dimensions together with the principal-angle
   multiset classify the subspace pair.
+- For fixed finite-dimensional endpoint subspaces, every orthonormal-frame
+  comparison matrix is in the biunitary orbit \(A\mapsto L^*AR\) of any one
+  representative. Rectangular SVD classifies that orbit by the singular values,
+  which are the principal-angle cosines. A sorted diagonal SVD is an orbit
+  normal form, not an endpoint-selected comparison matrix.
 - On the current qutrit/quartit/Veronese benchmark families, this simple-spectrum
   corollary is genuinely usable on a nonempty open set; it is not just a formal
   edge case.
@@ -223,8 +228,6 @@ Source anchor:
 - A multiparameter covariant-jet hierarchy that yields a canonical ordered
   matrix/frame package, if such a package exists at all; the subspace-level
   hierarchy is now exact.
-- A principled transport/frame theorem strong enough to justify any
-  transport-independent matrix-valued two-point invariant beyond subspace data.
 - A sharper decision criterion for when `O_r` versus `A_r` is the physically or
   mathematically preferred object outside the current benchmark families.
 - A concrete worked model tying the projector/principal-angle invariants to a

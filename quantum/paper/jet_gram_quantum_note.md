@@ -419,6 +419,23 @@ nonzero-overlap sector, while \(|C|\) carries the principal-angle spectrum. This
 is the strongest exact operator-level transport presently justified, but it is
 still not a canonical full matrix package.
 
+More precisely, let \(\dim S_-=p\) and \(\dim S_+=q\), and let
+\(U_-:\mathbb C^p\to S_-\), \(U_+:\mathbb C^q\to S_+\) be orthonormal frame
+isometries. The comparison matrix
+\[
+A=U_-^*U_+
+\]
+is the matrix of \(C\) in these two frames. Replacing the endpoint frames by
+\(U_-L\) and \(U_+R\), with \(L\in U(p)\) and \(R\in U(q)\), changes the matrix
+exactly by \(A\mapsto L^*AR\), and every orthonormal-frame comparison matrix for
+the same pair arises in this way. For fixed \(p,q\), rectangular SVD classifies
+this biunitary orbit by the singular values of \(A\), including rank-deficient
+zeros and the forced rectangular zero rows or columns in a normal form. These
+singular values are exactly the principal-angle cosines. Thus a sorted diagonal
+SVD representative is only an orbit normal form carrying dimensions and
+principal angles; it is not an endpoint-selected comparison matrix, and zero
+singular sectors or rectangular padding do not select frames.
+
 On that nonzero-overlap sector, canonical principal frames exist from the
 subspace pair alone exactly when the nonzero spectrum is simple. In the simple
 case one gets canonical matched principal vectors up to phase/sign; in repeated
@@ -767,7 +784,11 @@ Safe claims:
    canonical transport-free principal-angle and projector-spectrum data.
 7. In finite dimension, the resulting principal-angle/operator package is
    complete up to ambient unitary equivalence.
-8. There are now explicit benchmark families on both the ambient `A_r` side and
+8. For fixed endpoint subspaces, all orthonormal-frame comparison matrices form
+   one biunitary orbit, classified by the singular values/principal-angle
+   cosines; an entrywise representative requires extra frame-selecting
+   structure.
+9. There are now explicit benchmark families on both the ambient `A_r` side and
    the value-channel-free `O_r` side where the surviving two-point data is not
    determined by overlap alone.
 
@@ -785,12 +806,9 @@ Unsafe claims, for now:
 1. Determine whether any multiparameter covariant-jet hierarchy admits a
    canonical ordered matrix/frame package beyond the already-safe subspace
    theorem.
-2. Determine whether any matrix-valued two-point object beyond principal-angle /
-   projector-spectrum data can be canonical without extra frame-selecting
-   structure.
-3. Clarify when `O_r` versus `A_r` is the right object outside the current
+2. Clarify when `O_r` versus `A_r` is the right object outside the current
    benchmark families.
-4. Go beyond the current exact unitary/Krylov and projector-test specializations
+3. Go beyond the current exact unitary/Krylov and projector-test specializations
    to a more natural dynamical or experimental model.
 
 ## Provenance
@@ -840,6 +858,8 @@ Unsafe claims, for now:
 - `quantum/teams/20260424-033611-attack-twist-family/reports/`
 - `quantum/teams/20260424-034240-attack-quotient/reports/`
 - `quantum/teams/20260424-054845-attack-cs-normal-form/reports/`
+- `quantum/teams/20260423-043347-research-team-jet-gram-qm/agents/20260424-183451-gap-biunitary-matrix-finality/report.md`
+- `quantum/teams/20260423-043347-research-team-jet-gram-qm/agents/20260424-183451-verifier-biunitary-finality/report.md`
 - `quantum/teams/20260424-032829-attack-saturation/reports/`
 - `quantum/teams/20260424-033611-attack-twist-family/reports/`
 - `quantum/teams/20260424-034240-attack-quotient/reports/`

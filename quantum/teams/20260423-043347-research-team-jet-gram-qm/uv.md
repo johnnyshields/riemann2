@@ -10,13 +10,6 @@ Current quantum-track open targets. Provenance is the open-problem block in
   closure can be positive under explicit natural extra hypotheses, or negative
   as a unitary-equivariant no-go with the exact surviving basis-free object.
 
-- **UV-012** - `quantum-open-endpoint-matrix-beyond-operator-package`
-  Decide whether any matrix-valued two-point object beyond principal-angle /
-  projector-spectrum / polar-operator data is canonical without extra
-  frame-selecting structure. A closure should either produce the object and its
-  invariance class, or prove that all frame comparison matrices lie in the
-  expected biunitary orbit with singular values as the complete invariant.
-
 - **UV-013** - `quantum-open-Ar-vs-Or-selection`
   Clarify when `O_r` versus `A_r` is the right object outside the current
   benchmark families. A closure should give a criterion, a scoped operational

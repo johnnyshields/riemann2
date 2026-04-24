@@ -71,3 +71,20 @@ Decision: promote UV-012 with scoped wording. The theorem closes the
 frame-comparison matrix question for data determined by the fixed subspace pair
 alone. It does not rule out matrices built from extra dynamical, transport,
 ordering, or symmetry-breaking structure.
+
+## Promotion - UV-012
+
+Promoted the verified theorem into
+`quantum/paper/jet_gram_quantum_note.md` after the cross-contraction/polar
+paragraph. The note now states the full biunitary-orbit classification for
+orthonormal-frame comparison matrices, including rectangular/rank-deficient
+normal-form caveats, and the safe-claims/open-problems list no longer treats the
+fixed-subspace endpoint matrix question as open.
+
+Updated `findings.md` with the confirmed orbit theorem and removed the matching
+missing frame/matrix bullet. Removed UV-012 from `uv.md`.
+
+Next move: use this theorem as leverage on UV-011. The remaining matrix problem
+is narrower: whether multiparameter covariant-jet structure adds a genuine
+natural frame/order beyond the already-safe subspace hierarchy, or whether the
+same frame-selection obstruction closes it negatively.
