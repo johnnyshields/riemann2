@@ -112,3 +112,21 @@ Capture action: corrected stale paired sign wording in
 `paper/dirichlet_paired_source_candidate.tex`, refined `findings.md`, UV-016,
 UV-021, `attempts.md`, and this collation. Next target is the explicit
 `B_chi^pair` background split in the verified convention.
+
+## Follow-Up Wave 20260424
+
+Queued:
+
+- Jason continues in
+  `agents/20260424-183416-explorer-background-multiplicity/` with
+  `report-background-split.md`: derive the explicit `B_chi^pair` background
+  split in the fixed-quotient, negative-exponent convention, or reduce it to
+  precise missing substatements.
+- Beauvoir continues in
+  `agents/20260424-183416-gap-compact-regularization/` with
+  `report-source-audit.md`: source-audit the standard primitive nonprincipal
+  completed-\(L\) inputs used by the compact edge-difference proof.
+
+Reason: these two lanes are independent. Jason attacks the remaining
+normalization/source identity content of UV-016, while Beauvoir hardens the
+source citations behind the convergence lemma Sartre accepted.
