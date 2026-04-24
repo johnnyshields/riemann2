@@ -32,6 +32,15 @@ Working forward-carry of the current open UV items relevant to the active queue.
   actual two-atom `\mathcal J_2^{(7)}` / `\mathfrak O_7` construction can be
   promoted.
 
+- **UV-023** — `rem:wip-parity-projective-factorization-collision-blow-up`
+  Claim: prove that the order-7 quotient component of the corrected-whitening
+  cross-effect has zero first collision derivative after source-weight
+  linearization, either because only the quadratic homogeneous transfer
+  `\mathcal T_2` contributes or because all `\mathcal T_{p\ge3}` terms are
+  quotient-invisible through order 7.
+  Current role: sharp subtarget of UV-022; required before the cross-effect
+  package can yield the `\delta^2\mathcal H_7^q` edge law for UV-010.
+
 - **UV-004** — `rem:wip-explicit-pointwise-bridge-good-patch-detector`
   Claim: the local detector either sees the same-tower source `r=q^{(7)}` or the explicit pointwise package is invisible.
   Current role: bridge/diagnostic theorem beneath the package theorem.

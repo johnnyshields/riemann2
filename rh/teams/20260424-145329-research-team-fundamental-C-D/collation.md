@@ -580,3 +580,7 @@ Captured takeaway: the gap-closer confirms the same split constructively. For a 
 - **Keep:** cross-effect package shape; `\mathcal T_2` quadratic behavior; bidegree `(1,1)` projection as the next positive target; free `P(m,\kappa)` adversarial model.
 - **Discard:** diagonal self-subtraction alone, unsourced off-diagonal/free-`P` counterterms, and promotion from the full nonlinear cross-effect without a filtration theorem.
 - **Next:** source-mine whether the paper proves `\mathcal T_{p\ge3}` quotient-invisibility in the septic component; if absent, file the first-collision derivative of the renormalized order-7 quotient cross-effect as the next UV subtarget.
+
+### UV-023 filed
+
+Filed UV-023 for the sharp subtarget exposed by the UV-022 v2 checks: prove zero first collision derivative for the order-7 quotient component of the corrected-whitening cross-effect after source-weight linearization. Equivalent positive routes are: only the quadratic homogeneous transfer `\mathcal T_2` contributes to the septic quotient channel, or all higher homogeneous transfers `\mathcal T_{p\ge3}` are quotient-invisible through order 7. This is required before UV-022 can supply the `\delta^2\mathcal H_7^q` edge law needed by UV-010.
