@@ -106,6 +106,17 @@ is the supplied team dir unless another path is named.
   `agents/20260424-183416-verifier-slot-skeleton/report-source-normalization-audit.md`,
   `agents/20260424-183416-verifier-slot-skeleton/report-paper-updates-audit.md`,
   `agents/20260424-183416-verifier-slot-skeleton/report-paper-updates-final-check.md`.
+- **UV-017 reduces to a unit-coordinate local normal-form lemma.** With the
+  staged completed source package, the remaining renormalization site is not
+  source sign, factor, or whitening linearization; it is the map from
+  `S_chi^pair(m)` to the local zeroth value coordinate `a`. If the paired local
+  jet chart uses `a=q_chi^pair(m)-B_chi^pair(m)` and freezes non-value
+  coordinates on the pure value path, the RH local algebra gives unit
+  coefficient. The missing proof is that the paired corrected blocks really
+  have this unit-coordinate chart, with holomorphy/whitening and scalar readout
+  checks. Provenance:
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/report.md`,
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/notes/coefficient_freeze_reduction.md`.
 - **Tau is a self-dual phase-channel stress test, not the first exact `S(m)`
   target.** Tau has only a conditional compact source-package blueprint; paired
   Dirichlet remains sharper for exact source-plus-slot work. Provenance:

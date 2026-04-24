@@ -303,3 +303,23 @@ Reason: UV-016 now has a verifier-cleared staged source theorem, but no
 canonical GRH promotion target. The next proof-state frontier is UV-017: the
 source scalar must be shown to be the pure local value parameter rather than a
 renormalized or upstairs-only surrogate.
+
+## Noether UV-017 Deposit 20260424
+
+Report:
+`agents/20260424-192025-gap-uv017-coefficient-freeze/report.md`.
+Note:
+`agents/20260424-192025-gap-uv017-coefficient-freeze/notes/coefficient_freeze_reduction.md`.
+
+Verdict: keep, not closed. Noether reduces UV-017 to a unit-coordinate local
+normal-form lemma. Given the staged UV-016 completed source package,
+`S_chi,comp^pair=q_chi^pair`; no extra scalar arises from source sign/factor or
+matrix whitening linearization. The remaining possible renormalization is the
+source-to-local coordinate map. If the paired local jet chart uses
+`a=q_chi^pair(m)-B_chi^pair(m)` and freezes all non-value coordinates on the
+pure value path, the RH local algebra gives the unit coefficient; if
+`a=c_chi(m)S_chi^pair(m)+O(S^2)`, the coefficient becomes `c_chi(m)`.
+
+Capture action: refined `findings.md`, UV-017, and `attempts.md`. Next move is
+an adversarial check of this reduction and a direct attack on the paired
+unit-coordinate jet chart.

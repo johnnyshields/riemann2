@@ -23,6 +23,7 @@
 | coordinator | UV-016 | Applied Sartre's three wording fixes to staged theorem draft | keep | `paper-updates.md`; `agents/20260424-183416-verifier-slot-skeleton/report-paper-updates-audit.md` | final verifier pass | The staged draft now uses distinct zeros plus `m_rho`, real `C^1` phase, and explicit `D_chi` real/projection wording. |
 | Beauvoir | UV-016 | DLMF plus standard Hadamard theorem is acceptable citation fallback for working draft | keep | `agents/20260424-183416-gap-compact-regularization/report-citation-fallback-plan.md` | final citation wording | Clean Davenport is not a hard working-draft blocker if order one is derived from DLMF and Stirling; final bibliography upgrade remains open. |
 | Sartre | UV-016 | Patched staged theorem is mathematically promotion-ready modulo citation quality | terminal | `agents/20260424-183416-verifier-slot-skeleton/report-paper-updates-final-check.md`; `paper-updates.md` | coordinator promotion decision | No wording or normalization blocker remains from verifier lane; UV-017 remains separate. |
+| Noether | UV-017 | Exact slot realization reduces to paired unit-coordinate local normal-form lemma | keep | `agents/20260424-192025-gap-uv017-coefficient-freeze/report.md`; `agents/20260424-192025-gap-uv017-coefficient-freeze/notes/coefficient_freeze_reduction.md` | adversarial verifier / attack unit-coordinate chart | If `a=S_chi^pair(m)` in the local jet chart, RH algebra gives unit coefficient; missing proof is that paired corrected blocks use that coordinate and no scalar readout renormalization. |
 
 ## Frontier summaries
 
@@ -47,6 +48,6 @@
   UV-017 lacks paired symmetric normal form, value-parameter holomorphy, stable
   local positivity, exact freeze rules, and source-to-slot coefficient
   identification.
-- **Next:** decide whether to promote the completed-Hadamard source package as
-  a working theorem using the DLMF/Hadamard fallback citation stack, or wait
-  for clean-copy Davenport/Montgomery-Vaughan citations.
+- **Next:** adversarially verify Noether's UV-017 reduction, then attack the
+  paired unit-coordinate jet chart directly from the RH finite-\(s\) block
+  formulas.
