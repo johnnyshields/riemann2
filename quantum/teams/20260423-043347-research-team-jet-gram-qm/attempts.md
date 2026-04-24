@@ -2,6 +2,7 @@
 
 | Agent | Target | Claim / route | Status | Evidence | Action | Description |
 |---|---|---|---|---|---|---|
+| `20260424-183451-gap-biunitary-matrix-finality` | UV-012 | Prove fixed-subspace frame comparison matrices are exactly one biunitary orbit; singular values/principal angles are complete orbit data. | running | Dispatch brief in `dispatch.md`; target recovered from no-report `20260424-040334-attack-biunitary-classification` subdir. | Await report, then adversarial verification. | This is the focused matrix-finality route selected after the deep read. |
 
 ## Frontier summaries
 
