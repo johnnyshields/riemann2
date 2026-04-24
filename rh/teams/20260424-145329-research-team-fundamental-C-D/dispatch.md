@@ -62,11 +62,11 @@ Primary queue remains `UV-002`-first, but this cycle is a fundamental attack on 
 
 ## Briefing discipline
 
-Every agent gets the full `findings.md`, the relevant individual UV entry only if it is attacking or verifying that UV, the report schema, this non-goal list, its own deposit directory, and the writing discipline from `CLAUDE.md` §4.
+Every agent gets the full `findings.md`, the relevant individual UV entry only if it is attacking or verifying that UV, the report schema, this non-goal list, its own deposit directory, and the writing discipline from `AGENTS.md`.
 
 ## Long-running agent policy
 
-Keep these TeamCreate agents alive and re-use the same named agents for follow-up prompts while their context is fresh. Do not shut them down after first reports unless the cycle is terminal or the coordinator explicitly ends the team. Verifiers should wait for research deposits, then remain available for second-pass attacks on revised claims.
+Keep these Codex subagents alive and re-use the same named agents for follow-up prompts while their context is fresh. Do not shut them down after first reports unless the cycle is terminal or the coordinator explicitly ends the team. Verifiers should check stable prior deposits while independent research lanes keep moving.
 
 Every report must use exactly these fields:
 
@@ -160,7 +160,7 @@ Do not create a sibling team dir. New deposits go only under
 ### Protected surfaces
 
 Agents must not edit `rh/proof_of_rh.tex`, `findings.md`, `uv.md`,
-`attempts.tsv`, `attempts.md`, `collation.md`, `dispatch.md`, `CLAUDE.md`,
+`attempts.tsv`, `attempts.md`, `collation.md`, `dispatch.md`, `AGENTS.md`,
 `lore/`, `.agents/`, or another agent's directory. Each new agent owns only its
 assigned `agents/20260424-165509-<slug>/` directory.
 
@@ -247,7 +247,7 @@ New deposits go only under `agents/20260424-173642-*/`.
 ### Protected surfaces
 
 Agents must not edit `rh/proof_of_rh.tex`, `findings.md`, `uv.md`,
-`attempts.tsv`, `attempts.md`, `collation.md`, `dispatch.md`, `CLAUDE.md`,
+`attempts.tsv`, `attempts.md`, `collation.md`, `dispatch.md`, `AGENTS.md`,
 `lore/`, `.agents/`, or another agent's directory. Each agent owns only its
 assigned `agents/20260424-173642-<slug>/` directory.
 
@@ -322,3 +322,52 @@ Verifier scope:
 Both verifiers own only their assigned `agents/20260424-182546-<slug>/`
 directory. They must not edit team ledgers, `rh/proof_of_rh.tex`, `lore/`,
 `.agents/`, or another agent directory.
+
+## UV-022 cross-effect continuation 20260424-184643
+
+Base commit: `573a1690e1508cde25bbcbfbb5d70b51ed145e98`.
+
+Current target:
+
+- **UV-022** -- `rem:wip-parity-projective-factorization-collision-blow-up`.
+  Define an invariant source-weight-linear input for corrected blocks through
+  order 7 and an analytic corrected-whitening cross-effect package with exact
+  one-amplitude collapse; then prove its order-7 quotient component is
+  collision-vanishing in the UV-010 chart.
+
+Current frontier:
+
+- The good-patch determinant chart for UV-010 is verified.
+- Direct promotion of one-pair `K_1` / `\Delta_7` / centered `D_2` to the
+  actual two-atom quotient Hessian is rejected.
+- The whitening-side tangent `\mathcal T_1` exists, but the two-atom interaction
+  lives in the analytic cross-effect
+  `\mathcal T(a_1X_1+a_2X_2)-\mathcal T(a_1X_1)-\mathcal T(a_2X_2)`.
+- The cross-effect has exact one-amplitude collapse and an `a_1a_2` channel,
+  but its diagonal quotient component need not vanish. That is the immediate
+  obstruction.
+
+Roster:
+
+1. `gap-closer-UV022-diagonal-counterterm`: source-mine or construct a
+   same-reduced-image germ, collision-functoriality lemma, polarization
+   identity, or source-honest diagonal counterterm that kills the order-7
+   quotient diagonal cross-effect without assuming downstream merger
+   normalization.
+2. `verifier-adversarial-UV022-cross-effect`: pressure-test any such
+   counterterm or vanishing claim against the free `a_1a_2\delta^2P(m,\kappa)`
+   model, the `A_5^{\mathfrak f}=0` rank jump, scalar-only routes, and hidden
+   use of diagonal merger.
+
+In-scope sources:
+
+- `rh/proof_of_rh.tex:2415-2553` corrected-whitening transfer.
+- `rh/proof_of_rh.tex:11888-12189` source criterion and diagonal merger input.
+- `rh/proof_of_rh.tex:12192-12255` failure of naive source-summed routes.
+- `rh/proof_of_rh.tex:12385-12510` collision-cancellation chart.
+- Agent reports under `agents/20260424-183418-*`, `20260424-183713-*`,
+  `20260424-184004-*`, and `20260424-184202-*`.
+
+Protected surfaces are unchanged: agents write only to their own
+`agents/20260424-184643-<slug>/` directory and must not edit team ledgers,
+`rh/proof_of_rh.tex`, `lore/`, `.agents/`, or sibling agent dirs.
