@@ -23,6 +23,18 @@ Three-bin recovery:
 
 Resume target: UV-016 first, with a one-ahead verification lane on UV-017.
 
+Live roster:
+
+- Beauvoir (`019dbeda-2b9e-7a53-89c1-2218ff892545`) attacks UV-016 compact
+  regularization in
+  `agents/20260424-183416-gap-compact-regularization/`.
+- Jason (`019dbeda-2c40-7ed0-a5ba-a9076f939fc7`) explores UV-016 unified
+  background and multiplicity bookkeeping in
+  `agents/20260424-183416-explorer-background-multiplicity/`.
+- Sartre (`019dbeda-2d23-7da1-adf1-a557dccad97b`) adversarially verifies the
+  UV-017 slot skeleton in
+  `agents/20260424-183416-verifier-slot-skeleton/`.
+
 Report-processing note: no old agent deposit is being rewritten. The live
 briefing state is now captured in `findings.md`, `uv.md`, and `attempts.md`;
 old report paths remain the provenance.

@@ -12,10 +12,13 @@ create a sibling team dir.
 
 Roster:
 
-- `agents/20260424-183416-gap-compact-regularization/` - UV-016 gap-closer.
-- `agents/20260424-183416-explorer-background-multiplicity/` - UV-016
+- Beauvoir (`019dbeda-2b9e-7a53-89c1-2218ff892545`):
+  `agents/20260424-183416-gap-compact-regularization/` - UV-016 gap-closer.
+- Jason (`019dbeda-2c40-7ed0-a5ba-a9076f939fc7`):
+  `agents/20260424-183416-explorer-background-multiplicity/` - UV-016
   source/bookkeeping explorer.
-- `agents/20260424-183416-verifier-slot-skeleton/` - UV-017 adversarial
+- Sartre (`019dbeda-2d23-7da1-adf1-a557dccad97b`):
+  `agents/20260424-183416-verifier-slot-skeleton/` - UV-017 adversarial
   verifier for the current paired slot skeleton.
 
 Verifier queue: the UV-017 skeleton in
