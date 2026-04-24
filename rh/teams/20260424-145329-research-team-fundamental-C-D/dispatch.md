@@ -672,3 +672,36 @@ Ground-truth checks:
 
 Protected surfaces are unchanged: agents write only to
 `agents/20260424-195414-<slug>/`.
+
+## UV-026 cubic gauge attack 20260424-200220
+
+Base commit: `b906e4a`.
+
+Current target: UV-026. For the actual source-linear corrected-whitening matrix
+cross-effect, test whether every non-`(1,1)` cubic finite-order source term
+`T` of type `(1,1,5)` satisfies
+
+`B_7^{\mathfrak f}(T)\in\mathbf C A_5^{\mathfrak f}(m)`.
+
+Roster:
+
+1. `gap-closer-UV026-cubic-source-terms`: isolate the actual algebraic sources
+   of cubic `(1,1,5)` terms in the pre-`\Phi_K` corrected-whitening expansion,
+   using the newly staged UV-025 tagged source-block definition as a candidate
+   input. Decide whether each term is a one-pair `K_5` shadow, a commutator
+   killed by `\pi_{\mathfrak f}` modulo `A_5^{\mathfrak f}`, or still live.
+2. `verifier-adversarial-UV026-cubic-witness`: keep the formal witness harness
+   from `agents/20260424-194309-gap-closer-UV024-A5-gauge/` and reject any
+   proof that uses scalar hiding, determinant scalarization, swap symmetry, or
+   one-pair gauge law without actual fixed-sector proportionality.
+
+Ground-truth checks:
+
+- The target is actual-package cubic gauge, not formal source support alone.
+- Proportionality to `A_5^{\mathfrak f}(m)` is required.
+- `\Phi_K` invisibility is not evidence for quotient-gauge.
+- A negative return must state whether UV-026 is a genuine obstruction or
+  still only a formal countermodel awaiting actual-package coefficients.
+
+Protected surfaces are unchanged: agents write only to
+`agents/20260424-200220-<slug>/`.
