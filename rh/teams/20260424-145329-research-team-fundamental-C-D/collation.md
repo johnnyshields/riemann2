@@ -817,3 +817,17 @@ Captured takeaway: no actual `L_1YR_1` fixed-sector coefficient vector is availa
 - **Keep:** determinant test only after explicit fixed-sector vector exists.
 - **Discard:** accepting scalar invisibility or source support without vector data.
 - **Next:** wait for coefficient lane to produce or reduce the missing vector.
+
+### `20260424-200718-gap-closer-UV026-L1YR1-coefficient/report.md`
+
+Signal: UV-026 `L_1YR_1` coefficient reduction, keep.
+
+Captured takeaway: current sources do not compute the actual pre-`\Phi_K` fixed-sector coefficient for `L_1YR_1`. The smallest missing object is the grade `1/5/1` product data
+`L_{-,1}^{[1]}Y_1^{[5]}R_{+,2}^{[1]}+L_{-,1}^{[1]}Y_2^{[5]}R_{+,1}^{[1]}+L_{-,2}^{[1]}Y_1^{[5]}R_{+,1}^{[1]}` and the swapped tag expression. The script `agents/20260424-200718-gap-closer-UV026-L1YR1-coefficient/scripts/l1yr1_formal_gauge_check.py` reruns with determinant `1` for the formal witness `(3,7)` against `A_5=(2,5)`, so matrix/Loewner algebra alone cannot prove the gauge claim.
+
+### Frontier after `L_1YR_1` coefficient reduction
+
+- **Current best:** `L_1YR_1` is reduced to actual grade `1/5/1` source-tag coefficient extraction before `\Phi_K`.
+- **Keep:** the exact determinant acceptance test from the verifier and the formal algebra-only rejection from the gap-closer.
+- **Discard:** any UV-026 proof that skips the actual fixed-sector vector or argues only after scalarization.
+- **Next:** redeploy a source/coefficient lane on the actual grade `1/5/1` matrices; keep a verifier ready only when a concrete vector or cancellation theorem appears.

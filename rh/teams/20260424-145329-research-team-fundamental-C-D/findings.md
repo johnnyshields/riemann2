@@ -65,22 +65,13 @@ Active, compact knowledge base shared with every delegated agent.
   (`proof_of_rh.tex` lines 16116--16225, 26134--26299), plus recent bridge audits.
   Do-not-retry: generic local-pointwise detector nonvanishing from the present
   same-tower formulas alone without a new provenance-sensitive theorem.
-- **Current reduced-package blow-up hypotheses do not force diagonal collapse.**
-  Provenance: prior-cycle `agents/20260424-133500-C-failure/report.md`, current
-  `agents/20260424-145500-explorer-prior-treasure-hunt/report.md`, formal
-  countermodel `agents/20260424-160000-gap-closer-C-fiber-selection/report-cfs23-followup.md`
-  with script `scripts/formal_countermodel.py`, and actual-formula inspection
-  `agents/20260424-160000-gap-closer-C-fiber-selection/report-cfs2-actual-formulas.md`
-  with script `scripts/centered_delta_kappa_check.py`. Do-not-retry: deriving
+- **Reduced-package blow-up hypotheses do not force diagonal collapse.**
+  Provenance: prior/current C reports plus CFS2/CFS23 scripts and source/adversarial
+  reviews under `agents/20260424-160000-*`. Do-not-retry: deriving
   `\widetilde\Psi^{\corr}_{\mathrm{red}}(m,\kappa,0)=\widehat\Psi(m)` from fixed
-  codomain, `\mathcal R`, analyticity, swap-evenness, scalar normalization, or a
-  central-slope match alone; the toy package with `B_3=Z+\varepsilon\kappa` satisfies
-  those formal properties, and the displayed order-7 formula language leaves a
-  C-visible determinant slot `\det(R,A_5^{\mathfrak f})` / `D_2=2\kappa(AV_1-BU_1)`
-  unless an actual diagonal-merger or quotient-defect theorem kills it. Verified by
-  `agents/20260424-160000-verifier-adversarial-CDE/report-cfs2-actual-formula-review.md`
-  and
-  `agents/20260424-160000-verifier-source-CDE/report-cfs2-actual-formulas-source-check.md`.
+  codomain, `\mathcal R`, analyticity, swap-evenness, scalar normalization, or
+  central-slope alone; formal/actual checks leave a C-visible determinant slot
+  until an actual diagonal-merger or quotient-defect theorem kills it.
 - **Cubic/quintic edge laws plus the abstract source criterion do not determine the septic quotient edge.**
   Provenance:
   `agents/20260424-165509-gap-closer-C-R-determinant-control/report-edge-law-followup.md`
@@ -165,7 +156,7 @@ Active, compact knowledge base shared with every delegated agent.
   `\mathcal J_2^{(7)}` / `\mathfrak O_7`.
 - **UV-023/UV-024 source-bidegree quotient package is missing from current source.**
   Provenance: UV-023/UV-026 reports in `agents/20260424-190438-*` through
-  `agents/20260424-194928-verifier-source-UV025-package-language/report.md`.
+  `agents/20260424-200718-gap-closer-UV026-L1YR1-coefficient/report.md`.
   Usage: `(1,1)` projection kills `\mathcal T_{p\ge3}` formally, and the best
   `L_h` candidate is the pre-whitening pair-kernel-linear derivative supported
   by one-pair formulas. The best `Q_7^q` target is
@@ -173,8 +164,9 @@ Active, compact knowledge base shared with every delegated agent.
   UV-025 has source/adversarial verification for a guarded `paper-updates.md`
   source-block definition. UV-026 reduces to seven cubic pre-`\Phi_K` whitening
   families; current source only gives gauge/vanishing once a term is identified
-  as one-pair `K_5`, `K_3`, or pure. Actual `B_7^{\mathfrak f}` coefficients
-  must be computed or source-classified.
+  as one-pair `K_5`, `K_3`, or pure. First target `L_1YR_1` needs the actual
+  grade `1/5/1` fixed-sector matrices for the three ordered source-tag products;
+  formal Loewner algebra alone does not force `A_5^{\mathfrak f}`-gauge.
 
 ## Recurring open gaps
 

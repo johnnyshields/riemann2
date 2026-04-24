@@ -69,6 +69,9 @@ Working forward-carry of the current open UV items relevant to the active queue.
   satisfies `B_7^{\mathfrak f}(T)\in\mathbf C A_5^{\mathfrak f}(m)`.
   Current role: narrowed cubic gauge subtarget for UV-024; needed before the
   full non-`(1,1)` quotient-invisibility theorem can be promoted.
+  Immediate subtarget: compute the actual grade `(1,5,1)` pre-`\Phi_K`
+  fixed-sector coefficient for `L_1YR_1`; formal Loewner algebra alone does not
+  force gauge.
 
 - **UV-004** — `rem:wip-explicit-pointwise-bridge-good-patch-detector`
   Claim: the local detector either sees the same-tower source `r=q^{(7)}` or the explicit pointwise package is invisible.
