@@ -148,6 +148,10 @@ Focused target:
 - Gap closer:
   `agents/20260424-192133-gap-natural-protocol/` targets UV-014.
 
+Verifier:
+- `agents/20260424-192735-verifier-natural-protocol/` checks the
+  two-reflection protocol before any UV-014 promotion.
+
 Ground-truth check:
 - Test a positive route through two-subspace projective measurements,
   alternating projections, or product-of-reflections phase estimation: can the
