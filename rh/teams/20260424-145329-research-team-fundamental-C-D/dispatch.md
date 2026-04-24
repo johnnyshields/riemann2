@@ -371,3 +371,48 @@ In-scope sources:
 Protected surfaces are unchanged: agents write only to their own
 `agents/20260424-184643-<slug>/` directory and must not edit team ledgers,
 `rh/proof_of_rh.tex`, `lore/`, `.agents/`, or sibling agent dirs.
+
+## UV-023 transfer-filtration attack 20260424-190438
+
+Base commit: `52ba67f35e9929c9266bcc123ee066e8ee84420b`.
+
+Target:
+
+- **UV-023** -- prove that the order-7 quotient component of the
+  corrected-whitening cross-effect has zero first collision derivative after
+  source-weight linearization, either because only the quadratic homogeneous
+  transfer `\mathcal T_2` contributes or because all `\mathcal T_{p\ge3}`
+  terms are quotient-invisible through order 7.
+
+Current frontier:
+
+- UV-022 cross-effect package shape is still the best package layer.
+- Diagonal self-subtraction alone is rejected: generic cubic and higher
+  transfer terms pass one-amplitude/swap/diagonal-value tests but leave
+  order-`\delta` terms.
+- The next target is a source theorem about the homogeneous-transfer filtration,
+  not another formal counterterm.
+
+Roster:
+
+1. `gap-closer-UV023-transfer-filtration`: source-mine and attempt a positive
+   theorem that the septic quotient channel sees only `\mathcal T_2` or that
+   `\mathcal T_{p\ge3}` is quotient-invisible through order 7.
+2. `verifier-source-UV023-filtration`: source-audit the positive claim space;
+   decide whether the paper already proves, conditionally proves, or misses the
+   required homogeneous-transfer filtration / first-collision derivative lemma.
+
+Ground-truth checks:
+
+- A positive result must cite source lines for the homogeneous expansion,
+  order bookkeeping, quotient extraction, and the reason higher homogeneous
+  transfer pieces cannot contribute to the order-7 quotient first collision
+  derivative.
+- It must not assume diagonal merger, same-reduced-image collapse, determinant
+  scalarization, or downstream package coincidence.
+- If the source does not contain the theorem, reduce to the smallest missing
+  substatement and state the exact candidate lemma.
+
+Protected surfaces are unchanged: agents write only to their own
+`agents/20260424-190438-<slug>/` directory and must not edit ledgers, paper,
+`lore/`, `.agents/`, or sibling agent dirs.
