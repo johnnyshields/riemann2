@@ -41,7 +41,7 @@ Allowed `Status` values: `proved | computational | heuristic | open | rejected`.
 - Write your final report to the exact `tasks/.../reports/<name>.md` path given in your assignment.
 - Put optional scratch work under `tasks/.../notes/<name>/`.
 - Put any scripts under `tasks/.../scripts/`.
-- Do not edit `paper/proof_of_rh.tex`, `paper/unverified.tex`, `paper/findings.md`, `CLAUDE.md`, or `lore/`.
+- Do not edit `paper/proof_of_rh.tex`, `paper/unverified.tex`, `paper/findings.md`, `AGENTS.md`, or `lore/`.
 
 ## Non-goals for this cycle
 
@@ -62,7 +62,7 @@ Active, compact knowledge base shared with every delegated agent.
   produced a reusable lesson.
 - Git log + commit messages are the audit trail. No status annotations here.
 - Keep this file \(\le 200\) lines. Paste it in full into every delegated
-  agent prompt (see `CLAUDE.md` §6).
+  agent prompt (see `AGENTS.md` `Briefing rule`).
 
 ## Structural
 

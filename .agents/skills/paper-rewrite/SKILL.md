@@ -13,37 +13,31 @@ Compactness pass on `<paper>/<main>.tex` (or a scope). Rewriters
 (`role prompt: rewriter`) are edit-capable for their own agent dir
 only; assembly into the paper is gated behind integrity checks. Use the inherited Codex model by default.
 
-`$ARGUMENTS`: empty â†’ full paper; `Â§<N>` or `Â§<N>.<M>` â†’ that section;
-`--line-range <from>-<to>` â†’ specific range; `--target-ratio <N>` â†’
-compaction target (default 15%); `--no-agents` â†’ coordinator does it
-directly (scopes < 500 lines); `--preserve-extra "<list>"` â†’ additional
+`$ARGUMENTS`: empty -> full paper; section or line range -> scoped pass;
+`--target-ratio <N>` sets compaction target (default 15%); `--no-agents`
+means coordinator-only for small scopes; `--preserve-extra "<list>"` adds
 locked identifiers.
 
 ## Non-negotiable invariants
 
 Any violation aborts assembly.
 
-1. **Frozen macro namespace** â€” no new / renamed / removed
-   `\newcommand`s. Body must reuse the input's macros.
-2. **Every `\label{...}`** preserved. No renames, deletions, or new
-   labels.
-3. **Every `\cite{...}` / `\ref{...}` / `\eqref{...}`** remains
-   resolvable. No renames.
-4. **Theorem / Proposition / Lemma / Corollary / Remark STATEMENTS**
+1. **Frozen macro namespace**: no new / renamed / removed `\newcommand`s.
+2. **Labels, cites, refs**: every `\label{...}`, `\cite{...}`, `\ref{...}`,
+   and `\eqref{...}` is preserved and resolvable.
+3. **Theorem / Proposition / Lemma / Corollary / Remark STATEMENTS**
    byte-identical (whitespace-only changes allowed). Tighten surrounding
    prose and proof text only.
-5. **Mathematical content** (equations, constants, identities) untouched.
+4. **Mathematical content** (equations, constants, identities) untouched.
    Math mode copied verbatim.
-6. **Notation** â€” every symbol keeps its meaning. No `u â†’ x`, no
-   `\phi â†’ \varphi`, no `\mathbb â†” \mathcal` swaps.
-7. **Section / subsection order and titles** preserved; no merges or
-   splits.
-8. **`rem:wip-*` labels and their claim-state** preserved â€” a
-   `[conditional]` remark must not become `[proved]`.
-9. **Scope disclaimers** (`from [scope] alone`, `conditional on [X]`)
+5. **Notation**: every symbol keeps its meaning; no symbol-family swaps.
+6. **Section / subsection order and titles** preserved; no merges or splits.
+7. **`rem:wip-*` labels and their claim-state** preserved: a `[conditional]`
+   remark must not become `[proved]`.
+8. **Scope disclaimers** (`from [scope] alone`, `conditional on [X]`)
    preserved. Compactness does not override honesty.
-10. **Bibliography** untouched (use `paper-biblio` instead).
-11. **`--preserve-extra` list**, if supplied.
+9. **Bibliography** untouched (use `paper-biblio` instead).
+10. **`--preserve-extra` list**, if supplied.
 
 Fair game: AI tells, redundant transitions, repeated setups, overlapping
 remarks, unnecessary hedging, long prose redundant with an equation,
@@ -53,10 +47,8 @@ stale cross-references.
 
 Create `<paper>/teams/<ts>-other-rewrite-<slug>/`. Capture invariants into
 `notes/`: macros, theorem envs, labels, cite keys, cross-refs, baseline
-line count (grep + `wc -l`). Baseline compile-check must be clean before
-starting. Partition scope (full = 14 top-level sections + `LaTeX conventions`' six
-subsections â†’ up to 19 rewriters; scoped = by subsection,
-â‰¤2000 lines per rewriter).
+line count. Baseline compile-check must be clean before starting. Partition by
+section/subsection, aiming for no more than 2000 lines per rewriter.
 
 ## Dispatch (unless `--no-agents`)
 

@@ -91,7 +91,7 @@ unless their next assignment depends on that verifier's answer.
 
 | Intent | Skill |
 |---|---|
-| balanced cycle, no fixed target | `research-team` |
+| general research cycle, no fixed target | `research-team` |
 | focused push on one UV / label | `research-attack` |
 | resume / recover existing team dir in place | `research-resume` |
 | grade a subsection or three | `research-audit` |

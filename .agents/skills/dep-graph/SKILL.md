@@ -54,8 +54,8 @@ Root blockers: UV closing would cascade the most
 Cross-check for uv-sync: labels missing from paper
 ```
 
-Archive as `lore/<yyyymmdd>-dep-graph.md` + commit only if requested;
-otherwise print-and-exit.
+Archive as `lore/<yyyymmdd>-dep-graph.md` and commit when the result changes
+the active agenda; otherwise print the report and exit.
 
 ## Don't
 

@@ -8,7 +8,7 @@ Active, compact knowledge base shared with every delegated agent.
   produced a reusable lesson.
 - Git log + commit messages are the audit trail. No status annotations here.
 - Keep this file \(\le 200\) lines. Paste it in full into every delegated
-  agent prompt (see `CLAUDE.md` §6).
+  agent prompt (see `AGENTS.md` `Briefing rule`).
 
 ## Structural
 

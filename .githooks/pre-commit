@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 #
-# pre-commit hook — enforces CLAUDE.md §11a.
+# pre-commit hook — enforces AGENTS.md compile-check policy.
 # Runs a LaTeX compile-check when paper/proof_of_rh.tex is part of the commit.
 #
 # One-time setup per clone:
 #   git config core.hooksPath .githooks
 #
-# Bypass (only with explicit justification — CLAUDE.md discourages):
+# Bypass only with explicit justification; AGENTS.md discourages it:
 #   git commit --no-verify
 
 set -u
@@ -18,7 +18,7 @@ if ! echo "$STAGED" | grep -qE '^paper/proof_of_rh\.tex$'; then
     exit 0
 fi
 
-echo "pre-commit: paper/proof_of_rh.tex is staged — running compile-check (CLAUDE.md §11a)..."
+echo "pre-commit: paper/proof_of_rh.tex is staged — running compile-check (AGENTS.md compile-check policy)..."
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
 cd "$REPO_ROOT/paper" || exit 2
@@ -41,7 +41,7 @@ if [ -n "$ERRORS" ]; then
     echo "$ERRORS"
     echo "-----"
     echo "Full log: $LOG"
-    echo "Fix before committing. Do NOT use --no-verify unless you have a real reason (see CLAUDE.md §11)."
+    echo "Fix before committing. Do NOT use --no-verify unless you have a real reason (see AGENTS.md Git workflow)."
     exit 1
 fi
 

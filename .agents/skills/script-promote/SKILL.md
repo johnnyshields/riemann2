@@ -18,15 +18,18 @@ Promote a verification script to a hardened version in
 
 ## Preamble
 
-Read `findings.md` (cross-reference with any relevant goodie). Create
-`<paper>/teams/<ts>-other-script-<slug>/` with `reports/`, `scripts/`, `notes/`.
+Read the current team dir's `findings.md`, `uv.md`, and relevant reports.
+Create `<paper>/teams/<ts>-other-script-<slug>/` with standard team files and
+an `agents/<ts>-promoter-<slug>/` deposit dir.
 
 ## Dispatch
 
-When delegated teamwork is authorized, record team name `script-promote-<ts>` in `dispatch.md`. Spawn `promoter-<slug>` with
-`role prompt: script-promoter` and the inherited Codex model by default. Standard briefing plus the specific UV-NNN entry the script verifies,
-if any (narrow exception). Writing discipline: docstrings and lore
-state what the script proves cleanly, no overclaim.
+When delegated teamwork is authorized, record team name `script-promote-<ts>`
+in `dispatch.md`. Spawn `promoter-<slug>` as a Codex subagent with a
+self-contained hardening brief and the inherited Codex model. Include the
+specific UV-NNN entry the script verifies, if any (narrow exception). Writing
+discipline: docstrings and lore state what the script proves cleanly, no
+overclaim.
 
 **Edit-capable exception**: promoter may create a file under
 `final-scripts/<paper>/` and a new lore file. No other canonical files.
@@ -48,7 +51,8 @@ Promoter's job:
 5. Write a lore file `lore/YYYYMMDD-script-<slug>.md` â€” claim, paper
    ref, provenance (base script or scratch), pass/fail, any issues,
    team dir pointer.
-6. Deposit the 9-field report and `send_input` team-lead; stay idle.
+6. Deposit the 9-field report under `agents/<ts>-promoter-<slug>/report.md`
+   and `send_input` team-lead; stay idle.
 
 ## Post-cycle
 

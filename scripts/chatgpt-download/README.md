@@ -35,7 +35,7 @@ Tools for downloading RH-related ChatGPT conversations into
   `create_time` (UTC) and the slug is derived from the title (or the first
   user message when the title is empty/"New chat").
 - Format: markdown with LaTeX-native math delimiters `\(...\)` / `\[...\]`.
-  Do not convert to `$...$` — see `CLAUDE.md` "LaTeX conventions".
+  Do not convert to `$...$` — see `AGENTS.md` "LaTeX conventions".
 - Role headers: `## User (2026-04-22 08:23)` / `## Assistant (...)`.
 - Skipped: system messages, tool messages (redacted), internal tool-call
   JSON (`code` / `thoughts` / `model_editable_context`).
