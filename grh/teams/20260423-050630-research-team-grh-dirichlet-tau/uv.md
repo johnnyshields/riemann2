@@ -49,14 +49,18 @@
   `notes/paired_slot_hypotheses.md`;
   `agents/20260424-175245-paired-slot-proof-skeleton-routeA/report.md`;
   `agents/20260424-183416-verifier-slot-skeleton/report.md`;
-  `agents/20260424-192025-gap-uv017-coefficient-freeze/report.md`.
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/report.md`;
+  `agents/20260424-183416-verifier-slot-skeleton/report-uv017-coefficient-reduction-audit.md`.
   Current role: second-step non-zeta frontier after UV-016.
   Current reduction: source normalization and whitening linearization are not
   the remaining scalar-renormalization sites; UV-017 is now the paired
   unit-coordinate local normal-form lemma. Prove that the corrected paired
   local blocks use zeroth coordinate
-  `a=q_chi^pair(m)-B_chi^pair(m)` with non-value coordinates frozen on the pure
-  value path, plus holomorphy/whitening and scalar-readout checks.
+  `a=q_chi^pair(m)-B_chi^pair(m)` with unit derivative
+  `a(S,eta(S))=S+O(S^2)` and non-value coordinates frozen on the pure value
+  path. Also prove paired holomorphy/whitening and define any downstream scalar
+  readout at the same level as `A_val` or prove that it does not rescale the
+  slot.
 
 - **UV-018** - corrected odd/transverse realization and boundary package.
   After paired slot realization, construct the corrected odd/transverse scalar,

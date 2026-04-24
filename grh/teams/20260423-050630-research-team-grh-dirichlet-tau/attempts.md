@@ -24,6 +24,7 @@
 | Beauvoir | UV-016 | DLMF plus standard Hadamard theorem is acceptable citation fallback for working draft | keep | `agents/20260424-183416-gap-compact-regularization/report-citation-fallback-plan.md` | final citation wording | Clean Davenport is not a hard working-draft blocker if order one is derived from DLMF and Stirling; final bibliography upgrade remains open. |
 | Sartre | UV-016 | Patched staged theorem is mathematically promotion-ready modulo citation quality | terminal | `agents/20260424-183416-verifier-slot-skeleton/report-paper-updates-final-check.md`; `paper-updates.md` | coordinator promotion decision | No wording or normalization blocker remains from verifier lane; UV-017 remains separate. |
 | Noether | UV-017 | Exact slot realization reduces to paired unit-coordinate local normal-form lemma | keep | `agents/20260424-192025-gap-uv017-coefficient-freeze/report.md`; `agents/20260424-192025-gap-uv017-coefficient-freeze/notes/coefficient_freeze_reduction.md` | adversarial verifier / attack unit-coordinate chart | If `a=S_chi^pair(m)` in the local jet chart, RH algebra gives unit coefficient; missing proof is that paired corrected blocks use that coordinate and no scalar readout renormalization. |
+| Sartre | UV-017 | Noether's reduction is sound, scoped to matrix-level unit-coordinate chart | keep | `agents/20260424-183416-verifier-slot-skeleton/report-uv017-coefficient-reduction-audit.md` | attack `da/dS=1` chart | Pure freeze rule must test actual `a(S,eta(S))=S+O(S^2)` and scalar readout must be included in `A_val` or separately normalized. |
 
 ## Frontier summaries
 
@@ -50,4 +51,4 @@
   identification.
 - **Next:** adversarially verify Noether's UV-017 reduction, then attack the
   paired unit-coordinate jet chart directly from the RH finite-\(s\) block
-  formulas.
+  formulas, with `da/dS|0=1` as the harness.

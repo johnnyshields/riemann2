@@ -113,10 +113,12 @@ is the supplied team dir unless another path is named.
   jet chart uses `a=q_chi^pair(m)-B_chi^pair(m)` and freezes non-value
   coordinates on the pure value path, the RH local algebra gives unit
   coefficient. The missing proof is that the paired corrected blocks really
-  have this unit-coordinate chart, with holomorphy/whitening and scalar readout
-  checks. Provenance:
+  have this unit-coordinate chart. Sartre's audit sharpens the test to
+  `a(S,eta(S))=S+O(S^2)` with `da/dS|0=1`, plus holomorphy/whitening and any
+  scalar readout normalization check. Provenance:
   `agents/20260424-192025-gap-uv017-coefficient-freeze/report.md`,
-  `agents/20260424-192025-gap-uv017-coefficient-freeze/notes/coefficient_freeze_reduction.md`.
+  `agents/20260424-192025-gap-uv017-coefficient-freeze/notes/coefficient_freeze_reduction.md`,
+  `agents/20260424-183416-verifier-slot-skeleton/report-uv017-coefficient-reduction-audit.md`.
 - **Tau is a self-dual phase-channel stress test, not the first exact `S(m)`
   target.** Tau has only a conditional compact source-package blueprint; paired
   Dirichlet remains sharper for exact source-plus-slot work. Provenance:

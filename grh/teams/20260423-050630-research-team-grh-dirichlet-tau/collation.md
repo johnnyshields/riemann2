@@ -323,3 +323,20 @@ pure value path, the RH local algebra gives the unit coefficient; if
 Capture action: refined `findings.md`, UV-017, and `attempts.md`. Next move is
 an adversarial check of this reduction and a direct attack on the paired
 unit-coordinate jet chart.
+
+## Sartre UV-017 Reduction Audit 20260424
+
+Report:
+`agents/20260424-183416-verifier-slot-skeleton/report-uv017-coefficient-reduction-audit.md`.
+
+Verdict: keep, open. Sartre accepts Noether's reduction in the scoped sense:
+after UV-016 source normalization, sign/factor and post-whitened matrix
+whitening are not independent scalar-renormalization sites. The exact remaining
+test is the paired unit-coordinate chart:
+`a(S,eta(S))=S+O(S^2)` with `da/dS|0=1`, and non-value coordinates must have
+zero first variation on the pure source path. If any downstream scalar readout
+is used, `A_val` must be defined after readout or the readout derivative must
+be checked not to rescale the slot.
+
+Capture action: refined `findings.md`, UV-017, and `attempts.md`. Next move is
+to attack `da/dS|0=1` directly from the paired local block coordinates.
