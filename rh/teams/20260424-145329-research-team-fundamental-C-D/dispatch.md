@@ -854,3 +854,69 @@ Protected surfaces and report contract are unchanged: agents write only under
 their owned dirs, do not edit ledgers or the paper, use the 9-field report
 schema plus autoresearch closing block and `Ledger destination`, and separate
 proved / conditional / missing.
+
+## Resume dispatch 20260424-225250
+
+Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260424-225250`.
+
+Base commit: `fbb79bf`.
+
+Coordinator-owned theorem target: source-bidegree corrected-whitening gauge.
+For the tagged two-atom pre-whitening block `\mathcal B_2`, the intended theorem
+is
+`B_7^{\mathfrak f}((1-\Pi_{1,1})C_{\mathcal W})\in
+\mathbf C A_5^{\mathfrak f}(m)` before `\Phi_K`, equivalently
+`Q_{7,m}^q(C_{\mathcal W})=Q_{7,m}^q(\Pi_{1,1}C_{\mathcal W})`.  This dispatch
+does not ask agents to prove the full theorem in one jump.  It attacks the two
+small gates most likely to reveal the mechanism.
+
+Roster:
+
+1. `gap-closer-UV026-L1YR1-Lambda-M5-coefficients-v2` writes only under
+   `agents/20260424-225250-gap-closer-UV026-L1YR1-Lambda-M5-coefficients-v2/`.
+   Task: derive, compute, or source-reduce the coefficient lists
+   `[z^r]\Lambda_{i,\pm}` and `[z^s]M_i^{[5]}` needed for the two
+   `L_1YR_1` tag vectors and determinant identities.
+2. `explorer-UV026-next-cubic-L3N0R0-v2` writes only under
+   `agents/20260424-225250-explorer-UV026-next-cubic-L3N0R0-v2/`.
+   Task: classify `L_3N_0R_0` and `L_0N_0R_3` as source-trivial, one-pair
+   `K_5`/`K_3`, `A_5^{\mathfrak f}`-gauge, or reduce to the exact missing
+   coefficient theorem.
+
+Verifier queue: none yet.  Add an adversarial verifier only after a concrete
+coefficient vector, determinant identity, or source-classification theorem is
+deposited.
+
+In-scope files and prior reports:
+
+- `rh/proof_of_rh.tex` lines 1392--2048, 2324--2587, 2607--2787,
+  6976--7295, and 7742--8033.
+- `rh/teams/20260424-145329-research-team-fundamental-C-D/findings.md`.
+- `rh/teams/20260424-145329-research-team-fundamental-C-D/uv.md`, UV-026 only.
+- `rh/teams/20260424-145329-research-team-fundamental-C-D/paper-updates.md`.
+- `agents/20260424-200220-gap-closer-UV026-cubic-source-terms/report.md`.
+- `agents/20260424-201525-gap-closer-UV026-L1YR1-actual-matrices/report.md`.
+- `agents/20260424-201525-source-auditor-UV026-L1YR1-matrix-provenance/report.md`.
+- `collation.md`, section `Coordinator theorem target 20260424-225250`.
+
+Ground-truth checks:
+
+- All evidence stays before `\Phi_K`, determinant scalarization, quotient
+  extraction, and diagonal merger.
+- `L_1YR_1` progress requires actual coefficient lists, a script-backed
+  coefficient extraction, or a minimal missing theorem. Another generic Loewner
+  witness is no progress.
+- `L_3N_0R_0` progress requires a source classification or exact missing
+  coefficient theorem. Left/right symmetry is allowed only at matrix/fixed-sector
+  level.
+- Computational claims require scripts deposited before running in the owned
+  `scripts/` dir and cited with output in `report.md`.
+
+Non-goals: do not edit `rh/proof_of_rh.tex`; do not promote UV-024, UV-025, or
+UV-026; do not assert the full source-bidegree gauge theorem unless the local
+acceptance tests have actual proof evidence.
+
+Protected surfaces and report contract are unchanged: agents write only under
+their owned dirs, do not edit ledgers or the paper, use the 9-field report
+schema plus autoresearch closing block and `Ledger destination`, and separate
+proved / conditional / missing.

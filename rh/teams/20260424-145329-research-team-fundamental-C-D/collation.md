@@ -857,3 +857,24 @@ Captured takeaway: the source displays the first-order same-point matrix `\delta
 - **Keep:** first-order source matrices extracted from the paper are usable input for a staged theorem or script-backed symbolic expansion.
 - **Discard:** trying to run the gauge checker before those coefficient lists exist.
 - **Next:** derive the `\Lambda` and `M^{[5]}` coefficient lists, while opening the next cubic family if this lane stalls.
+
+### Coordinator theorem target 20260424-225250
+
+Working theorem shape: source-bidegree corrected-whitening gauge.  For the
+tagged two-atom pre-whitening source block `\mathcal B_2`, let
+`C_{\mathcal W}` be the actual corrected-whitening matrix cross-effect before
+`\Phi_K`.  The target is
+`B_7^{\mathfrak f}((1-\Pi_{1,1})C_{\mathcal W})\in
+\mathbf C A_5^{\mathfrak f}(m)`, equivalently
+`Q_{7,m}^q(C_{\mathcal W})=Q_{7,m}^q(\Pi_{1,1}C_{\mathcal W})`.
+
+This is the theorem that would absorb UV-023, UV-024, and UV-026 together.
+Current evidence does not prove it.  It only says this is the cleanest target:
+UV-025 supplies the tagged source input, UV-024 supplies the intended quotient
+extractor once the matrix coefficient exists, and UV-026 is the local obstruction
+test for non-`(1,1)` cubic whitening terms.
+
+Proof gate: first pass `L_1YR_1` by deriving `[z^r]\Lambda_{i,\pm}` and
+`[z^s]M_i^{[5]}` and proving the two determinant identities against
+`A_5^{\mathfrak f}(m)`.  In parallel, classify `L_3N_0R_0` and `L_0N_0R_3`.
+Do not promote scalarized, determinant-level, or post-`\Phi_K` arguments.
