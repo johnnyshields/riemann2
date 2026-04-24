@@ -393,15 +393,52 @@ Captured takeaway: no prior report, summary, or narrow `rh/chats` search contain
 - **Discard:** scalar-only edge package substitutes, one-pair quotient-septic closure as a two-atom theorem, and derivations from lower edge laws plus abstract source axioms alone.
 - **Next:** run adversarial and source verifiers against the first-wave formulation and the determinant-trivialization good-patch claim; then redelegate a positive source construction for `\mathcal J_2^{(7)}` / `\mathfrak O_7`.
 
+### `20260424-182546-verifier-source-UV010-first-wave/report.md`
+
+Signal: UV-010 first-wave source audit, open / keep.
+
+Captured takeaway: source verifier confirms the first-wave synthesis is honest
+only as a reduction. Source-supported: native terminology; non-equivalence of
+one-pair quotient-septic closure to the two-atom edge package; determinant
+pairing as a local quotient coordinate on `A_5^{\mathfrak f}(m)\neq0`; centered
+`D_2` as a comparison target; and downstream separation of edge law, transport,
+and package coincidence. Conditional: the normalized fixed-target theorem and
+`[R]_{\mathrm{edge}}=-\mathcal H_7^q(m,\kappa,0)` require an actual
+fixed-target order-7 quotient defect first. Missing: no audited line supplies
+or forbids
+`\overline E_{12}^{(7;1)}=\delta^2\mathcal H_7^q(m,\kappa,\delta^2)` before
+diagonal merger, and no source definition of `\mathcal J_2^{(7)}` /
+`\mathfrak O_7` appears.
+
 ### `20260424-182546-verifier-adversarial-UV010-first-wave/report.md`
 
-Signal: UV-010 first-wave adversarial review, keep.
+Signal: UV-010 first-wave adversarial audit, keep.
 
-Captured takeaway: adversarial verifier validates the first-wave split as a reduction, not closure. The determinant chart is good on `A_5^{\mathfrak f}(m)\neq0` and only kills representative changes, not a free quotient scalar. The `A_5^{\mathfrak f}=0` locus is a rank jump requiring explicit exclusion or a prepared/projectivized convention. The centered `D_2` computation remains pressure-only. Scalar-only UV-010 routes fail the formal `a_1a_2\delta^2P(m,\kappa)` perturbation test, rerun in `agents/20260424-182546-verifier-adversarial-UV010-first-wave/scripts/uv010_first_wave_adversarial_check.js`.
+Captured takeaway: adversarial verifier validates the definition-only boundary
+and rejects overclaims. The script
+`agents/20260424-182546-verifier-adversarial-UV010-first-wave/scripts/uv010_first_wave_adversarial_check.js`
+reruns cleanly: representative shifts leave the determinant scalar unchanged,
+the zero midpoint line triggers a rank jump, a formal
+`a_1a_2\delta^2P(m,\kappa)` septic quotient perturbation survives swap,
+one-amplitude, diagonal, and lower-law checks, scalar-only routes do not kill
+the free coordinate, and centered `D_2` remains pressure-only rather than an
+actual two-atom Hessian. This is terminal for scalar-only UV-010 routes and for
+deriving UV-010 from lower cubic/quintic edge laws plus abstract formal
+properties.
 
-### Frontier after adversarial verifier
+### Resume frontier after verifier pass
 
-- **Current best:** UV-010 theorem boundary and good-patch quotient trivialization are adversarially supported; UV-010 still needs the actual corrected two-atom order-7 quotient Hessian.
-- **Keep:** determinant chart only after quotient-valued defect exists; explicit good-patch or exceptional-convention requirement; formal perturbation as acceptance test.
-- **Discard:** scalar-only edge package definitions and any proof that promotes centered `D_2` to `\mathfrak O_7` without a source construction.
-- **Next:** wait for source verifier, then assign a positive construction pass for `\mathcal J_2^{(7)}` / `\mathfrak O_7`.
+- **Current best:** UV-010 is verifier-stabilized into a local coordinate lemma
+  plus a missing actual edge object. The determinant moving-to-midpoint chart is
+  usable on `A_5^{\mathfrak f}(m)\neq0`; the actual quotient-valued edge law is
+  still missing.
+- **Keep:** definition-only theorem boundary, determinant good-patch chart,
+  explicit `A_5^{\mathfrak f}=0` rank-jump handling, native source language,
+  centered `D_2` as pressure target, and the free
+  `a_1a_2\delta^2P(m,\kappa)` adversarial model.
+- **Discard:** scalar-only edge packages, one-pair quotient-septic closure as a
+  two-atom theorem, lower-law-only closure, and determinant scalarization as
+  descent/state-locality.
+- **Next:** redelegate a positive construction attempt for the actual corrected
+  order-7 quotient Hessian `\mathcal J_2^{(7)}` / `\mathfrak O_7`, using the
+  determinant chart only as good-patch bookkeeping.

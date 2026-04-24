@@ -153,12 +153,18 @@ Active, compact knowledge base shared with every delegated agent.
   Provenance:
   `agents/20260424-173642-gap-closer-UV010-theorem-formulation/report.md`,
   `agents/20260424-173642-gap-closer-UV010-septic-hessian/report.md`, and
-  `agents/20260424-173642-explorer-UV010-prior-miner/report.md`. Usage: state the
+  `agents/20260424-173642-explorer-UV010-prior-miner/report.md`; verified by
+  `agents/20260424-182546-verifier-source-UV010-first-wave/report.md` and
+  `agents/20260424-182546-verifier-adversarial-UV010-first-wave/report.md` with
+  `scripts/uv010_first_wave_adversarial_check.js`. Usage: state the
   target as a fixed-midpoint quotient edge law for a normalized
   `a_1^{-1}\overline{\mathcal E}_{12}^{(7;1)}` class and
   `[R]_{\mathrm{edge}}=-\mathcal H_7^q(m,\kappa,0)`. Current sources expose the
   centered `D_2` pressure target and one-pair quotient closure, but no actual
-  two-atom `\mathcal J_2^{(7)}` / `\mathfrak O_7` construction.
+  two-atom `\mathcal J_2^{(7)}` / `\mathfrak O_7` construction. Determinant
+  scalarization is only good-patch bookkeeping; it does not kill the free septic
+  quotient coordinate, and `A_5^{\mathfrak f}=0` needs exclusion or a separate
+  prepared/projectivized convention.
 
 ## Recurring open gaps
 
