@@ -171,10 +171,9 @@ Active, compact knowledge base shared with every delegated agent.
   by one-pair formulas. The best `Q_7^q` target is
   `[B_7^{\mathfrak f}(C)]\in\mathfrak f/\mathbf C A_5^{\mathfrak f}(m)`.
   Conditional matrix `C_{\mathcal W}` and `B_7^{\mathfrak f}` are definition-ready
-  once the actual source-linear two-atom block exists. UV-025 asks for that
-  block; UV-026 asks for cubic `(1,1,5)` `A_5^{\mathfrak f}`-gauge. Promotion
-  still needs actual-package source, `\Pi_{1,1}`, and quotient-gauge; current
-  `\mathfrak P_2` language is quotient-output, not pre-whitening `\mathcal B_2`.
+  once the actual source-linear two-atom block exists. UV-025 has a proposed
+  tagged pre-whitening `\mathcal B_2` definition block awaiting verification;
+  UV-026 asks for cubic `(1,1,5)` `A_5^{\mathfrak f}`-gauge.
 
 ## Recurring open gaps
 

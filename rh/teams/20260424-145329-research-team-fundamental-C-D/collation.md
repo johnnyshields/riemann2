@@ -739,3 +739,16 @@ Captured takeaway: existing `\mathfrak P_2` language is quotient-output package 
 - **Keep:** output-package phrasing for later, after pre-whitening provenance exists.
 - **Discard:** treating assumed quotient-output identities as a pre-whitening source proof.
 - **Next:** wait for constructive `\mathcal B_2` skeleton, then decide whether to stage it in `paper-updates.md` or keep it as a UV-only target.
+
+### `20260424-194928-gap-closer-UV025-B2-definition/report.md`
+
+Signal: UV-025 constructive definition, keep.
+
+Captured takeaway: UV-025 is likely a definition addition plus short theorem, not a genuine obstruction. The proposed block introduces source tags `\tau_1,\tau_2`, defines additive tagged perturbations in the corrected phase variables, defines `\mathcal B_2` by the existing corrected same-point and mixed block formulas before whitening, and defines `\mathcal K` so the `\mathcal K`-linear part splits as `\tau_1a_1L_{h_1}+\tau_2a_2L_{h_2}`. Downstream UV-024/UV-026 remain separate.
+
+### Frontier after UV-025 constructive pass
+
+- **Current best:** `agents/20260424-194928-gap-closer-UV025-B2-definition/notes/B2-definition-block.md` is a candidate paper-updates block.
+- **Keep:** tagged pre-whitening source block and `\mathcal K` filtration definition.
+- **Verification needed:** source/adversarial check that the tagged substitution uses the same corrected phase variables as the source formulas and does not claim quotient package coincidence.
+- **Next:** dispatch a verifier on the exact `B2-definition-block.md` before writing `paper-updates.md`.
