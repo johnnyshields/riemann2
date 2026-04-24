@@ -4,19 +4,22 @@
 
 - **UV-016** - paired compact source-package closure.
   Prove a compact-interval source package for primitive Dirichlet pairs built
-  from `Phi_chi^pair(s)=Xi_chi(2s-1)/Xi_chi(2s)`: compact-interval
-  convergence/regularization of the paired zero contribution, one unified
-  theorem-ready `B_chi^pair`, multiplicity bookkeeping compatible with the
-  same compact identity, and a sign convention compatible with the positive
-  strip-edge kernel. Provenance:
+  from `Phi_chi^pair(s)=Xi_chi(2s-1)/Xi_chi(2s)`: one unified theorem-ready
+  `B_chi^pair`, multiplicity bookkeeping compatible with the same compact
+  identity, and a source-normalization statement using the sign-audited
+  convention. Provenance:
   `notes/paired_source_package.md`;
   `agents/20260424-160512-paired-regularization-package-verifier/report.md`;
   `agents/20260424-171036-paired-bookkeeping-block-verifier/report.md`;
   `agents/20260424-183416-explorer-background-multiplicity/report.md`;
-  `agents/20260424-183416-gap-compact-regularization/report.md`.
+  `agents/20260424-183416-gap-compact-regularization/report.md`;
+  `agents/20260424-183416-verifier-slot-skeleton/report-sign-audit.md`;
+  `agents/20260424-183416-verifier-slot-skeleton/report-compact-convergence-audit.md`.
   Current role: immediate non-zeta frontier.
-  Current candidate reduction: compact zero-regularization may follow from
-  Hadamard edge-difference cancellation; adversarial/source audit pending.
+  Current reduction: compact zero-regularization is adversarially checked under
+  standard primitive nonprincipal completed-function inputs; the remaining
+  burden is the explicit `B_chi^pair` split in the sign-audited convention plus
+  source citations for those standard inputs.
 
 - **UV-017** - exact paired local `S(m)`-slot realization.
   Prove that the scalar `S_chi^pair(m)=q_chi^pair(m)-B_chi^pair(m)` from
@@ -56,13 +59,17 @@
   Current role: secondary self-dual stress test behind paired Dirichlet.
 
 - **UV-021** - paired quotient sign normalization.
-  Resolve the sign convention for the fixed paired quotient
+  Rewrite the source-normalization interface for the fixed paired quotient
   `Phi_chi^pair(s)=Xi_chi(2s-1)/Xi_chi(2s)` against the positive strip-edge
   kernel and the desired source split `q_chi^pair=B_chi^pair+S_chi^pair`.
-  Current evidence says the positive one-zero kernel is the contribution to
-  `-1/2 Phi'/Phi`, not `+1/2 Phi'/Phi`; choose and verify one convention
-  among negative boundary exponent with `q=Theta'`, positive exponent with
-  `q=-Theta'`, or inverse quotient. Provenance:
+  The adversarially checked convention for the fixed quotient is negative
+  boundary exponent with `q=Theta'`, equivalently
+  `q_chi^pair=-1/2 Phi'/Phi` at the zero-source level; positive exponent needs
+  `q=-Theta'` or inverse quotient. Provenance:
   `agents/20260424-183416-explorer-background-multiplicity/report.md`;
-  `agents/20260424-183416-explorer-background-multiplicity/scripts/check_one_zero_sign.py`.
-  Current role: subgap of UV-016; adversarial sign audit queued with Sartre.
+  `agents/20260424-183416-explorer-background-multiplicity/scripts/check_one_zero_sign.py`;
+  `agents/20260424-183416-verifier-slot-skeleton/report-sign-audit.md`;
+  `notes/dirichlet_paired_source.md`;
+  `paper/dirichlet_paired_source_candidate.tex`.
+  Current role: subgap of UV-016; convention chosen, source package rewrite
+  still needed.

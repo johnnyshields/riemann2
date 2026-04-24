@@ -44,21 +44,26 @@ is the supplied team dir unless another path is named.
   scoped notation aliases; it may not claim exact slot realization, canonical
   source-free coefficient matching, or whitening closure. Provenance:
   `agents/20260424-171036-paired-bookkeeping-block-verifier/report.md`.
-- **The paired quotient sign convention is now an explicit subgap.** For the
+- **The paired quotient sign convention is adversarially fixed for the current
+  quotient.** For the
   fixed quotient `Xi_chi(2s-1)/Xi_chi(2s)`, Jason's one-zero check finds the
-  positive strip-edge kernel as `-1/2 Phi'/Phi`, not `+1/2 Phi'/Phi`; this
-  conflicts with earlier positive-exponent wording unless `q`, the phase, or
-  the quotient orientation is changed. Provenance:
+  positive strip-edge kernel as `-1/2 Phi'/Phi`, not `+1/2 Phi'/Phi`, and
+  Sartre's adversarial audit confirms the older positive-exponent route is
+  inconsistent as written. Use the negative boundary exponent with `q=Theta'`,
+  or explicitly change `q`/invert the quotient. Provenance:
   `agents/20260424-183416-explorer-background-multiplicity/report.md`,
-  `agents/20260424-183416-explorer-background-multiplicity/scripts/check_one_zero_sign.py`.
-- **[candidate] Compact zero-regularization may reduce to Hadamard
-  edge-difference cancellation.** Beauvoir's proof note argues that subtracting
+  `agents/20260424-183416-explorer-background-multiplicity/scripts/check_one_zero_sign.py`,
+  `agents/20260424-183416-verifier-slot-skeleton/report-sign-audit.md`.
+- **Compact zero-regularization reduces to Hadamard edge-difference
+  cancellation under standard nonprincipal completed-function inputs.** Beauvoir's proof note argues that subtracting
   the two edge logarithmic-derivative sums cancels the genus-one constants and
   `1/rho` terms, leaving an `O_I(|rho|^{-2})` summand with uniform compact
-  convergence and fixed derivative convergence. This still needs adversarial
-  and source audit before promotion. Provenance:
+  convergence and fixed derivative convergence; Sartre's adversarial audit
+  accepts the proof in that scoped form. Source citation of the standard
+  completed-\(L\) inputs is still needed before paper promotion. Provenance:
   `agents/20260424-183416-gap-compact-regularization/report.md`,
-  `agents/20260424-183416-gap-compact-regularization/notes/compact_regularization_reduction.md`.
+  `agents/20260424-183416-gap-compact-regularization/notes/compact_regularization_reduction.md`,
+  `agents/20260424-183416-verifier-slot-skeleton/report-compact-convergence-audit.md`.
 - **Tau is a self-dual phase-channel stress test, not the first exact `S(m)`
   target.** Tau has only a conditional compact source-package blueprint; paired
   Dirichlet remains sharper for exact source-plus-slot work. Provenance:
@@ -90,10 +95,9 @@ is the supplied team dir unless another path is named.
   Provenance:
   `agents/20260424-143617-paired-regularization-plan-verifier/report.md`,
   `agents/20260424-160512-paired-regularization-package-verifier/report.md`.
-- **Do not promote the paired positive-exponent convention yet.** It needs an
-  adversarial sign audit against the fixed quotient, boundary phase, and
-  `q=B+S` orientation. Provenance:
-  `agents/20260424-183416-explorer-background-multiplicity/report.md`.
+- **Do not use the old paired positive-exponent convention as written.** It is
+  sign-reversed for the positive source kernel under the fixed quotient.
+  Provenance: `agents/20260424-183416-verifier-slot-skeleton/report-sign-audit.md`.
 
 ## Goodies
 

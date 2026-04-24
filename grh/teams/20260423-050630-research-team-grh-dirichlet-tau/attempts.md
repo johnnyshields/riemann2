@@ -12,15 +12,17 @@
 | Sartre | UV-017 | Paired slot skeleton passes only as conditional roadmap; coefficient lemma still missing | keep | `agents/20260424-183416-verifier-slot-skeleton/report.md` | reduce to normalization/freeze-rule lemma | Need value-parameter holomorphy, stable positivity, exact freeze rules, and a check excluding scalar renormalization before any source-to-slot promotion. |
 | Jason | UV-016 / UV-021 | Fixed paired quotient gives positive kernel from `-1/2 Phi'/Phi`, not `+1/2` | keep | `agents/20260424-183416-explorer-background-multiplicity/report.md`; `agents/20260424-183416-explorer-background-multiplicity/scripts/check_one_zero_sign.py` | adversarial sign audit | Either use negative boundary exponent with `q=Theta'`, redefine `q`, or invert the quotient before theorem wording. |
 | Beauvoir | UV-016 | Compact zero-regularization reduces to Hadamard edge-difference cancellation | keep | `agents/20260424-183416-gap-compact-regularization/report.md`; `agents/20260424-183416-gap-compact-regularization/notes/compact_regularization_reduction.md` | adversarial/source audit | Candidate proof gives `O_I(|rho|^{-2})` summability after edge subtraction; full UV-016 still needs sign convention and explicit `B_chi^pair`. |
+| Sartre | UV-021 | Sign audit confirms fixed quotient needs negative boundary exponent for positive source | keep | `agents/20260424-183416-verifier-slot-skeleton/report-sign-audit.md`; `agents/20260424-183416-verifier-slot-skeleton/scripts/audit_one_zero_sign.py` | rewrite source normalization | Older positive-exponent route is inconsistent as written; use `e^{-2iTheta}`, `q=Theta'`, or explicitly change `q`/invert quotient. |
+| Sartre | UV-016 | Compact edge-difference convergence proof is sound in scoped form | keep | `agents/20260424-183416-verifier-slot-skeleton/report-compact-convergence-audit.md` | source-audit standard inputs | Completed zero-regularization is no longer the blocker under standard primitive nonprincipal inputs; explicit `B_chi^pair` split remains. |
 
 ## Frontier summaries
 
 - **Current best:** UV-016, the primitive Dirichlet paired compact source
-  package, is the live non-zeta bottleneck. The exact theorem is not closed; the
-  compact zero-regularization subproblem now has a candidate Hadamard
-  edge-difference proof pending adversarial/source audit. The remaining UV-016
-  burdens are UV-021 sign normalization and explicit theorem-ready
-  `B_chi^pair`.
+  package, is the live non-zeta bottleneck. The compact zero-regularization
+  subproblem is adversarially checked in the completed-function setting. The
+  remaining UV-016 burdens are the explicit theorem-ready `B_chi^pair` split in
+  the negative-exponent convention and source citations for the standard
+  completed-\(L\) inputs.
 - **Keep:** paired object `Phi_chi^pair`, positive upstairs strip-edge kernel,
   immediate post-theorem bookkeeping placement, and the conditional UV-017
   slot skeleton after Sartre's coefficient-lemma caveat.
@@ -28,12 +30,12 @@
   claims that denominator comparability alone gives whitening positivity;
   claims that single-channel Dirichlet or tau already supplies the manuscript
   exact `S(m)` slot.
-- **Blocked:** UV-016 lacks theorem-strength paired compact
-  convergence/regularization, unified `B_chi^pair`, multiplicity closure, and a
-  verified sign convention for the fixed paired quotient.
+- **Blocked:** UV-016 lacks theorem-strength unified `B_chi^pair`,
+  source-cited completed-\(L\) inputs, and a final compact source statement in
+  the verified sign convention.
   UV-017 lacks paired symmetric normal form, value-parameter holomorphy, stable
   local positivity, exact freeze rules, and source-to-slot coefficient
   identification.
-- **Next:** get Sartre's adversarial audits on UV-021 sign normalization and
-  Beauvoir's compact convergence proof before any normalization or
-  regularization language is promoted.
+- **Next:** attack the explicit `B_chi^pair` background split in the
+  negative-exponent convention and source-audit the standard nonprincipal
+  completed-\(L\) inputs.

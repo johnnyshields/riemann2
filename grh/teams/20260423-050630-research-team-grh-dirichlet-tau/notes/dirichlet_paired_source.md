@@ -46,19 +46,26 @@ The later paired-quotient-properties attack sharpened this further:
 - positivity of the manuscript's paired `S(m)` slot becomes automatic only if
   that theorem also provides exact local-slot identification.
 
-The later paired-quotient-normalization attack clarifies the front-end sign/factor convention:
+The later paired-quotient-normalization attack first proposed a front-end
+sign/factor convention. The 2026-04-24 resumed sign audit corrects that proposal
+for the fixed quotient:
 
 - factor `2` is fine here too;
-- safest theorem-facing choice, if an explicit phase is introduced, is to mirror
-  the repaired zeta-side convention and write
-  `Phi_chi^pair(1/2+it)=e^{2 i Theta_chi^pair(t)}` with
+- for the fixed quotient `Phi_chi^pair(s)=Xi_chi(2s-1)/Xi_chi(2s)`, the
+  positive strip-edge kernel is the contribution to `-1/2 Phi'/Phi`, not
+  `+1/2 Phi'/Phi`;
+- safest theorem-facing choice, if an explicit phase is introduced while
+  keeping the fixed quotient and positive source scalar, is
+  `Phi_chi^pair(1/2+it)=e^{-2 i Theta_chi^pair(t)}` with
   `q_chi^pair=(Theta_chi^pair)'`.
 
-The later paired `q`-normalization attack stabilizes that further:
+The later paired `q`-normalization attack is therefore superseded at the sign
+level:
 
-- this front-end sign/factor issue no longer needs to remain open in the notes;
-- but it is still only a source-normalized interface convention, not yet a
-  theorem-closing canonical normalization.
+- this front-end sign/factor issue remains open until the compact source
+  package is rewritten in one convention;
+- the older positive-exponent recommendation should not be promoted unless the
+  theorem explicitly uses `q=-Theta'` or the inverse quotient.
 
 The paired-background attack sharpened the source side one step further:
 

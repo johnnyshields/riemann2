@@ -89,3 +89,26 @@ requires adversarial/source audit and standard completed-\(L\) source checks.
 Capture action: recorded the candidate reduction in `findings.md`, UV-016, and
 `attempts.md`. Sartre was queued to audit the convergence proof after the sign
 audit.
+
+## Sartre Follow-Up Audits 20260424
+
+Reports:
+`agents/20260424-183416-verifier-slot-skeleton/report-sign-audit.md` and
+`agents/20260424-183416-verifier-slot-skeleton/report-compact-convergence-audit.md`.
+Script:
+`agents/20260424-183416-verifier-slot-skeleton/scripts/audit_one_zero_sign.py`.
+
+Verdicts: keep. The sign audit confirms Jason's objection: for the fixed
+paired quotient, the positive strip-edge source is `-1/2 Phi'/Phi`; the old
+positive-exponent recommendation is inconsistent as written. The safest
+convention is fixed quotient, `Phi(1/2+it)=e^{-2iTheta(t)}`, and `q=Theta'`.
+The compact-convergence audit accepts Beauvoir's Hadamard edge-difference proof
+under standard primitive nonprincipal completed-function inputs. It proves only
+the completed zero-regularization layer, not the full `B_chi^pair` source
+identity.
+
+Capture action: corrected stale paired sign wording in
+`notes/dirichlet_paired_source.md` and
+`paper/dirichlet_paired_source_candidate.tex`, refined `findings.md`, UV-016,
+UV-021, `attempts.md`, and this collation. Next target is the explicit
+`B_chi^pair` background split in the verified convention.
