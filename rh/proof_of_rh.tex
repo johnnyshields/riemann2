@@ -12839,6 +12839,21 @@ sector, identify it as source-trivial or one-pair/pure, prove it is
 its possible contributions.
 \end{remark}
 
+\begin{remark}[Residual-source tower before highest-new reduction]
+\label{rem:residual-source-tower-before-highest-new-reduction}
+The homogeneous scalar-grade convention organizes the local residual source
+tower, but it does not by itself identify all residual-source coefficients
+with the highest-new tower \(q^{(7)}\).  Finite quotient-gauge identities
+must first be tested in the residual-source variables supplied by the
+corrected source block.  Only a residual that survives this package-level
+test should be passed to the later same-tower / highest-new reduction.
+
+Thus the statement that the eventual local bridge should run through the
+single highest-new source \(q^{(7)}\) is a downstream package-to-jet bridge
+claim.  It is not a substitute for the pre-\(\Phi_K\), pre-determinant
+fixed-sector quotient-gauge calculation.
+\end{remark}
+
 \begin{remark}[Quarantined matrix-output \(M^{[5]}\) convention]
 \label{rem:quarantined-matrix-output-M5-convention}
 A nonzero ordinary matrix-output order-\(5\) convention for \(M^{[5]}\) is
@@ -13038,6 +13053,12 @@ swap symmetry, one-pair gauge, or the UV-025 source block alone do not prove
 UV-026.  The theorem must be proved at the pre-\(\Phi_K\), pre-determinant
 fixed-sector quotient level of
 Section~\ref{sec:corrected-fixed-target-quotient-package}.
+
+In this formulation, UV-026 is a theorem about the normalized corrected
+package representative.  The raw seven-family Fr\'echet sum is only a
+diagnostic object; its failure under a matrix-output \(M^{[5]}\) convention
+is recorded in Remark~\ref{rem:computational-status-raw-package} and does
+not replace the corrected package theorem.
 \end{remark}
 
 \begin{remark}[Relation to the package-to-jet bridge]
@@ -27332,6 +27353,25 @@ themselves do not prove quotient gauge; the closing subsection records the
 status of the raw seven-family shortcut and points forward to the corrected
 package representative.
 
+\begin{remark}[Fr\'echet coefficient normalization]
+\label{rem:frechet-coefficient-normalization}
+The finite tables in this section use homogeneous Taylor coefficients in the
+ordinary \(z\)-expansion of the inverse-square-root transfer.  Thus
+\(\Lambda\), \(H\), and \(G\) denote the actual coefficient contributions to
+the expanded matrix series, not raw multilinear derivatives \(D,D^2,D^3\)
+unless explicitly stated.
+
+Equivalently, if a separate computation uses derivative-normalized tensors,
+then the dictionary is
+\[
+H_{\mathrm{Taylor}}=\frac{1}{2!}H_{\mathrm{deriv}},
+\qquad
+G_{\mathrm{Taylor}}=\frac{1}{3!}G_{\mathrm{deriv}}.
+\]
+All determinant tests in this paper use the Taylor-coefficient convention
+unless the contrary is explicitly stated.
+\end{remark}
+
 \begin{remark}[Stage 1 source-table status]
 \label{rem:stage-one-source-table-status}
 The finite Fr\'echet recurrences in this section become a proof tool only
@@ -27961,27 +28001,31 @@ Changing \(E_m\) or \(\ell_h\) changes the representative only by a multiple of
 \]
 \end{definition}
 
-\begin{definition}[Normalized corrected-whitening package representative]
+\begin{definition}[Normalized corrected-whitening fixed-sector package representative]
 \label{def:normalized-corrected-whitening-package-representative}
 Assume the amplitude-normalized package
 \[
 \widehat C_{\mathcal W}^{\mathrm{amp}}
 \]
-extends holomorphically to \(\delta=0\).  Define the normalized fixed-target
-corrected-whitening package by
+extends holomorphically to \(\delta=0\) through ordinary order \(7\).
+
+First extract the moving fixed-sector representative
 \[
-C_{\mathcal W}^{\corr}(h)
+Z_{\mathcal W}^{\mathfrak f}(h)
 :=
-\operatorname{Triv}_{h\to m}
-\left(
+\pi_{\mathfrak f_h}[z^{\le7}]
 \widehat C_{\mathcal W}^{\mathrm{amp}}(h)
-\right).
+\in\mathfrak f_h .
 \]
-Define its fixed-target fixed-sector representative through order \(7\) by
+Then define the normalized fixed-target package representative by
 \[
 B_{\mathrm{pkg}}^{\mathfrak f}(h)
 :=
-\pi_{\mathfrak f_m}[z^{\le7}]\,C_{\mathcal W}^{\corr}(h).
+\operatorname{Triv}_{h\to m}
+\left(
+Z_{\mathcal W}^{\mathfrak f}(h)
+\right)
+\in\mathfrak f_m .
 \]
 Equivalently,
 \[
@@ -27994,15 +28038,20 @@ B_j\in\mathfrak f_m.
 Although the coefficients still depend on the moving parameter \(h\), the
 representatives themselves have already been transported to the fixed
 midpoint fiber \(\mathfrak f_m\).
+
+When we write \(C_{\mathcal W}^{\corr}\) below, we mean this normalized
+fixed-sector package representative \(B_{\mathrm{pkg}}^{\mathfrak f}\), not
+the full unprojected matrix cross-effect.
 \end{definition}
 
 \begin{definition}[Package-level order-\(7\) quotient extractor]
 \label{def:package-level-order-7-quotient-extractor}
-For the normalized package representative, define
+For the normalized fixed-target package representative, define
 \[
 B_7^{\mathfrak f}(C_{\mathcal W}^{\corr})
 :=
-[z^7]\,B_{\mathrm{pkg}}^{\mathfrak f}(m).
+[z^7]\,B_{\mathrm{pkg}}^{\mathfrak f}(m)
+\in \mathfrak f_m .
 \]
 The quotient-valued order-\(7\) extractor is
 \[
@@ -28080,6 +28129,21 @@ q_{\mathrm{conn},7}[M]
 \]
 \end{definition}
 
+\begin{remark}[Representative choices and lower coefficient tables]
+\label{rem:representative-choices-lower-coefficient-tables}
+The lower coefficients \(B_j[M]\) are representative-dependent as elements
+of \(\mathfrak f_m\), but the order-\(7\) connection coordinate
+\[
+\sum_{i=1}^{7}\omega_m(B_{7-i}[M],A_i)
+\]
+is independent of changes of \(B_j[M]\) by multiples of \(A_m\).  Therefore
+coefficient tables may choose any analytic section used by
+Definition~\ref{def:representative-level-midpoint-trivialization}, but they
+must keep that section fixed until the final quotient-coordinate
+calculation.  Changing representatives in the middle of a finite table is
+not a valid simplification.
+\end{remark}
+
 \begin{remark}[Next package table required for the connection correction]
 \label{rem:next-package-table-connection-correction}
 The next computable package table is not a raw Fr\'echet-family table.  It
@@ -28129,6 +28193,15 @@ quotient-gauge property.
 The following are theorem obligations.
 
 \begin{enumerate}
+\item \textbf{Source-weight-linear package input.}
+One must prove that the tagged pre-whitening source block induces the actual
+source-weight-linear input used by the corrected-whitening cross-effect.  In
+particular, the construction must not reintroduce the rejected signed-lift
+shortcut in which multiplying an even whitened package by the source
+amplitude leaves higher \(a^3,a^5,\ldots\) terms.  The package input must be
+invariant, functorial through the corrected-whitening transfer, and
+compatible with the quotient extractor \(Q_{7,m}^q\).
+
 \item \textbf{Edge divisibility.}
 One must prove
 \[
