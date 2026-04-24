@@ -561,3 +561,22 @@ subtract the diagonal order-7 quotient component so the collision edge is
 - **Next:** source-mine same-reduced-image germ, collision-functoriality, or a
   canonical polarization counterterm that kills the diagonal quotient
   cross-effect without assuming the downstream merger normalization.
+
+### `20260424-185740-verifier-adversarial-UV022-cross-effect-v2/report.md`
+
+Signal: UV-022 cross-effect adversarial check, keep.
+
+Captured takeaway: adversarial verifier rejects the current diagonal-counterterm route as promotion-ready. A diagonal subtraction can kill the literal diagonal, but the rebuilt nonlinear harness has `renorm_delta2_divisible = false` with 28 terms below `\delta^2`. In the favorable scalar quotient model, a source-honest diagonal counterterm leaves the free edge value `P(m,\kappa)=180`, so determinant bookkeeping still does not kill the free quotient coordinate. The next positive target is a bidegree `(1,1)` projection or a source theorem killing the first collision derivative.
+
+### `20260424-185740-gap-closer-UV022-diagonal-counterterm-v2/report.md`
+
+Signal: UV-022 diagonal-counterterm reduction, keep.
+
+Captured takeaway: the gap-closer confirms the same split constructively. For a purely quadratic transfer, diagonal self-subtraction gives one-amplitude collapse, swap symmetry, diagonal vanishing, and `\delta^2` divisibility. For cubic and mixed transfers, the same superficial checks pass but order-`\delta` terms survive, including after the leading cancellation substitution `a_2=-a_1`. The missing theorem is now sharp: prove that the order-7 quotient channel receives only the quadratic homogeneous transfer `\mathcal T_2`, prove `\mathcal T_{p\ge3}` is quotient-invisible through order 7, or prove a same-reduced-image / collision-functoriality law killing the first collision derivative.
+
+### Resume frontier after UV-022 v2 checks
+
+- **Current best:** UV-022 reduces to a homogeneous-transfer filtration or first-collision-derivative theorem for the order-7 quotient cross-effect.
+- **Keep:** cross-effect package shape; `\mathcal T_2` quadratic behavior; bidegree `(1,1)` projection as the next positive target; free `P(m,\kappa)` adversarial model.
+- **Discard:** diagonal self-subtraction alone, unsourced off-diagonal/free-`P` counterterms, and promotion from the full nonlinear cross-effect without a filtration theorem.
+- **Next:** source-mine whether the paper proves `\mathcal T_{p\ge3}` quotient-invisibility in the septic component; if absent, file the first-collision derivative of the renormalized order-7 quotient cross-effect as the next UV subtarget.

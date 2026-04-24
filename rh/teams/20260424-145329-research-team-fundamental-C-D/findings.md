@@ -163,14 +163,13 @@ Active, compact knowledge base shared with every delegated agent.
   the source-weight-linear actual two-atom block perturbation `X^{[1]}` and a
   proof that its order-7 quotient output is the UV-010
   `\mathcal J_2^{(7)}` / `\mathfrak O_7`.
-- **UV-022 package should be a corrected-whitening cross-effect, not just `\mathcal T_1`.**
-  Provenance:
-  `agents/20260424-184202-explorer-UV022-cross-effect-package/report.md` with
-  script `scripts/cross_effect_harness.js`. Usage: the analytic cross-effect
-  `\mathcal T(a_1X_1+a_2X_2)-\mathcal T(a_1X_1)-\mathcal T(a_2X_2)` gives
-  exact one-amplitude collapse and an `a_1a_2` interaction channel. The missing
-  theorem is diagonal/collision vanishing, or a source-honest diagonal
-  counterterm, for the order-7 quotient component.
+- **UV-022 cross-effect route needs a homogeneous-transfer filtration theorem.**
+  Provenance: `agents/20260424-184202-explorer-UV022-cross-effect-package/report.md`
+  and `agents/20260424-185740-*-UV022-*/report.md` with scripts. Usage: the
+  analytic cross-effect gives one-amplitude collapse and an `a_1a_2` channel,
+  but diagonal self-subtraction alone does not imply `\delta^2` divisibility;
+  promotion needs the order-7 quotient channel governed by `\mathcal T_2` only,
+  or a proof that `\mathcal T_{p\ge3}` first-collision terms are quotient-invisible.
 
 ## Recurring open gaps
 
