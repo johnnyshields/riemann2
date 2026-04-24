@@ -973,6 +973,31 @@ Roster:
 Ground-truth checks: stay pre-`\Phi_K`; scripts before run; no promotion from
 prototypes or absence of source alone.
 
+## Resume dispatch 20260425-002114
+
+Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260425-002114`.
+
+Base commit: `cf168f0`.
+
+Coordinator status: the pure homogeneous mixed-order convention fails for
+`L_1YR_1` because odd scalar source pieces miss odd mixed orders.  The open
+question is whether `M_i^{[5]}` means actual ordinary-`z` mixed order `5` or a
+source-grade label, and what parity theorem governs `M`.
+
+Roster:
+
+1. `gap-closer-UV026-mixed-parity-theorem` writes only under
+   `agents/20260425-002114-gap-closer-UV026-mixed-parity-theorem/`.
+   Task: prove or finitely audit the parity/ordinary-`z` powers of the
+   source-linear scaled mixed input `M=\mathfrak D_Q\delta N^{\lin}`.
+2. `verifier-source-UV026-M5-language` writes only under
+   `agents/20260425-002114-verifier-source-UV026-M5-language/`.
+   Task: audit whether current paper/team wording treats `M_i^{[5]}` as actual
+   mixed order `5`, source grade `5`, or an ambiguous placeholder.
+
+Ground-truth checks: cite exact wording/formulas; stay pre-`\Phi_K`; no
+determinant or quotient shortcut.
+
 ## Resume dispatch 20260424-233157
 
 Team name: `research-resume-20260424-145329-research-team-fundamental-C-D-20260424-233157`.

@@ -1205,3 +1205,14 @@ with nonzero `[z^5]M`.
 - **Next:** decide whether `M^{[5]}` is a source label rather than actual mixed
   order, or construct a non-homogeneous `Gr_5` projection with nonzero
   `[z^5]M`.
+
+### Dispatch 20260425-002114
+
+Issued two follow-ups.  Hilbert owns the mixed-input parity theorem lane under
+`agents/20260425-002114-gap-closer-UV026-mixed-parity-theorem/`.  Harvey owns
+the `M_i^{[5]}` source-language audit under
+`agents/20260425-002114-verifier-source-UV026-M5-language/`.
+
+Expected ledger destinations: parity theorem or obstruction to `uv.md` /
+`attempts.md`; wording ambiguity or required definition clarification to
+`uv.md` / `attempts.md`; durable guardrail to `findings.md` only if compact.
