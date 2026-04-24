@@ -603,3 +603,28 @@ Captured takeaway: source verifier confirms UV-023 is missing from the paper. So
 - **Keep:** analytic transfer framework; bidegree `(1,1)` projection as a plausible next route; `\mathfrak D_Q` / finite-order grading as the next source-mining target.
 - **Discard:** proving UV-023 from coefficient bounds alone, diagonal self-subtraction alone, or downstream merger/state-locality assumptions.
 - **Next:** mine the finite-order grading of corrected block inputs and `\mathfrak D_Q` scaling for a theorem that `\mathcal T_{p\ge3}` cannot reach the septic quotient coefficient for the actual source-weight-linear `X^{[1]}`.
+
+### `20260424-190928-gap-closer-UV023-bidegree-projection/report.md`
+
+Signal: UV-023 bidegree projection, keep.
+
+Captured takeaway: the `(1,1)` route is formally correct but not source-defined. The agent's script shows that projecting the cross-effect to source bidegree `(1,1)` keeps the quadratic transfer and kills all `\mathcal T_{p\ge3}` by source degree. Current source still lacks the objects needed to promote it: actual source-weight-linear `X^{[1]}`, a projector `\Pi_{1,1}` before quotient extraction, fixed-target order-7 quotient extraction `Q_7^q`, and a compatibility theorem `Q_7^q(C)=Q_7^q(\Pi_{1,1}C)`.
+
+### Frontier after bidegree projection pass
+
+- **Current best:** UV-023 reduces to a source-bidegree quotient-compatibility lemma.
+- **Keep:** formal `(1,1)` mechanism; previous source audit that the paper does not define it.
+- **Next:** wait for `\mathfrak D_Q` / grading explorer, then decide whether to attack source tags/projector construction or a grading invisibility theorem.
+
+### `20260424-190928-explorer-UV023-DQ-scaling/report.md`
+
+Signal: UV-023 `\mathfrak D_Q` / grading check, keep.
+
+Captured takeaway: `\mathfrak D_Q` scaling and finite-order grading do not close UV-023. Scaling is useful bookkeeping but leaves channels with no forced positive `w`-order, so coefficient bounds alone allow cubic homogeneous transfer through order 7. Finite-order grading also permits a cubic witness with one `q^{(7)}`-grade factor and two lower grade-1 factors, `(1,1,5)`. A source bidegree `(1,1)` projection would exclude higher homogeneous transfers, but the source does not yet define it for the actual order-7 quotient cross-effect.
+
+### Resume frontier after UV-023 bidegree / grading pass
+
+- **Current best:** UV-023 is reduced to the source-bidegree quotient-compatibility lemma.
+- **Keep:** formal `(1,1)` projection mechanism; negative against `\mathfrak D_Q` scaling or finite-order grading alone.
+- **Discard:** proving UV-023 from coefficient bounds, scaling, finite-order grading, diagonal counterterms, or determinant scalarization alone.
+- **Next:** construct the actual source-tagged `X^{[1]}` and projector `\Pi_{1,1}`, define `Q_7^q`, and prove `Q_7^q(C)=Q_7^q(\Pi_{1,1}C)`.
