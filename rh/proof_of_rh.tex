@@ -29957,6 +29957,21 @@ presently proved.
 \section{Current proof state after the local package audits}
 \label{sec:current-proof-state-after-local-audits}
 
+\begin{remark}[Audit convention for the current proof-state section]
+\label{rem:audit-convention-current-proof-state}
+The statements in this section distinguish three levels:
+\begin{enumerate}
+\item local algebraic lemmas, such as Gate A/B cancellations under fixed
+source/core and grading conventions;
+\item conditional local geometric infrastructure, such as the reduced-base
+rank-two connection and affine forcing equation;
+\item missing global proof gates, such as affine transport, boundary,
+holonomy/index, or finite-core non-concentration.
+\end{enumerate}
+A statement at level (1) or (2) should not be read as a proof of RH.  The
+current missing theorem is global.
+\end{remark}
+
 This section records the current proof state after the Gate~B, Bottleneck~C,
 finite-core, and interaction audits.  It is not part of the original local
 coefficient calculus; it is a status ledger for the remaining proof
@@ -30824,6 +30839,136 @@ package without changing the physical readout merely transfers the same
 obstruction to the hidden \(T\)-coordinate.
 \end{remark}
 
+\subsection{Actual exterior-pair source jets and failure of pair-level locking}
+\label{subsec:actual-exterior-pair-source-jets-no-locking}
+
+The most direct possible rescue of the Bottleneck-C row would be a hidden
+actual-source relation forcing the midpoint post-affine source jets
+\[
+\rho_2,\qquad \rho_4
+\]
+to satisfy the ratio required by the \(\eta\eta\) top-row coefficient.  This
+does not occur at the one-pair level.
+
+For an exterior functional-equation zero-pair write
+\[
+f_{\beta,\gamma}(t)
+=
+\frac{1-\beta}{(1-\beta)^2+(2t-\gamma)^2}
++
+\frac{\beta}{\beta^2+(2t-\gamma)^2}.
+\]
+Put
+\[
+a:=1-\beta,\qquad b:=\beta,\qquad x:=2m-\gamma,\qquad u:=t-m.
+\]
+Then
+\[
+f_{\beta,\gamma}(m+u)
+=
+\frac{a}{a^2+(x+2u)^2}
++
+\frac{b}{b^2+(x+2u)^2}.
+\]
+Affine subtraction removes only the constant and linear terms.  Thus the
+post-affine coefficients \(\rho_2,\rho_4\) are the \(u^2,u^4\) coefficients of
+the above expansion.
+
+For one summand,
+\[
+[u^2]\frac{c}{c^2+(x+2u)^2}
+=
+\frac{4c(3x^2-c^2)}{(c^2+x^2)^3},
+\]
+and
+\[
+[u^4]\frac{c}{c^2+(x+2u)^2}
+=
+\frac{16c(c^4-10c^2x^2+5x^4)}{(c^2+x^2)^5}.
+\]
+Therefore
+\[
+\boxed{
+\rho_2(\beta,x)
+=
+4a\frac{3x^2-a^2}{(a^2+x^2)^3}
++
+4b\frac{3x^2-b^2}{(b^2+x^2)^3}
+}
+\]
+and
+\[
+\boxed{
+\rho_4(\beta,x)
+=
+16a\frac{a^4-10a^2x^2+5x^4}{(a^2+x^2)^5}
++
+16b\frac{b^4-10b^2x^2+5x^4}{(b^2+x^2)^5}.
+}
+\]
+
+\begin{proposition}[No one-pair jet-locking law]
+\label{prop:no-one-pair-jet-locking-law}
+For \(\rho_2(\beta,x)\ne0\), the ratio
+\[
+\frac{\rho_4(\beta,x)}{\rho_2(\beta,x)}
+=
+4
+\frac{
+a\dfrac{a^4-10a^2x^2+5x^4}{(a^2+x^2)^5}
++
+b\dfrac{b^4-10b^2x^2+5x^4}{(b^2+x^2)^5}
+}{
+a\dfrac{3x^2-a^2}{(a^2+x^2)^3}
++
+b\dfrac{3x^2-b^2}{(b^2+x^2)^3}
+}
+\]
+is a nonconstant rational function of the exterior-pair parameters.  In
+particular, the actual one-pair source class does not force
+\[
+\frac{\rho_4}{\rho_2}
+=
+\frac{10q_0^2}{9}
+-
+\frac{5q_0''}{18q_0}.
+\]
+\end{proposition}
+
+\begin{proof}
+The displayed formulas are obtained by Taylor expanding the two summands at
+\(u=0\).  The ratio \(\rho_4/\rho_2\) depends on the one-pair parameters
+\((\beta,x)\), while the Bottleneck-C locking ratio depends on the local
+baseline phase jets \(q_0,q_0''\).  There is no source-internal identity
+equating these quantities.
+\end{proof}
+
+Two useful checks are:
+\[
+\beta=\frac12,\quad x=0
+\quad\Longrightarrow\quad
+\rho_2=-64,\qquad \rho_4=1024,\qquad
+\frac{\rho_4}{\rho_2}=-16,
+\]
+and, as \(|x|\to\infty\),
+\[
+\rho_2=\frac{12}{x^4}+O(x^{-6}),
+\qquad
+\rho_4=\frac{80}{x^6}+O(x^{-8}),
+\]
+so
+\[
+\boxed{
+\frac{\rho_4}{\rho_2}
+=
+\frac{20}{3x^2}+O(x^{-4}).
+}
+\]
+Thus far exterior source atoms approximate the formal bad germ \(r(u)=u^2\)
+to finite jet order.  Any cancellation of the aggregate Bottleneck-C
+coefficient must therefore be a genuine global zero-tail identity, not a
+pair-level source rigidity law.
+
 \subsection{Source-convention rebuild and persistence of the \(\eta\eta\) row}
 \label{subsec:source-convention-rebuild-etaeta-row}
 
@@ -31133,6 +31278,63 @@ If \(A_2^{\new}\ne0\), this is equivalently
 \frac{5(q_0^{\new})''}{18q_0^{\new}}.
 \]
 No such global zero-complement identity is presently proved.
+\end{remark}
+
+\begin{remark}[Source-tagging and renormalized-complement ODEs]
+\label{rem:source-tagging-renormalized-complement-ode-no-go}
+The quantities \(A_2^{\new}\) and \(A_4^{\new}\) in the rebuilt
+Bottleneck-C coefficient are the second and fourth midpoint jets of the
+tagged zero-source object
+\[
+G^{\new}=q_{\mathrm{aux},R}+T_{\mathrm{far},R},
+\]
+after affine subtraction.  They are not the corresponding jets of
+\[
+q-q_{\core},
+\qquad
+B_{\bg}+T_{\far,R}+E_{\est,R},
+\qquad
+q,
+\]
+or any other renormalized complement unless the entire finite-\(s\) row is
+rebuilt.
+
+Thus an ODE for a different complement does not affect the already-derived
+row.  In the present source convention, the only relevant derivative-ratio
+identity is
+\[
+\frac{(G^{\new})^{(4)}(m)}{(G^{\new})''(m)}
+=
+\frac{40(q_0^{\new})^2}{3}
+-
+\frac{10(q_0^{\new})''}{3q_0^{\new}}.
+\]
+No ODE, meromorphic identity, moving-cutoff identity, or standard
+\(\xi'/\xi\) phase-calculus identity currently supplies this condition.
+
+Moreover, near an exterior zero-source pole \(p\) in \(G^{\new}\),
+\[
+G^{\new}(t)\sim \frac{C}{t-p},
+\qquad
+(G^{\new})''(t)\sim \frac{2C}{(t-p)^3},
+\qquad
+(G^{\new})^{(4)}(t)\sim \frac{24C}{(t-p)^5},
+\]
+so
+\[
+\frac{(G^{\new})^{(4)}}{(G^{\new})''}
+\sim
+\frac{12}{(t-p)^2}.
+\]
+But \(q_{\base}^{\new}=q_{\core}+B_{\bg}+E_{\est,R}\) does not contain that
+exterior pole, so the right-hand side
+\[
+\frac{40(q_{\base}^{\new})^2}{3}
+-
+\frac{10(q_{\base}^{\new})''}{3q_{\base}^{\new}}
+\]
+has no matching pole there.  Hence the required equation is not a meromorphic
+identity for the source-compatible complement.
 \end{remark}
 
 \subsection{Invariant and quotient no-go for the \(S\)-visible defect}
@@ -32373,6 +32575,89 @@ Therefore none of these repairs currently replaces pointwise Bottleneck-C
 closure.
 \end{remark}
 
+\subsection{Reduced core, packet visibility, and the visibility-positive base}
+\label{subsec:reduced-core-packet-visibility-base}
+
+The rank-two architecture is only meaningful after fixing the source/core
+convention.  Arbitrary transfers of zero atoms between source and core are not
+currently functorial.  Moving a single zero contribution \(q_\rho\) from source
+to core changes the local corrected object, not merely its coordinates.  At
+coefficient level one should expect
+\[
+A_{2r+1,j}^{\mathfrak f}
+=
+G_{ij}^{-1}A_{2r+1,i}^{\mathfrak f}
++
+B_{\rho,2r+1},
+\]
+not a pure \(GL_2\)-transition.  Therefore source/core moves are excluded from
+the atlas rather than transported.
+
+We use the canonical reduced-core rule
+\[
+\mathcal C_k(m)
+=
+\text{the unique symmetry-closed, same-scale \(k\)-packet nearest }m.
+\]
+Let
+\[
+\mathcal E_{\rm geom}^{\core}
+=
+\mathcal E_{\rm geom}
+\cup
+\mathcal E_{\rm core\ boundary},
+\]
+where \(\mathcal E_{\rm core\ boundary}\) includes nearest-packet ties,
+same-scale boundary, symmetry-closure ambiguity, endpoint-gap collapse, zero
+collision or multiplicity, Gram/whitening singularity, and patch-boundary
+failure.  Define
+\[
+\mathcal B_{\rm red}
+=
+\mathcal B\setminus\mathcal E_{\rm geom}^{\core}.
+\]
+On \(\mathcal B_{\rm red}\), the selected core is locally constant as a
+labelled symmetry-closed packet.
+
+The RH-relevant local object is not a single zero but the symmetry packet
+\[
+\mathcal P(\rho)
+=
+\{\rho,\bar\rho,1-\rho,1-\bar\rho\},
+\qquad
+\rho=\beta+i\gamma,\quad \beta\ne\frac12.
+\]
+Packet-level ordering is essential: functional-equation and conjugation
+symmetries force internal equalities inside \(\mathcal P(\rho)\), and these
+should not be counted as core-selection failures.  The dangerous tie walls are
+ties between distinct packets.
+
+For packet visibility, set
+\[
+\mathcal B_{\rm red}^{+}
+=
+\mathcal B_{\rm red}
+\setminus
+\mathcal E_{\rm invis}^{\core,7}.
+\]
+For the centered one-whitening-slot route, the incidence walls include
+\[
+\{y=0\}\cup\{q''=0\}\cup\{g=h\},
+\]
+and, when quotient isolation is used, also \(\{v_5=0\}\).  For the
+non-centered \(q^{(7)}\)-transport route, include
+\[
+\{q^{(7)}=0\}\cup\{\Xi_{K_1}=0\}.
+\]
+On \(\mathcal B_{\rm red}^{+}\), the off-line packet fixed-sector visibility
+vector
+\[
+C_{\rm fd}^{\vec f}
+=
+(A_7^{\mathfrak f},A_9^{\mathfrak f},\ldots)
+\]
+is nonzero modulo these explicit incidence exclusions.
+
 \subsection{Rank-two fixed-sector bundle as the remaining viable language}
 \label{subsec:rank-two-fixed-sector-remaining-language}
 
@@ -32500,6 +32785,168 @@ can still transform by a \(GL_2\)-matrix.  Hence the rank-two bundle is the
 right level at which to formulate covariance.
 \end{remark}
 
+\subsection{Order-seven packet visibility on the reduced base}
+\label{subsec:order-seven-packet-visibility-reduced-base}
+
+The first admissible visibility coefficient is not \(A_5^{\mathfrak f}\),
+which defines the reference line, but \(A_7^{\mathfrak f}\).  The direct raw
+off-diagonal order-seven term is not itself the witness.  At a centered even
+packet,
+\[
+N_7^{\off}=C_7J,
+\qquad
+J=
+\begin{pmatrix}
+0&1\\
+-1&0
+\end{pmatrix}.
+\]
+Since \(X_{-,0}=X_{+,0}=X_0\),
+\[
+X_0N_7^{\off}X_0=C_7(\det X_0)J,
+\]
+so
+\[
+\pi_{\mathfrak f}(X_0N_7^{\off}X_0)=0.
+\]
+
+The live centered channel is instead the one-whitening-slot term
+\[
+T_7^{(1)}
+=
+X_{-,1}YX_{+,0}+X_{-,0}YX_{+,1},
+\qquad
+Y=yJ.
+\]
+At centered parity,
+\[
+X_{+,0}=X_{-,0}=X_0,
+\qquad
+X_{+,1}=-X_{-,1}.
+\]
+Write
+\[
+X_0=pI+rD,
+\qquad
+X_{-,1}=BS.
+\]
+Then
+\[
+T_7^{(1)}
+=
+yB(SJX_0-X_0JS)
+=
+-2yB(pD+rI),
+\]
+and hence
+\[
+\boxed{
+\pi_{\mathfrak f}(T_7^{(1)})=-2yBr\,I.
+}
+\]
+
+For the centered off-line packet,
+\[
+q''=2A_2,
+\qquad
+A_2=-4(a^{-3}+b^{-3})\ne0,
+\]
+and
+\[
+y_{\rm lead}
+=
+-\frac{q_0A_2^2}{72}.
+\]
+Moreover
+\[
+B=
+\frac{q''}
+{4\pi\sqrt{gh}(\sqrt g+\sqrt h)},
+\qquad
+r=\frac12(g^{-1/2}-h^{-1/2}).
+\]
+Thus the one-whitening-slot channel is nonzero outside the explicit incidence
+walls
+\[
+y=0,\qquad q''=0,\qquad g=h.
+\]
+
+There is also a non-centered visibility route.  The local construction uses
+\[
+t_\pm=m\pm\frac{s}{2},
+\]
+so \(m\) is a sampling midpoint, not necessarily the zero-packet center.  For
+the paired packet
+\[
+f_{\beta,\gamma}(t)
+=
+\frac{a}{a^2+x^2}+\frac{b}{b^2+x^2},
+\qquad x=2t-\gamma,
+\]
+one has, near \(x_m=2m-\gamma=0\),
+\[
+q^{(7)}(m)
+=
+5160960(a^{-9}+b^{-9})x_m+O(x_m^3).
+\]
+Thus \(x_m=0\) is a simple zero of \(q^{(7)}(m)\), and every sufficiently small
+nonzero perturbation of \(m\) activates the septic \(K_1\)-transport slice,
+outside
+\[
+q^{(7)}=0,
+\qquad
+\Xi_{K_1}=0.
+\]
+
+\begin{proposition}[Packet visibility on \(\mathcal B_{\rm red}^{+}\)]
+\label{prop:packet-visibility-on-bred-plus}
+On \(\mathcal B_{\rm red}^{+}\), the finite fixed-sector vector
+\[
+C_{\rm fd}^{\vec f}
+=
+(A_7^{\mathfrak f},A_9^{\mathfrak f},\ldots)
+\]
+is nonzero for the reduced off-line packet family.
+\end{proposition}
+
+\begin{proof}
+For the centered route, the direct skew \(N_7^{\off}\)-term projects to zero,
+but the one-whitening-slot \(K_1\)-channel has fixed-sector projection
+\[
+-2yBr\,I,
+\]
+which is nonzero outside \(\{y=0\}\cup\{q''=0\}\cup\{g=h\}\).
+
+For the non-centered route, \(m\) is a free sampling midpoint.  The expansion
+of \(q^{(7)}(m)\) shows that \(q^{(7)}=0\) is a proper analytic wall near the
+packet center.  Away from this wall and from \(\{\Xi_{K_1}=0\}\), the septic
+\(K_1\)-transport slice gives \(A_7^{\mathfrak f}\ne0\).
+\end{proof}
+
+\begin{remark}[Order-seven channel independence ledger]
+\label{rem:order-seven-channel-independence-ledger}
+The full order-seven corrected-whitening coefficient is
+\[
+A_{7,\core}^{\mathfrak f}
+=
+\pi_{\mathfrak f}
+\sum_{a+g+b=7}
+X_{-,a}N_gX_{+,b}.
+\]
+The direct skew \(N_7^{\off}\)-term is killed by \(\pi_{\mathfrak f}\).  The
+live one-whitening-slot term belongs to the \(K_1\)-transport sector.  \(K_3\)
+shadow terms are projected away, pure same-point septic terms vanish in the
+odd two-point germ, and \(K_5\)-terms lie in
+\[
+\mathbf C A_5^{\mathfrak f}.
+\]
+Thus exact cancellation of the live \(-2yBr\,I\) channel can only come from a
+same \(K_1\)-transport contribution or a direct diagonal \(N_7\)-term with the
+same jet monomial.  No structural identity forcing such cancellation is
+currently present; such cancellation is included in the visibility incidence
+locus.
+\end{remark}
+
 \subsection{The \(\eta\eta\) row as rank-two affine forcing}
 \label{subsec:etaeta-row-rank-two-affine-forcing}
 
@@ -32599,6 +33046,100 @@ E_{\rm line}\in \mathbf C A_5^{\mathfrak f}.
 The remaining table dependency is to verify that no additional uncontrolled
 same-grade \(K_1\) source-Hessian companion survives outside the already
 identified \(E_{\eta\eta}\) row.
+
+The current local row table is:
+\[
+\begin{array}{c|c|c|c}
+\text{row class} & \text{source} & \text{fixed-sector status}
+& \text{present role}\\ \hline
+E_{\rm GateA}
+& \text{aggregate homogeneous scalar-grade rows}
+& 0
+& \text{closed by Gate A}\\
+E_{\rm GateB}
+& \text{ordinary order }\le 7\text{ local rows}
+& 0
+& \text{closed by Gate B hypotheses}\\
+E_{\eta\eta}
+& \text{symmetric second-source Hessian / mixed-block row}
+& -\dfrac{\nu_{\eta\eta}}{24\pi q^3}(wI+uS)
+& \text{retained as affine forcing}\\
+E_{\rm line}
+& K_5\text{ normalization shadows}
+& \in\mathbf C A_5^{\mathfrak f}
+& \text{transported line term}\\
+E_{K_3}
+& K_3\text{ shadow sector}
+& 0
+& \text{projected away}\\
+E_{\rm pure}
+& \text{pure same-point septic sector}
+& 0
+& \text{vanishes in odd two-point germ}\\
+E_{\rm conn}
+& \text{frame/projection/whitening gauge motion}
+& 0
+& \text{absorbed by }\nabla^{\mathfrak f}\\
+E_{\rm bg/core}
+& \text{fixed background/core baseline terms}
+& \text{fixed analytic section}
+& \text{included in affine forcing}
+\end{array}
+\]
+
+The visibility-positive incidence exclusions used to define
+\(\mathcal B_{\rm red}^{+}\) do not alter Gate A/B; they only restrict the
+base to points where the packet-visibility channel is active.
+
+\begin{theorem}[Conditional local rank-two affine forcing equation]
+\label{thm:conditional-local-rank-two-affine-forcing}
+On \(\mathcal B_{\rm red}^{+}\), assume the rank-two connection theorem and
+the row-table classifications above.  Then
+\[
+\nabla_\kappa^{\mathfrak f}A_7^{\mathfrak f}
+=
+E_{\eta\eta}+E_{\rm lower},
+\]
+where
+\[
+E_{\eta\eta}
+=
+-\frac{\nu_{\eta\eta}}{24\pi q^3}(wI+uS)
+\]
+is a tensorial section of \(\mathcal F_{\rm red}^{+}\), and \(E_{\rm lower}\)
+contains only Gate A/B-closed, connection-absorbed, line, shadow, pure,
+background/core, and already-classified analytic forcing terms.
+\end{theorem}
+
+\begin{proof}
+By definition,
+\[
+A_7^{\mathfrak f}
+=
+[s^7]\Pi_{\mathfrak f}\widehat\Omega_\zeta^{\corr}(s;m).
+\]
+The projected connection gives
+\[
+\nabla_\kappa^{\mathfrak f}A_7^{\mathfrak f}
+=
+\Pi_{\mathfrak f}d_\kappa^{\mathcal J}
+\left([s^7]\widehat\Omega_\zeta^{\corr}\right),
+\]
+so frame, projection, and whitening-gauge variations are absorbed into
+\(\nabla^{\mathfrak f}\).  The \(\eta_i\eta_j\) second-source Hessian row of
+the promoted mixed block gives \(E_{\eta\eta}\).  All remaining terms are
+classified by the displayed table.
+\end{proof}
+
+\begin{remark}[The equation is local, not yet global]
+\label{rem:local-affine-forcing-not-global}
+Theorem~\ref{thm:conditional-local-rank-two-affine-forcing} does not prove a
+global contradiction.  It changes the local interpretation of the
+Bottleneck-C row: the row is no longer a scalar defect demanding pointwise
+vanishing, but an inhomogeneous forcing term in a rank-two transport equation.
+A global boundary, holonomy, exactness, index, or transported finite-core
+non-concentration theorem is still required.
+\end{remark}
 
 \begin{remark}[What the affine equation changes]
 \label{rem:what-affine-equation-changes}
@@ -32703,6 +33244,47 @@ q(A')^2
 \]
 The last two terms are genuine bulk terms.  Therefore the forcing is not
 presently a boundary term in the natural variables.
+
+For a loop \(\Gamma\) based at \(b\), the corresponding affine holonomy data are
+\[
+\operatorname{AffHol}_\Gamma
+=
+\left(
+U_\Gamma,
+\Delta_\Gamma^{\rm aff}
+\right),
+\]
+where
+\[
+\Delta_\Gamma^{\rm aff}
+=
+\int_\Gamma
+U_{t\to b}
+\left(E_{\eta\eta}+E_{\rm lower}\right)(t)\,dt.
+\]
+A holonomy proof gate would need all of:
+\begin{enumerate}
+\item a canonical loop \(\Gamma\subset\mathcal B_{\rm red}^{+}\);
+\item a global theorem constraining \(U_\Gamma\);
+\item a global zeta-theoretic law forcing \(\Delta_\Gamma^{\rm aff}=0\), or a
+prescribed value;
+\item an off-line-packet theorem forcing an incompatible value of
+\(\Delta_\Gamma^{\rm aff}\).
+\end{enumerate}
+None of these is presently available.
+
+\begin{remark}[Affine holonomy is not presently a proof gate]
+\label{rem:affine-holonomy-not-proof-gate}
+Loops around core-boundary walls, packet-visibility incidence walls, Gram
+singularities, or whitening branch loci are diagnostic but not currently
+canonical RH objects.  A loop around a core-boundary wall may change labels or
+source/core convention; a Gram loop may measure only gauge or atlas monodromy;
+and zero-counting contours live in the complex zeta plane, not yet in the
+rank-two fixed-sector base \(\mathcal B_{\rm red}^{+}\).  Thus affine holonomy
+cannot presently replace the local affine forcing equation.  The most
+plausible global successors are real path/boundary transport or a transported
+finite-core non-concentration theorem.
+\end{remark}
 
 \begin{remark}[Current global dependency]
 \label{rem:current-global-affine-transport-dependency}
@@ -32835,12 +33417,80 @@ about rank-two affine transport, vector-valued finite-core non-concentration,
 or a comparable non-scalar invariant.
 \end{remark}
 
+\begin{remark}[Current architecture ledger]
+\label{rem:current-architecture-ledger-rank-two}
+The current state is:
+\[
+\boxed{\text{Gate A/B are retained as local fixed-convention algebraic lemmas.}}
+\]
+\[
+\boxed{\text{Scalar, quotient-only, split-pointwise, and line-bundle Bottleneck-C repairs do not close the proof.}}
+\]
+\[
+\boxed{\text{The reduced-base rank-two fixed-sector bundle is the remaining viable local language.}}
+\]
+\[
+\boxed{\text{Packet visibility is closed on }\mathcal B_{\rm red}^{+}\text{ modulo explicit incidence.}}
+\]
+\[
+\boxed{\text{The active }\eta\eta\text{ row is tensorial affine forcing, not ordinary curvature.}}
+\]
+\[
+\boxed{\text{The local affine forcing equation is conditionally established pending the written }E_{\rm lower}\text{ table.}}
+\]
+\[
+\boxed{\text{The next missing theorem is global affine transport, boundary, index, or transported non-concentration control.}}
+\]
+\end{remark}
+
 The finite-core problem below should therefore be read in this updated role:
 it is no longer a downstream step after a closed Bottleneck-C gate.  Rather, it
 is one possible global theorem that could make the rank-two/vector-valued
 architecture proof-relevant.  The specific missing input is pointwise sampled
 non-concentration for the relevant fixed-sector vector, not another finite
 determinacy statement.
+
+\begin{remark}[Visibility is not non-concentration]
+\label{rem:visibility-not-nonconcentration}
+The order-seven packet-visibility result proves that the relevant fixed-sector
+vector is not identically zero on the reduced visibility-positive base.  It
+does not prove the sampled finite-core lower bound.  The aligned branch
+\[
+J_{\rm fd}^{\vec f}\approx -P_{\rm fd}^{\vec f}
+\]
+remains possible until a vector-valued non-concentration, cone-control,
+interaction-rigidity, or transport-index theorem rules it out.  Thus
+visibility closes the local detection problem but not the global sampling
+problem.
+\end{remark}
+
+\begin{remark}[Transported finite-core data do not remove alignment]
+\label{rem:transported-finite-core-data-do-not-remove-alignment}
+One may try to strengthen the finite-core vector by adding covariant transport
+data, for instance
+\[
+C_{\rm fd}^{\rm tr}
+=
+(A_7^{\mathfrak f},
+\nabla^{\mathfrak f}A_7^{\mathfrak f},
+A_9^{\mathfrak f},
+\nabla^{\mathfrak f}A_9^{\mathfrak f},
+\ldots).
+\]
+Using the local affine equation, this is equivalent to adding
+\[
+E_{\eta\eta}+E_{\rm lower}
+\]
+as additional coordinates.  This is coherent, but it does not by itself prove
+sampled non-concentration.  The old aligned branch simply becomes
+\[
+J_{\rm fd}^{\rm tr}\approx -P_{\rm fd}^{\rm tr}.
+\]
+Adding derivative or forcing coordinates enlarges the finite vector but does
+not impose a sign, cone, monotonicity, or endpoint constraint that forbids
+alignment.  A transported finite-core theorem would therefore require a new
+coercivity, boundary, incidence, or cone-control input.
+\end{remark}
 
 \subsection{Finite-core sampled vector non-concentration}
 \label{subsec:finite-core-sampled-vector-nonconcentration}
