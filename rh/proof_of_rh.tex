@@ -3006,6 +3006,42 @@ transfer, hidden-state/odd-block extraction, and the downstream endgame
 reductions.
 \end{remark}
 
+\begin{remark}[Sensitivity of the mixed four-point branch to Gate B]
+\label{rem:mixed-four-point-sensitivity-to-gate-b}
+The mixed four-point branch is sensitive only to the fixed-sector
+quotient class of a Gate~B residual.  Let
+\[
+E=eI+fS\in\mathfrak f_h.
+\]
+If
+\[
+E\in \mathbf C A_5^{\mathfrak f}(h),
+\]
+then \(E\) is invisible in the quotient package.  On a good patch, this
+is equivalently
+\[
+ev_5-u_5f=0,
+\qquad
+A_5^{\mathfrak f}(h)=u_5I+v_5S.
+\]
+If instead
+\[
+ev_5-u_5f\ne0,
+\]
+then \(E\) shifts the order-\(7\) quotient scalar:
+\[
+\Delta_7\longmapsto \Delta_7+(ev_5-u_5f).
+\]
+Consequently \(\lambda=\Delta_7/v_5\) and the downstream scalar package
+\(\mathcal Z,\mathcal R,T_v\) generally change.  Thus a non-gauge Gate~B
+residual would create precisely the independent fixed-sector quotient
+carrier that the corrected package theorem is designed to remove.
+
+The mixed four-point scalar-exit theorem should therefore be read after
+Gate~B has removed non-\((1,1)\) quotient directions.  It is not a
+substitute for Gate~B.
+\end{remark}
+
 \begin{corollary}[Single-pair exterior odd-coefficient bound]
 \label{cor:single-pair-odd-jet}
 Fix $0<c_*<\rho_0/8$. Let $h_\rho(s)$ be the corrected transverse scalar
@@ -12728,6 +12764,49 @@ The corrected-package audit uses two separate gates.  We call them Gate~A
 and Gate~B to prevent the leading homogeneous cubic audit from being
 confused with the full raw edge-divisibility theorem.
 
+\begin{remark}[Roadmap of the Gate A/Gate B correction]
+\label{rem:roadmap-gate-a-gate-b-correction}
+The corrected-package audit separates into two layers.
+
+\emph{Gate A} is the leading homogeneous cubic audit.  It is a finite,
+order-\(7\), leading-source calculation.  Under the homogeneous scalar-grade
+convention, Gate~A closes at the aggregate fixed-sector level:
+\[
+F_1^{\mathrm{lead\ cubic}}=0.
+\]
+
+\emph{Gate B} is the raw edge-divisibility theorem.  It concerns the full
+non-\((1,1)\) projected raw corrected-whitening cross-effect
+\[
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}
+\]
+on the collision chart
+\[
+h_1=h-\frac{\delta}{2},\qquad
+h_2=h+\frac{\delta}{2},\qquad
+a_2=-a_1(1+\kappa\delta).
+\]
+Gate~B is the assertion
+\[
+[z^7][\delta^1]\,
+\pi_{\mathfrak f_h}(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}=0.
+\]
+
+The proof of Gate~B below uses four inputs:
+\begin{enumerate}
+\item Gate~A aggregate closure;
+\item odd total-grade subset-complement cancellation for amplitude terms;
+\item moving Taylor-frame telescoping for the source-motion terms;
+\item \(2\)-jet source-frame normalization, which removes the affine lower
+boundary.
+\end{enumerate}
+Only after Gate~B is proved may one form the normalized edge package
+\[
+-a_1^{-1}\delta^{-2}
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}.
+\]
+\end{remark}
+
 \begin{definition}[Gate A: leading homogeneous cubic audit]
 \label{def:gate-a-leading-homogeneous-cubic-audit}
 Work under the homogeneous scalar-grade convention
@@ -13438,6 +13517,28 @@ package representative.  The raw seven-family Fr\'echet sum is only a
 diagnostic object; its failure under a matrix-output \(M^{[5]}\) convention
 is recorded in Remark~\ref{rem:computational-status-raw-package} and does
 not replace the corrected package theorem.
+\end{remark}
+
+\begin{remark}[Superseded Gate B status notes]
+\label{rem:superseded-gate-b-status-notes}
+Earlier WIP notes treated \(p\ge4\) transfer filtration and lower-shadow
+absorption as open obstructions.  That was the correct status before the
+homogeneous transfer audit.  The current proof replaces those open
+obligations as follows:
+\begin{enumerate}
+\item positive-grade amplitude terms of total grade \(7\) vanish by odd
+total-grade subset-complement cancellation;
+\item the grade-preserving part of \(X_h\) vanishes by the same
+cancellation;
+\item the grade-lowering part of \(X_h\) telescopes across adjacent
+moving Taylor grades;
+\item the sole lower boundary produced by \(\operatorname{Gr}_0\) is
+affine and is removed by \(2\)-jet source-frame normalization.
+\end{enumerate}
+Thus the remaining role of the old notes is as guardrails: do not prove
+Gate~B by post-edge quotient compatibility, do not demand
+family-by-family vanishing, and do not truncate the source tower before
+differentiating.
 \end{remark}
 
 \begin{remark}[Relation to the package-to-jet bridge]
@@ -27993,6 +28094,76 @@ Definition~\ref{def:normalized-corrected-whitening-package-representative},
 not the raw seven-family Fr\'echet sum.
 \end{remark}
 
+\begin{remark}[Convention: transfer degree versus source bidegree]
+\label{conv:transfer-degree-versus-source-bidegree}
+We write \(d\) for homogeneous transfer degree in
+\[
+\mathcal T(X)=\sum_{d\ge1}\mathcal T_d(X),
+\]
+and reserve \((p,q)\) for source bidegree in the source-tagged expansion
+\[
+C(\tau_1,\tau_2)=\sum_{p,q}\tau_1^p\tau_2^qC_{p,q}.
+\]
+\end{remark}
+
+\begin{remark}[Fixed-sector projection in the moving fiber]
+\label{rem:fixed-sector-projection-moving-fiber}
+When the midpoint is \(h\), the fixed-sector projection is denoted
+\(\pi_{\mathfrak f_h}\).  The transpose-invariance identity
+\[
+\pi_{\mathfrak f_h}(Z^T)=\pi_{\mathfrak f_h}(Z)
+\]
+is applied in the moving midpoint fiber before midpoint trivialization to
+\(m\).
+\end{remark}
+
+\begin{lemma}[Universal first-collision formula by transfer degree]
+\label{lem:universal-first-collision-formula-transfer-degree}
+Let
+\[
+\mathcal T(X)=\sum_{d\ge1}\mathcal T_d(X)
+\]
+be the homogeneous transfer expansion of the corrected-whitening map.  On
+the collision chart
+\[
+h_1=h-\frac{\delta}{2},\qquad
+h_2=h+\frac{\delta}{2},\qquad
+a_2=-a_1(1+\kappa\delta),
+\]
+the first-collision contribution of homogeneous transfer degree \(d\) has
+the form
+\[
+\boxed{
+F_{1,d}
+=
+[z^7]\pi_{\mathfrak f_h}
+\left[
+(-1)^{d+1}d\kappa\,\mathcal T_d(X^d)
++
+\frac d2(1-(-1)^d)\mathcal T_d(X^{d-1},X_h)
+\right].
+}
+\]
+Thus even \(d\) contributes only the amplitude term
+\[
+[z^7]\pi_{\mathfrak f_h}\mathcal T_d(X^d),
+\]
+whereas odd \(d\) contributes both the amplitude term and the
+source-motion term
+\[
+[z^7]\pi_{\mathfrak f_h}\mathcal T_d(X^{d-1},X_h).
+\]
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+The factor \(a_2=-a_1(1+\kappa\delta)\) produces the amplitude derivative
+term proportional to \(d\kappa\).  The endpoint displacement
+\(h_1=h-\delta/2\), \(h_2=h+\delta/2\) produces the midpoint-motion
+insertion.  The parity of \(d\) controls whether the endpoint-motion
+contributions cancel or add: for even \(d\) the \(X_h\)-insertion cancels,
+while for odd \(d\) it appears with coefficient \(d\).
+\end{proof}
+
 \subsection{Fourth-transfer coefficient table for Gate B}
 \label{subsec:fourth-transfer-coefficient-table-gate-b}
 
@@ -28274,6 +28445,12 @@ Equivalently, the source-frame projection is
 \]
 Thus constant and affine modes are not independent raw source inputs.
 
+This is not a blanket assertion that all lower-shadow grades are discarded.
+The grade \(0,2,4\) source directions may appear in the moving Taylor tower.
+They are handled by the interior telescoping identity when they arise from
+source-motion, not by reclassifying them as baseline data.  The only
+boundary mode removed here is the affine grade \(-1\) term.
+
 For the homogeneous scalar-grade basis, the remaining lower boundary
 \[
 (\partial_h\operatorname{Gr}_{0}r)_{\mathrm{lower}}
@@ -28309,6 +28486,56 @@ an affine source would force \(U_\pm\) and \(E_\pm\) to have poles in
 \(z\).  Hence affine modes are outside the admissible holomorphic source
 sector.  This is the source-frame reason the homogeneous scalar-grade
 tower starts at \(g=0\), i.e. at the second derivative.
+\end{proof}
+
+\begin{proposition}[Decomposition of the Gate B first-collision coefficient]
+\label{prop:decomposition-gate-b-first-collision}
+Through ordinary order \(7\), the Gate~B first-collision coefficient
+decomposes as
+\[
+F_1
+=
+F_1^{\mathrm{GateA}}
++
+F_1^{\mathrm{amp}}
++
+F_1^{X_h,\mathrm{same}}
++
+F_1^{X_h,\mathrm{lower}}
++
+F_1^{\mathrm{bdry}},
+\]
+where:
+\begin{enumerate}
+\item \(F_1^{\mathrm{GateA}}\) is the leading homogeneous cubic
+contribution;
+\item \(F_1^{\mathrm{amp}}\) is the amplitude contribution of higher
+transfer terms \(\mathcal T_d(X^d)\) with total homogeneous grade \(7\);
+\item \(F_1^{X_h,\mathrm{same}}\) is the grade-preserving part of the
+source-motion insertion;
+\item \(F_1^{X_h,\mathrm{lower}}\) is the grade-lowering part of the
+source-motion insertion;
+\item \(F_1^{\mathrm{bdry}}\) consists of the lower affine boundary and
+the upper truncation boundary of the moving Taylor source frame.
+\end{enumerate}
+Under the hypotheses of Gate~A closure, all-subset midpoint parity,
+leading \(Y\)-middle parity, moving source-frame telescoping, and
+\(2\)-jet source-frame normalization, every term on the right vanishes.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+The decomposition follows from
+Lemma~\ref{lem:universal-first-collision-formula-transfer-degree}.  Gate~A
+handles the leading cubic term.
+Theorem~\ref{thm:odd-total-grade-subset-complement-cancellation} handles
+the amplitude part.  The grade-preserving component of \(X_h\) has the
+same midpoint parity as the undifferentiated source and is handled by the
+same subset-complement argument.  The grade-lowering part of \(X_h\) is
+handled by Theorem~\ref{thm:moving-homogeneous-source-frame-telescoping}.
+The lower affine boundary is removed by
+Lemma~\ref{lem:affine-boundary-removal-moving-source-frame}, and the
+upper boundary is avoided by differentiating the full Taylor source tower
+before truncation.
 \end{proof}
 
 \begin{corollary}[Gate B raw edge-divisibility through ordinary order \(7\)]
@@ -28366,6 +28593,18 @@ parity, and then project to the transpose-invariant fixed sector.  No
 placement-by-placement vanishing is asserted.
 \end{remark}
 
+\begin{remark}[Raw placement-level vanishing is false]
+\label{rem:raw-placement-level-vanishing-false}
+The aggregate cancellations above must not be read as placement-level
+vanishing.  A single fourth-transfer subchannel, for instance a diagonal
+same-point placement in the \((1,1,1,4)\) class, can produce a nonzero
+fixed-sector \(I\)-component.  The cancellation occurs only after summing
+the labelled subset-complement aggregate and applying the
+transpose-invariant projection \(\pi_{\mathfrak f}\).  Thus the correct
+theorem is aggregate fixed-sector cancellation, not termwise support-zero
+or family-by-family gauge.
+\end{remark}
+
 \begin{remark}[Layering of the corrected package]
 \label{rem:layering-of-corrected-package}
 The raw edge-divisibility statement is pre-normalization.  Only after
@@ -28381,6 +28620,70 @@ has been established may one form the amplitude-normalized package
 \]
 Post-edge quotient compatibility statements involving \(Q_{7,m}^q\)
 should not be used as the first proof of edge divisibility.
+\end{remark}
+
+\begin{remark}[Post-edge quotient compatibility is not a proof of edge divisibility]
+\label{rem:post-edge-quotient-compatibility-not-edge-proof}
+The formal projection identity
+\[
+\Pi_{1,1}\mathcal T_{d\ge3}=0
+\]
+does not by itself prove Gate~B.  Gate~B uses the retained complement
+\[
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}},
+\]
+and must be proved before the normalized quotient package exists.
+Therefore a statement such as
+\[
+Q_{7,m}^q(C)=Q_{7,m}^q(\Pi_{1,1}C)
+\]
+is a post-edge compatibility statement unless it is reformulated at the
+raw edge level.  It cannot be used as the first proof that
+\[
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}=O(a_1\delta^2).
+\]
+\end{remark}
+
+\begin{definition}[Pre-trivialization edge table after Gate B]
+\label{def:pre-trivialization-edge-table-after-gate-b}
+After Corollary~\ref{cor:gate-b-raw-edge-divisibility-order-seven}, the
+edge-normalized package is holomorphic through ordinary order \(7\).  For
+a source monomial \(M\), define the pre-trivialization edge coefficient
+\[
+\boxed{
+Z_j[M](z)
+:=
+-[\epsilon^j\delta^2M]\,
+a_1^{-1}\,
+\tau_{h\to m}\pi_{\mathfrak f_h}[z^{\le7}]
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}},
+}
+\]
+where \(\epsilon=h-m\).  Equivalently,
+\[
+Z_j[M](z)
+=
+[\epsilon^jM]\,
+\tau_{h\to m}\pi_{\mathfrak f_h}[z^{\le7}]
+\widehat C_{\mathcal W}^{\mathrm{amp}},
+\]
+once the edge-normalized package
+\(\widehat C_{\mathcal W}^{\mathrm{amp}}\) has been formed.
+\end{definition}
+
+\begin{remark}[Pre-trivialization versus post-trivialization coefficients]
+\label{rem:pre-trivialization-versus-post-trivialization-coefficients}
+The coefficients \(Z_j[M]\) are pre-trivialization coefficients.  If
+\(B_j[M]\) denotes coefficients after applying the representative-level
+midpoint trivialization, then \(B_j[M]\) already includes the moving-line
+connection contribution.  Therefore the connection sum
+\[
+q_{\mathrm{conn},7}[M]
+=
+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M],A_i)
+\]
+must use \(Z_j[M]\), not post-trivialization \(B_j[M]\), or the
+connection is counted twice.
 \end{remark}
 
 \subsection{Midpoint parity}
