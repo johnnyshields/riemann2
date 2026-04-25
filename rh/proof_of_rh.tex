@@ -33206,6 +33206,49 @@ right level at which to formulate covariance.
 \subsection{Order-seven packet visibility on the reduced base}
 \label{subsec:order-seven-packet-visibility-reduced-base}
 
+For this and the following subsections, write the centered diagonal Gram
+data as
+\[
+g=\frac{q_0}{\pi},
+\qquad
+h=\frac1\pi\left(\frac13q_0^3+\frac16q''\right),
+\]
+so that the centered same-point Gram block at \(s=0\) is, up to the fixed
+ambient normalization,
+\[
+G_0=\operatorname{diag}(2g,2h).
+\]
+
+\begin{definition}[First and second Gram-anisotropy functionals]
+\label{def:gram-anisotropy-functionals}
+On a centered reduced patch define
+\[
+\Gamma_G
+:=
+q''-6q_0+2q_0^3 .
+\]
+Then
+\[
+g-h
+=
+-\frac{\Gamma_G}{6\pi}.
+\]
+Thus the Gram-isotropy wall \(g=h\) is equivalently
+\[
+\Gamma_G=0.
+\]
+
+We also define the second Gram-anisotropy functional
+\[
+\Gamma_{G,2}
+:=
+(1-q_0^2)q''-\frac16q^{(4)}.
+\]
+This is the anisotropy of the second centered Gram variation.  In
+particular, on \(g=h\), the first Gram anisotropy has vanished, but the
+second one need not vanish.
+\end{definition}
+
 The first admissible visibility coefficient is not \(A_5^{\mathfrak f}\),
 which defines the reference line, but \(A_7^{\mathfrak f}\).  The direct raw
 off-diagonal order-seven term is not itself the witness.  At a centered even
@@ -33288,6 +33331,611 @@ walls
 \[
 y=0,\qquad q''=0,\qquad g=h.
 \]
+
+\begin{lemma}[Centered order-seven fixed-sector row and first Gram anisotropy]
+\label{lem:centered-order-seven-gram-anisotropy}
+At centered parity,
+\[
+X_{+,0}=X_{-,0}=X_0,
+\qquad
+X_{+,1}=-X_{-,1}.
+\]
+Write
+\[
+X_0=pI+rD,
+\qquad
+X_{-,1}=BS,
+\qquad
+Y=yJ,
+\]
+where
+\[
+p=\frac12(g^{-1/2}+h^{-1/2}),
+\qquad
+r=\frac12(g^{-1/2}-h^{-1/2}).
+\]
+Then the centered one-whitening-slot row
+\[
+T_7^{(1)}
+:=
+X_{-,1}YX_{+,0}+X_{-,0}YX_{+,1}
+\]
+satisfies
+\[
+T_7^{(1)}
+=
+-2yB(pD+rI).
+\]
+Consequently
+\[
+\pi_{\mathfrak f}T_7^{(1)}
+=
+-2yBr\,I.
+\]
+Equivalently,
+\[
+\pi_{\mathfrak f}T_7^{(1)}
+=
+-y\frac{q''(h-g)}
+{4\pi gh(\sqrt g+\sqrt h)^2}I.
+\]
+Thus, away from the source walls \(y=0\) and \(q''=0\), the centered
+order-seven fixed-sector signal is nonzero exactly off the first
+Gram-isotropy wall \(g=h\), or equivalently off \(\Gamma_G=0\).
+\end{lemma}
+
+\begin{remark}[Why order seven alone is insufficient on \(g=h\)]
+\label{rem:order-seven-insufficient-on-gram-isotropy}
+On \(g=h\) one has \(r=0\).  The order-seven row does not disappear in
+the ambient \(2\times2\) algebra; rather, it becomes
+\[
+T_7^{(1)}\big|_{g=h}
+=
+-2yBpD.
+\]
+This component is anti-fixed and is killed by
+\(\pi_{\mathfrak f}\).  Hence the centered order-seven fixed-sector
+argument requires either quantitative separation from \(g=h\), an
+ambient \(D\)-sector enlargement, or a higher-order fixed-sector
+replacement.  The next replacement is the order-nine row below.
+\end{remark}
+
+\begin{lemma}[Second whitening anisotropy on the Gram-isotropy wall]
+\label{lem:second-whitening-anisotropy}
+Assume \(g=h\), so that
+\[
+G_0=gI.
+\]
+Write
+\[
+G_-(s)=G_0+sG_1+s^2G_2+O(s^3),
+\qquad
+X_-(s)=G_-(s)^{-1/2}
+=
+X_0+sX_1+s^2X_2+O(s^3),
+\]
+with the convention \(G_-(s)=G(m-s/2)\), so
+\[
+G_1=-\frac12G'(m),
+\qquad
+G_2=\frac18G''(m).
+\]
+At a scalar base,
+\[
+X_2
+=
+-\frac12g^{-3/2}G_2
++
+\frac38g^{-5/2}G_1^2.
+\]
+At centered parity, \(G_1\in\mathbf C S\), hence
+\[
+G_1^2\in\mathbf C I.
+\]
+Therefore
+\[
+(X_2)_D
+=
+-\frac12g^{-3/2}(G_2)_D.
+\]
+
+Using the centered Gram model
+\[
+G(t)
+=
+\frac1\pi
+\begin{pmatrix}
+q(t) & \frac12q'(t)\\[1mm]
+\frac12q'(t) &
+\frac13q(t)^3+\frac16q''(t)
+\end{pmatrix},
+\]
+and \(q'(m)=q'''(m)=0\), one has
+\[
+G''(m)
+=
+\frac1\pi
+\begin{pmatrix}
+q'' & 0\\[1mm]
+0 & q_0^2q''+\frac16q^{(4)}
+\end{pmatrix}.
+\]
+Thus
+\[
+(G_2)_D
+=
+\frac{1}{16\pi}
+\left(
+(1-q_0^2)q''-\frac16q^{(4)}
+\right)
+=
+\frac{\Gamma_{G,2}}{16\pi}.
+\]
+Consequently
+\[
+\boxed{
+(X_2)_D
+=
+-\frac{1}{32\pi}g^{-3/2}\Gamma_{G,2}.
+}
+\]
+\end{lemma}
+
+\begin{proposition}[Order-nine fixed-sector survivor on \(g=h\)]
+\label{prop:order-nine-gram-isotropy-survivor}
+Assume \(g=h\).  At centered parity,
+\[
+X_{+,1}=-X_{-,1},
+\qquad
+X_{+,2}=X_{-,2}.
+\]
+Let
+\[
+X_1:=X_{-,1}=BS,
+\qquad
+Y=yJ,
+\qquad
+X_2:=X_{-,2}=aI+dD,
+\]
+with \(d=(X_2)_D\).  Consider the order-nine row
+\[
+T_9^{(1,2)}
+:=
+X_{-,1}YX_{+,2}
++
+X_{-,2}YX_{+,1}.
+\]
+Then
+\[
+T_9^{(1,2)}
+=
+X_1YX_2-X_2YX_1.
+\]
+Using \(SJ=-D\) and \(JS=D\), we obtain
+\[
+T_9^{(1,2)}
+=
+-2yB(aD+dI).
+\]
+Therefore
+\[
+\pi_{\mathfrak f}T_9^{(1,2)}
+=
+-2yBd\,I.
+\]
+At \(g=h\),
+\[
+B=\frac{q''}{8\pi g^{3/2}}
+\]
+and, by Lemma~\ref{lem:second-whitening-anisotropy},
+\[
+d
+=
+-\frac{1}{32\pi}g^{-3/2}\Gamma_{G,2}.
+\]
+Hence
+\[
+\boxed{
+\pi_{\mathfrak f}T_9^{(1,2)}
+=
+\frac{yq''\Gamma_{G,2}}{128\pi^2g^3}I.
+}
+\]
+In particular, on the source-good locus \(yq''\ne0\), the order-nine
+fixed-sector row survives on \(g=h\) whenever
+\[
+\Gamma_{G,2}\ne0,
+\]
+modulo the correction incidence defined below.
+\end{proposition}
+
+\begin{lemma}[The second anisotropy wall is not forced by \(g=h\)]
+\label{lem:second-anisotropy-proper}
+The first Gram-isotropy relation
+\[
+g=h
+\]
+is equivalent to
+\[
+q''=6q_0-2q_0^3.
+\]
+It does not imply
+\[
+\Gamma_{G,2}=0.
+\]
+Indeed, on \(g=h\),
+\[
+\Gamma_{G,2}
+=
+(1-q_0^2)(6q_0-2q_0^3)-\frac16q^{(4)}.
+\]
+Thus \(\Gamma_{G,2}=0\) imposes the additional fourth-jet relation
+\[
+q^{(4)}
+=
+6(1-q_0^2)(6q_0-2q_0^3).
+\]
+This is an independent higher-jet incidence condition.
+
+For a centered paired packet
+\[
+f_{\beta,\gamma}(t)
+=
+\frac{a}{a^2+x^2}
++
+\frac{b}{b^2+x^2},
+\qquad
+x=2t-\gamma,
+\]
+evaluated at \(x=0\), one has
+\[
+q_0=a^{-1}+b^{-1},
+\qquad
+q''=-8(a^{-3}+b^{-3}),
+\qquad
+q^{(4)}=384(a^{-5}+b^{-5}).
+\]
+Hence
+\[
+\Gamma_{G,2}
+=
+(1-q_0^2)q''-\frac16q^{(4)}.
+\]
+For example, for \(a=\frac14\), \(b=\frac34\),
+\[
+q_0=\frac{16}{3},
+\qquad
+q''=-\frac{14336}{27},
+\qquad
+q^{(4)}=\frac{31981568}{81},
+\]
+and therefore
+\[
+\Gamma_{G,2}
+=
+-\frac{12449792}{243}\ne0.
+\]
+Thus the order-nine wall \(\Gamma_{G,2}=0\) is a proper additional
+analytic wall, not a consequence of centered parity or of \(g=h\).
+\end{lemma}
+
+\begin{proposition}[Raw order-nine \(I\)-row audit]
+\label{prop:raw-order-nine-row-audit}
+Under the centered raw two-point convention, the raw odd carriers are skew
+off-diagonal:
+\[
+N_{2j+1}=F_{2j+1}J.
+\]
+In particular,
+\[
+N_9=F_9J,
+\qquad
+N_7=F_7J,
+\qquad
+N_5=F_5J,
+\qquad
+N_3=F_3J,
+\qquad
+N_1=F_1J.
+\]
+Consequently their \(I\)- and \(D\)-components vanish:
+\[
+N_{2j+1}^I=N_{2j+1}^D=0.
+\]
+
+The raw even carriers are fixed under endpoint swap.  In the centered raw
+two-point convention, their symmetric off-diagonal \(S\)-parts do not
+contribute to the order-nine \(I\)-coordinate:
+\[
+N_4^S=N_2^S=N_0^S=0
+\]
+for the raw lower-carrier row relevant here.
+
+Therefore the raw order-nine \(I\)-coordinate receives no contribution from
+the raw carriers other than the order-nine survivor
+\[
+T_9^{(1,2)}
+=
+X_{-,1}YX_{+,2}+X_{-,2}YX_{+,1}.
+\]
+Equivalently,
+\[
+R_{\le4}^{I,\mathrm{raw}}=0,
+\]
+and
+\[
+R_9^I[N_9]=R_7^I[N_7]=R_5^I[N_5]=0.
+\]
+\end{proposition}
+
+\begin{remark}[Convention caveat for corrected rows]
+\label{rem:raw-versus-corrected-row-caveat}
+Proposition~\ref{prop:raw-order-nine-row-audit} concerns the raw
+pre-whitening two-point carriers \(N_b\).  If a later notation folds
+normalization, subtraction, background/core, line, or connection correction
+terms into a symbol also called \(N_b\), those terms should be separated from
+the raw carrier and placed into the correction remainder below.  The raw
+matrix-parity audit does not by itself eliminate such correction rows.
+\end{remark}
+
+\begin{definition}[Order-nine correction incidence]
+\label{def:order-nine-correction-incidence}
+Let \(R_{\rm corr}^{I,(9)}\) denote the residual order-nine \(I\)-coordinate
+coming from correction rows not included in the raw two-point carrier table.
+After covariantization and the fixed-convention local gates, this residual may
+only include line, background/core, or normalization/subtraction correction
+data:
+\[
+R_{\rm corr}^{I,(9)}
+=
+R_{\rm line}^{I,(9)}
++
+R_{\rm bg/core}^{I,(9)}
++
+R_{\rm norm/sub}^{I,(9)}.
+\]
+Connection/frame/projection/whitening-gauge terms are absorbed by
+\(\nabla^{\mathfrak f}\); Gate~A/B rows are closed under the fixed-convention
+hypotheses; shadow rows are projected away; and pure same-point odd rows
+vanish by centered parity.
+
+Define the order-nine correction incidence wall by
+\[
+\mathcal E_{\rm corr}^{(9)}
+:=
+\left\{
+R_{\rm corr}^{I,(9)}
+=
+-\frac{yq''\Gamma_{G,2}}{128\pi^2g^3},
+\quad
+yq''\Gamma_{G,2}\ne0
+\right\}.
+\]
+On the complement of this wall, the order-nine \(I\)-coordinate is nonzero
+whenever \(yq''\Gamma_{G,2}\ne0\).
+\end{definition}
+
+\begin{theorem}[Layered fixed-sector visibility through order nine]
+\label{thm:layered-fixed-sector-visibility-order-nine}
+Work on a centered reduced good patch in the fixed-core convention.  Assume
+\[
+g>0,\qquad h>0,\qquad yq''\ne0.
+\]
+Let
+\[
+\Gamma_G=q''-6q_0+2q_0^3,
+\qquad
+\Gamma_{G,2}=(1-q_0^2)q''-\frac16q^{(4)}.
+\]
+Assume also that the point is not in the order-seven cross-channel incidence
+wall and not in the order-nine correction incidence wall:
+\[
+\theta\notin
+\mathcal E_{\rm cc}^{(7)}
+\cup
+\mathcal E_{\rm corr}^{(9)}.
+\]
+If
+\[
+\Gamma_G\ne0
+\quad\text{or}\quad
+\Gamma_{G,2}\ne0,
+\]
+then
+\[
+(A_7^{\mathfrak f},A_9^{\mathfrak f})\ne0.
+\]
+
+More precisely:
+\[
+\Gamma_G\ne0
+\quad\Longrightarrow\quad
+A_7^{\mathfrak f}\ne0,
+\]
+where the nonzero fixed-sector row is the centered order-seven row
+\[
+\pi_{\mathfrak f}T_7^{(1)}
+=
+-2yBr\,I.
+\]
+On the first Gram-isotropy wall
+\[
+\Gamma_G=0,
+\]
+if
+\[
+\Gamma_{G,2}\ne0
+\]
+and
+\[
+\theta\notin\mathcal E_{\rm corr}^{(9)},
+\]
+then
+\[
+A_9^{\mathfrak f}\ne0,
+\]
+with order-nine \(I\)-coordinate
+\[
+(A_9^{\mathfrak f})_I
+=
+\frac{yq''\Gamma_{G,2}}{128\pi^2g^3}
++
+R_{\rm corr}^{I,(9)}.
+\]
+\end{theorem}
+
+\begin{proof}
+If \(\Gamma_G\ne0\), then \(g-h\ne0\).  By
+Lemma~\ref{lem:centered-order-seven-gram-anisotropy},
+\[
+\pi_{\mathfrak f}T_7^{(1)}
+=
+-y\frac{q''(h-g)}
+{4\pi gh(\sqrt g+\sqrt h)^2}I,
+\]
+which is nonzero under \(yq''\ne0\), \(g,h>0\), and \(g-h\ne0\), outside the
+named order-seven cross-channel incidence.
+
+It remains to consider \(\Gamma_G=0\), equivalently \(g=h\).  By
+Proposition~\ref{prop:order-nine-gram-isotropy-survivor},
+\[
+\pi_{\mathfrak f}T_9^{(1,2)}
+=
+\frac{yq''\Gamma_{G,2}}{128\pi^2g^3}I.
+\]
+By Proposition~\ref{prop:raw-order-nine-row-audit}, the raw order-nine
+\(I\)-row has no additional contribution from \(N_9,N_7,N_5\), or from the
+raw lower carriers.  Thus the only possible remaining \(I\)-coordinate
+correction is \(R_{\rm corr}^{I,(9)}\).  Outside
+\(\mathcal E_{\rm corr}^{(9)}\), this correction does not cancel the displayed
+candidate row.  Hence \(A_9^{\mathfrak f}\ne0\).
+\end{proof}
+
+\begin{remark}[What the layered theorem does and does not prove]
+\label{rem:layered-visibility-scope}
+Theorem~\ref{thm:layered-fixed-sector-visibility-order-nine} is a local
+visibility theorem.  It improves the centered order-seven story by replacing
+the single excluded wall
+\[
+\Gamma_G=0
+\]
+with the layered incidence
+\[
+\Gamma_G=0,\qquad \Gamma_{G,2}=0,
+\]
+together with the named correction incidence.  In particular, the order-seven
+fixed-sector signal detects off first Gram isotropy, while the order-nine
+fixed-sector signal detects on the first Gram-isotropy wall unless the second
+Gram anisotropy also vanishes.
+
+This is still not an RH-scale quantitative lower bound.  For a global proof
+one would need a non-concentration estimate of the form
+\[
+|yq''|
+\max\{|\Gamma_G|,|\Gamma_{G,2}|\}
+\ge Q^{-A},
+\]
+or an equivalent lower bound for
+\[
+\|(A_7^{\mathfrak f},A_9^{\mathfrak f})\|
+\]
+outside the layered incidence and correction walls.  Qualitative
+nonvanishing alone does not rule out super-polynomial approach to the layered
+incidence set.
+\end{remark}
+
+\begin{remark}[No-go ledger for the centered order-seven/nine analysis]
+\label{rem:no-go-ledger-order-seven-nine}
+The following points should be kept separate.
+
+\begin{enumerate}
+\item The centered order-seven fixed-sector row is structurally proportional
+to the first Gram anisotropy \(g-h\).  Hence it cannot detect the wall
+\(g=h\) inside the fixed sector.
+
+\item The ambient order-seven \(D\)-component survives on \(g=h\), but using it
+would require an ambient, non-fixed-sector enlargement.  The present theorem
+instead stays within the rank-two fixed sector and uses order nine.
+
+\item The order-nine survivor is not a raw-carrier artifact.  It arises from
+the channel
+\[
+Y_JX_{1,S}X_{2,D},
+\]
+namely
+\[
+X_{-,1}YX_{+,2}+X_{-,2}YX_{+,1}.
+\]
+
+\item The raw carriers \(N_9,N_7,N_5,N_3,N_1\) are skew off-diagonal at
+centered parity:
+\[
+N_{2j+1}=F_{2j+1}J.
+\]
+They do not contribute to the order-nine \(I\)-coordinate.  The raw even lower
+carriers are likewise harmless for the order-nine \(I\)-row under the centered
+raw convention.
+
+\item Any remaining order-nine cancellation is therefore a correction-row or
+cross-channel analytic incidence issue, not a sector/parity identity of the
+raw row table.
+\end{enumerate}
+\end{remark}
+
+\begin{remark}[Raw skew coefficients \(F_5\) and \(F_7\)]
+\label{rem:raw-skew-coefficients-F5-F7}
+For the centered raw off-diagonal scalar
+\[
+F(s)
+=
+\frac{\sin\Delta(s)+q_-(s)s\cos\Delta(s)}{s^2},
+\]
+with
+\[
+\Delta(s)
+=
+q_0s+\frac{q_2}{24}s^3+\frac{q_4}{1920}s^5
++\frac{q_6}{322560}s^7+\cdots,
+\]
+and
+\[
+q_-(s)
+=
+q_0+\frac{q_2}{8}s^2+\frac{q_4}{384}s^4
++\frac{q_6}{46080}s^6+\cdots,
+\]
+the raw odd carriers are skew:
+\[
+N_{2j+1}=F_{2j+1}J.
+\]
+In the normalization used here,
+\[
+F_5
+=
+-\frac{q_0^7}{630}
++\frac{q_0^4q_2}{72}
+-\frac{q_0^2q_4}{480}
+-\frac{q_0q_2^2}{144}
++\frac{q_6}{40320},
+\]
+and
+\[
+\begin{aligned}
+F_7
+={}&
+\frac{q_0^9}{36288}
+-\frac{q_0^6q_2}{1728}
++\frac{q_0^4q_4}{4608}
++\frac{5q_0^3q_2^2}{3456} \\
+&-\frac{q_0^2q_6}{64512}
+-\frac{q_0q_2q_4}{4608}
+-\frac{5q_2^3}{41472}
++\frac{q_8}{9289728}.
+\end{aligned}
+\]
+These coefficients are useful for auditing the raw row table, but they multiply
+\(J\) and hence do not contribute directly to the fixed \(I\)-coordinate.
+\end{remark}
 
 There is also a non-centered visibility route.  The local construction uses
 \[
@@ -33948,6 +34596,76 @@ not impose a sign, cone, monotonicity, or endpoint constraint that forbids
 alignment.  A transported finite-core theorem would therefore require a new
 coercivity, boundary, incidence, or cone-control input.
 \end{remark}
+
+\subsection{Layered finite-core non-concentration as the remaining global gate}
+\label{subsec:layered-finite-core-nonconcentration-gate}
+
+The local fixed-sector visibility result is now layered through order nine:
+\[
+\Gamma_G\ne0
+\Longrightarrow
+A_7^{\mathfrak f}\ne0,
+\]
+while
+\[
+\Gamma_G=0,\quad \Gamma_{G,2}\ne0
+\Longrightarrow
+A_9^{\mathfrak f}\ne0
+\]
+outside the named correction and cross-channel incidence walls.  Therefore the
+static local finite-core vector should be read at least as
+\[
+C_{\rm fd}^{\vec f}
+=
+(A_7^{\mathfrak f},A_9^{\mathfrak f},\ldots).
+\]
+
+For RH-scale use, the local result must be upgraded to a quantitative
+non-concentration theorem.  A minimal target is
+\[
+|yq''|
+\max\{|\Gamma_G|,|\Gamma_{G,2}|\}
+\ge Q^{-A}
+\]
+on the relevant reduced sampled path, outside the layered incidence set.
+A more invariant formulation is
+\[
+\left\|
+(A_7^{\mathfrak f},A_9^{\mathfrak f})
+\right\|_\infty
+\ge Q^{-B}.
+\]
+
+In the transported version, one may instead work with
+\[
+C_{\rm fd}^{\rm tr}
+=
+\left(
+A_7^{\mathfrak f},
+\nabla^{\mathfrak f}A_7^{\mathfrak f},
+A_9^{\mathfrak f},
+\nabla^{\mathfrak f}A_9^{\mathfrak f},
+\ldots
+\right),
+\]
+or minimally, using the affine equation,
+\[
+C_{\rm fd}^{\rm tr}
+=
+\left(
+A_7^{\mathfrak f},
+E_{\eta\eta}+E_{\rm lower},
+A_9^{\mathfrak f},
+\ldots
+\right).
+\]
+The remaining global obstruction is that pair and interaction pieces may still
+align:
+\[
+J_{\rm fd}^{\rm tr}\approx -P_{\rm fd}^{\rm tr}.
+\]
+Thus the next proof-closing theorem must be a quantitative layered
+non-concentration, incidence-distance, cone, or arithmetic separation result.
 
 \subsection{Finite-core sampled vector non-concentration}
 \label{subsec:finite-core-sampled-vector-nonconcentration}
