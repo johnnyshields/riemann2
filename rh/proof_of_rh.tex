@@ -3093,30 +3093,37 @@ still satisfy
 \]
 \end{remark}
 
-\begin{theorem}[Mixed four-point dependence descends to the quotient determinant]
-\label{thm:mixed-four-point-dependence-quotient-determinant}
+\begin{theorem}[Mixed four-point factorization through quotient determinant]
+\label{thm:mixed-four-point-factors-through-delta-seven}
 Let
 \[
 A_5^{\mathfrak f}=u_5I+v_5S,
 \qquad
 A_7^{\mathfrak f}=u_7I+v_7S,
 \qquad
-\Delta_7=u_7v_5-u_5v_7.
+c\ne0,
 \]
-On every good mixed four-point patch, the mixed four-point scalar-exit data
-factor through
+and define
 \[
-(c,u_5,v_5,\Delta_7).
+\Delta_7
+=
+\omega_h(A_7^{\mathfrak f},A_5^{\mathfrak f})
+=
+u_7v_5-u_5v_7,
+\qquad
+T=\frac{v_7}{c}.
 \]
-In particular, they do not depend on the augmented hidden coordinate
+On every good mixed four-point patch, the mixed four-point scalar exits depend
+only on
 \[
-T=\frac{v_7}{c}
+c,\quad u_5,\quad v_5,\quad \Delta_7.
 \]
-once \(c,u_5,v_5,\Delta_7\) are fixed.
+They do not depend on \(T\) independently.
 \end{theorem}
 
 \begin{proof}
-On a \(v_5\ne0\) patch, the mixed four-point branch is expressed through
+On a \(v_5\ne0\) patch, the mixed four-point branch is written through the
+normalized variables
 \[
 x=\frac{v_5}{c},
 \qquad
@@ -3124,18 +3131,27 @@ Y=\frac{u_5}{c},
 \qquad
 \sigma_v=\frac{\Delta_7}{cv_5}.
 \]
-Thus all scalar-exit data are functions of these quantities and their local
-derivatives.  No expression uses \(u_7\) or \(v_7\) separately.
+All scalar exits are functions of these quantities and their local
+derivatives.  Thus they are determined by
+\[
+c,\quad u_5,\quad v_5,\quad \Delta_7,
+\]
+and do not require \(u_7\) or \(v_7\) separately.
 
-On a \(u_5\ne0\) patch, one instead uses
+On a \(u_5\ne0\) patch, one uses the parallel quotient coordinate
 \[
 \sigma_u=-\frac{\Delta_7}{cu_5},
 \]
-and the same conclusion holds.
+and the same factorization holds.
 
-For an order-seven residual \(E=eI+fS\), the quotient determinant changes by
+For an order-seven fixed-sector residual
 \[
-\Delta_7\longmapsto \Delta_7+\omega(E,A_5^{\mathfrak f})
+E=eI+fS,
+\]
+adding \(E\) to \(A_7^{\mathfrak f}\) changes the determinant by
+\[
+\Delta_7\longmapsto
+\Delta_7+\omega_h(E,A_5^{\mathfrak f})
 =
 \Delta_7+ev_5-u_5f.
 \]
@@ -3144,27 +3160,31 @@ The hidden coordinate changes by
 T\longmapsto T+\frac{f}{c}.
 \]
 Thus the mixed four-point branch sees only the determinant projection
-\(ev_5-u_5f\), while the transform-visible hidden state sees the \(S\)-component
-projection \(f/c\).
+\(ev_5-u_5f\), while the \(T\)-coordinate records a separate
+\(\Phi_K\)-visible projection.
 \end{proof}
 
-\begin{remark}[No independent mixed four-point carrier]
-\label{rem:no-independent-mixed-four-point-carrier-final}
-A line shift
+\begin{remark}[No independent \(T\)-dependency in mixed four-point]
+\label{rem:no-t-dependency-mixed-four-point}
+A pure quotient-line shift
 \[
 E=\chi A_5^{\mathfrak f}
 \]
 has
 \[
-\omega(E,A_5^{\mathfrak f})=0,
+\omega_h(E,A_5^{\mathfrak f})=0,
 \]
-and is therefore invisible to mixed four-point geometry.  It may still be
-\(\Phi_K\)-visible, since
+and is therefore invisible to mixed four-point geometry.  It changes
 \[
-\Phi_K(E)=2\chi v_5.
+T
 \]
-Hence mixed four-point closure is a quotient-determinant problem, whereas
-two-point transform closure also requires \(T\)-compatibility.
+by
+\[
+T\longmapsto T+\chi\frac{v_5}{c},
+\]
+and is generally \(\Phi_K\)-visible on \(v_5\ne0\).  Hence mixed four-point
+closure is a quotient-determinant problem, whereas two-point transform closure
+also requires \(T\)-horizontal compatibility.
 \end{remark}
 
 \begin{corollary}[Single-pair exterior odd-coefficient bound]
@@ -13847,12 +13867,12 @@ among finite-core constituents.
 \begin{definition}[Nonsingular actual-source \(k\)-core stratum]
 \label{def:nonsingular-actual-source-k-core-stratum}
 A compact parameter patch \(\Theta_k\) is called a nonsingular actual-source
-\(k\)-core stratum if the following hold.
+\(k\)-core stratum if the following conditions hold.
 
 \begin{enumerate}
-\item \(\Theta_k\) is a compact subset of a finite-dimensional real-analytic
-parameter manifold, with fixed core cardinality \(k\) and fixed combinatorial
-source type.
+\item \(\Theta_k\) is contained in a finite-dimensional real-analytic
+parameter manifold with fixed core cardinality \(k\), fixed source
+combinatorics, and fixed collision/blow-up chart.
 
 \item The corrected finite-core transverse scalar
 \[
@@ -13865,15 +13885,14 @@ H_{\core,\theta}(z)
 is real-analytic jointly in \((\theta,z)\) on a neighborhood of
 \(\Theta_k\times\{0\}\).
 
-\item The whitening and midpoint-trivialization maps used to define
-\(\widehat\Omega_{\core,\theta}^{\corr}\) are nonsingular on the patch.  In
-particular, the relevant Gram blocks remain invertible and the chosen analytic
-branches of inverse square roots and transport maps do not cross singularities.
+\item The whitening, inverse-square-root, and midpoint-trivialization maps used
+to define \(\widehat\Omega_{\core,\theta}^{\corr}\) are nonsingular and
+analytic on the patch.
 
-\item No coordinate used in the chosen package chart divides by a vanishing
-quantity.  Thus, if the chart uses \(c^{-1}\), \(v_5^{-1}\), \(u_5^{-1}\), or
-a determinant coordinate relative to \(A_5^{\mathfrak f}\), the corresponding
-quantity is assumed nonzero on the patch.
+\item The chosen coordinate chart does not divide by a vanishing quantity.  In
+particular, if the chart uses \(c^{-1}\), \(u_5^{-1}\), \(v_5^{-1}\), or a
+determinant coordinate relative to \(A_5^{\mathfrak f}\), the corresponding
+quantity is nonzero on the patch.
 \end{enumerate}
 \end{definition}
 
@@ -13884,10 +13903,9 @@ Write
 \[
 H_{\core,\theta}(z)
 =
-\sum_{r\ge0}c_{\core,2r+1}(\theta)z^{2r+1},
+\sum_{r\ge0}c_{\core,2r+1}(\theta)z^{2r+1}.
 \]
-where the coefficients \(c_{\core,2r+1}\) are analytic functions of
-\(\theta\).  Then there exists an integer \(R_{\Theta_k}\ge0\) such that
+Then there exists an integer \(R_{\Theta_k}\ge0\) such that
 \[
 c_{\core,1}(\theta)=c_{\core,3}(\theta)=\cdots
 =c_{\core,2R_{\Theta_k}+1}(\theta)=0
@@ -13908,9 +13926,11 @@ is cut out on \(\Theta_k\) by finitely many odd coefficient equations.
 \end{theorem}
 
 \begin{proof}
-Since \(H_{\core,\theta}(z)\) is analytic jointly in \((\theta,z)\), each
-coefficient \(c_{\core,2r+1}(\theta)\) is analytic on a neighborhood of
-\(\Theta_k\).
+By joint analyticity of \(H_{\core,\theta}(z)\), each coefficient
+\[
+c_{\core,2r+1}(\theta)
+\]
+is real-analytic on a neighborhood of \(\Theta_k\).
 
 Fix \(\theta_0\in\Theta_k\).  Let
 \[
@@ -13920,10 +13940,9 @@ Fix \(\theta_0\in\Theta_k\).  Let
 \subset
 \mathcal O_{\Theta_k,\theta_0}
 \]
-be the ideal generated by the odd coefficient germs in the local analytic
-ring at \(\theta_0\).  The local analytic ring
-\(\mathcal O_{\Theta_k,\theta_0}\) is Noetherian, so
-\(\mathcal I_{\theta_0}\) is finitely generated.  Hence there are indices
+be the ideal generated by the odd coefficient germs in the local analytic ring
+at \(\theta_0\).  The local analytic ring is Noetherian.  Hence
+\(\mathcal I_{\theta_0}\) is finitely generated.  Therefore there are indices
 \(r_1,\ldots,r_s\) such that
 \[
 \mathcal I_{\theta_0}
@@ -13932,28 +13951,132 @@ ring at \(\theta_0\).  The local analytic ring
 c_{\core,2r_1+1},\ldots,c_{\core,2r_s+1}
 \bigr)
 \]
-as an ideal of germs at \(\theta_0\).
+as germs at \(\theta_0\).
 
-Let
+Set
 \[
 R(\theta_0)=\max(r_1,\ldots,r_s).
 \]
-After shrinking to a neighborhood \(U_{\theta_0}\), every higher coefficient
+After shrinking to a neighborhood \(U_{\theta_0}\), every coefficient
 \(c_{\core,2r+1}\) is an analytic linear combination of
 \[
 c_{\core,1},c_{\core,3},\ldots,c_{\core,2R(\theta_0)+1}.
 \]
-Thus, on \(U_{\theta_0}\), vanishing of all odd coefficients up to
-\(2R(\theta_0)+1\) forces vanishing of every odd coefficient.  Hence
-\(H_{\core,\theta}\equiv0\).
+Thus, on \(U_{\theta_0}\), vanishing of all odd coefficients up to order
+\(2R(\theta_0)+1\) forces every odd coefficient to vanish.  Hence
+\(H_{\core,\theta}\equiv0\) as an odd germ.
 
-Compactness gives finitely many such neighborhoods covering \(\Theta_k\).  Let
-\(R_{\Theta_k}\) be the maximum of their corresponding \(R(\theta_j)\).  Then
-the stated finite determinacy holds on all of \(\Theta_k\).
+The compactness of \(\Theta_k\) gives a finite subcover
+\[
+U_{\theta_1},\ldots,U_{\theta_M}.
+\]
+Taking
+\[
+R_{\Theta_k}
+=
+\max_{1\le j\le M}R(\theta_j)
+\]
+proves the claim uniformly on \(\Theta_k\).
 \end{proof}
 
-\begin{remark}[Finite determinacy is not scale transfer]
-\label{rem:finite-determinacy-not-scale-transfer-final}
+\begin{remark}[Strata excluded from one finite-determinacy patch]
+\label{rem:finite-determinacy-excluded-strata}
+Theorem~\ref{thm:finite-odd-germ-determinacy-actual-source} is stratum-local.
+The following loci must be separated before applying it.
+
+\begin{enumerate}
+\item \emph{Amplitude-drop strata:}
+\[
+a_j=0,
+\]
+where a \(k\)-core degenerates to a smaller core.
+
+\item \emph{Collision strata:}
+\[
+h_i=h_j,
+\]
+unless a collision/blow-up coordinate chart has been chosen in which the
+corrected source construction remains analytic.
+
+\item \emph{Whitening singularities:} loci where the relevant Gram blocks lose
+invertibility or the inverse-square-root branches cease to be analytic.
+
+\item \emph{\(c=0\) strata:} these must be excluded from charts using
+\[
+T=\frac{v_7}{c}
+\]
+or any other \(c^{-1}\)-normalization.
+
+\item \emph{\(A_5^{\mathfrak f}=0\) strata:} these are rank-jump loci for the
+quotient line
+\[
+\mathbf C A_5^{\mathfrak f}.
+\]
+
+\item \emph{\(v_5=0\) and \(u_5=0\) patch boundaries:} these must be separated
+when using the corresponding \(v_5\)-patch or \(u_5\)-patch coordinates.
+
+\item \emph{Hidden-state rank jumps:} loci where the augmented package
+coordinate
+\[
+T=\frac{v_7}{c}
+\]
+or the \(\Phi_K\)-visible lift ceases to be represented by the chosen analytic
+chart.
+\end{enumerate}
+
+After separating these loci, finite odd-germ determinacy applies on each
+compact nonsingular analytic stratum.
+\end{remark}
+
+\begin{corollary}[Coefficient floor away from the zero-anomaly locus]
+\label{cor:coefficient-floor-away-from-zero-anomaly}
+Let \(\Theta_k\) be a compact nonsingular actual-source \(k\)-core stratum, and
+let \(R_{\Theta_k}\) be the finite-determinacy depth from
+Theorem~\ref{thm:finite-odd-germ-determinacy-actual-source}.  Define
+\[
+\mathcal Z_k
+=
+\{\theta\in\Theta_k:H_{\core,\theta}\equiv0\}.
+\]
+For \(\eta>0\), set
+\[
+\Theta_{k,\eta}
+=
+\{\theta\in\Theta_k:
+\operatorname{dist}(\theta,\mathcal Z_k)\ge\eta\}.
+\]
+Then there exists \(\gamma_\eta>0\) such that every
+\(\theta\in\Theta_{k,\eta}\) satisfies
+\[
+\max_{0\le r\le R_{\Theta_k}}
+|c_{\core,2r+1}(\theta)|
+\ge
+\gamma_\eta.
+\]
+\end{corollary}
+
+\begin{proof}
+The function
+\[
+D(\theta)
+=
+\max_{0\le r\le R_{\Theta_k}}
+|c_{\core,2r+1}(\theta)|
+\]
+is continuous on \(\Theta_k\).  By
+Theorem~\ref{thm:finite-odd-germ-determinacy-actual-source},
+\[
+D(\theta)=0
+\quad\Longleftrightarrow\quad
+\theta\in\mathcal Z_k.
+\]
+Thus \(D>0\) on the compact set \(\Theta_{k,\eta}\), and hence \(D\) has a
+positive minimum there.
+\end{proof}
+
+\begin{remark}[Finite determinacy is not zeta-scale transfer]
+\label{rem:finite-determinacy-not-zeta-scale-transfer}
 Theorem~\ref{thm:finite-odd-germ-determinacy-actual-source} is qualitative.
 It proves only
 \[
@@ -13962,59 +14085,108 @@ H_{\core,\theta}\not\equiv0
 \exists N\le R_{\Theta_k}+1:
 c_{\core,2N-1}(\theta)\ne0.
 \]
-It does not prove the zeta-scale lower bound
+It does not prove
 \[
 |\Xi_{\core}^{(N)}(m)|
 \gtrsim
 \frac{x}{B_\zeta(m)}S(m).
 \]
-For that one needs a calibrated separation theorem comparing the distance of
-the actual zeta core from the zero-anomaly locus
+Nor does it provide a sign law, a tail-domination estimate for the filtered
+\(N\)-point coefficient, or an explicit bound for \(R_{\Theta_k}\) depending
+only on \(k\).
+
+The remaining quantitative problem is to compare the actual zeta core's
+distance from
 \[
-\mathcal Z_k=\{\theta:H_{\core,\theta}\equiv0\}
+\mathcal Z_k
 \]
-with the scale
+with the calibration scale
 \[
 \frac{x}{B_\zeta(m)}S(m).
 \]
-Thus finite determinacy removes the possibility of arbitrarily delayed odd
-detection on a fixed analytic stratum, but the quantitative finite-core lower
-law remains a separate obligation.
+That is the calibrated separation problem, not a consequence of
+Noetherian finite determinacy.
 \end{remark}
 
-\begin{remark}[Finite-core scale transfer requires calibrated separation]
-\label{rem:finite-core-calibrated-separation-needed}
+\begin{hypothesis}[Calibrated finite-core separation]
+\label{hyp:calibrated-finite-core-separation}
 Let \(\Theta_k\) be a compact nonsingular actual-source \(k\)-core stratum,
-and let
+with zero-anomaly locus
 \[
-\mathcal Z_k=\{\theta:H_{\core,\theta}\equiv0\}.
+\mathcal Z_k
+=
+\{\theta:H_{\core,\theta}\equiv0\}.
 \]
-Finite determinacy and compactness imply coefficient separation only away
-from \(\mathcal Z_k\).  To obtain the required \(N\)-point lower bound, one
-must prove that actual zeta cores either lie in \(\mathcal Z_k\), enter a
-controlled incidence stratum, or satisfy a calibrated lower bound
+For actual zeta finite cores \(\theta(m)\), either
 \[
-\operatorname{dist}(\theta(m),\mathcal Z_k)\ge D_{\Theta_k}(m,Q)
+\theta(m)\in\mathcal Z_k,
 \]
-large enough to imply
+or \(\theta(m)\) lies in a controlled incidence stratum, or else
+\[
+\operatorname{dist}(\theta(m),\mathcal Z_k)
+\ge
+D_{\Theta_k}(m,Q),
+\]
+where \(D_{\Theta_k}(m,Q)\) is large enough to force
 \[
 \left|
 c_{\core,2N-1}
 +
-\sum_{j\ge1}c_{\core,2N-1+2j}h_j(1^2,\dots,N^2)Q^{-2j}
+\sum_{j\ge1}
+c_{\core,2N-1+2j}
+h_j(1^2,\ldots,N^2)Q^{-2j}
 \right|
 \gtrsim
 \frac{Q^{2N+2}}{(2N-1)N!(N-1)!}
-\frac{x}{B_\zeta(m)}S(m).
+\frac{x}{B_\zeta(m)}S(m)
 \]
-Without such calibrated separation, the near-zero-anomaly branch
+for some
 \[
+N\le R_{\Theta_k}+1.
+\]
+\end{hypothesis}
+
+\begin{definition}[Near-zero-anomaly finite-core branch]
+\label{def:near-zero-anomaly-finite-core-branch}
+On a compact nonsingular actual-source \(k\)-core stratum \(\Theta_k\), define
+\[
+\mathcal N_k(m,Q)
+:=
+\left\{
+\theta(m)\in\Theta_k:
 0<
 \operatorname{dist}(\theta(m),\mathcal Z_k)
 <
-D_{\Theta_k}(m,Q)
+D_{\Theta_k}(m,Q),
+\quad
+\theta(m)\notin\mathcal E_{\rm geom}
+\right\}.
 \]
-remains open unless it can be shown to lie in a controlled incidence stratum.
+This is the branch where the corrected finite-core anomaly is nonzero but too
+close to the zero-anomaly locus for the finite-determinacy--{\L}ojasiewicz
+argument to imply
+\[
+|\Xi_{\core}^{(N)}(m)|
+\gtrsim
+\frac{x}{B_\zeta(m)}S(m).
+\]
+\end{definition}
+
+\begin{remark}[Status of the near-zero-anomaly branch]
+\label{rem:status-near-zero-anomaly-finite-core-branch}
+The present draft does not prove
+\[
+\mathcal N_k(m,Q)=\varnothing.
+\]
+In particular, proximity to \(\mathcal Z_k\) is not currently shown to imply
+membership in a controlled incidence stratum such as
+\[
+M=0,\quad W=0,\quad K_v=0,\quad T_v=0,
+\]
+nor collision, patch-boundary, endpoint-gap incidence, amplitude drop,
+whitening singularity, \(c=0\), \(A_5^{\mathfrak f}=0\), or hidden-state rank
+jump.  Thus finite-core closure requires either calibrated anti-tangency from
+\(\mathcal Z_k\) or a separate analysis of \(\mathcal N_k(m,Q)\).
 \end{remark}
 
 \begin{definition}[First interaction branch]
@@ -14083,25 +14255,24 @@ prove the final quotient-gauge theorem, diagonal merger,
 \(\kappa\)-independence, the connection cancellations for \(M_A,M_C\), or
 the package-to-\(\Xi_\zeta^{(N)}\) bridge.
 
-The next package-level objects are:
+The \(M_A,M_C\) connection branch is now closed under the source-grade
+reflection convention by
+Theorem~\ref{thm:ma-mc-pretriv-connection-closure-final}.  Thus the remaining
+post-Gate-B local obstruction is not the \(Z_j[M_A],Z_j[M_C]\) table.  The
+remaining local actual-source/Bottleneck-C obstruction is the promoted
+quadratic mixed-block coefficient
 \[
-Z_j[M_A],\quad Z_j[M_C],\qquad 0\le j\le6,
+E_{A,Y}^{\mathrm{BC}}
 \]
-together with the transported moving-line coefficients
+of Definition~\ref{def:promoted-quadratic-mixed-block-bc-coefficient}.  Its
+quotient test is
 \[
-A_i=[\epsilon^i]\tau_{h\to m}A_5^{\mathfrak f}(h),
-\qquad 1\le i\le7.
+e_{A,Y}v_5-u_5f_{A,Y}=0,
 \]
-The next identities are therefore
+and its transform-safe test is
 \[
-R_7^{(A)}+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M_A],A_i)=0,
+f_{A,Y}=0.
 \]
-and
-\[
-R_7^{(C)}+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M_C],A_i)=0.
-\]
-These are downstream connection identities, not replacements for the raw
-Gate~B edge-divisibility theorem.
 \end{remark}
 
 \begin{remark}[Reduced package equality does not imply hidden-state equality]
@@ -14218,134 +14389,197 @@ Hence the reduced quotient package does not determine the
 \(\Phi_K\)-visible septic state.
 \end{proof}
 
-\begin{remark}[Needed package-to-transform state-locality theorem]
-\label{rem:needed-package-to-transform-state-locality-theorem}
-The theorem needed downstream is not merely quotient-septic closure.  It must
-identify the first transform-visible corrected odd coefficient as a function
-of the reduced corrected package.
-
-A sufficient form is the following state-locality statement.  If two actual
-corrected packages \(P,P'\) have the same reduced package datum, then
+\begin{remark}[Package-to-transform bridge after augmentation]
+\label{rem:package-to-transform-bridge-after-augmentation}
+The quotient-only package-to-transform bridge is impossible on the generic
+patch \(v_5\ne0\), since
 \[
-A_{7,\Xi}^{\mathfrak f}(P')-A_{7,\Xi}^{\mathfrak f}(P)
-\in
-\ker\Phi_K.
+A_7^{\mathfrak f}\sim A_7^{\mathfrak f}+\chi A_5^{\mathfrak f}
 \]
-Equivalently, there should exist a package-local functional
+preserves the quotient class but changes
 \[
-\Theta_{\Phi,7}
+\Phi_K(A_7^{\mathfrak f})
 \]
-such that
+by
 \[
-\Phi_K\!\left(A_{7,\Xi}^{\mathfrak f}(P)\right)
+2\chi v_5.
+\]
+The correct theorem object is therefore the transform-safe augmented package
+\[
+\widehat\Psi_{\rm red}^{+}
 =
-\Theta_{\Phi,7}\!\left(\widehat\Psi_{\mathrm{red}}(P)\right).
+(\widehat\Psi_{\rm red},T),
+\qquad
+T=\frac{v_7}{c}.
 \]
-Only such a theorem allows the corrected quotient package to feed the
-two-point and mixed four-point transform branches.
+With this augmentation, the first \(\Phi_K\)-visible septic coefficient is
+read off as
+\[
+\Phi_K(A_7^{\mathfrak f})=2cT.
+\]
+The remaining compatibility problem is not quotient-only state-locality; it is
+the hidden-horizontal diagonal-merger condition
+\[
+\partial_\kappa T(m,\kappa,0)=0.
+\]
 \end{remark}
 
 \begin{definition}[Transform-safe augmented reduced package]
 \label{def:transform-safe-augmented-reduced-package}
-On a patch with \(c\ne0\), write
+Work on a good patch with
 \[
-A_7^{\mathfrak f}=u_7I+v_7S.
+c\ne0,
+\qquad
+A_5^{\mathfrak f}=u_5I+v_5S.
 \]
-Define the normalized hidden septic coordinate
+Write
 \[
-T:=\frac{v_7}{c}.
-\]
-Equivalently,
-\[
-\theta_{\Phi,7}
-:=
-\frac{\Phi_K(A_7^{\mathfrak f})}{c}
-=
-\frac{2v_7}{c}
-=
-2T.
+A_7^{\mathfrak f}=u_7I+v_7S,
+\qquad
+\Delta_7:=u_7v_5-u_5v_7.
 \]
 The transform-safe augmented reduced package is
 \[
 \widehat\Psi_{\rm red}^{+}
 :=
-(\widehat\Psi_{\rm red},T).
-\]
-On a \(v_5\ne0\) patch, where
-\[
-A_5^{\mathfrak f}=u_5I+v_5S,
+(\widehat\Psi_{\rm red},T),
 \qquad
-\Delta_7=u_7v_5-u_5v_7,
+T:=\frac{v_7}{c}.
 \]
-this may be written as
+Equivalently, on the \(v_5\)-patch one may write
 \[
 \widehat\Psi_{\rm red}^{+}
 =
 (c,u_5,v_5,\Delta_7,T).
 \]
+The normalized \(\Phi_K\)-visible coordinate is
+\[
+\theta_{\Phi,7}
+:=
+\frac{\Phi_K(A_7^{\mathfrak f})}{c}
+=
+2T.
+\]
 \end{definition}
 
-\begin{remark}[Why the augmented coordinate is necessary]
-\label{rem:why-augmented-coordinate-necessary}
-The reduced quotient package records the class
-\[
-[A_7^{\mathfrak f}]
-\in
-\mathfrak f_m/\mathbf C A_5^{\mathfrak f}(m),
-\]
-or equivalently the determinant coordinate \(\Delta_7\).  It is invariant
-under the line shift
-\[
-A_7^{\mathfrak f}
-\longmapsto
-A_7^{\mathfrak f}+\chi A_5^{\mathfrak f}.
-\]
-However
-\[
-\Phi_K(\chi A_5^{\mathfrak f})=2\chi v_5.
-\]
-Thus, on the generic patch \(v_5\ne0\), the quotient-forgotten direction is
-visible to the two-point finite-\(s\) transform.  The coordinate
-\[
-T=\frac{v_7}{c}
-\]
-is exactly the missing transform-visible septic state.
-\end{remark}
-
-\begin{remark}[Augmented diagonal merger has quotient and hidden components]
-\label{rem:augmented-diagonal-merger-two-components}
-For the augmented package
+\begin{theorem}[Augmented package-to-transform readout]
+\label{thm:augmented-package-to-transform-readout}
+Let
 \[
 \widehat\Psi_{\rm red}^{+}
 =
-(\widehat\Psi_{\rm red},T),
+(c,u_5,v_5,\Delta_7,T)
 \]
-diagonal merger requires both the quotient condition
+be the transform-safe augmented package on a good patch with \(c\ne0\). Then
+the first \(\Phi_K\)-visible septic coefficient of the corrected finite-\(s\)
+two-point transform is determined by the augmented package:
+\[
+\Phi_K(A_7^{\mathfrak f})
+=
+2v_7
+=
+2cT.
+\]
+Equivalently,
+\[
+\frac{1}{c}
+[s^7]\Phi_K(\widehat\Omega^{\corr}(s;m))
+=
+2T.
+\]
+Thus the two-point transform-visible septic state factors through
+\(\widehat\Psi_{\rm red}^{+}\), not through \(\widehat\Psi_{\rm red}\) alone.
+\end{theorem}
+
+\begin{remark}[Why the old quotient-only bridge must be abandoned]
+\label{rem:old-quotient-only-bridge-abandoned}
+The reduced quotient package remembers only
+\[
+[A_7^{\mathfrak f}]
+\in
+\mathfrak f_m/\mathbf C A_5^{\mathfrak f}(m).
+\]
+It therefore identifies
+\[
+A_7^{\mathfrak f}
+\sim
+A_7^{\mathfrak f}+\chi A_5^{\mathfrak f}.
+\]
+But
+\[
+\Phi_K(A_5^{\mathfrak f})=2v_5.
+\]
+Hence, on the generic patch \(v_5\ne0\), the quotient-forgotten line direction
+is \(\Phi_K\)-visible:
+\[
+\Phi_K(A_7^{\mathfrak f}+\chi A_5^{\mathfrak f})
+-
+\Phi_K(A_7^{\mathfrak f})
+=
+2\chi v_5.
+\]
+Therefore no functional of \(\widehat\Psi_{\rm red}\) alone can determine
+\(\Phi_K(A_7^{\mathfrak f})\) on the generic patch.  The missing coordinate is
+exactly
+\[
+T=\frac{v_7}{c}.
+\]
+\end{remark}
+
+\begin{theorem}[Augmented Bottleneck C condition]
+\label{thm:augmented-bottleneck-c-condition}
+On the good patch \(c\ne0\), diagonal merger for the transform-safe package
+\[
+\widehat\Psi_{\rm red}^{+}
+=
+(c,u_5,v_5,\Delta_7,T)
+\]
+requires both
 \[
 \partial_\kappa Q_{7,m}^q(m,\kappa,0)=0
 \]
-and the hidden-state condition
+and
 \[
 \partial_\kappa T(m,\kappa,0)=0.
 \]
-The first condition controls the quotient determinant \(\Delta_7\).  The second
-controls the \(\Phi_K\)-visible septic state and is not implied by quotient
-merger on the generic patch \(v_5\ne0\).
+The first condition is quotient-horizontal merger.  The second is
+hidden-horizontal merger.  On the generic patch \(v_5\ne0\), the first does
+not imply the second.
+\end{theorem}
 
-Indeed, if
+\begin{remark}[Scalar Bottleneck C condition]
+\label{rem:scalar-bottleneck-c-condition}
+Let
 \[
-\partial_\kappa B_7^{\mathfrak f}(m,\kappa,0)
+P_7(a_1,a_2)
 =
-\lambda(m)A_5^{\mathfrak f}(m),
+[z^7][\delta^1]\tau_{h\to m}\pi_{\mathfrak f_h}
+(1-\Pi_{1,1})_{\rm mix}C_{\mathcal W}^{\rm raw}.
 \]
-then this slope is zero in
-\(\mathfrak f_m/\mathbf C A_5^{\mathfrak f}(m)\), but
+The quotient Bottleneck C condition is
 \[
-\partial_\kappa T
-=
-\frac{\lambda(m)v_5(m)}{c(m)}.
+\partial_{a_2}P_7(a_1,-a_1)
+\in
+\mathbf C A_5^{\mathfrak f}(m).
 \]
-Thus a nonzero line-gauge slope is quotient-invisible but transform-visible.
+The transform-safe condition is instead
+\[
+\Phi_K\!\left(\partial_{a_2}P_7(a_1,-a_1)\right)=0.
+\]
+Equivalently, if
+\[
+P_{7,\Phi}(a_1,a_2)
+:=
+\frac{1}{c}\Phi_K(P_7(a_1,a_2)),
+\]
+then the scalar condition is
+\[
+P_{7,\Phi}(a_1,a_2)
+\in
+(a_1+a_2)^2\mathbf C[a_1,a_2].
+\]
+This scalar condition is independent of quotient-valued double-balanced
+divisibility on the generic patch \(v_5\ne0\).
 \end{remark}
 
 \begin{lemma}[Hidden-horizontal exceptional divisor condition]
@@ -14547,80 +14781,212 @@ class; it does not prove that the quotient class itself is independent of the
 exceptional slope \(\kappa\).
 \end{remark}
 
-\begin{definition}[Promoted quadratic mixed-block obstruction]
-\label{def:promoted-quadratic-mixed-block-obstruction}
+\begin{definition}[Promoted quadratic mixed-block Bottleneck-C coefficient]
+\label{def:promoted-quadratic-mixed-block-bc-coefficient}
 Let
 \[
 Y_{12}^{(2)}:=D^2N_0[\xi_1,\xi_2]
 \]
 denote the \(\mathcal K^2\), source-bidegree \((1,1)\) nonlinear Taylor
 remainder of the actual corrected mixed block
-\(N^{\corr}(d_-,d_+,\eta)\).  For any same-point linear whitening source slots
-\(A_-,B_+\) whose ordinary orders can contribute to \(z^7\), define
+\(N^{\corr}(d_-,d_+,\eta)\).
+
+The promoted channel has amplitude factor
 \[
-E_{A,Y}
+a_1a_2(a_1+a_2).
+\]
+On the collision chart
+\[
+a_2=-a_1(1+\kappa\delta),
+\]
+this amplitude already contributes the first \(\delta\)-edge:
+\[
+a_1a_2(a_1+a_2)
+=
+a_1^3\kappa\delta+O(\delta^2).
+\]
+Therefore the Bottleneck-C coefficient for this promoted channel is the
+frozen internal coefficient
+\[
+E_{A,Y}^{\mathrm{BC}}
 :=
-[z^7][\delta^1]\tau_{h\to m}\pi_{\mathfrak f_h}
-\left(
+\tau_{h\to m}\pi_{\mathfrak f_h}
+\operatorname{Sym}
+[z^7]\,
+D(G_-^{-1/2})[A_-]\,
+Y_{12}^{(2)}\,
+R_0.
+\]
+Equivalently,
+\[
+E_{A,Y}^{\mathrm{BC}}
+=
+\tau_{h\to m}\pi_{\mathfrak f_h}
+\operatorname{Sym}
+\sum_{\chi\in\{dd,d\eta+\eta d,\eta\eta\}}
+\sum_{g=4}^{7}
+\sum_{r+b=7-g}
+H^A_{r,0}Y^\chi_{g,0}W_{+,b}.
+\]
+Write
+\[
+E_{A,Y}^{\mathrm{BC}}
+=
+e_{A,Y}I+f_{A,Y}S.
+\]
+The quotient Bottleneck-C obstruction is
+\[
+Q_{A,Y}:=e_{A,Y}v_5-u_5f_{A,Y}.
+\]
+The transform-safe obstruction is
+\[
+\Phi_K(E_{A,Y}^{\mathrm{BC}})=2f_{A,Y}.
+\]
+
+For comparison, the literal source-position edge
+\[
+E_{A,Y}^{\mathrm{pos}}
+:=
+\tau_{h\to m}\pi_{\mathfrak f_h}
+\operatorname{Sym}
+[z^7\delta^1]\,
 D(G_-^{-1/2})[A_-]\,
 Y_{12}^{(2)}\,
 R_0
-+
-L_0\,
-Y_{12}^{(2)}\,
-D(G_+^{-1/2})[B_+]
-\right).
 \]
-Its quotient class is
-\[
-E_{A,Y}^q:=[E_{A,Y}]
-\in
-\mathfrak f_m/\mathbf C A_5^{\mathfrak f}(m).
-\]
+belongs to the next source-motion layer and should not be confused with the
+first Bottleneck-C amplitude-derivative coefficient.
 \end{definition}
 
 \begin{remark}[First live promoted nonlinear mixed-block obstruction]
 \label{rem:first-live-promoted-y12-obstruction}
 The same-point cubic \(q^3\) defect is fixed-sector invisible in same-point-only
 Fr\'echet responses by endpoint-swap/transpose symmetry.  The first remaining
-actual-source/Bottleneck C carrier is the promoted nonlinear mixed-block
+actual-source/Bottleneck-C carrier is the promoted nonlinear mixed-block
 quadratic remainder
 \[
 Y_{12}^{(2)}=D^2N_0[\xi_1,\xi_2],
 \]
-coupled to one same-point linear whitening slot as in
-Definition~\ref{def:promoted-quadratic-mixed-block-obstruction}.
+coupled to one same-point linear whitening slot.
 
-The quadratic mixed block contributes the cross-amplitude factor \(a_1a_2\),
-and the same-point whitening slot contributes \(a_1+a_2\).  Hence the
-amplitude polynomial of this promoted channel is
+The amplitude factor of this channel is
 \[
 a_1a_2(a_1+a_2).
 \]
-It has a simple balanced zero:
+Since
 \[
-a_1a_2(a_1+a_2)\big|_{a_2=-a_1}=0,
-\]
-but not a double balanced zero, since
-\[
-\partial_{a_2}\bigl(a_1a_2(a_1+a_2)\bigr)\big|_{a_2=-a_1}
+a_1a_2(a_1+a_2)
 =
--a_1^2.
+a_1^3\kappa\delta+O(\delta^2)
+\quad
+\text{on }a_2=-a_1(1+\kappa\delta),
 \]
-Therefore quotient-valued Bottleneck C for this channel is exactly the
-condition
+the first Bottleneck-C coefficient is
 \[
-E_{A,Y}^q=0,
-\qquad\text{equivalently}\qquad
-E_{A,Y}\in\mathbf C A_5^{\mathfrak f}(m).
+E_{A,Y}^{\mathrm{BC}},
 \]
-The transform-safe augmented package requires the stronger scalar condition
+not the internal source-position coefficient \(E_{A,Y}^{\mathrm{pos}}\).
+
+Thus quotient-valued Bottleneck C for this channel is exactly
 \[
-\Phi_K(E_{A,Y})=0.
+Q_{A,Y}=e_{A,Y}v_5-u_5f_{A,Y}=0.
 \]
-On the generic line-gauge patch \(v_5\ne0\), if
-\(E_{A,Y}\in\mathbf C A_5^{\mathfrak f}(m)\), this stronger condition forces
-\(E_{A,Y}=0\).
+The augmented transform-safe package requires the stronger scalar condition
+\[
+f_{A,Y}=0,
+\qquad
+\text{equivalently}\qquad
+\Phi_K(E_{A,Y}^{\mathrm{BC}})=0.
+\]
+On the generic \(v_5\ne0\) patch, quotient closure together with
+\(T\)-horizontal closure forces
+\[
+E_{A,Y}^{\mathrm{BC}}=0.
+\]
+\end{remark}
+
+\begin{lemma}[Promoted mixed-block coefficient table]
+\label{lem:promoted-y12-coefficient-table}
+In the notation of
+Definition~\ref{def:promoted-quadratic-mixed-block-bc-coefficient}, the frozen
+Bottleneck-C coefficient of the promoted quadratic mixed-block channel is
+\[
+E_{A,Y}^{\mathrm{BC}}
+=
+\tau_{h\to m}\pi_{\mathfrak f_h}
+\operatorname{Sym}
+\sum_{\chi\in\{dd,d\eta+\eta d,\eta\eta\}}
+\sum_{g=4}^{7}
+\sum_{r+b=7-g}
+H^A_{r,0}Y^\chi_{g,0}W_{+,b}.
+\]
+Here
+\[
+H^A_{r,0}
+=
+[z^r]D(G_-^{-1/2})[A_-],
+\qquad
+W_{+,b}=[z^b]G_+^{-1/2},
+\]
+and
+\[
+Y^\chi_{g,0}=[z^g]Y_\chi^{(2)}
+\]
+for
+\[
+\chi\in\{dd,d\eta+\eta d,\eta\eta\}.
+\]
+The skew combination
+\[
+Y_{d\eta-\eta d}^{(2)}
+\]
+is not included, since it is killed by fixed-sector projection.
+
+If
+\[
+E_{A,Y}^{\mathrm{BC}}=e_{A,Y}I+f_{A,Y}S,
+\]
+then the quotient obstruction is
+\[
+e_{A,Y}v_5-u_5f_{A,Y},
+\]
+and the transform-safe obstruction is
+\[
+f_{A,Y}.
+\]
+\end{lemma}
+
+\begin{remark}[Current status of the promoted mixed-block coefficient table]
+\label{rem:status-promoted-y12-coefficient-table}
+The finite Fr\'echet/Sylvester machinery determines the shape of
+\(E_{A,Y}^{\mathrm{BC}}\), but the present draft does not yet tabulate the
+scalar midpoint jet data needed to decide
+\[
+E_{A,Y}^{\mathrm{BC}}=0,
+\qquad
+E_{A,Y}^{\mathrm{BC}}\in\mathbf C A_5^{\mathfrak f}(m),
+\qquad
+\text{or}\qquad
+(E_{A,Y}^{\mathrm{BC}})^q\ne0.
+\]
+The exact missing finite table is
+\[
+\left\{
+W_{+,0},W_{+,1},W_{+,2},W_{+,3},
+\quad
+\Lambda^-_{a,0},\Lambda^-_{a,1},\Lambda^-_{a,2},\Lambda^-_{a,3},
+\right.
+\]
+\[
+\left.
+Y^{dd}_{g,0},\quad
+Y^{d\eta+\eta d}_{g,0},\quad
+Y^{\eta\eta}_{g,0}
+\quad (4\le g\le7)
+\right\}.
+\]
+Until that table is evaluated, \(E_{A,Y}^{\mathrm{BC}}\) remains the first
+unresolved local actual-source/Bottleneck-C obstruction.
 \end{remark}
 
 \begin{remark}[Shortcut routes excluded for the corrected package theorem]
@@ -28799,9 +29165,9 @@ package-to-transform contradiction.  The remaining global obligations are:
 \begin{remark}[Current status summary after the consolidated round]
 \label{rem:current-status-summary-consolidated-round}
 Reading
-Lemma~\ref{lem:actual-source-linear-y-middle-edge-parity},
-Theorem~\ref{thm:ma-mc-connection-closure-actual-y-parity},
-Definition~\ref{def:promoted-quadratic-mixed-block-obstruction},
+Lemma~\ref{lem:edge-refined-y-middle-parity-final},
+Theorem~\ref{thm:ma-mc-pretriv-connection-closure-final},
+Definition~\ref{def:promoted-quadratic-mixed-block-bc-coefficient},
 Definition~\ref{def:transform-safe-augmented-reduced-package},
 Theorem~\ref{thm:finite-odd-germ-determinacy-actual-source}, and
 Definition~\ref{def:first-interaction-branch} together, the present status is:
@@ -30995,39 +31361,41 @@ residuals in the same pre-\(\Phi_K\), pre-determinant convention.  Old raw
 seven-family residuals must not be substituted for these quantities.
 \end{remark}
 
-\begin{lemma}[Actual source-linear \(Y\)-middle edge parity]
-\label{lem:actual-source-linear-y-middle-edge-parity}
-Let \(N^{\corr}(h_-,h_+)\) be the actual corrected mixed block before
-whitening and before fixed-sector projection.  Then
+\begin{lemma}[Source-grade reflection]
+\label{lem:source-grade-reflection}
+Let \(\mathsf S\) denote endpoint swap \(h_-\leftrightarrow h_+\), equivalently
+\(\delta\mapsto-\delta\).  Under the homogeneous scalar-grade convention
 \[
-N^{\corr}(h_-,h_+)^T=N^{\corr}(h_+,h_-).
-\]
-Assume moreover that the actual source-linear homogeneous grade extraction
-satisfies
-\[
-\mathsf P_g\circ\mathsf S=(-1)^g\mathsf S\circ\mathsf P_g,
-\]
-where \(\mathsf S\) is endpoint swap.  If \(Y_g\) denotes the source-linear
-grade-\(g\) middle block, then
-\[
-Y_g(h_-,h_+)^T=(-1)^gY_g(h_+,h_-).
-\]
-Consequently, writing
-\[
-Y_g(h-\delta/2,h+\delta/2)
+\operatorname{Gr}_g r(t)
 =
-\sum_{e\ge0}\delta^eY_g^{\langle e\rangle}(h),
+\frac{r^{(g+2)}(m)}{(g+2)!}(t-m)^{g+2},
 \]
-one has
+the source-linear grade extractor \(\mathsf P_g\) satisfies
 \[
-\left(Y_g^{\langle e\rangle}\right)^T
+\mathsf P_g\circ\mathsf S
 =
-(-1)^{g+e}Y_g^{\langle e\rangle}.
+(-1)^g\mathsf S\circ\mathsf P_g.
 \]
 \end{lemma}
 
 \begin{proof}
-The corrected mixed block has the form
+Reflection about the midpoint sends \(t-m\mapsto-(t-m)\).  Hence
+\[
+(t-m)^{g+2}\mapsto(-1)^{g+2}(t-m)^{g+2}=(-1)^g(t-m)^{g+2}.
+\]
+This is exactly the asserted commutation law.
+\end{proof}
+
+\begin{lemma}[Corrected mixed-block endpoint-swap identity]
+\label{lem:corr-mixed-block-endpoint-swap}
+The corrected mixed block satisfies
+\[
+N^{\corr}(h_-,h_+)^T=N^{\corr}(h_+,h_-).
+\]
+\end{lemma}
+
+\begin{proof}
+Writing the corrected mixed block as
 \[
 N^{\corr}(q_-,q_+,\Delta;s)
 =
@@ -31040,57 +31408,57 @@ N^{\corr}(q_-,q_+,\Delta;s)
 -\dfrac{\sin\Delta+q_-s\cos\Delta}{s^2}
 &
 \dfrac{(q_-+q_+)s\cos\Delta+(2-q_-q_+s^2)\sin\Delta}{2s^3}
-\end{pmatrix}.
+\end{pmatrix},
 \]
-Endpoint swap sends
+endpoint swap sends
 \[
-(q_-,q_+,\Delta,s)\longmapsto(q_+,q_-,-\Delta,-s).
+(q_-,q_+,\Delta,s)\mapsto(q_+,q_-,-\Delta,-s).
 \]
-A direct entrywise check gives
-\[
-N^{\corr}(q_+,q_-,-\Delta;-s)
-=
-N^{\corr}(q_-,q_+,\Delta;s)^T.
-\]
-This identity is algebraic in the actual corrected variables and therefore
-holds before source-linear extraction, whitening, and fixed-sector projection.
+Using \(\sin(-\Delta)=-\sin\Delta\), \(\cos(-\Delta)=\cos\Delta\),
+and \((-s)^2=s^2\), \((-s)^3=-s^3\), the swapped matrix is exactly the
+transpose of the original matrix.
+\end{proof}
 
-The source-linear grade extraction contributes the sign \((-1)^g\) under
-reflection by assumption.  Hence
+\begin{lemma}[Edge-refined \(Y\)-middle parity]
+\label{lem:edge-refined-y-middle-parity-final}
+Let \(Y_g\) be the source-linear grade-\(g\) middle block extracted from
+\(N^{\corr}\).  Then
 \[
 Y_g(h_-,h_+)^T=(-1)^gY_g(h_+,h_-).
 \]
-Substituting \(h_\pm=h\pm\delta/2\) and expanding in powers of \(\delta\),
+Consequently, if
 \[
 Y_g(h-\delta/2,h+\delta/2)
 =
 \sum_{e\ge0}\delta^eY_g^{\langle e\rangle}(h),
 \]
-while
+then
 \[
-Y_g(h+\delta/2,h-\delta/2)
+\left(Y_{g,\beta}^{\langle e\rangle}\right)^T
 =
-\sum_{e\ge0}(-\delta)^eY_g^{\langle e\rangle}(h).
+(-1)^{g+e}Y_{g,\beta}^{\langle e\rangle}.
 \]
-Comparing coefficients gives
-\[
-\left(Y_g^{\langle e\rangle}\right)^T
-=
-(-1)^{g+e}Y_g^{\langle e\rangle}.
-\]
+\end{lemma}
+
+\begin{proof}
+Apply Lemma~\ref{lem:corr-mixed-block-endpoint-swap} and then extract the
+source-linear homogeneous grade using Lemma~\ref{lem:source-grade-reflection}.
+The coefficient of \(\delta^e\) gains the additional factor \((-1)^e\)
+because endpoint swap sends \(\delta\mapsto-\delta\).
 \end{proof}
 
-\begin{theorem}[\(M_A,M_C\) connection closure from actual \(Y\)-middle parity]
-\label{thm:ma-mc-connection-closure-actual-y-parity}
-Assume Lemma~\ref{lem:actual-source-linear-y-middle-edge-parity}, together
-with all-subset midpoint parity and transpose-invariance of
-\(\pi_{\mathfrak f_h}\).  Then, for
+\begin{theorem}[\(M_A,M_C\) pre-trivialization connection closure]
+\label{thm:ma-mc-pretriv-connection-closure-final}
+Let
 \[
 M_A=\dot r_3r_2\dot r_4,
 \qquad
-M_C=\dot r_3\dot r_2r_4,
+M_C=\dot r_3\dot r_2r_4.
 \]
-the labelled \(J=(3,2,4)\) pre-trivialization table satisfies
+Assume all-subset midpoint parity, transpose-invariance of
+\(\pi_{\mathfrak f_h}\), symmetry of \(N^{(0)}\), and the source-grade
+reflection convention of Lemma~\ref{lem:source-grade-reflection}.  Then the
+pre-trivialization table satisfies
 \[
 Z_j[M_A]=Z_j[M_C]=0,
 \qquad 0\le j\le7.
@@ -31099,62 +31467,70 @@ Consequently,
 \[
 R_7^{(A)}
 +
-\sum_{i=1}^7\omega_m(Z_{7-i}[M_A],A_i)=0,
+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M_A],A_i)=0,
 \]
 and
 \[
 R_7^{(C)}
 +
-\sum_{i=1}^7\omega_m(Z_{7-i}[M_C],A_i)=0.
+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M_C],A_i)=0.
 \]
 \end{theorem}
 
 \begin{proof}
-The \(N_0\)-middle part cancels by complement pairing.  Indeed, for the
-labelled triple \(J=(3,2,4)\), one has \(|J|=9\), and the two-dot
-\(\delta^2\)-edge weights for both
-\[
-M_A=\dot r_3r_2\dot r_4,
-\qquad
-M_C=\dot r_3\dot r_2r_4
-\]
-are invariant under
-\[
-I\longmapsto J\setminus I.
-\]
-All-subset midpoint parity and transpose-invariance of \(\pi_{\mathfrak f_h}\)
-therefore make each \(N_0\)-middle complement pair cancel.
+For the \(N_0\)-middle block, the labelled source multiset is
+\(J=(3,2,4)\), hence \(|J|=9\).  Complementing a placement
+\(I\subseteq J\) gives a factor \((-1)^{|J|}=-1\), while the
+\(\delta^2\)-edge weights of \(M_A\) and \(M_C\) are complement-invariant
+because both monomials have two dotted endpoint sources.  Hence every
+\(N_0\)-middle complement pair cancels.
 
-It remains to check the \(Y\)-middle part.  Fix a middle label \(g\in J\) and
-write \(K=J\setminus\{g\}\).  Complement pairing sends
+For the \(Y\)-middle block, fix a middle grade \(m\in J\), set
+\(K=J\setminus\{m\}\), and let \(e\in\{0,1\}\) be the number of edge
+derivatives carried by the middle source.  The complement placement gains
+the matrix factor
 \[
-I\longmapsto K\setminus I.
+(-1)^{|K|}(-1)^{m+e}.
 \]
-If the middle source contributes \(e\in\{0,1\}\) endpoint-edge derivatives,
-the source-edge weight changes by \((-1)^e\).  Lemma
-\ref{lem:actual-source-linear-y-middle-edge-parity} gives
+The source-edge weight gains the factor \((-1)^e\).  Since
 \[
-\left(Y_g^{\langle e\rangle}\right)^T
+|K|+m=|J|=9,
+\]
+the total complement factor is
+\[
+(-1)^e(-1)^{|K|}(-1)^{m+e}
 =
-(-1)^{g+e}Y_g^{\langle e\rangle}.
+(-1)^{|J|}
+=
+-1.
 \]
-Combining this with the endpoint parity of the left and right whitening
-blocks gives a total complement-pair sign of \(-1\).  Hence every
-\(Y\)-middle complement pair cancels.
-
-Thus the full labelled \(J=(3,2,4)\) pre-trivialization table vanishes:
+Thus every \(Y\)-middle complement pair cancels.  Therefore
 \[
-Z_j[M_A]=Z_j[M_C]=0,
-\qquad 0\le j\le7.
+Z_j[M_A]=Z_j[M_C]=0
 \]
-Since
+for \(0\le j\le7\).  The displayed connection identities follow immediately
+from
 \[
 R_7^{(X)}=\omega_m(Z_7[M_X],A_0),
-\qquad X\in\{A,C\},
+\qquad X\in\{A,C\}.
 \]
-both direct residuals vanish as well, and the displayed connection identities
-follow.
 \end{proof}
+
+\begin{remark}[Scope of the \(M_A,M_C\) connection closure]
+\label{rem:scope-ma-mc-connection-closure-final}
+Theorem~\ref{thm:ma-mc-pretriv-connection-closure-final} closes the
+\(M_A,M_C\) pre-trivialization connection branch under the stated
+source-grade reflection convention.  It does not prove the full
+actual-source Gate~B upgrade
+\[
+\Theta_7^{\actual}=0,
+\]
+and it does not address the promoted nonlinear mixed-block carrier
+\[
+Y_{12}^{(2)}=D^2N_0[\xi_1,\xi_2],
+\]
+which remains a separate actual-source/Bottleneck~C obstruction.
+\end{remark}
 
 \begin{remark}[Connection table reduction for the residual monomials]
 \label{rem:connection-table-reduction-residual-monomials}
