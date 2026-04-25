@@ -30009,6 +30009,35 @@ alone.  The remaining local route would require a new physical edge identity
 not present in the current package calculus.
 \end{remark}
 
+\begin{remark}[\(\Theta_\pm\) no-go versus the frozen Bottleneck-C coefficient]
+\label{rem:theta-nogo-versus-frozen-bc-coefficient}
+The no-go result for the \(\Theta_\pm\)-normal repair does not replace the
+frozen coefficient
+\[
+E_{A,Y}^{\mathrm{BC}}.
+\]
+Rather, it says that normal-form coordinates or septic counterterms cannot
+make the physical transform-safe Bottleneck-C obstruction disappear.  The
+canonical local coefficient to compute remains
+\[
+E_{A,Y}^{\mathrm{BC}}
+=
+e_{A,Y}I+f_{A,Y}S,
+\]
+with quotient test
+\[
+e_{A,Y}v_5-u_5f_{A,Y}=0
+\]
+and transform-safe test
+\[
+f_{A,Y}=0.
+\]
+The \(\Theta_\pm\) audit shows that if one removes a visible septic residual
+from a formal package, the same residual must be carried by the physical
+hidden coordinate.  Thus it is an obstruction-isolation result, not a
+replacement for the \(E_{A,Y}^{\mathrm{BC}}\) finite table.
+\end{remark}
+
 \subsection{Finite-core sampled vector non-concentration}
 \label{subsec:finite-core-sampled-vector-nonconcentration}
 
@@ -30056,8 +30085,8 @@ C_*
 \right).
 \]
 
-\begin{theorem}[Sampled finite-core vector non-concentration, needed]
-\label{thm:sampled-finite-core-vector-nonconcentration-needed}
+\begin{hypothesis}[Sampled finite-core vector non-concentration]
+\label{hyp:sampled-finite-core-vector-nonconcentration}
 For every actual zeta finite-core parameter
 \[
 \theta(m)\in\Theta_k,
@@ -30076,7 +30105,7 @@ or
 \ge
 \Lambda(m,Q).
 \]
-\end{theorem}
+\end{hypothesis}
 
 \begin{definition}[Interaction-aligned finite-core branch]
 \label{def:interaction-aligned-finite-core-branch}
@@ -30095,16 +30124,16 @@ such that
 <
 \Lambda(m,Q).
 \]
-Equivalently, Theorem~\ref{thm:sampled-finite-core-vector-nonconcentration-needed}
+Equivalently, Hypothesis~\ref{hyp:sampled-finite-core-vector-nonconcentration}
 asserts
 \[
 \mathcal N_k^{\rm align}(m,Q)=\varnothing.
 \]
 \end{definition}
 
-\begin{lemma}[Lower transfer from sampled vector non-concentration]
+\begin{lemma}[Finite-core lower transfer from sampled vector non-concentration]
 \label{lem:finite-core-lower-transfer-from-svnc-current}
-Assume Theorem~\ref{thm:sampled-finite-core-vector-nonconcentration-needed}.
+Assume Hypothesis~\ref{hyp:sampled-finite-core-vector-nonconcentration}.
 Assume also bounded-depth projective detection: for \(Q\ge Q_0(\Theta_k)\),
 every \(\theta\notin\mathcal Z_k\) admits some
 \(1\le N\le R_{\Theta_k}+1\) such that
@@ -30131,7 +30160,7 @@ Choose \(N\) by projective detection.  Since
 \[
 C_{\rm fd}=P_{\rm fd}+J_{\rm fd},
 \]
-Theorem~\ref{thm:sampled-finite-core-vector-nonconcentration-needed} gives
+Hypothesis~\ref{hyp:sampled-finite-core-vector-nonconcentration} gives
 \[
 |F_N(\theta(m),Q)|
 \ge
@@ -30162,7 +30191,7 @@ gives the asserted lower bound.
 \label{rem:status-finite-core-branch-current}
 Finite odd-germ determinacy supplies qualitative detection on compact
 nonsingular strata.  It does not supply the sampled vector lower bound in
-Theorem~\ref{thm:sampled-finite-core-vector-nonconcentration-needed}.  The
+Hypothesis~\ref{hyp:sampled-finite-core-vector-nonconcentration}.  The
 live finite-core obstruction is calibrated interaction alignment:
 \[
 J_{\rm fd}(\theta(m))\approx -P_{\rm fd}(\theta(m)),
@@ -30231,8 +30260,8 @@ The centered \(dd\)-interaction branch is
 \]
 \end{definition}
 
-\begin{theorem}[Feature balance or spectral positivity, needed]
-\label{thm:feature-balance-or-spectral-positivity-needed-current}
+\begin{remark}[Needed input for the \(dd\)-interaction branch]
+\label{rem:feature-balance-or-spectral-positivity-dd-needed}
 On each compact nonsingular same-scale finite-core patch away from the
 controlled degeneracy set, let \(v(u)\) be the transverse \(dd\)-source feature
 after same-side whitening normalization.  To close the \(dd\)-interaction
@@ -30267,7 +30296,7 @@ Absent one of these inputs, the branch
 \mathfrak Z_{\rm int}^{dd}
 \]
 remains independent.
-\end{theorem}
+\end{remark}
 
 \begin{remark}[Current proof frontier after the local package audits]
 \label{rem:current-proof-frontier-after-local-package-audits}
@@ -30303,11 +30332,15 @@ The known good-patch models have
 \partial_\kappa(\beta_{\loc}^{\Theta}/c)\ne0.
 \]
 
-\item The finite-core lower-transfer branch is reduced to sampled vector
-non-concentration:
+\item The finite-core lower-transfer branch is reduced to the sampled vector
+non-concentration dependency
 \[
 \mathcal N_k^{\rm align}(m,Q)=\varnothing.
 \]
+This is not proved by finite determinacy, compactness, pairwise zero-spacing,
+endpoint-gap control, or Remez--{\L}ojasiewicz volume estimates; it is a
+pointwise arithmetic/source-level non-concentration input for actual zeta
+finite-core samples.
 
 \item The \(dd\)-interaction branch remains independent unless feature
 balance, conditional spectral positivity, or incidence containment is proved.
