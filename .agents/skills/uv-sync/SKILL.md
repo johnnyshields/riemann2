@@ -43,4 +43,4 @@ Stage changed paths by name. Commit `uv-sync: <counts> - <summary>`. Avoid `<pap
 
 ## When
 
-After a large paper editing pass; before `research-team` / `research-attack` so gap-closers get correct entries; periodic hygiene after major proof-state churn.
+After a large paper editing pass; before `research-attack` / `research-team` so attack-mode researchers get correct entries; periodic hygiene after major proof-state churn.

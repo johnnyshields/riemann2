@@ -45,22 +45,26 @@ Hard gates:
 
 Delegation uses Codex subagents: `spawn_agent` for new teammates, `send_input` for follow-up, `wait_agent` only when blocked, `close_agent` only at terminal condition / explicit halt / stale long-idle team. Spawn only when the user asks for delegated work or invokes a multi-agent skill (`research-team`, `research-attack`, `research-audit`, `trifecta`, `paper-harden`, `paper-referee`, `paper-rewrite`, `script-promote`). Otherwise run the workflow locally.
 
-**Keep teammates alive.** A team is a live group, not a one-shot batch. After a deposit, redelegate via `send_input` for follow-up, adversarial back-and-forth, the next adjacent task. Spawn a replacement only when the role changes, the agent is blocked, or fresh independence matters.
+There is one agent definition: `researcher`. The brief assigns one *mode* per dispatch — `attack`, `explore`, `audit`, `source-check`, `verify`, `fix`, `rewrite`, `synthesis`. Old role names (`gap-closer`, `verifier-adversarial`, `auditor`, `fixer`, `harden-reviewer`, `referee`, `rewriter`, `trifecta-analyst`, `verifier-source`, `explorer`) have been collapsed into modes — never spawn under those names.
 
-**Autoresearch everywhere.** Every research workflow and every research agent runs under `.agents/agents/_autoresearch.md`. Include it in every brief. Agents loop: read state, choose next move, work, deposit, state next step, wait. They don't ask whether to continue.
+**Tight default.** Two or three researchers on bounded technical lanes that can fail cleanly. The coordinator owns theorem formulation, ledger filing, and paper integration directly — don't delegate the synthesis. Subagents take well-scoped sub-problems, not the whole frontier. Use `research-team` only when the frontier genuinely lacks focus; `research-attack` is the default.
+
+**Lazy verifier.** Don't spawn a fresh adversarial verifier until a concrete candidate exists. Burning a verifier on a vacuum produces noise and ties up a slot.
+
+**Cross-audit.** Same researcher pool can review each other. When researcher A's deposit needs adversarial review, redelegate researcher B to it in `verify` mode rather than spawning a new agent. Spawn a fresh independent verifier only when independence is the point — the existing pool is too entangled with the route, or the claim would change the paper.
+
+**Keep teammates alive.** A team is a live group, not a one-shot batch. After a deposit, redelegate via `send_input` for follow-up, adversarial back-and-forth, the next adjacent task. Spawn a replacement only when the mode changes substantively, the agent is blocked, or fresh independence matters.
+
+**Autoresearch everywhere.** Every research workflow and every researcher runs under `.agents/agents/_autoresearch.md`. Include it in every brief. They loop: read state, choose next move, work, deposit, state next step, wait. They don't ask whether to continue.
 
 **Model.** Inherited Codex model by default. Override only if the user asks or a bounded task has a clear reason; record that reason in `dispatch.md`. No vendor model names hard-coded in skills/briefs/agents.
-
-**Adaptive roster.** No fixed headcount — the smallest live roster that keeps the frontier moving: gap-closers for concrete UVs, explorers for redirects, source/adversarial verifiers when there's something specific to check, fresh independent agents when independence matters.
-
-**One-ahead verification.** Keep at least one research/exploration lane moving while verifiers review the previous stable deposit. Verification is risk-based: exploratory notes and failed routes don't need a verifier; proof-state changes, UV removals, paper edits, and durable findings do. Don't idle researchers behind verifier work unless their next move depends on the answer.
 
 ### Selector
 
 | Intent | Skill |
 |---|---|
-| general research cycle, no fixed target | `research-team` |
-| focused push on one UV / label | `research-attack` |
+| focused push on one UV / label (default) | `research-attack` |
+| broader cycle when frontier lacks focus | `research-team` |
 | resume existing team dir in place | `research-resume` |
 | grade subsections | `research-audit` |
 | post-work synthesis, literature, hidden links | `trifecta` |
@@ -80,11 +84,11 @@ Delegation uses Codex subagents: `spawn_agent` for new teammates, `send_input` f
 | harden a script | `script-promote` |
 | bibliography | `paper-biblio` |
 
-When in doubt between `research-team` and `research-attack`, prefer `research-attack` — cheaper to spin up, cheaper to get wrong.
+Default to `research-attack`. Reach for `research-team` only when there's no focused target and the frontier itself needs scoping work.
 
 ## Coordinator autonomy
 
-Decide without asking: roster size, UV target, explorer topic, non-goals (synthesized from in-flight work and recent lore), team-dir slug, commit wording, subsection selection, demote timing, forward-carry filtering. Don't interrupt over research-direction minutia.
+Decide without asking: roster size, UV target, mode assignment, explorer topic, non-goals (synthesized from in-flight work and recent lore), team-dir slug, commit wording, subsection selection, demote timing, forward-carry filtering. Don't interrupt over research-direction minutia.
 
 No approval prompts before routine actions: target choice, dispatch, resume, editing workflow files, staging by name, committing logical units, pushing, promote/demote/reject, filing UV. For architectural or irreversible decisions: take the safest reversible action — quarantine the claim, file a UV, record the blocker — and continue adjacent work. Pause only for explicit user halt, hard runtime/tooling blocker, or terminal condition.
 
@@ -130,15 +134,17 @@ Also names:
 - protected surfaces the agent must not edit (`<main>.tex`, team-dir state files, `AGENTS.md`, `lore/`, other agents' dirs — unless the role grants exception);
 - the ground-truth check: theorem statement, `rem:wip-*`, source ref, verifier question, pinned objection set, or script output that decides whether evidence counts.
 
-**Default brief excludes the full `uv.md`.** Tentative claims poison independent agents. Feed the relevant *individual* UV entries (not the whole ledger) to:
+**Default brief excludes the full `uv.md`.** Tentative claims poison independent agents. Feed the relevant *individual* UV entries (not the whole ledger) only to researchers whose mode requires them:
 
-- the gap-closer attacking that specific UV;
-- the adversarial verifier reviewing exactly that claim;
-- the source auditor whose range contains the matching `rem:wip-*`;
-- the Phase-1 fixer whose issue touches it;
-- any agent structurally adjacent enough that prior UV phrasing saves a re-discovery.
+- `attack` — the specific UV being attacked, verbatim.
+- `verify` — the UV(s) cited in the deposit being reviewed.
+- `source-check` — UVs whose matching `rem:wip-*` falls in the audited range.
+- `fix` — the UV touching the issue being fixed.
+- Any researcher structurally adjacent enough that prior UV phrasing saves a re-discovery.
 
-An agent pushing on a UV needs the entry verbatim plus a one-line pointer to the reports that produced it: prior routes, strongest objection, current fallback.
+`explore`, `audit`, `synthesis`, and `rewrite` modes get no `uv.md` content by default.
+
+A researcher in `attack` mode needs the entry verbatim plus a one-line pointer to the reports that produced it: prior routes, strongest objection, current fallback.
 
 **Update `findings.md` / `uv.md` before launching.** An out-of-date briefing is the handoff bug.
 
@@ -200,9 +206,9 @@ Route status values (also defined in `_autoresearch.md`):
 - `terminal` — target closed, rejected, or superseded
 - `crash` — tooling/execution failure (distinct from mathematical failure)
 
-**Agents write their own provenance.** Every agent — gap-closer, explorer, verifier, auditor, Phase-1 fixer — writes directly to `agents/<slug>/`: report, scripts, notes. The team lead briefs / collates / commits; never transcribes an agent's findings into a fresh file. Chat-only output gets sent back: "deposit your report and scripts under `agents/<your-slug>/`, then ping me." Paraphrased provenance is laundered provenance.
+**Researchers write their own provenance.** Every researcher in every mode writes directly to `agents/<slug>/`: report, scripts, notes. The team lead briefs / collates / commits; never transcribes a researcher's findings into a fresh file. Chat-only output gets sent back: "deposit your report and scripts under `agents/<your-slug>/`, then ping me." Paraphrased provenance is laundered provenance.
 
-Agents do **not** write to `<main>.tex`, team-dir state files, `AGENTS.md`, `lore/`, or another agent's dir — unless a skill grants explicit exception (e.g. `paper-referee` Phase 1).
+Researchers do **not** write to `<main>.tex`, team-dir state files, `AGENTS.md`, `lore/`, or another agent's dir — except `fix` mode (Phase-1 referee), which may edit the paper within the scoped region in its brief.
 
 ## Report schema
 

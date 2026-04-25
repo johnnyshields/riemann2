@@ -1,11 +1,11 @@
 ---
 name: paper-rewrite
-description: Compactness rewrite of a paper main TeX file or specified scope. Tightens prose and removes redundancy while preserving macros, labels, cite keys, theorem statements, notation, and mathematical content. Uses coordinator-selected parallel rewriters when useful.
+description: Compactness rewrite of a paper main TeX file or specified scope via researchers in rewrite mode. Tightens prose and removes redundancy while preserving macros, labels, cite keys, theorem statements, notation, and mathematical content.
 ---
 
 # Paper Rewrite
 
-Compactness pass on `<paper>/<main>.tex` or a scope. Rewriters edit only their own agent dirs; assembly into the paper is coordinator-owned and gated by integrity checks.
+Compactness pass on `<paper>/<main>.tex` or a scope. Researchers in `rewrite` mode edit only their own agent dirs; assembly into the paper is coordinator-owned and gated by integrity checks.
 
 `$ARGUMENTS`: empty → full paper; section or line range → scoped pass; `--target-ratio <N>` sets compaction target (default 15%); `--no-agents` means coordinator-only for small scopes; `--preserve-extra "<list>"` adds locked identifiers.
 
@@ -32,7 +32,7 @@ Create `<paper>/teams/<ts>-other-rewrite-<slug>/` with standard team files: copy
 
 ## Dispatch
 
-Record team name `paper-rewrite-<ts>` in `dispatch.md`. Spawn the smallest useful set of `rewriter-<slug>` agents. Brief with the invariant list, `notes/frozen-macros.txt`, input region, labels/cites/refs present, target compaction ratio, exact deposit path, and the contract: replacement block at `agents/<slug>/rewrite.tex`, 9-field report with "Compaction notes", no direct `<main>.tex` edits.
+Record team name `paper-rewrite-<ts>` in `dispatch.md`. Spawn the smallest useful set of researchers in `rewrite` mode → slug `rewrite-<scope>`. Brief with the invariant list, `notes/frozen-macros.txt`, input region, labels/cites/refs present, target compaction ratio, deposit path, and the contract: replacement block at `agents/<slug>/rewrite.tex`, 9-field report with "Compaction notes", no direct `<main>.tex` edits.
 
 Non-goals: no proof restructuring, removed conditionals, `rem:wip-*` promotion, new labels/macros/cite keys, ordering changes within scope. With `--no-agents`, the coordinator applies the same invariants directly.
 

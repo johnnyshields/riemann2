@@ -1,11 +1,11 @@
 ---
 name: research-resume
-description: Continue research-team from an existing paper team directory. Same adaptive roster, one-ahead verification pattern, briefing, capture, and provenance rules as research-team; the only difference is that it reuses the existing team dir and creates only new agent subdirs.
+description: Continue research-attack or research-team from an existing paper team directory. Same dispatch rules — tight roster, mode-assigned researchers, lazy verifier, cross-audit — but reuses the existing team dir and creates only new agent subdirs.
 ---
 
 # Research Resume
 
-`research-team` run in an existing team dir. Same roster, one-ahead pattern, briefing, capture, long-lived agents, autoresearch, promotion. Only difference: don't create a sibling team dir. Reuse the supplied dir and create fresh `agents/<resume-ts>-<agent-slug>/` subdirs.
+Resume work in an existing team dir. Same dispatch rules as `research-attack` (default tight pattern) or `research-team` (broader fallback): mode-assigned researchers, coordinator-led synthesis, lazy verifier, cross-audit via redelegation. Only difference: don't create a sibling team dir — reuse the supplied dir and create fresh `agents/<resume-ts>-<agent-slug>/` subdirs.
 
 `$ARGUMENTS`: existing `<paper>/teams/<ts>-<slug>/` path; optional focus (`UV-NNN`, `rem:wip-*`, route name). No focus → choose the most blocking frontier from the existing dir without asking.
 
@@ -16,28 +16,29 @@ description: Continue research-team from an existing paper team directory. Same 
 3. Capture stranded material per `Ledger separation`: UVs → `uv.md`, lessons → `findings.md`, routes → `attempts.md`, no-action → `collation.md`. `attempts.tsv` is legacy context — import only live next-actions.
 4. Run the ledger gate.
 5. Initialize missing stubs only inside the existing dir.
-6. Append `## Resume dispatch <timestamp>` to `dispatch.md` with current commit, roster, verifier queue, targets, exact in-scope files/lines/reports, protected surfaces, non-goals, fixed-harness criteria, ground-truth checks, budgets, ledger contract. Commit by named paths.
+6. Append `## Resume dispatch <timestamp>` to `dispatch.md` with current commit, roster + per-lane mode, targets, exact in-scope files/lines/reports, protected surfaces, non-goals, fixed-harness criteria, ground-truth checks, budgets, ledger contract. Commit by named paths.
 
 ## Dispatch
 
-Record team name `research-resume-<existing-ts-or-slug>-<resume-ts>` in `dispatch.md`. Same dispatch rules as `research-team`: spawn the coordinator-selected live roster, keep research/exploration lanes moving, add verifiers when deposits are ready or risk demands it. Each fresh teammate gets:
+Record team name `research-resume-<existing-ts-or-slug>-<resume-ts>` in `dispatch.md`. Spawn the coordinator-selected tight roster (typically 1-3 researchers with assigned modes from `attack` / `explore` / `audit` / `synthesis`). Cross-audit via `verify`-mode redelegation when a candidate exists. Spawn a fresh independent verifier only when independence matters. Each fresh teammate gets:
 
 `<existing-team-dir>/agents/<resume-ts>-<agent-slug>/`
 
 Never reuse an old agent dir. Existing team files stay authoritative.
 
-Briefings match `research-team`: full `_autoresearch.md`, full `findings.md`, 9-field schema, non-goals, deposit path, self-deposit checklist, `Writing discipline`, role-specific UV/report exceptions.
+Briefings match `research-attack` / `research-team`: full `_autoresearch.md`, full `findings.md`, 9-field schema, non-goals, deposit path, self-deposit checklist, `Writing discipline`, mode-specific UV/report exceptions per `Briefing`.
 
-Don't ask for approval. Pick roster and targets from the recovered frontier and proceed.
+Don't ask for approval. Pick roster, modes, and targets from the recovered frontier and proceed.
 
 ## Continuing Cycle
 
-Same as `research-team`, all capture in the existing dir.
+All capture in the existing dir.
 
-1. Verify each returning agent deposited `report.md` + cited `scripts/` / `notes/`. Chase missing; record gaps in `collation.md`.
+1. Verify each returning researcher deposited `report.md` + cited `scripts/` / `notes/`. Chase missing; record gaps in `collation.md`.
 2. Walk each report per `Ledger separation`. Process proof-state changes through `Claim lifecycle`. `attempts.md` rows cite reports. Write `collation.md` no-action notes where needed. Refresh frontier summaries. Commit logical units by named paths.
-3. One-ahead: queue verification while independent research/exploration continues. Wait only when the next move depends on the verifier.
-4. Respond to each agent with a concrete follow-up, adversarial challenge, or next task.
-5. `paper-updates.md` for paper-ready edits only. No direct `<main>.tex` edits.
+3. Coordinator owns synthesis: theorem formulation, ledger filing, paper integration. Don't delegate this to a subagent.
+4. Cross-audit: redelegate an existing researcher in `verify` mode to a sibling's deposit once it's stable. Spawn a fresh verifier only when independence matters.
+5. Respond to each researcher with a concrete follow-up, sharper objection, or next bounded lane.
+6. `paper-updates.md` for paper-ready edits only. Direct `<main>.tex` edits stay coordinator-owned.
 
 Keep the resumed team alive. `close_agent` only at terminal condition, halt, stale team, or clear better replacement.

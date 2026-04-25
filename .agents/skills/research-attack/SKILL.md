@@ -1,37 +1,43 @@
 ---
 name: research-attack
-description: Small-cycle variant of research-team for a focused push on one UV-NNN or rem:wip-* target. Starts with one or two gap-closers and adds lagging verification only when a stable claim is ready or risk demands it.
+description: Default focused-attack pattern. 1-3 researchers in attack mode on bounded technical lanes for one UV-NNN or rem:wip-* target; verifier spawned lazily after a candidate exists, or via cross-audit redelegation.
 ---
 
 # Research Attack
 
-Focused push on one gap. Start with one gap-closer; `--double` for two independent routes. Add a verifier only when a stable claim is ready, the target is high-risk, or promotion is being considered. See `Dispatch`, `Briefing`, `Team dirs`, `Capture / Forward-carry`, and `_autoresearch.md`.
+Tight focused push on one gap. Coordinator owns theorem statement and ledger/paper integration directly. Subagents take bounded technical lanes that can fail cleanly. See `Dispatch`, `Briefing`, `Team dirs`, `Capture / Forward-carry`, and `_autoresearch.md`.
 
-`$ARGUMENTS`: `UV-NNN`, `rem:wip-<label>`, or free text resolved to the best match. Optional `--double`.
+`$ARGUMENTS`: `UV-NNN`, `rem:wip-<label>`, or free text resolved to the best match. Optional `--double` to run two independent attack lanes; `--triple` for three.
 
 ## Preamble
 
-1. Read the most recent team dir's `findings.md` / `uv.md` plus the paper region around the target's `rem:wip-*` label.
+1. Read the most recent team dir's `findings.md` / `uv.md` plus the paper region around the target's `rem:wip-*`.
 2. Create `<paper>/teams/<ts>-attack-gap-<slug>/`. Copy prior `findings.md` / `uv.md`, prune, add uncaptured material, initialize fresh `attempts.md`, carry target-relevant open next-actions to `dispatch.md` or `collation.md`. Commit.
 3. Run the ledger gate for the target.
-4. Write `dispatch.md` with originating commit, target, current baseline/frontier, exact in-scope files/lines/reports, protected surfaces, routes, verifier queue, non-goals, fixed-harness criteria, ground-truth checks, budgets, ledger contract.
+4. Write `dispatch.md` with originating commit, target, current baseline/frontier, exact in-scope files/lines/reports, protected surfaces, routes, non-goals, fixed-harness criteria, ground-truth checks, budgets, ledger contract.
 
 ## Dispatch
 
-Record team name `research-attack-<ts>` in `dispatch.md`. Roster:
+Record team name `research-attack-<ts>` in `dispatch.md`. Roster (default 1; `--double` = 2; `--triple` = 3):
 
-- **Gap-closer(s)** (`role: gap-closer`) → `gap-<slug>` or `gap-<slug>-routeA` / `-routeB` under `--double`. Brief with `_autoresearch.md`, full `findings.md`, the UV entry verbatim, clean target, routes A/B/C, exact deposit path, self-deposit checklist.
-- **Verifier / source auditor** (`role: verifier-adversarial` or `verifier-source`) → spawn only when there's a concrete prior deposit to attack or source-check. Give the specific UV entry and report path needed — not the whole ledger.
+- **Researcher in `attack` mode** → slug `attack-<lane>` (e.g. `attack-routeA`, `attack-routeB`, or `attack-coefficient-list`). Brief with `_autoresearch.md`, full `findings.md`, the UV entry verbatim, the *bounded* sub-problem for this lane, routes A/B/C, deposit path, self-deposit checklist.
 
-Keep teammates alive after deposit. Use `send_input` for follow-up challenges, verifier objections, sharpened reductions, next adjacent attack — before spawning replacements.
+Coordinator handles theorem formulation and ledger/paper integration — don't delegate the synthesis to a subagent.
+
+**No pre-spawned verifier.** Verification lands one of two ways once a concrete candidate exists:
+
+- **Cross-audit (default):** redelegate one of the existing attackers in `verify` mode to a sibling's deposit. They've been close to the problem and can spot routine errors fast.
+- **Fresh verify:** spawn a new researcher in `verify` mode only when independence matters — the existing pool is too entangled with the route, or promotion is being considered.
+
+Keep teammates alive after deposit. `send_input` to push back, sharpen a reduction, request the next lane.
 
 Non-goals are coordinator-synthesized: no adjacent UVs, no re-proving closed lemmas, no new conjectures outside scope.
 
 ## Continuing Cycle
 
-1. Verify every `report.md` plus cited `scripts/` / `notes/` exists; chase missing.
-2. Walk each report per `Ledger separation`: refine or file UVs, append only reusable lessons to `findings.md`, log routes in `attempts.md` with report provenance, put synthesis/no-action in `collation.md`.
-3. One-ahead: send independent next attacks to gap-closers while any verifier checks the previous stable claim. Wait only when the next attack depends on that check.
-4. `paper-updates.md` for paper-ready edits only. No direct `<main>.tex` edits.
+1. Verify every `report.md` plus cited `scripts/` / `notes/`; chase missing.
+2. Walk each report per `Ledger separation`: refine or file UVs, append reusable lessons to `findings.md`, log routes in `attempts.md` with report provenance, put synthesis/no-action in `collation.md`.
+3. Once a deposit looks promising, redelegate a sibling in `verify` mode (cross-audit) — or do the adversarial pass yourself if scope is small. Spawn a fresh verifier only when independence is the point.
+4. `paper-updates.md` for paper-ready edits only. Direct `<main>.tex` edits stay coordinator-owned and gated by `Claim lifecycle`.
 
 Don't shut down at attack boundaries. Keep the team alive. `close_agent` only at terminal condition, halt, stale team, or clear better replacement.
