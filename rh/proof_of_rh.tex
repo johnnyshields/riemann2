@@ -30969,6 +30969,63 @@ to finite jet order.  Any cancellation of the aggregate Bottleneck-C
 coefficient must therefore be a genuine global zero-tail identity, not a
 pair-level source rigidity law.
 
+\begin{remark}[Full symmetry-packet closure does not cancel the source moments]
+\label{rem:full-symmetry-packet-does-not-cancel-source-moments}
+The paired atom \(f_{\beta,\gamma}\) already includes the
+functional-equation partner at the same ordinate:
+\[
+\beta+i\gamma,
+\qquad
+1-\beta+i\gamma.
+\]
+The full symmetry packet also contains the conjugate ordinate pair
+\[
+\beta-i\gamma,
+\qquad
+1-\beta-i\gamma,
+\]
+whose paired contribution is
+\[
+f_{\beta,-\gamma}(t)
+=
+\frac{1-\beta}{(1-\beta)^2+(2t+\gamma)^2}
++
+\frac{\beta}{\beta^2+(2t+\gamma)^2}.
+\]
+If
+\[
+x_+(m)=2m-\gamma,
+\qquad
+x_-(m)=2m+\gamma,
+\]
+then the corresponding post-affine coefficients are
+\[
+\rho_2(\beta,x_+),\quad \rho_4(\beta,x_+),
+\qquad
+\rho_2(\beta,x_-),\quad \rho_4(\beta,x_-).
+\]
+The formulas above are even in \(x\).  Thus at a symmetric midpoint
+\(m=0\), the \(\gamma\) and \(-\gamma\) packets add:
+\[
+\rho_2(\beta,-\gamma)=\rho_2(\beta,\gamma),
+\qquad
+\rho_4(\beta,-\gamma)=\rho_4(\beta,\gamma).
+\]
+At the midpoint centered on the \(+\gamma\) packet, \(x_+=0\) while
+\(x_-=2\gamma\); again the conjugate packet supplies an additional contribution
+rather than a sign-reversed copy.  Therefore functional-equation and conjugation
+closure do not structurally force
+\[
+A_2=0,
+\qquad
+A_4=0,
+\qquad
+\nu_{\eta\eta}=0.
+\]
+Any cancellation after summing the full packet is a proper analytic incidence
+condition, not a symmetry identity.
+\end{remark}
+
 \subsection{Source-convention rebuild and persistence of the \(\eta\eta\) row}
 \label{subsec:source-convention-rebuild-etaeta-row}
 
@@ -31788,6 +31845,216 @@ global zero-source cancellation theorem, or else one pivots to a different
 architecture, such as global curvature/holonomy control or a quotient-only
 no-\(T\) program.
 
+\subsection{Last-chance pointwise flatness in full phase variables}
+\label{subsec:last-chance-pointwise-flatness-full-phase-variables}
+
+The rebuilt source convention removes the unstable-cutoff objection by using
+the full non-core zero complement
+\[
+G^{\new}=q_{\aux,R}+T_{\far,R}.
+\]
+A final possible escape is that the exact decomposition of the full phase
+derivative into rebuilt baseline and non-core complement might itself force
+the Bottleneck-C flatness identity.  This subsection records that it does not.
+
+Write
+\[
+Q(t):=q(t)
+\]
+for the full phase derivative, and decompose
+\[
+Q(t)=b(t)+G(t),
+\]
+where
+\[
+b(t):=q_{\base}^{\new}(t)
+=
+q_{\core}(t)+B_{\bg}(t)+E_{\est,R}(t),
+\]
+and
+\[
+G(t):=G^{\new}(t)=q_{\aux,R}(t)+T_{\far,R}(t).
+\]
+At the midpoint \(m\), put
+\[
+b_0:=b(m),
+\qquad
+b_2:=b''(m),
+\]
+and
+\[
+A_2:=\frac{G''(m)}2,
+\qquad
+A_4:=\frac{G^{(4)}(m)}{24}.
+\]
+Then
+\[
+A_2=\frac{Q''(m)-b''(m)}2,
+\qquad
+A_4=\frac{Q^{(4)}(m)-b^{(4)}(m)}{24}.
+\]
+
+The rebuilt Bottleneck-C flatness condition is
+\[
+\frac{b_0}{240}A_2A_4
++
+\frac{1}{144}
+\left(
+\frac{b_2}{6}
+-
+\frac{2b_0^3}{3}
+\right)
+A_2^2
+=0.
+\]
+Substitution gives
+\[
+\frac{b_0}{11520}
+\bigl(Q''-b''\bigr)
+\bigl(Q^{(4)}-b^{(4)}\bigr)
++
+\frac{1}{576}
+\left(
+\frac{b''}{6}
+-
+\frac{2b_0^3}{3}
+\right)
+\bigl(Q''-b''\bigr)^2
+=0,
+\]
+with all derivatives evaluated at \(m\).  Equivalently, if
+\[
+D_2:=Q''-b''=G'',
+\qquad
+D_4:=Q^{(4)}-b^{(4)}=G^{(4)},
+\]
+then the condition is
+\[
+D_2
+\left[
+b_0D_4
++
+20
+\left(
+\frac{b''}{6}
+-
+\frac{2b_0^3}{3}
+\right)
+D_2
+\right]
+=0.
+\]
+
+\begin{proposition}[The rebuilt flatness equation is an extra fourth-order constraint]
+\label{prop:rebuilt-flatness-extra-fourth-order-constraint}
+The identity
+\[
+Q=b+G
+\]
+does not imply
+\[
+\nu_{21,7}^{\new,\mathrm{agg}}=0.
+\]
+On a good patch with \(G''(m)\ne0\), pointwise flatness is equivalent to the
+additional derivative-ratio constraint
+\[
+\frac{G^{(4)}(m)}{G''(m)}
+=
+\frac{40b(m)^2}{3}
+-
+\frac{10b''(m)}{3b(m)}.
+\]
+Equivalently,
+\[
+b^{(4)}(m)
+=
+Q^{(4)}(m)
+-
+\left(
+\frac{40b(m)^2}{3}
+-
+\frac{10b''(m)}{3b(m)}
+\right)
+\bigl(Q''(m)-b''(m)\bigr).
+\]
+Thus the desired flatness is not a consequence of the tautological full-phase
+decomposition.  It is an extra nonlinear fourth-order pointwise condition on
+the selected baseline/source split.
+\end{proposition}
+
+\begin{proof}
+The displayed factorization shows that, if \(D_2=G''(m)\ne0\), the vanishing
+condition is precisely
+\[
+b_0D_4
++
+20
+\left(
+\frac{b''}{6}
+-
+\frac{2b_0^3}{3}
+\right)
+D_2
+=0.
+\]
+Dividing by \(b_0D_2\) gives
+\[
+\frac{G^{(4)}(m)}{G''(m)}
+=
+\frac{40b_0^2}{3}
+-
+\frac{10b''(m)}{3b_0}.
+\]
+The equivalent formula for \(b^{(4)}\) follows from
+\[
+G^{(4)}=Q^{(4)}-b^{(4)}.
+\]
+The decomposition \(Q=b+G\) supplies only
+\[
+G''=Q''-b'',
+\qquad
+G^{(4)}=Q^{(4)}-b^{(4)}.
+\]
+It supplies no relation fixing \(G^{(4)}/G''\) in terms of \(b,b''\).
+\end{proof}
+
+\begin{remark}[Why defining the baseline by flatness is circular]
+\label{rem:baseline-by-flatness-is-circular}
+One could formally choose \(b\) by requiring the fourth-order equation in
+Proposition~\ref{prop:rebuilt-flatness-extra-fourth-order-constraint}.  Such a
+choice would kill the Bottleneck-C row by definition.  It is not a proof
+unless an independent zeta-side principle selects exactly this baseline, for
+example through the functional equation, a canonical scattering law, a
+zero-counting conservation principle, or a functorial fixed-core construction.
+No such principle is currently present.
+\end{remark}
+
+\begin{remark}[Asymptotic scale is not an identity]
+\label{rem:asymptotic-scale-not-identity}
+If \(b\) is dominated by the smooth phase/background, one expects roughly
+\[
+b(t)\sim \frac12\log(t/2\pi).
+\]
+Then the required ratio has scale
+\[
+\frac{G^{(4)}}{G''}
+\sim
+\frac{40}{3}b^2
+\asymp
+\log^2 t.
+\]
+A non-core zero complement with pole distances of order \(1/\log t\) can have
+the same dimensional scale.  This is not enough: the identity requires the
+exact constant and sign
+\[
+\frac{40b^2}{3}-\frac{10b''}{3b}
+\]
+pointwise.  Local one-pair and finite-tail tests show that source geometry can
+produce different fourth-to-second derivative ratios.  Thus a proof of
+flatness would have to be a genuinely new global zero-complement rigidity
+theorem.
+\end{remark}
+
 \subsection{Global obstruction-class interpretation of the Bottleneck-C defect}
 \label{subsec:global-obstruction-class-bottleneck-c-defect}
 
@@ -32132,6 +32399,127 @@ f_{\eta\eta}^{\new,\mathrm{agg}}
 \]
 Thus an integrated or cyclic residue cancellation cannot close the present
 \(T\)-horizontal gate.
+\end{remark}
+
+\subsection{Meromorphic ODE principal-part no-go}
+\label{subsec:meromorphic-ode-principal-part-no-go}
+
+A related failed repair is to seek a meromorphic differential equation for the
+source complement or for the full phase derivative.  The local flatness
+condition would be implied by an equation of the form
+\[
+\frac{G^{(4)}}{G''}
+=
+\frac{40q^2}{3}
+-
+\frac{10q''}{3q},
+\]
+or by the same equation with \(G=q\).  This is incompatible with the principal
+parts of the actual zero-pair pole fields.
+
+Let
+\[
+H(t)=\frac{C}{t-p}+O(1)
+\]
+have a simple pole.  Then
+\[
+H''(t)=\frac{2C}{(t-p)^3}+O(1),
+\qquad
+H^{(4)}(t)=\frac{24C}{(t-p)^5}+O(1),
+\]
+so
+\[
+\frac{H^{(4)}}{H''}
+=
+\frac{12}{(t-p)^2}+O\!\left(\frac1{t-p}\right).
+\]
+
+On the other hand, if the full phase derivative has
+\[
+q(t)=\frac{R}{t-p}+O(1),
+\]
+then
+\[
+q^2(t)=\frac{R^2}{(t-p)^2}+O\!\left(\frac1{t-p}\right),
+\qquad
+\frac{q''}{q}
+=
+\frac{2}{(t-p)^2}+O\!\left(\frac1{t-p}\right).
+\]
+Hence
+\[
+\frac{40q^2}{3}-\frac{10q''}{3q}
+=
+\left(
+\frac{40R^2}{3}
+-
+\frac{20}{3}
+\right)
+\frac1{(t-p)^2}
++
+O\!\left(\frac1{t-p}\right).
+\]
+Matching the left-hand double-pole coefficient \(12\) would require
+\[
+R^2=\frac75.
+\]
+
+\begin{proposition}[Zero-pair residues rule out the meromorphic ODE repair]
+\label{prop:zero-pair-residues-rule-out-meromorphic-ode}
+The flatness-forcing ODE
+\[
+\frac{H^{(4)}}{H''}
+=
+\frac{40q^2}{3}
+-
+\frac{10q''}{3q}
+\]
+cannot hold as a meromorphic identity for the raw non-core zero source, for the
+full phase derivative, or for any complement retaining the zero-pair poles.
+\end{proposition}
+
+\begin{proof}
+For a zero-pair summand
+\[
+f_a(t)=\frac{a}{a^2+(2t-\gamma)^2},
+\]
+the poles are
+\[
+p_a^\pm=\frac{\gamma\pm ia}{2},
+\]
+with residues
+\[
+\operatorname{Res}_{p_a^+} f_a=-\frac{i}{4},
+\qquad
+\operatorname{Res}_{p_a^-} f_a=\frac{i}{4}.
+\]
+Thus the phase-pole residues are purely imaginary.  For a simple pole,
+\[
+R=\pm \frac{i}{4},
+\]
+so
+\[
+R^2=-\frac1{16},
+\]
+not \(7/5\).  If several same-sign pole contributions coincide, then
+\[
+R=\pm \frac{ni}{4},
+\]
+and still \(R^2<0\).  Therefore the right-hand double-pole coefficient cannot
+match the coefficient \(12\) of \(H^{(4)}/H''\).
+\end{proof}
+
+\begin{remark}[Pole-cancelled complements are the wrong object]
+\label{rem:pole-cancelled-complements-wrong-object}
+A pole-cancelled complement can evade the principal-part contradiction at the
+cancelled pole.  But Bottleneck-C uses the source moments
+\[
+A_2=\frac{G''(m)}2,
+\qquad
+A_4=\frac{G^{(4)}(m)}{24}.
+\]
+An ODE for a pole-cancelled complement is therefore an ODE for the wrong
+object, unless the entire order-seven row is rederived with different moments.
 \end{remark}
 
 \subsection{Connection-defect interpretation and possible architecture pivot}
@@ -32619,6 +33007,36 @@ failure.  Define
 On \(\mathcal B_{\rm red}\), the selected core is locally constant as a
 labelled symmetry-closed packet.
 
+\begin{hypothesis}[Reduced good-patch reach]
+\label{hyp:reduced-good-patch-reach}
+Every nondegenerate RH-relevant off-line symmetry packet
+\[
+\mathcal P(\rho)=\{\rho,\bar\rho,1-\rho,1-\bar\rho\},
+\qquad
+\rho=\beta+i\gamma,\quad \beta\ne\frac12,
+\]
+admits a nearby reduced good patch
+\[
+b=(m,s,\mathcal C_k(m))\in\mathcal B_{\rm red},
+\]
+or else the failure lies in a controlled component of
+\(\mathcal E_{\rm geom}^{\core}\).
+\end{hypothesis}
+
+\begin{remark}[Status of the reach hypothesis]
+\label{rem:status-reduced-good-patch-reach}
+The strict-gap, same-scale, endpoint, symmetry-closure, and Gram/whitening
+conditions are open once they hold at one point.  Thus
+Hypothesis~\ref{hyp:reduced-good-patch-reach} is a non-swallowing assertion:
+the enlarged exceptional set
+\[
+\mathcal E_{\rm geom}^{\core}
+\]
+must not contain all RH-relevant off-line packet configurations.  This is a
+global reach condition for the rank-two route, not a consequence of Gate~A or
+Gate~B.
+\end{remark}
+
 The RH-relevant local object is not a single zero but the symmetry packet
 \[
 \mathcal P(\rho)
@@ -32913,9 +33331,30 @@ is nonzero for the reduced off-line packet family.
 For the centered route, the direct skew \(N_7^{\off}\)-term projects to zero,
 but the one-whitening-slot \(K_1\)-channel has fixed-sector projection
 \[
--2yBr\,I,
+-2yBr\,I.
 \]
-which is nonzero outside \(\{y=0\}\cup\{q''=0\}\cup\{g=h\}\).
+This vector is nonzero outside
+\[
+\{y=0\}\cup\{q''=0\}\cup\{g=h\}.
+\]
+To rule out cancellation by the \(K_5\)-line sector using quotient isolation,
+we also exclude
+\[
+v_5=0.
+\]
+Indeed,
+\[
+\omega_h(-2yBr\,I,A_5^{\mathfrak f})
+=
+-2yBr\,v_5,
+\]
+so \(K_5\)-line terms cannot cancel the \(K_1\)-channel on the generic patch
+\[
+yBrv_5\ne0.
+\]
+The branch \(v_5=0\) is therefore either included in
+\(\mathcal E_{\rm invis}^{\core,7}\) or must be treated by a separate
+full-vector \(K_5\)-coefficient computation.
 
 For the non-centered route, \(m\) is a free sampling midpoint.  The expansion
 of \(q^{(7)}(m)\) shows that \(q^{(7)}=0\) is a proper analytic wall near the
@@ -33301,6 +33740,24 @@ fixed-sector vector.
 None of these is presently proved.
 \end{remark}
 
+\begin{hypothesis}[Global rank-two affine transport gate]
+\label{hyp:global-rank-two-affine-transport-gate}
+There exists a canonical path, loop, boundary condition, index, or transported
+finite-core non-concentration theorem on \(\mathcal B_{\rm red}^{+}\) that
+controls
+\[
+\Delta_\Gamma^{\rm aff}
+=
+\int_\Gamma
+U_{t\to b}
+\left(E_{\eta\eta}+E_{\rm lower}\right)(t)\,dt.
+\]
+Equivalently, the rank-two affine forcing equation must be coupled to a global
+law that distinguishes RH-compatible configurations from off-line-packet
+configurations.  Without such a law, the rank-two architecture is locally
+coherent but globally non-closing.
+\end{hypothesis}
+
 \subsection{Derived diagnostics: projective, vector-valued, and energy data}
 \label{subsec:derived-diagnostics-projective-vector-energy}
 
@@ -33436,7 +33893,7 @@ The current state is:
 \boxed{\text{The active }\eta\eta\text{ row is tensorial affine forcing, not ordinary curvature.}}
 \]
 \[
-\boxed{\text{The local affine forcing equation is conditionally established pending the written }E_{\rm lower}\text{ table.}}
+\boxed{\text{The local affine forcing equation is conditionally established, subject to the displayed }E_{\rm lower}\text{ row-table classifications.}}
 \]
 \[
 \boxed{\text{The next missing theorem is global affine transport, boundary, index, or transported non-concentration control.}}
@@ -33494,6 +33951,30 @@ coercivity, boundary, incidence, or cone-control input.
 
 \subsection{Finite-core sampled vector non-concentration}
 \label{subsec:finite-core-sampled-vector-nonconcentration}
+
+The notation in this subsection originally arose in the scalar
+\(\Phi_K\)-sampled formulation.  In the current rank-two architecture, the
+corresponding fixed-sector vector is
+\[
+C_{\rm fd}^{\vec f}(\theta)
+=
+(A_7^{\mathfrak f},A_9^{\mathfrak f},\ldots,
+A_{2R_{\Theta_k}+1}^{\mathfrak f})(\theta).
+\]
+The old scalar vector
+\[
+C_{\rm fd}(\theta)
+=
+(c_{\core,1},c_{\core,3},\ldots,c_{\core,2R_{\Theta_k}+1})(\theta)
+\]
+should be regarded as its \(\Phi_K\)-readout, not as the full fixed-sector
+object.  The rank-two non-concentration theorem needed by the present
+architecture is therefore a lower bound for
+\[
+P_{\rm fd}^{\vec f}(\theta)+J_{\rm fd}^{\vec f}(\theta),
+\]
+or for a transported enhancement of this vector, rather than merely for the
+scalar \(\Phi_K\)-projection.
 
 Let \(\Theta_k\) be a compact nonsingular actual-source \(k\)-core stratum.
 Define the finite-determinacy vector
