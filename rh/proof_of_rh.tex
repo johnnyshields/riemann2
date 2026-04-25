@@ -13415,11 +13415,22 @@ The current package chain is as follows.
 \item \textbf{UV-022.} Define an invariant source-weight-linear input for the
 corrected block and obtain exact one-amplitude collapse at the package level.
 
-\item \textbf{UV-023.} Prove the order-\(7\) quotient component of the
-corrected-whitening cross-effect has zero first collision derivative after
-source-weight linearization, either because only the quadratic homogeneous
-transfer contributes or because higher homogeneous transfers are quotient
-invisible through order \(7\).
+\item \textbf{UV-023.} Establish the raw first-collision edge law for the
+non-\((1,1)\) projected corrected-whitening cross-effect through ordinary
+order \(7\):
+\[
+[z^7][\delta^1]\,
+\pi_{\mathfrak f_h}
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}=0.
+\]
+In the present draft this is supplied, conditionally, by
+Corollary~\ref{cor:gate-b-raw-edge-divisibility-order-seven}.  The
+mechanism is not a \(\mathcal T_2\)-only truncation theorem, not
+source-weight linearization, and not post-edge quotient compatibility.
+It uses Gate~A aggregate closure, odd total-grade subset-complement
+cancellation, grade-preserving source-motion cancellation, moving
+source-frame telescoping, affine boundary removal, and full-tower
+differentiation before ordinary-order truncation.
 
 \item \textbf{UV-024.} Define the pre-determinant fixed-sector coefficient
 \[
@@ -28511,32 +28522,34 @@ matrix products are transposes, and the transpose-invariant projection
 \begin{corollary}[Amplitude closure of higher transfers]
 \label{cor:amplitude-closure-higher-transfers}
 The amplitude part of every Gate~B transfer of total homogeneous grade
-\(7\) vanishes in \(\mathfrak f_h\).  In particular,
+\(7\) vanishes in \(\mathfrak f_h\).  In particular, the aggregate
+fourth-transfer positive-grade contribution
 \[
-V_4=0
+\sum_{J\in\{(1,1,1,4),(1,1,2,3),(1,2,2,2)\}}
+[z^7]\pi_{\mathfrak f_h}\mathcal T_4(J)
 \]
-for the \(d=4\) positive-grade aggregate
+vanishes.
+
+The same argument also kills the first lower-shadow fourth-transfer
+aggregate
 \[
-(1,1,1,4),\qquad (1,1,2,3),\qquad (1,2,2,2),
+[z^7]\pi_{\mathfrak f_h}\mathcal T_4(0,1,1,5)=0.
+\]
+More generally, the subset-complement argument applies to every labelled
+multiset of total homogeneous grade \(7\), including zero-padded
+lower-shadow multisets, provided the full Taylor source tower is
+differentiated before ordinary-order truncation.
+
+Thus the amplitude parts also vanish for
+\[
+d=5:\quad (1,1,1,1,3),\ (1,1,1,2,2),
+\]
+\[
+d=6:\quad (1,1,1,1,1,2),
 \]
 and
 \[
-R_{0115}=0
-\]
-for the first lower-shadow fourth-transfer target
-\[
-(0,1,1,5).
-\]
-The same argument closes the amplitude parts for
-\[
-d=5:\ (1,1,1,1,3),\ (1,1,1,2,2),
-\]
-\[
-d=6:\ (1,1,1,1,1,2),
-\]
-and
-\[
-d=7:\ (1,1,1,1,1,1,1).
+d=7:\quad (1,1,1,1,1,1,1).
 \]
 \end{corollary}
 
@@ -28956,6 +28969,28 @@ once the edge-normalized package
 \(\widehat C_{\mathcal W}^{\mathrm{amp}}\) has been formed.
 \end{definition}
 
+\begin{remark}[Polynomial versus vector notation for {\(Z_j[M]\)}]
+\label{rem:polynomial-versus-vector-notation-zj}
+Definition~\ref{def:pre-trivialization-edge-table-after-gate-b} first
+defines the pre-trivialization edge table as a polynomial
+\[
+Z_j[M](z)\in\mathfrak f_m[z]_{\le7}.
+\]
+When \(Z_j[M]\) appears without the argument \(z\) in the moving-line
+connection formula, it denotes its ordinary \(z^7\)-coefficient:
+\[
+Z_j[M]:=[z^7]Z_j[M](z)\in\mathfrak f_m.
+\]
+Thus
+\[
+q_{\mathrm{conn},7}[M]
+=
+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M],A_i)
+\]
+uses the vector coefficient \([z^7]Z_{7-i}[M](z)\), not the full
+polynomial.
+\end{remark}
+
 \begin{remark}[Pre-trivialization versus post-trivialization coefficients]
 \label{rem:pre-trivialization-versus-post-trivialization-coefficients}
 The coefficients \(Z_j[M]\) are pre-trivialization coefficients.  If
@@ -29042,6 +29077,23 @@ Consequently,
 \subsection{Computed finite gates}
 \label{subsec:computed-finite-gates}
 
+\begin{remark}[Scope of the computed finite gates subsection]
+\label{rem:scope-computed-finite-gates-subsection}
+The finite gates in this subsection record diagnostic computations from
+the ordinary matrix-output / raw-family audit.  They are useful as
+coefficient checks and as warnings against termwise or raw-package
+shortcuts, but they are not the active Gate~A/Gate~B proof route.
+
+In the active homogeneous scalar-grade proof, the \(Y\)-slot families
+are absent at \(B_7\), Gate~A closes by aggregate fixed-sector
+cancellation, and Gate~B closes through ordinary order \(7\) by odd
+total-grade subset-complement cancellation, moving source-frame
+telescoping, and affine boundary removal.  Therefore the older
+\(Y^5/Y^6\), \(d^-_{324}\), and five-family \(N^{(0)}\)-weighted
+residual formulas below should be read as historical diagnostics for
+the raw package, not as remaining theorem obligations.
+\end{remark}
+
 \begin{remark}[Source-coefficient parity in the \(Y\)-slot]
 \label{rem:y-slot-source-coefficient-parity}
 For the grade-five mixed slot \(Y^a\), the source-coefficient table gives
@@ -29081,8 +29133,9 @@ The accompanying \(d^+_{324}\) term vanishes by \(Y^3=0\), and the
 
 \begin{remark}[Five-family \(N^{(0)}\)-weighted endpoint gate]
 \label{rem:five-family-n0-weighted-endpoint-gate}
-The \(N_0\)-middle families do not collapse to the \(r+t=2\) range.  They
-involve the full baseline middle factor and hence the convolution
+In the older raw-family diagnostic audit, the \(N_0\)-middle families did
+not collapse to the \(r+t=2\) range.  They involved the full baseline
+middle factor and hence the convolution
 \[
 n+s+t=7.
 \]
@@ -29117,6 +29170,12 @@ R^{(C)}_5=y_4\Xi_{324}+E^-_{324}+2E^+_{324}.
 \]
 These are finite coefficient identities, not consequences of support or
 generic Fr\'echet algebra.
+
+In the active Gate~B proof these raw-family residual formulas are
+superseded by Corollary~\ref{cor:gate-b-raw-edge-divisibility-order-seven}.
+They should not be listed as live post-Gate-B obstructions unless one
+rejects one of the Gate~B hypotheses in
+Remark~\ref{rem:what-remains-attackable-in-gate-b}.
 \end{remark}
 
 \subsection{Raw-package failure status}
@@ -29973,16 +30032,16 @@ L_2YR_0 & \text{absent} &
 L_0YR_2 & \text{absent} &
 \text{right-hand mirror of }L_2YR_0
 \\
-L_2N_0R_1 & \text{live placement, aggregate closed} &
+L_2N_0R_1 & \text{order-admissible placement, aggregate closed} &
 \text{cancels with }L_1N_0R_2\text{ by transpose-pairing}
 \\
-L_1N_0R_2 & \text{live placement, aggregate closed} &
+L_1N_0R_2 & \text{order-admissible placement, aggregate closed} &
 \text{cancels with }L_2N_0R_1\text{ by transpose-pairing}
 \\
-L_3N_0R_0 & \text{live placement, aggregate closed conditionally} &
+L_3N_0R_0 & \text{order-admissible placement, aggregate closed conditionally} &
 \text{cancels with }L_0N_0R_3\text{ under third-Fr\'echet midpoint parity}
 \\
-L_0N_0R_3 & \text{live placement, aggregate closed conditionally} &
+L_0N_0R_3 & \text{order-admissible placement, aggregate closed conditionally} &
 \text{right-hand mirror of }L_3N_0R_0
 \end{array}
 \]
@@ -30150,15 +30209,19 @@ coefficient convention is used instead, the ordered-permutation aggregate
 must be included consistently on both sides before invoking the
 transpose-pairing argument.
 
-\subsection{Leading table for \(L_2N_0R_1/L_1N_0R_2\)}
+\subsection{Diagnostic leading table for \(L_2N_0R_1/L_1N_0R_2\)}
 \label{app:l2n0r1-leading-table}
 
-The first live homogeneous non-\(Y\) gate is
+Before the aggregate Gate~A closure was isolated, the first homogeneous
+non-\(Y\) coefficient table to audit was
 \[
 L_2N_0R_1
 \qquad\text{and}\qquad
 L_1N_0R_2.
 \]
+The table below is retained as a diagnostic coefficient contract.  It is
+not a remaining live Gate~A obstruction and it is not a family-by-family
+determinant-gauge requirement.
 The leading table is:
 \[
 \begin{array}{c|c}
@@ -30314,7 +30377,9 @@ A valid coefficient-table submission must specify:
 \\
 \text{projection} & \pi_{\mathfrak f}\text{ before determinant test}
 \\
-\text{determinant test} & uv_5-u_5v=0
+\text{determinant coordinate}
+&
+\text{allowed only after the fixed-sector vector is computed; never as the definition}
 \\
 \text{ordered vs symmetric source slots}
 &
@@ -30324,6 +30389,17 @@ if ordered, include all labelled permutations before applying aggregate
 transpose cancellation}
 \end{array}
 \]
+
+For aggregate Gate~A tables, determinant proportionality to
+\(A_5^{\mathfrak f}\) is not the closure mechanism unless explicitly
+stated.  The primary object is the fixed-sector vector in \(\mathfrak f\),
+and the primary test is the aggregate identity in \(\mathfrak f\).  The
+determinant coordinate
+\[
+uv_5-u_5v
+\]
+is only a good-patch coordinate after the relevant fixed-sector vector or
+aggregate has already been formed.
 
 A submission is not valid if it:
 \begin{enumerate}
@@ -30335,6 +30411,39 @@ without the no-double-counting theorem;
 computing the fixed-sector vectors;
 \item omits the baseline \(q_0\)-jet convention or the grade-zero sector.
 \end{enumerate}
+
+\begin{remark}[Final status of the Gate A/Gate B package layer]
+\label{rem:final-status-gate-a-gate-b-package-layer}
+At this stage the corrected-package construction has the following status.
+
+Gate~A is closed at the aggregate fixed-sector level under the active
+homogeneous scalar-grade convention and the stated third-Fr\'echet
+midpoint parity convention.  It should not be reopened as a
+family-by-family determinant-gauge problem.
+
+Gate~B is closed only in the conditional raw edge-divisibility sense of
+Corollary~\ref{cor:gate-b-raw-edge-divisibility-order-seven}: its use
+depends on the stated midpoint-parity, source-frame telescoping,
+\(2\)-jet source-frame normalization, and full-Taylor-tower-before-truncation
+hypotheses.  If one of those hypotheses is not verified in the final
+source model, Gate~B reverts to an open raw edge-divisibility target, not
+to a post-edge quotient-compatibility statement.
+
+After Gate~B, the next local package table is the pre-trivialization
+\(Z_j[M]\)-table, and the next local identities are
+\[
+R_7^{(A)}+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M_A],A_i)=0,
+\qquad
+R_7^{(C)}+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M_C],A_i)=0.
+\]
+The post-trivialization coefficients \(B_j[M]\) must not be substituted
+into these connection sums.
+
+Finally, none of Gate~A, Gate~B, or the \(Z_j[M]\)-connection package by
+itself proves the global package-to-\(\Xi_\zeta^{(N)}\) hidden-state
+bridge or the final finite-core contradiction.  Those remain downstream
+theorem obligations.
+\end{remark}
 
 \begin{thebibliography}{99}
 
