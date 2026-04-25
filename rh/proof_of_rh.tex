@@ -3012,8 +3012,10 @@ T_v=0
 \mathcal R=0.
 \]
 The remaining global proof still requires the finite-core lower-model
-transfer, hidden-state/odd-block extraction, and the downstream endgame
-reductions.
+transfer or a separate treatment of the near-zero-anomaly branch
+\(\mathcal N_k(m,Q)\), hidden-state/\(T\)-horizontal odd-block extraction,
+and the downstream endgame reductions, including the source-level
+interaction branch controlled by \(J_1=[s]\Phi_K(\mathcal I_{\ge2})\).
 \end{remark}
 
 \begin{remark}[Sensitivity of the mixed four-point branch to Gate B]
@@ -14247,6 +14249,37 @@ controlled incidence equations.  Without such a theorem,
 remains a separate finite-core branch.
 \end{remark}
 
+\begin{remark}[Source-level first-interaction rigidity remains open]
+\label{rem:source-level-first-interaction-rigidity-open}
+At two-source order, the first interaction coefficient has the form
+\[
+\mathfrak j_{ij}^{(2)}
+=
+[s]\Phi_K
+\left(
+D\mathcal W_0[\mathcal B_{ij}^{(2)}]
++
+D^2\mathcal W_0[\mathcal B_i^{(1)},\mathcal B_j^{(1)}]
+\right).
+\]
+The direct Hessian contribution and the bilinear whitening contribution split
+into the independent channels
+\[
+dd,\qquad d\eta+\eta d,\qquad \eta\eta,
+\]
+together with bilinear whitening products.  No current parity,
+endpoint-symmetry, ECT, or controlled-incidence theorem forces their sum to
+vanish, gives it a calibrated sign/cone condition, or places it in the radical
+of the controlled incidence ideal.
+
+Thus
+\[
+J_1=[s]\Phi_K(\mathcal I_{\ge2})
+\]
+remains an independent finite-core obstruction unless a separate
+source-level first-interaction rigidity theorem is proved.
+\end{remark}
+
 \begin{remark}[Scope after Gate B]
 \label{rem:scope-after-gate-b}
 Gate~B supplies the raw \(\delta^2\)-edge divisibility needed to construct
@@ -14642,6 +14675,52 @@ coordinate.  Since \(T=\Phi_K(A_7^{\mathfrak f})/(2c)\), the displayed
 criterion follows.
 \end{proof}
 
+\begin{corollary}[First live \(T\)-slope carrier]
+\label{cor:first-live-t-slope-carrier}
+Let
+\[
+E_{A,Y}^{\mathrm{BC}}
+=
+e_{A,Y}I+f_{A,Y}S
+\]
+be the frozen Bottleneck-C coefficient of the promoted nonlinear mixed-block
+carrier.  The amplitude factor of this carrier is
+\[
+a_1a_2(a_1+a_2),
+\]
+and
+\[
+\partial_{a_2}\bigl(a_1a_2(a_1+a_2)\bigr)\big|_{a_2=-a_1}
+=
+-a_1^2.
+\]
+Consequently its contribution to the hidden-horizontal slope is
+\[
+\partial_\kappa T\big|_{E_{A,Y}^{\mathrm{BC}}}
+=
+-a_1^2\frac{\Phi_K(E_{A,Y}^{\mathrm{BC}})}{2c}
+=
+-a_1^2\frac{f_{A,Y}}{c}.
+\]
+Thus the augmented transform-safe package requires
+\[
+f_{A,Y}=0.
+\]
+In particular, if
+\[
+E_{A,Y}^{\mathrm{BC}}=\lambda A_5^{\mathfrak f},
+\]
+then
+\[
+\partial_\kappa T\big|_{E_{A,Y}^{\mathrm{BC}}}
+=
+-a_1^2\lambda\frac{v_5}{c}.
+\]
+On the generic \(v_5\ne0\) patch, a nonzero line-gauge
+\(E_{A,Y}^{\mathrm{BC}}\) closes the quotient condition but still leaks
+through \(T\).
+\end{corollary}
+
 \begin{remark}[Local diagnostic for the hidden septic state]
 \label{rem:local-diagnostic-hidden-septic-state}
 On the quintic-good patch
@@ -14858,6 +14937,83 @@ belongs to the next source-motion layer and should not be confused with the
 first Bottleneck-C amplitude-derivative coefficient.
 \end{definition}
 
+\begin{remark}[Executable table for \(E_{A,Y}^{\mathrm{BC}}\)]
+\label{rem:executable-table-eay-bc}
+The frozen Bottleneck-C coefficient is computed from the rows
+\[
+\mathcal E^a_{\chi;g,r,b}
+:=
+\tau_{h\to m}\pi_{\mathfrak f_h}
+\operatorname{Sym}
+\left(
+\Lambda^-_{a,r}
+Y^\chi_{g,0}
+W_{+,b}
+\right),
+\]
+where
+\[
+a\in\{1,5\},\qquad
+\chi\in\{dd,d\eta+\eta d,\eta\eta\},
+\]
+\[
+4\le g\le7,\qquad r+b=7-g.
+\]
+Thus
+\[
+E_{A,Y}^{\mathrm{BC}}
+=
+\sum_{\chi\in\{dd,d\eta+\eta d,\eta\eta\}}
+\sum_{a\in\{1,5\}}
+\sum_{\substack{4\le g\le7\\ r+b=7-g}}
+\mathcal E^a_{\chi;g,r,b}.
+\]
+The skew row
+\[
+Y_{d\eta-\eta d}^{(2)}
+\]
+is excluded because it is killed by fixed-sector projection.
+\end{remark}
+
+\begin{remark}[Status of \(E_{A,Y}^{\mathrm{BC}}\)]
+\label{rem:status-eay-bc}
+The recurrences for
+\[
+W_{+,0},W_{+,1},W_{+,2},W_{+,3}
+\]
+and
+\[
+\Lambda^-_{a,0},\Lambda^-_{a,1},\Lambda^-_{a,2},\Lambda^-_{a,3}
+\]
+reduce \(E_{A,Y}^{\mathrm{BC}}\) to a finite symbolic coefficient table.
+However, the present draft does not yet supply the scalar midpoint source
+jets needed to evaluate
+\[
+E_{A,Y}^{\mathrm{BC}}=e_{A,Y}I+f_{A,Y}S.
+\]
+The missing scalar jets are
+\[
+q_0^{(k)}(m),\qquad 0\le k\le9,
+\]
+and
+\[
+(r_i^{[a]})^{(k)}(m),
+\qquad
+i=1,2,\quad a\in\{1,5\},\quad 2\le k\le9.
+\]
+No current symmetry forces
+\[
+E_{A,Y}^{\mathrm{BC}}=0,
+\qquad
+e_{A,Y}v_5-u_5f_{A,Y}=0,
+\qquad
+\text{or}\qquad
+f_{A,Y}=0.
+\]
+Thus \(E_{A,Y}^{\mathrm{BC}}\) remains the first unresolved local
+actual-source/Bottleneck-C obstruction.
+\end{remark}
+
 \begin{remark}[First live promoted nonlinear mixed-block obstruction]
 \label{rem:first-live-promoted-y12-obstruction}
 The same-point cubic \(q^3\) defect is fixed-sector invisible in same-point-only
@@ -14987,6 +15143,34 @@ Y^{\eta\eta}_{g,0}
 \]
 Until that table is evaluated, \(E_{A,Y}^{\mathrm{BC}}\) remains the first
 unresolved local actual-source/Bottleneck-C obstruction.
+\end{remark}
+
+\begin{remark}[Frozen Bottleneck-C coefficient versus source-position edge]
+\label{rem:frozen-bc-coefficient-versus-source-position-edge}
+The coefficient \(E_{A,Y}^{\mathrm{BC}}\) is the first Bottleneck-C
+amplitude-ratio carrier.  It uses the frozen internal coefficient because the
+amplitude factor
+\[
+a_1a_2(a_1+a_2)
+\]
+already supplies the first \(\delta\)-edge on the collision chart
+\[
+a_2=-a_1(1+\kappa\delta).
+\]
+
+The literal source-position edge
+\[
+E_{A,Y}^{\mathrm{pos}}
+:=
+\tau_{h\to m}\pi_{\mathfrak f_h}
+\operatorname{Sym}
+[z^7\delta^1]\,
+D(G_-^{-1/2})[A_-]\,
+Y_{12}^{(2)}\,
+R_0
+\]
+belongs to the next source-motion layer and should not be used as the first
+Bottleneck-C amplitude-derivative coefficient.
 \end{remark}
 
 \begin{remark}[Shortcut routes excluded for the corrected package theorem]
@@ -29180,7 +29364,7 @@ source-linear }Y\text{-middle edge parity.}
 \[
 \boxed{
 \text{The remaining local actual-source obstruction is the promoted
-quadratic mixed-block class }E_{A,Y}.
+quadratic mixed-block Bottleneck-C coefficient }E_{A,Y}^{\mathrm{BC}}.
 }
 \]
 \[
@@ -29196,6 +29380,29 @@ quadratic mixed-block class }E_{A,Y}.
 interaction rigidity remain open.}
 }
 \]
+\end{remark}
+
+\begin{remark}[Current local obstruction after the corrected Bottleneck-C bookkeeping]
+\label{rem:current-local-obstruction-after-frozen-bc-bookkeeping}
+After correcting the Bottleneck-C bookkeeping, the first local actual-source
+obstruction is the finite frozen coefficient
+\[
+E_{A,Y}^{\mathrm{BC}}
+=
+e_{A,Y}I+f_{A,Y}S.
+\]
+The quotient test is
+\[
+e_{A,Y}v_5-u_5f_{A,Y}=0,
+\]
+whereas the transform-safe test is
+\[
+f_{A,Y}=0.
+\]
+No current symmetry forces either condition.  The remaining local task is to
+evaluate the finite coefficient table of
+Lemma~\ref{lem:promoted-y12-coefficient-table}, or prove a structural identity
+forcing both tests.
 \end{remark}
 
 \appendix
@@ -31525,11 +31732,21 @@ actual-source Gate~B upgrade
 \[
 \Theta_7^{\actual}=0,
 \]
-and it does not address the promoted nonlinear mixed-block carrier
+and it does not address the promoted nonlinear mixed-block Bottleneck-C
+coefficient
 \[
+E_{A,Y}^{\mathrm{BC}}
+=
+\tau_{h\to m}\pi_{\mathfrak f_h}
+\operatorname{Sym}
+[z^7]\,
+D(G_-^{-1/2})[A_-]\,
+Y_{12}^{(2)}\,
+R_0,
+\qquad
 Y_{12}^{(2)}=D^2N_0[\xi_1,\xi_2],
 \]
-which remains a separate actual-source/Bottleneck~C obstruction.
+which remains a separate actual-source/Bottleneck-C obstruction.
 \end{remark}
 
 \begin{remark}[Connection table reduction for the residual monomials]
