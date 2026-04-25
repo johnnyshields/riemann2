@@ -13104,16 +13104,34 @@ independent ordinary matrix-output inputs.  Such conventions require a
 separate no-double-counting theorem.
 \end{remark}
 
-\begin{remark}[Work in progress: UV-026 package quotient-gauge target]
+\begin{remark}[Corrected package theorem after the Gate A/Gate B split]
 \label{rem:wip-first-cubic-source-transfer-target}
-After the tagged pre-whitening source block of
-Definition~\ref{def:tagged-two-atom-prewhitening-source-block}, the
-order-seven source-transfer problem is not a scalar \(\Phi_K\)-statement and
-not a determinant-scalarization statement.  It is a matrix/fixed-sector
-statement before applying \(\Phi_K\), before determinant trivialization, and
-before diagonal merger.
+The current corrected-package frontier is no longer the raw seven-family
+Fr\'echet shortcut.  The proof architecture is layered as follows.
 
-The active UV-026 target is the package quotient-gauge statement
+First, Gate~A closes the leading homogeneous cubic non-\((1,1)\) audit at
+the aggregate fixed-sector level.  This uses the homogeneous scalar-grade
+convention, the absence of the \(Y\)-slot families at \(B_7\), the aggregate
+\(L_2N_0R_1/L_1N_0R_2\) cancellation, and the aggregate
+\(L_3N_0R_0/L_0N_0R_3\) cancellation, the last under the stated
+third-Fr\'echet midpoint parity convention.
+
+Second, Gate~B proves raw edge-divisibility for the projected raw
+corrected-whitening cross-effect:
+\[
+[z^7][\delta^1]\,
+\pi_{\mathfrak f_h}
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}=0.
+\]
+This is the raw theorem needed before the amplitude-normalized package
+\[
+-a_1^{-1}\delta^{-2}
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}
+\]
+can be formed.
+
+Only after Gate~B is proved does the corrected fixed-target package become
+available for the quotient-gauge theorem
 \[
 B_7^{\mathfrak f}(C_{\mathcal W}^{\corr})
 \in
@@ -13123,43 +13141,16 @@ equivalently
 \[
 Q_{7,m}^q(C_{\mathcal W}^{\corr})=0.
 \]
-Here \(C_{\mathcal W}^{\corr}\) is the normalized corrected-whitening package
-representative of
-Definition~\ref{def:normalized-corrected-whitening-package-representative},
-not the raw seven-family Fr\'echet package.
-
-At the raw cross-effect stage, the source-bidegree component feeding this
-target is
+Thus any statement of the form
 \[
-Q_{7,m}^q
-\left(
-(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}
-\right)=0.
+Q_{7,m}^q(C)=Q_{7,m}^q(\Pi_{1,1}C)
 \]
-This becomes the UV-026 package statement only after edge divisibility,
-amplitude normalization, midpoint trivialization, and fixed-sector
-extraction have been performed.
+is post-edge bookkeeping unless it is explicitly reformulated as a raw
+edge-divisibility statement.
 
-Under the homogeneous scalar-grade convention of
-Definition~\ref{def:homogeneous-scalar-grade}, the \(Y\)-slot families
-\[
-L_1YR_1,\qquad L_2YR_0,\qquad L_0YR_2
-\]
-are absent at \(B_7\) by
-Lemma~\ref{lem:y-slot-families-absent-homogeneous-grade}.  Thus the active
-leading cubic gate is the non-\(Y\) gate
-\[
-L_2N_0R_1
-\qquad\text{and}\qquad
-L_1N_0R_2,
-\]
-as recorded in Remark~\ref{rem:first-live-non-y-cubic-gate}.
-
-The older matrix-output \(M^{[5]}\) convention is quarantined in
-Remark~\ref{rem:quarantined-matrix-output-M5-convention}.  If that
-convention is revived, then the \(Y\)-slot families reopen and require
-their own coefficient audit.  They are not part of the active homogeneous
-scalar-grade UV-026 gate.
+The older raw seven-family finite-coefficient tests remain useful only as
+diagnostic coefficient tools.  They are not the theorem object and should
+not be used in place of the corrected package representative.
 \end{remark}
 
 \begin{definition}[Homogeneous scalar grade]
@@ -13240,33 +13231,59 @@ requires a no-double-counting theorem against the natural grade \(0,2,4\)
 same-point shadows.
 \end{remark}
 
-\begin{remark}[Status of the homogeneous-grade lemmas]
+\begin{remark}[Status of the homogeneous-grade lemmas after Gate A/B]
 \label{rem:status-homogeneous-grade-lemmas}
 Lemmas~\ref{lem:transpose-parity-source-linear-mixed-input}
-and~\ref{lem:y-slot-families-absent-homogeneous-grade} record audited
-current working facts from the UV-026 coefficient push.  They are intended
-as briefing-grade inputs for the corrected package program, not as final
-closure of UV-026.  Any paper-level promotion still requires the full
-source theorem fixing the scalar-grade convention, the baseline
-\(q_0\)-jet table, the grade-zero sector, and the live non-\(Y\)
-fixed-sector determinant tests.
+and~\ref{lem:y-slot-families-absent-homogeneous-grade} are now inputs to
+the Gate~A/Gate~B closure mechanism.
+
+Under the homogeneous scalar-grade convention, the \(Y\)-slot families are
+absent at \(B_7\), the leading non-\(Y\) Gate~A aggregate closes in
+\(\mathfrak f_h\), and Gate~B closes through ordinary order \(7\) after
+all-subset midpoint parity, moving source-frame telescoping, and affine
+boundary removal are imposed.
+
+This does not mean that lower-shadow grades \(0,2,4\) are discarded.  They
+may appear in the moving Taylor tower.  Interior lower-shadow terms are
+handled by the telescoping identity of
+Theorem~\ref{thm:moving-homogeneous-source-frame-telescoping}; only the
+affine grade \(-1\) boundary is removed by the \(2\)-jet source-frame
+normalization of
+Lemma~\ref{lem:affine-boundary-removal-moving-source-frame}.
 \end{remark}
 
-\begin{remark}[Grade-zero sector remains open]
-\label{rem:grade-zero-sector-remains-open}
-The homogeneous scalar grade convention
+\begin{remark}[Grade-zero sector after the Gate B source-frame audit]
+\label{rem:grade-zero-sector-after-gate-b-source-frame-audit}
+The homogeneous scalar-grade convention
 \[
 \operatorname{Gr}_a r
 =
 \frac{r^{(a+2)}(m)}{(a+2)!}(t-m)^{a+2}
 \]
-does not by itself justify discarding the grade-zero component corresponding
-to \(r^{(2)}(m)\).  Affine removal eliminates the \(0\)- and \(1\)-jets, but
-\(r^{(2)}(m)\) remains a genuine pre-\(\Phi_K\) source input.  Thus any proof
-of the non-\((1,1)\) cubic gauge theorem must either exclude the grade-zero
-sector, identify it as source-trivial or one-pair/pure, prove it is
-\(A_5^{\mathfrak f}\)-gauge, or expand the determinant inventory to include
-its possible contributions.
+does not discard the grade-zero component
+\[
+\operatorname{Gr}_0r=\frac{r^{(2)}(m)}{2!}(t-m)^2.
+\]
+Affine removal eliminates only the constant and affine modes.  Thus
+\(r^{(2)}(m)\) is a genuine source-frame direction, not baseline data.
+
+The Gate~B result treats this direction differently from the old
+open-status notes.  Grade \(0\) is allowed in the moving homogeneous Taylor
+tower.  Its amplitude contributions are covered by the odd total-grade
+subset-complement cancellation, including zero-padded labelled multisets.
+Its source-motion lower boundary is
+\[
+(\partial_h\operatorname{Gr}_{0}r)_{\mathrm{lower}}
+=
+-r^{(2)}(h)(t-h),
+\]
+which is affine and is removed by the \(2\)-jet source-frame projection
+\(\Pi_{\ge2,h}\).
+
+Consequently grade \(0\) is neither an independent leftover Gate~B residual
+nor something silently absorbed into \(q_0\).  It is a live source-frame
+direction whose first-collision contribution is killed by the Gate~B
+source-frame mechanism.
 \end{remark}
 
 \begin{remark}[Residual-source tower before highest-new reduction]
@@ -13303,35 +13320,25 @@ corrected package representative of
 Section~\ref{sec:corrected-fixed-target-quotient-package}.
 \end{remark}
 
-\begin{remark}[First live non-\(Y\) cubic gate]
+\begin{remark}[Historical role of the first non-\(Y\) cubic gate]
 \label{rem:first-live-non-y-cubic-gate}
-After Lemma~\ref{lem:y-slot-families-absent-homogeneous-grade}, the first live
-homogeneous cubic gate is
+Before the aggregate Gate~A closure was isolated, the first non-\(Y\)
+homogeneous cubic gate was the pair
 \[
 L_2N_0R_1
 \qquad\text{and}\qquad
 L_1N_0R_2.
 \]
-Order counting does not remove this gate, because the baseline mixed block
-has a nonzero zeroth coefficient \(N_0[0]\).  The two relevant placements
-land exactly at ordinary order \(7\):
+The finite coefficient inputs for this diagnostic gate were
 \[
-2+0+5=7,
-\qquad
-6+0+1=7.
-\]
-
-The required leading coefficients are
-\[
-[z^2]\mathcal L_-^{\{1,1\}},
-\qquad
+[z^2]\mathcal L_-^{\{1,1\}},\qquad
 [z^6]\mathcal L_-^{\{1,5\}},
 \]
 \[
-[z^2]\mathcal R_+^{\{1,1\}},
-\qquad
+[z^2]\mathcal R_+^{\{1,1\}},\qquad
 [z^6]\mathcal R_+^{\{1,5\}},
 \]
+together with
 \[
 N_0[0],
 \qquad
@@ -13339,84 +13346,65 @@ N_0[0],
 \qquad
 [z^5]\Lambda_\pm^{[5]}.
 \]
-From these one forms the four tag vectors
-\[
-C_{112}^{L_2N_0R_1},
-\qquad
-C_{122}^{L_2N_0R_1},
-\qquad
-C_{112}^{L_1N_0R_2},
-\qquad
-C_{122}^{L_1N_0R_2}.
-\]
-If a candidate fixed-sector vector is \(uI+vS\), its quotient-gauge test is
-\[
-uv_5-u_5v=0,
-\qquad
-A_5^{\mathfrak f}(m)=u_5I+v_5S.
-\]
-These four determinant identities are the leading-coefficient fixed-sector
-test for the live \(L_2N_0R_1/L_1N_0R_2\) gate.
+These data are still useful for auditing the finite coefficient tables.
+
+However, in the current proof they are no longer an open Gate~A target.
+Lemma~\ref{lem:aggregate-closure-leading-l2n0r1-l1n0r2-gate} proves that
+the \(L_2N_0R_1/L_1N_0R_2\) leading homogeneous gate closes at the
+aggregate fixed-sector level.  Therefore this remark records historical
+coefficient-tool provenance, not a remaining theorem obligation.
 \end{remark}
 
-\begin{remark}[Leading coefficient test for the first non-\(Y\) cubic gate]
+\begin{remark}[Superseded coefficient test for the first non-\(Y\) gate]
 \label{target:leading-coefficient-test-first-non-y-cubic-gate}
-For the live homogeneous gate
-\[
-L_2N_0R_1+L_1N_0R_2,
-\]
-compute the four fixed-sector tag vectors
+The earlier coefficient-level audit asked for the four fixed-sector tag
+vectors
 \[
 C_{112}^{L_2N_0R_1},\qquad
 C_{122}^{L_2N_0R_1},\qquad
 C_{112}^{L_1N_0R_2},\qquad
 C_{122}^{L_1N_0R_2}.
 \]
-The required inputs are
+That was the correct finite test before the aggregate closure mechanism
+was identified.
+
+In the current draft this test is superseded by
+Lemma~\ref{lem:aggregate-closure-leading-l2n0r1-l1n0r2-gate}, which proves
+the cancellation in \(\mathfrak f\) directly:
 \[
-[z^2]\mathcal L_-^{\{1,1\}},\qquad
-[z^6]\mathcal L_-^{\{1,5\}},\qquad
-[z^2]\mathcal R_+^{\{1,1\}},\qquad
-[z^6]\mathcal R_+^{\{1,5\}},
-\]
-\[
-N_0[0],
+C_{112}^{L_2N_0R_1}+C_{112}^{L_1N_0R_2}=0,
 \qquad
-[z^1]\Lambda_\pm^{[1]},
-\qquad
-[z^5]\Lambda_\pm^{[5]}.
+C_{122}^{L_2N_0R_1}+C_{122}^{L_1N_0R_2}=0.
 \]
-If
-\[
-A_5^{\mathfrak f}(m)=u_5I+v_5S
-\]
-and a candidate vector is
-\[
-C=uI+vS,
-\]
-then the quotient-gauge test is
-\[
-uv_5-u_5v=0.
-\]
-The live gate closes only if all four tag vectors pass this determinant
-test.
+Thus the old determinant checks against \(A_5^{\mathfrak f}\) should not
+be read as remaining obligations for Gate~A.  They remain only as a
+useful coordinate-level audit if the homogeneous scalar-grade convention
+is later changed or the aggregate proof is challenged.
 \end{remark}
 
-\begin{remark}[All-left/all-right cubic families remain pending]
-\label{rem:all-left-all-right-families-remain-pending}
-The all-left and all-right families
+\begin{remark}[All-left/all-right cubic families: aggregate status]
+\label{rem:all-left-all-right-families-aggregate-status}
+The all-left/all-right families
 \[
 L_3N_0R_0,
 \qquad
 L_0N_0R_3
 \]
-remain to be audited under the homogeneous scalar grade convention.  They
-are not closed by source support, one-pair \(K_5/K_3\) classification,
-pure-sector arguments, determinant scalarization, or generic Fr\'echet
-algebra.  If they remain live by order count, they require actual
-third-Fr\'echet inverse-square-root coefficient identities before
-\(\Phi_K\), followed by the same fixed-sector determinant test against
-\(A_5^{\mathfrak f}(m)\).
+are not closed family-by-family.  However, under the homogeneous
+scalar-grade convention and assuming third-Fr\'echet midpoint parity, their
+leading \((1,1,5)\) aggregate satisfies
+\[
+L_3N_0R_0+L_0N_0R_3=0
+\quad\text{in }\mathfrak f.
+\]
+This is stronger than quotient-gauge for the package-level Gate~A target.
+It does not assert that either family is separately proportional to
+\(A_5^{\mathfrak f}\).
+
+If a coefficient table uses ordered triples rather than symmetric
+multilinear coefficients, the aggregate must include all ordered
+permutations with the same convention on both left and right sides before
+this cancellation is invoked.
 \end{remark}
 
 \begin{remark}[Current UV chain and status]
@@ -13476,16 +13464,15 @@ divisibility needed before amplitude normalization and before the lower
 package table \(Z_j[M]\) is formed.
 
 \item \textbf{Connection correction subtarget.}
-For the normalized fixed-target package representative, compute the moving
-line coefficients
+After Gate~B, compute the moving line coefficients
 \[
 A_i=[(h-m)^i]A_5^{\mathfrak f}(h),
 \qquad
 1\le i\le7,
 \]
-and the lower fixed-sector package coefficients
+and the pre-trivialization lower edge coefficients
 \[
-B_j[M_A],\quad B_j[M_C],
+Z_j[M_A],\quad Z_j[M_C],
 \qquad
 0\le j\le6,
 \]
@@ -13497,14 +13484,14 @@ M_C=\dot r_3\dot r_2r_4.
 \]
 The required cancellation identities are
 \[
-R_7^{(A)}+\sum_{i=1}^7\omega_m(B_{7-i}[M_A],A_i)=0,
+R_7^{(A)}+\sum_{i=1}^7\omega_m(Z_{7-i}[M_A],A_i)=0,
 \]
 and
 \[
-R_7^{(C)}+\sum_{i=1}^7\omega_m(B_{7-i}[M_C],A_i)=0.
+R_7^{(C)}+\sum_{i=1}^7\omega_m(Z_{7-i}[M_C],A_i)=0.
 \]
-These are package-representative identities, not raw seven-family
-identities.
+These are package-level pre-trivialization connection identities, not raw
+seven-family identities and not post-trivialization \(B_j[M]\) identities.
 \end{enumerate}
 
 Shortcut proofs using \(\Phi_K\)-scalar hiding, determinant scalarization,
@@ -13542,6 +13529,65 @@ family-by-family vanishing, and do not truncate the source tower before
 differentiating.
 \end{remark}
 
+\begin{remark}[Lower-shadow sectors and zero-padding after Gate B]
+\label{rem:lower-shadow-zero-padding-after-gate-b}
+The old lower-shadow obstruction was not a finite missing table.  If
+grade \(0\) is treated as an independent source factor, then the
+source-grade partition inventory is non-finite:
+\[
+(0,1,1,5),\qquad
+(0,0,1,1,5),\qquad
+(\underbrace{0,\ldots,0}_{N},1,1,5),\qquad \ldots
+\]
+and similarly for
+\[
+(\underbrace{0,\ldots,0}_{N},7),\qquad
+(\underbrace{0,\ldots,0}_{N},1,2,4),\qquad
+(\underbrace{0,\ldots,0}_{N},2,2,3).
+\]
+The Gate~B proof does not close this tower by finite enumeration.  It
+closes it uniformly.
+
+More precisely, lower-shadow grades \(0,2,4\) are not reclassified as
+baseline data and are not silently discarded.  They remain part of the
+moving homogeneous Taylor source tower.  Their amplitude contributions of
+total homogeneous grade \(7\) are killed by odd total-grade
+subset-complement cancellation for arbitrary labelled transfer degree.
+Their source-motion contributions are handled by the moving source-frame
+telescoping identity, and the only lower boundary generated by
+differentiating \(\operatorname{Gr}_0\) is the affine grade \(-1\) mode,
+which is removed by the \(2\)-jet source-frame normalization.
+
+Thus the correct post-Gate~B status is: lower shadows are live
+source-frame directions, but not live Gate~B first-collision residuals.
+They should not be listed as an infinite family of remaining residual
+partitions after
+Corollary~\ref{cor:gate-b-raw-edge-divisibility-order-seven}.
+\end{remark}
+
+\begin{remark}[Counterterm route if Gate B dependencies fail]
+\label{rem:counterterm-route-if-gate-b-dependencies-fail}
+The present draft proves Gate~B under the stated midpoint-parity,
+source-frame telescoping, and \(2\)-jet normalization hypotheses.  If any
+of those hypotheses fails in the final source model, then one cannot
+simply subtract the residual after determinant scalarization.
+
+A legitimate counterterm would have to be a canonical pre-\(\Phi_K\),
+pre-determinant, source-bidegree-compatible edge counterterm
+\(C_{\mathrm{diag}/\mathrm{edge}}\) determined by the raw edge jets
+\[
+[z^7][\delta^0]\pi_{\mathfrak f_h}
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}},
+\qquad
+[z^7][\delta^1]\pi_{\mathfrak f_h}
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}.
+\]
+It must be natural under atom swap, must preserve the
+\((1-\Pi_{1,1})_{\mathrm{mix}}\) source-bidegree sector, and must be
+defined before \(\Phi_K\), determinant pairing, and quotienting.
+Otherwise it is merely subtracting the obstruction by hand.
+\end{remark}
+
 \begin{remark}[Relation to the package-to-jet bridge]
 \label{rem:relation-to-package-to-jet-bridge}
 The corrected package program above is not an alternative to the zeta-side
@@ -13553,6 +13599,12 @@ compressed to the remaining package-level data.  Thus any surviving
 obstruction after the corrected package quotient theorem must be treated as
 a package-to-transform or hidden-state problem, not as another planar or
 scalarized local detector.
+
+In particular, Gate~A and Gate~B are package-construction results.  They do
+not by themselves prove the final finite-core contradiction or the
+package-to-\(\Xi_\zeta^{(N)}\) hidden-state theorem.  Any residual
+\(\Phi_K\)-visible affine-lift or higher odd-block state remains a separate
+package-to-transform issue.
 \end{remark}
 
 \begin{remark}[Shortcut routes excluded for the corrected package theorem]
@@ -27642,10 +27694,12 @@ threshold together with a finite low-height bridge, neither of which has yet
 been written out in the draft.
 \end{remark}
 
-\begin{theorem}[Final calibrated $N$-point contradiction in the pair-like branch]
+\begin{theorem}[Asymptotic calibrated \(N\)-point contradiction in the pair-like branch]
 \label{thm:final-contradiction}
-No fixed off-line toy anomaly can occur in the pair-like branch. Consequently,
-under the pair-like branch hypothesis, the calibrated contradiction closes.
+Assume the pair-like branch hypothesis and assume the package-to-jet bridge
+identifies the first surviving odd finite-core coefficient with the calibrated
+local package data.  Then, for \(Q\) sufficiently large, no fixed off-line toy
+anomaly can occur in the pair-like branch.
 \end{theorem}
 
 \begin{proof}
@@ -27690,13 +27744,16 @@ Hence for $Q$ sufficiently large,
 |\Xi_\zeta^{(N)}(m)|<|\Xi_{\toy}^{(N)}(u,d)|.
 \]
 
-This is impossible if the corrected local zeta deformation realizes the local
-off-line toy anomaly with parameter $d\in D$, because the calibrated $N$-point
-construction was set up so that the toy model is the jet-limit local avatar of
-an off-line zero configuration. Thus no off-line zero can occur. Since every
-violation of the Riemann Hypothesis would produce such an off-line local
-anomaly, all nontrivial zeros must lie on the critical line. Hence $\RH$
-holds.
+This contradicts the assumed calibrated realization of a fixed off-line toy
+anomaly in the pair-like branch, once \(Q\) is sufficiently large.  Thus,
+under the pair-like branch hypothesis and the package-to-jet bridge
+hypothesis, the pair-like branch is excluded at sufficiently large height.
+
+This theorem is an asymptotic branch exclusion.  To obtain a complete
+\(\RH\) proof from it one still needs: an effective extraction of the
+threshold \(Q_*\), a conversion from \(Q_*\) to a height threshold \(T_*\),
+a finite low-height verification or alternative low-height argument, and
+the non-pair-like finite-core branch closure.
 \end{proof}
 
 \appendix
@@ -28260,6 +28317,20 @@ R_K^+=(-1)^{|K|}L_K^-.
 \]
 \end{lemma}
 
+\begin{remark}[Scope of all-subset midpoint parity]
+\label{rem:scope-all-subset-midpoint-parity}
+Lemma~\ref{lem:all-subset-midpoint-parity} is a leading homogeneous
+coefficient statement.  It uses the midpoint chart
+\[
+t_\pm=h\pm\frac{z}{2Q^2}
+\]
+and the Taylor-coefficient Fr\'echet convention.  If one works with
+derivative-normalized Fr\'echet tensors, ordered unsymmetrized source
+slots, or non-leading ordinary coefficients, the parity factors and
+multiplicities must be translated back to this convention before applying
+the subset-complement cancellation.
+\end{remark}
+
 \begin{lemma}[Symmetry of same-point subset coefficients]
 \label{lem:symmetry-same-point-subset-coefficients}
 For every labelled subset \(K\),
@@ -28283,6 +28354,20 @@ and
 \qquad(a\ \mathrm{even}).
 \]
 \end{lemma}
+
+\begin{remark}[Scope of the leading \(Y\)-middle parity table]
+\label{rem:scope-leading-y-middle-parity-table}
+Lemma~\ref{lem:leading-y-middle-parity} concerns the leading homogeneous
+ordinary-order coefficient of the source-linear mixed middle input in the
+active homogeneous scalar-grade convention.  It is not a statement about
+every ordinary coefficient of a non-homogeneous matrix-output \(M^{[5]}\)
+table.
+
+In particular, older coefficient audits that found antisymmetric
+\(J\)-channel middle terms belong to the quarantined non-homogeneous
+matrix-output convention.  They do not contradict the leading homogeneous
+\(Y\)-middle parity table used in Gate~B.
+\end{remark}
 
 \begin{theorem}[Odd total-grade subset-complement cancellation]
 \label{thm:odd-total-grade-subset-complement-cancellation}
@@ -28335,6 +28420,42 @@ and write \(a=g_m\), \(K=J\setminus\{m\}\).  If \(a\) is odd, then
 \(Y_m=0\) by Lemma~\ref{lem:leading-y-middle-parity}.  If \(a\) is even,
 then \(Y_m\) is symmetric and \(|K|=7-a\) is odd, so the same
 subset-complement pairing cancels the fixed-sector projection.
+\end{proof}
+
+\begin{lemma}[Grade-preserving source-motion cancellation]
+\label{lem:grade-preserving-source-motion-cancellation}
+Let \(J=(g_1,\ldots,g_d)\) be a labelled homogeneous source multiset with
+\[
+|J|=\sum_i g_i=7.
+\]
+Replace one source slot by the grade-preserving part of its midpoint
+derivative,
+\[
+(\partial_h\operatorname{Gr}_{g_i}r)_{\mathrm{same}},
+\]
+and keep all other source slots fixed.  Then the corresponding fixed-sector
+source-motion contribution vanishes:
+\[
+[z^7]\pi_{\mathfrak f_h}
+\mathcal T_d
+\left(
+X^{[g_1]},\ldots,
+X^{[g_i]}_{\mathrm{same},h},
+\ldots,
+X^{[g_d]}
+\right)
+=0.
+\]
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+The grade-preserving derivative has the same ordinary source parity and
+the same endpoint transpose parity as the undifferentiated homogeneous
+grade in that slot.  Therefore the same subset-complement pairing used in
+Theorem~\ref{thm:odd-total-grade-subset-complement-cancellation} applies:
+each labelled subset contribution is paired with its complement, the two
+matrix products are transposes, and the transpose-invariant projection
+\(\pi_{\mathfrak f_h}\) kills the aggregate fixed-sector contribution.
 \end{proof}
 
 \begin{corollary}[Amplitude closure of higher transfers]
@@ -28529,9 +28650,9 @@ The decomposition follows from
 Lemma~\ref{lem:universal-first-collision-formula-transfer-degree}.  Gate~A
 handles the leading cubic term.
 Theorem~\ref{thm:odd-total-grade-subset-complement-cancellation} handles
-the amplitude part.  The grade-preserving component of \(X_h\) has the
-same midpoint parity as the undifferentiated source and is handled by the
-same subset-complement argument.  The grade-lowering part of \(X_h\) is
+the amplitude part.  The grade-preserving component of \(X_h\) is handled
+by Lemma~\ref{lem:grade-preserving-source-motion-cancellation}.  The
+grade-lowering part of \(X_h\) is
 handled by Theorem~\ref{thm:moving-homogeneous-source-frame-telescoping}.
 The lower affine boundary is removed by
 Lemma~\ref{lem:affine-boundary-removal-moving-source-frame}, and the
@@ -28573,6 +28694,41 @@ O(a_1\delta^2)
 \]
 through ordinary order \(7\) in fixed sector.
 \end{corollary}
+
+\begin{remark}[Dependency ledger for Gate B]
+\label{rem:dependency-ledger-gate-b}
+Corollary~\ref{cor:gate-b-raw-edge-divisibility-order-seven} is a raw
+edge-divisibility result, not a post-edge quotient compatibility result.
+Its inputs are logically independent and should not be silently replaced by
+quotient-level language.
+
+The dependencies are:
+\begin{enumerate}
+\item Gate~A aggregate closure, which removes the leading homogeneous
+cubic non-\((1,1)\) contribution.
+\item All-subset midpoint parity for the same-point whitening
+coefficients, which pairs labelled subsets with their complements.
+\item Symmetry of the relevant same-point subset coefficients and of
+\(N_0[0]\).
+\item Transpose-invariance of the moving fixed-sector projection
+\(\pi_{\mathfrak f_h}\).
+\item Leading \(Y\)-middle parity, which removes odd \(Y\)-middle entries
+and makes the even entries compatible with subset-complement
+cancellation.
+\item Moving homogeneous source-frame telescoping, which cancels the
+grade-lowering source-motion term against the same-basis derivative of
+the adjacent lower grade.
+\item \(2\)-jet source-frame normalization, which removes the affine
+lower boundary produced by differentiating \(\operatorname{Gr}_0\).
+\item Differentiation of the full Taylor source tower before
+ordinary-order truncation, which prevents an artificial upper-boundary
+residual.
+\end{enumerate}
+
+If any one of these inputs is removed, the statement should be demoted
+back to a conditional Gate~B target rather than used as a proved package
+construction.
+\end{remark}
 
 \begin{remark}[Gate A is not Gate B]
 \label{rem:gate-a-is-not-gate-b}
@@ -29169,53 +29325,69 @@ coefficients \(B_{7-i}[M]\) to correct the quotient line at ordinary order
 \(7\).
 \end{remark}
 
-\begin{definition}[Lower moving package coefficients]
+\begin{definition}[Lower moving package coefficients and connection data]
 \label{def:lower-moving-package-coefficients}
-Let \(M\) be a residual-source monomial.  Define
+Let \(M\) be a residual-source monomial and set \(\epsilon=h-m\).  After
+Gate~B raw edge-divisibility, define the pre-trivialization edge
+coefficients by
+\[
+Z_j[M]
+:=
+-[z^7][\epsilon^j\delta^2M]\,
+a_1^{-1}\tau_{h\to m}
+\pi_{\mathfrak f_h}
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}},
+\qquad
+0\le j\le 6.
+\]
+Equivalently,
+\[
+Z_j[M]
+=
+[z^7][\epsilon^jM]\,
+\tau_{h\to m}\pi_{\mathfrak f_h}
+\widehat C_{\mathcal W}^{\mathrm{amp}}
+\]
+once the edge-normalized package has been formed.
+
+By contrast, let
 \[
 B_{\mathrm{pkg}}^{\mathfrak f}(h;z;M)
 \]
-to be the coefficient of \(M\) in the fixed-target polynomial
-\(B_{\mathrm{pkg}}^{\mathfrak f}(h;z)\).
-
-For
-\[
-M_A:=\dot r_3r_2\dot r_4,
-\qquad
-M_C:=\dot r_3\dot r_2r_4,
-\]
-write
+be the coefficient of \(M\) in the fixed-target package representative
+after representative-level midpoint trivialization, and write
 \[
 B_{\mathrm{pkg}}^{\mathfrak f}(h;z;M)
 =
-\sum_{j\ge0}(h-m)^j\mathcal B_j[M](z),
+\sum_{j\ge0}\epsilon^j\mathcal B_j[M](z),
 \qquad
 \mathcal B_j[M](z)\in\mathfrak f_m[z]_{\le7}.
 \]
-The lower moving representatives entering the order-\(7\) quotient-line
-connection are the ordinary order-\(7\) coefficients
+The post-trivialization lower representatives are
 \[
-B_j[M]:=[z^7]\mathcal B_j[M](z)\in\mathfrak f_m,
-\qquad
-0\le j\le6.
+B_j[M]:=[z^7]\mathcal B_j[M](z)\in\mathfrak f_m.
 \]
+These coefficients are useful for recording the final representative, but
+they must not be inserted into the moving-line connection formula, because
+the trivialization has already transported along the moving quotient
+line.
 
+Let
+\[
+A_5^{\mathfrak f}(h)=\sum_{i\ge0}\epsilon^iA_i,
+\qquad
+A_i=u_i^AI+v_i^AS.
+\]
 If
 \[
-B_j[M]=u_j^B[M]I+v_j^B[M]S
-\]
-and
-\[
-A_5^{\mathfrak f}(h)=\sum_{i\ge0}(h-m)^iA_i,
-\qquad
-A_i=u_i^AI+v_i^AS,
+Z_j[M]=u_j^Z[M]I+v_j^Z[M]S,
 \]
 then the order-\(7\) quotient-line connection correction on \(M\) is
 \[
 q_{\mathrm{conn},7}[M]
 =
 \sum_{i=1}^{7}
-\omega_m(B_{7-i}[M],A_i).
+\omega_m(Z_{7-i}[M],A_i).
 \]
 In coordinates,
 \[
@@ -29223,18 +29395,18 @@ q_{\mathrm{conn},7}[M]
 =
 \sum_{i=1}^{7}
 \left(
-u_{7-i}^B[M]v_i^A
+u_{7-i}^Z[M]v_i^A
 -
-u_i^Av_{7-i}^B[M]
+u_i^Av_{7-i}^Z[M]
 \right).
 \]
-If \(A_i,B_j[M]\) are derivative-normalized rather than coefficient-normalized,
-replace this formula by
+If \(A_i,Z_j[M]\) are derivative-normalized rather than
+coefficient-normalized, replace this formula by
 \[
 q_{\mathrm{conn},7}[M]
 =
 \sum_{i=1}^{7}\binom{7}{i}
-\omega_m(B_{7-i}[M],A_i).
+\omega_m(Z_{7-i}[M],A_i).
 \]
 \end{definition}
 
@@ -29287,22 +29459,33 @@ or the moving-line correction is counted twice.
 
 \begin{remark}[Next package table required for the connection correction]
 \label{rem:next-package-table-connection-correction}
-The next computable package table is not a raw Fr\'echet-family table.  It
-is the moving lower-representative table
+The next computable package table is not a raw Fr\'echet-family table and
+not a post-trivialization representative table.  The connection correction
+requires the moving-line table
 \[
-A_i=[(h-m)^i]A_5^{\mathfrak f}(h),
+A_i=[\epsilon^i]A_5^{\mathfrak f}(h),
 \qquad
 1\le i\le7,
+\qquad
+\epsilon=h-m,
 \]
-together with
+together with the pre-trivialization edge coefficients
 \[
-B_j[M_A]=[z^7][(h-m)^jM_A]\,
-B_{\mathrm{pkg}}^{\mathfrak f}(h;z),
+Z_j[M_A]
+=
+-[z^7][\epsilon^j\delta^2M_A]\,
+a_1^{-1}\tau_{h\to m}
+\pi_{\mathfrak f_h}
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}},
 \]
 and
 \[
-B_j[M_C]=[z^7][(h-m)^jM_C]\,
-B_{\mathrm{pkg}}^{\mathfrak f}(h;z),
+Z_j[M_C]
+=
+-[z^7][\epsilon^j\delta^2M_C]\,
+a_1^{-1}\tau_{h\to m}
+\pi_{\mathfrak f_h}
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}},
 \qquad
 0\le j\le6,
 \]
@@ -29317,18 +29500,19 @@ The connection-cancellation identities to prove are
 R_7^{(A)}
 +
 \sum_{i=1}^{7}
-\omega_m(B_{7-i}[M_A],A_i)=0,
+\omega_m(Z_{7-i}[M_A],A_i)=0,
 \]
 and
 \[
 R_7^{(C)}
 +
 \sum_{i=1}^{7}
-\omega_m(B_{7-i}[M_C],A_i)=0.
+\omega_m(Z_{7-i}[M_C],A_i)=0.
 \]
-These \(B_j[M]\) must be extracted from
-\(B_{\mathrm{pkg}}^{\mathfrak f}(h;z)\), not from the raw seven-family
-coefficient table.
+The post-trivialization coefficients \(B_j[M]\) may be recorded after
+applying \(\operatorname{Triv}_{h\to m}\), but inserting them into the
+displayed connection formula double-counts the moving quotient-line
+correction.
 \end{remark}
 
 \begin{remark}[Definition-level material and theorem obligations]
@@ -29368,18 +29552,25 @@ must be reopened and audited separately, as noted in
 Remark~\ref{rem:quarantined-matrix-output-M5-convention}.
 
 \item \textbf{Edge divisibility.}
-One must prove
+Corollary~\ref{cor:gate-b-raw-edge-divisibility-order-seven} proves
+\[
+[z^7][\delta^1]\pi_{\mathfrak f_h}
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}=0
+\]
+under its stated source-frame, parity, and full-tower-before-truncation
+hypotheses.  Equivalently,
 \[
 (1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}
 =
 O(a_1\delta^2)
 \]
-on the collision chart, so that
-\[
--a_1^{-1}\delta^{-2}
-(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}
-\]
-extends holomorphically to \(\delta=0\).
+through ordinary order \(7\) in fixed sector.
+
+The remaining obligation is not to re-prove the leading cubic or
+higher-transfer audits, but to ensure that the hypotheses of
+Corollary~\ref{cor:gate-b-raw-edge-divisibility-order-seven} are part of
+the actual corrected source package, and to extend the edge law if a
+later argument requires orders beyond \(7\).
 
 \item \textbf{Source-bidegree compatibility.}
 The source-bidegree projector must be compatible with the pre-determinant
@@ -29400,11 +29591,11 @@ M_A=\dot r_3r_2\dot r_4,
 \qquad
 M_C=\dot r_3\dot r_2r_4,
 \]
-one must prove
+one must prove the pre-trivialization connection identities
 \[
 R_7^{(A)}
 +
-\sum_{i=1}^{7}\omega_m(B_{7-i}[M_A],A_i)
+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M_A],A_i)
 =
 0,
 \]
@@ -29412,10 +29603,13 @@ and
 \[
 R_7^{(C)}
 +
-\sum_{i=1}^{7}\omega_m(B_{7-i}[M_C],A_i)
+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M_C],A_i)
 =
 0.
 \]
+Here \(Z_j[M]\) denotes the pre-trivialization edge coefficient of
+Definition~\ref{def:pre-trivialization-edge-table-after-gate-b}; it is
+not the post-trivialization coefficient \(B_j[M]\).
 
 \item \textbf{UV-026 package quotient gauge.}
 With the present definitions, \(C_{\mathcal W}^{\corr}\) already denotes the
@@ -29529,7 +29723,7 @@ the current \(B_7^{\mathfrak f}\)-status of the seven cubic families is:
 \[
 \begin{array}{c|c|c}
 \text{Family} & \text{Status at }B_7^{\mathfrak f}
-& \text{Reason / remaining input}
+& \text{Reason / hypothesis}
 \\
 \hline
 L_1YR_1 & \text{absent} &
@@ -29541,25 +29735,28 @@ L_2YR_0 & \text{absent} &
 L_0YR_2 & \text{absent} &
 \text{right-hand mirror of }L_2YR_0
 \\
-L_2N_0R_1 & \text{live} &
-N_0[0]\text{ gives }2+0+5=7,\ 6+0+1=7
+L_2N_0R_1 & \text{live placement, aggregate closed} &
+\text{cancels with }L_1N_0R_2\text{ by transpose-pairing}
 \\
-L_1N_0R_2 & \text{live} &
-\text{right-hand mirror of }L_2N_0R_1
+L_1N_0R_2 & \text{live placement, aggregate closed} &
+\text{cancels with }L_2N_0R_1\text{ by transpose-pairing}
 \\
-L_3N_0R_0 & \text{pending} &
-\text{requires third Fr\'echet coefficient audit}
+L_3N_0R_0 & \text{live placement, aggregate closed conditionally} &
+\text{cancels with }L_0N_0R_3\text{ under third-Fr\'echet midpoint parity}
 \\
-L_0N_0R_3 & \text{pending} &
+L_0N_0R_3 & \text{live placement, aggregate closed conditionally} &
 \text{right-hand mirror of }L_3N_0R_0
 \end{array}
 \]
 
 The three \(Y\)-slot absences are order-count statements, not determinant
-proportionality statements.  If a future theorem defines \(M^{[5]}\) as an
-ordinary matrix-output order-\(5\) projection, then the \(Y\)-slot families
-must be reopened.  That route requires a no-double-counting theorem against
-the natural homogeneous scalar grades \(0,2,4\).
+proportionality statements.  The four non-\(Y\) rows are not asserted to
+vanish placement by placement.  They close only after the indicated
+aggregate pairing and fixed-sector projection.  If a future theorem
+defines \(M^{[5]}\) as an ordinary matrix-output order-\(5\) projection,
+then the \(Y\)-slot families must be reopened.  That route requires a
+no-double-counting theorem against the natural homogeneous scalar grades
+\(0,2,4\).
 
 \subsection{Mixed-input parity table}
 \label{app:mixed-input-parity-table}
@@ -29626,9 +29823,20 @@ for the corresponding mixed coefficient}
 \]
 
 The grade-zero sector corresponding to \(r^{(2)}(m)\) is not removed by
-affine normalization.  It remains an independent source obligation: one
-must exclude it, identify it as source-trivial or pure/one-pair, prove it
-is \(A_5^{\mathfrak f}\)-gauge, or expand the determinant inventory.
+affine normalization and should not be erased from the source table.  Its
+correct status after the Gate~B source-frame audit is more precise: grade
+\(0\) remains a live moving Taylor source direction, but its
+first-collision contribution is handled uniformly.  Amplitude terms of
+total homogeneous grade \(7\), including zero-padded lower-shadow
+multisets, vanish by odd total-grade subset-complement cancellation;
+source-motion lower terms telescope against adjacent grades; and the sole
+lower boundary
+\[
+(\partial_h\operatorname{Gr}_{0}r)_{\mathrm{lower}}
+=
+-r^{(2)}(h)(t-h)
+\]
+is affine and is removed by the \(2\)-jet source-frame projection.
 
 \subsection{Baseline coefficient table contract}
 \label{app:baseline-coefficient-table-contract}
@@ -29769,8 +29977,8 @@ uv_5-u_5v=0.
 \]
 The gate closes only if all four tag vectors pass this test.
 
-\subsection{Pending all-left/all-right cubic table}
-\label{app:pending-all-left-all-right-cubic-table}
+\subsection{All-left/all-right cubic aggregate table}
+\label{app:all-left-all-right-cubic-aggregate-table}
 
 The all-left and all-right families
 \[
@@ -29778,26 +29986,48 @@ L_3N_0R_0,
 \qquad
 L_0N_0R_3
 \]
-remain pending under the homogeneous scalar-grade convention.  If order
-counting leaves them live, the table to compute is:
+are live placements by order count, but they are not remaining
+independent Gate~A residuals under the third-Fr\'echet midpoint-parity
+convention.  Let
 \[
-\begin{array}{c|c}
-\text{Family} & \text{required third Fr\'echet table}
-\\
-\hline
-L_3N_0R_0 & G^-_{abc,n}\text{ in the relevant source triples, }3\le n\le7
-\\
-L_0N_0R_3 & G^+_{abc,n}\text{ in the relevant source triples, }3\le n\le7
-\end{array}
+G:=G^-_{7;1,1,5},
+\qquad
+W:=W_{-,0}=W_{+,0},
+\qquad
+N:=N_0[0].
 \]
-The corresponding fixed-sector vector must again be tested by
+The two aggregate fixed-sector contributions are
 \[
-uv_5-u_5v=0.
+\pi_{\mathfrak f}(GNW)
 \]
+and
+\[
+-\pi_{\mathfrak f}(WNG).
+\]
+Since \(G,N,W\) are symmetric,
+\[
+(GNW)^T=WNG,
+\]
+and since \(\pi_{\mathfrak f}\) is transpose-invariant,
+\[
+\pi_{\mathfrak f}(GNW)=\pi_{\mathfrak f}(WNG).
+\]
+Therefore
+\[
+L_3N_0R_0+L_0N_0R_3=0
+\quad\text{in }\mathfrak f
+\]
+at the aggregate fixed-sector level, conditional on the third-Fr\'echet
+midpoint-parity convention.
 
-Generic matrix algebra, one-pair \(K_5/K_3\) identities, determinant
-scalarization, or \(\Phi_K\)-scalar invisibility do not close this table.
-Actual third-Fr\'echet coefficient identities are required.
+Thus the required table is not a pending quotient-gauge determinant
+table.  The remaining obligation is to verify that the third-Fr\'echet
+coefficient normalization used by any coefficient agent is the same
+symmetric multilinear normalization used in
+Lemma~\ref{lem:aggregate-closure-leading-all-left-all-right-cubic-gate}.
+If an ordered-triple convention is used instead, the ordered-permutation
+aggregate must be included consistently on both sides before applying the
+transpose-pairing argument.
 
 \subsection{Validation checklist for coefficient agents}
 \label{app:validation-checklist-coefficient-agents}
