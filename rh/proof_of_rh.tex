@@ -29405,6 +29405,915 @@ Lemma~\ref{lem:promoted-y12-coefficient-table}, or prove a structural identity
 forcing both tests.
 \end{remark}
 
+\section{Current proof state after the local package audits}
+\label{sec:current-proof-state-after-local-audits}
+
+This section records the current proof state after the Gate~B, Bottleneck~C,
+finite-core, and interaction audits.  It is not part of the original local
+coefficient calculus; it is a status ledger for the remaining proof
+obligations.
+
+The closed branches are:
+\[
+\boxed{
+M_A,M_C\text{ connection closure is complete under source-grade reflection,}
+}
+\]
+\[
+\boxed{
+\text{mixed four-point dependence factors through }
+(c,u_5,v_5,\Delta_7),
+}
+\]
+and
+\[
+\boxed{
+\text{finite odd-germ determinacy holds on compact nonsingular
+actual-source strata.}
+}
+\]
+
+The live branches are:
+\[
+\boxed{
+\text{local Bottleneck~C physical edge obstruction,}
+}
+\]
+\[
+\boxed{
+\text{finite-core sampled vector non-concentration,}
+}
+\]
+and
+\[
+\boxed{
+dd\text{-interaction feature-balance / spectral rigidity.}
+}
+\]
+
+\subsection{Closed branch: \(M_A,M_C\) connection closure}
+\label{subsec:closed-ma-mc-connection-closure}
+
+Let
+\[
+M_A=\dot r_3r_2\dot r_4,
+\qquad
+M_C=\dot r_3\dot r_2r_4.
+\]
+Under the homogeneous scalar-grade reflection convention,
+\[
+\mathsf P_g\circ\mathsf S=(-1)^g\mathsf S\circ\mathsf P_g,
+\]
+where \(\mathsf S\) is endpoint swap, the corrected mixed block satisfies
+\[
+N^{\corr}(h_-,h_+)^T=N^{\corr}(h_+,h_-).
+\]
+Consequently, for the source-linear middle block \(Y_g\),
+\[
+Y_g(h_-,h_+)^T=(-1)^gY_g(h_+,h_-).
+\]
+Writing
+\[
+Y_g(h-\delta/2,h+\delta/2)
+=
+\sum_{e\ge0}\delta^eY_g^{\langle e\rangle}(h),
+\]
+one obtains the edge-refined parity
+\[
+\left(Y_{g,\beta}^{\langle e\rangle}\right)^T
+=
+(-1)^{g+e}Y_{g,\beta}^{\langle e\rangle}.
+\]
+
+This parity closes the labelled \(J=(3,2,4)\) pre-trivialization table:
+\[
+Z_j[M_A]=Z_j[M_C]=0,
+\qquad
+0\le j\le7.
+\]
+Therefore the connection identities
+\[
+R_7^{(A)}
++
+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M_A],A_i)=0,
+\]
+and
+\[
+R_7^{(C)}
++
+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M_C],A_i)=0
+\]
+hold under the stated source-grade reflection convention.
+
+Thus the \(M_A,M_C\) connection branch is no longer a live obstruction.
+
+\subsection{Live local obstruction: the frozen promoted mixed-block coefficient}
+\label{subsec:live-local-obstruction-eay-bc}
+
+The first live local actual-source/Bottleneck~C carrier is the promoted
+quadratic mixed-block channel
+\[
+Y_{12}^{(2)}:=D^2N_0[\xi_1,\xi_2].
+\]
+It is coupled to one same-point linear whitening slot.  The promoted channel
+has amplitude factor
+\[
+a_1a_2(a_1+a_2).
+\]
+On the collision chart
+\[
+a_2=-a_1(1+\kappa\delta),
+\]
+one has
+\[
+a_1a_2(a_1+a_2)=a_1^3\kappa\delta+O(\delta^2).
+\]
+Thus the amplitude already supplies the first \(\delta\)-edge.  Therefore the
+first Bottleneck~C coefficient is the frozen internal coefficient
+\[
+E_{A,Y}^{\mathrm{BC}}
+:=
+\tau_{h\to m}\pi_{\mathfrak f_h}
+\operatorname{Sym}
+[z^7]\,
+D(G_-^{-1/2})[A_-]\,
+Y_{12}^{(2)}\,
+R_0.
+\]
+Equivalently,
+\[
+E_{A,Y}^{\mathrm{BC}}
+=
+\tau_{h\to m}\pi_{\mathfrak f_h}
+\operatorname{Sym}
+\sum_{\chi\in\{dd,d\eta+\eta d,\eta\eta\}}
+\sum_{g=4}^{7}
+\sum_{r+b=7-g}
+H^A_{r,0}Y^\chi_{g,0}W_{+,b}.
+\]
+Write
+\[
+E_{A,Y}^{\mathrm{BC}}=e_{A,Y}I+f_{A,Y}S.
+\]
+The quotient Bottleneck~C obstruction is
+\[
+Q_{A,Y}:=e_{A,Y}v_5-u_5f_{A,Y}.
+\]
+The transform-safe obstruction is
+\[
+\Phi_K(E_{A,Y}^{\mathrm{BC}})=2f_{A,Y}.
+\]
+
+For comparison, the literal source-position edge
+\[
+E_{A,Y}^{\mathrm{pos}}
+:=
+\tau_{h\to m}\pi_{\mathfrak f_h}
+\operatorname{Sym}
+[z^7\delta^1]\,
+D(G_-^{-1/2})[A_-]\,
+Y_{12}^{(2)}\,
+R_0
+\]
+belongs to the next source-motion layer.  It is not the first
+Bottleneck~C amplitude-derivative coefficient.
+
+\begin{remark}[Executable table for \(E_{A,Y}^{\mathrm{BC}}\) (current section)]
+\label{rem:executable-table-eay-bc-current}
+The frozen Bottleneck~C coefficient is computed from the rows
+\[
+\mathcal E^a_{\chi;g,r,b}
+:=
+\tau_{h\to m}\pi_{\mathfrak f_h}
+\operatorname{Sym}
+\left(
+\Lambda^-_{a,r}Y^\chi_{g,0}W_{+,b}
+\right),
+\]
+where
+\[
+a\in\{1,5\},
+\qquad
+\chi\in\{dd,d\eta+\eta d,\eta\eta\},
+\]
+\[
+4\le g\le7,
+\qquad
+r+b=7-g.
+\]
+Thus
+\[
+E_{A,Y}^{\mathrm{BC}}
+=
+\sum_{\chi\in\{dd,d\eta+\eta d,\eta\eta\}}
+\sum_{a\in\{1,5\}}
+\sum_{\substack{4\le g\le7\\ r+b=7-g}}
+\mathcal E^a_{\chi;g,r,b}.
+\]
+The skew combination
+\[
+Y_{d\eta-\eta d}^{(2)}
+\]
+is excluded because it is killed by fixed-sector projection.
+\end{remark}
+
+\begin{remark}[Status of the frozen promoted mixed-block coefficient (current section)]
+\label{rem:status-eay-bc-current}
+The finite Fr\'echet--Sylvester recurrences reduce
+\(E_{A,Y}^{\mathrm{BC}}\) to the finite symbolic table of
+Remark~\ref{rem:executable-table-eay-bc-current}.  However, the current draft
+does not supply the scalar midpoint source-jet data needed to evaluate
+\[
+E_{A,Y}^{\mathrm{BC}}=e_{A,Y}I+f_{A,Y}S.
+\]
+The required scalar data include, safely,
+\[
+q_0^{(k)}(m),
+\qquad
+0\le k\le9,
+\]
+and
+\[
+(r_i^{[a]})^{(k)}(m),
+\qquad
+i=1,2,\quad a\in\{1,5\},\quad 2\le k\le9.
+\]
+Equivalently, the paper must supply the midpoint Taylor coefficients of
+\[
+d_{i,\pm}(z),
+\qquad
+\eta_i(z),
+\]
+through the orders contributing to
+\[
+Y^{dd}_{g,0},
+\qquad
+Y^{d\eta+\eta d}_{g,0},
+\qquad
+Y^{\eta\eta}_{g,0},
+\qquad
+4\le g\le7.
+\]
+
+At present no available symmetry forces
+\[
+E_{A,Y}^{\mathrm{BC}}=0,
+\]
+nor
+\[
+e_{A,Y}v_5-u_5f_{A,Y}=0,
+\]
+nor
+\[
+f_{A,Y}=0.
+\]
+Thus \(E_{A,Y}^{\mathrm{BC}}\) remains the first unresolved local
+actual-source/Bottleneck~C coefficient.
+\end{remark}
+
+\begin{lemma}[Scalar tests for the frozen promoted mixed-block coefficient]
+\label{lem:scalar-tests-eay-bc}
+Let
+\[
+E_{A,Y}^{\mathrm{BC}}=eI+fS,
+\qquad
+A_5^{\mathfrak f}=u_5I+v_5S.
+\]
+Then quotient Bottleneck~C for the promoted mixed-block carrier is equivalent
+to
+\[
+ev_5-u_5f=0.
+\]
+The transform-safe \(T\)-horizontal condition is equivalent to
+\[
+f=0.
+\]
+\end{lemma}
+
+\begin{proof}
+The quotient line is
+\[
+\mathbf C A_5^{\mathfrak f}.
+\]
+Thus
+\[
+E_{A,Y}^{\mathrm{BC}}\in \mathbf C A_5^{\mathfrak f}
+\]
+is equivalent, on a good patch, to the vanishing of the determinant
+\[
+ev_5-u_5f.
+\]
+On the other hand,
+\[
+\Phi_K(I)=0,
+\qquad
+\Phi_K(S)=2.
+\]
+Hence
+\[
+\Phi_K(E_{A,Y}^{\mathrm{BC}})=2f,
+\]
+so the transform-safe condition is exactly \(f=0\).
+\end{proof}
+
+\begin{corollary}[First live \(T\)-slope carrier (current section)]
+\label{cor:first-live-t-slope-carrier-current}
+The amplitude factor of the promoted carrier is
+\[
+a_1a_2(a_1+a_2),
+\]
+and
+\[
+\partial_{a_2}\bigl(a_1a_2(a_1+a_2)\bigr)\big|_{a_2=-a_1}
+=
+-a_1^2.
+\]
+Therefore
+\[
+\partial_\kappa T\big|_{E_{A,Y}^{\mathrm{BC}}}
+=
+-a_1^2\frac{\Phi_K(E_{A,Y}^{\mathrm{BC}})}{2c}
+=
+-a_1^2\frac{f}{c}.
+\]
+If
+\[
+E_{A,Y}^{\mathrm{BC}}=\lambda A_5^{\mathfrak f},
+\]
+then
+\[
+\partial_\kappa T\big|_{E_{A,Y}^{\mathrm{BC}}}
+=
+-a_1^2\lambda\frac{v_5}{c}.
+\]
+Thus, on the generic patch \(v_5\ne0\), a nonzero line-gauge
+\(E_{A,Y}^{\mathrm{BC}}\) closes the quotient condition but still leaks
+through \(T\).
+\end{corollary}
+
+\subsection{No-go for the \(\Theta_\pm\)-normal repair}
+\label{subsec:no-go-theta-normal-repair}
+
+The off-diagonal numerator variables
+\[
+\Theta_+=\sin\Delta+q_+s\cos\Delta,
+\qquad
+\Theta_-=\sin\Delta+q_-s\cos\Delta
+\]
+make the off-diagonal entries formally affine:
+\[
+N_{12}^{\Theta}=\frac{\Theta_+}{s^2},
+\qquad
+N_{21}^{\Theta}=-\frac{\Theta_-}{s^2}.
+\]
+As a formal normal package this cancels the original off-diagonal
+\(\eta\eta\) Hessian row.  It does not, however, close the physical
+Bottleneck~C obstruction.
+
+\begin{definition}[\(\Theta\)-local physical edge residual]
+\label{def:theta-local-physical-edge-residual}
+Let
+\[
+R_{\off,7}^{\Theta}
+\]
+be the septic fixed-sector residual produced by the actual constrained source
+curvature of the off-diagonal variables \(\Theta_\pm\).  Let
+\[
+R_{\diag,7}^{\Theta}
+\]
+be the shifted diagonal \(\eta\eta\) septic residual
+\[
+\pi_{\mathfrak f}
+\operatorname{Sym}
+\left(
+\Lambda^-_{\bullet,1}Y^{\eta\eta,\diag}_6W_{+,0}
++
+\Lambda^-_{\bullet,0}Y^{\eta\eta,\diag}_6W_{+,1}
+\right).
+\]
+Define
+\[
+R_{\loc,7}^{\Theta}
+:=
+R_{\off,7}^{\Theta}+R_{\diag,7}^{\Theta}.
+\]
+Write
+\[
+R_{\loc,7}^{\Theta}
+=
+\alpha_{\loc}^{\Theta}I+\beta_{\loc}^{\Theta}S.
+\]
+The scalar \(\beta_{\loc}^{\Theta}\) is the \(\Phi_K\)-visible physical edge
+residual left by the \(\Theta_\pm\)-normal package.
+\end{definition}
+
+\begin{remark}[Constrained \(\Theta_\pm\) variables reintroduce curvature]
+\label{rem:constrained-theta-reintroduces-curvature}
+The variables \(\Theta_\pm\) are not free affine source variables in the
+physical finite-\(s\) block.  They are constrained by
+\[
+\Theta_\sigma=\sin\Delta+q_\sigma s\cos\Delta.
+\]
+For two source variations,
+\[
+D_{\source}^2\Theta_\sigma
+=
+A_\sigma\eta_{ij}
++sC\,\chi_{\sigma,ij}
+-\Theta_{\sigma,0}\eta_i\eta_j
+-sS(\chi_{\sigma,i}\eta_j+\chi_{\sigma,j}\eta_i).
+\]
+In the pure \(\eta\eta\) channel, this gives
+\[
+D_{\source}^2N_{21}^{\Theta,\actual}
+=
+\left(
+\frac{\sin\Delta_0}{s^2}
++
+\frac{q_-\cos\Delta_0}{s}
+\right)\eta_i\eta_j,
+\]
+which is the old off-diagonal source-curvature obstruction.  Thus the
+\(\Theta_\pm\)-normal form is not a physical coordinate relabeling that
+removes the obstruction; it is a formal package subtraction unless this
+curvature is carried back into the physical readout.
+\end{remark}
+
+\begin{proposition}[No transform-faithful septic normal-form repair]
+\label{prop:no-transform-faithful-septic-normal-form-repair}
+Let \(K_7\) be a local septic normal-form correction satisfying:
+\begin{enumerate}
+\item \(K_7\) is invisible below ordinary order \(7\);
+\item \(K_7\) is source-quadratic, hence does not alter source-linear Gate~A,
+Gate~B, or the \(M_A,M_C\) connection tables;
+\item \(K_7\) cancels the local septic residual
+\[
+R_{\loc,7}^{\Theta}
+=
+\alpha_{\loc}^{\Theta}I+\beta_{\loc}^{\Theta}S;
+\]
+\item the physical \(\Phi_K\)-readout is unchanged, so no correction is added
+back into the physical hidden coordinate.
+\end{enumerate}
+Then necessarily
+\[
+\beta_{\loc}^{\Theta}=0.
+\]
+Consequently, on any good patch where \(\beta_{\loc}^{\Theta}\ne0\), no such
+transform-faithful local normal-form correction exists.
+\end{proposition}
+
+\begin{proof}
+To cancel \(R_{\loc,7}^{\Theta}\), the correction \(K_7\) must contain the
+fixed-sector component
+\[
+-\beta_{\loc}^{\Theta}S.
+\]
+But preserving the physical \(\Phi_K\)-readout without adding a correction to
+the hidden coordinate requires
+\[
+[z^7]\Phi_K(K_7)=0.
+\]
+Since \(\Phi_K(S)=2\), this forces
+\[
+\beta_{\loc}^{\Theta}=0.
+\]
+\end{proof}
+
+\begin{proposition}[Physical edge obstruction survives in a good-patch model]
+\label{prop:theta-physical-edge-obstruction-good-patch}
+There exists a homogeneous good-patch local coefficient model for which
+\[
+\left.
+\partial_\kappa
+\left(
+\frac{\beta_{\loc}^{\Theta}}{c}
+\right)
+\right|_{\kappa=0}
+\ne0.
+\]
+\end{proposition}
+
+\begin{proof}
+The edge amplitude carrier is
+\[
+a_1a_2(a_1+a_2).
+\]
+Along
+\[
+a_2=-a_1+\kappa
+\]
+one has
+\[
+a_1a_2(a_1+a_2)=-a_1^2\kappa+a_1\kappa^2,
+\]
+and hence
+\[
+\left.
+\partial_\kappa
+\bigl(a_1a_2(a_1+a_2)\bigr)
+\right|_{\kappa=0}
+=
+-a_1^2.
+\]
+Since \(\beta_{\loc}^{\Theta}(0)=0\), differentiating \(1/c\) contributes
+nothing at \(\kappa=0\).  Thus
+\[
+\left.
+\partial_\kappa
+\left(
+\frac{\beta_{\loc}^{\Theta}}{c}
+\right)
+\right|_{\kappa=0}
+=
+-\frac{a_1^2}{c_0}B_{\loc}^{\Theta},
+\]
+where \(B_{\loc}^{\Theta}\) is the frozen physical edge coefficient.
+
+Take a homogeneous source model
+\[
+r_i=r_j=u^2,
+\qquad
+q_0''=0,
+\]
+on a good patch with
+\[
+u\,q_0\,q\,Q\,c_0\ne0.
+\]
+The constrained off-diagonal \(\Theta_\pm\)-source curvature contributes a
+nonzero fixed-sector \(S\)-coefficient.  In the top-row normalization this
+has leading form
+\[
+B_{\off}^{\Theta,\hom}
+=
+\frac{u q_0^3}{5184\pi q^3Q^{14}}.
+\]
+The shifted diagonal term has the form
+\[
+B_{\diag}^{\Theta,\hom}
+=
+-\frac{\lambda}{2\pi Q^{12}}
+\left(
+\frac{q_0\alpha}{72}
++
+\frac{q_0^3\beta}{864}
+\right),
+\qquad
+\lambda=
+\frac{\alpha\beta}{4\pi Q(p_1+p_2)}.
+\]
+Choosing
+\[
+\alpha=\varepsilon\alpha_0,\qquad
+\beta=\varepsilon\beta_0,
+\]
+with \(\varepsilon\ne0\) sufficiently small gives
+\[
+B_{\diag}^{\Theta,\hom}=O(\varepsilon^3),
+\]
+while \(B_{\off}^{\Theta,\hom}\) remains nonzero.  Therefore
+\[
+B_{\loc}^{\Theta,\hom}
+=
+B_{\off}^{\Theta,\hom}
++
+O(\varepsilon^3)
+\ne0
+\]
+for sufficiently small \(\varepsilon\), and the claimed derivative is nonzero.
+\end{proof}
+
+\begin{remark}[Status of the \(\Theta_\pm\)-normal repair]
+\label{rem:status-theta-normal-repair}
+A formal septic package may subtract \(R_{\loc,7}^{\Theta}\) and thereby make
+the formal package horizontal.  But the physical hidden coordinate is then
+\[
+T^{\phys}
+=
+T^\star+\frac{\beta_{\loc}^{\Theta}}{c}.
+\]
+Thus the transform-safe physical Bottleneck~C condition is
+\[
+\partial_\kappa
+\left(
+T^\star+\frac{\beta_{\loc}^{\Theta}}{c}
+\right)=0.
+\]
+Proposition~\ref{prop:theta-physical-edge-obstruction-good-patch} shows that
+the second term is not currently zero.  Therefore local Bottleneck~C cannot be
+closed by \(\Theta_\pm\)-normal coordinates or septic normal-form counterterms
+alone.  The remaining local route would require a new physical edge identity
+\[
+\partial_\kappa(\beta_{\loc}^{\Theta}/c)=0
+\]
+not present in the current package calculus.
+\end{remark}
+
+\subsection{Finite-core sampled vector non-concentration}
+\label{subsec:finite-core-sampled-vector-nonconcentration}
+
+Let \(\Theta_k\) be a compact nonsingular actual-source \(k\)-core stratum.
+Define the finite-determinacy vector
+\[
+C_{\rm fd}(\theta)
+=
+(c_{\core,1},c_{\core,3},\ldots,c_{\core,2R_{\Theta_k}+1})(\theta).
+\]
+Decompose it as
+\[
+C_{\rm fd}(\theta)=P_{\rm fd}(\theta)+J_{\rm fd}(\theta),
+\]
+where \(P_{\rm fd}\) is the pair-like or one-body finite vector and
+\[
+J_{\rm fd}
+=
+(J_1,J_3,\ldots,J_{2R_{\Theta_k}+1}),
+\qquad
+J_{2r+1}=[s^{2r+1}]\Phi_K(\mathcal I_{\ge2}),
+\]
+is the finite interaction vector.
+
+For \(1\le N\le R_{\Theta_k}+1\), define
+\[
+F_N(\theta,Q)
+=
+c_{\core,2N-1}(\theta)
++
+\sum_{j\ge1}
+c_{\core,2N-1+2j}(\theta)
+h_j(1^2,\ldots,N^2)Q^{-2j}.
+\]
+Set
+\[
+\Lambda(m,Q)
+=
+C_*
+\max_{1\le N\le R_{\Theta_k}+1}
+\left(
+\frac{Q^{2N+2}}
+{(2N-1)N!(N-1)!}
+\frac{x}{B_\zeta(m)}S(m)
+\right).
+\]
+
+\begin{theorem}[Sampled finite-core vector non-concentration, needed]
+\label{thm:sampled-finite-core-vector-nonconcentration-needed}
+For every actual zeta finite-core parameter
+\[
+\theta(m)\in\Theta_k,
+\]
+one needs the following alternative:
+\[
+\theta(m)\in\mathcal Z_k,
+\]
+or
+\[
+\theta(m)\in\mathcal E_{\rm geom},
+\]
+or
+\[
+\|P_{\rm fd}(\theta(m))+J_{\rm fd}(\theta(m))\|_\infty
+\ge
+\Lambda(m,Q).
+\]
+\end{theorem}
+
+\begin{definition}[Interaction-aligned finite-core branch]
+\label{def:interaction-aligned-finite-core-branch}
+Define
+\[
+\mathcal N_k^{\rm align}(m,Q)
+\]
+to be the set of actual zeta finite-core parameters
+\[
+\theta(m)\in\Theta_k\setminus(\mathcal Z_k\cup\mathcal E_{\rm geom})
+\]
+such that
+\[
+0<
+\|P_{\rm fd}(\theta(m))+J_{\rm fd}(\theta(m))\|_\infty
+<
+\Lambda(m,Q).
+\]
+Equivalently, Theorem~\ref{thm:sampled-finite-core-vector-nonconcentration-needed}
+asserts
+\[
+\mathcal N_k^{\rm align}(m,Q)=\varnothing.
+\]
+\end{definition}
+
+\begin{lemma}[Lower transfer from sampled vector non-concentration]
+\label{lem:finite-core-lower-transfer-from-svnc-current}
+Assume Theorem~\ref{thm:sampled-finite-core-vector-nonconcentration-needed}.
+Assume also bounded-depth projective detection: for \(Q\ge Q_0(\Theta_k)\),
+every \(\theta\notin\mathcal Z_k\) admits some
+\(1\le N\le R_{\Theta_k}+1\) such that
+\[
+|F_N(\theta,Q)|
+\ge
+c_0\|C_{\rm fd}(\theta)\|_\infty.
+\]
+Then every actual zeta finite-core sample
+\[
+\theta(m)\notin\mathcal Z_k\cup\mathcal E_{\rm geom}
+\]
+has some \(1\le N\le R_{\Theta_k}+1\) satisfying
+\[
+|\Xi_{\core}^{(N)}(m)|
+\ge
+c
+\frac{x}{B_\zeta(m)}S(m).
+\]
+\end{lemma}
+
+\begin{proof}
+Choose \(N\) by projective detection.  Since
+\[
+C_{\rm fd}=P_{\rm fd}+J_{\rm fd},
+\]
+Theorem~\ref{thm:sampled-finite-core-vector-nonconcentration-needed} gives
+\[
+|F_N(\theta(m),Q)|
+\ge
+c_0\Lambda(m,Q).
+\]
+By the definition of \(\Lambda(m,Q)\),
+\[
+\Lambda(m,Q)
+\ge
+C_*
+\frac{Q^{2N+2}}
+{(2N-1)N!(N-1)!}
+\frac{x}{B_\zeta(m)}S(m).
+\]
+Substituting this into
+\[
+\Xi_{\core}^{(N)}(m)
+=
+(-1)^{N+1}
+(2N-1)N!(N-1)!
+Q^{-(2N+2)}
+F_N(\theta(m),Q)
+\]
+gives the asserted lower bound.
+\end{proof}
+
+\begin{remark}[Status of the finite-core branch]
+\label{rem:status-finite-core-branch-current}
+Finite odd-germ determinacy supplies qualitative detection on compact
+nonsingular strata.  It does not supply the sampled vector lower bound in
+Theorem~\ref{thm:sampled-finite-core-vector-nonconcentration-needed}.  The
+live finite-core obstruction is calibrated interaction alignment:
+\[
+J_{\rm fd}(\theta(m))\approx -P_{\rm fd}(\theta(m)),
+\]
+making \(C_{\rm fd}=P_{\rm fd}+J_{\rm fd}\) nonzero but smaller than the
+\(N\)-point scale \(\Lambda(m,Q)\), without entering any currently listed
+controlled incidence stratum.
+\end{remark}
+
+\subsection{\(dd\)-interaction feature-balance obstruction}
+\label{subsec:dd-interaction-feature-balance-obstruction}
+
+In the covariance-weighted \(dd\)-interaction model, write
+\[
+K_{ij}^{dd}
+=
+(u_i-u_j)^2\langle v_i,v_j\rangle,
+\qquad
+v_i=v(u_i).
+\]
+For balanced amplitudes
+\[
+\sum_i a_i=0,
+\]
+the associated quadratic form is
+\[
+Q_{dd}(a)
+=
+2\left\langle
+\sum_i a_i u_i^2v_i,\sum_j a_jv_j
+\right\rangle
+-
+2\left|
+\sum_i a_i u_iv_i
+\right|^2.
+\]
+The second term is one-sided.  The first term has no fixed sign unless one has
+feature balance:
+\[
+\sum_i a_iv_i=0.
+\]
+Ordinary amplitude balance does not imply feature balance.  Even rank-one
+locking
+\[
+v_i=\lambda_i v_0
+\]
+only changes the missing condition to
+\[
+\sum_i a_i\lambda_i=0.
+\]
+
+\begin{definition}[\(dd\)-interaction branch]
+\label{def:dd-interaction-branch-current}
+The centered \(dd\)-interaction branch is
+\[
+\mathfrak Z_{\rm int}^{dd}
+=
+\left\{
+\sum_\nu a_\nu K(d_\nu)
++
+\sum_{i,j}a_i a_j
+(u_i-u_j)^2\langle v_i,v_j\rangle
+=0
+\right\}
+\setminus\mathcal E_{\rm geom}.
+\]
+\end{definition}
+
+\begin{theorem}[Feature balance or spectral positivity, needed]
+\label{thm:feature-balance-or-spectral-positivity-needed-current}
+On each compact nonsingular same-scale finite-core patch away from the
+controlled degeneracy set, let \(v(u)\) be the transverse \(dd\)-source feature
+after same-side whitening normalization.  To close the \(dd\)-interaction
+branch, one needs at least one of the following:
+\begin{enumerate}
+\item \emph{Feature balance:}
+\[
+\sum_i a_i v(u_i)=0
+\]
+for every admissible balanced finite-core amplitude vector
+\(\sum_i a_i=0\);
+
+\item \emph{Conditional spectral rigidity:} the reduced kernel
+\[
+K_{dd}(t;m)
+=
+t^2
+\left\langle
+v\!\left(m+\frac t2\right),
+v\!\left(m-\frac t2\right)
+\right\rangle
+\]
+admits, after phase rotation, a conditionally one-sided spectral
+representation, or its negative;
+
+\item \emph{Incidence containment:} all feature-balance failures and centered
+kernel signature-changing loci lie in the controlled incidence set
+\(\mathcal E_{\rm geom}\).
+\end{enumerate}
+Absent one of these inputs, the branch
+\[
+\mathfrak Z_{\rm int}^{dd}
+\]
+remains independent.
+\end{theorem}
+
+\begin{remark}[Current proof frontier after the local package audits]
+\label{rem:current-proof-frontier-after-local-package-audits}
+The current proof frontier is as follows.
+
+\begin{enumerate}
+\item The \(M_A,M_C\) connection branch is closed under the source-grade
+reflection convention.
+
+\item The promoted quadratic mixed-block Bottleneck~C coefficient
+\[
+E_{A,Y}^{\mathrm{BC}}
+\]
+is the first unresolved local actual-source coefficient.  The quotient test is
+\[
+e_{A,Y}v_5-u_5f_{A,Y}=0,
+\]
+and the transform-safe test is
+\[
+f_{A,Y}=0.
+\]
+
+\item The \(\Theta_\pm\)-normal form and septic normal-form counterterms do
+not close the physical local obstruction.  They can move the obstruction into
+a formal package, but the physical hidden coordinate carries it back through
+\[
+T^{\phys}
+=
+T^\star+\frac{\beta_{\loc}^{\Theta}}{c}.
+\]
+The known good-patch models have
+\[
+\partial_\kappa(\beta_{\loc}^{\Theta}/c)\ne0.
+\]
+
+\item The finite-core lower-transfer branch is reduced to sampled vector
+non-concentration:
+\[
+\mathcal N_k^{\rm align}(m,Q)=\varnothing.
+\]
+
+\item The \(dd\)-interaction branch remains independent unless feature
+balance, conditional spectral positivity, or incidence containment is proved.
+\end{enumerate}
+\end{remark}
+
 \appendix
 
 \section{Toy microscopic expansion}
