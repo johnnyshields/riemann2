@@ -2890,12 +2890,22 @@ contributions, the \(\mathcal K\)-linear part is the sum of the two one-atom
 
 \begin{remark}[Scope of the tagged source block]
 \label{rem:scope-tagged-source-block}
-The definitions and lemma above are pre-whitening statements.  They do not
-assert transfer-domain vanishing, quotient-output package coincidence,
+The definitions and lemma above are pre-whitening statements.  They prove
+tagged \(\mathcal K\)-linear additivity of the corrected source block before
+the nonlinear corrected-whitening transfer
+\[
+\mathcal W(G_-,N,G_+)=G_-^{-1/2}NG_+^{-1/2}.
+\]
+They do not by themselves prove transfer-domain vanishing,
+source-bidegree edge divisibility, quotient-output package coincidence,
 diagonal merger, the coefficient \(B_7^{\mathfrak f}\), the quotient
-\(Q_{7,m}^q\), the projector \(\Pi_{1,1}\), or the cubic
-\((1,1,5)\) \(A_5^{\mathfrak f}\)-gauge theorem.  Those remain separate
-UV-024 and UV-026 obligations.
+\(Q_{7,m}^q\), or the projector \(\Pi_{1,1}\).
+
+In particular, the tagged pre-whitening block does not automatically induce
+the homogeneous scalar-grade source tower used in
+Corollary~\ref{cor:gate-b-raw-edge-divisibility-order-seven}.  That
+identification is a separate source-model theorem for the actual
+\(\mathfrak D_Q\)-scaled corrected-whitening package.
 \end{remark}
 
 \begin{remark}[Corrected package map for the two-point and mixed four-point frontiers]
@@ -3040,6 +3050,47 @@ carrier that the corrected package theorem is designed to remove.
 The mixed four-point scalar-exit theorem should therefore be read after
 Gate~B has removed non-\((1,1)\) quotient directions.  It is not a
 substitute for Gate~B.
+\end{remark}
+
+\begin{remark}[No separate mixed four-point carrier beyond the quotient determinant]
+\label{rem:no-separate-mixed-four-point-carrier}
+Assume Gate~B and the post-Gate-B connection correction close at the quotient
+line.  Then a non-\((1,1)\) order-\(7\) fixed-sector residual
+\[
+E=eI+fS
+\]
+is seen by the mixed four-point branch only through its quotient determinant
+\[
+\omega_h(E,A_5^{\mathfrak f}(h))=ev_5-u_5f.
+\]
+If
+\[
+E\in \mathbf C A_5^{\mathfrak f}(h),
+\]
+then it does not change the canonical septic determinant
+\[
+\Delta_7=u_7v_5-u_5v_7
+\]
+and hence creates no mixed four-point carrier beyond the already-defined
+scalar exits.
+
+If the residual is not quotient-line absorbed, the obstruction is precisely
+the failure of the quotient-septic connection identity, for example
+\[
+R_7^{(A)}
++
+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M_A],A_i)
+\]
+or the corresponding \(M_C\) expression.  It is not a new mixed four-point
+mechanism; downstream it enters only through the induced change of
+\(\Delta_7\).
+
+This does not solve the separate \(\Phi_K\)-visible hidden-state problem,
+since a line shift \(E=\chi A_5^{\mathfrak f}\) is quotient-invisible but may
+still satisfy
+\[
+\Phi_K(E)=2\chi v_5.
+\]
 \end{remark}
 
 \begin{corollary}[Single-pair exterior odd-coefficient bound]
@@ -4436,6 +4487,63 @@ O\!\bigl(e^{-2\alpha Q\log Q+O(Q)}\bigr).
 \]
 Thus the full transformed zeta-side scalar is determined, up to exponentially
 small error, by a fixed finite core.
+\end{remark}
+
+\begin{definition}[Finite-core \(N\)-point scalar]
+\label{def:finite-core-npoint-scalar}
+Fix a finite same-scale core \(\mathcal C\) of zero pairs around the midpoint
+\(m\), and let
+\[
+H_{\core,m}(s)
+:=
+\Phi_K\!\bigl(\widehat\Omega_{\core}^{\corr}(s;m)\bigr)
+\]
+denote the corrected transverse scalar contributed by this core, in the same
+finite-\(s\) normalization as \(H_m(s)\).  For \(N\ge1\), define
+\[
+\Xi_{\core}^{(N)}(m)
+:=
+\sum_{j=1}^N a_j^{(N)}H_{\core,m}(j/Q^2).
+\]
+If
+\[
+H_{\core,m}(z/Q^2)
+=
+\sum_{r\ge 0}
+c_{\core,2r+1}(m)\frac{z^{2r+1}}{Q^{2r+4}},
+\]
+then the \(N\)-point moment cancellations give
+\[
+\Xi_{\core}^{(N)}(m)
+=
+(-1)^{N+1}(2N-1)N!(N-1)!
+\sum_{k\ge0}
+c_{\core,2N-1+2k}(m)
+h_k(1^2,\dots,N^2)
+Q^{-(2N+2k+2)}.
+\]
+Thus the first finite-core coefficient seen by the \(N\)-point projector at
+depth \(N\) is
+\[
+c_{\core,2N-1}(m).
+\]
+\end{definition}
+
+\begin{remark}[Finite-core localization is not a lower law]
+\label{rem:finite-core-localization-not-lower-law}
+Corollary~\ref{cor:xi-zeta-finite-core-localization} is an upper/localization
+statement.  It does not supply a lower bound for
+\[
+\Xi_{\core}^{(N)}(m).
+\]
+In particular, it does not rule out cancellation among the finitely many core
+constituents:
+\[
+c_{\core,2N-1}(m)=0
+\]
+or cancellation of several consecutive \(N\)-visible odd coefficients.
+A separate finite-core lower-transfer theorem is required before the
+\(N\)-point contradiction can be applied to genuinely non-pair-like cores.
 \end{remark}
 
 \begin{remark}[Exact Laurent tail of the contour kernel]
@@ -13635,6 +13743,33 @@ package-to-\(\Xi_\zeta^{(N)}\) hidden-state theorem.  Any residual
 package-to-transform issue.
 \end{remark}
 
+\begin{remark}[Open theorem target: finite-core lower transfer]
+\label{rem:open-finite-core-lower-transfer}
+The finite-core branch would be closed by a theorem of the following form.
+
+\emph{Finite-core lower-transfer theorem.}
+Let \(\mathcal C\) be a normalized genuinely finite same-scale core whose
+corrected package anomaly is nonzero after all quotient and hidden-state
+identifications relevant to \(\Phi_K\).  Then there exist an admissible
+\(N=N(m)\), a sign \(\sigma_{\mathcal C}\in\{\pm1\}\), and a constant
+\(c_{\mathcal C}>0\), stable on the compact core-parameter patch, such that
+\[
+|\Xi_{\core}^{(N)}(m)|
+\ge
+c_{\mathcal C}\frac{x}{B_\zeta(m)}S(m).
+\]
+
+The present draft does not prove this theorem.  The corrected order-\(7\)
+package controls the local quotient construction and removes the known
+two-point/package quotient residuals, but it does not by itself determine the
+\(N\)-visible coefficient
+\[
+c_{\core,2N-1}(m)
+\]
+for a genuinely non-pair-like finite core, nor does it rule out cancellation
+among finite-core constituents.
+\end{remark}
+
 \begin{remark}[Scope after Gate B]
 \label{rem:scope-after-gate-b}
 Gate~B supplies the raw \(\delta^2\)-edge divisibility needed to construct
@@ -13686,6 +13821,123 @@ locus \(v_5=0\) or after an additional theorem showing cancellation in the
 actual corrected block.  The missing hidden-state theorem is therefore a
 transform-level state-locality statement modulo \(\ker\Phi_K\), not a
 formal consequence of quotient-septic closure.
+\end{remark}
+
+\begin{definition}[\(\Phi_K\)-visible septic state]
+\label{def:phik-visible-septic-state}
+On the fixed target fiber
+\[
+\mathfrak f_m=\mathbf C I\oplus \mathbf C S,
+\]
+write
+\[
+A_7^{\mathfrak f}=u_7I+v_7S.
+\]
+The \(\Phi_K\)-visible septic state is the class
+\[
+[A_7^{\mathfrak f}]_{\Phi}:=
+A_7^{\mathfrak f}\bmod \ker(\Phi_K|_{\mathfrak f_m}),
+\]
+equivalently the scalar
+\[
+\phi_7:=\Phi_K(A_7^{\mathfrak f})=2v_7.
+\]
+If the \(c\)-normalized package is being used, the normalized visible septic
+state is
+\[
+\theta_7:=\frac{\phi_7}{c}=\frac{2v_7}{c}.
+\]
+\end{definition}
+
+\begin{proposition}[Formal non-descent of the \(\Phi_K\)-visible septic state]
+\label{prop:formal-non-descent-phik-visible-septic-state}
+On the generic locus \(v_5\neq0\), the quotient class
+\[
+[A_7^{\mathfrak f}]
+\in
+\mathfrak f_m/\mathbf C A_5^{\mathfrak f}(m)
+\]
+does not determine the \(\Phi_K\)-visible septic state
+\[
+[A_7^{\mathfrak f}]_{\Phi}
+\in
+\mathfrak f_m/\ker(\Phi_K|_{\mathfrak f_m}).
+\]
+In particular, quotient package equality does not imply equality of the first
+\(\Phi_K\)-visible corrected odd coefficient.
+\end{proposition}
+
+\begin{proof}
+Write
+\[
+A_5^{\mathfrak f}=u_5I+v_5S,
+\qquad
+A_7^{\mathfrak f}=u_7I+v_7S.
+\]
+The quotient identifies
+\[
+A_7^{\mathfrak f}
+\sim
+A_7^{\mathfrak f}+\chi A_5^{\mathfrak f}.
+\]
+However
+\[
+\Phi_K(A_7^{\mathfrak f}+\chi A_5^{\mathfrak f})
+-
+\Phi_K(A_7^{\mathfrak f})
+=
+\chi\Phi_K(A_5^{\mathfrak f})
+=
+2\chi v_5.
+\]
+Thus, if \(v_5\neq0\), the forgotten quotient direction is visible to
+\(\Phi_K\).
+
+Equivalently, take the formal model
+\[
+A_5^{\mathfrak f}=S,
+\qquad
+A_7^{\mathfrak f,\chi}=\chi S.
+\]
+Then
+\[
+[A_7^{\mathfrak f,\chi}]=0
+\quad\text{in}\quad
+\mathfrak f_m/\mathbf C S
+\]
+for every \(\chi\), but
+\[
+\Phi_K(A_7^{\mathfrak f,\chi})=2\chi.
+\]
+Hence the reduced quotient package does not determine the
+\(\Phi_K\)-visible septic state.
+\end{proof}
+
+\begin{remark}[Needed package-to-transform state-locality theorem]
+\label{rem:needed-package-to-transform-state-locality-theorem}
+The theorem needed downstream is not merely quotient-septic closure.  It must
+identify the first transform-visible corrected odd coefficient as a function
+of the reduced corrected package.
+
+A sufficient form is the following state-locality statement.  If two actual
+corrected packages \(P,P'\) have the same reduced package datum, then
+\[
+A_{7,\Xi}^{\mathfrak f}(P')-A_{7,\Xi}^{\mathfrak f}(P)
+\in
+\ker\Phi_K.
+\]
+Equivalently, there should exist a package-local functional
+\[
+\Theta_{\Phi,7}
+\]
+such that
+\[
+\Phi_K\!\left(A_{7,\Xi}^{\mathfrak f}(P)\right)
+=
+\Theta_{\Phi,7}\!\left(\widehat\Psi_{\mathrm{red}}(P)\right).
+\]
+Only such a theorem allows the corrected quotient package to feed the
+two-point and mixed four-point transform branches.
 \end{remark}
 
 \begin{remark}[Local diagnostic for the hidden septic state]
@@ -13751,6 +14003,80 @@ Thus representative-gauge invariance only kills additions parallel to
 quotient-defect data.  A C proof must control the actual corrected
 exceptional-divisor quotient class, not merely the formal shape of the
 reduced package.
+\end{remark}
+
+\begin{remark}[Atom swap does not impose \(\kappa\mapsto-\kappa\) on the exceptional divisor]
+\label{rem:atom-swap-does-not-kill-kappa-slope}
+In the collision chart
+\[
+h_1=m-\frac{\delta}{2},
+\qquad
+h_2=m+\frac{\delta}{2},
+\qquad
+a_2=-a_1(1+\kappa\delta),
+\]
+interchanging the two labelled atoms gives
+\[
+\delta\longmapsto-\delta,
+\qquad
+a_1\longmapsto -a_1(1+\kappa\delta),
+\qquad
+\kappa\longmapsto \frac{\kappa}{1+\kappa\delta}.
+\]
+Hence on the exceptional divisor \(\delta=0\), the slope coordinate is fixed:
+\[
+\kappa\longmapsto\kappa.
+\]
+Therefore atom-swap symmetry does not force the exceptional trace
+\[
+B(m,\kappa)
+\]
+to be even in \(\kappa\), and in particular it does not force
+\[
+\partial_\kappa B(m,\kappa)=0.
+\]
+Swap symmetry removes the wrong-parity terms in the transverse collision
+variable; it does not remove quotient-visible dependence on the exceptional
+slope.
+\end{remark}
+
+\begin{remark}[Missing theorem: quotient-valued diagonal merger]
+\label{rem:missing-quotient-valued-diagonal-merger}
+Bottleneck~C requires a quotient-valued diagonal merger theorem.  On every
+good patch on which
+\[
+c(m)\ne0,
+\qquad
+A_5^{\mathfrak f}(m)\ne0,
+\]
+the corrected two-atom collision package must factor through the blow-down of
+the exceptional divisor:
+\[
+(m,\kappa,0)\longmapsto m.
+\]
+Equivalently,
+\[
+B(m,\kappa)
+=
+B(m,0)
+=
+\widehat\Psi(m)
+\qquad
+\text{for all sufficiently small }\kappa.
+\]
+At the order-\(7\) quotient level this means
+\[
+B_7^{\mathfrak f}(m,\kappa,0)
+-
+B_7^{\mathfrak f}(m,0,0)
+\in
+\mathbf C A_5^{\mathfrak f}(m).
+\]
+
+This is stronger than choosing a local septic gauge such as \(v_7=0\) or
+\(u_7=0\).  Such a gauge selects a representative inside a fixed quotient
+class; it does not prove that the quotient class itself is independent of the
+exceptional slope \(\kappa\).
 \end{remark}
 
 \begin{remark}[Shortcut routes excluded for the corrected package theorem]
@@ -27846,10 +28172,15 @@ been written out in the draft.
 
 \begin{theorem}[Asymptotic calibrated \(N\)-point contradiction in the pair-like branch]
 \label{thm:final-contradiction}
-Assume the pair-like branch hypothesis and assume the package-to-jet bridge
-identifies the first surviving odd finite-core coefficient with the calibrated
-local package data.  Then, for \(Q\) sufficiently large, no fixed off-line toy
-anomaly can occur in the pair-like branch.
+Assume the pair-like branch hypothesis and assume that the pair-like
+package-to-\(\Xi\) bridge identifies the calibrated local two-point package
+with the toy normal form entering Proposition~\ref{prop:toy-n-point-direct}.
+Then, for \(Q\) sufficiently large, no fixed off-line toy anomaly can occur in
+the pair-like branch.
+
+This theorem is not a finite-core closure theorem.  The genuinely non-pair-like
+finite-core branch remains open pending the lower-transfer theorem described in
+Remark~\ref{rem:open-finite-core-lower-transfer}.
 \end{theorem}
 
 \begin{proof}
@@ -27905,6 +28236,21 @@ threshold \(Q_*\), a conversion from \(Q_*\) to a height threshold \(T_*\),
 a finite low-height verification or alternative low-height argument, and
 the non-pair-like finite-core branch closure.
 \end{proof}
+
+\begin{remark}[Local package results are not yet global transform closure]
+\label{rem:local-package-not-global-transform-closure}
+The local Gate~B and connection-package results are package-construction
+results.  They do not by themselves prove hidden-state equality,
+exceptional-divisor fiber selection, finite-core exclusion, or a full
+package-to-transform contradiction.  The remaining global obligations are:
+\[
+\text{state-locality modulo }\ker\Phi_K,
+\qquad
+\text{quotient-valued diagonal merger},
+\qquad
+\text{finite-core lower transfer}.
+\]
+\end{remark}
 
 \appendix
 
@@ -28719,6 +29065,13 @@ Equivalently, the source-frame projection is
 \]
 Thus constant and affine modes are not independent raw source inputs.
 
+This statement is a source-admissibility assertion for the holomorphic
+\(\mathfrak D_Q\)-scaled corrected source variables.  It is not a license to
+discard lower homogeneous grades.  It uses the residual-source convention in
+which the moving midpoint affine jet has already been subtracted; without
+that convention an affine component would not be killed by a formal
+coefficient argument alone.
+
 This is not a blanket assertion that all lower-shadow grades are discarded.
 The grade \(0,2,4\) source directions may appear in the moving Taylor tower.
 They are handled by the interior telescoping identity when they arise from
@@ -28761,6 +29114,22 @@ an affine source would force \(U_\pm\) and \(E_\pm\) to have poles in
 sector.  This is the source-frame reason the homogeneous scalar-grade
 tower starts at \(g=0\), i.e. at the second derivative.
 \end{proof}
+
+\begin{remark}[No premature ordinary-order truncation]
+\label{rem:no-premature-ordinary-order-truncation-gate-b}
+The cancellation in
+Theorem~\ref{thm:moving-homogeneous-source-frame-telescoping} is a statement
+about the full moving Taylor source tower.  For ordinary order \(7\), one
+must include the next homogeneous grade before differentiating: the lower
+part of \(\partial_h\operatorname{Gr}_{8}r\) cancels the apparent upper
+boundary coming from the same-basis derivative of
+\(\operatorname{Gr}_{7}r\).  If the tower is truncated at grade \(7\) before
+\(\partial_h\) is applied, this cancellation is artificially destroyed.
+
+Thus ``through ordinary order \(7\)'' means: differentiate the full
+homogeneous source tower first, perform the adjacent-grade telescoping, and
+only then discard ordinary powers above \(7\).
+\end{remark}
 
 \begin{proposition}[Decomposition of the Gate B first-collision coefficient]
 \label{prop:decomposition-gate-b-first-collision}
@@ -28812,9 +29181,11 @@ upper boundary is avoided by differentiating the full Taylor source tower
 before truncation.
 \end{proof}
 
-\begin{corollary}[Gate B raw edge-divisibility through ordinary order \(7\)]
+\begin{corollary}[Conditional Gate B raw edge-divisibility through ordinary order \(7\)]
 \label{cor:gate-b-raw-edge-divisibility-order-seven}
-Assume:
+Assume that the following source-frame hypotheses have been verified for the
+actual \(\mathfrak D_Q\)-scaled corrected source model, not merely for a
+formal homogeneous Taylor model:
 \begin{enumerate}
 \item Gate~A aggregate closure;
 \item all-subset midpoint parity for same-point whitening coefficients;
@@ -28836,7 +29207,7 @@ Then
 (1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}=0.
 }
 \]
-Equivalently,
+Under these same hypotheses, equivalently,
 \[
 \boxed{
 (1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}
@@ -28883,6 +29254,30 @@ construction.  Thus the corollary should be cited as a conditional raw
 edge-divisibility theorem: it closes Gate~B for the corrected package only
 after the listed parity, source-frame, and full-tower-before-truncation
 hypotheses have been identified with the actual source model.
+\end{remark}
+
+\begin{remark}[Gate B remains conditional on source-model hardening]
+\label{rem:gate-b-source-model-hardening}
+Corollary~\ref{cor:gate-b-raw-edge-divisibility-order-seven} is a proved
+implication from its stated source-frame hypotheses.  It should not yet be
+read as an unconditional theorem of
+Definition~\ref{def:tagged-two-atom-prewhitening-source-block} alone.
+
+The tagged source block gives pre-whitening \(\mathcal K\)-linear additivity.
+The remaining source-model obligation is to prove that the actual
+\(\mathfrak D_Q\)-scaled corrected source variables feed the nonlinear
+corrected-whitening transfer
+\[
+\mathcal W(G_-,N,G_+)=G_-^{-1/2}NG_+^{-1/2}
+\]
+with the same homogeneous scalar grades, midpoint subset parities,
+source-motion telescoping, affine-boundary removal, and
+full-tower-before-truncation used in Gate~B.
+
+Thus the corollary is presently conditional in exactly this sense: the raw
+edge-divisibility conclusion follows once these source-frame hypotheses are
+verified for the actual corrected package, rather than only for the formal
+homogeneous Taylor tower.
 \end{remark}
 
 \begin{remark}[Negative findings from the Gate A/Gate B audit]
@@ -29363,6 +29758,94 @@ package quotient-gauge theorem.  The live coefficient gates are merely
 local tests for that theorem, not separate theorem statements.
 \end{remark}
 
+\begin{theorem}[Corrected UV-026 quotient-gauge theorem on the quintic-good patch]
+\label{thm:uv026-corrected-package-quotient-gauge}
+Work on a good patch on which
+\[
+A_5^{\mathfrak f}(m)\ne0.
+\]
+Assume that Gate~B raw edge-divisibility has supplied the holomorphic
+edge-normalized object
+\[
+\widehat C_{\mathcal W}^{\mathrm{amp}}
+=
+-a_1^{-1}\delta^{-2}
+(1-\Pi_{1,1})_{\mathrm{mix}}
+C_{\mathcal W}^{\mathrm{raw}}
+\]
+through ordinary order \(7\) on the collision chart.  Let
+\(C_{\mathcal W}^{\corr}\) denote the fixed-target fixed-sector package
+representative obtained from this object by
+\[
+C_{\mathcal W}^{\corr}
+=
+B_{\mathrm{pkg}}^{\mathfrak f}(h;z)
+=
+\sum_{n=0}^{7}
+z^n\operatorname{Triv}_{h\to m} Z_n(h),
+\]
+where
+\[
+\pi_{\mathfrak f_h}[z^{\le7}]
+\widehat C_{\mathcal W}^{\mathrm{amp}}(h)
+=
+\sum_{n=0}^{7}z^n Z_n(h).
+\]
+Then the corrected UV-026 statement is
+\[
+B_7^{\mathfrak f}(C_{\mathcal W}^{\corr})
+:=
+[z^7]B_{\mathrm{pkg}}^{\mathfrak f}(m;z)
+\in
+\mathbf C A_5^{\mathfrak f}(m),
+\]
+equivalently
+\[
+Q_{7,m}^q(C_{\mathcal W}^{\corr})
+=
+0
+\quad\text{in}\quad
+\mathfrak f_m/\mathbf C A_5^{\mathfrak f}(m).
+\]
+\end{theorem}
+
+\begin{remark}[UV-026 theorem object versus proof data]
+\label{rem:uv026-object-versus-proof-data}
+The theorem object in UV-026 is the quotient class
+\[
+Q_{7,m}^q(C_{\mathcal W}^{\corr})
+\in
+\mathfrak f_m/\mathbf C A_5^{\mathfrak f}(m).
+\]
+The source-bidegree projection, amplitude normalization, fixed-sector
+extraction, and midpoint trivialization are part of the definition of
+\(C_{\mathcal W}^{\corr}\).  They should not be applied again to
+\(C_{\mathcal W}^{\corr}\).
+
+The pre-trivialization edge table \(Z_j[M]\) is not extra output data in the
+UV-026 statement.  It is proof data needed to verify the connection
+cancellation for
+\[
+M_A=\dot r_3r_2\dot r_4,
+\qquad
+M_C=\dot r_3\dot r_2r_4.
+\]
+The required proof identities are
+\[
+R_7^{(A)}
++
+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M_A],A_i)=0,
+\]
+and
+\[
+R_7^{(C)}
++
+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M_C],A_i)=0.
+\]
+Replacing \(Z_j[M]\) by post-trivialization \(B_j[M]\) inside this connection
+sum double-counts the moving-line correction.
+\end{remark}
+
 \begin{definition}[Raw corrected-whitening matrix cross-effect before \(\Phi_K\)]
 \label{def:raw-corrected-whitening-cross-effect}
 Let
@@ -29621,6 +30104,36 @@ quotient-inconclusive, not evidence for or against the quotient-gauge
 theorem.
 \end{remark}
 
+\begin{remark}[Rank-jump locus is not covered by the good-patch quotient theorem]
+\label{rem:rank-jump-locus-not-covered-uv026}
+The corrected UV-026 theorem is a good-patch statement.  The
+representative-level midpoint trivialization uses a nonzero quintic line
+\[
+A_5^{\mathfrak f}(m)\ne0
+\]
+to identify the quotient
+\[
+\mathfrak f_m/\mathbf C A_5^{\mathfrak f}(m).
+\]
+On the rank-jump locus
+\[
+A_5^{\mathfrak f}(m)=0,
+\]
+the determinant coordinate is unavailable.  Moreover, the literal inclusion
+\[
+B_7^{\mathfrak f}(C_{\mathcal W}^{\corr})
+\in
+\mathbf C A_5^{\mathfrak f}(m)
+\]
+would reduce to the stronger assertion
+\[
+B_7^{\mathfrak f}(C_{\mathcal W}^{\corr})=0.
+\]
+That zero statement is not supplied by the good-patch quotient theorem.
+Rank-jump cases therefore require a separate extension, blow-up, or limiting
+quotient-line theorem.
+\end{remark}
+
 \begin{remark}[Two coefficient indices and two lower tables]
 \label{rem:two-coefficient-indices-package}
 There are two independent indexing conventions in the corrected package.
@@ -29868,6 +30381,214 @@ displayed connection formula double-counts the moving quotient-line
 correction.
 \end{remark}
 
+\begin{remark}[Status of the \(M_A,M_C\) connection identities]
+\label{rem:status-ma-mc-connection-identities}
+The identities
+\[
+R_7^{(A)}
++
+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M_A],A_i)=0,
+\]
+and
+\[
+R_7^{(C)}
++
+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M_C],A_i)=0
+\]
+are not proved in the present draft by parity alone.  The available
+antisymmetry and subset-complement mechanisms are Gate~B edge mechanisms;
+they do not by themselves evaluate the post-Gate-B moving-line connection
+sum.
+
+The viable closure mechanism is cancellation between the direct corrected
+order-\(7\) residuals \(R_7^{(A)},R_7^{(C)}\) and the connection
+contributions computed from the lower pre-trivialization table
+\(Z_j[M_A],Z_j[M_C]\).  Therefore the current status is:
+\[
+\boxed{
+\text{connection closure depends on the missing finite }Z_j\text{-tables
+and corrected }R_7\text{-tables.}
+}
+\]
+In particular, \(R_7^{(A)}\) and \(R_7^{(C)}\) must be corrected-package
+residuals in the same pre-\(\Phi_K\), pre-determinant convention.  Old raw
+seven-family residuals must not be substituted for these quantities.
+\end{remark}
+
+\begin{remark}[Connection table reduction for the residual monomials]
+\label{rem:connection-table-reduction-residual-monomials}
+The post-Gate-B connection identities for
+\[
+M_A=\dot r_3r_2\dot r_4,
+\qquad
+M_C=\dot r_3\dot r_2r_4
+\]
+are finite pre-trivialization table identities.  They are not raw
+seven-family identities and they must not be tested using the
+post-trivialization coefficients \(B_j[M]\).
+
+Write
+\[
+\epsilon=h-m,
+\qquad
+A_h^m:=\tau_{h\to m}A_5^{\mathfrak f}(h)
+       =\sum_{i\ge0}\epsilon^iA_i,
+\]
+so that
+\[
+A_i=[\epsilon^i]\tau_{h\to m}A_5^{\mathfrak f}(h),
+\qquad 1\le i\le7.
+\]
+If
+\[
+A_i=\alpha_i I+\beta_iS,
+\]
+and
+\[
+Z_j[M_X]=u_j^X I+v_j^X S,
+\qquad X\in\{A,C\},
+\]
+then the coefficient-normalized connection contribution is
+\[
+q_{\mathrm{conn},7}[M_X]
+=
+\sum_{i=1}^{7}
+\omega_m(Z_{7-i}[M_X],A_i)
+=
+\sum_{i=1}^{7}
+\left(
+u_{7-i}^X\beta_i-\alpha_i v_{7-i}^X
+\right).
+\]
+Thus the two required scalar identities are
+\[
+R_7^{(A)}
++
+\sum_{i=1}^{7}
+\left(
+u_{7-i}^A\beta_i-\alpha_i v_{7-i}^A
+\right)
+=0,
+\]
+and
+\[
+R_7^{(C)}
++
+\sum_{i=1}^{7}
+\left(
+u_{7-i}^C\beta_i-\alpha_i v_{7-i}^C
+\right)
+=0.
+\]
+
+If instead the table uses derivative-normalized coefficients
+\[
+\mathsf A_i
+=
+\partial_\epsilon^i
+\left(\tau_{m+\epsilon\to m}A_5^{\mathfrak f}(m+\epsilon)\right)
+\big|_{\epsilon=0},
+\qquad
+\mathsf Z_j[M]
+=
+\partial_\epsilon^j Z[M](m+\epsilon)\big|_{\epsilon=0},
+\]
+then
+\[
+A_i=\frac{\mathsf A_i}{i!},
+\qquad
+Z_j[M]=\frac{\mathsf Z_j[M]}{j!}.
+\]
+Consequently the coefficient-normalized order-\(7\) term is
+\[
+q_{\mathrm{conn},7}[M_X]
+=
+\frac{1}{7!}
+\sum_{i=1}^{7}
+\binom{7}{i}
+\omega_m(\mathsf Z_{7-i}[M_X],\mathsf A_i).
+\]
+Equivalently, after applying \(\partial_\epsilon^7|_{\epsilon=0}\) to the
+whole order-\(7\) identity, the derivative-normalized connection term is
+\[
+\sum_{i=1}^{7}
+\binom{7}{i}
+\omega_m(\mathsf Z_{7-i}[M_X],\mathsf A_i).
+\]
+The coefficient-normalized and derivative-normalized conventions must not be
+mixed.
+\end{remark}
+
+\begin{definition}[Finite \(Z_j\)-table target for \(M_A\) and \(M_C\)]
+\label{def:finite-zj-table-target-ma-mc}
+For \(X\in\{A,C\}\), set
+\[
+M_A=\dot r_3r_2\dot r_4,
+\qquad
+M_C=\dot r_3\dot r_2r_4.
+\]
+The required pre-trivialization table entries are
+\[
+Z_j[M_X]
+=
+-[z^7][\epsilon^j\delta^2M_X]\,
+a_1^{-1}\tau_{h\to m}
+\pi_{\mathfrak f_h}
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}},
+\qquad
+0\le j\le6.
+\]
+Equivalently, after Gate~B edge divisibility has supplied the holomorphic
+edge-normalized package,
+\[
+Z_j[M_X]
+=
+[z^7][\epsilon^jM_X]\,
+\tau_{h\to m}\pi_{\mathfrak f_h}
+\widehat C_{\mathcal W}^{\mathrm{amp}}.
+\]
+
+To compute these entries from the finite Fr\'echet/Sylvester calculus, one
+must keep the labelled source slots through the computation.  For the
+labelled source triple \(J=(3,2,4)\), the \(N_0\)-middle contribution has
+the schematic contract
+\[
+\sum_{I\subseteq J}
+\sum_{\alpha+\beta+\gamma=7}
+\pi_{\mathfrak f_h}
+\left(
+L^-_{I,\alpha}N^{(0)}_{\beta}
+R^+_{J\setminus I,\gamma}
+\right),
+\]
+and the \(Y\)-middle contribution has the schematic contract
+\[
+\sum_{m_0\in J}
+\sum_{I\subseteq J\setminus\{m_0\}}
+\sum_{\alpha+\beta+\gamma=7}
+\pi_{\mathfrak f_h}
+\left(
+L^-_{I,\alpha}Y_{m_0,\beta}
+R^+_{J\setminus(I\cup\{m_0\}),\gamma}
+\right).
+\]
+The operator
+\[
+-[\epsilon^j\delta^2M_X]\,a_1^{-1}\tau_{h\to m}
+(1-\Pi_{1,1})_{\mathrm{mix}}
+\]
+is then applied to the labelled aggregate before determinant scalarization
+and before midpoint trivialization.
+
+The current finite Fr\'echet recurrences supply the formal \(L\)- and
+\(R\)-coefficient infrastructure and the baseline \(N^{(0)}\)-coefficient
+infrastructure.  What remains to be supplied for this table is the actual
+\(\delta^2\)-edge source expansion for \(M_A,M_C\), including the
+\(\epsilon^j\)-coefficients for \(0\le j\le6\), the corresponding
+\(Y\)-middle source-linear table in the same normalization, and the
+transported moving-line coefficients \(A_i\) through \(i=7\).
+\end{definition}
+
 \begin{remark}[Definition-level material and theorem obligations]
 \label{rem:definition-level-material-and-theorem-obligations}
 Definitions~\ref{def:raw-corrected-whitening-cross-effect}--\ref{def:lower-moving-package-coefficients}
@@ -29984,8 +30705,9 @@ R_7^{(C)}
 0.
 \]
 Here \(Z_j[M]\) denotes the pre-trivialization edge coefficient of
-Definition~\ref{def:pre-trivialization-edge-table-after-gate-b}; it is
-not the post-trivialization coefficient \(B_j[M]\).
+Definition~\ref{def:lower-moving-package-coefficients}
+(equivalently Definition~\ref{def:pre-trivialization-edge-table-after-gate-b});
+it is not the post-trivialization coefficient \(B_j[M]\).
 
 \item \textbf{UV-026 package quotient gauge.}
 With the present definitions, \(C_{\mathcal W}^{\corr}\) already denotes the
