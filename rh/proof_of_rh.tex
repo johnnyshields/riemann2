@@ -30000,6 +30000,15 @@ dd\text{-interaction feature-balance / spectral rigidity.}
 }
 \]
 
+The local Bottleneck-C branch now has two strategic continuations: either prove
+the pointwise global zero-source identity
+\[
+\nu_{21,7}^{\new,\mathrm{agg}}=0,
+\]
+or replace the pointwise \(T\)-horizontal gate by a different architecture
+such as global curvature/holonomy control or quotient-only determinant
+geometry.
+
 \subsection{Closed branch: \(M_A,M_C\) connection closure}
 \label{subsec:closed-ma-mc-connection-closure}
 
@@ -31566,9 +31575,615 @@ or equivalently
 =
 0.
 \]
-No currently proved identity supplies this vanishing.  Thus the present local
-route remains open-negative: it requires a new global zero-source cancellation
-theorem, or else the Bottleneck-C architecture fails at this row.
+No currently proved identity supplies this vanishing.  The subsequent
+subsections record the present interpretation of this obstruction: it is not a
+natural boundary term or residue theorem, and it is best viewed as the
+vertical defect of the \(T\)-horizontal Bottleneck-C connection.  Thus the
+present local route remains open-negative: either one proves a new pointwise
+global zero-source cancellation theorem, or else one pivots to a different
+architecture, such as global curvature/holonomy control or a quotient-only
+no-\(T\) program.
+
+\subsection{Global obstruction-class interpretation of the Bottleneck-C defect}
+\label{subsec:global-obstruction-class-bottleneck-c-defect}
+
+The preceding local ledger shows that the present transform-faithful
+finite-\(s\) Bottleneck-C architecture closes only if the rebuilt aggregate
+coefficient
+\[
+\nu_{21,7}^{\new,\mathrm{agg}}
+\]
+vanishes pointwise.  The next question is whether this coefficient is a hidden
+boundary term, residue identity, or global conservation-law density.  The
+current evidence is negative: it is better understood as a bulk vertical
+connection-defect density for the \(T\)-horizontal Bottleneck-C connection.
+
+For this subsection write, for readability,
+\[
+G:=G^{\new}=q_{\mathrm{aux},R}+T_{\mathrm{far},R},
+\qquad
+A_2:=\frac{G''(m)}{2},
+\qquad
+A_4:=\frac{G^{(4)}(m)}{24},
+\]
+and
+\[
+q:=q_0^{\new},
+\qquad
+q'':=(q_0^{\new})''.
+\]
+The rebuilt obstruction is
+\[
+\nu_{21,7}^{\new,\mathrm{agg}}
+=
+\frac{1}{Q^{14}}
+\left[
+\frac{q}{240}A_2A_4
++
+\frac{1}{144}
+\left(
+\frac{q''}{6}
+-
+\frac{2q^3}{3}
+\right)
+A_2^2
+\right].
+\]
+
+\begin{proposition}[No natural exactness for the rebuilt Bottleneck-C defect]
+\label{prop:no-natural-exactness-rebuilt-bc-defect}
+Assume the source set is fixed as \(m\) varies, so that
+\[
+A_4=\frac{1}{12}A_2''.
+\]
+Then
+\[
+2880Q^{14}\nu_{21,7}^{\new,\mathrm{agg}}
+=
+qA_2A_2''
++
+20
+\left(
+\frac{q''}{6}
+-
+\frac{2q^3}{3}
+\right)
+A_2^2.
+\]
+This density is not an exact first-order local derivative in the natural
+midpoint variables \((A_2,A_2',q,q')\).  More precisely,
+\[
+2880Q^{14}\nu_{21,7}^{\new,\mathrm{agg}}
+=
+\left(
+qA_2A_2'
+-
+\frac12 q'A_2^2
+\right)'
+-
+q(A_2')^2
++
+\left(
+\frac{23}{6}q''
+-
+\frac{40}{3}q^3
+\right)
+A_2^2.
+\]
+The final two terms are genuine bulk terms.  Hence
+\[
+\nu_{21,7}^{\new,\mathrm{agg}}
+\]
+is not a boundary term or conservation-law density in the ordinary midpoint
+calculus.
+\end{proposition}
+
+\begin{proof}
+Since \(A_2=G''/2\), fixed source tagging gives
+\[
+A_2''=\frac{G^{(4)}}{2},
+\qquad
+A_4=\frac{G^{(4)}}{24}=\frac{1}{12}A_2''.
+\]
+Substitution into the formula for
+\(\nu_{21,7}^{\new,\mathrm{agg}}\) gives the first displayed identity.
+For the integration-by-parts decomposition, compute
+\[
+(qA_2A_2')'
+=
+qA_2A_2''
++
+q(A_2')^2
++
+q'A_2A_2',
+\]
+and
+\[
+(q'A_2^2)'=q''A_2^2+2q'A_2A_2'.
+\]
+Therefore
+\[
+qA_2A_2''
+=
+\left(
+qA_2A_2'
+-
+\frac12q'A_2^2
+\right)'
+-
+q(A_2')^2
++
+\frac12q''A_2^2.
+\]
+Adding
+\[
+20
+\left(
+\frac{q''}{6}
+-
+\frac{2q^3}{3}
+\right)A_2^2
+\]
+gives the claimed residual term
+\[
+-q(A_2')^2
++
+\left(
+\frac{23}{6}q''
+-
+\frac{40}{3}q^3
+\right)A_2^2.
+\]
+\end{proof}
+
+\begin{remark}[Moving source windows]
+\label{rem:moving-source-windows-exactness-correction}
+If the source set, cutoff, or core window depends on \(m\), write it as
+\(G_m(t)\).  Then
+\[
+A_2(m)=\frac12\partial_t^2G_m(t)\big|_{t=m},
+\]
+and differentiation gives
+\[
+A_2''(m)
+=
+\frac12
+\left(
+\partial_m^2\partial_t^2
++
+2\partial_m\partial_t^3
++
+\partial_t^4
+\right)G_m(t)\big|_{t=m}.
+\]
+Consequently
+\[
+A_4
+=
+\frac{1}{12}A_2''
+-
+\frac{1}{24}
+\left(
+\partial_m^2\partial_t^2
++
+2\partial_m\partial_t^3
+\right)G_m(t)\big|_{t=m}.
+\]
+Thus moving cutoffs or moving core windows introduce extra correction terms.
+They do not by themselves create a conservation law; they add another
+identity requirement.
+\end{remark}
+
+\begin{remark}[The induced second-order equation]
+\label{rem:induced-second-order-equation-bc-defect}
+If \(A_2\ne0\), pointwise vanishing of
+\(\nu_{21,7}^{\new,\mathrm{agg}}\) is equivalent, in the fixed-source-set
+calculus, to
+\[
+qA_2''
++
+20
+\left(
+\frac{q''}{6}
+-
+\frac{2q^3}{3}
+\right)A_2
+=0,
+\]
+or
+\[
+A_2''
++
+\left(
+\frac{10}{3}\frac{q''}{q}
+-
+\frac{40}{3}q^2
+\right)A_2
+=0.
+\]
+This should be read as the unproved pointwise equation demanded by the current
+Bottleneck-C gate, not as an already available zeta-side ODE.
+\end{remark}
+
+\subsection{Meromorphic residue no-go for the rebuilt obstruction}
+\label{subsec:meromorphic-residue-no-go-rebuilt-obstruction}
+
+There is also no current residue-theoretic mechanism forcing
+\[
+\nu_{21,7}^{\new,\mathrm{agg}}(m)=0.
+\]
+The rebuilt source is a zero-pair pole field.  Locally write
+\[
+G(m)
+=
+\sum_{p\in P_{\mathrm{ext}}}\frac{C_p}{m-p},
+\]
+where \(P_{\mathrm{ext}}\) is the set of non-core zero-source poles and
+\(C_p\) includes the residue and source weight.  Then
+\[
+A_2(m)=\sum_p\frac{C_p}{(m-p)^3},
+\qquad
+A_4(m)=\sum_p\frac{C_p}{(m-p)^5}.
+\]
+If
+\[
+K(m):=\frac{q''(m)}{6}-\frac{2q(m)^3}{3},
+\]
+then, up to the global factor \(Q^{-14}\),
+\[
+\nu(m)
+:=
+\frac{q(m)}{240}A_2A_4+\frac{K(m)}{144}A_2^2
+\]
+is the quadratic pole-interaction field
+\[
+\nu(m)
+=
+\frac{q(m)}{240}
+\sum_{p,r}
+\frac{C_pC_r}{(m-p)^3(m-r)^5}
++
+\frac{K(m)}{144}
+\sum_{p,r}
+\frac{C_pC_r}{(m-p)^3(m-r)^3}.
+\]
+
+\begin{proposition}[The rebuilt obstruction is not residue-killed]
+\label{prop:rebuilt-obstruction-not-residue-killed}
+The meromorphic differential \(\nu(m)\,dm\) is not, in general, an exact
+meromorphic derivative.  Its local residues at zero-source poles are
+generically nonzero.  Hence the global residue theorem can at most give
+cancellation of the sum of residues; it does not imply the pointwise condition
+\[
+\nu(m)=0
+\]
+required by Bottleneck~C.
+\end{proposition}
+
+\begin{proof}
+Fix a pole \(p\) and write \(\tau=m-p\).  Decompose
+\[
+A_2=C_p\tau^{-3}+a(\tau),
+\qquad
+A_4=C_p\tau^{-5}+b(\tau),
+\]
+where \(a,b\) are holomorphic at \(\tau=0\).  Then
+\[
+A_2A_4
+=
+C_p^2\tau^{-8}
++
+C_pb\,\tau^{-3}
++
+C_pa\,\tau^{-5}
++
+ab,
+\]
+and
+\[
+A_2^2
+=
+C_p^2\tau^{-6}
++
+2C_pa\,\tau^{-3}
++
+a^2.
+\]
+Thus \(\nu(m)\,dm\) has high-order poles, and its residue depends on Taylor
+coefficients of \(q,K,a,b\) at \(p\).  There is no structural reason for this
+residue to vanish.
+
+Already in a two-pole constant-\((q,K)\) model, with poles \(p_1,p_2\),
+residues \(C_1,C_2\), and \(d=p_1-p_2\), the analytic tail at \(p_1\) gives
+\[
+\operatorname{Res}_{p_1}(\nu\,dm)
+=
+C_1C_2
+\left(
+\frac{q}{8d^7}
++
+\frac{K}{12d^5}
+\right),
+\]
+which is generically nonzero.  Therefore \(\nu(m)\,dm\) is not an exact
+meromorphic derivative.
+\end{proof}
+
+\begin{remark}[What residue calculus can and cannot give]
+\label{rem:residue-calculus-limit-bc-obstruction}
+Functional-equation pairing and conjugation may pair or cancel residues in a
+global sum.  Such cancellation is compatible with the global residue theorem,
+but it is much weaker than the pointwise identity
+\[
+\nu_{21,7}^{\new,\mathrm{agg}}(m)=0.
+\]
+The Bottleneck-C gate is pointwise because
+\[
+f_{\eta\eta}^{\new,\mathrm{agg}}
+=
+-\frac{u^{\new}}{24\pi(q_{\wh}^{\new})^3}
+\nu_{21,7}^{\new,\mathrm{agg}},
+\qquad
+\partial_\kappa T=-a_1^2f/c.
+\]
+Thus an integrated or cyclic residue cancellation cannot close the present
+\(T\)-horizontal gate.
+\end{remark}
+
+\subsection{Connection-defect interpretation and possible architecture pivot}
+\label{subsec:connection-defect-interpretation-bc}
+
+The preceding no-go results suggest a different interpretation.  The
+coefficient
+\[
+\nu_{21,7}^{\new,\mathrm{agg}}
+\]
+is not merely a bad scalar coefficient; it is the vertical defect of the
+current \(T\)-horizontal Bottleneck-C connection.
+
+Recall that
+\[
+A_7^{\mathfrak f}=u_7I+v_7S,
+\qquad
+T=\frac{v_7}{c}.
+\]
+For a residual
+\[
+E=eI+fS,
+\]
+the physical readout satisfies
+\[
+\Phi_K(E)=2f,
+\]
+and the Bottleneck-C exceptional slope is
+\[
+\partial_\kappa T=-a_1^2\frac{f}{c}.
+\]
+For the rebuilt non-core zero-source convention, the active \(\eta\eta\) row
+gives
+\[
+f_{\eta\eta}^{\new,\mathrm{agg}}
+=
+-\frac{u^{\new}}{24\pi(q_{\wh}^{\new})^3}
+\nu_{21,7}^{\new,\mathrm{agg}}.
+\]
+Hence, on a good patch,
+\[
+\partial_\kappa T\big|_{\eta\eta}
+=
+a_1^2
+\frac{u^{\new}}{24\pi c(q_{\wh}^{\new})^3}
+\nu_{21,7}^{\new,\mathrm{agg}}.
+\]
+
+\begin{definition}[Bottleneck-C vertical defect density]
+\label{def:bottleneck-c-vertical-defect-density}
+Define
+\[
+\mathcal K_{\eta\eta;\kappa}
+:=
+\partial_\kappa T\big|_{\eta\eta}.
+\]
+Equivalently,
+\[
+\mathcal K_{\eta\eta;\kappa}
+=
+C_{\rm geom}\,
+\nu_{21,7}^{\new,\mathrm{agg}},
+\qquad
+C_{\rm geom}
+=
+a_1^2
+\frac{u^{\new}}{24\pi c(q_{\wh}^{\new})^3}.
+\]
+On a good patch,
+\[
+C_{\rm geom}\ne0.
+\]
+\end{definition}
+
+\begin{remark}[Curvature versus second fundamental form]
+\label{rem:curvature-versus-second-fundamental-form-bc}
+The active row is symmetric in the source directions \(\eta_i,\eta_j\).  Thus
+\(\mathcal K_{\eta\eta;\kappa}\) is not ordinary antisymmetric gauge curvature
+by itself.  It is better regarded as the vertical second fundamental form, or
+quadratic curvature-density, of the diagonal-merger horizontal distribution in
+the \(T\)-coordinate.
+\end{remark}
+
+\begin{proposition}[Local flatness equivalence]
+\label{prop:local-flatness-equivalence-bc}
+Within the current transform-faithful Bottleneck-C architecture, local
+\(T\)-horizontal closure of the rebuilt \(\eta\eta\) row is equivalent to
+\[
+\nu_{21,7}^{\new,\mathrm{agg}}=0.
+\]
+\end{proposition}
+
+\begin{proof}
+By Definition~\ref{def:bottleneck-c-vertical-defect-density},
+\[
+\partial_\kappa T\big|_{\eta\eta}
+=
+C_{\rm geom}
+\nu_{21,7}^{\new,\mathrm{agg}}.
+\]
+On a good patch \(C_{\rm geom}\ne0\).  Therefore
+\[
+\partial_\kappa T\big|_{\eta\eta}=0
+\]
+if and only if
+\[
+\nu_{21,7}^{\new,\mathrm{agg}}=0.
+\]
+\end{proof}
+
+\begin{remark}[Possible curvature/holonomy pivot]
+\label{rem:possible-curvature-holonomy-pivot}
+The current Bottleneck-C architecture demands pointwise flatness:
+\[
+\mathcal K_{\eta\eta;\kappa}=0.
+\]
+A different architecture could attempt to treat
+\[
+C_{\rm geom}\nu_{21,7}^{\new,\mathrm{agg}}\,dm
+\]
+as a global curvature or holonomy density, replacing pointwise \(T\)-flatness
+by a global statement such as
+\[
+\int \mathcal K_{\eta\eta;\kappa}\,dm=0,
+\qquad
+\operatorname{Hol}_T(\mathcal K)=0,
+\qquad
+\text{or}\qquad
+\operatorname{Index}(\mathcal K)=0.
+\]
+This would be a genuine architecture pivot, not a repair of the present local
+Bottleneck-C gate.  To make such a pivot meaningful, one would first need to
+prove transformation laws showing that
+\[
+C_{\rm geom}\nu_{21,7}^{\new,\mathrm{agg}}\,dm
+\]
+is a globally defined connection or curvature density under changes of patch,
+core window, source convention, and normalization.
+\end{remark}
+
+\subsection{No-\(T\) quotient-determinant architecture as a possible pivot}
+\label{subsec:no-t-quotient-determinant-architecture}
+
+A second possible pivot is to abandon the \(T\)-horizontal Bottleneck-C gate
+entirely and formulate the local-to-global argument using only quotient
+determinant data.  This is not a repair of Bottleneck~C; it is a different
+proof architecture.
+
+The fixed-sector data are
+\[
+A_5^{\mathfrak f}=u_5I+v_5S,
+\qquad
+A_7^{\mathfrak f}=u_7I+v_7S.
+\]
+The quotient determinant coordinate is
+\[
+\Delta_7=u_7v_5-u_5v_7.
+\]
+A shift
+\[
+A_7^{\mathfrak f}
+\mapsto
+A_7^{\mathfrak f}+\chi A_5^{\mathfrak f}
+\]
+preserves \(\Delta_7\), but changes
+\[
+T=\frac{v_7}{c}
+\quad\mapsto\quad
+T+\chi\frac{v_5}{c}.
+\]
+It also changes
+\[
+\Phi_K(A_7^{\mathfrak f})
+\]
+by \(2\chi v_5\).  Thus \(T\) is not quotient-invariant.
+
+A quotient-only architecture would use as local moduli
+\[
+\mathcal Q(h)
+=
+\left(
+c(h),u_5(h),v_5(h),\Delta_7(h)
+\right),
+\]
+or equivalently the quotient class
+\[
+[A_7^{\mathfrak f}]
+\in
+\mathfrak f_h/\mathbf C A_5^{\mathfrak f}.
+\]
+Its local gate would be
+\[
+ev_5-u_5f=0,
+\]
+not
+\[
+f=0.
+\]
+
+\begin{remark}[What a no-\(T\) architecture would require]
+\label{rem:no-t-architecture-requirements}
+A no-\(T\) architecture can make the \(T\)-leak irrelevant only if every
+downstream RH-relevant detection step is reformulated through quotient data:
+\[
+(c,u_5,v_5,\Delta_7),
+\]
+mixed four-point scalar exits, and finite-core determinant geometry.  It
+cannot use
+\[
+T=\frac{v_7}{c},
+\qquad
+\Phi_K(A_7^{\mathfrak f}),
+\]
+or hidden-state reconstruction as independent data.
+\end{remark}
+
+\begin{proposition}[Conditional no-go for quotient-only architecture]
+\label{prop:conditional-no-go-quotient-only-architecture}
+If a downstream local-to-global step requires reconstruction of \(T\) or
+\(\Phi_K(A_7^{\mathfrak f})\), then no quotient-only architecture can replace
+the current Bottleneck-C gate.
+\end{proposition}
+
+\begin{proof}
+The quotient identifies representatives
+\[
+A_7^{\mathfrak f}
+\quad\text{and}\quad
+A_7^{\mathfrak f}+\chi A_5^{\mathfrak f}.
+\]
+These representatives have the same \(\Delta_7\), but their \(T\)-coordinates
+differ by
+\[
+\chi\frac{v_5}{c}.
+\]
+On a \(v_5\ne0\) patch this is nonzero for \(\chi\ne0\).  Therefore no
+function of the quotient data can recover \(T\) or
+\(\Phi_K(A_7^{\mathfrak f})\).  Any proof step depending on those quantities
+cannot be performed in the quotient-only architecture.
+\end{proof}
+
+\begin{remark}[Relation to the Bottleneck-C obstruction]
+\label{rem:no-t-relation-to-bc-obstruction}
+The no-\(T\) quotient program would make the obstruction
+\[
+\nu_{21,7}^{\new,\mathrm{agg}}
+\]
+irrelevant only by removing \(T\)-horizontal closure from the proof.  It would
+not prove
+\[
+\nu_{21,7}^{\new,\mathrm{agg}}=0.
+\]
+The burden would instead move to quotient finite-core non-concentration and
+quotient interaction rigidity using only \((c,u_5,v_5,\Delta_7)\) and the
+mixed four-point scalar exits.
+\end{remark}
 
 \subsection{Finite-core sampled vector non-concentration}
 \label{subsec:finite-core-sampled-vector-nonconcentration}
