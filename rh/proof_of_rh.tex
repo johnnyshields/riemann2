@@ -30000,14 +30000,16 @@ dd\text{-interaction feature-balance / spectral rigidity.}
 }
 \]
 
-The local Bottleneck-C branch now has two strategic continuations: either prove
-the pointwise global zero-source identity
+The local Bottleneck-C branch has now exhausted the scalar, quotient, split,
+and line-bundle repair routes.  The remaining viable language is the full
+rank-two fixed-sector bundle
 \[
-\nu_{21,7}^{\new,\mathrm{agg}}=0,
+\mathcal F_b=\mathfrak f_h(b),
 \]
-or replace the pointwise \(T\)-horizontal gate by a different architecture
-such as global curvature/holonomy control or quotient-only determinant
-geometry.
+with \(E_{\eta\eta}\) treated as vector-valued affine forcing.  Gate A and
+Gate B remain as local algebraic lemmas, but the proof now requires a global
+rank-two affine transport, vector-valued non-concentration, projective-plus-scale
+index, or comparable non-scalar theorem.
 
 \subsection{Closed branch: \(M_A,M_C\) connection closure}
 \label{subsec:closed-ma-mc-connection-closure}
@@ -32184,6 +32186,661 @@ The burden would instead move to quotient finite-core non-concentration and
 quotient interaction rigidity using only \((c,u_5,v_5,\Delta_7)\) and the
 mixed four-point scalar exits.
 \end{remark}
+
+\subsection{Post-quotient audit: split and line-bundle repairs}
+\label{subsec:post-quotient-split-line-bundle-audit}
+
+The no-\(T\) quotient architecture keeps the determinant data
+\[
+D_{2r+1}
+=
+\omega_h(A_{2r+1}^{\mathfrak f},A_5^{\mathfrak f})
+=
+u_{2r+1}v_5-u_5v_{2r+1}.
+\]
+This removes the representative-level \(T\)-coordinate, but it also discards
+the full \(A_5^{\mathfrak f}\)-line.  Thus the pure line anomaly
+\[
+A_{2r+1}^{\mathfrak f}
+=
+\lambda_{2r+1}A_5^{\mathfrak f}
+\]
+has
+\[
+D_{2r+1}=0,
+\]
+while still giving
+\[
+\Phi_K(A_{2r+1}^{\mathfrak f})
+=
+2\lambda_{2r+1}v_5,
+\qquad
+T_{2r+1}
+=
+\lambda_{2r+1}\frac{v_5}{c}.
+\]
+Consequently the quotient scalar
+\[
+H_m^{\quot}(s)
+=
+\omega_h\!\left(
+\pi_{\mathfrak f}\widehat\Omega_\zeta^{\corr}(s;m),
+A_5^{\mathfrak f}
+\right)
+\]
+is analytically coherent but incomplete for the original transform-state
+detection problem.
+
+A natural repair is the split readout
+\[
+\mathcal H_m^{\mathrm{split}}(s)
+=
+\left(
+H_m^{\quot}(s),H_m^\parallel(s)
+\right),
+\]
+where
+\[
+H_m^\parallel(s)
+=
+\frac{
+\left\langle
+\pi_{\mathfrak f}\widehat\Omega_\zeta^{\corr}(s;m),
+A_5^{\mathfrak f}
+\right\rangle_{\wh}
+}{
+\left\langle
+A_5^{\mathfrak f},A_5^{\mathfrak f}
+\right\rangle_{\wh}
+}.
+\]
+For each coefficient
+\[
+A_{2r+1}^{\mathfrak f}
+=
+u_{2r+1}I+v_{2r+1}S,
+\]
+this gives the pair
+\[
+\left(
+D_{2r+1},\lambda_{2r+1}
+\right),
+\]
+with
+\[
+\lambda_{2r+1}
+=
+\frac{
+\langle A_{2r+1}^{\mathfrak f},A_5^{\mathfrak f}\rangle_{\wh}
+}{
+\langle A_5^{\mathfrak f},A_5^{\mathfrak f}\rangle_{\wh}
+}.
+\]
+On a good patch, if the whitening metric is fixed and nondegenerate, the pair
+\[
+(D_{2r+1},\lambda_{2r+1})
+\]
+recovers the full fixed-sector vector \(A_{2r+1}^{\mathfrak f}\).  Thus the
+split readout repairs the fatal incompleteness of the pure quotient readout.
+
+However, this completeness reintroduces the Bottleneck-C obstruction through
+the longitudinal coordinate.  For
+\[
+E_{\eta\eta}
+=
+-\frac{\nu_{\eta\eta}}{24\pi q^3}(wI+uS),
+\]
+one has
+\[
+D(E_{\eta\eta})
+=
+-\frac{\nu_{\eta\eta}}{24\pi q^3}(wv_5-u u_5),
+\]
+and
+\[
+\lambda(E_{\eta\eta})
+=
+-\frac{\nu_{\eta\eta}}{24\pi q^3}
+\frac{
+\langle wI+uS,A_5^{\mathfrak f}\rangle_{\wh}
+}{
+\langle A_5^{\mathfrak f},A_5^{\mathfrak f}\rangle_{\wh}
+}.
+\]
+Thus if the split readout is used as a pointwise vanishing gate, then on a
+good patch it requires
+\[
+E_{\eta\eta}=0,
+\]
+and hence again requires
+\[
+\nu_{\eta\eta}=0
+\]
+unless \(wI+uS\) degenerates.  The split readout is therefore a complete
+coordinate system for the fixed-sector vector, not a new closure mechanism.
+
+\begin{remark}[Line-bundle transport attempt]
+\label{rem:line-bundle-transport-attempt}
+One can try to avoid pointwise vanishing by treating the longitudinal
+coordinate as a section of
+\[
+L=\mathbf C A_5^{\mathfrak f}.
+\]
+With a fixed whitening metric, the natural local connection is
+\[
+\alpha_L
+=
+\frac{
+\langle dA_5^{\mathfrak f},A_5^{\mathfrak f}\rangle_{\wh}
+}{
+\langle A_5^{\mathfrak f},A_5^{\mathfrak f}\rangle_{\wh}
+}.
+\]
+If
+\[
+s=\lambda A_5^{\mathfrak f},
+\]
+then
+\[
+\nabla^Ls=(d\lambda+\lambda\alpha_L)A_5^{\mathfrak f}.
+\]
+Locally this is coherent: under
+\[
+A_5^{\mathfrak f}\mapsto \mu A_5^{\mathfrak f}
+\]
+one has
+\[
+\alpha_L\mapsto\alpha_L+d\log\mu,
+\]
+and the covariant derivative transforms correctly.
+
+The obstruction is global.  The construction requires the \(A_5^{\mathfrak f}\)
+line and the whitening metric to transform canonically under changes of patch,
+source/core window, and whitening convention.  This is not currently proved.
+Moreover, no canonical path, boundary condition, or holonomy theorem is
+available for \((L,\nabla^L)\), and the longitudinal forcing is not exact in
+the natural variables.  Thus line-bundle transport is a useful diagnostic
+language but not presently a proof gate.
+\end{remark}
+
+\begin{remark}[Current status of quotient, split, and line-bundle repairs]
+\label{rem:current-status-quotient-split-line-repairs}
+The quotient scalar is invariant but incomplete.  The split readout is complete
+but restores the original fixed-sector obstruction.  The line-bundle
+connection makes the longitudinal defect locally covariant, but lacks global
+covariance, canonical paths, boundary data, exactness, or holonomy control.
+Therefore none of these repairs currently replaces pointwise Bottleneck-C
+closure.
+\end{remark}
+
+\subsection{Rank-two fixed-sector bundle as the remaining viable language}
+\label{subsec:rank-two-fixed-sector-remaining-language}
+
+The preceding failures suggest that the defect should not be scalarized, nor
+should one single out the \(A_5^{\mathfrak f}\)-line as the primary geometric
+object.  The best remaining local language is the full rank-two fixed-sector
+bundle
+\[
+\mathcal F\to\mathcal B,
+\qquad
+\mathcal F_b=\mathfrak f_h(b)=\mathbf C I_b\oplus\mathbf C S_b.
+\]
+This formulation keeps the whole fixed-sector vector
+\[
+A_{2r+1}^{\mathfrak f}\in\mathcal F_b
+\]
+and therefore avoids the incompleteness of the quotient scalar and the
+noncanonical line-preservation problem of \(L=\mathbf C A_5^{\mathfrak f}\).
+
+The local candidate connection is the projected ambient derivative
+\[
+\nabla_X^{\mathfrak f}A
+=
+\Pi_{\mathfrak f}\bigl(d_X^{\mathcal J}A\bigr),
+\]
+where \(\mathcal J\) is the ambient corrected finite-\(s\) jet/kernel-state
+bundle, \(d^{\mathcal J}\) is the ambient derivative, and
+\[
+\Pi_{\mathfrak f}:\mathcal J_b\to\mathfrak f_h(b)
+\]
+is the fixed-sector projection.  In a local frame
+\[
+E=(I,S),
+\qquad
+A=Ea,
+\]
+the connection has the form
+\[
+\nabla^{\mathfrak f}A
+=
+E(da+\Gamma^{\mathfrak f}a).
+\]
+If
+\[
+E=E^{\rm raw}W,
+\]
+then formally
+\[
+\Gamma^{\mathfrak f}
+=
+W^{-1}\Gamma^{\rm raw}W+W^{-1}dW.
+\]
+In particular, if the raw frame is flat in the chart, then
+\[
+\Gamma^{\mathfrak f}=W^{-1}dW.
+\]
+
+On an overlap with
+\[
+E_j=E_iG_{ij},
+\qquad
+G_{ij}\in GL_2(\mathbf C),
+\]
+the connection matrices must satisfy
+\[
+\Gamma_j
+=
+G_{ij}^{-1}\Gamma_iG_{ij}
++
+G_{ij}^{-1}dG_{ij}.
+\]
+Thus the rank-two connection is canonical if the fixed-sector frames glue by
+canonical \(GL_2\)-transition maps and the fixed-sector projection is
+functorial under the ambient transition maps.
+
+\begin{proposition}[Conditional rank-two connection theorem]
+\label{prop:conditional-rank-two-connection}
+Assume that on a reduced good-patch base \(\mathcal B_{\rm red}^{+}\):
+\begin{enumerate}
+\item the core/source convention is fixed and locally stable;
+\item no zero moves into or out of \(q_{\core}\);
+\item the fixed-sector frames satisfy transition laws
+\[
+E_j=E_iG_{ij},
+\qquad
+G_{ij}\in GL_2(\mathbf C),
+\qquad
+G_{ij}G_{jk}=G_{ik};
+\]
+\item the ambient corrected jet bundle \(\mathcal J\) and projection
+\(\Pi_{\mathfrak f}\) are functorial under these transitions;
+\item the whitening branch and Gram normalization are fixed or functorial.
+\end{enumerate}
+Then
+\[
+\nabla_X^{\mathfrak f}A
+=
+\Pi_{\mathfrak f}(d_X^{\mathcal J}A)
+\]
+defines a canonical connection on
+\[
+\mathcal F_{\rm red}^{+}\to\mathcal B_{\rm red}^{+}.
+\]
+\end{proposition}
+
+The reduced-base hypotheses are essential.  On the unreduced base, changing the
+source/core convention can produce affine corrections
+\[
+A_j^{\mathfrak f}
+=
+G_{ij}^{-1}A_i^{\mathfrak f}
++
+B_{ij}.
+\]
+Such transformations do not define an ordinary vector-bundle connection.  Thus
+the present rank-two connection is currently a fixed-convention, reduced-base
+object unless an affine torsor transition theorem is proved.
+
+\begin{remark}[Why rank two improves on the line bundle]
+\label{rem:rank-two-improves-on-line-bundle}
+The \(A_5^{\mathfrak f}\)-line may rotate under legitimate changes of
+trivialization, source/core convention, or whitening.  This blocked the
+line-bundle route.  The full plane \(\mathfrak f_h=\mathbf C I\oplus\mathbf C S\)
+can still transform by a \(GL_2\)-matrix.  Hence the rank-two bundle is the
+right level at which to formulate covariance.
+\end{remark}
+
+\subsection{The \(\eta\eta\) row as rank-two affine forcing}
+\label{subsec:etaeta-row-rank-two-affine-forcing}
+
+In the rank-two formulation, the active Bottleneck-C row is no longer a scalar
+defect by itself.  It is a vector-valued section:
+\[
+E_{\eta\eta}
+=
+-\frac{\nu_{\eta\eta}}{24\pi q^3}(wI+uS)
+\in
+\Gamma(\mathcal F_{\rm red}^{+}).
+\]
+Under a frame change
+\[
+E_j=E_iG_{ij},
+\]
+the coordinate vector of \(wI+uS\) transforms by
+\[
+[w,u]_j^T
+=
+G_{ij}^{-1}[w,u]_i^T.
+\]
+The scalar coefficient
+\[
+-\frac{\nu_{\eta\eta}}{24\pi q^3}
+\]
+is fixed-convention scalar data.  Therefore \(E_{\eta\eta}\) transforms as a
+section of the rank-two fixed-sector bundle, provided the reduced atlas is
+functorial.
+
+This row should not be identified with ordinary curvature of
+\(\nabla^{\mathfrak f}\).  Curvature is antisymmetric in two tangent
+directions:
+\[
+F_{\nabla^{\mathfrak f}}(X,Y)
+=
+[\nabla_X^{\mathfrak f},\nabla_Y^{\mathfrak f}]
+-
+\nabla_{[X,Y]}^{\mathfrak f}.
+\]
+The active row is symmetric in the source directions \(\eta_i,\eta_j\).  It is
+better classified as a symmetric source-Hessian forcing term, or a
+second-fundamental-form component, in the fixed-sector transport equation.
+
+The natural local replacement for scalar Bottleneck-C flatness is therefore an
+affine transport equation of the form
+\[
+\nabla_\kappa^{\mathfrak f}A_7^{\mathfrak f}
+=
+E_{\eta\eta}
++
+E_{\rm lower}.
+\]
+Here \(E_{\rm lower}\) denotes all lower, line, shadow, pure, connection, and
+background/core terms.  The expected decomposition is
+\[
+E_{\rm lower}
+=
+E_{\rm GateA}
++
+E_{\rm GateB}
++
+E_{\rm line}
++
+E_{K_3}
++
+E_{\rm pure}
++
+E_{\rm conn}
++
+E_{\rm bg/core}
++
+E_{K_1}^{\rm comp}.
+\]
+Under the current local ledger,
+\[
+E_{\rm GateA}=0,
+\qquad
+E_{\rm GateB}=0
+\]
+under the accepted Gate A/B hypotheses,
+\[
+E_{\rm conn}=0
+\]
+after passing to the covariant derivative,
+\[
+E_{K_3}=0
+\]
+after fixed-sector projection,
+\[
+E_{\rm pure}=0
+\]
+in the odd two-point germ, and
+\[
+E_{\rm line}\in \mathbf C A_5^{\mathfrak f}.
+\]
+The remaining table dependency is to verify that no additional uncontrolled
+same-grade \(K_1\) source-Hessian companion survives outside the already
+identified \(E_{\eta\eta}\) row.
+
+\begin{remark}[What the affine equation changes]
+\label{rem:what-affine-equation-changes}
+The old scalar Bottleneck-C gate demanded local pointwise vanishing of the
+\(S\)-visible component.  The rank-two equation instead allows the same row to
+be an inhomogeneous forcing term in a vector-valued transport equation.  This
+is a genuine conceptual improvement only if a later global theorem controls
+the forced transport.  If one still demands
+\[
+E_{\eta\eta}=0
+\]
+pointwise, then the rank-two formulation collapses back to the old obstruction
+\[
+\nu_{\eta\eta}=0
+\]
+on a good patch.
+\end{remark}
+
+\subsection{Global affine transport dependency}
+\label{subsec:global-affine-transport-dependency}
+
+Assuming the local affine equation
+\[
+\nabla^{\mathfrak f}A=E
+\]
+is available, parallel transport along a path \(\Gamma:a\to b\) gives
+\[
+A(b)
+=
+U_{a\to b}A(a)
++
+\int_a^b U_{t\to b}E(t)\,dt.
+\]
+For the order-seven fixed-sector section this becomes
+\[
+A_7^{\mathfrak f}(b)
+=
+U_{a\to b}A_7^{\mathfrak f}(a)
++
+\int_a^b
+U_{t\to b}
+\left(
+E_{\eta\eta}+E_{\rm lower}
+\right)(t)\,dt.
+\]
+Thus the local Bottleneck-C obstruction becomes an affine displacement
+problem.
+
+At present no canonical global proof gate for this displacement is available.
+The natural path and boundary candidates have the following status:
+\begin{itemize}
+\item \(\kappa\)-paths are locally natural but have no known endpoint values for
+\(A_7^{\mathfrak f}\).
+\item midpoint paths \(m\mapsto b(m)\) are natural locally, but good-patch
+boundaries are exceptional walls rather than known boundary conditions.
+\item source/core deformation paths are excluded on the reduced base, since
+source/core transfer is not functorial as an ordinary vector-bundle
+transition.
+\item Gram or whitening loops may measure gauge/atlas data rather than zeta
+geometry unless a global atlas theorem is proved.
+\item zero-counting contours are canonical for \(\xi\) or \(\zeta\), but no
+map from those contours into the rank-two fixed-sector base is currently
+constructed.
+\end{itemize}
+
+Nor is the forcing currently exact.  In the fixed-source midpoint calculus, the
+active scalar density satisfies
+\[
+2880Q^{14}\nu_{\eta\eta}
+=
+qAA''
++
+20
+\left(
+\frac{q''}{6}
+-
+\frac{2q^3}{3}
+\right)A^2,
+\qquad
+A=A_2.
+\]
+Integration by parts yields
+\[
+qAA''
++
+20
+\left(
+\frac{q''}{6}
+-
+\frac{2q^3}{3}
+\right)A^2
+=
+\left(qAA'-\frac12 q'A^2\right)'
+-
+q(A')^2
++
+\left(
+\frac{23}{6}q''
+-
+\frac{40}{3}q^3
+\right)A^2.
+\]
+The last two terms are genuine bulk terms.  Therefore the forcing is not
+presently a boundary term in the natural variables.
+
+\begin{remark}[Current global dependency]
+\label{rem:current-global-affine-transport-dependency}
+The rank-two affine equation is currently descriptive rather than
+contradictory.  To turn it into a proof gate one needs one of:
+\begin{enumerate}
+\item canonical boundary values for \(A_7^{\mathfrak f}\);
+\item a canonical path or loop with prescribed affine holonomy;
+\item a path-independent affine displacement theorem;
+\item a projective/scale index theorem derived from the rank-two transport;
+\item a transported finite-core non-concentration theorem for the full
+fixed-sector vector.
+\end{enumerate}
+None of these is presently proved.
+\end{remark}
+
+\subsection{Derived diagnostics: projective, vector-valued, and energy data}
+\label{subsec:derived-diagnostics-projective-vector-energy}
+
+Several objects remain useful as diagnostics, but none currently replaces the
+rank-two affine transport theorem.
+
+First, projectivizing the fixed-sector vector gives
+\[
+\ell_{2r+1}(m)
+=
+[A_{2r+1}^{\mathfrak f}(m)]
+\in
+\mathbf P(\mathfrak f_h(m)).
+\]
+The quotient determinant is exactly projective incidence:
+\[
+D_{2r+1}
+=
+\omega_h(A_{2r+1}^{\mathfrak f},A_5^{\mathfrak f}),
+\]
+and
+\[
+D_{2r+1}=0
+\iff
+\ell_{2r+1}=\ell_5.
+\]
+Thus projective/Maslov/spectral-flow data recover the quotient determinant
+geometry.  They remain incomplete by themselves because pure line anomalies
+\[
+A_{2r+1}^{\mathfrak f}
+=
+\lambda A_5^{\mathfrak f}
+\]
+are projectively invisible but still visible to \(T\) and \(\Phi_K\).  A
+projective index would therefore need to be paired with scale, energy, or the
+full rank-two connection.
+
+Second, the complete local fixed-sector object is the vector-valued odd germ
+\[
+\mathcal A_{\odd}^{\mathfrak f}(s;m)
+=
+\sum_{r\ge0}
+A_{2r+1}^{\mathfrak f}(m)s^{2r+1}
+\in
+\mathfrak f_h(m).
+\]
+It retains all fixed-sector information, preserves componentwise holomorphy
+and Cauchy recovery, and avoids the incompleteness of quotient scalarization.
+However, it is essentially the full fixed-sector version of the split readout.
+It does not by itself prove the required finite-core lower bound
+\[
+\theta(m)\notin
+\mathcal Z_k^{\vec f}\cup\mathcal E_{\rm geom}^{\vec f}
+\Longrightarrow
+\left\|
+P_{\rm fd}^{\vec f}(\theta(m))
++
+J_{\rm fd}^{\vec f}(\theta(m))
+\right\|_\infty
+\ge
+\Lambda_{\vec f}(m,Q).
+\]
+The aligned branch
+\[
+J_{\rm fd}^{\vec f}\approx -P_{\rm fd}^{\vec f}
+\]
+therefore remains a genuine downstream dependency.
+
+Third, one may define fixed-sector energies such as
+\[
+\mathcal E_7
+=
+\|A_7^{\mathfrak f}\|_{\wh}^2
+\]
+or
+\[
+\mathcal E_{\odd}
+=
+\sum_r \omega_r
+\|A_{2r+1}^{\mathfrak f}\|_{\wh}^2.
+\]
+For
+\[
+E_{\eta\eta}
+=
+\gamma(wI+uS),
+\]
+the first variation of \(\mathcal E_7\) contains
+\[
+2\operatorname{Re}\left[
+\gamma\,
+\langle A_7^{\mathfrak f},wI+uS\rangle_{\wh}
+\right],
+\]
+which is sign-indefinite.  The second variation is positive but tautological:
+\[
+2|\gamma|^2\|wI+uS\|_{\wh}^2\ge0.
+\]
+No zero-energy, monotonicity, or endpoint theorem is presently available.
+Thus energy detects the defect but does not yet provide a contradiction.
+
+\begin{remark}[Role of Gate A and Gate B after the architecture audits]
+\label{rem:role-of-gate-a-b-after-audits}
+Gate A and Gate B should be retained as local algebraic lemmas:
+\[
+\text{Gate A: aggregate homogeneous cancellation,}
+\]
+\[
+\text{Gate B: conditional local quotient/fixed-sector algebra through order }7.
+\]
+They simplify the local expansion and help classify lower terms.  They are not
+proof-closing global gates.  The missing theorem is now a global statement
+about rank-two affine transport, vector-valued finite-core non-concentration,
+or a comparable non-scalar invariant.
+\end{remark}
+
+The finite-core problem below should therefore be read in this updated role:
+it is no longer a downstream step after a closed Bottleneck-C gate.  Rather, it
+is one possible global theorem that could make the rank-two/vector-valued
+architecture proof-relevant.  The specific missing input is pointwise sampled
+non-concentration for the relevant fixed-sector vector, not another finite
+determinacy statement.
 
 \subsection{Finite-core sampled vector non-concentration}
 \label{subsec:finite-core-sampled-vector-nonconcentration}
