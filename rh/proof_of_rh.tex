@@ -29860,7 +29860,9 @@ source-linear }Y\text{-middle edge parity.}
 \boxed{
 \text{The local obstruction has sharpened to the odd-background }
 \eta\eta\text{ top row inside }E_{A,Y}^{\mathrm{BC}},
-\text{ led by }\mathcal E^{2}_{\eta\eta;7,0,0}.
+\text{ led by }\mathcal E^{2}_{\eta\eta;7,0,0};
+\text{ the present transform-faithful finite-}s\text{ architecture does not
+currently remove this row.}
 }
 \]
 \[
@@ -29928,10 +29930,28 @@ Thus the local branch is now binary: either prove a zeta-specific identity
 \[
 \nu_{21,7}=0,
 \]
-or add a principled second-order phase-gap correction/counterterm cancelling
-this row.  Endpoint-diagonal source realization, even if proved, removes only
+or supply a genuine physical aggregate \(S\)-coefficient cancellation of the
+row.  Endpoint-diagonal source realization, even if proved, removes only
 endpoint-separation subchannels and does not by itself close this scalar
-\(\Delta\)-Hessian \(\eta\eta\) survivor.
+\(\Delta\)-Hessian \(\eta\eta\) survivor.  The only remaining local rescue is
+a genuine physical aggregate \(S\)-coefficient cancellation, not a formal
+package counterterm.
+\end{remark}
+
+\begin{remark}[Current outcome of the Bottleneck-C repair audits]
+\label{rem:current-outcome-bottleneck-c-repair-audits}
+The subsequent audits below sharpen the status of
+Remark~\ref{rem:current-local-obstruction-etaeta-top-row}.  Replacing the raw
+far-tail source by the full non-core zero source is coherent, but the
+rederived top row has the same obstruction form.  Replacing the scalar local
+readout, quotienting by the \(A_5^{\mathfrak f}\)-line, changing the
+finite-\(s\) carrier, or exact endpoint symmetrization likewise does not remove
+the \(S\)-visible \(\eta\eta\) row while preserving transform faithfulness.
+
+Consequently, within the present transform-faithful finite-\(s\) architecture,
+Bottleneck~C still requires a genuine vanishing of the physical aggregate
+\(S\)-coefficient of the \(\eta\eta\) top row.  No such vanishing theorem is
+presently proved.
 \end{remark}
 
 \section{Current proof state after the local package audits}
@@ -30184,7 +30204,9 @@ Y^{\eta\eta}_{g,0},
 4\le g\le7.
 \]
 
-At present no available symmetry forces
+At present no available symmetry, source-convention rebuild, quotient
+interpretation, transform-faithful invariant, or endpoint-symmetrized
+finite-\(s\) carrier forces
 \[
 E_{A,Y}^{\mathrm{BC}}=0,
 \qquad
@@ -30468,10 +30490,11 @@ new source-jet identity
 \]
 or one proves a full top-row \(S\)-cancellation
 \[
-\sum_{\mathrm{top}\ \eta\eta} f_{\eta\eta}^{\top}=0,
+\sum_{\mathrm{top}\ \eta\eta} f_{\eta\eta}^{\top}=0.
 \]
-or one adds a new second-order phase-gap correction/counterterm cancelling this
-row.  Without one of these inputs, the current corrected package does not close
+The only remaining local rescue is a genuine physical aggregate
+\(S\)-coefficient cancellation, not a formal package counterterm.  Without
+such cancellation, the current corrected package does not close
 Bottleneck~C or the \(T\)-horizontal condition at this row.
 
 \subsection{No-go for a transform-faithful free \(\Theta_\pm\)-normal repair}
@@ -30789,6 +30812,763 @@ current row-level witness of this phenomenon: removing it from a formal septic
 package without changing the physical readout merely transfers the same
 obstruction to the hidden \(T\)-coordinate.
 \end{remark}
+
+\subsection{Source-convention rebuild and persistence of the \(\eta\eta\) row}
+\label{subsec:source-convention-rebuild-etaeta-row}
+
+The preceding obstruction used the tagged omitted-zero tail as the source
+object.  One possible repair is to rebuild the source convention by moving all
+non-core zero atoms into the source.  The least artificial split is
+\[
+q
+=
+q_{\base}^{\new}
++
+G^{\new},
+\]
+where
+\[
+G^{\new}
+:=
+q_{\mathrm{aux},R}+T_{\mathrm{far},R},
+\qquad
+q_{\base}^{\new}
+:=
+q_{\mathrm{core}}+B_{\mathrm{bg}}+E_{\mathrm{est},R}.
+\]
+Thus \(G^{\new}\) remains a zero-source object; it contains the auxiliary
+non-core zero contribution and the far zero tail, but not the smooth background
+or estimation terms.
+
+The affine-subtracted source is
+\[
+r_G(t)
+:=
+G^{\new}(t)-G^{\new}(m)-G^{\new\,\prime}(m)(t-m).
+\]
+Equivalently, the effective baseline in the finite-\(s\) expansion is
+\[
+q_0^{\new}(t)
+:=
+q_{\base}^{\new}(t)
++
+G^{\new}(m)+G^{\new\,\prime}(m)(t-m),
+\]
+so that
+\[
+q(t)=q_0^{\new}(t)+r_G(t),
+\]
+with
+\[
+q_0^{\new}(m)=q(m),
+\qquad
+(q_0^{\new})'(m)=q'(m),
+\qquad
+(q_0^{\new})''(m)=(q_{\base}^{\new})''(m).
+\]
+This affine absorption is necessary: otherwise the source would contain value
+and linear jets and would reopen lower source-grade gates.
+
+\begin{remark}[Admissibility conditions for the rebuilt split]
+\label{rem:rebuilt-source-split-admissibility-conditions}
+The split
+\[
+G^{\new}=q_{\mathrm{aux},R}+T_{\mathrm{far},R}
+\]
+is conditionally compatible with the already-closed lower gates under the
+following hypotheses:
+\begin{enumerate}
+\item \(G^{\new}\) is kept as a tagged zero-source sum through the finite-\(s\)
+calculation, not collapsed prematurely into an unlabelled aggregate;
+\item \(r_G(m)=r_G'(m)=0\) is imposed after the new split;
+\item \(q_{\base}^{\new}\) is used consistently in \(q_\pm,\Delta_0,d_\pm,
+e_\pm,g_\pm,\eta\);
+\item the \(q_{\mathrm{aux},R}\)-atoms satisfy the same endpoint reflection and
+source-grade conventions as the \(T_{\mathrm{far},R}\)-atoms;
+\item the \(q_{\mathrm{aux},R}\)-atoms have compatible scalar-grade
+normalization, or else the affected coefficient tables must be regraded;
+\item no \(B_{\mathrm{bg}}\) or \(E_{\mathrm{est},R}\) term is treated as a
+zero-source variable.
+\end{enumerate}
+Under these hypotheses the rebuild does not introduce value or linear source
+jets before the Bottleneck-C \(\eta\eta\) row.  By contrast, the more radical
+choices
+\[
+G=q-q_{\mathrm{core}}
+\quad\text{or}\quad
+G=B_{\mathrm{bg}}+T_{\mathrm{far},R}+E_{\mathrm{est},R}
+\]
+mix zero atoms with background or error terms.  Those choices introduce
+background--source and error--source products and would require a fresh
+Gate~A/Gate~B analysis.
+\end{remark}
+
+For a tagged exterior-zero source atom \(\alpha\) in \(G^{\new}\), write
+\[
+r_\alpha(t)
+=
+g_\alpha(t)-g_\alpha(m)-g_\alpha'(m)(t-m).
+\]
+Define
+\[
+d_{\alpha,\pm}^{\new}=r_\alpha(t_\pm),
+\qquad
+e_{\alpha,\pm}^{\new}=r_\alpha'(t_\pm),
+\qquad
+g_{\alpha,\pm}^{\new}=r_\alpha''(t_\pm),
+\]
+and let \(\eta_\alpha^{\new}\) be the corresponding phase-gap source variable.
+For two tagged source atoms \(i,j\), the finite-\(s\) substitutions become
+\[
+q_\pm
+=
+q_{0,\pm}^{\new}
++
+\tau_i a_i d_{i,\pm}^{\new}
++
+\tau_j a_j d_{j,\pm}^{\new},
+\]
+\[
+q'_\pm
+=
+(q_0^{\new})'_\pm
++
+\tau_i a_i e_{i,\pm}^{\new}
++
+\tau_j a_j e_{j,\pm}^{\new},
+\]
+\[
+q''_\pm
+=
+(q_0^{\new})''_\pm
++
+\tau_i a_i g_{i,\pm}^{\new}
++
+\tau_j a_j g_{j,\pm}^{\new},
+\]
+and
+\[
+\Delta
+=
+\Delta_0^{\new}
++
+\tau_i a_i\eta_i^{\new}
++
+\tau_j a_j\eta_j^{\new}.
+\]
+
+The lower-left off-diagonal channel is still
+\[
+N_{21}
+=
+-\frac{\sin\Delta+q_-s\cos\Delta}{s^2}.
+\]
+Therefore its pure \(\eta_i\eta_j\) second phase-gap variation is
+\[
+\partial_\Delta^2N_{21}\big|_{\Delta=\Delta_0^{\new}}
+=
+\frac{\sin\Delta_0^{\new}}{s^2}
++
+\frac{q_{0,-}^{\new}\cos\Delta_0^{\new}}{s}.
+\]
+Thus the rebuilt top-row scalar is
+\[
+\nu_{21,7}^{\new,ij}
+:=
+[z^7]\left[
+\left(
+\frac{\sin\Delta_0^{\new}}{s^2}
++
+\frac{q_{0,-}^{\new}\cos\Delta_0^{\new}}{s}
+\right)
+\eta_i^{\new}\eta_j^{\new}
+\right].
+\]
+
+Let \(\rho_{\alpha,2}^{\new}\) and \(\rho_{\alpha,4}^{\new}\) be the midpoint
+source coefficients of \(r_\alpha\) in the same normalization as before.  Then
+the rederived pair coefficient has the same form as the old obstruction:
+\[
+\boxed{
+\nu_{21,7}^{\new,ij}
+=
+\frac{1}{Q^{14}}
+\left[
+\frac{q_0^{\new}}{480}
+\left(
+\rho_{i,2}^{\new}\rho_{j,4}^{\new}
++
+\rho_{i,4}^{\new}\rho_{j,2}^{\new}
+\right)
++
+\frac{1}{144}
+\left(
+\frac{(q_0^{\new})''}{6}
+-
+\frac{2(q_0^{\new})^3}{3}
+\right)
+\rho_{i,2}^{\new}\rho_{j,2}^{\new}
+\right].
+}
+\]
+Hence the source-convention rebuild does not algebraically kill the top row.
+
+Aggregating over the full non-core zero source, define
+\[
+A_2^{\new}
+:=
+\sum_{\alpha\in\mathcal I_{\mathrm{ext}}^{\new}}
+w_\alpha\rho_{\alpha,2}^{\new}
+=
+\frac{(G^{\new})''(m)}{2},
+\]
+and
+\[
+A_4^{\new}
+:=
+\sum_{\alpha\in\mathcal I_{\mathrm{ext}}^{\new}}
+w_\alpha\rho_{\alpha,4}^{\new}
+=
+\frac{(G^{\new})^{(4)}(m)}{24}.
+\]
+Then
+\[
+\boxed{
+\nu_{21,7}^{\new,\mathrm{agg}}
+=
+\frac{1}{Q^{14}}
+\left[
+\frac{q_0^{\new}}{240}A_2^{\new}A_4^{\new}
++
+\frac{1}{144}
+\left(
+\frac{(q_0^{\new})''}{6}
+-
+\frac{2(q_0^{\new})^3}{3}
+\right)
+(A_2^{\new})^2
+\right].
+}
+\]
+
+With
+\[
+W_{+,0}^{\new}
+=
+\begin{pmatrix}
+u^{\new}&w^{\new}\\
+w^{\new}&v^{\new}
+\end{pmatrix},
+\]
+the corresponding fixed-sector row is
+\[
+\mathcal E_{\eta\eta;7,0,0}^{2,\new}
+=
+-\frac{\nu_{21,7}^{\new}}{24\pi(q_{\wh}^{\new})^3}
+\left(
+w^{\new}I+u^{\new}S
+\right),
+\]
+so
+\[
+f_{\eta\eta}^{\new,\top}
+=
+-\frac{u^{\new}}{24\pi(q_{\wh}^{\new})^3}
+\nu_{21,7}^{\new}.
+\]
+Consequently, on a good patch with \(u^{\new}q_{\wh}^{\new}\ne0\), physical
+Bottleneck~C closure still requires
+\[
+\nu_{21,7}^{\new,\mathrm{agg}}=0.
+\]
+
+\begin{remark}[Outcome of the source-convention rebuild]
+\label{rem:outcome-source-convention-rebuild}
+The split
+\[
+G^{\new}=q_{\mathrm{aux},R}+T_{\mathrm{far},R}
+\]
+is cleaner than the raw far-tail source convention because all non-core zero
+atoms are placed on the source side.  Nevertheless, the rederived
+\(\eta\eta\) top row has the same obstruction form, with
+\[
+q_0,\ q_0'',\ A_2,\ A_4
+\]
+replaced by
+\[
+q_0^{\new},\ (q_0^{\new})'',\ A_2^{\new},\ A_4^{\new}.
+\]
+Thus the rebuild merely shifts the needed cancellation theorem to the full
+non-core zero complement:
+\[
+\frac{q_0^{\new}}{240}A_2^{\new}A_4^{\new}
++
+\frac{1}{144}
+\left(
+\frac{(q_0^{\new})''}{6}
+-
+\frac{2(q_0^{\new})^3}{3}
+\right)
+(A_2^{\new})^2
+=
+0.
+\]
+If \(A_2^{\new}\ne0\), this is equivalently
+\[
+\frac{A_4^{\new}}{A_2^{\new}}
+=
+\frac{10(q_0^{\new})^2}{9}
+-
+\frac{5(q_0^{\new})''}{18q_0^{\new}}.
+\]
+No such global zero-complement identity is presently proved.
+\end{remark}
+
+\subsection{Invariant and quotient no-go for the \(S\)-visible defect}
+\label{subsec:invariant-quotient-no-go-s-visible-defect}
+
+The source rebuild still leaves a physical \(S\)-visible defect.  One might
+therefore ask whether replacing the local invariant or quotienting the fixed
+sector can make this defect irrelevant.  This subsection records the negative
+answer.
+
+Let
+\[
+E=eI+fS
+\]
+be a Bottleneck-C fixed-sector residual.  The current physical readout has
+\[
+\Phi_K(I)=0,\qquad \Phi_K(S)=2,
+\]
+so
+\[
+\Phi_K(E)=2f.
+\]
+The hidden-state slope is
+\[
+\partial_\kappa T=-a_1^2\frac{f}{c}.
+\]
+
+\begin{proposition}[Local invariant no-go]
+\label{prop:local-invariant-no-go-bc}
+Let \(\mathcal J\) be a smooth local invariant or readout defined near the
+exceptional divisor.  Suppose \(\mathcal J\) is transform-faithful in the sense
+that its first variation determines the physical \(T\)-direction.  Then
+\[
+D\mathcal J[S]\ne0.
+\]
+Consequently, whenever the Bottleneck-C defect has \(f\ne0\), the first
+exceptional-divisor slope of \(\mathcal J\) contains a nonzero contribution
+from the same \(S\)-component.  Thus replacing \(\Phi_K\) by
+\(\mathcal J\) does not remove the \(\eta\eta\) obstruction.
+
+Conversely, if
+\[
+D\mathcal J[S]=0,
+\]
+then \(\mathcal J\) may hide the \(\eta\eta\) row at first order, but it cannot
+reconstruct or control the physical hidden-state slope
+\(\partial_\kappa T\).  Such a readout is not a valid Bottleneck-C replacement
+unless an independent theorem proves that \(T\) is pure gauge.
+\end{proposition}
+
+\begin{proof}
+At the exceptional divisor,
+\[
+\partial_\kappa\mathcal J
+=
+D\mathcal J[E]
+=
+D\mathcal J[eI+fS].
+\]
+If \(D\mathcal J[S]\ne0\), then the \(fS\)-component contributes to
+\(\partial_\kappa\mathcal J\).  After any normalization that removes scalar
+\(I\)-data, the \(S\)-term remains visible.  If \(D\mathcal J[S]=0\), then
+\(\mathcal J\) cannot distinguish \(eI\) from \(eI+\varepsilon S\) to first
+order.  But this is precisely the distinction measured by
+\[
+\partial_\kappa T=-a_1^2 f/c.
+\]
+Thus \(D\mathcal J[S]=0\) loses the physical \(T\)-direction, while
+\(D\mathcal J[S]\ne0\) inherits the obstruction.
+\end{proof}
+
+\begin{remark}[Examples of non-faithful and faithful invariants]
+\label{rem:examples-local-invariant-no-go-bc}
+Trace, determinant to first order at the scalar merger, unordered conjugacy
+class, and symplectic area are blind to \(f\) at first order.  They hide the
+bad row only by discarding the oriented \(S\)-direction.  Oriented eigenvalue
+ratios, oriented projective cross-ratios, and oriented curvature or
+Schwarzian-type readouts are sensitive to \(f\), and therefore inherit the
+same obstruction.
+\end{remark}
+
+Next consider the quotient line generated by
+\[
+A_5^{\mathfrak f}=u_5I+v_5S.
+\]
+The quotient determinant coordinate is
+\[
+\Delta_7
+=
+u_7v_5-u_5v_7.
+\]
+A residual \(E=eI+fS\) changes this coordinate by
+\[
+\omega_h(E,A_5^{\mathfrak f})=ev_5-u_5f.
+\]
+Thus the quotient condition is
+\[
+ev_5-u_5f=0.
+\]
+
+\begin{proposition}[Quotient invisibility is not transform invisibility]
+\label{prop:quotient-not-transform-invisibility-bc}
+Assume \(v_5\ne0\).  The quotient condition
+\[
+ev_5-u_5f=0
+\]
+does not imply the transform-safe condition \(f=0\).  In particular,
+\[
+E=\chi A_5^{\mathfrak f}
+\]
+is invisible to the quotient determinant, but
+\[
+\Phi_K(E)=2\chi v_5
+\]
+and
+\[
+T\mapsto T+\chi\frac{v_5}{c}.
+\]
+Therefore the quotient
+\[
+\mathfrak f_h/\mathbf C A_5^{\mathfrak f}
+\]
+is a valid moduli object for mixed four-point scalar exits, but not for the
+full Bottleneck-C physical transform state.
+\end{proposition}
+
+\begin{proof}
+If \(E=\chi A_5^{\mathfrak f}\), then
+\[
+E=\chi u_5I+\chi v_5S,
+\]
+so
+\[
+\omega_h(E,A_5^{\mathfrak f})
+=
+(\chi u_5)v_5-u_5(\chi v_5)
+=
+0.
+\]
+However
+\[
+\Phi_K(E)=2\chi v_5.
+\]
+On a \(v_5\ne0\) patch this is nonzero for \(\chi\ne0\).  The hidden coordinate
+changes by
+\[
+T=\frac{v_7}{c}
+\quad\mapsto\quad
+T+\chi\frac{v_5}{c}.
+\]
+Thus the quotient identifies states with different \(\Phi_K\)-visible
+transform data.
+\end{proof}
+
+\begin{remark}[Layer separation]
+\label{rem:quotient-layer-separation-bc}
+The quotient determinant layer and the physical transform layer see different
+functionals:
+\[
+\omega_h(E,A_5^{\mathfrak f})=ev_5-u_5f,
+\qquad
+\Phi_K(E)=2f.
+\]
+The kernel of the former is not contained in the kernel of the latter.  Hence
+quotient-horizontal Bottleneck~C can close the mixed four-point scalar-exit
+branch while still leaking in the physical \(T\)-coordinate.
+\end{remark}
+
+\subsection{Finite-\(s\) carrier and endpoint-symmetrization no-go}
+\label{subsec:finite-s-carrier-endpoint-symmetrization-no-go}
+
+The remaining possible repair is to alter the finite-\(s\) carrier before
+projection.  This also fails inside the present transform-faithful framework.
+
+Write
+\[
+N_{12}
+=
+\frac{n_+}{s^2},
+\qquad
+n_+
+=
+\sin\Delta+q_+s\cos\Delta,
+\]
+and
+\[
+N_{21}
+=
+-\frac{n_-}{s^2},
+\qquad
+n_-
+=
+\sin\Delta+q_-s\cos\Delta.
+\]
+For a pure \(\eta_i\eta_j\) source variation, the relevant variation is through
+\(\Delta\).  Holding \(q_\pm\) fixed in this Hessian row,
+\[
+\partial_\Delta n_\pm
+=
+\cos\Delta-q_\pm s\sin\Delta,
+\qquad
+\partial_\Delta^2 n_\pm
+=
+-\sin\Delta-q_\pm s\cos\Delta
+=
+-n_\pm.
+\]
+Therefore
+\[
+\partial_\Delta^2N_{12}
+=
+-\frac{\sin\Delta}{s^2}
+-\frac{q_+\cos\Delta}{s},
+\]
+whereas
+\[
+\partial_\Delta^2N_{21}
+=
+\frac{\sin\Delta}{s^2}
++
+\frac{q_-\cos\Delta}{s}.
+\]
+These are exact finite-\(s\) identities, not artifacts of Taylor truncation.
+
+For a general linear endpoint carrier
+\[
+C_{a,b}:=aN_{12}+bN_{21},
+\]
+one obtains
+\[
+\partial_\Delta^2 C_{a,b}
+=
+\frac{(b-a)\sin\Delta}{s^2}
++
+\frac{(bq_- - aq_+)\cos\Delta}{s}.
+\]
+Thus identical cancellation requires
+\[
+b-a=0,
+\qquad
+bq_- - aq_+=0.
+\]
+For a nonzero carrier this forces \(q_-=q_+\), which is not a generic
+finite-\(s\) identity.
+
+The common endpoint combinations illustrate the obstruction:
+\[
+N_{12}+N_{21}
+=
+\frac{(q_+-q_-)\cos\Delta}{s},
+\]
+so
+\[
+\partial_\Delta^2(N_{12}+N_{21})
+=
+-\frac{(q_+-q_-)\cos\Delta}{s}.
+\]
+This cancels the \(\sin\Delta/s^2\) part but leaves the endpoint-gradient
+term.  Similarly,
+\[
+q_+N_{21}+q_-N_{12}
+=
+\frac{(q_- - q_+)\sin\Delta}{s^2},
+\]
+so
+\[
+\partial_\Delta^2(q_+N_{21}+q_-N_{12})
+=
+\frac{(q_+ - q_-)\sin\Delta}{s^2}.
+\]
+This cancels the \(q_\pm\cos\Delta/s\) part but leaves the phase-gap term.
+Endpoint balancing can remove one component of the Hessian, but not both.
+
+At the matrix level, define
+\[
+B_\pm
+:=
+\frac{\sin\Delta}{s^2}
++
+\frac{q_\pm\cos\Delta}{s}.
+\]
+The off-diagonal second-Hessian matrix is
+\[
+H_{\eta\eta}
+=
+\begin{pmatrix}
+0&-B_+\\
+B_-&0
+\end{pmatrix}.
+\]
+Writing
+\[
+J=
+\begin{pmatrix}
+0&-1\\
+1&0
+\end{pmatrix},
+\qquad
+X=
+\begin{pmatrix}
+0&1\\
+1&0
+\end{pmatrix},
+\]
+one has
+\[
+H_{\eta\eta}=AJ+DX,
+\]
+where
+\[
+A=\frac{B_++B_-}{2}
+=
+\frac{\sin\Delta}{s^2}
++
+\frac{(q_++q_-)\cos\Delta}{2s},
+\]
+and
+\[
+D=\frac{B_- - B_+}{2}
+=
+\frac{(q_- - q_+)\cos\Delta}{2s}.
+\]
+Neither \(A\) nor \(D\) is generically zero.  The skew part \(AJ\) is the
+endpoint-average obstruction, while the symmetric part \(DX\) removes the
+\(\sin\Delta/s^2\) term but retains endpoint-gradient data.
+
+The active left whitening coefficient is
+\[
+\Lambda^-_{2,0}
+=
+-\frac{1}{24\pi q^3}E_{22}.
+\]
+Since
+\[
+E_{22}J=E_{21},
+\qquad
+E_{22}X=E_{21},
+\]
+both endpoint-skew and endpoint-symmetric Hessian pieces feed the same leading
+row after left multiplication.  Thus
+\[
+\Lambda^-_{2,0}(AJ)W_{+,0}
+=
+-\frac{A}{24\pi q^3}E_{21}W_{+,0},
+\]
+and
+\[
+\Lambda^-_{2,0}(DX)W_{+,0}
+=
+-\frac{D}{24\pi q^3}E_{21}W_{+,0}.
+\]
+After fixed-sector symmetrization,
+\[
+\pi_{\mathfrak f}\operatorname{Sym}(E_{21}W_{+,0})
+=
+wI+uS,
+\]
+up to the same normalization convention used in
+Subsection~\ref{subsec:concrete-odd-etaeta-top-row-obstruction}.  Hence any
+nonzero endpoint-symmetrized coefficient remains \(S\)-visible on a patch with
+\(u\ne0\).
+
+\begin{proposition}[Endpoint-symmetrized finite-\(s\) carrier no-go]
+\label{prop:endpoint-symmetrized-carrier-no-go}
+Let a finite-\(s\) endpoint carrier be formed from \(N_{12},N_{21}\) by smooth
+endpoint-symmetric linear combinations and endpoint or Gram normalizations
+that do not explicitly depend on the source variation direction.  If the
+carrier remains transform-faithful, then its pure \(\eta_i\eta_j\) second
+\(\Delta\)-Hessian has a nonzero lower-row component.  After the active
+left-whitening slot \(\Lambda^-_{2,0}\), this produces a fixed-sector term
+\[
+-\frac{\mu_{\eta\eta}}{24\pi q^3}(wI+uS)
+\]
+for some endpoint coefficient \(\mu_{\eta\eta}\).  In particular, unless
+\(\mu_{\eta\eta}\) is forced to vanish by a genuine zeta identity, the
+physical \(S\)-coefficient
+\[
+f_{\eta\eta}
+=
+-\frac{u}{24\pi q^3}\mu_{\eta\eta}
+\]
+survives.
+\end{proposition}
+
+\begin{remark}[Nonlinear carriers do not repair the obstruction]
+\label{rem:nonlinear-carriers-do-not-repair-etaeta-row}
+Ratio, logarithmic, determinant-normalized, and phase-coordinate carriers do
+not supply a transform-faithful repair.  A ratio or logarithmic carrier
+normalizes the Hessian but leaves a nonzero endpoint-curvature term.  A phase
+coordinate such as \(\Delta\) is affine in the source and therefore has zero
+second \(\Delta\)-Hessian, but reconstructing the physical finite-\(s\) kernel
+requires applying
+\[
+\Delta\mapsto \sin\Delta+q_\pm s\cos\Delta,
+\]
+whose second derivative is exactly the missing Hessian.  Thus the bad row is
+either visible in the carrier, reintroduced by reconstruction, or hidden only
+by losing the physical \(S\)-visible transform readout.
+\end{remark}
+
+\subsection{Local Bottleneck-C ledger after repair attempts}
+\label{subsec:local-bottleneck-c-ledger-after-repairs}
+
+Combining
+Subsections~\ref{subsec:source-convention-rebuild-etaeta-row},
+\ref{subsec:invariant-quotient-no-go-s-visible-defect}, and
+\ref{subsec:finite-s-carrier-endpoint-symmetrization-no-go}, the present local
+ledger is as follows.
+
+Changing the source convention from the raw far tail to the full non-core
+zero source
+\[
+G^{\new}=q_{\mathrm{aux},R}+T_{\mathrm{far},R}
+\]
+is coherent under the stated tagging and grading hypotheses, but it reproduces
+the same \(\eta\eta\) top-row obstruction form.  Replacing the scalar local
+invariant hides the defect only if it discards the physical \(T\)-direction.
+Quotienting by \(\mathbf C A_5^{\mathfrak f}\) is legitimate for mixed
+four-point scalar exits but not for the full transform state.  Finally,
+endpoint symmetrization and alternative finite-\(s\) carriers either preserve
+the second-\(\Delta\) Hessian, reintroduce it during reconstruction, or lose
+transform faithfulness.
+
+Therefore, within the present transform-faithful finite-\(s\) off-diagonal
+kernel architecture, Bottleneck~C closes only if the physical aggregate
+\(S\)-visible coefficient of the \(\eta\eta\) top row vanishes.  In the rebuilt
+full non-core zero-source convention this means
+\[
+\nu_{21,7}^{\new,\mathrm{agg}}=0,
+\]
+or equivalently
+\[
+\frac{q_0^{\new}}{240}A_2^{\new}A_4^{\new}
++
+\frac{1}{144}
+\left(
+\frac{(q_0^{\new})''}{6}
+-
+\frac{2(q_0^{\new})^3}{3}
+\right)
+(A_2^{\new})^2
+=
+0.
+\]
+No currently proved identity supplies this vanishing.  Thus the present local
+route remains open-negative: it requires a new global zero-source cancellation
+theorem, or else the Bottleneck-C architecture fails at this row.
 
 \subsection{Finite-core sampled vector non-concentration}
 \label{subsec:finite-core-sampled-vector-nonconcentration}
