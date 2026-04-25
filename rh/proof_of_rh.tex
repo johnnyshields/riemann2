@@ -13464,9 +13464,9 @@ divisibility needed before amplitude normalization and before the lower
 package table \(Z_j[M]\) is formed.
 
 \item \textbf{Connection correction subtarget.}
-After Gate~B, compute the moving line coefficients
+After Gate~B, compute the transported moving line coefficients
 \[
-A_i=[(h-m)^i]A_5^{\mathfrak f}(h),
+A_i=[(h-m)^i]\tau_{h\to m}A_5^{\mathfrak f}(h),
 \qquad
 1\le i\le7,
 \]
@@ -13527,6 +13527,23 @@ Thus the remaining role of the old notes is as guardrails: do not prove
 Gate~B by post-edge quotient compatibility, do not demand
 family-by-family vanishing, and do not truncate the source tower before
 differentiating.
+\end{remark}
+
+\begin{remark}[The old \(d\ge4\) residual partition list is superseded]
+\label{rem:old-dge4-residual-list-superseded}
+Earlier audits listed positive-grade residual partitions such as
+\[
+(1,1,1,4),\quad (1,1,2,3),\quad (1,2,2,2),
+\]
+\[
+(1,1,1,1,3),\quad (1,1,1,2,2),\quad
+(1,1,1,1,1,2),\quad (1,1,1,1,1,1,1)
+\]
+as live \(d\ge4\) transfer-filtration candidates.  Those lists are now
+superseded by the odd total-grade subset-complement cancellation and the
+moving source-frame telescoping theorem.  They should be used only as
+historical diagnostics for checking that the aggregate proof has included
+all labelled placements, not as remaining theorem obligations.
 \end{remark}
 
 \begin{remark}[Lower-shadow sectors and zero-padding after Gate B]
@@ -13605,6 +13622,35 @@ not by themselves prove the final finite-core contradiction or the
 package-to-\(\Xi_\zeta^{(N)}\) hidden-state theorem.  Any residual
 \(\Phi_K\)-visible affine-lift or higher odd-block state remains a separate
 package-to-transform issue.
+\end{remark}
+
+\begin{remark}[Scope after Gate B]
+\label{rem:scope-after-gate-b}
+Gate~B supplies the raw \(\delta^2\)-edge divisibility needed to construct
+the order-\(7\) edge-normalized corrected package.  It does not by itself
+prove the final quotient-gauge theorem, diagonal merger,
+\(\kappa\)-independence, the connection cancellations for \(M_A,M_C\), or
+the package-to-\(\Xi_\zeta^{(N)}\) bridge.
+
+The next package-level objects are:
+\[
+Z_j[M_A],\quad Z_j[M_C],\qquad 0\le j\le6,
+\]
+together with the transported moving-line coefficients
+\[
+A_i=[\epsilon^i]\tau_{h\to m}A_5^{\mathfrak f}(h),
+\qquad 1\le i\le7.
+\]
+The next identities are therefore
+\[
+R_7^{(A)}+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M_A],A_i)=0,
+\]
+and
+\[
+R_7^{(C)}+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M_C],A_i)=0.
+\]
+These are downstream connection identities, not replacements for the raw
+Gate~B edge-divisibility theorem.
 \end{remark}
 
 \begin{remark}[Shortcut routes excluded for the corrected package theorem]
@@ -28727,7 +28773,85 @@ residual.
 
 If any one of these inputs is removed, the statement should be demoted
 back to a conditional Gate~B target rather than used as a proved package
-construction.
+construction.  Thus the corollary should be cited as a conditional raw
+edge-divisibility theorem: it closes Gate~B for the corrected package only
+after the listed parity, source-frame, and full-tower-before-truncation
+hypotheses have been identified with the actual source model.
+\end{remark}
+
+\begin{remark}[Negative findings from the Gate A/Gate B audit]
+\label{rem:negative-findings-gate-a-gate-b-audit}
+The Gate A/Gate B audit rules out several tempting shortcuts.
+
+\begin{enumerate}
+\item \textbf{Placement-level vanishing is false.}
+Individual transfer placements can have nonzero fixed-sector components.
+The cancellation is only after labelled subset-complement aggregation and
+transpose-invariant fixed-sector projection.
+
+\item \textbf{Family-by-family gauge is too strong.}
+The package target is aggregate fixed-sector cancellation or quotient
+invisibility.  It does not require each Fr\'echet family to be separately
+proportional to \(A_5^{\mathfrak f}\).
+
+\item \textbf{Post-edge quotient compatibility is too late.}
+A statement such as
+\[
+Q_{7,m}^q(C)=Q_{7,m}^q(\Pi_{1,1}C)
+\]
+cannot be used to prove raw edge-divisibility unless it is reformulated at
+the raw edge layer.
+
+\item \textbf{Determinant scalarization is only a good-patch coordinate.}
+The quotient object is
+\[
+\mathfrak f_m/\mathbf C A_5^{\mathfrak f}(m).
+\]
+The scalar determinant test is a coordinate on a nondegenerate patch, not
+the definition of the quotient.
+
+\item \textbf{The matrix-output \(M^{[5]}\) convention is quarantined.}
+The active proof uses homogeneous scalar grades.  Replacing the grade-five
+source by an ordinary matrix-output order-\(5\) coefficient reopens the
+\(Y\)-slot families and requires a separate no-double-counting theorem
+against grades \(0,2,4\).
+
+\item \textbf{The \(Z_j\)-table is post-Gate-B, not the Gate-B
+obstruction.} After raw edge-divisibility, \(Z_j[M]\) is the next
+pre-trivialization table for the connection calculation.  It is not a
+missing proof of the \(\delta^2\)-edge law itself.
+\end{enumerate}
+\end{remark}
+
+\begin{remark}[Mechanism of the Gate B cancellation]
+\label{rem:mechanism-gate-b-cancellation}
+The Gate~B cancellation is not a brute-force finite coefficient accident.
+It is the combination of three structural symmetries: odd total-grade
+subset-complement cancellation for amplitude terms, moving Taylor-frame
+telescoping for source-motion lower terms, and \(2\)-jet source-frame
+normalization for the affine boundary.  These mechanisms act before
+\(\Phi_K\), before determinant scalarization, and before quotient
+extraction.  The resulting raw edge-divisibility is exactly the input
+needed to construct the normalized order-\(7\) corrected package.
+\end{remark}
+
+\begin{remark}[What remains attackable in Gate B]
+\label{rem:what-remains-attackable-in-gate-b}
+After Corollary~\ref{cor:gate-b-raw-edge-divisibility-order-seven}, the
+leading cubic inventory, the \(d\ge4\) amplitude terms, and the raw
+source-motion lower-shadow terms should not be reopened as independent
+obstructions unless one of the stated hypotheses is rejected.  A valid
+attack on Gate~B must now target one of the hypotheses:
+\[
+\text{all-subset midpoint parity},\quad
+\text{leading \(Y\)-middle parity},\quad
+\text{moving source-frame telescoping},\quad
+\text{affine boundary removal},\quad
+\text{full-tower-before-truncation}.
+\]
+In particular, a nonzero unsymmetrized transfer placement is not a Gate~B
+counterexample unless it survives the labelled aggregate and the
+source-frame telescoping procedure.
 \end{remark}
 
 \begin{remark}[Gate A is not Gate B]
@@ -28841,6 +28965,25 @@ q_{\mathrm{conn},7}[M]
 \]
 must use \(Z_j[M]\), not post-trivialization \(B_j[M]\), or the
 connection is counted twice.
+\end{remark}
+
+\begin{remark}[Next object after Gate B]
+\label{rem:next-object-after-gate-b}
+After Gate~B, the next finite table is not a raw seven-family coefficient
+table.  It is the pre-trivialization \(\delta^2\)-edge table
+\[
+Z_j[M]
+=
+-[\epsilon^j\delta^2M]\,
+a_1^{-1}
+\tau_{h\to m}\pi_{\mathfrak f_h}[z^{\le7}]
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}.
+\]
+This table is defined only after raw edge-divisibility makes the
+\(\delta^{-2}\)-normalized package holomorphic.  The finite
+Fr\'echet/Sylvester calculus supplies the raw coefficient infrastructure
+for computing \(Z_j[M]\); it does not replace the edge-divisibility
+theorem.
 \end{remark}
 
 \subsection{Midpoint parity}
@@ -29028,9 +29171,18 @@ the shorthand \(\mathrm{raw}\) labels the pre-projection cross-effect and
 \(\mathrm{amp}\) labels the amplitude-normalized package; these are not
 new macros, only superscripts.
 
-The definitions in this section are conditional package definitions.  They
-are not a proof of edge divisibility, source-bidegree compatibility, or
-quotient gauge.  Those obligations are listed in
+The definitions in this section are package definitions.  Raw
+edge-divisibility through ordinary order \(7\) is supplied by
+Corollary~\ref{cor:gate-b-raw-edge-divisibility-order-seven}, conditional on
+the stated source-frame, parity, and boundary hypotheses.  These definitions
+do not by themselves prove the later quotient-gauge theorem
+\[
+B_7^{\mathfrak f}(C_{\mathcal W}^{\corr})
+\in
+\mathbf C A_5^{\mathfrak f}(m),
+\]
+nor do they prove the post-Gate-B connection cancellation identities for
+\(M_A\) and \(M_C\).  Those obligations are listed in
 Remark~\ref{rem:definition-level-material-and-theorem-obligations}.
 
 \begin{remark}[Naming convention for UV-026]
@@ -29309,20 +29461,43 @@ quotient-inconclusive, not evidence for or against the quotient-gauge
 theorem.
 \end{remark}
 
-\begin{remark}[Two coefficient indices]
+\begin{remark}[Two coefficient indices and two lower tables]
 \label{rem:two-coefficient-indices-package}
-The subscript \(7\) in \(B_7^{\mathfrak f}\) denotes the ordinary \(z\)-order
-coefficient extracted from the fixed-target package polynomial
-\(B_{\mathrm{pkg}}^{\mathfrak f}(h;z)\).  By contrast, the index \(j\) in
-\(B_j[M]\) denotes the coefficient of \((h-m)^j\) in the moving midpoint
-expansion of a fixed residual monomial \(M\), after the ordinary \(z^7\)
-coefficient has been extracted:
+There are two independent indexing conventions in the corrected package.
+
+First, the subscript \(7\) in
 \[
-B_j[M]=[z^7][(h-m)^jM]\,B_{\mathrm{pkg}}^{\mathfrak f}(h;z).
+B_7^{\mathfrak f}
 \]
-These are different indices.  The connection correction uses lower moving
-coefficients \(B_{7-i}[M]\) to correct the quotient line at ordinary order
-\(7\).
+denotes the ordinary \(z\)-order coefficient extracted from the fixed-target
+package polynomial.
+
+Second, the subscript \(j\) in a lower moving table denotes the coefficient
+of \(\epsilon^j=(h-m)^j\) after the ordinary \(z^7\) coefficient has been
+selected.
+
+There are also two lower tables.  The pre-trivialization table is
+\[
+Z_j[M]
+=
+-[z^7][\epsilon^j\delta^2M]\,
+a_1^{-1}\tau_{h\to m}
+\pi_{\mathfrak f_h}
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}},
+\]
+and it is the table that enters the moving-line connection formula:
+\[
+q_{\mathrm{conn},7}[M]
+=
+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M],A_i).
+\]
+The post-trivialization table is
+\[
+B_j[M]=[z^7][\epsilon^jM]\,B_{\mathrm{pkg}}^{\mathfrak f}(h;z),
+\]
+after applying the representative-level midpoint trivialization.  It records
+the chosen final representative, but it must not be inserted into the
+pre-trivialization connection formula.
 \end{remark}
 
 \begin{definition}[Lower moving package coefficients and connection data]
@@ -29372,12 +29547,24 @@ they must not be inserted into the moving-line connection formula, because
 the trivialization has already transported along the moving quotient
 line.
 
-Let
+For the connection formula, all moving-line coefficients are first
+transported to the fixed target \(\mathfrak f_m\).  Thus set
 \[
-A_5^{\mathfrak f}(h)=\sum_{i\ge0}\epsilon^iA_i,
+A_h^m:=\tau_{h\to m}A_5^{\mathfrak f}(h),
 \qquad
-A_i=u_i^AI+v_i^AS.
+A_h^m=\sum_{i\ge0}\epsilon^iA_i,
+\qquad
+A_i=u_i^AI+v_i^AS\in\mathfrak f_m.
 \]
+Equivalently, every occurrence of
+\[
+A_i=[\epsilon^i]A_5^{\mathfrak f}(h)
+\]
+inside \(\omega_m(\,\cdot\,,A_i)\) means
+\[
+A_i=[\epsilon^i]\tau_{h\to m}A_5^{\mathfrak f}(h).
+\]
+
 If
 \[
 Z_j[M]=u_j^Z[M]I+v_j^Z[M]S,
@@ -29412,21 +29599,40 @@ q_{\mathrm{conn},7}[M]
 
 \begin{remark}[Representative choices and lower coefficient tables]
 \label{rem:representative-choices-lower-coefficient-tables}
-The lower coefficients \(B_j[M]\) are representative-dependent.  The
-connection expression is meaningful only after a single analytic
-representative and midpoint trivialization convention have been fixed.  It
-is not invariant under arbitrary termwise replacements
-\[
-B_j[M]\longmapsto B_j[M]+c_jA_m
-\]
-unless the direct term and the moving-line expansion are transformed
-coherently as part of the same representative change.
+There are two different kinds of lower coefficients.
 
-Thus coefficient tables may choose any analytic section from
-Definition~\ref{def:representative-level-midpoint-trivialization}, but they
-must keep that section fixed through the final quotient-coordinate
-calculation.  Changing representatives in the middle of a finite table is
-not a valid simplification.
+The pre-trivialization coefficients \(Z_j[M]\) are extracted before applying
+\(\operatorname{Triv}_{h\to m}\).  These are the coefficients that enter the
+moving-line connection formula
+\[
+q_{\mathrm{conn},7}[M]
+=
+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M],A_i).
+\]
+
+The post-trivialization coefficients \(B_j[M]\) record the chosen
+fixed-target representative after representative-level midpoint
+trivialization.  They are useful for describing the final normalized
+representative, but they already contain the moving-line correction.
+
+Consequently, one may not arbitrarily replace
+\[
+Z_j[M]\mapsto Z_j[M]+c_jA_0
+\]
+inside the connection sum unless the direct term and the moving-line
+expansion are transformed coherently as part of the same analytic
+representative choice.  Likewise, post-trivialization shifts
+\[
+B_j[M]\mapsto B_j[M]+c_jA_0
+\]
+are harmless only when \(B_j[M]\) is used solely as a quotient
+representative; they are not harmless if the shifted \(B_j[M]\) is then
+inserted into a separate connection formula.
+
+Thus coefficient tables may choose an analytic section, but they must keep
+the section fixed through the final quotient-coordinate calculation.
+Changing representatives in the middle of a finite table is not a valid
+simplification.
 \end{remark}
 
 \begin{remark}[Pre- and post-trivialization lower coefficients]
@@ -29461,9 +29667,9 @@ or the moving-line correction is counted twice.
 \label{rem:next-package-table-connection-correction}
 The next computable package table is not a raw Fr\'echet-family table and
 not a post-trivialization representative table.  The connection correction
-requires the moving-line table
+requires the transported moving-line table
 \[
-A_i=[\epsilon^i]A_5^{\mathfrak f}(h),
+A_i=[\epsilon^i]\tau_{h\to m}A_5^{\mathfrak f}(h),
 \qquad
 1\le i\le7,
 \qquad
@@ -29573,9 +29779,24 @@ the actual corrected source package, and to extend the edge law if a
 later argument requires orders beyond \(7\).
 
 \item \textbf{Source-bidegree compatibility.}
-The source-bidegree projector must be compatible with the pre-determinant
-fixed-sector coefficient extraction.  It is not valid to define
-\(\Pi_{1,1}\) after determinant scalarization or after quotienting.
+The source-bidegree projector must be applied before fixed-sector
+coefficient extraction, determinant pairing, or quotienting.  At the raw
+edge level, Corollary~\ref{cor:gate-b-raw-edge-divisibility-order-seven}
+proves the required first-collision divisibility through ordinary order
+\(7\) under its stated hypotheses:
+\[
+[z^7][\delta^1]\pi_{\mathfrak f_h}
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}=0.
+\]
+After this holomorphic edge normalization is available, the corresponding
+post-edge quotient formulation may be stated as
+\[
+Q_{7,m}^q(C)=Q_{7,m}^q(\Pi_{1,1}C)
+\]
+for the full corrected package, or equivalently as the quotient-gauge
+condition for the already-projected representative
+\(C_{\mathcal W}^{\corr}\).  The post-edge statement should not be used as
+the proof of raw edge divisibility.
 
 \item \textbf{Midpoint trivialization independence.}
 The quotient class in
@@ -29650,6 +29871,24 @@ extraction, determinant pairing, or quotienting.
 
 \section{Finite coefficient table contracts for the corrected-whitening package}
 \label{app:finite-coefficient-table-contracts}
+
+\begin{remark}[Active convention for this appendix]
+\label{rem:active-convention-finite-coefficient-appendix}
+This appendix is written under the homogeneous scalar-grade convention
+\[
+\operatorname{Gr}_a r
+=
+\frac{r^{(a+2)}(m)}{(a+2)!}(t-m)^{a+2}.
+\]
+Under this convention the ordinary matrix-output \(M^{[5]}\) route is
+quarantined.  In particular, the \(Y\)-slot families
+\[
+L_1YR_1,\qquad L_2YR_0,\qquad L_0YR_2
+\]
+are absent at \(B_7\).  If the project later changes to an ordinary
+matrix-output \(M^{[5]}\) convention, then those families must be reopened
+and a no-double-counting theorem against grades \(0,2,4\) is required.
+\end{remark}
 
 This appendix records the finite coefficient tables needed by the current
 corrected-whitening package frontier.  These are table contracts, not
@@ -29855,8 +30094,9 @@ W_\pm(z)=\sum_{n\ge0}W_{\pm,n}z^n,
 N_0(z)=\sum_{n\ge0}N_0[n]z^n.
 \]
 
-For the first live non-\(Y\) gate only the following baseline mixed
-coefficient is needed at leading order:
+For the historical first non-\(Y\) coefficient audit
+\(L_2N_0R_1/L_1N_0R_2\), the leading aggregate calculation uses only the
+baseline mixed coefficient
 \[
 N_0[0].
 \]
@@ -29893,18 +30133,23 @@ L_1N_0R_2\text{ with }(1,1)\text{ on the right}
 L_1N_0R_2\text{ with }(1,5)\text{ on the right}
 \\
 G^-_{324} & [z^3],\ldots,[z^7] &
-L_3N_0R_0\text{ audit, pending}
+\text{third-Fr\'echet parity audit / convention check}
 \\
 G^+_{324} & [z^3],\ldots,[z^7] &
-L_0N_0R_3\text{ audit, pending}
+\text{right-side mirror in the same convention}
 \end{array}
 \]
 
 Here \(\mathcal L\) and \(\mathcal R\) denote the left and right second
 Fr\'echet inverse-square-root outputs in the same fixed
-\(B_7^{\mathfrak f}\) normalization.  The third-Fr\'echet rows are
-diagnostic until the all-left/all-right homogeneous order audit is
-completed.
+\(B_7^{\mathfrak f}\) normalization.  The third-Fr\'echet rows are now a
+normalization check, not a pending Gate~A determinant table.  Under the
+symmetric multilinear third-Fr\'echet convention used in
+Lemma~\ref{lem:aggregate-closure-leading-all-left-all-right-cubic-gate},
+the all-left/all-right pair closes in aggregate.  If an ordered-triple
+coefficient convention is used instead, the ordered-permutation aggregate
+must be included consistently on both sides before invoking the
+transpose-pairing argument.
 
 \subsection{Leading table for \(L_2N_0R_1/L_1N_0R_2\)}
 \label{app:l2n0r1-leading-table}
@@ -29963,19 +30208,37 @@ Each entry is a fixed-sector vector in
 \[
 \mathfrak f=\operatorname{span}\{I,S\}.
 \]
-If an entry is
+These four vectors are retained as a coefficient-table contract, but they
+are no longer required to pass an \(A_5^{\mathfrak f}\)-line test
+family-by-family.  Under the homogeneous scalar-grade convention,
+Lemma~\ref{lem:aggregate-closure-leading-l2n0r1-l1n0r2-gate} proves the
+aggregate cancellation
 \[
-C=uI+vS
+C_{112}^{L_2N_0R_1}+C_{112}^{L_1N_0R_2}=0,
+\qquad
+C_{122}^{L_2N_0R_1}+C_{122}^{L_1N_0R_2}=0
 \]
-and
+in \(\mathfrak f\).  This is stronger than quotient-gauge and does not use
+the \(A_5^{\mathfrak f}\)-line.
+
+If this table is later used outside the homogeneous scalar-grade
+convention, then the old determinant coordinate
 \[
-A_5^{\mathfrak f}(m)=u_5I+v_5S,
+uv_5-u_5v=0
 \]
-then the quotient-gauge test is
-\[
-uv_5-u_5v=0.
-\]
-The gate closes only if all four tag vectors pass this test.
+is only a good-patch audit coordinate after the fixed-sector vector has
+been computed; it is not the definition of the quotient object and not the
+current Gate~A closure mechanism.
+
+\begin{remark}[Aggregate closure versus coefficient-table diagnostics]
+\label{rem:aggregate-closure-versus-coefficient-table-diagnostics}
+The coefficient tables in this appendix are diagnostic contracts.  They
+are designed to let agents reproduce the finite entries used by the
+aggregate proofs.  They should not be read as replacing the aggregate
+statements in the main text.  In particular, a nonzero placement-level
+vector is not a counterexample to Gate~A unless the full aggregate
+specified in the relevant lemma also survives in \(\mathfrak f\).
+\end{remark}
 
 \subsection{All-left/all-right cubic aggregate table}
 \label{app:all-left-all-right-cubic-aggregate-table}
@@ -30053,6 +30316,13 @@ A valid coefficient-table submission must specify:
 \text{projection} & \pi_{\mathfrak f}\text{ before determinant test}
 \\
 \text{determinant test} & uv_5-u_5v=0
+\\
+\text{ordered vs symmetric source slots}
+&
+\text{state whether Fr\'echet coefficients are ordered-labelled or
+symmetric;
+if ordered, include all labelled permutations before applying aggregate
+transpose cancellation}
 \end{array}
 \]
 
