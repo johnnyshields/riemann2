@@ -14110,6 +14110,33 @@ That is the calibrated separation problem, not a consequence of
 Noetherian finite determinacy.
 \end{remark}
 
+\begin{remark}[Later refinement of calibrated separation]
+\label{rem:calibrated-separation-later-refinement}
+The distance formulation below is an earlier geometric form of the finite-core
+quantitative gap.  The current proof-state uses the sharper sampled-vector
+formulation in
+Subsection~\ref{subsec:finite-core-sampled-vector-nonconcentration}.  In that
+formulation the finite-determinacy vector is decomposed as
+\[
+C_{\rm fd}=P_{\rm fd}+J_{\rm fd},
+\]
+and the live hypothesis is the sampled vector lower bound
+\[
+\|P_{\rm fd}(\theta(m))+J_{\rm fd}(\theta(m))\|_\infty
+\ge
+\Lambda(m,Q).
+\]
+Thus the branch
+\[
+\mathcal N_k(m,Q)
+\]
+defined below should be read as a geometric precursor to the sharper
+interaction-aligned branch
+\[
+\mathcal N_k^{\rm align}(m,Q).
+\]
+\end{remark}
+
 \begin{hypothesis}[Calibrated finite-core separation]
 \label{hyp:calibrated-finite-core-separation}
 Let \(\Theta_k\) be a compact nonsingular actual-source \(k\)-core stratum,
@@ -14937,6 +14964,33 @@ belongs to the next source-motion layer and should not be confused with the
 first Bottleneck-C amplitude-derivative coefficient.
 \end{definition}
 
+\begin{definition}[Active Bottleneck-C source-linear index set]
+\label{def:active-bc-source-linear-index-set}
+Let
+\[
+\mathcal A_{\mathrm{BC}}
+\subseteq\{2,3,4,5,6\}
+\]
+denote the set of same-point source-linear Fr\'echet primitive indices that
+can enter the promoted mixed-block Bottleneck-C coefficient
+\[
+E_{A,Y}^{\mathrm{BC}}.
+\]
+In the finite Fr\'echet convention of
+Section~\ref{sec:finite-frechet-coefficient-calculus}, the lead top-row
+obstruction uses
+\[
+a=2,
+\qquad
+\Lambda^-_{2,0}
+=
+-\frac{1}{24\pi q^3}E_{22},
+\]
+so \(2\in\mathcal A_{\mathrm{BC}}\).  Older shorthand using
+\(a\in\{1,5\}\) should be read only as a deprecated table convention and not
+as the active finite Fr\'echet index set.
+\end{definition}
+
 \begin{remark}[Executable table for \(E_{A,Y}^{\mathrm{BC}}\)]
 \label{rem:executable-table-eay-bc}
 The frozen Bottleneck-C coefficient is computed from the rows
@@ -14953,7 +15007,8 @@ W_{+,b}
 \]
 where
 \[
-a\in\{1,5\},\qquad
+a\in\mathcal A_{\mathrm{BC}},
+\qquad
 \chi\in\{dd,d\eta+\eta d,\eta\eta\},
 \]
 \[
@@ -14964,7 +15019,7 @@ Thus
 E_{A,Y}^{\mathrm{BC}}
 =
 \sum_{\chi\in\{dd,d\eta+\eta d,\eta\eta\}}
-\sum_{a\in\{1,5\}}
+\sum_{a\in\mathcal A_{\mathrm{BC}}}
 \sum_{\substack{4\le g\le7\\ r+b=7-g}}
 \mathcal E^a_{\chi;g,r,b}.
 \]
@@ -14999,19 +15054,22 @@ and
 \[
 (r_i^{[a]})^{(k)}(m),
 \qquad
-i=1,2,\quad a\in\{1,5\},\quad 2\le k\le9.
+i=1,2,\quad a\in\mathcal A_{\mathrm{BC}},\quad 2\le k\le9.
 \]
-No current symmetry forces
+Moreover, the active top row
 \[
-E_{A,Y}^{\mathrm{BC}}=0,
-\qquad
-e_{A,Y}v_5-u_5f_{A,Y}=0,
-\qquad
-\text{or}\qquad
-f_{A,Y}=0.
+(a,r,g,b)=(2,0,7,0),\qquad \chi=\eta\eta_{\odd},
 \]
-Thus \(E_{A,Y}^{\mathrm{BC}}\) remains the first unresolved local
-actual-source/Bottleneck-C obstruction.
+recorded in
+Subsection~\ref{subsec:concrete-odd-etaeta-top-row-obstruction}, gives a
+concrete \(\Phi_K\)-visible survivor unless
+\[
+\nu_{21,7}=0
+\]
+or unless it is cancelled by another physical top-row contribution.  Thus the
+current local obstruction is sharper than an unevaluated table: the package
+must prove cancellation of the odd-\(\eta\eta\) top row, or add a physical
+correction cancelling it.
 \end{remark}
 
 \begin{remark}[First live promoted nonlinear mixed-block obstruction]
@@ -29363,8 +29421,9 @@ source-linear }Y\text{-middle edge parity.}
 \]
 \[
 \boxed{
-\text{The remaining local actual-source obstruction is the promoted
-quadratic mixed-block Bottleneck-C coefficient }E_{A,Y}^{\mathrm{BC}}.
+\text{The local obstruction has sharpened to the odd-background }
+\eta\eta\text{ top row inside }E_{A,Y}^{\mathrm{BC}},
+\text{ led by }\mathcal E^{2}_{\eta\eta;7,0,0}.
 }
 \]
 \[
@@ -29382,27 +29441,60 @@ interaction rigidity remain open.}
 \]
 \end{remark}
 
-\begin{remark}[Current local obstruction after the corrected Bottleneck-C bookkeeping]
-\label{rem:current-local-obstruction-after-frozen-bc-bookkeeping}
+\begin{remark}[Current local obstruction: odd-background \(\eta\eta\) top row]
+\label{rem:current-local-obstruction-etaeta-top-row}
 After correcting the Bottleneck-C bookkeeping, the first local actual-source
-obstruction is the finite frozen coefficient
+obstruction is no longer merely an unevaluated broad finite table.  The
+current leading row is the frozen odd-background \(\eta\eta\) top row
 \[
-E_{A,Y}^{\mathrm{BC}}
+\mathcal E^{2}_{\eta\eta;7,0,0}.
+\]
+It is governed by
+\[
+\Lambda^-_{2,0}
+\left[
+\left(
+\frac{\sin\Delta_0}{s^2}
++
+\frac{q_-\cos\Delta_0}{s}
+\right)
+\eta_i\eta_j
+\right]_{7}
+W_{+,0},
+\]
+where
+\[
+\Lambda^-_{2,0}
 =
-e_{A,Y}I+f_{A,Y}S.
+-\frac{1}{24\pi q^3}E_{22}.
 \]
-The quotient test is
+Writing
 \[
-e_{A,Y}v_5-u_5f_{A,Y}=0,
+\nu_{21,7}
+:=
+[z^7]\left[
+\left(
+\frac{\sin\Delta_0}{s^2}
++
+\frac{q_-\cos\Delta_0}{s}
+\right)
+\eta_i\eta_j
+\right],
 \]
-whereas the transform-safe test is
+the top-row \(S\)-coefficient is
 \[
-f_{A,Y}=0.
+f_{\eta\eta}^{\rm top}
+=
+-\frac{u}{24\pi q^3}\nu_{21,7}.
 \]
-No current symmetry forces either condition.  The remaining local task is to
-evaluate the finite coefficient table of
-Lemma~\ref{lem:promoted-y12-coefficient-table}, or prove a structural identity
-forcing both tests.
+Thus the local branch is now binary: either prove a zeta-specific identity
+\[
+\nu_{21,7}=0,
+\]
+or add a principled second-order phase-gap correction/counterterm cancelling
+this row.  Endpoint-diagonal source realization, even if proved, removes only
+endpoint-separation subchannels and does not by itself close this scalar
+\(\Delta\)-Hessian \(\eta\eta\) survivor.
 \end{remark}
 
 \section{Current proof state after the local package audits}
@@ -29592,7 +29684,7 @@ The frozen Bottleneck~C coefficient is computed from the rows
 \]
 where
 \[
-a\in\{1,5\},
+a\in\mathcal A_{\mathrm{BC}},
 \qquad
 \chi\in\{dd,d\eta+\eta d,\eta\eta\},
 \]
@@ -29606,7 +29698,7 @@ Thus
 E_{A,Y}^{\mathrm{BC}}
 =
 \sum_{\chi\in\{dd,d\eta+\eta d,\eta\eta\}}
-\sum_{a\in\{1,5\}}
+\sum_{a\in\mathcal A_{\mathrm{BC}}}
 \sum_{\substack{4\le g\le7\\ r+b=7-g}}
 \mathcal E^a_{\chi;g,r,b}.
 \]
@@ -29636,7 +29728,7 @@ and
 \[
 (r_i^{[a]})^{(k)}(m),
 \qquad
-i=1,2,\quad a\in\{1,5\},\quad 2\le k\le9.
+i=1,2,\quad a\in\mathcal A_{\mathrm{BC}},\quad 2\le k\le9.
 \]
 Equivalently, the paper must supply the midpoint Taylor coefficients of
 \[
@@ -29658,17 +29750,26 @@ Y^{\eta\eta}_{g,0},
 At present no available symmetry forces
 \[
 E_{A,Y}^{\mathrm{BC}}=0,
-\]
-nor
-\[
+\qquad
 e_{A,Y}v_5-u_5f_{A,Y}=0,
-\]
-nor
-\[
+\qquad
 f_{A,Y}=0.
 \]
-Thus \(E_{A,Y}^{\mathrm{BC}}\) remains the first unresolved local
-actual-source/Bottleneck~C coefficient.
+More specifically, the odd-\(\eta\eta\) top row
+\[
+\mathcal E^{2}_{\eta\eta;7,0,0}
+\]
+has the \(S\)-visible coefficient recorded in
+Subsection~\ref{subsec:concrete-odd-etaeta-top-row-obstruction}.  Therefore
+the first unresolved local actual-source/Bottleneck-C obstruction is now the
+top-row cancellation problem
+\[
+\nu_{21,7}=0
+\]
+or an equivalent physical cancellation of
+\[
+\mathcal E^{2}_{\eta\eta;7,0,0}.
+\]
 \end{remark}
 
 \begin{lemma}[Scalar tests for the frozen promoted mixed-block coefficient]
@@ -29751,7 +29852,192 @@ Thus, on the generic patch \(v_5\ne0\), a nonzero line-gauge
 through \(T\).
 \end{corollary}
 
-\subsection{No-go for the \(\Theta_\pm\)-normal repair}
+\subsection{Concrete odd-\(\eta\eta\) top-row obstruction}
+\label{subsec:concrete-odd-etaeta-top-row-obstruction}
+
+The local package audits isolate a concrete top-row survivor inside the frozen
+Bottleneck~C coefficient.  The relevant row is
+\[
+\mathcal E^{2}_{\eta\eta;7,0,0}
+=
+\tau_{h\to m}\pi_{\mathfrak f_h}
+\operatorname{Sym}
+\left(
+\Lambda^-_{2,0}
+\left[
+\left(
+\frac{\sin\Delta_0}{s^2}
++
+\frac{q_-\cos\Delta_0}{s}
+\right)
+J\,\eta_i\eta_j
+\right]_{7}
+W_{+,0}
+\right),
+\]
+where
+\[
+J=
+\begin{pmatrix}
+0&-1\\
+1&0
+\end{pmatrix}.
+\]
+This is the actual finite Fr\'echet source index \(a=2\), not the older
+shorthand \(a\in\{1,5\}\).
+
+The row comes from the \((2,1)\)-off-diagonal entry
+\[
+N_{21}
+=
+-\frac{\sin\Delta+q_-s\cos\Delta}{s^2}.
+\]
+Twice differentiating in the scalar phase-gap variable \(\Delta\) gives
+\[
+\partial_\Delta^2N_{21}\big|_0
+=
+\frac{\sin\Delta_0}{s^2}
++
+\frac{q_-\cos\Delta_0}{s}.
+\]
+Thus the odd-background \(\eta\eta\) block is not an endpoint-separation
+artifact.  It is a scalar \(\Delta\)-Hessian term.
+
+For the active finite Fr\'echet row one has
+\[
+\Lambda^-_{2,0}
+=
+-\frac{1}{24\pi q^3}E_{22}.
+\]
+If
+\[
+W_{+,0}
+=
+\begin{pmatrix}
+u&w\\
+w&v
+\end{pmatrix},
+\]
+then
+\[
+\pi_{\mathfrak f}\operatorname{Sym}
+\left(
+\Lambda^-_{2,0}JW_{+,0}
+\right)
+=
+-\frac{1}{24\pi q^3}(wI+uS).
+\]
+Consequently, if
+\[
+\nu_{21,7}
+:=
+[z^7]\left[
+\left(
+\frac{\sin\Delta_0}{s^2}
++
+\frac{q_-\cos\Delta_0}{s}
+\right)\eta_i\eta_j
+\right],
+\]
+then this row contributes
+\[
+\mathcal E^{2}_{\eta\eta;7,0,0}
+=
+-\frac{\nu_{21,7}}{24\pi q^3}(wI+uS),
+\]
+up to the harmless good-patch transport \(\tau_{h\to m}\).  In particular,
+\[
+f_{\eta\eta}^{\top}
+=
+-\frac{u}{24\pi q^3}\nu_{21,7}.
+\]
+
+Under the favorable phase-gap integral model,
+\[
+\nu_{21,7}
+=
+\frac{1}{Q^{14}}
+\left[
+\frac{q_0}{480}
+(\rho_{i,2}\rho_{j,4}+\rho_{i,4}\rho_{j,2})
++
+\frac{1}{144}
+\left(
+\frac{q_0''}{6}
+-
+\frac{2q_0^3}{3}
+\right)
+\rho_{i,2}\rho_{j,2}
+\right].
+\]
+For the homogeneous source \(r(u)=u^2\), with \(q_0''=0\), this gives
+\[
+\nu_{21,7}
+=
+-\frac{q_0^3}{216Q^{14}},
+\]
+which is nonzero on a good phase patch.
+
+Therefore the row is generically \(T\)-visible:
+\[
+\partial_\kappa T
+=
+-a_1^2\frac{f_{\eta\eta}^{\top}}{c}
+\ne0.
+\]
+It is also quotient-visible on a generic \(u_5\ne0\) patch; for example, if
+\(w=0\), then
+\[
+Q_{\eta\eta}^{\top}
+=
+-u_5 f_{\eta\eta}^{\top}.
+\]
+
+\begin{remark}[Endpoint cleanup does not remove this row]
+\label{rem:endpoint-cleanup-does-not-remove-row}
+Endpoint-diagonal realization, if proved, removes only endpoint-separation
+subchannels such as
+\[
+d\eta^\Delta+\eta^\Delta d,
+\qquad
+\eta^\Sigma\eta^\Delta.
+\]
+It does not remove the scalar \(\eta\eta\) term above, since that term comes
+from \(\partial_\Delta^2N_0[\eta_i,\eta_j]\).  Thus the older route
+\[
+[\delta^0]\eta^\Delta=0
+\quad\Longrightarrow\quad
+E_{A,Y}^{\mathrm{BC}}=0
+\]
+is no longer sufficient.
+\end{remark}
+
+\begin{remark}[No existing package mechanism cancels the row]
+\label{rem:no-existing-package-mechanism-cancels-row}
+The present package mechanisms do not cancel
+\(\mathcal E^{2}_{\eta\eta;7,0,0}\):
+source-bidegree projection does not remove the promoted degree-three amplitude
+pattern \(a_1a_2(a_1+a_2)\); amplitude normalization only rescales the row;
+midpoint trivialization is invertible on a good patch; connection correction is
+post-edge and cannot cancel a raw frozen coefficient; and quotienting is
+insufficient because the augmented transform-safe package requires the
+\(S\)-component itself to vanish.
+\end{remark}
+
+Thus the local branch is in the following binary state.  Either one proves a
+new source-jet identity
+\[
+\nu_{21,7}=0,
+\]
+or one proves a full top-row \(S\)-cancellation
+\[
+\sum_{\mathrm{top}\ \eta\eta} f_{\eta\eta}^{\top}=0,
+\]
+or one adds a new second-order phase-gap correction/counterterm cancelling this
+row.  Without one of these inputs, the current corrected package does not close
+Bottleneck~C or the \(T\)-horizontal condition at this row.
+
+\subsection{No-go for a transform-faithful free \(\Theta_\pm\)-normal repair}
 \label{subsec:no-go-theta-normal-repair}
 
 The off-diagonal numerator variables
@@ -29769,6 +30055,13 @@ N_{21}^{\Theta}=-\frac{\Theta_-}{s^2}.
 As a formal normal package this cancels the original off-diagonal
 \(\eta\eta\) Hessian row.  It does not, however, close the physical
 Bottleneck~C obstruction.
+
+The distinction is important.  As a formal normal coordinate, \(\Theta_\pm\)
+makes the off-diagonal entries affine.  As a physical coordinate induced from
+\((q_-,q_+,\Delta)\), however, \(\Theta_\pm\) is constrained and its
+source-curvature must either remain in the raw package or be carried by the
+hidden physical readout.  The following no-go concerns the latter,
+transform-faithful interpretation.
 
 \begin{definition}[\(\Theta\)-local physical edge residual]
 \label{def:theta-local-physical-edge-residual}
@@ -29895,27 +30188,40 @@ There exists a homogeneous good-patch local coefficient model for which
 \end{proposition}
 
 \begin{proof}
-The edge amplitude carrier is
+After extracting the frozen Bottleneck-C matrix coefficient, the remaining
+amplitude derivative is the derivative of
 \[
-a_1a_2(a_1+a_2).
+a_1a_2(a_1+a_2)
 \]
-Along
+in the transverse amplitude direction at the balanced point \(a_2=-a_1\).
+Equivalently, using the local edge coordinate
 \[
-a_2=-a_1+\kappa
+\kappa_{\amp}:=a_2+a_1,
 \]
 one has
 \[
-a_1a_2(a_1+a_2)=-a_1^2\kappa+a_1\kappa^2,
+a_1a_2(a_1+a_2)
+=
+a_1(-a_1+\kappa_{\amp})\kappa_{\amp}
+=
+-a_1^2\kappa_{\amp}+O(\kappa_{\amp}^2),
 \]
-and hence
+so
 \[
 \left.
-\partial_\kappa
+\partial_{\kappa_{\amp}}
 \bigl(a_1a_2(a_1+a_2)\bigr)
-\right|_{\kappa=0}
+\right|_{\kappa_{\amp}=0}
 =
 -a_1^2.
 \]
+This is the same scalar edge factor obtained from the collision chart
+\[
+a_2=-a_1(1+\kappa\delta)
+\]
+after the first \(\delta\)-edge has been factored into the frozen
+Bottleneck-C coefficient.
+
 Since \(\beta_{\loc}^{\Theta}(0)=0\), differentiating \(1/c\) contributes
 nothing at \(\kappa=0\).  Thus
 \[
@@ -30036,6 +30342,15 @@ The \(\Theta_\pm\) audit shows that if one removes a visible septic residual
 from a formal package, the same residual must be carried by the physical
 hidden coordinate.  Thus it is an obstruction-isolation result, not a
 replacement for the \(E_{A,Y}^{\mathrm{BC}}\) finite table.
+
+The concrete top-row obstruction
+\[
+\mathcal E^{2}_{\eta\eta;7,0,0}
+\]
+of Subsection~\ref{subsec:concrete-odd-etaeta-top-row-obstruction} is the
+current row-level witness of this phenomenon: removing it from a formal septic
+package without changing the physical readout merely transfers the same
+obstruction to the hidden \(T\)-coordinate.
 \end{remark}
 
 \subsection{Finite-core sampled vector non-concentration}
@@ -30085,6 +30400,31 @@ C_*
 \right).
 \]
 
+\begin{hypothesis}[Bounded-depth projective detection]
+\label{hyp:bounded-depth-projective-detection}
+On the compact nonsingular actual-source stratum \(\Theta_k\), there exist
+constants
+\[
+Q_0(\Theta_k),\qquad c_0>0
+\]
+such that for every \(Q\ge Q_0(\Theta_k)\) and every
+\(\theta\notin\mathcal Z_k\), there is an index
+\[
+1\le N\le R_{\Theta_k}+1
+\]
+with
+\[
+|F_N(\theta,Q)|
+\ge
+c_0
+\|C_{\rm fd}(\theta)\|_\infty.
+\]
+This is the bounded-depth projective detection and \(Q^{-2}\)-tail-control
+input.  It is separate from sampled vector non-concentration: it detects the
+finite-determinacy vector once that vector has calibrated size, but it does
+not prove that calibrated size.
+\end{hypothesis}
+
 \begin{hypothesis}[Sampled finite-core vector non-concentration]
 \label{hyp:sampled-finite-core-vector-nonconcentration}
 For every actual zeta finite-core parameter
@@ -30131,17 +30471,53 @@ asserts
 \]
 \end{definition}
 
+\begin{remark}[Relation among finite-core bad branches]
+\label{rem:relation-among-finite-core-bad-branches}
+The branch
+\[
+\mathcal N_k^{\rm align}(m,Q)
+\]
+is the current sharp form of the finite-core obstruction.  Earlier
+formulations used either a distance-to-\(\mathcal Z_k\) tube
+\[
+\mathcal N_k(m,Q),
+\]
+or a coefficient-small branch
+\[
+\mathcal N_k^{\rm coef}(m,Q)
+=
+\left\{
+\theta(m)\notin\mathcal Z_k\cup\mathcal E_{\rm geom}:
+\max_N |F_N(\theta(m),Q)|<\Lambda(m,Q)
+\right\}.
+\]
+For \(Q\ge Q_0(\Theta_k)\), bounded-depth projective detection and
+\(Q^{-2}\)-tail control identify the coefficient-small branch with radial
+smallness of the finite-determinacy vector, up to fixed compact-patch
+constants:
+\[
+0<
+\|C_{\rm fd}(\theta(m))\|_\infty
+<
+\Lambda(m,Q).
+\]
+Since
+\[
+C_{\rm fd}=P_{\rm fd}+J_{\rm fd},
+\]
+this is exactly the interaction-aligned branch
+\[
+\mathcal N_k^{\rm align}(m,Q).
+\]
+Accordingly, subsequent finite-core arguments should target
+\(\mathcal N_k^{\rm align}\), not repeat finite determinacy or projective
+detection.
+\end{remark}
+
 \begin{lemma}[Finite-core lower transfer from sampled vector non-concentration]
 \label{lem:finite-core-lower-transfer-from-svnc-current}
-Assume Hypothesis~\ref{hyp:sampled-finite-core-vector-nonconcentration}.
-Assume also bounded-depth projective detection: for \(Q\ge Q_0(\Theta_k)\),
-every \(\theta\notin\mathcal Z_k\) admits some
-\(1\le N\le R_{\Theta_k}+1\) such that
-\[
-|F_N(\theta,Q)|
-\ge
-c_0\|C_{\rm fd}(\theta)\|_\infty.
-\]
+Assume Hypothesis~\ref{hyp:sampled-finite-core-vector-nonconcentration} and
+Hypothesis~\ref{hyp:bounded-depth-projective-detection}.
 Then every actual zeta finite-core sample
 \[
 \theta(m)\notin\mathcal Z_k\cup\mathcal E_{\rm geom}
@@ -30186,6 +30562,45 @@ F_N(\theta(m),Q)
 \]
 gives the asserted lower bound.
 \end{proof}
+
+\begin{remark}[Why sampled vector non-concentration is the exact finite-core dependency]
+\label{rem:why-svnc-is-exact-finite-core-dependency}
+Lemma~\ref{lem:finite-core-lower-transfer-from-svnc-current} separates the
+finite-core problem into a qualitative part and a sampled-size part.  The
+qualitative part is finite odd-germ determinacy: on a compact nonsingular
+actual-source stratum,
+\[
+C_{\rm fd}(\theta)=0
+\quad\Longleftrightarrow\quad
+H_{\core,\theta}\equiv0.
+\]
+Together with bounded-depth \(Q^{-2}\)-tail control, this gives projective
+detection of every nonzero finite-core germ by some
+\[
+1\le N\le R_{\Theta_k}+1.
+\]
+What remains is the sampled finite-vector lower bound
+\[
+\|C_{\rm fd}(\theta(m))\|_\infty
+=
+\|P_{\rm fd}(\theta(m))+J_{\rm fd}(\theta(m))\|_\infty
+\ge
+\Lambda(m,Q)
+\]
+outside
+\[
+\mathcal Z_k\cup\mathcal E_{\rm geom}.
+\]
+Equivalently, the remaining finite-core branch is the interaction-aligned
+small-vector branch
+\[
+\mathcal N_k^{\rm align}(m,Q).
+\]
+Thus any further finite-core proof must either prove
+Hypothesis~\ref{hyp:sampled-finite-core-vector-nonconcentration}, or add an
+independent theorem forcing \(P_{\rm fd}+J_{\rm fd}\)-smallness into a
+controlled incidence stratum.
+\end{remark}
 
 \begin{remark}[Status of the finite-core branch]
 \label{rem:status-finite-core-branch-current}
@@ -30243,6 +30658,48 @@ only changes the missing condition to
 \sum_i a_i\lambda_i=0.
 \]
 
+\begin{lemma}[Feature balance is stronger than amplitude balance]
+\label{lem:feature-balance-stronger-than-amplitude-balance}
+Suppose that, for a fixed finite core,
+\[
+\sum_i a_i v_i=0
+\]
+for every balanced amplitude vector
+\[
+\sum_i a_i=0.
+\]
+Then
+\[
+v_1=v_2=\cdots=v_k.
+\]
+Thus ordinary amplitude balance implies feature balance only when the
+transverse \(dd\)-features are constant on the core.
+\end{lemma}
+
+\begin{proof}
+Take \(a=e_i-e_j\).  Then \(\sum_\ell a_\ell=0\), so feature balance gives
+\(v_i-v_j=0\).  Since \(i,j\) are arbitrary, all \(v_i\) are equal.
+\end{proof}
+
+\begin{remark}[Rank-one locking does not close feature balance]
+\label{rem:rank-one-locking-does-not-close-feature-balance}
+If
+\[
+v_i=\lambda_i v_0,
+\]
+then feature balance becomes
+\[
+\sum_i a_i\lambda_i=0.
+\]
+This is not implied by
+\[
+\sum_i a_i=0
+\]
+unless the weights \(\lambda_i\) are constant on the core.  Thus rank-one
+transverse locking merely transfers the missing condition from the vector
+features \(v_i\) to the scalar weights \(\lambda_i\).
+\end{remark}
+
 \begin{definition}[\(dd\)-interaction branch]
 \label{def:dd-interaction-branch-current}
 The centered \(dd\)-interaction branch is
@@ -30260,6 +30717,153 @@ The centered \(dd\)-interaction branch is
 \]
 \end{definition}
 
+\begin{definition}[Transported \(dd\)-kernel Taylor coefficients]
+\label{def:transported-dd-kernel-taylor}
+Assume the favorable transported-feature reduction
+\[
+K_{dd}(t;m)
+=
+t^2
+\left\langle
+v\!\left(m+\frac t2\right),
+v\!\left(m-\frac t2\right)
+\right\rangle.
+\]
+Write
+\[
+v(m+h)
+=
+v_0+h v_1+\frac{h^2}{2}v_2+O(h^3).
+\]
+Then
+\[
+K_{dd}(t;m)
+=
+\kappa_2t^2+\kappa_4t^4+O(t^6),
+\]
+where
+\[
+\kappa_2=\langle v_0,v_0\rangle,
+\]
+and
+\[
+\kappa_4
+=
+\frac14
+\left(
+\langle v_0,v_2\rangle-\langle v_1,v_1\rangle
+\right).
+\]
+\end{definition}
+
+\begin{remark}[First Taylor obstruction to \(dd\)-kernel conditional definiteness]
+\label{rem:first-taylor-obstruction-dd-conditional-definiteness}
+A positive spectral representation of the form
+\[
+\operatorname{Re}(e^{-i\theta_0}K_{dd}(t;m))
+=
+\alpha(m)t^2+\int_{\mathbb R}(1-\cos(t\xi))\,d\mu_m(\xi),
+\qquad
+\mu_m\ge0,
+\]
+or its negative, imposes sign restrictions on the Taylor coefficients.  In
+particular, if the phase is chosen so that
+\[
+\operatorname{Re}(e^{-i\theta_0}\kappa_2)>0,
+\]
+then the first nonquadratic coefficient must satisfy
+\[
+\operatorname{Re}(e^{-i\theta_0}\kappa_4)\le0.
+\]
+By Definition~\ref{def:transported-dd-kernel-taylor}, this requires
+\[
+\operatorname{Re}
+\left(
+e^{-i\theta_0}
+\left(
+\langle v_0,v_2\rangle-\langle v_1,v_1\rangle
+\right)
+\right)
+\le0.
+\]
+The current one-pair incidence package does not prove this transverse
+feature-curvature inequality, nor the higher moment/Hankel positivity
+conditions needed for a full positive spectral representation.
+\end{remark}
+
+\begin{proposition}[Unit transported feature curves need not be spectrally positive]
+\label{prop:unit-feature-curve-not-spectrally-positive}
+Let
+\[
+v(u)=(\cos\phi(u),\sin\phi(u))
+\]
+be a unit transported transverse feature curve, and set
+\[
+K_{dd}(t)=
+t^2
+\left\langle
+v\!\left(\frac t2\right),
+v\!\left(-\frac t2\right)
+\right\rangle.
+\]
+If
+\[
+\phi(u)=au+bu^3,
+\]
+then
+\[
+K_{dd}(t)
+=
+t^2
+-\frac{a^2}{2}t^4
++
+\left(
+\frac{a^4}{24}-\frac{ab}{4}
+\right)t^6
++
+O(t^8).
+\]
+Consequently, even unit normalization of the transverse feature curve does
+not imply the coefficient signs required by a conditionally one-sided spectral
+representation.  In the negative-type convention, after
+\(\kappa_2>0\) and \(\kappa_4\le0\), one still needs
+\[
+\kappa_6
+=
+\frac{a^4}{24}-\frac{ab}{4}
+\ge0,
+\]
+which fails whenever
+\[
+b>\frac{a^3}{6}.
+\]
+\end{proposition}
+
+\begin{proof}
+Since
+\[
+\left\langle
+v\!\left(\frac t2\right),
+v\!\left(-\frac t2\right)
+\right\rangle
+=
+\cos\left(
+\phi\!\left(\frac t2\right)-\phi\!\left(-\frac t2\right)
+\right),
+\]
+and
+\[
+\phi\!\left(\frac t2\right)-\phi\!\left(-\frac t2\right)
+=
+at+\frac b4t^3,
+\]
+we have
+\[
+K_{dd}(t)=t^2\cos\left(at+\frac b4t^3\right).
+\]
+Expanding the cosine through order \(t^6\) gives the stated formula.
+\end{proof}
+
 \begin{remark}[Needed input for the \(dd\)-interaction branch]
 \label{rem:feature-balance-or-spectral-positivity-dd-needed}
 On each compact nonsingular same-scale finite-core patch away from the
@@ -30272,7 +30876,11 @@ branch, one needs at least one of the following:
 \sum_i a_i v(u_i)=0
 \]
 for every admissible balanced finite-core amplitude vector
-\(\sum_i a_i=0\);
+\[
+\sum_i a_i=0.
+\]
+By Lemma~\ref{lem:feature-balance-stronger-than-amplitude-balance}, this is
+much stronger than ordinary amplitude balance.
 
 \item \emph{Conditional spectral rigidity:} the reduced kernel
 \[
@@ -30285,7 +30893,20 @@ v\!\left(m-\frac t2\right)
 \right\rangle
 \]
 admits, after phase rotation, a conditionally one-sided spectral
-representation, or its negative;
+representation, or its negative:
+\[
+\operatorname{Re}(e^{-i\theta_0}K_{dd}(t;m))
+=
+\alpha(m)t^2+
+\int_{\mathbb R}(1-\cos(t\xi))\,d\mu_m(\xi),
+\qquad
+\alpha(m)\ge0,\quad \mu_m\ge0,
+\]
+or the negative of such a kernel.  At minimum this route requires the Taylor
+coefficient sign condition of
+Remark~\ref{rem:first-taylor-obstruction-dd-conditional-definiteness}.
+Proposition~\ref{prop:unit-feature-curve-not-spectrally-positive} shows that
+unit normalization of \(v(u)\) alone is insufficient.
 
 \item \emph{Incidence containment:} all feature-balance failures and centered
 kernel signature-changing loci lie in the controlled incidence set
@@ -30295,7 +30916,9 @@ Absent one of these inputs, the branch
 \[
 \mathfrak Z_{\rm int}^{dd}
 \]
-remains independent.
+remains independent.  In particular, pair-like positivity of the one-body
+kernel is not by itself a centered-kernel spectral theorem for the
+covariance-weighted \(dd\)-interaction.
 \end{remark}
 
 \begin{remark}[Current proof frontier after the local package audits]
@@ -30310,14 +30933,23 @@ reflection convention.
 \[
 E_{A,Y}^{\mathrm{BC}}
 \]
-is the first unresolved local actual-source coefficient.  The quotient test is
+is now blocked at the concrete odd-background top row
 \[
-e_{A,Y}v_5-u_5f_{A,Y}=0,
+\mathcal E^{2}_{\eta\eta;7,0,0}.
 \]
-and the transform-safe test is
+The associated \(S\)-coefficient is
 \[
-f_{A,Y}=0.
+f_{\eta\eta}^{\rm top}
+=
+-\frac{u}{24\pi q^3}\nu_{21,7}.
 \]
+Unless one proves
+\[
+\nu_{21,7}=0,
+\]
+finds a cancelling active top-row term, or adds a principled second-order
+correction, this row is generically \(T\)-visible and can also be quotient
+visible on a generic \(u_5\ne0\) patch.
 
 \item The \(\Theta_\pm\)-normal form and septic normal-form counterterms do
 not close the physical local obstruction.  They can move the obstruction into
@@ -30344,6 +30976,14 @@ finite-core samples.
 
 \item The \(dd\)-interaction branch remains independent unless feature
 balance, conditional spectral positivity, or incidence containment is proved.
+In the transported-kernel reduction, the first nonquadratic Taylor coefficient
+\[
+\kappa_4
+=
+\frac14
+(\langle v_0,v_2\rangle-\langle v_1,v_1\rangle)
+\]
+already gives a necessary sign test for conditional definiteness.
 \end{enumerate}
 \end{remark}
 
@@ -30474,14 +31114,19 @@ after the required source tables are supplied in the same ordinary-\(z\),
 pre-\(\Phi_K\), tagged normalization.  The current Stage 1 infrastructure
 reduces the needed source input to a finite midpoint-jet theorem:
 \[
-q_0^{(k)}(m),\qquad 0\le k\le9,
+\mathsf{Jet}_{\mathrm{Stage1}}
+=
+\left\{
+q_0^{(0)},\ldots,q_0^{(9)};
+\ (r_i^{[a]})^{(k)}
+:
+i=1,2,\quad a\in\mathcal A_{\mathrm{BC}},\quad 2\le k\le9
+\right\}_{m}.
 \]
-and
-\[
-(r_i^{[a]})^{(k)}(m),
-\qquad
-i=1,2,\quad a\in\{1,5\},\quad 2\le k\le9.
-\]
+The lead local obstruction currently uses \(a=2\).  Hence any Stage~1 table
+omitting the \(a=2\) source-linear primitive cannot evaluate the present
+Bottleneck-C frontier.
+
 The table generator is infrastructure, not a zeta-source proof.  A promotion
 requires a source theorem supplying these jets, or a reduction of them to
 named baseline objects, in the same normalization used for
@@ -33078,7 +33723,7 @@ and
 \[
 (r_i^{[a]})^{(k)}(m),
 \qquad
-i=1,2,\quad a\in\{1,5\},\quad 2\le k\le9.
+i=1,2,\quad a\in\mathcal A_{\mathrm{BC}},\quad 2\le k\le9.
 \]
 Thus the input table is
 \[
