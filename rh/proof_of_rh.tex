@@ -12722,6 +12722,308 @@ branches and then to a one-variable compatibility / resultant / norm test.
 This is a reduction of the remaining burden, not a closed theorem at present.
 \end{remark}
 
+\paragraph{Gate A and Gate B.}
+\label{par:gate-a-gate-b}
+The corrected-package audit uses two separate gates.  We call them Gate~A
+and Gate~B to prevent the leading homogeneous cubic audit from being
+confused with the full raw edge-divisibility theorem.
+
+\begin{definition}[Gate A: leading homogeneous cubic audit]
+\label{def:gate-a-leading-homogeneous-cubic-audit}
+Work under the homogeneous scalar-grade convention
+\[
+\operatorname{Gr}_a r
+=
+\frac{r^{(a+2)}(h)}{(a+2)!}(t-h)^{a+2}.
+\]
+Gate~A is the audit of the leading homogeneous cubic non-\((1,1)\) source
+sector at ordinary order \(7\).  In the active convention, this is the
+leading \((1,1,5)\)-type cubic sector.  The Gate~A families are
+\[
+L_1YR_1,\qquad L_2YR_0,\qquad L_0YR_2,
+\]
+\[
+L_2N_0R_1,\qquad L_1N_0R_2,
+\]
+and
+\[
+L_3N_0R_0,\qquad L_0N_0R_3.
+\]
+Gate~A asks whether these leading homogeneous non-\((1,1)\) cubic terms
+produce a fixed-sector order-\(7\) obstruction.
+\end{definition}
+
+\begin{definition}[Gate B: raw edge-divisibility]
+\label{def:gate-b-raw-edge-divisibility}
+Gate~B is the raw edge-divisibility theorem for the full projected
+corrected-whitening cross-effect.  Let
+\[
+C_{\mathcal W}^{\mathrm{raw}}
+=
+\mathcal W(\mathcal B_2)
+-\mathcal W(\mathcal B_1(a_1,h_1))
+-\mathcal W(\mathcal B_1(a_2,h_2))
++\mathcal W(\mathcal B_0),
+\]
+where
+\[
+\mathcal W(G_-,N,G_+)=G_-^{-1/2}NG_+^{-1/2}.
+\]
+Apply the source-bidegree projection before fixed-sector extraction,
+determinant scalarization, or quotienting:
+\[
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}.
+\]
+On the collision chart
+\[
+h_1=h-\frac{\delta}{2},\qquad
+h_2=h+\frac{\delta}{2},\qquad
+a_2=-a_1(1+\kappa\delta),
+\]
+Gate~B is the assertion
+\[
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}
+=
+O(a_1\delta^2)
+\]
+through fixed-sector ordinary order \(7\).  Equivalently, the
+first-collision coefficient
+\[
+F_1:=
+[z^7][\delta^1]\,
+\pi_{\mathfrak f_h}
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}
+\]
+vanishes.
+\end{definition}
+
+\begin{remark}[Why Gate B must be raw]
+\label{rem:why-gate-b-must-be-raw}
+Gate~B must be proved before forming the normalized package
+\[
+-a_1^{-1}\delta^{-2}
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}.
+\]
+If \(F_1\ne0\), this normalized expression has a \(\delta^{-1}\)-pole and
+the post-edge package is not holomorphic.  Therefore one must not use the
+post-edge quotient statement
+\[
+Q_{7,m}^q(C)=Q_{7,m}^q(\Pi_{1,1}C)
+\]
+as the first proof of edge divisibility.  Quotient compatibility is a
+post-edge statement unless it is reformulated at the raw edge level.
+\end{remark}
+
+\begin{lemma}[Order exhaustion for Gate A]
+\label{lem:gate-a-order-exhaustion}
+Under the homogeneous scalar-grade convention, every leading homogeneous
+cubic non-\((1,1)\) contribution to \(B_7^{\mathfrak f}\) is one of the
+seven families
+\[
+L_1YR_1,\quad L_2YR_0,\quad L_0YR_2,\quad
+L_2N_0R_1,\quad L_1N_0R_2,\quad
+L_3N_0R_0,\quad L_0N_0R_3.
+\]
+The three \(Y\)-slot families
+\[
+L_1YR_1,\qquad L_2YR_0,\qquad L_0YR_2
+\]
+are absent at \(B_7^{\mathfrak f}\).  The non-\(Y\) families reduce to the
+leading placements
+\[
+L_2^{\{1,1\}}N_0[0]R_1^{[5]},
+\qquad
+L_2^{\{1,5\}}N_0[0]R_1^{[1]},
+\]
+and their right-side mirrors, together with the all-left/all-right
+placements
+\[
+L_3^{\{1,1,5\}}N_0[0]R_0,
+\qquad
+L_0N_0[0]R_3^{\{1,1,5\}}.
+\]
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+The \(Y\)-slot absence is the homogeneous scalar-grade order-count
+statement: under this convention the relevant \(Y\)-middle entries do not
+reach ordinary order \(7\).  The remaining non-\(Y\) placements are the
+only ones whose Fr\'echet degree and homogeneous source grades can sum to
+\(7\) with the baseline middle \(N_0[0]\).  This is scoped to the
+homogeneous scalar-grade convention and does not apply to an ordinary
+matrix-output \(M^{[5]}\) convention.
+\end{proof}
+
+\begin{lemma}[Aggregate closure of the leading \(L_2N_0R_1/L_1N_0R_2\) gate]
+\label{lem:aggregate-closure-leading-l2n0r1-l1n0r2-gate}
+Work under the homogeneous scalar-grade convention.  Let
+\[
+N:=N_0[0],
+\qquad
+W:=W_{-,0}=G_0^{-1/2},
+\]
+and let \(\Sigma_-\) denote the Sylvester inverse
+\[
+G_0^{1/2}Z+ZG_0^{1/2}=C.
+\]
+The leading same-point source inputs satisfy
+\[
+X_{-,1}^{[1]}=-\frac{1}{48\pi Q^2}(I-D),
+\]
+and
+\[
+X_{-,5}^{[5]}
+=
+-\frac{1}{92160\pi Q^{10}}(I-D)
+=
+\lambda X_{-,1}^{[1]},
+\qquad
+\lambda:=\frac{1}{1920Q^8}.
+\]
+Set
+\[
+A:=S_{-,1}^{[1]}=\Sigma_-(X_{-,1}^{[1]}),
+\qquad
+M:=WAW,
+\]
+and
+\[
+T_2^{1,1}:=\Sigma_-(-2AA),
+\qquad
+H:=2WAWAW-WT_2^{1,1}W.
+\]
+Then
+\[
+S_{-,5}^{[5]}=\lambda A,
+\qquad
+T_6^{1,5}=\lambda T_2^{1,1},
+\qquad
+H_{-,6}^{1,5}=\lambda H.
+\]
+Consequently the leading fixed-sector tag vectors satisfy
+\[
+C_{112}^{L_2N_0R_1}
+=
+C_{122}^{L_2N_0R_1}
+=
+\lambda\,\pi_{\mathfrak f}(HNM),
+\]
+and
+\[
+C_{112}^{L_1N_0R_2}
+=
+C_{122}^{L_1N_0R_2}
+=
+-\lambda\,\pi_{\mathfrak f}(MNH).
+\]
+Since \(H,N,M\) are symmetric and
+\[
+(HNM)^T=MNH,
+\]
+while \(\pi_{\mathfrak f}\) is transpose-invariant, one has
+\[
+\pi_{\mathfrak f}(HNM)=\pi_{\mathfrak f}(MNH).
+\]
+Therefore
+\[
+C_{112}^{L_2N_0R_1}+C_{112}^{L_1N_0R_2}=0,
+\]
+and
+\[
+C_{122}^{L_2N_0R_1}+C_{122}^{L_1N_0R_2}=0.
+\]
+Thus the leading homogeneous non-\(Y\) \(L_2N_0R_1/L_1N_0R_2\) gate
+closes at the aggregate fixed-sector level before quotienting.
+\end{lemma}
+
+\begin{lemma}[Aggregate closure of the leading all-left/all-right cubic gate]
+\label{lem:aggregate-closure-leading-all-left-all-right-cubic-gate}
+Assume the midpoint parity convention extends to the third-Fr\'echet
+coefficient table:
+\[
+G^+_{n;a,b,c}=(-1)^nG^-_{n;a,b,c}.
+\]
+Under the homogeneous scalar-grade convention, the first
+all-left/all-right source multiset is \((1,1,5)\), and it contributes at
+ordinary order \(7\).  Let
+\[
+G:=G^-_{7;1,1,5},
+\qquad
+W:=W_{-,0}=W_{+,0},
+\qquad
+N:=N_0[0].
+\]
+Then
+\[
+G^+_{7;1,1,5}=-G.
+\]
+The leading all-left and all-right fixed-sector contributions are
+\[
+C^{L_3N_0R_0}_{1,1,5}
+=
+\pi_{\mathfrak f}(GNW),
+\]
+and
+\[
+C^{L_0N_0R_3}_{1,1,5}
+=
+-\pi_{\mathfrak f}(WNG).
+\]
+Since \(G,N,W\) are symmetric,
+\[
+(GNW)^T=WNG.
+\]
+Because \(\pi_{\mathfrak f}\) is transpose-invariant,
+\[
+\pi_{\mathfrak f}(GNW)=\pi_{\mathfrak f}(WNG).
+\]
+Hence
+\[
+C^{L_3N_0R_0}_{1,1,5}
++
+C^{L_0N_0R_3}_{1,1,5}
+=0
+\quad\text{in }\mathfrak f.
+\]
+Thus the leading all-left/all-right homogeneous third-Fr\'echet gate
+closes at the aggregate fixed-sector level before quotienting.
+\end{lemma}
+
+\begin{corollary}[Gate A closure]
+\label{cor:gate-a-closure}
+Under the homogeneous scalar-grade convention and the stated
+midpoint-parity conventions,
+\[
+F_1^{\mathrm{lead\ cubic}}=0.
+\]
+Equivalently, the leading homogeneous cubic non-\((1,1)\) sector
+contributes no fixed-sector \(B_7^{\mathfrak f}\) obstruction and no
+first-collision Gate~B obstruction.
+\end{corollary}
+
+\begin{remark}[Aggregate closure versus family-by-family gauge]
+\label{rem:aggregate-closure-versus-family-by-family-gauge}
+The preceding Gate~A closures are aggregate fixed-sector cancellations.
+They do not assert that the individual families
+\[
+L_2N_0R_1,\quad L_1N_0R_2,\quad L_3N_0R_0,\quad L_0N_0R_3
+\]
+are separately proportional to \(A_5^{\mathfrak f}(h)\).  The package
+theorem requires the aggregate corrected-whitening cross-effect, not a
+family-by-family gauge statement.  No determinant scalarization, no
+\(\Phi_K\)-scalar invisibility, and no downstream diagonal merger is used
+in these closures.
+\end{remark}
+
+\begin{remark}[Scope of Gate A]
+\label{rem:scope-of-gate-a}
+Gate~A is scoped to the active homogeneous scalar-grade convention.  It
+does not apply to an ordinary matrix-output \(M^{[5]}\) convention, nor to
+a bookkeeping system that treats lower-shadow grades \(0,2,4\) as
+independent ordinary matrix-output inputs.  Such conventions require a
+separate no-double-counting theorem.
+\end{remark}
+
 \begin{remark}[Work in progress: UV-026 package quotient-gauge target]
 \label{rem:wip-first-cubic-source-transfer-target}
 After the tagged pre-whitening source block of
@@ -13067,33 +13369,31 @@ Q_{7,m}^q(C):=[B_7^{\mathfrak f}(C)]
 Definition~\ref{def:tagged-two-atom-prewhitening-source-block}.  This is now
 a guarded source-level input, not a quotient theorem.
 
-\item \textbf{UV-026.}  Prove the package quotient-gauge theorem
+\item \textbf{Gate A / UV-026 leading cubic audit.}
+Under the homogeneous scalar-grade convention, the leading homogeneous
+cubic non-\((1,1)\) sector is closed at the aggregate fixed-sector level.
+The \(Y\)-slot families are absent at \(B_7\), and the non-\(Y\)
+aggregate pairs
 \[
-B_7^{\mathfrak f}(C_{\mathcal W}^{\corr})
-\in
-\mathbf C A_5^{\mathfrak f}(m),
+L_2N_0R_1+L_1N_0R_2,
+\qquad
+L_3N_0R_0+L_0N_0R_3
 \]
-or equivalently
+vanish in \(\mathfrak f\), the latter assuming third-Fr\'echet midpoint
+parity.
+
+\item \textbf{Gate B raw edge-divisibility.}
+The projected raw corrected-whitening cross-effect satisfies
 \[
-Q_{7,m}^q(C_{\mathcal W}^{\corr})=0.
+[z^7][\delta^1]\,
+\pi_{\mathfrak f_h}
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}=0
 \]
-Equivalently, if starting from the unprojected raw cross-effect,
-\[
-Q_{7,m}^q
-\left(
-(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}
-\right)=0.
-\]
-Under the active homogeneous scalar grade, the \(Y\)-slot families are
-absent at \(B_7\)
-(Lemma~\ref{lem:y-slot-families-absent-homogeneous-grade}), and the first
-live non-\(Y\) gate is
-\[
-L_2N_0R_1/L_1N_0R_2
-\]
-(Remark~\ref{rem:first-live-non-y-cubic-gate}), followed by the
-all-left/all-right \(L_3N_0R_0/L_0N_0R_3\) audit.  The raw seven-family
-shortcut is rejected and should not be used as the theorem object.
+through ordinary order \(7\), provided the all-subset midpoint parity,
+leading \(Y\)-middle parity, moving source-frame telescoping, and affine
+boundary-removal lemmas are imposed.  This supplies the raw edge
+divisibility needed before amplitude normalization and before the lower
+package table \(Z_j[M]\) is formed.
 
 \item \textbf{Connection correction subtarget.}
 For the normalized fixed-target package representative, compute the moving
@@ -27693,6 +27993,396 @@ Definition~\ref{def:normalized-corrected-whitening-package-representative},
 not the raw seven-family Fr\'echet sum.
 \end{remark}
 
+\subsection{Fourth-transfer coefficient table for Gate B}
+\label{subsec:fourth-transfer-coefficient-table-gate-b}
+
+The corrected-whitening map is
+\[
+\mathcal W(G_-,N,G_+)=G_-^{-1/2}NG_+^{-1/2}.
+\]
+Let a labelled source input be
+\[
+X_j=(A_j,Y_j,B_j),
+\]
+where
+\[
+A_j=\delta G_{-,j}^{\lin},\qquad
+Y_j=\delta N_j^{\lin},\qquad
+B_j=\delta G_{+,j}^{\lin}.
+\]
+Write
+\[
+(G_-^{(0)}+A)^{-1/2}
+=
+L_0+L_1[A]+L_2[A,A]+L_3[A,A,A]+L_4[A,A,A,A]+\cdots,
+\]
+and
+\[
+(G_+^{(0)}+B)^{-1/2}
+=
+R_0+R_1[B]+R_2[B,B]+R_3[B,B,B]+R_4[B,B,B,B]+\cdots.
+\]
+The middle block is source-linear:
+\[
+N=N_0+Y.
+\]
+For a labelled four-source set \(J=\{1,2,3,4\}\), the fourth homogeneous
+corrected-whitening transfer is
+\[
+\boxed{
+\mathcal T_4(X_1,X_2,X_3,X_4)
+=
+\sum_{I\subseteq J}
+L^-_I\,N_0\,R^+_{J\setminus I}
++
+\sum_{m\in J}
+\sum_{I\subseteq J\setminus\{m\}}
+L^-_I\,Y_m\,R^+_{J\setminus(I\cup\{m\})}.
+}
+\]
+The first sum consists of
+\[
+L_4N_0R_0,\quad
+L_3N_0R_1,\quad
+L_2N_0R_2,\quad
+L_1N_0R_3,\quad
+L_0N_0R_4,
+\]
+and the second sum consists of
+\[
+L_3YR_0,\quad
+L_2YR_1,\quad
+L_1YR_2,\quad
+L_0YR_3.
+\]
+The ordinary \(z^7\)-coefficient is
+\[
+\boxed{
+[z^7]\mathcal T_4(J)
+=
+\sum_{I\subseteq J}
+\sum_{\alpha+\beta+\gamma=7}
+L^-_{I,\alpha}N^{(0)}_{\beta}R^+_{J\setminus I,\gamma}
++
+\sum_{m\in J}
+\sum_{I\subseteq J\setminus\{m\}}
+\sum_{\alpha+\beta+\gamma=7}
+L^-_{I,\alpha}Y_{m,\beta}R^+_{J\setminus(I\cup\{m\}),\gamma}.
+}
+\]
+For a source multiset, \(\operatorname{Sym}\mathcal T_4\) denotes the
+labelled sum divided by the automorphism factor of the multiset.
+
+\begin{lemma}[All-subset midpoint parity]
+\label{lem:all-subset-midpoint-parity}
+Let \(K\) be any labelled subset of homogeneous source inputs and define
+\[
+|K|:=\sum_{g\in K}g.
+\]
+At leading homogeneous order, the left and right same-point
+inverse-square-root coefficients satisfy
+\[
+\boxed{
+R_K^+=(-1)^{|K|}L_K^-.
+}
+\]
+\end{lemma}
+
+\begin{lemma}[Symmetry of same-point subset coefficients]
+\label{lem:symmetry-same-point-subset-coefficients}
+For every labelled subset \(K\),
+\[
+(L_K^-)^T=L_K^-,
+\qquad
+(R_K^+)^T=R_K^+.
+\]
+Moreover \(N_0[0]^T=N_0[0]\).
+\end{lemma}
+
+\begin{lemma}[Leading \(Y\)-middle parity]
+\label{lem:leading-y-middle-parity}
+The leading \(Y\)-middle input satisfies
+\[
+Y^{[a]}_{\mathrm{lead}}=0\qquad(a\ \mathrm{odd}),
+\]
+and
+\[
+(Y^{[a]}_{\mathrm{lead}})^T=Y^{[a]}_{\mathrm{lead}}
+\qquad(a\ \mathrm{even}).
+\]
+\end{lemma}
+
+\begin{theorem}[Odd total-grade subset-complement cancellation]
+\label{thm:odd-total-grade-subset-complement-cancellation}
+Let
+\[
+J=(g_1,\ldots,g_d)
+\]
+be a labelled homogeneous source multiset with total grade
+\[
+|J|=\sum_i g_i=7.
+\]
+Then the leading ordinary-order amplitude contribution of the
+corrected-whitening transfer vanishes in fixed sector:
+\[
+\boxed{
+[z^7]\pi_{\mathfrak f_h}
+\mathcal T_d(X^{[g_1]},\ldots,X^{[g_d]})=0.
+}
+\]
+\end{theorem}
+
+\begin{proof}
+For the \(N_0\)-middle part, the leading contribution is
+\[
+\mathcal A_{N_0}(J)
+=
+[z^7]\pi_{\mathfrak f_h}
+\sum_{I\subseteq J}L_I^-N_0[0]R^+_{J\setminus I}.
+\]
+By Lemma~\ref{lem:all-subset-midpoint-parity},
+\[
+R^+_{J\setminus I}=(-1)^{|J|-|I|}L^-_{J\setminus I}.
+\]
+Since \(|J|=7\), this sign is \(-(-1)^{|I|}\).  Pair \(I\) with
+\(J\setminus I\).  The paired contribution is
+\[
+(-1)^{|I|}
+\pi_{\mathfrak f_h}
+\left(
+-L_I^-N_0[0]L^-_{J\setminus I}
++
+L^-_{J\setminus I}N_0[0]L_I^-
+\right).
+\]
+The two matrix products are transposes, and \(\pi_{\mathfrak f_h}\) is
+transpose-invariant.  Hence the pair cancels.
+
+For the \(Y\)-middle part, fix the source label \(m\in J\) in the middle
+and write \(a=g_m\), \(K=J\setminus\{m\}\).  If \(a\) is odd, then
+\(Y_m=0\) by Lemma~\ref{lem:leading-y-middle-parity}.  If \(a\) is even,
+then \(Y_m\) is symmetric and \(|K|=7-a\) is odd, so the same
+subset-complement pairing cancels the fixed-sector projection.
+\end{proof}
+
+\begin{corollary}[Amplitude closure of higher transfers]
+\label{cor:amplitude-closure-higher-transfers}
+The amplitude part of every Gate~B transfer of total homogeneous grade
+\(7\) vanishes in \(\mathfrak f_h\).  In particular,
+\[
+V_4=0
+\]
+for the \(d=4\) positive-grade aggregate
+\[
+(1,1,1,4),\qquad (1,1,2,3),\qquad (1,2,2,2),
+\]
+and
+\[
+R_{0115}=0
+\]
+for the first lower-shadow fourth-transfer target
+\[
+(0,1,1,5).
+\]
+The same argument closes the amplitude parts for
+\[
+d=5:\ (1,1,1,1,3),\ (1,1,1,2,2),
+\]
+\[
+d=6:\ (1,1,1,1,1,2),
+\]
+and
+\[
+d=7:\ (1,1,1,1,1,1,1).
+\]
+\end{corollary}
+
+\begin{lemma}[Raw midpoint derivative of homogeneous scalar grades]
+\label{lem:raw-midpoint-derivative-homogeneous-scalar-grades}
+For
+\[
+\operatorname{Gr}_g r(h;t)
+=
+\frac{r^{(g+2)}(h)}{(g+2)!}(t-h)^{g+2},
+\]
+one has
+\[
+\partial_h\operatorname{Gr}_g r
+=
+(\partial_h\operatorname{Gr}_g r)_{\mathrm{same}}
++
+(\partial_h\operatorname{Gr}_g r)_{\mathrm{lower}},
+\]
+where
+\[
+(\partial_h\operatorname{Gr}_g r)_{\mathrm{same}}
+=
+\frac{r^{(g+3)}(h)}{(g+2)!}(t-h)^{g+2},
+\]
+and
+\[
+(\partial_h\operatorname{Gr}_g r)_{\mathrm{lower}}
+=
+-\frac{r^{(g+2)}(h)}{(g+1)!}(t-h)^{g+1}.
+\]
+\end{lemma}
+
+\begin{theorem}[Moving homogeneous source-frame telescoping]
+\label{thm:moving-homogeneous-source-frame-telescoping}
+For every interior grade \(g\ge1\),
+\[
+\boxed{
+(\partial_h\operatorname{Gr}_{g-1}r)_{\mathrm{same}}
++
+(\partial_h\operatorname{Gr}_{g}r)_{\mathrm{lower}}
+=0.
+}
+\]
+Consequently, after labelled symmetrization, the grade-lowering part of
+the raw source-motion insertion cancels source-slot by source-slot
+against the same-basis derivative of the adjacent lower grade.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{lem:raw-midpoint-derivative-homogeneous-scalar-grades},
+\[
+(\partial_h\operatorname{Gr}_{g-1}r)_{\mathrm{same}}
+=
+\frac{r^{(g+2)}(h)}{(g+1)!}(t-h)^{g+1},
+\]
+whereas
+\[
+(\partial_h\operatorname{Gr}_{g}r)_{\mathrm{lower}}
+=
+-\frac{r^{(g+2)}(h)}{(g+1)!}(t-h)^{g+1}.
+\]
+The signs and factorials agree exactly.  The cancellation is
+labelled-slot local, so it survives the symmetrized multilinear transfer
+expansion.
+\end{proof}
+
+\begin{lemma}[Affine boundary removal in the moving source frame]
+\label{lem:affine-boundary-removal-moving-source-frame}
+In the \(\mathfrak D_Q\)-scaled corrected source block, admissible source
+inputs are \(2\)-jet normalized at the moving midpoint:
+\[
+f(h)=0,\qquad f'(h)=0.
+\]
+Equivalently, the source-frame projection is
+\[
+\Pi_{\ge2,h}f(t)=f(t)-f(h)-f'(h)(t-h).
+\]
+Thus constant and affine modes are not independent raw source inputs.
+
+For the homogeneous scalar-grade basis, the remaining lower boundary
+\[
+(\partial_h\operatorname{Gr}_{0}r)_{\mathrm{lower}}
+=
+-r^{(2)}(h)(t-h)
+\]
+is affine and is killed by \(\Pi_{\ge2,h}\).  Therefore no grade \(-1\)
+source term enters
+\[
+[z^7][\delta^1]\pi_{\mathfrak f_h}
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}.
+\]
+The Taylor source tower is differentiated before ordinary-order
+truncation; in particular, grade \(8\) is included when proving ordinary
+order \(7\) cancellation and truncation is applied only after
+\(\partial_h\).
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+An affine perturbation \(\psi(t)=t-h\) satisfies
+\[
+\psi(t_\pm)=\pm\frac{z}{2Q^2},\qquad
+\psi'(t_\pm)=1,\qquad
+\psi''(t_\pm)=0.
+\]
+In the \(\mathfrak D_Q\)-scaled source variables
+\[
+d_\pm(z)=\frac{z^2}{Q^4}U_\pm(z),
+\qquad
+e_\pm(z)=\frac{z}{Q^2}E_\pm(z),
+\]
+an affine source would force \(U_\pm\) and \(E_\pm\) to have poles in
+\(z\).  Hence affine modes are outside the admissible holomorphic source
+sector.  This is the source-frame reason the homogeneous scalar-grade
+tower starts at \(g=0\), i.e. at the second derivative.
+\end{proof}
+
+\begin{corollary}[Gate B raw edge-divisibility through ordinary order \(7\)]
+\label{cor:gate-b-raw-edge-divisibility-order-seven}
+Assume:
+\begin{enumerate}
+\item Gate~A aggregate closure;
+\item all-subset midpoint parity for same-point whitening coefficients;
+\item symmetry of same-point whitening subset coefficients and of
+\(N_0[0]\);
+\item transpose-invariance of \(\pi_{\mathfrak f_h}\);
+\item the leading \(Y\)-middle parity table;
+\item moving homogeneous source-frame telescoping;
+\item affine boundary removal by \(2\)-jet source-frame normalization;
+and
+\item differentiation of the full Taylor source tower before
+ordinary-order truncation.
+\end{enumerate}
+Then
+\[
+\boxed{
+[z^7][\delta^1]\,
+\pi_{\mathfrak f_h}
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}=0.
+}
+\]
+Equivalently,
+\[
+\boxed{
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}
+=
+O(a_1\delta^2)
+}
+\]
+through ordinary order \(7\) in fixed sector.
+\end{corollary}
+
+\begin{remark}[Gate A is not Gate B]
+\label{rem:gate-a-is-not-gate-b}
+Gate~A is the leading homogeneous cubic audit.  Gate~B is the raw
+edge-divisibility theorem for the projected corrected-whitening package.
+Gate~A closure is a necessary local input, but it is not the same
+statement as edge-normalized package construction.
+Corollary~\ref{cor:gate-b-raw-edge-divisibility-order-seven} records the
+additional transfer and source-frame mechanisms that promote the Gate~A
+closure to the order-\(7\) raw edge-divisibility statement.
+\end{remark}
+
+\begin{remark}[Unsymmetrized subchannels versus aggregate cancellation]
+\label{rem:unsymmetrized-subchannels-versus-aggregate-cancellation}
+Individual transfer placements can have nonzero fixed-sector components.
+This does not contradict the aggregate cancellations above.  The
+cancellations pair each labelled subset with its complement, use midpoint
+parity, and then project to the transpose-invariant fixed sector.  No
+placement-by-placement vanishing is asserted.
+\end{remark}
+
+\begin{remark}[Layering of the corrected package]
+\label{rem:layering-of-corrected-package}
+The raw edge-divisibility statement is pre-normalization.  Only after
+\[
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}
+=
+O(a_1\delta^2)
+\]
+has been established may one form the amplitude-normalized package
+\[
+-a_1^{-1}\delta^{-2}
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}.
+\]
+Post-edge quotient compatibility statements involving \(Q_{7,m}^q\)
+should not be used as the first proof of edge divisibility.
+\end{remark}
+
 \subsection{Midpoint parity}
 \label{subsec:midpoint-parity}
 
@@ -28261,6 +28951,34 @@ Definition~\ref{def:representative-level-midpoint-trivialization}, but they
 must keep that section fixed through the final quotient-coordinate
 calculation.  Changing representatives in the middle of a finite table is
 not a valid simplification.
+\end{remark}
+
+\begin{remark}[Pre- and post-trivialization lower coefficients]
+\label{rem:pre-post-trivialization-lower-coefficients}
+For the quotient-line connection formula we distinguish coefficients
+before and after representative-level midpoint trivialization.
+
+Define the pre-trivialization coefficients by
+\[
+Z_j[M]:=
+-[z^7][(h-m)^j\delta^2M]\,
+a_1^{-1}
+\tau_{h\to m}
+\pi_{\mathfrak f_h}
+(1-\Pi_{1,1})_{\mathrm{mix}}C_{\mathcal W}^{\mathrm{raw}}.
+\]
+These coefficients enter the moving-line connection formula
+\[
+q_{\mathrm{conn},7}[M]
+=
+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M],A_i).
+\]
+
+By contrast, \(B_j[M]\) denotes the coefficient after applying
+\(\operatorname{Triv}_{h\to m}\).  Thus \(B_j[M]\) already contains the
+connection contribution.  One should not insert post-trivialization
+coefficients \(B_j[M]\) into the pre-trivialization connection formula,
+or the moving-line correction is counted twice.
 \end{remark}
 
 \begin{remark}[Next package table required for the connection correction]
