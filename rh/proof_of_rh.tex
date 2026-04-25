@@ -3054,45 +3054,154 @@ Gate~B has removed non-\((1,1)\) quotient directions.  It is not a
 substitute for Gate~B.
 \end{remark}
 
-\begin{remark}[No separate mixed four-point carrier beyond the quotient determinant]
-\label{rem:no-separate-mixed-four-point-carrier}
-Assume Gate~B and the post-Gate-B connection correction close at the quotient
-line.  Then a non-\((1,1)\) order-\(7\) fixed-sector residual
+\begin{theorem}[Mixed four-point dependence descends to the quotient determinant]
+\label{thm:mixed-four-point-dependence-descends-to-quotient-determinant}
+Work on a good fixed-sector patch on which
 \[
-E=eI+fS
+c(h)\ne0,\qquad A_5^{\mathfrak f}(h)=u_5(h)I+v_5(h)S\ne0.
 \]
-is seen by the mixed four-point branch only through its quotient determinant
+Let
+\[
+E=eI+fS\in\mathfrak f_h
+\]
+be an order-\(7\) fixed-sector residual added to
+\[
+A_7^{\mathfrak f}=u_7I+v_7S,
+\]
+with \(c,u_5,v_5\) fixed.  Then the mixed four-point scalar-exit package sees
+\(E\) only through the quotient determinant pairing
 \[
 \omega_h(E,A_5^{\mathfrak f}(h))=ev_5-u_5f.
 \]
-If
-\[
-E\in \mathbf C A_5^{\mathfrak f}(h),
-\]
-then it does not change the canonical septic determinant
+
+Equivalently,
 \[
 \Delta_7=u_7v_5-u_5v_7
 \]
-and hence creates no mixed four-point carrier beyond the already-defined
-scalar exits.
-
-If the residual is not quotient-line absorbed, the obstruction is precisely
-the failure of the quotient-septic connection identity, for example
+is transformed by
 \[
-R_7^{(A)}
+\Delta_7
+\longmapsto
+\Delta_7+\omega_h(E,A_5^{\mathfrak f}(h)),
+\]
+and every lifted \(v_5\)-patch scalar
+\[
+Q_v,\qquad T_v,\qquad \mathcal Z,\qquad \mathcal R
+\]
+changes only through this induced change of \(\Delta_7\).
+
+In particular, if
+\[
+E\in\mathbf C A_5^{\mathfrak f}(h),
+\]
+then \(E\) is invisible to the mixed four-point geometry.  If
+\[
+[E]\ne0
+\quad\text{in}\quad
+\mathfrak f_h/\mathbf C A_5^{\mathfrak f}(h),
+\]
+then the resulting mixed four-point effect is exactly the already-defined
+quotient-septic obstruction, expressed through \(\Delta_7\).  No independent
+mixed four-point carrier is produced.
+\end{theorem}
+
+\begin{proof}
+The lifted mixed four-point branch is built, on a \(v_5\)-patch, from
+\[
+x=\frac{v_5}{c},
+\qquad
+Y=\frac{u_5}{c},
+\qquad
+S=\sigma_v=\frac{\Delta_7}{c\,v_5},
+\]
+and hence from
+\[
+Q_v=(Y,x,S).
+\]
+The scalar exits \(T_v,\mathcal Z,\mathcal R\) are functions of these data and
+their \(x\)-derivatives.  Thus the only possible order-\(7\) input from
+\(A_7^{\mathfrak f}\) is through \(\Delta_7\).
+
+Replacing \(A_7^{\mathfrak f}\) by \(A_7^{\mathfrak f}+E\), with
+\(E=eI+fS\), changes
+\[
+\Delta_7=\omega_h(A_7^{\mathfrak f},A_5^{\mathfrak f})
+\]
+by
+\[
+\omega_h(E,A_5^{\mathfrak f})
+=
+ev_5-u_5f.
+\]
+The same argument on a \(u_5\)-patch uses the parallel quotient coordinate
+\[
+-\frac{\Delta_7}{c\,u_5}.
+\]
+Hence no raw representative data \((u_7,v_7)\) or
+\(\Phi_K(A_7^{\mathfrak f})\) enter as independent mixed four-point inputs.
+\end{proof}
+
+\begin{corollary}[Connection residuals are quotient determinant failures]
+\label{cor:connection-residuals-are-quotient-determinant-failures}
+For \(M\in\{M_A,M_C\}\), set
+\[
+q_{\mathrm{tot},7}[M]
+:=
+R_7^{(M)}
 +
-\sum_{i=1}^{7}\omega_m(Z_{7-i}[M_A],A_i)
+\sum_{i=1}^{7}\omega_m(Z_{7-i}[M],A_i).
 \]
-or the corresponding \(M_C\) expression.  It is not a new mixed four-point
-mechanism; downstream it enters only through the induced change of
-\(\Delta_7\).
-
-This does not solve the separate \(\Phi_K\)-visible hidden-state problem,
-since a line shift \(E=\chi A_5^{\mathfrak f}\) is quotient-invisible but may
-still satisfy
+If
 \[
-\Phi_K(E)=2\chi v_5.
+q_{\mathrm{tot},7}[M_A]=q_{\mathrm{tot},7}[M_C]=0,
 \]
+then the residual monomials \(M_A,M_C\) create no mixed four-point carrier
+beyond the scalar exits already present in the lifted branch.
+
+If one of these two scalars is nonzero, the obstruction is exactly a failure
+of quotient determinant closure:
+\[
+\Delta_7\longmapsto \Delta_7+q_{\mathrm{tot},7}[M].
+\]
+It is not a separate four-point mechanism.
+\end{corollary}
+
+\begin{remark}[Three data layers in the mixed four-point audit]
+\label{rem:three-data-layers-mixed-four-point-audit}
+The mixed four-point carrier audit separates three logically different layers:
+\[
+\begin{array}{c|c|c}
+\text{Layer} & \text{Data} & \text{Role} \\
+\hline
+\text{pre-}\Phi_K\text{ quotient package}
+&
+[B_7^{\mathfrak f}]
+\in
+\mathfrak f_m/\mathbf C A_5^{\mathfrak f}(m)
+&
+\text{Gate B / UV-026 obstruction object}
+\\[0.8ex]
+\Phi_K\text{-visible hidden state}
+&
+A_7^{\mathfrak f}\mapsto
+A_7^{\mathfrak f}+\chi A_5^{\mathfrak f},
+\quad
+\Phi_K(\chi A_5^{\mathfrak f})=2\chi v_5
+&
+\text{visible to transform extraction, quotient-invisible}
+\\[0.8ex]
+\text{mixed four-point scalar exits}
+&
+Q_v,\ T_v,\ \mathcal Z,\ \mathcal R
+\text{ built from }
+c,u_5,v_5,\Delta_7
+&
+\text{downstream four-point branch geometry}
+\end{array}
+\]
+Thus quotient invisibility is enough to remove an order-\(7\) corrected source
+residual from the mixed four-point branch, but it is not by itself enough to
+solve the package-to-transform hidden-state bridge.
 \end{remark}
 
 \begin{theorem}[Mixed four-point factorization through quotient determinant]
@@ -14586,6 +14695,76 @@ T=\frac{v_7}{c}.
 \]
 \end{remark}
 
+\begin{theorem}[Sharp no-descent criterion for the \(\Phi_K\)-visible septic state]
+\label{thm:sharp-no-descent-transform-visible-septic}
+Let
+\[
+\mathfrak f_m=\mathbf C I\oplus\mathbf C S,
+\qquad
+A_5^{\mathfrak f}=u_5I+v_5S.
+\]
+Let
+\[
+q:\mathfrak f_m\to \mathfrak f_m/\mathbf C A_5^{\mathfrak f}
+\]
+be the quotient map.  There exists a functional
+\[
+\Theta_{\Phi,7}
+\]
+on the quotient such that
+\[
+\Phi_K(A_7^{\mathfrak f})
+=
+\Theta_{\Phi,7}(q(A_7^{\mathfrak f}))
+\]
+for all \(A_7^{\mathfrak f}\in\mathfrak f_m\) if and only if
+\[
+\Phi_K(A_5^{\mathfrak f})=0.
+\]
+Equivalently, since
+\[
+\Phi_K(A_5^{\mathfrak f})=2v_5,
+\]
+such descent is possible if and only if
+\[
+v_5=0.
+\]
+\end{theorem}
+
+\begin{proof}
+The quotient identifies
+\[
+A_7^{\mathfrak f}
+\sim
+A_7^{\mathfrak f}+\chi A_5^{\mathfrak f}.
+\]
+Therefore \(\Phi_K\) descends to the quotient if and only if it is constant on
+these affine fibers, i.e.
+\[
+\Phi_K(A_7^{\mathfrak f}+\chi A_5^{\mathfrak f})
+=
+\Phi_K(A_7^{\mathfrak f})
+\]
+for all \(A_7^{\mathfrak f}\) and all \(\chi\).  By linearity this is
+equivalent to
+\[
+\chi\Phi_K(A_5^{\mathfrak f})=0
+\]
+for all \(\chi\), hence to
+\[
+\Phi_K(A_5^{\mathfrak f})=0.
+\]
+Writing
+\[
+A_5^{\mathfrak f}=u_5I+v_5S
+\]
+gives
+\[
+\Phi_K(A_5^{\mathfrak f})=2v_5.
+\]
+Thus descent holds exactly on the locus \(v_5=0\).
+\end{proof}
+
 \begin{theorem}[Augmented Bottleneck C condition]
 \label{thm:augmented-bottleneck-c-condition}
 On the good patch \(c\ne0\), diagonal merger for the transform-safe package
@@ -14700,6 +14879,64 @@ represented by
 Applying \(\Phi_K/c\) gives the slope of the normalized transform-visible
 coordinate.  Since \(T=\Phi_K(A_7^{\mathfrak f})/(2c)\), the displayed
 criterion follows.
+\end{proof}
+
+\begin{proposition}[Formal transform-visible line-gauge leakage]
+\label{prop:formal-transform-visible-line-gauge-leakage}
+On a good patch with
+\[
+c\ne0,
+\qquad
+A_5^{\mathfrak f}=u_5I+v_5S,
+\qquad
+v_5\ne0,
+\]
+quotient-horizontal Bottleneck~C does not imply \(T\)-horizontal merger.
+\end{proposition}
+
+\begin{proof}
+Consider an order-\(7\) fixed-sector edge carrier of the form
+\[
+[\delta^1]A_7^{\mathfrak f,\chi}
+=
+\lambda(m)\,a_1a_2(a_1+a_2)\,A_5^{\mathfrak f}(m).
+\]
+Since it is pointwise parallel to \(A_5^{\mathfrak f}(m)\), its quotient class
+vanishes:
+\[
+[A_7^{\mathfrak f,\chi}]=0
+\qquad
+\text{in}
+\qquad
+\mathfrak f_m/\mathbf C A_5^{\mathfrak f}(m).
+\]
+Thus it is invisible to quotient Bottleneck~C.
+
+However,
+\[
+a_1a_2(a_1+a_2)\big|_{a_2=-a_1}=0,
+\]
+but
+\[
+\partial_{a_2}\bigl(a_1a_2(a_1+a_2)\bigr)\big|_{a_2=-a_1}
+=
+-a_1^2.
+\]
+Moreover,
+\[
+\Phi_K(A_5^{\mathfrak f})=2v_5.
+\]
+Therefore the induced hidden-state slope is
+\[
+[\delta^1]\partial_{a_2}T_\chi(a_1,-a_1,\delta)
+=
+-a_1^2\lambda(m)\frac{v_5(m)}{c(m)}.
+\]
+On the generic patch \(c\ne0,\ v_5\ne0\), this is nonzero unless
+\[
+\lambda(m)=0.
+\]
+Thus a quotient-invisible line-gauge edge carrier can be transform-visible.
 \end{proof}
 
 \begin{corollary}[First live \(T\)-slope carrier]
@@ -14885,6 +15122,206 @@ This is stronger than choosing a local septic gauge such as \(v_7=0\) or
 \(u_7=0\).  Such a gauge selects a representative inside a fixed quotient
 class; it does not prove that the quotient class itself is independent of the
 exceptional slope \(\kappa\).
+\end{remark}
+
+\begin{definition}[Quotient-valued two-atom collision functor]
+\label{def:quotient-valued-two-atom-collision-functor}
+On a good patch with
+\[
+A_5^{\mathfrak f}(m)\ne0,
+\]
+define the order-\(7\) quotient-valued two-atom collision functor by the
+ordered composite
+\[
+\mathcal B_2
+\longmapsto
+C_{\mathcal W}^{\rm raw}
+\longmapsto
+(1-\Pi_{1,1})_{\rm mix}C_{\mathcal W}^{\rm raw}
+\longmapsto
+-a_1^{-1}\delta^{-2}
+(1-\Pi_{1,1})_{\rm mix}C_{\mathcal W}^{\rm raw}
+\]
+\[
+\longmapsto
+\pi_{\mathfrak f_h}[z^{\le7}]
+\longmapsto
+\tau_{h\to m}
+\longmapsto
+[z^7]
+\longmapsto
+\mathfrak f_m/\mathbf C A_5^{\mathfrak f}(m).
+\]
+In formulas,
+\[
+\mathcal C_7^q(m,\kappa,\delta)
+:=
+\left[
+[z^7]\,
+\tau_{h\to m}
+\pi_{\mathfrak f_h}
+\left(
+-a_1^{-1}\delta^{-2}
+(1-\Pi_{1,1})_{\rm mix}
+C_{\mathcal W}^{\rm raw}
+\right)
+\right].
+\]
+The exceptional-divisor trace is
+\[
+B(m,\kappa)=\mathcal C_7^q(m,\kappa,0).
+\]
+Thus quotient-valued diagonal merger is precisely the statement that
+\[
+\mathcal C_7^q(m,\kappa,0)
+=
+\mathcal C_7^q(m,0,0),
+\]
+or equivalently that \(\mathcal C_7^q\) factors on the exceptional divisor
+through the blow-down map
+\[
+(m,\kappa,0)\longmapsto m.
+\]
+\end{definition}
+
+\begin{proposition}[Formal quotient-visible exceptional-slope leakage]
+\label{prop:formal-quotient-visible-exceptional-slope-leakage}
+The formal properties
+\[
+\text{analyticity},\qquad
+\text{atom-swap compatibility},\qquad
+\text{fixed codomain},\qquad
+\text{scalar normalization},\qquad
+B(m,0)=\widehat\Psi(m)
+\]
+do not imply quotient-valued diagonal merger.
+\end{proposition}
+
+\begin{proof}
+Work on a good patch and choose
+\[
+E_m\in\mathfrak f_m
+\]
+with
+\[
+\omega_m(E_m,A_5^{\mathfrak f}(m))=1.
+\]
+Thus \(E_m\) is nonzero in
+\[
+\mathfrak f_m/\mathbf C A_5^{\mathfrak f}(m).
+\]
+
+In the collision chart
+\[
+h_1=m-\frac{\delta}{2},
+\qquad
+h_2=m+\frac{\delta}{2},
+\qquad
+a_2=-a_1(1+\kappa\delta),
+\]
+atom swap acts by
+\[
+\delta\longmapsto-\delta,
+\qquad
+\kappa\longmapsto\frac{\kappa}{1+\kappa\delta}.
+\]
+Define
+\[
+H(\kappa,\delta)
+:=
+\frac12
+\left(
+\kappa+\frac{\kappa}{1+\kappa\delta}
+\right).
+\]
+Then \(H\) is analytic near \((\kappa,\delta)=(0,0)\), satisfies
+\[
+H\!\left(\frac{\kappa}{1+\kappa\delta},-\delta\right)
+=
+H(\kappa,\delta),
+\]
+and restricts to
+\[
+H(\kappa,0)=\kappa
+\]
+on the exceptional divisor.
+
+Let \(Z_0(m)\in\mathfrak f_m\) be any representative of
+\(\widehat\Psi(m)\), and define the formal normalized septic edge
+representative
+\[
+\mathcal R_\varepsilon(m,\kappa,\delta;z)
+=
+z^7
+\left(
+Z_0(m)+\varepsilon H(\kappa,\delta)E_m
+\right).
+\]
+Equivalently, before edge normalization one may write the raw model as
+\[
+\mathcal N_\varepsilon
+=
+-a_1\delta^2z^7
+\left(
+Z_0(m)+\varepsilon H(\kappa,\delta)E_m
+\right).
+\]
+This raw model is \(O(a_1\delta^2)\), so it is compatible with raw
+edge-divisibility.  It is analytic and atom-swap compatible by construction.
+
+At \(\kappa=0\),
+\[
+B_\varepsilon(m,0)=[Z_0(m)]=\widehat\Psi(m).
+\]
+But on the exceptional divisor,
+\[
+B_\varepsilon(m,\kappa)
+=
+[Z_0(m)+\varepsilon\kappa E_m],
+\]
+and hence
+\[
+\partial_\kappa B_\varepsilon(m,\kappa)
+=
+\varepsilon [E_m]\ne0
+\]
+in
+\[
+\mathfrak f_m/\mathbf C A_5^{\mathfrak f}(m).
+\]
+Therefore the listed formal properties do not force quotient-valued diagonal
+merger.
+\end{proof}
+
+\begin{remark}[Balancing does not impose hidden \(\kappa\)-horizontality]
+\label{rem:balancing-does-not-impose-kappa-horizontality}
+The balancing condition
+\[
+a_2=-a_1(1+\kappa\delta)
+\]
+gives
+\[
+\partial_\kappa a_2=-a_1\delta.
+\]
+This single factor of \(\delta\) does not force the normalized exceptional
+slope to vanish after the \(\delta^{-2}\) edge normalization.  A raw term of
+the form
+\[
+-a_1\delta^2\kappa E_m
+\]
+is still of the allowed Gate-B edge order and survives normalization as
+\[
+\kappa E_m.
+\]
+Equivalently, with \(\kappa=2\omega/\delta\), the leakage term
+\[
+2\varepsilon\omega\delta E_m
+=
+\varepsilon\kappa\delta^2E_m
+\]
+is invisible before edge normalization but visible on the exceptional divisor.
+Thus balancing kills the zeroth source moment; it does not by itself kill the
+projective exceptional slope.
 \end{remark}
 
 \begin{definition}[Promoted quadratic mixed-block Bottleneck-C coefficient]
@@ -33503,11 +33940,22 @@ and before midpoint trivialization.
 
 The current finite Fr\'echet recurrences supply the formal \(L\)- and
 \(R\)-coefficient infrastructure and the baseline \(N^{(0)}\)-coefficient
-infrastructure.  What remains to be supplied for this table is the actual
-\(\delta^2\)-edge source expansion for \(M_A,M_C\), including the
-\(\epsilon^j\)-coefficients for \(0\le j\le6\), the corresponding
-\(Y\)-middle source-linear table in the same normalization, and the
-transported moving-line coefficients \(A_i\) through \(i=7\).
+infrastructure.  Before the edge-refined \(Y\)-middle parity theorem was
+isolated, this table was the direct finite computation needed for the
+\(M_A,M_C\) branch.
+
+After Lemma~\ref{lem:edge-refined-y-middle-parity-final} and
+Theorem~\ref{thm:ma-mc-pretriv-connection-closure-final}, this table should
+be read as an audit fallback rather than as an open primary dependency.  Under
+the stated actual source-grade reflection convention, the labelled
+\(J=(3,2,4)\) \(N_0\)-middle and \(Y\)-middle complement pairs cancel
+before midpoint trivialization:
+\[
+Z_j[M_A]=Z_j[M_C]=0,\qquad 0\le j\le7.
+\]
+Thus explicit evaluation of the finite \(Z_j\)-table is no longer required
+for the \(M_A,M_C\) connection branch unless the actual source-grade
+reflection convention or edge-refined \(Y\)-middle parity is later reopened.
 \end{definition}
 
 \begin{remark}[Definition-level material and theorem obligations]
