@@ -134,6 +134,21 @@ The proof has four main pillars.
     \item \emph{$N$-point transverse cancellation:} use an odd holomorphic expansion and explicit cancellation coefficients to crush the zeta transverse channel exponentially in the local height parameter.
 \end{enumerate}
 
+\begin{remark}[Audit status of the four pillars]
+\label{rem:wip-four-pillars-audit-status}
+The four pillars above remain part of the local language of the draft, but
+they should not be read as a complete proof gate.  The later audits show that
+the decisive obstruction is no longer transverse odd-mode detection alone; it
+is the source-weighted interval non-concentration problem for actual zeta
+data.  The local answer is partly positive and partly negative: the layered
+order-seven/order-nine analysis gives conditional fixed-sector visibility, but
+the same rows carry the vulnerable source factor \(H=yq''\).  Whether actual
+zeta arithmetic prevents source-flat intervals that are allowed by finite
+same-scale packet geometry and by fixed-prime/AFE-style surrogates is the
+remaining proof question; see
+Remark~\ref{rem:terminal-status-current-architecture} for the terminal ledger.
+\end{remark}
+
 This approach is not aimed at discovering new direct relations among primes. Rather, it studies a local, normalized geometric object attached to the zeta function and argues that an off-line zero would force a forbidden transverse odd mode in that object. In that sense, the method is primarily a zeta-side rigidity argument, with prime-distribution consequences entering only indirectly through the arithmetic content encoded in the zeta phase and, more broadly, through the classical zero--prime linkage expressed by the explicit formula \cite{Bombieri2000,Conrey2003,Edwards2001,Titchmarsh1986}. This local geometric viewpoint is not standard among the main classical families of approaches to $\RH$ surveyed in the literature \cite{Bombieri2000,Conrey2003}.
 
 For orientation, it may be helpful to situate the present framework relative to earlier geometric viewpoints on $\RH$. One such direction is the Speiser--Levinson--Montgomery line, in which the geometry of zeros of $\zeta'(s)$ is used to encode information about zeros of $\zeta(s)$ \cite{Speiser1935,LevinsonMontgomery1974}. Another is the de~Branges Hilbert-space program, in which one seeks global kernel/positivity structures attached to entire functions related to $\zeta$ \cite{deBranges1986,ConreyLi2000}. The present approach appears to differ in emphasis: rather than working directly with raw derivative geometry or with a global positivity condition, it constructs a locally normalized transverse invariant after quotienting out the dominant value/gauge directions. This comparison is intended only as heuristic orientation for the reader; no claim is made here that the present framework subsumes those earlier viewpoints.
@@ -35310,7 +35325,7 @@ gives the claim.  Therefore \(q_\mu(u)=1/d\) on a neighborhood of the
 origin, and all positive-order derivatives at the origin vanish.
 \end{proof}
 
-\begin{corollary}[Finite same-scale source flattening to arbitrary finite order]
+\begin{corollary}[Finite same-scale source flattening to arbitrary finite jet order]
 \label{cor:finite-same-scale-source-flattening}
 For every \(M\ge1\), there exist finitely many angles
 \[
@@ -35326,9 +35341,9 @@ x_i^2+c_i^2=d^2
 \]
 for every \(i\), and
 \[
-\sum_i w_iK_{\theta_i,d}^{(2j)}(0)=0,
+\sum_i w_iK_{\theta_i,d}^{(r)}(0)=0,
 \qquad
-1\le j\le M,
+1\le r\le M,
 \]
 while
 \[
@@ -35336,7 +35351,7 @@ while
 \]
 Equivalently, a finite positive same-distance packet cluster can satisfy
 \[
-q^{(2)}(0)=q^{(4)}(0)=\cdots=q^{(2M)}(0)=0
+q^{(r)}(0)=0,\qquad 1\le r\le M,
 \]
 while retaining
 \[
@@ -35351,11 +35366,19 @@ Theorem~\ref{thm:continuous-same-scale-source-flattening-model} and the finite
 list of continuous functions
 \[
 K_{\theta,d}(0),\quad
-K_{\theta,d}^{(2)}(0),\quad
-K_{\theta,d}^{(4)}(0),\ldots,K_{\theta,d}^{(2M)}(0).
+K_{\theta,d}^{(1)}(0),\quad
+K_{\theta,d}^{(2)}(0),\ldots,K_{\theta,d}^{(M)}(0).
 \]
-The continuous measure has the prescribed moments.  A positive finite
-quadrature rule reproduces the same finite list of moments.
+The continuous measure has the prescribed moments because
+\[
+\int K_{\theta,d}^{(r)}(0)\,d\mu(\theta)=0
+\qquad (1\le r\le M)
+\]
+and
+\[
+\int K_{\theta,d}(0)\,d\mu(\theta)=\frac1d>0.
+\]
+A positive finite quadrature rule reproduces the same finite list of moments.
 \end{proof}
 
 \begin{remark}[Uniform same-scale caveat]
@@ -35415,15 +35438,21 @@ and therefore can be made smaller than \(Q^{-A}\).
 By Corollary~\ref{cor:finite-same-scale-source-flattening}, choose the packet
 cluster so that
 \[
-q^{(2)}(m_0)=q^{(4)}(m_0)=\cdots=q^{(2M)}(m_0)=0.
+q^{(r)}(m_0)=0,
+\qquad
+1\le r\le M.
 \]
-Symmetric placement also kills odd derivatives at \(m_0\).  Thus
+Taking \(M\ge R+2\), this gives
 \[
-(q'')^{(r)}(m_0)=0
+(q'')^{(r)}(m_0)=q^{(r+2)}(m_0)=0,
+\qquad
+0\le r\le R.
 \]
-for all \(r\) up to the corresponding finite order.  Taking
+Taking
 \[
-M\asymp \frac{C\log Q}{\log\log Q}
+R\asymp \frac{C\log Q}{\log\log Q}
+\qquad\text{and}\qquad
+M\ge R+2,
 \]
 or more conservatively \(M=O(\log Q)\), the standard Taylor--Cauchy estimate at
 scale \(d\asymp Q^{-1}\) gives
@@ -35489,6 +35518,10 @@ packet quadrature to arbitrary finite order.  Therefore the missing input
 cannot be a finite local packet-geometry lemma; it must use actual zeta
 arithmetic, a source-robust row, or a genuinely global transport/projective
 constraint.
+
+This proposition is not a counterexample to \(\RH\) or to actual zeta; it is a
+no-go for closing the present rank-two norm route from local packet geometry
+alone.
 \end{proposition}
 
 \begin{remark}[What would be needed to save the norm route]
@@ -36391,6 +36424,11 @@ mere symbolic artefact: it survives fixed-prime phases, prime powers,
 smoothing, dual oscillatory blocks, and interval verification in the surrogate
 models.  Therefore the positive route must identify a genuine actual-zeta
 arithmetic obstruction, not another local rank-two algebraic identity.
+
+The numerical evidence is not used as proof.  Its role is to identify the
+precise missing theorem: actual-zeta source-curvature observability on
+\(I_\rho\), as formulated in
+Subsection~\ref{subsec:arithmetic-source-curvature-observability-next-attack}.
 \end{remark}
 
 \begin{remark}[Current branch decision]
@@ -36528,6 +36566,161 @@ already gives a necessary sign test for conditional definiteness.
 \end{enumerate}
 \end{remark}
 
+\subsection{Arithmetic source-curvature observability: the next attack}
+\label{subsec:arithmetic-source-curvature-observability-next-attack}
+
+The preceding source-collapse countermodels show that the current rank-two
+norm route cannot close from local row algebra, same-scale packet geometry, or
+finite Hadamard/quartet symmetry alone.  The exact missing input is now an
+arithmetic source-jet theorem for actual zeta data.  The minimal useful form is
+\[
+\boxed{
+\sup_{m\in I_\rho}|q''(m)|\ge Q^{-B}.
+}
+\]
+A stronger and more stable form is the interval energy estimate
+\[
+\boxed{
+\int_{I_\rho}|q''(m)|^2\,dm
+\ge
+Q^{-B}|I_\rho|.
+}
+\]
+This is the positive theorem that would block the interval-local
+source-collapse branch.
+
+\begin{definition}[Canonical source-curvature representation problem]
+\label{def:canonical-source-curvature-representation-problem}
+The first arithmetic task is to put the source curvature \(q''\) into a
+canonical actual-zeta form on both sides of the explicit formula.  One needs a
+zero-side representation
+\[
+q''(m)
+=
+B_2(m)+\sum_\rho K_2(m;\rho),
+\]
+with all source/core and background conventions fixed, and an AFE or
+prime-side representation of the form
+\[
+q''(m)
+=
+B_2(m)
++
+\Re\sum_n b_n(\log n)^2 n^{-im}
++
+\text{\rm dual/gamma/error terms}.
+\]
+The coefficients \(b_n\), the smoothing, the dual term, the gamma/background
+contribution, and the error terms must be specified in the same normalization
+used by the rank-two local rows.  Until this representation is fixed, the
+phrase ``actual-zeta source-jet nonflatness'' is not a precise theorem.
+\end{definition}
+
+\begin{hypothesis}[Off-line-packet source-curvature observability]
+\label{hyp:offline-packet-source-curvature-observability}
+Let \(I_\rho\) be an admissible reduced good-patch interval attached to a
+hypothetical off-line packet \(\rho\).  Actual zeta data satisfy
+\[
+\int_{I_\rho}|q''(m)|^2\,dm
+\ge
+Q^{-B}|I_\rho|
+\]
+for some fixed \(B\), outside the already named reduced-base and correction
+incidence loci.
+Equivalently, in a weaker pointwise form,
+\[
+\sup_{m\in I_\rho}|q''(m)|\ge Q^{-B}.
+\]
+\end{hypothesis}
+
+\begin{remark}[Why this theorem is genuinely arithmetic]
+\label{rem:source-curvature-observability-is-arithmetic}
+Hypothesis~\ref{hyp:offline-packet-source-curvature-observability} cannot
+follow from the local packet geometry developed above.  The same-scale
+source-flattening theorem and finite quadrature corollary show that positive
+same-distance packet configurations can make
+\[
+q''(m_0),\ q^{(4)}(m_0),\ldots,q^{(M)}(m_0)
+\]
+vanish to arbitrary finite order while keeping
+\[
+q_0>0,\qquad g>0,\qquad h>0,
+\]
+and while keeping
+\[
+\Gamma_G=q''-6q_0+2q_0^3
+\]
+bounded away from zero after normalization, for example near \(q_0=2\).
+Thus any proof of
+Hypothesis~\ref{hyp:offline-packet-source-curvature-observability} must use
+actual zeta arithmetic beyond finite same-scale positive packet geometry.
+\end{remark}
+
+\begin{remark}[Prime-side observability formulation]
+\label{rem:prime-side-source-curvature-observability-formulation}
+After fixing the representation in
+Definition~\ref{def:canonical-source-curvature-representation-problem}, the
+source-curvature problem becomes a short-interval non-approximation problem.
+Writing
+\[
+q''(m)=B_2(m)+P_2(m),
+\]
+where \(P_2\) is the oscillatory prime/AFE part, source collapse means
+\[
+P_2(m)\approx -B_2(m)
+\quad\text{throughout }I_\rho.
+\]
+The desired arithmetic theorem is therefore an observability estimate of the
+form
+\[
+\int_{I_\rho}|B_2(m)+P_2(m)|^2\,dm
+\ge Q^{-B}|I_\rho|.
+\]
+A proof would likely have to use fixed zeta coefficients, not merely generic
+Dirichlet-polynomial flexibility.  Candidate tools include localized large
+sieve estimates, Montgomery--Vaughan mean-value estimates, explicit-formula
+energy identities, or a zero-side theorem excluding the same-scale quadrature
+configuration for actual zeta zeros.
+\end{remark}
+
+\begin{remark}[Finite-jet version of the arithmetic problem]
+\label{rem:finite-jet-source-nonflatness-problem}
+The interval energy estimate may also be attacked through finite jets.  On an
+interval
+\[
+I_\rho=[m_0-c/Q,m_0+c/Q],
+\]
+source collapse requires simultaneous smallness of
+\[
+(q'')^{(r)}(m_0),\qquad 0\le r\le R,
+\]
+where the scale audit gives
+\[
+R\asymp \frac{\log Q}{\log\log Q}
+\]
+or more conservatively \(R=O(\log Q)\).  In an AFE model this becomes a finite
+system
+\[
+\sum_n b_n(-i\log n)^r e^{-im_0\log n}
+\approx
+-B_2^{(r)}(m_0),
+\qquad
+0\le r\le R.
+\]
+The positive theorem would be a prime-log derivative-jet nonrecurrence
+statement:
+\[
+\max_{0\le r\le R}
+\left|
+(q'')^{(r)}(m_0)
+\right|
+\ge Q^{-B}.
+\]
+The recurrence heuristics developed above suggest that this is a difficult
+arithmetic theorem and may be false in fixed-prime or AFE surrogates.  This is
+therefore the sharp next branch of the attack.
+\end{remark}
+
 \begin{remark}[Terminal status of the current architecture]
 \label{rem:terminal-status-current-architecture}
 The present proof architecture has reached the following decision point.
@@ -36593,23 +36786,23 @@ needs at least one genuinely new input:
 \text{actual-zeta source-jet nonflatness,}
 }
 \]
-for example
-\[
-\sup_{m\in I_\rho}|q''(m)|\ge Q^{-B},
-\]
-or a stronger finite/growing-jet interval theorem; or else
+in the precise sense of
+Hypothesis~\ref{hyp:offline-packet-source-curvature-observability}; or else
 \[
 \boxed{
-\text{a source-robust row/invariant,}
+\text{a source-robust row/invariant not divisible by }H=yq'',
 }
 \]
 or
 \[
 \boxed{
-\text{a global projective/affine transport index theorem.}
+\text{a global projective/affine transport index theorem with correction control.}
 }
 \]
-Absent such an input, the present architecture is non-closing.
+Absent one of these inputs, the present architecture is non-closing.  The
+least nonlinear and most concrete next attack is the source-curvature
+observability problem of
+Subsection~\ref{subsec:arithmetic-source-curvature-observability-next-attack}.
 \end{remark}
 
 \appendix
