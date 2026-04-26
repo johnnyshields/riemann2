@@ -184,12 +184,16 @@ def qpp_proxy_values(ms: np.ndarray, gammas: np.ndarray, eps: float) -> np.ndarr
 def Q_of_m(m0: float, mode: str = "log") -> float:
     """Q is the asymptotic mean Gram-point spacing scale: Q = log(m0 / (2*pi)).
 
-    Defined only for m0 > 2*pi. Caller is responsible for filtering centers
-    whose Q is too small (Q <= 1 by default). Returns log(m0/(2*pi)) without
-    clamping; values <= 0 are valid sentinels meaning "skip this center".
+    Valid only for positive m0 (zero ordinates of zeta on the critical line are
+    positive). For m0 <= 0 returns -inf so callers can filter via --min-Q (or
+    short-circuit) without hitting a math domain error. Returns log(m0/(2*pi))
+    without clamping for valid inputs; values <= 0 are valid sentinels meaning
+    "skip this center".
     """
     if mode == "log":
-        return math.log(abs(m0) / (2.0 * math.pi))
+        if m0 <= 0:
+            return float("-inf")
+        return math.log(m0 / (2.0 * math.pi))
     raise ValueError(f"Unknown Q mode: {mode}")
 
 
@@ -765,7 +769,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--zeros", required=True, help="Path to zero ordinates file.")
     parser.add_argument("--out", default=_default_out("zero_pilot_results.csv"),
-                        help="Output CSV path. Default lands in <script>/../out/.")
+                        help="Output CSV path. Default lands in <script>/out/.")
     parser.add_argument("--fast", action="store_true", help="Small fast pilot.")
     parser.add_argument("--seed", type=int, default=12345)
     parser.add_argument("--top", type=int, default=20)

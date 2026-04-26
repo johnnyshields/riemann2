@@ -127,14 +127,14 @@ def K_fourth(theta: np.ndarray, x: np.ndarray) -> np.ndarray:
     Analytic fourth derivative of K_theta(x).
 
     Let y=x-c, a=s. For K=a/(y^2+a^2):
-    K'''' = 24*a*(16*y^4 - 12*a^2*y^2 + a^4) / (y^2+a^2)^5
+    K'''' = 24*a*(5*y^4 - 10*a^2*y^2 + a^4) / (y^2+a^2)^5
     """
     s = np.sin(theta)[None, :]
     c = np.cos(theta)[None, :]
     xx = x[:, None]
     y = xx - c
     den = y * y + s * s
-    numerator = 24.0 * s * (16.0 * y**4 - 12.0 * s**2 * y**2 + s**4)
+    numerator = 24.0 * s * (5.0 * y**4 - 10.0 * s**2 * y**2 + s**4)
     return numerator / (den**5)
 
 

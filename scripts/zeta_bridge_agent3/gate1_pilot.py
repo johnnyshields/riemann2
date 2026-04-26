@@ -47,7 +47,11 @@ import numpy as np
 import mpmath as mp
 from numpy.polynomial.legendre import leggauss
 
-warnings.filterwarnings("ignore", category=np.exceptions.RankWarning)
+try:
+    _RANK_WARNING = np.exceptions.RankWarning  # type: ignore[attr-defined]
+except AttributeError:
+    _RANK_WARNING = getattr(np, "RankWarning", Warning)
+warnings.filterwarnings("ignore", category=_RANK_WARNING)
 
 
 def log(msg: str) -> None:
@@ -477,15 +481,22 @@ def _rel_diff(a: float, b: float) -> float:
 
 def _classify_row(B_eff: float, J_max: float,
                   tail_drift_rel: float, quad_drift_rel: float,
+                  tail_edge: bool = False,
                   tail_tol: float = 2e-2, quad_tol: float = 1e-5) -> str:
-    """Unified six-tier status. Matches agent1 thresholds."""
+    """Unified status. Matches agent1 thresholds, plus a tail-edge guard so
+    near-edge centers are not accepted as 'healthy' just because the truncated
+    2*W window happens to look stable for the wrong reason. Also strengthens
+    `candidate_proxy_flat` to require small J_max (interval flatness alone is
+    not enough; we need simultaneous interval and finite-jet flatness)."""
+    if tail_edge:
+        return "reject_tail_edge"
     if not math.isfinite(tail_drift_rel) or tail_drift_rel > tail_tol:
         return "reject_tail_unstable"
     if not math.isfinite(quad_drift_rel) or quad_drift_rel > quad_tol:
         return "reject_quad_unstable"
     if math.isfinite(B_eff) and math.isfinite(J_max) and B_eff > 20 and J_max < 1e-8:
         return "serious_proxy_warning"
-    if math.isfinite(B_eff) and B_eff > 10:
+    if math.isfinite(B_eff) and math.isfinite(J_max) and B_eff > 10 and J_max < 1e-6:
         return "candidate_proxy_flat"
     if math.isfinite(B_eff) and B_eff > 5:
         return "watch"
@@ -586,6 +597,7 @@ def _process_center(task: Tuple) -> List[Dict]:
             for W_factor in W_factor_list:
                 W = W_factor / Q
                 W2 = 2.0 * W_factor / Q
+                tail_edge = (m0 - W2 < zeros[0]) or (m0 + W2 > zeros[-1])
                 for R_jet in R_jet_list:
                     for nquad in nquad_list:
                         E_I, S_I, num_used = integrate_zero_proxy(
@@ -607,7 +619,8 @@ def _process_center(task: Tuple) -> List[Dict]:
                         J_max, J_rms = finite_difference_jets_zero_proxy(
                             zeros=zeros, m0=m0, Delta=Delta, eps=eps, W=W, R=R_jet
                         )
-                        status = _classify_row(B_eff, J_max, tail_drift, quad_drift)
+                        status = _classify_row(B_eff, J_max, tail_drift, quad_drift,
+                                               tail_edge=tail_edge)
                         out.append({
                             "center_type": center_type,
                             "m0": m0,
@@ -645,9 +658,13 @@ def run_actual_zero_proxy_scan(outdir: str,
     zeros = load_or_generate_zeros(outdir, n_zeros=n_zeros)
     log(f"have {len(zeros)} zeros: gamma_1={zeros[0]:.4f}, gamma_N={zeros[-1]:.4f}")
 
+    # Resolve effective center-generation parameters BEFORE hashing, so that the
+    # hash describes the actual rows produced. (Smoke mode overrides
+    # end_index/random_count internally; if we hashed the user-supplied values,
+    # the slug would change without the rows changing, or vice versa.)
     if smoke:
-        centers = make_centers(zeros, start_index, min(start_index + 50, end_index),
-                               random_count=10, uniform_count=uniform_count, seed=seed)
+        effective_end_index = min(start_index + 50, end_index)
+        effective_random_count = 10
         c_I_list = [0.5]
         kappa_list = [1.0]
         W_factor_list = [50.0]
@@ -655,14 +672,18 @@ def run_actual_zero_proxy_scan(outdir: str,
         nquad_list = [257]
         suffix = "smoke"
     else:
-        centers = make_centers(zeros, start_index, end_index,
-                               random_count=random_count, uniform_count=uniform_count, seed=seed)
+        effective_end_index = end_index
+        effective_random_count = random_count
         c_I_list = [0.2, 0.5]
         kappa_list = [0.5, 1.0]
         W_factor_list = [25.0, 50.0]
         R_jet_list = [4]
         nquad_list = [257]
         suffix = "small"
+
+    centers = make_centers(zeros, start_index, effective_end_index,
+                           random_count=effective_random_count,
+                           uniform_count=uniform_count, seed=seed)
 
     n_params_per_center = (
         len(c_I_list) * len(kappa_list) * len(W_factor_list) * len(R_jet_list) * len(nquad_list)
@@ -675,8 +696,8 @@ def run_actual_zero_proxy_scan(outdir: str,
     params_hash = compute_params_hash(
         zeros=zeros, c_I_list=c_I_list, kappa_list=kappa_list,
         W_factor_list=W_factor_list, R_jet_list=R_jet_list, nquad_list=nquad_list,
-        start_index=start_index, end_index=end_index,
-        random_count=random_count, uniform_count=uniform_count, seed=seed,
+        start_index=start_index, end_index=effective_end_index,
+        random_count=effective_random_count, uniform_count=uniform_count, seed=seed,
     )
     stem = os.path.join(outdir, f"actual_zero_proxy_{suffix}.csv")
     csv_path = derive_output_path(stem, params_hash, hash_len=hash_len)
@@ -728,16 +749,31 @@ def run_actual_zero_proxy_scan(outdir: str,
             writer.writeheader()
             fout.flush()
 
+        # Filter worker output against the row-level done_keys set so that an
+        # interrupted center (where some param tuples were written and others
+        # were not) does not reappear as duplicate rows on resume. Also dedupes
+        # against any within-run repeats.
+        seen_keys = set(done_keys)
+
+        def _emit(result_rows):
+            written = 0
+            for row in result_rows:
+                key = _row_key(row)
+                if key in seen_keys:
+                    continue
+                writer.writerow(row)
+                seen_keys.add(key)
+                rows.append(row)
+                written += 1
+            if written:
+                fout.flush()
+
         try:
             if workers <= 1:
                 log("running serial (workers <= 1)")
                 _init_worker(list(zeros))
                 for idx, task in enumerate(tasks):
-                    result = _process_center(task)
-                    for row in result:
-                        writer.writerow(row)
-                    fout.flush()
-                    rows.extend(result)
+                    _emit(_process_center(task))
                     if (idx + 1) % progress_every == 0 or idx + 1 == len(tasks):
                         elapsed = time.time() - t0
                         rate = (idx + 1) / elapsed if elapsed > 0 else 0
@@ -747,17 +783,15 @@ def run_actual_zero_proxy_scan(outdir: str,
                             f"elapsed={elapsed:.1f}s  rate={rate:.2f}/s  eta={eta:.1f}s"
                         )
             else:
-                log(f"running in process pool with {workers} workers")
-                ctx = mp_proc.get_context("fork")
+                method = "fork" if "fork" in mp_proc.get_all_start_methods() else "spawn"
+                log(f"running in process pool with {workers} workers (start_method={method})")
+                ctx = mp_proc.get_context(method)
                 with ctx.Pool(processes=workers, initializer=_init_worker,
                               initargs=(list(zeros),)) as pool:
                     for idx, result in enumerate(
                         pool.imap_unordered(_process_center, tasks, chunksize=4)
                     ):
-                        for row in result:
-                            writer.writerow(row)
-                        fout.flush()
-                        rows.extend(result)
+                        _emit(result)
                         if (idx + 1) % progress_every == 0 or idx + 1 == len(tasks):
                             elapsed = time.time() - t0
                             rate = (idx + 1) / elapsed if elapsed > 0 else 0
