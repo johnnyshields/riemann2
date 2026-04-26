@@ -1,0 +1,596 @@
+#!/usr/bin/env python3
+"""
+Gate 1 actual-zero pilot scan, zero-kernel-only proxy.
+
+This script tests the Gate 1 source-curvature diagnostic on actual zero ordinates
+using a deliberately simplified proxy kernel:
+
+    K(m; gamma, eps) = eps / ((m-gamma)^2 + eps^2)
+
+    K2(m; gamma, eps) = d^2/dm^2 K
+        = 2 eps (3(m-gamma)^2 - eps^2) / ((m-gamma)^2 + eps^2)^3
+
+Proxy object:
+
+    qpp_zero_eps(m) = sum_{gamma in cutoff window} K2(m; gamma, eps)
+
+This is NOT the final canonical q''_can. It omits B2, completed-phase constants,
+tail regularization, and quartet/completed-zero normalization. Use it as a
+geometry/pipeline pilot only.
+
+Run:
+    python gate1_zero_pilot.py --zeros zeros.txt --out zero_pilot_results.csv
+    python gate1_zero_pilot.py --zeros zeros.csv --fast --out zero_pilot_fast.csv
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import math
+import os
+from dataclasses import dataclass, asdict
+from typing import Iterable
+
+import numpy as np
+from numpy.polynomial.legendre import leggauss
+
+
+# ----------------------------
+# Input
+# ----------------------------
+
+def load_zeros(path: str) -> np.ndarray:
+    """
+    Load zero ordinates from:
+      - plain text, one float per line
+      - CSV with column gamma/zero/zeros/ordinate/t
+      - CSV-like first column fallback
+
+    Lines beginning with # are ignored.
+    """
+    if not os.path.exists(path):
+        raise FileNotFoundError(path)
+
+    # Try CSV/header mode.
+    with open(path, "r", newline="") as f:
+        sample = f.read(4096)
+        f.seek(0)
+
+        # If header-ish, use csv.DictReader.
+        first_nonempty = None
+        for line in sample.splitlines():
+            line = line.strip()
+            if line and not line.startswith("#"):
+                first_nonempty = line
+                break
+
+        if first_nonempty and any(name in first_nonempty.lower().split(",") for name in ["gamma", "zero", "zeros", "ordinate", "t"]):
+            reader = csv.DictReader(f)
+            candidates = ["gamma", "zero", "zeros", "ordinate", "t"]
+            col = None
+            lower_map = {c.lower(): c for c in (reader.fieldnames or [])}
+            for cand in candidates:
+                if cand in lower_map:
+                    col = lower_map[cand]
+                    break
+            if col is None:
+                raise ValueError(f"Could not find zero ordinate column in {reader.fieldnames}")
+            vals = []
+            for row in reader:
+                raw = (row.get(col) or "").strip()
+                if raw:
+                    vals.append(float(raw))
+            arr = np.array(vals, dtype=np.float64)
+            arr.sort()
+            return arr
+
+    # Plain/fallback mode.
+    vals = []
+    with open(path, "r") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            # accept comma-separated; take first parseable field
+            parts = [p.strip() for p in line.replace("\t", ",").split(",")]
+            for p in parts:
+                if not p:
+                    continue
+                try:
+                    vals.append(float(p))
+                    break
+                except ValueError:
+                    continue
+
+    arr = np.array(vals, dtype=np.float64)
+    arr = arr[np.isfinite(arr)]
+    arr.sort()
+    if len(arr) == 0:
+        raise ValueError("No zero ordinates loaded.")
+    return arr
+
+
+# ----------------------------
+# Proxy kernel and derivatives
+# ----------------------------
+
+def K2_eps(m: np.ndarray, gammas: np.ndarray, eps: float) -> np.ndarray:
+    """
+    Return matrix K2(m_i; gamma_j, eps), shape (len(m), len(gammas)).
+
+    K2 = 2 eps (3 x^2 - eps^2) / (x^2 + eps^2)^3
+    """
+    x = m[:, None] - gammas[None, :]
+    den = x * x + eps * eps
+    return 2.0 * eps * (3.0 * x * x - eps * eps) / (den ** 3)
+
+
+def K2_deriv_at_center(gammas: np.ndarray, m0: float, eps: float, r: int) -> float:
+    """
+    Numerically stable-ish finite-difference-free derivatives for small r by
+    polynomial recurrence would be ideal. For pilot, use complex-step-like
+    polynomial fitting instead elsewhere. This placeholder is not used directly.
+    """
+    raise NotImplementedError
+
+
+def qpp_proxy_values(ms: np.ndarray, gammas: np.ndarray, eps: float) -> np.ndarray:
+    if len(gammas) == 0:
+        return np.zeros_like(ms)
+    return np.sum(K2_eps(ms, gammas, eps), axis=1)
+
+
+# ----------------------------
+# Interval computations
+# ----------------------------
+
+def Q_of_m(m0: float, mode: str = "log") -> float:
+    if mode == "log":
+        return max(1.0, math.log(3.0 + abs(m0)))
+    raise ValueError(f"Unknown Q mode: {mode}")
+
+
+def select_zeros_in_window(zeros: np.ndarray, center: float, W: float) -> np.ndarray:
+    lo = np.searchsorted(zeros, center - W, side="left")
+    hi = np.searchsorted(zeros, center + W, side="right")
+    return zeros[lo:hi]
+
+
+def compute_interval_energy(
+    zeros: np.ndarray,
+    m0: float,
+    c_I: float,
+    kappa: float,
+    W_factor: float,
+    Q_mode: str,
+    nquad: int,
+) -> tuple[float, float, float, int]:
+    """
+    Compute:
+      Q = log-ish scale
+      eps = kappa/Q
+      I = [m0-c_I/Q, m0+c_I/Q]
+      W = W_factor/Q
+      qpp = sum_{|gamma-m0|<=W} K2
+      E_I = mean |qpp|^2 over I
+      S_I = max over quadrature nodes
+    """
+    Q = Q_of_m(m0, Q_mode)
+    eps = kappa / Q
+    half = c_I / Q
+    W = W_factor / Q
+
+    local_zeros = select_zeros_in_window(zeros, m0, W)
+
+    nodes, weights = leggauss(nquad)
+    ms = m0 + half * nodes
+    ws = half * weights
+
+    vals = qpp_proxy_values(ms, local_zeros, eps)
+    integral = float(np.sum(ws * vals * vals))
+    E_I = integral / (2.0 * half)
+    S_I = float(np.max(np.abs(vals))) if len(vals) else 0.0
+    return E_I, S_I, Q, len(local_zeros)
+
+
+def chebyshev_jet_proxy(
+    zeros: np.ndarray,
+    m0: float,
+    c_I: float,
+    kappa: float,
+    W_factor: float,
+    Q_mode: str,
+    R: int,
+    nfit: int,
+) -> tuple[float, float]:
+    """
+    Compute normalized finite jets J_r = Delta^r f^(r)(m0), r=0..R,
+    via Chebyshev/polynomial fit over [-Delta, Delta].
+
+    We fit f(m0 + Delta*x) as polynomial in x:
+        f ~ sum a_r x^r
+    Then Delta^r f^(r)(m0) = r! a_r.
+
+    Returns:
+      J_max, J_rms
+    """
+    Q = Q_of_m(m0, Q_mode)
+    eps = kappa / Q
+    Delta = c_I / Q
+    W = W_factor / Q
+
+    local_zeros = select_zeros_in_window(zeros, m0, W)
+
+    # Chebyshev-ish nodes in x.
+    j = np.arange(nfit)
+    x = np.cos((2 * j + 1) * math.pi / (2 * nfit))
+    ms = m0 + Delta * x
+    vals = qpp_proxy_values(ms, local_zeros, eps)
+
+    # Fit ordinary polynomial in x up to degree R.
+    # Use overdetermined least squares.
+    V = np.vander(x, N=R + 1, increasing=True)
+    coeffs, *_ = np.linalg.lstsq(V, vals, rcond=None)
+
+    jets = np.array([math.factorial(r) * coeffs[r] for r in range(R + 1)], dtype=np.float64)
+    J_max = float(np.max(np.abs(jets)))
+    J_rms = float(np.sqrt(np.sum(jets * jets)))
+    return J_max, J_rms
+
+
+# ----------------------------
+# Center families
+# ----------------------------
+
+def gram_like_centers(zeros: np.ndarray, max_count: int) -> np.ndarray:
+    """
+    Placeholder 'Gram-like' centers: evenly spaced between min/max zero range.
+    True Gram points require theta(t), not included in this proxy script.
+    """
+    if len(zeros) < 2:
+        return zeros.copy()
+    lo, hi = float(zeros[0]), float(zeros[-1])
+    return np.linspace(lo, hi, min(max_count, max(2, len(zeros) // 2)))
+
+
+def generate_centers(
+    zeros: np.ndarray,
+    max_per_family: int,
+    seed: int,
+) -> list[tuple[str, float]]:
+    rng = np.random.default_rng(seed)
+    centers: list[tuple[str, float]] = []
+
+    # zero ordinates
+    for g in zeros[:max_per_family]:
+        centers.append(("zero", float(g)))
+
+    # gap midpoints and small-gap neighborhoods
+    gaps = np.diff(zeros)
+    if len(gaps) > 0:
+        idx_sorted_small = np.argsort(gaps)[:max_per_family]
+        idx_sorted_large = np.argsort(gaps)[-max_per_family:]
+
+        for i in idx_sorted_small:
+            a, b = zeros[i], zeros[i + 1]
+            centers.append(("small_gap_mid", float(0.5 * (a + b))))
+            centers.append(("small_gap_q25", float(a + 0.25 * (b - a))))
+            centers.append(("small_gap_q75", float(a + 0.75 * (b - a))))
+
+        for i in idx_sorted_large:
+            a, b = zeros[i], zeros[i + 1]
+            centers.append(("large_gap_mid", float(0.5 * (a + b))))
+
+    # gap midpoints first max_per_family
+    for i in range(min(max_per_family, max(0, len(zeros) - 1))):
+        centers.append(("gap_mid", float(0.5 * (zeros[i] + zeros[i + 1]))))
+
+    # gram-like placeholder
+    for g in gram_like_centers(zeros, max_per_family):
+        centers.append(("gram_like_even", float(g)))
+
+    # random centers within zero range
+    if len(zeros) >= 2:
+        lo, hi = float(zeros[0]), float(zeros[-1])
+        for m in rng.uniform(lo, hi, size=max_per_family):
+            centers.append(("random", float(m)))
+
+    # Deduplicate approximately
+    seen = set()
+    deduped = []
+    for typ, m in centers:
+        key = (typ, round(m, 12))
+        if key not in seen:
+            seen.add(key)
+            deduped.append((typ, m))
+    return deduped
+
+
+# ----------------------------
+# Result row
+# ----------------------------
+
+@dataclass
+class ScanRow:
+    center_type: str
+    m0: float
+    Q: float
+    c_I: float
+    kappa: float
+    W_factor: float
+    nquad: int
+    R_jet: int
+    local_zero_count: int
+    E_I: float
+    S_I: float
+    B_eff: float
+    J_max: float
+    J_rms: float
+    tail_drift_rel: float
+    quad_drift_rel: float
+    status: str
+
+
+def safe_B_eff(E_I: float, Q: float) -> float:
+    if E_I <= 0 or Q <= 1:
+        return float("nan")
+    return -math.log(E_I) / math.log(Q)
+
+
+def rel_diff(a: float, b: float) -> float:
+    denom = max(abs(a), abs(b), 1e-300)
+    return abs(a - b) / denom
+
+
+def classify_row(row: ScanRow, tail_tol: float, quad_tol: float) -> str:
+    if row.tail_drift_rel > tail_tol:
+        return "reject_tail_unstable"
+    if row.quad_drift_rel > quad_tol:
+        return "reject_quad_unstable"
+    # Proxy thresholds only.
+    if row.B_eff > 20 and row.J_max < 1e-8:
+        return "serious_proxy_warning"
+    if row.B_eff > 10:
+        return "candidate_proxy_flat"
+    if row.B_eff > 5:
+        return "watch"
+    return "healthy"
+
+
+def run_scan(
+    zeros: np.ndarray,
+    centers: list[tuple[str, float]],
+    c_I_values: list[float],
+    kappa_values: list[float],
+    W_factor_values: list[float],
+    Q_mode: str,
+    nquad: int,
+    R_jet: int,
+    nfit: int,
+    tail_tol: float,
+    quad_tol: float,
+) -> list[ScanRow]:
+    rows: list[ScanRow] = []
+    for center_type, m0 in centers:
+        # Avoid centers too near boundary for large windows.
+        for c_I in c_I_values:
+            for kappa in kappa_values:
+                for W_factor in W_factor_values:
+                    # Main energy.
+                    E, S, Q, count = compute_interval_energy(
+                        zeros, m0, c_I, kappa, W_factor, Q_mode, nquad
+                    )
+
+                    # Quadrature drift: compare with half nquad.
+                    E_half, _, _, _ = compute_interval_energy(
+                        zeros, m0, c_I, kappa, W_factor, Q_mode, max(32, nquad // 2)
+                    )
+                    quad_drift = rel_diff(E, E_half)
+
+                    # Tail drift: compare current W to 2W if possible.
+                    E_2W, _, _, _ = compute_interval_energy(
+                        zeros, m0, c_I, kappa, 2.0 * W_factor, Q_mode, nquad
+                    )
+                    tail_drift = rel_diff(E, E_2W)
+
+                    try:
+                        J_max, J_rms = chebyshev_jet_proxy(
+                            zeros, m0, c_I, kappa, W_factor, Q_mode, R_jet, nfit
+                        )
+                    except Exception:
+                        J_max, J_rms = float("nan"), float("nan")
+
+                    B_eff = safe_B_eff(E, Q)
+
+                    row = ScanRow(
+                        center_type=center_type,
+                        m0=m0,
+                        Q=Q,
+                        c_I=c_I,
+                        kappa=kappa,
+                        W_factor=W_factor,
+                        nquad=nquad,
+                        R_jet=R_jet,
+                        local_zero_count=count,
+                        E_I=E,
+                        S_I=S,
+                        B_eff=B_eff,
+                        J_max=J_max,
+                        J_rms=J_rms,
+                        tail_drift_rel=tail_drift,
+                        quad_drift_rel=quad_drift,
+                        status="",
+                    )
+                    row.status = classify_row(row, tail_tol, quad_tol)
+                    rows.append(row)
+    return rows
+
+
+def write_rows(path: str, rows: list[ScanRow]) -> None:
+    fields = list(asdict(rows[0]).keys()) if rows else []
+    with open(path, "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fields)
+        writer.writeheader()
+        for row in rows:
+            writer.writerow(asdict(row))
+
+
+def print_summary(rows: list[ScanRow], top_n: int) -> None:
+    print("\n=== Gate 1 actual-zero pilot summary: zero-kernel-only proxy ===")
+    print(f"rows: {len(rows)}")
+
+    by_status = {}
+    for r in rows:
+        by_status[r.status] = by_status.get(r.status, 0) + 1
+    print("status counts:")
+    for k, v in sorted(by_status.items()):
+        print(f"  {k}: {v}")
+
+    rows_sorted = sorted(rows, key=lambda r: (float(np.nan_to_num(-r.B_eff, nan=1e999))))
+    # Actually want largest B_eff.
+    rows_sorted = sorted(rows, key=lambda r: (-float(np.nan_to_num(r.B_eff, nan=-1e999)), r.tail_drift_rel, r.quad_drift_rel))
+
+    print(f"\nTop {top_n} by B_eff:")
+    header = [
+        "rank", "status", "center_type", "m0", "Q", "c_I", "kappa", "W_factor",
+        "count", "E_I", "S_I", "B_eff", "J_max", "tail_drift", "quad_drift"
+    ]
+    print(",".join(header))
+    for i, r in enumerate(rows_sorted[:top_n], start=1):
+        print(",".join([
+            str(i),
+            r.status,
+            r.center_type,
+            f"{r.m0:.12g}",
+            f"{r.Q:.6g}",
+            f"{r.c_I:.3g}",
+            f"{r.kappa:.3g}",
+            f"{r.W_factor:.3g}",
+            str(r.local_zero_count),
+            f"{r.E_I:.6e}",
+            f"{r.S_I:.6e}",
+            f"{r.B_eff:.6g}",
+            f"{r.J_max:.6e}",
+            f"{r.tail_drift_rel:.3e}",
+            f"{r.quad_drift_rel:.3e}",
+        ]))
+
+
+def _parse_floats(s: str) -> list[float]:
+    return [float(p.strip()) for p in s.split(",") if p.strip()]
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--zeros", required=True, help="Path to zero ordinates file.")
+    parser.add_argument("--out", default="zero_pilot_results.csv", help="Output CSV path.")
+    parser.add_argument("--fast", action="store_true", help="Small fast pilot.")
+    parser.add_argument("--seed", type=int, default=12345)
+    parser.add_argument("--top", type=int, default=20)
+    parser.add_argument("--min-m0", type=float, default=None,
+                        help="Discard zero ordinates and centers below this height.")
+    parser.add_argument("--min-Q", type=float, default=None,
+                        help="Discard centers whose Q = log(3+|m0|) is below this.")
+    parser.add_argument("--W-factors", type=str, default=None,
+                        help="Comma-separated W_factor values (override default).")
+    parser.add_argument("--c-I-values", type=str, default=None,
+                        help="Comma-separated c_I values (override default).")
+    parser.add_argument("--kappa-values", type=str, default=None,
+                        help="Comma-separated kappa values (override default).")
+    parser.add_argument("--nquad", type=int, default=None)
+    parser.add_argument("--R-jet", type=int, default=None)
+    parser.add_argument("--nfit", type=int, default=None)
+    parser.add_argument("--tail-tol", type=float, default=None)
+    parser.add_argument("--quad-tol", type=float, default=None)
+    parser.add_argument("--max-per-family", type=int, default=None)
+    args = parser.parse_args()
+
+    zeros = load_zeros(args.zeros)
+    print(f"Loaded {len(zeros)} zeros: [{zeros[0]}, {zeros[-1]}]")
+
+    if args.min_m0 is not None:
+        before = len(zeros)
+        zeros = zeros[zeros >= args.min_m0]
+        print(f"Filtered to {len(zeros)} zeros with m0 >= {args.min_m0} (was {before})")
+        if len(zeros) < 2:
+            raise SystemExit("Too few zeros after --min-m0 filter.")
+
+    if args.fast:
+        max_per_family = 8
+        c_I_values = [0.2, 0.5]
+        kappa_values = [0.5, 1.0]
+        W_factor_values = [10.0, 25.0]
+        nquad = 96
+        R_jet = 6
+        nfit = 24
+        tail_tol = 5e-2
+        quad_tol = 1e-4
+    else:
+        max_per_family = 25
+        c_I_values = [0.1, 0.2, 0.5, 1.0]
+        kappa_values = [0.25, 0.5, 1.0]
+        W_factor_values = [10.0, 25.0, 50.0, 100.0]
+        nquad = 160
+        R_jet = 8
+        nfit = 36
+        tail_tol = 2e-2
+        quad_tol = 1e-5
+
+    if args.max_per_family is not None:
+        max_per_family = args.max_per_family
+    if args.c_I_values is not None:
+        c_I_values = _parse_floats(args.c_I_values)
+    if args.kappa_values is not None:
+        kappa_values = _parse_floats(args.kappa_values)
+    if args.W_factors is not None:
+        W_factor_values = _parse_floats(args.W_factors)
+    if args.nquad is not None:
+        nquad = args.nquad
+    if args.R_jet is not None:
+        R_jet = args.R_jet
+    if args.nfit is not None:
+        nfit = args.nfit
+    if args.tail_tol is not None:
+        tail_tol = args.tail_tol
+    if args.quad_tol is not None:
+        quad_tol = args.quad_tol
+
+    centers = generate_centers(zeros, max_per_family=max_per_family, seed=args.seed)
+    print(f"Generated {len(centers)} centers.")
+
+    if args.min_m0 is not None:
+        before = len(centers)
+        centers = [(t, m) for (t, m) in centers if m >= args.min_m0]
+        print(f"Centers after --min-m0: {len(centers)} (was {before})")
+
+    if args.min_Q is not None:
+        before = len(centers)
+        centers = [(t, m) for (t, m) in centers if Q_of_m(m, "log") >= args.min_Q]
+        print(f"Centers after --min-Q: {len(centers)} (was {before})")
+
+    if not centers:
+        raise SystemExit("No centers remain after filters.")
+
+    rows = run_scan(
+        zeros=zeros,
+        centers=centers,
+        c_I_values=c_I_values,
+        kappa_values=kappa_values,
+        W_factor_values=W_factor_values,
+        Q_mode="log",
+        nquad=nquad,
+        R_jet=R_jet,
+        nfit=nfit,
+        tail_tol=tail_tol,
+        quad_tol=quad_tol,
+    )
+
+    write_rows(args.out, rows)
+    print_summary(rows, top_n=args.top)
+    print(f"\nWrote CSV: {args.out}")
+    print("\nNOTE: This is a zero-kernel-only proxy. It omits B2 and final canonical regularization.")
+
+
+if __name__ == "__main__":
+    main()
