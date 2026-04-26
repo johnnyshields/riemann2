@@ -163,11 +163,8 @@ def K2_eps(m: np.ndarray, gammas: np.ndarray, eps: float) -> np.ndarray:
 
 
 def K2_deriv_at_center(gammas: np.ndarray, m0: float, eps: float, r: int) -> float:
-    """
-    Numerically stable-ish finite-difference-free derivatives for small r by
-    polynomial recurrence would be ideal. For pilot, use complex-step-like
-    polynomial fitting instead elsewhere. This placeholder is not used directly.
-    """
+    """Reserved for future analytic jet computation. Current pilot uses
+    chebyshev_jet_proxy() instead."""
     raise NotImplementedError
 
 
