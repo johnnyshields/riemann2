@@ -411,7 +411,19 @@ def parse_args():
     p.add_argument("--proxy-step", type=float, default=0.1)
     p.add_argument("--mp-dps", type=int, default=30)
 
-    return p.parse_args()
+    args = p.parse_args()
+
+    # Q = log(t / (2π)) is used as the canonical scale; B_eff = -log(E)/log(Q)
+    # would blow up or sign-flip when Q ≤ 1, i.e. t ≤ 2π·e ≈ 17.08. Reject up
+    # front rather than emit NaNs deep in the sweep.
+    _Q1_THRESHOLD = 2.0 * math.pi * math.e
+    if args.t_min <= _Q1_THRESHOLD:
+        p.error(
+            f"--t-min must exceed 2π·e ≈ {_Q1_THRESHOLD:.4f} so that Q = log(t/(2π)) > 1; "
+            f"got {args.t_min}"
+        )
+
+    return args
 
 
 def main():

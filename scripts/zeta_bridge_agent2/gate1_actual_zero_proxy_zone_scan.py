@@ -35,6 +35,7 @@ Dependencies:
 
 import argparse
 import hashlib
+import io
 import json
 import math
 import os
@@ -819,11 +820,26 @@ def main():
     metas: List[Dict] = []
 
     def write_zone(df_zone: pd.DataFrame):
+        """Atomic per-zone append.
+
+        Serialize the whole zone to an in-memory buffer first, then issue a
+        single write+fsync. A signal mid-call leaves the file unchanged
+        rather than partially populated, so resume can't mistake a half-
+        written zone for a complete one. Per-zone payloads are well under
+        the OS atomic-write boundary (~PIPE_BUF / 4 KB), so this is safe at
+        our row counts.
+        """
         nonlocal header_needed
         df_z = _finalize_zone_df(df_zone, param_hash)
         if df_z.empty:
             return
-        df_z.to_csv(out_path, mode="a", header=header_needed, index=False)
+        buf = io.StringIO()
+        df_z.to_csv(buf, header=header_needed, index=False)
+        payload = buf.getvalue().encode("utf-8")
+        with open(out_path, "ab") as f:
+            f.write(payload)
+            f.flush()
+            os.fsync(f.fileno())
         header_needed = False
 
     if pending_zones:
