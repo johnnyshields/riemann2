@@ -82,64 +82,12 @@ except ImportError:
 # Canonical gamma curvature term B_2(t)
 # -----------------------------
 #
-# Canonical zero-side curvature is q''_can(t) = B_2(t) + sum_rho K_2(t; rho).
-# B_2(t) = theta'''(t) = -(1/8) Re psi^(2)(1/4 + i t/2). For t > 50 the
-# asymptotic B_2(t) ~ -1/(2 t^2) agrees with the exact polygamma expression
-# to better than 1 part in 10^4 (smaller still as t grows), so we use the
-# closed form there and fall back to mpmath only for low heights.
+# Single source of truth: b2_canonical.py (sibling module). Do not redefine
+# B_2 here -- the canonical handoff has frozen the exact formula
+# B_2(t) = -(1/8) Re psi^(2)(1/4 + i t/2) and its leading / 3-term asymptotic.
+# The cache is process-local in b2_canonical, populated lazily as scans run.
 
-_B2_ASYMPTOTIC_CUTOFF = 50.0
-
-
-def B2_exact(t: float, dps: int = 30) -> float:
-    mp.mp.dps = dps
-    z = mp.mpc(mp.mpf("0.25"), mp.mpf(t) / 2)
-    return float(-mp.re(mp.polygamma(2, z)) / 8.0)
-
-
-def B2_fast(t: float, dps: int = 30) -> float:
-    if t > _B2_ASYMPTOTIC_CUTOFF:
-        return -0.5 / (t * t)
-    return B2_exact(t, dps=dps)
-
-
-def B2_array(xs: np.ndarray, dps: int = 30) -> np.ndarray:
-    """Vectorized B_2 over a grid. Asymptotic where xs > cutoff, else exact."""
-    out = np.empty_like(xs, dtype=float)
-    mask_large = xs > _B2_ASYMPTOTIC_CUTOFF
-    if mask_large.any():
-        out[mask_large] = -0.5 / (xs[mask_large] ** 2)
-    if not mask_large.all():
-        small_idx = np.where(~mask_large)[0]
-        for i in small_idx:
-            out[i] = B2_exact(float(xs[i]), dps=dps)
-    return out
-
-
-# Process-local cache: same xs grid is reused across stability_W /
-# stability_kappa / B2-toggle variants; only stability_nquad changes it.
-# Cache hit on the second-and-later use saves ~13 redundant polygamma sweeps
-# per (center, c_I) at low-t centers where the asymptotic cutoff doesn't fire.
-# Keyed by (xs[0], xs[-1], len(xs), dps) — coarse enough that nearby grids
-# don't collide and fine enough that identical grids from the same call site
-# always hit. Grows monotonically; capped via FIFO eviction below.
-_B2_CACHE: Dict[Tuple[float, float, int, int], np.ndarray] = {}
-_B2_CACHE_MAX = 4096
-
-
-def B2_array_cached(xs: np.ndarray, dps: int = 30) -> np.ndarray:
-    if len(xs) == 0:
-        return np.empty(0, dtype=float)
-    key = (round(float(xs[0]), 9), round(float(xs[-1]), 9), int(len(xs)), int(dps))
-    cached = _B2_CACHE.get(key)
-    if cached is not None and cached.shape == xs.shape:
-        return cached
-    result = B2_array(xs, dps=dps)
-    if len(_B2_CACHE) >= _B2_CACHE_MAX:
-        # Cheap FIFO drop: pop the oldest insertion.
-        _B2_CACHE.pop(next(iter(_B2_CACHE)))
-    _B2_CACHE[key] = result
-    return result
+from b2_canonical import B2_exact, B2_fast, B2_array, B2_array_cached  # noqa: E402
 
 
 # -----------------------------
@@ -309,6 +257,103 @@ def K2_proxy(m: np.ndarray, gamma: float, eps: float) -> np.ndarray:
     return 2.0 * eps * (3.0 * x * x - eps * eps) / (den ** 3)
 
 
+def chi_smooth(u: np.ndarray) -> np.ndarray:
+    """Cosine-taper window: 1 on |u| <= 1, half-cosine taper on 1 < |u| < 2,
+    0 on |u| >= 2. Used as a smooth replacement for the hard cutoff
+    indicator that selects which critical-line zeros contribute to the local
+    proxy sum."""
+    abs_u = np.abs(u)
+    out = (abs_u <= 1.0).astype(float)
+    mid = (abs_u > 1.0) & (abs_u < 2.0)
+    out[mid] = 0.5 * (1.0 + np.cos(math.pi * (abs_u[mid] - 1.0)))
+    return out
+
+
+def density_tail_correction_array(
+    xs: np.ndarray,
+    center: float,
+    W_factor: float,
+    kappa: float,
+    L_factor: float = 400.0,
+    n_tail_quad: int = 2001,
+) -> np.ndarray:
+    """Mean-density tail-completion of the omitted critical-line zero sum.
+
+        T_dens(x; W, eta, L) = int_{W_abs < |u| < L_abs}
+                               K_2(x; x+u, eta) * (1/2pi) log((x+u)/(2pi)) du
+
+    using the substitution u = gamma - x. Both W_abs and L_abs are
+    derived from the *center* Q so the correction is consistent with the
+    local interval-window definition. Returns an array of T_dens values
+    aligned with `xs`.
+
+    The mean-density factor (1/2pi) log(gamma/(2pi)) goes to zero at gamma
+    = 2pi and is negative below (where the Riemann-von Mangoldt formula
+    breaks down anyway, and there are no actual zeros). We zero the
+    integrand below the 2pi guard rather than letting it contribute
+    spurious negative density.
+
+    Symmetric two-tail trapezoidal quadrature in u; one tail has n_tail_quad/2
+    points. K_2(x; x+u) = 2 eta (3 u^2 - eta^2) / (u^2 + eta^2)^3 depends only
+    on u (the dependence on x in m - gamma cancels), so we compute it once
+    and reuse across xs.
+    """
+    Q = math.log(center / (2.0 * math.pi))
+    eps = kappa / Q
+    W_abs = W_factor / Q
+    L_abs = max(L_factor / Q, W_abs * 1.001)
+
+    n_per_tail = max(2, n_tail_quad // 2)
+    u_pos = np.linspace(W_abs, L_abs, n_per_tail)
+    u_neg = -u_pos[::-1]
+
+    def _K_on_u(u):
+        den = u * u + eps * eps
+        return 2.0 * eps * (3.0 * u * u - eps * eps) / (den ** 3)
+
+    K_pos = _K_on_u(u_pos)
+    K_neg = _K_on_u(u_neg)
+
+    twopi = 2.0 * math.pi
+
+    gammas_pos = xs[:, None] + u_pos[None, :]      # (nx, nT)
+    density_pos = np.zeros_like(gammas_pos)
+    mask_pos = gammas_pos > twopi
+    density_pos[mask_pos] = np.log(gammas_pos[mask_pos] / twopi) / twopi
+
+    gammas_neg = xs[:, None] + u_neg[None, :]
+    density_neg = np.zeros_like(gammas_neg)
+    mask_neg = gammas_neg > twopi
+    density_neg[mask_neg] = np.log(gammas_neg[mask_neg] / twopi) / twopi
+
+    integrand_pos = K_pos[None, :] * density_pos
+    integrand_neg = K_neg[None, :] * density_neg
+
+    val_pos = _trapz(integrand_pos, u_pos, axis=1)
+    val_neg = _trapz(integrand_neg, u_neg, axis=1)
+    return val_pos + val_neg
+
+
+def eta_value(c_I: float, Q: float, mode: str, value: float) -> float:
+    """Map (mode, value) to an absolute Poisson smoothing height eta.
+
+    Three declared families of sensors:
+      - "kappa_over_Q":   eta = value / Q             (existing proxy sensor)
+      - "fixed":          eta = value                 (physical eta, height-independent)
+      - "interval_scaled": eta = value * |I| where |I| = 2 c_I / Q
+
+    No candidate is serious unless it survives all three modes (per the
+    canonical critical-line handoff).
+    """
+    if mode == "kappa_over_Q":
+        return float(value) / float(Q)
+    if mode == "fixed":
+        return float(value)
+    if mode == "interval_scaled":
+        return float(value) * (2.0 * float(c_I) / float(Q))
+    raise ValueError(f"unknown eta mode: {mode!r}")
+
+
 def q2_zero_proxy(
     xs: np.ndarray,
     zeros: np.ndarray,
@@ -317,26 +362,69 @@ def q2_zero_proxy(
     kappa: float,
     include_B2: bool = False,
     mp_dps: int = 30,
+    cutoff_mode: str = "hard",
+    include_density_tail: bool = False,
+    density_L_factor: float = 400.0,
+    density_nquad: int = 2001,
+    eta_abs: float = None,
 ) -> Tuple[np.ndarray, int]:
-    """Canonical-shape proxy q''_can,eta(t) = B_2(t) + sum_{|gamma-t|<=W_abs} K2(t; gamma, eps).
+    """Canonical-shape smoothed proxy:
 
-    `include_B2` toggles the canonical gamma curvature term. `W_abs = W_factor/Q`
-    matches the factor semantics used by agent1/agent3 and by the `tail_edge`
-    guard in scan_zone.
+        q''_{proxy,eta}(t) = B_2(t)
+                             + sum_{|gamma-t|<=W_abs} K2(t; gamma, eps)
+                             + T_dens(t; W, eta, L).
+
+    This includes the canonical gamma curvature term B_2 (when `include_B2`)
+    but still uses an eta-regularized critical-line zero proxy and a finite
+    local cutoff. `W_abs = W_factor/Q` matches the factor semantics used by
+    agent1/agent3 and by the `tail_edge` guard in scan_zone.
+
+    `cutoff_mode = "hard"` keeps only zeros within `W_abs` (sharp indicator).
+    `cutoff_mode = "smooth"` weights each zero by chi_smooth((gamma-t)/W_abs);
+    the support extends out to 2*W_abs and the tapered region softens
+    finite-window discontinuity artifacts.
+
+    `include_density_tail` adds the mean-density tail completion T_dens.
+    Cutoff and density-tail are independent toggles: `include_density_tail`
+    always uses `W_abs` (not `2 W_abs`) as the integration starting boundary
+    even when `cutoff_mode="smooth"`. That mild inconsistency is acceptable
+    for an exploratory T3 diagnostic; the dominant signal is the size of
+    T_dens itself, not the precise pairing with the cutoff edge.
+
+    `eta_abs` optionally overrides the eps = kappa/Q smoothing scale with
+    an explicit absolute eta. Used by the canonical eta-mode sweep
+    (kappa_over_Q / fixed / interval_scaled). When None, the legacy kappa/Q
+    convention is used.
     """
     Q = math.log(center / (2.0 * math.pi))
-    eps = kappa / Q
+    eps = float(eta_abs) if eta_abs is not None else (kappa / Q)
     W_abs = W_factor / Q
-    use = zeros[np.abs(zeros - center) <= W_abs]
+
+    if cutoff_mode == "hard":
+        use = zeros[np.abs(zeros - center) <= W_abs]
+        weights = np.ones(len(use), dtype=float)
+    elif cutoff_mode == "smooth":
+        use = zeros[np.abs(zeros - center) <= 2.0 * W_abs]
+        weights = chi_smooth((use - center) / W_abs)
+    else:
+        raise ValueError(f"unknown cutoff_mode: {cutoff_mode!r}")
 
     vals = np.zeros_like(xs, dtype=float)
-    for g in use:
-        vals += K2_proxy(xs, g, eps)
+    for g, w in zip(use, weights):
+        if w == 0.0:
+            continue
+        vals += w * K2_proxy(xs, g, eps)
 
     if include_B2:
         vals += B2_array_cached(xs, dps=mp_dps)
 
-    return vals, len(use)
+    if include_density_tail:
+        vals += density_tail_correction_array(
+            xs, center=center, W_factor=W_factor, kappa=kappa,
+            L_factor=density_L_factor, n_tail_quad=density_nquad,
+        )
+
+    return vals, int((weights > 0).sum())
 
 
 def interval_metrics(
@@ -348,6 +436,11 @@ def interval_metrics(
     nquad: int = 401,
     include_B2: bool = False,
     mp_dps: int = 30,
+    cutoff_mode: str = "hard",
+    include_density_tail: bool = False,
+    density_L_factor: float = 400.0,
+    density_nquad: int = 2001,
+    eta_abs: float = None,
 ) -> Dict[str, float]:
     Q = math.log(center / (2.0 * math.pi))
     half = c_I / Q
@@ -355,7 +448,10 @@ def interval_metrics(
 
     vals, n_used = q2_zero_proxy(
         xs, zeros, center, W_factor=W_factor, kappa=kappa,
-        include_B2=include_B2, mp_dps=mp_dps,
+        include_B2=include_B2, mp_dps=mp_dps, cutoff_mode=cutoff_mode,
+        include_density_tail=include_density_tail,
+        density_L_factor=density_L_factor, density_nquad=density_nquad,
+        eta_abs=eta_abs,
     )
     E = float(_trapz(vals ** 2, xs) / (2.0 * half))
     S = float(np.max(np.abs(vals)))
@@ -379,6 +475,11 @@ def finite_jet_proxy(
     n_fit: int = 31,
     include_B2: bool = False,
     mp_dps: int = 30,
+    cutoff_mode: str = "hard",
+    include_density_tail: bool = False,
+    density_L_factor: float = 400.0,
+    density_nquad: int = 2001,
+    eta_abs: float = None,
 ) -> Dict[str, float]:
     """
     Estimate normalized finite jets J_r = Delta^r d^r q2/dm^r(center)
@@ -393,7 +494,10 @@ def finite_jet_proxy(
     xs = center + np.linspace(-h, h, n_fit)
     vals, _ = q2_zero_proxy(
         xs, zeros, center, W_factor=W_factor, kappa=kappa,
-        include_B2=include_B2, mp_dps=mp_dps,
+        include_B2=include_B2, mp_dps=mp_dps, cutoff_mode=cutoff_mode,
+        include_density_tail=include_density_tail,
+        density_L_factor=density_L_factor, density_nquad=density_nquad,
+        eta_abs=eta_abs,
     )
 
     deg = min(max(R_jet + 2, 6), n_fit - 1)
@@ -606,17 +710,20 @@ def scan_zone(zone: float, args) -> Tuple[pd.DataFrame, Dict]:
                 center, zeros,
                 c_I=c_I, kappa=args.kappa, W_factor=args.W_factor, nquad=args.nquad,
                 include_B2=args.include_B2, mp_dps=args.mp_dps,
+                cutoff_mode=args.cutoff_mode,
             )
             jets = finite_jet_proxy(
                 center, zeros,
                 R_jet=args.R_jet, kappa=args.kappa, W_factor=args.W_factor,
                 h_factor=args.jet_h_factor, n_fit=args.jet_fit_points,
                 include_B2=args.include_B2, mp_dps=args.mp_dps,
+                cutoff_mode=args.cutoff_mode,
             )
 
             # Tail drift: vary cutoff window. Quad drift: vary nquad.
             # Eta drift: vary kappa (smoothing scale eps = kappa/Q). B2 drift:
             # toggle the canonical gamma term to detect B_2-driven artifacts.
+            # Smooth-cutoff drift (separate path): toggle hard <-> smooth window.
             E_base = metrics["E_I"]
 
             tail_E = []
@@ -624,6 +731,7 @@ def scan_zone(zone: float, args) -> Tuple[pd.DataFrame, Dict]:
                 tail_E.append(interval_metrics(
                     center, zeros, c_I=c_I, kappa=args.kappa, W_factor=W2, nquad=args.nquad,
                     include_B2=args.include_B2, mp_dps=args.mp_dps,
+                    cutoff_mode=args.cutoff_mode,
                 )["E_I"])
             tail_drift_rel = max(abs(e - E_base) for e in tail_E) / max(abs(E_base), 1e-300)
 
@@ -632,25 +740,121 @@ def scan_zone(zone: float, args) -> Tuple[pd.DataFrame, Dict]:
                 quad_E.append(interval_metrics(
                     center, zeros, c_I=c_I, kappa=args.kappa, W_factor=args.W_factor, nquad=int(nq),
                     include_B2=args.include_B2, mp_dps=args.mp_dps,
+                    cutoff_mode=args.cutoff_mode,
                 )["E_I"])
             quad_drift_rel = max(abs(e - E_base) for e in quad_E) / max(abs(E_base), 1e-300)
 
-            kappa_E = []
+            # Canonical critical-line eta sweep. Three declared modes -- the
+            # legacy kappa/Q sensor (Mode A), a fixed physical eta (Mode B),
+            # and an interval-scale-tied eta (Mode C). No candidate is serious
+            # unless it survives all three. Each per-mode E_I list is compared
+            # against E_base; the combined eta_drift_rel is the worst-case.
+            eta_E_kappa = []
             for k2 in args.stability_kappa:
-                kappa_E.append(interval_metrics(
-                    center, zeros, c_I=c_I, kappa=float(k2), W_factor=args.W_factor, nquad=args.nquad,
+                eta_E_kappa.append(interval_metrics(
+                    center, zeros, c_I=c_I, kappa=args.kappa, W_factor=args.W_factor, nquad=args.nquad,
                     include_B2=args.include_B2, mp_dps=args.mp_dps,
+                    cutoff_mode=args.cutoff_mode,
+                    eta_abs=eta_value(c_I, Q_check, "kappa_over_Q", float(k2)),
                 )["E_I"])
-            kappa_drift_rel = max(abs(e - E_base) for e in kappa_E) / max(abs(E_base), 1e-300)
+            eta_kappa_drift_rel = (
+                max(abs(e - E_base) for e in eta_E_kappa) / max(abs(E_base), 1e-300)
+                if eta_E_kappa else float("nan")
+            )
+
+            eta_E_fixed = []
+            for f in args.eta_fixed_values:
+                eta_E_fixed.append(interval_metrics(
+                    center, zeros, c_I=c_I, kappa=args.kappa, W_factor=args.W_factor, nquad=args.nquad,
+                    include_B2=args.include_B2, mp_dps=args.mp_dps,
+                    cutoff_mode=args.cutoff_mode,
+                    eta_abs=eta_value(c_I, Q_check, "fixed", float(f)),
+                )["E_I"])
+            eta_fixed_drift_rel = (
+                max(abs(e - E_base) for e in eta_E_fixed) / max(abs(E_base), 1e-300)
+                if eta_E_fixed else float("nan")
+            )
+
+            eta_E_lambda = []
+            for lam in args.eta_lambda_values:
+                eta_E_lambda.append(interval_metrics(
+                    center, zeros, c_I=c_I, kappa=args.kappa, W_factor=args.W_factor, nquad=args.nquad,
+                    include_B2=args.include_B2, mp_dps=args.mp_dps,
+                    cutoff_mode=args.cutoff_mode,
+                    eta_abs=eta_value(c_I, Q_check, "interval_scaled", float(lam)),
+                )["E_I"])
+            eta_lambda_drift_rel = (
+                max(abs(e - E_base) for e in eta_E_lambda) / max(abs(E_base), 1e-300)
+                if eta_E_lambda else float("nan")
+            )
+
+            # Combined: worst-case across all sweeps. NaN-safe: only consider
+            # finite per-mode drifts (a mode with empty value list contributes
+            # nothing).
+            _per_mode = [
+                d for d in (eta_kappa_drift_rel, eta_fixed_drift_rel, eta_lambda_drift_rel)
+                if math.isfinite(d)
+            ]
+            eta_drift_rel = max(_per_mode) if _per_mode else float("nan")
+            # Backward-compat alias: kappa_drift_rel == eta_kappa_drift_rel.
+            kappa_drift_rel = eta_kappa_drift_rel
 
             if args.include_B2:
                 E_no_B2 = interval_metrics(
                     center, zeros, c_I=c_I, kappa=args.kappa, W_factor=args.W_factor, nquad=args.nquad,
-                    include_B2=False, mp_dps=args.mp_dps,
+                    include_B2=False, mp_dps=args.mp_dps, cutoff_mode=args.cutoff_mode,
                 )["E_I"]
                 B2_drift_rel = abs(E_base - E_no_B2) / max(abs(E_base), 1e-300)
             else:
                 B2_drift_rel = float("nan")
+
+            # Smooth-cutoff drift: replace the hard indicator chi_{|u|<=1} with
+            # the cosine taper chi_smooth(u). Hard-vs-smooth disagreement
+            # quantifies finite-window discontinuity artifacts in E_I, which
+            # the W-factor sweep alone cannot disentangle from genuine local
+            # behavior.
+            other_cutoff = "smooth" if args.cutoff_mode == "hard" else "hard"
+            E_other_cutoff = interval_metrics(
+                center, zeros, c_I=c_I, kappa=args.kappa, W_factor=args.W_factor, nquad=args.nquad,
+                include_B2=args.include_B2, mp_dps=args.mp_dps, cutoff_mode=other_cutoff,
+            )["E_I"]
+            smooth_drift_rel = abs(E_base - E_other_cutoff) / max(abs(E_base), 1e-300)
+
+            # T3 density-tail diagnostic (exploratory). When enabled, also
+            # evaluate the density-completed proxy at the baseline and across
+            # stability_W to see whether the mean-density tail can explain the
+            # raw tail dependence. T3 columns annotate; for the watch intervals
+            # they should NOT overturn artifact_eta.
+            if args.include_density_tail:
+                E_density_base = interval_metrics(
+                    center, zeros, c_I=c_I, kappa=args.kappa,
+                    W_factor=args.W_factor, nquad=args.nquad,
+                    include_B2=args.include_B2, mp_dps=args.mp_dps,
+                    cutoff_mode=args.cutoff_mode,
+                    include_density_tail=True,
+                    density_L_factor=args.density_L_factor,
+                    density_nquad=args.density_nquad,
+                )["E_I"]
+                density_drift_rel = abs(E_density_base - E_base) / max(abs(E_base), 1e-300)
+
+                tail_E_density = []
+                for W2 in args.stability_W:
+                    tail_E_density.append(interval_metrics(
+                        center, zeros, c_I=c_I, kappa=args.kappa,
+                        W_factor=W2, nquad=args.nquad,
+                        include_B2=args.include_B2, mp_dps=args.mp_dps,
+                        cutoff_mode=args.cutoff_mode,
+                        include_density_tail=True,
+                        density_L_factor=args.density_L_factor,
+                        density_nquad=args.density_nquad,
+                    )["E_I"])
+                tail_drift_density_rel = (
+                    max(abs(e - E_density_base) for e in tail_E_density)
+                    / max(abs(E_density_base), 1e-300)
+                )
+            else:
+                density_drift_rel = float("nan")
+                tail_drift_density_rel = float("nan")
 
             # Tail-edge guard: the largest stability window 2 * max(stability_W) / Q
             # might extend beyond the available zero range, in which case the
@@ -665,13 +869,22 @@ def scan_zone(zone: float, args) -> Tuple[pd.DataFrame, Dict]:
             row = {
                 **base,
                 "include_B2": bool(args.include_B2),
+                "cutoff_mode": str(args.cutoff_mode),
+                "include_density_tail": bool(args.include_density_tail),
                 **metrics,
                 **jets,
                 "tail_drift_rel": tail_drift_rel,
                 "tail_edge": tail_edge,
                 "quad_drift_rel": quad_drift_rel,
-                "kappa_drift_rel": kappa_drift_rel,
+                "eta_drift_rel": eta_drift_rel,
+                "eta_kappa_drift_rel": eta_kappa_drift_rel,
+                "eta_fixed_drift_rel": eta_fixed_drift_rel,
+                "eta_lambda_drift_rel": eta_lambda_drift_rel,
+                "kappa_drift_rel": kappa_drift_rel,  # backward-compat alias
                 "B2_drift_rel": B2_drift_rel,
+                "smooth_drift_rel": smooth_drift_rel,
+                "density_drift_rel": density_drift_rel,
+                "tail_drift_density_rel": tail_drift_density_rel,
             }
             rows.append(row)
 
@@ -699,39 +912,58 @@ def classify_row(
     quad_tol: float = 1e-5,
     kappa_tol: float = 0.1,
     B2_tol: float = 0.5,
+    smooth_tol: float = 5e-2,
 ):
-    """Unified status. Combines agent1/agent3 stability rejects with the
-    canonical artifact diagnostics:
+    """Unified status. Priority chain:
 
-    - `artifact_eta`: large drift across kappa (smoothing scale eps=kappa/Q),
-      i.e. the candidate is a critical-line smoothing artifact.
-    - `artifact_B2`: large drift when toggling the B_2 gamma term, i.e. the
-      candidate is dominated by the background curvature term and not by the
-      zero structure.
+      1. reject_tail_edge          -- 2*W window exceeds local zero coverage
+      2. reject_quad_unstable      -- numerical quadrature instability
+      3. artifact_eta              -- kappa-sweep instability dominates
+      4. artifact_B2               -- toggling B_2 changes E_I materially
+      5. artifact_tail_smooth      -- hard-vs-smooth cutoff edge disagreement
+      6. artifact_tail_density     -- T3: density correction does not flatten
+                                       the W-sweep (only when T3 is enabled)
+      6'. reject_tail_unstable     -- raw W-sweep is unstable AND T3 not run
+                                       (fallback when T3 didn't measure tail
+                                       under density correction)
+      7. serious_proxy_warning / candidate_proxy_flat / watch / healthy
 
-    `candidate_proxy_flat` requires small J_max (simultaneous interval and
-    finite-jet flatness). `tail_edge` shorts the chain so near-edge centers
-    are not accepted as 'healthy' just because the truncated 2*W window
-    happens to look stable for the wrong reason.
+    T3 (artifact_tail_density) sits BELOW artifact_eta/artifact_B2/
+    artifact_tail_smooth. For watch intervals dominated by eta-smoothing,
+    T3 only annotates and does not rescue them.
     """
     tail_drift = float(row.get("tail_drift_rel", float("nan")))
     quad_drift = float(row.get("quad_drift_rel", float("nan")))
-    kappa_drift = float(row.get("kappa_drift_rel", float("nan")))
+    # Prefer the combined three-mode eta drift; fall back to legacy
+    # kappa_drift_rel only if the new column is missing.
+    eta_drift = float(row.get("eta_drift_rel", float("nan")))
+    if not math.isfinite(eta_drift):
+        eta_drift = float(row.get("kappa_drift_rel", float("nan")))
     B2_drift = float(row.get("B2_drift_rel", float("nan")))
+    smooth_drift = float(row.get("smooth_drift_rel", float("nan")))
+    tail_drift_density = float(row.get("tail_drift_density_rel", float("nan")))
     B_eff = float(row.get("B_eff", float("nan")))
     J_max = float(row.get("J_max", float("nan")))
     tail_edge = bool(row.get("tail_edge", False))
 
     if tail_edge:
         return "reject_tail_edge"
-    if not math.isfinite(tail_drift) or tail_drift > tail_tol:
-        return "reject_tail_unstable"
     if not math.isfinite(quad_drift) or quad_drift > quad_tol:
         return "reject_quad_unstable"
-    if math.isfinite(kappa_drift) and kappa_drift > kappa_tol:
+    if math.isfinite(eta_drift) and eta_drift > kappa_tol:
         return "artifact_eta"
     if math.isfinite(B2_drift) and B2_drift > B2_tol:
         return "artifact_B2"
+    if math.isfinite(smooth_drift) and smooth_drift > smooth_tol:
+        return "artifact_tail_smooth"
+    if math.isfinite(tail_drift_density):
+        # T3 ran. Density-corrected W-sweep is the authoritative tail check.
+        if tail_drift_density > tail_tol:
+            return "artifact_tail_density"
+    else:
+        # T3 didn't run; fall back to the raw W-sweep instability check.
+        if not math.isfinite(tail_drift) or tail_drift > tail_tol:
+            return "reject_tail_unstable"
     if math.isfinite(B_eff) and math.isfinite(J_max) and B_eff > 20 and J_max < 1e-8:
         return "serious_proxy_warning"
     if math.isfinite(B_eff) and math.isfinite(J_max) and B_eff > 10 and J_max < 1e-6:
@@ -763,11 +995,17 @@ _PARAM_HASH_KEYS = (
     "stability_W",
     "stability_nquad",
     "stability_kappa",
+    "eta_fixed_values",
+    "eta_lambda_values",
     "c_I_values",
     "mp_dps",
     "zero_radius",
     "zero_step",
     "include_B2",
+    "cutoff_mode",
+    "include_density_tail",
+    "density_L_factor",
+    "density_nquad",
 )
 
 
@@ -882,10 +1120,24 @@ def parse_args():
                    help="W_factor values used to compute tail_drift_rel.")
     p.add_argument("--stability-nquad", type=int, nargs="+", default=[201, 401, 801],
                    help="nquad values used to compute quad_drift_rel.")
-    p.add_argument("--stability-kappa", type=float, nargs="+",
+    # Three canonical eta sweep families. Each row is evaluated against all
+    # three; eta_drift_rel is the worst-case relative shift in E_I. A serious
+    # candidate must survive all three modes.
+    p.add_argument("--stability-kappa", "--eta-kappa-values", type=float, nargs="+",
+                   dest="stability_kappa",
                    default=[0.0625, 0.125, 0.25, 0.5, 1.0, 2.0],
-                   help="kappa values used to compute kappa_drift_rel "
-                        "(eta-sweep for critical-line smoothing scale eps=kappa/Q).")
+                   help="Mode A (kappa_over_Q) sweep: eta = kappa / Q. "
+                        "Feeds eta_kappa_drift_rel and the combined eta_drift_rel.")
+    p.add_argument("--eta-fixed-values", dest="eta_fixed_values",
+                   type=float, nargs="+",
+                   default=[0.02, 0.05, 0.1, 0.2],
+                   help="Mode B (fixed) sweep: eta = value, height-independent. "
+                        "Feeds eta_fixed_drift_rel.")
+    p.add_argument("--eta-lambda-values", dest="eta_lambda_values",
+                   type=float, nargs="+",
+                   default=[0.05, 0.1, 0.25, 0.5, 1.0],
+                   help="Mode C (interval_scaled) sweep: eta = lambda * |I|, "
+                        "where |I| = 2 c_I / Q. Feeds eta_lambda_drift_rel.")
 
     p.add_argument(
         "--include-B2",
@@ -899,6 +1151,53 @@ def parse_args():
         dest="include_B2",
         action="store_false",
         help="Disable B_2; use the bare K_2 zero kernel only (proxy-only mode).",
+    )
+
+    p.add_argument(
+        "--cutoff-mode",
+        dest="cutoff_mode",
+        choices=("hard", "smooth"),
+        default="hard",
+        help=(
+            "Window shape for the local zero sum. 'hard' uses chi_{|u|<=1} "
+            "(default, matches existing rows). 'smooth' uses a cosine taper "
+            "out to |u|=2. The other mode is always evaluated alongside as a "
+            "smooth_drift_rel diagnostic."
+        ),
+    )
+
+    p.add_argument(
+        "--include-density-tail",
+        dest="include_density_tail",
+        action="store_true",
+        default=False,
+        help=(
+            "T3: compute the mean-density tail-completion diagnostic columns "
+            "density_drift_rel and tail_drift_density_rel. Off by default; "
+            "exploratory hardening for future candidates that pass earlier "
+            "checks."
+        ),
+    )
+    p.add_argument(
+        "--no-include-density-tail",
+        dest="include_density_tail",
+        action="store_false",
+        help="Disable T3 density-tail diagnostics (default).",
+    )
+    p.add_argument(
+        "--density-L-factor",
+        dest="density_L_factor",
+        type=float,
+        default=400.0,
+        help="Outer cutoff for density-tail integration: L_abs = L_factor / Q.",
+    )
+    p.add_argument(
+        "--density-nquad",
+        dest="density_nquad",
+        type=int,
+        default=2001,
+        help="Total quadrature points for density-tail integration "
+             "(split evenly between negative and positive tails).",
     )
 
     p.add_argument(
@@ -948,7 +1247,9 @@ def _print_zone_best(zone: float, df_zone: pd.DataFrame, idx: int, total: int):
         best = df_zone.sort_values("E_I").head(5)
         cols = ["center_type", "m0", "c_I", "E_I", "B_eff", "J_max",
                 "tail_drift_rel", "quad_drift_rel",
-                "kappa_drift_rel", "B2_drift_rel", "tail_edge"]
+                "eta_drift_rel", "B2_drift_rel", "smooth_drift_rel",
+                "density_drift_rel", "tail_drift_density_rel",
+                "tail_edge"]
         cols = [c for c in cols if c in best.columns]
         print(best[cols].to_string(index=False), flush=True)
 
@@ -1081,7 +1382,9 @@ def main():
     if not full_df.empty:
         cols = ["zone", "center_type", "m0", "c_I", "E_I", "B_eff", "J_max",
                 "tail_drift_rel", "quad_drift_rel",
-                "kappa_drift_rel", "B2_drift_rel", "tail_edge", "status"]
+                "eta_drift_rel", "B2_drift_rel", "smooth_drift_rel",
+                "density_drift_rel", "tail_drift_density_rel",
+                "tail_edge", "status"]
         cols = [c for c in cols if c in full_df.columns]
         print(full_df.sort_values("E_I").head(20)[cols].to_string(index=False), flush=True)
 
