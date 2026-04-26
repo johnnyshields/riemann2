@@ -404,9 +404,9 @@ def run_actual_zero_proxy_scan(outdir: str,
         centers = make_centers(zeros, start_index, end_index, random_count=100)
         c_I_list = [0.2, 0.5]
         kappa_list = [0.5, 1.0]
-        W_mult_list = [25.0, 50.0, 100.0]
-        R_list = [4, 8]
-        n_quad_list = [257, 513]
+        W_mult_list = [25.0, 50.0]
+        R_list = [4]
+        n_quad_list = [257]
 
     n_params_per_center = (
         len(c_I_list) * len(kappa_list) * len(W_mult_list) * len(R_list) * len(n_quad_list)
