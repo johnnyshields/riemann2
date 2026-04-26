@@ -18,14 +18,36 @@ Outputs:
 
 import argparse
 import math
+import os
 import warnings
 from dataclasses import dataclass
+from datetime import datetime
 from typing import Callable, Dict, List, Tuple
+
+# Pin BLAS / OpenMP to 1 thread per process (unified gate1 convention).
+# Set before numpy import.
+for _k in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS",
+           "VECLIB_MAXIMUM_THREADS", "NUMEXPR_NUM_THREADS"):
+    os.environ.setdefault(_k, "1")
 
 import numpy as np
 import pandas as pd
 from scipy.optimize import minimize_scalar
 from scipy.signal import argrelextrema
+
+
+def log(msg: str) -> None:
+    """Timestamped, flushed line. Unified logging helper across the gate1 scripts."""
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}", flush=True)
+
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_DEFAULT_OUT_DIR = os.path.normpath(os.path.join(_SCRIPT_DIR, "out"))
+
+
+def _default_out(*parts: str) -> str:
+    """Resolve <script_dir>/out/<parts...>; unified outputs location."""
+    return os.path.join(_DEFAULT_OUT_DIR, *parts)
 
 try:
     import mpmath as mp
@@ -133,7 +155,7 @@ class SurrogateModel:
         return val / self.norm
 
     def source_jets(self, t: float, R: int) -> np.ndarray:
-        Q = math.log(max(t, 3.0))
+        Q = math.log(t / (2.0 * math.pi))
         Delta = 1.0 / Q
         return np.array([(Delta ** r) * self.derivative_value(t, r) for r in range(R + 1)])
 
@@ -142,7 +164,7 @@ class SurrogateModel:
         return float(np.sum(jets ** 2))
 
     def interval_energy(self, t0: float, cI: float = 0.5, grid: int = 401) -> Tuple[float, float, float]:
-        Q = math.log(max(t0, 3.0))
+        Q = math.log(t0 / (2.0 * math.pi))
         half = cI / Q
         xs = np.linspace(t0 - half, t0 + half, grid)
         vals = np.array([self.source_value(float(x)) for x in xs])
@@ -322,7 +344,7 @@ def K2_proxy(m: np.ndarray, gamma: float, eps: float) -> np.ndarray:
 
 
 def zero_proxy_energy(t0: float, zeros: np.ndarray, cI: float = 0.5, kappa: float = 0.5, W: float = 40.0, grid: int = 401):
-    Q = math.log(max(t0, 3.0))
+    Q = math.log(t0 / (2.0 * math.pi))
     eps = kappa / Q
     half = cI / Q
     xs = np.linspace(t0 - half, t0 + half, grid)
@@ -396,26 +418,31 @@ def main():
     warnings.filterwarnings("ignore", category=RuntimeWarning)
     args = parse_args()
 
-    print("Running surrogate sweep...")
+    log("Running surrogate sweep...")
     all_df, best_df = run_surrogate_sweep(args)
 
-    all_df.to_csv("gate1_surrogate_sweep_results.csv", index=False)
-    best_df.to_csv("gate1_surrogate_best_candidates.csv", index=False)
+    os.makedirs(_DEFAULT_OUT_DIR, exist_ok=True)
+    sweep_path = _default_out("gate1_surrogate_sweep_results.csv")
+    best_path = _default_out("gate1_surrogate_best_candidates.csv")
+    crosscheck_path = _default_out("gate1_surrogate_actual_zero_proxy_crosscheck.csv")
 
-    print("\nBest candidates by model:")
-    print(best_df.sort_values("best_objective").head(20).to_string(index=False))
+    all_df.to_csv(sweep_path, index=False)
+    best_df.to_csv(best_path, index=False)
+
+    log("Best candidates by model:")
+    print(best_df.sort_values("best_objective").head(20).to_string(index=False), flush=True)
 
     if args.actual_zero_proxy:
-        print("\nRunning optional actual-zero proxy cross-checks for best candidates...")
+        log("Running optional actual-zero proxy cross-checks for best candidates...")
         proxy_df = run_actual_zero_proxy_for_best(best_df.sort_values("best_objective"), args)
-        proxy_df.to_csv("gate1_surrogate_actual_zero_proxy_crosscheck.csv", index=False)
-        print(proxy_df.head(args.proxy_best_count).to_string(index=False))
+        proxy_df.to_csv(crosscheck_path, index=False)
+        print(proxy_df.head(args.proxy_best_count).to_string(index=False), flush=True)
 
-    print("\nWrote:")
-    print("  gate1_surrogate_sweep_results.csv")
-    print("  gate1_surrogate_best_candidates.csv")
+    log("Wrote:")
+    log(f"  {sweep_path}")
+    log(f"  {best_path}")
     if args.actual_zero_proxy:
-        print("  gate1_surrogate_actual_zero_proxy_crosscheck.csv")
+        log(f"  {crosscheck_path}")
 
 
 if __name__ == "__main__":

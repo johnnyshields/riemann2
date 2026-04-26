@@ -54,6 +54,22 @@ import numpy as np
 import pandas as pd
 import mpmath as mp
 
+from datetime import datetime
+
+
+def log(msg: str) -> None:
+    """Timestamped, flushed line. Unified logging helper across the gate1 scripts."""
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}", flush=True)
+
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_DEFAULT_OUT_DIR = os.path.normpath(os.path.join(_SCRIPT_DIR, "out"))
+
+
+def _default_out(*parts: str) -> str:
+    """Resolve <script_dir>/out/<parts...>; unified outputs location."""
+    return os.path.join(_DEFAULT_OUT_DIR, *parts)
+
 
 try:
     from numpy import trapezoid as _trapz
@@ -235,7 +251,7 @@ def q2_zero_proxy(
     W: float,
     kappa: float,
 ) -> Tuple[np.ndarray, int]:
-    Q = math.log(max(center, 3.0))
+    Q = math.log(center / (2.0 * math.pi))
     eps = kappa / Q
     use = zeros[np.abs(zeros - center) <= W]
 
@@ -249,34 +265,34 @@ def q2_zero_proxy(
 def interval_metrics(
     center: float,
     zeros: np.ndarray,
-    cI: float = 0.5,
+    c_I: float = 0.5,
     kappa: float = 0.5,
-    W: float = 40.0,
-    grid: int = 401,
+    W_factor: float = 40.0,
+    nquad: int = 401,
 ) -> Dict[str, float]:
-    Q = math.log(max(center, 3.0))
-    half = cI / Q
-    xs = np.linspace(center - half, center + half, grid)
+    Q = math.log(center / (2.0 * math.pi))
+    half = c_I / Q
+    xs = np.linspace(center - half, center + half, nquad)
 
-    vals, n_used = q2_zero_proxy(xs, zeros, center, W=W, kappa=kappa)
+    vals, n_used = q2_zero_proxy(xs, zeros, center, W=W_factor, kappa=kappa)
     E = float(_trapz(vals ** 2, xs) / (2.0 * half))
     S = float(np.max(np.abs(vals)))
-    Beff = -math.log(max(E, 1e-300)) / math.log(Q)
+    B_eff = -math.log(max(E, 1e-300)) / math.log(Q)
 
     return {
-        "E": E,
-        "S": S,
-        "Beff": Beff,
-        "zeros_used": n_used,
+        "E_I": E,
+        "S_I": S,
+        "B_eff": B_eff,
+        "local_zero_count": n_used,
     }
 
 
 def finite_jet_proxy(
     center: float,
     zeros: np.ndarray,
-    R: int = 4,
+    R_jet: int = 4,
     kappa: float = 0.5,
-    W: float = 40.0,
+    W_factor: float = 40.0,
     h_factor: float = 0.015,
     n_fit: int = 31,
 ) -> Dict[str, float]:
@@ -286,21 +302,21 @@ def finite_jet_proxy(
 
     This is diagnostic only; high-order jet estimates are noisy.
     """
-    Q = math.log(max(center, 3.0))
+    Q = math.log(center / (2.0 * math.pi))
     Delta = 1.0 / Q
     h = h_factor / Q
 
     xs = center + np.linspace(-h, h, n_fit)
-    vals, _ = q2_zero_proxy(xs, zeros, center, W=W, kappa=kappa)
+    vals, _ = q2_zero_proxy(xs, zeros, center, W=W_factor, kappa=kappa)
 
-    deg = min(max(R + 2, 6), n_fit - 1)
+    deg = min(max(R_jet + 2, 6), n_fit - 1)
     # Fit in local variable y = x - center for numerical conditioning.
     y = xs - center
     coeff = np.polyfit(y, vals, deg=deg)  # descending powers
 
     jets = []
     p = np.poly1d(coeff)
-    for r in range(R + 1):
+    for r in range(R_jet + 1):
         deriv = np.polyder(p, m=r)
         raw = float(deriv(0.0))
         jets.append((Delta ** r) * raw)
@@ -308,6 +324,7 @@ def finite_jet_proxy(
     jets = np.array(jets, dtype=float)
     return {
         "J_max": float(np.max(np.abs(jets))),
+        "J_rms": float(np.sqrt(np.mean(jets * jets))),
         "J_0": float(jets[0]),
         "J_1": float(jets[1]) if len(jets) > 1 else np.nan,
         "J_2": float(jets[2]) if len(jets) > 2 else np.nan,
@@ -482,55 +499,54 @@ def scan_zone(zone: float, args) -> Tuple[pd.DataFrame, Dict]:
 
     rows = []
     for fam, center in centers:
-        for cI in args.cI:
+        Q_check = math.log(center / (2.0 * math.pi))
+        if Q_check <= 1.0:
+            continue
+        for c_I in args.c_I_values:
             base = {
                 "zone": zone,
-                "family": fam,
-                "center": center,
-                "cI": cI,
-                "Q": math.log(max(center, 3.0)),
-                "zero_count_zone": len(zeros),
-                "zero_min": float(np.min(zeros)) if len(zeros) else np.nan,
-                "zero_max": float(np.max(zeros)) if len(zeros) else np.nan,
+                "center_type": fam,
+                "m0": center,
+                "c_I": c_I,
+                "kappa": args.kappa,
+                "W_factor": args.W_factor,
+                "nquad": args.nquad,
+                "R_jet": args.R_jet,
+                "Q": Q_check,
             }
 
             metrics = interval_metrics(
-                center,
-                zeros,
-                cI=cI,
-                kappa=args.kappa,
-                W=args.W,
-                grid=args.grid,
+                center, zeros,
+                c_I=c_I, kappa=args.kappa, W_factor=args.W_factor, nquad=args.nquad,
             )
             jets = finite_jet_proxy(
-                center,
-                zeros,
-                R=args.R,
-                kappa=args.kappa,
-                W=args.W,
-                h_factor=args.jet_h_factor,
-                n_fit=args.jet_fit_points,
+                center, zeros,
+                R_jet=args.R_jet, kappa=args.kappa, W_factor=args.W_factor,
+                h_factor=args.jet_h_factor, n_fit=args.jet_fit_points,
             )
 
-            # Stability checks for selected small subset only: all rows get W/kappa drift.
-            E_base = metrics["E"]
-
+            # Tail drift: vary the cutoff window. Quadrature drift: vary nquad.
+            E_base = metrics["E_I"]
             tail_E = []
             for W2 in args.stability_W:
-                tail_E.append(interval_metrics(center, zeros, cI=cI, kappa=args.kappa, W=W2, grid=args.grid)["E"])
-            tail_drift = max(abs(e - E_base) for e in tail_E) / max(abs(E_base), 1e-300)
+                tail_E.append(interval_metrics(
+                    center, zeros, c_I=c_I, kappa=args.kappa, W_factor=W2, nquad=args.nquad,
+                )["E_I"])
+            tail_drift_rel = max(abs(e - E_base) for e in tail_E) / max(abs(E_base), 1e-300)
 
-            reg_E = []
-            for k2 in args.stability_kappa:
-                reg_E.append(interval_metrics(center, zeros, cI=cI, kappa=k2, W=args.W, grid=args.grid)["E"])
-            reg_drift = max(abs(e - E_base) for e in reg_E) / max(abs(E_base), 1e-300)
+            quad_E = []
+            for nq in args.stability_nquad:
+                quad_E.append(interval_metrics(
+                    center, zeros, c_I=c_I, kappa=args.kappa, W_factor=args.W_factor, nquad=int(nq),
+                )["E_I"])
+            quad_drift_rel = max(abs(e - E_base) for e in quad_E) / max(abs(E_base), 1e-300)
 
             row = {
                 **base,
                 **metrics,
                 **jets,
-                "tail_drift": tail_drift,
-                "reg_drift": reg_drift,
+                "tail_drift_rel": tail_drift_rel,
+                "quad_drift_rel": quad_drift_rel,
             }
             rows.append(row)
 
@@ -546,20 +562,30 @@ def summarize_results(df: pd.DataFrame) -> pd.DataFrame:
     if df.empty:
         return pd.DataFrame()
 
-    idx = df.groupby(["zone", "family", "cI"])["E"].idxmin()
+    idx = df.groupby(["zone", "center_type", "c_I"])["E_I"].idxmin()
     summary = df.loc[idx].copy()
-    summary = summary.sort_values(["zone", "E"], ascending=[True, True])
+    summary = summary.sort_values(["zone", "E_I"], ascending=[True, True])
     return summary
 
 
-def classify_row(row, warn_Beff=3.0, serious_Beff=6.0, max_tail_drift=0.1):
-    if row["tail_drift"] > max_tail_drift:
+def classify_row(row, tail_tol: float = 2e-2, quad_tol: float = 1e-5):
+    """Unified six-tier status (matches agent1)."""
+    tail_drift = float(row.get("tail_drift_rel", float("nan")))
+    quad_drift = float(row.get("quad_drift_rel", float("nan")))
+    B_eff = float(row.get("B_eff", float("nan")))
+    J_max = float(row.get("J_max", float("nan")))
+
+    if not math.isfinite(tail_drift) or tail_drift > tail_tol:
         return "reject_tail_unstable"
-    if row["Beff"] >= serious_Beff and row["J_max"] < 1e-2:
-        return "serious_warning_proxy"
-    if row["Beff"] >= warn_Beff:
-        return "watch_proxy"
-    return "healthy_proxy"
+    if not math.isfinite(quad_drift) or quad_drift > quad_tol:
+        return "reject_quad_unstable"
+    if math.isfinite(B_eff) and math.isfinite(J_max) and B_eff > 20 and J_max < 1e-8:
+        return "serious_proxy_warning"
+    if math.isfinite(B_eff) and B_eff > 10:
+        return "candidate_proxy_flat"
+    if math.isfinite(B_eff) and B_eff > 5:
+        return "watch"
+    return "healthy"
 
 
 # -----------------------------
@@ -572,9 +598,9 @@ def classify_row(row, warn_Beff=3.0, serious_Beff=6.0, max_tail_drift=0.1):
 _PARAM_HASH_KEYS = (
     "scan_radius",
     "kappa",
-    "W",
-    "grid",
-    "R",
+    "W_factor",
+    "nquad",
+    "R_jet",
     "jet_h_factor",
     "jet_fit_points",
     "random_count",
@@ -582,8 +608,8 @@ _PARAM_HASH_KEYS = (
     "seed",
     "no_gram",
     "stability_W",
-    "stability_kappa",
-    "cI",
+    "stability_nquad",
+    "c_I_values",
     "mp_dps",
     "zero_radius",
     "zero_step",
@@ -612,9 +638,10 @@ def _backup(path: str) -> str:
 
 
 def with_hash_suffix(path: str, h: str) -> str:
-    """Insert _<hash> before the file extension. 'a/b.csv' -> 'a/b_<h>.csv'."""
+    """Insert .<hash> before the file extension (unified gate1 convention).
+    'a/b.csv' -> 'a/b.<h>.csv'."""
     root, ext = os.path.splitext(path)
-    return f"{root}_{h}{ext}"
+    return f"{root}.{h}{ext}"
 
 
 def open_resume_state(csv_path: str, param_hash: str, resume_flag: bool):
@@ -667,7 +694,8 @@ def open_resume_state(csv_path: str, param_hash: str, resume_flag: bool):
 def parse_args():
     p = argparse.ArgumentParser()
 
-    p.add_argument("--candidate-csv", default="gate1_surrogate_best_candidates.csv")
+    p.add_argument("--candidate-csv", default=_default_out("gate1_surrogate_best_candidates.csv"),
+                   help="Path to surrogate-best-candidates CSV. Default reads from <script>/out/.")
     p.add_argument("--zones", type=float, nargs="*", default=[])
     p.add_argument("--top", type=int, default=8)
     p.add_argument("--merge-distance", type=float, default=5.0)
@@ -676,15 +704,17 @@ def parse_args():
     p.add_argument("--scan-radius", type=float, default=35.0)
     p.add_argument("--zero-step", type=float, default=0.1)
     p.add_argument("--mp-dps", type=int, default=30)
-    p.add_argument("--cache-dir", default="zero_proxy_cache")
+    p.add_argument("--cache-dir", default=_default_out("zero_proxy_cache"),
+                   help="Hardy-Z zero cache directory. Default lands under <script>/out/.")
     p.add_argument("--force-zero-rescan", action="store_true")
 
-    p.add_argument("--cI", type=float, nargs="+", default=[0.1, 0.2, 0.5, 1.0])
+    p.add_argument("--c-I-values", dest="c_I_values", type=float, nargs="+",
+                   default=[0.1, 0.2, 0.5, 1.0])
     p.add_argument("--kappa", type=float, default=0.5)
-    p.add_argument("--W", type=float, default=40.0)
-    p.add_argument("--grid", type=int, default=401)
+    p.add_argument("--W-factor", dest="W_factor", type=float, default=40.0)
+    p.add_argument("--nquad", type=int, default=401)
 
-    p.add_argument("--R", type=int, default=4)
+    p.add_argument("--R-jet", dest="R_jet", type=int, default=4)
     p.add_argument("--jet-h-factor", type=float, default=0.015)
     p.add_argument("--jet-fit-points", type=int, default=31)
 
@@ -693,8 +723,10 @@ def parse_args():
     p.add_argument("--seed", type=int, default=0)
     p.add_argument("--no-gram", action="store_true")
 
-    p.add_argument("--stability-W", type=float, nargs="+", default=[10.0, 20.0, 40.0])
-    p.add_argument("--stability-kappa", type=float, nargs="+", default=[0.25, 0.5, 1.0])
+    p.add_argument("--stability-W", type=float, nargs="+", default=[10.0, 20.0, 40.0],
+                   help="W_factor values used to compute tail_drift_rel.")
+    p.add_argument("--stability-nquad", type=int, nargs="+", default=[201, 401, 801],
+                   help="nquad values used to compute quad_drift_rel.")
 
     p.add_argument(
         "--workers",
@@ -705,16 +737,18 @@ def parse_args():
 
     p.add_argument(
         "--out",
-        default="gate1_actual_zero_proxy_zone_scan.csv",
+        default=_default_out("gate1_actual_zero_proxy_zone_scan.csv"),
         help=(
             "Output CSV stem. The current param_hash is inserted before the "
-            "extension, e.g. <stem>_<hash>.csv, so each param set has its own file."
+            "extension, e.g. <stem>.<hash>.csv, so each param set has its own file. "
+            "Default lands in <script>/out/."
         ),
     )
     p.add_argument(
         "--summary-out",
-        default="gate1_actual_zero_proxy_zone_summary.csv",
-        help="Summary CSV stem. Hash-suffixed the same way as --out.",
+        default=_default_out("gate1_actual_zero_proxy_zone_summary.csv"),
+        help="Summary CSV stem. Hash-suffixed the same way as --out. "
+             "Default lands in <script>/out/.",
     )
 
     p.add_argument(
@@ -735,17 +769,19 @@ def parse_args():
 
 
 def _print_zone_best(zone: float, df_zone: pd.DataFrame, idx: int, total: int):
-    print(f"\n[{idx}/{total}] Zone {zone:.6f}")
+    log(f"[{idx}/{total}] Zone {zone:.6f}")
     if not df_zone.empty:
-        best = df_zone.sort_values("E").head(5)
-        print(best[["family", "center", "cI", "E", "S", "Beff", "J_max", "tail_drift", "reg_drift"]].to_string(index=False))
+        best = df_zone.sort_values("E_I").head(5)
+        cols = ["center_type", "m0", "c_I", "E_I", "S_I", "B_eff", "J_max",
+                "tail_drift_rel", "quad_drift_rel"]
+        print(best[cols].to_string(index=False), flush=True)
 
 
 def _finalize_zone_df(df_zone: pd.DataFrame, param_hash: str) -> pd.DataFrame:
     if df_zone.empty:
         return df_zone
     df_z = df_zone.copy()
-    df_z["classification"] = df_z.apply(classify_row, axis=1)
+    df_z["status"] = df_z.apply(classify_row, axis=1)
     df_z["param_hash"] = param_hash
     return df_z
 
@@ -761,20 +797,24 @@ def main():
     workers = max(1, int(args.workers))
     param_hash = compute_param_hash(args)
     out_path = with_hash_suffix(args.out, param_hash)
+    for _p in (out_path, args.summary_out, args.cache_dir):
+        _parent = _p if _p == args.cache_dir else os.path.dirname(os.path.abspath(_p))
+        if _parent:
+            os.makedirs(_parent, exist_ok=True)
     summary_path = with_hash_suffix(args.summary_out, param_hash)
 
-    print(f"Scanning {n_zones} zones with --workers {workers}, param_hash={param_hash}:")
+    log(f"Scanning {n_zones} zones with --workers {workers}, param_hash={param_hash}:")
     for z in zones:
-        print(f"  {z:.6f}")
-    print(f"Output:  {out_path}")
-    print(f"Summary: {summary_path}")
+        log(f"  {z:.6f}")
+    log(f"Output:  {out_path}")
+    log(f"Summary: {summary_path}")
 
     done_zones, header_needed = open_resume_state(out_path, param_hash, args.resume)
 
     pending_zones = [z for z in zones if round(z, 6) not in done_zones]
     skipped = n_zones - len(pending_zones)
     if skipped:
-        print(f"Skipping {skipped} zone(s) already complete in {out_path}.")
+        log(f"Skipping {skipped} zone(s) already complete in {out_path}.")
 
     metas: List[Dict] = []
 
@@ -792,8 +832,8 @@ def main():
 
         if use_zone_pool:
             zone_workers = min(workers, n_pending)
-            print(
-                f"\nDispatching {n_pending} pending zone(s) in parallel "
+            log(
+                f"Dispatching {n_pending} pending zone(s) in parallel "
                 f"(pool={zone_workers}); each zone runs serially."
             )
 
@@ -813,9 +853,9 @@ def main():
                     _print_zone_best(zone, df_zone, completed, n_pending)
         else:
             if n_pending == 1 and workers >= 2:
-                print(f"\nSingle pending zone: using within-zone parallelism (pool={workers}).")
+                log(f"Single pending zone: using within-zone parallelism (pool={workers}).")
             else:
-                print("\nRunning pending zones serially.")
+                log("Running pending zones serially.")
 
             for i, zone in enumerate(pending_zones, start=1):
                 df_zone, meta = scan_zone(zone, args)
@@ -823,38 +863,38 @@ def main():
                 write_zone(df_zone)
                 _print_zone_best(zone, df_zone, i, n_pending)
     else:
-        print("\nAll requested zones already complete; rebuilding summary only.")
+        log("All requested zones already complete; rebuilding summary only.")
 
     # Read back the per-hash CSV for summary + final report.
     if not os.path.exists(out_path):
-        print(f"\nNo data written to {out_path}; nothing to summarize.")
+        log(f"No data written to {out_path}; nothing to summarize.")
         return
 
     full_df = pd.read_csv(out_path)
     if "param_hash" in full_df.columns:
         full_df = full_df[full_df["param_hash"].astype(str) == param_hash].copy()
     if not full_df.empty:
-        full_df = full_df.sort_values(["zone", "E"]).reset_index(drop=True)
+        full_df = full_df.sort_values(["zone", "E_I"]).reset_index(drop=True)
 
     summary = summarize_results(full_df)
     if not summary.empty:
-        summary["classification"] = summary.apply(classify_row, axis=1)
+        summary["status"] = summary.apply(classify_row, axis=1)
     summary.to_csv(summary_path, index=False)
 
-    print("\nWrote:")
-    print(f"  {out_path}")
-    print(f"  {summary_path}")
+    log("Wrote:")
+    log(f"  {out_path}")
+    log(f"  {summary_path}")
 
-    print("\nBest overall rows:")
+    log("Best overall rows:")
     if not full_df.empty:
-        print(full_df.sort_values("E").head(20)[
-            ["zone", "family", "center", "cI", "E", "S", "Beff", "J_max", "tail_drift", "reg_drift", "classification"]
-        ].to_string(index=False))
+        cols = ["zone", "center_type", "m0", "c_I", "E_I", "S_I", "B_eff", "J_max",
+                "tail_drift_rel", "quad_drift_rel", "status"]
+        print(full_df.sort_values("E_I").head(20)[cols].to_string(index=False), flush=True)
 
     if metas:
-        print("\nZone metadata (this run):")
+        log("Zone metadata (this run):")
         metas_df = pd.DataFrame(metas).sort_values("zone").reset_index(drop=True)
-        print(metas_df.to_string(index=False))
+        print(metas_df.to_string(index=False), flush=True)
 
 
 if __name__ == "__main__":

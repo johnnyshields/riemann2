@@ -3,6 +3,13 @@ import csv
 import math
 import sys
 from collections import Counter
+from datetime import datetime
+
+
+def log(msg: str) -> None:
+    """Timestamped, flushed line. Unified logging helper across the gate1 scripts."""
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}", flush=True)
+
 
 def fnum(x):
     try:

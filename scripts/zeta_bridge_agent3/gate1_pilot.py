@@ -54,6 +54,15 @@ def log(msg: str) -> None:
     print(f"[{time.strftime('%H:%M:%S')}] {msg}", flush=True)
 
 
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_DEFAULT_OUT_DIR = os.path.normpath(os.path.join(_SCRIPT_DIR, "out"))
+
+
+def _default_out(*parts: str) -> str:
+    """Resolve <script_dir>/out/<parts...>; unified outputs location."""
+    return os.path.join(_DEFAULT_OUT_DIR, *parts)
+
+
 # ----------------------------
 # Utility
 # ----------------------------
@@ -355,39 +364,43 @@ def make_centers(zeros: Sequence[float],
                  start_index: int,
                  end_index: int,
                  random_count: int = 100,
+                 uniform_count: int = 0,
                  seed: int = 0) -> List[Tuple[str, float, Optional[int]]]:
     """
+    Generate centers using the unified family vocabulary:
+      zero_ordinate, gap_midpoint, large_gap_midpoint, small_gap_midpoint,
+      random, uniform.
+
     start_index/end_index are 1-based zeta zero indices.
     """
     rng = random.Random(seed)
     z = list(zeros)
-    # convert to zero-based inclusive-ish bounds
     s = max(1, start_index) - 1
     e = min(len(z) - 2, end_index - 1)
 
     centers: List[Tuple[str, float, Optional[int]]] = []
 
-    # gap midpoints
     for i in range(s, e):
         centers.append(("gap_midpoint", 0.5 * (z[i] + z[i + 1]), i + 1))
 
-    # every 5th zero center
     for i in range(s, e + 1, 5):
-        centers.append(("zero_center", z[i], i + 1))
+        centers.append(("zero_ordinate", z[i], i + 1))
 
-    # small/large gap neighborhoods
     gaps = [(z[i + 1] - z[i], i) for i in range(s, e)]
     gaps_sorted = sorted(gaps, key=lambda t: t[0])
     k = max(1, int(0.05 * len(gaps_sorted)))
-    for label, subset in [("small_gap", gaps_sorted[:k]), ("large_gap", gaps_sorted[-k:])]:
+    for label, subset in [("small_gap_midpoint", gaps_sorted[:k]),
+                          ("large_gap_midpoint", gaps_sorted[-k:])]:
         for gap, i in subset:
-            for eta in [0.25, 0.5, 0.75]:
-                centers.append((label, z[i] + eta * gap, i + 1))
+            centers.append((label, z[i] + 0.5 * gap, i + 1))
 
-    # random centers
     lo, hi = z[s], z[e]
     for _ in range(random_count):
         centers.append(("random", rng.uniform(lo, hi), None))
+
+    if uniform_count > 0:
+        for v in np.linspace(lo, hi, uniform_count):
+            centers.append(("uniform", float(v), None))
 
     return centers
 
@@ -396,37 +409,104 @@ def make_centers(zeros: Sequence[float],
 # Actual-zero proxy scan
 # ----------------------------
 
-def _param_hash(c_I_list: Sequence[float],
-                kappa_list: Sequence[float],
-                W_mult_list: Sequence[float],
-                R_list: Sequence[int],
-                n_quad_list: Sequence[int]) -> str:
-    """Deterministic short hash of the param grid; embedded in CSV filenames.
+def _zeros_content_hash(zeros: Sequence[float]) -> str:
+    """Stable SHA-256 over the actual zero ordinates so different generations
+    (or different n_zeros) produce different filenames."""
+    payload = json.dumps([float(g) for g in zeros], separators=(",", ":")).encode()
+    return hashlib.sha256(payload).hexdigest()
 
-    Different grids -> different files, so resume never mixes runs with
-    different parameters.
+
+def compute_params_hash(zeros: Sequence[float],
+                        c_I_list: Sequence[float],
+                        kappa_list: Sequence[float],
+                        W_factor_list: Sequence[float],
+                        R_jet_list: Sequence[int],
+                        nquad_list: Sequence[int],
+                        start_index: int,
+                        end_index: int,
+                        random_count: int,
+                        uniform_count: int,
+                        seed: int) -> str:
+    """Full SHA-256 over every input that affects row math, matching the unified
+    convention across the gate1 scripts. Includes a content hash of the actual
+    zero ordinates."""
+    record = {
+        "zeros_sha256": _zeros_content_hash(zeros),
+        "Q_mode": "log",
+        "c_I_values": [float(x) for x in c_I_list],
+        "kappa_values": [float(x) for x in kappa_list],
+        "W_factor_values": [float(x) for x in W_factor_list],
+        "R_jet_values": [int(x) for x in R_jet_list],
+        "nquad_values": [int(x) for x in nquad_list],
+        "start_index": int(start_index),
+        "end_index": int(end_index),
+        "random_count": int(random_count),
+        "uniform_count": int(uniform_count),
+        "seed": int(seed),
+        "schema_version": 1,
+    }
+    blob = json.dumps(record, sort_keys=True, separators=(",", ":")).encode()
+    return hashlib.sha256(blob).hexdigest()
+
+
+def derive_output_path(stem: str, params_hash: str, hash_len: int = 12) -> str:
+    """Insert a short params hash before the extension of stem (unified convention).
+
+    foo.csv -> foo.<hash>.csv
+    foo     -> foo.<hash>
     """
-    payload = json.dumps({
-        "c_I": [float(x) for x in c_I_list],
-        "kappa": [float(x) for x in kappa_list],
-        "W_mult": [float(x) for x in W_mult_list],
-        "R": [int(x) for x in R_list],
-        "n_quad": [int(x) for x in n_quad_list],
-    }, sort_keys=True).encode()
-    return hashlib.sha1(payload).hexdigest()[:8]
+    short = params_hash[:hash_len]
+    head, ext = os.path.splitext(stem)
+    return f"{head}.{short}{ext}" if ext else f"{head}.{short}"
 
 
-# Stable schema for streaming CSV writes / resume.
+# Unified schema (matches agent1's ScanRow). Streaming writes / resume key both
+# use these column names.
 _PROXY_FIELDNAMES = [
-    "run_label", "center_type", "ref_idx", "m0", "Q",
-    "c_I", "Delta", "kappa", "eps", "W_mult", "W",
-    "R", "N_quad", "num_zeros_used", "edge_truncated",
+    "center_type", "m0", "Q", "c_I", "kappa", "W_factor",
+    "nquad", "R_jet", "local_zero_count",
     "E_I", "S_I", "B_eff", "J_max", "J_rms",
+    "tail_drift_rel", "quad_drift_rel", "status",
 ]
 
 
-def _load_done_centers(path: str) -> set:
-    """Build set of (center_type, m0) keys already present in CSV."""
+def _rel_diff(a: float, b: float) -> float:
+    denom = max(abs(a), abs(b), 1e-300)
+    return abs(a - b) / denom
+
+
+def _classify_row(B_eff: float, J_max: float,
+                  tail_drift_rel: float, quad_drift_rel: float,
+                  tail_tol: float = 2e-2, quad_tol: float = 1e-5) -> str:
+    """Unified six-tier status. Matches agent1 thresholds."""
+    if not math.isfinite(tail_drift_rel) or tail_drift_rel > tail_tol:
+        return "reject_tail_unstable"
+    if not math.isfinite(quad_drift_rel) or quad_drift_rel > quad_tol:
+        return "reject_quad_unstable"
+    if math.isfinite(B_eff) and math.isfinite(J_max) and B_eff > 20 and J_max < 1e-8:
+        return "serious_proxy_warning"
+    if math.isfinite(B_eff) and B_eff > 10:
+        return "candidate_proxy_flat"
+    if math.isfinite(B_eff) and B_eff > 5:
+        return "watch"
+    return "healthy"
+
+
+def _row_key(row: Dict) -> tuple:
+    """Unified resume key (matches agent1)."""
+    return (
+        row["center_type"],
+        round(float(row["m0"]), 12),
+        float(row["c_I"]),
+        float(row["kappa"]),
+        float(row["W_factor"]),
+        int(row["nquad"]),
+        int(row["R_jet"]),
+    )
+
+
+def _load_done_keys(path: str) -> set:
+    """Build set of unified row keys already present in CSV."""
     if not os.path.exists(path):
         return set()
     done = set()
@@ -435,7 +515,7 @@ def _load_done_centers(path: str) -> set:
             reader = csv.DictReader(f)
             for row in reader:
                 try:
-                    done.add((row["center_type"], float(row["m0"])))
+                    done.add(_row_key(row))
                 except (KeyError, ValueError):
                     continue
     except Exception as e:
@@ -448,9 +528,10 @@ def _load_existing_rows(path: str) -> List[Dict]:
     if not os.path.exists(path):
         return []
     out: List[Dict] = []
-    int_fields = {"ref_idx", "R", "N_quad", "num_zeros_used"}
-    float_fields = {"m0", "Q", "c_I", "Delta", "kappa", "eps", "W_mult", "W",
-                    "E_I", "S_I", "B_eff", "J_max", "J_rms"}
+    int_fields = {"nquad", "R_jet", "local_zero_count"}
+    float_fields = {"m0", "Q", "c_I", "kappa", "W_factor",
+                    "E_I", "S_I", "B_eff", "J_max", "J_rms",
+                    "tail_drift_rel", "quad_drift_rel"}
     with open(path, "r", encoding="utf-8", newline="") as f:
         reader = csv.DictReader(f)
         for row in reader:
@@ -466,8 +547,6 @@ def _load_existing_rows(path: str) -> List[Dict]:
                         parsed[k] = float(v)
                     except ValueError:
                         parsed[k] = float("nan")
-                elif k == "edge_truncated":
-                    parsed[k] = (v == "True")
                 else:
                     parsed[k] = v
             out.append(parsed)
@@ -485,12 +564,11 @@ def _init_worker(zeros: List[float]) -> None:
 
 
 def _process_center(task: Tuple) -> List[Dict]:
-    """
-    Worker: process one center across the full param grid.
-    task = (center_type, m0, ref_idx, c_I_list, kappa_list, W_mult_list, R_list, n_quad_list)
-    """
+    """Worker: process one center across the full param grid. Emits rows in
+    the unified schema (matches agent1). Computes tail and quadrature drift
+    by re-integrating at 2*W and at nquad/2, then classifies status."""
     (center_type, m0, ref_idx,
-     c_I_list, kappa_list, W_mult_list, R_list, n_quad_list) = task
+     c_I_list, kappa_list, W_factor_list, R_jet_list, nquad_list) = task
 
     zeros = _W_ZEROS
     if zeros is None:
@@ -505,41 +583,49 @@ def _process_center(task: Tuple) -> List[Dict]:
         Delta = c_I / Q
         for kappa in kappa_list:
             eps = kappa / Q
-            for W_mult in W_mult_list:
-                W = W_mult / Q
-                edge_truncated = (m0 - W < zeros[0]) or (m0 + W > zeros[-1])
-                for R in R_list:
-                    for n_quad in n_quad_list:
+            for W_factor in W_factor_list:
+                W = W_factor / Q
+                W2 = 2.0 * W_factor / Q
+                for R_jet in R_jet_list:
+                    for nquad in nquad_list:
                         E_I, S_I, num_used = integrate_zero_proxy(
-                            zeros=zeros, m0=m0, Delta=Delta, eps=eps, W=W, n_nodes=n_quad
+                            zeros=zeros, m0=m0, Delta=Delta, eps=eps, W=W, n_nodes=nquad
                         )
                         if not math.isfinite(E_I):
                             continue
+                        E_half, _, _ = integrate_zero_proxy(
+                            zeros=zeros, m0=m0, Delta=Delta, eps=eps, W=W,
+                            n_nodes=max(32, nquad // 2),
+                        )
+                        quad_drift = _rel_diff(E_I, E_half) if math.isfinite(E_half) else float("nan")
+                        E_2W, _, _ = integrate_zero_proxy(
+                            zeros=zeros, m0=m0, Delta=Delta, eps=eps, W=W2, n_nodes=nquad
+                        )
+                        tail_drift = _rel_diff(E_I, E_2W) if math.isfinite(E_2W) else float("nan")
+
                         B_eff = -safe_log(E_I) / math.log(Q)
                         J_max, J_rms = finite_difference_jets_zero_proxy(
-                            zeros=zeros, m0=m0, Delta=Delta, eps=eps, W=W, R=R
+                            zeros=zeros, m0=m0, Delta=Delta, eps=eps, W=W, R=R_jet
                         )
+                        status = _classify_row(B_eff, J_max, tail_drift, quad_drift)
                         out.append({
-                            "run_label": "zero_kernel_only_proxy",
                             "center_type": center_type,
-                            "ref_idx": ref_idx,
                             "m0": m0,
                             "Q": Q,
                             "c_I": c_I,
-                            "Delta": Delta,
                             "kappa": kappa,
-                            "eps": eps,
-                            "W_mult": W_mult,
-                            "W": W,
-                            "R": R,
-                            "N_quad": n_quad,
-                            "num_zeros_used": num_used,
-                            "edge_truncated": edge_truncated,
+                            "W_factor": W_factor,
+                            "nquad": nquad,
+                            "R_jet": R_jet,
+                            "local_zero_count": num_used,
                             "E_I": E_I,
                             "S_I": S_I,
                             "B_eff": B_eff,
                             "J_max": J_max,
                             "J_rms": J_rms,
+                            "tail_drift_rel": tail_drift,
+                            "quad_drift_rel": quad_drift,
+                            "status": status,
                         })
     return out
 
@@ -549,52 +635,82 @@ def run_actual_zero_proxy_scan(outdir: str,
                                start_index: int,
                                end_index: int,
                                smoke: bool = False,
-                               workers: int = 1) -> List[Dict]:
+                               workers: int = 1,
+                               resume: bool = True,
+                               random_count: int = 100,
+                               uniform_count: int = 0,
+                               seed: int = 0,
+                               hash_len: int = 12) -> List[Dict]:
     log(f"loading or generating {n_zeros} zeros")
     zeros = load_or_generate_zeros(outdir, n_zeros=n_zeros)
     log(f"have {len(zeros)} zeros: gamma_1={zeros[0]:.4f}, gamma_N={zeros[-1]:.4f}")
 
     if smoke:
-        centers = make_centers(zeros, start_index, min(start_index + 50, end_index), random_count=10)
+        centers = make_centers(zeros, start_index, min(start_index + 50, end_index),
+                               random_count=10, uniform_count=uniform_count, seed=seed)
         c_I_list = [0.5]
         kappa_list = [1.0]
-        W_mult_list = [50.0]
-        R_list = [4]
-        n_quad_list = [257]
+        W_factor_list = [50.0]
+        R_jet_list = [4]
+        nquad_list = [257]
+        suffix = "smoke"
     else:
-        centers = make_centers(zeros, start_index, end_index, random_count=100)
+        centers = make_centers(zeros, start_index, end_index,
+                               random_count=random_count, uniform_count=uniform_count, seed=seed)
         c_I_list = [0.2, 0.5]
         kappa_list = [0.5, 1.0]
-        W_mult_list = [25.0, 50.0]
-        R_list = [4]
-        n_quad_list = [257]
+        W_factor_list = [25.0, 50.0]
+        R_jet_list = [4]
+        nquad_list = [257]
+        suffix = "small"
 
     n_params_per_center = (
-        len(c_I_list) * len(kappa_list) * len(W_mult_list) * len(R_list) * len(n_quad_list)
+        len(c_I_list) * len(kappa_list) * len(W_factor_list) * len(R_jet_list) * len(nquad_list)
     )
     log(
         f"scan plan: {len(centers)} centers x {n_params_per_center} params = "
         f"{len(centers) * n_params_per_center} total work units"
     )
 
-    suffix = "smoke" if smoke else "small"
-    grid_hash = _param_hash(c_I_list, kappa_list, W_mult_list, R_list, n_quad_list)
-    csv_path = os.path.join(outdir, f"actual_zero_proxy_{suffix}_{grid_hash}.csv")
-    log(f"param grid hash: {grid_hash}  csv: {csv_path}")
+    params_hash = compute_params_hash(
+        zeros=zeros, c_I_list=c_I_list, kappa_list=kappa_list,
+        W_factor_list=W_factor_list, R_jet_list=R_jet_list, nquad_list=nquad_list,
+        start_index=start_index, end_index=end_index,
+        random_count=random_count, uniform_count=uniform_count, seed=seed,
+    )
+    stem = os.path.join(outdir, f"actual_zero_proxy_{suffix}.csv")
+    csv_path = derive_output_path(stem, params_hash, hash_len=hash_len)
+    log(f"params hash: {params_hash[:hash_len]}  (full sha256: {params_hash})")
+    log(f"output csv: {csv_path}")
 
-    # Resume: skip centers whose (center_type, m0) is already in the CSV.
-    done_centers = _load_done_centers(csv_path)
-    if done_centers:
-        log(f"resume: {len(done_centers)} centers already present in {csv_path}")
-    rows: List[Dict] = _load_existing_rows(csv_path) if done_centers else []
+    file_exists = os.path.exists(csv_path) and os.path.getsize(csv_path) > 0
+    if not resume and file_exists:
+        log(f"--no-resume: truncating existing file {csv_path}")
+        os.remove(csv_path)
+        file_exists = False
 
-    tasks = [
-        (center_type, m0, ref_idx, c_I_list, kappa_list, W_mult_list, R_list, n_quad_list)
-        for (center_type, m0, ref_idx) in centers
-        if (center_type, m0) not in done_centers
-    ]
+    done_keys = _load_done_keys(csv_path) if (resume and file_exists) else set()
+    if done_keys:
+        log(f"resume: {len(done_keys)} rows already present in {csv_path}")
+    rows: List[Dict] = _load_existing_rows(csv_path) if done_keys else []
+
+    tasks = []
+    for (center_type, m0, ref_idx) in centers:
+        Q_check = math.log(m0 / (2.0 * math.pi))
+        if Q_check <= 1.0:
+            continue
+        all_done = all(
+            (center_type, round(float(m0), 12), float(c_I), float(kappa),
+             float(W_factor), int(nquad), int(R_jet)) in done_keys
+            for c_I in c_I_list for kappa in kappa_list
+            for W_factor in W_factor_list for R_jet in R_jet_list for nquad in nquad_list
+        )
+        if all_done:
+            continue
+        tasks.append((center_type, m0, ref_idx,
+                      c_I_list, kappa_list, W_factor_list, R_jet_list, nquad_list))
     skipped = len(centers) - len(tasks)
-    log(f"to compute: {len(tasks)} centers; skipped (resumed): {skipped}")
+    log(f"to compute: {len(tasks)} centers; skipped (resumed or Q<=1): {skipped}")
 
     t0 = time.time()
     progress_every = 5
@@ -654,7 +770,8 @@ def run_actual_zero_proxy_scan(outdir: str,
             fout.close()
 
     # Top diagnostics (over union of resumed + newly computed rows).
-    top_path = os.path.join(outdir, f"actual_zero_proxy_{suffix}_{grid_hash}_top_by_Beff.csv")
+    top_stem = os.path.join(outdir, f"actual_zero_proxy_{suffix}_top_by_Beff.csv")
+    top_path = derive_output_path(top_stem, params_hash, hash_len=hash_len)
     write_csv(top_path, summarize_top(rows, "B_eff", n=50, reverse=True))
 
     return rows
@@ -667,13 +784,26 @@ def run_actual_zero_proxy_scan(outdir: str,
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--mode", choices=["controls", "actual", "all"], default="controls")
-    ap.add_argument("--outdir", default="gate1_out")
+    ap.add_argument("--outdir", default=_DEFAULT_OUT_DIR,
+                    help="Output directory. Default: <script>/out/.")
     ap.add_argument("--zeros", type=int, default=500)
     ap.add_argument("--start-index", type=int, default=50)
     ap.add_argument("--end-index", type=int, default=500)
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--workers", type=int, default=max(1, (os.cpu_count() or 2) - 2),
                     help="number of worker processes for the actual-zero scan; 1 = serial")
+    ap.add_argument("--resume", dest="resume", action="store_true", default=True,
+                    help="If the params-hash-derived CSV already exists, append to it and skip "
+                         "rows whose key is already present. Resume is on by default.")
+    ap.add_argument("--no-resume", dest="resume", action="store_false",
+                    help="Truncate the output CSV if it already exists.")
+    ap.add_argument("--hash-len", type=int, default=12,
+                    help="Length of the params-hash slug embedded in the output filename.")
+    ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--random-count", type=int, default=100,
+                    help="Number of random centers per scan.")
+    ap.add_argument("--uniform-count", type=int, default=0,
+                    help="Number of evenly-spaced uniform centers per scan (0 disables).")
     args = ap.parse_args()
 
     ensure_dir(args.outdir)
@@ -702,25 +832,32 @@ def main() -> None:
             end_index=args.end_index,
             smoke=args.smoke,
             workers=args.workers,
+            resume=args.resume,
+            random_count=args.random_count,
+            uniform_count=args.uniform_count,
+            seed=args.seed,
+            hash_len=args.hash_len,
         )
         log(f"wrote {len(rows)} rows to actual_zero_proxy CSV")
         top = summarize_top(rows, "B_eff", n=10, reverse=True)
         log("top rows by B_eff:")
         for r in top:
             print({
+                "status": r.get("status"),
                 "center_type": r.get("center_type"),
                 "m0": r.get("m0"),
                 "Q": r.get("Q"),
                 "c_I": r.get("c_I"),
                 "kappa": r.get("kappa"),
-                "W_mult": r.get("W_mult"),
-                "R": r.get("R"),
-                "N_quad": r.get("N_quad"),
+                "W_factor": r.get("W_factor"),
+                "R_jet": r.get("R_jet"),
+                "nquad": r.get("nquad"),
                 "E_I": r.get("E_I"),
                 "B_eff": r.get("B_eff"),
                 "J_max": r.get("J_max"),
-                "num_zeros_used": r.get("num_zeros_used"),
-                "edge_truncated": r.get("edge_truncated"),
+                "tail_drift_rel": r.get("tail_drift_rel"),
+                "quad_drift_rel": r.get("quad_drift_rel"),
+                "local_zero_count": r.get("local_zero_count"),
             }, flush=True)
 
 

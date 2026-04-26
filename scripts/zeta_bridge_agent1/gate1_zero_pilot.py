@@ -42,10 +42,25 @@ import hashlib
 import json
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from dataclasses import dataclass, asdict
+from datetime import datetime
 from typing import Iterable
 
 import numpy as np
 from numpy.polynomial.legendre import leggauss
+
+
+def log(msg: str) -> None:
+    """Timestamped, flushed line. Unified logging helper across the gate1 scripts."""
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}", flush=True)
+
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_DEFAULT_OUT_DIR = os.path.normpath(os.path.join(_SCRIPT_DIR, "out"))
+
+
+def _default_out(*parts: str) -> str:
+    """Resolve <script_dir>/out/<parts...>; unified outputs location."""
+    return os.path.join(_DEFAULT_OUT_DIR, *parts)
 
 
 # Worker-side global, set by _worker_init.
@@ -167,8 +182,14 @@ def qpp_proxy_values(ms: np.ndarray, gammas: np.ndarray, eps: float) -> np.ndarr
 # ----------------------------
 
 def Q_of_m(m0: float, mode: str = "log") -> float:
+    """Q is the asymptotic mean Gram-point spacing scale: Q = log(m0 / (2*pi)).
+
+    Defined only for m0 > 2*pi. Caller is responsible for filtering centers
+    whose Q is too small (Q <= 1 by default). Returns log(m0/(2*pi)) without
+    clamping; values <= 0 are valid sentinels meaning "skip this center".
+    """
     if mode == "log":
-        return max(1.0, math.log(3.0 + abs(m0)))
+        return math.log(abs(m0) / (2.0 * math.pi))
     raise ValueError(f"Unknown Q mode: {mode}")
 
 
@@ -264,11 +285,9 @@ def chebyshev_jet_proxy(
 # Center families
 # ----------------------------
 
-def gram_like_centers(zeros: np.ndarray, max_count: int) -> np.ndarray:
-    """
-    Placeholder 'Gram-like' centers: evenly spaced between min/max zero range.
-    True Gram points require theta(t), not included in this proxy script.
-    """
+def gram_placeholder_centers(zeros: np.ndarray, max_count: int) -> np.ndarray:
+    """Placeholder for Gram points: evenly spaced between min/max zero ordinate.
+    Real Gram points require theta(t); this script does not compute them."""
     if len(zeros) < 2:
         return zeros.copy()
     lo, hi = float(zeros[0]), float(zeros[-1])
@@ -280,44 +299,39 @@ def generate_centers(
     max_per_family: int,
     seed: int,
 ) -> list[tuple[str, float]]:
+    """Build centers for a scan. Family names follow the unified vocabulary:
+    zero_ordinate, gap_midpoint, large_gap_midpoint, small_gap_midpoint,
+    gram_placeholder, random, uniform."""
     rng = np.random.default_rng(seed)
     centers: list[tuple[str, float]] = []
 
-    # zero ordinates
     for g in zeros[:max_per_family]:
-        centers.append(("zero", float(g)))
+        centers.append(("zero_ordinate", float(g)))
 
-    # gap midpoints and small-gap neighborhoods
     gaps = np.diff(zeros)
     if len(gaps) > 0:
         idx_sorted_small = np.argsort(gaps)[:max_per_family]
         idx_sorted_large = np.argsort(gaps)[-max_per_family:]
-
         for i in idx_sorted_small:
             a, b = zeros[i], zeros[i + 1]
-            centers.append(("small_gap_mid", float(0.5 * (a + b))))
-            centers.append(("small_gap_q25", float(a + 0.25 * (b - a))))
-            centers.append(("small_gap_q75", float(a + 0.75 * (b - a))))
-
+            centers.append(("small_gap_midpoint", float(0.5 * (a + b))))
         for i in idx_sorted_large:
             a, b = zeros[i], zeros[i + 1]
-            centers.append(("large_gap_mid", float(0.5 * (a + b))))
+            centers.append(("large_gap_midpoint", float(0.5 * (a + b))))
 
-    # gap midpoints first max_per_family
     for i in range(min(max_per_family, max(0, len(zeros) - 1))):
-        centers.append(("gap_mid", float(0.5 * (zeros[i] + zeros[i + 1]))))
+        centers.append(("gap_midpoint", float(0.5 * (zeros[i] + zeros[i + 1]))))
 
-    # gram-like placeholder
-    for g in gram_like_centers(zeros, max_per_family):
-        centers.append(("gram_like_even", float(g)))
+    for g in gram_placeholder_centers(zeros, max_per_family):
+        centers.append(("gram_placeholder", float(g)))
 
-    # random centers within zero range
     if len(zeros) >= 2:
         lo, hi = float(zeros[0]), float(zeros[-1])
         for m in rng.uniform(lo, hi, size=max_per_family):
             centers.append(("random", float(m)))
+        for m in np.linspace(lo, hi, max_per_family):
+            centers.append(("uniform", float(m)))
 
-    # Deduplicate approximately
     seen = set()
     deduped = []
     for typ, m in centers:
@@ -486,8 +500,8 @@ def run_scan(
                     ))
 
     if resume_keys is not None:
-        print(f"Resume: skipping {skipped} already-computed tasks; "
-              f"{len(tasks)} new tasks to run.")
+        log(f"Resume: skipping {skipped} already-computed tasks; "
+            f"{len(tasks)} new tasks to run.")
 
     total = len(tasks)
     rows: list[ScanRow] = []
@@ -495,6 +509,9 @@ def run_scan(
     csv_writer = None
     csv_file = None
     if out_path is not None:
+        out_parent = os.path.dirname(os.path.abspath(out_path))
+        if out_parent:
+            os.makedirs(out_parent, exist_ok=True)
         file_exists = os.path.exists(out_path) and os.path.getsize(out_path) > 0
         csv_file = open(out_path, "a", newline="")
         fieldnames = list(asdict(ScanRow(
@@ -704,14 +721,16 @@ def _parse_floats(s: str) -> list[float]:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--zeros", required=True, help="Path to zero ordinates file.")
-    parser.add_argument("--out", default="zero_pilot_results.csv", help="Output CSV path.")
+    parser.add_argument("--out", default=_default_out("zero_pilot_results.csv"),
+                        help="Output CSV path. Default lands in <script>/../out/.")
     parser.add_argument("--fast", action="store_true", help="Small fast pilot.")
     parser.add_argument("--seed", type=int, default=12345)
     parser.add_argument("--top", type=int, default=20)
     parser.add_argument("--min-m0", type=float, default=None,
                         help="Discard zero ordinates and centers below this height.")
-    parser.add_argument("--min-Q", type=float, default=None,
-                        help="Discard centers whose Q = log(3+|m0|) is below this.")
+    parser.add_argument("--min-Q", type=float, default=1.0,
+                        help="Discard centers whose Q = log(m0/(2*pi)) is below this. "
+                             "Default 1.0 (m0 > 2*pi*e ~= 17.08) so B_eff = -log(E)/log(Q) is well-defined.")
     parser.add_argument("--W-factors", type=str, default=None,
                         help="Comma-separated W_factor values (override default).")
     parser.add_argument("--c-I-values", type=str, default=None,
@@ -729,21 +748,22 @@ def main() -> None:
                         help="Process-pool workers (default: cpu_count - 2).")
     parser.add_argument("--progress-every", type=int, default=0,
                         help="Print progress every N completed tasks (0 = silent).")
-    parser.add_argument("--resume", action="store_true",
+    parser.add_argument("--resume", dest="resume", action="store_true", default=True,
                         help="If the params-hash-derived output file already exists, append to it "
-                             "and skip rows whose key is already present. Without --resume, an "
-                             "existing file aborts the run to avoid silent overwrite.")
+                             "and skip rows whose key is already present. Resume is on by default.")
+    parser.add_argument("--no-resume", dest="resume", action="store_false",
+                        help="Truncate the output file if it already exists. Off by default.")
     parser.add_argument("--hash-len", type=int, default=12,
                         help="Length of the params-hash slug embedded in the output filename.")
     args = parser.parse_args()
 
     zeros = load_zeros(args.zeros)
-    print(f"Loaded {len(zeros)} zeros: [{zeros[0]}, {zeros[-1]}]")
+    log(f"Loaded {len(zeros)} zeros: [{zeros[0]}, {zeros[-1]}]")
 
     if args.min_m0 is not None:
         before = len(zeros)
         zeros = zeros[zeros >= args.min_m0]
-        print(f"Filtered to {len(zeros)} zeros with m0 >= {args.min_m0} (was {before})")
+        log(f"Filtered to {len(zeros)} zeros with m0 >= {args.min_m0} (was {before})")
         if len(zeros) < 2:
             raise SystemExit("Too few zeros after --min-m0 filter.")
 
@@ -788,23 +808,23 @@ def main() -> None:
         quad_tol = args.quad_tol
 
     centers = generate_centers(zeros, max_per_family=max_per_family, seed=args.seed)
-    print(f"Generated {len(centers)} centers.")
+    log(f"Generated {len(centers)} centers.")
 
     if args.min_m0 is not None:
         before = len(centers)
         centers = [(t, m) for (t, m) in centers if m >= args.min_m0]
-        print(f"Centers after --min-m0: {len(centers)} (was {before})")
+        log(f"Centers after --min-m0: {len(centers)} (was {before})")
 
     if args.min_Q is not None:
         before = len(centers)
         centers = [(t, m) for (t, m) in centers if Q_of_m(m, "log") >= args.min_Q]
-        print(f"Centers after --min-Q: {len(centers)} (was {before})")
+        log(f"Centers after --min-Q: {len(centers)} (was {before})")
 
     if not centers:
         raise SystemExit("No centers remain after filters.")
 
     workers = max(1, args.workers)
-    print(f"Workers: {workers}")
+    log(f"Workers: {workers}")
 
     params_hash = compute_params_hash(
         zeros_path=args.zeros,
@@ -823,25 +843,20 @@ def main() -> None:
         min_Q=args.min_Q,
     )
     out_path = derive_output_path(args.out, params_hash, hash_len=args.hash_len)
-    print(f"Params hash: {params_hash[:args.hash_len]}  (full sha256: {params_hash})")
-    print(f"Output CSV : {out_path}")
+    log(f"Params hash: {params_hash[:args.hash_len]}  (full sha256: {params_hash})")
+    log(f"Output CSV : {out_path}")
 
     resume_keys: set[tuple] | None = None
     file_exists = os.path.exists(out_path) and os.path.getsize(out_path) > 0
     if args.resume:
         if file_exists:
             resume_keys = load_existing_keys(out_path)
-            print(f"Resume: loaded {len(resume_keys)} existing keys from {out_path}.")
+            log(f"Resume: loaded {len(resume_keys)} existing keys from {out_path}.")
         else:
-            print("Resume: no prior file at this hash; starting fresh.")
+            log("Resume: no prior file at this hash; starting fresh.")
     else:
         if file_exists:
-            raise SystemExit(
-                f"Output file already exists: {out_path}\n"
-                "Pass --resume to append to it (params match by construction), "
-                "or delete it / change --out to start over."
-            )
-        if os.path.exists(out_path):
+            log(f"--no-resume: truncating existing file {out_path}.")
             os.remove(out_path)
 
     rows = run_scan(
@@ -867,8 +882,8 @@ def main() -> None:
         print_summary(all_rows, top_n=args.top)
     else:
         print_summary(rows, top_n=args.top)
-    print(f"\nWrote CSV: {out_path}")
-    print("\nNOTE: This is a zero-kernel-only proxy. It omits B2 and final canonical regularization.")
+    log(f"Wrote CSV: {out_path}")
+    log("NOTE: This is a zero-kernel-only proxy. It omits B2 and final canonical regularization.")
 
 
 if __name__ == "__main__":

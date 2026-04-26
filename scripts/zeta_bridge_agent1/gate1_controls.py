@@ -18,11 +18,33 @@ from __future__ import annotations
 import argparse
 import csv
 import math
+import os
 from dataclasses import dataclass
+from datetime import datetime
 from typing import Iterable
+
+# Pin BLAS / OpenMP to 1 thread per process (unified gate1 convention).
+# Set before numpy import.
+for _k in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS",
+           "VECLIB_MAXIMUM_THREADS", "NUMEXPR_NUM_THREADS"):
+    os.environ.setdefault(_k, "1")
 
 import numpy as np
 from numpy.polynomial.legendre import leggauss
+
+
+def log(msg: str) -> None:
+    """Timestamped, flushed line. Unified logging helper across the gate1 scripts."""
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}", flush=True)
+
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_DEFAULT_OUT_DIR = os.path.normpath(os.path.join(_SCRIPT_DIR, "out"))
+
+
+def _default_out(*parts: str) -> str:
+    """Resolve <script_dir>/out/<parts...>; unified outputs location."""
+    return os.path.join(_DEFAULT_OUT_DIR, *parts)
 
 
 # ----------------------------
@@ -405,7 +427,10 @@ def write_csv(path: str, neg_rows: list[NegativeControlRow], sing_rows: list[Sin
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--fast", action="store_true", help="Run a faster reduced test suite.")
-    parser.add_argument("--out", type=str, default="", help="Optional CSV output path.")
+    parser.add_argument("--out", type=str,
+                        default=_default_out("gate1_controls_results.csv"),
+                        help="CSV output path. Default lands in <script>/out/. "
+                             "Pass an empty string to skip writing.")
     args = parser.parse_args()
 
     if args.fast:
@@ -442,8 +467,11 @@ def main() -> None:
     print_singular_rows(sing_rows)
 
     if args.out:
+        out_parent = os.path.dirname(os.path.abspath(args.out))
+        if out_parent:
+            os.makedirs(out_parent, exist_ok=True)
         write_csv(args.out, neg_rows, sing_rows)
-        print(f"\nWrote CSV: {args.out}")
+        log(f"Wrote CSV: {args.out}")
 
 
 if __name__ == "__main__":
