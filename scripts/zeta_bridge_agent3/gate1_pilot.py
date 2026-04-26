@@ -19,10 +19,22 @@ as a labeled zero-kernel-only proxy.
 
 from __future__ import annotations
 
+import os
+
+# Pin BLAS / OpenMP to 1 thread per process. We parallelize at the center
+# level via multiprocessing; with 30 workers each trying to spawn 32 OpenMP
+# threads, the first batch was thrashing for ~12 minutes before the OS
+# balanced affinity. Set these before numpy is imported.
+for _k in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS",
+          "VECLIB_MAXIMUM_THREADS", "NUMEXPR_NUM_THREADS"):
+    os.environ.setdefault(_k, "1")
+
 import argparse
 import csv
+import hashlib
+import json
 import math
-import os
+import multiprocessing as mp_proc
 import random
 import sys
 import time
@@ -384,11 +396,160 @@ def make_centers(zeros: Sequence[float],
 # Actual-zero proxy scan
 # ----------------------------
 
+def _param_hash(c_I_list: Sequence[float],
+                kappa_list: Sequence[float],
+                W_mult_list: Sequence[float],
+                R_list: Sequence[int],
+                n_quad_list: Sequence[int]) -> str:
+    """Deterministic short hash of the param grid; embedded in CSV filenames.
+
+    Different grids -> different files, so resume never mixes runs with
+    different parameters.
+    """
+    payload = json.dumps({
+        "c_I": [float(x) for x in c_I_list],
+        "kappa": [float(x) for x in kappa_list],
+        "W_mult": [float(x) for x in W_mult_list],
+        "R": [int(x) for x in R_list],
+        "n_quad": [int(x) for x in n_quad_list],
+    }, sort_keys=True).encode()
+    return hashlib.sha1(payload).hexdigest()[:8]
+
+
+# Stable schema for streaming CSV writes / resume.
+_PROXY_FIELDNAMES = [
+    "run_label", "center_type", "ref_idx", "m0", "Q",
+    "c_I", "Delta", "kappa", "eps", "W_mult", "W",
+    "R", "N_quad", "num_zeros_used", "edge_truncated",
+    "E_I", "S_I", "B_eff", "J_max", "J_rms",
+]
+
+
+def _load_done_centers(path: str) -> set:
+    """Build set of (center_type, m0) keys already present in CSV."""
+    if not os.path.exists(path):
+        return set()
+    done = set()
+    try:
+        with open(path, "r", encoding="utf-8", newline="") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                try:
+                    done.add((row["center_type"], float(row["m0"])))
+                except (KeyError, ValueError):
+                    continue
+    except Exception as e:
+        log(f"warning: failed to read existing CSV for resume: {e}")
+    return done
+
+
+def _load_existing_rows(path: str) -> List[Dict]:
+    """Re-read full CSV with type coercion so summaries can include resumed rows."""
+    if not os.path.exists(path):
+        return []
+    out: List[Dict] = []
+    int_fields = {"ref_idx", "R", "N_quad", "num_zeros_used"}
+    float_fields = {"m0", "Q", "c_I", "Delta", "kappa", "eps", "W_mult", "W",
+                    "E_I", "S_I", "B_eff", "J_max", "J_rms"}
+    with open(path, "r", encoding="utf-8", newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            parsed: Dict = {}
+            for k, v in row.items():
+                if k in int_fields:
+                    try:
+                        parsed[k] = int(v) if v != "" else None
+                    except ValueError:
+                        parsed[k] = None
+                elif k in float_fields:
+                    try:
+                        parsed[k] = float(v)
+                    except ValueError:
+                        parsed[k] = float("nan")
+                elif k == "edge_truncated":
+                    parsed[k] = (v == "True")
+                else:
+                    parsed[k] = v
+            out.append(parsed)
+    return out
+
+
+# Worker globals (set by _init_worker in each subprocess to avoid re-pickling
+# the zero list on every task).
+_W_ZEROS: Optional[List[float]] = None
+
+
+def _init_worker(zeros: List[float]) -> None:
+    global _W_ZEROS
+    _W_ZEROS = zeros
+
+
+def _process_center(task: Tuple) -> List[Dict]:
+    """
+    Worker: process one center across the full param grid.
+    task = (center_type, m0, ref_idx, c_I_list, kappa_list, W_mult_list, R_list, n_quad_list)
+    """
+    (center_type, m0, ref_idx,
+     c_I_list, kappa_list, W_mult_list, R_list, n_quad_list) = task
+
+    zeros = _W_ZEROS
+    if zeros is None:
+        return []
+
+    Q = math.log(m0 / (2.0 * math.pi))
+    if Q <= 1.0:
+        return []
+
+    out: List[Dict] = []
+    for c_I in c_I_list:
+        Delta = c_I / Q
+        for kappa in kappa_list:
+            eps = kappa / Q
+            for W_mult in W_mult_list:
+                W = W_mult / Q
+                edge_truncated = (m0 - W < zeros[0]) or (m0 + W > zeros[-1])
+                for R in R_list:
+                    for n_quad in n_quad_list:
+                        E_I, S_I, num_used = integrate_zero_proxy(
+                            zeros=zeros, m0=m0, Delta=Delta, eps=eps, W=W, n_nodes=n_quad
+                        )
+                        if not math.isfinite(E_I):
+                            continue
+                        B_eff = -safe_log(E_I) / math.log(Q)
+                        J_max, J_rms = finite_difference_jets_zero_proxy(
+                            zeros=zeros, m0=m0, Delta=Delta, eps=eps, W=W, R=R
+                        )
+                        out.append({
+                            "run_label": "zero_kernel_only_proxy",
+                            "center_type": center_type,
+                            "ref_idx": ref_idx,
+                            "m0": m0,
+                            "Q": Q,
+                            "c_I": c_I,
+                            "Delta": Delta,
+                            "kappa": kappa,
+                            "eps": eps,
+                            "W_mult": W_mult,
+                            "W": W,
+                            "R": R,
+                            "N_quad": n_quad,
+                            "num_zeros_used": num_used,
+                            "edge_truncated": edge_truncated,
+                            "E_I": E_I,
+                            "S_I": S_I,
+                            "B_eff": B_eff,
+                            "J_max": J_max,
+                            "J_rms": J_rms,
+                        })
+    return out
+
+
 def run_actual_zero_proxy_scan(outdir: str,
                                n_zeros: int,
                                start_index: int,
                                end_index: int,
-                               smoke: bool = False) -> List[Dict]:
+                               smoke: bool = False,
+                               workers: int = 1) -> List[Dict]:
     log(f"loading or generating {n_zeros} zeros")
     zeros = load_or_generate_zeros(outdir, n_zeros=n_zeros)
     log(f"have {len(zeros)} zeros: gamma_1={zeros[0]:.4f}, gamma_N={zeros[-1]:.4f}")
@@ -416,84 +577,84 @@ def run_actual_zero_proxy_scan(outdir: str,
         f"{len(centers) * n_params_per_center} total work units"
     )
 
-    rows: List[Dict] = []
-    t0 = time.time()
-    progress_every = max(1, len(centers) // 50)
-    log(f"progress prints every {progress_every} centers")
-
-    for idx, (center_type, m0, ref_idx) in enumerate(centers):
-        Q = math.log(m0 / (2.0 * math.pi))
-        if Q <= 1.0:
-            continue
-
-        for c_I in c_I_list:
-            Delta = c_I / Q
-            for kappa in kappa_list:
-                eps = kappa / Q
-                for W_mult in W_mult_list:
-                    W = W_mult / Q
-                    edge_truncated = (m0 - W < zeros[0]) or (m0 + W > zeros[-1])
-                    for R in R_list:
-                        for n_quad in n_quad_list:
-                            E_I, S_I, num_used = integrate_zero_proxy(
-                                zeros=zeros,
-                                m0=m0,
-                                Delta=Delta,
-                                eps=eps,
-                                W=W,
-                                n_nodes=n_quad
-                            )
-                            if not math.isfinite(E_I):
-                                continue
-
-                            B_eff = -safe_log(E_I) / math.log(Q)
-                            J_max, J_rms = finite_difference_jets_zero_proxy(
-                                zeros=zeros,
-                                m0=m0,
-                                Delta=Delta,
-                                eps=eps,
-                                W=W,
-                                R=R
-                            )
-
-                            rows.append({
-                                "run_label": "zero_kernel_only_proxy",
-                                "center_type": center_type,
-                                "ref_idx": ref_idx,
-                                "m0": m0,
-                                "Q": Q,
-                                "c_I": c_I,
-                                "Delta": Delta,
-                                "kappa": kappa,
-                                "eps": eps,
-                                "W_mult": W_mult,
-                                "W": W,
-                                "R": R,
-                                "N_quad": n_quad,
-                                "num_zeros_used": num_used,
-                                "edge_truncated": edge_truncated,
-                                "E_I": E_I,
-                                "S_I": S_I,
-                                "B_eff": B_eff,
-                                "J_max": J_max,
-                                "J_rms": J_rms,
-                            })
-
-        if (idx + 1) % progress_every == 0 or idx + 1 == len(centers):
-            elapsed = time.time() - t0
-            rate = (idx + 1) / elapsed if elapsed > 0 else 0
-            eta = (len(centers) - idx - 1) / rate if rate > 0 else 0
-            log(
-                f"  centers {idx+1}/{len(centers)}  rows={len(rows)}  "
-                f"elapsed={elapsed:.1f}s  rate={rate:.2f}/s  eta={eta:.1f}s"
-            )
-
     suffix = "smoke" if smoke else "small"
-    path = os.path.join(outdir, f"actual_zero_proxy_{suffix}.csv")
-    write_csv(path, rows)
+    grid_hash = _param_hash(c_I_list, kappa_list, W_mult_list, R_list, n_quad_list)
+    csv_path = os.path.join(outdir, f"actual_zero_proxy_{suffix}_{grid_hash}.csv")
+    log(f"param grid hash: {grid_hash}  csv: {csv_path}")
 
-    # Top diagnostics
-    top_path = os.path.join(outdir, f"actual_zero_proxy_{suffix}_top_by_Beff.csv")
+    # Resume: skip centers whose (center_type, m0) is already in the CSV.
+    done_centers = _load_done_centers(csv_path)
+    if done_centers:
+        log(f"resume: {len(done_centers)} centers already present in {csv_path}")
+    rows: List[Dict] = _load_existing_rows(csv_path) if done_centers else []
+
+    tasks = [
+        (center_type, m0, ref_idx, c_I_list, kappa_list, W_mult_list, R_list, n_quad_list)
+        for (center_type, m0, ref_idx) in centers
+        if (center_type, m0) not in done_centers
+    ]
+    skipped = len(centers) - len(tasks)
+    log(f"to compute: {len(tasks)} centers; skipped (resumed): {skipped}")
+
+    t0 = time.time()
+    progress_every = 5
+    log(f"progress prints every {progress_every} centers, workers={workers}")
+
+    if not tasks:
+        log("nothing to compute; using existing CSV for summary")
+    else:
+        # Open CSV in append mode if it exists, else create with header.
+        file_exists = os.path.exists(csv_path) and os.path.getsize(csv_path) > 0
+        mode = "a" if file_exists else "w"
+        fout = open(csv_path, mode, encoding="utf-8", newline="")
+        writer = csv.DictWriter(fout, fieldnames=_PROXY_FIELDNAMES)
+        if not file_exists:
+            writer.writeheader()
+            fout.flush()
+
+        try:
+            if workers <= 1:
+                log("running serial (workers <= 1)")
+                _init_worker(list(zeros))
+                for idx, task in enumerate(tasks):
+                    result = _process_center(task)
+                    for row in result:
+                        writer.writerow(row)
+                    fout.flush()
+                    rows.extend(result)
+                    if (idx + 1) % progress_every == 0 or idx + 1 == len(tasks):
+                        elapsed = time.time() - t0
+                        rate = (idx + 1) / elapsed if elapsed > 0 else 0
+                        eta = (len(tasks) - idx - 1) / rate if rate > 0 else 0
+                        log(
+                            f"  centers {idx+1}/{len(tasks)}  rows={len(rows)}  "
+                            f"elapsed={elapsed:.1f}s  rate={rate:.2f}/s  eta={eta:.1f}s"
+                        )
+            else:
+                log(f"running in process pool with {workers} workers")
+                ctx = mp_proc.get_context("fork")
+                with ctx.Pool(processes=workers, initializer=_init_worker,
+                              initargs=(list(zeros),)) as pool:
+                    for idx, result in enumerate(
+                        pool.imap_unordered(_process_center, tasks, chunksize=4)
+                    ):
+                        for row in result:
+                            writer.writerow(row)
+                        fout.flush()
+                        rows.extend(result)
+                        if (idx + 1) % progress_every == 0 or idx + 1 == len(tasks):
+                            elapsed = time.time() - t0
+                            rate = (idx + 1) / elapsed if elapsed > 0 else 0
+                            eta = (len(tasks) - idx - 1) / rate if rate > 0 else 0
+                            log(
+                                f"  centers {idx+1}/{len(tasks)}  rows={len(rows)}  "
+                                f"elapsed={elapsed:.1f}s  rate={rate:.2f}/s  eta={eta:.1f}s"
+                            )
+        finally:
+            fout.close()
+
+    # Top diagnostics (over union of resumed + newly computed rows).
+    top_path = os.path.join(outdir, f"actual_zero_proxy_{suffix}_{grid_hash}_top_by_Beff.csv")
     write_csv(top_path, summarize_top(rows, "B_eff", n=50, reverse=True))
 
     return rows
@@ -511,6 +672,8 @@ def main() -> None:
     ap.add_argument("--start-index", type=int, default=50)
     ap.add_argument("--end-index", type=int, default=500)
     ap.add_argument("--smoke", action="store_true")
+    ap.add_argument("--workers", type=int, default=max(1, (os.cpu_count() or 2) - 2),
+                    help="number of worker processes for the actual-zero scan; 1 = serial")
     args = ap.parse_args()
 
     ensure_dir(args.outdir)
@@ -538,6 +701,7 @@ def main() -> None:
             start_index=args.start_index,
             end_index=args.end_index,
             smoke=args.smoke,
+            workers=args.workers,
         )
         log(f"wrote {len(rows)} rows to actual_zero_proxy CSV")
         top = summarize_top(rows, "B_eff", n=10, reverse=True)

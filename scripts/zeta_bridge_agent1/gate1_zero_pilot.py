@@ -29,11 +29,32 @@ import argparse
 import csv
 import math
 import os
+
+# Pin BLAS / OpenMP to 1 thread per process. We parallelize at the center
+# level via multiprocessing; with 30 workers each trying to spawn 32 OpenMP
+# threads, the first batch was thrashing for ~12 minutes before the OS
+# balanced affinity. Set these before numpy is imported.
+for _k in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS",
+           "VECLIB_MAXIMUM_THREADS", "NUMEXPR_NUM_THREADS"):
+    os.environ.setdefault(_k, "1")
+
+import hashlib
+import json
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from dataclasses import dataclass, asdict
 from typing import Iterable
 
 import numpy as np
 from numpy.polynomial.legendre import leggauss
+
+
+# Worker-side global, set by _worker_init.
+_WORKER_ZEROS: np.ndarray | None = None
+
+
+def _worker_init(zeros: np.ndarray) -> None:
+    global _WORKER_ZEROS
+    _WORKER_ZEROS = zeros
 
 
 # ----------------------------
@@ -358,6 +379,73 @@ def classify_row(row: ScanRow, tail_tol: float, quad_tol: float) -> str:
     return "healthy"
 
 
+def _scan_one(task: tuple) -> ScanRow:
+    """Compute one ScanRow. Reads zeros from the worker-global set by _worker_init."""
+    (center_type, m0, c_I, kappa, W_factor, Q_mode,
+     nquad, R_jet, nfit, tail_tol, quad_tol) = task
+    zeros = _WORKER_ZEROS
+    if zeros is None:
+        raise RuntimeError("Worker not initialized with zeros.")
+
+    E, S, Q, count = compute_interval_energy(
+        zeros, m0, c_I, kappa, W_factor, Q_mode, nquad
+    )
+    E_half, _, _, _ = compute_interval_energy(
+        zeros, m0, c_I, kappa, W_factor, Q_mode, max(32, nquad // 2)
+    )
+    quad_drift = rel_diff(E, E_half)
+    E_2W, _, _, _ = compute_interval_energy(
+        zeros, m0, c_I, kappa, 2.0 * W_factor, Q_mode, nquad
+    )
+    tail_drift = rel_diff(E, E_2W)
+
+    try:
+        J_max, J_rms = chebyshev_jet_proxy(
+            zeros, m0, c_I, kappa, W_factor, Q_mode, R_jet, nfit
+        )
+    except Exception:
+        J_max, J_rms = float("nan"), float("nan")
+
+    B_eff = safe_B_eff(E, Q)
+    row = ScanRow(
+        center_type=center_type,
+        m0=m0,
+        Q=Q,
+        c_I=c_I,
+        kappa=kappa,
+        W_factor=W_factor,
+        nquad=nquad,
+        R_jet=R_jet,
+        local_zero_count=count,
+        E_I=E,
+        S_I=S,
+        B_eff=B_eff,
+        J_max=J_max,
+        J_rms=J_rms,
+        tail_drift_rel=tail_drift,
+        quad_drift_rel=quad_drift,
+        status="",
+    )
+    row.status = classify_row(row, tail_tol, quad_tol)
+    return row
+
+
+_ROW_KEY_FIELDS = ("center_type", "m0", "c_I", "kappa", "W_factor", "nquad", "R_jet")
+
+
+def _row_key(center_type: str, m0: float, c_I: float, kappa: float,
+             W_factor: float, nquad: int, R_jet: int) -> tuple:
+    return (center_type, round(float(m0), 12), float(c_I), float(kappa),
+            float(W_factor), int(nquad), int(R_jet))
+
+
+def _row_key_from_dict(d: dict) -> tuple:
+    return _row_key(
+        d["center_type"], float(d["m0"]), float(d["c_I"]), float(d["kappa"]),
+        float(d["W_factor"]), int(d["nquad"]), int(d["R_jet"]),
+    )
+
+
 def run_scan(
     zeros: np.ndarray,
     centers: list[tuple[str, float]],
@@ -370,60 +458,192 @@ def run_scan(
     nfit: int,
     tail_tol: float,
     quad_tol: float,
+    workers: int = 1,
+    progress_every: int = 0,
+    out_path: str | None = None,
+    resume_keys: set[tuple] | None = None,
 ) -> list[ScanRow]:
-    rows: list[ScanRow] = []
+    """
+    Build the task list, optionally skipping any task whose row-key is already
+    in resume_keys, and execute. If out_path is given, each row is appended
+    to the CSV (with header on first write) and flushed as soon as it is
+    computed, so a kill leaves a valid partial CSV.
+    """
+    tasks: list[tuple] = []
+    skipped = 0
     for center_type, m0 in centers:
-        # Avoid centers too near boundary for large windows.
         for c_I in c_I_values:
             for kappa in kappa_values:
                 for W_factor in W_factor_values:
-                    # Main energy.
-                    E, S, Q, count = compute_interval_energy(
-                        zeros, m0, c_I, kappa, W_factor, Q_mode, nquad
-                    )
+                    if resume_keys is not None:
+                        key = _row_key(center_type, m0, c_I, kappa, W_factor, nquad, R_jet)
+                        if key in resume_keys:
+                            skipped += 1
+                            continue
+                    tasks.append((
+                        center_type, m0, c_I, kappa, W_factor, Q_mode,
+                        nquad, R_jet, nfit, tail_tol, quad_tol,
+                    ))
 
-                    # Quadrature drift: compare with half nquad.
-                    E_half, _, _, _ = compute_interval_energy(
-                        zeros, m0, c_I, kappa, W_factor, Q_mode, max(32, nquad // 2)
-                    )
-                    quad_drift = rel_diff(E, E_half)
+    if resume_keys is not None:
+        print(f"Resume: skipping {skipped} already-computed tasks; "
+              f"{len(tasks)} new tasks to run.")
 
-                    # Tail drift: compare current W to 2W if possible.
-                    E_2W, _, _, _ = compute_interval_energy(
-                        zeros, m0, c_I, kappa, 2.0 * W_factor, Q_mode, nquad
-                    )
-                    tail_drift = rel_diff(E, E_2W)
+    total = len(tasks)
+    rows: list[ScanRow] = []
 
-                    try:
-                        J_max, J_rms = chebyshev_jet_proxy(
-                            zeros, m0, c_I, kappa, W_factor, Q_mode, R_jet, nfit
-                        )
-                    except Exception:
-                        J_max, J_rms = float("nan"), float("nan")
+    csv_writer = None
+    csv_file = None
+    if out_path is not None:
+        file_exists = os.path.exists(out_path) and os.path.getsize(out_path) > 0
+        csv_file = open(out_path, "a", newline="")
+        fieldnames = list(asdict(ScanRow(
+            center_type="", m0=0.0, Q=0.0, c_I=0.0, kappa=0.0, W_factor=0.0,
+            nquad=0, R_jet=0, local_zero_count=0, E_I=0.0, S_I=0.0, B_eff=0.0,
+            J_max=0.0, J_rms=0.0, tail_drift_rel=0.0, quad_drift_rel=0.0,
+            status="",
+        )).keys())
+        csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+        if not file_exists:
+            csv_writer.writeheader()
+            csv_file.flush()
 
-                    B_eff = safe_B_eff(E, Q)
+    def _emit(row: ScanRow) -> None:
+        rows.append(row)
+        if csv_writer is not None:
+            csv_writer.writerow(asdict(row))
+            csv_file.flush()
 
-                    row = ScanRow(
-                        center_type=center_type,
-                        m0=m0,
-                        Q=Q,
-                        c_I=c_I,
-                        kappa=kappa,
-                        W_factor=W_factor,
-                        nquad=nquad,
-                        R_jet=R_jet,
-                        local_zero_count=count,
-                        E_I=E,
-                        S_I=S,
-                        B_eff=B_eff,
-                        J_max=J_max,
-                        J_rms=J_rms,
-                        tail_drift_rel=tail_drift,
-                        quad_drift_rel=quad_drift,
-                        status="",
-                    )
-                    row.status = classify_row(row, tail_tol, quad_tol)
-                    rows.append(row)
+    try:
+        if workers <= 1:
+            _worker_init(zeros)
+            for i, t in enumerate(tasks, 1):
+                _emit(_scan_one(t))
+                if progress_every and i % progress_every == 0:
+                    print(f"  scan: {i}/{total}", flush=True)
+        else:
+            with ProcessPoolExecutor(
+                max_workers=workers,
+                initializer=_worker_init,
+                initargs=(zeros,),
+            ) as pool:
+                futures = [pool.submit(_scan_one, t) for t in tasks]
+                done = 0
+                for fut in as_completed(futures):
+                    _emit(fut.result())
+                    done += 1
+                    if progress_every and done % progress_every == 0:
+                        print(f"  scan: {done}/{total}", flush=True)
+    finally:
+        if csv_file is not None:
+            csv_file.close()
+
+    return rows
+
+
+def _hash_file(path: str) -> str:
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def compute_params_hash(
+    zeros_path: str,
+    Q_mode: str,
+    c_I_values: list[float],
+    kappa_values: list[float],
+    W_factor_values: list[float],
+    nquad: int,
+    R_jet: int,
+    nfit: int,
+    tail_tol: float,
+    quad_tol: float,
+    max_per_family: int,
+    seed: int,
+    min_m0: float | None,
+    min_Q: float | None,
+) -> str:
+    """SHA-256 over every input that affects row math, including the zeros file content."""
+    record = {
+        "zeros_sha256": _hash_file(zeros_path),
+        "Q_mode": Q_mode,
+        "c_I_values": [float(x) for x in c_I_values],
+        "kappa_values": [float(x) for x in kappa_values],
+        "W_factor_values": [float(x) for x in W_factor_values],
+        "nquad": int(nquad),
+        "R_jet": int(R_jet),
+        "nfit": int(nfit),
+        "tail_tol": float(tail_tol),
+        "quad_tol": float(quad_tol),
+        "max_per_family": int(max_per_family),
+        "seed": int(seed),
+        "min_m0": None if min_m0 is None else float(min_m0),
+        "min_Q": None if min_Q is None else float(min_Q),
+        "schema_version": 1,
+    }
+    blob = json.dumps(record, sort_keys=True, separators=(",", ":")).encode()
+    return hashlib.sha256(blob).hexdigest()
+
+
+def derive_output_path(stem: str, params_hash: str, hash_len: int = 12) -> str:
+    """Insert a short params hash before the extension of `stem`.
+
+    foo.csv -> foo.<hash>.csv
+    foo     -> foo.<hash>
+    /a/b/foo.csv -> /a/b/foo.<hash>.csv
+    """
+    short = params_hash[:hash_len]
+    head, ext = os.path.splitext(stem)
+    return f"{head}.{short}{ext}" if ext else f"{head}.{short}"
+
+
+def load_existing_keys(csv_path: str) -> set[tuple]:
+    keys: set[tuple] = set()
+    if not os.path.exists(csv_path) or os.path.getsize(csv_path) == 0:
+        return keys
+    with open(csv_path, newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            try:
+                keys.add(_row_key_from_dict(row))
+            except (KeyError, ValueError):
+                continue
+    return keys
+
+
+def _load_rows_for_summary(csv_path: str) -> list[ScanRow]:
+    """Reload the full CSV (prior + freshly streamed rows) so the end-of-run
+    summary covers everything when --resume was used."""
+    rows: list[ScanRow] = []
+    if not os.path.exists(csv_path) or os.path.getsize(csv_path) == 0:
+        return rows
+    with open(csv_path, newline="") as f:
+        reader = csv.DictReader(f)
+        for d in reader:
+            try:
+                rows.append(ScanRow(
+                    center_type=d["center_type"],
+                    m0=float(d["m0"]),
+                    Q=float(d["Q"]),
+                    c_I=float(d["c_I"]),
+                    kappa=float(d["kappa"]),
+                    W_factor=float(d["W_factor"]),
+                    nquad=int(d["nquad"]),
+                    R_jet=int(d["R_jet"]),
+                    local_zero_count=int(d["local_zero_count"]),
+                    E_I=float(d["E_I"]),
+                    S_I=float(d["S_I"]),
+                    B_eff=float(d["B_eff"]),
+                    J_max=float(d["J_max"]),
+                    J_rms=float(d["J_rms"]),
+                    tail_drift_rel=float(d["tail_drift_rel"]),
+                    quad_drift_rel=float(d["quad_drift_rel"]),
+                    status=d.get("status", ""),
+                ))
+            except (KeyError, ValueError):
+                continue
     return rows
 
 
@@ -504,6 +724,17 @@ def main() -> None:
     parser.add_argument("--tail-tol", type=float, default=None)
     parser.add_argument("--quad-tol", type=float, default=None)
     parser.add_argument("--max-per-family", type=int, default=None)
+    parser.add_argument("--workers", type=int,
+                        default=max(1, (os.cpu_count() or 2) - 2),
+                        help="Process-pool workers (default: cpu_count - 2).")
+    parser.add_argument("--progress-every", type=int, default=0,
+                        help="Print progress every N completed tasks (0 = silent).")
+    parser.add_argument("--resume", action="store_true",
+                        help="If the params-hash-derived output file already exists, append to it "
+                             "and skip rows whose key is already present. Without --resume, an "
+                             "existing file aborts the run to avoid silent overwrite.")
+    parser.add_argument("--hash-len", type=int, default=12,
+                        help="Length of the params-hash slug embedded in the output filename.")
     args = parser.parse_args()
 
     zeros = load_zeros(args.zeros)
@@ -572,6 +803,47 @@ def main() -> None:
     if not centers:
         raise SystemExit("No centers remain after filters.")
 
+    workers = max(1, args.workers)
+    print(f"Workers: {workers}")
+
+    params_hash = compute_params_hash(
+        zeros_path=args.zeros,
+        Q_mode="log",
+        c_I_values=c_I_values,
+        kappa_values=kappa_values,
+        W_factor_values=W_factor_values,
+        nquad=nquad,
+        R_jet=R_jet,
+        nfit=nfit,
+        tail_tol=tail_tol,
+        quad_tol=quad_tol,
+        max_per_family=max_per_family,
+        seed=args.seed,
+        min_m0=args.min_m0,
+        min_Q=args.min_Q,
+    )
+    out_path = derive_output_path(args.out, params_hash, hash_len=args.hash_len)
+    print(f"Params hash: {params_hash[:args.hash_len]}  (full sha256: {params_hash})")
+    print(f"Output CSV : {out_path}")
+
+    resume_keys: set[tuple] | None = None
+    file_exists = os.path.exists(out_path) and os.path.getsize(out_path) > 0
+    if args.resume:
+        if file_exists:
+            resume_keys = load_existing_keys(out_path)
+            print(f"Resume: loaded {len(resume_keys)} existing keys from {out_path}.")
+        else:
+            print("Resume: no prior file at this hash; starting fresh.")
+    else:
+        if file_exists:
+            raise SystemExit(
+                f"Output file already exists: {out_path}\n"
+                "Pass --resume to append to it (params match by construction), "
+                "or delete it / change --out to start over."
+            )
+        if os.path.exists(out_path):
+            os.remove(out_path)
+
     rows = run_scan(
         zeros=zeros,
         centers=centers,
@@ -584,11 +856,18 @@ def main() -> None:
         nfit=nfit,
         tail_tol=tail_tol,
         quad_tol=quad_tol,
+        workers=workers,
+        progress_every=args.progress_every,
+        out_path=out_path,
+        resume_keys=resume_keys,
     )
 
-    write_rows(args.out, rows)
-    print_summary(rows, top_n=args.top)
-    print(f"\nWrote CSV: {args.out}")
+    if args.resume and resume_keys:
+        all_rows = _load_rows_for_summary(out_path)
+        print_summary(all_rows, top_n=args.top)
+    else:
+        print_summary(rows, top_n=args.top)
+    print(f"\nWrote CSV: {out_path}")
     print("\nNOTE: This is a zero-kernel-only proxy. It omits B2 and final canonical regularization.")
 
 

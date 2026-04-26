@@ -21,6 +21,14 @@ Outputs:
   - gate1_actual_zero_proxy_zone_summary.csv
   - cached zero proxy files under ./zero_proxy_cache/
 
+Parallelism:
+  --workers controls process-pool size for mpmath-heavy work
+  (Hardy-Z grid eval, sign-change bisection, Gram-point bisection).
+  When len(zones) >= 2, zones are dispatched in parallel and each
+  zone runs its mpmath work serially. When len(zones) == 1, the
+  single zone uses within-zone parallelism for its Hardy-Z scan,
+  bisection brackets, and Gram-point search.
+
 Dependencies:
   pip install numpy pandas mpmath
 """
@@ -30,12 +38,92 @@ import hashlib
 import json
 import math
 import os
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from dataclasses import dataclass
 from typing import Dict, List, Tuple
+
+# Pin BLAS / OpenMP to 1 thread per process. We parallelize at the center
+# level via multiprocessing; with 30 workers each trying to spawn 32 OpenMP
+# threads, the first batch was thrashing for ~12 minutes before the OS
+# balanced affinity. Set these before numpy is imported.
+for _k in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS",
+          "VECLIB_MAXIMUM_THREADS", "NUMEXPR_NUM_THREADS"):
+    os.environ.setdefault(_k, "1")
 
 import numpy as np
 import pandas as pd
 import mpmath as mp
+
+
+try:
+    from numpy import trapezoid as _trapz
+except ImportError:
+    from numpy import trapz as _trapz
+
+
+# -----------------------------
+# Top-level workers (must be picklable for ProcessPoolExecutor)
+# -----------------------------
+
+def _siegelz_chunk_eval(args):
+    xs, dps = args
+    mp.mp.dps = dps
+    return np.array([float(mp.siegelz(float(x))) for x in xs], dtype=float)
+
+
+def _siegelz_bisect(args):
+    a, b, fa, fb, dps, n_iter = args
+    mp.mp.dps = dps
+    for _ in range(n_iter):
+        mid = 0.5 * (a + b)
+        fm = float(mp.siegelz(mid))
+        if fa == 0:
+            return a
+        if fm == 0:
+            return mid
+        if fa * fm <= 0:
+            b, fb = mid, fm
+        else:
+            a, fa = mid, fm
+    return 0.5 * (a + b)
+
+
+def _gram_single_n(args):
+    n, lo, hi, dps, scan_pts, n_bisect = args
+    mp.mp.dps = dps
+    target = n * math.pi
+    xs = np.linspace(lo, hi, scan_pts)
+    vals = np.array([float(mp.siegeltheta(float(x))) - target for x in xs], dtype=float)
+    idxs = np.where(vals[:-1] * vals[1:] <= 0)[0]
+    if len(idxs) == 0:
+        return None
+
+    i = int(idxs[0])
+    a, b = float(xs[i]), float(xs[i + 1])
+    fa = float(mp.siegeltheta(a)) - target
+
+    for _ in range(n_bisect):
+        mid = 0.5 * (a + b)
+        fm = float(mp.siegeltheta(mid)) - target
+        if fa * fm <= 0:
+            b = mid
+        else:
+            a, fa = mid, fm
+
+    g = 0.5 * (a + b)
+    if lo <= g <= hi:
+        return g
+    return None
+
+
+def _scan_zone_worker(args):
+    """Run a single zone scan serially inside one worker process."""
+    zone, args_dict = args
+    ns = argparse.Namespace(**args_dict)
+    # Children must run serially -- nested ProcessPoolExecutors are not allowed
+    # (or at least asking for trouble across platforms).
+    ns.workers = 1
+    return scan_zone(zone, ns)
 
 
 # -----------------------------
@@ -54,6 +142,7 @@ def hardy_z_zeros_near(
     dps: int = 30,
     cache_dir: str = "zero_proxy_cache",
     force: bool = False,
+    workers: int = 1,
 ) -> np.ndarray:
     """
     Find approximate critical-line zeros by sign changes of Hardy Z(t).
@@ -70,48 +159,48 @@ def hardy_z_zeros_near(
         return np.array(data["zeros"], dtype=float)
 
     mp.mp.dps = dps
-
-    def zval(x: float) -> float:
-        return float(mp.siegelz(x))
-
     lo = t_center - radius
     hi = t_center + radius
     xs = np.arange(lo, hi + step, step)
 
-    zeros = []
-    prev_x = float(xs[0])
-    prev_v = zval(prev_x)
+    # Evaluate siegelz on the full grid (parallel chunks if requested).
+    if workers > 1 and len(xs) >= 2 * workers:
+        chunks = np.array_split(xs, workers)
+        chunk_args = [(np.asarray(c, dtype=float), dps) for c in chunks]
+        with ProcessPoolExecutor(max_workers=workers) as ex:
+            chunk_vals = list(ex.map(_siegelz_chunk_eval, chunk_args))
+        vals = np.concatenate(chunk_vals)
+    else:
+        vals = _siegelz_chunk_eval((xs, dps))
 
-    for x in xs[1:]:
-        x = float(x)
-        v = zval(x)
+    # Identify sign-change brackets.
+    bracket_args = []
+    exact_zeros: List[float] = []
+
+    for i in range(len(xs) - 1):
+        prev_x, prev_v = float(xs[i]), float(vals[i])
+        x, v = float(xs[i + 1]), float(vals[i + 1])
 
         if prev_v == 0.0:
-            zeros.append(prev_x)
-        elif v == 0.0:
-            zeros.append(x)
+            exact_zeros.append(prev_x)
+        elif v == 0.0 and i == len(xs) - 2:
+            exact_zeros.append(x)
         elif prev_v * v < 0:
-            # Bisection refinement inside the sign-change bracket.
-            a, b = prev_x, x
-            fa, fb = prev_v, v
-            for _ in range(40):
-                mid = 0.5 * (a + b)
-                fm = zval(mid)
-                if fa == 0:
-                    b = a
-                    break
-                if fm == 0:
-                    a = b = mid
-                    break
-                if fa * fm <= 0:
-                    b, fb = mid, fm
-                else:
-                    a, fa = mid, fm
-            zeros.append(0.5 * (a + b))
+            bracket_args.append((prev_x, x, prev_v, v, dps, 40))
 
-        prev_x, prev_v = x, v
+    # Bisect brackets in parallel.
+    bisect_zeros: List[float] = []
+    if bracket_args:
+        if workers > 1 and len(bracket_args) >= 2:
+            with ProcessPoolExecutor(max_workers=workers) as ex:
+                bisect_zeros = list(ex.map(_siegelz_bisect, bracket_args))
+        else:
+            bisect_zeros = [_siegelz_bisect(a) for a in bracket_args]
 
-    zeros = np.array(sorted(set(round(z, 12) for z in zeros)), dtype=float)
+    zeros = np.array(
+        sorted(set(round(z, 12) for z in (exact_zeros + bisect_zeros))),
+        dtype=float,
+    )
 
     with open(path, "w", encoding="utf-8") as f:
         json.dump(
@@ -170,7 +259,7 @@ def interval_metrics(
     xs = np.linspace(center - half, center + half, grid)
 
     vals, n_used = q2_zero_proxy(xs, zeros, center, W=W, kappa=kappa)
-    E = float(np.trapz(vals ** 2, xs) / (2.0 * half))
+    E = float(_trapz(vals ** 2, xs) / (2.0 * half))
     S = float(np.max(np.abs(vals)))
     Beff = -math.log(max(E, 1e-300)) / math.log(Q)
 
@@ -231,50 +320,31 @@ def finite_jet_proxy(
 # Center generation
 # -----------------------------
 
-def gram_theta(t: float) -> float:
-    """
-    Riemann-Siegel theta approximation via mpmath.
-    """
-    return float(mp.siegeltheta(t))
-
-
-def gram_points_near(lo: float, hi: float, dps: int = 30) -> np.ndarray:
+def gram_points_near(lo: float, hi: float, dps: int = 30, workers: int = 1) -> np.ndarray:
     """
     Approximate Gram points by solving theta(t) = n*pi.
     Uses coarse bracketing based on sampled theta.
     """
     mp.mp.dps = dps
 
-    # Determine n range.
-    n_lo = math.floor(gram_theta(lo) / math.pi) - 2
-    n_hi = math.ceil(gram_theta(hi) / math.pi) + 2
+    # Determine n range from theta endpoints.
+    th_lo = float(mp.siegeltheta(lo))
+    th_hi = float(mp.siegeltheta(hi))
+    n_lo = math.floor(min(th_lo, th_hi) / math.pi) - 2
+    n_hi = math.ceil(max(th_lo, th_hi) / math.pi) + 2
 
-    gps = []
-    for n in range(n_lo, n_hi + 1):
-        target = n * math.pi
+    args_list = [
+        (n, lo, hi, dps, 300, 40)
+        for n in range(n_lo, n_hi + 1)
+    ]
 
-        # Find rough bracket by local scan.
-        xs = np.linspace(lo, hi, 300)
-        vals = np.array([gram_theta(float(x)) - target for x in xs])
-        idxs = np.where(vals[:-1] * vals[1:] <= 0)[0]
-        if len(idxs) == 0:
-            continue
+    if workers > 1 and len(args_list) >= 2:
+        with ProcessPoolExecutor(max_workers=workers) as ex:
+            results = list(ex.map(_gram_single_n, args_list))
+    else:
+        results = [_gram_single_n(a) for a in args_list]
 
-        i = idxs[0]
-        a, b = float(xs[i]), float(xs[i + 1])
-        fa = gram_theta(a) - target
-
-        for _ in range(40):
-            mid = 0.5 * (a + b)
-            fm = gram_theta(mid) - target
-            if fa * fm <= 0:
-                b = mid
-            else:
-                a, fa = mid, fm
-        g = 0.5 * (a + b)
-        if lo <= g <= hi:
-            gps.append(g)
-
+    gps = [r for r in results if r is not None]
     return np.array(sorted(set(round(g, 12) for g in gps)), dtype=float)
 
 
@@ -286,6 +356,7 @@ def build_centers_for_zone(
     uniform_count: int = 120,
     seed: int = 0,
     include_gram: bool = True,
+    workers: int = 1,
 ) -> List[Tuple[str, float]]:
     lo, hi = zone_center - radius, zone_center + radius
     centers = []
@@ -322,7 +393,7 @@ def build_centers_for_zone(
 
     if include_gram:
         try:
-            gps = gram_points_near(lo, hi)
+            gps = gram_points_near(lo, hi, workers=workers)
             for g in gps:
                 centers.append(("gram_point", float(g)))
         except Exception as e:
@@ -394,6 +465,7 @@ def scan_zone(zone: float, args) -> Tuple[pd.DataFrame, Dict]:
         dps=args.mp_dps,
         cache_dir=args.cache_dir,
         force=args.force_zero_rescan,
+        workers=args.workers,
     )
 
     centers = build_centers_for_zone(
@@ -404,6 +476,7 @@ def scan_zone(zone: float, args) -> Tuple[pd.DataFrame, Dict]:
         uniform_count=args.uniform_count,
         seed=args.seed,
         include_gram=not args.no_gram,
+        workers=args.workers,
     )
 
     rows = []
@@ -488,6 +561,108 @@ def classify_row(row, warn_Beff=3.0, serious_Beff=6.0, max_tail_drift=0.1):
     return "healthy_proxy"
 
 
+# -----------------------------
+# Param hashing + resume
+# -----------------------------
+
+# Args that affect the per-row contents. Orchestration knobs (workers, top,
+# zones list, output paths, force-zero-rescan, resume) are deliberately
+# excluded so they don't invalidate cached rows.
+_PARAM_HASH_KEYS = (
+    "scan_radius",
+    "kappa",
+    "W",
+    "grid",
+    "R",
+    "jet_h_factor",
+    "jet_fit_points",
+    "random_count",
+    "uniform_count",
+    "seed",
+    "no_gram",
+    "stability_W",
+    "stability_kappa",
+    "cI",
+    "mp_dps",
+    "zero_radius",
+    "zero_step",
+)
+
+
+def compute_param_hash(args) -> str:
+    payload = {}
+    for k in _PARAM_HASH_KEYS:
+        v = getattr(args, k)
+        if isinstance(v, (list, tuple)):
+            v = sorted(float(x) for x in v)
+        elif isinstance(v, bool):
+            v = bool(v)
+        payload[k] = v
+    s = json.dumps(payload, sort_keys=True)
+    return hashlib.sha1(s.encode()).hexdigest()[:12]
+
+
+def _backup(path: str) -> str:
+    bak = path + ".bak"
+    if os.path.exists(bak):
+        os.remove(bak)
+    os.rename(path, bak)
+    return bak
+
+
+def with_hash_suffix(path: str, h: str) -> str:
+    """Insert _<hash> before the file extension. 'a/b.csv' -> 'a/b_<h>.csv'."""
+    root, ext = os.path.splitext(path)
+    return f"{root}_{h}{ext}"
+
+
+def open_resume_state(csv_path: str, param_hash: str, resume_flag: bool):
+    """
+    Decide whether the existing per-hash output CSV should be resumed from.
+
+    Returns (done_zones_set, header_needed_bool). On --no-resume or an
+    unreadable/malformed file, the existing file is moved to <csv_path>.bak
+    and a fresh write begins.
+    """
+    if not resume_flag and os.path.exists(csv_path):
+        bak = _backup(csv_path)
+        print(f"--no-resume: moved existing {csv_path} -> {bak}")
+        return set(), True
+
+    if not os.path.exists(csv_path):
+        return set(), True
+
+    try:
+        existing = pd.read_csv(csv_path)
+    except Exception as e:
+        bak = _backup(csv_path)
+        print(f"WARN: could not read {csv_path} ({e}); moved to {bak}")
+        return set(), True
+
+    if "zone" not in existing.columns:
+        bak = _backup(csv_path)
+        print(f"WARN: {csv_path} lacks 'zone' column; moved to {bak}")
+        return set(), True
+
+    # Defensive: filter out any rows whose stamped param_hash disagrees with
+    # the filename (should not happen unless a previous run was interrupted
+    # mid-write). Keep the file but ignore the bad rows for resume purposes.
+    if "param_hash" in existing.columns:
+        bad = existing[existing["param_hash"].astype(str) != param_hash]
+        if len(bad):
+            print(
+                f"WARN: {csv_path} contains {len(bad)} row(s) with non-matching "
+                f"param_hash; expected {param_hash}. Ignoring those for resume."
+            )
+            existing = existing[existing["param_hash"].astype(str) == param_hash]
+
+    done_zones = set(round(float(z), 6) for z in existing["zone"].unique())
+    print(
+        f"Resume: {csv_path} has {len(existing)} row(s) covering {len(done_zones)} zone(s)."
+    )
+    return done_zones, False
+
+
 def parse_args():
     p = argparse.ArgumentParser()
 
@@ -520,10 +695,58 @@ def parse_args():
     p.add_argument("--stability-W", type=float, nargs="+", default=[10.0, 20.0, 40.0])
     p.add_argument("--stability-kappa", type=float, nargs="+", default=[0.25, 0.5, 1.0])
 
-    p.add_argument("--out", default="gate1_actual_zero_proxy_zone_scan.csv")
-    p.add_argument("--summary-out", default="gate1_actual_zero_proxy_zone_summary.csv")
+    p.add_argument(
+        "--workers",
+        type=int,
+        default=max(1, (os.cpu_count() or 2) - 2),
+        help="Process-pool size for mpmath-heavy work.",
+    )
+
+    p.add_argument(
+        "--out",
+        default="gate1_actual_zero_proxy_zone_scan.csv",
+        help=(
+            "Output CSV stem. The current param_hash is inserted before the "
+            "extension, e.g. <stem>_<hash>.csv, so each param set has its own file."
+        ),
+    )
+    p.add_argument(
+        "--summary-out",
+        default="gate1_actual_zero_proxy_zone_summary.csv",
+        help="Summary CSV stem. Hash-suffixed the same way as --out.",
+    )
+
+    p.add_argument(
+        "--resume",
+        dest="resume",
+        action="store_true",
+        default=True,
+        help="Resume from the per-hash output CSV if it exists (default).",
+    )
+    p.add_argument(
+        "--no-resume",
+        dest="resume",
+        action="store_false",
+        help="Ignore existing per-hash --out file; back it up to .bak and start fresh.",
+    )
 
     return p.parse_args()
+
+
+def _print_zone_best(zone: float, df_zone: pd.DataFrame, idx: int, total: int):
+    print(f"\n[{idx}/{total}] Zone {zone:.6f}")
+    if not df_zone.empty:
+        best = df_zone.sort_values("E").head(5)
+        print(best[["family", "center", "cI", "E", "S", "Beff", "J_max", "tail_drift", "reg_drift"]].to_string(index=False))
+
+
+def _finalize_zone_df(df_zone: pd.DataFrame, param_hash: str) -> pd.DataFrame:
+    if df_zone.empty:
+        return df_zone
+    df_z = df_zone.copy()
+    df_z["classification"] = df_z.apply(classify_row, axis=1)
+    df_z["param_hash"] = param_hash
+    return df_z
 
 
 def main():
@@ -533,46 +756,104 @@ def main():
     if not zones:
         raise RuntimeError("No zones supplied. Use --candidate-csv or --zones.")
 
-    print(f"Scanning {len(zones)} zones:")
+    n_zones = len(zones)
+    workers = max(1, int(args.workers))
+    param_hash = compute_param_hash(args)
+    out_path = with_hash_suffix(args.out, param_hash)
+    summary_path = with_hash_suffix(args.summary_out, param_hash)
+
+    print(f"Scanning {n_zones} zones with --workers {workers}, param_hash={param_hash}:")
     for z in zones:
         print(f"  {z:.6f}")
+    print(f"Output:  {out_path}")
+    print(f"Summary: {summary_path}")
 
-    all_rows = []
-    metas = []
+    done_zones, header_needed = open_resume_state(out_path, param_hash, args.resume)
 
-    for i, zone in enumerate(zones, start=1):
-        print(f"\n[{i}/{len(zones)}] Zone {zone:.6f}")
-        df_zone, meta = scan_zone(zone, args)
-        metas.append(meta)
-        all_rows.append(df_zone)
+    pending_zones = [z for z in zones if round(z, 6) not in done_zones]
+    skipped = n_zones - len(pending_zones)
+    if skipped:
+        print(f"Skipping {skipped} zone(s) already complete in {out_path}.")
 
-        if not df_zone.empty:
-            best = df_zone.sort_values("E").head(5)
-            print(best[["family", "center", "cI", "E", "S", "Beff", "J_max", "tail_drift", "reg_drift"]].to_string(index=False))
+    metas: List[Dict] = []
 
-    df = pd.concat(all_rows, ignore_index=True) if all_rows else pd.DataFrame()
-    if not df.empty:
-        df["classification"] = df.apply(classify_row, axis=1)
+    def write_zone(df_zone: pd.DataFrame):
+        nonlocal header_needed
+        df_z = _finalize_zone_df(df_zone, param_hash)
+        if df_z.empty:
+            return
+        df_z.to_csv(out_path, mode="a", header=header_needed, index=False)
+        header_needed = False
 
-    summary = summarize_results(df)
+    if pending_zones:
+        n_pending = len(pending_zones)
+        use_zone_pool = n_pending >= 2 and workers >= 2
+
+        if use_zone_pool:
+            zone_workers = min(workers, n_pending)
+            print(
+                f"\nDispatching {n_pending} pending zone(s) in parallel "
+                f"(pool={zone_workers}); each zone runs serially."
+            )
+
+            args_dict = vars(args)
+            completed = 0
+            with ProcessPoolExecutor(max_workers=zone_workers) as ex:
+                futures = {
+                    ex.submit(_scan_zone_worker, (zone, args_dict)): zone
+                    for zone in pending_zones
+                }
+                for fut in as_completed(futures):
+                    zone = futures[fut]
+                    completed += 1
+                    df_zone, meta = fut.result()
+                    metas.append(meta)
+                    write_zone(df_zone)
+                    _print_zone_best(zone, df_zone, completed, n_pending)
+        else:
+            if n_pending == 1 and workers >= 2:
+                print(f"\nSingle pending zone: using within-zone parallelism (pool={workers}).")
+            else:
+                print("\nRunning pending zones serially.")
+
+            for i, zone in enumerate(pending_zones, start=1):
+                df_zone, meta = scan_zone(zone, args)
+                metas.append(meta)
+                write_zone(df_zone)
+                _print_zone_best(zone, df_zone, i, n_pending)
+    else:
+        print("\nAll requested zones already complete; rebuilding summary only.")
+
+    # Read back the per-hash CSV for summary + final report.
+    if not os.path.exists(out_path):
+        print(f"\nNo data written to {out_path}; nothing to summarize.")
+        return
+
+    full_df = pd.read_csv(out_path)
+    if "param_hash" in full_df.columns:
+        full_df = full_df[full_df["param_hash"].astype(str) == param_hash].copy()
+    if not full_df.empty:
+        full_df = full_df.sort_values(["zone", "E"]).reset_index(drop=True)
+
+    summary = summarize_results(full_df)
     if not summary.empty:
         summary["classification"] = summary.apply(classify_row, axis=1)
-
-    df.to_csv(args.out, index=False)
-    summary.to_csv(args.summary_out, index=False)
+    summary.to_csv(summary_path, index=False)
 
     print("\nWrote:")
-    print(f"  {args.out}")
-    print(f"  {args.summary_out}")
+    print(f"  {out_path}")
+    print(f"  {summary_path}")
 
     print("\nBest overall rows:")
-    if not df.empty:
-        print(df.sort_values("E").head(20)[
+    if not full_df.empty:
+        print(full_df.sort_values("E").head(20)[
             ["zone", "family", "center", "cI", "E", "S", "Beff", "J_max", "tail_drift", "reg_drift", "classification"]
         ].to_string(index=False))
 
-    print("\nZone metadata:")
-    print(pd.DataFrame(metas).to_string(index=False))
+    if metas:
+        print("\nZone metadata (this run):")
+        metas_df = pd.DataFrame(metas).sort_values("zone").reset_index(drop=True)
+        print(metas_df.to_string(index=False))
 
 
 if __name__ == "__main__":
