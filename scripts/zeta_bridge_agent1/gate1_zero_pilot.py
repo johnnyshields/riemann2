@@ -673,25 +673,68 @@ def write_rows(path: str, rows: list[ScanRow]) -> None:
             writer.writerow(asdict(row))
 
 
+_NUMERIC_SUMMARY_FIELDS = (
+    "E_I", "S_I", "B_eff", "J_max", "J_rms",
+    "tail_drift_rel", "quad_drift_rel", "local_zero_count",
+)
+
+_THRESHOLD_CHECKS = (
+    ("B_eff > 5",            lambda r: math.isfinite(r.B_eff) and r.B_eff > 5),
+    ("B_eff > 10",           lambda r: math.isfinite(r.B_eff) and r.B_eff > 10),
+    ("B_eff > 20",           lambda r: math.isfinite(r.B_eff) and r.B_eff > 20),
+    ("tail_drift_rel > 0.02", lambda r: math.isfinite(r.tail_drift_rel) and r.tail_drift_rel > 0.02),
+    ("quad_drift_rel > 1e-5", lambda r: math.isfinite(r.quad_drift_rel) and r.quad_drift_rel > 1e-5),
+)
+
+
 def print_summary(rows: list[ScanRow], top_n: int) -> None:
     print("\n=== Gate 1 actual-zero pilot summary: zero-kernel-only proxy ===")
     print(f"rows: {len(rows)}")
 
-    by_status = {}
+    by_status: dict[str, int] = {}
     for r in rows:
         by_status[r.status] = by_status.get(r.status, 0) + 1
     print("status counts:")
     for k, v in sorted(by_status.items()):
         print(f"  {k}: {v}")
 
-    rows_sorted = sorted(rows, key=lambda r: (float(np.nan_to_num(-r.B_eff, nan=1e999))))
-    # Actually want largest B_eff.
-    rows_sorted = sorted(rows, key=lambda r: (-float(np.nan_to_num(r.B_eff, nan=-1e999)), r.tail_drift_rel, r.quad_drift_rel))
+    print("\npercentiles:")
+    for col in _NUMERIC_SUMMARY_FIELDS:
+        xs = [getattr(r, col) for r in rows]
+        xs = [float(x) for x in xs if x is not None and math.isfinite(float(x))]
+        if not xs:
+            continue
+        xs.sort()
+        def _pct(p: float) -> float:
+            return xs[int(p * (len(xs) - 1))]
+        print(
+            f"  {col}: "
+            f"min={xs[0]:.6e}, "
+            f"p25={_pct(0.25):.6e}, "
+            f"median={_pct(0.50):.6e}, "
+            f"p75={_pct(0.75):.6e}, "
+            f"max={xs[-1]:.6e}"
+        )
+
+    print("\nthreshold counts:")
+    for label, predicate in _THRESHOLD_CHECKS:
+        n_match = sum(1 for r in rows if predicate(r))
+        print(f"  {label}: {n_match}")
+
+    # Top-N by B_eff (desc), tie-broken by ascending tail/quad drift.
+    rows_sorted = sorted(
+        rows,
+        key=lambda r: (
+            -float(np.nan_to_num(r.B_eff, nan=-1e999)),
+            r.tail_drift_rel,
+            r.quad_drift_rel,
+        ),
+    )
 
     print(f"\nTop {top_n} by B_eff:")
     header = [
         "rank", "status", "center_type", "m0", "Q", "c_I", "kappa", "W_factor",
-        "count", "E_I", "S_I", "B_eff", "J_max", "tail_drift", "quad_drift"
+        "count", "E_I", "S_I", "B_eff", "J_max", "tail_drift", "quad_drift",
     ]
     print(",".join(header))
     for i, r in enumerate(rows_sorted[:top_n], start=1):
