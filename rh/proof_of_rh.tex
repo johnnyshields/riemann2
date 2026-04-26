@@ -107,7 +107,20 @@ The Riemann Hypothesis, originating in Riemann's 1859 memoir \cite{Riemann1859},
     \item a local jet-whitened block extracted from the zeta/scattering phase on short symmetric windows, and
     \item a local off-line toy model corresponding to a split pair away from the critical line.
 \end{enumerate}
-The goal is to show that the toy anomaly has a transverse component that survives every local normalization, while the zeta-side transverse channel is annihilated at leading value order and becomes exponentially small after odd-moment cancellation. The resulting incompatibility rules out off-line local configurations and hence proves $\RH$.
+The original goal was to show that the toy anomaly has a transverse component
+that survives every local normalization, while the zeta-side transverse channel
+is annihilated at leading value order and becomes exponentially small after
+odd-moment cancellation.  The present draft should now be read more cautiously:
+the local analysis has produced a detailed obstruction framework and several
+conditional rank-two visibility theorems, but the global proof of \(\RH\) is
+not closed.  The current remaining gap is a quantitative, source-level
+non-concentration statement for actual zeta data.  In particular, the latest
+rank-two route requires an additional theorem preventing source-collapse on
+admissible reduced packet intervals; absent such an arithmetic input, the
+framework remains a strong local obstruction analysis rather than a completed
+proof of \(\RH\).
+For the final ledger of what is established locally and what remains open, see
+Remark~\ref{rem:terminal-status-current-architecture}.
 
 Classically, $\RH$ sits at the intersection of the zero distribution of $\zeta(s)$, the explicit formula relating zeros and primes, and a number of equivalent or partially equivalent positivity, spectral, and functional-analytic reformulations \cite{Bombieri2000,Conrey2003}.
 
@@ -35043,6 +35056,64 @@ T_{\rm hit}
 Thus scale considerations do not presently block the fixed-prime
 source-collapse surrogate.
 
+The phase-relaxed derivative-flat target can be sharpened further.  In the
+fixed-amplitude prime model
+\[
+L_P(m)=\sum_{p\le P}a_p e^{-im\log p},
+\qquad
+a_p=\frac{\log p}{\sqrt p},
+\]
+one obtains
+\[
+(J_0,J_2,J_4)
+=
+\sum_{p\le P}
+x_p a_p
+\left(
+1,\,-(\log p)^2,\,(\log p)^4
+\right),
+\qquad
+x_p=\cos(m\log p).
+\]
+Thus the phase-relaxed attainable jet values form a fixed-amplitude prime
+zonotope.  The source-collapse target
+\[
+(J_0,J_2,J_4)=(2,0,0)
+\]
+is compatible with good-patch positivity:
+\[
+g=\frac2\pi>0,\qquad h=\frac{8}{3\pi}>0,
+\]
+and has live anisotropy
+\[
+R_1=4,\qquad R_2=0.
+\]
+Finite-dimensional feasibility tests for the moment system
+\[
+\sum_{p\le P}a_px_p=2,
+\qquad
+\sum_{p\le P}a_p(\log p)^{2k}x_p=0
+\]
+show interior solutions for low and moderate finite orders.  For example:
+\[
+\begin{array}{c|c|c|c}
+\text{moments imposed} & P & \#\{p\le P\} & \min \max_{p\le P}|x_p|\\
+\hline
+0,2,4 & 100 & 25 & 0.699\\
+0,2,4,6 & 300 & 62 & 0.679\\
+0,2,4,6,8 & 1000 & 168 & 0.637\\
+0,2,4,6,8,10 & 1000 & 168 & 0.888\\
+0,2,4,6,8,10,12 & 5000 & 669 & 0.718.
+\end{array}
+\]
+So the target lies in the interior of the fixed-prime phase-relaxed cosine
+zonotope, not on a boundary.  The remaining issue is therefore not amplitude
+feasibility.  It is the one-parameter recurrence problem
+\[
+m_0\log p\equiv \theta_p\pmod{2\pi}
+\]
+for selected phases \(\theta_p\).
+
 AFE-compatible models add prime powers, smoothing, a dual sum, and gamma
 background terms.  These shift or couple the target, but no algebraic
 obstruction is presently known that forces
@@ -35051,6 +35122,63 @@ obstruction is presently known that forces
 \]
 Therefore the exact missing theorem is a source-jet nonflatness statement for
 actual zeta, not another local row identity.
+\end{remark}
+
+\begin{remark}[Prime-log recurrence to derivative-flat tubes]
+\label{rem:prime-log-recurrence-derivative-flat-tubes}
+Let
+\[
+\lambda=(\log p_1,\ldots,\log p_N),
+\qquad
+\Theta(m)=m\lambda\pmod{2\pi}.
+\]
+Let \(\mathcal T_{\flat}(\varepsilon)\subset\mathbb T^N\) denote the
+\(\varepsilon\)-tube around the derivative-flat target
+\[
+|J_2^{(r)}|\le\varepsilon,\qquad 0\le r\le R,
+\]
+with side constraints
+\[
+|J_0-2|\le\varepsilon,
+\qquad
+|J_4|\le\varepsilon.
+\]
+If this target is regular, then
+\[
+\mu(\mathcal T_{\flat}(\varepsilon))\asymp \varepsilon^K,
+\qquad
+K\sim R+3.
+\]
+This is a positive-measure analytic tube, not a prescribed point in
+\(\mathbb T^N\).
+
+For polynomial tolerance
+\[
+\varepsilon=Q^{-C},
+\]
+the random/equidistribution hitting scale is
+\[
+T_{\rm hit}\sim \varepsilon^{-K}=Q^{CK}.
+\]
+For the derivative orders relevant to Taylor--Bernstein source flattening,
+\[
+R\asymp (C+M_0)\frac{\log Q}{\log\log Q}
+\]
+or even \(R=O(\log Q)\), this gives
+\[
+T_{\rm hit}
+=
+\exp\!\left(O\!\left(\frac{(\log Q)^2}{\log\log Q}\right)\right)
+\quad\text{or}\quad
+T_{\rm hit}=\exp(O((\log Q)^2)).
+\]
+Both are far below the available height scale \(e^Q\).
+
+Thus recurrence cost does not presently block the interval-local source-collapse
+surrogate.  A proof of the desired source-weighted lower bound would need a
+nonstandard quantitative nonrecurrence theorem for the prime-log flow against
+these derivative-flat tubes, or an actual-zeta source-jet nonflatness theorem
+that bypasses the recurrence model entirely.
 \end{remark}
 
 \begin{remark}[Zero-side same-scale source flattening]
@@ -35108,41 +35236,218 @@ nonflatness theorem.  A proof must use information not already contained in
 finite same-scale positive packet geometry.
 \end{remark}
 
-\begin{remark}[Continuous same-scale flattening model]
-\label{rem:continuous-same-scale-flattening-model}
-A useful idealized model is to place same-scale packets on a fixed semicircle
+\begin{theorem}[Continuous same-scale source-flattening model]
+\label{thm:continuous-same-scale-source-flattening-model}
+Fix \(d>0\).  For
 \[
-x^2+c^2=d^2
+c=d\sin\theta,\qquad x=d\cos\theta,\qquad 0<\theta<\pi,
 \]
-and average their kernels against a positive density \(d\mu(\theta)\).  In the
-continuous model, one can arrange that the averaged source kernel is constant
-near the midpoint:
+consider the same-distance packet kernel
 \[
-\int K_{\theta,d}(u)\,d\mu(\theta)=\frac1d.
+K_{\theta,d}(u)
+=
+\frac{c}{c^2+(x+2u)^2}.
 \]
-Consequently
+Let
 \[
-q_\mu^{(r)}(0)=0,\qquad r\ge1,
+d\mu(\theta)=\frac{2}{\pi}\sin\theta\,d\theta.
+\]
+Then, for \(|2u/d|<1\),
+\[
+\boxed{
+\int_0^\pi K_{\theta,d}(u)\,d\mu(\theta)=\frac1d.
+}
+\]
+Consequently,
+\[
+q_\mu(u):=\int_0^\pi K_{\theta,d}(u)\,d\mu(\theta)
+\]
+satisfies
+\[
+q_\mu(0)=\frac1d>0,
+\qquad
+q_\mu^{(r)}(0)=0
+\quad (r\ge1).
+\]
+In particular,
+\[
+q_\mu^{(2)}(0)=q_\mu^{(4)}(0)=q_\mu^{(6)}(0)=\cdots=0.
+\]
+\end{theorem}
+
+\begin{proof}
+Put
+\[
+t=\frac{2u}{d}.
+\]
+Then
+\[
+K_{\theta,d}(u)
+=
+\frac1d
+\frac{\sin\theta}{1+2t\cos\theta+t^2}.
+\]
+Hence
+\[
+\int_0^\pi K_{\theta,d}(u)\,d\mu(\theta)
+=
+\frac1d
+\int_0^\pi
+\frac{2}{\pi}
+\frac{\sin^2\theta}{1+2t\cos\theta+t^2}
+\,d\theta.
+\]
+For \(|t|<1\), the elementary Poisson-kernel identity
+\[
+\int_0^\pi
+\frac{2}{\pi}
+\frac{\sin^2\theta}{1+2t\cos\theta+t^2}
+\,d\theta
+=
+1
+\]
+gives the claim.  Therefore \(q_\mu(u)=1/d\) on a neighborhood of the
+origin, and all positive-order derivatives at the origin vanish.
+\end{proof}
+
+\begin{corollary}[Finite same-scale source flattening to arbitrary finite order]
+\label{cor:finite-same-scale-source-flattening}
+For every \(M\ge1\), there exist finitely many angles
+\[
+0<\theta_1,\ldots,\theta_N<\pi
+\]
+and positive weights \(w_i>0\) such that, with
+\[
+c_i=d\sin\theta_i,\qquad x_i=d\cos\theta_i,
+\]
+one has
+\[
+x_i^2+c_i^2=d^2
+\]
+for every \(i\), and
+\[
+\sum_i w_iK_{\theta_i,d}^{(2j)}(0)=0,
+\qquad
+1\le j\le M,
 \]
 while
 \[
-q_\mu(0)>0.
+\sum_i w_iK_{\theta_i,d}(0)>0.
 \]
-By finite quadrature, Tchakaloff, or Carath\'eodory-type finite moment
-reduction, any finite list of these derivative identities can be matched by a
-finite positive same-scale packet cluster.  This gives a zero-side finite-jet
-source-flattening model: for every finite \(M\), one may impose
+Equivalently, a finite positive same-distance packet cluster can satisfy
 \[
 q^{(2)}(0)=q^{(4)}(0)=\cdots=q^{(2M)}(0)=0
 \]
-while retaining \(q_0>0\).  Therefore fixed finite source-jet tests cannot by
-themselves rule out source collapse.
+while retaining
+\[
+q_0=q(0)>0.
+\]
+\end{corollary}
+
+\begin{proof}
+Apply Tchakaloff's theorem, or finite-dimensional Carath\'eodory reduction, to
+the positive measure \(\mu\) in
+Theorem~\ref{thm:continuous-same-scale-source-flattening-model} and the finite
+list of continuous functions
+\[
+K_{\theta,d}(0),\quad
+K_{\theta,d}^{(2)}(0),\quad
+K_{\theta,d}^{(4)}(0),\ldots,K_{\theta,d}^{(2M)}(0).
+\]
+The continuous measure has the prescribed moments.  A positive finite
+quadrature rule reproduces the same finite list of moments.
+\end{proof}
+
+\begin{remark}[Uniform same-scale caveat]
+\label{rem:uniform-same-scale-caveat}
+The construction above is same-scale in the strong fixed-distance sense
+\(x_i^2+c_i^2=d^2\).  If a later argument requires the additional uniform
+angular condition
+\[
+\epsilon\le \frac{c_i}{d}\le 1-\epsilon
+\]
+with \(\epsilon>0\) independent of \(M\), then one still needs a strengthened
+annular positive-cone lemma.  The present result is already enough to show
+that finite source-jet flattening is not excluded by positive same-distance
+packet geometry.  Thus any proof-closing lower bound for \(q''\) must use
+additional actual-zeta arithmetic, not merely same-scale positivity.
 \end{remark}
+
+\begin{corollary}[Interval-local source collapse from finite quadrature]
+\label{cor:interval-local-source-collapse-from-quadrature}
+Fix \(A>0\).  Assume the packet scale is microscopic,
+\[
+d\asymp Q^{-1},
+\]
+and let
+\[
+I=[m_0-c/Q,m_0+c/Q]
+\]
+with \(c>0\) fixed sufficiently small.  For every \(C>A/3\), a finite
+same-distance positive packet cluster can be chosen so that
+\[
+\sup_{m\in I}|q''(m)|\le Q^{-C},
+\]
+while
+\[
+q_0(m)\asymp1,\qquad g(m)>0,\qquad h(m)>0,
+\]
+and
+\[
+\max\{|\Gamma_G(m)|,|\Gamma_{G,2}(m)|\}\asymp1
+\]
+on \(I\), after a harmless normalization of the total weight.
+
+Consequently, at leading source order,
+\[
+H=yq''\sim-\frac{q_0(q'')^3}{288}
+\]
+satisfies
+\[
+\sup_{m\in I}|H(m)|
+\max\{|\Gamma_G(m)|,|\Gamma_{G,2}(m)|\}
+\ll Q^{-3C},
+\]
+and therefore can be made smaller than \(Q^{-A}\).
+\end{corollary}
+
+\begin{proof}
+By Corollary~\ref{cor:finite-same-scale-source-flattening}, choose the packet
+cluster so that
+\[
+q^{(2)}(m_0)=q^{(4)}(m_0)=\cdots=q^{(2M)}(m_0)=0.
+\]
+Symmetric placement also kills odd derivatives at \(m_0\).  Thus
+\[
+(q'')^{(r)}(m_0)=0
+\]
+for all \(r\) up to the corresponding finite order.  Taking
+\[
+M\asymp \frac{C\log Q}{\log\log Q}
+\]
+or more conservatively \(M=O(\log Q)\), the standard Taylor--Cauchy estimate at
+scale \(d\asymp Q^{-1}\) gives
+\[
+\sup_I |q''|\le Q^{-C}.
+\]
+Normalizing the total mass so that \(q_0\) is close to \(2\), one obtains
+\[
+g=\frac{q_0}{\pi}>0,
+\qquad
+h=\frac1\pi\left(\frac13q_0^3+\frac16q''\right)>0,
+\]
+and
+\[
+\Gamma_G=q''-6q_0+2q_0^3=4+O(Q^{-C}).
+\]
+Hence the anisotropy factor remains bounded below while the source factor
+collapses cubically in \(q''\).
+\end{proof}
 
 \begin{proposition}[No-go for the current rank-two norm route]
 \label{prop:no-go-current-rank-two-norm-route}
 The current rank-two norm route cannot close RH from the established local
-row theory alone.
+row theory and same-scale positive packet geometry alone.
 
 More precisely, the following data are compatible with the current local
 rank-two structure:
@@ -35178,6 +35483,12 @@ Taking \(C>A/3\) violates the desired \(Q^{-A}\) source-weighted lower bound.
 
 Thus the local rank-two norm route requires a new theorem excluding such
 source-flat intervals for actual zeta data.
+By Corollary~\ref{cor:interval-local-source-collapse-from-quadrature}, the
+source-flat interval model is compatible with finite positive same-distance
+packet quadrature to arbitrary finite order.  Therefore the missing input
+cannot be a finite local packet-geometry lemma; it must use actual zeta
+arithmetic, a source-robust row, or a genuinely global transport/projective
+constraint.
 \end{proposition}
 
 \begin{remark}[What would be needed to save the norm route]
@@ -35287,6 +35598,80 @@ multi-prime sums with no identified positivity or coercive lower bound.
 Accordingly, the current route is non-closing unless one proves either a
 source-robust row theorem, an actual-zeta source-jet nonflatness theorem, or a
 genuinely global arithmetic/projective/transport index theorem.
+\end{remark}
+
+\begin{remark}[Corrected projective transport obstruction]
+\label{rem:corrected-projective-transport-obstruction}
+One possible response to source divisibility is to pass to the projective ratio.
+In the idealized factorized model
+\[
+A_7=HG_1,\qquad A_9=HG_2,\qquad H=yq'',
+\]
+one has
+\[
+[A_7:A_9]=[G_1:G_2].
+\]
+In the present setting \(G_1\) and \(G_2\) are represented by
+\[
+G_1\sim \Gamma_G,
+\qquad
+G_2\sim \Gamma_{G,2}.
+\]
+Thus projectivization formally cancels the common source factor \(H\).
+
+However, the actual corrected rows may have the form
+\[
+A_7=HG_1+R_7,
+\qquad
+A_9=HG_2+R_9,
+\]
+where \(R_7,R_9\) denote line, background/core, normalization, or other
+correction-row contributions not known to be \(H\)-divisible.  On the chart
+\(A_7\ne0\), put
+\[
+Z=\frac{A_9}{A_7}.
+\]
+Then
+\[
+\nabla Z
+=
+\frac{A_7\nabla A_9-A_9\nabla A_7}{A_7^2},
+\]
+and substitution gives
+\[
+\begin{aligned}
+A_7\nabla A_9-A_9\nabla A_7
+={}&
+H^2(G_1\nabla G_2-G_2\nabla G_1)\\
+&+H(G_1\nabla R_9-G_2\nabla R_7)\\
+&+H(R_7\nabla G_2-R_9\nabla G_1)\\
+&+(\nabla H)(R_7G_2-R_9G_1)\\
+&+(R_7\nabla R_9-R_9\nabla R_7).
+\end{aligned}
+\]
+Therefore the clean source-normalized identity
+\[
+\nabla\left(\frac{A_9}{A_7}\right)
+=
+\nabla\left(\frac{G_2}{G_1}\right)
+\]
+is valid only if the correction rows vanish or are themselves
+\(H\)-divisible.  If non-\(H\)-divisible corrections remain, then near
+\(H=0\)
+\[
+[A_7:A_9]\to [R_7:R_9],
+\]
+not
+\[
+[\Gamma_G:\Gamma_{G,2}].
+\]
+Thus the projective branch is coherent only after a correction-divisibility or
+correction-absorption theorem, or after enlarging the projective coordinate to
+\[
+[A_7:A_9:R_7:R_9:\cdots].
+\]
+No global projective endpoint, holonomy, or index theorem is presently known
+for that enlarged object.
 \end{remark}
 
 \subsection{Finite-core sampled vector non-concentration}
@@ -36141,6 +36526,90 @@ In the transported-kernel reduction, the first nonquadratic Taylor coefficient
 \]
 already gives a necessary sign test for conditional definiteness.
 \end{enumerate}
+\end{remark}
+
+\begin{remark}[Terminal status of the current architecture]
+\label{rem:terminal-status-current-architecture}
+The present proof architecture has reached the following decision point.
+
+\begin{enumerate}
+\item The original scalar Bottleneck-C closure route is blocked: the active
+\(\eta\eta\)-row is \(S\)-visible and cannot be removed by source
+repackaging, quotienting, split readout, line-bundle transport, or
+transform-faithful normal-form counterterms.
+
+\item The rank-two fixed-sector bundle is the correct local language for the
+remaining obstruction.  It gives a coherent reduced-base connection and a
+conditional affine forcing equation, but it does not supply a global
+contradiction without an additional boundary, holonomy, index, or quantitative
+non-concentration theorem.
+
+\item The local packet-visibility problem is substantially improved by the
+layered order-seven/order-nine theorem:
+\[
+\Gamma_G\ne0\Rightarrow A_7^{\mathfrak f}\ne0,
+\qquad
+\Gamma_G=0,\ \Gamma_{G,2}\ne0\Rightarrow A_9^{\mathfrak f}\ne0,
+\]
+modulo named correction incidence.  This is a local visibility theorem, not a
+proof of \(\RH\).
+
+\item The norm-based rank-two route is source-divisible.  The established rows
+have schematic form
+\[
+A_7^{\mathfrak f}\sim H\Gamma_G,
+\qquad
+A_9^{\mathfrak f}\sim H\Gamma_{G,2},
+\qquad
+H=yq''.
+\]
+Since
+\[
+H\sim-\frac{q_0(q'')^3}{288},
+\]
+an interval on which \(q''\) is small collapses the known row vector even when
+the anisotropy factor remains live.
+
+\item The projective route cancels \(H\) formally, but it loses magnitude,
+remains singular at
+\[
+\Gamma_G=\Gamma_{G,2}=0,
+\]
+and is not cleanly defined for the corrected row vector unless correction rows
+vanish or are \(H\)-divisible.  No global projective endpoint, holonomy, or
+index theorem is currently available.
+
+\item The same-scale source-flattening construction shows that finite
+same-scale positive packet geometry does not itself prevent source collapse.
+Consequently, an actual proof must use information not already present in the
+local Hadamard/quartet packet geometry.
+\end{enumerate}
+
+Thus the current framework should be treated as a precise local obstruction
+and diagnostic architecture.  To turn it into a proof of \(\RH\), one still
+needs at least one genuinely new input:
+\[
+\boxed{
+\text{actual-zeta source-jet nonflatness,}
+}
+\]
+for example
+\[
+\sup_{m\in I_\rho}|q''(m)|\ge Q^{-B},
+\]
+or a stronger finite/growing-jet interval theorem; or else
+\[
+\boxed{
+\text{a source-robust row/invariant,}
+}
+\]
+or
+\[
+\boxed{
+\text{a global projective/affine transport index theorem.}
+}
+\]
+Absent such an input, the present architecture is non-closing.
 \end{remark}
 
 \appendix
