@@ -831,8 +831,10 @@ def main() -> None:
     ap.add_argument("--start-index", type=int, default=50)
     ap.add_argument("--end-index", type=int, default=500)
     ap.add_argument("--smoke", action="store_true")
-    ap.add_argument("--workers", type=int, default=max(1, (os.cpu_count() or 2) - 2),
-                    help="number of worker processes for the actual-zero scan; 1 = serial")
+    ap.add_argument("--workers", type=int,
+                    default=max(1, min((os.cpu_count() or 2) - 2, 10)),
+                    help="number of worker processes for the actual-zero scan; 1 = serial. "
+                         "Default: max(1, min(cpu_count - 2, 10)).")
     ap.add_argument("--resume", dest="resume", action="store_true", default=True,
                     help="If the params-hash-derived CSV already exists, append to it and skip "
                          "rows whose key is already present. Resume is on by default.")

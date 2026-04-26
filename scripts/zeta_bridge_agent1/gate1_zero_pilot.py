@@ -803,8 +803,8 @@ def main() -> None:
     parser.add_argument("--quad-tol", type=float, default=None)
     parser.add_argument("--max-per-family", type=int, default=None)
     parser.add_argument("--workers", type=int,
-                        default=max(1, (os.cpu_count() or 2) - 2),
-                        help="Process-pool workers (default: cpu_count - 2).")
+                        default=max(1, min((os.cpu_count() or 2) - 2, 10)),
+                        help="Process-pool workers (default: max(1, min(cpu_count - 2, 10))).")
     parser.add_argument("--progress-every", type=int, default=0,
                         help="Print progress every N completed tasks (0 = silent).")
     parser.add_argument("--resume", dest="resume", action="store_true", default=True,

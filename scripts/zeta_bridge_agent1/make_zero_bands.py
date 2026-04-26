@@ -186,7 +186,8 @@ def parse_band(spec: str) -> Tuple[float, float, str]:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--out-dir", default=os.path.join(SCRIPT_DIR, "out", "zero_bands"))
-    parser.add_argument("--workers", type=int, default=max(1, (os.cpu_count() or 2) - 2))
+    parser.add_argument("--workers", type=int,
+                        default=max(1, min((os.cpu_count() or 2) - 2, 10)))
     parser.add_argument("--step", type=float, default=0.05,
                         help="Hardy-Z grid step. Smaller = safer for high heights.")
     parser.add_argument("--dps", type=int, default=30, help="Working precision for siegelz scan.")

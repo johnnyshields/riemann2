@@ -79,6 +79,70 @@ except ImportError:
 
 
 # -----------------------------
+# Canonical gamma curvature term B_2(t)
+# -----------------------------
+#
+# Canonical zero-side curvature is q''_can(t) = B_2(t) + sum_rho K_2(t; rho).
+# B_2(t) = theta'''(t) = -(1/8) Re psi^(2)(1/4 + i t/2). For t > 50 the
+# asymptotic B_2(t) ~ -1/(2 t^2) agrees with the exact polygamma expression
+# to better than 1 part in 10^4 (smaller still as t grows), so we use the
+# closed form there and fall back to mpmath only for low heights.
+
+_B2_ASYMPTOTIC_CUTOFF = 50.0
+
+
+def B2_exact(t: float, dps: int = 30) -> float:
+    mp.mp.dps = dps
+    z = mp.mpc(mp.mpf("0.25"), mp.mpf(t) / 2)
+    return float(-mp.re(mp.polygamma(2, z)) / 8.0)
+
+
+def B2_fast(t: float, dps: int = 30) -> float:
+    if t > _B2_ASYMPTOTIC_CUTOFF:
+        return -0.5 / (t * t)
+    return B2_exact(t, dps=dps)
+
+
+def B2_array(xs: np.ndarray, dps: int = 30) -> np.ndarray:
+    """Vectorized B_2 over a grid. Asymptotic where xs > cutoff, else exact."""
+    out = np.empty_like(xs, dtype=float)
+    mask_large = xs > _B2_ASYMPTOTIC_CUTOFF
+    if mask_large.any():
+        out[mask_large] = -0.5 / (xs[mask_large] ** 2)
+    if not mask_large.all():
+        small_idx = np.where(~mask_large)[0]
+        for i in small_idx:
+            out[i] = B2_exact(float(xs[i]), dps=dps)
+    return out
+
+
+# Process-local cache: same xs grid is reused across stability_W /
+# stability_kappa / B2-toggle variants; only stability_nquad changes it.
+# Cache hit on the second-and-later use saves ~13 redundant polygamma sweeps
+# per (center, c_I) at low-t centers where the asymptotic cutoff doesn't fire.
+# Keyed by (xs[0], xs[-1], len(xs), dps) — coarse enough that nearby grids
+# don't collide and fine enough that identical grids from the same call site
+# always hit. Grows monotonically; capped via FIFO eviction below.
+_B2_CACHE: Dict[Tuple[float, float, int, int], np.ndarray] = {}
+_B2_CACHE_MAX = 4096
+
+
+def B2_array_cached(xs: np.ndarray, dps: int = 30) -> np.ndarray:
+    if len(xs) == 0:
+        return np.empty(0, dtype=float)
+    key = (round(float(xs[0]), 9), round(float(xs[-1]), 9), int(len(xs)), int(dps))
+    cached = _B2_CACHE.get(key)
+    if cached is not None and cached.shape == xs.shape:
+        return cached
+    result = B2_array(xs, dps=dps)
+    if len(_B2_CACHE) >= _B2_CACHE_MAX:
+        # Cheap FIFO drop: pop the oldest insertion.
+        _B2_CACHE.pop(next(iter(_B2_CACHE)))
+    _B2_CACHE[key] = result
+    return result
+
+
+# -----------------------------
 # Top-level workers (must be picklable for ProcessPoolExecutor)
 # -----------------------------
 
@@ -251,10 +315,15 @@ def q2_zero_proxy(
     center: float,
     W_factor: float,
     kappa: float,
+    include_B2: bool = False,
+    mp_dps: int = 30,
 ) -> Tuple[np.ndarray, int]:
-    """Sum the regularized K2 kernel over zeros within an absolute window
-    W_abs = W_factor / Q, matching the factor semantics used by agent1/agent3
-    and by the `tail_edge` guard in scan_zone."""
+    """Canonical-shape proxy q''_can,eta(t) = B_2(t) + sum_{|gamma-t|<=W_abs} K2(t; gamma, eps).
+
+    `include_B2` toggles the canonical gamma curvature term. `W_abs = W_factor/Q`
+    matches the factor semantics used by agent1/agent3 and by the `tail_edge`
+    guard in scan_zone.
+    """
     Q = math.log(center / (2.0 * math.pi))
     eps = kappa / Q
     W_abs = W_factor / Q
@@ -263,6 +332,9 @@ def q2_zero_proxy(
     vals = np.zeros_like(xs, dtype=float)
     for g in use:
         vals += K2_proxy(xs, g, eps)
+
+    if include_B2:
+        vals += B2_array_cached(xs, dps=mp_dps)
 
     return vals, len(use)
 
@@ -274,12 +346,17 @@ def interval_metrics(
     kappa: float = 0.5,
     W_factor: float = 40.0,
     nquad: int = 401,
+    include_B2: bool = False,
+    mp_dps: int = 30,
 ) -> Dict[str, float]:
     Q = math.log(center / (2.0 * math.pi))
     half = c_I / Q
     xs = np.linspace(center - half, center + half, nquad)
 
-    vals, n_used = q2_zero_proxy(xs, zeros, center, W_factor=W_factor, kappa=kappa)
+    vals, n_used = q2_zero_proxy(
+        xs, zeros, center, W_factor=W_factor, kappa=kappa,
+        include_B2=include_B2, mp_dps=mp_dps,
+    )
     E = float(_trapz(vals ** 2, xs) / (2.0 * half))
     S = float(np.max(np.abs(vals)))
     B_eff = -math.log(max(E, 1e-300)) / math.log(Q)
@@ -300,6 +377,8 @@ def finite_jet_proxy(
     W_factor: float = 40.0,
     h_factor: float = 0.015,
     n_fit: int = 31,
+    include_B2: bool = False,
+    mp_dps: int = 30,
 ) -> Dict[str, float]:
     """
     Estimate normalized finite jets J_r = Delta^r d^r q2/dm^r(center)
@@ -312,7 +391,10 @@ def finite_jet_proxy(
     h = h_factor / Q
 
     xs = center + np.linspace(-h, h, n_fit)
-    vals, _ = q2_zero_proxy(xs, zeros, center, W_factor=W_factor, kappa=kappa)
+    vals, _ = q2_zero_proxy(
+        xs, zeros, center, W_factor=W_factor, kappa=kappa,
+        include_B2=include_B2, mp_dps=mp_dps,
+    )
 
     deg = min(max(R_jet + 2, 6), n_fit - 1)
     # Fit in local variable y = x - center for numerical conditioning.
@@ -523,19 +605,25 @@ def scan_zone(zone: float, args) -> Tuple[pd.DataFrame, Dict]:
             metrics = interval_metrics(
                 center, zeros,
                 c_I=c_I, kappa=args.kappa, W_factor=args.W_factor, nquad=args.nquad,
+                include_B2=args.include_B2, mp_dps=args.mp_dps,
             )
             jets = finite_jet_proxy(
                 center, zeros,
                 R_jet=args.R_jet, kappa=args.kappa, W_factor=args.W_factor,
                 h_factor=args.jet_h_factor, n_fit=args.jet_fit_points,
+                include_B2=args.include_B2, mp_dps=args.mp_dps,
             )
 
-            # Tail drift: vary the cutoff window. Quadrature drift: vary nquad.
+            # Tail drift: vary cutoff window. Quad drift: vary nquad.
+            # Eta drift: vary kappa (smoothing scale eps = kappa/Q). B2 drift:
+            # toggle the canonical gamma term to detect B_2-driven artifacts.
             E_base = metrics["E_I"]
+
             tail_E = []
             for W2 in args.stability_W:
                 tail_E.append(interval_metrics(
                     center, zeros, c_I=c_I, kappa=args.kappa, W_factor=W2, nquad=args.nquad,
+                    include_B2=args.include_B2, mp_dps=args.mp_dps,
                 )["E_I"])
             tail_drift_rel = max(abs(e - E_base) for e in tail_E) / max(abs(E_base), 1e-300)
 
@@ -543,8 +631,26 @@ def scan_zone(zone: float, args) -> Tuple[pd.DataFrame, Dict]:
             for nq in args.stability_nquad:
                 quad_E.append(interval_metrics(
                     center, zeros, c_I=c_I, kappa=args.kappa, W_factor=args.W_factor, nquad=int(nq),
+                    include_B2=args.include_B2, mp_dps=args.mp_dps,
                 )["E_I"])
             quad_drift_rel = max(abs(e - E_base) for e in quad_E) / max(abs(E_base), 1e-300)
+
+            kappa_E = []
+            for k2 in args.stability_kappa:
+                kappa_E.append(interval_metrics(
+                    center, zeros, c_I=c_I, kappa=float(k2), W_factor=args.W_factor, nquad=args.nquad,
+                    include_B2=args.include_B2, mp_dps=args.mp_dps,
+                )["E_I"])
+            kappa_drift_rel = max(abs(e - E_base) for e in kappa_E) / max(abs(E_base), 1e-300)
+
+            if args.include_B2:
+                E_no_B2 = interval_metrics(
+                    center, zeros, c_I=c_I, kappa=args.kappa, W_factor=args.W_factor, nquad=args.nquad,
+                    include_B2=False, mp_dps=args.mp_dps,
+                )["E_I"]
+                B2_drift_rel = abs(E_base - E_no_B2) / max(abs(E_base), 1e-300)
+            else:
+                B2_drift_rel = float("nan")
 
             # Tail-edge guard: the largest stability window 2 * max(stability_W) / Q
             # might extend beyond the available zero range, in which case the
@@ -558,11 +664,14 @@ def scan_zone(zone: float, args) -> Tuple[pd.DataFrame, Dict]:
 
             row = {
                 **base,
+                "include_B2": bool(args.include_B2),
                 **metrics,
                 **jets,
                 "tail_drift_rel": tail_drift_rel,
                 "tail_edge": tail_edge,
                 "quad_drift_rel": quad_drift_rel,
+                "kappa_drift_rel": kappa_drift_rel,
+                "B2_drift_rel": B2_drift_rel,
             }
             rows.append(row)
 
@@ -584,14 +693,31 @@ def summarize_results(df: pd.DataFrame) -> pd.DataFrame:
     return summary
 
 
-def classify_row(row, tail_tol: float = 2e-2, quad_tol: float = 1e-5):
-    """Unified status (matches agent1/agent3). Adds tail-edge guard so near-edge
-    centers are not accepted as 'healthy' just because the truncated 2*W window
-    happens to look stable for the wrong reason. `candidate_proxy_flat` also
-    requires small J_max (interval flatness alone is not enough; we need
-    simultaneous interval and finite-jet flatness)."""
+def classify_row(
+    row,
+    tail_tol: float = 2e-2,
+    quad_tol: float = 1e-5,
+    kappa_tol: float = 0.1,
+    B2_tol: float = 0.5,
+):
+    """Unified status. Combines agent1/agent3 stability rejects with the
+    canonical artifact diagnostics:
+
+    - `artifact_eta`: large drift across kappa (smoothing scale eps=kappa/Q),
+      i.e. the candidate is a critical-line smoothing artifact.
+    - `artifact_B2`: large drift when toggling the B_2 gamma term, i.e. the
+      candidate is dominated by the background curvature term and not by the
+      zero structure.
+
+    `candidate_proxy_flat` requires small J_max (simultaneous interval and
+    finite-jet flatness). `tail_edge` shorts the chain so near-edge centers
+    are not accepted as 'healthy' just because the truncated 2*W window
+    happens to look stable for the wrong reason.
+    """
     tail_drift = float(row.get("tail_drift_rel", float("nan")))
     quad_drift = float(row.get("quad_drift_rel", float("nan")))
+    kappa_drift = float(row.get("kappa_drift_rel", float("nan")))
+    B2_drift = float(row.get("B2_drift_rel", float("nan")))
     B_eff = float(row.get("B_eff", float("nan")))
     J_max = float(row.get("J_max", float("nan")))
     tail_edge = bool(row.get("tail_edge", False))
@@ -602,6 +728,10 @@ def classify_row(row, tail_tol: float = 2e-2, quad_tol: float = 1e-5):
         return "reject_tail_unstable"
     if not math.isfinite(quad_drift) or quad_drift > quad_tol:
         return "reject_quad_unstable"
+    if math.isfinite(kappa_drift) and kappa_drift > kappa_tol:
+        return "artifact_eta"
+    if math.isfinite(B2_drift) and B2_drift > B2_tol:
+        return "artifact_B2"
     if math.isfinite(B_eff) and math.isfinite(J_max) and B_eff > 20 and J_max < 1e-8:
         return "serious_proxy_warning"
     if math.isfinite(B_eff) and math.isfinite(J_max) and B_eff > 10 and J_max < 1e-6:
@@ -632,10 +762,12 @@ _PARAM_HASH_KEYS = (
     "no_gram",
     "stability_W",
     "stability_nquad",
+    "stability_kappa",
     "c_I_values",
     "mp_dps",
     "zero_radius",
     "zero_step",
+    "include_B2",
 )
 
 
@@ -750,12 +882,31 @@ def parse_args():
                    help="W_factor values used to compute tail_drift_rel.")
     p.add_argument("--stability-nquad", type=int, nargs="+", default=[201, 401, 801],
                    help="nquad values used to compute quad_drift_rel.")
+    p.add_argument("--stability-kappa", type=float, nargs="+",
+                   default=[0.0625, 0.125, 0.25, 0.5, 1.0, 2.0],
+                   help="kappa values used to compute kappa_drift_rel "
+                        "(eta-sweep for critical-line smoothing scale eps=kappa/Q).")
+
+    p.add_argument(
+        "--include-B2",
+        dest="include_B2",
+        action="store_true",
+        default=True,
+        help="Add the canonical gamma curvature term B_2(t) to q'' (default).",
+    )
+    p.add_argument(
+        "--no-include-B2",
+        dest="include_B2",
+        action="store_false",
+        help="Disable B_2; use the bare K_2 zero kernel only (proxy-only mode).",
+    )
 
     p.add_argument(
         "--workers",
         type=int,
-        default=max(1, (os.cpu_count() or 2) - 2),
-        help="Process-pool size for mpmath-heavy work.",
+        default=max(1, min((os.cpu_count() or 2) - 2, 10)),
+        help="Process-pool size for mpmath-heavy work "
+             "(default: max(1, min(cpu_count - 2, 10))).",
     )
 
     p.add_argument(
@@ -795,8 +946,9 @@ def _print_zone_best(zone: float, df_zone: pd.DataFrame, idx: int, total: int):
     log(f"[{idx}/{total}] Zone {zone:.6f}")
     if not df_zone.empty:
         best = df_zone.sort_values("E_I").head(5)
-        cols = ["center_type", "m0", "c_I", "E_I", "S_I", "B_eff", "J_max",
-                "tail_drift_rel", "quad_drift_rel", "tail_edge"]
+        cols = ["center_type", "m0", "c_I", "E_I", "B_eff", "J_max",
+                "tail_drift_rel", "quad_drift_rel",
+                "kappa_drift_rel", "B2_drift_rel", "tail_edge"]
         cols = [c for c in cols if c in best.columns]
         print(best[cols].to_string(index=False), flush=True)
 
@@ -927,8 +1079,9 @@ def main():
 
     log("Best overall rows:")
     if not full_df.empty:
-        cols = ["zone", "center_type", "m0", "c_I", "E_I", "S_I", "B_eff", "J_max",
-                "tail_drift_rel", "quad_drift_rel", "tail_edge", "status"]
+        cols = ["zone", "center_type", "m0", "c_I", "E_I", "B_eff", "J_max",
+                "tail_drift_rel", "quad_drift_rel",
+                "kappa_drift_rel", "B2_drift_rel", "tail_edge", "status"]
         cols = [c for c in cols if c in full_df.columns]
         print(full_df.sort_values("E_I").head(20)[cols].to_string(index=False), flush=True)
 
