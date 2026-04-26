@@ -84,7 +84,8 @@ from afe_logderiv_weights import (  # noqa: E402
 )
 
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2  # v2: B_2 at m (not u_0); B_2 in dual stages; b2_toy label;
+                    # filled op_node fields; sqrt_m guard.
 EPS = 1e-300
 
 
@@ -162,6 +163,9 @@ class Diagnostics:
     kappa_basis: float
     gram_error: float
     objective_value: float
+    op_node_min: float
+    op_node_max: float
+    diam_x: float
 
 
 @dataclass
@@ -283,6 +287,7 @@ def compute_params_hash(cfg: Dict[str, Any], config_name: str) -> str:
         "C_kappa": float(cfg.get("C_kappa", 4.0)),
         "seed": int(cfg.get("seed", 12345)),
         "alpha_grid_mode": cfg.get("alpha_grid_mode", "default"),
+        "include_B2_in_dual": bool(cfg.get("include_B2_in_dual", True)),
     }
     blob = json.dumps(record, sort_keys=True, separators=(",", ":")).encode()
     return hashlib.sha256(blob).hexdigest()
@@ -484,7 +489,10 @@ def get_N(policy: str, n_values: np.ndarray, m: float) -> Optional[float]:
     if policy == "cover_block":
         return conductor_cover_block(n_values, y_at_max=0.5)
     if policy == "sqrt_m":
-        return conductor_sqrt_m(max(m, 1.0))
+        # Clamp to m >= 1 so the orbit grid's m=0 starting point doesn't
+        # crash sqrt_m configs. sqrt_m at the clamp value is just a small
+        # conductor, which the bump cuts off harmlessly.
+        return conductor_sqrt_m(max(float(m), 1.0))
     raise ValueError(f"unknown conductor policy: {policy}")
 
 
@@ -531,19 +539,34 @@ def build_terms(block: PrimeBlock, m: float, alpha: float, include_dual: bool,
 
 
 def evaluate_terms(block: PrimeBlock, terms: TermSet, R: int,
-                   include_b2: bool) -> Tuple[Diagnostics, np.ndarray, Basis]:
+                   include_b2: bool,
+                   m: Optional[float] = None) -> Tuple[Diagnostics, np.ndarray, Basis]:
+    """
+    `m` is the height (the spectral parameter), not the block center.
+    B_2 must be evaluated at m, not at u_0. When `m` is None (e.g. relaxed
+    stage), include_b2 is silently disabled.
+    """
     weights_c = np.maximum(np.abs(terms.c_coeffs) ** 2, EPS)
     basis = build_basis(terms.op_nodes_z, terms.op_nodes_c, weights_c, degree=R + 1)
-    b2 = B2_fast_3term(block.u0) if include_b2 else None
+
+    if include_b2 and m is not None and math.isfinite(m) and m > 0:
+        b2 = B2_fast_3term(float(m))
+    else:
+        b2 = None
     M = build_M(terms, basis, R, b2_value=b2)
     eta_z, log_eta_z = eta_Z_direct(terms)
     dd = det_diagnostics(M)
-    # Two-branch rank residual: r = z/c on the c (source) nodes; both
-    # branches included if dual is on.
+    # Two-branch rank residual on source nodes; plus and minus included
+    # whenever dual is active in `terms`.
     r = terms.z_coeffs / np.where(np.abs(terms.c_coeffs) > EPS,
                                   terms.c_coeffs, EPS)
     w = weights_c
     rho2, rhoinf = symbol_rank_residual(basis.x_c, r, w, R)
+
+    op_min = float(np.min(terms.op_nodes_c))
+    op_max = float(np.max(terms.op_nodes_c))
+    diam_x = float(np.max(basis.x_c) - np.min(basis.x_c))
+
     diag = Diagnostics(
         eta_Z=eta_z, log_eta_Z=log_eta_z,
         eta_W=dd["eta_W"], log_eta_W=dd["log_eta_W"], eta_sv=dd["eta_sv"],
@@ -552,6 +575,7 @@ def evaluate_terms(block: PrimeBlock, terms: TermSet, R: int,
         rho_rank_2=rho2, rho_rank_inf=rhoinf,
         kappa_basis=basis.kappa_basis, gram_error=basis.gram_error,
         objective_value=eta_z ** 2 + dd["eta_W"] ** 2,
+        op_node_min=op_min, op_node_max=op_max, diam_x=diam_x,
     )
     return diag, M, basis
 
@@ -576,7 +600,9 @@ def relaxed_search(block: PrimeBlock, alpha: float, cfg: Dict[str, Any],
         z_phase = np.exp(-1j * rng.uniform(0, 2 * np.pi, size=n_z))
         c_phase = np.exp(-1j * rng.uniform(0, 2 * np.pi, size=n_c))
         terms = dataclasses.replace(base_terms, z_phases=z_phase, c_phases=c_phase)
-        diag, M, _basis = evaluate_terms(block, terms, block.R, include_b2=False)
+        # Relaxed phases destroy the m-dependence in coefficients we built,
+        # so leaving include_b2=False is correct here regardless.
+        diag, M, _basis = evaluate_terms(block, terms, block.R, include_b2=False, m=None)
         if best is None or diag.objective_value < best[0].objective_value:
             best = (diag, M)
     assert best is not None
@@ -585,24 +611,36 @@ def relaxed_search(block: PrimeBlock, alpha: float, cfg: Dict[str, Any],
 
 def scan_orbit_grid(block: PrimeBlock, alpha: float, cfg: Dict[str, Any],
                     include_dual: bool, include_b2: bool,
-                    grid_size: int) -> Tuple[float, Diagnostics, np.ndarray]:
+                    grid_size: int,
+                    smoothing_override: Optional[str] = None,
+                    conductor_override: Optional[str] = None,
+                    ) -> Tuple[float, Diagnostics, np.ndarray]:
+    """Sweep m on a grid; return (best_m, best_diag, best_M).
+
+    If `smoothing_override` / `conductor_override` are given, they replace
+    the cfg-level smoothing / conductor_policy for this stage only — used
+    by `formal_dual` to force plateau geometry while leaving the configured
+    smoothing for `actual_like_dual`.
+    """
     m_min = float(cfg.get("m_min", 0.0))
     m_max = float(cfg.get("m_max_factor", 100.0)) * block.Q
     k_Z = int(cfg.get("k_Z", 0))
     k_q = int(cfg.get("k_q", 3))
-    smoothing = str(cfg.get("smoothing", "plateau"))
-    conductor_policy = str(cfg.get("conductor_policy", "plateau"))
+    smoothing = smoothing_override or str(cfg.get("smoothing", "plateau"))
+    conductor_policy = conductor_override or str(cfg.get("conductor_policy", "plateau"))
 
     best: Optional[Tuple[Diagnostics, np.ndarray]] = None
     best_m = m_min
     for m in np.linspace(m_min, m_max, grid_size):
-        terms = build_terms(block, m=float(m), alpha=alpha, include_dual=include_dual,
+        m_f = float(m)
+        terms = build_terms(block, m=m_f, alpha=alpha, include_dual=include_dual,
                             k_Z=k_Z, k_q=k_q,
                             smoothing=smoothing, conductor_policy=conductor_policy)
-        diag, M, _basis = evaluate_terms(block, terms, block.R, include_b2=include_b2)
+        diag, M, _basis = evaluate_terms(block, terms, block.R,
+                                         include_b2=include_b2, m=m_f)
         if best is None or diag.objective_value < best[0].objective_value:
             best = (diag, M)
-            best_m = float(m)
+            best_m = m_f
     assert best is not None
     return best_m, best[0], best[1]
 
@@ -637,17 +675,33 @@ def E2_perturbation(M: np.ndarray, trials: int, scale: float, seed: int) -> Dict
 
 def classify(stage: str, Q: float, diag: Diagnostics, survives_E2: bool,
              cfg: Dict[str, Any]) -> str:
+    """
+    Stage labels:
+      relaxed          -> phase-relaxed negative control
+      main_orbit       -> plus-only one-parameter orbit
+      b2_toy           -> main_orbit + crude scalar B_2 injection (toy_diagnostic only)
+      formal_dual      -> plus + reflected minus, plateau geometry, B_2 included if cfg
+      actual_like_dual -> plus + reflected minus, configured geometry, B_2 included if cfg
+      e2               -> row perturbation on actual_like_dual
+    """
     CZ = float(cfg.get("C_Z", 6.0))
     CW = float(cfg.get("C_W", 6.0))
     CR = float(cfg.get("C_rank", 4.0))
     CK = float(cfg.get("C_kappa", 4.0))
     healthy = (diag.rho_rank_2 >= Q ** (-CR)) and (diag.kappa_basis <= Q ** CK)
     collapsed = (diag.eta_Z <= Q ** (-CZ)) and (diag.eta_W <= Q ** (-CW))
+
+    if stage == "b2_toy":
+        # Crude scalar injection is not a canonical Wronskian B_2 action;
+        # never produce Yellow/Red from this stage. See script docstring
+        # and audit notes for the planned `b2_operator` upgrade.
+        return "toy_diagnostic"
+
     if not healthy:
         return "degenerate"
     if stage == "relaxed" and collapsed:
         return "relaxed_only_possible"
-    if stage in {"main_orbit", "b2"} and collapsed:
+    if stage == "main_orbit" and collapsed:
         return "yellow_orbit_collapse"
     if stage == "formal_dual" and collapsed:
         return "red_candidate_pre_E2"
@@ -670,9 +724,9 @@ def make_row(run_id: str, config_name: str, block: PrimeBlock, stage: str,
              num_dual_terms: int = 0) -> CandidateRow:
     e2 = e2 or {}
     survives = bool(e2.get("survives_E2", False))
-    op_min = float("nan"); op_max = float("nan"); diam_x = 2.0
-    if M is not None and len(block.primes):
-        diam_x = 2.0
+    op_min = float(diag.op_node_min)
+    op_max = float(diag.op_node_max)
+    diam_x = float(diag.diam_x)
     return CandidateRow(
         run_id=run_id,
         timestamp=time.strftime("%Y-%m-%d %H:%M:%S"),
@@ -727,9 +781,13 @@ def _process_one_task(task: tuple) -> List[CandidateRow]:
         return rows
 
     stages = list(cfg.get("stages", ["relaxed", "main_orbit"]))
+    # B_2 in dual stages: per the audit, the canonical Red/Green ladder is
+    # +B_2 -> +dual -> +E_2, so dual stages should include B_2 by default.
+    include_B2_in_dual = bool(cfg.get("include_B2_in_dual", True))
+    grid_size = int(cfg.get("m_grid", 1000))
     seed = int(cfg.get("seed", 12345)) + int(R) * 1000 + int(round(c_val * 100)) * 17 + int(round(alpha * 13))
 
-    # Stage: relaxed
+    # Stage: relaxed (negative control)
     if "relaxed" in stages:
         m_r, diag_r, M_r = relaxed_search(block, alpha, cfg,
                                           restarts=int(cfg.get("relaxed_restarts", 64)),
@@ -738,46 +796,56 @@ def _process_one_task(task: tuple) -> List[CandidateRow]:
                              diag_r, M_r, cfg, "phase-relaxed negative control",
                              include_dual=False))
 
-    # Stage: main_orbit
+    # Stage: main_orbit (plus-only orbit)
     if "main_orbit" in stages:
         m, diag, M = scan_orbit_grid(block, alpha, cfg,
                                      include_dual=False, include_b2=False,
-                                     grid_size=int(cfg.get("m_grid", 1000)))
+                                     grid_size=grid_size)
         rows.append(make_row(run_id, config_name, block, "main_orbit", alpha, m,
                              diag, M, cfg, "main-only orbit", include_dual=False))
 
-    # Stage: +B2
-    if "b2" in stages:
+    # Stage: b2_toy (main_orbit + crude scalar B_2(m) injection — diagnostic only)
+    if "b2_toy" in stages or "b2" in stages:
         m, diag, M = scan_orbit_grid(block, alpha, cfg,
                                      include_dual=False, include_b2=True,
-                                     grid_size=int(cfg.get("m_grid", 1000)))
-        rows.append(make_row(run_id, config_name, block, "b2", alpha, m,
-                             diag, M, cfg, "+B2 canonical injection",
+                                     grid_size=grid_size)
+        rows.append(make_row(run_id, config_name, block, "b2_toy", alpha, m,
+                             diag, M, cfg, "B2 toy scalar injection (diagnostic only)",
                              include_dual=False))
 
-    # Stage: formal_dual
+    # Stage: formal_dual (plus + reflected minus, plateau geometry forced;
+    # B_2(m) included by default).
     if "formal_dual" in stages:
         m, diag, M = scan_orbit_grid(block, alpha, cfg,
-                                     include_dual=True, include_b2=False,
-                                     grid_size=int(cfg.get("m_grid", 1000)))
+                                     include_dual=True,
+                                     include_b2=include_B2_in_dual,
+                                     grid_size=grid_size,
+                                     smoothing_override="plateau",
+                                     conductor_override="plateau")
         rows.append(make_row(run_id, config_name, block, "formal_dual", alpha, m,
-                             diag, M, cfg, "reflected log-derivative dual (plateau)",
+                             diag, M, cfg,
+                             "reflected dual (plateau forced) + B_2"
+                             if include_B2_in_dual else
+                             "reflected dual (plateau forced) without B_2",
                              include_dual=True, num_dual_terms=2 * len(block.primes)))
 
-    # Stage: actual_like_dual + E2
+    # Stage: actual_like_dual (configured smoothing/conductor; B_2(m) included by default)
     M_actual: Optional[np.ndarray] = None
     diag_actual: Optional[Diagnostics] = None
     m_actual: float = float("nan")
     if "actual_like_dual" in stages:
         m_actual, diag_actual, M_actual = scan_orbit_grid(
             block, alpha, cfg,
-            include_dual=True, include_b2=False,
-            grid_size=int(cfg.get("m_grid", 1000)))
+            include_dual=True, include_b2=include_B2_in_dual,
+            grid_size=grid_size)
         rows.append(make_row(run_id, config_name, block, "actual_like_dual",
                              alpha, m_actual, diag_actual, M_actual, cfg,
-                             "reflected log-derivative dual (configured smoothing)",
+                             "reflected dual (configured) + B_2"
+                             if include_B2_in_dual else
+                             "reflected dual (configured) without B_2",
                              include_dual=True, num_dual_terms=2 * len(block.primes)))
 
+    # Stage: e2 (row perturbation on actual_like_dual M; B_2 already baked in)
     if "e2" in stages and M_actual is not None and diag_actual is not None:
         e2 = E2_perturbation(M_actual,
                              trials=int(cfg.get("E2_trials", 200)),
