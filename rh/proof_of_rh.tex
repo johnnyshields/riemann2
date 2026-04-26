@@ -84,6 +84,7 @@
 \newcommand{\odd}{\mathrm{odd}}
 \newcommand{\amp}{\mathrm{amp}}
 \newcommand{\actual}{\mathrm{actual}}
+\newcommand{\can}{\mathrm{can}}
 \newcommand{\source}{\mathrm{source}}
 \newcommand{\base}{\mathrm{base}}
 \newcommand{\wh}{\mathrm{wh}}
@@ -196,6 +197,39 @@ We write
 \[
 q(t):=\Ph'(t).
 \]
+
+\begin{definition}[Canonical actual-zeta phase curvature]
+\label{def:canonical-actual-zeta-phase-curvature}
+When the local phase is the actual zeta phase, we write
+\[
+\Ph=\Phi_\zeta,
+\qquad
+q_\zeta(t):=\Phi_\zeta'(t).
+\]
+The canonical source-curvature object used by the rank-two Gram rows is
+\[
+\boxed{
+q''_{\can}(m):=q_\zeta''(m)=\Phi_\zeta'''(m).
+}
+\]
+Thus \(q''_{\can}\) is the full actual-zeta phase-derivative curvature in the
+same-point Gram normalization.  It is not whitened, projectivized,
+AFE-normalized, or affine-subtracted.
+
+When no ambiguity is possible, later centered rank-two formulas may write
+\(q,q'',q^{(4)}\) for
+\[
+q_\zeta,\qquad q''_{\can},\qquad (q_\zeta)^{(4)}.
+\]
+If a source/core split is being discussed, the complement-source curvature is
+instead denoted
+\[
+q''_{\source,R}(m):=(G^{\new})''(m),
+\]
+and should not be identified with \(q''_{\can}\) unless a separate rederived
+row formula explicitly says so.
+\end{definition}
+
 For two nearby points around a center $T$, the natural local point basis is not stable under coalescence. One instead passes to the point-to-jet matrix
 \begin{equation}\label{eq:point-to-jet}
 P_h:=\frac12
@@ -31120,6 +31154,29 @@ q_0^{\new}(m)=q(m),
 This affine absorption is necessary: otherwise the source would contain value
 and linear jets and would reopen lower source-grade gates.
 
+\begin{remark}[Complement-source curvature]
+\label{rem:complement-source-curvature-notation}
+For the rebuilt source split, define
+\[
+q''_{\source,R}(m):=(G^{\new})''(m).
+\]
+Since
+\[
+r_G(t)=G^{\new}(t)-G^{\new}(m)-G^{\new\,\prime}(m)(t-m),
+\]
+one has
+\[
+r_G''(m)=q''_{\source,R}(m).
+\]
+This is the curvature of the affine-subtracted non-core zero complement.  It is
+not the full canonical actual-zeta curvature
+\[
+q''_{\can}(m)=q_\zeta''(m),
+\]
+which also includes the core, background, and all remaining completed-phase
+contributions in the fixed actual-zeta normalization.
+\end{remark}
+
 \begin{remark}[Admissibility conditions for the rebuilt split]
 \label{rem:rebuilt-source-split-admissibility-conditions}
 The split
@@ -32111,29 +32168,32 @@ For this subsection write, for readability,
 \[
 G:=G^{\new}=q_{\mathrm{aux},R}+T_{\mathrm{far},R},
 \qquad
-A_2:=\frac{G''(m)}{2},
+A_2:=\frac{G''(m)}{2}=\frac12q''_{\source,R}(m),
 \qquad
 A_4:=\frac{G^{(4)}(m)}{24},
 \]
-and
+and use the baseline-local notation
 \[
-q:=q_0^{\new},
+q_b:=q_0^{\new},
 \qquad
-q'':=(q_0^{\new})''.
+q_b^{(2)}:=(q_0^{\new})''.
 \]
+The notation \(q_b^{(2)}\) is deliberately not written as \(q''\), because
+\(q''\) is reserved in the rank-two arithmetic sections for the full canonical
+curvature \(q''_{\can}\).
 The rebuilt obstruction is
 \[
 \nu_{21,7}^{\new,\mathrm{agg}}
 =
 \frac{1}{Q^{14}}
 \left[
-\frac{q}{240}A_2A_4
+\frac{q_b}{240}A_2A_4
 +
 \frac{1}{144}
 \left(
-\frac{q''}{6}
+\frac{q_b^{(2)}}{6}
 -
-\frac{2q^3}{3}
+\frac{2q_b^3}{3}
 \right)
 A_2^2
 \right].
@@ -32149,33 +32209,33 @@ Then
 \[
 2880Q^{14}\nu_{21,7}^{\new,\mathrm{agg}}
 =
-qA_2A_2''
+q_bA_2A_2''
 +
 20
 \left(
-\frac{q''}{6}
+\frac{q_b^{(2)}}{6}
 -
-\frac{2q^3}{3}
+\frac{2q_b^3}{3}
 \right)
 A_2^2.
 \]
 This density is not an exact first-order local derivative in the natural
-midpoint variables \((A_2,A_2',q,q')\).  More precisely,
+midpoint variables \((A_2,A_2',q_b,q_b')\).  More precisely,
 \[
 2880Q^{14}\nu_{21,7}^{\new,\mathrm{agg}}
 =
 \left(
-qA_2A_2'
+q_bA_2A_2'
 -
-\frac12 q'A_2^2
+\frac12 q_b'A_2^2
 \right)'
 -
-q(A_2')^2
+q_b(A_2')^2
 +
 \left(
-\frac{23}{6}q''
+\frac{23}{6}q_b^{(2)}
 -
-\frac{40}{3}q^3
+\frac{40}{3}q_b^3
 \right)
 A_2^2.
 \]
@@ -32198,49 +32258,49 @@ Substitution into the formula for
 \(\nu_{21,7}^{\new,\mathrm{agg}}\) gives the first displayed identity.
 For the integration-by-parts decomposition, compute
 \[
-(qA_2A_2')'
+(q_bA_2A_2')'
 =
-qA_2A_2''
+q_bA_2A_2''
 +
-q(A_2')^2
+q_b(A_2')^2
 +
-q'A_2A_2',
+q_b'A_2A_2',
 \]
 and
 \[
-(q'A_2^2)'=q''A_2^2+2q'A_2A_2'.
+(q_b'A_2^2)'=q_b^{(2)}A_2^2+2q_b'A_2A_2'.
 \]
 Therefore
 \[
-qA_2A_2''
+q_bA_2A_2''
 =
 \left(
-qA_2A_2'
+q_bA_2A_2'
 -
-\frac12q'A_2^2
+\frac12q_b'A_2^2
 \right)'
 -
-q(A_2')^2
+q_b(A_2')^2
 +
-\frac12q''A_2^2.
+\frac12q_b^{(2)}A_2^2.
 \]
 Adding
 \[
 20
 \left(
-\frac{q''}{6}
+\frac{q_b^{(2)}}{6}
 -
-\frac{2q^3}{3}
+\frac{2q_b^3}{3}
 \right)A_2^2
 \]
 gives the claimed residual term
 \[
--q(A_2')^2
+-q_b(A_2')^2
 +
 \left(
-\frac{23}{6}q''
+\frac{23}{6}q_b^{(2)}
 -
-\frac{40}{3}q^3
+\frac{40}{3}q_b^3
 \right)A_2^2.
 \]
 \end{proof}
@@ -32289,13 +32349,13 @@ If \(A_2\ne0\), pointwise vanishing of
 \(\nu_{21,7}^{\new,\mathrm{agg}}\) is equivalent, in the fixed-source-set
 calculus, to
 \[
-qA_2''
+q_bA_2''
 +
 20
 \left(
-\frac{q''}{6}
+\frac{q_b^{(2)}}{6}
 -
-\frac{2q^3}{3}
+\frac{2q_b^3}{3}
 \right)A_2
 =0,
 \]
@@ -32304,9 +32364,9 @@ or
 A_2''
 +
 \left(
-\frac{10}{3}\frac{q''}{q}
+\frac{10}{3}\frac{q_b^{(2)}}{q_b}
 -
-\frac{40}{3}q^2
+\frac{40}{3}q_b^2
 \right)A_2
 =0.
 \]
@@ -32452,8 +32512,9 @@ condition would be implied by an equation of the form
 -
 \frac{10q''}{3q},
 \]
-or by the same equation with \(G=q\).  This is incompatible with the principal
-parts of the actual zero-pair pole fields.
+or by the same equation with \(G=q_\zeta\), the full actual-zeta phase
+derivative.  This is incompatible with the principal parts of the actual
+zero-pair pole fields.
 
 Let
 \[
@@ -32474,13 +32535,13 @@ so
 
 On the other hand, if the full phase derivative has
 \[
-q(t)=\frac{R}{t-p}+O(1),
+q_\zeta(t)=\frac{R}{t-p}+O(1),
 \]
 then
 \[
-q^2(t)=\frac{R^2}{(t-p)^2}+O\!\left(\frac1{t-p}\right),
+q_\zeta^2(t)=\frac{R^2}{(t-p)^2}+O\!\left(\frac1{t-p}\right),
 \qquad
-\frac{q''}{q}
+\frac{q''_{\can}}{q_\zeta}
 =
 \frac{2}{(t-p)^2}+O\!\left(\frac1{t-p}\right).
 \]
@@ -33259,13 +33320,23 @@ G_0=\operatorname{diag}(2g,2h).
 
 \begin{definition}[First and second Gram-anisotropy functionals]
 \label{def:gram-anisotropy-functionals}
-On a centered reduced patch define
+On a centered reduced patch, unless explicitly stated otherwise, \(q_0\),
+\(q''\), and \(q^{(4)}\) mean the full actual-zeta centered jets
 \[
-\Gamma_G
-:=
-q''-6q_0+2q_0^3 .
+q_0=q_\zeta(m),
+\qquad
+q''=q''_{\can}(m)=q_\zeta''(m),
+\qquad
+q^{(4)}=(q_\zeta)^{(4)}(m).
 \]
-Then
+Define
+\[
+\Gamma_G^{\can}
+:=
+q''_{\can}-6q_0+2q_0^3 .
+\]
+For readability we usually suppress the superscript and write
+\(\Gamma_G=\Gamma_G^{\can}\).  Then
 \[
 g-h
 =
@@ -33278,13 +33349,14 @@ Thus the Gram-isotropy wall \(g=h\) is equivalently
 
 We also define the second Gram-anisotropy functional
 \[
-\Gamma_{G,2}
+\Gamma_{G,2}^{\can}
 :=
-(1-q_0^2)q''-\frac16q^{(4)}.
+(1-q_0^2)q''_{\can}-\frac16(q_\zeta)^{(4)}.
 \]
-This is the anisotropy of the second centered Gram variation.  In
-particular, on \(g=h\), the first Gram anisotropy has vanished, but the
-second one need not vanish.
+Again, when the canonical convention is fixed, we write
+\(\Gamma_{G,2}=\Gamma_{G,2}^{\can}\).  This is the anisotropy of the second
+centered Gram variation.  In particular, on \(g=h\), the first Gram anisotropy
+has vanished, but the second one need not vanish.
 \end{definition}
 
 The first admissible visibility coefficient is not \(A_5^{\mathfrak f}\),
@@ -35836,13 +35908,42 @@ same-scale packet geometry alone.
 The sharpest remaining positive target is not the full nonlinear residual but
 the source-curvature estimate
 \[
-\int_{I_\rho}|q''(m)|^2\,dm\ge Q^{-B}|I_\rho|,
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|,
 \]
 or at least
 \[
-\sup_{m\in I_\rho}|q''(m)|\ge Q^{-B}.
+\sup_{m\in I_\rho}|q''_{\can}(m)|\ge Q^{-B}.
 \]
 This is the least nonlinear form of the missing arithmetic input.
+
+\item \emph{Source--anisotropy reintegration.}
+Even if the interval source-curvature estimate
+\[
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|
+\]
+is proved, it does not by itself imply the source-weighted rank-two lower
+bound.  One still needs to exclude concentration of \(q''_{\can}\)-mass near
+\[
+\Gamma_G=0,
+\qquad
+\Gamma_{G,2}=0.
+\]
+Equivalently, the architecture needs the vector estimate
+\[
+\int_{I_\rho}
+|q''_{\can}|^2
+(\Gamma_G^2+\Gamma_{G,2}^2)\,dm
+\ge Q^{-A}|I_\rho|.
+\]
+The identity
+\[
+\Gamma_{G,2}
+=
+2q(q')^2-\frac16\Gamma_G''
+\]
+turns this into a local analytic/ODE rigidity problem coupled to the arithmetic
+source-observability problem.  This bridge is currently a missing theorem, not
+a consequence of source observability alone.
 
 \item \emph{Global trace / projective index / Connes-style imbalance.}
 A global trace, projective index, or spectral accounting theorem is not ruled
@@ -36823,26 +36924,31 @@ not additional local row algebra, not order eleven by itself, and not clean
 projectivization alone.  The sharp remaining fork is:
 
 \begin{enumerate}
-\item Prove an actual-zeta source-jet nonflatness theorem, for example
+\item Prove actual-zeta source-curvature observability,
 \[
-\sup_{m\in I_\rho}|q''(m)|\ge Q^{-B};
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|,
+\]
+and then prove source--anisotropy reintegration,
+\[
+\int_{I_\rho}
+|q''_{\can}|^2(\Gamma_G^2+\Gamma_{G,2}^2)\,dm
+\ge Q^{-A}|I_\rho|;
 \]
 
-\item or construct/verify an interval-local fixed-prime/AFE source-collapse
-model satisfying
+\item or construct/verify an actual-zeta source-collapse model satisfying
 \[
 0<
 \sup_{m\in I_\rho}
-|yq''|
+|yq''_{\can}|
 \max\{|\Gamma_G|,|\Gamma_{G,2}|\}
 <Q^{-A};
 \]
 
-\item or find a genuinely source-robust row/invariant not divisible by
-\(H=yq''\);
+\item or find a genuinely source-robust packet-visible row/invariant not
+divisible by \(H=yq''_{\can}\);
 
-\item or prove a global projective/holonomy/index theorem that gives a
-contradiction without a norm lower bound.
+\item or prove a global projective/holonomy/trace/index theorem that gives a
+contradiction without a local norm lower bound.
 \end{enumerate}
 
 Absent one of these, the present rank-two norm/projective architecture remains
@@ -36965,23 +37071,33 @@ already gives a necessary sign test for conditional definiteness.
 
 The preceding source-collapse countermodels show that the current rank-two
 norm route cannot close from local row algebra, same-scale packet geometry, or
-finite Hadamard/quartet symmetry alone.  The exact missing input is now an
-arithmetic source-jet theorem for actual zeta data.  The minimal useful form is
+finite Hadamard/quartet symmetry alone.  The first missing input is an
+arithmetic source-curvature theorem for actual zeta data.  In the notation
+fixed below, the minimal useful pointwise form is
 \[
 \boxed{
-\sup_{m\in I_\rho}|q''(m)|\ge Q^{-B}.
+\sup_{m\in I_\rho}|q''_{\can}(m)|\ge Q^{-B}.
 }
 \]
 A stronger and more stable form is the interval energy estimate
 \[
 \boxed{
-\int_{I_\rho}|q''(m)|^2\,dm
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm
 \ge
 Q^{-B}|I_\rho|.
 }
 \]
-This is the positive theorem that would block the interval-local
-source-collapse branch.
+This estimate would block the pure source-collapse branch, but it is now only
+the first gate.  It does not by itself recover the source-weighted rank-two
+lower bound, because the \(q''_{\can}\)-mass could still concentrate near the
+anisotropy base locus
+\[
+\Gamma_G\approx0,
+\qquad
+\Gamma_{G,2}\approx0.
+\]
+The second missing input is therefore a source--anisotropy reintegration
+theorem, formulated below.
 
 This subsection is the positive-theorem counterpart of
 Remark~\ref{rem:status-ledger-candidate-routes}: all currently explored local,
@@ -36990,43 +37106,67 @@ either been classified as diagnostic or shown vulnerable to source collapse.
 
 \begin{definition}[Canonical source-curvature representation problem]
 \label{def:canonical-source-curvature-representation-problem}
-The first arithmetic task is to put the source curvature \(q''\) into a
-canonical actual-zeta form on both sides of the explicit formula.  One needs a
-zero-side representation
+In this subsection and in every source-observability statement below, the
+canonical source-curvature object is
 \[
-q''(m)
-=
-B_2(m)+\sum_\rho K_2(m;\rho),
+\boxed{
+q''_{\can}(m)=q_\zeta''(m)=\Phi_\zeta'''(m).
+}
 \]
-with all source/core and background conventions fixed, and an AFE or
-prime-side representation of the form
+This is the full actual-zeta phase-derivative curvature in the same Gram
+normalization used by the local rank-two rows.  It is not the affine-subtracted
+complement curvature.  The latter is denoted separately by
 \[
-q''(m)
+q''_{\source,R}(m):=(G^{\new})''(m),
+\qquad
+G^{\new}=q_{\aux,R}+T_{\far,R}.
+\]
+The affine-subtracted complement curvature is a component in a chosen
+source/core split; it is not the canonical arithmetic object whose nonflatness
+is required.
+
+The arithmetic representation problem is to write \(q''_{\can}\) on both sides
+of the explicit formula.  On the zero side one needs a representation
+\[
+q''_{\can}(m)
+=
+B_2(m)+\sum_{\rho}^{\rm reg}K_2(m;\rho),
+\]
+with all background, tail, source/core, and regularization conventions fixed.
+On the prime/AFE side one needs a representation of the form
+\[
+q''_{\can}(m)
 =
 B_2(m)
 +
+P_2(m)
++
+D_2(m)
++
+E_2(m),
+\]
+where
+\[
+P_2(m)
+=
 \Re\sum_{n\le X}
 b_n(\log n)^2 n^{-1/2-im}W(n/T)
-+
-\text{\rm dual/gamma/error terms}.
 \]
-The coefficients \(b_n\), the smoothing, the dual term, the gamma/background
-contribution, and the error terms must be specified in the same normalization
-used by the rank-two local rows.  Until this representation is fixed, the
-phrase ``actual-zeta source-jet nonflatness'' is not a precise theorem.
-In an actual-zeta normalization one expects \(b_n\) to be fixed by the zeta
-coefficients, for example by \(\Lambda(n)\)-type log-derivative weights after
-the chosen smoothing and completion conventions are fixed.  The point of this
-definition is to forbid replacing the arithmetic object by an arbitrary
-Dirichlet polynomial with freely tunable coefficients.
+has fixed actual-zeta coefficients, \(D_2\) denotes the dual or
+functional-equation contribution, and \(E_2\) denotes a controlled
+differentiated error term.  The coefficients \(b_n\), smoothing, dual term,
+gamma/background contribution, and error scale must be specified in the same
+normalization used by the rank-two local rows.  The point of this convention
+is to forbid replacing \(q''_{\can}\) by an arbitrary Dirichlet polynomial or
+by the affine-subtracted complement \(q''_{\source,R}\).
 \end{definition}
 
-\begin{hypothesis}[Off-line-packet source-curvature observability]
+\begin{hypothesis}[Gate 1: off-line-packet source-curvature observability]
 \label{hyp:offline-packet-source-curvature-observability}
 Let \(I_\rho\) be an admissible reduced good-patch interval attached to a
 hypothetical off-line packet \(\rho\).  Actual zeta data satisfy
 \[
-\int_{I_\rho}|q''(m)|^2\,dm
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm
 \ge
 Q^{-B}|I_\rho|
 \]
@@ -37034,9 +37174,79 @@ for some fixed \(B\), outside the already named reduced-base and correction
 incidence loci.
 Equivalently, in a weaker pointwise form,
 \[
-\sup_{m\in I_\rho}|q''(m)|\ge Q^{-B}.
+\sup_{m\in I_\rho}|q''_{\can}(m)|\ge Q^{-B}.
+\]
+This is a necessary source-level nonflatness input for the current rank-two
+norm route.  It is not sufficient by itself to recover the desired lower bound
+for
+\[
+|H|\max\{|\Gamma_G|,|\Gamma_{G,2}|\}.
 \]
 \end{hypothesis}
+
+\begin{hypothesis}[Gate 2: source--anisotropy vector observability]
+\label{hyp:source-anisotropy-vector-observability}
+On the same admissible interval \(I_\rho\), actual zeta data satisfy a
+source-weighted anisotropy lower bound of the form
+\[
+\int_{I_\rho}
+|q''_{\can}(m)|^2
+\left(
+\Gamma_G(m)^2+\Gamma_{G,2}(m)^2
+\right)\,dm
+\ge
+Q^{-A}|I_\rho|.
+\]
+A pointwise substitute would be
+\[
+\sup_{m\in I_\rho}
+|H(m)|
+\max\{|\Gamma_G(m)|,|\Gamma_{G,2}(m)|\}
+\ge Q^{-A}.
+\]
+This is a separate gate from
+Hypothesis~\ref{hyp:offline-packet-source-curvature-observability}.  Source
+curvature may be observable in \(L^2\) while the anisotropy factors are small
+on most of the \(q''_{\can}\)-mass.  The current proof architecture requires
+both gates, or a single stronger theorem implying both.
+\end{hypothesis}
+
+\begin{remark}[ODE form of the reintegration problem]
+\label{rem:ode-form-source-anisotropy-reintegration}
+Let
+\[
+u=q''_{\can},
+\qquad
+\Gamma_G=u-6q+2q^3,
+\qquad
+\Gamma_{G,2}=(1-q^2)u-\frac16q^{(4)}.
+\]
+Differentiating \(\Gamma_G\) gives
+\[
+\Gamma_G''
+=
+u''-6u+12q(q')^2+6q^2u.
+\]
+Since \(u''=q^{(4)}\), one obtains the identity
+\[
+\boxed{
+\Gamma_{G,2}
+=
+2q(q')^2-\frac16\Gamma_G''.
+}
+\]
+Thus the reintegration gate is not merely a prime-side arithmetic problem.  It
+also has a local analytic/ODE formulation: source mass for \(u=q''_{\can}\)
+must be prevented from concentrating on a set where both
+\[
+\Gamma_G\approx0
+\qquad\text{and}\qquad
+2q(q')^2-\frac16\Gamma_G''\approx0.
+\]
+A proof of Hypothesis~\ref{hyp:source-anisotropy-vector-observability} must
+control this base-locus regime, including possible cancellation between
+\(\Gamma_G''\) and \(2q(q')^2\).
+\end{remark}
 
 \begin{remark}[Off-line-packet conditional form]
 \label{rem:offline-packet-conditional-source-observability}
@@ -37044,27 +37254,32 @@ A more targeted version of
 Hypothesis~\ref{hyp:offline-packet-source-curvature-observability} uses the
 hypothetical off-line packet itself.  Write
 \[
-q''=q''_P+q''_R,
+q''_{\can}=q''_P+q''_{\mathrm{rest}},
 \]
 where \(q''_P\) is the contribution of the distinguished off-line packet and
-\(q''_R\) is the contribution of the remaining core, tail, background, and
-error terms in the fixed source/core convention.  The interval observability
-claim may be sharpened to
+\(q''_{\mathrm{rest}}\) is the contribution of all remaining actual-zeta data:
+other core packets, auxiliary/tail terms, background, dual terms, and
+controlled errors in the fixed convention.  This \(q''_{\mathrm{rest}}\)
+should not be confused with the affine-subtracted complement curvature
+\(q''_{\source,R}=(G^{\new})''\) unless the source/core split has explicitly
+identified the two.
+
+The interval observability claim may be sharpened to
 \[
-\int_{I_\rho}|q''_P(m)+q''_R(m)|^2\,dm
+\int_{I_\rho}|q''_P(m)+q''_{\mathrm{rest}}(m)|^2\,dm
 \ge
 Q^{-B}|I_\rho|.
 \]
 Equivalently, the rest term cannot satisfy
 \[
-q''_R(m)=-q''_P(m)+O(Q^{-B})
+q''_{\mathrm{rest}}(m)=-q''_P(m)+O(Q^{-B})
 \]
 throughout the packet interval.  This formulation uses the off-line-packet
 hypothesis directly and is stronger than a generic short-interval lower bound
-for \(q''\).  The same-scale source-flattening construction shows that this
-cannot be proved from arbitrary positive same-scale packet geometry alone; it
-must use actual-zeta arithmetic or a restriction on how actual zero packets
-may be arranged around \(\rho\).
+for \(q''_{\can}\).  The same-scale source-flattening construction shows that
+this cannot be proved from arbitrary positive same-scale packet geometry
+alone; it must use actual-zeta arithmetic or a restriction on how actual zero
+packets may be arranged around \(\rho\).
 \end{remark}
 
 \begin{remark}[Why this theorem is genuinely arithmetic]
@@ -37123,27 +37338,30 @@ zero-side form of the source-curvature observability problem.
 \label{rem:prime-side-source-curvature-observability-formulation}
 After fixing the representation in
 Definition~\ref{def:canonical-source-curvature-representation-problem}, the
-source-curvature problem becomes a short-interval non-approximation problem.
-Writing
+source-curvature problem becomes a short-interval fixed-coefficient
+non-approximation problem.  Writing
 \[
-q''(m)=B_2(m)+P_2(m),
+q''_{\can}(m)=B_2(m)+P_2(m)+D_2(m)+E_2(m),
 \]
-where \(P_2\) is the oscillatory prime/AFE part, source collapse means
+source collapse means
 \[
-P_2(m)\approx -B_2(m)
-\quad\text{throughout }I_\rho.
+P_2(m)\approx -B_2(m)-D_2(m)
+\quad\text{throughout }I_\rho,
 \]
-The desired arithmetic theorem is therefore an observability estimate of the
-form
+up to the controlled error \(E_2\).  The desired arithmetic theorem is
+therefore an observability estimate of the form
 \[
-\int_{I_\rho}|B_2(m)+P_2(m)|^2\,dm
-\ge Q^{-B}|I_\rho|.
+\int_{I_\rho}|B_2(m)+P_2(m)+D_2(m)|^2\,dm
+\ge Q^{-B}|I_\rho|,
 \]
-A proof would likely have to use fixed zeta coefficients, not merely generic
-Dirichlet-polynomial flexibility.  Candidate tools include localized large
-sieve estimates, Montgomery--Vaughan mean-value estimates, explicit-formula
-energy identities, or a zero-side theorem excluding the same-scale quadrature
-configuration for actual zeta zeros.
+with \(E_2\) absorbed into the final error budget.
+
+This is not a generic Dirichlet-polynomial problem.  The coefficients in
+\(P_2\) are fixed by the actual zeta/AFE normalization.  Standard localized
+large-sieve, Montgomery--Vaughan, explicit-formula energy, or uncertainty
+principles are useful diagnostics, but no theorem currently proves this
+fixed-coefficient lower bound.  If interval estimates remain out of reach, the
+equivalent finite-jet formulation below is the sharper arithmetic target.
 \end{remark}
 
 \begin{remark}[Finite-jet version of the arithmetic problem]
@@ -37155,7 +37373,9 @@ I_\rho=[m_0-c/Q,m_0+c/Q],
 \]
 source collapse requires simultaneous smallness of
 \[
-(q'')^{(r)}(m_0),\qquad 0\le r\le R,
+\partial_m^r q''_{\can}(m_0),
+\qquad
+0\le r\le R,
 \]
 where the scale audit gives
 \[
@@ -37164,24 +37384,30 @@ R\asymp \frac{\log Q}{\log\log Q}
 or more conservatively \(R=O(\log Q)\).  In an AFE model this becomes a finite
 system
 \[
-\sum_n b_n(-i\log n)^r e^{-im_0\log n}
-\approx
--B_2^{(r)}(m_0),
+\partial_m^r\bigl(B_2+D_2+P_2\bigr)(m_0)
+\approx0,
 \qquad
-0\le r\le R.
+0\le r\le R,
 \]
-The positive theorem would be a prime-log derivative-jet nonrecurrence
-statement:
+or equivalently
+\[
+P_2^{(r)}(m_0)
+\approx
+-\left(B_2+D_2\right)^{(r)}(m_0).
+\]
+The positive theorem would be a fixed-coefficient prime-log derivative-jet
+nonrecurrence statement:
 \[
 \max_{0\le r\le R}
 \left|
-(q'')^{(r)}(m_0)
+\partial_m^r q''_{\can}(m_0)
 \right|
 \ge Q^{-B}.
 \]
 The recurrence heuristics developed above suggest that this is a difficult
-arithmetic theorem and may be false in fixed-prime or AFE surrogates.  This is
-therefore the sharp next branch of the attack.
+arithmetic theorem and may be false in fixed-prime or AFE surrogates.  It is
+therefore not currently proved by large-sieve or generic
+Dirichlet-polynomial approximation estimates.
 \end{remark}
 
 \begin{remark}[Terminal status of the current architecture]
@@ -37238,12 +37464,22 @@ index theorem is currently available.
 \item The same-scale source-flattening construction shows that finite
 same-scale positive packet geometry does not itself prevent source collapse.
 Consequently, an actual proof must use information not already present in the
-local Hadamard/quartet packet geometry.  In particular, the next positive
-target is not another local row identity, but an actual-zeta source-curvature
-observability theorem, preferably in the interval-energy form
+local Hadamard/quartet packet geometry.  The next positive target is not another
+local row identity, but the two-gate chain
 \[
-\int_{I_\rho}|q''(m)|^2\,dm\ge Q^{-B}|I_\rho|.
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm
+\ge Q^{-B}|I_\rho|
 \]
+followed by
+\[
+\int_{I_\rho}
+|q''_{\can}(m)|^2
+(\Gamma_G(m)^2+\Gamma_{G,2}(m)^2)\,dm
+\ge Q^{-A}|I_\rho|.
+\]
+The first estimate is source-curvature observability.  The second is
+source--anisotropy reintegration.  The second does not follow formally from
+the first.
 \end{enumerate}
 
 Thus the current framework should be treated as a precise local obstruction
@@ -37251,30 +37487,34 @@ and diagnostic architecture.  To turn it into a proof of \(\RH\), one still
 needs at least one genuinely new input:
 \[
 \boxed{
-\text{actual-zeta source-jet nonflatness,}
+\text{Gate 1: actual-zeta source-curvature observability}
 }
 \]
-in the precise sense of
-Hypothesis~\ref{hyp:offline-packet-source-curvature-observability}; or else
+together with
 \[
 \boxed{
-\text{a source-robust row/invariant not divisible by }H=yq'',
+\text{Gate 2: source--anisotropy vector observability,}
+}
+\]
+or else a single stronger theorem implying both.  Alternatively, one needs
+\[
+\boxed{
+\text{a source-robust row/invariant not divisible by }H=yq''_{\can},
 }
 \]
 or
 \[
 \boxed{
-\text{a global projective/affine transport index theorem with correction control.}
+\text{a global projective/affine/trace theorem with correction control.}
 }
 \]
-Absent one of these inputs, the present architecture is non-closing.  The
-least nonlinear and most concrete next attack is the source-curvature
-observability problem of
-Subsection~\ref{subsec:arithmetic-source-curvature-observability-next-attack}.
-The most economical next input is the off-line-packet source-curvature
-observability theorem of
-Hypothesis~\ref{hyp:offline-packet-source-curvature-observability}, preferably
-in the interval-energy form.
+Absent one of these inputs, the present architecture is conditionally
+non-closing.  The least nonlinear arithmetic attack remains
+Hypothesis~\ref{hyp:offline-packet-source-curvature-observability}; the most
+important bridge is
+Hypothesis~\ref{hyp:source-anisotropy-vector-observability}, with the ODE
+identity recorded in
+Remark~\ref{rem:ode-form-source-anisotropy-reintegration}.
 \end{remark}
 
 \appendix
