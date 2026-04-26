@@ -447,7 +447,7 @@ def compute_params_hash(zeros: Sequence[float],
         "random_count": int(random_count),
         "uniform_count": int(uniform_count),
         "seed": int(seed),
-        "schema_version": 1,
+        "schema_version": 2,
     }
     blob = json.dumps(record, sort_keys=True, separators=(",", ":")).encode()
     return hashlib.sha256(blob).hexdigest()
@@ -470,7 +470,7 @@ _PROXY_FIELDNAMES = [
     "center_type", "m0", "Q", "c_I", "kappa", "W_factor",
     "nquad", "R_jet", "local_zero_count",
     "E_I", "S_I", "B_eff", "J_max", "J_rms",
-    "tail_drift_rel", "quad_drift_rel", "status",
+    "tail_drift_rel", "quad_drift_rel", "tail_edge", "status",
 ]
 
 
@@ -543,6 +543,7 @@ def _load_existing_rows(path: str) -> List[Dict]:
     float_fields = {"m0", "Q", "c_I", "kappa", "W_factor",
                     "E_I", "S_I", "B_eff", "J_max", "J_rms",
                     "tail_drift_rel", "quad_drift_rel"}
+    bool_fields = {"tail_edge"}
     with open(path, "r", encoding="utf-8", newline="") as f:
         reader = csv.DictReader(f)
         for row in reader:
@@ -558,8 +559,13 @@ def _load_existing_rows(path: str) -> List[Dict]:
                         parsed[k] = float(v)
                     except ValueError:
                         parsed[k] = float("nan")
+                elif k in bool_fields:
+                    parsed[k] = (v == "True")
                 else:
                     parsed[k] = v
+            # Default tail_edge to False for old CSVs that pre-date schema_version 2.
+            for k in bool_fields:
+                parsed.setdefault(k, False)
             out.append(parsed)
     return out
 
@@ -638,6 +644,7 @@ def _process_center(task: Tuple) -> List[Dict]:
                             "J_rms": J_rms,
                             "tail_drift_rel": tail_drift,
                             "quad_drift_rel": quad_drift,
+                            "tail_edge": tail_edge,
                             "status": status,
                         })
     return out

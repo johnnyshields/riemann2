@@ -369,6 +369,7 @@ class ScanRow:
     tail_drift_rel: float
     quad_drift_rel: float
     status: str
+    tail_edge: bool = False
 
 
 def safe_B_eff(E_I: float, Q: float) -> float:
@@ -383,16 +384,21 @@ def rel_diff(a: float, b: float) -> float:
 
 
 def classify_row(row: ScanRow, tail_tol: float, quad_tol: float) -> str:
-    if row.tail_drift_rel > tail_tol:
+    """Unified status. Reads `row.tail_edge` directly so the boolean is
+    persisted with the row and post-hoc re-classification stays correct.
+    `candidate_proxy_flat` also requires small J_max (interval flatness alone
+    is not enough; we need simultaneous interval and finite-jet flatness)."""
+    if row.tail_edge:
+        return "reject_tail_edge"
+    if not math.isfinite(row.tail_drift_rel) or row.tail_drift_rel > tail_tol:
         return "reject_tail_unstable"
-    if row.quad_drift_rel > quad_tol:
+    if not math.isfinite(row.quad_drift_rel) or row.quad_drift_rel > quad_tol:
         return "reject_quad_unstable"
-    # Proxy thresholds only.
-    if row.B_eff > 20 and row.J_max < 1e-8:
+    if math.isfinite(row.B_eff) and math.isfinite(row.J_max) and row.B_eff > 20 and row.J_max < 1e-8:
         return "serious_proxy_warning"
-    if row.B_eff > 10:
+    if math.isfinite(row.B_eff) and math.isfinite(row.J_max) and row.B_eff > 10 and row.J_max < 1e-6:
         return "candidate_proxy_flat"
-    if row.B_eff > 5:
+    if math.isfinite(row.B_eff) and row.B_eff > 5:
         return "watch"
     return "healthy"
 
@@ -416,6 +422,14 @@ def _scan_one(task: tuple) -> ScanRow:
         zeros, m0, c_I, kappa, 2.0 * W_factor, Q_mode, nquad
     )
     tail_drift = rel_diff(E, E_2W)
+
+    # Tail-edge guard: if the doubled cutoff 2*W extends beyond the zero list,
+    # tail_drift can look small for the wrong reason (both windows truncated
+    # the same way). Flag and let classify_row reject those rows.
+    tail_edge = False
+    if Q > 0 and len(zeros) >= 2:
+        W2 = 2.0 * W_factor / Q
+        tail_edge = bool((m0 - W2 < zeros[0]) or (m0 + W2 > zeros[-1]))
 
     try:
         J_max, J_rms = chebyshev_jet_proxy(
@@ -443,6 +457,7 @@ def _scan_one(task: tuple) -> ScanRow:
         tail_drift_rel=tail_drift,
         quad_drift_rel=quad_drift,
         status="",
+        tail_edge=tail_edge,
     )
     row.status = classify_row(row, tail_tol, quad_tol)
     return row
@@ -602,7 +617,7 @@ def compute_params_hash(
         "seed": int(seed),
         "min_m0": None if min_m0 is None else float(min_m0),
         "min_Q": None if min_Q is None else float(min_Q),
-        "schema_version": 1,
+        "schema_version": 2,
     }
     blob = json.dumps(record, sort_keys=True, separators=(",", ":")).encode()
     return hashlib.sha256(blob).hexdigest()
@@ -662,6 +677,7 @@ def _load_rows_for_summary(csv_path: str) -> list[ScanRow]:
                     tail_drift_rel=float(d["tail_drift_rel"]),
                     quad_drift_rel=float(d["quad_drift_rel"]),
                     status=d.get("status", ""),
+                    tail_edge=(d.get("tail_edge", "False") == "True"),
                 ))
             except (KeyError, ValueError):
                 continue

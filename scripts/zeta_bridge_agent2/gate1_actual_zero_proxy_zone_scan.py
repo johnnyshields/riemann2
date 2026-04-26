@@ -542,11 +542,22 @@ def scan_zone(zone: float, args) -> Tuple[pd.DataFrame, Dict]:
                 )["E_I"])
             quad_drift_rel = max(abs(e - E_base) for e in quad_E) / max(abs(E_base), 1e-300)
 
+            # Tail-edge guard: the largest stability window 2 * max(stability_W) / Q
+            # might extend beyond the available zero range, in which case the
+            # tail_drift_rel comparison can look stable for the wrong reason.
+            W_max = max(list(args.stability_W) + [args.W_factor])
+            W2_abs = 2.0 * W_max / Q_check
+            tail_edge = bool(
+                len(zeros) >= 2 and
+                ((center - W2_abs < float(zeros[0])) or (center + W2_abs > float(zeros[-1])))
+            )
+
             row = {
                 **base,
                 **metrics,
                 **jets,
                 "tail_drift_rel": tail_drift_rel,
+                "tail_edge": tail_edge,
                 "quad_drift_rel": quad_drift_rel,
             }
             rows.append(row)
@@ -570,19 +581,26 @@ def summarize_results(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def classify_row(row, tail_tol: float = 2e-2, quad_tol: float = 1e-5):
-    """Unified six-tier status (matches agent1)."""
+    """Unified status (matches agent1/agent3). Adds tail-edge guard so near-edge
+    centers are not accepted as 'healthy' just because the truncated 2*W window
+    happens to look stable for the wrong reason. `candidate_proxy_flat` also
+    requires small J_max (interval flatness alone is not enough; we need
+    simultaneous interval and finite-jet flatness)."""
     tail_drift = float(row.get("tail_drift_rel", float("nan")))
     quad_drift = float(row.get("quad_drift_rel", float("nan")))
     B_eff = float(row.get("B_eff", float("nan")))
     J_max = float(row.get("J_max", float("nan")))
+    tail_edge = bool(row.get("tail_edge", False))
 
+    if tail_edge:
+        return "reject_tail_edge"
     if not math.isfinite(tail_drift) or tail_drift > tail_tol:
         return "reject_tail_unstable"
     if not math.isfinite(quad_drift) or quad_drift > quad_tol:
         return "reject_quad_unstable"
     if math.isfinite(B_eff) and math.isfinite(J_max) and B_eff > 20 and J_max < 1e-8:
         return "serious_proxy_warning"
-    if math.isfinite(B_eff) and B_eff > 10:
+    if math.isfinite(B_eff) and math.isfinite(J_max) and B_eff > 10 and J_max < 1e-6:
         return "candidate_proxy_flat"
     if math.isfinite(B_eff) and B_eff > 5:
         return "watch"

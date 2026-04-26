@@ -155,15 +155,23 @@ class SurrogateModel:
         return val / self.norm
 
     def source_jets(self, t: float, R: int) -> np.ndarray:
+        # Low-height guard: Q = log(t/(2*pi)) must exceed 1 for the jet
+        # normalization Delta = 1/Q to be meaningful (matches agent1/agent3 --min-Q).
+        if t <= 2.0 * math.pi * math.e:
+            return np.full(R + 1, np.nan)
         Q = math.log(t / (2.0 * math.pi))
         Delta = 1.0 / Q
         return np.array([(Delta ** r) * self.derivative_value(t, r) for r in range(R + 1)])
 
     def source_objective(self, t: float, R: int) -> float:
         jets = self.source_jets(t, R)
+        if not np.all(np.isfinite(jets)):
+            return float("inf")
         return float(np.sum(jets ** 2))
 
     def interval_energy(self, t0: float, cI: float = 0.5, grid: int = 401) -> Tuple[float, float, float]:
+        if t0 <= 2.0 * math.pi * math.e:
+            return float("nan"), float("nan"), float("nan")
         Q = math.log(t0 / (2.0 * math.pi))
         half = cI / Q
         xs = np.linspace(t0 - half, t0 + half, grid)
