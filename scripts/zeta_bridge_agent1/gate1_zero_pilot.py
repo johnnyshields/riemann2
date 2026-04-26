@@ -463,9 +463,6 @@ def _scan_one(task: tuple) -> ScanRow:
     return row
 
 
-_ROW_KEY_FIELDS = ("center_type", "m0", "c_I", "kappa", "W_factor", "nquad", "R_jet")
-
-
 def _row_key(center_type: str, m0: float, c_I: float, kappa: float,
              W_factor: float, nquad: int, R_jet: int) -> tuple:
     return (center_type, round(float(m0), 12), float(c_I), float(kappa),
@@ -699,11 +696,12 @@ _NUMERIC_SUMMARY_FIELDS = (
 )
 
 _THRESHOLD_CHECKS = (
-    ("B_eff > 5",            lambda r: math.isfinite(r.B_eff) and r.B_eff > 5),
-    ("B_eff > 10",           lambda r: math.isfinite(r.B_eff) and r.B_eff > 10),
-    ("B_eff > 20",           lambda r: math.isfinite(r.B_eff) and r.B_eff > 20),
+    ("B_eff > 5",             lambda r: math.isfinite(r.B_eff) and r.B_eff > 5),
+    ("B_eff > 10",            lambda r: math.isfinite(r.B_eff) and r.B_eff > 10),
+    ("B_eff > 20",            lambda r: math.isfinite(r.B_eff) and r.B_eff > 20),
     ("tail_drift_rel > 0.02", lambda r: math.isfinite(r.tail_drift_rel) and r.tail_drift_rel > 0.02),
     ("quad_drift_rel > 1e-5", lambda r: math.isfinite(r.quad_drift_rel) and r.quad_drift_rel > 1e-5),
+    ("tail_edge",             lambda r: bool(r.tail_edge)),
 )
 
 
@@ -754,7 +752,7 @@ def print_summary(rows: list[ScanRow], top_n: int) -> None:
     print(f"\nTop {top_n} by B_eff:")
     header = [
         "rank", "status", "center_type", "m0", "Q", "c_I", "kappa", "W_factor",
-        "count", "E_I", "S_I", "B_eff", "J_max", "tail_drift", "quad_drift",
+        "count", "E_I", "S_I", "B_eff", "J_max", "tail_drift", "quad_drift", "tail_edge",
     ]
     print(",".join(header))
     for i, r in enumerate(rows_sorted[:top_n], start=1):
@@ -774,6 +772,7 @@ def print_summary(rows: list[ScanRow], top_n: int) -> None:
             f"{r.J_max:.6e}",
             f"{r.tail_drift_rel:.3e}",
             f"{r.quad_drift_rel:.3e}",
+            str(bool(r.tail_edge)),
         ]))
 
 

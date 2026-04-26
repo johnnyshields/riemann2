@@ -898,6 +898,7 @@ def main() -> None:
                 "J_max": r.get("J_max"),
                 "tail_drift_rel": r.get("tail_drift_rel"),
                 "quad_drift_rel": r.get("quad_drift_rel"),
+                "tail_edge": r.get("tail_edge"),
                 "local_zero_count": r.get("local_zero_count"),
             }, flush=True)
 

@@ -249,12 +249,16 @@ def q2_zero_proxy(
     xs: np.ndarray,
     zeros: np.ndarray,
     center: float,
-    W: float,
+    W_factor: float,
     kappa: float,
 ) -> Tuple[np.ndarray, int]:
+    """Sum the regularized K2 kernel over zeros within an absolute window
+    W_abs = W_factor / Q, matching the factor semantics used by agent1/agent3
+    and by the `tail_edge` guard in scan_zone."""
     Q = math.log(center / (2.0 * math.pi))
     eps = kappa / Q
-    use = zeros[np.abs(zeros - center) <= W]
+    W_abs = W_factor / Q
+    use = zeros[np.abs(zeros - center) <= W_abs]
 
     vals = np.zeros_like(xs, dtype=float)
     for g in use:
@@ -275,7 +279,7 @@ def interval_metrics(
     half = c_I / Q
     xs = np.linspace(center - half, center + half, nquad)
 
-    vals, n_used = q2_zero_proxy(xs, zeros, center, W=W_factor, kappa=kappa)
+    vals, n_used = q2_zero_proxy(xs, zeros, center, W_factor=W_factor, kappa=kappa)
     E = float(_trapz(vals ** 2, xs) / (2.0 * half))
     S = float(np.max(np.abs(vals)))
     B_eff = -math.log(max(E, 1e-300)) / math.log(Q)
@@ -308,7 +312,7 @@ def finite_jet_proxy(
     h = h_factor / Q
 
     xs = center + np.linspace(-h, h, n_fit)
-    vals, _ = q2_zero_proxy(xs, zeros, center, W=W_factor, kappa=kappa)
+    vals, _ = q2_zero_proxy(xs, zeros, center, W_factor=W_factor, kappa=kappa)
 
     deg = min(max(R_jet + 2, 6), n_fit - 1)
     # Fit in local variable y = x - center for numerical conditioning.
@@ -792,7 +796,8 @@ def _print_zone_best(zone: float, df_zone: pd.DataFrame, idx: int, total: int):
     if not df_zone.empty:
         best = df_zone.sort_values("E_I").head(5)
         cols = ["center_type", "m0", "c_I", "E_I", "S_I", "B_eff", "J_max",
-                "tail_drift_rel", "quad_drift_rel"]
+                "tail_drift_rel", "quad_drift_rel", "tail_edge"]
+        cols = [c for c in cols if c in best.columns]
         print(best[cols].to_string(index=False), flush=True)
 
 
@@ -922,7 +927,8 @@ def main():
     log("Best overall rows:")
     if not full_df.empty:
         cols = ["zone", "center_type", "m0", "c_I", "E_I", "S_I", "B_eff", "J_max",
-                "tail_drift_rel", "quad_drift_rel", "status"]
+                "tail_drift_rel", "quad_drift_rel", "tail_edge", "status"]
+        cols = [c for c in cols if c in full_df.columns]
         print(full_df.sort_values("E_I").head(20)[cols].to_string(index=False), flush=True)
 
     if metas:
