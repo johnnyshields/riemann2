@@ -418,10 +418,11 @@ def build_centers_for_zone(
 def load_zones(args) -> List[float]:
     zones = []
 
+    # Explicit --zones overrides --candidate-csv. The CSV is only consulted
+    # when no zones were given on the command line.
     if args.zones:
         zones.extend(args.zones)
-
-    if args.candidate_csv:
+    elif args.candidate_csv:
         df = pd.read_csv(args.candidate_csv)
 
         # Try common columns.
