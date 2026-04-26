@@ -7,16 +7,20 @@ Numerical AFE / canonical-zeta cross-check for the zero-side proxy.
 
 For each (m_0, c_I) target on the canonical_eta_targets list, evaluate
 
-    q''_zeta_eta(t) := d^2/dt^2 log |zeta(1/2 + eta + it)|     (canonical sensor)
-    q''_proxy(t)    := B_2(t) + sum_{|gamma-t|<=W_abs} K_2(t; gamma, eps)
-                                                              (zero-side sensor)
+    q''_can_eta(t) := d^3/dt^3 Im log xi(1/2 + eta + it)       (canonical sensor)
+    q''_proxy(t)   := B_2(t) + sum_{|gamma-t|<=W_abs} K_2(t; gamma, eps)
+                                                               (zero-side sensor)
 
 on a shared tight grid in [m_0 - c_I/Q, m_0 + c_I/Q], where eta = kappa/Q.
 
-The canonical sensor calls mpmath.zeta (which uses Riemann-Siegel internally
-at high t -- this is the AFE-quality evaluation). Its second derivative is
-taken by 5-point central differences. The proxy reuses the cached Hardy-Z
-zero ordinates from the matching canonical-eta scan.
+Note the apparently-second-derivative q'' notation actually denotes the
+THIRD t-derivative of Im log xi: K_2 is the kernel d^3/dt^3 arctan((t-g)/eta)
+and B_2 = theta'''(t) -- both consistent with q''_can = d^3/dt^3 Im log xi.
+
+The canonical sensor calls mpmath.zeta and mpmath.loggamma (both use AFE /
+Riemann-Siegel internally at high t). The third derivative is taken by a
+7-point central stencil (4th-order accurate). The proxy reuses the cached
+Hardy-Z zero ordinates from the matching canonical-eta scan.
 
 Outputs per (m_0, c_I):
   - E_I_zeta, B_eff_zeta            (canonical sensor)
@@ -80,50 +84,77 @@ from gate1_actual_zero_proxy_zone_scan import (
 
 
 # -----------------------------
-# Canonical-zeta sensor
+# Canonical-zeta sensor: q''_can = d^3/dt^3 Im log xi(1/2 + eta + it)
 # -----------------------------
 
-def _log_abs_zeta_at(t: float, eta: float, dps: int) -> float:
+def _phi_xi_at(t: float, eta: float, dps: int) -> float:
+    """Im log xi(1/2 + eta + it), built from log gamma + log zeta + linear term.
+
+    log xi(s) = const + log s + log(s-1) - (s/2) log pi + log Gamma(s/2) + log zeta(s).
+    The s(s-1) factor's imag part is small (O(1/t)) and contributes only
+    O(1/t^k) to higher derivatives at our heights; it is included here for
+    correctness.
+    """
     mp.mp.dps = dps
     s = mp.mpc(mp.mpf("0.5") + mp.mpf(eta), mp.mpf(t))
-    z = mp.zeta(s)
-    return float(mp.log(mp.fabs(z)))
+    log_pi = mp.log(mp.pi)
+    val = (
+        mp.arg(s) + mp.arg(s - 1)
+        - (mp.mpf(t) / 2) * log_pi
+        + mp.im(mp.loggamma(s / 2))
+        + mp.arg(mp.zeta(s))
+    )
+    return float(val)
 
 
-def log_abs_zeta_grid(t_grid: np.ndarray, eta: float, dps: int) -> np.ndarray:
-    return np.array([_log_abs_zeta_at(float(t), eta, dps) for t in t_grid], dtype=float)
+def phi_xi_grid(t_grid: np.ndarray, eta: float, dps: int) -> np.ndarray:
+    """Phi(t) = Im log xi(1/2 + eta + it), continuous in t for eta > 0."""
+    raw = np.array([_phi_xi_at(float(t), eta, dps) for t in t_grid], dtype=float)
+    # mp.arg returns a value in (-pi, pi]; for eta > 0 the underlying function
+    # is continuous, so any 2*pi jumps are unwrappable artifacts of the
+    # principal-value branch.
+    return np.unwrap(raw)
 
 
-def second_derivative_5point(y: np.ndarray, dt: float) -> np.ndarray:
-    """5-point central second derivative.
+def third_derivative_7point(y: np.ndarray, dt: float) -> np.ndarray:
+    """7-point central 3rd derivative, O(dt^4) accurate.
 
-    Interior (i in [2, n-3]):
-      f''(x_i) ~ (-f_{i-2} + 16 f_{i-1} - 30 f_i + 16 f_{i+1} - f_{i+2}) / (12 dt^2)
-    Edges fall back to the 3-point central formula, then to the next-interior
-    value at the very ends so the boundary doesn't dominate the integral.
+    Interior (i in [3, n-4]):
+      f'''(x_i) ~ ( f_{i-3} - 8 f_{i-2} + 13 f_{i-1}
+                   -13 f_{i+1} + 8 f_{i+2} - f_{i+3}) / (8 dt^3)
+    Edges fall back to the 5-point stencil (O(dt^2)):
+      f'''(x_i) ~ (-f_{i-2} + 2 f_{i-1} - 2 f_{i+1} + f_{i+2}) / (2 dt^3)
+    Far edges replicate the next-interior value to avoid boundary
+    dominance in the squared integral.
     """
     n = len(y)
-    d2 = np.empty(n)
-    if n < 5:
-        # Fallback for very short grids
-        for i in range(1, n - 1):
-            d2[i] = (y[i - 1] - 2 * y[i] + y[i + 1]) / (dt * dt)
-        d2[0] = d2[1] if n > 1 else 0.0
-        d2[-1] = d2[-2] if n > 1 else 0.0
-        return d2
-    for i in range(2, n - 2):
-        d2[i] = (-y[i - 2] + 16 * y[i - 1] - 30 * y[i] + 16 * y[i + 1] - y[i + 2]) / (12.0 * dt * dt)
-    d2[1] = (y[0] - 2 * y[1] + y[2]) / (dt * dt)
-    d2[n - 2] = (y[n - 3] - 2 * y[n - 2] + y[n - 1]) / (dt * dt)
-    d2[0] = d2[2]
-    d2[n - 1] = d2[n - 3]
-    return d2
+    d3 = np.empty(n)
+    if n < 7:
+        # 5-point fallback for short grids
+        for i in range(2, n - 2):
+            d3[i] = (-y[i - 2] + 2 * y[i - 1] - 2 * y[i + 1] + y[i + 2]) / (2.0 * dt ** 3)
+        for i in (0, 1, n - 2, n - 1):
+            d3[i] = d3[max(2, min(i, n - 3))]
+        return d3
+    for i in range(3, n - 3):
+        d3[i] = (
+            y[i - 3] - 8 * y[i - 2] + 13 * y[i - 1]
+            - 13 * y[i + 1] + 8 * y[i + 2] - y[i + 3]
+        ) / (8.0 * dt ** 3)
+    for i in (2, n - 3):
+        d3[i] = (-y[i - 2] + 2 * y[i - 1] - 2 * y[i + 1] + y[i + 2]) / (2.0 * dt ** 3)
+    for i in (0, 1):
+        d3[i] = d3[3]
+    for i in (n - 2, n - 1):
+        d3[i] = d3[n - 4]
+    return d3
 
 
 def q2_zeta(t_grid: np.ndarray, eta: float, dps: int = 40) -> np.ndarray:
-    log_abs = log_abs_zeta_grid(t_grid, eta=eta, dps=dps)
+    """Canonical sensor: d^3/dt^3 Im log xi(1/2 + eta + it)."""
+    phi = phi_xi_grid(t_grid, eta=eta, dps=dps)
     dt = float(t_grid[1] - t_grid[0])
-    return second_derivative_5point(log_abs, dt)
+    return third_derivative_7point(phi, dt)
 
 
 # -----------------------------
