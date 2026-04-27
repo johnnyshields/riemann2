@@ -90,7 +90,16 @@ for _d in (_SHARED_DIR,):
 from afe_logderiv_weights import sigma_k  # noqa: E402
 
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 3  # v3: log-uniform prime sampling so max_primes-capped wide
+                    # blocks actually cover the full [u_min, u_max] log range
+                    # instead of only the left edge. Records actual_u_min /
+                    # actual_u_max / actual_lambda_width from selected primes
+                    # and demotes Orange/Red to "undercovered_*_diagnostic"
+                    # when actual coverage or active cell count is too low.
+                    # v2: multi-block support_blocks K (widened cell-sum support
+                    # K*Q/R); active_cell_count_*; Orange/Red guarded to
+                    # support_blocks > 1.
+                    # v1: single-block support, no active cell count.
 EPS = 1e-300
 
 
@@ -135,10 +144,31 @@ class PrimeBlock:
     Q: float
     c: float
     lam: float
-    u_min: float
-    u_max: float
+    u_min: float        # nominal: c*Q
+    u_max: float        # nominal: c*Q + K*Q/R
+    support_blocks: float  # K such that u_max = c*Q + K*Q/R
     primes: np.ndarray
     logs: np.ndarray
+    sampling_mode: str = "all"  # "all" or "log_uniform"
+
+    @property
+    def lambda_width(self) -> float:
+        # lam * (u_max - u_min) = K / R (nominal)
+        return self.lam * (self.u_max - self.u_min)
+
+    @property
+    def actual_u_min(self) -> float:
+        return float(self.logs.min()) if len(self.logs) else float("nan")
+
+    @property
+    def actual_u_max(self) -> float:
+        return float(self.logs.max()) if len(self.logs) else float("nan")
+
+    @property
+    def actual_lambda_width(self) -> float:
+        if len(self.logs) == 0:
+            return float("nan")
+        return self.lam * (self.actual_u_max - self.actual_u_min)
 
 
 @dataclass
@@ -212,6 +242,14 @@ class ResultRow:
     num_primes: int
     include_dual: bool
     k_Z: int
+    support_blocks: float
+    u_min: float
+    u_max: float
+    lambda_width: float
+    actual_u_min: float
+    actual_u_max: float
+    actual_lambda_width: float
+    sampling_mode: str
 
     Z0_abs: float
     eta_Z0: float
@@ -246,16 +284,19 @@ class ResultRow:
     cell_mass_l2_R: float
     cell_mass_inf_R: float
     cell_mass_ratio_R: float
+    active_cell_count_R: int
 
     cell_count_2R: int
     cell_mass_l2_2R: float
     cell_mass_inf_2R: float
     cell_mass_ratio_2R: float
+    active_cell_count_2R: int
 
     cell_count_4R: int
     cell_mass_l2_4R: float
     cell_mass_inf_4R: float
     cell_mass_ratio_4R: float
+    active_cell_count_4R: int
 
     threat_score: float
     jet_objective: float
@@ -334,6 +375,7 @@ def compute_params_hash(cfg: Dict[str, Any], config_name: str,
         "Q_mode": cfg.get("Q_mode", "larger_toy"),
         "R_values": [int(x) for x in cfg.get("R_values", [4, 6, 8, 10, 12, 16])],
         "c_values": [float(x) for x in cfg.get("c_values", [0.1, 0.2, 0.3, 0.4])],
+        "support_blocks": float(cfg.get("support_blocks", 1.0)),
         "max_targets": int(cfg.get("max_targets", 800)),
         "random_controls": int(cfg.get("random_controls", 100)),
         "direct_jet_minimizers": int(cfg.get("direct_jet_minimizers", 3)),
@@ -353,6 +395,7 @@ def compute_params_hash(cfg: Dict[str, Any], config_name: str,
         "C_J": float(cfg.get("C_J", 4.0)),
         "C_cell": float(cfg.get("C_cell", 4.0)),
         "C0_crowd": float(cfg.get("C0_crowd", 4.0)),
+        "c_max_eff_limit": float(cfg.get("c_max_eff_limit", 1.0)),
         "seed": int(cfg.get("seed", 12345)),
     }
     blob = json.dumps(record, sort_keys=True, separators=(",", ":")).encode()
@@ -393,6 +436,9 @@ def choose_Q_for_R(R: int, mode: str) -> float:
 
 
 def primes_in_interval(lo: int, hi: int, max_count: Optional[int] = None) -> List[int]:
+    """Left-edge enumerator: returns the first `max_count` primes in [lo, hi]
+    via sympy.nextprime. Used for ALL-mode sampling and as the inner primitive
+    for log-uniform sampling."""
     lo = max(2, int(lo))
     hi = int(hi)
     if lo > hi:
@@ -426,17 +472,78 @@ def primes_in_interval(lo: int, hi: int, max_count: Optional[int] = None) -> Lis
     return out
 
 
-def build_prime_block(R: int, Q: float, c: float, max_primes: int) -> PrimeBlock:
+def primes_in_log_interval_log_uniform(u_min: float, u_max: float,
+                                       max_count: int) -> List[int]:
+    """Log-uniform prime sampling across [u_min, u_max].
+
+    Visits `max_count` evenly-spaced log-anchors and takes the next prime at
+    or after each anchor. Returns sorted unique primes within
+    [exp(u_min), exp(u_max)]. Designed for wide multi-block supports where the
+    full prime count exceeds max_count and we want coverage across the entire
+    log interval rather than only the left edge.
+    """
+    if sp is None:
+        # Fallback: dense enumeration capped at max_count (left-edge biased).
+        return primes_in_interval(int(math.ceil(math.exp(u_min))),
+                                  int(math.floor(math.exp(u_max))),
+                                  max_count=max_count)
+    if max_count <= 0:
+        return []
+    hi_int = int(math.floor(math.exp(u_max)))
+    us = np.linspace(float(u_min), float(u_max), int(max_count))
+    seen: set = set()
+    out: List[int] = []
+    for u in us:
+        n = int(math.ceil(math.exp(float(u))))
+        try:
+            p = int(sp.nextprime(n - 1))
+        except Exception:
+            continue
+        if p > hi_int or p in seen:
+            continue
+        seen.add(p)
+        out.append(p)
+    out.sort()
+    return out
+
+
+def build_prime_block(R: int, Q: float, c: float, max_primes: int,
+                      support_blocks: float = 1.0,
+                      sampling_mode: str = "auto") -> PrimeBlock:
+    """
+    Wide-support prime block: u_max = c*Q + K*(Q/R), where K = support_blocks.
+    K=1 reproduces the original determinant (Q/R)-block. K>=4 widens the
+    support so cell-mass diagnostics don't degenerate to one cell.
+
+    sampling_mode:
+        "all":         use primes_in_interval; capped at max_primes from the
+                       left edge (fine for narrow blocks where the cap is not
+                       hit).
+        "log_uniform": evenly-spaced log-anchors with nextprime(); covers the
+                       full [u_min, u_max] log range when the prime count
+                       exceeds max_primes.
+        "auto":        log_uniform for wide blocks (K > 1); all for K <= 1.
+    """
+    K = float(support_blocks)
     lam = 1.0 / Q
     u_min = c * Q
-    u_max = c * Q + Q / R
-    p_min = int(math.ceil(math.exp(u_min)))
-    p_max = int(math.floor(math.exp(u_max)))
-    ps = primes_in_interval(p_min, p_max, max_count=max_primes)
+    u_max = c * Q + K * Q / R
+
+    if sampling_mode == "auto":
+        sampling_mode = "log_uniform" if K > 1.0 else "all"
+
+    if sampling_mode == "log_uniform":
+        ps = primes_in_log_interval_log_uniform(u_min, u_max, max_primes)
+    else:
+        p_min = int(math.ceil(math.exp(u_min)))
+        p_max = int(math.floor(math.exp(u_max)))
+        ps = primes_in_interval(p_min, p_max, max_count=max_primes)
+
     primes = np.asarray(ps, dtype=np.float64)
     logs = np.log(primes) if len(primes) else np.asarray([], dtype=float)
     return PrimeBlock(R=R, Q=Q, c=c, lam=lam, u_min=u_min, u_max=u_max,
-                      primes=primes, logs=logs)
+                      support_blocks=K, primes=primes, logs=logs,
+                      sampling_mode=sampling_mode)
 
 
 def build_z_model(block: PrimeBlock, alpha: float, k_Z: int,
@@ -638,10 +745,11 @@ def jet_objective_at(model: ZModel, m: float, cfg: Dict[str, Any]) -> float:
 def _direct_jet_minimizer_one_block(task: tuple) -> List[Target]:
     """One (R, c) block's direct jet minimizer search. Worker function."""
     (R, Q, c, m_lo, m_hi, scan_grid, count_per_block, k_Z, include_dual,
-     max_primes, cfg) = task
+     max_primes, cfg, support_blocks) = task
     out: List[Target] = []
     try:
-        block = build_prime_block(R, Q, c, max_primes)
+        block = build_prime_block(R, Q, c, max_primes,
+                                  support_blocks=support_blocks)
         model = build_z_model(block, alpha=0.0, k_Z=k_Z,
                               include_dual=include_dual)
     except Exception:
@@ -687,6 +795,7 @@ def generate_jet_minimizer_targets(cfg: Dict[str, Any],
     k_Z = int(cfg.get("k_Z", 0))
     max_primes = int(cfg.get("max_primes", 8000))
     scan_grid = int(cfg.get("jet_minimizer_grid", 400))
+    support_blocks = float(cfg.get("support_blocks", 1.0))
 
     cfg_constants = {
         "C_Z": float(cfg.get("C_Z", 6.0)),
@@ -699,7 +808,7 @@ def generate_jet_minimizer_targets(cfg: Dict[str, Any],
         for c in c_values:
             tasks.append((R, Q, c, m_min, m_max_factor * Q, scan_grid,
                           count_per_block, k_Z, include_dual, max_primes,
-                          cfg_constants))
+                          cfg_constants, support_blocks))
 
     out: List[Target] = []
     if workers <= 1 or len(tasks) <= 1:
@@ -857,7 +966,8 @@ def compute_cell_sums(model: ZModel, m0: float, M_cell: int) -> Dict[str, Any]:
     if len(x_all) == 0:
         return {"cell_count": M_cell, "cell_mass_l2": float("nan"),
                 "cell_mass_inf": float("nan"),
-                "cell_mass_ratio": float("nan")}
+                "cell_mass_ratio": float("nan"),
+                "active_cell_count": 0}
 
     mn = float(np.min(x_all))
     mx = float(np.max(x_all))
@@ -871,11 +981,13 @@ def compute_cell_sums(model: ZModel, m0: float, M_cell: int) -> Dict[str, Any]:
     cell_l2 = float(np.sum(np.abs(B) ** 2))
     cell_inf = float(np.max(np.abs(B)))
     coeff_l2 = float(np.sum(np.abs(z_all) ** 2))
+    active = int(np.sum(np.abs(B) > 0))
     return {
         "cell_count": M_cell,
         "cell_mass_l2": cell_l2,
         "cell_mass_inf": cell_inf,
         "cell_mass_ratio": cell_l2 / max(coeff_l2, EPS),
+        "active_cell_count": active,
     }
 
 
@@ -902,15 +1014,56 @@ def classify_v2(metrics: Dict[str, Any], cfg: Dict[str, Any]) -> str:
     crowded = Nlq > C0 * R
     cell_small = math.isfinite(cell2R) and cell2R <= Q ** (-Ccell)
 
+    support_blocks = float(metrics.get("support_blocks", 1.0))
+
     if z_small and jet_small and A_lq_small and crowded and cell_small:
-        return "red_local_amplitude_threat"
-    if z_small and jet_small and cell_small and not A_lq_small:
-        return "orange_cell_warning"
-    if z_small and jet_small and A_R_small and not A_lq_small:
-        return "yellow_local_flatness"
-    if z_small and not A_lq_small:
-        return "z_small_but_amplitude_ok"
-    return "harmless"
+        verdict = "red_local_amplitude_threat"
+    elif z_small and jet_small and cell_small and not A_lq_small:
+        verdict = "orange_cell_warning"
+    elif z_small and jet_small and A_R_small and not A_lq_small:
+        verdict = "yellow_local_flatness"
+    elif z_small and not A_lq_small:
+        verdict = "z_small_but_amplitude_ok"
+    else:
+        verdict = "harmless"
+
+    # Cell-mass diagnostic degenerates on a single (Q/R)-width block
+    # (only ~1 active cell), so demote Orange/Red verdicts that depend on
+    # cell_mass_ratio to a separate label until support_blocks > 1.
+    if support_blocks <= 1.0 and verdict in {
+        "orange_cell_warning", "red_local_amplitude_threat"
+    }:
+        return "single_block_cell_diagnostic"
+
+    # Coverage guards: even with K > 1, the block can be undercovered if
+    # max_primes truncated the sample or active cells are too sparse.
+    actual_lambda_width = float(metrics.get("actual_lambda_width", float("nan")))
+    nominal_lambda_width = support_blocks / max(R, 1)
+    if (math.isfinite(actual_lambda_width)
+            and actual_lambda_width < 0.5 * nominal_lambda_width
+            and verdict in {"orange_cell_warning", "red_local_amplitude_threat"}):
+        return "undercovered_support_diagnostic"
+
+    active2R = int(metrics.get("active_cell_count_2R", 0))
+    # ceil to avoid aggressive flooring for non-integer K, and bump the
+    # floor so a meaningful multi-block cell test really has at least
+    # ceil(K/2) active cells (per audit recommendation).
+    min_active = max(4, int(math.ceil(support_blocks / 2.0)))
+    if (active2R < min_active
+            and verdict in {"orange_cell_warning", "red_local_amplitude_threat"}):
+        return "undercovered_cell_diagnostic"
+
+    # Out-of-band guard: if c + K/R exceeds c_max_eff_limit, the wide block
+    # leaves the intended (c < c_max) region. Demote Orange/Red to a
+    # diagnostic class rather than treat as evidence.
+    c_val = float(metrics.get("c", 0.0))
+    c_max_eff = c_val + support_blocks / max(R, 1)
+    c_max_eff_limit = float(cfg.get("c_max_eff_limit", 1.0))
+    if (c_max_eff > c_max_eff_limit
+            and verdict in {"orange_cell_warning", "red_local_amplitude_threat"}):
+        return "out_of_band_diagnostic"
+
+    return verdict
 
 
 # ============================================================
@@ -919,7 +1072,8 @@ def classify_v2(metrics: Dict[str, Any], cfg: Dict[str, Any]) -> str:
 
 def _evaluate_target_with_model(target: Target, model: ZModel,
                                 cfg: Dict[str, Any], run_id: str,
-                                config_name: str) -> ResultRow:
+                                config_name: str,
+                                block: PrimeBlock) -> ResultRow:
     Z0 = abs(model.Z(target.m0))
     eta_Z0 = Z0 / max(model.coeff_norm, EPS)
     J_max, J_rms, J_sum_sq, J_argmax_k = compute_jets(model, target.m0)
@@ -943,6 +1097,10 @@ def _evaluate_target_with_model(target: Target, model: ZModel,
         "A_R": ev["R"]["A_sup"], "A_logQ2": ev["logQ2"]["A_sup"],
         "N_min_logQ2": ev["logQ2"]["N_minima_thresholded"],
         "cell_mass_ratio_2R": cells_2R["cell_mass_ratio"],
+        "support_blocks": block.support_blocks,
+        "actual_lambda_width": block.actual_lambda_width,
+        "active_cell_count_2R": cells_2R["active_cell_count"],
+        "c": target.c,
     }
     cls = classify_v2(metrics, cfg)
     threat = (Z0 + EPS) * (J_max + EPS) * (ev["logQ2"]["A_sup"] + EPS) / (
@@ -975,6 +1133,13 @@ def _evaluate_target_with_model(target: Target, model: ZModel,
         alpha=target.alpha, m0=target.m0,
         num_primes=int(len(model.primes)),
         include_dual=model.include_dual, k_Z=model.k_Z,
+        support_blocks=block.support_blocks,
+        u_min=block.u_min, u_max=block.u_max,
+        lambda_width=block.lambda_width,
+        actual_u_min=block.actual_u_min,
+        actual_u_max=block.actual_u_max,
+        actual_lambda_width=block.actual_lambda_width,
+        sampling_mode=block.sampling_mode,
         Z0_abs=Z0, eta_Z0=eta_Z0,
         A_1=ev["1"]["A_sup"], A_R=ev["R"]["A_sup"],
         A_2R=ev["2R"]["A_sup"], A_logQ2=ev["logQ2"]["A_sup"],
@@ -993,14 +1158,17 @@ def _evaluate_target_with_model(target: Target, model: ZModel,
         cell_mass_l2_R=cells_R["cell_mass_l2"],
         cell_mass_inf_R=cells_R["cell_mass_inf"],
         cell_mass_ratio_R=cells_R["cell_mass_ratio"],
+        active_cell_count_R=cells_R["active_cell_count"],
         cell_count_2R=cells_2R["cell_count"],
         cell_mass_l2_2R=cells_2R["cell_mass_l2"],
         cell_mass_inf_2R=cells_2R["cell_mass_inf"],
         cell_mass_ratio_2R=cells_2R["cell_mass_ratio"],
+        active_cell_count_2R=cells_2R["active_cell_count"],
         cell_count_4R=cells_4R["cell_count"],
         cell_mass_l2_4R=cells_4R["cell_mass_l2"],
         cell_mass_inf_4R=cells_4R["cell_mass_inf"],
         cell_mass_ratio_4R=cells_4R["cell_mass_ratio"],
+        active_cell_count_4R=cells_4R["active_cell_count"],
         threat_score=float(threat),
         jet_objective=float(jet_obj),
         classification=cls,
@@ -1009,8 +1177,11 @@ def _evaluate_target_with_model(target: Target, model: ZModel,
 
 
 def _failed_row(run_id: str, config_name: str, target: Target,
-                include_dual: bool, k_Z: int, msg: str) -> ResultRow:
+                include_dual: bool, k_Z: int, msg: str,
+                support_blocks: float = 1.0) -> ResultRow:
     nan = float("nan")
+    u_min = target.c * target.Q
+    u_max = u_min + support_blocks * target.Q / max(target.R, 1)
     return ResultRow(
         run_id=run_id, timestamp=time.strftime("%Y-%m-%d %H:%M:%S"),
         config_name=config_name,
@@ -1027,6 +1198,11 @@ def _failed_row(run_id: str, config_name: str, target: Target,
         R=target.R, Q=target.Q, lambda_=1.0 / target.Q, c=target.c,
         alpha=target.alpha, m0=target.m0, num_primes=0,
         include_dual=include_dual, k_Z=k_Z,
+        support_blocks=float(support_blocks),
+        u_min=u_min, u_max=u_max,
+        lambda_width=(u_max - u_min) / target.Q,
+        actual_u_min=nan, actual_u_max=nan, actual_lambda_width=nan,
+        sampling_mode="failed",
         Z0_abs=nan, eta_Z0=nan,
         A_1=nan, A_R=nan, A_2R=nan, A_logQ2=nan,
         L2_1=nan, L2_R=nan, L2_2R=nan, L2_logQ2=nan,
@@ -1036,11 +1212,11 @@ def _failed_row(run_id: str, config_name: str, target: Target,
         N_min_ratio_logQ2=nan,
         J_max=nan, J_rms=nan, J_sum_sq=nan, J_argmax_k=-1,
         cell_count_R=0, cell_mass_l2_R=nan, cell_mass_inf_R=nan,
-        cell_mass_ratio_R=nan,
+        cell_mass_ratio_R=nan, active_cell_count_R=0,
         cell_count_2R=0, cell_mass_l2_2R=nan, cell_mass_inf_2R=nan,
-        cell_mass_ratio_2R=nan,
+        cell_mass_ratio_2R=nan, active_cell_count_2R=0,
         cell_count_4R=0, cell_mass_l2_4R=nan, cell_mass_inf_4R=nan,
-        cell_mass_ratio_4R=nan,
+        cell_mass_ratio_4R=nan, active_cell_count_4R=0,
         threat_score=nan, jet_objective=nan,
         classification="failed", notes=msg[:200],
     )
@@ -1049,7 +1225,7 @@ def _failed_row(run_id: str, config_name: str, target: Target,
 def _process_group(task: tuple) -> List[ResultRow]:
     """One worker task = all targets sharing a (R, Q, c) prime block."""
     (run_id, config_name, R, Q, c_val, targets, cfg, include_dual,
-     k_Z, max_primes) = task
+     k_Z, max_primes, support_blocks) = task
     rows: List[ResultRow] = []
 
     block: Optional[PrimeBlock] = None
@@ -1058,7 +1234,8 @@ def _process_group(task: tuple) -> List[ResultRow]:
     for tgt in targets:
         try:
             if block is None:
-                block = build_prime_block(R, Q, c_val, max_primes)
+                block = build_prime_block(R, Q, c_val, max_primes,
+                                          support_blocks=support_blocks)
             akey = round(tgt.alpha, 14)
             model = cached.get(akey)
             if model is None:
@@ -1067,15 +1244,16 @@ def _process_group(task: tuple) -> List[ResultRow]:
                 cached[akey] = model
         except Exception as e:
             rows.append(_failed_row(run_id, config_name, tgt, include_dual,
-                                    k_Z, str(e)))
+                                    k_Z, str(e), support_blocks=support_blocks))
             continue
 
         try:
             rows.append(_evaluate_target_with_model(tgt, model, cfg,
-                                                    run_id, config_name))
+                                                    run_id, config_name,
+                                                    block))
         except Exception as e:
             rows.append(_failed_row(run_id, config_name, tgt, include_dual,
-                                    k_Z, str(e)))
+                                    k_Z, str(e), support_blocks=support_blocks))
     return rows
 
 
@@ -1272,7 +1450,8 @@ def run(args: argparse.Namespace) -> None:
 
     log(f"config: {config_name}")
     log(f"workers: {workers}")
-    log(f"include_dual: {cfg.get('include_dual', False)}  k_Z: {cfg.get('k_Z', 0)}")
+    log(f"include_dual: {cfg.get('include_dual', False)}  k_Z: {cfg.get('k_Z', 0)}  "
+        f"support_blocks: {cfg.get('support_blocks', 1.0)}")
     log(f"input files:")
     for p in all_inputs:
         log(f"  - {p} ({'ok' if os.path.exists(p) else 'MISSING'})")
@@ -1299,6 +1478,7 @@ def run(args: argparse.Namespace) -> None:
     include_dual = bool(cfg.get("include_dual", False))
     k_Z = int(cfg.get("k_Z", 0))
     max_primes = int(cfg.get("max_primes", 8000))
+    support_blocks = float(cfg.get("support_blocks", 1.0))
 
     cfg_for_workers = {
         "C_Z": float(cfg.get("C_Z", 6.0)),
@@ -1306,6 +1486,7 @@ def run(args: argparse.Namespace) -> None:
         "C_J": float(cfg.get("C_J", 4.0)),
         "C_cell": float(cfg.get("C_cell", 4.0)),
         "C0_crowd": float(cfg.get("C0_crowd", 4.0)),
+        "c_max_eff_limit": float(cfg.get("c_max_eff_limit", 1.0)),
         "min_grid_floor": int(cfg.get("min_grid_floor", 401)),
         "min_grid_factor": int(cfg.get("min_grid_factor", 40)),
         "max_grid": int(cfg.get("max_grid", 10001)),
@@ -1314,7 +1495,7 @@ def run(args: argparse.Namespace) -> None:
     tasks: List[tuple] = []
     for (R, Q, c_val), tgts in sorted(groups.items()):
         tasks.append((run_id, config_name, R, Q, c_val, tgts, cfg_for_workers,
-                      include_dual, k_Z, max_primes))
+                      include_dual, k_Z, max_primes, support_blocks))
     log(f"tasks: {len(tasks)}")
 
     stream = CSVStream(out_path)
