@@ -30139,7 +30139,7 @@ The active wall route is
 +
 \text{gauge-locked wall escape}
 +
-\text{D4 row conversion}
+\text{D4 carrier-quotient/filtered row conversion}
 +
 \text{row mobility}
 \Longrightarrow
@@ -30152,13 +30152,214 @@ is forced to be exact-point or scalar-collapsed.
 
 \subsection{\texorpdfstring{\(L^2\)}{L2}-input real rigidity}
 
+\begin{definition}[Ordinary zero-separated source packet]
+\label{def:ordinary-zero-separated-source-packet}
+Let \(I^\ast\) be an enlarged ordinary packet interval and let
+\[
+\mathcal D=\lambda\partial_m,\qquad \lambda Q\asymp1.
+\]
+For \(\rho\ge Q^{-C_\rho}\), define
+\[
+\mathcal T_\rho(I^\ast)
+=
+\{m+iy:m\in I^\ast,\ |y|\le \rho\lambda\}.
+\]
+We say that \(I^\ast\) is ordinary zero-separated if
+\[
+\operatorname{dist}
+\left(
+\frac12+i\mathcal T_\rho(I^\ast),
+\mathcal Z_\Xi
+\right)
+\ge
+\lambda Q^{-C_0}.
+\]
+If this condition fails, the packet is not treated by the ordinary Gate--2
+local argument; it is routed to the singular/transition branch, or else a
+regularized phase convention must be used.
+\end{definition}
+
+\begin{lemma}[Ordinary zero-separated source-complexity transfer]
+\label{lem:ordinary-zero-separated-source-complexity-transfer}
+Assume \(I^\ast\) is ordinary zero-separated.  Assume also that the canonical
+source curvature is the full completed meromorphic curvature
+\[
+u=q''_{\can}=\mathfrak C_2[\Xi]\left(\frac12+im\right),
+\]
+where \(\mathfrak C_2\) is a fixed finite expression in the completed
+logarithmic derivative
+\[
+L(s)=\frac{\Xi'}{\Xi}(s)
+\]
+and finitely many derivatives \(L^{(r)}(s)\), together with regular
+gamma/background terms and no denominators other than those implicit in
+\(L=\Xi'/\Xi\).  Then
+\[
+\boxed{
+\|u\|_{L^\infty(I^\ast)}
++
+\|\mathcal D u\|_{L^\infty(I^\ast)}
+\le Q^C.
+}
+\]
+Equivalently, on \(I\subset I^\ast\),
+\[
+\boxed{
+\|u\|_{L^\infty(I)}+|I|\,\|u'\|_{L^\infty(I)}\le Q^C.
+}
+\]
+\end{lemma}
+
+\begin{proof}
+For fixed \(r\), the completed logarithmic derivative has the local
+partial-fraction form
+\[
+L^{(r)}(s)
+=
+(-1)^r r!\sum_\rho\frac1{(s-\rho)^{r+1}}
++
+\mathcal G_r(s),
+\]
+where \(\mathcal G_r\) denotes the regular gamma/background contribution.  Set
+\[
+\delta=\lambda Q^{-C_0}.
+\]
+On the ordinary tube, \(|s-\rho|\ge\delta\).  Split zeros into dyadic annuli
+\[
+A_\nu=\{\rho:2^\nu\delta\le |s-\rho|\le2^{\nu+1}\delta\}.
+\]
+The local zero-count estimate gives
+\[
+\# A_\nu\le Q^C(1+2^\nu\delta).
+\]
+Hence
+\[
+\sum_{\rho\in A_\nu}|s-\rho|^{-(r+1)}
+\le
+Q^C(1+2^\nu\delta)(2^\nu\delta)^{-(r+1)}.
+\]
+Summing over \(\nu\), the first annuli dominate:
+\[
+\sum_\rho |s-\rho|^{-(r+1)}
+\le Q^C\delta^{-(r+1)}
+\le Q^{C_r}.
+\]
+Thus every fixed \(L^{(r)}\) entering \(\mathfrak C_2[\Xi]\) is polynomially
+bounded on the tube.  Since \(u=\mathfrak C_2[\Xi]\) has fixed finite
+complexity,
+\[
+\|u\|_{L^\infty(I^\ast)}\le Q^C.
+\]
+Applying \(\mathcal D=\lambda\partial_m\) only raises the completed
+log-derivative order by one and multiplies by \(\lambda\le1\), so
+\[
+\|\mathcal D u\|_{L^\infty(I^\ast)}\le Q^C.
+\]
+The physical-coordinate estimate follows from \(\mathcal D=\lambda\partial_m\)
+and \(|I|\asymp\lambda\).
+\end{proof}
+
+\begin{remark}[Canonical and denominator guardrails for Gate--2]
+\label{rem:canonical-denominator-guardrails-gate-two}
+For Gate~2 the inclusive canonical convention is
+\[
+q''_{\can}=B_2+P_2+D_2+E_2=\mathfrak C_2[\Xi].
+\]
+Thus \(E_2\) is part of the exact canonical object and no separate
+\(E_2\)-smallness is needed for the minimal \(u,\mathcal D u\) transfer.  If
+instead \(E_2\) is used as a perturbative truncation error, the minimal Gate--2
+transfer requires
+\[
+\|E_2\|_\infty+\|\mathcal D E_2\|_\infty\le Q^{-A_E}.
+\]
+The canonical curvature \(q''_{\can}\) may contain \(\Xi'/\Xi\), fixed
+completed-log-derivative derivatives, and regular gamma/background terms.  It
+must not contain denominators such as
+\[
+1/q,\qquad 1/u,\qquad 1/\Gamma_G,\qquad
+1/\Gamma_{G,2},\qquad 1/|\Gamma|.
+\]
+Those denominators, if present, belong to later row-projection or quotient
+algebra, not to the canonical source curvature used in Gate~2.
+\end{remark}
+
+\begin{lemma}[Real-canonical Gate--2 compatibility]
+\label{lem:real-canonical-gate-two-compatibility}
+Assume the actual-zeta local variables are in the real completed gauge of
+Definition~\ref{def:canonical-actual-zeta-phase-curvature}.  Thus
+\[
+q=q_\zeta,\qquad u=q''_{\can}=\mathcal D^2q_\zeta,
+\]
+and the canonical anisotropies are
+\[
+\Gamma_G=q''_{\can}-6q_\zeta+2q_\zeta^3,
+\]
+\[
+\Gamma_{G,2}
+=(1-q_\zeta^2)q''_{\can}-\frac16\mathcal D^4q_\zeta.
+\]
+Then, on ordinary smooth zero-separated packets,
+\[
+q,\quad u,\quad \Gamma_G,\quad \Gamma_{G,2}
+\]
+are real-valued and, with \(g=\Gamma_G\), \(h=\Gamma_{G,2}\),
+\[
+u=q'',
+\]
+\[
+g=q''-6q+2q^3,
+\]
+and
+\[
+h=2q(q')^2-\frac16g''.
+\]
+\end{lemma}
+
+\begin{proof}
+The real-valuedness follows from the real completed critical-line gauge.  The
+first two identities are the definitions.  For the final identity, apply
+Lemma~\ref{lem:differentiated-form-second-gate-two-anisotropy} after suppressing
+the \(\zeta\)-subscript:
+\[
+\Gamma_{G,2}
+=
+2q(\mathcal Dq)^2-\frac16\mathcal D^2\Gamma_G.
+\]
+In ordinary local prime notation this is
+\[
+h=2q(q')^2-\frac16g''.
+\]
+\end{proof}
+
+\begin{remark}[Residual version of the compatibility package]
+\label{rem:gate-two-compatibility-residuals}
+If an approximate convention is used, define
+\[
+r_u:=q''_{\can}-q'',
+\]
+\[
+r_G:=\Gamma_G-(q''-6q+2q^3),
+\]
+and
+\[
+r_{G,2}:=
+\Gamma_{G,2}
+-\left(2q(q')^2-\frac16\Gamma_G''\right).
+\]
+The \(L^2\)-input rigidity lemma remains applicable provided these residuals
+are \(L^2\)-small on the source interval at the same scale as \(g,h\).  In the
+main canonical convention of this draft these residuals are zero.
+\end{remark}
+
 \begin{lemma}[\(L^2\)-input real rigidity; safe primitive-bounded form]
 \label{lem:l2-input-real-rigidity-safe}
 Let
 \[
         J=(-2,2),\qquad J'=(-1,1).
 \]
-Assume \(q,u,g,h\in\mathbb R\) are sufficiently smooth on \(J\), and
+Assume \(q,u,g,h\in\mathbb R\) are sufficiently smooth on \(J\), in the
+real-canonical convention of
+Lemma~\ref{lem:real-canonical-gate-two-compatibility}, and
 \[
         u=q'',
 \]
@@ -30473,19 +30674,60 @@ while \(r_g\) enters \(u=F+g-r_g\) and the potential estimate in the same way
 as \(g\).  After increasing \(C\), the same conclusion follows.
 \end{remark}
 
-\begin{remark}[Primitive-free strengthening not used]
+\begin{remark}[Primitive recovery and the safe proof route]
 \label{rem:l2-rigidity-primitive-free-not-used}
-One may try to remove the safe primitive bounds on \(q\) and \(q'\) by
-recovering them from
-\[
-q''=u,\qquad F(q)=u-g,\qquad |q|^6\le C(1+|F(q)|^2).
-\]
-That strengthening is not used in the main proof.  The present lemma uses the
-safe assumption
+Lemma~\ref{lem:l2-input-real-rigidity-safe} is stated with the safe local
+bounds
 \[
 \|q\|_\infty+\|q'\|_\infty+\|q''\|_\infty\le Q^C.
 \]
+These bounds are not intended as a new arithmetic input.  The \(q''\)-bound is
+the source bound \(u=q''_{\can}\).  The \(q'\)-bound follows from a single
+basepoint slope bound
+\[
+|q'(m_b)|\le Q^C
+\]
+and \(\|q''\|_\infty\le Q^C\).  The uniform \(q\)-bound is stronger than the
+multiplier proof actually needs; it may be recovered on shrunken intervals from
+\[
+F(q)=u-g,\qquad F(q)=6q-2q^3,\qquad |q|^6\le C(1+|F(q)|^2).
+\]
+A fully minimal formulation would keep only \(u,\mathcal D u\) and one
+primitive slope bound.  The present proof keeps the stronger primitive
+\(L^\infty\) hypothesis to avoid exceptional-set and interpolation
+bookkeeping.
 \end{remark}
+
+\begin{lemma}[Source thickening from one large source point]
+\label{lem:source-thickening-one-large-point}
+Let \(I\) be a packet interval and let \(u\) be real-valued on \(I\).  Assume
+\[
+\int_I |u|^2\,dm\ge Q^{-B}|I|
+\]
+and
+\[
+\|u'\|_{L^\infty(I)}\le Q^{C_u}|I|^{-1}.
+\]
+Then there exists an interval \(J\subset I\), one-sided if necessary, such that
+\[
+|u|\ge \tau:=\frac12Q^{-B/2}
+\qquad\text{on }J,
+\]
+and
+\[
+|J|\ge Q^{-B/2-C_u-O(1)}|I|.
+\]
+\end{lemma}
+
+\begin{proof}
+Gate~1 gives \(m_\ast\in I\) with \(|u(m_\ast)|\ge Q^{-B/2}\).  By the
+Lipschitz bound, \(|u|\ge \frac12Q^{-B/2}\) whenever
+\[
+|m-m_\ast|\le cQ^{-B/2-C_u}|I|
+\]
+with \(c>0\) sufficiently small.  Intersecting with \(I\) gives the claimed
+one-sided or two-sided interval.
+\end{proof}
 
 \subsection{Gate 2 from source thickening and \(L^2\)-input rigidity}
 
@@ -30529,16 +30771,12 @@ Assume, toward contradiction, that
 \[
 \int_I |u|^2(g^2+h^2)\,dm\le Q^{-A}|I|.
 \]
-Gate~1 gives \(m_\ast\in I\) with
+By Lemma~\ref{lem:source-thickening-one-large-point}, there is a one-sided or
+two-sided interval \(J\subset I\) such that, with
 \[
-|u(m_\ast)|\ge Q^{-B/2}.
+\tau:=\frac12Q^{-B/2},
 \]
-Set
-\[
-\tau:=\frac12Q^{-B/2}.
-\]
-By the Lipschitz bound, there is a one-sided or two-sided interval
-\(J\subset I\) such that
+one has
 \[
 |u|\ge\tau\quad\text{on }J,
 \]
@@ -34942,6 +35180,29 @@ F_9^I=0
 is relevant only if the downstream row theorem insists on collapsed scalar
 \(I\)-coordinate energy.  It is not an obstruction to carrier/quotient row
 energy.
+
+If one nevertheless imposes scalar \(I\)-coordinate row energy as the downstream
+output, the remaining finite obstruction is the incidence wall
+\[
+\mathcal E_{\rm cc}^{(9)}
+=
+\left\{
+F_9^I=0,\quad yq''\Gamma_{G,2}\ne0
+\right\},
+\]
+where
+\[
+F_9^I
+:=
+R_9^I+
+\frac{yq''\Gamma_{G,2}}{128\pi^2g^3}.
+\]
+Closing that scalar formulation would require either proving
+\(F_9^I\not\equiv0\) together with a quantitative avoidance theorem for
+\(\mathcal E_{\rm cc}^{(9)}\), proving that \(R_9^I\) is zero,
+\(H\)-divisible, or nuisance-quotient, or replacing the scalar readout by a
+higher-order or ambient row.  Under the carrier-quotient formulation this
+scalar incidence is not a D4 obstruction.
 \end{remark}
 
 \begin{remark}[Admissibility of carrier-quotient row energy]
@@ -34964,6 +35225,71 @@ is only one coordinate readout and is not faithful on the carrier quotient.  If
 one were to require scalar \(I\)-coordinate energy only, then the scalar
 cross-channel wall would remain a genuine obstruction.  Under the carrier
 quotient formulation it is quotiented away.
+\end{remark}
+
+\begin{definition}[D4 residual valuation ledger]
+\label{def:d4-residual-valuation-ledger}
+After extracting the carrier-quotient leading rows, write the remaining D4 row
+contribution schematically as
+\[
+\mathbf R
+=
+\mathbf R_{\rm same}
++
+\mathbf R_{\rm val}
++
+\mathbf R_{\rm abs}.
+\]
+A residual term \(T\) has valuation
+\[
+T=q_0^a u^b\Gamma^cE_T,
+\qquad
+\Gamma=(\Gamma_G,\Gamma_{G,2}),
+\]
+where \(E_T\) is polynomially bounded or separately controlled.
+
+Terms with the same anisotropy-linear valuation as the leading D4 row,
+\[
+(a,b,c)=(1,3,1),
+\]
+are not errors.  They are absorbed into the effective leading matrix or the
+carrier-quotient coordinate map.
+
+Terms with higher \(q_0\)-valuation, higher anisotropy valuation, or higher
+source valuation belong to \(\mathbf R_{\rm val}\) and are controlled by the
+chosen non-wall and wall-escape thresholds.
+
+Terms without sufficient factors of \(q_0,u,\Gamma\) belong to
+\(\mathbf R_{\rm abs}\).  These are the only residuals requiring a hard
+absolute smallness condition in the wall-escape corridor.
+\end{definition}
+
+\begin{remark}[Filtered D4 row observability]
+\label{rem:filtered-d4-row-observability}
+The notation \(q_0u^3L\Gamma\) records the expected leading row scale.  It
+should not be hard-coded if the exact row algebra contains lower
+\(u\)-valuation anisotropy-linear terms.  In general one should write
+\[
+\mathbf A_N^{\rm lin}
+=
+q_0\sum_{b\ge b_0}u^bL_b\Gamma.
+\]
+D4 closes once the stacked filtered response
+\[
+\begin{pmatrix}
+L_{b_0}\\
+uL_{b_0+1}\\
+\vdots\\
+u^{B-b_0}L_B
+\end{pmatrix}
+\]
+has second singular value bounded below by \(Q^{-C}\) on the sampled branch.
+The expected carrier-quotient case is \(b_0=B=3\) and
+\[
+L_3=-\frac1{288}I_2.
+\]
+If a lower \(u\)-valuation anisotropy-linear layer appears, it should be
+promoted into the leading filtered matrix rather than treated as an error.
 \end{remark}
 
 \begin{remark}[Raw skew coefficients \(F_5\) and \(F_7\)]
@@ -35591,22 +35917,26 @@ which is sign-indefinite.  The second variation is positive but tautological:
 No zero-energy, monotonicity, or endpoint theorem is presently available.
 Thus energy detects the defect but does not yet provide a contradiction.
 
-\begin{remark}[Role of Gate A and Gate B after the architecture audits]
+\begin{remark}[Role of Gate A and Gate B after the downstream repairs]
 \label{rem:role-of-gate-a-b-after-audits}
-Gate A and Gate B should be retained as local algebraic lemmas:
+Gate A and Gate B remain useful local algebraic lemmas:
 \[
 \text{Gate A: aggregate homogeneous cancellation,}
 \]
 \[
 \text{Gate B: conditional local quotient/fixed-sector algebra through order }7.
 \]
-They simplify the local expansion and help classify lower terms.  They are not
-proof-closing global gates.  After the source-divisibility and source-collapse
-audits, the sharp missing input is no longer another Gate A/B-style local row
-identity.  The current architecture needs the two-gate actual-zeta package:
-Gate~1 source-curvature observability and Gate~2 source--anisotropy
-reintegration.  Alternatively, it needs a source-robust packet-visible row or a
-global affine/projective transport theorem.
+They simplify the local expansion and classify lower terms, but they are not
+proof-closing global gates.
+
+After the \(L^2\)-rigidity repair, Gate~2 source--anisotropy reintegration is
+no longer an independent downstream input in the ordinary real-canonical
+branch; it is supplied by
+Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}, conditional on the
+real-canonical definitions and source local complexity.  The remaining burden
+is therefore sharper: prove Gate~1 source-curvature observability from the
+actual-zeta ordinary/singular inputs, and complete the D4 carrier-quotient row
+conversion and residual-control audit.
 \end{remark}
 
 \begin{remark}[Current architecture ledger]
@@ -35621,32 +35951,27 @@ Bottleneck-C repairs do not close the proof.}}
 \]
 \[
 \boxed{\text{The reduced-base rank-two fixed-sector bundle remains the best
-local language for the obstruction.}}
-\]
-\[
-\boxed{\text{The active }\eta\eta\text{ row is tensorial affine forcing, not
-ordinary curvature.}}
+local language for the local row obstruction.}}
 \]
 \[
 \boxed{\text{The layered order-seven/order-nine theorem gives local
-visibility, not an RH-scale lower bound.}}
+visibility, not by itself an RH-scale lower bound.}}
 \]
 \[
-\boxed{\text{The established rank-two norm tower is source-divisible:
-known packet-visible rows contain }H=yq''_{\can}.}
+\boxed{\text{The known packet-visible rows are source-divisible:
+they contain }H=yq''_{\can}.}
 \]
 \[
-\boxed{\text{The source-collapse regime }q''_{\can}\approx0\text{ with live
-anisotropy is fatal for the present norm route.}}
+\boxed{\text{In the ordinary real-canonical branch, Gate~2 is supplied by
+source thickening plus \(L^2\)-input rigidity.}}
 \]
 \[
-\boxed{\text{Projectivization cancels }H\text{ formally but lacks correction
-control, Regime-A control, and a global projective contradiction.}}
+\boxed{\text{The remaining source-side input is Gate~1 source-curvature
+observability for the full canonical object }q''_{\can}=B_2+P_2+D_2+E_2.}
 \]
 \[
-\boxed{\text{The current missing inputs are Gate 1 source-curvature
-observability and Gate 2 source--anisotropy reintegration, or else a genuinely
-source-robust/global invariant.}}
+\boxed{\text{The remaining row-side input is D4 carrier-quotient row conversion
+with residual control, or a fallback source-robust/global invariant.}}
 \]
 For the final status summary, see
 Remark~\ref{rem:terminal-status-current-architecture}.
@@ -35661,13 +35986,15 @@ factor
 \[
 H=yq''_{\can}.
 \]
-Thus any proof-relevant finite-core theorem must include Gate 1 source-level
-nonflatness, for instance
+The local downstream package supplies source--anisotropy reintegration from
+Gate~1 by Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}.  Thus the
+remaining proof-relevant finite-core theorem must include Gate~1 source-level
+nonflatness,
 \[
 \int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|,
 \]
-and also Gate 2 source--anisotropy reintegration, or else use a genuinely
-source-robust row/invariant not divisible by \(H\).
+and then connect the resulting Gate~2 source-weighted anisotropy to the D4
+carrier-quotient row-energy output.
 
 \begin{remark}[Visibility is not non-concentration]
 \label{rem:visibility-not-nonconcentration}
@@ -35727,20 +36054,25 @@ while
 A_9^{\mathfrak f}\ne0
 \]
 outside the named correction and cross-channel incidence walls.  This local
-visibility theorem is not the remaining proof gate.  The remaining arithmetic
-problem is now two-stage.  First one needs source-curvature observability,
+visibility theorem is not the remaining proof gate.
+
+After Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}, the old two-stage
+downstream problem should be read as follows.  First one needs Gate~1
+source-curvature observability,
 \[
 \int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|.
 \]
-Second one needs source--anisotropy reintegration,
+In the ordinary real-canonical branch, Gate~2 source--anisotropy reintegration
+is then supplied locally:
 \[
 \int_{I_\rho}
 |q''_{\can}(m)|^2
 (\Gamma_G(m)^2+\Gamma_{G,2}(m)^2)\,dm
 \ge Q^{-A}|I_\rho|.
 \]
-Equivalently, one needs a single stronger theorem implying the source-weighted
-lower bound
+The remaining downstream conversion is D4: convert this source-weighted
+anisotropy into carrier-quotient row energy.  In scalar language the target
+scale is
 \[
 \boxed{
 \sup_{m\in I_\rho}
@@ -35751,16 +36083,8 @@ lower bound
 H=yq''_{\can}.
 }
 \]
-A more invariant norm formulation is
-\[
-\left\|
-(A_7^{\mathfrak f},A_9^{\mathfrak f})
-\right\|_\infty
-\ge Q^{-B}
-\]
-on the sampled reduced packet interval.  The source-collapse analysis shows
-that source-jet nonflatness alone is necessary but not sufficient; it must be
-paired with reintegration against the anisotropy vector.
+In the carrier quotient, this is replaced by the quotient row-energy object in
+Remark~\ref{rem:carrier-quotient-source-weighted-residual}.
 
 In the transported version, one may instead work with
 \[
@@ -39019,109 +39343,55 @@ Dirichlet-polynomial approximation estimates.
 
 \begin{remark}[Terminal status of the current architecture]
 \label{rem:terminal-status-current-architecture}
-The present proof architecture has reached the following decision point.
+The present proof architecture is conditional and non-closing as a proof of
+\(\RH\).  The downstream local package has improved substantially, but the
+upstream source-observability problem remains open.
 
+The current state is:
 \begin{enumerate}
 \item The original scalar Bottleneck-C closure route is blocked: the active
-\(\eta\eta\)-row is \(S\)-visible and cannot be removed by source
-repackaging, quotienting, split readout, line-bundle transport, or
-transform-faithful normal-form counterterms.
+\(\eta\eta\)-row is \(S\)-visible and cannot be removed by source repackaging,
+quotienting, split readout, line-bundle transport, or transform-faithful
+normal-form counterterms.
 
-\item The rank-two fixed-sector bundle is the correct local language for the
-remaining obstruction.  It gives a coherent reduced-base connection and a
-conditional affine forcing equation, but it does not supply a global
-contradiction without an additional boundary, holonomy, index, or quantitative
-non-concentration theorem.
+\item The rank-two fixed-sector bundle remains the correct local language for
+the row obstruction.  The layered order-seven/order-nine theorem gives local
+visibility, and the carrier-quotient formulation removes the scalar
+\(I\)-coordinate order-nine collapse artifact.
 
-\item The local packet-visibility problem is substantially improved by the
-layered order-seven/order-nine theorem:
-\[
-\Gamma_G\ne0\Rightarrow A_7^{\mathfrak f}\ne0,
-\qquad
-\Gamma_G=0,\ \Gamma_{G,2}\ne0\Rightarrow A_9^{\mathfrak f}\ne0,
-\]
-modulo named correction incidence.  This is a local visibility theorem, not a
-proof of \(\RH\).
+\item In the ordinary real-canonical branch, Gate~2 is no longer an independent
+downstream missing input.  It is supplied by
+Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}, assuming the canonical
+definition package, ordinary \(u,\mathcal D u\) local complexity, and the
+safe \(L^2\)-input rigidity lemma.
 
-\item The norm-based rank-two route is source-divisible.  The established rows
-have schematic form
+\item The remaining source-side theorem is Gate~1:
 \[
-A_7^{\mathfrak f}\sim H\Gamma_G,
-\qquad
-A_9^{\mathfrak f}\sim H\Gamma_{G,2},
-\qquad
-H=yq''_{\can}.
-\]
-Since
-\[
-H\sim-\frac{q_0(q''_{\can})^3}{288},
-\]
-an interval on which \(q''_{\can}\) is small collapses the known row vector even when
-the anisotropy factor remains live.
-
-\item The projective route cancels \(H\) formally, but it loses magnitude,
-remains singular at
-\[
-\Gamma_G=\Gamma_{G,2}=0,
-\]
-and is not cleanly defined for the corrected row vector unless correction rows
-vanish or are \(H\)-divisible.  No global projective endpoint, holonomy, or
-index theorem is currently available.
-
-\item The same-scale source-flattening construction shows that finite
-same-scale positive packet geometry does not itself prevent source collapse.
-Consequently, an actual proof must use information not already present in the
-local Hadamard/quartet packet geometry.  The next positive target is not another
-local row identity, but the two-gate chain
-\[
+\boxed{
 \int_{I_\rho}|q''_{\can}(m)|^2\,dm
-\ge Q^{-B}|I_\rho|
+\ge Q^{-B}|I_\rho|.
+}
 \]
-followed by
+This is not a local row-identity problem.  It is an actual-zeta arithmetic
+nonflatness problem for the full canonical object
 \[
-\int_{I_\rho}
-|q''_{\can}(m)|^2
-(\Gamma_G(m)^2+\Gamma_{G,2}(m)^2)\,dm
-\ge Q^{-A}|I_\rho|.
+q''_{\can}=B_2+P_2+D_2+E_2.
 \]
-The first estimate is source-curvature observability.  The second is
-source--anisotropy reintegration.  The second does not follow formally from
-the first.
+
+\item If Gate~1 is proved, then the downstream branch requires a row-output
+mechanism.  The active mechanism is carrier/quotient D4 row energy with
+residual control.  Fallback mechanisms are a source-robust row/invariant not
+divisible by \(H=yq''_{\can}\), or a global projective/affine/trace theorem
+with correction control.
+
+\item The \(q_0\)-wall is handled under row-energy architecture by the
+gauge-locked wall-escape theorem plus D4.  If the final row output is forced to
+be exact-point scalar output, the \(q_0\)-adic wall-row audit remains a fallback
+requirement.
 \end{enumerate}
 
-Thus the current framework should be treated as a precise local obstruction
-and diagnostic architecture.  To turn it into a proof of \(\RH\), one still
-needs at least one genuinely new input:
-\[
-\boxed{
-\text{Gate 1: actual-zeta source-curvature observability}
-}
-\]
-together with
-\[
-\boxed{
-\text{Gate 2: source--anisotropy vector observability,}
-}
-\]
-or else a single stronger theorem implying both.  Alternatively, one needs
-\[
-\boxed{
-\text{a source-robust row/invariant not divisible by }H=yq''_{\can},
-}
-\]
-or
-\[
-\boxed{
-\text{a global projective/affine/trace theorem with correction control.}
-}
-\]
-Absent one of these inputs, the present architecture is conditionally
-non-closing.  The least nonlinear arithmetic attack remains
-Hypothesis~\ref{hyp:offline-packet-source-curvature-observability}; the most
-important bridge is
-Hypothesis~\ref{hyp:source-anisotropy-vector-observability}, with the ODE
-identity recorded in
-Remark~\ref{rem:ode-form-source-anisotropy-reintegration}.
+Absent Gate~1 and the stated row-output mechanism, the architecture remains
+conditionally non-closing.
 \end{remark}
 
 \begin{remark}[Open question: are the nontrivial zeros transcendental?]
@@ -39132,6 +39402,75 @@ of \(\zeta(s)\).  It is not currently known whether any \(\gamma_n\) is
 algebraic, irrational, or transcendental, nor whether the \(\gamma_n\) are
 algebraically independent; standard heuristics expect transcendence and
 \(\mathbb Q\)-linear independence, but no proof is available.
+\end{remark}
+
+\section{No-go and audit ledger}
+\label{sec:no-go-and-audit-ledger}
+
+The following negative results and audit boundaries are part of the current
+proof state.
+
+\begin{enumerate}[label=(\roman*)]
+\item \emph{Pointwise base-locus rigidity is false.}
+At a single point one may have
+\[
+\Gamma_G=0,\qquad \Gamma_{G,2}=0,\qquad u\ne0.
+\]
+Gate~2 must use interval or \(L^2\) structure.
+
+\item \emph{Finite same-scale packet geometry does not prove Gate~1.}
+Positive finite quadrature can annihilate finitely many source-curvature jets.
+Gate~1 must use actual-zeta arithmetic, not only local Hadamard packet geometry.
+
+\item \emph{Proxy source curvature is insufficient.}
+A zero-kernel proxy, flexible Dirichlet polynomial, \(B_2\)-only diagnostic, or
+affine-subtracted complement curvature is not the proof object.  Gate~1 and
+Gate~2 use
+\[
+q''_{\can}=B_2+P_2+D_2+E_2.
+\]
+
+\item \emph{Generic determinant nonvanishing is insufficient.}
+A Wronskian or finite determinant can be non-identically zero while becoming
+too small on a one-parameter prime-log orbit.  The missing theorem is an
+actual-zeta nonrecurrence/incidence lower bound, not formal rank.
+
+\item \emph{Filtered-minor isolation is not locally available at current depth.}
+Isolating one subset-product frequency would require an \(m\)-space filter
+larger than the packet scale or derivative depth beyond the current budget.
+
+\item \emph{Trace positivity is not coercivity.}
+A positive explicit-formula or trace identity gives nonnegativity, but Gate~1
+requires a polynomial lower bound on the packet interval.
+
+\item \emph{The scalar \(I\)-coordinate is not a faithful carrier quotient.}
+The order-nine scalar incidence wall appears after independent carrier
+directions are collapsed into the same scalar coordinate.  Carrier or quotient
+row energy should be used unless scalar \(I\)-coordinate output is explicitly
+required.
+
+\item \emph{Wall escape depends on row-output architecture.}
+Wall escape supplies a non-wall sample somewhere in the packet, not a row
+lower bound at a preassigned wall point.  Exact-point architectures require a
+separate \(q_0\)-adic wall-row audit.
+\end{enumerate}
+
+\begin{remark}[Numerical and surrogate status]
+\label{rem:numerical-surrogate-status}
+Current numerical and surrogate experiments are diagnostic only.  Deterministic
+positive quadrature controls show that the harness detects artificial
+same-scale source flattening.  Zero-side proxy scans and fixed-prime/AFE-style
+surrogates have not produced a proof-level counterexample for the full
+canonical object, but relaxed models can still flatten source jets.  The first
+constraint not broken by the adversarial models is full actual-zeta
+compatibility:
+\[
+q''_{\can}=B_2+P_2+D_2+E_2
+\]
+with fixed actual coefficients, completed dual/gamma/tail structure, and
+certified error control.  Numerical evidence should therefore be read as
+support for prioritizing the actual-zeta incidence theorem, not as proof of
+Gate~1.
 \end{remark}
 
 \appendix
