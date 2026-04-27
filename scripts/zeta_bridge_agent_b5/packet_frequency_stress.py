@@ -84,7 +84,9 @@ from afe_logderiv_weights import (  # noqa: E402
 )
 
 
-SCHEMA_VERSION = 2  # v2: B_2 at m (not u_0); B_2 in dual stages; b2_toy label;
+SCHEMA_VERSION = 3  # v3: m_min guard for actual_like_dual / e2 (corner_artifact
+                    # class); m parameter threaded into classify().
+                    # v2: B_2 at m (not u_0); B_2 in dual stages; b2_toy label;
                     # filled op_node fields; sqrt_m guard.
 EPS = 1e-300
 
@@ -674,7 +676,7 @@ def E2_perturbation(M: np.ndarray, trials: int, scale: float, seed: int) -> Dict
 # ============================================================
 
 def classify(stage: str, Q: float, diag: Diagnostics, survives_E2: bool,
-             cfg: Dict[str, Any]) -> str:
+             cfg: Dict[str, Any], m: float = float("nan")) -> str:
     """
     Stage labels:
       relaxed          -> phase-relaxed negative control
@@ -683,7 +685,14 @@ def classify(stage: str, Q: float, diag: Diagnostics, survives_E2: bool,
       formal_dual      -> plus + reflected minus, plateau geometry, B_2 included if cfg
       actual_like_dual -> plus + reflected minus, configured geometry, B_2 included if cfg
       e2               -> row perturbation on actual_like_dual
+
+    Corner guard: m <= 0 is not an admissible RH-height stress point. For
+    actual_like_dual and e2 stages, any candidate at m <= 0 is reported
+    as "corner_artifact" regardless of eta_Z / eta_W magnitudes.
     """
+    if stage in {"actual_like_dual", "e2"} and (math.isfinite(m) and m <= 0):
+        return "corner_artifact"
+
     CZ = float(cfg.get("C_Z", 6.0))
     CW = float(cfg.get("C_W", 6.0))
     CR = float(cfg.get("C_rank", 4.0))
@@ -746,7 +755,7 @@ def make_row(run_id: str, config_name: str, block: PrimeBlock, stage: str,
         row_norm_min=diag.row_norm_min, row_norm_max=diag.row_norm_max,
         sigma_min=diag.sigma_min, sigma_max=diag.sigma_max,
         objective_value=diag.objective_value,
-        collapse_class=classify(stage, block.Q, diag, survives, cfg),
+        collapse_class=classify(stage, block.Q, diag, survives, cfg, m=float(m)),
         notes=notes,
         k_Z=int(cfg.get("k_Z", 0)),
         k_q=int(cfg.get("k_q", 3)),
