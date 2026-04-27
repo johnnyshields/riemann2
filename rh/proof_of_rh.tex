@@ -199,37 +199,125 @@ We write
 q(t):=\Ph'(t).
 \]
 
-\begin{definition}[Canonical actual-zeta phase curvature]
+\begin{definition}[Actual-zeta real phase and canonical Gate--2 normalization]
 \label{def:canonical-actual-zeta-phase-curvature}
-When the local phase is the actual zeta phase, we write
+On ordinary smooth actual-zeta packets we use a real completed critical-line
+phase/scalar
 \[
-\Ph=\Phi_\zeta,
-\qquad
-q_\zeta(t):=\Phi_\zeta'(t).
+\Phi_\zeta.
 \]
-The canonical source-curvature object used by the rank-two Gram rows is
+The associated phase derivative is
+\[
+q_\zeta:=\mathcal D\Phi_\zeta,
+\]
+where \(\mathcal D\) denotes the normalized packet derivative.  In sections
+where ordinary prime notation is used, this means \(q_\zeta=\Phi_\zeta'\) in
+the local spectral coordinate.
+
+The canonical source curvature is
 \[
 \boxed{
-q''_{\can}(m):=q_\zeta''(m)=\Phi_\zeta'''(m).
+q''_{\can}:=\mathcal D^2q_\zeta=\mathcal D^3\Phi_\zeta.
 }
 \]
-Thus \(q''_{\can}\) is the full actual-zeta phase-derivative curvature in the
-same-point Gram normalization.  It is not whitened, projectivized,
-AFE-normalized, or affine-subtracted.
+Equivalently, in ordinary local prime notation,
+\[
+q''_{\can}=q_\zeta''=\Phi_\zeta'''.
+\]
+This is the full actual-zeta phase-derivative curvature in the same-point Gram
+normalization.  It is not whitened, projectivized, AFE-normalized, or
+affine-subtracted.
 
-When no ambiguity is possible, later centered rank-two formulas may write
+When no ambiguity is possible, centered rank-two formulas may write
 \(q,q'',q^{(4)}\) for
 \[
-q_\zeta,\qquad q''_{\can},\qquad (q_\zeta)^{(4)}.
+q_\zeta,\qquad q''_{\can},\qquad \mathcal D^4q_\zeta.
 \]
-If a source/core split is being discussed, the complement-source curvature is
-instead denoted
+If a source/core split is being discussed, the affine-subtracted complement
+curvature is instead denoted
 \[
 q''_{\source,R}(m):=(G^{\new})''(m),
 \]
-and should not be identified with \(q''_{\can}\) unless a separate rederived
-row formula explicitly says so.
+and should not be identified with \(q''_{\can}\) unless the entire finite-\(s\)
+row package has explicitly been rebuilt with \(q''_{\source,R}\) in place of
+the full actual-zeta curvature.
+
+On ordinary smooth zero-separated packets,
+\[
+q_\zeta,\qquad q''_{\can},\qquad \Gamma_G,\qquad \Gamma_{G,2}
+\]
+are real-valued.  If a critical-line zero lies in the unregularized packet
+interval, the packet is routed to the singular/transition branch, or else the
+corresponding regularized phase convention must be used.
 \end{definition}
+
+\begin{definition}[Canonical Gate--2 anisotropy functionals]
+\label{def:canonical-gate-two-anisotropy-functionals}
+In the canonical actual-zeta convention of
+Definition~\ref{def:canonical-actual-zeta-phase-curvature}, define
+\[
+\Gamma_G
+:=
+q''_{\can}-6q_\zeta+2q_\zeta^3,
+\]
+and
+\[
+\Gamma_{G,2}
+:=
+(1-q_\zeta^2)q''_{\can}
+-\frac16\mathcal D^4q_\zeta.
+\]
+When the local coordinate is clear, we suppress the \(\zeta\)-subscript and
+write \(q\) for \(q_\zeta\).
+\end{definition}
+
+\begin{lemma}[Differentiated form of the second Gate--2 anisotropy]
+\label{lem:differentiated-form-second-gate-two-anisotropy}
+With the canonical definitions above,
+\[
+\boxed{
+\Gamma_{G,2}
+=
+2q_\zeta(\mathcal Dq_\zeta)^2
+-\frac16\mathcal D^2\Gamma_G.
+}
+\]
+\end{lemma}
+
+\begin{proof}
+From
+\[
+\Gamma_G=q''_{\can}-6q_\zeta+2q_\zeta^3
+\]
+and \(q''_{\can}=\mathcal D^2q_\zeta\), we compute
+\[
+\mathcal D^2\Gamma_G
+=
+\mathcal D^4q_\zeta
+-6q''_{\can}
++
+12q_\zeta(\mathcal Dq_\zeta)^2
++
+6q_\zeta^2q''_{\can}.
+\]
+Hence
+\[
+\begin{aligned}
+2q_\zeta(\mathcal Dq_\zeta)^2-\frac16\mathcal D^2\Gamma_G
+&=
+2q_\zeta(\mathcal Dq_\zeta)^2
+-\frac16\mathcal D^4q_\zeta
++q''_{\can}
+-2q_\zeta(\mathcal Dq_\zeta)^2
+-q_\zeta^2q''_{\can}  \\
+&=
+(1-q_\zeta^2)q''_{\can}
+-\frac16\mathcal D^4q_\zeta
+=
+\Gamma_{G,2}.
+\end{aligned}
+\]
+\end{proof}
 
 For two nearby points around a center $T$, the natural local point basis is not stable under coalescence. One instead passes to the point-to-jet matrix
 \begin{equation}\label{eq:point-to-jet}
@@ -30027,6 +30115,682 @@ Bottleneck~C still requires a genuine vanishing of the physical aggregate
 presently proved.
 \end{remark}
 
+\section{Downstream local closure package: Gate 2, wall escape, and carrier rows}
+\label{sec:downstream-local-closure-package}
+
+This section records the current local downstream replacement for the older
+\(D1/D2/D3\) architecture.  The active Gate--2 route is no longer a
+Remez--Cartan or pointwise target-smallness route.  It is
+\[
+\boxed{
+\text{Gate 1}
++
+|u'|_\infty\text{ source thickening}
++
+L^2\text{-input real rigidity}
+\Longrightarrow
+\text{Gate 2}.
+}
+\]
+The active wall route is
+\[
+\boxed{
+\text{Gate 2}
++
+\text{gauge-locked wall escape}
++
+\text{D4 row conversion}
++
+\text{row mobility}
+\Longrightarrow
+\text{row energy}.
+}
+\]
+The source-robust wall-row search and the scalar \(I\)-coordinate order-nine
+incidence wall remain fallback formulations only if the row-output architecture
+is forced to be exact-point or scalar-collapsed.
+
+\subsection{\texorpdfstring{\(L^2\)}{L2}-input real rigidity}
+
+\begin{lemma}[\(L^2\)-input real rigidity; safe primitive-bounded form]
+\label{lem:l2-input-real-rigidity-safe}
+Let
+\[
+        J=(-2,2),\qquad J'=(-1,1).
+\]
+Assume \(q,u,g,h\in\mathbb R\) are sufficiently smooth on \(J\), and
+\[
+        u=q'',
+\]
+\[
+        g=q''-6q+2q^3,
+\]
+\[
+        h=2q(q')^2-\frac16g''.
+\]
+Assume the safe local bounds
+\[
+        \|q\|_{L^\infty(J)}
+        +\|q'\|_{L^\infty(J)}
+        +\|q''\|_{L^\infty(J)}
+        \le Q^C,
+\]
+and the \(L^2\)-smallness condition
+\[
+        \|g\|_{L^2(J)}+\|h\|_{L^2(J)}
+        \le \varepsilon |J|^{1/2}.
+\]
+Then, after increasing \(C\) if necessary,
+\[
+        \int_{J'} |u|^2
+        \le Q^C\varepsilon^{2/5}|J'|.
+\]
+\end{lemma}
+
+\begin{proof}
+If \(\varepsilon\ge1\), the conclusion follows immediately from
+\(\|u\|_\infty=\|q''\|_\infty\le Q^C\).  Assume \(0<\varepsilon<1\), and set
+\[
+        F(q):=6q-2q^3.
+\]
+Since \(g=q''-6q+2q^3\), we have
+\[
+        u=q''=F(q)+g.
+\]
+
+Choose
+\[
+        \phi=\psi^2\in C_c^2(J),
+        \qquad
+        0\le \phi\le1,
+        \qquad
+        \phi\equiv1\quad\text{on }J',
+\]
+with
+\[
+        |\phi'|^2\le Q^C\phi,
+        \qquad
+        |\phi''|\le Q^C.
+\]
+Let \(0<\delta<1\), to be chosen later.  Let
+\(\chi_\delta:\mathbb R\to[0,1]\) be smooth with
+\[
+        \chi_\delta(x)=0\quad (|x|\le\delta),
+        \qquad
+        \chi_\delta(x)=1\quad (|x|\ge2\delta),
+\]
+and
+\[
+        |\chi_\delta'|\le C\delta^{-1},
+        \qquad
+        |\chi_\delta''|\le C\delta^{-2}.
+\]
+Define
+\[
+        a_\delta(q):=q\chi_\delta(q).
+\]
+Then
+\[
+        a_\delta'(q)=\chi_\delta(q)+q\chi_\delta'(q)=O(1),
+\]
+and
+\[
+        a_\delta''(q)=2\chi_\delta'(q)+q\chi_\delta''(q)=O(\delta^{-1}),
+\]
+because on the transition region \(\delta\le |q|\le2\delta\) one has
+\(|q|\asymp\delta\).
+
+We first prove the weighted kinetic estimate.  From
+\[
+        h=2q(q')^2-\frac16g'',
+\]
+multiply by \(\phi a_\delta(q)\) and integrate over \(J\):
+\[
+        \int_J 2\phi a_\delta(q)q(q')^2
+        =
+        \int_J \phi a_\delta(q)h
+        +
+        \frac16\int_J \phi a_\delta(q)g''.
+\]
+After integrating by parts twice,
+\[
+        \int_J \phi a_\delta(q)g''
+        =
+        \int_J g(\phi a_\delta(q))''.
+\]
+Thus
+\[
+        \int_J 2\phi\chi_\delta(q)q^2(q')^2
+        =
+        \int_J \phi a_\delta(q)h
+        +
+        \frac16\int_J g(\phi a_\delta(q))''.
+\]
+The first term satisfies
+\[
+        \left|\int_J \phi a_\delta(q)h\right|
+        \le
+        \|\phi a_\delta(q)\|_{L^\infty(J)}
+        \|h\|_{L^2(J)}
+        |J|^{1/2}
+        \le
+        Q^C\varepsilon |J|.
+\]
+Next,
+\[
+        (\phi a_\delta(q))''
+        =
+        \phi''a_\delta(q)
+        +2\phi'a_\delta'(q)q'
+        +\phi a_\delta''(q)(q')^2
+        +\phi a_\delta'(q)q''.
+\]
+Using the bounds on \(a_\delta,a_\delta',a_\delta''\), and the safe bounds on
+\(q,q',q''\), we get
+\[
+        \|(\phi a_\delta(q))''\|_{L^2(J)}
+        \le Q^C\delta^{-1}|J|^{1/2}.
+\]
+Therefore
+\[
+        \left|\int_J g(\phi a_\delta(q))''\right|
+        \le
+        Q^C\varepsilon\delta^{-1}|J|.
+\]
+Consequently,
+\[
+        \int_J\phi\chi_\delta(q)q^2(q')^2
+        \le
+        Q^C\varepsilon\delta^{-1}|J|.
+\]
+On \(|q|\ge2\delta\), \(\chi_\delta(q)=1\) and \(q^2\ge4\delta^2\), so
+\[
+        \int_{\{|q|\ge2\delta\}}\phi(q')^2
+        \le
+        Q^C\varepsilon\delta^{-3}|J|.
+        \tag{1}
+\]
+
+Let \(\theta_\delta:\mathbb R\to[0,1]\) be smooth with
+\[
+        \theta_\delta(q)=0\quad (|q|\le2\delta),
+        \qquad
+        \theta_\delta(q)=1\quad (|q|\ge3\delta),
+\]
+and
+\[
+        |\theta_\delta'|\le C\delta^{-1}.
+\]
+Define
+\[
+        X:=\int_J \phi\,\theta_\delta(q)F(q)^2.
+\]
+Since \(F(q)=q''-g\),
+\[
+        X
+        =
+        \int_J \phi\theta_\delta Fq''
+        -
+        \int_J \phi\theta_\delta Fg.
+\]
+The \(g\)-term obeys
+\[
+        \left|\int_J \phi\theta_\delta Fg\right|
+        \le
+        X^{1/2}\|g\|_{L^2(J)}
+        \le
+        X^{1/2}\varepsilon |J|^{1/2},
+\]
+and hence, after absorption,
+\[
+        \left|\int_J \phi\theta_\delta Fg\right|
+        \le
+        \frac14X+Q^C\varepsilon^2|J|.
+        \tag{2}
+\]
+
+For the main term,
+\[
+        \int_J \phi\theta_\delta Fq''
+        =
+        -\int_J(\phi\theta_\delta F)'q',
+\]
+where
+\[
+        (\phi\theta_\delta F)'
+        =
+        \phi'\theta_\delta F
+        +
+        \phi\theta_\delta'(q)q'F
+        +
+        \phi\theta_\delta F'(q)q'.
+\]
+
+For the boundary term, using \(|\phi'|^2\le Q^C\phi\) and (1),
+\[
+\begin{aligned}
+\left|\int_J\phi'\theta_\delta Fq'\right|
+&\le
+Q^C
+\left(\int_J\phi\theta_\delta F^2\right)^{1/2}
+\left(
+\int_{\{|q|\ge2\delta\}}\phi(q')^2
+\right)^{1/2}  \\
+&\le
+Q^CX^{1/2}(\varepsilon\delta^{-3}|J|)^{1/2}  \\
+&\le
+\frac14X+Q^C\varepsilon\delta^{-3}|J|.
+\end{aligned}
+\tag{3}
+\]
+For the transition term, on \(\operatorname{supp}\theta_\delta'\) one has
+\(2\delta\le |q|\le3\delta\), so
+\[
+        |F(q)|=|6q-2q^3|\le C\delta,
+        \qquad
+        |\theta_\delta'|\le C\delta^{-1}.
+\]
+Thus \(|\theta_\delta'F|\le C\), and by (1),
+\[
+        \left|\int_J\phi\theta_\delta'(q)F(q)(q')^2\right|
+        \le
+        Q^C\varepsilon\delta^{-3}|J|.
+        \tag{4}
+\]
+Finally, since \(F'(q)=6-6q^2\) and \(\|q\|_{L^\infty(J)}\le Q^C\),
+\[
+        \left|\int_J\phi\theta_\delta F'(q)(q')^2\right|
+        \le
+        Q^C\int_{\{|q|\ge2\delta\}}\phi(q')^2
+        \le
+        Q^C\varepsilon\delta^{-3}|J|.
+        \tag{5}
+\]
+Combining (2)--(5) and absorbing,
+\[
+        X
+        \le
+        Q^C(\varepsilon\delta^{-3}+\varepsilon^2)|J|.
+        \tag{6}
+\]
+Since \(\phi=1\) on \(J'\) and \(\theta_\delta=1\) on \(|q|\ge3\delta\),
+\[
+        \int_{J'\cap\{|q|\ge3\delta\}}F(q)^2
+        \le
+        Q^C(\varepsilon\delta^{-3}+\varepsilon^2)|J'|.
+        \tag{7}
+\]
+
+On \(|q|\le3\delta\), \(|F(q)|\le C\delta\).  Since \(u=F(q)+g\),
+\[
+        \int_{J'\cap\{|q|\le3\delta\}}|u|^2
+        \le
+        Q^C(\delta^2+\varepsilon^2)|J'|.
+        \tag{8}
+\]
+Combining (7) and (8),
+\[
+        \int_{J'}|u|^2
+        \le
+        Q^C(\delta^2+\varepsilon\delta^{-3}+\varepsilon^2)|J'|.
+\]
+Choose
+\[
+        \delta=\varepsilon^{1/5}.
+\]
+Then
+\[
+        \delta^2=\varepsilon^{2/5},
+        \qquad
+        \varepsilon\delta^{-3}=\varepsilon^{2/5}.
+\]
+Since \(\varepsilon^2\le\varepsilon^{2/5}\) for \(0<\varepsilon<1\),
+\[
+        \int_{J'}|u|^2
+        \le
+        Q^C\varepsilon^{2/5}|J'|.
+\]
+\end{proof}
+
+\begin{remark}[Residual-stable form]
+\label{rem:l2-rigidity-residual-stable}
+The same estimate holds if the identities hold with \(L^2\)-controlled
+residuals:
+\[
+        g=q''-6q+2q^3+r_g,
+\]
+\[
+        h=2q(q')^2-\frac16g''+r_h,
+\]
+where
+\[
+        \|r_g\|_{L^2(J)}+\|r_h\|_{L^2(J)}
+        \le
+        \varepsilon |J|^{1/2}.
+\]
+Indeed, \(r_h\) enters the weighted kinetic estimate in the same way as \(h\),
+while \(r_g\) enters \(u=F+g-r_g\) and the potential estimate in the same way
+as \(g\).  After increasing \(C\), the same conclusion follows.
+\end{remark}
+
+\begin{remark}[Primitive-free strengthening not used]
+\label{rem:l2-rigidity-primitive-free-not-used}
+One may try to remove the safe primitive bounds on \(q\) and \(q'\) by
+recovering them from
+\[
+q''=u,\qquad F(q)=u-g,\qquad |q|^6\le C(1+|F(q)|^2).
+\]
+That strengthening is not used in the main proof.  The present lemma uses the
+safe assumption
+\[
+\|q\|_\infty+\|q'\|_\infty+\|q''\|_\infty\le Q^C.
+\]
+\end{remark}
+
+\subsection{Gate 2 from source thickening and \(L^2\)-input rigidity}
+
+\begin{theorem}[Gate 2 from Gate 1 and \(L^2\)-input rigidity]
+\label{thm:gate-two-from-gate-one-l2-rigidity}
+Assume the normalized real-canonical convention of
+Definitions~\ref{def:canonical-actual-zeta-phase-curvature} and
+\ref{def:canonical-gate-two-anisotropy-functionals}.  Let
+\[
+u=q''_{\can}=q'',
+\qquad
+g=\Gamma_G=q''-6q+2q^3,
+\qquad
+h=\Gamma_{G,2}=2q(q')^2-\frac16g''.
+\]
+Assume Gate~1:
+\[
+\int_I |u|^2\,dm\ge Q^{-B}|I|.
+\]
+Assume source Lipschitz control
+\[
+\|u'\|_{L^\infty(I)}\le Q^{C_u}|I|^{-1},
+\]
+and assume Lemma~\ref{lem:l2-input-real-rigidity-safe} holds on normalized
+source subintervals with loss \(Q^{C_R}\).  Then Gate~2 holds with any exponent
+\[
+\boxed{
+A>\frac{13}{2}B+C_u+5C_R+O(1).
+}
+\]
+Equivalently, for such \(A\),
+\[
+\boxed{
+\int_I |u|^2(g^2+h^2)\,dm\ge Q^{-A}|I|.
+}
+\]
+\end{theorem}
+
+\begin{proof}
+Assume, toward contradiction, that
+\[
+\int_I |u|^2(g^2+h^2)\,dm\le Q^{-A}|I|.
+\]
+Gate~1 gives \(m_\ast\in I\) with
+\[
+|u(m_\ast)|\ge Q^{-B/2}.
+\]
+Set
+\[
+\tau:=\frac12Q^{-B/2}.
+\]
+By the Lipschitz bound, there is a one-sided or two-sided interval
+\(J\subset I\) such that
+\[
+|u|\ge\tau\quad\text{on }J,
+\]
+and
+\[
+|J|\ge Q^{-B/2-C_u-O(1)}|I|.
+\]
+On \(J\), \(|u|^2\ge\tau^2\).  Therefore
+\[
+\tau^2\int_J(g^2+h^2)\,dm
+\le
+Q^{-A}|I|.
+\]
+Since \(\tau^{-2}\asymp Q^B\), division by \(|J|\) gives
+\[
+\boxed{
+\frac1{|J|}\int_J(g^2+h^2)\,dm
+\le
+Q^{-A+\frac32B+C_u+O(1)}.
+}
+\]
+Put
+\[
+\varepsilon^2
+=
+Q^{-A+\frac32B+C_u+O(1)}.
+\]
+Then
+\[
+\|g\|_{L^2(J)}+\|h\|_{L^2(J)}
+\le
+Q^{O(1)}\varepsilon |J|^{1/2}.
+\]
+Absorbing the harmless factor into \(C_R\), Lemma~\ref{lem:l2-input-real-rigidity-safe}
+gives on \(J'\Subset J\)
+\[
+\int_{J'}|u|^2\,dm
+\le
+Q^{C_R}\varepsilon^{2/5}|J'|.
+\]
+But \(J'\subset J\) and \(|u|\ge\tau\) on \(J\), so
+\[
+\int_{J'}|u|^2\,dm\ge Q^{-B-O(1)}|J'|.
+\]
+Using
+\[
+\varepsilon^{2/5}
+=
+Q^{-\frac15A+\frac3{10}B+\frac15C_u+O(1)},
+\]
+the two estimates are incompatible if
+\[
+C_R-\frac15A+\frac3{10}B+\frac15C_u+O(1)<-B.
+\]
+It suffices that
+\[
+A>\frac{13}{2}B+C_u+5C_R+O(1).
+\]
+Thus Gate~2 failure is impossible for such \(A\).
+\end{proof}
+
+\begin{remark}[Replacement of the old \(D1/D2\) downstream package]
+\label{rem:gate-two-replaces-old-d1-d2}
+Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity} replaces the older
+``density/Remez propagation'' and ``pointwise derivative propagation''
+downstream inputs.  The active local route is
+\[
+\boxed{
+\text{Gate 1}
++
+|u'|_\infty\text{ source thickening}
++
+L^2\text{-input real rigidity}
+\Rightarrow
+\text{Gate 2}.
+}
+\]
+No Remez--Cartan theorem, pointwise target-smallness interval, or pointwise
+\(\Gamma_G''\)-propagation is used in this route.
+\end{remark}
+
+\subsection{Gauge-locked wall escape and row energy}
+
+\begin{theorem}[Gauge-locked wall escape in normalized coordinates]
+\label{thm:gauge-locked-wall-escape-row-energy}
+Fix the normalized derivative convention
+\[
+\mathcal D=\lambda\partial_m.
+\]
+Let
+\[
+q=q_0,\qquad u=q''_{\can},
+\qquad
+\Gamma=(\Gamma_G,\Gamma_{G,2}),
+\qquad
+G:=|u|^2|\Gamma|^2.
+\]
+Assume Gate~2 mass on \(I\):
+\[
+\int_I G(m)\,dm\ge Q^{-A}|I|.
+\]
+Assume polynomial upper bounds
+\[
+G\le Q^{C_G},
+\qquad
+|\Gamma|\le Q^{C_\Gamma},
+\qquad
+|\mathcal D u|\le Q^{C_{u'}}.
+\]
+Define the gauge residuals
+\[
+r_C:=u-\mathcal D^2q_0,
+\]
+\[
+r_G:=
+\Gamma_G-\left(\mathcal D^2q_0-6q_0+2q_0^3\right),
+\]
+and
+\[
+r_H^\ast:=H+\frac{q_0u^3}{288}.
+\]
+Assume on wall-escape neighborhoods that
+\[
+|r_C|\le c\tau,
+\qquad
+|r_G-r_C|\le c\tau,
+\]
+and that \(r_H^\ast\) is controlled by the D4 residual estimate.
+
+Then either the non-wall region
+\[
+\{|q_0|\ge\varepsilon\}
+\]
+already supplies a non-wall D4 sample, or there exists \(m_1\in I\) such that
+\[
+|q_0(m_1)|=\varepsilon,
+\qquad
+|u(m_1)|\ge c\tau,
+\qquad
+|\Gamma_G(m_1)|\ge c\tau.
+\]
+Consequently
+\[
+G(m_1)\ge c\tau^4.
+\]
+If D4 row conversion holds at non-wall samples and row mobility holds, then
+\[
+\boxed{
+\int_I|\mathbf A_N(m)|^2\,dm\ge Q^{-C}|I|.
+}
+\]
+\end{theorem}
+
+\begin{proof}
+Split
+\[
+I_{\rm nd}=\{|q_0|\ge\varepsilon\},
+\qquad
+I_{\rm wall}=\{|q_0|<\varepsilon\}.
+\]
+If \(I_{\rm nd}\) carries a fixed polynomial portion of Gate~2 mass, then
+\(G\le Q^{C_G}\) gives a point \(m_\ast\in I_{\rm nd}\) with polynomially live
+\(G(m_\ast)\), and D4 applies directly.
+
+Assume instead that wall mass dominates.  Remove the low-source set
+\[
+|u|<\tau.
+\]
+Choosing
+\[
+2C_\tau\ge A+2C_\Gamma+O(1)
+\]
+ensures this low-source set cannot carry all wall mass.  Hence there is a
+wall-live point \(m_0\) with
+\[
+|q_0(m_0)|<\varepsilon,
+\qquad
+|u(m_0)|\ge\tau,
+\]
+away from the packet boundary after the standard buffered-packet reduction.
+
+For complex \(q_0\), set
+\[
+e=\frac{\overline{u(m_0)}}{|u(m_0)|},
+\qquad
+Q(m):=\Re(e q_0(m)).
+\]
+Since
+\[
+\mathcal D^2Q(m)=\Re\bigl(e(\mathcal D^2q_0)(m)\bigr)
+=\Re\bigl(e(u-r_C)(m)\bigr),
+\]
+the assumptions \(|r_C|\le c\tau\) and
+\[
+|\mathcal D u|\rho\le c\tau
+\]
+imply
+\[
+\mathcal D^2Q\ge c\tau
+\]
+on a normalized interval of radius \(\rho\).  Taking
+\[
+\rho\asymp\sqrt{\varepsilon/\tau}
+\]
+gives first exit from the strip \(|q_0|<\varepsilon\) within normalized
+distance \(O(\rho)\), provided
+\[
+C_\varepsilon\ge 3C_\tau+2C_{u'}+O(1).
+\]
+Boundary and buffer loss are controlled by choosing
+\[
+C_\varepsilon\ge C_\tau+2A+2C_G+O(1).
+\]
+Thus there exists \(m_1\) with
+\[
+|q_0(m_1)|=\varepsilon,
+\qquad
+|u(m_1)|\ge c\tau.
+\]
+
+Finally,
+\[
+\Gamma_G
+=
+u-6q_0+2q_0^3+(r_G-r_C).
+\]
+At \(m_1\), if \(\varepsilon\ll\tau\) and
+\[
+|r_G-r_C|\le c\tau,
+\]
+then
+\[
+|\Gamma_G(m_1)|\ge c\tau.
+\]
+Thus \(G(m_1)\ge c\tau^4\).  D4 converts this non-wall sample to a row lower
+bound, and row mobility thickens the pointwise lower bound to interval row
+energy.
+\end{proof}
+
+\begin{remark}[D3 is replaced by wall escape plus D4]
+\label{rem:d3-replaced-by-wall-escape-plus-d4}
+The old source-robust \(q_0\)-wall row is not the active route in the
+row-energy architecture.  Wall escape is the analytic version of saturating by
+\(q_0\): instead of dividing by \(q_0\), we move to a nearby point where
+\[
+|q_0|=\varepsilon
+\]
+and use the original rows.  The source-robust wall-row search remains a
+fallback only if the final contradiction requires row conversion at a fixed
+preassigned point.
+\end{remark}
+
 \section{Current proof state after the local package audits}
 \label{sec:current-proof-state-after-local-audits}
 
@@ -30043,6 +30807,50 @@ holonomy/index, or finite-core non-concentration.
 \end{enumerate}
 A statement at level (1) or (2) should not be read as a proof of RH.  The
 current missing theorem is global.
+\end{remark}
+
+\begin{remark}[Updated downstream status after the Gate--2 and carrier-quotient audits]
+\label{rem:updated-downstream-status-gate2-carrier-quotient}
+The downstream local package has changed relative to earlier versions of this
+section.
+
+First, the old \(D1/D2\) propagation route is no longer the active Gate--2
+route.  In the ordinary real-canonical branch, Gate~2 is supplied by
+Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}:
+\[
+\text{Gate 1}
++
+|u'|_\infty\text{ source thickening}
++
+L^2\text{-input real rigidity}
+\Longrightarrow
+\text{Gate 2}.
+\]
+
+Second, the old source-robust \(q_0\)-wall row is no longer the active D3
+route under row-energy architecture.  It is replaced by the gauge-locked wall
+escape theorem, Theorem~\ref{thm:gauge-locked-wall-escape-row-energy}, plus D4.
+
+Third, the scalar order-nine \(I\)-coordinate wall is not the active D4
+obstruction if row energy is measured in the carrier quotient.  The order-seven
+and order-nine clean carriers survive independently in
+\(\mathcal Q_{\rm car}\) by
+Theorem~\ref{thm:d4-carrier-quotient-through-order-nine}.
+
+Thus the current downstream implication is
+\[
+\boxed{
+\text{Gate 1}
++
+\text{ordinary real-canonical local complexity}
++
+\text{carrier-quotient D4 residual control}
+\Longrightarrow
+\text{row energy}.
+}
+\]
+This remains a downstream theorem only.  It does not discharge the upstream
+ordinary/singular actual-zeta inputs needed to obtain Gate~1 globally.
 \end{remark}
 
 This section records the current proof state after the Gate~B, Bottleneck~C,
@@ -33993,6 +34801,171 @@ raw row table.
 \end{enumerate}
 \end{remark}
 
+\begin{definition}[Carrier-graded row module through order nine]
+\label{def:carrier-graded-row-module-order-nine}
+Let \(\mathcal M_{\rm car}\) be the pre-collapse carrier row module through
+order nine, freely generated over the local coefficient ring by
+\[
+\mathsf C_7,\quad
+\mathsf C_{Y12},\quad
+\mathsf C_{N7,I},\quad
+\mathsf C_{N7,D},\quad
+\mathsf C_{N5,I},\quad
+\mathsf C_{N5,D},
+\]
+together with line, background/core, and normalization/subtraction carriers
+\[
+\mathsf C_{\rm line},\qquad
+\mathsf C_{\rm bg/core},\qquad
+\mathsf C_{\rm norm/sub}.
+\]
+Here \(\mathsf C_7\) denotes the order-seven live carrier
+\(T_7^{(1)}\), and \(\mathsf C_{Y12}\) denotes the clean order-nine carrier
+\[
+T_9^{(1,2)}=X_1YX_2-X_2YX_1.
+\]
+
+Define the nuisance submodule
+\[
+\mathcal C_{\rm car}
+:=
+\operatorname{span}
+\{
+\mathsf C_{N7,I},\mathsf C_{N7,D},
+\mathsf C_{N5,I},\mathsf C_{N5,D},
+\mathsf C_{\rm line},\mathsf C_{\rm bg/core},\mathsf C_{\rm norm/sub}
+\}.
+\]
+The carrier quotient is
+\[
+\mathcal Q_{\rm car}:=\mathcal M_{\rm car}/\mathcal C_{\rm car}.
+\]
+\end{definition}
+
+\begin{lemma}[Survival of the order-nine clean carrier in the carrier quotient]
+\label{lem:order-nine-carrier-survives-quotient}
+In \(\mathcal Q_{\rm car}\),
+\[
+[\mathsf C_{Y12}]\ne0,
+\]
+and
+\[
+[\mathsf C_7]\wedge[\mathsf C_{Y12}]\ne0
+\qquad
+\text{in }\wedge^2\mathcal Q_{\rm car}.
+\]
+\end{lemma}
+
+\begin{proof}
+By definition, \(\mathcal M_{\rm car}\) is free on the displayed carrier
+basis.  The nuisance submodule \(\mathcal C_{\rm car}\) is generated by the
+\(N_7\), \(N_5\), line, background/core, and normalization/subtraction
+carriers.  It does not contain \(\mathsf C_{Y12}\) or \(\mathsf C_7\).
+Therefore their quotient classes are nonzero and linearly independent, unless
+an additional row relation is imposed identifying \(\mathsf C_{Y12}\) or
+\(\mathsf C_7\) with the nuisance carriers.  No such relation is part of the
+carrier-graded associated row module.
+\end{proof}
+
+\begin{theorem}[D4 carrier-quotient row conversion through order nine]
+\label{thm:d4-carrier-quotient-through-order-nine}
+Assume the carrier-quotient row-energy formulation is admissible downstream.
+Then, in \(\mathcal Q_{\rm car}\), the order-seven and order-nine live rows
+have the schematic leading form
+\[
+[\mathcal A_7]\sim H\Gamma_G[\mathsf C_7],
+\]
+and
+\[
+[\mathcal A_9]\sim H\Gamma_{G,2}[\mathsf C_{Y12}].
+\]
+Consequently, on the source-good locus \(H\ne0\),
+\[
+(\Gamma_G,\Gamma_{G,2})\ne(0,0)
+\]
+implies nonzero carrier-quotient row output.  Quantitatively, if the quotient
+Gram determinant of
+\[
+[\mathsf C_7],\qquad [\mathsf C_{Y12}]
+\]
+is bounded below by \(Q^{-C}\), then
+\[
+\left|
+([\mathcal A_7],[\mathcal A_9])
+\right|_{\mathcal Q_{\rm car}}
+\ge
+Q^{-C}|H|\left(\Gamma_G^2+\Gamma_{G,2}^2\right)^{1/2}
+\]
+up to the stated D4 residual terms.
+\end{theorem}
+
+\begin{proof}
+The order-seven computation gives
+\[
+[\mathcal A_7]\sim H\Gamma_G[\mathsf C_7].
+\]
+The clean order-nine computation gives
+\[
+[\mathcal A_9]\sim H\Gamma_{G,2}[\mathsf C_{Y12}].
+\]
+By Lemma~\ref{lem:order-nine-carrier-survives-quotient}, the two carrier
+classes are independent in \(\mathcal Q_{\rm car}\).  Therefore the carrier
+response has rank two in the anisotropy vector
+\[
+(\Gamma_G,\Gamma_{G,2}).
+\]
+The quantitative statement is the same observation expressed using the quotient
+Gram matrix.
+\end{proof}
+
+\begin{remark}[Scalar \(I\)-coordinate incidence is a collapse artifact]
+\label{rem:scalar-i-incidence-collapse-artifact}
+The scalar obstruction
+\[
+(A_9^{\mathfrak f})_I
+=
+\frac{yq''\Gamma_{G,2}}{128\pi^2g^3}
++
+R_9^I
+\]
+arises after the collapse map
+\[
+S_I:\mathcal M_{\rm car}\to \mathcal O\cdot I
+\]
+has sent several independent carrier directions to the same scalar
+\(I\)-coordinate.  In the carrier quotient, the lower-carrier, line,
+background/core, and normalization/subtraction contributions are nuisance
+directions.  Thus the scalar incidence wall
+\[
+F_9^I=0
+\]
+is relevant only if the downstream row theorem insists on collapsed scalar
+\(I\)-coordinate energy.  It is not an obstruction to carrier/quotient row
+energy.
+\end{remark}
+
+\begin{remark}[Admissibility of carrier-quotient row energy]
+\label{rem:carrier-quotient-row-energy-admissible}
+The downstream row obstruction is formulated at the row-module or quotient-row
+level, not only after scalar collapse to the \(I\)-coordinate.  Therefore a
+lower bound of the form
+\[
+\int_I
+\left|
+[\mathcal A_N^{\rm car}(m)]
+\right|_{\mathcal Q_{\rm car}}^2\,dm
+\ge Q^{-C}|I|
+\]
+is an admissible row-energy output.  The scalar coordinate
+\[
+S_I(\mathcal A_N)
+\]
+is only one coordinate readout and is not faithful on the carrier quotient.  If
+one were to require scalar \(I\)-coordinate energy only, then the scalar
+cross-channel wall would remain a genuine obstruction.  Under the carrier
+quotient formulation it is quotiented away.
+\end{remark}
+
 \begin{remark}[Raw skew coefficients \(F_5\) and \(F_7\)]
 \label{rem:raw-skew-coefficients-F5-F7}
 For the centered raw off-diagonal scalar
@@ -34880,6 +35853,28 @@ H=yq''_{\can}
 \]
 This cubic source factor is the main vulnerability of the rank-two norm route.
 \end{definition}
+
+\begin{remark}[Carrier quotient version of the source-weighted residual]
+\label{rem:carrier-quotient-source-weighted-residual}
+Definition~\ref{def:source-weighted-layered-residual} records the scalar
+source-weighted scale
+\[
+(H\Gamma_G,\ H\Gamma_{G,2}).
+\]
+In the carrier-quotient row formulation, the corresponding object is
+\[
+\mathcal R_{\rm sw}^{\rm car}
+:=
+\left(
+H\Gamma_G[\mathsf C_7],
+\,
+H\Gamma_{G,2}[\mathsf C_{Y12}]
+\right)
+\in \mathcal Q_{\rm car}^{\oplus 2}.
+\]
+This is the proof-relevant row-energy object whenever the downstream
+contradiction is stated before scalar \(I\)-coordinate collapse.
+\end{remark}
 
 \begin{proposition}[Source-divisibility of the established fixed-sector tower]
 \label{prop:source-divisibility-established-fixed-sector-tower}
@@ -36006,6 +37001,21 @@ obstruction and diagnostic framework, but it is non-closing unless one supplies
 both actual-zeta source-curvature observability and source--anisotropy
 reintegration, or else supplies a genuinely source-robust row or a new global
 arithmetic/projective/trace theorem.
+\end{remark}
+
+\begin{remark}[How the downstream repairs modify the source-collapse ledger]
+\label{rem:downstream-repairs-modify-source-collapse-ledger}
+The source-collapse ledger remains valid as a no-go statement for purely local
+rank-two norm arguments and for collapsed scalar \(I\)-coordinate row energy.
+It should not be read as a no-go for the repaired downstream package.  The
+repaired package first proves the source--anisotropy Gate~2 estimate from
+Gate~1 by \(L^2\)-input rigidity, then uses wall escape and carrier-quotient
+row energy to convert the resulting interval mass into row energy.  Thus the
+source-collapse examples remain diagnostics and negative controls, but they no
+longer constitute the active downstream obstruction once the hypotheses of
+Theorems~\ref{thm:gate-two-from-gate-one-l2-rigidity},
+\ref{thm:gauge-locked-wall-escape-row-energy}, and
+\ref{thm:d4-carrier-quotient-through-order-nine} are assumed.
 \end{remark}
 
 \begin{remark}[Corrected projective transport obstruction]
@@ -37814,24 +38824,35 @@ lemma.  Hence the assumed failure of Gate~2 is impossible after weakening the
 exponent.
 \end{proof}
 
-\begin{remark}[Status of the Gate--2 analytic package]
+\begin{remark}[Status of the Gate--2 analytic package after the \(L^2\)-rigidity repair]
 \label{rem:status-gate-two-analytic-good-patch-package}
-The current draft contains several supporting analytic estimates: local
-source-curvature control, affine-jet subtraction estimates, tail-curvature
-bounds, corrected block perturbation estimates, and Cauchy bounds for the
-finite-\(s\) corrected scalar.  These do not yet imply
-Hypothesis~\ref{hyp:gate-two-derivative-complexity-good-patch}.  In
-particular, the draft still needs an \(m\)-variable polynomial
-derivative-complexity theorem through order six and a Remez--Bernstein
-propagation lemma for
+The previous conditional route through thick-set-to-interval propagation and
+pointwise control of \(\Gamma_G''\) is no longer the active Gate--2 route.
+In the ordinary real-canonical branch, Gate~2 is supplied by
+Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}.
+
+The remaining local hypotheses are now sharply reduced:
+\begin{enumerate}
+\item the real-canonical definition of \(q_\zeta\), \(q''_{\can}\),
+\(\Gamma_G\), and \(\Gamma_{G,2}\);
+
+\item the source Lipschitz bound
 \[
-u=q''_{\can},\qquad
-\Gamma_G,\qquad
-\Gamma_{G,2},\qquad
-\Gamma_G''.
+\|u'\|_{L^\infty(I)}\le Q^{C_u}|I|^{-1},
+\qquad
+u=q''_{\can};
 \]
-Thus Gate~2 is not currently a consequence of Gate~1 unless the
-analytic-good-patch package is supplied.
+
+\item the safe primitive-bounded hypotheses in
+Lemma~\ref{lem:l2-input-real-rigidity-safe}, or a later replacement proving
+the primitive-free strengthening;
+
+\item residual-stable identities if the displayed formulas for \(g\) and \(h\)
+are used with controlled \(L^2\)-errors.
+\end{enumerate}
+
+Thus the old \(D1/D2\) status should be read as historical/fallback for this
+branch, not as the current downstream proof gate.
 \end{remark}
 
 \begin{remark}[Off-line-packet conditional form]
@@ -41320,6 +42341,66 @@ Finally, none of Gate~A, Gate~B, or the \(Z_j[M]\)-connection package by
 itself proves the global package-to-\(\Xi_\zeta^{(N)}\) hidden-state
 bridge or the final finite-core contradiction.  Those remain downstream
 theorem obligations.
+\end{remark}
+
+\section{Final status after the downstream closure repairs}
+\label{sec:final-status-after-downstream-closure-repairs}
+
+\begin{remark}[What is closed downstream and what remains upstream]
+\label{rem:final-status-downstream-vs-upstream}
+The local downstream layer now has the following conditional form.
+
+In the ordinary real-canonical branch,
+\[
+\text{Gate 1}
++
+|u'|_\infty\text{ source thickening}
++
+L^2\text{-input real rigidity}
+\Longrightarrow
+\text{Gate 2}.
+\]
+The \(q_0\)-wall is handled, under row-energy architecture, by normalized
+wall escape:
+\[
+\text{Gate 2}
++
+\text{gauge-locked wall escape}
++
+\text{D4}
++
+\text{row mobility}
+\Longrightarrow
+\text{row energy}.
+\]
+The order-nine scalar cross-channel wall is bypassed if D4 is formulated in
+carrier/quotient row energy:
+\[
+[\mathcal A_7]\sim H\Gamma_G[\mathsf C_7],
+\qquad
+[\mathcal A_9]\sim H\Gamma_{G,2}[\mathsf C_{Y12}].
+\]
+
+Therefore the old broad downstream ledger
+\[
+D1+D2+D3+D4
+\]
+should now be read as a historical decomposition.  The active downstream
+obligations are:
+\begin{enumerate}
+\item ordinary real-canonical local complexity for \(u=q''_{\can}\) and its
+normalized derivative;
+\item the safe \(L^2\)-input rigidity lemma;
+\item gauge-locked wall escape in the same normalized derivative convention;
+\item D4 carrier-quotient row conversion and residual control;
+\item row mobility.
+\end{enumerate}
+
+This does not prove RH.  The upstream ordinary/singular gates remain separate
+actual-zeta arithmetic inputs.  In particular, a complete proof still requires
+the global mechanism that supplies Gate~1, plus the ordinary/singular routing
+and any remaining finite-core non-concentration inputs stated elsewhere in the
+draft.
 \end{remark}
 
 \begin{thebibliography}{99}
