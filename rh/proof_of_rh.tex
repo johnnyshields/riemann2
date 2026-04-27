@@ -40604,35 +40604,89 @@ lower bound at a preassigned wall point.  Exact-point architectures require a
 separate \(q_0\)-adic wall-row audit.
 \end{enumerate}
 
-\begin{remark}[Numerical and surrogate status]
+\begin{remark}[Numerical and surrogate evidence archive]
 \label{rem:numerical-surrogate-status}
-Current numerical and surrogate experiments are diagnostic only.  Deterministic
-positive quadrature controls show that the harness detects artificial
-same-scale source flattening; this is the mandatory negative control.  Singular
-dominance controls show that a single shallow packet produces huge Gate--2
-mass, and that the singular danger is again same-scale cancellation of source
-jets.
+The numerical and surrogate experiments in this draft are diagnostic only.
+They do not prove Gate~1, O1, O2, O3, or any global incidence theorem.
+Their value is to rule out obvious relaxed countermechanisms and to guide the
+next arithmetic inputs.
 
-A first zero-kernel-only smoke scan found no evidence of actual-zero proxy
-Gate~1 failure.  In that proxy run the strongest low-energy interval was only
-mildly low:
+The current evidence archive is:
 \[
-B_I^{\rm eff}\approx1.41,\qquad E_I\approx0.185,
+\begin{array}{c|c|c|c}
+\text{branch} & \text{scope} & \text{result} & \text{interpretation}\\
+\hline
+\text{packet-frequency determinant stress}
+&
+R\le16,\ m_{\min}=50,\ \text{reflected/actual-like dual and }E_2
+&
+\text{Yellow}=0,\ \text{Red}=0
+&
+\text{no determinant-incidence collapse detected}\\
+\hline
+\text{local }Z_\alpha\text{-amplitude v1}
+&
+1152\text{ rows}
+&
+\text{Yellow}=0,\ \text{Red}=0
+&
+\text{no local amplitude/jet flatness detected}\\
+\hline
+\text{v2 direct jet/cell-sum hardening}
+&
+\text{adversarial targets from v1/determinant runs}
+&
+\text{no Yellow/Orange/Red in the recorded runs}
+&
+\text{no cell-mass collapse found at }Z_\alpha\text{-near zeros}\\
+\hline
+\text{multiblock }K=8\text{ cell test}
+&
+794\text{ rows with log-uniform support}
+&
+\text{Yellow}=0,\ \text{Orange}=0,\ \text{Red}=0
+&
+\text{supports multiblock fixed-width cell nonrecurrence}\\
+\hline
+\text{small }Z_\alpha\text{ adversarial rows}
+&
+|Z_\alpha|\sim10^{-15}\text{--}10^{-12}
+&
+\text{amplitude, jets, and cell mass stayed non-small}
+&
+Z_\alpha\approx0\not\Rightarrow\text{ local collapse}
+\end{array}
 \]
-with finite jets not simultaneously small.  This should be read as
-encouraging but weak evidence: the run used a proxy kernel, omitted the exact
-canonical \(B_2\), and treated critical-line zeros through an artificial
-regularization parameter.
 
-The first constraint not broken by adversarial or surrogate models remains
-full actual-zeta compatibility:
+The strongest empirical message is:
+\[
+\boxed{
+Z_\alpha(m_0)\approx0
+\not\Rightarrow
+\text{amplitude / jet / cell collapse}
+}
+\]
+in the tested packet-frequency surrogates.
+
+The numerical evidence also has clear limits:
+\begin{enumerate}
+\item It does not prove fixed-width cell nonrecurrence.
+\item It does not prove cofactor-vector nonrecurrence.
+\item It does not prove Wronskian angle nonalignment.
+\item It does not prove singular anti-design exclusion.
+\item It does not replace canonical transfer from model rows to the actual
+object \(q''_{\can}=B_2+P_2+D_2+E_2\).
+\end{enumerate}
+
+The first constraint not broken by the adversarial relaxed models remains full
+actual-zeta compatibility:
 \[
 q''_{\can}=B_2+P_2+D_2+E_2
 \]
 with fixed actual coefficients, completed dual/gamma/tail structure, and
-certified error control.  Numerical evidence should therefore be read as
-support for prioritizing the actual-zeta incidence/nonrecurrence theorem, not
-as proof of Gate~1.
+certified error control.  Thus the numerical evidence supports prioritizing
+the actual-zeta incidence/nonrecurrence theorem; it is not a substitute for
+that theorem.
 \end{remark}
 
 \appendix
@@ -44205,6 +44259,88 @@ The three regimes must be routed explicitly.  A proof in one regime should not
 be cited as proof in another without a transition theorem.
 \end{remark}
 
+\begin{theorem}[Deep singular Gate--1 alternative]
+\label{thm:deep-singular-gate-one-alternative}
+Let
+\[
+I_\rho=\gamma+cX,
+\qquad
+cQ\ll(\log Q)^{-C_0}.
+\]
+Assume that on \(I_\rho\) the canonical source curvature decomposes as
+\[
+q''_{\can}(\gamma+cx)
+=
+c^{-3}Q_{\rm sing}''(x)
++
+R_{\rm far}(\gamma+cx),
+\]
+where \(Q_{\rm sing}\) is the normalized same-scale singular packet aggregate,
+and \(R_{\rm far}\) contains the background, far-zero tail, non-same-scale
+packets, and canonical residual terms.  If
+\[
+\|Q_{\rm sing}''\|_{L^2(X)}\ge Q^{-A}
+\]
+and
+\[
+\|R_{\rm far}\|_{L^2(I_\rho)}
+\le
+\frac12c^{-5/2}Q^{-A},
+\]
+then
+\[
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm
+\ge
+Q^{-B}|I_\rho|
+\]
+for some polynomial exponent \(B=B(A)\).
+
+Consequently, in the deep singular regime, Gate~1 can fail only if
+\[
+\|Q_{\rm sing}''\|_{L^2(X)}<Q^{-A}.
+\]
+Equivalently, after finite-jet reduction, the actual same-scale singular packet
+must satisfy a sine-moment anti-design
+\[
+\sum_j w_j\sin(k\theta_j)+\mathcal B_k\approx0,
+\qquad
+3\le k\le R+3,
+\]
+where \(\mathcal B_k\) denotes the normalized background and far-tail
+contribution.
+\end{theorem}
+
+\begin{proof}
+By the scaling \(m=\gamma+cx\),
+\[
+\|c^{-3}Q_{\rm sing}''\|_{L^2(I_\rho)}
+=
+c^{-5/2}\|Q_{\rm sing}''\|_{L^2(X)}
+\ge c^{-5/2}Q^{-A}.
+\]
+The far-term assumption gives
+\[
+\|q''_{\can}\|_{L^2(I_\rho)}
+\ge
+\frac12c^{-5/2}Q^{-A}.
+\]
+Squaring,
+\[
+\int_{I_\rho}|q''_{\can}|^2\,dm
+\ge
+\frac14c^{-5}Q^{-2A}.
+\]
+Since \(|I_\rho|\asymp c\), this equals
+\[
+\frac14c^{-6}Q^{-2A}|I_\rho|.
+\]
+The hypothesis \(cQ\ll(\log Q)^{-C_0}\) implies
+\[
+c^{-6}\gg Q^6(\log Q)^{6C_0}.
+\]
+After increasing \(B\), this gives the claimed Gate--1 lower bound.
+\end{proof}
+
 \subsection{No-go archive for the ordinary Wronskian route}
 \label{subsec:no-go-archive-ordinary-wronskian}
 
@@ -44350,6 +44486,49 @@ B_2(t)=\theta'''(t)
 and must be included in the canonical object unless explicitly transferred out.
 \end{remark}
 
+\begin{remark}[Derivative budget for the ordinary Wronskian route]
+\label{rem:ordinary-wronskian-derivative-budget}
+The ordinary Wronskian route must be run with normalized derivatives.  With
+\[
+G_0=Z_\alpha,\qquad
+G_{j+1}=\mathcal D^j q''_{\can},\qquad 0\le j\le R,
+\]
+and column operators of degree at most \(R+1\), the largest source derivative
+appearing in the determinant is
+\[
+\mathcal D^{2R+1}q''_{\can}.
+\]
+Equivalently, since \(q''_{\can}=q_\zeta''\), the primitive phase requires
+derivatives through order \(2R+3\), while the \(Z_\alpha\)-row requires
+derivatives through order \(R+1\).
+
+The safe depth is
+\[
+R\asymp\frac{\log Q}{\log\log Q}.
+\]
+At this depth,
+\[
+e^{O(R\log R)}=Q^{O(1)},
+\]
+so Cauchy estimates, smoothing-weight derivatives, gamma/Stirling derivatives,
+determinant perturbation constants, and finite-jet-to-energy constants can
+remain polynomial.  A depth \(R=O(\log Q)\) is not safe unless a separate
+no-factorial-loss theorem is supplied, because the same losses become
+\(Q^{O(\log\log Q)}\).
+
+Accordingly, any ordinary Wronskian theorem must control
+\[
+\max_{0\le k\le 2R+1}|\mathcal D^kE_2|\le Q^{-C_E}
+\]
+for the full canonical object
+\[
+q''_{\can}=B_2+P_2+D_2+E_2.
+\]
+A theorem for \(P_2\), \(B_2+P_2\), a finite zero-kernel truncation, or any
+other proxy is not an ordinary Gate--1 theorem unless it includes an explicit
+transfer estimate to \(q''_{\can}\) at this derivative depth.
+\end{remark}
+
 \section{Conditional status after the downstream closure repairs}
 \label{sec:final-status-after-downstream-closure-repairs}
 
@@ -44391,11 +44570,18 @@ This statement is a carrier-quotient row-energy statement.  It does not assert
 that the collapsed scalar \(I\)-coordinate order-nine expression is coercive.
 If scalar \(I\)-coordinate energy is required, the finite incidence wall
 \[
-F_9^I=0,\qquad yq''\Gamma_{G,2}\ne0
+F_9^I=0,\qquad yq''_{\can}\Gamma_{G,2}\ne0
 \]
 must still be controlled or bypassed by a higher/ambient row.  Under the
 carrier-quotient row-energy formulation, that scalar wall is a collapse
 artifact rather than a D4 obstruction.
+
+Thus the active D4 object is the carrier/quotient row-energy class.  The scalar
+\(I\)-coordinate order-nine incidence wall should be retained only as a
+fallback audit for architectures that insist on collapsed scalar output.
+Accordingly, the scalar incidence wall should not be listed among the active
+downstream blockers unless a later section explicitly chooses scalar
+\(I\)-coordinate row energy as the output norm.
 
 Therefore the old broad downstream ledger
 \[
