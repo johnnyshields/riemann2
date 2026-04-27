@@ -30546,7 +30546,7 @@ fixed by \(q_\zeta\).
 \label{rem:gate-two-compatibility-residuals}
 If an approximate convention is used, define
 \[
-        r_u:=u-q'',
+        r_C:=u-q'',
 \]
 \[
         r_G:=\Gamma_G-(q''-6q+2q^3),
@@ -30560,15 +30560,15 @@ and
 \]
 The main canonical convention of this draft has
 \[
-        r_u=r_G=r_{G,2}=0.
+        r_C=r_G=r_{G,2}=0.
 \]
 
 If a residual convention is used instead, then the \(L^2\)-input rigidity
 argument applies to \(q''\), while the Gate--2 source is \(u\).  Therefore one
-must also control the discrepancy \(r_u=u-q''\).  A sufficient residual package
+must also control the curvature discrepancy \(r_C=u-q''\).  A sufficient residual package
 on the source interval \(J\) is
 \[
-        \|r_u\|_{L^2(J)}
+        \|r_C\|_{L^2(J)}
         +\|r_G\|_{L^2(J)}
         +\|r_{G,2}\|_{L^2(J)}
         \le
@@ -30619,7 +30619,22 @@ Hence
 \[
 \|q\|_{L^6(J)}\le Q^C|J|^{1/6}.
 \]
-Since \(q''=u\in L^\infty(J)\), the one-dimensional interpolation estimate gives
+Since \(q''=u\in L^\infty(J)\), the one-dimensional interpolation estimate on
+the polynomially shrunken interval \(J_1\Subset J\) gives
+\[
+\|q\|_{L^\infty(J_1)}
+\le
+C\left(
+\|q\|_{L^6(J)}
++
+\|q\|_{L^6(J)}^{\frac35}
+\|q''\|_{L^\infty(J)}^{\frac25}
++
+1
+\right),
+\]
+after rescaling \(J\) to a bounded interval and absorbing the polynomial
+shrinkage factor into \(Q^C\).  Hence
 \[
 \|q\|_{L^\infty(J_1)}\le Q^C.
 \]
@@ -30663,9 +30678,10 @@ Assume the safe local bounds
         +\|q''\|_{L^\infty(J)}
         \le Q^C,
 \]
-This safe bound may either be assumed directly or obtained locally by applying
-Lemma~\ref{lem:local-primitive-recovery-from-l2-small-g} on a slightly larger
-source interval.  Assume also the \(L^2\)-smallness condition
+In the active Gate--2 proof this safe bound is assumed directly on the
+normalized source interval.  Lemma~\ref{lem:local-primitive-recovery-from-l2-small-g}
+records a possible strengthening, but it is not used to justify this lemma in
+the main argument.  Assume also the \(L^2\)-smallness condition
 \[
         \|g\|_{L^2(J)}+\|h\|_{L^2(J)}
         \le \varepsilon |J|^{1/2}.
@@ -30947,7 +30963,7 @@ Since \(\varepsilon^2\le\varepsilon^{2/5}\) for \(0<\varepsilon<1\),
 The same estimate holds if the identities hold with \(L^2\)-controlled
 residuals:
 \[
-        r_u:=u-q'',
+        r_C:=u-q'',
 \]
 \[
         g=q''-6q+2q^3+r_g,
@@ -30958,7 +30974,7 @@ and
 \]
 where
 \[
-        \|r_u\|_{L^2(J)}
+        \|r_C\|_{L^2(J)}
         +
         \|r_g\|_{L^2(J)}
         +
@@ -30968,7 +30984,7 @@ where
 \]
 Indeed, \(r_h\) enters the weighted kinetic estimate in the same way as \(h\),
 while \(r_g\) enters the potential estimate in the same way as \(g\).  The
-additional residual \(r_u\) is needed only at the final comparison between the
+additional residual \(r_C\) is needed only at the final comparison between the
 ideal curvature \(q''\) and the source \(u\).  After increasing \(C\), the same
 conclusion follows:
 \[
@@ -30977,7 +30993,7 @@ conclusion follows:
 \]
 In the exact real-canonical convention used in the main argument,
 \[
-r_u=r_g=r_h=0.
+r_C=r_g=r_h=0.
 \]
 \end{remark}
 
@@ -31553,6 +31569,46 @@ provided the nuisance frame is polynomially stable:
 \]
 If raw or carrier-row energy is accepted downstream, no moving-frame derivative
 estimate is needed.
+\end{remark}
+
+\begin{remark}[Frozen quotient coordinates avoid moving-frame derivatives]
+\label{rem:frozen-quotient-coordinates-row-mobility}
+If the quotient frame \(\mathcal Q_N(m)\) varies with \(m\), one can avoid
+moving-frame derivative estimates by freezing the quotient coordinates at the
+D4 sample point \(m_\ast\).  Suppose
+\[
+|[\mathbf A_N(m_\ast)]|_{\mathcal Q_N(m_\ast)}\ge Q^{-C_A}
+\]
+and the quotient Gram matrix at \(m_\ast\) is polynomially nondegenerate.  Let
+\(\ell_7^\ast,\ell_9^\ast\) be dual quotient coordinates at \(m_\ast\), extended
+as fixed linear functionals on the ambient finite row space.  Then
+\[
+|\ell_7^\ast(\mathbf A_N(m_\ast))|^2
++
+|\ell_9^\ast(\mathbf A_N(m_\ast))|^2
+\ge Q^{-C}.
+\]
+If the ambient row vector satisfies
+\[
+|\mathbf A_N'(m)|\le Q^{C_D}|I|^{-1},
+\]
+then the two fixed scalar functions
+\[
+\ell_7^\ast(\mathbf A_N(m)),
+\qquad
+\ell_9^\ast(\mathbf A_N(m))
+\]
+obey the same row-mobility argument, yielding
+\[
+\int_I
+\left(
+|\ell_7^\ast(\mathbf A_N(m))|^2+
+|\ell_9^\ast(\mathbf A_N(m))|^2
+\right)\,dm
+\ge Q^{-C'}|I|.
+\]
+Thus carrier-quotient row energy can be proved using fixed dual coordinates at
+the sample point, without differentiating the moving quotient frame.
 \end{remark}
 
 \begin{theorem}[Local downstream closure from Gate--2 and D4]
@@ -36145,6 +36201,29 @@ chosen non-wall and wall-escape thresholds.
 Terms without sufficient factors of \(q_0,u,\Gamma\) belong to
 \(\mathbf R_{\rm abs}\).  These are the only residuals requiring a hard
 absolute smallness condition in the wall-escape corridor.
+
+Equivalently, for a schematic term
+\[
+T=q_0^a u^b \Gamma^\ell D,
+\qquad |D|\le Q^C,
+\]
+compare to the leading scale
+\[
+q_0u^3\Gamma.
+\]
+The relative size is bounded by
+\[
+\frac{|T|}{|q_0u^3\Gamma|}
+\le
+Q^C
+|q_0|^{a-1}
+|u|^{b-3}
+|\Gamma|^{\ell-1}.
+\]
+Terms with \((a,b,\ell)=(1,3,1)\) belong in the effective leading matrix \(L\),
+not in the residual.  Terms with extra useful \(q_0,u,\Gamma\)-valuation are
+relative residuals.  Only terms without enough useful valuation are absolute
+floors and must satisfy the wall-escape corridor estimates.
 \end{definition}
 
 \begin{remark}[Filtered D4 row observability]
@@ -36173,6 +36252,104 @@ L_3=-\frac1{288}I_2.
 \]
 If a lower \(u\)-valuation anisotropy-linear layer appears, it should be
 promoted into the leading filtered matrix rather than treated as an error.
+\end{remark}
+
+\begin{remark}[Associated-graded D4 determinant certificate]
+\label{rem:associated-graded-d4-determinant-certificate}
+A finite way to certify D4 is to compute the associated-graded coefficient
+matrix of \((A_7,A_9)\) in the anisotropy variables
+\[
+\Gamma=(\Gamma_G,\Gamma_{G,2}).
+\]
+Write
+\[
+A_7^{\mathfrak f}
+=
+q_0u^3
+\left(
+\alpha_7\Gamma_G+\beta_7\Gamma_{G,2}
+\right)
++
+E_7,
+\]
+\[
+A_9^{\mathfrak f}
+=
+q_0u^3
+\left(
+\beta_9\Gamma_G+\alpha_9\Gamma_{G,2}
+\right)
++
+E_9,
+\]
+after absorbing all same-valuation anisotropy-linear terms into the effective
+matrix.  Then the D4 rank condition is
+\[
+\Delta_{7,9}:=\alpha_7\alpha_9-\beta_7\beta_9,
+\qquad
+|\Delta_{7,9}|\ge Q^{-C}.
+\]
+Equivalently, after eliminating the lower channel from \(A_9\),
+\[
+\widetilde A_9
+=
+A_9-\frac{\beta_9}{\alpha_7}A_7
+\]
+has leading coefficient
+\[
+\frac{\Delta_{7,9}}{\alpha_7}
+\]
+on \(\Gamma_{G,2}\).  Thus D4 closes with \(A_7,A_9\) if \(A_7\) detects
+\(\Gamma_G\) and \(\widetilde A_9\) detects a genuinely new
+\(\Gamma_{G,2}\)-direction, with half-leading residual control.
+
+In the expected clean carrier normalization,
+\[
+\alpha_7\alpha_9\ne0,
+\qquad
+\beta_7,\beta_9
+\]
+are either lower filtration or absorbed into the effective matrix, and the
+determinant is a fixed nonzero scalar multiple of \(1/288^2\).
+\end{remark}
+
+\begin{remark}[Nonzero D4 root traps are harmless under energetic sampling]
+\label{rem:nonzero-d4-root-trap}
+If a triangularized row coordinate has the form
+\[
+B_7=X+E_7,
+\qquad
+B_9=Y R_Y(Y)+X(\cdots)+E_9,
+\]
+where
+\[
+X=\Gamma_G,\qquad Y=\Gamma_{G,2},
+\]
+then a possible finite obstruction is a nonzero root
+\[
+R_Y(\zeta)=0,\qquad \zeta\ne0.
+\]
+The corresponding bad branch is
+\[
+X\approx0,\qquad Y\approx\zeta.
+\]
+This branch cannot persist on a polynomial-size real interval under the
+Gate--2 ODE identities.  Indeed,
+\[
+X=q''-6q+2q^3,
+\qquad
+Y=2q(q')^2-\frac16X''.
+\]
+Testing the second identity against a cutoff and integrating \(X''\) by parts
+twice converts the apparent derivative obstruction into an \(L^2\)-small
+\(X\)-term, just as in the \(L^2\)-input rigidity proof.  Thus an interval on
+which \(X\approx0\) and \(Y\approx\zeta\ne0\) would force \(Y\) small on a
+shrunken interval, contradicting \(|\zeta|\ge Q^{-C}\).
+
+Consequently, under existential or energetic row sampling, nonzero row roots
+are not fatal: isolated occurrences can be avoided, and interval traps are
+ruled out by the same local dynamics behind Gate--2 rigidity.  If the proof
+were exact-point locked, such roots would again become relevant.
 \end{remark}
 
 \begin{remark}[Raw skew coefficients \(F_5\) and \(F_7\)]
@@ -36921,7 +37098,7 @@ alignment.  A transported finite-core theorem would therefore require a new
 coercivity, boundary, incidence, or cone-control input.
 \end{remark}
 
-\subsection{Source-weighted interval non-concentration as the two-gate arithmetic problem}
+\subsection{Source-weighted interval non-concentration after the Gate--2 repair}
 \label{subsec:layered-finite-core-nonconcentration-gate}
 
 The local fixed-sector visibility result is layered through order nine:
@@ -39350,9 +39527,15 @@ The purpose is not to prove anything numerically, but to decide whether
 source-flat intervals are common in actual zeta data or are an artefact of the
 fixed-prime/AFE surrogates.  If source-flat intervals appear in actual data,
 Hypothesis~\ref{hyp:offline-packet-source-curvature-observability} is likely
-false in its present form.  If they do not appear, the first theorem to attack is the interval \(L^2\)
-source-curvature observability estimate; the next theorem is the
-source--anisotropy reintegration estimate.
+false in its present form.  If they do not appear, the first theorem to attack
+is the interval \(L^2\) source-curvature observability estimate for the full
+canonical object
+\[
+q''_{\can}=B_2+P_2+D_2+E_2.
+\]
+In the ordinary real-canonical branch, the source--anisotropy step is no
+longer a separate next theorem; it is supplied by
+Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}.
 \end{remark}
 
 \begin{remark}[Current branch decision]
@@ -39365,14 +39548,12 @@ projectivization alone.  The sharp remaining fork is:
 \begin{enumerate}
 \item Prove actual-zeta source-curvature observability,
 \[
-\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|,
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|.
 \]
-and then prove source--anisotropy reintegration,
-\[
-\int_{I_\rho}
-|q''_{\can}|^2(\Gamma_G^2+\Gamma_{G,2}^2)\,dm
-\ge Q^{-A}|I_\rho|;
-\]
+In the ordinary real-canonical branch, source--anisotropy reintegration then
+follows from Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}.  The
+remaining downstream burden is to convert the resulting Gate--2 mass into row
+energy through D4 carrier-quotient row conversion and residual control;
 
 \item or construct/verify an actual-zeta source-collapse model satisfying
 \[
@@ -39447,14 +39628,16 @@ non-concentration, for example
 \mathcal N_k^{\rm align}(m,Q)=\varnothing.
 \]
 The later audits show that such a theorem must include source-level
-nonflatness and source--anisotropy reintegration.  In particular, anisotropy or
-vector non-concentration alone cannot control the known rows when
+nonflatness.  In particular, anisotropy or vector non-concentration alone
+cannot control the known rows when
 \[
 H=yq''_{\can}\approx0.
 \]
-Thus the required input is now the two-gate actual-zeta package on
-\(I_\rho\), not merely finite determinacy, compactness, pairwise zero-spacing,
-endpoint-gap control, or Remez--{\L}ojasiewicz volume estimates.
+Thus the remaining source-side input is Gate~1 for the full canonical object
+on \(I_\rho\), not merely finite determinacy, compactness, pairwise
+zero-spacing, endpoint-gap control, or Remez--{\L}ojasiewicz volume estimates.
+In the ordinary real-canonical branch, the former source--anisotropy step is
+supplied downstream by Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}.
 
 \item The source-weighted layered route is blocked by source collapse.  The
 known order-seven/order-nine rows have the form
@@ -39484,17 +39667,18 @@ makes the norm vector
 \]
 super-polynomially small.  Fixed-prime and AFE-style derivative-flat
 surrogates, as well as same-scale packet moment models, do not presently
-supply an obstruction.  The missing positive input is the two-gate actual-zeta
-package
+supply an obstruction.  The missing positive source-side input is Gate~1:
 \[
-\int_{I_\rho}|q''_{\can}|^2\,dm\ge Q^{-B}|I_\rho|
+\int_{I_\rho}|q''_{\can}|^2\,dm\ge Q^{-B}|I_\rho|.
 \]
-together with
+Once this is available in the ordinary real-canonical branch, the source-weighted
+anisotropy estimate
 \[
 \int_{I_\rho}
 |q''_{\can}|^2(\Gamma_G^2+\Gamma_{G,2}^2)\,dm
-\ge Q^{-A}|I_\rho|.
+\ge Q^{-A}|I_\rho|
 \]
+is supplied by Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}.
 
 \item The \(dd\)-interaction branch remains independent unless feature
 balance, conditional spectral positivity, or incidence containment is proved.
@@ -39847,7 +40031,7 @@ q''_{\can}=B_2+P_2+D_2+E_2
 is used instead of the zero-side decomposition, then the differentiated error
 term satisfies
 \[
-\sup_{I_\rho^\ast}|\partial_m^jE_2(m)|\le Q^{C_j},
+\sup_{I_\rho^\ast}|\mathcal D^jE_2(m)|\le Q^{C_j},
 \qquad 0\le j\le4.
 \]
 \end{enumerate}
@@ -40570,6 +40754,21 @@ Gate~2 must use interval or \(L^2\) structure.
 \item \emph{Finite same-scale packet geometry does not prove Gate~1.}
 Positive finite quadrature can annihilate finitely many source-curvature jets.
 Gate~1 must use actual-zeta arithmetic, not only local Hadamard packet geometry.
+
+\item \emph{Band-limited singular probes do not avoid long-prime control.}
+In the deep singular branch, detecting the \(R\) sine moments
+\[
+\sin(k\theta),\qquad 3\le k\le R+3,
+\]
+requires analytic or band-limited probes with bandwidth at least polynomial in
+\(R\).  The explicit formula then sees primes with
+\[
+\log n\lesssim R^C/c.
+\]
+Since \(cQ\ll(\log Q)^{-C_0}\), this is generally longer than the ordinary
+packet-frequency range \(\log n\asymp Q\).  Therefore S1 is a separate
+long-prime actual-zeta nonrecurrence theorem, not a refinement of the ordinary
+Wronskian input.
 
 \item \emph{Proxy source curvature is insufficient.}
 A zero-kernel proxy, flexible Dirichlet polynomial, \(B_2\)-only diagnostic, or
@@ -44036,6 +44235,162 @@ polynomial modes.  Raw cell mass is the preferred positive \(L^2\)-amplitude
 route when \(M_{\rm cell}\asymp R\) and the cell basis is well conditioned.
 \end{remark}
 
+\begin{lemma}[Fixed-width cell mass implies the \(Z_\alpha\)-derivative row]
+\label{lem:fixed-width-cell-mass-implies-z-derivative-row}
+Assume the fixed-width cell setup of
+Definition~\ref{def:O1-fixed-width-cell-nonrecurrence}.  Let
+\[
+F(t)=Z_\alpha(m_0+\lambda t),
+\qquad F(0)=0,
+\qquad \lambda Q\asymp1.
+\]
+Assume the cell Gram/frame lower bound on the window \([-R,R]\),
+\[
+\lambda_{\min}(G_{\rm cell})\ge Q^{-C_G},
+\]
+and assume the full canonical cell error satisfies
+\[
+\|E_{\rm cell}\|_{L^2[-R,R]}^2
+\le
+\frac12 R Q^{-A-C_G}.
+\]
+If
+\[
+\sum_r |B_r(m_0,\alpha)|^2\ge Q^{-A},
+\]
+then
+\[
+\sup_{|t|\le R}|Z_\alpha(m_0+\lambda t)|\ge Q^{-A'}.
+\]
+If, moreover, \(Z_\alpha\) has polynomial analytic upper control on
+\[
+|t|\le R(\log Q)^{C_*},
+\]
+then
+\[
+\boxed{
+\|\mathbf z'(m_0,\alpha)\|\ge Q^{-A''}.
+}
+\]
+\end{lemma}
+
+\begin{proof}
+Let \(\xi_r\) be the cell centers and write
+\[
+F_{\rm cell}(t)=\sum_r B_r e^{-it\xi_r}.
+\]
+The cell Gram lower bound gives
+\[
+\int_{-R}^{R}|F_{\rm cell}(t)|^2\,dt
+\ge
+R Q^{-C_G}\sum_r|B_r|^2
+\ge
+R Q^{-A-C_G}.
+\]
+After subtracting \(E_{\rm cell}\), this yields
+\[
+\int_{-R}^{R}|F(t)|^2\,dt
+\ge
+\frac12 RQ^{-A-C_G},
+\]
+and hence
+\[
+\sup_{|t|\le R}|F(t)|\ge Q^{-A'}.
+\]
+The amplitude-to-derivative lemma applies because \(R\le(\log Q)^C\) and the
+outer analytic control is available on a polylogarithmically larger disk.  The
+basis-normalized operators \(C_\ell(\mathcal D)\) cost at most
+\[
+\exp(O(R\log R))=Q^{O(1)},
+\]
+so the monomial derivative lower bound gives
+\[
+\|\mathbf z'(m_0,\alpha)\|\ge Q^{-A''}.
+\]
+\end{proof}
+
+\begin{remark}[Internal structure of O1]
+\label{rem:internal-structure-O1-cell-nonrecurrence}
+The fixed-width cell input packages two more primitive actual-orbit
+nonrecurrence statements.
+
+First, one needs same-branch cell mass:
+\[
+\boxed{
+\|B^+(m_0,\alpha)\|_2^2+\|B^-(m_0,\alpha)\|_2^2\ge Q^{-A}.
+}
+\]
+Equivalently, in diagonal/off-diagonal notation,
+\[
+O^+(m_0,\alpha)+O^-(m_0,\alpha)
+\ge
+-(1-Q^{-A})(D^+ +D^-).
+\]
+This rules out simultaneous same-cell self-cancellation in both branches.
+
+Second, one needs folded main/dual cell nonalignment:
+\[
+\boxed{
+\|B^+(m_0,\alpha)+e^{i\Theta_Z}B^-(m_0,\alpha)\|_2
+\ge
+Q^{-A}\left(\|B^+\|_2+\|B^-\|_2\right),
+}
+\]
+up to the canonical background and error cell vectors.  Equivalently,
+\[
+|\langle B^+,B^-\rangle|
+\le
+(1-Q^{-A})\|B^+\|_2\|B^-\|_2.
+\]
+
+The tilted regime
+\[
+|\alpha|Q\gtrsim \log Q
+\]
+is easier: after polynomial AFE, gamma, log-power, and cell-normalization
+losses are absorbed, the exponential factors
+\[
+e^{-\alpha\log n},
+\qquad
+e^{+\alpha\log(m/(2\pi n))}
+\]
+make one branch dominate the other.  Thus, in the tilted regime, same-branch
+cell mass implies full cell mass by the triangle inequality.  The hard branch
+is the symmetric regime
+\[
+|\alpha|Q\ll\log Q,
+\]
+especially \(|\alpha|Q\ll1\), where branch magnitudes may be comparable and
+folded main/dual cell cancellation remains a genuine actual-orbit
+nonrecurrence problem.
+\end{remark}
+
+\begin{remark}[Raw and projected cell formulations]
+\label{rem:raw-projected-cell-formulations-O1}
+The raw cell theorem
+\[
+\sum_r|B_r|^2\ge Q^{-A}
+\]
+is the preferred O1 formulation when the number of cells satisfies
+\[
+M_{\rm cell}\asymp R
+\]
+and the cell basis is polynomially conditioned.  It is positive and implies a
+polylog-local \(L^2\)-amplitude lower bound for \(Z_\alpha\).
+
+If a later implementation uses substantially more than \(R\) cells, raw cell
+mass may live partly in high cell-frequency modes invisible to the degree
+\((R+1)\) jet.  In that case one should use the projected fallback
+\[
+\boxed{
+\|\Pi_{\le R+1}B(m_0,\alpha)\|_2^2\ge Q^{-A},
+}
+\]
+where \(\Pi_{\le R+1}\) is the stable projection to cell polynomial modes of
+degree at most \(R+1\).  This projected statement is the cell-coordinate form
+of direct \(Z_\alpha\)-jet nonflatness.
+\end{remark}
+
 \begin{definition}[O2: Cofactor-vector nonrecurrence]
 \label{def:O2-cofactor-vector-nonrecurrence}
 Let
@@ -44068,6 +44423,40 @@ Equivalently, the actual orbit avoids the cofactor-flat variety
 \]
 at polynomial scale on admissible \(Z_\alpha\)-zeros.
 \end{definition}
+
+\begin{remark}[Internal structure of O2]
+\label{rem:internal-structure-O2-cofactor-nonrecurrence}
+The cofactor-vector input has two conceptually different parts.
+
+The first is structural exterior coefficient mass.  If
+\[
+\mathbf M(m)=\sum_S \mathbf A_S e^{-im\Omega_S}+\cdots,
+\qquad
+\Omega_S=\log N_S,
+\]
+then a coefficient-level estimate of the form
+\[
+\boxed{
+\sum_S\|\mathbf A_S\|^2\ge Q^{-A}
+}
+\]
+is expected to follow from basis-normalized exterior volume and canonical row
+rank.  This shows that the cofactor vector is not symbolically zero.
+
+The second is the actual pointwise arithmetic assertion:
+\[
+\boxed{
+Z_\alpha(m_0)=0
+\Longrightarrow
+\left\|
+\sum_S \mathbf A_S e^{-im_0\Omega_S}+\cdots
+\right\|\ge Q^{-A}.
+}
+\]
+This is a degree-\((R+1)\) subset-product nonrecurrence theorem for the actual
+prime-log orbit.  Exterior coefficient mass alone does not imply it, because
+the subset-product phases may cancel at a prescribed \(m_0\).
+\end{remark}
 
 \begin{remark}[Averaged large sieves do not replace O2]
 \label{rem:averaged-large-sieve-does-not-replace-O2}
@@ -44125,6 +44514,36 @@ Z_\alpha(m_0)=0
 \]
 \end{definition}
 
+\begin{remark}[Bad incidence variety for O3]
+\label{rem:bad-incidence-variety-O3}
+Equivalently, O3 asserts actual-orbit avoidance of the bad incidence variety
+\[
+\mathcal I_{\rm bad}(\alpha)
+=
+\{u:Z_\alpha(u)=0,\ \widetilde{\mathcal W}_R(u,\alpha)=0\}.
+\]
+In cofactor form, at \(Z_\alpha(m_0)=0\),
+\[
+\widetilde{\mathcal W}_R(m_0,\alpha)
+=
+\langle \mathbf z'(m_0,\alpha),\mathbf M(m_0,\alpha)\rangle,
+\]
+so the bad incidence is
+\[
+\mathbf z'(m_0,\alpha)\in
+V(m_0):=
+\operatorname{span}\{Q_0(m_0),\ldots,Q_R(m_0)\}.
+\]
+Thus O3 is not a norm lower bound.  It is an angle/nonalignment theorem:
+\[
+\operatorname{dist}(\mathbf z',V)
+\ge Q^{-A}\|\mathbf z'\|.
+\]
+The phase-relaxed model permits \(Z_\alpha=0\), \(\mathbf z'\ne0\),
+\(\mathbf M\ne0\), and \(\mathbf z'\perp\mathbf M\) simultaneously; hence O3
+must use actual one-parameter zeta arithmetic.
+\end{remark}
+
 \begin{remark}[O3 is not implied by O1 and O2]
 \label{rem:O3-not-implied-by-O1-O2}
 The bounds
@@ -44149,6 +44568,32 @@ Thus O3 is an independent actual-zeta arithmetic incidence input, not a
 linear-algebra corollary of O1 and O2.
 \end{remark}
 
+\begin{remark}[Common-small-value reformulation does not close O3]
+\label{rem:common-small-value-does-not-close-O3}
+O3 can be restated as a common-small-value exclusion:
+\[
+|Z_\alpha(m)|+|\widetilde{\mathcal W}_R(m,\alpha)|\ge Q^{-A}
+\]
+on admissible ordinary packet centers.  At a zero \(Z_\alpha(m_0)=0\), this is
+equivalent to
+\[
+|\widetilde{\mathcal W}_R(m_0,\alpha)|\ge Q^{-A}.
+\]
+This reformulation is useful but does not prove O3.  In phase-relaxed models,
+one may impose both
+\[
+Z_\alpha=0
+\]
+and
+\[
+\widetilde{\mathcal W}_R=0
+\]
+because the active phase torus has many degrees of freedom.  Resultant-style
+or Wronskian-of-Wronskians arguments also do not currently give a polynomial
+separation estimate for the actual one-parameter zeta orbit.  Thus O3 remains
+a named actual-orbit incidence input.
+\end{remark}
+
 \begin{theorem}[Ordinary Gate--1 from O1--O3]
 \label{thm:ordinary-gate-one-from-O1-O2-O3}
 Assume the ordinary packet-frequency Wronskian construction above, the
@@ -44169,7 +44614,7 @@ Q^{-B}|I_\rho|.
 \end{theorem}
 
 \begin{proof}
-By O1 and Remark~\ref{rem:cell-mass-gives-z-derivative-row},
+By O1 and Lemma~\ref{lem:fixed-width-cell-mass-implies-z-derivative-row},
 \[
 \|\mathbf z'(m_0,\alpha)\|\ge Q^{-A_1}.
 \]
@@ -44433,6 +44878,17 @@ still requires actual folded main/dual nonalignment.  No sign, positivity,
 Hermitian, skew, or commutator invariant currently proves that nonalignment.
 \end{remark}
 
+\begin{remark}[Stop condition for ordinary-route decomposition]
+\label{rem:stop-condition-ordinary-route-decomposition}
+The ordinary packet-frequency route should now be treated as reduced to O1,
+O2, and O3.  Further decompositions of O3 into common-small-value,
+Hodge-angle, main/dual commutator, resultant, or filtered-minor formulations
+have not produced a proof.  They all return to actual one-parameter
+prime-log nonrecurrence.  Therefore, unless a genuinely new arithmetic
+mechanism is supplied, O3 should be cited as the named ordinary incidence
+input rather than reopened as a local-algebra problem.
+\end{remark}
+
 \subsection{Canonical audit for the named Gate--1 inputs}
 \label{subsec:canonical-audit-named-gate-one-inputs}
 
@@ -44464,6 +44920,25 @@ G_{j+1}=\mathcal D^j q''_{\can},
 A theorem proved only for \(P_2\), only for \(D_2\), only for \(B_2\), only for
 a zero-side proxy, or only for a flexible Dirichlet polynomial is diagnostic
 unless a canonical transfer estimate is supplied.
+For O3, canonical transfer must control the inner product itself.  If
+\((\mathbf z'_{\rm mod},\mathbf M_{\rm mod})\) is a model pair, then the model
+angle theorem transfers only if
+\[
+\|\mathbf z'_{\can}-\mathbf z'_{\rm mod}\|,
+\qquad
+\|\mathbf M_{\can}-\mathbf M_{\rm mod}\|,
+\]
+and
+\[
+\left|
+\langle\mathbf z'_{\can},\mathbf M_{\can}\rangle
+-
+\langle\mathbf z'_{\rm mod},\mathbf M_{\rm mod}\rangle
+\right|
+\]
+are all smaller than the relevant half-leading scale.  Controlling the norms
+of \(\mathbf z'\) and \(\mathbf M\) separately is not enough to transfer an
+angle theorem.
 \end{lemma}
 
 \begin{remark}[Derivative depth for canonical transfer]
@@ -44713,7 +45188,7 @@ The active remaining inputs may be summarized as follows:
 \hline
 \mathrm{O1}: \text{ fixed-width cell nonrecurrence}
 &
-\text{numerically supported; open}
+\text{named open; diagnostic evidence only}
 &
 Z_\alpha(m_0)=0\Rightarrow |\mathbf z'(m_0,\alpha)|\ge Q^{-A}
 \\
@@ -44744,13 +45219,13 @@ Z_\alpha(m_0)=0\Rightarrow |\mathbf M(m_0,\alpha)|\ge Q^{-A}
 \\
 \text{Gate--2 local package}
 &
-\text{near-Green conditional on Gate~1 and canonical hypotheses}
+\text{proved modulo Gate~1, real-canonical hypotheses, and safe }L^2\text{-rigidity}
 &
 \text{downstream}
 \\
 \text{carrier-quotient D4}
 &
-\text{finite residual valuation audit}
+\text{closed through order 9 modulo residual valuation control}
 &
 \text{downstream row energy}
 \end{array}
@@ -44792,6 +45267,8 @@ Z_\alpha(m_0)\approx0
 They do not prove O1, because O1 is a theorem about the actual one-parameter
 prime-log object and its canonical transfer.  They justify continuing the O1
 proof route rather than triggering a stop rule.
+They should not be cited as evidence for any theorem requiring uniform
+polynomial lower bounds over all admissible heights.
 \end{remark}
 
 \begin{remark}[Packet-frequency determinant stress-test status]
@@ -44844,6 +45321,9 @@ Gate~1 proof must apply to
 q''_{\can}=B_2+P_2+D_2+E_2
 \]
 with controlled errors in the same normalization as the local row package.
+Equivalently, the present draft has not proved O1, O2, or O3, nor the
+singular/transition inputs S1--T1.  The reductions above identify the needed
+arithmetic statements; they do not discharge them.
 \end{remark}
 
 \begin{thebibliography}{99}
