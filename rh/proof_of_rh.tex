@@ -319,6 +319,43 @@ Hence
 \]
 \end{proof}
 
+\begin{remark}[Derivative convention and gauge-locking for downstream use]
+\label{rem:derivative-convention-gauge-locking-downstream}
+All downstream Gate--2, wall-escape, and D4 row-conversion identities use the
+same normalized derivative convention
+\[
+\mathcal D=\lambda\partial_m.
+\]
+Thus, whenever ordinary prime notation is used in a local packet coordinate in
+the downstream sections, it is shorthand for \(\mathcal D\)-differentiation in
+that normalized local coordinate.  In particular,
+\[
+q''=q''_{\can}=\mathcal D^2q_\zeta,
+\qquad
+\Gamma_G=q''_{\can}-6q_\zeta+2q_\zeta^3,
+\]
+and
+\[
+\Gamma_{G,2}
+=
+2q_\zeta(\mathcal Dq_\zeta)^2-\frac16\mathcal D^2\Gamma_G.
+\]
+
+The scalar \(q_\zeta\) used here is also the scalar that appears in the
+\(q_0\)-wall and in the D4 source factor.  Thus the wall coordinate is not an
+arbitrary affine primitive of \(q''_{\can}\).  The affine freedom in solving
+\(\mathcal D^2q=q''_{\can}\) is fixed by the canonical real phase convention
+above.  This gauge-locking is necessary because neither
+\[
+\Gamma_G=q''_{\can}-6q+2q^3
+\]
+nor the source factor
+\[
+H_{\mathrm{lead}}=-\frac{q(q''_{\can})^3}{288}
+\]
+is invariant under affine changes \(q\mapsto q+am+b\).
+\end{remark}
+
 For two nearby points around a center $T$, the natural local point basis is not stable under coalescence. One instead passes to the point-to-jet matrix
 \begin{equation}\label{eq:point-to-jet}
 P_h:=\frac12
@@ -31016,6 +31053,29 @@ bound, and row mobility thickens the pointwise lower bound to interval row
 energy.
 \end{proof}
 
+\begin{remark}[Packet buffer for wall escape]
+\label{rem:packet-buffer-for-wall-escape}
+The first-exit wall-escape step moves by a distance
+\[
+\rho |I|,
+\qquad
+\rho\asymp\sqrt{\varepsilon/\tau}.
+\]
+The packet used for row conversion and local-complexity estimates should
+therefore be chosen with a buffer of at least this scale.  If the boundary
+layer has relative size \(\eta\), and the Gate--2 density is bounded above by
+\[
+G=|u|^2|\Gamma|^2\le Q^{C_G},
+\]
+then discarding the edge changes the Gate--2 mass by at most
+\(Q^{C_G}\eta |I|\).  Hence a boundary layer with
+\[
+\eta\le Q^{-A-C_G-O(1)}
+\]
+is negligible at Gate--2 mass scale \(Q^{-A}|I|\).  This converts packet-edge
+effects into exponent bookkeeping rather than a new structural obstruction.
+\end{remark}
+
 \begin{remark}[D3 is replaced by wall escape plus D4]
 \label{rem:d3-replaced-by-wall-escape-plus-d4}
 The old source-robust \(q_0\)-wall row is not the active route in the
@@ -31028,6 +31088,85 @@ and use the original rows.  The source-robust wall-row search remains a
 fallback only if the final contradiction requires row conversion at a fixed
 preassigned point.
 \end{remark}
+
+\begin{lemma}[Row mobility: pointwise row output thickens to row energy]
+\label{lem:row-mobility-point-to-energy}
+Let \(\mathbf A_N:I\to\mathbb C^M\) be a finite row vector.  Suppose
+\[
+|\mathbf A_N(m_\ast)|\ge Q^{-C_A}
+\]
+for some \(m_\ast\in I\), and
+\[
+|\mathbf A_N'(m)|\le Q^{C_D}|I|^{-1}
+\qquad (m\in I).
+\]
+Then
+\[
+\int_I|\mathbf A_N(m)|^2\,dm
+\ge Q^{-C'}|I|
+\]
+for some polynomial exponent \(C'\).
+\end{lemma}
+
+\begin{proof}
+For
+\[
+|m-m_\ast|\le \frac12Q^{-C_A-C_D}|I|,
+\]
+the derivative bound gives
+\[
+|\mathbf A_N(m)-\mathbf A_N(m_\ast)|\le \frac12Q^{-C_A}.
+\]
+Thus
+\[
+|\mathbf A_N(m)|\ge \frac12Q^{-C_A}
+\]
+on a subinterval of length at least \(Q^{-C_A-C_D-O(1)}|I|\), after taking a
+one-sided subinterval if \(m_\ast\) is near the boundary.  Integrating the
+square over that subinterval gives the claim.
+\end{proof}
+
+\begin{remark}[Quotient-frame version of row mobility]
+\label{rem:quotient-frame-row-mobility}
+If the row output is measured in a moving quotient row space
+\(\mathcal Q_N(m)=\mathcal H_N/\mathcal C_N(m)\), the same argument applies to
+\[
+P_{\mathcal C_N(m)^\perp}\mathbf A_N(m)
+\]
+provided the nuisance frame is polynomially stable:
+\[
+\lambda_{\min}(C(m)^*C(m))\ge Q^{-C},
+\qquad
+\|C'(m)\|\le Q^C|I|^{-1}.
+\]
+If raw or carrier-row energy is accepted downstream, no moving-frame derivative
+estimate is needed.
+\end{remark}
+
+\begin{theorem}[Local downstream closure from Gate--2 and D4]
+\label{thm:local-downstream-closure-from-gate2-d4}
+Assume Gate~2 on \(I\):
+\[
+\int_I |u|^2|\Gamma|^2\,dm\ge Q^{-A}|I|.
+\]
+Assume the ordinary real-canonical local complexity bounds and the gauge-locking
+hypotheses needed for
+Theorem~\ref{thm:gauge-locked-wall-escape-row-energy}.  Assume D4 row
+conversion at non-wall samples in either carrier quotient or filtered row form.
+Finally assume row mobility as in
+Lemma~\ref{lem:row-mobility-point-to-energy}.  Then
+\[
+\boxed{
+\int_I|\mathbf A_N(m)|^2\,dm\ge Q^{-C}|I|
+}
+\]
+for some polynomial exponent \(C\).
+
+In particular, under row-energy architecture, the \(q_0\)-wall does not require
+a separate source-robust wall row.  If the downstream architecture is
+exact-point locked, this theorem is not sufficient and the \(q_0\)-adic
+row-pencil or source-robust wall-row fallback must be used.
+\end{theorem}
 
 \section{Current proof state after the local package audits}
 \label{sec:current-proof-state-after-local-audits}
@@ -35154,6 +35293,80 @@ response has rank two in the anisotropy vector
 \]
 The quantitative statement is the same observation expressed using the quotient
 Gram matrix.
+\end{proof}
+
+\begin{theorem}[Two-coordinate carrier-quotient D4 conversion]
+\label{thm:two-coordinate-carrier-quotient-d4}
+Let
+\[
+E_{\rm car}
+:=
+\bigl([\mathsf C_7]\ [\mathsf C_{Y12}]\bigr)
+\]
+be the two-column carrier response map into \(\mathcal Q_{\rm car}\).  Assume
+its quotient Gram matrix
+\[
+G_{\rm car}:=
+E_{\rm car}^\ast E_{\rm car}
+\]
+satisfies
+\[
+\det G_{\rm car}\ge Q^{-C}.
+\]
+Equivalently, the two carrier classes
+\[
+[\mathsf C_7],\qquad [\mathsf C_{Y12}]
+\]
+are polynomially independent in the carrier quotient.
+
+Let \(B_7,B_9\) denote the dual quotient coordinates associated to this basis.
+Suppose the carrier-row class satisfies
+\[
+\begin{pmatrix}
+B_7\\[1mm]
+B_9
+\end{pmatrix}
+=
+H
+\begin{pmatrix}
+\Gamma_G\\[1mm]
+\Gamma_{G,2}
+\end{pmatrix}
++
+\epsilon,
+\]
+with
+\[
+|\epsilon|
+\le
+\frac12 |H|
+\left(\Gamma_G^2+\Gamma_{G,2}^2\right)^{1/2}.
+\]
+Then
+\[
+\left|[\mathcal A_N^{\rm car}]\right|_{\mathcal Q_{\rm car}}
+\ge
+Q^{-C}
+|H|
+\left(\Gamma_G^2+\Gamma_{G,2}^2\right)^{1/2}.
+\]
+Consequently, combined with Gate~2 and wall escape, carrier-quotient row
+mobility gives
+\[
+\int_I
+\left|[\mathcal A_N^{\rm car}(m)]\right|_{\mathcal Q_{\rm car}}^2\,dm
+\ge Q^{-C}|I|.
+\]
+\end{theorem}
+
+\begin{proof}
+The determinant lower bound for \(G_{\rm car}\) gives a polynomial lower frame
+bound for the two quotient carrier coordinates.  The displayed coordinate
+identity says that, in this frame, the leading carrier response is exactly
+\(H(\Gamma_G,\Gamma_{G,2})\), up to a half-leading error.  The lower bound
+follows by the triangle inequality and the frame lower bound.  Row mobility
+then upgrades the pointwise carrier-quotient lower bound to integrated
+carrier-quotient row energy.
 \end{proof}
 
 \begin{remark}[Scalar \(I\)-coordinate incidence is a collapse artifact]
@@ -39394,16 +39607,6 @@ Absent Gate~1 and the stated row-output mechanism, the architecture remains
 conditionally non-closing.
 \end{remark}
 
-\begin{remark}[Open question: are the nontrivial zeros transcendental?]
-\label{rem:open-question-transcendence-of-zeros}
-A separate classical question, recorded here for the future, is the
-arithmetic nature of the imaginary parts \(\gamma_n\) of the nontrivial zeros
-of \(\zeta(s)\).  It is not currently known whether any \(\gamma_n\) is
-algebraic, irrational, or transcendental, nor whether the \(\gamma_n\) are
-algebraically independent; standard heuristics expect transcendence and
-\(\mathbb Q\)-linear independence, but no proof is available.
-\end{remark}
-
 \section{No-go and audit ledger}
 \label{sec:no-go-and-audit-ledger}
 
@@ -42719,6 +42922,15 @@ carrier/quotient row energy:
 \qquad
 [\mathcal A_9]\sim H\Gamma_{G,2}[\mathsf C_{Y12}].
 \]
+This statement is a carrier-quotient row-energy statement.  It does not assert
+that the collapsed scalar \(I\)-coordinate order-nine expression is coercive.
+If scalar \(I\)-coordinate energy is required, the finite incidence wall
+\[
+F_9^I=0,\qquad yq''\Gamma_{G,2}\ne0
+\]
+must still be controlled or bypassed by a higher/ambient row.  Under the
+carrier-quotient row-energy formulation, that scalar wall is a collapse
+artifact rather than a D4 obstruction.
 
 Therefore the old broad downstream ledger
 \[
@@ -42740,6 +42952,91 @@ actual-zeta arithmetic inputs.  In particular, a complete proof still requires
 the global mechanism that supplies Gate~1, plus the ordinary/singular routing
 and any remaining finite-core non-concentration inputs stated elsewhere in the
 draft.
+\end{remark}
+
+\begin{remark}[Terminal conditional dependency ledger]
+\label{rem:terminal-conditional-dependency-ledger}
+The present draft should be read as a conditional architecture, not as a closed
+proof of \(\RH\).  The ordinary Gate--1 branch is conditional on the following
+actual-zeta inputs:
+\[
+\boxed{
+\mathrm{O1}:\ \text{Fixed-width cell nonrecurrence}
+}
+\]
+giving
+\[
+Z_\alpha(m_0)=0\Longrightarrow
+|\mathbf z'(m_0,\alpha)|\ge Q^{-A},
+\]
+\[
+\boxed{
+\mathrm{O2}:\ \text{Cofactor-vector nonrecurrence}
+}
+\]
+giving
+\[
+Z_\alpha(m_0)=0\Longrightarrow
+|\mathbf M(m_0,\alpha)|\ge Q^{-A},
+\]
+and
+\[
+\boxed{
+\mathrm{O3}:\ \text{Wronskian angle nonalignment}
+}
+\]
+giving
+\[
+|\langle \mathbf z',\mathbf M\rangle|
+\ge Q^{-A}|\mathbf z'|\,|\mathbf M|.
+\]
+Together these imply
+\[
+|\widetilde{\mathcal W}_R(m_0,\alpha)|\ge Q^{-A},
+\]
+and hence ordinary finite-jet anti-design and ordinary Gate~1, subject to the
+canonical transfer and finite-jet-to-energy bookkeeping already stated.
+
+The deep singular branch is conditional on
+\[
+\boxed{
+\mathrm{S1}:\ \text{Singular explicit-formula anti-design exclusion}
+}
+\]
+in the form
+\[
+|\mathbf P_R-\mathbf G_R-\mathbf T_R|_2\ge Q^{-A}.
+\]
+The mild transition region
+\[
+(\log Q)^{-C}\lesssim \lambda Q\lesssim 1
+\]
+requires its own transition-control statement.
+
+Downstream, the current local package is
+\[
+\text{Gate 1}
++
+|u'|_\infty\text{ source thickening}
++
+L^2\text{-input real rigidity}
+\Longrightarrow
+\text{Gate 2},
+\]
+and
+\[
+\text{Gate 2}
++
+\text{gauge-locked wall escape}
++
+\text{carrier-quotient D4}
++
+\text{row mobility}
+\Longrightarrow
+\text{row energy}.
+\]
+These downstream repairs do not discharge the upstream actual-zeta inputs
+\(\mathrm{O1}\)--\(\mathrm{O3}\), \(\mathrm{S1}\), or the transition theorem.
 \end{remark}
 
 \begin{thebibliography}{99}
