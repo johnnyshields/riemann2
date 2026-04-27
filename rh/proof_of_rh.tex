@@ -30373,7 +30373,15 @@ L(s)=\frac{\Xi'}{\Xi}(s)
 \]
 and finitely many derivatives \(L^{(r)}(s)\), together with regular
 gamma/background terms and no denominators other than those implicit in
-\(L=\Xi'/\Xi\).  Then
+\(L=\Xi'/\Xi\).
+Assume moreover the standard local zero-count estimate for the completed
+scalar:
+\[
+\#\{\rho\in\mathcal Z_\Xi: |s-\rho|\le R_0\}
+\le Q^C(1+R_0)
+\]
+through the polynomial range of \(R_0\) used below.
+Then
 \[
 \boxed{
 \|u\|_{L^\infty(I^\ast)}
@@ -31118,6 +31126,8 @@ By Lemma~\ref{lem:source-thickening-one-large-point}, there is an interval
 \[
 \tau^2\int_J(g^2+h^2)\,dm
 \le
+\int_J |u|^2(g^2+h^2)\,dm
+\le
 \int_I |u|^2(g^2+h^2)\,dm
 \le Q^{-A}|I|.
 \]
@@ -31155,8 +31165,15 @@ Assume source Lipschitz control
 \[
 \|u'\|_{L^\infty(I)}\le Q^{C_u}|I|^{-1},
 \]
-and assume Lemma~\ref{lem:l2-input-real-rigidity-safe} holds on normalized
-source subintervals with loss \(Q^{C_R}\).  Then Gate~2 holds with any exponent
+Assume moreover that every source interval produced by
+Lemma~\ref{lem:source-large-interval-l2-anisotropy} can be placed in the
+normalized setting of Lemma~\ref{lem:l2-input-real-rigidity-safe}, with the
+safe primitive bounds
+\[
+\|q\|_\infty+\|q'\|_\infty+\|q''\|_\infty\le Q^C
+\]
+available on that normalized interval, and with rigidity loss \(Q^{C_R}\).
+Then Gate~2 holds with any exponent
 \[
 \boxed{
 A>\frac{13}{2}B+C_u+5C_R+O(1).
@@ -31620,20 +31637,45 @@ Assume Gate~2 on \(I\):
 Assume the ordinary real-canonical local complexity bounds and the gauge-locking
 hypotheses needed for
 Theorem~\ref{thm:gauge-locked-wall-escape-row-energy}.  Assume D4 row
-conversion at non-wall samples in either carrier quotient or filtered row form.
-Finally assume row mobility as in
-Lemma~\ref{lem:row-mobility-point-to-energy}.  Then
+conversion at non-wall samples in a chosen row-output space
+\[
+\mathcal Q_{\rm row},
+\]
+where \(\mathcal Q_{\rm row}\) is either the carrier quotient
+\(\mathcal Q_{\rm car}\), a raw/ambient row space, or another filtered row
+space with polynomially equivalent norm.  Finally assume row mobility as in
+Lemma~\ref{lem:row-mobility-point-to-energy}, or the quotient-frame version of
+Remark~\ref{rem:quotient-frame-row-mobility} if the quotient varies with \(m\).
+
+Then the sampled packet carries polynomial row energy in the chosen row-output
+space:
 \[
 \boxed{
-\int_I|\mathbf A_N(m)|^2\,dm\ge Q^{-C}|I|
+\int_I
+\left\|
+\mathcal A_N(m)
+\right\|_{\mathcal Q_{\rm row}}^2\,dm
+\ge Q^{-C}|I|.
 }
 \]
-for some polynomial exponent \(C\).
+In the active carrier-quotient formulation this is
+\[
+\boxed{
+\int_I
+\left|
+[\mathcal A_N^{\rm car}(m)]
+\right|_{\mathcal Q_{\rm car}}^2\,dm
+\ge Q^{-C}|I|.
+}
+\]
 
-In particular, under row-energy architecture, the \(q_0\)-wall does not require
-a separate source-robust wall row.  If the downstream architecture is
-exact-point locked, this theorem is not sufficient and the \(q_0\)-adic
-row-pencil or source-robust wall-row fallback must be used.
+If the row-output space is represented by a concrete projected coordinate
+system, this theorem gives projected coordinate energy only after a polynomial
+frame lower bound for that coordinate system.  If the downstream architecture is
+exact-point locked or forced to use only the collapsed scalar \(I\)-coordinate,
+this theorem is not sufficient and the \(q_0\)-adic row-pencil, source-robust
+wall-row fallback, scalar incidence avoidance, or a higher/ambient row
+replacement must be used.
 \end{theorem}
 
 \section{Current proof state after the local package audits}
@@ -36175,6 +36217,10 @@ contribution schematically as
 +
 \mathbf R_{\rm abs}.
 \]
+Terms with the same anisotropy-linear valuation as the leading row are not
+automatically errors.  They must first be absorbed into the effective leading
+matrix \(L_{\rm eff}\).  Only the component remaining after this absorption is
+eligible to be estimated as a residual.
 A residual term \(T\) has valuation
 \[
 T=q_0^a u^b\Gamma^cE_T,
@@ -39808,6 +39854,13 @@ gamma/background contribution, and error scale must be specified in the same
 normalization used by the rank-two local rows.  The point of this convention
 is to forbid replacing \(q''_{\can}\) by an arbitrary Dirichlet polynomial or
 by the affine-subtracted complement \(q''_{\source,R}\).
+The displayed \((\log n)^2\)-weight corresponds to the literal
+\(q''_{\can}\) curvature convention.  Some numerical determinant stress tests
+also use a script-convention source row with \(k_q=3\), hence a
+\(\Lambda(n)(\log n)^3n^{-1/2}\)-type coefficient.  That \(k_q=3\) convention
+is a numerical stress-test convention recorded in
+Remark~\ref{rem:log-derivative-afe-stress-test-convention}; it is not a
+replacement for the literal \(q''_{\can}\) representation displayed here.
 \end{definition}
 
 \begin{remark}[Log-derivative AFE convention for numerical stress tests]
@@ -39856,6 +39909,10 @@ c_n^-
 =
 -\Lambda(n)(\log n)^2n^{-1/2}V_q^-.
 \]
+This convention switch must not be made inside a single proof-level
+Wronskian.  A given proof run must fix one convention for \(q''_{\can}\), and
+then use the corresponding \(Z_\alpha\)-symbol ratios, dual branch, \(E_2\)
+budget, and local row identities throughout.
 
 The Wronskian operator node is the signed differential-frequency node, not the
 folded conductor diagnostic node:
@@ -44147,7 +44204,8 @@ expansion along the \(Z_\alpha\)-row gives
 \mathbf M(m_0,\alpha)
 \right\rangle,
 \]
-where \(\mathbf z'\) is the nonzero derivative-row vector of \(Z_\alpha\), and
+where \(\mathbf z'\) denotes the full \(Z_\alpha\)-row at the zero, with its
+zeroth coordinate \(C_0Z_\alpha(m_0)=0\) included as a zero coordinate, and
 \(\mathbf M\) is the cofactor/Hodge-dual vector of the canonical
 \(q''_{\can}\)-jet block.
 
@@ -44164,23 +44222,39 @@ Fix a packet-frequency support
 \qquad
 0<c_-<c_+<\frac12,
 \]
-and partition the normalized support into cells \(I_r\) of width
+Set
 \[
-|I_r|\asymp R^{-1},
+x_n^+=\lambda\log n,
 \qquad
-M_{\rm cell}\asymp R.
+x_n^-=\lambda\log\frac{m_0}{2\pi n},
 \]
-Let
+or the corresponding folded-dual coordinate in the exact AFE convention.  The
+main branch lies in \([c_-,c_+]\), while the folded dual branch lies in
+approximately \([1-c_+,1-c_-]\).  Partition these two intervals into paired
+cells
+\[
+I_r^+\subset[c_-,c_+],
+\qquad
+I_r^-\subset[1-c_+,1-c_-],
+\]
+with
+\[
+|I_r^\pm|\asymp R^{-1},
+\qquad
+M_{\rm cell}\asymp R,
+\]
+paired by the folded map \(x^-\leftrightarrow 1-x^+\), up to the exact AFE
+folding convention.  Let
 \[
 B_r^+
 =
-\sum_{x_n^+\in I_r}
+\sum_{x_n^+\in I_r^+}
 z_n^+(\alpha,m_0)e^{-im_0\log n},
 \]
 \[
 B_r^-
 =
-\sum_{x_n^-\in I_r}
+\sum_{x_n^-\in I_r^-}
 z_n^-(\alpha,m_0)e^{+im_0\log n},
 \]
 and define the full canonical cell vector
@@ -44238,7 +44312,23 @@ route when \(M_{\rm cell}\asymp R\) and the cell basis is well conditioned.
 \begin{lemma}[Fixed-width cell mass implies the \(Z_\alpha\)-derivative row]
 \label{lem:fixed-width-cell-mass-implies-z-derivative-row}
 Assume the fixed-width cell setup of
-Definition~\ref{def:O1-fixed-width-cell-nonrecurrence}.  Let
+Definition~\ref{def:O1-fixed-width-cell-nonrecurrence}.
+Assume the cell vector \(B=(B_r)_r\) and the residual \(E_{\rm cell}\) are chosen
+so that on \([-R,R]\)
+\[
+Z_\alpha(m_0+\lambda t)
+=
+\sum_r B_r e^{-it\xi_r}
++
+E_{\rm cell}(t),
+\]
+where \(\xi_r\) is the representative center of the \(r\)-th cell.  In the
+inclusive canonical formulation, the known background and \(E_2\)-type pieces
+assigned to cells are included in \(B_r\), and only the remaining intra-cell,
+tail, truncation, or unassigned pieces are included in \(E_{\rm cell}\).  In a
+perturbative formulation, the omitted canonical pieces must instead be included
+in \(E_{\rm cell}\) and satisfy the stated \(L^2\)-smallness bound.
+Let
 \[
 F(t)=Z_\alpha(m_0+\lambda t),
 \qquad F(0)=0,
@@ -44336,12 +44426,19 @@ Second, one needs folded main/dual cell nonalignment:
 Q^{-A}\left(\|B^+\|_2+\|B^-\|_2\right),
 }
 \]
-up to the canonical background and error cell vectors.  Equivalently,
+up to the canonical background and error cell vectors.  Equivalently, the
+phase-specific cancellation direction must be avoided:
+\[
+\Re\!\left(e^{-i\Theta_Z}\langle B^+,B^-\rangle\right)
+\]
+cannot be too close to \(-\|B^+\|_2\|B^-\|_2\) at polynomial scale.  A convenient
+stronger sufficient condition is
 \[
 |\langle B^+,B^-\rangle|
 \le
-(1-Q^{-A})\|B^+\|_2\|B^-\|_2.
+(1-Q^{-A})\|B^+\|_2\|B^-\|_2,
 \]
+but this latter bound is stronger than the exact folded nonalignment condition.
 
 The tilted regime
 \[
@@ -44483,6 +44580,21 @@ V(m_0)
 \operatorname{span}\{Q_0(m_0),\ldots,Q_R(m_0)\}
 \subset\mathbb C^{R+2}.
 \]
+At a zero \(Z_\alpha(m_0)=0\), define the full derivative row
+\[
+\mathbf z'(m_0,\alpha)
+:=
+\left(
+0,\,
+C_1(\mathcal D)Z_\alpha(m_0),\,
+\ldots,\,
+C_{R+1}(\mathcal D)Z_\alpha(m_0)
+\right)
+\in\mathbb C^{R+2}.
+\]
+The initial zero is the \(C_0Z_\alpha(m_0)\) coordinate.  Norms of
+\(\mathbf z'\) are therefore the same as the norms of the nonzero derivative
+coordinates, but the vector lies in the same ambient space as \(V(m_0)\).
 Since
 \[
 \mathbf M=\star(Q_0\wedge\cdots\wedge Q_R),
@@ -44596,9 +44708,10 @@ a named actual-orbit incidence input.
 
 \begin{theorem}[Ordinary Gate--1 from O1--O3]
 \label{thm:ordinary-gate-one-from-O1-O2-O3}
-Assume the ordinary packet-frequency Wronskian construction above, the
-canonical transfer for \(q''_{\can}=B_2+P_2+D_2+E_2\), and the three inputs
-O1--O3.  Then every admissible ordinary-scale zero \(Z_\alpha(m_0)=0\)
+Assume the ordinary packet-frequency Wronskian construction above, the stable
+cell-frame and amplitude-to-jet hypotheses of
+Lemma~\ref{lem:fixed-width-cell-mass-implies-z-derivative-row}, the canonical
+transfer for \(q''_{\can}=B_2+P_2+D_2+E_2\), and the three inputs O1--O3.  Then every admissible ordinary-scale zero \(Z_\alpha(m_0)=0\)
 satisfies
 \[
 |\widetilde{\mathcal W}_R(m_0,\alpha)|\ge Q^{-A}.
@@ -45225,7 +45338,7 @@ Z_\alpha(m_0)=0\Rightarrow |\mathbf M(m_0,\alpha)|\ge Q^{-A}
 \\
 \text{carrier-quotient D4}
 &
-\text{closed through order 9 modulo residual valuation control}
+\text{structural rank through order 9; finite quotient/projection residual audit remains}
 &
 \text{downstream row energy}
 \end{array}
@@ -45233,6 +45346,12 @@ Z_\alpha(m_0)=0\Rightarrow |\mathbf M(m_0,\alpha)|\ge Q^{-A}
 The ordinary Wronskian route lives or dies on the actual arithmetic inputs
 \(\mathrm{O1}\)--\(\mathrm{O3}\).  The downstream repairs do not discharge
 those inputs.
+The carrier-quotient D4 row should likewise not be cited as a scalar
+\(I\)-coordinate coercivity theorem.  It is conditional on the quotient/carrier
+row-energy architecture and on the stated residual valuation control.  If a
+later argument requires collapsed scalar \(I\)-coordinate energy, the
+order-nine scalar incidence wall \(F_9^I=0\) must still be controlled or
+bypassed.
 \end{remark}
 
 \begin{remark}[Empirical support for O1: local amplitude and cell tests]
@@ -45295,6 +45414,8 @@ prime-log object and its canonical transfer.  They justify continuing the O1
 proof route rather than triggering a stop rule.
 They should not be cited as evidence for any theorem requiring uniform
 polynomial lower bounds over all admissible heights.
+Accordingly, no later theorem may invoke these computations as a hypothesis or
+as a proof substitute for O1; they are only adversarial model checks.
 \end{remark}
 
 \begin{remark}[Zero-side Gate--1 proxy and watch-rerun evidence]
