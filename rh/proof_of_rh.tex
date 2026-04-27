@@ -206,6 +206,17 @@ phase/scalar
 \[
 \Phi_\zeta.
 \]
+Concretely, \(\Phi_\zeta\) is defined in a real completed gauge, for instance
+from
+\[
+\Xi(t)=\xi\!\left(\frac12+it\right)\in\mathbb R
+\]
+or from an equivalent Hardy-normalized real scalar.  It is not a one-sided AFE
+branch, not \(P_2\) alone, not \(D_2\) alone, and not a proxy zero kernel.  If a
+local real chart is used to define \(\Phi_\zeta\), every chart denominator is
+assumed polynomially bounded below on the ordinary packet.  If this chart
+condition fails, the packet must be treated in another chart or routed to the
+singular/transition branch.
 The associated phase derivative is
 \[
 q_\zeta:=\mathcal D\Phi_\zeta,
@@ -227,6 +238,10 @@ q''_{\can}=q_\zeta''=\Phi_\zeta'''.
 This is the full actual-zeta phase-derivative curvature in the same-point Gram
 normalization.  It is not whitened, projectivized, AFE-normalized, or
 affine-subtracted.
+Finite zero-side proxies, one-sided AFE truncations, core-only curvatures, and
+affine-subtracted complement curvatures are diagnostic objects only unless the
+corresponding error has explicitly been included in \(q''_{\can}\) or proved
+perturbative at the stated downstream scale.
 
 When no ambiguity is possible, centered rank-two formulas may write
 \(q,q'',q^{(4)}\) for
@@ -251,6 +266,39 @@ interval, the packet is routed to the singular/transition branch, or else the
 corresponding regularized phase convention must be used.
 \end{definition}
 
+\begin{lemma}[Reality of the completed critical-line scalar]
+\label{lem:completed-critical-line-scalar-real}
+Let
+\[
+\xi(s)=\frac12s(s-1)\pi^{-s/2}\Gamma(s/2)\zeta(s).
+\]
+Then
+\[
+\Xi(t):=\xi\!\left(\frac12+it\right)
+\]
+is real for all real \(t\).
+\end{lemma}
+
+\begin{proof}
+The completed function satisfies
+\[
+\xi(s)=\xi(1-s),
+\qquad
+\overline{\xi(s)}=\xi(\overline{s}).
+\]
+Thus, for \(s=\frac12+it\),
+\[
+\overline{\xi\!\left(\frac12+it\right)}
+=
+\xi\!\left(\frac12-it\right)
+=
+\xi\!\left(1-\left(\frac12+it\right)\right)
+=
+\xi\!\left(\frac12+it\right).
+\]
+Therefore \(\Xi(t)\in\mathbb R\).
+\end{proof}
+
 \begin{definition}[Canonical Gate--2 anisotropy functionals]
 \label{def:canonical-gate-two-anisotropy-functionals}
 In the canonical actual-zeta convention of
@@ -270,6 +318,23 @@ and
 When the local coordinate is clear, we suppress the \(\zeta\)-subscript and
 write \(q\) for \(q_\zeta\).
 \end{definition}
+
+\begin{remark}[Derivative notation in the canonical Gate--2 identities]
+\label{rem:gate-two-derivative-notation}
+Throughout the canonical Gate--2 identities, primes denote the same normalized
+packet derivative \(\mathcal D\) used in
+Definition~\ref{def:canonical-actual-zeta-phase-curvature}.  Thus
+\[
+        q'= \mathcal D q_\zeta,\qquad
+        q''=\mathcal D^2q_\zeta=q''_{\can},
+        \qquad
+        q^{(4)}=\mathcal D^4q_\zeta.
+\]
+In physical coordinates \(m\), one has \(\mathcal D=\lambda\partial_m\) on
+ordinary packets.  All identities involving \(q'',\Gamma_G,\Gamma_{G,2}\), and
+\(\Gamma_G''\) are to be read in this normalized derivative convention unless
+explicitly stated otherwise.
+\end{remark}
 
 \begin{lemma}[Differentiated form of the second Gate--2 anisotropy]
 \label{lem:differentiated-form-second-gate-two-anisotropy}
@@ -316,6 +381,80 @@ Hence
 =
 \Gamma_{G,2}.
 \end{aligned}
+\]
+\end{proof}
+
+\begin{lemma}[Expanded Gate--2 derivative identities]
+\label{lem:expanded-gate-two-derivative-identities}
+In the normalized canonical convention,
+\[
+        u=q''_{\can}=q'',
+\qquad
+        g=\Gamma_G=q''-6q+2q^3,
+\]
+and
+\[
+        h=\Gamma_{G,2}.
+\]
+Then
+\[
+        h=(1-q^2)q''-\frac16q^{(4)}
+        =
+        (1-q^2)u-\frac16q^{(4)}.
+\]
+Moreover,
+\[
+        g'=q'''-6q'+6q^2q',
+\]
+and
+\[
+        h'
+        =
+        -2qq'q''
+        +(1-q^2)q'''
+        -\frac16q^{(5)}.
+\]
+Equivalently,
+\[
+        h'
+        =
+        -2qq'u
+        +(1-q^2)u'
+        -\frac16q^{(5)}.
+\]
+\end{lemma}
+
+\begin{proof}
+The identity for \(h\) follows by expanding
+\[
+        h=2q(q')^2-\frac16g''
+\]
+and using
+\[
+        g''=q^{(4)}-6q''+12q(q')^2+6q^2q''.
+\]
+Thus
+\[
+\begin{aligned}
+h
+&=
+2q(q')^2
+-\frac16q^{(4)}
++q''
+-2q(q')^2
+-q^2q''        \\
+&=
+(1-q^2)q''
+-\frac16q^{(4)}.
+\end{aligned}
+\]
+The formulas for \(g'\) and \(h'\) follow by differentiating
+\[
+        g=q''-6q+2q^3
+\]
+and
+\[
+        h=(1-q^2)q''-\frac16q^{(4)}.
 \]
 \end{proof}
 
@@ -30211,6 +30350,10 @@ We say that \(I^\ast\) is ordinary zero-separated if
 \ge
 \lambda Q^{-C_0}.
 \]
+Here \(\mathcal Z_\Xi\) denotes the zero set of the completed scalar underlying
+the canonical curvature operator \(\mathfrak C_2[\Xi]\).  It is unrelated to the
+finite \(N\)-point odd scalar \(\Xi_\zeta^{(N)}\) used earlier in the
+odd-moment cancellation construction.
 If this condition fails, the packet is not treated by the ordinary Gate--2
 local argument; it is routed to the singular/transition branch, or else a
 regularized phase convention must be used.
@@ -30323,7 +30466,10 @@ algebra, not to the canonical source curvature used in Gate~2.
 \begin{lemma}[Real-canonical Gate--2 compatibility]
 \label{lem:real-canonical-gate-two-compatibility}
 Assume the actual-zeta local variables are in the real completed gauge of
-Definition~\ref{def:canonical-actual-zeta-phase-curvature}.  Thus
+Definition~\ref{def:canonical-actual-zeta-phase-curvature}.
+If this gauge is implemented through a local chart, assume throughout the
+packet that every chart denominator is bounded below by \(Q^{-C}\).
+Thus
 \[
 q=q_\zeta,\qquad u=q''_{\can}=\mathcal D^2q_\zeta,
 \]
@@ -30368,25 +30514,129 @@ h=2q(q')^2-\frac16g''.
 \]
 \end{proof}
 
+\begin{corollary}[Gauge-locking for the \(q_0\)-wall]
+\label{cor:gauge-locking-q0-wall}
+In the real-canonical convention above, the \(q_0\)-wall used in wall escape is
+the same scalar wall that appears in the Gate--2 anisotropy and in the D4
+source factor.  Namely, for \(q_0=q_\zeta(m)\),
+\[
+u=\mathcal D^2q_0,
+\]
+\[
+\Gamma_G=u-6q_0+2q_0^3,
+\]
+and the D4 source factor has leading form
+\[
+H_{\mathrm{lead}}=-\frac{q_0u^3}{288}.
+\]
+Thus \(q_0\) is not an arbitrary affine primitive of \(u\).  Any affine drift
+\(q_0\mapsto q_0+am+b\) changes both
+\[
+\Gamma_G=u-6q_0+2q_0^3
+\]
+and
+\[
+H_{\mathrm{lead}}=-q_0u^3/288.
+\]
+Consequently, the wall-escape argument is applied only in the canonical gauge
+fixed by \(q_\zeta\).
+\end{corollary}
+
 \begin{remark}[Residual version of the compatibility package]
 \label{rem:gate-two-compatibility-residuals}
 If an approximate convention is used, define
 \[
-r_u:=q''_{\can}-q'',
+        r_u:=u-q'',
 \]
 \[
-r_G:=\Gamma_G-(q''-6q+2q^3),
+        r_G:=\Gamma_G-(q''-6q+2q^3),
 \]
 and
 \[
-r_{G,2}:=
-\Gamma_{G,2}
--\left(2q(q')^2-\frac16\Gamma_G''\right).
+        r_{G,2}:=
+        \Gamma_{G,2}
+        -
+        \left(2q(q')^2-\frac16\Gamma_G''\right).
 \]
-The \(L^2\)-input rigidity lemma remains applicable provided these residuals
-are \(L^2\)-small on the source interval at the same scale as \(g,h\).  In the
-main canonical convention of this draft these residuals are zero.
+The main canonical convention of this draft has
+\[
+        r_u=r_G=r_{G,2}=0.
+\]
+
+If a residual convention is used instead, then the \(L^2\)-input rigidity
+argument applies to \(q''\), while the Gate--2 source is \(u\).  Therefore one
+must also control the discrepancy \(r_u=u-q''\).  A sufficient residual package
+on the source interval \(J\) is
+\[
+        \|r_u\|_{L^2(J)}
+        +\|r_G\|_{L^2(J)}
+        +\|r_{G,2}\|_{L^2(J)}
+        \le
+        \varepsilon |J|^{1/2}.
+\]
+Under this package, the residual terms enter the kinetic, potential, and
+small-\(q\) estimates exactly like \(g\) and \(h\), and the conclusion of
+Lemma~\ref{lem:l2-input-real-rigidity-safe} remains valid after increasing the
+implicit polynomial loss.
 \end{remark}
+
+\begin{lemma}[Local primitive recovery from \(L^2\)-small \(g\)]
+\label{lem:local-primitive-recovery-from-l2-small-g}
+Let \(J_1\Subset J\) be intervals with polynomial separation from the boundary.
+Assume
+\[
+u=q'',\qquad g=u-F(q),\qquad F(q)=6q-2q^3,
+\]
+and
+\[
+\|u\|_{L^\infty(J)}\le Q^C,
+\qquad
+\|g\|_{L^2(J)}\le \varepsilon |J|^{1/2}.
+\]
+Then on \(J_1\),
+\[
+\|q\|_{L^\infty(J_1)}\le Q^C.
+\]
+Moreover, on any further polynomially shrunken interval \(J_2\Subset J_1\),
+\[
+\|q'\|_{L^\infty(J_2)}\le Q^C.
+\]
+\end{lemma}
+
+\begin{proof}
+Since \(F(q)=u-g\),
+\[
+\|F(q)\|_{L^2(J)}
+\le
+\|u\|_{L^2(J)}+\|g\|_{L^2(J)}
+\le Q^C|J|^{1/2}.
+\]
+The cubic polynomial \(F(q)=6q-2q^3\) satisfies
+\[
+|q|^6\le C(1+|F(q)|^2).
+\]
+Hence
+\[
+\|q\|_{L^6(J)}\le Q^C|J|^{1/6}.
+\]
+Since \(q''=u\in L^\infty(J)\), the one-dimensional interpolation estimate gives
+\[
+\|q\|_{L^\infty(J_1)}\le Q^C.
+\]
+Finally, the Landau estimate gives
+\[
+\|q'\|_{L^\infty(J_2)}
+\le
+C\left(
+\ell^{-1}\|q\|_{L^\infty(J_1)}
++
+\ell\|q''\|_{L^\infty(J_1)}
+\right)
+\le Q^C,
+\]
+where \(\ell=\operatorname{dist}(J_2,\partial J_1)\) and the shrinkage is
+polynomial.
+\end{proof}
 
 \begin{lemma}[\(L^2\)-input real rigidity; safe primitive-bounded form]
 \label{lem:l2-input-real-rigidity-safe}
@@ -30413,7 +30663,9 @@ Assume the safe local bounds
         +\|q''\|_{L^\infty(J)}
         \le Q^C,
 \]
-and the \(L^2\)-smallness condition
+This safe bound may either be assumed directly or obtained locally by applying
+Lemma~\ref{lem:local-primitive-recovery-from-l2-small-g} on a slightly larger
+source interval.  Assume also the \(L^2\)-smallness condition
 \[
         \|g\|_{L^2(J)}+\|h\|_{L^2(J)}
         \le \varepsilon |J|^{1/2}.
@@ -30735,9 +30987,32 @@ primitive slope bound.  The present proof keeps the stronger primitive
 bookkeeping.
 \end{remark}
 
+\begin{remark}[Scale-normalized use of Lemma~\ref{lem:l2-input-real-rigidity-safe}]
+\label{rem:scale-normalized-use-l2-rigidity}
+Lemma~\ref{lem:l2-input-real-rigidity-safe} is stated on the fixed normalized
+intervals
+\[
+        J=(-2,2),\qquad J'=(-1,1).
+\]
+When it is applied to a physical subinterval \(J_{\rm phys}\subset I\), one
+first rescales
+\[
+        m=m_J+\lambda_Jx,
+\]
+where \(\lambda_J\asymp |J_{\rm phys}|\).  The hypotheses are then interpreted
+with respect to the normalized derivative
+\[
+\mathcal D_J=\lambda_J\partial_m.
+\]
+All cutoff losses from this rescaling are absorbed into the polynomial factor
+\(Q^C\), provided \(J_{\rm phys}\) has polynomial relative length and the
+corresponding normalized primitive bounds remain polynomial.
+\end{remark}
+
 \begin{lemma}[Source thickening from one large source point]
 \label{lem:source-thickening-one-large-point}
-Let \(I\) be a packet interval and let \(u\) be real-valued on \(I\).  Assume
+Let \(I\) be a packet interval and let \(u\) be a \(C^1\), real- or
+complex-valued function on \(I\).  Assume
 \[
 \int_I |u|^2\,dm\ge Q^{-B}|I|
 \]
@@ -30757,13 +31032,63 @@ and
 \end{lemma}
 
 \begin{proof}
-Gate~1 gives \(m_\ast\in I\) with \(|u(m_\ast)|\ge Q^{-B/2}\).  By the
-Lipschitz bound, \(|u|\ge \frac12Q^{-B/2}\) whenever
+Gate~1 gives \(m_\ast\in I\) with \(|u(m_\ast)|\ge Q^{-B/2}\).  Since
+\[
+\bigl||u(m)|-|u(m_\ast)|\bigr|\le |u(m)-u(m_\ast)|,
+\]
+the Lipschitz bound gives \(|u|\ge \frac12Q^{-B/2}\) whenever
 \[
 |m-m_\ast|\le cQ^{-B/2-C_u}|I|
 \]
 with \(c>0\) sufficiently small.  Intersecting with \(I\) gives the claimed
 one-sided or two-sided interval.
+\end{proof}
+
+\begin{lemma}[Source-large interval with \(L^2\)-small anisotropy]
+\label{lem:source-large-interval-l2-anisotropy}
+Assume Gate~1:
+\[
+\int_I |u|^2\,dm\ge Q^{-B}|I|,
+\]
+source Lipschitz control
+\[
+\|u'\|_{L^\infty(I)}\le Q^{C_u}|I|^{-1},
+\]
+and Gate--2 failure at exponent \(A\):
+\[
+\int_I |u|^2(g^2+h^2)\,dm\le Q^{-A}|I|.
+\]
+Then there exists an interval \(J\subset I\) such that
+\[
+|u|\ge \tau:=\frac12Q^{-B/2}
+\qquad\text{on }J,
+\]
+\[
+|J|\ge Q^{-B/2-C_u-O(1)}|I|,
+\]
+and
+\[
+\frac1{|J|}\int_J(g^2+h^2)\,dm
+\le
+Q^{-A+\frac32B+C_u+O(1)}.
+\]
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:source-thickening-one-large-point}, there is an interval
+\(J\subset I\) with the stated lower bound for \(|u|\) and for \(|J|\).  Since
+\(|u|^2\ge \tau^2\) on \(J\),
+\[
+\tau^2\int_J(g^2+h^2)\,dm
+\le
+\int_I |u|^2(g^2+h^2)\,dm
+\le Q^{-A}|I|.
+\]
+Using \(\tau^{-2}\asymp Q^B\) and
+\[
+|J|^{-1}\le Q^{B/2+C_u+O(1)}|I|^{-1}
+\]
+gives the claim.
 \end{proof}
 
 \subsection{Gate 2 from source thickening and \(L^2\)-input rigidity}
@@ -30772,7 +31097,12 @@ one-sided or two-sided interval.
 \label{thm:gate-two-from-gate-one-l2-rigidity}
 Assume the normalized real-canonical convention of
 Definitions~\ref{def:canonical-actual-zeta-phase-curvature} and
-\ref{def:canonical-gate-two-anisotropy-functionals}.  Let
+\ref{def:canonical-gate-two-anisotropy-functionals}.
+This is an ordinary smooth-packet statement.  Packets containing an
+unregularized critical-line zero, or packets where the real completed phase is
+not smooth in the chosen convention, are routed to the singular/transition
+branch and are not covered by this theorem.
+Let
 \[
 u=q''_{\can}=q'',
 \qquad
@@ -30808,32 +31138,16 @@ Assume, toward contradiction, that
 \[
 \int_I |u|^2(g^2+h^2)\,dm\le Q^{-A}|I|.
 \]
-By Lemma~\ref{lem:source-thickening-one-large-point}, there is a one-sided or
-two-sided interval \(J\subset I\) such that, with
+By Lemma~\ref{lem:source-large-interval-l2-anisotropy}, there is an interval
+\(J\subset I\) such that
 \[
-\tau:=\frac12Q^{-B/2},
-\]
-one has
-\[
-|u|\ge\tau\quad\text{on }J,
+|u|\ge \tau:=\frac12Q^{-B/2}\quad\text{on }J,
 \]
 and
 \[
-|J|\ge Q^{-B/2-C_u-O(1)}|I|.
-\]
-On \(J\), \(|u|^2\ge\tau^2\).  Therefore
-\[
-\tau^2\int_J(g^2+h^2)\,dm
-\le
-Q^{-A}|I|.
-\]
-Since \(\tau^{-2}\asymp Q^B\), division by \(|J|\) gives
-\[
-\boxed{
 \frac1{|J|}\int_J(g^2+h^2)\,dm
 \le
 Q^{-A+\frac32B+C_u+O(1)}.
-}
 \]
 Put
 \[
@@ -30897,6 +31211,34 @@ No Remez--Cartan theorem, pointwise target-smallness interval, or pointwise
 
 \subsection{Gauge-locked wall escape and row energy}
 
+\begin{definition}[Gauge-locked wall scalar]
+\label{def:gauge-locked-wall-scalar}
+The wall scalar \(q_0\) is gauge-locked to the Gate--2 and D4 package if the
+same scalar \(q_0\) satisfies, in the same normalized derivative convention,
+\[
+q_0''=u=q''_{\can},
+\]
+\[
+\Gamma_G=u-6q_0+2q_0^3,
+\]
+and the D4 source factor has leading form
+\[
+H\sim-\frac{q_0u^3}{288}.
+\]
+If these identities hold only up to residuals, the residuals must satisfy
+\[
+|q_0''-u|\le c\tau,
+\]
+and
+\[
+\left|
+\Gamma_G-(u-6q_0+2q_0^3)
+\right|
+\le c\tau
+\]
+on wall-escape neighborhoods.
+\end{definition}
+
 \begin{theorem}[Gauge-locked wall escape in normalized coordinates]
 \label{thm:gauge-locked-wall-escape-row-energy}
 Fix the normalized derivative convention
@@ -30942,6 +31284,23 @@ Assume on wall-escape neighborhoods that
 |r_G-r_C|\le c\tau,
 \]
 and that \(r_H^\ast\) is controlled by the D4 residual estimate.
+
+Choose thresholds
+\[
+\tau=Q^{-C_\tau},
+\qquad
+\varepsilon=Q^{-C_\varepsilon},
+\]
+with
+\[
+2C_\tau\ge A+2C_\Gamma+O(1),
+\]
+and
+\[
+C_\varepsilon
+\ge
+\max\{3C_\tau+2C_{u'},\ C_\tau+2A+2C_G\}+O(1).
+\]
 
 Then either the non-wall region
 \[
@@ -31008,18 +31367,18 @@ Since
 \]
 the assumptions \(|r_C|\le c\tau\) and
 \[
-|\mathcal D u|\rho\le c\tau
+|\mathcal D u|\,r_{\mathrm{esc}}\le c\tau
 \]
 imply
 \[
 \mathcal D^2Q\ge c\tau
 \]
-on a normalized interval of radius \(\rho\).  Taking
+on a normalized interval of radius \(r_{\mathrm{esc}}\).  Taking
 \[
-\rho\asymp\sqrt{\varepsilon/\tau}
+r_{\mathrm{esc}}\asymp\sqrt{\varepsilon/\tau}
 \]
 gives first exit from the strip \(|q_0|<\varepsilon\) within normalized
-distance \(O(\rho)\), provided
+distance \(O(r_{\mathrm{esc}})\), provided
 \[
 C_\varepsilon\ge 3C_\tau+2C_{u'}+O(1).
 \]
@@ -31052,6 +31411,38 @@ Thus \(G(m_1)\ge c\tau^4\).  D4 converts this non-wall sample to a row lower
 bound, and row mobility thickens the pointwise lower bound to interval row
 energy.
 \end{proof}
+
+\begin{remark}[Absolute residual corridor in wall escape]
+\label{rem:absolute-residual-corridor-wall-escape}
+In Theorem~\ref{thm:gauge-locked-wall-escape-row-energy}, D4 residual control
+is interpreted valuation-wise.  Same-valuation anisotropy-linear terms are
+absorbed into the effective D4 row matrix, and valuation-relative residuals are
+estimated relative to the leading row scale.  Only absolute residual floors
+require a wall-threshold corridor.
+
+Concretely, if the D4 leading valuation is
+\[
+q_0u^{b_\ast}L_\ast\Gamma
+\]
+and the wall-escape sample satisfies
+\[
+|q_0|=\varepsilon,\qquad |u|\gg\tau,\qquad |\Gamma|\gg\tau,
+\]
+then an absolute residual bound
+\[
+|\mathbf R_{\rm abs}|\le Q^{-C_R^{\rm abs}}
+\]
+must satisfy
+\[
+C_R^{\rm abs}
+\ge
+C_\varepsilon+(b_\ast+1)C_\tau+C_L+O(1),
+\]
+where \(Q^{-C_L}\) is the D4 row-rank lower bound.  If D4 uses a filtered
+leading block through \(u\)-valuation \(B\), replace \(b_\ast\) by \(B\).
+This condition does not apply to residuals carrying useful \(q_0,u,\Gamma\)
+valuation.
+\end{remark}
 
 \begin{remark}[Packet buffer for wall escape]
 \label{rem:packet-buffer-for-wall-escape}
@@ -35244,56 +35635,171 @@ an additional row relation is imposed identifying \(\mathsf C_{Y12}\) or
 carrier-graded associated row module.
 \end{proof}
 
+\begin{lemma}[Leading source factor]
+\label{lem:leading-source-factor-H}
+In the centered reduced-patch normalization,
+\[
+H:=yq'',
+\]
+and the leading source term satisfies
+\[
+H_{\mathrm{lead}}=-\frac{q_0(q'')^3}{288}.
+\]
+Equivalently, with \(u=q''_{\can}=q''\),
+\[
+H_{\mathrm{lead}}=-\frac{q_0u^3}{288}.
+\]
+\end{lemma}
+
+\begin{proof}
+The centered source calculation gives
+\[
+y_{\mathrm{lead}}=-\frac{q_0A_2^2}{72},
+\qquad
+q''=2A_2.
+\]
+Hence
+\[
+H_{\mathrm{lead}}=y_{\mathrm{lead}}q''
+=
+-\frac{q_0A_2^2}{72}\cdot 2A_2
+=
+-\frac{q_0A_2^3}{36}.
+\]
+Since \(A_2=q''/2\),
+\[
+H_{\mathrm{lead}}
+=
+-\frac{q_0(q'')^3}{288}.
+\]
+\end{proof}
+
 \begin{theorem}[D4 carrier-quotient row conversion through order nine]
 \label{thm:d4-carrier-quotient-through-order-nine}
 Assume the carrier-quotient row-energy formulation is admissible downstream.
-Then, in \(\mathcal Q_{\rm car}\), the order-seven and order-nine live rows
-have the schematic leading form
+Let
 \[
-[\mathcal A_7]\sim H\Gamma_G[\mathsf C_7],
+W_{\rm car}:=\operatorname{span}\{[\mathsf C_7],[\mathsf C_{Y12}]\}
+\subset \mathcal Q_{\rm car}.
 \]
-and
-\[
-[\mathcal A_9]\sim H\Gamma_{G,2}[\mathsf C_{Y12}].
-\]
-Consequently, on the source-good locus \(H\ne0\),
-\[
-(\Gamma_G,\Gamma_{G,2})\ne(0,0)
-\]
-implies nonzero carrier-quotient row output.  Quantitatively, if the quotient
-Gram determinant of
+Assume the quotient Gram matrix of the ordered pair
 \[
 [\mathsf C_7],\qquad [\mathsf C_{Y12}]
 \]
-is bounded below by \(Q^{-C}\), then
+has determinant bounded below by \(Q^{-C}\).
+
+Assume that, in \(\mathcal Q_{\rm car}\), the order-seven and clean order-nine
+live carrier classes have the leading-symbol form, modulo nuisance directions
+and D4 residual terms,
+\[
+[\mathcal A_7]
+=
+H\Gamma_G[\mathsf C_7]+\mathcal E_7,
+\]
+\[
+[\mathcal A_9]
+=
+H\Gamma_{G,2}[\mathsf C_{Y12}]+\mathcal E_9,
+\]
+and that the quotient projection of the residual into \(W_{\rm car}\) is
+half-leading:
 \[
 \left|
-([\mathcal A_7],[\mathcal A_9])
+P_{W_{\rm car}}
+\left(
+\mathcal E_7+\mathcal E_9
+\right)
+\right|_{\mathcal Q_{\rm car}}
+\le
+\frac12
+|H|
+\left(\Gamma_G^2+\Gamma_{G,2}^2\right)^{1/2}.
+\]
+Then
+\[
+\left|
+[\mathcal A_7]+[\mathcal A_9]
 \right|_{\mathcal Q_{\rm car}}
 \ge
-Q^{-C}|H|\left(\Gamma_G^2+\Gamma_{G,2}^2\right)^{1/2}
+Q^{-C}
+|H|
+\left(\Gamma_G^2+\Gamma_{G,2}^2\right)^{1/2}.
 \]
-up to the stated D4 residual terms.
+Consequently, combined with Gate~2, gauge-locked wall escape, and
+Lemma~\ref{lem:row-mobility-point-to-energy}, one obtains carrier-quotient row
+energy
+\[
+\int_I
+\left|[\mathcal A_N^{\rm car}(m)]\right|_{\mathcal Q_{\rm car}}^2\,dm
+\ge Q^{-C}|I|.
+\]
 \end{theorem}
 
 \begin{proof}
-The order-seven computation gives
+The Gram determinant lower bound gives a polynomial lower frame bound for the
+two quotient carrier directions.  Therefore
 \[
-[\mathcal A_7]\sim H\Gamma_G[\mathsf C_7].
+\left|
+H\Gamma_G[\mathsf C_7]+H\Gamma_{G,2}[\mathsf C_{Y12}]
+\right|_{\mathcal Q_{\rm car}}
+\ge
+Q^{-C}
+|H|
+\left(\Gamma_G^2+\Gamma_{G,2}^2\right)^{1/2}.
 \]
-The clean order-nine computation gives
-\[
-[\mathcal A_9]\sim H\Gamma_{G,2}[\mathsf C_{Y12}].
-\]
-By Lemma~\ref{lem:order-nine-carrier-survives-quotient}, the two carrier
-classes are independent in \(\mathcal Q_{\rm car}\).  Therefore the carrier
-response has rank two in the anisotropy vector
-\[
-(\Gamma_G,\Gamma_{G,2}).
-\]
-The quantitative statement is the same observation expressed using the quotient
-Gram matrix.
+The residual bound is half-leading in the only quotient directions that can
+cancel the leading response.  The triangle inequality gives the pointwise row
+lower bound.  Row mobility upgrades the pointwise lower bound to row energy.
+
+This proves carrier-quotient row conversion only.  It does not assert
+coercivity of any collapsed scalar coordinate such as the \(I\)-coordinate
+order-nine readout.
 \end{proof}
+
+\begin{remark}[Two quotient coordinates for D4]
+\label{rem:two-quotient-coordinates-d4}
+Equivalently, choose dual quotient coordinates \(B_7,B_9\) for the pair
+\[
+[\mathsf C_7],\qquad [\mathsf C_{Y12}].
+\]
+Then D4 may be checked by the two scalar identities
+\[
+\begin{pmatrix}
+B_7\\
+B_9
+\end{pmatrix}
+=
+H
+M_Q
+\begin{pmatrix}
+\Gamma_G\\
+\Gamma_{G,2}
+\end{pmatrix}
++
+\epsilon,
+\]
+with
+\[
+|\det M_Q|\ge Q^{-C},
+\]
+and
+\[
+|\epsilon|
+\le
+\frac12
+|H|\,
+\sigma_{\min}(M_Q)
+\left(\Gamma_G^2+\Gamma_{G,2}^2\right)^{1/2}.
+\]
+In the expected clean carrier normalization,
+\[
+M_Q=I_2
+\]
+up to the fixed nonzero scalar already absorbed into the definition of the
+carrier coordinates.  This two-coordinate formulation is the smallest D4
+correction-control statement: residual components orthogonal to the carrier
+anisotropy plane cannot cancel the leading row response.
+\end{remark}
 
 \begin{theorem}[Two-coordinate carrier-quotient D4 conversion]
 \label{thm:two-coordinate-carrier-quotient-d4}
@@ -35384,7 +35890,10 @@ arises after the collapse map
 S_I:\mathcal M_{\rm car}\to \mathcal O\cdot I
 \]
 has sent several independent carrier directions to the same scalar
-\(I\)-coordinate.  In the carrier quotient, the lower-carrier, line,
+\(I\)-coordinate.
+The active D4 theorem in this draft is the carrier-quotient theorem
+\ref{thm:d4-carrier-quotient-through-order-nine}; the scalar \(I\)-coordinate
+formulation below is retained only as a fallback audit.  In the carrier quotient, the lower-carrier, line,
 background/core, and normalization/subtraction contributions are nuisance
 directions.  Thus the scalar incidence wall
 \[
@@ -35416,6 +35925,9 @@ Closing that scalar formulation would require either proving
 \(H\)-divisible, or nuisance-quotient, or replacing the scalar readout by a
 higher-order or ambient row.  Under the carrier-quotient formulation this
 scalar incidence is not a D4 obstruction.
+We refer to this fallback scalar obstruction as the order-nine scalar
+cross-channel incidence problem.  It is not part of the active
+carrier-quotient D4 route.
 \end{remark}
 
 \begin{remark}[Admissibility of carrier-quotient row energy]
@@ -35461,12 +35973,16 @@ T=q_0^a u^b\Gamma^cE_T,
 \]
 where \(E_T\) is polynomially bounded or separately controlled.
 
-Terms with the same anisotropy-linear valuation as the leading D4 row,
+Terms with the same anisotropy-linear valuation as the chosen leading D4 row
+are not errors.  In the expected carrier-quotient case this valuation is
 \[
 (a,b,c)=(1,3,1),
 \]
-are not errors.  They are absorbed into the effective leading matrix or the
-carrier-quotient coordinate map.
+corresponding to \(q_0u^3\Gamma\).  If the exact row algebra contains a lower
+or delayed \(u\)-valuation anisotropy-linear layer, the leading valuation is
+chosen according to the filtered row-observability rule in
+Remark~\ref{rem:filtered-d4-row-observability}.  They are absorbed into the
+effective leading matrix or the carrier-quotient coordinate map.
 
 Terms with higher \(q_0\)-valuation, higher anisotropy valuation, or higher
 source valuation belong to \(\mathbf R_{\rm val}\) and are controlled by the
@@ -38788,10 +39304,9 @@ for
 \]
 \end{hypothesis}
 
-\begin{hypothesis}[Gate 2: source--anisotropy vector observability]
-\label{hyp:source-anisotropy-vector-observability}
-On the same admissible interval \(I_\rho\), actual zeta data satisfy a
-source-weighted anisotropy lower bound of the form
+\begin{remark}[Gate 2 is no longer an independent ordinary-branch hypothesis]
+\label{rem:gate-two-no-longer-independent-ordinary-branch}
+In earlier versions, the source--anisotropy lower bound
 \[
 \int_{I_\rho}
 |q''_{\can}(m)|^2
@@ -38799,21 +39314,19 @@ source-weighted anisotropy lower bound of the form
 \Gamma_G(m)^2+\Gamma_{G,2}(m)^2
 \right)\,dm
 \ge
-Q^{-A}|I_\rho|.
+Q^{-A}|I_\rho|
 \]
-A pointwise substitute would be
-\[
-\sup_{m\in I_\rho}
-|H(m)|
-\max\{|\Gamma_G(m)|,|\Gamma_{G,2}(m)|\}
-\ge Q^{-A}.
-\]
-This is a separate gate from
-Hypothesis~\ref{hyp:offline-packet-source-curvature-observability}.  Source
-curvature may be observable in \(L^2\) while the anisotropy factors are small
-on most of the \(q''_{\can}\)-mass.  The current proof architecture requires
-both gates, or a single stronger theorem implying both.
-\end{hypothesis}
+was stated as a separate Gate--2 hypothesis.  In the ordinary smooth
+real-canonical branch, this is now supplied by
+Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}, assuming Gate~1,
+source Lipschitz control for \(u=q''_{\can}\), and the \(L^2\)-input real
+rigidity lemma.
+
+Thus the displayed source--anisotropy estimate is retained as the Gate--2
+conclusion, not as an independent ordinary-branch input.  Singular packets,
+transition packets, or packets outside the real-canonical smooth convention
+still require their own routing.
+\end{remark}
 
 \begin{remark}[ODE form of the reintegration problem]
 \label{rem:ode-form-source-anisotropy-reintegration}
@@ -38839,17 +39352,32 @@ Since \(u''=q^{(4)}\), one obtains the identity
 2q(q')^2-\frac16\Gamma_G''.
 }
 \]
-Thus the reintegration gate is not merely a prime-side arithmetic problem.  It
-also has a local analytic/ODE formulation: source mass for \(u=q''_{\can}\)
-must be prevented from concentrating on a set where both
+Thus the historical reintegration problem has a local analytic/ODE
+formulation: one must prevent source mass for \(u=q''_{\can}\) from
+concentrating where both
 \[
 \Gamma_G\approx0
 \qquad\text{and}\qquad
 2q(q')^2-\frac16\Gamma_G''\approx0.
 \]
-A proof of Hypothesis~\ref{hyp:source-anisotropy-vector-observability} must
-control this base-locus regime, including possible cancellation between
-\(\Gamma_G''\) and \(2q(q')^2\).
+In the present ordinary real-canonical branch this prevention is supplied by
+the \(L^2\)-input rigidity mechanism of
+Lemma~\ref{lem:l2-input-real-rigidity-safe} and
+Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}.  The ODE formulation is
+therefore retained as explanatory structure and as a fallback diagnostic, not
+as an independent active proof gate.
+\end{remark}
+
+\begin{remark}[Status of the following derivative-complexity package]
+\label{rem:status-derivative-complexity-package}
+The following finite-order derivative-complexity package is retained as a safe
+good-patch hypothesis and for historical comparison with the older pointwise
+propagation route.  The active ordinary Gate--2 proof uses only source
+Lipschitz control for \(u\), the real-normal-form identities, and
+Lemma~\ref{lem:l2-input-real-rigidity-safe}.  Thus the higher-derivative
+package below is stronger than what is needed for
+Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}, although it remains useful
+for fallback Remez/Bernstein arguments and row/D4 bookkeeping.
 \end{remark}
 
 \begin{hypothesis}[Gate--2 derivative-complexity good patch]
@@ -39047,8 +39575,11 @@ and \(a\ge Q^{-B/2}\), we obtain
 after decreasing the absolute constant.  This proves the claim.
 \end{proof}
 
-\begin{lemma}[Polynomial propagation from vector \(L^2\)-smallness]
+\begin{lemma}[Historical fallback polynomial propagation from vector \(L^2\)-smallness]
 \label{lem:polynomial-propagation-vector-smallness}
+This lemma belongs to the older pointwise propagation route.  It is not used in
+the main ordinary real-canonical Gate--2 proof, which instead uses
+Lemma~\ref{lem:l2-input-real-rigidity-safe}.
 Let \(J\subset I_\rho^\ast\) be an interval with
 \[
 |J|\ge Q^{-\kappa}.
@@ -39144,8 +39675,10 @@ for \(M\) sufficiently large relative to the good-patch constants.  Combining
 the estimates gives the result.
 \end{proof}
 
-\begin{lemma}[Quantitative ODE base-locus rigidity]
+\begin{lemma}[Historical fallback quantitative ODE base-locus rigidity]
 \label{lem:quantitative-ode-base-locus-rigidity}
+This is a pointwise interval-rigidity fallback.  The active Gate--2 proof uses
+the \(L^2\)-input real rigidity lemma instead.
 Let \(J\) be an interval of length \(\ell\).  Put
 \[
 u=q''_{\can},
@@ -42941,11 +43474,31 @@ obligations are:
 \begin{enumerate}
 \item ordinary real-canonical local complexity for \(u=q''_{\can}\) and its
 normalized derivative;
-\item the safe \(L^2\)-input rigidity lemma;
+\item the safe \(L^2\)-input rigidity lemma, together with the real-normal-form
+and primitive hypotheses stated above;
 \item gauge-locked wall escape in the same normalized derivative convention;
-\item D4 carrier-quotient row conversion and residual control;
-\item row mobility.
+\item D4 carrier-quotient row conversion, namely independence of the carrier
+classes \([\mathsf C_7]\), \([\mathsf C_{Y12}]\), and half-leading residual
+control in their quotient anisotropy plane;
+\item row mobility, supplied by Lemma~\ref{lem:row-mobility-point-to-energy}.
 \end{enumerate}
+
+If the final row obstruction is forced to use only the collapsed scalar
+\(I\)-coordinate, then the carrier-quotient D4 theorem is not sufficient.  In
+that scalar architecture one must return to the order-nine correction package
+\[
+(A_9^{\mathfrak f})_I
+=
+\frac{yq''\Gamma_{G,2}}{128\pi^2g^3}
++
+R_9^I
+\]
+and prove quantitative avoidance of the scalar incidence wall
+\[
+F_9^I=0,\qquad yq''\Gamma_{G,2}\ne0,
+\]
+or pass to an order-eleven or ambient-row replacement.  This is a fallback
+architecture, not the active carrier-quotient row-energy route.
 
 This does not prove RH.  The upstream ordinary/singular gates remain separate
 actual-zeta arithmetic inputs.  In particular, a complete proof still requires
