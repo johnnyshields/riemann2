@@ -70,13 +70,11 @@ except Exception:
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _DEFAULT_OUT_DIR = os.path.normpath(os.path.join(_SCRIPT_DIR, "out"))
-_AGENT2_DIR = os.path.normpath(os.path.join(_SCRIPT_DIR, "..", "zeta_bridge_agent2"))
 _SHARED_DIR = os.path.normpath(os.path.join(_SCRIPT_DIR, "..", "zeta_bridge_shared"))
-for _d in (_AGENT2_DIR, _SHARED_DIR):
-    if _d not in sys.path:
-        sys.path.insert(0, _d)
+if _SHARED_DIR not in sys.path:
+    sys.path.insert(0, _SHARED_DIR)
 
-from b2_canonical import B2_fast_3term  # noqa: E402  (agent2 source of truth)
+from b2_canonical import B2_fast_3term  # noqa: E402  (zeta_bridge_shared)
 from afe_logderiv_weights import (  # noqa: E402
     build_logderiv_weights,
     conductor_cover_block,

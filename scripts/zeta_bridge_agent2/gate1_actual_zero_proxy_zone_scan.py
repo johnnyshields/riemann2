@@ -39,6 +39,7 @@ import io
 import json
 import math
 import os
+import sys
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from dataclasses import dataclass
 from typing import Dict, List, Tuple
@@ -65,6 +66,9 @@ def log(msg: str) -> None:
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _DEFAULT_OUT_DIR = os.path.normpath(os.path.join(_SCRIPT_DIR, "out"))
+_SHARED_DIR = os.path.normpath(os.path.join(_SCRIPT_DIR, "..", "zeta_bridge_shared"))
+if _SHARED_DIR not in sys.path:
+    sys.path.insert(0, _SHARED_DIR)
 
 
 def _default_out(*parts: str) -> str:
@@ -82,12 +86,14 @@ except ImportError:
 # Canonical gamma curvature term B_2(t)
 # -----------------------------
 #
-# Single source of truth: b2_canonical.py (sibling module). Do not redefine
+# Single source of truth: zeta_bridge_shared/b2_canonical.py. Do not redefine
 # B_2 here -- the canonical handoff has frozen the exact formula
 # B_2(t) = -(1/8) Re psi^(2)(1/4 + i t/2) and its leading / 3-term asymptotic.
 # The cache is process-local in b2_canonical, populated lazily as scans run.
 
-from b2_canonical import B2_exact, B2_fast, B2_array, B2_array_cached  # noqa: E402
+from b2_canonical import (  # noqa: E402
+    B2_exact, B2_fast, B2_fast_3term, B2_array, B2_array_cached,
+)
 
 
 # -----------------------------

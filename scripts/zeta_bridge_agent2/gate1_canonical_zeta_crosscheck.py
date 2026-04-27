@@ -42,6 +42,7 @@ import io
 import json
 import math
 import os
+import sys
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from datetime import datetime
 from typing import Dict, List, Tuple
@@ -62,6 +63,9 @@ def log(msg: str) -> None:
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _DEFAULT_OUT_DIR = os.path.normpath(os.path.join(_SCRIPT_DIR, "out"))
+_SHARED_DIR = os.path.normpath(os.path.join(_SCRIPT_DIR, "..", "zeta_bridge_shared"))
+if _SHARED_DIR not in sys.path:
+    sys.path.insert(0, _SHARED_DIR)
 
 
 def _default_out(*parts: str) -> str:
