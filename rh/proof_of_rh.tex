@@ -36008,6 +36008,85 @@ coordinate.  These are scalar-output artifacts unless the downstream theorem
 explicitly requires scalar \(I\)-coordinate energy.
 \end{remark}
 
+\begin{remark}[Finite D4 audit status after the carrier-matrix computation]
+\label{rem:finite-D4-audit-status-after-carrier-matrix}
+The carrier-quotient D4 architecture should be read in the effective-matrix
+form
+\[
+P_{W_{\rm car}}([\mathcal A_7]+[\mathcal A_9])
+=
+H\,E_{\rm car}L_{\rm eff}
+\begin{pmatrix}
+\Gamma_G\\
+\Gamma_{G,2}
+\end{pmatrix}
++
+\varepsilon_{\rm rem},
+\]
+not as a literal unit-coefficient identity in the two clean carrier
+coordinates.  The clean \(A_7/A_9\) carrier matrix is triangularly invertible
+by Lemma~\ref{lem:clean-triangular-d4-carrier-matrix}.  The same-scale
+\(\Gamma_G\)-linear leakage in the order-nine coordinate is absorbed into
+\(L_{\rm eff}\); it is not a residual error.
+
+The remaining finite obligation is to compute the \(W_{\rm car}\)-projection
+of all line, background/core, and normalization/subtraction rows:
+\[
+P_{W_{\rm car}}R_{\nu}^{(b)}
+=
+H\,E_{\rm car}L_{\nu}^{(b)}
+\begin{pmatrix}
+\Gamma_G\\
+\Gamma_{G,2}
+\end{pmatrix}
++
+R_{\nu,\mathrm{val}}^{(b)}
++
+R_{\nu,\mathrm{abs}}^{(b)},
+\]
+for
+\[
+\nu\in
+\{\mathrm{line},\mathrm{bg/core},\mathrm{norm/sub}\},
+\qquad
+b\in\{7,9\}.
+\]
+The matrices \(L_{\nu}^{(b)}\) are same-scale terms and must be absorbed into
+\[
+L_{\rm eff}
+=
+L_{\rm clean}
++
+\sum_{\nu,b}L_{\nu}^{(b)}.
+\]
+The remaining residual is
+\[
+\varepsilon_{\rm rem}
+=
+\sum_{\nu,b}
+\left(
+R_{\nu,\mathrm{val}}^{(b)}
++
+R_{\nu,\mathrm{abs}}^{(b)}
+\right).
+\]
+D4 residual control is closed only after proving
+\[
+\sigma_{\min}(E_{\rm car}L_{\rm eff})\ge Q^{-C}
+\]
+and
+\[
+\|\varepsilon_{\rm rem}\|_{\mathcal Q_{\rm car}}
+\le
+\frac12 |H|\,
+\sigma_{\min}(E_{\rm car}L_{\rm eff})
+\left(\Gamma_G^2+\Gamma_{G,2}^2\right)^{1/2}.
+\]
+Until this finite residual table is supplied, carrier-quotient D4 row
+conversion remains conditionally formulated, although no scalar
+\(I\)-coordinate obstruction has been reopened.
+\end{remark}
+
 \begin{remark}[Two quotient coordinates for D4]
 \label{rem:two-quotient-coordinates-d4}
 Equivalently, choose dual quotient coordinates \(B_7,B_9\) for the pair
@@ -36300,6 +36379,165 @@ If a lower \(u\)-valuation anisotropy-linear layer appears, it should be
 promoted into the leading filtered matrix rather than treated as an error.
 \end{remark}
 
+\begin{lemma}[Clean triangular D4 carrier matrix]
+\label{lem:clean-triangular-d4-carrier-matrix}
+In the D4 finite carrier calculation, write the centered Gram diagonal scalars as
+\[
+g_{\rm Gr}:=\frac{q_0}{\pi},
+\qquad
+h_{\rm Gr}:=
+\frac1\pi\left(\frac13q_0^3+\frac16u\right),
+\qquad
+u=q''_{\can}.
+\]
+Then
+\[
+g_{\rm Gr}-h_{\rm Gr}
+=
+-\frac{\Gamma_G}{6\pi}.
+\]
+In this lemma set \(g=g_{\rm Gr}\), \(h=h_{\rm Gr}\).  The clean order-seven
+carrier coordinate is
+\[
+\pi_{\mathfrak f}T_7^{(1)}
+=
+H\,c_7(g,h)\Gamma_G I,
+\qquad
+H=yu,
+\]
+where
+\[
+c_7(g,h)
+=
+-\frac{1}
+{24\pi^2gh(\sqrt g+\sqrt h)^2}.
+\]
+
+For the clean order-nine channel, write
+\[
+X_{-,1}=BS,
+\qquad
+B=
+\frac{u}
+{4\pi\sqrt{gh}(\sqrt g+\sqrt h)}.
+\]
+Let
+\[
+G_2=\operatorname{diag}(K_1,K_2),
+\qquad
+K_1=\frac{u}{8\pi},
+\qquad
+K_2=
+\frac{q_0^2u+\frac16q^{(4)}}{8\pi}.
+\]
+If \(X_{-,2}=aI+dD\), then
+\[
+d=
+\frac14
+\left[
+\frac{B^2h+2B^2\sqrt{gh}-K_1/g}{\sqrt g}
+-
+\frac{B^2g+2B^2\sqrt{gh}-K_2/h}{\sqrt h}
+\right].
+\]
+Equivalently,
+\[
+d
+=
+-\frac{\Gamma_{G,2}}{32\pi h^{3/2}}
++
+\Gamma_G\,\rho_9(g,h,u),
+\]
+where
+\[
+\rho_9(g,h,u)
+=
+\frac{B^2(g+3\sqrt{gh}+h)}
+{24\pi(\sqrt h+\sqrt g)\sqrt{gh}}
+-
+\frac{K_1(g+\sqrt{gh}+h)}
+{24\pi(\sqrt h+\sqrt g)g^{3/2}h^{3/2}}.
+\]
+Since
+\[
+\pi_{\mathfrak f}T_9^{(1,2)}
+=
+-2yBd\,I,
+\]
+the clean order-nine carrier coordinate has the form
+\[
+\pi_{\mathfrak f}T_9^{(1,2)}
+=
+H\left(
+\beta_9(g,h,u)\Gamma_G
++
+\alpha_9(g,h)\Gamma_{G,2}
+\right)I,
+\]
+where
+\[
+\alpha_9(g,h)
+=
+\frac{1}
+{64\pi^2\sqrt{gh}\,h^{3/2}(\sqrt g+\sqrt h)}
+\]
+and
+\[
+\beta_9(g,h,u)
+=
+-\frac{\rho_9(g,h,u)}
+{2\pi\sqrt{gh}(\sqrt g+\sqrt h)}.
+\]
+In particular, on \(g=h\),
+\[
+\alpha_9(g,g)=\frac1{128\pi^2g^3},
+\]
+recovering the clean wall formula
+\[
+\pi_{\mathfrak f}T_9^{(1,2)}
+=
+\frac{H\Gamma_{G,2}}{128\pi^2g^3}I.
+\]
+
+Thus, in the clean carrier coordinates,
+\[
+\begin{pmatrix}
+B_7\\
+B_9
+\end{pmatrix}
+=
+H
+\begin{pmatrix}
+c_7&0\\
+\beta_9&\alpha_9
+\end{pmatrix}
+\begin{pmatrix}
+\Gamma_G\\
+\Gamma_{G,2}
+\end{pmatrix}.
+\]
+The same-scale \(\beta_9\Gamma_G\) term is part of the effective leading
+matrix, not a residual.  Moreover
+\[
+\det
+\begin{pmatrix}
+c_7&0\\
+\beta_9&\alpha_9
+\end{pmatrix}
+=
+c_7\alpha_9
+=
+-\frac{1}
+{1536\pi^4
+g^{3/2}h^3(\sqrt g+\sqrt h)^3}.
+\]
+Consequently this clean D4 carrier matrix is polynomially invertible on every
+Gram-good patch on which
+\[
+Q^{-C}\le g_{\rm Gr},h_{\rm Gr}\le Q^C.
+\]
+\end{lemma}
+
 \begin{remark}[Associated-graded D4 determinant certificate]
 \label{rem:associated-graded-d4-determinant-certificate}
 A finite way to certify D4 is to compute the associated-graded coefficient
@@ -36349,14 +36587,31 @@ on \(\Gamma_{G,2}\).  Thus D4 closes with \(A_7,A_9\) if \(A_7\) detects
 \(\Gamma_G\) and \(\widetilde A_9\) detects a genuinely new
 \(\Gamma_{G,2}\)-direction, with half-leading residual control.
 
-In the expected clean carrier normalization,
+In the clean carrier normalization of
+Lemma~\ref{lem:clean-triangular-d4-carrier-matrix},
 \[
-\alpha_7\alpha_9\ne0,
-\qquad
-\beta_7,\beta_9
+L_{\rm clean}
+=
+\begin{pmatrix}
+c_7&0\\
+\beta_9&\alpha_9
+\end{pmatrix},
 \]
-are either lower filtration or absorbed into the effective matrix, and the
-determinant is a fixed nonzero scalar multiple of \(1/288^2\).
+where \(\beta_9\Gamma_G\) is a same-scale anisotropy-linear contribution and
+therefore belongs to \(L_{\rm eff}\), not to the residual.  The determinant is
+\[
+\det L_{\rm clean}
+=
+c_7\alpha_9
+=
+-\frac{1}
+{1536\pi^4
+g_{\rm Gr}^{3/2}h_{\rm Gr}^{3}
+(\sqrt{g_{\rm Gr}}+\sqrt{h_{\rm Gr}})^3},
+\]
+which is polynomially bounded below on Gram-good patches.  Hence the clean
+D4 carrier matrix is triangularly invertible before correction-row residuals
+are added.
 \end{remark}
 
 \begin{remark}[Nonzero D4 root traps are harmless under energetic sampling]
@@ -40797,6 +41052,21 @@ conditionally non-closing.
 \section{No-go and audit ledger}
 \label{sec:no-go-and-audit-ledger}
 
+\begin{remark}[Unified bad-zero/nonrecurrence obstruction]
+\label{rem:unified-bad-zero-nonrecurrence-obstruction}
+After the ordinary-route audit, the remaining upstream burden is not local
+row algebra.  O1a, O1b, O2--BZ, and O3 are all pointwise actual-orbit
+bad-zero or incidence exclusions at zeros of \(Z_\alpha\).  Continuous
+mean-square estimates, phase-relaxed torus models, generic determinant
+nonvanishing, exterior coefficient mass, and averaged large-sieve estimates
+do not imply the needed pointwise lower bounds.  The missing input is a
+prime-log nonrecurrence theorem at specified \(Z_\alpha\)-zeros, formulated
+for the full canonical source
+\[
+q''_{\can}=B_2+P_2+D_2+E_2.
+\]
+\end{remark}
+
 The following negative results and audit boundaries are part of the current
 proof state.
 
@@ -44462,6 +44732,178 @@ folded main/dual cell cancellation remains a genuine actual-orbit
 nonrecurrence problem.
 \end{remark}
 
+\begin{hypothesis}[O1a: same-branch actual-orbit cell mass]
+\label{hyp:O1a-same-branch-cell-mass}
+Let
+\[
+\mathcal B_{\rm wide}
+=
+\{n:c_-Q\le \log n\le c_+Q\},
+\qquad
+0<c_-<c_+<\frac12,
+\]
+and let \(B_r^\pm(t,\alpha)\) be the paired same-branch cell sums in the
+ordinary packet-frequency regime \(\lambda Q\asymp1\), with
+\(M_{\rm cell}\asymp R\).  Define
+\[
+\mathcal S_{\rm sb}(t,\alpha)
+:=
+\sum_{\varepsilon=\pm}\sum_r |B_r^\varepsilon(t,\alpha)|^2.
+\]
+The O1a input is the zero-conditioned lower bound
+\[
+\boxed{
+Z_\alpha(m_0)=0
+\quad\Longrightarrow\quad
+\mathcal S_{\rm sb}(m_0,\alpha)\ge Q^{-A}.
+}
+\]
+Equivalently, no admissible \(Z_\alpha\)-zero is a polynomial-scale common
+small value of all same-branch cell Dirichlet polynomials.
+\end{hypothesis}
+
+\begin{remark}[O1a is not diagonal dominance]
+\label{rem:O1a-not-diagonal-dominance}
+Writing
+\[
+\|B^\pm\|_2^2=D^\pm+O^\pm,
+\]
+where \(D^\pm\) is the diagonal coefficient mass and \(O^\pm\) is the same-cell
+off-diagonal autocorrelation, O1a requires
+\[
+O^+(m_0,\alpha)+O^-(m_0,\alpha)
+\ge
+-(D^++D^-)+Q^{-A}
+\]
+at every admissible zero \(Z_\alpha(m_0)=0\).  The diagonal masses are
+healthy after the O1 normalization, and continuous-in-\(t\) mean-square
+estimates can show averaged same-branch mass.  They do not exclude an isolated
+bad zero at which all cell sums are simultaneously small.
+
+Thus O1a is a zero-conditioned actual-orbit nonrecurrence input.  It cannot
+be proved from coefficient magnitudes, cell geometry, \(\alpha\)-tilt
+bookkeeping, or phase-relaxed random models alone.
+\end{remark}
+
+\begin{lemma}[Folded failure forces phase-locked anti-alignment]
+\label{lem:folded-failure-forces-phase-locked-anti-alignment}
+Let \(a,b\in\mathbb C^N\), \(\theta\in\mathbb R\), and \(0<\varepsilon<1/4\).
+If
+\[
+\|a+e^{i\theta}b\|_2
+\le
+\varepsilon(\|a\|_2+\|b\|_2),
+\]
+then
+\[
+\frac{1-\varepsilon}{1+\varepsilon}
+\le
+\frac{\|a\|_2}{\|b\|_2}
+\le
+\frac{1+\varepsilon}{1-\varepsilon}
+\]
+and
+\[
+\left\|
+\frac{a}{\|a\|_2}
++
+e^{i\theta}
+\frac{b}{\|b\|_2}
+\right\|_2
+\ll \varepsilon.
+\]
+In particular,
+\[
+\Re\left(
+e^{-i\theta}
+\left\langle
+\frac{a}{\|a\|_2},
+\frac{b}{\|b\|_2}
+\right\rangle
+\right)
+\le
+-1+O(\varepsilon^2).
+\]
+\end{lemma}
+
+\begin{proof}
+The reverse triangle inequality gives
+\[
+|\|a\|_2-\|b\|_2|
+\le
+\|a+e^{i\theta}b\|_2
+\le
+\varepsilon(\|a\|_2+\|b\|_2),
+\]
+which implies the norm-ratio bound.  Write \(A=\|a\|_2\), \(B=\|b\|_2\),
+\(u=a/A\), and \(v=b/B\).  Since \(A/B=1+O(\varepsilon)\), we have
+\[
+\|u+e^{i\theta}v\|_2
+\le
+A^{-1}\|a+e^{i\theta}b\|_2
++
+|A^{-1}B-1|
+\ll \varepsilon.
+\]
+Squaring gives the stated inner-product form.
+\end{proof}
+
+\begin{hypothesis}[O1b: phase-locked folded anti-alignment exclusion]
+\label{hyp:O1b-phase-locked-folded-anti-alignment}
+Let \(m_0\) be an admissible ordinary-scale zero of \(Z_\alpha\), and set
+\[
+a=B^+(m_0,\alpha),\qquad b=B^-(m_0,\alpha),
+\qquad \theta=\Theta_Z(m_0,\alpha).
+\]
+Then either the tilted branch-dominance alternative holds,
+\[
+\min\{\|a\|_2,\|b\|_2\}
+\le Q^{-A'}\max\{\|a\|_2,\|b\|_2\},
+\]
+with \(A'\) large enough for reverse-triangle absorption, or else the
+symmetric anti-lock is excluded:
+\[
+\left\|
+\frac{a}{\|a\|_2}
++
+e^{i\theta}
+\frac{b}{\|b\|_2}
+\right\|_2
+\ge Q^{-A}.
+\]
+Equivalently,
+\[
+\Re\left(
+e^{-i\theta}
+\left\langle
+\frac{a}{\|a\|_2},
+\frac{b}{\|b\|_2}
+\right\rangle
+\right)
+\ge
+-1+Q^{-A}.
+\]
+\end{hypothesis}
+
+\begin{remark}[Why same-branch mass does not imply folded nonalignment]
+\label{rem:same-branch-mass-not-folded-nonalignment}
+Same-branch cell mass controls
+\[
+\|B^+\|_2^2+\|B^-\|_2^2,
+\]
+but it does not control the phase-specific cross term
+\[
+\Re\!\left(e^{-i\Theta_Z}\langle B^+,B^-\rangle\right).
+\]
+The vector configuration
+\[
+B^+=v,\qquad B^-=-e^{-i\Theta_Z}v
+\]
+has maximal same-branch mass but zero folded cell vector.  Therefore folded
+main/dual nonalignment is a separate actual-orbit nonrecurrence input, except
+in the tilted branch-dominance regime.
+\end{remark}
+
 \begin{remark}[Raw and projected cell formulations]
 \label{rem:raw-projected-cell-formulations-O1}
 The raw cell theorem
@@ -44569,6 +45011,109 @@ Definition~\ref{def:O2-cofactor-vector-nonrecurrence}.  A specified off-line
 zero may be exceptional.  Derivative propagation of \(\mathbf M\)-smallness is
 too local relative to the natural spacing of \(Z_\alpha\)-zeros, so a separate
 pointwise nonrecurrence input is required.
+\end{remark}
+
+\begin{hypothesis}[O2-BZ: \(Z\)--cofactor bad-zero exclusion]
+\label{hyp:O2-BZ-z-cofactor-bad-zero-exclusion}
+Work in the admissible ordinary packet-frequency regime
+\[
+\lambda Q\asymp1,
+\qquad
+R\asymp\frac{\log Q}{\log\log Q}.
+\]
+Let
+\[
+q''_{\can}=B_2+P_2+D_2+E_2
+\]
+be the full canonical source, controlled through normalized derivative depth
+\(2R+1\).  Let
+\[
+Q_j(m,\alpha)
+=
+\left(
+C_\ell(\mathcal D)\mathcal D^j q''_{\can}(m,\alpha)
+\right)_{\ell=0}^{R+1},
+\qquad
+0\le j\le R,
+\]
+and
+\[
+\mathbf M_{\can}(m,\alpha)
+=
+\star(Q_0\wedge\cdots\wedge Q_R)
+=
+(M_0,\ldots,M_{R+1}).
+\]
+There exist constants \(A,B>0\), with \(B\) sufficiently large relative to
+\(A\), such that on every admissible ordinary interval \(I\) there are
+analytic/exponential-polynomial multipliers
+\[
+U_0,U_1,\ldots,U_{R+2}
+\]
+satisfying
+\[
+\|U_c\|_{L^\infty(I)}\le Q^A
+\]
+and
+\[
+U_0 Z_\alpha+\sum_{c=0}^{R+1}U_{c+1}M_c
+=
+1+\mathcal E_{\mathrm{Bez}},
+\qquad
+\|\mathcal E_{\mathrm{Bez}}\|_{L^\infty(I)}\le Q^{-B}.
+\]
+\end{hypothesis}
+
+\begin{lemma}[O2 from bad-zero exclusion]
+\label{lem:O2-from-BZ}
+Assume Hypothesis~\ref{hyp:O2-BZ-z-cofactor-bad-zero-exclusion}.  Then for
+every admissible ordinary-scale zero \(Z_\alpha(m_0)=0\),
+\[
+\|\mathbf M_{\can}(m_0,\alpha)\|\ge Q^{-A'}.
+\]
+Hence O2 holds.
+\end{lemma}
+
+\begin{proof}
+Evaluate the Bezout identity at \(m=m_0\).  Since \(Z_\alpha(m_0)=0\),
+\[
+\sum_{c=0}^{R+1}U_{c+1}(m_0)M_c(m_0,\alpha)
+=
+1+\mathcal E_{\mathrm{Bez}}(m_0).
+\]
+For \(B\) large, the right-hand side has modulus at least \(1/2\).  Therefore
+\[
+\frac12
+\le
+\sum_{c=0}^{R+1}|U_{c+1}(m_0)|\,|M_c(m_0,\alpha)|
+\le
+Q^A\sqrt{R+2}\,\|\mathbf M_{\can}(m_0,\alpha)\|.
+\]
+Because \(R\asymp\log Q/\log\log Q\), the factor \(\sqrt{R+2}\) is absorbed
+into \(Q^{o(1)}\).  Thus
+\[
+\|\mathbf M_{\can}(m_0,\alpha)\|\ge Q^{-A'}
+\]
+for some fixed \(A'\).
+\end{proof}
+
+\begin{remark}[What remains unproved in O2]
+\label{rem:what-remains-unproved-in-O2}
+Exterior coefficient mass for \(\mathbf M_{\can}\) shows only that the cofactor
+vector is not identically zero as an exponential polynomial.  It does not
+exclude cancellation at a prescribed zero of \(Z_\alpha\).  Therefore O2
+requires a genuine bad-zero exclusion theorem, equivalently a polynomial
+resultant/Bezout lower bound for the system
+\[
+Z_\alpha=0,\qquad
+M_0=\cdots=M_{R+1}=0,
+\]
+with all objects formed from the full canonical source
+\[
+q''_{\can}=B_2+P_2+D_2+E_2.
+\]
+A theorem for \(P_2\), \(B_2\), a zero-side proxy, or an averaged large-sieve
+estimate is diagnostic only unless it supplies this bad-zero exclusion.
 \end{remark}
 
 \begin{definition}[O3: Wronskian angle nonalignment / ordinary incidence]
@@ -44680,6 +45225,83 @@ Thus O3 is an independent actual-zeta arithmetic incidence input, not a
 linear-algebra corollary of O1 and O2.
 \end{remark}
 
+\begin{lemma}[Phase-relaxed interpolation obstruction to O3]
+\label{lem:phase-relaxed-interpolation-obstruction-O3}
+The outputs of O1 and O2 do not imply O3, even in a stable
+finite-dimensional packet model.
+
+Let
+\[
+H_0=\{v\in\mathbb C^{R+2}:v_0=0\}.
+\]
+Let \(p_\ell\), \(0\le \ell\le R+1\), denote the polynomials corresponding to
+the basis-normalized operators \(C_\ell(\mathcal D)\).  Choose separated packet
+frequencies \(\eta_0,\ldots,\eta_R\) and set
+\[
+v(\eta_a)=
+\bigl(p_0(\eta_a),p_1(\eta_a),\ldots,p_{R+1}(\eta_a)\bigr)
+\in\mathbb C^{R+2}.
+\]
+For generic separated \(\eta_a\),
+\[
+V:=\operatorname{span}\{v(\eta_0),\ldots,v(\eta_R)\}
+\]
+has dimension \(R+1\).  Since also \(\dim H_0=R+1\), there exists
+\[
+0\neq z_*\in V\cap H_0.
+\]
+
+Choose separated packet frequencies \(\xi_0,\ldots,\xi_{R+1}\).  The
+Vandermonde-type matrix
+\[
+\bigl(p_\ell(\xi_k)e^{-im_0\xi_k}\bigr)_{0\le\ell,k\le R+1}
+\]
+is invertible in the stable finite-dimensional packet model.  Hence one can
+choose coefficients \(a_k\) so that
+\[
+F(m)=\sum_{k=0}^{R+1}a_ke^{-im\xi_k}
+\]
+satisfies
+\[
+\bigl(C_0F(m_0),C_1F(m_0),\ldots,C_{R+1}F(m_0)\bigr)=z_*.
+\]
+Because \(z_*\in H_0\), this gives \(F(m_0)=0\), while the derivative row
+\[
+\mathbf z'(m_0)=z_*
+\]
+is nonzero.
+
+Now choose
+\[
+q(m)=\sum_{a=0}^{R}b_ae^{-im\eta_a},
+\qquad b_a\ne0.
+\]
+Then the rows
+\[
+Q_j(m_0)=
+\bigl(C_\ell(\mathcal D)\mathcal D^jq(m_0)\bigr)_{\ell=0}^{R+1},
+\qquad 0\le j\le R,
+\]
+span \(V\).  Hence
+\[
+\mathbf M=\star(Q_0\wedge\cdots\wedge Q_R)\ne0.
+\]
+Thus the O1 output \(\|\mathbf z'\|\ge Q^{-A}\) and the O2 output
+\(\|\mathbf M\|\ge Q^{-A}\) may both hold.  Nevertheless,
+\[
+\mathbf z'=z_*\in V,
+\]
+so
+\[
+\operatorname{dist}(\mathbf z',V)=0,
+\qquad
+\langle \mathbf z',\mathbf M\rangle=0.
+\]
+Therefore O3 is not a finite-dimensional linear-algebra consequence of O1 and
+O2.  Any proof of O3 must use the actual coupling of the prime-log orbit across
+\(Z_\alpha\) and the canonical \(q''_{\can}\)-rows.
+\end{lemma}
+
 \begin{remark}[Common-small-value reformulation does not close O3]
 \label{rem:common-small-value-does-not-close-O3}
 O3 can be restated as a common-small-value exclusion:
@@ -44706,12 +45328,70 @@ separation estimate for the actual one-parameter zeta orbit.  Thus O3 remains
 a named actual-orbit incidence input.
 \end{remark}
 
+\begin{remark}[Resultant and Wronskian-of-Wronskians losses for O3]
+\label{rem:resultant-wronskian-losses-O3}
+Let
+\[
+F=Z_\alpha,
+\qquad
+G=\widetilde{\mathcal W}_R.
+\]
+A tempting route is to form
+\[
+J(F,G)=F'G-FG'.
+\]
+At a zero \(F(m_0)=0\),
+\[
+J(F,G)(m_0)=F'(m_0)G(m_0).
+\]
+Thus, after O1 supplies a lower bound for \(F'(m_0)\), a pointwise lower bound
+for \(J(F,G)(m_0)\) would imply O3.
+
+This does not close the problem.  The function \(G\), and hence also
+\(J(F,G)\), has subset-product frequencies
+\[
+\Omega_S=\log N_S,
+\]
+where \(N_S\) is a product of \(O(R)\) packet integers with \(\log n\asymp Q\).
+Therefore
+\[
+N_S\le e^{CQR}.
+\]
+For distinct subset products,
+\[
+|\Omega_S-\Omega_T|
+=
+\left|\log\frac{N_S}{N_T}\right|
+\gtrsim e^{-CQR}.
+\]
+Since
+\[
+R\asymp\frac{\log Q}{\log\log Q},
+\]
+this separation is only
+\[
+\exp\!\left(-C Q\frac{\log Q}{\log\log Q}\right),
+\]
+which is super-polynomially smaller than \(Q^{-A}\).
+
+Any resultant, Bezout-certificate, Vandermonde-inversion, or filtered-minor
+argument that inverts these subset-product gaps therefore incurs
+super-polynomial losses, far beyond the polynomial bookkeeping allowed in the
+ordinary Gate--1 route.  Consequently the resultant/Wronskian-of-Wronskians
+route cannot prove O3 unless it is supplemented by a new arithmetic theorem
+which avoids subset-frequency inversion and gives pointwise bad-zero exclusion
+directly on the actual prime-log orbit.
+\end{remark}
+
 \begin{theorem}[Ordinary Gate--1 from O1--O3]
 \label{thm:ordinary-gate-one-from-O1-O2-O3}
-Assume the ordinary packet-frequency Wronskian construction above, the stable
-cell-frame and amplitude-to-jet hypotheses of
-Lemma~\ref{lem:fixed-width-cell-mass-implies-z-derivative-row}, the canonical
-transfer for \(q''_{\can}=B_2+P_2+D_2+E_2\), and the three inputs O1--O3.  Then every admissible ordinary-scale zero \(Z_\alpha(m_0)=0\)
+Assume the stable cell-frame and amplitude-to-jet bridge, canonical transfer
+for
+\[
+q''_{\can}=B_2+P_2+D_2+E_2,
+\]
+the O1a same-branch cell input, the O1b folded anti-alignment input, and the
+O2--O3 inputs below.  Then every admissible ordinary-scale zero \(Z_\alpha(m_0)=0\)
 satisfies
 \[
 |\widetilde{\mathcal W}_R(m_0,\alpha)|\ge Q^{-A}.
@@ -44727,7 +45407,8 @@ Q^{-B}|I_\rho|.
 \end{theorem}
 
 \begin{proof}
-By O1 and Lemma~\ref{lem:fixed-width-cell-mass-implies-z-derivative-row},
+By O1a, O1b, the canonical background/error transfer, and
+Lemma~\ref{lem:fixed-width-cell-mass-implies-z-derivative-row},
 \[
 \|\mathbf z'(m_0,\alpha)\|\ge Q^{-A_1}.
 \]
@@ -44788,17 +45469,189 @@ cancellation
 once the explicit-formula prime, gamma/background, and tail terms are included.
 \end{definition}
 
-\begin{definition}[T1: Mild singular transition control]
-\label{def:T1-mild-singular-transition-control}
-The transition zone
+\begin{remark}[S1 is not a local singular-geometry theorem]
+\label{rem:S1-not-local-singular-geometry}
+The S1 lower bound
 \[
-(\log Q)^{-C}\lesssim \lambda Q\lesssim 1
+\left|\mathbf P_R-\mathbf G_R-\mathbf T_R\right|_2\ge Q^{-A}
 \]
-is not covered automatically by either the ordinary packet-frequency theorem or
-the deep singular theorem.  The named transition input is a uniform transfer
-statement showing that one of the ordinary or singular lower bounds remains
-valid throughout this zone, with polynomial losses.
+cannot be proved from the finite singular coordinate geometry alone.
+
+Indeed, ignoring for the moment the actual arithmetic restrictions on the
+angles and weights, a phase-relaxed singular packet with symmetric pairs
+\[
+(\theta_j,w_j),\qquad (-\theta_j,w_j)
+\]
+has
+\[
+w_j\sin(k\theta_j)+w_j\sin(-k\theta_j)=0
+\]
+for every \(k\).  Hence, when the normalized background vector vanishes, the
+finite sine moments satisfy
+\[
+\sum_jw_j\sin(k\theta_j)=0,
+\qquad
+3\le k\le R+3,
+\]
+exactly.
+
+Thus S1 is not a consequence of positivity, finite quadrature, or the local
+singular parametrization.  It is a genuine actual-zeta arithmetic
+nonrecurrence assertion: the realized tuple
+\[
+\left((\theta_j,w_j)_j,\mathcal B_3,\ldots,\mathcal B_{R+3}\right)
+\]
+must avoid the anti-design tube
+\[
+\mathcal V_R(\varepsilon)
+:=
+\left\{
+\left|
+\left(
+\sum_jw_j\sin(k\theta_j)+\mathcal B_k
+\right)_{3\le k\le R+3}
+\right|_2
+\le \varepsilon
+\right\}
+\]
+with \(\varepsilon=Q^{-A}\).
+
+Consequently, any proof of S1 must use actual arithmetic information about the
+zero/prime explicit-formula packet, the gamma/background term, the dual term,
+and the regularized tail.  A phase-relaxed or purely local singular model can
+only test the formulation; it cannot prove the lower bound.
+\end{remark}
+
+\begin{definition}[T1: Weighted transition source observability]
+\label{def:T1-weighted-transition-source-observability}
+Set
+\[
+\mu:=\lambda Q,
+\qquad
+F_\lambda(x):=\lambda^3q''_{\can}(m_0+\lambda x).
+\]
+In the transition regime
+\[
+(\log Q)^{-C_{\mathrm{tr}}}\lesssim \mu\lesssim1,
+\]
+the T1 input is the weighted finite-jet lower bound
+\[
+\boxed{
+\left\|
+\left(
+\mu^{-r}\partial_x^rF_\lambda(0)
+\right)_{0\le r\le R}
+\right\|_2
+\ge Q^{-A_{\mathrm{tr}}}.
+}
+\]
+Equivalently, if
+\[
+q''_{\can}=B_2+P_2+D_2+E_2
+\]
+is expanded using the exact canonical explicit-formula decomposition, then the
+transition packet cannot make all normalized packet moments
+\[
+\mu^{-r}\partial_x^r
+\left[
+\lambda^3q''_{\can}(m_0+\lambda x)
+\right]_{x=0},
+\qquad
+0\le r\le R,
+\]
+simultaneously \(Q^{-A_{\mathrm{tr}}}\)-small.
+
+This is a named actual-zeta input.  It is not supplied by the ordinary
+Wronskian theorem, because that theorem is normalized for \(\mu\gtrsim1\).  It
+is also not supplied by the deep singular anti-design theorem, because the
+singular sine-moment chart is normalized for \(\mu\ll(\log Q)^{-C_{\mathrm{tr}}}\).
 \end{definition}
+
+\begin{lemma}[Weighted transition chart loss]
+\label{lem:weighted-transition-chart-loss}
+Let
+\[
+F_\lambda(x)
+=
+\sum_{n\in\mathcal B}a_n e^{i\lambda(\log n)x}
++
+F_{\rm bg}(x)+F_{\rm tail}(x),
+\]
+where the active packet satisfies
+\[
+c_-Q\le\log n\le c_+Q.
+\]
+Set
+\[
+\tau_n:=\lambda\log n,
+\qquad
+\mu:=\lambda Q.
+\]
+Then
+\[
+\tau_n/\mu\in[c_-,c_+].
+\]
+For each \(0\le r\le R\),
+\[
+\mu^{-r}\partial_x^r e^{i\tau_nx}\big|_{x=0}
+=
+i^r(\tau_n/\mu)^r.
+\]
+Hence the weighted transition jet is a fixed-window moment vector in the
+bounded frequency variable \(\tau_n/\mu\), rather than a degenerating moment
+vector in \(\tau_n\).
+
+Consequently, passage from the weighted transition jet to an unweighted
+ordinary jet costs at most
+\[
+\mu^R
+\]
+at jet depth \(R\), not the determinant factor
+\[
+\mu^{R(R+1)/2}.
+\]
+In the transition range
+\[
+\mu\ge(\log Q)^{-C_{\mathrm{tr}}},
+\qquad
+R\asymp\frac{\log Q}{\log\log Q},
+\]
+one has
+\[
+\mu^R
+\ge
+(\log Q)^{-C_{\mathrm{tr}} R}
+=
+Q^{-O(1)}.
+\]
+Thus weighted transition transfer is compatible with fixed-polynomial Gate--1
+bookkeeping.
+\end{lemma}
+
+\begin{proof}
+The displayed identity is immediate:
+\[
+\mu^{-r}\partial_x^r e^{i\tau_nx}\big|_{x=0}
+=
+i^r(\tau_n/\mu)^r.
+\]
+Since \(\tau_n/\mu=(\log n)/Q\) stays in the fixed compact interval
+\([c_-,c_+]\), the weighted jet uses a nondegenerating moment basis.
+
+Recovering one unweighted derivative from the weighted jet costs only the
+factor \(\mu^r\) for that derivative.  Taking the worst \(r\le R\) gives
+\(\mu^R\).  By contrast, comparing full unweighted determinant charts across
+all derivative levels \(0,\ldots,R\) multiplies the losses and gives
+\[
+\prod_{r=0}^R\mu^r=\mu^{R(R+1)/2}.
+\]
+The final estimate follows from
+\[
+\mu\ge(\log Q)^{-C_{\mathrm{tr}}},
+\qquad
+R\asymp\frac{\log Q}{\log\log Q}.
+\]
+\end{proof}
 
 \begin{remark}[Ordinary, transition, and singular routing]
 \label{rem:ordinary-transition-singular-routing}
@@ -45229,67 +46082,38 @@ listed in Remark~\ref{rem:terminal-conditional-dependency-ledger}.
 \begin{remark}[Terminal conditional dependency ledger]
 \label{rem:terminal-conditional-dependency-ledger}
 The present draft should be read as a conditional architecture, not as a closed
-proof of \(\RH\).  The ordinary Gate--1 branch is conditional on the three
-actual-zeta inputs defined in
-Section~\ref{sec:upstream-gate-one-arithmetic-inputs}:
+proof of \(\RH\).  The active unresolved arithmetic and finite-audit inputs are
+now:
+
 \[
-\boxed{\mathrm{O1}:\ \text{Fixed-width cell nonrecurrence}},
+\boxed{\mathrm{O1a}:\ \text{same-branch actual-orbit cell mass}},
 \]
 \[
-\boxed{\mathrm{O2}:\ \text{Cofactor-vector nonrecurrence}},
+\boxed{\mathrm{O1b}:\ \text{phase-locked folded anti-alignment exclusion}},
+\]
+\[
+\boxed{\mathrm{O2\text{-}BZ}:\ \text{\(Z\)--cofactor bad-zero exclusion}},
+\]
+\[
+\boxed{\mathrm{O3}:\ \text{prime-log Wronskian incidence nonalignment}},
+\]
+\[
+\boxed{\mathrm{S1}:\ \text{singular explicit-formula anti-design exclusion}},
+\]
+\[
+\boxed{\mathrm{T1}:\ \text{weighted transition source observability}},
 \]
 and
 \[
-\boxed{\mathrm{O3}:\ \text{Wronskian angle nonalignment / ordinary incidence}}.
-\]
-By Theorem~\ref{thm:ordinary-gate-one-from-O1-O2-O3},
-\[
-\boxed{
-\mathrm{O1}+\mathrm{O2}+\mathrm{O3}
-\Longrightarrow
-\text{ordinary Gate~1}.
-}
+\boxed{\mathrm{D4}_{\rm res}:\ \text{finite carrier-quotient correction-row residual audit}}.
 \]
 
-The deep singular branch is conditional on
-\[
-\boxed{
-\mathrm{S1}:\ \text{singular explicit-formula anti-design exclusion}
-}
-\]
-as formulated in Definition~\ref{def:S1-singular-explicit-formula-anti-design}.
-The mild transition branch is conditional on
-\[
-\boxed{
-\mathrm{T1}:\ \text{mild singular transition control}
-}
-\]
-as formulated in Definition~\ref{def:T1-mild-singular-transition-control}.
-
-Downstream, the current local package is
-\[
-\text{Gate 1}
-+
-|u'|_\infty\text{ source thickening}
-+
-L^2\text{-input real rigidity}
-\Longrightarrow
-\text{Gate 2},
-\]
-and
-\[
-\text{Gate 2}
-+
-\text{gauge-locked wall escape}
-+
-\text{carrier-quotient D4}
-+
-\text{row mobility}
-\Longrightarrow
-\text{row energy}.
-\]
-These downstream repairs do not discharge the upstream actual-zeta inputs
-\(\mathrm{O1}\)--\(\mathrm{O3}\), \(\mathrm{S1}\), or the transition theorem.
+The downstream local architecture reduces row-energy production to Gate~1,
+Gate~2 real rigidity, gauge-locked wall escape, carrier-quotient D4, and row
+mobility.  It does not discharge the upstream arithmetic inputs O1a, O1b,
+O2--BZ, O3, S1, or T1.  The clean D4 carrier matrix is triangularly
+invertible on Gram-good patches, but D4 is not fully closed until the
+correction-row residual table and the half-leading residual bound are supplied.
 \end{remark}
 
 \begin{remark}[Active named-input status table]
