@@ -37370,6 +37370,128 @@ these derivative-flat tubes, or actual-zeta Gate~1 source-curvature
 observability together with Gate~2 source--anisotropy reintegration.
 \end{remark}
 
+\begin{remark}[Current Gate--1 attack ledger: finite-jet and Wronskian forms]
+\label{rem:current-gate-one-finite-jet-wronskian-ledger}
+The current Gate--1 target is
+\[
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|.
+\]
+In normalized coordinates
+\[
+m=m_0+\lambda x,\qquad
+F_\lambda(x)=\lambda^3q''_{\can}(m_0+\lambda x),
+\]
+it is enough, subject to the finite-jet-to-energy transfer, to prove a
+finite-jet anti-design estimate of the form
+\[
+\max_{0\le r\le R(Q)}
+|\partial_x^rF_\lambda(x_0)|
+\ge Q^{-B_{\rm jet}}\lambda^3.
+\]
+The natural depth is
+\[
+R(Q)\asymp\frac{\log Q}{\log\log Q},
+\]
+with \(R=O(\log Q)\) as a safer but more expensive depth.
+
+A promising formulation is a normalized Wronskian/transversality package.  Let
+\[
+G_0=Z_\alpha,\qquad
+G_{j+1}=\Delta^j\partial_m^j q''_{\can},
+\quad 0\le j\le R.
+\]
+The associated normalized Wronskian is
+\[
+\widetilde{\mathcal W}_R(m,\alpha)
+=
+\det\bigl(\mathcal D^\ell G_j(m,\alpha)\bigr)_{0\le j,\ell\le R+1},
+\qquad
+\mathcal D=\Delta\partial_m.
+\]
+A polynomial lower bound
+\[
+|\widetilde{\mathcal W}_R(m,\alpha)|\ge Q^{-A}
+\]
+at admissible centers would imply finite-jet anti-design and hence Gate~1.
+
+At present this route is not Green.  The \(Z_\alpha\)-symbol appears to add
+genuine rank to the \(q''_{\can}\)-jet system, but the Wronskian expands into
+a fixed-coefficient subset-product exponential sum.  Cauchy--Binet
+nonvanishing proves only that the determinant is not identically zero; it does
+not give the required pointwise lower bound on the actual prime-log orbit.
+Thus the current missing theorem is a fixed actual-zeta determinant or
+nonrecurrence lower bound, not another formal rank calculation.
+\end{remark}
+
+\begin{remark}[\(Z_\alpha\)-symbol transversality subproblem]
+\label{rem:zalpha-symbol-transversality-subproblem}
+The first finite-dimensional test for the Wronskian route is whether the
+off-line equation contributes a row independent from the \(q''_{\can}\)-jet
+rows.  In a simplified AFE block, write
+\[
+Z_\alpha(m)\sim\sum_n z_n(\alpha)e^{-im\log n},
+\]
+and
+\[
+\partial_m^r q''_{\can}(m)
+\sim
+\sum_n c_n(-i\log n)^r e^{-im\log n}.
+\]
+On an active block, the relevant symbolic test is whether
+\[
+\frac{z_n(\alpha)}{c_n}
+\]
+is approximable by a polynomial in \(\log n\) of degree at most \(R\).  The
+expected model is
+\[
+\frac{z_n(\alpha)}{c_n}
+\approx
+\frac{n^{-\alpha}}{(\log n)^3}
+\frac{V_\alpha(n/N)}{W_2(n/N)},
+\]
+or, with \(u=\log n\),
+\[
+f_\alpha(u)\approx e^{-\alpha u}u^{-3}A_\alpha(u).
+\]
+This is not polynomial-like on a thick active block unless the weights are
+degenerate.  Thus \(Z_\alpha\) likely adds genuine symbolic rank.  The missing
+step is quantitative: one needs a lower bound
+\[
+\inf_{P\in\mathcal P_{\le R}}
+\max_{n\in\mathcal B}
+\left|
+\frac{z_n(\alpha)}{c_n}-P(\log n)
+\right|
+\ge Q^{-C}
+\]
+for the actual AFE coefficients and active block.  Symbolic transversality
+alone still does not imply the required pointwise Wronskian lower bound.
+\end{remark}
+
+\begin{remark}[Derivative-order and error budget for the Wronskian route]
+\label{rem:wronskian-derivative-order-error-budget}
+The normalized Wronskian route is sensitive to derivative order.  Since
+\[
+G_{j+1}=\Delta^j\partial_m^j q''_{\can},
+\]
+and the Wronskian differentiates \(G_j\) up to order \(R+1\), the argument
+requires derivatives of \(q''_{\can}\) through order approximately \(2R+1\),
+equivalently derivatives of \(q_\zeta\) through order \(2R+3\).  The
+\(Z_\alpha\)-row requires derivatives through order \(R+1\).
+
+Therefore the canonical error term in
+\[
+q''_{\can}=B_2+P_2+D_2+E_2
+\]
+must be controlled through the same derivative order.  The safe choice
+\[
+R\asymp\frac{\log Q}{\log\log Q}
+\]
+keeps the normalized factorial and AFE derivative losses polynomial.  Taking
+\(R=O(\log Q)\) is dangerous unless a separate lemma removes the resulting
+factorial and differentiated-error losses.
+\end{remark}
+
 \begin{remark}[Zero-side same-scale source flattening]
 \label{rem:zero-side-same-scale-source-flattening}
 The source-collapse mechanism is not merely a prime-side artefact.  On the
@@ -37616,7 +37738,11 @@ Corollary~\ref{cor:finite-same-scale-source-flattening} is therefore negative
 but precise: local same-scale positivity does not by itself force
 source-curvature nonflatness.  Any proof of
 \[
-\sup_{m\in I_\rho}|q''(m)|\ge Q^{-B}
+\sup_{m\in I_\rho}|q''_{\can}(m)|\ge Q^{-B}
+\]
+or of the stronger interval estimate
+\[
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|
 \]
 must use actual-zeta arithmetic or a stronger packet-realizability theorem,
 not merely same-scale positive kernel geometry.
@@ -37624,6 +37750,13 @@ not merely same-scale positive kernel geometry.
 
 \begin{corollary}[Interval-local source collapse from finite quadrature]
 \label{cor:interval-local-source-collapse-from-quadrature}
+All unadorned \(q,q'',q^{(4)}\) in this corollary denote the local
+same-scale source-kernel aggregate from
+Remark~\ref{rem:local-kernel-notation-same-scale-model}, not the actual-zeta
+canonical curvature.  In the actual-zeta notation, this is a model for the
+hypothetical regime \(q''_{\can}\approx0\), but it is not a construction of
+actual zeta data.
+
 Fix \(A>0\).  Assume the packet scale is microscopic,
 \[
 d\asymp Q^{-1},
@@ -37649,11 +37782,11 @@ on \(I\), after a harmless normalization of the total weight.
 
 Consequently, at leading source order,
 \[
-H=yq''\sim-\frac{q_0(q'')^3}{288}
+H_{\rm loc}=yq''\sim-\frac{q_0(q'')^3}{288}
 \]
 satisfies
 \[
-\sup_{m\in I}|H(m)|
+\sup_{m\in I}|H_{\rm loc}(m)|
 \max\{|\Gamma_G(m)|,|\Gamma_{G,2}(m)|\}
 \ll Q^{-3C},
 \]
@@ -37711,6 +37844,20 @@ quadrature configuration.
 The current rank-two norm route cannot close RH from the established local
 row theory and same-scale positive packet geometry alone.
 
+Here the displayed \(q''\) and \(H=yq''\) first refer to the local
+same-scale source-kernel model of
+Corollary~\ref{cor:interval-local-source-collapse-from-quadrature}.  The
+proposition's conclusion for the actual rank-two route is obtained by
+comparison: if actual zeta permits the analogous canonical regime
+\[
+\sup_{m\in I_\rho}|q''_{\can}(m)|\le Q^{-C},
+\]
+then the actual source factor
+\[
+H=yq''_{\can}
+\]
+collapses in the same way.
+
 More precisely, the following data are compatible with the current local
 rank-two structure:
 \[
@@ -37743,10 +37890,13 @@ Consequently,
 \]
 Taking \(C>A/3\) violates the desired \(Q^{-A}\) source-weighted lower bound.
 
-Thus the local rank-two norm route requires a new actual-zeta theorem
-excluding such source-flat intervals at the level of the canonical curvature
-\(q''_{\can}\), and then a source--anisotropy reintegration theorem connecting
-that source mass back to the row vector.
+Thus the local rank-two norm route requires the actual-zeta Gate~1 theorem
+excluding canonical source-flat intervals,
+\[
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|,
+\]
+and then the Gate~2 source--anisotropy reintegration theorem connecting that
+source mass back to the row vector.
 By Corollary~\ref{cor:interval-local-source-collapse-from-quadrature}, the
 source-flat interval model is compatible with finite positive same-distance
 packet quadrature to arbitrary finite order.  Therefore the missing input
@@ -38154,13 +38304,24 @@ The finite-core non-concentration problem below is now secondary to the
 source-collapse obstruction.  The known fixed-sector rows are source-divisible,
 so a lower bound for a transported finite-core vector cannot be proved from
 anisotropy non-concentration alone.  Any proof-relevant finite-core theorem
-must either include a source-jet nonflatness input such as
+must either include the two-gate actual-zeta package
 \[
-\sup_{m\in I_\rho}|q''(m)|\ge Q^{-B},
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|
 \]
-or use a genuinely source-robust row/invariant.  Without that additional
-source-level input, the aligned/non-concentration language below remains a
-diagnostic framework rather than a proof-closing theorem.
+and
+\[
+\int_{I_\rho}
+|q''_{\can}(m)|^2
+\bigl(\Gamma_G(m)^2+\Gamma_{G,2}(m)^2\bigr)\,dm
+\ge Q^{-A}|I_\rho|,
+\]
+or else use a genuinely source-robust row/invariant not divisible by
+\[
+H=yq''_{\can}.
+\]
+Without that additional source-level input or source-robust replacement, the
+aligned/non-concentration language below remains a diagnostic framework rather
+than a proof-closing theorem.
 \end{remark}
 
 The notation in this subsection originally arose in the scalar
@@ -38827,11 +38988,19 @@ The source-collapse countermodels above show that this estimate cannot be
 deduced from local rank-two row algebra, finite Hadamard/quartet symmetry,
 same-scale packet geometry, Gram positivity, or finite-prime/AFE surrogate
 structure alone.  It now requires the two-gate actual-zeta package:
-source-curvature observability plus source--anisotropy reintegration.
-
-Alternatively, a zeta-specific rigidity, cone-separation, source-robust row, or
-global arithmetic non-concentration theorem implying such a bound would
-suffice.
+\[
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|
+\]
+together with
+\[
+\int_{I_\rho}
+|q''_{\can}(m)|^2
+\bigl(\Gamma_G(m)^2+\Gamma_{G,2}(m)^2\bigr)\,dm
+\ge Q^{-A}|I_\rho|.
+\]
+Alternatively, a zeta-specific rigidity, cone-separation, source-robust row,
+or global arithmetic non-concentration theorem implying the displayed
+source-weighted lower bound would suffice.
 
 \begin{remark}[Numerical fixed-prime and AFE-style evidence]
 \label{rem:numerical-fixed-prime-afe-source-collapse-evidence}
@@ -40195,18 +40364,31 @@ separate \(q_0\)-adic wall-row audit.
 \label{rem:numerical-surrogate-status}
 Current numerical and surrogate experiments are diagnostic only.  Deterministic
 positive quadrature controls show that the harness detects artificial
-same-scale source flattening.  Zero-side proxy scans and fixed-prime/AFE-style
-surrogates have not produced a proof-level counterexample for the full
-canonical object, but relaxed models can still flatten source jets.  The first
-constraint not broken by the adversarial models is full actual-zeta
-compatibility:
+same-scale source flattening; this is the mandatory negative control.  Singular
+dominance controls show that a single shallow packet produces huge Gate--2
+mass, and that the singular danger is again same-scale cancellation of source
+jets.
+
+A first zero-kernel-only smoke scan found no evidence of actual-zero proxy
+Gate~1 failure.  In that proxy run the strongest low-energy interval was only
+mildly low:
+\[
+B_I^{\rm eff}\approx1.41,\qquad E_I\approx0.185,
+\]
+with finite jets not simultaneously small.  This should be read as
+encouraging but weak evidence: the run used a proxy kernel, omitted the exact
+canonical \(B_2\), and treated critical-line zeros through an artificial
+regularization parameter.
+
+The first constraint not broken by adversarial or surrogate models remains
+full actual-zeta compatibility:
 \[
 q''_{\can}=B_2+P_2+D_2+E_2
 \]
 with fixed actual coefficients, completed dual/gamma/tail structure, and
 certified error control.  Numerical evidence should therefore be read as
-support for prioritizing the actual-zeta incidence theorem, not as proof of
-Gate~1.
+support for prioritizing the actual-zeta incidence/nonrecurrence theorem, not
+as proof of Gate~1.
 \end{remark}
 
 \appendix
@@ -43489,13 +43671,13 @@ that scalar architecture one must return to the order-nine correction package
 \[
 (A_9^{\mathfrak f})_I
 =
-\frac{yq''\Gamma_{G,2}}{128\pi^2g^3}
+\frac{yq''_{\can}\Gamma_{G,2}}{128\pi^2g^3}
 +
 R_9^I
 \]
 and prove quantitative avoidance of the scalar incidence wall
 \[
-F_9^I=0,\qquad yq''\Gamma_{G,2}\ne0,
+F_9^I=0,\qquad yq''_{\can}\Gamma_{G,2}\ne0,
 \]
 or pass to an order-eleven or ambient-row replacement.  This is a fallback
 architecture, not the active carrier-quotient row-energy route.
@@ -43510,50 +43692,65 @@ draft.
 \begin{remark}[Terminal conditional dependency ledger]
 \label{rem:terminal-conditional-dependency-ledger}
 The present draft should be read as a conditional architecture, not as a closed
-proof of \(\RH\).  The ordinary Gate--1 branch is conditional on the following
-actual-zeta inputs:
+proof of \(\RH\).  The ordinary Gate--1 branch is conditional on an
+actual-zeta finite-jet anti-design theorem for the full canonical source
+curvature:
 \[
 \boxed{
-\mathrm{O1}:\ \text{Fixed-width cell nonrecurrence}
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|.
 }
 \]
-giving
+Equivalently, in normalized packet coordinates
 \[
-Z_\alpha(m_0)=0\Longrightarrow
-|\mathbf z'(m_0,\alpha)|\ge Q^{-A},
+m=m_0+\lambda x,
+\qquad
+F_\lambda(x)=\lambda^3q''_{\can}(m_0+\lambda x),
 \]
+one needs
 \[
 \boxed{
-\mathrm{O2}:\ \text{Cofactor-vector nonrecurrence}
+\int_X|F_\lambda(x)|^2\,dx\ge Q^{-B}\lambda^6|X|.
 }
 \]
-giving
+A finite-jet version is
 \[
-Z_\alpha(m_0)=0\Longrightarrow
-|\mathbf M(m_0,\alpha)|\ge Q^{-A},
+\boxed{
+\max_{0\le r\le R(Q)}
+|\partial_x^rF_\lambda(x_0)|
+\ge Q^{-B_{\rm jet}}\lambda^3,
+}
+\]
+with \(R(Q)\asymp\log Q/\log\log Q\) as the preferred depth.
+
+The currently closest ordinary route is a normalized Wronskian/transversality
+package.  One possible factorization is:
+\[
+\mathrm{O1}:\ \text{\(Z_\alpha\)-symbol transversality against the }
+q''_{\can}\text{-jet rows},
+\]
+\[
+\mathrm{O2}:\ \text{subset-product Wronskian/nonrecurrence lower bound on the}
+\text{ actual prime-log orbit},
 \]
 and
 \[
-\boxed{
-\mathrm{O3}:\ \text{Wronskian angle nonalignment}
-}
+\mathrm{O3}:\ \text{canonical transfer/error control for }
+B_2+P_2+D_2+E_2
+\text{ through the required derivative order}.
 \]
-giving
-\[
-|\langle \mathbf z',\mathbf M\rangle|
-\ge Q^{-A}|\mathbf z'|\,|\mathbf M|.
-\]
-Together these imply
+Together these would imply a polynomial lower bound for the normalized
+Wronskian
 \[
 |\widetilde{\mathcal W}_R(m_0,\alpha)|\ge Q^{-A},
 \]
-and hence ordinary finite-jet anti-design and ordinary Gate~1, subject to the
-canonical transfer and finite-jet-to-energy bookkeeping already stated.
+and hence ordinary finite-jet anti-design and ordinary Gate~1.  None of
+\(\mathrm{O1}\)--\(\mathrm{O3}\) is currently proved at the required
+pointwise/nonrecurrence strength.
 
 The deep singular branch is conditional on
 \[
 \boxed{
-\mathrm{S1}:\ \text{Singular explicit-formula anti-design exclusion}
+\mathrm{S1}:\ \text{singular explicit-formula anti-design exclusion}
 }
 \]
 in the form
@@ -43590,6 +43787,22 @@ and
 \]
 These downstream repairs do not discharge the upstream actual-zeta inputs
 \(\mathrm{O1}\)--\(\mathrm{O3}\), \(\mathrm{S1}\), or the transition theorem.
+\end{remark}
+
+\begin{remark}[No Green Gate--1 proof yet]
+\label{rem:no-green-gate-one-proof-yet}
+At the current stage, no argument in the draft proves Gate~1 for the full
+canonical object \(q''_{\can}\).  Formal Wronskian or Cauchy--Binet
+nonvanishing is insufficient: the Wronskian becomes a fixed-coefficient
+exponential sum over subset-product frequencies, and the actual theorem needed
+is a pointwise lower bound on the prime-log orbit.  Likewise, a proof for a
+zero-kernel proxy, a flexible Dirichlet polynomial, or the affine-subtracted
+complement curvature \(q''_{\source,R}\) does not prove Gate~1.  Any future
+Gate~1 proof must apply to
+\[
+q''_{\can}=B_2+P_2+D_2+E_2
+\]
+with controlled errors in the same normalization as the local row package.
 \end{remark}
 
 \begin{thebibliography}{99}
