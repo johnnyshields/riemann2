@@ -36008,6 +36008,241 @@ coordinate.  These are scalar-output artifacts unless the downstream theorem
 explicitly requires scalar \(I\)-coordinate energy.
 \end{remark}
 
+\begin{remark}[Final D4 residual status in the carrier quotient]
+\label{rem:agent-six-final-D4-residual-status-carrier-quotient}
+The D4 residual statement is a carrier-quotient row-energy statement for the
+canonical scalar source
+\[
+u=q''_{\can}.
+\]
+It is not a scalar \(I\)-coordinate coercivity statement.
+
+In the carrier quotient, the D4 row has the effective form
+\[
+P_{W_{\rm car}}([\mathcal A_7]+[\mathcal A_9])
+=
+H\,E_{\rm car}L_{\rm eff}
+\begin{pmatrix}
+\Gamma_G\\
+\Gamma_{G,2}
+\end{pmatrix}
++
+\varepsilon_{\rm rem}.
+\]
+The clean matrix is
+\[
+L_{\rm clean}
+=
+\begin{pmatrix}
+c_7&0\\
+\beta_9&\alpha_9
+\end{pmatrix},
+\]
+with \(c_7,\alpha_9\) as in
+Lemma~\ref{lem:clean-triangular-d4-carrier-matrix}.  The
+same-scale \(\beta_9\Gamma_G\) term is part of \(L_{\rm eff}\), not a
+residual.
+
+The remaining correction-row issue is purely carrier-theoretic.  If, before
+scalar collapse, the order-seven and order-nine line, background/core, and
+normalization/subtraction correction rows satisfy
+\[
+R_{\nu}^{(b)}\in\mathcal C_{\rm car},
+\qquad
+\nu\in\{\mathrm{line},\mathrm{bg/core},\mathrm{norm/sub}\},
+\qquad
+b\in\{7,9\},
+\]
+then
+\[
+P_{W_{\rm car}}R_{\nu}^{(b)}=0
+\]
+for all six correction rows.  Consequently
+\[
+L_{\rm eff}=L_{\rm clean},
+\qquad
+\varepsilon_{\rm rem}=0.
+\]
+Thus the half-leading residual estimate closes automatically in the active
+carrier quotient.
+\end{remark}
+
+\begin{lemma}[Nuisance correction rows vanish in the carrier quotient]
+\label{lem:agent-six-final-nuisance-correction-rows-vanish}
+Assume that the finite correction rows through order nine satisfy
+\[
+R_{\rm line}^{(b)}\in\mathcal C_{\rm car},
+\qquad
+R_{\rm bg/core}^{(b)}\in\mathcal C_{\rm car},
+\qquad
+R_{\rm norm/sub}^{(b)}\in\mathcal C_{\rm car},
+\]
+for \(b\in\{7,9\}\).  Then, in
+\[
+\mathcal Q_{\rm car}
+=
+\mathcal M_{\rm car}/\mathcal C_{\rm car},
+\]
+one has
+\[
+[R_{\rm line}^{(b)}]
+=
+[R_{\rm bg/core}^{(b)}]
+=
+[R_{\rm norm/sub}^{(b)}]
+=
+0.
+\]
+Therefore
+\[
+P_{W_{\rm car}}R_{\nu}^{(b)}=0,
+\qquad
+\nu\in\{\mathrm{line},\mathrm{bg/core},\mathrm{norm/sub}\},
+\quad
+b\in\{7,9\}.
+\]
+Equivalently, in the residual-table notation,
+\[
+L_{\nu}^{(b)}=0,
+\qquad
+R_{\nu,\mathrm{val}}^{(b)}=0,
+\qquad
+R_{\nu,\mathrm{abs}}^{(b)}=0.
+\]
+\end{lemma}
+
+\begin{proof}
+The quotient map
+\[
+\mathcal M_{\rm car}\longrightarrow
+\mathcal Q_{\rm car}
+=
+\mathcal M_{\rm car}/\mathcal C_{\rm car}
+\]
+kills every element of \(\mathcal C_{\rm car}\).  The stated carrier-routing
+hypothesis places all six correction rows in \(\mathcal C_{\rm car}\), so their
+classes vanish in \(\mathcal Q_{\rm car}\).  Since \(W_{\rm car}\) is the live
+carrier plane in the quotient, their projection to \(W_{\rm car}\) is also
+zero.  The residual-table identities follow by taking all same-scale matrices
+and residual components equal to zero.
+\end{proof}
+
+\begin{corollary}[D4 residual audit closes in the formal carrier quotient]
+\label{cor:agent-six-final-D4-residual-closes-carrier-quotient}
+Assume Lemma~\ref{lem:agent-six-final-nuisance-correction-rows-vanish}, the
+Gram-good bounds
+\[
+Q^{-C_0}\le g_{\rm Gr},h_{\rm Gr}\le Q^{C_0},
+\]
+and the carrier-frame lower bound
+\[
+\sigma_{\min}(E_{\rm car})\ge Q^{-C_0}.
+\]
+Then
+\[
+L_{\rm eff}=L_{\rm clean}
+=
+\begin{pmatrix}
+c_7&0\\
+\beta_9&\alpha_9
+\end{pmatrix},
+\]
+and
+\[
+\varepsilon_{\rm rem}=0.
+\]
+Moreover
+\[
+\det L_{\rm eff}
+=
+-\frac{1}
+{1536\pi^4
+g_{\rm Gr}^{3/2}h_{\rm Gr}^{3}
+(\sqrt{g_{\rm Gr}}+\sqrt{h_{\rm Gr}})^3},
+\]
+so
+\[
+\sigma_{\min}(E_{\rm car}L_{\rm eff})\ge Q^{-C}
+\]
+on Gram-good patches.  Finally,
+\[
+\|\varepsilon_{\rm rem}\|_{\mathcal Q_{\rm car}}
+=
+0
+\le
+\frac12 |H|\,
+\sigma_{\min}(E_{\rm car}L_{\rm eff})
+\left(\Gamma_G^2+\Gamma_{G,2}^2\right)^{1/2}.
+\]
+Thus \(\mathrm{D4}_{\rm res}\) is Green in the formal carrier quotient for the
+canonical scalar source \(u=q''_{\can}\).
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{lem:agent-six-final-nuisance-correction-rows-vanish}, all six
+correction-row projections vanish in the carrier quotient.  Hence
+\[
+L_{\rm eff}
+=
+L_{\rm clean}
++
+\sum_{\nu,b}L_{\nu}^{(b)}
+=
+L_{\rm clean},
+\qquad
+\varepsilon_{\rm rem}=0.
+\]
+The determinant formula is the clean triangular determinant from
+Lemma~\ref{lem:clean-triangular-d4-carrier-matrix}.  On the
+Gram-good patch this determinant is polynomially bounded below, while the
+entries of \(L_{\rm clean}\) are polynomially bounded.  Therefore
+\[
+\sigma_{\min}(L_{\rm clean})\ge Q^{-C}.
+\]
+Combining this with
+\[
+\sigma_{\min}(E_{\rm car})\ge Q^{-C_0}
+\]
+gives
+\[
+\sigma_{\min}(E_{\rm car}L_{\rm eff})\ge Q^{-C}.
+\]
+The residual estimate is immediate from \(\varepsilon_{\rm rem}=0\).
+\end{proof}
+
+\begin{remark}[Scalar \(I\)-coordinate D4 remains quarantined]
+\label{rem:agent-six-final-scalar-I-D4-quarantined}
+Corollary~\ref{cor:agent-six-final-D4-residual-closes-carrier-quotient} is a
+carrier-quotient row-energy statement.  It does not assert coercivity after
+collapsing distinct carrier classes to the scalar \(I\)-coordinate.  Scalar
+\(I\)-coordinate cancellation is irrelevant to the active D4 route because the
+live carrier directions remain separated in \(\mathcal Q_{\rm car}\).  The
+scalar \(I\)-coordinate formulation should be reopened only if the
+carrier-quotient row-energy output is rejected.
+\end{remark}
+
+\begin{remark}[Compatibility with high-dimensional Gate--1 redesigns]
+\label{rem:agent-six-final-D4-family-valued-compatibility}
+The D4 carrier-quotient mechanism is tied to the canonical scalar curvature
+source
+\[
+u=q''_{\can}.
+\]
+It is not a generic converter for arbitrary high-dimensional or family-valued
+Gate--1 observables.
+
+Thus a redesigned upstream Gate--1 may feed the present downstream D4 route
+only if it certifies the same canonical source \(q''_{\can}\), for example by
+implying the required canonical jet or row lower bound for \(u=q''_{\can}\).
+Arbitrary projected observables
+\[
+G_\nu=L_\nu X
+\]
+are not themselves D4 sources unless each \(G_\nu\) comes with its own
+canonical phase, Gram matrix, whitening tower, carrier quotient, and order-seven
+and order-nine D4 identities.  No such generic transfer is asserted here.
+\end{remark}
+
 \begin{remark}[Finite D4 audit status after the carrier-matrix computation]
 \label{rem:finite-D4-audit-status-after-carrier-matrix}
 The carrier-quotient D4 architecture should be read in the effective-matrix
@@ -46105,15 +46340,36 @@ now:
 \]
 and
 \[
-\boxed{\mathrm{D4}_{\rm res}:\ \text{finite carrier-quotient correction-row residual audit}}.
+\boxed{
+\mathrm{D4}_{\rm res}:
+\text{Green in the formal carrier quotient for the canonical scalar source }
+u=q''_{\can}.
+}
 \]
+The statement is conditional on routing all order-seven and order-nine line,
+background/core, and normalization/subtraction correction rows into
+\(\mathcal C_{\rm car}\) before scalar collapse.  It is not scalar
+\(I\)-coordinate coercivity.
 
-The downstream local architecture reduces row-energy production to Gate~1,
-Gate~2 real rigidity, gauge-locked wall escape, carrier-quotient D4, and row
-mobility.  It does not discharge the upstream arithmetic inputs O1a, O1b,
-O2--BZ, O3, S1, or T1.  The clean D4 carrier matrix is triangularly
-invertible on Gram-good patches, but D4 is not fully closed until the
-correction-row residual table and the half-leading residual bound are supplied.
+The downstream canonical obstruction engine is repaired in the
+carrier-quotient route: Gate~1 feeds Gate~2 by source thickening and
+\(L^2\)-input real rigidity, and Gate~2 feeds row energy by gauge-locked wall
+escape, carrier-quotient D4, and row mobility.  The D4 residual step is Green
+in the formal carrier quotient for the canonical scalar source
+\(u=q''_{\can}\).
+
+The upstream ordinary finite-row Gate--1 package remains the main obstruction.
+As currently formulated, it is dimensionally underpowered: the observed
+finite-row dimension is \(O(R)\), whereas pointwise polynomial exclusion across
+the zero set requires either a counter-random theorem for this low-dimensional
+projection or a dimension-sufficient redesign that still certifies the same
+canonical source \(q''_{\can}\).
+
+The O2/O3 obstruction is equivalently a zero-conditioned complex-frame theorem
+for the actual prime-log moment functional and the canonical curvature
+multiplier.  The S1/T1 singular and transition branches remain low-dimensional
+actual-orbit anti-design inputs unless replaced by a high-dimensional
+observable architecture compatible with the canonical downstream source.
 \end{remark}
 
 \begin{remark}[Active named-input status table]
