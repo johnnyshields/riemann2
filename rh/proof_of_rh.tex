@@ -47254,6 +47254,56 @@ Both estimates are for the full canonical source
 \]
 \end{hypothesis}
 
+\begin{theorem}[Packet construction regularity]
+\label{thm:packet-construction-regularity}
+Let \(\mathcal S_X=\operatorname{span}\{B_2,P_{2,\le X},D_{2,\le X}\}\), and let
+\(\{\psi_p\}\) be the packet atoms used in the source decomposition of
+\(q''_{\can}\).  Assume each packet atom has the form
+\[
+\psi_p(t)=a_p(t)e^{i\omega_p t},
+\]
+where \(a_p\) is supported on the packet core \(K_p\), the packet cores have
+bounded overlap, and the packet scales satisfy
+\[
+Q^{-C}\le \lambda_p\le Q^{C}.
+\]
+Assume furthermore that the packet envelopes and the branch weight satisfy
+polynomial derivative bounds on the good packet set:
+\[
+\|\partial_t^r a_p\|_\infty\le Q^{C_r},
+\qquad
+\|\partial_t^r W_{\mathrm{branch}}\|_\infty\le Q^{C_r}
+\qquad (r\ge 0),
+\]
+and that the packet frequencies are organized into resonant blocks so that
+off-block gaps are polynomially bounded below.
+Then for every integer \(N\ge 0\),
+\[
+\|\partial_t^N(a_p\overline{a_q}W_{\mathrm{branch}})\|_{L^1}\le Q^{C_N}.
+\]
+In particular, the derivative budget needed for oscillatory kernel decay holds
+on the good packet set.
+\end{theorem}
+
+\begin{proof}
+The product rule gives
+\[
+\partial_t^N(a_p\overline{a_q}W_{\mathrm{branch}})
+=
+\sum_{r+s+t=N}
+\binom{N}{r,s,t}
+(\partial_t^r a_p)\,
+(\partial_t^s \overline{a_q})\,
+(\partial_t^t W_{\mathrm{branch}}).
+\]
+Each factor is polynomially bounded by assumption, so each term has
+\(L^1\)-norm \(\le Q^{C_N}\) after integration over the packet core, and the
+bounded-overlap hypothesis controls the sum over packets.  Hence
+\[
+\|\partial_t^N(a_p\overline{a_q}W_{\mathrm{branch}})\|_{L^1}\le Q^{C_N}.
+\]
+\end{proof}
+
 \begin{lemma}[Oscillatory packet kernel decay]
 \label{lem:packet-oscillatory-kernel-decay}
 Let \(\psi_p(t)=a_p(t)e^{i\omega_p t}\) and \(\psi_q(t)=a_q(t)e^{i\omega_q t}\),
@@ -47277,6 +47327,32 @@ and hence
 In particular, if \(|\omega_p-\omega_q|\ge Q^{-\delta}\) outside resonant blocks,
 then the off-diagonal correlation is \(Q^{-A}\)-small for \(N\) large enough.
 \end{lemma}
+
+\begin{proof}
+Let
+\[
+F_{pq}(t):=a_p(t)\overline{a_q(t)}W_{\mathrm{branch}}(t).
+\]
+Then
+\[
+\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}
+=
+\int F_{pq}(t)e^{i(\omega_p-\omega_q)t}\,dt.
+\]
+By Theorem~\ref{thm:packet-construction-regularity},
+\[
+\|\partial_t^N F_{pq}\|_{L^1}\le Q^{C_N}.
+\]
+Integrating by parts \(N\) times gives
+\[
+\bigl|\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}\bigr|
+\le
+C_N Q^{C_N}(1+|\omega_p-\omega_q|)^{-N}.
+\]
+This is the claimed oscillatory-kernel decay.  The row-sum estimate follows
+by summing over the finitely many resonant neighbors per packet and choosing
+\(N\) large enough.
+\end{proof}
 
 \begin{lemma}[Source frame coercivity for Gate--1]
 \label{lem:source-frame-coercivity}
