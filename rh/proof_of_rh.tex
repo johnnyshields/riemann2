@@ -30326,52 +30326,6 @@ The source-robust wall-row search and the scalar \(I\)-coordinate order-nine
 incidence wall remain fallback formulations only if the row-output architecture
 is forced to be exact-point or scalar-collapsed.
 
-\section{Unified finite-survival architecture}
-\label{sec:unified-finite-survival-architecture}
-
-\begin{theorem}[Unified finite-survival theorem]
-\label{thm:unified-finite-survival}
-The proof is organized around four finite-survival statements:
-\begin{enumerate}
-\item \textbf{Source survival:} \(\mathrm{Agg}L^2(q''_{\can})\) on a polynomial-weight good packet set.
-\item \textbf{Graph survival:} \(\mathrm{Graph/O2O3}_{23}\) after \(R^C\)-normalization and full determinant survival.
-\item \textbf{Quotient survival:} the primitive \(Y12\) carrier survives in the same quotient that removes actual-source nuisances.
-\item \textbf{Atomic contradiction:} the singular-discard observable is Type-I local-square and is bounded above on the same quotient norm.
-\end{enumerate}
-If all four hold, the same observable is simultaneously bounded below and above by incompatible polynomial scales, giving the downstream contradiction.
-\end{theorem}
-
-\begin{equation}\label{eq:proof-architecture-diagram}
-\begin{array}{c}
-\boxed{\mathrm{Agg}L^2(q''_{\can})}
-\\[3pt]
-\Downarrow \quad \text{(packet-core micro-covering + EF completion)}
-\\[3pt]
-\boxed{\mathrm{Graph/O2O3}_{23}}
-\\[3pt]
-\Downarrow \quad \text{(\(R^C\)-normalized Riesz basis + thickened Schur survival)}
-\\[3pt]
-\boxed{Y12\text{-quotient survival}}
-\\[3pt]
-\Downarrow \quad \text{(retained-space sandwich + labelled transition)}
-\\[3pt]
-\boxed{\mathrm{AtomicY12Contradiction}}
-\end{array}
-\end{equation}
-
-\subsection{Proof sketch}
-\label{subsec:unified-proof-sketch}
-\begin{enumerate}
-\item Prove aggregate source observability for \(q''_{\can}=B_2+P_2+D_2+E_2\) on a good packet set.
-\item Prove finite graph nondegeneracy in the \(R^C\)-normalized augmented matrix and promote pure graph mass to full determinant survival.
-\item Pass to the actual-source quotient: keep only EF-coherent retained directions, kill nuisances, and verify that the primitive \(Y12\) carrier remains nonzero in the quotient.
-\item Compare the same quotient observable against the Type-I singular-discard upper and the \(Y12\)-wall lower bound; conclude contradiction when the lower and upper scales are separated.
-\end{enumerate}
-
-\subsection{Bookkeeping conventions}
-\label{subsec:unified-bookkeeping}
-The proof always uses the same observable in the same norm on both sides of each comparison.  Source survival is measured before quotienting; contradiction is measured after quotienting by the actual-source nuisance space.  D4 is only local visibility unless the forbidden channel \(\Lambda\) has been shown to be Type-I and quotient-compatible.
-
 \subsection{\texorpdfstring{\(L^2\)}{L2}-input real rigidity}
 
 \begin{definition}[Ordinary zero-separated source packet]
@@ -35255,6 +35209,58 @@ No derivative wall components \(D\Gamma_G\) or \(D^2\Gamma_G\) are supplied by
 this rank-two D4 statement.
 \end{theorem}
 
+\begin{theorem}[Unified finite-survival theorem]
+\label{thm:unified-finite-survival}
+On the good packet set, the proof reduces to four finite survival statements:
+\begin{enumerate}
+\item \textbf{Source survival:} the normalized packet Gram matrix
+\[
+M=G_{\mathrm{ref}}^{-1/2}G_{\mathrm{branch}}G_{\mathrm{ref}}^{-1/2}
+\]
+is strictly diagonally dominant up to the residual perturbation.
+
+\item \textbf{Graph/O2O3 survival:} after Fej\'er--Riesz thickening, the normalized overlap matrix
+\[
+K=G_{00}^{-1/2}G_{0S}G_{SS}^{-1/2}
+\]
+satisfies \(\|K\|_{\operatorname{op}}<1-Q^{-A}\).
+
+\item \textbf{Y12 quotient survival:} the projected operator
+\[
+\mathfrak T_p=(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}
+\]
+is coercive on the admissible residual class, and the primitive \(Y12\) carrier survives the quotient \(\mathcal K_p^Y\).
+
+\item \textbf{Extraction survival:} on each frozen cap,
+\[
+\det(B_j)\ge Q^{-A}(\operatorname{tr}B_j)^2
+\]
+or else the wall is static and is handed to the Y12 quotient module.
+\end{enumerate}
+\end{theorem}
+
+\begin{equation}\label{eq:proof-architecture-diagram}
+\begin{array}{c}
+\boxed{\mathrm{Agg}L^2(q''_{\can})}
+\\[3pt]
+\Downarrow \quad \text{(packet correlation / EF completion)}
+\\[3pt]
+\boxed{\mathrm{Graph/O2O3}_{23}}
+\\[3pt]
+\Downarrow \quad \text{(thickened Schur / overlap control)}
+\\[3pt]
+\boxed{Y12\text{-quotient survival}}
+\\[3pt]
+\Downarrow \quad \text{(retained-space / Schur residual)}
+\\[3pt]
+\boxed{\mathrm{AtomicY12Contradiction}}
+\end{array}
+\end{equation}
+
+\begin{proof}[Proof sketch]
+The source layer is a finite packet-correlation matrix; the O2/O3 layer is a thickened overlap matrix; the Y12 layer is a projected quotient operator with a Schur residual; the extraction layer is a \(2\times2\) covariance test.  Each step is a finite positivity / survival statement under quotienting away nuisance directions.
+\end{proof}
+
 % === wip-rank-two-selector-bridge-Y12 ===
 % Purpose:
 %   Connect the row-normal \(2Y\) rank-two package to the paper's rank selector.
@@ -37125,6 +37131,71 @@ Define
 \]
 \end{definition}
 
+\begin{definition}[Combined nuisance block and projected transition operator]
+\label{def:combined-nuisance-block-y12}
+For each packet \(p\), define the combined \(Y12\) nuisance block
+\[
+U_p := \operatorname{span}\!\bigl(T_{\mathrm{par}}^{(\alpha)},\,T_7,\,T_{<7},\,II_{\mathrm{arith},9},\,T_{E_2}\bigr),
+\]
+with the understanding that \(T_{E_2}\) is included only when \(E_2\) is admitted
+in the current quotient layer.
+
+Define the projected transition operator
+\[
+\mathfrak T_p := (I-P_{\mathrm{sing},p})\,T_{\mathrm{tr}\to\mathrm{sing},p}\,J_{\mathrm{tr},p}.
+\]
+\end{definition}
+
+\begin{lemma}[Finite-codimension \(Y12\) graph/coercivity lemma]
+\label{lem:finite-codim-y12-graph}
+Assume that the \(Y12\) quotient annihilates the combined nuisance block,
+\[
+U_p \subseteq \ker \Lambda_{Y,p},
+\]
+and that the admissible residual class \(\mathcal R_X\) splits as a finite-codimension graph space
+\[
+\mathcal R_X = \mathcal R_{X,\mathrm{low},p}\oplus \mathcal R_{X,\mathrm{tail},p},
+\qquad
+\dim \mathcal R_{X,\mathrm{low},p}<\infty.
+\]
+Let \(\{e_{1,p},\dots,e_{r,p}\}\) be a basis of \(\mathcal R_{X,\mathrm{low},p}\), and define the defect matrix
+\[
+D_p := \begin{bmatrix}
+\mathfrak T_p e_{1,p} & \cdots & \mathfrak T_p e_{r,p}
+\end{bmatrix}.
+\]
+If
+\[
+\sigma_{\min}(D_p)\ge Q^{-C}
+\qquad\text{and}\qquad
+\sum_p \|\mathfrak T_p(R_X)\|^2 \le Q^{-B}\mu(\mathcal C),
+\]
+then \(\mathfrak T_p\) is coercive on \(\mathcal R_X\) up to the tail norm, and the
+\(Y12\) discarded observable survives on a polynomial-weight good set.
+\end{lemma}
+
+\begin{remark}[Defect matrix and \(D4\) transversality]
+\label{rem:defect-matrix-d4-transversality}
+The finite defect matrix \(D_p\) is the low-mode representation of the same
+discarded operator encoded by
+\[
+K_{\mathrm{D4},p}
+=
+(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}E_{\mathrm{car},p}^{\mathrm{tr}}L_{\mathrm{clean},p}^{\mathrm{tr}}.
+\]
+Thus the coercivity of \(\mathfrak T_p\) on the low block and the rank condition
+for \(K_{\mathrm{D4},p}\) are the same finite test in two coordinate systems.
+\end{remark}
+
+\begin{remark}[Graph-space no-go]
+\label{rem:graph-space-no-go}
+If \(U_p\not\subseteq\ker\Lambda_{Y,p}\), or if \(\mathcal R_X\) fails to admit
+a finite-codimension graph decomposition with tail norm
+\(\|\cdot\|_{\mathrm{EF}}\), then the \(Y12\) discarded observable is not
+coercive and the downstream atomic contradiction cannot be derived in the
+current norm.
+\end{remark}
+
 \begin{hypothesis}[Singular-discard upper from EF coherence]
 \label{hyp:singular-discard-upper-from-EF-coherence}
 The actual canonical rows satisfy
@@ -37608,6 +37679,33 @@ sublevel set
 In the normalized case \(a_p=0\), this reduces to anti-concentration of
 \(\Gamma_{G,2}\).
 \end{hypothesis}
+
+\begin{lemma}[Extraction covariance dichotomy]
+\label{lem:extraction-covariance-dichotomy}
+On each frozen cap \(C_j\), let
+\[
+B_j=\sum_{p\in C_j} w_p\,\Gamma_p\Gamma_p^\ast,
+\qquad
+w_p=\rho_p\frac{E_{1,p}H_p}{N_p},
+\qquad
+\Gamma_p=\binom{\Gamma_G(p)}{\Gamma_{G,2}(p)}.
+\]
+Then either
+\[
+\det(B_j)\ge Q^{-A}(\operatorname{tr}B_j)^2,
+\]
+equivalently
+\[
+\sum_{p\in C_j}\lambda_p|r_p-\bar r_j|^2\ge Q^{-A},
+\]
+where \(r_p=\Gamma_{G,2}(p)/\Gamma_G(p)\) on the chart
+\(|\Gamma_G|\ge \tfrac12|\Gamma|\), or else \(B_j\) is nearly rank one and the
+wall is effectively static.  In the static-line case, one must hand the cap to
+the \(Y12\) quotient test:
+\[
+\eta_j:=|(I-P_{\mathcal K_j^Y})u_j|^2\ge Q^{-A}.
+\]
+\end{lemma}
 
 \begin{theorem}[Normal D4 through the \(Y12\)-signature \(K_9\) channel]
 \label{thm:normal-D4-K9-Y12}
@@ -43400,6 +43498,107 @@ present.
 Whenever the text says \(\mathrm{Gate\text{--}1}\), it means \(\mathrm{Agg}L^2(q''_{\can})\).  Whenever it says \(\Lambda\), it means the transition--singular discarded operator \((I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}P_{\mathrm{tr}}\) unless the local section explicitly defines a different quotient.  Whenever it says D4 contradiction, it means a Type-I local-square upper in the same quotient norm as the lower bound.  The old finite-row O1/O2/O3, scalar \(I\)-coordinate D4, derivative-wall D4, optimized \(\Xi_N\), and one-parameter row mobility are historical or no-go routes unless a separate theorem explicitly reactivates them.
 \end{remark}
 
+\begin{lemma}[\(Y12\) quotient descent and primitive survival]
+\label{lem:Y12-quotient-descent}
+For each packet \(p\), define
+\[
+\mathcal K_p^Y
+:=
+\operatorname{im}
+\begin{bmatrix}
+R_{B_2,p}&R_{P,p}&R_{D,p}&A_{\alpha,p}&A_{7,p}&A_{<7,p}&A_{II,p}&A_{E_2,p}
+\end{bmatrix},
+\qquad
+q_p^Y:=I-P_{\mathcal K_p^Y}^{\mathrm{bd}},
+\]
+and let
+\[
+\Lambda_{Y,p}
+:=
+q_p^Y\Pi_{\Sigma(Y12),p}T_{\mathrm{tr}\to\mathrm{sing},p}P_{\mathrm{tr},p}.
+\]
+Assume the \(D4\) nuisance image is killed by the same quotient:
+\[
+\Pi_{\Sigma(Y12),p}T_{\mathrm{tr}\to\mathrm{sing},p}\mathcal N_p^{\mathrm{D4}}
+\subseteq
+\mathcal K_p^Y.
+\]
+Then \(\Lambda_{Y,p}\) factors through the \(D4\) quotient \(V_p/N_p^{\mathrm{D4}}\).
+Moreover, if
+\[
+Y_{Y,p}^{\mathrm{tar}}
+:=
+\Pi_{\Sigma(Y12),p}T_{\mathrm{tr}\to\mathrm{sing},p}[\mathsf C_{Y12}]^{\mathrm{tr}},
+\]
+then the Schur residual
+\[
+r_{Y,p}
+:=
+(I-P_{\mathcal K_p^Y}^{\mathrm{bd}})Y_{Y,p}^{\mathrm{tar}}
+\]
+vanishes if and only if \(Y_{Y,p}^{\mathrm{tar}}\in \mathcal K_p^Y\).
+\end{lemma}
+
+\begin{proof}
+If \(v-v'\in N_p^{\mathrm{D4}}\), then by hypothesis
+\[
+\Pi_{\Sigma(Y12),p}T_{\mathrm{tr}\to\mathrm{sing},p}(v-v')\in \mathcal K_p^Y,
+\]
+hence
+\[
+q_p^Y\Pi_{\Sigma(Y12),p}T_{\mathrm{tr}\to\mathrm{sing},p}(v-v')=0.
+\]
+Therefore \(\Lambda_{Y,p}(v)=\Lambda_{Y,p}(v')\), so \(\Lambda_{Y,p}\) is constant
+on cosets of \(N_p^{\mathrm{D4}}\) and descends to a unique induced map on
+\(V_p/N_p^{\mathrm{D4}}\).
+
+For the residual statement, let \(A_p\) be any matrix whose columns span
+\(\mathcal K_p^Y\).  Then
+\[
+r_{Y,p}=(I-P_{\mathcal K_p^Y}^{\mathrm{bd}})Y_{Y,p}^{\mathrm{tar}}
+\]
+and
+\[
+\|r_{Y,p}\|^2
+=
+\|Y_{Y,p}^{\mathrm{tar}}\|^2
+-
+(Y_{Y,p}^{\mathrm{tar}})^*A_p(A_p^*A_p)^\dagger A_p^*Y_{Y,p}^{\mathrm{tar}}.
+\]
+Hence \(r_{Y,p}=0\) precisely when \(Y_{Y,p}^{\mathrm{tar}}\in \mathcal K_p^Y\).
+\end{proof}
+
+\begin{corollary}[Rank form]
+\label{cor:Y12-quotient-rank}
+With the notation of Lemma~\ref{lem:Y12-quotient-descent},
+\[
+\operatorname{rank}
+\begin{bmatrix}
+\mathcal K_p^Y & \Pi_{\Sigma(Y12),p}T_{\mathrm{tr}\to\mathrm{sing},p}\mathcal N_p^{\mathrm{D4}}
+\end{bmatrix}
+=
+\operatorname{rank}(\mathcal K_p^Y)
+\]
+if and only if the \(Y12\) observable descends through the \(D4\) quotient, and
+\[
+\operatorname{rank}
+\begin{bmatrix}
+\mathcal K_p^Y & Y_{Y,p}^{\mathrm{tar}}
+\end{bmatrix}
+=
+\operatorname{rank}(\mathcal K_p^Y)+1
+\]
+if and only if the primitive \(Y12\) carrier survives the quotient.
+\end{corollary}
+
+\noindent
+In particular, the current \(D4\to Y12\) route reduces to the two finite checks
+\[
+\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing}}\mathcal N_p^{\mathrm{D4}}\subseteq \mathcal K_p^Y
+\qquad\text{and}\qquad
+Y_{Y,p}^{\mathrm{tar}}\notin \mathcal K_p^Y.
+\]
+
 \begin{remark}[No-go: functorial carrier lifts give rank-zero \(\Lambda\)]
 \label{rem:no-go-functorial-carrier-lifts-rank-zero}
 A carrier atlas lift that is fully functorial on the D4 live plane gives
@@ -47239,6 +47438,40 @@ Both estimates are for the full canonical source
 \]
 \end{hypothesis}
 
+\begin{lemma}[Oscillatory packet kernel decay]
+\label{lem:packet-oscillatory-kernel-decay}
+Let \(\psi_p(t)=a_p(t)e^{i\omega_p t}\) and \(\psi_q(t)=a_q(t)e^{i\omega_q t}\),
+with \(a_p,a_q\in C^N\) supported on packet cores and satisfying
+\[
+\|\partial_t^j a_p\|_\infty+\|\partial_t^j a_q\|_\infty \le Q^{Cj}
+\qquad (0\le j\le N).
+\]
+Then
+\[
+\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}
+=\widehat{F_{pq}}(\omega_p-\omega_q),
+\qquad
+F_{pq}(t)=a_p(t)\overline{a_q(t)}W_{\mathrm{branch}}(t),
+\]
+and hence
+\[
+|\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}|
+\le C_N Q^{C_N}(1+|\omega_p-\omega_q|)^{-N}.
+\]
+In particular, if \(|\omega_p-\omega_q|\ge Q^{-\delta}\) outside resonant blocks,
+then the off-diagonal correlation is \(Q^{-A}\)-small for \(N\) large enough.
+\end{lemma}
+
+\begin{remark}[Resonant block conditioning]
+\label{rem:source-resonant-block-conditioning}
+If \(|\omega_p-\omega_q|<Q^{-\delta}\), the pair must be handled inside a
+resonant block \(B\).  It is enough to prove
+\[
+G_B\ge Q^{-A}G_{B,\mathrm{ref}}
+\]
+for every resonant block.
+\end{remark}
+
 \begin{lemma}[Fubini form of branch-complete \(L^2\)-Gate--1]
 \label{lem:branch-complete-l2-gate-one-fubini}
 Let \(u=q''_{\can}\), and let
@@ -48227,6 +48460,36 @@ Since \(n=R+2\), \(\|A\|\le R^C\), and
 the claimed polynomial loss follows.
 \end{proof}
 
+\begin{theorem}[Thickened overlap Schur criterion]
+\label{thm:thickened-o2o3-schur}
+Let
+\[
+K:=G_{00}^{-1/2}G_{0S}G_{SS}^{-1/2}
+\]
+after Fej\'er--Riesz thickening of the Stack weight.  Then
+\[
+G_{00}-G_{0S}G_{SS}^{\dagger}G_{S0}\ge Q^{-A}G_{00}
+\]
+if and only if
+\[
+\|K\|_{\operatorname{op}}\le 1-Q^{-A}.
+\]
+A sufficient finite criterion is
+\[
+\Bigl(\max_i\sum_j |K_{ij}|\Bigr)\Bigl(\max_j\sum_i |K_{ij}|\Bigr)<(1-Q^{-A})^2.
+\]
+Equivalently, if \(K\) is viewed as a weighted bipartite overlap graph, then a
+coherence bound \(d\mu<1-Q^{-A}\) suffices.
+\end{theorem}
+
+\begin{remark}[O2/O3 failure modes]
+\label{rem:o2o3-thickened-overlap-failure}
+The only local failure mode at this stage is thickened overlap too coherent.
+The upstream prerequisites are \(R^C\)-normalization and
+genuine-pole/divided-difference visibility; if either fails, the overlap matrix
+is not in the correct finite regime.
+\end{remark}
+
 \begin{remark}[What finite/O2O3 does and does not use]
 \label{rem:finite-o2o3-basis-and-no-go-register}
 Finite/O2O3 uses the analytic Riesz basis for \(A_{\le X,m}\).  It does not use
@@ -49000,27 +49263,36 @@ on a polynomial-weight set, and the corresponding forbidden-channel mobility
 is positive atomic or localizable, so that local D4 energy cannot cancel
 against the complement.
 
-\begin{quote}
-\textbf{Current architecture:}
+\end{remark}
+
+\begin{remark}[Current architecture ledger]
+\label{rem:current-architecture-ledger-unified}
+The current proof architecture is
 \[
-\mathrm{Agg}L^2(q''_{\can})
-+
-\mathrm{Graph/O2O3}_{23}
-+
-\mathrm{NormalD4}_{K9,Y12}.
+\mathrm{Agg}L^2(q''_{\can})+\mathrm{Finite/O2O3}_{23}+\mathrm{ForbiddenSingularDiscardD4}.
 \]
-
-\textbf{Unresolved finite inputs:}
+The unresolved inputs are:
 \begin{enumerate}
-\item packet-core micro-covering / aggregate \(L^2\) observability;
-\item thickened Schur survival for the full O2/O3 determinant block;
-\item quotient survival of the primitive \(Y12\) carrier against actual-source nuisances;
-\item Type-I singular-discard upper in the same quotient norm.
+\item aggregate \(L^2\)-observability for \(q''_{\can}\),
+\item finite/O2O3 exterior-pivot anti-trough,
+\item construction of \(R_{\mathrm{sing}}\) and the singular-discard upper,
+\item D4 transversality to the discarded singular channel.
 \end{enumerate}
+Any sentence implying that finite D4 alone closes the proof should be replaced
+by ``visibility, not contradiction unless \(\Lambda\).''
+\end{remark}
 
-\textbf{Dead or historical routes:}
-finite-row O1/O2/O3 as a live Gate--1 definition, scalar \(I\)-coordinate D4, derivative-wall D4, optimized \(\Xi_N\), and one-parameter row mobility.
-\end{quote}
+\begin{remark}[No-go registry]
+\label{rem:no-go-registry-unified}
+The dead routes are:
+\begin{itemize}
+\item scalar \((I)\)-coordinate D4;
+\item derivative D4 wall;
+\item optimized \(\Xi_N\) as a finite D4 forbidden channel;
+\item one-parameter row mobility as a contradiction mechanism;
+\item functorial carrier lifts when \(R_{\mathrm{sing}}\) is Taylor-complete or carrier-complete;
+\item low-dimensional pointwise finite-row \(O1/S1/T1\) as the active Gate--1 definition.
+\end{itemize}
 \end{remark}
 
 \begin{remark}[Active input status table]
