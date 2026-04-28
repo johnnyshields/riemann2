@@ -39274,12 +39274,14 @@ they contain }H=yq''_{\can}.}
 source thickening plus \(L^2\)-input rigidity.}}
 \]
 \[
-\boxed{\text{The remaining source-side input is Gate~1 source-curvature
-observability for the full canonical object }q''_{\can}=B_2+P_2+D_2+E_2.}
+\boxed{\text{The remaining source-side input is }
+\mathrm{Agg}L^2(q''_{\can})\text{ for the full canonical object }
+q''_{\can}=B_2+P_2+D_2+E_2.}
 \]
 \[
-\boxed{\text{The remaining row-side input is D4 carrier-quotient row conversion
-with residual control, or a fallback source-robust/global invariant.}}
+\boxed{\text{The remaining row-side input is a forbidden-channel refinement of
+D4 carrier-quotient visibility, currently the }K_9/Y12\text{-normal
+singular-discard route.}}
 \]
 
 The rank-two branch is now organized in three normal forms:
@@ -42480,10 +42482,15 @@ Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}.
 
 \begin{remark}[Current branch decision]
 \label{rem:current-branch-decision-source-collapse}
-The current local rank-two architecture should be treated as conditional
-infrastructure rather than a proof engine.  The next proof-closing branch is
-not additional local row algebra, not order eleven by itself, and not clean
-projectivization alone.  The sharp remaining fork is:
+This is a historical source-collapse fork retained for the interval/local norm
+route.  After the \(L^2\)-Gate--1 repair, the active proof-closing upstream
+branch is the aggregate observability theorem
+\[
+  \mathrm{Agg}L^2(q''_{\can}).
+\]
+The interval statements below should be read as localized proof tools or
+diagnostics for that theorem.  In that older interval formulation, the sharp
+fork was:
 
 \begin{enumerate}
 \item Prove actual-zeta source-curvature observability,
@@ -43245,13 +43252,13 @@ D4_I\text{ scalar }I\text{-coordinate coercivity}
 The live downstream route is instead
 \[
 \boxed{
-\text{Gate--1}
+\mathrm{Agg}L^2(q''_{\can})
 +
 |u'|_\infty\text{ source thickening}
 +
 L^2\text{-input real rigidity}
 \Longrightarrow
-\text{Gate--2},
+\mathrm{Gate2},
 }
 \]
 followed by
@@ -43414,11 +43421,17 @@ The active rank-two branch is the following closure pipeline:
   +
   \mathrm{RankTwoCoercivity}
   +
-  \mathrm{Gate1}
+  \mathrm{Agg}L^2(q''_{\can})
   \Longrightarrow
   \int W_2\ge Q^{-A},
 \]
-where
+Here \(\mathrm{Agg}L^2(q''_{\can})\) is the branch-complete aggregate
+\(L^2\)-source input for the full canonical source
+\[
+  q''_{\can}=B_2+P_2+D_2+E_2.
+\]
+It is not the archived pointwise ordinary \(\mathrm{O1/O2/O3}\) finite-row
+route.
 \[
   W_2=|\Gamma_G|^2+|\Gamma_{G,2}|^2.
 \]
@@ -47023,8 +47036,7 @@ the live proof spine:
 \[
 \boxed{
 \mathrm{Agg}L^2(q''_{\can})
-\Longrightarrow
-\mathrm{Gate1};
+\text{ is the active Gate--1 input;}
 }
 \]
 The historical \(\mathrm{O1/O2/O3}\) and \(\mathrm{S1/T1}\) packages are retained
@@ -47033,7 +47045,7 @@ Gate--1 definition unless the proof explicitly returns to finite-row or
 branch-projection Gate--1.
 \[
 \boxed{
-\mathrm{Gate1}
+\mathrm{Agg}L^2(q''_{\can})
 +
 L^2\text{-input real rigidity}
 \Longrightarrow
@@ -47058,13 +47070,11 @@ B_Y=0
 +
 \mathrm{D4CoeffCoreRouting}_{2Y}
 +
-\mathrm{SourceCurvatureCompletion}^{(2)}
+\mathrm{Graph/O2O3}_{23}
 +
-\mathrm{FiniteAtlasRiesz}_{2Y}^p
+\mathrm{NormalD4}_{K9,Y12}
 +
-\mathrm{CoreWeightedPlainWallTransfer}_{2Y}
-+
-\mathrm{ScalarBoundedChargeO2O3}(d_{\max}^{(2)}).
+\mathrm{AtomicContradiction}.
 }
 \]
 All deleted \(D1/D2/D3\), scalar \(I\)-coordinate D4, and active rank-one
@@ -47624,6 +47634,78 @@ The following implications are not available:
 \]
 Low-prime or proxy blocks are diagnostic only.  Proof-level ordinary Gate--1
 requires the full canonical source \(q''_{\can}=B_2+P_2+D_2+E_2\).
+\end{remark}
+
+\begin{remark}[Macroscopic smoothed zero-Gram as a proof tool]
+\label{rem:macroscopic-smoothed-zero-gram-proof-tool}
+Although the pointwise ordinary finite-row route is archived, a macroscopic
+smoothed zero-Gram calculation remains useful for proving aggregate
+\(L^2\)-source estimates.
+
+Let
+\[
+  w_T(t)=w\!\left(\frac{t-T}{H}\right),
+  \qquad
+  H\gg T^{c_++\delta},
+  \qquad
+  n,n'\le T^{c_+},
+  \qquad
+  c_+<\tfrac12.
+\]
+For
+\[
+  K_H(u):=\sum_\gamma w_T(\gamma)e^{-i\gamma u},
+\]
+the smoothed explicit formula localizes the prime peaks to
+\[
+  u=\pm\log k.
+\]
+If
+\[
+  u=\log(n/n')
+\]
+and \(n\ne kn'\), then
+\[
+  \left|\log\frac{n}{kn'}\right|\gg T^{-c_+}.
+\]
+Thus
+\[
+  H\left|\log\frac{n}{kn'}\right|\gg T^\delta,
+\]
+and rapid decay of \(\widehat w\) kills non-exact ratios.  Hence only
+\[
+  n=kn'\qquad\text{or}\qquad n'=kn
+\]
+contribute to the leading zero-Gram.
+
+With the natural \(n^{-1/2}\)-normalization, the Landau term uses
+\[
+  \sum_k\frac{\Lambda(k)}{k}\delta_{\log k}\approx du.
+\]
+Thus the leading scalar zero-Gram has rank-one form
+\[
+  G_Z\approx I-\frac1Q e_Z\otimes e_Z.
+\]
+For smooth local cells of log-width \(\Delta\asymp\log Q\), the corresponding
+cell Gram is block-local:
+\[
+  G_{\mathrm{cell}}
+  \approx
+  \bigoplus_a
+  \left(I_a-\frac1Qe_a\otimes e_a\right),
+\]
+and remains positive since
+\[
+  \|e_a\|^2/Q\asymp\Delta/Q\ll1.
+\]
+
+This is a possible proof tool for aggregate \(L^2\)-source sampling.  It is
+not the Gate--1 definition, and it must use the full canonical source
+\[
+  q''_{\can}=B_2+P_2+D_2+E_2
+\]
+with smooth packets.  Hard cells, \(P_2\)-only packets, or scalar value packets
+are not sufficient proof objects.
 \end{remark}
 
 \subsection{Finite/O2O3\(_{23}\): analytic Riesz graph and exterior-pivot input}
@@ -48504,6 +48586,68 @@ Gate--1 object itself is always
 \]
 \end{remark}
 
+\begin{theorem}[Projected source-frame branch certificate]
+\label{thm:projected-source-frame-branch-certificate}
+Let
+\[
+  F_m(x):=\lambda_m^3q''_{\can}(m+\lambda_m x).
+\]
+Assume there are nonnegative smooth branch weights
+\[
+  \chi_{\mathrm{ord}}(m)+\chi_{\mathrm{tr}}(m)+\chi_{\mathrm{sing}}(m)=1
+\]
+and branch observables
+\[
+  E_{\mathrm{ord}}(m),\qquad E_{\mathrm{tr}}(m),\qquad E_{\mathrm{sing}}(m)
+\]
+with
+\[
+  E_{\mathrm{ord}}(m)=\|T_{\can}X_{\can}(m)\|^2
+\]
+in the ordinary packet-frequency chart, while
+\[
+  E_{\mathrm{tr}}(m)=\sum_j\|P_{\mathrm{tr},j}F_m\|_{L^2}^2,
+  \qquad
+  E_{\mathrm{sing}}(m)=\sum_j\|P_{\mathrm{sing},j}F_m\|_{L^2}^2.
+\]
+If the multichart source-frame inequality
+\[
+  \chi_{\mathrm{ord}}(m)E_{\mathrm{ord}}(m)
+  +
+  \chi_{\mathrm{tr}}(m)E_{\mathrm{tr}}(m)
+  +
+  \chi_{\mathrm{sing}}(m)E_{\mathrm{sing}}(m)
+  \ge
+  Q^{-A}\|F_m\|_{L^2}^2
+\]
+holds, then the branch observables certify the same scalar canonical source
+norm used by \(\mathrm{Agg}L^2(q''_{\can})\).
+
+In particular, transition point jets and singular sine moments are not
+standalone Gate--1 definitions.  They are valid proof tools only after being
+embedded in projection families satisfying the lower-frame inequality above.
+\end{theorem}
+
+\begin{remark}[Point jets and sine diagnostics are not complete frames]
+\label{rem:transition-singular-diagnostics-not-complete-frames}
+The transition point jet
+\[
+  \left(\mu^{-r}\partial_x^rF_m(0)\right)_{0\le r\le R}
+\]
+records only \(R+1\) bounded-window moments.  It is not, by itself, a lower
+frame for \(\|F_m\|_{L^2}\).  Similarly, a raw singular sine-moment vector is
+not a proof-level Gate--1 input unless it is proved to be an actual coefficient
+or projection frame for \(F_m\).
+
+Thus the active transition and singular proof objects are projected source
+energies:
+\[
+  \sum_j\|P_{\mathrm{tr},j}F_m\|_{L^2}^2,
+  \qquad
+  \sum_j\|P_{\mathrm{sing},j}F_m\|_{L^2}^2.
+\]
+\end{remark}
+
 \subsection{Ordinary Wronskian no-go archive}
 \label{subsec:no-go-archive-ordinary-wronskian}
 
@@ -48864,6 +49008,15 @@ whether
   \quad\text{in}\quad
   \mathcal Q_{9,Y12}^{\mathrm{forb},\alpha}.
 \]
+
+In particular, the downstream status should not be summarized as ``D4 closed''
+without qualification.  The accurate statement is:
+\[
+\boxed{
+\text{D4 is closed as local carrier-quotient visibility for }u=q''_{\can},
+\text{ but proof closure still requires a Type I/II forbidden channel.}
+}
+\]
 \end{remark}
 
 \begin{remark}[Empirical support for O1: local amplitude and cell tests]
@@ -49182,23 +49335,28 @@ metrics.  The flattest \(0.1\%\) of rows should be rerun with higher precision,
 larger zero cutoff, more quadrature nodes, finite jets, and AFE cross-checks.
 \end{remark}
 
-\begin{remark}[No Green Gate--1 proof yet]
+\begin{remark}[No Green \(\mathrm{Agg}L^2(q''_{\can})\) proof yet]
 \label{rem:no-green-gate-one-proof-yet}
-At the current stage, no argument in the draft proves Gate~1 for the full
-canonical object \(q''_{\can}\).  Formal Wronskian or Cauchy--Binet
-nonvanishing is insufficient: the Wronskian becomes a fixed-coefficient
-exponential sum over subset-product frequencies, and the actual theorem needed
-is a pointwise lower bound on the prime-log orbit.  Likewise, a proof for a
-zero-kernel proxy, a flexible Dirichlet polynomial, or the affine-subtracted
-complement curvature \(q''_{\source,R}\) does not prove Gate~1.  Any future
-Gate~1 proof must apply to
+At the current stage, no argument in the draft proves the active
+\(\mathrm{Agg}L^2(q''_{\can})\) theorem for the full canonical object
+\(q''_{\can}\).  Formal Wronskian or Cauchy--Binet nonvanishing is insufficient
+unless it is upgraded to a weighted \(L^2\)-source theorem for
 \[
-q''_{\can}=B_2+P_2+D_2+E_2
+q''_{\can}=B_2+P_2+D_2+E_2.
 \]
-with controlled errors in the same normalization as the local row package.
-Equivalently, the present draft has not proved O1, O2, or O3, nor the
-singular/transition inputs S1--T1.  The reductions above identify the needed
-arithmetic statements; they do not discharge them.
+A proof for a zero-kernel proxy, a flexible Dirichlet polynomial, a
+\(P_2\)-only source, a \(B_2\)-only diagnostic, or the affine-subtracted
+complement curvature \(q''_{\source,R}\) does not prove the active input.
+
+Equivalently, the present draft has not proved
+\[
+  \mathrm{Coverage}_{q''},
+  \qquad
+  \mathrm{MeanSq}_{q''_{\can}},
+\]
+nor the projected source-frame versions of the ordinary, transition, and
+singular proof tools.  The historical \(\mathrm{O1/O2/O3}\) route is also not
+proved, but it is no longer the active Gate--2 input.
 \end{remark}
 
 \begin{thebibliography}{99}
