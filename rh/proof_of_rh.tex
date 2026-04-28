@@ -35489,85 +35489,6 @@ is nonzero.  If it is zero, the singular-discard channel is D4-invisible.  If
 it has rank one or two, it gives a genuine local forbidden channel.
 \end{remark}
 
-% === wip-postclosure-L2-gate-one-interface ===
-% Purpose:
-%   Replace branch-specific Gate--1 observables by scalar local L^2 source energy.
-% Depends on:
-%   The real-rigidity Gate--2 theorem and the canonical source \(q''_{\can}\).
-% Status:
-%   Active architecture / finite-audit interface.
-
-\begin{definition}[Local \(L^2\) Gate--1 source energy]
-\label{def:local-L2-gate-one-source-energy}
-For a routed branch \(b\in\{\mathrm{ord},\mathrm{tr},\mathrm{sing}\}\), let \(\lambda_b\) be the local
-scale and let \(I_b\) be the corresponding normalized source window.  Define
-\[
-  F_{b,m}(x):=\lambda_b^3q''_{\can}(m+\lambda_bx),
-\]
-and set
-\[
-  E_{1,b}^{L^2}(m)
-  :=
-  \int_{I_b}
-  |F_{b,m}(x)|^2\,dx.
-\]
-Thus Gate--1 is the local scalar \(L^2\) energy of the single canonical source
-\[
-  u=q''_{\can}=B_2+P_2+D_2+E_2.
-\]
-The older ordinary finite row \(T_{\can}X_{\can}\), the transition jet
-\(\mathcal J_R^{\mathrm{tr}}\), singular sine moments, and singular projected modes
-are proof tools for lower-bounding \(E_{1,b}^{L^2}\), not definitions of
-Gate--1.
-\end{definition}
-
-\begin{remark}[Gate--2 input convention]
-\label{rem:gate-two-input-L2-source-convention}
-The active Gate--2 route uses source thickening and \(L^2\)-input real rigidity.
-Accordingly, the Gate--1 input to be fed downstream is
-\[
-  E_{1,b}^{L^2}(m)\ge Q^{-A}
-\]
-in the local normalization, not a branch-specific finite moment condition.
-O2/O3-type nondegeneracy remains a separate input; it is not part of the
-Gate--2 \(L^2\)-source hypothesis.
-\end{remark}
-
-\begin{definition}[Branch-complete aggregate \(L^2\) Gate--1]
-\label{def:branch-complete-aggregate-L2-gate-one}
-Let \(\rho_b(m)\ge0\) be routed branch weights.  The branch-complete aggregate
-Gate--1 theorem is
-\[
-  \sum_b\sum_{m\in\mathcal C_b}
-  \rho_b(m)E_{1,b}^{L^2}(m)
-  \ge
-  Q^{-A}
-  \sum_b\sum_{m\in\mathcal C_b}\rho_b(m)N_b(m),
-\]
-where \(N_b(m)\) is the branch-normalized canonical reference energy.  Equivalently,
-after Fubini, this is a weighted source-energy lower bound
-\[
-  \int |q''_{\can}(t)|^2 W_{\mathrm{branch}}(t)\,dt
-  \ge
-  Q^{-A}\mathcal N_{\can}(W_{\mathrm{branch}}),
-\]
-for the full canonical source \(q''_{\can}=B_2+P_2+D_2+E_2\).
-\end{definition}
-
-\begin{remark}[Branch observables are proof tools only]
-\label{rem:branch-observables-proof-tools-only}
-The branch-specific finite observables are retained only as tools:
-\[
-T_{\can}X_{\can}\Rightarrow E_{1,\mathrm{ord}}^{L^2},
-\qquad
-\mathcal J_R^{\mathrm{tr}}\Rightarrow E_{1,\mathrm{tr}}^{L^2},
-\qquad
-P_R F\text{ or }E_{\mathrm{sing}}^{\mathrm{multi}}\Rightarrow E_{1,\mathrm{sing}}^{L^2}.
-\]
-They should not be cited as the Gate--1 object unless the local \(L^2\)-input
-real-rigidity theorem is deliberately replaced by a finite-row version.
-\end{remark}
-
 % === audit-D4-needs-forbidden-channel ===
 % Purpose:
 %   Prevent the carrier-quotient D4 visibility theorem from being mistaken for
@@ -35604,148 +35525,6 @@ on a polynomial-weight extracted set.
 
 Thus D4 is currently a carrier-quotient visibility theorem unless a concrete
 \(\Lambda\) is supplied and shown to see the live D4 carrier plane.
-\end{remark}
-
-% === wip-forbidden-singular-discard-D4 ===
-% Purpose:
-%   State the current best finite-D4 contradiction candidate:
-%   transition-to-singular discarded carrier projection.
-% Depends on:
-%   A singular carrier lift and a transition-to-singular carrier transport map.
-% Status:
-%   Finite audit / unresolved.
-
-\begin{definition}[Transition--singular forbidden discard operator]
-\label{def:transition-singular-forbidden-discard}
-Let
-\[
-  W_{\mathrm{tr}}:=
-  \operatorname{span}\{[\mathsf C_7]^{\mathrm{tr}},[\mathsf C_{Y12}]^{\mathrm{tr}}\}
-\]
-be the transition-chart live D4 carrier plane.  Suppose the singular chart is
-equipped with a finite carrier module
-\[
-  M_{\mathrm{sing}}=W_{\mathrm{sing}}\oplus C_{\mathrm{sing}}
-\]
-and a projection
-\[
-  P_{\mathrm{sing}}:M_{\mathrm{sing}}\to W_{\mathrm{sing}}
-\]
-onto the retained singular carrier space.  Let
-\[
-  T_{\mathrm{tr}\to\mathrm{sing}}:M_{\mathrm{tr}}\to M_{\mathrm{sing}}
-\]
-be the carrier-level transition map.  Define the local forbidden discard
-operator
-\[
-  \Lambda_{\mathrm{tr},\mathrm{sing}}
-  :=
-  (I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}P_{\mathrm{tr}},
-\]
-where \(P_{\mathrm{tr}}\) denotes projection to the transition live carrier plane.
-
-On live D4 output this gives
-\[
-  K_{\mathrm{tr},\mathrm{sing}}
-  :=
-  \Lambda_{\mathrm{tr},\mathrm{sing}}E_{\mathrm{car}}^{\mathrm{tr}}L_{\mathrm{clean}}^{\mathrm{tr}}
-  :
-  \mathbf C^2_{\Gamma}\to C_{\mathrm{sing}}.
-\]
-\end{definition}
-
-\begin{remark}[Why a singular carrier lift is now required]
-\label{rem:singular-carrier-lift-required}
-The singular branch no longer needs a carrier quotient for Gate--1, because
-Gate--1 is local scalar \(L^2\) energy of \(q''_{\can}\).  However, a singular
-carrier lift is required for the downstream D4 contradiction audit.  Without
-a defined splitting
-\[
-  M_{\mathrm{sing}}=W_{\mathrm{sing}}\oplus C_{\mathrm{sing}},
-\]
-the map \((I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}\) cannot be evaluated on
-\([\mathsf C_7]^{\mathrm{tr}}\) or \([\mathsf C_{Y12}]^{\mathrm{tr}}\).
-\end{remark}
-
-\begin{definition}[Forbidden singular-discard wall energy]
-\label{def:forbidden-singular-discard-wall-energy}
-Set
-\[
-  \Gamma(m):=
-  \begin{pmatrix}
-    \Gamma_G(m)\\
-    \Gamma_{G,2}(m)
-  \end{pmatrix}.
-\]
-For a local transition-chart D4 output, define
-\[
-  E_{\mathrm{wall}}^{\mathrm{forb}}(m)
-  :=
-  \frac{
-    |H(m)|^2
-    \left\|
-      K_{\mathrm{tr},\mathrm{sing}}(m)\Gamma(m)
-    \right\|^2
-  }{
-    \mathcal N_{\mathrm{D4}}(m)
-  }.
-\]
-If \(K_{\mathrm{tr},\mathrm{sing}}\) has rank two, the old raw anisotropy wall
-\[
-  |H|^2(|\Gamma_G|^2+|\Gamma_{G,2}|^2)
-\]
-is equivalent to the forbidden wall.  If \(K_{\mathrm{tr},\mathrm{sing}}\) has rank one, only
-one forbidden linear combination
-\[
-  \ell_1\Gamma_G+\ell_2\Gamma_{G,2}
-\]
-is visible.  If \(K_{\mathrm{tr},\mathrm{sing}}=0\), finite D4 misses this forbidden channel.
-\end{definition}
-
-\begin{theorem}[Finite audit for forbidden singular-discard D4]
-\label{thm:forbidden-singular-discard-D4-audit}
-Assume:
-\begin{enumerate}
-\item actual global rows satisfy the singular-discard upper
-\[
-  \sum_p
-  \|(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(q''_{\can})\|^2
-  \le Q^{-B}\mu(\mathcal C);
-\]
-\item on a polynomial-weight extracted set, \(K_{\mathrm{tr},\mathrm{sing}}\) has rank at least
-one with polynomial lower singular value in its visible image;
-\item local Gate--2, carrier-quotient D4, and row-normal coefficient routing
-hold on that set.
-\end{enumerate}
-Then local D4 contributes positive forbidden-channel energy
-\[
-  \sum_{m\in\mathcal G}\mu(m)E_{\mathrm{wall}}^{\mathrm{forb}}(m)\ge Q^{-A}\mu(\mathcal G),
-\]
-contradicting the singular-discard upper after the corresponding mobility and
-normalization bounds.
-\end{theorem}
-
-\begin{remark}[Functorial singular lifts give rank zero]
-\label{rem:functorial-singular-lift-rank-zero}
-If the singular retained carrier space is defined functorially by
-\[
-  [\mathsf C_i]^{\mathrm{sing}}
-  =
-  T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_i]^{\mathrm{tr}},
-  \qquad i\in\{7,Y12\},
-\]
-then
-\[
-  T_{\mathrm{tr}\to\mathrm{sing}}(W_{\mathrm{tr}})\subseteq W_{\mathrm{sing}},
-\]
-so
-\[
-  (I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}|_{W_{\mathrm{tr}}}=0.
-\]
-A Taylor-complete or functorial singular lift therefore gives no finite-D4
-forbidden channel.  Nonzero D4 visibility can occur only if the singular
-retained space is a non-functorial projection or coherence space that discards
-some transition live-carrier content.
 \end{remark}
 
 \begin{definition}[Covariant septic row]
@@ -37308,6 +37087,51 @@ Hypothesis~\ref{hyp:agg-l2-qcan-gate-one} may also supply the forbidden upper,
 provided they hold in the singular overlap norms.
 \end{hypothesis}
 
+\begin{definition}[\(\mathrm{EFCompletion}_{K9}\)]
+\label{def:EFCompletion-K9}
+The local \(L^2\) completion used for Gate--1 is not automatically strong
+enough for the singular-discard forbidden upper.  Define
+\(\mathrm{EFCompletion}_{K9}\) to be the estimate
+\[
+  \boxed{
+  \sum_p
+  \left\|
+  \Lambda_{\mathrm{tr},\mathrm{sing},p}
+  T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(R_X)
+  \right\|^2
+  \le Q^{-B}\mu(\mathcal C),
+  }
+\]
+where
+\[
+  q''_{\can}=F_X+R_X,
+  \qquad
+  F_X=B_2+P_{2,\le X}+D_{2,\le X}.
+\]
+Equivalently, the residual must be small not only in the Gate--1
+\(L^2\)-window norm, but also after transport to the singular chart and
+application of the discarded singular projection.
+\end{definition}
+
+\begin{remark}[\(\mathrm{EFCompletion}_{L^2}\) does not automatically imply
+\(\mathrm{EFCompletion}_{K9}\)]
+\label{rem:EFCompletion-L2-not-K9}
+The implication
+\[
+  \mathrm{EFCompletion}_{L^2}
+  \Longrightarrow
+  \mathrm{EFCompletion}_{K9}
+\]
+requires a polynomial operator bound for
+\[
+  \Lambda_{\mathrm{tr},\mathrm{sing}}T_{\mathrm{tr}\to\mathrm{sing}}J_{\mathrm{tr}}
+\]
+from the \(L^2\)-completion norm to the discarded singular norm.  If such a
+bound is unavailable, the singular-discard upper remains open even when
+aggregate \(L^2\) Gate--1 is well-defined.  This is a separate completion
+ledger and should not be merged with the source-energy Gate--1 completion.
+\end{remark}
+
 \begin{definition}[D4 singular-discard transversality matrix]
 \label{def:d4-singular-discard-transversality-matrix}
 On the D4 live plane define
@@ -37336,6 +37160,127 @@ Write
 Then the rank is \(0\) if both vanish, \(1\) if they are nonzero and dependent,
 and \(2\) if they are independent.
 \end{definition}
+
+\begin{definition}[Singular order-nine connection residual]
+\label{def:singular-order-nine-K9-residual}
+Let \(s=(s_0,\ldots,s_9)\) denote the singular coefficient vector in the
+transition-to-singular overlap chart.  Suppose the actual EF-coherent singular
+source satisfies an order-nine connection relation of the form
+\[
+  s_9
+  =
+  \mathcal R_{7\to9}s_7
+  +
+  \mathcal R_{<7\to9}(s_{<7})
+  +
+  \operatorname{Tail}_9 .
+\]
+Define the singular order-nine residual
+\[
+  \mathcal K_9(s)
+  :=
+  s_9-\mathcal R_{7\to9}s_7-\mathcal R_{<7\to9}(s_{<7}).
+\]
+The associated forbidden operator is
+\[
+  \Lambda_{K9,p}
+  :=
+  \mathcal K_9\circ T_{\mathrm{tr}\to\mathrm{sing},p}P_{\mathrm{tr},p}.
+\]
+It is a valid singular-discard channel only if actual EF-coherent rows satisfy
+\[
+  \sum_p
+  \left|
+    \mathcal K_9\bigl(T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(q''_{\can})\bigr)
+  \right|^2
+  \le Q^{-B}\mu(\mathcal C),
+\]
+and if the D4 live plane has nonzero normal image:
+\[
+  \operatorname{rank}
+  \left(
+    \mathcal K_9
+    T_{\mathrm{tr}\to\mathrm{sing},p}
+    E_{\mathrm{car},p}^{\mathrm{tr}}
+    L_{\mathrm{clean},p}^{\mathrm{tr}}
+  \right)\ge1
+\]
+on a polynomial-weight set of packets.
+\end{definition}
+
+\begin{remark}[The \(Y12\) channel is the preferred \(K_9\) test]
+\label{rem:Y12-preferred-K9-test}
+For the rank-two D4 output
+\[
+  H
+  \begin{pmatrix}
+    c_7\Gamma_G\\
+    \beta_9^{\mathrm{tri}}\Gamma_G+\alpha_9\Gamma_{G,2}
+  \end{pmatrix},
+\]
+the cleanest singular-discard test is
+\[
+  \mathcal K_9\!\left(
+    T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}]^{\mathrm{tr}}
+  \right)\neq0.
+\]
+If this holds, then the pure \(\Gamma_{G,2}\) channel survives in the discarded
+singular normal direction, because \(\alpha_9\neq0\) on D4 coefficient-good
+charts.  If it fails, one should next test the \(\Gamma_G\)-channel through
+\[
+  \mathcal K_9\!\left(
+    T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_7]^{\mathrm{tr}}
+  \right).
+\]
+If both tests vanish, the order-nine singular residual \(\mathcal K_9\) is
+rank-zero for finite D4 and cannot serve as the downstream forbidden channel.
+\end{remark}
+
+\begin{definition}[Order-nine \(Y12\) normal quotient]
+\label{def:Y12-normal-quotient-Q9-forb}
+Let \(Y_9\) denote the order-nine singular carrier space containing the
+transitioned primitive \(Y12\)-carrier.  Define the forbidden order-nine
+quotient
+\[
+  \mathcal Q_9^{\mathrm{forb}}
+  :=
+  Y_9/
+  \left(
+    T_{\mathrm{par}}
+    +
+    T_7
+    +
+    T_{<7}
+  \right),
+\]
+where \(T_{\mathrm{par}}\) denotes actual parameter tangents, \(T_7\) denotes
+actual or lower order-seven connection tangents, and \(T_{<7}\) denotes lower
+typed dead directions.  The primitive \(Y12\)-normal D4 channel survives exactly
+when
+\[
+  [\mathsf C_{Y12}]\ne0
+  \qquad\text{in}\qquad
+  \mathcal Q_9^{\mathrm{forb}}.
+\]
+\end{definition}
+
+\begin{remark}[Relation between singular-discard and \(K_9/Y12\)]
+\label{rem:singular-discard-vs-K9-Y12}
+The \(K_9/Y12\) channel is a specialization of the singular-discard candidate.
+The finite test
+\[
+  (I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}]^{\mathrm{tr}}\ne0
+\]
+is equivalent to the existence of some normal \(K_9\) detecting the transitioned
+\(Y12\)-class.  The quotient \(\mathcal Q_9^{\mathrm{forb}}\) records precisely
+which actual-source and lower connection directions must be divided out before
+\(Y12\) is considered a genuine forbidden normal carrier.
+
+If \([\mathsf C_{Y12}]=0\) in \(\mathcal Q_9^{\mathrm{forb}}\), then the
+rank-one \(Y12\)-normal route is dead, even if D4 remains locally visible in a
+larger carrier quotient.  If \([\mathsf C_{Y12}]\ne0\), then finite D4 has a
+concrete atomic forbidden channel.
+\end{remark}
 
 \begin{hypothesis}[ForbiddenSingularDiscardD4]
 \label{hyp:forbidden-singular-discard-d4}
@@ -37391,6 +37336,96 @@ polynomial conditioning.
 \end{enumerate}
 If none of these failures occurs, finite D4 has a genuine Type-I positive
 atomic forbidden channel.
+\end{remark}
+
+\begin{definition}[Tubular normality for the singular actual-source manifold]
+\label{def:tubular-normality-singular-manifold}
+Let \(\mathcal M_{\mathrm{sing}}^{\mathrm{arith}}\) be the finite-dimensional
+actual-source singular coherence manifold in the retained singular chart.  We
+say it has polynomial tubular control on a packet family if its normal
+projection is defined on a \(Q^{-C}\)-tube and the second fundamental form
+satisfies
+\[
+  \boxed{
+  \|\mathrm{II}_{\mathcal M_{\mathrm{sing}}^{\mathrm{arith}}}\|\le Q^C.
+  }
+\]
+Equivalently, for every tangent point \(u\in\mathcal M_{\mathrm{sing}}^{\mathrm{arith}}\)
+and small displacement \(D\),
+\[
+  \operatorname{dist}(u+D,\mathcal M_{\mathrm{sing}}^{\mathrm{arith}})
+  \ge
+  \|\Pi_u^\perp D\|
+  -
+  Q^C\|D\|^2
+  -
+  \mathrm{Err}_{\mathrm{chart}}.
+\]
+\end{definition}
+
+\begin{remark}[Why tubular control is needed]
+\label{rem:why-tubular-control-needed}
+A nominally normal D4 displacement can be absorbed by a nearby nonlinear
+actual-source parameter shift if the singular actual-source manifold has large
+curvature at the relevant scale.  Therefore the singular-discard contradiction
+requires both a linear transversality audit
+\[
+  \operatorname{rank}
+  \left(
+  \Lambda_{\mathrm{tr},\mathrm{sing}}E_{\mathrm{car}}^{\mathrm{tr}}L_{\mathrm{clean}}^{\mathrm{tr}}
+  \right)\ge1
+\]
+and polynomial tubular control for
+\(\mathcal M_{\mathrm{sing}}^{\mathrm{arith}}\).  The latter is finite-geometric,
+not an arithmetic Gate--1 statement.
+\end{remark}
+
+\begin{remark}[Partial explicit-formula residuals are upstream completion tools]
+\label{rem:partial-EF-residual-role-separation}
+The full canonical explicit-formula identity
+\[
+  q''_{\can}=B_2+P_2+D_2+E_2
+\]
+is definitional for the canonical source.  Its full residual
+\[
+  q''_{\can}-(B_2+P_2+D_2+E_2)
+\]
+is therefore expected to be D4-invisible if all terms are varied coherently.  It
+should not be used as the downstream forbidden channel \(\Lambda\).
+
+Partial residuals such as
+\[
+  R_X
+  :=
+  q''_{\can}-(B_2+P_{2,\le X}+D_{2,\le X})
+\]
+are useful upstream for source completion and for proving aggregate
+\(L^2\)-observability of \(q''_{\can}\).  A typical use is:
+\[
+  q''_{\can}=F_X+R_X,\qquad
+  F_X:=B_2+P_{2,\le X}+D_{2,\le X},
+\]
+with
+\[
+  \|R_X\|_{L^2(W)}\le \frac12\|F_X\|_{L^2(W)}
+\]
+on the weighted branch window \(W\).  Then the full canonical source inherits
+the finite approximant's \(L^2\)-mass.
+
+A partial residual becomes a downstream forbidden channel only if both of the
+following are proved:
+\[
+  \|\Lambda_{X,\psi}V_{\mathrm{glob}}\|^2\le Q^{-B}\|\psi\|^2
+\]
+for localized cutoffs \(\psi\), and
+\[
+  \operatorname{rank}
+  \left(
+    \Lambda_{X,\psi}E_{\mathrm{car}}L_{\mathrm{clean}}
+  \right)\ge1
+\]
+on the D4 live plane.  In the absence of this upper/rank pair, partial EF
+residuals are completion-coherence inputs, not the proof-closing \(\Lambda\).
 \end{remark}
 
 \begin{remark}[Final D4 residual status in the carrier quotient]
@@ -42912,6 +42947,26 @@ singular source space that is globally small on actual rows but not functorial
 on the formal D4 carriers.
 \end{remark}
 
+\begin{remark}[No-go: Taylor-complete singular retained space]
+\label{rem:no-go-taylor-complete-singular-retained-space}
+If the retained singular space \(R_{\mathrm{sing}}\) contains all Taylor/jet
+data through the D4 carrier orders, then
+\[
+  T_{\mathrm{tr}\to\mathrm{sing}}
+  \operatorname{span}\{[\mathsf C_7]^{\mathrm{tr}},[\mathsf C_{Y12}]^{\mathrm{tr}}\}
+  \subset R_{\mathrm{sing}}.
+\]
+Consequently
+\[
+  (I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_7]^{\mathrm{tr}}=0,
+  \qquad
+  (I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}]^{\mathrm{tr}}=0,
+\]
+and the singular-discard forbidden channel has rank zero.  Thus
+\(R_{\mathrm{sing}}\) must be an actual EF-coherent retained space, not a
+Taylor-complete carrier space, if this \(\Lambda\)-route is to remain viable.
+\end{remark}
+
 \begin{remark}[No-go: pure branch determinant is not scalar O2/O3]
 \label{rem:no-go-pure-branch-determinant-not-full-o2o3}
 A lower bound for a phase-aligned pure branch determinant \(D_{\mathrm{dom}}\) does not
@@ -43021,6 +43076,60 @@ and
 \[
   \text{predetermined }R^{-C}\text{-large coefficient/smooth-good cores}.
 \]
+\end{remark}
+
+\begin{remark}[Next finite audits after the \(L^2\)-Gate--1 repair]
+\label{rem:next-finite-audits-after-l2-gate-one}
+After the \(L^2\)-Gate--1 repair, the next finite audits are:
+\begin{enumerate}
+\item \textbf{Finite AFE anti-lock.}
+Prove
+\[
+  \|B_2+P_{2,\le X}+D_{2,\le X}\|_{L^2(W_{\mathrm{branch}})}^2
+  \ge
+  Q^{-A}
+  \|B_2+P_{2,\le X}+D_{2,\le X}\|_{L^2(W_{\mathrm{ref}})}^2.
+\]
+
+\item \textbf{Central tube routing.}
+For \(\delta=R^{-C}\), route
+\[
+  \Omega_{\mathrm{cen}}=\{|x-\tfrac12|<\delta\}
+\]
+as a rescaled branch and prove the corresponding graph/O2/O3 lower bound.
+
+\item \textbf{EF residual split.}
+Prove both
+\[
+  \mathrm{EFCompletion}_{L^2}
+\]
+and, separately,
+\[
+  \mathrm{EFCompletion}_{K9}.
+\]
+
+\item \textbf{Y12 normal quotient.}
+Compute whether
+\[
+  [\mathsf C_{Y12}]\ne0
+  \quad\text{in}\quad
+  \mathcal Q_9^{\mathrm{forb}}.
+\]
+
+\item \textbf{Transition--singular leakage.}
+Compute
+\[
+  (I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_7]^{\mathrm{tr}},
+  \qquad
+  (I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}]^{\mathrm{tr}}.
+\]
+
+\item \textbf{Tubular singular coherence.}
+Prove a \(Q^C\)-bounded second fundamental form / tubular radius estimate for
+\[
+  \mathcal M_{\mathrm{sing}}^{\mathrm{arith}}.
+\]
+\end{enumerate}
 \end{remark}
 
 % === audit-no-Lambda-no-D4-contradiction ===
@@ -46471,11 +46580,15 @@ After the pruning in this section, the reader should treat the following as
 the live proof spine:
 \[
 \boxed{
-\mathrm{O1/O2/O3}\ \text{or}\ \mathrm{S1/T1}
+\mathrm{Agg}L^2(q''_{\can})
 \Longrightarrow
 \mathrm{Gate1};
 }
 \]
+The historical \(\mathrm{O1/O2/O3}\) and \(\mathrm{S1/T1}\) packages are retained
+as proof tools, alternate routes, and no-go ledgers.  They are not the active
+Gate--1 definition unless the proof explicitly returns to finite-row or
+branch-projection Gate--1.
 \[
 \boxed{
 \mathrm{Gate1}
@@ -46591,6 +46704,58 @@ Both estimates are for the full canonical source
 \]
 \end{hypothesis}
 
+\begin{lemma}[Fubini form of branch-complete \(L^2\)-Gate--1]
+\label{lem:branch-complete-l2-gate-one-fubini}
+Let \(u=q''_{\can}\), and let
+\[
+  E_{1,b}^{L^2}(m)
+  =
+  \int
+  \left|
+    \lambda_b(m)^3 u(m+\lambda_b(m)x)
+  \right|^2
+  w_b(x)\,dx.
+\]
+Then
+\[
+  E_{1,b}^{L^2}(m)
+  =
+  \int
+  |u(t)|^2
+  \lambda_b(m)^5
+  w_b\!\left(\frac{t-m}{\lambda_b(m)}\right)
+  dt.
+\]
+Consequently
+\[
+  \sum_b\sum_{m\in\mathcal C_b}
+  \rho_b(m)E_{1,b}^{L^2}(m)
+  =
+  \int |u(t)|^2 W_{\mathrm{branch}}(t)\,dt,
+\]
+where
+\[
+  W_{\mathrm{branch}}(t)
+  =
+  \sum_b\sum_{m\in\mathcal C_b}
+  \rho_b(m)\lambda_b(m)^5
+  w_b\!\left(\frac{t-m}{\lambda_b(m)}\right).
+\]
+Thus \(\mathrm{Agg}L^2(q''_{\can})\) is exactly the weighted source
+mean-square lower bound
+\[
+  \int |q''_{\can}(t)|^2W_{\mathrm{branch}}(t)\,dt
+  \ge
+  Q^{-A}\mathcal N_{\can}(W_{\mathrm{branch}}).
+\]
+In particular, the proof of Gate--1 splits into:
+\[
+  \boxed{\text{coverage of the }|q''_{\can}|^2\text{-energy measure}}
+  \qquad\text{and}\qquad
+  \boxed{\text{canonical source mean-square nontriviality}.}
+\]
+\end{lemma}
+
 \begin{remark}[Branch observables are proof tools, not Gate--1 definitions]
 \label{rem:branch-observables-proof-tools-only-upstream}
 The older branch observables
@@ -46648,6 +46813,111 @@ The principal failure mode is \(L^2\)-level anti-lock:
 \]
 on the observed branch windows.  This is a lower-frame/spectral observability
 problem for the actual canonical source, not a pointwise finite-row problem.
+\end{remark}
+
+\begin{remark}[Finite AFE anti-lock and the central square-root tube]
+\label{rem:finite-afe-antilock-central-tube}
+After finite truncation
+\[
+  F_X=B_2+P_{2,\le X}+D_{2,\le X},
+\]
+the first nontrivial \(L^2\)-Gate--1 obstruction is finite AFE anti-lock:
+\[
+  \|B_2+P_{2,\le X}+D_{2,\le X}\|_{L^2(W_{\mathrm{branch}})}^2
+  \ge
+  Q^{-A}
+  \|B_2+P_{2,\le X}+D_{2,\le X}\|_{L^2(W_{\mathrm{ref}})}^2.
+\]
+For the prime--dual component this is controlled by the fold
+\[
+  x\longmapsto 1-x.
+\]
+The only serious fold-degeneracy region is the central square-root tube
+\[
+  \Omega_{\mathrm{cen}}(\delta)
+  :=
+  \left\{x:\left|x-\frac12\right|<\delta\right\},
+  \qquad
+  \delta=R^{-C}.
+\]
+On the complement
+\[
+  \Omega_{\mathrm{out}}(\delta)
+  :=
+  \left\{x:\left|x-\frac12\right|\ge\delta\right\},
+\]
+the ratios
+\[
+  \frac{x^2}{(1-x)^2},
+  \qquad
+  \frac{(1-x)^2}{x^2}
+\]
+are \(R^{-C}\)-transverse.  Thus finite AFE anti-lock outside
+\(\Omega_{\mathrm{cen}}\) reduces to a bounded-degree fold-transversality
+estimate.
+
+The central tube is not an exception to be discarded.  It is a rescaled branch.
+Writing
+\[
+  x=\frac12+\delta y,\qquad |y|\le1,
+\]
+the graph obstruction for
+\[
+  f(x):=\frac1{m_{\can}(x)}
+\]
+becomes
+\[
+  \operatorname{dist}
+  \left(
+    f\!\left(\frac12+\delta y\right),
+    \mathbf C_R[y]
+  \right).
+\]
+For the model multiplier \(m_{\can}(x)=\kappa x^2\),
+\[
+  \frac1{m_{\can}(\frac12+\delta y)}
+  =
+  \frac4\kappa(1+2\delta y)^{-2},
+\]
+and the degree-\(R\) tail is of size
+\[
+  \asymp_R \delta^{R+1}.
+\]
+Thus choosing \(\delta=R^{-C}\) retains only polynomial loss:
+\[
+  \delta^R=R^{-CR}=Q^{-O(1)}.
+\]
+The same central-tube routing is used both for
+\(\mathrm{Agg}L^2(q''_{\can})\) and for the graph/O2/O3 branch-survival audit.
+\end{remark}
+
+\begin{remark}[Degree-one fold anti-lock as the model for determinant branch survival]
+\label{rem:degree-one-fold-antilock-models-determinant-survival}
+The \(L^2\)-Gate--1 anti-lock theorem is the degree-one model for the
+finite/O2/O3 determinant branch-survival theorem.  At degree one, the relevant
+branches are
+\[
+  B_2,\qquad P_{2,\le X},\qquad D_{2,\le X}.
+\]
+At determinant degree \(n=R+2\), the full determinant decomposes into bounded
+branch-charge sectors
+\[
+  D_{\mathrm{full}}=\sum_r D_r.
+\]
+After dyadic freezing of smooth denominators and the Stack-C2 weight, only
+finitely many near-pure sectors can interact with the pure plus sector:
+\[
+  D_{-n},\quad D_{-n+1},\ldots,D_{-n+d_0},
+  \qquad d_0=O(1).
+\]
+Thus fixed-\(\alpha\) determinant survival may be formulated as a finite Schur
+complement
+\[
+  D_{-n}\notin
+  \operatorname{span}\{D_{-n+1},\ldots,D_{-n+d_0}\},
+\]
+rather than as an uncontrolled \(O(R)\)-branch forest.  This is the determinant
+analogue of prime--dual fold anti-lock.
 \end{remark}
 
 \begin{remark}[Failure modes for \(\mathrm{Agg}L^2(q''_{\can})\)]
@@ -46727,6 +46997,105 @@ This is an actual-orbit nonrecurrence input.  It is not implied by local cell
 geometry, diagonal mass, or phase-relaxed coefficient magnitudes.
 \end{definition}
 
+\begin{definition}[O1b finite-frame folded audit]
+\label{def:O1b-finite-frame-folded-audit}
+In the historical ordinary finite-row route, write the main and folded-dual
+cell amplitudes as
+\[
+  a_r=B_r^+(m_0,\alpha),
+  \qquad
+  b_r=B_r^-(m_0,\alpha),
+  \qquad
+  e=e^{i\Theta_Z(m_0,\alpha)}.
+\]
+Let
+\[
+  c=(a_1,\ldots,a_M,eb_1,\ldots,eb_M)\in\mathbf C^{2M}.
+\]
+Let
+\[
+  \tau_1,\ldots,\tau_{2M}
+  =
+  \sigma_1^+,\ldots,\sigma_M^+,\sigma_1^-,\ldots,\sigma_M^-
+\]
+be the plus and folded-dual branch-symbol nodes.  The \(O1b\) finite-frame
+audit is the assertion that
+\[
+  \sum_{\ell=0}^{R+1}
+  \left|
+    \sum_{j=1}^{2M}p_\ell(\tau_j)c_j
+  \right|^2
+  \ge
+  Q^{-A}\sum_{j=1}^{2M}|c_j|^2 .
+\]
+At an admissible zero \(Z_\alpha(m_0)=0\), the value row may vanish, but the
+derivative rows still carry the folded branch mass if this finite-frame audit
+and the cell-symbol bridge hold.
+\end{definition}
+
+\begin{lemma}[Coarse paired cells discharge finite-row \(O1b\)]
+\label{lem:O1b-coarse-paired-cells-discharge}
+Assume
+\[
+  2M\le R+2.
+\]
+Assume also that the branch-symbol nodes are polynomially separated, that the
+row polynomials \(p_0,\ldots,p_{R+1}\) are polynomially equivalent on the two
+branch-symbol intervals to a stable polynomial basis, and that the cell-symbol
+bridge is valid.  Then
+\[
+  \sum_{\ell=0}^{R+1}
+  \left|
+    \sum_{r=1}^{M}
+    \left(
+      p_\ell(\sigma_r^+)B_r^+
+      +
+      p_\ell(\sigma_r^-)e^{i\Theta_Z}B_r^-
+    \right)
+  \right|^2
+  \ge
+  Q^{-A}
+  \sum_{r=1}^{M}\left(|B_r^+|^2+|B_r^-|^2\right).
+\]
+Thus folded value anti-lock is not an independent arithmetic obstruction in
+the coarse-cell finite-row setting.
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+Since \(2M\le R+2\), the row space contains enough polynomial degrees to
+interpolate arbitrary data on the \(2M\) branch nodes.  The interpolation
+loss is at most
+\[
+  \exp(O(M\log M)).
+\]
+For
+\[
+  M\asymp R\asymp \frac{\log Q}{\log\log Q},
+\]
+this is \(Q^{O(1)}\).  Hence the evaluation matrix
+\[
+  V_{\ell j}=p_\ell(\tau_j)
+\]
+has polynomial lower singular value.  The cell-symbol bridge transfers this
+model finite-frame estimate to the actual canonical cell sums.
+\end{proof}
+
+\begin{remark}[Cell-symbol bridge for \(O1b\)]
+\label{rem:O1b-cell-symbol-bridge}
+The deterministic \(O1b\) finite-frame lemma applies to symbol-compatible cell
+amplitudes.  For hard cells, the derivative row contains
+\[
+  \sum_{n\in I_r^\pm}p_\ell(\sigma_n^\pm)A_n^\pm,
+\]
+not automatically
+\[
+  p_\ell(\sigma_r^\pm)\sum_{n\in I_r^\pm}A_n^\pm.
+\]
+At depth \(\ell\sim R\), symbol variation over cells of width \(1/R\) is not
+automatically perturbative.  Therefore one must either use cell-dual polynomial
+observables or prove a depth-\(R\) hard-cell oscillation lemma.
+\end{remark}
+
 \begin{definition}[O2: cofactor-vector nonrecurrence]
 \label{def:O2-cofactor-vector-nonrecurrence}
 Let \(\mathbf M(m_0,\alpha)\) be the cofactor/Hodge-dual vector of the canonical
@@ -46773,6 +47142,15 @@ zero-conditioned actual-orbit nonrecurrence inputs.  In particular:
 \[
   \text{O1 same-branch mass}\not\Rightarrow\text{folded nonalignment},
 \]
+However, the folded subproblem \(O1b\) is finite-frame rather than
+fundamentally arithmetic once the paired-cell count is chosen with
+\[
+  2M\le R+2
+\]
+and the cell-symbol bridge of Remark~\ref{rem:O1b-cell-symbol-bridge} is
+available.  This does not repair the main ordinary Gate--1 dimension problem:
+the remaining decisive ordinary obstruction is still the actual-orbit
+\(O1a/O2/O3\) package for the full canonical source.
 \[
   \text{exterior coefficient mass}\not\Rightarrow\text{O2},
 \]
@@ -46851,6 +47229,44 @@ in the \(R^C\)-conditioned Riesz norm.  In the favorable model
 \]
 this is an analytic divided-difference/Riesz problem for \(1/m_{\can,+}\).
 \end{definition}
+
+\begin{remark}[Graph/O2/O3 route and near-pure Schur block]
+\label{rem:graph-o2o3-near-pure-schur-block}
+In the \(R^C\)-normalized analytic basis, the pure branch graph model is
+\[
+  \mathbf C\cdot1+m_{\can}\mathbf C_R[x]
+  =
+  m_{\can}
+  \left(
+    \mathbf C\cdot(1/m_{\can})+\mathbf C_R[x]
+  \right).
+\]
+Thus pure-branch O2/O3 reduces to non-polynomiality of \(1/m_{\can}\) in the
+finite Riesz norm:
+\[
+  \operatorname{dist}_{\mathcal R_R}
+  \left(1/m_{\can},\mathbf C_R[x]\right)\ge Q^{-A}.
+\]
+The full determinant problem is not solved by the pure branch alone.  Under a
+bounded branch-charge Stack weight, one must also prove survival of the pure
+branch inside the full determinant.  Equivalently, after branch-charge
+decomposition,
+\[
+  D_{\mathrm{full}}
+  =
+  \sum_{r=0}^{n}D_{-n+r},
+  \qquad n=R+2,
+\]
+one needs the finite near-pure Schur complement
+\[
+  D_{-n}
+  \notin_{Q^{-A}}
+  \operatorname{span}\{D_{-n+1},\ldots,D_{-n+d_0}\},
+\]
+where \(d_0\) is the bounded branch-charge degree of the smooth Stack weight.
+This statement should be proved before capped extraction; hard extraction
+destroys the branch-charge/Fourier structure needed for determinant survival.
+\end{remark}
 
 \begin{definition}[Harmonic exterior O2/O3 quantity]
 \label{def:finite-o2o3-harmonic-exterior}
@@ -46957,6 +47373,96 @@ A lower bound for \(D_{\mathrm{dom}}\) alone is a projected branch certificate a
 not prove scalar O2/O3 for the canonical source.
 \end{definition}
 
+\begin{remark}[Cauchy--Binet determinant coefficient and divided differences]
+\label{rem:cauchy-binet-divided-difference-o2o3}
+For a single branch with frequencies \(x_n=\lambda\log n\), write the augmented
+columns as
+\[
+  h_0(x)=1,\qquad h_{j+1}(x)=m_{\can}(x)x^j,\quad 0\le j\le R.
+\]
+If
+\[
+  A_m=(L_m(h_jx^k))_{0\le k,j\le R+1},
+\]
+then Cauchy--Binet gives
+\[
+  \det A_m
+  =
+  \sum_{\substack{S\\ |S|=R+2}}
+  C_S e^{-im\log N_S},
+  \qquad
+  N_S:=\prod_{n\in S}n.
+\]
+For a pure branch one has
+\[
+  C_S
+  =
+  \left(\prod_{n\in S}a_n\right)
+  (\det V_S)^2
+  \left(\prod_{n\in S}m_{\can}(x_n)\right)
+  [x_n:n\in S]\left(\frac1{m_{\can}}\right),
+\]
+where \(V_S\) is the Vandermonde matrix of the nodes \(x_n\).  Thus the
+analytic O3 content of the exterior determinant is the divided difference
+\[
+  [x_n:n\in S]\left(\frac1{m_{\can}}\right).
+\]
+
+In the favorable branch-normalized elliptic model
+\[
+  m_{\can,+}(x)=\kappa x^2(1+\varepsilon(x)),
+\]
+one compares \(1/m_{\can,+}\) to \((\kappa x^2)^{-1}\).  Since
+\[
+  \left(x^{-2}\right)^{(R+1)}
+  =
+  (-1)^{R+1}(R+2)!x^{-R-3},
+\]
+the model divided differences have fixed phase and non-small mass on \(x>0\).
+Therefore the analytic multiplier obstruction reduces to the finite audit that
+\[
+  \left(
+  \frac1{m_{\can,+}}
+  -
+  \frac1{\kappa x^2}
+  \right)^{(R+1)}
+\]
+is perturbative relative to
+\[
+  \left(\frac1{\kappa x^2}\right)^{(R+1)}
+\]
+on the chosen branch-routed subpacket.
+\end{remark}
+
+\begin{remark}[Collision and branch-survival guardrail for determinant methods]
+\label{rem:collision-branch-survival-determinant-methods}
+A pure-branch determinant lower bound is not, by itself, a scalar finite/O2/O3
+theorem for the full canonical matrix.  The determinant expansion has product
+frequencies
+\[
+  \log N_S=\sum_{n\in S}\log n,
+\]
+with \(|S|=R+2\), and therefore effective length \(e^{O(RQ)}\).  Exact and
+near multiplicative collisions can occur among the products \(N_S\).  Moreover,
+the full determinant also contains pure dual, mixed, background, and completion
+exterior terms.
+
+Thus any determinant route must prove both:
+\[
+  \boxed{\text{collision/near-collision noncancellation for the relevant
+  exterior coefficients}}
+\]
+and
+\[
+  \boxed{\text{survival of the branch determinant inside the full scalar
+  canonical determinant}.}
+\]
+Prime-labelled or otherwise collision-safe subpackets are useful only as
+witnesses inside a sector-compatible component of the full determinant.  A
+projected prime determinant alone certifies a projected map, not the scalar
+canonical augmented matrix.
+\end{remark}
+
 \begin{lemma}[Riesz-normalized determinant controls \(\mathcal H_{23}\)]
 \label{lem:riesz-normalized-determinant-controls-H23}
 Let \(A\) be an \(n\times n\) matrix with \(n=R+2\), written in an
@@ -47015,6 +47521,198 @@ effective type \(QR\) while the zero density is only \(Q\);
 \end{enumerate}
 The actual remaining theorem is weighted exterior-pivot anti-trough for the
 full finite canonical matrix, not merely for a pure branch determinant.
+\end{remark}
+
+\begin{definition}[\(\alpha\)-admissibility for determinant survival]
+\label{def:alpha-admissibility}
+An \(\alpha\)-twisted determinant survival argument is admissible only if the
+following package holds.
+
+\begin{enumerate}
+\item \textbf{Zero persistence.}
+Every fixed-target bad zero \(Z_0(m_0)=0\) in the regular stratum extends to a
+zero curve
+\[
+  Z_\alpha(m(\alpha))=0
+\]
+on an interval \(I_\alpha\) of polynomial length.  Quantitatively,
+\[
+  |\partial_mZ_\alpha(m(\alpha))|\ge Q^{-C},
+  \qquad
+  \frac{dm}{d\alpha}
+  =
+  -\frac{\partial_\alpha Z_\alpha}{\partial_m Z_\alpha}.
+\]
+
+\item \textbf{Badness persistence.}
+The Stack quantities
+\[
+  E_1,\qquad E_{23},\qquad E_{\mathrm{wall}}^{\mathrm{forb}},\qquad
+  D_{\mathrm{full}},\qquad D_{\mathrm{dom}},\qquad N
+\]
+have polynomial log-Lipschitz variation along the zero curve, away from capped
+sublevel boundaries.
+
+\item \textbf{Twist nondegeneracy.}
+If
+\[
+  D_{\mathrm{full}}(m,\alpha)
+  =
+  \sum_{r=0}^{R+2}e^{ir\Theta(m,\alpha)}D_r(m,\alpha),
+\]
+then along the zero curve
+\[
+  \boxed{
+  \left|
+  \frac{d}{d\alpha}\Theta(m(\alpha),\alpha)
+  \right|
+  =
+  \left|
+  \partial_\alpha\Theta
+  -
+  \partial_m\Theta
+  \frac{\partial_\alpha Z_\alpha}{\partial_m Z_\alpha}
+  \right|
+  \ge Q^{1-C}.
+  }
+\]
+
+\item \textbf{Stack uniformity.}
+Gate--2, O2/O3, D4, and the forbidden functional \(\Lambda\) are defined with
+uniform polynomial constants on the \(\alpha\)-tube.
+\end{enumerate}
+
+Without these four properties, \(\alpha\)-averaging is heuristic and cannot be
+used to prove the fixed \(\alpha=0\) target.
+\end{definition}
+
+\begin{remark}[Regular-zero branch and near-multiple branch]
+\label{rem:alpha-regular-versus-near-multiple-branch}
+The \(\alpha\)-twist route applies only on the regular zero stratum
+\[
+  |\partial_mZ_\alpha|\ge Q^{-C}.
+\]
+The complementary branch
+\[
+  |\partial_mZ_\alpha|<Q^{-C}
+\]
+must not be ignored.  It should be routed to a separate near-multiple-zero
+module.  Such zeros may already seed Gate--1, since
+\[
+  Z_\alpha(m)\approx0,\qquad
+  \partial_mZ_\alpha(m)\approx0
+\]
+forces local curvature unless the canonical source is flat to higher order.
+The required auxiliary theorem is
+\[
+  \boxed{
+  \mathrm{NearMultipleGate1}:
+  \quad
+  |Z_\alpha|+|\partial_mZ_\alpha|\le Q^{-A}
+  \Longrightarrow
+  \int_I |\lambda^3q''_{\can}(m+\lambda x)|^2\,dx\ge Q^{-A'}.
+  }
+\]
+If this theorem fails, near-multiple zeros require a separate singular/flatness
+branch.
+\end{remark}
+
+\begin{definition}[\(\alpha\)-D4 compatibility]
+\label{def:alpha-d4-compatibility}
+Let \(\mathcal K_9\) be the covariant order-nine singular coherence residual,
+with residual codomain \(\mathcal Y_9\).  Let
+\[
+  \mathcal T_{\mathrm{par}}^{(\alpha)}
+  :=
+  \operatorname{span}\{D_p\mathcal K_9(\partial_{p_a})\},
+\]
+where \(p_a\) ranges over the allowed actual-source parameters, including
+\(\alpha\) if \(\alpha\) is admitted.  Let \(\mathcal T_7\) and
+\(\mathcal T_{<7}\) be the order-seven and lower-order connection residual
+subspaces.  Define
+\[
+  \boxed{
+  \mathcal Q_9^{\mathrm{forb},\alpha}
+  :=
+  \mathcal Y_9/
+  \bigl(
+  \mathcal T_{\mathrm{par}}^{(\alpha)}
+  +
+  \mathcal T_7
+  +
+  \mathcal T_{<7}
+  \bigr).
+  }
+\]
+The \(\alpha\)-twist is compatible with the \(Y12\) D4 channel if
+\[
+  \boxed{
+  [\mathsf C_{Y12}]\ne0
+  \quad\text{in}\quad
+  \mathcal Q_9^{\mathrm{forb},\alpha}.
+  }
+\]
+Equivalently,
+\[
+  T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}]
+  \notin
+  \mathcal T_{\mathrm{par}}^{(\alpha)}+\mathcal T_7+\mathcal T_{<7}.
+\]
+\end{definition}
+
+\begin{remark}[\(\alpha\) can help O2/O3 while hurting D4]
+\label{rem:alpha-o2o3-d4-tradeoff}
+The \(\alpha\)-twist is a possible determinant-survival tool because it may
+orthogonalize folded-dual branch counts.  However, if \(\alpha\) is admitted as
+an actual-source parameter, the actual singular tangent space expands by
+\(\partial_\alpha u\).  The D4 contradiction survives this enlargement only if
+\[
+  [\mathsf C_{Y12}]\ne0
+  \quad\text{in}\quad
+  \mathcal Q_9^{\mathrm{forb},\alpha}.
+\]
+Thus the proof-critical admissibility package is
+\[
+  \boxed{
+  \mathrm{AlphaAdmissibility}^{+}
+  :=
+  \mathrm{AlphaAdmissibility}
+  +
+  \mathrm{AlphaD4Compatibility}.
+  }
+\]
+If \(\alpha\)-admission kills \([\mathsf C_{Y12}]\), then \(\alpha\) may still
+serve as an auxiliary averaging parameter, but it must not be added to the
+downstream actual-source manifold without a replacement forbidden channel.
+\end{remark}
+
+\begin{remark}[Two basis layers: analytic Riesz versus carrier projection]
+\label{rem:two-basis-layers-o2o3-lambda}
+The analytic basis used for finite/O2/O3 and the carrier projection used for
+\(\Lambda\) have different purposes and should not be identified.
+
+The finite/O2/O3 basis should be an \(R^C\)-conditioned analytic Riesz basis in
+which the augmented matrix satisfies
+\[
+  \|A_{\le X,m}\|\le R^C.
+\]
+This is what makes
+\[
+  \mathcal H_{23}(A_{\le X,m})
+  \ge Q^{-C}|\det A_{\le X,m}|^2
+\]
+a polynomial-loss implication.
+
+The forbidden-channel projection \(P_{\mathrm{sing}}\), in contrast, should
+encode actual EF-coherent singular source retention.  It must be non-functorial
+on at least one formal D4 carrier:
+\[
+  (I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_7]\ne0
+  \quad\text{or}\quad
+  (I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}]\ne0.
+\]
+Using one fully functorial basis for both jobs risks making O2/O3 well
+conditioned while killing the forbidden D4 channel.
 \end{remark}
 
 \subsection{Singular and transition proof tools after scalar \(L^2\) Gate--1}
@@ -47391,15 +48089,14 @@ The current downstream forbidden-channel candidate is
   \Lambda_{\mathrm{tr},\mathrm{sing},p}
   =
   (I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}P_{\mathrm{tr},p}.
-  }
+}
 \]
-It closes the downstream contradiction only if both:
+It closes the downstream contradiction only if all three conditions hold:
 \[
   \sum_p
   \|\Lambda_{\mathrm{tr},\mathrm{sing},p}J_{\mathrm{tr},p}(q''_{\can})\|^2
-  \le Q^{-B}\mu(\mathcal C)
+  \le Q^{-B}\mu(\mathcal C),
 \]
-and
 \[
   \operatorname{rank}
   \left(
@@ -47408,17 +48105,26 @@ and
   \right)
   \ge1
 \]
-hold on a polynomial-weight set.
+on a polynomial-weight set, and the corresponding forbidden-channel mobility
+is positive atomic or localizable, so that local D4 energy cannot cancel
+against the complement.
 
 The unresolved inputs are therefore:
 \begin{enumerate}
 \item aggregate \(L^2\)-observability for \(q''_{\can}\);
-\item finite/O2O3 exterior-pivot anti-trough for the full canonical matrix;
-\item construction of \(R_{\mathrm{sing}}\) and proof of the singular-discard upper;
+\item finite/O2/O3 exterior-pivot anti-trough for the full canonical matrix;
+\item full-canonical survival of any pure-branch or sectorial determinant
+witness inside the scalar canonical determinant;
+\item construction of \(R_{\mathrm{sing}}\) as an actual-source EF-coherent
+singular space, not a Taylor-complete carrier space;
+\item the singular-discard upper for actual rows;
 \item D4 transversality to the discarded singular channel.
+\item \(\mathrm{EFCompletion}_{K9}\), distinct from \(\mathrm{EFCompletion}_{L^2}\);
+\item tubular normality of the singular actual-source manifold;
+\item forbidden-channel mobility for the selected \(\Lambda\).
 \end{enumerate}
-If the last two fail, finite D4 remains local visibility only and does not
-close the proof.
+If the last six fail, finite D4 remains local visibility only and does not close
+the proof.
 \end{remark}
 
 \begin{remark}[Active input status table]
@@ -47434,21 +48140,40 @@ The active inputs are now as follows.
 \mathrm{EFCompletion}_{L^2}
 & \text{finite-audit}
 & \text{localized }R_X\text{ bounds in }W_{\mathrm{branch}},W_{\mathrm{ref}}\\
+\mathrm{EFCompletion}_{K9}
+& \text{finite-audit/open}
+& \text{residual small after }T_{\mathrm{tr}\to\mathrm{sing}}\text{ and }\Lambda_{\mathrm{tr},\mathrm{sing}}\\
 \mathrm{Finite/O2O3}_{23}
 & \text{open}
-& \text{weighted exterior-pivot anti-trough}\\
+& \text{weighted exterior-pivot anti-trough for the full matrix}\\
+\mathrm{FullDetSurvival}
+& \text{open}
+& \text{branch-count cancellation under Stack weight}\\
 \mathrm{RieszNorm}_{23}
 & \text{finite-audit}
 & \|A_{\le X,m}\|_{\operatorname{op}}\le R^C\\
+\mathrm{AlphaAdmissibility}^{+}
+& \text{conditional route}
+& \text{zero persistence, twist speed, Stack uniformity, D4 compatibility}\\
 \mathrm{ForbiddenSingularDiscardD4}
 & \text{open}
 & \text{definition of }R_{\mathrm{sing}}\text{ and D4 transversality}\\
+\mathcal K_9\text{-SingularResidual}
+& \text{finite-audit}
+& \mathcal K_9(T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}])\neq0
+  \text{ and singular residual upper}\\
+\mathrm{TubularNormality}_{\mathrm{sing}}
+& \text{finite-audit}
+& \text{polynomial second fundamental form of }\mathcal M_{\mathrm{sing}}^{\mathrm{arith}}\\
 \mathrm{SingularDiscardUpper}
 & \text{finite-audit/open}
 & \text{EF-coherent singular residual bound}\\
 \mathrm{D4PlainWall}
 & \text{conditional}
 & \text{coefficient-good plain wall only}\\
+\mathrm{NearMultipleGate1}
+& \text{open branch}
+& \text{derivative-small zeros versus higher-order flatness}\\
 \mathrm{O1/O2/O3}
 & \text{historical alternate route}
 & \text{zero-conditioned actual-orbit nonrecurrence}
@@ -47521,13 +48246,14 @@ Yellow/Orange/Red evidence.  In the recorded \(K=8\) run, \(794\) rows gave
 \text{Red}=0.
 \]
 
-They do not prove O1, because O1 is a theorem about the actual one-parameter
-prime-log object and its canonical transfer.  They justify continuing the O1
-proof route rather than triggering a stop rule.
-They should not be cited as evidence for any theorem requiring uniform
-polynomial lower bounds over all admissible heights.
-Accordingly, no later theorem may invoke these computations as a hypothesis or
-as a proof substitute for O1; they are only adversarial model checks.
+They do not prove O1, and O1 is no longer the active Gate--1 definition in the
+current architecture.  The active Gate--1 object is local scalar \(L^2\)-energy
+of \(q''_{\can}\), as in
+Hypothesis~\ref{hyp:agg-l2-qcan-gate-one}.  The computations above should be
+kept only as historical adversarial diagnostics for the old ordinary
+finite-row route.  They should not be cited as evidence for
+\(\mathrm{Agg}L^2(q''_{\can})\), finite/O2/O3, \(Y12\)-normal D4, or any
+uniform polynomial theorem over admissible heights.
 \end{remark}
 
 \begin{remark}[Zero-side Gate--1 proxy and watch-rerun evidence]
