@@ -35074,6 +35074,92 @@ Hence the corrected rank-one ratio is
 The older formula using raw \(\beta_9\) is valid only when \(\kappa=0\).
 \end{remark}
 
+\begin{theorem}[Two-row exact sequence for the \(2Y\) live fiber]
+\label{thm:two-row-exact-sequence-2Y}
+Let the septic row be the covariant quotient row
+\[
+  \ell_7=\frac{\Delta_7^\nabla}{\Delta_7^\nabla(C_7)}.
+\]
+Let the primitive \(Y12\)-whitening row be a covector
+\[
+  \omega_Y:W\to\mathbf C
+\]
+such that
+\[
+  \omega_Y(a_Y)=1,
+  \qquad
+  W_{\mathrm{dead}}^{\mathrm{fixed}}\subseteq\ker\omega_Y.
+\]
+Set
+\[
+  \kappa:=\omega_Y(e_7),
+  \qquad
+  \ell_9^Y:=\omega_Y-\kappa\ell_7,
+  \qquad
+  \beta_9^{\mathrm{tri}}:=\beta_9-\kappa c_7.
+\]
+Assume the septic exact-sequence conditions
+\[
+  \mathcal A_7^{\loc}\subseteq\ker\Delta_7^\nabla,
+  \qquad
+  \Delta_7^\nabla(C_7)\ne0,
+  \tag{R7}
+\]
+and the primitive \(Y12\)-whitening conditions
+\[
+  P_W\mathcal A_Y^{\loc}\subseteq W_{\mathrm{dead}}^{\mathrm{fixed}},
+  \qquad
+  a_Y\notin W_{\mathrm{dead}}^{\mathrm{fixed}}
+  \quad\text{with polynomial separation}.
+  \tag{RY}
+\]
+Assume also the grade-separation condition
+\[
+  \ell_7(e_Y)=0
+  \tag{G}
+\]
+and the polynomial row bound
+\[
+  |\omega_Y(e_7)|\le Q^A .
+\]
+Then \((\ell_7,\ell_9^Y)\) is a polynomially bounded live row pair satisfying
+\[
+  (\ell_7,\ell_9^Y)(e_7)=(1,0),
+  \qquad
+  (\ell_7,\ell_9^Y)(e_Y)=(0,1).
+\]
+Moreover, if
+\[
+  \ell_7(A_{2Y})=0,
+  \qquad
+  \omega_Y(A_{2Y})=0,
+\]
+then
+\[
+  \ell_7(A_{2Y})=0,
+  \qquad
+  \ell_9^Y(A_{2Y})=0.
+\]
+Thus the \(2Y\)-local image is zero in the row-normalized live fiber:
+\[
+  B_Y=0.
+\]
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The septic exact sequence gives a bounded row \(\ell_7\) detecting \(C_7\)
+and killing all admissible \(s_7\)-dead columns.  The whitening exact sequence
+gives a bounded primitive row \(\omega_Y\) detecting \(a_Y\) and killing the
+fixed-\(\alpha\) actual \(Y12\)-slot image.  Triangularization removes the
+allowed leakage \(\omega_Y(e_7)=\kappa\) by setting
+\[
+  \ell_9^Y=\omega_Y-\kappa\ell_7.
+\]
+The condition \(\ell_7(e_Y)=0\) is the non-negotiable grade-separation condition:
+the primitive order-nine \(Y12\)-carrier has no covariant order-seven septic
+shadow.  The row-normalized conclusions follow immediately.
+\end{proof}
+
 \begin{theorem}[Rank-two closure spine]
 \label{thm:rank-two-closure-spine}
 Assume
@@ -35114,6 +35200,83 @@ On coefficient-good cores this is polynomially equivalent to
 No derivative wall components \(D\Gamma_G\) or \(D^2\Gamma_G\) are supplied by
 this rank-two D4 statement.
 \end{theorem}
+
+\begin{remark}[Three normal forms for the rank-two branch]
+\label{rem:rank-two-three-normal-forms}
+The rank-two branch is organized by three normal forms.
+
+First, the local live fiber is always put in row normal form:
+\[
+  \kappa=\omega_Y(e_7),
+  \qquad
+  \ell_9^Y=\omega_Y-\kappa\ell_7,
+  \qquad
+  \beta_9^{\mathrm{tri}}=\beta_9-\kappa c_7.
+\]
+All branch classifications are made in the triangularized basis
+\[
+  (\ell_7,\ell_9^Y),
+\]
+not in the raw row pair \((\ell_7,\omega_Y)\).
+
+Second, the analytic wall is put in the source-curvature variable
+\[
+  p=q'',
+\]
+so that, up to fixed nonzero normalization constants,
+\[
+  \Gamma_G=-6p+36q-12q^3,
+  \qquad
+  \Gamma_{G,2}=p''-6p+6q^2p.
+\]
+Thus the finite wall spaces are built from a finite source space
+\(\mathcal P_I\) for \(p\), together with the affine reconstruction
+\[
+  \mathcal V_I=\mathcal A_1+\mathcal I^2\mathcal P_I.
+\]
+
+Third, weighted transfer is made through predetermined coefficient/smooth-good
+cores
+\[
+  E_I^{\core}\subset I,
+  \qquad
+  |E_I^{\core}|\ge R^{-C}|I|,
+\]
+chosen before wall extraction and independent of
+\[
+  \Gamma_G,\quad \Gamma_{G,2},\quad W_2,
+  \qquad
+  W_2:=|\Gamma_G|^2+|\Gamma_{G,2}|^2.
+\]
+This prevents post-hoc wall-dependent selection.
+\end{remark}
+
+\begin{remark}[Admissibility before quotient, projection, and selection]
+\label{rem:rank-two-admissibility-before-projection}
+The rank-two branch uses an admissibility-first convention at every layer.
+
+A direction may enter the exact local denominator only after it has been proved
+row-dead and live-pair preserving.  A finite coherent direction is routed to
+\(\mathcal C_{2Y}^{\mathrm{arith}}\), and a small direction is routed to \(R_X^{2Y}\);
+neither is silently quotiented as exact nuisance.
+
+Similarly, finite-atlas Riesz estimates are applied only after wall-variable
+completion has produced finite representatives
+\[
+  G_X\in\mathcal W_G,
+  \qquad
+  G_{2,X}\in\mathcal W_{G2}
+\]
+with
+\[
+  \|\Gamma_G-G_X\|_{H^2_{\mathrm{sc}}(I)}
+  +
+  \|\Gamma_{G,2}-G_{2,X}\|_{L^2(I)}
+  \le Q^{-B}.
+\]
+Finally, core sets \(E_I^{\core}\) for weighted transfer must be chosen from
+coefficient, smooth, and chart data before observing the wall \(W_2\).
+\end{remark}
 
 \begin{definition}[Covariant septic row]
 \label{def:rank-two-covariant-septic-row}
@@ -35224,6 +35387,218 @@ Formal \(C_7\)-carriers and formal \(C_7\to Y12\) connections do not enter
 fitting tangent.
 \end{remark}
 
+\begin{definition}[Actual lower parameter package map]
+\label{def:actual-lower-package-map}
+Let \(\Theta_{\mathrm{lower}}^{\mathrm{arith}}\) denote the actual lower-source parameter space.
+It contains only actual EF/gamma/chart/tail lower deformations, actual
+normalization or representative lower freedoms, and genuine exact nuisance
+lower directions.  It excludes formal D4 carrier variables, formal \(C_7\)
+labels, formal \(C_7\to Y12\) connections without actual tangent, proof
+thickening parameters, and free corrected-package coordinates not present in
+the actual source.
+
+Define the lower package map
+\[
+  \mathfrak d_{7,\mathrm{lower}}
+  :=
+  \Delta_7^\nabla Q_7^{\mathrm{pkg},\nabla}D\mathcal S_{\mathrm{lower}}
+  :
+  \Theta_{\mathrm{lower}}^{\mathrm{arith}}\to\mathbf C.
+\]
+\end{definition}
+
+\begin{lemma}[Actual lower no-package-coordinate audit]
+\label{lem:actual-lower-no-package-coordinate}
+The actual lower contribution to the \(s_7\)-row is zero if and only if
+\[
+  \mathfrak d_{7,\mathrm{lower}}=0.
+\]
+Equivalently, the actual lower parameter space has no corrected septic
+package-coordinate summand:
+\[
+  \Theta_{\mathrm{pkg},7}=0.
+\]
+A formal \(C_7\)-carrier or formal \(C_7\to Y12\) connection contributes to
+\(B_Y\) only after actualization by a genuine actual-source, exact nuisance, or
+atom-local tangent with nonzero \(\Delta_7^\nabla\).
+\end{lemma}
+
+\begin{remark}[Failure routing for actual lower package leakage]
+\label{rem:actual-lower-package-leakage-routing}
+If \(u_{\mathrm{lower}}\in T_{\mathrm{lower}}^{\mathrm{arith}}\) satisfies
+\[
+  \Delta_7^\nabla(u_{\mathrm{lower}})\ne0,
+\]
+then compute its triangularized live-fiber vector
+\[
+  (\ell_7(u_{\mathrm{lower}}),\ell_9^Y(u_{\mathrm{lower}})).
+\]
+If all such nonzero vectors span a graph line \(\mathbf C(1,\rho_Y)\), the
+rank-one moving-wall fallback remains available.  If a vertical vector
+\(\mathbf C(0,1)\), a second slope, or a full rank-two image appears, the
+current \(Y12\) route dies locally or requires a different carrier.
+\end{remark}
+
+\begin{definition}[Whitening quotient for the primitive \(Y12\) row]
+\label{def:whitening-quotient-Y12}
+Let \(W\) be the finite same-point whitening-input space seen by the order-nine
+singular extractor.  Define
+\[
+  W_{\mathrm{dead}}^{\mathrm{fixed}}
+  :=
+  W_{\mathrm{global}}
+  +W_{\mathrm{chart}}
+  +W_{\mathrm{norm}}
+  +W_{\bg}
+  +W_{\mathrm{trans}}
+  +W_{\mathrm{wrong}}.
+\]
+Here \(W_{\mathrm{trans}}\) denotes transported same-point whitening data and
+\(W_{\mathrm{wrong}}\) denotes wrong-origin terms, such as \(DW[DN_0]\),
+\(D^2W[N_0]\), or whitening applied to residual/completion data rather than
+to the primitive \(D^2N_0\)-carrier.  Let
+\[
+  a_Y\in W
+\]
+be the live same-point whitening input in the primitive carrier
+\[
+  DW_{\mathrm{same}}[a_Y]\,D^2N_0[\xi_1,\xi_2]
+\]
+with mixed branch \(12\), same-point incidence, and one whitening slot.
+\end{definition}
+
+\begin{theorem}[Whitening exact sequence for fixed-\(\alpha\) \(Y12\)]
+\label{thm:whitening-exact-sequence-Y12}
+Assume
+\[
+  P_WV_{\mathrm{arith}}^{\mathrm{fixed}}\subseteq W_{\mathrm{dead}}^{\mathrm{fixed}}
+  \tag{W1}
+\]
+and
+\[
+  \operatorname{dist}(a_Y,W_{\mathrm{dead}}^{\mathrm{fixed}})
+  \ge Q^{-A}|a_Y|.
+  \tag{W2}
+\]
+Then there is a polynomially bounded covector
+\[
+  \omega_Y:W\to\mathbf C
+\]
+such that
+\[
+  \omega_Y(a_Y)=1,
+  \qquad
+  \omega_Y(W_{\mathrm{dead}}^{\mathrm{fixed}})=0,
+  \qquad
+  \omega_Y(P_WV_{\mathrm{arith}}^{\mathrm{fixed}})=0.
+\]
+Consequently fixed-\(\alpha\) actual first and second canonical variations do
+not produce a primitive \(Y12\)-row column.
+
+If \(W1\) fails, the fallback audit is the ordered slot cascade:
+\[
+  \text{same-point whitening slot}
+  \longrightarrow
+  \text{source slot }1
+  \longrightarrow
+  \text{source slot }2
+  \longrightarrow
+  \text{coupled bilinear image}.
+\]
+Only failure of the final coupled bilinear image creates an actual \(Y12\)-live
+column.
+\end{theorem}
+
+\begin{remark}[Whitening naturality also controls labelled transition]
+\label{rem:whitening-naturality-controls-labelled-transition}
+The same whitening quotient controls the \(Y12\)-part of the labelled/raw
+transition defect.  Let
+\[
+  \mathfrak W_Y
+  :=
+  DW_{\mathrm{sing},\mathrm{same}}
+  -
+  S_WDW_{\mathrm{tr},\mathrm{same}}S^{-1}.
+\]
+The \(Y12\)-safe labelled-transition condition is
+\[
+  D_{\loc}\,
+  P_{(W_{\mathrm{dead}}^{\mathrm{fixed}})^\perp}
+  \bigl(\mathfrak W_Y[D^2N_0]\bigr)=0.
+\]
+Equivalently, same-point whitening may be transported or vary coherently, but
+it must not be refit atom-by-atom on the primitive carrier.  Fixed coherent
+defects are routed to \(\mathcal C_{2Y}^{\mathrm{arith}}\); residual defects are routed
+to \(R_X^{2Y}\); atom-local live defects enter \(B_Y\).
+\end{remark}
+
+\begin{definition}[Locality filtration for completion and labelled defects]
+\label{def:locality-filtration-2Y}
+For any \(2Y\)-fiber-valued expression \(X\), write
+\[
+  X=X_{\mathrm{fixed}}+X_{\mathrm{coh}}+X_{\mathrm{res}}+X_{\loc}.
+\]
+Only \(X_{\loc}\) contributes to \(B_Y\).  The fixed part is absorbed into
+basepoint/recentering data, the coherent part is routed to
+\(\mathcal C_{2Y}^{\mathrm{arith}}\), and the residual part is routed to \(R_X^{2Y}\).
+\end{definition}
+
+\begin{theorem}[No atom-fitting for \(E_2\) and labelled transition]
+\label{thm:no-atom-fitting-2Y-plus}
+Assume the following three guardrails.
+
+\begin{enumerate}
+\item No local live completion counterterms:
+\[
+  \operatorname{Loc}\Pi_{\mathrm{fib},Y}E_{\mathrm{model}}=0.
+\]
+In particular, no local terms of the forms
+\[
+  \eta_7(p)e_7(p)+\eta_Y(p)e_Y(p),
+  \qquad
+  \eta(p)(e_7(p)+\rho_Ye_Y(p))
+\]
+are admitted.
+
+\item Normal form data are not atom-fitted:
+\[
+D_{\loc}\Pi_{\mathrm{fib},Y}
+\left(
+D^2N_{0,\mathrm{sing}}\circ(L,L)-S D^2N_{0,\mathrm{tr}}
+\right)=0.
+\]
+
+\item Same-point whitening is not atom-fitted:
+\[
+D_{\loc}\Pi_{\mathrm{fib},Y}
+\left[
+\left(
+DW_{\mathrm{sing},\mathrm{same}}-S_WDW_{\mathrm{tr},\mathrm{same}}S^{-1}
+\right)[D^2N_0]
+\right]=0.
+\]
+\end{enumerate}
+
+Then
+\[
+  D_{\loc}\Pi_{\mathrm{fib},Y}(E_2+R_{\mathrm{lab}})=0.
+\]
+Thus \(E_2/R_{\mathrm{lab}}\) affects \(B_Y\) only through atom-local live-fiber
+fitting.  Fixed, coherent, and residual effects do not enter \(B_Y\).
+\end{theorem}
+
+\begin{remark}[Amplitude projection is downstream of \(B_Y=0\)]
+\label{rem:amplitude-projection-after-BY}
+The proof of \(B_Y=0\) must precede any amplitude projection.  A finite coherent
+space \(\mathcal C_{2Y}^{\mathrm{arith}}\) may be introduced only after the local
+live-fiber quotient has been fixed.  In particular, a projected wall
+\[
+  (I-P_{\mathcal C_{2Y}^{\mathrm{arith}}})F_{2Y}
+\]
+must not be used to define \(D_{2Y}\), the live rows, or the rank-two quotient,
+unless the projection is itself proved to have bounded local branch complexity.
+\end{remark}
+
 \begin{definition}[Exact/coherent/residual nuisance split]
 \label{def:rank-two-nuisance-split}
 Split the declared singular nuisance space as
@@ -35244,6 +35619,45 @@ to \(R_X^{2Y}\).  Thus
 \]
 not \(D_{2Y}^{0}+\mathcal N_{\mathrm{sing}}\).
 \end{definition}
+
+\begin{definition}[Admissible exact nuisance]
+\label{def:admissible-exact-nuisance-2Y}
+An exact nuisance generator \(n\in\mathcal N_{\mathrm{exact}}\) is admissible for the
+rank-two quotient only if
+\[
+  \Delta_7^\nabla(n)=0,
+  \qquad
+  \omega_Y(P_Wn)=0.
+\]
+Any declared nuisance generator failing either row test is not exact nuisance.
+It must instead be routed to one of:
+\[
+  \mathcal C_{2Y}^{\mathrm{arith}},
+  \qquad
+  R_X^{2Y},
+  \qquad
+  \text{quotient repair},
+  \qquad
+  \text{local rank failure}.
+\]
+\end{definition}
+
+\begin{remark}[Two-grade nuisance homogeneity]
+\label{rem:two-grade-nuisance-homogeneity}
+The exact nuisance denominator must not identify the two live grades.  In
+particular, one must rule out
+\[
+  e_Y-\lambda e_7\in D_{2Y}^{0}+\mathcal N_{\mathrm{exact}}
+\]
+with polynomially small angle.  Equivalently, exact nuisance should be
+grade-homogeneous,
+\[
+  \mathcal N_{\mathrm{exact}}
+  =
+  \mathcal N_{7,\mathrm{exact}}\oplus\mathcal N_{9,\mathrm{exact}},
+\]
+or at least block-triangular with no live \(7\leftrightarrow9\) relation.
+\end{remark}
 
 \begin{lemma}[Nuisance preservation of the live rows]
 \label{lem:rank-two-nuisance-preserves-rows}
@@ -35292,21 +35706,96 @@ Thus exact nuisance is both row-dead and live-pair preserving.
 
 \begin{corollary}[Nuisance-safe contribution to \(B_Y=0\)]
 \label{cor:rank-two-nuisance-safe-by-rows}
-If the actual-source rows and local completion/transition rows also satisfy
+Assume \(\mathcal N_{\mathrm{sing}}\) has been split as
 \[
-  \ell_7(T\mathcal M_Y^{\mathrm{arith}})=0,
+  \mathcal N_{\mathrm{sing}}
+  =
+  \mathcal N_{\mathrm{exact}}
+  +
+  \mathcal N_{\mathrm{coh}}
+  +
+  \mathcal N_{\mathrm{res}},
+\]
+and that only \(\mathcal N_{\mathrm{exact}}\) enters the exact denominator.  Suppose
+\(\mathcal N_{\mathrm{exact}}\) is row-dead:
+\[
+  \Delta_7^\nabla(\mathcal N_{\mathrm{exact}})=0,
   \qquad
-  \ell_9^Y(T\mathcal M_Y^{\mathrm{arith}})=0,
+  \omega_Y(P_W\mathcal N_{\mathrm{exact}})=0,
+\]
+and preserves the live pair:
+\[
+  e_7\notin D_{2Y}^{0}+\mathcal N_{\mathrm{exact}},
+  \qquad
+  e_Y\notin D_{2Y}^{0}+\mathcal N_{\mathrm{exact}},
 \]
 and
 \[
+  e_Y-\lambda e_7\notin D_{2Y}^{0}+\mathcal N_{\mathrm{exact}}
+  \quad\text{for every }\lambda\in\mathbf C,
+\]
+with polynomial angle.  Then nuisance contributes no local column to the
+row-normal live fiber:
+\[
+  (\ell_7,\ell_9^Y)(\mathcal N_{\mathrm{exact}})=0.
+\]
+The coherent part \(\mathcal N_{\mathrm{coh}}\) is routed to
+\(\mathcal C_{2Y}^{\mathrm{arith}}\), and the residual part \(\mathcal N_{\mathrm{res}}\) is
+routed to \(R_X^{2Y}\).  Neither coherent nor residual nuisance may be placed
+in the exact denominator merely by name.
+\end{corollary}
+
+\begin{theorem}[Row-normal live-fiber avoidance]
+\label{thm:rank-two-row-normal-live-fiber-avoidance}
+Let the live rows be in row-normal form:
+\[
+  \ell_7=\frac{\Delta_7^\nabla}{\Delta_7^\nabla(C_7)},
+  \qquad
+  \ell_9^Y=\omega_Y-\kappa\ell_7,
+  \qquad
+  \kappa=\omega_Y(e_7).
+\]
+Assume
+\[
+  \ell_7(e_7)=1,\qquad \ell_7(e_Y)=0,\qquad
+  \omega_Y(e_Y)=1,\qquad |\omega_Y(e_7)|\le Q^A,
+\]
+and polynomial row bounds.  Assume further that the five row blockers vanish:
+\[
+  \Delta_7^\nabla(D_{\actual}T\mathcal M_Y^{\mathrm{arith}})=0,
+\]
+\[
+  \omega_Y(P_WD_{\actual}T\mathcal M_Y^{\mathrm{arith}})=0,
+\]
+\[
   D_{\loc}(\ell_7,\ell_9^Y)(E_2+R_{\mathrm{lab}})=0,
 \]
-then
+\[
+  \Delta_7^\nabla(\mathcal N_{\mathrm{exact}})=0,
+\]
+and
+\[
+  \omega_Y(P_W\mathcal N_{\mathrm{exact}})=0.
+\]
+Then
 \[
   B_Y=0.
 \]
-\end{corollary}
+Consequently, if the triangularized D4 coefficients are polynomially conditioned,
+D4 gives the plain rank-two wall
+\[
+  F_{2Y}^{\mathrm{tri}}
+  =
+  H
+  \begin{pmatrix}
+    c_7\Gamma_G\\
+    \beta_9^{\mathrm{tri}}\Gamma_G+\alpha_9\Gamma_{G,2}
+  \end{pmatrix}
+  \asymp_{Q^A}
+  H(\Gamma_G,\Gamma_{G,2}).
+\]
+No derivative wall components are produced by this theorem.
+\end{theorem}
 
 \subsection{Order-seven packet visibility on the reduced base}
 \label{subsec:order-seven-packet-visibility-reduced-base}
@@ -37851,6 +38340,46 @@ observability for the full canonical object }q''_{\can}=B_2+P_2+D_2+E_2.}
 \boxed{\text{The remaining row-side input is D4 carrier-quotient row conversion
 with residual control, or a fallback source-robust/global invariant.}}
 \]
+
+The rank-two branch is now organized in three normal forms:
+\[
+\boxed{\text{row-normal local exactness}},
+\qquad
+\boxed{p=q''\text{ wall-variable finite atlas}},
+\qquad
+\boxed{\text{predetermined-core weighted transfer}}.
+\]
+The row-normal form uses
+\[
+  \kappa=\omega_Y(e_7),
+  \qquad
+  \ell_9^Y=\omega_Y-\kappa\ell_7,
+  \qquad
+  \beta_9^{\mathrm{tri}}=\beta_9-\kappa c_7.
+\]
+All branch classifications must be made in this triangularized row basis.
+
+The analytic wall is the honest plain wall
+\[
+  H(\Gamma_G,\Gamma_{G,2}).
+\]
+Derivative wall components \(D\Gamma_G,D^2\Gamma_G\) are not D4/O2/O3 wall
+components unless a separate derivative-D4-channel theorem is proved.  They
+enter only through finite-atlas Markov/Riesz estimates.
+
+The rank-two analytic price is source-curvature completion for
+\[
+  p=q''_{\can}
+\]
+in scale-normalized \(H^2\), including all background and tail terms through
+the two derivatives seen by
+\[
+  \Gamma_{G,2}=p''-6p+6q^2p.
+\]
+In particular, if \(B_2\) is part of \(p\), then \(B_2,DB_2,D^2B_2\) must be
+included exactly or approximated to \(Q^{-B}\)-accuracy in the source-curvature
+completion ledger.
+
 For the final status summary, see
 Remark~\ref{rem:terminal-status-current-architecture}.
 \end{remark}
@@ -38165,6 +38694,73 @@ One-dimensional product estimates yield the stated
 \(H^2_{\mathrm{sc}}\times L^2\) residual bound.
 \end{proof}
 
+\begin{remark}[Wall-variable completion contract]
+\label{rem:rank-two-wall-variable-completion-contract}
+The completion needed for the plain rank-two wall is a wall-variable completion,
+not necessarily a primitive \(H^4(q)\)-completion.  It is enough to produce
+finite wall representatives
+\[
+  G_X\in\mathcal W_G,
+  \qquad
+  G_{2,X}\in\mathcal W_{G2},
+\]
+such that
+\[
+  \|\Gamma_G-G_X\|_{H^2_{\mathrm{sc}}(I)}
+  +
+  \|\Gamma_{G,2}-G_{2,X}\|_{L^2(I)}
+  \le Q^{-B}.
+\]
+The finite-atlas Riesz/Markov estimates are applied to \(G_X,G_{2,X}\), and
+the residual is inserted only after the finite-atlas estimates are made.
+
+A sufficient source-level route is to work with
+\[
+  p=q'',
+\]
+to approximate \(p\) in \(H^2_{\mathrm{sc}}(I^*)\) by \(p_X\in\mathcal P_I\),
+and to reconstruct
+\[
+  q_X\in \mathcal V_I:=\mathcal A_1+\mathcal I^2\mathcal P_I
+\]
+with affine modes included or normalized.  Then, up to fixed harmless
+normalization constants,
+\[
+  \Gamma_G=-6p+36q-12q^3,
+  \qquad
+  \Gamma_{G,2}=p''-6p+6q^2p,
+\]
+and the finite wall spaces are
+\[
+  \mathcal W_G
+  =
+  \mathcal P_I+\mathcal V_I+\operatorname{Sym}^3\mathcal V_I,
+\]
+\[
+  \mathcal W_{G2}
+  =
+  D^2\mathcal P_I+\mathcal P_I+
+  \operatorname{Sym}^2\mathcal V_I\cdot\mathcal P_I.
+\]
+This is the source-curvature price of the rank-two plain-wall route.
+\end{remark}
+
+\begin{remark}[Two-derivative tax for \(B_2\) and background curvature]
+\label{rem:rank-two-b2-two-derivative-tax}
+If the canonical gamma/background curvature term \(B_2\) is included in
+\[
+  p=q'',
+\]
+then the second rank-two wall component
+\[
+  \Gamma_{G,2}=p''-6p+6q^2p
+\]
+sees two scaled derivatives of \(B_2\).  Hence the wall-variable completion
+ledger must include \(B_2\), \(D B_2\), and \(D^2B_2\), either exactly or to
+\(Q^{-B}\)-accuracy in the scaled norms used on \(I^*\).  A zeroth-order
+approximation to \(B_2\) is not sufficient for the rank-two wall completion.
+\end{remark}
+
 \begin{theorem}[FiniteAtlasRiesz in \(p=q''\) form]
 \label{thm:finite-atlas-riesz-2Y-p}
 Assume on each chart-good \(I\Subset I^*\):
@@ -38213,6 +38809,52 @@ where
   W_2:=|\Gamma_G|^2+|\Gamma_{G,2}|^2.
 \]
 \end{theorem}
+
+\begin{definition}[Product-Riesz audit for the \(p=q''\) wall atlas]
+\label{def:product-riesz-audit-2Y-p}
+Let \(\{p_i\}\) be a basis of \(\mathcal P_I\) and let \(\{v_i\}\) be the
+corresponding reconstructed basis of
+\[
+  \mathcal V_I=\mathcal A_1+\mathcal I^2\mathcal P_I.
+\]
+The product-Riesz audit consists of the raw product spanning lists
+\[
+  v_iv_jv_k
+  \quad\text{for}\quad
+  \operatorname{Sym}^3\mathcal V_I,
+\]
+and
+\[
+  v_iv_jp_k
+  \quad\text{for}\quad
+  \operatorname{Sym}^2\mathcal V_I\cdot\mathcal P_I.
+\]
+For each list, form the \(L^2(I^*)\)-Gram matrix, remove singular directions
+below \(Q^{-C}\), and retain a quotient basis.  The audit passes if the retained
+quotient basis is \(Q^C\)-Riesz and has \(Q^C\)-bounded leverage on \(I\).
+\end{definition}
+
+\begin{remark}[FiniteAtlasRiesz failure modes]
+\label{rem:finite-atlas-riesz-failure-modes-2Y}
+The theorem \(\mathrm{FiniteAtlasRiesz}_{2Y}^{p}\) fails only through explicit
+finite-atlas mechanisms:
+\[
+\boxed{\text{\(D^2\mathcal P_I\) not controlled,}}
+\]
+\[
+\boxed{\text{affine reconstruction unstable,}}
+\]
+\[
+\boxed{\text{product-Riesz or product-leverage spike,}}
+\]
+\[
+\boxed{\text{chart denominator singularity on \(I^*\),}}
+\]
+\[
+\boxed{\text{lack of \(R^{-C}\)-Remez on predetermined cores.}}
+\]
+These are finite-model failures, not rank-one wall finite-type failures.
+\end{remark}
 
 \begin{proposition}[Source-divisibility of the established fixed-sector tower]
 \label{prop:source-divisibility-established-fixed-sector-tower}
@@ -38426,6 +39068,63 @@ and
 \]
 \end{definition}
 
+\begin{theorem}[D4 coefficient-core routing]
+\label{thm:d4-coeff-core-routing-2Y}
+For every selected block \(I\), suppose there is a predetermined core
+\[
+  E_I^{\core}\subset I,
+  \qquad
+  |E_I^{\core}|\ge R^{-C}|I|,
+\]
+chosen before wall extraction.  The core may depend on
+\[
+  H,\quad c_7,\quad \alpha_9,\quad \beta_9^{\mathrm{tri}},\quad N_{\sm},
+  \quad\text{and chart data},
+\]
+but not on
+\[
+  \Gamma_G,\quad \Gamma_{G,2},\quad
+  W_2:=|\Gamma_G|^2+|\Gamma_{G,2}|^2,
+\]
+hard extracted atoms, or live residuals.  Assume on \(E_I^{\core}\) that
+\[
+  |H|\ge Q^{-A},
+\]
+\[
+  |c_7|,\ |c_7^{-1}|,\ |\alpha_9|,\ |\alpha_9^{-1}|,
+  \ |\beta_9^{\mathrm{tri}}|
+  \le Q^A,
+\]
+and
+\[
+  N_{\sm}\ge Q^{-A}.
+\]
+Then on the core
+\[
+  \left\|
+  H
+  \begin{pmatrix}
+    c_7\Gamma_G\\
+    \beta_9^{\mathrm{tri}}\Gamma_G+\alpha_9\Gamma_{G,2}
+  \end{pmatrix}
+  \right\|^2
+  \asymp_{Q^A}
+  |H|^2
+  \left(
+    |\Gamma_G|^2+|\Gamma_{G,2}|^2
+  \right).
+\]
+After multiplying by \(N_{\sm}\), the same core supplies the weighted wall
+\[
+  N_{\sm}|H|^2
+  \left(
+    |\Gamma_G|^2+|\Gamma_{G,2}|^2
+  \right).
+\]
+Thus coefficient-good routing is a core-selection statement, not a post-hoc
+selection of a wall-large set.
+\end{theorem}
+
 \begin{lemma}[Core weighted plain-wall transfer]
 \label{lem:core-weighted-plain-wall-transfer-2Y}
 Assume admissible cores and vector Remez:
@@ -38440,6 +39139,50 @@ Then
   \ge Q^{-A'}\int_IW_2\,d\nu.
 \]
 \end{lemma}
+
+\begin{remark}[Non-circularity of coefficient-good cores]
+\label{rem:rank-two-core-transfer-noncircularity}
+The core
+\[
+  E_I^{\core}
+\]
+must be selected before wall extraction.  It may depend on
+\[
+  H,\quad c_7,\quad \alpha_9,\quad \beta_9^{\mathrm{tri}},\quad N_{\sm},
+  \quad\text{and chart data,}
+\]
+but not on
+\[
+  \Gamma_G,\quad \Gamma_{G,2},\quad
+  W_2=|\Gamma_G|^2+|\Gamma_{G,2}|^2,
+\]
+nor on hard-extracted atoms or live residuals.  This is the transfer analogue
+of the local no-atom-fitting rule.  If \(E_I^{\core}\) is chosen after seeing
+\(W_2\), the weighted transfer becomes circular.
+\end{remark}
+
+\begin{remark}[Symbolic rank-two O2/O3 degree]
+\label{rem:rank-two-symbolic-o2o3-degree}
+The scalar O2/O3 input is degree-parametric.  After scalar component selection,
+the weight is
+\[
+  W_\star=N_{\sm}|H|^2|G_\star|^2,
+  \qquad
+  G_\star\in\{\Gamma_G,\Gamma_{G,2}\}.
+\]
+The required branch-charge bandwidth is
+\[
+  d_{\max}^{(2)}
+  =
+  d_N+2d_H+2\max(d_{\Gamma_G},d_{\Gamma_{G,2}}).
+\]
+One should not hard-code \(d_{\max}=14\) unless this degree audit has been
+performed in the active convention.  If \(H\) is a smooth coefficient or
+normalization denominator absorbed into the measure, then \(d_H=0\).  If \(H\)
+is branch-bearing, its fixed branch degree must be counted.  If \(H\) is
+locally adjustable, the present D4 normalization is not valid without
+renormalization or an alternate chart.
+\end{remark}
 
 \begin{lemma}[Scalar component selection]
 \label{lem:rank-two-scalar-component-selection}
@@ -38506,6 +39249,70 @@ Then the selected scalar wall
 \]
 is a valid bounded-charge O2/O3 input.
 \end{theorem}
+
+\begin{remark}[Rank-two no-go and guardrail register]
+\label{rem:rank-two-no-go-register}
+The following rules are active guardrails for the rank-two branch.
+
+\begin{enumerate}
+\item D4 supplies only the plain wall
+\[
+  H(\Gamma_G,\Gamma_{G,2}).
+\]
+The derivative family
+\[
+  \{\Gamma_G,D\Gamma_G,D^2\Gamma_G,\Gamma_{G,2}\}
+\]
+is analytic auxiliary data only.  It is not a D4/O2/O3 wall unless a separate
+\(\mathrm{DerivativeD4Channels}_{2Y}\) or block-difference derivative-channel
+theorem is proved.
+
+\item All branch classification is made in row-normal coordinates:
+\[
+  \ell_9^Y=\omega_Y-\omega_Y(e_7)\ell_7,
+  \qquad
+  \beta_9^{\mathrm{tri}}=\beta_9-\omega_Y(e_7)c_7.
+\]
+Any rank-one fallback must use
+\[
+  \rho_\Gamma^{\mathrm{tri}}
+  =
+  \frac{\beta_9^{\mathrm{tri}}-\rho_Yc_7}{\alpha_9}.
+\]
+
+\item Formal \(C_7\) carriers and formal \(C_7\to Y12\) connections do not
+contribute to \(B_Y\) unless actualized by a genuine actual-source, exact
+nuisance, or local fitting direction.
+
+\item Exact nuisance must be row-dead and live-pair preserving before it is
+placed in the denominator.  Coherent nuisance and residual nuisance are routed
+to \(\mathcal C_{2Y}^{\mathrm{arith}}\) and \(R_X^{2Y}\), respectively.
+
+\item \(E_2\) and \(R_{\mathrm{lab}}\) affect \(B_Y\) only through atom-local live-fiber
+fitting.  Fixed, coherent, and residual terms do not define local columns of
+\(B_Y\).
+
+\item Amplitude projection occurs only after \(B_Y=0\) is proved.  A projected
+wall is not fed back into the local quotient, the row definitions, the live
+pair, or the D4 chart unless its branch complexity has been separately
+controlled.
+
+\item The weighted-transfer core \(E_I^{\core}\) must be selected from
+coefficient, smooth, and chart data before observing
+\[
+  W_2=|\Gamma_G|^2+|\Gamma_{G,2}|^2.
+\]
+Post-hoc wall-dependent core selection is not allowed.
+
+\item The scalar O2/O3 theorem is degree-parametric.  Do not hard-code a
+specific value such as \(14\) until the rank-two wall degree audit has fixed
+\[
+  d_{\max}^{(2)}
+  =
+  d_N+2d_H+2\max(d_{\Gamma_G},d_{\Gamma_{G,2}}).
+\]
+\end{enumerate}
+\end{remark}
 
 \begin{remark}[Interval-local source collapse]
 \label{rem:interval-local-source-collapse}
@@ -41369,6 +42176,70 @@ H(\Gamma_G,\Gamma_{G,2}).
 \]
 No derivative D4 wall component is available unless a separate
 \(\mathrm{DerivativeD4Channels}_{2Y}\) theorem is proved.
+\end{remark}
+
+\begin{remark}[Active rank-two closure register]
+\label{rem:active-rank-two-closure-register}
+The active rank-two branch is the following closure pipeline:
+\[
+  \mathrm{RowNormalForm}_{2Y}
+  +
+  \mathrm{RowExactness}_{2Y}
+  \Longrightarrow
+  B_Y=0,
+\]
+\[
+  \mathrm{D4CoeffCoreRouting}_{2Y}
+  \Longrightarrow
+  F_{2Y}\asymp H(\Gamma_G,\Gamma_{G,2})
+  \quad\text{on predetermined cores},
+\]
+\[
+  \mathrm{WallVariableCompletion}_{2Y}
+  +
+  \mathrm{FiniteAtlasRiesz}_{2Y}^{p}
+  +
+  \mathrm{RankTwoCoercivity}
+  +
+  \mathrm{Gate1}
+  \Longrightarrow
+  \int W_2\ge Q^{-A},
+\]
+where
+\[
+  W_2=|\Gamma_G|^2+|\Gamma_{G,2}|^2.
+\]
+Then
+\[
+  \mathrm{CoreWeightedPlainWallTransfer}_{2Y}
+  \Longrightarrow
+  \int N_{\sm}|H|^2W_2\ge Q^{-A'},
+\]
+and a fixed scalar component
+\[
+  G_\star\in\{\Gamma_G,\Gamma_{G,2}\}
+\]
+is selected at the smooth aggregate stage for scalar O2/O3.
+
+The unresolved local blockers are now:
+\[
+  T_{\mathrm{lower}}^{\mathrm{arith}}\text{ actual corrected-package coordinate exclusion},
+\]
+and
+\[
+  \mathcal N_{\mathrm{sing}}\text{ row-dead/live-pair preserving exact nuisance}.
+\]
+The unresolved analytic blockers are:
+\[
+  p=q''\text{ source completion in }H^2_{\mathrm{sc}},
+\]
+\[
+  \text{ProductRiesz/Remez for }\mathcal W_G,\mathcal W_{G2},
+\]
+and
+\[
+  \text{predetermined }R^{-C}\text{-large coefficient/smooth-good cores}.
+\]
 \end{remark}
 
 The following negative results and audit boundaries are part of the current
@@ -45215,14 +46086,16 @@ The live row-output route is
 }
 \]
 
-For the rank-two branch, the additional finite-audit stack is
+For the rank-two branch, the active finite-audit stack is
 \[
 \boxed{
 \mathrm{TwoRowExactSequence}_{2Y}
 +
 \mathrm{RowNormalForm}_{2Y}
 +
-\mathrm{NuisancePreservesRows}_{2Y}
+\mathrm{AdmissibleNuisanceIsTypedDead}_{2Y}
++
+\mathrm{LivePairSchur}_{2Y}
 \Longrightarrow
 B_Y=0,
 }
@@ -45231,12 +46104,15 @@ B_Y=0,
 \boxed{
 \mathrm{D4CoeffCoreRouting}_{2Y}
 \Longrightarrow
-F_{2Y}\asymp H(\Gamma_G,\Gamma_{G,2}),
+F_{2Y}\asymp H(\Gamma_G,\Gamma_{G,2})
+\text{ on predetermined cores},
 }
 \]
 \[
 \boxed{
 \mathrm{SourceCurvatureCompletion}^{(2)}
++
+\mathrm{WallVariableCompletion}_{2Y}
 +
 \mathrm{FiniteAtlasRiesz}_{2Y}^{p}
 +
@@ -45249,7 +46125,7 @@ F_{2Y}\asymp H(\Gamma_G,\Gamma_{G,2}),
 \]
 where
 \[
-W_2=|\Gamma_G|^2+|\Gamma_{G,2}|^2.
+  W_2=|\Gamma_G|^2+|\Gamma_{G,2}|^2.
 \]
 Finally,
 \[
@@ -45259,9 +46135,9 @@ Finally,
 \mathrm{ScalarBoundedChargeO2O3}(d_{\max}^{(2)})
 }
 \]
-supplies the scalar O2/O3 input after selecting
+gives the scalar O2/O3 input after selecting
 \[
-G_\star\in\{\Gamma_G,\Gamma_{G,2}\}
+  G_\star\in\{\Gamma_G,\Gamma_{G,2}\}
 \]
 at the smooth aggregate stage.
 
@@ -45298,6 +46174,34 @@ The active remaining inputs are:
 The ordinary Wronskian route lives or dies on \(\mathrm{O1}\)--\(\mathrm{O3}\).
 The downstream repairs do not prove those inputs.  The carrier/quotient D4 row
 is not scalar \(I\)-coordinate coercivity.
+
+For the rank-two branch the active finite-audit stack is
+\[
+\boxed{
+\mathrm{RowExactness}_{2Y}
++
+\mathrm{D4CoeffCoreRouting}_{2Y}
++
+\mathrm{SourceCurvatureCompletion}^{(2)}
++
+\mathrm{FiniteAtlasRiesz}_{2Y}^{p}
++
+\mathrm{RankTwoWallDegree}
++
+\mathrm{ScalarBoundedChargeO2O3}(d_{\max}^{(2)}).
+}
+\]
+Here
+\[
+d_{\max}^{(2)}
+=
+d_N+2d_H+2\max(d_{\Gamma_G},d_{\Gamma_{G,2}}).
+\]
+The value \(14\) is not hard-coded; the transition basis must contain
+\[
+  \mathbf C_{d_{\max}^{(2)}}[y]
+\]
+after the rank-two degree audit.
 \end{remark}
 
 \begin{remark}[Empirical support for O1: local amplitude and cell tests]
