@@ -48436,6 +48436,98 @@ Equivalently, if \(K\) is viewed as a weighted bipartite overlap graph, then a
 coherence bound \(d\mu<1-Q^{-A}\) suffices.
 \end{theorem}
 
+\begin{lemma}[Packetwise thickened overlap decay]
+\label{lem:packetwise-thickened-overlap-decay}
+Let \(\{u_i\}\) be the thickened pure packet family and \(\{v_j\}\) the thickened
+contaminant packet family after Fej\'er--Riesz thickening.  Define the
+normalized overlap entries
+\[
+K_{ij}:=\big\langle G_{00}^{-1/2}u_i,\;G_{SS}^{-1/2}v_j\big\rangle.
+\]
+Assume the packet centers satisfy a separation estimate \(\Delta_{ij}\), and let
+\(\mu(\Delta)\) be the oscillatory-kernel decay profile from the packet
+correlation lemma.  Then
+\[
+|K_{ij}|\le \mu(\Delta_{ij}),
+\]
+with \(\mu(\Delta)\) decaying polynomially (or faster) in \(\Delta\).  In
+particular, if \(\Delta_{ij}\ge \Delta_0\) for all interacting pairs, then
+\[
+|K_{ij}|\le \mu_0
+\]
+for a uniform \(\mu_0=\mu(\Delta_0)\).
+\end{lemma}
+
+\begin{lemma}[Row/column coherence bound]
+\label{lem:row-column-coherence-bound}
+Let \(K=(K_{ij})\) be the normalized overlap matrix in
+Lemma~\ref{lem:packetwise-thickened-overlap-decay}.  Define
+\[
+r_i:=\sum_j |K_{ij}|,
+\qquad
+c_j:=\sum_i |K_{ij}|.
+\]
+If
+\[
+\Bigl(\max_i r_i\Bigr)\Bigl(\max_j c_j\Bigr)<(1-Q^{-A})^2,
+\]
+then
+\[
+\|K\|_{\operatorname{op}}<1-Q^{-A}.
+\]
+Equivalently, if each row has at most \(d_0\) nonnegligible entries and each
+column at most \(d_1\), with \(|K_{ij}|\le \mu\), then
+\[
+d_0d_1\mu^2<(1-Q^{-A})^2
+\quad\Longrightarrow\quad
+\|K\|_{\operatorname{op}}<1-Q^{-A}.
+\]
+\end{lemma}
+
+\begin{lemma}[Schur complement / principal-angle equivalence]
+\label{lem:schur-principal-angle-equivalence}
+With
+\[
+K:=G_{00}^{-1/2}G_{0S}G_{SS}^{-1/2},
+\]
+the following are equivalent:
+\begin{enumerate}
+\item \(\|K\|_{\operatorname{op}}<1-Q^{-A}\);
+\item the principal angle between the thickened pure and contaminant subspaces
+satisfies
+\[
+\sin\theta_{\min}(U,V)\ge Q^{-A};
+\]
+\item the Schur complement satisfies
+\[
+G_{00}-G_{0S}G_{SS}^{\dagger}G_{0S}^\ast\ge Q^{-A}G_{00}.
+\]
+\end{enumerate}
+In particular, any of the bounds in
+Lemma~\ref{lem:row-column-coherence-bound} closes the
+\(\mathrm{Graph/O2O3}_{23}\) gap.
+\end{lemma}
+
+\begin{corollary}[Exact target for \(\mathrm{Graph/O2O3}_{23}\)]
+\label{cor:graph-o2o3-target}
+To close \(\mathrm{Graph/O2O3}_{23}\), it is enough to prove one of the following:
+\[
+\Bigl(\max_i\sum_j |K_{ij}|\Bigr)\Bigl(\max_j\sum_i |K_{ij}|\Bigr)<(1-Q^{-A})^2,
+\]
+or
+\[
+d_0d_1\mu^2<(1-Q^{-A})^2,
+\]
+or
+\[
+G_{00}-G_{0S}G_{SS}^{\dagger}G_{0S}^\ast\ge Q^{-A}G_{00}.
+\]
+If none of these hold, the precise failure label is:
+\[
+\text{thickened overlap too coherent}.
+\]
+\end{corollary}
+
 \begin{remark}[wip-zeta-bridge-proof-o2o3]
 \label{rem:wip-zeta-bridge-proof-o2o3}
 What remains is the thickened Schur / overlap test:
