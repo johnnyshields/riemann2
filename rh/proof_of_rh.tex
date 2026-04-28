@@ -47254,6 +47254,77 @@ Both estimates are for the full canonical source
 \]
 \end{hypothesis}
 
+\subsection{Source hypothesis provenance}
+\label{subsec:source-hypothesis-provenance}
+
+\begin{remark}[Provenance of Hypothesis~\ref{hyp:packet-core-micro-covering}]
+\label{rem:packet-core-micro-covering-provenance}
+This hypothesis is intended to come from the packet-selection step in the
+finite AFE decomposition of \(q''_{\can}\).  The packet cores \(K_p\) should
+form a cover of the branch support at scale \(h\asymp \log Q/Q\) with bounded
+overlap, and the branch/reference weights should satisfy
+\[
+\inf_{t\in K}\frac{W_{\mathrm{branch}}(t)}{W_{\mathrm{ref}}(t)}\ge Q^{-C},
+\qquad
+K:=\bigcup_p K_p.
+\]
+The intended derivation is from zeta-side packetization of the finite AFE
+main term together with a bounded-overlap partition of unity on the packet
+cores.  The present draft uses this as an explicit hypothesis, not as a
+proved result.
+\end{remark}
+
+\begin{remark}[Provenance of Hypothesis~\ref{hyp:packet-amplitude-decay-budget}]
+\label{rem:packet-amplitude-decay-budget-provenance}
+This hypothesis is intended to follow from packet construction regularity.
+If the packet atoms have the form
+\[
+\psi_p(t)=a_p(t)e^{i\omega_p t},
+\qquad
+a_p(t)=\lambda_p^{-1/2}\chi_p(t)\eta\!\left(\frac{t-m_p}{\lambda_p}\right),
+\]
+with \(\eta,\chi_p\in C^\infty\) fixed and \(\lambda_p\) polynomially
+controlled on the good packet set, then the chain rule gives polynomial
+derivative bounds
+\[
+\|\partial_t^r a_p\|_\infty\le C_r\lambda_p^{-r}\le Q^{C_r}.
+\]
+That derivative budget is exactly what is needed for the oscillatory-kernel
+estimate later in the source argument.  The draft should treat this as the
+output of the packet-regularity theorem, not as a hidden assumption.
+\end{remark}
+
+\begin{remark}[Provenance of Hypothesis~\ref{hyp:ef-completion-bound}]
+\label{rem:ef-completion-bound-provenance}
+This is the tail estimate for the finite AFE truncation
+\[
+q''_{\can}=F_X+R_X.
+\]
+The intended derivation is from the zeta explicit formula / approximate
+functional equation after smooth truncation at the packet scale \(X\), with
+the tail \(R_X\) controlled in the branch and reference norms:
+\[
+\|R_X\|_{L^2(W_{\mathrm{branch}})}^2+\|R_X\|_{L^2(W_{\mathrm{ref}})}^2
+\le Q^{-B}\|F_X\|_{L^2(W_{\mathrm{ref}})}^2.
+\]
+This is the load-bearing open analytic input in the current draft.  It should
+be proved from the zeta-side tail analysis rather than assumed forever.
+\end{remark}
+
+\begin{remark}[Provenance of Hypothesis~\ref{hyp:reference-meansquare-noncollapse}]
+\label{rem:reference-meansquare-noncollapse-provenance}
+This hypothesis is the finite source nonflatness statement:
+\[
+\|F_X\|_{L^2(W_{\mathrm{ref}})}^2
+\ge Q^{-A}\sum_b\sum_m\rho_b(m).
+\]
+The intended derivation is from the zeta-side main-term positivity of the
+finite AFE source \(F_X=B_2+P_{2,\le X}+D_{2,\le X}\), together with the fact
+that the dominant source contribution does not cancel on the good packet
+set.  It is the normalization safeguard needed so that the source frame
+bound is nondegenerate.
+\end{remark}
+
 \begin{theorem}[Packet construction regularity]
 \label{thm:packet-construction-regularity}
 Let \(\mathcal S_X=\operatorname{span}\{B_2,P_{2,\le X},D_{2,\le X}\}\), and let
@@ -47306,6 +47377,10 @@ bounded-overlap hypothesis controls the sum over packets.  Hence
 
 \begin{lemma}[Oscillatory packet kernel decay]
 \label{lem:packet-oscillatory-kernel-decay}
+The derivative budget and packet-scale regularity used here are supplied by
+Theorem~\ref{thm:packet-construction-regularity} and the provenance remarks
+in Subsection~\ref{subsec:source-hypothesis-provenance}.
+
 Let \(\psi_p(t)=a_p(t)e^{i\omega_p t}\) and \(\psi_q(t)=a_q(t)e^{i\omega_q t}\),
 with \(a_p,a_q\in C^N\) supported on packet cores and satisfying
 \[
@@ -47438,8 +47513,10 @@ Hypothesis~\ref{hyp:ef-completion-bound}.
 Assume Hypotheses~\ref{hyp:packet-core-micro-covering},
 \ref{hyp:packet-amplitude-decay-budget},
 \ref{hyp:ef-completion-bound}, and
-\ref{hyp:reference-meansquare-noncollapse}.  Then, after grouping indices
-into resonant packet clusters \(B\),
+\ref{hyp:reference-meansquare-noncollapse}.  The intended derivation routes
+for these hypotheses are recorded in
+Subsection~\ref{subsec:source-hypothesis-provenance}.  Then, after grouping
+indices into resonant packet clusters \(B\),
 \[
 \min_B \lambda_{\min}(M_B)-\|M_{\off}\|_{\operatorname{op}}-\|E_B\|_{\operatorname{op}}\ge Q^{-A}
 \]
@@ -47525,6 +47602,14 @@ above, this conclusion is conditional; it depends on
 Hypothesis~\ref{hyp:ef-completion-bound}, which is the load-bearing open
 analytic obligation on \(q''_{\can}\).
 \end{corollary}
+
+\begin{remark}[Source-layer status]
+\label{rem:source-layer-status}
+The source proof is conditional on the hypotheses recorded in
+Subsection~\ref{subsec:source-hypothesis-provenance}.  Among them,
+Hypothesis~\ref{hyp:ef-completion-bound} remains the load-bearing analytic
+obligation.
+\end{remark}
 
 \begin{remark}[Failure labels]
 \label{rem:source-failure-labels}
