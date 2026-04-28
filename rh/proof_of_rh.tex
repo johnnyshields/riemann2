@@ -30326,6 +30326,52 @@ The source-robust wall-row search and the scalar \(I\)-coordinate order-nine
 incidence wall remain fallback formulations only if the row-output architecture
 is forced to be exact-point or scalar-collapsed.
 
+\section{Unified finite-survival architecture}
+\label{sec:unified-finite-survival-architecture}
+
+\begin{theorem}[Unified finite-survival theorem]
+\label{thm:unified-finite-survival}
+The proof is organized around four finite-survival statements:
+\begin{enumerate}
+\item \textbf{Source survival:} \(\mathrm{Agg}L^2(q''_{\can})\) on a polynomial-weight good packet set.
+\item \textbf{Graph survival:} \(\mathrm{Graph/O2O3}_{23}\) after \(R^C\)-normalization and full determinant survival.
+\item \textbf{Quotient survival:} the primitive \(Y12\) carrier survives in the same quotient that removes actual-source nuisances.
+\item \textbf{Atomic contradiction:} the singular-discard observable is Type-I local-square and is bounded above on the same quotient norm.
+\end{enumerate}
+If all four hold, the same observable is simultaneously bounded below and above by incompatible polynomial scales, giving the downstream contradiction.
+\end{theorem}
+
+\begin{equation}\label{eq:proof-architecture-diagram}
+\begin{array}{c}
+\boxed{\mathrm{Agg}L^2(q''_{\can})}
+\\[3pt]
+\Downarrow \quad \text{(packet-core micro-covering + EF completion)}
+\\[3pt]
+\boxed{\mathrm{Graph/O2O3}_{23}}
+\\[3pt]
+\Downarrow \quad \text{(\(R^C\)-normalized Riesz basis + thickened Schur survival)}
+\\[3pt]
+\boxed{Y12\text{-quotient survival}}
+\\[3pt]
+\Downarrow \quad \text{(retained-space sandwich + labelled transition)}
+\\[3pt]
+\boxed{\mathrm{AtomicY12Contradiction}}
+\end{array}
+\end{equation}
+
+\subsection{Proof sketch}
+\label{subsec:unified-proof-sketch}
+\begin{enumerate}
+\item Prove aggregate source observability for \(q''_{\can}=B_2+P_2+D_2+E_2\) on a good packet set.
+\item Prove finite graph nondegeneracy in the \(R^C\)-normalized augmented matrix and promote pure graph mass to full determinant survival.
+\item Pass to the actual-source quotient: keep only EF-coherent retained directions, kill nuisances, and verify that the primitive \(Y12\) carrier remains nonzero in the quotient.
+\item Compare the same quotient observable against the Type-I singular-discard upper and the \(Y12\)-wall lower bound; conclude contradiction when the lower and upper scales are separated.
+\end{enumerate}
+
+\subsection{Bookkeeping conventions}
+\label{subsec:unified-bookkeeping}
+The proof always uses the same observable in the same norm on both sides of each comparison.  Source survival is measured before quotienting; contradiction is measured after quotienting by the actual-source nuisance space.  D4 is only local visibility unless the forbidden channel \(\Lambda\) has been shown to be Type-I and quotient-compatible.
+
 \subsection{\texorpdfstring{\(L^2\)}{L2}-input real rigidity}
 
 \begin{definition}[Ordinary zero-separated source packet]
@@ -43205,6 +43251,38 @@ lower connection effects, and actual second curvature, the present
 higher order, or fixed-\(\alpha\) O2/O3 route.
 \end{remark}
 
+\section{How the older framing maps to the new framing}
+\label{sec:old-to-new-framing}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{p{0.28\linewidth} p{0.30\linewidth} p{0.32\linewidth}}
+\hline
+Older framing & New framing & Status \\
+\hline
+Finite-row Gate--1 / O1a / O1b & \(\mathrm{Agg}L^2(q''_{\can})\) source survival & live, but only as scalar source observability \\
+O2 / O3 incidence and exterior-pivot blocks & \(\mathrm{Graph/O2O3}_{23}\) thickened Schur survival & live \\
+S1 / T1 transition/singular diagnostics & proof tools / anti-design inputs & historical tools, not live Gate--1 \\
+Scalar \(I\)-coordinate D4 / derivative-wall D4 & \(\Lambda_{\mathrm{tr},\mathrm{sing},p}=(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}P_{\mathrm{tr},p}\) & dead or quarantined unless separately proved \\
+Raw \(ad+bc\) row test & labelled \(Y12\) quotient survival via \(\gamma_Y\) & replaced \\
+Optimized \(\Xi_N\) route & no-go registry & dead \\
+One-parameter row mobility & no-go registry & dead \\
+Full \(K_9\) or bust & stale; reduced to \(Y12\)-signature quotient plus \(\mathrm{EFCompletion}_{Y12}\) & historical only \\
+\hline
+\end{tabular}
+\end{center}
+
+The current live chain is:
+\[
+\mathrm{Agg}L^2(q''_{\can})
+\;\Rightarrow\;
+\mathrm{Graph/O2O3}_{23}
+\;\Rightarrow\;
+Y12\text{-quotient survival}
+\;\Rightarrow\;
+\mathrm{AtomicY12Contradiction}.
+\]
+
 \section{No-go and audit ledger}
 \label{sec:no-go-and-audit-ledger}
 
@@ -43315,6 +43393,11 @@ explicit reference nontriviality theorem for the branch normalization.  This is
 why the active upstream input is stated as aggregate \(L^2\)-observability for
 \(q''_{\can}\), not merely as finite-dimensional capture of whatever energy is
 present.
+\end{remark}
+
+\begin{remark}[Unified live/dead dictionary]
+\label{rem:unified-live-dead-dictionary}
+Whenever the text says \(\mathrm{Gate\text{--}1}\), it means \(\mathrm{Agg}L^2(q''_{\can})\).  Whenever it says \(\Lambda\), it means the transition--singular discarded operator \((I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}P_{\mathrm{tr}}\) unless the local section explicitly defines a different quotient.  Whenever it says D4 contradiction, it means a Type-I local-square upper in the same quotient norm as the lower bound.  The old finite-row O1/O2/O3, scalar \(I\)-coordinate D4, derivative-wall D4, optimized \(\Xi_N\), and one-parameter row mobility are historical or no-go routes unless a separate theorem explicitly reactivates them.
 \end{remark}
 
 \begin{remark}[No-go: functorial carrier lifts give rank-zero \(\Lambda\)]
@@ -48917,22 +49000,27 @@ on a polynomial-weight set, and the corresponding forbidden-channel mobility
 is positive atomic or localizable, so that local D4 energy cannot cancel
 against the complement.
 
-The unresolved inputs are therefore:
+\begin{quote}
+\textbf{Current architecture:}
+\[
+\mathrm{Agg}L^2(q''_{\can})
++
+\mathrm{Graph/O2O3}_{23}
++
+\mathrm{NormalD4}_{K9,Y12}.
+\]
+
+\textbf{Unresolved finite inputs:}
 \begin{enumerate}
-\item aggregate \(L^2\)-observability for \(q''_{\can}\);
-\item finite/O2/O3 exterior-pivot anti-trough for the full canonical matrix;
-\item full-canonical survival of any pure-branch or sectorial determinant
-witness inside the scalar canonical determinant;
-\item construction of \(R_{\mathrm{sing}}\) as an actual-source EF-coherent
-singular space, not a Taylor-complete carrier space;
-\item the singular-discard upper for actual rows;
-\item D4 transversality to the discarded singular channel.
-\item \(\mathrm{EFCompletion}_{K9}\), distinct from \(\mathrm{EFCompletion}_{L^2}\);
-\item tubular normality of the singular actual-source manifold;
-\item forbidden-channel mobility for the selected \(\Lambda\).
+\item packet-core micro-covering / aggregate \(L^2\) observability;
+\item thickened Schur survival for the full O2/O3 determinant block;
+\item quotient survival of the primitive \(Y12\) carrier against actual-source nuisances;
+\item Type-I singular-discard upper in the same quotient norm.
 \end{enumerate}
-If the last six fail, finite D4 remains local visibility only and does not close
-the proof.
+
+\textbf{Dead or historical routes:}
+finite-row O1/O2/O3 as a live Gate--1 definition, scalar \(I\)-coordinate D4, derivative-wall D4, optimized \(\Xi_N\), and one-parameter row mobility.
+\end{quote}
 \end{remark}
 
 \begin{remark}[Active input status table]
