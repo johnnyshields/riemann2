@@ -157,7 +157,7 @@ the decisive obstruction is no longer transverse odd-mode detection alone.
 The proof-state has separated into named upstream actual-zeta inputs
 (O1--O3, S1, and transition control) and downstream local conversion theorems
 (Gate~2 real rigidity, wall escape, D4 row conversion, and row mobility).
-See Remark~\ref{rem:terminal-conditional-dependency-ledger} for the terminal
+See Remark~\ref{rem:current-architecture-ledger-unified} for the terminal
 dependency ledger.
 \end{remark}
 
@@ -31702,7 +31702,7 @@ This section preserves the local Bottleneck--C and finite-core audit history.
 It should not be read as the final dependency graph of the present manuscript.
 The final dependency graph is summarized in
 Section~\ref{sec:upstream-gate-one-arithmetic-inputs} and
-Remark~\ref{rem:terminal-conditional-dependency-ledger}.  In particular, the
+Remark~\ref{rem:current-architecture-ledger-unified}.  In particular, the
 ordinary upstream branch is now packaged into O1--O3, while the local
 downstream branch is packaged into Gate~2, gauge-locked wall escape,
 carrier-quotient D4, and row mobility.
@@ -38475,6 +38475,10 @@ h_{\rm Gr}:=
 \qquad
 u=q''_{\can}.
 \]
+Let \(\kappa=\omega_Y(e_7)\), and define the row-normal coefficient
+\[
+\beta_9^{\mathrm{tri}}(g,h,u):=\beta_9(g,h,u)-\kappa\,c_7(g,h).
+\]
 Then
 \[
 g_{\rm Gr}-h_{\rm Gr}
@@ -38549,12 +38553,13 @@ Since
 =
 -2yBd\,I,
 \]
-the clean order-nine carrier coordinate has the form
+in the row-normal triangular coordinates the clean order-nine carrier
+coordinate has the form
 \[
 \pi_{\mathfrak f}T_9^{(1,2)}
 =
 H\left(
-\beta_9(g,h,u)\Gamma_G
+\beta_9^{\mathrm{tri}}(g,h,u)\Gamma_G
 +
 \alpha_9(g,h)\Gamma_{G,2}
 \right)I,
@@ -38568,10 +38573,11 @@ where
 \]
 and
 \[
-\beta_9(g,h,u)
+\beta_9^{\mathrm{tri}}(g,h,u)
 =
 -\frac{\rho_9(g,h,u)}
-{2\pi\sqrt{gh}(\sqrt g+\sqrt h)}.
+{2\pi\sqrt{gh}(\sqrt g+\sqrt h)}
+-\kappa\,c_7(g,h).
 \]
 In particular, on \(g=h\),
 \[
@@ -38594,20 +38600,20 @@ B_9
 H
 \begin{pmatrix}
 c_7&0\\
-\beta_9&\alpha_9
+\beta_9^{\mathrm{tri}}&\alpha_9
 \end{pmatrix}
 \begin{pmatrix}
 \Gamma_G\\
 \Gamma_{G,2}
 \end{pmatrix}.
 \]
-The same-scale \(\beta_9\Gamma_G\) term is part of the effective leading
-matrix, not a residual.  Moreover
+The same-scale \(\beta_9^{\mathrm{tri}}\Gamma_G\) term belongs to the effective
+leading matrix, not a residual.  Moreover
 \[
 \det
 \begin{pmatrix}
 c_7&0\\
-\beta_9&\alpha_9
+\beta_9^{\mathrm{tri}}&\alpha_9
 \end{pmatrix}
 =
 c_7\alpha_9
@@ -38630,6 +38636,8 @@ matrix of \((A_7,A_9)\) in the anisotropy variables
 \[
 \Gamma=(\Gamma_G,\Gamma_{G,2}).
 \]
+The coefficients below are pre-triangular; the row-normal coefficient is
+\(\beta_9^{\mathrm{tri}}:=\beta_9-\omega_Y(e_7)c_7\).
 Write
 \[
 A_7^{\mathfrak f}
@@ -39389,111 +39397,6 @@ real-canonical definitions and source local complexity.  The remaining burden
 is therefore sharper: prove Gate~1 source-curvature observability from the
 actual-zeta ordinary/singular inputs, and complete the D4 carrier-quotient row
 conversion and residual-control audit.
-\end{remark}
-
-\begin{remark}[Current architecture ledger]
-\label{rem:current-architecture-ledger-rank-two}
-The current state is:
-\[
-\boxed{\text{Gate A/B are retained as local fixed-convention algebraic lemmas.}}
-\]
-\[
-\boxed{\text{Scalar, quotient-only, split-pointwise, and line-bundle
-Bottleneck-C repairs do not close the proof.}}
-\]
-\[
-\boxed{\text{The reduced-base rank-two fixed-sector bundle remains the best
-local language for the local row obstruction.}}
-\]
-\[
-\boxed{\text{The layered order-seven/order-nine theorem gives local
-visibility, not by itself an RH-scale lower bound.}}
-\]
-\[
-\boxed{\text{The known packet-visible rows are source-divisible:
-they contain }H=yq''_{\can}.}
-\]
-\[
-\boxed{\text{In the ordinary real-canonical branch, Gate~2 is supplied by
-source thickening plus \(L^2\)-input rigidity.}}
-\]
-\[
-\boxed{\text{The remaining source-side input is }
-\mathrm{Agg}L^2(q''_{\can})\text{ for the full canonical object }
-q''_{\can}=B_2+P_2+D_2+E_2.}
-\]
-\[
-\boxed{\text{The remaining row-side input is a forbidden-channel refinement of
-D4 carrier-quotient visibility, currently the }K_9/Y12\text{-normal
-singular-discard route.}}
-\]
-
-The rank-two branch is now organized in three normal forms:
-\[
-\boxed{\text{row-normal local exactness}},
-\qquad
-\boxed{p=q''\text{ wall-variable finite atlas}},
-\qquad
-\boxed{\text{predetermined-core weighted transfer}}.
-\]
-The row-normal form uses
-\[
-  \kappa=\omega_Y(e_7),
-  \qquad
-  \ell_9^Y=\omega_Y-\kappa\ell_7,
-  \qquad
-  \beta_9^{\mathrm{tri}}=\beta_9-\kappa c_7.
-\]
-All branch classifications must be made in this triangularized row basis.
-
-The analytic wall is the honest plain wall
-\[
-  H(\Gamma_G,\Gamma_{G,2}).
-\]
-Derivative wall components \(D\Gamma_G,D^2\Gamma_G\) are not D4/O2/O3 wall
-components unless a separate derivative-D4-channel theorem is proved.  They
-enter only through finite-atlas Markov/Riesz estimates.
-
-The rank-two analytic price is source-curvature completion for
-\[
-  p=q''_{\can}
-\]
-in scale-normalized \(H^2\), including all background and tail terms through
-the two derivatives seen by
-\[
-  \Gamma_{G,2}=p''-6p+6q^2p.
-\]
-In particular, if \(B_2\) is part of \(p\), then \(B_2,DB_2,D^2B_2\) must be
-included exactly or approximated to \(Q^{-B}\)-accuracy in the source-curvature
-completion ledger.
-
-For the final status summary, see
-Remark~\ref{rem:terminal-status-current-architecture}.
-
-The latest role separation is:
-\[
-\boxed{
-\text{branches define charts, weights, and possible carrier holonomy;}
-}
-\]
-\[
-\boxed{
-\text{Gate--1 is scalar local }L^2\text{ energy of }q''_{\can};
-}
-\]
-\[
-\boxed{
-\text{O2/O3 uses an analytic Riesz basis and full determinant survival;}
-}
-\]
-\[
-\boxed{
-\text{finite D4 needs a separate forbidden functional }\Lambda.
-}
-\]
-Thus ordinary, transition, and singular branch data should be used to build
-charts, weights, completions, and possible carrier holonomies.  They should not
-replace the scalar canonical Gate--1 source.
 \end{remark}
 
 \begin{remark}[Coherent graph versus forbidden vertical residual]
@@ -43399,98 +43302,21 @@ q''_{\can}=B_2+P_2+D_2+E_2.
 \]
 \end{remark}
 
-\begin{remark}[Dead-route registry for superseded downstream mechanisms]
-\label{rem:dead-route-registry-superseded-downstream}
-The following routes are no longer active components of the proof architecture.
-
+\begin{remark}[Historical route register]
+\label{rem:historical-route-register}
+The following routes are historical or no-go unless explicitly reactivated:
+\begin{itemize}
+\item O1/O2/O3, S1/T1, and ordinary finite-row Gate--1 as active definitions;
+\item scalar \(I\)-coordinate D4 and derivative-wall D4;
+\item optimized \(\Xi_N\) as a finite D4 contradiction channel;
+\item one-parameter row mobility as a forbidden upper;
+\item functorial carrier lifts when \(R_{\mathrm{sing}}\) is Taylor-complete or carrier-complete;
+\item pure-branch determinant-only proofs for full O2/O3.
+\end{itemize}
+All live statements should be phrased in the current architecture:
 \[
-\begin{array}{c|c|c}
-\text{route} & \text{status} & \text{replacement / reason}\\
-\hline
-D1/D2\text{ derivative-complexity propagation}
-& \text{\rm dead}
-& \text{\rm replaced by Gate--2 from Gate--1 plus }L^2\text{\rm -input rigidity}\\
-D3\text{ source-robust wall row}
-& \text{\rm dead}
-& \text{\rm replaced by gauge-locked wall escape plus carrier rows}\\
-D4_I\text{ scalar }I\text{-coordinate coercivity}
-& \text{\rm dead}
-& \text{\rm scalar collapse loses the carrier separation}\\
-\text{jet D4 wall } \{ \Gamma_G,D\Gamma_G,D^2\Gamma_G,\Gamma_{G,2}\}
-& \text{\rm dead as D4/O2/O3 input}
-& \text{\rm D4 supplies only the plain wall unless derivative channels are proved}\\
-\text{rank-one moving-line tower}
-& \text{\rm fallback only after actual graph collapse}
-& \text{\rm bypassed by rank two when }B_Y=0
-\end{array}
+\mathrm{Agg}L^2(q''_{\can})+\mathrm{Graph/O2O3}_{23}+\mathrm{NormalD4}_{K9,Y12}.
 \]
-
-The live downstream route is instead
-\[
-\boxed{
-\mathrm{Agg}L^2(q''_{\can})
-+
-|u'|_\infty\text{ source thickening}
-+
-L^2\text{-input real rigidity}
-\Longrightarrow
-\mathrm{Gate2},
-}
-\]
-followed by
-\[
-\boxed{
-\text{Gate--2}
-+
-\text{gauge-locked wall escape}
-+
-\text{carrier/quotient D4}
-+
-\text{row mobility}
-\Longrightarrow
-\text{row energy}.
-}
-\]
-For the rank-two D4 branch, the live wall is the row-normalized plain wall
-\[
-\boxed{
-H(\Gamma_G,\Gamma_{G,2}).
-}
-\]
-No derivative D4 wall component is available unless a separate
-\(\mathrm{DerivativeD4Channels}_{2Y}\) theorem is proved.
-\end{remark}
-
-\begin{remark}[No-go: branch diagnostics are not Gate--1 definitions]
-\label{rem:no-go-branch-diagnostics-not-gate-one}
-The following objects are proof tools or diagnostics only:
-\[
-  T_{\can}X_{\can},
-  \qquad
-  \mathcal J_R^{\mathrm{tr}},
-  \qquad
-  \mathbf P_R-\mathbf G_R-\mathbf T_R,
-  \qquad
-  P_R[\lambda^3q''_{\can}].
-\]
-None of them is the active Gate--1 definition unless it is proved to imply
-local scalar \(L^2\)-energy of the full canonical source.  The active Gate--1
-quantity is
-\[
-  \int_{I_b}|\lambda_b^3q''_{\can}(m+\lambda_bx)|^2\,dx.
-\]
-Raw singular sine moments are especially unsafe unless a coefficient identity
-and tail nonaliasing theorem are proved.
-A normalized capture theorem such as
-\[
-  \|P_RF_m\|^2\ge Q^{-A}\|F_m\|^2
-\]
-does not by itself give Gate--1 if \(\|F_m\|^2\) is super-polynomially small.
-The active branch theorem must provide absolute scalar source energy, or an
-explicit reference nontriviality theorem for the branch normalization.  This is
-why the active upstream input is stated as aggregate \(L^2\)-observability for
-\(q''_{\can}\), not merely as finite-dimensional capture of whatever energy is
-present.
 \end{remark}
 
 \begin{remark}[Unified live/dead dictionary]
@@ -43599,20 +43425,6 @@ In particular, the current \(D4\to Y12\) route reduces to the two finite checks
 Y_{Y,p}^{\mathrm{tar}}\notin \mathcal K_p^Y.
 \]
 
-\begin{remark}[No-go: functorial carrier lifts give rank-zero \(\Lambda\)]
-\label{rem:no-go-functorial-carrier-lifts-rank-zero}
-A carrier atlas lift that is fully functorial on the D4 live plane gives
-\[
-  \Lambda[\mathsf C_7]=0,
-  \qquad
-  \Lambda[\mathsf C_{Y12}]=0,
-\]
-and therefore cannot supply a forbidden D4 channel.  A useful \(\Lambda\) must
-come from a finite carrier projection, quotient, or retained EF-coherent
-singular source space that is globally small on actual rows but not functorial
-on the formal D4 carriers.
-\end{remark}
-
 \begin{remark}[No-go: Taylor-complete singular retained space]
 \label{rem:no-go-taylor-complete-singular-retained-space}
 If the retained singular space \(R_{\mathrm{sing}}\) contains all Taylor/jet
@@ -43633,51 +43445,12 @@ and the singular-discard forbidden channel has rank zero.  Thus
 Taylor-complete carrier space, if this \(\Lambda\)-route is to remain viable.
 \end{remark}
 
-\begin{remark}[No-go: pure branch determinant is not scalar O2/O3]
-\label{rem:no-go-pure-branch-determinant-not-full-o2o3}
-A lower bound for a phase-aligned pure branch determinant \(D_{\mathrm{dom}}\) does not
-prove O2/O3 for the scalar canonical source.  The full determinant is
-\[
-  D_{\mathrm{full}}=\det A_{\mathrm{full}},
-\]
-where \(A_{\mathrm{full}}\) contains the full canonical source
-\[
-  q''_{\can}=B_2+P_2+D_2+E_2.
-\]
-One must prove full determinant survival:
-\[
-  \int |D_{\mathrm{full}}|^2\,d\nu
-  \ge
-  Q^{-A}\int |D_{\mathrm{dom}}|^2\,d\nu.
-\]
-Otherwise \(D_{\mathrm{dom}}\) is only a projected branch certificate.
-\end{remark}
-
-\begin{remark}[No-go: optimized \(\Xi_\zeta^{(N)}\) is mismatched with finite D4]
-\label{rem:no-go-optimized-Xi-mismatched-finite-D4}
-For \(N\asymp Q\), the optimized \(N\)-point calibration kills all odd Taylor
-orders up to \(2N-3\), including the current D4 orders \(7\) and \(9\).
-Therefore it is rank-zero on the present live D4 plane.  Low-\(N\) functionals
-such as \(\Xi_4,\Xi_5\) can see orders \(7\) and \(9\), but they do not carry
-the optimized high-order zeta-side upper.  Using them as a contradiction
-channel requires an independent low-order forbidden identity.
-\end{remark}
-
-\begin{remark}[No-go: one-parameter row mobility is not a forbidden identity]
-\label{rem:no-go-one-parameter-row-mobility-not-forbidden}
-A one-dimensional telescoping or row-mobility estimate controls signed endpoint
-differences or gives local \(L^2\)-thickening.  It does not contradict positive
-local D4 energy.  A sequence can have
-\[
-  \sum_i A_i=0
-\]
-and still have
-\[
-  \sum_i|A_i|^2\gg1.
-\]
-Thus finite D4 must land in a positive atomic, localizable, or otherwise
-coercive forbidden channel.  Generic row energy or one-parameter mobility is
-not enough.
+\begin{remark}[Active no-go boundary]
+\label{rem:active-no-go-boundary}
+The current \(D4\to Y12\) bridge is only valid if the forbidden observable
+descends through the same quotient that kills the \(D4\) nuisance block and
+the primitive \(Y12\) carrier survives that quotient.  If either condition
+fails, the bridge is structurally incompatible, not merely unfinished.
 \end{remark}
 
 \begin{remark}[Active rank-two closure register]
@@ -47311,59 +47084,6 @@ bridge or the final finite-core contradiction.  Those remain downstream
 theorem obligations.
 \end{remark}
 
-\begin{remark}[Reader orientation after pruning]
-\label{rem:reader-orientation-after-pruning}
-After the pruning in this section, the reader should treat the following as
-the live proof spine:
-\[
-\boxed{
-\mathrm{Agg}L^2(q''_{\can})
-\text{ is the active Gate--1 input;}
-}
-\]
-The historical \(\mathrm{O1/O2/O3}\) and \(\mathrm{S1/T1}\) packages are retained
-as proof tools, alternate routes, and no-go ledgers.  They are not the active
-Gate--1 definition unless the proof explicitly returns to finite-row or
-branch-projection Gate--1.
-\[
-\boxed{
-\mathrm{Agg}L^2(q''_{\can})
-+
-L^2\text{-input real rigidity}
-\Longrightarrow
-\mathrm{Gate2};
-}
-\]
-\[
-\boxed{
-\mathrm{Gate2}
-+
-\mathrm{D4}_{\rm car}
-+
-\mathrm{row\ mobility}
-\Longrightarrow
-\mathrm{row\ energy};
-}
-\]
-and, for the rank-two branch,
-\[
-\boxed{
-B_Y=0
-+
-\mathrm{D4CoeffCoreRouting}_{2Y}
-+
-\mathrm{Graph/O2O3}_{23}
-+
-\mathrm{NormalD4}_{K9,Y12}
-+
-\mathrm{AtomicContradiction}.
-}
-\]
-All deleted \(D1/D2/D3\), scalar \(I\)-coordinate D4, and active rank-one
-moving-line material should be read only through the concise no-go entries
-above.
-\end{remark}
-
 \section{Upstream Gate--1 arithmetic inputs after the ordinary-route audit}
 \label{sec:upstream-gate-one-arithmetic-inputs}
 
@@ -48997,39 +48717,15 @@ energies:
 \subsection{Ordinary Wronskian no-go archive}
 \label{subsec:no-go-archive-ordinary-wronskian}
 
-The ordinary Wronskian no-go results are centralized in
-Section~\ref{sec:no-go-and-audit-ledger}, especially
-Remarks~\ref{rem:unified-bad-zero-nonrecurrence-obstruction} and
-\ref{rem:dead-route-registry-superseded-downstream}.  The operative conclusions
-are:
-\[
-\boxed{
-\text{local packet geometry does not prove Gate--1;}
-}
-\]
-\[
-\boxed{
-\text{generic determinant nonvanishing does not prove O3;}
-}
-\]
-\[
-\boxed{
-\text{averaged large sieves do not prove pointwise O2;}
-}
-\]
-\[
-\boxed{
-\text{phase-relaxed models do not prove actual-orbit O1/O3;}
-}
-\]
-and
-\[
-\boxed{
-\text{proxy source curvature does not replace }q''_{\can}=B_2+P_2+D_2+E_2.
-}
-\]
-This subsection is therefore only a pointer to the no-go registry, not a
-separate proof branch.
+\begin{remark}[Ordinary route archive]
+\label{rem:ordinary-route-archive}
+The ordinary Wronskian and finite-row O1/O2/O3 discussions are now archived.
+They are proof tools or historical alternate routes only, unless they are
+explicitly transferred to the scalar local \(L^2\) source energy of
+\(q''_{\can}=B_2+P_2+D_2+E_2\).
+The active upstream statement is \(\mathrm{Agg}L^2(q''_{\can})\), not the old
+finite-row route.
+\end{remark}
 
 
 \subsection{Canonical audit for the named Gate--1 inputs}
@@ -49064,206 +48760,6 @@ in the scale-normalized \(H^2\)-ledger.
 
 \section{Conditional status after the downstream closure repairs}
 \label{sec:final-status-after-downstream-closure-repairs}
-
-\begin{remark}[What is closed downstream and what remains upstream]
-\label{rem:final-status-downstream-vs-upstream}
-The local downstream layer now has the following conditional form.
-
-In the ordinary real-canonical branch,
-\[
-\text{Gate 1}
-+
-|u'|_\infty\text{ source thickening}
-+
-L^2\text{-input real rigidity}
-\Longrightarrow
-\text{Gate 2}.
-\]
-The \(q_0\)-wall is handled, under row-energy architecture, by normalized
-wall escape:
-\[
-\text{Gate 2}
-+
-\text{gauge-locked wall escape}
-+
-\text{D4}
-+
-\text{row mobility}
-\Longrightarrow
-\text{row energy}.
-\]
-The order-nine scalar cross-channel wall is bypassed if D4 is formulated in
-carrier/quotient row energy:
-\[
-[\mathcal A_7]\sim H\Gamma_G[\mathsf C_7],
-\qquad
-[\mathcal A_9]\sim H\Gamma_{G,2}[\mathsf C_{Y12}].
-\]
-This statement is a carrier-quotient row-energy statement.  It does not assert
-that the collapsed scalar \(I\)-coordinate order-nine expression is coercive.
-If scalar \(I\)-coordinate energy is required, the finite incidence wall
-\[
-F_9^I=0,\qquad yq''_{\can}\Gamma_{G,2}\ne0
-\]
-must still be controlled or bypassed by a higher/ambient row.  Under the
-carrier-quotient row-energy formulation, that scalar wall is a collapse
-artifact rather than a D4 obstruction.
-
-Thus the active D4 object is the carrier/quotient row-energy class.  The scalar
-\(I\)-coordinate order-nine incidence wall should be retained only as a
-fallback audit for architectures that insist on collapsed scalar output.
-Accordingly, the scalar incidence wall should not be listed among the active
-downstream blockers unless a later section explicitly chooses scalar
-\(I\)-coordinate row energy as the output norm.
-
-Therefore the old broad downstream ledger
-\[
-D1+D2+D3+D4
-\]
-should now be read as a historical decomposition.  The active downstream
-obligations are:
-\begin{enumerate}
-\item ordinary real-canonical local complexity for \(u=q''_{\can}\) and its
-normalized derivative;
-\item the safe \(L^2\)-input rigidity lemma, together with the real-normal-form
-and primitive hypotheses stated above;
-\item gauge-locked wall escape in the same normalized derivative convention;
-\item D4 carrier-quotient row conversion, namely independence of the carrier
-classes \([\mathsf C_7]\), \([\mathsf C_{Y12}]\), and half-leading residual
-control in their quotient anisotropy plane;
-\item row mobility, supplied by Lemma~\ref{lem:row-mobility-point-to-energy}.
-\end{enumerate}
-
-If the final row obstruction is forced to use only the collapsed scalar
-\(I\)-coordinate, then the carrier-quotient D4 theorem is not sufficient.  In
-that scalar architecture one must return to the order-nine correction package
-\[
-(A_9^{\mathfrak f})_I
-=
-\frac{yq''_{\can}\Gamma_{G,2}}{128\pi^2g^3}
-+
-R_9^I
-\]
-and prove quantitative avoidance of the scalar incidence wall
-\[
-F_9^I=0,\qquad yq''_{\can}\Gamma_{G,2}\ne0,
-\]
-or pass to an order-eleven or ambient-row replacement.  This is a fallback
-architecture, not the active carrier-quotient row-energy route.
-
-This does not prove RH.  The upstream ordinary/singular gates remain separate
-actual-zeta arithmetic inputs.  In particular, a complete proof still requires
-the global mechanism that supplies Gate~1, plus the ordinary/singular routing
-and any remaining finite-core non-concentration inputs stated elsewhere in the
-draft.
-
-The downstream implication is therefore best read as a conditional theorem:
-\[
-\text{Gate 1}
-+
-\text{canonical local hypotheses}
-+
-\text{carrier-quotient D4}
-\Longrightarrow
-\text{row energy}.
-\]
-It is not a substitute for the ordinary/singular actual-zeta arithmetic inputs
-listed in Remark~\ref{rem:terminal-conditional-dependency-ledger}.
-\end{remark}
-
-\begin{remark}[Terminal dependency ledger after \(L^2\)-Gate--1 and forbidden-channel audit]
-\label{rem:terminal-conditional-dependency-ledger}
-The present draft is a conditional architecture, not a closed proof of \(\RH\).
-
-The active upstream Gate--1 input is aggregate scalar source observability:
-\[
-\boxed{
-\mathrm{Agg}L^2(q''_{\can}):
-\quad
-\int |q''_{\can}(t)|^2W_{\mathrm{branch}}(t)\,dt
-\ge
-Q^{-A}\mathcal N_{\can}(W_{\mathrm{branch}}).
-}
-\]
-It must use the full canonical source
-\[
-  q''_{\can}=B_2+P_2+D_2+E_2.
-\]
-The ordinary finite-row package \(\mathrm{O1/O2/O3}\), the transition jet
-\(\mathcal J_R^{\mathrm{tr}}\), and the singular diagnostic vectors are proof tools or
-historical alternate routes, not the active Gate--1 definition.
-
-The active downstream implication is
-\[
-\boxed{
-\mathrm{Agg}L^2(q''_{\can})
-+
-|u'|_\infty\text{ source thickening}
-+
-L^2\text{-input real rigidity}
-\Longrightarrow
-\mathrm{Gate2}.
-}
-\]
-
-For the rank-two branch, the local finite-audit stack remains
-\[
-\boxed{
-\mathrm{TwoRowExactSequence}_{2Y}
-+
-\mathrm{RowNormalForm}_{2Y}
-+
-\mathrm{NuisancePreservesRows}_{2Y}
-\Longrightarrow
-B_Y=0,
-}
-\]
-and
-\[
-\boxed{
-\mathrm{D4CoeffCoreRouting}_{2Y}
-\Longrightarrow
-F_{2Y}\asymp H(\Gamma_G,\Gamma_{G,2}).
-}
-\]
-D4 supplies only the plain wall \(H(\Gamma_G,\Gamma_{G,2})\).
-
-The finite/O2O3 input is a weighted exterior-pivot theorem for the
-\(R^C\)-normalized augmented matrix \(A_{\le X,m}\), preferably through
-\[
-  \mathcal H_{23}(A_{\le X,m})
-  =
-  \frac{\det(A_{\le X,m}^*A_{\le X,m})}
-       {e_{n-1}(A_{\le X,m}^*A_{\le X,m})}.
-\]
-
-The current downstream forbidden-channel candidate is
-\[
-\boxed{
-  \Lambda_{\mathrm{tr},\mathrm{sing},p}
-  =
-  (I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}P_{\mathrm{tr},p}.
-}
-\]
-It closes the downstream contradiction only if all three conditions hold:
-\[
-  \sum_p
-  \|\Lambda_{\mathrm{tr},\mathrm{sing},p}J_{\mathrm{tr},p}(q''_{\can})\|^2
-  \le Q^{-B}\mu(\mathcal C),
-\]
-\[
-  \operatorname{rank}
-  \left(
-    \Lambda_{\mathrm{tr},\mathrm{sing},p}
-    E_{\mathrm{car},p}^{\mathrm{tr}}L_{\mathrm{clean},p}^{\mathrm{tr}}
-  \right)
-  \ge1
-\]
-on a polynomial-weight set, and the corresponding forbidden-channel mobility
-is positive atomic or localizable, so that local D4 energy cannot cancel
-against the complement.
-
-\end{remark}
 
 \begin{remark}[Current architecture ledger]
 \label{rem:current-architecture-ledger-unified}
