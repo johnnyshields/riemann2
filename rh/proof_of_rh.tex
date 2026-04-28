@@ -35362,7 +35362,9 @@ unless the objects are explicitly the same.
 
 \begin{remark}[Three normal forms for the rank-two branch]
 \label{rem:rank-two-three-normal-forms}
-The rank-two branch is organized by three normal forms.
+The rank-two branch is organized by three internal normal forms.  If the final
+contradiction is a global forbidden identity rather than the scalar plain-wall
+route, a fourth forbidden-channel normal form is also required.
 
 First, the local live fiber is always put in row normal form:
 \[
@@ -35408,6 +35410,27 @@ chosen before wall extraction and independent of
   W_2:=|\Gamma_G|^2+|\Gamma_{G,2}|^2.
 \]
 This prevents post-hoc wall-dependent selection.
+
+If the route uses a global forbidden channel, the fourth normal form is
+forbidden-channel normal form.  One fixes
+\[
+  M_{\mathrm{forb}}:=\Lambda E_{\mathrm{car}}L_{\mathrm{clean}}
+\]
+on the D4 live plane and extracts against
+\[
+  E_{\mathrm{wall}}^{\mathrm{forb}}
+  =
+  \frac{|H|^2|M_{\mathrm{forb}}\Gamma|^2}{\mathcal N_{\mathrm{D4}}},
+  \qquad
+  \Gamma=(\Gamma_G,\Gamma_{G,2})^T.
+\]
+The current concrete Type-I candidate is the transition--singular discard
+operator
+\[
+  \Lambda_{\mathrm{tr},\mathrm{sing},p}
+  =
+  (I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}P_{\mathrm{tr},p}.
+\]
 \end{remark}
 
 \begin{remark}[Admissibility before quotient, projection, and selection]
@@ -37127,6 +37150,54 @@ Equivalently, the residual must be small not only in the Gate--1
 application of the discarded singular projection.
 \end{definition}
 
+\begin{definition}[\(\mathrm{EFCompletion}_{Y12}\)]
+\label{def:EFCompletion-Y12}
+The targeted \(Y12\)-signature completion estimate is
+\[
+  \boxed{
+  \sum_p
+  \left|
+    \Pi_{\Sigma(Y12)}
+    T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(R_X)
+  \right|^2
+  \le
+  Q^{-B}\mu(\mathcal C).
+  }
+\]
+This is weaker than \(\mathrm{EFCompletion}_{K9}\), which controls the full
+order-nine residual after applying \(\mathcal K_9\).  It is sufficient for the
+\(Y12\)-signature D4 contradiction if
+Hypothesis~\ref{hyp:second-order-Y12-signature-separation} holds.
+\end{definition}
+
+\begin{remark}[Three completion ledgers]
+\label{rem:three-EF-completion-ledgers}
+The proof now uses three different completion strengths:
+\[
+\boxed{\mathrm{EFCompletion}_{L^2}}
+\]
+for aggregate Gate--1 source energy,
+\[
+\boxed{\mathrm{EFCompletion}_{K9}}
+\]
+for a full order-nine residual upper, and
+\[
+\boxed{\mathrm{EFCompletion}_{Y12}}
+\]
+for the targeted primitive \(Y12\)-signature channel.  These must not be
+conflated.  In particular,
+\[
+  \mathrm{EFCompletion}_{L^2}\not\Rightarrow
+  \mathrm{EFCompletion}_{K9}
+\]
+unless the operator
+\[
+  \mathcal K_9T_{\mathrm{tr}\to\mathrm{sing}}J_{\mathrm{tr}}
+\]
+is polynomially bounded from the \(L^2\)-completion norm.  The targeted
+\(Y12\)-estimate may be substantially easier than full \(K_9\)-completion.
+\end{remark}
+
 \begin{remark}[\(\mathrm{EFCompletion}_{L^2}\) does not automatically imply
 \(\mathrm{EFCompletion}_{K9}\)]
 \label{rem:EFCompletion-L2-not-K9}
@@ -37342,6 +37413,81 @@ but also whether actual \(E_2\)-coherence already contains that same primitive
 direction.
 \end{remark}
 
+\begin{remark}[Coherent \(E_2^Y\) and the final \(Y12\)-normal wall]
+\label{rem:coherent-E2Y-final-Y12-normal-wall}
+The \(Y12\)-normal D4 channel is safe only after the \(E_2^Y\) component is
+classified.  There are three cases.
+
+First, \(E_2^Y\) may be absent, fixed, or residual-controlled.  Then it does
+not modify the local forbidden wall.
+
+Second, \(E_2^Y\) may be coherent and graph-like.  In this case it modifies the
+fiber graph slope
+\[
+  \rho_Y\longmapsto \rho_Y^{\mathrm{final}},
+\]
+and hence modifies the rank-one wall ratio to
+\[
+  \rho_\Gamma^{\mathrm{final}}
+  =
+  \frac{\beta_9^{\mathrm{tri}}-\rho_Y^{\mathrm{final}}c_7}{\alpha_9}.
+\]
+This is safe only if \(\rho_Y^{\mathrm{final}}\) remains low-order/coherent and
+does not depend on the actual \(\Gamma_{G,2}\)-wall value.
+
+Third, \(E_2^Y\) may generate an independent finite-dimensional coherent
+amplitude space
+\[
+  \mathcal C_Y^{E_2}.
+\]
+Then the actual forbidden wall is the Schur projection
+\[
+  F_Y^{\mathrm{eff}}
+  =
+  (I-P_{\mathcal C_Y^{E_2}}^{\mathrm{bd}})
+  \left[
+    H\bigl(
+      (\beta_9^{\mathrm{tri}}-\rho_Yc_7)\Gamma_G
+      +
+      \alpha_9\Gamma_{G,2}
+    \bigr)
+  \right].
+\]
+The branch-charge bandwidth \(d_0\) used in finite/O2/O3 must be computed from
+\(F_Y^{\mathrm{eff}}\), not from the unprojected wall.  If \(E_2^Y\) is locally
+free at extraction scale, then \(Y12\) is actual-source coherent and the
+normal-D4 channel is killed.
+\end{remark}
+
+\begin{hypothesis}[AmplitudeSchur\(_{Y12}\)]
+\label{hyp:amplitude-schur-Y12}
+Let \(\mathcal C_Y^{\mathrm{arith}}\) be the finite coherent \(Y12\)-amplitude
+space remaining after exact nuisance and residual routing.  Under the
+bounded-degree Stack weight \(d\nu_{\mathrm{bd}}\), the effective \(Y12\)-wall
+satisfies
+\[
+  \operatorname{dist}_{L^2(d\nu_{\mathrm{bd}})}
+  \left(
+    H\bigl(
+      (\beta_9^{\mathrm{tri}}-\rho_Yc_7)\Gamma_G
+      +
+      \alpha_9\Gamma_{G,2}
+    \bigr),
+    \mathcal C_Y^{\mathrm{arith}}
+  \right)^2
+  \ge
+  Q^{-A}
+  \left\|
+    H\bigl(
+      (\beta_9^{\mathrm{tri}}-\rho_Yc_7)\Gamma_G
+      +
+      \alpha_9\Gamma_{G,2}
+    \bigr)
+  \right\|_{L^2(d\nu_{\mathrm{bd}})}^2.
+\]
+If this fails, the coherent amplitude model absorbs the \(Y12\)-normal wall.
+\end{hypothesis}
+
 \begin{definition}[Order-nine \(Y12\) normal quotient]
 \label{def:Y12-normal-quotient-Q9-forb}
 Let \(Y_9\) denote the order-nine singular carrier space containing the
@@ -37387,6 +37533,121 @@ rank-one \(Y12\)-normal route is dead, even if D4 remains locally visible in a
 larger carrier quotient.  If \([\mathsf C_{Y12}]\ne0\), then finite D4 has a
 concrete atomic forbidden channel.
 \end{remark}
+
+\begin{hypothesis}[Moving \(Y12\)-wall anti-concentration]
+\label{hyp:moving-Y12-wall-anti-concentration}
+Let
+\[
+  \ell_p(\Gamma):=a_p\Gamma_G+b_p\Gamma_{G,2}
+\]
+be the moving linear form obtained from the \(Y12\)-signature D4 channel, with
+\[
+  |b_p|\ge Q^{-A}
+\]
+on the extracted set.  Under the post-Gate/O2/O3 measure \(\nu\), assume
+\[
+  \boxed{
+  \int |\ell_p(\Gamma)|^2\,d\nu
+  \ge
+  Q^{-A}
+  \int
+  \left(|\Gamma_G|^2+|\Gamma_{G,2}|^2\right)\,d\nu.
+  }
+\]
+Equivalently, the post-Gate/O2/O3 measure is not concentrated on the moving
+sublevel set
+\[
+  \{p:|a_p\Gamma_G+b_p\Gamma_{G,2}|\le Q^{-A}|\Gamma|\}.
+\]
+In the normalized case \(a_p=0\), this reduces to anti-concentration of
+\(\Gamma_{G,2}\).
+\end{hypothesis}
+
+\begin{theorem}[Normal D4 through the \(Y12\)-signature \(K_9\) channel]
+\label{thm:normal-D4-K9-Y12}
+Assume the following.
+
+\begin{enumerate}
+\item \(\mathrm{EFCompletion}_{Y12}\) holds:
+\[
+  \sum_p
+  \left|
+    \Pi_{\Sigma(Y12)}
+    T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(R_X)
+  \right|^2
+  \le
+  Q^{-B}\mu(\mathcal C).
+\]
+
+\item Lower-order tangent observability holds, so the covariant residual
+\(K_9\) is polynomially conditioned.
+
+\item The \(Y12\)-signature separation
+Hypothesis~\ref{hyp:second-order-Y12-signature-separation} holds.
+
+\item The singular actual-source manifold has polynomial tubular control as in
+Definition~\ref{def:tubular-normality-singular-manifold}.
+
+\item On a polynomial-weight extracted set, the D4 coefficient package is good:
+\[
+  |H|,\ |\alpha_9|,\ |\alpha_9^{-1}|,\ |c_7|,\ |c_7^{-1}|,
+  |\beta_9^{\mathrm{tri}}|\le Q^A,
+\]
+with \(|H|\ge Q^{-A}\).
+
+\item The moving \(Y12\)-wall anti-concentration estimate
+Hypothesis~\ref{hyp:moving-Y12-wall-anti-concentration} holds.
+\end{enumerate}
+
+Then the D4 displacement has a forbidden \(Y12\)-signature component.  More
+precisely,
+\[
+  \Pi_{\Sigma(Y12)}
+  T_{\mathrm{tr}\to\mathrm{sing}}
+  E_{\mathrm{car}}^{\mathrm{tr}}L_{\mathrm{clean}}^{\mathrm{tr}}\Gamma
+  =
+  H\,(a\,\Gamma_G+b\,\Gamma_{G,2})
+\]
+with
+\[
+  \boxed{b\ne0}
+\]
+on the extracted set, up to \(Q^{-A}\)-controlled normalization.  Hence the
+forbidden wall
+\[
+  \boxed{
+  E_{\mathrm{wall}}^{Y12}
+  :=
+  \frac{|H|^2|a\,\Gamma_G+b\,\Gamma_{G,2}|^2}
+       {\mathcal N_{\mathrm{D4}}}
+  }
+\]
+has polynomial mass.  Summing over packets contradicts the
+\(\mathrm{EFCompletion}_{Y12}\) upper, after the tubular quadratic error is
+absorbed.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The \(Y12\)-signature separation removes actual-source tangents, lower
+connection residuals, and actual second-curvature effects from the primitive
+\(Y12\)-signature quotient.  Therefore
+\[
+  \Pi_{\Sigma(Y12)}
+  T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}]
+\]
+is nonzero.  Applying the triangular D4 matrix gives
+\[
+  H\left(
+  \beta_9^{\mathrm{tri}}\Gamma_G+\alpha_9\Gamma_{G,2}
+  \right)
+  \Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}],
+\]
+so the \(\Gamma_{G,2}\)-coefficient is nonzero because \(\alpha_9\ne0\).
+Tubular control turns the linear normal component into an actual distance from
+the singular actual-source manifold.  The \(Y12\)-completion upper bounds the
+same normal component for actual rows.  The moving-wall anti-concentration
+gives positive mass for the D4 normal component, producing the contradiction.
+\end{proof}
 
 \begin{hypothesis}[ForbiddenSingularDiscardD4]
 \label{hyp:forbidden-singular-discard-d4}
@@ -37555,19 +37816,23 @@ H\,E_{\rm car}L_{\rm eff}
 +
 \varepsilon_{\rm rem}.
 \]
-The clean matrix is
+The clean row-normal matrix is
 \[
-L_{\rm clean}
+L_{\rm clean}^{\mathrm{tri}}
 =
 \begin{pmatrix}
 c_7&0\\
-\beta_9&\alpha_9
+\beta_9^{\mathrm{tri}}&\alpha_9
 \end{pmatrix},
+\qquad
+\beta_9^{\mathrm{tri}}:=\beta_9-\omega_Y(e_7)c_7,
 \]
 with \(c_7,\alpha_9\) as in
-Lemma~\ref{lem:clean-triangular-d4-carrier-matrix}.  The
-same-scale \(\beta_9\Gamma_G\) term is part of \(L_{\rm eff}\), not a
-residual.
+Lemma~\ref{lem:clean-triangular-d4-carrier-matrix}.  The same-scale
+\(\beta_9^{\mathrm{tri}}\Gamma_G\) term is part of \(L_{\rm eff}\), not a
+residual.  All D4 coefficient-good and rank-one fallback statements in this
+branch use the triangularized coefficient \(\beta_9^{\mathrm{tri}}\), not the
+raw \(\beta_9\).
 
 The remaining correction-row issue is purely carrier-theoretic.  If, before
 scalar collapse, the order-seven and order-nine line, background/core, and
@@ -37585,7 +37850,7 @@ P_{W_{\rm car}}R_{\nu}^{(b)}=0
 \]
 for all six correction rows.  Consequently
 \[
-L_{\rm eff}=L_{\rm clean},
+L_{\rm eff}=L_{\rm clean}^{\mathrm{tri}},
 \qquad
 \varepsilon_{\rm rem}=0.
 \]
@@ -37666,12 +37931,14 @@ and the carrier-frame lower bound
 \]
 Then
 \[
-L_{\rm eff}=L_{\rm clean}
+L_{\rm eff}=L_{\rm clean}^{\mathrm{tri}}
 =
 \begin{pmatrix}
 c_7&0\\
-\beta_9&\alpha_9
+\beta_9^{\mathrm{tri}}&\alpha_9
 \end{pmatrix},
+\qquad
+\beta_9^{\mathrm{tri}}:=\beta_9-\omega_Y(e_7)c_7,
 \]
 and
 \[
@@ -37710,20 +37977,21 @@ correction-row projections vanish in the carrier quotient.  Hence
 \[
 L_{\rm eff}
 =
-L_{\rm clean}
+L_{\rm clean}^{\mathrm{tri}}
 +
 \sum_{\nu,b}L_{\nu}^{(b)}
 =
-L_{\rm clean},
+L_{\rm clean}^{\mathrm{tri}},
 \qquad
 \varepsilon_{\rm rem}=0.
 \]
 The determinant formula is the clean triangular determinant from
 Lemma~\ref{lem:clean-triangular-d4-carrier-matrix}.  On the
 Gram-good patch this determinant is polynomially bounded below, while the
-entries of \(L_{\rm clean}\) are polynomially bounded.  Therefore
+entries of \(L_{\rm clean}^{\mathrm{tri}}\) are polynomially bounded.
+Therefore
 \[
-\sigma_{\min}(L_{\rm clean})\ge Q^{-C}.
+\sigma_{\min}(L_{\rm clean}^{\mathrm{tri}})\ge Q^{-C}.
 \]
 Combining this with
 \[
@@ -37771,132 +38039,8 @@ canonical phase, Gram matrix, whitening tower, carrier quotient, and order-seven
 and order-nine D4 identities.  No such generic transfer is asserted here.
 \end{remark}
 
-\begin{remark}[Finite D4 audit status after the carrier-matrix computation]
-\label{rem:finite-D4-audit-status-after-carrier-matrix}
-The carrier-quotient D4 architecture should be read in the effective-matrix
-form
-\[
-P_{W_{\rm car}}([\mathcal A_7]+[\mathcal A_9])
-=
-H\,E_{\rm car}L_{\rm eff}
-\begin{pmatrix}
-\Gamma_G\\
-\Gamma_{G,2}
-\end{pmatrix}
-+
-\varepsilon_{\rm rem},
-\]
-not as a literal unit-coefficient identity in the two clean carrier
-coordinates.  The clean \(A_7/A_9\) carrier matrix is triangularly invertible
-by Lemma~\ref{lem:clean-triangular-d4-carrier-matrix}.  The same-scale
-\(\Gamma_G\)-linear leakage in the order-nine coordinate is absorbed into
-\(L_{\rm eff}\); it is not a residual error.
-
-The remaining finite obligation is to compute the \(W_{\rm car}\)-projection
-of all line, background/core, and normalization/subtraction rows:
-\[
-P_{W_{\rm car}}R_{\nu}^{(b)}
-=
-H\,E_{\rm car}L_{\nu}^{(b)}
-\begin{pmatrix}
-\Gamma_G\\
-\Gamma_{G,2}
-\end{pmatrix}
-+
-R_{\nu,\mathrm{val}}^{(b)}
-+
-R_{\nu,\mathrm{abs}}^{(b)},
-\]
-for
-\[
-\nu\in
-\{\mathrm{line},\mathrm{bg/core},\mathrm{norm/sub}\},
-\qquad
-b\in\{7,9\}.
-\]
-The matrices \(L_{\nu}^{(b)}\) are same-scale terms and must be absorbed into
-\[
-L_{\rm eff}
-=
-L_{\rm clean}
-+
-\sum_{\nu,b}L_{\nu}^{(b)}.
-\]
-The remaining residual is
-\[
-\varepsilon_{\rm rem}
-=
-\sum_{\nu,b}
-\left(
-R_{\nu,\mathrm{val}}^{(b)}
-+
-R_{\nu,\mathrm{abs}}^{(b)}
-\right).
-\]
-D4 residual control is closed only after proving
-\[
-\sigma_{\min}(E_{\rm car}L_{\rm eff})\ge Q^{-C}
-\]
-and
-\[
-\|\varepsilon_{\rm rem}\|_{\mathcal Q_{\rm car}}
-\le
-\frac12 |H|\,
-\sigma_{\min}(E_{\rm car}L_{\rm eff})
-\left(\Gamma_G^2+\Gamma_{G,2}^2\right)^{1/2}.
-\]
-Until this finite residual table is supplied, carrier-quotient D4 row
-conversion remains conditionally formulated, although no scalar
-\(I\)-coordinate obstruction has been reopened.
-\end{remark}
-
-\begin{remark}[Two quotient coordinates for D4]
-\label{rem:two-quotient-coordinates-d4}
-Equivalently, choose dual quotient coordinates \(B_7,B_9\) for the pair
-\[
-[\mathsf C_7],\qquad [\mathsf C_{Y12}].
-\]
-Then D4 may be checked by the two scalar identities
-\[
-\begin{pmatrix}
-B_7\\
-B_9
-\end{pmatrix}
-=
-H
-M_Q
-\begin{pmatrix}
-\Gamma_G\\
-\Gamma_{G,2}
-\end{pmatrix}
-+
-\epsilon,
-\]
-with
-\[
-|\det M_Q|\ge Q^{-C},
-\]
-and
-\[
-|\epsilon|
-\le
-\frac12
-|H|\,
-\sigma_{\min}(M_Q)
-\left(\Gamma_G^2+\Gamma_{G,2}^2\right)^{1/2}.
-\]
-In the expected clean carrier normalization,
-\[
-M_Q=I_2
-\]
-up to the fixed nonzero scalar already absorbed into the definition of the
-carrier coordinates.  This two-coordinate formulation is the smallest D4
-correction-control statement: residual components orthogonal to the carrier
-anisotropy plane cannot cancel the leading row response.
-\end{remark}
-
-\begin{theorem}[Two-coordinate carrier-quotient D4 conversion]
-\label{thm:two-coordinate-carrier-quotient-d4}
+\begin{theorem}[Effective-matrix carrier-quotient D4 conversion]
+\label{thm:effective-matrix-carrier-quotient-d4}
 Let
 \[
 E_{\rm car}
@@ -37904,70 +38048,104 @@ E_{\rm car}
 \bigl([\mathsf C_7]\ [\mathsf C_{Y12}]\bigr)
 \]
 be the two-column carrier response map into \(\mathcal Q_{\rm car}\).  Assume
-its quotient Gram matrix
+the carrier frame is polynomially conditioned:
 \[
-G_{\rm car}:=
-E_{\rm car}^\ast E_{\rm car}
+\sigma_{\min}(E_{\rm car})\ge Q^{-C}.
 \]
-satisfies
+Assume the carrier-row class satisfies
 \[
-\det G_{\rm car}\ge Q^{-C}.
-\]
-Equivalently, the two carrier classes
-\[
-[\mathsf C_7],\qquad [\mathsf C_{Y12}]
-\]
-are polynomially independent in the carrier quotient.
-
-Let \(B_7,B_9\) denote the dual quotient coordinates associated to this basis.
-Suppose the carrier-row class satisfies
-\[
-\begin{pmatrix}
-B_7\\[1mm]
-B_9
-\end{pmatrix}
+P_{W_{\rm car}}([\mathcal A_7]+[\mathcal A_9])
 =
-H
+H\,E_{\rm car}L_{\rm eff}
 \begin{pmatrix}
 \Gamma_G\\[1mm]
 \Gamma_{G,2}
 \end{pmatrix}
 +
-\epsilon,
+\varepsilon_{\rm rem},
 \]
-with
+where
 \[
-|\epsilon|
-\le
-\frac12 |H|
-\left(\Gamma_G^2+\Gamma_{G,2}^2\right)^{1/2}.
+  \sigma_{\min}(L_{\rm eff})\ge Q^{-C}
+\]
+and
+\[
+  \|\varepsilon_{\rm rem}\|_{\mathcal Q_{\rm car}}
+  \le
+  \frac12
+  |H|\,
+  \sigma_{\min}(E_{\rm car}L_{\rm eff})
+  \left(\Gamma_G^2+\Gamma_{G,2}^2\right)^{1/2}.
 \]
 Then
 \[
-\left|[\mathcal A_N^{\rm car}]\right|_{\mathcal Q_{\rm car}}
+\left|
+P_{W_{\rm car}}([\mathcal A_7]+[\mathcal A_9])
+\right|_{\mathcal Q_{\rm car}}
 \ge
 Q^{-C}
 |H|
 \left(\Gamma_G^2+\Gamma_{G,2}^2\right)^{1/2}.
 \]
-Consequently, combined with Gate~2 and wall escape, carrier-quotient row
-mobility gives
+Consequently, combined with Gate--2, wall escape, and row mobility, the local
+carrier-quotient D4 output gives interval carrier-quotient row energy.
+
+In the formal carrier quotient of
+Corollary~\ref{cor:agent-six-final-D4-residual-closes-carrier-quotient},
+one has
 \[
-\int_I
-\left|[\mathcal A_N^{\rm car}(m)]\right|_{\mathcal Q_{\rm car}}^2\,dm
-\ge Q^{-C}|I|.
+  L_{\rm eff}=L_{\rm clean}^{\mathrm{tri}},
+  \qquad
+  \varepsilon_{\rm rem}=0,
 \]
+so the hypotheses above reduce to the clean triangular determinant and carrier
+frame lower bounds.
 \end{theorem}
 
 \begin{proof}
-The determinant lower bound for \(G_{\rm car}\) gives a polynomial lower frame
-bound for the two quotient carrier coordinates.  The displayed coordinate
-identity says that, in this frame, the leading carrier response is exactly
-\(H(\Gamma_G,\Gamma_{G,2})\), up to a half-leading error.  The lower bound
-follows by the triangle inequality and the frame lower bound.  Row mobility
-then upgrades the pointwise carrier-quotient lower bound to integrated
-carrier-quotient row energy.
+The polynomial lower bound for \(E_{\rm car}\) and \(L_{\rm eff}\) gives
+\[
+  \left\|
+  H\,E_{\rm car}L_{\rm eff}
+  \begin{pmatrix}
+  \Gamma_G\\
+  \Gamma_{G,2}
+  \end{pmatrix}
+  \right\|_{\mathcal Q_{\rm car}}
+  \ge
+  Q^{-C}
+  |H|
+  \left(\Gamma_G^2+\Gamma_{G,2}^2\right)^{1/2}.
+\]
+The residual estimate is half-leading, so the triangle inequality gives the
+claimed lower bound.  Row mobility then converts the pointwise or packet-level
+carrier lower bound into interval carrier-quotient energy.
 \end{proof}
+
+\begin{remark}[Why the unit-coordinate D4 form is no longer used]
+\label{rem:no-unit-coordinate-d4-form}
+The carrier coordinates should not be normalized as if the D4 map were
+\[
+  H I_2
+  \begin{pmatrix}
+  \Gamma_G\\
+  \Gamma_{G,2}
+  \end{pmatrix}.
+\]
+The clean finite computation gives the triangular row-normal matrix
+\[
+  L_{\rm clean}^{\mathrm{tri}}
+  =
+  \begin{pmatrix}
+  c_7&0\\
+  \beta_9^{\mathrm{tri}}&\alpha_9
+  \end{pmatrix},
+  \qquad
+  \beta_9^{\mathrm{tri}}:=\beta_9-\omega_Y(e_7)c_7.
+\]
+The same-scale \(\Gamma_G\)-term in the order-nine row is part of the effective
+leading matrix.  It is not a residual.
+\end{remark}
 
 \begin{remark}[Scalar \(I\)-coordinate incidence is a collapse artifact]
 \label{rem:scalar-i-incidence-collapse-artifact}
@@ -47467,6 +47645,70 @@ This statement should be proved before capped extraction; hard extraction
 destroys the branch-charge/Fourier structure needed for determinant survival.
 \end{remark}
 
+\begin{definition}[Bounded-charge near-pure Schur block]
+\label{def:bounded-charge-near-pure-schur-block}
+Let \(n=R+2\), and decompose the full determinant into branch-charge sectors
+\[
+  D_{\mathrm{full}}
+  =
+  \sum_r D_{-n+r}.
+\]
+Let \(d_0\) be the branch-charge bandwidth of the bounded-degree Stack weight
+used before capped extraction:
+\[
+  d_0
+  :=
+  d_N+2d_H+2d_{\Gamma,\mathrm{eff}}.
+\]
+Here \(d_{\Gamma,\mathrm{eff}}\) is computed from the final effective forbidden
+wall linear form after coherent amplitude projection.  Then the pure plus
+sector \(D_{-n}\) can interact, under the pre-extraction Stack weight, only
+with the finite block
+\[
+  D_{-n+1},\ldots,D_{-n+d_0}.
+\]
+The fixed-\(\alpha\) full determinant survival condition is therefore the
+finite Schur condition
+\[
+  \boxed{
+  D_{-n}
+  \notin_{Q^{-A}}
+  \operatorname{span}
+  \{D_{-n+1},\ldots,D_{-n+d_0}\}.
+  }
+\]
+This is the default finite/O2/O3 branch-survival theorem unless an
+AlphaAdmissibility package is installed.
+\end{definition}
+
+\begin{remark}[Do not cap before determinant survival]
+\label{rem:do-not-cap-before-determinant-survival}
+The finite/O2/O3 determinant-survival theorem must be proved at the smooth
+aggregate level.  Capped extraction destroys the branch-charge and Fourier
+structure used to prove
+\[
+  D_{-n}
+  \notin_{Q^{-A}}
+  \operatorname{span}\{D_{-n+1},\ldots,D_{-n+d_0}\}.
+\]
+Thus the proof order is
+\[
+  \boxed{
+  \text{smooth aggregate}
+  \to
+  \text{branch survival/O2/O3}
+  \to
+  \text{capped extraction}
+  \to
+  \text{atomic D4 contradiction}.
+  }
+\]
+In particular, the Stack weight used for determinant survival should be a
+bounded-degree pre-extraction weight.  Capped factors such as
+\(F_{\mathrm{wall}}^{\mathrm{forb}}\) may be used only after
+determinant-survival and aggregate lower bounds are secured.
+\end{remark}
+
 \begin{hypothesis}[Canonical quadratic multiplier theorem]
 \label{hyp:canonical-quadratic-multiplier}
 On each ordinary branch subpacket used for finite/O2/O3, the canonical
@@ -47914,6 +48156,89 @@ Equivalently,
   \mathcal T_{\mathrm{par}}^{(\alpha)}+\mathcal T_7+\mathcal T_{<7}.
 \]
 \end{definition}
+
+\begin{definition}[\(Y12\)-signature quotient]
+\label{def:Y12-signature-quotient}
+Let \(\Sigma(Y12)\) denote the primitive order-nine mixed-block signature of
+the carrier
+\[
+  Y_{12}^{(2)}=D^2N_0[\xi_1,\xi_2]
+\]
+coupled to one same-point whitening slot.  Let
+\[
+  \Pi_{\Sigma(Y12)}:\mathcal Y_9\to \mathcal Y_{\Sigma(Y12)}
+\]
+be the corresponding signature projection in the residual codomain of the
+covariant order-nine coherence residual \(\mathcal K_9\).
+
+Define the \(Y12\)-signature forbidden quotient by
+\[
+  \boxed{
+  \mathcal Q_{9,Y12}^{\mathrm{forb},\alpha}
+  :=
+  \mathcal Y_{\Sigma(Y12)}
+  \Big/
+  \Pi_{\Sigma(Y12)}
+  \bigl(
+    \mathcal T_{\mathrm{par}}^{(\alpha)}
+    +\mathcal T_7
+    +\mathcal T_{<7}
+    +\mathcal{II}_{\mathrm{arith},9}
+  \bigr).
+  }
+\]
+Here \(\mathcal{II}_{\mathrm{arith},9}\) denotes the second-order actual-source
+curvature/tangent image at order nine.  The \(Y12\)-channel survives iff
+\[
+  \boxed{
+  \Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}]
+  \ne0
+  \quad\text{in}\quad
+  \mathcal Q_{9,Y12}^{\mathrm{forb},\alpha}.
+  }
+\]
+\end{definition}
+
+\begin{hypothesis}[Second-order \(Y12\)-signature separation]
+\label{hyp:second-order-Y12-signature-separation}
+The actual-source tangent, lower-connection, and actual-source second-curvature
+images have no primitive \(Y12\)-signature:
+\[
+  \boxed{
+  \Pi_{\Sigma(Y12)}
+  \bigl(
+    \mathcal T_{\mathrm{par}}^{(\alpha)}
+    +\mathcal T_7
+    +\mathcal T_{<7}
+    +\mathcal{II}_{\mathrm{arith},9}
+  \bigr)=0.
+  }
+\]
+Moreover the transported D4 carrier has nonzero \(Y12\)-signature:
+\[
+  \boxed{
+  \Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}]\ne0.
+  }
+\]
+If \(\alpha\) is admitted as an actual parameter, it is required to be
+source-linear in the sense that
+\[
+  \Pi_{\Sigma(Y12)}\partial_\alpha u=0,
+  \qquad
+  \Pi_{\Sigma(Y12)}\partial_\alpha^2 u=0,
+\]
+unless a separate source-nonlinear \(\alpha\)-audit is supplied.
+\end{hypothesis}
+
+\begin{remark}[Why the \(Y12\)-signature test is sharper than full \(K_9\)]
+\label{rem:Y12-signature-sharper-than-full-K9}
+The full \(K_9\)-upper may be stronger than needed.  The D4 channel currently
+used by the rank-two route is the primitive \(Y12\)-signature component of the
+order-nine residual.  Therefore it is enough to control the \(Y12\)-signature
+projection of actual EF residuals and to prove that the D4 carrier survives in
+\(\mathcal Q_{9,Y12}^{\mathrm{forb},\alpha}\).  This avoids proving unnecessary
+completion estimates for unrelated order-nine residual sectors.
+\end{remark}
 
 \begin{remark}[\(\alpha\) can help O2/O3 while hurting D4]
 \label{rem:alpha-o2o3-d4-tradeoff}
