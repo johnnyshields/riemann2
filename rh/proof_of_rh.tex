@@ -37096,13 +37096,27 @@ enough for the singular-discard forbidden upper.  Define
   \boxed{
   \sum_p
   \left\|
-  \Lambda_{\mathrm{tr},\mathrm{sing},p}
-  T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(R_X)
+  \Lambda_{\mathrm{tr},\mathrm{sing},p}J_{\mathrm{tr},p}(R_X)
   \right\|^2
   \le Q^{-B}\mu(\mathcal C),
   }
 \]
-where
+Here
+\[
+  \Lambda_{\mathrm{tr},\mathrm{sing},p}
+  =
+  (I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}P_{\mathrm{tr},p}
+\]
+already includes the transition-to-singular transport.  Equivalently, for a
+normal residual functional \(K_{9,p}\), the same estimate may be written as
+\[
+  \sum_p
+  \left|
+    K_{9,p}T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(R_X)
+  \right|^2
+  \le Q^{-B}\mu(\mathcal C).
+\]
+Here
 \[
   q''_{\can}=F_X+R_X,
   \qquad
@@ -37124,7 +37138,7 @@ The implication
 \]
 requires a polynomial operator bound for
 \[
-  \Lambda_{\mathrm{tr},\mathrm{sing}}T_{\mathrm{tr}\to\mathrm{sing}}J_{\mathrm{tr}}
+  \Lambda_{\mathrm{tr},\mathrm{sing}}J_{\mathrm{tr}}
 \]
 from the \(L^2\)-completion norm to the discarded singular norm.  If such a
 bound is unavailable, the singular-discard upper remains open even when
@@ -37208,6 +37222,57 @@ and if the D4 live plane has nonzero normal image:
 on a polynomial-weight set of packets.
 \end{definition}
 
+\begin{definition}[Lower-order tangent observability for \(K_9\)]
+\label{def:lower-order-tangent-observability-K9}
+Let the actual-source tangent matrix in the singular order-nine chart be
+written in block form
+\[
+  T=
+  \begin{pmatrix}
+    T_L\\
+    T_9
+  \end{pmatrix},
+\]
+where \(T_L\) records the lower-order coordinates and \(T_9\) records the
+order-nine coordinate.  The residual
+\[
+  K_9(s)=s_9-\mathcal R_{7\to9}s_7-\mathcal R_{<7\to9}(s_{<7})
+\]
+is polynomially conditioned if the lower-order block observes every
+actual-source tangent:
+\[
+  \boxed{
+  |T_La|\ge Q^{-A}|T_9a|
+  \qquad\text{for every actual-source tangent }a.
+  }
+\]
+Equivalently, the connection operator
+\[
+  \mathcal R:=T_9T_L^\dagger
+\]
+exists on the relevant tangent image with
+\[
+  \|\mathcal R\|\le Q^A.
+\]
+\end{definition}
+
+\begin{remark}[Why \(K_9\) conditioning is separate from \(Y12\)-nonvanishing]
+\label{rem:K9-conditioning-separate-from-Y12-nonvanishing}
+The condition
+\[
+  K_9(T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}]^{\mathrm{tr}})\ne0
+\]
+is a signature nonvanishing test.  It does not by itself ensure that the normal
+functional \(K_9\) is quantitatively usable.  If an actual-source tangent is
+almost purely order nine, then \(K_9\) may have super-polynomial norm after
+quotienting lower-order directions.  Thus the \(K_9\)-route requires both:
+\[
+  \boxed{K_9(T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}]^{\mathrm{tr}})\ne0}
+  \qquad\text{and}\qquad
+  \boxed{\mathrm{LowerOrderTangentObservability}_{K9}}.
+\]
+\end{remark}
+
 \begin{remark}[The \(Y12\) channel is the preferred \(K_9\) test]
 \label{rem:Y12-preferred-K9-test}
 For the rank-two D4 output
@@ -37234,6 +37299,47 @@ charts.  If it fails, one should next test the \(\Gamma_G\)-channel through
 \]
 If both tests vanish, the order-nine singular residual \(\mathcal K_9\) is
 rank-zero for finite D4 and cannot serve as the downstream forbidden channel.
+\end{remark}
+
+\begin{remark}[\(E_2^{Y12}\) honesty audit]
+\label{rem:E2-Y12-honesty-audit}
+Before claiming that the \(Y12\)-normal direction is forbidden, one must audit
+the primitive \(Y12\)-signature of the actual completion/curvature term:
+\[
+  \Pi_{Y12}E_2.
+\]
+There are three cases.
+
+\[
+\boxed{\text{Case A: }\Pi_{Y12}E_2=0\text{ or }Q^{-B}\text{-small}.}
+\]
+Then \(Y12\) is a strong forbidden-channel candidate, and the actual-row upper
+requires only
+\[
+  \Pi_{Y12}T_{\mathrm{tr}\to\mathrm{sing}}J_{\mathrm{tr}}(R_X)
+\]
+to be small.
+
+\[
+\boxed{\text{Case B: }\Pi_{Y12}E_2\ne0\text{ but fixed/coherent}.}
+\]
+Then this piece must be included in the retained actual-source model or in
+\(R_{\mathrm{sing}}\).  The audit becomes whether its admissible variations span
+the same primitive \(Y12\) direction as the D4 carrier.
+
+\[
+\boxed{\text{Case C: }\Pi_{Y12}E_2\text{ supplies a free primitive }Y12
+\text{ amplitude}.}
+\]
+Then the \(Y12\)-normal D4 channel is tangent/coherent and the rank-one
+\(Y12\)-forbidden route is dead.
+
+Thus the finite audit is not merely
+\[
+  K_9(T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}])\ne0,
+\]
+but also whether actual \(E_2\)-coherence already contains that same primitive
+direction.
 \end{remark}
 
 \begin{definition}[Order-nine \(Y12\) normal quotient]
@@ -39064,6 +39170,54 @@ The latest role separation is:
 Thus ordinary, transition, and singular branch data should be used to build
 charts, weights, completions, and possible carrier holonomies.  They should not
 replace the scalar canonical Gate--1 source.
+\end{remark}
+
+\begin{remark}[Coherent graph versus forbidden vertical residual]
+\label{rem:coherent-graph-versus-forbidden-vertical}
+The current architecture repeatedly has the same form:
+\[
+  \boxed{\text{coherent graph}}
+  \qquad\text{versus}\qquad
+  \boxed{\text{forbidden vertical residual}.}
+\]
+
+For the \(Y12\)-fiber, the coherent graph has the form
+\[
+  s_9^Y=\rho_Ys_7+\eta_{\mathrm{coh}},
+\]
+and the forbidden normal component is
+\[
+  s_9^Y-\rho_Ys_7.
+\]
+
+For finite/O2/O3, the coherent graph is the near-pure determinant span
+\[
+  D_{-n+1},\ldots,D_{-n+d_0},
+\]
+and the forbidden residual is the Schur component
+\[
+  D_{-n}
+  \notin
+  \operatorname{span}\{D_{-n+1},\ldots,D_{-n+d_0}\}.
+\]
+
+For Gate--1 finite AFE anti-lock, the coherent graph is the fold-locked
+prime/dual cancellation model, and the forbidden residual is the remaining
+canonical source energy
+\[
+  B_2+P_{2,\le X}+D_{2,\le X}
+  \not\approx0
+\]
+on \(W_{\mathrm{branch}}\).
+
+This language should be used to keep the three live modules aligned:
+\[
+  \mathrm{Agg}L^2(q''_{\can}),
+  \qquad
+  \mathrm{Graph/O2O3}_{23},
+  \qquad
+  \mathrm{Y12NormalD4}.
+\]
 \end{remark}
 
 The finite-core problem below should therefore be read in a further updated
@@ -42931,6 +43085,16 @@ quantity is
 \]
 Raw singular sine moments are especially unsafe unless a coefficient identity
 and tail nonaliasing theorem are proved.
+A normalized capture theorem such as
+\[
+  \|P_RF_m\|^2\ge Q^{-A}\|F_m\|^2
+\]
+does not by itself give Gate--1 if \(\|F_m\|^2\) is super-polynomially small.
+The active branch theorem must provide absolute scalar source energy, or an
+explicit reference nontriviality theorem for the branch normalization.  This is
+why the active upstream input is stated as aggregate \(L^2\)-observability for
+\(q''_{\can}\), not merely as finite-dimensional capture of whatever energy is
+present.
 \end{remark}
 
 \begin{remark}[No-go: functorial carrier lifts give rank-zero \(\Lambda\)]
@@ -43096,7 +43260,27 @@ For \(\delta=R^{-C}\), route
 \[
   \Omega_{\mathrm{cen}}=\{|x-\tfrac12|<\delta\}
 \]
-as a rescaled branch and prove the corresponding graph/O2/O3 lower bound.
+as a rescaled branch and prove both the \(L^2\)-anti-lock and graph/O2/O3
+lower bounds there.
+
+\item \textbf{Canonical quadratic multiplier.}
+Prove
+\[
+  m_{\can,+}(x)=\kappa(x-z_0)^2u(x)
+\]
+with \(R^C\)-controlled divided differences for \(u\), giving
+\[
+  \operatorname{dist}(1/m_{\can,+},\mathbf C_R[x])\ge Q^{-A}.
+\]
+
+\item \textbf{Near-pure Schur block.}
+Prove
+\[
+  D_{-n}
+  \notin_{Q^{-A}}
+  \operatorname{span}\{D_{-n+1},\ldots,D_{-n+d_0}\}
+\]
+under the active Stack weight.
 
 \item \textbf{EF residual split.}
 Prove both
@@ -43107,6 +43291,13 @@ and, separately,
 \[
   \mathrm{EFCompletion}_{K9}.
 \]
+
+\item \textbf{Y12 honesty.}
+Classify
+\[
+  \Pi_{Y12}E_2
+\]
+as absent/small, fixed/coherent, or freely tangent.
 
 \item \textbf{Y12 normal quotient.}
 Compute whether
@@ -43122,6 +43313,14 @@ Compute
   (I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_7]^{\mathrm{tr}},
   \qquad
   (I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}]^{\mathrm{tr}}.
+\]
+
+\item \textbf{\(K_9\)-conditioning.}
+Prove lower-order tangent observability:
+\[
+  |T_La|\ge Q^{-A}|T_9a|
+  \qquad
+  \text{for every actual-source tangent }a.
 \]
 
 \item \textbf{Tubular singular coherence.}
@@ -47268,6 +47467,62 @@ This statement should be proved before capped extraction; hard extraction
 destroys the branch-charge/Fourier structure needed for determinant survival.
 \end{remark}
 
+\begin{hypothesis}[Canonical quadratic multiplier theorem]
+\label{hyp:canonical-quadratic-multiplier}
+On each ordinary branch subpacket used for finite/O2/O3, the canonical
+curvature multiplier has the form
+\[
+  m_{\can,+}(x)=\kappa (x-z_0)^2u(x),
+\]
+where
+\[
+  |\kappa|,\ |\kappa|^{-1}\le Q^C,
+  \qquad
+  |u(x)|,\ |u(x)|^{-1}\le Q^C,
+\]
+and \(u\) has \(R^C\)-controlled divided differences through order \(R+1\) in
+the active \(R^C\)-conditioned Riesz norm.  Moreover, \(z_0\) is polynomially
+close to the active branch scale, so that \(1/m_{\can,+}\) has a controlled
+second-order pole visible to the finite polynomial space.
+
+Consequently
+\[
+  \operatorname{dist}_{\mathcal R_R}
+  \left(
+    1/m_{\can,+},
+    \mathbf C_R[x]
+  \right)
+  \ge e^{-O(R\log R)}
+  \ge Q^{-C}.
+\]
+\end{hypothesis}
+
+\begin{remark}[Why the quadratic multiplier is the O2/O3 keystone]
+\label{rem:canonical-quadratic-multiplier-keystone}
+The pure-plus graph theorem
+\[
+  \operatorname{dist}(1/m_{\can,+},\mathbf C_R[x])\ge Q^{-A}
+\]
+is the analytic source of pure-plus determinant mass.  In the model
+\[
+  m_{\can,+}(x)\sim \kappa x^2,
+\]
+this is the elementary non-polynomiality of \(x^{-2}\), with loss
+\(e^{-O(R\log R)}=Q^{-O(1)}\).
+
+The same multiplier also produces the branch-substitution ratio
+\[
+  r(x)=\frac{(1-x)^2}{x^2}
+\]
+which enters the bounded-charge near-pure Schur block.  Thus the same finite
+theorem supplies both:
+\[
+  \boxed{\text{pure-plus graph non-polynomiality}}
+  \qquad\text{and}\qquad
+  \boxed{\text{near-pure substitution-ratio separation}.}
+\]
+\end{remark}
+
 \begin{definition}[Harmonic exterior O2/O3 quantity]
 \label{def:finite-o2o3-harmonic-exterior}
 For an \(n\times n\) augmented matrix \(A\), \(n=R+2\), define
@@ -47681,6 +47936,25 @@ Thus the proof-critical admissibility package is
   \mathrm{AlphaD4Compatibility}.
   }
 \]
+There are two logically distinct uses of \(\alpha\).
+
+First, \(\alpha\) may be used as a proof-thickening or averaging parameter for
+determinant survival.  In that use, one proves persistence back to the
+fixed-target problem at \(\alpha=0\), and \(\partial_\alpha u\) need not be
+added to the downstream actual-source tangent space.
+
+Second, \(\alpha\) may be admitted as an actual source deformation.  In that
+case \(\partial_\alpha u\) belongs to the tangent space in
+\(\mathcal T_{\mathrm{par}}^{(\alpha)}\), and one must verify
+\[
+  [\mathsf C_{Y12}]\ne0
+  \quad\text{in}\quad
+  \mathcal Q_9^{\mathrm{forb},\alpha}.
+\]
+Therefore the proof should not automatically insert \(\partial_\alpha u\) into
+the downstream tangent space merely because \(\alpha\) is used as an auxiliary
+averaging parameter.
+
 If \(\alpha\)-admission kills \([\mathsf C_{Y12}]\), then \(\alpha\) may still
 serve as an auxiliary averaging parameter, but it must not be added to the
 downstream actual-source manifold without a replacement forbidden channel.
@@ -48146,6 +48420,14 @@ The active inputs are now as follows.
 \mathrm{Finite/O2O3}_{23}
 & \text{open}
 & \text{weighted exterior-pivot anti-trough for the full matrix}\\
+\mathrm{CanonicalQuadraticMultiplier}
+& \text{finite-audit/open}
+& m_{\can,+}=\kappa(x-z_0)^2u(x)
+  \text{ with divided-difference control}\\
+\mathrm{NearPureSchur}_{23}
+& \text{open}
+& D_{-n}\notin
+  \operatorname{span}\{D_{-n+1},\ldots,D_{-n+d_0}\}\\
 \mathrm{FullDetSurvival}
 & \text{open}
 & \text{branch-count cancellation under Stack weight}\\
@@ -48162,6 +48444,14 @@ The active inputs are now as follows.
 & \text{finite-audit}
 & \mathcal K_9(T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}])\neq0
   \text{ and singular residual upper}\\
+\mathrm{LowerOrderTangentObservability}_{K9}
+& \text{finite-audit}
+& |T_La|\ge Q^{-A}|T_9a|
+  \text{ for every actual-source tangent}\\
+E_2^{Y12}\text{-Honesty}
+& \text{finite-audit}
+& \Pi_{Y12}E_2
+  \text{ absent/fixed/free tangent classification}\\
 \mathrm{TubularNormality}_{\mathrm{sing}}
 & \text{finite-audit}
 & \text{polynomial second fundamental form of }\mathcal M_{\mathrm{sing}}^{\mathrm{arith}}\\
