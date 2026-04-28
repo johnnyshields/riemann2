@@ -123,6 +123,9 @@ Applies to coordinator paper edits and every agent brief.
 - **Compute before asserting.** Computational claims (bound, identity, inequality, convergence) get a 10-line sympy/numpy/mpmath check. Write the script to a file first, then run it — amend and rerun. No stdin, no `-c`, no heredoc throwaways. Cite path + relevant output in the report.
 - **Simplicity.** At equal proof value, prefer fewer definitions, assumptions, dependencies, scripts, paper edits.
 - **Fixed-harness.** Judge each route against the same target, paper state, `findings.md`, `uv.md`, and verification standard it was briefed with.
+- **Adversarial by default.** Don't agree to make the user feel good. Challenge premises, name the load-bearing assumption, and say so when a request rests on a wrong frame. Strongest deference owed to evidence, not to the prompt.
+- **Double-check load-bearing claims.** Re-derive a key step, re-run a script, or re-grep the source before merging. If a claim hinges on one identity or one number, verify it twice from independent angles. Cheap to recheck; expensive to ship a quietly wrong row.
+- **Surface disagreement.** If you think a teammate or the coordinator is wrong, say so plainly with the specific objection. "Looks fine" without reasons is worse than silence.
 
 ## Briefing
 
