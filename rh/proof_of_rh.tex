@@ -30370,6 +30370,122 @@ The proof proceeds in four finite-survival layers:
 \end{enumerate}
 \end{proposition}
 
+\subsection{Shared finite-survival language}
+\label{subsec:shared-finite-survival-language}
+
+\begin{definition}[Finite-survival gaps and residuals]
+\label{def:finite-survival-gaps}
+The downstream proof uses the following shared finite objects.
+
+\paragraph{Source survival.}
+Let
+\[
+\mathcal S_X:=\operatorname{span}\{B_2,P_{2,\le X},D_{2,\le X}\},
+\qquad
+F_X:=B_2+P_{2,\le X}+D_{2,\le X}.
+\]
+Define
+\[
+M:=G_{\mathrm{ref}}^{-1/2}G_{\mathrm{branch}}G_{\mathrm{ref}}^{-1/2},
+\qquad
+E:=G_{\mathrm{ref}}^{-1/2}\bigl(G_{\mathrm{branch}}(q''_{\can})-G_{\mathrm{branch}}(F_X)\bigr)G_{\mathrm{ref}}^{-1/2},
+\]
+and the source gap
+\[
+\delta_{\mathrm{src}}:=\min_i\!\left(M_{ii}-\sum_{j\neq i}|M_{ij}|\right)-\|E\|_{\operatorname{op}}.
+\]
+Source survival means \(\delta_{\mathrm{src}}\ge Q^{-A}\).
+
+\paragraph{Graph survival.}
+Define
+\[
+K:=G_{00}^{-1/2}G_{0S}G_{SS}^{-1/2},
+\qquad
+\delta_{\mathrm{graph}}:=1-\|K\|_{\operatorname{op}}.
+\]
+Graph survival means \(\delta_{\mathrm{graph}}\ge Q^{-A}\), equivalently a Schur complement lower bound or a polynomial principal-angle gap.
+
+\paragraph{Quotient survival.}
+Let
+\[
+U_p:=\operatorname{col}\bigl(T_{\mathrm{par}}^{(\alpha)},T_7,T_{<7},II_{\mathrm{arith},9},T_{E_2}\bigr),
+\qquad
+\mathcal K_p^Y:=\operatorname{im}
+\begin{bmatrix}
+R_{B_2,p}&R_{P,p}&R_{D,p}&A_{\alpha,p}&A_{7,p}&A_{<7,p}&A_{II,p}&A_{E_2,p}
+\end{bmatrix},
+\]
+\[
+q_p^Y:=I-P_{\mathcal K_p^Y}^{\mathrm{bd}},
+\qquad
+N_p:=\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing}}\mathcal N_p^{\mathrm{D4}},
+\qquad
+Y_p:=\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}]^{\mathrm{tr}}.
+\]
+The quotient residuals are
+\[
+r_{N,p}:=q_p^Y N_p,
+\qquad
+r_{Y,p}:=q_p^Y Y_p.
+\]
+Quotient survival means \(r_{N,p}\approx 0\) and \(r_{Y,p}\neq 0\) with polynomial margin.
+
+\paragraph{Graph/coercivity survival.}
+Let
+\[
+\mathfrak T_p:=(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}.
+\]
+If \(\mathcal R_X=\mathcal R_{X,\mathrm{low},p}\oplus\mathcal R_{X,\mathrm{tail},p}\) is the admissible residual split and \(D_p\) is the low-mode defect matrix for \(\mathfrak T_p\), then
+\[
+\delta_{\mathrm{coerc}}:=\sigma_{\min}(D_p).
+\]
+Graph/coercivity survival means \(\delta_{\mathrm{coerc}}\ge Q^{-C}\) and the tail is absorbed by the EF/singular-discard bound.
+
+\paragraph{Extraction covariance survival.}
+On each frozen cap \(C_j\), let
+\[
+B_j:=\sum_{p\in C_j}w_p\,\Gamma_p\Gamma_p^\ast,
+\qquad
+w_p=\rho_p\frac{E_{1,p}H_p}{N_p},
+\qquad
+\Gamma_p=\binom{\Gamma_G(p)}{\Gamma_{G,2}(p)}.
+\]
+Define
+\[
+\delta_{\mathrm{ext}}:=\frac{\det(B_j)}{(\operatorname{tr}B_j)^2}.
+\]
+Extraction survival means \(\delta_{\mathrm{ext}}\ge Q^{-A}\).  If \(\delta_{\mathrm{ext}}\ll Q^{-A}\), the wall is effectively static and the cap is handed to the \(Y12\) quotient module.
+
+\paragraph{Atomic contradiction.}
+The forbidden observable is
+\[
+\Lambda_{Y,p}:=q_p^Y\Pi_{\Sigma(Y12),p}T_{\mathrm{tr}\to\mathrm{sing},p}P_{\mathrm{tr},p}.
+\]
+The final contradiction compares the same quotient norm upper bound for \(\Lambda_{Y,p}J_{\mathrm{tr},p}(q''_{\can})\) with the lower bound carried by \(r_{Y,p}\).
+\end{definition}
+
+\begin{remark}[Shared failure labels]
+\label{rem:shared-failure-labels}
+The proof uses a fixed failure grammar:
+\[
+\text{branch holes},
+\quad
+\text{off-diagonal packet correlation too large},
+\quad
+\text{residual completion failure},
+\quad
+\text{thickened overlap too coherent},
+\quad
+\text{quotient killed primitive carrier},
+\quad
+\text{graph/coercivity collapse},
+\quad
+\text{wall effectively static}.
+\]
+Each agent should reduce its module to one of the gaps
+\(\delta_{\mathrm{src}},\delta_{\mathrm{graph}},\delta_{\mathrm{coerc}},\delta_{\mathrm{ext}}\), or to the residuals \(r_{N,p},r_{Y,p}\).
+\end{remark}
+
 \subsection{\texorpdfstring{\(L^2\)}{L2}-input real rigidity}
 
 \begin{definition}[Ordinary zero-separated source packet]
@@ -43249,6 +43365,11 @@ Y12\text{-quotient survival}
 
 \section{No-go and audit ledger}
 \label{sec:no-go-and-audit-ledger}
+
+All later \(\mathrm{wip}\)-remarks in this section use the shared finite-survival
+notation of
+Subsection~\ref{subsec:shared-finite-survival-language}
+(Definition~\ref{def:finite-survival-gaps}).
 
 \begin{remark}[Unified bad-zero/nonrecurrence obstruction]
 \label{rem:unified-bad-zero-nonrecurrence-obstruction}
