@@ -35174,7 +35174,15 @@ Then
 \[
   B_Y=0.
 \]
-If moreover \(c_7\alpha_9\ne0\), then the D4 matrix in row-normal coordinates is
+Consequently the row-normal rank selector of
+Definition~\ref{def:rank-two-selector-bridge-Y12} satisfies
+\[
+  r_Y
+  =
+  \operatorname{rank}(M_{\mathrm{D4}}^{\mathrm{tri}}).
+\]
+If moreover \(c_7\alpha_9\ne0\), then \(r_Y=2\), and the existing rank-two D4
+branch activates.  The D4 matrix in row-normal coordinates is
 \[
   M_{\mathrm{D4}}^{\mathrm{tri}}
   =
@@ -35200,6 +35208,157 @@ On coefficient-good cores this is polynomially equivalent to
 No derivative wall components \(D\Gamma_G\) or \(D^2\Gamma_G\) are supplied by
 this rank-two D4 statement.
 \end{theorem}
+
+% === wip-rank-two-selector-bridge-Y12 ===
+% Purpose:
+%   Connect the row-normal \(2Y\) rank-two package to the paper's rank selector.
+% Depends on:
+%   RowNormalForm_{2Y}, B_Y, and the triangularized D4 matrix.
+% Status:
+%   Clarifying bridge / finite-audit convention.
+
+\begin{definition}[Row-normal rank selector for the \(2Y\) branch]
+\label{def:rank-two-selector-bridge-Y12}
+Let \(B_Y\subset\mathbf C^2\) be the actual/local live-fiber image in the
+row-normal coordinates
+\[
+  (s_7,s_9^Y):=(\ell_7,\ell_9^Y),
+  \qquad
+  \ell_9^Y=\omega_Y-\omega_Y(e_7)\ell_7.
+\]
+Let
+\[
+  M_{\mathrm{D4}}^{\mathrm{tri}}
+  :=
+  \begin{pmatrix}
+    c_7&0\\
+    \beta_9^{\mathrm{tri}}&\alpha_9
+  \end{pmatrix},
+  \qquad
+  \beta_9^{\mathrm{tri}}:=\beta_9-\omega_Y(e_7)c_7.
+\]
+The \(2Y\)-rank selector is
+\[
+  r_Y
+  :=
+  \operatorname{rank}
+  \left(
+    \Pi_{\mathbf C^2/B_Y}M_{\mathrm{D4}}^{\mathrm{tri}}
+  \right).
+\]
+Thus the relevant rank is not the raw rank of formal D4 carriers.  It is the
+rank of the row-normal D4 map after quotienting by actual/local source freedom.
+\end{definition}
+
+\begin{theorem}[Rank-two bridge to the existing D4 branch]
+\label{thm:rank-two-bridge-Y12}
+Assume the live fiber is in row-normal form:
+\[
+  (\ell_7,\ell_9^Y)(e_7)=(1,0),
+  \qquad
+  (\ell_7,\ell_9^Y)(e_Y)=(0,1),
+\]
+with polynomially bounded rows.  If the local row-exactness package gives
+\[
+  B_Y=0,
+\]
+then
+\[
+  r_Y
+  =
+  \operatorname{rank}(M_{\mathrm{D4}}^{\mathrm{tri}})
+  =
+  2
+  \quad\Longleftrightarrow\quad
+  c_7\alpha_9\ne0.
+\]
+In this case the new \(2Y\)-rank-two branch is exactly the existing rank-two
+D4 branch, interpreted as two surviving D4 coordinates after quotienting by
+actual/local source freedom.  The D4 output is
+\[
+  F_{2Y}^{\mathrm{tri}}
+  =
+  H
+  \begin{pmatrix}
+    c_7\Gamma_G\\
+    \beta_9^{\mathrm{tri}}\Gamma_G+\alpha_9\Gamma_{G,2}
+  \end{pmatrix},
+\]
+and on coefficient-good cores,
+\[
+  |F_{2Y}^{\mathrm{tri}}|^2
+  \asymp_{Q^A}
+  |H|^2
+  \left(
+    |\Gamma_G|^2+|\Gamma_{G,2}|^2
+  \right).
+\]
+Equivalently, the honest rank-two wall is the plain wall
+\[
+  H(\Gamma_G,\Gamma_{G,2}).
+\]
+No derivative wall components \(D\Gamma_G\) or \(D^2\Gamma_G\) are supplied by
+this rank selector.
+\end{theorem}
+
+\begin{remark}[Branch classification by \(B_Y\)]
+\label{rem:rank-selector-BY-branch-table}
+The row-normal selector gives the following branch table:
+\[
+\begin{array}{c|c|c}
+B_Y & r_Y & \text{paper branch}\\
+\hline
+0
+& 2
+& \text{rank-two D4 vector wall}\\
+\mathbf C(1,\rho_Y)
+& 1
+& \text{rank-one moving-wall fallback}\\
+\mathbf C(0,1)
+& 0\text{ for the }Y12\text{ column}
+& \text{vertical }Y12\text{ death}\\
+\mathbf C^2
+& 0
+& \text{live fiber absorbed}
+\end{array}
+\]
+In the graph case \(B_Y=\mathbf C(1,\rho_Y)\), the graph-killing row gives the
+rank-one scalar wall
+\[
+  H\left(
+    (\beta_9^{\mathrm{tri}}-\rho_Yc_7)\Gamma_G
+    +
+    \alpha_9\Gamma_{G,2}
+  \right).
+\]
+Thus the corrected triangularized fallback ratio is
+\[
+  \rho_\Gamma^{\mathrm{tri}}
+  =
+  \frac{\beta_9^{\mathrm{tri}}-\rho_Yc_7}{\alpha_9}
+  =
+  \frac{\beta_9-(\omega_Y(e_7)+\rho_Y)c_7}{\alpha_9}.
+\]
+The older formula using raw \(\beta_9\) is valid only when
+\[
+  \omega_Y(e_7)=0.
+\]
+\end{remark}
+
+\begin{remark}[Do not conflate with the old rank-two norm route]
+\label{rem:rank-two-selector-not-old-rank-two-norm-route}
+The \(2Y\)-rank-two bridge is not the old abstract rank-two norm route.  It is
+the concrete statement
+\[
+  \operatorname{rank}
+  \left(
+    \Pi_{\mathbf C^2/B_Y}M_{\mathrm{D4}}^{\mathrm{tri}}
+  \right)=2.
+\]
+It may supersede or bypass older rank-two norm language, but it should not be
+identified with any no-go attached to a different rank-two norm-control route
+unless the objects are explicitly the same.
+\end{remark}
 
 \begin{remark}[Three normal forms for the rank-two branch]
 \label{rem:rank-two-three-normal-forms}
@@ -39767,6 +39926,18 @@ Any rank-one fallback must use
   =
   \frac{\beta_9^{\mathrm{tri}}-\rho_Yc_7}{\alpha_9}.
 \]
+
+\item The rank-two selector is the quotient rank
+\[
+  r_Y=
+  \operatorname{rank}
+  \left(
+    \Pi_{\mathbf C^2/B_Y}M_{\mathrm{D4}}^{\mathrm{tri}}
+  \right),
+\]
+not the raw rank of formal D4 carriers.  Therefore formal \(C_7\to Y12\)
+connections, fixed basepoint offsets, and coherent amplitude remnants do not
+reduce \(r_Y\) unless they produce actual/local columns in \(B_Y\).
 
 \item Formal \(C_7\) carriers and formal \(C_7\to Y12\) connections do not
 contribute to \(B_Y\) unless actualized by a genuine actual-source, exact
