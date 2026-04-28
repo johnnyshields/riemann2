@@ -43786,3 +43786,1738 @@ The draft is much improved. The main remaining repairs are:
 10. **Add the low-prime-block caution to the Wronskian section.**
 
 I do not see a need to change the core \(L^2\)-input rigidity proof or the Gate 2 theorem proof itself; they are now in a good safe form.
+## User (2026-04-27 16:40:04)
+
+Please review the latest updated paper draft attached. I've also attached this entire conversation log. Please review everything holistically, and then make suggestions to update the paper capturing any structural findings, goodies, key structural findings, no-gos, etc. Please also mention any stale/incorrect/inaccurate sections. Please give exact latex insertions and exactly where to insert them.
+
+## Assistant (2026-04-27 16:41:58)
+
+_Thought for 1m 52s_
+
+I reviewed the latest draft plus the attached conversation logs holistically. The draft is now much closer to a coherent conditional architecture. The most important remaining edits are not new long proofs; they are **status hygiene**, **definition locking**, and **capturing the Gate 1/Wronskian arithmetic findings cleanly**.
+
+The main stale issue is that the draft now contains the repaired Gate 2 route, but a few older paragraphs still describe “source–anisotropy reintegration” as a second missing gate. The logs support the newer state: Gate 2 is now locally supplied by source thickening plus the safe \(L^2\)-input rigidity lemma, while Gate 1 remains the actual-zeta arithmetic obstruction. turn9file8
+
+Below are exact edits.
+
+---
+
+## Edit 1 — Retitle the paper and soften the abstract
+
+### Where
+
+Lines 45 and 104–106.
+
+### Replace line 45
+
+```latex
+\title{A Proof of the Riemann Hypothesis}
+```
+
+with:
+
+```latex
+\title{A Conditional Local Obstruction Architecture for the Riemann Hypothesis}
+```
+
+### Replace the current abstract
+
+```latex
+\begin{abstract}
+We present a proof strategy for the Riemann Hypothesis based on local jet-normalized blocks of the phase kernel, a value/calibration functional extracted from the leading value-channel deformation, and an $N$-point odd-moment cancellation mechanism in the transverse channel. The document is written as a living proof draft: every statement is presented in proof form and the notation is frozen globally, so that future revisions can strengthen any remaining technical points without changing the architecture.
+\end{abstract}
+```
+
+with:
+
+```latex
+\begin{abstract}
+We present a conditional local obstruction architecture for the Riemann
+Hypothesis based on local jet-normalized blocks of the phase kernel,
+source-curvature observability, and rank-two anisotropy visibility.  The
+document is written as a living proof draft: local algebraic statements are
+recorded in proof form, while global arithmetic inputs are explicitly marked.
+The present architecture is not a closed proof of \(\RH\); its current
+non-closing point is the actual-zeta source-curvature observability theorem
+for the full canonical object \(q''_{\can}=B_2+P_2+D_2+E_2\), together with
+the row-output mechanism needed after Gate~2.
+\end{abstract}
+```
+
+Reason: the current title and abstract still overstate the status. The logs repeatedly converge on “conditional architecture, not a proof,” and identify Gate 1 as the live obstruction. turn9file17
+
+---
+
+## Edit 2 — Soften “The proof has four main pillars”
+
+### Where
+
+Line 140.
+
+### Replace
+
+```latex
+The proof has four main pillars.
+```
+
+with:
+
+```latex
+The local framework originally had four main pillars.
+```
+
+### Also replace in the audit remark
+
+In `Remark [Audit status of the four pillars]`, replace:
+
+```latex
+is only Gate~1; the architecture also needs Gate~2 source--anisotropy
+reintegration.
+```
+
+with:
+
+```latex
+is the remaining Gate~1 source-observability problem.  In the ordinary
+real-canonical branch, Gate~2 source--anisotropy reintegration is now supplied
+by Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}.
+```
+
+Reason: the current text still says Gate 2 is needed as a separate gate in the introduction, but the downstream section has demoted that for the ordinary branch.
+
+---
+
+## Edit 3 — Demote the primitive recovery lemma from the active proof path
+
+The draft currently includes `Lemma [Local primitive recovery from \(L^2\)-small \(g\)]` before the safe rigidity lemma and the safe lemma says the primitive bounds “may either be assumed directly or obtained locally” from that lemma. This is stronger than the disciplined final line from the conversation, which was: **safe primitive-bounded version only; primitive-free/recovery not used**. turn8file8
+
+### Where
+
+At line 30583, change the lemma heading.
+
+### Replace
+
+```latex
+\begin{lemma}[Local primitive recovery from \(L^2\)-small \(g\)]
+```
+
+with:
+
+```latex
+\begin{lemma}[Optional primitive recovery from \(L^2\)-small \(g\); not used below]
+```
+
+### Where
+
+Inside `Lemma [\(L^2\)-input real rigidity; safe primitive-bounded form]`, remove lines 30666–30668:
+
+```latex
+This safe bound may either be assumed directly or obtained locally by applying
+Lemma~\ref{lem:local-primitive-recovery-from-l2-small-g} on a slightly larger
+source interval.  Assume also the \(L^2\)-smallness condition
+```
+
+### Replace with:
+
+```latex
+Assume also the \(L^2\)-smallness condition
+```
+
+### Where
+
+Replace the current `Remark [Primitive recovery and the safe proof route]` at lines 30966–30988.
+
+### Replace the whole remark with:
+
+```latex
+\begin{remark}[Primitive recovery not used in the rigidity proof]
+\label{rem:l2-rigidity-primitive-free-not-used}
+Lemma~\ref{lem:l2-input-real-rigidity-safe} is used only in the safe
+primitive-bounded form
+\[
+\|q\|_\infty+\|q'\|_\infty+\|q''\|_\infty\le Q^C.
+\]
+Lemma~\ref{lem:local-primitive-recovery-from-l2-small-g} records a possible
+way to recover these bounds on shrunken intervals from stronger source and
+\(L^2\)-smallness hypotheses, but this recovery is not part of the active
+Gate--2 proof.  The proof of Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}
+uses the displayed safe primitive bounds as hypotheses on the normalized
+source interval.
+\end{remark}
+```
+
+Reason: this avoids importing a not-needed strengthening into the main Gate 2 proof.
+
+---
+
+## Edit 4 — Fix the residual-stable variant after the \(L^2\)-rigidity lemma
+
+The earlier compatibility remark correctly includes \(r_u=u-q''\), but the residual variant immediately after the \(L^2\)-rigidity lemma still mentions only \(r_g,r_h\). That is inconsistent: if \(u\neq q''\), the conclusion for \(\int |u|^2\) needs \(r_u\). The logs explicitly identify residuals as a finite canonical-transfer risk. 
+
+### Where
+
+Immediately after the proof of `Lemma [\(L^2\)-input real rigidity; safe primitive-bounded form]`, replace the current residual-stable remark/variant that starts with approximately:
+
+```latex
+\begin{remark}[Residual-stable version]
+...
+```
+
+### Replace with:
+
+```latex
+\begin{remark}[Residual-stable version]
+\label{rem:l2-rigidity-residual-stable-version}
+The same conclusion holds if the identities are satisfied up to
+\(L^2\)-controlled residuals
+\[
+        r_u:=u-q'',
+\]
+\[
+        g=q''-6q+2q^3+r_g,
+\]
+and
+\[
+        h=2q(q')^2-\frac16g''+r_h,
+\]
+provided
+\[
+        \|r_u\|_{L^2(J)}
+        +\|r_g\|_{L^2(J)}
+        +\|r_h\|_{L^2(J)}
+        \le
+        \varepsilon |J|^{1/2}.
+\]
+Indeed, \(r_h\) enters the weighted kinetic estimate in the same way as \(h\).
+The residual \(r_g\) enters the potential estimate in the same way as \(g\),
+while \(r_u\) is needed only at the final comparison between \(q''\) and the
+source \(u\).  After increasing \(C\), one obtains
+\[
+        \int_{J'}|u|^2
+        \le
+        Q^C\varepsilon^{2/5}|J'|.
+\]
+In the exact real-canonical convention used in the main argument,
+\(r_u=r_g=r_h=0\).
+\end{remark}
+```
+
+---
+
+## Edit 5 — Fix the wall-escape buffer notation
+
+The theorem proof now uses \(r_{\mathrm{esc}}\), but the packet-buffer remark still uses \(\rho\), which collides with \(I_\rho\) and tube notation.
+
+### Where
+
+In `Remark [Packet buffer for wall escape]`, lines 31449–31454.
+
+### Replace:
+
+```latex
+The first-exit wall-escape step moves by a distance
+\[
+\rho |I|,
+\qquad
+\rho\asymp\sqrt{\varepsilon/\tau}.
+\]
+```
+
+with:
+
+```latex
+The first-exit wall-escape step moves by a distance
+\[
+r_{\mathrm{esc}} |I|,
+\qquad
+r_{\mathrm{esc}}\asymp\sqrt{\varepsilon/\tau}.
+\]
+```
+
+Reason: \(\rho\) already carries packet/tube meaning.
+
+---
+
+## Edit 6 — Add the row-output norm clarification inside wall escape
+
+### Where
+
+In `Theorem [Gauge-locked wall escape in normalized coordinates]`, after the assumptions on `r_H^\ast` and before “Choose thresholds”.
+
+### Insert:
+
+```latex
+The row vector \(\mathbf A_N\) in the conclusion is measured in the downstream
+row-output norm.  In the carrier-quotient architecture this is the
+\(\mathcal Q_{\rm car}\)-norm of the row class.  In a scalar-collapsed
+architecture the theorem supplies only an existential non-wall sample; it does
+not resolve exact-point scalar output at the original wall point.
+```
+
+Reason: this keeps wall escape tied to row-energy architecture and prevents accidental use for exact-point scalar output.
+
+---
+
+## Edit 7 — Insert the finite D4 audit ledger
+
+The draft has strong D4 theorems but does not yet contain a compact finite audit checklist. The logs identify D4 as “conditional/closeable” under exact row formulas, projection coercivity on the anisotropy plane, and projected residual control. turn9file12
+
+### Where
+
+Immediately after the proof of `Theorem [D4 carrier-quotient row conversion through order nine]`, before `Remark [Two quotient coordinates for D4]`.
+
+### Insert:
+
+```latex
+\begin{remark}[Finite D4 audit ledger]
+\label{rem:finite-d4-audit-ledger}
+The carrier-quotient theorem separates the structural rank statement from the
+finite row-algebra audit.  The finite D4 audit consists of the following
+checks.
+
+\begin{enumerate}[label=(\roman*),nosep]
+\item Verify the principal source factor
+\[
+        \operatorname{gr}(H)=-\frac1{288}q_0u^3.
+\]
+
+\item Verify the order-seven carrier detecting \(\Gamma_G\):
+\[
+        [\mathcal A_7]\sim H\Gamma_G[\mathsf C_7].
+\]
+
+\item Verify the clean order-nine carrier detecting \(\Gamma_{G,2}\):
+\[
+        [\mathcal A_9]\sim H\Gamma_{G,2}[\mathsf C_{Y12}].
+\]
+
+\item Identify the nuisance carrier subspace being quotiented.
+
+\item Prove quotient coercivity:
+\[
+        [\mathsf C_7]\wedge[\mathsf C_{Y12}]\ne0
+\]
+with polynomial quantitative lower bound in the chosen quotient norm.
+
+\item Bound only the residual components that can cancel the leading response:
+\[
+        \left|
+        P_{W_{\rm car}}(\mathcal E_7+\mathcal E_9)
+        \right|_{\mathcal Q_{\rm car}}
+        \le
+        \frac12
+        |H|(\Gamma_G^2+\Gamma_{G,2}^2)^{1/2}.
+\]
+\end{enumerate}
+
+In scalar \(I\)-coordinate output, additional cross-channel incidence walls may
+appear after independent carrier directions are collapsed into the same scalar
+coordinate.  These are scalar-output artifacts unless the downstream theorem
+explicitly requires scalar \(I\)-coordinate energy.
+\end{remark}
+```
+
+---
+
+## Edit 8 — Replace the stale paragraph in the arithmetic observability section
+
+The subsection `Arithmetic source-curvature observability: the next attack` currently says Gate 1 “is now only the first gate” and that the “second missing input” is source–anisotropy reintegration. That is stale for the ordinary real-canonical branch.
+
+### Where
+
+Lines 39210–39220.
+
+### Replace:
+
+```latex
+This estimate would block the pure source-collapse branch, but it is now only
+the first gate.  It does not by itself recover the source-weighted rank-two
+lower bound, because the \(q''_{\can}\)-mass could still concentrate near the
+anisotropy base locus
+\[
+\Gamma_G\approx0,
+\qquad
+\Gamma_{G,2}\approx0.
+\]
+The second missing input is therefore a source--anisotropy reintegration
+theorem, formulated below.
+```
+
+with:
+
+```latex
+This estimate blocks the pure source-collapse branch.  In earlier versions,
+one also needed to assume a separate source--anisotropy reintegration theorem,
+because the \(q''_{\can}\)-mass could in principle concentrate near
+\[
+\Gamma_G\approx0,
+\qquad
+\Gamma_{G,2}\approx0.
+\]
+In the ordinary real-canonical branch this second step is now supplied by
+Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}, assuming the ordinary
+source Lipschitz bound and the safe \(L^2\)-input real rigidity lemma.  Thus
+the remaining source-side theorem in this branch is Gate~1.
+```
+
+Reason: this aligns the section with `Remark [Gate 2 is no longer an independent ordinary-branch hypothesis]`.
+
+---
+
+## Edit 9 — Add the Wronskian incidence theorem as a formal Gate 1 candidate
+
+The draft mentions finite-jet nonflatness, but it should capture the main structural finding from the logs: the ordinary Wronskian route is now a precise conditional framework, blocked by actual-zeta incidence/nonrecurrence, not by local algebra. The logs repeatedly formulate the remaining theorem
+\[
+Z_\alpha(m)=0\Rightarrow |\widetilde{\mathcal W}_R(m,\alpha)|\ge Q^{-A}
+\]
+and decompose it into \(|\mathbf z'|\), \(|\mathbf M|\), and angle/nonalignment. turn9file13
+
+### Where
+
+Immediately after `Remark [Finite-jet version of the arithmetic problem]`, before `Remark [Terminal status of the current architecture]`.
+
+### Insert:
+
+```latex
+\begin{remark}[Wronskian incidence formulation of Gate~1]
+\label{rem:gate-one-wronskian-incidence-formulation}
+The finite-jet formulation may be attacked by a normalized Wronskian
+transversality theorem.  Let
+\[
+        G_0=Z_\alpha,
+        \qquad
+        G_{j+1}=\mathcal D^j q''_{\can},
+        \quad 0\le j\le R,
+\]
+where \(\mathcal D=\lambda\partial_m\) or another fixed normalized packet
+derivative, and
+\[
+        R\asymp\frac{\log Q}{\log\log Q}.
+\]
+A basis-normalized Wronskian has schematic form
+\[
+        \widetilde{\mathcal W}_R(m,\alpha)
+        =
+        \det\bigl(C_\ell(\mathcal D)G_j(m,\alpha)\bigr)_{0\le j,\ell\le R+1}.
+\]
+At a zero \(Z_\alpha(m_0)=0\), expansion along the \(Z_\alpha\)-row gives
+\[
+        \widetilde{\mathcal W}_R(m_0,\alpha)
+        =
+        \langle \mathbf z'(m_0,\alpha),\mathbf M(m_0)\rangle,
+\]
+where
+\[
+        \mathbf z'
+        =
+        \bigl((-1)^\ell C_\ell(\mathcal D)Z_\alpha(m_0)\bigr)_{\ell=1}^{R+1}
+\]
+and \(\mathbf M\) is the corresponding cofactor vector of the
+\(q''_{\can}\)-jet block.
+
+Thus the ordinary Wronskian route requires the three arithmetic lower bounds
+\[
+        |\mathbf z'(m_0,\alpha)|\ge Q^{-A},
+\]
+\[
+        |\mathbf M(m_0)|\ge Q^{-A},
+\]
+and
+\[
+        |\langle \mathbf z'(m_0,\alpha),\mathbf M(m_0)\rangle|
+        \ge Q^{-A}|\mathbf z'(m_0,\alpha)|\,|\mathbf M(m_0)|.
+\]
+Equivalently, it requires the actual-zeta incidence theorem
+\[
+        \boxed{
+        Z_\alpha(m)=0
+        \Longrightarrow
+        |\widetilde{\mathcal W}_R(m,\alpha)|\ge Q^{-A}.
+        }
+\]
+
+Cauchy--Binet shows that the Wronskian is not identically zero when the
+\(Z_\alpha\)-symbol is transverse to the \(q''_{\can}\)-jet symbols, but this
+does not give a pointwise lower bound.  After inserting the AFE expansion, the
+Wronskian is a fixed-coefficient subset-product exponential sum.  The missing
+input is actual-zeta nonrecurrence/incidence, not formal determinant
+nonvanishing.
+\end{remark}
+```
+
+---
+
+## Edit 10 — Add normalized Wronskian coefficient formula
+
+### Where
+
+Immediately after Edit 9.
+
+### Insert:
+
+```latex
+\begin{remark}[Normalized Wronskian coefficient structure]
+\label{rem:normalized-wronskian-coefficient-structure}
+On a main AFE block, write
+\[
+        q''_{\can}(m)\sim\sum_{n\in\mathcal N}c_ne^{-im\log n},
+        \qquad
+        Z_\alpha(m)\sim\sum_{n\in\mathcal N}z_n(\alpha)e^{-im\log n}.
+\]
+For \(\mathcal D=\tau\partial_m\), set
+\[
+        x_n=-i\tau\log n,
+        \qquad
+        r_n(\alpha)=\frac{z_n(\alpha)}{c_n}.
+\]
+Then the main-term normalized Wronskian has the Cauchy--Binet expansion
+\[
+        \widetilde{\mathcal W}_R(m,\alpha)
+        =
+        \sum_{\substack{S\subset\mathcal N\\ |S|=R+2}}
+        \widetilde C_S(\alpha)e^{-im\log N_S},
+        \qquad
+        N_S=\prod_{n\in S}n,
+\]
+with
+\[
+        \widetilde C_S(\alpha)
+        =
+        \left(\prod_{n\in S}c_n\right)
+        \det
+        \begin{pmatrix}
+        r_n(\alpha)\\
+        1\\
+        x_n\\
+        \vdots\\
+        x_n^R
+        \end{pmatrix}_{n\in S}
+        \prod_{n<n'}(x_{n'}-x_n).
+\]
+The first determinant is the \(Z_\alpha\)-symbol transversality determinant:
+it vanishes exactly when \(r_n(\alpha)\) is interpolated on \(S\) by a
+degree-\(R\) polynomial in \(x_n\).  Hence the Wronskian route separates into
+\[
+        \boxed{\text{\(Z_\alpha\)-symbol transversality}}
+        \qquad+\qquad
+        \boxed{\text{subset-product nonrecurrence}}.
+\]
+The same structure persists for normalized finite-difference symbols, with
+\(1,x,\ldots,x^R\) replaced by the corresponding stable symbols
+\(p_0(x),\ldots,p_R(x)\).
+\end{remark}
+```
+
+Reason: this is a key structural “goodie” from the conversation. It should be in the paper. turn9file14
+
+---
+
+## Edit 11 — Add packet-frequency versus low-prime caution
+
+### Where
+
+Immediately after Edit 10.
+
+### Insert:
+
+```latex
+\begin{remark}[Packet-frequency blocks versus low-prime symbol checks]
+\label{rem:packet-frequency-versus-low-prime}
+For the actual packet-scale Wronskian determinant, the active frequencies should
+satisfy
+\[
+        \lambda\log n\asymp1.
+\]
+At ordinary scale \(\lambda Q\asymp1\), this means
+\[
+        \log n\asymp Q.
+\]
+Low-prime plateau blocks may exhibit visible \(Z_\alpha\)-symbol variation,
+and are therefore useful as symbol-rank sanity checks.  They are not
+automatically determinant-admissible, because for \(\log p\asymp\log Q\),
+\[
+        \lambda\log p\asymp\frac{\log Q}{Q}\ll1
+\]
+at ordinary scale.  The normalized nodes can then collapse for a rank-\(R\)
+Wronskian.  Unless a separate renormalized transfer lemma is supplied, the
+Wronskian determinant should use packet-frequency or conductor-scale blocks
+with packet-scale normalized spread.
+\end{remark}
+```
+
+This warning is absent in the current draft and is one of the more important corrections from the extended conversation.
+
+---
+
+## Edit 12 — Add quantitative \(Z_\alpha\)-zero non-flatness as a named subinput
+
+### Where
+
+Immediately after Edit 11.
+
+### Insert:
+
+```latex
+\begin{remark}[\(Z_\alpha\)-zero non-flatness is a separate arithmetic input]
+\label{rem:zalpha-zero-nonflatness-input}
+At an admissible zero \(Z_\alpha(m_0)=0\), simplicity alone does not imply
+\[
+        |\mathbf z'(m_0,\alpha)|\ge Q^{-A}.
+\]
+A simple zero can be arbitrarily flat.  The Wronskian incidence route therefore
+requires a quantitative zero non-flatness theorem, for example:
+\[
+        Z_\alpha(m_0)=0
+        \Longrightarrow
+        \max_{1\le \ell\le R+1}
+        |C_\ell(\mathcal D)Z_\alpha(m_0)|
+        \ge Q^{-A}.
+\]
+A sufficient analytic package would be local amplitude plus tail control.  If
+\[
+        F(t)=Z_\alpha(m_0+\lambda t),\qquad F(0)=0,
+\]
+and
+\[
+        \sup_{|t|\le a}|F(t)|\ge Q^{-A_0},
+        \qquad
+        \sup_{|t|\le \rho}|F(t)|\le Q^{A_1},
+\]
+with
+\[
+        Q^{A_1}\left(\frac{a}{\rho}\right)^{R+2}\le \frac12Q^{-A_0},
+\]
+then one of the first \(R+1\) normalized Taylor coefficients is polynomially
+large.  At depth \(R\asymp\log Q/\log\log Q\), this typically requires a
+polylogarithmic radius ratio or sharper structural control.  Thus
+\(Z_\alpha\)-zero non-flatness is an actual-zeta input, not a consequence of
+simplicity alone.
+\end{remark}
+```
+
+Supported by the conversation’s repeated “simple zero is insufficient” finding. 
+
+---
+
+## Edit 13 — Add cofactor/minor vector nonrecurrence as a named subinput
+
+### Where
+
+Immediately after Edit 12.
+
+### Insert:
+
+```latex
+\begin{remark}[Cofactor-vector nonrecurrence]
+\label{rem:cofactor-vector-nonrecurrence}
+At a \(Z_\alpha\)-zero, the Wronskian factorization also requires a polynomial
+lower bound for the cofactor vector \(\mathbf M\).  Packet-frequency
+Cauchy--Binet gives
+\[
+        \mathbf M(m)
+        =
+        \sum_{|S|=R+1}\mathbf A_S e^{-im\log N_S}
+        +
+        \text{dual/background/error terms}.
+\]
+Exterior algebra and basis conditioning plausibly give coefficient-level mass
+\[
+        \sum_S|\mathbf A_S|^2\ge Q^{-C},
+\]
+but this does not imply the pointwise bound
+\[
+        |\mathbf M(m_0)|\ge Q^{-A}
+        \qquad
+        \text{when }Z_\alpha(m_0)=0.
+\]
+In phase-relaxed models the vector sum can vanish despite healthy coefficient
+mass, healthy symbol rank, and healthy basis conditioning.  Therefore the
+needed statement is an actual prime-log nonrecurrence/incidence theorem:
+\[
+        Z_\alpha(m_0)=0
+        \Longrightarrow
+        \left|
+        \sum_{|S|=R+1}\mathbf A_S e^{-im_0\log N_S}
+        +
+        \text{canonical dual/background/error}
+        \right|
+        \ge Q^{-A}.
+\]
+This is separate from the algebraic Cauchy--Binet nonvanishing.
+\end{remark}
+```
+
+This captures the minor-vector lane. turn9file13
+
+---
+
+## Edit 14 — Add a deep singular split remark
+
+The conversation distinguishes ordinary Wronskian scale from deep singular scale. The draft has various singular material, but the Gate 1 arithmetic section should say not to force deep singular packets through the ordinary Wronskian.
+
+### Where
+
+After Edit 13, before terminal status.
+
+### Insert:
+
+```latex
+\begin{remark}[Ordinary versus deep singular packets for Gate~1]
+\label{rem:ordinary-versus-deep-singular-gate-one}
+The normalized Wronskian route is an ordinary or mildly singular packet route.
+It is designed for
+\[
+        \lambda Q\asymp1
+\]
+or at least for packet scales where the normalized AFE nodes remain
+noncollapsed.  In the deep singular regime
+\[
+        \lambda Q\ll(\log Q)^{-C},
+\]
+one should not force the ordinary packet-frequency Wronskian determinant.
+Instead write \(m=\gamma+\lambda x\).  Then the local singular scaling has the
+form
+\[
+        q''_{\can}(\gamma+\lambda x)\sim \lambda^{-3}Q_{\rm sing}''(x),
+\]
+and
+\[
+        \int_{I_\rho}|q''_{\can}(m)|^2\,dm
+        \sim
+        \lambda^{-5}\int_X|Q_{\rm sing}''(x)|^2\,dx.
+\]
+Thus deep singular packets are handled by dominance unless an actual-zeta
+same-scale singular anti-design cancels the local singular jets.  That
+anti-design exclusion is a separate arithmetic input, not part of the ordinary
+Wronskian route.
+\end{remark}
+```
+
+---
+
+## Edit 15 — Update terminal status with Wronskian incidence wording
+
+### Where
+
+In `Remark [Terminal status of the current architecture]`, after the display:
+
+```latex
+q''_{\can}=B_2+P_2+D_2+E_2.
+```
+
+### Insert:
+
+```latex
+The current finite-jet/Wronskian formulation reduces this source-side theorem
+to an actual-zeta incidence or nonrecurrence statement at admissible
+\(Z_\alpha\)-zeros:
+\[
+        Z_\alpha(m)=0
+        \Longrightarrow
+        |\widetilde{\mathcal W}_R(m,\alpha)|\ge Q^{-A}.
+\]
+Formal Cauchy--Binet nonvanishing, generic determinant rank, phase-relaxed
+models, and long-interval averages do not prove this pointwise lower bound.
+```
+
+Reason: this is now the sharpest Gate 1 proof-state statement. turn9file13
+
+---
+
+## Edit 16 — Expand the no-go ledger item (i) with the concrete pointwise counterexample
+
+### Where
+
+In `No-go and audit ledger`, item (i), after:
+
+```latex
+\[
+\Gamma_G=0,\qquad \Gamma_{G,2}=0,\qquad u\ne0.
+\]
+```
+
+### Insert:
+
+```latex
+For example, at a point \(m_0\), choose
+\[
+        q(m_0)=a,\qquad q'(m_0)=0,\qquad q''(m_0)=6a-2a^3,
+\]
+with \(a\notin\{0,\pm\sqrt3\}\).  Then \(\Gamma_G(m_0)=0\) while
+\[
+        u(m_0)=q''(m_0)\ne0.
+\]
+Choosing \(q^{(4)}(m_0)\) so that \(\Gamma_G''(m_0)=0\) also gives
+\[
+        \Gamma_{G,2}(m_0)=0.
+\]
+Thus interval or \(L^2\)-structure is essential.
+```
+
+This makes the no-go constructive rather than just declarative.
+
+---
+
+## Edit 17 — Add Wronskian no-go items to the no-go ledger
+
+### Where
+
+In the `No-go and audit ledger` enumerate, after the current item:
+
+```latex
+\item \emph{Generic determinant nonvanishing is insufficient.}
+...
+```
+
+### Insert two new items:
+
+```latex
+\item \emph{\(Z_\alpha\)-symbol rank is not the full Wronskian theorem.}
+Even if \(Z_\alpha\) contributes an independent row at the symbol level, the
+basis-normalized Wronskian still expands as a fixed-coefficient subset-product
+exponential sum.  Symbol transversality gives non-identical-zero determinants;
+it does not give a pointwise lower bound at admissible \(Z_\alpha\)-zeros.
+
+\item \emph{Cofactor exterior mass is not pointwise cofactor mass.}
+The cofactor vector \(\mathbf M\) may have coefficient-level exterior mass
+\[
+        \sum_S|\mathbf A_S|^2\ge Q^{-C},
+\]
+but this does not imply
+\[
+        |\mathbf M(m_0)|\ge Q^{-A}
+\]
+at \(Z_\alpha(m_0)=0\).  The latter is a vector-valued actual prime-log
+nonrecurrence theorem.
+```
+
+---
+
+## Edit 18 — Add a local “stale labels” remark after the downstream opening paragraph
+
+The draft’s downstream section already says D1/D2/D3 are older, but add an explicit label hygiene remark.
+
+### Where
+
+After line 30327, before `\subsection{\(L^2\)-input real rigidity}`.
+
+### Insert:
+
+```latex
+\begin{remark}[Label hygiene for \(D1,D2,D3\)]
+\label{rem:label-hygiene-d1-d2-d3}
+The labels \(D1,D2,D3\) appear below in older audit remarks.  In the current
+ordinary real-canonical branch, \(D1/D2\) are replaced by
+Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}.  Under row-energy
+output, the old \(D3\) wall-row requirement is replaced by the gauge-locked
+wall-escape theorem plus D4.  If exact-point scalar row output is required,
+the old \(D3\) \(q_0\)-adic wall-row audit remains a fallback.
+\end{remark}
+```
+
+---
+
+## Edit 19 — Add exact lower-order \(h''\) identity? No; do not add
+
+I checked the current derived identities. The draft already has \(h\), \(g'\), and \(h'\). I do **not** recommend adding \(h''\) unless later sections explicitly use it. Adding it now will invite another round of high-order derivative convention auditing.
+
+---
+
+## Edit 20 — Stale older downstream theorem: keep, but visually mark as fallback
+
+You already have remarks around the older good-patch proposition. Add one sentence to the proposition body if not already there.
+
+### Where
+
+Immediately after the heading:
+
+```latex
+\begin{proposition}[Historical fallback: conditional Gate--2 transfer from the analytic-good-patch package]
+\label{prop:conditional-gate2-transfer-good-patch}
+```
+
+### Insert:
+
+```latex
+This proposition is retained only as a historical fallback theorem.  It is not
+used in the active ordinary Gate--2 proof path.
+```
+
+---
+
+# Short list of stale/incorrect sections
+
+1. **Title and abstract:** too proof-complete; apply Edit 1.
+2. **Introduction “four pillars”:** should be “local framework,” not “proof”; apply Edit 2.
+3. **Arithmetic observability section:** says source–anisotropy is still a second missing gate; apply Edit 8.
+4. **Primitive recovery:** currently too close to the active proof path; apply Edit 3.
+5. **Residual-stable variant:** currently inconsistent with \(r_u\); apply Edit 4.
+6. **Wall escape buffer notation:** uses \(\rho\) where \(r_{\mathrm{esc}}\) is intended; apply Edit 5.
+7. **D4:** structurally good, but missing finite audit checklist; apply Edit 7.
+8. **Gate 1/Wronskian:** needs explicit current theorem stack and no-go boundaries; apply Edits 9–15 and 17.
+
+These edits should capture the key structural findings from the full conversation without overstating the status.
+## User (2026-04-27 17:21:41)
+
+Do one last holistic review of the paper. Make sure all derivations, identities, goodies, etc. are captured. Please again mention anything remaining that is stale/inaccurate and the repair for it. (Do not touch the paper's title, abstract, intro, or conclusion.) Give exact latex insertions/edits/removals and exactly where to make them.
+
+## Assistant (2026-04-27 17:21:43)
+
+I’ll do one final pass focused only on internal consistency and insertion-level repairs, leaving title/abstract/intro/conclusion untouched as requested.
+
+_Thought for 4m 54s_
+
+I did the final holistic pass. The draft now captures most of the core findings: safe \(L^2\)-input Gate 2, ordinary/singular routing, D4 carrier quotient, wall escape, O1/O2/O3 upstream inputs, and the Wronskian/nonrecurrence bottleneck. The remaining problems are mostly **stale status language** and a few **missing local derivation ledgers**. I will not suggest changes to the title, abstract, introduction, or conclusion.
+
+The two highest-priority repairs are: remove the last places where Gate 2 is still described as an independent “second missing input,” and add the normalized Wronskian coefficient formula so the O1/O2/O3 section records the actual algebraic object being studied. The logs support this: the active Gate 2 route is now source thickening plus safe \(L^2\)-rigidity, while the Wronskian route remains conditional on actual-zeta incidence/nonrecurrence. turn10file15
+
+---
+
+## Edit 1 — Remove stale primitive-recovery dependency inside the safe \(L^2\)-rigidity lemma
+
+**Where:** In `Lemma [\(L^2\)-input real rigidity; safe primitive-bounded form]`, immediately after the safe local bounds display.
+
+**Remove exactly:**
+
+```latex
+This safe bound may either be assumed directly or obtained locally by applying
+Lemma~\ref{lem:local-primitive-recovery-from-l2-small-g} on a slightly larger
+source interval.  Assume also the \(L^2\)-smallness condition
+```
+
+**Replace with:**
+
+```latex
+Assume also the \(L^2\)-smallness condition
+```
+
+Reason: the draft correctly says later that primitive recovery is not used, but this sentence still makes it sound active. The final Gate 2 proof should use the safe primitive-bounded version only. turn10file7
+
+---
+
+## Edit 2 — Fix stale “next theorem is source–anisotropy reintegration” sentence
+
+**Where:** In `Remark [Next numerical test: actual-zeta source curvature]`.
+
+**Replace the final two sentences:**
+
+```latex
+If source-flat intervals appear in actual data,
+Hypothesis~\ref{hyp:offline-packet-source-curvature-observability} is likely
+false in its present form.  If they do not appear, the first theorem to attack is the interval \(L^2\)
+source-curvature observability estimate; the next theorem is the
+source--anisotropy reintegration estimate.
+```
+
+**with:**
+
+```latex
+If source-flat intervals appear in actual data,
+Hypothesis~\ref{hyp:offline-packet-source-curvature-observability} is likely
+false in its present form.  If they do not appear, the first theorem to attack
+is the interval \(L^2\) source-curvature observability estimate for the full
+canonical object
+\[
+        q''_{\can}=B_2+P_2+D_2+E_2.
+\]
+In the ordinary real-canonical branch, the source--anisotropy step is no
+longer a separate next theorem; it is supplied by
+Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}.
+```
+
+---
+
+## Edit 3 — Repair `Remark [Current branch decision]`
+
+**Where:** In `Remark [Current branch decision]`, item (1).
+
+**Replace item (1):**
+
+```latex
+\item Prove actual-zeta source-curvature observability,
+\[
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|,
+\]
+and then prove source--anisotropy reintegration,
+\[
+\int_{I_\rho}
+|q''_{\can}|^2(\Gamma_G^2+\Gamma_{G,2}^2)\,dm
+\ge Q^{-A}|I_\rho|;
+\]
+```
+
+**with:**
+
+```latex
+\item Prove actual-zeta source-curvature observability,
+\[
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|.
+\]
+In the ordinary real-canonical branch, source--anisotropy reintegration then
+follows from Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}.  The
+remaining downstream burden is to convert the resulting Gate--2 mass into row
+energy through D4 carrier-quotient row conversion and residual control;
+```
+
+---
+
+## Edit 4 — Repair stale “two-gate actual-zeta package” language in the local proof frontier
+
+**Where:** In `Remark [Current proof frontier after the local package audits]`, item beginning “The finite-core lower-transfer branch is now subordinate...”.
+
+**Replace this paragraph:**
+
+```latex
+The later audits show that such a theorem must include source-level
+nonflatness and source--anisotropy reintegration.  In particular, anisotropy or
+vector non-concentration alone cannot control the known rows when
+\[
+H=yq''_{\can}\approx0.
+\]
+Thus the required input is now the two-gate actual-zeta package on
+\(I_\rho\), not merely finite determinacy, compactness, pairwise zero-spacing,
+endpoint-gap control, or Remez--{\L}ojasiewicz volume estimates.
+```
+
+**with:**
+
+```latex
+The later audits show that such a theorem must include source-level
+nonflatness.  In particular, anisotropy or vector non-concentration alone
+cannot control the known rows when
+\[
+H=yq''_{\can}\approx0.
+\]
+Thus the remaining source-side input is Gate~1 for the full canonical object
+on \(I_\rho\), not merely finite determinacy, compactness, pairwise
+zero-spacing, endpoint-gap control, or Remez--{\L}ojasiewicz volume estimates.
+In the ordinary real-canonical branch, the former source--anisotropy step is
+supplied downstream by Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}.
+```
+
+---
+
+## Edit 5 — Repair stale “missing positive input is the two-gate package” language
+
+**Where:** In the same `Remark [Current proof frontier after the local package audits]`, item beginning “The source-weighted layered route is blocked by source collapse.”
+
+**Replace:**
+
+```latex
+Fixed-prime and AFE-style derivative-flat
+surrogates, as well as same-scale packet moment models, do not presently
+supply an obstruction.  The missing positive input is the two-gate actual-zeta
+package
+\[
+\int_{I_\rho}|q''_{\can}|^2\,dm\ge Q^{-B}|I_\rho|
+\]
+together with
+\[
+\int_{I_\rho}
+|q''_{\can}|^2(\Gamma_G^2+\Gamma_{G,2}^2)\,dm
+\ge Q^{-A}|I_\rho|.
+\]
+```
+
+**with:**
+
+```latex
+Fixed-prime and AFE-style derivative-flat
+surrogates, as well as same-scale packet moment models, do not presently
+supply an obstruction.  The missing positive source-side input is Gate~1:
+\[
+\int_{I_\rho}|q''_{\can}|^2\,dm\ge Q^{-B}|I_\rho|.
+\]
+Once this is available in the ordinary real-canonical branch, the source-weighted
+anisotropy estimate
+\[
+\int_{I_\rho}
+|q''_{\can}|^2(\Gamma_G^2+\Gamma_{G,2}^2)\,dm
+\ge Q^{-A}|I_\rho|
+\]
+is supplied by Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}.
+```
+
+---
+
+## Edit 6 — Repair opening paragraph of `Arithmetic source-curvature observability: the next attack`
+
+**Where:** In subsection `Arithmetic source-curvature observability: the next attack`, immediately after the interval Gate 1 display.
+
+**Replace:**
+
+```latex
+This estimate would block the pure source-collapse branch, but it is now only
+the first gate.  It does not by itself recover the source-weighted rank-two
+lower bound, because the \(q''_{\can}\)-mass could still concentrate near the
+anisotropy base locus
+\[
+\Gamma_G\approx0,
+\qquad
+\Gamma_{G,2}\approx0.
+\]
+The second missing input is therefore a source--anisotropy reintegration
+theorem, formulated below.
+```
+
+**with:**
+
+```latex
+This estimate blocks the pure source-collapse branch.  Earlier versions of
+the draft treated source--anisotropy reintegration as a second independent
+arithmetic gate, because the \(q''_{\can}\)-mass could in principle concentrate
+near the anisotropy base locus
+\[
+\Gamma_G\approx0,
+\qquad
+\Gamma_{G,2}\approx0.
+\]
+In the ordinary smooth real-canonical branch, that second step is now supplied
+by the source-thickening plus \(L^2\)-input rigidity mechanism of
+Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}.  Thus the remaining
+source-side theorem in this branch is Gate~1 itself.
+```
+
+---
+
+## Edit 7 — Rename stale subsection title
+
+**Where:** Subsection currently titled:
+
+```latex
+\subsection{Source-weighted interval non-concentration as the two-gate arithmetic problem}
+\label{subsec:layered-finite-core-nonconcentration-gate}
+```
+
+**Replace with:**
+
+```latex
+\subsection{Source-weighted interval non-concentration after the Gate--2 repair}
+\label{subsec:layered-finite-core-nonconcentration-gate}
+```
+
+Keep the label unchanged to preserve references.
+
+---
+
+## Edit 8 — Fix wall-escape buffer notation
+
+**Where:** `Remark [Packet buffer for wall escape]`.
+
+**Replace:**
+
+```latex
+The first-exit wall-escape step moves by a distance
+\[
+\rho |I|,
+\qquad
+\rho\asymp\sqrt{\varepsilon/\tau}.
+\]
+```
+
+**with:**
+
+```latex
+The first-exit wall-escape step moves by a distance
+\[
+r_{\mathrm{esc}} |I|,
+\qquad
+r_{\mathrm{esc}}\asymp\sqrt{\varepsilon/\tau}.
+\]
+```
+
+Reason: \(\rho\) is already used for packet/tube notation.
+
+---
+
+## Edit 9 — Add row-output norm clarification to wall escape theorem
+
+**Where:** In `Theorem [Gauge-locked wall escape in normalized coordinates]`, after:
+
+```latex
+and that \(r_H^\ast\) is controlled by the D4 residual estimate.
+```
+
+**Insert:**
+
+```latex
+The row vector \(\mathbf A_N\) in the conclusion is measured in the downstream
+row-output norm.  In the carrier-quotient architecture this is the
+\(\mathcal Q_{\rm car}\)-norm of the row class.  In a scalar-collapsed
+architecture this theorem supplies only an existential non-wall sample and does
+not resolve exact-point scalar output at the original wall point.
+```
+
+---
+
+## Edit 10 — Add the Wronskian coefficient formula to the upstream Gate 1 section
+
+**Where:** In `Subsection [Ordinary packet-frequency Wronskian route]`, immediately after the paragraph ending:
+
+```latex
+The ordinary route is now reduced to the following three named arithmetic
+inputs.
+```
+
+**Insert before `Definition [O1: Fixed-width cell nonrecurrence]`:**
+
+```latex
+\begin{remark}[Normalized Wronskian coefficient structure]
+\label{rem:normalized-wronskian-coefficient-structure}
+On a main AFE block, write
+\[
+        q''_{\can}(m)\sim \sum_{n\in\mathcal N}c_ne^{-im\log n},
+        \qquad
+        Z_\alpha(m)\sim \sum_{n\in\mathcal N}z_n(\alpha)e^{-im\log n}.
+\]
+For \(\mathcal D=\tau\partial_m\), set
+\[
+        x_n=-i\tau\log n,
+        \qquad
+        r_n(\alpha)=\frac{z_n(\alpha)}{c_n}.
+\]
+Then the main-term normalized Wronskian has the Cauchy--Binet expansion
+\[
+        \widetilde{\mathcal W}_R(m,\alpha)
+        =
+        \sum_{\substack{S\subset\mathcal N\\ |S|=R+2}}
+        \widetilde C_S(\alpha)e^{-im\log N_S},
+        \qquad
+        N_S=\prod_{n\in S}n,
+\]
+where
+\[
+        \widetilde C_S(\alpha)
+        =
+        \left(\prod_{n\in S}c_n\right)
+        \det
+        \begin{pmatrix}
+        r_n(\alpha)\\
+        1\\
+        x_n\\
+        \vdots\\
+        x_n^R
+        \end{pmatrix}_{n\in S}
+        \prod_{n<n'}(x_{n'}-x_n).
+\]
+The first determinant is the \(Z_\alpha\)-symbol transversality determinant:
+it vanishes exactly when \(r_n(\alpha)\) is interpolated on \(S\) by a
+degree-\(R\) polynomial in \(x_n\).  Hence the Wronskian route separates into
+\[
+        \boxed{\text{\(Z_\alpha\)-symbol transversality}}
+        \qquad+\qquad
+        \boxed{\text{subset-product nonrecurrence}}.
+\]
+The same structure persists for normalized finite-difference symbols, with
+\(1,x,\ldots,x^R\) replaced by the corresponding stable symbols
+\(p_0(x),\ldots,p_R(x)\).  Including the dual branch replaces this by the
+two-branch condition that the pair \(r^\pm\) is not simultaneously
+degree-\(R\)-polynomial on the folded main/dual node set.
+\end{remark}
+```
+
+Reason: this is the single most important “goodie” missing from the O1/O2/O3 section. It records the algebra behind the Wronskian route rather than only the named inputs.
+
+---
+
+## Edit 11 — Add packet-frequency vs low-prime caution to upstream section
+
+**Where:** Immediately after Edit 10.
+
+**Insert:**
+
+```latex
+\begin{remark}[Packet-frequency blocks versus low-prime symbol checks]
+\label{rem:packet-frequency-versus-low-prime}
+For the actual packet-scale Wronskian determinant, the active frequencies should
+satisfy
+\[
+        \lambda\log n\asymp1.
+\]
+At ordinary scale \(\lambda Q\asymp1\), this means
+\[
+        \log n\asymp Q.
+\]
+Low-prime plateau blocks may exhibit visible \(Z_\alpha\)-symbol variation and
+are therefore useful as symbol-rank sanity checks.  They are not automatically
+determinant-admissible, because for \(\log p\asymp\log Q\),
+\[
+        \lambda\log p\asymp\frac{\log Q}{Q}\ll1
+\]
+at ordinary scale.  The normalized nodes can then collapse for a rank-\(R\)
+Wronskian.  Unless a separate renormalized transfer lemma is supplied, the
+Wronskian determinant should use packet-frequency or conductor-scale blocks
+with packet-scale normalized spread.
+\end{remark}
+```
+
+---
+
+## Edit 12 — Fix O2 notation consistency
+
+**Where:** In `Definition [O2: Cofactor-vector nonrecurrence]`.
+
+**Replace:**
+
+```latex
+Define the canonical cofactor vector
+\[
+\mathbf M_{\can}(m_0)
+=
+\star(Q_0\wedge Q_1\wedge\cdots\wedge Q_R).
+\]
+```
+
+**with:**
+
+```latex
+Define the canonical cofactor vector
+\[
+\mathbf M_{\can}(m_0,\alpha)
+=
+\star(Q_0\wedge Q_1\wedge\cdots\wedge Q_R).
+\]
+The displayed wedge is independent of \(\alpha\) if the column basis
+\(C_\ell(\mathcal D)\) is fixed independently of \(\alpha\); the parameter
+\(\alpha\) records that the vector is being evaluated at an admissible
+\(Z_\alpha\)-zero and allows for any explicitly chosen \(\alpha\)-dependent
+basis convention.
+```
+
+Reason: the definition currently defines \(\mathbf M_{\can}(m_0)\) but immediately uses \(\mathbf M_{\can}(m_0,\alpha)\).
+
+---
+
+## Edit 13 — Add constructive pointwise base-locus counterexample
+
+**Where:** In `No-go and audit ledger`, item (i), after:
+
+```latex
+\[
+\Gamma_G=0,\qquad \Gamma_{G,2}=0,\qquad u\ne0.
+\]
+```
+
+**Insert:**
+
+```latex
+For example, at a point \(m_0\), choose
+\[
+        q(m_0)=a,\qquad q'(m_0)=0,\qquad q''(m_0)=6a-2a^3,
+\]
+with \(a\notin\{0,\pm\sqrt3\}\).  Then \(\Gamma_G(m_0)=0\) while
+\[
+        u(m_0)=q''(m_0)\ne0.
+\]
+Choosing \(q^{(4)}(m_0)\) so that
+\[
+        \Gamma_G''(m_0)=0
+\]
+also gives
+\[
+        \Gamma_{G,2}(m_0)=0.
+\]
+```
+
+---
+
+## Edit 14 — Add Wronskian-specific no-go items to the no-go ledger
+
+**Where:** In `No-go and audit ledger`, after item:
+
+```latex
+\item \emph{Generic determinant nonvanishing is insufficient.}
+...
+```
+
+**Insert:**
+
+```latex
+\item \emph{\(Z_\alpha\)-symbol rank is not the full Wronskian theorem.}
+Even if \(Z_\alpha\) contributes an independent row at the symbol level, the
+basis-normalized Wronskian still expands as a fixed-coefficient subset-product
+exponential sum.  Symbol transversality gives non-identical-zero determinants;
+it does not give a pointwise lower bound at admissible \(Z_\alpha\)-zeros.
+
+\item \emph{Cofactor exterior mass is not pointwise cofactor mass.}
+The cofactor vector \(\mathbf M\) may have coefficient-level exterior mass
+\[
+        \sum_S|\mathbf A_S|^2\ge Q^{-C},
+\]
+but this does not imply
+\[
+        |\mathbf M(m_0)|\ge Q^{-A}
+\]
+at \(Z_\alpha(m_0)=0\).  The latter is a vector-valued actual prime-log
+nonrecurrence theorem.
+```
+
+---
+
+## Edit 15 — Add a one-sentence terminal status update
+
+**Where:** In `Remark [Terminal conditional dependency ledger]`, after:
+
+```latex
+The ordinary Wronskian route lives or dies on the actual arithmetic inputs
+\(\mathrm{O1}\)--\(\mathrm{O3}\).  The downstream repairs do not discharge
+those inputs.
+```
+
+**Insert:**
+
+```latex
+Equivalently, the current ordinary Gate--1 frontier is the actual-zeta
+incidence theorem
+\[
+        Z_\alpha(m)=0
+        \Longrightarrow
+        |\widetilde{\mathcal W}_R(m,\alpha)|\ge Q^{-A},
+\]
+not another local row-algebra identity.
+```
+
+---
+
+# Remaining stale/inaccurate items after these edits
+
+1. **The safe \(L^2\)-rigidity lemma still references primitive recovery as an active source of the hypothesis.**  
+   Fix with Edit 1.
+
+2. **Several source-collapse status remarks still call source–anisotropy reintegration a second missing input.**  
+   Fix with Edits 2–7.
+
+3. **The wall-escape buffer remark still uses \(\rho\) for escape radius.**  
+   Fix with Edit 8.
+
+4. **The wall-escape theorem does not define the row-output norm in which \(\mathbf A_N\) is measured.**  
+   Fix with Edit 9.
+
+5. **The upstream O1/O2/O3 section states the named arithmetic inputs but does not yet show the Wronskian coefficient formula motivating them.**  
+   Fix with Edit 10.
+
+6. **Low-prime symbol checks versus packet-frequency determinant blocks need a caution in the upstream section.**  
+   Fix with Edit 11.
+
+7. **O2 notation uses \(\mathbf M_{\can}(m_0,\alpha)\) after defining only \(\mathbf M_{\can}(m_0)\).**  
+   Fix with Edit 12.
+
+8. **The no-go ledger should include the explicit pointwise base-locus counterexample and the Wronskian/cofactor no-gos.**  
+   Fix with Edits 13–14.
+
+After these changes, I would not add more major material. The draft already captures the main structural findings; it mainly needs these final consistency and derivation-locking edits.
+## User (2026-04-27 17:47:34)
+
+Do one last holistic pass review on the paper for anything critical that would introduce errors in future work. If you find anything, give it as exact latex insertions/edits and exactly where to make them.
+
+## Assistant (2026-04-27 17:49:01)
+
+_Thought for 1m 25s_
+
+Final pass found a few critical items that could mislead future work. I would make only the following edits.
+
+---
+
+## Edit 1 — Fix stale Gate 1/Gate 2 status in arithmetic observability section
+
+### Where
+
+In `\subsection{Arithmetic source-curvature observability: the next attack}`, immediately after the display
+
+```latex
+\[
+\boxed{
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm
+\ge
+Q^{-B}|I_\rho|.
+}
+\]
+```
+
+### Replace the following paragraph
+
+```latex
+This estimate would block the pure source-collapse branch, but it is now only
+the first gate.  It does not by itself recover the source-weighted rank-two
+lower bound, because the \(q''_{\can}\)-mass could still concentrate near the
+anisotropy base locus
+\[
+\Gamma_G\approx0,
+\qquad
+\Gamma_{G,2}\approx0.
+\]
+The second missing input is therefore a source--anisotropy reintegration
+theorem, formulated below.
+```
+
+### With
+
+```latex
+This estimate blocks the pure source-collapse branch.  Earlier versions of
+the draft treated source--anisotropy reintegration as a second independent
+arithmetic gate, because the \(q''_{\can}\)-mass could in principle concentrate
+near the anisotropy base locus
+\[
+\Gamma_G\approx0,
+\qquad
+\Gamma_{G,2}\approx0.
+\]
+In the ordinary smooth real-canonical branch, that second step is now supplied
+by the source-thickening plus \(L^2\)-input rigidity mechanism of
+Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}.  Thus the remaining
+source-side theorem in this branch is Gate~1 itself.
+```
+
+---
+
+## Edit 2 — Fix stale “must later be paired with Gate 2” language
+
+### Where
+
+In the remark immediately before `Remark [Prime-log recurrence to derivative-flat tubes]`, replace the sentence:
+
+```latex
+Therefore the exact missing Gate~1 theorem is actual-zeta source-curvature
+observability, and it must later be paired with Gate~2 source--anisotropy
+reintegration.  It is not another local row identity.
+```
+
+### With
+
+```latex
+Therefore the exact missing Gate~1 theorem is actual-zeta source-curvature
+observability.  In the ordinary real-canonical branch, Gate~2 is supplied
+downstream by Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}; the
+remaining additional burden is D4 row conversion and residual control.  The
+missing Gate~1 theorem is not another local row identity.
+```
+
+---
+
+## Edit 3 — Fix stale recurrence remark ending
+
+### Where
+
+In `Remark [Prime-log recurrence to derivative-flat tubes]`, replace the final sentence:
+
+```latex
+A proof of the desired source-weighted lower bound would need a
+nonstandard quantitative nonrecurrence theorem for the prime-log flow against
+these derivative-flat tubes, or actual-zeta Gate~1 source-curvature
+observability together with Gate~2 source--anisotropy reintegration.
+```
+
+### With
+
+```latex
+A proof of Gate~1 would need a nonstandard quantitative nonrecurrence theorem
+for the prime-log flow against these derivative-flat tubes, or another
+actual-zeta source-curvature observability mechanism for the full canonical
+object.  In the ordinary real-canonical branch, the subsequent Gate~2 estimate
+is supplied by Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}.
+```
+
+---
+
+## Edit 4 — Remove hard-coded \((\log n)^2\) from the canonical AFE definition
+
+This is the most important technical consistency fix. The draft defines
+
+\[
+q''_{\can}=q_\zeta''=\Phi_\zeta'''
+\]
+
+but later gives a schematic \(P_2\) with \((\log n)^2\). Elsewhere the draft distinguishes the script convention \(k_q=3\) from literal \(q''\)-row tests. A hard-coded power here can create future convention errors.
+
+### Where
+
+In `Definition [Canonical source-curvature representation problem]`, replace:
+
+```latex
+P_2(m)
+=
+\Re\sum_{n\le X}
+b_n(\log n)^2 n^{-1/2-im}W(n/T)
+```
+
+### With
+
+```latex
+P_2(m)
+=
+\Re\sum_{n\le X}
+b_n(\log n)^{k_{\can}} n^{-1/2-im}W(n/T),
+\qquad
+k_{\can}\in\{2,3\}
+```
+
+### Then immediately after the display, insert:
+
+```latex
+The exponent \(k_{\can}\) is fixed by the chosen completed phase-curvature
+convention.  In a literal \(q''_{\can}\)-row convention one may have
+\(k_{\can}=2\), while in the logarithmic-derivative/script convention used in
+some determinant stress tests one has \(k_{\can}=3\).  The proof-level
+requirement is not the numerical value of this exponent in isolation, but that
+\(P_2,D_2,E_2,Z_\alpha\), the Wronskian symbols, and the local row package all
+use the same convention.
+```
+
+---
+
+## Edit 5 — Make the stress-test convention explicitly non-proof-level
+
+### Where
+
+In `Remark [Log-derivative AFE convention for numerical stress tests]`, after:
+
+```latex
+For a literal \(q''_{\can}\)-row test, replace \(k_q=3\) by \(k_q=2\), giving
+\[
+c_n^+
+=
+\Lambda(n)(\log n)^2n^{-1/2}V_q^+,
+\qquad
+c_n^-
+=
+-\Lambda(n)(\log n)^2n^{-1/2}V_q^-.
+\]
+```
+
+### Insert
+
+```latex
+This convention switch must not be made inside a single proof-level
+Wronskian.  A given proof run must fix one convention for \(q''_{\can}\), and
+then use the corresponding \(Z_\alpha\)-symbol ratios, dual branch, \(E_2\)
+budget, and local row identities throughout.
+```
+
+---
+
+## Edit 6 — Add pointwise base-locus counterexample to no-go ledger
+
+### Where
+
+In `No-go and audit ledger`, item `(i)`, immediately after:
+
+```latex
+\[
+\Gamma_G=0,\qquad \Gamma_{G,2}=0,\qquad u\ne0.
+\]
+```
+
+### Insert
+
+```latex
+For example, at a point \(m_0\), choose
+\[
+        q(m_0)=a,\qquad q'(m_0)=0,\qquad q''(m_0)=6a-2a^3,
+\]
+with \(a\notin\{0,\pm\sqrt3\}\).  Then \(\Gamma_G(m_0)=0\), while
+\[
+        u(m_0)=q''(m_0)\ne0.
+\]
+Choosing \(q^{(4)}(m_0)\) so that
+\[
+        \Gamma_G''(m_0)=0
+\]
+also gives
+\[
+        \Gamma_{G,2}(m_0)=0.
+\]
+Thus interval or \(L^2\)-structure is essential.
+```
+
+---
+
+## Edit 7 — Add Wronskian/cofactor no-go items to no-go ledger
+
+### Where
+
+In `No-go and audit ledger`, immediately after the item beginning:
+
+```latex
+\item \emph{Generic determinant nonvanishing is insufficient.}
+```
+
+### Insert
+
+```latex
+\item \emph{\(Z_\alpha\)-symbol rank is not the full Wronskian theorem.}
+Even if \(Z_\alpha\) contributes an independent row at the symbol level, the
+basis-normalized Wronskian still expands as a fixed-coefficient subset-product
+exponential sum.  Symbol transversality gives non-identical-zero determinants;
+it does not give a pointwise lower bound at admissible \(Z_\alpha\)-zeros.
+
+\item \emph{Cofactor exterior mass is not pointwise cofactor mass.}
+The cofactor vector \(\mathbf M\) may have coefficient-level exterior mass
+\[
+        \sum_S|\mathbf A_S|^2\ge Q^{-C},
+\]
+but this does not imply
+\[
+        |\mathbf M(m_0)|\ge Q^{-A}
+\]
+at \(Z_\alpha(m_0)=0\).  The latter is a vector-valued actual prime-log
+nonrecurrence theorem.
+```
+
+---
+
+## Edit 8 — Add one status sentence to the terminal dependency ledger
+
+### Where
+
+In `Remark [Terminal conditional dependency ledger]`, after:
+
+```latex
+The ordinary Wronskian route lives or dies on the actual arithmetic inputs
+\(\mathrm{O1}\)--\(\mathrm{O3}\).  The downstream repairs do not discharge
+those inputs.
+```
+
+### Insert
+
+```latex
+Equivalently, the current ordinary Gate--1 frontier is the actual-zeta
+incidence theorem
+\[
+        Z_\alpha(m)=0
+        \Longrightarrow
+        |\widetilde{\mathcal W}_R(m,\alpha)|\ge Q^{-A},
+\]
+not another local row-algebra identity.
+```
+
+---
+
+## Edit 9 — If not already present, add row-output norm clarification in wall escape theorem
+
+### Where
+
+In `Theorem [Gauge-locked wall escape in normalized coordinates]`, after the residual assumptions and before the conclusion.
+
+### Insert
+
+```latex
+The row vector \(\mathbf A_N\) in the conclusion is measured in the downstream
+row-output norm.  In the carrier-quotient architecture this is the
+\(\mathcal Q_{\rm car}\)-norm of the row class.  In a scalar-collapsed
+architecture this theorem supplies only an existential non-wall sample and does
+not resolve exact-point scalar output at the original wall point.
+```
+
+If this text is already present verbatim, no change is needed.
+
+---
+
+# Final critical status
+
+After these edits, I would stop making broad structural changes. The remaining critical risks will be correctly fenced:
+
+1. Gate~2 is no longer incorrectly treated as an independent ordinary-branch arithmetic input.
+2. The canonical AFE log-power convention will no longer be hard-coded inconsistently.
+3. Pointwise base-locus rigidity will be explicitly marked false.
+4. Wronskian symbol-rank/cofactor mass will not be mistaken for Wronskian incidence.
+5. Wall escape will not be accidentally used as exact-point scalar row output.

@@ -65869,3 +65869,6636 @@ If you only make a subset, prioritize:
 3. **Patch 16–18** — demote stale old Gate 2 hypothesis/propgation material.
 4. **Patch 23/26** — add \(H_{\lead}\) derivation and repair valuation ledger.
 5. **Patch 28/29** — final status precision.
+## User (2026-04-27 16:42:48)
+
+Please review the latest updated paper draft attached which includes your edits. I've also attached this entire conversation log. Please review everything holistically, and then make suggestions to update the paper capturing any structural findings, goodies, key structural findings, no-gos, etc. Please also mention any stale/incorrect/inaccurate sections. Please give exact latex insertions and exactly where to insert them.
+
+## Assistant (2026-04-27 16:42:58)
+
+I’ll make this a final delta pass against the latest draft, not a fresh rewrite. I’ll look for sections that are still stale or missing the latest structural findings, then give exact patch blocks only where they add value.
+
+_Thought for 3m 36s_
+
+I reviewed the latest draft and the full conversation log holistically. The draft now captures most of the major Gate 2/D3a/D4 repairs. I would **not** add another broad “state of the project” section. The remaining work is narrower: remove a few stale \(q''\) / “source-jet nonflatness” phrasings, harden the latest Gate 1/Wronskian status, record the finite-table/D4 residual blockers more precisely, and update the numerical/surrogate status with the latest smoke-test interpretation. The latest conversation log supports the current hierarchy: Gate 1 is the central arithmetic bottleneck; local same-scale quadrature is the decisive no-go; Wronskian/transversality is still Yellow, not Green; carrier-quotient D4 is the active row formulation; scalar \(I\)-coordinate D4 is fallback. turn98file10turn98file16
+
+Below is the final patch set.
+
+---
+
+## Edit 1 — Repair stale finite-core “source-jet nonflatness” wording
+
+**Where:** In
+
+```latex
+\begin{remark}[Updated role of finite-core non-concentration]
+\label{rem:updated-role-finite-core-nonconcentration}
+```
+
+**Replace the full remark body with:**
+
+```latex
+The finite-core non-concentration problem below is now secondary to the
+source-collapse obstruction.  The known fixed-sector rows are source-divisible,
+so a lower bound for a transported finite-core vector cannot be proved from
+anisotropy non-concentration alone.  Any proof-relevant finite-core theorem
+must either include the two-gate actual-zeta package
+\[
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|
+\]
+and
+\[
+\int_{I_\rho}
+|q''_{\can}(m)|^2
+\bigl(\Gamma_G(m)^2+\Gamma_{G,2}(m)^2\bigr)\,dm
+\ge Q^{-A}|I_\rho|,
+\]
+or else use a genuinely source-robust row/invariant not divisible by
+\[
+H=yq''_{\can}.
+\]
+Without that additional source-level input or source-robust replacement, the
+aligned/non-concentration language below remains a diagnostic framework rather
+than a proof-closing theorem.
+```
+
+**Reason:** The current text still says the finite-core theorem needs a “source-jet nonflatness input” and displays \(\sup |q''|\). That is stale relative to the two-gate architecture and \(q''_{\can}\) convention.
+
+---
+
+## Edit 2 — Patch the source-kernel caveat to avoid ambiguous \(q''\)
+
+**Where:** In
+
+```latex
+\begin{remark}[Source-kernel versus actual-zeta packet caveat]
+\label{rem:source-kernel-versus-actual-zeta-packet-caveat}
+```
+
+**Replace:**
+
+```latex
+Any proof of
+\[
+\sup_{m\in I_\rho}|q''(m)|\ge Q^{-B}
+\]
+must use actual-zeta arithmetic or a stronger packet-realizability theorem,
+not merely same-scale positive kernel geometry.
+```
+
+**with:**
+
+```latex
+Any proof of
+\[
+\sup_{m\in I_\rho}|q''_{\can}(m)|\ge Q^{-B}
+\]
+or of the stronger interval estimate
+\[
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|
+\]
+must use actual-zeta arithmetic or a stronger packet-realizability theorem,
+not merely same-scale positive kernel geometry.
+```
+
+**Reason:** This paragraph discusses the actual-zeta theorem, not just the local model. It should use \(q''_{\can}\).
+
+---
+
+## Edit 3 — Clarify the interval-local source-collapse corollary as a local model
+
+**Where:** In
+
+```latex
+\begin{corollary}[Interval-local source collapse from finite quadrature]
+\label{cor:interval-local-source-collapse-from-quadrature}
+```
+
+**Insert immediately after the opening sentence / before “Fix \(A>0\)” if there is no sentence before it:**
+
+```latex
+All unadorned \(q,q'',q^{(4)}\) in this corollary denote the local
+same-scale source-kernel aggregate from
+Remark~\ref{rem:local-kernel-notation-same-scale-model}, not the actual-zeta
+canonical curvature.  In the actual-zeta notation, this is a model for the
+hypothetical regime \(q''_{\can}\approx0\), but it is not a construction of
+actual zeta data.
+```
+
+**Then replace the display:**
+
+```latex
+H=yq''\sim-\frac{q_0(q'')^3}{288}
+```
+
+**with:**
+
+```latex
+H_{\rm loc}=yq''\sim-\frac{q_0(q'')^3}{288}.
+```
+
+**And replace later occurrences inside this corollary of \(H(m)\) with \(H_{\rm loc}(m)\).**
+
+**Reason:** The local-kernel guard is already present, but this corollary is close to the actual rank-two no-go statements and still reads like actual \(H=yq''_{\can}\). This makes the distinction explicit without rewriting the local model.
+
+---
+
+## Edit 4 — Clarify the “No-go for the current rank-two norm route” proposition
+
+**Where:** In
+
+```latex
+\begin{proposition}[No-go for the current rank-two norm route]
+\label{prop:no-go-current-rank-two-norm-route}
+```
+
+**Insert immediately after the first paragraph:**
+
+```latex
+Here the displayed \(q''\) and \(H=yq''\) first refer to the local
+same-scale source-kernel model of
+Corollary~\ref{cor:interval-local-source-collapse-from-quadrature}.  The
+proposition’s conclusion for the actual rank-two route is obtained by
+comparison: if actual zeta permits the analogous canonical regime
+\[
+\sup_{m\in I_\rho}|q''_{\can}(m)|\le Q^{-C},
+\]
+then the actual source factor
+\[
+H=yq''_{\can}
+\]
+collapses in the same way.
+```
+
+**Then, in the proposition’s final paragraph, replace:**
+
+```latex
+Thus the local rank-two norm route requires a new actual-zeta theorem
+excluding such source-flat intervals at the level of the canonical curvature
+\(q''_{\can}\), and then a source--anisotropy reintegration theorem connecting
+that source mass back to the row vector.
+```
+
+**with:**
+
+```latex
+Thus the local rank-two norm route requires the actual-zeta Gate~1 theorem
+excluding canonical source-flat intervals,
+\[
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|,
+\]
+and then the Gate~2 source--anisotropy reintegration theorem connecting that
+source mass back to the row vector.
+```
+
+**Reason:** This preserves the valid local model while avoiding a misleading global replacement of all local \(q''\)’s by \(q''_{\can}\).
+
+---
+
+## Edit 5 — Replace the “source-weighted layered lower bound” paragraph
+
+**Where:** Find the paragraph beginning:
+
+```latex
+A more concrete form of the same obstruction is the source-weighted layered
+lower bound
+```
+
+**Replace from that sentence through the paragraph ending with:**
+
+```latex
+or a stronger finite/growing-jet version.
+```
+
+**with:**
+
+```latex
+A more concrete form of the same obstruction is the source-weighted layered
+lower bound
+\[
+\boxed{
+\sup_{m\in I_\rho}
+|y(m)q''_{\can}(m)|
+\max\{|\Gamma_G(m)|,|\Gamma_{G,2}(m)|\}
+\ge Q^{-A}.
+}
+\]
+The source-collapse countermodels above show that this estimate cannot be
+deduced from local rank-two row algebra, finite Hadamard/quartet symmetry,
+same-scale packet geometry, Gram positivity, or finite-prime/AFE surrogate
+structure alone.  It now requires the two-gate actual-zeta package:
+\[
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|
+\]
+together with
+\[
+\int_{I_\rho}
+|q''_{\can}(m)|^2
+\bigl(\Gamma_G(m)^2+\Gamma_{G,2}(m)^2\bigr)\,dm
+\ge Q^{-A}|I_\rho|.
+\]
+Alternatively, a zeta-specific rigidity, cone-separation, source-robust row,
+or global arithmetic non-concentration theorem implying the displayed
+source-weighted lower bound would suffice.
+```
+
+**Reason:** This is the current exact proof obligation and removes old “source-jet nonflatness alone” language.
+
+---
+
+## Edit 6 — Add a current Gate–1/Wronskian attack ledger
+
+**Where:** Insert after
+
+```latex
+\begin{remark}[Prime-log recurrence to derivative-flat tubes]
+\label{rem:prime-log-recurrence-derivative-flat-tubes}
+...
+\end{remark}
+```
+
+or, if you prefer the terminal location, insert just before
+
+```latex
+\section{No-go and audit ledger}
+```
+
+**Insert:**
+
+```latex
+\begin{remark}[Current Gate--1 attack ledger: finite-jet and Wronskian forms]
+\label{rem:current-gate-one-finite-jet-wronskian-ledger}
+The current Gate--1 target is
+\[
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|.
+\]
+In normalized coordinates
+\[
+m=m_0+\lambda x,\qquad
+F_\lambda(x)=\lambda^3q''_{\can}(m_0+\lambda x),
+\]
+it is enough, subject to the finite-jet-to-energy transfer, to prove a
+finite-jet anti-design estimate of the form
+\[
+\max_{0\le r\le R(Q)}
+|\partial_x^rF_\lambda(x_0)|
+\ge Q^{-B_{\rm jet}}\lambda^3.
+\]
+The natural depth is
+\[
+R(Q)\asymp\frac{\log Q}{\log\log Q},
+\]
+with \(R=O(\log Q)\) as a safer but more expensive depth.
+
+A promising formulation is a normalized Wronskian/transversality package.  Let
+\[
+G_0=Z_\alpha,\qquad
+G_{j+1}=\Delta^j\partial_m^j q''_{\can},
+\quad 0\le j\le R.
+\]
+The associated normalized Wronskian is
+\[
+\widetilde{\mathcal W}_R(m,\alpha)
+=
+\det\bigl(\mathcal D^\ell G_j(m,\alpha)\bigr)_{0\le j,\ell\le R+1},
+\qquad
+\mathcal D=\Delta\partial_m.
+\]
+A polynomial lower bound
+\[
+|\widetilde{\mathcal W}_R(m,\alpha)|\ge Q^{-A}
+\]
+at admissible centers would imply finite-jet anti-design and hence Gate~1.
+
+At present this route is not Green.  The \(Z_\alpha\)-symbol appears to add
+genuine rank to the \(q''_{\can}\)-jet system, but the Wronskian expands into
+a fixed-coefficient subset-product exponential sum.  Cauchy--Binet
+nonvanishing proves only that the determinant is not identically zero; it does
+not give the required pointwise lower bound on the actual prime-log orbit.
+Thus the current missing theorem is a fixed actual-zeta determinant or
+nonrecurrence lower bound, not another formal rank calculation.
+\end{remark}
+```
+
+**Reason:** This captures the latest sprint: Wronskian/transversality is the closest Gate 1 route, but it is still Yellow because fixed actual-zeta nonrecurrence remains open. turn98file11
+
+---
+
+## Edit 7 — Add the \(Z_\alpha\)-symbol transversality subproblem
+
+**Where:** Immediately after Edit 6.
+
+**Insert:**
+
+```latex
+\begin{remark}[\(Z_\alpha\)-symbol transversality subproblem]
+\label{rem:zalpha-symbol-transversality-subproblem}
+The first finite-dimensional test for the Wronskian route is whether the
+off-line equation contributes a row independent from the \(q''_{\can}\)-jet
+rows.  In a simplified AFE block, write
+\[
+Z_\alpha(m)\sim\sum_n z_n(\alpha)e^{-im\log n},
+\]
+and
+\[
+\partial_m^r q''_{\can}(m)
+\sim
+\sum_n c_n(-i\log n)^r e^{-im\log n}.
+\]
+On an active block, the relevant symbolic test is whether
+\[
+\frac{z_n(\alpha)}{c_n}
+\]
+is approximable by a polynomial in \(\log n\) of degree at most \(R\).  The
+expected model is
+\[
+\frac{z_n(\alpha)}{c_n}
+\approx
+\frac{n^{-\alpha}}{(\log n)^3}
+\frac{V_\alpha(n/N)}{W_2(n/N)},
+\]
+or, with \(u=\log n\),
+\[
+f_\alpha(u)\approx e^{-\alpha u}u^{-3}A_\alpha(u).
+\]
+This is not polynomial-like on a thick active block unless the weights are
+degenerate.  Thus \(Z_\alpha\) likely adds genuine symbolic rank.  The missing
+step is quantitative: one needs a lower bound
+\[
+\inf_{P\in\mathcal P_{\le R}}
+\max_{n\in\mathcal B}
+\left|
+\frac{z_n(\alpha)}{c_n}-P(\log n)
+\right|
+\ge Q^{-C}
+\]
+for the actual AFE coefficients and active block.  Symbolic transversality
+alone still does not imply the required pointwise Wronskian lower bound.
+\end{remark}
+```
+
+**Reason:** This is a concise way to record the most concrete finite-dimensional subproblem produced by the latest agents.
+
+---
+
+## Edit 8 — Add Wronskian derivative-budget guardrail
+
+**Where:** Immediately after Edit 7.
+
+**Insert:**
+
+```latex
+\begin{remark}[Derivative-order and error budget for the Wronskian route]
+\label{rem:wronskian-derivative-order-error-budget}
+The normalized Wronskian route is sensitive to derivative order.  Since
+\[
+G_{j+1}=\Delta^j\partial_m^j q''_{\can},
+\]
+and the Wronskian differentiates \(G_j\) up to order \(R+1\), the argument
+requires derivatives of \(q''_{\can}\) through order approximately \(2R+1\),
+equivalently derivatives of \(q_\zeta\) through order \(2R+3\).  The
+\(Z_\alpha\)-row requires derivatives through order \(R+1\).
+
+Therefore the canonical error term in
+\[
+q''_{\can}=B_2+P_2+D_2+E_2
+\]
+must be controlled through the same derivative order.  The safe choice
+\[
+R\asymp\frac{\log Q}{\log\log Q}
+\]
+keeps the normalized factorial and AFE derivative losses polynomial.  Taking
+\(R=O(\log Q)\) is dangerous unless a separate lemma removes the resulting
+factorial and differentiated-error losses.
+\end{remark}
+```
+
+**Reason:** This prevents future agents from using a Wronskian depth that the canonical transfer/error budget cannot support. 
+
+---
+
+## Edit 9 — Add numerical/surrogate smoke-test update
+
+**Where:** Replace the current
+
+```latex
+\begin{remark}[Numerical and surrogate status]
+\label{rem:numerical-surrogate-status}
+...
+\end{remark}
+```
+
+**with:**
+
+```latex
+\begin{remark}[Numerical and surrogate status]
+\label{rem:numerical-surrogate-status}
+Current numerical and surrogate experiments are diagnostic only.  Deterministic
+positive quadrature controls show that the harness detects artificial
+same-scale source flattening; this is the mandatory negative control.  Singular
+dominance controls show that a single shallow packet produces huge Gate--2
+mass, and that the singular danger is again same-scale cancellation of source
+jets.
+
+A first zero-kernel-only smoke scan found no evidence of actual-zero proxy
+Gate~1 failure.  In that proxy run the strongest low-energy interval was only
+mildly low:
+\[
+B_I^{\rm eff}\approx1.41,\qquad E_I\approx0.185,
+\]
+with finite jets not simultaneously small.  This should be read as
+encouraging but weak evidence: the run used a proxy kernel, omitted the exact
+canonical \(B_2\), and treated critical-line zeros through an artificial
+regularization parameter.
+
+The first constraint not broken by adversarial or surrogate models remains
+full actual-zeta compatibility:
+\[
+q''_{\can}=B_2+P_2+D_2+E_2
+\]
+with fixed actual coefficients, completed dual/gamma/tail structure, and
+certified error control.  Numerical evidence should therefore be read as
+support for prioritizing the actual-zeta incidence/nonrecurrence theorem, not
+as proof of Gate~1.
+\end{remark}
+```
+
+**Reason:** This records the useful smoke-test result without overclaiming. The conversation log explicitly says the proxy scan is encouraging but weak, and that Gate 1 remains unproved. turn98file4
+
+---
+
+## Edit 10 — Patch final downstream status scalar \(I\)-coordinate displays
+
+**Where:** In
+
+```latex
+\begin{remark}[What is closed downstream and what remains upstream]
+\label{rem:final-status-downstream-vs-upstream}
+```
+
+**Replace:**
+
+```latex
+F_9^I=0,\qquad yq''\Gamma_{G,2}\ne0
+```
+
+**with:**
+
+```latex
+F_9^I=0,\qquad yq''_{\can}\Gamma_{G,2}\ne0
+```
+
+**And replace:**
+
+```latex
+\frac{yq''\Gamma_{G,2}}{128\pi^2g^3}
+```
+
+**with:**
+
+```latex
+\frac{yq''_{\can}\Gamma_{G,2}}{128\pi^2g^3}
+```
+
+**Reason:** This final-status section is about the actual downstream theorem, not the local source-kernel model. It should use \(q''_{\can}\).
+
+---
+
+## Edit 11 — Replace the terminal conditional dependency ledger with the current Gate–1 formulation
+
+**Where:** Replace the entire current
+
+```latex
+\begin{remark}[Terminal conditional dependency ledger]
+\label{rem:terminal-conditional-dependency-ledger}
+...
+\end{remark}
+```
+
+**with:**
+
+```latex
+\begin{remark}[Terminal conditional dependency ledger]
+\label{rem:terminal-conditional-dependency-ledger}
+The present draft should be read as a conditional architecture, not as a closed
+proof of \(\RH\).  The ordinary Gate--1 branch is conditional on an
+actual-zeta finite-jet anti-design theorem for the full canonical source
+curvature:
+\[
+\boxed{
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|.
+}
+\]
+Equivalently, in normalized packet coordinates
+\[
+m=m_0+\lambda x,
+\qquad
+F_\lambda(x)=\lambda^3q''_{\can}(m_0+\lambda x),
+\]
+one needs
+\[
+\boxed{
+\int_X|F_\lambda(x)|^2\,dx\ge Q^{-B}\lambda^6|X|.
+}
+\]
+A finite-jet version is
+\[
+\boxed{
+\max_{0\le r\le R(Q)}
+|\partial_x^rF_\lambda(x_0)|
+\ge Q^{-B_{\rm jet}}\lambda^3,
+}
+\]
+with \(R(Q)\asymp\log Q/\log\log Q\) as the preferred depth.
+
+The currently closest ordinary route is a normalized Wronskian/transversality
+package.  One possible factorization is:
+\[
+\mathrm{O1}:\ \text{\(Z_\alpha\)-symbol transversality against the }
+q''_{\can}\text{-jet rows},
+\]
+\[
+\mathrm{O2}:\ \text{subset-product Wronskian/nonrecurrence lower bound on the}
+\text{ actual prime-log orbit},
+\]
+and
+\[
+\mathrm{O3}:\ \text{canonical transfer/error control for }
+B_2+P_2+D_2+E_2
+\text{ through the required derivative order}.
+\]
+Together these would imply a polynomial lower bound for the normalized
+Wronskian
+\[
+|\widetilde{\mathcal W}_R(m_0,\alpha)|\ge Q^{-A},
+\]
+and hence ordinary finite-jet anti-design and ordinary Gate~1.  None of
+\(\mathrm{O1}\)--\(\mathrm{O3}\) is currently proved at the required
+pointwise/nonrecurrence strength.
+
+The deep singular branch is conditional on
+\[
+\boxed{
+\mathrm{S1}:\ \text{singular explicit-formula anti-design exclusion}
+}
+\]
+in the form
+\[
+|\mathbf P_R-\mathbf G_R-\mathbf T_R|_2\ge Q^{-A}.
+\]
+The mild transition region
+\[
+(\log Q)^{-C}\lesssim \lambda Q\lesssim 1
+\]
+requires its own transition-control statement.
+
+Downstream, the current local package is
+\[
+\text{Gate 1}
++
+|u'|_\infty\text{ source thickening}
++
+L^2\text{-input real rigidity}
+\Longrightarrow
+\text{Gate 2},
+\]
+and
+\[
+\text{Gate 2}
++
+\text{gauge-locked wall escape}
++
+\text{carrier-quotient D4}
++
+\text{row mobility}
+\Longrightarrow
+\text{row energy}.
+\]
+These downstream repairs do not discharge the upstream actual-zeta inputs
+\(\mathrm{O1}\)--\(\mathrm{O3}\), \(\mathrm{S1}\), or the transition theorem.
+\end{remark}
+```
+
+**Reason:** The current terminal ledger still frames O1/O2/O3 as fixed-width cell/cofactor/angle inputs. That was an earlier decomposition. The latest sprint re-centered O1/O2/O3 around finite-jet anti-design, \(Z_\alpha\)-symbol transversality, subset-product Wronskian nonrecurrence, and derivative/error budget. This replacement captures the latest state while preserving the conditional architecture.
+
+---
+
+## Edit 12 — Add explicit “no Green proof yet” warning near the final ledger
+
+**Where:** Immediately after Edit 11.
+
+**Insert:**
+
+```latex
+\begin{remark}[No Green Gate--1 proof yet]
+\label{rem:no-green-gate-one-proof-yet}
+At the current stage, no argument in the draft proves Gate~1 for the full
+canonical object \(q''_{\can}\).  Formal Wronskian or Cauchy--Binet
+nonvanishing is insufficient: the Wronskian becomes a fixed-coefficient
+exponential sum over subset-product frequencies, and the actual theorem needed
+is a pointwise lower bound on the prime-log orbit.  Likewise, a proof for a
+zero-kernel proxy, a flexible Dirichlet polynomial, or the affine-subtracted
+complement curvature \(q''_{\source,R}\) does not prove Gate~1.  Any future
+Gate~1 proof must apply to
+\[
+q''_{\can}=B_2+P_2+D_2+E_2
+\]
+with controlled errors in the same normalization as the local row package.
+\end{remark}
+```
+
+**Reason:** This is the most important trust-preserving sentence: no route is Green yet. It also prevents formal determinant nonvanishing from being overread as a proof. turn98file11
+
+---
+
+## Edit 13 — Optional but recommended: remove or move the unrelated transcendence remark
+
+If the draft still contains:
+
+```latex
+\begin{remark}[Open question: are the nontrivial zeros transcendental?]
+...
+\end{remark}
+```
+
+remove it from the main body or move it to an appendix titled “External classical questions not used here.”
+
+**Reason:** It is orthogonal to the Gate 1/Gate 2/D4 architecture and distracts from the terminal dependency ledger.
+
+---
+
+# Edits I would **not** make
+
+1. **Do not replace all local \(q''\)’s in the same-scale model with \(q''_{\can}\).** The local-kernel guard is the correct fix. The same-scale model is intentionally a local source-kernel countermodel, not actual zeta.
+
+2. **Do not demote the carrier-quotient D4 theorem.** The active row formulation remains carrier/quotient row energy; scalar \(I\)-coordinate cancellation is fallback only. 
+
+3. **Do not claim the Wronskian route is Green.** It is the closest route, but it still needs an actual fixed-coefficient determinant/nonrecurrence lower bound.
+
+4. **Do not make numerical evidence proof-level.** The smoke scan is encouraging but proxy-level and must remain framed as diagnostic. turn98file4
+
+---
+
+# Priority order
+
+Apply these in this order:
+
+1. **Edit 11 + Edit 12** — terminal dependency ledger and no-Green warning.
+2. **Edit 6 + Edit 7 + Edit 8** — Gate 1/Wronskian finite-jet attack ledger.
+3. **Edit 1 + Edit 5** — stale finite-core/source-weighted lower-bound wording.
+4. **Edit 9** — numerical/surrogate status update.
+5. **Edit 10** — final scalar \(I\)-coordinate \(q''_{\can}\) cleanup.
+6. **Edits 2–4** — local same-scale notation clarity.
+## User (2026-04-27 16:56:52)
+
+Now review these edits from agents. Review holistically and synthesize the agent edits into final insertions. Prefer condensing/replacing stale sections rather than adding qualifiers where the latest finding supersedes them.
+
+## Assistant (2026-04-27 16:58:55)
+
+_Thought for 1m 59s_
+
+I reviewed the latest draft plus the new agent suggestions holistically. The draft is now close structurally: Gate 2/D3a/D4 are largely repaired; the remaining paper-level problem is that the upstream Gate 1 architecture and the latest no-go/evidence ledger are still too compressed or scattered. The edits below consolidate the current state without re-opening old D1/D2/D3 paths. The agent notes support treating O1/O2/O3 as named open ordinary inputs, S1/T1 as singular/transition inputs, and carrier-quotient D4 as the active row-output route. turn102file10turn103file0
+
+I would apply the following final patch set.
+
+---
+
+# Edit 1 — Retitle and replace the abstract
+
+## Where
+
+Near the top of the file.
+
+## Replace
+
+```latex
+\title{A Proof of the Riemann Hypothesis}
+```
+
+with:
+
+```latex
+\title{A Conditional Local Obstruction Architecture for the Riemann Hypothesis}
+```
+
+## Replace the entire abstract with
+
+```latex
+\begin{abstract}
+We present a conditional local obstruction architecture for the Riemann
+Hypothesis based on local jet-normalized blocks of the completed critical-line
+phase kernel, actual-zeta source curvature, rank-two anisotropy visibility,
+and downstream carrier-quotient row conversion.  The document is written as a
+living proof draft: local algebraic statements are recorded in proof form,
+while global arithmetic inputs are explicitly marked.
+
+The present manuscript is not a completed proof of \(\RH\).  Its ordinary
+Gate--1 branch is conditional on three actual-zeta inputs: fixed-width cell
+nonrecurrence, cofactor-vector nonrecurrence, and Wronskian angle
+nonalignment.  Its deep singular branch is conditional on a singular
+explicit-formula anti-design exclusion, with a separate mild-transition
+coverage theorem.  Downstream, Gate~2 is treated through source thickening and
+an \(L^2\)-input real-rigidity lemma, while row energy is obtained through
+gauge-locked wall escape and carrier-quotient D4 row conversion.  The purpose
+of the draft is to make these reductions, definitions, no-go results, and
+remaining proof obligations explicit and auditable.
+\end{abstract}
+```
+
+---
+
+# Edit 2 — Replace the stale introduction status paragraph
+
+## Where
+
+In the introduction, replace the paragraph beginning:
+
+```latex
+The original goal was to show that the toy anomaly has a transverse component
+...
+```
+
+and ending:
+
+```latex
+... rather than a completed proof of \(\RH\).
+```
+
+## Replace with
+
+```latex
+The original goal was to show that the toy anomaly has a transverse component
+that survives every local normalization, while the zeta-side transverse channel
+is annihilated at leading value order and becomes exponentially small after
+odd-moment cancellation.  The present draft should now be read more cautiously:
+the local analysis has produced a detailed obstruction framework and several
+conditional rank-two visibility theorems, but the global proof of \(\RH\) is
+not closed.
+
+The present proof-state is layered.  Upstream, ordinary Gate~1 is conditional
+on three named actual-zeta nonrecurrence/incidence inputs: fixed-width cell
+nonrecurrence, cofactor-vector nonrecurrence, and Wronskian angle
+nonalignment.  The deep singular branch is conditional on a singular
+explicit-formula anti-design exclusion, while the mild transition region
+requires a separate transition-control theorem.  Downstream, Gate~2 has been
+reduced to source thickening plus an \(L^2\)-input real-rigidity lemma, and
+the row-energy layer has been reduced to gauge-locked wall escape plus
+carrier-quotient D4 row conversion.  Thus the draft is a conditional local
+obstruction architecture, not a completed proof of \(\RH\).
+```
+
+## Also replace
+
+```latex
+The proof has four main pillars.
+```
+
+with:
+
+```latex
+The local framework originally had four main pillars.
+```
+
+## And in `Remark~\ref{rem:wip-four-pillars-audit-status}` replace the body with
+
+```latex
+The four pillars above remain part of the local language of the draft, but
+they should not be read as a complete proof gate.  The later audits show that
+the decisive obstruction is no longer transverse odd-mode detection alone.
+The proof-state has separated into named upstream actual-zeta inputs
+(O1--O3, S1, and transition control) and downstream local conversion theorems
+(Gate~2 real rigidity, wall escape, D4 row conversion, and row mobility).
+See Remark~\ref{rem:terminal-conditional-dependency-ledger} for the terminal
+dependency ledger.
+```
+
+---
+
+# Edit 3 — Replace the stale bridge paragraph after the downstream-status remark
+
+## Where
+
+Immediately after:
+
+```latex
+\begin{remark}[Updated downstream status after the Gate--2 and carrier-quotient audits]
+\label{rem:updated-downstream-status-gate2-carrier-quotient}
+...
+\end{remark}
+```
+
+The draft currently continues:
+
+```latex
+This section records the current proof state after the Gate~B, Bottleneck~C,
+finite-core, and interaction audits.  It is not part of the original local
+coefficient calculus; it is a status ledger for the remaining proof
+obligations.
+```
+
+## Replace those two sentences with
+
+```latex
+The remaining subsections of this section record the broader proof state after
+the Gate~B, Bottleneck~C, finite-core, and interaction audits.  They are a
+status ledger for older and parallel proof obligations and should be read
+separately from the ordinary real-canonical downstream closure package above.
+In particular, references below to local Bottleneck--C, finite-core sampled
+vector non-concentration, or \(dd\)-interaction rigidity are not meant to undo
+the updated downstream organization:
+\[
+\text{Gate 1}
++
+|u'|_\infty\text{ source thickening}
++
+L^2\text{-input real rigidity}
+\Rightarrow
+\text{Gate 2},
+\]
+followed by
+\[
+\text{Gate 2}
++
+\text{gauge-locked wall escape}
++
+\text{carrier-quotient D4}
++
+\text{row mobility}
+\Rightarrow
+\text{row energy}.
+\]
+```
+
+---
+
+# Edit 4 — Replace the unsafe scale-normalization remark for \(L^2\)-rigidity
+
+## Where
+
+Replace the entire remark:
+
+```latex
+\begin{remark}[Scale-normalized use of Lemma~\ref{lem:l2-input-real-rigidity-safe}]
+\label{rem:scale-normalized-use-l2-rigidity}
+...
+\end{remark}
+```
+
+## Replace with
+
+```latex
+\begin{remark}[Application on polynomial subintervals]
+\label{rem:scale-normalized-use-l2-rigidity}
+Lemma~\ref{lem:l2-input-real-rigidity-safe} is stated on the fixed model
+intervals
+\[
+        J=(-2,2),\qquad J'=(-1,1),
+\]
+for notational convenience.  In applications to a physical subinterval
+\(J_{\rm phys}\subset I\), the Gate--2 identities are still interpreted in the
+original packet-normalized derivative convention
+\[
+        \mathcal D=\lambda\partial_m,
+\]
+not in a newly rescaled derivative unless the variables \(q,u,g,h\) are also
+renormalized and the identities are restated.
+
+Thus, when applying the lemma on \(J_{\rm phys}\), we keep
+\[
+u=q'',\qquad
+g=q''-6q+2q^3,\qquad
+h=2q(q')^2-\frac16g''
+\]
+with primes denoting the original \(\mathcal D\)-derivative.  The cutoff
+functions used in the proof then have derivatives of size polynomially bounded
+in \(|J_{\rm phys}|^{-1}\).  Since the source-thickening interval has
+polynomial relative length,
+\[
+|J_{\rm phys}|\ge Q^{-C}|I|,
+\]
+these cutoff losses are absorbed into the \(Q^C\) factor in
+Lemma~\ref{lem:l2-input-real-rigidity-safe}.  No change of the canonical
+Gate--2 derivative convention is made.
+\end{remark}
+```
+
+---
+
+# Edit 5 — Replace the residual-stable \(L^2\)-rigidity remark to include \(r_u\)
+
+## Where
+
+Immediately after the proof of:
+
+```latex
+\begin{lemma}[\(L^2\)-input real rigidity; safe primitive-bounded form]
+\label{lem:l2-input-real-rigidity-safe}
+```
+
+replace the current residual-stable remark.
+
+## Replace with
+
+```latex
+\begin{remark}[Residual-stable form]
+\label{rem:l2-rigidity-residual-stable}
+The same estimate holds if the identities hold with \(L^2\)-controlled
+residuals:
+\[
+        r_u:=u-q'',
+\]
+\[
+        g=q''-6q+2q^3+r_g,
+\]
+and
+\[
+        h=2q(q')^2-\frac16g''+r_h,
+\]
+where
+\[
+        \|r_u\|_{L^2(J)}
+        +
+        \|r_g\|_{L^2(J)}
+        +
+        \|r_h\|_{L^2(J)}
+        \le
+        \varepsilon |J|^{1/2}.
+\]
+Indeed, \(r_h\) enters the weighted kinetic estimate in the same way as \(h\),
+while \(r_g\) enters the potential estimate in the same way as \(g\).  The
+additional residual \(r_u\) is needed only at the final comparison between the
+ideal curvature \(q''\) and the source \(u\).  After increasing \(C\), the same
+conclusion follows:
+\[
+        \int_{J'}|u|^2
+        \le Q^C\varepsilon^{2/5}|J'|.
+\]
+In the exact real-canonical convention used in the main argument,
+\[
+r_u=r_g=r_h=0.
+\]
+\end{remark}
+```
+
+---
+
+# Edit 6 — Demote primitive recovery from the active proof path
+
+## Where
+
+Change the lemma heading:
+
+```latex
+\begin{lemma}[Local primitive recovery from \(L^2\)-small \(g\)]
+```
+
+to:
+
+```latex
+\begin{lemma}[Optional primitive recovery from \(L^2\)-small \(g\); not used below]
+```
+
+## Where
+
+Replace `Remark~\ref{rem:l2-rigidity-primitive-free-not-used}` with:
+
+```latex
+\begin{remark}[Primitive recovery not used in the rigidity proof]
+\label{rem:l2-rigidity-primitive-free-not-used}
+Lemma~\ref{lem:l2-input-real-rigidity-safe} is used only in the safe
+primitive-bounded form
+\[
+\|q\|_\infty+\|q'\|_\infty+\|q''\|_\infty\le Q^C.
+\]
+Lemma~\ref{lem:local-primitive-recovery-from-l2-small-g} records a possible
+way to recover these bounds on shrunken intervals from stronger source and
+\(L^2\)-smallness hypotheses, but this recovery is not part of the active
+Gate--2 proof.  The proof of
+Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity} uses the displayed safe
+primitive bounds as hypotheses on the normalized source interval.
+\end{remark}
+```
+
+**Do not remove the primitive recovery lemma; keep it as optional/future infrastructure.**
+
+---
+
+# Edit 7 — Harden the canonical source-curvature definition with exact \(B_2\)
+
+## Where
+
+In:
+
+```latex
+\begin{definition}[Canonical source-curvature representation problem]
+\label{def:canonical-source-curvature-representation-problem}
+```
+
+replace the zero-side representation paragraph:
+
+```latex
+On the zero side one needs a representation
+\[
+q''_{\can}(m)
+=
+B_2(m)+\sum_{\rho}^{\rm reg}K_2(m;\rho),
+\]
+with all background, tail, source/core, and regularization conventions fixed.
+```
+
+## Replace with
+
+```latex
+On the zero side one needs a representation
+\[
+q''_{\can}(m)
+=
+B_2(m)+\sum_{\rho}^{\rm reg}K_2(m;\rho),
+\]
+with all background, tail, source/core, and regularization conventions fixed.
+The background curvature is fixed canonically by
+\[
+\boxed{
+B_2(t)=\theta'''(t)
+=
+-\frac18\Re\psi^{(2)}
+\!\left(\frac14+\frac{it}{2}\right).
+}
+\]
+Equivalently, for large \(t\),
+\[
+B_2(t)
+=
+-\frac1{2t^2}
+-\frac1{8t^4}
+-\frac7{64t^6}
++O(t^{-8}).
+\]
+The background term is included by default in zero-side proxy and canonical
+scans.  A \(B_2\)-only mode is diagnostic only; it is never a Gate~1 candidate
+because Gate~1 concerns the full object \(q''_{\can}\), not the
+gamma/background term alone.
+```
+
+---
+
+# Edit 8 — Add AFE/log-derivative stress-test convention guardrails
+
+## Where
+
+Immediately after `Definition~\ref{def:canonical-source-curvature-representation-problem}` and before:
+
+```latex
+\begin{hypothesis}[Gate 1: off-line-packet source-curvature observability]
+```
+
+## Insert
+
+```latex
+\begin{remark}[Log-derivative AFE convention for numerical stress tests]
+\label{rem:log-derivative-afe-stress-test-convention}
+The packet-frequency determinant and local \(Z_\alpha\)-amplitude stress tests
+use the logarithmic-derivative convention
+\[
+A(s)=-\frac{\zeta'}{\zeta}(s),
+\qquad
+C_k(s)=(-1)^k\partial_s^k A(s).
+\]
+The reflected functional-equation sign is
+\[
+\sigma_k=(-1)^{k+1}.
+\]
+For the current \(Z_\alpha\)-row convention one has \(k_Z=0\), so the plus and
+minus branch coefficients are
+\[
+z_n^+(\alpha)
+=
+\Lambda(n)n^{-1/2-\alpha}V_Z^+(n/N_Z^+),
+\]
+\[
+z_n^-(\alpha)
+=
+-\Lambda(n)n^{-1/2+\alpha}V_Z^-(n/N_Z^-).
+\]
+For the script-convention source row one uses \(k_q=3\):
+\[
+c_n^+
+=
+\Lambda(n)(\log n)^3n^{-1/2}V_q^+(n/N_q^+),
+\]
+\[
+c_n^-
+=
++\Lambda(n)(\log n)^3n^{-1/2}V_q^-(n/N_q^-).
+\]
+For a literal \(q''_{\can}\)-row test, replace \(k_q=3\) by \(k_q=2\), giving
+\[
+c_n^+
+=
+\Lambda(n)(\log n)^2n^{-1/2}V_q^+,
+\qquad
+c_n^-
+=
+-\Lambda(n)(\log n)^2n^{-1/2}V_q^-.
+\]
+
+The Wronskian operator node is the signed differential-frequency node, not the
+folded conductor diagnostic node:
+\[
+\text{plus operator node }=+\log n,
+\qquad
+\text{minus operator node }=-\log n.
+\]
+Folded quantities such as
+\[
+\log\frac{m}{2\pi n}
+\]
+may be recorded as conductor/saddle diagnostics, but they are not substituted
+for the eigenvalue of \(\lambda\partial_m\) unless a different folded
+differential operator has been explicitly defined.
+
+These conventions are numerical guardrails.  Proof-level canonical use still
+requires the exact Mellin smoothing, the paired \(V^\pm\)-weights, derivatives
+of \(m\)-dependent weights, the \(E_2\)-tail budget, and the selected real/phase
+projection.
+\end{remark}
+```
+
+---
+
+# Edit 9 — Replace the carrier-graded row module’s clean order-nine carrier
+
+## Where
+
+In:
+
+```latex
+\begin{definition}[Carrier-graded row module through order nine]
+\label{def:carrier-graded-row-module-order-nine}
+```
+
+replace:
+
+```latex
+Here \(\mathsf C_7\) denotes the order-seven live carrier
+\(T_7^{(1)}\), and \(\mathsf C_{Y12}\) denotes the clean order-nine carrier
+\[
+T_9^{(1,2)}=X_1YX_2-X_2YX_1.
+\]
+```
+
+with:
+
+```latex
+Here \(\mathsf C_7\) denotes the order-seven live carrier
+\(T_7^{(1)}\), and \(\mathsf C_{Y12}\) denotes the clean centered order-nine
+carrier
+\[
+T_9^{(1,2)}
+=
+X_{-,1}YX_{+,2}+X_{-,2}YX_{+,1}.
+\]
+This is the same carrier denoted \(T_9^{(1,2)}\) in
+Proposition~\ref{prop:raw-order-nine-row-audit} and
+Theorem~\ref{thm:layered-fixed-sector-visibility-order-nine}.
+```
+
+---
+
+# Edit 10 — Add carrier-freeness caveat
+
+## Where
+
+Immediately after the proof of:
+
+```latex
+\begin{lemma}[Survival of the order-nine clean carrier in the carrier quotient]
+\label{lem:order-nine-carrier-survives-quotient}
+```
+
+and before `\begin{lemma}[Leading source factor]`.
+
+## Insert
+
+```latex
+\begin{remark}[Carrier freeness is the row-output choice]
+\label{rem:carrier-freeness-row-output-choice}
+Lemma~\ref{lem:order-nine-carrier-survives-quotient} is a statement in the
+pre-collapse carrier module.  It uses the row-output choice that carrier labels
+are retained until after quotienting nuisance directions.  If one instead
+defines the row output only after applying the scalar collapse map
+\[
+S_I:\mathcal M_{\rm car}\to\mathcal O\cdot I,
+\]
+then the freeness assertion is no longer available and the scalar
+cross-channel incidence problem for \(F_9^I\) returns.  Thus carrier freeness
+is not a hidden scalar non-cancellation theorem; it is the explicit
+carrier-quotient row-energy architecture.
+\end{remark}
+```
+
+---
+
+# Edit 11 — Define \(F_9^I\) explicitly in the scalar fallback
+
+## Where
+
+Replace the body of:
+
+```latex
+\begin{definition}[Order-nine correction incidence]
+\label{def:order-nine-correction-incidence}
+...
+\end{definition}
+```
+
+## Replace with
+
+```latex
+\begin{definition}[Order-nine correction incidence]
+\label{def:order-nine-correction-incidence}
+Let \(R_{\rm corr}^{I,(9)}\) denote the residual order-nine \(I\)-coordinate
+coming from correction rows not included in the raw two-point carrier table.
+After covariantization and the fixed-convention local gates, this residual may
+only include line, background/core, or normalization/subtraction correction
+data:
+\[
+R_{\rm corr}^{I,(9)}
+=
+R_{\rm line}^{I,(9)}
++
+R_{\rm bg/core}^{I,(9)}
++
+R_{\rm norm/sub}^{I,(9)}.
+\]
+Connection/frame/projection/whitening-gauge terms are absorbed by
+\(\nabla^{\mathfrak f}\); Gate~A/B rows are closed under the fixed-convention
+hypotheses; shadow rows are projected away; and pure same-point odd rows
+vanish by centered parity.
+
+For the collapsed scalar \(I\)-coordinate fallback, define
+\[
+F_9^I
+:=
+R_{\rm corr}^{I,(9)}
++
+\frac{yq''\Gamma_{G,2}}{128\pi^2g^3}.
+\]
+Thus the order-nine scalar \(I\)-coordinate is
+\[
+(A_9^{\mathfrak f})_I=F_9^I.
+\]
+Define the order-nine correction incidence wall by
+\[
+\mathcal E_{\rm corr}^{(9)}
+:=
+\left\{
+F_9^I=0,
+\quad
+yq''\Gamma_{G,2}\ne0
+\right\}.
+\]
+Equivalently,
+\[
+\mathcal E_{\rm corr}^{(9)}
+=
+\left\{
+R_{\rm corr}^{I,(9)}
+=
+-\frac{yq''\Gamma_{G,2}}{128\pi^2g^3},
+\quad
+yq''\Gamma_{G,2}\ne0
+\right\}.
+\]
+On the complement of this wall, the collapsed order-nine \(I\)-coordinate is
+nonzero whenever \(yq''\Gamma_{G,2}\ne0\).
+\end{definition}
+```
+
+---
+
+# Edit 12 — Add a finite D4 audit ledger
+
+## Where
+
+Immediately after the proof of:
+
+```latex
+\begin{theorem}[D4 carrier-quotient row conversion through order nine]
+\label{thm:d4-carrier-quotient-through-order-nine}
+```
+
+and before `\begin{remark}[Two quotient coordinates for D4]`.
+
+## Insert
+
+```latex
+\begin{remark}[Finite D4 audit ledger]
+\label{rem:finite-d4-audit-ledger}
+The carrier-quotient theorem separates the structural rank statement from the
+finite row-algebra audit.  The finite D4 audit consists of the following
+checks.
+
+\begin{enumerate}[label=(\roman*),nosep]
+\item Verify the principal source factor
+\[
+        \operatorname{gr}(H)=-\frac1{288}q_0u^3.
+\]
+
+\item Verify the order-seven carrier detecting \(\Gamma_G\):
+\[
+        [\mathcal A_7]\sim H\Gamma_G[\mathsf C_7].
+\]
+
+\item Verify the clean order-nine carrier detecting \(\Gamma_{G,2}\):
+\[
+        [\mathcal A_9]\sim H\Gamma_{G,2}[\mathsf C_{Y12}].
+\]
+
+\item Identify the nuisance carrier subspace being quotiented.
+
+\item Prove quotient coercivity:
+\[
+        [\mathsf C_7]\wedge[\mathsf C_{Y12}]\ne0
+\]
+with polynomial quantitative lower bound in the chosen quotient norm.
+
+\item Bound only the residual components that can cancel the leading response:
+\[
+        \left|
+        P_{W_{\rm car}}(\mathcal E_7+\mathcal E_9)
+        \right|_{\mathcal Q_{\rm car}}
+        \le
+        \frac12
+        |H|(\Gamma_G^2+\Gamma_{G,2}^2)^{1/2}.
+\]
+\end{enumerate}
+
+In scalar \(I\)-coordinate output, additional cross-channel incidence walls may
+appear after independent carrier directions are collapsed into the same scalar
+coordinate.  These are scalar-output artifacts unless the downstream theorem
+explicitly requires scalar \(I\)-coordinate energy.
+\end{remark}
+```
+
+---
+
+# Edit 13 — Add D4 carrier-quotient warning at the start of the theorem
+
+## Where
+
+Immediately after:
+
+```latex
+\begin{theorem}[D4 carrier-quotient row conversion through order nine]
+\label{thm:d4-carrier-quotient-through-order-nine}
+```
+
+and before the assumptions.
+
+## Insert
+
+```latex
+This theorem is a quotient row-energy theorem.  It does not assert coercivity
+of the collapsed scalar \(I\)-coordinate.  If the final downstream norm is
+forced to be the scalar \(I\)-coordinate norm, then one must instead control
+the scalar incidence wall in
+Definition~\ref{def:order-nine-correction-incidence}, or pass to a higher or
+ambient row architecture.
+```
+
+---
+
+# Edit 14 — Add a full upstream Gate--1 named-input section
+
+## Where
+
+Insert immediately before:
+
+```latex
+\section{Final status after the downstream closure repairs}
+\label{sec:final-status-after-downstream-closure-repairs}
+```
+
+## Insert
+
+```latex
+\section{Upstream Gate--1 arithmetic inputs after the ordinary-route audit}
+\label{sec:upstream-gate-one-arithmetic-inputs}
+
+The downstream local package of Section~\ref{sec:downstream-local-closure-package}
+reduces row-energy production to Gate~1 and finite D4 row conversion.  The
+present section records the current upstream status for Gate~1.  This is a
+conditional arithmetic ledger: the inputs below are not proved in this draft.
+
+\subsection{Ordinary packet-frequency Wronskian route}
+\label{subsec:ordinary-packet-frequency-wronskian-route}
+
+Work in the ordinary packet-frequency regime
+\[
+\lambda Q\asymp1,
+\qquad
+R\asymp\frac{\log Q}{\log\log Q},
+\qquad
+\mathcal D=\lambda\partial_m.
+\]
+The fully canonical source row is
+\[
+q''_{\can}=B_2+P_2+D_2+E_2.
+\]
+The basis-normalized ordinary Wronskian uses rows
+\[
+G_0=Z_\alpha,
+\qquad
+G_{j+1}=\mathcal D^j q''_{\can},
+\qquad
+0\le j\le R.
+\]
+Thus
+\[
+\widetilde{\mathcal W}_R(m,\alpha)
+=
+\det\left(C_\ell(\mathcal D)G_j(m,\alpha)\right)_{0\le j,\ell\le R+1}.
+\]
+At an admissible ordinary-scale zero
+\[
+Z_\alpha(m_0)=0,
+\]
+expansion along the \(Z_\alpha\)-row gives
+\[
+\widetilde{\mathcal W}_R(m_0,\alpha)
+=
+\left\langle
+\mathbf z'(m_0,\alpha),
+\mathbf M(m_0,\alpha)
+\right\rangle,
+\]
+where \(\mathbf z'\) is the nonzero derivative-row vector of \(Z_\alpha\), and
+\(\mathbf M\) is the cofactor/Hodge-dual vector of the canonical
+\(q''_{\can}\)-jet block.
+
+The ordinary route is now reduced to the following three named arithmetic
+inputs.
+
+\begin{definition}[O1: Fixed-width cell nonrecurrence]
+\label{def:O1-fixed-width-cell-nonrecurrence}
+Fix a packet-frequency support
+\[
+\mathcal B_{\rm wide}
+=
+\{n:c_-Q\le \log n\le c_+Q\},
+\qquad
+0<c_-<c_+<\frac12,
+\]
+and partition the normalized support into cells \(I_r\) of width
+\[
+|I_r|\asymp R^{-1},
+\qquad
+M_{\rm cell}\asymp R.
+\]
+Let
+\[
+B_r^+
+=
+\sum_{x_n^+\in I_r}
+z_n^+(\alpha,m_0)e^{-im_0\log n},
+\]
+\[
+B_r^-
+=
+\sum_{x_n^-\in I_r}
+z_n^-(\alpha,m_0)e^{+im_0\log n},
+\]
+and define the full canonical cell vector
+\[
+B_r
+=
+B_r^+
++
+e^{i\Theta_Z(m_0,\alpha)}B_r^-
++
+B_r^{\rm bg}
++
+B_r^E.
+\]
+The fixed-width cell nonrecurrence input is the assertion that, for every
+admissible ordinary-scale zero \(Z_\alpha(m_0)=0\),
+\[
+\boxed{
+\sum_r |B_r(m_0,\alpha)|^2\ge Q^{-A}.
+}
+\]
+Equivalently, the actual prime-log orbit avoids the cell-flat variety
+\[
+\{B_r=0\ \text{for all }r\}
+\]
+at polynomial scale.  This input must use the full canonical
+main+dual+background+error cell vector above; a plus-only, main-only, or
+proxy-cell theorem is not proof-level without a canonical transfer theorem.
+\end{definition}
+
+\begin{remark}[Cell mass gives the \(Z_\alpha\)-derivative row]
+\label{rem:cell-mass-gives-z-derivative-row}
+Under the stable cell partition above, the lower bound in
+Definition~\ref{def:O1-fixed-width-cell-nonrecurrence} implies a
+polylog-local amplitude lower bound for
+\[
+t\mapsto Z_\alpha(m_0+\lambda t).
+\]
+By the finite-dimensional amplitude-to-jet principle, this gives
+\[
+\boxed{
+\|\mathbf z'(m_0,\alpha)\|\ge Q^{-A'}.
+}
+\]
+If the partition uses more than \(R+2\) cells, one should use the projected
+fallback
+\[
+\|\Pi_{\le R+1}B(m_0,\alpha)\|_2^2\ge Q^{-A},
+\]
+where \(\Pi_{\le R+1}\) is the stable projection to degree-\((R+1)\) cell
+polynomial modes.  Raw cell mass is the preferred positive \(L^2\)-amplitude
+route when \(M_{\rm cell}\asymp R\) and the cell basis is well conditioned.
+\end{remark}
+
+\begin{definition}[O2: Cofactor-vector nonrecurrence]
+\label{def:O2-cofactor-vector-nonrecurrence}
+Let
+\[
+Q_j(m_0)
+=
+\left(
+C_\ell(\mathcal D)\mathcal D^j q''_{\can}(m_0)
+\right)_{\ell=0}^{R+1},
+\qquad
+0\le j\le R.
+\]
+Define the canonical cofactor vector
+\[
+\mathbf M_{\can}(m_0)
+=
+\star(Q_0\wedge Q_1\wedge\cdots\wedge Q_R).
+\]
+The cofactor-vector nonrecurrence input is the pointwise assertion
+\[
+\boxed{
+Z_\alpha(m_0)=0
+\Longrightarrow
+\|\mathbf M_{\can}(m_0,\alpha)\|\ge Q^{-A}.
+}
+\]
+Equivalently, the actual orbit avoids the cofactor-flat variety
+\[
+\mathcal M_{\rm flat}=\{u:\mathbf M_{\can}(u,\alpha)=0\}
+\]
+at polynomial scale on admissible \(Z_\alpha\)-zeros.
+\end{definition}
+
+\begin{remark}[Averaged large sieves do not replace O2]
+\label{rem:averaged-large-sieve-does-not-replace-O2}
+An averaged zero-set estimate of the form
+\[
+\sum_{\substack{m_j\in J\\ Z_\alpha(m_j)=0}}
+\|\mathbf M(m_j,\alpha)\|^2
+\ge
+Q^{-A}N_{Z_\alpha}(J)
+\]
+is useful as evidence and as a companion theorem, but it does not imply
+Definition~\ref{def:O2-cofactor-vector-nonrecurrence}.  A specified off-line
+zero may be exceptional.  Derivative propagation of \(\mathbf M\)-smallness is
+too local relative to the natural spacing of \(Z_\alpha\)-zeros, so a separate
+pointwise nonrecurrence input is required.
+\end{remark}
+
+\begin{definition}[O3: Wronskian angle nonalignment / ordinary incidence]
+\label{def:O3-wronskian-angle-nonalignment}
+Let
+\[
+V(m_0)
+=
+\operatorname{span}\{Q_0(m_0),\ldots,Q_R(m_0)\}
+\subset\mathbb C^{R+2}.
+\]
+Since
+\[
+\mathbf M=\star(Q_0\wedge\cdots\wedge Q_R),
+\]
+the vector \(\mathbf M\) is normal to \(V\).  The Wronskian angle nonalignment
+input is
+\[
+\boxed{
+\operatorname{dist}\left(\mathbf z'(m_0,\alpha),V(m_0)\right)
+\ge Q^{-A}\|\mathbf z'(m_0,\alpha)\|
+}
+\]
+at every admissible ordinary-scale zero \(Z_\alpha(m_0)=0\).  Equivalently,
+\[
+\boxed{
+|\langle\mathbf z'(m_0,\alpha),\mathbf M(m_0,\alpha)\rangle|
+\ge
+Q^{-A}\|\mathbf z'(m_0,\alpha)\|\,
+\|\mathbf M(m_0,\alpha)\|.
+}
+\]
+Equivalently again,
+\[
+\boxed{
+Z_\alpha(m_0)=0
+\Longrightarrow
+|\widetilde{\mathcal W}_R(m_0,\alpha)|\ge Q^{-A}.
+}
+\]
+\end{definition}
+
+\begin{remark}[O3 is not implied by O1 and O2]
+\label{rem:O3-not-implied-by-O1-O2}
+The bounds
+\[
+\|\mathbf z'\|\ge Q^{-A},
+\qquad
+\|\mathbf M\|\ge Q^{-A}
+\]
+do not imply a lower bound for
+\[
+|\langle\mathbf z',\mathbf M\rangle|.
+\]
+Exterior/Hodge geometry identifies the missing angle but does not lower-bound
+it.  Phase-relaxed models can satisfy healthy symbol rank, nonzero
+\(\mathbf z'\), nonzero \(\mathbf M\), and still have
+\[
+\mathbf z'\in V,
+\qquad
+\langle\mathbf z',\mathbf M\rangle=0.
+\]
+Thus O3 is an independent actual-zeta arithmetic incidence input, not a
+linear-algebra corollary of O1 and O2.
+\end{remark}
+
+\begin{theorem}[Ordinary Gate--1 from O1--O3]
+\label{thm:ordinary-gate-one-from-O1-O2-O3}
+Assume the ordinary packet-frequency Wronskian construction above, the
+canonical transfer for \(q''_{\can}=B_2+P_2+D_2+E_2\), and the three inputs
+O1--O3.  Then every admissible ordinary-scale zero \(Z_\alpha(m_0)=0\)
+satisfies
+\[
+|\widetilde{\mathcal W}_R(m_0,\alpha)|\ge Q^{-A}.
+\]
+Consequently the ordinary finite-jet anti-design theorem applies, and hence
+\[
+\boxed{
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm
+\ge
+Q^{-B}|I_\rho|.
+}
+\]
+\end{theorem}
+
+\begin{proof}
+By O1 and Remark~\ref{rem:cell-mass-gives-z-derivative-row},
+\[
+\|\mathbf z'(m_0,\alpha)\|\ge Q^{-A_1}.
+\]
+By O2,
+\[
+\|\mathbf M(m_0,\alpha)\|\ge Q^{-A_2}.
+\]
+By O3,
+\[
+|\widetilde{\mathcal W}_R(m_0,\alpha)|
+=
+|\langle\mathbf z',\mathbf M\rangle|
+\ge
+Q^{-A_3}\|\mathbf z'\|\,\|\mathbf M\|
+\ge Q^{-A}.
+\]
+The Wronskian-to-finite-jet anti-design implication is the existing
+finite-dimensional determinant step: a basis-normalized Wronskian lower bound
+prevents the finite source jet
+\[
+\left(\mathcal D^r q''_{\can}(m_0)\right)_{0\le r\le R}
+\]
+from being \(Q^{-A}\)-flat.  The finite-jet-to-energy lemma then gives the
+ordinary Gate--1 interval bound.
+\end{proof}
+
+\subsection{Singular and transition Gate--1 branches}
+\label{subsec:singular-transition-gate-one-branches}
+
+The ordinary packet-frequency Wronskian route above is not intended to cover
+deep singular packets.  The deep singular regime is
+\[
+\lambda Q\ll(\log Q)^{-C}.
+\]
+In that regime the ordinary packet-frequency basis loses its intended
+normalization, and Gate--1 is routed to a separate singular anti-design input.
+
+\begin{definition}[S1: Singular explicit-formula anti-design exclusion]
+\label{def:S1-singular-explicit-formula-anti-design}
+In the deep singular regime, after singular rescaling
+\[
+m=\gamma+\lambda x,
+\]
+the singular obstruction is encoded by a finite vector of packet sine/prime
+modes.  The named singular input is
+\[
+\boxed{
+\left|\mathbf P_R-\mathbf G_R-\mathbf T_R\right|_2\ge Q^{-A}.
+}
+\]
+Equivalently, the singular packet cannot realize the full anti-design
+cancellation
+\[
+\sum_j w_j\sin(k\theta_j)+\mathcal B_k\approx0,
+\qquad
+3\le k\le R+3,
+\]
+once the explicit-formula prime, gamma/background, and tail terms are included.
+\end{definition}
+
+\begin{definition}[T1: Mild singular transition control]
+\label{def:T1-mild-singular-transition-control}
+The transition zone
+\[
+(\log Q)^{-C}\lesssim \lambda Q\lesssim 1
+\]
+is not covered automatically by either the ordinary packet-frequency theorem or
+the deep singular theorem.  The named transition input is a uniform transfer
+statement showing that one of the ordinary or singular lower bounds remains
+valid throughout this zone, with polynomial losses.
+\end{definition}
+
+\begin{remark}[Ordinary, transition, and singular routing]
+\label{rem:ordinary-transition-singular-routing}
+The complete Gate--1 input is the disjunction of:
+\[
+\text{ordinary branch: O1+O2+O3,}
+\]
+\[
+\text{transition branch: T1,}
+\]
+and
+\[
+\text{deep singular branch: S1.}
+\]
+The three regimes must be routed explicitly.  A proof in one regime should not
+be cited as proof in another without a transition theorem.
+\end{remark}
+```
+
+---
+
+# Edit 15 — Add the no-go archive for ordinary Wronskian routes
+
+## Where
+
+Immediately after Edit 14 and before the final status section.
+
+## Insert
+
+```latex
+\subsection{No-go archive for the ordinary Wronskian route}
+\label{subsec:no-go-archive-ordinary-wronskian}
+
+The following failed routes are recorded to prevent the ordinary Gate--1
+analysis from being repeatedly reopened in equivalent forms.
+
+\begin{remark}[Local packet geometry and phase-relaxed no-go]
+\label{rem:local-packet-geometry-phase-relaxed-no-go}
+Local same-scale packet geometry does not prove Gate--1.  Positive quadrature
+and finite-moment anti-design constructions can flatten source-curvature jets
+in relaxed packet models.  In phase-relaxed models, the conditions
+\[
+Z_\alpha=0,
+\qquad
+\mathbf z'\approx0,
+\qquad
+\mathbf M\approx0,
+\qquad
+\langle\mathbf z',\mathbf M\rangle\approx0
+\]
+can be imposed by using the extra phase degrees of freedom.  Thus the ordinary
+route must use actual one-parameter zeta arithmetic, not only local zero
+geometry, determinant algebra, or generic torus dimension counts.
+\end{remark}
+
+\begin{remark}[Positive trace and Weil-positive functionals are not coercive]
+\label{rem:positive-trace-weil-not-coercive}
+A positive packet trace
+\[
+\mathcal E_w(m_0)=\int w(m-m_0)|q''_{\can}(m)|^2\,dm
+\]
+gives nonnegativity, not the Gate--1 lower bound
+\[
+\mathcal E_w(m_0)\ge Q^{-B}|I_\rho|.
+\]
+Similarly, an abstract Weil-positive functional is not a packet-specific
+coercive estimate unless its prime/gamma side supplies a certified lower bound
+at the prescribed off-line packet center.  No such packet-specific positive
+minorant is currently established.
+\end{remark}
+
+\begin{remark}[Filtered minor isolation is nonlocal]
+\label{rem:filtered-minor-isolation-nonlocal}
+Trying to isolate a single Wronskian minor by filtering in \(m\) requires
+frequency resolution at the scale of subset-product gaps
+\[
+\Omega_S-\Omega_T=\log(N_S/N_T).
+\]
+For thick packet-frequency blocks these gaps can be much smaller than the
+reciprocal packet length.  Hence a filter that isolates a single subset product
+is generally nonlocal and cannot feed back into the packet-local Gate--1
+estimate.  Polynomial filters in \(\mathcal D\) face the same obstruction:
+isolating one minor would require degree comparable to the number of active
+subset frequencies, far beyond the safe derivative budget.
+\end{remark}
+
+\begin{remark}[Averaged large sieves do not imply pointwise nonrecurrence]
+\label{rem:averaged-large-sieve-not-pointwise}
+Averaged statements such as
+\[
+\sum_{\substack{m_j\in J\\ Z_\alpha(m_j)=0}}
+|B(m_j)|^2
+\ge Q^{-A}N_{Z_\alpha}(J)
+\]
+or
+\[
+\sum_{\substack{m_j\in J\\ Z_\alpha(m_j)=0}}
+\|\mathbf M(m_j)\|^2
+\ge Q^{-A}N_{Z_\alpha}(J)
+\]
+do not imply the pointwise inputs O1 or O2.  A specified off-line zero may be
+exceptional.  Derivative propagation of smallness is too local relative to the
+natural zero spacing, so an averaged theorem requires an additional bad-zero
+exclusion principle before it can replace pointwise nonrecurrence.
+\end{remark}
+
+\begin{remark}[Main/dual and \(\alpha\)-tilt status]
+\label{rem:main-dual-alpha-tilt-status}
+Folded main/dual structure and branch separation are useful for symbol rank and
+conditioning.  In the tilted regime
+\[
+|\alpha|Q\gtrsim\log Q,
+\]
+branch dominance can reduce full cell mass to same-branch cell mass, modulo
+canonical error control.  The hard symmetric regime
+\[
+|\alpha|Q\ll\log Q
+\]
+still requires actual folded main/dual nonalignment.  No sign, positivity,
+Hermitian, skew, or commutator invariant currently proves that nonalignment.
+\end{remark}
+```
+
+---
+
+# Edit 16 — Add canonical audit for named Gate--1 inputs
+
+## Where
+
+Immediately after Edit 15.
+
+## Insert
+
+```latex
+\subsection{Canonical audit for the named Gate--1 inputs}
+\label{subsec:canonical-audit-named-gate-one-inputs}
+
+\begin{lemma}[Canonical form of the ordinary Wronskian inputs]
+\label{lem:canonical-form-ordinary-wronskian-inputs}
+All ordinary Gate--1 inputs O1--O3 must be stated for the full canonical source
+\[
+q''_{\can}=B_2+P_2+D_2+E_2.
+\]
+In particular:
+\begin{enumerate}
+\item O1 must use the full cell vector
+\[
+B=B^+ + e^{i\Theta_Z}B^-+B^{\rm bg}+B^E.
+\]
+\item O2 must use the cofactor vector formed from rows
+\[
+G_{j+1}=\mathcal D^j q''_{\can},
+\qquad
+0\le j\le R.
+\]
+\item O3 must use the full determinant
+\[
+\widetilde{\mathcal W}_R
+=
+\det(C_\ell(\mathcal D)G_j)_{0\le j,\ell\le R+1}.
+\]
+\end{enumerate}
+A theorem proved only for \(P_2\), only for \(D_2\), only for \(B_2\), only for
+a zero-side proxy, or only for a flexible Dirichlet polynomial is diagnostic
+unless a canonical transfer estimate is supplied.
+\end{lemma}
+
+\begin{remark}[Derivative depth for canonical transfer]
+\label{rem:derivative-depth-canonical-transfer}
+The ordinary Wronskian uses rows through \(\mathcal D^R q''_{\can}\) and
+columns through order \(R+1\).  Therefore canonical transfer and \(E_2\)-control
+must be available through approximately \(2R+1\) normalized derivatives.  A
+safe form is
+\[
+\max_{0\le k\le 2R+1}\|\mathcal D^kE_2\|_\infty\le Q^{-C_E},
+\]
+with \(C_E\) large enough to dominate the exterior-power and basis-conditioning
+losses.  The finalized background term is
+\[
+B_2(t)=\theta'''(t)
+=
+-\frac18\Re\psi^{(2)}
+\left(\frac14+\frac{it}{2}\right),
+\]
+and must be included in the canonical object unless explicitly transferred out.
+\end{remark}
+```
+
+---
+
+# Edit 17 — Replace the terminal dependency ledger with a pointer to the new sections
+
+## Where
+
+Replace the current:
+
+```latex
+\begin{remark}[Terminal conditional dependency ledger]
+\label{rem:terminal-conditional-dependency-ledger}
+...
+\end{remark}
+```
+
+## Replace with
+
+```latex
+\begin{remark}[Terminal conditional dependency ledger]
+\label{rem:terminal-conditional-dependency-ledger}
+The present draft should be read as a conditional architecture, not as a closed
+proof of \(\RH\).  The ordinary Gate--1 branch is conditional on the three
+actual-zeta inputs defined in
+Section~\ref{sec:upstream-gate-one-arithmetic-inputs}:
+\[
+\boxed{\mathrm{O1}:\ \text{Fixed-width cell nonrecurrence}},
+\]
+\[
+\boxed{\mathrm{O2}:\ \text{Cofactor-vector nonrecurrence}},
+\]
+and
+\[
+\boxed{\mathrm{O3}:\ \text{Wronskian angle nonalignment / ordinary incidence}}.
+\]
+By Theorem~\ref{thm:ordinary-gate-one-from-O1-O2-O3},
+\[
+\boxed{
+\mathrm{O1}+\mathrm{O2}+\mathrm{O3}
+\Longrightarrow
+\text{ordinary Gate~1}.
+}
+\]
+
+The deep singular branch is conditional on
+\[
+\boxed{
+\mathrm{S1}:\ \text{singular explicit-formula anti-design exclusion}
+}
+\]
+as formulated in Definition~\ref{def:S1-singular-explicit-formula-anti-design}.
+The mild transition branch is conditional on
+\[
+\boxed{
+\mathrm{T1}:\ \text{mild singular transition control}
+}
+\]
+as formulated in Definition~\ref{def:T1-mild-singular-transition-control}.
+
+Downstream, the current local package is
+\[
+\text{Gate 1}
++
+|u'|_\infty\text{ source thickening}
++
+L^2\text{-input real rigidity}
+\Longrightarrow
+\text{Gate 2},
+\]
+and
+\[
+\text{Gate 2}
++
+\text{gauge-locked wall escape}
++
+\text{carrier-quotient D4}
++
+\text{row mobility}
+\Longrightarrow
+\text{row energy}.
+\]
+These downstream repairs do not discharge the upstream actual-zeta inputs
+\(\mathrm{O1}\)--\(\mathrm{O3}\), \(\mathrm{S1}\), or the transition theorem.
+\end{remark}
+```
+
+---
+
+# Edit 18 — Add active named-input status table
+
+## Where
+
+Immediately after the replacement terminal dependency ledger from Edit 17.
+
+## Insert
+
+```latex
+\begin{remark}[Active named-input status table]
+\label{rem:active-input-status-table}
+The active remaining inputs may be summarized as follows:
+\[
+\begin{array}{c|c|c}
+\text{input} & \text{current status} & \text{role}\\
+\hline
+\mathrm{O1}: \text{ fixed-width cell nonrecurrence}
+&
+\text{numerically supported; open}
+&
+Z_\alpha(m_0)=0\Rightarrow |\mathbf z'(m_0,\alpha)|\ge Q^{-A}
+\\
+\mathrm{O2}: \text{ cofactor-vector nonrecurrence}
+&
+\text{open}
+&
+Z_\alpha(m_0)=0\Rightarrow |\mathbf M(m_0,\alpha)|\ge Q^{-A}
+\\
+\mathrm{O3}: \text{ Wronskian angle nonalignment}
+&
+\text{hardest open ordinary input}
+&
+|\langle\mathbf z',\mathbf M\rangle|
+\ge Q^{-A}|\mathbf z'||\mathbf M|
+\\
+\mathrm{S1}: \text{ singular explicit-formula anti-design}
+&
+\text{open, separate branch}
+&
+\lambda Q\ll(\log Q)^{-C}
+\\
+\mathrm{T1}: \text{ transition control}
+&
+\text{open}
+&
+(\log Q)^{-C}\lesssim\lambda Q\lesssim1
+\\
+\text{Gate--2 local package}
+&
+\text{near-Green conditional on Gate~1 and canonical hypotheses}
+&
+\text{downstream}
+\\
+\text{carrier-quotient D4}
+&
+\text{finite residual valuation audit}
+&
+\text{downstream row energy}
+\end{array}
+\]
+The ordinary Wronskian route lives or dies on the actual arithmetic inputs
+\(\mathrm{O1}\)--\(\mathrm{O3}\).  The downstream repairs do not discharge
+those inputs.
+\end{remark}
+```
+
+---
+
+# Edit 19 — Add O1 numerical evidence archive
+
+## Where
+
+Immediately after Edit 18.
+
+## Insert
+
+```latex
+\begin{remark}[Empirical support for O1: local amplitude and cell tests]
+\label{rem:empirical-support-o1-local-amplitude-cell-tests}
+The current numerical evidence for O1 is purely diagnostic but consistent.
+The local \(Z_\alpha\)-amplitude stress tests checked both plus-only and
+reflected-dual models over \(1152\) target/window rows and found
+\[
+\text{Yellow}=0,\qquad \text{Red}=0.
+\]
+A hardened v2 run selected adversarial targets by smallest local amplitude,
+smallest \(J_{\max}\), combined threat score, minima crowding, determinant
+small-\(\eta_Z\) rows, and direct jet minimizers.  Its cell-mass diagnostic
+used
+\[
+\mathrm{CellMassRatio}_M
+=
+\frac{\sum_r|B_r|^2}{\sum_n|z_n|^2},
+\qquad
+M\in\{R,2R,4R\}.
+\]
+In the recorded multiblock \(K=8\) cell test, \(794\) rows produced
+\[
+\text{Yellow}=0,\qquad \text{Orange}=0,\qquad \text{Red}=0.
+\]
+These tests support the heuristic
+\[
+Z_\alpha(m_0)\approx0
+\not\Rightarrow
+\text{polylog-local amplitude, jet, or cell collapse}.
+\]
+They do not prove O1, because O1 is a theorem about the actual one-parameter
+prime-log object and its canonical transfer.  They justify continuing the O1
+proof route rather than triggering a stop rule.
+\end{remark}
+```
+
+---
+
+# Edit 20 — Add packet-frequency determinant stress-test evidence
+
+## Where
+
+Immediately after Edit 19.
+
+## Insert
+
+```latex
+\begin{remark}[Packet-frequency determinant stress-test status]
+\label{rem:packet-frequency-determinant-stress-status}
+The ordinary packet-frequency determinant stress tests use active blocks
+\[
+\mathcal B_{\rm pf}
+=
+\{n:cQ\le\log n\le cQ+Q/R\},
+\qquad
+0<c<1/2,
+\]
+so that \(\lambda\log n\asymp1\).  This avoids the low-prime node-compression
+failure.  The v3 stress tests ran through
+\[
+R=4,6,8,10,12,16
+\]
+with reflected dual, actual-like dual, and \(E_2\)-perturbation stages.  The
+completed larger-toy run recorded
+\[
+\text{Yellow}=0,\qquad
+\text{Red}_{\rm pre\text{-}E2}=0,\qquad
+\text{Red}=0.
+\]
+The old \(m=0,\alpha=0\) artifacts disappeared after imposing
+\[
+m_{\min}=50.
+\]
+This evidence does not prove the Wronskian incidence theorem, but it found no
+surviving packet-frequency determinant collapse under the current diagnostics
+\[
+\eta_Z,\qquad \eta_W,\qquad \rho_{\rm rank},\qquad
+\kappa_{\rm basis}.
+\]
+Hence no numerical stop rule is currently triggered for the ordinary
+packet-frequency Wronskian route.
+\end{remark}
+```
+
+---
+
+# Edit 21 — Add no-overclaim sentence to final downstream status
+
+## Where
+
+At the end of:
+
+```latex
+\begin{remark}[What is closed downstream and what remains upstream]
+\label{rem:final-status-downstream-vs-upstream}
+...
+\end{remark}
+```
+
+just before `\end{remark}`.
+
+## Insert
+
+```latex
+The downstream implication is therefore best read as a conditional theorem:
+\[
+\text{Gate 1}
++
+\text{canonical local hypotheses}
++
+\text{carrier-quotient D4}
+\Longrightarrow
+\text{row energy}.
+\]
+It is not a substitute for the ordinary/singular actual-zeta arithmetic inputs
+listed in Remark~\ref{rem:terminal-conditional-dependency-ledger}.
+```
+
+---
+
+# Edit 22 — Rename final status section
+
+## Where
+
+Replace:
+
+```latex
+\section{Final status after the downstream closure repairs}
+\label{sec:final-status-after-downstream-closure-repairs}
+```
+
+with:
+
+```latex
+\section{Conditional status after the downstream closure repairs}
+\label{sec:final-status-after-downstream-closure-repairs}
+```
+
+Keep the label unchanged to avoid breaking references.
+
+---
+
+# Edit 23 — Replace `Updated downstream status` wording: “supplied” only after Gate 1
+
+## Where
+
+In:
+
+```latex
+\begin{remark}[Updated downstream status after the Gate--2 and carrier-quotient audits]
+\label{rem:updated-downstream-status-gate2-carrier-quotient}
+```
+
+replace:
+
+```latex
+First, the old \(D1/D2\) propagation route is no longer the active Gate--2
+route.  In the ordinary real-canonical branch, Gate~2 is supplied by
+Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}:
+```
+
+with:
+
+```latex
+First, the old \(D1/D2\) propagation route is no longer the active Gate--2
+route.  In the ordinary real-canonical branch, once Gate~1 is available,
+Gate~2 is supplied by Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}:
+```
+
+---
+
+# Edit 24 — Add current-ledger bridge to avoid stale local-ledger confusion
+
+## Where
+
+Immediately after:
+
+```latex
+\begin{remark}[Audit convention for the current proof-state section]
+...
+\end{remark}
+```
+
+inside `\section{Current proof state after the local package audits}`.
+
+## Insert
+
+```latex
+\begin{remark}[Relation to the final named-input ledger]
+\label{rem:current-ledger-vs-final-named-inputs}
+This section preserves the local Bottleneck--C and finite-core audit history.
+It should not be read as the final dependency graph of the present manuscript.
+The final dependency graph is summarized in
+Section~\ref{sec:upstream-gate-one-arithmetic-inputs} and
+Remark~\ref{rem:terminal-conditional-dependency-ledger}.  In particular, the
+ordinary upstream branch is now packaged into O1--O3, while the local
+downstream branch is packaged into Gate~2, gauge-locked wall escape,
+carrier-quotient D4, and row mobility.
+\end{remark}
+```
+
+---
+
+# Edit 25 — Do not add more Gate 2 theory
+
+The draft’s Gate 2 theorem and proof are coherent. I would **not** add another G2-A/G2-B formulation. The only Gate 2 edits still needed are hygiene edits already listed above: residual stability, scope guardrails, and the historical/fallback status for old propagation statements. Do not reintroduce D1/D2 as active named inputs.
+
+---
+
+## Final application priority
+
+Apply in this order:
+
+1. **Edits 14–18**: insert the upstream Gate--1 named-input section, singular/transition inputs, no-go archive, canonical audit, and status table.
+2. **Edits 1–3 and 7–8**: clean title/abstract/intro and current-proof-state bridge.
+3. **Edits 4–6 and 21–23**: clean Gate 2 scope/residual/scale language.
+4. **Edits 9–13**: clean D4 carrier quotient and scalar fallback.
+5. **Edits 19–20**: add numerical/evidence archive.
+
+After this, the draft should accurately represent the latest architecture:
+
+\[
+\boxed{\text{Ordinary Gate 1 is conditional on O1+O2+O3.}}
+\]
+
+\[
+\boxed{\text{Singular/transition Gate 1 is conditional on S1/T1.}}
+\]
+
+\[
+\boxed{\text{Gate 2 is downstream and locally near-closed once Gate 1 is available.}}
+\]
+
+\[
+\boxed{\text{D4 is carrier-quotient row energy; scalar \(I\)-coordinate D4 is fallback.}}
+\]
+
+\[
+\boxed{\text{The full RH proof remains open.}}
+\]
+## User (2026-04-27 17:04:58)
+
+OK now, please give a full handover note for the next agent
+
+## Assistant (2026-04-27 17:05:01)
+
+I’ll write this as a working handover for a mathematically capable next agent: current architecture, what is settled, what is open, what not to reopen, and the highest-value next tasks.
+
+_Thought for 34s_
+
+# Handover note for next agent
+
+## 0. Orientation
+
+You are entering a long-running RH proof-development project. The current manuscript should be treated as a **conditional local obstruction architecture**, not as a completed proof of RH. The current work has shifted from broad local algebra to a much more precise upstream/downstream dependency graph.
+
+The most recent draft and agent comments indicate that the downstream local package is largely repaired, while the upstream ordinary Gate–1 arithmetic inputs remain open. The current recommended paper edits focus on making that dependency graph explicit, especially O1/O2/O3, S1/T1, and the no-go archive. 
+
+---
+
+## 1. Current architecture in one line
+
+The active chain is:
+
+\[
+\boxed{
+\text{ordinary/singular Gate 1}
+\Longrightarrow
+\text{Gate 2}
+\Longrightarrow
+\text{carrier-quotient row energy}
+}
+\]
+
+More explicitly:
+
+\[
+\boxed{
+\text{Gate 1}
++
+|u'|_\infty\text{ source thickening}
++
+L^2\text{-input real rigidity}
+\Rightarrow
+\text{Gate 2}.
+}
+\]
+
+Then:
+
+\[
+\boxed{
+\text{Gate 2}
++
+\text{gauge-locked wall escape}
++
+\text{carrier-quotient D4}
++
+\text{row mobility}
+\Rightarrow
+\text{row energy}.
+}
+\]
+
+The old \(D1/D2/D3\) labels are historical/fallback, not the active downstream route. This replacement is explicitly supported in the latest edit notes. 
+
+---
+
+## 2. Core definitions that must not drift
+
+The canonical object is:
+
+\[
+q''_{\can}=q_\zeta''=\Phi_\zeta'''.
+\]
+
+It is the **full actual-zeta source curvature**, not:
+
+\[
+q''_{\source,R}=(G^{\new})'',
+\]
+
+which is only the affine-subtracted complement-source curvature.
+
+All Gate–1 and Gate–2 source statements must use \(q''_{\can}\), not a proxy, not \(P_2\)-only, not a finite zero-kernel-only diagnostic, and not a flexible Dirichlet polynomial.
+
+The full canonical representation is:
+
+\[
+q''_{\can}=B_2+P_2+D_2+E_2.
+\]
+
+A theorem for \(B_2\), \(P_2\), \(B_2+P_2\), a zero-side truncation, or an AFE surrogate is only diagnostic until a transfer theorem to this full object is supplied. This guardrail appears repeatedly in the latest edit proposals. 
+
+---
+
+## 3. What is now considered “settled” downstream
+
+### 3.1 Gate 2 route
+
+Gate 2 is no longer the vague “source-anisotropy reintegration” mystery in the ordinary smooth real-canonical branch. It is supplied by:
+
+1. Source thickening from Gate 1:
+   \[
+   \int_I |u|^2\ge Q^{-B}|I|
+   \Rightarrow
+   \exists J\subset I:
+   |u|\ge Q^{-C},\quad |J|\ge Q^{-C}|I|.
+   \]
+
+2. \(L^2\)-input real rigidity:
+   \[
+   \|g\|_{L^2(J)}+\|h\|_{L^2(J)}
+   \le \varepsilon |J|^{1/2}
+   \Rightarrow
+   \int_{J'}|u|^2
+   \le Q^C\varepsilon^{2/5}|J'|.
+   \]
+
+3. Contradiction with \(|u|\ge Q^{-C}\) on \(J'\).
+
+The safe version of the \(L^2\)-input rigidity lemma uses primitive-bounded hypotheses for \(q,q',q''\). Primitive-free recovery exists as optional/future infrastructure, but the active proof path uses the safe primitive-bounded version.
+
+### 3.2 D3a / wall escape
+
+The \(q_0\)-wall is no longer an independent conceptual blocker under row-energy architecture. The active route is:
+
+\[
+\text{Gate 2 wall mass}
+\Rightarrow
+\text{first-exit non-wall sample}
+\Rightarrow
+\text{D4 sample}
+\Rightarrow
+\text{row mobility}.
+\]
+
+Critical guardrail: **gauge-locking**. The scalar \(q_0\) in wall escape must be the same canonical scalar appearing in:
+
+\[
+u=q_0'',
+\]
+
+\[
+\Gamma_G=u-6q_0+2q_0^3,
+\]
+
+and the D4 source factor:
+
+\[
+H\sim-\frac{q_0u^3}{288}.
+\]
+
+If the proof requires exact-point scalar output instead of row-energy/existential output, wall escape is insufficient and the old \(q_0\)-adic wall-row fallback returns.
+
+### 3.3 D4 carrier quotient
+
+The active D4 formulation is **carrier-quotient row energy**, not collapsed scalar \(I\)-coordinate energy.
+
+The clean carrier statement is:
+
+\[
+[\mathcal A_7]\sim H\Gamma_G[\mathsf C_7],
+\]
+
+\[
+[\mathcal A_9]\sim H\Gamma_{G,2}[\mathsf C_{Y12}].
+\]
+
+The classes \([\mathsf C_7]\) and \([\mathsf C_{Y12}]\) survive independently in the carrier quotient by construction of the pre-collapse carrier module. If one instead collapses to the scalar \(I\)-coordinate, the order-nine scalar incidence wall returns. The latest notes explicitly say the scalar \(I\)-coordinate wall is a fallback only if scalar output is forced. 
+
+The scalar fallback obstruction is:
+
+\[
+F_9^I
+=
+R_9^I+
+\frac{yq''\Gamma_{G,2}}{128\pi^2g^3}
+=0,
+\qquad
+yq''\Gamma_{G,2}\ne0.
+\]
+
+Under carrier quotient row energy, this is treated as a collapse artifact, not the active D4 blocker. 
+
+---
+
+## 4. Main remaining upstream burden
+
+The ordinary upstream burden is now organized as three named inputs:
+
+\[
+\boxed{\mathrm{O1}: \text{Fixed-width cell nonrecurrence}},
+\]
+
+\[
+\boxed{\mathrm{O2}: \text{Cofactor-vector nonrecurrence}},
+\]
+
+\[
+\boxed{\mathrm{O3}: \text{Wronskian angle nonalignment / ordinary incidence}}.
+\]
+
+The latest edit proposals recommend adding a full section defining these, because the current draft’s terminal ledger is too compressed. O1/O2/O3 should not remain just a one-paragraph terminal note. 
+
+Together they imply a normalized Wronskian lower bound:
+
+\[
+|\widetilde{\mathcal W}_R(m_0,\alpha)|\ge Q^{-A},
+\]
+
+which implies ordinary finite-jet anti-design and ordinary Gate 1:
+
+\[
+\boxed{
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm
+\ge Q^{-B}|I_\rho|.
+}
+\]
+
+But none of O1/O2/O3 is proved in the draft.
+
+---
+
+## 5. What O1, O2, and O3 mean
+
+### O1 — Fixed-width cell nonrecurrence
+
+O1 gives:
+
+\[
+Z_\alpha(m_0)=0
+\Longrightarrow
+|\mathbf z'(m_0,\alpha)|\ge Q^{-A}.
+\]
+
+Internally, O1 is about a full canonical cell vector:
+
+\[
+B_r
+=
+B_r^+
++
+e^{i\Theta_Z(m_0,\alpha)}B_r^-
++
+B_r^{\rm bg}
++
+B_r^E.
+\]
+
+It packages:
+
+1. same-branch cell nonrecurrence;
+2. folded main/dual nonalignment.
+
+Phase-relaxed models can kill all cell sums, so O1 must use the actual one-parameter prime-log orbit, not just coefficient magnitudes or local cell geometry.
+
+### O2 — Cofactor-vector nonrecurrence
+
+O2 gives:
+
+\[
+Z_\alpha(m_0)=0
+\Longrightarrow
+|\mathbf M(m_0,\alpha)|\ge Q^{-A}.
+\]
+
+The key no-go: averaged zero-set large sieve estimates do not imply pointwise O2. A single bad zero can survive an averaged lower bound. This is explicitly noted in the latest suggestions. 
+
+### O3 — Wronskian angle nonalignment
+
+O3 gives:
+
+\[
+|\langle\mathbf z',\mathbf M\rangle|
+\ge
+Q^{-A}|\mathbf z'||\mathbf M|.
+\]
+
+O1 and O2 do not imply O3. Exterior algebra identifies the angle, but does not lower-bound it. This is an actual-orbit incidence theorem.
+
+---
+
+## 6. Singular and transition branches
+
+The ordinary Wronskian route does **not** cover all scales. The latest edits propose adding explicit S1/T1 sections.
+
+### S1 — Singular explicit-formula anti-design
+
+In the deep singular regime:
+
+\[
+\lambda Q\ll(\log Q)^{-C},
+\]
+
+the named singular input is:
+
+\[
+\boxed{
+|\mathbf P_R-\mathbf G_R-\mathbf T_R|_2\ge Q^{-A}.
+}
+\]
+
+This excludes same-scale singular anti-design once prime, gamma/background, and tail terms are included.
+
+### T1 — Mild singular transition control
+
+The transition region:
+
+\[
+(\log Q)^{-C}\lesssim \lambda Q\lesssim1
+\]
+
+needs a separate theorem transferring either ordinary or singular lower bounds with polynomial loss.
+
+Do not force the deep singular branch through the ordinary packet-frequency Wronskian.
+
+---
+
+## 7. Key no-go results to preserve
+
+The paper should keep these no-go findings as durable architecture constraints.
+
+### 7.1 Local same-scale quadrature defeats local/Hadamard-only source nonflatness
+
+The local same-scale positive packet model can flatten source jets to arbitrary finite order while keeping \(q_0>0\), Gram positivity, and live \(\Gamma_G\). This means Gate 1 cannot be proved from local zero-packet geometry alone.
+
+### 7.2 Generic determinant nonvanishing is insufficient
+
+Cauchy–Binet can show a Wronskian determinant is not identically zero. It does not prove a pointwise lower bound at actual \(Z_\alpha\)-zeros.
+
+### 7.3 Symbol rank is not O3
+
+Even if the \(Z_\alpha\)-symbol is not spanned by the \(q''_{\can}\)-jet symbols, the actual vector \(\mathbf z'\) can still align with the cofactor hyperplane at a point.
+
+### 7.4 Averaged large sieves are not pointwise O2
+
+Averaged mass over many zeros does not rule out a specified bad zero.
+
+### 7.5 Low-prime blocks are diagnostic only
+
+Low-prime plateau blocks can test symbolic rank, but for packet-scale Wronskians the active frequencies should satisfy:
+
+\[
+\lambda\log n\asymp1.
+\]
+
+At ordinary scale \(\lambda Q\asymp1\), this means \(\log n\asymp Q\), not \(\log n\asymp\log Q\).
+
+### 7.6 Scalar \(I\)-coordinate D4 is fallback
+
+Carrier quotient row energy is active. Scalar \(I\)-coordinate non-cancellation is not solved and should not be listed as an active blocker unless the proof insists on scalar output.
+
+---
+
+## 8. Numerical and surrogate status
+
+The latest notes propose recording numerical evidence carefully, not as proof.
+
+Important current evidence:
+
+1. Deterministic same-scale quadrature controls do collapse as expected.
+2. Singular dominance controls produce huge Gate 2 mass unless cancellation occurs.
+3. First zero-kernel-only actual-zero smoke scans showed no serious Gate 1 warning, but they were proxy-level.
+4. Packet-frequency determinant stress tests through \(R=16\) reportedly produced no Yellow/Red warnings in current diagnostics.
+5. Local \(Z_\alpha\)-amplitude/cell tests likewise produced no Yellow/Red in recorded runs.
+
+These support continuing the ordinary Gate 1 route, but they do not prove O1/O2/O3. The latest recommendations include an evidence archive with this exact caveat. 
+
+---
+
+## 9. Current highest-priority paper edits
+
+The most important edits to make next are:
+
+1. Retitle the manuscript as a conditional architecture.
+2. Replace the abstract so it does not claim a proof.
+3. Add a full section: “Upstream Gate–1 arithmetic inputs after the ordinary-route audit.”
+4. Define O1/O2/O3 there.
+5. Add theorem: O1+O2+O3 imply ordinary Gate 1.
+6. Add S1/T1 definitions for singular/transition branches.
+7. Add no-go archive for O1/O2/O3 routes.
+8. Add canonical audit lemma for named Gate–1 inputs.
+9. Add active named-input status table.
+10. Add evidence archive for O1 numerical/cell/determinant tests.
+11. Add D4 finite audit ledger.
+12. Clarify scalar \(I\)-coordinate D4 fallback.
+13. Fix derivative convention and scale-normalized \(L^2\)-rigidity application.
+14. Demote optional primitive recovery from the active Gate 2 proof path.
+
+These edits are strongly aligned with the latest agent suggestions. turn104file3turn104file10
+
+---
+
+## 10. Current highest-priority mathematical work
+
+Do not send more agents to re-audit Gate 1’s centrality. That is settled.
+
+The next mathematical work should focus on the upstream O1/O2/O3 stack:
+
+### Track A — O1
+
+Prove fixed-width cell nonrecurrence:
+
+\[
+Z_\alpha(m_0)=0
+\Rightarrow
+\sum_r |B_r(m_0,\alpha)|^2\ge Q^{-A}.
+\]
+
+Must handle folded main/dual nonalignment.
+
+### Track B — O2
+
+Prove pointwise cofactor-vector nonrecurrence:
+
+\[
+Z_\alpha(m_0)=0
+\Rightarrow
+|\mathbf M(m_0,\alpha)|\ge Q^{-A}.
+\]
+
+Averaged large sieve is insufficient unless paired with a bad-zero exclusion theorem.
+
+### Track C — O3
+
+Prove Wronskian angle nonalignment:
+
+\[
+|\langle\mathbf z',\mathbf M\rangle|
+\ge
+Q^{-A}|\mathbf z'||\mathbf M|.
+\]
+
+This is likely the hardest ordinary input.
+
+### Track D — S1/T1
+
+Route singular/transition regimes explicitly. Do not use the ordinary Wronskian in deep singular scale.
+
+### Track E — D4 finite row audit
+
+If staying downstream, compute actual row formulas and residual projections:
+\[
+\operatorname{gr}_4(H),\quad \operatorname{gr}_5(R_7),\quad \operatorname{gr}_5(R_9),
+\]
+nuisance quotient, quotient Gram, and half-leading residual control. 
+
+---
+
+## 11. What not to do
+
+Do not:
+
+1. Reopen old D1/D2/Remez propagation as active.
+2. Reopen scalar \(I\)-coordinate D4 as active unless carrier quotient output is rejected.
+3. Treat \(P_2\)-only, \(B_2\)-only, or proxy zero-kernel tests as Gate 1.
+4. Claim the Wronskian route is Green merely because the determinant is nonzero.
+5. Claim numerical support proves Gate 1.
+6. Treat order 11 as the main attack.
+7. Claim downstream closure proves RH.
+
+---
+
+## 12. Suggested next-agent mission
+
+The next agent should not draft more broad strategy. It should do one of the following:
+
+### Preferred mathematical task
+
+Develop O1/O2/O3 rigorously, beginning with O1:
+
+\[
+Z_\alpha(m_0)=0
+\Rightarrow
+\sum_r |B_r(m_0,\alpha)|^2\ge Q^{-A}.
+\]
+
+If O1 stalls, identify exactly whether the obstruction is same-branch cell cancellation, folded main/dual nonalignment, background/error transfer, or endpoint/low-prime block misuse.
+
+### Preferred paper task
+
+Apply the upstream Gate–1 named-input section and no-go archive, then remove or demote stale wording that implies source-anisotropy reintegration is still a separate ordinary downstream gate.
+
+---
+
+## 13. One-paragraph handoff
+
+The project is now a conditional RH obstruction framework. The downstream has been largely repaired: Gate 2 follows locally from Gate 1 via source thickening and \(L^2\)-input real rigidity, and row energy follows from Gate 2 via gauge-locked wall escape, carrier-quotient D4, and row mobility. The remaining upstream proof burden is ordinary Gate 1 and singular/transition coverage. Ordinary Gate 1 is now organized into O1 fixed-width cell nonrecurrence, O2 cofactor-vector nonrecurrence, and O3 Wronskian angle nonalignment; together they imply the normalized Wronskian lower bound and then Gate 1. These are named open actual-zeta arithmetic inputs, not local algebraic consequences. Singular/deep packets require S1 singular explicit-formula anti-design exclusion, and the mild transition band requires T1. D4 carrier quotient is active; scalar \(I\)-coordinate D4 is fallback only. No proof of RH is currently complete.
+## User (2026-04-27 17:18:10)
+
+ok based on the above, do one more  holistic review to make sure the paper has all this ammo captured.
+
+## Assistant (2026-04-27 17:20:01)
+
+_Thought for 1m 42s_
+
+I did one more pass over `proof_of_rh(575).tex`. The paper now captures most of the “ammo”: the upstream O1/O2/O3 section is present, S1/T1 are present, carrier-freeness and D4 audit are present, the \(L^2\)-Gate 2 route is present, and the current-ledger bridge is present. I would **not** add the O1/O2/O3 section again.
+
+The remaining gaps are specific:
+
+1. title/abstract still overclaim;
+2. intro/four-pillars language still sounds like a proof rather than a conditional architecture;
+3. the numerical archive is still the older weak version, not the latest O1/determinant/multiblock evidence archive;
+4. the Wronskian derivative-budget guardrail is still missing;
+5. the deep singular dominance alternative is still missing;
+6. final downstream status still has a scalar \(I\)-fallback display with \(yq''\) instead of \(yq''_{\can}\);
+7. the final status should start with an explicit “RH is not proved” sentence.
+
+The agent edits support these changes: especially the conditional title/abstract, O1/O2/O3 named-input architecture, numerical evidence archive, and scalar-D4 fallback cautions. turn106file5turn107file5
+
+---
+
+# Final delta edits
+
+## Edit 1 — Retitle the paper
+
+**Where:** near the top.
+
+**Replace:**
+
+```latex
+\title{A Proof of the Riemann Hypothesis}
+```
+
+**with:**
+
+```latex
+\title{A Conditional Local Obstruction Architecture for the Riemann Hypothesis}
+```
+
+---
+
+## Edit 2 — Replace the abstract
+
+**Where:** replace the entire current `abstract` environment.
+
+**Replace with:**
+
+```latex
+\begin{abstract}
+We present a conditional local obstruction architecture for the Riemann
+Hypothesis based on local jet-normalized blocks of the completed critical-line
+phase kernel, actual-zeta source curvature, rank-two anisotropy visibility,
+and downstream carrier-quotient row conversion.  The document is written as a
+living proof draft: local algebraic statements are recorded in proof form,
+while global arithmetic inputs are explicitly marked.
+
+The present manuscript is not a completed proof of \(\RH\).  Its ordinary
+Gate--1 branch is conditional on three actual-zeta inputs: fixed-width cell
+nonrecurrence, cofactor-vector nonrecurrence, and Wronskian angle
+nonalignment.  Its deep singular branch is conditional on a singular
+explicit-formula anti-design exclusion, with a separate mild-transition
+coverage theorem.  Downstream, Gate~2 is treated through source thickening and
+an \(L^2\)-input real-rigidity lemma, while row energy is obtained through
+gauge-locked wall escape and carrier-quotient D4 row conversion.  The purpose
+of the draft is to make these reductions, definitions, no-go results, and
+remaining proof obligations explicit and auditable.
+\end{abstract}
+```
+
+---
+
+## Edit 3 — Soften the “four pillars” wording
+
+**Where:** in the introduction.
+
+**Replace:**
+
+```latex
+The proof has four main pillars.
+```
+
+**with:**
+
+```latex
+The local framework originally had four main pillars.
+```
+
+**Where:** in `Remark~\ref{rem:wip-four-pillars-audit-status}`.
+
+**Replace the current body with:**
+
+```latex
+The four pillars above remain part of the local language of the draft, but
+they should not be read as a complete proof gate.  The later audits show that
+the decisive obstruction is no longer transverse odd-mode detection alone.
+The proof-state has separated into named upstream actual-zeta inputs
+(O1--O3, S1, and transition control) and downstream local conversion theorems
+(Gate~2 real rigidity, wall escape, D4 row conversion, and row mobility).
+See Remark~\ref{rem:terminal-conditional-dependency-ledger} for the terminal
+dependency ledger.
+```
+
+---
+
+## Edit 4 — Add the Wronskian derivative-budget guardrail
+
+**Where:** in the upstream Gate–1 section, immediately after the ordinary Wronskian definitions/theorem is fine. If you prefer a terminal placement, put it immediately before `Remark~\ref{terminal-conditional-dependency-ledger}`.
+
+**Insert:**
+
+```latex
+\begin{remark}[Derivative budget for the ordinary Wronskian route]
+\label{rem:ordinary-wronskian-derivative-budget}
+The ordinary Wronskian route must be run with normalized derivatives.  With
+\[
+G_0=Z_\alpha,\qquad
+G_{j+1}=\mathcal D^j q''_{\can},\qquad 0\le j\le R,
+\]
+and column operators of degree at most \(R+1\), the largest source derivative
+appearing in the determinant is
+\[
+\mathcal D^{2R+1}q''_{\can}.
+\]
+Equivalently, since \(q''_{\can}=q_\zeta''\), the primitive phase requires
+derivatives through order \(2R+3\), while the \(Z_\alpha\)-row requires
+derivatives through order \(R+1\).
+
+The safe depth is
+\[
+R\asymp\frac{\log Q}{\log\log Q}.
+\]
+At this depth,
+\[
+e^{O(R\log R)}=Q^{O(1)},
+\]
+so Cauchy estimates, smoothing-weight derivatives, gamma/Stirling derivatives,
+determinant perturbation constants, and finite-jet-to-energy constants can
+remain polynomial.  A depth \(R=O(\log Q)\) is not safe unless a separate
+no-factorial-loss theorem is supplied, because the same losses become
+\(Q^{O(\log\log Q)}\).
+
+Accordingly, any ordinary Wronskian theorem must control
+\[
+\max_{0\le k\le 2R+1}|\mathcal D^kE_2|\le Q^{-C_E}
+\]
+for the full canonical object
+\[
+q''_{\can}=B_2+P_2+D_2+E_2.
+\]
+A theorem for \(P_2\), \(B_2+P_2\), a finite zero-kernel truncation, or any
+other proxy is not an ordinary Gate--1 theorem unless it includes an explicit
+transfer estimate to \(q''_{\can}\) at this derivative depth.
+\end{remark}
+```
+
+---
+
+## Edit 5 — Add the deep singular Gate–1 dominance alternative
+
+**Where:** after the S1/T1 subsection in `\section{Upstream Gate--1 arithmetic inputs after the ordinary-route audit}`.
+
+**Insert:**
+
+```latex
+\begin{theorem}[Deep singular Gate--1 alternative]
+\label{thm:deep-singular-gate-one-alternative}
+Let
+\[
+I_\rho=\gamma+cX,
+\qquad
+cQ\ll(\log Q)^{-C_0}.
+\]
+Assume that on \(I_\rho\) the canonical source curvature decomposes as
+\[
+q''_{\can}(\gamma+cx)
+=
+c^{-3}Q_{\rm sing}''(x)
++
+R_{\rm far}(\gamma+cx),
+\]
+where \(Q_{\rm sing}\) is the normalized same-scale singular packet aggregate,
+and \(R_{\rm far}\) contains the background, far-zero tail, non-same-scale
+packets, and canonical residual terms.  If
+\[
+\|Q_{\rm sing}''\|_{L^2(X)}\ge Q^{-A}
+\]
+and
+\[
+\|R_{\rm far}\|_{L^2(I_\rho)}
+\le
+\frac12c^{-5/2}Q^{-A},
+\]
+then
+\[
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm
+\ge
+Q^{-B}|I_\rho|
+\]
+for some polynomial exponent \(B=B(A)\).
+
+Consequently, in the deep singular regime, Gate~1 can fail only if
+\[
+\|Q_{\rm sing}''\|_{L^2(X)}<Q^{-A}.
+\]
+Equivalently, after finite-jet reduction, the actual same-scale singular packet
+must satisfy a sine-moment anti-design
+\[
+\sum_j w_j\sin(k\theta_j)+\mathcal B_k\approx0,
+\qquad
+3\le k\le R+3,
+\]
+where \(\mathcal B_k\) denotes the normalized background and far-tail
+contribution.
+\end{theorem}
+
+\begin{proof}
+By the scaling \(m=\gamma+cx\),
+\[
+\|c^{-3}Q_{\rm sing}''\|_{L^2(I_\rho)}
+=
+c^{-5/2}\|Q_{\rm sing}''\|_{L^2(X)}
+\ge c^{-5/2}Q^{-A}.
+\]
+The far-term assumption gives
+\[
+\|q''_{\can}\|_{L^2(I_\rho)}
+\ge
+\frac12c^{-5/2}Q^{-A}.
+\]
+Squaring,
+\[
+\int_{I_\rho}|q''_{\can}|^2\,dm
+\ge
+\frac14c^{-5}Q^{-2A}.
+\]
+Since \(|I_\rho|\asymp c\), this equals
+\[
+\frac14c^{-6}Q^{-2A}|I_\rho|.
+\]
+The hypothesis \(cQ\ll(\log Q)^{-C_0}\) implies
+\[
+c^{-6}\gg Q^6(\log Q)^{6C_0}.
+\]
+After increasing \(B\), this gives the claimed Gate--1 lower bound.
+\end{proof}
+```
+
+---
+
+## Edit 6 — Replace the numerical/surrogate status remark with the latest evidence archive
+
+**Where:** replace the entire current `Remark~\ref{rem:numerical-surrogate-status}`.
+
+**Replace with:**
+
+```latex
+\begin{remark}[Numerical and surrogate evidence archive]
+\label{rem:numerical-surrogate-status}
+The numerical and surrogate experiments in this draft are diagnostic only.
+They do not prove Gate~1, O1, O2, O3, or any global incidence theorem.
+Their value is to rule out obvious relaxed countermechanisms and to guide the
+next arithmetic inputs.
+
+The current evidence archive is:
+\[
+\begin{array}{c|c|c|c}
+\text{branch} & \text{scope} & \text{result} & \text{interpretation}\\
+\hline
+\text{packet-frequency determinant stress}
+&
+R\le16,\ m_{\min}=50,\ \text{reflected/actual-like dual and }E_2
+&
+\text{Yellow}=0,\ \text{Red}=0
+&
+\text{no determinant-incidence collapse detected}\\
+\hline
+\text{local }Z_\alpha\text{-amplitude v1}
+&
+1152\text{ rows}
+&
+\text{Yellow}=0,\ \text{Red}=0
+&
+\text{no local amplitude/jet flatness detected}\\
+\hline
+\text{v2 direct jet/cell-sum hardening}
+&
+\text{adversarial targets from v1/determinant runs}
+&
+\text{no Yellow/Orange/Red in the recorded runs}
+&
+\text{no cell-mass collapse found at }Z_\alpha\text{-near zeros}\\
+\hline
+\text{multiblock }K=8\text{ cell test}
+&
+794\text{ rows with log-uniform support}
+&
+\text{Yellow}=0,\ \text{Orange}=0,\ \text{Red}=0
+&
+\text{supports multiblock fixed-width cell nonrecurrence}\\
+\hline
+\text{small }Z_\alpha\text{ adversarial rows}
+&
+|Z_\alpha|\sim10^{-15}\text{--}10^{-12}
+&
+\text{amplitude, jets, and cell mass stayed non-small}
+&
+Z_\alpha\approx0\not\Rightarrow\text{ local collapse}
+\end{array}
+\]
+
+The strongest empirical message is:
+\[
+\boxed{
+Z_\alpha(m_0)\approx0
+\not\Rightarrow
+\text{amplitude / jet / cell collapse}
+}
+\]
+in the tested packet-frequency surrogates.
+
+The numerical evidence also has clear limits:
+\begin{enumerate}
+\item It does not prove fixed-width cell nonrecurrence.
+\item It does not prove cofactor-vector nonrecurrence.
+\item It does not prove Wronskian angle nonalignment.
+\item It does not prove singular anti-design exclusion.
+\item It does not replace canonical transfer from model rows to the actual
+object \(q''_{\can}=B_2+P_2+D_2+E_2\).
+\end{enumerate}
+
+The first constraint not broken by the adversarial relaxed models remains full
+actual-zeta compatibility:
+\[
+q''_{\can}=B_2+P_2+D_2+E_2
+\]
+with fixed actual coefficients, completed dual/gamma/tail structure, and
+certified error control.  Thus the numerical evidence supports prioritizing
+the actual-zeta incidence/nonrecurrence theorem; it is not a substitute for
+that theorem.
+\end{remark}
+```
+
+This update is directly supported by the numerical evidence summaries: determinant tests, local \(Z_\alpha\)-amplitude tests, v2 hardening, and \(K=8\) multiblock tests all returned no Yellow/Red-style warnings, but they do not prove the named inputs. turn107file7turn107file14
+
+---
+
+## Edit 7 — Fix the scalar \(I\)-coordinate display in final downstream status
+
+**Where:** in `Remark~\ref{rem:final-status-downstream-vs-upstream}`.
+
+**Replace:**
+
+```latex
+F_9^I=0,\qquad yq''\Gamma_{G,2}\ne0
+```
+
+**with:**
+
+```latex
+F_9^I=0,\qquad yq''_{\can}\Gamma_{G,2}\ne0
+```
+
+**Replace:**
+
+```latex
+\frac{yq''\Gamma_{G,2}}{128\pi^2g^3}
+```
+
+**with:**
+
+```latex
+\frac{yq''_{\can}\Gamma_{G,2}}{128\pi^2g^3}
+```
+
+**Then insert immediately after the scalar-wall paragraph:**
+
+```latex
+Thus the active D4 object is the carrier/quotient row-energy class.  The scalar
+\(I\)-coordinate order-nine incidence wall should be retained only as a
+fallback audit for architectures that insist on collapsed scalar output.
+Accordingly, the scalar incidence wall should not be listed among the active
+downstream blockers unless a later section explicitly chooses scalar
+\(I\)-coordinate row energy as the output norm.
+```
+
+---
+
+## Edit 8 — Add a blunt first sentence to the final downstream status
+
+**Where:** immediately after:
+
+```latex
+\begin{remark}[What is closed downstream and what remains upstream]
+\label{rem:final-status-downstream-vs-upstream}
+```
+
+**Insert:**
+
+```latex
+The Riemann Hypothesis is not proved by the present draft.  The draft records a
+conditional architecture whose remaining proof burden is concentrated in the
+named ordinary, singular, transition, and finite row-conversion inputs listed
+below.
+```
+
+---
+
+## Edit 9 — Add a final named-input table if you want a reader-facing summary
+
+**Where:** after `Remark~\ref{rem:terminal-conditional-dependency-ledger}` and before the bibliography.
+
+**Insert:**
+
+```latex
+\begin{remark}[Named inputs and status table]
+\label{rem:named-inputs-status-table}
+For reference, the named inputs currently have the following status:
+\[
+\begin{array}{c|c|c}
+\text{Name} & \text{Role} & \text{Status}\\
+\hline
+\mathrm{O1} & \text{fixed-width cell nonrecurrence }(\|\mathbf z'\|\text{ lower bound}) & \text{named open; numerically supported}\\
+\mathrm{O2} & \text{cofactor-vector nonrecurrence }(\|\mathbf M\|\text{ lower bound}) & \text{named open}\\
+\mathrm{O3} & \text{Wronskian angle nonalignment / ordinary incidence} & \text{named open}\\
+\mathrm{S1} & \text{deep singular explicit-formula anti-design exclusion} & \text{named open}\\
+\mathrm{T1} & \text{mild singular transition control} & \text{named open}\\
+\mathrm{G2} & \text{source thickening plus \(L^2\)-input real rigidity} & \text{near-Green conditional on Gate~1 and canonical hypotheses}\\
+\mathrm{D3a} & \text{gauge-locked wall escape} & \text{near-Green under row-energy architecture}\\
+\mathrm{D4} & \text{carrier-quotient / filtered row conversion} & \text{finite row-residual audit}\\
+\end{array}
+\]
+Thus the present document is a structured reduction.  Closing the named open
+inputs above remains necessary before any claim of \(\RH\) can be made.
+\end{remark}
+```
+
+---
+
+# Overall verdict
+
+After these edits, the paper will have the major “ammo” captured:
+
+\[
+\boxed{\text{O1/O2/O3 ordinary Gate--1 stack: captured.}}
+\]
+
+\[
+\boxed{\text{S1/T1 singular-transition stack: captured.}}
+\]
+
+\[
+\boxed{\text{Gate 2 \(L^2\)-rigidity downstream route: captured.}}
+\]
+
+\[
+\boxed{\text{Wall escape + carrier-quotient D4: captured.}}
+\]
+
+\[
+\boxed{\text{Scalar \(I\)-coordinate D4 as fallback only: captured.}}
+\]
+
+\[
+\boxed{\text{Numerical evidence/no-go archive: after Edit 6, captured.}}
+\]
+
+\[
+\boxed{\text{Full RH proof remains open: after Edits 1, 2, and 8, unmistakable.}}
+\]
+
+I would stop after these. Additional edits are likely to rehash already-captured architecture rather than improve the draft.
+## User (2026-04-27 17:29:07)
+
+ok do one more holistic review and look at these suggestions from agents, consolidate them into a finalized list of edits to make. be thorough. give the exact latex insertions/edits/removals and exactly where to make them
+
+## Assistant (2026-04-27 17:29:45)
+
+_Thought for 35s_
+
+Below is the consolidated final patch list. I am **not** repeating every prior edit; this is the **remaining high-value delta** after the latest draft and the new agent comments. The latest agent suggestions converge on a narrow set of repairs: clean stale Gate–2 dependency language, make O1/O2/O3 internally auditable, harden residual/derivative conventions, add the missing Wronskian coefficient/no-go material, and keep scalar \(I\)-coordinate D4 as fallback only. 
+
+I would apply these edits and then stop broad paper-editing rounds.
+
+---
+
+# Edit 1 — Remove primitive recovery as an active hypothesis source in the safe \(L^2\)-rigidity lemma
+
+**Where:** In
+
+```latex
+\begin{lemma}[\(L^2\)-input real rigidity; safe primitive-bounded form]
+\label{lem:l2-input-real-rigidity-safe}
+```
+
+find the paragraph immediately after the safe local bounds display.
+
+**Replace:**
+
+```latex
+This safe bound may either be assumed directly or obtained locally by applying
+Lemma~\ref{lem:local-primitive-recovery-from-l2-small-g} on a slightly larger
+source interval.  Assume also the \(L^2\)-smallness condition
+```
+
+**with:**
+
+```latex
+In the active Gate--2 proof this safe bound is assumed directly on the
+normalized source interval.  Lemma~\ref{lem:local-primitive-recovery-from-l2-small-g}
+records a possible strengthening, but it is not used to justify this lemma in
+the main argument.  Assume also the \(L^2\)-smallness condition
+```
+
+**Reason:** Primitive recovery is useful optional infrastructure, but the active Gate–2 theorem uses the safe primitive-bounded \(L^\infty\) version.
+
+---
+
+# Edit 2 — Strengthen the optional primitive-recovery proof with an explicit interpolation inequality
+
+**Where:** In
+
+```latex
+\begin{lemma}[Optional primitive recovery from \(L^2\)-small \(g\); not used below]
+```
+
+or, if the lemma is still titled
+
+```latex
+\begin{lemma}[Local primitive recovery from \(L^2\)-small \(g\)]
+```
+
+first rename it to:
+
+```latex
+\begin{lemma}[Optional primitive recovery from \(L^2\)-small \(g\); not used below]
+```
+
+Then, in its proof, find:
+
+```latex
+Since \(q''=u\in L^\infty(J)\), the one-dimensional interpolation estimate gives
+\[
+\|q\|_{L^\infty(J_1)}\le Q^C.
+\]
+```
+
+**Replace with:**
+
+```latex
+Since \(q''=u\in L^\infty(J)\), the one-dimensional interpolation estimate on
+the polynomially shrunken interval \(J_1\Subset J\) gives
+\[
+\|q\|_{L^\infty(J_1)}
+\le
+C\left(
+\|q\|_{L^6(J)}
++
+\|q\|_{L^6(J)}^{\frac35}
+\|q''\|_{L^\infty(J)}^{\frac25}
++
+1
+\right),
+\]
+after rescaling \(J\) to a bounded interval and absorbing the polynomial
+shrinkage factor into \(Q^C\).  Hence
+\[
+\|q\|_{L^\infty(J_1)}\le Q^C.
+\]
+```
+
+**Reason:** Keeps the optional recovery lemma mathematically explicit while not making it a main proof dependency.
+
+---
+
+# Edit 3 — Harmonize Gate–2 curvature residual notation with wall/gauge notation
+
+Use \(r_C\) consistently for the curvature residual \(u-q''\). This avoids having both \(r_u\) and \(r_C\) mean the same thing.
+
+## 3A. In `Remark~\ref{rem:gate-two-compatibility-residuals}`
+
+Replace:
+
+```latex
+r_u:=u-q'',
+```
+
+with:
+
+```latex
+r_C:=u-q'',
+```
+
+Replace:
+
+```latex
+r_u=r_G=r_{G,2}=0.
+```
+
+with:
+
+```latex
+r_C=r_G=r_{G,2}=0.
+```
+
+Replace:
+
+```latex
+Therefore one must also control the discrepancy \(r_u=u-q''\).
+```
+
+with:
+
+```latex
+Therefore one must also control the curvature discrepancy \(r_C=u-q''\).
+```
+
+Replace:
+
+```latex
+\|r_u\|_{L^2(J)}
+```
+
+with:
+
+```latex
+\|r_C\|_{L^2(J)}
+```
+
+## 3B. In `Remark~\ref{rem:l2-rigidity-residual-stable}`
+
+Replace:
+
+```latex
+r_u:=u-q'',
+```
+
+with:
+
+```latex
+r_C:=u-q'',
+```
+
+Replace all occurrences of:
+
+```latex
+\|r_u\|_{L^2(J)}
+```
+
+with:
+
+```latex
+\|r_C\|_{L^2(J)}
+```
+
+Replace:
+
+```latex
+The additional residual \(r_u\) is needed only at the final comparison
+```
+
+with:
+
+```latex
+The additional residual \(r_C\) is needed only at the final comparison
+```
+
+Replace:
+
+```latex
+r_u=r_g=r_h=0.
+```
+
+with:
+
+```latex
+r_C=r_g=r_h=0.
+```
+
+**Reason:** The wall/gauge-locking package already uses \(r_C\). Use the same symbol throughout.
+
+---
+
+# Edit 4 — Normalize \(E_2\) derivative notation in the Gate–2 good-patch hypothesis
+
+**Where:** In
+
+```latex
+\begin{hypothesis}[Gate--2 derivative-complexity good patch]
+```
+
+replace:
+
+```latex
+\sup_{I_\rho^\ast}|\partial_m^jE_2(m)|\le Q^{C_j},
+\qquad 0\le j\le4.
+```
+
+with:
+
+```latex
+\sup_{I_\rho^\ast}|\mathcal D^jE_2(m)|\le Q^{C_j},
+\qquad 0\le j\le4.
+```
+
+**Reason:** Downstream Gate–2 identities are in the normalized \(\mathcal D\)-derivative convention.
+
+---
+
+# Edit 5 — Remove the last stale “source–anisotropy reintegration is the next theorem” language
+
+## 5A. In `Remark [Next numerical test: actual-zeta source curvature]`
+
+Replace the final sentences:
+
+```latex
+If source-flat intervals appear in actual data,
+Hypothesis~\ref{hyp:offline-packet-source-curvature-observability} is likely
+false in its present form.  If they do not appear, the first theorem to attack is the interval \(L^2\)
+source-curvature observability estimate; the next theorem is the
+source--anisotropy reintegration estimate.
+```
+
+with:
+
+```latex
+If source-flat intervals appear in actual data,
+Hypothesis~\ref{hyp:offline-packet-source-curvature-observability} is likely
+false in its present form.  If they do not appear, the first theorem to attack
+is the interval \(L^2\) source-curvature observability estimate for the full
+canonical object
+\[
+q''_{\can}=B_2+P_2+D_2+E_2.
+\]
+In the ordinary real-canonical branch, the source--anisotropy step is no
+longer a separate next theorem; it is supplied by
+Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}.
+```
+
+## 5B. In `Remark [Current branch decision]`, item (1)
+
+Replace:
+
+```latex
+\item Prove actual-zeta source-curvature observability,
+\[
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|,
+\]
+and then prove source--anisotropy reintegration,
+\[
+\int_{I_\rho}
+|q''_{\can}|^2(\Gamma_G^2+\Gamma_{G,2}^2)\,dm
+\ge Q^{-A}|I_\rho|;
+\]
+```
+
+with:
+
+```latex
+\item Prove actual-zeta source-curvature observability,
+\[
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|.
+\]
+In the ordinary real-canonical branch, source--anisotropy reintegration then
+follows from Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}.  The
+remaining downstream burden is to convert the resulting Gate--2 mass into row
+energy through D4 carrier-quotient row conversion and residual control;
+```
+
+## 5C. In `Remark [Current proof frontier after the local package audits]`
+
+Find the paragraph beginning:
+
+```latex
+The later audits show that such a theorem must include source-level
+nonflatness and source--anisotropy reintegration.
+```
+
+Replace that paragraph with:
+
+```latex
+The later audits show that such a theorem must include source-level
+nonflatness.  In particular, anisotropy or vector non-concentration alone
+cannot control the known rows when
+\[
+H=yq''_{\can}\approx0.
+\]
+Thus the remaining source-side input is Gate~1 for the full canonical object
+on \(I_\rho\), not merely finite determinacy, compactness, pairwise
+zero-spacing, endpoint-gap control, or Remez--{\L}ojasiewicz volume estimates.
+In the ordinary real-canonical branch, the former source--anisotropy step is
+supplied downstream by Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}.
+```
+
+Find the paragraph beginning:
+
+```latex
+Fixed-prime and AFE-style derivative-flat
+surrogates, as well as same-scale packet moment models, do not presently
+supply an obstruction.  The missing positive input is the two-gate actual-zeta
+package
+```
+
+Replace it with:
+
+```latex
+Fixed-prime and AFE-style derivative-flat
+surrogates, as well as same-scale packet moment models, do not presently
+supply an obstruction.  The missing positive source-side input is Gate~1:
+\[
+\int_{I_\rho}|q''_{\can}|^2\,dm\ge Q^{-B}|I_\rho|.
+\]
+Once this is available in the ordinary real-canonical branch, the source-weighted
+anisotropy estimate
+\[
+\int_{I_\rho}
+|q''_{\can}|^2(\Gamma_G^2+\Gamma_{G,2}^2)\,dm
+\ge Q^{-A}|I_\rho|
+\]
+is supplied by Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}.
+```
+
+## 5D. In subsection title
+
+Replace:
+
+```latex
+\subsection{Source-weighted interval non-concentration as the two-gate arithmetic problem}
+\label{subsec:layered-finite-core-nonconcentration-gate}
+```
+
+with:
+
+```latex
+\subsection{Source-weighted interval non-concentration after the Gate--2 repair}
+\label{subsec:layered-finite-core-nonconcentration-gate}
+```
+
+**Reason:** Gate–2 reintegration is no longer an independent ordinary-branch theorem.
+
+---
+
+# Edit 6 — Add a formal O1 bridge lemma: cell mass \(\Rightarrow\mathbf z'\)
+
+**Where:** Immediately after `Remark~\ref{rem:cell-mass-gives-z-derivative-row}` and before `Definition [O2: Cofactor-vector nonrecurrence]`.
+
+Insert this full block:
+
+```latex
+\begin{lemma}[Fixed-width cell mass implies the \(Z_\alpha\)-derivative row]
+\label{lem:fixed-width-cell-mass-implies-z-derivative-row}
+Assume the fixed-width cell setup of
+Definition~\ref{def:O1-fixed-width-cell-nonrecurrence}.  Let
+\[
+F(t)=Z_\alpha(m_0+\lambda t),
+\qquad F(0)=0,
+\qquad \lambda Q\asymp1.
+\]
+Assume the cell Gram/frame lower bound on the window \([-R,R]\),
+\[
+\lambda_{\min}(G_{\rm cell})\ge Q^{-C_G},
+\]
+and assume the full canonical cell error satisfies
+\[
+\|E_{\rm cell}\|_{L^2[-R,R]}^2
+\le
+\frac12 R Q^{-A-C_G}.
+\]
+If
+\[
+\sum_r |B_r(m_0,\alpha)|^2\ge Q^{-A},
+\]
+then
+\[
+\sup_{|t|\le R}|Z_\alpha(m_0+\lambda t)|\ge Q^{-A'}.
+\]
+If, moreover, \(Z_\alpha\) has polynomial analytic upper control on
+\[
+|t|\le R(\log Q)^{C_*},
+\]
+then
+\[
+\boxed{
+\|\mathbf z'(m_0,\alpha)\|\ge Q^{-A''}.
+}
+\]
+\end{lemma}
+
+\begin{proof}
+Let \(\xi_r\) be the cell centers and write
+\[
+F_{\rm cell}(t)=\sum_r B_r e^{-it\xi_r}.
+\]
+The cell Gram lower bound gives
+\[
+\int_{-R}^{R}|F_{\rm cell}(t)|^2\,dt
+\ge
+R Q^{-C_G}\sum_r|B_r|^2
+\ge
+R Q^{-A-C_G}.
+\]
+After subtracting \(E_{\rm cell}\), this yields
+\[
+\int_{-R}^{R}|F(t)|^2\,dt
+\ge
+\frac12 RQ^{-A-C_G},
+\]
+and hence
+\[
+\sup_{|t|\le R}|F(t)|\ge Q^{-A'}.
+\]
+The amplitude-to-derivative lemma applies because \(R\le(\log Q)^C\) and the
+outer analytic control is available on a polylogarithmically larger disk.  The
+basis-normalized operators \(C_\ell(\mathcal D)\) cost at most
+\[
+\exp(O(R\log R))=Q^{O(1)},
+\]
+so the monomial derivative lower bound gives
+\[
+\|\mathbf z'(m_0,\alpha)\|\ge Q^{-A''}.
+\]
+\end{proof}
+```
+
+Then in `Theorem~\ref{thm:ordinary-gate-one-from-O1-O2-O3}`, replace:
+
+```latex
+By O1 and Remark~\ref{rem:cell-mass-gives-z-derivative-row},
+\[
+\|\mathbf z'(m_0,\alpha)\|\ge Q^{-A_1}.
+\]
+```
+
+with:
+
+```latex
+By O1 and Lemma~\ref{lem:fixed-width-cell-mass-implies-z-derivative-row},
+\[
+\|\mathbf z'(m_0,\alpha)\|\ge Q^{-A_1}.
+\]
+```
+
+**Reason:** The theorem uses O1 as a \(\mathbf z'\)-lower bound. Make the cell-mass-to-derivative bridge formal.
+
+---
+
+# Edit 7 — Add O1 internal decomposition
+
+**Where:** Immediately after the lemma from Edit 6.
+
+Insert:
+
+```latex
+\begin{remark}[Internal structure of O1]
+\label{rem:internal-structure-O1-cell-nonrecurrence}
+The fixed-width cell input packages two more primitive actual-orbit
+nonrecurrence statements.
+
+First, one needs same-branch cell mass:
+\[
+\boxed{
+\|B^+(m_0,\alpha)\|_2^2+\|B^-(m_0,\alpha)\|_2^2\ge Q^{-A}.
+}
+\]
+Equivalently, in diagonal/off-diagonal notation,
+\[
+O^+(m_0,\alpha)+O^-(m_0,\alpha)
+\ge
+-(1-Q^{-A})(D^+ +D^-).
+\]
+This rules out simultaneous same-cell self-cancellation in both branches.
+
+Second, one needs folded main/dual cell nonalignment:
+\[
+\boxed{
+\|B^+(m_0,\alpha)+e^{i\Theta_Z}B^-(m_0,\alpha)\|_2
+\ge
+Q^{-A}\left(\|B^+\|_2+\|B^-\|_2\right),
+}
+\]
+up to the canonical background and error cell vectors.  Equivalently,
+\[
+|\langle B^+,B^-\rangle|
+\le
+(1-Q^{-A})\|B^+\|_2\|B^-\|_2.
+\]
+
+The tilted regime
+\[
+|\alpha|Q\gtrsim \log Q
+\]
+is easier: after polynomial AFE, gamma, log-power, and cell-normalization
+losses are absorbed, the exponential factors
+\[
+e^{-\alpha\log n},
+\qquad
+e^{+\alpha\log(m/(2\pi n))}
+\]
+make one branch dominate the other.  Thus, in the tilted regime, same-branch
+cell mass implies full cell mass by the triangle inequality.  The hard branch
+is the symmetric regime
+\[
+|\alpha|Q\ll\log Q,
+\]
+especially \(|\alpha|Q\ll1\), where branch magnitudes may be comparable and
+folded main/dual cell cancellation remains a genuine actual-orbit
+nonrecurrence problem.
+\end{remark}
+```
+
+---
+
+# Edit 8 — Add raw/projected O1 formulation
+
+**Where:** Immediately after Edit 7.
+
+Insert:
+
+```latex
+\begin{remark}[Raw and projected cell formulations]
+\label{rem:raw-projected-cell-formulations-O1}
+The raw cell theorem
+\[
+\sum_r|B_r|^2\ge Q^{-A}
+\]
+is the preferred O1 formulation when the number of cells satisfies
+\[
+M_{\rm cell}\asymp R
+\]
+and the cell basis is polynomially conditioned.  It is positive and implies a
+polylog-local \(L^2\)-amplitude lower bound for \(Z_\alpha\).
+
+If a later implementation uses substantially more than \(R\) cells, raw cell
+mass may live partly in high cell-frequency modes invisible to the degree
+\((R+1)\) jet.  In that case one should use the projected fallback
+\[
+\boxed{
+\|\Pi_{\le R+1}B(m_0,\alpha)\|_2^2\ge Q^{-A},
+}
+\]
+where \(\Pi_{\le R+1}\) is the stable projection to cell polynomial modes of
+degree at most \(R+1\).  This projected statement is the cell-coordinate form
+of direct \(Z_\alpha\)-jet nonflatness.
+\end{remark}
+```
+
+---
+
+# Edit 9 — Add O2 internal decomposition
+
+**Where:** Immediately after `Definition [O2: Cofactor-vector nonrecurrence]` and before `Remark [Averaged large sieves do not replace O2]`.
+
+Insert:
+
+```latex
+\begin{remark}[Internal structure of O2]
+\label{rem:internal-structure-O2-cofactor-nonrecurrence}
+The cofactor-vector input has two conceptually different parts.
+
+The first is structural exterior coefficient mass.  If
+\[
+\mathbf M(m)=\sum_S \mathbf A_S e^{-im\Omega_S}+\cdots,
+\qquad
+\Omega_S=\log N_S,
+\]
+then a coefficient-level estimate of the form
+\[
+\boxed{
+\sum_S\|\mathbf A_S\|^2\ge Q^{-A}
+}
+\]
+is expected to follow from basis-normalized exterior volume and canonical row
+rank.  This shows that the cofactor vector is not symbolically zero.
+
+The second is the actual pointwise arithmetic assertion:
+\[
+\boxed{
+Z_\alpha(m_0)=0
+\Longrightarrow
+\left\|
+\sum_S \mathbf A_S e^{-im_0\Omega_S}+\cdots
+\right\|\ge Q^{-A}.
+}
+\]
+This is a degree-\((R+1)\) subset-product nonrecurrence theorem for the actual
+prime-log orbit.  Exterior coefficient mass alone does not imply it, because
+the subset-product phases may cancel at a prescribed \(m_0\).
+\end{remark}
+```
+
+---
+
+# Edit 10 — Add O3 bad-incidence variety
+
+**Where:** Immediately after `Definition [O3: Wronskian angle nonalignment / ordinary incidence]` and before `Remark [O3 is not implied by O1 and O2]`.
+
+Insert:
+
+```latex
+\begin{remark}[Bad incidence variety for O3]
+\label{rem:bad-incidence-variety-O3}
+Equivalently, O3 asserts actual-orbit avoidance of the bad incidence variety
+\[
+\mathcal I_{\rm bad}(\alpha)
+=
+\{u:Z_\alpha(u)=0,\ \widetilde{\mathcal W}_R(u,\alpha)=0\}.
+\]
+In cofactor form, at \(Z_\alpha(m_0)=0\),
+\[
+\widetilde{\mathcal W}_R(m_0,\alpha)
+=
+\langle \mathbf z'(m_0,\alpha),\mathbf M(m_0,\alpha)\rangle,
+\]
+so the bad incidence is
+\[
+\mathbf z'(m_0,\alpha)\in
+V(m_0):=
+\operatorname{span}\{Q_0(m_0),\ldots,Q_R(m_0)\}.
+\]
+Thus O3 is not a norm lower bound.  It is an angle/nonalignment theorem:
+\[
+\operatorname{dist}(\mathbf z',V)
+\ge Q^{-A}\|\mathbf z'\|.
+\]
+The phase-relaxed model permits \(Z_\alpha=0\), \(\mathbf z'\ne0\),
+\(\mathbf M\ne0\), and \(\mathbf z'\perp\mathbf M\) simultaneously; hence O3
+must use actual one-parameter zeta arithmetic.
+\end{remark}
+```
+
+---
+
+# Edit 11 — Add common-small-value no-go for O3
+
+**Where:** After `Remark~\ref{rem:O3-not-implied-by-O1-O2}`.
+
+Insert:
+
+```latex
+\begin{remark}[Common-small-value reformulation does not close O3]
+\label{rem:common-small-value-does-not-close-O3}
+O3 can be restated as a common-small-value exclusion:
+\[
+|Z_\alpha(m)|+|\widetilde{\mathcal W}_R(m,\alpha)|\ge Q^{-A}
+\]
+on admissible ordinary packet centers.  At a zero \(Z_\alpha(m_0)=0\), this is
+equivalent to
+\[
+|\widetilde{\mathcal W}_R(m_0,\alpha)|\ge Q^{-A}.
+\]
+This reformulation is useful but does not prove O3.  In phase-relaxed models,
+one may impose both
+\[
+Z_\alpha=0
+\]
+and
+\[
+\widetilde{\mathcal W}_R=0
+\]
+because the active phase torus has many degrees of freedom.  Resultant-style
+or Wronskian-of-Wronskians arguments also do not currently give a polynomial
+separation estimate for the actual one-parameter zeta orbit.  Thus O3 remains
+a named actual-orbit incidence input.
+\end{remark}
+```
+
+---
+
+# Edit 12 — Add stop condition for O3 decomposition
+
+**Where:** At the end of `\subsection{No-go archive for the ordinary Wronskian route}`, before `\subsection{Canonical audit for the named Gate--1 inputs}`.
+
+Insert:
+
+```latex
+\begin{remark}[Stop condition for ordinary-route decomposition]
+\label{rem:stop-condition-ordinary-route-decomposition}
+The ordinary packet-frequency route should now be treated as reduced to O1,
+O2, and O3.  Further decompositions of O3 into common-small-value,
+Hodge-angle, main/dual commutator, resultant, or filtered-minor formulations
+have not produced a proof.  They all return to actual one-parameter
+prime-log nonrecurrence.  Therefore, unless a genuinely new arithmetic
+mechanism is supplied, O3 should be cited as the named ordinary incidence
+input rather than reopened as a local-algebra problem.
+\end{remark}
+```
+
+---
+
+# Edit 13 — Strengthen canonical transfer for O3
+
+**Where:** In `Lemma [Canonical form of the ordinary Wronskian inputs]`, after:
+
+```latex
+A theorem proved only for \(P_2\), only for \(D_2\), only for \(B_2\), only for
+a zero-side proxy, or only for a flexible Dirichlet polynomial is diagnostic
+unless a canonical transfer estimate is supplied.
+```
+
+Insert:
+
+```latex
+For O3, canonical transfer must control the inner product itself.  If
+\((\mathbf z'_{\rm mod},\mathbf M_{\rm mod})\) is a model pair, then the model
+angle theorem transfers only if
+\[
+\|\mathbf z'_{\can}-\mathbf z'_{\rm mod}\|,
+\qquad
+\|\mathbf M_{\can}-\mathbf M_{\rm mod}\|,
+\]
+and
+\[
+\left|
+\langle\mathbf z'_{\can},\mathbf M_{\can}\rangle
+-
+\langle\mathbf z'_{\rm mod},\mathbf M_{\rm mod}\rangle
+\right|
+\]
+are all smaller than the relevant half-leading scale.  Controlling the norms
+of \(\mathbf z'\) and \(\mathbf M\) separately is not enough to transfer an
+angle theorem.
+```
+
+---
+
+# Edit 14 — Adjust named-input status table language
+
+**Where:** In `Remark [Active named-input status table]`.
+
+Replace the O1 row status:
+
+```latex
+\text{numerically supported; open}
+```
+
+with:
+
+```latex
+\text{named open; diagnostic evidence only}
+```
+
+Replace the Gate–2 row status:
+
+```latex
+\text{near-Green conditional on Gate~1 and canonical hypotheses}
+```
+
+with either:
+
+```latex
+\text{conditional theorem from Gate~1 plus }L^2\text{-rigidity}
+```
+
+or, if you prefer stronger wording:
+
+```latex
+\text{proved modulo Gate~1, real-canonical hypotheses, and safe }L^2\text{-rigidity}
+```
+
+Replace the D4 row status:
+
+```latex
+\text{finite residual valuation audit}
+```
+
+with:
+
+```latex
+\text{closed through order 9 modulo residual valuation control}
+```
+
+---
+
+# Edit 15 — Strengthen empirical O1 warning
+
+**Where:** In `Remark [Empirical support for O1: local amplitude and cell tests]`, after:
+
+```latex
+They justify continuing the O1
+proof route rather than triggering a stop rule.
+```
+
+Insert:
+
+```latex
+They should not be cited as evidence for any theorem requiring uniform
+polynomial lower bounds over all admissible heights.
+```
+
+---
+
+# Edit 16 — Add final warning to `No Green Gate--1 proof yet`
+
+**Where:** In `Remark [No Green Gate--1 proof yet]`, before `\end{remark}`.
+
+Insert:
+
+```latex
+Equivalently, the present draft has not proved O1, O2, or O3, nor the
+singular/transition inputs S1--T1.  The reductions above identify the needed
+arithmetic statements; they do not discharge them.
+```
+
+---
+
+# Edit 17 — Add residual test formula to D4 residual valuation ledger
+
+**Where:** At the end of `Definition [D4 residual valuation ledger]`, before `\end{definition}`.
+
+Insert:
+
+```latex
+Equivalently, for a schematic term
+\[
+T=q_0^a u^b \Gamma^\ell D,
+\qquad |D|\le Q^C,
+\]
+compare to the leading scale
+\[
+q_0u^3\Gamma.
+\]
+The relative size is bounded by
+\[
+\frac{|T|}{|q_0u^3\Gamma|}
+\le
+Q^C
+|q_0|^{a-1}
+|u|^{b-3}
+|\Gamma|^{\ell-1}.
+\]
+Terms with \((a,b,\ell)=(1,3,1)\) belong in the effective leading matrix \(L\),
+not in the residual.  Terms with extra useful \(q_0,u,\Gamma\)-valuation are
+relative residuals.  Only terms without enough useful valuation are absolute
+floors and must satisfy the wall-escape corridor estimates.
+```
+
+---
+
+# Edit 18 — Add frozen quotient-coordinate row mobility
+
+**Where:** After `Remark [Quotient-frame version of row mobility]`.
+
+Insert:
+
+```latex
+\begin{remark}[Frozen quotient coordinates avoid moving-frame derivatives]
+\label{rem:frozen-quotient-coordinates-row-mobility}
+If the quotient frame \(\mathcal Q_N(m)\) varies with \(m\), one can avoid
+moving-frame derivative estimates by freezing the quotient coordinates at the
+D4 sample point \(m_\ast\).  Suppose
+\[
+|[\mathbf A_N(m_\ast)]|_{\mathcal Q_N(m_\ast)}\ge Q^{-C_A}
+\]
+and the quotient Gram matrix at \(m_\ast\) is polynomially nondegenerate.  Let
+\(\ell_7^\ast,\ell_9^\ast\) be dual quotient coordinates at \(m_\ast\), extended
+as fixed linear functionals on the ambient finite row space.  Then
+\[
+|\ell_7^\ast(\mathbf A_N(m_\ast))|^2
++
+|\ell_9^\ast(\mathbf A_N(m_\ast))|^2
+\ge Q^{-C}.
+\]
+If the ambient row vector satisfies
+\[
+|\mathbf A_N'(m)|\le Q^{C_D}|I|^{-1},
+\]
+then the two fixed scalar functions
+\[
+\ell_7^\ast(\mathbf A_N(m)),
+\qquad
+\ell_9^\ast(\mathbf A_N(m))
+\]
+obey the same row-mobility argument, yielding
+\[
+\int_I
+\left(
+|\ell_7^\ast(\mathbf A_N(m))|^2+
+|\ell_9^\ast(\mathbf A_N(m))|^2
+\right)\,dm
+\ge Q^{-C'}|I|.
+\]
+Thus carrier-quotient row energy can be proved using fixed dual coordinates at
+the sample point, without differentiating the moving quotient frame.
+\end{remark}
+```
+
+---
+
+# Edit 19 — Add D4 associated-graded determinant certificate
+
+**Where:** After `Remark [Filtered D4 row observability]`.
+
+Insert:
+
+```latex
+\begin{remark}[Associated-graded D4 determinant certificate]
+\label{rem:associated-graded-d4-determinant-certificate}
+A finite way to certify D4 is to compute the associated-graded coefficient
+matrix of \((A_7,A_9)\) in the anisotropy variables
+\[
+\Gamma=(\Gamma_G,\Gamma_{G,2}).
+\]
+Write
+\[
+A_7^{\mathfrak f}
+=
+q_0u^3
+\left(
+\alpha_7\Gamma_G+\beta_7\Gamma_{G,2}
+\right)
++
+E_7,
+\]
+\[
+A_9^{\mathfrak f}
+=
+q_0u^3
+\left(
+\beta_9\Gamma_G+\alpha_9\Gamma_{G,2}
+\right)
++
+E_9,
+\]
+after absorbing all same-valuation anisotropy-linear terms into the effective
+matrix.  Then the D4 rank condition is
+\[
+\Delta_{7,9}:=\alpha_7\alpha_9-\beta_7\beta_9,
+\qquad
+|\Delta_{7,9}|\ge Q^{-C}.
+\]
+Equivalently, after eliminating the lower channel from \(A_9\),
+\[
+\widetilde A_9
+=
+A_9-\frac{\beta_9}{\alpha_7}A_7
+\]
+has leading coefficient
+\[
+\frac{\Delta_{7,9}}{\alpha_7}
+\]
+on \(\Gamma_{G,2}\).  Thus D4 closes with \(A_7,A_9\) if \(A_7\) detects
+\(\Gamma_G\) and \(\widetilde A_9\) detects a genuinely new
+\(\Gamma_{G,2}\)-direction, with half-leading residual control.
+
+In the expected clean carrier normalization,
+\[
+\alpha_7\alpha_9\ne0,
+\qquad
+\beta_7,\beta_9
+\]
+are either lower filtration or absorbed into the effective matrix, and the
+determinant is a fixed nonzero scalar multiple of \(1/288^2\).
+\end{remark}
+```
+
+---
+
+# Edit 20 — Add D4 nonzero root-trap remark
+
+**Where:** After Edit 19.
+
+Insert:
+
+```latex
+\begin{remark}[Nonzero D4 root traps are harmless under energetic sampling]
+\label{rem:nonzero-d4-root-trap}
+If a triangularized row coordinate has the form
+\[
+B_7=X+E_7,
+\qquad
+B_9=Y R_Y(Y)+X(\cdots)+E_9,
+\]
+where
+\[
+X=\Gamma_G,\qquad Y=\Gamma_{G,2},
+\]
+then a possible finite obstruction is a nonzero root
+\[
+R_Y(\zeta)=0,\qquad \zeta\ne0.
+\]
+The corresponding bad branch is
+\[
+X\approx0,\qquad Y\approx\zeta.
+\]
+This branch cannot persist on a polynomial-size real interval under the
+Gate--2 ODE identities.  Indeed,
+\[
+X=q''-6q+2q^3,
+\qquad
+Y=2q(q')^2-\frac16X''.
+\]
+Testing the second identity against a cutoff and integrating \(X''\) by parts
+twice converts the apparent derivative obstruction into an \(L^2\)-small
+\(X\)-term, just as in the \(L^2\)-input rigidity proof.  Thus an interval on
+which \(X\approx0\) and \(Y\approx\zeta\ne0\) would force \(Y\) small on a
+shrunken interval, contradicting \(|\zeta|\ge Q^{-C}\).
+
+Consequently, under existential or energetic row sampling, nonzero row roots
+are not fatal: isolated occurrences can be avoided, and interval traps are
+ruled out by the same local dynamics behind Gate--2 rigidity.  If the proof
+were exact-point locked, such roots would again become relevant.
+\end{remark}
+```
+
+---
+
+# Edit 21 — Add singular long-prime no-go item
+
+**Where:** In `\section{No-go and audit ledger}`, inside the enumerate, after the item about finite same-scale packet geometry.
+
+Insert:
+
+```latex
+\item \emph{Band-limited singular probes do not avoid long-prime control.}
+In the deep singular branch, detecting the \(R\) sine moments
+\[
+\sin(k\theta),\qquad 3\le k\le R+3,
+\]
+requires analytic or band-limited probes with bandwidth at least polynomial in
+\(R\).  The explicit formula then sees primes with
+\[
+\log n\lesssim R^C/c.
+\]
+Since \(cQ\ll(\log Q)^{-C_0}\), this is generally longer than the ordinary
+packet-frequency range \(\log n\asymp Q\).  Therefore S1 is a separate
+long-prime actual-zeta nonrecurrence theorem, not a refinement of the ordinary
+Wronskian input.
+```
+
+---
+
+# Edits I would not make
+
+I would not rewrite the Gate–2 theorem, wall-escape theorem, carrier-quotient theorem, or canonical \(q_\zeta\) definitions. They are now aligned with the final architecture.
+
+The remaining changes above are refinements: they make the named inputs internally auditable, remove overreadings of optional primitive recovery and numerical evidence, and lock D4 into the carrier-quotient/fallback split. 
+
+## User (2026-04-27 17:35:46)
+
+mine these chats for any additional numerical evidence we can add as insertions. keep it very concise but add anything that will be useful for future. Please give exact latex insertions and where to make htem
+
+## Assistant (2026-04-27 17:35:50)
+
+I’ll mine only for concrete numerical results worth preserving, not general strategy. I’ll keep the insertions short and label them diagnostic/non-proof-level.
+
+_Thought for 30s_
+
+Below are **additional numerical-evidence insertions** worth mining from the chats. I am keeping them concise and diagnostic. These should not be framed as proof; they are evidence/stop-rule bookkeeping for future agents.
+
+The useful extra evidence falls into four buckets:
+
+1. zero-side Gate–1 scans and watch reruns;
+2. same-scale quadrature negative controls;
+3. packet-frequency determinant stress details;
+4. \(Z_\alpha\)-amplitude / cell-mass adversarial diagnostics.
+
+---
+
+# Insertion 1 — Add zero-side Gate–1 proxy/watch evidence
+
+**Where:** In or immediately after
+
+```latex
+\begin{remark}[Numerical and surrogate evidence archive]
+\label{rem:numerical-surrogate-status}
+...
+\end{remark}
+```
+
+or, if you have a later O1 evidence section, place it after
+
+```latex
+\begin{remark}[Empirical support for O1: local amplitude and cell tests]
+\label{rem:empirical-support-o1-local-amplitude-cell-tests}
+...
+\end{remark}
+```
+
+**Insert:**
+
+```latex
+\begin{remark}[Zero-side Gate--1 proxy and watch-rerun evidence]
+\label{rem:zero-side-gate-one-proxy-watch-evidence}
+The zero-side Gate--1 proxy scans did not produce a stable source-flat
+candidate.
+
+In the canonical regularized zero-side pilot using \(N=180\) actual zeta zeros,
+\(260\) intervals, and \(121\) sample points per interval, the scan found
+\[
+\min_I \sup_I |q''_{\can,N}|\approx 1.6854,
+\]
+and
+\[
+\min_I |I|^{-1}\int_I |q''_{\can,N}(m)|^2\,dm
+\approx 2.4954.
+\]
+The flattest interval occurred near
+\[
+m_0\approx22.8958,\qquad Q\approx3.8241,
+\]
+with
+\[
+B_I^{\rm eff}
+=
+-\frac{\log E_I}{\log Q}
+\approx -0.6817.
+\]
+Thus the normalized interval energy stayed order-one or larger in this
+canonical zero-side pilot; no source-flat interval was observed.
+
+The targeted watch-rerun evidence is also favorable.  In one targeted rerun of
+the watch centers, \(8\) centers generated \(1152\) rows:
+\[
+\text{healthy}=272,\qquad
+\text{watch}=880,\qquad
+\text{candidate\_flat}=0,\qquad
+\text{serious}=0.
+\]
+The smallest proxy energy was
+\[
+E_I\approx9.8\times10^{-5},
+\qquad
+B_I^{\rm eff}\approx23.36,
+\]
+but this occurred only under an aggressive regularization setting and remained
+classified as watch-level because the regularization drift was large,
+approximately
+\[
+D_{\rm reg}\approx0.99.
+\]
+
+A larger watch rerun with \(8640\) rows gave
+\[
+\text{reject\_tail\_edge}=6480,\quad
+\text{healthy}=1728,\quad
+\text{watch}=432,
+\]
+and again
+\[
+\text{candidate\_proxy\_flat}=0,\qquad
+\text{serious\_proxy\_warning}=0.
+\]
+The best stable watch rows had low interval energy but failed the finite-jet
+criterion; for example near
+\[
+m_0\approx109.099,\qquad Q\approx2.85,
+\]
+one had
+\[
+B_I^{\rm eff}\approx7.25,\qquad
+E_I\approx5.0\times10^{-4},\qquad
+J_{\max}\approx0.022,
+\]
+whereas
+\[
+Q^{-5}\approx5.3\times10^{-3}.
+\]
+Thus these were smooth gap-midpoint or regularization artifacts, not
+quadrature-like source-flat candidates.
+\end{remark}
+```
+
+**Why this is useful:** It preserves the most important Gate–1 numerical lesson: low \(E_I\) alone is not a warning; simultaneous finite-jet flatness and stability are required. The cited logs distinguish watch rows from real candidates and record zero candidate/serious rows. turn113file11
+
+---
+
+# Insertion 2 — Add the broad proxy top-target handoff result
+
+**Where:** Immediately after Insertion 1, or in the same numerical evidence section.
+
+**Insert:**
+
+```latex
+\begin{remark}[Broad proxy search top-target status]
+\label{rem:broad-proxy-top-target-status}
+A broad zero-proxy extraction produced
+\[
+46408\text{ input rows},\qquad 46396\text{ valid rows},
+\]
+and the top \(50\) ranked rows had only
+\[
+B_I^{\rm eff}\in[0.83,0.87].
+\]
+All top rows were classified as healthy, with no tail-edge failure.  Their
+finite-jet diagnostics were far from flat:
+\[
+J_{\max}\sim10^3 Q^{-5}
+\]
+for the leading rows.  The ranking also came in physical-center pairs because
+the labels `gap\_midpoint' and `large\_gap\_midpoint' can refer to the same
+center.  Thus the top \(50\) rows cover roughly \(25\) unique physical targets.
+
+These rows are useful canonical cross-check targets, but they are not Gate--1
+candidates.
+\end{remark}
+```
+
+**Why this is useful:** It records that a broad proxy search found no even watch-level top rows; useful for future agents deciding whether more proxy scans are worth running. 
+
+---
+
+# Insertion 3 — Add same-scale quadrature negative-control numbers
+
+**Where:** In the numerical evidence archive, near any discussion of “negative controls” or same-scale quadrature.
+
+**Insert:**
+
+```latex
+\begin{remark}[Same-scale quadrature negative-control benchmark]
+\label{rem:same-scale-quadrature-negative-control-numerics}
+The same-scale quadrature negative control was verified to produce the expected
+source-flat signature.  In a representative run at
+\[
+Q\approx3.078,\qquad d=1/Q,\qquad
+I=[-0.2/Q,0.2/Q],
+\]
+the positive same-scale quadrature model gave
+\[
+\sup_I |q''_{\rm quad}|\approx5.7\times10^{-15},
+\]
+\[
+|I|^{-1}\int_I |q''_{\rm quad}(m)|^2\,dm
+\approx3.5\times10^{-30},
+\]
+and
+\[
+B_I^{\rm eff}\approx60.3.
+\]
+This confirms that the numerical pipeline can detect the known
+same-scale source-flattening adversary when it is present.  The actual-zero
+proxy scans above did not resemble this negative control.
+\end{remark}
+```
+
+**Why this is useful:** This is the essential sensitivity check. It shows that the absence of actual flat candidates is not because the metric is incapable of detecting flatness. turn113file13
+
+---
+
+# Insertion 4 — Add packet-frequency determinant stress-test detail
+
+**Where:** In or immediately after
+
+```latex
+\begin{remark}[Packet-frequency determinant stress-test status]
+\label{rem:packet-frequency-determinant-stress-status}
+```
+
+If that remark already exists, add the following before `\end{remark}`.
+
+**Insert:**
+
+```latex
+The detailed determinant stress archive also found no stop-rule event.  The
+larger-toy run covered
+\[
+R=4,6,8,10,12,16
+\]
+with reflected dual, actual-like dual, and \(E_2\)-perturbation stages, and
+reported
+\[
+\text{Yellow}=0,\qquad
+\text{Red}_{\rm pre\text{-}E2}=0,\qquad
+\text{Red}=0.
+\]
+The \(R=16\) row count was lower than the smaller-\(R\) counts because some
+blocks or \(\alpha\)-cases were filtered before emission, not because the run
+failed.
+
+The best actual-like non-collapsing candidate occurred at roughly
+\[
+R=6,\qquad Q=58,\qquad c=0.2,\qquad \alpha=0,\qquad m\approx5377.16,
+\]
+with
+\[
+\eta_Z\approx2.41\times10^{-5},
+\qquad
+\eta_W\approx1.35\times10^{-5},
+\]
+\[
+\rho_{\rm rank,2}\approx2.89\times10^{-4},
+\qquad
+\kappa_{\rm basis}\approx4.02\times10^{4}.
+\]
+It was classified as `no\_collapse'.  Some rows had very small determinants,
+for instance
+\[
+\eta_W\sim10^{-13},
+\]
+but these did not co-occur with sufficiently small \(\eta_Z\), or were filtered
+as degenerate.  Thus determinant-smallness alone did not produce an incidence
+collapse.
+```
+
+**Why this is useful:** The existing packet-frequency determinant remark may already say “no Yellow/Red”; this adds the reason: determinant-small cases did not align with zero-row smallness. That is exactly O3-relevant. 
+
+---
+
+# Insertion 5 — Add the \(Z_\alpha\)-amplitude/cell evidence details
+
+**Where:** In
+
+```latex
+\begin{remark}[Empirical support for O1: local amplitude and cell tests]
+\label{rem:empirical-support-o1-local-amplitude-cell-tests}
+```
+
+Add this before the closing paragraph that says the tests do not prove O1.
+
+**Insert:**
+
+```latex
+A particularly useful adversarial subfamily consisted of \(52\) reflected-dual
+direct-jet-minimizer rows for which the optimizer drove
+\[
+|Z_\alpha(m_0)|\sim10^{-15}\text{--}10^{-12}.
+\]
+In these rows, the rescue diagnostics remained non-small: the local amplitude
+at polylogarithmic radius, the jet size \(J_{\max}\), and the multiscale cell
+mass ratios did not collapse.  This is the empirical behavior predicted by
+\[
+Z_\alpha(m_0)=0
+\Longrightarrow
+|\mathbf z'(m_0,\alpha)|\ge Q^{-A}.
+\]
+
+The \(K=8\) multiblock cell test is especially relevant because it addresses
+the main weakness of earlier single-block diagnostics.  It used log-uniform
+support coverage and recorded actual support width and active-cell count per
+row.  Rows with undercovered support, too few active cells, or out-of-band
+widened support were demoted to diagnostic status rather than counted as
+Yellow/Orange/Red evidence.  In the recorded \(K=8\) run, \(794\) rows gave
+\[
+\text{Yellow}=0,\qquad
+\text{Orange}=0,\qquad
+\text{Red}=0.
+\]
+```
+
+**Why this is useful:** This preserves the strongest O1 evidence: even when \(Z_\alpha\) is forced nearly to zero, local amplitude, jets, and cell mass stay alive. turn113file17
+
+---
+
+# Insertion 6 — Add a concise “classification rule” for future numerical claims
+
+**Where:** Near the end of the numerical evidence archive, after the empirical remarks.
+
+**Insert:**
+
+```latex
+\begin{remark}[Numerical classification rule for Gate--1 warnings]
+\label{rem:numerical-classification-rule-gate-one}
+A numerical row is not a serious Gate--1 warning unless all of the following
+hold:
+\[
+E_I\text{ is small},
+\]
+\[
+J_{\max}\text{ is small through the declared jet depth},
+\]
+the tail, quadrature, regularization, and width drifts are stable, and either
+the AFE cross-check passes or the row is explicitly labeled
+\[
+\texttt{serious\_warning\_zero\_side\_only}.
+\]
+A route-threatening conclusion requires a family, not a single interval.  A
+single low-energy row is only watch-level unless it also exhibits finite-jet
+flatness and stability.
+\end{remark}
+```
+
+**Why this is useful:** It prevents future numerical overreaction. This rule is repeatedly stated in the logs and should be preserved. turn113file10
+
+---
+
+# Insertion 7 — Add the experimental sequence / dashboard schema in an appendix
+
+**Where:** If the paper has an appendix or numerical methodology section, insert there. If not, place after `Remark~\ref{rem:numerical-classification-rule-gate-one}` as a compact operational note.
+
+**Insert:**
+
+```latex
+\begin{remark}[Gate--1 numerical validation sequence]
+\label{rem:gate-one-numerical-validation-sequence}
+Future Gate--1 numerical runs should follow this order:
+\[
+\text{same-scale quadrature negative control}
+\to
+\text{random packet positive/control test}
+\to
+\text{singular dominance and cancellation tests}
+\to
+\text{actual zero-side scan}
+\to
+\text{candidate refinement}
+\to
+\text{AFE cross-check}
+\to
+\text{surrogate comparison and height trend}.
+\]
+Each run should report at least
+\[
+E_I,\quad S_I,\quad B_I^{\rm eff},\quad J_{\max},\quad J_{\rm rms},
+\]
+together with tail, quadrature, regularization, width, and AFE stability
+metrics.  The flattest \(0.1\%\) of rows should be rerun with higher precision,
+larger zero cutoff, more quadrature nodes, finite jets, and AFE cross-checks.
+\end{remark}
+```
+
+**Why this is useful:** Future agents can reproduce the numerical discipline rather than only the conclusions. turn113file12
+
+---
+
+# Optional replacement — If the paper already has a numerical evidence remark
+
+If your draft already has a large `Numerical and surrogate evidence archive`, you can replace it with this concise integrated version instead of adding the separate insertions above.
+
+```latex
+\begin{remark}[Numerical and surrogate evidence archive]
+\label{rem:numerical-surrogate-status}
+The numerical evidence in this draft is diagnostic only.  It does not prove
+Gate~1, O1, O2, O3, S1, T1, or any downstream row theorem.  Its role is to
+detect obvious relaxed countermechanisms and to maintain stop rules.
+
+Current evidence:
+\[
+\begin{array}{c|c|c|c}
+\text{branch} & \text{scope} & \text{result} & \text{interpretation}\\
+\hline
+\text{canonical zero-side pilot}
+&
+N=180,\ 260\text{ intervals},\ 121\text{ points/interval}
+&
+\min E_I\approx2.4954,\ \min S_I\approx1.6854
+&
+\text{no source-flat interval found}\\
+\hline
+\text{targeted watch rerun}
+&
+8\text{ centers},\ 1152\text{ rows}
+&
+\text{candidate}=0,\ \text{serious}=0
+&
+\text{watch rows are regularization artifacts}\\
+\hline
+\text{larger watch rerun}
+&
+8640\text{ rows}
+&
+1728\text{ healthy},\ 432\text{ watch},\ 0\text{ candidate/serious}
+&
+\text{low }E_I\text{ rows fail finite-jet test}\\
+\hline
+\text{broad proxy top targets}
+&
+46408\text{ input},\ 46396\text{ valid}
+&
+B_I^{\rm eff}\in[0.83,0.87]\text{ in top }50
+&
+\text{healthy cross-check targets only}\\
+\hline
+\text{same-scale quadrature control}
+&
+Q\approx3.078
+&
+E_I\approx3.5\times10^{-30},\ B_I^{\rm eff}\approx60.3
+&
+\text{pipeline detects known adversary}\\
+\hline
+\text{packet-frequency determinant stress}
+&
+R\le16,\ \text{reflected/actual-like dual},\ E_2
+&
+\text{Yellow}=0,\ \text{Red}=0
+&
+\text{no determinant-incidence collapse}\\
+\hline
+\text{local }Z_\alpha\text{-amplitude/cell tests}
+&
+1152\text{ amplitude rows};\ 794\text{ }K=8\text{ cell rows}
+&
+\text{Yellow}=0,\ \text{Orange}=0,\ \text{Red}=0
+&
+Z_\alpha\approx0\not\Rightarrow\text{ local collapse}
+\end{array}
+\]
+
+The strongest empirical messages are:
+\[
+\boxed{
+\text{actual-zero and packet-frequency tests have not produced a stable
+Gate--1 source-flat family;}
+}
+\]
+\[
+\boxed{
+\text{the same-scale quadrature control does produce extreme flatness, so the
+pipeline is sensitive to the known adversary;}
+}
+\]
+and
+\[
+\boxed{
+Z_\alpha(m_0)\approx0
+\not\Rightarrow
+\text{amplitude / jet / cell collapse}
+}
+\]
+in the tested packet-frequency surrogates.
+
+These data support prioritizing the actual-zeta O1/O2/O3 nonrecurrence inputs.
+They are not proof-level lower bounds and should not be cited as evidence for
+uniform polynomial estimates over all admissible heights.
+\end{remark}
+```
+
+---
+
+## Minimal set to apply
+
+If you only want the most useful additions, apply:
+
+1. **Insertion 1** — zero-side/watch evidence.
+2. **Insertion 3** — quadrature negative-control numbers.
+3. **Insertion 4** — determinant stress details.
+4. **Insertion 5** — \(52\) small-\(Z_\alpha\) / \(K=8\) cell evidence.
+5. **Insertion 6** — classification rule.
+
+That captures the useful numerical “ammo” without bloating the paper.
+## User (2026-04-27 17:54:41)
+
+Synthesize these agent findings in a final set of edits. The goal is to fix anything that would introduce errors in future work. Give it as exact latex insertions/edits and exactly where to make them.
+
+## Assistant (2026-04-27 17:55:26)
+
+_Thought for 41s_
+
+Below is the **final consolidated guardrail patch set**. I am not adding broad new sections. These are the edits that prevent future agents from making incorrect inferences from the current draft: cell-pairing mistakes in O1, implicit cell/error double-counting, dimension errors in O3, overclaiming Gate–2/D4, and conflating proof-level \(q''_{\can}\) with stress-test conventions. These recommendations synthesize the latest agent comments and the current draft state.   
+
+---
+
+# Edit 1 — Repair O1’s main/dual cell definition
+
+**Problem:** \(B_r^+\) uses plus nodes \(x_n^+=\lambda\log n\), while \(B_r^-\) uses folded-dual nodes \(x_n^-=\lambda\log(m_0/(2\pi n))\). These generally live in paired but different intervals. Using the same \(I_r\) without defining paired cells can make later main/dual nonalignment statements false or ambiguous.
+
+**Where:** In
+
+```latex
+\begin{definition}[O1: Fixed-width cell nonrecurrence]
+\label{def:O1-fixed-width-cell-nonrecurrence}
+```
+
+replace the block beginning:
+
+```latex
+and partition the normalized support into cells \(I_r\) of width
+\[
+|I_r|\asymp R^{-1},
+\qquad
+M_{\rm cell}\asymp R.
+\]
+Let
+\[
+B_r^+
+=
+\sum_{x_n^+\in I_r}
+z_n^+(\alpha,m_0)e^{-im_0\log n},
+\]
+\[
+B_r^-
+=
+\sum_{x_n^-\in I_r}
+z_n^-(\alpha,m_0)e^{+im_0\log n},
+\]
+```
+
+with:
+
+```latex
+Set
+\[
+x_n^+=\lambda\log n,
+\qquad
+x_n^-=\lambda\log\frac{m_0}{2\pi n},
+\]
+or the corresponding folded-dual coordinate in the exact AFE convention.  The
+main branch lies in \([c_-,c_+]\), while the folded dual branch lies in
+approximately \([1-c_+,1-c_-]\).  Partition these two intervals into paired
+cells
+\[
+I_r^+\subset[c_-,c_+],
+\qquad
+I_r^-\subset[1-c_+,1-c_-],
+\]
+with
+\[
+|I_r^\pm|\asymp R^{-1},
+\qquad
+M_{\rm cell}\asymp R,
+\]
+paired by the folded map \(x^-\leftrightarrow 1-x^+\), up to the exact AFE
+folding convention.  Let
+\[
+B_r^+
+=
+\sum_{x_n^+\in I_r^+}
+z_n^+(\alpha,m_0)e^{-im_0\log n},
+\]
+\[
+B_r^-
+=
+\sum_{x_n^-\in I_r^-}
+z_n^-(\alpha,m_0)e^{+im_0\log n},
+\]
+```
+
+---
+
+# Edit 2 — Clarify the cell-vector/residual decomposition in the O1 bridge lemma
+
+**Problem:** O1’s \(B_r\) already includes canonical background/error cell pieces, while the cell-mass bridge lemma also has \(E_{\rm cell}\). Without an explicit decomposition, future work may double-count background or \(E_2\)-type terms.
+
+**Where:** In
+
+```latex
+\begin{lemma}[Fixed-width cell mass implies the \(Z_\alpha\)-derivative row]
+\label{lem:fixed-width-cell-mass-implies-z-derivative-row}
+```
+
+immediately after:
+
+```latex
+Assume the fixed-width cell setup of
+Definition~\ref{def:O1-fixed-width-cell-nonrecurrence}.
+```
+
+insert:
+
+```latex
+Assume the cell vector \(B=(B_r)_r\) and the residual \(E_{\rm cell}\) are chosen
+so that on \([-R,R]\)
+\[
+Z_\alpha(m_0+\lambda t)
+=
+\sum_r B_r e^{-it\xi_r}
++
+E_{\rm cell}(t),
+\]
+where \(\xi_r\) is the representative center of the \(r\)-th cell.  In the
+inclusive canonical formulation, the known background and \(E_2\)-type pieces
+assigned to cells are included in \(B_r\), and only the remaining intra-cell,
+tail, truncation, or unassigned pieces are included in \(E_{\rm cell}\).  In a
+perturbative formulation, the omitted canonical pieces must instead be included
+in \(E_{\rm cell}\) and satisfy the stated \(L^2\)-smallness bound.
+```
+
+---
+
+# Edit 3 — Fix the “equivalent” folded main/dual nonalignment statement
+
+**Problem:** The condition
+
+\[
+|\langle B^+,B^-\rangle|\le(1-Q^{-A})\|B^+\|\|B^-\|
+\]
+
+is not equivalent to avoiding cancellation in the specific \(e^{i\Theta_Z}\)-direction. It is a stronger sufficient condition.
+
+**Where:** In
+
+```latex
+\begin{remark}[Internal structure of O1]
+\label{rem:internal-structure-O1-cell-nonrecurrence}
+```
+
+replace the folded nonalignment paragraph:
+
+```latex
+Second, one needs folded main/dual cell nonalignment:
+\[
+\boxed{
+\|B^+(m_0,\alpha)+e^{i\Theta_Z}B^-(m_0,\alpha)\|_2
+\ge
+Q^{-A}\left(\|B^+\|_2+\|B^-\|_2\right),
+}
+\]
+up to the canonical background and error cell vectors.  Equivalently,
+\[
+|\langle B^+,B^-\rangle|
+\le
+(1-Q^{-A})\|B^+\|_2\|B^-\|_2.
+\]
+```
+
+with:
+
+```latex
+Second, one needs folded main/dual cell nonalignment:
+\[
+\boxed{
+\|B^+(m_0,\alpha)+e^{i\Theta_Z}B^-(m_0,\alpha)\|_2
+\ge
+Q^{-A}\left(\|B^+\|_2+\|B^-\|_2\right),
+}
+\]
+up to the canonical background and error cell vectors.  Equivalently, the
+phase-specific cancellation direction must be avoided:
+\[
+\Re\!\left(e^{-i\Theta_Z}\langle B^+,B^-\rangle\right)
+\]
+cannot be too close to \(-\|B^+\|_2\|B^-\|_2\) at polynomial scale.  A convenient
+stronger sufficient condition is
+\[
+|\langle B^+,B^-\rangle|
+\le
+(1-Q^{-A})\|B^+\|_2\|B^-\|_2,
+\]
+but this latter bound is stronger than the exact folded nonalignment condition.
+```
+
+---
+
+# Edit 4 — Fix the ambient dimension of \(\mathbf z'\) in O3
+
+**Problem:** \(V(m_0)\subset\mathbb C^{R+2}\), so \(\mathbf z'\) must also be an \(R+2\)-vector. It should include the zeroth coordinate \(C_0Z_\alpha(m_0)=0\), not only the nonzero derivative coordinates.
+
+## 4A. Edit the pre-O1 paragraph
+
+**Where:** In the paragraph immediately before “The ordinary route is now reduced…”.
+
+Replace:
+
+```latex
+where \(\mathbf z'\) is the nonzero derivative-row vector of \(Z_\alpha\), and
+\(\mathbf M\) is the cofactor/Hodge-dual vector of the canonical
+\(q''_{\can}\)-jet block.
+```
+
+with:
+
+```latex
+where \(\mathbf z'\) denotes the full \(Z_\alpha\)-row at the zero, with its
+zeroth coordinate \(C_0Z_\alpha(m_0)=0\) included as a zero coordinate, and
+\(\mathbf M\) is the cofactor/Hodge-dual vector of the canonical
+\(q''_{\can}\)-jet block.
+```
+
+## 4B. Edit the O3 definition
+
+**Where:** In
+
+```latex
+\begin{definition}[O3: Wronskian angle nonalignment / ordinary incidence]
+\label{def:O3-wronskian-angle-nonalignment}
+```
+
+immediately after the display defining \(V(m_0)\), insert:
+
+```latex
+At a zero \(Z_\alpha(m_0)=0\), define the full derivative row
+\[
+\mathbf z'(m_0,\alpha)
+:=
+\left(
+0,\,
+C_1(\mathcal D)Z_\alpha(m_0),\,
+\ldots,\,
+C_{R+1}(\mathcal D)Z_\alpha(m_0)
+\right)
+\in\mathbb C^{R+2}.
+\]
+The initial zero is the \(C_0Z_\alpha(m_0)\) coordinate.  Norms of
+\(\mathbf z'\) are therefore the same as the norms of the nonzero derivative
+coordinates, but the vector lies in the same ambient space as \(V(m_0)\).
+```
+
+---
+
+# Edit 5 — Strengthen the assumptions in “Ordinary Gate–1 from O1–O3”
+
+**Problem:** The theorem uses the cell-mass-to-\(\mathbf z'\) bridge, so it should explicitly assume the stable cell-frame and amplitude-to-jet hypotheses used by that bridge.
+
+**Where:** In
+
+```latex
+\begin{theorem}[Ordinary Gate--1 from O1--O3]
+\label{thm:ordinary-gate-one-from-O1-O2-O3}
+```
+
+replace:
+
+```latex
+Assume the ordinary packet-frequency Wronskian construction above, the
+canonical transfer for \(q''_{\can}=B_2+P_2+D_2+E_2\), and the three inputs
+O1--O3.
+```
+
+with:
+
+```latex
+Assume the ordinary packet-frequency Wronskian construction above, the stable
+cell-frame and amplitude-to-jet hypotheses of
+Lemma~\ref{lem:fixed-width-cell-mass-implies-z-derivative-row}, the canonical
+transfer for \(q''_{\can}=B_2+P_2+D_2+E_2\), and the three inputs O1--O3.
+```
+
+---
+
+# Edit 6 — Make the Gate–2 theorem explicitly require safe primitive applicability
+
+**Problem:** The active Gate–2 proof uses the safe \(L^2\)-rigidity lemma, which requires
+
+\[
+\|q\|_\infty+\|q'\|_\infty+\|q''\|_\infty\le Q^C.
+\]
+
+Do not leave this implicit.
+
+**Where:** In
+
+```latex
+\begin{theorem}[Gate 2 from Gate 1 and \(L^2\)-input rigidity]
+\label{thm:gate-two-from-gate-one-l2-rigidity}
+```
+
+replace:
+
+```latex
+and assume Lemma~\ref{lem:l2-input-real-rigidity-safe} holds on normalized
+source subintervals with loss \(Q^{C_R}\).  Then Gate~2 holds with any exponent
+```
+
+with:
+
+```latex
+Assume moreover that every source interval produced by
+Lemma~\ref{lem:source-large-interval-l2-anisotropy} can be placed in the
+normalized setting of Lemma~\ref{lem:l2-input-real-rigidity-safe}, with the
+safe primitive bounds
+\[
+\|q\|_\infty+\|q'\|_\infty+\|q''\|_\infty\le Q^C
+\]
+available on that normalized interval, and with rigidity loss \(Q^{C_R}\).
+Then Gate~2 holds with any exponent
+```
+
+---
+
+# Edit 7 — Add the missing intermediate inequality in the source-anisotropy extraction proof
+
+**Problem:** The proof is correct but skips one line. Add it to avoid a future misread.
+
+**Where:** In
+
+```latex
+\begin{lemma}[Source-large interval with \(L^2\)-small anisotropy]
+\label{lem:source-large-interval-l2-anisotropy}
+```
+
+replace:
+
+```latex
+Since
+\(|u|^2\ge \tau^2\) on \(J\),
+\[
+\tau^2\int_J(g^2+h^2)\,dm
+\le
+\int_I |u|^2(g^2+h^2)\,dm
+\le Q^{-A}|I|.
+\]
+```
+
+with:
+
+```latex
+Since \(|u|^2\ge \tau^2\) on \(J\),
+\[
+\tau^2\int_J(g^2+h^2)\,dm
+\le
+\int_J |u|^2(g^2+h^2)\,dm
+\le
+\int_I |u|^2(g^2+h^2)\,dm
+\le Q^{-A}|I|.
+\]
+```
+
+---
+
+# Edit 8 — Clarify the proof-level \(P_2\) convention versus stress-test convention
+
+**Problem:** The draft’s proof-level \(P_2\) convention and the \(k_q=3\) numerical stress-test convention must not be mixed inside one proof run.
+
+**Where:** In
+
+```latex
+\begin{definition}[Canonical source-curvature representation problem]
+\label{def:canonical-source-curvature-representation-problem}
+```
+
+after the paragraph ending:
+
+```latex
+The coefficients \(b_n\), smoothing, dual term,
+gamma/background contribution, and error scale must be specified in the same
+normalization used by the rank-two local rows.  The point of this convention
+is to forbid replacing \(q''_{\can}\) by an arbitrary Dirichlet polynomial or
+by the affine-subtracted complement \(q''_{\source,R}\).
+```
+
+insert:
+
+```latex
+The displayed \((\log n)^2\)-weight corresponds to the literal
+\(q''_{\can}\) curvature convention.  Some numerical determinant stress tests
+also use a script-convention source row with \(k_q=3\), hence a
+\(\Lambda(n)(\log n)^3n^{-1/2}\)-type coefficient.  That \(k_q=3\) convention
+is a numerical stress-test convention recorded in
+Remark~\ref{rem:log-derivative-afe-stress-test-convention}; it is not a
+replacement for the literal \(q''_{\can}\) representation displayed here.
+```
+
+**Where:** In
+
+```latex
+\begin{remark}[Log-derivative AFE convention for numerical stress tests]
+\label{rem:log-derivative-afe-stress-test-convention}
+```
+
+after the display for the literal \(q''_{\can}\)-row test, insert:
+
+```latex
+This convention switch must not be made inside a single proof-level
+Wronskian.  A given proof run must fix one convention for \(q''_{\can}\), and
+then use the corresponding \(Z_\alpha\)-symbol ratios, dual branch, \(E_2\)
+budget, and local row identities throughout.
+```
+
+---
+
+# Edit 9 — Make numerical evidence explicitly non-theorem-level
+
+**Problem:** Avoid numerical diagnostics becoming implicit proof inputs.
+
+**Where:** At the end of
+
+```latex
+\begin{remark}[Empirical support for O1: local amplitude and cell tests]
+\label{rem:empirical-support-o1-local-amplitude-cell-tests}
+```
+
+after the sentence:
+
+```latex
+They should not be cited as evidence for any theorem requiring uniform
+polynomial lower bounds over all admissible heights.
+```
+
+insert:
+
+```latex
+Accordingly, no later theorem may invoke these computations as a hypothesis or
+as a proof substitute for O1; they are only adversarial model checks.
+```
+
+---
+
+# Edit 10 — Add local zero-count as an explicit hypothesis in ordinary zero-separated transfer
+
+**Problem:** The proof uses a dyadic zero-annulus count. For the actual zeta scalar this is standard, but the lemma is written for a completed scalar \(\Xi\); make the assumption explicit.
+
+**Where:** In
+
+```latex
+\begin{lemma}[Ordinary zero-separated source-complexity transfer]
+\label{lem:ordinary-zero-separated-source-complexity-transfer}
+```
+
+after:
+
+```latex
+where \(\mathfrak C_2\) is a fixed finite expression in the completed
+logarithmic derivative
+\[
+L(s)=\frac{\Xi'}{\Xi}(s)
+\]
+and finitely many derivatives \(L^{(r)}(s)\), together with regular
+gamma/background terms and no denominators other than those implicit in
+\(L=\Xi'/\Xi\).
+```
+
+insert:
+
+```latex
+Assume moreover the standard local zero-count estimate for the completed
+scalar:
+\[
+\#\{\rho\in\mathcal Z_\Xi: |s-\rho|\le R_0\}
+\le Q^C(1+R_0)
+\]
+through the polynomial range of \(R_0\) used below.
+```
+
+---
+
+# Edit 11 — Clarify that same-scale D4 linear terms are not residual errors
+
+**Problem:** Same-valuation anisotropy-linear terms should be absorbed into \(L_{\rm eff}\), not bounded as residual errors.
+
+**Where:** In
+
+```latex
+\begin{definition}[D4 residual valuation ledger]
+\label{def:d4-residual-valuation-ledger}
+```
+
+after the paragraph introducing
+
+```latex
+\mathbf R
+=
+\mathbf R_{\rm same}
++
+\mathbf R_{\rm val}
++
+\mathbf R_{\rm abs}.
+```
+
+insert:
+
+```latex
+Terms with the same anisotropy-linear valuation as the leading row are not
+automatically errors.  They must first be absorbed into the effective leading
+matrix \(L_{\rm eff}\).  Only the component remaining after this absorption is
+eligible to be estimated as a residual.
+```
+
+---
+
+# Edit 12 — Soften the D4 status-table wording
+
+**Problem:** Do not call carrier-quotient D4 “closed” before residual/projection audit is discharged.
+
+**Where:** In
+
+```latex
+\begin{remark}[Active named-input status table]
+\label{rem:active-input-status-table}
+```
+
+replace the D4 row:
+
+```latex
+\text{carrier-quotient D4}
+&
+\text{closed through order 9 modulo residual valuation control}
+&
+\text{downstream row energy}
+```
+
+with:
+
+```latex
+\text{carrier-quotient D4}
+&
+\text{structural rank through order 9; finite quotient/projection residual audit remains}
+&
+\text{downstream row energy}
+```
+
+---
+
+# Edit 13 — Add D4/scalar-output guard after the active status table
+
+**Where:** Immediately after the paragraph ending:
+
+```latex
+The ordinary Wronskian route lives or dies on the actual arithmetic inputs
+\(\mathrm{O1}\)--\(\mathrm{O3}\).  The downstream repairs do not discharge
+those inputs.
+```
+
+insert:
+
+```latex
+The carrier-quotient D4 row should likewise not be cited as a scalar
+\(I\)-coordinate coercivity theorem.  It is conditional on the quotient/carrier
+row-energy architecture and on the stated residual valuation control.  If a
+later argument requires collapsed scalar \(I\)-coordinate energy, the
+order-nine scalar incidence wall \(F_9^I=0\) must still be controlled or
+bypassed.
+```
+
+---
+
+# Edit 14 — Replace the local downstream closure theorem’s output norm
+
+**Problem:** The theorem should output energy in the chosen row-output norm, not silently in raw coordinates.
+
+**Where:** Replace the entire theorem:
+
+```latex
+\begin{theorem}[Local downstream closure from Gate--2 and D4]
+\label{thm:local-downstream-closure-from-gate2-d4}
+...
+\end{theorem}
+```
+
+with:
+
+```latex
+\begin{theorem}[Local downstream closure from Gate--2 and D4]
+\label{thm:local-downstream-closure-from-gate2-d4}
+Assume Gate~2 on \(I\):
+\[
+\int_I |u|^2|\Gamma|^2\,dm\ge Q^{-A}|I|.
+\]
+Assume the ordinary real-canonical local complexity bounds and the gauge-locking
+hypotheses needed for
+Theorem~\ref{thm:gauge-locked-wall-escape-row-energy}.  Assume D4 row
+conversion at non-wall samples in a chosen row-output space
+\[
+\mathcal Q_{\rm row},
+\]
+where \(\mathcal Q_{\rm row}\) is either the carrier quotient
+\(\mathcal Q_{\rm car}\), a raw/ambient row space, or another filtered row
+space with polynomially equivalent norm.  Finally assume row mobility as in
+Lemma~\ref{lem:row-mobility-point-to-energy}, or the quotient-frame version of
+Remark~\ref{rem:quotient-frame-row-mobility} if the quotient varies with \(m\).
+
+Then the sampled packet carries polynomial row energy in the chosen row-output
+space:
+\[
+\boxed{
+\int_I
+\left\|
+\mathcal A_N(m)
+\right\|_{\mathcal Q_{\rm row}}^2\,dm
+\ge Q^{-C}|I|.
+}
+\]
+In the active carrier-quotient formulation this is
+\[
+\boxed{
+\int_I
+\left|
+[\mathcal A_N^{\rm car}(m)]
+\right|_{\mathcal Q_{\rm car}}^2\,dm
+\ge Q^{-C}|I|.
+}
+\]
+
+If the row-output space is represented by a concrete projected coordinate
+system, this theorem gives projected coordinate energy only after a polynomial
+frame lower bound for that coordinate system.  If the downstream architecture is
+exact-point locked or forced to use only the collapsed scalar \(I\)-coordinate,
+this theorem is not sufficient and the \(q_0\)-adic row-pencil, source-robust
+wall-row fallback, scalar incidence avoidance, or a higher/ambient row
+replacement must be used.
+\end{theorem}
+```
+
+---
+
+## End state after these edits
+
+After these patches, the draft should no longer allow these common future errors:
+
+\[
+\boxed{\text{mispaired plus/folded-dual cells in O1}}
+\]
+
+\[
+\boxed{\text{double-counted cell background/error terms}}
+\]
+
+\[
+\boxed{\text{dimensionally invalid O3 angle statement}}
+\]
+
+\[
+\boxed{\text{Gate--2 theorem silently omitting safe primitive bounds}}
+\]
+
+\[
+\boxed{\text{proof-level \(q''_{\can}\) convention mixed with stress-test \(k_q=3\)}}
+\]
+
+\[
+\boxed{\text{numerics cited as theorem input}}
+\]
+
+\[
+\boxed{\text{same-scale D4 terms incorrectly treated as residuals}}
+\]
+
+\[
+\boxed{\text{carrier-quotient D4 mistaken for scalar \(I\)-coordinate D4}}
+\]
+
+I would not add any more broad sections. This is the last critical guardrail layer.
+## User (2026-04-27 18:05:16)
+
+ok give the final, very detailed handover to the next agent
+
+## Assistant (2026-04-27 18:05:19)
+
+# Handover to the next agent
+
+## 0. Executive summary
+
+This project is a long-running RH proof-development draft. The current paper should **not** be treated as a completed proof of RH. It is now best described as:
+
+\[
+\boxed{
+\text{a conditional local obstruction architecture for RH}
+}
+\]
+
+The draft has gone through many rounds of repair. The main downstream architecture is now coherent:
+
+\[
+\boxed{
+\text{Gate 1}
++
+|u'|_\infty\text{ source thickening}
++
+L^2\text{-input real rigidity}
+\Longrightarrow
+\text{Gate 2}.
+}
+\]
+
+Then:
+
+\[
+\boxed{
+\text{Gate 2}
++
+\text{gauge-locked wall escape}
++
+\text{carrier-quotient D4}
++
+\text{row mobility}
+\Longrightarrow
+\text{row energy}.
+}
+\]
+
+The remaining upstream burden is not local row algebra. It is the named actual-zeta arithmetic package:
+
+\[
+\boxed{\mathrm{O1}+\mathrm{O2}+\mathrm{O3}\Longrightarrow \text{ordinary Gate 1}}
+\]
+
+plus singular/transition inputs:
+
+\[
+\boxed{\mathrm{S1},\quad \mathrm{T1}}.
+\]
+
+The critical warning for the next agent:
+
+\[
+\boxed{
+\text{Do not reopen old D1/D2/Remez or scalar }I\text{-coordinate D4 as active routes.}
+}
+\]
+
+They are fallback/historical unless the proof explicitly rejects the carrier-quotient row-output architecture.
+
+---
+
+## 1. Current proof-state map
+
+### 1.1 Canonical source curvature
+
+The canonical source curvature is:
+
+\[
+q''_{\can}=q_\zeta''=\Phi_\zeta'''.
+\]
+
+It is the **full actual-zeta phase curvature** in the same normalized derivative convention as the local Gram/row package.
+
+It is not:
+
+\[
+q''_{\source,R}=(G^{\new})'',
+\]
+
+which is only the affine-subtracted complement-source curvature.
+
+It is also not a proxy:
+
+\[
+B_2\text{-only},\quad P_2\text{-only},\quad \text{zero-kernel-only},\quad \text{flexible Dirichlet polynomial}.
+\]
+
+The full canonical object is:
+
+\[
+q''_{\can}=B_2+P_2+D_2+E_2.
+\]
+
+The finalized \(B_2\) background is:
+
+\[
+B_2(t)=\theta'''(t)
+=
+-\frac18\Re\psi^{(2)}
+\left(\frac14+\frac{it}{2}\right),
+\]
+
+with large-\(t\) expansion:
+
+\[
+B_2(t)
+=
+-\frac1{2t^2}
+-\frac1{8t^4}
+-\frac7{64t^6}
++O(t^{-8}).
+\]
+
+Important: \(B_2\)-only diagnostics are not Gate–1 candidates. They are only background diagnostics.
+
+---
+
+## 2. Real-normal-form and Gate–2 variables
+
+Gate–2 uses real scalar variables on ordinary smooth zero-separated packets:
+
+\[
+q,u,g,h\in\mathbb R,
+\]
+
+with:
+
+\[
+u=q''_{\can}=q'',
+\]
+
+\[
+g=\Gamma_G=q''-6q+2q^3=u-6q+2q^3,
+\]
+
+\[
+h=\Gamma_{G,2}=2q(q')^2-\frac16g''.
+\]
+
+The equivalent canonical definition is:
+
+\[
+\Gamma_{G,2}
+=
+(1-q^2)q''_{\can}
+-\frac16\mathcal D^4q.
+\]
+
+The key differentiated identity is:
+
+\[
+\boxed{
+\Gamma_{G,2}
+=
+2q(q')^2-\frac16\Gamma_G''.
+}
+\]
+
+The derivative convention is normalized:
+
+\[
+\mathcal D=\lambda\partial_m.
+\]
+
+All \(q',q'',q^{(4)}\) in Gate–2 and downstream D3/D4 should be read in this normalized convention unless explicitly stated otherwise.
+
+---
+
+## 3. Gate 2: what is settled
+
+### 3.1 Active theorem
+
+Gate 2 is no longer a vague source-anisotropy reintegration hypothesis in the ordinary smooth real-canonical branch. It is supplied by:
+
+\[
+\text{Gate 1}
++
+|u'|_\infty\text{ source thickening}
++
+L^2\text{-input real rigidity}.
+\]
+
+Gate 1 is:
+
+\[
+\int_I |u|^2\,dm\ge Q^{-B}|I|.
+\]
+
+If Gate 2 failed:
+
+\[
+\int_I |u|^2(g^2+h^2)\,dm\le Q^{-A}|I|,
+\]
+
+then Gate 1 gives a point:
+
+\[
+|u(m_\ast)|\ge Q^{-B/2}.
+\]
+
+With source Lipschitz:
+
+\[
+\|u'\|_{L^\infty(I)}\le Q^{C_u}|I|^{-1},
+\]
+
+one obtains a source-large interval \(J\subset I\):
+
+\[
+|u|\ge \tau=\frac12Q^{-B/2}
+\quad\text{on }J,
+\]
+
+\[
+|J|\ge Q^{-B/2-C_u-O(1)}|I|.
+\]
+
+Gate–2 failure then gives:
+
+\[
+\frac1{|J|}\int_J(g^2+h^2)\,dm
+\le
+Q^{-A+\frac32B+C_u+O(1)}.
+\]
+
+Set:
+
+\[
+\varepsilon^2
+=
+Q^{-A+\frac32B+C_u+O(1)}.
+\]
+
+Then \(L^2\)-input rigidity gives:
+
+\[
+\int_{J'}|u|^2
+\le
+Q^{C_R}\varepsilon^{2/5}|J'|.
+\]
+
+But source thickening gives:
+
+\[
+\int_{J'}|u|^2
+\ge Q^{-B-O(1)}|J'|.
+\]
+
+Contradiction if:
+
+\[
+\boxed{
+A>\frac{13}{2}B+C_u+5C_R+O(1).
+}
+\]
+
+So Gate 2 is a conditional downstream theorem, not an independent arithmetic input in the ordinary branch.
+
+### 3.2 \(L^2\)-input rigidity
+
+The safe lemma is:
+
+\[
+\|g\|_{L^2(J)}+\|h\|_{L^2(J)}
+\le
+\varepsilon |J|^{1/2}
+\Rightarrow
+\int_{J'}|u|^2
+\le
+Q^C\varepsilon^{2/5}|J'|.
+\]
+
+It assumes safe primitive bounds:
+
+\[
+\|q\|_\infty+\|q'\|_\infty+\|q''\|_\infty\le Q^C.
+\]
+
+The proof uses:
+
+\[
+a_\delta(q)=q\chi_\delta(q),
+\]
+
+with:
+
+\[
+a_\delta'=O(1),\qquad a_\delta''=O(\delta^{-1}).
+\]
+
+It proves:
+
+\[
+\int \phi\chi_\delta(q)q^2(q')^2
+\le
+Q^C\varepsilon\delta^{-1}|J|,
+\]
+
+hence:
+
+\[
+\int_{\{|q|\ge2\delta\}}\phi(q')^2
+\le
+Q^C\varepsilon\delta^{-3}|J|.
+\]
+
+Then the potential estimate plus small-\(q\) estimate gives:
+
+\[
+\int_{J'}|u|^2
+\le
+Q^C(\delta^2+\varepsilon\delta^{-3}+\varepsilon^2)|J'|.
+\]
+
+Choose:
+
+\[
+\delta=\varepsilon^{1/5}.
+\]
+
+Then:
+
+\[
+\int_{J'}|u|^2
+\le
+Q^C\varepsilon^{2/5}|J'|.
+\]
+
+Critical: the primitive-free recovery is optional/future infrastructure. The active proof uses the safe primitive-bounded version.
+
+---
+
+## 4. Downstream wall escape / D3a
+
+The old \(D3\) source-robust wall row is no longer active in the row-energy architecture.
+
+The active theorem is gauge-locked wall escape:
+
+\[
+q=q_0,\qquad u=q''_{\can},
+\qquad \Gamma=(\Gamma_G,\Gamma_{G,2}).
+\]
+
+Assume Gate 2 mass:
+
+\[
+\int_I |u|^2|\Gamma|^2\,dm\ge Q^{-A}|I|.
+\]
+
+Split:
+
+\[
+I_{\rm nd}=\{|q_0|\ge\varepsilon\},
+\qquad
+I_{\rm wall}=\{|q_0|<\varepsilon\}.
+\]
+
+If non-wall mass is present, D4 applies.
+
+If wall mass dominates, remove low-source points \(|u|<\tau\). On live wall points:
+
+\[
+|q_0|<\varepsilon,\qquad |u|\ge\tau.
+\]
+
+Use gauge-locking:
+
+\[
+q_0''=u
+\]
+
+or robustly:
+
+\[
+|q_0''-u|\le c\tau.
+\]
+
+For complex \(q_0\), project:
+
+\[
+e=\frac{\overline{u(m_0)}}{|u(m_0)|},
+\qquad
+Q(m)=\Re(e q_0(m)).
+\]
+
+Then first exit gives a nearby \(m_1\):
+
+\[
+|q_0(m_1)|=\varepsilon,
+\qquad
+|u(m_1)|\ge c\tau.
+\]
+
+At first exit:
+
+\[
+\Gamma_G=u-6q_0+2q_0^3
+\]
+
+so if \(\varepsilon\ll\tau\):
+
+\[
+|\Gamma_G(m_1)|\ge c\tau.
+\]
+
+Thus:
+
+\[
+|u|^2|\Gamma|^2(m_1)\ge Q^{-C}.
+\]
+
+Then D4 applies at \(m_1\), and row mobility thickens pointwise row output to row energy.
+
+Critical guardrail: the scalar \(q_0\) must be the same scalar in:
+
+\[
+q_0''=u,
+\]
+
+\[
+\Gamma_G=u-6q_0+2q_0^3,
+\]
+
+and:
+
+\[
+H_{\lead}=-\frac{q_0u^3}{288}.
+\]
+
+Do not allow an arbitrary affine primitive of \(u\) in wall escape.
+
+---
+
+## 5. D4: carrier-quotient row energy
+
+The active D4 output is not scalar \(I\)-coordinate energy. It is carrier/quotient row energy.
+
+Expected clean carrier rows:
+
+\[
+[\mathcal A_7]\sim H\Gamma_G[\mathsf C_7],
+\]
+
+\[
+[\mathcal A_9]\sim H\Gamma_{G,2}[\mathsf C_{Y12}].
+\]
+
+The carrier module keeps pre-collapse carrier directions. Nuisance subspace includes lower-carrier, line, background/core, and normalization/subtraction directions.
+
+In the carrier quotient:
+
+\[
+[\mathsf C_{Y12}]\ne0,
+\]
+
+and:
+
+\[
+[\mathsf C_7]\wedge[\mathsf C_{Y12}]\ne0.
+\]
+
+Thus D4 rank through order 9 is structurally available in carrier quotient.
+
+But the finite row audit remains:
+
+1. verify source factor:
+   \[
+   \operatorname{gr}(H)=-\frac1{288}q_0u^3;
+   \]
+
+2. verify row identities:
+   \[
+   [\mathcal A_7]\sim H\Gamma_G[\mathsf C_7],
+   \]
+   \[
+   [\mathcal A_9]\sim H\Gamma_{G,2}[\mathsf C_{Y12}];
+   \]
+
+3. verify quotient coercivity:
+   \[
+   [\mathsf C_7]\wedge[\mathsf C_{Y12}]\ne0
+   \]
+   quantitatively;
+
+4. verify residual valuation control:
+   only components in the carrier anisotropy plane can cancel the leading response.
+
+The scalar \(I\)-coordinate order-nine wall:
+
+\[
+F_9^I=0,\qquad yq''_{\can}\Gamma_{G,2}\ne0
+\]
+
+is a fallback issue only if the proof insists on collapsed scalar \(I\)-coordinate output. Under carrier quotient row energy, it is a collapse artifact.
+
+Do not treat scalar \(I\)-coordinate D4 as the active route.
+
+---
+
+## 6. Row mobility
+
+If D4 supplies a pointwise row lower bound:
+
+\[
+|\mathbf A_N(m_\ast)|\ge Q^{-C_A},
+\]
+
+and derivative control:
+
+\[
+|\mathbf A_N'(m)|\le Q^{C_D}|I|^{-1},
+\]
+
+then:
+
+\[
+\int_I|\mathbf A_N(m)|^2\,dm\ge Q^{-C}|I|.
+\]
+
+For quotient row spaces, freeze quotient coordinates at the sample point \(m_\ast\) if possible:
+
+\[
+\ell_7^\ast,\ell_9^\ast.
+\]
+
+Then row mobility applies to scalar functions:
+
+\[
+\ell_7^\ast(\mathbf A_N(m)),
+\qquad
+\ell_9^\ast(\mathbf A_N(m)).
+\]
+
+This avoids differentiating a moving quotient frame, provided the frozen dual coordinates have polynomially bounded norm.
+
+---
+
+## 7. Upstream ordinary Gate–1 architecture
+
+Ordinary Gate 1 is:
+
+\[
+\boxed{
+\int_{I_\rho}|q''_{\can}(m)|^2\,dm\ge Q^{-B}|I_\rho|.
+}
+\]
+
+The ordinary route is organized by O1, O2, O3.
+
+### O1 — Fixed-width cell nonrecurrence
+
+O1 should be formulated on paired plus/folded-dual cells.
+
+Plus coordinate:
+
+\[
+x_n^+=\lambda\log n.
+\]
+
+Folded-dual coordinate:
+
+\[
+x_n^-=\lambda\log\frac{m_0}{2\pi n}
+\]
+
+or exact convention equivalent.
+
+Cells:
+
+\[
+I_r^+\subset[c_-,c_+],
+\]
+
+\[
+I_r^-\subset[1-c_+,1-c_-],
+\]
+
+paired by folding.
+
+Cell sums:
+
+\[
+B_r^+,
+\qquad
+B_r^-.
+\]
+
+Full cell vector:
+
+\[
+B_r
+=
+B_r^+
++
+e^{i\Theta_Z}B_r^-
++
+B_r^{\rm bg}
++
+B_r^E.
+\]
+
+O1 target:
+
+\[
+Z_\alpha(m_0)=0
+\Longrightarrow
+\sum_r |B_r(m_0,\alpha)|^2\ge Q^{-A}.
+\]
+
+O1 implies \(\mathbf z'\) lower bound only through the cell-mass-to-amplitude-to-jet bridge, and requires stable cell-frame and residual \(E_{\rm cell}\) control.
+
+Important: raw cell mass is enough only if the cell basis is degree-visible and polynomially conditioned. If too many cells are used, require projected cell mass:
+
+\[
+\|\Pi_{\le R+1}B\|_2^2\ge Q^{-A}.
+\]
+
+### O2 — Cofactor-vector nonrecurrence
+
+Define canonical rows:
+
+\[
+Q_j(m_0)
+=
+\left(
+C_\ell(\mathcal D)\mathcal D^j q''_{\can}(m_0)
+\right)_{\ell=0}^{R+1}.
+\]
+
+Cofactor vector:
+
+\[
+\mathbf M_{\can}
+=
+\star(Q_0\wedge\cdots\wedge Q_R).
+\]
+
+O2 target:
+
+\[
+Z_\alpha(m_0)=0
+\Longrightarrow
+\|\mathbf M_{\can}(m_0,\alpha)\|\ge Q^{-A}.
+\]
+
+Exterior coefficient mass does not prove pointwise O2. O2 is a vector-valued actual prime-log nonrecurrence theorem.
+
+### O3 — Wronskian angle nonalignment
+
+Ambient space is \(\mathbb C^{R+2}\).
+
+At a zero:
+
+\[
+\mathbf z'(m_0,\alpha)
+=
+\left(
+0,\,
+C_1(\mathcal D)Z_\alpha(m_0),\,
+\ldots,\,
+C_{R+1}(\mathcal D)Z_\alpha(m_0)
+\right).
+\]
+
+The zero coordinate is \(C_0Z_\alpha(m_0)=0\).
+
+Let:
+
+\[
+V(m_0)=\operatorname{span}\{Q_0,\ldots,Q_R\}.
+\]
+
+O3 target:
+
+\[
+\operatorname{dist}(\mathbf z',V)
+\ge Q^{-A}\|\mathbf z'\|.
+\]
+
+Equivalently:
+
+\[
+|\langle\mathbf z',\mathbf M\rangle|
+\ge Q^{-A}\|\mathbf z'\|\|\mathbf M\|.
+\]
+
+Equivalently:
+
+\[
+|\widetilde{\mathcal W}_R(m_0,\alpha)|\ge Q^{-A}.
+\]
+
+O1 and O2 do not imply O3. O3 is an actual one-parameter incidence theorem.
+
+### Ordinary Gate 1 theorem
+
+The draft’s ordinary theorem should read:
+
+\[
+\boxed{
+\mathrm{O1}+\mathrm{O2}+\mathrm{O3}
+\Longrightarrow
+\text{ordinary Gate 1}.
+}
+\]
+
+But only assuming:
+
+1. stable cell-frame and amplitude-to-jet bridge;
+2. canonical transfer for \(q''_{\can}=B_2+P_2+D_2+E_2\);
+3. Wronskian finite-jet-to-energy transfer.
+
+---
+
+## 8. Singular and transition branches
+
+### S1 — Deep singular explicit-formula anti-design
+
+Deep singular regime:
+
+\[
+\lambda Q\ll(\log Q)^{-C}.
+\]
+
+S1 input:
+
+\[
+|\mathbf P_R-\mathbf G_R-\mathbf T_R|_2\ge Q^{-A}.
+\]
+
+This excludes sine-moment anti-design:
+
+\[
+\sum_j w_j\sin(k\theta_j)+\mathcal B_k\approx0,
+\qquad
+3\le k\le R+3.
+\]
+
+Deep singular dominance theorem: if the singular same-scale packet contributes nontrivially and far/background terms are half-small, Gate 1 follows. Thus deep singular failure is precisely a singular anti-design problem.
+
+### T1 — Transition control
+
+Transition zone:
+
+\[
+(\log Q)^{-C}\lesssim \lambda Q\lesssim1.
+\]
+
+T1 must show ordinary or singular lower bounds transfer with only polynomial loss.
+
+Important: determinant losses of \(\mu^{-O(R)}\) are acceptable, but \(\mu^{-O(R^2)}\) are not in fixed-polynomial bookkeeping.
+
+---
+
+## 9. Numerical evidence archive
+
+The useful numerical evidence is diagnostic only.
+
+Important mined numbers worth preserving:
+
+### Canonical zero-side pilot
+
+\[
+N=180,\quad 260\text{ intervals},\quad 121\text{ points/interval}.
+\]
+
+Minimum:
+
+\[
+\min_I \sup_I|q''_{\can,N}|\approx1.6854,
+\]
+
+\[
+\min_I |I|^{-1}\int_I|q''_{\can,N}|^2\approx2.4954.
+\]
+
+Flattest interval:
+
+\[
+m_0\approx22.8958,\quad Q\approx3.8241,\quad B_I^{\rm eff}\approx-0.6817.
+\]
+
+No source-flat intervals.
+
+### Watch reruns
+
+A targeted watch rerun:
+
+\[
+8\text{ centers},\quad 1152\text{ rows},
+\]
+
+\[
+\text{healthy}=272,\quad \text{watch}=880,\quad
+\text{candidate}=0,\quad \text{serious}=0.
+\]
+
+A larger watch rerun:
+
+\[
+8640\text{ rows},
+\]
+
+\[
+\text{reject\_tail\_edge}=6480,\quad
+\text{healthy}=1728,\quad
+\text{watch}=432,
+\]
+
+\[
+\text{candidate\_proxy\_flat}=0,\quad
+\text{serious\_proxy\_warning}=0.
+\]
+
+Best stable watch rows had low energy but failed finite-jet flatness. Example:
+
+\[
+m_0\approx109.099,\quad Q\approx2.85,
+\]
+
+\[
+B_I^{\rm eff}\approx7.25,
+\quad
+E_I\approx5.0\times10^{-4},
+\quad
+J_{\max}\approx0.022,
+\]
+
+while:
+
+\[
+Q^{-5}\approx5.3\times10^{-3}.
+\]
+
+Thus not quadrature-like.
+
+### Broad proxy top targets
+
+\[
+46408\text{ input rows},\quad 46396\text{ valid}.
+\]
+
+Top 50:
+
+\[
+B_I^{\rm eff}\in[0.83,0.87],
+\]
+
+all healthy. Finite jets not small:
+
+\[
+J_{\max}\sim10^3 Q^{-5}.
+\]
+
+### Same-scale quadrature negative control
+
+At:
+
+\[
+Q\approx3.078,\quad d=1/Q,\quad I=[-0.2/Q,0.2/Q],
+\]
+
+the quadrature adversary gives:
+
+\[
+\sup_I|q''_{\rm quad}|\approx5.7\times10^{-15},
+\]
+
+\[
+|I|^{-1}\int_I|q''_{\rm quad}|^2\approx3.5\times10^{-30},
+\]
+
+\[
+B_I^{\rm eff}\approx60.3.
+\]
+
+This confirms the numerical pipeline detects the known adversary.
+
+### Packet-frequency determinant stress
+
+Ran:
+
+\[
+R=4,6,8,10,12,16
+\]
+
+with reflected dual, actual-like dual, and \(E_2\)-perturbation.
+
+Reported:
+
+\[
+\text{Yellow}=0,\quad
+\text{Red}_{\rm pre\text{-}E2}=0,\quad
+\text{Red}=0.
+\]
+
+Best actual-like non-collapsing candidate:
+
+\[
+R=6,\quad Q=58,\quad c=0.2,\quad \alpha=0,\quad m\approx5377.16,
+\]
+
+\[
+\eta_Z\approx2.41\times10^{-5},
+\quad
+\eta_W\approx1.35\times10^{-5},
+\]
+
+\[
+\rho_{\rm rank,2}\approx2.89\times10^{-4},
+\quad
+\kappa_{\rm basis}\approx4.02\times10^4.
+\]
+
+Classified no-collapse.
+
+### Local \(Z_\alpha\)-amplitude and cell diagnostics
+
+There were \(52\) reflected-dual direct-jet-minimizer rows with:
+
+\[
+|Z_\alpha(m_0)|\sim10^{-15}\text{--}10^{-12}.
+\]
+
+Even there, amplitude, \(J_{\max}\), and cell mass stayed non-small.
+
+A \(K=8\) multiblock cell test with \(794\) rows gave:
+
+\[
+\text{Yellow}=0,\quad \text{Orange}=0,\quad \text{Red}=0.
+\]
+
+Diagnostic only; not a theorem.
+
+---
+
+## 10. No-go ledger: do not reopen
+
+These routes have been audited and should not be reopened as active without new input:
+
+1. Pure local zero-packet geometry cannot prove Gate 1.
+2. Positive same-scale quadrature can flatten source jets.
+3. Quartet symmetry, smooth \(B_2\), finite zero-counting, flexible dual surrogates, and finitely many center constraints do not kill the source-flat adversary.
+4. Generic determinant nonvanishing is insufficient.
+5. \(Z_\alpha\)-symbol rank is not the full Wronskian theorem.
+6. Cofactor exterior mass is not pointwise cofactor mass.
+7. Averaged large-sieve estimates do not prove pointwise O2.
+8. Low-prime plateau blocks are not determinant-admissible for packet-frequency Wronskians.
+9. Scalar \(I\)-coordinate D4 is fallback only.
+10. Numerical diagnostics are not theorem inputs.
+11. \(R=O(\log Q)\) is not “safer” for Wronskians unless a no-factorial-loss theorem is supplied; safe depth is:
+   \[
+   R\asymp\frac{\log Q}{\log\log Q}.
+   \]
+
+---
+
+## 11. Recent final guardrail edits recommended
+
+If the next agent is editing the paper, the final guardrail patch set is:
+
+1. O1 paired plus/folded-dual cells.
+2. O1 cell vector vs. \(E_{\rm cell}\) decomposition.
+3. Folded nonalignment exact phase-specific condition, not the stronger inner-product bound labeled “equivalent.”
+4. \(\mathbf z'\in\mathbb C^{R+2}\) with zero zeroth coordinate.
+5. Ordinary Gate–1 theorem assumes the stable cell-frame and amplitude-to-jet hypotheses.
+6. Gate–2 theorem explicitly assumes safe primitive applicability on produced intervals.
+7. Add the intermediate inequality in source-large interval extraction:
+   \[
+   \tau^2\int_J(g^2+h^2)
+   \le
+   \int_J |u|^2(g^2+h^2)
+   \le
+   \int_I |u|^2(g^2+h^2).
+   \]
+8. Clarify proof-level \(P_2\) convention vs. \(k_q=3\) stress-test convention.
+9. Numerical evidence cannot be cited as theorem input.
+10. Ordinary zero-separated transfer should include local zero-count estimate.
+11. D4 same-scale anisotropy-linear terms must be absorbed into \(L_{\rm eff}\), not treated as residual.
+12. D4 table should say structural rank through order 9; finite quotient/projection residual audit remains.
+13. Local downstream closure theorem should output:
+    \[
+    \int_I\|\mathcal A_N(m)\|_{\mathcal Q_{\rm row}}^2\,dm\ge Q^{-C}|I|,
+    \]
+    not silently raw coordinate energy.
+
+---
+
+## 12. Highest-value next mathematical tasks
+
+### Task A — Prove O1
+
+Most concrete route:
+
+\[
+Z_\alpha(m_0)=0
+\Longrightarrow
+\sum_r|B_r(m_0,\alpha)|^2\ge Q^{-A}.
+\]
+
+Break into:
+
+1. same-branch cell mass;
+2. folded main/dual nonalignment;
+3. tilted regime branch dominance;
+4. symmetric regime nonalignment.
+
+### Task B — Prove O2
+
+Target:
+
+\[
+Z_\alpha(m_0)=0
+\Longrightarrow
+\|\mathbf M(m_0,\alpha)\|\ge Q^{-A}.
+\]
+
+Do not rely only on exterior coefficient mass or averaged large sieve.
+
+### Task C — Prove O3
+
+Target:
+
+\[
+|\langle\mathbf z',\mathbf M\rangle|
+\ge Q^{-A}\|\mathbf z'\|\|\mathbf M\|.
+\]
+
+This is likely the hardest ordinary input. It is actual prime-log incidence.
+
+### Task D — Singular S1/T1
+
+Prove singular explicit-formula anti-design exclusion:
+
+\[
+|\mathbf P_R-\mathbf G_R-\mathbf T_R|_2\ge Q^{-A},
+\]
+
+and transition control for:
+
+\[
+(\log Q)^{-C}\lesssim\lambda Q\lesssim1.
+\]
+
+### Task E — D4 finite audit
+
+Compute/prove:
+
+\[
+\operatorname{gr}(H)=-\frac1{288}q_0u^3,
+\]
+
+\[
+[\mathcal A_7]\sim H\Gamma_G[\mathsf C_7],
+\]
+
+\[
+[\mathcal A_9]\sim H\Gamma_{G,2}[\mathsf C_{Y12}],
+\]
+
+quotient Gram/coercivity, and half-leading residual control.
+
+---
+
+## 13. What the next agent should not do
+
+Do not:
+
+1. claim RH is proved;
+2. claim Gate 1 follows from numerical evidence;
+3. claim O1/O2 imply O3;
+4. claim determinant nonzero implies Wronskian lower bound;
+5. use \(P_2\)-only or zero-proxy tests as proof-level \(q''_{\can}\);
+6. treat scalar \(I\)-coordinate D4 as active unless carrier quotient is rejected;
+7. reopen D1/D2/Remez as active;
+8. use \(R=O(\log Q)\) without addressing factorial losses;
+9. conflate \(q''_{\source,R}\) with \(q''_{\can}\);
+10. treat optional primitive recovery as part of the main Gate–2 proof.
+
+---
+
+## 14. One-paragraph handoff
+
+The manuscript is now a conditional RH obstruction framework. The downstream branch is coherent: Gate 1 plus source Lipschitz and safe \(L^2\)-input real rigidity gives Gate 2; Gate 2 plus gauge-locked wall escape, carrier-quotient D4, and row mobility gives row energy. The real open work is upstream: ordinary Gate 1 requires O1 fixed-width cell nonrecurrence, O2 cofactor-vector nonrecurrence, and O3 Wronskian angle nonalignment; singular/transition require S1/T1. D4 is structurally viable through carrier quotient order 9 but still requires a finite residual/projection audit. Numerical evidence supports the route but proves nothing. The next agent should focus on O1/O2/O3 or on the finite D4 residual audit, not on old local algebra or scalar \(I\)-coordinate D4.
