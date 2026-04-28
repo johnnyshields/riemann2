@@ -35034,6 +35034,280 @@ can still transform by a \(GL_2\)-matrix.  Hence the rank-two bundle is the
 right level at which to formulate covariance.
 \end{remark}
 
+\begin{definition}[Row-normal form for the \(2Y\) live fiber]
+\label{def:rank-two-row-normal-form-2Y}
+Let \(\ell_7\) be the covariant order-seven live row and let \(\omega_Y\) be a
+primitive \(Y12\)-row with \(\omega_Y(e_Y)=1\).  Set
+\[
+  \kappa:=\omega_Y(e_7),
+  \qquad
+  \ell_9^Y:=\omega_Y-\kappa\ell_7,
+  \qquad
+  \beta_9^{\mathrm{tri}}:=\beta_9-\kappa c_7 .
+\]
+The \(2Y\)-fiber is in row-normal form if
+\[
+  (\ell_7,\ell_9^Y)(e_7)=(1,0),
+  \qquad
+  (\ell_7,\ell_9^Y)(e_Y)=(0,1).
+\]
+All branch classifications below are made in this triangularized row basis.
+\end{definition}
+
+\begin{remark}[Triangularized rank-one fallback ratio]
+\label{rem:rank-two-triangular-rank-one-ratio}
+If the live obstruction collapses to a graph line
+\[
+  B_Y=\mathbf C(1,\rho_Y)
+\]
+in the triangularized basis, then the graph-killing row gives the scalar
+rank-one wall
+\[
+  H\left((\beta_9^{\mathrm{tri}}-\rho_Yc_7)\Gamma_G+\alpha_9\Gamma_{G,2}\right).
+\]
+Hence the corrected rank-one ratio is
+\[
+  \rho_\Gamma^{\mathrm{tri}}
+  :=
+  \frac{\beta_9^{\mathrm{tri}}-\rho_Yc_7}{\alpha_9}.
+\]
+The older formula using raw \(\beta_9\) is valid only when \(\kappa=0\).
+\end{remark}
+
+\begin{theorem}[Rank-two closure spine]
+\label{thm:rank-two-closure-spine}
+Assume
+\[
+  \mathrm{TwoRowExactSequence}_{2Y},
+  \qquad
+  \mathrm{RowNormalForm}_{2Y},
+  \qquad
+  \mathrm{NuisancePreservesRows}_{2Y}.
+\]
+Then
+\[
+  B_Y=0.
+\]
+If moreover \(c_7\alpha_9\ne0\), then the D4 matrix in row-normal coordinates is
+\[
+  M_{\mathrm{D4}}^{\mathrm{tri}}
+  =
+  \begin{pmatrix}
+    c_7&0\\
+    \beta_9^{\mathrm{tri}}&\alpha_9
+  \end{pmatrix},
+\]
+and D4 supplies the plain wall
+\[
+  F_{2Y}^{\mathrm{tri}}
+  =
+  H
+  \begin{pmatrix}
+    c_7\Gamma_G\\
+    \beta_9^{\mathrm{tri}}\Gamma_G+\alpha_9\Gamma_{G,2}
+  \end{pmatrix}.
+\]
+On coefficient-good cores this is polynomially equivalent to
+\[
+  H(\Gamma_G,\Gamma_{G,2}).
+\]
+No derivative wall components \(D\Gamma_G\) or \(D^2\Gamma_G\) are supplied by
+this rank-two D4 statement.
+\end{theorem}
+
+\begin{definition}[Covariant septic row]
+\label{def:rank-two-covariant-septic-row}
+Let
+\[
+  A_5^{\mathfrak f}(m)=u_5I+v_5S,
+  \qquad
+  L_5(m):=\mathbf C A_5^{\mathfrak f}(m)\subset \mathfrak f_m .
+\]
+Define
+\[
+  \Delta_7^\nabla(u)
+  :=
+  \omega_m\!\left(Q_7^{\mathrm{pkg},\nabla}u,A_5^{\mathfrak f}(m)\right),
+\]
+as a covector on the moving quotient
+\[
+  \mathfrak f_m/L_5(m).
+\]
+Thus
+\[
+  \Delta_7^\nabla(u)=0
+  \quad\Longleftrightarrow\quad
+  Q_7^{\mathrm{pkg},\nabla}u\in \mathbf C A_5^{\mathfrak f}(m).
+\]
+The normalized septic row is
+\[
+  \ell_7(u):=\frac{\Delta_7^\nabla(u)}{\Delta_7^\nabla(C_7)}.
+\]
+Raw determinant drift in \(u_7v_5-u_5v_7\) is not a live \(s_7\)-motion unless
+it survives this covariant quotient.
+\end{definition}
+
+\begin{definition}[Typed septic denominator]
+\label{def:rank-two-typed-septic-denominator}
+Define
+\[
+\begin{aligned}
+  \mathcal D_7^{\mathrm{typed}}
+  :=
+  &\ \mathbf C A_5^{\mathfrak f}
+  +\mathcal D_{7,\mathrm{EF}}
+  +\mathcal D_{7,\mathrm{chart}}
+  +\mathcal D_{7,\mathrm{norm}}
+  +\mathcal D_{7,\gamma/\bg}        \\
+  &\quad
+  +\mathcal D_{7,\tail/\mathrm{res}}
+  +\mathcal D_{7,\mathrm{wrong}}
+  +\mathcal N_{7,\mathrm{exact}}.
+\end{aligned}
+\]
+Here \(\mathcal N_{7,\mathrm{exact}}\) consists only of exact nuisance directions that
+have already passed the row-deadness and live-pair preservation tests.
+\end{definition}
+
+\begin{theorem}[Septic exact sequence audit]
+\label{thm:rank-two-septic-exact-sequence}
+Let
+\[
+  \mathcal A_7^{\loc}
+  :=
+  \mathcal I_{\can}^{(2)}
+  +T_{\mathrm{lower}}^{\mathrm{arith}}
+  +T_{E_2/R_{\mathrm{lab}},\loc}^{s_7}
+  +\mathcal N_{7,\mathrm{exact}}.
+\]
+Assume
+\[
+  \Delta_7^\nabla(\mathcal A_7^{\loc})=0,
+  \tag{SE1}
+\]
+and
+\[
+  |\Delta_7^\nabla(C_7)|\ge Q^{-A}.
+  \tag{SE2}
+\]
+Equivalently,
+\[
+  \operatorname{rank}[\mathcal D_7^{\mathrm{typed}},\mathcal A_7^{\loc}]
+  =
+  \operatorname{rank}\mathcal D_7^{\mathrm{typed}},
+\]
+while
+\[
+  \operatorname{dist}(C_7,\mathcal D_7^{\mathrm{typed}})\ge Q^{-A}\|C_7\|.
+\]
+Then
+\[
+  \ell_7(\mathcal A_7^{\loc})=0,
+  \qquad
+  \ell_7(C_7)=1.
+\]
+\end{theorem}
+
+\begin{remark}[Actual lower kernel audit]
+\label{rem:rank-two-actual-lower-kernel-audit}
+The actual-lower part of \((\mathrm{SE1})\) is the finite kernel condition
+\[
+  \Delta_7^\nabla Q_7^{\mathrm{pkg},\nabla}D\mathcal S_{\mathrm{lower}}=0.
+\]
+Equivalently, the actual lower parameter space has no corrected septic
+package-coordinate summand:
+\[
+  \Theta_{\mathrm{pkg},7}=0.
+\]
+Formal \(C_7\)-carriers and formal \(C_7\to Y12\) connections do not enter
+\(B_Y\) unless actualized by a genuine actual-source, exact nuisance, or local
+fitting tangent.
+\end{remark}
+
+\begin{definition}[Exact/coherent/residual nuisance split]
+\label{def:rank-two-nuisance-split}
+Split the declared singular nuisance space as
+\[
+  \mathcal N_{\mathrm{sing}}
+  =
+  \mathcal N_{\mathrm{exact}}
+  +
+  \mathcal N_{\mathrm{coh}}
+  +
+  \mathcal N_{\mathrm{res}}.
+\]
+Only \(\mathcal N_{\mathrm{exact}}\) enters the exact local denominator.  The coherent
+part is routed to \(\mathcal C_{2Y}^{\mathrm{arith}}\), and the residual part is routed
+to \(R_X^{2Y}\).  Thus
+\[
+  D_{2Y}:=D_{2Y}^{0}+\mathcal N_{\mathrm{exact}},
+\]
+not \(D_{2Y}^{0}+\mathcal N_{\mathrm{sing}}\).
+\end{definition}
+
+\begin{lemma}[Nuisance preservation of the live rows]
+\label{lem:rank-two-nuisance-preserves-rows}
+Assume
+\[
+  \Delta_7^\nabla(\mathcal N_{\mathrm{exact}})=0,
+  \qquad
+  \omega_Y(P_W\mathcal N_{\mathrm{exact}})=0.
+\]
+Assume also the live-pair Schur condition
+\[
+  \lambda_{\min}
+  \left(
+  [e_7,e_Y]^*
+  (I-P_{D_{2Y}^{0}+\mathcal N_{\mathrm{exact}}})
+  [e_7,e_Y]
+  \right)
+  \ge Q^{-A}.
+\]
+Then
+\[
+  (\ell_7,\ell_9^Y)(\mathcal N_{\mathrm{exact}})=0,
+\]
+and the live pair remains two-dimensional and polynomially conditioned modulo
+\(D_{2Y}^{0}+\mathcal N_{\mathrm{exact}}\).
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+The first row-deadness condition gives \(\ell_7(\mathcal N_{\mathrm{exact}})=0\).
+The second gives \(\omega_Y(P_W\mathcal N_{\mathrm{exact}})=0\).  Since
+\[
+  \ell_9^Y=\omega_Y-\kappa\ell_7,
+\]
+we get \(\ell_9^Y(\mathcal N_{\mathrm{exact}})=0\).  The Schur condition rules out
+\[
+  e_7\in D_{2Y}^{0}+\mathcal N_{\mathrm{exact}},
+  \qquad
+  e_Y\in D_{2Y}^{0}+\mathcal N_{\mathrm{exact}},
+\]
+and
+\[
+  e_Y-\lambda e_7\in D_{2Y}^{0}+\mathcal N_{\mathrm{exact}}.
+\]
+Thus exact nuisance is both row-dead and live-pair preserving.
+\end{proof}
+
+\begin{corollary}[Nuisance-safe contribution to \(B_Y=0\)]
+\label{cor:rank-two-nuisance-safe-by-rows}
+If the actual-source rows and local completion/transition rows also satisfy
+\[
+  \ell_7(T\mathcal M_Y^{\mathrm{arith}})=0,
+  \qquad
+  \ell_9^Y(T\mathcal M_Y^{\mathrm{arith}})=0,
+\]
+and
+\[
+  D_{\loc}(\ell_7,\ell_9^Y)(E_2+R_{\mathrm{lab}})=0,
+\]
+then
+\[
+  B_Y=0.
+\]
+\end{corollary}
+
 \subsection{Order-seven packet visibility on the reduced base}
 \label{subsec:order-seven-packet-visibility-reduced-base}
 
@@ -36822,20 +37096,21 @@ on \(\Gamma_{G,2}\).  Thus D4 closes with \(A_7,A_9\) if \(A_7\) detects
 \(\Gamma_G\) and \(\widetilde A_9\) detects a genuinely new
 \(\Gamma_{G,2}\)-direction, with half-leading residual control.
 
-In the clean carrier normalization of
-Lemma~\ref{lem:clean-triangular-d4-carrier-matrix},
+In row-normal coordinates the effective clean D4 matrix is
 \[
-L_{\rm clean}
+L_{\rm clean}^{\mathrm{tri}}
 =
 \begin{pmatrix}
 c_7&0\\
-\beta_9&\alpha_9
+\beta_9^{\mathrm{tri}}&\alpha_9
 \end{pmatrix},
+\qquad
+\beta_9^{\mathrm{tri}}:=\beta_9-\omega_Y(e_7)c_7.
 \]
-where \(\beta_9\Gamma_G\) is a same-scale anisotropy-linear contribution and
-therefore belongs to \(L_{\rm eff}\), not to the residual.  The determinant is
+The same-scale term \(\beta_9^{\mathrm{tri}}\Gamma_G\) belongs to the effective
+leading matrix, not to the residual.  Thus the determinant condition is
 \[
-\det L_{\rm clean}
+\det L_{\rm clean}^{\mathrm{tri}}
 =
 c_7\alpha_9
 =
@@ -36844,9 +37119,14 @@ c_7\alpha_9
 g_{\rm Gr}^{3/2}h_{\rm Gr}^{3}
 (\sqrt{g_{\rm Gr}}+\sqrt{h_{\rm Gr}})^3},
 \]
-which is polynomially bounded below on Gram-good patches.  Hence the clean
-D4 carrier matrix is triangularly invertible before correction-row residuals
-are added.
+and the clean D4 carrier matrix is triangularly invertible on every
+coefficient-good patch where \(c_7\) and \(\alpha_9\) are polynomially bounded
+above and below.  Consequently the D4 wall produced by this row is the plain
+two-component wall
+\[
+H(\Gamma_G,\Gamma_{G,2}),
+\]
+not a derivative wall involving \(D\Gamma_G\) or \(D^2\Gamma_G\).
 \end{remark}
 
 \begin{remark}[Nonzero D4 root traps are harmless under energetic sampling]
@@ -37796,6 +38076,142 @@ This is the proof-relevant row-energy object whenever the downstream
 contradiction is stated before scalar \(I\)-coordinate collapse.
 \end{remark}
 
+\begin{lemma}[Source-curvature completion for the rank-two plain wall]
+\label{lem:rank-two-source-curvature-completion}
+Let \(I\Subset I^*\) be a chart-good interval with \(R^{-C}\)-scale buffer, and set
+\[
+  p:=q''.
+\]
+Assume there is a finite source space \(\mathcal P_I\) and \(p_X\in\mathcal P_I\)
+such that
+\[
+  \|p-p_X\|_{H^2_{\mathrm{sc}}(I^*)}\le Q^{-B_0}.
+\]
+Let
+\[
+  \mathcal V_I:=\mathcal A_1+\mathcal I^2\mathcal P_I,
+  \qquad
+  \mathcal A_1:=\operatorname{span}\{1,t\},
+\]
+and choose \(q_X\in\mathcal V_I\) with \(q_X''=p_X\), with affine modes included
+or normalized.  Define
+\[
+  \mathcal W_G
+  :=
+  \mathcal P_I+\mathcal V_I+\operatorname{Sym}^3\mathcal V_I,
+\]
+and
+\[
+  \mathcal W_{G2}
+  :=
+  D^2\mathcal P_I+\mathcal P_I+
+  \operatorname{Sym}^2\mathcal V_I\cdot\mathcal P_I.
+\]
+If
+\[
+  \|q_X\|_{C^4_{\mathrm{sc}}(I^*)}\le Q^{C_0},
+\]
+then
+\[
+  G_X:=\Gamma_G(q_X)\in\mathcal W_G,
+  \qquad
+  G_{2,X}:=\Gamma_{G,2}(q_X)\in\mathcal W_{G2},
+\]
+and, after increasing \(B_0\),
+\[
+  \|\Gamma_G(q)-G_X\|_{H^2_{\mathrm{sc}}(I)}
+  +
+  \|\Gamma_{G,2}(q)-G_{2,X}\|_{L^2(I)}
+  \le Q^{-B}.
+\]
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+Use
+\[
+  \Gamma_G(q)=-6q''+36q-12q^3=-6p+36q-12q^3,
+\]
+and
+\[
+  \Gamma_{G,2}(q)=q^{(4)}-6(1-q^2)q''=p''-6p+6q^2p.
+\]
+Since \(q_X''=p_X\), the claimed finite-space inclusions are immediate.
+
+Set \(r=q-q_X\).  Then \(r''=p-p_X\), and affine reconstruction gives
+\[
+  \|r\|_{H^4_{\mathrm{sc}}(I)}
+  \le Q^C\|p-p_X\|_{H^2_{\mathrm{sc}}(I^*)}.
+\]
+The residuals are
+\[
+  R_G=-6r''+(36-36q_X^2)r-36q_Xr^2-12r^3,
+\]
+and
+\[
+\begin{aligned}
+  R_{G2}
+  &=
+  r^{(4)}-6r''
+  +6q_X^2r''
+  +12q_Xr q_X''
+  +12q_Xr r''
+  +6r^2q_X''
+  +6r^2r'' .
+\end{aligned}
+\]
+One-dimensional product estimates yield the stated
+\(H^2_{\mathrm{sc}}\times L^2\) residual bound.
+\end{proof}
+
+\begin{theorem}[FiniteAtlasRiesz in \(p=q''\) form]
+\label{thm:finite-atlas-riesz-2Y-p}
+Assume on each chart-good \(I\Subset I^*\):
+\begin{enumerate}
+\item \(\dim\mathcal P_I\le R^C\) and \(\mathcal P_I\) has a \(Q^C\)-Riesz basis in \(L^2(I^*)\).
+\item
+\[
+  \|D^2p_X\|_{L^2(I)}\le Q^C\|p_X\|_{L^2(I^*)},
+  \qquad p_X\in\mathcal P_I.
+\]
+\item Affine reconstruction into \(\mathcal V_I=\mathcal A_1+\mathcal I^2\mathcal P_I\)
+is polynomially controlled.
+\item \(\operatorname{Sym}^3\mathcal V_I\) and
+\(\operatorname{Sym}^2\mathcal V_I\cdot\mathcal P_I\) have \(Q^C\)-conditioned
+quotient bases and bounded leverage.
+\item All relevant chart denominators are \(Q^{-C}\)-bounded below on \(I^*\).
+\item For every predetermined \(E\subset I\) with \(|E|\ge R^{-C}|I|\), Remez
+holds for
+\[
+  \mathcal W_G
+  =
+  \mathcal P_I+\mathcal V_I+\operatorname{Sym}^3\mathcal V_I
+\]
+and
+\[
+  \mathcal W_{G2}
+  =
+  D^2\mathcal P_I+\mathcal P_I+
+  \operatorname{Sym}^2\mathcal V_I\cdot\mathcal P_I.
+\]
+\end{enumerate}
+Then
+\[
+  \|w\|_{H^2_{\mathrm{sc}}(I)}
+  \le Q^C\|w\|_{L^2(I^*)},
+  \qquad w\in\mathcal W_G.
+\]
+Moreover, after Lemma~\ref{lem:rank-two-source-curvature-completion},
+\[
+  |E|\ge R^{-C}|I|
+  \quad\Longrightarrow\quad
+  \int_E W_2\ge Q^{-C}\int_I W_2-Q^{-B},
+\]
+where
+\[
+  W_2:=|\Gamma_G|^2+|\Gamma_{G,2}|^2.
+\]
+\end{theorem}
+
 \begin{proposition}[Source-divisibility of the established fixed-sector tower]
 \label{prop:source-divisibility-established-fixed-sector-tower}
 The established fixed-sector escape tower generated by the channels
@@ -37974,6 +38390,120 @@ input such as
 \]
 or a stronger source-jet / interval nonflatness theorem for actual zeta data.
 \end{remark}
+
+\begin{definition}[D4 coefficient-good core]
+\label{def:d4-coeff-core-2Y}
+For each routed block \(I\), choose before wall extraction a core
+\[
+  E_I^{\core}\subset I
+\]
+depending only on
+\[
+  H,\ c_7,\ \alpha_9,\ \beta_9^{\mathrm{tri}},\ N_{\sm},
+  \quad\text{and chart data,}
+\]
+not on
+\[
+  \Gamma_G,\ \Gamma_{G,2},\ W_2,\ \text{hard atoms, or live residuals}.
+\]
+The core is admissible if
+\[
+  |E_I^{\core}|\ge R^{-C}|I|,
+\]
+and on \(E_I^{\core}\),
+\[
+  |H|\ge Q^{-A},
+\]
+\[
+  |c_7|,\ |c_7^{-1}|,\ |\alpha_9|,\ |\alpha_9^{-1}|,\ |\beta_9^{\mathrm{tri}}|
+  \le Q^A,
+\]
+and
+\[
+  N_{\sm}\ge Q^{-A}.
+\]
+\end{definition}
+
+\begin{lemma}[Core weighted plain-wall transfer]
+\label{lem:core-weighted-plain-wall-transfer-2Y}
+Assume admissible cores and vector Remez:
+\[
+  |E|\ge R^{-C}|I|
+  \quad\Longrightarrow\quad
+  \int_E W_2\,d\nu\ge Q^{-C}\int_IW_2\,d\nu.
+\]
+Then
+\[
+  \int_I N_{\sm}|H|^2W_2\,d\nu
+  \ge Q^{-A'}\int_IW_2\,d\nu.
+\]
+\end{lemma}
+
+\begin{lemma}[Scalar component selection]
+\label{lem:rank-two-scalar-component-selection}
+If
+\[
+  \int N_{\sm}|H|^2\left(|\Gamma_G|^2+|\Gamma_{G,2}|^2\right)d\nu\ge Q^{-A},
+\]
+then there exists a fixed component
+\[
+  G_\star\in\{\Gamma_G,\Gamma_{G,2}\}
+\]
+chosen at the smooth aggregate stage such that
+\[
+  \int N_{\sm}|H|^2|G_\star|^2\,d\nu\ge Q^{-A'}.
+\]
+\end{lemma}
+
+\begin{definition}[Rank-two wall degree]
+\label{def:rank-two-wall-degree}
+For
+\[
+  G_\star\in\{\Gamma_G,\Gamma_{G,2}\},
+\]
+define
+\[
+  d_0(G_\star):=d_N+2d_H+2d_{G_\star}.
+\]
+Set
+\[
+  d_{\max}^{(2)}
+  :=
+  d_N+2d_H+2\max(d_{\Gamma_G},d_{\Gamma_{G,2}}).
+\]
+Conservatively,
+\[
+  d_{\Gamma_G},d_{\Gamma_{G,2}}\le 3d_q,
+\]
+so
+\[
+  d_{\max}^{(2)}\le d_N+2d_H+6d_q.
+\]
+If \(H\) is smooth-renormalizable and carries no branch charge, set \(d_H=0\).
+\end{definition}
+
+\begin{theorem}[Scalar O2/O3 interface for rank two]
+\label{thm:rank-two-scalar-o2o3-interface}
+Assume weighted rank-two plain wall mass has been transferred, and assume
+\[
+  \mathbb C_{d_{\max}^{(2)}}[y]\subset V_{\mathrm{tr}}.
+\]
+Assume the scalar O2/O3 near-pure separation holds uniformly for every fixed
+\(d\le d_{\max}^{(2)}\):
+\[
+  \operatorname{dist}_{L^2(\mu_{\mathrm{sub}})}
+  \left(
+  1,
+  \operatorname{span}\{R_{\mathrm{fold}},R_{\mathrm{fold}}^2,\ldots,R_{\mathrm{fold}}^{d}\}
+  \right)^2
+  \ge Q^{-A(d_{\max}^{(2)})}.
+\]
+Then the selected scalar wall
+\[
+  W_\star=N_{\sm}|H|^2|G_\star|^2
+\]
+is a valid bounded-charge O2/O3 input.
+\end{theorem}
 
 \begin{remark}[Interval-local source collapse]
 \label{rem:interval-local-source-collapse}
