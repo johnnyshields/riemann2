@@ -30326,6 +30326,50 @@ The source-robust wall-row search and the scalar \(I\)-coordinate order-nine
 incidence wall remain fallback formulations only if the row-output architecture
 is forced to be exact-point or scalar-collapsed.
 
+\section{Unified finite-survival architecture}
+\label{sec:unified-finite-survival-architecture}
+
+\begin{theorem}[Unified finite-survival theorem]
+\label{thm:unified-finite-survival}
+The proof is organized around four finite-survival statements:
+\begin{enumerate}
+\item \textbf{Source survival:} \(\mathrm{Agg}L^2(q''_{\can})\) on a polynomial-weight good packet set.
+\item \textbf{Graph survival:} \(\mathrm{Graph/O2O3}_{23}\) after \(R^C\)-normalization and full determinant survival.
+\item \textbf{Quotient survival:} the primitive \(Y12\) carrier survives in the same quotient that removes actual-source nuisances.
+\item \textbf{Atomic contradiction:} the singular-discard observable is Type-I local-square and is bounded above on the same quotient norm.
+\end{enumerate}
+If all four hold, the same observable is simultaneously bounded below and above by incompatible polynomial scales, giving the downstream contradiction.
+\end{theorem}
+
+\begin{equation}\label{eq:proof-architecture-diagram}
+\begin{array}{c}
+\boxed{\mathrm{Agg}L^2(q''_{\can})}
+\\[3pt]
+\Downarrow \quad \text{(packet-core micro-covering + EF completion)}
+\\[3pt]
+\boxed{\mathrm{Graph/O2O3}_{23}}
+\\[3pt]
+\Downarrow \quad \text{(\(R^C\)-normalized Riesz basis + thickened Schur survival)}
+\\[3pt]
+\boxed{Y12\text{-quotient survival}}
+\\[3pt]
+\Downarrow \quad \text{(retained-space sandwich + labelled transition)}
+\\[3pt]
+\boxed{\mathrm{AtomicY12Contradiction}}
+\end{array}
+\end{equation}
+
+\begin{proposition}[Proof sketch / structure]
+\label{prop:unified-proof-sketch}
+The proof proceeds in four finite-survival layers:
+\begin{enumerate}
+\item establish aggregate source observability for \(q''_{\can}=B_2+P_2+D_2+E_2\) on a good packet set;
+\item establish finite graph nondegeneracy in the \(R^C\)-normalized O2/O3 block and promote it to full determinant survival;
+\item pass to the actual-source quotient and verify that the primitive \(Y12\) carrier survives after removing nuisance directions;
+\item compare the same quotient observable against the Type-I singular-discard upper and conclude contradiction when the lower and upper scales are separated.
+\end{enumerate}
+\end{proposition}
+
 \subsection{\texorpdfstring{\(L^2\)}{L2}-input real rigidity}
 
 \begin{definition}[Ordinary zero-separated source packet]
@@ -35210,58 +35254,6 @@ No derivative wall components \(D\Gamma_G\) or \(D^2\Gamma_G\) are supplied by
 this rank-two D4 statement.
 \end{theorem}
 
-\begin{theorem}[Unified finite-survival theorem]
-\label{thm:unified-finite-survival}
-On the good packet set, the proof reduces to four finite survival statements:
-\begin{enumerate}
-\item \textbf{Source survival:} the normalized packet Gram matrix
-\[
-M=G_{\mathrm{ref}}^{-1/2}G_{\mathrm{branch}}G_{\mathrm{ref}}^{-1/2}
-\]
-is strictly diagonally dominant up to the residual perturbation.
-
-\item \textbf{Graph/O2O3 survival:} after Fej\'er--Riesz thickening, the normalized overlap matrix
-\[
-K=G_{00}^{-1/2}G_{0S}G_{SS}^{-1/2}
-\]
-satisfies \(\|K\|_{\operatorname{op}}<1-Q^{-A}\).
-
-\item \textbf{Y12 quotient survival:} the projected operator
-\[
-\mathfrak T_p=(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}
-\]
-is coercive on the admissible residual class, and the primitive \(Y12\) carrier survives the quotient \(\mathcal K_p^Y\).
-
-\item \textbf{Extraction survival:} on each frozen cap,
-\[
-\det(B_j)\ge Q^{-A}(\operatorname{tr}B_j)^2
-\]
-or else the wall is static and is handed to the Y12 quotient module.
-\end{enumerate}
-\end{theorem}
-
-\begin{equation}\label{eq:proof-architecture-diagram}
-\begin{array}{c}
-\boxed{\mathrm{Agg}L^2(q''_{\can})}
-\\[3pt]
-\Downarrow \quad \text{(packet correlation / EF completion)}
-\\[3pt]
-\boxed{\mathrm{Graph/O2O3}_{23}}
-\\[3pt]
-\Downarrow \quad \text{(thickened Schur / overlap control)}
-\\[3pt]
-\boxed{Y12\text{-quotient survival}}
-\\[3pt]
-\Downarrow \quad \text{(retained-space / Schur residual)}
-\\[3pt]
-\boxed{\mathrm{AtomicY12Contradiction}}
-\end{array}
-\end{equation}
-
-\begin{proof}[Proof sketch]
-The source layer is a finite packet-correlation matrix; the O2/O3 layer is a thickened overlap matrix; the Y12 layer is a projected quotient operator with a Schur residual; the extraction layer is a \(2\times2\) covariance test.  Each step is a finite positivity / survival statement under quotienting away nuisance directions.
-\end{proof}
-
 % === wip-rank-two-selector-bridge-Y12 ===
 % Purpose:
 %   Connect the row-normal \(2Y\) rank-two package to the paper's rank selector.
@@ -35388,14 +35380,10 @@ Thus the corrected triangularized fallback ratio is
 \[
   \rho_\Gamma^{\mathrm{tri}}
   =
-  \frac{\beta_9^{\mathrm{tri}}-\rho_Yc_7}{\alpha_9}
-  =
-  \frac{\beta_9-(\omega_Y(e_7)+\rho_Y)c_7}{\alpha_9}.
+  \frac{\beta_9^{\mathrm{tri}}-\rho_Yc_7}{\alpha_9}.
 \]
-The older formula using raw \(\beta_9\) is valid only when
-\[
-  \omega_Y(e_7)=0.
-\]
+The raw-\(\beta_9\) expression is historical only and is not used in live
+row-normal formulas.
 \end{remark}
 
 \begin{remark}[Do not conflate with the old rank-two norm route]
@@ -43226,23 +43214,22 @@ higher order, or fixed-\(\alpha\) O2/O3 route.
 
 \begin{center}
 \renewcommand{\arraystretch}{1.15}
-\begin{tabular}{p{0.28\linewidth} p{0.30\linewidth} p{0.32\linewidth}}
+\begin{tabular}{p{0.30\linewidth} p{0.30\linewidth} p{0.30\linewidth}}
 \hline
 Older framing & New framing & Status \\
 \hline
-Finite-row Gate--1 / O1a / O1b & \(\mathrm{Agg}L^2(q''_{\can})\) source survival & live, but only as scalar source observability \\
-O2 / O3 incidence and exterior-pivot blocks & \(\mathrm{Graph/O2O3}_{23}\) thickened Schur survival & live \\
-S1 / T1 transition/singular diagnostics & proof tools / anti-design inputs & historical tools, not live Gate--1 \\
-Scalar \(I\)-coordinate D4 / derivative-wall D4 & \(\Lambda_{\mathrm{tr},\mathrm{sing},p}=(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}P_{\mathrm{tr},p}\) & dead or quarantined unless separately proved \\
-Raw \(ad+bc\) row test & labelled \(Y12\) quotient survival via \(\gamma_Y\) & replaced \\
-Optimized \(\Xi_N\) route & no-go registry & dead \\
-One-parameter row mobility & no-go registry & dead \\
-Full \(K_9\) or bust & stale; reduced to \(Y12\)-signature quotient plus \(\mathrm{EFCompletion}_{Y12}\) & historical only \\
+Finite-row O1/O2/O3 Gate--1 & \(\mathrm{Agg}L^2(q''_{\can})\) source survival & historical tool only \\
+S1/T1 transition / singular diagnostics & proof tools for scalar source observability & not the live Gate--1 definition \\
+Scalar \(I\)-coordinate D4 & carrier quotient / row-normal plain wall & dead fallback \\
+Derivative-wall D4 & separate no-go / future derivative-channel theorem & not active \\
+Optimized \(\Xi_N\) route & rank-zero on the current finite D4 live plane & no-go \\
+One-parameter row mobility & not a forbidden identity & no-go \\
+Full \(K_9\)-or-bust route & stale & replaced by \(Y12\)-signature quotient \\
 \hline
 \end{tabular}
 \end{center}
 
-The current live chain is:
+The current live chain is
 \[
 \mathrm{Agg}L^2(q''_{\can})
 \;\Rightarrow\;
@@ -43290,7 +43277,7 @@ All live statements should be phrased in the current architecture:
 
 \begin{remark}[Unified live/dead dictionary]
 \label{rem:unified-live-dead-dictionary}
-Whenever the text says \(\mathrm{Gate\text{--}1}\), it means \(\mathrm{Agg}L^2(q''_{\can})\).  Whenever it says \(\Lambda\), it means the transition--singular discarded operator \((I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}P_{\mathrm{tr}}\) unless the local section explicitly defines a different quotient.  Whenever it says D4 contradiction, it means a Type-I local-square upper in the same quotient norm as the lower bound.  The old finite-row O1/O2/O3, scalar \(I\)-coordinate D4, derivative-wall D4, optimized \(\Xi_N\), and one-parameter row mobility are historical or no-go routes unless a separate theorem explicitly reactivates them.
+Whenever the text says \(\mathrm{Gate\text{--}1}\), it means \(\mathrm{Agg}L^2(q''_{\can})\).  Whenever it says \(\Lambda\), it means the transition--singular discarded operator \((I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}P_{\mathrm{tr}}\) unless a local section explicitly defines a different quotient.  D4 is only local visibility unless the forbidden channel has been established in the same quotient norm as the upper bound.
 \end{remark}
 
 \begin{lemma}[\(Y12\) quotient descent and primitive survival]
