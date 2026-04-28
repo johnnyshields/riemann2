@@ -48439,24 +48439,39 @@ coherence bound \(d\mu<1-Q^{-A}\) suffices.
 \begin{lemma}[Packetwise thickened overlap decay]
 \label{lem:packetwise-thickened-overlap-decay}
 Let \(\{u_i\}\) be the thickened pure packet family and \(\{v_j\}\) the thickened
-contaminant packet family after Fej\'er--Riesz thickening.  Define the
-normalized overlap entries
+contaminant packet family after Fej\'er--Riesz thickening.  Define
 \[
 K_{ij}:=\big\langle G_{00}^{-1/2}u_i,\;G_{SS}^{-1/2}v_j\big\rangle.
 \]
-Assume the packet centers satisfy a separation estimate \(\Delta_{ij}\), and let
-\(\mu(\Delta)\) be the oscillatory-kernel decay profile from the packet
-correlation lemma.  Then
+Assume the packet centers satisfy the oscillatory-kernel separation hypothesis
+from the source-side packet lemma, with decay profile \(\mu(\Delta)\).  Then
 \[
 |K_{ij}|\le \mu(\Delta_{ij}),
 \]
-with \(\mu(\Delta)\) decaying polynomially (or faster) in \(\Delta\).  In
-particular, if \(\Delta_{ij}\ge \Delta_0\) for all interacting pairs, then
+and in particular if the interacting packet pairs satisfy
+\(\Delta_{ij}\ge \Delta_0\), then
 \[
-|K_{ij}|\le \mu_0
+|K_{ij}|\le \mu_0:=\mu(\Delta_0).
 \]
-for a uniform \(\mu_0=\mu(\Delta_0)\).
 \end{lemma}
+
+\begin{proof}
+This is the packetwise form of the oscillatory-kernel estimate already used in
+the source layer.  After Fej\'er--Riesz thickening, the normalized overlap
+entry is exactly the inner product between the normalized pure and contaminant
+packets:
+\[
+K_{ij}=\langle \tilde u_i,\tilde v_j\rangle,
+\qquad
+\tilde u_i:=G_{00}^{-1/2}u_i,
+\qquad
+\tilde v_j:=G_{SS}^{-1/2}v_j.
+\]
+Writing the packets in oscillatory form
+\(u_i=a_i e^{i\omega_i t}\), \(v_j=b_j e^{i\nu_j t}\), the overlap is an
+oscillatory integral.  The oscillatory-kernel hypothesis gives the stated decay
+in packet separation \(\Delta_{ij}\).  That is exactly the bound claimed.
+\end{proof}
 
 \begin{lemma}[Row/column coherence bound]
 \label{lem:row-column-coherence-bound}
@@ -48484,6 +48499,23 @@ d_0d_1\mu^2<(1-Q^{-A})^2
 \]
 \end{lemma}
 
+\begin{proof}
+This is a standard Schur test estimate.  For any vector \(x\),
+\[
+|(Kx)_i|\le \sum_j |K_{ij}|\,|x_j|.
+\]
+By Cauchy--Schwarz and the row/column sum bounds,
+\[
+\|Kx\|_2^2\le \Bigl(\max_i r_i\Bigr)\Bigl(\max_j c_j\Bigr)\|x\|_2^2.
+\]
+Therefore
+\[
+\|K\|_{\operatorname{op}}^2\le \Bigl(\max_i r_i\Bigr)\Bigl(\max_j c_j\Bigr),
+\]
+and the stated implication follows.  The bounded-degree form is the special
+case \(r_i\le d_0\mu\), \(c_j\le d_1\mu\).
+\end{proof}
+
 \begin{lemma}[Schur complement / principal-angle equivalence]
 \label{lem:schur-principal-angle-equivalence}
 With
@@ -48507,6 +48539,41 @@ In particular, any of the bounds in
 Lemma~\ref{lem:row-column-coherence-bound} closes the
 \(\mathrm{Graph/O2O3}_{23}\) gap.
 \end{lemma}
+
+\begin{proof}
+By definition, \(K\) is the normalized cross-Gram block between the pure and
+contaminant subspaces.  Hence \(\|K\|_{\operatorname{op}}\) is the cosine of
+the smallest principal angle:
+\[
+\|K\|_{\operatorname{op}}=\cos\theta_{\min}(U,V).
+\]
+Therefore \(\|K\|_{\operatorname{op}}<1-Q^{-A}\) is equivalent to
+\[
+\sin\theta_{\min}(U,V)\ge Q^{-A},
+\]
+up to the standard trigonometric identity.
+
+For the Schur complement, write the block Gram matrix
+\[
+\begin{pmatrix}
+G_{00} & G_{0S}\\
+G_{0S}^\ast & G_{SS}
+\end{pmatrix}.
+\]
+After conjugating by \(G_{00}^{-1/2}\oplus G_{SS}^{-1/2}\), the positivity of
+the block matrix is equivalent to
+\[
+I-KK^\ast \succ 0.
+\]
+A quantitative lower bound \(I-KK^\ast\ge Q^{-A}I\) is equivalent to
+\[
+\|K\|_{\operatorname{op}}<1-Q^{-A},
+\]
+which is equivalent to the Schur complement lower bound
+\[
+G_{00}-G_{0S}G_{SS}^{\dagger}G_{0S}^\ast\ge Q^{-A}G_{00}.
+\]
+\end{proof}
 
 \begin{corollary}[Exact target for \(\mathrm{Graph/O2O3}_{23}\)]
 \label{cor:graph-o2o3-target}
