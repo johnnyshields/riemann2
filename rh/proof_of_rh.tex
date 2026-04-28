@@ -47450,6 +47450,14 @@ The packet cores form a polynomially thick sampling set at scale
 W_{\mathrm{branch}}\ge Q^{-C}W_{\mathrm{ref}}
 \quad\text{on the packet cores}.
 \]
+
+\noindent\emph{Status note.}  This is the least arithmetical and most
+geometric of the four source hypotheses.  It is intended to come from the
+packetization of the finite AFE main term: packet cores covering the good
+branch support at scale \(h\asymp \log Q/Q\) with bounded overlap and with
+\(W_{\mathrm{branch}}\) comparable to \(W_{\mathrm{ref}}\) on the cores.  The
+draft uses this directly to obtain diagonal lower mass in the source frame
+estimate, but the covering theorem itself is not proved here.
 \end{hypothesis}
 
 \begin{hypothesis}[Packet amplitude / oscillatory-kernel decay budget]
@@ -47459,6 +47467,18 @@ off-diagonal packet kernels obey polynomial oscillatory decay (as in
 Theorem~\ref{thm:packet-construction-regularity} and
 Lemma~\ref{lem:packet-oscillatory-kernel-decay}), and the resonant clusters
 are finite-dimensional.
+
+\noindent\emph{Status note.}  This is the most directly derivable of the four
+source hypotheses.  Once the packet atoms are written as smooth windows
+times phases
+\[
+\psi_p(t)=a_p(t)e^{i\omega_p t},
+\]
+with scale-controlled amplitudes \(a_p\), the derivative bounds needed for
+oscillatory-kernel decay reduce to a chain-rule and scaling computation.  The
+source proof uses exactly this kind of bound to obtain off-diagonal decay,
+so this hypothesis is the most ``mechanical'' of the four to upgrade to a
+theorem from packet construction regularity.
 \end{hypothesis}
 
 \begin{hypothesis}[EF completion bound on \(q''_{\can}\)]
@@ -47476,6 +47496,13 @@ satisfies
 for some absolute \(B>0\) and all sufficiently large cutoffs \(X\).  This is
 the load-bearing analytic estimate on the actual canonical source
 \(q''_{\can}=B_2+P_2+D_2+E_2\); it is not derived in the present draft.
+
+\noindent\emph{Status note.}  This is the genuinely load-bearing open input
+of the source layer.  The conditional source lemma and its corollary state
+the conclusion conditional on this hypothesis, and identify it as the open
+analytic obligation on \(q''_{\can}\).  The estimate is not currently proved
+in the paper; it is the tail bound that must come from the zeta-side
+approximate functional equation / explicit-formula machinery.
 \end{hypothesis}
 
 \begin{hypothesis}[Reference mean-square non-collapse]
@@ -47486,6 +47513,12 @@ The reference mean-square does not collapse, so the canonical finite source
 \|F_X\|_{L^2(W_{\mathrm{ref}})}\ge Q^{-A_0}
 \]
 for some absolute \(A_0>0\) and all sufficiently large \(X\).
+
+\noindent\emph{Status note.}  This is a lower-bound / nonflatness statement
+for the finite AFE source.  It is plausible from zeta-side main-term
+positivity of \(F_X=B_2+P_{2,\le X}+D_{2,\le X}\), but it is not yet proved
+in the draft.  The source proof uses it to ensure the normalization is
+nondegenerate; without it the frame argument can collapse.
 \end{hypothesis}
 
 \begin{lemma}[Conditional source frame coercivity for Gate--1]
