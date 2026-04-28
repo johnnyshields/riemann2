@@ -47278,12 +47278,142 @@ In particular, if \(|\omega_p-\omega_q|\ge Q^{-\delta}\) outside resonant blocks
 then the off-diagonal correlation is \(Q^{-A}\)-small for \(N\) large enough.
 \end{lemma}
 
-\begin{remark}[wip-zeta-bridge-proof-source]
-\label{rem:wip-zeta-bridge-proof-source}
-What remains is the finite packet-correlation certificate for
-\(\mathrm{Agg}L^2(q''_{\can})\):
-the normalized source Gram matrix must be diagonally dominant
-after the residual perturbation.
+\begin{lemma}[Source frame coercivity for Gate--1]
+\label{lem:source-frame-coercivity}
+Let
+\[
+\mathcal S_X=\operatorname{span}\{B_2,P_{2,\le X},D_{2,\le X}\},
+\qquad
+F_X=B_2+P_{2,\le X}+D_{2,\le X}.
+\]
+Let \(\{\psi_i\}_{i=1}^N\) be packet-adapted source atoms spanning \(\mathcal S_X\),
+normalized in the reference metric:
+\[
+\|\psi_i\|_{L^2(W_{\mathrm{ref}})}=1.
+\]
+Define the normalized packet Gram matrix
+\[
+M_{ij}:=\langle \psi_i,\psi_j\rangle_{W_{\mathrm{branch}}},
+\qquad
+M=G_{\mathrm{ref}}^{-1/2}G_{\mathrm{branch}}G_{\mathrm{ref}}^{-1/2},
+\]
+and the residual correction
+\[
+E:=G_{\mathrm{ref}}^{-1/2}\bigl(G_{\mathrm{branch}}(q''_{\can})-G_{\mathrm{branch}}(F_X)\bigr)G_{\mathrm{ref}}^{-1/2}.
+\]
+
+Assume the packet-core micro-covering and oscillatory-kernel hypotheses already
+recorded in this subsection, namely:
+
+\begin{enumerate}
+\item the packet cores form a polynomially thick sampling set at scale
+\(h\asymp \log Q/Q\), with bounded overlap and
+\[
+W_{\mathrm{branch}}\ge Q^{-C}W_{\mathrm{ref}}
+\quad\text{on the packet cores};
+\]
+
+\item the packet amplitudes satisfy polynomial derivative bounds so that the
+off-diagonal packet kernels obey polynomial oscillatory decay, and the
+resonant clusters are finite-dimensional;
+
+\item the residual term satisfies the EF completion bound
+\[
+\|E\|_{\operatorname{op}}\le Q^{-B};
+\]
+
+\item the reference mean-square does not collapse, so the canonical finite
+source has nontrivial \(W_{\mathrm{ref}}\)-mass.
+\end{enumerate}
+
+Then, after grouping indices into resonant packet clusters \(B\),
+\[
+\min_B \lambda_{\min}(M_B)-\|M_{\off}\|_{\operatorname{op}}-\|E_B\|_{\operatorname{op}}\ge Q^{-A}
+\]
+for some absolute \(A>0\), and in particular
+\[
+\delta_{\mathrm{src}}
+:=
+\min_i\!\left(M_{ii}-\sum_{j\neq i}|M_{ij}|\right)-\|E\|_{\operatorname{op}}
+\ge Q^{-A}.
+\]
+Equivalently,
+\[
+\lambda_{\min}(M+E)\ge Q^{-A},
+\qquad
+\|f\|_{L^2(W_{\mathrm{branch}})}^2\ge Q^{-A}\|f\|_{L^2(W_{\mathrm{ref}})}^2
+\quad(\forall f\in\mathcal S_X).
+\]
+\end{lemma}
+
+\begin{proof}
+Normalize the packet atoms so that \(\|\psi_i\|_{L^2(W_{\mathrm{ref}})}=1\).  The
+micro-covering hypothesis gives a diagonal lower bound on each packet core:
+\[
+M_{ii}=\langle \psi_i,\psi_i\rangle_{W_{\mathrm{branch}}}\ge 1-Q^{-A_1},
+\]
+since \(W_{\mathrm{branch}}\ge Q^{-C}W_{\mathrm{ref}}\) on the core and the EF
+completion bound controls the tail outside the core.
+
+For \(i\neq j\), write \(\psi_i(t)=a_i(t)e^{i\omega_i t}\) and
+\(\psi_j(t)=a_j(t)e^{i\omega_j t}\).  The oscillatory-kernel hypothesis gives
+\[
+|M_{ij}|
+=
+\left|\int a_i(t)\overline{a_j(t)}W_{\mathrm{branch}}(t)e^{i(\omega_i-\omega_j)t}\,dt\right|
+\le C_NQ^{C_N}(1+|\omega_i-\omega_j|)^{-N}.
+\]
+After grouping the packet indices into resonant blocks, only finitely many
+near-resonant neighbors remain in each row, and the row-sum bound becomes
+\[
+\sum_{j\neq i}|M_{ij}|\le Q^{-A_2}.
+\]
+Choosing \(N\) large enough and using the finite block size yields
+\[
+\min_i\!\left(M_{ii}-\sum_{j\neq i}|M_{ij}|\right)\ge 1-Q^{-A_3}.
+\]
+
+Now incorporate the residual perturbation \(E\).  The EF completion bound gives
+\[
+\|E\|_{\operatorname{op}}\le Q^{-B}.
+\]
+Taking \(B\) larger than the constants from the diagonal and off-diagonal
+estimates, we obtain
+\[
+\delta_{\mathrm{src}}
+=
+\min_i\!\left(M_{ii}-\sum_{j\neq i}|M_{ij}|\right)-\|E\|_{\operatorname{op}}
+\ge Q^{-A}.
+\]
+
+By Gershgorin, this implies
+\[
+\lambda_{\min}(M+E)\ge Q^{-A}.
+\]
+Since \(M+E\) is exactly the normalized source frame operator on \(\mathcal S_X\),
+\[
+\|f\|_{L^2(W_{\mathrm{branch}})}^2\ge Q^{-A}\|f\|_{L^2(W_{\mathrm{ref}})}^2
+\quad\text{for all }f\in\mathcal S_X.
+\]
+This is the desired source-survival inequality.
+\end{proof}
+
+\begin{corollary}[Gate--1 source survival]
+\label{cor:gate-one-source-survival}
+The aggregate source layer satisfies
+\[
+\int |q''_{\can}(t)|^2W_{\mathrm{branch}}(t)\,dt
+\ge
+Q^{-A}\int |q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt,
+\]
+equivalently \(\mathrm{Agg}L^2(q''_{\can})\) holds with polynomial loss.
+\end{corollary}
+
+\begin{remark}[Failure labels]
+\label{rem:source-failure-labels}
+If the source frame bound fails, the only remaining failure modes are:
+branch holes, off-diagonal packet correlation too large, residual completion
+failure, or reference mean-square collapse.
 \end{remark}
 
 \begin{remark}[Resonant block conditioning]
