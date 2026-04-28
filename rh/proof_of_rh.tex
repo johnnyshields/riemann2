@@ -35278,6 +35278,265 @@ Finally, core sets \(E_I^{\core}\) for weighted transfer must be chosen from
 coefficient, smooth, and chart data before observing the wall \(W_2\).
 \end{remark}
 
+% === wip-postclosure-L2-gate-one-interface ===
+% Purpose:
+%   Replace branch-specific Gate--1 observables by scalar local L^2 source energy.
+% Depends on:
+%   The real-rigidity Gate--2 theorem and the canonical source \(q''_{\can}\).
+% Status:
+%   Active architecture / finite-audit interface.
+
+\begin{definition}[Local \(L^2\) Gate--1 source energy]
+\label{def:local-L2-gate-one-source-energy}
+For a routed branch \(b\in\{\mathrm{ord},\mathrm{tr},\mathrm{sing}\}\), let \(\lambda_b\) be the local
+scale and let \(I_b\) be the corresponding normalized source window.  Define
+\[
+  F_{b,m}(x):=\lambda_b^3q''_{\can}(m+\lambda_bx),
+\]
+and set
+\[
+  E_{1,b}^{L^2}(m)
+  :=
+  \int_{I_b}
+  |F_{b,m}(x)|^2\,dx.
+\]
+Thus Gate--1 is the local scalar \(L^2\) energy of the single canonical source
+\[
+  u=q''_{\can}=B_2+P_2+D_2+E_2.
+\]
+The older ordinary finite row \(T_{\can}X_{\can}\), the transition jet
+\(\mathcal J_R^{\mathrm{tr}}\), singular sine moments, and singular projected modes
+are proof tools for lower-bounding \(E_{1,b}^{L^2}\), not definitions of
+Gate--1.
+\end{definition}
+
+\begin{remark}[Gate--2 input convention]
+\label{rem:gate-two-input-L2-source-convention}
+The active Gate--2 route uses source thickening and \(L^2\)-input real rigidity.
+Accordingly, the Gate--1 input to be fed downstream is
+\[
+  E_{1,b}^{L^2}(m)\ge Q^{-A}
+\]
+in the local normalization, not a branch-specific finite moment condition.
+O2/O3-type nondegeneracy remains a separate input; it is not part of the
+Gate--2 \(L^2\)-source hypothesis.
+\end{remark}
+
+\begin{definition}[Branch-complete aggregate \(L^2\) Gate--1]
+\label{def:branch-complete-aggregate-L2-gate-one}
+Let \(\rho_b(m)\ge0\) be routed branch weights.  The branch-complete aggregate
+Gate--1 theorem is
+\[
+  \sum_b\sum_{m\in\mathcal C_b}
+  \rho_b(m)E_{1,b}^{L^2}(m)
+  \ge
+  Q^{-A}
+  \sum_b\sum_{m\in\mathcal C_b}\rho_b(m)N_b(m),
+\]
+where \(N_b(m)\) is the branch-normalized canonical reference energy.  Equivalently,
+after Fubini, this is a weighted source-energy lower bound
+\[
+  \int |q''_{\can}(t)|^2 W_{\mathrm{branch}}(t)\,dt
+  \ge
+  Q^{-A}\mathcal N_{\can}(W_{\mathrm{branch}}),
+\]
+for the full canonical source \(q''_{\can}=B_2+P_2+D_2+E_2\).
+\end{definition}
+
+\begin{remark}[Branch observables are proof tools only]
+\label{rem:branch-observables-proof-tools-only}
+The branch-specific finite observables are retained only as tools:
+\[
+T_{\can}X_{\can}\Rightarrow E_{1,\mathrm{ord}}^{L^2},
+\qquad
+\mathcal J_R^{\mathrm{tr}}\Rightarrow E_{1,\mathrm{tr}}^{L^2},
+\qquad
+P_R F\text{ or }E_{\mathrm{sing}}^{\mathrm{multi}}\Rightarrow E_{1,\mathrm{sing}}^{L^2}.
+\]
+They should not be cited as the Gate--1 object unless the local \(L^2\)-input
+real-rigidity theorem is deliberately replaced by a finite-row version.
+\end{remark}
+
+% === audit-D4-needs-forbidden-channel ===
+% Purpose:
+%   Prevent the carrier-quotient D4 visibility theorem from being mistaken for
+%   a contradiction theorem.
+% Status:
+%   Active no-go / finite-audit warning.
+
+\begin{remark}[D4 visibility is not yet contradiction]
+\label{rem:D4-visibility-not-contradiction}
+Carrier-quotient D4 supplies local visibility of the row-normalized plain wall:
+\[
+  F_{2Y}^{\mathrm{tri}}
+  =
+  H
+  \begin{pmatrix}
+    c_7\Gamma_G\\
+    \beta_9^{\mathrm{tri}}\Gamma_G+\alpha_9\Gamma_{G,2}
+  \end{pmatrix}.
+\]
+This is not by itself a contradiction.  A contradiction requires a global
+forbidden channel
+\[
+  \Lambda:\mathcal H_{\mathrm{row}}\to\mathcal K
+\]
+such that the global row object satisfies
+\[
+  \|\Lambda V_{\mathrm{glob}}\|^2\le Q^{-B}\mu(\mathcal C),
+\]
+or exactly \(\Lambda V_{\mathrm{glob}}=0\), while local D4 produces
+\[
+  \|\Lambda v_m\|^2\ge Q^{-A}
+\]
+on a polynomial-weight extracted set.
+
+Thus D4 is currently a carrier-quotient visibility theorem unless a concrete
+\(\Lambda\) is supplied and shown to see the live D4 carrier plane.
+\end{remark}
+
+% === wip-forbidden-singular-discard-D4 ===
+% Purpose:
+%   State the current best finite-D4 contradiction candidate:
+%   transition-to-singular discarded carrier projection.
+% Depends on:
+%   A singular carrier lift and a transition-to-singular carrier transport map.
+% Status:
+%   Finite audit / unresolved.
+
+\begin{definition}[Transition--singular forbidden discard operator]
+\label{def:transition-singular-forbidden-discard}
+Let
+\[
+  W_{\mathrm{tr}}:=
+  \operatorname{span}\{[\mathsf C_7]^{\mathrm{tr}},[\mathsf C_{Y12}]^{\mathrm{tr}}\}
+\]
+be the transition-chart live D4 carrier plane.  Suppose the singular chart is
+equipped with a finite carrier module
+\[
+  M_{\mathrm{sing}}=W_{\mathrm{sing}}\oplus C_{\mathrm{sing}}
+\]
+and a projection
+\[
+  P_{\mathrm{sing}}:M_{\mathrm{sing}}\to W_{\mathrm{sing}}
+\]
+onto the retained singular carrier space.  Let
+\[
+  T_{\mathrm{tr}\to\mathrm{sing}}:M_{\mathrm{tr}}\to M_{\mathrm{sing}}
+\]
+be the carrier-level transition map.  Define the local forbidden discard
+operator
+\[
+  \Lambda_{\mathrm{tr},\mathrm{sing}}
+  :=
+  (I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}P_{\mathrm{tr}},
+\]
+where \(P_{\mathrm{tr}}\) denotes projection to the transition live carrier plane.
+
+On live D4 output this gives
+\[
+  K_{\mathrm{tr},\mathrm{sing}}
+  :=
+  \Lambda_{\mathrm{tr},\mathrm{sing}}E_{\mathrm{car}}^{\mathrm{tr}}L_{\mathrm{clean}}^{\mathrm{tr}}
+  :
+  \mathbf C^2_{\Gamma}\to C_{\mathrm{sing}}.
+\]
+\end{definition}
+
+\begin{remark}[Why a singular carrier lift is now required]
+\label{rem:singular-carrier-lift-required}
+The singular branch no longer needs a carrier quotient for Gate--1, because
+Gate--1 is local scalar \(L^2\) energy of \(q''_{\can}\).  However, a singular
+carrier lift is required for the downstream D4 contradiction audit.  Without
+a defined splitting
+\[
+  M_{\mathrm{sing}}=W_{\mathrm{sing}}\oplus C_{\mathrm{sing}},
+\]
+the map \((I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}\) cannot be evaluated on
+\([\mathsf C_7]^{\mathrm{tr}}\) or \([\mathsf C_{Y12}]^{\mathrm{tr}}\).
+\end{remark}
+
+\begin{definition}[Forbidden singular-discard wall energy]
+\label{def:forbidden-singular-discard-wall-energy}
+Set
+\[
+  \Gamma(m):=
+  \begin{pmatrix}
+    \Gamma_G(m)\\
+    \Gamma_{G,2}(m)
+  \end{pmatrix}.
+\]
+For a local transition-chart D4 output, define
+\[
+  E_{\mathrm{wall}}^{\mathrm{forb}}(m)
+  :=
+  \frac{
+    |H(m)|^2
+    \left\|
+      K_{\mathrm{tr},\mathrm{sing}}(m)\Gamma(m)
+    \right\|^2
+  }{
+    \mathcal N_{\mathrm{D4}}(m)
+  }.
+\]
+If \(K_{\mathrm{tr},\mathrm{sing}}\) has rank two, the old raw anisotropy wall
+\[
+  |H|^2(|\Gamma_G|^2+|\Gamma_{G,2}|^2)
+\]
+is equivalent to the forbidden wall.  If \(K_{\mathrm{tr},\mathrm{sing}}\) has rank one, only
+one forbidden linear combination
+\[
+  \ell_1\Gamma_G+\ell_2\Gamma_{G,2}
+\]
+is visible.  If \(K_{\mathrm{tr},\mathrm{sing}}=0\), finite D4 misses this forbidden channel.
+\end{definition}
+
+\begin{theorem}[Finite audit for forbidden singular-discard D4]
+\label{thm:forbidden-singular-discard-D4-audit}
+Assume:
+\begin{enumerate}
+\item actual global rows satisfy the singular-discard upper
+\[
+  \sum_p
+  \|(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(q''_{\can})\|^2
+  \le Q^{-B}\mu(\mathcal C);
+\]
+\item on a polynomial-weight extracted set, \(K_{\mathrm{tr},\mathrm{sing}}\) has rank at least
+one with polynomial lower singular value in its visible image;
+\item local Gate--2, carrier-quotient D4, and row-normal coefficient routing
+hold on that set.
+\end{enumerate}
+Then local D4 contributes positive forbidden-channel energy
+\[
+  \sum_{m\in\mathcal G}\mu(m)E_{\mathrm{wall}}^{\mathrm{forb}}(m)\ge Q^{-A}\mu(\mathcal G),
+\]
+contradicting the singular-discard upper after the corresponding mobility and
+normalization bounds.
+\end{theorem}
+
+\begin{remark}[Functorial singular lifts give rank zero]
+\label{rem:functorial-singular-lift-rank-zero}
+If the singular retained carrier space is defined functorially by
+\[
+  [\mathsf C_i]^{\mathrm{sing}}
+  =
+  T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_i]^{\mathrm{tr}},
+  \qquad i\in\{7,Y12\},
+\]
+then
+\[
+  T_{\mathrm{tr}\to\mathrm{sing}}(W_{\mathrm{tr}})\subseteq W_{\mathrm{sing}},
+\]
+so
+\[
+  (I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}|_{W_{\mathrm{tr}}}=0.
+\]
+A Taylor-complete or functorial singular lift therefore gives no finite-D4
+forbidden channel.  Nonzero D4 visibility can occur only if the singular
+retained space is a non-functorial projection or coherence space that discards
+some transition live-carrier content.
+\end{remark}
+
 \begin{definition}[Covariant septic row]
 \label{def:rank-two-covariant-septic-row}
 Let
@@ -42242,6 +42501,91 @@ and
 \]
 \end{remark}
 
+% === audit-no-Lambda-no-D4-contradiction ===
+% Purpose:
+%   Record the current downstream no-go boundary.
+% Status:
+%   Active audit ledger.
+
+\begin{remark}[No forbidden channel, no D4 contradiction]
+\label{rem:no-Lambda-no-D4-contradiction}
+Carrier-quotient D4 is a local visibility statement.  It becomes a contradiction
+only after a globally forbidden channel \(\Lambda\) is identified.  A total
+Bessel or row-energy upper of the form
+\[
+  \|V_{\mathrm{glob}}\|^2\le Q^C\mu(\mathcal C)
+\]
+does not contradict a lower bound of size \(Q^{-C}\mu(\mathcal C)\).
+
+The acceptable forbidden-channel mechanisms are:
+\begin{enumerate}
+\item a positive atomic upper
+\[
+  \sum_a|\Lambda_a V_{\mathrm{glob}}|^2\le Q^{-B}\mu(\mathcal C);
+\]
+\item a localizable identity family
+\[
+  |\Lambda_\psi V_{\mathrm{glob}}|^2\le Q^{-B}\|\psi\|^2;
+\]
+\item a coboundary/curl identity such as \(\delta^2=0\);
+\item an approximate identity
+\[
+  \Lambda V_{\mathrm{glob}}=\operatorname{Err},
+  \qquad
+  \|\operatorname{Err}\|^2\le Q^{-B}\mu(\mathcal C).
+\]
+\end{enumerate}
+Without one of these, finite D4 remains a detector, not a proof-closing
+contradiction.  The current best finite-D4 candidate is
+\[
+  \Lambda_{\mathrm{tr},\mathrm{sing}}=(I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}P_{\mathrm{tr}}.
+\]
+\end{remark}
+
+% === wip-current-postclosure-architecture-ledger ===
+% Purpose:
+%   Record the current post-rank-two-cleanup proof architecture.
+% Status:
+%   Active architecture ledger.
+
+\begin{remark}[Current post-closure architecture]
+\label{rem:current-postclosure-architecture}
+After the rank-two closure cleanup, the live proof architecture is best recorded as
+\[
+  \boxed{
+  \mathrm{Agg}L^2(q''_{\can})
+  +
+  \mathrm{Graph/O2O3}_{23}
+  +
+  \mathrm{ForbiddenSingularDiscardD4}.
+  }
+\]
+The first term is branch-complete local scalar source energy:
+\[
+  E_{1,b}^{L^2}(m)
+  =
+  \int_{I_b}
+  |\lambda_b^3 q''_{\can}(m+\lambda_bx)|^2\,dx.
+\]
+The second term is the finite O2/O3 nondegeneracy package, preferably expressed
+through a Riesz graph model for
+\[
+  \mathbf C\cdot1+m_{\can}\mathbf C_R[x]
+  \simeq
+  m_{\can}\bigl(\mathbf C\cdot(1/m_{\can})+\mathbf C_R[x]\bigr).
+\]
+The third term is a forbidden D4 channel, currently represented by the
+transition--singular discard operator
+\[
+  \Lambda_{\mathrm{tr},\mathrm{sing}}=(I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}P_{\mathrm{tr}}.
+\]
+
+The older row-normal rank-two chain remains a finite-audit submodule proving
+that D4 supplies the plain wall \(H(\Gamma_G,\Gamma_{G,2})\).  The present
+post-closure architecture adds the missing contradiction requirement: the
+plain wall must be visible through an actual forbidden channel.
+\end{remark}
+
 The following negative results and audit boundaries are part of the current
 proof state.
 
@@ -46040,110 +46384,66 @@ listed in Remark~\ref{rem:terminal-conditional-dependency-ledger}.
 \label{rem:terminal-conditional-dependency-ledger}
 The present draft is a conditional architecture, not a closed proof of \(\RH\).
 
-The live upstream arithmetic inputs are
+The rank-two local cleanup establishes the following finite-audit spine:
 \[
-\boxed{\mathrm{O1}:\ \text{fixed-width cell nonrecurrence}},
+  \mathrm{TwoRowExactSequence}_{2Y}
+  +
+  \mathrm{RowNormalForm}_{2Y}
+  +
+  \mathrm{NuisancePreservesRows}_{2Y}
+  \Longrightarrow
+  B_Y=0,
 \]
+and hence, after coefficient routing,
 \[
-\boxed{\mathrm{O2}:\ \text{cofactor-vector nonrecurrence}},
+  F_{2Y}\asymp H(\Gamma_G,\Gamma_{G,2}).
 \]
+D4 supplies only this plain wall.  It does not supply derivative wall components.
+
+The current post-closure architecture is:
 \[
-\boxed{\mathrm{O3}:\ \text{Wronskian angle nonalignment}},
+  \boxed{
+  \mathrm{Agg}L^2(q''_{\can})
+  +
+  \mathrm{Graph/O2O3}_{23}
+  +
+  \mathrm{ForbiddenSingularDiscardD4}.
+  }
 \]
+Here
 \[
-\boxed{\mathrm{S1}:\ \text{singular explicit-formula anti-design}},
+  \mathrm{Agg}L^2(q''_{\can})
 \]
-and
+means branch-complete aggregate local \(L^2\) energy of the full canonical source
 \[
-\boxed{\mathrm{T1}:\ \text{weighted transition finite-jet observability}}.
+  q''_{\can}=B_2+P_2+D_2+E_2.
+\]
+The finite O2/O3 package is a separate nondegeneracy input, best expressed via
+the graph/Riesz model for \(1/m_{\can}\).  The finite D4 contradiction requires
+a forbidden channel \(\Lambda\); the current candidate is the transition--singular
+discard operator
+\[
+  \Lambda_{\mathrm{tr},\mathrm{sing}}=(I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}P_{\mathrm{tr}}.
 \]
 
-The live ordinary downstream implication is
+The remaining unresolved inputs are:
+\begin{enumerate}
+\item branch-complete weighted \(L^2\) source nonflatness for \(q''_{\can}\);
+\item finite O2/O3 graph/exterior-pivot nondegeneracy for the full canonical
+matrix;
+\item a singular carrier lift \(M_{\mathrm{sing}}=W_{\mathrm{sing}}\oplus C_{\mathrm{sing}}\);
+\item a transition--singular rank audit
 \[
-\boxed{
-\mathrm{Gate1}
-+
-|u'|_\infty\text{ source thickening}
-+
-L^2\text{-input real rigidity}
-\Longrightarrow
-\mathrm{Gate2}.
-}
+  \operatorname{rank}
+  \left(
+  (I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}
+  E_{\mathrm{car}}^{\mathrm{tr}}L_{\mathrm{clean}}^{\mathrm{tr}}
+  \right)\ge1;
 \]
-
-The live row-output route is
-\[
-\boxed{
-\mathrm{Gate2}
-+
-\text{gauge-locked wall escape}
-+
-\text{carrier/quotient D4}
-+
-\text{row mobility}
-\Longrightarrow
-\text{row energy}.
-}
-\]
-
-For the rank-two branch, the active finite-audit stack is
-\[
-\boxed{
-\mathrm{TwoRowExactSequence}_{2Y}
-+
-\mathrm{RowNormalForm}_{2Y}
-+
-\mathrm{AdmissibleNuisanceIsTypedDead}_{2Y}
-+
-\mathrm{LivePairSchur}_{2Y}
-\Longrightarrow
-B_Y=0,
-}
-\]
-\[
-\boxed{
-\mathrm{D4CoeffCoreRouting}_{2Y}
-\Longrightarrow
-F_{2Y}\asymp H(\Gamma_G,\Gamma_{G,2})
-\text{ on predetermined cores},
-}
-\]
-\[
-\boxed{
-\mathrm{SourceCurvatureCompletion}^{(2)}
-+
-\mathrm{WallVariableCompletion}_{2Y}
-+
-\mathrm{FiniteAtlasRiesz}_{2Y}^{p}
-+
-\mathrm{RankTwoCoercivity}
-+
-\mathrm{Gate1}
-\Longrightarrow
-\int W_2\ge Q^{-A},
-}
-\]
-where
-\[
-  W_2=|\Gamma_G|^2+|\Gamma_{G,2}|^2.
-\]
-Finally,
-\[
-\boxed{
-\mathrm{CoreWeightedPlainWallTransfer}_{2Y}
-+
-\mathrm{ScalarBoundedChargeO2O3}(d_{\max}^{(2)})
-}
-\]
-gives the scalar O2/O3 input after selecting
-\[
-  G_\star\in\{\Gamma_G,\Gamma_{G,2}\}
-\]
-at the smooth aggregate stage.
-
-The old \(D1/D2/D3\) route and scalar \(I\)-coordinate \(D4_I\) are not
-fallback proof paths in this draft.  They are dead routes recorded only in
-Remark~\ref{rem:dead-route-registry-superseded-downstream}.
+\item a global singular-discard upper for actual rows.
+\end{enumerate}
+If the last two fail, finite D4 remains local visibility only and does not
+close the proof.
 \end{remark}
 
 \begin{remark}[Active named-input status table]
@@ -46202,6 +46502,21 @@ The value \(14\) is not hard-coded; the transition basis must contain
   \mathbf C_{d_{\max}^{(2)}}[y]
 \]
 after the rank-two degree audit.
+
+The current architecture demotes O1/O2/O3/S1/T1-style branch observables from
+Gate--1 definitions to proof tools, whenever they are used only to establish
+local \(L^2\) source energy of \(q''_{\can}\).  The active Gate--1 object is
+\[
+  E_{1,b}^{L^2}(m)
+  =
+  \int_{I_b}|\lambda_b^3q''_{\can}(m+\lambda_bx)|^2\,dx.
+\]
+The live unresolved downstream input is no longer carrier-quotient D4 visibility
+itself, but the existence of a forbidden channel \(\Lambda\) that sees the live
+D4 plane.  The current candidate is
+\[
+  \Lambda_{\mathrm{tr},\mathrm{sing}}=(I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}P_{\mathrm{tr}}.
+\]
 \end{remark}
 
 \begin{remark}[Empirical support for O1: local amplitude and cell tests]
