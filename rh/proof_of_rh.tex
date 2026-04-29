@@ -37942,12 +37942,100 @@ What remains is the \(2\times2\) covariance test on each frozen cap:
 or else the cap is static and must be handed to the \(Y12\) quotient module.
 \end{remark}
 
-\begin{lemma}[Conditional local affine quotient normal form on a nonstatic cap]
+\begin{definition}[Affine gauge slice and regular locus]
+\label{def:affine-gauge-slice}
+Let \(T_{\alpha,\beta}(x)=\alpha x+\beta\) with \(\alpha>0\).  Let
+\(\mathcal N_1,\mathcal N_2\) be the two normalization functionals already
+fixed in the draft, and define
+\[
+\mathcal F_f(\alpha,\beta)
+:=
+\bigl(\mathcal N_1(T_{\alpha,\beta}f),\ \mathcal N_2(T_{\alpha,\beta}f)-1\bigr).
+\]
+We call \(f\) \emph{regular} if there exists a solution
+\((\alpha_0,\beta_0)\) to \(\mathcal F_f(\alpha,\beta)=0\) such that
+\[
+\det D_{(\alpha,\beta)}\mathcal F_f(\alpha_0,\beta_0)\neq 0.
+\]
+Let \(\mathcal U\) denote the set of regular classes.
+\end{definition}
+
+\begin{lemma}[Local affine quotient normal form]
 \label{lem:local-affine-quotient-normal-form}
-\emph{Status: FINITE AUDIT.  This is a conditional bridge — it derives the
-local affine normal form and the Jacobian / Wronskian / angle-separation
-certificate from the four named hypotheses below, but does not establish
-those hypotheses.}
+On the regular locus \(\mathcal U\), every equivalence class has a unique
+representative of the form \(T_{\alpha,\beta}f\) satisfying the normalization
+conditions
+\[
+\mathcal N_1(T_{\alpha,\beta}f)=0,
+\qquad
+\mathcal N_2(T_{\alpha,\beta}f)=1,
+\]
+with \(\alpha>0\).  Moreover, the map
+\[
+[f]\longmapsto (\alpha(f),\beta(f))
+\]
+is \(C^1\) (indeed smooth if the data are smooth) on \(\mathcal U\).
+\end{lemma}
+
+\begin{proof}
+Fix a regular class \([f_0]\in\mathcal U\), and let
+\((\alpha_0,\beta_0)\) be a solution of
+\(\mathcal F_{f_0}(\alpha,\beta)=0\) with
+\[
+\det D_{(\alpha,\beta)}\mathcal F_{f_0}(\alpha_0,\beta_0)\neq 0.
+\]
+Since the affine group is two-dimensional, the equation
+\(\mathcal F_f(\alpha,\beta)=0\) is a square system in the two variables
+\((\alpha,\beta)\).  By the implicit function theorem, there is a
+neighborhood \(\mathcal V\) of \(f_0\) in the regular locus and unique
+\(C^1\) functions
+\[
+\alpha(\cdot),\beta(\cdot):\mathcal V\to\mathbb R
+\]
+such that
+\[
+\mathcal F_f(\alpha(f),\beta(f))=0
+\qquad\text{for all }f\in\mathcal V.
+\]
+Uniqueness follows because any two solutions in \(\mathcal V\) would define
+two points on the same transverse local slice, hence coincide by the
+implicit-function theorem uniqueness statement.  Since the reference
+solution has \(\alpha_0>0\), shrinking \(\mathcal V\) if necessary keeps
+\(\alpha(f)>0\) throughout the neighborhood.
+\end{proof}
+
+\begin{corollary}[Local affine quotient angle]
+\label{cor:local-affine-quotient-angle}
+On the regular locus \(\mathcal U\), the quotient angle
+\[
+\theta([f]) := \arg\bigl(\alpha(f)+i\beta(f)\bigr)
+\]
+is well-defined and \(C^1\) (indeed smooth if the data are smooth).
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{lem:local-affine-quotient-normal-form}, the normalized pair
+\((\alpha(f),\beta(f))\) depends smoothly on the quotient class.  Since
+\(\alpha(f)>0\) on \(\mathcal U\), the complex number
+\(\alpha(f)+i\beta(f)\) is never zero on the regular locus, so \(\arg\) is
+smooth there.  Therefore \(\theta([f])\) is well-defined and smooth.
+\end{proof}
+
+\begin{remark}[Compatibility with the \(D_4\)-symmetry]
+\label{rem:d4-compatibility-quotient-angle}
+If the \(D_4\)-action preserves the normalization slice
+\(\mathcal N_1=0,\ \mathcal N_2=1\), then the induced action on
+\(\theta\) is the finite symmetry identification already built into the
+quotient.
+\end{remark}
+
+\begin{corollary}[Cap-level Jacobian transversality (conditional bridge)]
+\label{cor:cap-jacobian-transversality}
+\emph{Status: FINITE AUDIT.  This is the conditional bridge from extraction
+to the atomic contradiction.  It applies the abstract slice theorem
+(Lemma~\ref{lem:local-affine-quotient-normal-form}) with cap-specific gauge
+data, but the four cap-side hypotheses below are still listed in
+Remark~\ref{rem:open-downstream-modules} as open downstream inputs.}
 
 Fix a packet \(p\) and a frozen cap \(C_j\).  Write the cap coordinate as
 \[
@@ -37968,292 +38056,68 @@ N_p:=\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing}}\mathcal N_p^{\mathrm{D4}},
 \qquad
 Y_p:=\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}]^{\mathrm{tr}}.
 \]
-
-Assume:
-
+Assume the four cap-side conditions:
 \begin{enumerate}
-\item \emph{Quotient survival.} The nuisance block
-\[
-U_p:=\operatorname{col}\bigl(T_{\mathrm{par}}^{(\alpha)},T_7,T_{<7},II_{\mathrm{arith},9},T_{E_2}\bigr)
-\]
-is killed by the same quotient, i.e.
-\[
-U_p\subseteq \ker(\Lambda_{Y,p}),
-\qquad
-\Lambda_{Y,p}:=q_p^Y\Pi_{\Sigma(Y12),p}T_{\mathrm{tr}\to\mathrm{sing},p}P_{\mathrm{tr},p}.
-\]
-
-\item \emph{Graph/coercivity survival.} The projected transition operator
-\[
-\mathfrak T_p:=(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}
-\]
-admits a finite-codimension low-mode/tail split
-\[
-\mathcal R_X=\mathcal R_{X,\mathrm{low},p}\oplus \mathcal R_{X,\mathrm{tail},p},
-\]
-with low-mode defect matrix
-\[
-D_p=\bigl[\mathfrak T_p e_{1,p}\ \cdots\ \mathfrak T_p e_{r,p}\bigr]
-\]
-satisfying
-\[
-\sigma_{\min}(D_p)\ge Q^{-C},
-\]
-and with the tail controlled by the singular-discard/EF bound already
-established earlier in the section.
-
-\item \emph{Row-normal D4 carrier.} On the Gram-good patch, the clean carrier
-matrix is
-\[
-L_{\mathrm{clean}}
-=
-\begin{pmatrix}
-c_7 & 0\\
-\beta_9^{\mathrm{tri}} & \alpha_9
-\end{pmatrix},
-\qquad
-\beta_9^{\mathrm{tri}}:=\beta_9-\kappa c_7,
-\]
-and \(c_7\alpha_9\) is polynomially bounded away from \(0\).
-
-\item \emph{Nonstatic cap.} The extraction covariance satisfies
-\[
-\delta_{\mathrm{ext}}
-=
-\frac{\det(B_j)}{(\operatorname{tr}B_j)^2}
-\ge Q^{-A},
-\qquad
-B_j:=\sum_{p\in C_j}w_p\Gamma_p\Gamma_p^\ast.
-\]
+\item Quotient survival
+\(U_p\subseteq \ker\Lambda_{Y,p}\), with
+\(\Lambda_{Y,p}:=q_p^Y\Pi_{\Sigma(Y12),p}T_{\mathrm{tr}\to\mathrm{sing},p}P_{\mathrm{tr},p}\).
+\item Graph/coercivity survival
+\(\sigma_{\min}(D_p)\ge Q^{-C}\) for the low-mode defect matrix
+\(D_p=[\mathfrak T_p e_{1,p}\ \cdots\ \mathfrak T_p e_{r,p}]\) with
+\(\mathfrak T_p:=(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}\),
+plus tail control by the singular-discard / EF bound.
+\item Row-normal D4 carrier
+\(L_{\mathrm{clean}}=\bigl(\begin{smallmatrix}c_7&0\\ \beta_9^{\mathrm{tri}}&\alpha_9\end{smallmatrix}\bigr)\)
+with \(c_7\alpha_9\) polynomially bounded away from \(0\).
+\item Nonstatic cap
+\(\delta_{\mathrm{ext}}=\det(B_j)/(\operatorname{tr}B_j)^2\ge Q^{-A}\).
 \end{enumerate}
-
-Then there exist a scalar \(H_{j,p}\) with \(|H_{j,p}|\asymp 1\) on the good
-set and an error term \(\varepsilon_{j,p}(s)\) such that
-\[
-\binom{r_{N,p}(s)}{r_{Y,p}(s)}
-=
-H_{j,p}
-\begin{pmatrix}
-c_7 & 0\\
-\beta_9^{\mathrm{tri}} & \alpha_9
-\end{pmatrix}
-\binom{1}{s}
-+
-\varepsilon_{j,p}(s),
-\]
-with
-\[
-\|\partial_s\varepsilon_{j,p}\|\le Q^{-B}.
-\]
-In particular, at the cap center \(s_j\),
-\[
-\left.
-\frac{\partial}{\partial(1,s)}
-\binom{r_{N,p}(s)}{r_{Y,p}(s)}
-\right|_{s=s_j}
-=
-H_{j,p}
-\begin{pmatrix}
-c_7 & 0\\
-\beta_9^{\mathrm{tri}} & \alpha_9
-\end{pmatrix}
-+
-O(Q^{-B}),
-\]
-so
-\[
-\det\!\left(
-\left.
-\frac{\partial}{\partial(1,s)}
-\binom{r_{N,p}(s)}{r_{Y,p}(s)}
-\right|_{s=s_j}
-\right)
-=
-H_{j,p}^2\,c_7\alpha_9
-+
-O(Q^{-B}).
-\]
-Hence on the good set,
-\[
-\left|
-\det\!\left(
-\left.
-\frac{\partial}{\partial(1,s)}
-\binom{r_{N,p}(s)}{r_{Y,p}(s)}
-\right|_{s=s_j}
-\right)
-\right|
-\ge Q^{-A}.
-\]
-\end{lemma}
-
-\begin{proof}
-Because \(U_p\subseteq\ker(\Lambda_{Y,p})\), every contribution in the
-nuisance block vanishes after applying the quotient projection \(q_p^Y\).
-Thus the quotient residual pair \((r_{N,p},r_{Y,p})\) only sees the surviving
-transition data and the low-mode/tail remainder.
-
-By the graph/coercivity hypothesis, the admissible residual class splits into
-a finite low block and a tail.  The low block is controlled by the defect
-matrix \(D_p\) with \(\sigma_{\min}(D_p)\ge Q^{-C}\), so the low block cannot
-generate a hidden kernel at polynomial scale.  The tail contribution is
-controlled by the singular-discard/EF upper bound, hence its derivative
-contribution is \(O(Q^{-B})\).  Therefore the quotient residual map is
-\(C^1\) on the good set and differs from its low-mode linearization by a
-derivative-small error.
-
-The row-normal D4 carrier theorem supplies the leading linear term on the
-surviving quotient coordinates.  On the good patch, the clean carrier matrix
-is
-\[
-L_{\mathrm{clean}}
-=
-\begin{pmatrix}
-c_7 & 0\\
-\beta_9^{\mathrm{tri}} & \alpha_9
-\end{pmatrix},
-\]
-so after quotienting and restricting to the cap slope coordinate \(s\), the
-surviving first-order term must be a scalar multiple \(H_{j,p}\) of
-\(L_{\mathrm{clean}}(1,s)^T\).  This gives the affine normal form
+Then there exist a scalar \(H_{j,p}\) with \(|H_{j,p}|\asymp 1\) and an
+error \(\varepsilon_{j,p}(s)\) with \(\|\partial_s\varepsilon_{j,p}\|\le Q^{-B}\)
+such that
 \[
 \binom{r_{N,p}(s)}{r_{Y,p}(s)}
 =
 H_{j,p}L_{\mathrm{clean}}\binom{1}{s}
-+
-\varepsilon_{j,p}(s),
-\qquad
-\|\partial_s\varepsilon_{j,p}\|\le Q^{-B}.
++\varepsilon_{j,p}(s).
 \]
-
-Differentiate at the cap center \(s=s_j\).  Since the error derivative is
-\(O(Q^{-B})\), the Jacobian is
+At the cap center \(s_j\) the Jacobian determinant satisfies
 \[
-\left.
-\frac{\partial}{\partial(1,s)}
-\binom{r_{N,p}(s)}{r_{Y,p}(s)}
-\right|_{s=s_j}
-=
-H_{j,p}L_{\mathrm{clean}}+O(Q^{-B}).
+\left|\det\!\left(\left.\tfrac{\partial}{\partial(1,s)}\binom{r_{N,p}}{r_{Y,p}}\right|_{s=s_j}\right)\right|
+\ge Q^{-A},
 \]
-Taking determinants,
-\[
-\det\!\left(
-\left.
-\frac{\partial}{\partial(1,s)}
-\binom{r_{N,p}(s)}{r_{Y,p}(s)}
-\right|_{s=s_j}
-\right)
-=
-H_{j,p}^2\det(L_{\mathrm{clean}})+O(Q^{-B})
-=
-H_{j,p}^2\,c_7\alpha_9+O(Q^{-B}).
-\]
-Because \(H_{j,p}\asymp 1\) on the good set and \(c_7\alpha_9\) is
-polynomially nonzero on the Gram-good patch, the error term can be absorbed
-for \(Q\) sufficiently large.  This yields the stated lower bound
-\[
-\left|
-\det\!\left(
-\left.
-\frac{\partial}{\partial(1,s)}
-\binom{r_{N,p}(s)}{r_{Y,p}(s)}
-\right|_{s=s_j}
-\right)
-\right|
-\ge Q^{-A}.
-\]
-
-This is exactly the cap-centered Jacobian lower bound.
-\end{proof}
-
-\begin{corollary}[Conditional Wronskian and angle separation]
-\label{cor:local-affine-quotient-angle}
-\emph{Status: FINITE AUDIT, inheriting the conditional status of
-Lemma~\ref{lem:local-affine-quotient-normal-form}.}
-
-Under the hypotheses of Lemma~\ref{lem:local-affine-quotient-normal-form},
-define
-\[
-G_p^Y=
-\begin{pmatrix}
-\langle r_{N,p},r_{N,p}\rangle & \langle r_{N,p},r_{Y,p}\rangle\\
-\langle r_{Y,p},r_{N,p}\rangle & \langle r_{Y,p},r_{Y,p}\rangle
-\end{pmatrix},
-\]
-and
-\[
-W_{j,p}(s):=r'_{Y,p}(s)r_{N,p}(s)-r'_{N,p}(s)r_{Y,p}(s).
-\]
-Then on the good set,
-\[
-|W_{j,p}(s_j)|\ge Q^{-A}|r_{N,p}(s_j)|^2,
-\]
-and therefore
-\[
-\frac{\det(G_p^Y)}{|r_{N,p}|^2|r_{Y,p}|^2}
-=
-\sin^2\theta_p
-\ge Q^{-A}.
-\]
-Equivalently, the quotient residuals \(r_{N,p}\) and \(r_{Y,p}\) are
-polynomially transverse on every nonstatic cap.
+the Wronskian
+\(W_{j,p}(s):=r'_{Y,p}(s)r_{N,p}(s)-r'_{N,p}(s)r_{Y,p}(s)\)
+satisfies
+\(|W_{j,p}(s_j)|\ge Q^{-A}|r_{N,p}(s_j)|^2\),
+and the Gram angle
+\(\theta_p\) of the bordered Gram matrix
+\(G_p^Y=(\langle r_{\bullet,p},r_{\bullet,p}\rangle)\)
+satisfies
+\(\sin^2\theta_p \ge Q^{-A}\).
+In particular, the quotient residuals \(r_{N,p}\) and \(r_{Y,p}\) are
+polynomially transverse on every nonstatic cap, supplying the lower-bound
+carrier needed for the atomic contradiction
+(Definition~\ref{def:finite-survival-gaps}).
 \end{corollary}
 
 \begin{proof}
-The Jacobian lower bound from
-Lemma~\ref{lem:local-affine-quotient-normal-form} implies the Wronskian lower
-bound by the identity
-\[
-\frac{d}{ds}\left(\frac{r_{Y,p}(s)}{r_{N,p}(s)}\right)
-=
-\frac{W_{j,p}(s)}{r_{N,p}(s)^2}.
-\]
-The determinant of the bordered Gram matrix \(G_p^Y\) is
-\[
-\det(G_p^Y)=\|r_{N,p}\|^2\|r_{Y,p}\|^2\sin^2\theta_p,
-\]
-so the Wronskian lower bound yields the stated angle separation.  This is
-the quotient-transversality certificate needed for the final same-norm
-contradiction.
+Hypothesis~(1) (\(U_p\subseteq \ker\Lambda_{Y,p}\)) eliminates the nuisance
+block from \((r_{N,p},r_{Y,p})\) under \(q_p^Y\).  The graph/coercivity
+hypothesis~(2) gives a finite low-mode defect matrix with
+\(\sigma_{\min}(D_p)\ge Q^{-C}\) plus tail \(O(Q^{-B})\), so the quotient
+residual pair is \(C^1\) and differs from its low-mode linearization by a
+derivative-small error.  Hypothesis~(3) supplies the leading linear term as
+a scalar multiple \(H_{j,p}\) of \(L_{\mathrm{clean}}(1,s)^T\), giving the
+affine normal form.  Differentiating at the cap center gives Jacobian
+\(H_{j,p}L_{\mathrm{clean}}+O(Q^{-B})\); taking determinants yields
+\(H_{j,p}^2 c_7\alpha_9+O(Q^{-B})\), and Hypothesis~(4) plus the row-normal
+bounds force \(|H_{j,p}|\asymp 1\) and \(c_7\alpha_9\) polynomially nonzero,
+absorbing the error.  The Wronskian bound follows from the identity
+\(\frac{d}{ds}(r_{Y,p}/r_{N,p})=W_{j,p}/r_{N,p}^2\), and the angle
+separation from
+\(\det G_p^Y=\|r_{N,p}\|^2\|r_{Y,p}\|^2\sin^2\theta_p\).
 \end{proof}
-
-\begin{remark}[Conditional bridge status]
-\label{rem:local-affine-quotient-conditional-status}
-Lemma~\ref{lem:local-affine-quotient-normal-form} and
-Corollary~\ref{cor:local-affine-quotient-angle} are a conditional downstream
-bridge, not a closure.  They derive the local affine normal form and the
-angle-separation certificate from the four conditional hypotheses already
-recorded in the shared finite-survival chain, namely:
-\[
-U_p\subseteq \ker\Lambda_{Y,p},
-\qquad
-\sigma_{\min}(D_p)\ge Q^{-C},
-\]
-\[
-L_{\mathrm{clean}}=
-\begin{pmatrix}
-c_7 & 0\\
-\beta_9^{\mathrm{tri}} & \alpha_9
-\end{pmatrix}\text{ on the Gram-good patch},
-\qquad
-\delta_{\mathrm{ext}}\ge Q^{-A}.
-\]
-The bridge supplies the implication
-\[
-\text{quotient survival}
-+
-\text{coercivity}
-+
-\text{nonstatic cap}
-\;\Longrightarrow\;
-\text{local affine normal form}
-\;\Longrightarrow\;
-\text{Wronskian / angle separation},
-\]
-but it does not establish the four hypotheses themselves.  The status
-remains FINITE AUDIT.
-\end{remark}
 
 \begin{remark}[Remaining open downstream inputs]
 \label{rem:open-downstream-modules}
