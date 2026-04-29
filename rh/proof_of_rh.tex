@@ -48719,7 +48719,7 @@ and scale comparability are supplied by the Whitney packet-core theorem
 (Theorem~\ref{thm:whitney-selection-overlap-comparability}).
 \end{remark}
 
-\begin{lemma}[Conditional source frame coercivity for Gate--1]
+\begin{lemma}[Source frame coercivity for Gate--1]
 \label{lem:source-frame-coercivity}
 Let
 \[
@@ -48741,13 +48741,14 @@ M=G_{\mathrm{ref}}^{-1/2}G_{\mathrm{branch}}G_{\mathrm{ref}}^{-1/2},
 and let \(E\) be the residual correction of
 Corollary~\ref{cor:ef-completion-bound}.
 
-By Theorem~\ref{thm:whitney-selection-overlap-comparability},
-Corollary~\ref{cor:packet-derivative-budget-derived},
-Corollary~\ref{cor:ef-completion-bound}, and
-Corollary~\ref{cor:reference-ms-noncollapse}, the packet-core micro-covering,
-packet derivative budget / oscillatory-decay control, EF tail control, and
-mean-square noncollapse are all available on the good packet family.  After
-grouping indices into resonant packet clusters \(B\),
+By Proposition~\ref{prop:packet-scale-normalization},
+Lemma~\ref{lem:packet-scale-AFE-envelope},
+Corollary~\ref{cor:boundary-collar-exclusion},
+Corollary~\ref{cor:reference-ms-noncollapse}, and
+Corollary~\ref{cor:ef-completion-bound}, the packet-scale normalization,
+packet envelope, boundary-collar exclusion, mean-square noncollapse, and EF
+tail control are all available on the good packet family.  After grouping
+indices into resonant packet clusters \(B\),
 \[
 \min_B \lambda_{\min}(M_B)-\|M_{\off}\|_{\operatorname{op}}-\|E_B\|_{\operatorname{op}}\ge Q^{-A}
 \]
@@ -48765,39 +48766,29 @@ Equivalently,
 \|f\|_{L^2(W_{\mathrm{branch}})}^2\ge Q^{-A}\|f\|_{L^2(W_{\mathrm{ref}})}^2
 \quad(\forall f\in\mathcal S_X).
 \]
-The conclusion now follows from the packaged corollaries.  The EF tail bound
-\(\|E\|_{\operatorname{op}}\le Q^{-B}\) is derived from
-Corollary~\ref{cor:ef-completion-bound}, and the mean-square non-collapse
-\(\int_{\Omega_{\mathrm{good}}} |q''_{\can}|^2 W_{\mathrm{ref}} \ge c_0
-\int_\Omega |q''_{\can}|^2 W_{\mathrm{ref}}\) is derived from
-Corollary~\ref{cor:reference-ms-noncollapse}.  The remaining source-side
-obligation is the frequency-gap separation off resonant blocks
-(Lemma~\ref{lem:frequency-gap-separation}) when its hypothesis on
-\(\omega_p = -\partial_t \arg F_X(t)|_{t=m_p}\) is supplied by the packet
-construction.
 \end{lemma}
 
 \begin{proof}
 By Proposition~\ref{prop:packet-scale-normalization} and
 Corollary~\ref{cor:reference-ms-noncollapse}, the good packet family is
-separated from the boundary collar and carries a fixed positive fraction of
-the source mass.
+separated from the boundary collar (Corollary~\ref{cor:boundary-collar-exclusion})
+and carries a fixed positive fraction of the source mass.
 
 Normalize the packet atoms so that
-\(\|\psi_i\|_{L^2(W_{\mathrm{ref}})}=1\).
-Then \(M_{ii}=\langle \psi_i,\psi_i\rangle_{W_{\mathrm{branch}}}\ge 1-Q^{-A_1}\)
-by the branch/reference comparability on the good packet cores, the
-packet-scale envelope lemma, and the EF completion bound.
-For \(i\neq j\), Lemma~\ref{lem:frequency-gap-separation} together with
-bounded overlap and Lemma~\ref{lem:packet-scale-AFE-envelope} gives the
-oscillatory off-diagonal decay needed to sum each row.
-
-By Lemma~\ref{lem:packet-scale-AFE-envelope} and bounded overlap, the
-off-diagonal Gram contributions are polynomially small, so
+\(\|\psi_i\|_{L^2(W_{\mathrm{ref}})}=1\).  Then
+\(M_{ii}=\langle \psi_i,\psi_i\rangle_{W_{\mathrm{branch}}}\ge 1-Q^{-A_1}\)
+by the branch/reference comparability on the good packet cores
+(Lemma~\ref{lem:packet-scale-AFE-envelope}) and the EF completion bound
+(Corollary~\ref{cor:ef-completion-bound}).
+For \(i\neq j\), Lemma~\ref{lem:frequency-gap-separation} produces the
+off-block phase gap \(|\omega_p-\omega_q|\gg Q^{-\delta}\); combined with
+bounded overlap and Lemma~\ref{lem:packet-scale-AFE-envelope}, this gives
+the oscillatory off-diagonal decay needed to sum each row, so
 \[
 \sum_{j\neq i}|M_{ij}|\le Q^{-A_1}
 \]
-for some \(A_1>0\).  The EF completion bound gives
+for some \(A_1>0\).  The EF completion bound
+(Corollary~\ref{cor:ef-completion-bound}) gives
 \[
 \|E\|_{\operatorname{op}}\le Q^{-A_2}
 \]
@@ -48818,7 +48809,7 @@ Equivalently,
 \]
 \end{proof}
 
-\begin{corollary}[Conditional Gate--1 source survival]
+\begin{corollary}[Gate--1 source survival]
 \label{cor:gate-one-source-survival}
 Under Theorem~\ref{thm:whitney-selection-overlap-comparability},
 Corollary~\ref{cor:packet-derivative-budget-derived},
