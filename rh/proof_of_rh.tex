@@ -38725,6 +38725,90 @@ impose a hidden relation between \(C_7\) and \(C_{Y12}\) after dead-only
 quotienting.
 \end{hypothesis}
 
+\begin{lemma}[Dual-row certificate for rank-two \(C_7/Y12\) quotient survival]
+\label{lem:dual-row-rank-two-Y12-survival}
+Let
+\[
+E_p:=
+\begin{bmatrix}
+C_{7,p}^{\mathrm{tar}}&C_{Y,p}^{\mathrm{tar}}
+\end{bmatrix},
+\qquad
+q_p:=I-P_{\mathcal K_p^Y}^{\mathrm{bd}},
+\]
+where \(\mathcal K_p^Y\) is the dead-only nuisance space of
+Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival}.  Suppose there
+exist linear functionals
+\(\ell_{7,p},\ell_{Y,p}:\mathcal H_p^Y\to\mathbb C\) on the ambient
+\(Y12\)-boundary quotient space such that
+\[
+\ell_{7,p}(\mathcal K_p^Y)=\ell_{Y,p}(\mathcal K_p^Y)=0,
+\qquad
+\begin{pmatrix}
+\ell_{7,p}(C_{7,p}^{\mathrm{tar}})&
+\ell_{7,p}(C_{Y,p}^{\mathrm{tar}})\\
+\ell_{Y,p}(C_{7,p}^{\mathrm{tar}})&
+\ell_{Y,p}(C_{Y,p}^{\mathrm{tar}})
+\end{pmatrix}
+=I_2,
+\]
+and
+\(\|\ell_{7,p}\|+\|\ell_{Y,p}\|\le Q^C\).
+Then
+\[
+\sigma_{\min}(q_pE_p)\ge Q^{-C'}
+\]
+for some \(C'\) depending polynomially on \(C\).  Conversely, if
+\(\sigma_{\min}(q_pE_p)\ge Q^{-C}\) then the rows
+\(\ell_{i,p}:=\bigl((q_pE_p)^\ast(q_pE_p)\bigr)^{-1}(q_pE_p)^\ast\,e_i\)
+are bounded by \(Q^C\) and vanish on \(\mathcal K_p^Y\), giving a dual
+certificate.
+\end{lemma}
+
+\begin{proof}
+For the forward direction, fix \(v=(a,b)^T\in\mathbb C^2\).  Each row
+vanishes on \(\mathcal K_p^Y\), hence
+\(\ell_{i,p}(q_pE_pv)=\ell_{i,p}(E_pv)\), and the normalization gives
+\((\ell_{7,p}(E_pv),\ell_{Y,p}(E_pv))^T=v\).  Therefore
+\[
+|v|
+\le
+\sqrt{\|\ell_{7,p}\|^2+\|\ell_{Y,p}\|^2}\,\|q_pE_pv\|
+\le
+\sqrt{2}\,Q^C\,\|q_pE_pv\|,
+\]
+so \(\|q_pE_pv\|\ge Q^{-C-1}|v|\), which is the claim with
+\(C':=C+1\).  For the converse, the Moore--Penrose pseudoinverse rows have
+operator norm \(\sigma_{\min}(q_pE_p)^{-1}\le Q^C\), and they act after
+\(q_p\), hence vanish on \(\mathcal K_p^Y\); the diagonal normalization is
+the standard Moore--Penrose identity \(L_p^\dagger(q_pE_p)=I_2\).
+\end{proof}
+
+\begin{remark}[Necessity of dead-column split for rank-two survival]
+\label{rem:dead-column-split-necessity}
+Suppose the arithmetic nuisance column has the live decomposition
+\[
+A_{II,p}=A_{II,p}^{\mathrm{dead}}+c_{\mathrm{arith},Y}\,C_{Y,p}^{\mathrm{tar}}
++c_{\mathrm{arith},7}\,C_{7,p}^{\mathrm{tar}}.
+\]
+If the unsplit \(A_{II,p}\) is placed in \(\mathcal K_p^Y\), then any row
+\(\ell\) annihilating \(\mathcal K_p^Y\) satisfies
+\(0=\ell(A_{II,p})=\ell(A_{II,p}^{\mathrm{dead}})+c_{\mathrm{arith},Y}\ell(C_{Y,p}^{\mathrm{tar}})+c_{\mathrm{arith},7}\ell(C_{7,p}^{\mathrm{tar}})\).
+Since \(\ell(A_{II,p}^{\mathrm{dead}})=0\) on a genuine dead column, this
+forces a linear relation among
+\(\ell(C_{7,p}^{\mathrm{tar}}),\ell(C_{Y,p}^{\mathrm{tar}})\); for the
+normalized detecting rows of
+Lemma~\ref{lem:dual-row-rank-two-Y12-survival} this collapses to
+\(c_{\mathrm{arith},Y}=c_{\mathrm{arith},7}=0\).  The same argument
+applied to the \(A_{7,p}\) column with live coefficient
+\(\lambda_{7,p}\neq0\) forces \(q_p C_{7,p}^{\mathrm{tar}}=0\), violating
+the rank-two survival.  Thus the dead-only definition of
+\(\mathcal K_p^Y\) in
+Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival} is not
+optional: any unsplit live column placed in the quotient kernel breaks
+the dual-row certificate.
+\end{remark}
+
 \begin{corollary}[Cap transversality in live \(C_7/Y12\) coordinates]
 \label{cor:cap-transversality-live-C7-Y12-coordinates}
 \emph{Status: FINITE AUDIT.  This is the corrected cap bridge in live
@@ -38842,6 +38926,87 @@ and
 while
 \(\|\Phi_p^Y u\|\le Q^{C_0}\|u\|\); after squaring and weighted summing
 the static-line lower bound is uniform in \(u_j\).
+\end{proof}
+
+\begin{hypothesis}[Cap amplitude noncollapse]
+\label{hyp:cap-amplitude-noncollapse}
+\emph{Status: FINITE AUDIT.}  On every good frozen cap \(C_j\), the scalar
+amplitude \(H_{j,p}\) of the row-normal carrier expansion in
+Corollary~\ref{cor:cap-transversality-live-C7-Y12-coordinates} satisfies
+either the pointwise lower bound
+\[
+|H_{j,p}|\ge Q^{-C}
+\qquad\text{on the extracted cap core,}
+\]
+or the weighted average
+\[
+\sum_{p\in C_j}\mu_p|H_{j,p}|^2
+\ge
+Q^{-A}\sum_{p\in C_j}\mu_p.
+\]
+This is independent of the slope-variance identity
+\(\delta_{\mathrm{ext}}\ge Q^{-A}\): the latter constrains the spread of
+\(s_p=\Gamma_{G,2}(p)/\Gamma_G(p)\) across the cap but does not lower-bound
+the scalar amplitude that multiplies \(L_{\mathrm{clean}}(1,s)\) inside
+\(\Phi_p^Y\).  Without amplitude noncollapse, the cap Jacobian
+determinant \(H_{j,p}^2 c_7\alpha_9\) can be polynomially small even when
+the cap is nonstatic.  Amplitude noncollapse is therefore an additional
+finite obligation of the cap bridge, on top of the rank-two quotient and
+row-normal carrier hypotheses.
+\end{hypothesis}
+
+\begin{corollary}[Cap transversality in live carrier coordinates: projective Wronskian form]
+\label{cor:cap-transversality-live-carrier-coordinates}
+\emph{Status: FINITE AUDIT.  Sharper projective form of
+Corollary~\ref{cor:cap-transversality-live-C7-Y12-coordinates}.}
+Under the hypotheses of
+Corollary~\ref{cor:cap-transversality-live-C7-Y12-coordinates} together
+with Hypothesis~\ref{hyp:cap-amplitude-noncollapse},
+\[
+\rho_{7,p}(s)
+=
+H_{j,p}\,c_7+O(Q^{-B'}),
+\qquad
+\rho_{Y,p}(s)
+=
+H_{j,p}(\beta_9^{\mathrm{tri}}+\alpha_9 s)+O(Q^{-B'}),
+\]
+and the projective Wronskian
+\[
+W_p^{\mathrm{proj}}(s)
+:=
+\rho'_{Y,p}(s)\rho_{7,p}(s)-\rho'_{7,p}(s)\rho_{Y,p}(s)
+\]
+satisfies the absolute lower bound
+\[
+\bigl|W_p^{\mathrm{proj}}(s_j)\bigr|
+\ge Q^{-A}
+\]
+on the good cap core.  In particular the lower bound does not contain a
+\(|\rho_{7,p}(s_j)|^2\) factor.
+\end{corollary}
+
+\begin{proof}
+The displayed formulas for \(\rho_{7,p},\rho_{Y,p}\) are the entrywise
+unpacking of the row-normal scalar normal form proved in
+Corollary~\ref{cor:cap-transversality-live-C7-Y12-coordinates}.  At the
+leading order,
+\[
+W_p^{\mathrm{proj}}(s)
+=
+\bigl(H'_{j,p}(\beta_9^{\mathrm{tri}}+\alpha_9 s)+H_{j,p}\alpha_9\bigr)
+H_{j,p}c_7
+-H'_{j,p}c_7\,H_{j,p}(\beta_9^{\mathrm{tri}}+\alpha_9 s)
+=
+H_{j,p}^{\,2}\,c_7\alpha_9,
+\]
+the \(H'_{j,p}\)-terms cancelling because both rows share the same scalar
+amplitude \(H_{j,p}\).  By
+Hypothesis~\ref{hyp:cap-amplitude-noncollapse} and the row-normal carrier
+bound \(|c_7\alpha_9|\ge Q^{-C}\),
+\(|H_{j,p}^{\,2}c_7\alpha_9|\ge Q^{-3C}\); the \(O(Q^{-B'})\) error from the
+quotient residual \(R_p^\dagger q_p\varepsilon_p\) is absorbed for \(B'\)
+sufficiently large.
 \end{proof}
 
 \begin{corollary}[Cap-level Jacobian transversality (superseded conditional bridge)]
