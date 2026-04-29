@@ -39500,6 +39500,201 @@ sides live in the \(Y12\) boundary quotient, not in the abstract line
 \end{proof}
 
 
+\subsubsection{Positive-density extraction covariance and static-line handoff}
+\label{subsubsec:positive-density-extraction-covariance}
+
+The scalar covariance argument is an order argument.  It is therefore
+made with a nonnegative cap density.  On a frozen cap set
+\[
+  \omega_p\ge0,
+  \qquad
+  B_j^{\mathrm{cov}}:=\sum_{p\in C_j}\omega_p\Gamma_p\Gamma_p^*,
+  \qquad
+  \delta_{\mathrm{ext}}^{\mathrm{cov}}
+  :=\frac{\det B_j^{\mathrm{cov}}}{(\operatorname{tr}B_j^{\mathrm{cov}})^2}.
+\]
+If the original extraction coefficient
+\(w_p=\rho_p E_{1,p}H_p/\mathcal N_p^{\mathrm{wt}}\) is already
+nonnegative on the selected branch, take \(\omega_p=w_p\).  If it is
+signed or complex, the covariance object is not the signed matrix
+\(\sum w_p\Gamma_p\Gamma_p^*\); it is the positive-density replacement
+above, with \(\omega_p\) supplied either by a sign-coherent branch or
+by a positive packet density polynomially comparable to the extracted
+mass.
+
+\begin{hypothesis}[Positive extraction density selection]
+\label{hyp:positive-extraction-density-selection}
+On every selected good frozen cap \(C_j\) there is a positive
+covariance density \(\omega_p\ge0\), not identically zero on the chart,
+such that
+\[
+  S_j^{\mathrm{cov}}:=\sum_{p\in C_j}\omega_p|g_p|^2>0,
+  \qquad
+  \Gamma_p=(g_p,h_p)^T,
+\]
+and the cap quadrature/core-transfer estimates used downstream remain
+valid with the associated weights
+\(\mu_p^{\mathrm{cov}}:=\omega_p|g_p|^2\).  Equivalently, the signed
+coefficient \(w_p\) is either restricted to a sign-coherent branch, or
+it is replaced throughout the covariance and cap-core arguments by the
+positive density \(\omega_p\).
+\end{hypothesis}
+
+\begin{lemma}[Exact positive-density cap covariance]
+\label{lem:exact-positive-density-cap-covariance}
+Let \(C_j\) be a frozen cap satisfying
+Hypothesis~\ref{hyp:positive-extraction-density-selection}.  On a chart
+with \(g_p\ne0\), write
+\(\Gamma_p=g_p(1,s_p)^T\),
+\(\mu_p^{\mathrm{cov}}:=\omega_p|g_p|^2\),
+\(S_j^{\mathrm{cov}}:=\sum_{p\in C_j}\mu_p^{\mathrm{cov}}\), and
+\(\bar s_j^{\mathrm{cov}}:=(S_j^{\mathrm{cov}})^{-1}\sum_{p\in C_j}\mu_p^{\mathrm{cov}}s_p\).
+Then
+\[
+  \det B_j^{\mathrm{cov}}
+  =
+  S_j^{\mathrm{cov}}
+  \sum_{p\in C_j}\mu_p^{\mathrm{cov}}
+  |s_p-\bar s_j^{\mathrm{cov}}|^2 .
+\]
+If \(|g_p|\ge\frac12\|\Gamma_p\|\) on \(C_j\), then
+\[
+\frac1{16}
+\frac{\sum_p\mu_p^{\mathrm{cov}}|s_p-\bar s_j^{\mathrm{cov}}|^2}
+     {S_j^{\mathrm{cov}}}
+\le
+\delta_{\mathrm{ext}}^{\mathrm{cov}}
+\le
+\frac{\sum_p\mu_p^{\mathrm{cov}}|s_p-\bar s_j^{\mathrm{cov}}|^2}
+     {S_j^{\mathrm{cov}}}.
+\]
+\end{lemma}
+
+\begin{proof}
+The proof is the \(2\times2\) covariance computation:
+\(B_j^{\mathrm{cov}}=\bigl(\begin{smallmatrix}S_j^{\mathrm{cov}}&\overline{M_j^{\mathrm{cov}}}\\
+M_j^{\mathrm{cov}}&T_j^{\mathrm{cov}}\end{smallmatrix}\bigr)\) with
+\(M_j^{\mathrm{cov}}=\sum_p\mu_p^{\mathrm{cov}}s_p\) and
+\(T_j^{\mathrm{cov}}=\sum_p\mu_p^{\mathrm{cov}}|s_p|^2\).  Thus
+\(\det B_j^{\mathrm{cov}}=S_j^{\mathrm{cov}}T_j^{\mathrm{cov}}-|M_j^{\mathrm{cov}}|^2=S_j^{\mathrm{cov}}\sum_p\mu_p^{\mathrm{cov}}|s_p-\bar s_j^{\mathrm{cov}}|^2\).
+The chart condition gives
+\(S_j^{\mathrm{cov}}\le\operatorname{tr}B_j^{\mathrm{cov}}=\sum_p\mu_p^{\mathrm{cov}}(1+|s_p|^2)\le4S_j^{\mathrm{cov}}\),
+which gives the displayed comparison after division by
+\((\operatorname{tr}B_j^{\mathrm{cov}})^2\).
+\end{proof}
+
+\begin{corollary}[Positive-density nonstatic/static dichotomy]
+\label{cor:positive-density-nonstatic-static-dichotomy}
+Under the hypotheses of
+Lemma~\ref{lem:exact-positive-density-cap-covariance}, for every
+threshold \(Q^{-A}\) either
+\(\delta_{\mathrm{ext}}^{\mathrm{cov}}\ge Q^{-A'}\) or the cap is
+quantitatively static in the positive covariance density:
+\[
+  \sum_{p\in C_j}\mu_p^{\mathrm{cov}}
+  |s_p-\bar s_j^{\mathrm{cov}}|^2
+  \le Q^{-A}S_j^{\mathrm{cov}}.
+\]
+In the static alternative set
+\(s_j^*:=\bar s_j^{\mathrm{cov}}\),
+\(u_j:=(1,s_j^*)^T/(1+|s_j^*|^2)^{1/2}\).  On the same chart, after
+increasing the exponent if necessary,
+\[
+  \sum_{p\in C_j}\mu_p^{\mathrm{cov}}
+  \left\|\frac{(1,s_p)^T}{(1+|s_p|^2)^{1/2}}-u_j\right\|^2
+  \le Q^{-A'}S_j^{\mathrm{cov}}.
+\]
+\end{corollary}
+
+\begin{proof}
+The first assertion is
+Lemma~\ref{lem:exact-positive-density-cap-covariance}.  The final
+estimate follows because, on the chart
+\(|g_p|\ge\frac12\|\Gamma_p\|\), the map
+\(s\mapsto(1,s)^T/(1+|s|^2)^{1/2}\) is uniformly Lipschitz.
+\end{proof}
+
+\begin{proposition}[Static branch in the certified quotient]
+\label{prop:static-branch-certified-quotient-positive-density}
+Let \(C_j\) be in the static alternative of
+Corollary~\ref{cor:positive-density-nonstatic-static-dichotomy}.
+Assume that all packets in \(C_j\) satisfy the concrete row/routing
+certificate \(\mathfrak B_{2Y,p}\), so that
+Theorem~\ref{thm:rank-two-quotient-survival-from-concrete-certificate}
+applies.  Assume also the effective-carrier lower bound, the
+coefficient-good expansion
+\(\Phi_{p,\mathrm{cert}}^Y=H_pE_pL_{\mathrm{eff},p}+\varepsilon_p\),
+the quotient-error estimate, and the source-weighted D4 amplitude
+survival with the positive covariance weights
+\(\mu_p^{\mathrm{cov}}\).  Then
+\[
+  \sum_{p\in C_j}\mu_p^{\mathrm{cov}}
+  \|q_{p,\mathrm{cert}}^Y\Phi_{p,\mathrm{cert}}^Yu_j\|^2
+  \ge Q^{-A}
+  \sum_{p\in C_j}\mu_p^{\mathrm{cov}}
+  \|\Phi_{p,\mathrm{cert}}^Yu_j\|^2 .
+\]
+\end{proposition}
+
+\begin{proof}
+The rank-two row/routing certificate gives
+\(\sigma_{\min}(q_{p,\mathrm{cert}}^YE_p)\ge Q^{-C}\).  The effective
+carrier lower bound gives \(\|L_{\mathrm{eff},p}v\|\ge Q^{-C}\|v\|\)
+for every \(v\in\mathbb C^2\).  Applying these estimates to the fixed
+unit vector \(u_j\), using the carrier expansion, summing with the
+weights \(\mu_p^{\mathrm{cov}}\), applying source-weighted D4
+amplitude survival, and absorbing the quotient error yields the stated
+inequality.  The perturbative static estimate from
+Corollary~\ref{cor:positive-density-nonstatic-static-dichotomy}
+transfers the same lower bound from the actual directions to the
+frozen direction \(u_j\).
+\end{proof}
+
+\begin{theorem}[Extraction covariance closure in positive-density form]
+\label{thm:positive-density-extraction-covariance-closure}
+Assume Hypothesis~\ref{hyp:positive-extraction-density-selection}.  On
+every selected good frozen cap satisfying the good chart condition,
+either \(\delta_{\mathrm{ext}}^{\mathrm{cov}}\ge Q^{-A}\) or the typed
+static-line handoff in
+Proposition~\ref{prop:static-branch-certified-quotient-positive-density}
+holds, provided the concrete rank-two row/routing certificate,
+effective carrier lower bound, and source-weighted D4 amplitude
+survival hold on the cap.
+\end{theorem}
+
+\begin{proof}
+Apply Corollary~\ref{cor:positive-density-nonstatic-static-dichotomy}.
+The nonstatic alternative is the first displayed conclusion.  In the
+static alternative, apply
+Proposition~\ref{prop:static-branch-certified-quotient-positive-density}.
+\end{proof}
+
+\begin{remark}[Signed extraction coefficients]
+\label{rem:signed-extraction-coefficients-not-covariance}
+If the original coefficients \(w_p\) are signed or complex, then
+\(\sum_p w_p\Gamma_p\Gamma_p^*\) is not a positive covariance matrix,
+and \(\det(B_j)/(\operatorname{tr}B_j)^2\) has no variance
+interpretation.  The literal signed matrix can be used only after a
+sign-coherent restriction that makes it positive up to a common phase.
+Otherwise all cap covariance, static-slope, and cap-core estimates
+must be written with \(B_j^{\mathrm{cov}}\),
+\(\delta_{\mathrm{ext}}^{\mathrm{cov}}\), and
+\(\mu_p^{\mathrm{cov}}\).
+\end{remark}
+
+\begin{remark}[Current finite obligation]
+\label{rem:extraction-covariance-current-finite-obligation}
+\emph{Status: FINITE AUDIT.}  The positive-density covariance algebra
+above is complete.  The remaining finite obligations are external to
+the covariance identity: first, prove the positive extraction density
+selection if the original \(w_p\) is not already sign-coherent;
+second, verify the raw entries of \(\mathfrak B_{2Y,p}\) from finite
+row formulas so that the certified rank-two quotient route applies on
+all selected packets.  Without these two inputs, the extraction
+module is a finite audit rather than an unconditional theorem.
+\end{remark}
+
+
 \begin{lemma}[Static-line transfer from actual \(Y12\)-survival]
 \label{lem:static-line-transfer-from-actual-Y12-survival}
 Let \(C_j\) be a quantitatively static good cap.  Put
