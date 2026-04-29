@@ -37939,57 +37939,99 @@ S_j\le \operatorname{tr}B_j
 Dividing by \((\operatorname{tr}B_j)^2\) gives the claimed comparison.
 \end{proof}
 
-\begin{lemma}[Extraction covariance dichotomy]
+\begin{lemma}[Exact extraction covariance dichotomy]
 \label{lem:extraction-covariance-dichotomy}
-On each frozen cap \(C_j\), let
+Let \(C_j\) be a good frozen cap.  Assume \(w_p\ge0\), write
 \[
-B_j=\sum_{p\in C_j} w_p\,\Gamma_p\Gamma_p^\ast,
+\Gamma_p=\binom{g_p}{h_p}=g_p\binom{1}{s_p},
 \qquad
-w_p=\rho_p\frac{E_{1,p}H_p}{\mathcal N^{\mathrm{wt}}_p},
+\mu_p:=w_p|g_p|^2,
 \qquad
-\Gamma_p=\binom{\Gamma_G(p)}{\Gamma_{G,2}(p)}.
+S_j:=\sum_{p\in C_j}\mu_p>0,
 \]
-Then either
+and set
 \[
-\det(B_j)\ge Q^{-A}(\operatorname{tr}B_j)^2,
+\bar s_j:=S_j^{-1}\sum_{p\in C_j}\mu_p s_p.
 \]
-equivalently
+By Lemma~\ref{lem:exact-cap-covariance-identity},
 \[
-\sum_{p\in C_j}\lambda_p|r_p-\bar r_j|^2\ge Q^{-A},
+\det(B_j)
+=
+S_j\sum_{p\in C_j}\mu_p|s_p-\bar s_j|^2.
 \]
-where \(r_p=\Gamma_{G,2}(p)/\Gamma_G(p)\) on the chart
-\(|\Gamma_G|\ge \tfrac12|\Gamma|\), or else \(B_j\) is nearly rank one and the
-wall is effectively static.  In the static-line case, one must hand the cap to
-the \(Y12\) quotient test:
+If \(|g_p|\ge \tfrac12\|\Gamma_p\|\) on \(C_j\), then
 \[
-\eta_j:=|(I-P_{\mathcal K_j^Y})u_j|^2\ge Q^{-A}.
+\frac1{16}
+\frac{\sum_p\mu_p|s_p-\bar s_j|^2}{S_j}
+\le
+\delta_{\mathrm{ext}}
+\le
+\frac{\sum_p\mu_p|s_p-\bar s_j|^2}{S_j}.
 \]
+Consequently, for every threshold \(Q^{-A}\), either
+\[
+\delta_{\mathrm{ext}}\ge Q^{-A'}
+\]
+or the cap is quantitatively static:
+\[
+\sum_{p\in C_j}\mu_p|s_p-\bar s_j|^2
+\le
+Q^{-A}S_j,
+\]
+in which case the static slope is \(s_j^\ast:=\bar s_j\).
 \end{lemma}
 
-\begin{hypothesis}[Cap nonstaticity or static-line survival]
-\label{hyp:cap-nonstaticity-or-static-survival}
-\emph{Status: FINITE AUDIT.}  For every good frozen cap \(C_j\), either
-\[
-\sum_{p\in C_j}w_p|\Gamma_G(p)|^2|s_p-\bar s_j|^2
-\ge
-Q^{-A}
-\sum_{p\in C_j}w_p|\Gamma_G(p)|^2,
-\]
-or the associated static direction
+\begin{remark}[Static branch is not closed by one-wall anti-concentration]
+\label{rem:static-branch-not-closed}
+The dichotomy in
+Lemma~\ref{lem:extraction-covariance-dichotomy} is a tautology from the
+algebraic identity in Lemma~\ref{lem:exact-cap-covariance-identity}, so the
+nonstatic / static covariance dichotomy itself is proved.  However, a
+one-wall anti-concentration condition
+\(\ell_p(\Gamma)=a_p\Gamma_G+b_p\Gamma_{G,2}\) with \(|b_p|\ge Q^{-A}\) does
+not force \((\Gamma_G,\Gamma_{G,2})\) to span two directions on a cap: a
+cap with \(\Gamma_p=A_p(1,s_0)^T\) for all \(p\in C_j\) gives
+\(\det(B_j)=0\) and \(\delta_{\mathrm{ext}}=0\) while
+\(|a_p+b_p s_0|\) can remain polynomially nonzero.  Thus the static branch
+is not ruled out by moving-wall anti-concentration alone; the missing
+finite input is the static-line \(Y12\) quotient survival hypothesis below.
+\end{remark}
+
+\begin{hypothesis}[Static-line \(Y12\) quotient survival]
+\label{hyp:static-line-Y12-quotient-survival}
+\emph{Status: FINITE AUDIT.}  Let \(C_j\) be a quantitatively static good
+cap (Lemma~\ref{lem:extraction-covariance-dichotomy}) and let
 \[
 u_j=\frac{(1,s_j^\ast)}{\sqrt{1+|s_j^\ast|^2}}
 \]
-satisfies
+be its static direction.  Let
 \[
-\|(I-P_{\mathcal K_j^Y})u_j\|^2\ge Q^{-A}.
+\Phi_p^Y
+:=
+\Pi_{\Sigma(Y12)}
+T_{\mathrm{tr}\to\mathrm{sing},p}
+E_{\mathrm{car},p}^{\mathrm{tr}}
+L_{\mathrm{clean},p}^{\mathrm{tr}}
 \]
-By Lemma~\ref{lem:exact-cap-covariance-identity}, the first alternative is
-equivalent (up to absolute constants) to
-\(\delta_{\mathrm{ext}}=\det(B_j)/(\operatorname{tr}B_j)^2\ge Q^{-A}\); the
-second alternative is the static-line handoff to the \(Y12\) quotient module.
-The algebraic identity is proved (Lemma~\ref{lem:exact-cap-covariance-identity});
-the variance lower bound itself, and the static-line lower bound on
-\(\eta_j\), remain open inputs in the present draft.
+be the \(D4\)/\(Y12\) carrier map into the quotient ambient space.  Then
+\[
+\sum_{p\in C_j}\mu_p
+\|(I-P_{\mathcal K_p^Y}^{\mathrm{bd}})\Phi_p^Yu_j\|^2
+\ge
+Q^{-A}
+\sum_{p\in C_j}\mu_p\|\Phi_p^Yu_j\|^2.
+\]
+This is the missing finite input that closes the static branch of the
+extraction dichotomy.  It is the typed replacement for the earlier
+ill-typed expression \(\|(I-P_{\mathcal K_j^Y})u_j\|^2\), since
+\(\mathcal K_p^Y\) lives in the ambient quotient space, not in the
+two-dimensional extraction plane to which \(u_j\) belongs.
+
+The algebraic dichotomy
+(Lemma~\ref{lem:extraction-covariance-dichotomy}) is proved; the
+\(\delta_{\mathrm{ext}}\ge Q^{-A}\) lower bound on the nonstatic branch
+and the present static-line \(Y12\) quotient survival on the static
+branch remain open inputs.
 \end{hypothesis}
 
 \begin{remark}[Cap-wise covariance bottleneck]
