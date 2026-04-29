@@ -38216,6 +38216,22 @@ discharged by
 Corollary~\ref{cor:transition-singular-determinant-certified-quotient}.
 \end{remark}
 
+\begin{remark}[Agent~3 low-block coercivity status after certification]
+\label{rem:agent-three-delta-coerc-status-after-certification}
+The low-block \(Y12\) graph/coercivity item is closed for the certified
+singular retained space by
+Theorem~\ref{thm:low-block-coercivity-certified-singular-quotient} and
+Corollary~\ref{cor:transition-singular-determinant-certified-quotient}.
+Older remarks that describe \(\delta_{\mathrm{coerc}}\) as a raw finite
+audit should be read as warnings about non-certified retained spaces
+only.  In the active proof route all transition--singular low-block
+objects must use \(R_{\mathrm{sing},p}^{\mathrm{cert}}\),
+\(P_{\mathrm{sing},p}^{\mathrm{cert}}\), and \(D_p^{\mathrm{cert}}\).
+With these certified objects, the low-block gap
+\(\delta_{\mathrm{coerc},p}\ge Q^{-A}\) is supplied by the certified
+singular quotient.  It is not an additional open cap-side item.
+\end{remark}
+
 \begin{hypothesis}[Transition--singular low-block determinant]
 \label{hyp:transition-singular-low-block-determinant}
 \emph{Status: discharged for the certified singular retained space by
@@ -38261,6 +38277,12 @@ singular norm.
 
 \begin{remark}[Why this is still a finite audit, not an unconditional theorem]
 \label{rem:transition-singular-determinant-still-finite-audit}
+\emph{Historical/raw-space warning.}  This warning applies to older raw
+retained singular spaces.  It is superseded in the active proof route
+by the certified singular retained space of
+Theorem~\ref{thm:low-block-coercivity-certified-singular-quotient}; see
+Remark~\ref{rem:agent-three-delta-coerc-status-after-certification}.
+
 The determinant above is not a consequence of source survival, ordinary
 Graph/O2O3 survival, or certified \(Y12\)-quotient survival.  Those inputs
 do not determine the principal angle between
@@ -38478,12 +38500,19 @@ Corollary~\ref{cor:triangular-C7-Y12-normal-row-closure}.
 
 \begin{remark}[Status]
 \label{rem:status-after-rankone-vs-full-audit}
-\emph{Status: FINITE AUDIT.}  The new source/D4 amplitude repair removes
-the amplitude-mass obstruction, but it does not compute the
-transition--singular determinant.  The current proof therefore remains a
-finite audit at \(\delta_{\mathrm{coerc}}\): the missing item is a second
-independent singular-normal row, or a proof that the intended low block
-has been reduced to a one-dimensional \(Y12\)-normal quotient.
+\emph{Historical/raw-space warning.}  This warning applies to older raw
+retained singular spaces.  It is superseded in the active proof route
+by the certified singular retained space of
+Theorem~\ref{thm:low-block-coercivity-certified-singular-quotient}; see
+Remark~\ref{rem:agent-three-delta-coerc-status-after-certification}.
+
+\emph{Status: FINITE AUDIT (raw retained spaces).}  The new source/D4
+amplitude repair removes the amplitude-mass obstruction, but for raw
+retained spaces it does not compute the transition--singular
+determinant.  Such raw spaces remain at finite audit at
+\(\delta_{\mathrm{coerc}}\): the missing item is a second independent
+singular-normal row, or a proof that the intended low block has been
+reduced to a one-dimensional \(Y12\)-normal quotient.
 \end{remark}
 
 \begin{hypothesis}[Low-block Gershgorin margin]
@@ -40701,30 +40730,38 @@ smallest singular value is zero.
 
 \begin{remark}[Status after the coordinator review]
 \label{rem:status-after-review-714}
-\emph{Status: FINITE AUDIT.}
+\emph{Status: finite coefficient audit, with the effective-carrier
+bottom item closed in the active carrier quotient.}
 The earlier rank-two \(C_7/Y12\) quotient-survival hypothesis has been
-retired in favour of
-Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival} and the concrete
-row certificate of
+retired in favour of the torsion-free formulation
+Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival} and the
+concrete row certificate of
 Definition~\ref{def:concrete-row-certificate-C7-Y12}.  The certified
-quotient is not a free choice of rows: the rows must be constructed from
-the septic row and the fixed-whitening primitive row, and the raw nuisance
-list must pass the column routing certificate.  The smallest remaining coefficient theorem is
+quotient is not a free choice of rows: the rows must be constructed
+from the septic row and the fixed-whitening primitive row, and the raw
+nuisance list must pass the column-routing certificate.
+
+After the six-row carrier correction table, the smallest remaining
+coefficient certificate is
 \[
-\boxed{\mathfrak C_{2Y}(p):
+\boxed{\mathfrak C_{2Y}^{\rm row/route}(p):
 \begin{array}{l}
 \text{the concrete rows }(\ell_{7,p},\ell_{9,p}^Y)\text{ exist with polynomial norm;}\\
-\text{each of }R_{B_2},R_P,R_D,A_\alpha,A_{<7}\text{ is row-dead;}\\
-\text{the live parts of }A_7,A_{II},A_{E_2}\text{ are either zero or coherent/rerouted;}\\
-\text{no atom-local live }C_7/Y12\text{ coefficient is quotient-killed;}\\
-\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-C}.
+\text{each of }R_{B_2},R_P,R_D,A_\alpha,A_{<7}\text{ is row-dead or fixed-coherent;}\\
+\text{the live parts of }A_7,A_{II},A_{E_2}\text{ are zero, residual, or coherent/rerouted;}\\
+\text{no atom-local live }C_7/Y12\text{ coefficient is quotient-killed.}
 \end{array}}
 \]
-If \(\mathfrak C_{2Y}(p)\) is proved for all selected packets, then
-Theorem~\ref{thm:cap-Y12-bridge-after-concrete-row-certification} closes the
-rank-two cap/\(Y12\) bridge.  If \(\mathfrak C_{2Y}(p)\) fails because an
-atom-local live column remains, the current rank-two quotient route is not
-merely incomplete; it is false on that packet.
+The formerly separate bottom item
+\(\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-C}\) is discharged, for the
+active carrier-quotient route, by
+Theorem~\ref{thm:effective-carrier-closes-after-six-row-table}.  If
+\(\mathfrak C_{2Y}^{\rm row/route}(p)\) is proved for all selected
+packets, then
+Theorem~\ref{thm:cap-Y12-bridge-after-concrete-row-certification} closes
+the rank-two cap/\(Y12\) bridge.  If it fails because an atom-local live
+column remains, the current rank-two quotient route is false on that
+packet, not merely incomplete.
 \end{remark}
 
 \begin{definition}[Explicit coefficient certificate for the concrete rank-two quotient]
@@ -40904,10 +40941,15 @@ unresolved coefficient checks are:
 \text{(ii)} & \text{fixed-whitening separation: }
 \operatorname{dist}(a_Y,W_{\mathrm{dead}}^{\mathrm{fixed}})\ge Q^{-A}|a_Y|;\\[1mm]
 \text{(iii)} & \text{row-deadness of }R_{B_2},R_P,R_D,A_\alpha,A_{<7};\\[1mm]
-\text{(iv)} & \text{classification of }A_7,A_{II},A_{E_2}\text{ as zero/residual/coherent, not atom-local;}\\[1mm]
-\text{(v)} & \text{effective carrier noncancellation }\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-A}.
+\text{(iv)} & \text{classification of }A_7,A_{II},A_{E_2}
+\text{ as zero/residual/coherent, not atom-local.}
 \end{array}
 \]
+The earlier effective-carrier item (v) is now closed in the active
+carrier-quotient route by the six-row correction table and the clean
+triangular determinant:
+\(L_{\mathrm{eff},p}=L_{\mathrm{clean},p}^{\mathrm{tri}}\),
+\(\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-A}\).
 In particular the primitive arithmetic coefficient
 \[
  c_{\mathrm{arith},Y}
@@ -41434,43 +41476,44 @@ determinant/singular-value identity gives
 \(L_{\mathrm{eff},p}=L_{\mathrm{clean},p}\), the claim follows.
 \end{proof}
 
-\begin{remark}[Replacement for the bottom line of \(\mathfrak R_{2Y}\)]
+\begin{remark}[Bottom line of \(\mathfrak R_{2Y}\) after the carrier table]
 \label{rem:replace-bottom-line-R2Y-det-certificate}
-Replace the final clause
-\(\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-A}\) in
-Definition~\ref{def:explicit-coefficient-certificate-C2Y} by the explicit
-coefficient condition \(\mathfrak C_{2Y}^{\det}(p)\), or by the stronger
-triangular certificate of
-Definition~\ref{def:triangular-effective-carrier-certificate-2Y}.  The
-singular-value lower bound is then
-Lemma~\ref{lem:det-certificate-implies-effective-carrier-coercivity} or
-Lemma~\ref{lem:triangular-certificate-closes-effective-carrier}.  Without
-one of these determinant anti-cancellation conditions, the bottom item is
-not proved by row certification and column routing alone, by
-Proposition~\ref{prop:unrestricted-live-routing-does-not-imply-Leff-coercivity}.
+The final clause \(\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-A}\) in
+Definition~\ref{def:explicit-coefficient-certificate-C2Y} is now
+supplied, in the active carrier-quotient route, by the six-row carrier
+correction table:
+\(L_{\mathrm{eff},p}=L_{\mathrm{clean},p}^{\mathrm{tri}}\),
+\(\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-A}\).  Equivalently, item (v)
+of the older effective-carrier audit is discharged by
+Lemma~\ref{lem:six-row-carrier-correction-table} and
+Theorem~\ref{thm:effective-carrier-closes-after-six-row-table}.  The
+more general determinant certificate \(\mathfrak C_{2Y}^{\det}(p)\) and
+the triangular certificate remain recorded as fallback tools for a
+different routing convention in which coherent live correction matrices
+are not forced to vanish in \(\mathcal Q_{\rm car}\).  They are not
+additional assumptions in the active route.
 \end{remark}
 
-\begin{remark}[Status of the effective carrier item]
+\begin{remark}[Effective carrier item after the six-row table]
 \label{rem:effective-carrier-item-current-status}
-\emph{Status: FINITE AUDIT.}  The clean triangular determinant is proved on
-Gram-good packets.  The certified quotient theorem proves survival of the
-retained carrier plane \(q_{p,\mathrm{cert}}^YE_p\).  These two facts do
-not control the determinant of
-\(L_{\mathrm{eff},p}=L_{\mathrm{clean},p}+M_{\mathrm{live},p}\).  The
-remaining formula-level object is the determinant anti-cancellation
-certificate \(\mathfrak C_{2Y}^{\det}(p)\), or the stronger
-vanishing/triangular correction-row certificate.  If the six correction
-rows
-\(R_{\nu}^{(b)}\),
-\(\nu\in\{\mathrm{line},\mathrm{bg/core},\mathrm{norm/sub}\}\),
-\(b\in\{7,9\}\),
-have zero retained carrier projection before scalar collapse, then
-\(M_{\mathrm{live},p}=0\) and the effective carrier item is closed by
-Corollary~\ref{cor:vanishing-carrier-correction-closes-bottom-item}.
-Otherwise one must prove the determinant lower bound in
-Definition~\ref{def:effective-2Y-carrier-determinant-certificate}.  This
-is a finite coefficient computation, not a consequence of the quotient
-Schur gap.
+\emph{Status: discharged in the active carrier-quotient formulation.}
+The clean triangular determinant is proved on Gram-good packets, and the
+six-row carrier correction table shows that the line, background/core,
+and normalization/subtraction correction rows have zero retained
+\(C_7/Y12\)-projection in \(\mathcal Q_{\rm car}\).  Hence
+\[
+  M_{\mathrm{live},p}^{\mathrm{corr}}=0,
+  \qquad
+  L_{\mathrm{eff},p}=L_{\mathrm{clean},p}^{\mathrm{tri}},
+\]
+and Theorem~\ref{thm:effective-carrier-closes-after-six-row-table} gives
+\(\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-C}\) on Gram-good packets.
+The determinant anti-cancellation certificate
+\(\mathfrak C_{2Y}^{\det}(p)\) remains useful only for alternative routes
+in which additional coherent live corrections are allowed after the
+six-row carrier-quotient convention is abandoned or replaced.  Under the
+active associated-graded carrier convention, no separate determinant
+anti-cancellation condition remains for the six correction rows.
 \end{remark}
 
 \begin{theorem}[Verification theorem for \texorpdfstring{$\mathfrak C_{2Y}(p)$}{C2Y(p)}]
@@ -41491,8 +41534,12 @@ tests of Lemma~\ref{lem:A7-raw-column-classification-2Y}.
 Theorem~\ref{thm:primitive-arithmetic-coefficient-classification-2Y}.
 \item The \(E_2/R_{\mathrm{lab}}\) no-atom-fitting guardrails of
 Theorem~\ref{thm:no-atom-fitting-2Y-plus} hold.
-\item Every coherent live correction is coordinate-coherent, and
-\(\sigma_{\min}(L_{\mathrm{clean},p})\ge Q^{-A}\).
+\item The associated-graded six-row carrier correction table holds,
+namely Lemma~\ref{lem:six-row-carrier-correction-table}; equivalently
+the line, background/core, and normalization/subtraction correction
+rows have zero retained \(C_7/Y12\)-projection in
+\(\mathcal Q_{\rm car}\).  The clean triangular D4 carrier is
+Gram-good.
 \end{enumerate}
 Then the full concrete certificate \(\mathfrak C_{2Y}(p)\) holds:
 \[
@@ -41528,32 +41575,42 @@ residual; no atom-local live column is quotient-killed.  The certified
 dead quotient is therefore formed only from row-dead remainders, and
 Theorem~\ref{thm:rank-two-quotient-survival-from-concrete-certificate}
 gives \(\sigma_{\min}(q_{p,\mathrm{cert}}^YE_p)\ge Q^{-A}\) and the
-dead-only descent statement.  Finally, item (8) and
-Lemma~\ref{lem:effective-carrier-noncancellation-coordinate-coherent-2Y}
-give \(\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-A}\).
+dead-only descent statement.  Finally, item (8),
+Lemma~\ref{lem:six-row-carrier-correction-table}, and
+Theorem~\ref{thm:effective-carrier-closes-after-six-row-table} give
+\(L_{\mathrm{eff},p}=L_{\mathrm{clean},p}^{\mathrm{tri}}\) and
+\(\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-A}\).  Thus the effective
+carrier lower bound is supplied by the carrier-quotient six-row
+computation rather than by an independent coherent-live
+anti-cancellation hypothesis.
 \end{proof}
 
 \begin{remark}[Updated smallest remaining theorem]
 \label{rem:updated-smallest-remaining-theorem-C2Y}
-After Theorem~\ref{thm:verification-C2Y-certificate-continued}, the
-remaining work is no longer the abstract construction of live rows or
-the Schur-gap linear algebra.  The smallest coefficient theorem that
-still must be checked from the actual formulas is the eight-item packet
-certificate listed in that theorem.  In particular, the most delicate
-entries are:
+After Theorem~\ref{thm:verification-C2Y-certificate-continued} and the
+six-row carrier correction table, the remaining work is no longer the
+abstract construction of live rows, the Schur-gap linear algebra, or
+the effective-carrier determinant.  The smallest coefficient theorem
+still to be checked from the actual formulas is the row/routing
+certificate:
 \[
 \begin{array}{ll}
-\text{(a)} & \Delta_7^\nabla(C_{7,p}^{\mathrm{tar}})\text{ has a polynomial lower bound;}\\
-\text{(b)} & P_WV_{\mathrm{arith}}^{\mathrm{fixed}}\subseteq W_{\mathrm{dead}}^{\mathrm{fixed}}
+\text{(a)} & \Delta_7^\nabla(C_{7,p}^{\mathrm{tar}})
+\text{ has a polynomial lower bound and the }C_Y\text{ grade is separated;}\\
+\text{(b)} & P_WV_{\mathrm{arith}}^{\mathrm{fixed}}
+\subseteq W_{\mathrm{dead}}^{\mathrm{fixed}}
 \text{ and no primitive atom-local }II_{\mathrm{arith},9}\text{ slot appears;}\\
 \text{(c)} & E_2/R_{\mathrm{lab}}\text{ satisfies the no-atom-fitting guardrails;}\\
-\text{(d)} & \text{coherent live corrections are coordinate-coherent, hence cannot cancel }L_{\mathrm{clean},p}.
+\text{(d)} & \text{all nonzero live signatures of }A_7,A_{II},A_{E_2}
+\text{ are residual or coherent/rerouted, never atom-local quotient-killed.}
 \end{array}
 \]
-If these four formula-level facts are proved, the entire row/quotient/
-effective-carrier part of \(\mathfrak C_{2Y}(p)\) is proved.  If any of
-them fails with an atom-local live vector, the rank-two \(Y12\) quotient
-route is false on that packet, not merely incomplete.
+The coherent-live determinant item has been removed from this list in
+the active route: the six correction rows vanish in
+\(\mathcal Q_{\rm car}\), so
+\(L_{\mathrm{eff},p}=L_{\mathrm{clean},p}^{\mathrm{tri}}\).  If any of
+(a)--(d) fails with an atom-local live vector, the rank-two \(Y12\)
+quotient route is false on that packet, not merely incomplete.
 \end{remark}
 
 \begin{definition}[Certified live-row quotient]
@@ -43175,6 +43232,30 @@ remainders have no retained \(C_7/Y12\) projection in the carrier
 quotient.
 \end{remark}
 
+\begin{remark}[Scope of the six-row carrier correction table]
+\label{rem:six-row-table-carrier-quotient-not-scalar-I}
+Lemma~\ref{lem:six-row-carrier-correction-table} and
+Theorem~\ref{thm:effective-carrier-closes-after-six-row-table} are
+statements in the associated-graded carrier quotient
+\(\mathcal Q_{\rm car}=\mathcal M_{\rm car}/\mathcal C_{\rm car}\).  They
+are not scalar \(I\)-coordinate non-cancellation theorems.  The proof
+uses the fact that the retained carrier classes \([\mathsf C_7]\) and
+\([\mathsf C_{Y12}]\) remain distinct from the line, background/core,
+and normalization/subtraction correction classes before scalar collapse.
+Thus
+\[
+  P_{W_{\rm car}}R_{\nu}^{(b)}=0,
+  \qquad
+  \nu\in\{\mathrm{line},\mathrm{bg/core},\mathrm{norm/sub}\},
+  \quad b\in\{7,9\},
+\]
+is a carrier-quotient statement.  If one applies a scalar collapse map
+\(S_I:\mathcal M_{\rm car}\to\mathcal O\cdot I\), distinct carrier
+labels may acquire scalar incidences; those incidences belong to the
+quarantined scalar-\(I\) fallback audit and are not used in the active
+D4 route.
+\end{remark}
+
 \begin{theorem}[Effective carrier closes after the six-row table]
 \label{thm:effective-carrier-closes-after-six-row-table}
 On every Gram-good packet in the carrier-quotient route, the six-row
@@ -43398,17 +43479,18 @@ gives
 The residual estimate is immediate from \(\varepsilon_{\rm rem}=0\).
 \end{proof}
 
-\begin{remark}[Scalar \(I\)-coordinate D4 is dead]
+\begin{remark}[Scalar \(I\)-coordinate D4 is quarantined]
 \label{rem:agent-six-final-scalar-I-D4-quarantined}
 The scalar \(I\)-coordinate D4 formulation is not an active proof route.  It
-collapses distinct carrier classes and reintroduces cancellations that are
-absent in the carrier quotient.  The active D4 statement is the
-carrier-quotient row-energy statement for the canonical scalar source
-\[
-u=q''_{\can}.
-\]
-Any future scalar \(I\)-coordinate argument would be a new theorem, not a
-fallback use of the present D4 package.
+collapses distinct carrier classes and can reintroduce cancellations that are
+absent in the associated-graded carrier quotient.  The active D4 statement is
+the carrier-quotient row-energy statement for the canonical scalar source
+\(u=q''_{\can}\).  In particular,
+Corollary~\ref{cor:agent-six-final-D4-residual-closes-carrier-quotient} and
+Theorem~\ref{thm:effective-matrix-carrier-quotient-d4} do not assert a lower
+bound after applying a scalar collapse map \(S_I\).  Any future scalar
+\(I\)-coordinate proof would require its own incidence-avoidance theorem; it
+is not a fallback consequence of the present carrier-quotient D4 package.
 \end{remark}
 
 \begin{remark}[Compatibility with high-dimensional Gate--1 redesigns]
@@ -43557,9 +43639,15 @@ S_I:\mathcal M_{\rm car}\to \mathcal O\cdot I
 \]
 has sent several independent carrier directions to the same scalar
 \(I\)-coordinate.
-The active D4 theorem in this draft is the carrier-quotient theorem
-\ref{thm:d4-carrier-quotient-through-order-nine}; the scalar \(I\)-coordinate
-formulation below is retained only as a fallback audit.  In the carrier quotient, the lower-carrier, line,
+The active D4 theorem in this draft is the effective-matrix
+carrier-quotient conversion theorem,
+Theorem~\ref{thm:effective-matrix-carrier-quotient-d4}, together with the
+formal residual closure of
+Corollary~\ref{cor:agent-six-final-D4-residual-closes-carrier-quotient} and
+the six-row correction table of
+Lemma~\ref{lem:six-row-carrier-correction-table}.  The scalar
+\(I\)-coordinate formulation below is retained only as a quarantined
+fallback audit.  In the carrier quotient, the lower-carrier, line,
 background/core, and normalization/subtraction contributions are nuisance
 directions.  Thus the scalar incidence wall
 \[
@@ -56737,61 +56825,57 @@ in the scale-normalized \(H^2\)-ledger.
 \section{Conditional status after the downstream closure repairs}
 \label{sec:final-status-after-downstream-closure-repairs}
 
-\begin{remark}[Current architecture ledger after the D4-amplitude repair]
+\begin{remark}[Current architecture ledger after the downstream closures]
 \label{rem:current-architecture-ledger-unified}
-The current proof architecture is still a finite-survival chain, not yet a
-closed proof of \(\RH\).  After the actual-source D4-amplitude repair, the
-unresolved or structurally audited inputs are:
+The current proof architecture is still a finite-survival chain, not
+yet a closed proof of \(\RH\).  After the actual-source D4-amplitude
+repair, the Agent~3 certified-coercivity closure, and the six-row
+effective-carrier table, the unresolved or structurally audited inputs
+are:
 \begin{enumerate}
-\item aggregate \(L^2\)-observability for \(q''_{\can}\) and the associated
-branch/reference domination;
-\item finite/O2O3 packet-model hypotheses feeding the Fej\'er--Riesz graph
-anti-lock theorem;
-\item rank-two \(Y12\) quotient survival
-\[
-  \sigma_{\min}\bigl(q_p^Y[C_{7,p}^{\mathrm{tar}},C_{Y,p}^{\mathrm{tar}}]\bigr)
-  \ge Q^{-C};
-\]
-\item \(Y12\)-graph/coercivity and row-normal effective D4 carrier survival,
-including \(\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-C}\);
+\item aggregate \(L^2\)-observability for \(q''_{\can}\) and the
+associated branch/reference domination;
+\item finite/O2O3 packet-model hypotheses feeding the Fej\'er--Riesz
+graph anti-lock theorem;
+\item the concrete rank-two \(Y12\) row/routing certificate, i.e.\
+bounded septic/whitening rows and no atom-local live \(C_7/Y12\)
+coefficient is quotient-killed;
 \item extraction covariance survival
-\(\delta_{\mathrm{ext}}\ge Q^{-A}\) or the typed static-line \(Y12\) handoff;
-\item the final same-norm singular-discard/atomic comparison, including the
-construction of the forbidden channel and the Type-I local-square upper in the
-same quotient norm as the surviving lower bound.
+\(\delta_{\mathrm{ext}}\ge Q^{-A}\) or the typed static-line \(Y12\)
+handoff;
+\item the final same-norm singular-discard/atomic comparison, including
+the construction of the forbidden channel and the Type-I local-square
+upper in the same quotient norm as the surviving lower bound.
 \end{enumerate}
-The \(D4\) scalar amplitude mass is no longer an independent cap-side open
-item on ordinary real-canonical routed blocks: it is discharged by
-Theorems~\ref{thm:actual-source-D4-amplitude-nonflatness},
-\ref{thm:source-weighted-D4-amplitude-nonflatness}, and
-Corollary~\ref{cor:discrete-cap-D4-amplitude-survival-from-actual-source},
-provided the upstream source gates and cap-transfer estimates have been
-proved.  The principal-angle/Schur component \(\delta_{\mathrm{graph}}\) is
-also not listed as unresolved here: it is supplied by
-Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3} once the
-finite/O2O3 packet-model hypotheses are verified.  Any sentence implying
-that finite \(D4\) alone closes the proof should be replaced by
-``visibility, not contradiction unless \(\Lambda\).''
+The following items should no longer be listed as independent cap-side
+open obligations in the active route: D4 scalar amplitude mass on
+ordinary real-canonical routed blocks, the Agent~3 certified low-block
+coercivity \(\delta_{\mathrm{coerc}}\), and the effective-carrier lower
+bound \(\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-C}\).  They are
+respectively supplied by the actual-source nonflatness package, the
+certified singular quotient, and the six-row carrier correction table,
+subject to their stated upstream hypotheses and certified-object
+conventions.
 \end{remark}
 
-\begin{remark}[Updated downstream module ledger after the D4-amplitude repair]
+\begin{remark}[Updated downstream module ledger]
 \label{rem:updated-downstream-module-ledger-after-D4-amplitude-repair}
-After the actual-source D4 amplitude nonflatness repair, the scalar amplitude
-factor \(H_p\) should not be listed as an independent cap-side obstruction on
-ordinary real-canonical routed blocks.  The remaining downstream inputs are:
+After the actual-source D4 amplitude nonflatness repair, the Agent~3
+certified-coercivity closure, and the six-row carrier correction table,
+the remaining downstream ledger is:
 \[
 \begin{array}{c|c|c}
-\text{module} & \text{status after this repair} & \text{remaining obligation}\\
+\text{module} & \text{status in the active route} & \text{remaining obligation}\\
 \hline
 Y12\text{-quotient/rank-two carrier survival}
-& \text{open finite rank test}
-& \sigma_{\min}(q_p^Y[C_{7,p}^{\mathrm{tar}},C_{Y,p}^{\mathrm{tar}}])\ge Q^{-C}\\
+& \text{finite row/routing audit}
+& \mathfrak C_{2Y}^{\rm row/route}(p)\\
 Y12\text{-graph/coercivity}
-& \text{finite audit}
-& \sigma_{\min}(D_p)\ge Q^{-C}\text{ after projection}\\
+& \text{discharged for certified singular quotient}
+& \text{use }R_{\mathrm{sing}}^{\mathrm{cert}},P_{\mathrm{sing}}^{\mathrm{cert}}\\
 \text{row-normal }D4\text{ carrier}
-& \text{conditional on quotient/coercivity}
-& \sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-C}\\
+& \text{discharged in carrier quotient}
+& \text{six-row table; no scalar }I\text{-collapse}\\
 D4\text{ amplitude mass}
 & \text{discharged downstream of Gate--1/Gate--2}
 & \text{source-factor residual control and cap quadrature}\\
@@ -56803,10 +56887,26 @@ D4\text{ amplitude mass}
 & \text{forbidden upper and surviving lower in the same quotient norm.}
 \end{array}
 \]
-Thus the cap-side ledger should no longer say that the D4 amplitude factor is
-open independently of the source gates.  It remains conditional only in the
-sense that Gate--1, Gate--2, source residual control, and quadrature remain
-part of the upstream proof chain.
+Thus the cap-side ledger should no longer say that the D4 amplitude
+factor, the certified \(\delta_{\mathrm{coerc}}\) low block, or the
+effective D4 carrier determinant is independently open.  The
+still-active Agent~5 item is the concrete rank-two row/routing
+certificate, especially the arithmetic primitive slot
+\(c_{\mathrm{arith},Y}\) and the no-atom-local-live checks.
+\end{remark}
+
+\begin{remark}[Structural takeaways from the cap/\(Y12\) repairs]
+\label{rem:structural-takeaways-cap-Y12-repairs}
+The downstream repairs leave four useful structural facts for later
+modules.  First, the rank-two quotient condition has equivalent primal,
+Schur--Gram, distance, and bounded-dual-row forms; the coefficient work
+is to construct the rows, not to reprove the finite-dimensional
+equivalences.  Second, exact nuisance must be row-dead: coherent or
+residual live-looking terms are never quotient-killed, and atom-local
+live terms are a genuine no-go.  Third, D4 amplitude mass is a source
+theorem, not a quotient theorem.  Fourth, the six-row carrier table is
+a carrier-quotient computation; scalar \(I\)-coordinate incidences are
+quarantined and do not affect the active carrier row-energy route.
 \end{remark}
 
 \begin{remark}[wip-zeta-bridge-proof-atomic]
