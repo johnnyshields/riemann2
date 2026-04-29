@@ -39919,14 +39919,14 @@ The cap-level rank-two Jacobian then runs on
 with \(r_{C_7,p}:=q_p^YC_{7,p}^{\mathrm{tar}}\) and
 \(r_{C_Y,p}:=q_p^YC_{Y,p}^{\mathrm{tar}}\), not on \((r_{N,p},r_{Y,p})\).
 This is the typed precondition for
-Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival} below; without
+Corollary~\ref{cor:torsion-free-rank-two-C7-Y12-survival} below; without
 it, quotient descent and the cap bridge demand \(q_p^Y\) to both kill and
 preserve the same channel.
 \end{remark}
 
 \begin{lemma}[Static-line survival from rank-two quotient survival]
 \label{lem:static-line-survival-rank-two}
-Assume Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival} and the
+Assume Corollary~\ref{cor:torsion-free-rank-two-C7-Y12-survival} and the
 row-normal carrier expansion
 \[
 \Phi_p^Y(1,s)
@@ -39979,7 +39979,7 @@ without a separate static wall-escape estimate on
 \begin{proof}
 Write
 \(R_p:=(I-P_{\mathcal K_p^Y}^{\mathrm{bd}})\,[C_{7,p}^{\mathrm{tar}}\ C_{Y,p}^{\mathrm{tar}}]\).
-Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival} gives
+Corollary~\ref{cor:torsion-free-rank-two-C7-Y12-survival} gives
 \(\sigma_{\min}(R_p)\ge Q^{-C}\), so for every \(v\in\mathbb C^2\),
 \(\|R_pv\|\ge Q^{-C}\|v\|\) and
 \(\|[C_{7,p}^{\mathrm{tar}}\ C_{Y,p}^{\mathrm{tar}}]v\|\le Q^{C_0}\|v\|\) by the
@@ -40061,7 +40061,7 @@ large.  Equivalently, the Wronskian
 must therefore be carried on retained live carriers
 \(C_{7,p}^{\mathrm{tar}},C_{Y,p}^{\mathrm{tar}}\), not on
 \(N_p^{\mathrm{nuis}}\); see
-Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival} and
+Corollary~\ref{cor:torsion-free-rank-two-C7-Y12-survival} and
 Corollary~\ref{cor:cap-transversality-live-C7-Y12-coordinates} below.
 \end{lemma}
 
@@ -40163,9 +40163,13 @@ because killing \(C_7\) collapses the rank-two bridge to a primitive
 \end{corollary}
 
 
-\begin{corollary}[Torsion-free rank-two \(C_7/Y12\) quotient survival]
-\label{hyp:torsion-free-rank-two-C7-Y12-survival}
-For the certified dead-only nuisance quotient
+\begin{corollary}[Conditional torsion-free rank-two \(C_7/Y12\) quotient survival]
+\label{cor:torsion-free-rank-two-C7-Y12-survival}
+Assume the concrete row/routing coefficient certificate
+\(\mathfrak R_{2Y}(p)\), equivalently the verified vanishing/lower-bound
+conditions encoded by \(\mathfrak B_{2Y,p}\)
+(Definition~\ref{def:actual-row-obstruction-vector-2Y}).  For the
+certified dead-only nuisance quotient
 \(q_{p,\mathrm{cert}}^Y=I-P_{\mathcal K_{p,\mathrm{dead}}^{Y,\mathrm{cert}}}^{\mathrm{bd}}\)
 and the live carrier matrix
 \(E_p=[C_{7,p}^{\mathrm{tar}}\ C_{Y,p}^{\mathrm{tar}}]\), one has
@@ -40173,14 +40177,16 @@ and the live carrier matrix
 \sigma_{\min}(q_{p,\mathrm{cert}}^YE_p)
 \ge Q^{-C}.
 \]
-Equivalently, the certified quotient imposes no hidden torsion relation between
-\(C_7\) and \(C_{Y12}\): no nonzero polynomially bounded pair \((a,b)\) satisfies
+Equivalently, the certified quotient imposes no hidden torsion relation
+between \(C_7\) and \(C_{Y12}\): no nonzero polynomially bounded pair
+\((a,b)\) satisfies
 \[
   a\,q_{p,\mathrm{cert}}^YC_{7,p}^{\mathrm{tar}}
   +b\,q_{p,\mathrm{cert}}^YC_{Y,p}^{\mathrm{tar}}=0
 \]
-up to a polynomially small angle.  This is the proof-level replacement for the
-old rank-two quotient-survival hypothesis.
+up to a polynomially small angle.  This is the proof-level replacement
+for the old rank-two quotient-survival hypothesis once the raw
+coefficient certificate \(\mathfrak R_{2Y}(p)\) has been verified.
 \end{corollary}
 
 \begin{proof}
@@ -40204,7 +40210,7 @@ K_p:=\mathcal K_{p,\mathrm{dead}}^Y\subset \mathcal H_p^Y,
 q_p:=I-P_{K_p}^{\mathrm{bd}},
 \]
 for the dead-only nuisance space and its boundary projector
-(Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival}), and
+(Corollary~\ref{cor:torsion-free-rank-two-C7-Y12-survival}), and
 \[
 E_p:=
 \begin{bmatrix}
@@ -40230,7 +40236,7 @@ C_{7,p}^{\mathrm{tar}}&C_{Y,p}^{\mathrm{tar}}
 q_p:=I-P_{\mathcal K_p^Y}^{\mathrm{bd}},
 \]
 where \(\mathcal K_p^Y\) is the dead-only nuisance space of
-Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival}.  Suppose there
+Corollary~\ref{cor:torsion-free-rank-two-C7-Y12-survival}.  Suppose there
 exist linear functionals
 \(\ell_{7,p},\ell_{Y,p}:\mathcal H_p^Y\to\mathbb C\) on the ambient
 \(Y12\)-boundary quotient space such that
@@ -40357,7 +40363,7 @@ applied to the \(A_{7,p}\) column with live coefficient
 \(\lambda_{7,p}\neq0\) forces \(q_p C_{7,p}^{\mathrm{tar}}=0\), violating
 the rank-two survival.  Thus the dead-only definition of
 \(\mathcal K_p^Y\) in
-Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival} is not
+Corollary~\ref{cor:torsion-free-rank-two-C7-Y12-survival} is not
 optional: any unsplit live column placed in the quotient kernel breaks
 the dual-row certificate.
 \end{remark}
@@ -42047,7 +42053,7 @@ C_{7,p}^{\mathrm{tar}}&C_{Y,p}^{\mathrm{tar}}
 \qquad
 q_p^Y:=I-P_{\mathcal K_p^Y}^{\mathrm{bd}}.
 \]
-Assume Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival}, i.e.\
+Assume Corollary~\ref{cor:torsion-free-rank-two-C7-Y12-survival}, i.e.\
 \(\sigma_{\min}(R_p)\ge Q^{-C}\).  Define live scalar coordinates by
 \[
 R_p^\dagger:=(R_p^\ast R_p)^{-1}R_p^\ast,
@@ -42116,7 +42122,7 @@ holds uniformly in \(u_j\), without a separate wall-escape estimate on
 \end{corollary}
 
 \begin{proof}
-By Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival},
+By Corollary~\ref{cor:torsion-free-rank-two-C7-Y12-survival},
 \(R_p\) is left-invertible with \(\|R_p^\dagger\|_{\mathrm{op}}\le Q^C\).
 Apply \(R_p^\dagger\) to \(q_p^Y\Phi_p^Y(1,s)\): the row-normal expansion
 becomes the displayed scalar normal form, with
@@ -42648,7 +42654,7 @@ core mass condition is exactly the Remez/core-transfer estimate.
 \begin{remark}[Relative versus absolute static-line survival]
 \label{rem:relative-vs-absolute-static-line}
 Rank-two quotient survival
-(Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival}) together with
+(Corollary~\ref{cor:torsion-free-rank-two-C7-Y12-survival}) together with
 \(\sigma_{\min}(L_{\mathrm{clean}})\ge Q^{-C}\) closes the static-line
 handoff as a \emph{relative} lower bound,
 \[
@@ -42902,7 +42908,7 @@ Jacobian transversality bridge runs in live coordinates
 \((\rho_{7,p},\rho_{Y,p})\) built from the retained carrier columns
 \(C_{7,p}^{\mathrm{tar}},C_{Y,p}^{\mathrm{tar}}\) under the torsion-free
 rank-two hypothesis
-(Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival}); see
+(Corollary~\ref{cor:torsion-free-rank-two-C7-Y12-survival}); see
 Corollary~\ref{cor:cap-transversality-live-C7-Y12-coordinates}.
 The label is retained here for citation stability with prior text and
 downstream references; new uses should cite
@@ -57032,7 +57038,8 @@ associated branch/reference domination supply Gate--1;
 \(\delta_{\mathrm{graph}}\) once the finite/O2O3 packet-model
 hypotheses are verified;
 \item the certified live-row quotient supplies rank-two \(Y12\)
-quotient survival;
+quotient survival once the raw row/routing certificate
+\(\mathfrak R_{2Y}(p)\) is verified;
 \item the certified singular retained space supplies the low-block
 \(Y12\)-graph/coercivity gap \(\delta_{\mathrm{coerc}}\);
 \item the effective-carrier certificate supplies
@@ -57057,8 +57064,8 @@ the actual-source D4 amplitude repair, the downstream status table is:
 \text{module} & \text{status in the certified branch} & \text{remaining obligation}\\
 \hline
 Y12\text{-quotient/rank-two carrier survival}
-& \text{proved}
-& \text{use }q_{p,\mathrm{cert}}^Y\text{ and the dead/live split}\\
+& \text{proved conditional on }\mathfrak R_{2Y}(p)
+& \text{verify the raw row/routing obstruction vector }\mathfrak B_{2Y,p}\\
 Y12\text{-graph/coercivity}
 & \text{proved on the low block}
 & \text{use }P_{\mathrm{sing}}^{\mathrm{cert}}\text{; tail needs EF upper}\\
