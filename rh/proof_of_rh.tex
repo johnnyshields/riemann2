@@ -38619,95 +38619,258 @@ distinguish nuisance \(N_p^{\mathrm{nuis}}\) from retained
 \(C_{7,p}^{\mathrm{tar}}\) before the rank-two route is available.
 \end{remark}
 
-\begin{corollary}[Cap-level Jacobian transversality (conditional bridge)]
-\label{cor:cap-jacobian-transversality}
-\emph{Status: FINITE AUDIT.  This is the conditional bridge from extraction
-to the atomic contradiction.  It applies the abstract slice theorem
-(Lemma~\ref{lem:local-affine-quotient-normal-form}) with cap-specific gauge
-data, but the four cap-side hypotheses below are still listed in
-Remark~\ref{rem:open-downstream-modules} as open downstream inputs.}
-
-Fix a packet \(p\) and a frozen cap \(C_j\).  Write the cap coordinate as
+\begin{lemma}[Killed nuisance cannot be a live Jacobian row]
+\label{lem:killed-nuisance-not-live-jacobian-row}
+Assume
 \[
-s=\Gamma_{G,2}/\Gamma_G,
-\qquad \Gamma_G\neq 0,
+N_p^{\mathrm{nuis}}
+:=
+\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing}}\mathcal N_p^{\mathrm{D4}}
+\subseteq
+\mathcal K_p^Y.
 \]
-and define the quotient residual pair
+Then \(q_p^Y N_p^{\mathrm{nuis}}=0\).  Consequently no cap-level Jacobian
+lower bound can be derived from the pair
+\((q_p^Y N_p^{\mathrm{nuis}},\,q_p^Y Y_p)\): a putative normal form
 \[
-r_{N,p}(s):=q_p^Y N_p(s),
-\qquad
-r_{Y,p}(s):=q_p^Y Y_p(s),
-\]
-where
-\[
-q_p^Y:=I-P_{\mathcal K_p^Y}^{\mathrm{bd}},
-\qquad
-N_p:=\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing}}\mathcal N_p^{\mathrm{D4}},
-\qquad
-Y_p:=\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}]^{\mathrm{tr}}.
-\]
-Assume the four cap-side conditions:
-\begin{enumerate}
-\item Quotient survival
-\(U_p\subseteq \ker\Lambda_{Y,p}\), with
-\(\Lambda_{Y,p}:=q_p^Y\Pi_{\Sigma(Y12),p}T_{\mathrm{tr}\to\mathrm{sing},p}P_{\mathrm{tr},p}\).
-\item Graph/coercivity survival
-\(\sigma_{\min}(D_p)\ge Q^{-C}\) for the low-mode defect matrix
-\(D_p=[\mathfrak T_p e_{1,p}\ \cdots\ \mathfrak T_p e_{r,p}]\) with
-\(\mathfrak T_p:=(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}\),
-plus tail control by the singular-discard / EF bound.
-\item Row-normal D4 carrier
-\(L_{\mathrm{clean}}=\bigl(\begin{smallmatrix}c_7&0\\ \beta_9^{\mathrm{tri}}&\alpha_9\end{smallmatrix}\bigr)\)
-with \(c_7\alpha_9\) polynomially bounded away from \(0\).
-\item Nonstatic cap
-\(\delta_{\mathrm{ext}}=\det(B_j)/(\operatorname{tr}B_j)^2\ge Q^{-A}\).
-\end{enumerate}
-Then there exist a scalar \(H_{j,p}\) with \(|H_{j,p}|\asymp 1\) and an
-error \(\varepsilon_{j,p}(s)\) with \(\|\partial_s\varepsilon_{j,p}\|\le Q^{-B}\)
-such that
-\[
-\binom{r_{N,p}(s)}{r_{Y,p}(s)}
+\binom{q_p^Y N_p^{\mathrm{nuis}}}{q_p^Y Y_p}
 =
-H_{j,p}L_{\mathrm{clean}}\binom{1}{s}
-+\varepsilon_{j,p}(s).
+H_{j,p}
+\begin{pmatrix}
+c_7&0\\
+\beta_9^{\mathrm{tri}}&\alpha_9
+\end{pmatrix}
+\binom{1}{s}
++
+\varepsilon_{j,p}(s),
+\qquad
+\|\partial_s\varepsilon_{j,p}\|\le Q^{-B},
 \]
-At the cap center \(s_j\) the Jacobian determinant satisfies
+forces \(|H_{j,p}c_7|\le Q^{-B}\), incompatible with
+\(|H_{j,p}|\ge Q^{-C}\) and \(|c_7|\ge Q^{-C}\) for \(B\) sufficiently
+large.  Equivalently, the Wronskian
+\(W_{j,p}=r'_{Y,p}r_{N,p}-r'_{N,p}r_{Y,p}\) of any pair containing
+\(r_{N,p}\equiv0\) is identically zero.  The cap-level rank-two Jacobian
+must therefore be carried on retained live carriers
+\(C_{7,p}^{\mathrm{tar}},C_{Y,p}^{\mathrm{tar}}\), not on
+\(N_p^{\mathrm{nuis}}\); see
+Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival} and
+Corollary~\ref{cor:cap-transversality-live-C7-Y12-coordinates} below.
+\end{lemma}
+
+\begin{proof}
+\(N_p^{\mathrm{nuis}}\subseteq\mathcal K_p^Y\) gives
+\(P_{\mathcal K_p^Y}^{\mathrm{bd}}N_p^{\mathrm{nuis}}=N_p^{\mathrm{nuis}}\),
+hence
+\(q_p^Y N_p^{\mathrm{nuis}}=(I-P_{\mathcal K_p^Y}^{\mathrm{bd}})N_p^{\mathrm{nuis}}=0\).
+The first row of the assumed normal form then reads
+\(0=H_{j,p}c_7+\varepsilon_{1,j,p}(s)\), so
+\(|H_{j,p}c_7|=|\varepsilon_{1,j,p}|\le Q^{-B}\), contradicting the
+polynomial lower bounds on \(|H_{j,p}|\) and \(|c_7|\) for \(B>2C\).
+\end{proof}
+
+\begin{hypothesis}[Torsion-free rank-two \(C_7/Y12\) quotient survival]
+\label{hyp:torsion-free-rank-two-C7-Y12-survival}
+\emph{Status: FINITE AUDIT.}  Let
 \[
-\left|\det\!\left(\left.\tfrac{\partial}{\partial(1,s)}\binom{r_{N,p}}{r_{Y,p}}\right|_{s=s_j}\right)\right|
-\ge Q^{-A},
+C_{7,p}^{\mathrm{tar}}
+:=
+\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing},p}[\mathsf C_7]^{\mathrm{tr}},
+\qquad
+C_{Y,p}^{\mathrm{tar}}
+:=
+\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing},p}[\mathsf C_{Y12}]^{\mathrm{tr}},
 \]
-the Wronskian
-\(W_{j,p}(s):=r'_{Y,p}(s)r_{N,p}(s)-r'_{N,p}(s)r_{Y,p}(s)\)
-satisfies
-\(|W_{j,p}(s_j)|\ge Q^{-A}|r_{N,p}(s_j)|^2\),
-and the Gram angle
-\(\theta_p\) of the bordered Gram matrix
-\(G_p^Y=(\langle r_{\bullet,p},r_{\bullet,p}\rangle)\)
-satisfies
-\(\sin^2\theta_p \ge Q^{-A}\).
-In particular, the quotient residuals \(r_{N,p}\) and \(r_{Y,p}\) are
-polynomially transverse on every nonstatic cap, supplying the lower-bound
-carrier needed for the atomic contradiction
-(Definition~\ref{def:finite-survival-gaps}).
+and let \(\mathcal K_p^Y\) be the dead-only nuisance space, defined with all
+live \(C_7/Y12\) components removed before quotienting:
+\[
+\mathcal K_p^Y
+=
+\operatorname{im}
+\begin{bmatrix}
+R_{B_2,p}&R_{P,p}&R_{D,p}
+&A_{\alpha,p}^{\mathrm{dead}}&A_{7,p}^{\mathrm{dead}}
+&A_{<7,p}^{\mathrm{dead}}&A_{II,p}^{\mathrm{dead}}
+&A_{E_2,p}^{\mathrm{dead}}
+\end{bmatrix},
+\]
+with
+\(\Pi_{\mathrm{live}}A_{\bullet,p}^{\mathrm{dead}}=0\),
+\(\Pi_{\mathrm{live}}\) the orthogonal projection onto
+\(W_{\mathrm{car},p}:=\operatorname{span}\{C_{7,p}^{\mathrm{tar}},C_{Y,p}^{\mathrm{tar}}\}\).
+Then
+\[
+\sigma_{\min}
+\Bigl(
+(I-P_{\mathcal K_p^Y}^{\mathrm{bd}})
+\begin{bmatrix}
+C_{7,p}^{\mathrm{tar}} & C_{Y,p}^{\mathrm{tar}}
+\end{bmatrix}
+\Bigr)
+\ge Q^{-C}.
+\]
+Equivalently, no nonzero polynomially bounded pair \((a,b)\) satisfies
+\(a\,C_{7,p}^{\mathrm{tar}}+b\,C_{Y,p}^{\mathrm{tar}}\in\mathcal K_p^Y\)
+up to \(Q^{-C}\)-angle, and the wedge product satisfies
+\[
+\bigl|q_p^Y C_{7,p}^{\mathrm{tar}}\wedge q_p^Y C_{Y,p}^{\mathrm{tar}}\bigr|
+\ge Q^{-C}\,
+\bigl|C_{7,p}^{\mathrm{tar}}\wedge C_{Y,p}^{\mathrm{tar}}\bigr|.
+\]
+This is strictly stronger than primitive \(Y12\)-only quotient survival
+(\(q_p^Y C_{Y,p}^{\mathrm{tar}}\neq0\)) and is the typed replacement of
+Hypothesis~\ref{hyp:rank-two-C7-Y12-quotient-survival}: it adds the
+torsion-free condition that the analytic boundary quotient does not
+impose a hidden relation between \(C_7\) and \(C_{Y12}\) after dead-only
+quotienting.
+\end{hypothesis}
+
+\begin{corollary}[Cap transversality in live \(C_7/Y12\) coordinates]
+\label{cor:cap-transversality-live-C7-Y12-coordinates}
+\emph{Status: FINITE AUDIT.  This is the corrected cap bridge in live
+coordinates, replacing
+Corollary~\ref{cor:cap-jacobian-transversality} per
+Lemma~\ref{lem:killed-nuisance-not-live-jacobian-row}.}
+
+Fix a packet \(p\) and a frozen cap \(C_j\), and let
+\[
+R_p:=
+q_p^Y
+\begin{bmatrix}
+C_{7,p}^{\mathrm{tar}}&C_{Y,p}^{\mathrm{tar}}
+\end{bmatrix},
+\qquad
+q_p^Y:=I-P_{\mathcal K_p^Y}^{\mathrm{bd}}.
+\]
+Assume Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival}, i.e.\
+\(\sigma_{\min}(R_p)\ge Q^{-C}\).  Define live scalar coordinates by
+\[
+R_p^\dagger:=(R_p^\ast R_p)^{-1}R_p^\ast,
+\qquad
+\binom{\rho_{7,p}(s)}{\rho_{Y,p}(s)}
+:=
+R_p^\dagger\,q_p^Y\Phi_p^Y(1,s).
+\]
+Assume the row-normal carrier expansion
+\[
+\Phi_p^Y(1,s)
+=
+H_{j,p}
+\begin{bmatrix}
+C_{7,p}^{\mathrm{tar}}&C_{Y,p}^{\mathrm{tar}}
+\end{bmatrix}
+\begin{pmatrix}
+c_7&0\\
+\beta_9^{\mathrm{tri}}&\alpha_9
+\end{pmatrix}
+\binom{1}{s}
++\varepsilon_p(s),
+\]
+with
+\[
+|H_{j,p}|\ge Q^{-C},
+\qquad
+|c_7\alpha_9|\ge Q^{-C},
+\qquad
+\|\partial_s\,q_p^Y\varepsilon_p(s)\|\le Q^{-B}.
+\]
+Then for \(B\) sufficiently large,
+\[
+\binom{\rho_{7,p}(s)}{\rho_{Y,p}(s)}
+=
+H_{j,p}
+\begin{pmatrix}
+c_7&0\\
+\beta_9^{\mathrm{tri}}&\alpha_9
+\end{pmatrix}
+\binom{1}{s}
++R_p^\dagger\,q_p^Y\varepsilon_p(s),
+\]
+and
+\[
+\Bigl|
+\det
+\frac{\partial(\rho_{7,p},\rho_{Y,p})}{\partial(1,s)}
+\Bigr|
+\ge Q^{-A}.
+\]
+The Wronskian
+\(W_{j,p}^{\mathrm{live}}:=
+\rho'_{Y,p}\rho_{7,p}-\rho'_{7,p}\rho_{Y,p}\)
+satisfies \(|W_{j,p}^{\mathrm{live}}(s_j)|\ge Q^{-A}|\rho_{7,p}(s_j)|^2\),
+and the Gram angle of
+\((\rho_{7,p},\rho_{Y,p})\) satisfies \(\sin^2\theta_p\ge Q^{-A}\).
+The static-line handoff
+\[
+\sum_{p\in C_j}\mu_p\|q_p^Y\Phi_p^Y u_j\|^2
+\ge
+Q^{-A}\sum_{p\in C_j}\mu_p\|\Phi_p^Y u_j\|^2
+\]
+holds uniformly in \(u_j\), without a separate wall-escape estimate on
+\(|\beta_9^{\mathrm{tri}}+\alpha_9 s_j^\ast|\).
 \end{corollary}
 
 \begin{proof}
-Hypothesis~(1) (\(U_p\subseteq \ker\Lambda_{Y,p}\)) eliminates the nuisance
-block from \((r_{N,p},r_{Y,p})\) under \(q_p^Y\).  The graph/coercivity
-hypothesis~(2) gives a finite low-mode defect matrix with
-\(\sigma_{\min}(D_p)\ge Q^{-C}\) plus tail \(O(Q^{-B})\), so the quotient
-residual pair is \(C^1\) and differs from its low-mode linearization by a
-derivative-small error.  Hypothesis~(3) supplies the leading linear term as
-a scalar multiple \(H_{j,p}\) of \(L_{\mathrm{clean}}(1,s)^T\), giving the
-affine normal form.  Differentiating at the cap center gives Jacobian
-\(H_{j,p}L_{\mathrm{clean}}+O(Q^{-B})\); taking determinants yields
-\(H_{j,p}^2 c_7\alpha_9+O(Q^{-B})\), and Hypothesis~(4) plus the row-normal
-bounds force \(|H_{j,p}|\asymp 1\) and \(c_7\alpha_9\) polynomially nonzero,
-absorbing the error.  The Wronskian bound follows from the identity
-\(\frac{d}{ds}(r_{Y,p}/r_{N,p})=W_{j,p}/r_{N,p}^2\), and the angle
-separation from
-\(\det G_p^Y=\|r_{N,p}\|^2\|r_{Y,p}\|^2\sin^2\theta_p\).
+By Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival},
+\(R_p\) is left-invertible with \(\|R_p^\dagger\|_{\mathrm{op}}\le Q^C\).
+Apply \(R_p^\dagger\) to \(q_p^Y\Phi_p^Y(1,s)\): the row-normal expansion
+becomes the displayed scalar normal form, with
+\(\|R_p^\dagger q_p^Y\varepsilon_p(s)\|\le Q^{C-B}\) absorbed for \(B>3C\).
+Differentiating in \(s\), the Jacobian matrix is
+\(H_{j,p}\bigl(\begin{smallmatrix}c_7&0\\
+\beta_9^{\mathrm{tri}}&\alpha_9\end{smallmatrix}\bigr)+O(Q^{C-B})\), with
+determinant \(H_{j,p}^2 c_7\alpha_9+O(Q^{C-B})\); the polynomial lower
+bounds on \(H_{j,p}\) and \(c_7\alpha_9\) give \(\ge Q^{-A}\).  The
+Wronskian and Gram-angle bounds follow from
+\(\det\frac{\partial(\rho_{7,p},\rho_{Y,p})}{\partial(1,s)}=W_{j,p}^{\mathrm{live}}\)
+at \(s=s_j\) and
+\(\det G_p^{\mathrm{live}}=\|\rho_{7,p}\|^2\|\rho_{Y,p}\|^2\sin^2\theta_p\).
+For the static-line handoff, observe that for any unit
+\(u\in\mathbb C^2\),
+\[
+q_p^Y\Phi_p^Y u
+=
+H_{j,p}R_p L_{\mathrm{clean}}u+q_p^Y\varepsilon_p,
+\qquad
+L_{\mathrm{clean}}=\bigl(\begin{smallmatrix}c_7&0\\
+\beta_9^{\mathrm{tri}}&\alpha_9\end{smallmatrix}\bigr),
+\]
+and
+\(\|H_{j,p}R_p L_{\mathrm{clean}}u\|
+\ge|H_{j,p}|\sigma_{\min}(R_p)\sigma_{\min}(L_{\mathrm{clean}})\|u\|
+\ge Q^{-3C}\|u\|\),
+while
+\(\|\Phi_p^Y u\|\le Q^{C_0}\|u\|\); after squaring and weighted summing
+the static-line lower bound is uniform in \(u_j\).
 \end{proof}
+
+\begin{corollary}[Cap-level Jacobian transversality (superseded conditional bridge)]
+\label{cor:cap-jacobian-transversality}
+\emph{Status: SUPERSEDED.}  The original cap bridge ran the rank-two
+Jacobian on the residual pair \((r_{N,p},r_{Y,p})\) with
+\[
+N_p:=\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing}}\mathcal N_p^{\mathrm{D4}},
+\qquad
+Y_p:=\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}]^{\mathrm{tr}},
+\qquad
+q_p^Y:=I-P_{\mathcal K_p^Y}^{\mathrm{bd}}.
+\]
+Per Lemma~\ref{lem:killed-nuisance-not-live-jacobian-row}, quotient
+descent \(\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing}}\mathcal N_p^{\mathrm{D4}}
+\subseteq\mathcal K_p^Y\)
+forces \(r_{N,p}=q_p^Y N_p=0\), so the determinant
+\(H_{j,p}^2\,c_7\alpha_9\) is identically zero on the nuisance image and
+the rank-two normal form cannot be derived.  The corrected cap-level
+Jacobian transversality bridge runs in live coordinates
+\((\rho_{7,p},\rho_{Y,p})\) built from the retained carrier columns
+\(C_{7,p}^{\mathrm{tar}},C_{Y,p}^{\mathrm{tar}}\) under the torsion-free
+rank-two hypothesis
+(Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival}); see
+Corollary~\ref{cor:cap-transversality-live-C7-Y12-coordinates}.
+The label is retained here for citation stability with prior text and
+downstream references; new uses should cite
+Corollary~\ref{cor:cap-transversality-live-C7-Y12-coordinates}.
+\end{corollary}
 
 \begin{remark}[Remaining open downstream inputs]
 \label{rem:open-downstream-modules}
@@ -38752,8 +38915,8 @@ The next cap-level fork is the following dichotomy on each frozen good cap
 \ge Q^{-A},
 \]
 so the nonstatic cap transversality bridge
-Corollary~\ref{cor:cap-jacobian-transversality} applies, or the cap is
-quantitatively static and must be handled by
+Corollary~\ref{cor:cap-transversality-live-C7-Y12-coordinates} applies, or
+the cap is quantitatively static and must be handled by
 Hypothesis~\ref{hyp:static-line-Y12-quotient-survival} together with
 Lemma~\ref{lem:static-line-transfer-from-actual-Y12-survival}.
 \end{proposition}
@@ -38767,8 +38930,9 @@ Definition~\ref{def:finite-survival-gaps}: \(\delta_{\mathrm{graph}}\), the
 \(Y12\) quotient residuals \(r_{N,p},r_{Y,p}\), the graph/coercivity gap
 \(\delta_{\mathrm{coerc}}\), and the extraction gap \(\delta_{\mathrm{ext}}\).
 If \(\delta_{\mathrm{ext}}\ge Q^{-A}\), the cap is nonstatic and
-Corollary~\ref{cor:cap-jacobian-transversality} supplies the quotient-angle,
-Wronskian, and Gram-angle lower bounds.  If \(\delta_{\mathrm{ext}}<Q^{-A}\),
+Corollary~\ref{cor:cap-transversality-live-C7-Y12-coordinates} supplies the
+quotient-angle, Wronskian, and Gram-angle lower bounds in live
+\((\rho_{7,p},\rho_{Y,p})\) coordinates.  If \(\delta_{\mathrm{ext}}<Q^{-A}\),
 the cap is routed to the static-line module.  This is the announced downstream
 handoff.
 \end{proof}
