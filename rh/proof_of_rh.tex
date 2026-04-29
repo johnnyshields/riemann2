@@ -57102,6 +57102,141 @@ the forbidden upper must be Type-I local-square in the same quotient norm
 as the surviving lower bound.
 \end{remark}
 
+\begin{definition}[Certified singular-discard observable]
+\label{def:certified-singular-discard-observable-agent6}
+On the proof-level certified branch set
+\[
+  \Lambda_{p}^{\mathrm{cert}}
+  :=(I-P_{\mathrm{sing},p}^{\mathrm{cert}})
+    T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}.
+\]
+The corresponding D4 live carrier observable is
+\[
+  K_{\mathrm{D4},p}^{\mathrm{cert}}
+  :=(I-P_{\mathrm{sing},p}^{\mathrm{cert}})
+    T_{\mathrm{tr}\to\mathrm{sing},p}
+    E_{\mathrm{car},p}^{\mathrm{tr}}L_{\mathrm{eff},p}^{\mathrm{tr}}.
+\]
+Both norms below are the Hilbert norms of the same discarded singular
+quotient
+\((I-P_{\mathrm{sing},p}^{\mathrm{cert}})H_{\mathrm{sing},p}\).
+\end{definition}
+
+\begin{hypothesis}[Certified same-norm Type-I upper]
+\label{hyp:certified-same-norm-typeI-upper-agent6}
+For the actual canonical source one has, on the selected routed cap
+family,
+\[
+  \sum_{p\in C_j}\mu_p
+  \bigl\|\Lambda_p^{\mathrm{cert}}(q''_{\mathrm{can}})\bigr\|^2
+  \le
+  Q^{-B_{\mathrm{up}}}
+  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2 .
+\]
+Equivalently, after the EF decomposition
+\(q''_{\mathrm{can}}=F_X+R_X\), the coherent part is retained,
+\(\Lambda_p^{\mathrm{cert}}(F_X)=0\), up to the stated negligible error,
+and the transported residual satisfies
+\[
+  \sum_{p\in C_j}\mu_p
+  \bigl\|\Lambda_p^{\mathrm{cert}}(R_X)\bigr\|^2
+  \le
+  Q^{-B_{\mathrm{up}}}
+  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2 .
+\]
+This is the same-norm form of the targeted
+\(\mathrm{EFCompletion}_{K9}\) or \(\mathrm{EFCompletion}_{Y12}\) upper.
+\end{hypothesis}
+
+\begin{hypothesis}[Certified row identification]
+\label{hyp:certified-row-identification-agent6}
+On the same cap core as the lower bound,
+\[
+  \Lambda_p^{\mathrm{cert}}(q''_{\mathrm{can}})
+  =
+  H_p K_{\mathrm{D4},p}^{\mathrm{cert}}\Gamma_p+\mathcal R_{p}^{\mathrm{id}},
+\]
+with
+\[
+  \sum_{p\in C_j}\mu_p\|\mathcal R_{p}^{\mathrm{id}}\|^2
+  \le
+  Q^{-B_{\mathrm{id}}}
+  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2 .
+\]
+\end{hypothesis}
+
+\begin{theorem}[Certified same-norm atomic contradiction]
+\label{thm:certified-same-norm-atomic-contradiction-agent6}
+Assume the certified low-block carrier visibility
+\(\sigma_{\min}(K_{\mathrm{D4},p}^{\mathrm{cert}})\ge Q^{-C_K}\) on the
+selected cap family, the source-weighted D4 amplitude survival
+\[
+  \sum_{p\in C_j}\mu_p |H_p|^2\|\Gamma_p\|^2
+  \ge
+  Q^{-A_H}
+  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2,
+\]
+the certified row identification of
+Hypothesis~\ref{hyp:certified-row-identification-agent6}, and the
+certified same-norm Type-I upper of
+Hypothesis~\ref{hyp:certified-same-norm-typeI-upper-agent6}.  If
+\(B_{\mathrm{id}}\) is larger than the lower-bound losses and
+\(B_{\mathrm{up}}>A_H+2C_K+O(1)\), then no nonzero routed cap family
+can occur.  Equivalently, the certified cap lower bound and the Type-I
+upper give \(\mathrm{AtomicY12Contradiction}\) in the certified
+singular-discard norm.
+\end{theorem}
+
+\begin{proof}
+The certified carrier visibility gives, packetwise,
+\(\|K_{\mathrm{D4},p}^{\mathrm{cert}}\Gamma_p\|\ge Q^{-C_K}\|\Gamma_p\|\).
+Using \(\|x+y\|^2\ge \frac12\|x\|^2-\|y\|^2\) in the row-identification
+formula yields
+\[
+\begin{aligned}
+\sum_{p\in C_j}\mu_p
+\bigl\|\Lambda_p^{\mathrm{cert}}(q''_{\mathrm{can}})\bigr\|^2
+&\ge
+\frac12 Q^{-2C_K}
+\sum_{p\in C_j}\mu_p |H_p|^2\|\Gamma_p\|^2
+-
+\sum_{p\in C_j}\mu_p\|\mathcal R_{p}^{\mathrm{id}}\|^2  \\
+&\ge
+Q^{-A_{\mathrm{low}}}
+\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2,
+\end{aligned}
+\]
+for some polynomial exponent
+\(A_{\mathrm{low}}=A_H+2C_K+O(1)\), after absorbing the identification
+error by choosing \(B_{\mathrm{id}}>A_{\mathrm{low}}+1\).  The
+same-norm Type-I upper gives the opposite inequality
+\(\sum_{p\in C_j}\mu_p\|\Lambda_p^{\mathrm{cert}}(q''_{\mathrm{can}})\|^2\le Q^{-B_{\mathrm{up}}}\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2\).
+If the routed cap is nontrivial, the mass
+\(\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2\) is positive.  For
+\(B_{\mathrm{up}}>A_{\mathrm{low}}\), the upper and lower inequalities
+are incompatible for sufficiently large \(Q\).  All quantities are
+measured in the same Hilbert norm of the certified singular-discard
+quotient, so no projection or norm-change loss is hidden in the
+comparison.
+\end{proof}
+
+\begin{remark}[Agent 6 status of the final bridge]
+\label{rem:agent6-final-bridge-status-after-certified-closure}
+The lower half of the final bridge is closed in the certified branch:
+the literal \((q_p^YN_p,q_p^YY_p)\) bridge remains impossible because
+\(N_p\) is a killed nuisance column, but the retained \(C_7/Y12\)
+bridge gives the Jacobian, Wronskian, angle, and static-line lower
+bounds in the certified quotient.  The only missing theorem for
+\(\mathrm{AtomicY12Contradiction}\) is
+Hypothesis~\ref{hyp:certified-same-norm-typeI-upper-agent6} together
+with the row identification
+Hypothesis~\ref{hyp:certified-row-identification-agent6}.  These are
+not formal consequences of rank-two quotient survival, low-block
+coercivity, or D4 amplitude mass; they are targeted EF/singular-overlap
+upper estimates for actual canonical rows in the same certified
+discarded norm.
+\end{remark}
+
 
 \begin{remark}[No-go registry]
 \label{rem:no-go-registry-unified}
