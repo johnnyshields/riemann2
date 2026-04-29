@@ -30380,11 +30380,12 @@ The downstream proof uses the following shared finite objects.
 \paragraph{Source survival.}
 Let
 \[
-\mathcal S_X:=\operatorname{span}\{B_2,P_{2,\le X},D_{2,\le X}\},
+\mathcal S_X:=\operatorname{span}\{B_2,P_{2,\le X},D_{2,\le X},P_{\mathrm{res},X}\},
 \qquad
-F_X:=B_2+P_{2,\le X}+D_{2,\le X}.
+F_X:=B_2+P_{2,\le X}+D_{2,\le X}+P_{\mathrm{res},X},
 \]
-Define
+where the residue term is omitted if it vanishes and is absorbed into \(B_2\) if
+that convention has already been adopted.  Define
 \[
 M:=G_{\mathrm{ref}}^{-1/2}G_{\mathrm{branch}}G_{\mathrm{ref}}^{-1/2},
 \qquad
@@ -30392,9 +30393,12 @@ E:=G_{\mathrm{ref}}^{-1/2}\bigl(G_{\mathrm{branch}}(q''_{\can})-G_{\mathrm{branc
 \]
 and the source gap
 \[
-\delta_{\mathrm{src}}:=\min_i\!\left(M_{ii}-\sum_{j\neq i}|M_{ij}|\right)-\|E\|_{\operatorname{op}}.
+\delta_{\mathrm{src}}:=\lambda_{\min}(M)-\|E\|_{\operatorname{op}}.
 \]
-Source survival means \(\delta_{\mathrm{src}}\ge Q^{-A}\).
+Source survival means \(\delta_{\mathrm{src}}\ge Q^{-A}\).  A Gershgorin lower
+bound for \(M\) is a sufficient way to prove this in atom-normalized
+coordinates, but the invariant source-frame quantity is the reference-whitened
+minimum eigenvalue.
 
 \paragraph{Graph survival.}
 Define
@@ -38534,6 +38538,55 @@ All other uses of the downstream modules should be read as consequences of
 prior lemmas and definitions, not as new hypotheses.
 \end{remark}
 
+
+\begin{proposition}[Source-closed downstream handoff]
+\label{prop:source-closed-downstream-handoff}
+Assume Gate--1 source survival has been established by
+Theorem~\ref{thm:source-survival-from-three-inputs}.  Then the remaining
+finite-survival chain is purely downstream:
+\[
+\mathrm{Graph/O2O3}_{23}
+\Longrightarrow
+Y12\text{-quotient survival}
+\Longrightarrow
+Y12\text{-graph/coercivity}
+\Longrightarrow
+\text{extraction covariance/static-line survival}
+\Longrightarrow
+\text{cap transversality}
+\Longrightarrow
+\mathrm{AtomicY12Contradiction}.
+\]
+The next cap-level fork is the following dichotomy on each frozen good cap
+\(C_j\): either
+\[
+\delta_{\mathrm{ext}}(C_j)
+=
+\frac{\det B_j}{(\operatorname{tr}B_j)^2}
+\ge Q^{-A},
+\]
+so the nonstatic cap transversality bridge
+Corollary~\ref{cor:cap-jacobian-transversality} applies, or the cap is
+quantitatively static and must be handled by
+Hypothesis~\ref{hyp:static-line-Y12-quotient-survival} together with
+Lemma~\ref{lem:static-line-transfer-from-actual-Y12-survival}.
+\end{proposition}
+
+\begin{proof}
+Theorem~\ref{thm:source-survival-from-three-inputs} supplies the source gap
+\(\delta_{\mathrm{src}}\ge Q^{-A}\), so the source branch-hole, AFE completion,
+and reference noncollapse issues are no longer downstream hypotheses.  The
+remaining quantities are exactly the non-source gaps recorded in
+Definition~\ref{def:finite-survival-gaps}: \(\delta_{\mathrm{graph}}\), the
+\(Y12\) quotient residuals \(r_{N,p},r_{Y,p}\), the graph/coercivity gap
+\(\delta_{\mathrm{coerc}}\), and the extraction gap \(\delta_{\mathrm{ext}}\).
+If \(\delta_{\mathrm{ext}}\ge Q^{-A}\), the cap is nonstatic and
+Corollary~\ref{cor:cap-jacobian-transversality} supplies the quotient-angle,
+Wronskian, and Gram-angle lower bounds.  If \(\delta_{\mathrm{ext}}<Q^{-A}\),
+the cap is routed to the static-line module.  This is the announced downstream
+handoff.
+\end{proof}
+
 \begin{theorem}[Normal D4 through the \(Y12\)-signature \(K_9\) channel]
 \label{thm:normal-D4-K9-Y12}
 Assume the following.
@@ -38741,7 +38794,7 @@ are useful upstream for source completion and for proving aggregate
 \(L^2\)-observability of \(q''_{\can}\).  A typical use is:
 \[
   q''_{\can}=F_X+R_X,\qquad
-  F_X:=B_2+P_{2,\le X}+D_{2,\le X},
+  F_X:=B_2+P_{2,\le X}+D_{2,\le X}+P_{\mathrm{res},X},
 \]
 with
 \[
@@ -48136,15 +48189,43 @@ a set of positive measure.  Therefore its integral over \(\Omega\) is strictly
 positive.
 \end{proof}
 
-\begin{definition}[Canonical completed source]
-\label{def:canonical-completed-source}
-Define the canonical source trace on the critical line by
+\begin{hypothesis}[Completed-source anchor]
+\label{hyp:completed-source-anchor}
+The actual canonical source curvature introduced in
+Definition~\ref{def:canonical-actual-zeta-phase-curvature} admits a completed
+source trace \(\mathcal Z\) such that, on every ordinary source packet and as a
+regularized \(L^2_{\mathrm{loc}}\)-trace on the retained source line,
 \[
-q''_{\can}(t):=\mathcal Z\!\left(\tfrac12+it\right).
+q''_{\can}(t)
+=
+\mathcal D^3\Phi_\zeta(t)
+=
+\mathcal Z\!\left(\tfrac12+it\right).
+\]
+The function \(\mathcal Z\) is the completed source object of
+Remark~\ref{rem:standing-zeta-side-source-hypotheses}: it has the stated
+meromorphic continuation, vertical-strip bounds, Dirichlet expansion,
+functional equation, coefficient bounds, nonzero leading coefficient, and is
+holomorphic in a neighbourhood of the ordinary source line after the singular
+packets have been routed to the singular/transition branch.
+
+If \(\Phi_\zeta\) is represented by a logarithmic or phase branch with possible
+zero singularities, the displayed equality is understood after the same
+regularization used to define the retained source space.  In particular, no
+pole or principal-value contribution may be discarded unless it is included in
+one of the routed singular/transition terms.
+\end{hypothesis}
+
+\begin{definition}[Canonical completed source trace and Mellin cutoff]
+\label{def:canonical-completed-source}
+Under Hypothesis~\ref{hyp:completed-source-anchor}, the source-layer notation
+identifies the actual canonical source with the completed trace
+\[
+q''_{\can}(t)=\mathcal Z\!\left(\tfrac12+it\right).
 \]
 Fix a smooth cutoff \(V\) with Mellin transform \(\widehat V\), where
-\(\widehat V\) is entire and rapidly decaying on vertical strips.
-For \(X\ge1\), set
+\(\widehat V\) is entire and rapidly decaying on vertical strips.  For
+\(X\ge1\), set
 \[
 I(s;X):=\frac{1}{2\pi i}\int_{(2)}
 \mathcal Z(s+w)\widehat V(w)X^w\,\frac{dw}{w},
@@ -48152,151 +48233,161 @@ I(s;X):=\frac{1}{2\pi i}\int_{(2)}
 \]
 \end{definition}
 
-\begin{theorem}[Smooth finite AFE package for \(q''_{\can}\)]
+\begin{theorem}[Smooth finite AFE package for \(q''_{\can}\), with residues]
 \label{thm:smooth-finite-AFE-package}
-Under the standing hypotheses in
-Remark~\ref{rem:standing-zeta-side-source-hypotheses}, there exist smooth
-weights \(V_1,V_2\) and a remainder \(R_X(t)\) such that
+Assume the completed-source anchor, Hypothesis~\ref{hyp:completed-source-anchor},
+and the standing zeta-side source package in
+Remark~\ref{rem:standing-zeta-side-source-hypotheses}.  Let
+\(s=\tfrac12+it\), with \(t\in\Omega\).  Then there exist smooth AFE weights
+\(V_1(y)\), \(V_2(y;s)\), a finite signed residue term
+\(P_{\mathrm{res},X}(t)\), and a remainder \(R_X(t)\) such that
 \[
-q''_{\can}(t)
-=
-\sum_{n\ge1} a_n n^{-1/2-it}V_1(n/X)
-+
-\sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX)
-+
-R_X(t).
-\]
-Moreover:
-\[
-|a_n|,\ |\widetilde a_n|\ll_\varepsilon n^{-1/2+\varepsilon},
-\]
-and for every \(A>0\),
-\[
-R_X(t)=O_A(X^{-A})
-\]
-uniformly for \(t\in\Omega\).  In particular,
-\[
-\|R_X\|_{L^2(W_{\mathrm{ref}})}+\|R_X\|_{L^2(W_{\mathrm{branch}})}\ll_A X^{-A}.
-\]
-\end{theorem}
-
-\begin{proof}
-Set \(s=\tfrac12+it\) and write
-\[
-I(s;X)=\frac{1}{2\pi i}\int_{(2)}
-\mathcal Z(s+w)\widehat V(w)X^w\,\frac{dw}{w}.
-\]
-Since \(\Re(s+w)>1\) on \(\Re w=2\), we may insert the Dirichlet expansion
-of \(\mathcal Z\) and interchange sum and integral:
-\[
-I(s;X)
-=
-\sum_{n\ge1} a_n n^{-s}
-\left(
-\frac{1}{2\pi i}\int_{(2)}
-\left(\frac{X}{n}\right)^w \widehat V(w)\,\frac{dw}{w}
-\right).
-\]
-Define
-\[
-V_1(y):=\frac{1}{2\pi i}\int_{(2)} y^{-w}\widehat V(w)\,\frac{dw}{w}.
-\]
-Then
-\[
-I(s;X)=\sum_{n\ge1} a_n n^{-s}V_1(n/X).
-\]
-The rapid decay of \(\widehat V\) implies that \(V_1\) is smooth and satisfies
-for every \(A>0\),
-\[
-V_1(y)=1+O_A(y^A)\quad (y\to0),
-\qquad
-V_1(y)=O_A(y^{-A})\quad (y\to\infty).
-\]
-
-Next shift the contour from \(\Re w=2\) to \(\Re w=-2\).  The only pole crossed
-is at \(w=0\), with residue \(\mathcal Z(s)\).  Hence
-\[
-\mathcal Z(s)=I(s;X)-J(s;X),
+q''_{\can}(t)=F_X(t)+R_X(t),
 \]
 where
 \[
-J(s;X):=\frac{1}{2\pi i}\int_{(-2)}
-\mathcal Z(s+w)\widehat V(w)X^w\,\frac{dw}{w}.
+\begin{aligned}
+F_X(t)
+&:=
+\sum_{n\ge1} a_n n^{-1/2-it}V_1(n/X)
++
+\sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX;s)
++P_{\mathrm{res},X}(t).
+\end{aligned}
 \]
-Apply the functional equation inside \(J(s;X)\):
+The residue term is the finite sum of all nonzero residues crossed in the
+Mellin contour shifts, except for the pole at \(w=0\) whose residue is
+\(\mathcal Z(s)\).  More explicitly, if \(\mathscr P_s\) is the finite set of
+poles of \(w\mapsto \mathcal Z(s+w)\widehat V(w)X^w/w\) crossed when shifting
+from \(\Re w=2\) to the chosen left contour, then the first-shift contribution is
 \[
-\mathcal Z(s+w)=\chi(s+w)\widetilde{\mathcal Z}(1-s-w).
+-
+\sum_{\alpha\in\mathscr P_s\setminus\{0\}}
+\operatorname*{Res}_{w=\alpha}
+\left(
+\mathcal Z(s+w)\widehat V(w)X^w\frac1w
+\right),
 \]
-Now change variables \(w\mapsto -w\).  The contour returns to \(\Re w=2\), and
-we obtain
+and \(P_{\mathrm{res},X}\) also includes the analogous finite residues produced
+on the dual side after applying the functional equation.  If no such poles are
+crossed on the retained ordinary source line, then
+\(P_{\mathrm{res},X}\equiv0\).
+
+The coefficient convention is
 \[
-J(s;X)
+\mathcal Z(s)=\sum_{n\ge1}a_n n^{-s},
+\qquad
+\widetilde{\mathcal Z}(s)=\sum_{n\ge1}\widetilde a_n n^{-s},
+\qquad
+ a_n,\widetilde a_n\ll_\varepsilon n^\varepsilon.
+\]
+Thus the critical-line coefficients
+\[
+b_n:=a_n n^{-1/2},
+\qquad
+\widetilde b_n:=\widetilde a_n n^{-1/2}
+\]
+satisfy
+\[
+b_n,\widetilde b_n\ll_\varepsilon n^{-1/2+\varepsilon}.
+\]
+The symbols \(a_n,\widetilde a_n\) themselves are not redefined to include the
+factor \(n^{-1/2}\).
+
+For every fixed derivative order \(J\) and every \(A>0\), after choosing the
+left contour sufficiently far left,
+\[
+\sum_{0\le j\le J}
+\left(
+\|\partial_t^jR_X\|_{L^2(W_{\mathrm{ref}})}
++
+\|\partial_t^jR_X\|_{L^2(W_{\mathrm{branch}})}
+\right)
+\ll_{A,J} X^{-A}.
+\]
+The same polynomial-in-\(Q\) derivative bounds hold for the residue term
+\(P_{\mathrm{res},X}\) on the retained ordinary source window.
+\end{theorem}
+
+\begin{proof}
+Set \(s=\tfrac12+it\).  On \(\Re w=2\), absolute convergence gives
+\[
+I(s;X)
 =
-\frac{1}{2\pi i}\int_{(2)}
-\chi(s-w)\widetilde{\mathcal Z}(1-s+w)\widehat V(-w)X^{-w}\,\frac{dw}{w}.
-\]
-Since \(1-s=\tfrac12-it\), insert the Dirichlet expansion of
-\(\widetilde{\mathcal Z}\) on \(\Re(1-s+w)>1\) to get
-\[
-J(s;X)
-=
-\sum_{n\ge1}\widetilde a_n n^{-1/2+it}
+\sum_{n\ge1}a_n n^{-s}
 \left(
 \frac{1}{2\pi i}\int_{(2)}
-\left(\frac{1}{nX}\right)^w
-\chi(s-w)\widehat V(-w)\,\frac{dw}{w}
+\left(\frac{X}{n}\right)^w\widehat V(w)\,\frac{dw}{w}
 \right).
 \]
 Define
 \[
-V_2(y):=\frac{1}{2\pi i}\int_{(2)}
-y^{-w}\chi(s-w)\widehat V(-w)\,\frac{dw}{w}.
+V_1(y):=\frac{1}{2\pi i}\int_{(2)}y^{-w}\widehat V(w)\,\frac{dw}{w}.
 \]
 Then
 \[
-J(s;X)=\sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX),
+I(s;X)=\sum_{n\ge1}a_n n^{-s}V_1(n/X).
 \]
-and therefore
+
+Shift the contour left.  The pole at \(w=0\) contributes \(\mathcal Z(s)\).
+Every other crossed pole contributes a signed residue, and these signed
+nonzero-pole residues are by definition included in
+\(P_{\mathrm{res},X}(t)\).  The remaining left-contour integral is transformed by
+the functional equation
 \[
-q''_{\can}(t)
+\mathcal Z(s+w)=\chi(s+w)\widetilde{\mathcal Z}(1-s-w).
+\]
+Changing variables \(w\mapsto -w\) returns the dual integral to a right contour.
+Inserting the Dirichlet expansion for \(\widetilde{\mathcal Z}\) gives
+\[
+\sum_{n\ge1}\widetilde a_n n^{-(1-s)}V_2(nX;s)
 =
-\sum_{n\ge1} a_n n^{-1/2-it}V_1(n/X)
-+
-\sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX)
-+
-R_X(t),
+\sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX;s),
 \]
-with \(R_X(t)\) the remaining contour contribution.
-
-To bound \(R_X(t)\), shift the contour further left to \(\Re w=-A\), where
-the polynomial growth of \(\mathcal Z\) in vertical strips and the rapid
-decay of \(\widehat V(w)\) imply
+where
 \[
-R_X(t)=O_A(X^{-A})
+V_2(y;s):=\frac{1}{2\pi i}\int_{(2)}
+y^{-w}\chi(s-w)\widehat V(-w)\,\frac{dw}{w}.
 \]
-uniformly for \(t\in\Omega\).  This gives the pointwise remainder bound and,
-since \(W_{\mathrm{ref}},W_{\mathrm{branch}}\) have finite mass, the stated
-\(L^2\) bounds.
+Any poles crossed in this dual shift are again included in
+\(P_{\mathrm{res},X}\).  Therefore
+\[
+q''_{\can}(t)=F_X(t)+R_X(t)
+\]
+with \(F_X\) as displayed.
 
-Finally, the coefficient bounds
-\(a_n,\widetilde a_n\ll_\varepsilon n^\varepsilon\) from the standing
-hypotheses imply the displayed \(n^{-1/2+\varepsilon}\) bounds in the finite
-AFE.  The nonzero leading coefficient is \(a_1=1\) in the standard
-normalization.  This proves the theorem.
+The vertical-strip polynomial bounds for \(\mathcal Z\), the corresponding
+bounds for the gamma/functional-equation factor, and the rapid decay of
+\(\widehat V\) allow the remaining contours to be moved to \(\Re w=-A\) without
+crossing unrecorded poles.  Differentiating in \(t\) only differentiates
+\(s=\tfrac12+it\), the functional-equation factor in \(V_2\), and the finitely
+many residue terms; all are polynomially controlled on the retained source
+window.  Hence the displayed \(L^2(W_{\mathrm{ref}})\) and
+\(L^2(W_{\mathrm{branch}})\) remainder estimates follow.  The coefficient
+statement is exactly the convention in
+Remark~\ref{rem:standing-zeta-side-source-hypotheses} after evaluating on the
+critical line.
 \end{proof}
 
 \begin{corollary}[Smooth AFE tail bound]
 \label{cor:smooth-afe-tail-bound}
 With
 \[
-F_X(t):=\sum_{n\ge1} a_n n^{-1/2-it}V_1(n/X)
-+\sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX),
+\begin{aligned}
+F_X(t)&:=\sum_{n\ge1} a_n n^{-1/2-it}V_1(n/X)
++\sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX;\tfrac12+it)
++P_{\mathrm{res},X}(t),
+\end{aligned}
 \]
+one has
 \[
 q''_{\can}(t)=F_X(t)+R_X(t),
 \qquad
 \|R_X\|_{L^2(W_{\mathrm{ref}})}+\|R_X\|_{L^2(W_{\mathrm{branch}})}\ll_A X^{-A}.
 \]
+The residue term is part of the finite main term.  It is not placed in the
+error unless it has separately been proved perturbative on the retained source
+window.
 \end{corollary}
 
 \begin{proof}
@@ -48327,14 +48418,30 @@ and \(E\) is the normalized residual correction.  The
 
 \begin{remark}[AFE coefficient normalization]
 \label{rem:afe-coefficient-normalization}
-The smoothed finite AFE is normalized so that the leading coefficient in the
-main term is nonzero (equivalently \(a_1=1\) in the standard normalization),
-and the remaining coefficients satisfy
+The smoothed finite AFE uses the Dirichlet-coefficient convention
 \[
-|a_n|,|\widetilde a_n|\ll_\varepsilon n^{-1/2+\varepsilon}.
+\mathcal Z(s)=\sum_{n\ge1}a_n n^{-s},
+\qquad
+\widetilde{\mathcal Z}(s)=\sum_{n\ge1}\widetilde a_n n^{-s},
+\qquad
+ a_n,\widetilde a_n\ll_\varepsilon n^\varepsilon.
 \]
-In particular, \((\log n)^j/\sqrt n\ll_{j,\varepsilon}n^{-1/2+\varepsilon}\)
-for every fixed \(j\).
+The coefficients multiplying the pure oscillations \(n^{-it}\) and \(n^{it}\)
+on the critical line are instead
+\[
+b_n=a_n n^{-1/2},
+\qquad
+\widetilde b_n=\widetilde a_n n^{-1/2},
+\]
+and these satisfy
+\[
+b_n,\widetilde b_n\ll_\varepsilon n^{-1/2+\varepsilon}.
+\]
+Thus the notation must not simultaneously treat \(a_n\) as the Dirichlet
+coefficient in \(a_n n^{-s}\) and as the critical-line coefficient
+\(a_n n^{-it}\).  Derivatives of the finite AFE insert powers of \(\log n\), so
+\((\log n)^j b_n\ll_{j,\varepsilon}n^{-1/2+\varepsilon}\) for every fixed
+\(j\), and similarly for \(\widetilde b_n\).
 \end{remark}
 
 \begin{lemma}[Canonical reference noncollapse]
@@ -48584,7 +48691,7 @@ of Theorem~\ref{thm:unconditional-packet-regularity}).
 \label{lem:finite-afe-packet-regularity}
 Assume
 \[
-q''_{\can}=F_X+R_X,\qquad F_X:=B_2+P_{2,\le X}+D_{2,\le X},
+q''_{\can}=F_X+R_X,\qquad F_X:=B_2+P_{2,\le X}+D_{2,\le X}+P_{\mathrm{res},X},
 \]
 where the finite AFE uses the fixed smooth cutoff already introduced in the
 source section.  Let \(K_p\) be a Whitney packet core with enlargement
@@ -48646,16 +48753,20 @@ Corollary~\ref{cor:boundary-collar-exclusion}.
 \label{thm:packet-construction-regularity}
 Assume Theorem~\ref{thm:smooth-finite-AFE-package}.  Let
 \[
+\begin{aligned}
 F_X(t)
-=
+&=
 \sum_{n\ge1} a_n n^{-1/2-it}V_1(n/X)
 +
-\sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX)
+\sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX;\tfrac12+it)
++P_{\mathrm{res},X}(t)
+\end{aligned}
 \]
-be the finite-AFE main term.  Assume the source truncation range and the
-reference weight are polynomially controlled in the \(Q\)-scale used in the
-source section.  Then for each raw Whitney packet core \(K_p\) and each
-fixed integer \(j\ge0\),
+be the finite-AFE main term, with all nonzero contour residues included in
+\(P_{\mathrm{res},X}\).  Assume the source truncation range, residue term, dual
+AFE weights, and reference weight are polynomially controlled in the
+\(Q\)-scale used in the source section.  Then for each raw Whitney packet core
+\(K_p\) and each fixed integer \(j\ge0\),
 \[
 D_{p,j}
 :=
@@ -48675,46 +48786,42 @@ family.
 \end{theorem}
 
 \begin{proof}
-Differentiating the finite-AFE main term gives
-\[
-\partial_t^jF_X(t)
-=
-\sum_{n\ge1} a_n(-i\log n)^j n^{-1/2-it}V_1(n/X)
-+
-\sum_{n\ge1}\widetilde a_n(i\log n)^j n^{-1/2+it}V_2(nX).
-\]
-The smooth cutoffs restrict the first sum to the \(X\)-range up to rapidly
-decaying tails, and similarly restrict the dual sum to its smooth dual range.
-On these effective supports,
-\[
-|\log n|^j\ll_j(\log X)^j.
-\]
+Differentiating the first AFE sum inserts the factor \((-i\log n)^j\).  The
+\(t\)-derivatives of the dual sum give a finite Leibniz expansion whose terms
+are products of \((i\log n)^r\), \(0\le r\le j\), and derivatives of
+\(V_2(nX;\tfrac12+it)\).  The smooth AFE package gives polynomial bounds for
+those dual-weight derivatives on the retained source window.  The residue term
+\(P_{\mathrm{res},X}\) has polynomially controlled derivatives by
+Theorem~\ref{thm:smooth-finite-AFE-package}.
 
-Apply the standard short-interval mean-square estimate for smooth Dirichlet
-polynomials to \(K_p^+\).  With
+The smooth cutoffs restrict the two Dirichlet sums to polynomially controlled
+effective ranges, up to rapidly decaying tails.  On these effective supports,
 \[
-c_n^{(j)}
-=
-a_n(-i\log n)^j n^{-1/2}V_1(n/X),
-\qquad
-\widetilde c_n^{(j)}
-=
-\widetilde a_n(i\log n)^j n^{-1/2}V_2(nX),
+|\log n|^j\ll_j (\log X)^j.
 \]
-one obtains
+Apply the standard short-interval mean-square estimate for smooth Dirichlet
+polynomials to \(K_p^+\).  With critical-line coefficients
+\[
+c_n^{(r)}=a_n(-i\log n)^r n^{-1/2}V_1(n/X),
+\qquad
+\widetilde c_n^{(r)}=
+\widetilde a_n(i\log n)^r n^{-1/2}V_2(nX;\tfrac12+it),
+\]
+and using the polynomial bounds for \(\partial_t^{j-r}V_2\), one obtains
 \[
 \int_{K_p^+}\bigl|\partial_t^jF_X(t)\bigr|^2W_{\mathrm{ref}}(t)\,dt
 \ll
-Q^{C}
+Q^{C_j}
 \Bigl(
-(|K_p^+|+X)\sum_n |c_n^{(j)}|^2
+(|K_p^+|+X)\sum_n |a_n|^2n^{-1}|V_1(n/X)|^2
 +
-(|K_p^+|+X^\ast)\sum_n |\widetilde c_n^{(j)}|^2
-\Bigr),
+(|K_p^+|+X^*)\sum_n |\widetilde a_n|^2n^{-1}|V_2(nX;\tfrac12+it)|^2
++1
+\Bigr).
 \]
-where \(X^\ast\) denotes the effective dual truncation scale.  The
-coefficient bounds, smooth cutoffs, polynomial packet length, and polynomial
-source truncation give
+The coefficient bounds \(a_n,\widetilde a_n\ll_\varepsilon n^\varepsilon\),
+the smooth cutoffs, polynomial packet length, polynomial source truncation, and
+the residue derivative bounds give
 \[
 D_{p,j}\le Q^{C_j}.
 \]
@@ -48894,7 +49001,8 @@ F_X(t)
 =
 \sum_{n\ge1}a_n n^{-1/2-it}V_1(n/X)
 +
-\sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX).
+\sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX;\tfrac12+it)
++P_{\mathrm{res},X}(t).
 \]
 The smooth cutoffs restrict both sums to polynomially controlled effective
 ranges, and the coefficient bounds give
@@ -49231,14 +49339,21 @@ Combining this with the trivial bound yields the displayed
 
 \begin{corollary}[Scale-normalized off-block row-sum decay]
 \label{cor:source-oscillatory-decay}
-Assume the good packet family has cardinality \(\#\mathcal P_{\mathrm{good}}\le Q^D\)
-and resonant blocks are defined as in
-Lemma~\ref{lem:frequency-gap-separation}.  Then, after separating resonant
-blocks,
+Assume the good packet family has cardinality
+\(\#\mathcal P_{\mathrm{good}}\le Q^D\), resonant blocks are defined as in
+Lemma~\ref{lem:frequency-gap-separation}, and the reference block Grams satisfy
 \[
-\sup_p\sum_{q:\,B(q)\neq B(p)}
-\frac{|\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}|}
-{\|\psi_p\|_{L^2(W_{\mathrm{ref}})}\|\psi_q\|_{L^2(W_{\mathrm{ref}})}}
+\|G_{\mathrm{ref},B}^{-1/2}\|_{\operatorname{op}}\le Q^{C_{\mathrm{ref}}}
+\]
+on every good resonant block.  Then, after separating resonant blocks, the
+off-block part of the reference-whitened branch Gram matrix satisfies
+\[
+\sup_B\sum_{C\ne B}
+\left\|
+G_{\mathrm{ref},B}^{-1/2}
+G_{\mathrm{branch},BC}
+G_{\mathrm{ref},C}^{-1/2}
+\right\|_{\operatorname{op}}
 \le Q^{-A}
 \]
 for every prescribed \(A>0\), after choosing the integration-by-parts order
@@ -49246,10 +49361,8 @@ for every prescribed \(A>0\), after choosing the integration-by-parts order
 \end{corollary}
 
 \begin{proof}
-The atoms are reference-normalized in the source frame; otherwise absorb the
-polynomially controlled normalizing factors into the amplitude bound of
-Lemma~\ref{lem:windowed-packet-amplitude-bounds}.  For \(q\) outside the block
-of \(p\), Lemma~\ref{lem:frequency-gap-separation} gives
+For \(q\) outside the block of \(p\), Lemma~\ref{lem:frequency-gap-separation}
+gives
 \[
 \lambda_{pq}|\omega_p-\omega_q|\ge Q^\kappa.
 \]
@@ -49258,8 +49371,12 @@ Lemma~\ref{lem:scale-normalized-packet-kernel-decay} therefore gives
 |\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}|
 \le Q^{C_N-\kappa N}.
 \]
-Choose \(N\) so large that \(\kappa N-C_N\ge A+D+1\).  Since there are at most
-\(Q^D\) good packets, the row sum over off-block indices is \(O(Q^{-A})\).
+Thus every raw off-block matrix entry is \(O(Q^{C_N-\kappa N})\).  Multiplying
+on the left and right by the reference block inverse square roots costs at most
+\(Q^{2C_{\mathrm{ref}}}\), and summing over at most \(Q^D\) packet indices costs
+another polynomial factor.  Choosing \(N\) so that
+\(\kappa N-C_N\ge A+D+2C_{\mathrm{ref}}+10\) gives the displayed whitened
+row-sum bound.
 \end{proof}
 
 
@@ -49309,7 +49426,12 @@ construct packet atoms by
 \qquad \eta\in C_c^\infty(\mathbb R),
 \]
 on the good packet family.  Assume the source weights and auxiliary cutoffs are
-polynomially scale-slow and that the good packet family is scale-admissible.
+polynomially scale-slow, the good packet family is scale-admissible, the packet
+normalizers are polynomially bounded, and every good resonant block has a
+polynomially conditioned reference Gram matrix:
+\[
+\|G_{\mathrm{ref},B}^{-1/2}\|_{\operatorname{op}}\le Q^{C_{\mathrm{ref}}}.
+\]
 Then:
 \begin{enumerate}
 \item the packet supports have bounded overlap;
@@ -49327,10 +49449,12 @@ Then:
 the off-block kernels satisfy
 \[
 |\langle\psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}|
-\le Q^{C_N}(1+\lambda_{pq}|\omega_p-\omega_q|)^{-N}.
+\le Q^{C_N}(1+\lambda_{pq}|\omega_p-\omega_q|)^{-N};
 \]
+\item the off-block branch Gram is polynomially small in the same
+reference-whitened block coordinates used by the block coercivity lemma.
 \end{enumerate}
-Consequently, Corollary~\ref{cor:source-oscillatory-decay} gives the
+Consequently, Corollary~\ref{cor:source-oscillatory-decay} gives the whitened
 off-block row-sum decay used in the source-frame argument.
 \end{theorem}
 
@@ -49342,40 +49466,35 @@ Proposition~\ref{prop:packet-scale-normalization} on the good packet family.
 The amplitude derivative estimate is Lemma~\ref{lem:windowed-packet-amplitude-bounds}.
 The off-block kernel estimate is Lemma~\ref{lem:scale-normalized-packet-kernel-decay},
 with the scale-normalized nonresonance supplied by the definition of the
-resonant blocks in Lemma~\ref{lem:frequency-gap-separation}.  This proves all
-claims.
+resonant blocks in Lemma~\ref{lem:frequency-gap-separation}.  The passage to
+reference-whitened block coordinates is
+Corollary~\ref{cor:source-oscillatory-decay}, using the stated polynomial
+conditioning of \(G_{\mathrm{ref},B}\).  This proves all claims.
 \end{proof}
 
-\begin{remark}[What this target does and does not close]
+\begin{remark}[What the windowed packet target closes]
 \label{rem:unconditional-packet-target-status}
-Theorem~\ref{thm:unconditional-packet-regularity} is stated as the open
-target needed to remove the conditional status of the source-side
-oscillatory-decay step.  Two of the four properties --- the bounded-overlap
-and derivative-budget items (1) and (3) --- are direct consequences of the
-explicit windowed packet formula and are essentially mechanical once the
-zeta-side construction fixes \(\eta\), \(\chi_p\), and \(\lambda_p\).  The
-nontrivial inputs are items (2) and (4): polynomial scale bounds on
-\(\lambda_p\) and polynomial frequency separation outside resonant blocks.
-These must come from the zeta-side packet construction itself, not from
-the frame argument.
+Theorem~\ref{thm:unconditional-packet-regularity} closes the source-side
+oscillatory-decay step once the windowed packet construction supplies
+scale-admissibility, polynomial normalizers, scale-slow cutoffs, and polynomial
+conditioning of the reference block Grams.  Resonant blocks are defined by the
+scale-normalized relation, so no separate unnormalized frequency-gap theorem is
+used for off-block decay.
 
-Even if Theorem~\ref{thm:unconditional-packet-regularity} is established,
-the source layer still remains conditional on
-Hypothesis~\ref{hyp:ef-completion-bound} (EF completion bound on
-\(q''_{\can}\)) and
-Hypothesis~\ref{hyp:reference-meansquare-noncollapse} (reference
-mean-square non-collapse).  This target closes only the packet-regularity
-inputs, not the AFE tail or the source nonflatness.
+The AFE tail and fixed-window reference noncollapse are no longer hidden
+hypotheses: they are supplied by Theorem~\ref{thm:smooth-finite-AFE-package},
+Corollary~\ref{cor:ef-completion-bound}, and
+Corollary~\ref{cor:reference-ms-noncollapse}.  The source layer still requires
+two non-analytic structural inputs: the completed-source anchor
+(Hypothesis~\ref{hyp:completed-source-anchor}) and branch/reference block
+domination (Theorem~\ref{thm:branch-reference-block-domination}).
 
-\noindent\emph{Honest closure state.}  The downstream proof currently has
-several conditional finite-reduction bridges
-(\(\delta_{\mathrm{src}}\), \(\delta_{\mathrm{graph}}\),
-\(c_{\mathrm{arith},Y}\), \(\delta_{\mathrm{coerc}}\),
-\(\delta_{\mathrm{ext}}\), and the same-norm atomic comparison).  Each
-bridge is correct as a conditional reduction; none is yet unconditional.
-The next mathematically meaningful target after
-Theorem~\ref{thm:unconditional-packet-regularity} is the AFE tail bound
-formalised by Hypothesis~\ref{hyp:ef-completion-bound}.
+\noindent\emph{Honest closure state.}  Once those two structural inputs are
+proved by the upstream source construction, Theorem~\ref{thm:source-survival-from-three-inputs}
+gives \(\delta_{\mathrm{src}}\ge Q^{-A}\).  The downstream finite-survival
+bridges \(\delta_{\mathrm{graph}}\), \(c_{\mathrm{arith},Y}\),
+\(\delta_{\mathrm{coerc}}\), \(\delta_{\mathrm{ext}}\), and the same-norm atomic
+comparison remain separate downstream obligations.
 \end{remark}
 
 
@@ -49385,10 +49504,11 @@ The source bridge now separates analytic estimates from structural routing
 estimates.  The analytic estimates are supplied by the completed-source AFE,
 canonical reference noncollapse, absolute packet envelopes, and
 scale-normalized oscillatory integration by parts.  The remaining source-side
-structural assertion is routed-window domination on good packet supports,
+structural assertion is branch/reference block domination,
 \[
-W_{\mathrm{branch}}\ge Q^{-C}W_{\mathrm{ref}}.
+G_{\mathrm{branch},B}\ge Q^{-C}G_{\mathrm{ref},B}
 \]
+on every good resonant block, equivalently Definition~\ref{hyp:packet-core-micro-covering}.
 This is not an AFE consequence; it must come from the branch/reference window
 construction.  Once this domination is part of the construction,
 Lemma~\ref{lem:source-frame-coercivity} gives \(\delta_{\mathrm{src}}>0\) with
@@ -49396,21 +49516,55 @@ polynomial loss.
 \end{remark}
 
 
-\begin{hypothesis}[Routed packet-core domination]
+\begin{definition}[Branch-complete routed packet-core domination]
 \label{hyp:packet-core-micro-covering}
-The good packet cores have bounded overlap and the routed branch weight
-dominates the reference weight on their supports:
+The routed branch/reference window construction is called
+\emph{branch-complete on the good packet family} if the good packet cores have
+bounded overlap and, for every good resonant block \(B\), the branch and
+reference block Gram matrices satisfy the quadratic-form domination
 \[
-W_{\mathrm{branch}}\ge Q^{-C}W_{\mathrm{ref}}.
+G_{\mathrm{branch},B}\ge Q^{-C_{\mathrm{br}}}G_{\mathrm{ref},B}.
 \]
+Equivalently, for every coefficient vector \(c=(c_p)_{p\in B}\),
+\[
+\int\left|\sum_{p\in B}c_p\psi_p(t)\right|^2W_{\mathrm{branch}}(t)\,dt
+\ge
+Q^{-C_{\mathrm{br}}}
+\int\left|\sum_{p\in B}c_p\psi_p(t)\right|^2W_{\mathrm{ref}}(t)\,dt.
+\]
+This block condition is the exact no-branch-holes condition needed by the
+source frame.  A stronger sufficient pointwise condition is
+\[
+W_{\mathrm{branch}}(t)\ge Q^{-C_{\mathrm{br}}}W_{\mathrm{ref}}(t)
+\]
+on the union of supports of every good block.
+\end{definition}
 
-\noindent\emph{Status note.}  The bounded-overlap part is a theorem of the
-Whitney construction, Theorem~\ref{thm:whitney-selection-overlap-comparability}.
-The domination part is a structural statement about the branch/reference
-routing.  It is exactly the branch-hole condition isolated in
-Remark~\ref{rem:remaining-source-structural-input}; it cannot be proved from
-the AFE or from oscillatory decay.
-\end{hypothesis}
+\begin{theorem}[Branch/reference block domination from routed coverage]
+\label{thm:branch-reference-block-domination}
+If the routed branch/reference window construction is branch-complete in the
+sense of Definition~\ref{hyp:packet-core-micro-covering}, then every good
+resonant block satisfies
+\[
+G_{\mathrm{branch},B}\ge Q^{-C_{\mathrm{br}}}G_{\mathrm{ref},B}.
+\]
+In particular, the source layer has no branch-hole loss on the good packet
+family.
+\end{theorem}
+
+\begin{proof}
+The displayed inequality is precisely the quadratic-form clause in
+Definition~\ref{hyp:packet-core-micro-covering}.  If the stronger pointwise
+coverage condition holds, then for every
+\(f_B(t)=\sum_{p\in B}c_p\psi_p(t)\),
+\[
+\int |f_B(t)|^2W_{\mathrm{branch}}(t)\,dt
+\ge
+Q^{-C_{\mathrm{br}}}
+\int |f_B(t)|^2W_{\mathrm{ref}}(t)\,dt,
+\]
+which is exactly \(G_{\mathrm{branch},B}\ge Q^{-C_{\mathrm{br}}}G_{\mathrm{ref},B}\).
+\end{proof}
 
 
 \begin{hypothesis}[Packet amplitude / oscillatory-kernel decay budget]
@@ -49433,7 +49587,7 @@ The residual correction
 \[
 E:=G_{\mathrm{ref}}^{-1/2}\bigl(G_{\mathrm{branch}}(q''_{\can})-G_{\mathrm{branch}}(F_X)\bigr)G_{\mathrm{ref}}^{-1/2},
 \qquad
-F_X:=B_2+P_{2,\le X}+D_{2,\le X},
+F_X:=B_2+P_{2,\le X}+D_{2,\le X}+P_{\mathrm{res},X},
 \]
 satisfies
 \[
@@ -49475,77 +49629,101 @@ input, as stated in Remark~\ref{rem:reference-noncollapse-uniformity}.
 The finite AFE tail estimate, fixed-window reference noncollapse, absolute
 packet envelope, packet derivative budget, and scale-normalized off-block
 oscillatory decay are theorem outputs in this section.  The source-frame
-coercivity lemma still requires the structural routed-window domination
+coercivity lemma still requires the structural block domination
 \[
-W_{\mathrm{branch}}\ge Q^{-C}W_{\mathrm{ref}}
+G_{\mathrm{branch},B}\ge Q^{-C}G_{\mathrm{ref},B}
 \]
-on the good packet supports.  This domination is not a consequence of the AFE;
+on every good resonant block.  This domination is not a consequence of the AFE;
 it is a property of the branch/reference window construction.  If the routed
 source-window construction supplies it, the Gate--1 source frame bound follows
 from Lemma~\ref{lem:source-frame-coercivity}; otherwise the remaining source
 failure mode is a branch-hole failure.
 \end{remark}
 
+\begin{definition}[Reference-whitened resonant block coordinates]
+\label{def:reference-whitened-resonant-blocks}
+For a good resonant block \(B\), let
+\[
+G_{\mathrm{ref},B}:=(\langle\psi_i,\psi_j\rangle_{W_{\mathrm{ref}}})_{i,j\in B},
+\qquad
+G_{\mathrm{branch},B}:=(\langle\psi_i,\psi_j\rangle_{W_{\mathrm{branch}}})_{i,j\in B}.
+\]
+A good block is \emph{reference-regular} if \(G_{\mathrm{ref},B}\) is positive
+definite and
+\[
+\|G_{\mathrm{ref},B}^{-1/2}\|_{\operatorname{op}}
++
+\|G_{\mathrm{ref},B}^{1/2}\|_{\operatorname{op}}
+\le Q^{C_{\mathrm{ref}}}.
+\]
+On such a block the branch Gram in reference-whitened coordinates is
+\[
+M_B:=G_{\mathrm{ref},B}^{-1/2}G_{\mathrm{branch},B}G_{\mathrm{ref},B}^{-1/2}.
+\]
+All block lower bounds in the source frame are to be interpreted in these
+coordinates.  Individual normalization of the atoms is not a substitute for
+this whitening unless the reference Gram is already the identity.
+\end{definition}
+
 \begin{lemma}[Block coercivity from branch/reference domination]
 \label{lem:block-coercivity-from-weight-domination}
-Let \(B\) be a resonant packet block and assume that on the union of supports
-of atoms in \(B\),
+Let \(B\) be a reference-regular good resonant block.  If
 \[
-W_{\mathrm{branch}}(t)\ge Q^{-C_{\mathrm{br}}}W_{\mathrm{ref}}(t).
+G_{\mathrm{branch},B}\ge Q^{-C_{\mathrm{br}}}G_{\mathrm{ref},B}
 \]
-If the atoms in \(B\) are normalized in the reference metric, then the block
-Gram matrix
+as a quadratic form, then
 \[
-M_B=(\langle\psi_i,\psi_j\rangle_{W_{\mathrm{branch}}})_{i,j\in B}
+M_B
+=
+G_{\mathrm{ref},B}^{-1/2}G_{\mathrm{branch},B}G_{\mathrm{ref},B}^{-1/2}
+\ge Q^{-C_{\mathrm{br}}}I_B.
 \]
-satisfies
-\[
-M_B\ge Q^{-C_{\mathrm{br}}}I_B
-\]
-as a quadratic form in reference-normalized coordinates.
 \end{lemma}
 
 \begin{proof}
-For any coefficient vector \(c=(c_i)_{i\in B}\), set
+For any vector \(v\in\mathbb C^B\), set
+\(u=G_{\mathrm{ref},B}^{-1/2}v\).  Then
 \[
-f_B(t):=\sum_{i\in B}c_i\psi_i(t).
+\begin{aligned}
+v^*M_Bv
+&=u^*G_{\mathrm{branch},B}u
+\ge Q^{-C_{\mathrm{br}}}u^*G_{\mathrm{ref},B}u  \\
+&=Q^{-C_{\mathrm{br}}}
+\|G_{\mathrm{ref},B}^{1/2}G_{\mathrm{ref},B}^{-1/2}v\|_2^2
+=Q^{-C_{\mathrm{br}}}\|v\|_2^2.
+\end{aligned}
 \]
-Then
-\[
-c^*M_Bc
-=
-\int |f_B(t)|^2W_{\mathrm{branch}}(t)\,dt
-\ge
-Q^{-C_{\mathrm{br}}}
-\int |f_B(t)|^2W_{\mathrm{ref}}(t)\,dt.
-\]
-In reference-normalized block coordinates the last integral is \(\|c\|_2^2\).
-Thus \(c^*M_Bc\ge Q^{-C_{\mathrm{br}}}\|c\|_2^2\), which is the displayed matrix
-inequality.
+This is the claimed matrix inequality in reference-whitened coordinates.
 \end{proof}
 
 \begin{lemma}[Source frame coercivity for Gate--1]
 \label{lem:source-frame-coercivity}
 Let
 \[
-\mathcal S_X=\operatorname{span}\{B_2,P_{2,\le X},D_{2,\le X}\},
+\mathcal S_X=\operatorname{span}\{B_2,P_{2,\le X},D_{2,\le X},P_{\mathrm{res},X}\},
 \qquad
-F_X=B_2+P_{2,\le X}+D_{2,\le X}.
+F_X=B_2+P_{2,\le X}+D_{2,\le X}+P_{\mathrm{res},X}.
 \]
 Let \(\{\psi_i\}_{i=1}^N\) be packet-adapted source atoms spanning
-\(\mathcal S_X\), normalized in the reference metric, and grouped into the
-scale-normalized resonant blocks of Lemma~\ref{lem:frequency-gap-separation}.
-Assume branch/reference domination on every good block support:
+\(\mathcal S_X\), grouped into the scale-normalized resonant blocks of
+Lemma~\ref{lem:frequency-gap-separation}.  Assume:
+\begin{enumerate}
+\item every good block is reference-regular in the sense of
+Definition~\ref{def:reference-whitened-resonant-blocks};
+\item branch/reference block domination holds on every good block:
 \[
-W_{\mathrm{branch}}\ge Q^{-C_{\mathrm{br}}}W_{\mathrm{ref}}.
+G_{\mathrm{branch},B}\ge Q^{-C_{\mathrm{br}}}G_{\mathrm{ref},B};
 \]
-Then, using Corollary~\ref{cor:source-oscillatory-decay} for off-block entries
-and Corollary~\ref{cor:ef-completion-bound} for the residual correction, one
-has
+\item the off-block branch Gram satisfies the reference-whitened row-sum bound of
+Corollary~\ref{cor:source-oscillatory-decay};
+\item the EF completion correction satisfies Corollary~\ref{cor:ef-completion-bound}.
+\end{enumerate}
+Then
 \[
 \lambda_{\min}(M+E)\ge Q^{-A}
 \]
-for some absolute \(A>0\).  Equivalently,
+for some absolute \(A>0\), where \(M\) is the block reference-whitened branch
+Gram and \(E\) is the reference-whitened residual correction.  Equivalently,
 \[
 \|f\|_{L^2(W_{\mathrm{branch}})}^2
 \ge Q^{-A}\|f\|_{L^2(W_{\mathrm{ref}})}^2
@@ -49559,7 +49737,8 @@ satisfies
 \[
 M_B\ge Q^{-C_{\mathrm{br}}}I_B.
 \]
-Thus the block-diagonal part \(M_{\mathrm{diag}}\) of \(M\) obeys
+Thus the block-diagonal part \(M_{\mathrm{diag}}\) of the reference-whitened
+matrix obeys
 \[
 M_{\mathrm{diag}}\ge Q^{-C_{\mathrm{br}}}I.
 \]
@@ -49567,23 +49746,64 @@ By Corollary~\ref{cor:source-oscillatory-decay}, after choosing the
 integration-by-parts order sufficiently large,
 \[
 \|M_{\mathrm{off}}\|_{\operatorname{op}}
-\le
-\sup_i\sum_{j:\,B(j)\neq B(i)}|M_{ij}|
 \le Q^{-A_1}.
 \]
 The EF completion estimate gives
 \[
 \|E\|_{\operatorname{op}}\le Q^{-A_2}
 \]
-after the AFE cutoff is chosen sufficiently deep.  Taking \(A_1,A_2
->C_{\mathrm{br}}+10\), for example, yields
+after the AFE cutoff is chosen sufficiently deep.  Taking \(A_1,A_2\) larger
+than \(C_{\mathrm{br}}\) by a fixed margin yields
 \[
 M+E
 \ge
 \bigl(Q^{-C_{\mathrm{br}}}-Q^{-A_1}-Q^{-A_2}\bigr)I
-\ge Q^{-A}I
+\ge Q^{-A}I.
 \]
-for some absolute \(A\).  This is the stated frame coercivity.
+The final weighted \(L^2\) inequality is the same statement pulled back from
+reference-whitened coordinates to the original finite source space.
+\end{proof}
+
+\begin{theorem}[Source survival from the three source inputs]
+\label{thm:source-survival-from-three-inputs}
+Assume:
+\begin{enumerate}
+\item the completed-source anchor, Hypothesis~\ref{hyp:completed-source-anchor};
+\item the windowed packet construction regularity of
+Theorem~\ref{thm:unconditional-packet-regularity}, including reference-regular
+resonant blocks;
+\item branch/reference block domination,
+Theorem~\ref{thm:branch-reference-block-domination}.
+\end{enumerate}
+Then the Gate--1 source gap satisfies
+\[
+\delta_{\mathrm{src}}
+:=
+\lambda_{\min}(M)-\|E\|_{\operatorname{op}}
+\ge Q^{-A}
+\]
+for some absolute \(A>0\).  Equivalently,
+\[
+\int |q''_{\can}(t)|^2W_{\mathrm{branch}}(t)\,dt
+\ge
+Q^{-A}
+\int |q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt,
+\]
+up to the already quantified finite-AFE completion error.
+\end{theorem}
+
+\begin{proof}
+The completed-source anchor identifies the actual canonical source curvature
+with the completed source trace to which the smooth AFE applies.  Theorem~\ref{thm:smooth-finite-AFE-package}
+and Corollary~\ref{cor:ef-completion-bound} give the finite main term plus a
+polynomially small reference-whitened residual correction.  The windowed packet
+construction gives bounded overlap, polynomial scales, amplitude derivative
+bounds, reference block conditioning, and reference-whitened off-block decay by
+Corollary~\ref{cor:source-oscillatory-decay}.  Branch/reference block domination
+gives the block-diagonal lower bound by
+Lemma~\ref{lem:block-coercivity-from-weight-domination}.  Lemma~\ref{lem:source-frame-coercivity}
+then yields \(\lambda_{\min}(M+E)\ge Q^{-A}\), which is exactly
+\(\delta_{\mathrm{src}}\ge Q^{-A}\) after absorbing the residual correction.
 \end{proof}
 
 \begin{remark}[Remaining non-analytic structural input]
@@ -49591,24 +49811,24 @@ for some absolute \(A\).  This is the stated frame coercivity.
 The analytic parts of the source layer are now theorem outputs: finite AFE tail
 control, absolute packet derivative/envelope bounds, scale-normalized
 off-block oscillatory decay, and fixed-window reference noncollapse.  The one
-part that cannot be proved from the AFE alone is the routed-window domination
+part that cannot be proved from the AFE alone is branch/reference block
+domination,
 \[
-W_{\mathrm{branch}}\ge Q^{-C}W_{\mathrm{ref}}
+G_{\mathrm{branch},B}\ge Q^{-C}G_{\mathrm{ref},B}.
 \]
-on the good packet supports.  This is a structural assertion about how the
-branch windows are chosen relative to the reference window.  If it is adopted
-as part of the source-window construction, Lemma~\ref{lem:source-frame-coercivity}
-is unconditional relative to that construction.  If not, it remains exactly the
-``branch holes'' failure mode and must not be hidden inside an oscillatory
-estimate.
+This is a structural assertion about how the branch windows are chosen relative
+to the reference window.  If it is adopted as part of the source-window
+construction, Lemma~\ref{lem:source-frame-coercivity} is unconditional relative
+to that construction.  If not, it remains exactly the ``branch holes'' failure
+mode and must not be hidden inside an oscillatory estimate.
 \end{remark}
 
 
 \begin{corollary}[Gate--1 source survival]
 \label{cor:gate-one-source-survival}
-Assume the routed packet-core domination
-Hypothesis~\ref{hyp:packet-core-micro-covering} on the good packet supports.
-Then the source-frame coercivity lemma gives
+Assume the completed-source anchor and a branch-complete routed packet-core
+construction in the sense of Definition~\ref{hyp:packet-core-micro-covering}.
+Then Theorem~\ref{thm:source-survival-from-three-inputs} gives
 \[
 \int |q''_{\can}(t)|^2W_{\mathrm{branch}}(t)\,dt
 \ge
@@ -49616,11 +49836,11 @@ Q^{-A}
 \int |q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt,
 \]
 equivalently \(\mathrm{Agg}L^2(q''_{\can})\) holds with polynomial loss.  The
-analytic inputs used here are the AFE tail estimate
+analytic inputs used here are the residue-aware AFE tail estimate
 Corollary~\ref{cor:ef-completion-bound}, fixed-window reference noncollapse
 Corollary~\ref{cor:reference-ms-noncollapse}, packet derivative/envelope
-control, and scale-normalized off-block decay
-Corollary~\ref{cor:source-oscillatory-decay}.
+control, reference-whitened block coercivity, and scale-normalized off-block
+decay Corollary~\ref{cor:source-oscillatory-decay}.
 \end{corollary}
 
 \begin{remark}[Source-layer status]
@@ -49629,9 +49849,9 @@ The analytic source estimates now close through the packaged corollaries:
 canonical reference noncollapse, finite-AFE main-term noncollapse,
 boundary-collar exclusion, packet-scale normalization, and scale-normalized
 off-block oscillatory decay.  Full Gate--1 source survival additionally uses
-the routed-window domination
-\(W_{\mathrm{branch}}\ge Q^{-C}W_{\mathrm{ref}}\) on good packet supports, as
-recorded in Lemma~\ref{lem:source-frame-coercivity}.
+the branch/reference block domination
+\(G_{\mathrm{branch},B}\ge Q^{-C}G_{\mathrm{ref},B}\), as recorded in
+Lemma~\ref{lem:source-frame-coercivity}.
 \end{remark}
 
 \begin{remark}[Failure labels]
@@ -49640,8 +49860,8 @@ After the corrections above, the off-diagonal packet-correlation failure is
 handled by the scale-normalized oscillatory estimate, and fixed-window
 reference mean-square collapse is excluded by
 Corollary~\ref{cor:reference-ms-noncollapse}.  The genuine remaining
-source-frame failure mode is a branch-hole failure: the routed branch weight
-may fail to dominate the reference weight on the good packet supports.  For a
+source-frame failure mode is a branch-hole failure: the routed branch block Gram
+may fail to dominate the reference block Gram on a good resonant block.  For a
 \(Q\)-dependent reference window, a second possible failure mode is lack of a
 uniform polynomial version of reference noncollapse, as noted in
 Remark~\ref{rem:reference-noncollapse-uniformity}.
@@ -49657,7 +49877,7 @@ Inside a resonant block no oscillatory decay is claimed.  Block conditioning is
 instead supplied by branch/reference domination via
 Lemma~\ref{lem:block-coercivity-from-weight-domination}:
 \[
-G_B\ge Q^{-A}G_{B,\mathrm{ref}}.
+G_{\mathrm{branch},B}\ge Q^{-A}G_{\mathrm{ref},B}.
 \]
 \end{remark}
 
@@ -49744,7 +49964,7 @@ The safe branch-to-downstream rule is:
 The aggregate Gate--1 theorem may be attacked through finite canonical
 approximants such as
 \[
-  F_X:=B_2+P_{2,\le X}+D_{2,\le X},
+  F_X:=B_2+P_{2,\le X}+D_{2,\le X}+P_{\mathrm{res},X},
 \]
 with a completion estimate
 \[
