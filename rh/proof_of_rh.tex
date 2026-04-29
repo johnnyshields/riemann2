@@ -47855,6 +47855,23 @@ mass on \(\Omega\).
 \end{enumerate}
 \end{remark}
 
+\begin{lemma}[Positive reference mass]
+\label{lem:positive-reference-mass}
+Assume \(W_{\mathrm{ref}}\) is a nonnegative weight on \(\Omega\) and is not
+identically zero.  Then
+\[
+\int_\Omega W_{\mathrm{ref}}(t)\,dt>0.
+\]
+Equivalently, under the Fourier convention used in this draft,
+\(\widehat W_{\mathrm{ref}}(0)>0\).
+\end{lemma}
+
+\begin{proof}
+Since \(W_{\mathrm{ref}}\ge 0\) and is not identically zero, it is positive on
+a set of positive measure.  Therefore its integral over \(\Omega\) is strictly
+positive.
+\end{proof}
+
 \begin{definition}[Canonical completed source]
 \label{def:canonical-completed-source}
 Define the canonical source trace on the critical line by
@@ -48072,7 +48089,10 @@ for some absolute constant \(c_1\), provided the normalization \(a_1=1\)
 \end{lemma}
 
 \begin{proof}
-By the weighted mean-value theorem for smooth Dirichlet polynomials,
+By Lemma~\ref{lem:positive-reference-mass} and the normalization
+\(a_1=1\), the diagonal \(n=1\) term contributes a fixed positive amount.
+Concretely, by the weighted mean-value theorem for smooth Dirichlet
+polynomials,
 \[
 \int_\Omega |F_X(t)|^2W_{\mathrm{ref}}(t)\,dt
 =
@@ -48080,16 +48100,16 @@ By the weighted mean-value theorem for smooth Dirichlet polynomials,
 +|\widetilde a_n|^2\widetilde V(nX)^2\Bigr)
 +O_A(X^{-A}),
 \]
-for every \(A>0\).  By
-Remark~\ref{rem:standing-zeta-side-source-hypotheses} item~(5),
-\(\widehat W_{\mathrm{ref}}(0)=\int_\Omega W_{\mathrm{ref}}>0\), so the
-diagonal \(n=1\) contribution is
-\(\widehat W_{\mathrm{ref}}(0)\,|a_1|^2V(1/X)^2\), which is positive and
-bounded below once \(X\) is in the admissible AFE range; here
-\(a_1=1\) by Remark~\ref{rem:standing-zeta-side-source-hypotheses} item~(4).
-The coefficient growth \(|a_n|,|\widetilde a_n|\ll_\varepsilon n^{-1/2+\varepsilon}\)
-from item~(2) of the same remark makes the off-diagonal contribution
-\(O_A(X^{-A})\), so for \(A\) large we obtain the stated positive lower bound.
+for every \(A>0\); here
+\(\widehat W_{\mathrm{ref}}(0)=\int_\Omega W_{\mathrm{ref}}>0\) by
+Lemma~\ref{lem:positive-reference-mass}, and \(a_1=1\) by
+Remark~\ref{rem:standing-zeta-side-source-hypotheses} item~(4).  Thus the
+diagonal \(n=1\) contribution
+\(\widehat W_{\mathrm{ref}}(0)\,|a_1|^2V(1/X)^2\) is positive and bounded
+below once \(X\) is in the admissible AFE range.  The coefficient growth
+\(|a_n|,|\widetilde a_n|\ll_\varepsilon n^{-1/2+\varepsilon}\) from item~(2)
+of the same remark makes the off-diagonal contribution \(O_A(X^{-A})\), so
+for \(A\) large we obtain the stated positive lower bound.
 \end{proof}
 
 \begin{corollary}[Reference mean-square noncollapse]
@@ -48101,10 +48121,12 @@ There exists \(c_0>0\) such that
 \end{corollary}
 
 \begin{proof}
-Write \(q''_{\can}=F_X+R_X\).  By Lemma~\ref{lem:main-term-noncollapse},
+By Lemma~\ref{lem:main-term-noncollapse} and
+Lemma~\ref{lem:positive-reference-mass},
 \[
 \|F_X\|_{L^2(W_{\mathrm{ref}})}^2\ge c_1.
 \]
+Write \(q''_{\can}=F_X+R_X\).
 By the smooth AFE tail bound,
 \[
 \|R_X\|_{L^2(W_{\mathrm{ref}})}^2\le Q^{-B_0}
