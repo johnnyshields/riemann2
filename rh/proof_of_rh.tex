@@ -38433,6 +38433,192 @@ If the \(D_4\)-action preserves the normalization slice
 quotient.
 \end{remark}
 
+\begin{remark}[Nuisance \(N_p^{\mathrm{nuis}}\) versus retained
+\(C_{7,p}^{\mathrm{tar}}\): kill-vs-preserve obstruction]
+\label{rem:n-vs-c7-quotient-role-split}
+The corollary
+\(\ref{cor:cap-jacobian-transversality}\) sets
+\[
+N_p
+:=
+\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing}}\mathcal N_p^{\mathrm{D4}}
+\]
+and uses \(r_{N,p}=q_p^YN_p\) as the first row of a putative rank-two
+Jacobian.  But quotient survival as stated requires
+\(U_p\subseteq\ker\Lambda_{Y,p}\), so every column of
+\(\mathcal N_p^{\mathrm{D4}}\) maps into \(\mathcal K_p^Y\) under
+\(\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing}}\), and consequently
+\(q_p^YN_p=0\).  With \(N_p\) in the kernel of \(q_p^Y\) the
+Jacobian determinant \(H_{j,p}^2c_7\alpha_9\) is identically zero on the
+nuisance image and the rank-two normal form cannot be derived.  The cap
+bridge therefore needs the role split: the quotient kills
+\[
+N_p^{\mathrm{nuis}}
+:=
+\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing}}\mathcal N_p^{\mathrm{D4}},
+\]
+while it must \emph{retain} the two carrier columns
+\[
+C_{7,p}^{\mathrm{tar}}
+:=
+\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing},p}[\mathsf C_7]^{\mathrm{tr}},
+\qquad
+C_{Y,p}^{\mathrm{tar}}
+:=
+\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing},p}[\mathsf C_{Y12}]^{\mathrm{tr}}.
+\]
+The cap-level rank-two Jacobian then runs on
+\((r_{C_7,p},r_{C_Y,p})\)
+with \(r_{C_7,p}:=q_p^YC_{7,p}^{\mathrm{tar}}\) and
+\(r_{C_Y,p}:=q_p^YC_{Y,p}^{\mathrm{tar}}\), not on \((r_{N,p},r_{Y,p})\).
+This is the typed precondition for
+Hypothesis~\ref{hyp:rank-two-C7-Y12-quotient-survival} below; without it,
+quotient descent and the cap bridge demand \(q_p^Y\) to both kill and
+preserve the same channel.
+\end{remark}
+
+\begin{hypothesis}[Rank-two \(C_7/Y12\) quotient survival]
+\label{hyp:rank-two-C7-Y12-quotient-survival}
+\emph{Status: FINITE AUDIT.}  Let
+\[
+C_{7,p}^{\mathrm{tar}}
+:=
+\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing},p}[\mathsf C_7]^{\mathrm{tr}},
+\qquad
+C_{Y,p}^{\mathrm{tar}}
+:=
+\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing},p}[\mathsf C_{Y12}]^{\mathrm{tr}},
+\]
+and let \(\mathcal K_p^Y\) be the quotient nuisance space.  Then
+\[
+\operatorname{rank}
+\begin{bmatrix}
+\mathcal K_p^Y & C_{7,p}^{\mathrm{tar}} & C_{Y,p}^{\mathrm{tar}}
+\end{bmatrix}
+=
+\operatorname{rank}(\mathcal K_p^Y)+2,
+\]
+with a polynomial principal-angle lower bound: there exists \(C<\infty\)
+such that
+\[
+\sigma_{\min}
+\left(
+(I-P_{\mathcal K_p^Y}^{\mathrm{bd}})
+\begin{bmatrix}
+C_{7,p}^{\mathrm{tar}} & C_{Y,p}^{\mathrm{tar}}
+\end{bmatrix}
+\right)
+\ge Q^{-C}.
+\]
+This is the typed replacement of the implicit assumption in
+Corollary~\ref{cor:cap-jacobian-transversality} that
+\((r_{N,p},r_{Y,p})\) span a polynomially conditioned plane: per
+Remark~\ref{rem:n-vs-c7-quotient-role-split}, the role split forces the
+rank-two condition onto \((C_{7,p}^{\mathrm{tar}},C_{Y,p}^{\mathrm{tar}})\).
+\end{hypothesis}
+
+\begin{lemma}[Static-line survival from rank-two quotient survival]
+\label{lem:static-line-survival-rank-two}
+Assume Hypothesis~\ref{hyp:rank-two-C7-Y12-quotient-survival} and the
+row-normal carrier expansion
+\[
+\Phi_p^Y(1,s)
+=
+H_p
+\begin{bmatrix}
+C_{7,p}^{\mathrm{tar}} & C_{Y,p}^{\mathrm{tar}}
+\end{bmatrix}
+\begin{pmatrix}
+c_7&0\\
+\beta_9^{\mathrm{tri}}&\alpha_9
+\end{pmatrix}
+\binom{1}{s}
++\varepsilon_p(s),
+\]
+with
+\[
+|H_p|\ge Q^{-C},
+\qquad
+\sigma_{\min}\!
+\begin{pmatrix}
+c_7&0\\
+\beta_9^{\mathrm{tri}}&\alpha_9
+\end{pmatrix}
+\ge Q^{-C},
+\qquad
+\|\varepsilon_p(s)\|+\|(I-P_{\mathcal K_p^Y}^{\mathrm{bd}})\varepsilon_p(s)\|
+\le Q^{-B}.
+\]
+Then for \(B\) sufficiently large depending polynomially on \(C\) and the
+operator bounds, and for every unit vector \(u\in\mathbb C^2\),
+\[
+\|(I-P_{\mathcal K_p^Y}^{\mathrm{bd}})\Phi_p^Yu\|
+\ge
+Q^{-A}\|\Phi_p^Yu\|.
+\]
+Consequently the static-line handoff
+\[
+\sum_{p\in C_j}\mu_p
+\|(I-P_{\mathcal K_p^Y}^{\mathrm{bd}})\Phi_p^Yu_j\|^2
+\ge
+Q^{-A}
+\sum_{p\in C_j}\mu_p\|\Phi_p^Yu_j\|^2
+\]
+holds for every static direction \(u_j=(1,s_j^\ast)/\sqrt{1+|s_j^\ast|^2}\)
+without a separate static wall-escape estimate on
+\(|\beta_9^{\mathrm{tri}}+\alpha_9 s_j^\ast|\).
+\end{lemma}
+
+\begin{proof}
+Write
+\(R_p:=(I-P_{\mathcal K_p^Y}^{\mathrm{bd}})\,[C_{7,p}^{\mathrm{tar}}\ C_{Y,p}^{\mathrm{tar}}]\).
+Hypothesis~\ref{hyp:rank-two-C7-Y12-quotient-survival} gives
+\(\sigma_{\min}(R_p)\ge Q^{-C}\), so for every \(v\in\mathbb C^2\),
+\(\|R_pv\|\ge Q^{-C}\|v\|\) and
+\(\|[C_{7,p}^{\mathrm{tar}}\ C_{Y,p}^{\mathrm{tar}}]v\|\le Q^{C_0}\|v\|\) by the
+operator bounds.  Apply \((I-P_{\mathcal K_p^Y}^{\mathrm{bd}})\) to the
+row-normal expansion at a unit \(u\in\mathbb C^2\):
+\[
+(I-P_{\mathcal K_p^Y}^{\mathrm{bd}})\Phi_p^Yu
+=
+H_p R_p L_{\mathrm{clean}}u
++(I-P_{\mathcal K_p^Y}^{\mathrm{bd}})\varepsilon_p(s_u),
+\]
+with \(L_{\mathrm{clean}}=\bigl(\begin{smallmatrix}c_7&0\\
+\beta_9^{\mathrm{tri}}&\alpha_9\end{smallmatrix}\bigr)\) and
+\(s_u\) the affine coordinate of \(u\).  By the singular-value
+bounds,
+\(\|H_pR_pL_{\mathrm{clean}}u\|\ge Q^{-3C}\|u\|\); the error contributes
+\(O(Q^{-B})\), absorbed for \(B\) large.  Thus
+\(\|(I-P_{\mathcal K_p^Y}^{\mathrm{bd}})\Phi_p^Yu\|\ge Q^{-A}\|u\|\).  The
+operator bound also gives
+\(\|\Phi_p^Yu\|\le Q^{C_0}\|u\|\), hence
+\(\|(I-P_{\mathcal K_p^Y}^{\mathrm{bd}})\Phi_p^Yu\|\ge Q^{-A'}\|\Phi_p^Yu\|\).
+Squaring and weighted-summing over \(p\in C_j\) gives the static-line
+handoff for any \(u_j\) (no static wall-escape required, since the lower
+bound is uniform in \(u\)).
+\end{proof}
+
+\begin{remark}[Comparison with
+Lemma~\ref{lem:static-line-survival-from-wall-escape}]
+\label{rem:rank-two-vs-wall-escape}
+Lemma~\ref{lem:static-line-survival-from-wall-escape} reduces the static
+branch to a one-dimensional wall-escape estimate
+\(\sum_p\mu_p|\beta_9^{\mathrm{tri}}+\alpha_9 s_j^\ast|^2\ge Q^{-A}\sum_p\mu_p\)
+under primitive \(Y\)-only quotient survival
+\(\|q_p^YY_p\|\ge Q^{-C}\|Y_p\|\) and quotient annihilation of
+\(N_p\).  Lemma~\ref{lem:static-line-survival-rank-two} closes the
+static branch unconditionally on the static slope, but at the cost of a
+strictly stronger quotient hypothesis: both
+\(C_{7,p}^{\mathrm{tar}}\) and \(C_{Y,p}^{\mathrm{tar}}\) must survive
+the quotient with polynomial principal angle.  The two routes are not
+interchangeable: the rank-two route requires the quotient to retain the
+\(C_7\) channel, which contradicts treating it as nuisance.  Per
+Remark~\ref{rem:n-vs-c7-quotient-role-split}, the live quotient must
+distinguish nuisance \(N_p^{\mathrm{nuis}}\) from retained
+\(C_{7,p}^{\mathrm{tar}}\) before the rank-two route is available.
+\end{remark}
+
 \begin{corollary}[Cap-level Jacobian transversality (conditional bridge)]
 \label{cor:cap-jacobian-transversality}
 \emph{Status: FINITE AUDIT.  This is the conditional bridge from extraction
