@@ -38160,6 +38160,125 @@ Choosing \(B\) so that
 which is the claim after exponent renaming.
 \end{proof}
 
+\begin{lemma}[Static-line survival from primitive quotient and wall escape]
+\label{lem:static-line-survival-from-wall-escape}
+Let \(C_j\) be a quantitatively static good cap with static direction
+\[
+u_j=\frac{(1,s_j^\ast)}{\sqrt{1+|s_j^\ast|^2}},
+\]
+let
+\[
+Q_p:=I-P_{\mathcal K_p^Y}^{\mathrm{bd}},
+\qquad
+\Phi_p^Y
+:=
+\Pi_{\Sigma(Y12)}
+T_{\mathrm{tr}\to\mathrm{sing},p}
+E_{\mathrm{car},p}^{\mathrm{tr}}
+L_{\mathrm{clean},p}^{\mathrm{tr}},
+\]
+and assume the row-normal carrier expansion
+\[
+\Phi_p^Y(1,s)
+=
+H_p\bigl(c_{7,p}\,N_p+(\beta_{9,p}^{\mathrm{tri}}+\alpha_{9,p}s)\,Y_p\bigr)
++\varepsilon_p(s),
+\]
+with \(\|H_p\|\), \(\|N_p\|\), \(\|Y_p\|\) polynomially bounded above and below
+in \(Q\), with quotient annihilation of the \(N\)-channel
+\[
+\|Q_p N_p\|\le Q^{-B}\|N_p\|,
+\]
+with carrier-error control
+\[
+\|\varepsilon_p(s_j^\ast)\|+\|Q_p\varepsilon_p(s_j^\ast)\|\le Q^{-B},
+\]
+and primitive \(Y12\) quotient survival
+\[
+\|Q_p Y_p\|\ge Q^{-C}\|Y_p\|.
+\]
+Assume in addition the static wall-escape estimate
+\[
+\sum_{p\in C_j}\mu_p
+|H_p|^2
+|\beta_{9,p}^{\mathrm{tri}}+\alpha_{9,p}s_j^\ast|^2
+\|Q_p Y_p\|^2
+\ge
+Q^{-A}
+\sum_{p\in C_j}\mu_p
+\|\Phi_p^Y u_j\|^2.
+\]
+Then for \(B\) sufficiently large depending polynomially on \(A\), \(C\), and
+the operator bounds,
+\[
+\sum_{p\in C_j}\mu_p\|Q_p\Phi_p^Y u_j\|^2
+\ge
+Q^{-A'}
+\sum_{p\in C_j}\mu_p
+\|\Phi_p^Y u_j\|^2.
+\]
+\end{lemma}
+
+\begin{proof}
+Apply \(Q_p\) to the row-normal expansion at \(s=s_j^\ast\):
+\[
+Q_p\Phi_p^Y(1,s_j^\ast)
+=
+H_p(\beta_{9,p}^{\mathrm{tri}}+\alpha_{9,p}s_j^\ast)\,Q_p Y_p
++
+H_p c_{7,p}\,Q_p N_p
++
+Q_p\varepsilon_p(s_j^\ast).
+\]
+By the quotient annihilation \(\|Q_pN_p\|\le Q^{-B}\|N_p\|\) and the carrier
+error bound, the last two terms are \(O(Q^{-B})\) in the weighted cap norm.
+Using \(\|x+y\|^2\ge\tfrac12\|x\|^2-\|y\|^2\) and choosing \(B\) larger than
+the polynomial operator losses gives
+\[
+\sum_{p\in C_j}\mu_p
+\|Q_p\Phi_p^Y u_j\|^2
+\ge
+\tfrac12
+\sum_{p\in C_j}\mu_p
+|H_p|^2
+|\beta_{9,p}^{\mathrm{tri}}+\alpha_{9,p}s_j^\ast|^2
+\|Q_p Y_p\|^2
+-O(Q^{-B'}).
+\]
+The wall-escape hypothesis lower-bounds the first term by
+\(Q^{-A}\sum_p\mu_p\|\Phi_p^Y u_j\|^2\), and the carrier noncollapse implicit
+in the same hypothesis dominates the \(O(Q^{-B'})\) error for \(B\) large
+enough, which gives the conclusion after exponent renaming.
+\end{proof}
+
+\begin{remark}[Static wall as the residual finite obstruction]
+\label{rem:static-wall-residual}
+Lemma~\ref{lem:static-line-survival-from-wall-escape} sharpens
+Hypothesis~\ref{hyp:static-line-Y12-quotient-survival} by isolating the
+remaining finite input as a one-dimensional wall-escape estimate on the
+static line:
+\[
+\sum_{p\in C_j}\mu_p
+|\beta_{9,p}^{\mathrm{tri}}+\alpha_{9,p}s_j^\ast|^2
+\ge
+Q^{-A}
+\sum_{p\in C_j}\mu_p,
+\]
+under uniform polynomial lower bounds on \(|H_p|\), \(|\alpha_{9,p}|\), and
+\(\|Q_p Y_p\|/\|Y_p\|\).  Equivalently, the static slope \(s_j^\ast\) must
+not align with the killed row-normal direction
+\(s=-\beta_{9,p}^{\mathrm{tri}}/\alpha_{9,p}\) on a polynomially large
+\(\mu\)-mass of \(C_j\).  A two-dimensional countermodel
+\(\Phi(1,s)=c_7\,N+(\beta+\alpha s)\,Y\) with \(qN=0\), \(qY=Y\), and
+\(s_j^\ast=-\beta/\alpha\) satisfies primitive \(Y12\) quotient survival
+\(qY\neq0\) but kills static-line survival \(q\Phi(1,s_j^\ast)=0\); thus
+static wall escape is not a formal consequence of \(Y12\) quotient survival
+alone.  This is the residual finite input for the static branch:
+quotient-descent linear algebra plus quotient survival of the primitive
+\(Y\)-carrier reduce static-line survival to the wall-escape estimate above,
+and no further.
+\end{remark}
+
 \begin{remark}[Cap-wise covariance bottleneck]
 \label{rem:cap-wise-covariance-bottleneck}
 On each frozen cap \(C_j\), define
