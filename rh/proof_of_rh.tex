@@ -37597,6 +37597,232 @@ where
 certificate.
 \end{definition}
 
+\subsection{Retained-generator verification for the singular row lift}
+\label{subsec:retained-generator-verification-singular-row-lift}
+
+The singular row-lift condition can be verified without expanding the
+full Schur determinant, provided the retained singular generators are
+row-dead for exactly the same two rows that detect the live \(C_7/Y12\)
+carrier pair.  The following formulation is finite-dimensional and is
+invariant under a change of basis in the retained singular space.
+
+\begin{definition}[Retained-generator row-deadness certificate]
+\label{def:retained-generator-row-deadness-certificate}
+Let
+\[
+  E_{\mathrm{sing},p}^{2Y}
+  :=
+  T_{\mathrm{tr}\to\mathrm{sing},p}
+  \begin{bmatrix}
+  [\mathsf C_7]^{\mathrm{tr}}&[\mathsf C_{Y12}]^{\mathrm{tr}}
+  \end{bmatrix}
+  :\mathbb C^2\to H_{\mathrm{sing},p}.
+\]
+Let
+\(L_p^{\mathrm{row}}=\bigl(\begin{smallmatrix}\ell_{7,p}\\
+\ell_{9,p}^Y\end{smallmatrix}\bigr):\mathcal H_p^Y\to\mathbb C^2\) be the
+concrete live row map of the \(C_7/Y12\) certificate, and let
+\(\Theta_{2Y,p}:H_{\mathrm{sing},p}\to\mathcal H_p^Y\) be the singular
+finite-jet signature extractor.  Put
+\(\widehat L_{\mathrm{sing},p}:=L_p^{\mathrm{row}}\Theta_{2Y,p}\).  Let
+\(R_p=[r_{1,p}\ \cdots\ r_{s,p}]\) be a full-rank generator matrix for
+\(R_{\mathrm{sing},p}\), and let \(M_p\) be the singular ambient metric.
+The retained singular space satisfies the \emph{retained-generator
+row-deadness certificate} if, for some fixed polynomial exponent \(A\)
+and arbitrarily large residual exponent \(B\), the following finite
+estimates hold:
+\[
+  \|L_p^{\mathrm{row}}\|_{\operatorname{op}}
+  +\|\Theta_{2Y,p}\|_{\operatorname{op}}
+  +\|E_{\mathrm{sing},p}^{2Y}\|_{\operatorname{op}}
+  \le Q^{A},
+  \qquad
+  \kappa(R_p^*M_pR_p)\le Q^{A},
+\]
+\[
+  \|\widehat L_{\mathrm{sing},p}R_p\|_{\operatorname{op}}
+  \le Q^{-B},
+\tag{RD}
+\]
+while on the live carrier pair
+\[
+  \widehat L_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y}
+  =I_2+\mathcal E_{\mathrm{car},p},
+  \qquad
+  \|\mathcal E_{\mathrm{car},p}\|_{\operatorname{op}}
+  \le Q^{-B}.
+\tag{LC}
+\]
+The exact version has \(\widehat L_{\mathrm{sing},p}R_p=0\) and
+\(\mathcal E_{\mathrm{car},p}=0\).
+\end{definition}
+
+\begin{lemma}[Finite correction to exact singular-normal rows]
+\label{lem:finite-correction-exact-singular-normal-rows}
+Assume the retained-generator row-deadness certificate.  Let
+\(P_{\mathrm{sing},p}\) be the \(M_p\)-orthogonal projection onto
+\(R_{\mathrm{sing},p}\), and define
+\(L_{\mathrm{sing},p}:=\widehat L_{\mathrm{sing},p}(I-P_{\mathrm{sing},p})\).
+If \(B\) is larger than the polynomial losses in the conditioning of
+\(R_p,M_p,\Theta_{2Y,p}\), and \(E_{\mathrm{sing},p}^{2Y}\), then
+\(L_{\mathrm{sing},p}R_{\mathrm{sing},p}=0\),
+\(\|L_{\mathrm{sing},p}\|_{\operatorname{op}}\le Q^{A'}\), and
+\(L_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y}=I_2+O(Q^{-B+A'})\).  In
+particular,
+\(\sigma_{\min}\!\left(L_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y}\right)\ge Q^{-A'}\).
+\end{lemma}
+
+\begin{proof}
+The first identity is immediate from the definition of
+\(L_{\mathrm{sing},p}\).  The norm bound follows from
+\(\|I-P_{\mathrm{sing},p}\|\le1\) in the singular metric and the
+polynomial bounds on \(L_p^{\mathrm{row}}\) and \(\Theta_{2Y,p}\).  Since
+\(P_{\mathrm{sing},p}=R_p(R_p^*M_pR_p)^{-1}R_p^*M_p\), the polynomial
+conditioning of \(R_p^*M_pR_p\) and the row-deadness estimate
+\((\mathrm{RD})\) give
+\(\|\widehat L_{\mathrm{sing},p}P_{\mathrm{sing},p}\|_{\operatorname{op}}\le Q^{-B+A_1}\).
+Therefore
+\[
+  L_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y}
+  =\widehat L_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y}
+   -\widehat L_{\mathrm{sing},p}P_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y}
+  =I_2+\mathcal E_{\mathrm{car},p}+O(Q^{-B+A_1}).
+\]
+Taking \(B\) above the accumulated polynomial losses gives a perturbation
+of \(I_2\) with operator norm at most \(1/2\), hence a polynomial lower
+bound for the smallest singular value.
+\end{proof}
+
+\begin{theorem}[Singular finite-jet row lift from retained-generator exactness]
+\label{thm:singular-finite-jet-row-lift-from-retained-generators}
+Assume the concrete \(C_7/Y12\) row certificate
+\(L_p^{\mathrm{row}}[C_{7,p}^{\mathrm{tar}}\ C_{Y,p}^{\mathrm{tar}}]=I_2\),
+\(\|L_p^{\mathrm{row}}\|_{\operatorname{op}}\le Q^A\), and assume the
+retained-generator row-deadness certificate of
+Definition~\ref{def:retained-generator-row-deadness-certificate}.  Then
+the map
+\(L_{\mathrm{sing},p}=L_p^{\mathrm{row}}\Theta_{2Y,p}(I-P_{\mathrm{sing},p})\)
+is a singular two-row lift certificate: it annihilates
+\(R_{\mathrm{sing},p}\), has polynomial operator norm, and detects the
+transitioned live carrier pair with polynomial singular-value margin
+\(\sigma_{\min}\!\left(L_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y}\right)\ge Q^{-A'}\).
+Consequently
+\(\sigma_{\min}\!\left((I-P_{\mathrm{sing},p})E_{\mathrm{sing},p}^{2Y}\right)\ge Q^{-A''}\).
+\end{theorem}
+
+\begin{proof}
+The first three assertions are
+Lemma~\ref{lem:finite-correction-exact-singular-normal-rows}.  Since
+\(L_{\mathrm{sing},p}=L_{\mathrm{sing},p}(I-P_{\mathrm{sing},p})\), for
+every \(a\in\mathbb C^2\),
+\(\|L_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y}a\|\le\|L_{\mathrm{sing},p}\|_{\operatorname{op}}\|(I-P_{\mathrm{sing},p})E_{\mathrm{sing},p}^{2Y}a\|\).
+Taking the infimum over \(\|a\|=1\) gives the projected-carrier
+singular-value lower bound.
+\end{proof}
+
+\begin{corollary}[Low-block coercivity from retained-generator exactness]
+\label{cor:low-block-coercivity-from-retained-generator-exactness}
+Let \(V_p=\mathcal R_{X,\mathrm{low},p}\),
+\(A_p=T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}\big|_{V_p}\), and
+let \(E_p^{\mathrm{low}}:\mathbb C^r\to V_p\) be the low-mode basis map
+with Gram matrix \(B_p\).  Assume that the transitioned low block is
+polynomially identified with the live \(C_7/Y12\) carrier plane:
+\[
+  A_pE_p^{\mathrm{low}}
+  =E_{\mathrm{sing},p}^{2Y}M_{\mathrm{low},p}+\mathcal E_{\mathrm{low},p},
+  \qquad
+  \sigma_{\min}(M_{\mathrm{low},p}B_p^{-1/2})\ge Q^{-A},
+  \qquad
+  \|\mathcal E_{\mathrm{low},p}B_p^{-1/2}\|\le Q^{-B}.
+\]
+Under the hypotheses of
+Theorem~\ref{thm:singular-finite-jet-row-lift-from-retained-generators},
+\(\lambda_{\min}\!\left(B_p^{-1/2}D_p^*D_pB_p^{-1/2}\right)\ge Q^{-A'}\)
+with \(D_p=(I-P_{\mathrm{sing},p})A_pE_p^{\mathrm{low}}\), hence
+\(\delta_{\mathrm{coerc},p}\ge Q^{-A'}\).
+\end{corollary}
+
+\begin{proof}
+By
+Theorem~\ref{thm:singular-finite-jet-row-lift-from-retained-generators},
+\(\sigma_{\min}\bigl((I-P_{\mathrm{sing},p})E_{\mathrm{sing},p}^{2Y}\bigr)\ge Q^{-A_1}\).
+Multiplying by the conditioned matrix \(M_{\mathrm{low},p}B_p^{-1/2}\)
+gives a polynomial lower bound for the main term in
+\(D_pB_p^{-1/2}\).  The perturbation
+\((I-P_{\mathrm{sing},p})\mathcal E_{\mathrm{low},p}B_p^{-1/2}\) has norm
+\(O(Q^{-B})\); the standard singular-value perturbation inequality gives
+the claim after increasing \(B\).
+\end{proof}
+
+\begin{lemma}[Retained generators are row-dead under the existing row-exactness tests]
+\label{lem:retained-generators-row-dead-under-row-exactness}
+Assume the row-exactness certificate \(\mathcal E_{2Y}(p)\), the
+no-atom-fitting guardrails for \(E_2/R_{\mathrm{lab}}\), and the
+admissible exact-nuisance split.  Assume further that every generator of
+\(R_{\mathrm{sing},p}\) is one of the following classes after applying
+the singular finite-jet extractor \(\Theta_{2Y,p}\):
+\[
+  \mathcal K_{p,0}^{Y,\mathrm{dead}},\quad
+  \mathcal D_{7,\mathrm{chart}},\quad
+  \mathcal D_{7,\mathrm{norm}},\quad
+  \mathcal D_{7,\gamma/\mathrm{bg}},\quad
+  \mathcal D_{7,<7},\quad
+  W_{\mathrm{dead}}^{\mathrm{fixed}},\quad
+  \mathcal N_{\mathrm{exact}},
+\]
+or a fixed/coherent generator whose live row signature is routed into
+the effective carrier matrix and is not included in the retained
+singular space.  Then
+\(L_p^{\mathrm{row}}\Theta_{2Y,p}R_{\mathrm{sing},p}=0\) up to the
+residual ledger.  Hence the row-deadness estimate \((\mathrm{RD})\)
+holds.
+\end{lemma}
+
+\begin{proof}
+The septic row kills the typed septic denominator and the exact nuisance
+space by septic exactness.  The primitive \(Y12\) row kills the
+fixed-whitening dead space and the transported wrong-origin data by the
+whitening exact sequence.  The no-atom-fitting guardrails exclude local
+live contributions from completion and labelled-transition terms.
+Therefore every listed exact generator has zero row signature under
+\(L_p^{\mathrm{row}}\Theta_{2Y,p}\).  Residual generators are not
+retained exactly; they enter the residual ledger and contribute only the
+allowed \(O(Q^{-B})\) error.  Fixed/coherent generators with nonzero
+live signature are not row-dead and therefore cannot be included in
+\(R_{\mathrm{sing},p}\); by hypothesis they are routed into the
+effective carrier matrix instead.
+\end{proof}
+
+\begin{proposition}[Live retained generators obstruct the singular row lift]
+\label{prop:live-retained-generators-obstruct-singular-row-lift}
+If, for some nonzero \(a\in\mathbb C^2\),
+\(E_{\mathrm{sing},p}^{2Y}a\in R_{\mathrm{sing},p}\), then
+\((I-P_{\mathrm{sing},p})E_{\mathrm{sing},p}^{2Y}a=0\), and the rank-two
+projected carrier estimate fails.  In particular, no pair of normal rows
+annihilating \(R_{\mathrm{sing},p}\) can have polynomially invertible
+restriction to \(E_{\mathrm{sing},p}^{2Y}\mathbb C^2\).
+\end{proposition}
+
+\begin{proof}
+The first claim follows from the definition of the orthogonal projection
+onto \(R_{\mathrm{sing},p}\).  If normal rows annihilate
+\(R_{\mathrm{sing},p}\), they annihilate \(E_{\mathrm{sing},p}^{2Y}a\),
+so their restriction to the live carrier plane has a nontrivial kernel.
+\end{proof}
+
+\begin{remark}[Remaining finite verification]
+\label{rem:remaining-finite-verification-singular-row-lift}
+\emph{Status: FINITE AUDIT.}  The proof above shows that the singular
+row-lift theorem reduces to a retained generator table.  It is not
+necessary to expand the full Schur determinant if the table proves that
+the retained singular generators are row-dead and the transitioned
+\(C_7/Y12\) carriers have identity row signature.  Conversely, if a
+retained singular generator has a nonzero \(C_7/Y12\) live row signature,
+then the rank-two singular-discard coercivity statement is false unless
+that generator is removed from \(R_{\mathrm{sing},p}\) and routed as
+live/coherent or residual data.
+\end{remark}
+
 \begin{proposition}[Boundary row certificate lifts to singular normal rows]
 \label{prop:boundary-row-certificate-lifts-to-singular-normal-rows}
 Assume the concrete boundary row certificate
