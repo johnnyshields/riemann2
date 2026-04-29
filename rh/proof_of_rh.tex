@@ -30334,7 +30334,7 @@ is forced to be exact-point or scalar-collapsed.
 The proof is organized around four finite-survival statements:
 \begin{enumerate}
 \item \textbf{Source survival:} \(\mathrm{Agg}L^2(q''_{\can})\) on a polynomial-weight good packet set.
-\item \textbf{Graph survival:} \(\mathrm{Graph/O2O3}_{23}\) after \(R^C\)-normalization and full determinant survival.
+\item \textbf{Graph survival:} \(\mathrm{Graph/O2O3}_{23}\) after \(R^C\)-normalization, the bounded-degree Fej\'er--Riesz packet model, and off-block packet geometry.
 \item \textbf{Quotient survival:} the primitive \(Y12\) carrier survives in the same quotient that removes actual-source nuisances.
 \item \textbf{Atomic contradiction:} the singular-discard observable is Type-I local-square and is bounded above on the same quotient norm.
 \end{enumerate}
@@ -30349,7 +30349,7 @@ If all four hold, the same observable is simultaneously bounded below and above 
 \\[3pt]
 \boxed{\mathrm{Graph/O2O3}_{23}}
 \\[3pt]
-\Downarrow \quad \text{(\(R^C\)-normalized Riesz basis + thickened Schur survival)}
+\Downarrow \quad \text{(\(R^C\)-normalized Riesz basis + Fej\'er--Riesz charge anti-lock)}
 \\[3pt]
 \boxed{Y12\text{-quotient survival}}
 \\[3pt]
@@ -30364,7 +30364,7 @@ If all four hold, the same observable is simultaneously bounded below and above 
 The proof proceeds in four finite-survival layers:
 \begin{enumerate}
 \item establish aggregate source observability for \(q''_{\can}=B_2+P_2+D_2+E_2\) on a good packet set;
-\item establish finite graph nondegeneracy in the \(R^C\)-normalized O2/O3 block and promote it to full determinant survival;
+\item verify the finite/O2O3 packet model and invoke Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3} to obtain finite graph nondegeneracy;
 \item pass to the actual-source quotient and verify that the primitive \(Y12\) carrier survives after removing nuisance directions;
 \item compare the same quotient observable against the Type-I singular-discard upper and conclude contradiction when the lower and upper scales are separated.
 \end{enumerate}
@@ -30478,7 +30478,7 @@ The proof uses a fixed failure grammar:
 \quad
 \text{residual completion failure},
 \quad
-\text{thickened overlap too coherent},
+\text{Fej\'er--Riesz packet model not verified},
 \quad
 \text{quotient killed primitive carrier},
 \quad
@@ -39881,11 +39881,12 @@ prior lemmas and definitions, not as new hypotheses.
 \begin{proposition}[Source-closed downstream handoff]
 \label{prop:source-closed-downstream-handoff}
 Assume Gate--1 source survival has been established by
-Theorem~\ref{thm:source-survival-from-three-inputs}.  Then the remaining
-finite-survival chain is purely downstream:
+Theorem~\ref{thm:source-survival-from-three-inputs}.  The graph step is supplied
+by Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3} once the
+finite/O2O3 packet model, bounded-degree Fej\'er--Riesz block factorization,
+and off-block packet geometry are verified.  After this graph step, the
+remaining finite-survival chain is purely downstream:
 \[
-\mathrm{Graph/O2O3}_{23}
-\Longrightarrow
 Y12\text{-quotient survival}
 \Longrightarrow
 Y12\text{-graph/coercivity}
@@ -39915,9 +39916,10 @@ Lemma~\ref{lem:static-line-transfer-from-actual-Y12-survival}.
 Theorem~\ref{thm:source-survival-from-three-inputs} supplies the source gap
 \(\delta_{\mathrm{src}}\ge Q^{-A}\), so the source branch-hole, AFE completion,
 and reference noncollapse issues are no longer downstream hypotheses.  The
-remaining quantities are exactly the non-source gaps recorded in
-Definition~\ref{def:finite-survival-gaps}: \(\delta_{\mathrm{graph}}\), the
-\(Y12\) quotient residuals \(r_{N,p},r_{Y,p}\), the graph/coercivity gap
+principal-angle graph gap \(\delta_{\mathrm{graph}}\) is supplied by
+Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3} under the
+finite/O2O3 packet-model hypotheses.  The remaining quantities are the \(Y12\)
+quotient residuals \(r_{N,p},r_{Y,p}\), the graph/coercivity gap
 \(\delta_{\mathrm{coerc}}\), and the extraction gap \(\delta_{\mathrm{ext}}\).
 If \(\delta_{\mathrm{ext}}\ge Q^{-A}\), the cap is nonstatic and
 Corollary~\ref{cor:cap-transversality-live-C7-Y12-coordinates} supplies the
@@ -45391,16 +45393,20 @@ Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}, assuming the canonical
 definition package, source local complexity, and the safe \(L^2\)-input
 rigidity lemma.
 
-The finite/O2/O3 module is separate from Gate--2.  Its current analytic form is
+The finite/O2/O3 module is separate from Gate--2.  Its analytic form is
 the \(R^C\)-normalized graph problem
 \[
   \mathbf C\cdot1+m_{\can}\mathbf C_R[x]
   =
   m_{\can}\left(\mathbf C\cdot(1/m_{\can})+\mathbf C_R[x]\right),
 \]
-together with full determinant survival inside the scalar canonical matrix.
-The pure graph estimate for \(1/m_{\can}\) is only a branch witness; it must
-survive in the full determinant under the Stack weight.
+together with the weighted exterior-pivot anti-trough for the scalar canonical
+matrix.  Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3}
+supplies the normalized pure/contaminant graph gap once the finite/O2O3 packet
+family is placed in the bounded-degree Fej\'er--Riesz charge model and the
+off-block packet geometry hypotheses are available.  The pure graph estimate
+for \(1/m_{\can}\) remains a branch witness by itself; the Fej\'er--Riesz charge
+anti-lock theorem is the full graph-survival bridge.
 
 The current downstream contradiction candidate is the \(Y12\)-signature
 specialization of the singular-discard channel:
@@ -45800,8 +45806,8 @@ For \(\delta=R^{-C}\), route
 \[
   \Omega_{\mathrm{cen}}=\{|x-\tfrac12|<\delta\}
 \]
-as a rescaled branch and prove both the \(L^2\)-anti-lock and graph/O2/O3
-lower bounds there.
+as a rescaled branch and verify both the \(L^2\)-anti-lock and the
+finite/O2O3 packet-model hypotheses there.
 
 \item \textbf{Canonical quadratic multiplier.}
 Prove
@@ -45814,13 +45820,16 @@ with \(R^C\)-controlled divided differences for \(u\), giving
 \]
 
 \item \textbf{Near-pure Schur block.}
-Prove
+Verify that the active Stack weight and finite/O2O3 packets satisfy the
+bounded-degree Fej\'er--Riesz charge model used in
+Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3}.  Under those
+structural hypotheses, the theorem proves
 \[
   D_{-n}
   \notin_{Q^{-A}}
   \operatorname{span}\{D_{-n+1},\ldots,D_{-n+d_0}\}
 \]
-under the active Stack weight.
+with polynomial loss.
 
 \item \textbf{EF residual split.}
 Prove both
@@ -45887,9 +45896,12 @@ rank-one forbidden wall; rank \(2\) gives the full rank-two forbidden wall.
 carriers or recomputes \(N_0/\mathcal W\).  Transport preserves the
 \(Y12\)-origin filter; recomputation forces a direct Schur separation theorem.
 
-\item Decide whether O2/O3 will be proved by full graph-block Riesz survival,
-by determinant branch survival, or by an \(\alpha\)-admissible determinant
-average.  Pure-branch graph non-polynomiality alone does not certify the full
+\item O2/O3 is now routed through full graph-block Riesz survival via the
+Fej\'er--Riesz charge anti-lock theorem.  The remaining audit is structural:
+check the bounded-degree charge model, Fej\'er--Riesz factorization, and
+off-block packet decay for the active Stack weight.  Determinant branch
+survival and \(\alpha\)-admissible determinant averaging are fallback routes;
+pure-branch graph non-polynomiality alone still does not certify the full
 canonical augmented matrix.
 
 \item Decide whether \(Y12\)-normality is proved by the full \(K_9\)-residual
@@ -45967,8 +45979,10 @@ The first term is branch-complete local scalar source energy:
   \int_{I_b}
   |\lambda_b^3 q''_{\can}(m+\lambda_bx)|^2\,dx.
 \]
-The second term is the finite O2/O3 nondegeneracy package, preferably expressed
-through a Riesz graph model for
+The second term is the finite O2/O3 nondegeneracy package.  Its normalized
+graph component is supplied by
+Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3} after the
+active packets are expressed in the bounded-degree Fej\'er--Riesz charge model:
 \[
   \mathbf C\cdot1+m_{\can}\mathbf C_R[x]
   \simeq
@@ -51985,9 +51999,10 @@ finite Riesz norm:
   \left(1/m_{\can},\mathbf C_R[x]\right)\ge Q^{-A}.
 \]
 The full determinant problem is not solved by the pure branch alone.  Under a
-bounded branch-charge Stack weight, one must also prove survival of the pure
-branch inside the full determinant.  Equivalently, after branch-charge
-decomposition,
+bounded branch-charge Stack weight, the Fej\'er--Riesz charge anti-lock theorem
+proves survival of the pure branch inside the full determinant once the packet
+model is expressed in smooth charge coordinates.  Equivalently, after
+branch-charge decomposition,
 \[
   D_{\mathrm{full}}
   =
@@ -52001,8 +52016,10 @@ one needs the finite near-pure Schur complement
   \operatorname{span}\{D_{-n+1},\ldots,D_{-n+d_0}\},
 \]
 where \(d_0\) is the bounded branch-charge degree of the smooth Stack weight.
-This statement should be proved before capped extraction; hard extraction
-destroys the branch-charge/Fourier structure needed for determinant survival.
+This statement is proved below by
+Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3} before capped
+extraction; hard extraction would destroy the branch-charge/Fourier structure
+needed for the proof.
 \end{remark}
 
 \begin{definition}[Bounded-charge near-pure Schur block]
@@ -52027,8 +52044,8 @@ with the finite block
 \[
   D_{-n+1},\ldots,D_{-n+d_0}.
 \]
-The fixed-\(\alpha\) full determinant survival condition is therefore the
-finite Schur condition
+The fixed-\(\alpha\) graph-survival condition is therefore the finite Schur
+condition
 \[
   \boxed{
   D_{-n}
@@ -52037,15 +52054,17 @@ finite Schur condition
   \{D_{-n+1},\ldots,D_{-n+d_0}\}.
   }
 \]
-This is the default finite/O2/O3 branch-survival theorem unless an
-AlphaAdmissibility package is installed.
+This is the finite Schur target proved by
+Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3} under the
+bounded-degree Fej\'er--Riesz charge model; an AlphaAdmissibility package
+remains only a fallback route.
 \end{definition}
 
 \begin{remark}[Do not cap before determinant survival]
 \label{rem:do-not-cap-before-determinant-survival}
-The finite/O2/O3 determinant-survival theorem must be proved at the smooth
-aggregate level.  Capped extraction destroys the branch-charge and Fourier
-structure used to prove
+The Fej\'er--Riesz charge anti-lock proof of finite/O2/O3 graph survival is
+carried out at the smooth aggregate level.  Capped extraction destroys the
+branch-charge and Fourier structure used to prove
 \[
   D_{-n}
   \notin_{Q^{-A}}
@@ -53703,7 +53722,11 @@ The unresolved inputs are:
 \item construction of \(R_{\mathrm{sing}}\) and the singular-discard upper,
 \item D4 transversality to the discarded singular channel.
 \end{enumerate}
-Any sentence implying that finite D4 alone closes the proof should be replaced
+The principal-angle/Schur component \(\delta_{\mathrm{graph}}\) is not listed as
+an unresolved input here: it is supplied by
+Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3} once the
+finite/O2O3 packet-model hypotheses are verified.  Any sentence implying that
+finite D4 alone closes the proof should be replaced
 by ``visibility, not contradiction unless \(\Lambda\).''
 \end{remark}
 
@@ -53756,13 +53779,12 @@ The active inputs are now as follows.
 & \text{finite-audit/open}
 & m_{\can,+}=\kappa(x-z_0)^2u(x)
   \text{ with divided-difference control}\\
-\mathrm{NearPureSchur}_{23}
+\mathrm{Graph/O2O3}_{23}
+& \text{proved/structural audit}
+& \text{Fej\'er--Riesz packet model and off-block geometry}\\
+\mathrm{WeightedExteriorPivot}_{23}
 & \text{open}
-& D_{-n}\notin
-  \operatorname{span}\{D_{-n+1},\ldots,D_{-n+d_0}\}\\
-\mathrm{FullDetSurvival}
-& \text{open}
-& \text{branch-count cancellation under Stack weight}\\
+& \text{finite/O2O3 exterior-pivot anti-trough under Stack weight}\\
 \mathrm{RieszNorm}_{23}
 & \text{finite-audit}
 & \|A_{\le X,m}\|_{\operatorname{op}}\le R^C\\
