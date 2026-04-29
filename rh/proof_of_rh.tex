@@ -37480,6 +37480,240 @@ displayed triangular matrix has polynomially nonzero determinant and
 polynomially bounded entries, hence has polynomial smallest singular value.
 \end{proof}
 
+\subsection{Singular row lift for the low-block coercivity gap}
+\label{subsec:singular-row-lift-low-block-coercivity}
+
+The boundary certified quotient and the singular-discard projection are
+not the same operation.  The boundary quotient proves that the live
+\(C_7/Y12\) pair survives after quotienting dead boundary columns.  The
+low-block coercivity gap requires a stronger statement: the same live pair
+must survive after orthogonal projection away from the retained singular
+coherence space.  This is a finite row-lift problem.
+
+\begin{definition}[Singular two-row lift certificate]
+\label{def:singular-two-row-lift-certificate}
+Fix a good packet \(p\).  Let
+\[
+  E_{\mathrm{sing},p}^{2Y}
+  :=
+  \begin{bmatrix}
+  c_{7,p} & c_{Y,p}
+  \end{bmatrix}
+  :=
+  T_{\mathrm{tr}\to\mathrm{sing},p}
+  \begin{bmatrix}
+  [\mathsf C_7]^{\mathrm{tr}} & [\mathsf C_{Y12}]^{\mathrm{tr}}
+  \end{bmatrix}
+  :\mathbb C^2\to H_{\mathrm{sing},p}.
+\]
+A singular two-row lift certificate consists of a row map
+\[
+  L_{\mathrm{sing},p}
+  =
+  \begin{pmatrix}
+    \ell_{7,p}^{\mathrm{sing}}\\
+    \ell_{Y,p}^{\mathrm{sing}}
+  \end{pmatrix}
+  :H_{\mathrm{sing},p}\to\mathbb C^2
+\]
+with polynomial norm and polynomially conditioned carrier matrix:
+\[
+  \|L_{\mathrm{sing},p}\|_{\operatorname{op}}\le Q^A,
+  \qquad
+  L_{\mathrm{sing},p}R_{\mathrm{sing},p}=0,
+  \qquad
+  \sigma_{\min}\!\bigl(L_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y}\bigr)
+  \ge Q^{-A}.
+\]
+In row-normal coordinates this may be verified in triangular form:
+\[
+  L_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y}
+  =
+  \begin{pmatrix}
+    \eta_{7,p} & *\\
+    0 & \eta_{Y,p}
+  \end{pmatrix},
+  \qquad
+  |\eta_{7,p}\eta_{Y,p}|\ge Q^{-A},
+\]
+with polynomial upper bounds for the remaining entries.
+\end{definition}
+
+\begin{lemma}[Singular row lift implies projected carrier coercivity]
+\label{lem:singular-row-lift-implies-projected-carrier-coercivity}
+Assume the singular two-row lift certificate of
+Definition~\ref{def:singular-two-row-lift-certificate}.  Let
+\(P_{\mathrm{sing},p}\) be the orthogonal projection onto
+\(R_{\mathrm{sing},p}\), and set
+\(W_p:=(I-P_{\mathrm{sing},p})E_{\mathrm{sing},p}^{2Y}\).  Then
+\(\sigma_{\min}(W_p)\ge Q^{-A'}\).  Equivalently,
+\[
+  \det(W_p^*W_p)
+  =
+  \|c_{7,p}^{\perp}\|^2\|c_{Y,p}^{\perp}\|^2
+  -|\langle c_{7,p}^{\perp},c_{Y,p}^{\perp}\rangle|^2
+  \ge Q^{-A'}
+\]
+under the standing polynomial upper bounds.
+\end{lemma}
+
+\begin{proof}
+Since \(L_{\mathrm{sing},p}\) annihilates \(R_{\mathrm{sing},p}\), it
+annihilates the orthogonal projection onto that space, hence
+\(L_{\mathrm{sing},p}=L_{\mathrm{sing},p}(I-P_{\mathrm{sing},p})\).  For
+every \(a\in\mathbb C^2\),
+\(\|L_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y}a\|
+=\|L_{\mathrm{sing},p}(I-P_{\mathrm{sing},p})E_{\mathrm{sing},p}^{2Y}a\|
+\le\|L_{\mathrm{sing},p}\|_{\operatorname{op}}\,\|(I-P_{\mathrm{sing},p})E_{\mathrm{sing},p}^{2Y}a\|\).
+Taking the infimum over \(\|a\|=1\) gives
+\(\sigma_{\min}(W_p)\ge\sigma_{\min}(L_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y})/\|L_{\mathrm{sing},p}\|_{\operatorname{op}}\ge Q^{-A'}\).
+The determinant form follows from the two-dimensional singular-value
+identity \(\det(W_p^*W_p)=\sigma_1(W_p)^2\sigma_2(W_p)^2\) and the
+standing polynomial upper bound for \(W_p\).
+\end{proof}
+
+\begin{definition}[Signature extractor for the singular finite jet]
+\label{def:singular-finite-jet-signature-extractor}
+Let \(\Theta_{2Y,p}:H_{\mathrm{sing},p}\to\mathcal H_p^Y\) be the finite
+signature extractor which records the covariant septic row and the
+primitive fixed-whitened \(Y12\) row in the singular chart.  It is
+admissible if
+\[
+  \|\Theta_{2Y,p}\|_{\operatorname{op}}\le Q^A,
+\]
+\[
+  \Theta_{2Y,p}T_{\mathrm{tr}\to\mathrm{sing},p}
+  \begin{bmatrix}
+  [\mathsf C_7]^{\mathrm{tr}} & [\mathsf C_{Y12}]^{\mathrm{tr}}
+  \end{bmatrix}
+  =E_p+O(Q^{-B}),
+\]
+and
+\(\Theta_{2Y,p}R_{\mathrm{sing},p}\subseteq\ker L_p^{\mathrm{row}}+O(Q^{-B})\),
+where
+\(E_p=[C_{7,p}^{\mathrm{tar}}\ C_{Y,p}^{\mathrm{tar}}]\) and
+\(L_p^{\mathrm{row}}=\bigl(\begin{smallmatrix}\ell_{7,p}\\
+\ell_{9,p}^Y\end{smallmatrix}\bigr)\) is the concrete boundary row
+certificate.
+\end{definition}
+
+\begin{proposition}[Boundary row certificate lifts to singular normal rows]
+\label{prop:boundary-row-certificate-lifts-to-singular-normal-rows}
+Assume the concrete boundary row certificate
+\(L_p^{\mathrm{row}}E_p=I_2\),
+\(\|L_p^{\mathrm{row}}\|_{\operatorname{op}}\le Q^A\), and assume an
+admissible singular finite-jet signature extractor in the sense of
+Definition~\ref{def:singular-finite-jet-signature-extractor}.  Define
+\(L_{\mathrm{sing},p}:=L_p^{\mathrm{row}}\Theta_{2Y,p}\).  Then, after
+increasing \(B\) relative to the polynomial losses,
+\(L_{\mathrm{sing},p}\) is a singular two-row lift certificate.  In
+particular,
+\(L_{\mathrm{sing},p}R_{\mathrm{sing},p}=O(Q^{-B})\) and
+\(\sigma_{\min}(L_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y})\ge Q^{-A}\).
+If the extractor identities are exact, the annihilation is exact.
+\end{proposition}
+
+\begin{proof}
+The norm bound follows from
+\(\|L_{\mathrm{sing},p}\|_{\operatorname{op}}\le\|L_p^{\mathrm{row}}\|_{\operatorname{op}}\|\Theta_{2Y,p}\|_{\operatorname{op}}\le Q^A\).
+The retained-space condition gives
+\(L_{\mathrm{sing},p}R_{\mathrm{sing},p}=L_p^{\mathrm{row}}\Theta_{2Y,p}R_{\mathrm{sing},p}\subseteq L_p^{\mathrm{row}}(\ker L_p^{\mathrm{row}})+O(Q^{-B})=O(Q^{-B})\).
+On the live carrier pair,
+\(L_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y}=L_p^{\mathrm{row}}\Theta_{2Y,p}E_{\mathrm{sing},p}^{2Y}=L_p^{\mathrm{row}}(E_p+O(Q^{-B}))=I_2+O(Q^{A-B})\).
+For \(B\) larger than the polynomial losses, this matrix has smallest
+singular value at least \(Q^{-A}\); the exact case is immediate.
+\end{proof}
+
+\begin{theorem}[Low-block coercivity from the singular row lift]
+\label{thm:low-block-coercivity-from-singular-row-lift}
+Let \(V_p=\mathcal R_{X,\mathrm{low},p}\),
+\(A_p=T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}\big|_{V_p}\),
+\(\Pi_p^\perp=I-P_{\mathrm{sing},p}\), and let
+\(E_p^{\mathrm{low}}:\mathbb C^r\to V_p\) be the chosen low-mode basis
+map and \(D_p:=\Pi_p^\perp A_pE_p^{\mathrm{low}}\).  Assume that the low
+block is identified with the live transition carrier plane with
+polynomial conditioning: there is a matrix \(M_{\mathrm{low},p}\) such
+that
+\[
+  A_pE_p^{\mathrm{low}}
+  =
+  E_{\mathrm{sing},p}^{2Y}M_{\mathrm{low},p}+\mathcal E_{\mathrm{low},p},
+\]
+\[
+  \sigma_{\min}(M_{\mathrm{low},p}B_p^{-1/2})\ge Q^{-A},
+  \qquad
+  \|M_{\mathrm{low},p}\|_{\operatorname{op}}\le Q^A,
+  \qquad
+  \|\Pi_p^\perp\mathcal E_{\mathrm{low},p}B_p^{-1/2}\|_{\operatorname{op}}\le Q^{-B}.
+\]
+If the singular two-row lift certificate holds, then
+\(\lambda_{\min}\!\bigl(B_p^{-1/2}D_p^*D_pB_p^{-1/2}\bigr)\ge Q^{-A'}\),
+hence
+\(\delta_{\mathrm{coerc},p}=\sigma_{\min}\!\bigl(D_pB_p^{-1/2}\bigr)\ge Q^{-A'}\).
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{lem:singular-row-lift-implies-projected-carrier-coercivity},
+\(\sigma_{\min}\bigl(\Pi_p^\perp E_{\mathrm{sing},p}^{2Y}\bigr)\ge Q^{-A_1}\).
+Hence
+\(\sigma_{\min}\bigl(\Pi_p^\perp E_{\mathrm{sing},p}^{2Y}M_{\mathrm{low},p}B_p^{-1/2}\bigr)\ge Q^{-A_1}\sigma_{\min}(M_{\mathrm{low},p}B_p^{-1/2})\ge Q^{-A_2}\).
+The perturbation term
+\(\Pi_p^\perp\mathcal E_{\mathrm{low},p}B_p^{-1/2}\) has operator norm at
+most \(Q^{-B}\); taking \(B>A_2+10\) and applying the elementary
+singular-value perturbation inequality gives
+\(\sigma_{\min}(D_pB_p^{-1/2})\ge Q^{-A'}\).  Squaring gives the
+displayed Gram lower bound.
+\end{proof}
+
+\begin{proposition}[Retained live directions are the obstruction]
+\label{prop:retained-live-directions-obstruct-singular-coercivity}
+Suppose the retained singular space contains a nonzero live carrier
+combination: \(E_{\mathrm{sing},p}^{2Y}a\in R_{\mathrm{sing},p}\) for
+some \(0\ne a\in\mathbb C^2\).  Then
+\((I-P_{\mathrm{sing},p})E_{\mathrm{sing},p}^{2Y}a=0\), so the
+two-carrier projected matrix has a kernel.  In particular, full rank-two
+low-block coercivity fails on the live carrier plane.  Thus any coherent
+live column which is retained inside \(R_{\mathrm{sing},p}\), rather than
+subtracted or routed out before forming the singular retained space,
+destroys the rank-two singular-discard proof.
+\end{proposition}
+
+\begin{proof}
+If \(E_{\mathrm{sing},p}^{2Y}a\in R_{\mathrm{sing},p}\), then its
+orthogonal-complement projection is zero, so the projected carrier matrix
+has a nontrivial kernel.  The final assertion is this statement applied
+to a retained coherent live column in the \(C_7/Y12\) plane.
+\end{proof}
+
+\begin{remark}[Exact finite item still required]
+\label{rem:exact-finite-item-still-required-delta-coerc}
+\emph{Status: FINITE AUDIT.}  The insertion above proves the low-block
+coercivity gap once the finite singular row-lift certificate is verified.
+The remaining raw finite check is therefore not a generic determinant
+calculation.  It is the packetwise test
+\[
+  \Theta_{2Y,p}R_{\mathrm{sing},p}\subseteq \ker L_p^{\mathrm{row}}+O(Q^{-B}),
+  \qquad
+  \Theta_{2Y,p}E_{\mathrm{sing},p}^{2Y}=E_p+O(Q^{-B}),
+\]
+together with the polynomial conditioning of the low-mode-to-carrier
+matrix \(M_{\mathrm{low},p}\).  If these hold,
+Hypothesis~\ref{hyp:transition-singular-low-block-determinant} may be
+replaced by
+Theorem~\ref{thm:low-block-coercivity-from-singular-row-lift}.  If they
+fail, the failure is one of the following finite alternatives:
+\begin{enumerate}[label=(\roman*),nosep]
+\item a retained singular generator has a live \(C_7/Y12\) signature;
+\item the transition map collapses the live carrier plane;
+\item the low-mode block is not polynomially identified with the live
+carrier plane;
+\item the singular metric or extractor is not polynomially conditioned.
+\end{enumerate}
+In cases (i)--(iii), the projected matrix has a hidden near-kernel and
+full rank-two \(\delta_{\mathrm{coerc}}\) is false in the current
+singular-discard norm.
+\end{remark}
+
 \begin{hypothesis}[Transition--singular low-block determinant]
 \label{hyp:transition-singular-low-block-determinant}
 \emph{Status: FINITE AUDIT.}  For every packet in the routed good set,
