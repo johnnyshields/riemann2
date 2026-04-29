@@ -48469,19 +48469,29 @@ output of the packet-regularity theorem, not as a hidden assumption.
 
 \begin{remark}[Provenance of Hypothesis~\ref{hyp:ef-completion-bound}]
 \label{rem:ef-completion-bound-provenance}
-This is the tail estimate for the finite AFE truncation
+This is the tail estimate for the smooth finite AFE decomposition
 \[
 q''_{\can}=F_X+R_X.
 \]
-The intended derivation is from the zeta explicit formula / approximate
-functional equation after smooth truncation at the packet scale \(X\), with
-the tail \(R_X\) controlled in the branch and reference norms:
+After Hypothesis~\ref{hyp:completed-source-anchor} and
+Theorem~\ref{thm:smooth-finite-AFE-package}, it is no longer an independent
+Dirichlet-polynomial hypothesis: the theorem gives, for every fixed derivative
+order \(J\) and every \(A>0\),
 \[
-\|R_X\|_{L^2(W_{\mathrm{branch}})}^2+\|R_X\|_{L^2(W_{\mathrm{ref}})}^2
-\le Q^{-B}\|F_X\|_{L^2(W_{\mathrm{ref}})}^2.
+\sum_{0\le j\le J}
+\left(
+\|\partial_t^jR_X\|_{L^2(W_{\mathrm{ref}})}
++
+\|\partial_t^jR_X\|_{L^2(W_{\mathrm{branch}})}
+\right)
+\ll_{A,J}X^{-A}.
 \]
-This is the load-bearing open analytic input in the current draft.  It should
-be proved from the zeta-side tail analysis rather than assumed forever.
+Passing from this \(L^2\)-tail estimate to the reference-whitened matrix
+correction \(E\) also uses the polynomial reference-Gram conditioning of the
+finite packet family.  Thus the EF completion bound is conditional on the
+completed-source anchor, the residue-aware smooth AFE theorem, and the
+reference-regular packet coordinates; it is not a branch-coverage or
+oscillatory-decay input.
 \end{remark}
 
 \begin{remark}[Standing zeta-side source hypotheses]
@@ -48565,6 +48575,35 @@ regularization used to define the retained source space.  In particular, no
 pole or principal-value contribution may be discarded unless it is included in
 one of the routed singular/transition terms.
 \end{hypothesis}
+
+\begin{remark}[Completed-source anchor is not definitional]
+\label{rem:completed-source-anchor-not-definitional}
+Hypothesis~\ref{hyp:completed-source-anchor} is a load-bearing source input.
+The later notation
+\[
+q''_{\can}(t)=\mathcal Z\!\left(\tfrac12+it\right)
+\]
+is only shorthand after the anchor has been proved or explicitly assumed.  It
+must not be read as redefining the canonical source curvature
+\[
+q''_{\can}=\mathcal D^3\Phi_\zeta
+\]
+away from the actual-zeta phase construction of
+Definition~\ref{def:canonical-actual-zeta-phase-curvature}.
+
+The corresponding theorem target is the regularized trace identity
+\[
+\mathcal D^3\Phi_\zeta(t)
+=
+\mathcal Z\!\left(\tfrac12+it\right)
+\]
+on the retained ordinary source line, with all pole, principal-value,
+logarithmic-branch, and routed singular contributions either included in
+\(\mathcal Z\), included in the residue term \(P_{\mathrm{res},X}\), or sent to
+the singular/transition branch.  Until this theorem target is supplied, every
+source result using the smooth AFE is conditional on the completed-source
+anchor.
+\end{remark}
 
 \begin{definition}[Canonical completed source trace and Mellin cutoff]
 \label{def:canonical-completed-source}
@@ -48744,26 +48783,49 @@ window.
 Direct restatement of Theorem~\ref{thm:smooth-finite-AFE-package}.
 \end{proof}
 
-\begin{corollary}[EF completion bound]
+\begin{corollary}[EF completion bound in reference-whitened coordinates]
 \label{cor:ef-completion-bound}
-The normalized residual correction
+Assume Theorem~\ref{thm:smooth-finite-AFE-package}.  Assume also that the
+finite packet family used to form the source matrices is reference-regular, in
+the sense that
 \[
-E=G_{\mathrm{ref}}^{-1/2}\bigl(G_{\mathrm{branch}}(q''_{\can})-G_{\mathrm{branch}}(F_X)\bigr)G_{\mathrm{ref}}^{-1/2}
+\|G_{\mathrm{ref}}^{-1/2}\|_{\operatorname{op}}
++
+\|G_{\mathrm{ref}}^{1/2}\|_{\operatorname{op}}
+\le Q^{C_{\mathrm{ref}}},
 \]
-satisfies
+and that the number of packet atoms and the branch/reference weights are
+polynomially controlled.  Then the normalized residual correction
 \[
-\|E\|_{\operatorname{op}}\ll_A X^{-A}.
+E=G_{\mathrm{ref}}^{-1/2}
+\bigl(G_{\mathrm{branch}}(q''_{\can})-G_{\mathrm{branch}}(F_X)\bigr)
+G_{\mathrm{ref}}^{-1/2}
 \]
+satisfies, for every prescribed \(A>0\),
+\[
+\|E\|_{\operatorname{op}}\le Q^{-A}
+\]
+after choosing the smooth AFE cutoff depth sufficiently large.
 \end{corollary}
 
 \begin{proof}
 By Theorem~\ref{thm:smooth-finite-AFE-package} and
-Corollary~\ref{cor:smooth-afe-tail-bound},
-\(\|q''_{\can}-F_X\|_{L^2(W_{\mathrm{ref}})}+\|q''_{\can}-F_X\|_{L^2(W_{\mathrm{branch}})}\ll_A X^{-A}\),
-and \(E\) is the normalized residual correction.  The
-\(G_{\mathrm{ref}}^{-1/2}\) normalization preserves the \(L^2\) bound up to a
-\(W_{\mathrm{ref}}\)-mass factor, hence
-\(\|E\|_{\operatorname{op}}\ll_A X^{-A}\).
+Corollary~\ref{cor:smooth-afe-tail-bound}, for every \(A'>0\),
+\[
+\|q''_{\can}-F_X\|_{L^2(W_{\mathrm{ref}})}
++
+\|q''_{\can}-F_X\|_{L^2(W_{\mathrm{branch}})}
+\ll_{A'}X^{-A'}.
+\]
+For coefficient vectors supported on the finite packet family, Cauchy--Schwarz
+and the polynomial packet count convert this residual \(L^2\)-bound into a
+branch-Gram perturbation bound with at most a polynomial loss in \(Q\).  The
+left and right multiplications by \(G_{\mathrm{ref}}^{-1/2}\) cost at most
+\(Q^{2C_{\mathrm{ref}}}\).  Hence
+\[
+\|E\|_{\operatorname{op}}\ll Q^C X^{-A'}.
+\]
+Choosing \(A'\) larger than \(A+C\) gives the claim.
 \end{proof}
 
 \begin{remark}[AFE coefficient normalization]
@@ -49037,31 +49099,48 @@ of Theorem~\ref{thm:unconditional-packet-regularity}).
 \end{remark}
 
 
-\begin{lemma}[Finite-AFE packet regularity]
+\begin{lemma}[Finite-AFE packet geometry and branch-weight regularity]
 \label{lem:finite-afe-packet-regularity}
 Assume
 \[
-q''_{\can}=F_X+R_X,\qquad F_X:=B_2+P_{2,\le X}+D_{2,\le X}+P_{\mathrm{res},X},
+q''_{\can}=F_X+R_X,
+\qquad
+F_X:=B_2+P_{2,\le X}+D_{2,\le X}+P_{\mathrm{res},X},
 \]
-where the finite AFE uses the fixed smooth cutoff already introduced in the
-source section.  Let \(K_p\) be a Whitney packet core with enlargement
-\(K_p^+\) and scale \(\lambda_p\).  Then on every good packet:
+where the finite AFE uses the fixed smooth cutoff introduced in the source
+section.  Let \(K_p\) be a Whitney packet core with enlargement \(K_p^+\) and
+scale \(\lambda_p\).  Assume the routed branch/reference weights are
+scale-slow on good packet enlargements, namely for each fixed \(j\),
+\[
+\sup_{u\in K_p^+}
+\lambda_p^j
+\bigl|\partial_u^j\log W_{\mathrm{branch}}(u)\bigr|
+\le Q^{C_j}.
+\]
+Then on every good packet:
 \begin{enumerate}
 \item the packet cores have bounded overlap;
-\item the branch weights satisfy
+\item the branch weights satisfy the unscaled polynomial derivative bound
 \[
-\sup_{u\in K_p^+}\bigl|\partial_u^j \log W_{\mathrm{branch}}(u)\bigr|\ll Q^{Cj}.
+\sup_{u\in K_p^+}
+\bigl|\partial_u^j\log W_{\mathrm{branch}}(u)\bigr|
+\le Q^{C'_j}.
 \]
 \end{enumerate}
+No relative derivative estimate for \(F_X\) is asserted in this lemma.
 \end{lemma}
 
 \begin{proof}
-Both items are direct consequences of the Whitney-selection packet geometry
-together with the smooth AFE structure.  No relative derivative estimate
-\(\int|F_X^{(j)}|^2 \ll Q^{Cj}\int|F_X|^2\) is asserted here; that estimate
-is generally false for Dirichlet polynomials with local cancellation, and is
-treated separately in
-Theorem~\ref{thm:packet-construction-regularity} via an absolute derivative
+Bounded overlap is the Whitney geometry of
+Theorem~\ref{thm:whitney-selection-overlap-comparability}.  The branch-weight
+regularity is a property of the routed branch/reference window construction,
+or equivalently of the explicit scale-slow cutoff model used in
+Lemma~\ref{lem:windowed-packet-amplitude-bounds}; it is not a consequence of
+the AFE coefficients.  On scale-admissible good packets
+\(\lambda_p^{-1}\le Q^C\), so the scale-slow bounds imply the displayed
+unscaled polynomial derivative bounds.  The packet derivative estimates for
+\(F_X\) are supplied separately by
+Theorem~\ref{thm:packet-construction-regularity} through an absolute derivative
 budget plus mass-goodness.
 \end{proof}
 
@@ -49144,50 +49223,50 @@ those dual-weight derivatives on the retained source window.  The residue term
 \(P_{\mathrm{res},X}\) has polynomially controlled derivatives by
 Theorem~\ref{thm:smooth-finite-AFE-package}.
 
-The smooth cutoffs restrict the two Dirichlet sums to polynomially controlled
-effective ranges, up to rapidly decaying tails.  On these effective supports,
+The smooth cutoffs restrict both Dirichlet sums to polynomially controlled
+effective ranges, up to rapidly decaying tails.  On those ranges,
 \[
-|\log n|^j\ll_j (\log X)^j.
+|\log n|^j\le Q^{C_j}.
 \]
-Apply the standard short-interval mean-square estimate for smooth Dirichlet
-polynomials to \(K_p^+\).  With critical-line coefficients
+Using the coefficient convention
+\(a_n,\widetilde a_n\ll_\varepsilon n^\varepsilon\), the critical-line
+oscillatory coefficients satisfy
 \[
-c_n^{(r)}=a_n(-i\log n)^r n^{-1/2}V_1(n/X),
-\qquad
-\widetilde c_n^{(r)}=
-\widetilde a_n(i\log n)^r n^{-1/2}V_2(nX;\tfrac12+it),
-\]
-and using the polynomial bounds for \(\partial_t^{j-r}V_2\), one obtains
-\[
-\int_{K_p^+}\bigl|\partial_t^jF_X(t)\bigr|^2W_{\mathrm{ref}}(t)\,dt
-\ll
-Q^{C_j}
-\Bigl(
-(|K_p^+|+X)\sum_n |a_n|^2n^{-1}|V_1(n/X)|^2
+|a_n|n^{-1/2}|\log n|^j
 +
-(|K_p^+|+X^*)\sum_n |\widetilde a_n|^2n^{-1}|V_2(nX;\tfrac12+it)|^2
-+1
-\Bigr).
+|\widetilde a_n|n^{-1/2}|\log n|^j
+\le Q^{C_j}n^{-1/2+\varepsilon}
 \]
-The coefficient bounds \(a_n,\widetilde a_n\ll_\varepsilon n^\varepsilon\),
-the smooth cutoffs, polynomial packet length, polynomial source truncation, and
-the residue derivative bounds give
+on the effective supports.  Since the number and length of the effective
+summation ranges are polynomial in \(Q\), and since the derivatives of
+\(V_2\) and \(P_{\mathrm{res},X}\) are polynomially controlled, this gives the
+pointwise bound
 \[
-D_{p,j}\le Q^{C_j}.
+\sup_{t\in\Omega}|\partial_t^jF_X(t)|\le Q^{C_j}.
 \]
+The reference weight has polynomial mass on every raw packet enlargement, so
+\[
+D_{p,j}
+=
+\int_{K_p^+}|\partial_t^jF_X(t)|^2W_{\mathrm{ref}}(t)\,dt
+\le Q^{C_j}.
+\]
+This proves the absolute derivative budget without invoking any local
+no-cancellation estimate for \(F_X\).
 
-Now suppose \(p\) is mass-good.  Then
+If \(p\) is mass-good, then
 \[
-M_p=\int_{K_p^+}|F_X(t)|^2W_{\mathrm{ref}}(t)\,dt\ge Q^{-C_{\mathrm{mass}}}.
+M_p=\int_{K_p^+}|F_X(t)|^2W_{\mathrm{ref}}(t)\,dt
+\ge Q^{-C_{\mathrm{mass}}}.
 \]
 Therefore
 \[
-D_{p,j}\le Q^{C_j}
-\le
-Q^{C_j+C_{\mathrm{mass}}}M_p,
+D_{p,j}
+\le Q^{C_j}
+\le Q^{C_j+C_{\mathrm{mass}}}M_p,
 \]
-which is the claimed polynomial relative derivative budget on mass-good
-packets.
+which is the claimed polynomial relative derivative budget on the mass-good
+packet family.
 \end{proof}
 
 \begin{corollary}[Packet derivative budget on mass-good packets]
@@ -49201,12 +49280,12 @@ relative budget, not a \((\log X)^{2j}\)-relative budget.
 \begin{remark}[Status of the packet regularity theorem]
 \label{rem:packet-regularity-status}
 Theorem~\ref{thm:packet-construction-regularity} provides an absolute
-derivative budget \(D_{p,j}\le Q^{C_j}\) directly from
-Theorem~\ref{thm:smooth-finite-AFE-package}, and a polynomial relative
-budget on the mass-good packet family.  The relative budget is therefore
-unconditional on mass-good packets; it is not a \((\log X)^{2j}\)-relative
-estimate, since that strong form is generally false for Dirichlet
-polynomials with local cancellation.
+derivative budget \(D_{p,j}\le Q^{C_j}\) from the residue-aware smooth AFE
+package and polynomial source-window control.  On mass-good packets this gives
+a polynomial relative budget.  This is not the false
+\((\log X)^{2j}\)-relative estimate.  The word ``relative'' here always means
+``after mass-goodness,'' and the theorem remains conditional on the
+completed-source anchor and the smooth AFE package that produce \(F_X\).
 \end{remark}
 
 \begin{remark}[Scale-normalized oscillatory-kernel bound]
@@ -49530,49 +49609,84 @@ but it is not needed for the validity of the off-block integration-by-parts
 estimate.
 \end{remark}
 
+\begin{definition}[Finite-complexity source collar]
+\label{def:finite-complexity-source-collar}
+The source window \(\Omega\) is said to have polynomial collar complexity if,
+for all \(0<\eta\le1\),
+\[
+\mu\{t\in\Omega:\operatorname{dist}(t,\Omega^c)\le\eta\}
+\le Q^{C_\Omega}\eta.
+\]
+This holds, for example, if \(\Omega\) is a union of at most \(Q^{C_\Omega}\)
+intervals.  The good packet family is understood to consist of
+scale-admissible mass-good packets, with mass-goodness measured by
+\[
+M_p=\int_{K_p^+}|F_X(t)|^2W_{\mathrm{ref}}(t)\,dt
+\ge Q^{-C_{\mathrm{mass}}}.
+\]
+\end{definition}
+
 \begin{corollary}[Boundary-collar exclusion]
 \label{cor:boundary-collar-exclusion}
 Let
 \[
-C_\eta:=\{t\in\Omega:d(t)\le \eta\},
+C_\eta:=\{t\in\Omega:d(t)\le\eta\},
 \qquad d(t)=\operatorname{dist}(t,\Omega^c).
 \]
-Assume Lemma~\ref{lem:packet-scale-AFE-envelope} and
-Corollary~\ref{cor:reference-ms-noncollapse}.  Then for \(\eta=Q^{-C}\),
+Assume Lemma~\ref{lem:packet-scale-AFE-envelope},
+Corollary~\ref{cor:reference-ms-noncollapse},
+Corollary~\ref{cor:smooth-afe-tail-bound}, and the polynomial collar-complexity
+condition of Definition~\ref{def:finite-complexity-source-collar}.  Then for
+each prescribed \(A>0\) there is \(C_{\mathrm{col}}\) such that, with
+\(\eta=Q^{-C_{\mathrm{col}}}\),
 \[
 \int_{C_\eta}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt
-\le Q^{-A}\int_{\Omega}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt.
+\le
+Q^{-A}
+\int_\Omega |q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt.
 \]
-In particular, no good packet core can be supported entirely inside
-\(C_\eta\), so every good packet satisfies
+Moreover, after increasing \(C_{\mathrm{col}}\) in terms of
+\(C_{\mathrm{mass}}\), no mass-good packet enlargement \(K_p^+\) is contained
+in \(C_{c\eta}\) for any fixed geometric constant \(c\).  Consequently every
+good packet satisfies
 \[
-d(m_p)\ge Q^{-C}.
+d(m_p)\ge Q^{-C}
 \]
+for some fixed \(C\).
 \end{corollary}
 
 \begin{proof}
-By the packet envelope lemma, on each scale-admissible packet core \(K_p\),
+By Lemma~\ref{lem:packet-scale-AFE-envelope},
 \[
-\sup_{t\in K_p}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\ll Q^B
+\sup_{t\in\Omega}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\le Q^B
 \]
-for some fixed \(B>0\).  Since the packet cores have bounded overlap and the
-collar \(C_\eta\) is a one-dimensional boundary layer,
-\[
-\int_{C_\eta}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt
-\ll Q^B\,\mu(C_\eta)\ll Q^B \eta.
-\]
-Taking \(\eta=Q^{-C}\) with \(C\) sufficiently large gives
+on the scale-admissible packet region, after absorbing the smooth AFE tail.
+Using polynomial collar complexity,
 \[
 \int_{C_\eta}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt
-\le Q^{-A}\int_{\Omega}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt,
+\le Q^B\mu(C_\eta)
+\le Q^{B+C_\Omega}\eta.
 \]
-using Corollary~\ref{cor:reference-ms-noncollapse} to ensure the denominator
-is bounded below by a fixed positive constant.
+Choose \(C_{\mathrm{col}}\) so that
+\(Q^{B+C_\Omega}\eta\le Q^{-A}c_0\), where
+\[
+c_0\le \int_\Omega |q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt
+\]
+is supplied by Corollary~\ref{cor:reference-ms-noncollapse}.  This gives the
+collar-mass estimate.
 
-Now if a good packet \(p\) had \(d(m_p)\le Q^{-C}\), Whitney geometry would
-place its core inside \(C_{cQ^{-C}}\), so its contribution would be absorbed
-by the collar estimate above.  That contradicts goodness, hence every good
-packet must satisfy \(d(m_p)\ge Q^{-C}\).
+Now suppose \(K_p^+\subset C_{c\eta}\).  By \(q''_{\can}=F_X+R_X\),
+\[
+\int_{K_p^+}|F_X|^2W_{\mathrm{ref}}
+\le
+2\int_{C_{c\eta}}|q''_{\can}|^2W_{\mathrm{ref}}
++
+2\int_\Omega |R_X|^2W_{\mathrm{ref}}.
+\]
+Increase \(C_{\mathrm{col}}\) and choose the AFE cutoff depth so that the right
+side is \(<Q^{-C_{\mathrm{mass}}}\).  This contradicts mass-goodness.  Whitney
+geometry gives \(K_p^+\subset C_{c\eta}\) whenever \(d(m_p)\le c'\eta\), after
+adjusting constants.  Hence every good packet has \(d(m_p)\ge Q^{-C}\).
 \end{proof}
 
 \begin{proposition}[Packet-scale normalization]
@@ -50156,29 +50270,39 @@ then yields \(\lambda_{\min}(M+E)\ge Q^{-A}\), which is exactly
 \(\delta_{\mathrm{src}}\ge Q^{-A}\) after absorbing the residual correction.
 \end{proof}
 
-\begin{remark}[Remaining non-analytic structural input]
+\begin{remark}[Remaining source inputs]
 \label{rem:remaining-source-structural-input}
-The analytic parts of the source layer are now theorem outputs: finite AFE tail
-control, absolute packet derivative/envelope bounds, scale-normalized
-off-block oscillatory decay, and fixed-window reference noncollapse.  The one
-part that cannot be proved from the AFE alone is branch/reference block
-domination,
+The analytic estimates after the completed-source package are now explicit:
+residue-aware AFE tail control, absolute packet derivative/envelope bounds,
+scale-normalized off-block oscillatory decay, and fixed-window reference
+noncollapse.  The source layer is nevertheless not unconditional until the
+following non-AFE inputs are supplied:
+\begin{enumerate}
+\item the completed-source anchor
 \[
-G_{\mathrm{branch},B}\ge Q^{-C}G_{\mathrm{ref},B}.
+\mathcal D^3\Phi_\zeta(t)=\mathcal Z\!\left(\tfrac12+it\right),
 \]
-This is a structural assertion about how the branch windows are chosen relative
-to the reference window.  If it is adopted as part of the source-window
-construction, Lemma~\ref{lem:source-frame-coercivity} is unconditional relative
-to that construction.  If not, it remains exactly the ``branch holes'' failure
-mode and must not be hidden inside an oscillatory estimate.
+with all singular and residue channels accounted for;
+\item branch/reference block domination on every good resonant block,
+\[
+G_{\mathrm{branch},B}\ge Q^{-C}G_{\mathrm{ref},B};
+\]
+\item if \(W_{\mathrm{ref}}\) is allowed to vary with \(Q\), the uniform
+reference nonconcentration bound recorded in
+Remark~\ref{rem:reference-noncollapse-uniformity}.
+\end{enumerate}
+The second item is the branch-hole exclusion; it cannot be hidden inside the
+AFE or the off-block oscillatory estimate.
 \end{remark}
 
 
 \begin{corollary}[Gate--1 source survival]
 \label{cor:gate-one-source-survival}
-Assume the completed-source anchor and a branch-complete routed packet-core
-construction in the sense of Definition~\ref{hyp:packet-core-micro-covering}.
-Then Theorem~\ref{thm:source-survival-from-three-inputs} gives
+Assume the completed-source anchor, the windowed packet construction
+regularity of Theorem~\ref{thm:unconditional-packet-regularity}, and a
+branch-complete routed packet-core construction in the sense of
+Definition~\ref{hyp:packet-core-micro-covering}.  Then
+Theorem~\ref{thm:source-survival-from-three-inputs} gives
 \[
 \int |q''_{\can}(t)|^2W_{\mathrm{branch}}(t)\,dt
 \ge
@@ -50195,13 +50319,24 @@ decay Corollary~\ref{cor:source-oscillatory-decay}.
 
 \begin{remark}[Source-layer status]
 \label{rem:source-layer-status}
-The analytic source estimates now close through the packaged corollaries:
-canonical reference noncollapse, finite-AFE main-term noncollapse,
-boundary-collar exclusion, packet-scale normalization, and scale-normalized
-off-block oscillatory decay.  Full Gate--1 source survival additionally uses
-the branch/reference block domination
-\(G_{\mathrm{branch},B}\ge Q^{-C}G_{\mathrm{ref},B}\), as recorded in
-Lemma~\ref{lem:source-frame-coercivity}.
+The source estimates are architecturally repaired in the following precise
+sense:
+\[
+\text{completed-source anchor}
++
+\text{residue-aware smooth AFE}
++
+\text{windowed packet regularity}
++
+\text{branch/reference block domination}
+\Longrightarrow
+\delta_{\mathrm{src}}\ge Q^{-A}.
+\]
+The packet derivative budget is absolute, with only a mass-good polynomial
+relative consequence; no \((\log X)^{2j}\)-relative estimate is used.  The
+source layer remains conditional on the completed-source anchor and on
+branch/reference Gram domination.  If the reference window moves with \(Q\), it
+also remains conditional on a uniform polynomial reference-noncollapse theorem.
 \end{remark}
 
 \begin{remark}[Failure labels]
