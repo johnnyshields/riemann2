@@ -37372,6 +37372,211 @@ Thus the coercivity of \(\mathfrak T_p\) on the low block and the rank condition
 for \(K_{\mathrm{D4},p}\) are the same finite test in two coordinate systems.
 \end{remark}
 
+\begin{definition}[Coordinate-free low-block coercivity gap]
+\label{def:coordinate-free-low-block-coercivity-gap}
+Let
+\[
+  V_p:=\mathcal R_{X,\mathrm{low},p},
+  \qquad
+  A_p:=T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}\big|_{V_p},
+  \qquad
+  \Pi_p^\perp:=I-P_{\mathrm{sing},p}.
+\]
+The intrinsic low-block coercivity gap is
+\[
+  \delta_{\mathrm{coerc},p}
+  :=
+  \inf_{0\ne v\in V_p}
+  \frac{\|\Pi_p^\perp A_pv\|_{H_{\mathrm{sing},p}}}
+       {\|v\|_{X,p}}.
+\]
+Equivalently,
+\[
+  \delta_{\mathrm{coerc},p}
+  =
+  \inf_{0\ne v\in V_p}
+  \frac{\operatorname{dist}(A_pv,R_{\mathrm{sing},p})}
+       {\|v\|_{X,p}}.
+\]
+Thus the statement \(\delta_{\mathrm{coerc},p}\ge Q^{-C}\) is precisely the
+quantitative transversality of the transported low residual space
+\(A_pV_p\) to the retained singular space \(R_{\mathrm{sing},p}\).
+\end{definition}
+
+\begin{lemma}[Generalized Gram form of \(\delta_{\mathrm{coerc}}\)]
+\label{lem:generalized-gram-form-delta-coerc}
+Let
+\[
+  E_p^{\mathrm{low}}:\mathbb C^r\to V_p,
+  \qquad
+  E_p^{\mathrm{low}}a:=\sum_{k=1}^r a_ke_{k,p},
+\]
+where \(\{e_{1,p},\ldots,e_{r,p}\}\) is any basis of \(V_p\).  Set
+\[
+  B_p:=(E_p^{\mathrm{low}})^*E_p^{\mathrm{low}},
+  \qquad
+  D_p:=\Pi_p^\perp A_pE_p^{\mathrm{low}},
+  \qquad
+  G_p:=D_p^*D_p.
+\]
+Then
+\[
+  \delta_{\mathrm{coerc},p}^{\,2}
+  =
+  \lambda_{\min}\!\bigl(B_p^{-1/2}G_pB_p^{-1/2}\bigr).
+\]
+In particular, if the chosen basis is orthonormal in the domain metric, then
+\(\delta_{\mathrm{coerc},p}^{\,2}=\lambda_{\min}(G_p)\).  More generally, if
+\(B_p\) is polynomially conditioned, then a polynomial lower bound for
+\(\lambda_{\min}(G_p)\) is equivalent, up to polynomial loss, to
+\(\delta_{\mathrm{coerc},p}\ge Q^{-C}\).
+\end{lemma}
+
+\begin{proof}
+For \(a\in\mathbb C^r\), write \(v=E_p^{\mathrm{low}}a\).  Then
+\(\|v\|_{X,p}^2=a^*B_pa\) and
+\(\|\Pi_p^\perp A_pv\|_{H_{\mathrm{sing},p}}^2=a^*G_pa\).  Taking the infimum
+of the Rayleigh quotient over \(a\ne0\) gives
+\(\delta_{\mathrm{coerc},p}^{\,2}=\inf_{a\ne0}(a^*G_pa)/(a^*B_pa)=
+\lambda_{\min}(B_p^{-1/2}G_pB_p^{-1/2})\).  The orthonormal and polynomially
+conditioned conclusions are immediate.
+\end{proof}
+
+\begin{proposition}[Adjacent finite gates do not imply low-block coercivity]
+\label{prop:adjacent-gates-do-not-imply-delta-coerc}
+The already separate estimates for source survival, Graph/O2O3 survival, and
+certified \(Y12\)-quotient survival do not logically imply
+\(\delta_{\mathrm{coerc},p}\ge Q^{-C}\).  A further transition--singular
+transversality input is necessary.
+\end{proposition}
+
+\begin{proof}
+It is enough to give a finite model satisfying the adjacent algebraic
+conclusions while forcing \(D_p=0\).  Fix \(r\ge1\), let
+\[
+  V_p=\mathbb C^r,
+  \qquad
+  H_{\mathrm{sing},p}=\mathbb C^r\oplus\mathbb C^r,
+  \qquad
+  A_pv=(v,0),
+\]
+and take
+\(R_{\mathrm{sing},p}=\mathbb C^r\oplus\{0\}\),
+\(P_{\mathrm{sing},p}=P_{R_{\mathrm{sing},p}}\).  Then
+\((I-P_{\mathrm{sing},p})A_pv=0\) for \(v\in V_p\), so \(D_p=0\) and
+\(\delta_{\mathrm{coerc},p}=0\).  The adjacent finite gates may simultaneously
+be made perfect: choose a source frame with \(M=I\) and no residual error, so
+the source gap is one; choose Graph/O2O3 Gram blocks
+\(G_{00}=I,G_{SS}=I,G_{0S}=0\), so
+\(1-\|G_{00}^{-1/2}G_{0S}G_{SS}^{-1/2}\|_{\operatorname{op}}=1\); choose a
+certified quotient model with \(q_{p,\mathrm{cert}}^Y=I\) and live carrier
+matrix \(E_p=I_2\), so \(\sigma_{\min}(q_{p,\mathrm{cert}}^YE_p)=1\).  These
+choices satisfy the stated adjacent conclusions but leave
+\(\delta_{\mathrm{coerc},p}=0\).  Therefore the coercivity bound is not a
+formal consequence of those gates; it must come from a theorem controlling
+the relative position of \(A_pV_p\) and \(R_{\mathrm{sing},p}\).
+\end{proof}
+
+\begin{lemma}[Two-carrier determinant criterion for singular-discard leakage]
+\label{lem:two-carrier-determinant-criterion-singular-discard}
+Assume the low block is identified, with polynomially conditioned coordinates,
+with the live transition carrier plane
+\[
+  W_{\mathrm{tr},p}
+  =
+  \operatorname{span}\{[\mathsf C_7]^{\mathrm{tr}},[\mathsf C_{Y12}]^{\mathrm{tr}}\}.
+\]
+Set
+\[
+  v_{7,p}^\perp:=(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}
+  [\mathsf C_7]^{\mathrm{tr}},
+  \qquad
+  v_{Y,p}^\perp:=(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}
+  [\mathsf C_{Y12}]^{\mathrm{tr}},
+\]
+and \(W_p:=[v_{7,p}^\perp\ v_{Y,p}^\perp]\), \(S_p:=W_p^*W_p\).  If
+\(\operatorname{tr}S_p\le Q^{C_0}\) and \(\det S_p\ge Q^{-C_1}\), then
+\(\sigma_{\min}(W_p)\ge Q^{-(C_0+C_1)/2}\).  Equivalently, if
+\[
+  \|v_{7,p}^\perp\|\ge Q^{-A_1},
+  \qquad
+  \|v_{Y,p}^\perp\|\ge Q^{-A_1},
+  \qquad
+  \sin\angle(v_{7,p}^\perp,v_{Y,p}^\perp)\ge Q^{-A_2},
+\]
+and \(\operatorname{tr}S_p\le Q^{C_0}\), then \(\sigma_{\min}(W_p)\ge Q^{-C'}\)
+for a polynomial exponent \(C'\).
+\end{lemma}
+
+\begin{proof}
+The two eigenvalues of \(S_p\) are nonnegative and satisfy
+\(\lambda_{\min}(S_p)=\det S_p/\lambda_{\max}(S_p)\ge\det S_p/\operatorname{tr}S_p\).
+Thus \(\lambda_{\min}(S_p)\ge Q^{-(C_0+C_1)}\), and
+\(\sigma_{\min}(W_p)=\lambda_{\min}(S_p)^{1/2}\).  The equivalent angular
+criterion follows from
+\[
+  \det S_p
+  =
+  \|v_{7,p}^\perp\|^2\|v_{Y,p}^\perp\|^2
+  -|\langle v_{7,p}^\perp,v_{Y,p}^\perp\rangle|^2
+  =
+  \|v_{7,p}^\perp\|^2\|v_{Y,p}^\perp\|^2
+  \sin^2\angle(v_{7,p}^\perp,v_{Y,p}^\perp).
+\]
+\end{proof}
+
+\begin{theorem}[Conditional closure of \(\delta_{\mathrm{coerc}}\) from transition--singular leakage]
+\label{thm:conditional-delta-coerc-from-transition-singular-leakage}
+Let the low-mode coefficient map into transition live-carrier coordinates be
+polynomially conditioned.  More precisely, suppose there is an isomorphism
+\(R_p:\mathbb C^r\to\mathbb C^r\) such that the defect matrix factors as
+\(D_p=W_pR_p\) with
+\(\sigma_{\min}(R_p)\ge Q^{-C_R}\) and
+\(\|R_p\|_{\operatorname{op}}\le Q^{C_R}\).  If the transition--singular
+leakage matrix satisfies \(\sigma_{\min}(W_p)\ge Q^{-C_W}\), then
+\(\sigma_{\min}(D_p)\ge Q^{-(C_R+C_W)}\).  Consequently
+\(\delta_{\mathrm{coerc},p}\ge Q^{-C}\), after the polynomial
+basis-conditioning loss of
+Lemma~\ref{lem:generalized-gram-form-delta-coerc}.
+\end{theorem}
+
+\begin{proof}
+For every coefficient vector \(a\),
+\(\|D_pa\|=\|W_pR_pa\|\ge\sigma_{\min}(W_p)\|R_pa\|\ge Q^{-C_W}Q^{-C_R}\|a\|\).
+Taking the infimum over \(\|a\|=1\) gives the claimed singular-value lower
+bound.  The intrinsic \(\delta_{\mathrm{coerc}}\) statement follows from the
+generalized Gram representation.
+\end{proof}
+
+\begin{remark}[Smallest missing theorem for Agent 3]
+\label{rem:smallest-missing-theorem-agent-three-delta-coerc}
+\emph{Status: FINITE AUDIT.}  The missing theorem is not source survival,
+not Graph/O2O3, and not certified \(Y12\)-quotient survival.  It is the
+finite transition--singular leakage estimate
+\[
+  \lambda_{\min}\!\bigl(B_p^{-1/2}D_p^*D_pB_p^{-1/2}\bigr)
+  \ge Q^{-C}
+\]
+for
+\(D_p=(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}
+E_p^{\mathrm{low}}\).  If the low block is the two-dimensional live
+\(C_7/Y12\) carrier plane, this reduces by
+Lemma~\ref{lem:two-carrier-determinant-criterion-singular-discard} to the
+explicit determinant audit
+\[
+  \det
+  \begin{pmatrix}
+    \|v_{7,p}^\perp\|^2 & \langle v_{7,p}^\perp,v_{Y,p}^\perp\rangle\\
+    \langle v_{Y,p}^\perp,v_{7,p}^\perp\rangle & \|v_{Y,p}^\perp\|^2
+  \end{pmatrix}
+  \ge Q^{-C}.
+\]
+If both vectors lie in \(R_{\mathrm{sing},p}\), or if they are polynomially
+near-dependent after projection, then the low-block coercivity route fails
+by a hidden near-kernel.  Rank one gives at most a one-form forbidden wall;
+it does not prove \(\sigma_{\min}(D_p)>0\) on a two-dimensional low block.
+\end{remark}
+
 \begin{remark}[Graph-space no-go]
 \label{rem:graph-space-no-go}
 If \(U_p\not\subseteq\ker\Lambda_{Y,p}\), or if \(\mathcal R_X\) fails to admit
