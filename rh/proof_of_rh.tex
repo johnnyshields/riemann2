@@ -38669,6 +38669,92 @@ The first row of the assumed normal form then reads
 polynomial lower bounds on \(|H_{j,p}|\) and \(|c_7|\) for \(B>2C\).
 \end{proof}
 
+\begin{lemma}[Live-coefficient obstruction to rank-two quotient survival]
+\label{lem:live-coefficient-obstruction-rank-two-quotient}
+Let
+\[
+E_p:=
+\begin{bmatrix}
+C_{7,p}^{\mathrm{tar}}&C_{Y,p}^{\mathrm{tar}}
+\end{bmatrix}
+\]
+and let \(K_{0,p}\subseteq\mathcal H_p^Y\) be a dead nuisance space such that
+\[
+\sigma_{\min}\bigl((I-P_{K_{0,p}})E_p\bigr)\ge Q^{-C}.
+\]
+Suppose a declared nuisance column has the live decomposition
+\[
+A_p=D_p+E_pm_p,
+\qquad D_p\in K_{0,p},
+\qquad m_p=\binom{m_{7,p}}{m_{Y,p}}\in\mathbb C^2.
+\]
+Let
+\(K_p:=K_{0,p}+\operatorname{span}\{A_p\}\).
+If \(m_p\ne0\), then
+\[
+\sigma_{\min}\bigl((I-P_{K_p})E_p\bigr)=0.
+\]
+Consequently, rank-two \(C_7/Y12\) quotient survival is compatible with
+placing \(A_p\) in the nuisance quotient only if its live coefficient
+\(m_p\) vanishes, up to the desired polynomial error threshold.  More
+generally, if a finite family
+\(A_p^{(a)}=D_p^{(a)}+E_pm_p^{(a)}\) is placed in the nuisance quotient,
+the live-coefficient matrix
+\(M_{\mathrm{live},p}:=[m_p^{(1)}\ m_p^{(2)}\ \cdots]\) must satisfy
+\(\operatorname{rank}M_{\mathrm{live},p}=0\) up to the polynomial error;
+\(\operatorname{rank}=1\) leaves only one live direction surviving, and
+\(\operatorname{rank}=2\) collapses both retained carriers.
+\end{lemma}
+
+\begin{proof}
+Since \(D_p\in K_{0,p}\subseteq K_p\) and \(A_p\in K_p\),
+\(E_pm_p=A_p-D_p\in K_p\), hence \((I-P_{K_p})E_pm_p=0\).  If
+\(m_p\ne0\) the map \((I-P_{K_p})E_p:\mathbb C^2\to K_p^\perp\) has a
+nontrivial kernel and minimum singular value \(0\).  The general statement
+follows by induction on the family, since each successive nuisance column
+adds at most one column to the live-coefficient matrix and at most one
+direction to the kernel.
+\end{proof}
+
+\begin{corollary}[Primitive arithmetic coefficient must be dead or rerouted]
+\label{cor:primitive-arithmetic-coefficient-dead-or-rerouted}
+Suppose the arithmetic nuisance column has the live decomposition
+\[
+A_{II,p}
+=
+A_{II,p}^{\mathrm{dead}}
++
+c_{\mathrm{arith},7,p}\,C_{7,p}^{\mathrm{tar}}
++
+c_{\mathrm{arith},Y,p}\,C_{Y,p}^{\mathrm{tar}},
+\]
+and suppose the full \(A_{II,p}\) is placed in
+\(\mathcal K_p^Y\).  Then rank-two \(C_7/Y12\) quotient survival forces
+\[
+c_{\mathrm{arith},7,p}=c_{\mathrm{arith},Y,p}=0
+\]
+up to the required polynomial error.  In particular, the named
+arithmetic coefficient
+\[
+c_{\mathrm{arith},Y}
+:=
+\bigl[II_{\mathrm{arith},9}^{\mathrm{exact}}\bigr]_{D^2N_0,\ \mathrm{same},\ w=1,\ b=12}
+\]
+must vanish if \(II_{\mathrm{arith},9}^{\mathrm{exact}}\) is treated as
+exact nuisance.  If \(c_{\mathrm{arith},Y}\ne0\), the only consistent
+options are: (a) remove the live \(C_{Y12}\)-part of \(A_{II,p}\) before
+forming \(\mathcal K_p^Y\); (b) route that live part to a coherent or
+residual carrier channel rather than to exact nuisance; or
+(c) abandon rank-two \(C_7/Y12\) survival in this quotient.  A residual
+\(L^2\)-bound on the column does not fix the obstruction: once the column
+is quotient-killed, the corresponding live direction is gone.  The same
+analysis applied to
+\(A_{7,p}=A_{7,p}^{\mathrm{dead}}+\lambda_{77,p}C_{7,p}^{\mathrm{tar}}+\lambda_{7Y,p}C_{Y,p}^{\mathrm{tar}}\)
+forces \(\lambda_{77,p}=\lambda_{7Y,p}=0\) and is particularly load-bearing
+because killing \(C_7\) collapses the rank-two bridge to a primitive
+\(Y12\)-only route, which does not close the static-line branch.
+\end{corollary}
+
 \begin{hypothesis}[Torsion-free rank-two \(C_7/Y12\) quotient survival]
 \label{hyp:torsion-free-rank-two-C7-Y12-survival}
 \emph{Status: FINITE AUDIT.}  Let
@@ -38954,6 +39040,51 @@ the cap is nonstatic.  Amplitude noncollapse is therefore an additional
 finite obligation of the cap bridge, on top of the rank-two quotient and
 row-normal carrier hypotheses.
 \end{hypothesis}
+
+\begin{hypothesis}[D4 amplitude survival on the cap core (carrier-mass form)]
+\label{hyp:D4-amplitude-survival-cap-core}
+\emph{Status: FINITE AUDIT.}  On every selected good cap \(C_j\),
+\[
+\sum_{p\in C_j}\mu_p|H_p|^2\|\Gamma_p\|^2
+\ge
+Q^{-A}
+\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2.
+\]
+Equivalently, the \(D4\) scalar amplitude \(H_p\) is not lost on the cap
+mass that carries the extraction covariance.  This is the carrier-mass
+weighted strengthening of Hypothesis~\ref{hyp:cap-amplitude-noncollapse}:
+it controls the actual contribution of the \(D4\) carrier residual to
+the absolute atomic lower bound, not just the unweighted average of
+\(|H_p|^2\).  The slope-variance lower bound
+\(\delta_{\mathrm{ext}}\ge Q^{-A}\) does not imply this estimate, since
+\(\delta_{\mathrm{ext}}\) is independent of \(H_p\) and a configuration
+with strongly varying \(s_p\) and \(H_p\equiv0\) is consistent with
+nonstatic extraction covariance.
+\end{hypothesis}
+
+\begin{remark}[Relative versus absolute static-line survival]
+\label{rem:relative-vs-absolute-static-line}
+Rank-two quotient survival
+(Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival}) together with
+\(\sigma_{\min}(L_{\mathrm{clean}})\ge Q^{-C}\) closes the static-line
+handoff as a \emph{relative} lower bound,
+\[
+|q_p^Y\Phi_p^Y u_j|\ge Q^{-A}\,\|\Phi_p^Y u_j\|,
+\]
+in which the scalar \(H_p\) cancels.  The final atomic contradiction
+needs an \emph{absolute} lower bound in the same quotient norm as the
+upper bound, namely
+\[
+\sum_{p\in C_j}\mu_p\,|H_p|^2\,|L_{\mathrm{clean}}\Gamma_p|^2
+\ge
+Q^{-A}\sum_{p\in C_j}\mu_p\,\|\Gamma_p\|^2,
+\]
+which is supplied by
+Hypothesis~\ref{hyp:D4-amplitude-survival-cap-core}.  Relative survival
+without amplitude survival is not enough: a cap with strongly varying
+\(s_p\) and \(H_p\equiv0\) has \(\delta_{\mathrm{ext}}\ge Q^{-A}\) and
+\(q_p^Y\Phi_p^Y u_j=0\) simultaneously.
+\end{remark}
 
 \begin{corollary}[Cap transversality in live carrier coordinates: projective Wronskian form]
 \label{cor:cap-transversality-live-carrier-coordinates}
