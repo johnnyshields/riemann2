@@ -48203,86 +48203,137 @@ In particular, \((\log n)^j/\sqrt n\ll_{j,\varepsilon}n^{-1/2+\varepsilon}\)
 for every fixed \(j\).
 \end{remark}
 
-\begin{lemma}[Main-term noncollapse]
+\begin{lemma}[Canonical reference noncollapse]
 \label{lem:main-term-noncollapse}
-Let
+Assume the completed source \(\mathcal Z\) is holomorphic in a neighbourhood of
 \[
-F_X(t)=\sum_{n\ge1} a_n n^{-1/2-it}V(n/X)
-+\sum_{n\ge1}\widetilde a_n n^{-1/2+it}\widetilde V(nX),
+\left\{\tfrac12+it:t\in\Omega\right\},
 \]
-where \(V,\widetilde V\) are the fixed smooth AFE cutoffs.  Then
+and satisfies the standing source normalization \(a_1=1\).  Let
 \[
-\int_\Omega |F_X(t)|^2W_{\mathrm{ref}}(t)\,dt \ge c_1>0
+q''_{\can}(t)=\mathcal Z\!\left(\tfrac12+it\right).
 \]
-for some absolute constant \(c_1\), provided the normalization \(a_1=1\)
-(or, equivalently, the leading coefficient is nonzero) holds.
+If \(W_{\mathrm{ref}}\ge0\) has finite mass on \(\Omega\) and is not
+identically zero, then
+\[
+ c_{\can}
+ :=
+ \int_\Omega |q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt
+ >0.
+\]
+In particular, if the reference weight is fixed throughout the source-window
+argument, then
+\[
+\int_\Omega |q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt\ge c_{\can}
+\]
+with a positive constant independent of the packet parameter \(Q\).
 \end{lemma}
 
 \begin{proof}
-By Lemma~\ref{lem:positive-reference-mass} and the normalization
-\(a_1=1\), the diagonal \(n=1\) term contributes a fixed positive amount.
-Concretely, by the weighted mean-value theorem for smooth Dirichlet
-polynomials,
+The normalization \(a_1=1\) implies \(\mathcal Z\not\equiv0\): in the half-plane
+of absolute convergence the Dirichlet expansion has a nonzero first
+coefficient, so the completed source cannot be the zero meromorphic function.
+
+Suppose the displayed integral were zero.  Since \(W_{\mathrm{ref}}\ge0\), this
+would force
+\[
+q''_{\can}(t)=0
+\]
+for almost every \(t\) on the positive-measure set where
+\(W_{\mathrm{ref}}(t)>0\).  The function
+\[
+t\longmapsto q''_{\can}(t)=\mathcal Z\!\left(\tfrac12+it\right)
+\]
+is real-analytic on \(\Omega\), because \(\mathcal Z\) is holomorphic in a
+neighbourhood of the source line.  A nonzero real-analytic function has a
+discrete zero set.  Hence vanishing on a set of positive measure forces
+\(q''_{\can}\equiv0\) on some interval, and the complex identity theorem then
+forces \(\mathcal Z\equiv0\) in the connected holomorphic neighbourhood.  By
+meromorphic continuation this gives \(\mathcal Z\equiv0\), contradicting
+\(a_1=1\).  Therefore the integral is strictly positive.
+\end{proof}
+
+\begin{corollary}[Finite-AFE main-term noncollapse]
+\label{cor:finite-afe-main-term-noncollapse}
+With
+\[
+q''_{\can}=F_X+R_X
+\]
+as in Theorem~\ref{thm:smooth-finite-AFE-package}, choose the smooth AFE
+cutoff range so that
+\[
+\|R_X\|_{L^2(W_{\mathrm{ref}})}\le \tfrac12 c_{\can}^{1/2}.
+\]
+Then
 \[
 \int_\Omega |F_X(t)|^2W_{\mathrm{ref}}(t)\,dt
-=
-\widehat W_{\mathrm{ref}}(0)\!\!\sum_{n\ge1}\!\Bigl(|a_n|^2V(n/X)^2
-+|\widetilde a_n|^2\widetilde V(nX)^2\Bigr)
-+O_A(X^{-A}),
+\ge \tfrac14 c_{\can}.
 \]
-for every \(A>0\); here
-\(\widehat W_{\mathrm{ref}}(0)=\int_\Omega W_{\mathrm{ref}}>0\) by
-Lemma~\ref{lem:positive-reference-mass}, and \(a_1=1\) by
-Remark~\ref{rem:standing-zeta-side-source-hypotheses} item~(4).  Thus the
-diagonal \(n=1\) contribution
-\(\widehat W_{\mathrm{ref}}(0)\,|a_1|^2V(1/X)^2\) is positive and bounded
-below once \(X\) is in the admissible AFE range.  The coefficient growth
-\(|a_n|,|\widetilde a_n|\ll_\varepsilon n^{-1/2+\varepsilon}\) from item~(2)
-of the same remark makes the off-diagonal contribution \(O_A(X^{-A})\), so
-for \(A\) large we obtain the stated positive lower bound.
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{lem:main-term-noncollapse},
+\[
+\|q''_{\can}\|_{L^2(W_{\mathrm{ref}})}=c_{\can}^{1/2}.
+\]
+The triangle inequality and the AFE remainder bound give
+\[
+\|F_X\|_{L^2(W_{\mathrm{ref}})}
+\ge
+\|q''_{\can}\|_{L^2(W_{\mathrm{ref}})}
+-
+\|R_X\|_{L^2(W_{\mathrm{ref}})}
+\ge
+\tfrac12 c_{\can}^{1/2}.
+\]
+Squaring gives the claim.
 \end{proof}
 
 \begin{corollary}[Reference mean-square noncollapse]
 \label{cor:reference-ms-noncollapse}
 There exists \(c_0>0\) such that
 \[
-\int_\Omega |q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt \ge c_0.
+\int_\Omega |q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt\ge c_0.
+\]
+Moreover, for all AFE cutoffs satisfying the tail smallness condition in
+Corollary~\ref{cor:finite-afe-main-term-noncollapse},
+\[
+\int_\Omega |F_X(t)|^2W_{\mathrm{ref}}(t)\,dt\ge c_0/4.
 \]
 \end{corollary}
 
 \begin{proof}
-By Lemma~\ref{lem:main-term-noncollapse} and
-Lemma~\ref{lem:positive-reference-mass},
-\[
-\|F_X\|_{L^2(W_{\mathrm{ref}})}^2\ge c_1.
-\]
-Write \(q''_{\can}=F_X+R_X\).
-By the smooth AFE tail bound,
-\[
-\|R_X\|_{L^2(W_{\mathrm{ref}})}^2\le Q^{-B_0}
-\]
-for \(B_0\) large.  Hence
-\[
-\|q''_{\can}\|_{L^2(W_{\mathrm{ref}})}
-\ge
-\|F_X\|_{L^2(W_{\mathrm{ref}})}-\|R_X\|_{L^2(W_{\mathrm{ref}})}
-\ge \tfrac12\|F_X\|_{L^2(W_{\mathrm{ref}})},
-\]
-after enlarging \(X\) if needed.  Squaring gives the claim.
+Take \(c_0=c_{\can}\) in Lemma~\ref{lem:main-term-noncollapse}.  The final
+claim is Corollary~\ref{cor:finite-afe-main-term-noncollapse}.
 \end{proof}
 
-\begin{remark}[Provenance of Hypothesis~\ref{hyp:reference-meansquare-noncollapse}]
-\label{rem:reference-meansquare-noncollapse-provenance}
-This hypothesis is the finite source nonflatness statement:
+\begin{remark}[Uniformity of reference noncollapse]
+\label{rem:reference-noncollapse-uniformity}
+The preceding argument is unconditional for a fixed reference weight, or for a
+finite family of fixed reference weights.  If the draft later allows a
+\(Q\)-dependent family \(W_{\mathrm{ref},Q}\) whose support can drift or shrink
+with \(Q\), then the polynomial lower bound
 \[
-\|F_X\|_{L^2(W_{\mathrm{ref}})}^2
-\ge Q^{-A}\sum_b\sum_m\rho_b(m).
+\int |q''_{\can}|^2W_{\mathrm{ref},Q}\ge Q^{-A}
 \]
-The intended derivation is from the zeta-side main-term positivity of the
-finite AFE source \(F_X=B_2+P_{2,\le X}+D_{2,\le X}\), together with the fact
-that the dominant source contribution does not cancel on the good packet
-set.  It is the normalization safeguard needed so that the source frame
-bound is nondegenerate.
+is a separate quantitative nonconcentration statement and does not follow from
+\(a_1=1\) alone.  In that case it must remain a named input.
+\end{remark}
+
+
+\begin{remark}[Provenance of reference mean-square noncollapse]
+\label{rem:reference-meansquare-noncollapse-provenance}
+For a fixed reference weight, reference noncollapse is no longer a
+no-cancellation hypothesis for the Dirichlet polynomial.  It follows from the
+analytic nonzero trace argument in Lemma~\ref{lem:main-term-noncollapse}, and
+the finite-AFE main term inherits the lower bound from
+Corollary~\ref{cor:finite-afe-main-term-noncollapse}.  The previous proof route
+based on the \(n=1\) diagonal term and a negligible off-diagonal term should not
+be used.
+
+If the reference window is allowed to depend on \(Q\), the uniform polynomial
+lower bound remains a separate quantitative nonconcentration requirement, as
+recorded in Remark~\ref{rem:reference-noncollapse-uniformity}.
 \end{remark}
 
 \begin{definition}[Whitney packet cores]
@@ -48673,31 +48724,66 @@ e^{i(\phi_p(t)-\phi_q(t))}\,dt
 \]
 \end{remark}
 
-\begin{lemma}[Packet-scale AFE envelope]
+\begin{lemma}[Absolute packet-scale AFE envelope]
 \label{lem:packet-scale-AFE-envelope}
-For each admissible packet core \(K_p\),
+Assume the finite AFE truncation range, the packet window \(\Omega\), and the
+weights \(W_{\mathrm{ref}},W_{\mathrm{branch}}\) are polynomially controlled in
+\(Q\).  Then for every scale-admissible packet core \(K_p\),
 \[
-\sup_{t\in K_p}|F_X(t)|^2W_{\mathrm{ref}}(t)
-\ll
-(\lambda_p^{\mathrm{raw}})^{-1}\int_{K_p^+}|F_X(u)|^2W_{\mathrm{ref}}(u)\,du
-+
-\lambda_p^{\mathrm{raw}}\int_{K_p^+}|F_X'(u)|^2W_{\mathrm{ref}}(u)\,du.
+\sup_{t\in K_p}|F_X(t)|^2W_{\mathrm{ref}}(t)\le Q^B.
 \]
-Consequently, after the packet derivative budget and EF completion,
+Consequently, after the smooth AFE tail estimate,
 \[
 \sup_{t\in K_p}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\le Q^B
 \]
-on the admissible packet set.
+on the scale-admissible packet family.
+
+If, in addition, \(W_{\mathrm{ref}}\) is scale-slow on \(K_p^+\), then the
+sharper local Sobolev form also holds:
+\[
+\sup_{t\in K_p}|F_X(t)|^2W_{\mathrm{ref}}(t)
+\ll
+Q^C\left(
+(\lambda_p^{\mathrm{raw}})^{-1}
+\int_{K_p^+}|F_X(u)|^2W_{\mathrm{ref}}(u)\,du
++
+\lambda_p^{\mathrm{raw}}
+\int_{K_p^+}|F_X'(u)|^2W_{\mathrm{ref}}(u)\,du
+\right).
+\]
 \end{lemma}
 
 \begin{proof}
-This is the local one-dimensional Sobolev/Bernstein inequality on \(K_p\) at
-scale \(\lambda_p^{\mathrm{raw}}\), followed by the derivative budget from
-Lemma~\ref{lem:finite-afe-packet-regularity} and the EF tail bound
-(Corollary~\ref{cor:ef-completion-bound}).  The polynomial \(Q^B\) form on
-the admissible packet set follows from the raw scale bounds
-\(Q^{-C}\le \lambda_p^{\mathrm{raw}}\le Q^C\) baked into
-Definition~\ref{def:raw-packet-scale-admissibility}.
+For the absolute envelope, use the finite AFE expression
+\[
+F_X(t)
+=
+\sum_{n\ge1}a_n n^{-1/2-it}V_1(n/X)
++
+\sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX).
+\]
+The smooth cutoffs restrict both sums to polynomially controlled effective
+ranges, and the coefficient bounds give
+\[
+\sup_{t\in\Omega}|F_X(t)|\le Q^C.
+\]
+Since \(W_{\mathrm{ref}}\) is polynomially bounded on the source window,
+\[
+\sup_{t\in K_p}|F_X(t)|^2W_{\mathrm{ref}}(t)\le Q^B.
+\]
+The same bound for \(q''_{\can}=F_X+R_X\) follows from
+Corollary~\ref{cor:smooth-afe-tail-bound}, after increasing \(B\).
+
+For the local Sobolev refinement, apply the one-dimensional Sobolev inequality
+at scale \(\lambda_p^{\mathrm{raw}}\) to
+\[
+g(t):=F_X(t)W_{\mathrm{ref}}(t)^{1/2}.
+\]
+Scale-slow variation of \(W_{\mathrm{ref}}\) controls the derivative terms from
+\(\partial_t W_{\mathrm{ref}}^{1/2}\), giving the displayed estimate.  The
+weighted derivative integral is controlled on mass-good packets by
+Theorem~\ref{thm:packet-construction-regularity}; the absolute envelope above
+is the form used for collar exclusion.
 \end{proof}
 
 \begin{lemma}[Packet middle-third mass]
@@ -48810,64 +48896,46 @@ agrees on the good packet set with the local phase derivative
 \]
 \end{remark}
 
-\begin{lemma}[Frequency-gap separation off resonant blocks]
+\begin{lemma}[Scale-normalized frequency separation off resonant blocks]
 \label{lem:frequency-gap-separation}
-By Remark~\ref{rem:packet-phase-identification}, the packet frequency map is
+For two packet atoms \(p,q\), set
 \[
-\omega_p := -\partial_t \arg F_X(t)\big|_{t=m_p}.
+I_{pq}:=\operatorname{supp}(a_p\overline{a_q}W_{\mathrm{branch}}),
+\qquad
+\lambda_{pq}:=|I_{pq}|,
+\qquad
+\Delta\omega_{pq}:=|\omega_p-\omega_q|.
 \]
-Then on nonresonant blocks one has
+Fix \(\kappa>0\).  Define the resonant graph by placing an edge between
+\(p\) and \(q\) when
 \[
-|\omega_p-\omega_q|\gg Q^{-\delta}\qquad(p\neq q).
+\lambda_{pq}\Delta\omega_{pq}<Q^\kappa.
+\]
+The resonant blocks are the connected components of this graph.  If \(p\) and
+\(q\) lie in distinct resonant blocks, then
+\[
+\lambda_{pq}|\omega_p-\omega_q|\ge Q^\kappa.
 \]
 \end{lemma}
 
 \begin{proof}
-By Lemma~\ref{lem:phase-derivative-transversality}, on each good
-nonresonant packet core the phase derivative satisfies a positive lower
-bound.  Hence, for distinct packet centers \(m_p,m_q\) in the same
-nonresonant family, the mean value theorem gives
-\[
-|\omega_p-\omega_q|
-=
-|\omega(m_p)-\omega(m_q)|
-\ge
-\inf_{\xi\in I_{pq}}|\omega'(\xi)|\,|m_p-m_q|.
-\]
-The Whitney separation of distinct packet cores gives
-\[
-|m_p-m_q|\gtrsim \lambda
-\]
-for the relevant packet scale \(\lambda\), and \(\lambda\) is polynomially
-bounded on the good packet set.  Therefore
-\[
-|\omega_p-\omega_q|\gg Q^{-\delta}
-\]
-for some \(\delta>0\) after excluding resonant blocks.
+This is the definition of the connected components of the scale-normalized
+resonant graph.  If \(p\) and \(q\) were in distinct blocks and nevertheless
+\(\lambda_{pq}|\omega_p-\omega_q|<Q^\kappa\), the edge \((p,q)\) would join the
+two components, a contradiction.
 \end{proof}
+
 
 \begin{remark}[Frequency-gap closure status]
 \label{rem:frequency-gap-closure-status}
-The implication chain
-\[
-\text{middle-third packet mass}
-\;\Rightarrow\;
-\text{packet-window variance}
-\;\Rightarrow\;
-\text{phase-derivative transversality}
-\;\Rightarrow\;
-\text{frequency-gap separation}
-\]
-closes on the good packet set once the packet-construction definition
-includes the plateau/comparability condition
-\[
-\chi_p\equiv 1 \ \text{on } J_p^{\mathrm M},
-\qquad
-e^{-C_0}\le \frac{|B_p(\xi,t)|}{|B_p(\eta,t)|}\le e^{C_0}
-\quad (\xi,\eta\in J_p),
-\]
-and once the transport term is bounded by the existing packet derivative
-budget.
+For the source-frame proof, no unnormalized lower bound of the form
+\(|\omega_p-\omega_q|\gg Q^{-\delta}\) is used.  Resonant blocks are defined by
+the scale-normalized relation in Lemma~\ref{lem:frequency-gap-separation};
+off-block separation is therefore automatic in the dimensionless quantity
+\(\lambda_{pq}|\omega_p-\omega_q|\).  The earlier phase-derivative/variance
+chain may still be useful for constructing economically sized resonant blocks,
+but it is not needed for the validity of the off-block integration-by-parts
+estimate.
 \end{remark}
 
 \begin{corollary}[Boundary-collar exclusion]
@@ -48891,7 +48959,7 @@ d(m_p)\ge Q^{-C}.
 \end{corollary}
 
 \begin{proof}
-By the packet envelope lemma, on each admissible packet core \(K_p\),
+By the packet envelope lemma, on each scale-admissible packet core \(K_p\),
 \[
 \sup_{t\in K_p}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\ll Q^B
 \]
@@ -48937,115 +49005,212 @@ Q^{-C}\le \lambda_p\le Q^C.
 \]
 \end{proof}
 
-\begin{corollary}[Oscillatory decay closes the source-side off-diagonal bound]
-\label{cor:source-oscillatory-decay}
-\emph{Status: unconditional given Theorem~\ref{thm:packet-construction-regularity}.}
-
-Under Theorem~\ref{thm:packet-construction-regularity}, the packet-adapted
-source atoms satisfy the off-diagonal row-sum estimate
-\[
-\sup_i\sum_{j\neq i}
-\frac{|\langle \psi_i,\psi_j\rangle_{W_{\mathrm{branch}}}|}
-{\|\psi_i\|_{L^2(W_{\mathrm{ref}})}\|\psi_j\|_{L^2(W_{\mathrm{ref}})}}
-\le Q^{-A}
-\]
-after the resonant blocks are separated.
-\end{corollary}
-
-\begin{remark}[Use in the source frame lemma]
-\label{rem:packet-regularity-used-in-source-frame}
-Theorem~\ref{thm:packet-construction-regularity} supplies the off-diagonal
-control in Lemma~\ref{lem:source-frame-coercivity}.  Combined with the
-packet-core micro-covering and the EF completion bound already recorded
-earlier in the source section, it yields the Gershgorin margin for
-\[
-M+E=G_{\mathrm{ref}}^{-1/2}G_{\mathrm{branch}}G_{\mathrm{ref}}^{-1/2}+E.
-\]
-\end{remark}
-
-\begin{remark}[Packet-regularity bridge status]
-\label{rem:packet-regularity-conditional-status}
-Theorem~\ref{thm:packet-construction-regularity} and
-Corollary~\ref{cor:source-oscillatory-decay} now formalise the source-side
-analytic step:
-\[
-\text{packet regularity}
-\;\Rightarrow\;
-\text{derivative budget}
-\;\Rightarrow\;
-\text{oscillatory-kernel decay}
-\;\Rightarrow\;
-\text{off-diagonal row-sum control}.
-\]
-The remaining source-side obligations are now the EF completion bound and
-reference mean-square noncollapse, both packaged earlier in the source
-provenance section
-(Corollary~\ref{cor:ef-completion-bound},
-Corollary~\ref{cor:reference-ms-noncollapse}).
-
-\noindent The proof route for item~(4) is now explicit: middle-third packet
-mass (Lemma~\ref{lem:packet-middle-third-mass})
-\(\Rightarrow\) packet-window variance
-(Lemma~\ref{lem:packet-window-variance-lower-bound})
-\(\Rightarrow\) phase-derivative transversality
-(Lemma~\ref{lem:phase-derivative-transversality})
-\(\Rightarrow\) frequency-gap separation
-(Lemma~\ref{lem:frequency-gap-separation}).
-\end{remark}
-
-\begin{theorem}[Unconditional packet construction regularity (target)]
-\label{thm:unconditional-packet-regularity}
-\emph{Status: FINITE AUDIT, open target.  This statement is the missing
-zeta-side derivation that would lift
-Theorem~\ref{thm:packet-construction-regularity} from a conditional
-reduction to an unconditional source-side input.  The packet-construction
-assumptions below are not derived in the present draft; the theorem is
-recorded here only as a precise target for future work.}
-
-The zeta-side packet construction produces packet atoms
+\begin{lemma}[Windowed packet amplitude bounds]
+\label{lem:windowed-packet-amplitude-bounds}
+Let the packet atoms have the windowed form
 \[
 \psi_p(t)=a_p(t)e^{i\omega_p t},
 \qquad
-a_p(t)=\lambda_p^{-1/2}\chi_p(t)\eta\!\left(\frac{t-m_p}{\lambda_p}\right),
-\qquad
-\eta\in C_c^\infty(\mathbb R),
+ a_p(t)=\nu_p^{-1}\lambda_p^{-1/2}\chi_p(t)
+ \eta\!\left(\frac{t-m_p}{\lambda_p}\right),
 \]
-with the following properties, derived directly from the construction
-itself rather than assumed:
-\begin{enumerate}
-\item \emph{Bounded overlap of packet cores.} The cutoffs \(\chi_p\) come
-from a partition of unity with finite multiplicity, so at every \(t\) only
-\(O(1)\) packets are active.
-\item \emph{Polynomial scale bounds.} The packet scales satisfy
+where \(\eta\in C_c^\infty(\mathbb R)\), \(\nu_p\) is the
+\(L^2(W_{\mathrm{ref}})\)-normalizing factor, and \(\lambda_p\) is
+polynomially controlled on the good packet family.  Assume the source weights
+and the auxiliary cutoffs \(\chi_p\) have polynomial scale-slow derivatives on
+overlapping packet cores.  Then, for
 \[
-Q^{-C}\le \lambda_p\le Q^C
-\]
-on the good packet set.
-\item \emph{Polynomial derivative bounds.} The chain rule and Leibniz rule
-give
-\[
-\|\partial_t^r a_p\|_\infty\lesssim_r \lambda_p^{-r-1/2},
+A_{pq}(t):=a_p(t)\overline{a_q(t)}W_{\mathrm{branch}}(t),
 \qquad
-\|\partial_t^r(a_p\overline{a_q}W_{\mathrm{branch}})\|_{L^1}\le Q^{C_r}.
+I_{pq}:=\operatorname{supp}A_{pq},
+\qquad
+\lambda_{pq}:=|I_{pq}|,
 \]
-\item \emph{Polynomial frequency separation.} Resonant blocks are defined
-by \(|\omega_p-\omega_q|<Q^{-\delta}\); the zeta packet construction
-produces only polynomially many packets per block, and outside a block the
-gap is at least \(Q^{-\delta}\).
-\end{enumerate}
+one has, for each fixed \(N\),
+\[
+\sum_{r=0}^{N}\lambda_{pq}^{r}
+\bigl\|\partial_t^r A_{pq}\bigr\|_{L^1(I_{pq})}
+\le Q^{C_N}.
+\]
+\end{lemma}
 
-Consequently, oscillatory integration by parts gives
+\begin{proof}
+If \(I_{pq}=\varnothing\) there is nothing to prove.  Otherwise Whitney overlap
+comparability gives \(\lambda_p\asymp\lambda_q\asymp\lambda_{pq}\).  Repeated
+Leibniz differentiation of
 \[
-\bigl|\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}\bigr|
-\le
-C_NQ^{C_N}(1+|\omega_p-\omega_q|)^{-N},
+\nu_p^{-1}\nu_q^{-1}\lambda_p^{-1/2}\lambda_q^{-1/2}
+\chi_p(t)\overline{\chi_q(t)}
+\eta\!\left(\frac{t-m_p}{\lambda_p}\right)
+\overline{\eta\!\left(\frac{t-m_q}{\lambda_q}\right)}
+W_{\mathrm{branch}}(t)
 \]
-and the blockwise Gram matrices are finite-dimensional with polynomial
-singular-value bounds.  Combined with
-Theorem~\ref{thm:packet-construction-regularity}, this would discharge
-Hypotheses~\ref{hyp:packet-core-micro-covering} and
-\ref{hyp:packet-amplitude-decay-budget} unconditionally.
+shows that each derivative contributes at most the corresponding inverse
+packet scale, up to a polynomial power of \(Q\).  The reference-normalizing
+factors \(\nu_p^{-1},\nu_q^{-1}\) are polynomially controlled on good packets,
+and the support has length \(\asymp\lambda_{pq}\).  Multiplying the
+\(r\)-th derivative estimate by \(\lambda_{pq}^r\) and integrating over
+\(I_{pq}\) gives the bound.
+\end{proof}
+
+\begin{lemma}[Scale-normalized packet kernel decay]
+\label{lem:scale-normalized-packet-kernel-decay}
+Under Lemma~\ref{lem:windowed-packet-amplitude-bounds}, for every fixed \(N\),
+\[
+\left|
+\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}
+\right|
+\le
+Q^{C_N}
+\bigl(1+\lambda_{pq}|\omega_p-\omega_q|\bigr)^{-N}.
+\]
+\end{lemma}
+
+\begin{proof}
+Write
+\[
+\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}
+=
+\int_{I_{pq}}A_{pq}(t)e^{i(\omega_p-\omega_q)t}\,dt.
+\]
+The trivial estimate gives the claim when
+\(\lambda_{pq}|\omega_p-\omega_q|\lesssim1\).  Otherwise integrate by parts
+\(N\) times:
+\[
+\left|
+\int_{I_{pq}}A_{pq}(t)e^{i(\omega_p-\omega_q)t}\,dt
+\right|
+\le
+|\omega_p-\omega_q|^{-N}
+\bigl\|\partial_t^NA_{pq}\bigr\|_{L^1(I_{pq})}.
+\]
+Using Lemma~\ref{lem:windowed-packet-amplitude-bounds},
+\[
+|\omega_p-\omega_q|^{-N}
+\bigl\|\partial_t^NA_{pq}\bigr\|_{L^1(I_{pq})}
+\le
+Q^{C_N}(\lambda_{pq}|\omega_p-\omega_q|)^{-N}.
+\]
+Combining this with the trivial bound yields the displayed
+\((1+\lambda_{pq}|\omega_p-\omega_q|)^{-N}\) estimate.
+\end{proof}
+
+\begin{corollary}[Scale-normalized off-block row-sum decay]
+\label{cor:source-oscillatory-decay}
+Assume the good packet family has cardinality \(\#\mathcal P_{\mathrm{good}}\le Q^D\)
+and resonant blocks are defined as in
+Lemma~\ref{lem:frequency-gap-separation}.  Then, after separating resonant
+blocks,
+\[
+\sup_p\sum_{q:\,B(q)\neq B(p)}
+\frac{|\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}|}
+{\|\psi_p\|_{L^2(W_{\mathrm{ref}})}\|\psi_q\|_{L^2(W_{\mathrm{ref}})}}
+\le Q^{-A}
+\]
+for every prescribed \(A>0\), after choosing the integration-by-parts order
+\(N\) sufficiently large.
+\end{corollary}
+
+\begin{proof}
+The atoms are reference-normalized in the source frame; otherwise absorb the
+polynomially controlled normalizing factors into the amplitude bound of
+Lemma~\ref{lem:windowed-packet-amplitude-bounds}.  For \(q\) outside the block
+of \(p\), Lemma~\ref{lem:frequency-gap-separation} gives
+\[
+\lambda_{pq}|\omega_p-\omega_q|\ge Q^\kappa.
+\]
+Lemma~\ref{lem:scale-normalized-packet-kernel-decay} therefore gives
+\[
+|\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}|
+\le Q^{C_N-\kappa N}.
+\]
+Choose \(N\) so large that \(\kappa N-C_N\ge A+D+1\).  Since there are at most
+\(Q^D\) good packets, the row sum over off-block indices is \(O(Q^{-A})\).
+\end{proof}
+
+
+\begin{remark}[Use in the source frame lemma]
+\label{rem:packet-regularity-used-in-source-frame}
+The off-block control used in Lemma~\ref{lem:source-frame-coercivity} is supplied
+by the scale-normalized chain
+\[
+\text{windowed amplitude bounds}
+\Rightarrow
+\text{scale-normalized kernel decay}
+\Rightarrow
+\text{off-block row-sum control},
+\]
+namely Lemma~\ref{lem:windowed-packet-amplitude-bounds},
+Lemma~\ref{lem:scale-normalized-packet-kernel-decay}, and
+Corollary~\ref{cor:source-oscillatory-decay}.  Resonant blocks are handled by
+branch/reference domination, not by oscillatory decay.
+\end{remark}
+
+
+\begin{remark}[Packet-regularity bridge status]
+\label{rem:packet-regularity-conditional-status}
+The packet-regularity bridge now has a scale-normalized form:
+\[
+\text{absolute derivative/envelope bounds}
+\quad\text{and}\quad
+\text{windowed packet amplitudes}
+\Rightarrow
+\text{off-block oscillatory row-sum control}.
+\]
+This closes the analytic off-diagonal estimate.  It does not by itself prove
+branch/reference domination on good packet supports; that structural routing
+input is isolated in Hypothesis~\ref{hyp:packet-core-micro-covering} and used
+through Lemma~\ref{lem:block-coercivity-from-weight-domination}.
+\end{remark}
+
+\begin{theorem}[Windowed packet construction regularity]
+\label{thm:unconditional-packet-regularity}
+Adopt the Whitney packet cores of Definition~\ref{def:whitney-packet-cores} and
+construct packet atoms by
+\[
+\psi_p(t)=a_p(t)e^{i\omega_p t},
+\qquad
+ a_p(t)=\nu_p^{-1}\lambda_p^{-1/2}\chi_p(t)
+ \eta\!\left(\frac{t-m_p}{\lambda_p}\right),
+\qquad \eta\in C_c^\infty(\mathbb R),
+\]
+on the good packet family.  Assume the source weights and auxiliary cutoffs are
+polynomially scale-slow and that the good packet family is scale-admissible.
+Then:
+\begin{enumerate}
+\item the packet supports have bounded overlap;
+\item \(Q^{-C}\le\lambda_p\le Q^C\) on good packets;
+\item the amplitudes satisfy
+\[
+\sum_{r=0}^{N}\lambda_{pq}^{r}
+\|\partial_t^r(a_p\overline{a_q}W_{\mathrm{branch}})\|_{L^1(I_{pq})}
+\le Q^{C_N};
+\]
+\item after defining resonant blocks by the scale-normalized relation
+\[
+\lambda_{pq}|\omega_p-\omega_q|<Q^\kappa,
+\]
+the off-block kernels satisfy
+\[
+|\langle\psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}|
+\le Q^{C_N}(1+\lambda_{pq}|\omega_p-\omega_q|)^{-N}.
+\]
+\end{enumerate}
+Consequently, Corollary~\ref{cor:source-oscillatory-decay} gives the
+off-block row-sum decay used in the source-frame argument.
 \end{theorem}
+
+\begin{proof}
+Bounded overlap follows from
+Theorem~\ref{thm:whitney-selection-overlap-comparability}.  Polynomial scale
+bounds follow from scale-admissibility and
+Proposition~\ref{prop:packet-scale-normalization} on the good packet family.
+The amplitude derivative estimate is Lemma~\ref{lem:windowed-packet-amplitude-bounds}.
+The off-block kernel estimate is Lemma~\ref{lem:scale-normalized-packet-kernel-decay},
+with the scale-normalized nonresonance supplied by the definition of the
+resonant blocks in Lemma~\ref{lem:frequency-gap-separation}.  This proves all
+claims.
+\end{proof}
 
 \begin{remark}[What this target does and does not close]
 \label{rem:unconditional-packet-target-status}
@@ -49079,55 +49244,53 @@ Theorem~\ref{thm:unconditional-packet-regularity} is the AFE tail bound
 formalised by Hypothesis~\ref{hyp:ef-completion-bound}.
 \end{remark}
 
-\begin{remark}[wip-zeta-bridge-proof-source]
+
+\begin{remark}[Source bridge proof register]
 \label{rem:wip-zeta-bridge-proof-source}
-The source layer is open.  The conditional reduction below derives
-\(\mathrm{Agg}L^2(q''_{\can})\) from four named hypotheses
-(Hypotheses~\ref{hyp:packet-core-micro-covering},
-\ref{hyp:packet-amplitude-decay-budget},
-\ref{hyp:ef-completion-bound},
-\ref{hyp:reference-meansquare-noncollapse}).  The load-bearing analytic
-input is the EF completion bound
-Hypothesis~\ref{hyp:ef-completion-bound} on the actual canonical source
-\(q''_{\can}=B_2+P_2+D_2+E_2\); this is not derived in the present draft.
+The source bridge now separates analytic estimates from structural routing
+estimates.  The analytic estimates are supplied by the completed-source AFE,
+canonical reference noncollapse, absolute packet envelopes, and
+scale-normalized oscillatory integration by parts.  The remaining source-side
+structural assertion is routed-window domination on good packet supports,
+\[
+W_{\mathrm{branch}}\ge Q^{-C}W_{\mathrm{ref}}.
+\]
+This is not an AFE consequence; it must come from the branch/reference window
+construction.  Once this domination is part of the construction,
+Lemma~\ref{lem:source-frame-coercivity} gives \(\delta_{\mathrm{src}}>0\) with
+polynomial loss.
 \end{remark}
 
-\begin{hypothesis}[Packet-core micro-covering]
+
+\begin{hypothesis}[Routed packet-core domination]
 \label{hyp:packet-core-micro-covering}
-The packet cores form a polynomially thick sampling set at scale
-\(h\asymp \log Q/Q\), with bounded overlap and
+The good packet cores have bounded overlap and the routed branch weight
+dominates the reference weight on their supports:
 \[
-W_{\mathrm{branch}}\ge Q^{-C}W_{\mathrm{ref}}
-\quad\text{on the packet cores}.
+W_{\mathrm{branch}}\ge Q^{-C}W_{\mathrm{ref}}.
 \]
 
-\noindent\emph{Status note.}  This is the least arithmetical and most
-geometric of the four source hypotheses.  It is intended to come from the
-packetization of the finite AFE main term: packet cores covering the good
-branch support at scale \(h\asymp \log Q/Q\) with bounded overlap and with
-\(W_{\mathrm{branch}}\) comparable to \(W_{\mathrm{ref}}\) on the cores.  The
-draft uses this directly to obtain diagonal lower mass in the source frame
-estimate, but the covering theorem itself is not proved here.
+\noindent\emph{Status note.}  The bounded-overlap part is a theorem of the
+Whitney construction, Theorem~\ref{thm:whitney-selection-overlap-comparability}.
+The domination part is a structural statement about the branch/reference
+routing.  It is exactly the branch-hole condition isolated in
+Remark~\ref{rem:remaining-source-structural-input}; it cannot be proved from
+the AFE or from oscillatory decay.
 \end{hypothesis}
+
 
 \begin{hypothesis}[Packet amplitude / oscillatory-kernel decay budget]
 \label{hyp:packet-amplitude-decay-budget}
 The packet amplitudes satisfy polynomial derivative bounds, so that the
-off-diagonal packet kernels obey polynomial oscillatory decay (as in
-Theorem~\ref{thm:packet-construction-regularity}), and the resonant
-clusters are finite-dimensional.
+off-diagonal packet kernels obey scale-normalized oscillatory decay, and the
+resonant clusters are handled blockwise.
 
-\noindent\emph{Status note.}  This is the most directly derivable of the four
-source hypotheses.  Once the packet atoms are written as smooth windows
-times phases
-\[
-\psi_p(t)=a_p(t)e^{i\omega_p t},
-\]
-with scale-controlled amplitudes \(a_p\), the derivative bounds needed for
-oscillatory-kernel decay reduce to a chain-rule and scaling computation.  The
-source proof uses exactly this kind of bound to obtain off-diagonal decay,
-so this hypothesis is the most ``mechanical'' of the four to upgrade to a
-theorem from packet construction regularity.
+\noindent\emph{Status note.}  For windowed packet atoms this is no longer a
+standing analytic hypothesis.  It is proved by
+Lemma~\ref{lem:windowed-packet-amplitude-bounds},
+Lemma~\ref{lem:scale-normalized-packet-kernel-decay}, and
+Corollary~\ref{cor:source-oscillatory-decay}.  The hypothesis environment is
+retained only as a compatibility label for downstream references.
 \end{hypothesis}
 
 \begin{hypothesis}[EF completion bound on \(q''_{\can}\)]
@@ -49156,30 +49319,76 @@ cutoff in the AFE truncation, and the finite source-window mass of
 environment is retained as a labelled target for downstream lemmas to cite.
 \end{hypothesis}
 
+
 \begin{hypothesis}[Reference mean-square non-collapse]
 \label{hyp:reference-meansquare-noncollapse}
 The reference mean-square does not collapse, so the canonical finite source
 \(F_X\) has nontrivial \(W_{\mathrm{ref}}\)-mass:
 \[
-\|F_X\|_{L^2(W_{\mathrm{ref}})}\ge Q^{-A_0}
+\|F_X\|_{L^2(W_{\mathrm{ref}})}\ge Q^{-A_0}.
 \]
-for some absolute \(A_0>0\) and all sufficiently large \(X\).
 
-\noindent\emph{Status note.}  This is a lower-bound / nonflatness statement
-for the finite AFE source.  It is plausible from zeta-side main-term
-positivity of \(F_X=B_2+P_{2,\le X}+D_{2,\le X}\), but it is not yet proved
-in the draft.  The source proof uses it to ensure the normalization is
-nondegenerate; without it the frame argument can collapse.
+\noindent\emph{Status note.}  For a fixed reference weight this is derived from
+Lemma~\ref{lem:main-term-noncollapse} and
+Corollary~\ref{cor:finite-afe-main-term-noncollapse}.  If the reference weight
+is a drifting or shrinking \(Q\)-dependent family, the uniform polynomial form
+is not automatic and must remain a separate quantitative nonconcentration
+input, as stated in Remark~\ref{rem:reference-noncollapse-uniformity}.
 \end{hypothesis}
 
 \begin{remark}[Source-layer derivation register]
 \label{rem:source-layer-derivation-register}
-The packet derivative budget and oscillatory decay are theorem outputs, not
-separate assumptions.  The only genuinely open source-layer input remaining
-in this draft is Hypothesis~\ref{hyp:ef-completion-bound}; bounded overlap
-and scale comparability are supplied by the Whitney packet-core theorem
-(Theorem~\ref{thm:whitney-selection-overlap-comparability}).
+The finite AFE tail estimate, fixed-window reference noncollapse, absolute
+packet envelope, packet derivative budget, and scale-normalized off-block
+oscillatory decay are theorem outputs in this section.  The source-frame
+coercivity lemma still requires the structural routed-window domination
+\[
+W_{\mathrm{branch}}\ge Q^{-C}W_{\mathrm{ref}}
+\]
+on the good packet supports.  This domination is not a consequence of the AFE;
+it is a property of the branch/reference window construction.  If the routed
+source-window construction supplies it, the Gate--1 source frame bound follows
+from Lemma~\ref{lem:source-frame-coercivity}; otherwise the remaining source
+failure mode is a branch-hole failure.
 \end{remark}
+
+\begin{lemma}[Block coercivity from branch/reference domination]
+\label{lem:block-coercivity-from-weight-domination}
+Let \(B\) be a resonant packet block and assume that on the union of supports
+of atoms in \(B\),
+\[
+W_{\mathrm{branch}}(t)\ge Q^{-C_{\mathrm{br}}}W_{\mathrm{ref}}(t).
+\]
+If the atoms in \(B\) are normalized in the reference metric, then the block
+Gram matrix
+\[
+M_B=(\langle\psi_i,\psi_j\rangle_{W_{\mathrm{branch}}})_{i,j\in B}
+\]
+satisfies
+\[
+M_B\ge Q^{-C_{\mathrm{br}}}I_B
+\]
+as a quadratic form in reference-normalized coordinates.
+\end{lemma}
+
+\begin{proof}
+For any coefficient vector \(c=(c_i)_{i\in B}\), set
+\[
+f_B(t):=\sum_{i\in B}c_i\psi_i(t).
+\]
+Then
+\[
+c^*M_Bc
+=
+\int |f_B(t)|^2W_{\mathrm{branch}}(t)\,dt
+\ge
+Q^{-C_{\mathrm{br}}}
+\int |f_B(t)|^2W_{\mathrm{ref}}(t)\,dt.
+\]
+In reference-normalized block coordinates the last integral is \(\|c\|_2^2\).
+Thus \(c^*M_Bc\ge Q^{-C_{\mathrm{br}}}\|c\|_2^2\), which is the displayed matrix
+inequality.
+\end{proof}
 
 \begin{lemma}[Source frame coercivity for Gate--1]
 \label{lem:source-frame-coercivity}
@@ -49189,131 +49398,133 @@ Let
 \qquad
 F_X=B_2+P_{2,\le X}+D_{2,\le X}.
 \]
-Let \(\{\psi_i\}_{i=1}^N\) be packet-adapted source atoms spanning \(\mathcal S_X\),
-normalized in the reference metric:
+Let \(\{\psi_i\}_{i=1}^N\) be packet-adapted source atoms spanning
+\(\mathcal S_X\), normalized in the reference metric, and grouped into the
+scale-normalized resonant blocks of Lemma~\ref{lem:frequency-gap-separation}.
+Assume branch/reference domination on every good block support:
 \[
-\|\psi_i\|_{L^2(W_{\mathrm{ref}})}=1.
+W_{\mathrm{branch}}\ge Q^{-C_{\mathrm{br}}}W_{\mathrm{ref}}.
 \]
-Define the normalized packet Gram matrix
+Then, using Corollary~\ref{cor:source-oscillatory-decay} for off-block entries
+and Corollary~\ref{cor:ef-completion-bound} for the residual correction, one
+has
 \[
-M_{ij}:=\langle \psi_i,\psi_j\rangle_{W_{\mathrm{branch}}},
-\qquad
-M=G_{\mathrm{ref}}^{-1/2}G_{\mathrm{branch}}G_{\mathrm{ref}}^{-1/2},
+\lambda_{\min}(M+E)\ge Q^{-A}
 \]
-and let \(E\) be the residual correction of
-Corollary~\ref{cor:ef-completion-bound}.
-
-By Proposition~\ref{prop:packet-scale-normalization},
-Lemma~\ref{lem:packet-scale-AFE-envelope},
-Corollary~\ref{cor:boundary-collar-exclusion},
-Corollary~\ref{cor:reference-ms-noncollapse}, and
-Corollary~\ref{cor:ef-completion-bound}, the packet-scale normalization,
-packet envelope, boundary-collar exclusion, mean-square noncollapse, and EF
-tail control are all available on the good packet family.  After grouping
-indices into resonant packet clusters \(B\),
+for some absolute \(A>0\).  Equivalently,
 \[
-\min_B \lambda_{\min}(M_B)-\|M_{\off}\|_{\operatorname{op}}-\|E_B\|_{\operatorname{op}}\ge Q^{-A}
-\]
-for some absolute \(A>0\), and in particular
-\[
-\delta_{\mathrm{src}}
-:=
-\min_i\!\left(M_{ii}-\sum_{j\neq i}|M_{ij}|\right)-\|E\|_{\operatorname{op}}
-\ge Q^{-A}.
-\]
-Equivalently,
-\[
-\lambda_{\min}(M+E)\ge Q^{-A},
-\qquad
-\|f\|_{L^2(W_{\mathrm{branch}})}^2\ge Q^{-A}\|f\|_{L^2(W_{\mathrm{ref}})}^2
-\quad(\forall f\in\mathcal S_X).
+\|f\|_{L^2(W_{\mathrm{branch}})}^2
+\ge Q^{-A}\|f\|_{L^2(W_{\mathrm{ref}})}^2
+\qquad(f\in\mathcal S_X).
 \]
 \end{lemma}
 
 \begin{proof}
-By Proposition~\ref{prop:packet-scale-normalization} and
-Corollary~\ref{cor:reference-ms-noncollapse}, the good packet family is
-separated from the boundary collar (Corollary~\ref{cor:boundary-collar-exclusion})
-and carries a fixed positive fraction of the source mass.
-
-Normalize the packet atoms so that
-\(\|\psi_i\|_{L^2(W_{\mathrm{ref}})}=1\).  Then
-\(M_{ii}=\langle \psi_i,\psi_i\rangle_{W_{\mathrm{branch}}}\ge 1-Q^{-A_1}\)
-by the branch/reference comparability on the good packet cores
-(Lemma~\ref{lem:packet-scale-AFE-envelope}) and the EF completion bound
-(Corollary~\ref{cor:ef-completion-bound}).
-For \(i\neq j\), Lemma~\ref{lem:frequency-gap-separation} produces the
-off-block phase gap \(|\omega_p-\omega_q|\gg Q^{-\delta}\); combined with
-bounded overlap and Lemma~\ref{lem:packet-scale-AFE-envelope}, this gives
-the oscillatory off-diagonal decay needed to sum each row, so
+By Lemma~\ref{lem:block-coercivity-from-weight-domination}, each resonant block
+satisfies
 \[
-\sum_{j\neq i}|M_{ij}|\le Q^{-A_1}
+M_B\ge Q^{-C_{\mathrm{br}}}I_B.
 \]
-for some \(A_1>0\).  The EF completion bound
-(Corollary~\ref{cor:ef-completion-bound}) gives
+Thus the block-diagonal part \(M_{\mathrm{diag}}\) of \(M\) obeys
+\[
+M_{\mathrm{diag}}\ge Q^{-C_{\mathrm{br}}}I.
+\]
+By Corollary~\ref{cor:source-oscillatory-decay}, after choosing the
+integration-by-parts order sufficiently large,
+\[
+\|M_{\mathrm{off}}\|_{\operatorname{op}}
+\le
+\sup_i\sum_{j:\,B(j)\neq B(i)}|M_{ij}|
+\le Q^{-A_1}.
+\]
+The EF completion estimate gives
 \[
 \|E\|_{\operatorname{op}}\le Q^{-A_2}
 \]
-for some \(A_2>0\).
-
-Since \(M+E\) is the normalized source frame operator on \(\mathcal S_X\),
-Gershgorin's theorem yields
+after the AFE cutoff is chosen sufficiently deep.  Taking \(A_1,A_2
+>C_{\mathrm{br}}+10\), for example, yields
 \[
-\lambda_{\min}(M+E)\ge Q^{-A}.
+M+E
+\ge
+\bigl(Q^{-C_{\mathrm{br}}}-Q^{-A_1}-Q^{-A_2}\bigr)I
+\ge Q^{-A}I
 \]
-Equivalently,
-\[
-\min_i\!\left(M_{ii}-\sum_{j\neq i}|M_{ij}|\right)-\|E\|_{\operatorname{op}}
-\ge Q^{-A},
-\qquad
-\|f\|_{L^2(W_{\mathrm{branch}})}^2\ge Q^{-A}\|f\|_{L^2(W_{\mathrm{ref}})}^2
-\quad\text{for all }f\in\mathcal S_X.
-\]
+for some absolute \(A\).  This is the stated frame coercivity.
 \end{proof}
+
+\begin{remark}[Remaining non-analytic structural input]
+\label{rem:remaining-source-structural-input}
+The analytic parts of the source layer are now theorem outputs: finite AFE tail
+control, absolute packet derivative/envelope bounds, scale-normalized
+off-block oscillatory decay, and fixed-window reference noncollapse.  The one
+part that cannot be proved from the AFE alone is the routed-window domination
+\[
+W_{\mathrm{branch}}\ge Q^{-C}W_{\mathrm{ref}}
+\]
+on the good packet supports.  This is a structural assertion about how the
+branch windows are chosen relative to the reference window.  If it is adopted
+as part of the source-window construction, Lemma~\ref{lem:source-frame-coercivity}
+is unconditional relative to that construction.  If not, it remains exactly the
+``branch holes'' failure mode and must not be hidden inside an oscillatory
+estimate.
+\end{remark}
+
 
 \begin{corollary}[Gate--1 source survival]
 \label{cor:gate-one-source-survival}
-Under Theorem~\ref{thm:whitney-selection-overlap-comparability},
-Corollary~\ref{cor:packet-derivative-budget-derived},
-Corollary~\ref{cor:ef-completion-bound}, and
-Corollary~\ref{cor:reference-ms-noncollapse},
+Assume the routed packet-core domination
+Hypothesis~\ref{hyp:packet-core-micro-covering} on the good packet supports.
+Then the source-frame coercivity lemma gives
 \[
 \int |q''_{\can}(t)|^2W_{\mathrm{branch}}(t)\,dt
 \ge
-Q^{-A}\int |q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt,
+Q^{-A}
+\int |q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt,
 \]
 equivalently \(\mathrm{Agg}L^2(q''_{\can})\) holds with polynomial loss.  The
-EF tail input is derived from Corollary~\ref{cor:ef-completion-bound} and the
-mean-square non-collapse from Corollary~\ref{cor:reference-ms-noncollapse}.
+analytic inputs used here are the AFE tail estimate
+Corollary~\ref{cor:ef-completion-bound}, fixed-window reference noncollapse
+Corollary~\ref{cor:reference-ms-noncollapse}, packet derivative/envelope
+control, and scale-normalized off-block decay
+Corollary~\ref{cor:source-oscillatory-decay}.
 \end{corollary}
 
 \begin{remark}[Source-layer status]
 \label{rem:source-layer-status}
-The source layer now closes through the packaged corollaries:
-main-term noncollapse, reference mean-square noncollapse, boundary-collar
-exclusion, and packet-scale normalization.
+The analytic source estimates now close through the packaged corollaries:
+canonical reference noncollapse, finite-AFE main-term noncollapse,
+boundary-collar exclusion, packet-scale normalization, and scale-normalized
+off-block oscillatory decay.  Full Gate--1 source survival additionally uses
+the routed-window domination
+\(W_{\mathrm{branch}}\ge Q^{-C}W_{\mathrm{ref}}\) on good packet supports, as
+recorded in Lemma~\ref{lem:source-frame-coercivity}.
 \end{remark}
 
 \begin{remark}[Failure labels]
 \label{rem:source-failure-labels}
-If the source frame bound fails, the only remaining failure modes are:
-branch holes (Hypothesis~\ref{hyp:packet-core-micro-covering} fails),
-off-diagonal packet correlation too large
-(Hypothesis~\ref{hyp:packet-amplitude-decay-budget} fails),
-residual completion failure
-(Hypothesis~\ref{hyp:ef-completion-bound} fails),
-or reference mean-square collapse
-(Corollary~\ref{cor:reference-ms-noncollapse} fails).
+After the corrections above, the off-diagonal packet-correlation failure is
+handled by the scale-normalized oscillatory estimate, and fixed-window
+reference mean-square collapse is excluded by
+Corollary~\ref{cor:reference-ms-noncollapse}.  The genuine remaining
+source-frame failure mode is a branch-hole failure: the routed branch weight
+may fail to dominate the reference weight on the good packet supports.  For a
+\(Q\)-dependent reference window, a second possible failure mode is lack of a
+uniform polynomial version of reference noncollapse, as noted in
+Remark~\ref{rem:reference-noncollapse-uniformity}.
 \end{remark}
 
 \begin{remark}[Resonant block conditioning]
 \label{rem:source-resonant-block-conditioning}
-If \(|\omega_p-\omega_q|<Q^{-\delta}\), the pair must be handled inside a
-resonant block \(B\).  It is enough to prove
+Resonant blocks are defined by the scale-normalized condition
 \[
-G_B\ge Q^{-A}G_{B,\mathrm{ref}}
+\lambda_{pq}|\omega_p-\omega_q|<Q^\kappa.
 \]
-for every resonant block.
+Inside a resonant block no oscillatory decay is claimed.  Block conditioning is
+instead supplied by branch/reference domination via
+Lemma~\ref{lem:block-coercivity-from-weight-domination}:
+\[
+G_B\ge Q^{-A}G_{B,\mathrm{ref}}.
+\]
 \end{remark}
 
 \begin{lemma}[Fubini form of branch-complete \(L^2\)-Gate--1]
