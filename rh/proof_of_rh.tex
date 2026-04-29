@@ -37888,6 +37888,51 @@ the \(Y12\) quotient test:
 \]
 \end{lemma}
 
+\begin{remark}[Cap-wise covariance bottleneck]
+\label{rem:cap-wise-covariance-bottleneck}
+On each frozen cap \(C_j\), define
+\[
+B_j=\sum_{p\in C_j}w_p\,\Gamma_p\Gamma_p^\ast,
+\qquad
+w_p=\rho_p\frac{E_{1,p}H_p}{N_p},
+\qquad
+\Gamma_p=\binom{\Gamma_G(p)}{\Gamma_{G,2}(p)}.
+\]
+The extraction gap is
+\[
+\delta_{\mathrm{ext}}:=\frac{\det(B_j)}{(\operatorname{tr}B_j)^2}.
+\]
+On the chart \(|\Gamma_G(p)|\ge \tfrac12\|\Gamma_p\|\), write
+\[
+r_p=\frac{\Gamma_{G,2}(p)}{\Gamma_G(p)},
+\qquad
+\lambda_p=\frac{w_p\|\Gamma_p\|^2}{\operatorname{tr}(B_j)},
+\qquad
+\bar r_j=\sum_{p\in C_j}\lambda_p r_p.
+\]
+Then
+\[
+\det(B_j)\asymp (\operatorname{tr}B_j)^2
+\sum_{p\in C_j}\lambda_p|r_p-\bar r_j|^2.
+\]
+So the live bottleneck is exactly
+\[
+V_j:=\sum_{p\in C_j}\lambda_p|r_p-\bar r_j|^2\ge Q^{-A},
+\]
+equivalently
+\[
+\delta_{\mathrm{ext}}\ge Q^{-A}
+\quad\Longleftrightarrow\quad
+\det(B_j)\ge Q^{-A}(\operatorname{tr}B_j)^2.
+\]
+If \(V_j\) collapses, then \(B_j\) is nearly rank one,
+\[
+B_j\approx \operatorname{tr}(B_j)\,u_j u_j^\ast,
+\]
+so the cap is effectively static and must be handed to the \(Y12\) quotient
+module.
+\end{remark}
+
 \begin{remark}[wip-zeta-bridge-proof-extraction]
 \label{rem:wip-zeta-bridge-proof-extraction}
 What remains is the \(2\times2\) covariance test on each frozen cap:
