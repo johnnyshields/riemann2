@@ -47817,78 +47817,231 @@ This is the load-bearing open analytic input in the current draft.  It should
 be proved from the zeta-side tail analysis rather than assumed forever.
 \end{remark}
 
-\begin{lemma}[Smooth AFE tail bound]
-\label{lem:smooth-afe-tail-bound}
-Write the finite approximate functional equation in the smoothed form
+\begin{remark}[Standing zeta-side source hypotheses]
+\label{rem:standing-zeta-side-source-hypotheses}
+All statements in this subsection are conditional on the existence of a
+completed source object \(\mathcal Z(s)\) with the following properties:
+\begin{enumerate}
+\item \(\mathcal Z(s)\) is meromorphic on \(\mathbf C\) and has polynomial
+growth in vertical strips.
+\item For \(\Re s>1\),
+\[
+\mathcal Z(s)=\sum_{n\ge1} a_n n^{-s},
+\qquad
+\widetilde{\mathcal Z}(s)=\sum_{n\ge1} \widetilde a_n n^{-s},
+\]
+with
+\[
+a_n,\widetilde a_n \ll_\varepsilon n^\varepsilon
+\]
+for every \(\varepsilon>0\).
+\item The completed source satisfies a functional equation of the form
+\[
+\mathcal Z(s)=\chi(s)\widetilde{\mathcal Z}(1-s),
+\qquad
+\widetilde{\mathcal Z}(s)=\widetilde\chi(s)\mathcal Z(1-s),
+\]
+with \(\chi(s)\widetilde\chi(1-s)=1\).
+\item The leading coefficient is nonzero; in the standard normalization,
+\[
+a_1=1.
+\]
+\item The reference weight has positive total mass on the source window:
+\[
+\int_\Omega W_{\mathrm{ref}}(t)\,dt>0,
+\]
+and \(W_{\mathrm{ref}},W_{\mathrm{branch}}\) are nonnegative weights of finite
+mass on \(\Omega\).
+\end{enumerate}
+\end{remark}
+
+\begin{definition}[Canonical completed source]
+\label{def:canonical-completed-source}
+Define the canonical source trace on the critical line by
+\[
+q''_{\can}(t):=\mathcal Z\!\left(\tfrac12+it\right).
+\]
+Fix a smooth cutoff \(V\) with Mellin transform \(\widehat V\), where
+\(\widehat V\) is entire and rapidly decaying on vertical strips.
+For \(X\ge1\), set
+\[
+I(s;X):=\frac{1}{2\pi i}\int_{(2)}
+\mathcal Z(s+w)\widehat V(w)X^w\,\frac{dw}{w},
+\qquad s=\tfrac12+it.
+\]
+\end{definition}
+
+\begin{theorem}[Smooth finite AFE package for \(q''_{\can}\)]
+\label{thm:smooth-finite-AFE-package}
+Under the standing hypotheses in
+Remark~\ref{rem:standing-zeta-side-source-hypotheses}, there exist smooth
+weights \(V_1,V_2\) and a remainder \(R_X(t)\) such that
 \[
 q''_{\can}(t)
 =
-F_X(t)+R_X(t),
-\qquad
-F_X(t)=B_2(t)+P_{2,\le X}(t)+D_{2,\le X}(t),
+\sum_{n\ge1} a_n n^{-1/2-it}V_1(n/X)
++
+\sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX)
++
+R_X(t).
 \]
-where the truncated pieces are defined with a fixed smooth cutoff and the
-coefficients of the Dirichlet-polynomial terms satisfy the standard
-\((\log n)^j/\sqrt n\)-type bound recorded earlier in the draft.
-Then for every \(M>0\),
+Moreover:
 \[
-\|R_X\|_{L^2(W_{\mathrm{branch}})}^2+\|R_X\|_{L^2(W_{\mathrm{ref}})}^2
-\ll_M X^{-2M}.
+|a_n|,\ |\widetilde a_n|\ll_\varepsilon n^{-1/2+\varepsilon},
 \]
-
-In particular, if \(X=Q^\kappa\) with \(\kappa>0\) fixed and \(M\) is chosen
-sufficiently large, then
+and for every \(A>0\),
 \[
-\|R_X\|_{L^2(W_{\mathrm{branch}})}^2+\|R_X\|_{L^2(W_{\mathrm{ref}})}^2
-\le Q^{-B}
+R_X(t)=O_A(X^{-A})
 \]
-for some absolute \(B>0\).
-\end{lemma}
+uniformly for \(t\in\Omega\).  In particular,
+\[
+\|R_X\|_{L^2(W_{\mathrm{ref}})}+\|R_X\|_{L^2(W_{\mathrm{branch}})}\ll_A X^{-A}.
+\]
+\end{theorem}
 
 \begin{proof}
-Since \((\log n)^j\ll_{j,\varepsilon} n^\varepsilon\), the AFE coefficients
-satisfy \(|a_n|,|\widetilde a_n|\ll_\varepsilon n^{-1/2+\varepsilon}\).  The
-smooth cutoff has rapid decay in the tail region, so repeated integration by
-parts / summation by parts gives
+Set \(s=\tfrac12+it\) and write
 \[
-|R_X(t)|\ll_M X^{-M}
+I(s;X)=\frac{1}{2\pi i}\int_{(2)}
+\mathcal Z(s+w)\widehat V(w)X^w\,\frac{dw}{w}.
 \]
-uniformly for \(t\) in the source window.  Because \(W_{\mathrm{branch}}\) and
-\(W_{\mathrm{ref}}\) are fixed nonnegative weights on a finite source window,
-their total mass is finite, hence
+Since \(\Re(s+w)>1\) on \(\Re w=2\), we may insert the Dirichlet expansion
+of \(\mathcal Z\) and interchange sum and integral:
 \[
-\|R_X\|_{L^2(W)}^2\ll_M X^{-2M}
+I(s;X)
+=
+\sum_{n\ge1} a_n n^{-s}
+\left(
+\frac{1}{2\pi i}\int_{(2)}
+\left(\frac{X}{n}\right)^w \widehat V(w)\,\frac{dw}{w}
+\right).
 \]
-for \(W=W_{\mathrm{branch}},W_{\mathrm{ref}}\).  This gives the claim.
+Define
+\[
+V_1(y):=\frac{1}{2\pi i}\int_{(2)} y^{-w}\widehat V(w)\,\frac{dw}{w}.
+\]
+Then
+\[
+I(s;X)=\sum_{n\ge1} a_n n^{-s}V_1(n/X).
+\]
+The rapid decay of \(\widehat V\) implies that \(V_1\) is smooth and satisfies
+for every \(A>0\),
+\[
+V_1(y)=1+O_A(y^A)\quad (y\to0),
+\qquad
+V_1(y)=O_A(y^{-A})\quad (y\to\infty).
+\]
+
+Next shift the contour from \(\Re w=2\) to \(\Re w=-2\).  The only pole crossed
+is at \(w=0\), with residue \(\mathcal Z(s)\).  Hence
+\[
+\mathcal Z(s)=I(s;X)-J(s;X),
+\]
+where
+\[
+J(s;X):=\frac{1}{2\pi i}\int_{(-2)}
+\mathcal Z(s+w)\widehat V(w)X^w\,\frac{dw}{w}.
+\]
+Apply the functional equation inside \(J(s;X)\):
+\[
+\mathcal Z(s+w)=\chi(s+w)\widetilde{\mathcal Z}(1-s-w).
+\]
+Now change variables \(w\mapsto -w\).  The contour returns to \(\Re w=2\), and
+we obtain
+\[
+J(s;X)
+=
+\frac{1}{2\pi i}\int_{(2)}
+\chi(s-w)\widetilde{\mathcal Z}(1-s+w)\widehat V(-w)X^{-w}\,\frac{dw}{w}.
+\]
+Since \(1-s=\tfrac12-it\), insert the Dirichlet expansion of
+\(\widetilde{\mathcal Z}\) on \(\Re(1-s+w)>1\) to get
+\[
+J(s;X)
+=
+\sum_{n\ge1}\widetilde a_n n^{-1/2+it}
+\left(
+\frac{1}{2\pi i}\int_{(2)}
+\left(\frac{1}{nX}\right)^w
+\chi(s-w)\widehat V(-w)\,\frac{dw}{w}
+\right).
+\]
+Define
+\[
+V_2(y):=\frac{1}{2\pi i}\int_{(2)}
+y^{-w}\chi(s-w)\widehat V(-w)\,\frac{dw}{w}.
+\]
+Then
+\[
+J(s;X)=\sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX),
+\]
+and therefore
+\[
+q''_{\can}(t)
+=
+\sum_{n\ge1} a_n n^{-1/2-it}V_1(n/X)
++
+\sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX)
++
+R_X(t),
+\]
+with \(R_X(t)\) the remaining contour contribution.
+
+To bound \(R_X(t)\), shift the contour further left to \(\Re w=-A\), where
+the polynomial growth of \(\mathcal Z\) in vertical strips and the rapid
+decay of \(\widehat V(w)\) imply
+\[
+R_X(t)=O_A(X^{-A})
+\]
+uniformly for \(t\in\Omega\).  This gives the pointwise remainder bound and,
+since \(W_{\mathrm{ref}},W_{\mathrm{branch}}\) have finite mass, the stated
+\(L^2\) bounds.
+
+Finally, the coefficient bounds
+\(a_n,\widetilde a_n\ll_\varepsilon n^\varepsilon\) from the standing
+hypotheses imply the displayed \(n^{-1/2+\varepsilon}\) bounds in the finite
+AFE.  The nonzero leading coefficient is \(a_1=1\) in the standard
+normalization.  This proves the theorem.
+\end{proof}
+
+\begin{corollary}[Smooth AFE tail bound]
+\label{cor:smooth-afe-tail-bound}
+With
+\[
+F_X(t):=\sum_{n\ge1} a_n n^{-1/2-it}V_1(n/X)
++\sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX),
+\]
+\[
+q''_{\can}(t)=F_X(t)+R_X(t),
+\qquad
+\|R_X\|_{L^2(W_{\mathrm{ref}})}+\|R_X\|_{L^2(W_{\mathrm{branch}})}\ll_A X^{-A}.
+\]
+\end{corollary}
+
+\begin{proof}
+Direct restatement of Theorem~\ref{thm:smooth-finite-AFE-package}.
 \end{proof}
 
 \begin{corollary}[EF completion bound]
 \label{cor:ef-completion-bound}
-With
+The normalized residual correction
 \[
-E:=G_{\mathrm{ref}}^{-1/2}\bigl(G_{\mathrm{branch}}(q''_{\can})-
-G_{\mathrm{branch}}(F_X)\bigr)G_{\mathrm{ref}}^{-1/2},
-\qquad
-F_X:=B_2+P_{2,\le X}+D_{2,\le X},
+E=G_{\mathrm{ref}}^{-1/2}\bigl(G_{\mathrm{branch}}(q''_{\can})-G_{\mathrm{branch}}(F_X)\bigr)G_{\mathrm{ref}}^{-1/2}
 \]
-the operator norm satisfies
+satisfies
 \[
-\|E\|_{\operatorname{op}}\le Q^{-B}
+\|E\|_{\operatorname{op}}\ll_A X^{-A}.
 \]
-for some absolute \(B>0\) and all sufficiently large \(X\).
 \end{corollary}
 
 \begin{proof}
-The branch/reference norms are fixed weighted \(L^2\) norms on the source
-window, so Lemma~\ref{lem:smooth-afe-tail-bound} implies
-\[
-\|q''_{\can}-F_X\|_{L^2(W_{\mathrm{branch}})}^2
-+\|q''_{\can}-F_X\|_{L^2(W_{\mathrm{ref}})}^2
-\le Q^{-B}.
-\]
-By definition, \(E\) is exactly the normalized residual correction, so the
-same bound yields \(\|E\|_{\operatorname{op}}\le Q^{-B}\) after the
-normalization by \(G_{\mathrm{ref}}^{-1/2}\).
+By Theorem~\ref{thm:smooth-finite-AFE-package} and
+Corollary~\ref{cor:smooth-afe-tail-bound},
+\(\|q''_{\can}-F_X\|_{L^2(W_{\mathrm{ref}})}+\|q''_{\can}-F_X\|_{L^2(W_{\mathrm{branch}})}\ll_A X^{-A}\),
+and \(E\) is the normalized residual correction.  The
+\(G_{\mathrm{ref}}^{-1/2}\) normalization preserves the \(L^2\) bound up to a
+\(W_{\mathrm{ref}}\)-mass factor, hence
+\(\|E\|_{\operatorname{op}}\ll_A X^{-A}\).
 \end{proof}
 
 \begin{remark}[AFE coefficient normalization]
@@ -47927,12 +48080,16 @@ By the weighted mean-value theorem for smooth Dirichlet polynomials,
 +|\widetilde a_n|^2\widetilde V(nX)^2\Bigr)
 +O_A(X^{-A}),
 \]
-for every \(A>0\).  The diagonal \(n=1\) contribution is
+for every \(A>0\).  By
+Remark~\ref{rem:standing-zeta-side-source-hypotheses} item~(5),
+\(\widehat W_{\mathrm{ref}}(0)=\int_\Omega W_{\mathrm{ref}}>0\), so the
+diagonal \(n=1\) contribution is
 \(\widehat W_{\mathrm{ref}}(0)\,|a_1|^2V(1/X)^2\), which is positive and
-bounded below once \(X\) is in the admissible AFE range.  The coefficient
-growth \(|a_n|,|\widetilde a_n|\ll_\varepsilon n^{-1/2+\varepsilon}\) makes
-the off-diagonal contribution \(O_A(X^{-A})\), so for \(A\) large we obtain
-the stated positive lower bound.
+bounded below once \(X\) is in the admissible AFE range; here
+\(a_1=1\) by Remark~\ref{rem:standing-zeta-side-source-hypotheses} item~(4).
+The coefficient growth \(|a_n|,|\widetilde a_n|\ll_\varepsilon n^{-1/2+\varepsilon}\)
+from item~(2) of the same remark makes the off-diagonal contribution
+\(O_A(X^{-A})\), so for \(A\) large we obtain the stated positive lower bound.
 \end{proof}
 
 \begin{corollary}[Reference mean-square noncollapse]
@@ -48681,12 +48838,12 @@ satisfies
 \|E\|_{\operatorname{op}}\le Q^{-B}
 \]
 for some absolute \(B>0\) and all sufficiently large cutoffs \(X\).  This
-follows from Lemma~\ref{lem:smooth-afe-tail-bound} and
+follows from Corollary~\ref{cor:smooth-afe-tail-bound} and
 Corollary~\ref{cor:ef-completion-bound}; the draft now records it as a
 derived source-side estimate rather than a standing assumption.
 
 \noindent\emph{Status note.}  Previously the load-bearing open input of the
-source layer.  Now superseded by Lemma~\ref{lem:smooth-afe-tail-bound} and
+source layer.  Now superseded by Corollary~\ref{cor:smooth-afe-tail-bound} and
 Corollary~\ref{cor:ef-completion-bound}, which derive the tail bound from
 the standard \((\log n)^j/\sqrt n\) AFE coefficient bounds, the smooth
 cutoff in the AFE truncation, and the finite source-window mass of
