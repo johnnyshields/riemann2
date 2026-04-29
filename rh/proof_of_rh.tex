@@ -39548,44 +39548,243 @@ Q^{-C_M}
 \]
 \end{definition}
 
+\begin{lemma}[Quadratic escape from the source wall]
+\label{lem:quadratic-escape-source-wall}
+Let \(I\) be a normalized packet interval and let
+\(\mathcal D\) denote the normalized derivative.  Let \(q,u\) be complex-valued
+\(C^1\) functions on \(I\) satisfying
+\[
+        \mathcal D^2 q=u
+\]
+in the weak, hence classical, sense on the packet.  Assume
+\[
+        |u(m_0)|\ge \tau,
+        \qquad
+        |\mathcal D u|\le M
+\]
+on the buffered subinterval containing \(m_0\).  Let
+\(0<\varepsilon<1\), and suppose
+\[
+        |q(m_0)|<\varepsilon .
+\]
+If
+\[
+        r_\varepsilon:=4\sqrt{\varepsilon/\tau}
+        \le \min\{\operatorname{dist}(m_0,\partial I),\tau/(8M)\},
+\]
+then there is a point \(m_1\in I\), with
+\(|m_1-m_0|\le r_\varepsilon\) in normalized distance, such that
+\[
+        |q(m_1)|\ge \varepsilon,
+        \qquad
+        |u(m_1)|\ge \tau/2 .
+\]
+If, in addition, a vector field \(\Gamma\) satisfies
+\[
+        |\Gamma(m_0)|\ge \gamma,
+        \qquad
+        |\mathcal D\Gamma|\le M_\Gamma,
+        \qquad
+        r_\varepsilon\le \gamma/(2M_\Gamma),
+\]
+then
+\[
+        |\Gamma(m_1)|\ge \gamma/2 .
+\]
+\end{lemma}
+
+\begin{proof}
+Set
+\(e:=\overline{u(m_0)}/|u(m_0)|\) and \(Q_e(m):=\Re(e q(m))\).  Then
+\(\mathcal D^2Q_e(m_0)=|u(m_0)|\ge \tau\).  For \(|m-m_0|\le \tau/(8M)\), the
+bound on \(\mathcal D u\) gives \(\mathcal D^2Q_e(m)\ge \tau/2\).  Choose one
+of the two signs \(\sigma\in\{\pm1\}\) so that
+\(\sigma\mathcal DQ_e(m_0)\ge0\), and put
+\(m_1=m_0+\sigma r_\varepsilon\).  Taylor's formula in the normalized
+coordinate gives
+\[
+        Q_e(m_1)\ge Q_e(m_0)+\frac{\tau}{4}r_\varepsilon^2
+        \ge -\varepsilon+4\varepsilon\ge \varepsilon ,
+\]
+so \(|q(m_1)|\ge|Q_e(m_1)|\ge\varepsilon\).  The Lipschitz bound on \(u\) and
+the size condition on \(r_\varepsilon\) give
+\(|u(m_1)|\ge|u(m_0)|-Mr_\varepsilon\ge\tau/2\).  The estimate for \(\Gamma\)
+is identical.
+\end{proof}
+
 \begin{theorem}[Actual-source D4 amplitude nonflatness]
 \label{thm:actual-source-D4-amplitude-nonflatness}
-\emph{Status: FINITE AUDIT.}  This is the upstream source-side input that
-discharges the amplitude-mass hypothesis used downstream by
-Theorem~\ref{thm:D4-amplitude-survival-from-coefficient-good-core},
-Theorem~\ref{thm:amplitude-mass-from-source-nonflatness-core-transfer},
-and
-Corollary~\ref{cor:fully-unconditional-cap-Y12-after-source-amplitude-supply}.
-On every routed block \(I\) that enters the \(D4/Y12\) cap bridge, the
-scalar \(D4\) amplitude \(H\) satisfies the source-amplitude nonflatness
-estimate
+Let \(I\) be a routed ordinary real-canonical block, with normalized measure
+\(d\nu=w_\nu(m)\,dm\) satisfying the packet regularity bounds
 \[
-\int_I |H(t)|^2\,d\nu(t)\ge Q^{-C_H}\nu(I),
-\qquad
-\|H\|_{L^\infty(I)}\le Q^{C_H}.
+        Q^{-C_\nu}\le w_\nu(m)\le Q^{C_\nu}
+        \qquad (m\in I).
 \]
-Moreover, the associated coefficient-good core
+Put
 \[
-E_I^{\mathrm{core}}:=\{t\in I:|H(t)|\ge Q^{-C_*}\}
+        q=q_\zeta,
+        \qquad
+        u=q''_{\can}=\mathcal D^2q,
+        \qquad
+        H=yq''_{\can}.
 \]
-is selected before wall extraction and satisfies the vector-Remez /
-core-transfer estimate
+Assume the Gate--1 source-curvature lower bound
 \[
-\sum_{p\in C_j\cap E_I^{\mathrm{core}}}\mu_p\|\Gamma_p\|^2
-\ge
-Q^{-C_R}
-\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2
+        \int_I |u(m)|^2\,d\nu(m)\ge Q^{-A_1}\nu(I).
 \]
-for every frozen good cap \(C_j\subset I\).  Per
-Proposition~\ref{prop:source-amplitude-nonflatness-necessary}, this input
-is not implied by the rank-two quotient Schur gap, dead-column split, or
-extraction covariance: the local row algebra admits a source-collapse
-configuration with live anisotropy
-\((\Gamma_G,\Gamma_{G,2})=(4,0)\) and \(H=0\).  Until this theorem is
-proved by the actual-source construction (or replaced by a source-robust
-row not divisible by \(H\), or a separate branch handling the source-flat
-regime), the four-item cap/\(Y12\) package remains finite-audit.
+Assume the source local-complexity bounds
+\[
+        |u|+|\mathcal D u|\le Q^{C_u},
+        \qquad
+        |\mathcal D H|\le Q^{C_H}
+\]
+on the buffered block.  Assume also the gauge-locked D4 source-factor identity
+with residual
+\[
+        H(m)=-\frac{q(m)\,u(m)^3}{288}+R_H(m),
+\]
+and suppose that, whenever
+\(|q(m)|\ge Q^{-B_q}\) and \(|u(m)|\ge Q^{-B_u}\), one has the relative
+residual estimate
+\[
+        |R_H(m)|\le \frac1{576}|q(m)|\,|u(m)|^3 .
+\]
+Then there is an exponent \(A_H\), depending only on the displayed polynomial
+exponents, such that
+\[
+        \int_I |H(m)|^2\,d\nu(m)
+        \ge Q^{-A_H}\nu(I).
+\]
+More precisely, there exists a subinterval \(J_H\subset I\), of normalized
+length at least \(Q^{-A_H}\), on which \(|H(m)|\ge Q^{-A_H}\).
 \end{theorem}
+
+\begin{proof}
+Normalize \(\nu(I)\asymp1\); the general case follows by scaling using the
+bounds on \(w_\nu\).  From the Gate--1 lower bound and \(|u|\le Q^{C_u}\),
+there is a point \(m_0\in I\), after discarding the standard polynomially
+small buffer, such that \(|u(m_0)|\ge \tau:=Q^{-B_u}\) for some \(B_u\)
+depending only on \(A_1,C_u,C_\nu\).  Fix \(\varepsilon:=Q^{-B_q}\) with
+\(B_q\) large enough that
+\[
+        4\sqrt{\varepsilon/\tau}
+        \le \min\{\operatorname{dist}(m_0,\partial I),\tau/(8Q^{C_u})\}
+\]
+after the usual buffered-packet selection.  If \(|q(m_0)|\ge\varepsilon\),
+set \(m_1=m_0\); otherwise apply
+Lemma~\ref{lem:quadratic-escape-source-wall} with \(M=Q^{C_u}\).  In both
+cases we obtain a point \(m_1\in I\) with
+\(|q(m_1)|\ge\varepsilon\) and \(|u(m_1)|\ge\tau/2\).
+The residual hypothesis gives
+\[
+        |H(m_1)|
+        \ge\tfrac1{576}|q(m_1)|\,|u(m_1)|^3
+        \ge Q^{-B_*}
+\]
+for some polynomial exponent \(B_*\).  Since \(|\mathcal D H|\le Q^{C_H}\),
+the same lower bound persists, with one further polynomial loss, on a
+normalized subinterval \(J_H\subset I\) of length
+\(|J_H|\ge Q^{-(B_*+C_H+O(1))}\), so that
+\(|H(m)|\ge\tfrac12 Q^{-B_*}\) on \(J_H\).  Using the lower bound on
+\(w_\nu\),
+\[
+        \int_I|H|^2\,d\nu
+        \ge \int_{J_H}|H|^2\,d\nu
+        \ge Q^{-A_H}\nu(I)
+\]
+for a suitable \(A_H\).
+\end{proof}
+
+\begin{theorem}[Source-weighted D4 amplitude nonflatness]
+\label{thm:source-weighted-D4-amplitude-nonflatness}
+In addition to the hypotheses of
+Theorem~\ref{thm:actual-source-D4-amplitude-nonflatness}, let
+\(\Gamma=(\Gamma_G,\Gamma_{G,2})\), \(W_2:=\|\Gamma\|^2\), and assume the
+Gate--2 source--anisotropy mass bound
+\[
+        \int_I|u|^2W_2\,d\nu\ge Q^{-A_2}\nu(I),
+\]
+together with the local-complexity bounds
+\(W_2\le Q^{C_\Gamma}\), \(|\mathcal D\Gamma|\le Q^{C_\Gamma}\),
+\(|\mathcal D(H\Gamma)|\le Q^{C_{H\Gamma}}\).  Then there is an exponent
+\(A_{H\Gamma}\) such that
+\[
+        \int_I|H|^2W_2\,d\nu\ge Q^{-A_{H\Gamma}}\nu(I).
+\]
+Consequently, since \(W_2\le Q^{C_\Gamma}\),
+\[
+        \int_I|H|^2W_2\,d\nu
+        \ge Q^{-A_{H\Gamma}-C_\Gamma}\int_IW_2\,d\nu .
+\]
+\end{theorem}
+
+\begin{proof}
+Let \(G:=|u|^2W_2\).  The Gate--2 lower bound and the polynomial upper bounds
+imply that, after the standard buffered-packet reduction, there is a point
+\(m_0\in I\) with \(|u(m_0)|\ge\tau\) and \(|\Gamma(m_0)|\ge\gamma\), where
+\(\tau,\gamma\ge Q^{-B}\) for some polynomial exponent \(B\); indeed, if either
+\(|u|<\tau\) or \(|\Gamma|<\gamma\) on the mass-carrying part, then \(G\) would
+have integral smaller than the Gate--2 lower bound for sufficiently large
+\(B\).  Choose \(\varepsilon=Q^{-B_q}\) so that the escape radius of
+Lemma~\ref{lem:quadratic-escape-source-wall} is contained in the packet
+buffer and also satisfies \(4\sqrt{\varepsilon/\tau}\le\gamma/(2Q^{C_\Gamma})\).
+If \(|q(m_0)|\ge\varepsilon\), put \(m_1=m_0\); otherwise the quadratic
+escape lemma gives \(m_1\) with \(|q(m_1)|\ge\varepsilon\),
+\(|u(m_1)|\ge\tau/2\), \(|\Gamma(m_1)|\ge\gamma/2\).  The residual estimate
+for \(H\) gives \(|H(m_1)|\,|\Gamma(m_1)|\ge Q^{-B'}\); the derivative bound
+for \(H\Gamma\) thickens this to a subinterval \(J_{H\Gamma}\subset I\) of
+polynomial normalized length on which \(|H\Gamma|\ge Q^{-B''}\).
+Integrating over \(J_{H\Gamma}\) using the density bounds,
+\(\int_I|H|^2W_2\,d\nu=\int_I|H\Gamma|^2\,d\nu\ge Q^{-A_{H\Gamma}}\nu(I)\).
+The final comparison with \(\int_IW_2\,d\nu\) follows from
+\(W_2\le Q^{C_\Gamma}\).
+\end{proof}
+
+\begin{corollary}[Discrete cap D4 amplitude survival]
+\label{cor:discrete-cap-D4-amplitude-survival-from-actual-source}
+Let \(C_j\) be a frozen cap inside a routed block \(I\).  Suppose the packet
+quadrature and cap-transfer estimates compare the discrete cap measure with
+\(d\nu\) for the two functions \(W_2\) and \(|H|^2W_2\), with only polynomial
+loss.  Then
+\[
+        \sum_{p\in C_j}\mu_p|H_p|^2\|\Gamma_p\|^2
+        \ge
+        Q^{-A}
+        \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2 .
+\]
+Thus Hypothesis~\ref{hyp:D4-amplitude-survival-cap-core} is discharged on
+the ordinary real-canonical blocks for which Gate--1, Gate--2, gauge-locking,
+D4 residual control, and packet quadrature/core-transfer have already been
+proved.
+\end{corollary}
+
+\begin{proof}
+Apply Theorem~\ref{thm:source-weighted-D4-amplitude-nonflatness} on the
+routed block and transfer the continuous inequalities to the packet cap
+using the stated quadrature/core-transfer estimates.  The polynomial losses
+are absorbed into the exponent \(A\).
+\end{proof}
+
+\begin{remark}[What this theorem does and does not prove]
+\label{rem:actual-source-D4-amplitude-nonflatness-scope}
+Theorem~\ref{thm:actual-source-D4-amplitude-nonflatness} is not a substitute
+for Gate--1.  Its first hypothesis is precisely source-curvature observability
+for the actual canonical object \(q''_{\can}\).  Without that hypothesis the
+statement is false in the local model: one may have \(q''_{\can}\approx0\)
+and therefore \(H=yq''_{\can}\approx0\) while the anisotropy vector remains
+live (Proposition~\ref{prop:source-amplitude-nonflatness-necessary}).  The
+theorem proves the downstream implication
+\[
+        \mathrm{Gate\text{--}1}
+        +\mathrm{Gate\text{--}2}
+        +\text{gauge-locked D4 residual control}
+        \Longrightarrow
+        \text{D4 amplitude survival},
+\]
+so the D4 amplitude item is no longer an independent cap-side finite-audit
+hypothesis once the upstream actual-source Gate--1 theorem and the
+already-stated Gate--2 rigidity theorem are available.
+\end{remark}
 
 \begin{theorem}[D4 amplitude survival from a coefficient-good cap core]
 \label{thm:D4-amplitude-survival-from-coefficient-good-core}
