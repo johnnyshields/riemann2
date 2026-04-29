@@ -39076,6 +39076,290 @@ genuinely independent: a configuration with strongly varying
 amplitude mass.
 \end{remark}
 
+\begin{definition}[Certified live-row quotient]
+\label{def:certified-live-row-quotient}
+Let \(\mathcal H_p^Y\) be the finite-dimensional \(Y12\)-boundary output
+space and let
+\[
+E_p:=\begin{bmatrix}C_{7,p}^{\mathrm{tar}}&C_{Y,p}^{\mathrm{tar}}\end{bmatrix}:
+\mathbb C^2\to\mathcal H_p^Y.
+\]
+A \emph{certified live-row quotient} consists of two rows collected as a map
+\[
+L_p^{\mathrm{live}}:\mathcal H_p^Y\to\mathbb C^2
+\]
+such that
+\[
+L_p^{\mathrm{live}}E_p=I_2,
+\qquad
+\|L_p^{\mathrm{live}}\|_{\mathrm{op}}\le Q^C .
+\]
+Given a raw nuisance list \(\{A_{a,p}^{\mathrm{raw}}\}_{a\in\mathcal A}\), define
+its live coefficient and dead part by
+\[
+m_{a,p}:=L_p^{\mathrm{live}}A_{a,p}^{\mathrm{raw}}\in\mathbb C^2,
+\qquad
+A_{a,p}^{\mathrm{dead}}:=A_{a,p}^{\mathrm{raw}}-E_p m_{a,p}.
+\]
+The certified dead nuisance space is
+\[
+\mathcal K_{p,\mathrm{dead}}^{Y,\mathrm{cert}}:=
+\operatorname{span}\{A_{a,p}^{\mathrm{dead}}:a\in\mathcal A\}
+       +\mathcal K_{p,0}^{Y,\mathrm{dead}},
+\]
+where \(\mathcal K_{p,0}^{Y,\mathrm{dead}}\subset\ker L_p^{\mathrm{live}}\) is the
+base source-linear/dead quotient space.  The quotient projector is
+\[
+q_{p,\mathrm{cert}}^Y:=I-P_{\mathcal K_{p,\mathrm{dead}}^{Y,\mathrm{cert}}}^{\mathrm{bd}}.
+\]
+The discarded live matrix is
+\[
+M_{\mathrm{live},p}:=\begin{bmatrix}m_{a,p}:a\in\mathcal A\end{bmatrix}.
+\]
+All live coefficients are retained and routed into the effective carrier; no
+unsplit column with nonzero \(m_{a,p}\) is placed in the dead quotient.
+\end{definition}
+
+\begin{theorem}[Certified quotient gives rank-two survival]
+\label{thm:certified-quotient-gives-rank-two-survival}
+For a certified live-row quotient in the sense of
+Definition~\ref{def:certified-live-row-quotient},
+\[
+\sigma_{\min}(q_{p,\mathrm{cert}}^YE_p)\ge Q^{-C'} .
+\]
+Moreover every certified dead nuisance column is killed by the live rows:
+\[
+L_p^{\mathrm{live}}A_{a,p}^{\mathrm{dead}}=0,
+\]
+and therefore no live \(C_7/Y12\) torsion relation is introduced by forming
+\(\mathcal K_{p,\mathrm{dead}}^{Y,\mathrm{cert}}\).
+\end{theorem}
+
+\begin{proof}
+By construction,
+\[
+L_p^{\mathrm{live}}A_{a,p}^{\mathrm{dead}}=L_p^{\mathrm{live}}A_{a,p}^{\mathrm{raw}}
+       -L_p^{\mathrm{live}}E_p m_{a,p}=m_{a,p}-m_{a,p}=0,
+\]
+and \(L_p^{\mathrm{live}}\mathcal K_{p,0}^{Y,\mathrm{dead}}=0\).  Hence
+\(L_p^{\mathrm{live}}\mathcal K_{p,\mathrm{dead}}^{Y,\mathrm{cert}}=0\).  For every
+\(v\in\mathbb C^2\),
+\[
+v=L_p^{\mathrm{live}}E_pv=L_p^{\mathrm{live}}q_{p,\mathrm{cert}}^YE_pv,
+\]
+because the difference \(E_pv-q_{p,\mathrm{cert}}^YE_pv\) lies in
+\(\mathcal K_{p,\mathrm{dead}}^{Y,\mathrm{cert}}\), which is annihilated by
+\(L_p^{\mathrm{live}}\).  Thus
+\[
+\|v\|\le \|L_p^{\mathrm{live}}\|_{\mathrm{op}}\,
+        \|q_{p,\mathrm{cert}}^YE_pv\|
+      \le Q^C\|q_{p,\mathrm{cert}}^YE_pv\|.
+\]
+Taking the infimum over unit \(v\) gives the asserted singular-value lower
+bound.
+\end{proof}
+
+\begin{remark}[Edit to the quotient-descent statement]
+\label{rem:edit-quotient-descent-dead-only}
+Replace the old descent statement
+\[
+U_p\subseteq\ker(q_p^Y\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing}}P_{\mathrm{tr}})
+\]
+by the dead-only statement
+\[
+U_{p}^{\mathrm{dead}}\subseteq
+\ker(q_{p,\mathrm{cert}}^Y\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing}}P_{\mathrm{tr}}),
+\]
+where each raw column of \(U_p\) has first been split as
+\[
+A_{a,p}^{\mathrm{raw}}=A_{a,p}^{\mathrm{dead}}+E_p m_{a,p}.
+\]
+The live summand \(E_p m_{a,p}\) is not nuisance; it is retained and absorbed
+into the effective two-row carrier matrix.  In particular a nonzero
+\(c_{\mathrm{arith},Y}\) is no longer allowed to be quotient-killed.  It must either
+vanish by a coefficient theorem or be routed into the live matrix.
+\end{remark}
+
+\begin{definition}[Effective live carrier matrix after dead split]
+\label{def:effective-live-carrier-matrix-after-split}
+Let \(L_{\mathrm{clean},p}\) be the row-normal D4 matrix before raw nuisance
+splitting.  The live coefficients removed from the raw nuisance list contribute
+a finite matrix \(M_{\mathrm{live},p}\) to the same retained \(C_7/Y12\)
+carrier plane.  Define
+\[
+L_{\mathrm{eff},p}:=L_{\mathrm{clean},p}+M_{\mathrm{live},p}.
+\]
+The row-normal D4 carrier condition is imposed on \(L_{\mathrm{eff},p}\):
+\[
+\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-C}.
+\]
+After elementary row operations in \(\mathbb C^2\), this is equivalent to the
+triangular form
+\[
+L_{\mathrm{eff},p}\sim
+\begin{pmatrix}
+ c_{7,p}^{\mathrm{eff}}&0\\
+ \beta_{9,p}^{\mathrm{eff}}&\alpha_{9,p}^{\mathrm{eff}}
+\end{pmatrix},
+\qquad |c_{7,p}^{\mathrm{eff}}\alpha_{9,p}^{\mathrm{eff}}|\ge Q^{-C'}.
+\]
+\end{definition}
+
+\begin{proposition}[Cap lower bound from the certified quotient and effective carrier]
+\label{prop:cap-lower-bound-certified-effective-carrier}
+Assume the certified quotient of
+Definition~\ref{def:certified-live-row-quotient}, the effective carrier
+coercivity \(\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-C}\), and the expansion
+\[
+\Phi_p^Y\Gamma_p
+=H_pE_pL_{\mathrm{eff},p}\Gamma_p+\varepsilon_p,
+\qquad
+\sum_{p\in C_j}\mu_p\|q_{p,\mathrm{cert}}^Y\varepsilon_p\|^2
+\le Q^{-B}\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2 .
+\]
+If the amplitude mass estimate
+\[
+\sum_{p\in C_j}\mu_p|H_p|^2\|\Gamma_p\|^2
+\ge Q^{-A}\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2
+\]
+holds, then
+\[
+\sum_{p\in C_j}\mu_p\|q_{p,\mathrm{cert}}^Y\Phi_p^Y\Gamma_p\|^2
+\ge Q^{-A'}\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2 .
+\]
+\end{proposition}
+
+\begin{proof}
+By Theorem~\ref{thm:certified-quotient-gives-rank-two-survival},
+\(\sigma_{\min}(q_{p,\mathrm{cert}}^YE_p)\ge Q^{-C_1}\).  Hence
+\[
+\|q_{p,\mathrm{cert}}^YE_pL_{\mathrm{eff},p}\Gamma_p\|
+\ge Q^{-C_1}Q^{-C}\|\Gamma_p\|.
+\]
+The inequality \(\|x+y\|^2\ge \frac12\|x\|^2-\|y\|^2\) gives
+\[
+\|q_{p,\mathrm{cert}}^Y\Phi_p^Y\Gamma_p\|^2
+\ge \frac12Q^{-2C_1-2C}|H_p|^2\|\Gamma_p\|^2
+       -\|q_{p,\mathrm{cert}}^Y\varepsilon_p\|^2.
+\]
+Summing with weights \(\mu_p\), applying amplitude mass, and choosing
+\(B\) larger than the accumulated polynomial losses proves the claim.
+\end{proof}
+
+\begin{theorem}[Amplitude mass from source-amplitude nonflatness and core transfer]
+\label{thm:amplitude-mass-from-source-nonflatness-core-transfer}
+Let \(I\) be a routed block and suppose the scalar D4 amplitude \(H\) belongs
+to a finite atlas \(\mathcal A_H(I)\) with polynomial Bernstein/Riesz bounds.
+Assume the source-amplitude nonflatness estimate
+\[
+\int_I |H|^2\,d\nu\ge Q^{-C_H}\nu(I),
+\qquad
+\|H\|_{L^\infty(I)}\le Q^{C_H},
+\]
+and the predetermined-core transfer estimate: for every set
+\(E\subset I\) selected before wall extraction with \(\nu(E)\ge Q^{-C_E}\nu(I)\),
+\[
+\sum_{p\in C_j\cap E}\mu_p\|\Gamma_p\|^2
+\ge Q^{-C_R}
+\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2 .
+\]
+Then there exists a predetermined coefficient-good core
+\[
+E_I^{\mathrm{core}}:=\{t\in I: |H(t)|\ge Q^{-C_*}\}
+\]
+with \(\nu(E_I^{\mathrm{core}})\ge Q^{-C_E}\nu(I)\), and on every frozen cap
+\(C_j\subset I\),
+\[
+\sum_{p\in C_j}\mu_p|H_p|^2\|\Gamma_p\|^2
+\ge Q^{-A_*}
+\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2 .
+\]
+\end{theorem}
+
+\begin{proof}
+Choose \(C_*\) much larger than \(C_H\).  If
+\(E_I^{\mathrm{core}}=\{|H|\ge Q^{-C_*}\}\) had measure smaller than
+\(Q^{-C_E}\nu(I)\), then
+\[
+\int_I |H|^2 d\nu
+\le Q^{-2C_*}\nu(I)+Q^{2C_H}Q^{-C_E}\nu(I).
+\]
+Taking \(C_*,C_E\) sufficiently large relative to \(C_H\) contradicts
+\(\int_I|H|^2 d\nu\ge Q^{-C_H}\nu(I)\).  Thus the core has polynomial measure
+and is selected using only \(H\).  On the core, \(|H|^2\ge Q^{-2C_*}\).  The
+core-transfer estimate gives
+\[
+\sum_{p\in C_j}\mu_p|H_p|^2\|\Gamma_p\|^2
+\ge Q^{-2C_*}
+\sum_{p\in C_j\cap E_I^{\mathrm{core}}}\mu_p\|\Gamma_p\|^2
+\ge Q^{-2C_*-C_R}
+\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2.
+\]
+\end{proof}
+
+\begin{proposition}[Why source-amplitude nonflatness is necessary]
+\label{prop:source-amplitude-nonflatness-necessary}
+The amplitude mass estimate in
+Theorem~\ref{thm:amplitude-mass-from-source-nonflatness-core-transfer} is not
+a consequence of the rank-two quotient Schur gap, of the dead-column split, or
+of extraction covariance.  In the local row algebra one may have
+\[
+q_0=2,
+\qquad q''_{\can}=0,
+\qquad (q_\zeta)^{(4)}=0,
+\]
+so that
+\[
+\Gamma_G=q''_{\can}-6q_0+2q_0^3=4,
+\qquad
+\Gamma_{G,2}=(1-q_0^2)q''_{\can}-\frac16(q_\zeta)^{(4)}=0,
+\]
+while
+\[
+H=yq''_{\can}\sim -\frac{q_0(q''_{\can})^3}{288}=0.
+\]
+Thus the live anisotropy vector is nonzero but the D4 amplitude vanishes.  A
+polynomially small perturbation with \(|q''_{\can}|\le Q^{-C}\) keeps
+\(\max\{|\Gamma_G|,|\Gamma_{G,2}|\}\asymp1\) while making
+\(|H|\max\{|\Gamma_G|,|\Gamma_{G,2}|\}\ll Q^{-3C}\).  Therefore an
+unconditional proof must supply source-amplitude nonflatness, a source-robust
+row not divisible by \(H\), or a separate branch that handles this source-flat
+regime.
+\end{proposition}
+
+\begin{corollary}[Fully unconditional cap/\(Y12\) bridge after source-amplitude supply]
+\label{cor:fully-unconditional-cap-Y12-after-source-amplitude-supply}
+Assume the quotient is replaced by the certified dead-only quotient of
+Definition~\ref{def:certified-live-row-quotient}; assume the effective D4
+carrier matrix satisfies \(\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-C}\); and assume
+source-amplitude nonflatness plus predetermined-core transfer as in
+Theorem~\ref{thm:amplitude-mass-from-source-nonflatness-core-transfer}.  Then
+the four-item package
+\[
+\text{dead-column split}
++\text{bounded dual rows}
++\text{analytic live-pair Schur gap}
++D4\text{ amplitude survival}
+\]
+is fully proved, and the cap/\(Y12\) lower bound
+\[
+\sum_{p\in C_j}\mu_p\|q_{p,\mathrm{cert}}^Y\Phi_p^Y\Gamma_p\|^2
+\ge Q^{-A}
+\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2
+\]
+holds on every selected good cap.
+\end{corollary}
+
+\begin{proof}
+The certified quotient proves the dead-column split and the rank-two Schur gap
+by Theorem~\ref{thm:certified-quotient-gives-rank-two-survival}; bounded dual
+rows are part of the certificate and are equivalent to the Schur gap by
+Theorem~\ref{thm:rank-two-quotient-primal-dual-schur-equivalence}.  The source
+nonflatness/core-transfer theorem gives D4 amplitude survival.  Proposition
+\ref{prop:cap-lower-bound-certified-effective-carrier} then gives the cap/\(Y12\)
+lower bound.
+\end{proof}
+
 \begin{corollary}[Cap transversality in live \(C_7/Y12\) coordinates]
 \label{cor:cap-transversality-live-C7-Y12-coordinates}
 \emph{Status: FINITE AUDIT.  This is the corrected cap bridge in live
@@ -39263,6 +39547,45 @@ Q^{-C_M}
 \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2.
 \]
 \end{definition}
+
+\begin{theorem}[Actual-source D4 amplitude nonflatness]
+\label{thm:actual-source-D4-amplitude-nonflatness}
+\emph{Status: FINITE AUDIT.}  This is the upstream source-side input that
+discharges the amplitude-mass hypothesis used downstream by
+Theorem~\ref{thm:D4-amplitude-survival-from-coefficient-good-core},
+Theorem~\ref{thm:amplitude-mass-from-source-nonflatness-core-transfer},
+and
+Corollary~\ref{cor:fully-unconditional-cap-Y12-after-source-amplitude-supply}.
+On every routed block \(I\) that enters the \(D4/Y12\) cap bridge, the
+scalar \(D4\) amplitude \(H\) satisfies the source-amplitude nonflatness
+estimate
+\[
+\int_I |H(t)|^2\,d\nu(t)\ge Q^{-C_H}\nu(I),
+\qquad
+\|H\|_{L^\infty(I)}\le Q^{C_H}.
+\]
+Moreover, the associated coefficient-good core
+\[
+E_I^{\mathrm{core}}:=\{t\in I:|H(t)|\ge Q^{-C_*}\}
+\]
+is selected before wall extraction and satisfies the vector-Remez /
+core-transfer estimate
+\[
+\sum_{p\in C_j\cap E_I^{\mathrm{core}}}\mu_p\|\Gamma_p\|^2
+\ge
+Q^{-C_R}
+\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2
+\]
+for every frozen good cap \(C_j\subset I\).  Per
+Proposition~\ref{prop:source-amplitude-nonflatness-necessary}, this input
+is not implied by the rank-two quotient Schur gap, dead-column split, or
+extraction covariance: the local row algebra admits a source-collapse
+configuration with live anisotropy
+\((\Gamma_G,\Gamma_{G,2})=(4,0)\) and \(H=0\).  Until this theorem is
+proved by the actual-source construction (or replaced by a source-robust
+row not divisible by \(H\), or a separate branch handling the source-flat
+regime), the four-item cap/\(Y12\) package remains finite-audit.
+\end{theorem}
 
 \begin{theorem}[D4 amplitude survival from a coefficient-good cap core]
 \label{thm:D4-amplitude-survival-from-coefficient-good-core}
