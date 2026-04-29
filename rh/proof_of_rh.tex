@@ -37302,8 +37302,247 @@ then \(\mathfrak T_p\) is coercive on \(\mathcal R_X\) up to the tail norm, and 
 \(Y12\) discarded observable survives on a polynomial-weight good set.
 \end{lemma}
 
+\begin{definition}[Transition--singular low-block determinant]
+\label{def:transition-singular-low-block-determinant}
+Let
+\[
+  V_p:=\mathcal R_{X,\mathrm{low},p},
+  \qquad
+  A_p:=T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}\big|_{V_p},
+  \qquad
+  \Pi_p^\perp:=I-P_{\mathrm{sing},p}.
+\]
+Let \(\{e_{1,p},\ldots,e_{r,p}\}\) be a basis of \(V_p\), and set
+\[
+  C_p:=\bigl[A_pe_{1,p}\ \cdots\ A_pe_{r,p}\bigr]
+  \subset H_{\mathrm{sing},p},
+  \qquad
+  D_p:=\Pi_p^\perp C_p .
+\]
+Let \(B_p=(\langle e_{i,p},e_{j,p}\rangle_{V_p})_{i,j}\) be the low-block
+basis Gram matrix.  The coordinate-free coercivity constant is
+\[
+  \delta_{\mathrm{coerc},p}
+  :=
+  \inf_{0\ne v\in V_p}
+  \frac{\|\Pi_p^\perp A_pv\|_{H_{\mathrm{sing},p}}}{\|v\|_{V_p}} .
+\]
+Equivalently,
+\[
+  \delta_{\mathrm{coerc},p}^{2}
+  =
+  \lambda_{\min}\!\bigl(B_p^{-1/2}D_p^\ast D_pB_p^{-1/2}\bigr).
+\]
+In particular, if the low basis is retained-metric orthonormal, then
+\(\delta_{\mathrm{coerc},p}^{2}=\lambda_{\min}(D_p^\ast D_p)\).
+\end{definition}
+
+\begin{lemma}[Schur formula for the discarded Gram matrix]
+\label{lem:transition-singular-schur-formula}
+Let \(R_p=[r_{1,p}\ \cdots\ r_{s,p}]\) be any full-rank basis matrix for the
+retained singular space \(R_{\mathrm{sing},p}\subset H_{\mathrm{sing},p}\).
+Let \(M_p\) be the Gram matrix of the ambient singular inner product in the
+chosen finite coordinates.  Then
+\[
+  D_p^\ast D_p
+  =
+  C_p^\ast M_pC_p
+  -
+  C_p^\ast M_pR_p(R_p^\ast M_pR_p)^{-1}R_p^\ast M_pC_p .
+\]
+Equivalently, \(D_p^\ast D_p\) is the Schur complement of
+\(R_p^\ast M_pR_p\) in the bordered Gram matrix
+\[
+  \mathcal G_p:=
+  \begin{pmatrix}
+    R_p^\ast M_pR_p & R_p^\ast M_pC_p\\
+    C_p^\ast M_pR_p & C_p^\ast M_pC_p
+  \end{pmatrix}.
+\]
+Consequently, when the low block has dimension \(r\),
+\[
+  \det(D_p^\ast D_p)
+  =
+  \frac{\det \mathcal G_p}{\det(R_p^\ast M_pR_p)}.
+\]
+Thus \(\sigma_{\min}(D_p)\ge Q^{-C}\) is equivalent, up to the already
+required polynomial upper conditioning of \(B_p\), \(M_p\), \(C_p\), and
+\(R_p\), to the finite Schur determinant lower bound
+\(\det \mathcal G_p\ge Q^{-C}\det(R_p^\ast M_pR_p)\) together with the
+polynomial upper bound for \(D_p^\ast D_p\).
+\end{lemma}
+
+\begin{proof}
+The orthogonal projection onto \(R_{\mathrm{sing},p}\) is
+\(P_{\mathrm{sing},p}=R_p(R_p^\ast M_pR_p)^{-1}R_p^\ast M_p\).  Therefore
+\(D_p^\ast D_p=C_p^\ast M_p(I-P_{\mathrm{sing},p})C_p\), and the displayed
+formula follows.  The bordered determinant identity is the standard
+Schur-complement formula.  In fixed finite dimension and under polynomial
+upper conditioning, a polynomial determinant lower bound is equivalent to a
+polynomial lower bound for the smallest eigenvalue.
+\end{proof}
+
+\begin{definition}[Two-carrier transition--singular determinant]
+\label{def:two-carrier-transition-singular-determinant}
+On the live carrier plane set
+\[
+  c_{7,p}:=T_{\mathrm{tr}\to\mathrm{sing},p}[\mathsf C_7]^{\mathrm{tr}},
+  \qquad
+  c_{Y,p}:=T_{\mathrm{tr}\to\mathrm{sing},p}[\mathsf C_{Y12}]^{\mathrm{tr}},
+\]
+and
+\[
+  c_{7,p}^\perp:=\Pi_p^\perp c_{7,p},
+  \qquad
+  c_{Y,p}^\perp:=\Pi_p^\perp c_{Y,p}.
+\]
+Define
+\[
+  W_p:=\bigl[c_{7,p}^\perp\ c_{Y,p}^\perp\bigr],
+  \qquad
+  S_p:=W_p^\ast W_p.
+\]
+The two-carrier transition--singular determinant is
+\[
+  \Delta_{\mathrm{tr},\mathrm{sing},p}
+  :=
+  \det S_p
+  =
+  \|c_{7,p}^\perp\|^2\|c_{Y,p}^\perp\|^2
+  -
+  |\langle c_{7,p}^\perp,c_{Y,p}^\perp\rangle|^2 .
+\]
+Equivalently,
+\(\Delta_{\mathrm{tr},\mathrm{sing},p}=\|c_{7,p}^\perp\|^2\|c_{Y,p}^\perp\|^2\sin^2\angle(c_{7,p}^\perp,c_{Y,p}^\perp)\).
+\end{definition}
+
+\begin{lemma}[Two-carrier determinant criterion]
+\label{lem:two-carrier-transition-singular-determinant-criterion}
+Assume \(\|c_{7,p}^\perp\|+\|c_{Y,p}^\perp\|\le Q^C\).  Then
+\(\sigma_{\min}(W_p)\ge Q^{-C'}\) for some polynomial exponent \(C'\) if
+and only if \(\Delta_{\mathrm{tr},\mathrm{sing},p}\ge Q^{-C''}\) for some
+polynomial exponent \(C''\).  In particular, a rank-one \(Y12\)-signature
+test gives only \(\operatorname{rank}W_p\ge1\); it does not imply
+\(\sigma_{\min}(W_p)>0\) on the two-dimensional carrier plane.
+\end{lemma}
+
+\begin{proof}
+The eigenvalues of \(S_p\) are nonnegative and satisfy
+\(\lambda_{\min}(S_p)=\det S_p/\lambda_{\max}(S_p)\).  The polynomial upper
+bound gives \(\lambda_{\max}(S_p)\le Q^C\), hence
+\(\det S_p\ge Q^{-C''}\) implies \(\lambda_{\min}(S_p)\ge Q^{-C'}\).  The
+converse is immediate from
+\(\det S_p=\lambda_{\min}(S_p)\lambda_{\max}(S_p)\) and polynomial upper
+conditioning.  If only one normal functional detects the carrier plane, its
+kernel is a nontrivial line in the two-dimensional carrier plane, so the
+smallest singular value on that plane is zero.
+\end{proof}
+
+\begin{lemma}[Normal-row certificate for transition--singular coercivity]
+\label{lem:normal-row-certificate-transition-singular-coercivity}
+Suppose there exists a finite normal row map
+\(L_p:H_{\mathrm{sing},p}\to\mathbb C^r\) such that
+\[
+  L_pR_{\mathrm{sing},p}=0,
+  \qquad
+  \|L_p\|_{\operatorname{op}}\le Q^C,
+  \qquad
+  \sigma_{\min}\!\bigl(L_pA_p[e_{1,p}\ \cdots\ e_{r,p}]\,B_p^{-1/2}\bigr)
+  \ge Q^{-C}.
+\]
+Then \(\delta_{\mathrm{coerc},p}\ge Q^{-C'}\).  For the two-carrier live
+plane it is enough to find two polynomially bounded normal rows
+\(\ell_{7,p}^{\perp},\ell_{Y,p}^{\perp}\) annihilating
+\(R_{\mathrm{sing},p}\) and satisfying the triangular lower bound
+\[
+  \begin{pmatrix}
+    \ell_{7,p}^{\perp}c_{7,p} & \ell_{7,p}^{\perp}c_{Y,p}\\
+    \ell_{Y,p}^{\perp}c_{7,p} & \ell_{Y,p}^{\perp}c_{Y,p}
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    \eta_{7,p} & *\\
+    0 & \eta_{Y,p}
+  \end{pmatrix},
+  \qquad
+  |\eta_{7,p}\eta_{Y,p}|\ge Q^{-C}.
+\]
+\end{lemma}
+
+\begin{proof}
+Since \(L_pR_{\mathrm{sing},p}=0\), one has \(L_p=L_p\Pi_p^\perp\).  Hence,
+for every coefficient vector \(x\),
+\(\|L_pA_p[e_{1,p}\ \cdots\ e_{r,p}]x\|=\|L_p\Pi_p^\perp A_p[e_{1,p}\ \cdots\
+e_{r,p}]x\|\le\|L_p\|_{\operatorname{op}}\|D_px\|\).  After normalizing the
+domain by \(B_p^{-1/2}\), the assumed lower bound for the left-hand side
+gives the claimed lower bound for \(D_p\).  In the two-carrier case, the
+displayed triangular matrix has polynomially nonzero determinant and
+polynomially bounded entries, hence has polynomial smallest singular value.
+\end{proof}
+
+\begin{hypothesis}[Transition--singular low-block determinant]
+\label{hyp:transition-singular-low-block-determinant}
+\emph{Status: FINITE AUDIT.}  For every packet in the routed good set,
+after fixing the actual retained singular space \(R_{\mathrm{sing},p}\),
+the actual transition operator \(T_{\mathrm{tr}\to\mathrm{sing},p}\), and
+the admissible low-mode basis, the Schur complement in
+Lemma~\ref{lem:transition-singular-schur-formula} satisfies
+\[
+  \lambda_{\min}\!\bigl(B_p^{-1/2}D_p^\ast D_pB_p^{-1/2}\bigr)
+  \ge Q^{-C}.
+\]
+Equivalently, in the live two-carrier normalization,
+\[
+  \Delta_{\mathrm{tr},\mathrm{sing},p}
+  =
+  \det
+  \begin{pmatrix}
+    \|c_{7,p}^\perp\|^2 & \langle c_{7,p}^\perp,c_{Y,p}^\perp\rangle\\
+    \langle c_{Y,p}^\perp,c_{7,p}^\perp\rangle & \|c_{Y,p}^\perp\|^2
+  \end{pmatrix}
+  \ge Q^{-C}.
+\]
+\end{hypothesis}
+
+\begin{theorem}[Low-block coercivity from the transition--singular determinant]
+\label{thm:low-block-coercivity-from-transition-singular-determinant}
+Assume Hypothesis~\ref{hyp:transition-singular-low-block-determinant}, the
+polynomial conditioning of the low-mode basis \(B_p\), and the polynomial
+upper bounds for the singular overlap norms.  Then
+\(\sigma_{\min}(D_p)\ge Q^{-C'}\).  Consequently the finite low-block part
+of the \(Y12\) graph/coercivity module is closed; the remaining residual
+directions are exactly the tail directions controlled by the
+singular-discard/EF upper.
+\end{theorem}
+
+\begin{proof}
+This is Definition~\ref{def:transition-singular-low-block-determinant}
+after absorbing the polynomial conditioning of \(B_p\) and the ambient
+singular norm.
+\end{proof}
+
+\begin{remark}[Why this is still a finite audit, not an unconditional theorem]
+\label{rem:transition-singular-determinant-still-finite-audit}
+The determinant above is not a consequence of source survival, ordinary
+Graph/O2O3 survival, or certified \(Y12\)-quotient survival.  Those inputs
+do not determine the principal angle between
+\(T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}V_p\) and
+\(R_{\mathrm{sing},p}\).  In particular, if \(R_{\mathrm{sing},p}\) is
+enlarged so that it contains
+\(T_{\mathrm{tr}\to\mathrm{sing},p}\operatorname{span}\{[\mathsf C_7]^{\mathrm{tr}},[\mathsf C_{Y12}]^{\mathrm{tr}}\}\),
+then \(D_p=0\) on the live carrier plane even if the source, ordinary
+graph, and boundary quotient modules are all perfectly conditioned.
+Therefore the unconditional proof requires an actual computation of
+\(R_p\), \(M_p\), and \(C_p\), or an independent pair of normal rows as in
+Lemma~\ref{lem:normal-row-certificate-transition-singular-coercivity}.
+\end{remark}
+
 \begin{hypothesis}[Low-block Gershgorin margin]
 \label{hyp:y12-low-block-gershgorin}
+\emph{Coordinate-dependent sufficient certificate for
+Hypothesis~\ref{hyp:transition-singular-low-block-determinant}: a polynomial
+Gershgorin margin in this finite basis implies the Schur determinant lower
+bound, but the intrinsic input is the determinant hypothesis itself.}
 Let
 \[
 D_p=\bigl[\mathfrak T_p e_{1,p}\ \cdots\ \mathfrak T_p e_{r,p}\bigr],
