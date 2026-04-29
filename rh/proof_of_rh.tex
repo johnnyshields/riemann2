@@ -38221,8 +38221,9 @@ the proof-level formulation must use
 \(R_{\mathrm{sing},p}^{\mathrm{cert}}\) and
 \(P_{\mathrm{sing},p}^{\mathrm{cert}}\) in the definition of the
 transition--singular forbidden channel.  With this certified
-replacement,
-Hypothesis~\ref{hyp:transition-singular-low-block-determinant} is
+replacement, the legacy transition--singular low-block determinant
+item, recorded under
+label~\ref{hyp:transition-singular-low-block-determinant}, is
 discharged by
 Corollary~\ref{cor:transition-singular-determinant-certified-quotient}.
 \end{remark}
@@ -38515,10 +38516,10 @@ is not a formal consequence of the carrier quotient or of primitive
 theorem.
 \end{remark}
 
-\begin{theorem}[Exact remaining theorem for unconditional \(\delta_{\mathrm{coerc}}\)]
+\begin{theorem}[Archived raw determinant test for non-certified \(\delta_{\mathrm{coerc}}\)]
 \label{thm:exact-remaining-theorem-delta-coerc}
-In the raw formulation, the low-block gap is closed if and only if, on the routed good packet
-set, one proves the finite determinant estimate
+For an arbitrary raw retained singular space, the low-block gap would
+be closed if one proved the finite determinant estimate
 \[
   \lambda_{\min}\!\left(B_p^{-1/2}D_p^*D_pB_p^{-1/2}\right)\ge Q^{-C},
   \qquad
@@ -38537,10 +38538,11 @@ with
 \(v_{7,p}^{\perp}:=(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}[\mathsf C_7]^{\mathrm{tr}}\),
 \(v_{Y,p}^{\perp}:=(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}[\mathsf C_{Y12}]^{\mathrm{tr}}\).
 A rank-one \(Y12\)-signature normal theorem proves only that
-\(v_{Y,p}^{\perp}\ne0\) in a quotient direction.  Full two-dimensional
-\(\delta_{\mathrm{coerc}}\) requires either the determinant above or the
-normal-row certificate of
-Corollary~\ref{cor:triangular-C7-Y12-normal-row-closure}.
+\(v_{Y,p}^{\perp}\ne0\) in a quotient direction.  For the active
+certified branch this raw determinant test is superseded by
+Theorem~\ref{thm:low-block-coercivity-certified-singular-quotient}.
+The displayed criterion remains only as an archive explaining why
+arbitrary raw singular projections are not proof-level choices.
 \end{theorem}
 
 \begin{remark}[Status after certified singular retention]
@@ -38560,13 +38562,11 @@ choices are inadmissible for proof-level
 Remark~\ref{rem:transition-singular-determinant-still-finite-audit}.
 \end{remark}
 
-\begin{hypothesis}[Low-block Gershgorin margin]
+\begin{remark}[Archived low-block Gershgorin sufficient test]
 \label{hyp:y12-low-block-gershgorin}
-\emph{Coordinate-dependent sufficient certificate for
-Hypothesis~\ref{hyp:transition-singular-low-block-determinant}: a polynomial
-Gershgorin margin in this finite basis implies the Schur determinant lower
-bound, but the intrinsic input is the determinant hypothesis itself.}
-Let
+The coordinate Gershgorin margin is no longer an active hypothesis in
+the proof-level branch.  It remains a useful sufficient test for an
+arbitrary raw finite basis:
 \[
 D_p=\bigl[\mathfrak T_p e_{1,p}\ \cdots\ \mathfrak T_p e_{r,p}\bigr],
 \qquad
@@ -38574,51 +38574,30 @@ G_p:=D_p^\ast D_p,
 \qquad
 \mathfrak T_p:=(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}.
 \]
-Assume the low-mode basis \(\{e_{1,p},\dots,e_{r,p}\}\) is chosen in the
-retained metric so that the Gram matrix \(G_p\) satisfies a uniform
-Gershgorin gap:
-\[
-(G_p)_{ii}\ge \sum_{j\neq i}|(G_p)_{ij}| + c_0Q^{-C}
-\qquad\text{for every }i
-\]
-for some fixed \(c_0>0\) and polynomial exponent \(C\).  Also assume the
-quotient side and tail side already hold:
-\[
-U_p\subseteq \ker\Lambda_{Y,p}
-\qquad\text{and}\qquad
-\sum_p \|\mathfrak T_p(R_X)\|^2\le Q^{-B}\mu(\mathcal C).
-\]
-\end{hypothesis}
-
-\begin{lemma}[Finite low-block Gershgorin coercivity]
-\label{lem:finite-low-block-gershgorin}
-Under Hypothesis~\ref{hyp:y12-low-block-gershgorin}, the low-block Gram matrix
-is positive definite with polynomial margin:
-\[
-G_p\succ 0,
-\qquad
-\lambda_{\min}(G_p)\ge c_0Q^{-C},
-\qquad
-\sigma_{\min}(D_p)\ge \sqrt{c_0}\,Q^{-C/2}.
-\]
-Consequently, the projected operator \(\mathfrak T_p\) is coercive on the
-low-mode block of \(\mathcal R_X\), and the only remaining approximate-kernel
-directions are those already absorbed by the tail norm.
-\end{lemma}
-
-\begin{remark}[What is assumed and what remains to be proved]
-\label{rem:y12-low-block-assumption-status}
-The statement above proves coercivity \emph{conditional on} the Gershgorin
-gap in Hypothesis~\ref{hyp:y12-low-block-gershgorin}.  The remaining open
-work is to derive that gap from the packet-level structure of the draft,
-rather than to assume it.
+If a chosen raw basis satisfies
+\(
+(G_p)_{ii}\ge\sum_{j\ne i}|(G_p)_{ij}|+c_0Q^{-C}
+\),
+then Gershgorin gives
+\(\lambda_{\min}(G_p)\ge c_0Q^{-C}\) and
+\(\sigma_{\min}(D_p)\ge\sqrt{c_0}\,Q^{-C/2}\).  However, in the active
+proof route the finite low-block gap is supplied instead by the
+certified singular retained space:
+\(P_{\mathrm{sing},p}=P_{\mathrm{sing},p}^{\mathrm{cert}}\),
+\(D_p=D_p^{\mathrm{cert}}\), and by
+Theorem~\ref{thm:low-block-coercivity-certified-singular-quotient}.
+Thus the Gershgorin criterion is an archived coordinate sufficient
+test, not a remaining open assumption.
 \end{remark}
 
-\begin{remark}[wip-zeta-bridge-proof-y12-graph]
-\label{rem:wip-zeta-bridge-proof-y12-graph}
-What remains is the finite-codimension graph/coercivity statement for
-\(\mathfrak T_p=(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}\):
-a finite low-mode defect matrix and a controlled singular-discard tail.
+\begin{remark}[Certified \(Y12\) graph/coercivity status]
+\label{rem:y12-low-block-assumption-status}
+The \(Y12\) graph/coercivity low-block gap is closed on the certified
+singular-discard branch.  Any statement referring to an unresolved raw
+Gershgorin margin concerns only non-certified or Taylor-complete
+retained spaces and is not part of the active proof branch.  The
+remaining singular-discard work is the residual upper in the same
+certified quotient norm, not the finite low-block determinant.
 \end{remark}
 
 \begin{remark}[Defect matrix and \(D4\) transversality]
@@ -49166,13 +49145,25 @@ Compute whether
   \mathcal Q_9^{\mathrm{forb}}.
 \]
 
-\item \textbf{Transition--singular leakage.}
-Compute
+\item \textbf{Certified transition--singular branch.}
+The finite low-block leakage of the \(C_7/Y12\) carrier pair is now
+closed on the certified branch by
+Theorem~\ref{thm:low-block-coercivity-certified-singular-quotient}.
+The remaining singular-discard obligation is the residual/EF upper in
+the same certified norm:
 \[
-  (I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_7]^{\mathrm{tr}},
-  \qquad
-  (I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}]^{\mathrm{tr}}.
+  \sum_p
+  \left\|
+  (I-P_{\mathrm{sing},p}^{\mathrm{cert}})
+  T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(R_X)
+  \right\|^2
+  \le Q^{-B}\mu(\mathcal C).
 \]
+Raw computations of
+\((I-P_{\mathrm{sing}}^{\mathrm{raw}})T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_7]^{\mathrm{tr}}\)
+and
+\((I-P_{\mathrm{sing}}^{\mathrm{raw}})T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}]^{\mathrm{tr}}\)
+remain diagnostic only.
 
 \item \textbf{\(K_9\)-conditioning.}
 Prove lower-order tangent observability:
@@ -49194,13 +49185,16 @@ Prove a \(Q^C\)-bounded second fundamental form / tubular radius estimate for
 \label{rem:final-unresolved-finite-decisions}
 After the current cleanup, the remaining decisive finite decisions are:
 \begin{enumerate}
-\item Define \(R_{\mathrm{sing}}\) as an actual-source coherence space and test
-\[
-  (I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}
-  \operatorname{span}\{[\mathsf C_7]^{\mathrm{tr}},[\mathsf C_{Y12}]^{\mathrm{tr}}\}.
-\]
-Rank \(0\) kills the singular-discard \(\Lambda\)-route; rank \(1\) gives a
-rank-one forbidden wall; rank \(2\) gives the full rank-two forbidden wall.
+\item The proof-level singular-discard branch uses the certified retained
+space \(R_{\mathrm{sing}}^{\mathrm{cert}}\).  On this branch the rank-two
+low-block leakage is closed by
+Theorem~\ref{thm:low-block-coercivity-certified-singular-quotient}.
+The remaining decision is not the finite rank of the certified carrier
+plane, but whether the residual singular-discard upper holds in the
+same certified norm.  Raw choices of
+\(R_{\mathrm{sing}}^{\mathrm{raw}}\) may still have rank \(0,1,\) or
+\(2\), but those cases are diagnostic archives rather than active
+proof branches.
 
 \item Decide whether \(T_{\mathrm{tr}\to\mathrm{sing}}\) transports formed labelled
 carriers or recomputes \(N_0/\mathcal W\).  Transport preserves the
@@ -49258,10 +49252,16 @@ The acceptable forbidden-channel mechanisms are:
 \]
 \end{enumerate}
 Without one of these, finite D4 remains a detector, not a proof-closing
-contradiction.  The current best finite-D4 candidate is
+contradiction.  The current best finite-D4 candidate is the certified
+singular-discard channel
 \[
-  \Lambda_{\mathrm{tr},\mathrm{sing}}=(I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}P_{\mathrm{tr}}.
+  \Lambda_{\mathrm{tr},\mathrm{sing}}^{\mathrm{cert}}
+  =
+  (I-P_{\mathrm{sing}}^{\mathrm{cert}})T_{\mathrm{tr}\to\mathrm{sing}}P_{\mathrm{tr}}.
 \]
+The unsuperscripted notation in the active forbidden-channel branch is
+used only under the convention
+\(P_{\mathrm{sing}}=P_{\mathrm{sing}}^{\mathrm{cert}}\).
 \end{remark}
 
 % === wip-current-postclosure-architecture-ledger ===
