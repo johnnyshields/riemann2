@@ -48253,11 +48253,6 @@ source section.  Let \(K_p\) be a Whitney packet core with enlargement
 \(K_p^+\) and scale \(\lambda_p\).  Then on every good packet:
 \begin{enumerate}
 \item the packet cores have bounded overlap;
-\item for each fixed derivative order \(j\),
-\[
-\int_{K_p^+}\bigl|F_X^{(j)}(u)\bigr|^2W_{\mathrm{ref}}(u)\,du
-\ll Q^{Cj}\int_{K_p^+}|F_X(u)|^2W_{\mathrm{ref}}(u)\,du;
-\]
 \item the branch weights satisfy
 \[
 \sup_{u\in K_p^+}\bigl|\partial_u^j \log W_{\mathrm{branch}}(u)\bigr|\ll Q^{Cj}.
@@ -48266,24 +48261,37 @@ source section.  Let \(K_p\) be a Whitney packet core with enlargement
 \end{lemma}
 
 \begin{proof}
-This is the Whitney-selection packet geometry together with the smooth AFE
-structure.  The local AFE pieces are short Dirichlet polynomials with the
-standard \((\log n)^j/\sqrt n\)-type coefficient growth, so differentiation
-preserves a polynomial derivative budget on each packet.
+Both items are direct consequences of the Whitney-selection packet geometry
+together with the smooth AFE structure.  No relative derivative estimate
+\(\int|F_X^{(j)}|^2 \ll Q^{Cj}\int|F_X|^2\) is asserted here; that estimate
+is generally false for Dirichlet polynomials with local cancellation, and is
+treated separately in
+Theorem~\ref{thm:packet-construction-regularity} via an absolute derivative
+budget plus mass-goodness.
 \end{proof}
 
-\begin{definition}[Raw packet scale and admissibility]
+\begin{definition}[Raw packet scale, scale-admissibility, and mass-good packets]
 \label{def:raw-packet-scale-admissibility}
 For each Whitney packet core \(K_p\), let \(\lambda_p^{\mathrm{raw}}\) denote
-its geometric packet width produced by the Whitney construction
-(Definition~\ref{def:whitney-packet-cores}).  A packet is called
-\emph{admissible} if it satisfies the packet-regularity hypotheses of
-Lemma~\ref{lem:finite-afe-packet-regularity} and the raw scale bound
+its geometric packet width from
+Definition~\ref{def:whitney-packet-cores}.  A packet is called
+\emph{scale-admissible} if
 \[
-Q^{-C}\le \lambda_p^{\mathrm{raw}}\le Q^C.
+Q^{-C_\lambda}\le \lambda_p^{\mathrm{raw}}\le Q^{C_\lambda}.
 \]
-On the admissible packet family we write
+On the scale-admissible family we write
 \(\lambda_p:=\lambda_p^{\mathrm{raw}}\).
+
+Set
+\[
+M_p:=\int_{K_p^+}|F_X(t)|^2W_{\mathrm{ref}}(t)\,dt.
+\]
+A scale-admissible packet is called \emph{mass-good} if
+\[
+M_p\ge Q^{-C_{\mathrm{mass}}}.
+\]
+No derivative estimate is included in the definition of scale-admissibility
+or mass-goodness.
 \end{definition}
 
 \begin{remark}[Upper raw-scale bound from localization]
@@ -48296,10 +48304,9 @@ is part of admissibility; it is upgraded to a theorem about good packets in
 Corollary~\ref{cor:boundary-collar-exclusion}.
 \end{remark}
 
-\begin{theorem}[Packet construction regularity from the smooth finite AFE]
+\begin{theorem}[Finite-AFE derivative budget on raw packets]
 \label{thm:packet-construction-regularity}
-Assume Theorem~\ref{thm:smooth-finite-AFE-package} and the raw Whitney packet
-geometry of Definition~\ref{def:raw-packet-scale-admissibility}.  Let
+Assume Theorem~\ref{thm:smooth-finite-AFE-package}.  Let
 \[
 F_X(t)
 =
@@ -48307,92 +48314,210 @@ F_X(t)
 +
 \sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX)
 \]
-be the finite-AFE main term, with
+be the finite-AFE main term.  Assume the source truncation range and the
+reference weight are polynomially controlled in the \(Q\)-scale used in the
+source section.  Then for each raw Whitney packet core \(K_p\) and each
+fixed integer \(j\ge0\),
 \[
-|a_n|,\ |\widetilde a_n|\ll_\varepsilon n^\varepsilon
+D_{p,j}
+:=
+\int_{K_p^+}\bigl|\partial_t^jF_X(t)\bigr|^2W_{\mathrm{ref}}(t)\,dt
+\le Q^{C_j}.
 \]
-for every \(\varepsilon>0\).  Then for each admissible packet core \(K_p\) and
-each fixed derivative order \(j\ge0\),
+Consequently, on every mass-good packet
+(Definition~\ref{def:raw-packet-scale-admissibility}),
 \[
-\int_{K_p^+}\bigl|\partial_t^j F_X(t)\bigr|^2 W_{\mathrm{ref}}(t)\,dt
-\ll
-(\log X)^{2j}\int_{K_p^+}|F_X(t)|^2 W_{\mathrm{ref}}(t)\,dt.
+\int_{K_p^+}\bigl|\partial_t^jF_X(t)\bigr|^2W_{\mathrm{ref}}(t)\,dt
+\le
+Q^{C_j+C_{\mathrm{mass}}}
+\int_{K_p^+}|F_X(t)|^2W_{\mathrm{ref}}(t)\,dt.
 \]
-In particular, since \(\log X\ll Q^\varepsilon\), there exists \(C>0\) such
-that
-\[
-\int_{K_p^+}\bigl|\partial_t^j F_X(t)\bigr|^2 W_{\mathrm{ref}}(t)\,dt
-\ll
-Q^{Cj}\int_{K_p^+}|F_X(t)|^2 W_{\mathrm{ref}}(t)\,dt.
-\]
-Moreover, if \(\phi_p,\phi_q\) are the packet phases on a nonresonant overlap
-region and
-\[
-\bigl|(\phi_p-\phi_q)'(t)\bigr|\ge \Lambda_{pq}>0,
-\]
-then the corresponding oscillatory kernel satisfies, for every \(N\ge1\),
-\[
-\left|\int_{K_p^+\cap K_q^+} A_{pq}(t)e^{i(\phi_p(t)-\phi_q(t))}\,dt\right|
-\ll_N \Lambda_{pq}^{-N},
-\]
-where \(A_{pq}\) is the smooth amplitude induced by the AFE weights and
-packet cutoffs.
+Thus the packet derivative budget is polynomial on the mass-good packet
+family.
 \end{theorem}
 
 \begin{proof}
-Differentiate the finite-AFE main term term-by-term:
+Differentiating the finite-AFE main term gives
 \[
-\partial_t^j F_X(t)
+\partial_t^jF_X(t)
 =
 \sum_{n\ge1} a_n(-i\log n)^j n^{-1/2-it}V_1(n/X)
 +
 \sum_{n\ge1}\widetilde a_n(i\log n)^j n^{-1/2+it}V_2(nX).
 \]
-Because \(V_1\) and \(V_2\) are smooth cutoffs, only the range \(n\asymp X\)
-contributes effectively to the first sum, while the second sum is confined to
-the dual range and decays rapidly outside it.  On the effective support,
+The smooth cutoffs restrict the first sum to the \(X\)-range up to rapidly
+decaying tails, and similarly restrict the dual sum to its smooth dual range.
+On these effective supports,
 \[
-(\log n)^j\ll_j (\log X)^j.
+|\log n|^j\ll_j(\log X)^j.
 \]
-Using the coefficient bounds
-\(a_n,\widetilde a_n\ll_\varepsilon n^\varepsilon\) and the standard
-mean-square estimate for smooth Dirichlet polynomials on a packet core, we
-obtain
-\[
-\int_{K_p^+}\bigl|\partial_t^j F_X(t)\bigr|^2 W_{\mathrm{ref}}(t)\,dt
-\ll
-(\log X)^{2j}\int_{K_p^+}|F_X(t)|^2 W_{\mathrm{ref}}(t)\,dt,
-\]
-which gives the displayed packet derivative budget after using
-\(\log X\ll Q^\varepsilon\).
 
-For the oscillatory-kernel bound, write the off-diagonal contribution between
-two packet phases as
+Apply the standard short-interval mean-square estimate for smooth Dirichlet
+polynomials to \(K_p^+\).  With
 \[
-\int_{K_p^+\cap K_q^+} A_{pq}(t)e^{i(\phi_p(t)-\phi_q(t))}\,dt.
+c_n^{(j)}
+=
+a_n(-i\log n)^j n^{-1/2}V_1(n/X),
+\qquad
+\widetilde c_n^{(j)}
+=
+\widetilde a_n(i\log n)^j n^{-1/2}V_2(nX),
 \]
-On a nonresonant overlap region, the phase difference has derivative bounded
-below by \(\Lambda_{pq}\).  Repeated integration by parts against the phase
-then gives, for every \(N\),
+one obtains
 \[
-\left|\int_{K_p^+\cap K_q^+} A_{pq}(t)e^{i(\phi_p(t)-\phi_q(t))}\,dt\right|
-\ll_N \Lambda_{pq}^{-N}.
+\int_{K_p^+}\bigl|\partial_t^jF_X(t)\bigr|^2W_{\mathrm{ref}}(t)\,dt
+\ll
+Q^{C}
+\Bigl(
+(|K_p^+|+X)\sum_n |c_n^{(j)}|^2
++
+(|K_p^+|+X^\ast)\sum_n |\widetilde c_n^{(j)}|^2
+\Bigr),
 \]
-This proves the stated oscillatory-kernel decay.
+where \(X^\ast\) denotes the effective dual truncation scale.  The
+coefficient bounds, smooth cutoffs, polynomial packet length, and polynomial
+source truncation give
+\[
+D_{p,j}\le Q^{C_j}.
+\]
+
+Now suppose \(p\) is mass-good.  Then
+\[
+M_p=\int_{K_p^+}|F_X(t)|^2W_{\mathrm{ref}}(t)\,dt\ge Q^{-C_{\mathrm{mass}}}.
+\]
+Therefore
+\[
+D_{p,j}\le Q^{C_j}
+\le
+Q^{C_j+C_{\mathrm{mass}}}M_p,
+\]
+which is the claimed polynomial relative derivative budget on mass-good
+packets.
 \end{proof}
 
-\begin{corollary}[Packet derivative budget]
+\begin{corollary}[Packet derivative budget on mass-good packets]
 \label{cor:packet-derivative-budget-derived}
-The packet derivative budget and oscillatory-kernel decay follow from
-Theorem~\ref{thm:packet-construction-regularity}.
+The packet derivative budget used in the source-frame and envelope estimates
+holds on the mass-good packet family by
+Theorem~\ref{thm:packet-construction-regularity}.  It is a polynomial
+relative budget, not a \((\log X)^{2j}\)-relative budget.
 \end{corollary}
 
 \begin{remark}[Status of the packet regularity theorem]
 \label{rem:packet-regularity-status}
-Theorem~\ref{thm:packet-construction-regularity} is now proved directly from
-Theorem~\ref{thm:smooth-finite-AFE-package} and the raw Whitney packet
-geometry.  Its corollary~\ref{cor:packet-derivative-budget-derived} is
-therefore unconditional.
+Theorem~\ref{thm:packet-construction-regularity} provides an absolute
+derivative budget \(D_{p,j}\le Q^{C_j}\) directly from
+Theorem~\ref{thm:smooth-finite-AFE-package}, and a polynomial relative
+budget on the mass-good packet family.  The relative budget is therefore
+unconditional on mass-good packets; it is not a \((\log X)^{2j}\)-relative
+estimate, since that strong form is generally false for Dirichlet
+polynomials with local cancellation.
+\end{remark}
+
+\begin{remark}[Scale-normalized oscillatory-kernel bound]
+\label{rem:scale-normalized-oscillatory-kernel}
+The oscillatory-kernel estimate must be stated in terms of a dimensionless
+separation parameter.  The bound
+\[
+\left|
+\int A_{pq}(t)
+e^{i(\phi_p(t)-\phi_q(t))}\,dt
+\right|
+\ll_N \Lambda_{pq}^{-N}
+\]
+is a decay estimate only in the regime \(\Lambda_{pq}\gtrsim 1\).  If
+\(\Lambda_{pq}\le Q^{-\delta}\), then
+\[
+\Lambda_{pq}^{-N}\ge Q^{\delta N},
+\]
+so the right-hand side grows rather than decays.
+
+Let
+\[
+I_{pq}:=\operatorname{supp} A_{pq},
+\qquad
+\lambda_{pq}:=|I_{pq}|,
+\qquad
+\Delta\omega_{pq}:=|\omega_p-\omega_q|.
+\]
+The correct scale-normalized separation parameter is
+\[
+\Theta_{pq}:=1+\lambda_{pq}\Delta\omega_{pq}.
+\]
+Equivalently, in the fully invariant form one may set
+\[
+\Theta_{pq}
+:=
+1+\lambda_{pq}
+\inf_{t\in I_{pq}}
+\left|
+\partial_t(\phi_p-\phi_q)(t)
+\right|.
+\]
+On packet-normalized supports these two definitions are comparable, since
+\[
+\inf_{t\in I_{pq}}
+\left|
+\partial_t(\phi_p-\phi_q)(t)
+\right|
+\asymp
+|\omega_p-\omega_q|.
+\]
+
+Assume that the amplitude satisfies the scale-normalized derivative bounds
+\[
+\sum_{k=0}^{N}
+\lambda_{pq}^{k}
+\left\|
+\partial_t^k A_{pq}
+\right\|_{L^1(I_{pq})}
+\le Q^{C_N},
+\]
+and that the phase is non-stationary on \(I_{pq}\) with polynomially
+controlled higher derivatives.  Then repeated integration by parts gives
+\[
+\left|
+\int A_{pq}(t)
+e^{i(\phi_p(t)-\phi_q(t))}\,dt
+\right|
+\ll_N
+Q^{C_N}
+\bigl(1+\lambda_{pq}|\omega_p-\omega_q|\bigr)^{-N}.
+\]
+Thus off-block decay requires the scale-normalized nonresonance condition
+\[
+\lambda_{pq}|\omega_p-\omega_q|
+\ge Q^{\kappa}
+\]
+for some \(\kappa>0\), not merely the unnormalized condition
+\[
+|\omega_p-\omega_q|\ge Q^{-\delta}.
+\]
+Indeed, under
+\[
+\lambda_{pq}|\omega_p-\omega_q|\ge Q^{\kappa},
+\]
+the preceding estimate gives
+\[
+\left|
+\int A_{pq}(t)
+e^{i(\phi_p(t)-\phi_q(t))}\,dt
+\right|
+\ll_N
+Q^{C_N-\kappa N}.
+\]
+Consequently, if the integration-by-parts order \(N\) is chosen so that
+\[
+\kappa N-C_N\ge A,
+\]
+then
+\[
+\left|
+\int A_{pq}(t)
+e^{i(\phi_p(t)-\phi_q(t))}\,dt
+\right|
+\ll_A Q^{-A}.
+\]
 \end{remark}
 
 \begin{lemma}[Packet-scale AFE envelope]
