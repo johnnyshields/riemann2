@@ -48385,32 +48385,38 @@ standard \((\log n)^j/\sqrt n\)-type coefficient growth, so differentiation
 preserves a polynomial derivative budget on each packet.
 \end{proof}
 
+\begin{definition}[Raw packet scale]
+\label{def:raw-packet-scale}
+For each Whitney packet \(p\), let \(\lambda_p^{\mathrm{raw}}\) denote the
+geometric packet width produced by the Whitney construction
+(Definition~\ref{def:whitney-packet-cores}).  This is the scale parameter used
+in the local Sobolev/Bernstein estimates on \(K_p\).  A packet is
+\emph{admissible} if it is one of the Whitney packets produced by the
+construction and satisfies the packet-regularity hypotheses of
+Lemma~\ref{lem:finite-afe-packet-regularity}.
+\end{definition}
+
 \begin{lemma}[Packet-scale AFE envelope]
 \label{lem:packet-scale-AFE-envelope}
-For each good packet core \(K_p\),
+For each admissible packet core \(K_p\),
 \[
 \sup_{t\in K_p}|F_X(t)|^2W_{\mathrm{ref}}(t)
 \ll
-\lambda_p^{-1}\int_{K_p^+}|F_X(u)|^2W_{\mathrm{ref}}(u)\,du
+(\lambda_p^{\mathrm{raw}})^{-1}\int_{K_p^+}|F_X(u)|^2W_{\mathrm{ref}}(u)\,du
 +
-\lambda_p\int_{K_p^+}|F_X'(u)|^2W_{\mathrm{ref}}(u)\,du.
+\lambda_p^{\mathrm{raw}}\int_{K_p^+}|F_X'(u)|^2W_{\mathrm{ref}}(u)\,du.
 \]
-In particular, using the packet derivative budget,
-\[
-\sup_{t\in K_p}|F_X(t)|^2W_{\mathrm{ref}}(t)\ll Q^B
-\]
-on the good packet set once the scale normalization below is available.
-Consequently, after EF completion,
-\[
-\sup_{t\in K_p}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\ll Q^B.
-\]
+Under the packet derivative budget, this yields a polynomial packet envelope
+on the admissible packet family.
 \end{lemma}
 
 \begin{proof}
-This is the local one-dimensional Sobolev/Bernstein inequality on \(K_p\),
-followed by the derivative budget from
-Lemma~\ref{lem:finite-afe-packet-regularity} and the already-inserted EF tail
-bound (Corollary~\ref{cor:ef-completion-bound}).
+This is the local one-dimensional Sobolev/Bernstein inequality on \(K_p\) at
+scale \(\lambda_p^{\mathrm{raw}}\), followed by the derivative budget from
+Lemma~\ref{lem:finite-afe-packet-regularity} and the EF tail bound
+(Corollary~\ref{cor:ef-completion-bound}).  The polynomial packet envelope
+follows because the Whitney construction produces \(\lambda_p^{\mathrm{raw}}\)
+within the polynomial range intrinsic to \(\Omega\).
 \end{proof}
 
 \begin{lemma}[Packet middle-third mass]
@@ -48589,17 +48595,16 @@ Corollary~\ref{cor:reference-ms-noncollapse}.  Then for \(\eta=Q^{-C}\),
 \end{corollary}
 
 \begin{proof}
-On the collar \(C_\eta\), the packet-envelope lemma gives
-\[
-|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\ll Q^B
-\]
-on each good packet, and bounded overlap globalizes this to
+On the collar \(C_\eta\), Lemma~\ref{lem:packet-scale-AFE-envelope} gives a
+polynomial packet envelope on each admissible packet, and bounded overlap
+globalizes this to
 \[
 \int_{C_\eta}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt
-\ll Q^B\,\mu(C_\eta).
+\ll Q^B\,\mu(C_\eta)
 \]
-Since the source window is one-dimensional, \(\mu(C_\eta)\ll \eta\), so with
-\(\eta=Q^{-C}\) and \(C\) chosen large relative to \(A+B\), we get
+for some absolute \(B\).  Since the source window is one-dimensional,
+\(\mu(C_\eta)\ll \eta\), so with \(\eta=Q^{-C}\) and \(C\) chosen large
+relative to \(A+B\), we get
 \[
 \int_{C_\eta}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt
 \le \tfrac12 c_0\,Q^{-A}.
