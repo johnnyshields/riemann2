@@ -40741,6 +40741,234 @@ product of its triangular pivots after polynomially conditioned row
 operations.
 \end{proof}
 
+\begin{proposition}[Unrestricted coherent live routing does not imply effective carrier coercivity]
+\label{prop:unrestricted-live-routing-does-not-imply-Leff-coercivity}
+The concrete row certificate, the dead-column split, and dead-only quotient
+survival do not by themselves imply
+\(\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-C}\).  More precisely, there is
+a two-dimensional finite model in which
+\(L_p^{\mathrm{row}}E_p=I_2\),
+\(\sigma_{\min}(q_{p,\mathrm{cert}}^YE_p)=1\), all live nuisance pieces
+are coherently routed rather than quotient-killed, but
+\(L_{\mathrm{eff},p}=0\).
+\end{proposition}
+
+\begin{proof}
+Take \(\mathcal H_p^Y=\mathbb C^2\), \(E_p=I_2\), \(L_p^{\mathrm{row}}=I_2\).
+The concrete row certificate is exact and polynomially conditioned.  Let
+\[
+  L_{\mathrm{clean},p}
+  =
+  \begin{pmatrix}
+    c&0\\
+    \beta&\alpha
+  \end{pmatrix},
+  \qquad c\alpha\ne0.
+\]
+Choose two coherent live raw columns
+\(A_{1,p}^{\mathrm{raw}}=E_p\binom{-c}{-\beta}\) and
+\(A_{2,p}^{\mathrm{raw}}=E_p\binom{0}{-\alpha}\).  Their live coefficients
+are \(m_{1,p}=L_p^{\mathrm{row}}A_{1,p}^{\mathrm{raw}}=\binom{-c}{-\beta}\)
+and \(m_{2,p}=L_p^{\mathrm{row}}A_{2,p}^{\mathrm{raw}}=\binom{0}{-\alpha}\),
+and their dead parts are zero
+\(A_{i,p}^{\mathrm{dead}}=A_{i,p}^{\mathrm{raw}}-E_pm_{i,p}=0\).
+Thus the certified dead quotient introduces no live torsion relation;
+indeed \(q_{p,\mathrm{cert}}^YE_p=I_2\).  If the fixed carrier-entry rows
+are \(\eta_1^*=(1,0)\) and \(\eta_2^*=(0,1)\), then
+\[
+  M_{\mathrm{live},p}
+  =m_{1,p}\eta_1^*+m_{2,p}\eta_2^*
+  =
+  \begin{pmatrix}
+    -c&0\\
+    -\beta&-\alpha
+  \end{pmatrix}
+  =-L_{\mathrm{clean},p},
+\]
+hence \(L_{\mathrm{eff},p}=L_{\mathrm{clean},p}+M_{\mathrm{live},p}=0\).
+This proves that effective carrier coercivity is a separate coefficient
+anti-cancellation assertion, not a formal consequence of the live-row
+quotient certificate.
+\end{proof}
+
+\begin{definition}[Effective \(2Y\) carrier determinant certificate]
+\label{def:effective-2Y-carrier-determinant-certificate}
+Write
+\[
+  L_{\mathrm{clean},p}
+  =
+  \begin{pmatrix}
+    c_{7,p}&0\\
+    \beta_{9,p}^{\mathrm{tri}}&\alpha_{9,p}
+  \end{pmatrix},
+  \qquad
+  M_{\mathrm{live},p}
+  =
+  \begin{pmatrix}
+    m_{11,p}&m_{12,p}\\
+    m_{21,p}&m_{22,p}
+  \end{pmatrix}.
+\]
+The packet \(p\) satisfies the \emph{effective \(2Y\) carrier determinant
+certificate}, denoted \(\mathfrak C_{2Y}^{\det}(p)\), if
+\(\|L_{\mathrm{eff},p}\|_{\operatorname{op}}=\|L_{\mathrm{clean},p}+M_{\mathrm{live},p}\|_{\operatorname{op}}\le Q^C\)
+and
+\(\bigl|\det(L_{\mathrm{clean},p}+M_{\mathrm{live},p})\bigr|\ge Q^{-C}\).
+Equivalently, in entries,
+\[
+\begin{aligned}
+  \det L_{\mathrm{eff},p}
+  ={}&(c_{7,p}+m_{11,p})(\alpha_{9,p}+m_{22,p})
+      -m_{12,p}(\beta_{9,p}^{\mathrm{tri}}+m_{21,p}) \\
+  ={}&c_{7,p}\alpha_{9,p}
+     +c_{7,p}m_{22,p}
+     +\alpha_{9,p}m_{11,p}
+     +m_{11,p}m_{22,p}
+     -\beta_{9,p}^{\mathrm{tri}}m_{12,p}
+     -m_{12,p}m_{21,p},
+\end{aligned}
+\]
+and this determinant is polynomially bounded away from zero.
+\end{definition}
+
+\begin{lemma}[Determinant certificate implies effective carrier coercivity]
+\label{lem:det-certificate-implies-effective-carrier-coercivity}
+If \(\mathfrak C_{2Y}^{\det}(p)\) holds, then
+\(\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-C'}\).
+\end{lemma}
+
+\begin{proof}
+For every \(2\times2\) matrix \(L\),
+\(\sigma_{\min}(L)\sigma_{\max}(L)=|\det L|\).  Applying this to
+\(L=L_{\mathrm{eff},p}\) gives
+\(\sigma_{\min}(L_{\mathrm{eff},p})=|\det L_{\mathrm{eff},p}|/\sigma_{\max}(L_{\mathrm{eff},p})\ge Q^{-C}/Q^C=Q^{-C'}\).
+\end{proof}
+
+\begin{definition}[Triangular effective carrier certificate]
+\label{def:triangular-effective-carrier-certificate-2Y}
+A stronger, triangular form of \(\mathfrak C_{2Y}^{\det}(p)\) is the
+following set of coefficient conditions:
+\(m_{12,p}=0\),
+\(|c_{7,p}+m_{11,p}|\ge Q^{-C}\),
+\(|\alpha_{9,p}+m_{22,p}|\ge Q^{-C}\), and
+\(|\beta_{9,p}^{\mathrm{tri}}+m_{21,p}|\le Q^C\).  Equivalently,
+\[
+  L_{\mathrm{eff},p}
+  =
+  \begin{pmatrix}
+    c_{7,p}^{\mathrm{eff}}&0\\
+    \beta_{9,p}^{\mathrm{eff}}&\alpha_{9,p}^{\mathrm{eff}}
+  \end{pmatrix},
+  \qquad
+  |c_{7,p}^{\mathrm{eff}}|\ge Q^{-C},
+  \qquad
+  |\alpha_{9,p}^{\mathrm{eff}}|\ge Q^{-C},
+  \qquad
+  |\beta_{9,p}^{\mathrm{eff}}|\le Q^C.
+\]
+\end{definition}
+
+\begin{lemma}[Triangular certificate closes the effective carrier]
+\label{lem:triangular-certificate-closes-effective-carrier}
+The triangular effective carrier certificate implies
+\(\mathfrak C_{2Y}^{\det}(p)\), and hence
+\(\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-C'}\).
+\end{lemma}
+
+\begin{proof}
+Under Definition~\ref{def:triangular-effective-carrier-certificate-2Y},
+\(\det L_{\mathrm{eff},p}=c_{7,p}^{\mathrm{eff}}\alpha_{9,p}^{\mathrm{eff}}\),
+so \(|\det L_{\mathrm{eff},p}|\ge Q^{-2C}\).  The displayed upper bounds on
+the three entries give \(\|L_{\mathrm{eff},p}\|_{\operatorname{op}}\le Q^{C_1}\).
+Lemma~\ref{lem:det-certificate-implies-effective-carrier-coercivity} then
+gives the singular-value lower bound.
+\end{proof}
+
+\begin{corollary}[Vanishing carrier correction closes the bottom item]
+\label{cor:vanishing-carrier-correction-closes-bottom-item}
+If all coherent live correction rows have zero projection to the retained
+carrier quotient, so that \(M_{\mathrm{live},p}=0\), then
+\(L_{\mathrm{eff},p}=L_{\mathrm{clean},p}\) and the bottom item of
+\(\mathfrak C_{2Y}(p)\) is proved on every Gram-good packet.
+\end{corollary}
+
+\begin{proof}
+For the clean row-normal matrix,
+\[
+  L_{\mathrm{clean},p}
+  =
+  \begin{pmatrix}
+    c_{7,p}&0\\
+    \beta_{9,p}^{\mathrm{tri}}&\alpha_{9,p}
+  \end{pmatrix},
+\]
+with
+\[
+  c_{7,p}
+  =-\frac{1}{24\pi^2g_{\mathrm{Gr},p}h_{\mathrm{Gr},p}
+  (\sqrt{g_{\mathrm{Gr},p}}+\sqrt{h_{\mathrm{Gr},p}})^2},
+\]
+\[
+  \alpha_{9,p}
+  =
+  \frac{1}{64\pi^2\sqrt{g_{\mathrm{Gr},p}h_{\mathrm{Gr},p}}\,
+  h_{\mathrm{Gr},p}^{3/2}(\sqrt{g_{\mathrm{Gr},p}}+\sqrt{h_{\mathrm{Gr},p}})}.
+\]
+Hence
+\[
+  \det L_{\mathrm{clean},p}=c_{7,p}\alpha_{9,p}
+  =-\frac{1}{1536\pi^4\,
+  g_{\mathrm{Gr},p}^{3/2}h_{\mathrm{Gr},p}^{3}
+  (\sqrt{g_{\mathrm{Gr},p}}+\sqrt{h_{\mathrm{Gr},p}})^3}.
+\]
+On a Gram-good packet,
+\(Q^{-C}\le g_{\mathrm{Gr},p},h_{\mathrm{Gr},p}\le Q^C\), so
+\(|\det L_{\mathrm{clean},p}|\ge Q^{-C}\) and
+\(\|L_{\mathrm{clean},p}\|_{\operatorname{op}}\le Q^C\).  The
+determinant/singular-value identity gives
+\(\sigma_{\min}(L_{\mathrm{clean},p})\ge Q^{-C'}\).  Since
+\(L_{\mathrm{eff},p}=L_{\mathrm{clean},p}\), the claim follows.
+\end{proof}
+
+\begin{remark}[Replacement for the bottom line of \(\mathfrak R_{2Y}\)]
+\label{rem:replace-bottom-line-R2Y-det-certificate}
+Replace the final clause
+\(\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-A}\) in
+Definition~\ref{def:explicit-coefficient-certificate-C2Y} by the explicit
+coefficient condition \(\mathfrak C_{2Y}^{\det}(p)\), or by the stronger
+triangular certificate of
+Definition~\ref{def:triangular-effective-carrier-certificate-2Y}.  The
+singular-value lower bound is then
+Lemma~\ref{lem:det-certificate-implies-effective-carrier-coercivity} or
+Lemma~\ref{lem:triangular-certificate-closes-effective-carrier}.  Without
+one of these determinant anti-cancellation conditions, the bottom item is
+not proved by row certification and column routing alone, by
+Proposition~\ref{prop:unrestricted-live-routing-does-not-imply-Leff-coercivity}.
+\end{remark}
+
+\begin{remark}[Status of the effective carrier item]
+\label{rem:effective-carrier-item-current-status}
+\emph{Status: FINITE AUDIT.}  The clean triangular determinant is proved on
+Gram-good packets.  The certified quotient theorem proves survival of the
+retained carrier plane \(q_{p,\mathrm{cert}}^YE_p\).  These two facts do
+not control the determinant of
+\(L_{\mathrm{eff},p}=L_{\mathrm{clean},p}+M_{\mathrm{live},p}\).  The
+remaining formula-level object is the determinant anti-cancellation
+certificate \(\mathfrak C_{2Y}^{\det}(p)\), or the stronger
+vanishing/triangular correction-row certificate.  If the six correction
+rows
+\(R_{\nu}^{(b)}\),
+\(\nu\in\{\mathrm{line},\mathrm{bg/core},\mathrm{norm/sub}\}\),
+\(b\in\{7,9\}\),
+have zero retained carrier projection before scalar collapse, then
+\(M_{\mathrm{live},p}=0\) and the effective carrier item is closed by
+Corollary~\ref{cor:vanishing-carrier-correction-closes-bottom-item}.
+Otherwise one must prove the determinant lower bound in
+Definition~\ref{def:effective-2Y-carrier-determinant-certificate}.  This
+is a finite coefficient computation, not a consequence of the quotient
+Schur gap.
+\end{remark}
+
 \begin{theorem}[Verification theorem for \texorpdfstring{$\mathfrak C_{2Y}(p)$}{C2Y(p)}]
 \label{thm:verification-C2Y-certificate-continued}
 Assume the following packet-level coefficient facts.
