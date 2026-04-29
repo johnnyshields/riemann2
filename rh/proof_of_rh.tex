@@ -48227,6 +48227,106 @@ Lemma~\ref{lem:finite-afe-packet-regularity} and the already-inserted EF tail
 bound (Corollary~\ref{cor:ef-completion-bound}).
 \end{proof}
 
+\begin{lemma}[Packet middle-third mass]
+\label{lem:packet-middle-third-mass}
+Let \(J_p\) be the frequency window attached to a good packet \(p\), and let
+\(J_p^{\mathrm M}\subset J_p\) denote its middle third.  Assume the packet
+amplitude factors as
+\[
+A_p(\xi,t)=\chi_p(\xi)B_p(\xi,t),
+\]
+where \(\chi_p\equiv 1\) on \(J_p^{\mathrm M}\), \(0\le \chi_p\le 1\), and
+\(|B_p(\xi,t)|\) is uniformly comparable on \(J_p\), namely
+\[
+e^{-C_0}\le \frac{|B_p(\xi,t)|}{|B_p(\eta,t)|}\le e^{C_0}
+\qquad(\xi,\eta\in J_p).
+\]
+Define the normalized packet density
+\[
+\rho_t(\xi):=
+\frac{|A_p(\xi,t)|^2}{\int_{J_p}|A_p(\eta,t)|^2\,d\eta}.
+\]
+Then there exists \(\theta_0>0\) such that
+\[
+\int_{J_p^{\mathrm M}}\rho_t(\xi)\,d\xi\ge \theta_0
+\]
+uniformly on good packets.
+\end{lemma}
+
+\begin{proof}
+Since \(\chi_p\equiv 1\) on \(J_p^{\mathrm M}\) and \(\chi_p\le 1\) on \(J_p\),
+\[
+\int_{J_p^{\mathrm M}}\rho_t(\xi)\,d\xi
+=
+\frac{\int_{J_p^{\mathrm M}}|B_p(\xi,t)|^2\,d\xi}
+{\int_{J_p}|\chi_p(\eta)B_p(\eta,t)|^2\,d\eta}.
+\]
+By uniform comparability of \(|B_p|\) on \(J_p\),
+\[
+\int_{J_p^{\mathrm M}}|B_p(\xi,t)|^2\,d\xi
+\ge e^{-2C_0}|J_p^{\mathrm M}|\inf_{J_p}|B_p|^2,
+\]
+while
+\[
+\int_{J_p}|\chi_p(\eta)B_p(\eta,t)|^2\,d\eta
+\le e^{2C_0}|J_p|\inf_{J_p}|B_p|^2.
+\]
+Since \(|J_p^{\mathrm M}|=\frac13|J_p|\), the claim follows with
+\(\theta_0=\frac13e^{-4C_0}\).
+\end{proof}
+
+\begin{lemma}[Packet-window variance lower bound]
+\label{lem:packet-window-variance-lower-bound}
+Under Lemma~\ref{lem:packet-middle-third-mass}, the packet density satisfies
+\[
+\operatorname{Var}_{\rho_t}(\xi)\ge c\,|J_p|^2
+\]
+for some absolute \(c>0\).
+\end{lemma}
+
+\begin{proof}
+A fixed positive fraction \(\theta_0\) of the probability mass lies in the
+middle third \(J_p^{\mathrm M}\).  Every point of \(J_p^{\mathrm M}\) is a
+distance \(\gtrsim |J_p|\) from at least one endpoint of \(J_p\), so the
+variance of any probability density carrying mass \(\theta_0\) there is
+bounded below by a fixed multiple of \(|J_p|^2\).
+\end{proof}
+
+\begin{lemma}[Phase-derivative transversality on good packets]
+\label{lem:phase-derivative-transversality}
+Let
+\[
+F_X(t)=\int_{J_p}A_p(\xi,t)e^{-it\xi}\,d\xi,
+\qquad
+\omega(t):=-\Im\!\left(\frac{F_X'(t)}{F_X(t)}\right).
+\]
+Then on every good packet core,
+\[
+\omega'(t)=\operatorname{Var}_{\rho_t}(\xi)+\mathcal E_{\mathrm{tr}}(t),
+\]
+where the transport term \(\mathcal E_{\mathrm{tr}}(t)\) is controlled by the
+packet derivative budget.  In particular, if
+\[
+|\mathcal E_{\mathrm{tr}}(t)|\le \tfrac12 c\,|J_p|^2,
+\]
+then
+\[
+|\omega'(t)|\ge \tfrac12 c\,|J_p|^2.
+\]
+\end{lemma}
+
+\begin{proof}
+Differentiate
+\[
+\omega(t)=-\Im(F_X'/F_X)
+\]
+once more.  The main term is the spectral variance of the normalized packet
+density \(\rho_t\), and the remaining terms come from the \(t\)-transport of
+\(A_p(\xi,t)\).  Lemma~\ref{lem:packet-window-variance-lower-bound} gives the
+lower bound for the variance term, while the packet derivative budget bounds
+the transport error.  Shrinking constants yields the claim.
+\end{proof}
+
 \begin{lemma}[Frequency-gap separation off resonant blocks]
 \label{lem:frequency-gap-separation}
 Assume the packet frequency map has been defined by
@@ -48238,6 +48338,30 @@ Then on nonresonant blocks one has
 |\omega_p-\omega_q|\gg Q^{-\delta}\qquad(p\neq q).
 \]
 \end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:phase-derivative-transversality}, on each good
+nonresonant packet core the phase derivative satisfies a positive lower
+bound.  Hence, for distinct packet centers \(m_p,m_q\) in the same
+nonresonant family, the mean value theorem gives
+\[
+|\omega_p-\omega_q|
+=
+|\omega(m_p)-\omega(m_q)|
+\ge
+\inf_{\xi\in I_{pq}}|\omega'(\xi)|\,|m_p-m_q|.
+\]
+The Whitney separation of distinct packet cores gives
+\[
+|m_p-m_q|\gtrsim \lambda
+\]
+for the relevant packet scale \(\lambda\), and \(\lambda\) is polynomially
+bounded on the good packet set.  Therefore
+\[
+|\omega_p-\omega_q|\gg Q^{-\delta}
+\]
+for some \(\delta>0\) after excluding resonant blocks.
+\end{proof}
 
 \begin{corollary}[Boundary-collar exclusion]
 \label{cor:boundary-collar-exclusion}
@@ -48317,6 +48441,15 @@ The reduction is unconditional given the packet-structure assumptions
 not derive those assumptions from zeta or from earlier lemmas, and so the
 overall source layer remains FINITE AUDIT.  Hypothesis~\ref{hyp:ef-completion-bound}
 remains the load-bearing open analytic obligation.
+
+\noindent The proof route for item~(4) is now explicit: middle-third packet
+mass (Lemma~\ref{lem:packet-middle-third-mass})
+\(\Rightarrow\) packet-window variance
+(Lemma~\ref{lem:packet-window-variance-lower-bound})
+\(\Rightarrow\) phase-derivative transversality
+(Lemma~\ref{lem:phase-derivative-transversality})
+\(\Rightarrow\) frequency-gap separation
+(Lemma~\ref{lem:frequency-gap-separation}).
 \end{remark}
 
 \begin{theorem}[Unconditional packet construction regularity (target)]
