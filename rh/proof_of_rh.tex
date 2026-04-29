@@ -41602,6 +41602,167 @@ the active route: the six correction rows vanish in
 quotient route is false on that packet, not merely incomplete.
 \end{remark}
 
+\begin{definition}[Actual finite row obstruction vector for the certified \(2Y\) quotient]
+\label{def:actual-row-obstruction-vector-2Y}
+Assume the notation of
+Subsection~\ref{subsec:verification-concrete-C7-Y12-row-certificate}.
+On a selected ordinary real-canonical packet define the actual row
+obstruction vector
+\[
+\mathfrak B_{2Y,p}:=
+\left(
+\begin{array}{c}
+\Delta_7^\nabla(C_{Y,p}^{\mathrm{tar}})\\[0.4ex]
+Q^A\operatorname{dist}(C_{7,p}^{\mathrm{tar}},\ker\Delta_7^\nabla)^{-1}\text{ failure flag}\\[0.4ex]
+P_{(W_{\mathrm{dead}}^{\mathrm{fixed}})^\perp}a_Y\\[0.4ex]
+P_{(W_{\mathrm{dead}}^{\mathrm{fixed}})^\perp}P_WV_{\mathrm{arith}}^{\mathrm{fixed}}\\[0.4ex]
+\Delta_7^\nabla(A_{7,p}^{\mathrm{loc}})\\[0.4ex]
+\omega_Y(P_WA_{7,p}^{\mathrm{loc}})\\[0.4ex]
+D_{\mathrm{loc}}P_{(W_{\mathrm{dead}}^{\mathrm{fixed}})^\perp}
+\bigl[II_{\mathrm{arith},9}^{\mathrm{exact}}\bigr]_{D^2N_0,\,\mathrm{same},\,w=1,\,b=12}\\[0.4ex]
+D_{\mathrm{loc}}\Pi_{\mathrm{fib},Y}(E_2+R_{\mathrm{lab}})
+\end{array}
+\right).
+\]
+The second entry is shorthand for the required polynomial lower bound
+\(|\Delta_7^\nabla(C_{7,p}^{\mathrm{tar}})|\ge Q^{-A}\|\Delta_7^\nabla\|\,\|C_{7,p}^{\mathrm{tar}}\|\).
+The third entry is required to be polynomially nonzero:
+\(\|P_{(W_{\mathrm{dead}}^{\mathrm{fixed}})^\perp}a_Y\|\ge Q^{-A}\|a_Y\|\),
+whereas the fourth, fifth, sixth, seventh, and eighth entries are
+required to vanish, or to be already routed as residual/coherent data
+before forming the certified dead quotient.  The seventh entry is the
+primitive arithmetic obstruction; in scalar notation it is precisely
+the atom-local part of
+\[
+  c_{\mathrm{arith},Y}
+  :=
+  \bigl[II_{\mathrm{arith},9}^{\mathrm{exact}}\bigr]_{D^2N_0,\,\mathrm{same},\,w=1,\,b=12}.
+\]
+\end{definition}
+
+\begin{theorem}[Verification audit for \(\mathfrak R_{2Y}(p)\) from raw row algebra]
+\label{thm:verification-audit-R2Y-from-raw-row-algebra}
+The finite-dimensional quotient algebra in
+Theorem~\ref{thm:rank-two-quotient-survival-from-concrete-certificate},
+Theorem~\ref{thm:concrete-live-rows-from-septic-whitening}, and
+Theorem~\ref{thm:verification-C2Y-certificate-continued} proves the
+certified rank-two quotient survival
+\[
+  \sigma_{\min}\!
+  \left(
+  q_{p,\mathrm{cert}}^Y
+  \begin{bmatrix}C_{7,p}^{\mathrm{tar}}&C_{Y,p}^{\mathrm{tar}}\end{bmatrix}
+  \right)
+  \ge Q^{-A}
+\]
+provided the actual obstruction vector of
+Definition~\ref{def:actual-row-obstruction-vector-2Y} satisfies the
+following coefficient conditions:
+\begin{enumerate}
+\item \(\Delta_7^\nabla(C_{Y,p}^{\mathrm{tar}})=0\) and
+\(|\Delta_7^\nabla(C_{7,p}^{\mathrm{tar}})|\ge Q^{-A}\|\Delta_7^\nabla\|\|C_{7,p}^{\mathrm{tar}}\|\).
+\item \(\operatorname{dist}(a_Y,W_{\mathrm{dead}}^{\mathrm{fixed}})\ge Q^{-A}|a_Y|\)
+and
+\(P_WV_{\mathrm{arith}}^{\mathrm{fixed}}\subseteq W_{\mathrm{dead}}^{\mathrm{fixed}}\).
+\item The actual local order-seven component is row-dead:
+\[
+  \Delta_7^\nabla(A_{7,p}^{\mathrm{loc}})=0,
+  \qquad
+  \omega_Y(P_WA_{7,p}^{\mathrm{loc}})=0.
+\]
+\item The primitive arithmetic same-point one-whitening slot is not
+atom-local:
+\[
+  D_{\mathrm{loc}}P_{(W_{\mathrm{dead}}^{\mathrm{fixed}})^\perp}
+  \bigl[II_{\mathrm{arith},9}^{\mathrm{exact}}\bigr]_{D^2N_0,\,\mathrm{same},\,w=1,\,b=12}=0.
+\]
+\item The completion/labelled-transition contribution is not atom-local:
+\(D_{\mathrm{loc}}\Pi_{\mathrm{fib},Y}(E_2+R_{\mathrm{lab}})=0\).
+\end{enumerate}
+If all five items hold, then the concrete coefficient certificate
+\(\mathfrak R_{2Y}(p)\), and hence \(\mathfrak C_{2Y}(p)\), holds on the
+packet.  If item (4) fails, then the primitive coefficient
+\(c_{\mathrm{arith},Y}\) is atom-local live and the certified rank-two
+\(C_7/Y12\) quotient route is false on that packet unless that live
+component is removed from the exact nuisance quotient and routed as
+coherent/residual data.
+\end{theorem}
+
+\begin{proof}
+Items (1)--(2) are exactly the row-exactness certificate
+\(\mathcal E_{2Y}(p)\): item (1) gives the normalized septic row
+\(\ell_{7,p}\), and item (2) gives the primitive whitening row
+\(\omega_Y\).  The triangular definition
+\(\ell_{9,p}^Y=\omega_Y-\omega_Y(C_{7,p}^{\mathrm{tar}})\ell_{7,p}\)
+then gives \(L_p^{\mathrm{row}}E_p=I_2\) and
+\(\|L_p^{\mathrm{row}}\|_{\mathrm{op}}\le Q^A\) by
+Theorem~\ref{thm:concrete-live-rows-from-septic-whitening}.
+
+The base source-linear columns \(R_{B_2,p},R_{P,p},R_{D,p}\), the
+affine fixed/recentering column, and the lower-order column
+\(A_{<7,p}\) are killed or coherently routed by
+Lemmas~\ref{lem:origin-grade-row-deadness-2Y}
+and~\ref{lem:affine-coherent-columns-routing-2Y}, once they are placed
+in the origin/grade spaces listed there.  Item (3) is precisely the
+atom-local part of the order-seven test in
+Lemma~\ref{lem:A7-raw-column-classification-2Y}.  Item (4), together
+with item (2), is precisely the primitive arithmetic test in
+Theorem~\ref{thm:primitive-arithmetic-coefficient-classification-2Y}.
+Item (5) is the hypothesis needed in
+Theorem~\ref{thm:E2-Rlab-no-atom-local-live-verification-2Y}.
+
+Therefore every raw nuisance column is row-dead, residual, or
+coherent/reroutable; no atom-local live column is quotient-killed.
+The certified dead quotient is formed only from row-dead remainders,
+and the singular-value lower bound follows from
+Theorem~\ref{thm:rank-two-quotient-survival-from-concrete-certificate}.
+The effective carrier item is already supplied in the active route by
+the six-row carrier correction table and
+Theorem~\ref{thm:effective-carrier-closes-after-six-row-table}.
+
+If item (4) fails, the vector
+\(D_{\mathrm{loc}}P_{(W_{\mathrm{dead}}^{\mathrm{fixed}})^\perp}\bigl[II_{\mathrm{arith},9}^{\mathrm{exact}}\bigr]_{D^2N_0,\,\mathrm{same},\,w=1,\,b=12}\)
+is a nonzero local primitive \(Y12\)-coordinate.  Placing the unsplit
+arithmetic column in the exact dead quotient then kills a nonzero
+vector in the live plane, contradicting
+Lemma~\ref{lem:live-coefficient-obstruction-rank-two-quotient}.  Hence
+the certified route is invalid on that packet unless the component is
+rerouted out of the exact quotient.
+\end{proof}
+
+\begin{remark}[Current status of the row/routing certificate]
+\label{rem:current-status-row-routing-certificate-R2Y}
+\emph{Status: FINITE AUDIT.}  The present draft proves the linear
+algebra from the coefficient certificate to rank-two quotient survival.
+It does not yet compute all entries of \(\mathfrak B_{2Y,p}\) from raw
+formulas.  In particular, the theorems labelled ``septic exact
+sequence'', ``whitening exact sequence'', and ``no atom-fitting'' still
+contain the exact coefficient assumptions
+\((\mathrm{SE1})\)--\((\mathrm{SE2})\),
+\((\mathrm{W1})\)--\((\mathrm{W2})\), and the three no-atom-fitting
+guardrails.  Thus, until those assumptions are verified from the actual
+finite row formulas on the selected packets, the rank-two \(Y12\)
+row/routing certificate remains a finite audit item.
+\end{remark}
+
+\begin{remark}[Superseding the older primitive-only quotient ledger]
+\label{rem:supersede-primitive-only-Y12-ledger}
+Older ledgers that say the only unresolved quotient point is
+\(c_{\mathrm{arith},Y}=0\) should be read in the certified sense of
+Theorem~\ref{thm:verification-audit-R2Y-from-raw-row-algebra}.  The
+active proof does not require a global scalar identity
+\(c_{\mathrm{arith},Y}=0\).  It requires the stronger typed statement
+that the atom-local primitive component
+\[
+D_{\mathrm{loc}}P_{(W_{\mathrm{dead}}^{\mathrm{fixed}})^\perp}
+\bigl[II_{\mathrm{arith},9}^{\mathrm{exact}}\bigr]_{D^2N_0,\,\mathrm{same},\,w=1,\,b=12}
+\]
+vanishes, or else is not placed in the exact dead quotient.  Coherent
+or residual primitive terms are allowed only after being routed out of
+the exact quotient.  A nonzero atom-local primitive term is a genuine
+local failure of rank-two \(C_7/Y12\) quotient survival.
+\end{remark}
+
 \begin{definition}[Certified live-row quotient]
 \label{def:certified-live-row-quotient}
 Let \(\mathcal H_p^Y\) be the finite-dimensional \(Y12\)-boundary output
