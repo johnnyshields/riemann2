@@ -38811,6 +38811,30 @@ impose a hidden relation between \(C_7\) and \(C_{Y12}\) after dead-only
 quotienting.
 \end{hypothesis}
 
+\begin{definition}[Dead-only quotient space and live carrier matrix]
+\label{def:dead-only-quotient-live-carrier-matrix}
+Let \(\mathcal H_p^Y\) be the finite-dimensional Hilbert space in which the
+\(Y12\)-boundary outputs live.  Write
+\[
+K_p:=\mathcal K_{p,\mathrm{dead}}^Y\subset \mathcal H_p^Y,
+\qquad
+q_p:=I-P_{K_p}^{\mathrm{bd}},
+\]
+for the dead-only nuisance space and its boundary projector
+(Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival}), and
+\[
+E_p:=
+\begin{bmatrix}
+C_{7,p}^{\mathrm{tar}}&C_{Y,p}^{\mathrm{tar}}
+\end{bmatrix}:\mathbb C^2\to \mathcal H_p^Y
+\]
+for the retained live carrier matrix.  The rank-two live-pair quotient gap
+\[
+\delta_{2Y,p}:=\sigma_{\min}(q_pE_p)
+\]
+is the standing finite-dimensional invariant of the cap/\(Y12\) bridge.
+\end{definition}
+
 \begin{lemma}[Dual-row certificate for rank-two \(C_7/Y12\) quotient survival]
 \label{lem:dual-row-rank-two-Y12-survival}
 Let
@@ -38869,6 +38893,66 @@ operator norm \(\sigma_{\min}(q_pE_p)^{-1}\le Q^C\), and they act after
 \(q_p\), hence vanish on \(\mathcal K_p^Y\); the diagonal normalization is
 the standard Moore--Penrose identity \(L_p^\dagger(q_pE_p)=I_2\).
 \end{proof}
+
+\begin{lemma}[Canonical dead-column split relative to detecting rows]
+\label{lem:canonical-dead-column-split-relative-to-rows}
+Assume the equivalent conditions of
+Lemma~\ref{lem:dual-row-rank-two-Y12-survival} for a base nuisance space
+\(K_{0,p}\subset\mathcal H_p^Y\), and let
+\(L_{0,p}:\mathcal H_p^Y\to\mathbb C^2\) be a bounded row certificate with
+\[
+L_{0,p}K_{0,p}=0,
+\qquad
+L_{0,p}E_p=I_2,
+\qquad
+\|L_{0,p}\|\le Q^C.
+\]
+For every declared nuisance column \(A_{a,p}\in\mathcal H_p^Y\), define its
+canonical live coefficient and dead remainder by
+\[
+m_{a,p}:=L_{0,p}A_{a,p}\in\mathbb C^2,
+\qquad
+A_{a,p}^{\mathrm{dead}}:=A_{a,p}-E_p m_{a,p}.
+\]
+Then \(L_{0,p}A_{a,p}^{\mathrm{dead}}=0\).  Consequently, if the
+nuisance space is enlarged only by the dead remainders,
+\[
+K_{p,\mathrm{dead}}
+:=K_{0,p}+\operatorname{span}\{A_{a,p}^{\mathrm{dead}}:a\in\mathcal A\},
+\]
+then the same rows \(L_{0,p}\) still kill \(K_{p,\mathrm{dead}}\) and
+still normalize \(E_p\), so that
+\[
+\sigma_{\min}\bigl((I-P_{K_{p,\mathrm{dead}}}^{\mathrm{bd}})E_p\bigr)
+\ge Q^{-C'}
+\]
+for some \(C'\) depending polynomially on \(C\).
+\end{lemma}
+
+\begin{proof}
+By definition,
+\(L_{0,p}A_{a,p}^{\mathrm{dead}}=L_{0,p}A_{a,p}-L_{0,p}E_p m_{a,p}
+=m_{a,p}-m_{a,p}=0\).  Thus \(L_{0,p}\) kills both \(K_{0,p}\) and every
+added dead remainder, so it kills \(K_{p,\mathrm{dead}}\).  Since
+\(L_{0,p}E_p=I_2\) and \(\|L_{0,p}\|\le Q^C\), the dual-row implication of
+Lemma~\ref{lem:dual-row-rank-two-Y12-survival} gives the stated
+singular-value lower bound, with only polynomial loss.
+\end{proof}
+
+\begin{remark}[What the dead-column split proves]
+\label{rem:what-dead-column-split-proves}
+Lemma~\ref{lem:canonical-dead-column-split-relative-to-rows} is not a new
+analytic estimate.  It is the algebraic bookkeeping needed to assemble a
+nuisance space that is row-dead and live-pair preserving.  The actual
+analytic content is the existence of bounded rows \(L_{0,p}\),
+equivalently the rank-two Schur gap of
+Lemma~\ref{lem:dual-row-rank-two-Y12-survival}.  Once those rows exist,
+every declared nuisance column has the canonical live coefficient
+\(m_{a,p}=L_{0,p}A_{a,p}\); placing the unsplit column into the kernel
+is safe only when \(m_{a,p}=0\) or when the live part has been rerouted
+out of the dead quotient, as recorded in
+Corollary~\ref{cor:primitive-arithmetic-coefficient-dead-or-rerouted}.
+\end{remark}
 
 \begin{remark}[Necessity of dead-column split for rank-two survival]
 \label{rem:dead-column-split-necessity}
@@ -39159,6 +39243,87 @@ with strongly varying \(s_p\) and \(H_p\equiv0\) is consistent with
 nonstatic extraction covariance.
 \end{hypothesis}
 
+\begin{definition}[D4 coefficient-good cap core]
+\label{def:D4-coefficient-good-cap-core}
+Let \(C_j\) be a frozen cap with nonnegative weights \(\mu_p\) and
+extraction vectors \(\Gamma_p\in\mathbb C^2\).  A subset
+\(C_j^{\mathrm{core}}\subset C_j\) is called a \(D4\) coefficient-good cap
+core if there are constants \(C_H,C_M\) such that the pointwise amplitude
+bound
+\[
+|H_p|\ge Q^{-C_H}
+\qquad(p\in C_j^{\mathrm{core}})
+\]
+holds and the core carries polynomially much of the weighted carrier
+mass:
+\[
+\sum_{p\in C_j^{\mathrm{core}}}\mu_p\|\Gamma_p\|^2
+\ge
+Q^{-C_M}
+\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2.
+\]
+\end{definition}
+
+\begin{theorem}[D4 amplitude survival from a coefficient-good cap core]
+\label{thm:D4-amplitude-survival-from-coefficient-good-core}
+If \(C_j^{\mathrm{core}}\subset C_j\) is a \(D4\) coefficient-good cap
+core in the sense of
+Definition~\ref{def:D4-coefficient-good-cap-core}, then the carrier-mass
+form of \(D4\) amplitude survival holds on \(C_j\):
+\[
+\sum_{p\in C_j}\mu_p|H_p|^2\|\Gamma_p\|^2
+\ge
+Q^{-A_H}
+\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2,
+\qquad A_H=2C_H+C_M.
+\]
+In particular, Hypothesis~\ref{hyp:D4-amplitude-survival-cap-core} is
+discharged once a coefficient-good cap core has been exhibited.
+\end{theorem}
+
+\begin{proof}
+By nonnegativity of the weights and the pointwise core lower bound on
+\(|H_p|\),
+\[
+\sum_{p\in C_j}\mu_p|H_p|^2\|\Gamma_p\|^2
+\ge
+\sum_{p\in C_j^{\mathrm{core}}}\mu_p|H_p|^2\|\Gamma_p\|^2
+\ge
+Q^{-2C_H}
+\sum_{p\in C_j^{\mathrm{core}}}\mu_p\|\Gamma_p\|^2.
+\]
+The core mass condition gives
+\(\sum_{C_j^{\mathrm{core}}}\mu_p\|\Gamma_p\|^2\ge
+Q^{-C_M}\sum_{C_j}\mu_p\|\Gamma_p\|^2\); combining the two estimates
+proves the result.
+\end{proof}
+
+\begin{corollary}[D4 amplitude survival from admissible cores and vector Remez]
+\label{cor:D4-amplitude-survival-from-core-Remez}
+Suppose that on each routed block \(I\) there is a predetermined
+coefficient-good core \(E_I^{\mathrm{core}}\), chosen independently of
+\(\Gamma_p\), of the hard atoms, and of the live residuals, such that
+\(|H_p|\ge Q^{-C_H}\) for \(p\in E_I^{\mathrm{core}}\); and suppose the
+vector-Remez / core-transfer estimate gives, after restriction to every
+frozen cap \(C_j\),
+\[
+\sum_{p\in C_j\cap E_I^{\mathrm{core}}}\mu_p\|\Gamma_p\|^2
+\ge
+Q^{-C_M}
+\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2.
+\]
+Then the \(D4\) amplitude survival estimate of
+Theorem~\ref{thm:D4-amplitude-survival-from-coefficient-good-core} holds
+on \(C_j\) with \(C_j^{\mathrm{core}}:=C_j\cap E_I^{\mathrm{core}}\).
+\end{corollary}
+
+\begin{proof}
+Apply Theorem~\ref{thm:D4-amplitude-survival-from-coefficient-good-core}
+with \(C_j^{\mathrm{core}}:=C_j\cap E_I^{\mathrm{core}}\): the pointwise
+amplitude bound is the hypothesis on \(E_I^{\mathrm{core}}\), and the
+core mass condition is exactly the Remez/core-transfer estimate.
+\end{proof}
+
 \begin{remark}[Relative versus absolute static-line survival]
 \label{rem:relative-vs-absolute-static-line}
 Rank-two quotient survival
@@ -39246,6 +39411,50 @@ The amplitude mass hypothesis bounds the first sum below by
 \(Q^{-A-4C}\sum_p\mu_p\,\|\Gamma_p\|^2\); the error sum is
 \(\le Q^{-B}\sum_p\mu_p\,\|\Gamma_p\|^2\), absorbed for
 \(B>A+4C+1\).  Renaming the exponent gives the stated lower bound.
+\end{proof}
+
+\begin{corollary}[Four-item cap/\(Y12\) bridge package]
+\label{cor:four-item-cap-Y12-bridge-package}
+Assume the bounded dual-row certificate of
+Lemma~\ref{lem:dual-row-rank-two-Y12-survival}, equivalently the rank-two
+quotient Schur gap of
+Theorem~\ref{thm:rank-two-quotient-primal-dual-schur-equivalence}.  Form
+the nuisance quotient using the canonical dead-column split of
+Lemma~\ref{lem:canonical-dead-column-split-relative-to-rows}, and assume
+the coefficient-good cap core of
+Theorem~\ref{thm:D4-amplitude-survival-from-coefficient-good-core}.  If
+the row-normal \(D4\) expansion has small quotient error and
+\(\sigma_{\min}(L_{\mathrm{clean}})\ge Q^{-C}\), then the cap-side
+absolute \(D4\) lower bound
+\[
+\sum_{p\in C_j}\mu_p\|q_p^Y\Phi_p^Y\Gamma_p\|^2
+\ge
+Q^{-A}
+\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2
+\]
+holds.  Equivalently, the four heuristic items
+\[
+\text{dead-column split},\qquad
+\text{bounded dual rows},\qquad
+\text{analytic live-pair Schur gap},\qquad
+D4\text{ amplitude survival}
+\]
+form a closed referee-safe cap/\(Y12\) package once the dual rows and
+the coefficient-good cap core have been established by the preceding
+modules.
+\end{corollary}
+
+\begin{proof}
+The dual rows give the Schur gap by
+Theorem~\ref{thm:rank-two-quotient-primal-dual-schur-equivalence}.  The
+canonical split of
+Lemma~\ref{lem:canonical-dead-column-split-relative-to-rows} keeps the
+quotient dead-only and preserves those rows, so the Schur gap survives
+the formation of \(\mathcal K_p^Y\).  The cap core gives \(D4\) amplitude
+survival on \(C_j\) by
+Theorem~\ref{thm:D4-amplitude-survival-from-coefficient-good-core}.
+The absolute \(D4\) lower bound is then exactly
+Proposition~\ref{prop:cap-D4-lower-bound-from-schur-and-amplitude}.
 \end{proof}
 
 \begin{corollary}[Cap transversality in live carrier coordinates: projective Wronskian form]
