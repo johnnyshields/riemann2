@@ -30446,7 +30446,7 @@ On each frozen cap \(C_j\), let
 \[
 B_j:=\sum_{p\in C_j}w_p\,\Gamma_p\Gamma_p^\ast,
 \qquad
-w_p=\rho_p\frac{E_{1,p}H_p}{N_p},
+w_p=\rho_p\frac{E_{1,p}H_p}{\mathcal N^{\mathrm{wt}}_p},
 \qquad
 \Gamma_p=\binom{\Gamma_G(p)}{\Gamma_{G,2}(p)}.
 \]
@@ -37861,13 +37861,91 @@ In the normalized case \(a_p=0\), this reduces to anti-concentration of
 \(\Gamma_{G,2}\).
 \end{hypothesis}
 
+\begin{lemma}[Exact cap covariance identity]
+\label{lem:exact-cap-covariance-identity}
+Let \(C_j\) be a frozen cap and suppose \(w_p\ge0\).  Write
+\[
+\Gamma_p=\binom{g_p}{h_p},
+\qquad
+s_p:=h_p/g_p
+\]
+on a chart where \(g_p\neq0\), and put
+\[
+\mu_p:=w_p|g_p|^2,
+\qquad
+S_j:=\sum_{p\in C_j}\mu_p.
+\]
+Assume \(S_j>0\), and define
+\[
+\bar s_j:=S_j^{-1}\sum_{p\in C_j}\mu_p s_p.
+\]
+Then
+\[
+\det\!\left(\sum_{p\in C_j}w_p\Gamma_p\Gamma_p^\ast\right)
+=
+S_j\sum_{p\in C_j}\mu_p|s_p-\bar s_j|^2.
+\]
+If in addition
+\[
+|g_p|\ge \tfrac12\|\Gamma_p\|
+\qquad(p\in C_j),
+\]
+then
+\[
+\frac1{16}
+\frac{\sum_p\mu_p|s_p-\bar s_j|^2}{\sum_p\mu_p}
+\le
+\frac{\det(B_j)}{(\operatorname{tr}B_j)^2}
+\le
+\frac{\sum_p\mu_p|s_p-\bar s_j|^2}{\sum_p\mu_p}.
+\]
+\end{lemma}
+
+\begin{proof}
+Since \(h_p=g_ps_p\),
+\[
+\Gamma_p\Gamma_p^\ast
+=
+|g_p|^2
+\begin{pmatrix}
+1&\overline{s_p}\\
+s_p&|s_p|^2
+\end{pmatrix}.
+\]
+Thus
+\[
+B_j=
+\begin{pmatrix}
+S_j&\overline{M_j}\\
+M_j&T_j
+\end{pmatrix},
+\qquad
+M_j=\sum_p\mu_ps_p,
+\qquad
+T_j=\sum_p\mu_p|s_p|^2.
+\]
+Therefore
+\[
+\det(B_j)=S_jT_j-|M_j|^2
+=
+S_j\sum_p\mu_p|s_p-\bar s_j|^2.
+\]
+The chart condition gives
+\[
+S_j\le \operatorname{tr}B_j
+=\sum_p\mu_p(1+|s_p|^2)
+\le4S_j.
+\]
+Dividing by \((\operatorname{tr}B_j)^2\) gives the claimed comparison.
+\end{proof}
+
 \begin{lemma}[Extraction covariance dichotomy]
 \label{lem:extraction-covariance-dichotomy}
 On each frozen cap \(C_j\), let
 \[
 B_j=\sum_{p\in C_j} w_p\,\Gamma_p\Gamma_p^\ast,
 \qquad
-w_p=\rho_p\frac{E_{1,p}H_p}{N_p},
+w_p=\rho_p\frac{E_{1,p}H_p}{\mathcal N^{\mathrm{wt}}_p},
 \qquad
 \Gamma_p=\binom{\Gamma_G(p)}{\Gamma_{G,2}(p)}.
 \]
@@ -37888,13 +37966,39 @@ the \(Y12\) quotient test:
 \]
 \end{lemma}
 
+\begin{hypothesis}[Cap nonstaticity or static-line survival]
+\label{hyp:cap-nonstaticity-or-static-survival}
+\emph{Status: FINITE AUDIT.}  For every good frozen cap \(C_j\), either
+\[
+\sum_{p\in C_j}w_p|\Gamma_G(p)|^2|s_p-\bar s_j|^2
+\ge
+Q^{-A}
+\sum_{p\in C_j}w_p|\Gamma_G(p)|^2,
+\]
+or the associated static direction
+\[
+u_j=\frac{(1,s_j^\ast)}{\sqrt{1+|s_j^\ast|^2}}
+\]
+satisfies
+\[
+\|(I-P_{\mathcal K_j^Y})u_j\|^2\ge Q^{-A}.
+\]
+By Lemma~\ref{lem:exact-cap-covariance-identity}, the first alternative is
+equivalent (up to absolute constants) to
+\(\delta_{\mathrm{ext}}=\det(B_j)/(\operatorname{tr}B_j)^2\ge Q^{-A}\); the
+second alternative is the static-line handoff to the \(Y12\) quotient module.
+The algebraic identity is proved (Lemma~\ref{lem:exact-cap-covariance-identity});
+the variance lower bound itself, and the static-line lower bound on
+\(\eta_j\), remain open inputs in the present draft.
+\end{hypothesis}
+
 \begin{remark}[Cap-wise covariance bottleneck]
 \label{rem:cap-wise-covariance-bottleneck}
 On each frozen cap \(C_j\), define
 \[
 B_j=\sum_{p\in C_j}w_p\,\Gamma_p\Gamma_p^\ast,
 \qquad
-w_p=\rho_p\frac{E_{1,p}H_p}{N_p},
+w_p=\rho_p\frac{E_{1,p}H_p}{\mathcal N^{\mathrm{wt}}_p},
 \qquad
 \Gamma_p=\binom{\Gamma_G(p)}{\Gamma_{G,2}(p)}.
 \]
