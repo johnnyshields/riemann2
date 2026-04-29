@@ -43085,6 +43085,173 @@ Thus the half-leading residual estimate closes automatically in the active
 carrier quotient.
 \end{remark}
 
+\begin{definition}[Associated-graded correction-row convention]
+\label{def:associated-graded-correction-row-convention}
+Work in the carrier-graded row module \(\mathcal M_{\rm car}\) of
+Definition~\ref{def:carrier-graded-row-module-order-nine}.  The clean
+live rows through order nine are the two components already extracted in
+Lemma~\ref{lem:clean-triangular-d4-carrier-matrix}, namely the
+\(\mathsf C_7\)-row and the clean centered \(\mathsf C_{Y12}\)-row.
+After these two live rows are removed, the remaining correction rows
+through order nine are, by definition, the associated-graded remainder
+in the three non-live correction origins
+\(\nu\in\{\mathrm{line},\mathrm{bg/core},\mathrm{norm/sub}\}\).  Thus,
+for \(b\in\{7,9\}\), the correction rows have the associated-graded form
+\[
+  R_{\rm line}^{(b)}=a_{{\rm line},b}\,\mathsf C_{\rm line},
+  \qquad
+  R_{\rm bg/core}^{(b)}=a_{{\rm bg/core},b}\,\mathsf C_{\rm bg/core},
+  \qquad
+  R_{\rm norm/sub}^{(b)}=a_{{\rm norm/sub},b}\,\mathsf C_{\rm norm/sub},
+\]
+with coefficients in the local coefficient ring.  Any term with a
+\(\mathsf C_7\)- or \(\mathsf C_{Y12}\)-component is not part of
+\(R_{\nu}^{(b)}\); it is, by this convention, part of the live carrier
+matrix.  Equivalently, the symbols \(R_{\nu}^{(b)}\) denote the non-live
+residual after projection away from the retained carrier plane
+\(W_{\rm car}:=\operatorname{span}\{[\mathsf C_7],[\mathsf C_{Y12}]\}\).
+\end{definition}
+
+\begin{lemma}[Six-row carrier correction table]
+\label{lem:six-row-carrier-correction-table}
+In the associated-graded correction-row convention, the six correction
+rows through order nine have the following carrier table:
+\[
+\begin{array}{c|c|c|c|c}
+\text{row} & \text{associated carrier} & \text{class in }\mathcal Q_{\rm car}
+& P_{W_{\rm car}}R_{\nu}^{(b)} & L_{\nu}^{(b)} \\
+\hline
+R_{\rm line}^{(7)}     & \mathsf C_{\rm line}     & 0 & 0 & 0\\
+R_{\rm line}^{(9)}     & \mathsf C_{\rm line}     & 0 & 0 & 0\\
+R_{\rm bg/core}^{(7)}  & \mathsf C_{\rm bg/core}  & 0 & 0 & 0\\
+R_{\rm bg/core}^{(9)}  & \mathsf C_{\rm bg/core}  & 0 & 0 & 0\\
+R_{\rm norm/sub}^{(7)} & \mathsf C_{\rm norm/sub} & 0 & 0 & 0\\
+R_{\rm norm/sub}^{(9)} & \mathsf C_{\rm norm/sub} & 0 & 0 & 0
+\end{array}
+\]
+Consequently all six correction rows lie in \(\mathcal C_{\rm car}\),
+have zero retained carrier projection, and contribute no coherent live
+correction matrix:
+\(M_{\rm live,p}^{\rm corr}=0\).
+\end{lemma}
+
+\begin{proof}
+By Definition~\ref{def:carrier-graded-row-module-order-nine}, the
+nuisance submodule is
+\(\mathcal C_{\rm car}=\operatorname{span}\{\mathsf C_{N7,I},\mathsf C_{N7,D},\mathsf C_{N5,I},\mathsf C_{N5,D},\mathsf C_{\rm line},\mathsf C_{\rm bg/core},\mathsf C_{\rm norm/sub}\}\).
+Definition~\ref{def:associated-graded-correction-row-convention} writes
+the six correction rows as coefficient multiples of
+\(\mathsf C_{\rm line}\), \(\mathsf C_{\rm bg/core}\), or
+\(\mathsf C_{\rm norm/sub}\), so each belongs to
+\(\mathcal C_{\rm car}\) and its class in
+\(\mathcal Q_{\rm car}=\mathcal M_{\rm car}/\mathcal C_{\rm car}\) is
+zero.  Since \(W_{\rm car}\subset\mathcal Q_{\rm car}\), the projection
+to \(W_{\rm car}\) is zero as well.  The same-scale live matrix
+contribution \(L_{\nu}^{(b)}\) is precisely the
+\((\mathsf C_7,\mathsf C_{Y12})\)-coordinate of the row, which is zero
+by the associated-graded convention.
+\end{proof}
+
+\begin{remark}[No double counting of the triangularization row]
+\label{rem:no-double-counting-triangularization-row}
+The row-normal subtraction
+\(\ell_9^Y=\omega_Y-\omega_Y(e_7)\ell_7\) and the corresponding
+coefficient \(\beta_9^{\rm tri}:=\beta_9-\omega_Y(e_7)c_7\) are part of
+the clean live row-normal matrix
+\[
+  L_{\rm clean}^{\rm tri}
+  =
+  \begin{pmatrix}
+  c_7&0\\
+  \beta_9^{\rm tri}&\alpha_9
+  \end{pmatrix}.
+\]
+They are not counted as one of the six correction rows
+\(R_{\nu}^{(b)}\).  Thus the table in
+Lemma~\ref{lem:six-row-carrier-correction-table} does not remove or
+hide the same-scale \(\beta_9^{\rm tri}\Gamma_G\) contribution; it
+records only that line, background/core, and normalization/subtraction
+remainders have no retained \(C_7/Y12\) projection in the carrier
+quotient.
+\end{remark}
+
+\begin{theorem}[Effective carrier closes after the six-row table]
+\label{thm:effective-carrier-closes-after-six-row-table}
+On every Gram-good packet in the carrier-quotient route, the six-row
+carrier correction table gives
+\[
+  L_{\rm eff,p}=L_{\rm clean,p}^{\rm tri}
+  =
+  \begin{pmatrix}
+  c_{7,p}&0\\
+  \beta_{9,p}^{\rm tri}&\alpha_{9,p}
+  \end{pmatrix},
+\]
+and hence \(\sigma_{\min}(L_{\rm eff,p})\ge Q^{-C}\).  Consequently the
+bottom item of \(\mathfrak C_{2Y}(p)\) is proved in the carrier-quotient
+formulation.
+\end{theorem}
+
+\begin{proof}
+Lemma~\ref{lem:six-row-carrier-correction-table} gives
+\(M_{\rm live,p}^{\rm corr}=0\), so
+\(L_{\rm eff,p}=L_{\rm clean,p}^{\rm tri}\).  By
+Lemma~\ref{lem:clean-triangular-d4-carrier-matrix},
+\[
+  \det L_{\rm clean,p}^{\rm tri}=c_{7,p}\alpha_{9,p}
+  =-\frac{1}{1536\pi^4
+  g_{{\rm Gr},p}^{3/2}h_{{\rm Gr},p}^{3}
+  (\sqrt{g_{{\rm Gr},p}}+\sqrt{h_{{\rm Gr},p}})^3}.
+\]
+On a Gram-good packet,
+\(Q^{-C_0}\le g_{{\rm Gr},p},h_{{\rm Gr},p}\le Q^{C_0}\), so
+\(|\det L_{\rm clean,p}^{\rm tri}|\ge Q^{-C_1}\) and
+\(\|L_{\rm clean,p}^{\rm tri}\|_{\operatorname{op}}\le Q^{C_1}\).  For a
+\(2\times2\) matrix \(L\),
+\(\sigma_{\min}(L)=|\det L|/\sigma_{\max}(L)\), giving
+\(\sigma_{\min}(L_{\rm eff,p})\ge Q^{-C}\).
+\end{proof}
+
+\begin{corollary}[D4 residual audit closes in the active carrier quotient]
+\label{cor:D4-residual-audit-closes-active-carrier-quotient}
+Assume the retained carrier frame lower bound
+\(\sigma_{\min}(E_{\rm car})\ge Q^{-C}\) and the Gram-good packet
+bounds.  Then
+\(\sigma_{\min}(E_{\rm car}L_{\rm eff,p})\ge Q^{-C}\) and
+\(\varepsilon_{\rm rem}=0\) in the active carrier quotient.  In
+particular, the effective-carrier finite-audit item is closed; no
+determinant anti-cancellation condition remains for the six correction
+rows.
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:effective-carrier-closes-after-six-row-table} gives
+\(\sigma_{\min}(L_{\rm eff,p})\ge Q^{-C}\), and the carrier-frame
+assumption then gives
+\(\sigma_{\min}(E_{\rm car}L_{\rm eff,p})\ge\sigma_{\min}(E_{\rm car})\sigma_{\min}(L_{\rm eff,p})\ge Q^{-C'}\).
+By Lemma~\ref{lem:six-row-carrier-correction-table}, the six correction
+rows have zero carrier-quotient class, so the correction residual in
+the active carrier quotient is zero.
+\end{proof}
+
+\begin{remark}[Status update for the effective-carrier ledger]
+\label{rem:effective-carrier-ledger-closed-by-six-row-table}
+This supersedes
+Remark~\ref{rem:effective-carrier-item-current-status}, which treated
+\(\sigma_{\min}(L_{\rm eff,p})\ge Q^{-C}\) as a finite-audit item.  In
+the active carrier-quotient formulation, the six correction rows are
+not arbitrary coherent live matrices.  They are associated-graded line,
+background/core, and normalization/subtraction rows, hence lie in
+\(\mathcal C_{\rm car}\) and have zero retained \(C_7/Y12\) projection.
+Therefore
+\(M_{\rm live,p}^{\rm corr}=0\),
+\(L_{\rm eff,p}=L_{\rm clean,p}^{\rm tri}\), and the clean triangular
+determinant closes the effective-carrier item.  The only way this
+conclusion could fail would be to work after scalar \(I\)-coordinate
+collapse, where the carrier labels are no longer independent.  That
+scalar formulation is not the active D4 route.
+\end{remark}
+
 \begin{lemma}[Nuisance correction rows vanish in the carrier quotient]
 \label{lem:agent-six-final-nuisance-correction-rows-vanish}
 Assume that the finite correction rows through order nine satisfy
