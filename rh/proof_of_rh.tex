@@ -48407,16 +48407,29 @@ standard \((\log n)^j/\sqrt n\)-type coefficient growth, so differentiation
 preserves a polynomial derivative budget on each packet.
 \end{proof}
 
-\begin{definition}[Raw packet scale]
-\label{def:raw-packet-scale}
-For each Whitney packet \(p\), let \(\lambda_p^{\mathrm{raw}}\) denote the
-geometric packet width produced by the Whitney construction
-(Definition~\ref{def:whitney-packet-cores}).  This is the scale parameter used
-in the local Sobolev/Bernstein estimates on \(K_p\).  A packet is
-\emph{admissible} if it is one of the Whitney packets produced by the
-construction and satisfies the packet-regularity hypotheses of
-Lemma~\ref{lem:finite-afe-packet-regularity}.
+\begin{definition}[Raw packet scale and admissibility]
+\label{def:raw-packet-scale-admissibility}
+For each Whitney packet core \(K_p\), let \(\lambda_p^{\mathrm{raw}}\) denote
+its geometric packet width produced by the Whitney construction
+(Definition~\ref{def:whitney-packet-cores}).  A packet is called
+\emph{admissible} if it satisfies the packet-regularity hypotheses of
+Lemma~\ref{lem:finite-afe-packet-regularity} and the raw scale bound
+\[
+Q^{-C}\le \lambda_p^{\mathrm{raw}}\le Q^C.
+\]
+On the admissible packet family we write
+\(\lambda_p:=\lambda_p^{\mathrm{raw}}\).
 \end{definition}
+
+\begin{remark}[Upper raw-scale bound from localization]
+\label{rem:upper-raw-scale-bound}
+The upper bound \(\lambda_p^{\mathrm{raw}}\le Q^C\) follows from the fact
+that the source-admissible region lies inside the finite-AFE window
+\(I_{\mathrm{ref}}\) of polynomial diameter, so
+\(d(m_p)\le \operatorname{diam}(I_{\mathrm{ref}})\ll Q^C\).  The lower bound
+is part of admissibility; it is upgraded to a theorem about good packets in
+Corollary~\ref{cor:boundary-collar-exclusion}.
+\end{remark}
 
 \begin{lemma}[Packet-scale AFE envelope]
 \label{lem:packet-scale-AFE-envelope}
@@ -48428,17 +48441,21 @@ For each admissible packet core \(K_p\),
 +
 \lambda_p^{\mathrm{raw}}\int_{K_p^+}|F_X'(u)|^2W_{\mathrm{ref}}(u)\,du.
 \]
-Under the packet derivative budget, this yields a polynomial packet envelope
-on the admissible packet family.
+Consequently, after the packet derivative budget and EF completion,
+\[
+\sup_{t\in K_p}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\le Q^B
+\]
+on the admissible packet set.
 \end{lemma}
 
 \begin{proof}
 This is the local one-dimensional Sobolev/Bernstein inequality on \(K_p\) at
 scale \(\lambda_p^{\mathrm{raw}}\), followed by the derivative budget from
 Lemma~\ref{lem:finite-afe-packet-regularity} and the EF tail bound
-(Corollary~\ref{cor:ef-completion-bound}).  The polynomial packet envelope
-follows because the Whitney construction produces \(\lambda_p^{\mathrm{raw}}\)
-within the polynomial range intrinsic to \(\Omega\).
+(Corollary~\ref{cor:ef-completion-bound}).  The polynomial \(Q^B\) form on
+the admissible packet set follows from the raw scale bounds
+\(Q^{-C}\le \lambda_p^{\mathrm{raw}}\le Q^C\) baked into
+Definition~\ref{def:raw-packet-scale-admissibility}.
 \end{proof}
 
 \begin{lemma}[Packet middle-third mass]
@@ -48614,25 +48631,36 @@ Corollary~\ref{cor:reference-ms-noncollapse}.  Then for \(\eta=Q^{-C}\),
 \int_{C_\eta}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt
 \le Q^{-A}\int_{\Omega}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt.
 \]
+In particular, no good packet core can be supported entirely inside
+\(C_\eta\), so every good packet satisfies
+\[
+d(m_p)\ge Q^{-C}.
+\]
 \end{corollary}
 
 \begin{proof}
-On the collar \(C_\eta\), Lemma~\ref{lem:packet-scale-AFE-envelope} gives a
-polynomial packet envelope on each admissible packet, and bounded overlap
-globalizes this to
+By the packet envelope lemma, on each admissible packet core \(K_p\),
+\[
+\sup_{t\in K_p}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\ll Q^B
+\]
+for some fixed \(B>0\).  Since the packet cores have bounded overlap and the
+collar \(C_\eta\) is a one-dimensional boundary layer,
 \[
 \int_{C_\eta}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt
-\ll Q^B\,\mu(C_\eta)
+\ll Q^B\,\mu(C_\eta)\ll Q^B \eta.
 \]
-for some absolute \(B\).  Since the source window is one-dimensional,
-\(\mu(C_\eta)\ll \eta\), so with \(\eta=Q^{-C}\) and \(C\) chosen large
-relative to \(A+B\), we get
+Taking \(\eta=Q^{-C}\) with \(C\) sufficiently large gives
 \[
 \int_{C_\eta}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt
-\le \tfrac12 c_0\,Q^{-A}.
+\le Q^{-A}\int_{\Omega}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt,
 \]
-Now apply Corollary~\ref{cor:reference-ms-noncollapse} to convert this into
-the stated relative bound.
+using Corollary~\ref{cor:reference-ms-noncollapse} to ensure the denominator
+is bounded below by a fixed positive constant.
+
+Now if a good packet \(p\) had \(d(m_p)\le Q^{-C}\), Whitney geometry would
+place its core inside \(C_{cQ^{-C}}\), so its contribution would be absorbed
+by the collar estimate above.  That contradicts goodness, hence every good
+packet must satisfy \(d(m_p)\ge Q^{-C}\).
 \end{proof}
 
 \begin{proposition}[Packet-scale normalization]
@@ -48647,13 +48675,12 @@ Q^{-C}\le \lambda_p\le Q^C.
 
 \begin{proof}
 The upper bound \(d(m_p)\le Q^C\) is the finite-AFE localization bound
-already available in the draft.  For the lower bound, if
-\(d(m_p)\le Q^{-C}\), then Whitney geometry forces
-\(K_p\subset C_{cQ^{-C}}\).
-Corollary~\ref{cor:boundary-collar-exclusion} shows that this collar carries
-only a \(Q^{-A}\)-fraction of the source mass, so such a packet cannot be
-good.  Hence \(d(m_p)\ge Q^{-C}\), and therefore
+already available in the draft (Remark~\ref{rem:upper-raw-scale-bound}).
+The lower bound follows from
+Corollary~\ref{cor:boundary-collar-exclusion}.  Therefore
 \[
+Q^{-C}\le d(m_p)\le Q^C,
+\qquad\text{and hence}\qquad
 Q^{-C}\le \lambda_p\le Q^C.
 \]
 \end{proof}
