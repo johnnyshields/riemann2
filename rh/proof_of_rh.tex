@@ -37537,6 +37537,217 @@ Therefore the unconditional proof requires an actual computation of
 Lemma~\ref{lem:normal-row-certificate-transition-singular-coercivity}.
 \end{remark}
 
+\subsection{Rank-one \texorpdfstring{$Y12$}{Y12} normality versus full low-block coercivity}
+\label{subsec:agent3-rankone-vs-full-coercivity}
+
+The current downstream repair supplies source-weighted D4 amplitude mass after
+Gate--1/Gate--2 and identifies a targeted primitive \(Y12\)-signature normal
+route.  This is enough for a rank-one forbidden wall, but it is not the same
+statement as the low-block singular value bound
+\[
+  \delta_{\mathrm{coerc},p}
+  :=
+  \sigma_{\min}\!
+  \left(
+    (I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}
+    \big|_{\mathcal R_{X,\mathrm{low},p}}
+  \right)
+  \ge Q^{-C}.
+\]
+The latter is a full principal-angle statement between the transitioned low
+block and the retained singular space.
+
+\begin{definition}[Low-block singular-discard Gram]
+\label{def:agent3-low-block-singular-discard-gram}
+Let
+\[
+  V_p:=\mathcal R_{X,\mathrm{low},p},
+  \qquad
+  A_p:=T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}\big|_{V_p},
+  \qquad
+  \Pi_p^\perp:=I-P_{\mathrm{sing},p}.
+\]
+For a basis \(e_{1,p},\ldots,e_{r,p}\) of \(V_p\), put
+\[
+  C_p=[A_pe_{1,p}\ \cdots\ A_pe_{r,p}],
+  \qquad
+  D_p=\Pi_p^\perp C_p,
+  \qquad
+  G_p=D_p^*D_p.
+\]
+If \(B_p=(\langle e_{i,p},e_{j,p}\rangle)_{ij}\) is the Gram matrix of the
+chosen low basis, then
+\[
+  \delta_{\mathrm{coerc},p}^{2}
+  =
+  \lambda_{\min}\!
+  \left(B_p^{-1/2}G_pB_p^{-1/2}\right).
+\]
+Equivalently,
+\(\delta_{\mathrm{coerc},p}=\inf_{0\ne v\in V_p}\operatorname{dist}(A_pv,R_{\mathrm{sing},p})/\|v\|\).
+\end{definition}
+
+\begin{lemma}[Rank-one normal visibility is not full coercivity]
+\label{lem:agent3-rankone-not-full-coercivity}
+Suppose the low block contains a two-dimensional live carrier plane
+\(W_p=\operatorname{span}\{c_{7,p},c_{Y,p}\}\subset V_p\), and suppose there
+is a single polynomially bounded normal row \(\ell_{Y,p}\) such that
+\[
+  \ell_{Y,p}R_{\mathrm{sing},p}=0,
+  \qquad
+  \ell_{Y,p}A_pc_{Y,p}=b_p,
+  \qquad
+  |b_p|\ge Q^{-C}.
+\]
+Then the \(Y12\)-normal channel is nonzero, but this does not imply
+\(\sigma_{\min}(D_p|_{W_p})\ge Q^{-C'}\): if \(\ell_{Y,p}A_pc_{7,p}=a_p\),
+the row sees only \(a_px_7+b_px_Y\), and the nonzero vector \(x=(b_p,-a_p)\)
+is killed.  Therefore a second independent normal row, or a one-dimensional
+reduction of the low block, is necessary to prove a positive smallest
+singular value on \(W_p\).
+\end{lemma}
+
+\begin{proof}
+The assertion is the rank computation for the \(1\times2\) matrix
+\([a_p\ b_p]\): its rank is at most one, hence it has a nontrivial kernel
+on a two-dimensional plane.  This kernel is compatible with \(b_p\ne0\),
+so primitive \(Y12\)-signature survival gives rank-one normal visibility
+only.
+\end{proof}
+
+\begin{proposition}[Two-normal-row certificate for \(\delta_{\mathrm{coerc}}\)]
+\label{prop:agent3-two-normal-row-certificate}
+Let \(V_p=\mathcal R_{X,\mathrm{low},p}\), let
+\(A_p=T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}|_{V_p}\), and let
+\(\Pi_p^\perp=I-P_{\mathrm{sing},p}\).  Suppose there is a matrix of normal
+rows \(L_p:H_{\mathrm{sing},p}\to\mathbb C^r\) with
+\[
+  L_pP_{\mathrm{sing},p}=0,
+  \qquad
+  \|L_p\|_{\operatorname{op}}\le Q^{C_L},
+  \qquad
+  \sigma_{\min}\!\left(L_pA_p\big|_{V_p}\right)\ge Q^{-C_M}
+\]
+in the same low-basis metric.  Then
+\[
+  \sigma_{\min}\!\left((I-P_{\mathrm{sing},p})A_p\big|_{V_p}\right)
+  \ge Q^{-(C_L+C_M)}.
+\]
+\end{proposition}
+
+\begin{proof}
+Because \(L_pP_{\mathrm{sing},p}=0\),
+\(L_p=L_p(I-P_{\mathrm{sing},p})=L_p\Pi_p^\perp\).  Thus
+\(\|L_pA_pv\|=\|L_p\Pi_p^\perp A_pv\|\le\|L_p\|_{\operatorname{op}}\|\Pi_p^\perp A_pv\|\)
+for every \(v\in V_p\).  The lower bound on \(L_pA_p\) gives
+\(Q^{-C_M}\|v\|\le\|L_pA_pv\|\le Q^{C_L}\|\Pi_p^\perp A_pv\|\).
+\end{proof}
+
+\begin{corollary}[Triangular \(C_7/Y12\) normal-row closure]
+\label{cor:agent3-triangular-C7-Y12-normal-row-closure}
+Assume the low block is the live carrier plane with a polynomially
+conditioned basis
+\(V_p=\operatorname{span}\{c_{7,p},c_{Y,p}\}\).  Suppose there are
+polynomially bounded rows
+\(\ell_{7,p}^{\perp},\ell_{Y,p}^{\perp}:H_{\mathrm{sing},p}\to\mathbb C\)
+with
+\(\ell_{7,p}^{\perp}R_{\mathrm{sing},p}=0\),
+\(\ell_{Y,p}^{\perp}R_{\mathrm{sing},p}=0\), and (after polynomially bounded
+row operations)
+\[
+  \begin{pmatrix}
+  \ell_{7,p}^{\perp}A_pc_{7,p} & \ell_{7,p}^{\perp}A_pc_{Y,p}\\
+  \ell_{Y,p}^{\perp}A_pc_{7,p} & \ell_{Y,p}^{\perp}A_pc_{Y,p}
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+  \eta_{7,p} & *\\
+  0 & \eta_{Y,p}
+  \end{pmatrix},
+  \qquad
+  |\eta_{7,p}\eta_{Y,p}|\ge Q^{-C}.
+\]
+Then
+\(\sigma_{\min}\!\left((I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}\big|_{V_p}\right)\ge Q^{-C'}\).
+\end{corollary}
+
+\begin{proof}
+Take \(L_p=\bigl(\begin{smallmatrix}\ell_{7,p}^{\perp}\\
+\ell_{Y,p}^{\perp}\end{smallmatrix}\bigr)\).  The displayed triangular
+matrix has polynomial determinant and polynomial upper norm, hence
+polynomial smallest singular value.  Apply
+Proposition~\ref{prop:agent3-two-normal-row-certificate}.
+\end{proof}
+
+\begin{remark}[What the present \(Y12\)-signature route proves]
+\label{rem:agent3-what-y12-signature-route-proves}
+The primitive \(Y12\)-signature route supplies a candidate for
+\(\ell_{Y,p}^{\perp}\): a conditioned normal row detecting
+\(T_{\mathrm{tr}\to\mathrm{sing},p}[\mathsf C_{Y12}]^{\mathrm{tr}}\) after
+quotienting actual-source tangents, lower connections, and actual
+second-curvature directions.  This is a rank-one statement.  It gives a
+forbidden wall \(a_p\Gamma_G+b_p\Gamma_{G,2}\) with \(|b_p|\ge Q^{-C}\),
+which must then be paired with moving-wall anti-concentration.  It does
+not by itself supply a positive smallest singular value for a
+two-dimensional \(C_7/Y12\) low block.
+\end{remark}
+
+\begin{remark}[Missing compatibility for the septic row]
+\label{rem:agent3-missing-septic-normal-compatibility}
+The covariant septic row \(\ell_7\) detects \(\mathsf C_7\) in the typed
+septic carrier quotient.  To use it in
+Corollary~\ref{cor:agent3-triangular-C7-Y12-normal-row-closure} one still
+needs the singular-normal compatibility theorem
+\[
+  \ell_{7,p}^{\perp}R_{\mathrm{sing},p}=0,
+  \qquad
+  \ell_{7,p}^{\perp}T_{\mathrm{tr}\to\mathrm{sing},p}[\mathsf C_7]^{\mathrm{tr}}\ne0,
+\]
+with polynomial conditioning and with \(\ell_{7,p}^{\perp}\) defined on
+the same singular discarded quotient as \(I-P_{\mathrm{sing},p}\).  This
+is not a formal consequence of the carrier quotient or of primitive
+\(Y12\)-signature survival; it is a separate transition--singular row-lift
+theorem.
+\end{remark}
+
+\begin{theorem}[Exact remaining theorem for unconditional \(\delta_{\mathrm{coerc}}\)]
+\label{thm:agent3-exact-remaining-theorem-delta-coerc}
+The current Agent~3 gap is closed if and only if, on the routed good packet
+set, one proves the finite determinant estimate
+\[
+  \lambda_{\min}\!\left(B_p^{-1/2}D_p^*D_pB_p^{-1/2}\right)\ge Q^{-C},
+  \qquad
+  D_p=(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}[e_{1,p}\ \cdots\ e_{r,p}].
+\]
+In the two-carrier reduction this is equivalently
+\[
+  \det
+  \begin{pmatrix}
+  \|v_{7,p}^{\perp}\|^2 & \langle v_{7,p}^{\perp},v_{Y,p}^{\perp}\rangle\\
+  \langle v_{Y,p}^{\perp},v_{7,p}^{\perp}\rangle & \|v_{Y,p}^{\perp}\|^2
+  \end{pmatrix}
+  \ge Q^{-C},
+\]
+with
+\(v_{7,p}^{\perp}:=(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}[\mathsf C_7]^{\mathrm{tr}}\),
+\(v_{Y,p}^{\perp}:=(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}[\mathsf C_{Y12}]^{\mathrm{tr}}\).
+A rank-one \(Y12\)-signature normal theorem proves only that
+\(v_{Y,p}^{\perp}\ne0\) in a quotient direction.  Full two-dimensional
+\(\delta_{\mathrm{coerc}}\) requires either the determinant above or the
+normal-row certificate of
+Corollary~\ref{cor:agent3-triangular-C7-Y12-normal-row-closure}.
+\end{theorem}
+
+\begin{remark}[Status]
+\label{rem:agent3-status-after-rankone-vs-full-audit}
+\emph{Status: FINITE AUDIT.}  The new source/D4 amplitude repair removes
+the amplitude-mass obstruction, but it does not compute the
+transition--singular determinant.  The current proof therefore remains a
+finite audit at \(\delta_{\mathrm{coerc}}\): the missing item is a second
+independent singular-normal row, or a proof that the intended low block
+has been reduced to a one-dimensional \(Y12\)-normal quotient.
+\end{remark}
+
 \begin{hypothesis}[Low-block Gershgorin margin]
 \label{hyp:y12-low-block-gershgorin}
 \emph{Coordinate-dependent sufficient certificate for
