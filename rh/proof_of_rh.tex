@@ -38034,6 +38034,117 @@ and the present static-line \(Y12\) quotient survival on the static
 branch remain open inputs.
 \end{hypothesis}
 
+\begin{lemma}[Static-line transfer from actual \(Y12\)-survival]
+\label{lem:static-line-transfer-from-actual-Y12-survival}
+Let \(C_j\) be a quantitatively static good cap.  Put
+\[
+e_p:=\frac{(1,s_p)}{\sqrt{1+|s_p|^2}},
+\qquad
+u_j:=\frac{(1,s_j^\ast)}{\sqrt{1+|s_j^\ast|^2}},
+\]
+and let
+\[
+A_p:=\Phi_p^Y
+=
+\Pi_{\Sigma(Y12)}
+T_{\mathrm{tr}\to\mathrm{sing},p}
+E_{\mathrm{car},p}^{\mathrm{tr}}
+L_{\mathrm{clean},p}^{\mathrm{tr}},
+\qquad
+Q_p:=I-P_{\mathcal K_p^Y}^{\mathrm{bd}}.
+\]
+Assume the polynomial operator bounds
+\[
+\|A_p\|_{\operatorname{op}}+\|Q_pA_p\|_{\operatorname{op}}\le Q^{C_0},
+\]
+the actual-vector \(Y12\)-quotient survival
+\[
+\sum_{p\in C_j}\mu_p\|Q_pA_pe_p\|^2
+\ge
+Q^{-A_0}
+\sum_{p\in C_j}\mu_p\|A_pe_p\|^2,
+\tag{QS}
+\]
+and carrier noncollapse on the frozen static direction
+\[
+\sum_{p\in C_j}\mu_p\|A_pu_j\|^2
+\ge
+Q^{-C_1}\sum_{p\in C_j}\mu_p.
+\tag{NC}
+\]
+If
+\[
+\sum_{p\in C_j}\mu_p\|e_p-u_j\|^2
+\le
+Q^{-B}\sum_{p\in C_j}\mu_p
+\tag{ST}
+\]
+with \(B\) sufficiently large depending on \(A_0,C_0,C_1\), then
+\[
+\sum_{p\in C_j}\mu_p\|Q_pA_pu_j\|^2
+\ge
+Q^{-A_2}
+\sum_{p\in C_j}\mu_p\|A_pu_j\|^2.
+\]
+\end{lemma}
+
+\begin{proof}
+By the operator bound,
+\[
+\sum_p\mu_p\|Q_pA_p(e_p-u_j)\|^2
+\le
+Q^{2C_0}\sum_p\mu_p\|e_p-u_j\|^2
+\le
+Q^{2C_0-B}S_j,
+\]
+and similarly
+\[
+\sum_p\mu_p\|A_p(e_p-u_j)\|^2
+\le
+Q^{2C_0-B}S_j.
+\]
+Using \(\|x+y\|^2\ge \tfrac12\|x\|^2-\|y\|^2\),
+\[
+\sum_p\mu_p\|Q_pA_pu_j\|^2
+\ge
+\tfrac12\sum_p\mu_p\|Q_pA_pe_p\|^2-Q^{2C_0-B}S_j.
+\]
+By (QS),
+\[
+\sum_p\mu_p\|Q_pA_pu_j\|^2
+\ge
+\tfrac12 Q^{-A_0}\sum_p\mu_p\|A_pe_p\|^2
+-Q^{2C_0-B}S_j.
+\]
+A second perturbation gives
+\[
+\sum_p\mu_p\|A_pe_p\|^2
+\ge
+\tfrac12\sum_p\mu_p\|A_pu_j\|^2-Q^{2C_0-B}S_j,
+\]
+hence
+\[
+\sum_p\mu_p\|Q_pA_pu_j\|^2
+\ge
+\tfrac14 Q^{-A_0}\sum_p\mu_p\|A_pu_j\|^2
+-O(Q^{2C_0-B}S_j).
+\]
+By (NC),
+\[
+Q^{2C_0-B}S_j
+\le
+Q^{2C_0+C_1-B}\sum_p\mu_p\|A_pu_j\|^2.
+\]
+Choosing \(B\) so that
+\(O(Q^{2C_0+C_1-B})\le \tfrac18 Q^{-A_0}\) gives
+\[
+\sum_p\mu_p\|Q_pA_pu_j\|^2
+\ge
+\tfrac18 Q^{-A_0}\sum_p\mu_p\|A_pu_j\|^2,
+\]
+which is the claim after exponent renaming.
+\end{proof}
+
 \begin{remark}[Cap-wise covariance bottleneck]
 \label{rem:cap-wise-covariance-bottleneck}
 On each frozen cap \(C_j\), define
