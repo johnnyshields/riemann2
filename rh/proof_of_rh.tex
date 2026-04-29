@@ -51812,213 +51812,771 @@ Since \(n=R+2\), \(\|A\|\le R^C\), and
 the claimed polynomial loss follows.
 \end{proof}
 
+\begin{definition}[Fej\'er--Riesz thickened O2/O3 Gram blocks]
+\label{def:fr-thickened-o2o3-gram-blocks}
+Work in the smooth pre-extraction Fej\'er--Riesz Hilbert space
+\[
+  \mathcal H_{\mathrm{FR}}:=L^2(d\nu_{\mathrm{FR}}),
+\]
+where the Stack weight has first been replaced on each resonant packet block
+by its Fej\'er--Riesz factor.  Let
+\[
+  U=[u_i]_{i\in I_0}
+\]
+be the finite column matrix whose columns are the thickened pure packet columns
+from the charge-zero determinant sector
+\[
+  D_{-n},
+\]
+and let
+\[
+  V=[v_j]_{j\in I_S}
+\]
+be the finite column matrix whose columns are the thickened contaminant packet
+columns from the bounded positive-charge sector
+\[
+  D_{-n+1},\ldots,D_{-n+d_0}.
+\]
+The exact Gram blocks are
+\[
+  G_{00}:=U^*U,\qquad G_{0S}:=U^*V,\qquad G_{SS}:=V^*V.
+\]
+Equivalently,
+\[
+  (G_{00})_{ii'}=\langle u_i,u_{i'}\rangle_{\mathcal H_{\mathrm{FR}}},
+  \qquad
+  (G_{0S})_{ij}=\langle u_i,v_j\rangle_{\mathcal H_{\mathrm{FR}}},
+\]
+\[
+  (G_{SS})_{jj'}=\langle v_j,v_{j'}\rangle_{\mathcal H_{\mathrm{FR}}}.
+\]
+After deleting redundant columns, equivalently after passing to the ranges of
+the two Gram matrices, we regard
+\[
+  G_{00}>0,\qquad G_{SS}>0.
+\]
+The normalized cross-Gram operator is
+\[
+  K:=G_{00}^{-1/2}G_{0S}G_{SS}^{-1/2},
+\]
+and the graph survival gap is
+\[
+  \delta_{\mathrm{graph}}:=1-\|K\|_{\operatorname{op}}.
+\]
+If redundant columns are retained, every occurrence of an inverse below is read
+as the corresponding inverse on the Gram range, or equivalently as the
+Moore--Penrose inverse on the full coordinate space.
+\end{definition}
+
 \begin{theorem}[Thickened overlap Schur criterion]
 \label{thm:thickened-o2o3-schur}
-Let
+With the notation of Definition~\ref{def:fr-thickened-o2o3-gram-blocks}, the
+following quantitative statements are equivalent up to changing the polynomial
+exponent.
+\begin{enumerate}
+\item The normalized cross-Gram has a polynomial gap:
 \[
-K:=G_{00}^{-1/2}G_{0S}G_{SS}^{-1/2}
+  \|K\|_{\operatorname{op}}\le 1-Q^{-A}.
 \]
-after Fej\'er--Riesz thickening of the Stack weight.  Then
+\item The smallest principal angle between
 \[
-G_{00}-G_{0S}G_{SS}^{\dagger}G_{S0}\ge Q^{-A}G_{00}
+  \mathcal U:=\operatorname{ran}U,
+  \qquad
+  \mathcal V:=\operatorname{ran}V
 \]
-if and only if
+has polynomial sine:
 \[
-\|K\|_{\operatorname{op}}\le 1-Q^{-A}.
+  \sin\theta_{\min}(\mathcal U,\mathcal V)\ge Q^{-A}.
 \]
-A sufficient finite criterion is
+\item The Schur complement of the contaminant block satisfies
 \[
-\Bigl(\max_i\sum_j |K_{ij}|\Bigr)\Bigl(\max_j\sum_i |K_{ij}|\Bigr)<(1-Q^{-A})^2.
+  G_{00}-G_{0S}G_{SS}^{\dagger}G_{S0}\ge Q^{-A}G_{00}.
 \]
-Equivalently, if \(K\) is viewed as a weighted bipartite overlap graph, then a
-coherence bound \(d\mu<1-Q^{-A}\) suffices.
+\end{enumerate}
+Moreover, if
+\[
+  \Bigl(\max_i\sum_j |K_{ij}|\Bigr)
+  \Bigl(\max_j\sum_i |K_{ij}|\Bigr)
+  \le (1-Q^{-A})^2,
+\]
+then the preceding three conditions hold, after again weakening the exponent
+if necessary.
 \end{theorem}
 
-\begin{lemma}[Packetwise thickened overlap decay]
-\label{lem:packetwise-thickened-overlap-decay}
-Let \(\{u_i\}\) be the thickened pure packet family and \(\{v_j\}\) the thickened
-contaminant packet family after Fej\'er--Riesz thickening.  Define
+\begin{proof}
+Set
 \[
-K_{ij}:=\big\langle G_{00}^{-1/2}u_i,\;G_{SS}^{-1/2}v_j\big\rangle.
+  \widehat U:=UG_{00}^{-1/2},\qquad
+  \widehat V:=VG_{SS}^{-1/2}.
 \]
-Assume the packet centers satisfy the oscillatory-kernel separation hypothesis
-from the source-side packet lemma, with decay profile \(\mu(\Delta)\).  Then
+The columns of \(\widehat U\) and \(\widehat V\) are orthonormal bases for the
+pure and contaminant ranges.  Therefore
 \[
-|K_{ij}|\le \mu(\Delta_{ij}),
+  K=\widehat U^*\widehat V,
 \]
-and in particular if the interacting packet pairs satisfy
-\(\Delta_{ij}\ge \Delta_0\), then
+and \(\|K\|_{\operatorname{op}}\) is the cosine of the smallest principal angle:
 \[
-|K_{ij}|\le \mu_0:=\mu(\Delta_0).
+  \|K\|_{\operatorname{op}}=\cos\theta_{\min}(\mathcal U,\mathcal V).
+\]
+Thus a bound \(\|K\|_{\operatorname{op}}\le 1-\varepsilon\) is equivalent, with
+polynomially comparable constants, to
+\[
+  \sin\theta_{\min}(\mathcal U,\mathcal V)
+  =(1-\|K\|_{\operatorname{op}}^2)^{1/2}
+  \gg \varepsilon^{1/2}.
+\]
+Changing the exponent of \(Q\) gives the equivalence of the first two
+statements.
+
+For the Schur complement, compute
+\[
+  G_{00}-G_{0S}G_{SS}^{\dagger}G_{S0}
+  =G_{00}^{1/2}(I-KK^*)G_{00}^{1/2}.
+\]
+Hence
+\[
+  I-KK^*\ge \eta I
+\]
+is exactly the same as
+\[
+  G_{00}-G_{0S}G_{SS}^{\dagger}G_{S0}\ge \eta G_{00}.
+\]
+Since \(1-\|K\|_{\operatorname{op}}^2\) and
+\(1-\|K\|_{\operatorname{op}}\) are polynomially comparable in the range under
+consideration, the Schur statement is equivalent to the norm statement after
+renaming the exponent.
+
+Finally, Schur's test gives
+\[
+  \|K\|_{\operatorname{op}}^2
+  \le
+  \Bigl(\max_i\sum_j |K_{ij}|\Bigr)
+  \Bigl(\max_j\sum_i |K_{ij}|\Bigr),
+\]
+which proves the sufficient row/column criterion.
+\end{proof}
+
+\begin{lemma}[One-step shift lower bound]
+\label{lem:fr-one-step-shift-lower-bound}
+Let \(F\) be a Hilbert-valued polynomial of degree at most \(N\),
+\[
+  F(z)=\sum_{k=0}^N f_kz^k.
+\]
+Then, for every \(\lambda\in\mathbf C\),
+\[
+  \|(1-\lambda z)F\|_{L^2(\mathbb T)}
+  \ge \frac1{N+1}\|F\|_{L^2(\mathbb T)}.
 \]
 \end{lemma}
 
 \begin{proof}
-This is the packetwise form of the oscillatory-kernel estimate already used in
-the source layer.  After Fej\'er--Riesz thickening, the normalized overlap
-entry is exactly the inner product between the normalized pure and contaminant
-packets:
+Write
 \[
-K_{ij}=\langle \tilde u_i,\tilde v_j\rangle,
-\qquad
-\tilde u_i:=G_{00}^{-1/2}u_i,
-\qquad
-\tilde v_j:=G_{SS}^{-1/2}v_j.
+  Y(z):=(1-\lambda z)F(z)=\sum_{k=0}^{N+1}y_kz^k.
 \]
-Writing the packets in oscillatory form
-\(u_i=a_i e^{i\omega_i t}\), \(v_j=b_j e^{i\nu_j t}\), the overlap is an
-oscillatory integral.  The oscillatory-kernel hypothesis gives the stated decay
-in packet separation \(\Delta_{ij}\).  That is exactly the bound claimed.
+Then
+\[
+  y_0=f_0,\qquad y_k=f_k-\lambda f_{k-1}\ (1\le k\le N),
+  \qquad y_{N+1}=-\lambda f_N.
+\]
+If \(|\lambda|\le1\), the recurrence gives
+\[
+  f_k=\sum_{j=0}^k\lambda^j y_{k-j}.
+\]
+The triangular convolution kernel has \(\ell^1\)-norm at most \(N+1\), and
+Young's inequality yields
+\[
+  \Bigl(\sum_{k=0}^N\|f_k\|^2\Bigr)^{1/2}
+  \le
+  (N+1)
+  \Bigl(\sum_{k=0}^{N+1}\|y_k\|^2\Bigr)^{1/2}.
+\]
+If \(|\lambda|>1\), solve backwards:
+\[
+  f_k=-\sum_{j=k+1}^{N+1}\lambda^{-(j-k)}y_j.
+\]
+Again the triangular convolution kernel has \(\ell^1\)-norm at most \(N+1\),
+because \(|\lambda|^{-1}<1\).  Thus the same estimate holds.  Parseval's
+identity converts the coefficient estimate to the asserted \(L^2(\mathbb T)\)
+estimate.
+\end{proof}
+
+\begin{lemma}[Finite predictor lower bound]
+\label{lem:fr-finite-predictor-lower-bound}
+Let \(P\) be a scalar polynomial of degree at most \(D\), and let
+\[
+  b(z)=1+b_1z+\cdots+b_dz^d
+\]
+be any scalar polynomial with constant coefficient \(1\).  Then
+\[
+  \|Pb\|_{L^2(\mathbb T)}
+  \ge
+  \gamma_{D,d}\|P\|_{L^2(\mathbb T)},
+\]
+where
+\[
+  \gamma_{D,d}:=\prod_{\ell=0}^{d-1}\frac1{D+\ell+1}.
+\]
+In particular,
+\[
+  \gamma_{D,d}\ge (D+d+1)^{-d}.
+\]
+\end{lemma}
+
+\begin{proof}
+Since \(b(0)=1\), the nonconstant part factors as
+\[
+  b(z)=\prod_{\ell=1}^s(1-\lambda_\ell z),
+  \qquad s\le d.
+\]
+Apply Lemma~\ref{lem:fr-one-step-shift-lower-bound} successively.  Before the
+\((\ell+1)\)-st factor is applied, the degree is at most \(D+\ell\).  Hence
+\[
+  \|Pb\|_2
+  \ge
+  \prod_{\ell=0}^{s-1}\frac1{D+\ell+1}\,\|P\|_2.
+\]
+Weakening the product to the first \(d\) factors gives the stated
+\(\gamma_{D,d}\) bound.
+\end{proof}
+
+\begin{lemma}[Fiberwise Fej\'er--Riesz charge anti-lock]
+\label{lem:fr-fiberwise-charge-antilock}
+Let \((Y,\sigma)\) be a measure space.  For each \(y\in Y\), let
+\(\Phi_y(z)\) be a scalar polynomial in \(z\) of degree at most \(D\), and let
+\(\mathcal E_y\) be a Hilbert fiber.  For measurable fields
+\[
+  \xi(y)\in\mathcal E_y,
+  \qquad
+  \eta_r(y)\in\mathcal E_y\quad(1\le r\le d),
+\]
+one has
+\[
+\begin{aligned}
+&\int_Y\int_{\mathbb T}
+  \left\|
+    \Phi_y(z)
+    \left(
+      \xi(y)-\sum_{r=1}^dz^r\eta_r(y)
+    \right)
+  \right\|^2\,d\theta\,d\sigma(y) \\
+&\hspace{3em}\ge
+  \gamma_{D,d}^{\,2}
+  \int_Y\int_{\mathbb T}
+  \|\Phi_y(z)\xi(y)\|^2\,d\theta\,d\sigma(y),
+\end{aligned}
+\]
+where \(\gamma_{D,d}\) is as in
+Lemma~\ref{lem:fr-finite-predictor-lower-bound}.
+\end{lemma}
+
+\begin{proof}
+Fix \(y\).  If \(\xi(y)=0\), there is nothing to prove.  Otherwise set
+\[
+  e(y):=\frac{\xi(y)}{\|\xi(y)\|}.
+\]
+Orthogonal projection onto the line \(\mathbf C e(y)\) cannot increase norm, so
+\[
+\begin{aligned}
+&\left\|
+    \Phi_y(z)
+    \left(
+      \xi(y)-\sum_{r=1}^dz^r\eta_r(y)
+    \right)
+  \right\|^2 \\
+&\qquad\ge
+  \|\xi(y)\|^2
+  |\Phi_y(z)|^2
+  \left|
+    1-\sum_{r=1}^d a_r(y)z^r
+  \right|^2,
+\end{aligned}
+\]
+where
+\[
+  a_r(y):=\frac{\langle\eta_r(y),e(y)\rangle}{\|\xi(y)\|}.
+\]
+The scalar polynomial
+\[
+  b_y(z):=1-\sum_{r=1}^da_r(y)z^r
+\]
+has constant coefficient \(1\).  Applying
+Lemma~\ref{lem:fr-finite-predictor-lower-bound} to
+\(P=\Phi_y\) and \(b=b_y\) gives
+\[
+  \int_{\mathbb T}|\Phi_y(z)b_y(z)|^2\,d\theta
+  \ge
+  \gamma_{D,d}^{\,2}
+  \int_{\mathbb T}|\Phi_y(z)|^2\,d\theta.
+\]
+Multiplying by \(\|\xi(y)\|^2\) and integrating in \(y\) proves the lemma.
+\end{proof}
+
+\begin{proposition}[Block Fej\'er--Riesz charge anti-lock]
+\label{prop:block-fejer-riesz-charge-antilock}
+Fix a resonant O2/O3 packet block \(B\).  Let
+\[
+  z=e^{i\theta}
+\]
+be the branch-charge coordinate, and suppose that on \(B\) the smooth
+pre-extraction Stack weight has a Fej\'er--Riesz factorization
+\[
+  W_B(y,z)=|\Phi_B(y,z)|^2,
+  \qquad
+  \Phi_B(y,z)=\sum_{\ell=0}^{D_W}\phi_{B,\ell}(y)z^\ell.
+\]
+Let \(\mathcal E_B(y)\) denote the non-charge packet coefficient fiber on
+this block.  Assume that the pure block is contained in the charge-zero model
+\[
+  \mathcal U_B\subseteq
+  \left\{
+    \Phi_B(y,z)\xi(y):\xi(y)\in\mathcal E_B(y)
+  \right\},
+\]
+and that the contaminant block is contained in the positive-charge model
+\[
+  \mathcal V_B\subseteq
+  \left\{
+    \Phi_B(y,z)\sum_{r=1}^{d_0}z^r\eta_r(y):
+    \eta_r(y)\in\mathcal E_B(y)
+  \right\}.
+\]
+Then every \(u\in\mathcal U_B\) satisfies
+\[
+  \operatorname{dist}(u,\mathcal V_B)^2
+  \ge
+  \eta_0\|u\|^2,
+\]
+where
+\[
+  \eta_0:=\gamma_{D_W,d_0}^{\,2}
+  \ge (D_W+d_0+1)^{-2d_0}.
+\]
+Consequently, for the block-normalized cross-Gram operator
+\[
+  K_B:=G_{00,B}^{-1/2}G_{0S,B}G_{SS,B}^{-1/2},
+\]
+one has
+\[
+  \|K_B\|_{\operatorname{op}}
+  \le \sqrt{1-\eta_0}
+  \le 1-\frac12\eta_0.
+\]
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+  \mathcal V_B^\sharp:=
+  \left\{
+    \Phi_B(y,z)\sum_{r=1}^{d_0}z^r\eta_r(y):
+    \eta_r(y)\in\mathcal E_B(y)
+  \right\}.
+\]
+Since \(\mathcal V_B\subseteq\mathcal V_B^\sharp\),
+\[
+  \operatorname{dist}(u,\mathcal V_B)
+  \ge
+  \operatorname{dist}(u,\mathcal V_B^\sharp).
+\]
+Write \(u=\Phi_B\xi\).  Lemma~\ref{lem:fr-fiberwise-charge-antilock}, with
+\(D=D_W\) and \(d=d_0\), gives for every choice of \(\eta_1,\ldots,\eta_{d_0}\)
+\[
+  \left\|
+    \Phi_B\xi-
+    \Phi_B\sum_{r=1}^{d_0}z^r\eta_r
+  \right\|^2
+  \ge
+  \gamma_{D_W,d_0}^{\,2}\|\Phi_B\xi\|^2.
+\]
+Taking the infimum over the \(\eta_r\)'s proves the distance estimate.
+
+For unit \(u\in\mathcal U_B\),
+\[
+  \operatorname{dist}(u,\mathcal V_B)^2
+  =1-\|P_{\mathcal V_B}u\|^2.
+\]
+Thus
+\[
+  \sup_{\|u\|=1,u\in\mathcal U_B}\|P_{\mathcal V_B}u\|^2
+  \le 1-\eta_0.
+\]
+The left side is \(\|K_B\|_{\operatorname{op}}^2\), which gives
+\[
+  \|K_B\|_{\operatorname{op}}
+  \le\sqrt{1-\eta_0}.
+\]
+Finally, \(\sqrt{1-x}\le1-x/2\) for \(0\le x\le1\), so
+\[
+  \|K_B\|_{\operatorname{op}}
+  \le1-\frac12\eta_0.
+\]
+\end{proof}
+
+\begin{lemma}[Packetwise thickened overlap decay and off-block perturbation]
+\label{lem:packetwise-thickened-overlap-decay}
+Let \(\{u_i\}\) be the thickened pure packet family and \(\{v_j\}\) the
+thickened contaminant packet family after Fej\'er--Riesz thickening.  Partition
+the packet indices into the resonant blocks used in
+Proposition~\ref{prop:block-fejer-riesz-charge-antilock}, and let
+\[
+  G_{00}^{\mathrm{bd}}:=\bigoplus_BG_{00,B},\qquad
+  G_{SS}^{\mathrm{bd}}:=\bigoplus_BG_{SS,B},\qquad
+  G_{0S}^{\mathrm{bd}}:=\bigoplus_BG_{0S,B}.
+\]
+For every prescribed \(M\), after choosing the packet integration-by-parts
+order sufficiently large, the off-block packet geometry gives
+\[
+\left\|
+  (G_{00}^{\mathrm{bd}})^{-1/2}
+  (G_{00}-G_{00}^{\mathrm{bd}})
+  (G_{00}^{\mathrm{bd}})^{-1/2}
+\right\|_{\operatorname{op}}
+\le Q^{-M},
+\]
+\[
+\left\|
+  (G_{SS}^{\mathrm{bd}})^{-1/2}
+  (G_{SS}-G_{SS}^{\mathrm{bd}})
+  (G_{SS}^{\mathrm{bd}})^{-1/2}
+\right\|_{\operatorname{op}}
+\le Q^{-M},
+\]
+and
+\[
+\left\|
+  (G_{00}^{\mathrm{bd}})^{-1/2}
+  (G_{0S}-G_{0S}^{\mathrm{bd}})
+  (G_{SS}^{\mathrm{bd}})^{-1/2}
+\right\|_{\operatorname{op}}
+\le Q^{-M}.
+\]
+Equivalently, if \(\Delta_{ij}\) denotes the normalized packet separation, the
+available overlap bound has the form
+\[
+  |\langle \widetilde u_i,\widetilde v_j\rangle|
+  \le \mu_L(\Delta_{ij}),
+  \qquad
+  \mu_L(\Delta)\ll_L (1+\Delta)^{-L},
+\]
+for block-whitened packets \(\widetilde u_i,\widetilde v_j\), and the
+corresponding off-block row and column sums are \(O(Q^{-M})\).
+\end{lemma}
+
+\begin{proof}
+The Fej\'er--Riesz factor has bounded charge degree and polynomially controlled
+coefficients on every ordinary packet.  Multiplication by this factor only
+increases the symbol seminorms by a polynomial amount.  For two packets in
+different resonant blocks, the phase derivative of their overlap is bounded
+away from zero in the normalized packet scale.  Repeated integration by parts
+therefore gives, for every \(L\),
+\[
+  |\langle \widetilde u_i,\widetilde v_j\rangle|
+  \le C_L(1+\Delta_{ij})^{-L},
+\]
+and the same estimate holds for pure--pure and contaminant--contaminant
+off-block entries.
+
+The number of packet indices is polynomial in \(Q\).  Choosing \(L\) larger
+than this polynomial counting exponent plus \(M\), the Schur test gives
+off-block row and column sums \(O(Q^{-M})\).  Applying Schur's test separately
+to the pure--pure, contaminant--contaminant, and pure--contaminant off-block
+matrices yields the three displayed operator-norm estimates.  This is purely
+the already-packaged smooth packet geometry; it does not use capped extraction
+or any downstream \(Y12\), D4, or atomic information.
 \end{proof}
 
 \begin{lemma}[Row/column coherence bound]
 \label{lem:row-column-coherence-bound}
-Let \(K=(K_{ij})\) be the normalized overlap matrix in
-Lemma~\ref{lem:packetwise-thickened-overlap-decay}.  Define
+Let \(K=(K_{ij})\) be any finite normalized overlap matrix.  Define
 \[
-r_i:=\sum_j |K_{ij}|,
-\qquad
-c_j:=\sum_i |K_{ij}|.
+  r_i:=\sum_j |K_{ij}|,
+  \qquad
+  c_j:=\sum_i |K_{ij}|.
 \]
-If
+Then
 \[
-\Bigl(\max_i r_i\Bigr)\Bigl(\max_j c_j\Bigr)<(1-Q^{-A})^2,
+  \|K\|_{\operatorname{op}}^2
+  \le
+  \Bigl(\max_i r_i\Bigr)
+  \Bigl(\max_j c_j\Bigr).
+\]
+In particular, if
+\[
+  \Bigl(\max_i r_i\Bigr)
+  \Bigl(\max_j c_j\Bigr)<(1-Q^{-A})^2,
 \]
 then
 \[
-\|K\|_{\operatorname{op}}<1-Q^{-A}.
+  \|K\|_{\operatorname{op}}<1-Q^{-A}.
 \]
-Equivalently, if each row has at most \(d_0\) nonnegligible entries and each
-column at most \(d_1\), with \(|K_{ij}|\le \mu\), then
+If each row has at most \(d_0\) nonnegligible entries and each column at most
+\(d_1\), with \(|K_{ij}|\le\mu\), then
 \[
-d_0d_1\mu^2<(1-Q^{-A})^2
-\quad\Longrightarrow\quad
-\|K\|_{\operatorname{op}}<1-Q^{-A}.
+  d_0d_1\mu^2<(1-Q^{-A})^2
+  \quad\Longrightarrow\quad
+  \|K\|_{\operatorname{op}}<1-Q^{-A}.
 \]
 \end{lemma}
 
 \begin{proof}
-This is a standard Schur test estimate.  For any vector \(x\),
+For any vector \(x\),
 \[
-|(Kx)_i|\le \sum_j |K_{ij}|\,|x_j|.
+  |(Kx)_i|
+  \le
+  \sum_j |K_{ij}|\,|x_j|.
 \]
-By Cauchy--Schwarz and the row/column sum bounds,
+Schur's test gives
 \[
-\|Kx\|_2^2\le \Bigl(\max_i r_i\Bigr)\Bigl(\max_j c_j\Bigr)\|x\|_2^2.
+  \|Kx\|_2^2
+  \le
+  \Bigl(\max_i r_i\Bigr)
+  \Bigl(\max_j c_j\Bigr)\|x\|_2^2.
 \]
-Therefore
-\[
-\|K\|_{\operatorname{op}}^2\le \Bigl(\max_i r_i\Bigr)\Bigl(\max_j c_j\Bigr),
-\]
-and the stated implication follows.  The bounded-degree form is the special
-case \(r_i\le d_0\mu\), \(c_j\le d_1\mu\).
+Taking the supremum over \(x\ne0\) proves the operator-norm bound.  The
+bounded-incidence form follows from \(r_i\le d_0\mu\) and \(c_j\le d_1\mu\).
 \end{proof}
 
 \begin{lemma}[Schur complement / principal-angle equivalence]
 \label{lem:schur-principal-angle-equivalence}
 With
 \[
-K:=G_{00}^{-1/2}G_{0S}G_{SS}^{-1/2},
+  K:=G_{00}^{-1/2}G_{0S}G_{SS}^{-1/2},
 \]
-the following are equivalent:
+the following are equivalent up to polynomial loss:
 \begin{enumerate}
-\item \(\|K\|_{\operatorname{op}}<1-Q^{-A}\);
-\item the principal angle between the thickened pure and contaminant subspaces
-satisfies
+\item \(\|K\|_{\operatorname{op}}\le1-Q^{-A}\);
+\item \(\sin\theta_{\min}(U,V)\ge Q^{-A}\);
+\item
 \[
-\sin\theta_{\min}(U,V)\ge Q^{-A};
-\]
-\item the Schur complement satisfies
-\[
-G_{00}-G_{0S}G_{SS}^{\dagger}G_{0S}^\ast\ge Q^{-A}G_{00}.
+  G_{00}-G_{0S}G_{SS}^{\dagger}G_{0S}^*\ge Q^{-A}G_{00}.
 \]
 \end{enumerate}
-In particular, any of the bounds in
-Lemma~\ref{lem:row-column-coherence-bound} closes the
-\(\mathrm{Graph/O2O3}_{23}\) gap.
 \end{lemma}
 
 \begin{proof}
-By definition, \(K\) is the normalized cross-Gram block between the pure and
-contaminant subspaces.  Hence \(\|K\|_{\operatorname{op}}\) is the cosine of
-the smallest principal angle:
+This is Theorem~\ref{thm:thickened-o2o3-schur} restated in the notation used
+by the downstream finite-gap ledger.  The normalized columns
+\(UG_{00}^{-1/2}\) and \(VG_{SS}^{-1/2}\) give orthonormal bases for the two
+subspaces, so their cross-Gram has norm \(\cos\theta_{\min}\).  The Schur
+identity
 \[
-\|K\|_{\operatorname{op}}=\cos\theta_{\min}(U,V).
+  G_{00}-G_{0S}G_{SS}^{\dagger}G_{0S}^*
+  =G_{00}^{1/2}(I-KK^*)G_{00}^{1/2}
 \]
-Therefore \(\|K\|_{\operatorname{op}}<1-Q^{-A}\) is equivalent to
-\[
-\sin\theta_{\min}(U,V)\ge Q^{-A},
-\]
-up to the standard trigonometric identity.
+then gives the Schur equivalence.
+\end{proof}
 
-For the Schur complement, write the block Gram matrix
+\begin{theorem}[Fej\'er--Riesz charge anti-lock closes Graph/O2O3]
+\label{thm:fejer-riesz-charge-antilock-closes-graph-o2o3}
+Assume the finite/O2O3 packet model of
+Definition~\ref{def:fr-thickened-o2o3-gram-blocks}, the bounded positive-charge
+contaminant range
 \[
-\begin{pmatrix}
-G_{00} & G_{0S}\\
-G_{0S}^\ast & G_{SS}
-\end{pmatrix}.
+  D_{-n+1},\ldots,D_{-n+d_0},
 \]
-After conjugating by \(G_{00}^{-1/2}\oplus G_{SS}^{-1/2}\), the positivity of
-the block matrix is equivalent to
+the Fej\'er--Riesz block factorization of
+Proposition~\ref{prop:block-fejer-riesz-charge-antilock}, and the off-block
+packet geometry of Lemma~\ref{lem:packetwise-thickened-overlap-decay}.  Then
 \[
-I-KK^\ast \succ 0.
+  \delta_{\mathrm{graph}}
+  =1-\|G_{00}^{-1/2}G_{0S}G_{SS}^{-1/2}\|_{\operatorname{op}}
+  \ge
+  \frac14\eta_0,
 \]
-A quantitative lower bound \(I-KK^\ast\ge Q^{-A}I\) is equivalent to
+where
 \[
-\|K\|_{\operatorname{op}}<1-Q^{-A},
+  \eta_0:=\gamma_{D_W,d_0}^{\,2}
+  \ge (D_W+d_0+1)^{-2d_0}.
 \]
-which is equivalent to the Schur complement lower bound
+In particular, if \(D_W,d_0=O(1)\), then \(\delta_{\mathrm{graph}}\gg1\).  If
+\(D_W,d_0=O(R)\), then
 \[
-G_{00}-G_{0S}G_{SS}^{\dagger}G_{0S}^\ast\ge Q^{-A}G_{00}.
+  \delta_{\mathrm{graph}}\ge e^{-O(R\log R)}.
 \]
+Under the standing depth budget
+\[
+  R\log R=O(\log Q),
+\]
+this gives
+\[
+  \delta_{\mathrm{graph}}\ge Q^{-A}.
+\]
+Equivalently,
+\[
+  G_{00}-G_{0S}G_{SS}^{\dagger}G_{S0}\ge Q^{-A}G_{00}.
+\]
+\end{theorem}
+
+\begin{proof}
+First ignore off-block interactions.  Let
+\[
+  K^{\mathrm{bd}}
+  :=(G_{00}^{\mathrm{bd}})^{-1/2}
+    G_{0S}^{\mathrm{bd}}
+    (G_{SS}^{\mathrm{bd}})^{-1/2}.
+\]
+By Proposition~\ref{prop:block-fejer-riesz-charge-antilock}, each block
+satisfies
+\[
+  \|K_B\|_{\operatorname{op}}
+  \le 1-\frac12\eta_0.
+\]
+Since \(K^{\mathrm{bd}}\) is the direct sum of the \(K_B\)'s,
+\[
+  \|K^{\mathrm{bd}}\|_{\operatorname{op}}
+  \le 1-\frac12\eta_0.
+\]
+
+Now include off-block terms.  Write
+\[
+  E_0:=(G_{00}^{\mathrm{bd}})^{-1/2}
+  (G_{00}-G_{00}^{\mathrm{bd}})
+  (G_{00}^{\mathrm{bd}})^{-1/2},
+\]
+\[
+  E_S:=(G_{SS}^{\mathrm{bd}})^{-1/2}
+  (G_{SS}-G_{SS}^{\mathrm{bd}})
+  (G_{SS}^{\mathrm{bd}})^{-1/2},
+\]
+and
+\[
+  E_{0S}:=(G_{00}^{\mathrm{bd}})^{-1/2}
+  (G_{0S}-G_{0S}^{\mathrm{bd}})
+  (G_{SS}^{\mathrm{bd}})^{-1/2}.
+\]
+Then
+\[
+  G_{0S}
+  =(G_{00}^{\mathrm{bd}})^{1/2}
+    (K^{\mathrm{bd}}+E_{0S})
+    (G_{SS}^{\mathrm{bd}})^{1/2}.
+\]
+Lemma~\ref{lem:packetwise-thickened-overlap-decay} gives, for any prescribed
+\(M\),
+\[
+  \|E_0\|_{\operatorname{op}},
+  \|E_S\|_{\operatorname{op}},
+  \|E_{0S}\|_{\operatorname{op}}
+  \le Q^{-M}.
+\]
+Set
+\[
+  A_0:=G_{00}^{-1/2}(G_{00}^{\mathrm{bd}})^{1/2},
+  \qquad
+  A_S:=G_{SS}^{-1/2}(G_{SS}^{\mathrm{bd}})^{1/2}.
+\]
+The relative identities
+\[
+  G_{00}
+  =(G_{00}^{\mathrm{bd}})^{1/2}(I+E_0)(G_{00}^{\mathrm{bd}})^{1/2},
+\]
+\[
+  G_{SS}
+  =(G_{SS}^{\mathrm{bd}})^{1/2}(I+E_S)(G_{SS}^{\mathrm{bd}})^{1/2}
+\]
+imply
+\[
+  \|A_0\|_{\operatorname{op}},\|A_S\|_{\operatorname{op}}
+  \le (1-Q^{-M})^{-1/2}.
+\]
+Moreover
+\[
+  K=A_0(K^{\mathrm{bd}}+E_{0S})A_S^*.
+\]
+Hence
+\[
+  \|K\|_{\operatorname{op}}
+  \le
+  (1-Q^{-M})^{-1}
+  \left(\|K^{\mathrm{bd}}\|_{\operatorname{op}}+Q^{-M}\right).
+\]
+Choose \(M\) so large that the last multiplicative and additive losses together
+are at most \(\eta_0/4\).  Then
+\[
+  \|K\|_{\operatorname{op}}
+  \le
+  \|K^{\mathrm{bd}}\|_{\operatorname{op}}+\frac14\eta_0
+  \le
+  1-\frac12\eta_0+\frac14\eta_0
+  =1-\frac14\eta_0.
+\]
+Thus
+\[
+  \delta_{\mathrm{graph}}
+  =1-\|K\|_{\operatorname{op}}
+  \ge \frac14\eta_0.
+\]
+The lower bounds
+\[
+  \eta_0\ge(D_W+d_0+1)^{-2d_0}
+\]
+and, in the \(O(R)\)-degree case,
+\[
+  \eta_0\ge e^{-O(R\log R)}
+\]
+are immediate from the definition of \(\gamma_{D_W,d_0}\).  The depth budget
+\(R\log R=O(\log Q)\) gives \(\eta_0\ge Q^{-A}\).  The Schur complement bound
+then follows from Lemma~\ref{lem:schur-principal-angle-equivalence}.
 \end{proof}
 
 \begin{corollary}[Graph/O2O3 is the immediate finite-gap consequence]
 \label{cor:graph-o2o3-derivable}
-Any one of the equivalent conditions in
-Lemma~\ref{lem:schur-principal-angle-equivalence} implies
-\(\mathrm{Graph/O2O3}_{23}\) with polynomial loss.  In particular, once the
-\(R^C\)-normalized overlap matrix satisfies a Schur or principal-angle gap,
-no extra graph hypothesis is needed.
+The Fej\'er--Riesz charge anti-lock theorem implies
+\(
+  \mathrm{Graph/O2O3}_{23}
+\)
+with polynomial loss.  In particular,
+\[
+  \|G_{00}^{-1/2}G_{0S}G_{SS}^{-1/2}\|_{\operatorname{op}}
+  \le 1-Q^{-A},
+\]
+and no additional graph hypothesis is required once the finite/O2O3 packet
+model has been placed in the smooth Fej\'er--Riesz charge coordinates.
 \end{corollary}
 
 \begin{corollary}[Exact target for \(\mathrm{Graph/O2O3}_{23}\)]
 \label{cor:graph-o2o3-target}
-To close \(\mathrm{Graph/O2O3}_{23}\), it is enough to prove one of the following:
+The exact target is the principal-angle gap
 \[
-\Bigl(\max_i\sum_j |K_{ij}|\Bigr)\Bigl(\max_j\sum_i |K_{ij}|\Bigr)<(1-Q^{-A})^2,
+  \delta_{\mathrm{graph}}
+  :=1-\|K\|_{\operatorname{op}}
+  \ge Q^{-A},
+  \qquad
+  K=G_{00}^{-1/2}G_{0S}G_{SS}^{-1/2}.
 \]
-or
-\[
-d_0d_1\mu^2<(1-Q^{-A})^2,
-\]
-or
-\[
-G_{00}-G_{0S}G_{SS}^{\dagger}G_{0S}^\ast\ge Q^{-A}G_{00}.
-\]
-If none of these hold, the precise failure label is:
-\[
-\text{thickened overlap too coherent}.
-\]
+Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3} proves this
+target from the bounded-charge Fej\'er--Riesz block model and the already
+packaged off-block packet geometry.  The proof does not require capped
+extraction, the \(Y12\) quotient, D4 row-normal information, or the final atomic
+contradiction.
 \end{corollary}
 
-\begin{remark}[wip-zeta-bridge-proof-o2o3]
+\begin{remark}[Resolved graph/O2O3 bridge]
 \label{rem:wip-zeta-bridge-proof-o2o3}
-What remains is the thickened Schur / overlap test:
-\[
-\|K\|_{\operatorname{op}}<1-Q^{-A}.
-\]
-Equivalently, the Stack-thickened pure/contaminant overlap must be
-spectrally subcritical.
+The previous ``thickened overlap too coherent'' failure mode is removed by the
+charge anti-lock argument.  Inside a resonant block the relevant mechanism is
+not entrywise smallness; the pure vector
+\(\Phi_B\xi\) cannot be predicted by positive charges
+\(\Phi_B\sum_{r=1}^{d_0}z^r\eta_r\) with loss better than
+\((D_W+d_0+1)^{-d_0}\).  Off-block coherence is then perturbative by the
+packetwise oscillatory decay estimate.  Thus the graph/O2O3 gate is closed at
+polynomial cost once the finite/O2O3 packet family is expressed in the
+Fej\'er--Riesz charge model above.
 \end{remark}
 
-\begin{remark}[O2/O3 failure modes]
+\begin{remark}[O2/O3 failure modes after charge anti-lock]
 \label{rem:o2o3-thickened-overlap-failure}
-The only local failure mode at this stage is thickened overlap too coherent.
-The upstream prerequisites are \(R^C\)-normalization and
-genuine-pole/divided-difference visibility; if either fails, the overlap matrix
-is not in the correct finite regime.
+After Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3}, the
+remaining possible failure is not a Schur/principal-angle failure.  It would
+have to be a failure of one of the inputs needed to form the finite charge
+model itself: lack of \(R^C\)-normalization, failure of the bounded-degree
+Fej\'er--Riesz Stack factorization, or failure to identify the pure sector as
+charge \(0\) and the contaminant sector as charges \(1,\ldots,d_0\) before
+capped extraction.  Once those structural inputs are present, the normalized
+cross-Gram gap follows from the finite anti-lock proof.
 \end{remark}
+
 
 \begin{remark}[What finite/O2O3 does and does not use]
 \label{rem:finite-o2o3-basis-and-no-go-register}
