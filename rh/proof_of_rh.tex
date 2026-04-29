@@ -40184,6 +40184,412 @@ current status of the concrete coefficient certificate is FINITE AUDIT,
 not PROVED.
 \end{remark}
 
+\subsection{Verification of the concrete \texorpdfstring{$C_7/Y12$}{C7/Y12} row certificate}
+\label{subsec:verification-concrete-C7-Y12-row-certificate}
+
+The preceding section reduces rank-two quotient survival to the concrete
+row certificate and the column routing certificate.  This subsection records
+which parts of that certificate are now finite-dimensional consequences of
+already stated exact-sequence hypotheses, and which parts remain genuine
+coefficient verifications.  Throughout, set
+\[
+E_p:=
+\begin{bmatrix}
+C_{7,p}^{\mathrm{tar}}&C_{Y,p}^{\mathrm{tar}}
+\end{bmatrix},
+\qquad
+L_p^{\mathrm{row}}:=
+\binom{\ell_{7,p}}{\ell_{9,p}^Y}.
+\]
+
+\begin{definition}[Row-exactness certificate]
+\label{def:row-exactness-certificate-2Y}
+We say that packet \(p\) satisfies the \emph{row-exactness certificate}
+\(\mathcal E_{2Y}(p)\) if the following hold.
+\begin{enumerate}
+\item The septic exact sequence hypotheses
+\((\mathrm{SE1})\)--\((\mathrm{SE2})\) from
+Theorem~\ref{thm:rank-two-septic-exact-sequence} hold, and
+\[
+ \|\Delta_7^\nabla\|\le Q^{A},
+ \qquad
+ |\Delta_7^\nabla(C_{7,p}^{\mathrm{tar}})|\ge Q^{-A}.
+\]
+\item The grade separation condition
+\(\Delta_7^\nabla(C_{Y,p}^{\mathrm{tar}})=0\) holds.
+\item The whitening exact sequence hypotheses
+\((\mathrm{W1})\)--\((\mathrm{W2})\) from
+Theorem~\ref{thm:whitening-exact-sequence-Y12} hold after applying the
+same trace-to-singular and \(Y12\)-projection maps, and the corresponding
+covector satisfies
+\[
+ \omega_Y(C_{Y,p}^{\mathrm{tar}})=1,
+ \qquad
+ \|\omega_Y\|\le Q^{A},
+ \qquad
+ |\omega_Y(C_{7,p}^{\mathrm{tar}})|\le Q^{A}.
+\]
+\end{enumerate}
+All constants are allowed to change from line to line, but only by
+polynomial losses.
+\end{definition}
+
+\begin{theorem}[Concrete live rows from septic and whitening exactness]
+\label{thm:concrete-live-rows-from-septic-whitening}
+Assume \(\mathcal E_{2Y}(p)\).  Define
+\[
+  \ell_{7,p}:=\frac{\Delta_7^\nabla}{\Delta_7^\nabla(C_{7,p}^{\mathrm{tar}})},
+  \qquad
+  \ell_{9,p}^Y:=\omega_Y-\omega_Y(C_{7,p}^{\mathrm{tar}})\ell_{7,p}.
+\]
+Then \(L_p^{\mathrm{row}}E_p=I_2\) and
+\(\|L_p^{\mathrm{row}}\|_{\mathrm{op}}\le Q^{A'}\).  Moreover, every vector
+lying in the septic exact denominator and in the fixed-whitening dead space
+is killed by both rows.
+\end{theorem}
+
+\begin{proof}
+The lower bound on \(\Delta_7^\nabla(C_{7,p}^{\mathrm{tar}})\) and the norm
+bound on \(\Delta_7^\nabla\) give
+\(\|\ell_{7,p}\|\le\|\Delta_7^\nabla\|\,|\Delta_7^\nabla(C_{7,p}^{\mathrm{tar}})|^{-1}\le Q^{A'}\).
+By definition,
+\(\ell_{7,p}(C_{7,p}^{\mathrm{tar}})=1\) and
+\(\ell_{7,p}(C_{Y,p}^{\mathrm{tar}})=0\).  The whitening normalization gives
+\(\omega_Y(C_{Y,p}^{\mathrm{tar}})=1\), and the grade separation gives
+\(\ell_{9,p}^Y(C_{Y,p}^{\mathrm{tar}})=\omega_Y(C_{Y,p}^{\mathrm{tar}})-\omega_Y(C_{7,p}^{\mathrm{tar}})\cdot0=1\),
+\(\ell_{9,p}^Y(C_{7,p}^{\mathrm{tar}})=\omega_Y(C_{7,p}^{\mathrm{tar}})-\omega_Y(C_{7,p}^{\mathrm{tar}})\cdot1=0\).
+Thus \(L_p^{\mathrm{row}}E_p=I_2\).  The norm bound for \(\ell_{9,p}^Y\)
+follows from
+\(\|\ell_{9,p}^Y\|\le\|\omega_Y\|+|\omega_Y(C_{7,p}^{\mathrm{tar}})|\,\|\ell_{7,p}\|\le Q^{A'}\).
+The row-deadness assertion follows from \((\mathrm{SE1})\) and from
+\(\omega_Y(W_{\mathrm{dead}}^{\mathrm{fixed}})=0\).
+\end{proof}
+
+\begin{remark}[What is no longer a black box]
+\label{rem:row-exactness-no-longer-black-box}
+The existence of bounded detecting rows is not a free choice.  It is proved
+by Theorem~\ref{thm:concrete-live-rows-from-septic-whitening} once the
+septic exactness/separation and fixed-whitening exactness/separation
+assertions are verified.  Thus the row part of \(\mathfrak C_{2Y}(p)\) has
+been reduced to the explicit coefficient tests \(\mathcal E_{2Y}(p)\),
+rather than to an abstract Schur-gap hypothesis.
+\end{remark}
+
+\begin{definition}[Row signature of a raw nuisance column]
+\label{def:row-signature-raw-nuisance-column-2Y}
+Assume \(\mathcal E_{2Y}(p)\), and let
+\[
+ \mathfrak r_{2Y,p}(A):=L_p^{\mathrm{row}}A
+ =\binom{\ell_{7,p}(A)}{\ell_{9,p}^Y(A)}\in\mathbb C^2.
+\]
+For a raw nuisance column \(A\), the vector \(\mathfrak r_{2Y,p}(A)\) is
+its \emph{live row signature}.  The column is row-dead exactly when
+\(\mathfrak r_{2Y,p}(A)=0\).  If \(\mathfrak r_{2Y,p}(A)\neq0\), the
+column is not exact nuisance and must be routed as coherent live, residual
+live, or atom-local live, according to the locality filtration of
+Definition~\ref{def:locality-filtration-2Y}.
+\end{definition}
+
+\begin{lemma}[Origin and grade row-deadness]
+\label{lem:origin-grade-row-deadness-2Y}
+Assume \(\mathcal E_{2Y}(p)\).  Let \(A\) be any raw column whose projected
+trace-to-singular \(Y12\)-component belongs to the sum of the base
+source-linear space, the fixed affine/chart normalization space, the
+wrong-origin whitening space, the lower-order \(<7\) space, and the
+transported fixed-whitening dead space, namely
+\[
+ A\in
+ \mathcal K_{p,0}^{Y,\mathrm{dead}}
+ +\mathcal D_{7,\mathrm{chart}}
+ +\mathcal D_{7,\mathrm{norm}}
+ +\mathcal D_{7,\gamma/\mathrm{bg}}
+ +\mathcal D_{7,<7}
+ +W_{\mathrm{dead}}^{\mathrm{fixed}}.
+\]
+Then \(\mathfrak r_{2Y,p}(A)=0\).  Consequently the columns
+\(R_{B_2,p},R_{P,p},R_{D,p}\) are row-dead whenever their images are
+included in the base source-linear/dead quotient space, and \(A_{<7,p}\)
+is row-dead whenever its image is genuinely of order \(<7\) with no
+corrected septic package-coordinate summand.
+\end{lemma}
+
+\begin{proof}
+On the septic row, all listed spaces are contained in the typed denominator
+\(\mathcal D_7^{\mathrm{typed}}\) or in the exact kernel of
+\(\Delta_7^\nabla\) by Theorem~\ref{thm:rank-two-septic-exact-sequence};
+hence \(\ell_{7,p}(A)=0\).  On the primitive \(Y12\) row, the same spaces
+project into \(W_{\mathrm{dead}}^{\mathrm{fixed}}\) or into wrong-origin /
+transported whitening data.
+Theorem~\ref{thm:whitening-exact-sequence-Y12} gives \(\omega_Y(P_WA)=0\).
+Since \(\ell_{9,p}^Y=\omega_Y-\omega_Y(C_{7,p}^{\mathrm{tar}})\ell_{7,p}\),
+both terms vanish and \(\ell_{9,p}^Y(A)=0\).
+\end{proof}
+
+\begin{lemma}[Affine and coherent-recentering columns are not quotient-killed]
+\label{lem:affine-coherent-columns-routing-2Y}
+Assume \(\mathcal E_{2Y}(p)\).  Let \(A_{\alpha,p}^{\mathrm{raw}}\) be an
+affine/recentering column.  Then exactly one of the following holds.
+\begin{enumerate}
+\item \(\mathfrak r_{2Y,p}(A_{\alpha,p}^{\mathrm{raw}})=0\), in which case
+the column is row-dead and may enter the exact quotient.
+\item \(\mathfrak r_{2Y,p}(A_{\alpha,p}^{\mathrm{raw}})\neq0\), but the
+signature is determined by fixed affine chart data.  Then the column is
+coherent live and must be routed into \(M_{\mathrm{live},p}\); it may not be
+included unsplit in the exact quotient.
+\end{enumerate}
+In particular, an affine/recentering column is atom-local live only if the
+affine chart itself has been refit packet-by-packet after the live rows are
+chosen.  Such refitting is excluded by the fixed-normalization convention
+in the quotient slice.
+\end{lemma}
+
+\begin{proof}
+The affine action and its normalization functionals are fixed before the
+local \(Y12\) live-row quotient is formed.  Hence the row signature of an
+affine column is a function of the fixed affine chart data and not of an
+atom-local free parameter.  If the signature vanishes the column is dead.
+If it does not vanish, quotienting the unsplit column would force a live
+relation in the plane spanned by
+\(C_{7,p}^{\mathrm{tar}},C_{Y,p}^{\mathrm{tar}}\).  The live-coefficient
+obstruction of
+Lemma~\ref{lem:live-coefficient-obstruction-rank-two-quotient} therefore
+forces the coherent-routing alternative.
+\end{proof}
+
+\begin{lemma}[Order-seven raw column classification]
+\label{lem:A7-raw-column-classification-2Y}
+Assume \(\mathcal E_{2Y}(p)\).  Let \(A_{7,p}^{\mathrm{raw}}\) be the raw
+order-seven nuisance column.  Decompose it by the locality filtration
+\[
+ A_{7,p}^{\mathrm{raw}}
+ =A_{7,p}^{\mathrm{fixed}}+A_{7,p}^{\mathrm{coh}}
+  +A_{7,p}^{\mathrm{res}}+A_{7,p}^{\mathrm{loc}}.
+\]
+If \(\Delta_7^\nabla(A_{7,p}^{\mathrm{loc}})=0\) and
+\(\omega_Y(P_WA_{7,p}^{\mathrm{loc}})=0\), then \(A_{7,p}^{\mathrm{raw}}\)
+has no atom-local live component.  Its fixed and coherent live signatures,
+if nonzero, are routed into \(M_{\mathrm{live},p}\), and its residual
+component is routed to the error term.  If either displayed row evaluation
+is nonzero, the rank-two \(C_7/Y12\) quotient route fails on that packet
+unless that local component is removed from the nuisance tangent.
+\end{lemma}
+
+\begin{proof}
+The two displayed equalities say precisely that the local part is killed
+by the septic row and by the primitive \(Y12\) row, hence is not an
+atom-local live tangent.  Fixed/coherent terms with nonzero row signature
+are not exact nuisance; they are retained as coherent carrier corrections
+by Definition~\ref{def:column-routing-certificate-Y12}.  Residual terms
+are routed to the error ledger.  If the local part has a nonzero row
+signature, then quotient-killing it would annihilate a nonzero vector in
+the live carrier plane, contradicting rank-two survival by
+Lemma~\ref{lem:live-coefficient-obstruction-rank-two-quotient}.
+\end{proof}
+
+\begin{theorem}[Primitive arithmetic coefficient classification]
+\label{thm:primitive-arithmetic-coefficient-classification-2Y}
+Assume \(\mathcal E_{2Y}(p)\).  Let
+\(A_{II,p}^{\mathrm{raw}}=A_{II,p}^{\mathrm{fixed}}+A_{II,p}^{\mathrm{coh}}+A_{II,p}^{\mathrm{res}}+A_{II,p}^{\mathrm{loc}}\)
+be its locality filtration, and set
+\[
+\mathfrak r_{2Y,p}(A_{II,p}^{\mathrm{raw}})
+=\binom{c_{\mathrm{arith},7,p}}{c_{\mathrm{arith},Y,p}}.
+\]
+If
+\[
+A_{II,p}^{\mathrm{loc}}=0
+\quad\text{in the primitive same-point one-whitening slot,}
+\tag{AI-loc}
+\]
+and the fixed arithmetic variations satisfy
+\[
+P_WV_{\mathrm{arith}}^{\mathrm{fixed}}
+\subseteq W_{\mathrm{dead}}^{\mathrm{fixed}},
+\tag{AI-fix}
+\]
+then the primitive atom-local obstruction vanishes, and
+\(c_{\mathrm{arith},Y,p}=0\) for the exact fixed part; any nonzero
+\(Y12\)-row signature of \(A_{II,p}^{\mathrm{raw}}\) is coherent or
+residual and must be routed to \(M_{\mathrm{live},p}\) or to the residual
+error, not to the exact dead quotient.  If \((\mathrm{AI\text{-}loc})\)
+fails, the nonzero primitive coefficient \(c_{\mathrm{arith},Y,p}\) is
+atom-local and the rank-two quotient route is false on that packet.
+\end{theorem}
+
+\begin{proof}
+The fixed part is killed by \(\omega_Y\) by
+Theorem~\ref{thm:whitening-exact-sequence-Y12} and
+\((\mathrm{AI\text{-}fix})\).  Its septic component is killed by the
+septic exact denominator when admitted as exact nuisance.  Hence the exact
+fixed part has zero row signature.  The local primitive same-point
+one-whitening slot is exactly the slot detected by \(a_Y\) and normalized
+by \(\omega_Y(a_Y)=1\).  If \((\mathrm{AI\text{-}loc})\) fails, applying
+\(\omega_Y\) detects a nonzero local \(Y12\)-coordinate; quotient-killing
+that column would kill \(C_{Y,p}^{\mathrm{tar}}\) or a nonzero linear
+combination of the two live carriers.  If \((\mathrm{AI\text{-}loc})\)
+holds, the remaining nonzero signatures are fixed/coherent or residual by
+the locality filtration, and are routed accordingly.
+\end{proof}
+
+\begin{corollary}[Safe treatment of \texorpdfstring{$c_{\mathrm{arith},Y}$}{c_arith,Y}]
+\label{cor:safe-treatment-c-arith-Y-2Y}
+The coefficient
+\[
+ c_{\mathrm{arith},Y}:=
+ \bigl[II_{\mathrm{arith},9}^{\mathrm{exact}}\bigr]_{D^2N_0,\ \mathrm{same},\ w=1,\ b=12}
+\]
+may be placed in the exact dead quotient only in the zero case.  If it is
+nonzero and coherent, it is absorbed into \(L_{\mathrm{eff},p}\).  If it
+is nonzero and atom-local, the local rank-two quotient certificate fails.
+Thus ``\(c_{\mathrm{arith},Y}=0\)'' is no longer a global necessity; the
+necessary condition is that no nonzero atom-local primitive
+\(Y12\)-coefficient be quotient-killed.
+\end{corollary}
+
+\begin{theorem}[No atom-local live contribution from \texorpdfstring{$E_2/R_{\mathrm{lab}}$}{E2/Rlab}]
+\label{thm:E2-Rlab-no-atom-local-live-verification-2Y}
+Assume the three guardrails of Theorem~\ref{thm:no-atom-fitting-2Y-plus}.
+Then \(\mathfrak r_{2Y,p}(A_{E_2,p}^{\mathrm{raw}})\) is zero, residual,
+or coherent.  In particular \(A_{E_2,p}^{\mathrm{raw}}\) has no atom-local
+live \(C_7/Y12\) component and is safe for the certified quotient after
+the canonical dead/coherent/residual split.
+\end{theorem}
+
+\begin{proof}
+The guardrails give
+\(D_{\mathrm{loc}}\Pi_{\mathrm{fib},Y}(E_2+R_{\mathrm{lab}})=0\) by
+Theorem~\ref{thm:no-atom-fitting-2Y-plus}.  Hence the local component of
+\(A_{E_2,p}^{\mathrm{raw}}\) has zero image under both live rows.  The
+fixed part is part of the base row data, the coherent part is routed to
+\(\mathcal C_{2Y}^{\mathrm{arith}}\) and then to \(M_{\mathrm{live},p}\),
+and the residual part is routed to \(R_X^{2Y}\).  No atom-local live
+coefficient remains to be killed by the quotient.
+\end{proof}
+
+\begin{definition}[Coordinate-coherent live correction]
+\label{def:coordinate-coherent-live-correction-2Y}
+A coherent live correction \(M_{\mathrm{live},p}\) is called
+\emph{coordinate-coherent} if there exist polynomially conditioned
+matrices \(U_p,V_p\in GL_2(\mathbb C)\) and a residual matrix \(R_p\)
+with \(\|R_p\|\le Q^{-B}\) such that
+\[
+ L_{\mathrm{clean},p}+M_{\mathrm{live},p}
+ =U_pL_{\mathrm{clean},p}V_p+R_p,
+ \qquad
+ \sigma_{\min}(U_p),\sigma_{\min}(V_p)\ge Q^{-A},
+ \qquad
+ \|U_p\|+\|V_p\|\le Q^A.
+\]
+This is the exact condition that the coherent live terms change the
+live-row basis and/or the domain slope chart rather than introduce an
+arbitrary cancelling additive perturbation.
+\end{definition}
+
+\begin{lemma}[Effective carrier noncancellation from coordinate coherence]
+\label{lem:effective-carrier-noncancellation-coordinate-coherent-2Y}
+Assume \(\sigma_{\min}(L_{\mathrm{clean},p})\ge Q^{-A}\) and that
+\(M_{\mathrm{live},p}\) is coordinate-coherent in the sense of
+Definition~\ref{def:coordinate-coherent-live-correction-2Y}.  If \(B\) is
+larger than the polynomial losses, then
+\(\sigma_{\min}(L_{\mathrm{eff},p})=\sigma_{\min}(L_{\mathrm{clean},p}+M_{\mathrm{live},p})\ge Q^{-A'}\).
+Equivalently, after triangularization,
+\(|c_{7,p}^{\mathrm{eff}}\alpha_{9,p}^{\mathrm{eff}}|\ge Q^{-A'}\).
+\end{lemma}
+
+\begin{proof}
+For unit \(v\),
+\(\|U_pL_{\mathrm{clean},p}V_pv\|\ge\sigma_{\min}(U_p)\sigma_{\min}(L_{\mathrm{clean},p})\sigma_{\min}(V_p)\ge Q^{-A'}\).
+Therefore \(\|L_{\mathrm{eff},p}v\|\ge Q^{-A'}-\|R_p\|\); taking \(B\)
+large gives the asserted bound.  The triangular determinant statement
+follows from the equivalence between a polynomial singular-value lower
+bound for a \(2\times2\) matrix and a polynomial lower bound for the
+product of its triangular pivots after polynomially conditioned row
+operations.
+\end{proof}
+
+\begin{theorem}[Verification theorem for \texorpdfstring{$\mathfrak C_{2Y}(p)$}{C2Y(p)}]
+\label{thm:verification-C2Y-certificate-continued}
+Assume the following packet-level coefficient facts.
+\begin{enumerate}
+\item The row-exactness certificate \(\mathcal E_{2Y}(p)\) holds.
+\item The images of \(R_{B_2,p},R_{P,p},R_{D,p}\) lie in the base
+source-linear/dead quotient space.
+\item The affine/recentering column is fixed or coherent in the sense of
+Lemma~\ref{lem:affine-coherent-columns-routing-2Y}.
+\item The lower-order column \(A_{<7,p}\) has no corrected septic
+package-coordinate summand.
+\item The order-seven local component satisfies the two row-vanishing
+tests of Lemma~\ref{lem:A7-raw-column-classification-2Y}.
+\item The arithmetic column satisfies \((\mathrm{AI\text{-}loc})\) and
+\((\mathrm{AI\text{-}fix})\) of
+Theorem~\ref{thm:primitive-arithmetic-coefficient-classification-2Y}.
+\item The \(E_2/R_{\mathrm{lab}}\) no-atom-fitting guardrails of
+Theorem~\ref{thm:no-atom-fitting-2Y-plus} hold.
+\item Every coherent live correction is coordinate-coherent, and
+\(\sigma_{\min}(L_{\mathrm{clean},p})\ge Q^{-A}\).
+\end{enumerate}
+Then the full concrete certificate \(\mathfrak C_{2Y}(p)\) holds:
+\[
+\begin{gathered}
+L_p^{\mathrm{row}}E_p=I_2,
+\qquad
+\|L_p^{\mathrm{row}}\|_{\mathrm{op}}\le Q^A,\qquad
+\sigma_{\min}(q_{p,\mathrm{cert}}^YE_p)\ge Q^{-A},\\
+U_p^{\mathrm{dead}}\subseteq
+\ker\bigl(q_{p,\mathrm{cert}}^Y\Pi_{\Sigma(Y12),p}T_{\mathrm{tr}\to\mathrm{sing},p}P_{\mathrm{tr},p}\bigr),\\
+\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-A}.
+\end{gathered}
+\]
+Thus the rank-two \(Y12\) quotient survival and the effective row-normal
+D4 carrier survival are proved on packet \(p\).
+\end{theorem}
+
+\begin{proof}
+The first assertion follows from
+Theorem~\ref{thm:concrete-live-rows-from-septic-whitening}.  Items
+(2)--(4) and Lemmas~\ref{lem:origin-grade-row-deadness-2Y} and
+\ref{lem:affine-coherent-columns-routing-2Y} show that the base, affine,
+and lower-order columns are row-dead or coherent-reroutable.  Item (5)
+and Lemma~\ref{lem:A7-raw-column-classification-2Y} eliminate atom-local
+live contributions from \(A_7\).  Item (6) and
+Theorem~\ref{thm:primitive-arithmetic-coefficient-classification-2Y}
+eliminate the primitive atom-local arithmetic obstruction, including the
+dangerous \(c_{\mathrm{arith},Y}\) slot.  Item (7) and
+Theorem~\ref{thm:E2-Rlab-no-atom-local-live-verification-2Y} eliminate
+atom-local live contributions from \(E_2/R_{\mathrm{lab}}\).  Consequently
+every raw nuisance column is either row-dead, coherent-reroutable, or
+residual; no atom-local live column is quotient-killed.  The certified
+dead quotient is therefore formed only from row-dead remainders, and
+Theorem~\ref{thm:rank-two-quotient-survival-from-concrete-certificate}
+gives \(\sigma_{\min}(q_{p,\mathrm{cert}}^YE_p)\ge Q^{-A}\) and the
+dead-only descent statement.  Finally, item (8) and
+Lemma~\ref{lem:effective-carrier-noncancellation-coordinate-coherent-2Y}
+give \(\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-A}\).
+\end{proof}
+
+\begin{remark}[Updated smallest remaining theorem]
+\label{rem:updated-smallest-remaining-theorem-C2Y}
+After Theorem~\ref{thm:verification-C2Y-certificate-continued}, the
+remaining work is no longer the abstract construction of live rows or
+the Schur-gap linear algebra.  The smallest coefficient theorem that
+still must be checked from the actual formulas is the eight-item packet
+certificate listed in that theorem.  In particular, the most delicate
+entries are:
+\[
+\begin{array}{ll}
+\text{(a)} & \Delta_7^\nabla(C_{7,p}^{\mathrm{tar}})\text{ has a polynomial lower bound;}\\
+\text{(b)} & P_WV_{\mathrm{arith}}^{\mathrm{fixed}}\subseteq W_{\mathrm{dead}}^{\mathrm{fixed}}
+\text{ and no primitive atom-local }II_{\mathrm{arith},9}\text{ slot appears;}\\
+\text{(c)} & E_2/R_{\mathrm{lab}}\text{ satisfies the no-atom-fitting guardrails;}\\
+\text{(d)} & \text{coherent live corrections are coordinate-coherent, hence cannot cancel }L_{\mathrm{clean},p}.
+\end{array}
+\]
+If these four formula-level facts are proved, the entire row/quotient/
+effective-carrier part of \(\mathfrak C_{2Y}(p)\) is proved.  If any of
+them fails with an atom-local live vector, the rank-two \(Y12\) quotient
+route is false on that packet, not merely incomplete.
+\end{remark}
+
 \begin{definition}[Certified live-row quotient]
 \label{def:certified-live-row-quotient}
 Let \(\mathcal H_p^Y\) be the finite-dimensional \(Y12\)-boundary output
