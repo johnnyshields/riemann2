@@ -47831,6 +47831,115 @@ set.  It is the normalization safeguard needed so that the source frame
 bound is nondegenerate.
 \end{remark}
 
+\begin{definition}[Whitney packet cores]
+\label{def:whitney-packet-cores}
+Let \(\Omega\subset\mathbb R\) be the packet-admissible source region and
+\[
+d(t):=\operatorname{dist}(t,\Omega^c)
+\]
+the associated distance-to-boundary function.  Fix
+\(0<\varepsilon\le \tfrac{1}{10}\).  Choose packet centers \(m_p\in\Omega\) so
+that the shrunken intervals
+\[
+K_p^- := (m_p-\tfrac{1}{2}r_p,\ m_p+\tfrac{1}{2}r_p),
+\qquad
+r_p:=\varepsilon\,d(m_p),
+\]
+are pairwise disjoint.  Define the packet cores by
+\[
+K_p:=(m_p-r_p,\ m_p+r_p).
+\]
+\end{definition}
+
+\begin{theorem}[Whitney selection / overlap comparability]
+\label{thm:whitney-selection-overlap-comparability}
+With the packet cores \(K_p\) from
+Definition~\ref{def:whitney-packet-cores}:
+
+\begin{enumerate}
+\item if \(K_p\cap K_q\neq\varnothing\), then
+\[
+r_p\asymp r_q;
+\]
+
+\item the packet cores have bounded overlap:
+\[
+\sup_{t\in\Omega}\sum_p \mathbf 1_{K_p}(t)\le C_\varepsilon;
+\]
+
+\item consequently, \(\{K_p\}\) is a Whitney family for \(\Omega\), and the
+packet-core micro-covering needed for the source frame bound is automatic.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Assume \(K_p\cap K_q\neq\varnothing\).  Pick \(x\in K_p\cap K_q\).  Then
+\[
+|m_p-m_q|\le r_p+r_q.
+\]
+Since \(d(\cdot)\) is \(1\)-Lipschitz,
+\[
+d(m_p)\le d(m_q)+|m_p-m_q|
+\le d(m_q)+r_p+r_q
+=
+d(m_q)+\varepsilon d(m_p)+\varepsilon d(m_q).
+\]
+Thus
+\[
+(1-\varepsilon)d(m_p)\le (1+\varepsilon)d(m_q),
+\]
+and symmetrically
+\[
+(1-\varepsilon)d(m_q)\le (1+\varepsilon)d(m_p).
+\]
+Multiplying by \(\varepsilon\) gives
+\[
+r_p=\varepsilon d(m_p)\asymp \varepsilon d(m_q)=r_q.
+\]
+
+For bounded overlap, fix \(t\in\Omega\), and let
+\[
+\mathcal P(t):=\{p:\ t\in K_p\}.
+\]
+For \(p\in\mathcal P(t)\),
+\[
+|t-m_p|\le r_p=\varepsilon d(m_p).
+\]
+By the same Lipschitz estimate,
+\[
+(1-\varepsilon)d(m_p)\le d(t)\le (1+\varepsilon)d(m_p),
+\]
+so all \(r_p\) for \(p\in\mathcal P(t)\) are comparable to \(d(t)\).  Hence
+the pairwise disjoint shrunken intervals \(K_p^-\) all lie inside an
+interval of length \(O(d(t))\), while each has length \(\asymp d(t)\).
+Therefore only \(O(1)\) many can fit, uniformly in \(t\), and
+\[
+\sup_{t\in\Omega}\sum_p \mathbf 1_{K_p}(t)\le C_\varepsilon.
+\]
+This proves the Whitney property.
+\end{proof}
+
+\begin{remark}[Whitney family implies source thickness]
+\label{rem:whitney-family-source-thickness}
+If the packet construction chooses the packet cores by the maximal Whitney
+selection of Definition~\ref{def:whitney-packet-cores}, then the
+bounded-overlap and scale-comparability inputs in the source layer are
+unconditional consequences of the construction.  This discharges
+property~(1) of Theorem~\ref{thm:unconditional-packet-regularity} and
+clauses~(1) and~(3) of
+Theorem~\ref{thm:packet-construction-regularity}'s packet-structure
+assumptions.
+
+\noindent\emph{Scope note.}  The theorem above is unconditional once the
+Whitney selection rule is adopted as part of the packet construction.  The
+present draft adopts this selection rule by Definition~\ref{def:whitney-packet-cores};
+compatibility of this rule with the existing packet usage in the source
+decomposition is a draft-level convention to be checked when the source
+construction is finalised.  The remaining open packet-side input is the
+frequency-separation theorem for the resonant-block organization (item~(4)
+of Theorem~\ref{thm:unconditional-packet-regularity}).
+\end{remark}
+
 \begin{theorem}[Conditional packet construction regularity and oscillatory decay]
 \label{thm:packet-construction-regularity}
 \emph{Status: FINITE AUDIT.  This is a conditional reduction.  Under the
