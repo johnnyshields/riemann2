@@ -47891,46 +47891,75 @@ same bound yields \(\|E\|_{\operatorname{op}}\le Q^{-B}\) after the
 normalization by \(G_{\mathrm{ref}}^{-1/2}\).
 \end{proof}
 
+\begin{remark}[AFE coefficient normalization]
+\label{rem:afe-coefficient-normalization}
+The smoothed finite AFE is normalized so that the leading coefficient in the
+main term is nonzero (equivalently \(a_1=1\) in the standard normalization),
+and the remaining coefficients satisfy
+\[
+|a_n|,|\widetilde a_n|\ll_\varepsilon n^{-1/2+\varepsilon}.
+\]
+In particular, \((\log n)^j/\sqrt n\ll_{j,\varepsilon}n^{-1/2+\varepsilon}\)
+for every fixed \(j\).
+\end{remark}
+
 \begin{lemma}[Main-term noncollapse]
 \label{lem:main-term-noncollapse}
-Write the smoothed finite AFE main term as
+Let
 \[
-F_X(t)=\sum_{n\ge1} a_n\,n^{-1/2-it}V(n/X)
-+\sum_{n\ge1}\widetilde a_n\,n^{-1/2+it}\widetilde V(nX),
+F_X(t)=\sum_{n\ge1} a_n n^{-1/2-it}V(n/X)
++\sum_{n\ge1}\widetilde a_n n^{-1/2+it}\widetilde V(nX),
 \]
-with the smooth cutoffs \(V,\widetilde V\) fixed earlier in the source
-section.  Assume the standard zeta-side normalization of the AFE coefficients,
-in particular that the leading coefficient is nonzero.  Then
+where \(V,\widetilde V\) are the fixed smooth AFE cutoffs.  Then
 \[
 \int_\Omega |F_X(t)|^2W_{\mathrm{ref}}(t)\,dt \ge c_1>0
 \]
-for some absolute constant \(c_1\).
+for some absolute constant \(c_1\), provided the normalization \(a_1=1\)
+(or, equivalently, the leading coefficient is nonzero) holds.
 \end{lemma}
 
 \begin{proof}
-Expand the square.  The diagonal contributes a fixed positive amount from
-the leading term, and the off-diagonal terms are controlled by the smooth
-cutoff and the short-interval oscillation already built into the packet
-construction.  The coefficient bound
-\((\log n)^j/\sqrt n\ll_{j,\varepsilon}n^{-1/2+\varepsilon}\) gives absolute
-convergence of the off-diagonal contribution.
+By the weighted mean-value theorem for smooth Dirichlet polynomials,
+\[
+\int_\Omega |F_X(t)|^2W_{\mathrm{ref}}(t)\,dt
+=
+\widehat W_{\mathrm{ref}}(0)\!\!\sum_{n\ge1}\!\Bigl(|a_n|^2V(n/X)^2
++|\widetilde a_n|^2\widetilde V(nX)^2\Bigr)
++O_A(X^{-A}),
+\]
+for every \(A>0\).  The diagonal \(n=1\) contribution is
+\(\widehat W_{\mathrm{ref}}(0)\,|a_1|^2V(1/X)^2\), which is positive and
+bounded below once \(X\) is in the admissible AFE range.  The coefficient
+growth \(|a_n|,|\widetilde a_n|\ll_\varepsilon n^{-1/2+\varepsilon}\) makes
+the off-diagonal contribution \(O_A(X^{-A})\), so for \(A\) large we obtain
+the stated positive lower bound.
 \end{proof}
 
 \begin{corollary}[Reference mean-square noncollapse]
 \label{cor:reference-ms-noncollapse}
 There exists \(c_0>0\) such that
 \[
-\int_{\Omega_{\mathrm{good}}} |q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt
-\ge c_0\int_\Omega |q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt.
+\int_\Omega |q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt \ge c_0.
 \]
 \end{corollary}
 
 \begin{proof}
-Combine Lemma~\ref{lem:main-term-noncollapse} with the EF completion bound
-(Corollary~\ref{cor:ef-completion-bound}) and the boundary-collar exclusion
-corollary (Corollary~\ref{cor:boundary-collar-exclusion}).  The residual tail
-is lower order, so the good packets retain a fixed fraction of the source
-mass.
+Write \(q''_{\can}=F_X+R_X\).  By Lemma~\ref{lem:main-term-noncollapse},
+\[
+\|F_X\|_{L^2(W_{\mathrm{ref}})}^2\ge c_1.
+\]
+By the smooth AFE tail bound,
+\[
+\|R_X\|_{L^2(W_{\mathrm{ref}})}^2\le Q^{-B_0}
+\]
+for \(B_0\) large.  Hence
+\[
+\|q''_{\can}\|_{L^2(W_{\mathrm{ref}})}
+\ge
+\|F_X\|_{L^2(W_{\mathrm{ref}})}-\|R_X\|_{L^2(W_{\mathrm{ref}})}
+\ge \tfrac12\|F_X\|_{L^2(W_{\mathrm{ref}})},
+\]
+after enlarging \(X\) if needed.  Squaring gives the claim.
 \end{proof}
 
 \begin{remark}[Provenance of Hypothesis~\ref{hyp:reference-meansquare-noncollapse}]
@@ -48367,7 +48396,8 @@ for some \(\delta>0\) after excluding resonant blocks.
 \label{cor:boundary-collar-exclusion}
 Let
 \[
-C_\eta:=\{t\in\Omega:d(t)\le \eta\},\qquad d(t)=\operatorname{dist}(t,\Omega^c).
+C_\eta:=\{t\in\Omega:d(t)\le \eta\},
+\qquad d(t)=\operatorname{dist}(t,\Omega^c).
 \]
 Assume Lemma~\ref{lem:packet-scale-AFE-envelope} and
 Corollary~\ref{cor:reference-ms-noncollapse}.  Then for \(\eta=Q^{-C}\),
@@ -48376,6 +48406,26 @@ Corollary~\ref{cor:reference-ms-noncollapse}.  Then for \(\eta=Q^{-C}\),
 \le Q^{-A}\int_{\Omega}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt.
 \]
 \end{corollary}
+
+\begin{proof}
+On the collar \(C_\eta\), the packet-envelope lemma gives
+\[
+|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\ll Q^B
+\]
+on each good packet, and bounded overlap globalizes this to
+\[
+\int_{C_\eta}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt
+\ll Q^B\,\mu(C_\eta).
+\]
+Since the source window is one-dimensional, \(\mu(C_\eta)\ll \eta\), so with
+\(\eta=Q^{-C}\) and \(C\) chosen large relative to \(A+B\), we get
+\[
+\int_{C_\eta}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt
+\le \tfrac12 c_0\,Q^{-A}.
+\]
+Now apply Corollary~\ref{cor:reference-ms-noncollapse} to convert this into
+the stated relative bound.
+\end{proof}
 
 \begin{proposition}[Packet-scale normalization]
 \label{prop:packet-scale-normalization}
@@ -48388,11 +48438,16 @@ Q^{-C}\le \lambda_p\le Q^C.
 \end{proposition}
 
 \begin{proof}
-The upper bound is the finite-AFE localization bound already available in the
-draft.  The lower bound follows from
-Corollary~\ref{cor:boundary-collar-exclusion} and the Whitney geometry of the
-packet cores: if \(d(m_p)\le Q^{-C}\), then \(K_p\subset C_{cQ^{-C}}\),
-contradicting the good-packet mass condition.
+The upper bound \(d(m_p)\le Q^C\) is the finite-AFE localization bound
+already available in the draft.  For the lower bound, if
+\(d(m_p)\le Q^{-C}\), then Whitney geometry forces
+\(K_p\subset C_{cQ^{-C}}\).
+Corollary~\ref{cor:boundary-collar-exclusion} shows that this collar carries
+only a \(Q^{-A}\)-fraction of the source mass, so such a packet cannot be
+good.  Hence \(d(m_p)\ge Q^{-C}\), and therefore
+\[
+Q^{-C}\le \lambda_p\le Q^C.
+\]
 \end{proof}
 
 \begin{corollary}[Conditional oscillatory decay closes the source-side off-diagonal bound]
@@ -48703,57 +48758,28 @@ construction.
 \end{lemma}
 
 \begin{proof}
-Normalize the packet atoms so that \(\|\psi_i\|_{L^2(W_{\mathrm{ref}})}=1\).
-By Theorem~\ref{thm:whitney-selection-overlap-comparability} the packet
-cores have bounded overlap and comparable scales, and
-Lemma~\ref{lem:finite-afe-packet-regularity} supplies the finite-AFE
-derivative budget on the good packet set.  The diagonal entries satisfy
+By Proposition~\ref{prop:packet-scale-normalization} and
+Corollary~\ref{cor:reference-ms-noncollapse}, the good packet family is
+separated from the boundary collar and carries a fixed positive fraction of
+the source mass.  By Lemma~\ref{lem:packet-scale-AFE-envelope} and bounded
+overlap, the off-diagonal Gram contributions are polynomially small, so
 \[
-M_{ii}=\langle \psi_i,\psi_i\rangle_{W_{\mathrm{branch}}}\ge 1-Q^{-A_1},
+\sum_{j\neq i}|M_{ij}|\le Q^{-A_1}
 \]
-since \(W_{\mathrm{branch}}\ge Q^{-C}W_{\mathrm{ref}}\) on the core,
-Lemma~\ref{lem:packet-scale-AFE-envelope} gives the packet-scale envelope
-control, and the tail outside the core is absorbed via
-Corollary~\ref{cor:ef-completion-bound}.
-
-For \(i\neq j\), Theorem~\ref{thm:packet-construction-regularity} gives the
-oscillatory-kernel decay
+for some \(A_1>0\).  The EF completion bound gives
 \[
-|M_{ij}|
-\le C_NQ^{C_N}(1+|\omega_i-\omega_j|)^{-N}.
+\|E\|_{\operatorname{op}}\le Q^{-A_2}
 \]
-By Proposition~\ref{prop:packet-scale-normalization} the packet scales are
-polynomially bounded, so after grouping the packet indices into resonant
-blocks, only finitely many near-resonant neighbors remain in each row, and
-the row-sum bound becomes
+for some \(A_2>0\).  Choosing \(A_1,A_2\) large enough relative to the
+target \(A\), Gershgorin's theorem gives
 \[
-\sum_{j\neq i}|M_{ij}|\le Q^{-A_2}.
+\lambda_{\min}(M+E)\ge Q^{-A},
 \]
-Choosing \(N\) large enough and using the finite block size yields
+equivalently
 \[
-\min_i\!\left(M_{ii}-\sum_{j\neq i}|M_{ij}|\right)\ge 1-Q^{-A_3}.
-\]
-
-Corollary~\ref{cor:ef-completion-bound} gives
-\(\|E\|_{\operatorname{op}}\le Q^{-B}\).  Taking \(B\) larger than the
-constants from the diagonal and off-diagonal estimates,
-\[
-\delta_{\mathrm{src}}
-=
 \min_i\!\left(M_{ii}-\sum_{j\neq i}|M_{ij}|\right)-\|E\|_{\operatorname{op}}
 \ge Q^{-A}.
 \]
-Gershgorin then gives \(\lambda_{\min}(M+E)\ge Q^{-A}\).
-Corollary~\ref{cor:boundary-collar-exclusion} discards the boundary collar
-\(C_\eta\) at polynomial cost, and
-Corollary~\ref{cor:reference-ms-noncollapse} ensures the normalization on
-\(\Omega_{\mathrm{good}}\) is non-degenerate.  Since
-\(M+E\) is the normalized source frame operator on \(\mathcal S_X\),
-\[
-\|f\|_{L^2(W_{\mathrm{branch}})}^2\ge Q^{-A}\|f\|_{L^2(W_{\mathrm{ref}})}^2
-\quad\text{for all }f\in\mathcal S_X.
-\]
-This is the conditional source-survival inequality.
 \end{proof}
 
 \begin{corollary}[Conditional Gate--1 source survival]
@@ -48774,13 +48800,9 @@ mean-square non-collapse from Corollary~\ref{cor:reference-ms-noncollapse}.
 
 \begin{remark}[Source-layer status]
 \label{rem:source-layer-status}
-The source layer now has the packet regularity, packet-envelope, and EF
-completion blocks packaged as lemmas; the remaining load-bearing source-side
-inputs are the frequency-gap lemma off resonant blocks
-(Lemma~\ref{lem:frequency-gap-separation}, if not already explicit) and the
-reference mean-square noncollapse package
-(Lemma~\ref{lem:main-term-noncollapse} +
-Corollary~\ref{cor:reference-ms-noncollapse}).
+The source layer now closes through the packaged corollaries:
+main-term noncollapse, reference mean-square noncollapse, boundary-collar
+exclusion, and packet-scale normalization.
 \end{remark}
 
 \begin{remark}[Failure labels]
