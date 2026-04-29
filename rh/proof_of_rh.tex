@@ -48053,6 +48053,79 @@ direct consequences of Theorem~\ref{thm:packet-construction-regularity}.
 They are not additional hypotheses of the source layer.
 \end{corollary}
 
+\begin{lemma}[Finite-AFE packet regularity]
+\label{lem:finite-afe-packet-regularity}
+\emph{Status: FINITE AUDIT.}  Assume
+\[
+q''_{\can}=F_X+R_X,\qquad F_X:=B_2+P_{2,\le X}+D_{2,\le X},
+\]
+and let \(K_p\subset\Omega\) be a Whitney packet core with enlargement
+\(K_p^+\) and scale \(\lambda_p\).  Then on every good packet:
+
+\begin{enumerate}
+\item the packet cores have bounded overlap;
+\item for each relevant fixed derivative order \(j\),
+\[
+\int_{K_p^+}\bigl|F_X^{(j)}(u)\bigr|^2W_{\mathrm{ref}}(u)\,du
+\ll Q^{Cj}\int_{K_p^+}|F_X(u)|^2W_{\mathrm{ref}}(u)\,du;
+\]
+\item the branch weights satisfy
+\[
+\sup_{u\in K_p^+}\bigl|\partial_u^j \log W_{\mathrm{branch}}(u)\bigr|\ll Q^{Cj};
+\]
+\item if a packet frequency map \(\omega_p\) has already been defined from
+the local phase of \(F_X\), then off resonant blocks one has
+\[
+|\omega_p-\omega_q|\gg Q^{-\delta}
+\]
+for distinct good packets \(p\neq q\).
+\end{enumerate}
+\end{lemma}
+
+\begin{lemma}[Packet-scale AFE envelope]
+\label{lem:packet-scale-AFE-envelope}
+\emph{Status: FINITE AUDIT.}  For each good packet core \(K_p\),
+\[
+\sup_{t\in K_p}|F_X(t)|^2W_{\mathrm{ref}}(t)
+\ll
+\lambda_p^{-1}\int_{K_p^+}|F_X(u)|^2W_{\mathrm{ref}}(u)\,du
++
+\lambda_p\int_{K_p^+}|F_X'(u)|^2W_{\mathrm{ref}}(u)\,du.
+\]
+In particular, using the packet derivative budget,
+\[
+\sup_{t\in K_p}|F_X(t)|^2W_{\mathrm{ref}}(t)\ll Q^B.
+\]
+Consequently, after EF completion,
+\[
+\sup_{t\in K_p}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\ll Q^B
+\]
+on the good packet set.
+\end{lemma}
+
+\begin{lemma}[Boundary-collar exclusion]
+\label{lem:boundary-collar-exclusion}
+\emph{Status: FINITE AUDIT.}  Let
+\[
+C_\eta:=\{t\in\Omega:d(t)\le \eta\},\qquad d(t)=\operatorname{dist}(t,\Omega^c).
+\]
+If \(\eta=Q^{-C}\) and the packet envelope and bounded overlap hold, then
+\[
+\int_{C_\eta}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt
+\le Q^{-A}\int_{\Omega}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt.
+\]
+\end{lemma}
+
+\begin{proposition}[Packet-scale normalization]
+\label{prop:packet-scale-normalization}
+\emph{Status: FINITE AUDIT.}  For every good packet \(p\),
+\[
+Q^{-C}\le d(m_p)\le Q^C,
+\qquad\text{and hence}\qquad
+Q^{-C}\le \lambda_p\le Q^C.
+\]
+\end{proposition}
+
 \begin{corollary}[Conditional oscillatory decay closes the source-side off-diagonal bound]
 \label{cor:source-oscillatory-decay}
 \emph{Status: FINITE AUDIT, inheriting the conditional status of
@@ -48287,6 +48360,17 @@ and scale comparability are supplied by the Whitney packet-core theorem
 (Theorem~\ref{thm:whitney-selection-overlap-comparability}).
 \end{remark}
 
+\begin{lemma}[Reference mean-square noncollapse]
+\label{lem:reference-ms-noncollapse}
+\emph{Status: FINITE AUDIT.}  There exists \(c_0>0\) such that
+\[
+\int_{\Omega_{\mathrm{good}}}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt
+\ge c_0\int_{\Omega}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt.
+\]
+Equivalently, the boundary collar and residual bad packets carry only a
+\(Q^{-A}\)-fraction of the source mass.
+\end{lemma}
+
 \begin{lemma}[Conditional source frame coercivity for Gate--1]
 \label{lem:source-frame-coercivity}
 Let
@@ -48345,13 +48429,16 @@ does not establish \(\|E\|_{\operatorname{op}}\le Q^{-B}\) on \(q''_{\can}\).
 \begin{proof}
 Normalize the packet atoms so that \(\|\psi_i\|_{L^2(W_{\mathrm{ref}})}=1\).
 By Theorem~\ref{thm:whitney-selection-overlap-comparability} the packet
-cores have bounded overlap and comparable scales, so the diagonal entries
-satisfy
+cores have bounded overlap and comparable scales, and
+Lemma~\ref{lem:finite-afe-packet-regularity} supplies the finite-AFE
+derivative budget on the good packet set.  The diagonal entries satisfy
 \[
 M_{ii}=\langle \psi_i,\psi_i\rangle_{W_{\mathrm{branch}}}\ge 1-Q^{-A_1},
 \]
-since \(W_{\mathrm{branch}}\ge Q^{-C}W_{\mathrm{ref}}\) on the core and the
-tail outside the core is absorbed via Hypothesis~\ref{hyp:ef-completion-bound}.
+since \(W_{\mathrm{branch}}\ge Q^{-C}W_{\mathrm{ref}}\) on the core,
+Lemma~\ref{lem:packet-scale-AFE-envelope} gives the packet-scale envelope
+control, and the tail outside the core is absorbed via
+Hypothesis~\ref{hyp:ef-completion-bound}.
 
 For \(i\neq j\), Theorem~\ref{thm:packet-construction-regularity} gives the
 oscillatory-kernel decay
@@ -48359,8 +48446,10 @@ oscillatory-kernel decay
 |M_{ij}|
 \le C_NQ^{C_N}(1+|\omega_i-\omega_j|)^{-N}.
 \]
-After grouping the packet indices into resonant blocks, only finitely many
-near-resonant neighbors remain in each row, and the row-sum bound becomes
+By Proposition~\ref{prop:packet-scale-normalization} the packet scales are
+polynomially bounded, so after grouping the packet indices into resonant
+blocks, only finitely many near-resonant neighbors remain in each row, and
+the row-sum bound becomes
 \[
 \sum_{j\neq i}|M_{ij}|\le Q^{-A_2}.
 \]
@@ -48378,10 +48467,13 @@ constants from the diagonal and off-diagonal estimates,
 \min_i\!\left(M_{ii}-\sum_{j\neq i}|M_{ij}|\right)-\|E\|_{\operatorname{op}}
 \ge Q^{-A}.
 \]
-Gershgorin then gives \(\lambda_{\min}(M+E)\ge Q^{-A}\), and
+Gershgorin then gives \(\lambda_{\min}(M+E)\ge Q^{-A}\).
+Lemma~\ref{lem:boundary-collar-exclusion} discards the boundary collar
+\(C_\eta\) at polynomial cost, and
+Lemma~\ref{lem:reference-ms-noncollapse} together with
 Hypothesis~\ref{hyp:reference-meansquare-noncollapse} ensures the
-normalization is non-degenerate.  Since \(M+E\) is the normalized source
-frame operator on \(\mathcal S_X\),
+normalization on \(\Omega_{\mathrm{good}}\) is non-degenerate.  Since
+\(M+E\) is the normalized source frame operator on \(\mathcal S_X\),
 \[
 \|f\|_{L^2(W_{\mathrm{branch}})}^2\ge Q^{-A}\|f\|_{L^2(W_{\mathrm{ref}})}^2
 \quad\text{for all }f\in\mathcal S_X.
