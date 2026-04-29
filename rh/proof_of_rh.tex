@@ -47984,6 +47984,92 @@ overall source layer remains FINITE AUDIT.  Hypothesis~\ref{hyp:ef-completion-bo
 remains the load-bearing open analytic obligation.
 \end{remark}
 
+\begin{theorem}[Unconditional packet construction regularity (target)]
+\label{thm:unconditional-packet-regularity}
+\emph{Status: FINITE AUDIT, open target.  This statement is the missing
+zeta-side derivation that would lift
+Theorem~\ref{thm:packet-construction-regularity} from a conditional
+reduction to an unconditional source-side input.  The packet-construction
+assumptions below are not derived in the present draft; the theorem is
+recorded here only as a precise target for future work.}
+
+The zeta-side packet construction produces packet atoms
+\[
+\psi_p(t)=a_p(t)e^{i\omega_p t},
+\qquad
+a_p(t)=\lambda_p^{-1/2}\chi_p(t)\eta\!\left(\frac{t-m_p}{\lambda_p}\right),
+\qquad
+\eta\in C_c^\infty(\mathbb R),
+\]
+with the following properties, derived directly from the construction
+itself rather than assumed:
+\begin{enumerate}
+\item \emph{Bounded overlap of packet cores.} The cutoffs \(\chi_p\) come
+from a partition of unity with finite multiplicity, so at every \(t\) only
+\(O(1)\) packets are active.
+\item \emph{Polynomial scale bounds.} The packet scales satisfy
+\[
+Q^{-C}\le \lambda_p\le Q^C
+\]
+on the good packet set.
+\item \emph{Polynomial derivative bounds.} The chain rule and Leibniz rule
+give
+\[
+\|\partial_t^r a_p\|_\infty\lesssim_r \lambda_p^{-r-1/2},
+\qquad
+\|\partial_t^r(a_p\overline{a_q}W_{\mathrm{branch}})\|_{L^1}\le Q^{C_r}.
+\]
+\item \emph{Polynomial frequency separation.} Resonant blocks are defined
+by \(|\omega_p-\omega_q|<Q^{-\delta}\); the zeta packet construction
+produces only polynomially many packets per block, and outside a block the
+gap is at least \(Q^{-\delta}\).
+\end{enumerate}
+
+Consequently, oscillatory integration by parts gives
+\[
+\bigl|\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}\bigr|
+\le
+C_NQ^{C_N}(1+|\omega_p-\omega_q|)^{-N},
+\]
+and the blockwise Gram matrices are finite-dimensional with polynomial
+singular-value bounds.  Combined with
+Theorem~\ref{thm:packet-construction-regularity}, this would discharge
+Hypotheses~\ref{hyp:packet-core-micro-covering} and
+\ref{hyp:packet-amplitude-decay-budget} unconditionally.
+\end{theorem}
+
+\begin{remark}[What this target does and does not close]
+\label{rem:unconditional-packet-target-status}
+Theorem~\ref{thm:unconditional-packet-regularity} is stated as the open
+target needed to remove the conditional status of the source-side
+oscillatory-decay step.  Two of the four properties --- the bounded-overlap
+and derivative-budget items (1) and (3) --- are direct consequences of the
+explicit windowed packet formula and are essentially mechanical once the
+zeta-side construction fixes \(\eta\), \(\chi_p\), and \(\lambda_p\).  The
+nontrivial inputs are items (2) and (4): polynomial scale bounds on
+\(\lambda_p\) and polynomial frequency separation outside resonant blocks.
+These must come from the zeta-side packet construction itself, not from
+the frame argument.
+
+Even if Theorem~\ref{thm:unconditional-packet-regularity} is established,
+the source layer still remains conditional on
+Hypothesis~\ref{hyp:ef-completion-bound} (EF completion bound on
+\(q''_{\can}\)) and
+Hypothesis~\ref{hyp:reference-meansquare-noncollapse} (reference
+mean-square non-collapse).  This target closes only the packet-regularity
+inputs, not the AFE tail or the source nonflatness.
+
+\noindent\emph{Honest closure state.}  The downstream proof currently has
+several conditional finite-reduction bridges
+(\(\delta_{\mathrm{src}}\), \(\delta_{\mathrm{graph}}\),
+\(c_{\mathrm{arith},Y}\), \(\delta_{\mathrm{coerc}}\),
+\(\delta_{\mathrm{ext}}\), and the same-norm atomic comparison).  Each
+bridge is correct as a conditional reduction; none is yet unconditional.
+The next mathematically meaningful target after
+Theorem~\ref{thm:unconditional-packet-regularity} is the AFE tail bound
+formalised by Hypothesis~\ref{hyp:ef-completion-bound}.
+\end{remark}
+
 \begin{remark}[wip-zeta-bridge-proof-source]
 \label{rem:wip-zeta-bridge-proof-source}
 The source layer is open.  The conditional reduction below derives
