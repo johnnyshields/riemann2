@@ -39778,6 +39778,201 @@ atom-local live column remains, the current rank-two quotient route is not
 merely incomplete; it is false on that packet.
 \end{remark}
 
+\begin{definition}[Explicit coefficient certificate for the concrete rank-two quotient]
+\label{def:explicit-coefficient-certificate-C2Y}
+For a selected packet \(p\), let
+\(E_p:=[C_{7,p}^{\mathrm{tar}}\ C_{Y,p}^{\mathrm{tar}}]\) and
+\[
+L_p^{\mathrm{row}}=
+\begin{pmatrix}\ell_{7,p}\\ \ell_{9,p}^Y\end{pmatrix},
+\qquad
+\ell_{7,p}:=\frac{\Delta_7^\nabla}{\Delta_7^\nabla(C_7)},
+\qquad
+\ell_{9,p}^Y:=\omega_Y-\omega_Y(e_7)\ell_{7,p}.
+\]
+The explicit coefficient certificate \(\mathfrak R_{2Y}(p)\) is the
+following list.
+
+\begin{enumerate}
+\item \emph{Row construction and conditioning:}
+\[
+  |\Delta_7^\nabla(C_7)|\ge Q^{-A},\qquad
+  \|\Delta_7^\nabla\|\le Q^A,
+\]
+\[
+  \ell_{7,p}(C_{Y,p}^{\mathrm{tar}})=0,
+  \qquad
+  \omega_Y(C_{Y,p}^{\mathrm{tar}})=1,
+\]
+\[
+  \omega_Y(W_{\mathrm{dead}}^{\mathrm{fixed}})=0,
+  \qquad
+  \|\omega_Y\|\le Q^A,
+  \qquad
+  |\omega_Y(e_7)|\le Q^A.
+\]
+Equivalently, the septic exactness, grade-separation, and fixed-whitening
+separation tests hold with polynomial margins.
+
+\item \emph{Base source-linear/dead rows:}
+\[
+L_p^{\mathrm{row}}R_{B_2,p}=0,
+\qquad
+L_p^{\mathrm{row}}R_{P,p}=0,
+\qquad
+L_p^{\mathrm{row}}R_{D,p}=0.
+\]
+
+\item \emph{Affine and lower-order rows:}
+\[
+L_p^{\mathrm{row}}A_{\alpha,p}^{\mathrm{raw}}
+\in\mathcal C_{\mathrm{coh},p}^{2Y},
+\qquad
+L_p^{\mathrm{row}}A_{<7,p}^{\mathrm{raw}}=0,
+\]
+where coherent affine recentering is routed to the effective carrier and
+is not placed in the dead quotient.
+
+\item \emph{Order-seven, arithmetic, and completion rows:}
+\[
+L_p^{\mathrm{row}}A_{7,p}^{\mathrm{raw}}
+=(\lambda_{77,p},\lambda_{7Y,p})^T,
+\]
+\[
+L_p^{\mathrm{row}}A_{II,p}^{\mathrm{raw}}
+=(c_{\mathrm{arith},7,p},c_{\mathrm{arith},Y,p})^T,
+\]
+\[
+L_p^{\mathrm{row}}A_{E_2,p}^{\mathrm{raw}}=m_{E_2,p}.
+\]
+Each of these live coefficient vectors is either zero, residual of
+weighted cap norm \(O(Q^{-B})\), or fixed/coherent and routed into
+\(M_{\mathrm{live},p}\).  No atom-local live coefficient is
+quotient-killed.
+
+\item \emph{Effective carrier noncancellation:} after all coherent live
+vectors have been routed into
+\(L_{\mathrm{eff},p}:=L_{\mathrm{clean},p}+M_{\mathrm{live},p}\),
+\[
+\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-A}.
+\]
+Equivalently, after triangular row operations,
+\[
+L_{\mathrm{eff},p}\sim
+\begin{pmatrix}
+ c_{7,p}^{\mathrm{eff}}&0\\
+ \beta_{9,p}^{\mathrm{eff}}&\alpha_{9,p}^{\mathrm{eff}}
+\end{pmatrix},
+\qquad
+|c_{7,p}^{\mathrm{eff}}\alpha_{9,p}^{\mathrm{eff}}|\ge Q^{-A}.
+\]
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}[Verification of the concrete row certificate from \(\mathfrak R_{2Y}\)]
+\label{lem:verification-concrete-row-certificate-from-R2Y}
+If the row-construction part of \(\mathfrak R_{2Y}(p)\) holds, then
+\[
+L_p^{\mathrm{row}}E_p=I_2,
+\qquad
+\|L_p^{\mathrm{row}}\|_{\mathrm{op}}\le Q^A.
+\]
+Thus \(L_p^{\mathrm{row}}\) is a concrete row certificate in the sense of
+Definition~\ref{def:concrete-row-certificate-C7-Y12}.
+\end{lemma}
+
+\begin{proof}
+By definition, \(\ell_{7,p}(C_{7,p}^{\mathrm{tar}})=1\).  The
+grade-separation condition gives
+\(\ell_{7,p}(C_{Y,p}^{\mathrm{tar}})=0\).  For the second row,
+\(\ell_{9,p}^Y(C_{7,p}^{\mathrm{tar}})=\omega_Y(e_7)-\omega_Y(e_7)\cdot1=0\)
+and
+\(\ell_{9,p}^Y(C_{Y,p}^{\mathrm{tar}})=\omega_Y(C_{Y,p}^{\mathrm{tar}})-\omega_Y(e_7)\cdot0=1\).
+Hence \(L_p^{\mathrm{row}}E_p=I_2\).  The norm bound follows from
+\(\|\ell_{7,p}\|\le\|\Delta_7^\nabla\|/|\Delta_7^\nabla(C_7)|\le Q^A\) and
+\(\|\ell_{9,p}^Y\|\le\|\omega_Y\|+|\omega_Y(e_7)|\,\|\ell_{7,p}\|\le Q^A\)
+after enlarging the exponent.
+\end{proof}
+
+\begin{proposition}[Verification of the column routing certificate from \(\mathfrak R_{2Y}\)]
+\label{prop:verification-column-routing-from-R2Y}
+Assume \(\mathfrak R_{2Y}(p)\).  Define, for every raw nuisance column,
+\(m_{a,p}:=L_p^{\mathrm{row}}A_{a,p}^{\mathrm{raw}}\) and
+\(A_{a,p}^{\mathrm{dead}}:=A_{a,p}^{\mathrm{raw}}-E_p m_{a,p}\).  Then
+\(L_p^{\mathrm{row}}A_{a,p}^{\mathrm{dead}}=0\) for every raw nuisance
+column, no atom-local live vector is placed into the dead quotient, and
+every coherent live vector is included in \(M_{\mathrm{live},p}\).  Hence
+the column routing certificate of
+Definition~\ref{def:column-routing-certificate-Y12} holds.
+\end{proposition}
+
+\begin{proof}
+The identity
+\(L_p^{\mathrm{row}}A_{a,p}^{\mathrm{dead}}=L_p^{\mathrm{row}}A_{a,p}^{\mathrm{raw}}-L_p^{\mathrm{row}}E_pm_{a,p}=m_{a,p}-m_{a,p}=0\)
+is formal.  The substantive content is precisely the classification
+asserted in \(\mathfrak R_{2Y}(p)\): source-linear, affine-dead, and
+lower-order columns are row-dead or coherent, while the order-seven,
+arithmetic, and completion columns have no atom-local live part and any
+coherent live part is routed to \(M_{\mathrm{live},p}\), not to the dead
+quotient.
+\end{proof}
+
+\begin{theorem}[Concrete certificate closes the rank-two cap/\(Y12\) bridge]
+\label{thm:explicit-C2Y-certificate-closes-cap-Y12}
+If \(\mathfrak R_{2Y}(p)\) holds on every selected packet in the frozen
+cap, then
+\[
+\sigma_{\min}(q_{p,\mathrm{cert}}^YE_p)\ge Q^{-A},
+\]
+the dead-only quotient descent holds, and the effective carrier is
+polynomially invertible.  Consequently, together with the already
+established actual-source D4 amplitude survival and the small
+quotient-error estimate,
+Theorem~\ref{thm:cap-Y12-bridge-after-concrete-row-certification} applies.
+\end{theorem}
+
+\begin{proof}
+Lemma~\ref{lem:verification-concrete-row-certificate-from-R2Y} gives the
+bounded detecting rows.  Proposition~\ref{prop:verification-column-routing-from-R2Y}
+gives the certified dead-only nuisance quotient.  Hence
+Theorem~\ref{thm:rank-two-quotient-survival-from-concrete-certificate}
+gives \(\sigma_{\min}(q_{p,\mathrm{cert}}^YE_p)\ge Q^{-A}\) and dead-only
+quotient descent.  The effective carrier lower bound is the last clause of
+\(\mathfrak R_{2Y}(p)\).  The cap/\(Y12\) lower bound is then
+Theorem~\ref{thm:cap-Y12-bridge-after-concrete-row-certification}.
+\end{proof}
+
+\begin{remark}[Verification status of \(\mathfrak R_{2Y}\) in the present draft]
+\label{rem:verification-status-R2Y-present-draft}
+\emph{Status: FINITE AUDIT.}  The present draft proves the formal
+implications above, but it does not yet verify all coefficient clauses of
+\(\mathfrak R_{2Y}(p)\) from the underlying finite row algebra.  The
+unresolved coefficient checks are:
+\[
+\begin{array}{ll}
+\text{(i)} & \text{septic nonvanishing and grade separation: }
+|\Delta_7^\nabla(C_7)|\ge Q^{-A},\quad \ell_7(C_Y)=0;\\[1mm]
+\text{(ii)} & \text{fixed-whitening separation: }
+\operatorname{dist}(a_Y,W_{\mathrm{dead}}^{\mathrm{fixed}})\ge Q^{-A}|a_Y|;\\[1mm]
+\text{(iii)} & \text{row-deadness of }R_{B_2},R_P,R_D,A_\alpha,A_{<7};\\[1mm]
+\text{(iv)} & \text{classification of }A_7,A_{II},A_{E_2}\text{ as zero/residual/coherent, not atom-local;}\\[1mm]
+\text{(v)} & \text{effective carrier noncancellation }\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-A}.
+\end{array}
+\]
+In particular the primitive arithmetic coefficient
+\[
+ c_{\mathrm{arith},Y}
+ =\bigl[II_{\mathrm{arith},9}^{\mathrm{exact}}\bigr]_{D^2N_0,\mathrm{same},w=1,b=12}
+\]
+has not yet been computed in the draft.  It must be shown to vanish, be
+residual, or be fixed/coherent and noncancelling inside
+\(L_{\mathrm{eff},p}\).  If it is atom-local and quotient-killed, the
+rank-two quotient route fails on that packet by
+Proposition~\ref{prop:atom-local-live-column-obstruction-Y12}.  Thus the
+current status of the concrete coefficient certificate is FINITE AUDIT,
+not PROVED.
+\end{remark}
+
 \begin{definition}[Certified live-row quotient]
 \label{def:certified-live-row-quotient}
 Let \(\mathcal H_p^Y\) be the finite-dimensional \(Y12\)-boundary output
