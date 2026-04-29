@@ -38677,57 +38677,14 @@ The cap-level rank-two Jacobian then runs on
 with \(r_{C_7,p}:=q_p^YC_{7,p}^{\mathrm{tar}}\) and
 \(r_{C_Y,p}:=q_p^YC_{Y,p}^{\mathrm{tar}}\), not on \((r_{N,p},r_{Y,p})\).
 This is the typed precondition for
-Hypothesis~\ref{hyp:rank-two-C7-Y12-quotient-survival} below; without it,
-quotient descent and the cap bridge demand \(q_p^Y\) to both kill and
+Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival} below; without
+it, quotient descent and the cap bridge demand \(q_p^Y\) to both kill and
 preserve the same channel.
 \end{remark}
 
-\begin{hypothesis}[Rank-two \(C_7/Y12\) quotient survival]
-\label{hyp:rank-two-C7-Y12-quotient-survival}
-\emph{Superseded by
-Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival} and by the
-concrete row certificate of
-Definition~\ref{def:concrete-row-certificate-C7-Y12}.}  Let
-\[
-C_{7,p}^{\mathrm{tar}}
-:=
-\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing},p}[\mathsf C_7]^{\mathrm{tr}},
-\qquad
-C_{Y,p}^{\mathrm{tar}}
-:=
-\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing},p}[\mathsf C_{Y12}]^{\mathrm{tr}},
-\]
-and let \(\mathcal K_p^Y\) be the quotient nuisance space.  Then
-\[
-\operatorname{rank}
-\begin{bmatrix}
-\mathcal K_p^Y & C_{7,p}^{\mathrm{tar}} & C_{Y,p}^{\mathrm{tar}}
-\end{bmatrix}
-=
-\operatorname{rank}(\mathcal K_p^Y)+2,
-\]
-with a polynomial principal-angle lower bound: there exists \(C<\infty\)
-such that
-\[
-\sigma_{\min}
-\left(
-(I-P_{\mathcal K_p^Y}^{\mathrm{bd}})
-\begin{bmatrix}
-C_{7,p}^{\mathrm{tar}} & C_{Y,p}^{\mathrm{tar}}
-\end{bmatrix}
-\right)
-\ge Q^{-C}.
-\]
-This is the typed replacement of the implicit assumption in
-Corollary~\ref{cor:cap-jacobian-transversality} that
-\((r_{N,p},r_{Y,p})\) span a polynomially conditioned plane: per
-Remark~\ref{rem:n-vs-c7-quotient-role-split}, the role split forces the
-rank-two condition onto \((C_{7,p}^{\mathrm{tar}},C_{Y,p}^{\mathrm{tar}})\).
-\end{hypothesis}
-
 \begin{lemma}[Static-line survival from rank-two quotient survival]
 \label{lem:static-line-survival-rank-two}
-Assume Hypothesis~\ref{hyp:rank-two-C7-Y12-quotient-survival} and the
+Assume Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival} and the
 row-normal carrier expansion
 \[
 \Phi_p^Y(1,s)
@@ -38780,7 +38737,7 @@ without a separate static wall-escape estimate on
 \begin{proof}
 Write
 \(R_p:=(I-P_{\mathcal K_p^Y}^{\mathrm{bd}})\,[C_{7,p}^{\mathrm{tar}}\ C_{Y,p}^{\mathrm{tar}}]\).
-Hypothesis~\ref{hyp:rank-two-C7-Y12-quotient-survival} gives
+Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival} gives
 \(\sigma_{\min}(R_p)\ge Q^{-C}\), so for every \(v\in\mathbb C^2\),
 \(\|R_pv\|\ge Q^{-C}\|v\|\) and
 \(\|[C_{7,p}^{\mathrm{tar}}\ C_{Y,p}^{\mathrm{tar}}]v\|\le Q^{C_0}\|v\|\) by the
@@ -39012,11 +38969,9 @@ up to \(Q^{-C}\)-angle, and the wedge product satisfies
 \bigl|C_{7,p}^{\mathrm{tar}}\wedge C_{Y,p}^{\mathrm{tar}}\bigr|.
 \]
 This is strictly stronger than primitive \(Y12\)-only quotient survival
-(\(q_p^Y C_{Y,p}^{\mathrm{tar}}\neq0\)) and is the typed replacement of
-Hypothesis~\ref{hyp:rank-two-C7-Y12-quotient-survival}: it adds the
-torsion-free condition that the analytic boundary quotient does not
-impose a hidden relation between \(C_7\) and \(C_{Y12}\) after dead-only
-quotienting.
+(\(q_p^Y C_{Y,p}^{\mathrm{tar}}\neq0\)): it adds the torsion-free condition
+that the analytic boundary quotient does not impose a hidden relation
+between \(C_7\) and \(C_{Y12}\) after dead-only quotienting.
 \end{hypothesis}
 
 \begin{definition}[Dead-only quotient space and live carrier matrix]
@@ -39544,13 +39499,14 @@ smallest singular value is zero.
 \begin{remark}[Status after the coordinator review]
 \label{rem:agent5-status-after-review-714}
 \emph{Status: FINITE AUDIT.}
-Hypothesis~\ref{hyp:rank-two-C7-Y12-quotient-survival} should be retired or
-marked as superseded by
+The earlier rank-two \(C_7/Y12\) quotient-survival hypothesis has been
+retired in favour of
 Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival} and the concrete
-row certificate above.  The certified quotient is not a free choice of
-rows: the rows must be constructed from the septic row and the
-fixed-whitening primitive row, and the raw nuisance list must pass the
-column routing certificate.  The smallest remaining coefficient theorem is
+row certificate of
+Definition~\ref{def:concrete-row-certificate-C7-Y12}.  The certified
+quotient is not a free choice of rows: the rows must be constructed from
+the septic row and the fixed-whitening primitive row, and the raw nuisance
+list must pass the column routing certificate.  The smallest remaining coefficient theorem is
 \[
 \boxed{\mathfrak C_{2Y}(p):
 \begin{array}{l}
