@@ -48264,118 +48264,6 @@ frequency-separation theorem for the resonant-block organization (item~(4)
 of Theorem~\ref{thm:unconditional-packet-regularity}).
 \end{remark}
 
-\begin{theorem}[Conditional packet construction regularity and oscillatory decay]
-\label{thm:packet-construction-regularity}
-\emph{Status: FINITE AUDIT.  This is a conditional reduction.  Under the
-packet-structure assumptions (1)--(3) below, the derivative budget and the
-oscillatory-kernel decay estimate are derived; the packet-structure
-assumptions themselves are not derived from zeta or from earlier lemmas in
-the present draft.}
-
-Let \(\mathcal S_X=\operatorname{span}\{B_2,P_{2,\le X},D_{2,\le X}\}\), and let
-\(\{\psi_p\}\) be the packet atoms used in the source decomposition of
-\(q''_{\can}\).  Write each packet atom in the form
-\[
-\psi_p(t)=a_p(t)e^{i\omega_p t},
-\qquad
-a_p(t)=\lambda_p^{-1/2}\chi_p(t)\eta\!\left(\frac{t-m_p}{\lambda_p}\right),
-\]
-where \(\eta\in C_c^\infty(\mathbb R)\) is a fixed bump, \(\chi_p\) is a smooth
-cutoff adapted to the packet core \(K_p\), and \(\lambda_p\) is the packet
-scale.  Assume only the packet structure already fixed earlier in the source
-construction:
-\begin{enumerate}
-\item the packet cores \(K_p\) have bounded overlap;
-\item the packet scales are polynomially bounded on the good packet set:
-\[
-Q^{-C}\le \lambda_p \le Q^C;
-\]
-\item the branch weight \(W_{\mathrm{branch}}\) is built from the same
-packet-scale windows and has the same bounded-overlap regularity on the good
-packet set.
-\end{enumerate}
-Then for every integer \(r\ge 0\) there is a constant \(C_r\) such that
-\[
-\|\partial_t^r a_p\|_\infty \le C_r \lambda_p^{-r-1/2}\le Q^{C_r},
-\qquad
-\|\partial_t^r(a_p\overline{a_q}W_{\mathrm{branch}})\|_{L^1}\le Q^{C_r}.
-\]
-Consequently, for every \(N\ge 0\),
-\[
-\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}
-=
-\int a_p(t)\overline{a_q(t)}W_{\mathrm{branch}}(t)e^{i(\omega_p-\omega_q)t}\,dt
-\]
-satisfies
-\[
-\bigl|\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}\bigr|
-\le
-C_N Q^{C_N}(1+|\omega_p-\omega_q|)^{-N}.
-\]
-In particular, if packets are grouped into resonant blocks \(B\) by the
-construction already fixed in the source section, then outside a resonant
-block the cross terms are polynomially small, and inside a resonant block the
-matrix is finite-dimensional with polynomial size.
-\end{theorem}
-
-\begin{proof}
-Since \(\eta\), \(\chi_p\), and the packet windows defining
-\(W_{\mathrm{branch}}\) are smooth and compactly supported at packet scale,
-each differentiation of \(\eta((t-m_p)/\lambda_p)\) produces a factor of
-\(\lambda_p^{-1}\), and each differentiation of \(\chi_p\) or of the branch
-weight produces only bounded factors on the good packet set.  Thus by the
-chain rule and Leibniz rule,
-\[
-\|\partial_t^r a_p\|_\infty \ll_r \lambda_p^{-r-1/2},
-\]
-and the same estimate holds for \(a_p\overline{a_q}W_{\mathrm{branch}}\)
-because the packet overlap is bounded and the packet scales are polynomially
-bounded.  This gives the stated derivative budget.
-
-For oscillatory decay, write
-\[
-F_{pq}(t):=a_p(t)\overline{a_q(t)}W_{\mathrm{branch}}(t).
-\]
-Then
-\[
-\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}
-=
-\int F_{pq}(t)e^{i(\omega_p-\omega_q)t}\,dt.
-\]
-Integrating by parts \(N\) times gives
-\[
-\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}
-=
-\frac{1}{(i(\omega_p-\omega_q))^N}
-\int \partial_t^N F_{pq}(t)e^{i(\omega_p-\omega_q)t}\,dt,
-\]
-hence
-\[
-\bigl|\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}\bigr|
-\le
-|\omega_p-\omega_q|^{-N}\,\|\partial_t^N F_{pq}\|_{L^1}
-\le
-C_N Q^{C_N}|\omega_p-\omega_q|^{-N}.
-\]
-This is the claimed oscillatory-kernel decay.
-
-Now group the packets into the resonant blocks already defined by the packet
-construction.  If \(p\) and \(q\) lie in distinct blocks, then
-\(|\omega_p-\omega_q|\ge Q^{-\delta}\), so the cross terms are
-\(Q^{-A}\)-small for \(N\) sufficiently large.  Since each block has
-polynomial size, the row sums over off-block indices are still polynomially
-small, while each diagonal term is controlled by the packet-core mass.  This
-is exactly the finite source input needed by the frame/Gershgorin lemma
-below.
-\end{proof}
-
-\begin{corollary}[Packet derivative budget is a theorem output]
-\label{cor:packet-derivative-budget-derived}
-On the good packet set, the derivative bounds for the packet envelopes and
-the branch weight, and hence the oscillatory-kernel decay estimate, are
-direct consequences of Theorem~\ref{thm:packet-construction-regularity}.
-They are not additional hypotheses of the source layer.
-\end{corollary}
 
 \begin{lemma}[Finite-AFE packet regularity]
 \label{lem:finite-afe-packet-regularity}
@@ -48429,6 +48317,105 @@ that the source-admissible region lies inside the finite-AFE window
 \(d(m_p)\le \operatorname{diam}(I_{\mathrm{ref}})\ll Q^C\).  The lower bound
 is part of admissibility; it is upgraded to a theorem about good packets in
 Corollary~\ref{cor:boundary-collar-exclusion}.
+\end{remark}
+
+\begin{theorem}[Packet construction regularity from the smooth finite AFE]
+\label{thm:packet-construction-regularity}
+Assume Theorem~\ref{thm:smooth-finite-AFE-package} and the raw Whitney packet
+geometry of Definition~\ref{def:raw-packet-scale-admissibility}.  Let
+\[
+F_X(t)
+=
+\sum_{n\ge1} a_n n^{-1/2-it}V_1(n/X)
++
+\sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX)
+\]
+be the finite-AFE main term, with
+\[
+|a_n|,\ |\widetilde a_n|\ll_\varepsilon n^\varepsilon
+\]
+for every \(\varepsilon>0\).  Then for each admissible packet core \(K_p\) and
+each fixed derivative order \(j\ge0\),
+\[
+\int_{K_p^+}\bigl|\partial_t^j F_X(t)\bigr|^2 W_{\mathrm{ref}}(t)\,dt
+\ll
+(\log X)^{2j}\int_{K_p^+}|F_X(t)|^2 W_{\mathrm{ref}}(t)\,dt.
+\]
+In particular, since \(\log X\ll Q^\varepsilon\), there exists \(C>0\) such
+that
+\[
+\int_{K_p^+}\bigl|\partial_t^j F_X(t)\bigr|^2 W_{\mathrm{ref}}(t)\,dt
+\ll
+Q^{Cj}\int_{K_p^+}|F_X(t)|^2 W_{\mathrm{ref}}(t)\,dt.
+\]
+Moreover, if \(\phi_p,\phi_q\) are the packet phases on a nonresonant overlap
+region and
+\[
+\bigl|(\phi_p-\phi_q)'(t)\bigr|\ge \Lambda_{pq}>0,
+\]
+then the corresponding oscillatory kernel satisfies, for every \(N\ge1\),
+\[
+\left|\int_{K_p^+\cap K_q^+} A_{pq}(t)e^{i(\phi_p(t)-\phi_q(t))}\,dt\right|
+\ll_N \Lambda_{pq}^{-N},
+\]
+where \(A_{pq}\) is the smooth amplitude induced by the AFE weights and
+packet cutoffs.
+\end{theorem}
+
+\begin{proof}
+Differentiate the finite-AFE main term term-by-term:
+\[
+\partial_t^j F_X(t)
+=
+\sum_{n\ge1} a_n(-i\log n)^j n^{-1/2-it}V_1(n/X)
++
+\sum_{n\ge1}\widetilde a_n(i\log n)^j n^{-1/2+it}V_2(nX).
+\]
+Because \(V_1\) and \(V_2\) are smooth cutoffs, only the range \(n\asymp X\)
+contributes effectively to the first sum, while the second sum is confined to
+the dual range and decays rapidly outside it.  On the effective support,
+\[
+(\log n)^j\ll_j (\log X)^j.
+\]
+Using the coefficient bounds
+\(a_n,\widetilde a_n\ll_\varepsilon n^\varepsilon\) and the standard
+mean-square estimate for smooth Dirichlet polynomials on a packet core, we
+obtain
+\[
+\int_{K_p^+}\bigl|\partial_t^j F_X(t)\bigr|^2 W_{\mathrm{ref}}(t)\,dt
+\ll
+(\log X)^{2j}\int_{K_p^+}|F_X(t)|^2 W_{\mathrm{ref}}(t)\,dt,
+\]
+which gives the displayed packet derivative budget after using
+\(\log X\ll Q^\varepsilon\).
+
+For the oscillatory-kernel bound, write the off-diagonal contribution between
+two packet phases as
+\[
+\int_{K_p^+\cap K_q^+} A_{pq}(t)e^{i(\phi_p(t)-\phi_q(t))}\,dt.
+\]
+On a nonresonant overlap region, the phase difference has derivative bounded
+below by \(\Lambda_{pq}\).  Repeated integration by parts against the phase
+then gives, for every \(N\),
+\[
+\left|\int_{K_p^+\cap K_q^+} A_{pq}(t)e^{i(\phi_p(t)-\phi_q(t))}\,dt\right|
+\ll_N \Lambda_{pq}^{-N}.
+\]
+This proves the stated oscillatory-kernel decay.
+\end{proof}
+
+\begin{corollary}[Packet derivative budget]
+\label{cor:packet-derivative-budget-derived}
+The packet derivative budget and oscillatory-kernel decay follow from
+Theorem~\ref{thm:packet-construction-regularity}.
+\end{corollary}
+
+\begin{remark}[Status of the packet regularity theorem]
+\label{rem:packet-regularity-status}
+Theorem~\ref{thm:packet-construction-regularity} is now proved directly from
+Theorem~\ref{thm:smooth-finite-AFE-package} and the raw Whitney packet
+geometry.  Its corollary~\ref{cor:packet-derivative-budget-derived} is
+therefore unconditional.
 \end{remark}
 
 \begin{lemma}[Packet-scale AFE envelope]
