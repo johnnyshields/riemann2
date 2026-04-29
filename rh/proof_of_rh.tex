@@ -48785,8 +48785,19 @@ construction.
 By Proposition~\ref{prop:packet-scale-normalization} and
 Corollary~\ref{cor:reference-ms-noncollapse}, the good packet family is
 separated from the boundary collar and carries a fixed positive fraction of
-the source mass.  By Lemma~\ref{lem:packet-scale-AFE-envelope} and bounded
-overlap, the off-diagonal Gram contributions are polynomially small, so
+the source mass.
+
+Normalize the packet atoms so that
+\(\|\psi_i\|_{L^2(W_{\mathrm{ref}})}=1\).
+Then \(M_{ii}=\langle \psi_i,\psi_i\rangle_{W_{\mathrm{branch}}}\ge 1-Q^{-A_1}\)
+by the branch/reference comparability on the good packet cores, the
+packet-scale envelope lemma, and the EF completion bound.
+For \(i\neq j\), Lemma~\ref{lem:frequency-gap-separation} together with
+bounded overlap and Lemma~\ref{lem:packet-scale-AFE-envelope} gives the
+oscillatory off-diagonal decay needed to sum each row.
+
+By Lemma~\ref{lem:packet-scale-AFE-envelope} and bounded overlap, the
+off-diagonal Gram contributions are polynomially small, so
 \[
 \sum_{j\neq i}|M_{ij}|\le Q^{-A_1}
 \]
@@ -48794,15 +48805,20 @@ for some \(A_1>0\).  The EF completion bound gives
 \[
 \|E\|_{\operatorname{op}}\le Q^{-A_2}
 \]
-for some \(A_2>0\).  Choosing \(A_1,A_2\) large enough relative to the
-target \(A\), Gershgorin's theorem gives
+for some \(A_2>0\).
+
+Since \(M+E\) is the normalized source frame operator on \(\mathcal S_X\),
+Gershgorin's theorem yields
 \[
-\lambda_{\min}(M+E)\ge Q^{-A},
+\lambda_{\min}(M+E)\ge Q^{-A}.
 \]
-equivalently
+Equivalently,
 \[
 \min_i\!\left(M_{ii}-\sum_{j\neq i}|M_{ij}|\right)-\|E\|_{\operatorname{op}}
-\ge Q^{-A}.
+\ge Q^{-A},
+\qquad
+\|f\|_{L^2(W_{\mathrm{branch}})}^2\ge Q^{-A}\|f\|_{L^2(W_{\mathrm{ref}})}^2
+\quad\text{for all }f\in\mathcal S_X.
 \]
 \end{proof}
 
