@@ -37940,9 +37940,287 @@ full rank-two \(\delta_{\mathrm{coerc}}\) is false in the current
 singular-discard norm.
 \end{remark}
 
+\subsection{Certified singular retention and low-block coercivity}
+\label{subsec:certified-singular-retention-low-block-coercivity}
+
+The transition--singular determinant is fixed once the retained singular
+space is tied to the same certified dead/live split used in the rank-two
+\(C_7/Y12\) quotient.  The retained singular space must contain the
+actual-source dead and coherent-denominator directions needed for the
+upper bound, but it must not retain the two live \(C_7/Y12\) carrier
+directions.  The following construction performs this split inside the
+singular finite jet.
+
+\begin{definition}[Singular row-signature matrix]
+\label{def:singular-row-signature-matrix}
+Fix a good packet \(p\).  Let
+\[
+  E_{\mathrm{sing},p}^{2Y}
+  :=
+  T_{\mathrm{tr}\to\mathrm{sing},p}
+  \begin{bmatrix}
+  [\mathsf C_7]^{\mathrm{tr}}&[\mathsf C_{Y12}]^{\mathrm{tr}}
+  \end{bmatrix}
+  :\mathbb C^2\to H_{\mathrm{sing},p}.
+\]
+Let \(\Theta_{2Y,p}:H_{\mathrm{sing},p}\to\mathcal H_p^Y\) be the singular
+finite-jet signature extractor and let
+\(L_p^{\mathrm{row}}:=\bigl(\begin{smallmatrix}\ell_{7,p}\\
+\ell_{9,p}^Y\end{smallmatrix}\bigr):\mathcal H_p^Y\to\mathbb C^2\) be the
+certified live row pair obtained from the septic and fixed-whitening
+exact sequences.  Define
+\(C_{\mathrm{sing},p}^{2Y}:=L_p^{\mathrm{row}}\Theta_{2Y,p}E_{\mathrm{sing},p}^{2Y}\).
+\end{definition}
+
+\begin{lemma}[Transition labels reproduce the certified live rows]
+\label{lem:transition-labels-reproduce-certified-live-rows}
+Assume the certified \(C_7/Y12\) row certificate, the labelled-transition
+no-atom-fitting guardrails, and fixed-whitening naturality in the
+transition--singular overlap chart.  Then
+\[
+  \Theta_{2Y,p}E_{\mathrm{sing},p}^{2Y}
+  =E_p+\mathcal R_{E,p},
+  \qquad
+  E_p:=[C_{7,p}^{\mathrm{tar}}\ C_{Y,p}^{\mathrm{tar}}],
+  \qquad
+  \|\mathcal R_{E,p}\|_{\operatorname{op}}\le Q^{-B}.
+\]
+Consequently, after taking \(B\) larger than the fixed polynomial losses,
+\(C_{\mathrm{sing},p}^{2Y}=I_2+O(Q^{A-B})\),
+\(\sigma_{\min}(C_{\mathrm{sing},p}^{2Y})\ge Q^{-A}\), and
+\(\|(C_{\mathrm{sing},p}^{2Y})^{-1}\|_{\operatorname{op}}\le Q^A\).  In
+the exact labelled finite-jet normalization the error term is zero.
+\end{lemma}
+
+\begin{proof}
+The extractor \(\Theta_{2Y,p}\) records exactly the covariant septic
+signature and the primitive fixed-whitened \(Y12\) signature in the
+singular chart.  The labelled-transition no-atom-fitting guardrails
+exclude atom-by-atom refitting of these two coordinates, and
+fixed-whitening naturality identifies the same-point whitening slot in
+the transition and singular charts.  Therefore the transition image of
+\([\mathsf C_7]^{\mathrm{tr}}\) has the certified target signature
+\(C_{7,p}^{\mathrm{tar}}\), and the transition image of
+\([\mathsf C_{Y12}]^{\mathrm{tr}}\) has the certified target signature
+\(C_{Y,p}^{\mathrm{tar}}\), up to the residual ledger.  The certified
+row certificate gives \(L_p^{\mathrm{row}}E_p=I_2\) and
+\(\|L_p^{\mathrm{row}}\|_{\operatorname{op}}\le Q^A\), so
+\(C_{\mathrm{sing},p}^{2Y}=L_p^{\mathrm{row}}(E_p+\mathcal R_{E,p})=I_2+O(Q^{A-B})\).
+For \(B\) above the accumulated polynomial losses, this is an invertible
+perturbation of the identity with polynomially bounded inverse.
+\end{proof}
+
+\begin{definition}[Certified singular retained space]
+\label{def:certified-singular-retained-space}
+Let \(\mathcal G_{\mathrm{sing},p}^{\mathrm{act}}\subset H_{\mathrm{sing},p}\)
+be the finite list of singular generators retained for the EF-coherent
+upper: the transitioned localized finite canonical model, together with
+the mandatory chart, normalization, gamma/background, lower-order,
+exact-nuisance, and coherent generators admitted by the certified
+routing ledger.  For \(h\in H_{\mathrm{sing},p}\), define its certified
+dead part by
+\[
+  h^{\mathrm{dead}}
+  :=
+  h
+  -E_{\mathrm{sing},p}^{2Y}(C_{\mathrm{sing},p}^{2Y})^{-1}
+   L_p^{\mathrm{row}}\Theta_{2Y,p}h .
+\]
+The certified retained singular space is
+\[
+  R_{\mathrm{sing},p}^{\mathrm{cert}}
+  :=
+  \operatorname{span}\{h^{\mathrm{dead}}:h\in\mathcal G_{\mathrm{sing},p}^{\mathrm{act}}\}
+  +R_{\mathrm{sing},p}^{\mathrm{tail/dead}},
+\]
+where \(R_{\mathrm{sing},p}^{\mathrm{tail/dead}}\) denotes the already
+row-dead tail/completion part of the singular retained model.  Let
+\(P_{\mathrm{sing},p}^{\mathrm{cert}}\) be the orthogonal projection
+onto \(R_{\mathrm{sing},p}^{\mathrm{cert}}\) in the singular Hilbert
+norm.
+\end{definition}
+
+\begin{lemma}[Certified retention is row-dead and transverse to the live plane]
+\label{lem:certified-retention-row-dead-live-transverse}
+Under the hypotheses of
+Lemma~\ref{lem:transition-labels-reproduce-certified-live-rows},
+\(L_p^{\mathrm{row}}\Theta_{2Y,p}R_{\mathrm{sing},p}^{\mathrm{cert}}=0\).
+Moreover,
+\(R_{\mathrm{sing},p}^{\mathrm{cert}}\cap E_{\mathrm{sing},p}^{2Y}\mathbb C^2=\{0\}\),
+and the angle between \(R_{\mathrm{sing},p}^{\mathrm{cert}}\) and the
+live carrier plane is polynomially bounded below:
+\(\operatorname{dist}(E_{\mathrm{sing},p}^{2Y}a,R_{\mathrm{sing},p}^{\mathrm{cert}})\ge Q^{-A}\|a\|\)
+for \(a\in\mathbb C^2\).
+\end{lemma}
+
+\begin{proof}
+For every retained generator \(h\),
+\[
+  L_p^{\mathrm{row}}\Theta_{2Y,p}h^{\mathrm{dead}}
+  =L_p^{\mathrm{row}}\Theta_{2Y,p}h
+   -C_{\mathrm{sing},p}^{2Y}(C_{\mathrm{sing},p}^{2Y})^{-1}L_p^{\mathrm{row}}\Theta_{2Y,p}h=0.
+\]
+The tail/dead retained part is row-dead by the origin, grade,
+exact-nuisance, and no-atom-fitting row-deadness lemmas.  Hence the whole
+certified retained space is killed by
+\(L_p^{\mathrm{row}}\Theta_{2Y,p}\).  If
+\(E_{\mathrm{sing},p}^{2Y}a\in R_{\mathrm{sing},p}^{\mathrm{cert}}\),
+applying \(L_p^{\mathrm{row}}\Theta_{2Y,p}\) gives
+\(C_{\mathrm{sing},p}^{2Y}a=0\).  Since
+\(C_{\mathrm{sing},p}^{2Y}\) is polynomially invertible, \(a=0\).  More
+generally, for any \(r\in R_{\mathrm{sing},p}^{\mathrm{cert}}\),
+\(\|L_p^{\mathrm{row}}\Theta_{2Y,p}(E_{\mathrm{sing},p}^{2Y}a-r)\|=\|C_{\mathrm{sing},p}^{2Y}a\|\ge Q^{-A}\|a\|\);
+using
+\(\|L_p^{\mathrm{row}}\Theta_{2Y,p}\|_{\operatorname{op}}\le Q^A\) and
+taking the infimum over \(r\) gives the displayed polynomial angle bound.
+\end{proof}
+
+\begin{theorem}[Singular finite-jet row lift]
+\label{thm:singular-finite-jet-row-lift}
+Assume the certified \(C_7/Y12\) row certificate, the certified routing
+ledger for actual singular generators, the labelled-transition
+no-atom-fitting guardrails, and fixed-whitening naturality.  Let
+\(L_{\mathrm{sing},p}:=L_p^{\mathrm{row}}\Theta_{2Y,p}\).  Then
+\(L_{\mathrm{sing},p}\) is a singular two-row lift certificate for the
+certified retained singular space \(R_{\mathrm{sing},p}^{\mathrm{cert}}\):
+\[
+  \|L_{\mathrm{sing},p}\|_{\operatorname{op}}\le Q^A,
+  \qquad
+  L_{\mathrm{sing},p}R_{\mathrm{sing},p}^{\mathrm{cert}}=0,
+  \qquad
+  \sigma_{\min}\!\bigl(L_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y}\bigr)
+  \ge Q^{-A}.
+\]
+Consequently
+\(\sigma_{\min}\!\left((I-P_{\mathrm{sing},p}^{\mathrm{cert}})E_{\mathrm{sing},p}^{2Y}\right)\ge Q^{-A}\).
+\end{theorem}
+
+\begin{proof}
+The operator norm bound follows from the polynomial bounds for
+\(L_p^{\mathrm{row}}\) and \(\Theta_{2Y,p}\).  The annihilation statement
+is Lemma~\ref{lem:certified-retention-row-dead-live-transverse}.
+Finally, \(L_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y}=C_{\mathrm{sing},p}^{2Y}\),
+which has polynomial smallest singular value by
+Lemma~\ref{lem:transition-labels-reproduce-certified-live-rows}.  Since
+\(L_{\mathrm{sing},p}\) annihilates
+\(R_{\mathrm{sing},p}^{\mathrm{cert}}\),
+\(L_{\mathrm{sing},p}=L_{\mathrm{sing},p}(I-P_{\mathrm{sing},p}^{\mathrm{cert}})\),
+so for every \(a\in\mathbb C^2\),
+\(\|C_{\mathrm{sing},p}^{2Y}a\|\le\|L_{\mathrm{sing},p}\|_{\operatorname{op}}\|(I-P_{\mathrm{sing},p}^{\mathrm{cert}})E_{\mathrm{sing},p}^{2Y}a\|\).
+Taking the infimum over \(\|a\|=1\) gives the projected-carrier lower
+bound.
+\end{proof}
+
+\begin{definition}[Certified two-dimensional low block]
+\label{def:certified-two-dimensional-low-block}
+For the rank-two \(2Y\) branch, define the certified finite low block by
+\(V_{\mathrm{low},p}^{\mathrm{cert}}:=\operatorname{span}\{[\mathsf C_7]^{\mathrm{tr}},[\mathsf C_{Y12}]^{\mathrm{tr}}\}\).
+Let
+\(E_{\mathrm{low},p}^{\mathrm{cert}}:\mathbb C^2\to V_{\mathrm{low},p}^{\mathrm{cert}}\),
+\(E_{\mathrm{low},p}^{\mathrm{cert}}a=a_7[\mathsf C_7]^{\mathrm{tr}}+a_Y[\mathsf C_{Y12}]^{\mathrm{tr}}\).
+All other finite actual-source singular directions are treated by the
+certified routing ledger: row-dead directions are retained in
+\(R_{\mathrm{sing},p}^{\mathrm{cert}}\), coherent live directions are
+absorbed into the effective carrier coordinates, and residual directions
+enter the singular-discard tail/EF upper.
+\end{definition}
+
+\begin{theorem}[Low-block coercivity in the certified singular quotient]
+\label{thm:low-block-coercivity-certified-singular-quotient}
+Assume the hypotheses of
+Theorem~\ref{thm:singular-finite-jet-row-lift}, the polynomial
+conditioning of the certified carrier basis
+\(E_{\mathrm{low},p}^{\mathrm{cert}}\), and the singular-discard tail/EF
+upper for all directions outside \(V_{\mathrm{low},p}^{\mathrm{cert}}\).
+Set
+\[
+  D_p^{\mathrm{cert}}
+  :=
+  (I-P_{\mathrm{sing},p}^{\mathrm{cert}})
+  T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}
+  E_{\mathrm{low},p}^{\mathrm{cert}} .
+\]
+Then \(\sigma_{\min}(D_p^{\mathrm{cert}})\ge Q^{-A}\).  Equivalently,
+\(\lambda_{\min}\!\left((B_p^{\mathrm{cert}})^{-1/2}(D_p^{\mathrm{cert}})^*D_p^{\mathrm{cert}}(B_p^{\mathrm{cert}})^{-1/2}\right)\ge Q^{-A}\),
+where
+\(B_p^{\mathrm{cert}}=(E_{\mathrm{low},p}^{\mathrm{cert}})^*E_{\mathrm{low},p}^{\mathrm{cert}}\).
+Hence the \(Y12\) graph/coercivity low-block gap
+\(\delta_{\mathrm{coerc},p}\ge Q^{-A}\) is proved for the certified
+singular-discard quotient.
+\end{theorem}
+
+\begin{proof}
+By construction,
+\(T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}E_{\mathrm{low},p}^{\mathrm{cert}}=E_{\mathrm{sing},p}^{2Y}M_{\mathrm{low},p}\),
+where \(M_{\mathrm{low},p}\) is the finite basis-change matrix from the
+chosen low-block coordinates to the labelled carrier coordinates.  The
+certified basis-conditioning gives
+\(\sigma_{\min}\!\bigl(M_{\mathrm{low},p}(B_p^{\mathrm{cert}})^{-1/2}\bigr)\ge Q^{-A}\).
+Theorem~\ref{thm:singular-finite-jet-row-lift} gives
+\(\sigma_{\min}\!\left((I-P_{\mathrm{sing},p}^{\mathrm{cert}})E_{\mathrm{sing},p}^{2Y}\right)\ge Q^{-A}\).
+Therefore
+\(\sigma_{\min}\!\bigl(D_p^{\mathrm{cert}}(B_p^{\mathrm{cert}})^{-1/2}\bigr)\ge Q^{-A}\),
+and squaring gives the Gram lower bound.  Directions outside the
+certified carrier low block are not part of the finite defect block:
+row-dead finite directions are retained in
+\(R_{\mathrm{sing},p}^{\mathrm{cert}}\), coherent live directions have
+been absorbed into the effective carrier coordinates, and residual
+directions are controlled by the singular-discard tail/EF upper.
+\end{proof}
+
+\begin{corollary}[Transition--singular determinant for the certified quotient]
+\label{cor:transition-singular-determinant-certified-quotient}
+With \(P_{\mathrm{sing},p}=P_{\mathrm{sing},p}^{\mathrm{cert}}\) and
+\(V_p=V_{\mathrm{low},p}^{\mathrm{cert}}\), the Schur determinant in
+Lemma~\ref{lem:transition-singular-schur-formula} has a polynomial lower
+bound:
+\(\det\mathcal G_p\ge Q^{-A}\det(R_p^*M_pR_p)\), where \(R_p\) is any
+full-rank basis for \(R_{\mathrm{sing},p}^{\mathrm{cert}}\).
+Equivalently,
+\[
+  \det\begin{pmatrix}
+    \|c_{7,p}^{\perp}\|^2&\langle c_{7,p}^{\perp},c_{Y,p}^{\perp}\rangle\\
+    \langle c_{Y,p}^{\perp},c_{7,p}^{\perp}\rangle&\|c_{Y,p}^{\perp}\|^2
+  \end{pmatrix}
+  \ge Q^{-A},
+\]
+where \(c_{7,p}^{\perp},c_{Y,p}^{\perp}\) are computed using
+\(P_{\mathrm{sing},p}^{\mathrm{cert}}\).
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:low-block-coercivity-certified-singular-quotient} gives
+a polynomial lower bound for the smallest singular value of the
+projected carrier matrix, while the finite atlas gives polynomial upper
+bounds for its operator norm; hence the two-dimensional Gram determinant
+is polynomially bounded below.  The bordered Schur determinant identity
+of Lemma~\ref{lem:transition-singular-schur-formula} gives the displayed
+\(\det\mathcal G_p\) lower bound.
+\end{proof}
+
+\begin{remark}[Replacement of the raw finite-audit item]
+\label{rem:replacement-of-raw-finite-audit-item-delta-coerc}
+The theorem above closes the low-block coercivity item for the
+certified singular retained space.  It does not assert the same
+conclusion for an older raw retained space that contains a nonzero
+vector in
+\(T_{\mathrm{tr}\to\mathrm{sing},p}\operatorname{span}\{[\mathsf C_7]^{\mathrm{tr}},[\mathsf C_{Y12}]^{\mathrm{tr}}\}\).
+Such a raw space makes the projected carrier matrix singular.  Therefore
+the proof-level formulation must use
+\(R_{\mathrm{sing},p}^{\mathrm{cert}}\) and
+\(P_{\mathrm{sing},p}^{\mathrm{cert}}\) in the definition of the
+transition--singular forbidden channel.  With this certified
+replacement,
+Hypothesis~\ref{hyp:transition-singular-low-block-determinant} is
+discharged by
+Corollary~\ref{cor:transition-singular-determinant-certified-quotient}.
+\end{remark}
+
 \begin{hypothesis}[Transition--singular low-block determinant]
 \label{hyp:transition-singular-low-block-determinant}
-\emph{Status: FINITE AUDIT.}  For every packet in the routed good set,
+\emph{Status: discharged for the certified singular retained space by
+Corollary~\ref{cor:transition-singular-determinant-certified-quotient}.}
+For every packet in the routed good set,
 after fixing the actual retained singular space \(R_{\mathrm{sing},p}\),
 the actual transition operator \(T_{\mathrm{tr}\to\mathrm{sing},p}\), and
 the admissible low-mode basis, the Schur complement in
