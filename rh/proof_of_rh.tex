@@ -38684,7 +38684,10 @@ preserve the same channel.
 
 \begin{hypothesis}[Rank-two \(C_7/Y12\) quotient survival]
 \label{hyp:rank-two-C7-Y12-quotient-survival}
-\emph{Status: FINITE AUDIT.}  Let
+\emph{Superseded by
+Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival} and by the
+concrete row certificate of
+Definition~\ref{def:concrete-row-certificate-C7-Y12}.}  Let
 \[
 C_{7,p}^{\mathrm{tar}}
 :=
@@ -39279,6 +39282,290 @@ genuinely independent: a configuration with strongly varying
 \(\delta_{\mathrm{ext}}\ge Q^{-A}\) and
 \(\sigma_{\min}(q_pE_p)\ge Q^{-C}\) simultaneously while violating the
 amplitude mass.
+\end{remark}
+
+\subsubsection{The actual rank-two quotient certificate}
+\label{subsubsec:actual-rank-two-quotient-certificate-agent5}
+
+The preceding primal--dual--Schur theorem proves that the rank-two quotient
+condition is equivalent to the existence of bounded live detecting rows.  It
+must not be read as a proof that such rows exist for the actual quotient.  The
+missing object is the following finite coefficient certificate.
+
+\begin{definition}[Concrete row certificate for the live \(C_7/Y12\) plane]
+\label{def:concrete-row-certificate-C7-Y12}
+Let
+\[
+E_p:=
+\begin{bmatrix}
+C_{7,p}^{\mathrm{tar}}&C_{Y,p}^{\mathrm{tar}}
+\end{bmatrix}:
+\mathbb C^2\to\mathcal H_p^Y.
+\]
+A \emph{concrete row certificate} for the live \(C_7/Y12\)-plane is a pair
+of bounded rows
+\[
+L_p^{\mathrm{row}}=
+\begin{pmatrix}
+\ell_{7,p}\\ \ell_{Y,p}
+\end{pmatrix}:
+\mathcal H_p^Y\to\mathbb C^2
+\]
+with
+\[
+L_p^{\mathrm{row}}E_p=I_2,
+\qquad
+\|L_p^{\mathrm{row}}\|_{\mathrm{op}}\le Q^C .
+\]
+In the row-normal construction these rows are
+\[
+\ell_{7,p}=\frac{\Delta_7^\nabla}{\Delta_7^\nabla(C_7)},
+\qquad
+\ell_{Y,p}:=\ell_{9,p}^Y=\omega_Y-\omega_Y(e_7)\ell_{7,p}.
+\]
+Thus the certificate is concrete only after the following coefficient facts
+have been verified:
+\[
+\Delta_7^\nabla(C_7)\ne0,
+\qquad
+\ell_{7,p}(C_{Y,p}^{\mathrm{tar}})=0,
+\qquad
+\omega_Y(C_{Y,p}^{\mathrm{tar}})=1,
+\qquad
+\omega_Y(W_{\mathrm{dead}}^{\mathrm{fixed}})=0,
+\]
+with polynomial margins, and with polynomial row norm.  These are precisely
+the septic exactness, grade-separation, and fixed-whitening separation tests.
+\end{definition}
+
+\begin{definition}[Column routing certificate for the \(Y12\) quotient]
+\label{def:column-routing-certificate-Y12}
+Fix a concrete row certificate \(L_p^{\mathrm{row}}\).  Let the raw nuisance
+list be
+\[
+\mathcal A_p^{\mathrm{raw}}:=
+\{R_{B_2,p},R_{P,p},R_{D,p},A_{\alpha,p},A_{7,p},A_{<7,p},A_{II,p},A_{E_2,p}\}.
+\]
+For each raw column \(A_{a,p}^{\mathrm{raw}}\in\mathcal A_p^{\mathrm{raw}}\),
+define its live coefficient and dead part by
+\[
+m_{a,p}:=L_p^{\mathrm{row}}A_{a,p}^{\mathrm{raw}}\in\mathbb C^2,
+\qquad
+A_{a,p}^{\mathrm{dead}}:=A_{a,p}^{\mathrm{raw}}-E_pm_{a,p}.
+\]
+The column is classified as follows.
+\begin{enumerate}
+\item It is \emph{row-dead} if \(m_{a,p}=0\).
+\item It is \emph{coherent live} if \(m_{a,p}\ne0\) but the coefficient is
+part of the fixed or coherently transported row data.  In this case the live
+part \(E_pm_{a,p}\) is not put in the dead quotient; it is routed into the
+effective live carrier matrix.
+\item It is \emph{residual live} if its weighted cap norm is
+\(O(Q^{-B})\) after the same projection.  It is routed to the residual error.
+\item It is \emph{atom-local live} if \(m_{a,p}\ne0\) is a free local packet
+parameter.  This is a structural failure of the rank-two \(Y12\) quotient
+route: the column cannot be killed while preserving the live
+\(C_7/Y12\)-plane.
+\end{enumerate}
+The column routing certificate holds on packet \(p\) if no raw nuisance
+column is atom-local live and if all coherent live columns are included in
+the finite matrix
+\[
+M_{\mathrm{live},p}:=\sum_{a\in\mathcal A_{\mathrm{coh}}} m_{a,p}\,\eta_a^*,
+\]
+where the fixed vectors \(\eta_a\in\mathbb C^2\) encode how the coherent
+column enters the D4 two-row carrier.  The dead quotient is then
+\[
+\mathcal K_{p,\mathrm{dead}}^{Y,\mathrm{cert}}
+:=
+\mathcal K_{p,0}^{Y,\mathrm{dead}}
++
+\operatorname{span}\{A_{a,p}^{\mathrm{dead}}:A_{a,p}^{\mathrm{raw}}\in\mathcal A_p^{\mathrm{raw}}\},
+\]
+where \(\mathcal K_{p,0}^{Y,\mathrm{dead}}\subseteq\ker L_p^{\mathrm{row}}\) is
+the base source-linear/dead quotient space.
+\end{definition}
+
+\begin{lemma}[Column-by-column consequences of the routing certificate]
+\label{lem:column-by-column-routing-consequences-Y12}
+Assume the concrete row certificate of
+Definition~\ref{def:concrete-row-certificate-C7-Y12}.  Then the raw nuisance
+list has the following exact tests.
+\[
+\begin{array}{c|c|c}
+\text{raw column} & \text{live coefficient} & \text{required disposition}\\
+\hline
+R_{B_2,p},R_{P,p},R_{D,p} & L_p^{\mathrm{row}}A_{a,p}^{\mathrm{raw}} & 0\text{, by base source-linearity/deadness}\\
+A_{\alpha,p} & L_p^{\mathrm{row}}A_{\alpha,p}^{\mathrm{raw}} & 0\text{, or coherent affine recentering}\\
+A_{<7,p} & L_p^{\mathrm{row}}A_{<7,p}^{\mathrm{raw}} & 0\text{, by grade/order separation}\\
+A_{7,p} & (\lambda_{77,p},\lambda_{7Y,p})^T & 0\text{ or coherent live routing into }L_{\mathrm{eff},p}\\
+A_{II,p} & (c_{\mathrm{arith},7,p},c_{\mathrm{arith},Y,p})^T & 0\text{ or coherent live routing into }L_{\mathrm{eff},p}\\
+A_{E_2,p} & L_p^{\mathrm{row}}A_{E_2,p}^{\mathrm{raw}} & 0,\ O(Q^{-B}),\text{ or coherent live routing}
+\end{array}
+\]
+If any entry in the last three rows is atom-local live, the rank-two
+\(C_7/Y12\) quotient route fails on that packet.
+\end{lemma}
+
+\begin{proof}
+The first three rows are exactly the assertion that source-linear, affine,
+and lower-order chart/transport columns are in the base dead space or have no
+same-point one-whitening \(Y12\)-signature.  The \(A_7\), \(A_{II}\), and
+\(A_{E_2}\) rows are not automatically dead: applying the concrete row
+certificate extracts precisely their live \(C_7/Y12\)-coordinates.  If such a
+coordinate is coherent, quotienting the unsplit column would kill a retained
+carrier direction; hence it must be removed from the dead quotient and added
+to the effective live carrier.  If it is atom-local, then the actual tangent
+space contains a local free live \(C_7/Y12\) direction, so no quotient that
+kills that tangent can preserve the two-dimensional live plane.
+\end{proof}
+
+\begin{theorem}[Rank-two quotient survival from the concrete row and column certificates]
+\label{thm:rank-two-quotient-survival-from-concrete-certificate}
+Assume the concrete row certificate
+\(L_p^{\mathrm{row}}\) of
+Definition~\ref{def:concrete-row-certificate-C7-Y12} with
+\(\|L_p^{\mathrm{row}}\|_{\mathrm{op}}\le Q^C\), and assume the column
+routing certificate of
+Definition~\ref{def:column-routing-certificate-Y12}.  Let
+\[
+q_{p,\mathrm{cert}}^Y:=I-P_{\mathcal K_{p,\mathrm{dead}}^{Y,\mathrm{cert}}}^{\mathrm{bd}}.
+\]
+Then \(\sigma_{\min}(q_{p,\mathrm{cert}}^YE_p)\ge Q^{-C'}\).  Moreover the
+quotient descent statement holds in the dead-only form
+\[
+U_p^{\mathrm{dead}}\subseteq
+\ker\bigl(q_{p,\mathrm{cert}}^Y\Pi_{\Sigma(Y12),p}T_{\mathrm{tr}\to\mathrm{sing},p}P_{\mathrm{tr},p}\bigr),
+\]
+and no live \(C_7/Y12\) torsion relation is introduced by quotienting.
+\end{theorem}
+
+\begin{proof}
+By construction,
+\(L_p^{\mathrm{row}}A_{a,p}^{\mathrm{dead}}=L_p^{\mathrm{row}}A_{a,p}^{\mathrm{raw}}-L_p^{\mathrm{row}}E_pm_{a,p}=m_{a,p}-m_{a,p}=0\).
+The base dead space is also contained in \(\ker L_p^{\mathrm{row}}\).  Hence
+\(L_p^{\mathrm{row}}\mathcal K_{p,\mathrm{dead}}^{Y,\mathrm{cert}}=0\).  For
+every \(v\in\mathbb C^2\),
+\[
+v=L_p^{\mathrm{row}}E_pv
+ =L_p^{\mathrm{row}}q_{p,\mathrm{cert}}^YE_pv,
+\]
+because
+\(E_pv-q_{p,\mathrm{cert}}^YE_pv\in\mathcal K_{p,\mathrm{dead}}^{Y,\mathrm{cert}}\).
+Therefore
+\(\|v\|\le\|L_p^{\mathrm{row}}\|_{\mathrm{op}}\|q_{p,\mathrm{cert}}^YE_pv\|\le Q^C\|q_{p,\mathrm{cert}}^YE_pv\|\).
+Taking the infimum over \(\|v\|=1\) gives the singular-value lower bound.
+The quotient-descent statement follows because only row-dead columns are put
+into \(U_p^{\mathrm{dead}}\), and these columns span the certified dead
+quotient.
+\end{proof}
+
+\begin{corollary}[Treatment of the primitive arithmetic coefficient]
+\label{cor:c-arith-Y-treatment-after-row-certificate}
+Let
+\[
+c_{\mathrm{arith},Y}:=
+\bigl[II_{\mathrm{arith},9}^{\mathrm{exact}}\bigr]_{D^2N_0,\ \mathrm{same},\ w=1,\ b=12}.
+\]
+Under the concrete row certificate, \(c_{\mathrm{arith},Y}\) is classified
+as follows.
+\begin{enumerate}
+\item If \(c_{\mathrm{arith},Y}=0\), the primitive arithmetic column is
+row-dead in the \(Y12\) slot and may enter the exact dead quotient after the
+remaining \(C_7\)-coordinate is also dead.
+\item If \(c_{\mathrm{arith},Y}\ne0\) but is coherent/fixed, the term is not
+dead.  It must be routed into \(M_{\mathrm{live},p}\) and hence into
+\(L_{\mathrm{eff},p}=L_{\mathrm{clean},p}+M_{\mathrm{live},p}\).
+\item If \(c_{\mathrm{arith},Y}\ne0\) and is atom-local/free, then
+\(C_{Y,p}^{\mathrm{tar}}\) lies in an admitted local tangent direction and
+the rank-two quotient survival route is invalid on that packet.
+\end{enumerate}
+Thus the draft no longer needs a global assertion
+\(c_{\mathrm{arith},Y}=0\) if the coefficient is coherent and the effective
+carrier remains polynomially invertible.  What is forbidden is
+quotient-killing an unsplit arithmetic column containing a live primitive
+\(Y12\)-component.
+\end{corollary}
+
+\begin{theorem}[Cap/\(Y12\) bridge after concrete row certification]
+\label{thm:cap-Y12-bridge-after-concrete-row-certification}
+Assume the hypotheses of
+Theorem~\ref{thm:rank-two-quotient-survival-from-concrete-certificate}.  Let
+\[
+L_{\mathrm{eff},p}:=L_{\mathrm{clean},p}+M_{\mathrm{live},p}
+\]
+be the effective carrier matrix after coherent live routing, and assume
+\(\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-C}\).  Assume also the
+already-proved actual-source D4 amplitude survival on the selected cap core
+and the error bound
+\[
+\Phi_p^Y\Gamma_p
+=H_pE_pL_{\mathrm{eff},p}\Gamma_p+\varepsilon_p,
+\qquad
+\sum_{p\in C_j}\mu_p\|q_{p,\mathrm{cert}}^Y\varepsilon_p\|^2
+\le Q^{-B}\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2.
+\]
+Then
+\[
+\sum_{p\in C_j}\mu_p\|q_{p,\mathrm{cert}}^Y\Phi_p^Y\Gamma_p\|^2
+\ge Q^{-A}
+\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2.
+\]
+In particular, the static-line handoff and the nonstatic cap bridge are both
+closed in the certified quotient.
+\end{theorem}
+
+\begin{proof}
+Theorem~\ref{thm:rank-two-quotient-survival-from-concrete-certificate} gives
+\(\sigma_{\min}(q_{p,\mathrm{cert}}^YE_p)\ge Q^{-C_1}\), so
+\(\|q_{p,\mathrm{cert}}^YE_pL_{\mathrm{eff},p}\Gamma_p\|\ge Q^{-C_1-C}\|\Gamma_p\|\).
+Using \(\|x+y\|^2\ge\frac12\|x\|^2-\|y\|^2\),
+\(\|q_{p,\mathrm{cert}}^Y\Phi_p^Y\Gamma_p\|^2\ge\frac12 Q^{-2C_1-2C}|H_p|^2\|\Gamma_p\|^2-\|q_{p,\mathrm{cert}}^Y\varepsilon_p\|^2\).
+Summing over \(C_j\), applying D4 amplitude survival, and taking \(B\) larger
+than the polynomial losses gives the claim.
+\end{proof}
+
+\begin{proposition}[Atom-local live column obstruction]
+\label{prop:atom-local-live-column-obstruction-Y12}
+If any raw nuisance column has an atom-local live component
+\(L_p^{\mathrm{row}}A_{a,p}^{\mathrm{raw}}=m_{a,p}\ne0\) and the full column
+is required to be killed by the quotient, then no rank-two quotient
+preserving \(E_p=[C_{7,p}^{\mathrm{tar}},C_{Y,p}^{\mathrm{tar}}]\) can exist
+on that packet.
+\end{proposition}
+
+\begin{proof}
+If the full column is killed and its non-dead part is \(E_pm_{a,p}\), then
+\(E_pm_{a,p}\in\mathcal K_p^Y\), hence \(q_p^YE_pm_{a,p}=0\).  Since
+\(m_{a,p}\ne0\), the map \(q_p^YE_p\) has a nontrivial kernel and so its
+smallest singular value is zero.
+\end{proof}
+
+\begin{remark}[Status after the coordinator review]
+\label{rem:agent5-status-after-review-714}
+\emph{Status: FINITE AUDIT.}
+Hypothesis~\ref{hyp:rank-two-C7-Y12-quotient-survival} should be retired or
+marked as superseded by
+Hypothesis~\ref{hyp:torsion-free-rank-two-C7-Y12-survival} and the concrete
+row certificate above.  The certified quotient is not a free choice of
+rows: the rows must be constructed from the septic row and the
+fixed-whitening primitive row, and the raw nuisance list must pass the
+column routing certificate.  The smallest remaining coefficient theorem is
+\[
+\boxed{\mathfrak C_{2Y}(p):
+\begin{array}{l}
+\text{the concrete rows }(\ell_{7,p},\ell_{9,p}^Y)\text{ exist with polynomial norm;}\\
+\text{each of }R_{B_2},R_P,R_D,A_\alpha,A_{<7}\text{ is row-dead;}\\
+\text{the live parts of }A_7,A_{II},A_{E_2}\text{ are either zero or coherent/rerouted;}\\
+\text{no atom-local live }C_7/Y12\text{ coefficient is quotient-killed;}\\
+\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-C}.
+\end{array}}
+\]
+If \(\mathfrak C_{2Y}(p)\) is proved for all selected packets, then
+Theorem~\ref{thm:cap-Y12-bridge-after-concrete-row-certification} closes the
+rank-two cap/\(Y12\) bridge.  If \(\mathfrak C_{2Y}(p)\) fails because an
+atom-local live column remains, the current rank-two quotient route is not
+merely incomplete; it is false on that packet.
 \end{remark}
 
 \begin{definition}[Certified live-row quotient]
