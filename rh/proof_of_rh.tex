@@ -42032,127 +42032,119 @@ nonflatness/core-transfer theorem gives D4 amplitude survival.  Proposition
 lower bound.
 \end{proof}
 
-\begin{corollary}[Cap transversality in live \(C_7/Y12\) coordinates]
+\begin{corollary}[Cap transversality in certified live \(C_7/Y12\) coordinates]
 \label{cor:cap-transversality-live-C7-Y12-coordinates}
-\emph{Status: CERTIFIED INPUTS SUPPLIED; conditional only on the cap being in
-the nonstatic branch.}  This is the corrected cap bridge in live coordinates,
-replacing Corollary~\ref{cor:cap-jacobian-transversality} per
-Lemma~\ref{lem:killed-nuisance-not-live-jacobian-row}.  The rank-two quotient
-and effective-carrier inputs are now supplied by the certified quotient and
-\(\mathfrak C_{2Y}(p)\); the remaining branch choice is the extraction
-covariance alternative \(\delta_{\mathrm{ext}}\ge Q^{-A}\) versus the certified
-static-line handoff of Corollary~\ref{hyp:static-line-Y12-quotient-survival}.
+\emph{Status: certified-input conditional.}
+Work on the proof-level certified branch.  Set
+\[
+  Q_p^Y:=q_{p,\mathrm{cert}}^Y
+  =I-P_{\mathcal K_{p,\mathrm{dead}}^{Y,\mathrm{cert}}}^{\mathrm{bd}},
+  \qquad
+  E_p:=\begin{bmatrix}C_{7,p}^{\mathrm{tar}}&C_{Y,p}^{\mathrm{tar}}\end{bmatrix},
+  \qquad
+  R_p^{\mathrm{cert}}:=Q_p^Y E_p .
+\]
+Assume the certified row/routing certificate on the selected packet, so
+that
+\[
+  \sigma_{\min}(R_p^{\mathrm{cert}})\ge Q^{-C},
+  \qquad
+  \sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-C},
+\]
+and assume the certified row-normal expansion
+\[
+  \Phi_p^Y(1,s)
+  =H_p E_pL_{\mathrm{eff},p}\binom{1}{s}+\varepsilon_p(s),
+  \qquad
+  \|\partial_s Q_p^Y\varepsilon_p(s)\|\le Q^{-B}.
+\]
+Define live scalar coordinates by
+\[
+  \rho_p(s):=
+  \binom{\rho_{7,p}(s)}{\rho_{Y,p}(s)}
+  :=(R_p^{\mathrm{cert}})^\dagger Q_p^Y\Phi_p^Y(1,s).
+\]
+Then, for \(B\) sufficiently large,
+\[
+  \rho_p(s)=H_pL_{\mathrm{eff},p}\binom{1}{s}+O(Q^{-B+C}).
+\]
+After polynomially conditioned row operations on the two live
+coordinates,
+\[
+  L_{\mathrm{eff},p}
+  \sim
+  \begin{pmatrix}
+    c_{7,p}^{\mathrm{eff}}&0\\
+    \beta_{9,p}^{\mathrm{eff}}&\alpha_{9,p}^{\mathrm{eff}}
+  \end{pmatrix},
+  \qquad
+  |c_{7,p}^{\mathrm{eff}}\alpha_{9,p}^{\mathrm{eff}}|\ge Q^{-C}.
+\]
+Consequently, on the coefficient-good core where the amplitude factor
+is pointwise polynomially nonzero,
+\[
+  \left|
+  \det \frac{\partial(\rho_{7,p},\rho_{Y,p})}{\partial(1,s)}
+  \right|
+  =|H_p|^2|c_{7,p}^{\mathrm{eff}}\alpha_{9,p}^{\mathrm{eff}}|+O(Q^{-B+C})
+  \ge Q^{-A}.
+\]
+Equivalently, in the certified quotient Hilbert norm, the
+vector-valued area Jacobian satisfies
+\[
+  \sqrt{\det\bigl((D_{(1,s)}Q_p^Y\Phi_p^Y)^*(D_{(1,s)}Q_p^Y\Phi_p^Y)\bigr)}
+  \ge Q^{-A}.
+\]
+The projective Wronskian in the certified live coordinates obeys
+\[
+  W_p^{\mathrm{cert}}(s)
+  :=\rho'_{Y,p}(s)\rho_{7,p}(s)-\rho'_{7,p}(s)\rho_{Y,p}(s)
+  =H_p^2c_{7,p}^{\mathrm{eff}}\alpha_{9,p}^{\mathrm{eff}}+O(Q^{-B+C}),
+\]
+and the corresponding certified quotient Gram angle satisfies
+\(\sin^2\theta_p^{\mathrm{cert}}\ge Q^{-A}\) under the standard
+polynomial upper-conditioning bounds for the finite carrier atlas.
 
-Fix a packet \(p\) and a frozen cap \(C_j\), and let
+For a quantitatively static cap and a static unit direction \(u_j\),
+the same certified rank-two bound gives the typed static-line handoff
 \[
-R_p:=
-q_p^Y
-\begin{bmatrix}
-C_{7,p}^{\mathrm{tar}}&C_{Y,p}^{\mathrm{tar}}
-\end{bmatrix},
-\qquad
-q_p^Y:=I-P_{\mathcal K_p^Y}^{\mathrm{bd}}.
+  \sum_{p\in C_j}\mu_p
+  \|Q_p^Y\Phi_p^Y u_j\|^2
+  \ge
+  Q^{-A}
+  \sum_{p\in C_j}\mu_p
+  |H_p|^2\|L_{\mathrm{eff},p}u_j\|^2
+  -Q^{-B}
+  \sum_{p\in C_j}\mu_p\|u_j\|^2 .
 \]
-Assume Corollary~\ref{cor:torsion-free-rank-two-C7-Y12-survival}, i.e.\
-\(\sigma_{\min}(R_p)\ge Q^{-C}\).  Define live scalar coordinates by
-\[
-R_p^\dagger:=(R_p^\ast R_p)^{-1}R_p^\ast,
-\qquad
-\binom{\rho_{7,p}(s)}{\rho_{Y,p}(s)}
-:=
-R_p^\dagger\,q_p^Y\Phi_p^Y(1,s).
-\]
-Assume the row-normal carrier expansion
-\[
-\Phi_p^Y(1,s)
-=
-H_{j,p}
-\begin{bmatrix}
-C_{7,p}^{\mathrm{tar}}&C_{Y,p}^{\mathrm{tar}}
-\end{bmatrix}
-\begin{pmatrix}
-c_7&0\\
-\beta_9^{\mathrm{tri}}&\alpha_9
-\end{pmatrix}
-\binom{1}{s}
-+\varepsilon_p(s),
-\]
-with
-\[
-|H_{j,p}|\ge Q^{-C},
-\qquad
-|c_7\alpha_9|\ge Q^{-C},
-\qquad
-\|\partial_s\,q_p^Y\varepsilon_p(s)\|\le Q^{-B}.
-\]
-Then for \(B\) sufficiently large,
-\[
-\binom{\rho_{7,p}(s)}{\rho_{Y,p}(s)}
-=
-H_{j,p}
-\begin{pmatrix}
-c_7&0\\
-\beta_9^{\mathrm{tri}}&\alpha_9
-\end{pmatrix}
-\binom{1}{s}
-+R_p^\dagger\,q_p^Y\varepsilon_p(s),
-\]
-and
-\[
-\Bigl|
-\det
-\frac{\partial(\rho_{7,p},\rho_{Y,p})}{\partial(1,s)}
-\Bigr|
-\ge Q^{-A}.
-\]
-The Wronskian
-\(W_{j,p}^{\mathrm{live}}:=
-\rho'_{Y,p}\rho_{7,p}-\rho'_{7,p}\rho_{Y,p}\)
-satisfies \(|W_{j,p}^{\mathrm{live}}(s_j)|\ge Q^{-A}|\rho_{7,p}(s_j)|^2\),
-and the Gram angle of
-\((\rho_{7,p},\rho_{Y,p})\) satisfies \(\sin^2\theta_p\ge Q^{-A}\).
-The static-line handoff
-\[
-\sum_{p\in C_j}\mu_p\|q_p^Y\Phi_p^Y u_j\|^2
-\ge
-Q^{-A}\sum_{p\in C_j}\mu_p\|\Phi_p^Y u_j\|^2
-\]
-holds uniformly in \(u_j\), without a separate wall-escape estimate on
-\(|\beta_9^{\mathrm{tri}}+\alpha_9 s_j^\ast|\).
+Together with source-weighted D4 amplitude survival, this gives the
+same absolute lower bound needed by the certified atomic comparison.
+No separate static wall-escape estimate on
+\(|\beta_{9,p}^{\mathrm{eff}}+\alpha_{9,p}^{\mathrm{eff}}s_j^*|\) is
+required on the certified rank-two branch.
 \end{corollary}
 
 \begin{proof}
-By Corollary~\ref{cor:torsion-free-rank-two-C7-Y12-survival},
-\(R_p\) is left-invertible with \(\|R_p^\dagger\|_{\mathrm{op}}\le Q^C\).
-Apply \(R_p^\dagger\) to \(q_p^Y\Phi_p^Y(1,s)\): the row-normal expansion
-becomes the displayed scalar normal form, with
-\(\|R_p^\dagger q_p^Y\varepsilon_p(s)\|\le Q^{C-B}\) absorbed for \(B>3C\).
-Differentiating in \(s\), the Jacobian matrix is
-\(H_{j,p}\bigl(\begin{smallmatrix}c_7&0\\
-\beta_9^{\mathrm{tri}}&\alpha_9\end{smallmatrix}\bigr)+O(Q^{C-B})\), with
-determinant \(H_{j,p}^2 c_7\alpha_9+O(Q^{C-B})\); the polynomial lower
-bounds on \(H_{j,p}\) and \(c_7\alpha_9\) give \(\ge Q^{-A}\).  The
-Wronskian and Gram-angle bounds follow from
-\(\det\frac{\partial(\rho_{7,p},\rho_{Y,p})}{\partial(1,s)}=W_{j,p}^{\mathrm{live}}\)
-at \(s=s_j\) and
-\(\det G_p^{\mathrm{live}}=\|\rho_{7,p}\|^2\|\rho_{Y,p}\|^2\sin^2\theta_p\).
-For the static-line handoff, observe that for any unit
-\(u\in\mathbb C^2\),
-\[
-q_p^Y\Phi_p^Y u
-=
-H_{j,p}R_p L_{\mathrm{clean}}u+q_p^Y\varepsilon_p,
-\qquad
-L_{\mathrm{clean}}=\bigl(\begin{smallmatrix}c_7&0\\
-\beta_9^{\mathrm{tri}}&\alpha_9\end{smallmatrix}\bigr),
-\]
-and
-\(\|H_{j,p}R_p L_{\mathrm{clean}}u\|
-\ge|H_{j,p}|\sigma_{\min}(R_p)\sigma_{\min}(L_{\mathrm{clean}})\|u\|
-\ge Q^{-3C}\|u\|\),
-while
-\(\|\Phi_p^Y u\|\le Q^{C_0}\|u\|\); after squaring and weighted summing
-the static-line lower bound is uniform in \(u_j\).
+The certified quotient gives
+\(\|(R_p^{\mathrm{cert}})^\dagger\|\le Q^C\).  Applying this left
+inverse to \(Q_p^Y\Phi_p^Y(1,s)\) gives the displayed scalar coordinate
+expansion.  The Jacobian determinant in these coordinates is
+\(\det(H_pL_{\mathrm{eff},p}+O(Q^{-B+C}))=H_p^2\det L_{\mathrm{eff},p}+O(Q^{-B+C})\).
+The effective-carrier certificate gives
+\(|\det L_{\mathrm{eff},p}|\ge Q^{-C}\), after the displayed
+triangularization, and the amplitude condition gives the pointwise
+lower bound on the core.  The vector-valued area lower bound follows
+because \(R_p^{\mathrm{cert}}\) has smallest singular value at least
+\(Q^{-C}\).  The Wronskian identity is the same determinant written in
+projective live coordinates; common derivatives of the scalar
+amplitude cancel in \(\rho'_{Y}\rho_7-\rho'_7\rho_Y\), and the residual
+is absorbed by the \(Q^{-B}\) ledger.  The Gram-angle bound is
+\(\det G=\|v_1\|^2\|v_2\|^2\sin^2\theta\) with polynomial upper
+conditioning.  For the static direction, use
+\(\|Q_p^YE_pL_{\mathrm{eff},p}u_j\|\ge\sigma_{\min}(Q_p^YE_p)\sigma_{\min}(L_{\mathrm{eff},p})\|u_j\|\ge Q^{-C}\|u_j\|\),
+square, sum over the cap, and absorb the certified quotient error.
+The final absolute mass is supplied by the same source-weighted
+amplitude survival used in the nonstatic branch.
 \end{proof}
 
 \begin{hypothesis}[Cap amplitude noncollapse]
@@ -57171,6 +57163,85 @@ with
   \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2 .
 \]
 \end{hypothesis}
+
+\begin{hypothesis}[Localized certified singular-overlap completion]
+\label{hyp:localized-certified-singular-overlap-completion}
+On every routed cap family used in the final comparison, the EF split
+\(q''_{\mathrm{can}}=F_X+R_X\) satisfies the certified retained-row
+condition
+\[
+  \sum_{p\in C_j}\mu_p
+  \|\Lambda_p^{\mathrm{cert}}(F_X)\|^2
+  \le
+  Q^{-B_F}
+  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2,
+\]
+and the certified transported residual estimate
+\[
+  \sum_{p\in C_j}\mu_p
+  \|\Lambda_p^{\mathrm{cert}}(R_X)\|^2
+  \le
+  Q^{-B_R}
+  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2 .
+\]
+The estimates are in the Hilbert norm of
+\((I-P_{\mathrm{sing},p}^{\mathrm{cert}})H_{\mathrm{sing},p}\), with the
+same packet weights \(\mu_p\) and the same selected cap core as the
+lower bound.
+\end{hypothesis}
+
+\begin{proposition}[Localized completion gives the certified Type-I upper]
+\label{prop:localized-completion-gives-certified-typeI-upper}
+Hypothesis~\ref{hyp:localized-certified-singular-overlap-completion}
+implies Hypothesis~\ref{hyp:certified-same-norm-typeI-upper}, after
+replacing \(B_{\mathrm{up}}\) by \(\min(B_F,B_R)-O(1)\).
+\end{proposition}
+
+\begin{proof}
+By linearity,
+\(\Lambda_p^{\mathrm{cert}}(q''_{\mathrm{can}})=\Lambda_p^{\mathrm{cert}}(F_X)+\Lambda_p^{\mathrm{cert}}(R_X)\).
+Use \(\|a+b\|^2\le2\|a\|^2+2\|b\|^2\), multiply by \(\mu_p\), and sum
+over \(p\in C_j\).  The two displayed estimates give exactly the
+cap-local, weighted, certified-norm Type-I upper.
+\end{proof}
+
+\begin{hypothesis}[Certified D4 row realization]
+\label{hyp:certified-D4-row-realization}
+On the same cap core, the actual canonical row has the certified D4
+expansion
+\[
+  \Lambda_p^{\mathrm{cert}}(q''_{\mathrm{can}})
+  =H_pK_{\mathrm{D4},p}^{\mathrm{cert}}\Gamma_p+
+    \mathcal R_p^{\mathrm{id}},
+\]
+with
+\[
+  \sum_{p\in C_j}\mu_p\|\mathcal R_p^{\mathrm{id}}\|^2
+  \le
+  Q^{-B_{\mathrm{id}}}
+  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2 .
+\]
+Equivalently, the row-normal D4 carrier expansion is not merely a
+formal carrier identity: after applying the same certified
+singular-discard operator used in the upper bound, all non-D4 coherent
+pieces are retained and all transport/residual errors are in the
+displayed small term.
+\end{hypothesis}
+
+\begin{remark}[Remaining final-bridge obligation]
+\label{rem:remaining-certified-final-bridge-obligation}
+The certified cap transversality lower bound, the Wronskian lower
+bound, the Gram-angle lower bound, and the static-line handoff are
+lower-side statements.  They do not prove the forbidden upper for
+actual canonical rows.  The remaining proof-closing obligation is
+precisely the pair of cap-local certified estimates in
+Hypotheses~\ref{hyp:localized-certified-singular-overlap-completion}
+and~\ref{hyp:certified-D4-row-realization}.  These estimates are
+stronger than the older global unweighted
+\(\mathrm{EFCompletion}_{Y12}\) line unless a separate
+localization/sampling theorem transfers that completion to the
+selected cap weights and to the certified discarded singular norm.
+\end{remark}
 
 \begin{theorem}[Certified same-norm atomic contradiction]
 \label{thm:certified-same-norm-atomic-contradiction}
