@@ -47831,95 +47831,75 @@ set.  It is the normalization safeguard needed so that the source frame
 bound is nondegenerate.
 \end{remark}
 
-\begin{theorem}[Packet construction regularity]
+\begin{theorem}[Conditional packet construction regularity and oscillatory decay]
 \label{thm:packet-construction-regularity}
+\emph{Status: FINITE AUDIT.  This is a conditional reduction.  Under the
+packet-structure assumptions (1)--(3) below, the derivative budget and the
+oscillatory-kernel decay estimate are derived; the packet-structure
+assumptions themselves are not derived from zeta or from earlier lemmas in
+the present draft.}
+
 Let \(\mathcal S_X=\operatorname{span}\{B_2,P_{2,\le X},D_{2,\le X}\}\), and let
 \(\{\psi_p\}\) be the packet atoms used in the source decomposition of
-\(q''_{\can}\).  Assume each packet atom has the form
+\(q''_{\can}\).  Write each packet atom in the form
 \[
 \psi_p(t)=a_p(t)e^{i\omega_p t},
-\]
-where \(a_p\) is supported on the packet core \(K_p\), the packet cores have
-bounded overlap, and the packet scales satisfy
-\[
-Q^{-C}\le \lambda_p\le Q^{C}.
-\]
-Assume furthermore that the packet envelopes and the branch weight satisfy
-polynomial derivative bounds on the good packet set:
-\[
-\|\partial_t^r a_p\|_\infty\le Q^{C_r},
 \qquad
-\|\partial_t^r W_{\mathrm{branch}}\|_\infty\le Q^{C_r}
-\qquad (r\ge 0),
+a_p(t)=\lambda_p^{-1/2}\chi_p(t)\eta\!\left(\frac{t-m_p}{\lambda_p}\right),
 \]
-and that the packet frequencies are organized into resonant blocks so that
-off-block gaps are polynomially bounded below.
-Then for every integer \(N\ge 0\),
+where \(\eta\in C_c^\infty(\mathbb R)\) is a fixed bump, \(\chi_p\) is a smooth
+cutoff adapted to the packet core \(K_p\), and \(\lambda_p\) is the packet
+scale.  Assume only the packet structure already fixed earlier in the source
+construction:
+\begin{enumerate}
+\item the packet cores \(K_p\) have bounded overlap;
+\item the packet scales are polynomially bounded on the good packet set:
 \[
-\|\partial_t^N(a_p\overline{a_q}W_{\mathrm{branch}})\|_{L^1}\le Q^{C_N}.
+Q^{-C}\le \lambda_p \le Q^C;
 \]
-In particular, the derivative budget needed for oscillatory kernel decay holds
-on the good packet set.
+\item the branch weight \(W_{\mathrm{branch}}\) is built from the same
+packet-scale windows and has the same bounded-overlap regularity on the good
+packet set.
+\end{enumerate}
+Then for every integer \(r\ge 0\) there is a constant \(C_r\) such that
+\[
+\|\partial_t^r a_p\|_\infty \le C_r \lambda_p^{-r-1/2}\le Q^{C_r},
+\qquad
+\|\partial_t^r(a_p\overline{a_q}W_{\mathrm{branch}})\|_{L^1}\le Q^{C_r}.
+\]
+Consequently, for every \(N\ge 0\),
+\[
+\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}
+=
+\int a_p(t)\overline{a_q(t)}W_{\mathrm{branch}}(t)e^{i(\omega_p-\omega_q)t}\,dt
+\]
+satisfies
+\[
+\bigl|\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}\bigr|
+\le
+C_N Q^{C_N}(1+|\omega_p-\omega_q|)^{-N}.
+\]
+In particular, if packets are grouped into resonant blocks \(B\) by the
+construction already fixed in the source section, then outside a resonant
+block the cross terms are polynomially small, and inside a resonant block the
+matrix is finite-dimensional with polynomial size.
 \end{theorem}
 
 \begin{proof}
-The product rule gives
+Since \(\eta\), \(\chi_p\), and the packet windows defining
+\(W_{\mathrm{branch}}\) are smooth and compactly supported at packet scale,
+each differentiation of \(\eta((t-m_p)/\lambda_p)\) produces a factor of
+\(\lambda_p^{-1}\), and each differentiation of \(\chi_p\) or of the branch
+weight produces only bounded factors on the good packet set.  Thus by the
+chain rule and Leibniz rule,
 \[
-\partial_t^N(a_p\overline{a_q}W_{\mathrm{branch}})
-=
-\sum_{r+s+t=N}
-\binom{N}{r,s,t}
-(\partial_t^r a_p)\,
-(\partial_t^s \overline{a_q})\,
-(\partial_t^t W_{\mathrm{branch}}).
+\|\partial_t^r a_p\|_\infty \ll_r \lambda_p^{-r-1/2},
 \]
-Each factor is polynomially bounded by assumption, so each term has
-\(L^1\)-norm \(\le Q^{C_N}\) after integration over the packet core, and the
-bounded-overlap hypothesis controls the sum over packets.  Hence
-\[
-\|\partial_t^N(a_p\overline{a_q}W_{\mathrm{branch}})\|_{L^1}\le Q^{C_N}.
-\]
-\end{proof}
+and the same estimate holds for \(a_p\overline{a_q}W_{\mathrm{branch}}\)
+because the packet overlap is bounded and the packet scales are polynomially
+bounded.  This gives the stated derivative budget.
 
-\begin{corollary}[Packet derivative budget is a theorem output]
-\label{cor:packet-derivative-budget-derived}
-On the good packet set, the derivative bounds for the packet envelopes and
-the branch weight, and hence the oscillatory-kernel decay estimate of
-Lemma~\ref{lem:packet-oscillatory-kernel-decay}, are direct consequences of
-Theorem~\ref{thm:packet-construction-regularity}.  They are not additional
-hypotheses of the source layer.
-\end{corollary}
-
-\begin{lemma}[Oscillatory packet kernel decay]
-\label{lem:packet-oscillatory-kernel-decay}
-The derivative budget and packet-scale regularity used here are supplied by
-Theorem~\ref{thm:packet-construction-regularity} and the provenance remarks
-in Subsection~\ref{subsec:source-hypothesis-provenance}.
-
-Let \(\psi_p(t)=a_p(t)e^{i\omega_p t}\) and \(\psi_q(t)=a_q(t)e^{i\omega_q t}\),
-with \(a_p,a_q\in C^N\) supported on packet cores and satisfying
-\[
-\|\partial_t^j a_p\|_\infty+\|\partial_t^j a_q\|_\infty \le Q^{Cj}
-\qquad (0\le j\le N).
-\]
-Then
-\[
-\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}
-=\widehat{F_{pq}}(\omega_p-\omega_q),
-\qquad
-F_{pq}(t)=a_p(t)\overline{a_q(t)}W_{\mathrm{branch}}(t),
-\]
-and hence
-\[
-|\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}|
-\le C_N Q^{C_N}(1+|\omega_p-\omega_q|)^{-N}.
-\]
-In particular, if \(|\omega_p-\omega_q|\ge Q^{-\delta}\) outside resonant blocks,
-then the off-diagonal correlation is \(Q^{-A}\)-small for \(N\) large enough.
-\end{lemma}
-
-\begin{proof}
-Let
+For oscillatory decay, write
 \[
 F_{pq}(t):=a_p(t)\overline{a_q(t)}W_{\mathrm{branch}}(t).
 \]
@@ -47929,20 +47909,80 @@ Then
 =
 \int F_{pq}(t)e^{i(\omega_p-\omega_q)t}\,dt.
 \]
-By Theorem~\ref{thm:packet-construction-regularity},
-\[
-\|\partial_t^N F_{pq}\|_{L^1}\le Q^{C_N}.
-\]
 Integrating by parts \(N\) times gives
+\[
+\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}
+=
+\frac{1}{(i(\omega_p-\omega_q))^N}
+\int \partial_t^N F_{pq}(t)e^{i(\omega_p-\omega_q)t}\,dt,
+\]
+hence
 \[
 \bigl|\langle \psi_p,\psi_q\rangle_{W_{\mathrm{branch}}}\bigr|
 \le
-C_N Q^{C_N}(1+|\omega_p-\omega_q|)^{-N}.
+|\omega_p-\omega_q|^{-N}\,\|\partial_t^N F_{pq}\|_{L^1}
+\le
+C_N Q^{C_N}|\omega_p-\omega_q|^{-N}.
 \]
-This is the claimed oscillatory-kernel decay.  The row-sum estimate follows
-by summing over the finitely many resonant neighbors per packet and choosing
-\(N\) large enough.
+This is the claimed oscillatory-kernel decay.
+
+Now group the packets into the resonant blocks already defined by the packet
+construction.  If \(p\) and \(q\) lie in distinct blocks, then
+\(|\omega_p-\omega_q|\ge Q^{-\delta}\), so the cross terms are
+\(Q^{-A}\)-small for \(N\) sufficiently large.  Since each block has
+polynomial size, the row sums over off-block indices are still polynomially
+small, while each diagonal term is controlled by the packet-core mass.  This
+is exactly the finite source input needed by the frame/Gershgorin lemma
+below.
 \end{proof}
+
+\begin{corollary}[Conditional oscillatory decay closes the source-side off-diagonal bound]
+\label{cor:source-oscillatory-decay}
+\emph{Status: FINITE AUDIT, inheriting the conditional status of
+Theorem~\ref{thm:packet-construction-regularity}.}
+
+Under Theorem~\ref{thm:packet-construction-regularity}, the packet-adapted
+source atoms satisfy the off-diagonal row-sum estimate
+\[
+\sup_i\sum_{j\neq i}
+\frac{|\langle \psi_i,\psi_j\rangle_{W_{\mathrm{branch}}}|}
+{\|\psi_i\|_{L^2(W_{\mathrm{ref}})}\|\psi_j\|_{L^2(W_{\mathrm{ref}})}}
+\le Q^{-A}
+\]
+after the resonant blocks are separated.
+\end{corollary}
+
+\begin{remark}[Use in the source frame lemma]
+\label{rem:packet-regularity-used-in-source-frame}
+Theorem~\ref{thm:packet-construction-regularity} supplies the off-diagonal
+control in Lemma~\ref{lem:source-frame-coercivity}.  Combined with the
+packet-core micro-covering and the EF completion bound already recorded
+earlier in the source section, it yields the Gershgorin margin for
+\[
+M+E=G_{\mathrm{ref}}^{-1/2}G_{\mathrm{branch}}G_{\mathrm{ref}}^{-1/2}+E.
+\]
+\end{remark}
+
+\begin{remark}[Packet-regularity bridge status]
+\label{rem:packet-regularity-conditional-status}
+Theorem~\ref{thm:packet-construction-regularity} and
+Corollary~\ref{cor:source-oscillatory-decay} formalise the source-side
+analytic step:
+\[
+\text{packet regularity}
+\;\Rightarrow\;
+\text{derivative budget}
+\;\Rightarrow\;
+\text{oscillatory-kernel decay}
+\;\Rightarrow\;
+\text{off-diagonal row-sum control}.
+\]
+The reduction is unconditional given the packet-structure assumptions
+(bounded core overlap, polynomial scale, packet-built branch weight); it does
+not derive those assumptions from zeta or from earlier lemmas, and so the
+overall source layer remains FINITE AUDIT.  Hypothesis~\ref{hyp:ef-completion-bound}
+remains the load-bearing open analytic obligation.
+\end{remark}
 
 \begin{remark}[wip-zeta-bridge-proof-source]
 \label{rem:wip-zeta-bridge-proof-source}
@@ -47979,9 +48019,8 @@ estimate, but the covering theorem itself is not proved here.
 \label{hyp:packet-amplitude-decay-budget}
 The packet amplitudes satisfy polynomial derivative bounds, so that the
 off-diagonal packet kernels obey polynomial oscillatory decay (as in
-Theorem~\ref{thm:packet-construction-regularity} and
-Lemma~\ref{lem:packet-oscillatory-kernel-decay}), and the resonant clusters
-are finite-dimensional.
+Theorem~\ref{thm:packet-construction-regularity}), and the resonant
+clusters are finite-dimensional.
 
 \noindent\emph{Status note.}  This is the most directly derivable of the four
 source hypotheses.  Once the packet atoms are written as smooth windows
@@ -48106,7 +48145,7 @@ tail outside the core is absorbed via Hypothesis~\ref{hyp:ef-completion-bound}.
 For \(i\neq j\), write \(\psi_i(t)=a_i(t)e^{i\omega_i t}\) and
 \(\psi_j(t)=a_j(t)e^{i\omega_j t}\).  By
 Hypothesis~\ref{hyp:packet-amplitude-decay-budget} together with
-Lemma~\ref{lem:packet-oscillatory-kernel-decay},
+Theorem~\ref{thm:packet-construction-regularity},
 \[
 |M_{ij}|
 \le C_NQ^{C_N}(1+|\omega_i-\omega_j|)^{-N}.
