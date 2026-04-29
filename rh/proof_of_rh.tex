@@ -37298,6 +37298,56 @@ then \(\mathfrak T_p\) is coercive on \(\mathcal R_X\) up to the tail norm, and 
 \(Y12\) discarded observable survives on a polynomial-weight good set.
 \end{lemma}
 
+\begin{hypothesis}[Low-block Gershgorin margin]
+\label{hyp:y12-low-block-gershgorin}
+Let
+\[
+D_p=\bigl[\mathfrak T_p e_{1,p}\ \cdots\ \mathfrak T_p e_{r,p}\bigr],
+\qquad
+G_p:=D_p^\ast D_p,
+\qquad
+\mathfrak T_p:=(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}.
+\]
+Assume the low-mode basis \(\{e_{1,p},\dots,e_{r,p}\}\) is chosen in the
+retained metric so that the Gram matrix \(G_p\) satisfies a uniform
+Gershgorin gap:
+\[
+(G_p)_{ii}\ge \sum_{j\neq i}|(G_p)_{ij}| + c_0Q^{-C}
+\qquad\text{for every }i
+\]
+for some fixed \(c_0>0\) and polynomial exponent \(C\).  Also assume the
+quotient side and tail side already hold:
+\[
+U_p\subseteq \ker\Lambda_{Y,p}
+\qquad\text{and}\qquad
+\sum_p \|\mathfrak T_p(R_X)\|^2\le Q^{-B}\mu(\mathcal C).
+\]
+\end{hypothesis}
+
+\begin{lemma}[Finite low-block Gershgorin coercivity]
+\label{lem:finite-low-block-gershgorin}
+Under Hypothesis~\ref{hyp:y12-low-block-gershgorin}, the low-block Gram matrix
+is positive definite with polynomial margin:
+\[
+G_p\succ 0,
+\qquad
+\lambda_{\min}(G_p)\ge c_0Q^{-C},
+\qquad
+\sigma_{\min}(D_p)\ge \sqrt{c_0}\,Q^{-C/2}.
+\]
+Consequently, the projected operator \(\mathfrak T_p\) is coercive on the
+low-mode block of \(\mathcal R_X\), and the only remaining approximate-kernel
+directions are those already absorbed by the tail norm.
+\end{lemma}
+
+\begin{remark}[What is assumed and what remains to be proved]
+\label{rem:y12-low-block-assumption-status}
+The statement above proves coercivity \emph{conditional on} the Gershgorin
+gap in Hypothesis~\ref{hyp:y12-low-block-gershgorin}.  The remaining open
+work is to derive that gap from the packet-level structure of the draft,
+rather than to assume it.
+\end{remark}
+
 \begin{remark}[wip-zeta-bridge-proof-y12-graph]
 \label{rem:wip-zeta-bridge-proof-y12-graph}
 What remains is the finite-codimension graph/coercivity statement for
@@ -43440,6 +43490,70 @@ All live statements should be phrased in the current architecture:
 \begin{remark}[Unified live/dead dictionary]
 \label{rem:unified-live-dead-dictionary}
 Whenever the text says \(\mathrm{Gate\text{--}1}\), it means \(\mathrm{Agg}L^2(q''_{\can})\).  Whenever it says \(\Lambda\), it means the transition--singular discarded operator \((I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}P_{\mathrm{tr}}\) unless a local section explicitly defines a different quotient.  D4 is only local visibility unless the forbidden channel has been established in the same quotient norm as the upper bound.
+\end{remark}
+
+\begin{remark}[\(Y12\) quotient audit status]
+\label{rem:y12-quotient-audit-status}
+The quotient-survival step is reduced to the primitive-line arithmetic
+coefficient
+\[
+c_{\mathrm{arith},Y}:=
+\left[II_{\mathrm{arith},9}^{\mathrm{exact}}\right]_{D^2N_0,\ \mathrm{same},\ w=1,\ b=12}.
+\]
+Using the shared glossary,
+\[
+U_p=\operatorname{col}\bigl(T_{\mathrm{par}}^{(\alpha)},T_7,T_{<7},II_{\mathrm{arith},9},T_{E_2}\bigr),
+\qquad
+q_p^Y=I-P_{\mathcal K_p^Y}^{\mathrm{bd}},
+\]
+\[
+\mathcal K_p^Y:=\operatorname{im}
+\begin{bmatrix}
+R_{B_2,p}&R_{P,p}&R_{D,p}&A_{\alpha,p}&A_{7,p}&A_{<7,p}&A_{II,p}&A_{E_2,p}
+\end{bmatrix},
+\]
+\[
+r_{N,p}:=q_p^Y N_p,\qquad r_{Y,p}:=q_p^Y Y_p,
+\qquad
+N_p:=\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing}}\mathcal N_p^{\mathrm{D4}},
+\qquad
+Y_p:=\Pi_{\Sigma(Y12)}T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}]^{\mathrm{tr}}.
+\]
+
+The quotient step is clean if and only if
+\[
+U_p\subseteq \ker\Lambda_{Y,p}
+\quad\text{and}\quad
+r_{Y,p}\neq 0
+\]
+with polynomial margin, equivalently
+\[
+\operatorname{rank}\begin{bmatrix}
+\mathcal K_p^Y & N_p
+\end{bmatrix}
+=
+\operatorname{rank}(\mathcal K_p^Y),
+\qquad
+\operatorname{rank}\begin{bmatrix}
+\mathcal K_p^Y & Y_p
+\end{bmatrix}
+=
+\operatorname{rank}(\mathcal K_p^Y)+1.
+\]
+
+At present, the only unresolved point is whether
+\[
+c_{\mathrm{arith},Y}=0.
+\]
+If \(c_{\mathrm{arith},Y}\neq 0\), then the primitive coefficient survives and
+the arithmetic-curvature term is not dead in this quotient; it must be
+treated as a live primitive tangent or free amplitude.  If \(T_{E_2}\) turns
+out to be a free primitive \(Y12\) tangent, that is the other exact failure
+label.  The same applies if any of
+\[
+T_{\mathrm{par}}^{(\alpha)},\quad T_7,\quad T_{<7}
+\]
+fail to be dead in this quotient.
 \end{remark}
 
 \begin{lemma}[\(Y12\) quotient descent and primitive survival]
