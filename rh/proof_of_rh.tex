@@ -39481,8 +39481,10 @@ the static-line lower bound is uniform in \(u_j\).
 
 \begin{hypothesis}[Cap amplitude noncollapse]
 \label{hyp:cap-amplitude-noncollapse}
-\emph{Status: FINITE AUDIT.}  On every good frozen cap \(C_j\), the scalar
-amplitude \(H_{j,p}\) of the row-normal carrier expansion in
+\emph{Status: cap-side condition; its carrier-mass strengthening is discharged
+by Corollary~\ref{cor:cap-amplitude-noncollapse-from-actual-source} on
+ordinary real-canonical routed blocks.}  On every good frozen cap \(C_j\), the
+scalar amplitude \(H_{j,p}\) of the row-normal carrier expansion in
 Corollary~\ref{cor:cap-transversality-live-C7-Y12-coordinates} satisfies
 either the pointwise lower bound
 \[
@@ -39508,7 +39510,11 @@ row-normal carrier hypotheses.
 
 \begin{hypothesis}[D4 amplitude survival on the cap core (carrier-mass form)]
 \label{hyp:D4-amplitude-survival-cap-core}
-\emph{Status: FINITE AUDIT.}  On every selected good cap \(C_j\),
+\emph{Status: exact cap-side condition, discharged on ordinary real-canonical
+blocks by
+Corollary~\ref{cor:discrete-cap-D4-amplitude-survival-from-actual-source} once
+Gate--1, Gate--2, source-factor residual control, and packet quadrature have
+been proved.}  On every selected good cap \(C_j\),
 \[
 \sum_{p\in C_j}\mu_p|H_p|^2\|\Gamma_p\|^2
 \ge
@@ -39547,6 +39553,68 @@ Q^{-C_M}
 \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2.
 \]
 \end{definition}
+
+\begin{lemma}[Buffered weighted point extraction]
+\label{lem:buffered-weighted-point-extraction}
+Let \(I\) be a normalized packet interval, let
+\[
+  I_\eta:=\{m\in I:\operatorname{dist}_{\mathrm{norm}}(m,\partial I)\ge \eta\},
+\]
+and let \(d\nu=w_\nu(m)\,dm\) with
+\(Q^{-C_\nu}\le w_\nu\le Q^{C_\nu}\).  If
+\[
+  \int_{I_\eta}|f(m)|^2\,d\nu(m)\ge Q^{-A}\nu(I),
+\]
+then there exists \(m_0\in I_\eta\) such that
+\[
+  |f(m_0)|\ge Q^{-A/2}.
+\]
+After increasing the exponent, the same conclusion holds if the right side is
+\(Q^{-A}\nu(I_\eta)\) or if \(I_\eta\) has only polynomially comparable
+\(\nu\)-mass to \(I\).
+\end{lemma}
+
+\begin{proof}
+If \(|f|<Q^{-A/2}\) everywhere on \(I_\eta\), then
+\[
+  \int_{I_\eta}|f|^2\,d\nu<Q^{-A}\nu(I_\eta)\le Q^{-A}\nu(I),
+\]
+contradicting the hypothesis.  The variants follow from
+\(\nu(I_\eta)\asymp_{Q^C}\nu(I)\).
+\end{proof}
+
+\begin{lemma}[Buffered simultaneous point extraction]
+\label{lem:buffered-simultaneous-point-extraction}
+Let \(I_\eta\), \(d\nu\), \(u\), and \(\Gamma\) be as above.  Assume
+\[
+  \int_{I_\eta}|u|^2\|\Gamma\|^2\,d\nu\ge Q^{-A}\nu(I),
+\]
+and the pointwise polynomial bounds
+\[
+  |u|\le Q^{C_u},\qquad \|\Gamma\|\le Q^{C_\Gamma}
+\]
+on \(I_\eta\).  Then there is \(m_0\in I_\eta\) such that
+\[
+  |u(m_0)|\ge Q^{-B_u},\qquad \|\Gamma(m_0)\|\ge Q^{-B_\Gamma},
+\]
+with \(B_u,B_\Gamma\) depending only on \(A,C_u,C_\Gamma\) and the density
+regularity exponent.
+\end{lemma}
+
+\begin{proof}
+Choose
+\(\tau:=Q^{-(A+2C_\Gamma+3)/2}\) and
+\(\gamma:=Q^{-(A+2C_u+3)/2}\).  If every point of \(I_\eta\) satisfied either
+\(|u|<\tau\) or \(\|\Gamma\|<\gamma\), then pointwise
+\[
+  |u|^2\|\Gamma\|^2
+  \le \tau^2 Q^{2C_\Gamma}+Q^{2C_u}\gamma^2
+  \le 2Q^{-A-3}<Q^{-A},
+\]
+for \(Q\) sufficiently large after harmless exponent adjustment.  Integrating
+would contradict the lower bound.  Hence some \(m_0\in I_\eta\) satisfies both
+lower bounds.  Rename the exponents.
+\end{proof}
 
 \begin{lemma}[Quadratic escape from the source wall]
 \label{lem:quadratic-escape-source-wall}
@@ -39660,39 +39728,42 @@ length at least \(Q^{-A_H}\), on which \(|H(m)|\ge Q^{-A_H}\).
 \end{theorem}
 
 \begin{proof}
-Normalize \(\nu(I)\asymp1\); the general case follows by scaling using the
-bounds on \(w_\nu\).  From the Gate--1 lower bound and \(|u|\le Q^{C_u}\),
-there is a point \(m_0\in I\), after discarding the standard polynomially
-small buffer, such that \(|u(m_0)|\ge \tau:=Q^{-B_u}\) for some \(B_u\)
-depending only on \(A_1,C_u,C_\nu\).  Fix \(\varepsilon:=Q^{-B_q}\) with
-\(B_q\) large enough that
+By the boundary-collar/buffer exclusion already used in the packet
+construction, we may replace \(I\) by a buffered subinterval
+\(I_\eta\subset I\), \(\eta\ge Q^{-C_\eta}\), with
 \[
-        4\sqrt{\varepsilon/\tau}
-        \le \min\{\operatorname{dist}(m_0,\partial I),\tau/(8Q^{C_u})\}
+  \int_{I_\eta}|u|^2\,d\nu\ge Q^{-A_1'}\nu(I).
 \]
-after the usual buffered-packet selection.  If \(|q(m_0)|\ge\varepsilon\),
-set \(m_1=m_0\); otherwise apply
+Lemma~\ref{lem:buffered-weighted-point-extraction} gives
+\(m_0\in I_\eta\) with \(|u(m_0)|\ge \tau:=Q^{-B_u}\).  Choose
+\(\varepsilon=Q^{-B_q}\) so large in exponent that
+\[
+  r_\varepsilon:=4\sqrt{\varepsilon/\tau}
+  \le \min\{\eta/2,\tau/(8Q^{C_u})\}.
+\]
+If \(|q(m_0)|\ge\varepsilon\), put \(m_1=m_0\); otherwise apply
 Lemma~\ref{lem:quadratic-escape-source-wall} with \(M=Q^{C_u}\).  In both
-cases we obtain a point \(m_1\in I\) with
-\(|q(m_1)|\ge\varepsilon\) and \(|u(m_1)|\ge\tau/2\).
-The residual hypothesis gives
+cases \(m_1\in I\) and
+\(|q(m_1)|\ge\varepsilon\), \(|u(m_1)|\ge\tau/2\).
+The gauge-locked D4 source-factor identity and the residual hypothesis yield
 \[
-        |H(m_1)|
-        \ge\tfrac1{576}|q(m_1)|\,|u(m_1)|^3
-        \ge Q^{-B_*}
+  |H(m_1)|
+  \ge\tfrac1{576}|q(m_1)|\,|u(m_1)|^3
+  \ge Q^{-B_H}.
 \]
-for some polynomial exponent \(B_*\).  Since \(|\mathcal D H|\le Q^{C_H}\),
-the same lower bound persists, with one further polynomial loss, on a
-normalized subinterval \(J_H\subset I\) of length
-\(|J_H|\ge Q^{-(B_*+C_H+O(1))}\), so that
-\(|H(m)|\ge\tfrac12 Q^{-B_*}\) on \(J_H\).  Using the lower bound on
-\(w_\nu\),
+Since \(|\mathcal D H|\le Q^{C_H}\), the lower bound persists on a
+normalized interval \(J_H\subset I\) of length at least
+\(Q^{-B_H-C_H-O(1)}\):
 \[
-        \int_I|H|^2\,d\nu
-        \ge \int_{J_H}|H|^2\,d\nu
-        \ge Q^{-A_H}\nu(I)
+  |H(m)|\ge \tfrac12 Q^{-B_H}\qquad(m\in J_H).
 \]
-for a suitable \(A_H\).
+The density bounds give
+\[
+  \int_I |H|^2\,d\nu
+  \ge \int_{J_H}|H|^2\,d\nu
+  \ge Q^{-A_H}\nu(I)
+\]
+for a polynomial exponent \(A_H\).
 \end{proof}
 
 \begin{theorem}[Source-weighted D4 amplitude nonflatness]
@@ -39719,25 +39790,40 @@ Consequently, since \(W_2\le Q^{C_\Gamma}\),
 \end{theorem}
 
 \begin{proof}
-Let \(G:=|u|^2W_2\).  The Gate--2 lower bound and the polynomial upper bounds
-imply that, after the standard buffered-packet reduction, there is a point
-\(m_0\in I\) with \(|u(m_0)|\ge\tau\) and \(|\Gamma(m_0)|\ge\gamma\), where
-\(\tau,\gamma\ge Q^{-B}\) for some polynomial exponent \(B\); indeed, if either
-\(|u|<\tau\) or \(|\Gamma|<\gamma\) on the mass-carrying part, then \(G\) would
-have integral smaller than the Gate--2 lower bound for sufficiently large
-\(B\).  Choose \(\varepsilon=Q^{-B_q}\) so that the escape radius of
-Lemma~\ref{lem:quadratic-escape-source-wall} is contained in the packet
-buffer and also satisfies \(4\sqrt{\varepsilon/\tau}\le\gamma/(2Q^{C_\Gamma})\).
-If \(|q(m_0)|\ge\varepsilon\), put \(m_1=m_0\); otherwise the quadratic
-escape lemma gives \(m_1\) with \(|q(m_1)|\ge\varepsilon\),
-\(|u(m_1)|\ge\tau/2\), \(|\Gamma(m_1)|\ge\gamma/2\).  The residual estimate
-for \(H\) gives \(|H(m_1)|\,|\Gamma(m_1)|\ge Q^{-B'}\); the derivative bound
-for \(H\Gamma\) thickens this to a subinterval \(J_{H\Gamma}\subset I\) of
-polynomial normalized length on which \(|H\Gamma|\ge Q^{-B''}\).
-Integrating over \(J_{H\Gamma}\) using the density bounds,
-\(\int_I|H|^2W_2\,d\nu=\int_I|H\Gamma|^2\,d\nu\ge Q^{-A_{H\Gamma}}\nu(I)\).
-The final comparison with \(\int_IW_2\,d\nu\) follows from
-\(W_2\le Q^{C_\Gamma}\).
+After applying the same buffered-packet reduction, assume
+\[
+  \int_{I_\eta}|u|^2\|\Gamma\|^2\,d\nu\ge Q^{-A_2'}\nu(I),
+  \qquad \eta\ge Q^{-C_\eta}.
+\]
+Lemma~\ref{lem:buffered-simultaneous-point-extraction} gives
+\(m_0\in I_\eta\) with
+\(|u(m_0)|\ge\tau:=Q^{-B_u}\) and
+\(\|\Gamma(m_0)\|\ge\gamma:=Q^{-B_\Gamma}\).  Choose
+\(\varepsilon=Q^{-B_q}\) so that
+\[
+  r_\varepsilon:=4\sqrt{\varepsilon/\tau}
+  \le \min\{\eta/2,\tau/(8Q^{C_u}),\gamma/(2Q^{C_\Gamma})\}.
+\]
+If \(|q(m_0)|\ge\varepsilon\), put \(m_1=m_0\); otherwise apply
+Lemma~\ref{lem:quadratic-escape-source-wall}; its vector-field clause gives
+\[
+  |q(m_1)|\ge\varepsilon,
+  \qquad |u(m_1)|\ge\tau/2,
+  \qquad \|\Gamma(m_1)\|\ge\gamma/2.
+\]
+The D4 residual estimate gives
+\(|H(m_1)|\,\|\Gamma(m_1)\|\ge Q^{-B_{H\Gamma}}\).  The derivative bound
+\(|\mathcal D(H\Gamma)|\le Q^{C_{H\Gamma}}\) thickens this to a subinterval
+\(J_{H\Gamma}\subset I\) of polynomial normalized length on which
+\(|H\Gamma|\ge Q^{-B_{H\Gamma}-O(1)}\).  Hence
+\[
+  \int_I |H|^2\|\Gamma\|^2\,d\nu
+  =\int_I |H\Gamma|^2\,d\nu
+  \ge Q^{-A_{H\Gamma}}\nu(I).
+\]
+Finally, \(\|\Gamma\|^2\le Q^{C_\Gamma}\) gives
+\(\int_I |H|^2\|\Gamma\|^2\,d\nu
+\ge Q^{-A_{H\Gamma}-C_\Gamma}\int_I\|\Gamma\|^2\,d\nu\).
 \end{proof}
 
 \begin{corollary}[Discrete cap D4 amplitude survival]
@@ -39785,6 +39871,49 @@ so the D4 amplitude item is no longer an independent cap-side finite-audit
 hypothesis once the upstream actual-source Gate--1 theorem and the
 already-stated Gate--2 rigidity theorem are available.
 \end{remark}
+
+\begin{remark}[D4 amplitude survival status after actual-source nonflatness]
+\label{rem:D4-amplitude-survival-status-after-actual-source}
+Hypotheses~\ref{hyp:cap-amplitude-noncollapse} and
+\ref{hyp:D4-amplitude-survival-cap-core} should no longer be listed as
+independent cap-side finite-audit assumptions on ordinary real-canonical routed
+blocks.  They are discharged by the chain
+\[
+  \mathrm{Gate\text{--}1}
+  +\mathrm{Gate\text{--}2}
+  +\text{gauge-locked D4 source-factor identity}
+  +\text{D4 residual control}
+  +\text{packet quadrature/core transfer}
+  \Longrightarrow
+  \text{D4 amplitude survival},
+\]
+namely Theorems~\ref{thm:actual-source-D4-amplitude-nonflatness} and
+\ref{thm:source-weighted-D4-amplitude-nonflatness} followed by
+Corollary~\ref{cor:discrete-cap-D4-amplitude-survival-from-actual-source}.
+They remain useful labels for the exact estimate consumed by the cap bridge,
+but the ledger entry should read ``proved downstream of Gate--1/Gate--2 and
+quadrature'', not ``open cap finite audit.''  This update does not prove
+Gate--1, Gate--2, or the quadrature theorem themselves; it removes only the
+previously independent scalar-amplitude obstruction.
+\end{remark}
+
+\begin{corollary}[Cap amplitude noncollapse from actual-source D4 nonflatness]
+\label{cor:cap-amplitude-noncollapse-from-actual-source}
+On every ordinary real-canonical cap for which the hypotheses of
+Corollary~\ref{cor:discrete-cap-D4-amplitude-survival-from-actual-source} hold,
+Hypothesis~\ref{hyp:D4-amplitude-survival-cap-core} holds.  In particular the
+weighted alternative in Hypothesis~\ref{hyp:cap-amplitude-noncollapse} holds
+after replacing the unweighted mass by the carrier mass
+\(\mu_p\|\Gamma_p\|^2\).
+\end{corollary}
+
+\begin{proof}
+This is exactly the conclusion of
+Corollary~\ref{cor:discrete-cap-D4-amplitude-survival-from-actual-source}.
+The carrier-mass form is stronger for the cap-side absolute lower bound than
+an unweighted average of \(|H_p|^2\), because the quotient residual is paired
+with \(L_{\mathrm{clean}}\Gamma_p\).
+\end{proof}
 
 \begin{theorem}[D4 amplitude survival from a coefficient-good cap core]
 \label{thm:D4-amplitude-survival-from-coefficient-good-core}
@@ -39868,6 +39997,13 @@ Hypothesis~\ref{hyp:D4-amplitude-survival-cap-core}.  Relative survival
 without amplitude survival is not enough: a cap with strongly varying
 \(s_p\) and \(H_p\equiv0\) has \(\delta_{\mathrm{ext}}\ge Q^{-A}\) and
 \(q_p^Y\Phi_p^Y u_j=0\) simultaneously.
+
+The absolute lower bound is now supplied on ordinary real-canonical routed
+blocks by
+Corollary~\ref{cor:discrete-cap-D4-amplitude-survival-from-actual-source},
+not by quotient geometry.  The distinction remains important: rank-two
+quotient survival gives a relative static-line handoff, while the same-norm
+atomic lower bound requires \(D4\) amplitude mass.
 \end{remark}
 
 \begin{proposition}[Cap D4 lower bound from quotient Schur gap and amplitude mass]
@@ -39981,7 +40117,10 @@ Proposition~\ref{prop:cap-D4-lower-bound-from-schur-and-amplitude}.
 
 \begin{corollary}[Cap transversality in live carrier coordinates: projective Wronskian form]
 \label{cor:cap-transversality-live-carrier-coordinates}
-\emph{Status: FINITE AUDIT.  Sharper projective form of
+\emph{Status: proved on the D4-good core under the live-coordinate normal
+form, rank-two quotient Schur gap, row-normal carrier lower bound, and
+Corollary~\ref{cor:projective-Wronskian-lower-bound-D4-good-core}.  Sharper
+projective form of
 Corollary~\ref{cor:cap-transversality-live-C7-Y12-coordinates}.}
 Under the hypotheses of
 Corollary~\ref{cor:cap-transversality-live-C7-Y12-coordinates} together
@@ -40033,6 +40172,45 @@ quotient residual \(R_p^\dagger q_p\varepsilon_p\) is absorbed for \(B'\)
 sufficiently large.
 \end{proof}
 
+\begin{corollary}[Projective Wronskian lower bound on the D4-good core]
+\label{cor:projective-Wronskian-lower-bound-D4-good-core}
+Assume the live-coordinate normal form of
+Corollary~\ref{cor:cap-transversality-live-C7-Y12-coordinates}, the rank-two
+quotient Schur gap
+\(\sigma_{\min}(q_p^YE_p)\ge Q^{-C}\), the row-normal lower bound
+\(|c_7\alpha_9|\ge Q^{-C}\), and the pointwise D4-good core bound
+\(|H_{j,p}|\ge Q^{-C}\) on the selected cap core.  Then the projective live
+Wronskian
+\[
+  W_p^{\mathrm{proj}}(s)
+  :=\rho'_{Y,p}(s)\rho_{7,p}(s)-\rho'_{7,p}(s)\rho_{Y,p}(s)
+\]
+satisfies
+\[
+  |W_p^{\mathrm{proj}}(s)|\ge Q^{-A}
+\]
+on the core, after absorbing the quotient error.
+\end{corollary}
+
+\begin{proof}
+In live coordinates,
+\(\rho_{7,p}(s)=H_{j,p}c_7+O(Q^{-B'})\) and
+\(\rho_{Y,p}(s)=H_{j,p}(\beta_9^{\mathrm{tri}}+\alpha_9 s)+O(Q^{-B'})\).
+Differentiating in the projective parameter and forming the Wronskian gives
+\[
+\begin{aligned}
+  W_p^{\mathrm{proj}}(s)
+  &=\bigl(H'_{j,p}(\beta_9^{\mathrm{tri}}+\alpha_9s)+H_{j,p}\alpha_9\bigr)
+       H_{j,p}c_7
+    -H'_{j,p}c_7H_{j,p}(\beta_9^{\mathrm{tri}}+\alpha_9s)+O(Q^{-B''})\\
+  &=H_{j,p}^2c_7\alpha_9+O(Q^{-B''}).
+\end{aligned}
+\]
+The \(H'_{j,p}\)-terms cancel because the two live rows share the same scalar
+amplitude.  The pointwise core bound and \(|c_7\alpha_9|\ge Q^{-C}\) give the
+claim for \(B''\) sufficiently large.
+\end{proof}
+
 \begin{corollary}[Cap-level Jacobian transversality (superseded conditional bridge)]
 \label{cor:cap-jacobian-transversality}
 \emph{Status: SUPERSEDED.}  The original cap bridge ran the rank-two
@@ -40063,32 +40241,40 @@ Corollary~\ref{cor:cap-transversality-live-C7-Y12-coordinates}.
 
 \begin{remark}[Remaining open downstream inputs]
 \label{rem:open-downstream-modules}
-The genuinely open downstream inputs in this draft are:
+The genuinely open downstream inputs in the current draft are:
 \[
-\mathrm{EFCompletion}_{Y12},\quad
-Y12\text{-signature separation},\quad
-\text{lower-order tangent observability},\quad
-\text{tubular normality},\quad
-\text{moving }Y12\text{-wall anti-concentration},\quad
-\operatorname{rank}K_{\mathrm{D4},p}\ge1.
+  Y12\text{-rank-two quotient survival},\qquad
+  Y12\text{-graph/coercivity},
 \]
-All other uses of the downstream modules should be read as consequences of
-prior lemmas and definitions, not as new hypotheses.
+\[
+  \text{row-normal effective }D4\text{ carrier survival},\qquad
+  \delta_{\mathrm{ext}}\text{ or static-line quotient survival},
+\]
+and the final same-norm singular-discard/atomic comparison.  The earlier list
+that included D4 scalar amplitude as an independent cap-side audit should be
+read through Remark~\ref{rem:D4-amplitude-survival-status-after-actual-source}:
+amplitude survival is now a consequence of the actual-source Gate--1/Gate--2
+and cap-transfer package, not a separate quotient-geometry input.  All other
+uses of the downstream modules should be read as consequences of prior
+lemmas and definitions, not as new hypotheses.
 \end{remark}
 
 
 \begin{proposition}[Source-closed downstream handoff]
 \label{prop:source-closed-downstream-handoff}
-Assume Gate--1 source survival has been established by
-Theorem~\ref{thm:source-survival-from-three-inputs}.  The graph step is supplied
-by Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3} once the
-finite/O2O3 packet model, bounded-degree Fej\'er--Riesz block factorization,
-and off-block packet geometry are verified.  After this graph step, the
-remaining finite-survival chain is purely downstream:
+Assume Gate--1 source survival, Gate--2 source--anisotropy mass, the
+source-factor residual control for \(H=-qu^3/288+R_H\), and packet
+quadrature.  Then \(D4\) amplitude survival is supplied by
+Corollary~\ref{cor:discrete-cap-D4-amplitude-survival-from-actual-source}.
+Assume also the graph step of
+Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3} under its
+finite/O2O3 packet-model hypotheses.  The remaining downstream chain is
 \[
-Y12\text{-quotient survival}
+Y12\text{-rank-two quotient survival}
 \Longrightarrow
 Y12\text{-graph/coercivity}
+\Longrightarrow
+\text{row-normal effective }D4\text{ carrier}
 \Longrightarrow
 \text{extraction covariance/static-line survival}
 \Longrightarrow
@@ -40096,36 +40282,32 @@ Y12\text{-graph/coercivity}
 \Longrightarrow
 \mathrm{AtomicY12Contradiction}.
 \]
-The next cap-level fork is the following dichotomy on each frozen good cap
-\(C_j\): either
+The cap-level fork on each frozen good cap \(C_j\) is:
 \[
-\delta_{\mathrm{ext}}(C_j)
-=
-\frac{\det B_j}{(\operatorname{tr}B_j)^2}
-\ge Q^{-A},
+\delta_{\mathrm{ext}}(C_j)=\frac{\det B_j}{(\operatorname{tr}B_j)^2}\ge Q^{-A}
 \]
-so the nonstatic cap transversality bridge
+and the live-coordinate transversality bridge
 Corollary~\ref{cor:cap-transversality-live-C7-Y12-coordinates} applies, or
-the cap is quantitatively static and must be handled by
-Hypothesis~\ref{hyp:static-line-Y12-quotient-survival} together with
-Lemma~\ref{lem:static-line-transfer-from-actual-Y12-survival}.
+the cap is quantitatively static and must be routed through the typed
+static-line \(Y12\)-carrier handoff
+\[
+  \sum_{p\in C_j}\mu_p\|q_p^Y\Phi_p^Y u_j\|^2
+  \ge Q^{-A}
+  \sum_{p\in C_j}\mu_p\|\Phi_p^Y u_j\|^2.
+\]
 \end{proposition}
 
 \begin{proof}
-Theorem~\ref{thm:source-survival-from-three-inputs} supplies the source gap
-\(\delta_{\mathrm{src}}\ge Q^{-A}\), so the source branch-hole, AFE completion,
-and reference noncollapse issues are no longer downstream hypotheses.  The
-principal-angle graph gap \(\delta_{\mathrm{graph}}\) is supplied by
-Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3} under the
-finite/O2O3 packet-model hypotheses.  The remaining quantities are the \(Y12\)
-quotient residuals \(r_{N,p},r_{Y,p}\), the graph/coercivity gap
-\(\delta_{\mathrm{coerc}}\), and the extraction gap \(\delta_{\mathrm{ext}}\).
-If \(\delta_{\mathrm{ext}}\ge Q^{-A}\), the cap is nonstatic and
-Corollary~\ref{cor:cap-transversality-live-C7-Y12-coordinates} supplies the
-quotient-angle, Wronskian, and Gram-angle lower bounds in live
-\((\rho_{7,p},\rho_{Y,p})\) coordinates.  If \(\delta_{\mathrm{ext}}<Q^{-A}\),
-the cap is routed to the static-line module.  This is the announced downstream
-handoff.
+The source hypotheses imply the carrier-mass amplitude estimate by
+Corollary~\ref{cor:discrete-cap-D4-amplitude-survival-from-actual-source};
+therefore the absolute cap lower bound is no longer blocked by scalar
+amplitude collapse.  The graph theorem supplies the upstream principal-angle
+source/graph gap under its stated structural hypotheses.  What remains is the
+rank-two quotient/coercivity/row-normal/extraction chain.  In the nonstatic
+case, the live-coordinate cap transversality corollary supplies the
+quotient-angle and Wronskian lower bounds.  In the static case, the cap is
+handed to the typed static-line carrier map.  This is the corrected
+post-amplitude downstream fork.
 \end{proof}
 
 \begin{theorem}[Normal D4 through the \(Y12\)-signature \(K_9\) channel]
@@ -53908,25 +54090,76 @@ in the scale-normalized \(H^2\)-ledger.
 \section{Conditional status after the downstream closure repairs}
 \label{sec:final-status-after-downstream-closure-repairs}
 
-\begin{remark}[Current architecture ledger]
+\begin{remark}[Current architecture ledger after the D4-amplitude repair]
 \label{rem:current-architecture-ledger-unified}
-The current proof architecture is
-\[
-\mathrm{Agg}L^2(q''_{\can})+\mathrm{Finite/O2O3}_{23}+\mathrm{ForbiddenSingularDiscardD4}.
-\]
-The unresolved inputs are:
+The current proof architecture is still a finite-survival chain, not yet a
+closed proof of \(\RH\).  After the actual-source D4-amplitude repair, the
+unresolved or structurally audited inputs are:
 \begin{enumerate}
-\item aggregate \(L^2\)-observability for \(q''_{\can}\),
-\item finite/O2O3 exterior-pivot anti-trough,
-\item construction of \(R_{\mathrm{sing}}\) and the singular-discard upper,
-\item D4 transversality to the discarded singular channel.
+\item aggregate \(L^2\)-observability for \(q''_{\can}\) and the associated
+branch/reference domination;
+\item finite/O2O3 packet-model hypotheses feeding the Fej\'er--Riesz graph
+anti-lock theorem;
+\item rank-two \(Y12\) quotient survival
+\[
+  \sigma_{\min}\bigl(q_p^Y[C_{7,p}^{\mathrm{tar}},C_{Y,p}^{\mathrm{tar}}]\bigr)
+  \ge Q^{-C};
+\]
+\item \(Y12\)-graph/coercivity and row-normal effective D4 carrier survival,
+including \(\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-C}\);
+\item extraction covariance survival
+\(\delta_{\mathrm{ext}}\ge Q^{-A}\) or the typed static-line \(Y12\) handoff;
+\item the final same-norm singular-discard/atomic comparison, including the
+construction of the forbidden channel and the Type-I local-square upper in the
+same quotient norm as the surviving lower bound.
 \end{enumerate}
-The principal-angle/Schur component \(\delta_{\mathrm{graph}}\) is not listed as
-an unresolved input here: it is supplied by
+The \(D4\) scalar amplitude mass is no longer an independent cap-side open
+item on ordinary real-canonical routed blocks: it is discharged by
+Theorems~\ref{thm:actual-source-D4-amplitude-nonflatness},
+\ref{thm:source-weighted-D4-amplitude-nonflatness}, and
+Corollary~\ref{cor:discrete-cap-D4-amplitude-survival-from-actual-source},
+provided the upstream source gates and cap-transfer estimates have been
+proved.  The principal-angle/Schur component \(\delta_{\mathrm{graph}}\) is
+also not listed as unresolved here: it is supplied by
 Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3} once the
-finite/O2O3 packet-model hypotheses are verified.  Any sentence implying that
-finite D4 alone closes the proof should be replaced
-by ``visibility, not contradiction unless \(\Lambda\).''
+finite/O2O3 packet-model hypotheses are verified.  Any sentence implying
+that finite \(D4\) alone closes the proof should be replaced by
+``visibility, not contradiction unless \(\Lambda\).''
+\end{remark}
+
+\begin{remark}[Updated downstream module ledger after the D4-amplitude repair]
+\label{rem:updated-downstream-module-ledger-after-D4-amplitude-repair}
+After the actual-source D4 amplitude nonflatness repair, the scalar amplitude
+factor \(H_p\) should not be listed as an independent cap-side obstruction on
+ordinary real-canonical routed blocks.  The remaining downstream inputs are:
+\[
+\begin{array}{c|c|c}
+\text{module} & \text{status after this repair} & \text{remaining obligation}\\
+\hline
+Y12\text{-quotient/rank-two carrier survival}
+& \text{open finite rank test}
+& \sigma_{\min}(q_p^Y[C_{7,p}^{\mathrm{tar}},C_{Y,p}^{\mathrm{tar}}])\ge Q^{-C}\\
+Y12\text{-graph/coercivity}
+& \text{finite audit}
+& \sigma_{\min}(D_p)\ge Q^{-C}\text{ after projection}\\
+\text{row-normal }D4\text{ carrier}
+& \text{conditional on quotient/coercivity}
+& \sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-C}\\
+D4\text{ amplitude mass}
+& \text{discharged downstream of Gate--1/Gate--2}
+& \text{source-factor residual control and cap quadrature}\\
+\text{extraction covariance/static line}
+& \text{finite audit}
+& \delta_{\mathrm{ext}}\ge Q^{-A}\text{ or typed static-line handoff}\\
+\text{same-norm atomic comparison}
+& \text{open final bridge}
+& \text{forbidden upper and surviving lower in the same quotient norm.}
+\end{array}
+\]
+Thus the cap-side ledger should no longer say that the D4 amplitude factor is
+open independently of the source gates.  It remains conditional only in the
+sense that Gate--1, Gate--2, source residual control, and quadrature remain
+part of the upstream proof chain.
 \end{remark}
 
 \begin{remark}[wip-zeta-bridge-proof-atomic]
