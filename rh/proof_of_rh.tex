@@ -55852,7 +55852,7 @@ Corollary~\ref{cor:source-oscillatory-decay}, using the stated polynomial
 conditioning of \(G_{\mathrm{ref},B}\).  This proves all claims.
 \end{proof}
 
-\begin{remark}[What the windowed packet target closes]
+\begin{remark}[What the windowed packet target closes after the canonical window]
 \label{rem:unconditional-packet-target-status}
 Theorem~\ref{thm:unconditional-packet-regularity} closes the source-side
 oscillatory-decay step once the windowed packet construction supplies
@@ -55861,60 +55861,62 @@ conditioning of the reference block Grams.  Resonant blocks are defined by the
 scale-normalized relation, so no separate unnormalized frequency-gap theorem is
 used for off-block decay.
 
-The AFE tail and fixed-window reference noncollapse are no longer hidden
-hypotheses: they are supplied by Theorem~\ref{thm:smooth-finite-AFE-package},
+The AFE tail and fixed-window reference noncollapse are supplied by
+Theorem~\ref{thm:smooth-finite-AFE-package},
 Corollary~\ref{cor:ef-completion-bound}, and
-Corollary~\ref{cor:reference-ms-noncollapse}.  The source layer still requires
-two non-analytic structural inputs: the completed-source anchor
-(Hypothesis~\ref{hyp:completed-source-anchor}) and branch/reference block
-domination (Theorem~\ref{thm:branch-reference-block-domination}).
+Corollary~\ref{cor:reference-ms-noncollapse}.  In the canonical Gate--1 branch,
+branch/reference block domination is no longer an additional analytic input: it
+is supplied by the canonical branch-complete construction,
+Definition~\ref{hyp:packet-core-micro-covering}, through
+Theorem~\ref{thm:branch-reference-block-domination}.
 
-\noindent\emph{Honest closure state.}  Once those two structural inputs are
-proved by the upstream source construction, Theorem~\ref{thm:source-survival-from-three-inputs}
+\noindent\emph{Honest closure state.}  Relative to the completed-source anchor
+and the canonical branch-complete window, Theorem~\ref{thm:source-survival-from-three-inputs}
 gives \(\delta_{\mathrm{src}}\ge Q^{-A}\).  The remaining active obligations are
-now upstream or entry obligations:
+therefore upstream or entry obligations:
 \[
 \text{completed-source anchor},\qquad
-\text{branch/reference block domination},\qquad
+\text{canonical branch-complete construction data},\qquad
 \text{raw row/routing certificate }\mathfrak B_{2Y,p}.
 \]
-In the active canonical source-graded branch,
-\(\delta_{\mathrm{coerc}}\), the positive-density extraction/static-line
-module, and the same-norm atomic comparison are handled by the certified
-downstream package recorded in
-Remark~\ref{rem:active-input-status-table}.  They should not be listed as
-open finite-survival gaps unless the proof leaves the canonical certified
-branch.  The Graph/O2O3 gap
-\(\delta_{\mathrm{graph}}\) is closed by
-Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3},
-conditional only on the structural identification of the finite/O2/O3
-Fej\'er--Riesz charge model (\(R^C\)-normalization, bounded-degree
-Fej\'er--Riesz Stack factorization, and identification of the pure
-sector as charge \(0\) and the contaminant sector as charges
-\(1,\ldots,d_0\)); it is no longer an active finite-survival gap of the
-same status as the upstream objects above.
+Here the second item means the actual Gate--1 branch weight is
+\(W_{\mathrm{branch}}^{\mathrm{can}}\); the theorem is not a statement about an
+arbitrary older routed branch window.
 
-The label \(\texttt{thm:unconditional-packet-regularity}\) is retained for
-citation stability; the theorem is unconditional only relative to the stated
-windowed packet-construction data.
+In the active canonical source-graded branch, \(\delta_{\mathrm{coerc}}\), the
+positive-density extraction/static-line module, and the same-norm atomic
+comparison are handled by the certified downstream package recorded in
+Remark~\ref{rem:active-input-status-table}.  They should not be listed as open
+finite-survival gaps unless the proof leaves the canonical certified branch.
+The Graph/O2O3 gap \(\delta_{\mathrm{graph}}\) is closed by
+Theorem~\ref{thm:canonical-FR-construction-closes-O2O3-model-membership} together
+with the canonical multiplier/anti-lock theorem
+Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3}.  It is not an
+active source-construction gap in the canonical Fej\'er--Riesz branch.
+
+The label \texttt{thm:unconditional-packet-regularity} is retained for citation
+stability; the theorem is unconditional only relative to the stated windowed
+packet-construction data.
 \end{remark}
 
 
 \begin{remark}[Source bridge proof register]
 \label{rem:wip-zeta-bridge-proof-source}
-The source bridge now separates analytic estimates from structural routing
+The source bridge now separates analytic estimates from constructional routing
 estimates.  The analytic estimates are supplied by the completed-source AFE,
 canonical reference noncollapse, absolute packet envelopes, and
-scale-normalized oscillatory integration by parts.  The remaining source-side
-structural assertion is branch/reference block domination,
+scale-normalized oscillatory integration by parts.  The constructional routing
+estimate is supplied by the canonical branch-complete window:
 \[
-G_{\mathrm{branch},B}\ge Q^{-C}G_{\mathrm{ref},B}
+W_{\mathrm{branch}}^{\mathrm{can}}\ge Q^{-C}W_{\mathrm{ref}},
+\qquad
+G_{\mathrm{branch},B}^{\mathrm{can}}\ge Q^{-C}G_{\mathrm{ref},B}.
 \]
-on every good resonant block, equivalently Definition~\ref{hyp:packet-core-micro-covering}.
-This is not an AFE consequence; it must come from the branch/reference window
-construction.  Once this domination is part of the construction,
-Lemma~\ref{lem:source-frame-coercivity} gives \(\delta_{\mathrm{src}}>0\) with
-polynomial loss.
+Thus branch/reference domination is theorem-level in the canonical Gate--1
+branch, by Theorem~\ref{thm:branch-reference-block-domination}.  If some archived
+or raw branch window is used instead of \(W_{\mathrm{branch}}^{\mathrm{can}}\), it
+must carry its own quadratic-form domination proof; the canonical theorem does
+not retrofit arbitrary older weights.
 \end{remark}
 
 
@@ -56049,6 +56051,20 @@ packet family or a consequence of a separately proved boundary-collar
 exclusion theorem.  It is not used in the proof of
 Theorem~\ref{thm:branch-reference-block-domination}, which only needs the
 core covering and scale-slow reference weight hypotheses.
+\end{remark}
+
+\begin{remark}[Legacy local-coordinate branch weights]
+\label{rem:legacy-local-coordinate-branch-weights}
+Lemma~\ref{lem:branch-complete-l2-gate-one-fubini} records the local-coordinate
+Fubini form of older branch observables, where powers such as \(\lambda_b^5\)
+come from the local energy normalization.  This is not the proof-level
+pointwise branch window used for Gate--1 in the canonical branch.  The
+proof-level Gate--1 Gram comparison uses
+\(W_{\mathrm{branch}}^{\mathrm{can}}\) from
+Definition~\ref{hyp:packet-core-micro-covering}.  Any argument using the
+legacy Fubini weight must either identify its resulting pointwise weight with
+\(W_{\mathrm{branch}}^{\mathrm{can}}\) or prove a separate quadratic-form
+branch/reference domination theorem for that weight.
 \end{remark}
 
 
@@ -56249,7 +56265,7 @@ The final weighted \(L^2\) inequality is the same statement pulled back from
 reference-whitened coordinates to the original finite source space.
 \end{proof}
 
-\begin{theorem}[Source survival from the three source inputs]
+\begin{theorem}[Source survival from completed source and canonical construction]
 \label{thm:source-survival-from-three-inputs}
 Assume:
 \begin{enumerate}
@@ -56257,8 +56273,8 @@ Assume:
 \item the windowed packet construction regularity of
 Theorem~\ref{thm:unconditional-packet-regularity}, including reference-regular
 resonant blocks;
-\item branch/reference block domination,
-Theorem~\ref{thm:branch-reference-block-domination}.
+\item the Gate--1 branch window is the canonical branch-complete window
+\(W_{\mathrm{branch}}^{\mathrm{can}}\) of Definition~\ref{hyp:packet-core-micro-covering}.
 \end{enumerate}
 Then the Gate--1 source gap satisfies
 \[
@@ -56269,7 +56285,7 @@ Then the Gate--1 source gap satisfies
 \]
 for some absolute \(A>0\).  Equivalently,
 \[
-\int |q''_{\can}(t)|^2W_{\mathrm{branch}}(t)\,dt
+\int |q''_{\can}(t)|^2W_{\mathrm{branch}}^{\mathrm{can}}(t)\,dt
 \ge
 Q^{-A}
 \int |q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt,
@@ -56279,53 +56295,55 @@ up to the already quantified finite-AFE completion error.
 
 \begin{proof}
 The completed-source anchor identifies the actual canonical source curvature
-with the completed source trace to which the smooth AFE applies.  Theorem~\ref{thm:smooth-finite-AFE-package}
-and Corollary~\ref{cor:ef-completion-bound} give the finite main term plus a
+with the completed source trace to which the smooth AFE applies.
+Theorem~\ref{thm:smooth-finite-AFE-package} and
+Corollary~\ref{cor:ef-completion-bound} give the finite main term plus a
 polynomially small reference-whitened residual correction.  The windowed packet
 construction gives bounded overlap, polynomial scales, amplitude derivative
 bounds, reference block conditioning, and reference-whitened off-block decay by
-Corollary~\ref{cor:source-oscillatory-decay}.  Branch/reference block domination
-gives the block-diagonal lower bound by
+Corollary~\ref{cor:source-oscillatory-decay}.  The canonical branch-complete
+window gives the block-diagonal lower bound by
+Theorem~\ref{thm:branch-reference-block-domination} and
 Lemma~\ref{lem:block-coercivity-from-weight-domination}.  Lemma~\ref{lem:source-frame-coercivity}
 then yields \(\lambda_{\min}(M+E)\ge Q^{-A}\), which is exactly
 \(\delta_{\mathrm{src}}\ge Q^{-A}\) after absorbing the residual correction.
 \end{proof}
 
-\begin{remark}[Remaining source inputs]
+\begin{remark}[Remaining source inputs after the canonical branch window]
 \label{rem:remaining-source-structural-input}
 The analytic estimates after the completed-source package are now explicit:
 residue-aware AFE tail control, absolute packet derivative/envelope bounds,
 scale-normalized off-block oscillatory decay, and fixed-window reference
-noncollapse.  The source layer is nevertheless not unconditional until the
-following non-AFE inputs are supplied:
+noncollapse.  In the canonical source branch the branch-hole obstruction is
+removed by the construction of \(W_{\mathrm{branch}}^{\mathrm{can}}\).  The source
+layer is nevertheless not global until the following non-AFE inputs are supplied:
 \begin{enumerate}
 \item the completed-source anchor
 \[
 \mathcal D^3\Phi_\zeta(t)=\mathcal Z\!\left(\tfrac12+it\right),
 \]
 with all singular and residue channels accounted for;
-\item branch/reference block domination on every good resonant block,
-\[
-G_{\mathrm{branch},B}\ge Q^{-C}G_{\mathrm{ref},B};
-\]
+\item the canonical branch-complete construction data of
+Definition~\ref{hyp:packet-core-micro-covering};
 \item if \(W_{\mathrm{ref}}\) is allowed to vary with \(Q\), the uniform
 reference nonconcentration bound recorded in
 Remark~\ref{rem:reference-noncollapse-uniformity}.
 \end{enumerate}
-The second item is the branch-hole exclusion; it cannot be hidden inside the
-AFE or the off-block oscillatory estimate.
+Branch/reference block domination is not listed as a separate remaining input
+in this branch, because it is Theorem~\ref{thm:branch-reference-block-domination}.
+For an archived noncanonical branch window, however, the branch-hole failure
+mode remains possible.
 \end{remark}
 
 
-\begin{corollary}[Gate--1 source survival]
+\begin{corollary}[Gate--1 source survival in the canonical branch]
 \label{cor:gate-one-source-survival}
-Assume the completed-source anchor, the windowed packet construction
-regularity of Theorem~\ref{thm:unconditional-packet-regularity}, and a
-branch-complete routed packet-core construction in the sense of
-Definition~\ref{hyp:packet-core-micro-covering}.  Then
-Theorem~\ref{thm:source-survival-from-three-inputs} gives
+Assume the completed-source anchor, the windowed packet construction regularity
+of Theorem~\ref{thm:unconditional-packet-regularity}, and the canonical
+branch-complete source window of Definition~\ref{hyp:packet-core-micro-covering}.
+Then Theorem~\ref{thm:source-survival-from-three-inputs} gives
 \[
-\int |q''_{\can}(t)|^2W_{\mathrm{branch}}(t)\,dt
+\int |q''_{\can}(t)|^2W_{\mathrm{branch}}^{\mathrm{can}}(t)\,dt
 \ge
 Q^{-A}
 \int |q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt,
@@ -56349,15 +56367,16 @@ sense:
 +
 \text{windowed packet regularity}
 +
-\text{branch/reference block domination}
+\text{canonical branch-complete window}
 \Longrightarrow
 \delta_{\mathrm{src}}\ge Q^{-A}.
 \]
 The packet derivative budget is absolute, with only a mass-good polynomial
-relative consequence; no \((\log X)^{2j}\)-relative estimate is used.  The
-source layer remains conditional on the completed-source anchor and on
-branch/reference Gram domination.  If the reference window moves with \(Q\), it
-also remains conditional on a uniform polynomial reference-noncollapse theorem.
+relative consequence; no unqualified \((\log X)^{2j}\)-relative estimate is
+used.  The source layer remains conditional on the completed-source anchor and
+on the decision to use the canonical branch-complete window as the proof-level
+Gate--1 observation window.  If the reference window moves with \(Q\), it also
+remains conditional on a uniform polynomial reference-noncollapse theorem.
 \end{remark}
 
 \begin{remark}[Failure labels]
@@ -56365,10 +56384,12 @@ also remains conditional on a uniform polynomial reference-noncollapse theorem.
 After the corrections above, the off-diagonal packet-correlation failure is
 handled by the scale-normalized oscillatory estimate, and fixed-window
 reference mean-square collapse is excluded by
-Corollary~\ref{cor:reference-ms-noncollapse}.  The genuine remaining
-source-frame failure mode is a branch-hole failure: the routed branch block Gram
-may fail to dominate the reference block Gram on a good resonant block.  For a
-\(Q\)-dependent reference window, a second possible failure mode is lack of a
+Corollary~\ref{cor:reference-ms-noncollapse}.  In the canonical source branch,
+the branch-hole failure is removed by
+Theorem~\ref{thm:branch-reference-block-domination}.  A branch-hole failure
+remains a valid label only for noncanonical or archived branch windows that are
+not identified with \(W_{\mathrm{branch}}^{\mathrm{can}}\).  For a
+\(Q\)-dependent reference window, a separate possible failure mode is lack of a
 uniform polynomial version of reference noncollapse, as noted in
 Remark~\ref{rem:reference-noncollapse-uniformity}.
 \end{remark}
@@ -58877,6 +58898,20 @@ q''_{\can}(t)=\mathcal Z(1/2+it)
 Thus Rules~1--2 remove source/O2O3 construction gaps in the canonical branch;
 they should not be cited as closing the completed-source anchor or downstream
 raw \(2Y\) coefficient verification.
+\end{remark}
+
+\begin{remark}[Referee-safe status of the construction-rule closures]
+\label{rem:referee-safe-status-construction-rule-closures}
+Rules~1--2 are now theorem-level only in the canonical construction branch.
+Rule~1 closes branch/reference block domination because the branch window is
+constructed as \(W_{\mathrm{branch}}^{\mathrm{can}}\) and satisfies the pointwise
+lower bound against \(W_{\mathrm{ref}}\).  Rule~2 closes bounded-degree
+Fej\'er--Riesz model membership because the O2/O3 Stack weight is chosen before
+capped extraction inside the Fej\'er--Riesz charge algebra.  Neither rule is a
+retrofit theorem for arbitrary older branch or Stack weights.  Neither rule
+proves the completed-source anchor, and neither rule proves the raw
+\(2Y\) row/routing certificate unless that certificate is separately verified or
+imported.
 \end{remark}
 
 \section{Certified downstream status after the canonical source-graded closure}
