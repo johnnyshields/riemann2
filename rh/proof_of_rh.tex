@@ -39626,90 +39626,58 @@ Hence its smallest singular value is at least \(Q^{-A_1}\).  The Gram
 form follows by squaring the singular-value inequality.
 \end{proof}
 
-\begin{proposition}[Main-term row-deadness is necessary for full-main retention]
-\label{prop:main-term-row-deadness-necessary-full-main-retention}
-Let \(h\in\mathcal F_{X,p}^{\mathrm{sing}}\).  If the full vector \(h\)
-is retained in \(R_{\mathrm{sing},p}^{\mathrm{full}}\) and its live row
-signature \(L_{\mathrm{sing},p}h\ne0\), then the projected carrier Schur
-gap fails for the enlarged retained space unless the corresponding live
-direction is removed from the affine carrier map.  Thus, in the active
-branch, finite-main generators may be retained only after replacing them
-by their row-dead parts.
-\end{proposition}
-
-\begin{proof}
-Write
+\begin{remark}[Legacy row-dead finite-main route superseded]
+\label{rem:legacy-row-dead-finite-main-route-superseded}
+The earlier row-dead finite-main formulation is only a sufficient fallback.
+It should not be used as the active proof route.  In the active branch the
+proof is carried out in the canonical source-graded \(K9\) lift of
+Definition~\ref{def:canonical-source-graded-K9-lift}.  The finite-AFE main
+labels lie in \(H_{p,\mathrm{main}}\), the affine \(C_7/Y12\) live labels lie
+in \(H_{p,\mathrm{aff}}\), and these two labelled subspaces are orthogonal
+before scalar collapse.  Therefore the full finite-main model may be retained
+by
 \[
-  h=h^{\mathrm{dead}}+E_{\mathrm{sing},p}^{2Y}a,
-  \qquad
-  a=(C_{\mathrm{sing},p}^{2Y})^{-1}L_{\mathrm{sing},p}h.
+  P_p^{\mathrm{full}}:=P_{R_p+\operatorname{im}H_{F,p}}
 \]
-If \(L_{\mathrm{sing},p}h\ne0\), then \(a\ne0\).  If the full \(h\) and
-the dead part \(h^{\mathrm{dead}}\) both lie in the retained space, then
-\(E_{\mathrm{sing},p}^{2Y}a=h-h^{\mathrm{dead}}\) lies in the retained
-space.  Hence
-\((I-P_{R_{\mathrm{sing},p}^{\mathrm{full}}})E_{\mathrm{sing},p}^{2Y}a=0\),
-so the carrier projection has a nontrivial kernel.  This is incompatible
-with a polynomial Schur gap on the full live carrier plane.
-\end{proof}
-
-\begin{corollary}[Certified same-norm upper with full-main dead retention]
-\label{cor:certified-same-norm-upper-full-main-dead-retention}
-Assume the certified full-main retained space is used, and that the
-finite AFE main term is retained in the row-dead sense:
+without killing the affine live normal directions, because
+Corollary~\ref{cor:finite-main-Schur-discharged-by-canonical-lift} gives
 \[
-  T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(F_X)\in R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}
-  \quad\text{up to a }Q^{-B_F}\text{-small residual in the same norm.}
+  (E_p^{\mathrm{aff}})^*
+  (I-P_p^{\mathrm{full}})E_p^{\mathrm{aff}}
+  \ge Q^{-C}I .
 \]
-Assume also \(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\).  Then the
-actual canonical source satisfies the same-norm affine upper
-\[
-  \sum_{p\in C_j}\mu_p
-  \bigl\|
-  (I-\widehat P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}})
-  \mathcal T_{\mathrm{aff},p}J_{\mathrm{tr},p}(q''_{\can})
-  \bigr\|_{\mathrm{gr}}^2
-  \le Q^{-B_{\mathrm{up}}}
-  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2,
-\]
-where \(\mathcal T_{\mathrm{aff},p}\) denotes the source-graded affine
-component of the certified transition--singular row, and
-\(B_{\mathrm{up}}\) is the minimum of the main-term and residual
-completion exponents up to polynomial loss.
-\end{corollary}
+Thus the finite-main Schur complement is closed in the canonical
+source-graded branch.  Statements saying that finite-main generators must be
+retained only after row-deadification are to be read as warnings for
+noncanonical or scalar-collapsed formulations, not as active hypotheses in the
+proof-level branch.
+\end{remark}
 
-\begin{proof}
-Use \(q''_{\can}=F_X+R_X\) and linearity.  The finite-main part is
-killed by
-\(I-\widehat P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}\) up to
-the stated residual.  The remainder part is controlled by
-\(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\), since the affine-graded
-row is an orthogonal projection of the full-vector certified \(K9\)
-discarded row.  Summing the two estimates with
-\(\|x+y\|^2\le2\|x\|^2+2\|y\|^2\) gives the claim.
-\end{proof}
-
-\begin{remark}[What certified \(\delta_{\mathrm{coerc}}\) does and does not close]
+\begin{remark}[Scope of certified coercivity after the canonical lift]
 \label{rem:delta-coerc-affine-full-main-scope}
-The certified low-block coercivity theorem closes the affine full-main
-Schur gap once all finite-main retained generators are first replaced by
-their row-dead parts.  This is the precise sense in which the
-\(\delta_{\mathrm{coerc}}\) theorem supplies the missing affine
-transversality input.  It does not, by itself, prove the local
-row-realization identity
+Certified low-block coercivity supplies the affine carrier lower bound
 \[
-  (I-\widehat P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}})T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(q''_{\can})
-  =
-  (I-\widehat P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}})\mathcal E_p^{\mathrm{aff}}
-  \binom{H_pL_{\mathrm{clean},p}v_p}{m_{\eta,p}}
-  +O(Q^{-B}).
+  (E_p^{\mathrm{aff}})^*(I-P_{R_p})E_p^{\mathrm{aff}}
+  \ge Q^{-C}I
 \]
-That identity is the remaining finite row-table statement: every
-non-D4, non-\(\eta\eta\) source-graded component must be either
-row-dead/retained or placed in the residual ledger.  Thus
-\(\delta_{\mathrm{coerc}}\) closes the Schur-gap side of the affine
-repair, while the row-identification formula remains the final
-same-norm row-realization check.
+in the source-graded singular Hilbert space.  The canonical labelled lift and
+finite-main/affine grade separation imply
+\[
+  (E_p^{\mathrm{aff}})^*
+  (I-P_{R_p+\operatorname{im}H_{F,p}})E_p^{\mathrm{aff}}
+  =
+  (E_p^{\mathrm{aff}})^*(I-P_{R_p})E_p^{\mathrm{aff}},
+\]
+because the mixed Gram block
+\[
+  (E_p^{\mathrm{aff}})^*(I-P_{R_p})H_{F,p}
+\]
+vanishes by orthogonality of \(H_{p,\mathrm{aff}}\) and
+\(H_{p,\mathrm{main}}\).  Hence certified coercivity closes the Schur-gap side
+of the final affine branch after full finite-main retention.  The row
+realization is also theorem-level in the canonical branch, because the
+maximal affine target contains every live affine \(K9\) source-grade label;
+see Lemma~\ref{lem:maximal-affine-row-realization-canonical-lift}.
 \end{remark}
 
 \begin{lemma}[Full-vector \(K9\) completion implies affine-graded completion]
@@ -39806,155 +39774,154 @@ stated cap quadrature/core-transfer estimate; the polynomial transfer
 loss is absorbed into the exponent.
 \end{proof}
 
-\begin{corollary}[Same-norm affine upper from full-vector completion]
-\label{cor:same-norm-affine-upper-from-full-vector-completion}
-Assume \(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\) and suppose the
-coherent finite-AFE main term is retained by the certified singular
-model in the affine-graded channel, namely
+\begin{definition}[Proof-level source-graded discard]
+\label{def:proof-level-source-graded-discard}
+In the canonical source-graded \(K9\) branch set
 \[
-  \sum_{p\in C_j}\mu_p
-  \bigl\|
-  \widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(F_X)
-  \bigr\|_{\mathrm{gr}}^2
-  \le
-  Q^{-B_F}
-  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2 .
+  P_p^{\mathrm{full}}:=P_{R_p+\operatorname{im}H_{F,p}},
+  \qquad
+  \Lambda_p^{\mathrm{gr,full}}
+  :=
+  (I-P_p^{\mathrm{full}})
+  \mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p}.
 \]
-Then the actual canonical source satisfies the same-norm affine upper
+The maximal affine projection of this observable is
+\[
+  \widehat\Lambda_{\max,p}
+  :=
+  \Pi_{\max,p}^{\mathrm{gr}}\Lambda_p^{\mathrm{gr,full}} .
+\]
+The comparison norm is the Hilbert norm of \(H_{K9,p}^{\mathrm{gr}}\), or the
+orthogonal projected norm on the maximal affine summand.  No scalar
+\(I\)-coordinate or primitive-only \(Y12\) collapse is made before the
+contradiction.
+\end{definition}
+
+\begin{theorem}[Source-graded same-norm Type-I upper]
+\label{thm:source-graded-same-norm-typeI-upper}
+\label{hyp:certified-same-norm-typeI-upper}
+Assume the canonical source-graded \(K9\) lift, full finite-main retention
+through \(P_p^{\mathrm{full}}\), and the cap-local form of
+\(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\) for the AFE tail \(R_X\).  Then,
+for every prescribed upper exponent \(B_{\mathrm{up}}\), after choosing the
+AFE cutoff depth sufficiently large,
 \[
   \sum_{p\in C_j}\mu_p
   \bigl\|
-  \widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(q''_{\can})
+  \Lambda_p^{\mathrm{gr,full}}(q''_{\can})
   \bigr\|_{\mathrm{gr}}^2
   \le
   Q^{-B_{\mathrm{up}}}
-  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2,
+  \sum_{p\in C_j}\mu_p\|v_p\|^2 .
 \]
-with \(B_{\mathrm{up}}=\min(B_F,B_R)-O(1)\), where \(B_R\) is the
-residual completion exponent from
-Theorem~\ref{thm:full-vector-K9-EFCompletion-from-AFE-tail}.
-\end{corollary}
-
-\begin{proof}
-Use \(q''_{\can}=F_X+R_X\), linearity of
-\(\widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}\), and
-\(\|a+b\|^2\le2\|a\|^2+2\|b\|^2\).  The coherent main-term estimate
-controls the first part, and
-Lemma~\ref{lem:full-vector-K9-implies-affine-graded-completion} with
-Theorem~\ref{thm:full-vector-K9-EFCompletion-from-AFE-tail} controls
-the residual part in the same source-graded norm.
-\end{proof}
-
-\begin{proposition}[Tail completion alone does not give the certified Type-I upper]
-\label{prop:tail-completion-alone-not-certified-typeI-upper}
-The estimate \(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\) for the
-smooth AFE remainder \(R_X\) does not, by itself, imply the certified
-same-norm Type-I upper for \(q''_{\can}\).  A separate same-norm
-estimate for the finite AFE main term is necessary.
-\end{proposition}
-
-\begin{proof}
-The point is finite-dimensional.  Let the certified discarded space be
-one-dimensional, let \(\widehat\Lambda_{\mathrm{aff}}=\operatorname{id}\),
-and set \(R_X=0\), \(F_X=q''_{\can}=1\).  Then
-\(\|\widehat\Lambda_{\mathrm{aff}}J_{\mathrm{tr}}(R_X)\|=0\), so the
-full-vector tail completion holds with arbitrary strength.  But
-\(\|\widehat\Lambda_{\mathrm{aff}}J_{\mathrm{tr}}(q''_{\can})\|=1\), so
-the certified same-norm Type-I upper fails.  Thus the implication from
-\(R_X\)-completion to the actual-source upper is valid only after
-proving
-\[
-  \sum_{p\in C_j}\mu_p
-  \|\widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(F_X)\|_{\mathrm{gr}}^{2}
-  \le Q^{-B_F}\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2,
-\]
-or an equivalent retained-main-term/coherent-row statement in the same
-certified norm.
-\end{proof}
-
-\begin{definition}[Source-graded singular row-completion property]
-\label{def:source-graded-singular-row-completion-property}
-On a routed cap core \(C_j\), say that the certified affine branch
-satisfies \emph{source-graded singular row completion} if the following
-two estimates hold in the same source-graded discarded norm:
-\[
-  \sum_{p\in C_j}\mu_p
-  \|\widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(F_X)\|_{\mathrm{gr}}^{2}
-  \le Q^{-B_F}\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2,
-\tag{SG1}
-\]
-and
-\[
-  \widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(q''_{\can})
-  =
-  \widehat\Phi_{p,\mathrm{aff}}^{Y}(v_p)+\mathcal R_p^{\mathrm{id}},
-  \qquad
-  \sum_{p\in C_j}\mu_p\|\mathcal R_p^{\mathrm{id}}\|_{\mathrm{gr}}^{2}
-  \le Q^{-B_{\mathrm{id}}}\sum_{p\in C_j}\mu_p\|v_p\|^2 .
-\tag{SG2}
-\]
-Here \(v_p=\Gamma_p\) in the nonstatic branch and \(v_p=u_j\) in the
-static-line branch, with the corresponding normalization of weights.
-The estimate \((\mathrm{SG1})\) is the same-norm finite-AFE main-term
-coherence; \((\mathrm{SG2})\) is the same-norm certified row
-identification.
-\end{definition}
-
-\begin{lemma}[Minimal same-norm upper from row completion and vector EF]
-\label{lem:minimal-upper-from-row-completion-and-vector-EF}
-Assume \(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\) and the
-source-graded singular row-completion property \((\mathrm{SG1})\).
-Then
-\[
-  \sum_{p\in C_j}\mu_p
-  \|\widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(q''_{\can})\|_{\mathrm{gr}}^{2}
-  \le Q^{-B_{\mathrm{up}}}\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2,
-\]
-with \(B_{\mathrm{up}}=\min(B_F,B_R)-O(1)\), where \(B_R\) is the
-exponent in the cap-local form of
-\(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\).
-\end{lemma}
-
-\begin{proof}
-Use \(q''_{\can}=F_X+R_X\) and linearity:
-\[
-  \widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(q''_{\can})
-  =
-  \widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(F_X)
-  +
-  \widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(R_X).
-\]
-After squaring, summing with weights \(\mu_p\), and using
-\(\|a+b\|^2\le2\|a\|^2+2\|b\|^2\), the main term is controlled by
-\((\mathrm{SG1})\) and the residual by
-Lemma~\ref{lem:full-vector-K9-implies-affine-graded-completion} and
-Theorem~\ref{thm:full-vector-K9-EFCompletion-from-AFE-tail}.
-\end{proof}
-
-\begin{theorem}[Affine-graded closure from source-graded row completion]
-\label{thm:affine-graded-closure-from-source-graded-row-completion}
-Assume the affine-live quotient preserves the retained two-plane,
-\(\sigma_{\min}(q_{p,\mathrm{aff}}^{Y}E_p)\ge Q^{-C_E}\), the clean
-carrier is invertible \(\sigma_{\min}(L_{\mathrm{clean},p})\ge Q^{-C_L}\),
-and the D4 amplitude mass estimate holds on the selected cap core.
-Assume also \(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\) and the
-source-graded singular row-completion property
-\((\mathrm{SG1})\)--\((\mathrm{SG2})\).  Then no nonzero static routed
-cap core exists in the affine-graded branch.
+The same estimate holds with \(\Lambda_p^{\mathrm{gr,full}}\) replaced by
+\(\widehat\Lambda_{\max,p}\).  Here \(v_p=\Gamma_p\) in the nonstatic branch,
+and \(v_p\) is the normalized static direction in the typed static-line
+branch.
 \end{theorem}
 
 \begin{proof}
-Proposition~\ref{prop:static-line-lower-affine-graded-norm} gives the
-source-graded lower bound for
-\(\widehat\Phi_{p,\mathrm{aff}}^{Y}(v_p)\).  The row identification
-\((\mathrm{SG2})\) transfers this lower bound to
-\(\widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(q''_{\can})\), up
-to a negligible error, by
-\(\|x+y\|^2\ge\frac12\|x\|^2-\|y\|^2\).
-Lemma~\ref{lem:minimal-upper-from-row-completion-and-vector-EF} gives
-the same-norm upper.  Taking the upper exponent larger than the lower
-exponent contradicts positive cap mass.
+By definition of \(H_{F,p}\), the source-graded finite-main row satisfies
+\[
+  \mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p}(F_X)
+  \in \operatorname{im}H_{F,p}.
+\]
+Therefore
+\[
+  \Lambda_p^{\mathrm{gr,full}}(F_X)=0 .
+\]
+Using the EF split \(q''_{\can}=F_X+R_X\) and linearity of the canonical lift,
+\[
+  \Lambda_p^{\mathrm{gr,full}}(q''_{\can})
+  =
+  \Lambda_p^{\mathrm{gr,full}}(R_X).
+\]
+Since \(P_p^{\mathrm{full}}\) retains at least the certified retained space
+used in \(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\), enlarging the retained
+space can only decrease the discarded norm.  Hence the cap-local
+full-vector \(K9\) completion estimate for \(R_X\) gives the displayed upper.
+The maximal affine estimate follows because
+\(\Pi_{\max,p}^{\mathrm{gr}}\) is an orthogonal projection.
 \end{proof}
+
+\begin{theorem}[Maximal affine row realization in the canonical branch]
+\label{thm:maximal-affine-row-realization-canonical-branch}
+\label{hyp:certified-row-identification}
+Let
+\[
+  z_p:=
+  \left(
+    H_pL_{\mathrm{clean},p}v_p,\,
+    (m_{\lambda,p})_{\lambda\in\mathfrak A_{K9,p}}
+  \right)
+\]
+be the maximal affine coefficient vector.  In the canonical labelled lift,
+on the selected cap core,
+\[
+  \widehat\Lambda_{\max,p}(q''_{\can})
+  =
+  \Pi_{\max,p}^{\mathrm{gr}}
+  (I-P_p^{\mathrm{full}})E_p^{\mathrm{aff}}z_p
+  +\mathcal R_{p,\max}^{\mathrm{id}},
+\]
+and the residual ledger gives
+\[
+  \sum_{p\in C_j}\mu_p
+  \|\mathcal R_{p,\max}^{\mathrm{id}}\|_{\mathrm{gr}}^2
+  \le
+  Q^{-B_{\mathrm{id}}}
+  \sum_{p\in C_j}\mu_p\|v_p\|^2
+\]
+for arbitrarily large prescribed \(B_{\mathrm{id}}\), after the standard
+residual-depth choices.
+\end{theorem}
+
+\begin{proof}
+The labelled \(K9\) row table is a finite orthogonal direct sum of four
+classes: finite-main labels, affine live labels, dead/retained labels, and
+residual labels.  The finite-main labels lie in \(\operatorname{im}H_{F,p}\)
+and are killed by \(I-P_p^{\mathrm{full}}\).  The dead/retained labels lie in
+\(R_p\) and are also killed.  The projection \(\Pi_{\max,p}^{\mathrm{gr}}\)
+keeps exactly the maximal affine live label set
+\(\mathfrak A_{K9,p}\) together with the clean D4 affine label.  Since this
+set is maximal, no same-grade affine companion remains outside the target.
+The surviving affine coefficients are precisely the clean coefficient
+\(H_pL_{\mathrm{clean},p}v_p\) and the retained forcing coefficients
+\((m_{\lambda,p})_{\lambda\in\mathfrak A_{K9,p}}\).  Everything else is in
+the residual-labelled ledger, which is measured in the same source-graded
+Hilbert norm and gives the displayed bound.
+\end{proof}
+
+\begin{corollary}[Localized source-graded singular-overlap completion]
+\label{cor:localized-source-graded-singular-overlap-completion}
+\label{hyp:localized-certified-singular-overlap-completion}
+In the canonical source-graded \(K9\) branch, localized singular-overlap
+completion is a theorem:
+\[
+  \sum_{p\in C_j}\mu_p
+  \|\widehat\Lambda_{\max,p}(q''_{\can})\|_{\mathrm{gr}}^2
+  \le
+  Q^{-B_{\mathrm{up}}}
+  \sum_{p\in C_j}\mu_p\|v_p\|^2 .
+\]
+It is the orthogonal maximal-affine projection of
+Theorem~\ref{thm:source-graded-same-norm-typeI-upper}.
+\end{corollary}
+
+\begin{proof}
+Apply Theorem~\ref{thm:source-graded-same-norm-typeI-upper} and project by
+\(\Pi_{\max,p}^{\mathrm{gr}}\).
+\end{proof}
+
+\begin{remark}[Tail-only no-go retained only for noncanonical formulations]
+\label{rem:tail-only-no-go-legacy-after-canonical-branch}
+The finite-dimensional warning that \(R_X\)-completion alone does not control
+\(q''_{\can}=F_X+R_X\) remains valid if the finite-main model is not retained
+in the same source-graded norm.  It no longer represents an active gap in the
+canonical branch, because \(P_p^{\mathrm{full}}\) retains the full finite-main
+labelled model and Corollary~\ref{cor:finite-main-Schur-discharged-by-canonical-lift}
+shows that this retention does not destroy the affine live Schur gap.
+\end{remark}
 
 \begin{remark}[Consolidated status of the affine-forcing repair: discharged]
 \label{rem:consolidated-affine-forcing-status-discharged}
@@ -58488,291 +58455,151 @@ a carrier-quotient computation; scalar \(I\)-coordinate incidences are
 quarantined and do not affect the active carrier row-energy route.
 \end{remark}
 
-\begin{remark}[wip-zeta-bridge-proof-atomic]
-\label{rem:wip-zeta-bridge-proof-atomic}
-The last step is the same-norm atomic comparison:
-the forbidden upper must be Type-I local-square in the same quotient norm
-as the surviving lower bound.
+\begin{remark}[Final bridge observable]
+\label{rem:final-bridge-observable-source-graded}
+The proof-level final comparison is not made with the legacy scalar-discard
+observable \(\Lambda_p^{\mathrm{cert}}\).  It is made with
+\[
+  \Lambda_p^{\mathrm{gr,full}}
+  =
+  (I-P_p^{\mathrm{full}})
+  \mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p}
+\]
+and, for the affine live contradiction, with its orthogonal maximal-affine
+projection \(\widehat\Lambda_{\max,p}\).  This is the same norm in which the
+finite-main Schur complement is positive, the full-vector \(K9\) upper is
+proved, and the affine D4 lower is measured.
 \end{remark}
 
-\begin{definition}[Certified singular-discard observable]
-\label{def:certified-singular-discard-observable}
-On the proof-level certified branch set
-\[
-  \Lambda_{p}^{\mathrm{cert}}
-  :=(I-P_{\mathrm{sing},p}^{\mathrm{cert}})
-    T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}.
-\]
-The corresponding D4 live carrier observable is
-\[
-  K_{\mathrm{D4},p}^{\mathrm{cert}}
-  :=(I-P_{\mathrm{sing},p}^{\mathrm{cert}})
-    T_{\mathrm{tr}\to\mathrm{sing},p}
-    E_{\mathrm{car},p}^{\mathrm{tr}}L_{\mathrm{eff},p}^{\mathrm{tr}}.
-\]
-Both norms below are the Hilbert norms of the same discarded singular
-quotient
-\((I-P_{\mathrm{sing},p}^{\mathrm{cert}})H_{\mathrm{sing},p}\).
-\end{definition}
 
-\begin{theorem}[Affine-graded same-norm Type-I contradiction]
-\label{thm:affine-graded-same-norm-typeI-contradiction}
-Assume the affine-live quotient of
-Definition~\ref{def:affine-live-certified-quotient}, the source-graded
-affine observable of
-Definition~\ref{def:affine-graded-cap-observable}, and the row
-identification
-\[
-  \widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(q''_{\can})
-  =
-  \widehat\Phi_{p,\mathrm{aff}}^Y(v_p)+\mathcal R_p^{\mathrm{id}}
-\]
-on the selected cap core, with
-\(\sum_{p\in C_j}\mu_p\|\mathcal R_p^{\mathrm{id}}\|_{\mathrm{gr}}^2\le Q^{-B_{\mathrm{id}}}\sum_{p\in C_j}\mu_p\|v_p\|^2\).
-Assume the affine-graded lower bound
-\(\sum_{p\in C_j}\mu_p\|\widehat\Phi_{p,\mathrm{aff}}^Y(v_p)\|_{\mathrm{gr}}^2\ge Q^{-A_{\mathrm{low}}}\sum_{p\in C_j}\mu_p\|v_p\|^2\)
-and the same-norm affine upper
-\(\sum_{p\in C_j}\mu_p\|\widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(q''_{\can})\|_{\mathrm{gr}}^2\le Q^{-B_{\mathrm{up}}}\sum_{p\in C_j}\mu_p\|v_p\|^2\).
-If \(B_{\mathrm{id}}\) and \(B_{\mathrm{up}}\) are larger than
-\(A_{\mathrm{low}}\) by a fixed polynomial margin, then no nonzero
-routed cap core satisfying these hypotheses exists.
-\end{theorem}
-
-\begin{proof}
-The row identification and \(\|x+y\|^2\ge\tfrac12\|x\|^2-\|y\|^2\)
-give
-\[
-\sum_{p\in C_j}\mu_p\|\widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(q''_{\can})\|_{\mathrm{gr}}^2
-\ge
-\tfrac12\sum_{p\in C_j}\mu_p\|\widehat\Phi_{p,\mathrm{aff}}^Y(v_p)\|_{\mathrm{gr}}^2
--\sum_{p\in C_j}\mu_p\|\mathcal R_p^{\mathrm{id}}\|_{\mathrm{gr}}^2
-\ge Q^{-A_{\mathrm{low}}-O(1)}\sum_{p\in C_j}\mu_p\|v_p\|^2,
-\]
-provided \(B_{\mathrm{id}}\) is chosen larger than the lower-bound
-losses.  The same-norm upper gives the opposite inequality with
-exponent \(B_{\mathrm{up}}\).  If the routed cap core is nonzero and
-\(B_{\mathrm{up}}>A_{\mathrm{low}}+O(1)\), the two estimates are
-incompatible for sufficiently large \(Q\).
-\end{proof}
-
-\begin{corollary}[Affine-forcing repair closes the static branch with vector \(K9\) completion]
-\label{cor:affine-forcing-repair-closes-static-branch-with-vector-K9}
-On a quantitatively static cap, retain the live odd-\(\eta\eta\)
-arithmetic row as affine forcing rather than quotient-killing it.
-Assume:
-\begin{enumerate}
-\item the affine-live row certificate, so that
-\(\sigma_{\min}(q_{p,\mathrm{aff}}^YE_p)\ge Q^{-C}\);
-\item clean D4 carrier invertibility
-\(\sigma_{\min}(L_{\mathrm{clean},p})\ge Q^{-C}\);
-\item D4 amplitude mass on the selected cap core;
-\item the row identification in the source-graded affine target;
-\item full-vector \(K9\) completion and retained-main-term coherence,
-so that
-Corollary~\ref{cor:same-norm-affine-upper-from-full-vector-completion}
-applies.
-\end{enumerate}
-Then the typed static-line branch gives the affine-graded same-norm
-Type-I contradiction.  In particular, the nonzero primitive arithmetic
-row is no longer a rank-two quotient obstruction; it is a live
-source-grade component of the discarded observable.
-\end{corollary}
-
-\begin{hypothesis}[Certified same-norm Type-I upper]
-\label{hyp:certified-same-norm-typeI-upper}
-\emph{Superseded on the affine-forcing branch by
-Corollary~\ref{cor:same-norm-affine-upper-from-full-vector-completion};
-retained only as a label for the required same-norm upper.}
-For the actual canonical source one has, on the selected routed cap
-family,
-\[
-  \sum_{p\in C_j}\mu_p
-  \bigl\|\Lambda_p^{\mathrm{cert}}(q''_{\mathrm{can}})\bigr\|^2
-  \le
-  Q^{-B_{\mathrm{up}}}
-  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2 .
-\]
-Equivalently, after the EF decomposition
-\(q''_{\mathrm{can}}=F_X+R_X\), the coherent part is retained,
-\(\Lambda_p^{\mathrm{cert}}(F_X)=0\), up to the stated negligible error,
-and the transported residual satisfies
-\[
-  \sum_{p\in C_j}\mu_p
-  \bigl\|\Lambda_p^{\mathrm{cert}}(R_X)\bigr\|^2
-  \le
-  Q^{-B_{\mathrm{up}}}
-  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2 .
-\]
-This is the same-norm form of the targeted
-\(\mathrm{EFCompletion}_{K9}\) or \(\mathrm{EFCompletion}_{Y12}\) upper.
-\end{hypothesis}
-
-\begin{hypothesis}[Certified row identification]
-\label{hyp:certified-row-identification}
-On the same cap core as the lower bound,
-\[
-  \Lambda_p^{\mathrm{cert}}(q''_{\mathrm{can}})
-  =
-  H_p K_{\mathrm{D4},p}^{\mathrm{cert}}\Gamma_p+\mathcal R_{p}^{\mathrm{id}},
-\]
-with
-\[
-  \sum_{p\in C_j}\mu_p\|\mathcal R_{p}^{\mathrm{id}}\|^2
-  \le
-  Q^{-B_{\mathrm{id}}}
-  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2 .
-\]
-\end{hypothesis}
-
-\begin{hypothesis}[Localized certified singular-overlap completion]
-\label{hyp:localized-certified-singular-overlap-completion}
-On every routed cap family used in the final comparison, the EF split
-\(q''_{\mathrm{can}}=F_X+R_X\) satisfies the certified retained-row
-condition
-\[
-  \sum_{p\in C_j}\mu_p
-  \|\Lambda_p^{\mathrm{cert}}(F_X)\|^2
-  \le
-  Q^{-B_F}
-  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2,
-\]
-and the certified transported residual estimate
-\[
-  \sum_{p\in C_j}\mu_p
-  \|\Lambda_p^{\mathrm{cert}}(R_X)\|^2
-  \le
-  Q^{-B_R}
-  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2 .
-\]
-The estimates are in the Hilbert norm of
-\((I-P_{\mathrm{sing},p}^{\mathrm{cert}})H_{\mathrm{sing},p}\), with the
-same packet weights \(\mu_p\) and the same selected cap core as the
-lower bound.
-\end{hypothesis}
-
-\begin{proposition}[Localized completion gives the certified Type-I upper]
-\label{prop:localized-completion-gives-certified-typeI-upper}
-Hypothesis~\ref{hyp:localized-certified-singular-overlap-completion}
-implies Hypothesis~\ref{hyp:certified-same-norm-typeI-upper}, after
-replacing \(B_{\mathrm{up}}\) by \(\min(B_F,B_R)-O(1)\).
-\end{proposition}
-
-\begin{proof}
-By linearity,
-\(\Lambda_p^{\mathrm{cert}}(q''_{\mathrm{can}})=\Lambda_p^{\mathrm{cert}}(F_X)+\Lambda_p^{\mathrm{cert}}(R_X)\).
-Use \(\|a+b\|^2\le2\|a\|^2+2\|b\|^2\), multiply by \(\mu_p\), and sum
-over \(p\in C_j\).  The two displayed estimates give exactly the
-cap-local, weighted, certified-norm Type-I upper.
-\end{proof}
-
-\begin{hypothesis}[Certified D4 row realization]
-\label{hyp:certified-D4-row-realization}
-On the same cap core, the actual canonical row has the certified D4
-expansion
-\[
-  \Lambda_p^{\mathrm{cert}}(q''_{\mathrm{can}})
-  =H_pK_{\mathrm{D4},p}^{\mathrm{cert}}\Gamma_p+
-    \mathcal R_p^{\mathrm{id}},
-\]
-with
-\[
-  \sum_{p\in C_j}\mu_p\|\mathcal R_p^{\mathrm{id}}\|^2
-  \le
-  Q^{-B_{\mathrm{id}}}
-  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2 .
-\]
-Equivalently, the row-normal D4 carrier expansion is not merely a
-formal carrier identity: after applying the same certified
-singular-discard operator used in the upper bound, all non-D4 coherent
-pieces are retained and all transport/residual errors are in the
-displayed small term.
-\end{hypothesis}
-
-\begin{remark}[Remaining final-bridge obligation]
-\label{rem:remaining-certified-final-bridge-obligation}
-The certified cap transversality lower bound, the Wronskian lower
-bound, the Gram-angle lower bound, and the static-line handoff are
-lower-side statements.  They do not prove the forbidden upper for
-actual canonical rows.  The remaining proof-closing obligation is
-precisely the pair of cap-local certified estimates in
-Hypotheses~\ref{hyp:localized-certified-singular-overlap-completion}
-and~\ref{hyp:certified-D4-row-realization}.  These estimates are
-stronger than the older global unweighted
-\(\mathrm{EFCompletion}_{Y12}\) line unless a separate
-localization/sampling theorem transfers that completion to the
-selected cap weights and to the certified discarded singular norm.
-\end{remark}
-
-\begin{theorem}[Certified same-norm atomic contradiction]
+\begin{theorem}[Canonical source-graded atomic contradiction]
 \label{thm:certified-same-norm-atomic-contradiction}
-Assume the certified low-block carrier visibility
-\(\sigma_{\min}(K_{\mathrm{D4},p}^{\mathrm{cert}})\ge Q^{-C_K}\) on the
-selected cap family, the source-weighted D4 amplitude survival
+\label{thm:canonical-source-graded-atomic-contradiction}
+Assume the selected routed cap family is in the canonical source-graded
+\(K9\) branch.  Assume:
+\begin{enumerate}
+\item the finite-main Schur gap
 \[
-  \sum_{p\in C_j}\mu_p |H_p|^2\|\Gamma_p\|^2
+  (E_p^{\mathrm{aff}})^*(I-P_p^{\mathrm{full}})E_p^{\mathrm{aff}}
+  \ge Q^{-C_E}I,
+\]
+as supplied by Corollary~\ref{cor:finite-main-Schur-discharged-by-canonical-lift};
+\item clean carrier invertibility
+\[
+  \sigma_{\min}(L_{\mathrm{clean},p})\ge Q^{-C_L};
+\]
+\item source-weighted D4 amplitude mass
+\[
+  \sum_{p\in C_j}\mu_p|H_p|^2\|v_p\|^2
   \ge
   Q^{-A_H}
-  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2,
+  \sum_{p\in C_j}\mu_p\|v_p\|^2;
 \]
-the certified row identification of
-Hypothesis~\ref{hyp:certified-row-identification}, and the
-certified same-norm Type-I upper of
-Hypothesis~\ref{hyp:certified-same-norm-typeI-upper}.  If
-\(B_{\mathrm{id}}\) is larger than the lower-bound losses and
-\(B_{\mathrm{up}}>A_H+2C_K+O(1)\), then no nonzero routed cap family
-can occur.  Equivalently, the certified cap lower bound and the Type-I
-upper give \(\mathrm{AtomicY12Contradiction}\) in the certified
-singular-discard norm.
+\item maximal affine row realization,
+Theorem~\ref{thm:maximal-affine-row-realization-canonical-branch};
+\item source-graded same-norm Type-I upper,
+Theorem~\ref{thm:source-graded-same-norm-typeI-upper}.
+\end{enumerate}
+If the residual and upper exponents are chosen larger than the lower-bound
+losses, no nonzero routed cap family can occur.  Equivalently, the final
+cap transversality lower bound and the Type-I upper give
+\(\mathrm{AtomicY12Contradiction}\) in the canonical source-graded \(K9\)
+norm.
 \end{theorem}
 
 \begin{proof}
-The certified carrier visibility gives, packetwise,
-\(\|K_{\mathrm{D4},p}^{\mathrm{cert}}\Gamma_p\|\ge Q^{-C_K}\|\Gamma_p\|\).
-Using \(\|x+y\|^2\ge \frac12\|x\|^2-\|y\|^2\) in the row-identification
-formula yields
+Let
+\[
+  z_p=
+  \left(
+    H_pL_{\mathrm{clean},p}v_p,\,
+    (m_{\lambda,p})_{\lambda\in\mathfrak A_{K9,p}}
+  \right).
+\]
+The clean component alone gives
+\[
+  \|z_p\|^2
+  \ge
+  |H_p|^2\|L_{\mathrm{clean},p}v_p\|^2
+  \ge
+  Q^{-2C_L}|H_p|^2\|v_p\|^2 .
+\]
+The finite-main Schur gap gives
+\[
+  \|(I-P_p^{\mathrm{full}})E_p^{\mathrm{aff}}z_p\|_{\mathrm{gr}}^2
+  \ge
+  Q^{-C_E}\|z_p\|^2 .
+\]
+Since \(E_p^{\mathrm{aff}}z_p\) lies in the maximal affine source-grade and
+\(P_p^{\mathrm{full}}\) is source-grade saturated, the maximal-affine
+projection does not reduce this carrier contribution.  Hence
+Theorem~\ref{thm:maximal-affine-row-realization-canonical-branch} and
+\(\|x+y\|^2\ge \tfrac12\|x\|^2-\|y\|^2\) imply
 \[
 \begin{aligned}
-\sum_{p\in C_j}\mu_p
-\bigl\|\Lambda_p^{\mathrm{cert}}(q''_{\mathrm{can}})\bigr\|^2
-&\ge
-\frac12 Q^{-2C_K}
-\sum_{p\in C_j}\mu_p |H_p|^2\|\Gamma_p\|^2
--
-\sum_{p\in C_j}\mu_p\|\mathcal R_{p}^{\mathrm{id}}\|^2  \\
-&\ge
-Q^{-A_{\mathrm{low}}}
-\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2,
+  \sum_{p\in C_j}\mu_p
+  \|\widehat\Lambda_{\max,p}(q''_{\can})\|_{\mathrm{gr}}^2
+  &\ge
+  Q^{-C_E-2C_L-O(1)}
+  \sum_{p\in C_j}\mu_p |H_p|^2\|v_p\|^2       \\
+  &\qquad
+  -\sum_{p\in C_j}\mu_p
+   \|\mathcal R_{p,\max}^{\mathrm{id}}\|_{\mathrm{gr}}^2 .
 \end{aligned}
 \]
-for some polynomial exponent
-\(A_{\mathrm{low}}=A_H+2C_K+O(1)\), after absorbing the identification
-error by choosing \(B_{\mathrm{id}}>A_{\mathrm{low}}+1\).  The
-same-norm Type-I upper gives the opposite inequality
-\(\sum_{p\in C_j}\mu_p\|\Lambda_p^{\mathrm{cert}}(q''_{\mathrm{can}})\|^2\le Q^{-B_{\mathrm{up}}}\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2\).
-If the routed cap is nontrivial, the mass
-\(\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2\) is positive.  For
-\(B_{\mathrm{up}}>A_{\mathrm{low}}\), the upper and lower inequalities
-are incompatible for sufficiently large \(Q\).  All quantities are
-measured in the same Hilbert norm of the certified singular-discard
-quotient, so no projection or norm-change loss is hidden in the
-comparison.
+Choosing \(B_{\mathrm{id}}\) larger than the polynomial lower losses and then
+using D4 amplitude mass gives
+\[
+  \sum_{p\in C_j}\mu_p
+  \|\widehat\Lambda_{\max,p}(q''_{\can})\|_{\mathrm{gr}}^2
+  \ge
+  Q^{-A_{\mathrm{low}}}
+  \sum_{p\in C_j}\mu_p\|v_p\|^2
+\]
+for \(A_{\mathrm{low}}=A_H+C_E+2C_L+O(1)\).  On the other hand,
+Theorem~\ref{thm:source-graded-same-norm-typeI-upper} and orthogonal
+projection give
+\[
+  \sum_{p\in C_j}\mu_p
+  \|\widehat\Lambda_{\max,p}(q''_{\can})\|_{\mathrm{gr}}^2
+  \le
+  Q^{-B_{\mathrm{up}}}
+  \sum_{p\in C_j}\mu_p\|v_p\|^2 .
+\]
+For a nonzero routed cap the mass on the right is positive.  Taking
+\(B_{\mathrm{up}}>A_{\mathrm{low}}\) gives a contradiction for sufficiently
+large \(Q\).
 \end{proof}
 
-\begin{remark}[Status of the final bridge]
+\begin{corollary}[Static-line branch in the canonical source-graded norm]
+\label{cor:static-line-branch-canonical-source-graded-norm}
+On a quantitatively static cap, take \(v_p=u_j\) to be the normalized static
+line direction.  Under the same canonical source-graded inputs as
+Theorem~\ref{thm:canonical-source-graded-atomic-contradiction}, the static-line
+branch also gives \(\mathrm{AtomicY12Contradiction}\).  No scalar wall-escape
+condition for \(H_pL_{\mathrm{clean},p}u_j+m_{\eta,p}\) is required, because
+the clean D4 component and every affine forcing component live in orthogonal
+source grades.
+\end{corollary}
+
+\begin{proof}
+The proof of Theorem~\ref{thm:canonical-source-graded-atomic-contradiction}
+uses only the clean component \(H_pL_{\mathrm{clean},p}v_p\) for the lower
+bound.  With \(v_p=u_j\), clean carrier invertibility and D4 amplitude mass
+give the same lower estimate.  The same-norm upper is unchanged.
+\end{proof}
+
+\begin{remark}[Final bridge status in the canonical branch]
 \label{rem:final-bridge-status-after-certified-closure}
-The lower half of the final bridge is closed in the certified branch:
-the literal \((q_p^YN_p,q_p^YY_p)\) bridge remains impossible because
-\(N_p\) is a killed nuisance column, but the retained \(C_7/Y12\)
-bridge gives the Jacobian, Wronskian, angle, and static-line lower
-bounds in the certified quotient.  The only missing theorem for
-\(\mathrm{AtomicY12Contradiction}\) is
-Hypothesis~\ref{hyp:certified-same-norm-typeI-upper} together
-with the row identification
-Hypothesis~\ref{hyp:certified-row-identification}.  These are
-not formal consequences of rank-two quotient survival, low-block
-coercivity, or D4 amplitude mass; they are targeted EF/singular-overlap
-upper estimates for actual canonical rows in the same certified
-discarded norm.
+The literal pair \((q_p^YN_p,q_p^YY_p)\) remains a no-go because \(N_p\) is a
+killed nuisance column.  The proof-level bridge is the retained affine
+\(C_7/Y12\) carrier in the canonical source-graded \(K9\) norm.  In that
+branch the Jacobian/Wronskian/angle lower bound, the finite-main Schur gap,
+the maximal affine row realization, and the Type-I upper are all in the same
+source-graded Hilbert norm.  Therefore the same-norm atomic compatibility
+obstruction is closed in the canonical source-graded branch.  Scalar
+\(Y12\)-completion or scalar \(I\)-coordinate collapse is not a substitute for
+this branch.
 \end{remark}
 
 
@@ -58797,12 +58624,12 @@ The proof-level branch uses \(R_{\mathrm{sing}}^{\mathrm{cert}}\) and
 
 
 
-\begin{remark}[Active input status table]
+\begin{remark}[Downstream status after source-graded final closure]
 \label{rem:active-input-status-table}
-The active inputs are now as follows.
+The downstream status table should be read as follows.
 \[
 \begin{array}{c|c|c}
-\text{module} & \text{current status} & \text{main remaining obligation}\\
+\text{module} & \text{current status} & \text{remaining obligation}\\
 \hline
 \mathrm{Agg}L^2(q''_{\can})
 & \text{upstream source theorem}
@@ -58811,33 +58638,32 @@ The active inputs are now as follows.
 & \text{proved from Fej\'er--Riesz anti-lock}
 & \text{verify packet model/off-block hypotheses}\\
 Y12\text{-certified quotient}
-& \text{proved}
-& \text{use }q_{p,\mathrm{cert}}^Y\text{, not a raw nuisance quotient}\\
+& \text{proved in the certified branch}
+& \text{use the live/dead certified quotient, not a raw nuisance quotient}\\
 \delta_{\mathrm{coerc}}
-& \text{proved in certified singular quotient}
-& \text{use }P_{\mathrm{sing}}^{\mathrm{cert}}\text{ and same-norm EF upper}\\
+& \text{proved in the canonical source-graded branch}
+& \text{use }P_p^{\mathrm{full}}\text{ and the }K9\text{ labelled norm}\\
 L_{\mathrm{eff},p}\text{ carrier}
 & \text{proved by }\mathfrak C_{2Y}(p)
 & \text{maintain effective-carrier determinant/triangular certificate}\\
 D4\text{ amplitude mass}
 & \text{proved downstream of Gate--1/Gate--2}
 & \text{source-factor residual control and quadrature}\\
-\text{full-vector }\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}
-& \text{proved on ordinary routed blocks from smooth AFE tail}
-& \text{do not use scalar }Y12\text{ completion for affine-forcing branch}\\
+\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}
+& \text{proved on ordinary routed blocks from the smooth AFE tail}
+& \text{do not replace by scalar }Y12\text{ completion}\\
 \delta_{\mathrm{ext}}\text{ / static line}
-& \text{active finite item}
+& \text{routing item}
 & \text{cap extraction covariance or typed static-line handoff}\\
 \mathrm{AtomicY12Contradiction}
-& \text{active final bridge}
-& \text{Type-I local-square upper in the same certified quotient norm.}
+& \text{proved in the canonical source-graded }K9\text{ branch}
+& \text{ensure the routed cap enters this branch.}
 \end{array}
 \]
-The decisive downstream rank question is no longer whether
-\(T_{\mathrm{tr}\to\mathrm{sing}}\operatorname{span}\{[\mathsf C_7]^{\mathrm{tr}},[\mathsf C_{Y12}]^{\mathrm{tr}}\}\)
-is swallowed by an arbitrary \(R_{\mathrm{sing}}\).  That raw possibility is
-excluded by construction.  The active question is whether the actual-row upper
-and the atomic lower are expressed in the same certified singular-discard norm.
+Thus the same-norm final bridge is no longer an active obstruction in the
+canonical source-graded branch.  Remaining global obligations, if any, are
+upstream source/routing obligations or branch-entry obligations, not a failure
+of the final atomic compatibility comparison.
 \end{remark}
 
 
