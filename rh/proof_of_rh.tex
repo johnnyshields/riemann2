@@ -54386,7 +54386,7 @@ This is the tail estimate for the smooth finite AFE decomposition
 \[
 q''_{\can}=F_X+R_X.
 \]
-After Hypothesis~\ref{hyp:completed-source-anchor} and
+After Theorem~\ref{hyp:completed-source-anchor} and
 Theorem~\ref{thm:smooth-finite-AFE-package}, it is no longer an independent
 Dirichlet-polynomial hypothesis: the theorem gives, for every fixed derivative
 order \(J\) and every \(A>0\),
@@ -55081,22 +55081,24 @@ Corollary~\ref{cor:boundary-collar-exclusion}.
 
 \begin{theorem}[Finite-AFE derivative budget on raw packets]
 \label{thm:packet-construction-regularity}
-Assume Theorem~\ref{thm:smooth-finite-AFE-package}.  Let
+Assume Theorem~\ref{thm:smooth-finite-AFE-package}.  Let \(F_X(t)\) be the
+differential Hardy finite-AFE main term \(F_X^{\curv}(t)\),
 \[
 \begin{aligned}
 F_X(t)
-&=
-\sum_{n\ge1} a_n n^{-1/2-it}V_1(n/X)
-+
-\sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX;\tfrac12+it)
-+P_{\mathrm{res},X}(t)
+&=\sum_{0\le r+k\le 3}\sum_{n\ge1}
+  c_{r,k}^{+}(t)(\log n)^r n^{-1/2-it}V_{1,r,k}(n/X;t) \\
+&\quad+
+\sum_{0\le r+k\le 3}\sum_{n\ge1}
+  c_{r,k}^{-}(t)(\log n)^r n^{-1/2+it}V_{2,r,k}(nX;t)
++P_{\mathrm{res},X}^{\curv}(t),
 \end{aligned}
 \]
-be the finite-AFE main term, with all nonzero contour residues included in
-\(P_{\mathrm{res},X}\).  Assume the source truncation range, residue term, dual
-AFE weights, and reference weight are polynomially controlled in the
-\(Q\)-scale used in the source section.  Then for each raw Whitney packet core
-\(K_p\) and each fixed integer \(j\ge0\),
+with all nonzero contour residues collected in \(P_{\mathrm{res},X}^{\curv}\).
+Assume the source truncation range, residue term, dual AFE weights, and
+reference weight are polynomially controlled in the \(Q\)-scale used in the
+source section.  Then for each raw Whitney packet core \(K_p\) and each fixed
+integer \(j\ge0\),
 \[
 D_{p,j}
 :=
@@ -55116,32 +55118,32 @@ family.
 \end{theorem}
 
 \begin{proof}
-Differentiating the first AFE sum inserts the factor \((-i\log n)^j\).  The
-\(t\)-derivatives of the dual sum give a finite Leibniz expansion whose terms
-are products of \((i\log n)^r\), \(0\le r\le j\), and derivatives of
-\(V_2(nX;\tfrac12+it)\).  The smooth AFE package gives polynomial bounds for
-those dual-weight derivatives on the retained source window.  The residue term
-\(P_{\mathrm{res},X}\) has polynomially controlled derivatives by
-Theorem~\ref{thm:smooth-finite-AFE-package}.
+Differentiating each summand inserts factors \((-i\log n)^j\) (from the first
+sum) or \((i\log n)^j\) (from the second), together with finite Leibniz
+contributions from \(t\)-derivatives of the smooth amplitudes
+\(c_{r,k}^{\pm}(t)\) and weights \(V_{1,r,k}(n/X;t)\), \(V_{2,r,k}(nX;t)\).
+Theorem~\ref{thm:smooth-finite-AFE-package} gives polynomial bounds for these
+amplitudes and weight derivatives on the retained source window.  The residue
+term \(P_{\mathrm{res},X}^{\curv}\) has polynomially controlled derivatives by
+the same theorem.
 
 The smooth cutoffs restrict both Dirichlet sums to polynomially controlled
 effective ranges, up to rapidly decaying tails.  On those ranges,
 \[
-|\log n|^j\le Q^{C_j}.
+|\log n|^{r+j}\le Q^{C_{r,j}},
+\qquad 0\le r\le 3.
 \]
-Using the coefficient convention
-\(a_n,\widetilde a_n\ll_\varepsilon n^\varepsilon\), the critical-line
-oscillatory coefficients satisfy
+Combined with \((\log n)^r n^{-1/2}\ll_{r,\varepsilon}n^{-1/2+\varepsilon}\)
+and the polynomial vertical-strip bounds
+\(|c_{r,k}^{\pm}(t)|\le Q^{C}\), the differentiated terms satisfy
 \[
-|a_n|n^{-1/2}|\log n|^j
-+
-|\widetilde a_n|n^{-1/2}|\log n|^j
-\le Q^{C_j}n^{-1/2+\varepsilon}
+|c_{r,k}^{\pm}(t)|n^{-1/2}|\log n|^{r+j}
+\le Q^{C_{r,j}}n^{-1/2+\varepsilon}
 \]
 on the effective supports.  Since the number and length of the effective
 summation ranges are polynomial in \(Q\), and since the derivatives of
-\(V_2\) and \(P_{\mathrm{res},X}\) are polynomially controlled, this gives the
-pointwise bound
+\(V_{1,r,k}\), \(V_{2,r,k}\) and \(P_{\mathrm{res},X}^{\curv}\) are
+polynomially controlled, this gives the pointwise bound
 \[
 \sup_{t\in\Omega}|\partial_t^jF_X(t)|\le Q^{C_j}.
 \]
@@ -55185,8 +55187,11 @@ derivative budget \(D_{p,j}\le Q^{C_j}\) from the residue-aware smooth AFE
 package and polynomial source-window control.  On mass-good packets this gives
 a polynomial relative budget.  This is not the false
 \((\log X)^{2j}\)-relative estimate.  The word ``relative'' here always means
-``after mass-goodness,'' and the theorem remains conditional on the
-completed-source anchor and the smooth AFE package that produce \(F_X\).
+``after mass-goodness.''  In the active Hardy-curvature branch, the
+completed-source anchor is closed by Theorem~\ref{hyp:completed-source-anchor}
+and the smooth AFE package by Theorem~\ref{thm:smooth-finite-AFE-package};
+the theorem above therefore inherits its inputs from those two source-side
+theorems.  A different source branch must provide its own trace/AFE package.
 \end{remark}
 
 \begin{remark}[Scale-normalized oscillatory-kernel bound]
@@ -56361,10 +56366,13 @@ sense:
 \]
 The packet derivative budget is absolute, with only a mass-good polynomial
 relative consequence; no unqualified \((\log X)^{2j}\)-relative estimate is
-used.  The source layer remains conditional on the completed-source anchor and
-on the decision to use the canonical branch-complete window as the proof-level
-Gate--1 observation window.  If the reference window moves with \(Q\), it also
-remains conditional on a uniform polynomial reference-noncollapse theorem.
+used.  In the active Hardy-curvature branch the completed-source anchor is
+closed by Theorem~\ref{hyp:completed-source-anchor}; a different source branch
+must provide its own trace/AFE package.  The source layer is otherwise
+conditional only on the decision to use the canonical branch-complete window
+as the proof-level Gate--1 observation window.  If the reference window moves
+with \(Q\), it also remains conditional on a uniform polynomial
+reference-noncollapse theorem.
 \end{remark}
 
 \begin{remark}[Failure labels]
