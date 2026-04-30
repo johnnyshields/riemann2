@@ -30544,116 +30544,83 @@ local argument; it is routed to the singular/transition branch, or else a
 regularized phase convention must be used.
 \end{definition}
 
-\begin{lemma}[Ordinary zero-separated source-complexity transfer]
+\begin{lemma}[Ordinary Hardy-branch source-complexity transfer]
 \label{lem:ordinary-zero-separated-source-complexity-transfer}
-Assume \(I^\ast\) is ordinary zero-separated.  Assume also that the canonical
-source curvature is the full completed meromorphic curvature
+Let \(I^\ast\) be an ordinary Hardy source strip with a fixed analytic branch of
+\(B_{\mathrm H}=\chi^{-1/2}\).  Assume the strip is source-admissible, so that
+Stirling bounds for the gamma quotient and the standard polynomial vertical-strip
+bounds for \(\zeta\) and its derivatives hold through the derivative order used
+below.  Let
 \[
-u=q''_{\can}=\mathfrak C_2[\Xi]\left(\frac12+im\right),
+  u_H(t)=\partial_t^3Z_{\mathrm H}(t),
+  \qquad \mathcal D_p=\lambda_p\partial_t,
+  \qquad u_{H,p}^{\mathrm{norm}}=\lambda_p^3u_H.
 \]
-where \(\mathfrak C_2\) is a fixed finite expression in the completed
-logarithmic derivative
+On every scale-admissible packet contained in \(I^\ast\),
 \[
-L(s)=\frac{\Xi'}{\Xi}(s)
+  \|u_{H,p}^{\mathrm{norm}}\|_{L^\infty(I^\ast)}
+  +\|\mathcal D_pu_{H,p}^{\mathrm{norm}}\|_{L^\infty(I^\ast)}
+  \le Q^C.
 \]
-and finitely many derivatives \(L^{(r)}(s)\), together with regular
-gamma/background terms and no denominators other than those implicit in
-\(L=\Xi'/\Xi\).
-Assume moreover the standard local zero-count estimate for the completed
-scalar:
+Equivalently, in physical coordinates on a packet interval \(I\subset I^\ast\),
 \[
-\#\{\rho\in\mathcal Z_\Xi: |s-\rho|\le R_0\}
-\le Q^C(1+R_0)
-\]
-through the polynomial range of \(R_0\) used below.
-Then
-\[
-\boxed{
-\|u\|_{L^\infty(I^\ast)}
-+
-\|\mathcal D u\|_{L^\infty(I^\ast)}
-\le Q^C.
-}
-\]
-Equivalently, on \(I\subset I^\ast\),
-\[
-\boxed{
-\|u\|_{L^\infty(I)}+|I|\,\|u'\|_{L^\infty(I)}\le Q^C.
-}
+  \|u_H\|_{L^\infty(I)}+|I|\|u_H'\|_{L^\infty(I)}\le Q^C.
 \]
 \end{lemma}
 
 \begin{proof}
-For fixed \(r\), the completed logarithmic derivative has the local
-partial-fraction form
+The source is
 \[
-L^{(r)}(s)
-=
-(-1)^r r!\sum_\rho\frac1{(s-\rho)^{r+1}}
-+
-\mathcal G_r(s),
+  u_H(t)=-i(\Phi_{\mathrm H}^{\#})^{(3)}(1/2+it),
+  \qquad \Phi_{\mathrm H}^{\#}(s)=B_{\mathrm H}(s)\zeta(s).
 \]
-where \(\mathcal G_r\) denotes the regular gamma/background contribution.  Set
+A fixed number of further packet derivatives produces a finite linear
+combination of terms
 \[
-\delta=\lambda Q^{-C_0}.
+  B_{\mathrm H}^{(a)}(s)\zeta^{(b)}(s),
+  \qquad a+b\le C_0,
 \]
-On the ordinary tube, \(|s-\rho|\ge\delta\).  Split zeros into dyadic annuli
+with \(C_0\) fixed by the proof.  On ordinary Hardy source strips, Stirling's
+formula gives polynomial bounds for the derivatives of \(B_{\mathrm H}\), and
+standard vertical-strip estimates give polynomial bounds for the corresponding
+\(\zeta^{(b)}\).  Hence
 \[
-A_\nu=\{\rho:2^\nu\delta\le |s-\rho|\le2^{\nu+1}\delta\}.
+  \|u_H\|_{L^\infty(I^\ast)}+\|\partial_tu_H\|_{L^\infty(I^\ast)}\le Q^C.
 \]
-The local zero-count estimate gives
-\[
-\# A_\nu\le Q^C(1+2^\nu\delta).
-\]
-Hence
-\[
-\sum_{\rho\in A_\nu}|s-\rho|^{-(r+1)}
-\le
-Q^C(1+2^\nu\delta)(2^\nu\delta)^{-(r+1)}.
-\]
-Summing over \(\nu\), the first annuli dominate:
-\[
-\sum_\rho |s-\rho|^{-(r+1)}
-\le Q^C\delta^{-(r+1)}
-\le Q^{C_r}.
-\]
-Thus every fixed \(L^{(r)}\) entering \(\mathfrak C_2[\Xi]\) is polynomially
-bounded on the tube.  Since \(u=\mathfrak C_2[\Xi]\) has fixed finite
-complexity,
-\[
-\|u\|_{L^\infty(I^\ast)}\le Q^C.
-\]
-Applying \(\mathcal D=\lambda\partial_m\) only raises the completed
-log-derivative order by one and multiplies by \(\lambda\le1\), so
-\[
-\|\mathcal D u\|_{L^\infty(I^\ast)}\le Q^C.
-\]
-The physical-coordinate estimate follows from \(\mathcal D=\lambda\partial_m\)
-and \(|I|\asymp\lambda\).
+Multiplication by \(\lambda_p^3\) and by one additional normalized derivative
+\(\mathcal D_p=\lambda_p\partial_t\) costs only a polynomial factor on
+scale-admissible packets.  Since \(|I|\asymp\lambda_p\) on such packets, the
+physical-coordinate form follows.
 \end{proof}
 
-\begin{remark}[Canonical and denominator guardrails for Gate--2]
+\begin{remark}[Hardy denominator and residue guardrails for Gate--2]
 \label{rem:canonical-denominator-guardrails-gate-two}
-For Gate~2 the inclusive canonical convention is
+For Gate--2 in the active branch, the inclusive canonical convention is
 \[
-q''_{\can}=B_2+P_2+D_2+E_2=\mathfrak C_2[\Xi].
+  q''_{\can}=B_2^H+P_2^H+D_2^H+E_2^H=u_H
 \]
-Thus \(E_2\) is part of the exact canonical object and no separate
-\(E_2\)-smallness is needed for the minimal \(u,\mathcal D u\) transfer.  If
-instead \(E_2\) is used as a perturbative truncation error, the minimal Gate--2
-transfer requires
+in physical coordinates, and
 \[
-\|E_2\|_\infty+\|\mathcal D E_2\|_\infty\le Q^{-A_E}.
+  q''_{\can,p}=\lambda_p^3u_H
 \]
-The canonical curvature \(q''_{\can}\) may contain \(\Xi'/\Xi\), fixed
-completed-log-derivative derivatives, and regular gamma/background terms.  It
-must not contain denominators such as
+in normalized packet coordinates.  The term \(E_2^H\) is part of the exact
+Hardy-differential source decomposition unless explicitly declared to be a
+residual; if it is used perturbatively, then its physical and normalized
+packet derivatives must satisfy the stated residual ledger.
+
+The Hardy source may contain gamma/theta amplitude derivatives, log-power
+Dirichlet coefficients, and residue terms from the differentiated AFE.  These
+are part of \(B_2^H,P_2^H,D_2^H,E_2^H\).  Denominators such as
 \[
-1/q,\qquad 1/u,\qquad 1/\Gamma_G,\qquad
-1/\Gamma_{G,2},\qquad 1/|\Gamma|.
+1/q,
+\qquad 1/u,
+\qquad 1/\Gamma_G,
+\qquad 1/\Gamma_{G,2},
+\qquad 1/|\Gamma|
 \]
-Those denominators, if present, belong to later row-projection or quotient
-algebra, not to the canonical source curvature used in Gate~2.
+do not belong to the canonical source curvature.  If such denominators appear,
+they belong to row-projection, carrier, or quotient algebra and must be guarded
+there.
 \end{remark}
 
 \begin{lemma}[Real-canonical Gate--2 compatibility]
@@ -55063,6 +55030,143 @@ only the resulting finite AFE, polynomial coefficient/derivative bounds, and
 source mass in the canonical branch.
 \end{remark}
 
+\begin{definition}[Active Hardy source API]
+\label{def:active-hardy-source-api}
+In the active proof branch, the physical actual-zeta source is
+\[
+  u_H(t):=\partial_t^3 Z_{\mathrm H}(t)
+  =\mathcal Z_{\curv}\!\left(\frac12+it\right),
+\]
+where
+\[
+  Z_{\mathrm H}(t)=B_{\mathrm H}\!\left(\frac12+it\right)
+  \zeta\!\left(\frac12+it\right),
+  \qquad B_{\mathrm H}(s)=\chi(s)^{-1/2}.
+\]
+On a packet with normalized derivative
+\[
+  \mathcal D_p=\lambda_p\partial_t,
+\]
+the packet-normalized source row is
+\[
+  u_{H,p}^{\mathrm{norm}}(t):=\mathcal D_p^3 Z_{\mathrm H}(t)=\lambda_p^3u_H(t).
+\]
+Thus a single global function \(\mathcal Z_{\curv}(1/2+it)\) represents the
+physical source \(u_H\), while packet-normalized rows carry the explicit factor
+\(\lambda_p^3\).  All Gate--1 Grams, packet rows, and downstream source rows in
+this branch use this convention.
+
+The finite AFE decomposition in this branch is
+\[
+  u_H(t)=F_X^{H,3}(t)+R_X^{H,3}(t),
+\]
+where \(F_X^{H,3}\) is the differentiated Hardy AFE main term of
+Theorem~\ref{thm:smooth-finite-AFE-package}.  The packet-normalized finite AFE is
+\[
+  u_{H,p}^{\mathrm{norm}}(t)=\lambda_p^3F_X^{H,3}(t)+\lambda_p^3R_X^{H,3}(t).
+\]
+When no confusion is possible, we write
+\[
+  q''_{\can}=u_H,\qquad F_X=F_X^{H,3},\qquad R_X=R_X^{H,3}
+\]
+in physical coordinates, and insert the factor \(\lambda_p^3\) whenever the
+normalized packet derivative \(\mathcal D_p\) is used.
+\end{definition}
+
+\begin{definition}[Hardy-differential source pieces]
+\label{def:hardy-differential-source-pieces}
+The source pieces appearing in the finite survival chain are the
+Hardy-differential pieces
+\[
+  B_2^H,\qquad P_2^H,\qquad D_2^H,
+  \qquad E_2^H,
+\]
+defined by decomposing the differentiated Hardy AFE main term and residual as
+\[
+  q''_{\can}=u_H=B_2^H+P_2^H+D_2^H+E_2^H.
+\]
+Here each term includes the relevant derivatives of \(B_{\mathrm H}(s)\),
+log-power coefficients \((\log n)^r\), differentiated cutoffs, and all residue
+terms produced by the contour shift.  In the active Hardy branch, unsuperscripted
+symbols
+\[
+  B_2,\\ P_2,
+  \\ D_2,
+  \\ E_2,
+  \\ F_X
+\]
+mean these Hardy-differential objects unless an older archived source model is
+explicitly named.  The old ordinary fixed-coefficient source pieces are not used
+in the proof branch leading to Gate--1.
+\end{definition}
+
+\begin{lemma}[Hardy source and Gate--2 derivative compatibility]
+\label{lem:hardy-source-gate-two-derivative-compatibility}
+In the active Hardy branch let
+\[
+  \Phi_\zeta(t)=Z_{\mathrm H}(t),
+  \qquad q_p:=\mathcal D_p\Phi_\zeta(t).
+\]
+Then
+\[
+  \mathcal D_p^2q_p=\mathcal D_p^3\Phi_\zeta(t)
+  =\lambda_p^3u_H(t).
+\]
+Consequently, in the normalized packet convention,
+\[
+  q''=q''_{\can,p}=u_{H,p}^{\mathrm{norm}}.
+\]
+The Gate--2 anisotropy identities remain exact:
+\[
+  \Gamma_G=q''-6q+2q^3,
+\]
+and
+\[
+  \Gamma_{G,2}=2q(q')^2-\frac16\Gamma_G'',
+\]
+where primes denote the same normalized derivative \(\mathcal D_p\).
+\end{lemma}
+
+\begin{proof}
+The first identity is the definition of \(q_p\) and the fact that
+\(\mathcal D_p=\lambda_p\partial_t\) is constant on the packet.  Thus
+\[
+  \mathcal D_p^2q_p=\mathcal D_p^3Z_{\mathrm H}
+  =\lambda_p^3\partial_t^3Z_{\mathrm H}
+  =\lambda_p^3u_H.
+\]
+The formula for \(\Gamma_G\) is the definition of the first Gate--2 anisotropy.
+The displayed form of \(\Gamma_{G,2}\) follows from
+Lemma~\ref{lem:differentiated-form-second-gate-two-anisotropy}, with every
+prime interpreted as \(\mathcal D_p\).  No physical-coordinate derivative is
+mixed into these identities.
+\end{proof}
+
+\begin{remark}[Downstream source API after the Hardy repair]
+\label{rem:downstream-source-api-after-hardy-repair}
+The Hardy-normalized differential-source repair is not a drop-in proof of the
+old fixed-coefficient package.  It replaces the source API.  Downstream modules
+must receive
+\[
+  u_H,\qquad \lambda_p^3u_H,
+  \qquad F_X^{H,3},\qquad R_X^{H,3},
+\]
+not the old ordinary Dirichlet source with a distinguished coefficient
+\(a_1=1\).  In particular:
+\begin{enumerate}
+\item every occurrence of \(B_2,P_2,D_2,E_2\) in the source layer means the
+      Hardy-differential piece of Definition~\ref{def:hardy-differential-source-pieces};
+\item packet-normalized source Grams and packet rows carry \(\lambda_p^3\);
+\item the Gate--2 identities use the normalized derivative convention of
+      Lemma~\ref{lem:hardy-source-gate-two-derivative-compatibility};
+\item the old \(a_1=1\) noncollapse proof is replaced by
+      Lemma~\ref{lem:main-term-noncollapse} and the mass-good packet selection.
+\end{enumerate}
+A branch using \(\xi\), a logarithmic phase, or a different real completed scalar
+must provide its own trace, residue-aware AFE, source mass theorem, and Gate--2
+compatibility audit.
+\end{remark}
+
 \begin{remark}[Provenance of reference mean-square noncollapse]
 \label{rem:reference-meansquare-noncollapse-provenance}
 For a fixed reference weight, reference noncollapse is no longer a
@@ -55550,6 +55654,34 @@ weighted derivative integral is controlled on mass-good packets by
 Theorem~\ref{thm:packet-construction-regularity}; the absolute envelope above
 is the form used for collar exclusion.
 \end{proof}
+
+\begin{remark}[Hardy form of the packet-scale AFE envelope]
+\label{rem:hardy-form-packet-scale-AFE-envelope}
+In Lemma~\ref{lem:packet-scale-AFE-envelope}, the displayed proof line using
+\[
+  F_X(t)=\sum a_n n^{-1/2-it}V_1(n/X)
+  +\sum \widetilde a_n n^{-1/2+it}V_2(nX)+P_{\mathrm{res},X}(t)
+\]
+should be read in the active branch as the Hardy-differential finite AFE
+\[
+\begin{aligned}
+F_X(t)=F_X^{H,3}(t)
+&=\sum_{0\le r+k\le3}\sum_{n\ge1}
+  c_{r,k}^{+}(t)(\log n)^r n^{-1/2-it}V_{1,r,k}(n/X;t)\\
+&\quad+\sum_{0\le r+k\le3}\sum_{n\ge1}
+  c_{r,k}^{-}(t)(\log n)^r n^{-1/2+it}V_{2,r,k}(nX;t)
+  +P_{\mathrm{res},X}^{\curv}(t).
+\end{aligned}
+\]
+The conclusion of the lemma is unchanged.  Indeed, the smooth cutoffs restrict
+the sums to polynomially controlled effective ranges, the log powers satisfy
+\((\log n)^r\ll_{r,\varepsilon}n^\varepsilon\), and the Hardy amplitude
+coefficients \(c_{r,k}^{\pm}(t)\) and their fixed-order derivatives are
+polynomially bounded on ordinary source strips by Theorem~\ref{thm:smooth-finite-AFE-package}.
+Thus the same absolute envelope proof applies to \(F_X^{H,3}\).  The old
+fixed-coefficient display is archived notation only and should not be used as a
+source-side input in the active branch.
+\end{remark}
 
 \begin{lemma}[Two-sided packet-window mass]
 \label{lem:packet-middle-third-mass}
@@ -56456,7 +56588,8 @@ reference-whitened coordinates to the original finite source space.
 \label{thm:source-survival-from-three-inputs}
 Assume:
 \begin{enumerate}
-\item the completed-source anchor, Hypothesis~\ref{hyp:completed-source-anchor};
+\item the actual Hardy source anchor and differential AFE package,
+Theorems~\ref{hyp:completed-source-anchor} and~\ref{thm:smooth-finite-AFE-package};
 \item the windowed packet construction regularity of
 Theorem~\ref{thm:unconditional-packet-regularity}, including reference-regular
 resonant blocks;
@@ -56527,8 +56660,10 @@ active branch by the actual Hardy-curvature source package.
 
 \begin{corollary}[Gate--1 source survival in the canonical branch]
 \label{cor:gate-one-source-survival}
-Assume the completed-source anchor, the windowed packet construction regularity
-of Theorem~\ref{thm:unconditional-packet-regularity}, and the canonical
+Assume the actual Hardy source anchor and differential AFE package,
+Theorems~\ref{hyp:completed-source-anchor} and~\ref{thm:smooth-finite-AFE-package};
+the windowed packet construction regularity of
+Theorem~\ref{thm:unconditional-packet-regularity}; and the canonical
 branch-complete source window of Definition~\ref{hyp:packet-core-micro-covering}.
 Then Theorem~\ref{thm:source-survival-from-three-inputs} gives
 \[
@@ -59073,17 +59208,20 @@ In the final status tables, the following wording should be used.
 \text{module} & \text{canonical-branch status} & \text{caveat}\\
 \hline
 \delta_{\mathrm{src}} &
-\text{closed by actual Hardy source mass and }W_{\mathrm{branch}}^{\mathrm{can}} &
-\text{requires canonical Hardy branch and mass-good packets}\\
+\text{closed by the Hardy source mass theorem and }W_{\mathrm{branch}}^{\mathrm{can}} &
+\text{requires ordinary Hardy branch, mass-good packets, and }\lambda_p^3\text{ normalization}\\
 \delta_{\mathrm{graph}} &
 \text{closed by pre-extraction Fej\'er--Riesz charge anti-lock} &
-\text{requires canonical multiplier/anti-lock theorem}\\
+\text{requires canonical multiplier/anti-lock theorem and no early caps}\\
 \text{raw }2Y\text{ row/routing} &
 \text{closed by exhaustive maximal labelled live/dead routing} &
 \text{otherwise legacy }\mathfrak B_{2Y,p}\text{ remains}\\
-\text{completed source} &
+\text{actual source anchor} &
 \text{closed in the active Hardy-curvature branch} &
-\text{different source choices require their own package}
+\text{different source choices require their own trace/AFE/mass package}\\
+\text{Gate--2 source compatibility} &
+\text{closed by Lemma~\ref{lem:hardy-source-gate-two-derivative-compatibility}} &
+\text{all Gate--2 primes use the same normalized derivative }\mathcal D_p
 \end{array}
 \]
 Thus the canonical construction rules and the Hardy-curvature source repair
@@ -59091,18 +59229,41 @@ together close source/O2O3/raw-\(2Y\) construction gaps in the canonical branch;
 a different source or routing choice requires its own audit.
 \end{remark}
 
-\begin{remark}[Referee-safe status of the construction-rule closures]
+\begin{remark}[Referee-safe status of the canonical construction rules]
 \label{rem:referee-safe-status-construction-rule-closures}
-Rules~1--2 are now theorem-level only in the canonical construction branch.
-Rule~1 closes branch/reference block domination because the branch window is
-constructed as \(W_{\mathrm{branch}}^{\mathrm{can}}\) and satisfies the pointwise
-lower bound against \(W_{\mathrm{ref}}\).  Rule~2 closes bounded-degree
-Fej\'er--Riesz model membership because the O2/O3 Stack weight is chosen before
-capped extraction inside the Fej\'er--Riesz charge algebra.  Neither rule is a
-retrofit theorem for arbitrary older branch or Stack weights.  Neither rule
-proves the completed-source anchor, and neither rule proves the raw
-\(2Y\) row/routing certificate unless that certificate is separately verified or
-imported.
+Rules~1--2 are theorem-level only in the canonical construction branch.  Rule~1
+closes branch/reference block domination because the branch window is constructed
+as \(W_{\mathrm{branch}}^{\mathrm{can}}\) and satisfies the pointwise lower bound
+against \(W_{\mathrm{ref}}\).  Rule~2 closes bounded-degree Fej\'er--Riesz model
+membership because the O2/O3 Stack weight is chosen before capped extraction
+inside the Fej\'er--Riesz charge algebra.  Neither rule is a retrofit theorem
+for arbitrary older branch or Stack weights.
+
+The completed-source anchor is not proved by Rules~1--2; it is proved in the
+active branch by the separate Hardy source theorem,
+Theorem~\ref{hyp:completed-source-anchor}, after replacing the old
+fixed-coefficient source package by the Hardy differential package.  Likewise,
+raw \(2Y\) row/routing is not proved by Rules~1--2; it is proved only in the
+canonical maximal-labelled branch, where every live \(C_7/Y12\) row label is
+retained or residual-routed before the dead quotient is formed.
+\end{remark}
+
+\begin{remark}[Hardy source and the RH-entry reduction]
+\label{rem:hardy-source-rh-entry-reduction}
+The Hardy source repair ties the source layer to the actual zeta function, rather
+than to an abstract completed-source model.  It does not by itself replace the
+separate global entry theorem which starts the finite-survival architecture from
+a hypothetical RH counterexample.  The proof branch using
+\(\Phi_\zeta=Z_{\mathrm H}\) must cite or prove the implication
+\[
+  \text{RH counterexample}
+  \Longrightarrow
+  \text{ordinary Hardy-normalized source branch satisfying Gate--1/Gate--2 entry hypotheses}.
+\]
+Once this branch-entry theorem is invoked, all source estimates downstream use
+\(u_H=\partial_t^3Z_{\mathrm H}\) and its packet-normalized form
+\(\lambda_p^3u_H\).  A different initial scalar or phase requires a separate
+entry and source-package audit.
 \end{remark}
 
 \section{Certified downstream status after the canonical source-graded closure}
