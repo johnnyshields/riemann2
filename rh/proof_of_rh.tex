@@ -39016,6 +39016,269 @@ used after retaining the \(\eta\eta\) row must be
 projection \(\widehat\Lambda_{\mathrm{aff}}\).
 \end{remark}
 
+\begin{lemma}[Direct-sum form of certified low-block coercivity]
+\label{lem:direct-sum-certified-low-block-coercivity}
+Let \(H_p\) be a Hilbert space, let \(R_p\subset H_p\) be a closed
+finite-dimensional retained space, and let
+\[
+  A_p:\mathbb C^2\longrightarrow H_p
+\]
+be a two-carrier map.  Put \(q_p:=I-P_{R_p}\).  If
+\[
+  \sigma_{\min}(q_pA_p)\ge Q^{-C},
+\]
+then the source-graded direct-sum map
+\[
+  \widehat A_p:\mathbb C^2\oplus\mathbb C^2\longrightarrow H_p\oplus H_p,
+  \qquad
+  \widehat A_p(a,b):=(q_pA_pa,q_pA_pb),
+\]
+satisfies
+\[
+  \sigma_{\min}(\widehat A_p)\ge Q^{-C}
+\]
+with respect to the orthogonal direct-sum norm.
+\end{lemma}
+
+\begin{proof}
+For \((a,b)\in\mathbb C^2\oplus\mathbb C^2\),
+\[
+  \|\widehat A_p(a,b)\|^2
+  =\|q_pA_pa\|^2+\|q_pA_pb\|^2
+  \ge Q^{-2C}(\|a\|^2+\|b\|^2).
+\]
+Taking the infimum over unit \((a,b)\) gives the claim.
+\end{proof}
+
+\begin{definition}[Certified full-main retained space]
+\label{def:certified-full-main-retained-space}
+Let
+\[
+  \mathcal F_{X,p}^{\mathrm{sing}}:=
+  \operatorname{span}\{T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(B_2),
+  T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(P_{2,\le X}),
+  T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(D_{2,\le X})\}.
+\]
+In the proof-level branch this finite-main singular space is admitted
+into the retained space only through its certified row-dead part.  More
+precisely, if
+\[
+  L_{\mathrm{sing},p}:=L_p^{\mathrm{row}}\Theta_{2Y,p}
+\]
+is the singular two-row lift, write
+\[
+  h^{\mathrm{dead}}:=h-E_{\mathrm{sing},p}^{2Y}(C_{\mathrm{sing},p}^{2Y})^{-1}L_{\mathrm{sing},p}h,
+  \qquad h\in\mathcal F_{X,p}^{\mathrm{sing}},
+\]
+where
+\(C_{\mathrm{sing},p}^{2Y}:=L_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y}\).
+Define
+\[
+  \mathcal F_{X,p}^{\mathrm{dead}}:=\operatorname{span}\{h^{\mathrm{dead}}:h\in\mathcal F_{X,p}^{\mathrm{sing}}\}
+\]
+and
+\[
+  R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}:=R_{\mathrm{sing},p}^{\mathrm{cert}}+\mathcal F_{X,p}^{\mathrm{dead}},
+  \qquad
+  P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}:=P_{R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}}.
+\]
+Thus only row-dead finite-main generators are retained.  Any nonzero
+live signature \(L_{\mathrm{sing},p}h\) is not hidden in the retained
+space; it is routed into the certified live/affine coordinates, exactly
+as for other coherent live rows.
+\end{definition}
+
+\begin{lemma}[Adding row-dead finite-main generators preserves the two-carrier Schur gap]
+\label{lem:row-dead-full-main-preserves-schur-gap}
+Assume the singular row lift theorem gives
+\[
+  \|L_{\mathrm{sing},p}\|_{\mathrm{op}}\le Q^A,
+  \qquad
+  L_{\mathrm{sing},p}R_{\mathrm{sing},p}^{\mathrm{cert}}=0,
+  \qquad
+  \sigma_{\min}(L_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y})\ge Q^{-A}.
+\]
+Then
+\[
+  L_{\mathrm{sing},p}R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}=0
+\]
+and
+\[
+  \sigma_{\min}\!\left((I-P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}})E_{\mathrm{sing},p}^{2Y}\right)
+  \ge Q^{-A'}.
+\]
+\end{lemma}
+
+\begin{proof}
+By construction, \(L_{\mathrm{sing},p}h^{\mathrm{dead}}=0\) for every
+\(h\in\mathcal F_{X,p}^{\mathrm{sing}}\), and the original certified
+retained space is also killed by \(L_{\mathrm{sing},p}\).  Hence
+\(L_{\mathrm{sing},p}R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}=0\).
+For any \(a\in\mathbb C^2\) and any
+\(r\in R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}\),
+\[
+  \|L_{\mathrm{sing},p}(E_{\mathrm{sing},p}^{2Y}a-r)\|
+  =\|L_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y}a\|
+  \ge Q^{-A}\|a\|.
+\]
+Since \(\|L_{\mathrm{sing},p}\|_{\mathrm{op}}\le Q^A\),
+\[
+  \|E_{\mathrm{sing},p}^{2Y}a-r\|\ge Q^{-A'}\|a\|.
+\]
+Taking the infimum over
+\(r\in R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}\) gives
+\[
+  \|(I-P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}})E_{\mathrm{sing},p}^{2Y}a\|
+  =\operatorname{dist}(E_{\mathrm{sing},p}^{2Y}a,R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}})
+  \ge Q^{-A'}\|a\|.
+\]
+This is the claimed Schur gap.
+\end{proof}
+
+\begin{definition}[Affine full-main carrier map]
+\label{def:affine-full-main-carrier-map}
+In the source-graded affine branch define
+\[
+  \mathcal E_{p}^{\mathrm{aff}}:\mathbb C^2\oplus\mathbb C^2
+  \longrightarrow
+  H_{\mathrm{sing},p}\oplus H_{\mathrm{sing},p},
+  \qquad
+  \mathcal E_p^{\mathrm{aff}}(a,b):=(E_{\mathrm{sing},p}^{2Y}a,E_{\mathrm{sing},p}^{2Y}b).
+\]
+The first copy is the clean D4 \(C_7/Y12\) carrier channel and the
+second copy is the retained odd-\(\eta\eta\) affine-forcing channel.
+The retained space in the graded target is
+\[
+  \widehat R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}
+  :=R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}\oplus R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}},
+  \qquad
+  \widehat P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}:=P_{\widehat R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}}.
+\]
+\end{definition}
+
+\begin{theorem}[Affine full-main Schur gap from certified \(\delta_{\mathrm{coerc}}\)]
+\label{thm:affine-full-main-schur-gap-from-delta-coerc}
+Assume the certified singular row lift and low-block coercivity theorem
+hold for \(E_{\mathrm{sing},p}^{2Y}\) and
+\(R_{\mathrm{sing},p}^{\mathrm{cert}}\).  Form the certified full-main
+retained space \(R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}\) as
+in Definition~\ref{def:certified-full-main-retained-space}.  Then the
+source-graded affine carrier map satisfies
+\[
+  \sigma_{\min}\!\left(
+    (I-\widehat P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}})\mathcal E_p^{\mathrm{aff}}
+  \right)
+  \ge Q^{-A}.
+\]
+Equivalently,
+\[
+  (\mathcal E_p^{\mathrm{aff}})^*(I-\widehat P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}})\mathcal E_p^{\mathrm{aff}}
+  \ge Q^{-A}I_4
+\]
+up to a harmless change of the exponent.
+\end{theorem}
+
+\begin{proof}
+Lemma~\ref{lem:row-dead-full-main-preserves-schur-gap} gives
+\[
+  \sigma_{\min}\!\left((I-P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}})E_{\mathrm{sing},p}^{2Y}\right)
+  \ge Q^{-A_1}.
+\]
+Apply Lemma~\ref{lem:direct-sum-certified-low-block-coercivity} with
+\(A_p=E_{\mathrm{sing},p}^{2Y}\) and
+\(R_p=R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}\).  The
+direct-sum map is exactly
+\((I-\widehat P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}})\mathcal E_p^{\mathrm{aff}}\).
+Hence its smallest singular value is at least \(Q^{-A_1}\).  The Gram
+form follows by squaring the singular-value inequality.
+\end{proof}
+
+\begin{proposition}[Main-term row-deadness is necessary for full-main retention]
+\label{prop:main-term-row-deadness-necessary-full-main-retention}
+Let \(h\in\mathcal F_{X,p}^{\mathrm{sing}}\).  If the full vector \(h\)
+is retained in \(R_{\mathrm{sing},p}^{\mathrm{full}}\) and its live row
+signature \(L_{\mathrm{sing},p}h\ne0\), then the projected carrier Schur
+gap fails for the enlarged retained space unless the corresponding live
+direction is removed from the affine carrier map.  Thus, in the active
+branch, finite-main generators may be retained only after replacing them
+by their row-dead parts.
+\end{proposition}
+
+\begin{proof}
+Write
+\[
+  h=h^{\mathrm{dead}}+E_{\mathrm{sing},p}^{2Y}a,
+  \qquad
+  a=(C_{\mathrm{sing},p}^{2Y})^{-1}L_{\mathrm{sing},p}h.
+\]
+If \(L_{\mathrm{sing},p}h\ne0\), then \(a\ne0\).  If the full \(h\) and
+the dead part \(h^{\mathrm{dead}}\) both lie in the retained space, then
+\(E_{\mathrm{sing},p}^{2Y}a=h-h^{\mathrm{dead}}\) lies in the retained
+space.  Hence
+\((I-P_{R_{\mathrm{sing},p}^{\mathrm{full}}})E_{\mathrm{sing},p}^{2Y}a=0\),
+so the carrier projection has a nontrivial kernel.  This is incompatible
+with a polynomial Schur gap on the full live carrier plane.
+\end{proof}
+
+\begin{corollary}[Certified same-norm upper with full-main dead retention]
+\label{cor:certified-same-norm-upper-full-main-dead-retention}
+Assume the certified full-main retained space is used, and that the
+finite AFE main term is retained in the row-dead sense:
+\[
+  T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(F_X)\in R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}
+  \quad\text{up to a }Q^{-B_F}\text{-small residual in the same norm.}
+\]
+Assume also \(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\).  Then the
+actual canonical source satisfies the same-norm affine upper
+\[
+  \sum_{p\in C_j}\mu_p
+  \bigl\|
+  (I-\widehat P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}})
+  \mathcal T_{\mathrm{aff},p}J_{\mathrm{tr},p}(q''_{\can})
+  \bigr\|_{\mathrm{gr}}^2
+  \le Q^{-B_{\mathrm{up}}}
+  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2,
+\]
+where \(\mathcal T_{\mathrm{aff},p}\) denotes the source-graded affine
+component of the certified transition--singular row, and
+\(B_{\mathrm{up}}\) is the minimum of the main-term and residual
+completion exponents up to polynomial loss.
+\end{corollary}
+
+\begin{proof}
+Use \(q''_{\can}=F_X+R_X\) and linearity.  The finite-main part is
+killed by
+\(I-\widehat P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}\) up to
+the stated residual.  The remainder part is controlled by
+\(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\), since the affine-graded
+row is an orthogonal projection of the full-vector certified \(K9\)
+discarded row.  Summing the two estimates with
+\(\|x+y\|^2\le2\|x\|^2+2\|y\|^2\) gives the claim.
+\end{proof}
+
+\begin{remark}[What certified \(\delta_{\mathrm{coerc}}\) does and does not close]
+\label{rem:delta-coerc-affine-full-main-scope}
+The certified low-block coercivity theorem closes the affine full-main
+Schur gap once all finite-main retained generators are first replaced by
+their row-dead parts.  This is the precise sense in which the
+\(\delta_{\mathrm{coerc}}\) theorem supplies the missing affine
+transversality input.  It does not, by itself, prove the local
+row-realization identity
+\[
+  (I-\widehat P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}})T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(q''_{\can})
+  =
+  (I-\widehat P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}})\mathcal E_p^{\mathrm{aff}}
+  \binom{H_pL_{\mathrm{clean},p}v_p}{m_{\eta,p}}
+  +O(Q^{-B}).
+\]
+That identity is the remaining finite row-table statement: every
+non-D4, non-\(\eta\eta\) source-graded component must be either
+row-dead/retained or placed in the residual ledger.  Thus
+\(\delta_{\mathrm{coerc}}\) closes the Schur-gap side of the affine
+repair, while the row-identification formula remains the final
+same-norm row-realization check.
+\end{remark}
+
 \begin{lemma}[Full-vector \(K9\) completion implies affine-graded completion]
 \label{lem:full-vector-K9-implies-affine-graded-completion}
 Assume \(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\).  Then
