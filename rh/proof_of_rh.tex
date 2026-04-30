@@ -54666,6 +54666,43 @@ branch therefore uses the Hardy-normalized scalar
 \(B_{\mathrm H}(s)\zeta(s)\) and its third critical-line derivative.
 \end{remark}
 
+\begin{remark}[Why the Hardy-normalized source is the active source]
+\label{rem:why-hardy-normalized-source-active}
+The choice
+\[
+  \Phi_{\mathrm H}^{\#}(s)=\chi(s)^{-1/2}\zeta(s),
+  \qquad
+  q''_{\can}(t)=\partial_t^3\Phi_{\mathrm H}^{\#}\!\left(\tfrac12+it\right),
+\]
+is a source-level normalization, not a cosmetic rewrite.  It is selected because it
+simultaneously satisfies the three requirements used by the finite-survival chain.
+First, its critical-line trace is an actual zeta object: with a fixed Hardy branch,
+\(Z_{\mathrm H}(t)=\Phi_{\mathrm H}^{\#}(1/2+it)\) is real on ordinary source strips and
+\[
+  \partial_t^3 Z_{\mathrm H}(t)=\mathcal Z_{\curv}\!\left(\tfrac12+it\right),
+  \qquad
+  \mathcal Z_{\curv}(s)=-i(\Phi_{\mathrm H}^{\#})^{(3)}(s).
+\]
+Second, the source admits a smooth finite AFE after replacing the old
+fixed-coefficient Dirichlet package by a finite differential Hardy package: the
+main terms have log-power coefficients and gamma/theta amplitude derivatives, and
+the residual satisfies the differentiated AFE tail estimates used in the packet
+layer.  Third, Hardy normalization avoids the critical-line gamma-decay problem of
+using \(\xi(s)\) directly while avoiding the poles, principal values, and zero-residue
+bookkeeping forced by logarithmic-phase sources.  Thus the Hardy source is the
+least disruptive actual-zeta source compatible with the existing Gate--1/Gate--2,
+D4, and source-graded \(K9\) architecture.
+
+The tradeoff is explicit.  The old ordinary source package
+\(\mathcal Z(s)=\sum a_n n^{-s}\) with a fixed leading coefficient \(a_1=1\) is
+not used in the active branch.  It is superseded by the Hardy differential AFE and
+by the Hardy-curvature mean-square / mass-good packet selection theorem.  If one
+uses packet-normalized derivatives \(\mathcal D_p=\lambda_p\partial_t\), then the
+packet row is \(\lambda_p^3\mathcal Z_{\curv}(1/2+it)\); this factor is part of the
+source API and must be carried in the corresponding packet Grams and row
+normalizations.
+\end{remark}
+
 \begin{definition}[Canonical actual Hardy-curvature source and Mellin cutoff]
 \label{def:canonical-completed-source}
 In the actual Hardy-curvature branch, the physical source is
