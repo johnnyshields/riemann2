@@ -39149,6 +39149,133 @@ Theorem~\ref{thm:full-vector-K9-EFCompletion-from-AFE-tail} controls
 the residual part in the same source-graded norm.
 \end{proof}
 
+\begin{proposition}[Tail completion alone does not give the certified Type-I upper]
+\label{prop:tail-completion-alone-not-certified-typeI-upper}
+The estimate \(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\) for the
+smooth AFE remainder \(R_X\) does not, by itself, imply the certified
+same-norm Type-I upper for \(q''_{\can}\).  A separate same-norm
+estimate for the finite AFE main term is necessary.
+\end{proposition}
+
+\begin{proof}
+The point is finite-dimensional.  Let the certified discarded space be
+one-dimensional, let \(\widehat\Lambda_{\mathrm{aff}}=\operatorname{id}\),
+and set \(R_X=0\), \(F_X=q''_{\can}=1\).  Then
+\(\|\widehat\Lambda_{\mathrm{aff}}J_{\mathrm{tr}}(R_X)\|=0\), so the
+full-vector tail completion holds with arbitrary strength.  But
+\(\|\widehat\Lambda_{\mathrm{aff}}J_{\mathrm{tr}}(q''_{\can})\|=1\), so
+the certified same-norm Type-I upper fails.  Thus the implication from
+\(R_X\)-completion to the actual-source upper is valid only after
+proving
+\[
+  \sum_{p\in C_j}\mu_p
+  \|\widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(F_X)\|_{\mathrm{gr}}^{2}
+  \le Q^{-B_F}\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2,
+\]
+or an equivalent retained-main-term/coherent-row statement in the same
+certified norm.
+\end{proof}
+
+\begin{definition}[Source-graded singular row-completion property]
+\label{def:source-graded-singular-row-completion-property}
+On a routed cap core \(C_j\), say that the certified affine branch
+satisfies \emph{source-graded singular row completion} if the following
+two estimates hold in the same source-graded discarded norm:
+\[
+  \sum_{p\in C_j}\mu_p
+  \|\widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(F_X)\|_{\mathrm{gr}}^{2}
+  \le Q^{-B_F}\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2,
+\tag{SG1}
+\]
+and
+\[
+  \widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(q''_{\can})
+  =
+  \widehat\Phi_{p,\mathrm{aff}}^{Y}(v_p)+\mathcal R_p^{\mathrm{id}},
+  \qquad
+  \sum_{p\in C_j}\mu_p\|\mathcal R_p^{\mathrm{id}}\|_{\mathrm{gr}}^{2}
+  \le Q^{-B_{\mathrm{id}}}\sum_{p\in C_j}\mu_p\|v_p\|^2 .
+\tag{SG2}
+\]
+Here \(v_p=\Gamma_p\) in the nonstatic branch and \(v_p=u_j\) in the
+static-line branch, with the corresponding normalization of weights.
+The estimate \((\mathrm{SG1})\) is the same-norm finite-AFE main-term
+coherence; \((\mathrm{SG2})\) is the same-norm certified row
+identification.
+\end{definition}
+
+\begin{lemma}[Minimal same-norm upper from row completion and vector EF]
+\label{lem:minimal-upper-from-row-completion-and-vector-EF}
+Assume \(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\) and the
+source-graded singular row-completion property \((\mathrm{SG1})\).
+Then
+\[
+  \sum_{p\in C_j}\mu_p
+  \|\widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(q''_{\can})\|_{\mathrm{gr}}^{2}
+  \le Q^{-B_{\mathrm{up}}}\sum_{p\in C_j}\mu_p\|\Gamma_p\|^2,
+\]
+with \(B_{\mathrm{up}}=\min(B_F,B_R)-O(1)\), where \(B_R\) is the
+exponent in the cap-local form of
+\(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\).
+\end{lemma}
+
+\begin{proof}
+Use \(q''_{\can}=F_X+R_X\) and linearity:
+\(\widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(q''_{\can})=\widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(F_X)+\widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(R_X)\).
+After squaring, summing with weights \(\mu_p\), and using
+\(\|a+b\|^2\le2\|a\|^2+2\|b\|^2\), the main term is controlled by
+\((\mathrm{SG1})\) and the residual by
+Lemma~\ref{lem:full-vector-K9-implies-affine-graded-completion} and
+Theorem~\ref{thm:full-vector-K9-EFCompletion-from-AFE-tail}.
+\end{proof}
+
+\begin{theorem}[Affine-graded closure from source-graded row completion]
+\label{thm:affine-graded-closure-from-source-graded-row-completion}
+Assume the affine-live quotient preserves the retained two-plane,
+\(\sigma_{\min}(q_{p,\mathrm{aff}}^{Y}E_p)\ge Q^{-C_E}\), the clean
+carrier is invertible \(\sigma_{\min}(L_{\mathrm{clean},p})\ge Q^{-C_L}\),
+and the D4 amplitude mass estimate holds on the selected cap core.
+Assume also \(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\) and the
+source-graded singular row-completion property
+\((\mathrm{SG1})\)--\((\mathrm{SG2})\).  Then no nonzero static routed
+cap core exists in the affine-graded branch.
+\end{theorem}
+
+\begin{proof}
+Proposition~\ref{prop:static-line-lower-affine-graded-norm} gives the
+source-graded lower bound for
+\(\widehat\Phi_{p,\mathrm{aff}}^{Y}(v_p)\).  The row identification
+\((\mathrm{SG2})\) transfers this lower bound to
+\(\widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(q''_{\can})\), up
+to a negligible error, by
+\(\|x+y\|^2\ge\frac12\|x\|^2-\|y\|^2\).
+Lemma~\ref{lem:minimal-upper-from-row-completion-and-vector-EF} gives
+the same-norm upper.  Taking the upper exponent larger than the lower
+exponent contradicts positive cap mass.
+\end{proof}
+
+\begin{remark}[The remaining proof-closing theorem]
+\label{rem:remaining-proof-closing-theorem-after-affine-repair}
+\emph{Status: FINITE AUDIT.}  After retaining the odd-\(\eta\eta\) row
+as source-graded affine forcing, the primitive arithmetic coefficient
+is no longer a quotient-rank obstruction.  The remaining proof-closing
+issue is exactly the source-graded singular row-completion property of
+Definition~\ref{def:source-graded-singular-row-completion-property}.
+The smooth AFE tail proves only the \(R_X\)-part.  It does not prove
+\((\mathrm{SG1})\), and rank-two quotient survival does not prove
+\((\mathrm{SG2})\).  Thus any final ledger should replace a vague
+``EFCompletion closes the upper'' statement by the pair:
+\[
+\boxed{\text{finite-AFE main term is small/retained in the same affine-graded norm}}
+\]
+and
+\[
+\boxed{\text{certified row identification in that same norm}.}
+\]
+Without these two same-norm statements the affine-forcing repair is a
+local rank repair, not a complete Type-I contradiction.
+\end{remark}
+
 \begin{remark}[\(\mathrm{EFCompletion}_{L^2}\) does not automatically imply
 \(\mathrm{EFCompletion}_{K9}\)]
 \label{rem:EFCompletion-L2-not-K9}
