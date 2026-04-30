@@ -39464,6 +39464,20 @@ source-graded norm sees \(\|x\|^2+\|y\|^2\).  Consequently a primitive-only
 source-graded full-vector \(K9\) completion used below.
 \end{remark}
 
+\begin{remark}[Projection notation in the active affine branch]
+\label{rem:projection-notation-active-affine-branch}
+In the active branch the old symbol
+\(\Pi_{\mathrm{aff},p}^{\mathrm{gr}}\) is only a compatibility name for
+\(\Pi_{\max,p}^{\mathrm{gr}}\).  All same-norm upper/lower estimates are made
+with the maximal source-graded affine projection
+\[
+  \Pi_{\max,p}^{\mathrm{gr}}:
+  H_{K9,p}^{\mathrm{gr}}\to\widehat{\mathcal H}_{p}^{Y,\max}.
+\]
+This prevents accidental reversion to the earlier two-summand affine target or
+to a scalar-collapsed primitive \(Y12\) projection.
+\end{remark}
+
 \begin{lemma}[Finite source-graded direct-sum amplification of certified coercivity]
 \label{lem:direct-sum-certified-low-block-coercivity}
 Let \(A_p:\mathbb C^2\to H_p\) and \(q_p:=I-P_{R_p}\).  Suppose
@@ -43113,17 +43127,21 @@ rerouted out of the exact quotient.
 
 \begin{remark}[Current status of the row/routing certificate]
 \label{rem:current-status-row-routing-certificate-R2Y}
-\emph{Status: FINITE AUDIT.}  The present draft proves the linear
-algebra from the coefficient certificate to rank-two quotient survival.
-It does not yet compute all entries of \(\mathfrak B_{2Y,p}\) from raw
-formulas.  In particular, the theorems labelled ``septic exact
-sequence'', ``whitening exact sequence'', and ``no atom-fitting'' still
-contain the exact coefficient assumptions
+\emph{Status: raw coefficient audit unless imported as a theorem.}  The present
+draft proves the finite-dimensional implication from the coefficient
+certificate \(\mathfrak R_{2Y}(p)\) to rank-two certified quotient survival.
+It also proves that the nonzero odd-\(\eta\eta\) / Bottleneck--C row is handled
+by live affine routing in the canonical source-graded branch.  What this remark
+tracks is narrower: the actual coefficient verification of the live detecting
+rows and dead/coherent/residual routing.  In particular, the theorems labelled
+``septic exact sequence'', ``whitening exact sequence'', and ``no
+atom-fitting'' still contain the coefficient assumptions
 \((\mathrm{SE1})\)--\((\mathrm{SE2})\),
-\((\mathrm{W1})\)--\((\mathrm{W2})\), and the three no-atom-fitting
-guardrails.  Thus, until those assumptions are verified from the actual
-finite row formulas on the selected packets, the rank-two \(Y12\)
-row/routing certificate remains a finite audit item.
+\((\mathrm{W1})\)--\((\mathrm{W2})\), and the no-atom-fitting guardrails,
+unless those assumptions are proved in the relevant preceding subsection.  Thus
+\(\mathfrak R_{2Y}(p)\) is the remaining raw row/routing audit item; it is not
+an additional finite-main Schur, D4 amplitude, effective-carrier, or same-norm
+atomic-comparison gap.
 \end{remark}
 
 \begin{remark}[Consistency of the certified branch with the row/routing audit]
@@ -58568,7 +58586,7 @@ B_2,\qquad DB_2,\qquad D^2B_2
 in the scale-normalized \(H^2\)-ledger.
 \end{remark}
 
-\section{Conditional status after the downstream closure repairs}
+\section{Certified downstream status after the canonical source-graded closure}
 \label{sec:final-status-after-downstream-closure-repairs}
 
 \begin{remark}[Current architecture ledger after canonical downstream closure]
@@ -58609,21 +58627,21 @@ coefficient certificate recorded in their own sections.
 \begin{remark}[Updated downstream module ledger after canonical closure]
 \label{rem:updated-downstream-module-ledger-after-D4-amplitude-repair}
 After the certified quotient/coercivity/effective-carrier repairs, the
-actual-source D4 amplitude repair, and the canonical source-graded
-\(K9\) same-norm repair, the downstream status table is:
+actual-source D4 amplitude repair, and the canonical source-graded \(K9\)
+same-norm repair, the downstream status table is:
 \[
 \begin{array}{c|c|c}
 \text{module} & \text{status in the certified branch} & \text{remaining obligation}\\
 \hline
 Y12\text{-quotient/rank-two carrier survival}
-& \text{proved on packets satisfying }\mathfrak R_{2Y}(p)
-& \text{raw row/routing coefficient verification, if not already imported}\\
+& \text{proved once }\mathfrak R_{2Y}(p)\text{ is verified or imported}
+& \text{raw row/routing coefficient verification}\\
 Y12\text{-graph/coercivity}
 & \text{proved on the certified low block}
 & \text{use the certified retained space}\\
 \text{row-normal effective }D4\text{ carrier}
-& \text{proved by the effective-carrier certificate}
-& \text{maintain coefficient-good routing}\\
+& \text{proved by the carrier-quotient/effective-carrier certificate}
+& \text{remain in the carrier-quotient branch}\\
 D4\text{ amplitude mass}
 & \text{discharged downstream of Gate--1/Gate--2}
 & \text{source-factor residual control and cap quadrature}\\
@@ -58631,16 +58649,19 @@ D4\text{ amplitude mass}
 & \text{closed by the canonical source-graded }K9\text{ lift}
 & \text{no scalar-collapse substitution}\\
 \text{extraction covariance/static line}
-& \text{closed as a positive-density fork}
-& B_j^{\mathrm{cov}}\text{, not signed }\sum w_p\Gamma_p\Gamma_p^*\\
+& \text{closed as a positive-density nonstatic/static fork}
+& B_j^{\mathrm{cov}}\text{, not a signed covariance}\\
 \text{same-norm atomic comparison}
-& \text{available in the source-graded norm}
-& \text{upper and lower must use the same certified quotient norm.}
+& \text{proved in the canonical source-graded norm}
+& \text{upper and lower must use }\Lambda_p^{\mathrm{gr,full}}
 \end{array}
 \]
 The entries marked closed are statements in the certified dead/live,
 source-graded branch.  They are not statements about raw quotients, raw
-singular projections, or scalar-collapsed \(Y12\)-only norms.
+singular projections, or scalar-collapsed \(Y12\)-only norms.  The only
+remaining downstream coefficient issue is the raw verification of
+\(\mathfrak R_{2Y}(p)\), unless that verification has been imported elsewhere
+in the draft.
 \end{remark}
 
 \begin{remark}[Structural takeaways from the cap/\(Y12\) repairs]
@@ -58806,6 +58827,32 @@ obstruction is closed in the canonical source-graded branch.  Scalar
 this branch.
 \end{remark}
 
+\begin{remark}[Holistic consistency after the canonical \(K9\) closure]
+\label{rem:holistic-consistency-after-canonical-K9-closure}
+The canonical source-graded insertion closes the finite-main/affine-forcing
+same-norm obstruction in the certified branch.  The closure rests on four
+specific facts:
+\begin{enumerate}
+\item \(\mathcal L_{K9,p}^{\mathrm{gr}}\) is a fixed linear labelled lift before
+scalar collapse and is independent of the decomposition
+\(q''_{\can}=F_X+R_X\).
+\item finite-main labels lie in \(H_{p,\mathrm{main}}\), affine live labels lie in
+\(H_{p,\mathrm{aff}}\), and these labelled subspaces are orthogonal.
+\item the maximal affine target contains every live affine \(K9\) source-grade
+label, including the odd-\(\eta\eta\) / Bottleneck--C forcing row.
+\item the upper and lower are both measured with
+\(\Lambda_p^{\mathrm{gr,full}}\) or its orthogonal maximal-affine projection;
+no scalar \(I\)-coordinate or primitive-only \(Y12\) collapse occurs before the
+contradiction.
+\end{enumerate}
+Consequently, older phrases such as ``finite-main Schur obstruction'',
+``affine-forcing same-norm obstruction'', and ``tail-only completion problem''
+are legacy warnings for noncanonical or scalar-collapsed routes.  They are not
+active gaps in the canonical branch.  The still-active downstream audit, if not
+already discharged elsewhere, is the raw row/routing coefficient certificate
+\(\mathfrak R_{2Y}(p)\) that constructs the certified live/dead quotient rows.
+\end{remark}
+
 
 \begin{remark}[No-go registry]
 \label{rem:no-go-registry-unified}
@@ -58843,13 +58890,13 @@ The downstream status table should be read as follows.
 & \text{verify packet model/off-block hypotheses}\\
 Y12\text{-certified quotient}
 & \text{proved on packets satisfying }\mathfrak R_{2Y}(p)
-& \text{raw row/routing coefficient verification or explicit import}\\
+& \text{do not substitute a raw nuisance quotient}\\
 \delta_{\mathrm{coerc}}
 & \text{proved in the canonical source-graded branch}
 & \text{use }P_p^{\mathrm{full}}\text{ and the }K9\text{ labelled norm}\\
 L_{\mathrm{eff},p}\text{ carrier}
-& \text{proved by }\mathfrak C_{2Y}(p)
-& \text{maintain effective-carrier determinant/triangular certificate}\\
+& \text{proved by the carrier-quotient/effective-carrier certificate}
+& \text{do not absorb affine }\eta\eta\text{ forcing into the six-row table}\\
 D4\text{ amplitude mass}
 & \text{proved downstream of Gate--1/Gate--2}
 & \text{source-factor residual control and quadrature}\\
@@ -58858,7 +58905,7 @@ D4\text{ amplitude mass}
 & \text{do not replace by scalar }Y12\text{ completion}\\
 \delta_{\mathrm{ext}}\text{ / static line}
 & \text{closed as a positive-density fork}
-& B_j^{\mathrm{cov}}\text{ and the canonical source-graded static handoff; no signed covariance}\\
+& \text{use }B_j^{\mathrm{cov}}\text{ and the typed static-line branch}\\
 \mathrm{AtomicY12Contradiction}
 & \text{proved in the canonical source-graded }K9\text{ branch}
 & \text{ensure the routed cap enters this branch.}
@@ -58866,8 +58913,9 @@ D4\text{ amplitude mass}
 \]
 Thus the same-norm final bridge is no longer an active obstruction in the
 canonical source-graded branch.  Remaining global obligations, if any, are
-upstream source/routing obligations or branch-entry obligations, not a failure
-of the final atomic compatibility comparison.
+upstream source/routing obligations, packet-model obligations, or the raw
+row/routing coefficient certificate \(\mathfrak R_{2Y}(p)\), not a failure of
+the final atomic compatibility comparison.
 \end{remark}
 
 
