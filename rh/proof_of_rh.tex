@@ -59149,12 +59149,138 @@ bounded-degree Fej\'er--Riesz charge algebra,
   d\nu_{\mathrm{FR},B}=|\Phi_B(z)|^2\,d\theta\,d\sigma_B,
   \qquad \deg\Phi_B=O(R).
 \]
-These choices close the completed-source anchor for the active Hardy branch,
-the branch-hole obstruction, and the Fej\'er--Riesz model-membership
-obstruction.  They do not assert anything about archived noncanonical branch
+The Hardy source theorem closes the completed-source anchor in the active Hardy
+branch.  The canonical branch-complete window closes the branch-hole obstruction,
+and the pre-extraction Fej\'er--Riesz Stack closes the bounded-degree
+model-membership obstruction.  The two construction rules themselves do not
+prove the source anchor; that role is played by the Hardy-curvature source
+package.  These choices do not assert anything about archived noncanonical branch
 weights, scalar-collapsed Stack weights, or alternative source choices.  They
 also do not remove the need to stay in the canonical source-graded \(K9\) norm
 for the downstream same-norm comparison.
+\end{remark}
+
+\begin{remark}[Canonical construction discipline]
+\label{rem:canonical-construction-discipline}
+The active proof branch uses canonical choices only in the following no-loss
+sense.  A canonical branch window, Stack weight, packet family, labelled lift,
+or quotient is proof-level only after one proves either polynomial domination
+of the previous object or super-polynomial loss outside the canonical object.
+Downstream arguments must use the same canonical objects and the same Hilbert
+norms.  Archived arbitrary branch weights, post-extraction caps, scalar-collapsed
+observables, and unsplit nuisance quotients are diagnostic only unless separately
+compared to the canonical branch by a polynomial comparison theorem.
+
+Concretely, the active proof branch is not the statement that every possible
+routing choice is harmless.  It is the statement that a hypothetical obstruction
+is first transferred into the canonical branch below, and the contradiction is
+then proved entirely inside that branch.
+\end{remark}
+
+\begin{remark}[Canonical branch dependency ledger]
+\label{rem:canonical-branch-dependency-ledger}
+The order of construction in the active branch is fixed as follows:
+\[
+\text{Hardy source and ordinary source strip}
+\longrightarrow
+\text{raw Whitney packets}
+\longrightarrow
+W_{\mathrm{branch}}^{\mathrm{can}}
+\longrightarrow
+ d\nu_{\mathrm{FR},B}
+\longrightarrow
+\text{cap extraction}
+\longrightarrow
+K9\text{-graded live/dead split}
+\longrightarrow
+\text{dead-only quotient}
+\longrightarrow
+\text{source-graded same-norm comparison}.
+\]
+Thus the source lower bound is proved before cap extraction, the
+Fej\'er--Riesz charge model is imposed before hard caps, the live/dead split is
+performed before forming the exact killed quotient, and the final atomic
+comparison is taken in the same source-graded \(K9\) norm as the lower bound.
+This ordering rules out adaptive definitions in which the quotient, cap, or
+Stack weight is chosen after seeing the live direction to be killed.
+\end{remark}
+
+\begin{remark}[No-loss certificates for the active canonical choices]
+\label{rem:canonical-no-loss-certificate-ledger}
+The canonical choices used later have the following no-loss certificates.
+\[
+\begin{array}{c|c|c}
+\text{canonical choice} & \text{no-loss certificate} & \text{where used}\\
+\hline
+\text{Hardy source }u_H=\partial_t^3Z_{\mathrm H}
+& \text{trace identity, differential AFE, dyadic mass-good selection}
+& \delta_{\mathrm{src}},\ D4\text{ amplitude}\\
+W_{\mathrm{branch}}^{\mathrm{can}}
+& W_{\mathrm{branch}}^{\mathrm{can}}\ge Q^{-C}W_{\mathrm{ref}}
+& G_{\mathrm{branch},B}^{\mathrm{can}}\ge Q^{-C}G_{\mathrm{ref},B}\\
+d\nu_{\mathrm{FR},B}=|\Phi_B|^2d\theta d\sigma_B
+& \deg\Phi_B=O(R)\text{ and polynomial outer/mass control}
+& \mathrm{Graph/O2O3}_{23}\\
+\text{maximal labelled }K9\text{ live/dead split}
+& A_{a,p}^{\mathrm{raw}}=A_{a,p}^{\mathrm{dead}}+E_pL_p^{\mathrm{row}}A_{a,p}^{\mathrm{raw}}
+& \text{rank-two }C_7/Y12\text{ survival}\\
+\text{canonical source-graded }K9\text{ lift}
+& \pi_{\mathrm{coll}}\mathcal L_{K9,p}^{\mathrm{gr}}=T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}
+\text{ and same-norm upper/lower}
+& \mathrm{AtomicY12Contradiction}
+\end{array}
+\]
+If a later proof step uses an object outside this table, it must either identify
+that object with the listed canonical one or supply a separate no-loss theorem.
+\end{remark}
+
+\begin{remark}[Fej\'er--Riesz Stack mass persistence]
+\label{rem:FR-stack-mass-persistence}
+The pre-extraction Fej\'er--Riesz construction is a no-loss construction only
+on the selected good set where the factor \(\Phi_B\) has polynomial coefficient
+bounds and a polynomial outer lower bound.  In particular, model membership
+alone is not enough: if \(|\Phi_B|^2\) were allowed to vanish on the active
+packet family, the anti-lock theorem would be applied to a measure that has
+already discarded the obstruction.  All O2/O3 masses in the active branch are
+therefore measured with \(d\nu_{\mathrm{FR},B}\) from
+Definition~\ref{def:pre-extraction-FR-stack-weight}, and any older Stack
+measure must be polynomially compared to it before it can be used in a proof.
+\end{remark}
+
+\begin{remark}[Same-norm invariant]
+\label{rem:canonical-same-norm-invariant}
+Every lower bound used in the final contradiction is measured in the same
+canonical source-graded \(K9\) norm as the upper bound.  More precisely, the
+active upper is the full-vector source-graded discard
+\(\Lambda_p^{\mathrm{gr,full}}\) and its orthogonal maximal-affine projection
+\(\widehat\Lambda_{\max,p}\).  No scalar \(Y12\)-only norm, scalar
+\(I\)-coordinate, or primitive-line functional may replace this norm downstream
+unless a separate polynomial comparison lemma is proved in both directions on
+the selected cap family.  This is the invariant that prevents the affine
+forcing component from being hidden by scalar cancellation.
+\end{remark}
+
+\begin{remark}[Canonical packet-to-corrected-jet transfer discipline]
+\label{rem:canonical-packet-to-corrected-jet-transfer-discipline}
+The draft does not use an unqualified isomorphism between arbitrary packet
+energy and arbitrary corrected-jet energy.  The active branch uses only the
+following named transfers:
+\begin{enumerate}
+\item Gate--1 source energy is transferred by the canonical branch/reference
+      domination theorem
+      \(G_{\mathrm{branch},B}^{\mathrm{can}}\ge Q^{-C}G_{\mathrm{ref},B}\).
+\item Tail errors are transferred to source-graded \(K9\) rows by the polynomial
+      finite-jet upper bound for certified \(K9\) rows.
+\item Lower bounds are transferred only on the retained affine carrier plane,
+      by the certified coercivity / finite-main Schur gap in the canonical
+      source-graded Hilbert space.
+\item Quotient transfer is performed only after exhaustive labelled live/dead
+      splitting, so that the killed quotient contains row-dead remainders and
+      not live \(C_7/Y12\) components.
+\end{enumerate}
+Thus the proof requires no hidden functorial comparison between every analytic
+packet and every finite jet.  If a future argument needs such a comparison, it
+must be stated as a separate Gram-transfer theorem with polynomial constants.
 \end{remark}
 
 \begin{remark}[Boundary-collar route is no longer the Gate--1 proof mechanism]
@@ -59283,8 +59409,8 @@ same-norm repair, the downstream status table is:
 \text{module} & \text{status in the certified branch} & \text{remaining obligation}\\
 \hline
 Y12\text{-quotient/rank-two carrier survival}
-& \text{proved once }\mathfrak R_{2Y}(p)\text{ is verified or imported}
-& \text{raw row/routing coefficient verification}\\
+& \text{proved in the exhaustive maximal-labelled }K9\text{ branch}
+& \text{legacy }\mathfrak B_{2Y,p}\text{ remains diagnostic for noncanonical quotients}\\
 Y12\text{-graph/coercivity}
 & \text{proved on the certified low block}
 & \text{use the certified retained space}\\
@@ -59540,8 +59666,8 @@ branch-entry, or raw row-certificate obligations.
 & \text{proved from Fej\'er--Riesz anti-lock}
 & \text{verify packet model/off-block hypotheses}\\
 Y12\text{-certified quotient and }L_{\mathrm{eff},p}
-& \text{proved conditional on raw }\mathfrak B_{2Y,p}
-& \text{verify all raw row/routing coefficient entries defining }\mathfrak B_{2Y,p}\\
+& \text{proved in the exhaustive maximal-labelled }K9\text{ branch}
+& \text{if a noncanonical raw quotient is used, verify the legacy }\mathfrak B_{2Y,p}\\
 \delta_{\mathrm{coerc}}
 & \text{proved in the canonical source-graded branch}
 & \text{use }P_p^{\mathrm{full}}\text{ and the }K9\text{ labelled norm}\\
