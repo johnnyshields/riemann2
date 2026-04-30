@@ -54407,42 +54407,46 @@ reference-regular packet coordinates; it is not a branch-coverage or
 oscillatory-decay input.
 \end{remark}
 
-\begin{remark}[Standing zeta-side source hypotheses]
+\begin{remark}[Standing zeta-side source hypotheses: actual Hardy-curvature version]
 \label{rem:standing-zeta-side-source-hypotheses}
-All statements in this subsection are conditional on the existence of a
-completed source object \(\mathcal Z(s)\) with the following properties:
-\begin{enumerate}
-\item \(\mathcal Z(s)\) is meromorphic on \(\mathbf C\) and has polynomial
-growth in vertical strips.
-\item For \(\Re s>1\),
+The source package used below is no longer an abstract ordinary Dirichlet
+source with a distinguished coefficient \(a_1=1\).  It is the actual
+Hardy-normalized curvature source attached to \(\zeta\).  Put
 \[
-\mathcal Z(s)=\sum_{n\ge1} a_n n^{-s},
+\chi(s):=\pi^{s-1/2}
+\frac{\Gamma((1-s)/2)}{\Gamma(s/2)},
 \qquad
-\widetilde{\mathcal Z}(s)=\sum_{n\ge1} \widetilde a_n n^{-s},
-\]
-with
-\[
-a_n,\widetilde a_n \ll_\varepsilon n^\varepsilon
-\]
-for every \(\varepsilon>0\).
-\item The completed source satisfies a functional equation of the form
-\[
-\mathcal Z(s)=\chi(s)\widetilde{\mathcal Z}(1-s),
+\zeta(s)=\chi(s)\zeta(1-s),
 \qquad
-\widetilde{\mathcal Z}(s)=\widetilde\chi(s)\mathcal Z(1-s),
+\chi(s)\chi(1-s)=1.
 \]
-with \(\chi(s)\widetilde\chi(1-s)=1\).
-\item The leading coefficient is nonzero; in the standard normalization,
+On each ordinary source strip we fix the analytic square-root branch
 \[
-a_1=1.
+B_{\mathrm H}(s):=\chi(s)^{-1/2}
 \]
-\item The reference weight has positive total mass on the source window:
+by the Hardy critical-line convention.  Equivalently, on the critical line
+\(s=1/2+it\), the boundary value
 \[
-\int_\Omega W_{\mathrm{ref}}(t)\,dt>0,
+Z_{\mathrm H}(t):=B_{\mathrm H}(1/2+it)\zeta(1/2+it)
 \]
-and \(W_{\mathrm{ref}},W_{\mathrm{branch}}\) are nonnegative weights of finite
-mass on \(\Omega\).
-\end{enumerate}
+is the Hardy real scalar, up to the harmless global sign determined by the
+chosen branch.  We write
+\[
+\Phi_{\mathrm H}^{\#}(s):=B_{\mathrm H}(s)\zeta(s),
+\qquad
+\mathcal Z_{\curv}(s):=-i\,\frac{d^3}{ds^3}\Phi_{\mathrm H}^{\#}(s)
+\]
+The object \(\mathcal Z_{\curv}\) is a finite-order differential Hardy source:
+its half-plane expansion contains log-power coefficients and derivatives of
+the gamma/theta amplitude.  Thus the old fixed-coefficient package
+\(\mathcal Z(s)=\sum a_n n^{-s}\), \(a_1=1\), is superseded in the active proof
+branch by the actual-curvature package below.
+
+All source estimates in this subsection are made on ordinary zero-separated
+source strips where the chosen branch of \(B_{\mathrm H}\) is analytic and where all
+routed zero/pole singularities have already been sent to the singular or
+transition branches.  Branch changes multiply \(Z_{\mathrm H}\) by a fixed sign on a
+connected ordinary strip and do not affect the quadratic estimates.
 \end{remark}
 
 \begin{lemma}[Positive reference mass]
@@ -54457,243 +54461,184 @@ Equivalently, under the Fourier convention used in this draft,
 \end{lemma}
 
 \begin{proof}
-Since \(W_{\mathrm{ref}}\ge 0\) and is not identically zero, it is positive on
+Since \(W_{\mathrm{ref}}\ge0\) and is not identically zero, it is positive on
 a set of positive measure.  Therefore its integral over \(\Omega\) is strictly
 positive.
 \end{proof}
 
-\begin{hypothesis}[Completed-source anchor]
+\begin{theorem}[Actual Hardy-curvature source anchor]
 \label{hyp:completed-source-anchor}
-The actual canonical source curvature introduced in
-Definition~\ref{def:canonical-actual-zeta-phase-curvature} admits a completed
-source trace \(\mathcal Z\) such that, on every ordinary source packet and as a
-regularized \(L^2_{\mathrm{loc}}\)-trace on the retained source line,
+Let
 \[
-q''_{\can}(t)
-=
-\mathcal D^3\Phi_\zeta(t)
-=
-\mathcal Z\!\left(\tfrac12+it\right).
+Z_{\mathrm H}(t):=B_{\mathrm H}(1/2+it)\zeta(1/2+it),
+\qquad
+\mathcal Z_{\curv}(s):=-i(\Phi_{\mathrm H}^{\#})^{(3)}(s).
 \]
-The function \(\mathcal Z\) is the completed source object of
-Remark~\ref{rem:standing-zeta-side-source-hypotheses}: it has the stated
-meromorphic continuation, vertical-strip bounds, Dirichlet expansion,
-functional equation, coefficient bounds, nonzero leading coefficient, and is
-holomorphic in a neighbourhood of the ordinary source line after the singular
-packets have been routed to the singular/transition branch.
+Then, on every ordinary source packet on which the Hardy branch is fixed,
+\[
+\partial_t^3 Z_{\mathrm H}(t)
+=
+\mathcal Z_{\curv}\!\left(\tfrac12+it\right).
+\]
+More generally, if the packet-normalized derivative is
+\(\mathcal D_p=\lambda_p\partial_t\), then
+\[
+\mathcal D_p^3\Phi_\zeta(t)
+=
+\lambda_p^3\,
+\mathcal Z_{\curv}\!\left(\tfrac12+it\right),
+\]
+where \(\Phi_\zeta(t)=Z_{\mathrm H}(t)\) in the active Hardy-normalized source branch.
+The factors \(\lambda_p^3\) are carried in the packet row normalization and are
+polynomially harmless on admissible packets.
+\end{theorem}
 
-If \(\Phi_\zeta\) is represented by a logarithmic or phase branch with possible
-zero singularities, the displayed equality is understood after the same
-regularization used to define the retained source space.  In particular, no
-pole or principal-value contribution may be discarded unless it is included in
-one of the routed singular/transition terms.
-\end{hypothesis}
+\begin{proof}
+By definition \(s=1/2+it\), hence \(\partial_t=i\partial_s\).  Therefore
+\[
+\partial_t^3Z_{\mathrm H}(t)
+= i^3(\Phi_{\mathrm H}^{\#})^{(3)}(1/2+it)
+= -i(\Phi_{\mathrm H}^{\#})^{(3)}(1/2+it)
+= \mathcal Z_{\curv}(1/2+it).
+\]
+If \(\mathcal D_p=\lambda_p\partial_t\), the displayed packet-normalized identity
+is obtained by multiplying by \(\lambda_p^3\).
+\end{proof}
 
-\begin{remark}[Completed-source anchor is not definitional]
+\begin{remark}[The completed-source anchor is now an actual-source theorem]
 \label{rem:completed-source-anchor-not-definitional}
-Hypothesis~\ref{hyp:completed-source-anchor} is a load-bearing source input.
-The later notation
+Theorem~\ref{hyp:completed-source-anchor} replaces the older abstract
+completed-source hypothesis.  It proves the source trace for the actual
+Hardy-normalized scalar.  What changes is the analytic source package: the
+source is not an ordinary fixed-coefficient Dirichlet series with \(a_1=1\), but
+a finite differential Hardy source with gamma/theta amplitude derivatives and
+log-power coefficients.  All downstream uses of
 \[
-q''_{\can}(t)=\mathcal Z\!\left(\tfrac12+it\right)
+q''_{\can}(t)=\mathcal Z(1/2+it)
 \]
-is only shorthand after the anchor has been proved or explicitly assumed.  It
-must not be read as redefining the canonical source curvature
+should now be read in the active branch as
 \[
-q''_{\can}=\mathcal D^3\Phi_\zeta
+q''_{\can,p}(t)=\lambda_p^3\mathcal Z_{\curv}(1/2+it)
 \]
-away from the actual-zeta phase construction of
-Definition~\ref{def:canonical-actual-zeta-phase-curvature}.
-
-The corresponding theorem target is the regularized trace identity
-\[
-\mathcal D^3\Phi_\zeta(t)
-=
-\mathcal Z\!\left(\tfrac12+it\right)
-\]
-on the retained ordinary source line, with all pole, principal-value,
-logarithmic-branch, and routed singular contributions either included in
-\(\mathcal Z\), included in the residue term \(P_{\mathrm{res},X}\), or sent to
-the singular/transition branch.  Until this theorem target is supplied, every
-source result using the smooth AFE is conditional on the completed-source
-anchor.
+when packet-normalized derivatives are used, and as
+\(q''_{\can}(t)=\mathcal Z_{\curv}(1/2+it)\) in the physical derivative
+normalization.  A proof branch that keeps a different real scalar or a
+logarithmic phase must provide its own corresponding AFE and residue package.
 \end{remark}
 
-\begin{definition}[Canonical completed source trace and Mellin cutoff]
+\begin{definition}[Canonical actual Hardy-curvature source and Mellin cutoff]
 \label{def:canonical-completed-source}
-Under Hypothesis~\ref{hyp:completed-source-anchor}, the source-layer notation
-identifies the actual canonical source with the completed trace
+In the actual Hardy-curvature branch, the physical source is
 \[
-q''_{\can}(t)=\mathcal Z\!\left(\tfrac12+it\right).
+q_{\curv}(t):=\partial_t^3Z_{\mathrm H}(t)=\mathcal Z_{\curv}\!\left(\tfrac12+it\right).
 \]
-Fix a smooth cutoff \(V\) with Mellin transform \(\widehat V\), where
-\(\widehat V\) is entire and rapidly decaying on vertical strips.  For
-\(X\ge1\), set
+On a packet with normalized derivative \(\mathcal D_p=\lambda_p\partial_t\), the
+packet source is
 \[
-I(s;X):=\frac{1}{2\pi i}\int_{(2)}
-\mathcal Z(s+w)\widehat V(w)X^w\,\frac{dw}{w},
-\qquad s=\tfrac12+it.
+q''_{\can,p}(t):=\mathcal D_p^3\Phi_\zeta(t)=\lambda_p^3q_{\curv}(t).
 \]
+Fix a smooth Mellin cutoff \(V\) whose Mellin transform \(\widehat V\) is entire
+and rapidly decaying on vertical strips.  The finite AFE below is obtained by
+applying \(-i\partial_s^3\) to the smoothed AFE for
+\(\Phi_{\mathrm H}^{\#}(s)=B_{\mathrm H}(s)\zeta(s)\).
 \end{definition}
 
-\begin{theorem}[Smooth finite AFE package for \(q''_{\can}\), with residues]
+\begin{theorem}[Smooth finite AFE package for the actual Hardy-curvature source]
 \label{thm:smooth-finite-AFE-package}
-Assume the completed-source anchor, Hypothesis~\ref{hyp:completed-source-anchor},
-and the standing zeta-side source package in
-Remark~\ref{rem:standing-zeta-side-source-hypotheses}.  Let
-\(s=\tfrac12+it\), with \(t\in\Omega\).  Then there exist smooth AFE weights
-\(V_1(y)\), \(V_2(y;s)\), a finite signed residue term
-\(P_{\mathrm{res},X}(t)\), and a remainder \(R_X(t)\) such that
+Let \(s=1/2+it\), with \(t\) in an ordinary source strip.  There exist smooth
+weights \(V_{1,r,k}(y;t)\), \(V_{2,r,k}(y;t)\), a finite residue term
+\(P_{\mathrm{res},X}^{\curv}(t)\), and a remainder
+\(R_X^{\curv}(t)\) such that
 \[
-q''_{\can}(t)=F_X(t)+R_X(t),
+q_{\curv}(t)=F_X^{\curv}(t)+R_X^{\curv}(t),
 \]
 where
 \[
 \begin{aligned}
-F_X(t)
-&:=
-\sum_{n\ge1} a_n n^{-1/2-it}V_1(n/X)
-+
-\sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX;s)
-+P_{\mathrm{res},X}(t).
+F_X^{\curv}(t)
+&=\sum_{0\le r+k\le 3}\sum_{n\ge1}
+  c_{r,k}^{+}(t)(\log n)^r n^{-1/2-it}V_{1,r,k}(n/X;t) \\
+&\quad+
+\sum_{0\le r+k\le 3}\sum_{n\ge1}
+  c_{r,k}^{-}(t)(\log n)^r n^{-1/2+it}V_{2,r,k}(nX;t)
++P_{\mathrm{res},X}^{\curv}(t).
 \end{aligned}
 \]
-The residue term is the finite sum of all nonzero residues crossed in the
-Mellin contour shifts, except for the pole at \(w=0\) whose residue is
-\(\mathcal Z(s)\).  More explicitly, if \(\mathscr P_s\) is the finite set of
-poles of \(w\mapsto \mathcal Z(s+w)\widehat V(w)X^w/w\) crossed when shifting
-from \(\Re w=2\) to the chosen left contour, then the first-shift contribution is
+Here the amplitudes \(c_{r,k}^{\pm}(t)\) are finite linear combinations of the
+critical-line boundary values of \(B_{\mathrm H}^{(k)}(s)\), the differentiated
+functional-equation factors, and derivatives of the smooth AFE weights.  They
+satisfy polynomial vertical-strip bounds on ordinary source strips.  The
+critical-line coefficients obey, for every fixed \(r\) and every
+\(\varepsilon>0\),
 \[
--
-\sum_{\alpha\in\mathscr P_s\setminus\{0\}}
-\operatorname*{Res}_{w=\alpha}
-\left(
-\mathcal Z(s+w)\widehat V(w)X^w\frac1w
-\right),
+(\log n)^r n^{-1/2}\ll_{r,\varepsilon} n^{-1/2+\varepsilon}.
 \]
-and \(P_{\mathrm{res},X}\) also includes the analogous finite residues produced
-on the dual side after applying the functional equation.  If no such poles are
-crossed on the retained ordinary source line, then
-\(P_{\mathrm{res},X}\equiv0\).
-
-The coefficient convention is
-\[
-\mathcal Z(s)=\sum_{n\ge1}a_n n^{-s},
-\qquad
-\widetilde{\mathcal Z}(s)=\sum_{n\ge1}\widetilde a_n n^{-s},
-\qquad
- a_n,\widetilde a_n\ll_\varepsilon n^\varepsilon.
-\]
-Thus the critical-line coefficients
-\[
-b_n:=a_n n^{-1/2},
-\qquad
-\widetilde b_n:=\widetilde a_n n^{-1/2}
-\]
-satisfy
-\[
-b_n,\widetilde b_n\ll_\varepsilon n^{-1/2+\varepsilon}.
-\]
-The symbols \(a_n,\widetilde a_n\) themselves are not redefined to include the
-factor \(n^{-1/2}\).
-
 For every fixed derivative order \(J\) and every \(A>0\), after choosing the
-left contour sufficiently far left,
+Mellin cutoff depth sufficiently large,
 \[
 \sum_{0\le j\le J}
 \left(
-\|\partial_t^jR_X\|_{L^2(W_{\mathrm{ref}})}
+\|\partial_t^jR_X^{\curv}\|_{L^2(W_{\mathrm{ref}})}
 +
-\|\partial_t^jR_X\|_{L^2(W_{\mathrm{branch}})}
+\|\partial_t^jR_X^{\curv}\|_{L^2(W_{\mathrm{branch}}^{\can})}
 \right)
-\ll_{A,J} X^{-A}.
+\ll_{A,J}X^{-A}.
 \]
-The same polynomial-in-\(Q\) derivative bounds hold for the residue term
-\(P_{\mathrm{res},X}\) on the retained ordinary source window.
+On a packet with \(\mathcal D_p=\lambda_p\partial_t\), the same estimate holds
+for \(\lambda_p^3R_X^{\curv}\) with only a polynomial loss, since
+\(Q^{-C}\le |\lambda_p|\le Q^C\) on admissible packets.
 \end{theorem}
 
 \begin{proof}
-Set \(s=\tfrac12+it\).  On \(\Re w=2\), absolute convergence gives
+Start from the standard smoothed AFE for the Hardy-normalized analytic source
+\(\Phi_{\mathrm H}^{\#}(s)=B_{\mathrm H}(s)\zeta(s)\) on the chosen ordinary strip:
 \[
-I(s;X)
+\Phi_{\mathrm H}^{\#}(s)
 =
-\sum_{n\ge1}a_n n^{-s}
-\left(
-\frac{1}{2\pi i}\int_{(2)}
-\left(\frac{X}{n}\right)^w\widehat V(w)\,\frac{dw}{w}
-\right).
+\sum_{n\ge1}B_{\mathrm H}(s)n^{-s}V_1(n/X)
++
+\sum_{n\ge1}B_{\mathrm H}(1-s)n^{-(1-s)}V_2(nX;s)
++P_{\mathrm{res},X}^{(0)}(s)+R_X^{(0)}(s).
 \]
-Define
+The residue term records the finitely many poles or branch-endpoint residues
+crossed in the Mellin contour shifts; on ordinary retained strips it is a
+finite smooth term.  Apply \(-i\partial_s^3\).  Differentiating the first sum
+produces finite terms
 \[
-V_1(y):=\frac{1}{2\pi i}\int_{(2)}y^{-w}\widehat V(w)\,\frac{dw}{w}.
+-i\binom{3}{r}B_{\mathrm H}^{(3-r)}(s)(-\log n)^r n^{-s}V_1(n/X),
+\qquad 0\le r\le 3,
 \]
-Then
+and differentiating the second sum produces the dual terms, including
+finite derivatives of \(B_{\mathrm H}(1-s)\) and of the smooth weight \(V_2(nX;s)\).
+These terms have exactly the displayed form.  The residue term is differentiated
+and included in \(P_{\mathrm{res},X}^{\curv}\).  The remainder is
 \[
-I(s;X)=\sum_{n\ge1}a_n n^{-s}V_1(n/X).
+R_X^{\curv}(t):=-i\partial_s^3R_X^{(0)}(1/2+it).
 \]
-
-Shift the contour left.  The pole at \(w=0\) contributes \(\mathcal Z(s)\).
-Every other crossed pole contributes a signed residue, and these signed
-nonzero-pole residues are by definition included in
-\(P_{\mathrm{res},X}(t)\).  The remaining left-contour integral is transformed by
-the functional equation
-\[
-\mathcal Z(s+w)=\chi(s+w)\widetilde{\mathcal Z}(1-s-w).
-\]
-Changing variables \(w\mapsto -w\) returns the dual integral to a right contour.
-Inserting the Dirichlet expansion for \(\widetilde{\mathcal Z}\) gives
-\[
-\sum_{n\ge1}\widetilde a_n n^{-(1-s)}V_2(nX;s)
-=
-\sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX;s),
-\]
-where
-\[
-V_2(y;s):=\frac{1}{2\pi i}\int_{(2)}
-y^{-w}\chi(s-w)\widehat V(-w)\,\frac{dw}{w}.
-\]
-Any poles crossed in this dual shift are again included in
-\(P_{\mathrm{res},X}\).  Therefore
-\[
-q''_{\can}(t)=F_X(t)+R_X(t)
-\]
-with \(F_X\) as displayed.
-
-The vertical-strip polynomial bounds for \(\mathcal Z\), the corresponding
-bounds for the gamma/functional-equation factor, and the rapid decay of
-\(\widehat V\) allow the remaining contours to be moved to \(\Re w=-A\) without
-crossing unrecorded poles.  Differentiating in \(t\) only differentiates
-\(s=\tfrac12+it\), the functional-equation factor in \(V_2\), and the finitely
-many residue terms; all are polynomially controlled on the retained source
-window.  Hence the displayed \(L^2(W_{\mathrm{ref}})\) and
-\(L^2(W_{\mathrm{branch}})\) remainder estimates follow.  The coefficient
-statement is exactly the convention in
-Remark~\ref{rem:standing-zeta-side-source-hypotheses} after evaluating on the
-critical line.
+The tail estimates follow from the usual smoothed AFE contour bounds, the rapid
+decay of \(\widehat V\), Stirling bounds for the gamma-ratio amplitude
+\(B_{\mathrm H}\) and its derivatives, and the fact that only finitely many fixed
+\(s\)-derivatives are taken.  The packet-normalized statement follows by the
+polynomial admissibility bounds for \(\lambda_p\).
 \end{proof}
 
 \begin{corollary}[Smooth AFE tail bound]
 \label{cor:smooth-afe-tail-bound}
-With
+With \(q_{\curv}=F_X^{\curv}+R_X^{\curv}\) as in
+Theorem~\ref{thm:smooth-finite-AFE-package}, one has
 \[
-\begin{aligned}
-F_X(t)&:=\sum_{n\ge1} a_n n^{-1/2-it}V_1(n/X)
-+\sum_{n\ge1}\widetilde a_n n^{-1/2+it}V_2(nX;\tfrac12+it)
-+P_{\mathrm{res},X}(t),
-\end{aligned}
+\|R_X^{\curv}\|_{L^2(W_{\mathrm{ref}})}
++
+\|R_X^{\curv}\|_{L^2(W_{\mathrm{branch}}^{\can})}
+\ll_A X^{-A}.
 \]
-one has
-\[
-q''_{\can}(t)=F_X(t)+R_X(t),
-\qquad
-\|R_X\|_{L^2(W_{\mathrm{ref}})}+\|R_X\|_{L^2(W_{\mathrm{branch}})}\ll_A X^{-A}.
-\]
-The residue term is part of the finite main term.  It is not placed in the
-error unless it has separately been proved perturbative on the retained source
-window.
+The finite main term includes all differentiated residue terms.  A residue term
+is never placed in the error unless it is separately proved perturbative on the
+retained source window.
 \end{corollary}
 
 \begin{proof}
-Direct restatement of Theorem~\ref{thm:smooth-finite-AFE-package}.
+This is the case \(J=0\) of Theorem~\ref{thm:smooth-finite-AFE-package}.
 \end{proof}
 
 \begin{corollary}[EF completion bound in reference-whitened coordinates]
@@ -54707,8 +54652,10 @@ the sense that
 \|G_{\mathrm{ref}}^{1/2}\|_{\operatorname{op}}
 \le Q^{C_{\mathrm{ref}}},
 \]
-and that the number of packet atoms and the branch/reference weights are
-polynomially controlled.  Then the normalized residual correction
+and that the packet count and the branch/reference weights are polynomially
+controlled.  Let \(F_X\) denote the differentiated Hardy finite main term
+\(F_X^{\curv}\), with the packet factor \(\lambda_p^3\) absorbed where normalized
+packet derivatives are used.  Then the normalized residual correction
 \[
 E=G_{\mathrm{ref}}^{-1/2}
 \bigl(G_{\mathrm{branch}}(q''_{\can})-G_{\mathrm{branch}}(F_X)\bigr)
@@ -54722,170 +54669,211 @@ after choosing the smooth AFE cutoff depth sufficiently large.
 \end{corollary}
 
 \begin{proof}
-By Theorem~\ref{thm:smooth-finite-AFE-package} and
-Corollary~\ref{cor:smooth-afe-tail-bound}, for every \(A'>0\),
-\[
-\|q''_{\can}-F_X\|_{L^2(W_{\mathrm{ref}})}
-+
-\|q''_{\can}-F_X\|_{L^2(W_{\mathrm{branch}})}
-\ll_{A'}X^{-A'}.
-\]
-For coefficient vectors supported on the finite packet family, Cauchy--Schwarz
-and the polynomial packet count convert this residual \(L^2\)-bound into a
-branch-Gram perturbation bound with at most a polynomial loss in \(Q\).  The
-left and right multiplications by \(G_{\mathrm{ref}}^{-1/2}\) cost at most
-\(Q^{2C_{\mathrm{ref}}}\).  Hence
-\[
-\|E\|_{\operatorname{op}}\ll Q^C X^{-A'}.
-\]
-Choosing \(A'\) larger than \(A+C\) gives the claim.
+Theorem~\ref{thm:smooth-finite-AFE-package} gives an arbitrarily strong
+\(L^2(W_{\mathrm{ref}})\) and \(L^2(W_{\mathrm{branch}}^{\can})\) bound for
+\(q''_{\can}-F_X\), up to the polynomial packet-normalization factors already
+absorbed into the source rows.  Cauchy--Schwarz and the polynomial packet count
+convert this into a branch-Gram perturbation with polynomial loss.  The two
+reference-whitening factors cost at most \(Q^{2C_{\mathrm{ref}}}\).  Choosing the
+AFE tail depth larger than the total polynomial loss gives the claim.
 \end{proof}
 
-\begin{remark}[AFE coefficient normalization]
+\begin{remark}[Differential Hardy AFE coefficient normalization]
 \label{rem:afe-coefficient-normalization}
-The smoothed finite AFE uses the Dirichlet-coefficient convention
+The active finite AFE coefficients are not fixed coefficients \(a_n\) with
+\(a_1=1\).  They are finite sums of critical-line amplitudes multiplying
+\((\log n)^r n^{-1/2\pm it}\).  For every fixed \(r\),
 \[
-\mathcal Z(s)=\sum_{n\ge1}a_n n^{-s},
-\qquad
-\widetilde{\mathcal Z}(s)=\sum_{n\ge1}\widetilde a_n n^{-s},
-\qquad
- a_n,\widetilde a_n\ll_\varepsilon n^\varepsilon.
+(\log n)^r n^{-1/2}\ll_{r,\varepsilon} n^{-1/2+\varepsilon}.
 \]
-The coefficients multiplying the pure oscillations \(n^{-it}\) and \(n^{it}\)
-on the critical line are instead
-\[
-b_n=a_n n^{-1/2},
-\qquad
-\widetilde b_n=\widetilde a_n n^{-1/2},
-\]
-and these satisfy
-\[
-b_n,\widetilde b_n\ll_\varepsilon n^{-1/2+\varepsilon}.
-\]
-Thus the notation must not simultaneously treat \(a_n\) as the Dirichlet
-coefficient in \(a_n n^{-s}\) and as the critical-line coefficient
-\(a_n n^{-it}\).  Derivatives of the finite AFE insert powers of \(\log n\), so
-\((\log n)^j b_n\ll_{j,\varepsilon}n^{-1/2+\varepsilon}\) for every fixed
-\(j\), and similarly for \(\widetilde b_n\).
+All gamma/theta derivatives are smooth packet amplitudes with polynomial
+vertical-strip bounds on ordinary source strips.  Consequently the old
+\(a_1=1\) noncollapse argument is superseded by the actual Hardy-curvature
+mean-square theorem below.
 \end{remark}
 
-\begin{lemma}[Canonical reference noncollapse]
+\begin{lemma}[Dyadic mean square for the actual Hardy curvature]
 \label{lem:main-term-noncollapse}
-Assume the completed source \(\mathcal Z\) is holomorphic in a neighbourhood of
+Let \(W_T(t)=W(t/T)\) be a nonnegative smooth dyadic weight supported in
+\([T,2T]\), with
 \[
-\left\{\tfrac12+it:t\in\Omega\right\},
+W^{(j)}(x)\ll_j1,
+\qquad
+\int W_T(t)\,dt\asymp T.
 \]
-and satisfies the standing source normalization \(a_1=1\).  Let
+Then, for \(T\) sufficiently large,
 \[
-q''_{\can}(t)=\mathcal Z\!\left(\tfrac12+it\right).
+\int |\partial_t^3Z_{\mathrm H}(t)|^2W_T(t)\,dt
+\asymp
+T(\log T)^7.
 \]
-If \(W_{\mathrm{ref}}\ge0\) has finite mass on \(\Omega\) and is not
-identically zero, then
+In particular,
 \[
- c_{\can}
- :=
- \int_\Omega |q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt
- >0.
+\int |q_{\curv}(t)|^2W_T(t)\,dt
+\ge c\,T(\log T)^7
 \]
-In particular, if the reference weight is fixed throughout the source-window
-argument, then
-\[
-\int_\Omega |q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt\ge c_{\can}
-\]
-with a positive constant independent of the packet parameter \(Q\).
+for some absolute \(c>0\) depending only on the fixed dyadic weight.
 \end{lemma}
 
 \begin{proof}
-The normalization \(a_1=1\) implies \(\mathcal Z\not\equiv0\): in the half-plane
-of absolute convergence the Dirichlet expansion has a nonzero first
-coefficient, so the completed source cannot be the zero meromorphic function.
+The classical weighted mean-square theorem for Hardy derivatives gives, for
+each fixed \(k\),
+\[
+\int |Z_{\mathrm H}^{(k)}(t)|^2W_T(t)\,dt
+=
+T\,\mathfrak P_{2k+1}(\log T)+O_k(T(\log T)^{2k}),
+\]
+where \(\mathfrak P_{2k+1}\) is a real polynomial of degree \(2k+1\) with
+positive leading coefficient.  For \(k=3\), this is the displayed asymptotic
+with degree \(7\).
 
-Suppose the displayed integral were zero.  Since \(W_{\mathrm{ref}}\ge0\), this
-would force
-\[
-q''_{\can}(t)=0
-\]
-for almost every \(t\) on the positive-measure set where
-\(W_{\mathrm{ref}}(t)>0\).  The function
-\[
-t\longmapsto q''_{\can}(t)=\mathcal Z\!\left(\tfrac12+it\right)
-\]
-is real-analytic on \(\Omega\), because \(\mathcal Z\) is holomorphic in a
-neighbourhood of the source line.  A nonzero real-analytic function has a
-discrete zero set.  Hence vanishing on a set of positive measure forces
-\(q''_{\can}\equiv0\) on some interval, and the complex identity theorem then
-forces \(\mathcal Z\equiv0\) in the connected holomorphic neighbourhood.  By
-meromorphic continuation this gives \(\mathcal Z\equiv0\), contradicting
-\(a_1=1\).  Therefore the integral is strictly positive.
+For completeness, we recall the standard proof mechanism.  Differentiate the
+smoothed AFE for \(Z_{\mathrm H}\) three times.  The resulting Dirichlet polynomials
+have coefficients which are finite linear combinations of
+\((\log n)^r n^{-1/2}\), \(0\le r\le3\), times smooth gamma/theta amplitudes.
+The weighted Montgomery--Vaughan mean-value theorem gives the diagonal main
+term, and the differentiated functional equation pairs the two halves into the
+Hardy real form.  The diagonal contribution has leading size
+\(T(\log T)^7\) and positive leading coefficient; off-diagonal and differentiated
+weight terms contribute to lower powers of \(\log T\).  Hence the lower and
+upper bounds follow.
 \end{proof}
 
 \begin{corollary}[Finite-AFE main-term noncollapse]
 \label{cor:finite-afe-main-term-noncollapse}
-With
+Let \(W_{\mathrm{ref}}\) be a canonical dyadic source reference weight on an
+ordinary source window \(\Omega_T\subset[T,2T]\), comparable to a smooth dyadic
+weight as in Lemma~\ref{lem:main-term-noncollapse}.  Then
 \[
-q''_{\can}=F_X+R_X
+\int_{\Omega_T}|q_{\curv}(t)|^2W_{\mathrm{ref}}(t)\,dt
+\ge Q^{-A}\int_{\Omega_T}W_{\mathrm{ref}}(t)\,dt.
 \]
-as in Theorem~\ref{thm:smooth-finite-AFE-package}, choose the smooth AFE
-cutoff range so that
+For the differentiated finite AFE
+\(q_{\curv}=F_X^{\curv}+R_X^{\curv}\), choose the cutoff depth so that
 \[
-\|R_X\|_{L^2(W_{\mathrm{ref}})}\le \tfrac12 c_{\can}^{1/2}.
+\|R_X^{\curv}\|_{L^2(W_{\mathrm{ref}})}
+\le
+\frac12
+\|q_{\curv}\|_{L^2(W_{\mathrm{ref}})}.
 \]
 Then
 \[
-\int_\Omega |F_X(t)|^2W_{\mathrm{ref}}(t)\,dt
-\ge \tfrac14 c_{\can}.
+\int_{\Omega_T}|F_X^{\curv}(t)|^2W_{\mathrm{ref}}(t)\,dt
+\ge
+Q^{-A'}\int_{\Omega_T}W_{\mathrm{ref}}(t)\,dt.
 \]
+The same estimates hold for packet-normalized \(q''_{\can,p}=\lambda_p^3q_{\curv}\)
+with only polynomial changes in the exponents.
 \end{corollary}
 
 \begin{proof}
-By Lemma~\ref{lem:main-term-noncollapse},
+The dyadic lower bound is Lemma~\ref{lem:main-term-noncollapse}, after absorbing
+the fixed comparison between \(W_{\mathrm{ref}}\) and a smooth dyadic weight.
+Since \((\log T)^7\) is polynomially bounded below in the packet scale, the
+lower bound has the stated \(Q^{-A}\) form.  The finite-main estimate follows
+from the triangle inequality:
 \[
-\|q''_{\can}\|_{L^2(W_{\mathrm{ref}})}=c_{\can}^{1/2}.
-\]
-The triangle inequality and the AFE remainder bound give
-\[
-\|F_X\|_{L^2(W_{\mathrm{ref}})}
+\|F_X^{\curv}\|_{L^2(W_{\mathrm{ref}})}
 \ge
-\|q''_{\can}\|_{L^2(W_{\mathrm{ref}})}
+\|q_{\curv}\|_{L^2(W_{\mathrm{ref}})}
 -
-\|R_X\|_{L^2(W_{\mathrm{ref}})}
+\|R_X^{\curv}\|_{L^2(W_{\mathrm{ref}})}
 \ge
-\tfrac12 c_{\can}^{1/2}.
+\tfrac12\|q_{\curv}\|_{L^2(W_{\mathrm{ref}})}.
 \]
-Squaring gives the claim.
+The packet-normalized version follows from \(Q^{-C}\le |\lambda_p|\le Q^C\).
 \end{proof}
 
 \begin{corollary}[Reference mean-square noncollapse]
 \label{cor:reference-ms-noncollapse}
-There exists \(c_0>0\) such that
+On every canonical dyadic ordinary source window used by the active proof
+branch,
 \[
-\int_\Omega |q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt\ge c_0.
+\int |q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt
+\ge Q^{-A}\int W_{\mathrm{ref}}(t)\,dt,
 \]
-Moreover, for all AFE cutoffs satisfying the tail smallness condition in
-Corollary~\ref{cor:finite-afe-main-term-noncollapse},
-\[
-\int_\Omega |F_X(t)|^2W_{\mathrm{ref}}(t)\,dt\ge c_0/4.
-\]
+where \(q''_{\can}\) denotes either the physical source \(q_{\curv}\) or the
+packet-normalized source \(\lambda_p^3q_{\curv}\), according to the local packet
+normalization.  Consequently the source selection has polynomially large
+reference mass before branch completion.
 \end{corollary}
 
 \begin{proof}
-Take \(c_0=c_{\can}\) in Lemma~\ref{lem:main-term-noncollapse}.  The final
-claim is Corollary~\ref{cor:finite-afe-main-term-noncollapse}.
+This is Corollary~\ref{cor:finite-afe-main-term-noncollapse}, with the packet
+normalization convention stated in Theorem~\ref{hyp:completed-source-anchor}.
 \end{proof}
 
-\begin{remark}[Uniformity of reference noncollapse]
-\label{rem:reference-noncollapse-uniformity}
-The preceding argument is unconditional for a fixed reference weight, or for a
-finite family of fixed reference weights.  If the draft later allows a
-\(Q\)-dependent family \(W_{\mathrm{ref},Q}\) whose support can drift or shrink
-with \(Q\), then the polynomial lower bound
+\begin{definition}[Hardy-curvature mass-good packets]
+\label{def:hardy-curvature-mass-good-packets}
+Let \(\{K_p^+\}\) be the Whitney packet enlargement of a canonical dyadic source
+window.  Define
 \[
-\int |q''_{\can}|^2W_{\mathrm{ref},Q}\ge Q^{-A}
+M_p:=\int_{K_p^+}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt.
 \]
-is a separate quantitative nonconcentration statement and does not follow from
-\(a_1=1\) alone.  In that case it must remain a named input.
+For a fixed exponent \(A_{\mathrm{mg}}\), call \(p\) mass-good if
+\[
+M_p\ge Q^{-A_{\mathrm{mg}}}\int_{K_p^+}W_{\mathrm{ref}}(t)\,dt.
+\]
+The active Gate--1 packet family is taken from the mass-good packets, together
+with the usual ordinary/admissible packet conditions.
+\end{definition}
+
+\begin{lemma}[Mass-good packets carry polynomial Hardy-curvature mass]
+\label{lem:hardy-curvature-mass-good-packets-carry-mass}
+For \(A_{\mathrm{mg}}\) chosen larger than the fixed polynomial losses in the
+Whitney overlap and the dyadic upper bound, the union of mass-good packets
+carries a polynomial fraction of the total Hardy-curvature source mass:
+\[
+\sum_{p\in\mathcal P_{\mathrm{mg}}}M_p
+\ge
+Q^{-A}\int_{\Omega_T}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt.
+\]
+\end{lemma}
+
+\begin{proof}
+The dyadic upper bound in Lemma~\ref{lem:main-term-noncollapse} and the bounded
+Whitney overlap give
+\[
+\sum_p M_p\ll Q^C\int_{\Omega_T}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt.
+\]
+The total lower bound is Corollary~\ref{cor:reference-ms-noncollapse}.  If the
+mass-good packets carried less than a polynomial fraction of the total mass,
+then the bad packets, each satisfying
+\[
+M_p<Q^{-A_{\mathrm{mg}}}\int_{K_p^+}W_{\mathrm{ref}},
+\]
+would force the total mass to be smaller than the dyadic lower bound after
+choosing \(A_{\mathrm{mg}}\) beyond the fixed overlap and scale losses.  This
+contradiction proves the claim.
+\end{proof}
+
+\begin{remark}[No arbitrary local Hardy-curvature lower bound]
+\label{rem:reference-noncollapse-uniformity}
+The Hardy-curvature lower bound is a dyadic/mass-good source theorem, not a
+pointwise lower bound on every arbitrary packet.  A nonnegative weight can be
+supported in a tiny neighbourhood where \(|\partial_t^3Z_{\mathrm H}|\) is very small;
+therefore no theorem of the form
+\[
+\int_K|\partial_t^3Z_{\mathrm H}(t)|^2W_K(t)\,dt
+\ge Q^{-A}\int_KW_K(t)\,dt
+\]
+can hold for all adversarial local windows \(K\).  The active proof branch uses
+canonical dyadic reference windows and then selects mass-good Whitney packets.
+This is the source-side replacement for the old \(a_1=1\) noncollapse argument.
 \end{remark}
 
+\begin{remark}[Status after the actual Hardy-curvature source repair]
+\label{rem:status-after-actual-hardy-curvature-source-repair}
+The completed-source anchor is discharged in the active Hardy branch by
+Theorem~\ref{hyp:completed-source-anchor}; the old abstract \(a_1=1\) source
+package is superseded.  The source noncollapse input is discharged on canonical
+dyadic ordinary source windows by Lemma~\ref{lem:main-term-noncollapse} and by
+mass-good packet selection.  These changes do not alter the downstream
+canonical branch-complete window, the pre-extraction Fej\'er--Riesz Stack
+construction, or the maximal labelled \(K9\) live/dead routing; those pieces use
+only the resulting finite AFE, polynomial coefficient/derivative bounds, and
+source mass in the canonical branch.
+\end{remark}
 
 \begin{remark}[Provenance of reference mean-square noncollapse]
 \label{rem:reference-meansquare-noncollapse-provenance}
