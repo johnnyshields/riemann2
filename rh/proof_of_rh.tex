@@ -55370,57 +55370,73 @@ Theorem~\ref{thm:packet-construction-regularity}; the absolute envelope above
 is the form used for collar exclusion.
 \end{proof}
 
-\begin{lemma}[Packet middle-third mass]
+\begin{lemma}[Two-sided packet-window mass]
 \label{lem:packet-middle-third-mass}
 Let \(J_p\) be the frequency window attached to a good packet \(p\), and let
-\(J_p^{\mathrm M}\subset J_p\) denote its middle third.  Assume the packet
-amplitude factors as
+\(J_p^{-},J_p^{+}\subset J_p^{\mathrm M}\) be two subintervals of the middle
+third separated by
+\[
+\operatorname{dist}(J_p^{-},J_p^{+})\ge c_*|J_p|
+\]
+and satisfying
+\[
+|J_p^{-}|,\ |J_p^{+}|\ge c_*|J_p|.
+\]
+Assume the packet amplitude factors as
 \[
 A_p(\xi,t)=\chi_p(\xi)B_p(\xi,t),
 \]
-where \(\chi_p\equiv 1\) on \(J_p^{\mathrm M}\), \(0\le \chi_p\le 1\), and
-\(|B_p(\xi,t)|\) is uniformly comparable on \(J_p\), namely
+where \(\chi_p\equiv1\) on \(J_p^{\mathrm M}\), \(0\le\chi_p\le1\), and
 \[
-e^{-C_0}\le \frac{|B_p(\xi,t)|}{|B_p(\eta,t)|}\le e^{C_0}
+e^{-C_0}\le
+\frac{|B_p(\xi,t)|}{|B_p(\eta,t)|}
+\le e^{C_0}
 \qquad(\xi,\eta\in J_p).
 \]
-Define the normalized packet density
+Define
 \[
 \rho_t(\xi):=
-\frac{|A_p(\xi,t)|^2}{\int_{J_p}|A_p(\eta,t)|^2\,d\eta}.
+\frac{|A_p(\xi,t)|^2}
+{\int_{J_p}|A_p(\eta,t)|^2\,d\eta}.
 \]
 Then there exists \(\theta_0>0\) such that
 \[
-\int_{J_p^{\mathrm M}}\rho_t(\xi)\,d\xi\ge \theta_0
+\int_{J_p^-}\rho_t(\xi)\,d\xi\ge \theta_0,
+\qquad
+\int_{J_p^+}\rho_t(\xi)\,d\xi\ge \theta_0.
 \]
-uniformly on good packets.
 \end{lemma}
 
 \begin{proof}
-Since \(\chi_p\equiv 1\) on \(J_p^{\mathrm M}\) and \(\chi_p\le 1\) on \(J_p\),
+The proof is the same on \(J_p^{-}\) and \(J_p^{+}\).  Since
+\(\chi_p\equiv1\) on \(J_p^{\mathrm M}\) and \(\chi_p\le1\) on \(J_p\),
 \[
-\int_{J_p^{\mathrm M}}\rho_t(\xi)\,d\xi
+\int_{J_p^\pm}\rho_t(\xi)\,d\xi
 =
-\frac{\int_{J_p^{\mathrm M}}|B_p(\xi,t)|^2\,d\xi}
+\frac{\int_{J_p^\pm}|B_p(\xi,t)|^2\,d\xi}
 {\int_{J_p}|\chi_p(\eta)B_p(\eta,t)|^2\,d\eta}.
 \]
-By uniform comparability of \(|B_p|\) on \(J_p\),
+By uniform comparability of \(|B_p|\),
 \[
-\int_{J_p^{\mathrm M}}|B_p(\xi,t)|^2\,d\xi
-\ge e^{-2C_0}|J_p^{\mathrm M}|\inf_{J_p}|B_p|^2,
+\int_{J_p^\pm}|B_p(\xi,t)|^2\,d\xi
+\ge
+e^{-2C_0}|J_p^\pm|\inf_{J_p}|B_p|^2,
 \]
-while
+whereas
 \[
 \int_{J_p}|\chi_p(\eta)B_p(\eta,t)|^2\,d\eta
-\le e^{2C_0}|J_p|\inf_{J_p}|B_p|^2.
+\le
+e^{2C_0}|J_p|\inf_{J_p}|B_p|^2.
 \]
-Since \(|J_p^{\mathrm M}|=\frac13|J_p|\), the claim follows with
-\(\theta_0=\frac13e^{-4C_0}\).
+Since \(|J_p^\pm|\ge c_*|J_p|\), the claim follows with
+\[
+\theta_0:=c_*e^{-4C_0}.
+\]
 \end{proof}
 
-\begin{lemma}[Packet-window variance lower bound]
+\begin{lemma}[Packet-window variance lower bound from two-sided mass]
 \label{lem:packet-window-variance-lower-bound}
-Under Lemma~\ref{lem:packet-middle-third-mass}, the packet density satisfies
+Under Lemma~\ref{lem:packet-middle-third-mass},
 \[
 \operatorname{Var}_{\rho_t}(\xi)\ge c\,|J_p|^2
 \]
@@ -55428,47 +55444,34 @@ for some absolute \(c>0\).
 \end{lemma}
 
 \begin{proof}
-A fixed positive fraction \(\theta_0\) of the probability mass lies in the
-middle third \(J_p^{\mathrm M}\).  Every point of \(J_p^{\mathrm M}\) is a
-distance \(\gtrsim |J_p|\) from at least one endpoint of \(J_p\), so the
-variance of any probability density carrying mass \(\theta_0\) there is
-bounded below by a fixed multiple of \(|J_p|^2\).
+Let \(X,X'\) be independent random variables with law \(\rho_t\).  Then
+\[
+2\operatorname{Var}_{\rho_t}(\xi)=\mathbb E|X-X'|^2.
+\]
+On the event \(X\in J_p^{-}\) and \(X'\in J_p^{+}\), which has probability at
+least \(\theta_0^2\), one has
+\[
+|X-X'|\ge c_*|J_p|.
+\]
+Therefore
+\[
+2\operatorname{Var}_{\rho_t}(\xi)
+\ge
+\theta_0^2c_*^2|J_p|^2,
+\]
+which proves the claim after changing constants.
 \end{proof}
 
-\begin{lemma}[Phase-derivative transversality on good packets]
-\label{lem:phase-derivative-transversality}
-Let
-\[
-F_X(t)=\int_{J_p}A_p(\xi,t)e^{-it\xi}\,d\xi,
-\qquad
-\omega(t):=-\Im\!\left(\frac{F_X'(t)}{F_X(t)}\right).
-\]
-Then on every good packet core,
-\[
-\omega'(t)=\operatorname{Var}_{\rho_t}(\xi)+\mathcal E_{\mathrm{tr}}(t),
-\]
-where the transport term \(\mathcal E_{\mathrm{tr}}(t)\) is controlled by the
-packet derivative budget.  In particular, if
-\[
-|\mathcal E_{\mathrm{tr}}(t)|\le \tfrac12 c\,|J_p|^2,
-\]
-then
-\[
-|\omega'(t)|\ge \tfrac12 c\,|J_p|^2.
-\]
-\end{lemma}
-
-\begin{proof}
-Differentiate
-\[
-\omega(t)=-\Im(F_X'/F_X)
-\]
-once more.  The main term is the spectral variance of the normalized packet
-density \(\rho_t\), and the remaining terms come from the \(t\)-transport of
-\(A_p(\xi,t)\).  Lemma~\ref{lem:packet-window-variance-lower-bound} gives the
-lower bound for the variance term, while the packet derivative budget bounds
-the transport error.  Shrinking constants yields the claim.
-\end{proof}
+\begin{remark}[Phase-derivative transversality is diagnostic here]
+\label{rem:phase-derivative-transversality-diagnostic}
+The two-sided packet-window variance estimate is useful when one wants to
+derive an explicit phase-transversality theorem from a spectral packet model.
+It is not a load-bearing input in the current source-frame proof.  The active
+off-block estimate uses the scale-normalized resonant graph of
+Lemma~\ref{lem:frequency-gap-separation} and the integration-by-parts estimate
+of Lemma~\ref{lem:scale-normalized-packet-kernel-decay}.  Thus no global or
+unnormalized lower bound for \(|\omega_p-\omega_q|\) is assumed.
+\end{remark}
 
 \begin{remark}[Identification of packet phase]
 \label{rem:packet-phase-identification}
@@ -55868,15 +55871,20 @@ domination (Theorem~\ref{thm:branch-reference-block-domination}).
 
 \noindent\emph{Honest closure state.}  Once those two structural inputs are
 proved by the upstream source construction, Theorem~\ref{thm:source-survival-from-three-inputs}
-gives \(\delta_{\mathrm{src}}\ge Q^{-A}\).  The remaining active downstream
-finite-survival obligations are
+gives \(\delta_{\mathrm{src}}\ge Q^{-A}\).  The remaining active obligations are
+now upstream or entry obligations:
 \[
-\delta_{\mathrm{src}},\quad
-c_{\mathrm{arith},Y},\quad
-\delta_{\mathrm{coerc}},\quad
-\delta_{\mathrm{ext}},
+\text{completed-source anchor},\qquad
+\text{branch/reference block domination},\qquad
+\text{raw row/routing certificate }\mathfrak B_{2Y,p}.
 \]
-together with the same-norm atomic comparison.  The Graph/O2O3 gap
+In the active canonical source-graded branch,
+\(\delta_{\mathrm{coerc}}\), the positive-density extraction/static-line
+module, and the same-norm atomic comparison are handled by the certified
+downstream package recorded in
+Remark~\ref{rem:active-input-status-table}.  They should not be listed as
+open finite-survival gaps unless the proof leaves the canonical certified
+branch.  The Graph/O2O3 gap
 \(\delta_{\mathrm{graph}}\) is closed by
 Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3},
 conditional only on the structural identification of the finite/O2/O3
@@ -55884,7 +55892,11 @@ Fej\'er--Riesz charge model (\(R^C\)-normalization, bounded-degree
 Fej\'er--Riesz Stack factorization, and identification of the pure
 sector as charge \(0\) and the contaminant sector as charges
 \(1,\ldots,d_0\)); it is no longer an active finite-survival gap of the
-same status as the four objects above.
+same status as the upstream objects above.
+
+The label \(\texttt{thm:unconditional-packet-regularity}\) is retained for
+citation stability; the theorem is unconditional only relative to the stated
+windowed packet-construction data.
 \end{remark}
 
 
