@@ -55233,641 +55233,76 @@ This is Corollary~\ref{cor:finite-afe-main-term-noncollapse}, with the packet
 normalization convention stated in Theorem~\ref{hyp:completed-source-anchor}.
 \end{proof}
 
-\begin{definition}[Hardy-curvature branch packet energy and mass-good packets]
+\begin{definition}[Hardy-curvature mass-good packets]
 \label{def:hardy-curvature-mass-good-packets}
-Let \(\Omega_T\subset[T,2T]\) be an ordinary Hardy-normalized canonical source
-window, let \(W_{\mathrm{ref}}\) be the canonical dyadic reference weight on
-\(\Omega_T\), and let
+Let \(\{K_p^+\}\) be the Whitney packet enlargement of a canonical dyadic source
+window.  Define
 \[
-  u_H(t):=\partial_t^3Z_{\mathrm H}(t)
-  =
-  \mathcal Z_{\curv}\!\left(\frac12+it\right)
+M_p:=\int_{K_p^+}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt.
 \]
-be the active Hardy-curvature source.
-
-Let
+For a fixed exponent \(A_{\mathrm{mg}}\), call \(p\) mass-good if
 \[
-  K_p=(m_p-r_p,m_p+r_p)
+M_p\ge Q^{-A_{\mathrm{mg}}}\int_{K_p^+}W_{\mathrm{ref}}(t)\,dt.
 \]
-be the Whitney packet cover used in the canonical source branch, and let
-\(w\in C_c^\infty(\mathbb R)\), \(w\ge0\), be the fixed packet bump occurring
-in the canonical branch-complete window
-\[
-  W_{\mathrm{branch}}^{\mathrm{can}}(t)
-  =
-  \sum_p W_{\mathrm{ref}}(m_p)
-  w\!\left(\frac{t-m_p}{r_p}\right).
-\]
-Define the physical branch packet energy and branch packet volume by
-\[
-  L_p
-  :=
-  W_{\mathrm{ref}}(m_p)
-  \int
-  w\!\left(\frac{t-m_p}{r_p}\right)
-  |u_H(t)|^2\,dt,
-\]
-and
-\[
-  V_p
-  :=
-  W_{\mathrm{ref}}(m_p)
-  \int
-  w\!\left(\frac{t-m_p}{r_p}\right)\,dt.
-\]
-For a fixed exponent \(A_{\mathrm{mg}}\), call \(p\) \emph{mass-good} if
-\[
-  L_p\ge Q^{-A_{\mathrm{mg}}}V_p.
-\]
-The active Gate--1 packet family is the subfamily
-\[
-  \mathcal P_{\mathrm{mg}}
-  :=
-  \{p:L_p\ge Q^{-A_{\mathrm{mg}}}V_p\}
-\]
-intersected with the ordinary, scale-admissible, and routed canonical packet
-conditions.
-
-If the packet-normalized derivative
-\[
-  \mathcal D_p=\lambda_p\partial_t
-\]
-is used, then the normalized source row is
-\[
-  u_{H,p}^{\mathrm{norm}}(t)
-  =
-  \mathcal D_p^3Z_{\mathrm H}(t)
-  =
-  \lambda_p^3u_H(t),
-\]
-and the corresponding normalized packet energy is
-\[
-  L_p^{\mathrm{norm}}
-  :=
-  W_{\mathrm{ref}}(m_p)
-  \int
-  w\!\left(\frac{t-m_p}{r_p}\right)
-  |\lambda_p^3u_H(t)|^2\,dt.
-\]
-On scale-admissible packets,
-\[
-  Q^{-C_\lambda}\le |\lambda_p|\le Q^{C_\lambda},
-\]
-so
-\[
-  Q^{-6C_\lambda}L_p
-  \le
-  L_p^{\mathrm{norm}}
-  \le
-  Q^{6C_\lambda}L_p.
-\]
-Thus packet normalization changes the aggregate source lower bound only by a
-polynomial factor.
+The active Gate--1 packet family is taken from the mass-good packets, together
+with the usual ordinary/admissible packet conditions.
 \end{definition}
 
-
-\begin{lemma}[Branch packet volume is polynomially controlled]
-\label{lem:hardy-branch-packet-volume-control}
-Assume the Whitney packet cover has bounded overlap, the bump \(w\) has fixed
-compact support, and \(W_{\mathrm{ref}}\) is scale-slow on the enlarged packet
-supports.  Then
-\[
-  \sum_p V_p
-  =
-  \int W_{\mathrm{branch}}^{\mathrm{can}}(t)\,dt
-  \le
-  Q^{C_{\mathrm{vol}}}
-  G_{\mathrm{ref}},
-\]
-where
-\[
-  G_{\mathrm{ref}}
-  :=
-  \int_{\Omega_T}W_{\mathrm{ref}}(t)\,dt.
-\]
-\end{lemma}
-
-\begin{proof}
-By definition,
-\[
-  \sum_p V_p
-  =
-  \sum_p
-  W_{\mathrm{ref}}(m_p)
-  \int
-  w\!\left(\frac{t-m_p}{r_p}\right)\,dt
-  =
-  \int W_{\mathrm{branch}}^{\mathrm{can}}(t)\,dt.
-\]
-The support of each summand lies in a fixed enlargement of \(K_p\).  Bounded
-Whitney overlap implies that every \(t\in\Omega_T\) belongs to at most
-\(Q^{O(1)}\) such enlarged supports.  Scale-slow variation of \(W_{\mathrm{ref}}\)
-on enlarged packet supports gives
-\[
-  W_{\mathrm{ref}}(m_p)
-  \le
-  Q^{C_{\mathrm{sl}}}W_{\mathrm{ref}}(t)
-\]
-whenever the \(p\)-summand is nonzero at \(t\).  Therefore
-\[
-  W_{\mathrm{branch}}^{\mathrm{can}}(t)
-  \le
-  Q^{C_{\mathrm{vol}}}W_{\mathrm{ref}}(t)
-\]
-on the retained source region, after absorbing the fixed \(L^\infty\)-norm of
-\(w\), the bounded-overlap constant, and the scale-slow exponent.  Integrating
-gives the claim.
-\end{proof}
-
-
-\begin{lemma}[Mass-good packets carry polynomial branch source mass]
+\begin{lemma}[Mass-good packets carry polynomial Hardy-curvature mass]
 \label{lem:hardy-curvature-mass-good-packets-carry-mass}
-Assume the hypotheses of
-Lemma~\ref{lem:hardy-branch-packet-volume-control}.  Assume also the dyadic
-Hardy-curvature reference lower bound
+For \(A_{\mathrm{mg}}\) chosen larger than the fixed polynomial losses in the
+Whitney overlap and the dyadic upper bound, the union of mass-good packets
+carries a polynomial fraction of the total Hardy-curvature source mass:
 \[
-  \int_{\Omega_T}|u_H(t)|^2W_{\mathrm{ref}}(t)\,dt
-  \ge
-  Q^{-A_{\mathrm{ms}}}G_{\mathrm{ref}},
-\]
-and the canonical branch/reference domination
-\[
-  W_{\mathrm{branch}}^{\mathrm{can}}(t)
-  \ge
-  Q^{-C_{\mathrm{dom}}}W_{\mathrm{ref}}(t)
-\]
-on the good ordinary source region.  If
-\[
-  A_{\mathrm{mg}}
-  >
-  A_{\mathrm{ms}}+C_{\mathrm{dom}}+C_{\mathrm{vol}}+2,
-\]
-then
-\[
-  \sum_{p\in\mathcal P_{\mathrm{mg}}}L_p
-  \ge
-  Q^{-A_{\mathrm{src}}}G_{\mathrm{ref}}
-\]
-for some
-\[
-  A_{\mathrm{src}}
-  =
-  A_{\mathrm{ms}}+C_{\mathrm{dom}}+O(1).
-\]
-For packet-normalized rows,
-\[
-  \sum_{p\in\mathcal P_{\mathrm{mg}}}L_p^{\mathrm{norm}}
-  \ge
-  Q^{-(A_{\mathrm{src}}+6C_\lambda)}G_{\mathrm{ref}}.
+\sum_{p\in\mathcal P_{\mathrm{mg}}}M_p
+\ge
+Q^{-A}\int_{\Omega_T}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt.
 \]
 \end{lemma}
 
 \begin{proof}
-By the definition of \(W_{\mathrm{branch}}^{\mathrm{can}}\),
+The dyadic upper bound in Lemma~\ref{lem:main-term-noncollapse} and the bounded
+Whitney overlap give
 \[
-  \sum_pL_p
-  =
-  \int |u_H(t)|^2W_{\mathrm{branch}}^{\mathrm{can}}(t)\,dt.
+\sum_p M_p\ll Q^C\int_{\Omega_T}|q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt.
 \]
-Canonical branch/reference domination gives
+The total lower bound is Corollary~\ref{cor:reference-ms-noncollapse}.  If the
+mass-good packets carried less than a polynomial fraction of the total mass,
+then the bad packets, each satisfying
 \[
-  \sum_pL_p
-  \ge
-  Q^{-C_{\mathrm{dom}}}
-  \int_{\Omega_T}|u_H(t)|^2W_{\mathrm{ref}}(t)\,dt.
+M_p<Q^{-A_{\mathrm{mg}}}\int_{K_p^+}W_{\mathrm{ref}},
 \]
-The dyadic Hardy-curvature lower bound then gives
-\[
-  \sum_pL_p
-  \ge
-  Q^{-(A_{\mathrm{ms}}+C_{\mathrm{dom}})}G_{\mathrm{ref}}.
-\]
-
-For bad packets \(p\notin\mathcal P_{\mathrm{mg}}\), the definition of
-mass-goodness gives
-\[
-  L_p<Q^{-A_{\mathrm{mg}}}V_p.
-\]
-Hence, by Lemma~\ref{lem:hardy-branch-packet-volume-control},
-\[
-  \sum_{p\notin\mathcal P_{\mathrm{mg}}}L_p
-  <
-  Q^{-A_{\mathrm{mg}}}\sum_pV_p
-  \le
-  Q^{-A_{\mathrm{mg}}+C_{\mathrm{vol}}}G_{\mathrm{ref}}.
-\]
-The choice
-\[
-  A_{\mathrm{mg}}
-  >
-  A_{\mathrm{ms}}+C_{\mathrm{dom}}+C_{\mathrm{vol}}+2
-\]
-therefore implies
-\[
-  \sum_{p\notin\mathcal P_{\mathrm{mg}}}L_p
-  \le
-  \frac12
-  Q^{-(A_{\mathrm{ms}}+C_{\mathrm{dom}})}G_{\mathrm{ref}}
-\]
-for \(Q\) sufficiently large.  Subtracting the bad-packet contribution from
-the total branch source mass yields
-\[
-  \sum_{p\in\mathcal P_{\mathrm{mg}}}L_p
-  \ge
-  \frac12
-  Q^{-(A_{\mathrm{ms}}+C_{\mathrm{dom}})}G_{\mathrm{ref}}.
-\]
-Absorbing the harmless factor \(1/2\) into the exponent gives the asserted
-physical-coordinate estimate.
-
-For normalized packet rows, use
-\[
-  L_p^{\mathrm{norm}}
-  =
-  |\lambda_p|^6L_p
-\]
-and the scale-admissibility bound
-\[
-  |\lambda_p|^6\ge Q^{-6C_\lambda}.
-\]
-This gives
-\[
-  \sum_{p\in\mathcal P_{\mathrm{mg}}}L_p^{\mathrm{norm}}
-  \ge
-  Q^{-6C_\lambda}
-  \sum_{p\in\mathcal P_{\mathrm{mg}}}L_p
-  \ge
-  Q^{-(A_{\mathrm{src}}+6C_\lambda)}G_{\mathrm{ref}}.
-\]
+would force the total mass to be smaller than the dyadic lower bound after
+choosing \(A_{\mathrm{mg}}\) beyond the fixed overlap and scale losses.  This
+contradiction proves the claim.
 \end{proof}
-
-
-\begin{theorem}[Hardy-curvature aggregate source lower bound]
-\label{thm:hardy-curvature-aggregate-source-lower-bound}
-Let \(\Omega_T\subset[T,2T]\) be an ordinary Hardy-normalized canonical source
-window, and assume \(T\ge T_0\).  Let
-\[
-  u_H(t)=\partial_t^3Z_{\mathrm H}(t)
-\]
-be the active Hardy-curvature source.  Assume:
-
-\begin{enumerate}[label=\textup{(\alph*)},leftmargin=*]
-
-\item \(W_{\mathrm{ref}}\) is a canonical nonnegative dyadic reference weight
-on \(\Omega_T\), comparable to a fixed smooth dyadic weight, nonzero, and
-scale-slow on Whitney packet cores and their fixed enlargements.
-
-\item The Whitney packet family \(\{K_p\}\) has bounded overlap, its cores cover
-the retained ordinary source region, and its packet scales are polynomially
-admissible:
-\[
-  Q^{-C_\lambda}\le |\lambda_p|\le Q^{C_\lambda}.
-\]
-
-\item The proof-level branch source window is the full-cover canonical window
-\[
-  W_{\mathrm{branch}}^{\mathrm{can}}(t)
-  =
-  \sum_p W_{\mathrm{ref}}(m_p)
-  w\!\left(\frac{t-m_p}{r_p}\right)
-\]
-of Definition~\ref{hyp:packet-core-micro-covering}.
-
-\item The ordinary source height and proof scale are polynomially related, so
-that logarithmic factors and fixed dyadic constants can be absorbed into powers
-of \(Q\).
-
-\end{enumerate}
-
-Then there is an exponent \(A>0\), depending only on the fixed dyadic weight,
-Whitney-overlap constants, scale-slow constants, packet-scale admissibility
-constants, and the fixed derivative order \(3\), such that
-\[
-  \sum_{p\in\mathcal P_{\mathrm{mg}}}
-  W_{\mathrm{ref}}(m_p)
-  \int
-  w\!\left(\frac{t-m_p}{r_p}\right)
-  |\partial_t^3Z_{\mathrm H}(t)|^2\,dt
-  \ge
-  Q^{-A}G_{\mathrm{ref}},
-\]
-where
-\[
-  G_{\mathrm{ref}}
-  :=
-  \int_{\Omega_T}W_{\mathrm{ref}}(t)\,dt.
-\]
-Equivalently, in the physical Hardy branch,
-\[
-  \int |q''_{\can}(t)|^2
-  W_{\mathrm{branch}}^{\mathrm{can}}(t)\,dt
-  \ge
-  Q^{-A}G_{\mathrm{ref}},
-  \qquad
-  q''_{\can}=u_H.
-\]
-For normalized packet derivatives \(\mathcal D_p=\lambda_p\partial_t\), the
-same estimate holds with \(A\) enlarged by \(6C_\lambda\):
-\[
-  \sum_{p\in\mathcal P_{\mathrm{mg}}}
-  W_{\mathrm{ref}}(m_p)
-  \int
-  w\!\left(\frac{t-m_p}{r_p}\right)
-  |\mathcal D_p^3Z_{\mathrm H}(t)|^2\,dt
-  \ge
-  Q^{-A'}G_{\mathrm{ref}}.
-\]
-Consequently \(\mathrm{Agg}L^2(q''_{\can})\) holds inside the ordinary
-Hardy-normalized canonical branch.
-\end{theorem}
-
-\begin{proof}
-By Theorem~\ref{hyp:completed-source-anchor},
-\[
-  \partial_t^3Z_{\mathrm H}(t)
-  =
-  \mathcal Z_{\curv}\!\left(\frac12+it\right).
-\]
-Thus the active physical source is
-\[
-  q''_{\can}=u_H=\partial_t^3Z_{\mathrm H}.
-\]
-
-The residue-aware differentiated Hardy AFE is
-Theorem~\ref{thm:smooth-finite-AFE-package}.  It writes
-\[
-  u_H(t)=F_X^{H,3}(t)+R_X^{H,3}(t),
-\]
-where the finite main term is a finite sum of two Hardy-symmetric Dirichlet
-polynomial halves:
-\[
-\begin{aligned}
-F_X^{H,3}(t)
-&=
-\sum_{0\le r+k+\ell\le3}
-\sum_{n\ge1}
-a^+_{r,k,\ell}(t)
-(\log n)^r n^{-1/2-it}
-V^+_{r,k,\ell}(n/X;t)
-\\
-&\quad+
-\sum_{0\le r+k+\ell\le3}
-\sum_{n\ge1}
-a^-_{r,k,\ell}(t)
-(\log n)^r n^{-1/2+it}
-V^-_{r,k,\ell}(nX;t)
-+
-P_{\mathrm{res},X}^{H,3}(t).
-\end{aligned}
-\]
-The amplitudes \(a^\pm_{r,k,\ell}(t)\) are finite combinations of derivatives
-of \(B_{\mathrm H}(s)=\chi(s)^{-1/2}\), derivatives of the smooth AFE weights,
-and differentiated functional-equation factors.  The residual satisfies, after
-choosing the Mellin cutoff depth sufficiently large,
-\[
-  \|R_X^{H,3}\|_{L^2(W_{\mathrm{ref}})}
-  +
-  \|R_X^{H,3}\|_{L^2(W_{\mathrm{branch}}^{\mathrm{can}})}
-  \le
-  Q^{-A_{\mathrm{tail}}}
-\]
-with \(A_{\mathrm{tail}}\) larger than all fixed polynomial losses.  Therefore
-the AFE residual is perturbative in the source Gram, by
-Corollary~\ref{cor:ef-completion-bound}; all differentiated residue terms remain
-in the finite main term unless separately estimated.
-
-The dyadic Hardy-derivative mean-square theorem used in
-Lemma~\ref{lem:main-term-noncollapse} gives
-\[
-  \int_{\Omega_T}|u_H(t)|^2W_{\mathrm{ref}}(t)\,dt
-  \ge
-  Q^{-A_{\mathrm{ms}}}G_{\mathrm{ref}}.
-\]
-This is the only analytic noncollapse input.  It is a dyadic reference-window
-statement, not a pointwise lower bound on every packet.
-
-The branch window is full-cover canonical before mass-good selection.  Hence
-Theorem~\ref{thm:branch-reference-block-domination}, equivalently
-Lemma~\ref{lem:canonical-pointwise-branch-reference-domination}, gives
-\[
-  W_{\mathrm{branch}}^{\mathrm{can}}(t)
-  \ge
-  Q^{-C_{\mathrm{dom}}}W_{\mathrm{ref}}(t).
-\]
-Therefore
-\[
-\begin{aligned}
-  \sum_p L_p
-  &=
-  \int |u_H(t)|^2W_{\mathrm{branch}}^{\mathrm{can}}(t)\,dt \\
-  &\ge
-  Q^{-C_{\mathrm{dom}}}
-  \int_{\Omega_T}|u_H(t)|^2W_{\mathrm{ref}}(t)\,dt \\
-  &\ge
-  Q^{-(A_{\mathrm{ms}}+C_{\mathrm{dom}})}G_{\mathrm{ref}}.
-\end{aligned}
-\]
-Lemma~\ref{lem:hardy-curvature-mass-good-packets-carry-mass} then shows that,
-after choosing
-\[
-  A_{\mathrm{mg}}
-  >
-  A_{\mathrm{ms}}+C_{\mathrm{dom}}+C_{\mathrm{vol}}+2,
-\]
-the mass-good packets carry a polynomial fraction of this branch source mass:
-\[
-  \sum_{p\in\mathcal P_{\mathrm{mg}}}L_p
-  \ge
-  Q^{-A}G_{\mathrm{ref}}.
-\]
-
-Finally, on a normalized packet,
-\[
-  \mathcal D_p^3Z_{\mathrm H}(t)
-  =
-  \lambda_p^3\partial_t^3Z_{\mathrm H}(t)
-  =
-  \lambda_p^3\mathcal Z_{\curv}\!\left(\frac12+it\right).
-\]
-The squared \(L^2\)-energy therefore acquires the factor \(|\lambda_p|^6\).
-Scale admissibility gives
-\[
-  Q^{-6C_\lambda}\le |\lambda_p|^6\le Q^{6C_\lambda},
-\]
-so the normalized packet-row estimate follows after increasing the exponent by
-\(6C_\lambda\).  This is exactly the aggregate Hardy-curvature Gate--1 estimate
-\(\mathrm{Agg}L^2(q''_{\can})\) inside the ordinary canonical branch.
-\end{proof}
-
-
-\begin{corollary}[Gate--1 source survival from Hardy curvature]
-\label{cor:hardy-curvature-agg-l2-gate-one}
-On every ordinary Hardy-normalized canonical branch satisfying the hypotheses
-of Theorem~\ref{thm:hardy-curvature-aggregate-source-lower-bound},
-\[
-  \mathrm{Agg}L^2(q''_{\can})
-\]
-holds with polynomial loss.  In physical coordinates,
-\[
-  q''_{\can}=u_H=\partial_t^3Z_{\mathrm H}.
-\]
-In packet-normalized coordinates,
-\[
-  q''_{\can,p}(t)
-  =
-  \mathcal D_p^3Z_{\mathrm H}(t)
-  =
-  \lambda_p^3u_H(t).
-\]
-Thus all Gate--1 source rows in the active Hardy branch are actual
-Hardy-curvature rows, not rows from the archived fixed-coefficient
-\(a_1=1\) source package.
-\end{corollary}
-
-\begin{proof}
-This is Theorem~\ref{thm:hardy-curvature-aggregate-source-lower-bound} with
-the source convention of Theorem~\ref{hyp:completed-source-anchor}.  The
-polynomial loss from packet normalization is exactly the factor
-\(|\lambda_p|^6\), which is controlled by scale admissibility.
-\end{proof}
-
 
 \begin{remark}[No arbitrary local Hardy-curvature lower bound]
 \label{rem:reference-noncollapse-uniformity}
-The Hardy-curvature lower bound is a dyadic reference-window and mass-good
-packet theorem.  It is not a pointwise or adversarial-window lower bound.  A
-nonnegative local weight can be supported in a small neighbourhood where
+The Hardy-curvature lower bound is a dyadic/mass-good source theorem, not a
+pointwise lower bound on every arbitrary packet.  A nonnegative weight can be
+supported in a tiny neighbourhood where \(|\partial_t^3Z_{\mathrm H}|\) is very small;
+therefore no theorem of the form
 \[
-  |\partial_t^3Z_{\mathrm H}(t)|
+\int_K|\partial_t^3Z_{\mathrm H}(t)|^2W_K(t)\,dt
+\ge Q^{-A}\int_KW_K(t)\,dt
 \]
-is very small, so a statement of the form
-\[
-  \int_K|\partial_t^3Z_{\mathrm H}(t)|^2W_K(t)\,dt
-  \ge
-  Q^{-A}\int_KW_K(t)\,dt
-\]
-cannot hold uniformly for all arbitrary local windows \(K\).  The active proof
-uses canonical dyadic reference windows, the full-cover canonical branch window,
-and then mass-good packet selection.  This is the source-side replacement for
-the archived \(a_1=1\) noncollapse route.
+can hold for all adversarial local windows \(K\).  The active proof branch uses
+canonical dyadic reference windows and then selects mass-good Whitney packets.
+This is the source-side replacement for the old \(a_1=1\) noncollapse argument.
 \end{remark}
-
-
-\begin{remark}[Non-circular order of branch/reference domination]
-\label{rem:hardy-source-window-domination-noncircular}
-The domination
-\[
-  W_{\mathrm{branch}}^{\mathrm{can}}\ge Q^{-C}W_{\mathrm{ref}}
-\]
-is not obtained from the desired source lower bound.  The order of construction
-is:
-\[
-  \text{ordinary source region}
-  \Longrightarrow
-  \text{Whitney core cover}
-  \Longrightarrow
-  W_{\mathrm{branch}}^{\mathrm{can}}
-  \Longrightarrow
-  W_{\mathrm{branch}}^{\mathrm{can}}\ge Q^{-C}W_{\mathrm{ref}}
-  \Longrightarrow
-  \text{source lower bound}
-  \Longrightarrow
-  \text{mass-good packet selection}.
-\]
-For \(t\) in the good ordinary source region, the Whitney core-covering
-property supplies a packet \(p\) with \(t\in K_p^\circ\).  Since
-\[
-  w\!\left(\frac{t-m_p}{r_p}\right)\ge c_w
-\]
-on cores and \(W_{\mathrm{ref}}\) is scale-slow,
-\[
-  W_{\mathrm{branch}}^{\mathrm{can}}(t)
-  \ge
-  W_{\mathrm{ref}}(m_p)
-  w\!\left(\frac{t-m_p}{r_p}\right)
-  \ge
-  c_wQ^{-C_{\mathrm{sl}}}W_{\mathrm{ref}}(t).
-\]
-Thus branch/reference domination is a structural consequence of the canonical
-full-cover window.  It would be circular only if the branch window were defined
-after selecting mass-good packets.  The active construction does not do that.
-\end{remark}
-
-
-\begin{remark}[Exact dependencies of the Hardy-curvature source theorem]
-\label{rem:hardy-curvature-source-exact-dependencies}
-Theorem~\ref{thm:hardy-curvature-aggregate-source-lower-bound} uses exactly the
-following inputs:
-
-\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
-
-\item the actual Hardy source trace
-\[
-  \partial_t^3Z_{\mathrm H}(t)
-  =
-  \mathcal Z_{\curv}\!\left(\frac12+it\right)
-\]
-from Theorem~\ref{hyp:completed-source-anchor};
-
-\item the residue-aware differentiated Hardy AFE of
-Theorem~\ref{thm:smooth-finite-AFE-package}, including gamma/theta derivative
-amplitudes, log-power coefficients, all differentiated residue terms in the
-finite main term, and a polynomially negligible \(L^2\) residual;
-
-\item the dyadic weighted mean-square lower bound for the fixed Hardy
-derivative \(Z_{\mathrm H}^{(3)}\), as recorded in
-Lemma~\ref{lem:main-term-noncollapse};
-
-\item canonical dyadic reference-window comparability and nonconcentration;
-
-\item bounded-overlap Whitney packet coverage;
-
-\item scale-slow variation of \(W_{\mathrm{ref}}\) on packet cores and fixed
-enlargements;
-
-\item polynomial packet-scale admissibility
-\[
-  Q^{-C_\lambda}\le |\lambda_p|\le Q^{C_\lambda};
-\]
-
-\item the full-cover definition of
-\(W_{\mathrm{branch}}^{\mathrm{can}}\) before mass-good packet selection.
-
-\end{enumerate}
-
-It does not use archived O1/O2/O3 pointwise gates, the old \(a_1=1\)
-completed-source noncollapse route, scalar \(I\)-coordinate D4, primitive-only
-\(Y12\), or raw branch-observable windows.
-\end{remark}
-
 
 \begin{remark}[Status after the actual Hardy-curvature source repair]
 \label{rem:status-after-actual-hardy-curvature-source-repair}
-Inside an ordinary Hardy-normalized canonical branch, the source theorem is
-closed:
-\[
-  \text{Hardy source anchor}
-  \Longrightarrow
-  \text{differential Hardy AFE}
-  \Longrightarrow
-  \text{dyadic reference mean square}
-  \Longrightarrow
-  \text{mass-good Whitney packets}
-  \Longrightarrow
-  \mathrm{Agg}L^2(q''_{\can}).
-\]
-The theorem does not prove the global RH-entry implication
-\[
-  \rho=\beta+i\gamma,\quad \beta\ne\frac12
-  \Longrightarrow
-  \text{ordinary Hardy-normalized canonical branch}.
-\]
-It also does not remove the large-height threshold in the dyadic
-Hardy-derivative mean-square theorem.  Low-height zeros require either a finite
-verification below the effective threshold or a separate low-height argument.
-
-Thus the source side is proved only after entry into the ordinary canonical
-Hardy branch.  This is the intended scope of the active Gate--1 theorem.
+The completed-source anchor is discharged in the active Hardy branch by
+Theorem~\ref{hyp:completed-source-anchor}; the old abstract \(a_1=1\) source
+package is superseded.  The source noncollapse input is discharged on canonical
+dyadic ordinary source windows by Lemma~\ref{lem:main-term-noncollapse} and by
+mass-good packet selection.  These changes do not alter the downstream
+canonical branch-complete window, the pre-extraction Fej\'er--Riesz Stack
+construction, or the maximal labelled \(K9\) live/dead routing; those pieces use
+only the resulting finite AFE, polynomial coefficient/derivative bounds, and
+source mass in the canonical branch.
 \end{remark}
 
 \begin{definition}[Active Hardy source API]
