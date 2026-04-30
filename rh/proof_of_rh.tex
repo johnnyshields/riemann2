@@ -35646,7 +35646,7 @@ coefficient, smooth, and chart data before observing the wall \(W_2\).
 % Purpose:
 %   Record the current post-row-normal cleanup architecture.
 % Status:
-%   Active architecture / finite-audit ledger.
+%   Updated architecture ledger; raw singular-discard rank tests are archived.
 
 \begin{remark}[Current architecture after the \(L^2\) Gate--1 repair]
 \label{rem:current-architecture-l2-gate-one-forbidden-d4}
@@ -35655,9 +35655,9 @@ The active architecture is now
   \boxed{
   \mathrm{Agg}L^2(q''_{\can})
   +
-  \mathrm{Finite/O2O3}_{23}
+  \mathrm{Graph/O2O3}_{23}
   +
-  \mathrm{ForbiddenSingularDiscardD4}.
+  \mathrm{NormalD4}_{K9}^{\mathrm{gr}}.
   }
 \]
 Here Gate--1 is local scalar \(L^2\)-energy of the full canonical source
@@ -35675,33 +35675,29 @@ the plain wall
 \]
 not derivative wall components.
 
-The finite/O2O3 module uses an analytic \(R^C\)-conditioned Riesz basis for the
-finite augmented matrix.  The downstream forbidden channel, if it exists, uses a
-separate carrier/source-coherence projection.  These two bases should not be
-identified.
-
-The best current downstream forbidden-channel candidate is the local
-transition--singular discard operator
+The finite/O2O3 module uses the graph/O2O3 package supplied by
+Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3}.  The downstream
+forbidden channel is the canonical source-graded \(K9\) channel
 \[
-  \Lambda_{\mathrm{tr},\mathrm{sing},p}:=(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}P_{\mathrm{tr},p},
+  \Lambda_p^{\mathrm{gr,full}}
+  =(I-P_p^{\mathrm{full}})\mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p},
 \]
-not the full three-chart atlas loop.  The finite audit is whether
+and its maximal affine projection.  Raw tests of
 \[
-  (I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}
+  (I-P_{\mathrm{sing}}^{\mathrm{raw}})T_{\mathrm{tr}\to\mathrm{sing}}
   \operatorname{span}\{[\mathsf C_7]^{\mathrm{tr}},[\mathsf C_{Y12}]^{\mathrm{tr}}\}
 \]
-is nonzero.  If it is zero, the singular-discard channel is D4-invisible.  If
-it has rank one or two, it gives a genuine local forbidden channel.
+are archived diagnostics for noncanonical singular projections; they are not
+active finite audits in the canonical source-graded branch.
 \end{remark}
 
 % === audit-D4-needs-forbidden-channel ===
 % Purpose:
-%   Prevent the carrier-quotient D4 visibility theorem from being mistaken for
-%   a contradiction theorem.
+%   Record the old no-go boundary and the current canonical-channel repair.
 % Status:
-%   Active no-go / finite-audit warning.
+%   Archived no-go warning; repaired by the source-graded \(K9\) channel.
 
-\begin{remark}[D4 visibility is not yet contradiction]
+\begin{remark}[D4 visibility and the canonical forbidden channel]
 \label{rem:D4-visibility-not-contradiction}
 Carrier-quotient D4 supplies local visibility of the row-normalized plain wall:
 \[
@@ -35713,23 +35709,19 @@ Carrier-quotient D4 supplies local visibility of the row-normalized plain wall:
     \beta_9^{\mathrm{tri}}\Gamma_G+\alpha_9\Gamma_{G,2}
   \end{pmatrix}.
 \]
-This is not by itself a contradiction.  A contradiction requires a global
-forbidden channel
+This local visibility was not, by itself, a contradiction; it required a
+forbidden channel with a same-norm upper.  In the active proof branch that
+channel is now fixed:
 \[
-  \Lambda:\mathcal H_{\mathrm{row}}\to\mathcal K
+  \Lambda_p^{\mathrm{gr,full}}
+  =(I-P_p^{\mathrm{full}})\mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p},
+  \qquad
+  \widehat\Lambda_{\max,p}=\Pi_{\max,p}^{\mathrm{gr}}\Lambda_p^{\mathrm{gr,full}}.
 \]
-such that the global row object satisfies
-\[
-  \|\Lambda V_{\mathrm{glob}}\|^2\le Q^{-B}\mu(\mathcal C),
-\]
-or exactly \(\Lambda V_{\mathrm{glob}}=0\), while local D4 produces
-\[
-  \|\Lambda v_m\|^2\ge Q^{-A}
-\]
-on a polynomial-weight extracted set.
-
-Thus D4 is currently a carrier-quotient visibility theorem unless a concrete
-\(\Lambda\) is supplied and shown to see the live D4 carrier plane.
+The local D4 lower is seen by this channel through the maximal affine row
+realization, while Theorem~\ref{thm:source-graded-same-norm-typeI-upper}
+gives the same-norm upper.  Therefore the warning in this remark applies only
+to carrier-quotient D4 used without the canonical source-graded \(K9\) channel.
 \end{remark}
 
 \begin{definition}[Covariant septic row]
@@ -38616,9 +38608,13 @@ test, not a remaining open assumption.
 The \(Y12\) graph/coercivity low-block gap is closed on the certified
 singular-discard branch.  Any statement referring to an unresolved raw
 Gershgorin margin concerns only non-certified or Taylor-complete
-retained spaces and is not part of the active proof branch.  The
-remaining singular-discard work is the residual upper in the same
-certified quotient norm, not the finite low-block determinant.
+retained spaces and is not part of the active proof branch.  In the active
+canonical route, the residual upper is not a scalar certified-quotient
+assumption: it is the source-graded full-vector \(K9\) upper of
+Definition~\ref{def:source-graded-full-vector-K9-completion} and
+Theorem~\ref{thm:source-graded-same-norm-typeI-upper}.  Thus no
+low-block determinant or scalar residual-upper audit remains in
+\(\delta_{\mathrm{coerc}}\).
 \end{remark}
 
 \begin{remark}[Defect matrix and \(D4\) transversality]
@@ -44560,9 +44556,9 @@ gives positive mass for the D4 normal component, producing the contradiction.
 \end{proof}
 
 
-\begin{proposition}[Certified forbidden singular-discard D4 visibility]
+\begin{proposition}[Archived scalar certified singular-discard D4 visibility]
 \label{hyp:forbidden-singular-discard-d4}
-On the certified proof-level branch define
+For the legacy scalar-certified branch define
 \[
   K_{\mathrm{D4},p}^{\mathrm{cert}}
   :=
@@ -44580,8 +44576,12 @@ set
   \qquad
   \operatorname{rank}K_{\mathrm{D4},p}^{\mathrm{cert}}=2 .
 \]
-Consequently the finite D4 wall energy may be formed with the same certified
-singular-discard projection that appears in the upper bound:
+Consequently the finite D4 wall energy may be formed in that scalar-certified
+projection.  In the active canonical source-graded branch this archived matrix
+is replaced by \(K_{\mathrm{D4},p}^{\mathrm{gr}}\) from
+Definition~\ref{def:d4-singular-discard-transversality-matrix}; the final
+upper/lower comparison is made in \(H_{K9,p}^{\mathrm{gr}}\), not in the scalar
+certified quotient.  The archived scalar wall energy is
 \[
   E_{\mathrm{wall}}^{\mathrm{forb}}(p)
   :=
@@ -44632,10 +44632,15 @@ row and Schur estimates lose polynomial conditioning.
 \item If the D4 live plane is not coefficient-good, the wall energy loses
 polynomial normalization even though the certified projection is transverse.
 \end{enumerate}
-With the certified projection and coefficient-good packets, the rank-two finite
-D4 visibility item is supplied by
-Proposition~\ref{hyp:forbidden-singular-discard-d4}; the remaining contradiction
-work is the same-norm upper and the atomic comparison.
+With the certified scalar projection and coefficient-good packets, the archived
+rank-two finite D4 visibility item is supplied by
+Proposition~\ref{hyp:forbidden-singular-discard-d4}.  In the active canonical
+branch, this role is taken by the source-graded matrix
+\(K_{\mathrm{D4},p}^{\mathrm{gr}}\), while the same-norm upper and atomic
+comparison are closed by Theorem~\ref{thm:canonical-source-graded-affine-branch-closure}
+and the canonical source-graded atomic contradiction.  Thus the listed failure
+routes are diagnostics for noncanonical singular-discard choices, not active
+obstructions in the source-graded branch.
 \end{remark}
 
 
@@ -47501,13 +47506,17 @@ carrier.  If every natural carrier lift is functorial through order \(9\), then
 and finite D4 has no contradiction channel.
 
 \item Carrier-quotient D4 is a visibility theorem, not a contradiction theorem,
-until a forbidden channel \(\Lambda\) is supplied.  The finite audit is
+unless a forbidden channel \(\Lambda\) is supplied.  In the active canonical
+source-graded branch this channel is
+\(\Lambda_p^{\mathrm{gr,full}}\) and its maximal affine projection, so the
+old rank audit
 \[
   \operatorname{rank}
   \left(
     \Lambda E_{\mathrm{car}}L_{\mathrm{clean}}
-  \right)\ge1.
+  \right)\ge1
 \]
+is retained only as a noncanonical diagnostic.
 \end{enumerate}
 \end{remark}
 
@@ -50660,9 +50669,12 @@ and
 \]
 \end{remark}
 
-\begin{remark}[Next finite audits after the \(L^2\)-Gate--1 repair]
+\begin{remark}[Archived finite-audit checklist after the \(L^2\)-Gate--1 repair]
 \label{rem:next-finite-audits-after-l2-gate-one}
-After the \(L^2\)-Gate--1 repair, the next finite audits are:
+This checklist records older finite-audit items and their current routing.  It
+is not the active terminal ledger; see
+Remark~\ref{rem:active-input-status-table} for the current source-graded status.
+The archived items are:
 \begin{enumerate}
 \item \textbf{Finite AFE anti-lock.}
 Prove
@@ -50704,13 +50716,17 @@ structural hypotheses, the theorem proves
 with polynomial loss.
 
 \item \textbf{EF residual split.}
-Prove \(\mathrm{EFCompletion}_{L^2}\) for the source-energy ledger.  In the
-canonical downstream branch, the separate \(K9\) requirement is the
-source-graded full-vector tail estimate
-\(\mathrm{EFCompletion}_{K9}^{\mathrm{gr,vec}}\), supplied by
-Theorem~\ref{thm:full-vector-K9-EFCompletion-from-AFE-tail} once the smooth
-AFE derivative tail, polynomial finite-jet row bounds, and bounded packet
-overlap/quadrature hypotheses are in force.
+Keep the three completion ledgers distinct:
+\[
+  \mathrm{EFCompletion}_{L^2},
+  \qquad
+  \mathrm{EFCompletion}_{K9}^{\mathrm{gr,vec}},
+  \qquad
+  \mathrm{EFCompletion}_{Y12}.
+\]
+In the canonical source-graded branch the \(K9\) item is the full-vector tail
+estimate of Definition~\ref{def:source-graded-full-vector-K9-completion}; it is
+not the older scalar singular-discard estimate.
 
 \item \textbf{Y12 honesty.}
 Classify
@@ -50728,14 +50744,20 @@ Compute whether
 \]
 
 \item \textbf{Certified transition--singular branch.}
-The finite low-block leakage of the \(C_7/Y12\) carrier pair is now
-closed on the certified branch by
+The finite low-block leakage of the \(C_7/Y12\) carrier pair is closed on the
+certified branch by
 Theorem~\ref{thm:low-block-coercivity-certified-singular-quotient}.  In the
-canonical source-graded branch, the residual/EF upper is the full-vector
-labelled estimate of
-Theorem~\ref{thm:full-vector-K9-EFCompletion-from-AFE-tail}, projected to the
-same-norm observable of Theorem~\ref{thm:source-graded-same-norm-typeI-upper}.
-Raw computations of
+active same-norm branch, the residual upper is the source-graded full-vector
+estimate
+\[
+  \sum_p
+  \bigl\|
+  (I-P_{R_p})\mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p}(R_X)
+  \bigr\|_{\mathrm{gr}}^2
+  \le Q^{-B}\mu(\mathcal C),
+\]
+followed by full finite-main retention through \(P_p^{\mathrm{full}}\).  Raw
+computations of
 \((I-P_{\mathrm{sing}}^{\mathrm{raw}})T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_7]^{\mathrm{tr}}\)
 and
 \((I-P_{\mathrm{sing}}^{\mathrm{raw}})T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}]^{\mathrm{tr}}\)
@@ -50762,15 +50784,15 @@ Prove a \(Q^C\)-bounded second fundamental form / tubular radius estimate for
 After the current cleanup, the remaining decisive finite decisions are:
 \begin{enumerate}
 \item The proof-level singular-discard branch uses the certified retained
-space \(R_{\mathrm{sing}}^{\mathrm{cert}}\).  On this branch the rank-two
-low-block leakage is closed by
-Theorem~\ref{thm:low-block-coercivity-certified-singular-quotient}.
-The remaining decision is not the finite rank of the certified carrier
-plane, but whether the residual singular-discard upper holds in the
-same certified norm.  Raw choices of
+space \(R_{\mathrm{sing}}^{\mathrm{cert}}\), and the active final comparison uses
+the canonical source-graded lift.  The rank-two low-block leakage is closed by
+Theorem~\ref{thm:low-block-coercivity-certified-singular-quotient}.  The
+residual upper is supplied, in the active branch, by
+\(\mathrm{EFCompletion}_{K9}^{\mathrm{gr,vec}}\) and
+Theorem~\ref{thm:source-graded-same-norm-typeI-upper}; it is no longer a
+separate scalar certified-norm decision.  Raw choices of
 \(R_{\mathrm{sing}}^{\mathrm{raw}}\) may still have rank \(0,1,\) or
-\(2\), but those cases are diagnostic archives rather than active
-proof branches.
+\(2\), but those cases are diagnostic archives rather than active proof branches.
 
 \item Decide whether \(T_{\mathrm{tr}\to\mathrm{sing}}\) transports formed labelled
 carriers or recomputes \(N_0/\mathcal W\).  Transport preserves the
@@ -50797,7 +50819,7 @@ The targeted route is weaker and should be attempted first.
 % Purpose:
 %   Record the current downstream no-go boundary.
 % Status:
-%   Active audit ledger.
+%   Archived no-go boundary; active branch uses the canonical source-graded channel.
 
 \begin{remark}[No forbidden channel, no D4 contradiction]
 \label{rem:no-Lambda-no-D4-contradiction}
@@ -50828,16 +50850,18 @@ The acceptable forbidden-channel mechanisms are:
 \]
 \end{enumerate}
 Without one of these, finite D4 remains a detector, not a proof-closing
-contradiction.  The current best finite-D4 candidate is the certified
-singular-discard channel
+contradiction.  In the active canonical branch the proof-level forbidden
+channel is no longer the scalar certified discard alone, but the fixed
+source-graded observable
 \[
-  \Lambda_{\mathrm{tr},\mathrm{sing}}^{\mathrm{cert}}
-  =
-  (I-P_{\mathrm{sing}}^{\mathrm{cert}})T_{\mathrm{tr}\to\mathrm{sing}}P_{\mathrm{tr}}.
+  \Lambda_p^{\mathrm{gr,full}}
+  =(I-P_p^{\mathrm{full}})\mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p},
 \]
-The unsuperscripted notation in the active forbidden-channel branch is
-used only under the convention
-\(P_{\mathrm{sing}}=P_{\mathrm{sing}}^{\mathrm{cert}}\).
+and its maximal affine projection \(\widehat\Lambda_{\max,p}\).  The scalar
+certified channel
+\((I-P_{\mathrm{sing}}^{\mathrm{cert}})T_{\mathrm{tr}\to\mathrm{sing}}P_{\mathrm{tr}}\)
+remains an archived collapsed diagnostic; it is not the active same-norm
+forbidden channel.
 \end{remark}
 
 % === wip-current-postclosure-architecture-ledger ===
@@ -50848,14 +50872,15 @@ used only under the convention
 
 \begin{remark}[Current post-closure architecture]
 \label{rem:current-postclosure-architecture}
-After the rank-two closure cleanup, the live proof architecture is best recorded as
+After the canonical source-graded cleanup, the live proof architecture is best
+recorded as
 \[
   \boxed{
   \mathrm{Agg}L^2(q''_{\can})
   +
   \mathrm{Graph/O2O3}_{23}
   +
-  \mathrm{ForbiddenSingularDiscardD4}.
+  \mathrm{NormalD4}_{K9}^{\mathrm{gr}}.
   }
 \]
 The first term is branch-complete local scalar source energy:
@@ -50874,20 +50899,17 @@ active packets are expressed in the bounded-degree Fej\'er--Riesz charge model:
   \simeq
   m_{\can}\bigl(\mathbf C\cdot(1/m_{\can})+\mathbf C_R[x]\bigr).
 \]
-The third term is a forbidden D4 channel, currently represented by the
-transition--singular discard operator
+The third term is the canonical source-graded forbidden D4 channel
 \[
-  \Lambda_{\mathrm{tr},\mathrm{sing}}=(I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}P_{\mathrm{tr}}.
+  \Lambda_p^{\mathrm{gr,full}}
+  =(I-P_p^{\mathrm{full}})\mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p},
 \]
-
-The older row-normal rank-two chain is a finite-audit submodule only for
-archived scalar or noncertified routes.  In the canonical source-graded branch,
-D4 visibility is through the labelled \(K9\) forbidden channel
-\(\Lambda_p^{\mathrm{gr,full}}\) and its maximal affine projection; the
-same-norm contradiction is recorded in
-Theorem~\ref{thm:canonical-source-graded-atomic-contradiction}.  The remaining
-entry obligations are source/packet hypotheses and the raw row/routing
-certificate, not a missing final forbidden-channel comparison.
+together with its maximal affine projection \(\widehat\Lambda_{\max,p}\).  The
+rank-two carrier algebra, effective-carrier determinant, source-weighted D4
+amplitude mass, finite-main Schur complement, same-norm upper, and atomic
+comparison are closed in this canonical branch.  The older scalar
+transition--singular discard operator is retained only as a collapsed diagnostic
+for noncanonical routes.
 \end{remark}
 
 The following negative results and audit boundaries are part of the current
