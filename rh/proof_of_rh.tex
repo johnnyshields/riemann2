@@ -54496,6 +54496,7 @@ positive.
 
 \begin{theorem}[Actual Hardy-curvature source anchor]
 \label{hyp:completed-source-anchor}
+\label{thm:actual-hardy-curvature-source-anchor}
 Let
 \[
 Z_{\mathrm H}(t):=B_{\mathrm H}(1/2+it)\zeta(1/2+it),
@@ -54552,6 +54553,21 @@ when packet-normalized derivatives are used, and as
 \(q''_{\can}(t)=\mathcal Z_{\curv}(1/2+it)\) in the physical derivative
 normalization.  A proof branch that keeps a different real scalar or a
 logarithmic phase must provide its own corresponding AFE and residue package.
+\end{remark}
+
+\begin{remark}[Label convention for the Hardy source anchor]
+\label{rem:hardy-source-anchor-label-convention}
+The historical label \(\texttt{hyp:completed-source-anchor}\) is retained only
+for citation stability.  In the active Hardy branch the source trace is the
+theorem
+\[
+  \partial_t^3Z_{\mathrm H}(t)
+  =
+  \mathcal Z_{\curv}\!\left(\frac12+it\right),
+\]
+proved in Theorem~\ref{thm:actual-hardy-curvature-source-anchor}.  Any future
+source branch using a different scalar or logarithmic phase must provide its
+own trace theorem, AFE package, and source-mass theorem.
 \end{remark}
 
 \begin{lemma}[Odd functional equation for the actual Hardy-curvature source]
@@ -55330,14 +55346,33 @@ No derivative estimate is included in the definition of scale-admissibility
 or mass-goodness.
 \end{definition}
 
-\begin{remark}[Upper raw-scale bound from localization]
+\begin{remark}[Raw-scale admissibility versus collar no-loss]
 \label{rem:upper-raw-scale-bound}
 The upper bound \(\lambda_p^{\mathrm{raw}}\le Q^C\) follows from the fact
 that the source-admissible region lies inside the finite-AFE window
 \(I_{\mathrm{ref}}\) of polynomial diameter, so
-\(d(m_p)\le \operatorname{diam}(I_{\mathrm{ref}})\ll Q^C\).  The lower bound
-is part of admissibility; it is upgraded to a theorem about good packets in
-Corollary~\ref{cor:boundary-collar-exclusion}.
+\[
+d(m_p)\le \operatorname{diam}(I_{\mathrm{ref}})\ll Q^C.
+\]
+The lower bound
+\[
+\lambda_p^{\mathrm{raw}}\ge Q^{-C_\lambda}
+\]
+is part of the admissible-packet selection in
+Definition~\ref{def:raw-packet-scale-admissibility}.  The role of
+Corollary~\ref{cor:boundary-collar-exclusion} is not to prove that every raw
+Whitney packet has this lower bound.  Its role is to prove that discarding the
+sub-polynomial boundary-collar packets is no-loss for the source-frame mass.
+Thus the noncircular order is
+\[
+\text{raw Whitney packets}
+\to
+\text{scale-admissible selection}
+\to
+\text{packet envelope}
+\to
+\text{boundary-collar no-loss}.
+\]
 \end{remark}
 
 \begin{theorem}[Finite-AFE derivative budget on raw packets]
@@ -59177,6 +59212,23 @@ is first transferred into the canonical branch below, and the contradiction is
 then proved entirely inside that branch.
 \end{remark}
 
+\begin{remark}[Unsuperscripted notation in the canonical branch]
+\label{rem:unsuperscripted-canonical-notation}
+In sections following the canonical construction ledger, unsuperscripted notation
+is used only under the active-branch convention
+\[
+W_{\mathrm{branch}}=W_{\mathrm{branch}}^{\mathrm{can}},\qquad
+q_p^Y=q_{p,\mathrm{aff}}^Y,\qquad
+P_{\mathrm{sing},p}=P_{\mathrm{sing},p}^{\mathrm{cert}},
+\qquad
+\Lambda_p=\Lambda_p^{\mathrm{gr,full}},
+\]
+unless explicitly stated otherwise.  Any theorem using an archived branch
+weight, a raw quotient, a raw singular projection, or a scalar-collapsed
+observable must carry the corresponding superscript and must provide a
+polynomial comparison theorem before entering the proof-level chain.
+\end{remark}
+
 \begin{remark}[Canonical branch dependency ledger]
 \label{rem:canonical-branch-dependency-ledger}
 The order of construction in the active branch is fixed as follows:
@@ -59241,8 +59293,11 @@ on the selected good set where the factor \(\Phi_B\) has polynomial coefficient
 bounds and a polynomial outer lower bound.  In particular, model membership
 alone is not enough: if \(|\Phi_B|^2\) were allowed to vanish on the active
 packet family, the anti-lock theorem would be applied to a measure that has
-already discarded the obstruction.  All O2/O3 masses in the active branch are
-therefore measured with \(d\nu_{\mathrm{FR},B}\) from
+already discarded the obstruction.  The factor \(\Phi_B\) is fixed by the
+pre-extraction Stack construction before the cap, wall, or live/dead quotient
+is chosen; it is not selected after seeing which live direction would otherwise
+survive.  All O2/O3 masses in the active branch are therefore measured with
+\(d\nu_{\mathrm{FR},B}\) from
 Definition~\ref{def:pre-extraction-FR-stack-weight}, and any older Stack
 measure must be polynomially compared to it before it can be used in a proof.
 \end{remark}
@@ -59283,6 +59338,43 @@ packet and every finite jet.  If a future argument needs such a comparison, it
 must be stated as a separate Gram-transfer theorem with polynomial constants.
 \end{remark}
 
+\begin{theorem}[Exhaustive labelled live/dead routing]
+\label{thm:exhaustive-labelled-live-dead-routing}
+In the active maximal-labelled \(K9\) branch, every raw nuisance column
+\(A_{a,p}^{\mathrm{raw}}\) entering the \(Y12\) quotient admits a canonical decomposition
+\[
+A_{a,p}^{\mathrm{raw}}
+=
+A_{a,p}^{\mathrm{dead}}
++
+E_p\,m_{a,p}
++
+A_{a,p}^{\mathrm{res}},
+\qquad
+m_{a,p}:=L_p^{\mathrm{row}}A_{a,p}^{\mathrm{raw}},
+\]
+where
+\[
+L_p^{\mathrm{row}}A_{a,p}^{\mathrm{dead}}=0.
+\]
+Only the row-dead terms \(A_{a,p}^{\mathrm{dead}}\) are placed in the exact
+killed quotient.  The live terms \(E_pm_{a,p}\) are retained in the maximal
+labelled affine target, and the residual terms \(A_{a,p}^{\mathrm{res}}\) are
+controlled by the source-graded residual ledger.  Consequently no atom-local
+live \(C_7/Y12\) component is quotient-killed in the active branch.
+\end{theorem}
+
+\begin{proof}
+This is the defining projection onto the retained labelled live plane
+\(E_p=[C_{7,p}^{\mathrm{tar}}\ C_{Y,p}^{\mathrm{tar}}]\) using the certified
+rows \(L_p^{\mathrm{row}}E_p=I_2\).  Subtracting
+\(E_pL_p^{\mathrm{row}}A_{a,p}^{\mathrm{raw}}\) makes the dead remainder
+row-invisible.  The maximal labelled construction of
+Definition~\ref{def:exhaustive-maximal-labelled-K9-routing} retains the live
+component and routes the residual component before the dead quotient is
+formed.
+\end{proof}
+
 \begin{remark}[Boundary-collar route is no longer the Gate--1 proof mechanism]
 \label{rem:collar-route-diagnostic-after-canonical-window}
 With the canonical branch-complete window, Gate--1 source domination follows
@@ -59292,7 +59384,10 @@ exclusion may still be used to justify admissible raw packet scales or to
 organize packet selection, but it is no longer the load-bearing proof of
 branch/reference domination in the canonical source branch.  The draft should
 avoid running the collar-exclusion route and the canonical branch-complete
-route as competing proofs of the same Gate--1 lower bound.
+route as competing proofs of the same Gate--1 lower bound.  When collar
+exclusion is invoked later, it is used only as a no-loss certificate for
+scale-admissible packet selection, not as the proof of the Gate--1
+branch/reference Gram domination.
 \end{remark}
 
 \begin{remark}[Canonical construction ledger]
@@ -59316,12 +59411,19 @@ In the final status tables, the following wording should be used.
 \text{different source choices require their own trace/AFE/mass package}\\
 \text{Gate--2 source compatibility} &
 \text{closed by Lemma~\ref{lem:hardy-source-gate-two-derivative-compatibility}} &
-\text{all Gate--2 primes use the same normalized derivative }\mathcal D_p
+\text{all Gate--2 primes use the same normalized derivative }\mathcal D_p\\
+\text{RH-entry into the Hardy branch} &
+\text{separate entry theorem} &
+\text{prove RH counterexample }\Rightarrow
+\text{ ordinary Hardy-normalized routed branch satisfying Gate--1/Gate--2}
 \end{array}
 \]
 Thus the canonical construction rules and the Hardy-curvature source repair
-together close source/O2O3/raw-\(2Y\) construction gaps in the canonical branch;
-a different source or routing choice requires its own audit.
+close the source/O2O3/raw-\(2Y\) construction gaps after the proof has entered
+the ordinary Hardy-normalized canonical branch.  They do not by themselves
+supply the global RH-entry theorem recorded in
+Remark~\ref{rem:hardy-source-rh-entry-reduction}.  A different source or routing
+choice requires its own audit.
 \end{remark}
 
 \begin{remark}[Referee-safe status of the canonical construction rules]
@@ -59359,6 +59461,21 @@ Once this branch-entry theorem is invoked, all source estimates downstream use
 \(u_H=\partial_t^3Z_{\mathrm H}\) and its packet-normalized form
 \(\lambda_p^3u_H\).  A different initial scalar or phase requires a separate
 entry and source-package audit.
+\end{remark}
+
+\begin{remark}[Canonical branch entry is not a formal WLOG step]
+\label{rem:canonical-branch-entry-not-wlog}
+The canonical branch is a proof-level normal form only after an entry theorem
+places the hypothetical obstruction into it with polynomial loss.  Thus
+phrases such as ``we work canonically'' mean
+\[
+\text{obstruction}
+\Longrightarrow
+\text{canonical Hardy/Whitney/FR/\(K9\) branch}
+\]
+by a cited theorem, not by an informal change of notation.  This distinction is
+essential for the Hardy source, the scale-admissible packet selection, and the
+maximal labelled \(K9\) quotient.
 \end{remark}
 
 \section{Certified downstream status after the canonical source-graded closure}
@@ -59660,11 +59777,11 @@ branch-entry, or raw row-certificate obligations.
 \text{module} & \text{current status} & \text{remaining obligation}\\
 \hline
 \mathrm{Agg}L^2(q''_{\can})
-& \text{upstream source theorem}
-& \text{canonical }L^2\text{ anti-lock and branch coverage}\\
+& \text{proved inside the ordinary Hardy canonical branch}
+& \text{requires RH-entry into that branch and mass-good Hardy packets}\\
 \mathrm{Graph/O2O3}_{23}
-& \text{proved from Fej\'er--Riesz anti-lock}
-& \text{verify packet model/off-block hypotheses}\\
+& \text{proved from pre-extraction Fej\'er--Riesz anti-lock}
+& \text{requires FR Stack persistence and no early capped extraction}\\
 Y12\text{-certified quotient and }L_{\mathrm{eff},p}
 & \text{proved in the exhaustive maximal-labelled }K9\text{ branch}
 & \text{if a noncanonical raw quotient is used, verify the legacy }\mathfrak B_{2Y,p}\\
