@@ -137,6 +137,230 @@ the row-energy layer has been reduced to gauge-locked wall escape plus
 carrier-quotient D4 row conversion.  Thus the draft is a conditional local
 obstruction architecture, not a completed proof of \(\RH\).
 
+\subsection{Master conditional theorem}
+\label{subsec:master-conditional-theorem}
+
+The global proof-state is organized around the following conditional theorem.
+It is the central dependency theorem of the present draft.  It does not assert
+the branch-entry, Fej\'er--Riesz persistence, raw \(2Y\) certificate, or
+packet-to-\(K9\) transfer hypotheses; rather, it records that these are exactly
+the remaining inputs needed to turn the canonical local obstruction into a
+high-height exclusion of off-line zeros.
+
+\begin{theorem}[Master conditional high-height \(\RH\)]
+\label{thm:master-conditional-high-height-rh}
+Assume the following four inputs.
+
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=*]
+
+\item \textbf{Canonical Hardy branch-entry.}
+There are constants \(T_0,C,A>0\) such that every nontrivial zero
+\[
+  \rho=\beta+i\gamma,\qquad \beta\ne\frac12,\qquad |\gamma|\ge T_0,
+\]
+with symmetry packet
+\[
+  \mathcal Z(\rho)
+  =
+  \{\rho,\bar\rho,1-\rho,1-\bar\rho\},
+\]
+generates, with scale parameter \(Q=Q(\gamma)\to\infty\), an ordinary
+Hardy-normalized canonical packet family \(\mathcal P_\rho\).  This family is
+scale-admissible, lies in an ordinary zero-separated Hardy source strip, uses
+the canonical source
+\[
+  q''_{\can}=u_H=\partial_t^3 Z_{\mathrm H}(t),
+\]
+and satisfies the canonical source-window and Gate--1/Gate--2 entry bounds
+with only polynomial loss:
+\[
+  W_{\mathrm{branch}}^{\can}\ge Q^{-C}W_{\mathrm{ref}},
+  \qquad
+  \mathrm{Agg}L^2(q''_{\can})\ge Q^{-A}
+\]
+on a positive polynomial-weight subfamily of packets.
+
+\item \textbf{Pre-extraction Fej\'er--Riesz persistence.}
+For each active resonant block \(B\) in the family \(\mathcal P_\rho\), the
+pre-extraction Fej\'er--Riesz Stack
+\[
+  d\nu_{\mathrm{FR},B}
+  =
+  |\Phi_B(z)|^2\,d\theta\,d\sigma_B,
+  \qquad
+  \deg \Phi_B=O(R),
+\]
+is imposed before capped extraction and preserves the selected packet mass up
+to polynomial loss:
+\[
+  \nu_{\mathrm{FR},B}(\mathcal P_\rho^{\mathrm{active}})
+  \ge
+  Q^{-C}\nu_{\mathrm{pre},B}(\mathcal P_\rho^{\mathrm{active}}).
+\]
+Moreover no early capped extraction discards a super-polynomial fraction of
+the active mass.  Consequently the active packet family belongs to the
+bounded-degree Fej\'er--Riesz charge model needed for
+\(\mathrm{Graph/O2O3}_{23}\), and the graph survival gap satisfies
+\[
+  \delta_{\mathrm{graph}}\ge Q^{-A}.
+\]
+
+\item \textbf{Raw \(2Y\) row/routing certificate.}
+For every active packet \(p\in\mathcal P_\rho^{\mathrm{active}}\), the raw
+certificate
+\[
+  \mathfrak R_{2Y}(p)
+\]
+is verified or imported.  In particular, the \(C_7/Y12\) detecting rows have
+polynomial conditioning,
+\[
+  L_p^{\mathrm{row}}E_p=I_2,
+  \qquad
+  \|L_p^{\mathrm{row}}\|_{\mathrm{op}}\le Q^C,
+\]
+and every row in the raw table is routed as row-dead, coherent-live, or
+residual.  Only row-dead terms enter the exact killed quotient; every
+atom-local live \(Y12\) contribution is labelled and retained in the active
+affine branch.
+
+\item \textbf{Packet-to-source-graded \(K9\) transfer.}
+There is a canonical transfer map
+\[
+  T_{\mathrm{jet},\rho}:
+  \mathcal H_{\mathrm{pkt},\rho}^{\mathrm{good}}
+  \longrightarrow
+  \mathcal H_{K9,\rho}^{\mathrm{gr}}
+\]
+from the good analytic packet space to the canonical source-graded \(K9\) jet
+space such that
+\[
+  Q^{-C}\|v\|_{\mathrm{pkt}}^2
+  \le
+  \|T_{\mathrm{jet},\rho}v\|_{K9,\mathrm{gr}}^2
+  \le
+  Q^C\|v\|_{\mathrm{pkt}}^2
+  \qquad
+  (v\in\mathcal H_{\mathrm{pkt},\rho}^{\mathrm{good}}).
+\]
+The map is compatible with the canonical branch window, the Fej\'er--Riesz Stack,
+the labelled \(K9\) live/dead routing, and the retained affine \(C_7/Y12\)
+carrier.  In particular it transports the surviving source/graph packet mass
+into the same source-graded Hilbert norm used by
+\[
+  \Lambda_p^{\mathrm{gr,full}}
+  =
+  (I-P_p^{\mathrm{full}})
+  \mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p}
+\]
+and by the maximal affine projection
+\[
+  \widehat\Lambda_{\max,p}.
+\]
+
+\end{enumerate}
+
+Then there exists \(T_\ast\ge T_0\) such that every nontrivial zero
+\[
+  \rho=\beta+i\gamma,\qquad |\gamma|\ge T_\ast,
+\]
+satisfies
+\[
+  \beta=\frac12.
+\]
+Equivalently, under the four inputs above, \(\RH\) holds for all sufficiently
+large heights.
+\end{theorem}
+
+\begin{proof}
+Suppose, to the contrary, that there is an off-line zero
+\[
+  \rho=\beta+i\gamma,\qquad \beta\ne\frac12,
+\]
+with \(|\gamma|\) sufficiently large.  Let \(Q=Q(\gamma)\) be the associated
+canonical local height/scale parameter.
+
+By canonical Hardy branch-entry, the symmetry packet
+\[
+  \{\rho,\bar\rho,1-\rho,1-\bar\rho\}
+\]
+produces an ordinary Hardy-normalized canonical packet family
+\(\mathcal P_\rho\), with
+\[
+  q''_{\can}=u_H=\partial_t^3Z_{\mathrm H},
+\]
+canonical branch-window domination, and aggregate source survival
+\[
+  \mathrm{Agg}L^2(q''_{\can})\ge Q^{-A}
+\]
+after polynomial loss.
+
+By Fej\'er--Riesz persistence, the same active packet mass survives inside the
+pre-extraction bounded-degree charge model.  The finite charge anti-lock module
+therefore supplies
+\[
+  \mathrm{Graph/O2O3}_{23},
+  \qquad
+  \delta_{\mathrm{graph}}\ge Q^{-A},
+\]
+again after only polynomial loss.
+
+By the raw certificate \(\mathfrak R_{2Y}(p)\), the active packets have the
+required \(C_7/Y12\) detecting rows, polynomially conditioned row extraction,
+and exhaustive labelled live/dead routing.  Thus the primitive arithmetic
+rows are not quotient-killed; all atom-local live \(Y12\) contributions enter
+the retained affine source-graded branch.
+
+Finally, the packet-to-\(K9\) transfer identifies the surviving analytic packet
+mass with the canonical source-graded \(K9\) jet norm up to polynomial
+distortion.  Hence the active branch satisfies the hypotheses of the canonical
+source-graded atomic comparison:
+\[
+  \mathrm{Agg}L^2(q''_{\can})
+  +
+  \mathrm{Graph/O2O3}_{23}
+  +
+  \mathfrak R_{2Y}
+  +
+  \mathrm{Transfer}_{K9}
+  \Longrightarrow
+  \mathrm{AtomicY12Contradiction}.
+\]
+The contradiction is obtained in the same source-graded Hilbert norm, through
+\(\Lambda_p^{\mathrm{gr,full}}\) or \(\widehat\Lambda_{\max,p}\).  The
+polynomial losses in the four inputs are absorbed by increasing the constants
+\(A\) and \(C\).  Since \(Q(\gamma)\to\infty\) as \(|\gamma|\to\infty\), there
+is a threshold \(T_\ast\) beyond which the large-\(Q\) canonical contradiction
+applies.  Therefore no off-line zero can occur for \(|\Im\rho|\ge T_\ast\).
+\end{proof}
+
+\begin{corollary}[Conditional full \(\RH\) after a low-height bridge]
+\label{cor:master-conditional-full-rh-after-low-height}
+Assume the four hypotheses of
+Theorem~\ref{thm:master-conditional-high-height-rh}.  If, in addition, all
+nontrivial zeros with
+\[
+  |\Im\rho|<T_\ast
+\]
+are known to lie on the critical line, then \(\RH\) follows.
+\end{corollary}
+
+\begin{remark}[Status of the master theorem]
+\label{rem:status-master-conditional-theorem}
+Theorem~\ref{thm:master-conditional-high-height-rh} is a dependency theorem,
+not an assertion that its four inputs have been proved.  Its role is to make
+the remaining proof debt explicit:
+\[
+\boxed{
+\text{off-line zero}
+\Longrightarrow
+\text{canonical Hardy/Fej\'er--Riesz/\(K9\) branch}
+}
+\]
+with polynomial loss, plus the finite row certificate
+\(\mathfrak R_{2Y}(p)\).  Once those inputs are supplied, the downstream
+canonical source-graded branch gives the high-height contradiction.
+\end{remark}
+
 Classically, $\RH$ sits at the intersection of the zero distribution of $\zeta(s)$, the explicit formula relating zeros and primes, and a number of equivalent or partially equivalent positivity, spectral, and functional-analytic reformulations \cite{Bombieri2000,Conrey2003}.
 
 We introduce a normalized local jet-Gramian associated to the corrected local phase geometry. This object encodes the intrinsic local deformation after removal of the dominant value-channel and background effects, and it is the basic carrier of the odd quotient information used in the argument.
