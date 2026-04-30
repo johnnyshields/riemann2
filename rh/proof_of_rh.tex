@@ -55918,55 +55918,138 @@ polynomial loss.
 \end{remark}
 
 
-\begin{definition}[Branch-complete routed packet-core domination]
+\begin{definition}[Canonical branch-complete source window]
 \label{hyp:packet-core-micro-covering}
-The routed branch/reference window construction is called
-\emph{branch-complete on the good packet family} if the good packet cores have
-bounded overlap and, for every good resonant block \(B\), the branch and
-reference block Gram matrices satisfy the quadratic-form domination
+Let \(\Omega_{\mathrm{good}}\) be the good source region used by the Gate--1
+packet family.  Let
 \[
-G_{\mathrm{branch},B}\ge Q^{-C_{\mathrm{br}}}G_{\mathrm{ref},B}.
+  K_p=(m_p-r_p,m_p+r_p)
+\]
+be the raw Whitney packet cover of \(\Omega_{\mathrm{good}}\), with bounded
+overlap.  Fix a nonnegative smooth bump \(w\) and a core parameter
+\(0<\kappa<1\) such that
+\[
+  w(x)\ge c_w>0\qquad (|x|\le \kappa).
+\]
+Assume the Whitney cores
+\[
+  K_p^{\circ}:=\{t: |t-m_p|\le \kappa r_p\}
+\]
+cover \(\Omega_{\mathrm{good}}\), and assume the reference weight is scale-slow
+on cores:
+\[
+  W_{\mathrm{ref}}(m_p)\ge Q^{-C_{\mathrm{sl}}}W_{\mathrm{ref}}(t)
+  \qquad (t\in K_p^{\circ}).
+\]
+The proof-level Gate--1 branch observation window is the canonical
+branch-complete window
+\[
+  W_{\mathrm{branch}}^{\mathrm{can}}(t)
+  :=
+  \sum_p W_{\mathrm{ref}}(m_p)
+  w\!\left(\frac{t-m_p}{r_p}\right).
+\]
+All Gate--1 branch Gram matrices in the canonical source branch are computed
+using \(W_{\mathrm{branch}}^{\mathrm{can}}\).  Older occurrences of
+\(W_{\mathrm{branch}}\) in the Gate--1 source-frame argument are to be read as
+\(W_{\mathrm{branch}}^{\mathrm{can}}\), unless explicitly marked as an archived
+or raw branch weight.
+\end{definition}
+
+\begin{lemma}[Canonical pointwise branch/reference domination]
+\label{lem:canonical-pointwise-branch-reference-domination}
+On \(\Omega_{\mathrm{good}}\),
+\[
+  W_{\mathrm{branch}}^{\mathrm{can}}(t)
+  \ge Q^{-C}W_{\mathrm{ref}}(t)
+\]
+for some absolute \(C\).
+\end{lemma}
+
+\begin{proof}
+Fix \(t\in\Omega_{\mathrm{good}}\).  By the core-covering property there is a
+packet \(p=p(t)\) with \(t\in K_p^{\circ}\).  Hence
+\[
+  w\!\left(\frac{t-m_p}{r_p}\right)\ge c_w.
+\]
+The corresponding term in the defining sum gives
+\[
+  W_{\mathrm{branch}}^{\mathrm{can}}(t)
+  \ge c_w W_{\mathrm{ref}}(m_p)
+  \ge c_w Q^{-C_{\mathrm{sl}}}W_{\mathrm{ref}}(t).
+\]
+Absorbing \(c_w^{-1}\) into the polynomial exponent gives the claim.
+\end{proof}
+
+\begin{theorem}[Canonical branch/reference block domination]
+\label{thm:branch-reference-block-domination}
+For the canonical branch-complete source window, every good resonant block
+\(B\) satisfies the quadratic-form domination
+\[
+  G_{\mathrm{branch},B}^{\mathrm{can}}
+  \ge Q^{-C}G_{\mathrm{ref},B}.
 \]
 Equivalently, for every coefficient vector \(c=(c_p)_{p\in B}\),
 \[
-\int\left|\sum_{p\in B}c_p\psi_p(t)\right|^2W_{\mathrm{branch}}(t)\,dt
-\ge
-Q^{-C_{\mathrm{br}}}
-\int\left|\sum_{p\in B}c_p\psi_p(t)\right|^2W_{\mathrm{ref}}(t)\,dt.
+  \int\left|\sum_{p\in B}c_p\psi_p(t)\right|^2
+  W_{\mathrm{branch}}^{\mathrm{can}}(t)\,dt
+  \ge
+  Q^{-C}
+  \int\left|\sum_{p\in B}c_p\psi_p(t)\right|^2
+  W_{\mathrm{ref}}(t)\,dt.
 \]
-This block condition is the exact no-branch-holes condition needed by the
-source frame.  A stronger sufficient pointwise condition is
-\[
-W_{\mathrm{branch}}(t)\ge Q^{-C_{\mathrm{br}}}W_{\mathrm{ref}}(t)
-\]
-on the union of supports of every good block.
-\end{definition}
-
-\begin{theorem}[Branch/reference block domination from routed coverage]
-\label{thm:branch-reference-block-domination}
-If the routed branch/reference window construction is branch-complete in the
-sense of Definition~\ref{hyp:packet-core-micro-covering}, then every good
-resonant block satisfies
-\[
-G_{\mathrm{branch},B}\ge Q^{-C_{\mathrm{br}}}G_{\mathrm{ref},B}.
-\]
-In particular, the source layer has no branch-hole loss on the good packet
-family.
+Thus the branch-hole failure mode is absent in the canonical Gate--1 source
+branch.
 \end{theorem}
 
 \begin{proof}
-The displayed inequality is precisely the quadratic-form clause in
-Definition~\ref{hyp:packet-core-micro-covering}.  If the stronger pointwise
-coverage condition holds, then for every
-\(f_B(t)=\sum_{p\in B}c_p\psi_p(t)\),
+Apply Lemma~\ref{lem:canonical-pointwise-branch-reference-domination} to
 \[
-\int |f_B(t)|^2W_{\mathrm{branch}}(t)\,dt
-\ge
-Q^{-C_{\mathrm{br}}}
-\int |f_B(t)|^2W_{\mathrm{ref}}(t)\,dt,
+  f_B(t):=\sum_{p\in B}c_p\psi_p(t).
 \]
-which is exactly \(G_{\mathrm{branch},B}\ge Q^{-C_{\mathrm{br}}}G_{\mathrm{ref},B}\).
+Then
+\[
+  \int |f_B(t)|^2W_{\mathrm{branch}}^{\mathrm{can}}(t)\,dt
+  \ge Q^{-C}
+  \int |f_B(t)|^2W_{\mathrm{ref}}(t)\,dt,
+\]
+which is precisely the stated quadratic-form domination of the Gram matrices.
 \end{proof}
+
+\begin{remark}[Canonical branch window is a construction choice]
+\label{rem:canonical-branch-window-not-retrofit}
+The preceding theorem is a theorem about the canonical branch-complete window
+\(W_{\mathrm{branch}}^{\mathrm{can}}\).  It is not a theorem about an arbitrary
+previously routed branch weight.  If an older branch object is used elsewhere,
+then either it must be identified with \(W_{\mathrm{branch}}^{\mathrm{can}}\)
+or it must carry its own proof of quadratic-form domination.  In particular,
+AFE tail control, packet regularity, and positive reference mass do not by
+themselves imply
+\(G_{\mathrm{branch},B}\ge Q^{-C}G_{\mathrm{ref},B}\) for an arbitrary branch
+window.
+\end{remark}
+
+\begin{remark}[Scaling convention for the canonical branch window]
+\label{rem:canonical-branch-window-scaling-convention}
+The displayed definition of \(W_{\mathrm{branch}}^{\mathrm{can}}\) is a
+pointwise \(t\)-weight.  No extra powers of \(r_p\) are included in this
+pointwise convention.  If a local-coordinate normalization uses factors such
+as \(r_p^k\), those factors belong to the local energy normalization and must
+not be inserted again into the pointwise weight.  This convention prevents a
+spurious scale loss in the branch/reference Gram comparison.
+\end{remark}
+
+\begin{remark}[Whitney geometry versus admissible lower scale]
+\label{rem:whitney-geometry-versus-admissible-scale}
+The Whitney construction supplies bounded overlap and scale comparability on
+overlapping packets.  A polynomial lower bound for the raw packet scale,
+\(r_p\ge Q^{-C}\), is not a consequence of Whitney geometry alone.  In the
+canonical source branch it is either an admissibility condition on the selected
+packet family or a consequence of a separately proved boundary-collar
+exclusion theorem.  It is not used in the proof of
+Theorem~\ref{thm:branch-reference-block-domination}, which only needs the
+core covering and scale-slow reference weight hypotheses.
+\end{remark}
 
 
 \begin{hypothesis}[Packet amplitude / oscillatory-kernel decay budget]
@@ -57297,6 +57380,107 @@ Since \(n=R+2\), \(\|A\|\le R^C\), and
 the claimed polynomial loss follows.
 \end{proof}
 
+\begin{definition}[Pre-extraction Fej\'er--Riesz Stack weight]
+\label{def:pre-extraction-FR-stack-weight}
+On each resonant O2/O3 block \(B\), before capped extraction, the active Stack
+measure is chosen inside the bounded-degree Fej\'er--Riesz charge algebra:
+\[
+  d\nu_{\mathrm{FR},B}
+  := |\Phi_B(z)|^2\,d\theta\,d\sigma_B,
+  \qquad z=e^{i\theta},
+\]
+where
+\[
+  \deg_z\Phi_B\le D_W,
+  \qquad D_W=O(R),
+\]
+and the coefficient norm and outer lower bound of \(\Phi_B\) on the selected
+good set are polynomially controlled.  The O2/O3 packet family, its masses,
+and the later caps are selected relative to this pre-extraction measure.  No
+rough cap, sharp cutoff, or arbitrary smooth factor is inserted before the
+O2/O3 survival theorem unless it is itself represented inside the same
+bounded-degree Fej\'er--Riesz algebra.
+\end{definition}
+
+\begin{remark}[No early capped extraction]
+\label{rem:no-early-capped-extraction-FR}
+The order of operations in the active O2/O3 branch is
+\[
+  \text{pre-extraction Fej\'er--Riesz Stack weight}
+  \longrightarrow
+  \text{Fej\'er--Riesz charge anti-lock}
+  \longrightarrow
+  \text{capped extraction / downstream caps}.
+\]
+Hard caps or arbitrary smooth Stack factors inserted before determinant
+survival are outside the active proof branch unless they are first encoded by
+bounded-degree Fej\'er--Riesz factors.  This is why the construction closes
+model membership by design rather than by approximating an older Stack weight
+after the fact.
+\end{remark}
+
+\begin{lemma}[Pre-extraction Fej\'er--Riesz model membership]
+\label{lem:pre-extraction-FR-model-membership}
+In the construction of
+Definition~\ref{def:pre-extraction-FR-stack-weight}, the O2/O3 packet weights
+belong to the bounded-degree Fej\'er--Riesz charge model with degree
+\(D_W=O(R)\).  If the contaminant charge bandwidth is \(d_0\), then the
+thickened finite charge model has degree at most \(D_W+d_0\), with polynomially
+controlled coefficient and mass constants on the selected good set.
+\end{lemma}
+
+\begin{proof}
+The Stack density is exactly \(|\Phi_B(z)|^2\) with
+\(\deg_z\Phi_B\le D_W\).  Thus Fej\'er--Riesz factorization is not an additional
+lemma; it is part of the construction.  Multiplication by the finite
+contaminant packet family increases the charge bandwidth by at most \(d_0\).
+The coefficient and outer bounds in
+Definition~\ref{def:pre-extraction-FR-stack-weight} give the stated polynomial
+control on the selected good set.
+\end{proof}
+
+\begin{theorem}[Canonical Fej\'er--Riesz construction closes O2/O3 model membership]
+\label{thm:canonical-FR-construction-closes-O2O3-model-membership}
+Assume the pre-extraction Stack measure is
+\(d\nu_{\mathrm{FR},B}\) from
+Definition~\ref{def:pre-extraction-FR-stack-weight}.  Then the model-membership
+hypothesis in
+Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3}
+is satisfied.  Consequently, whenever the canonical quadratic multiplier /
+near-pure anti-lock hypotheses of that theorem hold and
+\[
+  D_W,d_0=O(R),
+  \qquad R\log R=O(\log Q),
+\]
+the O2/O3 graph gap satisfies
+\[
+  \delta_{\mathrm{graph}}\ge Q^{-A}.
+\]
+\end{theorem}
+
+\begin{proof}
+Lemma~\ref{lem:pre-extraction-FR-model-membership} supplies the bounded-degree
+Fej\'er--Riesz charge model required by
+Theorem~\ref{thm:fejer-riesz-charge-antilock-closes-graph-o2o3}.  That theorem
+gives the finite anti-lock lower bound
+\[
+  \eta_0\ge (D_W+d_0+1)^{-2d_0}.
+\]
+Under \(D_W,d_0=O(R)\) and \(R\log R=O(\log Q)\), this lower bound is
+polynomial in \(Q^{-1}\).  Renaming the exponent gives
+\(\delta_{\mathrm{graph}}\ge Q^{-A}\).
+\end{proof}
+
+\begin{remark}[Fej\'er--Riesz construction is not a retrofit]
+\label{rem:FR-construction-not-retrofit}
+The preceding theorem closes the bounded-degree model-membership problem only
+for the pre-extraction Fej\'er--Riesz construction.  It does not prove that an
+arbitrary older Stack weight, or a Stack weight already modified by rough caps,
+has bounded Fej\'er--Riesz degree.  If such a weight is retained, then its
+bounded-degree factorization and polynomial mass persistence must be proved
+separately.
+\end{remark}
+
 \begin{definition}[Fej\'er--Riesz thickened O2/O3 Gram blocks]
 \label{def:fr-thickened-o2o3-gram-blocks}
 Work in the smooth pre-extraction Fej\'er--Riesz Hilbert space
@@ -58625,6 +58809,74 @@ then the wall-completion module must include or approximate
 B_2,\qquad DB_2,\qquad D^2B_2
 \]
 in the scale-normalized \(H^2\)-ledger.
+\end{remark}
+
+\begin{remark}[Status after canonical source/O2O3 construction rules]
+\label{rem:status-after-canonical-construction-rules}
+The proof-level source/O2O3 branch uses two canonical construction choices.
+First, the Gate--1 source observation window is
+\(W_{\mathrm{branch}}^{\mathrm{can}}\), for which
+\[
+  W_{\mathrm{branch}}^{\mathrm{can}}\ge Q^{-C}W_{\mathrm{ref}},
+  \qquad
+  G_{\mathrm{branch},B}^{\mathrm{can}}
+  \ge Q^{-C}G_{\mathrm{ref},B}.
+\]
+Second, the O2/O3 Stack weight is imposed before capped extraction inside the
+bounded-degree Fej\'er--Riesz charge algebra:
+\[
+  d\nu_{\mathrm{FR},B}=|\Phi_B(z)|^2\,d\theta\,d\sigma_B,
+  \qquad \deg\Phi_B=O(R).
+\]
+These choices close the branch-hole obstruction and the Fej\'er--Riesz
+model-membership obstruction in the canonical branch.  They are construction
+choices, not theorems about older arbitrary branch or Stack weights.
+
+They do not by themselves prove the completed-source anchor
+\(q''_{\can}(t)=\mathcal Z(1/2+it)\), and they do not replace any still-active
+raw \(2Y\) row/routing coefficient verification.  Thus global unconditional
+closure requires the completed-source anchor and the downstream certified row
+certificate to be either proved in their own sections or explicitly imported
+as already-proved inputs.
+\end{remark}
+
+\begin{remark}[Boundary-collar route is no longer the Gate--1 proof mechanism]
+\label{rem:collar-route-diagnostic-after-canonical-window}
+With the canonical branch-complete window, Gate--1 source domination follows
+from the pointwise inequality
+\(W_{\mathrm{branch}}^{\mathrm{can}}\ge Q^{-C}W_{\mathrm{ref}}\).  Boundary-collar
+exclusion may still be used to justify admissible raw packet scales or to
+organize packet selection, but it is no longer the load-bearing proof of
+branch/reference domination in the canonical source branch.  The draft should
+avoid running the collar-exclusion route and the canonical branch-complete
+route as competing proofs of the same Gate--1 lower bound.
+\end{remark}
+
+\begin{remark}[Canonical construction ledger]
+\label{rem:canonical-construction-ledger-final}
+In the final status tables, the following wording should be used.
+\[
+\begin{array}{c|c|c}
+\text{module} & \text{canonical-branch status} & \text{caveat}\\
+\hline
+\delta_{\mathrm{src}} &
+\text{closed by }W_{\mathrm{branch}}^{\mathrm{can}}
+\text{ and block domination} &
+\text{requires completed-source anchor and canonical window}\\
+\delta_{\mathrm{graph}} &
+\text{closed by pre-extraction Fej\'er--Riesz charge anti-lock} &
+\text{requires canonical multiplier/anti-lock theorem}\\
+\text{raw }2Y\text{ row/routing} &
+\text{separate downstream certificate} &
+\text{not supplied by Rules 1--2}\\
+\text{completed source} &
+\text{separate upstream anchor} &
+q''_{\can}(t)=\mathcal Z(1/2+it)
+\end{array}
+\]
+Thus Rules~1--2 remove source/O2O3 construction gaps in the canonical branch;
+they should not be cited as closing the completed-source anchor or downstream
+raw \(2Y\) coefficient verification.
 \end{remark}
 
 \section{Certified downstream status after the canonical source-graded closure}
