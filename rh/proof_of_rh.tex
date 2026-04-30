@@ -50478,18 +50478,27 @@ q''_{\can}=B_2+P_2+D_2+E_2.
 
 \begin{remark}[Historical route register]
 \label{rem:historical-route-register}
-The following routes are historical or no-go unless explicitly reactivated:
+The following routes are historical diagnostics or no-go branches unless
+explicitly reactivated by a transfer theorem to the canonical Hardy/K9 branch:
 \begin{itemize}
-\item O1/O2/O3, S1/T1, and ordinary finite-row Gate--1 as active definitions;
+\item O1/O2/O3 ordinary finite-row Gate--1;
+\item S1/T1 transition and singular point-jet or sine-moment Gate--1 proxies;
 \item scalar \(I\)-coordinate D4 and derivative-wall D4;
-\item optimized \(\Xi_N\) as a finite D4 contradiction channel;
-\item one-parameter row mobility as a forbidden upper;
-\item functorial carrier lifts when \(R_{\mathrm{sing}}\) is Taylor-complete or carrier-complete;
+\item optimized \(\Xi_N\) as a finite D4 forbidden channel;
+\item one-parameter row mobility as a contradiction mechanism;
+\item functorial carrier lifts when \(R_{\mathrm{sing}}^{\mathrm{raw}}\) is Taylor-complete,
+carrier-complete, or otherwise retains the live \(C_7/Y12\) transition plane;
 \item pure-branch determinant-only proofs for full O2/O3.
 \end{itemize}
-All live statements should be phrased in the current architecture:
+The live architecture is:
 \[
-\mathrm{Agg}L^2(q''_{\can})+\mathrm{Graph/O2O3}_{23}+\mathrm{NormalD4}_{K9,Y12}.
+\mathrm{Agg}L^2(q''_{\can})
++
+\mathrm{Graph/O2O3}_{23}
++
+\mathrm{NormalD4}_{K9,Y12}
+\Longrightarrow
+\mathrm{AtomicY12Contradiction}.
 \]
 \end{remark}
 
@@ -54343,9 +54352,24 @@ theorem obligations.
 \label{sec:upstream-gate-one-arithmetic-inputs}
 
 The downstream local package of Section~\ref{sec:downstream-local-closure-package}
-reduces row-energy production to Gate~1 and finite D4 row conversion.  The
-present section records the current upstream status for Gate~1.  This is a
-conditional arithmetic ledger: the inputs below are not proved in this draft.
+reduces row-energy production to a single active upstream input:
+\[
+\mathrm{Agg}L^2(q''_{\can})
+\]
+for the Hardy-normalized source \(q''_{\can}=u_H=\partial_t^3Z_{\mathrm H}\),
+together with the canonical branch-complete source window.  The live material
+in this section is the proof-level chain
+\[
+\text{Hardy source API}
+\to
+\text{windowed finite AFE packets}
+\to
+W_{\mathrm{branch}}^{\mathrm{can}}\ge Q^{-C}W_{\mathrm{ref}}
+\to
+\delta_{\mathrm{src}}\ge Q^{-A}.
+\]
+Older O1/O2/O3, S1/T1, pointwise Wronskian, numerical proxy, and raw
+branch-observable routes are archived diagnostics only.
 
 \subsection{Branch-complete local \(L^2\) Gate--1}
 \label{subsec:branch-complete-local-l2-gate-one}
@@ -54374,113 +54398,81 @@ where \(w_b\ge0\) is a fixed smooth local branch window.  Gate--1 on the packet
 This definition is branch-independent after normalization and is the scalar
 source input consumed by the Gate--2 \(L^2\)-real-rigidity theorem.
 
-\begin{hypothesis}[Aggregate scalar \(L^2\) observability for \(q''_{\can}\)]
+\begin{definition}[Aggregate scalar \(L^2\) Gate--1 target]
 \label{hyp:agg-l2-qcan-gate-one}
-Let
+The proof-level Gate--1 target is the aggregate scalar source estimate
 \[
-  W_{\mathrm{branch}}(t)
+  \mathrm{Agg}L^2(q''_{\can}).
 \]
-be the routed branch-window weight obtained from the ordinary, transition, and
-singular packet windows:
+For a branch \(b\in\{\mathrm{ord},\mathrm{tr},\mathrm{sing}\}\), define
 \[
-  W_{\mathrm{branch}}(t)
+  F_{b,m}(x):=\lambda_b^3q''_{\can}(m+\lambda_bx),
+\]
+and
+\[
+  E_{1,b}^{L^2}(m)
   :=
-  \sum_b\sum_{m\in\mathcal C_b}
-  \rho_b(m)\lambda_b^5
-  w_b\!\left(\frac{t-m}{\lambda_b}\right),
+  \int_{I_b}|F_{b,m}(x)|^2w_b(x)\,dx.
 \]
-with the evident modification if \(w_b\) has already been normalized after
-change of variables.  The aggregate Gate--1 input is
+In the active Hardy branch,
 \[
-  \boxed{
-  \int |q''_{\can}(t)|^2W_{\mathrm{branch}}(t)\,dt
-  \ge
-  Q^{-A}\mathcal N_{\can}(W_{\mathrm{branch}}).
-  }
+  q''_{\can}=u_H=\partial_t^3Z_{\mathrm H},
 \]
-The reference normalization must also satisfy
+and packet-normalized rows carry the explicit factor \(\lambda_b^3\).
+
+Equivalently, using the proof-level canonical branch-complete window
+\(W_{\mathrm{branch}}^{\mathrm{can}}\),
 \[
-  \boxed{
-  \mathcal N_{\can}(W_{\mathrm{branch}})
+  \mathrm{Agg}L^2(q''_{\can})
+  \quad\Longleftrightarrow\quad
+  \int |q''_{\can}(t)|^2W_{\mathrm{branch}}^{\mathrm{can}}(t)\,dt
   \ge
   Q^{-A}
-  \sum_b\sum_{m\in\mathcal C_b}\rho_b(m).
-  }
+  \int |q''_{\can}(t)|^2W_{\mathrm{ref}}(t)\,dt,
 \]
-Both estimates are for the full canonical source
-\[
-  q''_{\can}=B_2+P_2+D_2+E_2.
-\]
-\end{hypothesis}
+up to the finite-AFE completion error already controlled by
+Corollary~\ref{cor:ef-completion-bound}.
+
+This label is retained for compatibility with older references.  It is not a
+separate hypothesis in the canonical Hardy branch; it is proved by
+Theorem~\ref{thm:source-survival-from-three-inputs} and
+Corollary~\ref{cor:gate-one-source-survival}.
+\end{definition}
 
 \subsection{Source hypothesis provenance}
 \label{subsec:source-hypothesis-provenance}
 
-\begin{remark}[Historical provenance of the packet-core covering condition]
+\begin{remark}[Compatibility labels for old source hypotheses]
+\label{rem:source-compatibility-labels}
 \label{rem:packet-core-micro-covering-provenance}
-The earlier packet-core micro-covering hypothesis was a placeholder for the
-source-window construction.  In the active canonical branch it is no longer an
-open Gate--1 hypothesis: it is implemented by the Whitney packet-core
-construction and by the canonical branch-complete window of
-Definition~\ref{hyp:packet-core-micro-covering}.  In particular,
-Theorem~\ref{thm:branch-reference-block-domination} proves
-\[
-  G_{\mathrm{branch},B}^{\mathrm{can}}\ge Q^{-C}G_{\mathrm{ref},B}
-\]
-for every good resonant block whose branch Gram is computed with
-\(W_{\mathrm{branch}}^{\mathrm{can}}\).
-
-This remark records only the historical provenance.  It is not a license to use
-an archived or arbitrary branch window in place of \(W_{\mathrm{branch}}^{\mathrm{can}}\).  Any
-noncanonical branch window must either be identified with the canonical one in
-the relevant Gram norm or must carry its own quadratic-form domination proof.
-\end{remark}
-
-\begin{remark}[Provenance of Hypothesis~\ref{hyp:packet-amplitude-decay-budget}]
 \label{rem:packet-amplitude-decay-budget-provenance}
-This hypothesis is intended to follow from packet construction regularity.
-If the packet atoms have the form
-\[
-\psi_p(t)=a_p(t)e^{i\omega_p t},
-\qquad
-a_p(t)=\lambda_p^{-1/2}\chi_p(t)\eta\!\left(\frac{t-m_p}{\lambda_p}\right),
-\]
-with \(\eta,\chi_p\in C^\infty\) fixed and \(\lambda_p\) polynomially
-controlled on the good packet set, then the chain rule gives polynomial
-derivative bounds
-\[
-\|\partial_t^r a_p\|_\infty\le C_r\lambda_p^{-r}\le Q^{C_r}.
-\]
-That derivative budget is exactly what is needed for the oscillatory-kernel
-estimate later in the source argument.  The draft should treat this as the
-output of the packet-regularity theorem, not as a hidden assumption.
-\end{remark}
-
-\begin{remark}[Provenance of Hypothesis~\ref{hyp:ef-completion-bound}]
 \label{rem:ef-completion-bound-provenance}
-This is the tail estimate for the smooth finite AFE decomposition
+The older source labels
 \[
-q''_{\can}=F_X+R_X.
+\texttt{hyp:packet-core-micro-covering},\qquad
+\texttt{hyp:packet-amplitude-decay-budget},\qquad
+\texttt{hyp:ef-completion-bound},\qquad
+\texttt{hyp:reference-meansquare-noncollapse}
 \]
-After Theorem~\ref{hyp:completed-source-anchor} and
-Theorem~\ref{thm:smooth-finite-AFE-package}, it is no longer an independent
-Dirichlet-polynomial hypothesis: the theorem gives, for every fixed derivative
-order \(J\) and every \(A>0\),
-\[
-\sum_{0\le j\le J}
-\left(
-\|\partial_t^jR_X\|_{L^2(W_{\mathrm{ref}})}
-+
-\|\partial_t^jR_X\|_{L^2(W_{\mathrm{branch}})}
-\right)
-\ll_{A,J}X^{-A}.
-\]
-Passing from this \(L^2\)-tail estimate to the reference-whitened matrix
-correction \(E\) also uses the polynomial reference-Gram conditioning of the
-finite packet family.  Thus the EF completion bound is conditional on the
-completed-source anchor, the residue-aware smooth AFE theorem, and the
-reference-regular packet coordinates; it is not a branch-coverage or
-oscillatory-decay input.
+are retained only as compatibility labels for downstream references.  In the
+active Hardy/canonical branch they are supplied as follows:
+\begin{itemize}
+\item packet-core coverage and branch/reference domination are supplied by the
+canonical branch-complete source window
+Definition~\ref{hyp:packet-core-micro-covering} and
+Theorem~\ref{thm:branch-reference-block-domination};
+\item amplitude bounds and off-block decay are supplied by
+Lemma~\ref{lem:windowed-packet-amplitude-bounds},
+Lemma~\ref{lem:scale-normalized-packet-kernel-decay}, and
+Corollary~\ref{cor:source-oscillatory-decay};
+\item EF completion is supplied by Corollary~\ref{cor:ef-completion-bound};
+\item fixed-window reference noncollapse is supplied by
+Corollary~\ref{cor:reference-ms-noncollapse}.
+\end{itemize}
+Thus these labels should not be read as open assumptions in the canonical
+branch.  They remain open only for noncanonical branch windows, non-Hardy source
+choices, or drifting reference windows not covered by the stated
+nonconcentration theorem.
 \end{remark}
 
 \begin{remark}[Standing zeta-side source hypotheses: actual Hardy-curvature version]
@@ -56220,7 +56212,7 @@ input is isolated in Hypothesis~\ref{hyp:packet-core-micro-covering} and used
 through Lemma~\ref{lem:block-coercivity-from-weight-domination}.
 \end{remark}
 
-\begin{theorem}[Windowed packet construction regularity]
+\begin{theorem}[Windowed packet construction regularity relative to construction data]
 \label{thm:unconditional-packet-regularity}
 Adopt the Whitney packet cores of Definition~\ref{def:whitney-packet-cores} and
 construct packet atoms by
@@ -56500,77 +56492,61 @@ branch/reference domination theorem for that weight.
 \end{remark}
 
 
-\begin{hypothesis}[Packet amplitude / oscillatory-kernel decay budget]
+\begin{remark}[Archived source hypothesis labels]
 \label{hyp:packet-amplitude-decay-budget}
-The packet amplitudes satisfy polynomial derivative bounds, so that the
-off-diagonal packet kernels obey scale-normalized oscillatory decay, and the
-resonant clusters are handled blockwise.
-
-\noindent\emph{Status note.}  For windowed packet atoms this is no longer a
-standing analytic hypothesis.  It is proved by
-Lemma~\ref{lem:windowed-packet-amplitude-bounds},
-Lemma~\ref{lem:scale-normalized-packet-kernel-decay}, and
-Corollary~\ref{cor:source-oscillatory-decay}.  The hypothesis environment is
-retained only as a compatibility label for downstream references.
-\end{hypothesis}
-
-\begin{hypothesis}[EF completion bound on \(q''_{\can}\)]
 \label{hyp:ef-completion-bound}
-The residual correction
-\[
-E:=G_{\mathrm{ref}}^{-1/2}\bigl(G_{\mathrm{branch}}(q''_{\can})-G_{\mathrm{branch}}(F_X)\bigr)G_{\mathrm{ref}}^{-1/2},
-\qquad
-F_X:=B_2+P_{2,\le X}+D_{2,\le X}+P_{\mathrm{res},X},
-\]
-satisfies
-\[
-\|E\|_{\operatorname{op}}\le Q^{-B}
-\]
-for some absolute \(B>0\) and all sufficiently large cutoffs \(X\).  This
-follows from Corollary~\ref{cor:smooth-afe-tail-bound} and
-Corollary~\ref{cor:ef-completion-bound}; the draft now records it as a
-derived source-side estimate rather than a standing assumption.
-
-\noindent\emph{Status note.}  Previously the load-bearing open input of the
-source layer.  Now superseded by Corollary~\ref{cor:smooth-afe-tail-bound} and
-Corollary~\ref{cor:ef-completion-bound}, which derive the tail bound from
-the standard \((\log n)^j/\sqrt n\) AFE coefficient bounds, the smooth
-cutoff in the AFE truncation, and the finite source-window mass of
-\(W_{\mathrm{branch}}\) and \(W_{\mathrm{ref}}\).  The hypothesis
-environment is retained as a labelled target for downstream lemmas to cite.
-\end{hypothesis}
-
-
-\begin{hypothesis}[Reference mean-square non-collapse]
 \label{hyp:reference-meansquare-noncollapse}
-The reference mean-square does not collapse, so the canonical finite source
-\(F_X\) has nontrivial \(W_{\mathrm{ref}}\)-mass:
+The labels
 \[
-\|F_X\|_{L^2(W_{\mathrm{ref}})}\ge Q^{-A_0}.
+\texttt{hyp:packet-amplitude-decay-budget},\qquad
+\texttt{hyp:ef-completion-bound},\qquad
+\texttt{hyp:reference-meansquare-noncollapse}
 \]
-
-\noindent\emph{Status note.}  For a fixed reference weight this is derived from
-Lemma~\ref{lem:main-term-noncollapse} and
-Corollary~\ref{cor:finite-afe-main-term-noncollapse}.  If the reference weight
-is a drifting or shrinking \(Q\)-dependent family, the uniform polynomial form
-is not automatic and must remain a separate quantitative nonconcentration
-input, as stated in Remark~\ref{rem:reference-noncollapse-uniformity}.
-\end{hypothesis}
+are archived compatibility labels.  In the active Hardy/canonical branch:
+\[
+\texttt{hyp:packet-amplitude-decay-budget}
+\]
+is supplied by the windowed packet amplitude and scale-normalized oscillatory
+decay lemmas;
+\[
+\texttt{hyp:ef-completion-bound}
+\]
+is supplied by Corollary~\ref{cor:ef-completion-bound}; and
+\[
+\texttt{hyp:reference-meansquare-noncollapse}
+\]
+is supplied by Corollary~\ref{cor:reference-ms-noncollapse}, subject to the
+uniformity caveat in Remark~\ref{rem:reference-noncollapse-uniformity} for
+moving \(Q\)-dependent reference windows.
+They should not be cited as active hypotheses unless the proof explicitly
+leaves the canonical Hardy branch.
+\end{remark}
 
 \begin{remark}[Source-layer derivation register]
 \label{rem:source-layer-derivation-register}
-The finite AFE tail estimate, fixed-window reference noncollapse, absolute
-packet envelope, packet derivative budget, and scale-normalized off-block
-oscillatory decay are theorem outputs in this section.  The source-frame
-coercivity lemma still requires the structural block domination
+In the active Hardy/canonical branch, the following source-side items are
+theorem-level outputs:
 \[
-G_{\mathrm{branch},B}\ge Q^{-C}G_{\mathrm{ref},B}
+\text{Hardy source trace},\quad
+\text{differential AFE tail},\quad
+\text{fixed-window source noncollapse},\quad
+\text{absolute packet envelope},\quad
+\text{off-block oscillatory decay}.
 \]
-on every good resonant block.  This domination is not a consequence of the AFE;
-it is a property of the branch/reference window construction.  If the routed
-source-window construction supplies it, the Gate--1 source frame bound follows
-from Lemma~\ref{lem:source-frame-coercivity}; otherwise the remaining source
-failure mode is a branch-hole failure.
+The branch/reference lower bound is also theorem-level in the canonical branch:
+\[
+W_{\mathrm{branch}}^{\mathrm{can}}\ge Q^{-C}W_{\mathrm{ref}},
+\qquad
+G_{\mathrm{branch},B}^{\mathrm{can}}\ge Q^{-C}G_{\mathrm{ref},B}.
+\]
+It is not a theorem about arbitrary archived branch windows.  Therefore the
+only source-layer qualifications that remain are:
+\begin{enumerate}
+\item use the Hardy source API of Definition~\ref{def:active-hardy-source-api};
+\item use \(W_{\mathrm{branch}}^{\mathrm{can}}\) as the proof-level Gate--1 observation window;
+\item maintain the uniform reference nonconcentration condition if
+\(W_{\mathrm{ref}}\) varies with \(Q\).
+\end{enumerate}
 \end{remark}
 
 \begin{definition}[Reference-whitened resonant block coordinates]
@@ -56848,557 +56824,56 @@ G_{\mathrm{branch},B}\ge Q^{-A}G_{\mathrm{ref},B}.
 \]
 \end{remark}
 
-\begin{lemma}[Fubini form of branch-complete \(L^2\)-Gate--1]
+\begin{remark}[Archived Gate--1 proof tools]
 \label{lem:branch-complete-l2-gate-one-fubini}
-Let \(u=q''_{\can}\), and let
-\[
-  E_{1,b}^{L^2}(m)
-  =
-  \int
-  \left|
-    \lambda_b(m)^3 u(m+\lambda_b(m)x)
-  \right|^2
-  w_b(x)\,dx.
-\]
-Then
-\[
-  E_{1,b}^{L^2}(m)
-  =
-  \int
-  |u(t)|^2
-  \lambda_b(m)^5
-  w_b\!\left(\frac{t-m}{\lambda_b(m)}\right)
-  dt.
-\]
-Consequently
-\[
-  \sum_b\sum_{m\in\mathcal C_b}
-  \rho_b(m)E_{1,b}^{L^2}(m)
-  =
-  \int |u(t)|^2 W_{\mathrm{branch}}(t)\,dt,
-\]
-where
-\[
-  W_{\mathrm{branch}}(t)
-  =
-  \sum_b\sum_{m\in\mathcal C_b}
-  \rho_b(m)\lambda_b(m)^5
-  w_b\!\left(\frac{t-m}{\lambda_b(m)}\right).
-\]
-Thus \(\mathrm{Agg}L^2(q''_{\can})\) is exactly the weighted source
-mean-square lower bound
-\[
-  \int |q''_{\can}(t)|^2W_{\mathrm{branch}}(t)\,dt
-  \ge
-  Q^{-A}\mathcal N_{\can}(W_{\mathrm{branch}}).
-\]
-In particular, the proof of Gate--1 splits into:
-\[
-  \boxed{\text{coverage of the }|q''_{\can}|^2\text{-energy measure}}
-  \qquad\text{and}\qquad
-  \boxed{\text{canonical source mean-square nontriviality}.}
-\]
-\end{lemma}
-
-\begin{remark}[Branch observables are proof tools, not Gate--1 definitions]
 \label{rem:branch-observables-proof-tools-only-upstream}
-The older branch observables
-\[
-  T_{\can}X_{\can},
-  \qquad
-  \mathcal J_R^{\mathrm{tr}},
-  \qquad
-  \mathbf P_R-\mathbf G_R-\mathbf T_R,
-  \qquad
-  P_R[\lambda^3q''_{\can}]
-\]
-are retained only as possible proof tools for
-Hypothesis~\ref{hyp:agg-l2-qcan-gate-one}.  They are not the Gate--1
-definition.  In particular, raw singular sine moments and projected singular
-low modes are diagnostics unless they are used to prove local scalar
-\(L^2\)-energy of the actual canonical source.
-
-The safe branch-to-downstream rule is:
-\[
-  \boxed{
-  \text{every branch must certify local scalar }L^2\text{ energy of }q''_{\can}.
-  }
-\]
-\end{remark}
-
-\begin{remark}[Finite approximation and \(L^2\)-anti-lock]
 \label{rem:finite-approximation-l2-antilock}
-The aggregate Gate--1 theorem may be attacked through finite canonical
-approximants such as
-\[
-  F_X:=B_2+P_{2,\le X}+D_{2,\le X}+P_{\mathrm{res},X},
-\]
-with a completion estimate
-\[
-  \|q''_{\can}-F_X\|_{L^2(W_{\mathrm{branch}})}^2
-  +
-  \|q''_{\can}-F_X\|_{L^2(W_{\mathrm{ref}})}^2
-  \le
-  Q^{-A_{\rm big}}
-  \|F_X\|_{L^2(W_{\mathrm{ref}})}^2.
-\]
-The hard finite theorem is then a weighted \(L^2\) observability estimate
-\[
-  \boxed{
-  \|F_X\|_{L^2(W_{\mathrm{branch}})}^2
-  \ge
-  Q^{-A}
-  \|F_X\|_{L^2(W_{\mathrm{ref}})}^2.
-  }
-\]
-The principal failure mode is \(L^2\)-level anti-lock:
-\[
-  B_2+P_{2,\le X}+D_{2,\le X}\approx0
-\]
-on the observed branch windows.  This is a lower-frame/spectral observability
-problem for the actual canonical source, not a pointwise finite-row problem.
-\end{remark}
-
-\begin{remark}[Finite AFE anti-lock and the central square-root tube]
 \label{rem:finite-afe-antilock-central-tube}
-After finite truncation
-\[
-  F_X=B_2+P_{2,\le X}+D_{2,\le X},
-\]
-the first nontrivial \(L^2\)-Gate--1 obstruction is finite AFE anti-lock:
-\[
-  \|B_2+P_{2,\le X}+D_{2,\le X}\|_{L^2(W_{\mathrm{branch}})}^2
-  \ge
-  Q^{-A}
-  \|B_2+P_{2,\le X}+D_{2,\le X}\|_{L^2(W_{\mathrm{ref}})}^2.
-\]
-For the prime--dual component this is controlled by the fold
-\[
-  x\longmapsto 1-x.
-\]
-The only serious fold-degeneracy region is the central square-root tube
-\[
-  \Omega_{\mathrm{cen}}(\delta)
-  :=
-  \left\{x:\left|x-\frac12\right|<\delta\right\},
-  \qquad
-  \delta=R^{-C}.
-\]
-On the complement
-\[
-  \Omega_{\mathrm{out}}(\delta)
-  :=
-  \left\{x:\left|x-\frac12\right|\ge\delta\right\},
-\]
-the ratios
-\[
-  \frac{x^2}{(1-x)^2},
-  \qquad
-  \frac{(1-x)^2}{x^2}
-\]
-are \(R^{-C}\)-transverse.  Thus finite AFE anti-lock outside
-\(\Omega_{\mathrm{cen}}\) reduces to a bounded-degree fold-transversality
-estimate.
-
-The central tube is not an exception to be discarded.  It is a rescaled branch.
-Writing
-\[
-  x=\frac12+\delta y,\qquad |y|\le1,
-\]
-the graph obstruction for
-\[
-  f(x):=\frac1{m_{\can}(x)}
-\]
-becomes
-\[
-  \operatorname{dist}
-  \left(
-    f\!\left(\frac12+\delta y\right),
-    \mathbf C_R[y]
-  \right).
-\]
-For the model multiplier \(m_{\can}(x)=\kappa x^2\),
-\[
-  \frac1{m_{\can}(\frac12+\delta y)}
-  =
-  \frac4\kappa(1+2\delta y)^{-2},
-\]
-and the degree-\(R\) tail is of size
-\[
-  \asymp_R \delta^{R+1}.
-\]
-Thus choosing \(\delta=R^{-C}\) retains only polynomial loss:
-\[
-  \delta^R=R^{-CR}=Q^{-O(1)}.
-\]
-The same central-tube routing is used both for
-\(\mathrm{Agg}L^2(q''_{\can})\) and for the graph/O2/O3 branch-survival audit.
-\end{remark}
-
-\begin{remark}[Degree-one fold anti-lock as the model for determinant branch survival]
 \label{rem:degree-one-fold-antilock-models-determinant-survival}
-The \(L^2\)-Gate--1 anti-lock theorem is the degree-one model for the
-finite/O2/O3 determinant branch-survival theorem.  At degree one, the relevant
-branches are
-\[
-  B_2,\qquad P_{2,\le X},\qquad D_{2,\le X}.
-\]
-At determinant degree \(n=R+2\), the full determinant decomposes into bounded
-branch-charge sectors
-\[
-  D_{\mathrm{full}}=\sum_r D_r.
-\]
-After dyadic freezing of smooth denominators and the Stack-C2 weight, only
-finitely many near-pure sectors can interact with the pure plus sector:
-\[
-  D_{-n},\quad D_{-n+1},\ldots,D_{-n+d_0},
-  \qquad d_0=O(1).
-\]
-Thus fixed-\(\alpha\) determinant survival may be formulated as a finite Schur
-complement
-\[
-  D_{-n}\notin
-  \operatorname{span}\{D_{-n+1},\ldots,D_{-n+d_0}\},
-\]
-rather than as an uncontrolled \(O(R)\)-branch forest.  This is the determinant
-analogue of prime--dual fold anti-lock.
-\end{remark}
-
-\begin{remark}[Failure modes for \(\mathrm{Agg}L^2(q''_{\can})\)]
 \label{rem:agg-l2-qcan-failure-modes}
-The branch-complete \(L^2\) Gate--1 theorem can fail only through:
-\begin{enumerate}
-\item branch holes: \(W_{\mathrm{branch}}\) misses where \(q''_{\can}\) has energy;
-\item finite packet anti-lock:
+The older local-coordinate Fubini forms, branch-observable diagnostics,
+finite-AFE anti-lock heuristics, central-tube fold discussions, and
+degree-one determinant analogies are archived proof tools.  They are not part
+of the proof-level Gate--1 chain in the canonical Hardy branch.
+
+The live Gate--1 route is:
 \[
-  B_2+P_{2,\le X}+D_{2,\le X}\approx0
+\text{Hardy source API}
++
+W_{\mathrm{branch}}^{\mathrm{can}}
++
+\text{windowed packet regularity}
++
+\text{reference-whitened block coercivity}
+\Longrightarrow
+\mathrm{Agg}L^2(q''_{\can}).
 \]
-on \(W_{\mathrm{branch}}\);
-\item residual failure:
-\[
-  \|q''_{\can}-F_X\|_{L^2(W_{\mathrm{branch}})}^2
-  +
-  \|q''_{\can}-F_X\|_{L^2(W_{\mathrm{ref}})}^2
-  \not\ll
-  \|F_X\|_{L^2(W_{\mathrm{ref}})}^2;
-\]
-\item reference collapse:
-\[
-  \mathcal N_{\can}(W_{\mathrm{branch}})\ll
-  Q^{-A}\sum_{b,m}\rho_b(m);
-\]
-\item genuine local source flatness on most branch windows.
-\end{enumerate}
-These replace the older finite-row pointwise projection obstruction as the
-active Gate--1 failure modes.
+Any future use of the archived diagnostics must explicitly prove a
+polynomial comparison with the canonical \(W_{\mathrm{branch}}^{\mathrm{can}}\)-weighted
+source norm.
 \end{remark}
 
-\subsection{Ordinary packet-frequency Gate--1 inputs}
+
+\subsection{Archived ordinary packet-frequency route}
 \label{subsec:ordinary-packet-frequency-wronskian-route}
 
-This subsection records the historical finite-row ordinary Wronskian route.
-It is no longer the primary Gate--1 definition once
-Hypothesis~\ref{hyp:agg-l2-qcan-gate-one} is adopted.  The old O1/O2/O3
-package remains useful as an alternate proof tool and as a no-go ledger for
-pointwise zero-conditioned nonrecurrence.  The local scalar \(L^2\)-source
-input for Gate--2 should not be replaced by \(T_{\can}X_{\can}\), transition
-jets, or singular sine/projection diagnostics unless the proof explicitly
-returns to this finite-row route.
-
-In the ordinary packet-frequency regime
-\[
-\lambda Q\asymp1,
-\qquad
-R\asymp\frac{\log Q}{\log\log Q},
-\qquad
-\mathcal D=\lambda\partial_m,
-\]
-the ordinary Gate--1 route is retained only as the named arithmetic input package
-\[
-\boxed{
-\mathrm{O1}+\mathrm{O2}+\mathrm{O3}
-\Longrightarrow
-\text{ordinary Gate--1}.
-}
-\]
-The source object is always the full canonical curvature
-\[
-q''_{\can}=B_2+P_2+D_2+E_2.
-\]
-
-\begin{definition}[O1: fixed-width cell nonrecurrence]
-\label{def:O1-fixed-width-cell-nonrecurrence}
-For each admissible ordinary-scale zero \(Z_\alpha(m_0)=0\), let \(B_r\) denote
-the full canonical fixed-width packet cell vector, including main branch,
-folded dual branch, gamma/background, and error contributions in the selected
-AFE convention.  O1 is
-\[
-\boxed{
-\sum_r |B_r(m_0,\alpha)|^2\ge Q^{-A}.
-}
-\]
-This is an actual-orbit nonrecurrence input.  It is not implied by local cell
-geometry, diagonal mass, or phase-relaxed coefficient magnitudes.
-\end{definition}
-
-\begin{definition}[O1b finite-frame folded audit]
-\label{def:O1b-finite-frame-folded-audit}
-In the historical ordinary finite-row route, write the main and folded-dual
-cell amplitudes as
-\[
-  a_r=B_r^+(m_0,\alpha),
-  \qquad
-  b_r=B_r^-(m_0,\alpha),
-  \qquad
-  e=e^{i\Theta_Z(m_0,\alpha)}.
-\]
-Let
-\[
-  c=(a_1,\ldots,a_M,eb_1,\ldots,eb_M)\in\mathbf C^{2M}.
-\]
-Let
-\[
-  \tau_1,\ldots,\tau_{2M}
-  =
-  \sigma_1^+,\ldots,\sigma_M^+,\sigma_1^-,\ldots,\sigma_M^-
-\]
-be the plus and folded-dual branch-symbol nodes.  The \(O1b\) finite-frame
-audit is the assertion that
-\[
-  \sum_{\ell=0}^{R+1}
-  \left|
-    \sum_{j=1}^{2M}p_\ell(\tau_j)c_j
-  \right|^2
-  \ge
-  Q^{-A}\sum_{j=1}^{2M}|c_j|^2 .
-\]
-At an admissible zero \(Z_\alpha(m_0)=0\), the value row may vanish, but the
-derivative rows still carry the folded branch mass if this finite-frame audit
-and the cell-symbol bridge hold.
-\end{definition}
-
-\begin{lemma}[Coarse paired cells discharge finite-row \(O1b\)]
-\label{lem:O1b-coarse-paired-cells-discharge}
-Assume
-\[
-  2M\le R+2.
-\]
-Assume also that the branch-symbol nodes are polynomially separated, that the
-row polynomials \(p_0,\ldots,p_{R+1}\) are polynomially equivalent on the two
-branch-symbol intervals to a stable polynomial basis, and that the cell-symbol
-bridge is valid.  Then
-\[
-  \sum_{\ell=0}^{R+1}
-  \left|
-    \sum_{r=1}^{M}
-    \left(
-      p_\ell(\sigma_r^+)B_r^+
-      +
-      p_\ell(\sigma_r^-)e^{i\Theta_Z}B_r^-
-    \right)
-  \right|^2
-  \ge
-  Q^{-A}
-  \sum_{r=1}^{M}\left(|B_r^+|^2+|B_r^-|^2\right).
-\]
-Thus folded value anti-lock is not an independent arithmetic obstruction in
-the coarse-cell finite-row setting.
-\end{lemma}
-
-\begin{proof}[Proof sketch]
-Since \(2M\le R+2\), the row space contains enough polynomial degrees to
-interpolate arbitrary data on the \(2M\) branch nodes.  The interpolation
-loss is at most
-\[
-  \exp(O(M\log M)).
-\]
-For
-\[
-  M\asymp R\asymp \frac{\log Q}{\log\log Q},
-\]
-this is \(Q^{O(1)}\).  Hence the evaluation matrix
-\[
-  V_{\ell j}=p_\ell(\tau_j)
-\]
-has polynomial lower singular value.  The cell-symbol bridge transfers this
-model finite-frame estimate to the actual canonical cell sums.
-\end{proof}
-
-\begin{remark}[Cell-symbol bridge for \(O1b\)]
-\label{rem:O1b-cell-symbol-bridge}
-The deterministic \(O1b\) finite-frame lemma applies to symbol-compatible cell
-amplitudes.  For hard cells, the derivative row contains
-\[
-  \sum_{n\in I_r^\pm}p_\ell(\sigma_n^\pm)A_n^\pm,
-\]
-not automatically
-\[
-  p_\ell(\sigma_r^\pm)\sum_{n\in I_r^\pm}A_n^\pm.
-\]
-At depth \(\ell\sim R\), symbol variation over cells of width \(1/R\) is not
-automatically perturbative.  Therefore one must either use cell-dual polynomial
-observables or prove a depth-\(R\) hard-cell oscillation lemma.
-\end{remark}
-
-\begin{definition}[O2: cofactor-vector nonrecurrence]
-\label{def:O2-cofactor-vector-nonrecurrence}
-Let \(\mathbf M(m_0,\alpha)\) be the cofactor/Hodge-dual vector of the canonical
-\(q''_{\can}\)-jet block at an ordinary zero \(Z_\alpha(m_0)=0\).  O2 is
-\[
-\boxed{
-|\mathbf M(m_0,\alpha)|\ge Q^{-A}.
-}
-\]
-Averaged exterior mass or large-sieve estimates do not imply this pointwise
-zero-conditioned statement.
-\end{definition}
-
-\begin{definition}[O3: prime-log Wronskian angle nonalignment]
-\label{def:O3-wronskian-angle-nonalignment}
-Let \(\mathbf z'(m_0,\alpha)\) be the \(Z_\alpha\)-row derivative vector at an
-ordinary zero, and let \(\mathbf M(m_0,\alpha)\) be the canonical cofactor
-vector.  O3 is
-\[
-\boxed{
-|\langle \mathbf z'(m_0,\alpha),\mathbf M(m_0,\alpha)\rangle|
-\ge Q^{-A}|\mathbf z'(m_0,\alpha)|\,|\mathbf M(m_0,\alpha)|.
-}
-\]
-O3 is an actual prime-log incidence theorem.  It is not implied by O1 and O2.
-\end{definition}
-
-\begin{theorem}[Ordinary finite-row Gate--1 from O1--O3, historical route]
-\label{thm:ordinary-gate-one-from-O1-O2-O3}
-Assume O1, O2, and O3 for every admissible ordinary-scale zero.  Then the
-ordinary packet-frequency branch supplies Gate--1 for the full canonical source:
-\[
-\boxed{
-\int_I |q''_{\can}(m)|^2\,dm\ge Q^{-A}|I|.
-}
-\]
-\end{theorem}
-
-\begin{remark}[Status of the finite-row ordinary route]
+\begin{remark}[Archived O1/O2/O3 ordinary finite-row route]
 \label{rem:ordinary-finite-row-route-historical-status}
-The finite-row ordinary route is not deleted: it remains a valid conditional
-sub-architecture.  Its current status is that O1, O2, and O3 are
-zero-conditioned actual-orbit nonrecurrence inputs.  In particular:
-\[
-  \text{O1 same-branch mass}\not\Rightarrow\text{folded nonalignment},
-\]
-However, the folded subproblem \(O1b\) is finite-frame rather than
-fundamentally arithmetic once the paired-cell count is chosen with
-\[
-  2M\le R+2
-\]
-and the cell-symbol bridge of Remark~\ref{rem:O1b-cell-symbol-bridge} is
-available.  This does not repair the main ordinary Gate--1 dimension problem:
-the remaining decisive ordinary obstruction is still the actual-orbit
-\(O1a/O2/O3\) package for the full canonical source.
-\[
-  \text{exterior coefficient mass}\not\Rightarrow\text{O2},
-\]
-and
-\[
-  \text{O1+O2}\not\Rightarrow\text{O3}.
-\]
-The active Gate--1 route is instead the branch-complete \(L^2\) theorem
-\[
-  \mathrm{Agg}L^2(q''_{\can}).
-\]
-\end{remark}
-
-\begin{remark}[Ordinary-route no-go summary]
 \label{rem:ordinary-route-no-go-summary}
-The following implications are not available:
+The O1/O2/O3 ordinary packet-frequency route is no longer an active Gate--1
+definition.  It is archived as a diagnostic finite-row route.  Its old objects
+should not be used as substitutes for
 \[
-\text{diagonal mass}\not\Rightarrow\mathrm{O1},
-\qquad
-\mathrm{O1}+\mathrm{O2}\not\Rightarrow\mathrm{O3},
+\mathrm{Agg}L^2(q''_{\can})
 \]
-\[
-\text{generic determinant nonvanishing}\not\Rightarrow\mathrm{O3},
-\qquad
-\text{averaged large sieve}\not\Rightarrow\mathrm{O2},
-\]
-\[
-\text{phase-relaxed model}\not\Rightarrow\text{actual-orbit nonrecurrence}.
-\]
-Low-prime or proxy blocks are diagnostic only.  Proof-level ordinary Gate--1
-requires the full canonical source \(q''_{\can}=B_2+P_2+D_2+E_2\).
+unless one proves a transfer theorem from the corresponding finite-row
+quantity to the canonical scalar \(L^2\)-source energy for the Hardy source.
+
+The active upstream proof uses the canonical Hardy source, canonical
+branch-complete window, and source-frame coercivity of
+Theorem~\ref{thm:source-survival-from-three-inputs}.
 \end{remark}
 
-\begin{remark}[Macroscopic smoothed zero-Gram as a proof tool]
-\label{rem:macroscopic-smoothed-zero-gram-proof-tool}
-Although the pointwise ordinary finite-row route is archived, a macroscopic
-smoothed zero-Gram calculation remains useful for proving aggregate
-\(L^2\)-source estimates.
-
-Let
-\[
-  w_T(t)=w\!\left(\frac{t-T}{H}\right),
-  \qquad
-  H\gg T^{c_++\delta},
-  \qquad
-  n,n'\le T^{c_+},
-  \qquad
-  c_+<\tfrac12.
-\]
-For
-\[
-  K_H(u):=\sum_\gamma w_T(\gamma)e^{-i\gamma u},
-\]
-the smoothed explicit formula localizes the prime peaks to
-\[
-  u=\pm\log k.
-\]
-If
-\[
-  u=\log(n/n')
-\]
-and \(n\ne kn'\), then
-\[
-  \left|\log\frac{n}{kn'}\right|\gg T^{-c_+}.
-\]
-Thus
-\[
-  H\left|\log\frac{n}{kn'}\right|\gg T^\delta,
-\]
-and rapid decay of \(\widehat w\) kills non-exact ratios.  Hence only
-\[
-  n=kn'\qquad\text{or}\qquad n'=kn
-\]
-contribute to the leading zero-Gram.
-
-With the natural \(n^{-1/2}\)-normalization, the Landau term uses
-\[
-  \sum_k\frac{\Lambda(k)}{k}\delta_{\log k}\approx du.
-\]
-Thus the leading scalar zero-Gram has rank-one form
-\[
-  G_Z\approx I-\frac1Q e_Z\otimes e_Z.
-\]
-For smooth local cells of log-width \(\Delta\asymp\log Q\), the corresponding
-cell Gram is block-local:
-\[
-  G_{\mathrm{cell}}
-  \approx
-  \bigoplus_a
-  \left(I_a-\frac1Qe_a\otimes e_a\right),
-\]
-and remains positive since
-\[
-  \|e_a\|^2/Q\asymp\Delta/Q\ll1.
-\]
-
-This is a possible proof tool for aggregate \(L^2\)-source sampling.  It is
-not the Gate--1 definition, and it must use the full canonical source
-\[
-  q''_{\can}=B_2+P_2+D_2+E_2
-\]
-with smooth packets.  Hard cells, \(P_2\)-only packets, or scalar value packets
-are not sufficient proof objects.
-\end{remark}
 
 \subsection{Finite/O2O3\(_{23}\): analytic Riesz graph and exterior-pivot input}
 \label{subsec:finite-o2o3-23}
@@ -59041,204 +58516,29 @@ Using one fully functorial basis for both jobs risks making O2/O3 well
 conditioned while killing the forbidden D4 channel.
 \end{remark}
 
-\subsection{Singular and transition proof tools after scalar \(L^2\) Gate--1}
+\subsection{Archived transition and singular Gate--1 proof tools}
 \label{subsec:singular-transition-gate-one-branches}
-
-The regimes
-\[
-\mu\gtrsim1,
-\qquad
-(\log Q)^{-C_{\mathrm{tr}}}\lesssim\mu\lesssim1,
-\qquad
-\mu\ll(\log Q)^{-C_{\mathrm{tr}}},
-\qquad
-\mu:=\lambda Q,
-\]
-still govern the construction of packet windows, chart coordinates, proof
-tools, and downstream carrier transitions.  They no longer define three
-different Gate--1 objects.  All branches feed the same scalar downstream input:
-\[
-  \int_{I_b}|\lambda_b^3q''_{\can}(m+\lambda_bx)|^2\,dx\ge Q^{-A}.
-\]
-
-\begin{definition}[Deprecated pointwise S1 diagnostic]
-\label{def:S1-singular-explicit-formula-anti-design}
-The old S1 vector
-\[
-  \mathbf P_R-\mathbf G_R-\mathbf T_R
-\]
-is a singular diagnostic/proof tool only.  It is not a proof-level Gate--1
-definition unless one proves that it gives
-\[
-  \int_{I_b}|\lambda_b^3q''_{\can}(m+\lambda_bx)|^2\,dx\ge Q^{-A}.
-\]
-Without that transfer, S1 is only a proxy anti-design statement.
-\end{definition}
-
-\begin{definition}[Deprecated pointwise T1 diagnostic]
-\label{def:T1-weighted-transition-source-observability}
-The weighted transition jet
-\[
-  \mathcal J_R^{\mathrm{tr}}(m)
-  :=
-  \left(
-  \mu^{-r}\partial_x^r[
-  \lambda^3q''_{\can}(m+\lambda x)]_{x=0}
-  \right)_{0\le r\le R},
-  \qquad
-  \mu=\lambda Q,
-\]
-is a transition proof tool.  If
-\[
-  \|\mathcal J_R^{\mathrm{tr}}(m)\|\ge Q^{-A},
-\]
-then a weighted finite-jet-to-energy lemma may yield local scalar Gate--1.
-However, the proof-level Gate--1 quantity remains
-\[
-  E_{1,\mathrm{tr}}^{L^2}(m)
-  =
-  \int_{I_{\mathrm{tr}}}|\lambda^3q''_{\can}(m+\lambda x)|^2\,dx.
-\]
-\end{definition}
-
-\begin{lemma}[Weighted transition chart loss]
-\label{lem:weighted-transition-chart-loss}
-Let
-\[
-F_\lambda(x)=\sum_{n\in\mathcal B} a_n e^{i\lambda(\log n)x}
-+F_{\rm bg}(x)+F_{\rm tail}(x),
-\]
-with \(c_-Q\le\log n\le c_+Q\).  Set
-\[
-\tau_n:=\lambda\log n,
-\qquad
-\mu:=\lambda Q.
-\]
-Then \(\tau_n/\mu\in[c_-,c_+]\), and
-\[
-\mu^{-r}\partial_x^r e^{i\tau_nx}\big|_{x=0}
-=
-i^r(\tau_n/\mu)^r.
-\]
-Thus the weighted transition jet uses a fixed-window moment vector in the
-bounded variable \(\tau_n/\mu\).  Passing from weighted to unweighted
-derivatives costs at most \(\mu^{-R}\) at depth \(R\), rather than the
-Vandermonde determinant loss \(\mu^{-O(R^2)}\).  Since
-\[
-\mu\ge(\log Q)^{-C_{\mathrm{tr}}},
-\qquad
-R\asymp\frac{\log Q}{\log\log Q},
-\]
-the loss is polynomial in \(Q\).
-\end{lemma}
-
-\begin{remark}[Finite transition jets are not complete source frames]
-\label{rem:transition-point-jets-not-complete-frame}
-The weighted transition jet
-\[
-  \left(\mu^{-r}\partial_x^rF_\lambda(0)\right)_{0\le r\le R}
-\]
-records only \(R+1\) bounded-window moments of the local coefficient measure.
-For arbitrary transition packets, one may choose nonzero coefficients with
-\[
-  \sum_n a_n(\tau_n/\mu)^r=0,
-  \qquad 0\le r\le R,
-\]
-while
-\[
-  \|F_\lambda\|_{L^2}>0.
-\]
-Thus weighted point jets alone are not a deterministic lower frame for local
-\(L^2\)-source energy.  They may be used as one coordinate block of a larger
-transition projection family, or as a diagnostic, but not as a standalone
-deterministic Gate--1 lower frame.
-\end{remark}
-
-\begin{remark}[Regime routing after scalar \(L^2\) normalization]
-\label{rem:gate-one-regime-routing}
-The ordinary, transition, and singular regimes now determine how to prove
-local scalar \(L^2\)-energy and how to construct chart/carrying maps.  The
-Gate--1 object itself is always
-\[
-  E_{1,b}^{L^2}(m)
-  =
-  \int_{I_b}|\lambda_b^3q''_{\can}(m+\lambda_bx)|^2\,dx.
-\]
-\end{remark}
-
-\begin{theorem}[Projected source-frame branch certificate]
-\label{thm:projected-source-frame-branch-certificate}
-Let
-\[
-  F_m(x):=\lambda_m^3q''_{\can}(m+\lambda_m x).
-\]
-Assume there are nonnegative smooth branch weights
-\[
-  \chi_{\mathrm{ord}}(m)+\chi_{\mathrm{tr}}(m)+\chi_{\mathrm{sing}}(m)=1
-\]
-and branch observables
-\[
-  E_{\mathrm{ord}}(m),\qquad E_{\mathrm{tr}}(m),\qquad E_{\mathrm{sing}}(m)
-\]
-with
-\[
-  E_{\mathrm{ord}}(m)=\|T_{\can}X_{\can}(m)\|^2
-\]
-in the ordinary packet-frequency chart, while
-\[
-  E_{\mathrm{tr}}(m)=\sum_j\|P_{\mathrm{tr},j}F_m\|_{L^2}^2,
-  \qquad
-  E_{\mathrm{sing}}(m)=\sum_j\|P_{\mathrm{sing},j}F_m\|_{L^2}^2.
-\]
-If the multichart source-frame inequality
-\[
-  \chi_{\mathrm{ord}}(m)E_{\mathrm{ord}}(m)
-  +
-  \chi_{\mathrm{tr}}(m)E_{\mathrm{tr}}(m)
-  +
-  \chi_{\mathrm{sing}}(m)E_{\mathrm{sing}}(m)
-  \ge
-  Q^{-A}\|F_m\|_{L^2}^2
-\]
-holds, then the branch observables certify the same scalar canonical source
-norm used by \(\mathrm{Agg}L^2(q''_{\can})\).
-
-In particular, transition point jets and singular sine moments are not
-standalone Gate--1 definitions.  They are valid proof tools only after being
-embedded in projection families satisfying the lower-frame inequality above.
-\end{theorem}
-
-\begin{remark}[Point jets and sine diagnostics are not complete frames]
-\label{rem:transition-singular-diagnostics-not-complete-frames}
-The transition point jet
-\[
-  \left(\mu^{-r}\partial_x^rF_m(0)\right)_{0\le r\le R}
-\]
-records only \(R+1\) bounded-window moments.  It is not, by itself, a lower
-frame for \(\|F_m\|_{L^2}\).  Similarly, a raw singular sine-moment vector is
-not a proof-level Gate--1 input unless it is proved to be an actual coefficient
-or projection frame for \(F_m\).
-
-Thus the active transition and singular proof objects are projected source
-energies:
-\[
-  \sum_j\|P_{\mathrm{tr},j}F_m\|_{L^2}^2,
-  \qquad
-  \sum_j\|P_{\mathrm{sing},j}F_m\|_{L^2}^2.
-\]
-\end{remark}
-
-\subsection{Ordinary Wronskian no-go archive}
 \label{subsec:no-go-archive-ordinary-wronskian}
 
-\begin{remark}[Ordinary route archive]
+\begin{remark}[Transition and singular diagnostics are archived]
+\label{def:S1-singular-explicit-formula-anti-design}
+\label{def:T1-weighted-transition-source-observability}
+\label{rem:gate-one-regime-routing}
+\label{thm:projected-source-frame-branch-certificate}
 \label{rem:ordinary-route-archive}
-The ordinary Wronskian and finite-row O1/O2/O3 discussions are now archived.
-They are proof tools or historical alternate routes only, unless they are
-explicitly transferred to the scalar local \(L^2\) source energy of
-\(q''_{\can}=B_2+P_2+D_2+E_2\).
-The active upstream statement is \(\mathrm{Agg}L^2(q''_{\can})\), not the old
-finite-row route.
+The transition and singular point-jet/sine-moment objects are archived proof
+tools.  They no longer define separate Gate--1 objects.  In the active branch,
+ordinary, transition, and singular packets all feed the same canonical scalar
+source estimate
+\[
+\int_{I_b}|\lambda_b^3q''_{\can}(m+\lambda_bx)|^2\,dx\ge Q^{-A}.
+\]
+Any future use of transition point jets or singular sine diagnostics must be
+accompanied by an explicit lower-frame theorem transferring them to this
+scalar \(L^2\)-source energy.  Without that transfer they remain diagnostics.
+The ordinary Wronskian and finite-row O1/O2/O3 discussions are also archived;
+they are not the active upstream input.  The live upstream statement is
+\(\mathrm{Agg}L^2(q''_{\can})\) for the Hardy source.
 \end{remark}
 
 
@@ -59247,10 +58547,12 @@ finite-row route.
 
 \begin{remark}[Canonical audit for named Gate--1 inputs]
 \label{rem:canonical-audit-named-gate-one-inputs}
-Every named Gate--1 input must be stated for the same full canonical source
+Every named Gate--1 input must be stated for the same active Hardy source API:
 \[
-q''_{\can}=B_2+P_2+D_2+E_2.
+q''_{\can}=u_H=B_2^H+P_2^H+D_2^H+E_2^H,
 \]
+with packet-normalized rows carrying the explicit factor \(\lambda_p^3\), as
+in Definition~\ref{def:active-hardy-source-api}.
 The following substitutions are not allowed:
 \[
 B_2\text{-only},\qquad
@@ -59267,7 +58569,7 @@ p=q''_{\can},
 \]
 then the wall-completion module must include or approximate
 \[
-B_2,\qquad DB_2,\qquad D^2B_2
+B_2^H,\qquad DB_2^H,\qquad D^2B_2^H
 \]
 in the scale-normalized \(H^2\)-ledger.
 \end{remark}
@@ -59866,23 +59168,11 @@ already discharged elsewhere, is the raw row/routing coefficient certificate
 \end{remark}
 
 
-\begin{remark}[No-go registry]
+\begin{remark}[No-go registry is consolidated]
 \label{rem:no-go-registry-unified}
-The dead or archived routes are:
-\begin{itemize}
-\item scalar \((I)\)-coordinate D4;
-\item derivative D4 wall;
-\item optimized \(\Xi_N\) as a finite D4 forbidden channel;
-\item one-parameter row mobility as a contradiction mechanism;
-\item functorial carrier lifts when \(R_{\mathrm{sing}}^{\mathrm{raw}}\) is
-Taylor-complete, carrier-complete, or otherwise retains the live
-\(C_7/Y12\) transition plane;
-\item low-dimensional pointwise finite-row \(O1/S1/T1\) as the active Gate--1
-definition.
-\end{itemize}
-The raw \(R_{\mathrm{sing}}\) caveat is preserved as a no-go statement only.
-The proof-level branch uses \(R_{\mathrm{sing}}^{\mathrm{cert}}\) and
-\(P_{\mathrm{sing}}^{\mathrm{cert}}\).
+The no-go registry has been consolidated in
+Remark~\ref{rem:historical-route-register}.  This label is retained only for
+citation stability.
 \end{remark}
 
 
@@ -59953,342 +59243,64 @@ source-graded \(K9\) norm.  Departing from any of these canonical choices
 requires a separate audit for the departed branch.
 \end{remark}
 
+\begin{remark}[Live upstream proof chain after pruning]
+\label{rem:live-upstream-proof-chain-after-pruning}
+After pruning, the active upstream chain is:
+\[
+\text{Hardy source anchor}
+\to
+\text{differential Hardy AFE}
+\to
+\text{mass-good Whitney packets}
+\to
+W_{\mathrm{branch}}^{\mathrm{can}}\ge Q^{-C}W_{\mathrm{ref}}
+\to
+\delta_{\mathrm{src}}\ge Q^{-A}.
+\]
+The active graph branch is:
+\[
+\text{pre-extraction Fej\'er--Riesz Stack}
+\to
+\text{finite charge anti-lock}
+\to
+\delta_{\mathrm{graph}}\ge Q^{-A}.
+\]
+The active downstream branch is:
+\[
+\text{maximal labelled }K9\text{ live/dead routing}
+\to
+\text{source-graded same-norm comparison}
+\to
+\mathrm{AtomicY12Contradiction}.
+\]
+Any route not fitting one of these chains is historical unless a transfer
+theorem explicitly maps it into the active chain with polynomial loss.
+\end{remark}
 
-\begin{remark}[Empirical support for O1: local amplitude and cell tests]
+\begin{remark}[Archived numerical Gate--1 diagnostics]
 \label{rem:empirical-support-o1-local-amplitude-cell-tests}
-The current numerical evidence for O1 is purely diagnostic but consistent.
-The local \(Z_\alpha\)-amplitude stress tests checked both plus-only and
-reflected-dual models over \(1152\) target/window rows and found
-\[
-\text{Yellow}=0,\qquad \text{Red}=0.
-\]
-A hardened v2 run selected adversarial targets by smallest local amplitude,
-smallest \(J_{\max}\), combined threat score, minima crowding, determinant
-small-\(\eta_Z\) rows, and direct jet minimizers.  Its cell-mass diagnostic
-used
-\[
-\mathrm{CellMassRatio}_M
-=
-\frac{\sum_r|B_r|^2}{\sum_n|z_n|^2},
-\qquad
-M\in\{R,2R,4R\}.
-\]
-In the recorded multiblock \(K=8\) cell test, \(794\) rows produced
-\[
-\text{Yellow}=0,\qquad \text{Orange}=0,\qquad \text{Red}=0.
-\]
-These tests support the heuristic
-\[
-Z_\alpha(m_0)\approx0
-\not\Rightarrow
-\text{polylog-local amplitude, jet, or cell collapse}.
-\]
-A particularly useful adversarial subfamily consisted of \(52\) reflected-dual
-direct-jet-minimizer rows for which the optimizer drove
-\[
-|Z_\alpha(m_0)|\sim10^{-15}\text{--}10^{-12}.
-\]
-In these rows, the rescue diagnostics remained non-small: the local amplitude
-at polylogarithmic radius, the jet size \(J_{\max}\), and the multiscale cell
-mass ratios did not collapse.  This is the empirical behavior predicted by
-\[
-Z_\alpha(m_0)=0
-\Longrightarrow
-|\mathbf z'(m_0,\alpha)|\ge Q^{-A}.
-\]
-
-The \(K=8\) multiblock cell test is especially relevant because it addresses
-the main weakness of earlier single-block diagnostics.  It used log-uniform
-support coverage and recorded actual support width and active-cell count per
-row.  Rows with undercovered support, too few active cells, or out-of-band
-widened support were demoted to diagnostic status rather than counted as
-Yellow/Orange/Red evidence.  In the recorded \(K=8\) run, \(794\) rows gave
-\[
-\text{Yellow}=0,\qquad
-\text{Orange}=0,\qquad
-\text{Red}=0.
-\]
-
-They do not prove O1, and O1 is no longer the active Gate--1 definition in the
-current architecture.  The active Gate--1 object is local scalar \(L^2\)-energy
-of \(q''_{\can}\), as in
-Hypothesis~\ref{hyp:agg-l2-qcan-gate-one}.  The computations above should be
-kept only as historical adversarial diagnostics for the old ordinary
-finite-row route.  They should not be cited as evidence for
-\(\mathrm{Agg}L^2(q''_{\can})\), finite/O2/O3, \(Y12\)-normal D4, or any
-uniform polynomial theorem over admissible heights.
-\end{remark}
-
-\begin{remark}[Zero-side Gate--1 proxy and watch-rerun evidence]
 \label{rem:zero-side-gate-one-proxy-watch-evidence}
-The zero-side Gate--1 proxy scans did not produce a stable source-flat
-candidate.
-
-In the canonical regularized zero-side pilot using \(N=180\) actual zeta zeros,
-\(260\) intervals, and \(121\) sample points per interval, the scan found
-\[
-\min_I \sup_I |q''_{\can,N}|\approx 1.6854,
-\]
-and
-\[
-\min_I |I|^{-1}\int_I |q''_{\can,N}(m)|^2\,dm
-\approx 2.4954.
-\]
-The flattest interval occurred near
-\[
-m_0\approx22.8958,\qquad Q\approx3.8241,
-\]
-with
-\[
-B_I^{\rm eff}
-=
--\frac{\log E_I}{\log Q}
-\approx -0.6817.
-\]
-Thus the normalized interval energy stayed order-one or larger in this
-canonical zero-side pilot; no source-flat interval was observed.
-
-The targeted watch-rerun evidence is also favorable.  In one targeted rerun of
-the watch centers, \(8\) centers generated \(1152\) rows:
-\[
-\text{healthy}=272,\qquad
-\text{watch}=880,\qquad
-\text{candidate\_flat}=0,\qquad
-\text{serious}=0.
-\]
-The smallest proxy energy was
-\[
-E_I\approx9.8\times10^{-5},
-\qquad
-B_I^{\rm eff}\approx23.36,
-\]
-but this occurred only under an aggressive regularization setting and remained
-classified as watch-level because the regularization drift was large,
-approximately
-\[
-D_{\rm reg}\approx0.99.
-\]
-
-A larger watch rerun with \(8640\) rows gave
-\[
-\text{reject\_tail\_edge}=6480,\quad
-\text{healthy}=1728,\quad
-\text{watch}=432,
-\]
-and again
-\[
-\text{candidate\_proxy\_flat}=0,\qquad
-\text{serious\_proxy\_warning}=0.
-\]
-The best stable watch rows had low interval energy but failed the finite-jet
-criterion; for example near
-\[
-m_0\approx109.099,\qquad Q\approx2.85,
-\]
-one had
-\[
-B_I^{\rm eff}\approx7.25,\qquad
-E_I\approx5.0\times10^{-4},\qquad
-J_{\max}\approx0.022,
-\]
-whereas
-\[
-Q^{-5}\approx5.3\times10^{-3}.
-\]
-Thus these were smooth gap-midpoint or regularization artifacts, not
-quadrature-like source-flat candidates.
-\end{remark}
-
-\begin{remark}[Broad proxy search top-target status]
 \label{rem:broad-proxy-top-target-status}
-A broad zero-proxy extraction produced
-\[
-46408\text{ input rows},\qquad 46396\text{ valid rows},
-\]
-and the top \(50\) ranked rows had only
-\[
-B_I^{\rm eff}\in[0.83,0.87].
-\]
-All top rows were classified as healthy, with no tail-edge failure.  Their
-finite-jet diagnostics were far from flat:
-\[
-J_{\max}\sim10^3 Q^{-5}
-\]
-for the leading rows.  The ranking also came in physical-center pairs because
-the labels `gap\_midpoint' and `large\_gap\_midpoint' can refer to the same
-center.  Thus the top \(50\) rows cover roughly \(25\) unique physical targets.
-
-These rows are useful canonical cross-check targets, but they are not Gate--1
-candidates.
-\end{remark}
-
-\begin{remark}[Same-scale quadrature negative-control benchmark]
 \label{rem:same-scale-quadrature-negative-control-numerics}
-The same-scale quadrature negative control was verified to produce the expected
-source-flat signature.  In a representative run at
-\[
-Q\approx3.078,\qquad d=1/Q,\qquad
-I=[-0.2/Q,0.2/Q],
-\]
-the positive same-scale quadrature model gave
-\[
-\sup_I |q''_{\rm quad}|\approx5.7\times10^{-15},
-\]
-\[
-|I|^{-1}\int_I |q''_{\rm quad}(m)|^2\,dm
-\approx3.5\times10^{-30},
-\]
-and
-\[
-B_I^{\rm eff}\approx60.3.
-\]
-This confirms that the numerical pipeline can detect the known
-same-scale source-flattening adversary when it is present.  The actual-zero
-proxy scans above did not resemble this negative control.
-\end{remark}
-
-\begin{remark}[Packet-frequency determinant stress-test status]
 \label{rem:packet-frequency-determinant-stress-status}
-The ordinary packet-frequency determinant stress tests use active blocks
-\[
-\mathcal B_{\rm pf}
-=
-\{n:cQ\le\log n\le cQ+Q/R\},
-\qquad
-0<c<1/2,
-\]
-so that \(\lambda\log n\asymp1\).  This avoids the low-prime node-compression
-failure.  The v3 stress tests ran through
-\[
-R=4,6,8,10,12,16
-\]
-with reflected dual, actual-like dual, and \(E_2\)-perturbation stages.  The
-completed larger-toy run recorded
-\[
-\text{Yellow}=0,\qquad
-\text{Red}_{\rm pre\text{-}E2}=0,\qquad
-\text{Red}=0.
-\]
-The old \(m=0,\alpha=0\) artifacts disappeared after imposing
-\[
-m_{\min}=50.
-\]
-This evidence does not prove the Wronskian incidence theorem, but it found no
-surviving packet-frequency determinant collapse under the current diagnostics
-\[
-\eta_Z,\qquad \eta_W,\qquad \rho_{\rm rank},\qquad
-\kappa_{\rm basis}.
-\]
-Hence no numerical stop rule is currently triggered for the ordinary
-packet-frequency Wronskian route.
-
-The detailed determinant stress archive also found no stop-rule event.  The
-larger-toy run covered
-\[
-R=4,6,8,10,12,16
-\]
-with reflected dual, actual-like dual, and \(E_2\)-perturbation stages, and
-reported
-\[
-\text{Yellow}=0,\qquad
-\text{Red}_{\rm pre\text{-}E2}=0,\qquad
-\text{Red}=0.
-\]
-The \(R=16\) row count was lower than the smaller-\(R\) counts because some
-blocks or \(\alpha\)-cases were filtered before emission, not because the run
-failed.
-
-The best actual-like non-collapsing candidate occurred at roughly
-\[
-R=6,\qquad Q=58,\qquad c=0.2,\qquad \alpha=0,\qquad m\approx5377.16,
-\]
-with
-\[
-\eta_Z\approx2.41\times10^{-5},
-\qquad
-\eta_W\approx1.35\times10^{-5},
-\]
-\[
-\rho_{\rm rank,2}\approx2.89\times10^{-4},
-\qquad
-\kappa_{\rm basis}\approx4.02\times10^{4}.
-\]
-It was classified as `no\_collapse'.  Some rows had very small determinants,
-for instance
-\[
-\eta_W\sim10^{-13},
-\]
-but these did not co-occur with sufficiently small \(\eta_Z\), or were filtered
-as degenerate.  Thus determinant-smallness alone did not produce an incidence
-collapse.
-\end{remark}
-
-\begin{remark}[Numerical classification rule for Gate--1 warnings]
 \label{rem:numerical-classification-rule-gate-one}
-A numerical row is not a serious Gate--1 warning unless all of the following
-hold:
-\[
-E_I\text{ is small},
-\]
-\[
-J_{\max}\text{ is small through the declared jet depth},
-\]
-the tail, quadrature, regularization, and width drifts are stable, and either
-the AFE cross-check passes or the row is explicitly labeled
-\[
-\texttt{serious\_warning\_zero\_side\_only}.
-\]
-A route-threatening conclusion requires a family, not a single interval.  A
-single low-energy row is only watch-level unless it also exhibits finite-jet
-flatness and stability.
-\end{remark}
-
-\begin{remark}[Gate--1 numerical validation sequence]
 \label{rem:gate-one-numerical-validation-sequence}
-Future Gate--1 numerical runs should follow this order:
-\[
-\text{same-scale quadrature negative control}
-\to
-\text{random packet positive/control test}
-\to
-\text{singular dominance and cancellation tests}
-\to
-\text{actual zero-side scan}
-\to
-\text{candidate refinement}
-\to
-\text{AFE cross-check}
-\to
-\text{surrogate comparison and height trend}.
-\]
-Each run should report at least
-\[
-E_I,\quad S_I,\quad B_I^{\rm eff},\quad J_{\max},\quad J_{\rm rms},
-\]
-together with tail, quadrature, regularization, width, and AFE stability
-metrics.  The flattest \(0.1\%\) of rows should be rerun with higher precision,
-larger zero cutoff, more quadrature nodes, finite jets, and AFE cross-checks.
+The numerical O1, zero-side proxy, same-scale quadrature, and
+packet-frequency determinant stress tests are archived diagnostics.  They are
+not used as proof inputs for the canonical Hardy Gate--1 theorem, the
+Fej\'er--Riesz O2/O3 theorem, the certified \(Y12/K9\) quotient, or the final
+source-graded atomic contradiction.  They may be moved to an appendix or
+supplementary numerical section.
 \end{remark}
 
-\begin{remark}[Gate--1 status after the Hardy source repair]
+\begin{remark}[Superseded Gate--1 warning]
 \label{rem:no-green-gate-one-proof-yet}
-The old warning that no source-side proof of
-\(\mathrm{Agg}L^2(q''_{\can})\) was available is superseded in the active
-Hardy branch.  The source is now
-\[
-  q''_{\can}=u_H=\partial_t^3Z_H,
-\]
-with the Hardy differential AFE, dyadic Hardy-curvature mean-square theorem,
-mass-good packet selection, and canonical branch-complete window.  Therefore
-Gate--1 source mass and branch/reference domination are theorem-level inside the
-ordinary Hardy/Whitney branch.
-
-The remaining global caveat is different.  The proof still needs the branch-entry
-theorem recorded in Remark~\ref{rem:hardy-source-rh-entry-reduction}: a
-hypothetical RH counterexample must enter an ordinary Hardy-normalized routed
-branch satisfying the Gate--1/Gate--2 entry hypotheses with only polynomial loss.
-Numerical zero-side proxy diagnostics do not prove this entry theorem; they are
-kept only as sanity checks for possible failure modes.
+This warning is superseded in the active Hardy/canonical branch by
+Theorem~\ref{thm:source-survival-from-three-inputs} and
+Corollary~\ref{cor:gate-one-source-survival}.  It remains valid only for
+archived noncanonical routes such as zero-kernel proxies, \(P_2\)-only or
+\(B_2\)-only diagnostics, scalar pointwise finite-row packages, and raw branch
+windows not identified with \(W_{\mathrm{branch}}^{\mathrm{can}}\).
 \end{remark}
 
 \begin{thebibliography}{99}
