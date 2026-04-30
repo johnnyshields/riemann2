@@ -40551,20 +40551,26 @@ Q^{-A}S_j,
 in which case the static slope is \(s_j^\ast:=\bar s_j\).
 \end{lemma}
 
-\begin{remark}[Static branch is not closed by one-wall anti-concentration]
+\begin{remark}[Legacy warning: scalar static branch]
 \label{rem:static-branch-not-closed}
-The dichotomy in
-Lemma~\ref{lem:extraction-covariance-dichotomy} is a tautology from the
-algebraic identity in Lemma~\ref{lem:exact-cap-covariance-identity}, so the
-nonstatic / static covariance dichotomy itself is proved.  However, a
-one-wall anti-concentration condition
-\(\ell_p(\Gamma)=a_p\Gamma_G+b_p\Gamma_{G,2}\) with \(|b_p|\ge Q^{-A}\) does
-not force \((\Gamma_G,\Gamma_{G,2})\) to span two directions on a cap: a
-cap with \(\Gamma_p=A_p(1,s_0)^T\) for all \(p\in C_j\) gives
-\(\det(B_j)=0\) and \(\delta_{\mathrm{ext}}=0\) while
-\(|a_p+b_p s_0|\) can remain polynomially nonzero.  Thus the static branch
-is not ruled out by moving-wall anti-concentration alone; the missing
-finite input is the static-line \(Y12\) quotient survival hypothesis below.
+This warning is retained only for the older scalar or primitive-only
+\(Y12\) route.  In that route, the covariance identity by itself gives only
+a nonstatic/static dichotomy, and one-wall anti-concentration does not rule
+out a rank-one cap
+\[
+  \Gamma_p=A_p(1,s_0)^T.
+\]
+In the active canonical branch this issue is superseded by the positive
+packet-density formulation and the source-graded affine comparison:
+\[
+  B_j^{\mathrm{cov}}=\sum_{p\in C_j}\omega_p\Gamma_p\Gamma_p^*,
+  \qquad \omega_p=\mu_p^{\mathrm{pkt}},
+\]
+together with
+Theorem~\ref{thm:positive-density-extraction-covariance-closure} and
+Theorem~\ref{thm:canonical-source-graded-affine-branch-closure}.
+Thus the static branch is not an active obstruction in the canonical
+source-graded \(K9\) branch.
 \end{remark}
 
 
@@ -40938,6 +40944,17 @@ not part of the covariance identity.
 \end{remark}
 
 
+\begin{remark}[Legacy scalar static-line transfer lemmas]
+\label{rem:legacy-scalar-static-line-transfer-lemmas}
+The following scalar \(Y12\)-transfer and static-wall escape lemmas are
+retained as fallback diagnostics for noncanonical or primitive-only routes.
+They are not active assumptions in the canonical source-graded \(K9\) branch.
+The active static-line closure is supplied by
+Theorem~\ref{thm:positive-density-extraction-covariance-closure},
+Theorem~\ref{thm:canonical-source-graded-affine-branch-closure}, and
+Corollary~\ref{cor:static-line-branch-canonical-source-graded-norm}.
+\end{remark}
+
 \begin{lemma}[Static-line transfer from actual \(Y12\)-survival]
 \label{lem:static-line-transfer-from-actual-Y12-survival}
 Let \(C_j\) be a quantitatively static good cap.  Put
@@ -41142,6 +41159,11 @@ enough, which gives the conclusion after exponent renaming.
 
 \begin{remark}[Static wall as the residual finite obstruction]
 \label{rem:static-wall-residual}
+This is a residual finite input only for the legacy scalar \(Y12\)-wall route.
+It is superseded in the canonical source-graded branch, where the affine
+forcing components are retained in orthogonal source-grade summands and the
+same-norm Type-I contradiction is supplied by
+Theorem~\ref{thm:canonical-source-graded-atomic-contradiction}.
 Lemma~\ref{lem:static-line-survival-from-wall-escape} sharpens
 Hypothesis~\ref{hyp:static-line-Y12-quotient-survival} by isolating the
 remaining finite input as a one-dimensional wall-escape estimate on the
@@ -41168,58 +41190,33 @@ quotient-descent linear algebra plus quotient survival of the primitive
 and no further.
 \end{remark}
 
-\begin{remark}[Cap-wise covariance bottleneck]
+\begin{remark}[Legacy signed covariance bottleneck]
 \label{rem:cap-wise-covariance-bottleneck}
-On each frozen cap \(C_j\), define
+The signed covariance bottleneck
 \[
-B_j=\sum_{p\in C_j}w_p\,\Gamma_p\Gamma_p^\ast,
-\qquad
-w_p=\rho_p\frac{E_{1,p}H_p}{\mathcal N^{\mathrm{wt}}_p},
-\qquad
-\Gamma_p=\binom{\Gamma_G(p)}{\Gamma_{G,2}(p)}.
+  B_j=\sum_{p\in C_j}w_p\Gamma_p\Gamma_p^*
 \]
-The extraction gap is
+is retained only as a diagnostic for sign-coherent branches.  In the active
+proof branch the covariance object is
 \[
-\delta_{\mathrm{ext}}:=\frac{\det(B_j)}{(\operatorname{tr}B_j)^2}.
+  B_j^{\mathrm{cov}}
+  =
+  \sum_{p\in C_j}\omega_p\Gamma_p\Gamma_p^*,
+  \qquad
+  \omega_p=\mu_p^{\mathrm{pkt}}>0.
 \]
-On the chart \(|\Gamma_G(p)|\ge \tfrac12\|\Gamma_p\|\), write
-\[
-r_p=\frac{\Gamma_{G,2}(p)}{\Gamma_G(p)},
-\qquad
-\lambda_p=\frac{w_p\|\Gamma_p\|^2}{\operatorname{tr}(B_j)},
-\qquad
-\bar r_j=\sum_{p\in C_j}\lambda_p r_p.
-\]
-Then
-\[
-\det(B_j)\asymp (\operatorname{tr}B_j)^2
-\sum_{p\in C_j}\lambda_p|r_p-\bar r_j|^2.
-\]
-So the live bottleneck is exactly
-\[
-V_j:=\sum_{p\in C_j}\lambda_p|r_p-\bar r_j|^2\ge Q^{-A},
-\]
-equivalently
-\[
-\delta_{\mathrm{ext}}\ge Q^{-A}
-\quad\Longleftrightarrow\quad
-\det(B_j)\ge Q^{-A}(\operatorname{tr}B_j)^2.
-\]
-If \(V_j\) collapses, then \(B_j\) is nearly rank one,
-\[
-B_j\approx \operatorname{tr}(B_j)\,u_j u_j^\ast,
-\]
-so the cap is effectively static and must be handed to the \(Y12\) quotient
-module.
+The active extraction statement is therefore
+Theorem~\ref{thm:positive-density-extraction-covariance-closure}, not the
+legacy signed determinant condition.
 \end{remark}
 
-\begin{remark}[wip-zeta-bridge-proof-extraction]
+\begin{remark}[Extraction bridge status]
 \label{rem:wip-zeta-bridge-proof-extraction}
-What remains is the \(2\times2\) covariance test on each frozen cap:
-\[
-\det(B_j)\ge Q^{-A}(\operatorname{tr}B_j)^2,
-\]
-or else the cap is static and must be handed to the \(Y12\) quotient module.
+The extraction covariance bridge is closed in the positive packet-density
+formulation by
+Theorem~\ref{thm:positive-density-extraction-covariance-closure}.  Any
+remaining references to a cap-wise signed determinant test should be read as
+legacy diagnostics unless the branch is explicitly sign-coherent.
 \end{remark}
 
 \begin{definition}[Affine gauge slice and regular locus]
@@ -58923,8 +58920,8 @@ branch-entry, or raw row-certificate obligations.
 & \text{proved from Fej\'er--Riesz anti-lock}
 & \text{verify packet model/off-block hypotheses}\\
 Y12\text{-certified quotient and }L_{\mathrm{eff},p}
-& \text{proved from }\mathfrak C_{2Y}(p)
-& \text{verify raw }\mathfrak B_{2Y,p}\text{ coefficient entries}\\
+& \text{proved conditional on raw }\mathfrak B_{2Y,p}
+& \text{verify all raw row/routing coefficient entries defining }\mathfrak B_{2Y,p}\\
 \delta_{\mathrm{coerc}}
 & \text{proved in the canonical source-graded branch}
 & \text{use }P_p^{\mathrm{full}}\text{ and the }K9\text{ labelled norm}\\
