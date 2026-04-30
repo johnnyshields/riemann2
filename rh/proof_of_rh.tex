@@ -38931,23 +38931,22 @@ is polynomially bounded from the \(L^2\)-completion norm.  The targeted
 \end{remark}
 
 
-\begin{definition}[Full-vector certified \(K9\) completion]
+\begin{definition}[Full-vector source-graded certified \(K9\) completion]
 \label{def:full-vector-certified-K9-completion}
-On the proof-level canonical source-graded branch define
+\label{def:source-graded-full-vector-K9-completion}
+On the proof-level canonical source-graded branch, define
 \[
-  \Lambda_{K9,p}^{\mathrm{vec}}
+  \Lambda_{K9,p}^{\mathrm{gr,vec}}
   :=
-  (I-P_{R_p})\mathcal L_{K9,p}^{\mathrm{gr}}P_{\mathrm{tr},p},
+  (I-P_{R_p})\mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p},
 \]
 where \(R_p\subset H_{K9,p}^{\mathrm{gr}}\) is the certified retained/dead
-source-graded space before the finite-main labels are added.  The norm is the
-Hilbert norm of \(H_{K9,p}^{\mathrm{gr}}\), before scalar \(I\)-coordinate
-collapse and before projection to any primitive \(Y12\) row.  The assertion
-\(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\) is the estimate
+source-graded space before adjoining the finite-AFE main model.  The assertion
+\(\mathrm{EFCompletion}_{K9}^{\mathrm{gr,vec}}\) is the estimate
 \[
   \sum_p
   \bigl\|
-  \Lambda_{K9,p}^{\mathrm{vec}}J_{\mathrm{tr},p}(R_X)
+  \Lambda_{K9,p}^{\mathrm{gr,vec}}(R_X)
   \bigr\|_{\mathrm{gr}}^2
   \le Q^{-B}\mu(\mathcal C)
 \]
@@ -38956,16 +38955,33 @@ sufficiently deep.  Its cap-local weighted form is
 \[
   \sum_{p\in C_j}\mu_p
   \bigl\|
-  \Lambda_{K9,p}^{\mathrm{vec}}J_{\mathrm{tr},p}(R_X)
+  \Lambda_{K9,p}^{\mathrm{gr,vec}}(R_X)
   \bigr\|_{\mathrm{gr}}^2
   \le Q^{-B}
-  \sum_{p\in C_j}\mu_p\|v_p\|^2 .
+  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2 .
 \]
-Since \(P_p^{\mathrm{full}}\) retains \(R_p\) and the finite-main labelled
-space, the discarded norm with \(P_p^{\mathrm{full}}\) is bounded above by this
-\(\Lambda_{K9,p}^{\mathrm{vec}}\)-norm.  This is the monotonicity used in
-Theorem~\ref{thm:source-graded-same-norm-typeI-upper}.
+This is the full labelled/source-graded row norm before scalar \(I\)-coordinate
+collapse and before projection to a primitive \(Y12\) row.  The older collapsed
+notation
+\[
+  (I-P_{\mathrm{sing},p}^{\mathrm{cert}})
+  T_{\mathrm{tr}\to\mathrm{sing},p}P_{\mathrm{tr},p}
+\]
+is the image of this source-graded row under the fixed collapse map only after
+the same-norm comparison has already been made.  It is not the active norm for
+the canonical affine-forcing branch.
 \end{definition}
+
+\begin{remark}[Legacy collapsed \(K9\) notation]
+\label{rem:legacy-collapsed-K9-notation}
+If an older citation writes \(\Lambda_{K9,p}^{\mathrm{vec}}\) without the
+superscript \(\mathrm{gr}\), it should be read in the canonical branch as
+\(\Lambda_{K9,p}^{\mathrm{gr,vec}}\).  Scalar/collapsed \(K9\) or primitive-only
+\(Y12\) completion is insufficient for the affine-forcing repair because it can
+hide cancellation between orthogonal source-grade components.  The upper used in
+Theorem~\ref{thm:canonical-source-graded-affine-branch-closure} is the
+source-graded full-vector estimate above.
+\end{remark}
 
 \begin{definition}[Canonical source-graded \(K9\) lift]
 \label{def:canonical-source-graded-K9-lift}
@@ -39427,7 +39443,7 @@ in the canonical source-graded Hilbert space \(H_{K9,p}^{\mathrm{gr}}\), and let
   :=
   \Pi_{\max,p}^{\mathrm{gr}}
   (I-P_p^{\mathrm{full}})
-  \mathcal L_{K9,p}^{\mathrm{gr}}P_{\mathrm{tr},p}
+  \mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p}
 \]
 denote the canonical-branch affine discarded observable.  When the symbol
 \(\widehat\Lambda_{\mathrm{aff},p}\) appears in the active proof it refers to
@@ -39663,14 +39679,13 @@ see Lemma~\ref{lem:maximal-affine-row-realization-canonical-lift}.
 \end{remark}
 
 
-\begin{lemma}[Full-vector \(K9\) completion implies affine-graded completion]
+\begin{lemma}[Source-graded \(K9\) completion implies affine-graded completion]
 \label{lem:full-vector-K9-implies-affine-graded-completion}
-Assume \(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\).  Then, in the canonical
-source-graded branch,
+Assume \(\mathrm{EFCompletion}_{K9}^{\mathrm{gr,vec}}\).  Then
 \[
   \sum_p
   \bigl\|
-  \widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(R_X)
+  \widehat\Lambda_{\mathrm{aff},p}(R_X)
   \bigr\|_{\mathrm{gr}}^2
   \le Q^{-B}\mu(\mathcal C)
 \]
@@ -39679,97 +39694,100 @@ holds in the cap-local weighted form.
 \end{lemma}
 
 \begin{proof}
-In the active branch
+By Definition~\ref{def:source-graded-affine-discarded-target},
 \[
   \widehat\Lambda_{\mathrm{aff},p}
-  =\Pi_{\max,p}^{\mathrm{gr}}(I-P_p^{\mathrm{full}})\mathcal L_{K9,p}^{\mathrm{gr}}P_{\mathrm{tr},p}.
+  =
+  \Pi_{\max,p}^{\mathrm{gr}}
+  (I-P_p^{\mathrm{full}})
+  \mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p}.
 \]
-The projection \(\Pi_{\max,p}^{\mathrm{gr}}\) is orthogonal, and
-\(R_p\subset R_p^{\mathrm{full}}\), so enlarging the retained space from
-\(R_p\) to \(R_p^{\mathrm{full}}\) can only decrease the discarded norm:
+Because \(P_p^{\mathrm{full}}\) contains \(R_p\), enlarging the retained space
+can only decrease the discarded norm:
 \[
-  \|\widehat\Lambda_{\mathrm{aff},p}x\|_{\mathrm{gr}}
+  \|(I-P_p^{\mathrm{full}})x\|_{\mathrm{gr}}
   \le
-  \|(I-P_{R_p})\mathcal L_{K9,p}^{\mathrm{gr}}P_{\mathrm{tr},p}x\|_{\mathrm{gr}}
-  =\|\Lambda_{K9,p}^{\mathrm{vec}}x\|_{\mathrm{gr}} .
+  \|(I-P_{R_p})x\|_{\mathrm{gr}}.
 \]
-Squaring and summing gives the claim.
+Since \(\Pi_{\max,p}^{\mathrm{gr}}\) is an orthogonal projection,
+\[
+  \|\widehat\Lambda_{\mathrm{aff},p}(R_X)\|_{\mathrm{gr}}
+  \le
+  \|\Lambda_{K9,p}^{\mathrm{gr,vec}}(R_X)\|_{\mathrm{gr}}.
+\]
+Squaring and summing, with or without cap weights, gives the claim.
 \end{proof}
 
 
-\begin{lemma}[Polynomial finite-jet bound for certified source-graded \(K9\) rows]
+\begin{lemma}[Polynomial finite-jet bound for source-graded certified \(K9\) rows]
 \label{lem:polynomial-finite-jet-bound-certified-K9}
 On an ordinary real-canonical, Gram-good, boundary-collar-excluded packet, the
-canonical source-graded row map satisfies the local Sobolev estimate
+source-graded certified transition--singular row map satisfies
 \[
   \bigl\|
-  (I-P_{R_p})\mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p}(f)
+  \Lambda_{K9,p}^{\mathrm{gr,vec}}(f)
   \bigr\|_{\mathrm{gr}}^2
   \le
   Q^{C_J}
   \sum_{0\le r\le J}
   \int_{K_p^+}|\partial_t^r f(t)|^2 W_{\mathrm{br}}(t)\,dt
 \]
-for some fixed finite \(J\) and an absolute exponent \(C_J\).  The same bound
-holds with \(P_{R_p}\) replaced by \(P_p^{\mathrm{full}}\), because enlarging
-the retained space only decreases the discarded norm.  Here \(W_{\mathrm{br}}\)
-is any branch/reference weight in the packet class which is polynomially
-comparable to Lebesgue measure on \(K_p^+\).
+for some fixed finite \(J\) and an absolute exponent \(C_J\).  Here
+\(W_{\mathrm{br}}\) is any branch/reference weight in the packet class which is
+polynomially comparable to Lebesgue measure on \(K_p^+\).
 \end{lemma}
 
 \begin{proof}
-The operator \(J_{\mathrm{tr},p}\) uses only finitely many transition jets, and
-\(\mathcal L_{K9,p}^{\mathrm{gr}}\), \(P_{\mathrm{tr},p}\), and
-\(I-P_{R_p}\) are finite-dimensional source-graded matrices whose entries are
-rational/analytic functions of the packet chart data.  On the ordinary
+The canonical lift \(\mathcal L_{K9,p}^{\mathrm{gr}}\) is a finite direct sum of
+labelled transition--singular rows.  Each labelled row uses only finitely many
+transition jets, and the certified projections are finite-dimensional matrices
+with entries rational/analytic in the packet chart data.  On the ordinary
 real-canonical, Gram-good, boundary-collar-excluded set all normalizing
 denominators are bounded below by a power of \(Q\), while all numerators have
-polynomial size.  Hence the matrix norm of the finite row map is
-\(O(Q^C)\) times the norm of finitely many point jets of \(f\).  For each point
-jet, the one-dimensional local Sobolev inequality on \(K_p^+\), together with
-the polynomial scale bounds and polynomial weight comparability on good
-packets, gives
-\[
-  |\partial_t^a f(m_p)|^2
-  \le Q^{C_a}\sum_{0\le r\le a+1}
-  \int_{K_p^+}|\partial_t^r f(t)|^2W_{\mathrm{br}}(t)\,dt .
-\]
-Taking \(J\) larger than the maximum jet order used by the certified labelled
-\(K9\) row gives the displayed estimate.  The variant with
-\(P_p^{\mathrm{full}}\) follows from \(R_p\subset R_p^{\mathrm{full}}\).
+polynomial size.  The direct-sum norm has only polynomially many source labels,
+so the row-map norm is \(O(Q^C)\) times the norm of finitely many point jets of
+\(f\).  The one-dimensional local Sobolev inequality on \(K_p^+\), together with
+polynomial scale bounds and polynomial weight comparability on good packets,
+gives the displayed estimate after choosing \(J\) larger than the maximum jet
+order used by the certified \(K9\) table.
 \end{proof}
 
-\begin{theorem}[Full-vector \(K9\) EF completion from the smooth AFE tail]
+\begin{theorem}[Source-graded full-vector \(K9\) EF completion from the smooth AFE tail]
 \label{thm:full-vector-K9-EFCompletion-from-AFE-tail}
-Assume the smooth finite AFE tail estimate gives, for every fixed
-\(J\) and every \(A_0>0\),
-\(\sum_{0\le r\le J}\|\partial_t^r R_X\|_{L^2(W_{\mathrm{br}})}^2\le X^{-A_0}\).
+Assume the smooth finite AFE tail estimate gives, for every fixed \(J\) and
+every \(A_0>0\),
+\[
+  \sum_{0\le r\le J}\|\partial_t^rR_X\|_{L^2(W_{\mathrm{br}})}^2\le X^{-A_0}.
+\]
 Assume the certified packet family has bounded overlap.  Then
-\(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\) holds.  More precisely,
-for every prescribed \(B\) one can choose the AFE cutoff depth so that
-\(\sum_p\|\Lambda_{K9,p}^{\mathrm{vec}}J_{\mathrm{tr},p}(R_X)\|^2\le Q^{-B}\mu(\mathcal C)\).
-The same conclusion holds in the cap-local weighted form whenever the
-cap quadrature/core-transfer estimate compares the discrete cap
-measure \(\sum_{p\in C_j}\mu_p\delta_{m_p}\) with
-\(W_{\mathrm{br}}(t)\,dt\) for the finite collection of functions
-\(|\partial_t^r R_X|^2\), \(0\le r\le J\), with polynomial loss.
+\(\mathrm{EFCompletion}_{K9}^{\mathrm{gr,vec}}\) holds.  More precisely, for
+every prescribed \(B\) one can choose the AFE cutoff depth so that
+\[
+  \sum_p
+  \|\Lambda_{K9,p}^{\mathrm{gr,vec}}(R_X)\|_{\mathrm{gr}}^2
+  \le Q^{-B}\mu(\mathcal C).
+\]
+The same conclusion holds in the cap-local weighted form whenever the cap
+quadrature/core-transfer estimate compares the discrete cap measure
+\(\sum_{p\in C_j}\mu_p\delta_{m_p}\) with \(W_{\mathrm{br}}(t)\,dt\) for the
+finite collection of functions \(|\partial_t^rR_X|^2\), \(0\le r\le J\), with
+polynomial loss.
 \end{theorem}
 
 \begin{proof}
-Apply Lemma~\ref{lem:polynomial-finite-jet-bound-certified-K9} with
-\(f=R_X\), and sum over \(p\).  Bounded overlap of the enlarged packet
-cores implies
+Apply Lemma~\ref{lem:polynomial-finite-jet-bound-certified-K9} with \(f=R_X\),
+and sum over \(p\).  Bounded overlap of the enlarged packet cores gives
 \[
-\sum_p\|\Lambda_{K9,p}^{\mathrm{vec}}J_{\mathrm{tr},p}(R_X)\|^2
-\le Q^{C_J}\sum_{0\le r\le J}\sum_p\int_{K_p^+}|\partial_t^rR_X(t)|^2W_{\mathrm{br}}(t)\,dt
-\le Q^{C_J'}\sum_{0\le r\le J}\|\partial_t^rR_X\|_{L^2(W_{\mathrm{br}})}^2
+\sum_p\|\Lambda_{K9,p}^{\mathrm{gr,vec}}(R_X)\|_{\mathrm{gr}}^2
+\le Q^{C_J'}
+\sum_{0\le r\le J}\|\partial_t^rR_X\|_{L^2(W_{\mathrm{br}})}^2
 \le Q^{C_J'}X^{-A_0}.
 \]
 Choose \(A_0\) and the cutoff depth so that
-\(Q^{C_J'}X^{-A_0}\le Q^{-B}\mu(\mathcal C)\).  The cap-local weighted
-version is the same argument after replacing bounded overlap by the
-stated cap quadrature/core-transfer estimate; the polynomial transfer
-loss is absorbed into the exponent.
+\(Q^{C_J'}X^{-A_0}\le Q^{-B}\mu(\mathcal C)\).  The cap-local weighted version is
+the same argument after replacing bounded overlap by the stated cap
+quadrature/core-transfer estimate; the polynomial transfer loss is absorbed into
+the exponent.
 \end{proof}
 
 \begin{definition}[Proof-level source-graded discard]
@@ -40353,20 +40371,23 @@ read as the sign-coherent special case, or replaced by
 general.
 \end{remark}
 
-\begin{hypothesis}[Positive extraction covariance weights]
+\begin{remark}[Legacy sign-coherent covariance convention]
 \label{ass:positive-extraction-covariance-weights}
-On every good frozen cap \(C_j\), the extraction weights used in
+\label{rem:legacy-sign-coherent-covariance-convention}
+The formula
 \[
-B_j=\sum_{p\in C_j}w_p\Gamma_p\Gamma_p^\ast
+  B_j=\sum_{p\in C_j}w_p\Gamma_p\Gamma_p^*,
+  \qquad
+  w_p=\rho_p\frac{E_{1,p}H_p}{\mathcal N_p^{\mathrm{wt}}},
 \]
-satisfy \(w_p\ge0\) and \(\sum_{p\in C_j}w_p|\Gamma_G(p)|^2>0\).
-Equivalently, if
-\[
-w_p=\rho_p\frac{E_{1,p}H_p}{\mathcal N_p^{\mathrm{wt}}},
-\]
-then the extracted packet selection is restricted to a sign-coherent branch,
-or \(w_p\) is replaced by the corresponding positive covariance density.
-\end{hypothesis}
+defines a positive covariance matrix only on a sign-coherent branch where
+\(w_p\ge0\) and \(\sum_{p\in C_j}w_p|\Gamma_G(p)|^2>0\).  This sign-coherent
+case is a legacy special case of the active positive-density formulation below.
+In the canonical proof branch the covariance density is the positive packet
+quadrature density \(\omega_p=\mu_p^{\mathrm{pkt}}\), not the signed wall
+coefficient \(w_p\), unless the branch has already been restricted so that
+\(w_p\) is nonnegative up to a common phase.
+\end{remark}
 
 \begin{lemma}[Exact cap covariance identity]
 \label{lem:exact-cap-covariance-identity}
@@ -40529,8 +40550,11 @@ Q^{-A}
 \sum_{p\in C_j}\mu_p\|\Phi_{p,\mathrm{cert}}^Yu_j\|^2.
 \]
 Thus the former static-line survival hypothesis is discharged in the certified
-quotient; the remaining static-branch work is only the final same-norm
-comparison using this lower bound.
+quotient.  In the active proof branch this relative quotient-survival statement
+is superseded by the source-graded affine comparison of
+Theorem~\ref{thm:canonical-source-graded-affine-branch-closure}, which supplies
+the same-norm Type-I contradiction after the static direction is routed into the
+maximal affine target.
 \end{corollary}
 
 \begin{proof}
@@ -40573,6 +40597,7 @@ by a positive packet density polynomially comparable to the extracted
 mass.
 
 \begin{theorem}[Positive extraction density identification]
+\label{thm:positive-extraction-density-identification}
 \label{hyp:positive-extraction-density-selection}
 On every selected ordinary real-canonical good frozen cap \(C_j\), the
 covariance density may be taken to be the positive cap/quadrature density
@@ -40662,7 +40687,7 @@ or variance interpretation.
 \begin{lemma}[Exact positive-density cap covariance]
 \label{lem:exact-positive-density-cap-covariance}
 Let \(C_j\) be a frozen cap satisfying
-Hypothesis~\ref{hyp:positive-extraction-density-selection}.  On a chart
+Theorem~\ref{thm:positive-extraction-density-identification}.  On a chart
 with \(g_p\ne0\), write
 \(\Gamma_p=g_p(1,s_p)^T\),
 \(\mu_p^{\mathrm{cov}}:=\omega_p|g_p|^2\),
@@ -40773,8 +40798,10 @@ frozen direction \(u_j\).
 \label{thm:positive-density-extraction-covariance-closure}
 On every selected good frozen cap satisfying the good chart condition,
 with the positive packet covariance density of
-Theorem~\ref{hyp:positive-extraction-density-selection}, exactly one of
-the following proof branches applies.
+Theorem~\ref{thm:positive-extraction-density-identification}, at least one
+of the following alternatives applies.  The alternatives may overlap at the
+threshold after exponent renaming; this harmless overlap is resolved by
+choosing either available branch.
 \begin{enumerate}
 \item The nonstatic branch holds:
 \[
@@ -40814,7 +40841,7 @@ assert the false all-caps scalar statement
 The nonstatic/static dichotomy is
 Corollary~\ref{cor:positive-density-nonstatic-static-dichotomy}, using
 the positive density supplied by
-Theorem~\ref{hyp:positive-extraction-density-selection}.  In the
+Theorem~\ref{thm:positive-extraction-density-identification}.  In the
 nonstatic alternative, Lemma~\ref{lem:exact-positive-density-cap-covariance}
 gives the lower bound for \(\delta_{\mathrm{ext}}^{\mathrm{cov}}\), after
 renaming exponents.
@@ -40822,7 +40849,7 @@ renaming exponents.
 In the static alternative, the Lipschitz chart estimate in
 Corollary~\ref{cor:positive-density-nonstatic-static-dichotomy} gives the
 fixed direction \(u_j\).  The D4 amplitude estimate in
-Theorem~\ref{hyp:positive-extraction-density-selection}, together with
+Theorem~\ref{thm:positive-extraction-density-identification}, together with
 the certified rank-two row/routing and effective carrier estimates,
 gives the source-graded lower bound for the affine coefficient vector
 whose clean component is \(H_pL_{\mathrm{clean},p}u_j\).  The live
@@ -40856,7 +40883,7 @@ The only covariance object used in the active proof is
 \(\omega_p=\mu_p^{\mathrm{pkt}}\).  Older wording that refers to a
 ``positive extraction density selection'' as an open finite audit should
 be read as superseded by
-Theorem~\ref{hyp:positive-extraction-density-selection}.  Older wording
+Theorem~\ref{thm:positive-extraction-density-identification}.  Older wording
 that refers to the signed coefficient \(w_p\) as a covariance weight is
 valid only on a sign-coherent branch; otherwise it must be replaced by
 \(\omega_p\) throughout the covariance identity, static slope, and cap
@@ -43097,6 +43124,19 @@ contain the exact coefficient assumptions
 guardrails.  Thus, until those assumptions are verified from the actual
 finite row formulas on the selected packets, the rank-two \(Y12\)
 row/routing certificate remains a finite audit item.
+\end{remark}
+
+\begin{remark}[Consistency of the certified branch with the row/routing audit]
+\label{rem:certified-branch-row-routing-consistency}
+The canonical source-graded closure does not remove the need for the concrete
+row/routing certificate \(\mathfrak R_{2Y}(p)\).  It removes the downstream
+finite-main Schur and same-norm affine-forcing obstructions once the certified
+branch is entered.  Thus statements saying ``the certified quotient is proved''
+mean: proved on packets for which \(\mathfrak R_{2Y}(p)\) has been verified or
+explicitly imported.  Statements saying the raw row/routing certificate remains a
+finite audit refer only to the coefficient-table verification that enters the
+branch; they do not reopen the positive-density extraction covariance, the
+finite-main Schur complement, or the source-graded same-norm comparison.
 \end{remark}
 
 \begin{remark}[Superseding the older primitive-only quotient ledger]
@@ -58802,8 +58842,8 @@ The downstream status table should be read as follows.
 & \text{proved from Fej\'er--Riesz anti-lock}
 & \text{verify packet model/off-block hypotheses}\\
 Y12\text{-certified quotient}
-& \text{proved in the certified branch}
-& \text{use the live/dead certified quotient, not a raw nuisance quotient}\\
+& \text{proved on packets satisfying }\mathfrak R_{2Y}(p)
+& \text{raw row/routing coefficient verification or explicit import}\\
 \delta_{\mathrm{coerc}}
 & \text{proved in the canonical source-graded branch}
 & \text{use }P_p^{\mathrm{full}}\text{ and the }K9\text{ labelled norm}\\
@@ -58817,8 +58857,8 @@ D4\text{ amplitude mass}
 & \text{proved on ordinary routed blocks from the smooth AFE tail}
 & \text{do not replace by scalar }Y12\text{ completion}\\
 \delta_{\mathrm{ext}}\text{ / static line}
-& \text{routing item}
-& \text{cap extraction covariance or typed static-line handoff}\\
+& \text{closed as a positive-density fork}
+& B_j^{\mathrm{cov}}\text{ and the canonical source-graded static handoff; no signed covariance}\\
 \mathrm{AtomicY12Contradiction}
 & \text{proved in the canonical source-graded }K9\text{ branch}
 & \text{ensure the routed cap enters this branch.}
