@@ -38819,75 +38819,67 @@ coercive and the downstream atomic contradiction cannot be derived in the
 current norm.
 \end{remark}
 
-\begin{hypothesis}[Singular-discard upper from EF coherence]
-\label{hyp:singular-discard-upper-from-EF-coherence}
-The actual canonical rows satisfy
-\[
-  \boxed{
-  \sum_p
-  \left\|
-  (I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(q''_{\can})
-  \right\|^2
-  \le
-  Q^{-B}\mu(\mathcal C).
-  }
-\]
-A sufficient proof route is:
-\[
-  q''_{\can}=F_X+R_X,
-  \qquad
-  T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(F_X)\in R_{\mathrm{sing},p},
-\]
-and
-\[
-  \sum_p
-  \|T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(R_X)\|^2
-  \le
-  Q^{-B}\mu(\mathcal C).
-\]
-Thus the same EF coherence estimates used in
-Hypothesis~\ref{hyp:agg-l2-qcan-gate-one} may also supply the forbidden upper,
-provided they hold in the singular overlap norms.
-\end{hypothesis}
 
-\begin{definition}[\(\mathrm{EFCompletion}_{K9}\)]
+\begin{remark}[Legacy scalar singular-discard upper]
+\label{hyp:singular-discard-upper-from-EF-coherence}
+This legacy label is retained only for citations to the old scalar
+transition--singular formulation.  It is not the active proof-level upper in
+the canonical source-graded branch.  The active upper is
+Theorem~\ref{thm:source-graded-same-norm-typeI-upper}, namely the estimate in
+the fixed labelled Hilbert space
+\(H_{K9,p}^{\mathrm{gr}}\) for
+\[
+  \Lambda_p^{\mathrm{gr,full}}
+  =(I-P_p^{\mathrm{full}})\mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p}.
+\]
+The old scalar display
+\[
+  (I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(q''_{\can})
+\]
+may be used only as a collapsed diagnostic after the source-graded
+same-norm contradiction has already been formulated.  In particular, the proof
+no longer assumes a scalar singular-discard upper for \(q''_{\can}\) as a
+separate hypothesis.  The upper is obtained by retaining the full finite-main
+labelled model \(H_{F,p}\), using
+\(q''_{\can}=F_X+R_X\), and applying full-vector source-graded
+\(K9\) completion to \(R_X\).
+\end{remark}
+
+
+\begin{definition}[Active meaning of \(\mathrm{EFCompletion}_{K9}\)]
 \label{def:EFCompletion-K9}
-The local \(L^2\) completion used for Gate--1 is not automatically strong
-enough for the singular-discard forbidden upper.  Define
-\(\mathrm{EFCompletion}_{K9}\) to be the estimate
+The active \(K9\)-completion estimate is the full-vector, source-graded tail
+upper before scalar collapse.  In the canonical branch it means
 \[
   \boxed{
   \sum_p
   \left\|
-  \Lambda_{\mathrm{tr},\mathrm{sing},p}J_{\mathrm{tr},p}(R_X)
-  \right\|^2
+  (I-P_{R_p})\mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p}(R_X)
+  \right\|_{\mathrm{gr}}^2
   \le Q^{-B}\mu(\mathcal C),
   }
 \]
-Here
+for arbitrarily large prescribed \(B\), after choosing the smooth AFE cutoff
+depth sufficiently deep.  Here \(R_p\) is the certified retained/dead
+source-graded space before full finite-main retention, and
+\(\mathcal L_{K9,p}^{\mathrm{gr}}\) is the fixed labelled lift of
+Definition~\ref{def:canonical-source-graded-K9-lift}.  Its cap-local form is
+\[
+  \sum_{p\in C_j}\mu_p
+  \left\|
+  (I-P_{R_p})\mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p}(R_X)
+  \right\|_{\mathrm{gr}}^2
+  \le Q^{-B}\sum_{p\in C_j}\mu_p\|v_p\|^2 .
+\]
+The older scalar notation
 \[
   \Lambda_{\mathrm{tr},\mathrm{sing},p}
-  =
-  (I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}P_{\mathrm{tr},p}
+  =(I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}P_{\mathrm{tr},p}
 \]
-already includes the transition-to-singular transport.  Equivalently, for a
-normal residual functional \(K_{9,p}\), the same estimate may be written as
-\[
-  \sum_p
-  \left|
-    K_{9,p}T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(R_X)
-  \right|^2
-  \le Q^{-B}\mu(\mathcal C).
-\]
-Here
-\[
-  q''_{\can}=F_X+R_X,
-  \qquad
-  F_X=B_2+P_{2,\le X}+D_{2,\le X}.
-\]
-Equivalently, the residual must be small not only in the Gate--1
-\(L^2\)-window norm, but also after transport to the singular chart and
-application of the discarded singular projection.
+is an archived shorthand for a collapsed diagnostic.  It is not sufficient for
+the affine-forcing branch, because scalar collapse can hide cancellation
+between finite-main and affine live labels.  The proof-level upper is always
+measured in the same source-graded norm used for the lower bound.
 \end{definition}
 
 \begin{definition}[\(\mathrm{EFCompletion}_{Y12}\)]
@@ -38938,36 +38930,41 @@ is polynomially bounded from the \(L^2\)-completion norm.  The targeted
 \(Y12\)-estimate may be substantially easier than full \(K_9\)-completion.
 \end{remark}
 
+
 \begin{definition}[Full-vector certified \(K9\) completion]
 \label{def:full-vector-certified-K9-completion}
-On the proof-level certified singular branch define
+On the proof-level canonical source-graded branch define
 \[
   \Lambda_{K9,p}^{\mathrm{vec}}
   :=
-  (I-P_{\mathrm{sing},p}^{\mathrm{cert}})
-  T_{\mathrm{tr}\to\mathrm{sing},p}P_{\mathrm{tr},p}.
+  (I-P_{R_p})\mathcal L_{K9,p}^{\mathrm{gr}}P_{\mathrm{tr},p},
 \]
-Here the norm is the Hilbert norm of the full discarded certified
-singular space, before any scalar \(I\)-coordinate collapse and before
-projecting to a single primitive \(Y12\) row.  The assertion
+where \(R_p\subset H_{K9,p}^{\mathrm{gr}}\) is the certified retained/dead
+source-graded space before the finite-main labels are added.  The norm is the
+Hilbert norm of \(H_{K9,p}^{\mathrm{gr}}\), before scalar \(I\)-coordinate
+collapse and before projection to any primitive \(Y12\) row.  The assertion
 \(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\) is the estimate
 \[
   \sum_p
   \bigl\|
   \Lambda_{K9,p}^{\mathrm{vec}}J_{\mathrm{tr},p}(R_X)
-  \bigr\|^2
+  \bigr\|_{\mathrm{gr}}^2
   \le Q^{-B}\mu(\mathcal C)
 \]
-for arbitrarily large prescribed \(B\), after choosing the smooth AFE
-cutoff sufficiently deep.  Its cap-local weighted form is
+for arbitrarily large prescribed \(B\), after choosing the smooth AFE cutoff
+sufficiently deep.  Its cap-local weighted form is
 \[
   \sum_{p\in C_j}\mu_p
   \bigl\|
   \Lambda_{K9,p}^{\mathrm{vec}}J_{\mathrm{tr},p}(R_X)
-  \bigr\|^2
+  \bigr\|_{\mathrm{gr}}^2
   \le Q^{-B}
-  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2 .
+  \sum_{p\in C_j}\mu_p\|v_p\|^2 .
 \]
+Since \(P_p^{\mathrm{full}}\) retains \(R_p\) and the finite-main labelled
+space, the discarded norm with \(P_p^{\mathrm{full}}\) is bounded above by this
+\(\Lambda_{K9,p}^{\mathrm{vec}}\)-norm.  This is the monotonicity used in
+Theorem~\ref{thm:source-graded-same-norm-typeI-upper}.
 \end{definition}
 
 \begin{definition}[Canonical source-graded \(K9\) lift]
@@ -39384,7 +39381,7 @@ For the upper, the finite main model is retained by \(P_p^{\mathrm{full}}\), so
 linearity of the canonical lift and the AFE identity
 \(q''_{\can}=F_X+R_X\) give
 \[
-  (I-P_p^{\mathrm{full}})\mathcal L_{K9,p}^{\mathrm{gr} }
+  (I-P_p^{\mathrm{full}})\mathcal L_{K9,p}^{\mathrm{gr}}
   J_{\mathrm{tr},p}(q''_{\can})
   =
   (I-P_p^{\mathrm{full}})\mathcal L_{K9,p}^{\mathrm{gr}}
@@ -39626,31 +39623,16 @@ Corollary~\ref{cor:finite-main-Schur-discharged-by-canonical-lift} and
 Theorem~\ref{thm:canonical-source-graded-affine-branch-closure}.
 \end{remark}
 
+
 \begin{remark}[Legacy row-dead finite-main route superseded]
 \label{rem:legacy-row-dead-finite-main-route-superseded}
-The earlier row-dead finite-main formulation is only a sufficient fallback.
-It should not be used as the active proof route.  In the active branch the
-proof is carried out in the canonical source-graded \(K9\) lift of
-Definition~\ref{def:canonical-source-graded-K9-lift}.  The finite-AFE main
-labels lie in \(H_{p,\mathrm{main}}\), the affine \(C_7/Y12\) live labels lie
-in \(H_{p,\mathrm{aff}}\), and these two labelled subspaces are orthogonal
-before scalar collapse.  Therefore the full finite-main model may be retained
-by
-\[
-  P_p^{\mathrm{full}}:=P_{R_p+\operatorname{im}H_{F,p}}
-\]
-without killing the affine live normal directions, because
-Corollary~\ref{cor:finite-main-Schur-discharged-by-canonical-lift} gives
-\[
-  (E_p^{\mathrm{aff}})^*
-  (I-P_p^{\mathrm{full}})E_p^{\mathrm{aff}}
-  \ge Q^{-C}I .
-\]
-Thus the finite-main Schur complement is closed in the canonical
-source-graded branch.  Statements saying that finite-main generators must be
-retained only after row-deadification are to be read as warnings for
-noncanonical or scalar-collapsed formulations, not as active hypotheses in the
-proof-level branch.
+This legacy label is retained for citations to the older finite-main
+row-deadification route.  Its content is now subsumed by
+Remark~\ref{rem:superseded-row-dead-finite-main-formulation} and
+Corollary~\ref{cor:finite-main-Schur-discharged-by-canonical-lift}.  In the
+active branch, the full finite-main labelled model is retained in
+\(H_{p,\mathrm{main}}\), while affine live labels remain in the orthogonal
+source-grade \(H_{p,\mathrm{aff}}\).
 \end{remark}
 
 \begin{remark}[Scope of certified coercivity after the canonical lift]
@@ -39680,9 +39662,11 @@ maximal affine target contains every live affine \(K9\) source-grade label;
 see Lemma~\ref{lem:maximal-affine-row-realization-canonical-lift}.
 \end{remark}
 
+
 \begin{lemma}[Full-vector \(K9\) completion implies affine-graded completion]
 \label{lem:full-vector-K9-implies-affine-graded-completion}
-Assume \(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\).  Then
+Assume \(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\).  Then, in the canonical
+source-graded branch,
 \[
   \sum_p
   \bigl\|
@@ -39690,55 +39674,69 @@ Assume \(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\).  Then
   \bigr\|_{\mathrm{gr}}^2
   \le Q^{-B}\mu(\mathcal C)
 \]
-with the same exponent up to harmless polynomial loss.  The same
-implication holds in the cap-local weighted form.
+with the same exponent up to harmless polynomial loss.  The same implication
+holds in the cap-local weighted form.
 \end{lemma}
 
 \begin{proof}
-By definition
-\(\widehat\Lambda_{\mathrm{aff},p}=\Pi_{\mathrm{aff},p}^{\mathrm{gr}}\Lambda_{K9,p}^{\mathrm{vec}}\),
-and \(\Pi_{\mathrm{aff},p}^{\mathrm{gr}}\) is an orthogonal projection.
-Hence
-\(\|\widehat\Lambda_{\mathrm{aff},p}x\|_{\mathrm{gr}}\le\|\Lambda_{K9,p}^{\mathrm{vec}}x\|\)
-for every transition jet \(x\); squaring and summing, with or without
-the cap weights \(\mu_p\), gives the claim.
+In the active branch
+\[
+  \widehat\Lambda_{\mathrm{aff},p}
+  =\Pi_{\max,p}^{\mathrm{gr}}(I-P_p^{\mathrm{full}})\mathcal L_{K9,p}^{\mathrm{gr}}P_{\mathrm{tr},p}.
+\]
+The projection \(\Pi_{\max,p}^{\mathrm{gr}}\) is orthogonal, and
+\(R_p\subset R_p^{\mathrm{full}}\), so enlarging the retained space from
+\(R_p\) to \(R_p^{\mathrm{full}}\) can only decrease the discarded norm:
+\[
+  \|\widehat\Lambda_{\mathrm{aff},p}x\|_{\mathrm{gr}}
+  \le
+  \|(I-P_{R_p})\mathcal L_{K9,p}^{\mathrm{gr}}P_{\mathrm{tr},p}x\|_{\mathrm{gr}}
+  =\|\Lambda_{K9,p}^{\mathrm{vec}}x\|_{\mathrm{gr}} .
+\]
+Squaring and summing gives the claim.
 \end{proof}
 
-\begin{lemma}[Polynomial finite-jet bound for certified \(K9\) rows]
+
+\begin{lemma}[Polynomial finite-jet bound for certified source-graded \(K9\) rows]
 \label{lem:polynomial-finite-jet-bound-certified-K9}
-On an ordinary real-canonical, Gram-good, boundary-collar-excluded
-packet, the certified transition--singular row map satisfies the local
-Sobolev estimate
+On an ordinary real-canonical, Gram-good, boundary-collar-excluded packet, the
+canonical source-graded row map satisfies the local Sobolev estimate
 \[
   \bigl\|
-  \Lambda_{K9,p}^{\mathrm{vec}}J_{\mathrm{tr},p}(f)
-  \bigr\|^2
+  (I-P_{R_p})\mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p}(f)
+  \bigr\|_{\mathrm{gr}}^2
   \le
   Q^{C_J}
   \sum_{0\le r\le J}
   \int_{K_p^+}|\partial_t^r f(t)|^2 W_{\mathrm{br}}(t)\,dt
 \]
-for some fixed finite \(J\) and an absolute exponent \(C_J\).  Here
-\(W_{\mathrm{br}}\) is any branch/reference weight in the packet class
-which is polynomially comparable to Lebesgue measure on \(K_p^+\).
+for some fixed finite \(J\) and an absolute exponent \(C_J\).  The same bound
+holds with \(P_{R_p}\) replaced by \(P_p^{\mathrm{full}}\), because enlarging
+the retained space only decreases the discarded norm.  Here \(W_{\mathrm{br}}\)
+is any branch/reference weight in the packet class which is polynomially
+comparable to Lebesgue measure on \(K_p^+\).
 \end{lemma}
 
 \begin{proof}
-The operator \(J_{\mathrm{tr},p}\) uses only finitely many transition
-jets, and \(T_{\mathrm{tr}\to\mathrm{sing},p}\),
-\(P_{\mathrm{tr},p}\), and \(I-P_{\mathrm{sing},p}^{\mathrm{cert}}\) are
-finite-dimensional matrices whose entries are rational/analytic
-functions of the packet chart data.  On the ordinary real-canonical,
-Gram-good, boundary-collar-excluded set all normalizing denominators
-are bounded below by a power of \(Q\), while all numerators have
-polynomial size.  Thus the matrix norm of the finite row map is
-\(O(Q^C)\) times the norm of finitely many point jets of \(f\).  For
-each point jet, the one-dimensional local Sobolev inequality on
-\(K_p^+\), together with the polynomial scale bounds and polynomial
-weight comparability on good packets, gives
-\(|\partial_t^a f(m_p)|^2\le Q^{C_a}\sum_{0\le r\le a+1}\int_{K_p^+}|\partial_t^r f(t)|^2W_{\mathrm{br}}(t)\,dt\).
-Taking \(J\) larger than the maximum jet order used by the certified
-\(K9\) row gives the displayed estimate.
+The operator \(J_{\mathrm{tr},p}\) uses only finitely many transition jets, and
+\(\mathcal L_{K9,p}^{\mathrm{gr}}\), \(P_{\mathrm{tr},p}\), and
+\(I-P_{R_p}\) are finite-dimensional source-graded matrices whose entries are
+rational/analytic functions of the packet chart data.  On the ordinary
+real-canonical, Gram-good, boundary-collar-excluded set all normalizing
+denominators are bounded below by a power of \(Q\), while all numerators have
+polynomial size.  Hence the matrix norm of the finite row map is
+\(O(Q^C)\) times the norm of finitely many point jets of \(f\).  For each point
+jet, the one-dimensional local Sobolev inequality on \(K_p^+\), together with
+the polynomial scale bounds and polynomial weight comparability on good
+packets, gives
+\[
+  |\partial_t^a f(m_p)|^2
+  \le Q^{C_a}\sum_{0\le r\le a+1}
+  \int_{K_p^+}|\partial_t^r f(t)|^2W_{\mathrm{br}}(t)\,dt .
+\]
+Taking \(J\) larger than the maximum jet order used by the certified labelled
+\(K9\) row gives the displayed estimate.  The variant with
+\(P_p^{\mathrm{full}}\) follows from \(R_p\subset R_p^{\mathrm{full}}\).
 \end{proof}
 
 \begin{theorem}[Full-vector \(K9\) EF completion from the smooth AFE tail]
@@ -40317,6 +40315,22 @@ sublevel set
 In the normalized case \(a_p=0\), this reduces to anti-concentration of
 \(\Gamma_{G,2}\).
 \end{hypothesis}
+
+\begin{remark}[Rank-one \(Y12\) normal channel is archived in the canonical branch]
+\label{rem:rank-one-Y12-channel-archived-canonical-branch}
+Hypothesis~\ref{hyp:amplitude-schur-Y12},
+Hypothesis~\ref{hyp:second-order-Y12-signature-separation}, and
+Hypothesis~\ref{hyp:moving-Y12-wall-anti-concentration} belong to the older
+rank-one primitive \(Y12\)-normal route.  They are useful diagnostics and may
+still support an alternate one-row forbidden wall, but they are not active
+assumptions in the canonical source-graded \(K9\) branch.  The proof-level
+same-norm contradiction instead uses the maximal affine target,
+Corollary~\ref{cor:finite-main-Schur-discharged-by-canonical-lift},
+Theorem~\ref{thm:source-graded-same-norm-typeI-upper}, and
+Theorem~\ref{thm:canonical-source-graded-atomic-contradiction}.  Thus scalar or
+primitive-only \(Y12\) hypotheses should not be listed as remaining obligations
+for the canonical branch.
+\end{remark}
 
 \begin{remark}[Signed cap weights are not the active covariance object]
 \label{rem:signed-cap-weights-not-active-covariance-object}
