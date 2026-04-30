@@ -46167,18 +46167,63 @@ The final statement follows because every nonzero live coefficient has been
 removed from the killed quotient before the quotient is formed.
 \end{proof}
 
+\begin{remark}[Certified labelled routing versus raw row verification]
+\label{rem:certified-routing-versus-raw-row-verification}
+Theorem~\ref{thm:raw-2Y-certificate-from-exhaustive-labelled-routing} is a
+certified-branch implication.  It proves the rank-two quotient lower bound once
+all of the following data have been supplied on the selected packet:
+\[
+  L_p^{\mathrm{row}}E_p=I_2,
+  \qquad
+  \|L_p^{\mathrm{row}}\|_{\mathrm{op}}\le Q^C,
+\]
+polynomial conditioning of the labelled live plane, and an exhaustive labelled
+split of every raw nuisance column before the killed quotient is formed.
+
+It does not, by itself, compute the concrete rows
+\(\ell_{7,p},\ell_{9,p}^Y\) from the raw formulas, nor does it prove the
+septic exactness, fixed-whitening separation, order-seven local row-deadness,
+primitive-arithmetic routing, or \(E_2/R_{\mathrm{lab}}\) no-atom-locality tests.  Those
+raw coefficient checks are exactly the content of the raw row/routing
+certificate \(\mathfrak R_{2Y}(p)\), equivalently the obstruction vector
+\(\mathfrak B_{2Y,p}\), unless they are imported from a separate verified table.
+
+Thus the active logical implication is
+\[
+  \mathfrak R_{2Y}(p)
+  \Longrightarrow
+  \text{exhaustive labelled live/dead routing}
+  \Longrightarrow
+  \sigma_{\min}(q_{p,\mathrm{aff}}^{Y}E_p)\ge Q^{-C}.
+\]
+The affine repair removes the obsolete target \(c_{\mathrm{arith},Y}=0\): a nonzero
+primitive arithmetic row is harmless if it is retained as a labelled affine
+forcing term or residual-routed before quotienting.  It is still fatal if an
+atom-local live \(C_7/Y12\) component is quotient-killed before the labelled
+split.
+\end{remark}
+
 \begin{remark}[Reduced raw \(2Y\) obstruction after maximal routing]
 \label{rem:reduced-raw-2Y-obstruction-after-maximal-routing}
 After the affine-live repair, the active raw \(2Y\) obstruction is not the
 scalar identity \(c_{\mathrm{arith},Y}=0\).  The active obstruction is the
-existence of an atom-local live \(C_7/Y12\) component outside the maximal
-labelled target or one killed before the live/dead split.  Thus older
-obstruction vectors \(\mathfrak B_{2Y,p}\) should be read in the active branch
-as checking exhaustiveness of the labelled routing and polynomial boundedness
-of the coordinate rows.  If
-Definition~\ref{def:exhaustive-maximal-labelled-K9-routing} holds, then the raw
-\(2Y\) quotient certificate is discharged by
-Theorem~\ref{thm:raw-2Y-certificate-from-exhaustive-labelled-routing}.
+existence of an atom-local live \(C_7/Y12\) row outside the maximal labelled
+target, or a live row which is killed before the live/dead split.  Thus older
+obstruction vectors \(\mathfrak B_{2Y,p}\) should be read as the finite
+row-table test for:
+\begin{enumerate}
+\item polynomially bounded detecting rows with
+      \(L_p^{\mathrm{row}}E_p=I_2\);
+\item septic exactness and fixed-whitening separation;
+\item row-deadness or residual/coherent routing of the \(A_7\),
+      \(II_{\mathrm{arith},9}\), and \(E_2/R_{\mathrm{lab}}\) entries;
+\item exhaustiveness of the labelled target for all atom-local live
+      \(C_7/Y12\) components.
+\end{enumerate}
+If these raw facts are verified, then
+Theorem~\ref{thm:raw-2Y-certificate-from-exhaustive-labelled-routing} discharges
+the certified quotient survival.  If they are not verified, then
+\(\mathfrak B_{2Y,p}\) remains the finite audit item for the \(2Y\) bridge.
 \end{remark}
 
 \begin{definition}[Affine-graded cap observable]
@@ -54371,21 +54416,24 @@ Both estimates are for the full canonical source
 \subsection{Source hypothesis provenance}
 \label{subsec:source-hypothesis-provenance}
 
-\begin{remark}[Provenance of Hypothesis~\ref{hyp:packet-core-micro-covering}]
+\begin{remark}[Historical provenance of the packet-core covering condition]
 \label{rem:packet-core-micro-covering-provenance}
-This hypothesis is intended to come from the packet-selection step in the
-finite AFE decomposition of \(q''_{\can}\).  The packet cores \(K_p\) should
-form a cover of the branch support at scale \(h\asymp \log Q/Q\) with bounded
-overlap, and the branch/reference weights should satisfy
+The earlier packet-core micro-covering hypothesis was a placeholder for the
+source-window construction.  In the active canonical branch it is no longer an
+open Gate--1 hypothesis: it is implemented by the Whitney packet-core
+construction and by the canonical branch-complete window of
+Definition~\ref{hyp:packet-core-micro-covering}.  In particular,
+Theorem~\ref{thm:branch-reference-block-domination} proves
 \[
-\inf_{t\in K}\frac{W_{\mathrm{branch}}(t)}{W_{\mathrm{ref}}(t)}\ge Q^{-C},
-\qquad
-K:=\bigcup_p K_p.
+  G_{\mathrm{branch},B}^{\mathrm{can}}\ge Q^{-C}G_{\mathrm{ref},B}
 \]
-The intended derivation is from zeta-side packetization of the finite AFE
-main term together with a bounded-overlap partition of unity on the packet
-cores.  The present draft uses this as an explicit hypothesis, not as a
-proved result.
+for every good resonant block whose branch Gram is computed with
+\(W_{\mathrm{branch}}^{\mathrm{can}}\).
+
+This remark records only the historical provenance.  It is not a license to use
+an archived or arbitrary branch window in place of \(W_{\mathrm{branch}}^{\mathrm{can}}\).  Any
+noncanonical branch window must either be identified with the canonical one in
+the relevant Gram norm or must carry its own quadratic-form domination proof.
 \end{remark}
 
 \begin{remark}[Provenance of Hypothesis~\ref{hyp:packet-amplitude-decay-budget}]
@@ -55187,6 +55235,30 @@ not the old ordinary Dirichlet source with a distinguished coefficient
 A branch using \(\xi\), a logarithmic phase, or a different real completed scalar
 must provide its own trace, residue-aware AFE, source mass theorem, and Gate--2
 compatibility audit.
+\end{remark}
+
+\begin{remark}[Hardy source migration checklist]
+\label{rem:hardy-source-migration-checklist}
+The active Hardy branch is a full source-API replacement.  The following
+migration rules are part of the proof branch.
+\begin{enumerate}
+\item The old fixed-coefficient completed source and its \(a_1=1\) noncollapse
+      proof are archived; all active source estimates use the differential
+      Hardy AFE.
+\item Packet-normalized source rows carry the explicit factor
+      \(\lambda_p^3\).  A global function \(\mathcal Z_{\curv}(1/2+it)\)
+      represents the physical source only.
+\item Gate--2 identities use the same derivative convention as the source
+      row; in particular \(q''=q''_{\can}=u_{H,p}^{\mathrm{norm}}\) in normalized
+      packet coordinates.
+\item The pieces \(B_2,P_2,D_2,E_2\) mean the Hardy-differential pieces unless
+      an archived source model is explicitly named.
+\item Residues, differentiated cutoffs, gamma/theta derivatives, and log-power
+      coefficients are part of the Hardy finite main term or its explicit
+      residual ledger; they are never silently dropped.
+\end{enumerate}
+These rules are the downstream audit consequences of replacing the old
+completed-source package by the actual Hardy-curvature package.
 \end{remark}
 
 \begin{remark}[Provenance of reference mean-square noncollapse]
@@ -59441,8 +59513,8 @@ In the final status tables, the following wording should be used.
 \text{closed by pre-extraction Fej\'er--Riesz charge anti-lock} &
 \text{requires canonical multiplier/anti-lock theorem and no early caps}\\
 \text{raw }2Y\text{ row/routing} &
-\text{closed by exhaustive maximal labelled live/dead routing} &
-\text{otherwise legacy }\mathfrak B_{2Y,p}\text{ remains}\\
+\text{closed after }\mathfrak R_{2Y}(p)\text{ is verified/imported and labelled routing is exhaustive} &
+\text{otherwise }\mathfrak B_{2Y,p}\text{ remains the finite row-table audit}\\
 \text{actual source anchor} &
 \text{closed in the active Hardy-curvature branch} &
 \text{different source choices require their own trace/AFE/mass package}\\
@@ -59461,6 +59533,17 @@ the ordinary Hardy-normalized canonical branch.  They do not by themselves
 supply the global RH-entry theorem recorded in
 Remark~\ref{rem:hardy-source-rh-entry-reduction}.  A different source or routing
 choice requires its own audit.
+\end{remark}
+
+\begin{remark}[How to read the raw \(2Y\) row in the canonical ledger]
+\label{rem:how-to-read-raw-2Y-ledger-row}
+The maximal labelled live/dead construction is the correct quotient-normal-form
+repair, but it is not a replacement for the raw row calculation.  It prevents
+live rows from being killed once the live coordinates and label set are known.
+The raw certificate \(\mathfrak R_{2Y}(p)\) is the assertion that those
+coordinates and labels have in fact been constructed from the actual finite
+row algebra with polynomial conditioning and no unlabelled atom-local live
+remainder.
 \end{remark}
 
 \begin{remark}[Referee-safe status of the canonical construction rules]
@@ -59563,8 +59646,8 @@ same-norm repair, the downstream status table is:
 \text{module} & \text{status in the certified branch} & \text{remaining obligation}\\
 \hline
 Y12\text{-quotient/rank-two carrier survival}
-& \text{proved in the exhaustive maximal-labelled }K9\text{ branch}
-& \text{legacy }\mathfrak B_{2Y,p}\text{ remains diagnostic for noncanonical quotients}\\
+& \text{proved after the raw }\mathfrak R_{2Y}(p)\text{ certificate supplies the rows and exhaustive routing}
+& \text{noncanonical quotients, or failure of }\mathfrak R_{2Y}(p),\text{ remain finite audit}\\
 Y12\text{-graph/coercivity}
 & \text{proved on the certified low block}
 & \text{use the certified retained space}\\
@@ -60187,28 +60270,25 @@ metrics.  The flattest \(0.1\%\) of rows should be rerun with higher precision,
 larger zero cutoff, more quadrature nodes, finite jets, and AFE cross-checks.
 \end{remark}
 
-\begin{remark}[No Green \(\mathrm{Agg}L^2(q''_{\can})\) proof yet]
+\begin{remark}[Gate--1 status after the Hardy source repair]
 \label{rem:no-green-gate-one-proof-yet}
-At the current stage, no argument in the draft proves the active
-\(\mathrm{Agg}L^2(q''_{\can})\) theorem for the full canonical object
-\(q''_{\can}\).  Formal Wronskian or Cauchy--Binet nonvanishing is insufficient
-unless it is upgraded to a weighted \(L^2\)-source theorem for
+The old warning that no source-side proof of
+\(\mathrm{Agg}L^2(q''_{\can})\) was available is superseded in the active
+Hardy branch.  The source is now
 \[
-q''_{\can}=B_2+P_2+D_2+E_2.
+  q''_{\can}=u_H=\partial_t^3Z_H,
 \]
-A proof for a zero-kernel proxy, a flexible Dirichlet polynomial, a
-\(P_2\)-only source, a \(B_2\)-only diagnostic, or the affine-subtracted
-complement curvature \(q''_{\source,R}\) does not prove the active input.
+with the Hardy differential AFE, dyadic Hardy-curvature mean-square theorem,
+mass-good packet selection, and canonical branch-complete window.  Therefore
+Gate--1 source mass and branch/reference domination are theorem-level inside the
+ordinary Hardy/Whitney branch.
 
-Equivalently, the present draft has not proved
-\[
-  \mathrm{Coverage}_{q''},
-  \qquad
-  \mathrm{MeanSq}_{q''_{\can}},
-\]
-nor the projected source-frame versions of the ordinary, transition, and
-singular proof tools.  The historical \(\mathrm{O1/O2/O3}\) route is also not
-proved, but it is no longer the active Gate--2 input.
+The remaining global caveat is different.  The proof still needs the branch-entry
+theorem recorded in Remark~\ref{rem:hardy-source-rh-entry-reduction}: a
+hypothetical RH counterexample must enter an ordinary Hardy-normalized routed
+branch satisfying the Gate--1/Gate--2 entry hypotheses with only polynomial loss.
+Numerical zero-side proxy diagnostics do not prove this entry theorem; they are
+kept only as sanity checks for possible failure modes.
 \end{remark}
 
 \begin{thebibliography}{99}
