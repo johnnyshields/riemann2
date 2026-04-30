@@ -38938,6 +38938,217 @@ is polynomially bounded from the \(L^2\)-completion norm.  The targeted
 \(Y12\)-estimate may be substantially easier than full \(K_9\)-completion.
 \end{remark}
 
+\begin{definition}[Full-vector certified \(K9\) completion]
+\label{def:full-vector-certified-K9-completion}
+On the proof-level certified singular branch define
+\[
+  \Lambda_{K9,p}^{\mathrm{vec}}
+  :=
+  (I-P_{\mathrm{sing},p}^{\mathrm{cert}})
+  T_{\mathrm{tr}\to\mathrm{sing},p}P_{\mathrm{tr},p}.
+\]
+Here the norm is the Hilbert norm of the full discarded certified
+singular space, before any scalar \(I\)-coordinate collapse and before
+projecting to a single primitive \(Y12\) row.  The assertion
+\(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\) is the estimate
+\[
+  \sum_p
+  \bigl\|
+  \Lambda_{K9,p}^{\mathrm{vec}}J_{\mathrm{tr},p}(R_X)
+  \bigr\|^2
+  \le Q^{-B}\mu(\mathcal C)
+\]
+for arbitrarily large prescribed \(B\), after choosing the smooth AFE
+cutoff sufficiently deep.  Its cap-local weighted form is
+\[
+  \sum_{p\in C_j}\mu_p
+  \bigl\|
+  \Lambda_{K9,p}^{\mathrm{vec}}J_{\mathrm{tr},p}(R_X)
+  \bigr\|^2
+  \le Q^{-B}
+  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2 .
+\]
+\end{definition}
+
+\begin{definition}[Source-graded affine discarded target]
+\label{def:source-graded-affine-discarded-target}
+Let \(E_p=[C_{7,p}^{\mathrm{tar}}\ C_{Y,p}^{\mathrm{tar}}]\), and let
+\(m_{\eta,p}\in\mathbb C^2\) denote the live coordinate vector of the
+retained odd-\(\eta\eta\) / Bottleneck-C forcing row.  Define the
+source-graded affine target as the orthogonal direct sum
+\[
+  \widehat{\mathcal H}_{p}^{Y,\mathrm{aff}}
+  :=
+  \mathcal H_{p,\mathrm{lin}}^{Y}
+  \oplus
+  \mathcal H_{p,\eta\eta}^{Y},
+  \qquad
+  \|(x,y)\|_{\mathrm{gr}}^2:=\|x\|^2+\|y\|^2 .
+\]
+The clean D4 carrier channel is placed in the first summand and the
+retained \(\eta\eta\)-forcing channel in the second summand.  Let
+\[
+  \Pi_{\mathrm{aff},p}^{\mathrm{gr}}
+  :
+  (I-P_{\mathrm{sing},p}^{\mathrm{cert}})H_{\mathrm{sing},p}
+  \longrightarrow
+  \widehat{\mathcal H}_{p}^{Y,\mathrm{aff}}
+\]
+be the orthogonal projection onto these two source-grade components,
+and set
+\(\widehat\Lambda_{\mathrm{aff},p}:=\Pi_{\mathrm{aff},p}^{\mathrm{gr}}\Lambda_{K9,p}^{\mathrm{vec}}\).
+Thus \(\widehat\Lambda_{\mathrm{aff},p}\) is a sub-observable of the
+full vector \(K9\) discarded observable, not a scalar-collapsed \(Y12\)
+functional.
+\end{definition}
+
+\begin{remark}[Scalar completion is not enough]
+\label{rem:scalar-completion-not-enough-for-affine-graded}
+The source-graded affine target is deliberately not the scalar collapse
+of the two channels.  A scalar functional may see \(x+y\) while the
+required norm sees \(\|x\|^2+\|y\|^2\).  Hence \(x\approx-y\) can make
+a scalar \(Y12\) upper small while the source-graded norm is large.
+Consequently \(\mathrm{EFCompletion}_{Y12}\) does not imply the
+affine-forcing upper unless it has already been proved as a projection
+of the full-vector certified \(K9\) completion.  The proof-level upper
+used after retaining the \(\eta\eta\) row must be
+\(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\), or its orthogonal
+projection \(\widehat\Lambda_{\mathrm{aff}}\).
+\end{remark}
+
+\begin{lemma}[Full-vector \(K9\) completion implies affine-graded completion]
+\label{lem:full-vector-K9-implies-affine-graded-completion}
+Assume \(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\).  Then
+\[
+  \sum_p
+  \bigl\|
+  \widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(R_X)
+  \bigr\|_{\mathrm{gr}}^2
+  \le Q^{-B}\mu(\mathcal C)
+\]
+with the same exponent up to harmless polynomial loss.  The same
+implication holds in the cap-local weighted form.
+\end{lemma}
+
+\begin{proof}
+By definition
+\(\widehat\Lambda_{\mathrm{aff},p}=\Pi_{\mathrm{aff},p}^{\mathrm{gr}}\Lambda_{K9,p}^{\mathrm{vec}}\),
+and \(\Pi_{\mathrm{aff},p}^{\mathrm{gr}}\) is an orthogonal projection.
+Hence
+\(\|\widehat\Lambda_{\mathrm{aff},p}x\|_{\mathrm{gr}}\le\|\Lambda_{K9,p}^{\mathrm{vec}}x\|\)
+for every transition jet \(x\); squaring and summing, with or without
+the cap weights \(\mu_p\), gives the claim.
+\end{proof}
+
+\begin{lemma}[Polynomial finite-jet bound for certified \(K9\) rows]
+\label{lem:polynomial-finite-jet-bound-certified-K9}
+On an ordinary real-canonical, Gram-good, boundary-collar-excluded
+packet, the certified transition--singular row map satisfies the local
+Sobolev estimate
+\[
+  \bigl\|
+  \Lambda_{K9,p}^{\mathrm{vec}}J_{\mathrm{tr},p}(f)
+  \bigr\|^2
+  \le
+  Q^{C_J}
+  \sum_{0\le r\le J}
+  \int_{K_p^+}|\partial_t^r f(t)|^2 W_{\mathrm{br}}(t)\,dt
+\]
+for some fixed finite \(J\) and an absolute exponent \(C_J\).  Here
+\(W_{\mathrm{br}}\) is any branch/reference weight in the packet class
+which is polynomially comparable to Lebesgue measure on \(K_p^+\).
+\end{lemma}
+
+\begin{proof}
+The operator \(J_{\mathrm{tr},p}\) uses only finitely many transition
+jets, and \(T_{\mathrm{tr}\to\mathrm{sing},p}\),
+\(P_{\mathrm{tr},p}\), and \(I-P_{\mathrm{sing},p}^{\mathrm{cert}}\) are
+finite-dimensional matrices whose entries are rational/analytic
+functions of the packet chart data.  On the ordinary real-canonical,
+Gram-good, boundary-collar-excluded set all normalizing denominators
+are bounded below by a power of \(Q\), while all numerators have
+polynomial size.  Thus the matrix norm of the finite row map is
+\(O(Q^C)\) times the norm of finitely many point jets of \(f\).  For
+each point jet, the one-dimensional local Sobolev inequality on
+\(K_p^+\), together with the polynomial scale bounds and polynomial
+weight comparability on good packets, gives
+\(|\partial_t^a f(m_p)|^2\le Q^{C_a}\sum_{0\le r\le a+1}\int_{K_p^+}|\partial_t^r f(t)|^2W_{\mathrm{br}}(t)\,dt\).
+Taking \(J\) larger than the maximum jet order used by the certified
+\(K9\) row gives the displayed estimate.
+\end{proof}
+
+\begin{theorem}[Full-vector \(K9\) EF completion from the smooth AFE tail]
+\label{thm:full-vector-K9-EFCompletion-from-AFE-tail}
+Assume the smooth finite AFE tail estimate gives, for every fixed
+\(J\) and every \(A_0>0\),
+\(\sum_{0\le r\le J}\|\partial_t^r R_X\|_{L^2(W_{\mathrm{br}})}^2\le X^{-A_0}\).
+Assume the certified packet family has bounded overlap.  Then
+\(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\) holds.  More precisely,
+for every prescribed \(B\) one can choose the AFE cutoff depth so that
+\(\sum_p\|\Lambda_{K9,p}^{\mathrm{vec}}J_{\mathrm{tr},p}(R_X)\|^2\le Q^{-B}\mu(\mathcal C)\).
+The same conclusion holds in the cap-local weighted form whenever the
+cap quadrature/core-transfer estimate compares the discrete cap
+measure \(\sum_{p\in C_j}\mu_p\delta_{m_p}\) with
+\(W_{\mathrm{br}}(t)\,dt\) for the finite collection of functions
+\(|\partial_t^r R_X|^2\), \(0\le r\le J\), with polynomial loss.
+\end{theorem}
+
+\begin{proof}
+Apply Lemma~\ref{lem:polynomial-finite-jet-bound-certified-K9} with
+\(f=R_X\), and sum over \(p\).  Bounded overlap of the enlarged packet
+cores implies
+\[
+\sum_p\|\Lambda_{K9,p}^{\mathrm{vec}}J_{\mathrm{tr},p}(R_X)\|^2
+\le Q^{C_J}\sum_{0\le r\le J}\sum_p\int_{K_p^+}|\partial_t^rR_X(t)|^2W_{\mathrm{br}}(t)\,dt
+\le Q^{C_J'}\sum_{0\le r\le J}\|\partial_t^rR_X\|_{L^2(W_{\mathrm{br}})}^2
+\le Q^{C_J'}X^{-A_0}.
+\]
+Choose \(A_0\) and the cutoff depth so that
+\(Q^{C_J'}X^{-A_0}\le Q^{-B}\mu(\mathcal C)\).  The cap-local weighted
+version is the same argument after replacing bounded overlap by the
+stated cap quadrature/core-transfer estimate; the polynomial transfer
+loss is absorbed into the exponent.
+\end{proof}
+
+\begin{corollary}[Same-norm affine upper from full-vector completion]
+\label{cor:same-norm-affine-upper-from-full-vector-completion}
+Assume \(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\) and suppose the
+coherent finite-AFE main term is retained by the certified singular
+model in the affine-graded channel, namely
+\[
+  \sum_{p\in C_j}\mu_p
+  \bigl\|
+  \widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(F_X)
+  \bigr\|_{\mathrm{gr}}^2
+  \le
+  Q^{-B_F}
+  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2 .
+\]
+Then the actual canonical source satisfies the same-norm affine upper
+\[
+  \sum_{p\in C_j}\mu_p
+  \bigl\|
+  \widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(q''_{\can})
+  \bigr\|_{\mathrm{gr}}^2
+  \le
+  Q^{-B_{\mathrm{up}}}
+  \sum_{p\in C_j}\mu_p\|\Gamma_p\|^2,
+\]
+with \(B_{\mathrm{up}}=\min(B_F,B_R)-O(1)\), where \(B_R\) is the
+residual completion exponent from
+Theorem~\ref{thm:full-vector-K9-EFCompletion-from-AFE-tail}.
+\end{corollary}
+
+\begin{proof}
+Use \(q''_{\can}=F_X+R_X\), linearity of
+\(\widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}\), and
+\(\|a+b\|^2\le2\|a\|^2+2\|b\|^2\).  The coherent main-term estimate
+controls the first part, and
+Lemma~\ref{lem:full-vector-K9-implies-affine-graded-completion} with
+Theorem~\ref{thm:full-vector-K9-EFCompletion-from-AFE-tail} controls
+the residual part in the same source-graded norm.
+\end{proof}
+
 \begin{remark}[\(\mathrm{EFCompletion}_{L^2}\) does not automatically imply
 \(\mathrm{EFCompletion}_{K9}\)]
 \label{rem:EFCompletion-L2-not-K9}
@@ -44786,6 +44997,142 @@ pointwise, then the rank-two formulation collapses back to the old obstruction
 \]
 on a good patch.
 \end{remark}
+
+\begin{proposition}[No-go for quotient-killing an unsplit live arithmetic row]
+\label{prop:no-go-unsplit-live-arithmetic-row}
+Let \(K_{0,p}\) be a dead nuisance space and let
+\(E_p=[C_{7,p}^{\mathrm{tar}}\ C_{Y,p}^{\mathrm{tar}}]\).  Suppose the
+raw arithmetic column has the decomposition
+\[
+  A_{II,p}^{\mathrm{raw}}
+  =
+  A_{II,p}^{\mathrm{dead}}+E_pm_{\eta,p},
+  \qquad
+  A_{II,p}^{\mathrm{dead}}\in K_{0,p},
+  \qquad
+  m_{\eta,p}\ne0.
+\]
+If the full unsplit column \(A_{II,p}^{\mathrm{raw}}\) is placed in the
+killed quotient space
+\(K_p:=K_{0,p}+\operatorname{span}\{A_{II,p}^{\mathrm{raw}}\}\), then
+\(\sigma_{\min}((I-P_{K_p}^{\mathrm{bd}})E_p)=0\).
+\end{proposition}
+
+\begin{proof}
+Since \(A_{II,p}^{\mathrm{raw}}\in K_p\) and
+\(A_{II,p}^{\mathrm{dead}}\in K_p\), their difference lies in \(K_p\):
+\(E_pm_{\eta,p}=A_{II,p}^{\mathrm{raw}}-A_{II,p}^{\mathrm{dead}}\in K_p\).
+Thus \((I-P_{K_p}^{\mathrm{bd}})E_pm_{\eta,p}=0\).  Since
+\(m_{\eta,p}\ne0\), the quotient map has a nontrivial kernel on the
+retained live plane.
+\end{proof}
+
+\begin{remark}[What triggers the affine repair]
+\label{rem:what-triggers-affine-repair}
+The vanishing route for the primitive arithmetic row is not available
+from the current local row algebra.  The active odd-\(\eta\eta\) top
+row has
+\(f_{\eta\eta}^{\mathrm{top}}=-u\,\nu_{21,7}/(24\pi q^3)\), and in the
+homogeneous source model one obtains
+\(\nu_{21,7}=-q_0^3/(216Q^{14})\), which is generically nonzero on
+ordinary good patches.  Therefore the correct repair is not to force
+\(c_{\mathrm{arith},Y}=0\), but to split the arithmetic column and
+retain its live \(C_7/Y12\) part as affine forcing.
+\end{remark}
+
+\begin{definition}[Affine-live certified quotient]
+\label{def:affine-live-certified-quotient}
+Construct the quotient in the following order.  First fix the retained
+live plane \(E_p=[C_{7,p}^{\mathrm{tar}}\ C_{Y,p}^{\mathrm{tar}}]\) and
+bounded rows \(L_p^{\mathrm{row}}\) satisfying
+\(L_p^{\mathrm{row}}E_p=I_2\) and
+\(\|L_p^{\mathrm{row}}\|_{\operatorname{op}}\le Q^C\).  For each raw
+nuisance column set
+\[
+  m_{a,p}:=L_p^{\mathrm{row}}A_{a,p}^{\mathrm{raw}},
+  \qquad
+  A_{a,p}^{\mathrm{dead}}:=A_{a,p}^{\mathrm{raw}}-E_pm_{a,p}.
+\]
+In particular,
+\(A_{II,p}^{\mathrm{raw}}=A_{II,p}^{\mathrm{dead}}+E_pm_{\eta,p}\).  The
+affine-live killed space is
+\[
+  \mathcal K_{p,\mathrm{aff}}^Y
+  :=
+  \operatorname{span}\{A_{a,p}^{\mathrm{dead}}:\ a\text{ in the nuisance list}\}
+  +K_{p,0}^{Y,\mathrm{dead}},
+  \qquad
+  q_{p,\mathrm{aff}}^Y:=I-P_{\mathcal K_{p,\mathrm{aff}}^Y}^{\mathrm{bd}}.
+\]
+The live vectors \(E_pm_{a,p}\), and in particular \(E_pm_{\eta,p}\),
+are not quotient-killed; they are retained in the affine discarded
+observable.
+\end{definition}
+
+\begin{lemma}[Affine-live quotient preserves the retained two-plane]
+\label{lem:affine-live-quotient-preserves-two-plane}
+Assume
+\(L_p^{\mathrm{row}}\mathcal K_{p,\mathrm{aff}}^Y=0\),
+\(L_p^{\mathrm{row}}E_p=I_2\), and
+\(\|L_p^{\mathrm{row}}\|_{\operatorname{op}}\le Q^C\).  Then
+\(\sigma_{\min}(q_{p,\mathrm{aff}}^YE_p)\ge Q^{-C}\).
+\end{lemma}
+
+\begin{proof}
+For \(v\in\mathbb C^2\),
+\(v=L_p^{\mathrm{row}}E_pv=L_p^{\mathrm{row}}q_{p,\mathrm{aff}}^YE_pv\),
+because \(L_p^{\mathrm{row}}\) kills \(\mathcal K_{p,\mathrm{aff}}^Y\).
+Hence
+\(\|v\|\le\|L_p^{\mathrm{row}}\|_{\operatorname{op}}\|q_{p,\mathrm{aff}}^YE_pv\|\le Q^C\|q_{p,\mathrm{aff}}^YE_pv\|\).
+Taking the infimum over \(\|v\|=1\) gives the singular-value bound.
+\end{proof}
+
+\begin{definition}[Affine-graded cap observable]
+\label{def:affine-graded-cap-observable}
+For \(v\in\mathbb C^2\), define
+\[
+  \widehat\Phi_{p,\mathrm{aff}}^Y(v)
+  :=
+  \bigl(
+    q_{p,\mathrm{aff}}^YE_pH_pL_{\mathrm{clean},p}v,\;
+    q_{p,\mathrm{aff}}^YE_pm_{\eta,p}
+  \bigr)
+  \in
+  \widehat{\mathcal H}_{p}^{Y,\mathrm{aff}} .
+\]
+Equivalently, the scalar-collapsed affine expression
+\(q_{p,\mathrm{aff}}^YE_p(H_pL_{\mathrm{clean},p}v+m_{\eta,p})\) is
+replaced by the source-graded vector with separate clean and
+\(\eta\eta\) components.
+\end{definition}
+
+\begin{proposition}[Static-line lower bound in the affine-graded norm]
+\label{prop:static-line-lower-affine-graded-norm}
+Let \(u_j\in\mathbb C^2\) be a unit static direction.  Assume
+\(\sigma_{\min}(q_{p,\mathrm{aff}}^YE_p)\ge Q^{-C_E}\),
+\(\sigma_{\min}(L_{\mathrm{clean},p})\ge Q^{-C_L}\), and the D4
+amplitude mass estimate
+\(\sum_{p\in C_j}\mu_p|H_p|^2\ge Q^{-A_H}\sum_{p\in C_j}\mu_p\) on the
+selected static cap core.  Then
+\[
+  \sum_{p\in C_j}\mu_p
+  \|\widehat\Phi_{p,\mathrm{aff}}^Y(u_j)\|_{\mathrm{gr}}^2
+  \ge
+  Q^{-A'}\sum_{p\in C_j}\mu_p .
+\]
+More generally, replacing \(u_j\) by arbitrary \(\Gamma_p\) gives the
+carrier-mass form with \(\sum\mu_p\|\Gamma_p\|^2\) on the right,
+provided the source-weighted D4 amplitude mass estimate is used.
+\end{proposition}
+
+\begin{proof}
+By definition of the graded norm,
+\(\|\widehat\Phi_{p,\mathrm{aff}}^Y(u_j)\|_{\mathrm{gr}}^2=\|q_{p,\mathrm{aff}}^YE_pH_pL_{\mathrm{clean},p}u_j\|^2+\|q_{p,\mathrm{aff}}^YE_pm_{\eta,p}\|^2\ge Q^{-2C_E}|H_p|^2\|L_{\mathrm{clean},p}u_j\|^2\ge Q^{-2C_E-2C_L}|H_p|^2\).
+Summing against \(\mu_p\) and using amplitude mass gives the claim.
+The carrier-mass form is identical with \(u_j\) replaced by
+\(\Gamma_p\), using
+\(\|L_{\mathrm{clean},p}\Gamma_p\|\ge Q^{-C_L}\|\Gamma_p\|\).
+\end{proof}
 
 \subsection{Global affine transport dependency}
 \label{subsec:global-affine-transport-dependency}
@@ -57325,8 +57672,100 @@ quotient
 \((I-P_{\mathrm{sing},p}^{\mathrm{cert}})H_{\mathrm{sing},p}\).
 \end{definition}
 
+\begin{theorem}[Affine-graded same-norm Type-I contradiction]
+\label{thm:affine-graded-same-norm-typeI-contradiction}
+Assume the affine-live quotient of
+Definition~\ref{def:affine-live-certified-quotient}, the source-graded
+affine observable of
+Definition~\ref{def:affine-graded-cap-observable}, and the row
+identification
+\[
+  \widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(q''_{\can})
+  =
+  \widehat\Phi_{p,\mathrm{aff}}^Y(v_p)+\mathcal R_p^{\mathrm{id}}
+\]
+on the selected cap core, with
+\(\sum_{p\in C_j}\mu_p\|\mathcal R_p^{\mathrm{id}}\|_{\mathrm{gr}}^2\le Q^{-B_{\mathrm{id}}}\sum_{p\in C_j}\mu_p\|v_p\|^2\).
+Assume the affine-graded lower bound
+\(\sum_{p\in C_j}\mu_p\|\widehat\Phi_{p,\mathrm{aff}}^Y(v_p)\|_{\mathrm{gr}}^2\ge Q^{-A_{\mathrm{low}}}\sum_{p\in C_j}\mu_p\|v_p\|^2\)
+and the same-norm affine upper
+\(\sum_{p\in C_j}\mu_p\|\widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(q''_{\can})\|_{\mathrm{gr}}^2\le Q^{-B_{\mathrm{up}}}\sum_{p\in C_j}\mu_p\|v_p\|^2\).
+If \(B_{\mathrm{id}}\) and \(B_{\mathrm{up}}\) are larger than
+\(A_{\mathrm{low}}\) by a fixed polynomial margin, then no nonzero
+routed cap core satisfying these hypotheses exists.
+\end{theorem}
+
+\begin{proof}
+The row identification and \(\|x+y\|^2\ge\tfrac12\|x\|^2-\|y\|^2\)
+give
+\[
+\sum_{p\in C_j}\mu_p\|\widehat\Lambda_{\mathrm{aff},p}J_{\mathrm{tr},p}(q''_{\can})\|_{\mathrm{gr}}^2
+\ge
+\tfrac12\sum_{p\in C_j}\mu_p\|\widehat\Phi_{p,\mathrm{aff}}^Y(v_p)\|_{\mathrm{gr}}^2
+-\sum_{p\in C_j}\mu_p\|\mathcal R_p^{\mathrm{id}}\|_{\mathrm{gr}}^2
+\ge Q^{-A_{\mathrm{low}}-O(1)}\sum_{p\in C_j}\mu_p\|v_p\|^2,
+\]
+provided \(B_{\mathrm{id}}\) is chosen larger than the lower-bound
+losses.  The same-norm upper gives the opposite inequality with
+exponent \(B_{\mathrm{up}}\).  If the routed cap core is nonzero and
+\(B_{\mathrm{up}}>A_{\mathrm{low}}+O(1)\), the two estimates are
+incompatible for sufficiently large \(Q\).
+\end{proof}
+
+\begin{corollary}[Affine-forcing repair closes the static branch with vector \(K9\) completion]
+\label{cor:affine-forcing-repair-closes-static-branch-with-vector-K9}
+On a quantitatively static cap, retain the live odd-\(\eta\eta\)
+arithmetic row as affine forcing rather than quotient-killing it.
+Assume:
+\begin{enumerate}
+\item the affine-live row certificate, so that
+\(\sigma_{\min}(q_{p,\mathrm{aff}}^YE_p)\ge Q^{-C}\);
+\item clean D4 carrier invertibility
+\(\sigma_{\min}(L_{\mathrm{clean},p})\ge Q^{-C}\);
+\item D4 amplitude mass on the selected cap core;
+\item the row identification in the source-graded affine target;
+\item full-vector \(K9\) completion and retained-main-term coherence,
+so that
+Corollary~\ref{cor:same-norm-affine-upper-from-full-vector-completion}
+applies.
+\end{enumerate}
+Then the typed static-line branch gives the affine-graded same-norm
+Type-I contradiction.  In particular, the nonzero primitive arithmetic
+row is no longer a rank-two quotient obstruction; it is a live
+source-grade component of the discarded observable.
+\end{corollary}
+
+\begin{remark}[Ledger update for EFCompletion and the affine repair]
+\label{rem:EFCompletion-affine-repair-ledger-update}
+After the repair above, the old scalar alternatives should be read as
+follows.
+\begin{itemize}
+\item Killing the unsplit arithmetic column is a no-go by
+Proposition~\ref{prop:no-go-unsplit-live-arithmetic-row} whenever
+\(m_{\eta,p}\ne0\).
+\item Retaining \(m_{\eta,p}\) repairs rank-two quotient survival but
+changes the lower channel from a linear clean D4 channel to a
+source-graded affine channel.
+\item The final upper must therefore be the projection of full-vector
+certified \(K9\) completion to the same source-graded affine norm.
+Scalar \(\mathrm{EFCompletion}_{Y12}\) is insufficient unless it is
+explicitly derived from that full-vector completion.
+\item On ordinary routed blocks,
+Theorem~\ref{thm:full-vector-K9-EFCompletion-from-AFE-tail} proves the
+required vector completion from the smooth AFE derivative tail,
+finite-jet operator bounds, bounded packet overlap, and cap
+quadrature/core transfer.
+\end{itemize}
+Thus the affine-forcing branch is a proof-level route only in the
+full-vector source-graded norm.  Any later scalar collapse must occur
+after the same-norm contradiction, not before it.
+\end{remark}
+
 \begin{hypothesis}[Certified same-norm Type-I upper]
 \label{hyp:certified-same-norm-typeI-upper}
+\emph{Superseded on the affine-forcing branch by
+Corollary~\ref{cor:same-norm-affine-upper-from-full-vector-completion};
+retained only as a label for the required same-norm upper.}
 For the actual canonical source one has, on the selected routed cap
 family,
 \[
@@ -57566,9 +58005,9 @@ L_{\mathrm{eff},p}\text{ carrier}
 D4\text{ amplitude mass}
 & \text{proved downstream of Gate--1/Gate--2}
 & \text{source-factor residual control and quadrature}\\
-\mathrm{EFCompletion}_{K9}\text{ or }\mathrm{EFCompletion}_{Y12}
-& \text{active upper ledger}
-& \text{certified discarded norm for actual rows}\\
+\text{full-vector }\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}
+& \text{proved on ordinary routed blocks from smooth AFE tail}
+& \text{do not use scalar }Y12\text{ completion for affine-forcing branch}\\
 \delta_{\mathrm{ext}}\text{ / static line}
 & \text{active finite item}
 & \text{cap extraction covariance or typed static-line handoff}\\
