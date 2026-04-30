@@ -39403,227 +39403,190 @@ Choosing the completion and residual exponents with \(B'>A'\) gives the
 contradiction.
 \end{proof}
 
-\begin{definition}[Source-graded affine discarded target]
+\begin{definition}[Maximal source-graded affine discarded target]
 \label{def:source-graded-affine-discarded-target}
-Let \(E_p=[C_{7,p}^{\mathrm{tar}}\ C_{Y,p}^{\mathrm{tar}}]\), and let
-\(m_{\eta,p}\in\mathbb C^2\) denote the live coordinate vector of the
-retained odd-\(\eta\eta\) / Bottleneck-C forcing row.  Define the
-source-graded affine target as the orthogonal direct sum
+This label is retained for compatibility with earlier citations.  In the active
+branch it means the maximal labelled target of
+Definition~\ref{def:maximal-source-graded-affine-target}, not the older
+only-two-summand target.  Thus
 \[
   \widehat{\mathcal H}_{p}^{Y,\mathrm{aff}}
-  :=
-  \mathcal H_{p,\mathrm{lin}}^{Y}
-  \oplus
-  \mathcal H_{p,\eta\eta}^{Y},
+  :=\widehat{\mathcal H}_{p}^{Y,\max},
   \qquad
-  \|(x,y)\|_{\mathrm{gr}}^2:=\|x\|^2+\|y\|^2 .
+  \widehat\Phi_{p,\mathrm{aff}}^Y:=\widehat\Phi_{p,\max}^Y .
 \]
-The clean D4 carrier channel is placed in the first summand and the
-retained \(\eta\eta\)-forcing channel in the second summand.  Let
+Let
 \[
-  \Pi_{\mathrm{aff},p}^{\mathrm{gr}}
-  :
-  (I-P_{\mathrm{sing},p}^{\mathrm{cert}})H_{\mathrm{sing},p}
-  \longrightarrow
-  \widehat{\mathcal H}_{p}^{Y,\mathrm{aff}}
+  P_p^{\mathrm{full}}:=P_{R_p+\operatorname{im}H_{F,p}}
 \]
-be the orthogonal projection onto these two source-grade components,
-and set
-\(\widehat\Lambda_{\mathrm{aff},p}:=\Pi_{\mathrm{aff},p}^{\mathrm{gr}}\Lambda_{K9,p}^{\mathrm{vec}}\).
-Thus \(\widehat\Lambda_{\mathrm{aff},p}\) is a sub-observable of the
-full vector \(K9\) discarded observable, not a scalar-collapsed \(Y12\)
-functional.
+in the canonical source-graded Hilbert space \(H_{K9,p}^{\mathrm{gr}}\), and set
+\[
+  \widehat\Lambda_{\mathrm{aff},p}
+  :=
+  \Pi_{\max,p}^{\mathrm{gr}}
+  (I-P_p^{\mathrm{full}})
+  \mathcal L_{K9,p}^{\mathrm{gr}}P_{\mathrm{tr},p}.
+\]
+Equivalently, the old symbol \(\widehat\Lambda_{\mathrm{aff},p}\) now denotes
+an orthogonal projection of the full canonical labelled \(K9\) discarded row,
+measured before scalar \(I\)-coordinate collapse.
 \end{definition}
 
 \begin{remark}[Scalar completion is not enough]
 \label{rem:scalar-completion-not-enough-for-affine-graded}
-The source-graded affine target is deliberately not the scalar collapse
-of the two channels.  A scalar functional may see \(x+y\) while the
-required norm sees \(\|x\|^2+\|y\|^2\).  Hence \(x\approx-y\) can make
-a scalar \(Y12\) upper small while the source-graded norm is large.
-Consequently \(\mathrm{EFCompletion}_{Y12}\) does not imply the
-affine-forcing upper unless it has already been proved as a projection
-of the full-vector certified \(K9\) completion.  The proof-level upper
-used after retaining the \(\eta\eta\) row must be
-\(\mathrm{EFCompletion}_{K9}^{\mathrm{vec}}\), or its orthogonal
-projection \(\widehat\Lambda_{\mathrm{aff}}\).
+The source-graded affine target is deliberately not a scalar collapse.  The
+same-norm branch is carried out in \(H_{K9,p}^{\mathrm{gr}}\), with finite-main
+labels in \(H_{p,\mathrm{main}}\) and affine live labels in
+\(H_{p,\mathrm{aff}}\).  A scalar functional may see \(x+y\), whereas the
+source-graded norm sees \(\|x\|^2+\|y\|^2\).  Consequently a primitive-only
+\(Y12\) completion or scalar \(I\)-coordinate completion cannot replace the
+source-graded full-vector \(K9\) completion used below.
 \end{remark}
 
-\begin{lemma}[Direct-sum form of certified low-block coercivity]
+\begin{lemma}[Finite source-graded direct-sum amplification of certified coercivity]
 \label{lem:direct-sum-certified-low-block-coercivity}
-Let \(H_p\) be a Hilbert space, let \(R_p\subset H_p\) be a closed
-finite-dimensional retained space, and let
+Let \(A_p:\mathbb C^2\to H_p\) and \(q_p:=I-P_{R_p}\).  Suppose
 \[
-  A_p:\mathbb C^2\longrightarrow H_p
+  \sigma_{\min}(q_pA_p)\ge Q^{-C}.
 \]
-be a two-carrier map.  Put \(q_p:=I-P_{R_p}\).  If
+Let \(\Lambda_p\) be a finite source-label set with \(|\Lambda_p|\le Q^C\), and
+let \(M_{\lambda,p}\) be polynomially conditioned live-coordinate maps:
 \[
-  \sigma_{\min}(q_pA_p)\ge Q^{-C},
-\]
-then the source-graded direct-sum map
-\[
-  \widehat A_p:\mathbb C^2\oplus\mathbb C^2\longrightarrow H_p\oplus H_p,
+  \sigma_{\min}(M_{\lambda,p})\ge Q^{-C},
   \qquad
-  \widehat A_p(a,b):=(q_pA_pa,q_pA_pb),
+  \|M_{\lambda,p}\|_{\mathrm{op}}\le Q^C .
 \]
-satisfies
+For the orthogonal direct sum
 \[
-  \sigma_{\min}(\widehat A_p)\ge Q^{-C}
+  A_p^\Lambda(a_\lambda)_\lambda
+  :=\bigl(q_pA_pM_{\lambda,p}a_\lambda\bigr)_{\lambda\in\Lambda_p}
 \]
-with respect to the orthogonal direct-sum norm.
+one has
+\[
+  \sigma_{\min}(A_p^\Lambda)\ge Q^{-C'}.
+\]
 \end{lemma}
 
 \begin{proof}
-For \((a,b)\in\mathbb C^2\oplus\mathbb C^2\),
+By orthogonality of the source labels,
 \[
-  \|\widehat A_p(a,b)\|^2
-  =\|q_pA_pa\|^2+\|q_pA_pb\|^2
-  \ge Q^{-2C}(\|a\|^2+\|b\|^2).
+  \|A_p^\Lambda(a_\lambda)_\lambda\|_{\mathrm{gr}}^2
+  =\sum_{\lambda\in\Lambda_p}\|q_pA_pM_{\lambda,p}a_\lambda\|^2
+  \ge Q^{-C'}\sum_{\lambda\in\Lambda_p}\|a_\lambda\|^2 .
 \]
-Taking the infimum over unit \((a,b)\) gives the claim.
+Taking the infimum over unit source-graded coefficient vectors gives the
+claim.  The polynomial loss absorbs the finite cardinality and conditioning of
+the maps \(M_{\lambda,p}\).
 \end{proof}
 
 \begin{definition}[Certified full-main retained space]
 \label{def:certified-full-main-retained-space}
-Let
+In the active canonical branch the full-main retained space is defined in the
+source-graded \(K9\) Hilbert space by
 \[
-  \mathcal F_{X,p}^{\mathrm{sing}}:=
-  \operatorname{span}\{T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(B_2),
-  T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(P_{2,\le X}),
-  T_{\mathrm{tr}\to\mathrm{sing},p}J_{\mathrm{tr},p}(D_{2,\le X})\}.
-\]
-In the proof-level branch this finite-main singular space is admitted
-into the retained space only through its certified row-dead part.  More
-precisely, if
-\[
-  L_{\mathrm{sing},p}:=L_p^{\mathrm{row}}\Theta_{2Y,p}
-\]
-is the singular two-row lift, write
-\[
-  h^{\mathrm{dead}}:=h-E_{\mathrm{sing},p}^{2Y}(C_{\mathrm{sing},p}^{2Y})^{-1}L_{\mathrm{sing},p}h,
-  \qquad h\in\mathcal F_{X,p}^{\mathrm{sing}},
-\]
-where
-\(C_{\mathrm{sing},p}^{2Y}:=L_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y}\).
-Define
-\[
-  \mathcal F_{X,p}^{\mathrm{dead}}:=\operatorname{span}\{h^{\mathrm{dead}}:h\in\mathcal F_{X,p}^{\mathrm{sing}}\}
-\]
-and
-\[
-  R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}:=R_{\mathrm{sing},p}^{\mathrm{cert}}+\mathcal F_{X,p}^{\mathrm{dead}},
+  R_p^{\mathrm{full}}:=R_p+\operatorname{im}H_{F,p},
   \qquad
-  P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}:=P_{R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}}.
+  P_p^{\mathrm{full}}:=P_{R_p^{\mathrm{full}}}.
 \]
-Thus only row-dead finite-main generators are retained.  Any nonzero
-live signature \(L_{\mathrm{sing},p}h\) is not hidden in the retained
-space; it is routed into the certified live/affine coordinates, exactly
-as for other coherent live rows.
+Here \(H_{F,p}\) is the finite-main labelled map whose image is spanned by the
+\(K9\)-labels of \(B_2,P_{2,\le X},D_{2,\le X}\).  The older construction that
+first replaced finite-main generators by their \(C_7/Y12\)-row-dead parts is
+archived as a fallback for noncanonical or scalar-collapsed quotients.  It is
+not the active branch once Definition~\ref{def:canonical-source-graded-K9-lift}
+is in force.
 \end{definition}
 
-\begin{lemma}[Adding row-dead finite-main generators preserves the two-carrier Schur gap]
+\begin{lemma}[Full-main retention preserves the affine Schur gap in the canonical branch]
 \label{lem:row-dead-full-main-preserves-schur-gap}
-Assume the singular row lift theorem gives
+Assume the canonical source-graded lift of
+Definition~\ref{def:canonical-source-graded-K9-lift}.  Let
+\(q_p:=I-P_{R_p}\), let \(E_p^{\mathrm{aff}}:\mathbb C^d\to H_{K9,p}^{\mathrm{gr}}\)
+be the maximal affine live carrier map, and let \(H_{F,p}\) be the finite-main
+labelled map.  If
 \[
-  \|L_{\mathrm{sing},p}\|_{\mathrm{op}}\le Q^A,
-  \qquad
-  L_{\mathrm{sing},p}R_{\mathrm{sing},p}^{\mathrm{cert}}=0,
-  \qquad
-  \sigma_{\min}(L_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y})\ge Q^{-A}.
+  (E_p^{\mathrm{aff}})^*q_pE_p^{\mathrm{aff}}\ge Q^{-C}I_d,
 \]
-Then
+then
 \[
-  L_{\mathrm{sing},p}R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}=0
-\]
-and
-\[
-  \sigma_{\min}\!\left((I-P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}})E_{\mathrm{sing},p}^{2Y}\right)
-  \ge Q^{-A'}.
+  (E_p^{\mathrm{aff}})^*(I-P_p^{\mathrm{full}})E_p^{\mathrm{aff}}
+  \ge Q^{-C}I_d .
 \]
 \end{lemma}
 
 \begin{proof}
-By construction, \(L_{\mathrm{sing},p}h^{\mathrm{dead}}=0\) for every
-\(h\in\mathcal F_{X,p}^{\mathrm{sing}}\), and the original certified
-retained space is also killed by \(L_{\mathrm{sing},p}\).  Hence
-\(L_{\mathrm{sing},p}R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}=0\).
-For any \(a\in\mathbb C^2\) and any
-\(r\in R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}\),
+By source-grade saturation,
 \[
-  \|L_{\mathrm{sing},p}(E_{\mathrm{sing},p}^{2Y}a-r)\|
-  =\|L_{\mathrm{sing},p}E_{\mathrm{sing},p}^{2Y}a\|
-  \ge Q^{-A}\|a\|.
+  q_pH_{F,p}\subset H_{p,\mathrm{main}},
+  \qquad
+  q_pE_p^{\mathrm{aff}}\subset H_{p,\mathrm{aff}},
+  \qquad
+  H_{p,\mathrm{main}}\perp H_{p,\mathrm{aff}} .
 \]
-Since \(\|L_{\mathrm{sing},p}\|_{\mathrm{op}}\le Q^A\),
+Thus the finite-main cross Gram block is zero:
 \[
-  \|E_{\mathrm{sing},p}^{2Y}a-r\|\ge Q^{-A'}\|a\|.
+  G_{EH,p}:=(E_p^{\mathrm{aff}})^*q_pH_{F,p}=0.
 \]
-Taking the infimum over
-\(r\in R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}\) gives
+The Schur formula of Lemma~\ref{lem:finite-main-schur-complement-formula} gives
 \[
-  \|(I-P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}})E_{\mathrm{sing},p}^{2Y}a\|
-  =\operatorname{dist}(E_{\mathrm{sing},p}^{2Y}a,R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}})
-  \ge Q^{-A'}\|a\|.
+  (E_p^{\mathrm{aff}})^*(I-P_p^{\mathrm{full}})E_p^{\mathrm{aff}}
+  =G_{EE,p}-G_{EH,p}G_{HH,p}^\dagger G_{EH,p}^*=G_{EE,p},
 \]
-This is the claimed Schur gap.
+and \(G_{EE,p}\ge Q^{-C}I_d\) by hypothesis.
 \end{proof}
 
 \begin{definition}[Affine full-main carrier map]
 \label{def:affine-full-main-carrier-map}
-In the source-graded affine branch define
+The active affine carrier map is the maximal source-graded live carrier map
 \[
-  \mathcal E_{p}^{\mathrm{aff}}:\mathbb C^2\oplus\mathbb C^2
-  \longrightarrow
-  H_{\mathrm{sing},p}\oplus H_{\mathrm{sing},p},
-  \qquad
-  \mathcal E_p^{\mathrm{aff}}(a,b):=(E_{\mathrm{sing},p}^{2Y}a,E_{\mathrm{sing},p}^{2Y}b).
+  E_p^{\mathrm{aff}}:\mathbb C^d\longrightarrow H_{K9,p}^{\mathrm{gr}}
 \]
-The first copy is the clean D4 \(C_7/Y12\) carrier channel and the
-second copy is the retained odd-\(\eta\eta\) affine-forcing channel.
-The retained space in the graded target is
-\[
-  \widehat R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}
-  :=R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}\oplus R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}},
-  \qquad
-  \widehat P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}:=P_{\widehat R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}}.
-\]
+whose image lies in \(H_{p,\mathrm{aff}}\).  Its first labelled component is the
+clean D4 \(C_7/Y12\) carrier coefficient \(H_pL_{\mathrm{clean},p}v_p\); the
+remaining labelled components are the live affine forcing coordinates
+\(m_{\lambda,p}\), including the odd-\(\eta\eta\) / Bottleneck--C row.  This
+maximal map supersedes the older two-copy map
+\((a,b)\mapsto(E_{\mathrm{sing},p}^{2Y}a,E_{\mathrm{sing},p}^{2Y}b)\), which is
+only its two-label special case.
 \end{definition}
 
 \begin{theorem}[Affine full-main Schur gap from certified \(\delta_{\mathrm{coerc}}\)]
 \label{thm:affine-full-main-schur-gap-from-delta-coerc}
-Assume the certified singular row lift and low-block coercivity theorem
-hold for \(E_{\mathrm{sing},p}^{2Y}\) and
-\(R_{\mathrm{sing},p}^{\mathrm{cert}}\).  Form the certified full-main
-retained space \(R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}\) as
-in Definition~\ref{def:certified-full-main-retained-space}.  Then the
-source-graded affine carrier map satisfies
+In the canonical source-graded branch,
 \[
-  \sigma_{\min}\!\left(
-    (I-\widehat P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}})\mathcal E_p^{\mathrm{aff}}
-  \right)
+  \sigma_{\min}\bigl((I-P_p^{\mathrm{full}})E_p^{\mathrm{aff}}\bigr)
   \ge Q^{-A}.
 \]
 Equivalently,
 \[
-  (\mathcal E_p^{\mathrm{aff}})^*(I-\widehat P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}})\mathcal E_p^{\mathrm{aff}}
-  \ge Q^{-A}I_4
+  (E_p^{\mathrm{aff}})^*(I-P_p^{\mathrm{full}})E_p^{\mathrm{aff}}
+  \ge Q^{-A}I_d .
 \]
-up to a harmless change of the exponent.
 \end{theorem}
 
 \begin{proof}
-Lemma~\ref{lem:row-dead-full-main-preserves-schur-gap} gives
-\[
-  \sigma_{\min}\!\left((I-P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}})E_{\mathrm{sing},p}^{2Y}\right)
-  \ge Q^{-A_1}.
-\]
-Apply Lemma~\ref{lem:direct-sum-certified-low-block-coercivity} with
-\(A_p=E_{\mathrm{sing},p}^{2Y}\) and
-\(R_p=R_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}}\).  The
-direct-sum map is exactly
-\((I-\widehat P_{\mathrm{sing},p}^{\mathrm{full},\mathrm{cert}})\mathcal E_p^{\mathrm{aff}}\).
-Hence its smallest singular value is at least \(Q^{-A_1}\).  The Gram
-form follows by squaring the singular-value inequality.
+Certified \(\delta_{\mathrm{coerc}}\) supplies the two-carrier normal-row gap on
+\(E_{\mathrm{sing},p}^{2Y}\).  Lemma~\ref{lem:direct-sum-certified-low-block-coercivity}
+amplifies that gap over the finite source-label set that forms
+\(E_p^{\mathrm{aff}}\), giving
+\((E_p^{\mathrm{aff}})^*q_pE_p^{\mathrm{aff}}\ge Q^{-A}I_d\).  Lemma~\ref{lem:row-dead-full-main-preserves-schur-gap}
+then passes the lower bound through full finite-main retention, because
+\(G_{EH,p}=0\) in the canonical labelled lift.
+\end{proof}
+
+\begin{proposition}[No-go for noncanonical full-main retention]
+\label{prop:main-term-row-deadness-necessary-full-main-retention}
+The old warning remains valid only outside the canonical source-graded branch:
+if a scalar-collapsed or non-source-graded retained space contains a nonzero
+live carrier direction \(E_p^{\mathrm{aff}}a\), then the projected affine carrier
+map has a kernel and the Schur gap fails.
+\end{proposition}
+
+\begin{proof}
+If \(E_p^{\mathrm{aff}}a\in R\) for some \(a\ne0\), then
+\((I-P_R)E_p^{\mathrm{aff}}a=0\).  Hence
+\(\sigma_{\min}((I-P_R)E_p^{\mathrm{aff}})=0\).  This is precisely why the
+active branch keeps finite-main and affine live directions in orthogonal
+source-grade summands before scalar collapse.
 \end{proof}
 
 \begin{remark}[Superseded row-dead finite-main formulation]
@@ -40007,33 +39970,27 @@ aggregate \(L^2\) Gate--1 is well-defined.  This is a separate completion
 ledger and should not be merged with the source-energy Gate--1 completion.
 \end{remark}
 
-\begin{definition}[D4 singular-discard transversality matrix]
+\begin{definition}[Certified source-graded D4 transversality matrix]
 \label{def:d4-singular-discard-transversality-matrix}
-On the D4 live plane define
+In the active source-graded branch the D4 transversality matrix is
 \[
-  K_{\mathrm{D4},p}
-  :=
-  (I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}
-  E_{\mathrm{car},p}^{\mathrm{tr}}L_{\mathrm{clean},p}^{\mathrm{tr}}.
+  K_{\mathrm{D4},p}^{\mathrm{gr}}
+  :=(I-P_p^{\mathrm{full}})\mathcal L_{K9,p}^{\mathrm{gr}}
+    E_{\mathrm{car},p}^{\mathrm{tr}}L_{\mathrm{eff},p}^{\mathrm{tr}} .
 \]
-Since \(L_{\mathrm{clean},p}^{\mathrm{tr}}\) is invertible on the live plane, the decisive
-rank test is equivalent to the rank of
+Equivalently, after projecting to the maximal affine labels,
 \[
-  (I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}
-  \Big|_{\operatorname{span}\{[\mathsf C_7]^{\mathrm{tr}},[\mathsf C_{Y12}]^{\mathrm{tr}}\}}.
+  \Pi_{\max,p}^{\mathrm{gr}}K_{\mathrm{D4},p}^{\mathrm{gr}}
+  =
+  \Pi_{\max,p}^{\mathrm{gr}}(I-P_p^{\mathrm{full}})E_p^{\mathrm{aff}}
+  \begin{pmatrix} H_pL_{\mathrm{clean},p} & (m_{\lambda,p})_\lambda \end{pmatrix},
 \]
-Write
-\[
-  v_7^\perp
-  :=
-  (I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_7]^{\mathrm{tr}},
-  \qquad
-  v_Y^\perp
-  :=
-  (I-P_{\mathrm{sing}})T_{\mathrm{tr}\to\mathrm{sing}}[\mathsf C_{Y12}]^{\mathrm{tr}}.
-\]
-Then the rank is \(0\) if both vanish, \(1\) if they are nonzero and dependent,
-and \(2\) if they are independent.
+with the evident interpretation of the affine coefficient vector.  The decisive
+rank/singular-value lower bound is the source-graded Schur gap of
+Corollary~\ref{cor:finite-main-Schur-discharged-by-canonical-lift}, combined
+with the effective-carrier determinant.  The older raw matrix
+\((I-P_{\mathrm{sing},p})T_{\mathrm{tr}\to\mathrm{sing},p}E_{\mathrm{car},p}^{\mathrm{tr}}L_{\mathrm{clean},p}^{\mathrm{tr}}\)
+is only an archived diagnostic for noncertified singular projections.
 \end{definition}
 
 \begin{definition}[Singular order-nine connection residual]
