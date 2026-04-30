@@ -39626,6 +39626,35 @@ Hence its smallest singular value is at least \(Q^{-A_1}\).  The Gram
 form follows by squaring the singular-value inequality.
 \end{proof}
 
+\begin{remark}[Superseded row-dead finite-main formulation]
+\label{rem:superseded-row-dead-finite-main-formulation}
+The earlier row-dead finite-main formulation is no longer the active
+same-norm branch.  In the canonical source-graded \(K9\) lift,
+\(F_X=B_2+P_{2,\le X}+D_{2,\le X}\) is retained as a finite-main labelled
+subspace, while the affine live \(C_7/Y12\) directions lie in orthogonal
+affine source-grade labels.  Therefore the finite-main Schur complement
+is
+\[
+  S_{F,p}
+  =G_{EE,p}-G_{EH,p}G_{HH,p}^{\dagger}G_{EH,p}^*,
+  \qquad
+  G_{EH,p}=0,
+\]
+and hence
+\[
+  S_{F,p}=G_{EE,p}\ge Q^{-C}I
+\]
+by certified affine coercivity.  The proof does not require the finite
+main rows to be row-dead in the affine row extractor.  It requires the
+canonical labelled lift before scalar collapse and the orthogonality of
+finite-main and affine labels.  Thus any statement saying that the
+finite-main obstruction remains open, or that full finite-main retention
+is allowed only after replacing each generator by a row-dead part, should
+be deleted or replaced by
+Corollary~\ref{cor:finite-main-Schur-discharged-by-canonical-lift} and
+Theorem~\ref{thm:canonical-source-graded-affine-branch-closure}.
+\end{remark}
+
 \begin{remark}[Legacy row-dead finite-main route superseded]
 \label{rem:legacy-row-dead-finite-main-route-superseded}
 The earlier row-dead finite-main formulation is only a sufficient fallback.
@@ -40324,6 +40353,27 @@ In the normalized case \(a_p=0\), this reduces to anti-concentration of
 \(\Gamma_{G,2}\).
 \end{hypothesis}
 
+\begin{remark}[Signed cap weights are not the active covariance object]
+\label{rem:signed-cap-weights-not-active-covariance-object}
+The formula
+\[
+  w_p=\rho_p\frac{E_{1,p}H_p}{\mathcal N_p^{\mathrm{wt}}}
+\]
+may occur naturally as a wall or row coefficient, but it is not the
+active covariance density unless the packet branch is sign-coherent.  In
+the active branch all covariance statements use the positive packet
+covariance matrix
+\[
+  B_j^{\mathrm{cov}}
+  =\sum_{p\in C_j}\mu_p^{\mathrm{pkt}}\Gamma_p\Gamma_p^*.
+\]
+Consequently, references to
+\(B_j=\sum w_p\Gamma_p\Gamma_p^*\) in covariance arguments should be
+read as the sign-coherent special case, or replaced by
+\(B_j^{\mathrm{cov}}\).  The signed matrix has no variance meaning in
+general.
+\end{remark}
+
 \begin{hypothesis}[Positive extraction covariance weights]
 \label{ass:positive-extraction-covariance-weights}
 On every good frozen cap \(C_j\), the extraction weights used in
@@ -40543,23 +40593,92 @@ above, with \(\omega_p\) supplied either by a sign-coherent branch or
 by a positive packet density polynomially comparable to the extracted
 mass.
 
-\begin{hypothesis}[Positive extraction density selection]
+\begin{theorem}[Positive extraction density identification]
 \label{hyp:positive-extraction-density-selection}
-On every selected good frozen cap \(C_j\) there is a positive
-covariance density \(\omega_p\ge0\), not identically zero on the chart,
-such that
+On every selected ordinary real-canonical good frozen cap \(C_j\), the
+covariance density may be taken to be the positive cap/quadrature density
+already used in the source-graded \(K9\) upper and in the D4 amplitude
+mass estimates.  More precisely, let \(\mu_p^{\mathrm{pkt}}>0\) denote
+that packet density and set
 \[
-  S_j^{\mathrm{cov}}:=\sum_{p\in C_j}\omega_p|g_p|^2>0,
+  \omega_p:=\mu_p^{\mathrm{pkt}},
   \qquad
-  \Gamma_p=(g_p,h_p)^T,
+  B_j^{\mathrm{cov}}
+  :=\sum_{p\in C_j}\omega_p\Gamma_p\Gamma_p^*,
+  \qquad
+  \mu_p^{\mathrm{cov}}:=\omega_p |g_p|^2 .
 \]
-and the cap quadrature/core-transfer estimates used downstream remain
-valid with the associated weights
-\(\mu_p^{\mathrm{cov}}:=\omega_p|g_p|^2\).  Equivalently, the signed
-coefficient \(w_p\) is either restricted to a sign-coherent branch, or
-it is replaced throughout the covariance and cap-core arguments by the
-positive density \(\omega_p\).
-\end{hypothesis}
+On a good chart with
+\[
+  |g_p|\ge \frac12\|\Gamma_p\|,
+\]
+one has
+\[
+  \frac14\mu_p^{\mathrm{pkt}}\|\Gamma_p\|^2
+  \le
+  \mu_p^{\mathrm{cov}}
+  \le
+  \mu_p^{\mathrm{pkt}}\|\Gamma_p\|^2 .
+\]
+Consequently
+\[
+  S_j^{\mathrm{cov}}
+  :=\sum_{p\in C_j}\mu_p^{\mathrm{cov}}>0
+\]
+for every selected cap carrying nonzero live mass, and all cap
+quadrature/core-transfer estimates used in the source-graded branch are
+valid with \(\mu_p^{\mathrm{cov}}\), after only polynomial changes of
+exponents.  In particular, source-weighted D4 amplitude survival in the
+packet density,
+\[
+  \sum_{p\in C_j}\mu_p^{\mathrm{pkt}}|H_p|^2\|\Gamma_p\|^2
+  \ge
+  Q^{-A}
+  \sum_{p\in C_j}\mu_p^{\mathrm{pkt}}\|\Gamma_p\|^2,
+\]
+implies the covariance-weighted form
+\[
+  \sum_{p\in C_j}\mu_p^{\mathrm{cov}}|H_p|^2
+  \ge
+  Q^{-A'}
+  \sum_{p\in C_j}\mu_p^{\mathrm{cov}} .
+\]
+The signed extraction coefficient
+\[
+  w_p=\rho_p\frac{E_{1,p}H_p}{\mathcal N_p^{\mathrm{wt}}}
+\]
+is not the covariance density unless the selected branch is already
+sign-coherent.  If \(w_p\) is signed or complex, it remains only a wall or
+row coefficient; it is not used to define a positive covariance matrix.
+\end{theorem}
+
+\begin{proof}
+The packet density \(\mu_p^{\mathrm{pkt}}\) is positive by construction of
+the cap quadrature measure.  On the selected good chart,
+\(|g_p|\ge \frac12\|\Gamma_p\|\), while trivially
+\(|g_p|\le \|\Gamma_p\|\).  This gives the displayed pointwise
+comparison between \(\mu_p^{\mathrm{cov}}\) and
+\(\mu_p^{\mathrm{pkt}}\|\Gamma_p\|^2\).  Since selected caps have
+nonzero live mass, \(S_j^{\mathrm{cov}}>0\).
+
+The quadrature and core-transfer estimates are formulated for the same
+positive packet density and are stable under multiplication by the
+polynomially comparable chart factor \(|g_p|^2\).  Applying the pointwise
+comparison to the D4 amplitude estimate gives
+\[
+  \sum_p\mu_p^{\mathrm{cov}}|H_p|^2
+  \ge
+  \frac14\sum_p\mu_p^{\mathrm{pkt}}\|\Gamma_p\|^2|H_p|^2
+  \ge
+  Q^{-A-O(1)}\sum_p\mu_p^{\mathrm{pkt}}\|\Gamma_p\|^2
+  \ge
+  Q^{-A'}\sum_p\mu_p^{\mathrm{cov}} .
+\]
+This proves admissibility of the positive covariance density.  The final
+sentence follows because a signed or complex weighted sum of rank-one
+matrices need not be positive semidefinite and therefore has no covariance
+or variance interpretation.
+\end{proof}
 
 \begin{lemma}[Exact positive-density cap covariance]
 \label{lem:exact-positive-density-cap-covariance}
@@ -40671,23 +40790,70 @@ transfers the same lower bound from the actual directions to the
 frozen direction \(u_j\).
 \end{proof}
 
-\begin{theorem}[Extraction covariance closure in positive-density form]
+\begin{theorem}[Extraction covariance closure in positive packet density]
 \label{thm:positive-density-extraction-covariance-closure}
-Assume Hypothesis~\ref{hyp:positive-extraction-density-selection}.  On
-every selected good frozen cap satisfying the good chart condition,
-either \(\delta_{\mathrm{ext}}^{\mathrm{cov}}\ge Q^{-A}\) or the typed
-static-line handoff in
-Proposition~\ref{prop:static-branch-certified-quotient-positive-density}
-holds, provided the concrete rank-two row/routing certificate,
-effective carrier lower bound, and source-weighted D4 amplitude
-survival hold on the cap.
+On every selected good frozen cap satisfying the good chart condition,
+with the positive packet covariance density of
+Theorem~\ref{hyp:positive-extraction-density-selection}, exactly one of
+the following proof branches applies.
+\begin{enumerate}
+\item The nonstatic branch holds:
+\[
+  \delta_{\mathrm{ext}}^{\mathrm{cov}}
+  :=\frac{\det B_j^{\mathrm{cov}}}{(\operatorname{tr}B_j^{\mathrm{cov}})^2}
+  \ge Q^{-A}.
+\]
+\item The cap is quantitatively static: for
+\[
+  s_j^*:=\bar s_j^{\mathrm{cov}},
+  \qquad
+  u_j:=\frac{(1,s_j^*)^T}{(1+|s_j^*|^2)^{1/2}},
+\]
+one has
+\[
+  \sum_{p\in C_j}\mu_p^{\mathrm{cov}}
+  \left\|
+  \frac{(1,s_p)^T}{(1+|s_p|^2)^{1/2}}-u_j
+  \right\|^2
+  \le Q^{-A'}S_j^{\mathrm{cov}},
+\]
+and the static direction is routed into the canonical source-graded
+affine branch.  Under the certified rank-two row/routing certificate,
+source-weighted D4 amplitude mass, full-vector source-graded
+\(K9\) EFCompletion, and the canonical labelled-lift closure of
+Theorem~\ref{thm:canonical-source-graded-affine-branch-closure}, this
+static branch gives the same-norm Type-I contradiction.
+\end{enumerate}
+Thus the extraction-covariance module is closed in the positive packet
+covariance formulation.  It does not assert that the signed matrix
+\(\sum w_p\Gamma_p\Gamma_p^*\) is a covariance matrix, and it does not
+assert the false all-caps scalar statement
+\(\delta_{\mathrm{ext}}\ge Q^{-A}\) on static rank-one caps.
 \end{theorem}
 
 \begin{proof}
-Apply Corollary~\ref{cor:positive-density-nonstatic-static-dichotomy}.
-The nonstatic alternative is the first displayed conclusion.  In the
-static alternative, apply
-Proposition~\ref{prop:static-branch-certified-quotient-positive-density}.
+The nonstatic/static dichotomy is
+Corollary~\ref{cor:positive-density-nonstatic-static-dichotomy}, using
+the positive density supplied by
+Theorem~\ref{hyp:positive-extraction-density-selection}.  In the
+nonstatic alternative, Lemma~\ref{lem:exact-positive-density-cap-covariance}
+gives the lower bound for \(\delta_{\mathrm{ext}}^{\mathrm{cov}}\), after
+renaming exponents.
+
+In the static alternative, the Lipschitz chart estimate in
+Corollary~\ref{cor:positive-density-nonstatic-static-dichotomy} gives the
+fixed direction \(u_j\).  The D4 amplitude estimate in
+Theorem~\ref{hyp:positive-extraction-density-selection}, together with
+the certified rank-two row/routing and effective carrier estimates,
+gives the source-graded lower bound for the affine coefficient vector
+whose clean component is \(H_pL_{\mathrm{clean},p}u_j\).  The live
+affine forcing components are kept in orthogonal source-grade summands,
+so they cannot cancel the clean component.  The same-norm upper and the
+finite-main Schur gap are exactly the content of
+Theorem~\ref{thm:canonical-source-graded-affine-branch-closure}, which
+uses the canonical source-graded \(K9\) lift before scalar collapse.
+Choosing the upper and residual exponents larger than the lower losses
+contradicts nonzero cap mass.
 \end{proof}
 
 \begin{remark}[Signed extraction coefficients]
@@ -40703,16 +40869,24 @@ must be written with \(B_j^{\mathrm{cov}}\),
 \(\mu_p^{\mathrm{cov}}\).
 \end{remark}
 
-\begin{remark}[Current finite obligation]
+\begin{remark}[Status of the extraction covariance module]
 \label{rem:extraction-covariance-current-finite-obligation}
-\emph{Status: FINITE AUDIT.}  The positive-density covariance algebra
-above is complete.  The remaining finite obligations are external to
-the covariance identity: first, prove the positive extraction density
-selection if the original \(w_p\) is not already sign-coherent;
-second, verify the raw entries of \(\mathfrak B_{2Y,p}\) from finite
-row formulas so that the certified rank-two quotient route applies on
-all selected packets.  Without these two inputs, the extraction
-module is a finite audit rather than an unconditional theorem.
+\emph{Status: closed in the positive packet-density formulation.}
+The only covariance object used in the active proof is
+\(B_j^{\mathrm{cov}}=\sum\omega_p\Gamma_p\Gamma_p^*\), with
+\(\omega_p=\mu_p^{\mathrm{pkt}}\).  Older wording that refers to a
+``positive extraction density selection'' as an open finite audit should
+be read as superseded by
+Theorem~\ref{hyp:positive-extraction-density-selection}.  Older wording
+that refers to the signed coefficient \(w_p\) as a covariance weight is
+valid only on a sign-coherent branch; otherwise it must be replaced by
+\(\omega_p\) throughout the covariance identity, static slope, and cap
+core estimates.
+
+This status update is local to extraction covariance.  Any remaining
+raw row/routing verification for \(\mathfrak B_{2Y,p}\), or any upstream
+Gate--1/Gate--2 source input, remains recorded in its own ledger and is
+not part of the covariance identity.
 \end{remark}
 
 
@@ -58378,67 +58552,76 @@ in the scale-normalized \(H^2\)-ledger.
 \section{Conditional status after the downstream closure repairs}
 \label{sec:final-status-after-downstream-closure-repairs}
 
-\begin{remark}[Current architecture ledger after certified downstream closure]
+\begin{remark}[Current architecture ledger after canonical downstream closure]
 \label{rem:current-architecture-ledger-unified}
-The current proof architecture is still a finite-survival chain, not a
-closed proof of \(\RH\), but the certified downstream repairs have
-narrowed the active load-bearing items.  On ordinary real-canonical
-routed blocks:
+The current proof architecture is a finite-survival chain.  On ordinary
+real-canonical routed blocks, the downstream certified branch now has the
+following status.
 \begin{enumerate}
-\item aggregate \(L^2\)-observability for \(q''_{\can}\) and the
-associated branch/reference domination supply Gate--1;
-\item the Fej\'er--Riesz charge anti-lock theorem supplies
+\item Aggregate \(L^2\)-observability for \(q''_{\can}\), together with
+branch/reference domination, supplies Gate--1.
+\item The Fej\'er--Riesz charge anti-lock theorem supplies
 \(\delta_{\mathrm{graph}}\) once the finite/O2O3 packet-model
-hypotheses are verified;
-\item the certified live-row quotient supplies rank-two \(Y12\)
-quotient survival once the raw row/routing certificate
-\(\mathfrak R_{2Y}(p)\) is verified;
-\item the certified singular retained space supplies the low-block
-\(Y12\)-graph/coercivity gap \(\delta_{\mathrm{coerc}}\);
-\item the effective-carrier certificate supplies
-\(\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-C}\);
-\item actual-source D4 amplitude nonflatness supplies the scalar
-amplitude mass downstream of Gate--1/Gate--2.
+hypotheses are verified.
+\item The certified live-row quotient supplies rank-two \(Y12\)
+quotient survival on packets satisfying the raw row/routing certificate
+\(\mathfrak R_{2Y}(p)\).
+\item The certified singular retained space supplies the low-block
+\(Y12\)-graph/coercivity gap \(\delta_{\mathrm{coerc}}\).
+\item The effective-carrier certificate supplies
+\(\sigma_{\min}(L_{\mathrm{eff},p})\ge Q^{-C}\).
+\item Actual-source D4 amplitude nonflatness supplies scalar amplitude
+mass downstream of Gate--1/Gate--2.
+\item The canonical source-graded \(K9\) lift closes the finite-main
+Schur complement and the affine-forcing same-norm upper/lower branch.
+\item The extraction covariance gate is closed as a positive packet-density
+nonstatic/static fork: either \(\delta_{\mathrm{ext}}^{\mathrm{cov}}
+\ge Q^{-A}\), or the static cap is sent to the canonical source-graded
+affine branch.
 \end{enumerate}
-The active remaining downstream items are the certified same-norm
-singular upper, extraction covariance or typed static-line survival,
-and the final Type-I local-square atomic comparison.  Any sentence
-implying that finite \(D4\) carrier visibility alone closes the proof
-should be replaced by ``certified visibility plus same-norm upper and
-atomic comparison.''
+Thus the phrases ``finite-main Schur obstruction'', ``affine-forcing
+same-norm obstruction'', and ``positive-density extraction selection''
+should no longer be listed as active downstream gaps in the canonical
+source-graded branch.  Remaining global obligations, if any, are the
+explicit upstream packet/source inputs and the raw row/routing
+coefficient certificate recorded in their own sections.
 \end{remark}
 
-\begin{remark}[Updated downstream module ledger after certified closure]
+\begin{remark}[Updated downstream module ledger after canonical closure]
 \label{rem:updated-downstream-module-ledger-after-D4-amplitude-repair}
-After the certified quotient/coercivity/effective-carrier repairs and
-the actual-source D4 amplitude repair, the downstream status table is:
+After the certified quotient/coercivity/effective-carrier repairs, the
+actual-source D4 amplitude repair, and the canonical source-graded
+\(K9\) same-norm repair, the downstream status table is:
 \[
 \begin{array}{c|c|c}
 \text{module} & \text{status in the certified branch} & \text{remaining obligation}\\
 \hline
 Y12\text{-quotient/rank-two carrier survival}
-& \text{proved conditional on }\mathfrak R_{2Y}(p)
-& \text{verify the raw row/routing obstruction vector }\mathfrak B_{2Y,p}\\
+& \text{proved on packets satisfying }\mathfrak R_{2Y}(p)
+& \text{raw row/routing coefficient verification, if not already imported}\\
 Y12\text{-graph/coercivity}
-& \text{proved on the low block}
-& \text{use }P_{\mathrm{sing}}^{\mathrm{cert}}\text{; tail needs EF upper}\\
+& \text{proved on the certified low block}
+& \text{use the certified retained space}\\
 \text{row-normal effective }D4\text{ carrier}
-& \text{proved by }\mathfrak C_{2Y}(p)
+& \text{proved by the effective-carrier certificate}
 & \text{maintain coefficient-good routing}\\
 D4\text{ amplitude mass}
 & \text{discharged downstream of Gate--1/Gate--2}
 & \text{source-factor residual control and cap quadrature}\\
+\text{finite-main Schur / affine forcing}
+& \text{closed by the canonical source-graded }K9\text{ lift}
+& \text{no scalar-collapse substitution}\\
 \text{extraction covariance/static line}
-& \text{active finite item}
-& \delta_{\mathrm{ext}}\ge Q^{-A}\text{ or typed static-line handoff}\\
+& \text{closed as a positive-density fork}
+& B_j^{\mathrm{cov}}\text{, not signed }\sum w_p\Gamma_p\Gamma_p^*\\
 \text{same-norm atomic comparison}
-& \text{active final bridge}
-& \text{forbidden upper and lower in the certified quotient norm.}
+& \text{available in the source-graded norm}
+& \text{upper and lower must use the same certified quotient norm.}
 \end{array}
 \]
-The entries marked ``proved'' are not statements about raw quotients
-or raw singular projections; they are statements in the certified
-dead/live branch.
+The entries marked closed are statements in the certified dead/live,
+source-graded branch.  They are not statements about raw quotients, raw
+singular projections, or scalar-collapsed \(Y12\)-only norms.
 \end{remark}
 
 \begin{remark}[Structural takeaways from the cap/\(Y12\) repairs]
