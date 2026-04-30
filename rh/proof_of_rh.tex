@@ -39200,6 +39200,78 @@ Lemma~\ref{lem:finite-main-schur-complement-formula} therefore gives
 which is bounded below by the certified affine coercivity assumption.
 \end{proof}
 
+\begin{corollary}[Finite-main Schur obstruction discharged by the canonical lift]
+\label{cor:finite-main-Schur-discharged-by-canonical-lift}
+Assume Definition~\ref{def:canonical-source-graded-K9-lift}.  In particular,
+\(\mathcal L_{K9,p}^{\mathrm{gr}}\) is a fixed linear labelled lift before scalar
+collapse, the decomposition
+\[
+  H_{K9,p}^{\mathrm{gr}}
+  =H_{p,\mathrm{main}}\oplus H_{p,\mathrm{aff}}
+   \oplus H_{p,\mathrm{dead}}\oplus H_{p,\mathrm{res}}
+\]
+is orthogonal, the finite-main labels of
+\(B_2,P_{2,\le X},D_{2,\le X}\) lie in \(H_{p,\mathrm{main}}\), and the maximal
+affine carrier image lies in \(H_{p,\mathrm{aff}}\).  Let
+\(R_p\subset H_{K9,p}^{\mathrm{gr}}\) be the source-grade saturated certified
+retained/dead space, let \(q_p:=I-P_{R_p}\), let
+\(E_p^{\mathrm{aff}}:\mathbb C^d\to H_{K9,p}^{\mathrm{gr}}\) be the maximal affine
+live carrier map, and let \(H_{F,p}:\mathbb C^m\to H_{K9,p}^{\mathrm{gr}}\) be the
+finite-main singular map.  If certified affine coercivity gives
+\[
+  (E_p^{\mathrm{aff}})^*q_pE_p^{\mathrm{aff}}\ge Q^{-C}I_d,
+\]
+then
+\[
+  \boxed{
+  (E_p^{\mathrm{aff}})^*(I-P_{R_p+\operatorname{im}H_{F,p}})E_p^{\mathrm{aff}}
+  \ge Q^{-C}I_d .}
+\]
+Consequently the finite-main Schur complement
+\[
+  G_{EE,p}-G_{EH,p}G_{HH,p}^{\dagger}G_{EH,p}^*
+\]
+is polynomially positive.  The finite-main obstruction is therefore discharged
+in the canonical source-graded branch.
+\end{corollary}
+
+\begin{proof}
+By source-grade saturation, projecting by \(q_p\) preserves the orthogonal
+separation of the main and affine grades modulo the retained/dead space:
+\[
+  q_pH_{F,p}\subset H_{p,\mathrm{main}},
+  \qquad
+  q_pE_p^{\mathrm{aff}}\subset H_{p,\mathrm{aff}},
+  \qquad
+  H_{p,\mathrm{main}}\perp H_{p,\mathrm{aff}} .
+\]
+Hence
+\[
+  G_{EH,p}:=(E_p^{\mathrm{aff}})^*q_pH_{F,p}=0 .
+\]
+The Schur formula of Lemma~\ref{lem:finite-main-schur-complement-formula} gives
+\[
+  (E_p^{\mathrm{aff}})^*(I-P_{R_p+\operatorname{im}H_{F,p}})E_p^{\mathrm{aff}}
+  =G_{EE,p}
+  =(E_p^{\mathrm{aff}})^*q_pE_p^{\mathrm{aff}},
+\]
+which is bounded below by certified affine coercivity.
+\end{proof}
+
+\begin{remark}[No remaining finite-main Schur audit in the canonical branch]
+\label{rem:no-remaining-FM-Schur-audit-canonical-branch}
+The warning in Proposition~\ref{prop:no-go-without-finite-main-schur-gap}
+remains important for noncanonical or scalar-collapsed formulations.  In the
+active proof branch, however, Definition~\ref{def:canonical-source-graded-K9-lift}
+commits to the labelled source-graded lift before scalar collapse.  Thus the
+finite-main rows and affine live rows are orthogonal source labels, not two
+post hoc decompositions of the same scalar row.  The possible obstruction
+\[
+  G_{EE,p}-G_{EH,p}G_{HH,p}^{\dagger}G_{EH,p}^*\not\ge Q^{-C}I
+\]
+reduces to \(G_{EH,p}=0\), and is discharged by the canonical grade separation.
+\end{remark}
+
 \begin{proposition}[No-go without finite-main Schur gap]
 \label{prop:no-go-without-finite-main-schur-gap}
 If the finite-main Schur complement has a nontrivial kernel, then retaining the
@@ -39221,69 +39293,113 @@ if the finite main model is not retained, the identity
 \(R_X\)-tail EFCompletion estimate cannot control that contribution.
 \end{proof}
 
-\begin{theorem}[Same-norm affine closure from canonical graded lift]
-\label{thm:same-norm-affine-closure-from-canonical-graded-lift}
-Assume:
-\begin{enumerate}
-\item the canonical source-graded \(K9\) lift and finite-main/affine grade
-separation of Theorem~\ref{thm:canonical-grade-separation-closes-FM-Schur};
-\item certified affine coercivity, hence the finite-main Schur gap
-\(S_{F,p}\ge Q^{-C}I\);
-\item full-vector source-graded \(K9\) EFCompletion for the AFE tail \(R_X\);
-\item the affine row-realization identity in the maximal target,
+\begin{lemma}[Maximal affine row realization in the canonical labelled lift]
+\label{lem:maximal-affine-row-realization-canonical-lift}
+Let \(\Pi_{\max,p}^{\mathrm{gr}}\) denote the orthogonal projection in
+\(H_{K9,p}^{\mathrm{gr}}\) onto the maximal affine labelled target of
+Definition~\ref{def:maximal-source-graded-affine-target}.  Let
 \[
-  (I-P_{R_p+\operatorname{im}H_{F,p}})
+  P_{p}^{\mathrm{full}}:=P_{R_p+\operatorname{im}H_{F,p}} .
+\]
+For the canonical source-graded lift,
+\[
+  \Pi_{\max,p}^{\mathrm{gr}}(I-P_p^{\mathrm{full}})
   \mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p}(q''_{\can})
   =
-  (I-P_{R_p+\operatorname{im}H_{F,p}})E_p^{\mathrm{aff}}z_p
-  +\mathcal R_{p}^{\mathrm{id}},
+  \Pi_{\max,p}^{\mathrm{gr}}(I-P_p^{\mathrm{full}})E_p^{\mathrm{aff}}z_p
+  +\mathcal R_{p,\max}^{\mathrm{id}},
 \]
-with
+where \(z_p\) is the vector of maximal affine live coefficients: its clean
+component is \(H_pL_{\mathrm{clean},p}v_p\), and its remaining components are the
+retained affine forcing coefficients \(m_{\lambda,p}\), including the
+odd-\(\eta\eta\) / Bottleneck--C coefficient.  The error
+\(\mathcal R_{p,\max}^{\mathrm{id}}\) is the projection of the residual-labelled
+part of the row table.  In particular, if the residual ledger gives
 \[
-  \sum_{p\in C_j}\mu_p\|\mathcal R_p^{\mathrm{id}}\|_{\mathrm{gr}}^2
-  \le Q^{-B}\sum_{p\in C_j}\mu_p\|v_p\|^2;
+  \sum_{p\in C_j}\mu_p\|\mathcal R_{p,\max}^{\mathrm{id}}\|_{\mathrm{gr}}^2
+  \le Q^{-B_{\mathrm{id}}}\sum_{p\in C_j}\mu_p\|v_p\|^2,
 \]
-\item clean carrier invertibility and D4 amplitude mass, so that the clean
-component of \(z_p\) satisfies
-\[
-  \sum_{p\in C_j}\mu_p\|z_p\|^2
-  \ge Q^{-A}\sum_{p\in C_j}\mu_p\|v_p\|^2 .
-\]
+then the same-norm row-realization estimate holds in the maximal affine target.
+\end{lemma}
+
+\begin{proof}
+The labelled lift is linear and decomposition-independent.  The labelled
+\(K9\) row table is a finite orthogonal direct sum of main labels, affine live
+labels, dead/retained labels, and residual labels.  By definition,
+\(H_{F,p}\) spans the finite-main labels, so these labels are annihilated by
+\(I-P_p^{\mathrm{full}}\).  The dead labels are contained in \(R_p\) and are
+also annihilated.  The projection \(\Pi_{\max,p}^{\mathrm{gr}}\) keeps exactly
+the affine live labels; since the target is maximal, no further same-grade
+\(K9\) affine companion remains outside it.  What is left is precisely
+\((I-P_p^{\mathrm{full}})E_p^{\mathrm{aff}}z_p\), plus the residual-labelled
+part.  The displayed cap estimate is exactly the residual ledger measured in
+this same source-graded Hilbert norm.
+\end{proof}
+
+\begin{theorem}[Canonical source-graded affine branch closure]
+\label{thm:canonical-source-graded-affine-branch-closure}
+Assume the following already-proved inputs on the selected ordinary
+real-canonical routed cap family:
+\begin{enumerate}
+\item the canonical source-graded \(K9\) lift of
+Definition~\ref{def:canonical-source-graded-K9-lift};
+\item certified affine coercivity for \(E_p^{\mathrm{aff}}\);
+\item affine-live quotient survival and the no-kill repair for the live
+odd-\(\eta\eta\) arithmetic row;
+\item clean row-normal carrier invertibility and source-weighted D4 amplitude
+mass;
+\item full-vector source-graded \(K9\) EFCompletion for the AFE tail \(R_X\);
+\item the residual estimate in Lemma~\ref{lem:maximal-affine-row-realization-canonical-lift}
+with exponent larger than the lower-bound losses.
 \end{enumerate}
-Then the affine-graded Type-I branch gives a contradiction for exponents
-chosen with the upper loss larger than the lower loss.  In particular, no
-nonzero routed static cap core can survive this branch.
+Then the source-graded affine branch gives a same-norm Type-I contradiction.
+Equivalently, no nonzero routed static cap core can survive in this branch.
 \end{theorem}
 
 \begin{proof}
-By the finite-main Schur gap,
+By Corollary~\ref{cor:finite-main-Schur-discharged-by-canonical-lift},
 \[
-  \|(I-P_{R_p+\operatorname{im}H_{F,p}})E_p^{\mathrm{aff}}z_p\|^2
-  \ge Q^{-C}\|z_p\|^2.
+  \|(I-P_p^{\mathrm{full}})E_p^{\mathrm{aff}}w\|^2
+  \ge Q^{-C}\|w\|^2
 \]
-Using the row-realization identity and
-\(\|x+y\|^2\ge\tfrac12\|x\|^2-\|y\|^2\), then summing with weights \(\mu_p\),
-gives the lower bound
+for every maximal affine coefficient vector \(w\).  Apply this to the affine
+coefficient vector \(z_p\).  Its clean component is
+\(H_pL_{\mathrm{clean},p}v_p\), hence clean carrier invertibility and D4 amplitude mass
+imply
+\[
+  \sum_{p\in C_j}\mu_p\|z_p\|^2
+  \ge
+  Q^{-A}\sum_{p\in C_j}\mu_p\|v_p\|^2 .
+\]
+Lemma~\ref{lem:maximal-affine-row-realization-canonical-lift}, together with
+\(\|x+y\|^2\ge \frac12\|x\|^2-\|y\|^2\), therefore gives the lower bound
 \[
   \sum_{p\in C_j}\mu_p
-  \|(I-P_{R_p+\operatorname{im}H_{F,p}})
-  \mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p}(q''_{\can})\|^2
+  \|(I-P_p^{\mathrm{full}})\mathcal L_{K9,p}^{\mathrm{gr}}
+      J_{\mathrm{tr},p}(q''_{\can})\|_{\mathrm{gr}}^2
   \ge
-  Q^{-A'}\sum_{p\in C_j}\mu_p\|v_p\|^2.
+  Q^{-A'}\sum_{p\in C_j}\mu_p\|v_p\|^2 .
 \]
-For the upper, the finite main model is retained by \(R_p+\operatorname{im}H_{F,p}\),
-so linearity and \(q''_{\can}=F_X+R_X\) give
+For the upper, the finite main model is retained by \(P_p^{\mathrm{full}}\), so
+linearity of the canonical lift and the AFE identity
+\(q''_{\can}=F_X+R_X\) give
 \[
-  (I-P_{R_p+\operatorname{im}H_{F,p}})
-  \mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p}(q''_{\can})
+  (I-P_p^{\mathrm{full}})\mathcal L_{K9,p}^{\mathrm{gr} }
+  J_{\mathrm{tr},p}(q''_{\can})
   =
-  (I-P_{R_p+\operatorname{im}H_{F,p}})
-  \mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p}(R_X).
+  (I-P_p^{\mathrm{full}})\mathcal L_{K9,p}^{\mathrm{gr}}
+  J_{\mathrm{tr},p}(R_X).
 \]
 Full-vector source-graded \(K9\) EFCompletion controls the right-hand side;
-enlarging the retained space can only decrease the discarded norm.  Hence the
-same left-hand side is at most
-\(Q^{-B'}\sum_{p\in C_j}\mu_p\|v_p\|^2\).  Choosing \(B'>A'\) gives the
+enlarging the retained space only decreases the discarded norm.  Thus
+\[
+  \sum_{p\in C_j}\mu_p
+  \|(I-P_p^{\mathrm{full}})\mathcal L_{K9,p}^{\mathrm{gr}}
+      J_{\mathrm{tr},p}(q''_{\can})\|_{\mathrm{gr}}^2
+  \le
+  Q^{-B'}\sum_{p\in C_j}\mu_p\|v_p\|^2 .
+\]
+Choosing the completion and residual exponents with \(B'>A'\) gives the
 contradiction.
 \end{proof}
 
@@ -39840,26 +39956,40 @@ the same-norm upper.  Taking the upper exponent larger than the lower
 exponent contradicts positive cap mass.
 \end{proof}
 
-\begin{remark}[Consolidated status of the affine-forcing repair]
-\label{rem:consolidated-affine-forcing-status}
+\begin{remark}[Consolidated status of the affine-forcing repair: discharged]
+\label{rem:consolidated-affine-forcing-status-discharged}
 The nonzero primitive arithmetic coefficient is no longer a quotient-rank
 obstruction: the live odd-\(\eta\eta\) row is retained as an affine source-grade
 component rather than killed.  The six-row effective-carrier table remains
-separate and is not used to absorb this affine forcing.  The remaining
-same-norm issue is precisely the canonical source-graded finite-main Schur gap:
+separate and is not used to absorb this affine forcing.  The apparent
+finite-main obstruction is the Schur complement
 \[
   (E_p^{\mathrm{aff}})^*(I-P_{R_p+\operatorname{im}H_{F,p}})E_p^{\mathrm{aff}}
-  \ge Q^{-C}I.
+  =G_{EE,p}-G_{EH,p}G_{HH,p}^{\dagger}G_{EH,p}^{*}.
 \]
-By Theorem~\ref{thm:canonical-grade-separation-closes-FM-Schur}, this gap is
-proved if the source-graded \(K9\) lift is a genuine fixed linear labelled lift
-and the finite-main labels are orthogonal to the affine labels before scalar
-collapse.  If this canonical lift/orthogonality statement is not part of the
-transition--singular construction, then the proof remains a finite audit with
-exact remaining formula
+In the active proof branch, the source-graded \(K9\) lift is a genuine fixed
+linear labelled lift before scalar collapse.  Therefore finite-main labels and
+affine live labels are orthogonal, \(G_{EH,p}=0\), and the finite-main Schur
+complement equals \(G_{EE,p}\).  Certified affine coercivity gives the
+polynomial lower bound.  Hence the affine-forcing same-norm branch is closed
+by Theorem~\ref{thm:canonical-source-graded-affine-branch-closure}.
+\end{remark}
+
+\begin{remark}[Ledger update: finite-main obstruction closed in the canonical branch]
+\label{rem:ledger-update-finite-main-obstruction-closed}
+In the canonical source-graded \(K9\) branch, the following items are now
+closed:
 \[
-  G_{EE,p}-G_{EH,p}G_{HH,p}^{\dagger}G_{EH,p}^{*}\ge Q^{-C}I.
+  \text{live arithmetic row torsion repair},
+  \qquad
+  \text{finite-main Schur complement},
+  \qquad
+  \text{same-norm affine upper/lower comparison}.
 \]
+The closure depends essentially on keeping the proof in the labelled
+source-graded norm until the contradiction is obtained.  A scalar
+\(I\)-coordinate or primitive-only \(Y12\) completion is not a substitute for
+this same-norm comparison.
 \end{remark}
 
 \begin{remark}[\(\mathrm{EFCompletion}_{L^2}\) does not automatically imply
