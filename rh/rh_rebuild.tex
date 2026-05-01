@@ -205,8 +205,10 @@ The active spine of the argument is the chain
 \;\longrightarrow\;
 \text{\S\ref{sec:finite-scale-local-blocks-and-whitening}}\\
 &\;\longrightarrow\;
-\text{\S\ref{sec:transverse-obstruction}}
-\;\longrightarrow\;
+\text{\S\ref{sec:toy-anomaly-and-transverse-obstruction},\
+\S\ref{sec:transverse-projection},\
+\S\ref{sec:actual-zeta-transverse-suppression}}\\
+&\;\longrightarrow\;
 \text{\S\ref{sec:projective-rigidity}}\\
 &\;\longrightarrow\;
 \text{\S\ref{sec:n-point-odd-moment-cancellation}}
@@ -453,7 +455,7 @@ Whitening is the change of basis that absorbs the positivity of \(J\)
 into the normalization and produces a single dimensionless finite-scale
 packet block \(\widehat\Om_\z(s;m)\), which is the input to every
 comparison theorem from
-Section~\ref{sec:transverse-obstruction} onward.
+Section~\ref{sec:toy-anomaly-and-transverse-obstruction} onward.
 
 \subsection{Finite same-point and mixed blocks}
 \label{subsec:finite-same-point-and-mixed-blocks}
@@ -521,26 +523,16 @@ whitening section.
 \end{wip}
 
 % =============================================================================
-\section{Transverse obstruction}
-\label{sec:transverse-obstruction}
+\section{Toy anomaly and transverse obstruction}
+\label{sec:toy-anomaly-and-transverse-obstruction}
 
-For a hypothetical off-line zero \(\rho=\beta+i\gamma\) with
-\(\beta\ne\tfrac12\), the local geometry near \(\rho\) is captured by a
-fixed model phase \(\Ph_\toy\) (the \emph{toy phase}) whose whitened
-block has an explicit transverse mode that does not vanish under a fixed
-value/gauge projection \(\Pi_\trans\).  The actual zeta phase \(\Ph\),
-under the same \(\Pi_\trans\), suppresses the same mode at a strictly
-larger polynomial exponent than the toy lower bound.  The transverse
-obstruction is the gap between these two bounds: the off-line scenario
-forces \(\Pi_\trans\widehat\Om\) to be large; \(\zeta\) forces it to be
-small.
-Sections~\ref{subsec:off-line-toy-phase}--\ref{subsec:transverse-projection}
-build the geometric machinery, and
-Sections~\ref{subsec:toy-visibility-lower-bound}--\ref{subsec:actual-zeta-suppression-upper-bound}
-state the two bounds.
-
-\subsection{Off-line toy phase}
-\label{subsec:off-line-toy-phase}
+The next three sections develop the transverse obstruction.  The
+off-line toy phase \(\Ph_\toy\) defined below has an explicit transverse
+mode under the value/gauge projection \(\Pi_\trans\) of
+Section~\ref{sec:transverse-projection}; the actual zeta phase, under
+the same \(\Pi_\trans\), suppresses the same mode at a strictly larger
+polynomial exponent (Section~\ref{sec:actual-zeta-transverse-suppression}).
+The transverse obstruction is the gap between these two bounds.
 
 \begin{definition}[Off-line toy phase]
 \label{def:off-line-toy-phase}
@@ -555,41 +547,6 @@ Concrete formula for \(\Ph_\toy\) and identification of its \(q,q',q''\)
 with elementary functions of \((2\beta-1)\) and the local coordinate.
 v1 prose to mine: the toy anomaly and transverse obstruction section.
 \end{wip}
-
-\subsection{Transverse projection}
-\label{subsec:transverse-projection}
-
-\begin{definition}[Transverse projection]
-\label{def:transverse-projection}
-Let \(\mathcal V_\val\) denote the finite-dimensional subspace of the
-value/derivative space spanned by the value, gauge, and background
-directions to be quotiented out.  A transverse projection
-\(\Pi_\trans\) is an operator onto the orthogonal complement of
-\(\mathcal V_\val\) satisfying, on the retained packets:
-\begin{enumerate}[label=\textup{(\(\Pi\)\arabic*)},leftmargin=*]
-\item \(\Pi_\trans\) annihilates \(\mathcal V_\val\) exactly;
-\item \(\Pi_\trans\) is bounded with polynomial-in-\(Q\) loss;
-\item \(\Pi_\trans\) is invariant under the residual gauge freedom left
-  in \(\Ph\) after Definition~\ref{def:local-phase-chart}.
-\end{enumerate}
-The projection \(\Pi_\trans\) is fixed once and for all in this section
-and is applied identically to the toy and actual-zeta packets in
-Sections~\ref{subsec:toy-visibility-lower-bound}
-and~\ref{subsec:actual-zeta-suppression-upper-bound}.
-\end{definition}
-
-\begin{wip}\label{rem:wip-transverse-projection}
-The choice of \(\mathcal V_\val\) is the most sensitive structural
-decision in the rebuild: it must precede
-Theorem~\ref{thm:toy-anomaly-visibility} and
-Hypothesis~\ref{hyp:actual-zeta-transverse-suppression}, and is not to be
-re-chosen afterward.  v1 prose to mine: the leading value matrix and
-canonical calibration section, together with the local projective
-rigidity of the one-pair and multi-pair families section.
-\end{wip}
-
-\subsection{Toy visibility lower bound}
-\label{subsec:toy-visibility-lower-bound}
 
 \begin{theorem}[Toy anomaly visibility]
 \label{thm:toy-anomaly-visibility}
@@ -613,13 +570,55 @@ but not for \(\beta\ne\tfrac12\)) and the lower bound on retained
 residual gauge.
 \end{wip}
 
-\subsection{Actual-zeta suppression upper bound}
-\label{subsec:actual-zeta-suppression-upper-bound}
+% =============================================================================
+\section{Transverse projection}
+\label{sec:transverse-projection}
+
+The transverse projection \(\Pi_\trans\) is the fixed value/gauge
+quotient under which the toy whitened block of
+Section~\ref{sec:toy-anomaly-and-transverse-obstruction} and the
+actual-zeta whitened block of
+Section~\ref{sec:actual-zeta-transverse-suppression} are compared.  Its
+construction is the most sensitive structural decision in the rebuild:
+\(\Pi_\trans\) is fixed here and is not to be re-chosen afterward.
+
+\begin{definition}[Transverse projection]
+\label{def:transverse-projection}
+Let \(\mathcal V_\val\) denote the finite-dimensional subspace of the
+value/derivative space spanned by the value, gauge, and background
+directions to be quotiented out.  A transverse projection
+\(\Pi_\trans\) is an operator onto the orthogonal complement of
+\(\mathcal V_\val\) satisfying, on the retained packets:
+\begin{enumerate}[label=\textup{(\(\Pi\)\arabic*)},leftmargin=*]
+\item \(\Pi_\trans\) annihilates \(\mathcal V_\val\) exactly;
+\item \(\Pi_\trans\) is bounded with polynomial-in-\(Q\) loss;
+\item \(\Pi_\trans\) is invariant under the residual gauge freedom left
+  in \(\Ph\) after Definition~\ref{def:local-phase-chart}.
+\end{enumerate}
+\end{definition}
+
+\begin{wip}\label{rem:wip-transverse-projection}
+The choice of \(\mathcal V_\val\) must precede
+Theorem~\ref{thm:toy-anomaly-visibility} and
+Hypothesis~\ref{hyp:actual-zeta-transverse-suppression}; it is not to
+be re-chosen after either has been invoked.  v1 prose to mine: the
+leading value matrix and canonical calibration section, together with
+the local projective rigidity of the one-pair and multi-pair families
+section.
+\end{wip}
+
+% =============================================================================
+\section{Actual-zeta transverse suppression}
+\label{sec:actual-zeta-transverse-suppression}
 
 The actual zeta phase \(\Ph\) defines its own whitened block
-\(\widehat\Om_\z(s;m)\); under the same \(\Pi_\trans\), its anomaly is
-suppressed at a strictly larger polynomial exponent than the toy lower
-bound of Theorem~\ref{thm:toy-anomaly-visibility}.
+\(\widehat\Om_\z(s;m)\); under the same \(\Pi_\trans\) of
+Definition~\ref{def:transverse-projection}, its anomaly is suppressed
+at a strictly larger polynomial exponent than the toy lower bound of
+Theorem~\ref{thm:toy-anomaly-visibility}.  This is the load-bearing
+asymmetry of the program: the off-line scenario forces
+\(\Pi_\trans\widehat\Om\) to be large; the actual zeta phase forces it
+to be small.
 
 \begin{hypothesis}[Actual-zeta transverse suppression]
 \label{hyp:actual-zeta-transverse-suppression}
@@ -663,9 +662,10 @@ distinct hypothesis.
 \section{Local projective rigidity}
 \label{sec:projective-rigidity}
 
-Section~\ref{sec:transverse-obstruction} provides the toy lower bound
-and the actual-zeta upper bound on the transverse anomaly under
-\(\Pi_\trans\).  The present section assembles the comparison.  On the
+Theorem~\ref{thm:toy-anomaly-visibility} and
+Hypothesis~\ref{hyp:actual-zeta-transverse-suppression} provide the toy
+lower bound and the actual-zeta upper bound on the transverse anomaly
+under \(\Pi_\trans\) of Definition~\ref{def:transverse-projection}.  The present section assembles the comparison.  On the
 two-point family attached to \(\rho\) and a single symmetry partner,
 and on the four-point family of the full symmetric quartet
 \(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\), the exponent inequality
@@ -948,10 +948,13 @@ summarizes the principal mining correspondences.
 & Finite-\(s\) local blocks; jet-limit local blocks. \\
 \S\ref{sec:finite-scale-local-blocks-and-whitening}
 & Corrected finite-\(s\) holomorphic whitening. \\
-\S\ref{sec:transverse-obstruction}
-& Toy anomaly and transverse obstruction; leading value matrix and
-  canonical calibration; odd holomorphic transverse channel; corrected
-  fixed-target quotient package. \\
+\S\ref{sec:toy-anomaly-and-transverse-obstruction}
+& Toy anomaly and transverse obstruction. \\
+\S\ref{sec:transverse-projection}
+& Leading value matrix and canonical calibration. \\
+\S\ref{sec:actual-zeta-transverse-suppression}
+& Odd holomorphic transverse channel; corrected fixed-target quotient
+  package. \\
 \S\ref{sec:projective-rigidity}
 & Local projective rigidity of the one-pair and multi-pair families;
   finite coefficient table contracts. \\
