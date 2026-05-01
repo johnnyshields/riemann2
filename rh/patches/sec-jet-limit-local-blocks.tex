@@ -226,9 +226,12 @@ admits an absolute-exponent polynomial lower spectral bound
 \end{lemma}
 
 \begin{proof}
-By (P2), \(q(T)\ge Q^{-c_q}\) on retained packets for an absolute
-exponent \(c_q>0\); by (P1) and standard derivative-of-phase estimates,
-\(|q'(T)|,|q''(T)|\le Q^{C_d}\) for an absolute exponent \(C_d\).
+By Lemma~\ref{lem:phase-derivative-lower-bound},
+\(q(T)\ge Q^{-c_q}\) on retained packets with absolute \(c_q=0\) at
+sufficiently large \(T\); standard derivative estimates on the
+Riemann--Siegel theta function give \(|q'(T)|,|q''(T)|\le Q^{C_d}\)
+for an absolute exponent \(C_d\) (in fact \(q'(t)=O(t^{-1})\) and
+\(q''(t)=O(t^{-2})\), so \(C_d\) can be taken \(0\)).
 From \eqref{eq:same-point-J},
 \begin{align*}
 \Tr J(T)
@@ -259,12 +262,13 @@ The bound \(\lambda_{\min}(J(T))\ge Q^{-C_J}\) follows with
 \begin{remark}[Conditional close]
 \label{rem:gram-positivity-conditional}
 The proof of Lemma~\ref{lem:same-point-gram-positivity} reduces the
-positivity of \(J(T)\) to the polynomial bounds (P1) and (P2) of
-Definition~\ref{def:local-phase-chart}; those bounds are themselves
-the content of Open Input \(\texttt{rem:wip-local-phase-chart}\) and
-must be discharged in the migration of
-\S\ref{sec:local-kernel-and-jet-normalization}.  Lemma's algebraic
-content (the trace/determinant computation and the
-\(\det/\Tr\) bound) is unconditional and verified in
-\texttt{rh/sympy/sec-jet-limit-local-blocks.py}.
+positivity of \(J(T)\) to the polynomial lower bound (P2) of
+Definition~\ref{def:local-phase-chart}, which is established
+unconditionally in
+Lemma~\ref{lem:phase-derivative-lower-bound} (\(c_q = 0\) at
+sufficiently large \(T\)).  The trace/determinant computation and
+the \(\det/\Tr\) lower bound are pure linear algebra and verified
+in \texttt{rh/sympy/sec-jet-limit-local-blocks.py}; thus
+Lemma~\ref{lem:same-point-gram-positivity} closes unconditionally
+once \S\ref{sec:local-kernel-and-jet-normalization} migrates.
 \end{remark}

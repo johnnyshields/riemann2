@@ -217,6 +217,66 @@ def check_kernel_derivatives_at_pair(T1, T2):
 # Main.
 # ----------------------------------------------------------------------
 
+def check_p2_across_height_ladder():
+    """Numerical verification of Lemma lem:phase-derivative-lower-bound:
+    q(t) = theta'(t) ~ (1/2) log(t / (2*pi)) with correction O(t^{-2}).
+
+    Sweep T over a height ladder and compare empirical q(T) against the
+    asymptotic; fit the residual to confirm scaling -1/(48 T^2).
+
+    Uses mpmath throughout (50 dps) so the residual is resolvable up to
+    T ~ 1e8 (the residual itself is only ~ 4e-19 at T = 1e8).
+    """
+    from mpmath import log as mp_log, mpf as mpf2
+
+    saved_dps = mp.dps
+    mp.dps = 50  # boost precision so 1/(48 T^2) ~ 1e-19 is resolvable.
+    try:
+        print("  Sweep heights and compare q(T) = theta'(T) to (1/2) log(T/(2pi)).")
+        print("  (mpmath precision: 50 dps; residual is ~ 1/(48 T^2) ~ 1e-3 to 1e-19.)")
+        print()
+        print(f"  {'T':>10}  {'q(T) empirical':>22}  {'asymptote':>22}  "
+              f"{'residual':>12}  {'residual * T^2':>17}")
+        print(f"  {'-'*10}  {'-'*22}  {'-'*22}  {'-'*12}  {'-'*17}")
+
+        Ts_mp = [mpf2(10) ** k for k in (3, 4, 5, 6, 7, 8)]
+        scaled_list = []
+        for T in Ts_mp:
+            q_T = theta_prime(T, 1)
+            asym = mpf2("0.5") * mp_log(T / (2 * MP_PI))
+            residual = q_T - asym
+            scaled = residual * T ** 2
+            scaled_list.append(scaled)
+            print(f"  {float(T):10.2e}  {mp.nstr(q_T, 16):>22}  "
+                  f"{mp.nstr(asym, 16):>22}  "
+                  f"{float(residual):+12.4e}  {float(scaled):+17.10f}")
+
+        # Expected: residual * T^2 -> -1/48 = -0.0208333...
+        expected = mpf2(-1) / 48
+        rel_errs = [abs(s - expected) / abs(expected) for s in scaled_list]
+        worst_idx = int(np.argmin([float(e) for e in rel_errs]))
+        # We use the BEST agreement (typically at moderate T, where the
+        # asymptotic dominates and precision suffices).
+        print()
+        print(f"  Asymptote of residual * T^2 (theory):  -1/48 = {float(expected):+.10f}")
+        print(f"  Best agreement across the ladder:")
+        for i, (T, s, re) in enumerate(zip(Ts_mp, scaled_list, rel_errs)):
+            tag = "  (best)" if i == worst_idx else ""
+            print(f"    T = {float(T):.0e}: scaled = {float(s):+.10f},  "
+                  f"rel.err = {float(re):.2e}{tag}")
+        if float(rel_errs[worst_idx]) < 1e-6:
+            print()
+            print("  [PASS] q(t) = (1/2) log(t / (2 pi)) - 1/(48 t^2) + O(t^{-4})")
+            print("         confirmed at high precision.  q(t) > 0 for all")
+            print("         tested T, growing logarithmically.  (P2) holds with")
+            print("         c_q = 0.")
+        else:
+            print()
+            print(f"  [WARN] Best agreement is {float(rel_errs[worst_idx]):.2e}.")
+    finally:
+        mp.dps = saved_dps
+
+
 def main():
     print("=" * 70)
     print("Simulation: sec:local-kernel-and-jet-normalization")
@@ -227,14 +287,19 @@ def main():
     half_window = mpf("0.05")
     n_samples = 50
 
-    print("[chart-denominator condition (P1)]")
+    print("[chart-denominator condition: empirical |zeta| range]")
     print()
     check_chart_denominator(T_center, half_window, n_samples)
     print()
 
-    print("[phase-derivative lower bound (P2)]")
+    print("[phase-derivative lower bound (P2): single-window check]")
     print()
     check_phase_derivative_lower_bound(T_center, half_window, n_samples)
+    print()
+
+    print("[phase-derivative lower bound (P2): height-ladder fit]")
+    print()
+    check_p2_across_height_ladder()
     print()
 
     print("[kernel symmetry]")

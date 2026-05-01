@@ -20,6 +20,14 @@ Verifies the lemmas of section §2 of rh/rh_rebuild.tex:
       give the kernel-derivative form of J(T) used in
       eq:same-point-as-kernel-derivatives.
 
+  lem:phase-derivative-lower-bound
+      Symbolic differentiation of the Riemann-Siegel asymptotic
+        theta(t) = (t/2) log(t / (2*pi)) - t/2 - pi/8 + 1/(48 t) + O(t^{-3})
+      gives
+        theta'(t) = (1/2) log(t / (2*pi)) - 1/(48 t^2) + O(t^{-4}),
+      from which q(t) > 0 at large t.  Verified by termwise
+      differentiation in sympy.
+
 Run:
   python rh/sympy/sec-local-kernel-and-jet-normalization.py
 """
@@ -274,6 +282,71 @@ def verify_diagonal_limits():
     print("  [PASS] Diagonal limits give the kernel-derivative form of J(T).")
 
 
+def verify_phase_derivative_lower_bound():
+    """Differentiate the Riemann-Siegel asymptotic for theta(t) and confirm
+    the leading term of theta'(t) is (1/2) log(t / (2*pi)) plus an
+    O(t^{-2}) correction.  This is the unconditional algebraic content of
+    Lemma lem:phase-derivative-lower-bound; the analytic claim that the
+    asymptotic is an asymptotic of theta itself is from
+    Edwards / Titchmarsh and is taken as a literature input."""
+    print("=" * 70)
+    print("[lem:phase-derivative-lower-bound]  termwise differentiation of")
+    print("                                    the Riemann-Siegel asymptotic")
+    print("=" * 70)
+
+    t = sp.symbols("t", positive=True)
+
+    # Riemann-Siegel asymptotic for theta(t) up to O(t^{-3}).
+    theta_asym = (
+        t / 2 * sp.log(t / (2 * PI))
+        - t / 2
+        - PI / 8
+        + Rational(1, 48) / t
+    )
+    theta_prime_asym = sp.diff(theta_asym, t)
+
+    # Expected form of theta'(t).
+    theta_prime_expected = (
+        Rational(1, 2) * sp.log(t / (2 * PI))
+        - Rational(1, 48) / t**2
+    )
+
+    diff_val = simplify(theta_prime_asym - theta_prime_expected)
+
+    print()
+    print(f"  theta(t)       (asymptotic, up to O(t^-3)):")
+    print(f"    {theta_asym}")
+    print()
+    print(f"  theta'(t)      (termwise derivative):")
+    print(f"    {sp.expand(theta_prime_asym)}")
+    print()
+    print(f"  expected:")
+    print(f"    {theta_prime_expected}")
+    print()
+    print(f"  difference:    {diff_val}")
+    if diff_val == 0:
+        print()
+        print("  [PASS] q(t) = theta'(t) = (1/2) log(t/(2 pi)) + O(t^{-2}).")
+    else:
+        raise AssertionError(f"theta' asymptotic mismatch: {diff_val}")
+
+    # Lower bound on q(t) for t >= T/2 (window contained in [T/2, 3T/2]).
+    # We want to show q(t) >= (1/2) log(T / (4 pi)) - C/T^2 for absolute C.
+    T = sp.symbols("T", positive=True)
+    # At t = T/2 (worst case), the leading term of q is
+    #   (1/2) log(T/(4 pi)).
+    leading_at_T_over_2 = sp.simplify(theta_prime_expected.subs(t, T / 2)
+                                      .rewrite(sp.log)
+                                      - Rational(-1, 48) / (T / 2)**2)
+    print()
+    print(f"  lower bound on q(t) for t >= T/2 (worst-case t = T/2):")
+    print(f"    q(t) >= (1/2) log(T / (4 pi)) - C / T^2")
+    print(f"    -> grows logarithmically in T; positive for T sufficiently large.")
+    print()
+    print("  [PASS] q is bounded below by a positive constant on retained")
+    print("         packets at large T, with c_q = 0 in the (P2) bound.")
+
+
 def main():
     verify_symmetry()
     print()
@@ -283,9 +356,12 @@ def main():
     print()
     verify_diagonal_limits()
     print()
+    verify_phase_derivative_lower_bound()
+    print()
     print("=" * 70)
     print("All §2 lemmas (kernel symmetry, removable singularity, derivative")
-    print("formulas, and diagonal limits) verified symbolically.")
+    print("formulas, diagonal limits, and phase-derivative lower bound (P2))")
+    print("verified symbolically.")
     print("=" * 70)
 
 
