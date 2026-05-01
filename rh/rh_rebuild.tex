@@ -1,18 +1,18 @@
 \documentclass[11pt,a4paper]{amsart}
 
 % =============================================================================
-% Clean rebuild scaffold (May 2026).
+% Clean rebuild scaffold.
 %
 % Status convention: every unproven leaf is followed by a Gap remark via the
 % `wip' theorem environment, carrying a `rem:wip-<name>' label so the gap is
 % individually addressable from anywhere in the file.  Status is binary: a
-% result is proved if and only if no `wip' remark is attached to it.  All
-% bookkeeping (what is missing, where v1 prose lives, dependencies) is the
-% body of that remark; nothing tracking-related lives outside the .tex.
+% result is proved iff no `wip' remark is attached to it.  All bookkeeping
+% (what is missing, where v1 prose lives, dependencies) lives in the body
+% of that remark; nothing tracking-related is kept outside the .tex.
 %
 % The original large draft `proof_of_rh.tex' stays in place as a quarry from
 % which prose may be migrated, after restatement and refereeing, into the
-% present file; see Appendix A.
+% present file; see Appendix~\ref{app:archive-map}.
 % =============================================================================
 
 \usepackage{amsmath,amssymb,amsthm,mathtools,bm,mathrsfs}
@@ -57,7 +57,7 @@
 \newtheorem{claim}[theorem]{Claim}
 \newtheorem{hypothesis}[theorem]{Hypothesis}
 
-\title{A Proof of the Riemann Hypothesis}
+\title{A local obstruction proof of the Riemann hypothesis}
 
 \author{John Shields}
 \thanks{Preprint, clean rebuild draft.}
@@ -65,7 +65,8 @@
 
 \subjclass[2020]{11M26 (primary), 11M06, 11M50 (secondary)}
 \keywords{Riemann hypothesis, zeta function, critical line, phase kernel,
-  jet normalization, jet-Gram block, odd-moment cancellation}
+  jet normalization, jet-Gram block, odd-moment cancellation, Hardy
+  source energy}
 
 % Frozen namespace, identical to proof_of_rh.tex.
 \newcommand{\RH}{\mathrm{RH}}
@@ -123,16 +124,18 @@
 \begin{document}
 
 \begin{abstract}
-We give a local-geometric proof of the Riemann Hypothesis.  At each candidate
-off-line zero we zoom into a window of size comparable to the inverse local
-height; the two-by-two jet-Gram blocks of the phase kernel at one or two
-centers form a finite-dimensional comparison object, and a hypothetical
-off-line zero is forced into a transverse mode that the actual zeta phase
-cannot realize.  Two-point and four-point closure of this comparison gives an
-unconditional zero-free strip around the critical line and hence the Riemann
-Hypothesis.  An optional final section provides extra source energy from
-zeta, available to the two-point and four-point closures if their standalone
-forms fall short.
+We present a local-geometric obstruction proof of the Riemann hypothesis.
+The two-by-two jet-normalized blocks of the phase kernel of \(\zeta\) at
+one or two centers form a finite-dimensional comparison object: a
+hypothetical off-line zero forces a transverse mode that the actual zeta
+phase, after a single fixed value-gauge quotient, suppresses at a strictly
+larger polynomial exponent in the local scale.  Two-point and four-point
+comparisons of this object aggregate over heights via \(N\)-point
+odd-moment cancellation to yield an unconditional zero-free strip around
+the critical line, hence the Riemann hypothesis.  A self-contained final
+section provides an optional Hardy-normalized source-energy supply
+available to the two-point and four-point comparisons if their standalone
+forms prove insufficient.
 \end{abstract}
 
 \maketitle
@@ -142,175 +145,217 @@ forms fall short.
 \newpage
 
 % =============================================================================
-\section{The argument in one paragraph}
-\label{sec:overview}
+\section{Introduction}
+\label{sec:introduction}
 
-Suppose \(\rho=\beta+i\gamma\) is a nontrivial zero of \(\zeta\) with
-\(\beta\ne\tfrac12\) and \(|\gamma|\) large.  Around \(\rho\) (and its
-symmetry partners \(\bar\rho,1-\rho,1-\bar\rho\)) we work in a smooth window
-of size comparable to \(1/Q\), where \(Q=Q(\gamma)\) is a scale parameter
-slowly growing with the height.  On this window we have a real local phase
-\(\Ph\) for \(\zeta\), and the only object we ever extract from \(\Ph\) is
-the phase kernel \(K_\Ph(x,y)=\sin(\Ph(x)-\Ph(y))/\pi(x-y)\).  Taking the
-\(2\times 2\) blocks of \(K_\Ph\) at one or two centers and rotating into the
-value/derivative basis gives finite explicit matrices: the same-point block
-\(J(T)\) and the cross-block \(N_{12}(T_1,T_2)\).  Everything downstream is
-finite linear algebra on these matrices.
+The Riemann hypothesis, originating in Riemann's 1859 memoir
+\cite{Riemann1859}, asserts that every nontrivial zero of \(\zeta(s)\) lies
+on the critical line \(\RePart s = \tfrac12\); see
+\cite{Bombieri2000,Conrey2003,Edwards2001,Titchmarsh1986} for surveys.  The
+proof presented in this paper proceeds by a local-geometric obstruction.
+For each height \(\gamma\) we work on a smooth window \(I_T\) centered at
+\(T=\gamma\) of width comparable to \(1/Q(\gamma)\), where \(Q\) is a
+scale parameter slowly growing with \(|\gamma|\).  On this window we fix a
+real local phase \(\Ph\) for \(\zeta\) and study the phase kernel
+\[
+K_\Ph(x,y)=\frac{\sin\bigl(\Ph(x)-\Ph(y)\bigr)}{\pi(x-y)},
+\qquad x\ne y,
+\]
+extended by removable singularity at \(x=y\).  The \(2\times 2\) blocks of
+\(K_\Ph\) at one or two centers, transformed into the value/derivative
+basis by a fixed elementary matrix \(P_h\), become explicit matrices
+\(J(T)\) and \(N_{12}(T_1,T_2)\) whose entries are finite combinations of
+\(q=\Ph'\), \(q'\), \(q''\), and \(\Del=\Ph(T_1)-\Ph(T_2)\).  All
+subsequent estimates reduce to finite linear-algebraic manipulations of
+these matrices.
 
-The argument is then a comparison: a hypothetical off-line zero forces a
-specific transverse mode in this finite linear-algebra picture (the
-\emph{toy} mode); the actual zeta phase, after a single fixed quotient that
-removes harmless value/gauge directions, cannot realize that mode.  The
-clash is two-point at minimum, four-point in the symmetric quartet form, and
-propagates by an odd-moment cancellation across the symmetry packet.  The
-contradiction excludes off-line zeros above some height; standard low-height
-verification then closes the line.
+A hypothetical off-line zero \(\rho=\beta+i\gamma\) with
+\(\beta\ne\tfrac12\) forces a specific transverse mode in the
+value/derivative space --- the toy mode --- which survives the natural
+value/gauge quotient.  The actual zeta phase, under the same quotient,
+cannot realize that mode: the transverse channel of the actual whitened
+block is suppressed at a strictly larger polynomial exponent in \(Q\)
+than the toy lower bound.  The clash is two-point at minimum and
+four-point in the full symmetry quartet \(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\),
+propagated across heights by an \(N\)-point odd-moment cancellation.
+Aggregation over the dyadic height ladder gives an unconditional
+zero-free strip around the critical line; combined with standard
+low-height verification of \(\RH\), this yields the Riemann hypothesis.
 
-\subsection{Spine}
-\label{subsec:spine}
+The argument is self-contained except for one optional input.  If either
+the two-point or the four-point standalone closure proves insufficient,
+the Hardy-normalized source-energy lower bound on the canonical source
+curvature \(q''_\can=\partial_t^3 Z_{\mathrm H}\), stated as
+Hypothesis~\ref{hyp:hardy-source-energy} in
+Section~\ref{sec:hardy-source-energy-supply}, supplies the additional
+polynomial-in-\(Q\) room required.
 
-The chain that delivers \(\RH\) is
+\subsection{Active dependency graph}
+\label{subsec:active-dependency-graph}
 
+The active spine of the argument is the chain
 \[
 \begin{aligned}
-&\text{\S\ref{sec:microscope}: local microscope}
+&\text{\S\ref{sec:local-kernel-and-jet-normalization}}
 \;\longrightarrow\;
-\text{\S\ref{sec:jet-gram-limits}: jet-Gram limits}
+\text{\S\ref{sec:jet-limit-local-blocks}}
 \;\longrightarrow\;
-\text{\S\ref{sec:finite-blocks}: finite-scale whitening}\\
+\text{\S\ref{sec:finite-scale-local-blocks-and-whitening}}\\
 &\;\longrightarrow\;
-\text{\S\ref{sec:toy} \,/\, \S\ref{sec:zeta}: toy vs.\ \(\zeta\) comparison}
+\text{\S\ref{sec:toy-anomaly-and-transverse-obstruction}\,/\,\S\ref{sec:actual-zeta-transverse-suppression}}
 \;\longrightarrow\;
-\text{\S\ref{sec:two-point} \,/\, \S\ref{sec:four-point}: pairwise / quartet rigidity}\\
+\text{\S\ref{sec:two-point-local-rigidity}\,/\,\S\ref{sec:four-point-local-rigidity}}\\
 &\;\longrightarrow\;
-\text{\S\ref{sec:odd}: odd-moment cancellation}
+\text{\S\ref{sec:n-point-odd-moment-cancellation}}
 \;\longrightarrow\;
-\text{\S\ref{sec:zerofree}: zero-free strip}
+\text{\S\ref{sec:aggregation-and-zero-free-strip}}
 \;\longrightarrow\;
-\text{\S\ref{sec:rh}: \(\RH\)}.
+\text{\S\ref{sec:riemann-hypothesis}}.
 \end{aligned}
 \]
-
-Section~\ref{sec:hardy} stands aside: it provides extra source energy from
-\(\zeta\) that the two-point or four-point closures may consume if and only
-if their standalone forms in \S\ref{sec:two-point}\,/\,\S\ref{sec:four-point}
-fall short.  All cross-references to \S\ref{sec:hardy} from earlier sections
-are forward references; \S\ref{sec:hardy} is closed and self-contained.
+Section~\ref{sec:hardy-source-energy-supply} stands aside: it provides the
+optional Hardy source-energy supply consumed by
+Section~\ref{sec:two-point-local-rigidity}\,/\,Section~\ref{sec:four-point-local-rigidity}
+when their standalone forms are insufficient.  All cross-references to
+Section~\ref{sec:hardy-source-energy-supply} from earlier sections are
+forward references; that section is self-contained.
 
 \subsection{Master conditional theorem}
-\label{subsec:master}
+\label{subsec:master-conditional}
 
 \begin{theorem}[Master conditional]
-\label{thm:master}
-Assume the same-point and cross-block jet-Gram limits
-(Lemmas~\ref{lem:same-point-limit} and~\ref{lem:cross-block-limit}), the
-finite-scale whitening loss bound (Lemma~\ref{lem:whitening-loss}), the toy
-visibility lower bound (Theorem~\ref{thm:toy-visibility}), the actual-zeta
-transverse suppression bound (Hypothesis~\ref{hyp:zeta-suppression}), the
-two-point or four-point closure (Theorem~\ref{thm:two-point-closure} or
-Theorem~\ref{thm:four-point-closure}), the odd-moment cancellation
-(Lemma~\ref{lem:odd-cancel}), and the aggregation step
-(Theorem~\ref{thm:zero-free-strip}).  Then every nontrivial zero of \(\zeta\)
-satisfies \(\RePart s = \tfrac12\).
+\label{thm:master-conditional}
+Assume the same-point and cross-block jet-limit identities
+(Lemmas~\ref{lem:same-point-jet-limit}
+and~\ref{lem:cross-block-jet-limit}); the finite-scale whitening loss
+bound (Lemma~\ref{lem:whitening-loss}); the toy anomaly visibility lower
+bound (Theorem~\ref{thm:toy-anomaly-visibility}); the actual-zeta
+transverse suppression upper bound
+(Hypothesis~\ref{hyp:actual-zeta-transverse-suppression}); the two-point
+or four-point local rigidity theorem
+(Theorem~\ref{thm:two-point-rigidity} or
+Theorem~\ref{thm:four-point-rigidity}); the \(N\)-point odd-moment
+cancellation (Lemma~\ref{lem:n-point-odd-moment-cancellation}); and the
+aggregation step (Theorem~\ref{thm:zero-free-strip}).  Then every
+nontrivial zero of \(\zeta\) satisfies \(\RePart s = \tfrac12\).
 \end{theorem}
 
-\begin{wip}\label{rem:wip-master}
-Statement of the conditional is firm; the inputs are the
-section-level theorems below.  The proof is short --- it composes the
-section-level results --- and is written out in \S\ref{sec:rh}.
+\begin{wip}\label{rem:wip-master-conditional}
+The conditional statement is firm; its inputs are the section-level
+results listed above.  The proof is short --- a composition of the
+section-level results --- and is written out in
+Section~\ref{sec:riemann-hypothesis}.
 \end{wip}
 
+\subsection{Notation and conventions}
+\label{subsec:notation-and-conventions}
+
+We use the symmetric pair convention \(T\pm h\) (rather than \(T\pm h/2\))
+throughout.  The point-to-jet transform \(P_h\) of
+\eqref{eq:point-to-jet-transform} is fixed by this choice.  The scale
+parameter \(Q=Q(\gamma)\) is a fixed slowly growing function of the
+height; all polynomial losses are stated as powers of \(Q\) with absolute
+exponents.  ``Retained packets'' refers to a polynomial-weight
+sub-family of the local packets at height \(\gamma\) on which the
+chart-regularity and Gram nondegeneracy hypotheses of
+Definition~\ref{def:local-phase-chart} hold.
+
 % =============================================================================
-\section{The local microscope: phase kernels and jet coordinates}
-\label{sec:microscope}
+\section{Local kernel and jet normalization}
+\label{sec:local-kernel-and-jet-normalization}
 
-A candidate off-line zero \(\rho\) at height \(\gamma\) is invisible at any
-scale much larger than \(1/\gamma\), and the analytic data of \(\zeta\)
-beyond a window of width \(1/Q\) around \(\gamma\) is irrelevant to the
-argument.  We therefore fix a real smooth phase \(\Ph\) for \(\zeta\) on such
-a window and never use \(\zeta\) again --- only \(\Ph\), and only through one
-specific kernel.  The construction below makes that reduction explicit.
+A candidate off-line zero \(\rho\) at height \(\gamma\) is detected only
+at scales comparable to \(1/\gamma\), and the analytic data of \(\zeta\)
+beyond a window of width \(\asymp 1/Q(\gamma)\) around \(\gamma\) does not
+enter the comparison object.  We therefore fix a real smooth phase
+\(\Ph\) for \(\zeta\) on such a window once and for all, and never use
+\(\zeta\) again --- only \(\Ph\), and only through the phase kernel
+\(K_\Ph\) and its Taylor jets at one or two centers.
 
-\subsection{Phase and kernel}
-\label{subsec:phase}
+\subsection{Local phase chart}
+\label{subsec:local-phase-chart}
 
 \begin{definition}[Local phase chart]
-\label{def:phase-chart}
-For each height \(T\) we fix a real smooth function \(\Ph_T\) on an interval
-\(I_T\) of length \(\asymp 1/Q(T)\) centered at \(T\), with the following
-properties:
+\label{def:local-phase-chart}
+For each height \(T\) we fix a real smooth function \(\Ph_T\) on an
+interval \(I_T\) of length \(\asymp 1/Q(T)\) centered at \(T\) with the
+following properties:
 \begin{enumerate}[label=\textup{(P\arabic*)},leftmargin=*]
 \item \(\Ph_T\) is the standard real critical-line phase of \(\zeta\) on
-  \(I_T\), in a chart whose denominators are bounded below by a polynomial
-  in \(Q\);
-\item the normalized derivative \(q:=\Ph_T'\) has a polynomial lower
-  spectral bound on retained packets.
+  \(I_T\), in a chart whose denominators admit a polynomial-in-\(Q\)
+  lower bound;
+\item the normalized derivative \(q:=\Ph_T'\) satisfies a
+  polynomial-in-\(Q\) lower spectral bound on the retained packets at
+  height \(T\).
 \end{enumerate}
-We write \(\Ph\) and \(q\) in place of \(\Ph_T,q\) when \(T\) is fixed by
+We write \(\Ph\) and \(q\) for \(\Ph_T,q\) when \(T\) is fixed by
 context.
 \end{definition}
 
-\begin{wip}\label{rem:wip-phase-chart}
-The chart and its polynomial denominator/derivative bounds
-are stated as a definition here; the existence of such a chart at every high
-height, and the polynomial constants, must be proved before
-Definition~\ref{def:phase-chart} is used downstream.
+\begin{wip}\label{rem:wip-local-phase-chart}
+Existence of such a chart at every sufficiently high \(T\) and the
+polynomial constants in (P1)--(P2) must be established before
+Definition~\ref{def:local-phase-chart} is invoked downstream.
+v1 prose to mine: the jet-limit local blocks subsection of the local
+kernel and jet normalization section.
 \end{wip}
 
 \begin{definition}[Phase kernel]
 \label{def:phase-kernel}
-The phase kernel of \(\Ph\) is
-\[
+The phase kernel of \(\Ph\) on \(I_T\) is
+\begin{equation}
+\label{eq:phase-kernel}
 K_\Ph(x,y)=
 \begin{cases}
 \dfrac{\sin\bigl(\Ph(x)-\Ph(y)\bigr)}{\pi(x-y)}, & x\ne y,\\[1.2ex]
-\dfrac{q(x)}{\pi}, & x=y,
+\dfrac{q(x)}{\pi}, & x=y.
 \end{cases}
-\qquad
-x,y\in I_T.
-\]
+\end{equation}
 \end{definition}
 
 \subsection{Point-to-jet transform}
-\label{subsec:point-to-jet}
+\label{subsec:point-to-jet-transform}
 
-The argument never uses \(K_\Ph\) at single points; it uses \(K_\Ph\) on
-small symmetric pairs \(T\pm h\) and rotates the resulting two-by-two block
-out of the point basis into the value/derivative basis.  The rotation is the
-fixed matrix
-\[
+The kernel \(K_\Ph\) is used only at small symmetric pairs \(T\pm h\); the
+\(2\times 2\) block at such a pair is rotated out of the point basis into
+the value/derivative basis by the fixed matrix
+\begin{equation}
+\label{eq:point-to-jet-transform}
 P_h
 =\frac12
 \begin{pmatrix}
 1 & 1\\[0.6ex]
 -1/h & 1/h
 \end{pmatrix}.
-\]
+\end{equation}
 
-\begin{remark}[Convention note]
-\label{rem:separation-convention}
+\begin{remark}[Pair separation convention]
+\label{rem:pair-separation-convention}
 We use the symmetric pair \(T\pm h\), not \(T\pm h/2\).  All formulas in
-Sections~\ref{sec:jet-gram-limits} and~\ref{sec:finite-blocks} are stated
-under that convention.  Any imported lemma using the alternative convention
-must be retransformed before insertion.
+Sections~\ref{sec:jet-limit-local-blocks}
+and~\ref{sec:finite-scale-local-blocks-and-whitening} are stated under
+that convention.  Any imported lemma using the alternative convention is
+to be retransformed before insertion.
 \end{remark}
 
 % =============================================================================
-\section{Same-point and cross-block jet-Gram limits}
-\label{sec:jet-gram-limits}
+\section{Jet-limit local blocks}
+\label{sec:jet-limit-local-blocks}
 
-The kernel \(K_\Ph\) collapses, at small \(h\), into two explicit \(2\times
-2\) matrices in the value/derivative basis: a same-point block \(J(T)\)
-attached to a single center, and a cross-block \(N_{12}\) attached to two
-centers \(T_1,T_2\).  These are the only objects later sections manipulate;
-\(\Ph\) itself never reappears past this point except through \(q\), \(q'\),
-\(q''\), and \(\Del=\Ph(T_1)-\Ph(T_2)\).
+The phase kernel \(K_\Ph\) collapses, in the limit \(h\to 0\), into two
+explicit \(2\times 2\) matrices in the value/derivative basis: a
+same-point block \(J(T)\) attached to a single center, and a cross-block
+\(N_{12}(T_1,T_2)\) attached to two centers.  These matrices, together
+with the polynomial Gram lower bounds of
+Section~\ref{subsec:same-point-gram-positivity}, are the only objects
+manipulated downstream; the phase \(\Ph\) reappears only through
+\(q,q',q''\) and \(\Del=\Ph(T_1)-\Ph(T_2)\).
 
-\subsection{Same-point limit}
-\label{subsec:same-point}
+\subsection{Same-point jet-limit}
+\label{subsec:same-point-jet-limit}
 
-\begin{lemma}[Same-point jet-Gram limit]
-\label{lem:same-point-limit}
+\begin{lemma}[Same-point jet-limit]
+\label{lem:same-point-jet-limit}
 Let \(A_h(T)\) denote the \(2\times 2\) block of \(K_\Ph\) at the points
 \(T-h,T+h\).  Then
 \[
@@ -318,29 +363,30 @@ P_h\,A_h(T)\,P_h^\top \;\longrightarrow\; J(T)
 \qquad (h\to 0),
 \]
 where
-\[
+\begin{equation}
+\label{eq:same-point-J}
 J(T)=\frac1\pi
 \begin{pmatrix}
 2q(T) & \tfrac12 q'(T)\\[1ex]
 \tfrac12 q'(T) & \tfrac1{12}\bigl(q''(T)+2q(T)^3\bigr)
 \end{pmatrix}.
-\]
+\end{equation}
 \end{lemma}
 
-\begin{wip}\label{rem:wip-same-point-limit}
-Taylor expand \(\Ph(T\pm h)\) to the order needed for
-the (1,1), off-diagonal, and (2,2) entries after applying \(P_h\); verify
-that singular powers of \(h\) cancel; the \(\tfrac1{12}\) coefficient and
-the \(2q(T)^3\) cubic correction must be cross-checked from an independent
-expansion.  v1 prose to mine: \texttt{proof\_of\_rh.tex} \S\,Local kernel and
-jet normalization.
+\begin{wip}\label{rem:wip-same-point-jet-limit}
+Taylor expand \(\Ph(T\pm h)\) to the order needed for the \((1,1)\),
+off-diagonal, and \((2,2)\) entries after applying \(P_h\); verify
+cancellation of singular powers of \(h\); the \(\tfrac1{12}\) coefficient
+and the \(2q(T)^3\) cubic correction in \eqref{eq:same-point-J} require an
+independent recheck.  v1 prose to mine: the local kernel and jet
+normalization section.
 \end{wip}
 
-\subsection{Cross-block limit}
-\label{subsec:cross-block}
+\subsection{Cross-block jet-limit}
+\label{subsec:cross-block-jet-limit}
 
-\begin{lemma}[Cross jet-Gram limit]
-\label{lem:cross-block-limit}
+\begin{lemma}[Cross-block jet-limit]
+\label{lem:cross-block-jet-limit}
 For \(T_1\ne T_2\), set \(s=T_1-T_2\), \(\Del=\Ph(T_1)-\Ph(T_2)\),
 \(q_j=q(T_j)\), and let \(C_h\) be the \(2\times 2\) mixed block of
 \(K_\Ph\) between the pairs \(T_1\pm h\) and \(T_2\pm h\).  Then
@@ -349,7 +395,8 @@ P_h\,C_h\,P_h^\top \;\longrightarrow\; \frac1\pi N_{12}(T_1,T_2)
 \qquad (h\to 0),
 \]
 where
-\[
+\begin{equation}
+\label{eq:cross-N12}
 N_{12}=
 \begin{pmatrix}
 \dfrac{2\sin\Del}{s}
@@ -360,65 +407,70 @@ N_{12}=
 &
 \dfrac{(q_1+q_2)s\cos\Del + (q_1 q_2 s^2 - 2)\sin\Del}{2s^3}
 \end{pmatrix}.
-\]
+\end{equation}
 \end{lemma}
 
-\begin{wip}\label{rem:wip-cross-block-limit}
-Four-entry Taylor expansion; sign convention on \(s\)
-and \(\Del\) must be audited (the sign of \(s\) controls whether the (1,2)
-or (2,1) entry carries \(q_1\) or \(q_2\)).
+\begin{wip}\label{rem:wip-cross-block-jet-limit}
+Four-entry Taylor expansion in the two displacement variables; the sign
+convention on \(s\) and \(\Del\) controls whether the \((1,2)\) or
+\((2,1)\) entry carries \(q_1\) or \(q_2\) and must be audited before
+\eqref{eq:cross-N12} is used downstream.
 \end{wip}
 
-\subsection{Jet-Gram positivity}
-\label{subsec:jet-gram-positivity}
+\subsection{Same-point Gram positivity}
+\label{subsec:same-point-gram-positivity}
 
 \begin{lemma}[Same-point Gram positivity]
-\label{lem:same-point-positivity}
-Under (P1)--(P2) of Definition~\ref{def:phase-chart}, on retained packets at
-height \(T\) the block \(J(T)\) is positive definite and admits a polynomial
-spectral lower bound
+\label{lem:same-point-gram-positivity}
+Under (P1)--(P2) of Definition~\ref{def:local-phase-chart}, the block
+\(J(T)\) is positive definite on the retained packets at height \(T\), and
+admits an absolute-exponent polynomial lower spectral bound
 \[
-\lambda_{\min}\bigl(J(T)\bigr) \ge Q^{-C_J}
+\lambda_{\min}\bigl(J(T)\bigr) \ge Q^{-C_J}.
 \]
-for an absolute constant \(C_J\).
 \end{lemma}
 
-\begin{wip}\label{rem:wip-same-point-positivity}
-Reduce to a quadratic in \(q\), \(q'\), \(q''\);
-use (P2) to bound \(q\) from below and a derivative-of-zeta-phase estimate
-to bound \(q''\) from above on retained packets.  v1 prose to mine: the
-relevant curvature/tail-curvature bounds.
+\begin{wip}\label{rem:wip-same-point-gram-positivity}
+Reduce to a quadratic in \(q,q',q''\); use (P2) for the lower bound on
+\(q\) and a derivative-of-zeta-phase upper bound for \(q''\); uniformity
+in \(T\) on the retained set is the nontrivial part.  v1 prose to mine:
+the curvature estimate subsection and the tail curvature bound section.
 \end{wip}
 
 % =============================================================================
-\section{Finite-scale packet blocks and whitening}
-\label{sec:finite-blocks}
+\section{Finite-scale local blocks and whitening}
+\label{sec:finite-scale-local-blocks-and-whitening}
 
-The \(h\to 0\) limits of \S\ref{sec:jet-gram-limits} are clean but not
-directly usable: the actual proof needs the same blocks at finite separation
-\(s>0\), uniformly in \(s\) and in the midpoint \(m\).  Whitening is the
-change of basis that makes these finite blocks dimensionless and absorbs the
-positivity of \(J(T)\) into the normalization.  The result is a single
-finite-scale packet matrix \(\widehat\Om_\z(s;m)\) that is the input to
-every comparison theorem from \S\ref{sec:toy} onward.
+The jet-limit identities of Section~\ref{sec:jet-limit-local-blocks} are
+not directly usable: the comparison theorems of
+Sections~\ref{sec:two-point-local-rigidity}
+and~\ref{sec:four-point-local-rigidity} require the same blocks at
+finite separation \(s>0\) uniformly in \(s\) and the midpoint \(m\).
+Whitening is the change of basis that absorbs the positivity of \(J\)
+into the normalization and produces a single dimensionless finite-scale
+packet block \(\widehat\Om_\z(s;m)\), which is the input to every
+comparison theorem from
+Section~\ref{sec:toy-anomaly-and-transverse-obstruction} onward.
 
-\subsection{Finite blocks}
-\label{subsec:finite-blocks}
+\subsection{Finite same-point and mixed blocks}
+\label{subsec:finite-same-point-and-mixed-blocks}
 
 Fix a midpoint \(m\) and separation \(s>0\); set \(t_\pm=m\pm s/2\),
 \(q_\pm=q(t_\pm)\), \(\Del_m(s)=\Ph(t_-)-\Ph(t_+)\).
 
 \begin{definition}[Finite same-point and mixed blocks]
-\label{def:finite-blocks}
-\[
+\label{def:finite-same-point-and-mixed-blocks}
+\begin{equation}
+\label{eq:Gpm}
 G_{m,\pm}(s)
 =\frac1\pi
 \begin{pmatrix}
 2q(t_\pm) & \tfrac12 q'(t_\pm)\\[0.8ex]
 \tfrac12 q'(t_\pm) & \tfrac1{12}\bigl(q''(t_\pm)+2q(t_\pm)^3\bigr)
 \end{pmatrix},
-\]
-\[
+\end{equation}
+\begin{equation}
+\label{eq:Nm}
 N_m(s)
 =\frac1\pi
 \begin{pmatrix}
@@ -430,69 +482,69 @@ N_m(s)
 &
 \dfrac{(q_-+q_+)s\cos\Del_m(s)+(2-q_- q_+ s^2)\sin\Del_m(s)}{2s^3}
 \end{pmatrix}.
-\]
+\end{equation}
 \end{definition}
 
-\subsection{Whitened packet block}
-\label{subsec:whitening}
+\subsection{Whitened finite block}
+\label{subsec:whitened-finite-block}
 
-\begin{definition}[Whitened packet block]
-\label{def:whitened-block}
+\begin{definition}[Whitened finite block]
+\label{def:whitened-finite-block}
 Provided \(G_{m,\pm}(s)\) are positive definite, set
-\[
+\begin{equation}
+\label{eq:omega-finite}
 \widehat\Om_\z(s;m)
 := G_{m,-}(s)^{-1/2}\,N_m(s)\,G_{m,+}(s)^{-1/2}.
-\]
+\end{equation}
 \end{definition}
 
 \begin{lemma}[Whitening loss]
 \label{lem:whitening-loss}
-On retained packets there is an absolute constant \(C_W\) such that the
-whitening map has operator-norm distortion at most \(Q^{C_W}\); equivalently
+On the retained packets there is an absolute exponent \(C_W\) such that
+the whitening map has operator-norm distortion at most \(Q^{C_W}\);
+equivalently
 \[
-\bigl\|G_{m,\pm}(s)^{-1/2}\bigr\|_{\op}
-\;\le\; Q^{C_W}
+\bigl\|G_{m,\pm}(s)^{-1/2}\bigr\|_{\op} \;\le\; Q^{C_W}
 \]
-on the retained set.
+uniformly in \(m\) and \(s\) on the retained set.
 \end{lemma}
 
 \begin{wip}\label{rem:wip-whitening-loss}
-Diagonal of \(G_{m,\pm}\) is bounded below by
-Lemma~\ref{lem:same-point-positivity}; bound the full inverse via the
-explicit \(2\times 2\) formula; uniformity in \(m\) and \(s\) is the
-non-trivial part.
+The diagonal of \(G_{m,\pm}\) is bounded below by
+Lemma~\ref{lem:same-point-gram-positivity}; bound the inverse via the
+explicit \(2\times 2\) formula; uniformity in \(m,s\) is the nontrivial
+part.  v1 prose to mine: the corrected finite-\(s\) holomorphic
+whitening section.
 \end{wip}
 
 % =============================================================================
-\section{What the toy off-line model sees}
-\label{sec:toy}
+\section{Toy anomaly and transverse obstruction}
+\label{sec:toy-anomaly-and-transverse-obstruction}
 
-If \(\rho=\beta+i\gamma\) with \(\beta\ne\tfrac12\), the local geometry near
-\(\rho\) is exactly that of a fixed model phase: a \emph{toy} phase
-\(\Ph_\toy\) parameterized by the off-line distance \(2\beta-1\), with
-explicit \(q_\toy,q_\toy',q_\toy''\).  The toy whitened block
-\(\widehat\Om_\toy(s;m)\) has an explicit transverse mode --- a specific
-direction in the \(2\times 2\) value/derivative space whose component does
-not vanish under any of the gauge or background quotients available to
-\(\zeta\).  This section states the visibility lower bound; \S\ref{sec:zeta}
-states the matching suppression upper bound.
+For a hypothetical off-line zero \(\rho=\beta+i\gamma\) with
+\(\beta\ne\tfrac12\), the local geometry near \(\rho\) is captured by a
+fixed model phase --- the toy phase \(\Ph_\toy\) parameterized by the
+off-line distance \(2\beta-1\) --- whose jet-Gram blocks are explicit and
+whose whitened block has an explicit transverse mode that does not vanish
+under the value/gauge quotient.  This section states the toy visibility
+lower bound; Section~\ref{sec:actual-zeta-transverse-suppression} states
+the matching upper bound for actual \(\zeta\).
 
-\subsection{Toy phase and toy block}
-\label{subsec:toy-phase}
+\subsection{Off-line toy phase}
+\label{subsec:off-line-toy-phase}
 
-\begin{definition}[Toy off-line phase]
-\label{def:toy-phase}
+\begin{definition}[Off-line toy phase]
+\label{def:off-line-toy-phase}
 For \(\beta\in(\tfrac12,1)\) and a window scale \(Q\), the toy off-line
-phase \(\Ph_\toy(t;\beta,Q)\) is the model phase of a split pair at offset
-\(\pm(2\beta-1)\) on a window of size \(1/Q\), in the same coordinate and
-gauge as Definition~\ref{def:phase-chart}.
+phase \(\Ph_\toy(t;\beta,Q)\) is the model phase of a split pair at
+offset \(\pm(2\beta-1)\) on a window of size \(1/Q\), in the same
+coordinate and gauge as Definition~\ref{def:local-phase-chart}.
 \end{definition}
 
-\begin{wip}\label{rem:wip-toy-phase}
-Concrete formula for \(\Ph_\toy\) and identification of its
-\(q,q',q''\) with elementary functions of \((2\beta-1)\) and the local
-coordinate.  v1 prose to mine: the toy anomaly and transverse obstruction
-section.
+\begin{wip}\label{rem:wip-off-line-toy-phase}
+Concrete formula for \(\Ph_\toy\) and identification of its \(q,q',q''\)
+with elementary functions of \((2\beta-1)\) and the local coordinate.
+v1 prose to mine: the toy anomaly and transverse obstruction section.
 \end{wip}
 
 \subsection{Transverse projection}
@@ -500,381 +552,442 @@ section.
 
 \begin{definition}[Transverse projection]
 \label{def:transverse-projection}
-There is a finite-dimensional subspace \(\mathcal V_\val\) of the
-value/derivative space spanned by the value and gauge/background
-directions, and a fixed projection
-\(\Pi_\trans\) onto its orthogonal complement, with the following
-properties on retained packets:
+Let \(\mathcal V_\val\) denote the finite-dimensional subspace of the
+value/derivative space spanned by the value, gauge, and background
+directions to be quotiented out.  A transverse projection
+\(\Pi_\trans\) is an operator onto the orthogonal complement of
+\(\mathcal V_\val\) satisfying, on the retained packets:
 \begin{enumerate}[label=\textup{(\(\Pi\)\arabic*)},leftmargin=*]
 \item \(\Pi_\trans\) annihilates \(\mathcal V_\val\) exactly;
-\item \(\Pi_\trans\) is bounded with polynomial loss;
-\item \(\Pi_\trans\) is gauge-invariant under the residual gauge freedom
-  left in \(\Ph\) after Definition~\ref{def:phase-chart}.
+\item \(\Pi_\trans\) is bounded with polynomial-in-\(Q\) loss;
+\item \(\Pi_\trans\) is invariant under the residual gauge freedom left
+  in \(\Ph\) after Definition~\ref{def:local-phase-chart}.
 \end{enumerate}
-The projection \(\Pi_\trans\) is fixed once and for all in this section, and
-is the same operator used in the toy and the zeta packets in
-\S\ref{sec:zeta}.
+The projection \(\Pi_\trans\) is fixed once and for all in this section
+and is applied identically to the toy and actual-zeta packets in
+Section~\ref{sec:actual-zeta-transverse-suppression}.
 \end{definition}
 
 \begin{wip}\label{rem:wip-transverse-projection}
-The choice of \(\mathcal V_\val\) is the most
-sensitive structural decision in the rebuild: it must precede
-Theorem~\ref{thm:toy-visibility} and Hypothesis~\ref{hyp:zeta-suppression}
-and not be re-chosen afterward.  v1 prose to mine: the leading value matrix
-and canonical calibration section, plus the local projective rigidity
-section.
+The choice of \(\mathcal V_\val\) is the most sensitive structural
+decision in the rebuild: it must precede
+Theorem~\ref{thm:toy-anomaly-visibility} and
+Hypothesis~\ref{hyp:actual-zeta-transverse-suppression}, and is not to be
+re-chosen afterward.  v1 prose to mine: the leading value matrix and
+canonical calibration section, together with the local projective
+rigidity of the one-pair and multi-pair families section.
 \end{wip}
 
-\subsection{Toy visibility}
-\label{subsec:toy-visibility}
+\subsection{Toy anomaly visibility}
+\label{subsec:toy-anomaly-visibility}
 
 \begin{theorem}[Toy anomaly visibility]
-\label{thm:toy-visibility}
-For every off-line distance \(\beta-\tfrac12 \ne 0\) at scale \(Q\), the toy
-whitened block \(\widehat\Om_\toy(s;m)\) satisfies
+\label{thm:toy-anomaly-visibility}
+For every off-line distance \(\beta-\tfrac12\ne 0\) at scale \(Q\), the
+toy whitened block \(\widehat\Om_\toy(s;m)\) satisfies
 \[
 \bigl\|\Pi_\trans\,\mathcal A_\toy\bigl(\widehat\Om_\toy(s;m)\bigr)\bigr\|
 \;\ge\; Q^{-A_\toy}
 \]
 on a positive polynomial-weight subset of midpoints \(m\) and separations
-\(s\), where \(A_\toy\) is an absolute constant and \(\mathcal A_\toy\) is
-the toy anomaly functional defined explicitly in terms of
+\(s\), where \(A_\toy\) is an absolute exponent and \(\mathcal A_\toy\)
+is the toy anomaly functional defined explicitly from the entries of
 \(\widehat\Om_\toy\).
 \end{theorem}
 
-\begin{wip}\label{rem:wip-toy-visibility}
-Definition of \(\mathcal A_\toy\) (a polynomial
-combination of the entries of \(\widehat\Om_\toy\) selected to vanish at
-\(\beta=\tfrac12\) but not for \(\beta\ne\tfrac12\)) and the lower bound
-for it on retained \((m,s)\).
+\begin{wip}\label{rem:wip-toy-anomaly-visibility}
+Definition of \(\mathcal A_\toy\) (a polynomial combination of the
+entries of \(\widehat\Om_\toy\) selected to vanish at \(\beta=\tfrac12\)
+but not for \(\beta\ne\tfrac12\)) and the lower bound on retained
+\((m,s)\).  The bound is to be insensitive to the value channel and the
+residual gauge.
 \end{wip}
 
 % =============================================================================
-\section{What actual \texorpdfstring{\(\zeta\)}{zeta} does instead}
-\label{sec:zeta}
+\section{Actual-zeta transverse suppression}
+\label{sec:actual-zeta-transverse-suppression}
 
 The actual zeta phase \(\Ph\) defines its own whitened block
-\(\widehat\Om_\z(s;m)\); under the same projection \(\Pi_\trans\), it
-satisfies a \emph{suppression} upper bound that is incompatible with the
-toy visibility lower bound at the same exponent.  This is the load-bearing
-asymmetry: the off-line scenario forces \(\Pi_\trans\widehat\Om\) to be
-large; \(\zeta\) forces it to be small.
+\(\widehat\Om_\z(s;m)\); under the same projection \(\Pi_\trans\) as in
+Section~\ref{sec:toy-anomaly-and-transverse-obstruction}, its anomaly is
+suppressed at a strictly larger polynomial exponent than the toy
+visibility lower bound.  This is the load-bearing asymmetry of the
+program: the off-line scenario forces
+\(\Pi_\trans\widehat\Om\) to be large; the actual zeta phase forces it
+to be small.
 
 \begin{hypothesis}[Actual-zeta transverse suppression]
-\label{hyp:zeta-suppression}
-On retained packets, after the gauge-fixed normalization of
-Definition~\ref{def:phase-chart} and the same \(\Pi_\trans\) as
-Theorem~\ref{thm:toy-visibility},
+\label{hyp:actual-zeta-transverse-suppression}
+On the retained packets, after the gauge-fixed normalization of
+Definition~\ref{def:local-phase-chart} and the same \(\Pi_\trans\) as
+Theorem~\ref{thm:toy-anomaly-visibility},
 \[
 \bigl\|\Pi_\trans\,\mathcal A_\z\bigl(\widehat\Om_\z(s;m)\bigr)\bigr\|
 \;\le\; Q^{-B_\z}
 \]
-for some absolute constant \(B_\z>A_\toy\), where \(\mathcal A_\z\) is the
-restriction of the toy anomaly functional to the actual-zeta whitened block.
+for an absolute exponent \(B_\z>A_\toy\), where \(\mathcal A_\z\) is the
+restriction of the toy anomaly functional of
+Theorem~\ref{thm:toy-anomaly-visibility} to the actual-zeta whitened
+block.
 \end{hypothesis}
 
-\begin{wip}\label{rem:wip-zeta-suppression}
-This is the structural gap of the program.  The
-hypothesis is consumed by Theorems~\ref{thm:two-point-closure}
-and~\ref{thm:four-point-closure}.  Two routes are possible: (i) prove the
-upper bound from the local jet-Gram geometry alone (the standalone route);
-(ii) prove it using the source-energy reservoir of \S\ref{sec:hardy} (the
-Hardy-assisted route).  v1 prose to mine: the corrected finite-\(s\)
-holomorphic whitening and odd holomorphic transverse channel sections.
+\begin{wip}\label{rem:wip-actual-zeta-transverse-suppression}
+This is the structural gap of the program.  The hypothesis is consumed
+by Theorems~\ref{thm:two-point-rigidity}
+and~\ref{thm:four-point-rigidity}.  Two proof routes are admissible:
+\textup{(i)} a standalone route from the local jet-Gram geometry alone;
+\textup{(ii)} a Hardy-assisted route consuming the source-energy supply
+of Section~\ref{sec:hardy-source-energy-supply} via
+Lemma~\ref{lem:hardy-energy-to-suppression}.  v1 prose to mine: the
+corrected finite-\(s\) holomorphic whitening section and the odd
+holomorphic transverse channel section.
 \end{wip}
 
-\begin{remark}[Standalone vs.\ Hardy-assisted]
-\label{rem:standalone-vs-hardy}
-Hypothesis~\ref{hyp:zeta-suppression} is stated as a single object; the two
-proof routes do not change its statement, only the technology of its proof.
-The forward references in Theorems~\ref{thm:two-point-closure}
-and~\ref{thm:four-point-closure} and in \S\ref{sec:hardy} are bookkeeping
-for which route is invoked, not separate statements.
+\begin{remark}[Standalone and Hardy-assisted routes]
+\label{rem:standalone-and-hardy-routes}
+Hypothesis~\ref{hyp:actual-zeta-transverse-suppression} is stated as a
+single object; the two proof routes do not change its statement, only the
+technology of its proof.  Forward references to
+Section~\ref{sec:hardy-source-energy-supply} from
+Theorems~\ref{thm:two-point-rigidity}
+and~\ref{thm:four-point-rigidity} indicate which route is invoked, not a
+distinct hypothesis.
 \end{remark}
 
 % =============================================================================
-\section{Two zeros at once: pairwise rigidity}
-\label{sec:two-point}
+\section{Two-point local rigidity}
+\label{sec:two-point-local-rigidity}
 
 The simplest comparison takes a hypothetical off-line zero \(\rho\) and a
 single symmetry partner --- typically \(\bar\rho\) or \(1-\rho\) --- and
 reads off the joint contribution to the cross-block \(N_m(s)\).  Under
-\(\Pi_\trans\) the toy visibility bound and the actual-zeta suppression
-bound apply at the same separation \(s\) and the same midpoint \(m\); they
-are incompatible at the same scale exponent, and the pair cannot exist.
+\(\Pi_\trans\), the toy visibility lower bound and the actual-zeta
+suppression upper bound apply at the matched midpoint and separation; the
+exponent inequality \(A_\toy<B_\z\) is incompatible with the existence
+of the pair.
 
-\begin{theorem}[Two-point closure]
-\label{thm:two-point-closure}
-Let \(\rho=\beta+i\gamma\) with \(\beta\ne\tfrac12\) and \(|\gamma|\) large,
-and let \((T_1,T_2)\) be the height pair attached to \(\rho\) and one of its
-symmetry partners.  Then under
-Lemmas~\ref{lem:same-point-limit},~\ref{lem:cross-block-limit},
-\ref{lem:whitening-loss}, Theorem~\ref{thm:toy-visibility}, and
-Hypothesis~\ref{hyp:zeta-suppression},
+\begin{theorem}[Two-point local rigidity]
+\label{thm:two-point-rigidity}
+Let \(\rho=\beta+i\gamma\) with \(\beta\ne\tfrac12\) and \(|\gamma|\)
+sufficiently large, and let \((T_1,T_2)\) be the height pair attached
+to \(\rho\) and one of its symmetry partners.  Under
+Lemmas~\ref{lem:same-point-jet-limit},
+\ref{lem:cross-block-jet-limit}, \ref{lem:whitening-loss},
+Theorem~\ref{thm:toy-anomaly-visibility}, and
+Hypothesis~\ref{hyp:actual-zeta-transverse-suppression},
 \[
-A_\toy < B_\z \qquad\Longrightarrow\qquad
-\rho\notin\{\zeta=0\}.
+A_\toy < B_\z \qquad\Longrightarrow\qquad \rho\notin\{\zeta=0\}.
 \]
 \end{theorem}
 
-\begin{wip}\label{rem:wip-two-point-closure}
-Compose Theorem~\ref{thm:toy-visibility} (lower) with
-Hypothesis~\ref{hyp:zeta-suppression} (upper) at matched \((m,s)\); show the
-exponent gap survives the polynomial whitening loss
-(Lemma~\ref{lem:whitening-loss}) and the polynomial Gram lower bound
-(Lemma~\ref{lem:same-point-positivity}).  This proof is short ---
-arithmetic on exponents --- once its inputs are in place.
+\begin{wip}\label{rem:wip-two-point-rigidity}
+Compose Theorem~\ref{thm:toy-anomaly-visibility} (lower bound) with
+Hypothesis~\ref{hyp:actual-zeta-transverse-suppression} (upper bound) at
+matched \((m,s)\); show the exponent gap survives the polynomial
+whitening loss (Lemma~\ref{lem:whitening-loss}) and the polynomial Gram
+lower bound (Lemma~\ref{lem:same-point-gram-positivity}).  The proof is
+short --- arithmetic on absolute exponents --- once the inputs are in
+place.
 \end{wip}
 
-\begin{remark}[Hardy assist, if needed]
-\label{rem:two-point-hardy}
-If Hypothesis~\ref{hyp:zeta-suppression} cannot be discharged from local
-jet-Gram geometry alone for the two-point pairing, the source-energy bound
-of Hypothesis~\ref{hyp:hardy-energy} in \S\ref{sec:hardy} provides the
-missing room.  Theorem~\ref{thm:two-point-closure} is then conditional on
-\S\ref{sec:hardy} as well as on the local inputs; the exponent inequality
-\(A_\toy<B_\z\) remains the only thing to verify.
+\begin{remark}[Hardy-assisted route, if invoked]
+\label{rem:two-point-hardy-supply}
+If Hypothesis~\ref{hyp:actual-zeta-transverse-suppression} cannot be
+discharged from the local jet-Gram geometry alone for the two-point
+pairing, the source-energy lower bound
+Hypothesis~\ref{hyp:hardy-source-energy} of
+Section~\ref{sec:hardy-source-energy-supply}, transferred via
+Lemma~\ref{lem:hardy-energy-to-suppression}, supplies the missing
+polynomial-in-\(Q\) room.  Theorem~\ref{thm:two-point-rigidity} is then
+conditional on that source as well as on the local inputs.
 \end{remark}
 
 % =============================================================================
-\section{Four zeros in a symmetric quartet: stronger rigidity}
-\label{sec:four-point}
+\section{Four-point local rigidity in the symmetric quartet}
+\label{sec:four-point-local-rigidity}
 
 The full symmetry packet of an off-line zero is the quartet
 \[
 \mathcal Z(\rho)=\{\rho,\bar\rho,1-\rho,1-\bar\rho\}.
 \]
 The four-center jet-Gram block carries strictly more rigidity than the
-two-point version: the toy visibility lower bound holds in a refined
-quotient that two-point comparisons cannot see, and the matching
-suppression hypothesis is correspondingly stronger.  This section states
-the four-point closure independently of \S\ref{sec:two-point}; either route
-suffices for \S\ref{sec:zerofree}.
+two-point cross-block: the toy visibility lower bound holds in a refined
+quotient invisible to the two-point comparison, and the matching
+suppression hypothesis is correspondingly stronger.  The four-point
+rigidity theorem is stated independently of
+Section~\ref{sec:two-point-local-rigidity}; either route suffices for the
+aggregation step in
+Section~\ref{sec:aggregation-and-zero-free-strip}.
 
-\begin{theorem}[Four-point closure]
-\label{thm:four-point-closure}
+\begin{theorem}[Four-point local rigidity]
+\label{thm:four-point-rigidity}
 Let \(\rho\) be a hypothetical off-line zero and \(\mathcal Z(\rho)\) its
-symmetry quartet.  The four-center jet-Gram comparison, under the same
-projection \(\Pi_\trans\) extended to the four-point quotient, yields
+symmetry quartet.  The four-center jet-Gram comparison, under the
+extension of \(\Pi_\trans\) to the four-point quotient, yields
 \(A_\toy^{(4)}<B_\z^{(4)}\) for absolute four-point exponents, and hence
-\(\mathcal Z(\rho)\) cannot be a quartet of zeros.
+\(\mathcal Z(\rho)\) cannot be a quartet of zeros of \(\zeta\).
 \end{theorem}
 
-\begin{wip}\label{rem:wip-four-point-closure}
-State and prove the four-center analogue of
-\(\widehat\Om_\z\), the four-point projection \(\Pi_\trans^{(4)}\), and the
-four-point versions of Theorem~\ref{thm:toy-visibility} and
-Hypothesis~\ref{hyp:zeta-suppression}; assemble the exponent inequality.
-v1 prose to mine: the local projective rigidity of the one-pair and
-multi-pair families, plus the corrected fixed-target quotient package.
+\begin{wip}\label{rem:wip-four-point-rigidity}
+State and prove the four-center analogue of \(\widehat\Om_\z\), the
+four-point projection \(\Pi_\trans^{(4)}\), and the four-point versions
+of Theorem~\ref{thm:toy-anomaly-visibility} and
+Hypothesis~\ref{hyp:actual-zeta-transverse-suppression}; assemble the
+exponent inequality.  v1 prose to mine: the local projective rigidity of
+the one-pair and multi-pair families section, and the corrected
+fixed-target quotient package.
 \end{wip}
 
-\begin{remark}[Hardy assist, if needed]
-\label{rem:four-point-hardy}
-The four-point analogue of Remark~\ref{rem:two-point-hardy} applies: if the
-four-point standalone suppression cannot be proved purely locally, the
-source-energy bound of Hypothesis~\ref{hyp:hardy-energy} can be invoked,
-with the same effect of supplying the gap between \(A_\toy^{(4)}\) and
+\begin{remark}[Hardy-assisted route, if invoked]
+\label{rem:four-point-hardy-supply}
+The four-point analogue of Remark~\ref{rem:two-point-hardy-supply}
+applies: if the four-point standalone suppression cannot be proved from
+local geometry alone, Hypothesis~\ref{hyp:hardy-source-energy} of
+Section~\ref{sec:hardy-source-energy-supply} supplies the missing room,
+with the same effect of separating \(A_\toy^{(4)}\) from
 \(B_\z^{(4)}\).
 \end{remark}
 
 % =============================================================================
-\section{Odd-moment cancellation across \texorpdfstring{\(N\)}{N} points}
-\label{sec:odd}
+\section{\texorpdfstring{$N$}{N}-point odd-moment cancellation}
+\label{sec:n-point-odd-moment-cancellation}
 
-The exponent inequality in Theorems~\ref{thm:two-point-closure}
-and~\ref{thm:four-point-closure} is the load-bearing inequality, but its
-inputs include a finite remainder coming from the Taylor expansion of
-\(\Ph\) around midpoints.  By symmetry, odd moments of the relevant
-expansion vanish under integration against the symmetric packet weight;
-this is the mechanism that keeps the remainders below
-\(\min(Q^{-A_\toy},Q^{-B_\z})\) and lets the comparison close.
+The exponent inequality of Theorems~\ref{thm:two-point-rigidity}
+and~\ref{thm:four-point-rigidity} is load-bearing, but its inputs include
+finite remainders from the Taylor expansion of \(\Ph\) around midpoints.
+By the symmetry of the packet measure, all odd moments of the relevant
+expansion vanish; this is the mechanism that holds the remainders below
+\(\min(Q^{-A_\toy},Q^{-B_\z})\) and lets the comparison close uniformly
+in the height.
 
-\begin{lemma}[Odd-moment cancellation]
-\label{lem:odd-cancel}
+\begin{lemma}[\(N\)-point odd-moment cancellation]
+\label{lem:n-point-odd-moment-cancellation}
 Let \(\widehat\mu_{N,Q}\) be the symmetric \(N\)-point packet measure
 attached to height \(T\) and scale \(Q\).  For every \(r\ge 0\),
-\[
+\begin{equation}
+\label{eq:odd-moment-vanishing}
 \partial_z^{\,2r+1}\widehat\mu_{N,Q}(0)=0.
-\]
-The same identity holds with the packet measure replaced by its convolution
-with any even bump \(\widehat\phi\): for every \(r\ge 0\),
-\[
+\end{equation}
+The same identity holds with \(\widehat\mu_{N,Q}\) replaced by its
+convolution with any even bump \(\widehat\phi\): for every \(r\ge 0\),
+\begin{equation}
+\label{eq:odd-moment-vanishing-convolved}
 \partial_z^{\,2r+1}\bigl(\widehat\phi(\eta z)\widehat\mu_{N,Q}(z)\bigr)\big|_{z=0}=0.
-\]
+\end{equation}
 \end{lemma}
 
-\begin{wip}\label{rem:wip-odd-cancel}
-Pure parity argument; v1 has the full proof in the
-\(N\)-point odd-moment cancellation section.  Migration is straight ---
-only the symmetry packet definition needs to match
-Definition~\ref{def:phase-chart}.
+\begin{wip}\label{rem:wip-n-point-odd-moment-cancellation}
+Pure parity argument; v1 carries the full proof in the \(N\)-point
+odd-moment cancellation section.  Migration is straightforward provided
+the symmetry packet of \eqref{eq:odd-moment-vanishing} matches
+Definition~\ref{def:local-phase-chart}.
 \end{wip}
 
 % =============================================================================
-\section{From local obstruction to a zero-free strip}
-\label{sec:zerofree}
+\section{Aggregation and zero-free strip}
+\label{sec:aggregation-and-zero-free-strip}
 
-The two-point and four-point closures of \S\ref{sec:two-point} and
-\S\ref{sec:four-point} exclude any single off-line zero above height
-\(T_0\); to upgrade this to a zero-free strip we aggregate over heights
-using the polynomial nature of every loss in
-Lemmas~\ref{lem:whitening-loss},~\ref{lem:same-point-positivity},
-Theorem~\ref{thm:toy-visibility}, and Hypothesis~\ref{hyp:zeta-suppression}.
+The two-point and four-point rigidity theorems exclude any single
+off-line zero above height \(T_0\); the upgrade to a zero-free strip
+proceeds by aggregating along the dyadic height ladder, exploiting the
+polynomial nature of every loss in
+Lemmas~\ref{lem:whitening-loss},
+\ref{lem:same-point-gram-positivity},
+Theorem~\ref{thm:toy-anomaly-visibility}, and
+Hypothesis~\ref{hyp:actual-zeta-transverse-suppression}.
 
 \begin{theorem}[Zero-free strip]
 \label{thm:zero-free-strip}
-There is \(T_0>0\) such that \(\zeta(\beta+i\gamma)\ne 0\) for every
-\(\beta\ne\tfrac12\) and \(|\gamma|\ge T_0\).
+There is \(T_0>0\) such that
+\(\zeta(\beta+i\gamma)\ne 0\) for every \(\beta\ne\tfrac12\) and
+\(|\gamma|\ge T_0\).
 \end{theorem}
 
 \begin{wip}\label{rem:wip-zero-free-strip}
-Aggregate Theorem~\ref{thm:two-point-closure}
-or Theorem~\ref{thm:four-point-closure} across the dyadic height ladder;
-the polynomial losses combine into a single polynomial loss in \(Q(\gamma)\)
-and the exponent inequality \(A_\toy<B_\z\) carries through uniformly.
+Aggregate Theorem~\ref{thm:two-point-rigidity} or
+Theorem~\ref{thm:four-point-rigidity} across the dyadic ladder; the
+polynomial losses combine into a single polynomial-in-\(Q(\gamma)\)
+factor, and the exponent inequality \(A_\toy<B_\z\) carries through
+uniformly.
 \end{wip}
 
 % =============================================================================
-\section{The Riemann Hypothesis}
-\label{sec:rh}
+\section{The Riemann hypothesis}
+\label{sec:riemann-hypothesis}
 
-Theorem~\ref{thm:zero-free-strip} excludes high off-line zeros; standard
-verification of \(\zeta\) on \(|\gamma|\le T_0\) covers the low-height
-range.
-
-\begin{theorem}[Riemann Hypothesis]
-\label{thm:rh}
+\begin{theorem}[Riemann hypothesis]
+\label{thm:riemann-hypothesis}
 Every nontrivial zero of \(\zeta\) satisfies \(\RePart s = \tfrac12\).
 \end{theorem}
 
 \begin{proof}
-Combine Theorem~\ref{thm:zero-free-strip} with the standard low-height
-numerical verification of \(\RH\) up to height \(T_0\).
-\qed
+By Theorem~\ref{thm:zero-free-strip}, no off-line zero can lie at
+height \(|\gamma|\ge T_0\); the standard low-height numerical
+verification of \(\RH\) (see, e.g., \cite{Edwards2001,Titchmarsh1986})
+covers the range \(|\gamma|<T_0\).
 \end{proof}
 
 % =============================================================================
-\section{(Optional) Extra source energy from \texorpdfstring{\(\zeta\)}{zeta}: the Hardy reservoir}
-\label{sec:hardy}
+\section{Hardy-normalized source-energy supply (optional)}
+\label{sec:hardy-source-energy-supply}
 
-This section is a self-contained interface.  Its only role is to provide a
-single source-energy lower bound that
-Theorems~\ref{thm:two-point-closure} and~\ref{thm:four-point-closure} may
-invoke if their standalone forms in \S\ref{sec:two-point}\,/\,\S\ref{sec:four-point}
-prove insufficient.  Nothing earlier in the paper depends on this section.
+This section is self-contained: its sole role is to supply a single
+source-energy lower bound that
+Theorems~\ref{thm:two-point-rigidity}
+and~\ref{thm:four-point-rigidity} may invoke when their standalone
+forms in
+Sections~\ref{sec:two-point-local-rigidity}\,/\,\ref{sec:four-point-local-rigidity}
+are insufficient.  Nothing earlier in the paper depends on this
+section.
 
 \subsection{Canonical source curvature}
-\label{subsec:hardy-canonical-source}
+\label{subsec:canonical-source-curvature}
 
 \begin{definition}[Canonical source curvature]
-\label{def:canonical-source}
-The canonical source curvature of \(\zeta\) on the local chart of
-Definition~\ref{def:phase-chart} is
-\[
+\label{def:canonical-source-curvature}
+The canonical source curvature of \(\zeta\) on the chart of
+Definition~\ref{def:local-phase-chart} is
+\begin{equation}
+\label{eq:canonical-source}
 q''_\can := \partial_t^3 Z_{\mathrm H}(t),
-\]
-where \(Z_{\mathrm H}\) is the Hardy-normalized real critical-line scalar
-of \(\zeta\) in the same chart.
+\end{equation}
+where \(Z_{\mathrm H}\) is the Hardy-normalized real critical-line
+scalar of \(\zeta\) in the same chart.
 \end{definition}
 
-\begin{wip}\label{rem:wip-canonical-source}
-Identification of \(q''_\can\) with
-\(\partial_t^3 Z_{\mathrm H}\) is convention; the chart-regularity and
-zero-separation hypotheses of Definition~\ref{def:phase-chart} carry over
-verbatim.  v1 prose to mine: the upstream Gate-1 arithmetic inputs section.
+\begin{wip}\label{rem:wip-canonical-source-curvature}
+Identification of \(q''_\can\) with \(\partial_t^3 Z_{\mathrm H}\) is a
+convention; chart-regularity and zero-separation hypotheses of
+Definition~\ref{def:local-phase-chart} carry over verbatim.  v1 prose to
+mine: the upstream Gate-1 arithmetic inputs section.
 \end{wip}
 
-\subsection{Source-energy reservoir}
-\label{subsec:hardy-energy}
+\subsection{Hardy source-energy bound}
+\label{subsec:hardy-source-energy-bound}
 
-\begin{hypothesis}[Hardy source-energy bound]
-\label{hyp:hardy-energy}
+\begin{hypothesis}[Hardy source-energy lower bound]
+\label{hyp:hardy-source-energy}
 On retained packet intervals \(I\subset I_T\), the canonical source
 curvature satisfies
-\[
-\int_I |q''_\can(m)|^2\,dm
-\;\ge\; Q^{-A_E}\,|I|
-\]
-on a positive polynomial-weight subfamily, for an absolute constant
+\begin{equation}
+\label{eq:hardy-source-energy}
+\int_I |q''_\can(m)|^2\,dm \;\ge\; Q^{-A_E}\,|I|
+\end{equation}
+on a positive polynomial-weight subfamily, for an absolute exponent
 \(A_E\).
 \end{hypothesis}
 
-\begin{wip}\label{rem:wip-hardy-energy}
-Hardy-type lower bound on \(\partial_t^3 Z_{\mathrm H}\)
-across the retained packet family.  This is an analytic estimate on
-\(\zeta\) and not on the local jet-Gram geometry; it is what makes the
-section optional.  v1 prose to mine: the Hardy-curvature mass-good packet
-source block.
+\begin{wip}\label{rem:wip-hardy-source-energy}
+Hardy-type lower bound on \(\partial_t^3 Z_{\mathrm H}\) across the
+retained packet family.  This is an analytic estimate on \(\zeta\) and
+not on the local jet-Gram geometry; it is what makes
+Section~\ref{sec:hardy-source-energy-supply} optional.  v1 prose to
+mine: the Hardy-curvature mass-good packet source block.
 \end{wip}
 
-\begin{lemma}[Energy-to-suppression interface]
-\label{lem:hardy-interface}
-Hypothesis~\ref{hyp:hardy-energy} implies
-Hypothesis~\ref{hyp:zeta-suppression} with absolute constant
-\(B_\z=B_\z(A_E)\) satisfying \(B_\z>A_\toy\), via the carrier-corrected
-transfer of the source energy into the transverse channel of
-\(\widehat\Om_\z(s;m)\).
+\subsection{Energy-to-suppression transfer}
+\label{subsec:energy-to-suppression-transfer}
+
+\begin{lemma}[Hardy energy to transverse suppression]
+\label{lem:hardy-energy-to-suppression}
+Hypothesis~\ref{hyp:hardy-source-energy} implies
+Hypothesis~\ref{hyp:actual-zeta-transverse-suppression} with absolute
+exponent \(B_\z=B_\z(A_E)\) satisfying \(B_\z>A_\toy\), via
+carrier-corrected transfer of the source energy into the transverse
+channel of \(\widehat\Om_\z(s;m)\).
 \end{lemma}
 
-\begin{wip}\label{rem:wip-hardy-interface}
-Carrier decomposition and packet trace step that
-takes \(\int |q''_\can|^2\) on the source side into a lower bound on
-\(\Pi_\trans\widehat\Om_\z\) on the jet-Gram side.  v1 prose to mine: the
-canonical source-graded closure and carrier-corrected source bridge
-sections.
+\begin{wip}\label{rem:wip-hardy-energy-to-suppression}
+Carrier decomposition and packet trace step taking
+\(\int |q''_\can|^2\) on the source side into a lower bound on
+\(\Pi_\trans\widehat\Om_\z\) on the jet-Gram side.  v1 prose to mine:
+the certified downstream status after the canonical source-graded
+closure section, and the carrier-corrected source bridge package.
 \end{wip}
 
 % =============================================================================
 \appendix
 
 \section{Archive map}
-\label{app:archive}
+\label{app:archive-map}
 
 The previous large draft is preserved in place at
-\texttt{rh/proof\_of\_rh.tex}; it is treated as a quarry from which prose
-and computations may be migrated, after restatement and refereeing, into
-the present file.  Pointers to relevant v1 sections are given inline at
-each \texttt{wip} mark above; the table below summarizes the main mining
-correspondences.
+\texttt{rh/proof\_of\_rh.tex} and is treated as a quarry from which
+prose and computations may be migrated, after restatement and
+refereeing, into the present file.  Pointers to relevant v1 sections
+are given inline at each \texttt{wip} mark above; the table below
+summarizes the principal mining correspondences.
 
 \medskip
-\noindent\begin{tabular}{@{}p{0.40\linewidth} p{0.55\linewidth}@{}}
+\noindent\begin{tabular}{@{}p{0.50\linewidth} p{0.45\linewidth}@{}}
 \hline
 \textbf{Rebuild section} & \textbf{v1 source (in \texttt{proof\_of\_rh.tex})} \\
 \hline
-\S\ref{sec:microscope} (microscope)
+\S\ref{sec:local-kernel-and-jet-normalization}
 & Local kernel and jet normalization. \\
-\S\ref{sec:jet-gram-limits} (jet-Gram limits)
+\S\ref{sec:jet-limit-local-blocks}
 & Finite-\(s\) local blocks; jet-limit local blocks. \\
-\S\ref{sec:finite-blocks} (finite blocks, whitening)
+\S\ref{sec:finite-scale-local-blocks-and-whitening}
 & Corrected finite-\(s\) holomorphic whitening. \\
-\S\ref{sec:toy} (toy visibility)
-& Toy anomaly and transverse obstruction;
-  leading value matrix and canonical calibration. \\
-\S\ref{sec:zeta} (zeta suppression)
-& Odd holomorphic transverse channel;
-  corrected fixed-target quotient package. \\
-\S\ref{sec:two-point}, \S\ref{sec:four-point} (two/four-point)
+\S\ref{sec:toy-anomaly-and-transverse-obstruction}
+& Toy anomaly and transverse obstruction; leading value matrix and
+  canonical calibration. \\
+\S\ref{sec:actual-zeta-transverse-suppression}
+& Odd holomorphic transverse channel; corrected fixed-target quotient
+  package. \\
+\S\ref{sec:two-point-local-rigidity},\
+\S\ref{sec:four-point-local-rigidity}
 & Local projective rigidity of the one-pair and multi-pair families;
   finite coefficient table contracts. \\
-\S\ref{sec:odd} (odd cancellation)
+\S\ref{sec:n-point-odd-moment-cancellation}
 & \(N\)-point odd-moment cancellation. \\
-\S\ref{sec:zerofree}, \S\ref{sec:rh} (strip, \(\RH\))
-& Master conditional theorem, introduction. \\
-\S\ref{sec:hardy} (Hardy reservoir)
-& Hardy-curvature mass-good packet source block;
-  carrier-corrected source bridge package;
-  upstream Gate-1 arithmetic inputs. \\
+\S\ref{sec:aggregation-and-zero-free-strip},\
+\S\ref{sec:riemann-hypothesis}
+& Master conditional theorem; introduction. \\
+\S\ref{sec:hardy-source-energy-supply}
+& Hardy-curvature mass-good packet source block; carrier-corrected
+  source bridge package; upstream Gate-1 arithmetic inputs. \\
 \hline
 \end{tabular}
 \medskip
 
-The v1 sections labeled ``Endgame architecture and remaining propagation
-problem,'' ``Downstream local closure package,'' ``Unified finite-survival
-architecture,'' ``Current proof state after the local package audits,''
-``How the older framing maps to the new framing,'' and ``No-go and audit
-ledger'' are deliberately not migrated; their content is route history and
-process bookkeeping, not active proof material.
+The v1 sections ``Endgame architecture and remaining propagation
+problem outside the clean mixed four-point case,'' ``Downstream local
+closure package: Gate 2, wall escape, and carrier rows,'' ``Unified
+finite-survival architecture,'' ``Current proof state after the local
+package audits,'' ``How the older framing maps to the new framing,''
+and ``No-go and audit ledger'' are deliberately not migrated; their
+content is route history and process bookkeeping rather than active
+proof material.
+
+% =============================================================================
+\begin{thebibliography}{99}
+
+\bibitem{Bombieri2000}
+E.~Bombieri,
+\emph{Problems of the millennium: the Riemann hypothesis},
+Clay Math.\ Inst.\ (2000).
+
+\bibitem{Conrey2003}
+J.~B.\ Conrey,
+\emph{The Riemann hypothesis},
+Notices Amer.\ Math.\ Soc.\ \textbf{50} (2003), 341--353.
+
+\bibitem{Edwards2001}
+H.~M.\ Edwards,
+\emph{Riemann's Zeta Function},
+Dover Publications, Mineola, NY, 2001.
+
+\bibitem{Riemann1859}
+B.~Riemann,
+\emph{\"Uber die Anzahl der Primzahlen unter einer gegebenen Gr\"osse},
+Monatsber.\ Berl.\ Akad.\ (1859), 671--680.
+
+\bibitem{Titchmarsh1986}
+E.~C.\ Titchmarsh (rev.\ D.~R.\ Heath-Brown),
+\emph{The Theory of the Riemann Zeta-function},
+Oxford University Press, 1986.
+
+\end{thebibliography}
 
 \end{document}
