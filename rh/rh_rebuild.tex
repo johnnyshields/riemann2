@@ -115,6 +115,9 @@
 \newcommand{\Tr}{\operatorname{Tr}}
 \newcommand{\Ker}{\operatorname{Ker}}
 \newcommand{\sgn}{\operatorname{sgn}}
+% Two additions used in this rebuild but absent from proof_of_rh.tex.
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\trans}{\mathrm{trans}}
 
 % Skeleton-only environment: marks an unproven leaf as a remark titled
 % `Gap'.  Each occurrence carries a `rem:wip-<name>' label so gaps are
@@ -175,9 +178,9 @@ value/derivative space --- the toy mode --- which survives the natural
 value/gauge quotient.  The actual zeta phase, under the same quotient,
 cannot realize that mode: the transverse channel of the actual whitened
 block is suppressed at a strictly larger polynomial exponent in \(Q\)
-than the toy lower bound.  The clash is two-point at minimum and
-four-point in the full symmetry quartet \(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\),
-propagated across heights by an \(N\)-point odd-moment cancellation.
+than the toy lower bound.  The clash is two-point at minimum and four-point in the full symmetry quartet
+\(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\), propagated across heights by
+an \(N\)-point odd-moment cancellation.
 Aggregation over the dyadic height ladder gives an unconditional
 zero-free strip around the critical line; combined with standard
 low-height verification of \(\RH\), this yields the Riemann hypothesis.
@@ -204,7 +207,7 @@ The active spine of the argument is the chain
 &\;\longrightarrow\;
 \text{\S\ref{sec:toy-anomaly-and-transverse-obstruction}\,/\,\S\ref{sec:actual-zeta-transverse-suppression}}
 \;\longrightarrow\;
-\text{\S\ref{sec:two-point-local-rigidity}\,/\,\S\ref{sec:four-point-local-rigidity}}\\
+\text{\S\ref{sec:projective-rigidity}}\\
 &\;\longrightarrow\;
 \text{\S\ref{sec:n-point-odd-moment-cancellation}}
 \;\longrightarrow\;
@@ -215,7 +218,7 @@ The active spine of the argument is the chain
 \]
 Section~\ref{sec:hardy-source-energy-supply} stands aside: it provides the
 optional Hardy source-energy supply consumed by
-Section~\ref{sec:two-point-local-rigidity}\,/\,Section~\ref{sec:four-point-local-rigidity}
+Section~\ref{sec:projective-rigidity}
 when their standalone forms are insufficient.  All cross-references to
 Section~\ref{sec:hardy-source-energy-supply} from earlier sections are
 forward references; that section is self-contained.
@@ -443,8 +446,8 @@ the curvature estimate subsection and the tail curvature bound section.
 
 The jet-limit identities of Section~\ref{sec:jet-limit-local-blocks} are
 not directly usable: the comparison theorems of
-Sections~\ref{sec:two-point-local-rigidity}
-and~\ref{sec:four-point-local-rigidity} require the same blocks at
+Section~\ref{sec:projective-rigidity} requires
+the same blocks at
 finite separation \(s>0\) uniformly in \(s\) and the midpoint \(m\).
 Whitening is the change of basis that absorbs the positivity of \(J\)
 into the normalization and produces a single dimensionless finite-scale
@@ -655,18 +658,36 @@ distinct hypothesis.
 \end{remark}
 
 % =============================================================================
-\section{Two-point local rigidity}
-\label{sec:two-point-local-rigidity}
+\section{Local projective rigidity}
+\label{sec:projective-rigidity}
 
-The simplest comparison takes a hypothetical off-line zero \(\rho\) and a
-single symmetry partner --- typically \(\bar\rho\) or \(1-\rho\) --- and
-reads off the joint contribution to the cross-block \(N_m(s)\).  Under
-\(\Pi_\trans\), the toy visibility lower bound and the actual-zeta
-suppression upper bound apply at the matched midpoint and separation; the
-exponent inequality \(A_\toy<B_\z\) is incompatible with the existence
-of the pair.
+Sections~\ref{sec:toy-anomaly-and-transverse-obstruction}
+and~\ref{sec:actual-zeta-transverse-suppression} provide the toy lower
+bound and the actual-zeta upper bound on the transverse anomaly under
+\(\Pi_\trans\).  The present section assembles the comparison.  On the
+two-point family attached to \(\rho\) and a single symmetry partner,
+and on the four-point family of the full symmetric quartet
+\(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\), the exponent inequality
+\(A_\toy<B_\z\) (resp.\ its four-point analogue
+\(A_\toy^{(4)}<B_\z^{(4)}\)) is incompatible with the existence of the
+configuration.  The two cases share the comparison mechanism but differ
+in the underlying jet-Gram object: the two-point case uses the cross-block
+\(N_{12}\) of Lemma~\ref{lem:cross-block-jet-limit}; the four-point case
+uses a four-center analogue \(\widehat\Om_\z^{(4)}\) and a four-point
+extension \(\Pi_\trans^{(4)}\) of the projection of
+Definition~\ref{def:transverse-projection}.  Either case suffices for the
+aggregation step in
+Section~\ref{sec:aggregation-and-zero-free-strip}.
 
-\begin{theorem}[Two-point local rigidity]
+\subsection{Two-point comparison}
+\label{subsec:two-point-comparison}
+
+The two-point comparison takes \(\rho\) and one symmetry partner
+(typically \(\bar\rho\) or \(1-\rho\)) and reads off the joint
+contribution to \(N_m(s)\) at matched midpoint and separation.  The
+exponent inequality \(A_\toy<B_\z\) excludes the pair.
+
+\begin{theorem}[Two-point rigidity]
 \label{thm:two-point-rigidity}
 Let \(\rho=\beta+i\gamma\) with \(\beta\ne\tfrac12\) and \(|\gamma|\)
 sufficiently large, and let \((T_1,T_2)\) be the height pair attached
@@ -694,7 +715,7 @@ place.
 \label{rem:two-point-hardy-supply}
 If Hypothesis~\ref{hyp:actual-zeta-transverse-suppression} cannot be
 discharged from the local jet-Gram geometry alone for the two-point
-pairing, the source-energy lower bound
+case, the source-energy lower bound
 Hypothesis~\ref{hyp:hardy-source-energy} of
 Section~\ref{sec:hardy-source-energy-supply}, transferred via
 Lemma~\ref{lem:hardy-energy-to-suppression}, supplies the missing
@@ -702,40 +723,37 @@ polynomial-in-\(Q\) room.  Theorem~\ref{thm:two-point-rigidity} is then
 conditional on that source as well as on the local inputs.
 \end{remark}
 
-% =============================================================================
-\section{Four-point local rigidity in the symmetric quartet}
-\label{sec:four-point-local-rigidity}
+\subsection{Four-point comparison in the symmetric quartet}
+\label{subsec:four-point-comparison-symmetric-quartet}
 
-The full symmetry packet of an off-line zero is the quartet
-\[
-\mathcal Z(\rho)=\{\rho,\bar\rho,1-\rho,1-\bar\rho\}.
-\]
-The four-center jet-Gram block carries strictly more rigidity than the
-two-point cross-block: the toy visibility lower bound holds in a refined
-quotient invisible to the two-point comparison, and the matching
-suppression hypothesis is correspondingly stronger.  The four-point
-rigidity theorem is stated independently of
-Section~\ref{sec:two-point-local-rigidity}; either route suffices for the
-aggregation step in
-Section~\ref{sec:aggregation-and-zero-free-strip}.
+The four-point comparison uses the full symmetry packet
+\(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\).  The four-center jet-Gram block
+carries strictly more rigidity than the two-point cross-block: the toy
+visibility lower bound holds in a refined quotient invisible to the
+two-point comparison, and the matching suppression hypothesis is
+correspondingly stronger.  The four-point theorem is stated
+independently of Theorem~\ref{thm:two-point-rigidity}.
 
-\begin{theorem}[Four-point local rigidity]
+\begin{theorem}[Four-point rigidity]
 \label{thm:four-point-rigidity}
-Let \(\rho\) be a hypothetical off-line zero and \(\mathcal Z(\rho)\) its
-symmetry quartet.  The four-center jet-Gram comparison, under the
-extension of \(\Pi_\trans\) to the four-point quotient, yields
-\(A_\toy^{(4)}<B_\z^{(4)}\) for absolute four-point exponents, and hence
-\(\mathcal Z(\rho)\) cannot be a quartet of zeros of \(\zeta\).
+Let \(\rho\) be a hypothetical off-line zero and
+\(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\) its symmetry quartet.  The
+four-center jet-Gram comparison, under the extension
+\(\Pi_\trans^{(4)}\) of the projection of
+Definition~\ref{def:transverse-projection} to the four-point quotient,
+yields \(A_\toy^{(4)}<B_\z^{(4)}\) for absolute four-point exponents,
+and hence \(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\) cannot be a quartet of
+zeros of \(\zeta\).
 \end{theorem}
 
 \begin{wip}\label{rem:wip-four-point-rigidity}
-State and prove the four-center analogue of \(\widehat\Om_\z\), the
-four-point projection \(\Pi_\trans^{(4)}\), and the four-point versions
-of Theorem~\ref{thm:toy-anomaly-visibility} and
-Hypothesis~\ref{hyp:actual-zeta-transverse-suppression}; assemble the
-exponent inequality.  v1 prose to mine: the local projective rigidity of
-the one-pair and multi-pair families section, and the corrected
-fixed-target quotient package.
+State and prove the four-center analogue \(\widehat\Om_\z^{(4)}\) of
+\(\widehat\Om_\z\); the four-point projection \(\Pi_\trans^{(4)}\); and
+the four-point versions of Theorem~\ref{thm:toy-anomaly-visibility} and
+Hypothesis~\ref{hyp:actual-zeta-transverse-suppression}.  Assemble the
+exponent inequality.  v1 prose to mine: the local projective rigidity
+of the one-pair and multi-pair families section, together with the
+corrected fixed-target quotient package.
 \end{wip}
 
 \begin{remark}[Hardy-assisted route, if invoked]
@@ -836,7 +854,7 @@ source-energy lower bound that
 Theorems~\ref{thm:two-point-rigidity}
 and~\ref{thm:four-point-rigidity} may invoke when their standalone
 forms in
-Sections~\ref{sec:two-point-local-rigidity}\,/\,\ref{sec:four-point-local-rigidity}
+Section~\ref{sec:projective-rigidity}
 are insufficient.  Nothing earlier in the paper depends on this
 section.
 
@@ -935,8 +953,7 @@ summarizes the principal mining correspondences.
 \S\ref{sec:actual-zeta-transverse-suppression}
 & Odd holomorphic transverse channel; corrected fixed-target quotient
   package. \\
-\S\ref{sec:two-point-local-rigidity},\
-\S\ref{sec:four-point-local-rigidity}
+\S\ref{sec:projective-rigidity}
 & Local projective rigidity of the one-pair and multi-pair families;
   finite coefficient table contracts. \\
 \S\ref{sec:n-point-odd-moment-cancellation}
