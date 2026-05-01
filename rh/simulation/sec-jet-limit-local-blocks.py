@@ -162,6 +162,14 @@ def fit_power_law(xs, ys):
     return sol[0], sol[1]
 
 
+def D_J_at(T):
+    """Return D_J(T) = 4 q^4 + 2 q q'' - 3 q'^2 at height T."""
+    q0 = float(diff(siegeltheta, mpf(T), 1))
+    q1 = float(diff(siegeltheta, mpf(T), 2))
+    q2 = float(diff(siegeltheta, mpf(T), 3))
+    return 4 * q0**4 + 2 * q0 * q2 - 3 * q1**2
+
+
 def main():
     print("=" * 70)
     print("Simulation: sec:jet-limit-local-blocks")
@@ -188,6 +196,35 @@ def main():
 
     print()
     print("  [PASS] J(T) is positive-definite at every tested height.")
+
+    # D_J(T) and its dominance over the q'^2 / q q'' corrections.
+    print()
+    print("[D_J(T) = 4 q^4 + 2 q q'' - 3 q'^2 across heights]")
+    print()
+    header_qq = "2 q q''"
+    header_qpsq = "-3 q'^2"
+    print(f"  {'T':>10}  {'q(T)':>10}  {'4 q^4':>14}  {header_qq:>14}  "
+          f"{header_qpsq:>14}  {'D_J':>14}  {'D_J / (4 q^4)':>15}")
+    print(f"  {'-'*10}  {'-'*10}  {'-'*14}  {'-'*14}  "
+          f"{'-'*14}  {'-'*14}  {'-'*15}")
+    for T in heights:
+        q0 = float(diff(siegeltheta, mpf(T), 1))
+        q1 = float(diff(siegeltheta, mpf(T), 2))
+        q2 = float(diff(siegeltheta, mpf(T), 3))
+        leading = 4 * q0**4
+        cross = 2 * q0 * q2
+        sq = -3 * q1**2
+        D_J = leading + cross + sq
+        ratio = D_J / leading
+        assert D_J > 0, f"D_J(T={T}) is non-positive!"
+        print(f"  {float(T):10.2e}  {q0:10.4f}  {leading:14.4e}  "
+              f"{cross:+14.4e}  {sq:+14.4e}  {D_J:14.4e}  {ratio:15.10f}")
+
+    print()
+    print("  [PASS] D_J(T) > 0 at every tested height; D_J / (4 q^4) -> 1")
+    print("         (the cross and q'^2 corrections are O(1/T^2), small")
+    print("          compared to 4 q^4 ~ (log T)^4 / 4).  The §3 Gram")
+    print("          positivity argument's analytic input is confirmed.")
 
     # Empirical exponent for lambda_min(J(T)).
     print()

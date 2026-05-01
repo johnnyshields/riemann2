@@ -2,45 +2,22 @@
 % Patch: §2 sec:local-kernel-and-jet-normalization
 %
 % Target file:   rh/rh_rebuild.tex
-% Target lines:  307 through 471 (the entire current §2 block, including
-%                §2.1 Local phase chart, §2.2 Phase kernel def, §2.3
-%                Point-to-jet transform).
+% Target lines:  307 through 471 (the entire current §2 block).
 %
 % Action: replace the existing §2 with the content below.
 %
 % Closes:
-%   - Identifies Phi = theta (Riemann-Siegel) on retained windows;
-%     chart existence is unconditional with this choice.
-%   - Adds lem:phase-kernel-properties (symmetry, real-valuedness,
-%     removable-singularity).
-%   - Adds lem:phase-kernel-derivatives (the kernel derivatives at
-%     (T_1, T_2) and (T,T) used in §3).
-%   - Adds lem:phase-derivative-lower-bound proving (P2): q = theta'
-%     has a polynomial-in-Q lower bound on retained packets, with
-%     c_q = 0 (q bounded below by an absolute positive constant) at
-%     large T, by the Riemann-Siegel asymptotic.
-%   - Drops the original (P1) "chart-denominator lower bound" from
-%     Definition def:local-phase-chart: it was inherited from v1's
-%     more general chart, but with Phi = theta there are no chart
-%     denominators.  Replaced by Remark rem:chart-regularity-zeta-side
-%     deferring zeta-side regularity to the section that consumes it.
-%   - Adds wip-audit rem:wip-audit-chart-regularity-placement for the
-%     structural design question of whether the deferred conditions
-%     could be hoisted to chart construction.
+%   rem:wip-local-phase-chart  (chart construction is closed; the
+%                               only residual is rem:wip-audit-chart-
+%                               regularity-placement, a structural
+%                               audit, not a missing proof)
 %
-% Status changes:
+% Status:
 %   \statusmig    not-started -> migrated
-%       (chart identification + kernel algebra + (P2) all closed;
-%        the only residual gap is the placement audit, which is a
-%        design choice, not a missing proof)
 %   \statussympy  not-started -> verified
-%       (verification: rh/sympy/sec-local-kernel-and-jet-normalization.py)
+%       (rh/sympy/sec-local-kernel-and-jet-normalization.py)
 %   \statussim    not-started -> verified
-%       (verification: rh/simulation/sec-local-kernel-and-jet-normalization.py)
-%
-% Verification scripts:
-%   python rh/sympy/sec-local-kernel-and-jet-normalization.py
-%   python rh/simulation/sec-local-kernel-and-jet-normalization.py
+%       (rh/simulation/sec-local-kernel-and-jet-normalization.py)
 % =============================================================================
 
 % =============================================================================
@@ -54,129 +31,104 @@
 \statuslean{not-started}
 \par\medskip
 
-A candidate off-line zero \(\rho\) at height \(\gamma\) is detected only
-at scales comparable to \(1/\gamma\), and the analytic data of \(\zeta\)
-beyond a window of width \(\asymp 1/Q(\gamma)\) around \(\gamma\) does not
-enter the comparison object.  We therefore fix a real smooth phase
-\(\Ph\) for \(\zeta\) on such a window once and for all, and never use
-\(\zeta\) again --- only \(\Ph\), and only through the phase kernel
-\(K_\Ph\) and its Taylor jets at one or two centers.
+Fix a height \(\gamma\) and let \(T = \gamma\).  We work on a window
+\(I_T \subset \mathbb R\) centered at \(T\) of length
+\(\asymp 1/Q(T)\), where \(Q\) is a fixed slowly growing function of
+the height.  All subsequent local estimates are expressed through the
+phase kernel \(K_\Ph\) on \(I_T\times I_T\) and its Taylor jets at
+one or two centers.
 
 \subsection{Local phase chart}
 \label{subsec:local-phase-chart}
 
 \begin{definition}[Local phase chart]
 \label{def:local-phase-chart}
-For each height \(T\) we fix a real smooth function \(\Ph_T\) on an
+For each height \(T\), \(\Ph_T\) is a real smooth function on an
 interval \(I_T\) of length \(\asymp 1/Q(T)\) centered at \(T\)
 satisfying:
 \begin{enumerate}[label=\textup{(P\arabic*)},leftmargin=*]
-\item \(\Ph_T\) is the Riemann--Siegel theta function \(\theta\) on
-  \(I_T\); see Remark~\ref{rem:phase-chart-identification}.  This
-  identification is unconditional and introduces no chart denominator;
-\item the normalized derivative \(q := \Ph_T'\) satisfies a
-  polynomial-in-\(Q\) lower spectral bound on retained packets,
-  \(q(t) \ge Q^{-c_q}\) for an absolute exponent \(c_q\ge 0\), as
-  established in Lemma~\ref{lem:phase-derivative-lower-bound}.
+\item \(\Ph_T = \theta\), the Riemann--Siegel theta function;
+\item \(q := \Ph_T'\) admits a polynomial-in-\(Q\) lower bound on
+  retained packets, \(q(t) \ge Q^{-c_q}\) for an absolute exponent
+  \(c_q \ge 0\) (Lemma~\ref{lem:phase-derivative-lower-bound}).
 \end{enumerate}
-We write \(\Ph\) and \(q\) for \(\Ph_T,q\) when \(T\) is fixed by
-context.
+We write \(\Ph,q\) for \(\Ph_T,q\) when \(T\) is fixed by context.
 \end{definition}
 
-\begin{remark}[Standard identification \(\Ph_T = \theta\)]
+\begin{remark}[Identification \(\Ph_T = \theta\)]
 \label{rem:phase-chart-identification}
-The local phase \(\Ph_T\) of Definition~\ref{def:local-phase-chart} is
-the Riemann--Siegel theta function \(\theta\) restricted to \(I_T\).
-The functional equation of \(\zeta\) gives the factorization
+The functional equation of \(\zeta\) gives
 \[
 \zeta(\tfrac12 + it) = e^{-i\theta(t)}\, Z(t),
 \qquad
 \theta(t) = \arg\Gamma\!\left(\tfrac14 + \tfrac{it}{2}\right) - \frac{t}{2}\log\pi,
 \]
-where \(Z\) is real-valued on \(\mathbb R\); we set
-\(\Ph_T(t) := \theta(t)\) on \(I_T\).  Since \(\theta\) is defined and
-smooth on all of \(\mathbb R\), the chart construction is
-unconditional with this choice and introduces no chart denominator
-that needs to be bounded.
+with \(Z\) real on \(\mathbb R\); we set \(\Ph_T(t) := \theta(t)\) on
+\(I_T\).
 \end{remark}
 
-\begin{lemma}[Phase-derivative lower bound: (P2)]
+\begin{lemma}[Phase-derivative lower bound]
 \label{lem:phase-derivative-lower-bound}
-With \(\Ph_T = \theta\) (Remark~\ref{rem:phase-chart-identification})
-and \(Q\) any function polynomial in \(\log T\), the lower bound
-\(q(t) \ge Q^{-c_q}\) of Definition~\ref{def:local-phase-chart}
-\textup{(P2)} holds with \(c_q = 0\) on the window \(I_T\) for all
-\(T\) sufficiently large.  Concretely,
+With \(\Ph_T = \theta\) and \(Q\) polynomial in \(\log T\),
+\(q(t) \ge Q^{-c_q}\) holds with \(c_q = 0\) on \(I_T\) for all
+sufficiently large \(T\).  Concretely,
 \[
-q(t) \;\ge\; \tfrac12 \log(T/(4\pi)) - C\,T^{-2}
-\qquad
-\text{for all }t \in I_T,\ \text{with absolute }C>0.
+q(t) \ge \tfrac12 \log(T/(4\pi)) - C\,T^{-2}
+\qquad (t \in I_T)
+\]
+for an absolute constant \(C\).
+\end{lemma}
+
+\begin{proof}
+The Riemann--Siegel asymptotic
+\cite{Edwards2001,Titchmarsh1986}
+\[
+\theta(t) = \frac{t}{2}\log\frac{t}{2\pi} - \frac{t}{2} - \frac{\pi}{8}
+          + \frac{1}{48 t} + O(t^{-3})
+\]
+gives \(q(t) = \theta'(t) = \tfrac12\log(t/(2\pi)) - 1/(48 t^2) +
+O(t^{-4})\).  On \(I_T\), \(t \ge T - 1/Q \ge T/2\) once
+\(Q \ge 2/T\), and the displayed bound follows.
+\end{proof}
+
+\begin{lemma}[Phase-derivative upper bounds]
+\label{lem:phase-derivative-upper-bounds}
+With \(\Ph_T = \theta\),
+\[
+q'(T) \;=\; \frac{1}{2T} + O(T^{-3}),\qquad
+q''(T) \;=\; -\frac{1}{2T^2} + O(T^{-4}).
 \]
 \end{lemma}
 
 \begin{proof}
-The Riemann--Siegel asymptotic for \(\theta\)
-\cite{Edwards2001,Titchmarsh1986} gives
-\[
-\theta(t) = \frac{t}{2}\log\frac{t}{2\pi} - \frac{t}{2} - \frac{\pi}{8}
-          + \frac{1}{48 t} + O(t^{-3}),
-\]
-so by termwise differentiation
-\[
-q(t) = \theta'(t) = \tfrac12\log(t/(2\pi)) - \frac{1}{48\,t^2} + O(t^{-4}).
-\]
-On the window \(I_T\) of width \(\asymp 1/Q(T)\) centered at \(T\),
-\(t \ge T - 1/Q \ge T/2\) once \(Q \ge 2/T\), so
-\[
-q(t) \ge \tfrac12\log\bigl(T/(4\pi)\bigr) - C\,T^{-2}
-\]
-for an absolute constant \(C\).  The right-hand side tends to
-\(+\infty\) as \(T\to\infty\); for any fixed \(c_q \ge 0\) and any
-\(Q\) polynomial in \(\log T\), the bound \(q(t)\ge Q^{-c_q}\) holds
-uniformly on \(I_T\) for \(T\) sufficiently large.  In particular
-(P2) is satisfied with \(c_q = 0\): \(q\) is bounded below by an
-absolute positive constant on retained packets at large heights.
-Symbolic and numerical verification of the differentiated asymptotic
-are in
-\texttt{rh/sympy/sec-local-kernel-and-jet-normalization.py} and
-\texttt{rh/simulation/sec-local-kernel-and-jet-normalization.py}.
+Termwise differentiation of the Riemann--Siegel asymptotic in the
+proof of Lemma~\ref{lem:phase-derivative-lower-bound}.
 \end{proof}
 
-\begin{remark}[Chart regularity of \(\zeta\)-side data, deferred]
+\begin{remark}[\(\zeta\)-side regularity]
 \label{rem:chart-regularity-zeta-side}
-The chart of Definition~\ref{def:local-phase-chart} is constructed
-from \(\theta\) alone; it depends on \(\zeta\) only through the
-factorization \(\zeta(\tfrac12 + it) = e^{-i\theta(t)} Z(t)\) and not
-through any quantitative regularity of \(Z\) or of
-\(|\zeta(\tfrac12 + it)|\).  Conditions specific to \(\zeta\)-side
-data --- a polynomial lower bound on \(|Z(t)|\) on the window, a
-no-zeros condition on \(I_T\), or a polynomial lower bound on
-\(|\zeta(\tfrac12 + it)|\) --- are introduced where they are
-consumed: in the suppression hypotheses of
-Section~\ref{sec:actual-zeta-transverse-suppression} or in the
-canonical-source-curvature analysis of
-Section~\ref{sec:source-energy-supply}.  No such condition is imposed
-at chart construction.
+The chart depends on \(\zeta\) only through
+\(\zeta(\tfrac12 + it) = e^{-i\theta(t)} Z(t)\).  Quantitative
+\(\zeta\)-side conditions (lower bounds on \(|Z|\), \(|\zeta|\), or
+no-zeros conditions on \(I_T\)) are imposed where they are consumed
+in
+Section~\ref{sec:actual-zeta-transverse-suppression} and
+Section~\ref{sec:source-energy-supply}, not at chart construction.
 \end{remark}
 
 \begin{wip}\label{rem:wip-audit-chart-regularity-placement}
-\textbf{Structural audit, not a missing proof.}  Revisit whether the
-\(\zeta\)-side chart-regularity conditions deferred by
-Remark~\ref{rem:chart-regularity-zeta-side} can be hoisted up to
-chart construction without restricting the retained packet family
-beyond what
+Structural audit, not a missing proof.  Revisit whether the
+\(\zeta\)-side conditions of
+Remark~\ref{rem:chart-regularity-zeta-side} can be hoisted to
+Definition~\ref{def:local-phase-chart} as a condition (P3) without
+restricting the retained packet family beyond what
 Sections~\ref{sec:actual-zeta-transverse-suppression}
-and~\ref{sec:source-energy-supply} already require.  If yes, fold
-them into a third condition (P3) of
-Definition~\ref{def:local-phase-chart} and discharge once at
-construction time; if no, keep them at point of use.  The program
-goes through under either placement; this audit is for cleanliness.
-Revisit when those sections are migrated.
+and~\ref{sec:source-energy-supply} already require.  Revisit when
+those sections are migrated.
 \end{wip}
 
 \begin{definition}[Phase kernel]
 \label{def:phase-kernel}
-The phase kernel of \(\Ph\) on \(I_T\) is
 \begin{equation}
 \label{eq:phase-kernel}
 K_\Ph(x,y)=
@@ -189,95 +141,58 @@ K_\Ph(x,y)=
 
 \begin{lemma}[Phase-kernel basic properties]
 \label{lem:phase-kernel-properties}
-Let \(\Ph\in C^3(I_T;\mathbb R)\).  The phase kernel \(K_\Ph\) of
-Definition~\ref{def:phase-kernel} satisfies:
+For \(\Ph\in C^3(I_T;\mathbb R)\), the kernel \(K_\Ph\) of
+\eqref{eq:phase-kernel} satisfies:
 \begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
-\item \emph{symmetry}: \(K_\Ph(x,y) = K_\Ph(y,x)\);
-\item \emph{real-valuedness}: \(K_\Ph(x,y)\in\mathbb R\) for all
-  \((x,y)\in I_T\times I_T\);
-\item \emph{removable singularity}:
-  \(\lim_{x\to y} K_\Ph(x,y) = q(y)/\pi\), and the displayed
-  diagonal value \eqref{eq:phase-kernel} is the unique continuous
-  extension across the diagonal.
+\item \(K_\Ph(x,y) = K_\Ph(y,x)\);
+\item \(K_\Ph(x,y)\in\mathbb R\) for \((x,y)\in I_T\times I_T\);
+\item \(\lim_{x\to y} K_\Ph(x,y) = q(y)/\pi\), continuously across
+  the diagonal.
 \end{enumerate}
 \end{lemma}
 
 \begin{proof}
 (i) For \(x\ne y\),
-\[
-K_\Ph(y,x) = \frac{\sin(\Ph(y)-\Ph(x))}{\pi(y-x)}
-           = \frac{-\sin(\Ph(x)-\Ph(y))}{-\pi(x-y)}
-           = K_\Ph(x,y).
-\]
-(ii) The numerator \(\sin(\Ph(x)-\Ph(y))\) is real because \(\Ph\) is
-real-valued; the denominator \(\pi(x-y)\) is real; the diagonal value
-\(q(y)/\pi\) is real.  Hence \(K_\Ph\) is real-valued throughout.
-(iii) Set \(x = y+h\) with \(h\to 0\).  Taylor-expanding \(\Ph\)
-around \(y\),
-\[
-\Ph(y+h) - \Ph(y) = h\,q(y) + \tfrac{h^2}{2}q'(y) + O(h^3),
-\]
-so
-\[
-\frac{\sin(\Ph(y+h)-\Ph(y))}{\pi h}
-= \frac{h\,q(y) + O(h^2)}{\pi h}
-= \frac{q(y)}{\pi} + O(h),
-\]
-which converges to \(q(y)/\pi\) as \(h\to 0\).  Continuity of \(\Ph\)
-and \(q\) makes the displayed extension the unique continuous one.
+\(\sin(\Ph(y)-\Ph(x))/\pi(y-x) = \sin(\Ph(x)-\Ph(y))/\pi(x-y)\).
+(ii) The numerator and denominator are real.
+(iii) Taylor expand: \(\Ph(y+h)-\Ph(y) = h q(y) + O(h^2)\), so
+\(K_\Ph(y+h,y) = q(y)/\pi + O(h)\).
 \end{proof}
 
-\begin{lemma}[Phase-kernel derivatives at distinct points]
+\begin{lemma}[Phase-kernel derivatives]
 \label{lem:phase-kernel-derivatives}
-At distinct points \(T_1 \ne T_2\), with \(s = T_1 - T_2\),
-\(\Del = \Ph(T_1) - \Ph(T_2)\), and \(q_j = q(T_j)\), the partial
-derivatives of \(K_\Ph\) at \((T_1, T_2)\) are
+For \(T_1\ne T_2\) with \(s = T_1 - T_2\),
+\(\Del = \Ph(T_1) - \Ph(T_2)\), and \(q_j = q(T_j)\),
 \begin{align*}
-K_\Ph(T_1, T_2)
-  &= \frac{\sin\Del}{\pi s},\\
-\partial_x K_\Ph(T_1, T_2)
-  &= \frac{q_1\, s\cos\Del - \sin\Del}{\pi s^2},\\
-\partial_y K_\Ph(T_1, T_2)
-  &= \frac{\sin\Del - q_2\, s\cos\Del}{\pi s^2},\\
-\partial_{xy} K_\Ph(T_1, T_2)
-  &= \frac{(q_1+q_2)s\cos\Del + (q_1 q_2 s^2 - 2)\sin\Del}{\pi s^3}.
+K_\Ph(T_1, T_2) &= \frac{\sin\Del}{\pi s},
+&K_x(T_1, T_2) &= \frac{q_1\, s\cos\Del - \sin\Del}{\pi s^2},\\
+K_y(T_1, T_2) &= \frac{\sin\Del - q_2\, s\cos\Del}{\pi s^2},
+&K_{xy}(T_1, T_2)
+&= \frac{(q_1+q_2)s\cos\Del + (q_1 q_2 s^2 - 2)\sin\Del}{\pi s^3}.
 \end{align*}
 \end{lemma}
 
 \begin{proof}
-Write \(K_\Ph(x,y) = N(x,y)/D(x,y)\) with \(N(x,y) = \sin(\Ph(x)-\Ph(y))\)
-and \(D(x,y) = \pi(x-y)\).  Apply the quotient rule and the chain rule
-on \(\sin\), using \(\partial_x \Ph(x) = q(x)\) and
-\(\partial_y \Ph(y) = q(y)\).  The first three identities are direct;
-the mixed second derivative \(\partial_{xy}\) follows by differentiating
-\(\partial_x K_\Ph\) in \(y\), keeping the four terms (carrier \(K\),
-factor \(\sin\Del\), factor \(\cos\Del\), denominator power) and
-collecting.  Symbolic verification entry by entry is in
-\texttt{rh/sympy/sec-local-kernel-and-jet-normalization.py}.
+Direct application of the quotient and chain rules to
+\(K_\Ph(x,y) = \sin(\Ph(x)-\Ph(y))/\pi(x-y)\).
 \end{proof}
 
-\begin{remark}[Diagonal limit of the kernel derivatives]
+\begin{remark}[Diagonal limits]
 \label{rem:kernel-derivatives-diagonal}
-As \(T_2 \to T_1 = T\), the formulas of
-Lemma~\ref{lem:phase-kernel-derivatives} take the diagonal limits
-\[
-K_\Ph(T,T) = \frac{q(T)}{\pi},\qquad
-\partial_x K_\Ph(T,T) = \partial_y K_\Ph(T,T) = \frac{q'(T)}{2\pi},
-\qquad
-\partial_{xy} K_\Ph(T,T) = \frac{q''(T) + 2q(T)^3}{6\pi},
-\]
-which is the kernel-derivative form of \(J(T)\) used in
-\eqref{eq:same-point-as-kernel-derivatives}.  These limits are
-uniform on retained windows by (P1)--(P2) of
-Definition~\ref{def:local-phase-chart}.
+As \(T_2\to T_1 = T\) the formulas of
+Lemma~\ref{lem:phase-kernel-derivatives} have limits
+\(K_\Ph(T,T) = q(T)/\pi\),
+\(K_x(T,T) = K_y(T,T) = q'(T)/(2\pi)\),
+\(K_{xy}(T,T) = (q''(T) + 2q(T)^3)/(6\pi)\),
+giving the kernel-derivative form of \(J(T)\) used in
+\eqref{eq:same-point-as-kernel-derivatives}.
 \end{remark}
 
 \subsection{Point-to-jet transform}
 \label{subsec:point-to-jet-transform}
 
-The kernel \(K_\Ph\) is used only at small symmetric pairs \(T\pm h\).
-We rotate the \(2\times 2\) block at such a pair out of the point basis
-by the \emph{Gram-normalized coalescing even/odd transform}
+For symmetric pairs \(T\pm h\), define the Gram-normalized
+point-to-jet transform
 \begin{equation}
 \label{eq:point-to-jet-transform}
 P_h
@@ -286,22 +201,17 @@ P_h
 \begin{pmatrix}
 1 & 1\\[0.6ex]
 -1/(2h) & 1/(2h)
-\end{pmatrix}.
-\end{equation}
-Equivalently, \eqref{eq:point-to-jet-transform} is obtained from the
-literal central value/derivative jet transform by a fixed diagonal
-congruence:
-\begin{equation}
-\label{eq:gram-vs-jet-congruence}
-P_h
+\end{pmatrix}
 \;=\;
 \diag(\sqrt 2,\, 1/\sqrt 2)\,
 \begin{pmatrix}
 1/2 & 1/2\\[0.6ex]
 -1/(2h) & 1/(2h)
-\end{pmatrix}.
+\end{pmatrix},
 \end{equation}
-With this convention the same-point limit is
+the second equality exhibiting \eqref{eq:point-to-jet-transform} as
+the diagonal congruence of the literal value/derivative jet
+transform.  With this convention,
 \begin{equation}
 \label{eq:same-point-as-kernel-derivatives}
 J(T)
@@ -311,49 +221,23 @@ J(T)
 \partial_x K_\Ph(T,T) & \tfrac12 \partial_{xy} K_\Ph(T,T)
 \end{pmatrix},
 \end{equation}
-which evaluates entry by entry to the explicit phase-kernel formula in
-Lemma~\ref{lem:same-point-jet-limit}.  We refer to the basis produced
-by \(P_h\) as the \emph{Gram-normalized basis}, not the literal
-value/derivative basis: it differs from the latter by the diagonal
-congruence \eqref{eq:gram-vs-jet-congruence}, which carries the
-factor-of-\(2\) rescaling visible in the leading entry of \(J(T)\) and
-the corresponding rescalings of every cross-block and finite-scale
-block downstream.
+which agrees with the explicit formula
+\eqref{eq:same-point-J} of
+Lemma~\ref{lem:same-point-jet-limit}.
 
-\begin{remark}[Pair separation convention]
+\begin{remark}[Pair separation]
 \label{rem:pair-separation-convention}
-We use the symmetric pair \(T\pm h\), not \(T\pm h/2\); the pair
-separation is therefore \(2h\), and the \(1/(2h)\) factor in the lower
-row of \(P_h\) is the inverse separation.  All formulas in
-Sections~\ref{sec:jet-limit-local-blocks}
-and~\ref{sec:finite-scale-local-blocks-and-whitening} are stated under
-that convention.  Any imported lemma using the alternative convention
-\(T\pm h/2\) (or using a \(P_h\) with \(1/h\) in the lower row) must be
-retransformed before insertion.
+We use \(T\pm h\), so the pair separation is \(2h\) and
+\(P_h\) carries \(1/(2h)\) (not \(1/h\)) in its lower row.  Imported
+results stated in the alternative \(T\pm h/2\) convention are to be
+retransformed before use.
 \end{remark}
 
-\begin{remark}[Convention audit: Gram-normalized vs.\ literal jet]
+\begin{remark}[Convention check]
 \label{rem:normalization-audit}
-The downstream object of this paper is a whitened Gram block
-\(\widehat\Om_\z(s;m)\)
-(Definition~\ref{def:whitened-finite-block}); Gram-normalizing the
-even and odd point modes before block extraction is the cleaner
-Hilbert-space convention.  The displayed jet-limit blocks --- the
-\(2 q(T)/\pi\) leading entry and the \(\tfrac1{12}(q''+2q^3)/\pi\)
-corner of \(J(T)\) (Lemma~\ref{lem:same-point-jet-limit}), and the
-matching cross-block entries \(2\sin\Del/(\pi s)\) etc.\ of
-\(N_{12}\) (Lemma~\ref{lem:cross-block-jet-limit}) --- are the
-Gram-normalized blocks; they are the limits of \(P_h A_h P_h^\top\)
-for \eqref{eq:point-to-jet-transform}, not for the literal-jet
-alternative.
-
-The earlier draft \texttt{rh/proof\_of\_rh.tex} contains a convention
-collision at exactly this point: it prints the literal-jet
-transform
-\(P_h^{\mathrm{old}}=\tfrac12\bigl(\begin{smallmatrix}1&1\\-1/h&1/h\end{smallmatrix}\bigr)\)
-and immediately afterward displays the Gram-normalized \(J(T)\) used
-above.  Those two choices do not match.  With \(P_h^{\mathrm{old}}\)
-and the pair \(T\pm h\), conjugation of the raw kernel block produces
+The literal-jet alternative
+\(\tfrac12\bigl(\begin{smallmatrix}1&1\\-1/h&1/h\end{smallmatrix}\bigr)\)
+applied to \(A_h(T)\) at the same pair \(T\pm h\) yields the limit
 \[
 \frac1\pi
 \begin{pmatrix}
@@ -361,19 +245,8 @@ q(T) & \tfrac12 q'(T)\\[0.6ex]
 \tfrac12 q'(T) & \tfrac16\bigl(q''(T)+2q(T)^3\bigr)
 \end{pmatrix},
 \]
-which is the literal central value/derivative jet block, \emph{not}
-the displayed \(J(T)\).  The two differ by the diagonal congruence
-\eqref{eq:gram-vs-jet-congruence}: rescale the \((1,1)\) entry by
-\(2\) and the \((2,2)\) entry by \(1/2\).  Not a typo in either
-matrix --- a convention collision.
-
-The present rebuild fixes the collision in favor of the Gram-normalized
-transform.  All same-point and cross-block jet limits, all finite-scale
-blocks \(G_{m,\pm}(s)\) and \(N_m(s)\), the whitened block
-\(\widehat\Om_\z(s;m)\), and every quotient covector are stated under
-\eqref{eq:point-to-jet-transform}.  The literal-jet alternative would
-also be valid, but only after rescaling each of these objects
-consistently; that rescaling is not done here.  Any imported v1 lemma
-or formula that silently assumes \(P_h^{\mathrm{old}}\) must be
-re-conjugated by \(\diag(\sqrt 2,\,1/\sqrt 2)\) before insertion.
+related to \(J(T)\) of \eqref{eq:same-point-J} by the diagonal
+congruence \(\diag(\sqrt 2, 1/\sqrt 2)\) of
+\eqref{eq:point-to-jet-transform}.  The Gram-normalized form is used
+throughout this paper.
 \end{remark}

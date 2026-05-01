@@ -326,25 +326,57 @@ def verify_phase_derivative_lower_bound():
     print(f"  difference:    {diff_val}")
     if diff_val == 0:
         print()
-        print("  [PASS] q(t) = theta'(t) = (1/2) log(t/(2 pi)) + O(t^{-2}).")
+        print("  [PASS] q(t) = theta'(t) = (1/2) log(t/(2 pi)) - 1/(48 t^2)")
+        print("                        + O(t^{-4}) by termwise differentiation.")
     else:
         raise AssertionError(f"theta' asymptotic mismatch: {diff_val}")
 
-    # Lower bound on q(t) for t >= T/2 (window contained in [T/2, 3T/2]).
-    # We want to show q(t) >= (1/2) log(T / (4 pi)) - C/T^2 for absolute C.
-    T = sp.symbols("T", positive=True)
-    # At t = T/2 (worst case), the leading term of q is
-    #   (1/2) log(T/(4 pi)).
-    leading_at_T_over_2 = sp.simplify(theta_prime_expected.subs(t, T / 2)
-                                      .rewrite(sp.log)
-                                      - Rational(-1, 48) / (T / 2)**2)
+
+def verify_phase_derivative_upper_bounds():
+    """Differentiate the Riemann-Siegel asymptotic twice and three times
+    to obtain q'(T) = theta''(T) and q''(T) = theta'''(T).  Confirm the
+    leading-order forms used in the proof of Lemma
+    lem:phase-derivative-upper-bounds and consumed by §3 Gram positivity."""
+    print("=" * 70)
+    print("[lem:phase-derivative-upper-bounds]  q'(T) = O(T^-1), q''(T) = O(T^-2)")
+    print("=" * 70)
+
+    t = sp.symbols("t", positive=True)
+
+    theta_asym = (
+        t / 2 * sp.log(t / (2 * PI))
+        - t / 2
+        - PI / 8
+        + Rational(1, 48) / t
+    )
+
+    theta_pp_asym = sp.expand(sp.diff(theta_asym, t, 2))
+    theta_ppp_asym = sp.expand(sp.diff(theta_asym, t, 3))
+
+    # Expected leading forms.
+    theta_pp_expected = Rational(1, 2) / t + Rational(1, 24) / t**3
+    theta_ppp_expected = -Rational(1, 2) / t**2 - Rational(1, 8) / t**4
+
+    diff_pp = simplify(theta_pp_asym - theta_pp_expected)
+    diff_ppp = simplify(theta_ppp_asym - theta_ppp_expected)
+
     print()
-    print(f"  lower bound on q(t) for t >= T/2 (worst-case t = T/2):")
-    print(f"    q(t) >= (1/2) log(T / (4 pi)) - C / T^2")
-    print(f"    -> grows logarithmically in T; positive for T sufficiently large.")
+    print(f"  q'(T) = theta''(T)   (termwise from Riemann-Siegel asymptotic):")
+    print(f"    {theta_pp_asym}")
+    print(f"  expected leading:    1/(2 T) + 1/(24 T^3) + O(T^-5)")
+    print(f"  difference:          {diff_pp}")
+    assert diff_pp == 0, f"theta'' mismatch: {diff_pp}"
     print()
-    print("  [PASS] q is bounded below by a positive constant on retained")
-    print("         packets at large T, with c_q = 0 in the (P2) bound.")
+    print(f"  q''(T) = theta'''(T)  (termwise from Riemann-Siegel asymptotic):")
+    print(f"    {theta_ppp_asym}")
+    print(f"  expected leading:    -1/(2 T^2) - 1/(8 T^4) + O(T^-6)")
+    print(f"  difference:          {diff_ppp}")
+    assert diff_ppp == 0, f"theta''' mismatch: {diff_ppp}"
+    print()
+    print("  [PASS] q'(T) = 1/(2T) + O(T^-3), q''(T) = -1/(2 T^2) + O(T^-4).")
+    print("         Both vanish as T -> infty; in particular |q'|, |q''| <= eps")
+    print("         for any eps > 0 and T sufficiently large.  This discharges")
+    print("         the upper bounds used in the §3 Gram positivity proof.")
 
 
 def main():
@@ -358,9 +390,12 @@ def main():
     print()
     verify_phase_derivative_lower_bound()
     print()
+    verify_phase_derivative_upper_bounds()
+    print()
     print("=" * 70)
     print("All §2 lemmas (kernel symmetry, removable singularity, derivative")
-    print("formulas, diagonal limits, and phase-derivative lower bound (P2))")
+    print("formulas, diagonal limits, phase-derivative lower bound (P2), and")
+    print("phase-derivative upper bounds q' = O(T^-1), q'' = O(T^-2))")
     print("verified symbolically.")
     print("=" * 70)
 
