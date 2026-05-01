@@ -435,6 +435,153 @@ with polynomial loss, plus the finite row certificate
 canonical source-graded branch gives the high-height contradiction.
 \end{remark}
 
+\begin{definition}[No-loss certificate]
+\label{def:no-loss-certificate}
+Let
+\[
+  \mathcal X \longrightarrow \mathcal Y
+\]
+be a proof-stage transition between packet, source, charge, row, or carrier
+objects.  The transition is called a \emph{no-loss certificate} at exponent
+\(C\) if the relevant active mass, Gram mass, row norm, or source-graded energy
+satisfies
+\[
+  \mathsf M_{\mathcal Y}
+  \ge Q^{-C}\mathsf M_{\mathcal X}
+  -Q^{-B}\mathsf M_{\mathrm{ref}},
+\]
+where \(B\) is chosen larger than the total downstream loss exponent.  The
+transition is called \emph{same-column} if the finite columns used in the source
+package, carrier Gram audit, and \(2Y\) row certificate are the same transferred
+columns.
+
+A no-loss certificate is never inferred from formal compatibility alone.  It is
+one of the following: an analytic estimate, a packet-routing theorem, a finite
+Gram/singular-value certificate, a row-table certificate, or an explicitly
+imported verified audit.
+\end{definition}
+
+\begin{remark}[No-loss arrows in the active proof]
+\label{rem:no-loss-arrows-active-proof}
+The active proof chain contains the following no-loss arrows:
+\[
+\begin{array}{ccl}
+\text{RH counterexample} &\longrightarrow&
+  \text{ordinary Hardy canonical branch},\\
+\text{Hardy source mass} &\longrightarrow&
+  \text{mass-good ordinary packets},\\
+\text{ordinary packets} &\longrightarrow&
+  W_{\mathrm{branch}}^{\can}\ge Q^{-C}W_{\mathrm{ref}},\\
+\text{raw Whitney packets} &\longrightarrow&
+  \text{pre-extraction Fej\'er--Riesz Stack},\\
+\text{FR Stack packets} &\longrightarrow&
+  \mathrm{Graph/O2O3}_{23},\\
+\text{Hardy packet source} &\longrightarrow&
+  \text{finite effective }K9/Y12\text{ carrier},\\
+\text{finite carrier} &\longrightarrow&
+  \mathfrak R_{2Y}\text{-certified live/dead quotient},\\
+\text{corrected source package} &\longrightarrow&
+  \text{two-point/four-point finite package}.
+\end{array}
+\]
+Each arrow must be backed by a named no-loss certificate in the sense of
+Definition~\ref{def:no-loss-certificate}.  The final source-graded atomic
+comparison may only be applied after all arrows used by the active branch have
+been certified with compatible exponents and same-column finite data.
+\end{remark}
+
+\begin{remark}[High-height closure is not full low-height closure]
+\label{rem:high-height-not-low-height-closure}
+Theorem~\ref{thm:master-conditional-high-height-rh} is a high-height statement.
+Even if all its four inputs are proved with effective constants, the resulting
+threshold
+\[
+  T_*=T_*(C,A,B,C_{\mathrm{cap}},C_{\mathrm{gram}},C_{2Y},\ldots)
+\]
+leaves a finite low-height verification problem.  A complete proof of \(\RH\)
+therefore requires either a separate low-height theorem or a certified finite
+verification below \(T_*\).  No asymptotic branch theorem is to be cited as a
+low-height exclusion unless the effective threshold and the finite verification
+are explicitly recorded.
+\end{remark}
+
+\begin{remark}[RH-entry no-go warning: off-line zeros do not by themselves give Hardy-curvature packets]
+\label{rem:rh-entry-no-go-hard-curvature-localization}
+The canonical Hardy branch-entry input is a genuine analytic theorem.  It does
+not follow from zero symmetry, the functional equation, zero counting, or dyadic
+Hardy mean-square estimates alone.
+
+Indeed, if an off-line zero
+\[
+  \rho=\beta+i\gamma,
+  \qquad \eta=\beta-\frac12\ne0,
+\]
+is present, then locally in the critical-line variable the completed function
+has a factor of the form
+\[
+  P_\rho(t)= (t-\gamma)^2+\eta^2
+\]
+up to the reflected factors and a zero-free background factor \(G_\rho\).  Thus
+\[
+  Z_H(t)=P_\rho(t)G_\rho(t)
+\]
+locally, while the active source is
+\[
+  u_H(t)=\partial_t^3 Z_H(t).
+\]
+The zero controls \(P_\rho\), but
+\[
+  (P_\rho G_\rho)'''
+  =P_\rho'''G_\rho+3P_\rho''G_\rho'
+   +3P_\rho'G_\rho''+P_\rho G_\rho'''
+\]
+contains the zero-free background and may cancel.  Therefore the implication
+\[
+  \rho\notin\Re s=\frac12
+  \quad\Longrightarrow\quad
+  \int_{p_\rho}|\partial_t^3Z_H(t)|^2\,dt\ge Q^{-A}\mathsf M_\rho
+\]
+is not a formal consequence of the local zero quartet.  It is the missing
+zeta-specific localization/non-cancellation theorem in the RH-entry input.
+\end{remark}
+
+\begin{remark}[Horizontal displacement bookkeeping]
+\label{rem:horizontal-displacement-bookkeeping-entry}
+Any entry theorem that resolves the off-line quartet at the horizontal scale
+\[
+  \eta=\left|\beta-\frac12\right|
+\]
+must record whether the proof constants depend on \(\eta^{-1}\).  Standard
+zero-distribution input does not supply a lower bound \(\eta\ge |\gamma|^{-C}\)
+for a hypothetical off-line zero.  Hence a height-only complexity parameter
+\(Q=Q(\gamma)\) is justified only if the entry proof is genuinely insensitive to
+arbitrarily small \(\eta\).  Otherwise the branch-entry statement must use
+\[
+  Q=Q(\gamma,\eta^{-1},\kappa_\rho),
+\]
+where \(\kappa_\rho\) records local separation and conditioning.  No downstream
+polynomial-loss estimate may hide an unrecorded super-polynomial dependence on
+\(\eta^{-1}\).
+\end{remark}
+
+\begin{remark}[Mean-square mass is not localized RH-entry]
+\label{rem:mean-square-not-localized-rh-entry}
+The Hardy mean-square theorem for \(u_H=\partial_t^3Z_H\) supplies source mass
+on dyadic or canonical packet families.  It does not by itself identify that
+mass with the packet selected by a given off-line zero.  Thus
+\[
+  \int_T^{2T}|u_H(t)|^2\,dt\gg T(\log T)^c
+\]
+may produce mass-good packets somewhere in the dyadic block, but it does not
+prove
+\[
+  p_\rho\cap\mathcal P_{\mathrm{mass\text{-}good}}\ne\varnothing
+\]
+with polynomial weight.  The RH-entry theorem must contain a separate no-loss
+localization or packet-overlap statement if the branch is to be triggered by a
+specified off-line zero.
+\end{remark}
+
 Classically, $\RH$ sits at the intersection of the zero distribution of $\zeta(s)$, the explicit formula relating zeros and primes, and a number of equivalent or partially equivalent positivity, spectral, and functional-analytic reformulations \cite{Bombieri2000,Conrey2003}.
 
 We introduce a normalized local jet-Gramian associated to the corrected local phase geometry. This object encodes the intrinsic local deformation after removal of the dominant value-channel and background effects, and it is the basic carrier of the odd quotient information used in the argument.
@@ -31693,6 +31840,41 @@ for \(B\) larger than the final loss exponent.
 \end{enumerate}
 \end{hypothesis}
 
+\begin{remark}[Ordinary packet no-loss is source-mass no-loss]
+\label{rem:ordinary-packet-no-loss-is-source-mass-no-loss}
+Hypothesis~\ref{hyp:ordinary-packet-no-loss-routing} is a statement about source
+mass and source-graded carrier mass, not merely about the number of packets.
+The alternative
+\[
+  G_{\mathrm{ord}}\ge Q^{-C}G_{\mathrm{ref}}
+\]
+means that the ordinary packet subfamily carries polynomially positive
+Hardy-source mass after the branch/reference weights and carrier projections
+used by the proof.  It is not enough to count many ordinary packets if the
+source mass, Gate--2 anisotropy, or effective \(K9/Y12\) carrier mass is
+concentrated on singular or transition packets.
+\end{remark}
+
+\begin{lemma}[Ordinary/singular routing no-loss consequence]
+\label{lem:ordinary-singular-routing-no-loss-consequence}
+Assume Hypothesis~\ref{hyp:ordinary-packet-no-loss-routing}.  Then the source
+lower bound needed by the ordinary Gate--2 theorem may be applied to
+\(\mathcal P_{\mathrm{ord}}\) with at most polynomial loss, or else the same
+source-graded lower bound is supplied by a certified singular/transition branch.
+In particular, no source mass carried only by \(\mathcal P_{\mathrm{sing}}\cup
+\mathcal P_{\mathrm{trans}}\) is silently discarded.
+\end{lemma}
+
+\begin{proof}
+The three alternatives in Hypothesis~\ref{hyp:ordinary-packet-no-loss-routing}
+are exhaustive by definition.  In the first case the ordinary family carries the
+required mass.  In the second case the singular and transition families are
+routed to an alternative certified branch with polynomially comparable lower
+bound.  In the third case their total contribution is below the residual budget
+and can be absorbed into the final error ledger.  Thus the active source mass is
+either ordinary, routed, or negligible at the declared exponent.
+\end{proof}
+
 \begin{theorem}[Gate 2 from Gate 1 and \(L^2\)-input rigidity]
 \label{thm:gate-two-from-gate-one-l2-rigidity}
 Assume the normalized real-canonical convention of
@@ -31795,6 +31977,90 @@ A>\frac{13}{2}B+C_u+5C_R+O(1).
 \]
 Thus Gate~2 failure is impossible for such \(A\).
 \end{proof}
+
+\begin{definition}[Gate--2 residual ledger]
+\label{def:gate-two-residual-ledger}
+On a normalized ordinary packet, write the exact Gate--2 identities as
+\[
+  u=\mathcal D_p^2q,
+  \qquad
+  g=u-6q+2q^3,
+  \qquad
+  h=2q(\mathcal D_pq)^2-\frac16\mathcal D_p^2g.
+\]
+If corrected coordinates or transition charts introduce errors, define
+\[
+  r_u:=u-\mathcal D_p^2q,
+\]
+\[
+  r_g:=g-(u-6q+2q^3),
+\]
+\[
+  r_h:=h-\left(2q(\mathcal D_pq)^2-\frac16\mathcal D_p^2g\right).
+\]
+The Gate--2 residual ledger is the assertion that on every source-thickening
+interval \(J\),
+\[
+  \|r_u\|_{L^2(J)}+
+  \|r_g\|_{L^2(J)}+
+  \|r_h\|_{L^2(J)}
+  \le Q^{-A_{\mathrm{res}}}|J|^{1/2},
+\]
+with \(A_{\mathrm{res}}\) larger than the Gate--2 rigidity threshold.
+\end{definition}
+
+\begin{lemma}[Residual-stable Gate--2 rigidity]
+\label{lem:residual-stable-gate-two-rigidity}
+In the setting of Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity}, suppose
+that the exact Gate--2 identities hold up to the residuals of
+Definition~\ref{def:gate-two-residual-ledger}.  If
+\[
+  \|g\|_{L^2(J)}+\|h\|_{L^2(J)}\le \varepsilon |J|^{1/2}
+\]
+and the residual ledger satisfies
+\[
+  \varepsilon_{\mathrm{res}}
+  :=Q^{-A_{\mathrm{res}}}
+  \le \varepsilon,
+\]
+then on the inner interval \(J'\Subset J\),
+\[
+  \int_{J'}|u|^2
+  \le
+  Q^{C_R}
+  \left(\varepsilon^{2/5}+\varepsilon_{\mathrm{res}}^{2/5}
+        +\varepsilon_{\mathrm{res}}^2\right)|J'|.
+\]
+Consequently the Gate--2 contradiction remains valid if
+\[
+  A_{\mathrm{res}}>\frac52(B+C_R)+O(1)
+\]
+and the final downstream residual budget is chosen below the same scale.
+\end{lemma}
+
+\begin{proof}
+Repeat the proof of the \(L^2\)-input rigidity lemma with
+\(g,h\) replaced by their exact-model parts plus residuals.  Every integration
+by parts term is bounded by the original \(\varepsilon\)-term plus a residual
+term of size \(Q^{C_R}\varepsilon_{\mathrm{res}}^{2/5}\) after the same
+optimization \(\delta=\varepsilon^{1/5}\), and by the direct residual-square
+term \(Q^{C_R}\varepsilon_{\mathrm{res}}^2\).  The displayed threshold makes
+these contributions smaller than the source-thickening lower bound.
+\end{proof}
+
+\begin{remark}[Derivative-convention no-go]
+\label{rem:gate-two-derivative-convention-no-go}
+The identity
+\[
+  h=2q(q')^2-\frac16g''
+\]
+is valid only in the same normalized derivative convention used to define
+\(u=q''\).  In packet coordinates this convention is
+\(\mathcal D_p=\lambda_p\partial_t\), and all derivatives in
+\(u_p,g_p,h_p\) must use \(\mathcal D_p\).  Mixing physical \(\partial_t\)
+derivatives with normalized \(\mathcal D_p\)-derivatives changes the powers of
+\(r_p\) and invalidates the Gate--2 wall-rigidity proof.
+\end{remark}
 
 \begin{theorem}[Carrier-visible Gate--2 output]
 \label{thm:carrier-visible-gate-two-output}
@@ -51515,6 +51781,25 @@ lower bound at a preassigned wall point.  Exact-point architectures require a
 separate \(q_0\)-adic wall-row audit.
 \end{enumerate}
 
+\begin{remark}[Numerical stress tests are not no-loss certificates]
+\label{rem:numerics-not-no-loss-certificates}
+The Python and finite-prime stress tests are useful for locating candidate
+flattening walls, row degeneracies, and finite carrier singular values.  They
+are not proof inputs unless converted into certified finite audits.  A numerical
+experiment may be promoted to a finite audit only after specifying:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=*]
+\item the exact finite basis or row table;
+\item the coefficient ring or interval enclosure used for every entry;
+\item the Gram matrices and their certified condition bounds;
+\item the residual/tail estimates connecting the finite model to the analytic
+      packet model;
+\item the exact pass/fail inequality, with margin exceeding the downstream
+      residual budget.
+\end{enumerate}
+Until those data are recorded, numerical evidence remains diagnostic and should
+not be cited as a no-loss lemma.
+\end{remark}
+
 \begin{remark}[Numerical and surrogate evidence archive]
 \label{rem:numerical-surrogate-status}
 The numerical and surrogate experiments in this draft are diagnostic only.
@@ -59184,6 +59469,43 @@ Definition~\ref{def:pre-extraction-FR-stack-weight}, and any older Stack
 measure must be polynomially compared to it before it can be used in a proof.
 \end{remark}
 
+\begin{hypothesis}[Fej\'er--Riesz Stack no-loss and no-early-cap certificate]
+\label{hyp:fr-stack-no-loss-no-early-cap}
+For every active resonant block \(B\), the pre-extraction Fej\'er--Riesz Stack
+measure
+\[
+  d\nu_{\mathrm{FR},B}=|\Phi_B(z)|^2\,d\theta\,d\sigma_B,
+  \qquad \deg\Phi_B=O(R),
+\]
+is imposed before capped extraction and satisfies the no-loss estimate
+\[
+  \nu_{\mathrm{FR},B}(\mathcal P_{B}^{\mathrm{active},\mathrm{car}})
+  \ge
+  Q^{-C_{\mathrm{FR}}}\nu_{\mathrm{pre},B}(\mathcal P_{B}^{\mathrm{active}})
+  -Q^{-B}G_{\mathrm{ref},B}.
+\]
+Moreover every cap or extraction step applied after the FR Stack preserves the
+bounded-degree charge model up to declared residuals below \(Q^{-B}\).  No cap
+is allowed to select packets before the Stack construction in a way that destroys
+FR charge membership or carrier visibility.
+\end{hypothesis}
+
+\begin{remark}[Model membership is not FR no-loss]
+\label{rem:model-membership-not-fr-no-loss}
+The statement that \(d\nu_{\mathrm{FR},B}\) puts the active packets into a
+bounded-degree charge model is not by itself a mass-persistence theorem.  The
+O2/O3 anti-lock module may be applied only after
+Hypothesis~\ref{hyp:fr-stack-no-loss-no-early-cap}, or an equivalent verified
+persistence theorem, has shown that the FR Stack has not discarded a
+super-polynomial fraction of the source/graph/carrier mass.  Thus
+\[
+  \text{FR model membership}
+  \not\Rightarrow
+  \text{FR no-loss persistence}
+\]
+without an additional estimate.
+\end{remark}
+
 \begin{remark}[Same-norm invariant]
 \label{rem:canonical-same-norm-invariant}
 Every lower bound used in the final contradiction is measured in the same
@@ -59411,6 +59733,49 @@ columns is retained rather than quotient-killed.  The residual/tail term is
 absorbed by the choice of \(B\).
 \end{proof}
 
+\begin{remark}[Carrier capture is not a consequence of aggregate source mass]
+\label{rem:carrier-capture-not-consequence-aggL2}
+The aggregate source bound
+\[
+  \mathrm{Agg}L^2(u_H)
+\]
+does not imply carrier capture.  It is possible for an analytic function to have
+large packet Sobolev mass while all finite transition jets and corrected
+\(K9\) rows vanish.  The finite-rank no-go lemma
+\ref{lem:no-full-packet-to-K9-lower-bound} is precisely this obstruction.  Thus
+Theorem~\ref{thm:carrier-corrected-packet-to-K9-transfer} must always be cited
+with its carrier-capture and finite Gram audit hypotheses.  Any proof step of
+the form
+\[
+  \|u_H\|_{\mathrm{pkt},J}^2\gg 1
+  \quad\Longrightarrow\quad
+  \|\Lambda^{\mathrm{gr,full}}u_H\|_{\mathrm{gr}}^2\gg1
+\]
+without \(\Pi_{\mathrm{eff}}\Pi_{\mathrm{car}}\) is invalid.
+\end{remark}
+
+\begin{lemma}[Same-column finite-carrier requirement]
+\label{lem:same-column-finite-carrier-requirement}
+Let \(\mathcal B_p=\{\psi_{p,1},\ldots,\psi_{p,N_p}\}\) be the packet carrier
+basis used in the finite \(K9\) Gram audit.  The raw \(2Y\) certificate
+\(\mathfrak R_{2Y}(p)\), the corrected Hardy-source package audit, and the
+carrier Gram audit must be evaluated on the same transferred columns
+\[
+  \Lambda_p^{\mathrm{gr,full}}\psi_{p,i}.
+\]
+If any one of these modules is certified on a different column set, then the
+modules do not compose into a source-to-two/four-point bridge.
+\end{lemma}
+
+\begin{proof}
+The finite Gram audit proves lower coercivity only for the image of the declared
+basis under \(\Lambda_p^{\mathrm{gr,full}}\).  The row certificate proves
+live/dead routing only for the rows and columns it sees.  The corrected package
+audit proves source identities only for its transferred source columns.  If the
+column sets differ, a vector may be live in one module and invisible, dead, or
+unlabelled in another.  Hence no common no-loss lower bound follows.
+\end{proof}
+
 \begin{definition}[Corrected Hardy-source package audit]
 \label{def:corrected-Hardy-source-package-audit}
 Let
@@ -59477,6 +59842,61 @@ all columns used in the package audit are the same transferred carrier columns
 used in \(\mathfrak R_{2Y}(p)\) and in the finite \(K9\) carrier Gram audit.
 \end{enumerate}
 \end{definition}
+
+\begin{remark}[Corrected package residual scale]
+\label{rem:corrected-package-residual-scale}
+The residual term \(O(Q^{-B})\) in the corrected Hardy-source package audit is
+not a qualitative placeholder.  The exponent \(B\) must dominate the combined
+loss from Gate--2 rigidity, D4 wall escape, carrier capture, finite \(K9\) Gram
+coercivity, raw \(2Y\) routing, and the final atomic comparison.  Equivalently,
+if
+\[
+  A_{\mathrm{tot}}
+  =A_{\mathrm{src}}+C_{\mathrm{cap}}+C_{\mathrm{gram}}+C_{2Y}
+   +C_{\mathrm{D4}}+C_{\mathrm{atomic}},
+\]
+then the package residual must satisfy
+\[
+  B>A_{\mathrm{tot}}+10.
+\]
+A corrected source identity proved only modulo an unspecified small error is not
+enough for the two-point/four-point bridge.
+\end{remark}
+
+\begin{remark}[Two-point provenance no-go for post-whitened amplitudes]
+\label{rem:two-point-post-whitening-amplitude-no-go}
+The two-point source identities must hold for the corrected source package used
+by the proof, not merely for a formal pre-whitened model.  In particular,
+whitening or nonlinear normalization may turn linear amplitude dependence into
+even or nonlinear amplitude dependence.  If the proof constructs
+\(\mathfrak P_2^\zeta\) only after such a nonlinear operation, then the
+one-amplitude collapse and diagonal merger identities do not follow formally.
+They must be verified in the corrected package audit.  Without those identities,
+the divisibility
+\[
+  \mathcal I_2^\zeta
+  =a_1a_2(h_1-h_2)^2\mathcal J_2^\zeta+O(Q^{-B})
+\]
+is not justified.
+\end{remark}
+
+\begin{remark}[Mixed four-point no-new-carrier warning]
+\label{rem:mixed-four-point-no-new-carrier-warning}
+The mixed four-point bridge uses only the quotient class of the corrected
+fixed-sector order-seven source term.  If
+\[
+  \left[
+  B_7^{\mathfrak f}(C_{\mathcal W}^{\mathrm{corr},\zeta})
+  \right]
+  \ne 0
+  \quad\text{in}\quad
+  \mathfrak f/\mathbf C A_5^{\mathfrak f}(m),
+\]
+then the actual zeta source creates a new mixed four-point carrier and the
+scalar exits \(T_v=0\) and \(\mathcal R=0\) are no longer exhaustive.  Thus the
+fixed-sector quotient nullity in Definition~\ref{def:corrected-Hardy-source-package-audit}
+is a load-bearing no-loss certificate, not a cosmetic simplification.
+\end{remark}
 
 \begin{theorem}[Actual zeta-source admissibility for the two/four-point package]
 \label{thm:actual-zeta-source-admissibility-two-four-point}
@@ -59563,6 +59983,23 @@ Equivalently, all nonmixed endpoint-gap recurrences are routed either to a
 declared scalar wall or to an already absorbed \(K9/Y12\) carrier branch.
 \end{hypothesis}
 
+\begin{remark}[Nonmixed four-point fork]
+\label{rem:nonmixed-four-point-fork-after-source-bridge}
+The corrected Hardy-source two-point/mixed-four-point bridge does not by itself
+settle any still-live nonmixed four-point endpoint-gap branch.  There are two
+allowed statuses:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=*]
+\item the final source-graded \(K9/Y12\) atomic bridge bypasses the older
+      nonmixed geometric endgame, in which case the nonmixed material is
+      historical or diagnostic;
+\item the nonmixed branch remains live, in which case a separate finite
+      determinant/sign or endpoint-gap no-loss certificate must be supplied.
+\end{enumerate}
+The proof may not use the two-point provenance identities or the mixed
+fixed-sector quotient nullity as a substitute for a nonmixed four-point theorem
+unless case \textup{(a)} has been explicitly established.
+\end{remark}
+
 \begin{theorem}[Complete actual-zeta bridge to the two/four-point package]
 \label{thm:complete-zeta-bridge-to-two-four-point}
 Assume:
@@ -59634,6 +60071,21 @@ not attempt to prove \(\RH\) by a parallel global criterion.  Its only purpose
 is to certify that the actual zeta source satisfies the finite source
 provenance, no-new-carrier, and source-graded \(K9/Y12\)-visibility conditions
 required downstream.
+\end{remark}
+
+\begin{remark}[Source-substitution no-go]
+\label{rem:source-substitution-no-go}
+The active source is
+\[
+  u_H=\partial_t^3Z_H.
+\]
+A logarithmic, Laguerre, Pick, or de Branges kernel source may be useful as a
+diagnostic for how an off-line zero is seen by \(\Xi\), but it is not the source
+used by the present two-point/four-point and \(K9/Y12\) architecture.  Replacing
+\(u_H\) by such a source invalidates the Hardy AFE theorem, Gate--2 rigidity,
+D4 row conversion, carrier Gram audit, and same-norm final comparison unless a
+new transfer theorem maps that source into the active Hardy-curvature carrier
+with polynomial loss.  No such substitution is made in the active proof.
 \end{remark}
 
 \begin{remark}[Dependency diagram for the zeta-to-two/four-point bridge]
@@ -59774,6 +60226,32 @@ finite-source admissibility theorem inside the ordinary Hardy-normalized
 canonical branch.  Its role is only to provide the source identities and live
 carrier mass required by the existing two-point/four-point and \(K9/Y12\)
 architecture.
+\end{remark}
+
+\begin{remark}[Unified active no-go registry]
+\label{rem:unified-active-no-go-registry}
+The following routes are active no-go warnings for the present draft.
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item \textbf{No full packet-to-jet lower bound:} finite corrected \(K9\) rows
+      cannot be coercive on the full analytic packet Hilbert space.
+\item \textbf{No mean-square-to-entry shortcut:} dyadic Hardy mean-square mass
+      does not localize the source to the packet attached to a specified
+      off-line zero.
+\item \textbf{No hidden \(\eta^{-1}\) loss:} any RH-entry proof resolving the
+      horizontal displacement \(\eta=|\beta-1/2|\) must either include
+      \(\eta^{-1}\) in \(Q\) or prove \(\eta\)-insensitivity.
+\item \textbf{No source substitution:} log/Pick/Laguerre sources do not replace
+      \(u_H=\partial_t^3Z_H\) inside the active bridge without a transfer theorem.
+\item \textbf{No mismatched row certificates:} \(\mathfrak R_{2Y}\), the finite
+      \(K9\) Gram audit, and the corrected source package must use the same
+      transferred columns.
+\item \textbf{No unproved nonmixed closure:} two-point and mixed four-point
+      source provenance does not close a still-live nonmixed branch unless the
+      final \(K9/Y12\) bridge has bypassed it or a separate nonmixed certificate
+      is supplied.
+\end{enumerate}
+Any proof step using one of these routes must cite the corresponding repair
+lemma, not the no-go route itself.
 \end{remark}
 
 \begin{remark}[How to read the raw \(2Y\) row in the canonical ledger]
