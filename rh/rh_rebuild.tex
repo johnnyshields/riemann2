@@ -126,6 +126,29 @@
 % individually addressable.  Removed at journal time.
 \newtheorem{wip}[theorem]{Gap}
 
+% Section-level status indicators.  Each axis has its own macro so it
+% can be read and edited independently in the source.  `\status{VALUE}'
+% is the underlying pill renderer.  Allowed values per axis:
+%
+%   \statuspaper    LIVE | FINITE AUDIT | ARCHIVED | SUPERSEDED |
+%                   NO-GO | DIAGNOSTIC
+%   \statusvmig     not-started | in-progress | partial | migrated | n/a
+%                   (migration from proof_of_rh.tex; n/a for
+%                    rebuild-original sections)
+%   \statusreferee  not-started | in-progress | passed | failed
+%   \statuspython   n/a | not-started | partial | verified
+%                   (sympy/numpy verification of formulas)
+%   \statuslean     n/a | not-started | in-progress | formalized
+%                   (Lean formalization)
+%
+% Removed at journal time.
+\newcommand{\status}[1]{\textbf{\scriptsize[#1]}}
+\newcommand{\statuspaper}[1]{\textsf{\footnotesize paper:}\,\status{#1}}
+\newcommand{\statusvmig}[1]{\textsf{\footnotesize v1:}\,\status{#1}}
+\newcommand{\statusreferee}[1]{\textsf{\footnotesize referee:}\,\status{#1}}
+\newcommand{\statuspython}[1]{\textsf{\footnotesize python:}\,\status{#1}}
+\newcommand{\statuslean}[1]{\textsf{\footnotesize lean:}\,\status{#1}}
+
 \begin{document}
 
 \begin{abstract}
@@ -152,6 +175,12 @@ forms prove insufficient.
 % =============================================================================
 \section{Introduction}
 \label{sec:introduction}
+\statuspaper{LIVE}\quad
+\statusvmig{n/a}\quad
+\statusreferee{not-started}\quad
+\statuspython{n/a}\quad
+\statuslean{not-started}
+\par\medskip
 
 The Riemann hypothesis, originating in Riemann's 1859 memoir
 \cite{Riemann1859}, asserts that every nontrivial zero of \(\zeta(s)\) lies
@@ -270,6 +299,12 @@ Definition~\ref{def:local-phase-chart} hold.
 % =============================================================================
 \section{Local kernel and jet normalization}
 \label{sec:local-kernel-and-jet-normalization}
+\statuspaper{LIVE}\quad
+\statusvmig{not-started}\quad
+\statusreferee{not-started}\quad
+\statuspython{not-started}\quad
+\statuslean{not-started}
+\par\medskip
 
 A candidate off-line zero \(\rho\) at height \(\gamma\) is detected only
 at scales comparable to \(1/\gamma\), and the analytic data of \(\zeta\)
@@ -367,6 +402,12 @@ Section~\ref{sec:finite-scale-local-blocks-and-whitening}.
 % =============================================================================
 \section{Jet-limit local blocks}
 \label{sec:jet-limit-local-blocks}
+\statuspaper{LIVE}\quad
+\statusvmig{not-started}\quad
+\statusreferee{not-started}\quad
+\statuspython{not-started}\quad
+\statuslean{not-started}
+\par\medskip
 
 The phase kernel \(K_\Ph\) collapses, in the limit \(h\to 0\), into two
 explicit \(2\times 2\) matrices in the value/derivative basis: a
@@ -466,6 +507,12 @@ the curvature estimate subsection and the tail curvature bound section.
 % =============================================================================
 \section{Finite-scale local blocks and whitening}
 \label{sec:finite-scale-local-blocks-and-whitening}
+\statuspaper{LIVE}\quad
+\statusvmig{not-started}\quad
+\statusreferee{not-started}\quad
+\statuspython{not-started}\quad
+\statuslean{not-started}
+\par\medskip
 
 The jet-limit identities of Section~\ref{sec:jet-limit-local-blocks} are
 not directly usable: the comparison theorems of
@@ -546,6 +593,12 @@ whitening section.
 % =============================================================================
 \section{Toy anomaly and transverse obstruction}
 \label{sec:toy-anomaly-and-transverse-obstruction}
+\statuspaper{LIVE}\quad
+\statusvmig{not-started}\quad
+\statusreferee{not-started}\quad
+\statuspython{not-started}\quad
+\statuslean{not-started}
+\par\medskip
 
 The next three sections develop the transverse obstruction.  The
 off-line toy phase \(\Ph_\toy\) defined below has an explicit transverse
@@ -594,6 +647,12 @@ residual gauge.
 % =============================================================================
 \section{Transverse projection}
 \label{sec:transverse-projection}
+\statuspaper{LIVE}\quad
+\statusvmig{not-started}\quad
+\statusreferee{not-started}\quad
+\statuspython{not-started}\quad
+\statuslean{not-started}
+\par\medskip
 
 The transverse projection \(\Pi_\trans\) is the fixed value/gauge
 quotient under which the toy whitened block of
@@ -632,6 +691,12 @@ section.
 % =============================================================================
 \section{Actual-zeta transverse suppression}
 \label{sec:actual-zeta-transverse-suppression}
+\statuspaper{LIVE}\quad
+\statusvmig{not-started}\quad
+\statusreferee{not-started}\quad
+\statuspython{not-started}\quad
+\statuslean{not-started}
+\par\medskip
 
 The actual zeta phase \(\Ph\) defines two whitened blocks --- the
 two-center block \(\widehat\Om_\z(s;m)\) and a four-center analogue
@@ -719,6 +784,12 @@ invoked, not which route proves it.
 % =============================================================================
 \section{Local projective rigidity}
 \label{sec:projective-rigidity}
+\statuspaper{LIVE}\quad
+\statusvmig{not-started}\quad
+\statusreferee{not-started}\quad
+\statuspython{not-started}\quad
+\statuslean{not-started}
+\par\medskip
 
 Theorem~\ref{thm:toy-anomaly-visibility} provides the toy lower bound
 and Hypotheses~\ref{hyp:zeta-suppression-two-point}
@@ -830,6 +901,12 @@ Lemma~\ref{lem:hardy-energy-to-suppression}, separating
 % =============================================================================
 \section{\texorpdfstring{$N$}{N}-point odd-moment cancellation}
 \label{sec:n-point-odd-moment-cancellation}
+\statuspaper{LIVE}\quad
+\statusvmig{not-started}\quad
+\statusreferee{not-started}\quad
+\statuspython{not-started}\quad
+\statuslean{not-started}
+\par\medskip
 
 The exponent inequality of Theorems~\ref{thm:two-point-rigidity}
 and~\ref{thm:four-point-rigidity} is load-bearing, but its inputs include
@@ -865,6 +942,12 @@ Definition~\ref{def:local-phase-chart}.
 % =============================================================================
 \section{Aggregation and zero-free strip}
 \label{sec:aggregation-and-zero-free-strip}
+\statuspaper{LIVE}\quad
+\statusvmig{not-started}\quad
+\statusreferee{not-started}\quad
+\statuspython{not-started}\quad
+\statuslean{not-started}
+\par\medskip
 
 The two-point and four-point rigidity theorems exclude any single
 off-line zero above height \(T_0\); the upgrade to a zero-free strip
@@ -894,6 +977,12 @@ uniformly.
 % =============================================================================
 \section{The Riemann hypothesis}
 \label{sec:riemann-hypothesis}
+\statuspaper{LIVE}\quad
+\statusvmig{n/a}\quad
+\statusreferee{not-started}\quad
+\statuspython{n/a}\quad
+\statuslean{not-started}
+\par\medskip
 
 \begin{theorem}[Riemann hypothesis]
 \label{thm:riemann-hypothesis}
@@ -910,6 +999,12 @@ covers the range \(|\gamma|<T_0\).
 % =============================================================================
 \section{Hardy-normalized source-energy supply (optional)}
 \label{sec:hardy-source-energy-supply}
+\statuspaper{LIVE}\quad
+\statusvmig{not-started}\quad
+\statusreferee{not-started}\quad
+\statuspython{not-started}\quad
+\statuslean{not-started}
+\par\medskip
 
 This section is self-contained: its sole role is to supply a single
 source-energy lower bound that
@@ -995,6 +1090,12 @@ bridge package.
 
 \section{Archive map}
 \label{app:archive-map}
+\statuspaper{DIAGNOSTIC}\quad
+\statusvmig{n/a}\quad
+\statusreferee{n/a}\quad
+\statuspython{n/a}\quad
+\statuslean{n/a}
+\par\medskip
 
 The previous large draft is preserved in place at
 \texttt{rh/proof\_of\_rh.tex} and is treated as a quarry from which
