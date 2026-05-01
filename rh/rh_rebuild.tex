@@ -45,6 +45,8 @@
 \usepackage[expansion=false]{microtype}
 \usepackage[margin=1in]{geometry}
 
+\numberwithin{equation}{section}
+
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
@@ -234,11 +236,11 @@ Assume the same-point and cross-block jet-limit identities
 (Lemmas~\ref{lem:same-point-jet-limit}
 and~\ref{lem:cross-block-jet-limit}); the finite-scale whitening loss
 bound (Lemma~\ref{lem:whitening-loss}); the toy anomaly visibility lower
-bound (Theorem~\ref{thm:toy-anomaly-visibility}); the actual-zeta
-transverse suppression upper bound
-(Hypothesis~\ref{hyp:actual-zeta-transverse-suppression}); the two-point
-or four-point local rigidity theorem
-(Theorem~\ref{thm:two-point-rigidity} or
+bound (Theorem~\ref{thm:toy-anomaly-visibility}); the two-point or
+four-point actual-zeta transverse suppression upper bound
+(Hypothesis~\ref{hyp:zeta-suppression-two-point} or
+Hypothesis~\ref{hyp:zeta-suppression-four-point}); the corresponding
+local rigidity theorem (Theorem~\ref{thm:two-point-rigidity} or
 Theorem~\ref{thm:four-point-rigidity}); the \(N\)-point odd-moment
 cancellation (Lemma~\ref{lem:n-point-odd-moment-cancellation}); and the
 aggregation step (Theorem~\ref{thm:zero-free-strip}).  Then every
@@ -327,20 +329,39 @@ the value/derivative basis by the fixed matrix
 \begin{equation}
 \label{eq:point-to-jet-transform}
 P_h
-=\frac12
+=\frac1{\sqrt2}
 \begin{pmatrix}
 1 & 1\\[0.6ex]
--1/h & 1/h
+-1/(2h) & 1/(2h)
 \end{pmatrix}.
 \end{equation}
 
 \begin{remark}[Pair separation convention]
 \label{rem:pair-separation-convention}
-We use the symmetric pair \(T\pm h\), not \(T\pm h/2\).  All formulas in
+We use the symmetric pair \(T\pm h\), not \(T\pm h/2\); the pair
+separation is therefore \(2h\), and the \(1/(2h)\) factor in the lower
+row of \(P_h\) is the inverse separation.  All formulas in
 Sections~\ref{sec:jet-limit-local-blocks}
 and~\ref{sec:finite-scale-local-blocks-and-whitening} are stated under
-that convention.  Any imported lemma using the alternative convention is
-to be retransformed before insertion.
+that convention.  Any imported lemma using the alternative convention
+\(T\pm h/2\) (or using a \(P_h\) with \(1/h\) in the lower row) must be
+retransformed before insertion.
+\end{remark}
+
+\begin{remark}[Normalization audit]
+\label{rem:normalization-audit}
+The orthonormal value/derivative normalization
+\eqref{eq:point-to-jet-transform} is fixed because it is the unique
+normalization of \(P_h\) for which \(P_h A_h(T) P_h^\top\) converges to
+the matrix \(J(T)\) of \eqref{eq:same-point-J} entry by entry as
+\(h\to 0\); see Lemma~\ref{lem:same-point-jet-limit}.  Alternative
+choices --- in particular the unnormalized
+\(\tfrac12\bigl(\begin{smallmatrix}1&1\\-1/h&1/h\end{smallmatrix}\bigr)\)
+appearing in some early drafts --- rescale the \((1,1)\) and \((2,2)\)
+entries of the limit by reciprocal factors of \(2\) and break the
+displayed identity.  This normalization is therefore fixed for every
+finite-scale block in
+Section~\ref{sec:finite-scale-local-blocks-and-whitening}.
 \end{remark}
 
 % =============================================================================
@@ -600,8 +621,9 @@ directions to be quotiented out.  A transverse projection
 \begin{wip}\label{rem:wip-transverse-projection}
 The choice of \(\mathcal V_\val\) must precede
 Theorem~\ref{thm:toy-anomaly-visibility} and
-Hypothesis~\ref{hyp:actual-zeta-transverse-suppression}; it is not to
-be re-chosen after either has been invoked.  v1 prose to mine: the
+Hypotheses~\ref{hyp:zeta-suppression-two-point}
+and~\ref{hyp:zeta-suppression-four-point}; it is not to be re-chosen
+after any has been invoked.  v1 prose to mine: the
 leading value matrix and canonical calibration section, together with
 the local projective rigidity of the one-pair and multi-pair families
 section.
@@ -611,61 +633,98 @@ section.
 \section{Actual-zeta transverse suppression}
 \label{sec:actual-zeta-transverse-suppression}
 
-The actual zeta phase \(\Ph\) defines its own whitened block
-\(\widehat\Om_\z(s;m)\); under the same \(\Pi_\trans\) of
-Definition~\ref{def:transverse-projection}, its anomaly is suppressed
-at a strictly larger polynomial exponent than the toy lower bound of
+The actual zeta phase \(\Ph\) defines two whitened blocks --- the
+two-center block \(\widehat\Om_\z(s;m)\) and a four-center analogue
+\(\widehat\Om_\z^{(4)}\) for the symmetric quartet --- on which the
+actual-zeta anomaly is suppressed at a strictly larger polynomial
+exponent than the corresponding toy lower bound of
 Theorem~\ref{thm:toy-anomaly-visibility}.  This is the load-bearing
-asymmetry of the program: the off-line scenario forces
-\(\Pi_\trans\widehat\Om\) to be large; the actual zeta phase forces it
-to be small.
+asymmetry of the program: the off-line scenario forces the projective
+anomaly to be large; the actual zeta phase forces it to be small.  The
+two-point and four-point comparisons of
+Section~\ref{sec:projective-rigidity} consume different forms of this
+suppression, stated separately below.
 
-\begin{hypothesis}[Actual-zeta transverse suppression]
-\label{hyp:actual-zeta-transverse-suppression}
-On the retained packets, after the gauge-fixed normalization of
-Definition~\ref{def:local-phase-chart} and the same \(\Pi_\trans\) as
-Theorem~\ref{thm:toy-anomaly-visibility},
+\subsection{Two-point suppression}
+\label{subsec:two-point-suppression}
+
+\begin{hypothesis}[Two-point actual-zeta transverse suppression]
+\label{hyp:zeta-suppression-two-point}
+For the two-center packet associated with \(\rho\) and a symmetry
+partner, after the gauge-fixed normalization of
+Definition~\ref{def:local-phase-chart} and the projection
+\(\Pi_\trans\) of Definition~\ref{def:transverse-projection},
 \[
-\bigl\|\Pi_\trans\,\mathcal A_\z\bigl(\widehat\Om_\z(s;m)\bigr)\bigr\|
-\;\le\; Q^{-B_\z}
+\bigl\|\Pi_\trans\,\mathcal A_2\bigl(\widehat\Om_\z(s;m)\bigr)\bigr\|
+\;\le\; Q^{-B_{\z,2}}
 \]
-for an absolute exponent \(B_\z>A_\toy\), where \(\mathcal A_\z\) is the
-restriction of the toy anomaly functional of
-Theorem~\ref{thm:toy-anomaly-visibility} to the actual-zeta whitened
-block.
+for an absolute exponent \(B_{\z,2}>A_\toy\) on the retained subfamily
+used in Theorem~\ref{thm:toy-anomaly-visibility}.  Here \(\mathcal A_2\)
+is the restriction of the toy anomaly functional of
+Theorem~\ref{thm:toy-anomaly-visibility} to the actual-zeta two-center
+whitened block.
 \end{hypothesis}
 
-\begin{wip}\label{rem:wip-actual-zeta-transverse-suppression}
-This is the structural gap of the program.  The hypothesis is consumed
-by Theorems~\ref{thm:two-point-rigidity}
-and~\ref{thm:four-point-rigidity}.  Two proof routes are admissible:
+\begin{wip}\label{rem:wip-zeta-suppression-two-point}
+The two-point case of the structural gap.  Consumed by
+Theorem~\ref{thm:two-point-rigidity}.  Admissible proof routes:
 \textup{(i)} a standalone route from the local jet-Gram geometry alone;
 \textup{(ii)} a Hardy-assisted route consuming the source-energy supply
 of Section~\ref{sec:hardy-source-energy-supply} via
 Lemma~\ref{lem:hardy-energy-to-suppression}.  v1 prose to mine: the
-corrected finite-\(s\) holomorphic whitening section and the odd
-holomorphic transverse channel section.
+odd holomorphic transverse channel and corrected finite-\(s\)
+holomorphic whitening sections.
+\end{wip}
+
+\subsection{Four-point suppression}
+\label{subsec:four-point-suppression}
+
+\begin{hypothesis}[Four-point actual-zeta transverse suppression]
+\label{hyp:zeta-suppression-four-point}
+For the four-center packet associated with the symmetry quartet
+\(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\), under the four-point
+projection \(\Pi_\trans^{(4)}\) extending
+Definition~\ref{def:transverse-projection},
+\[
+\bigl\|\Pi_\trans^{(4)}\,\mathcal A_4\bigl(\widehat\Om_\z^{(4)}\bigr)\bigr\|
+\;\le\; Q^{-B_{\z,4}}
+\]
+for an absolute exponent \(B_{\z,4}>A_\toy^{(4)}\) on the retained
+four-point subfamily.  Here \(\mathcal A_4\) is the four-point analogue
+of the toy anomaly functional and \(A_\toy^{(4)}\) is the four-point
+toy visibility exponent.
+\end{hypothesis}
+
+\begin{wip}\label{rem:wip-zeta-suppression-four-point}
+The four-point case of the structural gap.  Consumed by
+Theorem~\ref{thm:four-point-rigidity}.  Same admissible proof routes
+as Hypothesis~\ref{hyp:zeta-suppression-two-point}.  v1 prose to mine:
+the local projective rigidity of the one-pair and multi-pair families
+section, four-point variant.
 \end{wip}
 
 \begin{remark}[Standalone and Hardy-assisted routes]
 \label{rem:standalone-and-hardy-routes}
-Hypothesis~\ref{hyp:actual-zeta-transverse-suppression} is stated as a
-single object; the two proof routes do not change its statement, only the
-technology of its proof.  Forward references to
-Section~\ref{sec:hardy-source-energy-supply} from
-Theorems~\ref{thm:two-point-rigidity}
-and~\ref{thm:four-point-rigidity} indicate which route is invoked, not a
-distinct hypothesis.
+Hypotheses~\ref{hyp:zeta-suppression-two-point}
+and~\ref{hyp:zeta-suppression-four-point} are stated independently of
+the technology of their proofs.  A purely local proof would use only
+the jet-Gram and quotient geometry of
+Sections~\ref{sec:jet-limit-local-blocks}--\ref{sec:transverse-projection};
+a Hardy-assisted proof may use the source-energy module of
+Section~\ref{sec:hardy-source-energy-supply}.  Forward references from
+Section~\ref{sec:projective-rigidity} indicate which hypothesis is
+invoked, not which route proves it.
 \end{remark}
 
 % =============================================================================
 \section{Local projective rigidity}
 \label{sec:projective-rigidity}
 
-Theorem~\ref{thm:toy-anomaly-visibility} and
-Hypothesis~\ref{hyp:actual-zeta-transverse-suppression} provide the toy
-lower bound and the actual-zeta upper bound on the transverse anomaly
-under \(\Pi_\trans\) of Definition~\ref{def:transverse-projection}.  The present section assembles the comparison.  On the
+Theorem~\ref{thm:toy-anomaly-visibility} provides the toy lower bound
+and Hypotheses~\ref{hyp:zeta-suppression-two-point}
+and~\ref{hyp:zeta-suppression-four-point} provide the matching
+actual-zeta upper bounds on the transverse anomaly under
+\(\Pi_\trans\) of Definition~\ref{def:transverse-projection}.  The present section assembles the comparison.  On the
 two-point family attached to \(\rho\) and a single symmetry partner,
 and on the four-point family of the full symmetric quartet
 \(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\), the exponent inequality
@@ -696,15 +755,15 @@ to \(\rho\) and one of its symmetry partners.  Under
 Lemmas~\ref{lem:same-point-jet-limit},
 \ref{lem:cross-block-jet-limit}, \ref{lem:whitening-loss},
 Theorem~\ref{thm:toy-anomaly-visibility}, and
-Hypothesis~\ref{hyp:actual-zeta-transverse-suppression},
+Hypothesis~\ref{hyp:zeta-suppression-two-point},
 \[
-A_\toy < B_\z \qquad\Longrightarrow\qquad \rho\notin\{\zeta=0\}.
+A_\toy < B_{\z,2} \qquad\Longrightarrow\qquad \rho\notin\{\zeta=0\}.
 \]
 \end{theorem}
 
 \begin{wip}\label{rem:wip-two-point-rigidity}
 Compose Theorem~\ref{thm:toy-anomaly-visibility} (lower bound) with
-Hypothesis~\ref{hyp:actual-zeta-transverse-suppression} (upper bound) at
+Hypothesis~\ref{hyp:zeta-suppression-two-point} (upper bound) at
 matched \((m,s)\); show the exponent gap survives the polynomial
 whitening loss (Lemma~\ref{lem:whitening-loss}) and the polynomial Gram
 lower bound (Lemma~\ref{lem:same-point-gram-positivity}).  The proof is
@@ -714,10 +773,9 @@ place.
 
 \begin{remark}[Hardy-assisted route, if invoked]
 \label{rem:two-point-hardy-supply}
-If Hypothesis~\ref{hyp:actual-zeta-transverse-suppression} cannot be
-discharged from the local jet-Gram geometry alone for the two-point
-case, the source-energy lower bound
-Hypothesis~\ref{hyp:hardy-source-energy} of
+If Hypothesis~\ref{hyp:zeta-suppression-two-point} cannot be discharged
+from the local jet-Gram geometry alone for the two-point case, the
+source-energy lower bound Hypothesis~\ref{hyp:hardy-source-energy} of
 Section~\ref{sec:hardy-source-energy-supply}, transferred via
 Lemma~\ref{lem:hardy-energy-to-suppression}, supplies the missing
 polynomial-in-\(Q\) room.  Theorem~\ref{thm:two-point-rigidity} is then
@@ -738,33 +796,35 @@ independently of Theorem~\ref{thm:two-point-rigidity}.
 \begin{theorem}[Four-point rigidity]
 \label{thm:four-point-rigidity}
 Let \(\rho\) be a hypothetical off-line zero and
-\(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\) its symmetry quartet.  The
-four-center jet-Gram comparison, under the extension
-\(\Pi_\trans^{(4)}\) of the projection of
-Definition~\ref{def:transverse-projection} to the four-point quotient,
-yields \(A_\toy^{(4)}<B_\z^{(4)}\) for absolute four-point exponents,
-and hence \(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\) cannot be a quartet of
-zeros of \(\zeta\).
+\(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\) its symmetry quartet.  Under
+the four-point analogue of Theorem~\ref{thm:toy-anomaly-visibility} and
+Hypothesis~\ref{hyp:zeta-suppression-four-point},
+\[
+A_\toy^{(4)} < B_{\z,4} \qquad\Longrightarrow\qquad
+\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\not\subset\{\zeta=0\}.
+\]
 \end{theorem}
 
 \begin{wip}\label{rem:wip-four-point-rigidity}
 State and prove the four-center analogue \(\widehat\Om_\z^{(4)}\) of
 \(\widehat\Om_\z\); the four-point projection \(\Pi_\trans^{(4)}\); and
-the four-point versions of Theorem~\ref{thm:toy-anomaly-visibility} and
-Hypothesis~\ref{hyp:actual-zeta-transverse-suppression}.  Assemble the
-exponent inequality.  v1 prose to mine: the local projective rigidity
-of the one-pair and multi-pair families section, together with the
-corrected fixed-target quotient package.
+the four-point analogue of Theorem~\ref{thm:toy-anomaly-visibility}
+matching Hypothesis~\ref{hyp:zeta-suppression-four-point}.  Assemble
+the exponent inequality.  v1 prose to mine: the local projective
+rigidity of the one-pair and multi-pair families section, together
+with the corrected fixed-target quotient package.
 \end{wip}
 
 \begin{remark}[Hardy-assisted route, if invoked]
 \label{rem:four-point-hardy-supply}
 The four-point analogue of Remark~\ref{rem:two-point-hardy-supply}
-applies: if the four-point standalone suppression cannot be proved from
-local geometry alone, Hypothesis~\ref{hyp:hardy-source-energy} of
-Section~\ref{sec:hardy-source-energy-supply} supplies the missing room,
-with the same effect of separating \(A_\toy^{(4)}\) from
-\(B_\z^{(4)}\).
+applies: if Hypothesis~\ref{hyp:zeta-suppression-four-point} cannot be
+proved from local geometry alone,
+Hypothesis~\ref{hyp:hardy-source-energy} of
+Section~\ref{sec:hardy-source-energy-supply} supplies the missing room
+via the four-point branch of
+Lemma~\ref{lem:hardy-energy-to-suppression}, separating
+\(A_\toy^{(4)}\) from \(B_{\z,4}\).
 \end{remark}
 
 % =============================================================================
@@ -813,7 +873,8 @@ polynomial nature of every loss in
 Lemmas~\ref{lem:whitening-loss},
 \ref{lem:same-point-gram-positivity},
 Theorem~\ref{thm:toy-anomaly-visibility}, and
-Hypothesis~\ref{hyp:actual-zeta-transverse-suppression}.
+Hypotheses~\ref{hyp:zeta-suppression-two-point}
+and~\ref{hyp:zeta-suppression-four-point}.
 
 \begin{theorem}[Zero-free strip]
 \label{thm:zero-free-strip}
@@ -909,19 +970,24 @@ mine: the Hardy-curvature mass-good packet source block.
 
 \begin{lemma}[Hardy energy to transverse suppression]
 \label{lem:hardy-energy-to-suppression}
-Hypothesis~\ref{hyp:hardy-source-energy} implies
-Hypothesis~\ref{hyp:actual-zeta-transverse-suppression} with absolute
-exponent \(B_\z=B_\z(A_E)\) satisfying \(B_\z>A_\toy\), via
-carrier-corrected transfer of the source energy into the transverse
-channel of \(\widehat\Om_\z(s;m)\).
+Hypothesis~\ref{hyp:hardy-source-energy}, after carrier decomposition
+and packet trace normalization, implies one of
+Hypothesis~\ref{hyp:zeta-suppression-two-point} (with exponent
+\(B_{\z,2}=B_{\z,2}(A_E)>A_\toy\)) or
+Hypothesis~\ref{hyp:zeta-suppression-four-point} (with exponent
+\(B_{\z,4}=B_{\z,4}(A_E)>A_\toy^{(4)}\)), according to which carrier
+transfer is established into the corresponding transverse channel of
+\(\widehat\Om_\z(s;m)\) or \(\widehat\Om_\z^{(4)}\).
 \end{lemma}
 
 \begin{wip}\label{rem:wip-hardy-energy-to-suppression}
 Carrier decomposition and packet trace step taking
 \(\int |q''_\can|^2\) on the source side into a lower bound on
-\(\Pi_\trans\widehat\Om_\z\) on the jet-Gram side.  v1 prose to mine:
-the certified downstream status after the canonical source-graded
-closure section, and the carrier-corrected source bridge package.
+\(\Pi_\trans\widehat\Om_\z\) (two-point case) or
+\(\Pi_\trans^{(4)}\widehat\Om_\z^{(4)}\) (four-point case).  v1 prose
+to mine: the certified downstream status after the canonical
+source-graded closure section, and the carrier-corrected source
+bridge package.
 \end{wip}
 
 % =============================================================================
