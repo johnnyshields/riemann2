@@ -204,7 +204,7 @@ K_\Ph(x,y)=\frac{\sin\bigl(\Ph(x)-\Ph(y)\bigr)}{\pi(x-y)},
 \qquad x\ne y,
 \]
 extended by removable singularity at \(x=y\).  The \(2\times 2\) blocks of
-\(K_\Ph\) at one or two centers, transformed into the value/derivative
+\(K_\Ph\) at one or two centers, transformed into the Gram-normalized
 basis by a fixed elementary matrix \(P_h\), become explicit matrices
 \(J(T)\) and \(N_{12}(T_1,T_2)\) whose entries are finite combinations of
 \(q=\Ph'\), \(q'\), \(q''\), and \(\Del=\Ph(T_1)-\Ph(T_2)\).  All
@@ -213,8 +213,8 @@ these matrices.
 
 A hypothetical off-line zero \(\rho=\beta+i\gamma\) with
 \(\beta\ne\tfrac12\) forces a specific transverse mode in the
-value/derivative space --- the toy mode --- which survives the natural
-value/gauge quotient.  The actual zeta phase, under the same quotient,
+Gram-normalized jet space --- the toy mode --- which survives the
+natural value/gauge quotient.  The actual zeta phase, under the same quotient,
 cannot realize that mode: the transverse channel of the actual whitened
 block is suppressed at a strictly larger polynomial exponent in \(Q\)
 than the toy lower bound.  The clash is two-point at minimum and four-point in the full symmetry quartet
@@ -367,18 +367,50 @@ K_\Ph(x,y)=
 \subsection{Point-to-jet transform}
 \label{subsec:point-to-jet-transform}
 
-The kernel \(K_\Ph\) is used only at small symmetric pairs \(T\pm h\); the
-\(2\times 2\) block at such a pair is rotated out of the point basis into
-the value/derivative basis by the fixed matrix
+The kernel \(K_\Ph\) is used only at small symmetric pairs \(T\pm h\).
+We rotate the \(2\times 2\) block at such a pair out of the point basis
+by the \emph{Gram-normalized coalescing even/odd transform}
 \begin{equation}
 \label{eq:point-to-jet-transform}
 P_h
-=\frac1{\sqrt2}
+\;=\;
+\frac1{\sqrt2}
 \begin{pmatrix}
 1 & 1\\[0.6ex]
 -1/(2h) & 1/(2h)
 \end{pmatrix}.
 \end{equation}
+Equivalently, \eqref{eq:point-to-jet-transform} is obtained from the
+literal central value/derivative jet transform by a fixed diagonal
+congruence:
+\begin{equation}
+\label{eq:gram-vs-jet-congruence}
+P_h
+\;=\;
+\diag(\sqrt 2,\, 1/\sqrt 2)\,
+\begin{pmatrix}
+1/2 & 1/2\\[0.6ex]
+-1/(2h) & 1/(2h)
+\end{pmatrix}.
+\end{equation}
+With this convention the same-point limit is
+\begin{equation}
+\label{eq:same-point-as-kernel-derivatives}
+J(T)
+\;=\;
+\begin{pmatrix}
+2K_\Ph(T,T) & \partial_y K_\Ph(T,T)\\[0.6ex]
+\partial_x K_\Ph(T,T) & \tfrac12 \partial_{xy} K_\Ph(T,T)
+\end{pmatrix},
+\end{equation}
+which evaluates entry by entry to the explicit phase-kernel formula in
+Lemma~\ref{lem:same-point-jet-limit}.  We refer to the basis produced
+by \(P_h\) as the \emph{Gram-normalized basis}, not the literal
+value/derivative basis: it differs from the latter by the diagonal
+congruence \eqref{eq:gram-vs-jet-congruence}, which carries the
+factor-of-\(2\) rescaling visible in the leading entry of \(J(T)\) and
+the corresponding rescalings of every cross-block and finite-scale
+block downstream.
 
 \begin{remark}[Pair separation convention]
 \label{rem:pair-separation-convention}
@@ -392,20 +424,50 @@ that convention.  Any imported lemma using the alternative convention
 retransformed before insertion.
 \end{remark}
 
-\begin{remark}[Normalization audit]
+\begin{remark}[Convention audit: Gram-normalized vs.\ literal jet]
 \label{rem:normalization-audit}
-The orthonormal value/derivative normalization
-\eqref{eq:point-to-jet-transform} is fixed because it is the unique
-normalization of \(P_h\) for which \(P_h A_h(T) P_h^\top\) converges to
-the matrix \(J(T)\) of \eqref{eq:same-point-J} entry by entry as
-\(h\to 0\); see Lemma~\ref{lem:same-point-jet-limit}.  Alternative
-choices --- in particular the unnormalized
-\(\tfrac12\bigl(\begin{smallmatrix}1&1\\-1/h&1/h\end{smallmatrix}\bigr)\)
-appearing in some early drafts --- rescale the \((1,1)\) and \((2,2)\)
-entries of the limit by reciprocal factors of \(2\) and break the
-displayed identity.  This normalization is therefore fixed for every
-finite-scale block in
-Section~\ref{sec:finite-scale-local-blocks-and-whitening}.
+The downstream object of this paper is a whitened Gram block
+\(\widehat\Om_\z(s;m)\)
+(Definition~\ref{def:whitened-finite-block}); Gram-normalizing the
+even and odd point modes before block extraction is the cleaner
+Hilbert-space convention.  The displayed jet-limit blocks --- the
+\(2 q(T)/\pi\) leading entry and the \(\tfrac1{12}(q''+2q^3)/\pi\)
+corner of \(J(T)\) (Lemma~\ref{lem:same-point-jet-limit}), and the
+matching cross-block entries \(2\sin\Del/(\pi s)\) etc.\ of
+\(N_{12}\) (Lemma~\ref{lem:cross-block-jet-limit}) --- are the
+Gram-normalized blocks; they are the limits of \(P_h A_h P_h^\top\)
+for \eqref{eq:point-to-jet-transform}, not for the literal-jet
+alternative.
+
+The earlier draft \texttt{rh/proof\_of\_rh.tex} contains a convention
+collision at exactly this point: it prints the literal-jet
+transform
+\(P_h^{\mathrm{old}}=\tfrac12\bigl(\begin{smallmatrix}1&1\\-1/h&1/h\end{smallmatrix}\bigr)\)
+and immediately afterward displays the Gram-normalized \(J(T)\) used
+above.  Those two choices do not match.  With \(P_h^{\mathrm{old}}\)
+and the pair \(T\pm h\), conjugation of the raw kernel block produces
+\[
+\frac1\pi
+\begin{pmatrix}
+q(T) & \tfrac12 q'(T)\\[0.6ex]
+\tfrac12 q'(T) & \tfrac16\bigl(q''(T)+2q(T)^3\bigr)
+\end{pmatrix},
+\]
+which is the literal central value/derivative jet block, \emph{not}
+the displayed \(J(T)\).  The two differ by the diagonal congruence
+\eqref{eq:gram-vs-jet-congruence}: rescale the \((1,1)\) entry by
+\(2\) and the \((2,2)\) entry by \(1/2\).  Not a typo in either
+matrix --- a convention collision.
+
+The present rebuild fixes the collision in favor of the Gram-normalized
+transform.  All same-point and cross-block jet limits, all finite-scale
+blocks \(G_{m,\pm}(s)\) and \(N_m(s)\), the whitened block
+\(\widehat\Om_\z(s;m)\), and every quotient covector are stated under
+\eqref{eq:point-to-jet-transform}.  The literal-jet alternative would
+also be valid, but only after rescaling each of these objects
+consistently; that rescaling is not done here.  Any imported v1 lemma
+or formula that silently assumes \(P_h^{\mathrm{old}}\) must be
+re-conjugated by \(\diag(\sqrt 2,\,1/\sqrt 2)\) before insertion.
 \end{remark}
 
 % =============================================================================
@@ -420,8 +482,9 @@ Section~\ref{sec:finite-scale-local-blocks-and-whitening}.
 \par\medskip
 
 The phase kernel \(K_\Ph\) collapses, in the limit \(h\to 0\), into two
-explicit \(2\times 2\) matrices in the value/derivative basis: a
-same-point block \(J(T)\) attached to a single center, and a cross-block
+explicit \(2\times 2\) matrices in the Gram-normalized basis of
+\eqref{eq:point-to-jet-transform}: a same-point block \(J(T)\) attached
+to a single center, and a cross-block
 \(N_{12}(T_1,T_2)\) attached to two centers.  These matrices, together
 with the polynomial Gram lower bounds of
 Section~\ref{subsec:same-point-gram-positivity}, are the only objects
@@ -678,7 +741,7 @@ construction is the most sensitive structural decision in the rebuild:
 \begin{definition}[Transverse projection]
 \label{def:transverse-projection}
 Let \(\mathcal V_\val\) denote the finite-dimensional subspace of the
-value/derivative space spanned by the value, gauge, and background
+Gram-normalized jet space spanned by the value, gauge, and background
 directions to be quotiented out.  A transverse projection
 \(\Pi_\trans\) is an operator onto the orthogonal complement of
 \(\mathcal V_\val\) satisfying, on the retained packets:
