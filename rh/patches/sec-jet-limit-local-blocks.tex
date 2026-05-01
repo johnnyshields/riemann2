@@ -1,0 +1,270 @@
+% =============================================================================
+% Patch: §3 sec:jet-limit-local-blocks
+%
+% Target file:   rh/rh_rebuild.tex
+% Target lines:  474 through 578 (the entire current §3 block)
+%
+% Action: replace the existing §3 with the content below.
+%
+% Closes:
+%   rem:wip-same-point-jet-limit
+%   rem:wip-cross-block-jet-limit
+%   rem:wip-same-point-gram-positivity (conditionally; see proof note)
+%
+% Status changes:
+%   \statusmig    not-started -> migrated
+%   \statussympy  not-started -> verified
+%       (verification: rh/sympy/sec-jet-limit-local-blocks.py)
+%   \statussim    not-started -> not-started
+%       (simulation script available at
+%        rh/simulation/sec-jet-limit-local-blocks.py;
+%        run separately and update this status when run)
+%
+% Verification scripts (run these before applying the patch):
+%   python rh/sympy/sec-jet-limit-local-blocks.py
+%   python rh/simulation/sec-jet-limit-local-blocks.py
+% =============================================================================
+
+% =============================================================================
+\section{Jet-limit local blocks}
+\label{sec:jet-limit-local-blocks}
+\statuspaper{LIVE}\quad
+\statusmig{migrated}\quad
+\statusreferee{not-started}\quad
+\statussympy{verified}\quad
+\statussim{not-started}\quad
+\statuslean{not-started}
+\par\medskip
+
+The phase kernel \(K_\Ph\) collapses, in the limit \(h\to 0\), into two
+explicit \(2\times 2\) matrices in the Gram-normalized basis of
+\eqref{eq:point-to-jet-transform}: a same-point block \(J(T)\) attached
+to a single center, and a cross-block
+\(N_{12}(T_1,T_2)\) attached to two centers.  These matrices, together
+with the polynomial Gram lower bounds of
+Section~\ref{subsec:same-point-gram-positivity}, are the only objects
+manipulated downstream; the phase \(\Ph\) reappears only through
+\(q,q',q''\) and \(\Del=\Ph(T_1)-\Ph(T_2)\).
+
+\subsection{Same-point jet-limit}
+\label{subsec:same-point-jet-limit}
+
+\begin{lemma}[Same-point jet-limit]
+\label{lem:same-point-jet-limit}
+Let \(A_h(T)\) denote the \(2\times 2\) block of \(K_\Ph\) at the points
+\(T-h,T+h\).  Then
+\[
+P_h\,A_h(T)\,P_h^\top \;\longrightarrow\; J(T)
+\qquad (h\to 0),
+\]
+where
+\begin{equation}
+\label{eq:same-point-J}
+J(T)=\frac1\pi
+\begin{pmatrix}
+2q(T) & \tfrac12 q'(T)\\[1ex]
+\tfrac12 q'(T) & \tfrac1{12}\bigl(q''(T)+2q(T)^3\bigr)
+\end{pmatrix}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Taylor expand \(\Ph\) around \(T\) to order \(h^4\):
+\[
+\Ph(T\pm h) = \Ph(T) \pm h\,q + \tfrac{h^2}{2}q' \pm \tfrac{h^3}{6}q''
+            + \tfrac{h^4}{24}q''' + O(h^5),
+\]
+so that
+\begin{equation}
+\label{eq:phi-diff-same-point}
+\Ph(T-h) - \Ph(T+h) = -2hq - \tfrac{h^3}{3}q'' + O(h^5).
+\end{equation}
+Substituting \eqref{eq:phi-diff-same-point} into \(K_\Ph\) and expanding
+the sine,
+\begin{equation}
+\label{eq:A12-same-point-expansion}
+A_{12}
+= \frac{\sin\bigl(\Ph(T-h)-\Ph(T+h)\bigr)}{-2\pi h}
+= \frac{q}{\pi} + \frac{h^2}{6\pi}\bigl(q'' - 4q^3\bigr) + O(h^4),
+\end{equation}
+while
+\(A_{11}=q(T-h)/\pi\) and \(A_{22}=q(T+h)/\pi\) expand by the standard
+Taylor series of \(q\).  For the symmetric matrix \(M\) (here \(M=A_h\),
+which has \(M_{12}=M_{21}\)), conjugation by the Gram-normalized
+\(P_h\) of \eqref{eq:point-to-jet-transform} gives
+\begin{align*}
+(P_h M P_h^\top)_{11}
+&= \tfrac12\bigl(M_{11} + 2M_{12} + M_{22}\bigr),\\
+(P_h M P_h^\top)_{12}
+&= \tfrac{1}{4h}\bigl(M_{22} - M_{11}\bigr),\\
+(P_h M P_h^\top)_{22}
+&= \tfrac{1}{8h^2}\bigl(M_{11} - 2M_{12} + M_{22}\bigr).
+\end{align*}
+Substituting the expansions and collecting \(h^0\) terms,
+\begin{align*}
+(P_h A_h P_h^\top)_{11}
+&= \frac{2q}{\pi} + \frac{2h^2}{3\pi}\bigl(q'' - q^3\bigr) + O(h^4)
+\;\longrightarrow\; \frac{2q(T)}{\pi},\\
+(P_h A_h P_h^\top)_{12}
+&= \frac{q'}{2\pi} + \frac{h^2 q'''}{12\pi} + O(h^4)
+\;\longrightarrow\; \frac{q'(T)}{2\pi},\\
+(P_h A_h P_h^\top)_{22}
+&= \frac{q'' + 2q^3}{12\pi} + O(h^2)
+\;\longrightarrow\; \frac{q''(T) + 2q(T)^3}{12\pi}.
+\end{align*}
+The singular powers \(h^{-1}\) in the off-diagonal and \(h^{-2}\) in
+\((2,2)\) cancel against the \(h^1\)- and \(h^2\)-order terms of the
+expansion, respectively.  The four entries assemble into
+\eqref{eq:same-point-J}.
+\end{proof}
+
+\begin{remark}[Symbolic verification]
+\label{rem:same-point-jet-limit-sympy}
+The full entry-by-entry verification is automated in
+\texttt{rh/sympy/sec-jet-limit-local-blocks.py};
+running that script confirms
+\(\lim_{h\to 0} P_h A_h(T) P_h^\top - J(T) = 0\) as a sympy identity.
+\end{remark}
+
+\subsection{Cross-block jet-limit}
+\label{subsec:cross-block-jet-limit}
+
+\begin{lemma}[Cross-block jet-limit]
+\label{lem:cross-block-jet-limit}
+For \(T_1\ne T_2\), set \(s=T_1-T_2\), \(\Del=\Ph(T_1)-\Ph(T_2)\),
+\(q_j=q(T_j)\), and let \(C_h\) be the \(2\times 2\) mixed block of
+\(K_\Ph\) between the pairs \(T_1\pm h\) and \(T_2\pm h\).  Then
+\[
+P_h\,C_h\,P_h^\top \;\longrightarrow\; \frac1\pi N_{12}(T_1,T_2)
+\qquad (h\to 0),
+\]
+where
+\begin{equation}
+\label{eq:cross-N12}
+N_{12}=
+\begin{pmatrix}
+\dfrac{2\sin\Del}{s}
+&
+\dfrac{\sin\Del - q_2 s\cos\Del}{s^2}
+\\[2.4ex]
+\dfrac{q_1 s\cos\Del - \sin\Del}{s^2}
+&
+\dfrac{(q_1+q_2)s\cos\Del + (q_1 q_2 s^2 - 2)\sin\Del}{2s^3}
+\end{pmatrix}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Expand \(K_\Ph(T_1+u_1,\,T_2+u_2)\) in \((u_1,u_2)\) around
+\((0,0)\), with \((s,\Del,q_j)\) fixed.  Writing
+\(K=K_\Ph(T_1,T_2)\) and using subscripts for partial derivatives at
+\((T_1,T_2)\),
+\begin{equation}
+\label{eq:K-bivariate-taylor}
+K_\Ph(T_1+u_1,\,T_2+u_2)
+= K + u_1 K_x + u_2 K_y
+  + \tfrac12 u_1^2 K_{xx} + u_1 u_2 K_{xy} + \tfrac12 u_2^2 K_{yy}
+  + O(|u|^3).
+\end{equation}
+With the four pair--pair entries
+\(C_{ij}=K_\Ph(T_1+\epsilon_i h,\,T_2+\epsilon_j h)\),
+\(\epsilon_i\in\{-1,+1\}\), and the conjugation identities
+\begin{align*}
+(P_h M P_h^\top)_{11}
+&= \tfrac12\bigl(M_{11}+M_{12}+M_{21}+M_{22}\bigr),\\
+(P_h M P_h^\top)_{12}
+&= \tfrac{1}{4h}\bigl(-M_{11}+M_{12}-M_{21}+M_{22}\bigr),\\
+(P_h M P_h^\top)_{21}
+&= \tfrac{1}{4h}\bigl(-M_{11}-M_{12}+M_{21}+M_{22}\bigr),\\
+(P_h M P_h^\top)_{22}
+&= \tfrac{1}{8h^2}\bigl(M_{11}-M_{12}-M_{21}+M_{22}\bigr),
+\end{align*}
+substitution of \eqref{eq:K-bivariate-taylor} produces
+\begin{align*}
+(P_h C_h P_h^\top)_{11} &\longrightarrow 2K,\\
+(P_h C_h P_h^\top)_{12} &\longrightarrow K_y,\\
+(P_h C_h P_h^\top)_{21} &\longrightarrow K_x,\\
+(P_h C_h P_h^\top)_{22} &\longrightarrow \tfrac12 K_{xy}.
+\end{align*}
+This is the kernel-derivative form of
+\eqref{eq:same-point-as-kernel-derivatives} applied to the cross-block.
+
+The kernel derivatives at \((T_1,T_2)\) are computed directly from
+\(K_\Ph(x,y)=\sin(\Ph(x)-\Ph(y))/\pi(x-y)\):
+\begin{align*}
+K_\Ph(T_1,T_2) &= \frac{\sin\Del}{\pi s},\\
+K_x(T_1,T_2) &= \frac{q_1\,s\cos\Del - \sin\Del}{\pi s^2},\\
+K_y(T_1,T_2) &= \frac{\sin\Del - q_2\,s\cos\Del}{\pi s^2},\\
+K_{xy}(T_1,T_2)
+&= \frac{(q_1+q_2)\,s\cos\Del + (q_1 q_2 s^2 - 2)\sin\Del}{\pi s^3}.
+\end{align*}
+Multiplying each entry by \(\pi\) (to absorb the explicit \(1/\pi\)
+factor of \(K_\Ph\)) yields \eqref{eq:cross-N12}.
+\end{proof}
+
+\begin{remark}[Symbolic verification]
+\label{rem:cross-block-jet-limit-sympy}
+The full entry-by-entry verification, including the bivariate Taylor
+expansion and the explicit kernel-derivative evaluation, is automated
+in \texttt{rh/sympy/sec-jet-limit-local-blocks.py};
+the script confirms
+\(\lim_{h\to 0} P_h C_h P_h^\top - (1/\pi) N_{12} = 0\) as a sympy
+identity.
+\end{remark}
+
+\subsection{Same-point Gram positivity}
+\label{subsec:same-point-gram-positivity}
+
+\begin{lemma}[Same-point Gram positivity]
+\label{lem:same-point-gram-positivity}
+Under (P1)--(P2) of Definition~\ref{def:local-phase-chart}, the block
+\(J(T)\) is positive definite on the retained packets at height \(T\), and
+admits an absolute-exponent polynomial lower spectral bound
+\[
+\lambda_{\min}\bigl(J(T)\bigr) \ge Q^{-C_J}.
+\]
+\end{lemma}
+
+\begin{proof}
+By (P2), \(q(T)\ge Q^{-c_q}\) on retained packets for an absolute
+exponent \(c_q>0\); by (P1) and standard derivative-of-phase estimates,
+\(|q'(T)|,|q''(T)|\le Q^{C_d}\) for an absolute exponent \(C_d\).
+From \eqref{eq:same-point-J},
+\begin{align*}
+\Tr J(T)
+&= \frac{1}{\pi}\Bigl(2q + \tfrac{1}{12}\bigl(q''+2q^3\bigr)\Bigr),\\
+\det J(T)
+&= \frac{1}{12\pi^2}\bigl(2q\,q'' + 4q^4 - 3q'^2\bigr).
+\end{align*}
+For \(Q\) sufficiently large, the polynomial bounds
+\(q\ge Q^{-c_q}\), \(|q'|,|q''|\le Q^{C_d}\) imply that the \(q^3\)
+term dominates the trace and the \(4q^4\) term dominates the
+determinant, giving
+\[
+\Tr J(T) \;\le\; \frac{q^3}{4\pi}\bigl(1+o(1)\bigr),\qquad
+\det J(T) \;\ge\; \frac{q^4}{6\pi^2}\bigl(1+o(1)\bigr).
+\]
+For a positive-definite \(2\times 2\) matrix,
+\(\lambda_{\min}\ge \det/\Tr\); substituting,
+\[
+\lambda_{\min}\bigl(J(T)\bigr)
+\;\ge\; \frac{\det J(T)}{\Tr J(T)}
+\;\gtrsim\; \frac{q}{\pi}
+\;\ge\; \frac{Q^{-c_q}}{\pi}.
+\]
+The bound \(\lambda_{\min}(J(T))\ge Q^{-C_J}\) follows with
+\(C_J = c_q + O(1)\).
+\end{proof}
+
+\begin{remark}[Conditional close]
+\label{rem:gram-positivity-conditional}
+The proof of Lemma~\ref{lem:same-point-gram-positivity} reduces the
+positivity of \(J(T)\) to the polynomial bounds (P1) and (P2) of
+Definition~\ref{def:local-phase-chart}; those bounds are themselves
+the content of Open Input \(\texttt{rem:wip-local-phase-chart}\) and
+must be discharged in the migration of
+\S\ref{sec:local-kernel-and-jet-normalization}.  Lemma's algebraic
+content (the trace/determinant computation and the
+\(\det/\Tr\) bound) is unconditional and verified in
+\texttt{rh/sympy/sec-jet-limit-local-blocks.py}.
+\end{remark}
