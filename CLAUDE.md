@@ -336,9 +336,9 @@ Every section in `rh_rebuild.tex` carries five status indicators under its headi
 
 ```latex
 \statuspaper{<value>}\quad
-\statusvmig{<value>}\quad
+\statusmig{<value>}\quad
 \statusreferee{<value>}\quad
-\statuspython{<value>}\quad
+\statussympy{<value>}\quad
 \statussim{<value>}\quad
 \statuslean{<value>}
 \par\medskip
@@ -349,7 +349,7 @@ Status values:
 - **paper** \(\in\) `LIVE | FINITE AUDIT | ARCHIVED | SUPERSEDED | NO-GO | DIAGNOSTIC`.
 - **v1** (migration from `proof_of_rh.tex`) \(\in\) `not-started | in-progress | partial | migrated | n/a` (rebuild-original sections).
 - **referee** \(\in\) `not-started | in-progress | passed | failed`.
-- **python** (symbolic/formula verification: sympy/numpy re-derivation of matrix entries, identities, Taylor coefficients) \(\in\) `n/a | not-started | partial | verified`.
+- **sympy** (symbolic/formula verification: sympy/numpy re-derivation of matrix entries, identities, Taylor coefficients) \(\in\) `n/a | not-started | partial | verified`.
 - **sim** (numerical simulation: empirical behavior at specific heights, sweeps, Monte Carlo --- *not* formula verification) \(\in\) `n/a | not-started | partial | verified`.
 - **lean** (Lean formalization) \(\in\) `n/a | not-started | in-progress | formalized`.
 
