@@ -237,39 +237,95 @@ residual.  Only row-dead terms enter the exact killed quotient; every
 atom-local live \(Y12\) contribution is labelled and retained in the active
 affine branch.
 
-\item \textbf{Packet-to-source-graded \(K9\) transfer.}
-There is a canonical transfer map
+\item \textbf{Carrier-corrected packet-to-source-graded \(K9\) transfer.}
+There is no assumed two-sided comparison between the full analytic packet
+Hilbert space and the finite corrected \(K9\) jet space.  Instead the following
+four transfer certificates hold.
+
+First, for some \(J\ge J_{K9}\), the packet Sobolev trace upper bound holds:
 \[
-  T_{\mathrm{jet},\rho}:
-  \mathcal H_{\mathrm{pkt},\rho}^{\mathrm{good}}
-  \longrightarrow
-  \mathcal H_{K9,\rho}^{\mathrm{gr}}
-\]
-from the good analytic packet space to the canonical source-graded \(K9\) jet
-space such that
-\[
-  Q^{-C}\|v\|_{\mathrm{pkt}}^2
+  \sum_p\mu_p
+  \bigl\|
+  \Lambda_p^{\mathrm{gr,full}}v_p
+  \bigr\|_{\mathrm{gr}}^{2}
   \le
-  \|T_{\mathrm{jet},\rho}v\|_{K9,\mathrm{gr}}^2
-  \le
-  Q^C\|v\|_{\mathrm{pkt}}^2
-  \qquad
-  (v\in\mathcal H_{\mathrm{pkt},\rho}^{\mathrm{good}}).
+  Q^{C_{\mathrm{tr}}}
+  \sum_p \mu_p W_{\mathrm{ref}}(m_p)
+  \sum_{0\le j\le J}
+  r_p^{2j-1}
+  \int_{K_p^+}
+  |\partial_t^j v_p(t)|^2\chi_p(t)\,dt
 \]
-The map is compatible with the canonical branch window, the Fej\'er--Riesz Stack,
-the labelled \(K9\) live/dead routing, and the retained affine \(C_7/Y12\)
-carrier.  In particular it transports the surviving source/graph packet mass
-into the same source-graded Hilbert norm used by
+for every analytic packet \(v=(v_p)_p\), where
 \[
   \Lambda_p^{\mathrm{gr,full}}
   =
   (I-P_p^{\mathrm{full}})
-  \mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p}
+  \mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p}.
 \]
-and by the maximal affine projection
+
+Second, the actual Hardy source admits a carrier decomposition
 \[
-  \widehat\Lambda_{\max,p}.
+  u_H=u_{H,\mathrm{car}}+u_{H,\tail},
+  \qquad
+  u_{H,\mathrm{car}}\in \bigoplus_p\mathcal V_{\mathrm{pkt},p}^{\mathrm{car}},
 \]
+with
+\[
+  \|u_{H,\tail}\|_{\mathrm{pkt},J}^{2}
+  \le Q^{-B}G_{\mathrm{ref}}
+\]
+and carrier capture
+\[
+  \sum_p\mu_p
+  \|\Pi_{\mathrm{eff},p}\Pi_{\mathrm{car},p}u_H\|_{\mathrm{pkt},J,p}^{2}
+  \ge Q^{-C_{\mathrm{cap}}}G_{\mathrm{ref}}.
+\]
+
+Third, on the retained effective carrier, the finite source-graded \(K9\) Gram
+audit holds:
+\[
+  A_p^*G_{\jet,p}^{\mathrm{gr}}A_p
+  \ge
+  Q^{-C_{\mathrm{gram}}}G_{\mathrm{pkt},p},
+\]
+where
+\[
+  A_p
+  =
+  \left[
+  \Lambda_p^{\mathrm{gr,full}}\psi_{p,1}\ \cdots\
+  \Lambda_p^{\mathrm{gr,full}}\psi_{p,N_p}
+  \right]
+\]
+for a certified basis
+\(\mathcal B_p=\{\psi_{p,1},\ldots,\psi_{p,N_p}\}\) of
+\(\mathcal V_{\mathrm{pkt},p}^{\mathrm{car}}\).
+
+Fourth, the raw \(2Y\) live/dead routing certificate
+\(\mathfrak R_{2Y}(p)\) is verified on these same transferred carrier columns.
+In particular,
+\[
+  L_p^{\mathrm{row}}E_p=I_2,
+  \qquad
+  \|L_p^{\mathrm{row}}\|_{\mathrm{op}}\le Q^C,
+\]
+and every transferred carrier column is classified as row-dead, coherent-live
+and retained, or residual.  No atom-local live \(Y12\) component is quotient-killed.
+
+Consequently,
+\[
+  \sum_p\mu_p
+  \bigl\|
+  \Lambda_p^{\mathrm{gr,full}}
+  \Pi_{\mathrm{eff},p}\Pi_{\mathrm{car},p}u_H
+  \bigr\|_{\mathrm{gr}}^{2}
+  \ge
+  Q^{-C_{\mathrm{cap}}-C_{\mathrm{gram}}-C_{2Y}}G_{\mathrm{ref}}
+  -
+  Q^{-B}G_{\mathrm{ref}}.
+\]
+The exponent \(B\) is chosen larger than the total downstream loss.
 
 \end{enumerate}
 
@@ -324,10 +380,14 @@ and exhaustive labelled live/dead routing.  Thus the primitive arithmetic
 rows are not quotient-killed; all atom-local live \(Y12\) contributions enter
 the retained affine source-graded branch.
 
-Finally, the packet-to-\(K9\) transfer identifies the surviving analytic packet
-mass with the canonical source-graded \(K9\) jet norm up to polynomial
-distortion.  Hence the active branch satisfies the hypotheses of the canonical
-source-graded atomic comparison:
+Finally, the carrier-corrected transfer package applies to the actual Hardy
+source.  The analytic trace theorem controls tail errors, carrier capture places
+a polynomial portion of the Hardy source in the finite effective carrier, the
+finite \(K9\) Gram audit converts that carrier mass into the source-graded
+\(K9\) norm, and \(\mathfrak R_{2Y}(p)\) routes the transferred columns through
+the retained \(C_7/Y12\) affine branch.  Thus the active branch satisfies the
+hypotheses of the canonical source-graded atomic comparison in the same
+\(K9\)-graded norm:
 \[
   \mathrm{Agg}L^2(q''_{\can})
   +
@@ -3855,6 +3915,50 @@ T\longmapsto T+\frac{f}{c}.
 Thus the mixed four-point branch sees only the determinant projection
 \(ev_5-u_5f\), while the \(T\)-coordinate records a separate
 \(\Phi_K\)-visible projection.
+\end{proof}
+
+\begin{theorem}[Actual zeta-source mixed four-point bridge]
+\label{thm:actual-zeta-source-mixed-four-point-bridge}
+Assume the corrected Hardy-source package audit,
+Definition~\ref{def:corrected-Hardy-source-package-audit}.  Then the actual
+zeta-source correction creates no independent mixed four-point fixed-sector
+carrier.  More precisely,
+\[
+  \left[
+  B_7^{\mathfrak f}
+  \bigl(C_{\mathcal W}^{\corr,\zeta}\bigr)
+  \right]
+  =
+  0
+  \quad
+  \text{in }
+  \mathfrak f/\mathbf C A_5^{\mathfrak f}(m),
+\]
+up to \(O(Q^{-B})\) residuals.  Hence the mixed four-point branch sees only the
+already-defined quotient determinant channel and exits through the existing
+scalar walls
+\[
+  T_v=0
+  \qquad\text{or}\qquad
+  \mathcal R=0.
+\]
+\end{theorem}
+
+\begin{proof}
+The fixed-sector quotient nullity clause of the corrected Hardy-source package
+audit says exactly that
+\[
+  B_7^{\mathfrak f}
+  \bigl(C_{\mathcal W}^{\corr,\zeta}\bigr)
+  \in
+  \mathbf C A_5^{\mathfrak f}(m)
+  +
+  O(Q^{-B}).
+\]
+Passing to the quotient
+\(\mathfrak f/\mathbf C A_5^{\mathfrak f}(m)\) gives the displayed vanishing.
+The existing mixed four-point quotient-determinant theorem then applies without
+introducing a new carrier.
 \end{proof}
 
 \begin{remark}[No independent \(T\)-dependency in mixed four-point]
@@ -13132,6 +13236,36 @@ for analytic $H$. Returning to $(h_1,h_2)$ gives
 a_1a_2(h_1-h_2)^2\,\mathcal J_2(a_1,h_1;a_2,h_2),
 \]
 as claimed.
+\end{proof}
+
+\begin{theorem}[Actual zeta-source two-point bridge]
+\label{thm:actual-zeta-source-two-point-bridge}
+Assume the corrected Hardy-source package audit,
+Definition~\ref{def:corrected-Hardy-source-package-audit}.  Then the actual
+zeta source satisfies the finite-order source criterion of
+Lemma~\ref{lem:minimal-source-level-two-point-criterion}.  Consequently the
+two-point interaction remainder factors as
+\[
+  \mathcal I_2^\zeta
+  =
+  a_1a_2(h_1-h_2)^2\mathcal J_2^\zeta
+  +
+  O(Q^{-B}).
+\]
+In particular, on compact good patches and after the \(K9/Y12\) carrier routing,
+the exact close two-point bad core is excluded up to the declared residual
+scale.
+\end{theorem}
+
+\begin{proof}
+One-amplitude collapse gives divisibility by \(a_1a_2\).  Swap symmetry makes the
+remaining two-point defect even under \(h_1\leftrightarrow h_2\).  Diagonal
+merger makes the defect vanish when \(h_1=h_2\).  Hence the defect is divisible
+by \((h_1-h_2)^2\), giving the displayed factorization.  The residual term is
+the residual allowed in the corrected package audit.  The carrier-visible source
+lower bound from
+Theorem~\ref{thm:actual-zeta-source-admissibility-two-four-point} prevents the
+factorized source contribution from being vacuous in the \(K9/Y12\) branch.
 \end{proof}
 
 \begin{corollary}[Conditional quadratic defect estimate and two-point exclusion]
@@ -31506,6 +31640,59 @@ gives the claim.
 
 \subsection{Gate 2 from source thickening and \(L^2\)-input rigidity}
 
+\begin{definition}[Ordinary, singular, and transition packet split]
+\label{def:ordinary-singular-transition-packet-split}
+Every Hardy packet family used by the source branch is partitioned as
+\[
+  \mathcal P
+  =
+  \mathcal P_{\mathrm{ord}}
+  \sqcup
+  \mathcal P_{\mathrm{sing}}
+  \sqcup
+  \mathcal P_{\mathrm{trans}}.
+\]
+The ordinary subfamily \(\mathcal P_{\mathrm{ord}}\) consists of packets on which
+the real-canonical Hardy branch is smooth, all chart denominators are bounded
+below by \(Q^{-C}\), the normalized derivative convention
+\(\mathcal D_p=\lambda_p\partial_t\) is fixed, and the identities
+\[
+  u_p=\mathcal D_p^2q_\zeta,
+  \qquad
+  \Gamma_G=u_p-6q_\zeta+2q_\zeta^3,
+\]
+\[
+  \Gamma_{G,2}
+  =
+  2q_\zeta(\mathcal D_pq_\zeta)^2
+  -
+  \frac16\mathcal D_p^2\Gamma_G
+\]
+hold up to the declared residual ledger.
+
+The singular subfamily contains packets meeting an unregularized critical-line
+zero, a branch denominator wall, or a chart singularity.  The transition
+subfamily contains collar packets used to pass between ordinary charts or
+between scale-admissible packet regimes.
+\end{definition}
+
+\begin{hypothesis}[Ordinary packet no-loss routing]
+\label{hyp:ordinary-packet-no-loss-routing}
+The active Hardy source packet family satisfies one of the following no-loss
+alternatives:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=*]
+\item ordinary packets carry polynomially positive source mass:
+\[
+  G_{\mathrm{ord}}\ge Q^{-C}G_{\mathrm{ref}};
+\]
+\item the singular and transition packets are routed to certified alternative
+branches whose source-graded \(K9/Y12\) lower bounds are polynomially comparable
+to the ordinary branch;
+\item the singular and transition packet contribution is \(O(Q^{-B}G_{\mathrm{ref}})\)
+for \(B\) larger than the final loss exponent.
+\end{enumerate}
+\end{hypothesis}
+
 \begin{theorem}[Gate 2 from Gate 1 and \(L^2\)-input rigidity]
 \label{thm:gate-two-from-gate-one-l2-rigidity}
 Assume the normalized real-canonical convention of
@@ -31607,6 +31794,72 @@ It suffices that
 A>\frac{13}{2}B+C_u+5C_R+O(1).
 \]
 Thus Gate~2 failure is impossible for such \(A\).
+\end{proof}
+
+\begin{theorem}[Carrier-visible Gate--2 output]
+\label{thm:carrier-visible-gate-two-output}
+Let \(\mathcal P_{\mathrm{ord}}\) be a positive-density family of ordinary smooth
+Hardy-normalized packets.  On each packet use the normalized derivative
+\[
+  \mathcal D_p=\lambda_p\partial_t
+\]
+and define
+\[
+  u_p=\mathcal D_p^2q_\zeta,
+\]
+\[
+  g_p=\Gamma_G=u_p-6q_\zeta+2q_\zeta^3,
+\]
+\[
+  h_p=\Gamma_{G,2}
+  =
+  2q_\zeta(\mathcal D_pq_\zeta)^2
+  -
+  \frac16\mathcal D_p^2g_p.
+\]
+Assume:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=*]
+\item Gate--1 source survival on \(\mathcal P_{\mathrm{ord}}\):
+\[
+  \sum_{p\in\mathcal P_{\mathrm{ord}}}\mu_p
+  \int_{K_p^+}|u_p|^2\,d\nu_p
+  \ge Q^{-A_1}G_{\mathrm{ref}};
+\]
+\item the ordinary Hardy primitive bounds for
+\(q_\zeta,\mathcal D_pq_\zeta,\mathcal D_p^2q_\zeta,\mathcal D_p^3q_\zeta\);
+\item the residual ledger for \(u_p,g_p,h_p\) lies below the Gate--2 failure
+scale;
+\item carrier capture and the finite \(K9/Y12\) Gram/\(\mathfrak R_{2Y}\) audits
+of Theorem~\ref{thm:carrier-corrected-packet-to-K9-transfer}.
+\end{enumerate}
+Then the analytic Gate--2 mass
+\[
+  \sum_{p\in\mathcal P_{\mathrm{ord}}}\mu_p
+  \int_{K_p^+}
+  |u_p|^2\bigl(|g_p|^2+|h_p|^2\bigr)\,d\nu_p
+  \ge Q^{-A_2}G_{\mathrm{ref}}
+\]
+upgrades to the source-graded \(K9/Y12\)-visible lower bound
+\[
+  \sum_p\mu_p
+  \bigl\|
+  \Pi_{\mathrm{live}}
+  \Lambda_p^{\mathrm{gr,full}}(u_H)
+  \bigr\|_{\mathrm{gr}}^{2}
+  \ge Q^{-A_3}G_{\mathrm{ref}}.
+\]
+\end{theorem}
+
+\begin{proof}
+The analytic Gate--2 lower bound follows from
+Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity} on the ordinary packet
+subfamily, using the common normalized derivative convention and the stated
+primitive and residual hypotheses.  The carrier-visible upgrade is exactly
+Theorem~\ref{thm:carrier-corrected-packet-to-K9-transfer}, applied to the
+Hardy-source carrier generated by the differential AFE and the retained
+\(C_7/Y12\) affine directions.  The live/dead routing part of
+\(\mathfrak R_{2Y}(p)\) ensures that the \(Y12\)-visible component is labelled
+and retained rather than killed.
 \end{proof}
 
 \begin{remark}[Replacement of the old \(D1/D2\) downstream package]
@@ -58967,6 +59220,461 @@ packet and every finite jet.  If a future argument needs such a comparison, it
 must be stated as a separate Gram-transfer theorem with polynomial constants.
 \end{remark}
 
+\begin{lemma}[No full packet-to-\(K9\) lower bound]
+\label{lem:no-full-packet-to-K9-lower-bound}
+Let \(p\) be a good analytic packet and let
+\[
+  T_p
+  =
+  (I-P_p^{\mathrm{full}})
+  \mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p}
+\]
+be any corrected \(K9\) jet map using finitely many transition jets and finitely
+many labelled row projections.  Then no constants \(C\) and \(Q\) can make
+\[
+  Q^{-C}\|v\|_{\mathrm{pkt},J,p}^{2}
+  \le
+  \|T_pv\|_{\mathrm{gr}}^{2}
+\]
+hold for every \(v\in H^J(K_p^+)\).
+
+Consequently, all lower packet-to-\(K9\) transfer statements in the proof must
+be restricted to a finite certified carrier or to a quotient of such a carrier.
+\end{lemma}
+
+\begin{proof}
+The map \(T_p\) has finite rank because it depends on finitely many transition
+jets and finitely many finite row projections.  The analytic packet space
+\(H^J(K_p^+)\) is infinite-dimensional.  Hence \(\ker T_p\) is
+infinite-dimensional.  Choose nonzero \(v\in\ker T_p\).  Then
+\[
+  \|T_pv\|_{\mathrm{gr}}=0,
+  \qquad
+  \|v\|_{\mathrm{pkt},J,p}>0,
+\]
+contradicting any lower bound of the displayed form.
+\end{proof}
+
+\begin{definition}[Hardy-source finite carrier]
+\label{def:hardy-source-finite-carrier}
+On a good ordinary Hardy-normalized packet \(p\), the Hardy-source finite carrier
+is a finite-dimensional subspace
+\[
+  \mathcal V_{\mathrm{pkt},p}^{\mathrm{car}}
+  =
+  \operatorname{span}\{\psi_{p,1},\ldots,\psi_{p,N_p}\}
+  \subset H^J(K_p^+)
+\]
+containing the packet restrictions of the following proof-level objects:
+\begin{enumerate}[label=\textup{(\roman*)},nosep]
+\item the Hardy-differential AFE main pieces for
+      \(u_H=\partial_t^3Z_H\);
+\item the gamma/theta derivative and log-power pieces appearing in the
+      differentiated Hardy AFE;
+\item the pre-extraction Fej\'er--Riesz Stack charge pieces used by the
+      finite/O2O3 branch;
+\item the transition/corrected-jet model pieces used by
+      \(\mathcal L_{K9,p}^{\mathrm{gr}}J_{\mathrm{tr},p}\);
+\item the retained labelled affine \(C_7/Y12\) directions.
+\end{enumerate}
+The effective carrier
+\[
+  \mathcal V_{\mathrm{pkt},p}^{\mathrm{eff}}
+  \subseteq
+  \mathcal V_{\mathrm{pkt},p}^{\mathrm{car}}
+\]
+is obtained by removing row-dead directions and declared \(Q^{-B}\)-residual
+directions.
+\end{definition}
+
+\begin{definition}[Carrier Gram audit]
+\label{def:carrier-Gram-audit-K9}
+For a certified carrier basis
+\[
+  \mathcal B_p=\{\psi_{p,1},\ldots,\psi_{p,N_p}\},
+\]
+define the packet Gram matrix
+\[
+  G_{\mathrm{pkt},p}
+  =
+  \bigl(
+  \langle\psi_{p,i},\psi_{p,j}\rangle_{\mathrm{pkt},J,p}
+  \bigr)_{i,j},
+\]
+the corrected \(K9\) jet matrix
+\[
+  A_p
+  =
+  \left[
+  \Lambda_p^{\mathrm{gr,full}}\psi_{p,1}\ \cdots\
+  \Lambda_p^{\mathrm{gr,full}}\psi_{p,N_p}
+  \right],
+\]
+and the source-graded target Gram matrix \(G_{\jet,p}^{\mathrm{gr}}\).  The
+carrier Gram audit is the finite certificate
+\[
+  A_p^*G_{\jet,p}^{\mathrm{gr}}A_p
+  \ge
+  Q^{-C_{\mathrm{gram}}}G_{\mathrm{pkt},p}
+  \qquad
+  \text{on }\mathcal V_{\mathrm{pkt},p}^{\mathrm{eff}}.
+\]
+Equivalently,
+\[
+  \sigma_{\min}
+  \left(
+  (G_{\jet,p}^{\mathrm{gr}})^{1/2}
+  A_p
+  G_{\mathrm{pkt},p}^{-1/2}
+  \bigm|_{\mathcal V_{\mathrm{pkt},p}^{\mathrm{eff}}}
+  \right)
+  \ge Q^{-C_{\mathrm{gram}}}.
+\]
+\end{definition}
+
+\begin{theorem}[Carrier-corrected packet-to-\(K9\) transfer]
+\label{thm:carrier-corrected-packet-to-K9-transfer}
+Let \(\{p\}\) be a good ordinary Hardy-normalized canonical packet family.
+Let \(J\ge J_{K9}\).  Assume:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=*]
+\item the packet Sobolev trace upper bound for \(\Lambda_p^{\mathrm{gr,full}}\);
+\item the Hardy-source carrier decomposition
+\[
+  u_H=u_{H,\mathrm{car}}+u_{H,\tail},
+  \qquad
+  u_{H,\mathrm{car}}\in\bigoplus_p\mathcal V_{\mathrm{pkt},p}^{\mathrm{car}},
+\]
+with
+\[
+  \|u_{H,\tail}\|_{\mathrm{pkt},J}^{2}\le Q^{-B}G_{\mathrm{ref}};
+\]
+\item carrier capture:
+\[
+  \sum_p\mu_p
+  \|\Pi_{\mathrm{eff},p}\Pi_{\mathrm{car},p}u_H\|_{\mathrm{pkt},J,p}^{2}
+  \ge Q^{-C_{\mathrm{cap}}}G_{\mathrm{ref}};
+\]
+\item the finite \(K9\) carrier Gram audit
+\[
+  A_p^*G_{\jet,p}^{\mathrm{gr}}A_p
+  \ge
+  Q^{-C_{\mathrm{gram}}}G_{\mathrm{pkt},p}
+\]
+on \(\mathcal V_{\mathrm{pkt},p}^{\mathrm{eff}}\);
+\item label compatibility with \(\mathfrak R_{2Y}(p)\) on the same transferred
+carrier columns.
+\end{enumerate}
+Then
+\[
+  \sum_p\mu_p
+  \bigl\|
+  \Lambda_p^{\mathrm{gr,full}}
+  \Pi_{\mathrm{eff},p}\Pi_{\mathrm{car},p}u_H
+  \bigr\|_{\mathrm{gr}}^{2}
+  \ge
+  Q^{-C_{\mathrm{cap}}-C_{\mathrm{gram}}-C_{2Y}}G_{\mathrm{ref}}
+  -
+  Q^{-B}G_{\mathrm{ref}}.
+\]
+In particular, choosing
+\[
+  B>
+  C_{\mathrm{cap}}+C_{\mathrm{gram}}+C_{2Y}+C_{\mathrm{atomic}}+10
+\]
+makes the tail contribution negligible at the final atomic scale.
+\end{theorem}
+
+\begin{proof}
+The Sobolev trace theorem gives the upper estimate for all analytic packets and
+therefore controls the tail:
+\[
+  \sum_p\mu_p
+  \|\Lambda_p^{\mathrm{gr,full}}u_{H,\tail}\|_{\mathrm{gr}}^{2}
+  \le
+  Q^{C_{\mathrm{tr}}}\|u_{H,\tail}\|_{\mathrm{pkt},J}^{2}
+  \le
+  Q^{-B+C_{\mathrm{tr}}}G_{\mathrm{ref}}.
+\]
+On the effective carrier, the finite Gram audit gives
+\[
+  \sum_p\mu_p
+  \|\Lambda_p^{\mathrm{gr,full}}
+  \Pi_{\mathrm{eff},p}\Pi_{\mathrm{car},p}u_H\|_{\mathrm{gr}}^{2}
+  \ge
+  Q^{-C_{\mathrm{gram}}}
+  \sum_p\mu_p
+  \|\Pi_{\mathrm{eff},p}\Pi_{\mathrm{car},p}u_H\|_{\mathrm{pkt},J,p}^{2}.
+\]
+Carrier capture gives the displayed lower bound, and
+\(\mathfrak R_{2Y}(p)\) ensures that the live \(C_7/Y12\) part of the transferred
+columns is retained rather than quotient-killed.  The residual/tail term is
+absorbed by the choice of \(B\).
+\end{proof}
+
+\begin{definition}[Corrected Hardy-source package audit]
+\label{def:corrected-Hardy-source-package-audit}
+Let
+\[
+  \mathfrak P_2^\zeta(a_1,h_1;a_2,h_2)
+\]
+denote the corrected two-atom source package produced from the actual
+Hardy-curvature source
+\[
+  u_H=\partial_t^3Z_H
+\]
+after canonical whitening, transition-jet correction, and source-graded \(K9\)
+normalization.  The corrected Hardy-source package audit consists of the
+following finite checks.
+
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=*]
+\item \textbf{Swap symmetry:}
+\[
+  \mathfrak P_2^\zeta(a_1,h_1;a_2,h_2)
+  =
+  \mathfrak P_2^\zeta(a_2,h_2;a_1,h_1)
+  +
+  O(Q^{-B}).
+\]
+
+\item \textbf{One-amplitude collapse:}
+\[
+  \mathfrak P_2^\zeta(0,h_1;a_2,h_2)
+  =
+  a_2F_{h_2}
+  +
+  O(Q^{-B}),
+\]
+\[
+  \mathfrak P_2^\zeta(a_1,h_1;0,h_2)
+  =
+  a_1F_{h_1}
+  +
+  O(Q^{-B}).
+\]
+
+\item \textbf{Diagonal merger:}
+\[
+  \mathfrak P_2^\zeta(a_1,h;a_2,h)
+  =
+  (a_1+a_2)F_h
+  +
+  O(Q^{-B}).
+\]
+
+\item \textbf{Fixed-sector quotient nullity:}
+after non-\((1,1)\) source-bidegree removal,
+\[
+  B_7^{\mathfrak f}
+  \bigl(C_{\mathcal W}^{\corr,\zeta}\bigr)
+  \in
+  \mathbf C A_5^{\mathfrak f}(m)
+  +
+  O(Q^{-B}).
+\]
+
+\item \textbf{Same-column \(K9/Y12\) compatibility:}
+all columns used in the package audit are the same transferred carrier columns
+used in \(\mathfrak R_{2Y}(p)\) and in the finite \(K9\) carrier Gram audit.
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Actual zeta-source admissibility for the two/four-point package]
+\label{thm:actual-zeta-source-admissibility-two-four-point}
+Let
+\[
+  u_H(t)=\partial_t^3Z_H(t)
+\]
+be the active Hardy-curvature source on a good ordinary Hardy-normalized
+canonical packet family.  Assume:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=*]
+\item ordinary packet no-loss routing, Hypothesis~\ref{hyp:ordinary-packet-no-loss-routing};
+\item Gate--1 source survival for \(u_H\);
+\item Gate--2 from \(L^2\)-input real rigidity,
+      Theorem~\ref{thm:gate-two-from-gate-one-l2-rigidity};
+\item gauge-locked wall escape and D4 row conversion,
+      Theorem~\ref{thm:gauge-locked-wall-escape-row-energy};
+\item carrier-visible \(K9/Y12\) transfer,
+      Theorem~\ref{thm:carrier-visible-gate-two-output};
+\item the corrected Hardy-source package audit,
+      Definition~\ref{def:corrected-Hardy-source-package-audit}.
+\end{enumerate}
+Then the actual zeta source supplies the finite source data required by the
+two-point and mixed four-point branches:
+\[
+  \mathrm{SourceAdmiss}_{\zeta}^{2/4}.
+\]
+More explicitly:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item the live source-graded \(K9/Y12\) component is nonzero with polynomial
+      lower bound:
+\[
+  \sum_p\mu_p
+  \bigl\|
+  \Pi_{\mathrm{live}}
+  \Lambda_p^{\mathrm{gr,full}}(u_H)
+  \bigr\|_{\mathrm{gr}}^{2}
+  \ge Q^{-A}G_{\mathrm{ref}};
+\]
+\item the corrected two-atom Hardy-source package satisfies swap symmetry,
+      one-amplitude collapse, and diagonal merger modulo \(O(Q^{-B})\) residuals;
+\item the mixed four-point corrected source cross-effect has no new
+      fixed-sector quotient component:
+\[
+  B_7^{\mathfrak f}
+  \bigl(C_{\mathcal W}^{\corr,\zeta}\bigr)
+  \in
+  \mathbf C A_5^{\mathfrak f}(m)
+  +
+  O(Q^{-B});
+\]
+\item any remaining nonmixed four-point source-order clause is either bypassed
+      by the final source-graded \(K9/Y12\) bridge or is supplied as the finite
+      determinant certificate recorded in the corrected package audit.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Gate--1, ordinary packet no-loss routing, and the real-canonical Gate--2
+rigidity theorem give analytic Gate--2 source anisotropy on the ordinary packet
+subfamily.  Gauge-locked wall escape converts this source anisotropy into D4
+row energy, and row mobility thickens pointwise row output into interval row
+energy.  The carrier-visible transfer theorem then places a polynomial portion
+of this row energy in the retained source-graded \(K9/Y12\) carrier.
+
+The two-point and mixed four-point assertions are exactly the finite corrected
+Hardy-source package audit: swap symmetry, one-amplitude collapse, and diagonal
+merger imply the two-point quadratic factorization, while the fixed-sector
+quotient inclusion prevents a new mixed four-point carrier.  The residuals are
+absorbed by choosing \(B\) larger than the total downstream loss exponent.
+\end{proof}
+
+\begin{hypothesis}[Optional nonmixed four-point source-order certificate]
+\label{hyp:optional-nonmixed-four-point-source-order-certificate}
+If the nonmixed four-point branch is not bypassed by the final source-graded
+\(K9/Y12\) bridge, the corrected Hardy-source package satisfies the following
+finite determinant sign certificate.  On every good nonmixed patch, the
+nonmixed determinant
+\[
+  \Delta_{\mathrm{nonmix}}^{\zeta}(h_1,h_2,h_3,h_4)
+\]
+associated with the corrected zeta source has fixed orientation on ordered
+quadruples away from the declared scalar walls, up to \(O(Q^{-B})\) residuals.
+Equivalently, all nonmixed endpoint-gap recurrences are routed either to a
+declared scalar wall or to an already absorbed \(K9/Y12\) carrier branch.
+\end{hypothesis}
+
+\begin{theorem}[Complete actual-zeta bridge to the two/four-point package]
+\label{thm:complete-zeta-bridge-to-two-four-point}
+Assume:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=*]
+\item ordinary Hardy branch entry and ordinary/singular packet no-loss routing;
+\item Gate--1 for \(u_H=\partial_t^3Z_H\);
+\item Gate--2 from \(L^2\)-input real rigidity;
+\item carrier-visible \(K9/Y12\) transfer;
+\item the corrected Hardy-source package audit;
+\item the raw \(2Y\) certificate \(\mathfrak R_{2Y}(p)\) on the same transferred
+      carrier columns.
+\end{enumerate}
+Then the actual zeta source supplies all source inputs required by the
+two-point and mixed four-point branches:
+\[
+  \mathrm{SourceAdmiss}_{\zeta}^{2/4}.
+\]
+Namely:
+\[
+  \mathcal I_2^\zeta
+  =
+  a_1a_2(h_1-h_2)^2\mathcal J_2^\zeta
+  +
+  O(Q^{-B}),
+\]
+and
+\[
+  B_7^{\mathfrak f}
+  \bigl(C_{\mathcal W}^{\corr,\zeta}\bigr)
+  \in
+  \mathbf C A_5^{\mathfrak f}(m)
+  +
+  O(Q^{-B}).
+\]
+Furthermore, the corresponding source mass is live in the retained
+source-graded \(K9/Y12\) carrier:
+\[
+  \sum_p\mu_p
+  \bigl\|
+  \Pi_{\mathrm{live}}
+  \Lambda_p^{\mathrm{gr,full}}(u_H)
+  \bigr\|_{\mathrm{gr}}^{2}
+  \ge Q^{-A}G_{\mathrm{ref}}.
+\]
+\end{theorem}
+
+\begin{proof}
+The live \(K9/Y12\) lower bound is
+Theorem~\ref{thm:actual-zeta-source-admissibility-two-four-point}.  The
+two-point factorization is Theorem~\ref{thm:actual-zeta-source-two-point-bridge}.
+The mixed four-point no-new-carrier assertion is
+Theorem~\ref{thm:actual-zeta-source-mixed-four-point-bridge}.  All three use
+the same transferred carrier columns, and \(\mathfrak R_{2Y}(p)\) ensures that
+live \(Y12\) contributions are retained rather than quotient-killed.  Hence the
+actual zeta source has been bridged into the exact finite source package
+consumed by the two-point/four-point architecture.
+\end{proof}
+
+\begin{remark}[No parallel Pick/de Branges proof is being invoked]
+\label{rem:no-parallel-pick-debranges-proof}
+The source bridge in this section uses the actual Hardy-curvature source
+\[
+  u_H=\partial_t^3Z_H
+\]
+and the corrected finite source package consumed by the two-point/four-point
+architecture.  It does not assert Pick positivity for
+\(-\Xi'/\Xi\), does not invoke a de Branges kernel positivity theorem, and does
+not attempt to prove \(\RH\) by a parallel global criterion.  Its only purpose
+is to certify that the actual zeta source satisfies the finite source
+provenance, no-new-carrier, and source-graded \(K9/Y12\)-visibility conditions
+required downstream.
+\end{remark}
+
+\begin{remark}[Dependency diagram for the zeta-to-two/four-point bridge]
+\label{rem:zeta-to-two-four-point-dependency-diagram}
+The completed source bridge has the following dependency graph:
+\[
+\begin{array}{c}
+u_H=\partial_t^3Z_H
+\\[2mm]
+\Downarrow\quad
+\text{Hardy AFE + ordinary packet no-loss}
+\\[2mm]
+\mathrm{Gate\text{-}1}
+\\[2mm]
+\Downarrow\quad
+L^2\text{-input real rigidity}
+\\[2mm]
+\mathrm{Gate\text{-}2}
+\\[2mm]
+\Downarrow\quad
+\text{gauge-locked wall escape + D4}
+\\[2mm]
+C_7/Y12\text{ row energy}
+\\[2mm]
+\Downarrow\quad
+\text{carrier capture + finite \(K9\) Gram + }\mathfrak R_{2Y}
+\\[2mm]
+\text{live source-graded \(K9/Y12\) carrier}
+\\[2mm]
+\Downarrow\quad
+\text{corrected Hardy-source package audit}
+\\[2mm]
+\text{two-point quadratic factorization}
+\quad+\quad
+\text{mixed four-point no-new-carrier}.
+\end{array}
+\]
+Thus Gate--2 supplies live row energy, while the corrected package audit supplies
+the finite identities consumed by the two-point and four-point modules.
+\end{remark}
+
 \begin{theorem}[Exhaustive labelled live/dead routing]
 \label{thm:exhaustive-labelled-live-dead-routing}
 In the active maximal-labelled \(K9\) branch, every raw nuisance column
@@ -59044,7 +59752,13 @@ In the final status tables, the following wording should be used.
 \text{RH-entry into the Hardy branch} &
 \text{separate entry theorem} &
 \text{prove RH counterexample }\Rightarrow
-\text{ ordinary Hardy-normalized routed branch satisfying Gate--1/Gate--2}
+\text{ ordinary Hardy-normalized routed branch satisfying Gate--1/Gate--2}\\
+\text{carrier-corrected packet-to-}K9\text{ transfer} &
+\text{trace upper + carrier capture + finite }K9\text{ Gram audit + }\mathfrak R_{2Y}\text{ compatibility} &
+\text{no full analytic packet-to-jet lower bound is used}\\
+\text{zeta-to-two/four-point bridge} &
+\text{proved from actual zeta-source admissibility} &
+\text{requires corrected Hardy-source package audit and same-column }2Y/K9\text{ routing}
 \end{array}
 \]
 Thus the canonical construction rules and the Hardy-curvature source repair
@@ -59053,6 +59767,13 @@ the ordinary Hardy-normalized canonical branch.  They do not by themselves
 supply the global RH-entry theorem recorded in
 Remark~\ref{rem:hardy-source-rh-entry-reduction}.  A different source or routing
 choice requires its own audit.
+
+The bridge from \(u_H=\partial_t^3Z_H\) to the two-point/four-point package is
+not a Pick/de Branges or logarithmic-source proof of \(\RH\).  It is a
+finite-source admissibility theorem inside the ordinary Hardy-normalized
+canonical branch.  Its role is only to provide the source identities and live
+carrier mass required by the existing two-point/four-point and \(K9/Y12\)
+architecture.
 \end{remark}
 
 \begin{remark}[How to read the raw \(2Y\) row in the canonical ledger]
