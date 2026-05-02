@@ -1,5 +1,5 @@
 % =============================================================================
-% Patch: jet-Gram foundation
+% Patch: jet-Gram foundation (referee-revised)
 %   §2  sec:local-kernel-and-jet-normalization
 %   §3  sec:jet-limit-local-blocks
 %
@@ -8,22 +8,46 @@
 %
 % Action: replace the existing §2 and §3 with the content below.
 %
+% Referee revisions integrated:
+%   - theta defined precisely as Im log Gamma(1/4 + it/2) - (t/2) log pi
+%     with continuous branch (Definition `def:riemann-siegel-phase').
+%   - Window uniformity made explicit at section start:
+%     I_T subset [T/2, 2T] and |I_T| << Q(T)^{-1}, used uniformly in
+%     all Stirling-type estimates.
+%   - Differentiated theta asymptotics extracted as an explicit lemma
+%     (`lem:theta-derivative-asymptotics') giving uniform bounds on
+%     q, q', q'' over I_T.
+%   - (P2) recast as q(t) >= 1 (which subsumes any polynomial-in-Q
+%     bound with c_q = 0 when Q >= 1).
+%   - Diagonal kernel derivatives separated into their own lemma
+%     (`lem:phase-kernel-diagonal-derivatives') with bivariate Taylor
+%     proof.
+%   - Same-point jet limit stated with explicit O(h^2) rate.
+%   - Cross-block jet limit: hypothesis 0 < h < |s|/3 added; proof now
+%     uses fourth-order parity argument with sign weights
+%     1, sigma_2, sigma_1, sigma_1 sigma_2 to make the O(h^2) rate
+%     referee-safe.
+%   - Same-point Gram positivity made explicitly theta-specific, with
+%     two-sided lambda_min asymptotic 2 q(T) / pi (1 + o(1)).
+%   - Scope guardrail remark added: positivity here does NOT prove
+%     anisotropy lower bounds (e.g. |q'' - 6 q + 2 q^3|) or supply
+%     Hardy/source-transfer information.
+%
 % Closes:
 %   §2: rem:wip-local-phase-chart
-%       (only residual is rem:wip-audit-chart-regularity-placement,
-%        a structural design audit, not a missing proof)
 %   §3: rem:wip-same-point-jet-limit
 %       rem:wip-cross-block-jet-limit
 %       rem:wip-same-point-gram-positivity
 %
 % Status:
-%   §2: \statusmig    not-started -> migrated
-%       \statussympy  not-started -> verified
+%   §2: \statusmig      not-started -> migrated
+%       \statusreferee  not-started -> in-progress
+%       \statussympy    not-started -> verified
 %           [rh/sympy/sec-local-kernel-and-jet-normalization.py]
-%       \statussim    not-started -> verified
+%       \statussim      not-started -> verified
 %           [rh/simulation/sec-local-kernel-and-jet-normalization.py]
-%       \statuslean   not-started -> in-progress
-%           [rh/lean/sec-local-kernel-and-jet-normalization.lean]
+%       \statuslean     not-started -> in-progress
+%           [rh/lean/RH/LocalKernelJetNormalization.lean]
 %   §3: \statusmig      not-started -> migrated
 %       \statusreferee  not-started -> in-progress
 %       \statussympy    not-started -> verified
@@ -31,7 +55,7 @@
 %       \statussim      not-started -> partial
 %           [rh/simulation/sec-jet-limit-local-blocks.py]
 %       \statuslean     not-started -> in-progress
-%           [rh/lean/sec-jet-limit-local-blocks.lean]
+%           [rh/lean/RH/JetLimitLocalBlocks.lean]
 % =============================================================================
 
 % =============================================================================
@@ -39,220 +63,258 @@
 \label{sec:local-kernel-and-jet-normalization}
 \statuspaper{LIVE}\quad
 \statusmig{migrated}\quad
-\statusreferee{not-started}\quad
+\statusreferee{in-progress}\quad
 \statussympy[rh/sympy/sec-local-kernel-and-jet-normalization.py]{verified}\quad
 \statussim[rh/simulation/sec-local-kernel-and-jet-normalization.py]{verified}\quad
-\statuslean[rh/lean/sec-local-kernel-and-jet-normalization.lean]{in-progress}
+\statuslean[rh/lean/RH/LocalKernelJetNormalization.lean]{in-progress}
 \par\medskip
 
-Fix a height \(\gamma\) and let \(T = \gamma\).  We work on a window
-\(I_T \subset \mathbb R\) centered at \(T\) of length
-\(\asymp 1/Q(T)\), where \(Q\) is a fixed slowly growing function of
-the height.  All subsequent local estimates are expressed through the
-phase kernel \(K_\Ph\) on \(I_T\times I_T\) and its Taylor jets at
-one or two centers.
+All local blocks in this paper are extracted from the Riemann--Siegel
+phase on high-height real windows.  Throughout this section, a height
+parameter \(T\) is assumed sufficiently large, and \(I_T\) denotes an
+interval centered at \(T\) with
+\[
+        |I_T|\ll Q(T)^{-1},
+        \qquad I_T\subset [T/2,2T].
+\]
+The second inclusion follows automatically at high height for every
+slowly growing choice of \(Q(T)\) used below, but it is recorded
+because the uniformity of the Stirling estimates is used on the whole
+window.
 
-\subsection{Local phase chart}
+\subsection{The Riemann--Siegel phase chart}
 \label{subsec:local-phase-chart}
+
+\begin{definition}[Riemann--Siegel phase]
+\label{def:riemann-siegel-phase}
+For \(t > 0\) let
+\begin{equation}
+\label{eq:theta-definition}
+ \theta(t)
+ := \Im \log \Gamma\!\left(\frac14+\frac{it}{2}\right)
+    -\frac{t}{2}\log\pi,
+\end{equation}
+with the continuous branch of \(\log\Gamma\) obtained from positive real
+argument.  Then
+\[
+        \zeta\!\left(\tfrac12+it\right)
+        =e^{-i\theta(t)}\,Z(t),
+        \qquad Z(t)\in\mathbb R \text{ for real } t.
+\]
+\end{definition}
+
+\begin{lemma}[Differentiated theta asymptotics]
+\label{lem:theta-derivative-asymptotics}
+Uniformly for \(t\in I_T\),
+\begin{align}
+\label{eq:theta-derivative-asymptotics}
+q(t):=\theta'(t)
+&=\frac12\log\frac{t}{2\pi}-\frac{1}{48 t^2}+O(t^{-4}),\\
+q'(t)=\theta''(t)
+&=\frac{1}{2t}+O(t^{-3}),\\
+q''(t)=\theta'''(t)
+&=-\frac{1}{2t^2}+O(t^{-4}).
+\end{align}
+The constants in the \(O\)-terms are absolute.
+\end{lemma}
+
+\begin{proof}
+Apply the differentiated Stirling expansion for \(\log\Gamma z\),
+uniformly in the sector containing \(z = 1/4 + it/2\), and take
+imaginary parts in \eqref{eq:theta-definition}; equivalently,
+differentiate the standard Riemann--Siegel expansion
+\[
+\theta(t)=\frac{t}{2}\log\frac{t}{2\pi}-\frac{t}{2}-\frac{\pi}{8}
+          +\frac{1}{48 t}+O(t^{-3})
+\]
+with its differentiated remainder.  This gives the first line of
+\eqref{eq:theta-derivative-asymptotics}; the remaining two lines
+follow by one and two further differentiations.
+\end{proof}
 
 \begin{definition}[Local phase chart]
 \label{def:local-phase-chart}
-For each height \(T\), \(\Ph_T\) is a real smooth function on an
-interval \(I_T\) of length \(\asymp 1/Q(T)\) centered at \(T\)
-satisfying:
-\begin{enumerate}[label=\textup{(P\arabic*)},leftmargin=*]
-\item \(\Ph_T = \theta\), the Riemann--Siegel theta function;
-\item \(q := \Ph_T'\) admits a polynomial-in-\(Q\) lower bound on
-  retained packets, \(q(t) \ge Q^{-c_q}\) for an absolute exponent
-  \(c_q \ge 0\) (Lemma~\ref{lem:phase-derivative-lower-bound}).
-\end{enumerate}
-We write \(\Ph,q\) for \(\Ph_T,q\) when \(T\) is fixed by context.
-\end{definition}
-
-\begin{remark}[Identification \(\Ph_T = \theta\)]
-\label{rem:phase-chart-identification}
-The functional equation of \(\zeta\) gives
+A retained high-height local phase chart is the interval \(I_T\)
+together with the real smooth phase
 \[
-\zeta(\tfrac12 + it) = e^{-i\theta(t)}\, Z(t),
-\qquad
-\theta(t) = \arg\Gamma\!\left(\tfrac14 + \tfrac{it}{2}\right) - \frac{t}{2}\log\pi,
+        \Ph_T(t):=\theta(t)\qquad (t\in I_T).
 \]
-with \(Z\) real on \(\mathbb R\); we set \(\Ph_T(t) := \theta(t)\) on
-\(I_T\).
-\end{remark}
+We write \(\Ph\) and \(q=\Ph'\) when \(T\) is fixed by context.  The
+chart conditions used downstream are:
+\begin{enumerate}[label=\textup{(P\arabic*)},leftmargin=*]
+\item \(\Ph_T = \theta\) on \(I_T\);
+\item \(q(t)\ge 1\) on \(I_T\), after increasing the global lower-height
+      cutoff if necessary.
+\end{enumerate}
+If \(Q(T)\ge 1\), then (P2) gives the polynomial-in-\(Q\) lower bound
+\(q(t)\ge Q(T)^{-c_q}\) with \(c_q = 0\).
+\end{definition}
 
 \begin{lemma}[Phase-derivative lower bound]
 \label{lem:phase-derivative-lower-bound}
-With \(\Ph_T = \theta\) and \(Q\) polynomial in \(\log T\),
-\(q(t) \ge Q^{-c_q}\) holds with \(c_q = 0\) on \(I_T\) for all
-sufficiently large \(T\).  Concretely,
+Condition \textup{(P2)} of Definition~\ref{def:local-phase-chart}
+holds for all sufficiently large \(T\).  More quantitatively, uniformly
+on \(I_T\),
 \[
-q(t) \ge \tfrac12 \log(T/(4\pi)) - C\,T^{-2}
-\qquad (t \in I_T)
+        q(t)\ge \frac12\log\frac{T}{4\pi}-C\,T^{-2}
 \]
 for an absolute constant \(C\).
 \end{lemma}
 
 \begin{proof}
-The Riemann--Siegel asymptotic
-\cite{Edwards2001,Titchmarsh1986}
-\[
-\theta(t) = \frac{t}{2}\log\frac{t}{2\pi} - \frac{t}{2} - \frac{\pi}{8}
-          + \frac{1}{48 t} + O(t^{-3})
-\]
-gives \(q(t) = \theta'(t) = \tfrac12\log(t/(2\pi)) - 1/(48 t^2) +
-O(t^{-4})\).  On \(I_T\), \(t \ge T - 1/Q \ge T/2\) once
-\(Q \ge 2/T\), and the displayed bound follows.
+By Lemma~\ref{lem:theta-derivative-asymptotics},
+\(q(t)=\tfrac12\log(t/(2\pi))+O(t^{-2})\).  Since
+\(t \in I_T \subset [T/2, 2T]\),
+\(\log(t/(2\pi)) \ge \log(T/(4\pi))\), and the stated bound follows.
+The right-hand side is eventually larger than \(1\).
 \end{proof}
 
-\begin{lemma}[Phase-derivative upper bounds]
-\label{lem:phase-derivative-upper-bounds}
-With \(\Ph_T = \theta\),
-\[
-q'(T) \;=\; \frac{1}{2T} + O(T^{-3}),\qquad
-q''(T) \;=\; -\frac{1}{2T^2} + O(T^{-4}).
-\]
-\end{lemma}
-
-\begin{proof}
-Termwise differentiation of the Riemann--Siegel asymptotic in the
-proof of Lemma~\ref{lem:phase-derivative-lower-bound}.
-\end{proof}
-
-\begin{remark}[\(\zeta\)-side regularity]
+\begin{remark}[No \(\zeta\)-side regularity is used here]
 \label{rem:chart-regularity-zeta-side}
-The chart depends on \(\zeta\) only through
-\(\zeta(\tfrac12 + it) = e^{-i\theta(t)} Z(t)\).  Quantitative
-\(\zeta\)-side conditions (lower bounds on \(|Z|\), \(|\zeta|\), or
-no-zeros conditions on \(I_T\)) are imposed where they are consumed
-in
-Section~\ref{sec:actual-zeta-transverse-suppression} and
-Section~\ref{sec:source-energy-supply}, not at chart construction.
+The chart uses \(\zeta\) only through the identity
+\(\zeta(1/2+it)=e^{-i\theta(t)}Z(t)\) and through the theta phase.
+No lower bound on \(|Z|\), no zero-free condition in \(I_T\), and no
+Hardy/source-energy input is used in
+Sections~\ref{sec:local-kernel-and-jet-normalization}--\ref{sec:jet-limit-local-blocks}.
+Such conditions are imposed only in the later sections where actual-zeta
+transverse suppression or source-energy transfer is consumed.
 \end{remark}
 
-\begin{wip}\label{rem:wip-audit-chart-regularity-placement}
-Structural audit, not a missing proof.  Revisit whether the
-\(\zeta\)-side conditions of
-Remark~\ref{rem:chart-regularity-zeta-side} can be hoisted to
-Definition~\ref{def:local-phase-chart} as a condition (P3) without
-restricting the retained packet family beyond what
-Sections~\ref{sec:actual-zeta-transverse-suppression}
-and~\ref{sec:source-energy-supply} already require.  Revisit when
-those sections are migrated.
-\end{wip}
+\subsection{The phase kernel}
+\label{subsec:phase-kernel}
 
 \begin{definition}[Phase kernel]
 \label{def:phase-kernel}
+For a real \(C^1\) phase \(\Ph\) on an interval \(I\),
 \begin{equation}
 \label{eq:phase-kernel}
 K_\Ph(x,y)=
 \begin{cases}
 \dfrac{\sin\bigl(\Ph(x)-\Ph(y)\bigr)}{\pi(x-y)}, & x\ne y,\\[1.2ex]
-\dfrac{q(x)}{\pi}, & x=y.
+\dfrac{q(x)}{\pi}, & x=y,
 \end{cases}
+\qquad q=\Ph'.
 \end{equation}
 \end{definition}
 
-\begin{lemma}[Phase-kernel basic properties]
+\begin{lemma}[Basic kernel properties]
 \label{lem:phase-kernel-properties}
-For \(\Ph\in C^3(I_T;\mathbb R)\), the kernel \(K_\Ph\) of
-\eqref{eq:phase-kernel} satisfies:
-\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
-\item \(K_\Ph(x,y) = K_\Ph(y,x)\);
-\item \(K_\Ph(x,y)\in\mathbb R\) for \((x,y)\in I_T\times I_T\);
-\item \(\lim_{x\to y} K_\Ph(x,y) = q(y)/\pi\), continuously across
-  the diagonal.
-\end{enumerate}
+\(K_\Ph\) is real-valued and symmetric.  If \(\Ph\in C^1\), the
+extension across the diagonal is continuous and
+\[
+        K_\Ph(T,T)=\frac{q(T)}{\pi}.
+\]
+If \(\Ph\in C^4\), the diagonal first and mixed second derivatives
+exist and are given by
+Lemma~\ref{lem:phase-kernel-diagonal-derivatives}.
 \end{lemma}
 
 \begin{proof}
-(i) For \(x\ne y\),
-\(\sin(\Ph(y)-\Ph(x))/\pi(y-x) = \sin(\Ph(x)-\Ph(y))/\pi(x-y)\).
-(ii) The numerator and denominator are real.
-(iii) Taylor expand: \(\Ph(y+h)-\Ph(y) = h q(y) + O(h^2)\), so
-\(K_\Ph(y+h,y) = q(y)/\pi + O(h)\).
+For \(x\ne y\), symmetry follows from
+\(\sin(\Ph(y)-\Ph(x))/(y-x) = \sin(\Ph(x)-\Ph(y))/(x-y)\).
+Real-valuedness is immediate.  The diagonal value follows from
+\(\Ph(y+h)-\Ph(y) = h q(y) + o(h)\).
 \end{proof}
 
-\begin{lemma}[Phase-kernel derivatives]
+\begin{lemma}[Off-diagonal kernel derivatives]
 \label{lem:phase-kernel-derivatives}
-For \(T_1\ne T_2\) with \(s = T_1 - T_2\),
-\(\Del = \Ph(T_1) - \Ph(T_2)\), and \(q_j = q(T_j)\),
+For \(T_1\ne T_2\) with \(s=T_1-T_2\), \(\Del=\Ph(T_1)-\Ph(T_2)\),
+\(q_j=q(T_j)\), and \(\Ph\in C^1\) near \(T_1, T_2\),
 \begin{align*}
-K_\Ph(T_1, T_2) &= \frac{\sin\Del}{\pi s},
-&K_x(T_1, T_2) &= \frac{q_1\, s\cos\Del - \sin\Del}{\pi s^2},\\
-K_y(T_1, T_2) &= \frac{\sin\Del - q_2\, s\cos\Del}{\pi s^2},
-&K_{xy}(T_1, T_2)
-&= \frac{(q_1+q_2)s\cos\Del + (q_1 q_2 s^2 - 2)\sin\Del}{\pi s^3}.
+K_\Ph(T_1,T_2) &= \frac{\sin\Del}{\pi s},
+&K_x(T_1,T_2) &= \frac{q_1\,s\cos\Del - \sin\Del}{\pi s^2},\\
+K_y(T_1,T_2) &= \frac{\sin\Del - q_2\,s\cos\Del}{\pi s^2},
+&K_{xy}(T_1,T_2)
+&= \frac{(q_1+q_2)\,s\cos\Del + (q_1 q_2 s^2 - 2)\sin\Del}{\pi s^3}.
 \end{align*}
 \end{lemma}
 
 \begin{proof}
-Direct application of the quotient and chain rules to
-\(K_\Ph(x,y) = \sin(\Ph(x)-\Ph(y))/\pi(x-y)\).
+Differentiate \(K_\Ph(x,y) = \sin(\Ph(x)-\Ph(y))/\pi(x-y)\) by the
+quotient and chain rules, then evaluate at \((T_1, T_2)\).
 \end{proof}
 
-\begin{remark}[Diagonal limits]
-\label{rem:kernel-derivatives-diagonal}
-As \(T_2\to T_1 = T\) the formulas of
-Lemma~\ref{lem:phase-kernel-derivatives} have limits
-\(K_\Ph(T,T) = q(T)/\pi\),
-\(K_x(T,T) = K_y(T,T) = q'(T)/(2\pi)\),
-\(K_{xy}(T,T) = (q''(T) + 2q(T)^3)/(6\pi)\),
-giving the kernel-derivative form of \(J(T)\) used in
-\eqref{eq:same-point-as-kernel-derivatives}.
-\end{remark}
+\begin{lemma}[Diagonal kernel derivatives]
+\label{lem:phase-kernel-diagonal-derivatives}
+If \(\Ph\in C^4\) near \(T\), then
+\begin{equation}
+\label{eq:diagonal-kernel-derivatives}
+K_\Ph(T,T)=\frac{q(T)}{\pi},\qquad
+K_x(T,T)=K_y(T,T)=\frac{q'(T)}{2\pi},
+\end{equation}
+\[
+        K_{xy}(T,T)=\frac{q''(T)+2q(T)^3}{6\pi}.
+\]
+\end{lemma}
+
+\begin{proof}
+Set \(x = T+u\), \(y = T+v\); derivatives below are evaluated at \(T\).
+Then
+\[
+\Ph(T+u)-\Ph(T+v)
+= q(u-v) + \frac{q'}{2}(u^2-v^2) + \frac{q''}{6}(u^3-v^3) + O(|(u,v)|^4).
+\]
+Dividing by \(u-v\) and expanding \(\sin z = z - z^3/6 + O(z^5)\),
+\[
+K_\Ph(T+u, T+v)
+= \frac1\pi\!\left[
+ q + \frac{q'}{2}(u+v)
+ + \!\left(\frac{q''}{6} - \frac{q^3}{6}\right)\!(u^2+v^2)
+ + \!\left(\frac{q''}{6} + \frac{q^3}{3}\right)\!uv
+ + O(|(u,v)|^3)\right].
+\]
+The coefficients of \(u\), \(v\), and \(uv\) are the asserted
+derivatives.
+\end{proof}
 
 \subsection{Point-to-jet transform}
 \label{subsec:point-to-jet-transform}
 
-For symmetric pairs \(T\pm h\), define the Gram-normalized
-point-to-jet transform
+For symmetric pairs \(T\pm h\), define the Gram-normalized coalescing
+even/odd transform
 \begin{equation}
 \label{eq:point-to-jet-transform}
 P_h
-\;=\;
-\frac1{\sqrt2}
+=\frac1{\sqrt2}
 \begin{pmatrix}
 1 & 1\\[0.6ex]
 -1/(2h) & 1/(2h)
 \end{pmatrix}
-\;=\;
-\diag(\sqrt 2,\, 1/\sqrt 2)\,
+=\diag(\sqrt 2, 1/\sqrt 2)\,
 \begin{pmatrix}
 1/2 & 1/2\\[0.6ex]
 -1/(2h) & 1/(2h)
-\end{pmatrix},
+\end{pmatrix}.
 \end{equation}
-the second equality exhibiting \eqref{eq:point-to-jet-transform} as
-the diagonal congruence of the literal value/derivative jet
-transform.  We refer to the value/derivative basis produced by
-\(P_h\) as the \emph{Gram-normalized basis}.  With this convention,
+Thus \(P_h\) is the literal central value/derivative jet transform
+followed by the fixed diagonal congruence
+\(\diag(\sqrt 2, 1/\sqrt 2)\).  We refer to the value/derivative basis
+produced by \(P_h\) as the \emph{Gram-normalized basis}.
+
+With this convention,
 \begin{equation}
 \label{eq:same-point-as-kernel-derivatives}
-J(T)
-\;=\;
+J(T)=
 \begin{pmatrix}
 2K_\Ph(T,T) & \partial_y K_\Ph(T,T)\\[0.6ex]
 \partial_x K_\Ph(T,T) & \tfrac12 \partial_{xy} K_\Ph(T,T)
 \end{pmatrix},
 \end{equation}
-which agrees with the explicit formula
-\eqref{eq:same-point-J} of
+which is the same-point block computed explicitly in
 Lemma~\ref{lem:same-point-jet-limit}.
 
-\begin{remark}[Pair separation]
+\begin{remark}[Pair-separation convention]
 \label{rem:pair-separation-convention}
-We use \(T\pm h\), so the pair separation is \(2h\) and
-\(P_h\) carries \(1/(2h)\) (not \(1/h\)) in its lower row.  Imported
-results stated in the alternative \(T\pm h/2\) convention are to be
-retransformed before use.
+The pair is \(T-h, T+h\), with separation \(2h\); the lower row of
+\(P_h\) carries \(1/(2h)\).  Any formula imported from the alternative
+\(T\pm h/2\) convention or from the literal-jet matrix with lower row
+\((-1/h, 1/h)\) must be re-conjugated before use.
 \end{remark}
 
 \begin{remark}[Convention check]
 \label{rem:normalization-audit}
-The literal-jet alternative
-\(\tfrac12\bigl(\begin{smallmatrix}1&1\\-1/h&1/h\end{smallmatrix}\bigr)\)
-applied to \(A_h(T)\) at the same pair \(T\pm h\) yields the limit
+With the literal central value/derivative transform at the pair
+\(T\pm h\), the same-point limit would be
 \[
 \frac1\pi
 \begin{pmatrix}
@@ -260,10 +322,12 @@ q(T) & \tfrac12 q'(T)\\[0.6ex]
 \tfrac12 q'(T) & \tfrac16\bigl(q''(T)+2q(T)^3\bigr)
 \end{pmatrix},
 \]
-related to \(J(T)\) of \eqref{eq:same-point-J} by the diagonal
-congruence \(\diag(\sqrt 2, 1/\sqrt 2)\) of
-\eqref{eq:point-to-jet-transform}.  The Gram-normalized form is used
-throughout this paper.
+related to \(J(T)\) by the diagonal congruence
+\(\diag(\sqrt 2, 1/\sqrt 2)\) of \eqref{eq:point-to-jet-transform}; the
+\((1,1)\) entry doubles and the \((2,2)\) entry is halved.  All
+same-point blocks, cross-blocks, finite-scale blocks, whitening
+matrices, and quotient covectors in this paper are read in the
+Gram-normalized convention.
 \end{remark}
 
 % =============================================================================
@@ -274,15 +338,15 @@ throughout this paper.
 \statusreferee{in-progress}\quad
 \statussympy[rh/sympy/sec-jet-limit-local-blocks.py]{verified}\quad
 \statussim[rh/simulation/sec-jet-limit-local-blocks.py]{partial}\quad
-\statuslean[rh/lean/sec-jet-limit-local-blocks.lean]{in-progress}
+\statuslean[rh/lean/RH/JetLimitLocalBlocks.lean]{in-progress}
 \par\medskip
 
-\subsection{Same-point jet-limit}
+\subsection{Same-point jet limit}
 \label{subsec:same-point-jet-limit}
 
-\begin{lemma}[Same-point jet-limit]
+\begin{lemma}[Same-point jet limit]
 \label{lem:same-point-jet-limit}
-Let
+Assume \(\Ph\in C^5\) near \(T\).  Let
 \[
 A_h(T)=
 \begin{pmatrix}
@@ -290,10 +354,10 @@ K_\Ph(T-h,T-h) & K_\Ph(T-h,T+h)\\
 K_\Ph(T+h,T-h) & K_\Ph(T+h,T+h)
 \end{pmatrix}
 \]
-with row and column order \((T-h,T+h)\).  Then
+with row and column order \((T-h, T+h)\).  Then
 \[
-P_h\,A_h(T)\,P_h^\top \;\longrightarrow\; J(T)
-\qquad (h\to 0),
+        P_h\,A_h(T)\,P_h^\top \;=\; J(T) + O(h^2)
+        \qquad (h\to 0),
 \]
 where
 \begin{equation}
@@ -307,62 +371,65 @@ J(T)=\frac1\pi
 \end{lemma}
 
 \begin{proof}
-Derivatives below are evaluated at \(T\).  Taylor expanding to order
-\(h^4\),
+Derivatives below are evaluated at \(T\).  Taylor expansion gives
 \[
-\Ph(T\pm h) = \Ph(T) \pm hq + \tfrac{h^2}{2}q' \pm \tfrac{h^3}{6}q''
-            + \tfrac{h^4}{24}q''' + O(h^5),
-\qquad
-\Ph(T-h) - \Ph(T+h) = -2hq - \tfrac{h^3}{3}q'' + O(h^5),
+\Ph(T\pm h) = \Ph(T) \pm hq + \frac{h^2}{2}q'
+            \pm \frac{h^3}{6}q'' + \frac{h^4}{24}q'''
+            + O(h^5),
 \]
-so that
+so
+\[
+\Ph(T-h)-\Ph(T+h) = -2hq - \frac{h^3}{3}q'' + O(h^5).
+\]
+Using \(\sin z = z - z^3/6 + O(z^5)\),
 \begin{equation}
 \label{eq:A12-same-point-expansion}
-K_\Ph(T-h,T+h)
-= \frac{q}{\pi} + \frac{h^2}{6\pi}\bigl(q'' - 4q^3\bigr) + O(h^4),
+K_\Ph(T-h, T+h)
+= \frac{q}{\pi} + \frac{h^2}{6\pi}(q'' - 4q^3) + O(h^4).
 \end{equation}
-while \(K_\Ph(T\pm h,T\pm h) = q(T\pm h)/\pi\) by the standard Taylor
-series of \(q\).  For symmetric \(M\) (here \(M=A_h\),
-\(M_{12}=M_{21}\) by Lemma~\ref{lem:phase-kernel-properties}(i)),
+Also \(K_\Ph(T\pm h, T\pm h) = q(T\pm h)/\pi\).  For symmetric \(M\),
 conjugation by \eqref{eq:point-to-jet-transform} gives
-\begin{equation}
-\label{eq:Ph-conjugation-symmetric}
-(P_h M P_h^\top)_{11} = \tfrac12(M_{11}+2M_{12}+M_{22}),\quad
-(P_h M P_h^\top)_{12} = \tfrac{1}{4h}(M_{22}-M_{11}),\quad
-(P_h M P_h^\top)_{22} = \tfrac{1}{8h^2}(M_{11}-2M_{12}+M_{22}).
-\end{equation}
-Substituting,
 \begin{align*}
-(P_h A_h P_h^\top)_{11}
-&= \frac{2q}{\pi} + \frac{2h^2}{3\pi}(q''-q^3) + O(h^4),\\
-(P_h A_h P_h^\top)_{12}
-&= \frac{q'}{2\pi} + \frac{h^2 q'''}{12\pi} + O(h^4),\\
-(P_h A_h P_h^\top)_{22}
-&= \frac{q''+2q^3}{12\pi} + O(h^2),
+(P_h M P_h^\top)_{11} &= \tfrac12(M_{11}+2M_{12}+M_{22}),\\
+(P_h M P_h^\top)_{12} &= \tfrac{1}{4h}(M_{22}-M_{11}),\\
+(P_h M P_h^\top)_{22} &= \tfrac{1}{8h^2}(M_{11}-2M_{12}+M_{22}).
 \end{align*}
-and \eqref{eq:same-point-J} follows.
+Substituting \eqref{eq:A12-same-point-expansion} and the Taylor series
+of \(q(T\pm h)\),
+\begin{align*}
+(P_h A_h P_h^\top)_{11} &= \frac{2q}{\pi} + O(h^2),\\
+(P_h A_h P_h^\top)_{12} &= \frac{q'}{2\pi} + O(h^2),\\
+(P_h A_h P_h^\top)_{22} &= \frac{q''+2q^3}{12\pi} + O(h^2),
+\end{align*}
+which is \eqref{eq:same-point-J}.
 \end{proof}
 
-\subsection{Cross-block jet-limit}
+\subsection{Cross-block jet limit}
 \label{subsec:cross-block-jet-limit}
 
-\begin{lemma}[Cross-block jet-limit]
+\begin{lemma}[Cross-block jet limit]
 \label{lem:cross-block-jet-limit}
-For \(T_1\ne T_2\), set \(s=T_1-T_2\), \(\Del=\Ph(T_1)-\Ph(T_2)\),
-\(q_j=q(T_j)\), and let
+Assume \(\Ph\in C^5\) in neighborhoods of \(T_1\) and \(T_2\), let
+\(T_1\ne T_2\), set
 \[
-C_h(T_1,T_2)=
+        s = T_1 - T_2,
+        \qquad \Del = \Ph(T_1)-\Ph(T_2),
+        \qquad q_j = q(T_j),
+\]
+and assume \(0 < h < |s|/3\).  Define
+\[
+C_h(T_1, T_2)=
 \begin{pmatrix}
-K_\Ph(T_1-h,T_2-h) & K_\Ph(T_1-h,T_2+h)\\
-K_\Ph(T_1+h,T_2-h) & K_\Ph(T_1+h,T_2+h)
+K_\Ph(T_1-h, T_2-h) & K_\Ph(T_1-h, T_2+h)\\
+K_\Ph(T_1+h, T_2-h) & K_\Ph(T_1+h, T_2+h)
 \end{pmatrix}
 \]
-with row order \((T_1-h,T_1+h)\) and column order \((T_2-h,T_2+h)\).
+with row order \((T_1-h, T_1+h)\) and column order \((T_2-h, T_2+h)\).
 Then
 \[
-P_h\,C_h(T_1,T_2)\,P_h^\top \;\longrightarrow\;
-\frac1\pi N_{12}(T_1,T_2)
-\qquad (h\to 0),
+        P_h\,C_h(T_1, T_2)\,P_h^\top
+        \;=\; \frac1\pi N_{12}(T_1, T_2) + O(h^2)
+        \qquad (h\to 0),
 \]
 where
 \begin{equation}
@@ -381,45 +448,39 @@ N_{12}=
 \end{lemma}
 
 \begin{proof}
-\(K_\Ph\) is smooth near \((T_1,T_2)\); write \(K=K_\Ph(T_1,T_2)\)
-and use subscripts for partial derivatives at \((T_1,T_2)\):
-\begin{equation}
-\label{eq:K-bivariate-taylor}
-K_\Ph(T_1+u_1,\,T_2+u_2)
-= K + u_1 K_x + u_2 K_y
-  + \tfrac12 u_1^2 K_{xx} + u_1 u_2 K_{xy} + \tfrac12 u_2^2 K_{yy}
-  + O(|u|^3).
-\end{equation}
-For general \(2\times 2\) \(M\), conjugation by
-\eqref{eq:point-to-jet-transform} gives
+Since \(T_1 \ne T_2\), the kernel is smooth near \((T_1, T_2)\).
+Write \(K_{ab} = \partial_x^a \partial_y^b K_\Ph(T_1, T_2)\).  Taylor
+expansion to total order four gives, uniformly for
+\(u_1, u_2 \in \{-h, +h\}\),
+\[
+K_\Ph(T_1+u_1, T_2+u_2)
+= \sum_{a+b\le 4}\frac{K_{ab}}{a!\,b!}\, u_1^a\, u_2^b + O(h^5).
+\]
+For a general \(2\times 2\) matrix \(M\),
 \begin{align*}
 (P_h M P_h^\top)_{11}
-&= \tfrac12(M_{11}+M_{12}+M_{21}+M_{22}),\\
+&= \tfrac12(M_{11} + M_{12} + M_{21} + M_{22}),\\
 (P_h M P_h^\top)_{12}
-&= \tfrac{1}{4h}(-M_{11}+M_{12}-M_{21}+M_{22}),\\
+&= \tfrac{1}{4h}(-M_{11} + M_{12} - M_{21} + M_{22}),\\
 (P_h M P_h^\top)_{21}
-&= \tfrac{1}{4h}(-M_{11}-M_{12}+M_{21}+M_{22}),\\
+&= \tfrac{1}{4h}(-M_{11} - M_{12} + M_{21} + M_{22}),\\
 (P_h M P_h^\top)_{22}
-&= \tfrac{1}{8h^2}(M_{11}-M_{12}-M_{21}+M_{22}).
+&= \tfrac{1}{8h^2}(M_{11} - M_{12} - M_{21} + M_{22}).
 \end{align*}
-Substituting \eqref{eq:K-bivariate-taylor} with
-\(u_i\in\{-h,+h\}\),
+Equivalently, these four expressions apply the sign weights
+\(1\), \(\sigma_2\), \(\sigma_1\), \(\sigma_1\sigma_2\) respectively to
+the four samples with \(u_i = \sigma_i h\).  The parity of the Taylor
+monomials therefore selects
 \[
-(P_h C_h P_h^\top)_{11}\to 2K,\quad
-(P_h C_h P_h^\top)_{12}\to K_y,\quad
-(P_h C_h P_h^\top)_{21}\to K_x,\quad
-(P_h C_h P_h^\top)_{22}\to \tfrac12 K_{xy}.
+(P_h C_h P_h^\top)_{11} = 2 K_{00} + O(h^2),\qquad
+(P_h C_h P_h^\top)_{12} = K_{01} + O(h^2),
 \]
-By Lemma~\ref{lem:phase-kernel-derivatives}, the four kernel
-derivatives at \((T_1,T_2)\) evaluate to
-\begin{align*}
-K_\Ph(T_1,T_2) &= \frac{\sin\Del}{\pi s},
-&K_x(T_1,T_2) &= \frac{q_1 s\cos\Del - \sin\Del}{\pi s^2},\\
-K_y(T_1,T_2) &= \frac{\sin\Del - q_2 s\cos\Del}{\pi s^2},
-&K_{xy}(T_1,T_2)
-&= \frac{(q_1+q_2) s\cos\Del + (q_1 q_2 s^2 - 2)\sin\Del}{\pi s^3},
-\end{align*}
-and \eqref{eq:cross-N12} follows.
+\[
+(P_h C_h P_h^\top)_{21} = K_{10} + O(h^2),\qquad
+(P_h C_h P_h^\top)_{22} = \tfrac12 K_{11} + O(h^2).
+\]
+Substituting the off-diagonal derivative formulas of
+Lemma~\ref{lem:phase-kernel-derivatives} gives \eqref{eq:cross-N12}.
 \end{proof}
 
 \subsection{Same-point Gram positivity}
@@ -433,55 +494,80 @@ D_J(T) \;:=\; 4\,q(T)^4 + 2\,q(T)\,q''(T) - 3\,q'(T)^2.
 \end{equation}
 \end{definition}
 
-\begin{lemma}[Algebraic Gram criterion]
+\begin{lemma}[Algebraic same-point Gram criterion]
 \label{lem:algebraic-same-point-gram-criterion}
+For \(J(T)\) of \eqref{eq:same-point-J},
 \begin{equation}
-\label{eq:J-trace}
+\label{eq:J-trace-det}
 \Tr J(T) = \frac{2 q(T)^3 + 24\,q(T) + q''(T)}{12\pi},\qquad
-\det J(T) = \frac{D_J(T)}{12\pi^2},
+\det J(T) = \frac{D_J(T)}{12\pi^2}.
 \end{equation}
-and \(J(T)\succ 0\) iff \(q(T) > 0\) and \(D_J(T) > 0\).
+Moreover,
+\[
+        J(T)\succ 0
+        \quad\Longleftrightarrow\quad
+        q(T) > 0 \quad\text{and}\quad D_J(T) > 0.
+\]
 \end{lemma}
 
 \begin{proof}
-Direct computation from \eqref{eq:same-point-J} gives
-\eqref{eq:J-trace}.  By Sylvester's criterion, the symmetric matrix
-\(J(T)\) is positive definite iff its leading principal minor
-\(2q(T)/\pi\) and its determinant are both positive.
+The trace and determinant follow by direct computation from
+\eqref{eq:same-point-J}.  Since \(J(T)\) is real symmetric,
+Sylvester's criterion gives positive definiteness exactly when its
+leading principal minor \(2q(T)/\pi\) and its determinant are
+positive.
 \end{proof}
 
-\begin{lemma}[Same-point Gram positivity]
+\begin{lemma}[Same-point Gram positivity for the theta phase]
 \label{lem:same-point-gram-positivity}
-With \(\Ph_T = \theta\), on retained packets at sufficiently large
-\(T\) the matrix \(J(T)\) is positive definite, and
-\[
-\lambda_{\min}(J(T))
-\;\ge\; \frac{2\,q(T)}{\pi}\bigl(1 + o(1)\bigr)
-\;=\; \frac{1}{\pi}\,\log(T/(2\pi))\,\bigl(1 + o(1)\bigr).
-\]
+For \(\Ph_T = \theta\), and for all sufficiently large retained
+heights, \(J(T)\) is positive definite.  More precisely,
+\begin{equation}
+\label{eq:lambda-min-asymptotic}
+        \lambda_{\min}(J(T))
+        = \frac{2 q(T)}{\pi}\,(1 + o(1))
+        = \frac{1}{\pi}\,\log\frac{T}{2\pi}\,(1 + o(1)).
+\end{equation}
+After increasing the lower-height cutoff if necessary,
+\(\lambda_{\min}(J(T)) \ge 1\); hence the polynomial-in-\(Q\) lower
+bound \(\lambda_{\min}(J(T)) \ge Q(T)^{-C_J}\) holds with \(C_J = 0\)
+whenever \(Q(T) \ge 1\).
 \end{lemma}
 
 \begin{proof}
-By Lemmas~\ref{lem:phase-derivative-lower-bound}
-and~\ref{lem:phase-derivative-upper-bounds},
-\(q(T) = \tfrac12 \log(T/(2\pi)) + O(T^{-2})\),
-\(q'(T) = O(T^{-1})\), \(q''(T) = O(T^{-2})\) at large \(T\).
-Substituting into \eqref{eq:same-point-gram-determinant},
+By Lemma~\ref{lem:theta-derivative-asymptotics},
 \[
-D_J(T)
-= 4\,q(T)^4 + O\bigl(q(T)\,T^{-2}\bigr) + O(T^{-2})
-= 4\,q(T)^4\bigl(1 + o(1)\bigr) > 0
+q(T) = \tfrac12 \log(T/(2\pi)) + O(T^{-2}),\qquad
+q'(T) = O(T^{-1}),\qquad q''(T) = O(T^{-2}).
 \]
-at sufficiently large \(T\), so
-Lemma~\ref{lem:algebraic-same-point-gram-criterion} gives
-\(J(T)\succ 0\).  For positive-definite \(2\times 2\),
-\(\lambda_{\min}\ge \det/\Tr\); with
-\(D_J(T) = 4q^4(1+o(1))\) and \(2q^3+24q+q'' = 2q^3(1+o(1))\),
+Therefore
 \[
-\lambda_{\min}(J(T))
-\ge \frac{D_J(T)}{\pi(2q^3+24q+q'')}
-= \frac{2q(T)}{\pi}\bigl(1+o(1)\bigr).
+D_J(T) = 4\,q(T)^4 + O\!\bigl(q(T)\,T^{-2}\bigr) + O(T^{-2})
+       = 4\,q(T)^4\,(1 + o(1)) > 0
 \]
-Substituting \(q(T) = \tfrac12 \log(T/(2\pi)) + O(T^{-2})\) gives
-the displayed bound.
+for sufficiently large \(T\), and \(q(T) > 0\).  By
+Lemma~\ref{lem:algebraic-same-point-gram-criterion},
+\(J(T) \succ 0\).
+
+Let \(0 < \lambda_1 \le \lambda_2\) be the eigenvalues of \(J(T)\).
+Since \(\lambda_2 \le \Tr J(T)\),
+\[
+\lambda_1 = \frac{\det J(T)}{\lambda_2}
+          \ge \frac{\det J(T)}{\Tr J(T)}
+          = \frac{D_J(T)}{\pi(2 q(T)^3 + 24\,q(T) + q''(T))}
+          = \frac{2 q(T)}{\pi}\,(1 + o(1)).
+\]
+The Rayleigh quotient at \(e_1\) gives
+\(\lambda_1 \le J_{11}(T) = 2 q(T)/\pi\), proving
+\eqref{eq:lambda-min-asymptotic}.
 \end{proof}
+
+\begin{remark}[Scope of the positivity lemma]
+\label{rem:scope-of-gram-positivity}
+Lemma~\ref{lem:same-point-gram-positivity} is theta-specific.  For an
+arbitrary real phase, the safe statement is only the algebraic
+criterion \(q > 0\) and \(D_J > 0\).  This lemma does not prove any
+lower bound for unrelated anisotropy functionals such as
+\(q'' - 6q + 2q^3\), nor does it supply Hardy/source-transfer
+information.
+\end{remark}
