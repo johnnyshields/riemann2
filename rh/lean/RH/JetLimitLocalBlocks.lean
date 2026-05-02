@@ -240,14 +240,141 @@ theorem algebraic_gram_criterion (T : ℝ) :
       have h_term2 : 0 < D_J T * (x 1)^2 := mul_pos hD h_x1sq
       linarith
 
-/-- Same-point Gram positivity: at sufficiently large `T`, `J(T) ≻ 0`,
-    with eigenvalue lower bound `λ_min(J(T)) ≥ (2 q(T) / π) (1 + o(1))`.
+/-- Algebraic lower bound for `D_J(T)`.  If `q(T) ≥ 2`, `|q'(T)| ≤ 1`,
+    and `|q''(T)| ≤ 1`, then `D_J(T) ≥ 57 > 0`.
 
-    Combines `algebraic_gram_criterion` with the Riemann–Siegel
-    asymptotics from §2 (`phase_derivative_lower_bound`,
-    `theta_derivative_asymptotics`). -/
+    Reduction: `4 q⁴ + 2 q q'' - 3 (q')² ≥ 4 q⁴ - 2 q - 3`, and the
+    identity `(q-2)(4q³+8q²+16q+30) = 4q⁴ - 2q - 60` shows
+    `4 q⁴ - 2 q ≥ 60` for `q ≥ 2`. -/
+private lemma D_J_lower_bound (T : ℝ) (hQ : 2 ≤ q T)
+    (hQp : |qPrime T| ≤ 1) (hQpp : |qDoublePrime T| ≤ 1) :
+    0 < D_J T := by
+  unfold D_J
+  have hqp_sq : (qPrime T)^2 ≤ 1 := by
+    have h := sq_abs (qPrime T)
+    nlinarith [hQp, abs_nonneg (qPrime T)]
+  have hqpp_lb : -1 ≤ qDoublePrime T := neg_le_of_abs_le hQpp
+  have h_q_pos : 0 < q T := by linarith
+  have h_factor :
+      (q T - 2) * (4 * (q T)^3 + 8 * (q T)^2 + 16 * q T + 30) =
+        4 * (q T)^4 - 2 * q T - 60 := by ring
+  have h_factor_nn :
+      0 ≤ (q T - 2) * (4 * (q T)^3 + 8 * (q T)^2 + 16 * q T + 30) := by
+    apply mul_nonneg
+    · linarith
+    · positivity
+  nlinarith [h_factor, h_factor_nn, hqp_sq, hqpp_lb, h_q_pos, hQ]
+
+/-- For sufficiently large `T`, the chart derivatives satisfy
+    `q(T) ≥ 2`, `|q'(T)| ≤ 1`, and `|q''(T)| ≤ 1`.
+
+    Chains the Riemann–Siegel asymptotics from §2: the lower bound
+    `q(T) ≥ (1/2) log(T/(4π)) - C₁/T²` of
+    `phase_derivative_lower_bound` exceeds `2` once
+    `log(T/(4π)) ≥ 6` and `C₁/T² ≤ 1`; the bounds
+    `|q'(T) - 1/(2T)| ≤ C₂/T³` and `|q''(T) + 1/(2T²)| ≤ C₂/T⁴`
+    of `theta_derivative_asymptotics` force `|q'(T)| ≤ 1` and
+    `|q''(T)| ≤ 1` once `T ≥ 1 + 2 C₂`. -/
+private lemma analytic_bounds_eventual :
+    ∃ T₀ : ℝ, 0 < T₀ ∧ ∀ T : ℝ, T₀ ≤ T →
+      2 ≤ q T ∧ |qPrime T| ≤ 1 ∧ |qDoublePrime T| ≤ 1 := by
+  obtain ⟨T₁, C₁, hT₁_pos, hC₁_nn, hq_lb⟩ := phase_derivative_lower_bound
+  obtain ⟨T₂, C₂, hT₂_pos, hC₂_nn, hasymp⟩ := theta_derivative_asymptotics
+  have h_4π_pos : (0 : ℝ) < 4 * Real.pi := by positivity
+  set Tlog : ℝ := 4 * Real.pi * Real.exp 6 with hTlog
+  set Tcoef : ℝ := 1 + C₁ + 2 * C₂ with hTcoef
+  refine ⟨max (max T₁ T₂) (max Tlog Tcoef), ?_, ?_⟩
+  · have h1 : 0 < max T₁ T₂ := lt_max_of_lt_left hT₁_pos
+    exact lt_max_of_lt_left h1
+  intro T hT
+  have hT_T₁ : T₁ ≤ T :=
+    le_trans (le_max_left _ _) (le_trans (le_max_left _ _) hT)
+  have hT_T₂ : T₂ ≤ T :=
+    le_trans (le_max_right _ _) (le_trans (le_max_left _ _) hT)
+  have hT_log : Tlog ≤ T :=
+    le_trans (le_max_left _ _) (le_trans (le_max_right _ _) hT)
+  have hT_coef : Tcoef ≤ T :=
+    le_trans (le_max_right _ _) (le_trans (le_max_right _ _) hT)
+  have h_exp_pos : (0 : ℝ) < Real.exp 6 := Real.exp_pos 6
+  have hT_pos : 0 < T := by
+    have : 0 < Tlog := by rw [hTlog]; positivity
+    linarith
+  have hT_ge_one : 1 ≤ T := by
+    rw [hTcoef] at hT_coef
+    linarith
+  have hT_sq_pos : 0 < T^2 := by positivity
+  have hT_cube_pos : 0 < T^3 := by positivity
+  have hT_four_pos : 0 < T^4 := by positivity
+  -- (1) q T ≥ 2
+  have h_q_ge_2 : 2 ≤ q T := by
+    have h_T_ratio : Real.exp 6 ≤ T / (4 * Real.pi) := by
+      rw [le_div_iff₀ h_4π_pos]
+      have : 4 * Real.pi * Real.exp 6 ≤ T := by rw [← hTlog]; exact hT_log
+      linarith
+    have h_log_T : 6 ≤ Real.log (T / (4 * Real.pi)) := by
+      calc 6 = Real.log (Real.exp 6) := (Real.log_exp 6).symm
+        _ ≤ Real.log (T / (4 * Real.pi)) := Real.log_le_log h_exp_pos h_T_ratio
+    have h_C₁_small : C₁ / T^2 ≤ 1 := by
+      have h_T_sq : C₁ ≤ T^2 := by
+        rw [hTcoef] at hT_coef
+        nlinarith [hT_ge_one, hC₁_nn, hC₂_nn]
+      rw [div_le_one hT_sq_pos]; exact h_T_sq
+    have h_qbd := hq_lb T hT_T₁ T (by linarith) (by linarith)
+    linarith
+  -- (2) |qPrime T| ≤ 1 and |qDoublePrime T| ≤ 1
+  obtain ⟨_, hqp_bd, hqpp_bd⟩ := hasymp T hT_T₂ T (by linarith) (by linarith)
+  have h_C₂_T_cube : C₂ / T^3 ≤ 1/2 := by
+    -- T³ ≥ T ≥ 1 + 2 C₂ ≥ 2 C₂
+    have hT3_ge : 2 * C₂ ≤ T^3 := by
+      have h_T_ge_2C₂ : 2 * C₂ ≤ T := by rw [hTcoef] at hT_coef; linarith
+      have h_T3_ge_T : T ≤ T^3 := by nlinarith [hT_ge_one]
+      linarith
+    rw [div_le_iff₀ hT_cube_pos]; linarith
+  have h_C₂_T_four : C₂ / T^4 ≤ 1/2 := by
+    have hT4_ge : 2 * C₂ ≤ T^4 := by
+      have h_T_ge_2C₂ : 2 * C₂ ≤ T := by rw [hTcoef] at hT_coef; linarith
+      have h_T4_ge_T : T ≤ T^4 := by nlinarith [hT_ge_one]
+      linarith
+    rw [div_le_iff₀ hT_four_pos]; linarith
+  have h_1_2T_le : 1 / (2 * T) ≤ 1/2 := by
+    have h2T : 0 < 2 * T := by linarith
+    rw [div_le_div_iff₀ h2T (by norm_num : (0:ℝ) < 2)]
+    nlinarith
+  have h_1_2T2_le : 1 / (2 * T^2) ≤ 1/2 := by
+    have h2T2 : 0 < 2 * T^2 := by positivity
+    rw [div_le_div_iff₀ h2T2 (by norm_num : (0:ℝ) < 2)]
+    nlinarith [hT_ge_one]
+  have h_1_2T_pos : 0 ≤ 1 / (2 * T) := by positivity
+  have h_qp_le : |qPrime T| ≤ 1 := by
+    rw [abs_le]
+    obtain ⟨h_lo, h_hi⟩ := abs_le.mp hqp_bd
+    refine ⟨?_, ?_⟩
+    · linarith
+    · linarith
+  have h_qpp_le : |qDoublePrime T| ≤ 1 := by
+    rw [abs_le]
+    obtain ⟨h_lo, h_hi⟩ := abs_le.mp hqpp_bd
+    have h_pos : 0 ≤ 1 / (2 * T^2) := by positivity
+    have h_neg : (-1 : ℝ) / (2 * T^2) = -(1 / (2 * T^2)) := by ring
+    rw [h_neg] at h_lo h_hi
+    refine ⟨?_, ?_⟩
+    · linarith
+    · linarith
+  exact ⟨h_q_ge_2, h_qp_le, h_qpp_le⟩
+
+/-- Same-point Gram positivity: at sufficiently large `T`, `J(T) ≻ 0`.
+
+    Chains `analytic_bounds_eventual` (q ≥ 2 ∧ |q'| ≤ 1 ∧ |q''| ≤ 1
+    eventually), `D_J_lower_bound` (gives `D_J > 0` from those bounds),
+    and `algebraic_gram_criterion` (gives `PosDef ↔ q > 0 ∧ D_J > 0`). -/
 theorem same_point_gram_positivity :
     ∃ T₀ : ℝ, 0 < T₀ ∧ ∀ T : ℝ, T₀ ≤ T → (J T).PosDef := by
-  sorry
+  obtain ⟨T₀, hT₀_pos, hbounds⟩ := analytic_bounds_eventual
+  refine ⟨T₀, hT₀_pos, ?_⟩
+  intro T hT
+  obtain ⟨hQ, hQp, hQpp⟩ := hbounds T hT
+  have h_q_pos : 0 < q T := by linarith
+  have h_DJ_pos : 0 < D_J T := D_J_lower_bound T hQ hQp hQpp
+  exact (algebraic_gram_criterion T).mpr ⟨h_q_pos, h_DJ_pos⟩
 
 end RH.JetLimitLocalBlocks
