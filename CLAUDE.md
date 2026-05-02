@@ -103,6 +103,8 @@ Applies to every edit of `rh/rh_rebuild.tex`, including section migrations, refi
 
 **Section orientation.** Every section in `rh_rebuild.tex` (and every section-replacement patch under `rh/patches/`) opens with one or two natural-prose sentences immediately after the status block. They identify what the section consumes from prior sections (anchored by `\ref`) and what principal definition, lemma, theorem, or block of objects it delivers to subsequent sections. Orientation reads as Annals-register declarative prose, not as a metadata block: do **not** use literal "Inputs: …" / "Outcome: …" labels with colons. It is terse and factual — it does not motivate, narrate strategy, paraphrase the proof, or use editorial markers like "load-bearing," "the strategy is," "we therefore." Subsections do not need orientation — only sections.
 
+**Voice and forward-reference idioms.** Prefer active voice in orientation prose and lemma/theorem statements. "This section establishes …", "Lemma~\ref{...} gives …", and "the comparison of \S\ref{...} carries …" are active; "the X is set up here", "the Y is given by", "the Z is introduced below" are passive and rewrite better. For forward references, use **"throughout"** when scope-wide; **"in subsequent sections"** for a narrower forward window. Avoid **"in the rest of the paper"**, **"later in this paper"**, **"in the sequel"**, and **"as we will see"** — these are colloquial / expository registers, not Annals.
+
 **Avoid:**
 
 - Editorial framing ("we therefore", "we never use \(\zeta\) again", "the algebra is unconditional and reduces to...", "load-bearing", "isolates", "structural separation").
