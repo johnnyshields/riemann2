@@ -1,12 +1,35 @@
-Next step:
-- Agent 5 hit an obstruction re: IIarith, we need to repair it.
-- Agents 4+6 are pending agent 5
+
+============
+
+https://chatgpt.com/c/69f3b418-ab80-83e8-804a-582cfa8eda8d <-- jet gram repairs
+
+==============
+
+https://chatgpt.com/c/69f3979c-42ec-83e8-af70-c27de9df10fe
+
+
+====
 
 about:debugging#/runtime/this-firefox
 
 ===
 
-PRO - Zeta Bridge Upstream Prover (starting from upstream Zeta)
+PRO - Zeta Bridge Downstream Prover
+
+PRO - Coordinator
+https://chatgpt.com/c/WEB:94eb384c-59a2-464b-a02e-7c2e2ffcce85
+
+PRO - Math Attack agents
+https://chatgpt.com/c/69f39d8c-4a84-83e8-81d6-5ca7e21dafc9 <-- NO-GO
+https://chatgpt.com/c/69f39d8c-5e74-83e8-a8bd-92c299acccd0 <-- PROVED
+https://chatgpt.com/c/69f39d8c-7750-83e8-bda2-f8218a37e719 <-- blocked on 1/5
+https://chatgpt.com/c/69f39d8c-99e4-83e8-a63e-f3fa589fcd75 <-- blocked on 1/5
+https://chatgpt.com/c/69f39d8c-ea5c-83e8-87c5-543cfb5822fa <-- NO-GO
+https://chatgpt.com/c/69f39d8c-d014-83e8-b937-213cdd493393 
+
+===
+
+PRO - Zeta Bridge Upstream Prover/Canonicalizer
 
 PRO - Coordinator
 https://chatgpt.com/c/69f206c3-443c-83e8-ba4e-4e50ca847bf0
@@ -14,9 +37,9 @@ https://chatgpt.com/c/69f206c3-443c-83e8-ba4e-4e50ca847bf0
 PRO - Math Attack agents
 https://chatgpt.com/c/69f20766-44cc-83e8-8791-675677aea7ab - Paper audit/repair
 https://chatgpt.com/c/69f20766-3858-83e8-ad18-f7e7161f201a
-https://chatgpt.com/c/69f20766-52b4-83e8-870e-c150d74285e4
+https://chatgpt.com/c/69f20766-52b4-83e8-870e-c150d74285e4 <-- d\coerc
 https://chatgpt.com/c/69f20766-4588-83e8-a627-5782183c63a3
-https://chatgpt.com/c/69f20a6a-6dec-83e8-bf96-ca3f32f4bf9e - Gate-1: Source survival - Nonstatic cap / extraction covariance
+https://chatgpt.com/c/69f20a6a-6dec-83e8-bf96-ca3f32f4bf9e <-- Agent 5 did most of the heavy lifting on d\src and canonicalization
 https://chatgpt.com/c/69f20be9-b4c8-83e8-9104-9fccec52a9cb
 
 Agent split against the current finite-survival handover:
@@ -181,6 +204,16 @@ We are trying to prove RH. Please see paper draft attached and handover notes fr
 You will act as a coordinator. You have 6 agents working for you, and you can delegate tasks to them. Agents will always work in parallel, and give their responses back to you (the coordinator) to consolidate after each round. Please don't give a suggested agent execution order next time. Ensure your prompts are ideally parallelize-able, i.e. ideally don't prompt one agent to wait for another. Address the agents as "Agent 1", "Agent 2", "Agent 3", etc.
 
 Now, read the draft and handover notes deeply to understand the full context.
+
+---
+
+COORDINATOR PROMPT V2:
+
+Now, you will act as the coordinator, and you will lead a team of 6 agents to do tasks, and delegate tasks to them. Agents will always work in parallel, and give their responses back to you (the coordinator) to consolidate after each round. Please don't give a suggested agent execution order next time. Ensure your prompts are ideally parallelize-able, i.e. ideally don't prompt one agent to wait for another. Address the agents as "Agent 1", "Agent 2", "Agent 3", etc.
+
+In every set of prompts, give a shared background for all agents. Also, in each instruction, tell the Agent to "end it's response with exactly one of PROVED, FINITE AUDIT, or NO-GO." Also, tell agents that they are in math attack mode first, and only ask them to draft latex once they have closed the math work.
+
+Now, prepare the 6 agent prompts for the 6 parallel attacks. For reference, I've attached what the old coordinator recommended, but feel free to do the attacks which you think are best.
 
 ---
 
