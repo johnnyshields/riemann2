@@ -98,6 +98,42 @@ theorem cross_block_jet_limit (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
       (nhds ((1 / Real.pi) • N12 T₁ T₂)) := by
   sorry
 
+/-! ## O(h²) rate statements
+
+    The paper proves `P_h A_h(T) P_h^⊤ = J(T) + O(h²)` and the
+    corresponding cross-block bound entrywise.  The `Tendsto` versions
+    above lose this rate; the explicit `O(h²)` form is required by
+    downstream finite-scale comparisons. -/
+
+/-- Same-point jet-limit with explicit `O(h²)` rate.  Entrywise:
+    there is `M ≥ 0` such that for `h ∈ (0, 1]` and each entry `(i, j)`
+    of `Fin 2 × Fin 2`,
+        `|((P_h A_h(T) P_h^⊤) − J(T)) i j| ≤ M h²`. -/
+theorem same_point_jet_limit_rate (T : ℝ) :
+    ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, 0 < h → h ≤ 1 →
+      ∀ i j : Fin 2,
+        |(pointToJetTransform h * samePointBlock T h *
+            (pointToJetTransform h).transpose - J T) i j| ≤ M * h^2 := by
+  -- TODO: 5th-order Taylor of θ around T, applied to the four-sample
+  -- conjugation; the explicit constant M depends on a local C^5 bound
+  -- for θ near T.
+  sorry
+
+/-- Cross-block jet-limit with explicit `O(h²)` rate.  Entrywise: for
+    fixed separation `s = T₁ − T₂ ≠ 0`, there is `M(|s|⁻¹) ≥ 0` such
+    that for `h ∈ (0, |s|/3]`,
+        `|((P_h C_h(T₁,T₂) P_h^⊤) − (1/π) N₁₂(T₁,T₂)) i j| ≤ M h²`. -/
+theorem cross_block_jet_limit_rate (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
+    ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, 0 < h → h ≤ |T₁ - T₂| / 3 →
+      ∀ i j : Fin 2,
+        |(pointToJetTransform h * crossBlock T₁ T₂ h *
+            (pointToJetTransform h).transpose -
+          (1 / Real.pi) • N12 T₁ T₂) i j| ≤ M * h^2 := by
+  -- TODO: 5th-order Taylor with parity weights `(1, σ₂, σ₁, σ₁σ₂)`
+  -- across the four samples; constant depends on `|s|⁻¹` and a local
+  -- C^5 bound for θ near `T₁` and `T₂`.
+  sorry
+
 /-! ## Same-point Gram positivity -/
 
 /-- Same-point Gram determinant `D_J(T) = 4 q⁴ + 2 q q'' - 3 (q')²`. -/
@@ -363,12 +399,16 @@ private lemma analytic_bounds_eventual :
     · linarith
   exact ⟨h_q_ge_2, h_qp_le, h_qpp_le⟩
 
-/-- Same-point Gram positivity: at sufficiently large `T`, `J(T) ≻ 0`.
+/-- Eventual same-point Gram positive-definiteness: at sufficiently
+    large `T`, `J(T) ≻ 0`.
 
     Chains `analytic_bounds_eventual` (q ≥ 2 ∧ |q'| ≤ 1 ∧ |q''| ≤ 1
     eventually), `D_J_lower_bound` (gives `D_J > 0` from those bounds),
-    and `algebraic_gram_criterion` (gives `PosDef ↔ q > 0 ∧ D_J > 0`). -/
-theorem same_point_gram_positivity :
+    and `algebraic_gram_criterion` (gives `PosDef ↔ q > 0 ∧ D_J > 0`).
+
+    This is the eventual-PosDef package; for the spectral floor used
+    in whitening, see `same_point_gram_uniform_floor`. -/
+theorem same_point_gram_posdef_eventual :
     ∃ T₀ : ℝ, 0 < T₀ ∧ ∀ T : ℝ, T₀ ≤ T → (J T).PosDef := by
   obtain ⟨T₀, hT₀_pos, hbounds⟩ := analytic_bounds_eventual
   refine ⟨T₀, hT₀_pos, ?_⟩
@@ -377,5 +417,27 @@ theorem same_point_gram_positivity :
   have h_q_pos : 0 < q T := by linarith
   have h_DJ_pos : 0 < D_J T := D_J_lower_bound T hQ hQp hQpp
   exact (algebraic_gram_criterion T).mpr ⟨h_q_pos, h_DJ_pos⟩
+
+/-- Backwards-compatible alias for `same_point_gram_posdef_eventual`. -/
+theorem same_point_gram_positivity :
+    ∃ T₀ : ℝ, 0 < T₀ ∧ ∀ T : ℝ, T₀ ≤ T → (J T).PosDef :=
+  same_point_gram_posdef_eventual
+
+/-- Uniform spectral floor for `J(T)`: at sufficiently large `T`,
+    `xᵀ J(T) x ≥ xᵀ x` for every `x : Fin 2 → ℝ`.
+
+    Equivalent to `λ_min(J(T)) ≥ 1` for real symmetric 2×2.  Matches
+    the paper's whitening-relevant floor in
+    Lemma `lem:same-point-gram-positivity` after raising the
+    lower-height cutoff. -/
+theorem same_point_gram_uniform_floor :
+    ∃ T₀ : ℝ, 0 < T₀ ∧
+      ∀ T : ℝ, T₀ ≤ T →
+      ∀ x : Fin 2 → ℝ,
+        x ⬝ᵥ ((J T) *ᵥ x) ≥ x ⬝ᵥ x := by
+  -- TODO: strengthen `analytic_bounds_eventual` to a regime where
+  --   `λ_min(J(T)) = (2 q(T) / π) (1 + o(1)) ≥ 1`,
+  -- and translate via the SOS identity used in `algebraic_gram_criterion`.
+  sorry
 
 end RH.JetLimitLocalBlocks

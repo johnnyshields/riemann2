@@ -1,18 +1,44 @@
 /-
 The Riemann–Siegel phase function and its derivatives.
 
-Concrete definitions used throughout `RH/`.  This module isolates the
-heavyweight digamma / log-Gamma infrastructure from the rest of the
-formalization.
+This module isolates the heavyweight log-Gamma / digamma infrastructure
+underpinning the Riemann–Siegel phase used in `rh_rebuild.tex` Sections
+2–3.
+
+The paper's `θ` is the unique holomorphic branch of `log Γ z` on
+`Re z > 0` normalized to be real on the positive real axis, restricted
+to `z = 1/4 + i t / 2`.  This branch is C^∞ on its full domain and
+agrees with the principal branch only away from the principal cut of
+`Complex.log` traversed by `t ↦ Γ(1/4 + i t / 2)`.
+
+We therefore keep `theta` abstract (a primitive symbol satisfying the
+asymptotic theorems below) and quarantine the principal-branch
+expression as `thetaPrincipal`, which is **not** the active phase.  A
+future bridge theorem `thetaPrincipal_eq_theta_of_no_branch_crossing`
+relates the two off the branch cut.
+
+WARNING: Earlier drafts defined `theta` directly via
+`Complex.log ∘ Complex.Gamma`.  That definition is *unsafe* — at branch
+crossings of `t ↦ Γ(1/4 + i t / 2)`, the principal logarithm has 2π
+jumps, and `deriv (principal-branch theta)` does not equal `deriv
+(continuous-branch theta)`.  The matrix kernel `sin(θ(x) − θ(y))` is
+unaffected, but the derivatives `q = θ'`, `q' = θ''`, `q'' = θ'''`
+(used in `J(T)` and `D_J(T)`) are not.  Do not revert.
 
 Maps to the LaTeX as follows:
   RH.RiemannSiegelTheta.theta
-      ↔ θ(t) of `def:riemann-siegel-phase`
+      ↔ θ(t) of `def:riemann-siegel-phase` (continuous branch)
   RH.RiemannSiegelTheta.q, qPrime, qDoublePrime
       ↔ q = θ', q' = θ'', q'' = θ'''
+  RH.RiemannSiegelTheta.thetaPrincipal
+      ↔ principal-branch expression `Im(log Γ(1/4 + i t / 2))
+              − (t/2) log π`,
+        equal to `theta` modulo a piecewise constant in 2π·ℤ;
+        not the active phase.
 
 Theorems:
   theta_derivative_asymptotics       ↔ Lemma `lem:theta-derivative-asymptotics`
+  theta_derivative_asymptotics_dyadic ↔ same on `[T/2, 2T]` window
   phase_derivative_lower_bound       ↔ Lemma `lem:phase-derivative-lower-bound`
 -/
 
@@ -29,24 +55,21 @@ namespace RH.RiemannSiegelTheta
 
 open Real Complex
 
-/-! ## Concrete definitions
+/-! ## Abstract phase function
 
-`theta` is defined via the principal branch of `Complex.log ∘ Complex.Gamma`
-on `1/4 + i t / 2`.  The principal branch has `2π` discontinuities; the
-*continuous* Riemann–Siegel phase used in the paper differs by a piecewise
-constant `2π k(t)`, but the kernel `sin(θ(x) − θ(y))` is `2π`-periodic in
-each argument and thus invariant under this choice.
+`theta` is the continuous Riemann–Siegel phase: the unique holomorphic
+branch of `log Γ z` on `Re z > 0` (real on the positive axis), evaluated
+along `z(t) = 1/4 + i t / 2`, minus `(t/2) log π`.  It is treated as an
+abstract primitive in this module; its concrete construction (and the
+proof that it is C^∞ on `(0, ∞)`) is part of the deferred
+`theta_derivative_asymptotics`.
 
-The first three derivatives `q`, `qPrime`, `qDoublePrime` are defined as
-iterated `deriv` of `theta` to match the LaTeX usage `q = θ′`,
-`q′ = θ″`, `q″ = θ‴`. -/
+The kernel `sin(θ(x) − θ(y))` and its derivatives only ever consume
+`theta`, `q`, `qPrime`, `qDoublePrime` through the asymptotic
+statements below; no caller should unfold `theta` to a closed form. -/
 
-/-- Riemann–Siegel phase, principal branch.
-
-    `θ(t) = Im(log Γ(1/4 + i t / 2)) − (t/2) log π`. -/
-noncomputable def theta (t : ℝ) : ℝ :=
-  (Complex.log (Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2))).im -
-    (t / 2) * Real.log Real.pi
+/-- The continuous Riemann–Siegel phase. -/
+noncomputable def theta : ℝ → ℝ := sorry
 
 /-- First derivative of the phase, `q := θ'`. -/
 noncomputable def q (t : ℝ) : ℝ := deriv theta t
@@ -57,129 +80,31 @@ noncomputable def qPrime (t : ℝ) : ℝ := deriv (deriv theta) t
 /-- Third derivative of the phase, `q'' := θ'''`. -/
 noncomputable def qDoublePrime (t : ℝ) : ℝ := deriv (deriv (deriv theta)) t
 
-/-! ## Closed-form expression for `q` via digamma
+/-! ## Principal-branch quarantine (not the active phase)
 
-    Differentiating `t ↦ Complex.log (Complex.Gamma (1/4 + i t / 2))` gives
-    `(i/2) · ψ(1/4 + i t / 2)`, where `ψ = Complex.digamma`.  Taking the
-    imaginary part:
-        `q(t) = (1/2) Re(ψ(1/4 + i t / 2)) − (1/2) log π`.
+The principal-branch expression is recorded so a future bridge theorem
+can relate it to the continuous-branch `theta` away from branch-cut
+crossings of `t ↦ Γ(1/4 + i t / 2)`.  It is **not** used elsewhere in
+this module or downstream. -/
 
-    The chain rule applies away from branch cuts: we require
-    `Γ(1/4 + i t / 2) ∈ slitPlane`. -/
-
-/-- The affine map `t ↦ 1/4 + i t / 2` has derivative `i/2`. -/
-private lemma z_hasDerivAt (t : ℝ) :
-    HasDerivAt (fun s : ℝ => (1 : ℂ) / 4 + Complex.I * (s : ℂ) / 2)
-      (Complex.I / 2) t := by
-  have h1 : HasDerivAt (fun s : ℝ => (s : ℂ)) (1 : ℂ) t :=
-    Complex.ofRealCLM.hasDerivAt
-  have h2 := h1.const_mul Complex.I
-  have h3 := h2.div_const 2
-  have h4 := h3.const_add ((1 : ℂ) / 4)
-  convert h4 using 1
-  ring
-
-/-- For real `t`, `1/4 + i t / 2` is never a non-positive integer
-    (since its real part is `1/4 > 0`). -/
-private lemma z_ne_neg_nat (t : ℝ) :
-    ∀ m : ℕ, ((1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2) ≠ -m := by
-  intro m heq
-  have h_re : ((1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2).re = ((-(m : ℂ)).re : ℝ) := by
-    rw [heq]
-  simp at h_re
-  -- h_re : 1/4 = -↑m, contradiction since 1/4 > 0 and m ≥ 0
-  have hm : (0 : ℝ) ≤ m := Nat.cast_nonneg m
-  linarith
-
-/-- `theta` has derivative `(1/2) Re(ψ(z(t))) − (1/2) log π` at `t`,
-    provided `Γ(z(t)) ∈ slitPlane`. -/
-theorem theta_hasDerivAt (t : ℝ)
-    (h_slit : Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2) ∈
-              Complex.slitPlane) :
-    HasDerivAt theta
-      ((1 / 2) * (Complex.digamma ((1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2)).re -
-        (1 / 2) * Real.log Real.pi) t := by
-  set z : ℂ := (1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2 with hz_def
-  have h_zdrv := z_hasDerivAt t
-  have h_z_ne := z_ne_neg_nat t
-  have h_Γ_diff : DifferentiableAt ℂ Complex.Gamma z :=
-    Complex.differentiableAt_Gamma z h_z_ne
-  have h_Γz : HasDerivAt
-      (fun s : ℝ => Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (s : ℂ) / 2))
-      ((Complex.I / 2) * deriv Complex.Gamma z) t :=
-    h_Γ_diff.hasDerivAt.scomp t h_zdrv
-  have h_logΓz : HasDerivAt
-      (fun s : ℝ => Complex.log (Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (s : ℂ) / 2)))
-      ((Complex.I / 2) * deriv Complex.Gamma z / Complex.Gamma z) t :=
-    h_Γz.clog_real h_slit
-  -- Compose with `Complex.imCLM` via `HasFDerivAt.comp_hasDerivAt`
-  have h_imComp : HasDerivAt
-      (Complex.imCLM ∘ fun s : ℝ =>
-        Complex.log (Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (s : ℂ) / 2)))
-      (Complex.imCLM ((Complex.I / 2) * deriv Complex.Gamma z / Complex.Gamma z)) t :=
-    Complex.imCLM.hasFDerivAt.comp_hasDerivAt t h_logΓz
-  -- Convert from `imCLM ∘ ...` to `fun s => (...).im`
-  have h_im : HasDerivAt
-      (fun s : ℝ =>
-        (Complex.log (Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (s : ℂ) / 2))).im)
-      (((Complex.I / 2) * deriv Complex.Gamma z / Complex.Gamma z).im) t := by
-    have h_eq_fns :
-        (Complex.imCLM ∘ fun s : ℝ =>
-            Complex.log (Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (s : ℂ) / 2))) =
-        (fun s : ℝ =>
-            (Complex.log (Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (s : ℂ) / 2))).im) := by
-      funext s
-      exact Complex.imCLM_apply _
-    have h_val :
-        Complex.imCLM ((Complex.I / 2) * deriv Complex.Gamma z / Complex.Gamma z) =
-          ((Complex.I / 2) * deriv Complex.Gamma z / Complex.Gamma z).im :=
-      Complex.imCLM_apply _
-    rw [h_eq_fns, h_val] at h_imComp
-    exact h_imComp
-  -- Evaluate the imaginary part
-  have h_im_value :
-      ((Complex.I / 2) * deriv Complex.Gamma z / Complex.Gamma z).im =
-        (1 / 2) * (Complex.digamma z).re := by
-    rw [Complex.digamma_def, logDeriv_apply, mul_div_assoc]
-    simp [Complex.mul_im, Complex.I_re, Complex.I_im,
-          Complex.div_re, Complex.div_im]
-  rw [h_im_value] at h_im
-  -- Linear part `(t/2) * log π`
-  have h_linear : HasDerivAt (fun s : ℝ => s / 2 * Real.log Real.pi)
-      (1 / 2 * Real.log Real.pi) t := by
-    have h_div : HasDerivAt (fun s : ℝ => s / 2) (1 / 2) t :=
-      (hasDerivAt_id t).div_const 2
-    have := h_div.mul_const (Real.log Real.pi)
-    simpa using this
-  exact h_im.sub h_linear
-
-/-- Convenience: `theta` is differentiable at `t` provided
-    `Γ(z(t)) ∈ slitPlane`. -/
-theorem theta_differentiableAt (t : ℝ)
-    (h_slit : Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2) ∈
-              Complex.slitPlane) :
-    DifferentiableAt ℝ theta t :=
-  (theta_hasDerivAt t h_slit).differentiableAt
-
-/-- `q t = (1/2) Re(digamma(1/4 + i t / 2)) − (1/2) log π`,
-    provided `Γ(z(t)) ∈ slitPlane`. -/
-theorem q_eq_digamma (t : ℝ)
-    (h_slit : Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2) ∈
-              Complex.slitPlane) :
-    q t = (1 / 2) * (Complex.digamma ((1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2)).re -
-          (1 / 2) * Real.log Real.pi :=
-  (theta_hasDerivAt t h_slit).deriv
+/-- Principal-branch expression for the Riemann–Siegel phase, using
+    `Complex.log` (principal logarithm).  Differs from `theta` by a
+    piecewise constant `2π k(t)` with `k : ℝ → ℤ`; not the paper's
+    `θ`.  Documented for future bridging only. -/
+noncomputable def thetaPrincipal (t : ℝ) : ℝ :=
+  (Complex.log (Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2))).im -
+    (t / 2) * Real.log Real.pi
 
 /-! ## Riemann–Siegel asymptotics
 
-    Differentiated Stirling for `log Γ` (or, equivalently, asymptotic
-    expansion of `digamma` at the half-period scale `t → ∞`).  Mathlib has
-    the leading term of Stirling but not the polynomial corrections, so
-    these are recorded as proof obligations. -/
+Differentiated Stirling for `log Γ` (or, equivalently, asymptotic
+expansion of `digamma` at the half-period scale `t → ∞`).  Mathlib has
+the leading term of Stirling but not the polynomial corrections, so
+these are recorded as proof obligations.  Two window variants are
+provided; dyadic is the paper's actual `I_T ⊂ [T/2, 2T]` interface. -/
 
-/-- Differentiated theta asymptotics, uniform over a window
-    `[T - 1, T + 1] ⊂ I_T`.  Combines the three derivative bounds of
-    Lemma `lem:theta-derivative-asymptotics`:
+/-- Differentiated theta asymptotics on the surrogate window
+    `[T - 1, T + 1]`.  Combines the three derivative bounds:
     `q  = (1/2) log(t/(2π)) - 1/(48 t²) + O(t⁻⁴)`,
     `q' = 1/(2t) + O(t⁻³)`, and
     `q'' = -1/(2t²) + O(t⁻⁴)`. -/
@@ -190,9 +115,17 @@ theorem theta_derivative_asymptotics :
         ≤ C / t^4 ∧
       |qPrime t - 1 / (2 * t)| ≤ C / t^3 ∧
       |qDoublePrime t - (-1) / (2 * t^2)| ≤ C / t^4 := by
-  -- TODO: differentiate Stirling for `log Γ` to three orders.
-  -- Mathlib has `Stirling.tendsto_stirlingSeq_atTop` (leading term only).
-  -- The polynomial corrections `1/(12 z) − 1/(360 z³) + …` need to be derived.
+  sorry
+
+/-- Dyadic-window form of `theta_derivative_asymptotics`, matching the
+    paper's `I_T ⊂ [T/2, 2T]` interface. -/
+theorem theta_derivative_asymptotics_dyadic :
+    ∃ T₀ C : ℝ, 0 < T₀ ∧ 0 ≤ C ∧
+    ∀ T t : ℝ, T₀ ≤ T → T / 2 ≤ t → t ≤ 2 * T →
+      |q t - ((1/2) * Real.log (t / (2 * Real.pi)) - 1 / (48 * t^2))|
+        ≤ C / t^4 ∧
+      |qPrime t - 1 / (2 * t)| ≤ C / t^3 ∧
+      |qDoublePrime t - (-1) / (2 * t^2)| ≤ C / t^4 := by
   sorry
 
 /-- Phase-derivative lower bound (P2):
@@ -217,25 +150,21 @@ theorem phase_derivative_lower_bound :
   have hT_pos : 0 < T := by linarith
   have ht_pos : 0 < t := by linarith
   have ht_half : T / 2 ≤ t := by linarith
-  -- Apply theta_derivative_asymptotics
   obtain ⟨h_q_bound, _, _⟩ := hasymp T hT_T₀' t ht_lo ht_hi
   have h_q_lo : (1/2) * Real.log (t / (2 * Real.pi)) - 1 / (48 * t^2) - C' / t^4 ≤ q t := by
     have h_abs := abs_le.mp h_q_bound
     linarith [h_abs.1]
-  -- log(t/(2π)) ≥ log(T/(4π)) since t ≥ T/2.
   have h_log_mono : Real.log (T / (4 * Real.pi)) ≤ Real.log (t / (2 * Real.pi)) := by
     apply Real.log_le_log (by positivity)
     rw [div_le_div_iff₀ (by positivity : (0:ℝ) < 4 * Real.pi)
         (by positivity : (0:ℝ) < 2 * Real.pi)]
     nlinarith [Real.pi_pos]
-  -- t² ≥ T²/4.
   have h_t_sq_lower : T^2 / 4 ≤ t^2 := by nlinarith
   have h_t_sq_pos : 0 < t^2 := by positivity
   have h_T_sq_pos : 0 < T^2 := by positivity
   have h_one_48 : 1 / (48 * t^2) ≤ 1 / (12 * T^2) := by
     rw [div_le_div_iff₀ (by positivity) (by positivity)]
     nlinarith
-  -- t⁴ ≥ T⁴/16 ≥ T²/16 (for T ≥ 1, since T² ≤ T⁴).
   have h_T_ge_1 : (1 : ℝ) ≤ T := by linarith
   have h_t_4_lower : T^4 / 16 ≤ t^4 := by nlinarith
   have h_T_sq_ge_1 : (1 : ℝ) ≤ T^2 := by nlinarith [h_T_ge_1]
@@ -243,7 +172,6 @@ theorem phase_derivative_lower_bound :
   have h_Cp_t4 : C' / t^4 ≤ 16 * C' / T^2 := by
     rw [div_le_div_iff₀ (by positivity) h_T_sq_pos]
     nlinarith [hC'_nn]
-  -- Combine
   have h_chain :
       (1/2) * Real.log (T / (4 * Real.pi)) - 1 / (12 * T^2) - 16 * C' / T^2 ≤ q t := by
     have h1 : (1/2) * Real.log (T / (4 * Real.pi)) ≤ (1/2) * Real.log (t / (2 * Real.pi)) := by

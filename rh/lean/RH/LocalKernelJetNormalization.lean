@@ -40,7 +40,13 @@ open Real RH.RiemannSiegelTheta
 
     The phase function `theta` and its derivatives `q`, `qPrime`,
     `qDoublePrime` live in `RH.RiemannSiegelTheta` and are accessed via
-    `open RH.RiemannSiegelTheta` above. -/
+    `open RH.RiemannSiegelTheta` above.
+
+    Scope: this module formalizes the *theta-specialized* kernel used
+    downstream by Sections 2–3.  The paper states several
+    phase-kernel lemmas for a general real `C¹` (resp. `C⁴`) phase `Φ`
+    and then specializes to `Φ_T = θ`; that general parameterization is
+    not represented here as a Lean theorem family. -/
 
 /-- Phase kernel
     `K_Φ(x, y) = sin(Φ(x) - Φ(y)) / (π (x - y))` for `x ≠ y`,
@@ -62,11 +68,22 @@ theorem phase_kernel_symmetric (x y : ℝ) :
         show Real.pi * (y - x) = -(Real.pi * (x - y)) from by ring]
     field_simp
 
-/-- Removable singularity at the diagonal: `K_Φ(x, y) → q(y) / π` as `x → y`. -/
+/-- Removable singularity at the diagonal: `K_Φ(x, y) → q(y) / π` as `x → y`.
+    One-variable form (with `y` fixed). -/
 theorem phase_kernel_diagonal_limit (y : ℝ) :
     Filter.Tendsto (fun x => phaseKernel x y) (nhds y) (nhds (q y / Real.pi)) := by
-  -- TODO: continuity of `theta` (from `Complex.log_Gamma` differentiable away
-  -- from branch cuts) plus `Real.sin t / t → 1` as `t → 0`.
+  -- TODO: continuity of `theta` plus `Real.sin t / t → 1` as `t → 0`.
+  sorry
+
+/-- Joint continuity at the diagonal: `K_Φ(x, y) → q(T) / π` as
+    `(x, y) → (T, T)`.  Stronger than the one-variable
+    `phase_kernel_diagonal_limit` and matches the paper's continuity
+    statement in `lem:phase-kernel-properties`. -/
+theorem phase_kernel_joint_diagonal_limit (T : ℝ) :
+    Filter.Tendsto (fun p : ℝ × ℝ => phaseKernel p.1 p.2)
+      (nhds (T, T)) (nhds (q T / Real.pi)) := by
+  -- TODO: continuity of `theta` and `Real.sin t / t → 1` as `t → 0`,
+  -- jointly across both arguments.
   sorry
 
 /-! ## Diagonal kernel derivatives
