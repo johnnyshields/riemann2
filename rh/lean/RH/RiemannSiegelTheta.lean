@@ -91,26 +91,76 @@ private lemma z_ne_neg_nat (t : ℝ) :
   have hm : (0 : ℝ) ≤ m := Nat.cast_nonneg m
   linarith
 
+/-- `theta` has derivative `(1/2) Re(ψ(z(t))) − (1/2) log π` at `t`,
+    provided `Γ(z(t)) ∈ slitPlane`. -/
+private lemma theta_hasDerivAt (t : ℝ)
+    (h_slit : Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2) ∈
+              Complex.slitPlane) :
+    HasDerivAt theta
+      ((1 / 2) * (Complex.digamma ((1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2)).re -
+        (1 / 2) * Real.log Real.pi) t := by
+  set z : ℂ := (1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2 with hz_def
+  have h_zdrv := z_hasDerivAt t
+  have h_z_ne := z_ne_neg_nat t
+  have h_Γ_diff : DifferentiableAt ℂ Complex.Gamma z :=
+    Complex.differentiableAt_Gamma z h_z_ne
+  have h_Γz : HasDerivAt
+      (fun s : ℝ => Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (s : ℂ) / 2))
+      ((Complex.I / 2) * deriv Complex.Gamma z) t :=
+    h_Γ_diff.hasDerivAt.scomp t h_zdrv
+  have h_logΓz : HasDerivAt
+      (fun s : ℝ => Complex.log (Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (s : ℂ) / 2)))
+      ((Complex.I / 2) * deriv Complex.Gamma z / Complex.Gamma z) t :=
+    h_Γz.clog_real h_slit
+  -- Compose with `Complex.imCLM` via `HasFDerivAt.comp_hasDerivAt`
+  have h_imComp : HasDerivAt
+      (Complex.imCLM ∘ fun s : ℝ =>
+        Complex.log (Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (s : ℂ) / 2)))
+      (Complex.imCLM ((Complex.I / 2) * deriv Complex.Gamma z / Complex.Gamma z)) t :=
+    Complex.imCLM.hasFDerivAt.comp_hasDerivAt t h_logΓz
+  -- Convert from `imCLM ∘ ...` to `fun s => (...).im`
+  have h_im : HasDerivAt
+      (fun s : ℝ =>
+        (Complex.log (Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (s : ℂ) / 2))).im)
+      (((Complex.I / 2) * deriv Complex.Gamma z / Complex.Gamma z).im) t := by
+    have h_eq_fns :
+        (Complex.imCLM ∘ fun s : ℝ =>
+            Complex.log (Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (s : ℂ) / 2))) =
+        (fun s : ℝ =>
+            (Complex.log (Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (s : ℂ) / 2))).im) := by
+      funext s
+      exact Complex.imCLM_apply _
+    have h_val :
+        Complex.imCLM ((Complex.I / 2) * deriv Complex.Gamma z / Complex.Gamma z) =
+          ((Complex.I / 2) * deriv Complex.Gamma z / Complex.Gamma z).im :=
+      Complex.imCLM_apply _
+    rw [h_eq_fns, h_val] at h_imComp
+    exact h_imComp
+  -- Evaluate the imaginary part
+  have h_im_value :
+      ((Complex.I / 2) * deriv Complex.Gamma z / Complex.Gamma z).im =
+        (1 / 2) * (Complex.digamma z).re := by
+    rw [Complex.digamma_def, logDeriv_apply, mul_div_assoc]
+    simp [Complex.mul_im, Complex.I_re, Complex.I_im,
+          Complex.div_re, Complex.div_im]
+  rw [h_im_value] at h_im
+  -- Linear part `(t/2) * log π`
+  have h_linear : HasDerivAt (fun s : ℝ => s / 2 * Real.log Real.pi)
+      (1 / 2 * Real.log Real.pi) t := by
+    have h_div : HasDerivAt (fun s : ℝ => s / 2) (1 / 2) t :=
+      (hasDerivAt_id t).div_const 2
+    have := h_div.mul_const (Real.log Real.pi)
+    simpa using this
+  exact h_im.sub h_linear
+
 /-- `q t = (1/2) Re(digamma(1/4 + i t / 2)) − (1/2) log π`,
-    provided `Γ(z(t)) ∈ slitPlane`.
-
-    The proof chains: `z_hasDerivAt t : HasDerivAt z (i/2) t`,
-    `Complex.differentiableAt_Gamma z (z_ne_neg_nat t) :
-        DifferentiableAt ℂ Γ z`,
-    `HasDerivAt.scomp` to get `HasDerivAt (Γ ∘ z) ((i/2) Γ'(z)) t`,
-    `HasDerivAt.clog_real h_slit` to get
-        `HasDerivAt (log Γ ∘ z) ((i/2) Γ'(z) / Γ(z)) t`,
-    composition with `Complex.imCLM` (Im as a `ℝ-CLM`), and
-    `Complex.digamma = logDeriv Γ` to identify `Γ'(z)/Γ(z) = ψ(z)`.
-
-    TODO: bridging `.im` between `HasDerivAt` and `Complex.imCLM`-composition
-    needs careful elaboration; `h.im` is not a primitive on `HasDerivAt`. -/
+    provided `Γ(z(t)) ∈ slitPlane`. -/
 theorem q_eq_digamma (t : ℝ)
     (h_slit : Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2) ∈
               Complex.slitPlane) :
     q t = (1 / 2) * (Complex.digamma ((1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2)).re -
-          (1 / 2) * Real.log Real.pi := by
-  sorry
+          (1 / 2) * Real.log Real.pi :=
+  (theta_hasDerivAt t h_slit).deriv
 
 /-! ## Riemann–Siegel asymptotics
 
