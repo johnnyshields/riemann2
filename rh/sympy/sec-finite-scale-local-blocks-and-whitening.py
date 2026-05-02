@@ -147,7 +147,84 @@ def verify_Nm_matches_cross_block():
 
 
 # ---------------------------------------------------------------------------
-# (iii) Removable singularity of N_m(s) at s = 0.
+# (iii) q_± Taylor expansion sign pattern (proof regression guard).
+# ---------------------------------------------------------------------------
+
+def verify_q_pm_taylor_signs():
+    """Confirm the signs of the Taylor expansion of q(t_±) = q(m ± s/2)
+    used in the removable-singularity proof:
+
+        q_+ = q + (s/2) q' + (s^2/8) q'' + o(s^2),
+        q_- = q - (s/2) q' + (s^2/8) q'' + o(s^2).
+
+    The linear term is ±(s/2) q' (PLUS-MINUS), the quadratic term has
+    the SAME sign (+s^2/8 q'') in both q_+ and q_-, and the cubic term
+    is ±(s^3/48) q''' (alternating again, like the linear).
+
+    A previous version of the patch wrote q_± = q ∓ (s/2) q' + O(s^2)
+    (MINUS-PLUS), which was wrong.  This test makes the correct sign
+    pattern explicit so a regression is caught symbolically.
+    """
+    print("=" * 70)
+    print("[q_± Taylor signs] q(m ± s/2) expansion to order s^3")
+    print("=" * 70)
+    s = symbols("s", real=True)
+    qm, qpm, qppm, qpppm = symbols("q qp qpp qppp", real=True)
+    # Use Taylor series of a generic q at m, evaluated at m + h (with h = s/2 or -s/2).
+    h = symbols("h", real=True)
+    q_taylor_h = (qm + h * qpm + Rational(1, 2) * h**2 * qppm
+                  + Rational(1, 6) * h**3 * qpppm)
+
+    qplus_expected = q_taylor_h.subs(h, s / 2)
+    qmin_expected = q_taylor_h.subs(h, -s / 2)
+
+    qplus_expanded = sp.expand(qplus_expected)
+    qmin_expanded = sp.expand(qmin_expected)
+
+    # Closed-form claim:
+    qplus_claim = (qm + Rational(1, 2) * s * qpm
+                   + Rational(1, 8) * s**2 * qppm
+                   + Rational(1, 48) * s**3 * qpppm)
+    qmin_claim = (qm - Rational(1, 2) * s * qpm
+                  + Rational(1, 8) * s**2 * qppm
+                  - Rational(1, 48) * s**3 * qpppm)
+
+    diff_plus = sp.simplify(sp.expand(qplus_expanded - qplus_claim))
+    diff_minus = sp.simplify(sp.expand(qmin_expanded - qmin_claim))
+
+    print()
+    print(f"  q_+ = q(m + s/2):")
+    sp.pprint(qplus_expanded)
+    print(f"  q_+ claimed: q + (s/2) q' + (s^2/8) q'' + (s^3/48) q'''")
+    print(f"  diff = {diff_plus}")
+    assert diff_plus == 0, f"q_+ Taylor sign error: {diff_plus}"
+
+    print()
+    print(f"  q_- = q(m - s/2):")
+    sp.pprint(qmin_expanded)
+    print(f"  q_- claimed: q - (s/2) q' + (s^2/8) q'' - (s^3/48) q'''")
+    print(f"  diff = {diff_minus}")
+    assert diff_minus == 0, f"q_- Taylor sign error: {diff_minus}"
+
+    # Sanity: the linear-term coefficient signs are opposite between q_+ and q_-,
+    # but the quadratic-term coefficient signs are equal (+s^2/8 q'').
+    coeff_plus_lin = qplus_expanded.coeff(s, 1)
+    coeff_minus_lin = qmin_expanded.coeff(s, 1)
+    assert sp.simplify(coeff_plus_lin + coeff_minus_lin) == 0, \
+        "Linear coefficients should cancel: not opposite signs"
+    coeff_plus_quad = qplus_expanded.coeff(s, 2)
+    coeff_minus_quad = qmin_expanded.coeff(s, 2)
+    assert sp.simplify(coeff_plus_quad - coeff_minus_quad) == 0, \
+        "Quadratic coefficients should agree: not same sign"
+    print()
+    print("  Linear coefficients cancel: (s/2 q') + (-s/2 q') = 0.")
+    print("  Quadratic coefficients agree: both equal +s^2/8 q''.")
+    print()
+    print("  [PASS] q_± Taylor expansion signs are correct.")
+
+
+# ---------------------------------------------------------------------------
+# (iv) Removable singularity of N_m(s) at s = 0.
 # ---------------------------------------------------------------------------
 
 def verify_Nm_removable_singularity():
@@ -158,7 +235,10 @@ def verify_Nm_removable_singularity():
     qm, qpm, qppm = symbols("q qp qpp", real=True)
     qpppm = symbols("qppp", real=True)
 
-    # Taylor expand q at m: q(t_±) = q ∓ s/2 q' + (s/2)^2 q''/2 + O(s^3).
+    # q(t_±) = q ± (s/2) q' + (s/2)^2 q'' / 2 ± (s/2)^3 q''' / 6 + O(s^4)
+    # Linear: ±(s/2) q' (PLUS-MINUS, opposite signs in q_+ vs q_-).
+    # Quadratic: +(s^2/8) q'' (SAME sign in both q_+ and q_-).
+    # Cubic: ±(s^3/48) q''' (PLUS-MINUS again).
     qmin_taylor = qm - (s / 2) * qpm + (s**2 / 8) * qppm - (s**3 / 48) * qpppm
     qplus_taylor = qm + (s / 2) * qpm + (s**2 / 8) * qppm + (s**3 / 48) * qpppm
     # Phi(t_-) - Phi(t_+) = -s q(m) - s^3 q''(m)/24 + O(s^5)
@@ -383,6 +463,8 @@ def main():
     print()
     verify_Nm_matches_cross_block()
     print()
+    verify_q_pm_taylor_signs()
+    print()
     verify_Nm_removable_singularity()
     print()
     verify_omega_coalescence()
@@ -393,8 +475,10 @@ def main():
     print()
     print("=" * 70)
     print("All §4 lemmas verified symbolically:")
-    print("  - G_{m,±}(s) = J(t_±) by substitution into §3 same-point form")
-    print("  - N_m(s) = (1/pi) N_12(t_-, t_+) cross-block substitution")
+    print("  - lem:finite-blocks-exact-interpretation: G_{m,±}(s) = J(t_±),")
+    print("    N_m(s) = (1/pi) N_12(t_-, t_+) cross-block substitution")
+    print("  - q_± Taylor signs: q_+ has +linear, q_- has -linear, both have")
+    print("    +quadratic (proof regression guard)")
     print("  - lem:Nm-removable-singularity: N_m(0) = J(m), entry by entry")
     print("  - cor:omega-coalescence: Omega_zeta_hat(0; m) = I_2")
     print("  - lem:whitening-loss: ||G^{-1/2}||_op ~ sqrt(pi / (2 q))")

@@ -1,5 +1,5 @@
 % =============================================================================
-% Patch: §4 Finite-scale local blocks and whitening
+% Patch: §4 Finite-scale local blocks and whitening (hardened)
 %   sec:finite-scale-local-blocks-and-whitening
 %
 % Target file:   rh/rh_rebuild.tex
@@ -8,31 +8,47 @@
 % Action: this patch is NOT to be merged into rh_rebuild.tex yet.  It is
 % staged under rh/patches/ for review.
 %
-% Migration content (relative to the current stub):
+% Migration content (relative to the current stub), with hardening from
+% the referee diff at
+%   rh/patches/referee/sec-finite-scale-local-blocks-and-whitening.hardened.tex:
 %
-%   - Confirm G_{m,±}(s) and N_m(s) entries by substitution into the §3
-%     jet-limit identities (T_1 = t_-, T_2 = t_+).  Eq:Gpm and Eq:Nm in
-%     the stub are already correct; only the connection to §3 is added.
+%   - Definition def:finite-packet-domain: introduce the finite packet
+%     domain D_T = {(m, s) : t_± in I_T} with signed s, so the s -> 0
+%     removable-singularity statement is precise.
 %
-%   - Removable singularity lemma (lem:Nm-removable-singularity):
-%     N_m(s) extends holomorphically through s = 0 with N_m(0) = J(m).
-%     Proved directly from the Taylor expansion of sin(Delta_m(s)) and
-%     the parity Delta_m(s) = O(s).
+%   - Lemma lem:finite-blocks-exact-interpretation (promoted from a
+%     remark): G_{m,±}(s) = J(t_±) and N_m(s) is the kernel-derivative
+%     form at (T_1, T_2) = (t_-, t_+).  Exact, citable downstream.
 %
-%   - Coalescence corollary (cor:omega-coalescence): the whitened block
-%     satisfies Omega_zeta_hat(0; m) = I_2 once G_{m,±}(0) = J(m) is
-%     used.  Sanity check that the whitening normalization is correct.
+%   - Lemma lem:Nm-removable-singularity: continuous removable
+%     singularity N_m(0) = J(m).  Proof rewritten with correct
+%     o-expansions:
+%         Delta_m(s) = -q s - q'' s^3 / 24 + o(s^3),
+%         q_+ = q + (s/2) q' + (s^2/8) q'' + o(s^2),
+%         q_- = q - (s/2) q' + (s^2/8) q'' + o(s^2).
+%     (Earlier version had the q_± linear-term sign flipped in the
+%     proof prose; final limits were right but the proof line was wrong.)
 %
-%   - Whitening-loss lemma proved (lem:whitening-loss): the operator
-%     norm is bounded by sqrt(pi / (2 q(t_±))) (1 + o(1)), giving the
-%     polynomial-in-Q exponent C_W = 0 above the §2 lower-height cutoff.
+%   - Remark rem:Nm-coalescence-not-cross-limit: the s -> 0 coalescence
+%     is NOT obtained from lem:cross-block-jet-limit (which is fixed-
+%     separation in h, not in s).  It is the separate Taylor
+%     computation above.
 %
-%   - Holomorphy scope remark (rem:whitening-loss-scope): the bound
-%     proven here uses only the theta-phase Gram positivity of §3 and
-%     the chart inequalities (P1)-(P2) of §2.  No omitted-zero
-%     analysis (the v1 "corrected whitening" apparatus) is consumed
-%     here; that material would supply finer constants and is the
-%     subject of a separate later migration.
+%   - Definition def:whitened-finite-block: explicit "positive definite
+%     inverse square root" reference.
+%
+%   - Corollary cor:omega-coalescence: Omega_zeta_hat(0; m) = I_2.
+%     Proof now cites continuity of the SPD square-root map.
+%
+%   - Lemma lem:whitening-loss: operator-norm bound with explicit
+%     epsilon_T -> 0 uniformly on D_T; C_W = 0 derived from
+%     lambda_min(J(t)) -> infty uniformly for t in I_T after raising
+%     the cutoff.
+%
+%   - Remark rem:whitening-loss-scope: scope sharpened.  The lemma
+%     controls only real-axis same-point whitening for the theta phase;
+%     no actual-zeta suppression, no source-energy, no complex-disk
+%     whitening, no holomorphic estimates.
 %
 % Closes:
 %   rem:wip-whitening-loss
@@ -48,17 +64,22 @@
 %
 % Verification:
 %   - rh/sympy/sec-finite-scale-local-blocks-and-whitening.py
-%       verify_finite_blocks_match_section3,
+%       verify_G_matches_J,
+%       verify_Nm_matches_cross_block,
+%       verify_q_pm_taylor_signs,
 %       verify_Nm_removable_singularity,
 %       verify_omega_coalescence,
 %       verify_whitening_loss_constant,
 %       verify_inverse_sqrt_closed_form.
 %   - rh/simulation/sec-finite-scale-local-blocks-and-whitening.py
 %       check_finite_blocks_at_T,
+%       check_q_pm_signs_numerical,
 %       check_Nm_removable_singularity_numerical,
+%       check_signed_s_domain,
 %       check_omega_coalescence_numerical,
 %       check_whitening_loss_sweep,
-%       check_lambda_min_polynomial_floor.
+%       check_lambda_min_polynomial_floor,
+%       check_inverse_sqrt_routes.
 % =============================================================================
 
 % =============================================================================
@@ -72,10 +93,10 @@
 \statuslean{n/a}
 \par\medskip
 
-Around a midpoint \(m\) at finite separation \(s>0\), the same-point
-and cross-block jets of Section~\ref{sec:jet-limit-local-blocks}
-extend to two same-point Gram blocks \(G_{m,\pm}(s)\) and a mixed
-block \(N_m(s)\); whitening these into the dimensionless
+Around a midpoint \(m\) at finite separation \(s\), the same-point and
+cross-block jets of Section~\ref{sec:jet-limit-local-blocks} extend to
+two same-point Gram blocks \(G_{m,\pm}(s)\) and a mixed block
+\(N_m(s)\); whitening these into the dimensionless
 \(\widehat\Om_\z(s;m)\)
 (Definition~\ref{def:whitened-finite-block}) with the
 polynomial-in-\(Q\) whitening-loss bound of
@@ -83,14 +104,35 @@ Lemma~\ref{lem:whitening-loss} produces the input consumed by every
 comparison theorem from
 Section~\ref{sec:toy-anomaly-and-transverse-obstruction} onward.
 
+\begin{definition}[Finite packet domain]
+\label{def:finite-packet-domain}
+For a retained theta chart \(I_T\), set \(t_\pm = m\pm s/2\) and
+\[
+        \mathcal D_T
+        :=\bigl\{(m,s)\in\mathbb R^2 : t_-\in I_T,\ t_+\in I_T\bigr\}.
+\]
+Write \(\mathcal D_T^\times := \{(m,s)\in\mathcal D_T : s\ne 0\}\).
+The orientation convention is that rows correspond to the center
+\(t_-\) and columns to the center \(t_+\).  In applications \(s>0\),
+but allowing signed \(s\) makes the removable-singularity statement at
+\(s=0\) precise.  Uniform estimates below are taken on
+\(\mathcal D_T\), after the global lower-height cutoff has been
+enlarged if necessary.
+\end{definition}
+
 \subsection{Finite same-point and mixed blocks}
 \label{subsec:finite-same-point-and-mixed-blocks}
 
-Fix a midpoint \(m\) and a separation \(s>0\); set \(t_\pm = m\pm s/2\),
-\(q_\pm = q(t_\pm)\), and \(\Del_m(s) = \Ph(t_-) - \Ph(t_+)\).
+Fix \((m,s)\in\mathcal D_T^\times\) and write
+\[
+        t_\pm = m\pm s/2,
+        \qquad q_\pm = q(t_\pm),
+        \qquad \Del_m(s) = \Ph(t_-)-\Ph(t_+).
+\]
 
 \begin{definition}[Finite same-point and mixed blocks]
 \label{def:finite-same-point-and-mixed-blocks}
+The finite same-point blocks are
 \begin{equation}
 \label{eq:Gpm}
 G_{m,\pm}(s)
@@ -98,8 +140,9 @@ G_{m,\pm}(s)
 \begin{pmatrix}
 2q(t_\pm) & \tfrac12 q'(t_\pm)\\[0.8ex]
 \tfrac12 q'(t_\pm) & \tfrac1{12}\bigl(q''(t_\pm)+2q(t_\pm)^3\bigr)
-\end{pmatrix},
+\end{pmatrix}.
 \end{equation}
+For \(s\ne 0\), the finite mixed block is
 \begin{equation}
 \label{eq:Nm}
 N_m(s)
@@ -116,21 +159,43 @@ N_m(s)
 \end{equation}
 \end{definition}
 
-\begin{remark}[Connection to \S\ref{sec:jet-limit-local-blocks}]
-\label{rem:finite-blocks-from-jet-limit}
-The blocks of Definition~\ref{def:finite-same-point-and-mixed-blocks}
-are the kernel-derivative form of the same-point and cross-block jets
-of \S\ref{sec:jet-limit-local-blocks} evaluated at the centers
-\(t_\pm = m\pm s/2\).  Concretely, \(G_{m,\pm}(s) = J(t_\pm)\) is the
-same-point Gram block of \eqref{eq:same-point-J} at \(T = t_\pm\), and
-\(N_m(s) = \pi^{-1} N_{12}(t_-, t_+)\) is the cross-block of
-\eqref{eq:cross-N12} at \((T_1, T_2) = (t_-, t_+)\), with
-\(s_{12} = t_- - t_+ = -s\) absorbed into the displayed signs.
-\end{remark}
+\begin{lemma}[Exact finite-block interpretation]
+\label{lem:finite-blocks-exact-interpretation}
+For \((m,s)\in\mathcal D_T^\times\),
+\[
+        G_{m,\pm}(s) = J(t_\pm).
+\]
+Moreover,
+\begin{equation}
+\label{eq:Nm-kernel-derivative-form}
+N_m(s)
+=
+\begin{pmatrix}
+2K_\Ph(t_-,t_+) & \partial_y K_\Ph(t_-,t_+)\\[0.6ex]
+\partial_x K_\Ph(t_-,t_+) & \tfrac12\partial_{xy}K_\Ph(t_-,t_+)
+\end{pmatrix}.
+\end{equation}
+Equivalently, \(N_m(s) = \pi^{-1} N_{12}\) for the matrix \(N_{12}\) of
+\eqref{eq:cross-N12} taken at \((T_1, T_2) = (t_-, t_+)\), with
+\(s_{12} = T_1 - T_2 = -s\) absorbed into the displayed signs in
+\eqref{eq:Nm}.
+\end{lemma}
+
+\begin{proof}
+The identity \(G_{m,\pm}(s) = J(t_\pm)\) is immediate by comparing
+\eqref{eq:Gpm} with \eqref{eq:same-point-J}.  For the mixed block,
+apply the off-diagonal kernel-derivative formulas of
+Lemma~\ref{lem:phase-kernel-derivatives} at
+\((T_1, T_2) = (t_-, t_+)\); there \(s_{12} = t_- - t_+ = -s\),
+\(q_1 = q_-\), \(q_2 = q_+\), and \(\Delta = \Del_m(s)\).
+Substitution gives the four entries of
+\eqref{eq:Nm-kernel-derivative-form}, which match \eqref{eq:Nm} entry
+by entry.
+\end{proof}
 
 \begin{lemma}[Removable singularity of \(N_m(s)\)]
 \label{lem:Nm-removable-singularity}
-If \(\Ph\in C^4\) on a neighborhood of \(m\), the entries of
+If \(\Ph\in C^3\) on a neighborhood of \(m\), the entries of
 \(N_m(s)\) of \eqref{eq:Nm} extend continuously to \(s=0\) with
 \begin{equation}
 \label{eq:Nm-at-zero}
@@ -144,33 +209,59 @@ If \(\Ph\in C^4\) on a neighborhood of \(m\), the entries of
 \end{lemma}
 
 \begin{proof}
-Taylor expansion of \(\Ph\) at \(m\) gives
-\(\Del_m(s) = -s q(m) - (s^3/24) q''(m) + O(s^5)\) and \(q_\pm = q(m)\mp
-(s/2)q'(m) + O(s^2)\).  Substituting into \eqref{eq:Nm} and using
-\(\sin z = z - z^3/6 + O(z^5)\) cancels the displayed denominators.
-The four resulting limits are
+Write \(q = q(m)\), \(a = q'(m)\), \(b = q''(m)\).  Taylor expansion
+about \(m\), using the symmetric points \(m\pm s/2\), gives
 \[
-        \lim_{s\to 0}\!\Bigl(-\tfrac{2\sin\Del_m(s)}{\pi s}\Bigr) = \tfrac{2q(m)}{\pi},
+        \Del_m(s)
+        = \Ph(m-s/2)-\Ph(m+s/2)
+        = -qs - \frac{b}{24}s^3 + o(s^3),
 \]
 \[
-        \lim_{s\to 0}\!\tfrac{\sin\Del_m(s)+q_+ s\cos\Del_m(s)}{\pi s^2} = \tfrac{q'(m)}{2\pi},
+        q_+ = q + \frac{a}{2}s + \frac{b}{8}s^2 + o(s^2),
+        \qquad
+        q_- = q - \frac{a}{2}s + \frac{b}{8}s^2 + o(s^2).
 \]
+Hence
 \[
-        \lim_{s\to 0}\!\Bigl(-\tfrac{\sin\Del_m(s)+q_- s\cos\Del_m(s)}{\pi s^2}\Bigr) = \tfrac{q'(m)}{2\pi},
+        \sin\Del_m(s)
+        = -qs + \!\left(\frac{q^3}{6}-\frac{b}{24}\right)\!s^3
+          + o(s^3),
+        \qquad
+        \cos\Del_m(s) = 1 - \frac{q^2}{2}s^2 + o(s^2).
 \]
-\[
-        \lim_{s\to 0}\!\tfrac{(q_-+q_+)s\cos\Del_m(s)+(2-q_-q_+s^2)\sin\Del_m(s)}{2\pi s^3}
-        = \tfrac{q''(m)+2q(m)^3}{12\pi},
-\]
-matching \(J(m)\) entry by entry.
+Substituting into \eqref{eq:Nm} entry by entry,
+\begin{align*}
+        -\frac{2\sin\Del_m(s)}{s}
+        &= 2q + o(1),\\
+        \frac{\sin\Del_m(s)+q_+ s\cos\Del_m(s)}{s^2}
+        &= \frac{a}{2} + o(1),\\
+        -\frac{\sin\Del_m(s)+q_- s\cos\Del_m(s)}{s^2}
+        &= \frac{a}{2} + o(1),\\
+        \frac{(q_-+q_+)s\cos\Del_m(s)+(2-q_- q_+ s^2)\sin\Del_m(s)}{2s^3}
+        &= \frac{b}{12}+\frac{q^3}{6}+o(1).
+\end{align*}
+The common factor \(1/\pi\) in \eqref{eq:Nm} gives
+\eqref{eq:Nm-at-zero}.
 \end{proof}
+
+\begin{remark}[Coalescence is not the cross-block jet limit]
+\label{rem:Nm-coalescence-not-cross-limit}
+Lemma~\ref{lem:cross-block-jet-limit} is a fixed-center-separation
+limit in the sampling parameter \(h\); its constants are not uniform
+as \(s\to 0\) (Remark~\ref{rem:cross-block-fixed-separation-scope}).
+Lemma~\ref{lem:Nm-removable-singularity} is a separate coalescence
+statement in the center-separation parameter \(s\), proved by direct
+Taylor expansion above.
+\end{remark}
 
 \subsection{Whitened finite block}
 \label{subsec:whitened-finite-block}
 
 \begin{definition}[Whitened finite block]
 \label{def:whitened-finite-block}
-Provided \(G_{m,\pm}(s)\) are positive definite, set
+Whenever \(G_{m,-}(s)\) and \(G_{m,+}(s)\) are positive definite, let
+\(G_{m,\pm}(s)^{-1/2}\) denote the positive definite inverse square
+root and set
 \begin{equation}
 \label{eq:omega-finite}
 \widehat\Om_\z(s;m)
@@ -186,11 +277,15 @@ For every retained midpoint \(m\) at sufficiently large height,
 \end{corollary}
 
 \begin{proof}
-At \(s=0\), \(t_\pm \to m\) gives \(G_{m,\pm}(0) = J(m)\), and
-Lemma~\ref{lem:Nm-removable-singularity} gives \(N_m(0) = J(m)\).
-Substituting into \eqref{eq:omega-finite},
-\(\widehat\Om_\z(0;m) = J(m)^{-1/2}\,J(m)\,J(m)^{-1/2} = I_2\), where
-the inverse exists by Lemma~\ref{lem:same-point-gram-positivity}.
+By Lemma~\ref{lem:same-point-gram-positivity}, \(J(m)\succ 0\) at
+every sufficiently large retained midpoint \(m\).  By continuity,
+\(G_{m,\pm}(s) = J(m\pm s/2)\) remain positive definite for all
+sufficiently small \(|s|\) with \((m,s)\in\mathcal D_T\), and the map
+\(G\mapsto G^{-1/2}\) is continuous on the positive definite cone.
+Lemma~\ref{lem:Nm-removable-singularity} gives \(N_m(0) = J(m)\),
+while \(G_{m,\pm}(0) = J(m)\) by
+Lemma~\ref{lem:finite-blocks-exact-interpretation}.  Therefore
+\(\widehat\Om_\z(0;m) = J(m)^{-1/2}\,J(m)\,J(m)^{-1/2} = I_2\).
 \end{proof}
 
 \subsection{Whitening loss}
@@ -198,51 +293,73 @@ the inverse exists by Lemma~\ref{lem:same-point-gram-positivity}.
 
 \begin{lemma}[Operator-norm bound for \(G_{m,\pm}^{-1/2}\)]
 \label{lem:whitening-loss}
-For \(\Ph_T = \theta\) on \(I_T\) and any retained midpoint \(m\) with
-\(t_\pm = m\pm s/2\in I_T\), the operator norm of the whitening factor
-satisfies
+For \(\Ph_T = \theta\) on \(I_T\), after enlarging the global
+lower-height cutoff if necessary, \(G_{m,\pm}(s)\) are positive
+definite for every \((m,s)\in\mathcal D_T\), and there is a quantity
+\(\varepsilon_T\to 0\), independent of \((m,s)\in\mathcal D_T\), such
+that
 \begin{equation}
 \label{eq:whitening-loss-bound}
         \bigl\|G_{m,\pm}(s)^{-1/2}\bigr\|_{\op}
         \;\le\;
-        \sqrt{\tfrac{\pi}{2\,q(t_\pm)}}\,(1 + o(1))
-        \qquad (T\to\infty),
+        \sqrt{\frac{\pi}{2\,q(t_\pm)}}\,(1+\varepsilon_T)
+        \qquad (T\to\infty).
 \end{equation}
-uniformly in \((m,s)\) on the retained set.  Above the global
-lower-height cutoff of
-Lemma~\ref{lem:same-point-gram-positivity}, this gives the
-polynomial-in-\(Q\) bound
+After possibly enlarging the same lower-height cutoff,
 \begin{equation}
 \label{eq:whitening-loss-polynomial}
         \bigl\|G_{m,\pm}(s)^{-1/2}\bigr\|_{\op}
         \;\le\; Q(T)^{C_W}
 \end{equation}
-with absolute exponent \(C_W = 0\) whenever \(Q(T)\ge 1\).
+uniformly on \(\mathcal D_T\), with absolute exponent \(C_W = 0\)
+whenever \(Q(T)\ge 1\).
 \end{lemma}
 
 \begin{proof}
-By Remark~\ref{rem:finite-blocks-from-jet-limit},
-\(G_{m,\pm}(s) = J(t_\pm)\); applying
-Lemma~\ref{lem:same-point-gram-positivity} at \(T = t_\pm\) gives
-\(\lambda_{\min}(G_{m,\pm}(s)) = (2q(t_\pm)/\pi)(1 + o(1))\) at large
-heights.  For a positive-definite symmetric \(2\times 2\) matrix \(G\),
-\(\|G^{-1/2}\|_{\op} = \lambda_{\min}(G)^{-1/2}\), whence
-\eqref{eq:whitening-loss-bound}.  Above the cutoff of
-Lemma~\ref{lem:same-point-gram-positivity},
-\(\lambda_{\min}(G_{m,\pm})\ge 1\), so
-\(\|G_{m,\pm}^{-1/2}\|_{\op}\le 1\le Q(T)^0\), giving \(C_W = 0\).
+By Lemma~\ref{lem:finite-blocks-exact-interpretation},
+\(G_{m,\pm}(s) = J(t_\pm)\); since \((m,s)\in\mathcal D_T\) implies
+\(t_\pm\in I_T\subset[T/2, 2T]\), the theta-derivative estimates of
+Lemma~\ref{lem:theta-derivative-asymptotics} are uniform at
+\(t = t_\pm\).  The proof of Lemma~\ref{lem:same-point-gram-positivity}
+then applies with \(T\) replaced by an arbitrary \(t\in I_T\), giving,
+uniformly on \(I_T\),
+\[
+        \lambda_{\min}(J(t))
+        = \frac{2q(t)}{\pi}\,(1 + o(1)).
+\]
+Equivalently, for some \(\delta_T\to 0\) independent of \(t\in I_T\),
+\[
+        \lambda_{\min}(J(t))
+        \;\ge\; \frac{2q(t)}{\pi}\,(1-\delta_T).
+\]
+For large \(T\), \(1-\delta_T > 0\); the finite same-point blocks are
+positive definite, and
+\[
+        \bigl\|G_{m,\pm}(s)^{-1/2}\bigr\|_{\op}
+        = \lambda_{\min}(G_{m,\pm}(s))^{-1/2}
+        \;\le\; \sqrt{\frac{\pi}{2\,q(t_\pm)}}\,(1-\delta_T)^{-1/2}.
+\]
+Absorbing \((1-\delta_T)^{-1/2}\) into \(1+\varepsilon_T\) gives
+\eqref{eq:whitening-loss-bound}.
+
+For the polynomial bound, the uniform asymptotic above together with
+Lemma~\ref{lem:phase-derivative-lower-bound} gives
+\(\lambda_{\min}(J(t))\to\infty\) uniformly for \(t\in I_T\); after
+enlarging the lower-height cutoff,
+\(\lambda_{\min}(J(t))\ge 1\) uniformly on \(I_T\).  Hence
+\(\|G_{m,\pm}(s)^{-1/2}\|_{\op}\le 1\le Q(T)^0\) whenever
+\(Q(T)\ge 1\), which is \eqref{eq:whitening-loss-polynomial} with
+\(C_W = 0\).
 \end{proof}
 
 \begin{remark}[Scope of Lemma~\ref{lem:whitening-loss}]
 \label{rem:whitening-loss-scope}
-The bound \eqref{eq:whitening-loss-bound} consumes only
-\eqref{eq:lambda-min-asymptotic} of
-Lemma~\ref{lem:same-point-gram-positivity}, that is, the theta-phase
-Gram positivity proven in \S\ref{sec:jet-limit-local-blocks}.  No
-omitted-zero, no zero-free-region input, and no holomorphic-extension
-machinery is consumed here.  The corrected-whitening machinery of v1,
-which uses an omitted-zero shell decomposition to produce sharper
-constants on a complex disk \(|s|<\rho_0/Q\), is a separate piece of
-analysis whose migration is independent of the present whitening
-bound.
+Lemma~\ref{lem:whitening-loss} controls only the real-axis same-point
+whitening factors attached to the theta phase.  It does not prove
+actual-zeta transverse suppression, does not supply source-energy
+input, does not give a uniform bound on \(\widehat\Om_\z(s;m)\) itself
+beyond the whitening-factor loss, and does not give complex-disk or
+holomorphic whitening estimates.  Any stronger whitening statement
+needed for a later complex-analytic argument must be introduced as a
+separate input or proved in a separate section.
 \end{remark}

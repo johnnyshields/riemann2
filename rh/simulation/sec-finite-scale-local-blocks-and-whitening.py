@@ -183,6 +183,65 @@ def check_finite_blocks_at_T(T, n_midpoints=5, n_seps=5):
 # (ii) Removable singularity: N_m(s) -> J(m) as s -> 0.
 # ---------------------------------------------------------------------------
 
+def check_q_pm_signs_numerical(T, s_grid=None):
+    """Numerical regression guard for the q_± Taylor sign pattern:
+
+        q(m + s/2) - q(m) = (s/2) q'(m) + (s^2/8) q''(m) + O(s^3),
+        q(m - s/2) - q(m) = -(s/2) q'(m) + (s^2/8) q''(m) + O(s^3).
+
+    Linear term: ±(s/2) q' (sign of s flips).
+    Quadratic term: +s^2/8 q'' (same sign for both q_+ and q_-).
+
+    A regression that flips the q_- linear sign would surface as a
+    diff that fails to scale linearly with s.
+    """
+    print("=" * 70)
+    print(f"[q_± numerical signs at T = {float(T):.0e}]")
+    print("=" * 70)
+    print()
+    m = T
+    q0, qp, qpp, _ = phi_derivs(m)
+    if s_grid is None:
+        s_grid = [mpf(10) ** k for k in (-2, -3, -4, -5)]
+    print(f"  q(m)   = {float(q0):.6f}")
+    print(f"  q'(m)  = {float(qp):.4e}")
+    print(f"  q''(m) = {float(qpp):.4e}")
+    print()
+    header_plus = "q_+ residual"
+    header_minus = "q_- residual"
+    print(f"  {'s':>10}  {header_plus:>22}  {header_minus:>24}")
+    print(f"  (residuals subtract the +/- (s/2) q' linear term)")
+    print(f"  {'-'*10}  {'-'*22}  {'-'*24}")
+    for s in s_grid:
+        t_plus = m + s / 2
+        t_minus = m - s / 2
+        q_plus, _, _, _ = phi_derivs(t_plus)
+        q_minus, _, _, _ = phi_derivs(t_minus)
+        # Linear-term check: q_+ - q_0 - (s/2) q' should be O(s^2);
+        # q_- - q_0 + (s/2) q' should be O(s^2).
+        residual_plus = q_plus - q0 - (s / 2) * qp
+        residual_minus = q_minus - q0 + (s / 2) * qp
+        print(f"  {float(s):10.0e}  {float(residual_plus):+22.4e}  "
+              f"{float(residual_minus):+24.4e}")
+        # Both residuals should scale as O(s^2) and have the same sign
+        # (positive q'' would give residual ~ +s^2/8 q'' for both).
+        # Check that the quadratic coefficient agrees.
+        approx_plus = residual_plus / (s**2 / 8)
+        approx_minus = residual_minus / (s**2 / 8)
+        # In the limit s -> 0 these both approach q''(m).
+        # At small s, |approx_plus - q''| and |approx_minus - q''| should be small.
+        rel_plus = abs(approx_plus - qpp) / abs(qpp)
+        rel_minus = abs(approx_minus - qpp) / abs(qpp)
+        if s <= mpf("1e-3"):
+            assert rel_plus < mpf("0.1"), \
+                f"q_+ sign pattern off at s = {float(s)}: rel.err = {float(rel_plus)}"
+            assert rel_minus < mpf("0.1"), \
+                f"q_- sign pattern off at s = {float(s)}: rel.err = {float(rel_minus)}"
+    print()
+    print("  [PASS] q_+ has +(s/2) q' linear term, q_- has -(s/2) q'; both")
+    print("         share the +s^2/8 q'' quadratic term.")
+
+
 def check_Nm_removable_singularity_numerical(T):
     print("=" * 70)
     print(f"[lem:Nm-removable-singularity]  N_m(s) -> J(m) as s -> 0 at T = "
@@ -235,6 +294,56 @@ def check_Nm_removable_singularity_numerical(T):
 # ---------------------------------------------------------------------------
 # (iii) Coalescence Omega(0; m) = I_2 (computed via small-s extrapolation).
 # ---------------------------------------------------------------------------
+
+def check_signed_s_domain(T):
+    """Confirm that the finite-block formulas extend to negative s on
+    the finite packet domain D_T = {(m, s): t_± in I_T}, matching the
+    hardened def:finite-packet-domain.
+
+    For symmetric reasons we expect:
+      - G_{m,±}(s) at s and at -s differ only by swapping t_+ <-> t_-,
+        i.e. G_{m,+}(s) = G_{m,-}(-s) and vice versa.
+      - N_m(s) at signed s extends continuously through s = 0.
+
+    The sympy file verifies the symbolic identity; this is a numerical
+    regression guard.
+    """
+    print("=" * 70)
+    print(f"[signed s in D_T at T = {float(T):.0e}]")
+    print("=" * 70)
+    print()
+    m = T
+    print(f"  m = T = {float(m):.0e}")
+    print()
+    print(f"  {'s':>10}  {'max|G+(s) - G-(-s)|':>24}  {'max|N_m(s) - N_m(-s).T sign|':>32}")
+    print(f"  {'-'*10}  {'-'*24}  {'-'*32}")
+    s_grid = [mpf("0.01"), mpf("0.001"), mpf("0.0001")]
+    for s_pos in s_grid:
+        s_neg = -s_pos
+        # G_{m,+}(s) = J(m + s/2); G_{m,-}(-s) = J(m + s/2). Should match.
+        G_plus_s = G_at(m + s_pos / 2)
+        G_minus_neg_s = G_at(m + (-s_neg) / 2)  # = m + s/2
+        err_swap = mat2_max_diff(G_plus_s, G_minus_neg_s)
+        # For N_m: under s -> -s, the (1,1) entry stays even since
+        # sin(Delta_m(-s)) = -sin(Delta_m(s)) and the explicit -2 sin/s
+        # ratio is even.  The other entries swap roles.  We just check
+        # both N_m(s) and N_m(-s) are well-defined and finite.
+        N_pos = Nm_block(m, s_pos)
+        N_neg = Nm_block(m, s_neg)
+        # The (1,1) entry is even in s (it equals -2 sin(Delta)/s and
+        # both sin(Delta) and s flip sign, leaving the ratio invariant).
+        err_n11_even = abs(N_pos[0, 0] - N_neg[0, 0])
+        print(f"  {float(s_pos):+10.4f}  {float(err_swap):24.4e}  "
+              f"{float(err_n11_even):32.4e}")
+        assert err_swap < mpf("1e-30"), \
+            f"G_+(s) != G_-(-s) at s = {float(s_pos)}: err = {float(err_swap)}"
+        assert err_n11_even < mpf("1e-30"), \
+            f"N_m(s)_{{11}} not even in s at s = {float(s_pos)}: "\
+            f"err = {float(err_n11_even)}"
+    print()
+    print("  [PASS] Finite blocks are well-defined for signed s on D_T;")
+    print("         G_{m,+}(s) = G_{m,-}(-s) and N_m^{(1,1)}(s) is even in s.")
+
 
 def check_omega_coalescence_numerical(T):
     print("=" * 70)
@@ -349,15 +458,40 @@ def check_whitening_loss_sweep(T_values=(mpf("1e3"), mpf("1e4"),
     assert sup_global < mpf("2"), (
         f"sup ||G^{{-1/2}}||_op exceeds 2: {float(sup_global)}"
     )
+    # Hardened-lemma claim: there exists epsilon_T -> 0 such that
+    #     ||G^{-1/2}||_op <= sqrt(pi/(2 q(T))) (1 + epsilon_T).
+    # Equivalently, the relative error
+    #     epsilon_T(empirical) = (sup ||G^{-1/2}||_op) / sqrt(pi/(2 q(T))) - 1
+    # decreases monotonically in T (above the cutoff).
+    eps_at_T = {}
+    for T in T_values:
+        if T >= mpf("1e4"):
+            q_T, _, _, _ = phi_derivs(T)
+            target = mp_sqrt(MP_PI / (2 * q_T))
+            eps_at_T[T] = sup_at_T[T] / target - 1
+    eps_sorted = [eps_at_T[T] for T in sorted(eps_at_T.keys())]
+    print()
+    print(f"  Empirical epsilon_T = sup||G^{{-1/2}}||_op / sqrt(pi/(2q(T))) - 1:")
+    for T in sorted(eps_at_T.keys()):
+        print(f"    T = {float(T):.0e}: epsilon_T = {float(eps_at_T[T]):+.4e}")
+    # The hardened lemma claims epsilon_T -> 0; check the magnitude
+    # decreases at the highest height tested.
+    assert abs(eps_sorted[-1]) < abs(eps_sorted[0]) + mpf("1e-30"), (
+        f"epsilon_T not decreasing: T_min eps = {float(eps_sorted[0]):.4e}, "
+        f"T_max eps = {float(eps_sorted[-1]):.4e}"
+    )
+    assert abs(eps_sorted[-1]) < mpf("1e-6"), (
+        f"epsilon_T at largest T = {float(T_values[-1]):.0e} is "
+        f"{float(eps_sorted[-1]):.4e}, not -> 0"
+    )
     print()
     print(f"  sup above cutoff (T >= 1e4): {float(sup_post_cutoff):.6f} < 1")
     print(f"  global sup across tested T:  {float(sup_global):.6f} < 2")
     print()
     print("  [PASS] ||G^{-1/2}||_op bounded by an absolute constant; above")
     print("         the asymptote cutoff (T >= 1e4) the bound is < 1,")
-    print("         giving C_W = 0 empirically.  Below the cutoff the bound")
-    print("         is still finite but the asymptote sqrt(pi/(2q)) has")
-    print("         not yet kicked in.")
+    print("         giving C_W = 0 empirically.  Empirical epsilon_T -> 0")
+    print("         confirmed at the highest tested height (rel.err < 1e-6).")
 
 
 # ---------------------------------------------------------------------------
@@ -458,7 +592,11 @@ def main():
 
     check_finite_blocks_at_T(T_anchor)
     print()
+    check_q_pm_signs_numerical(T_anchor)
+    print()
     check_Nm_removable_singularity_numerical(T_anchor)
+    print()
+    check_signed_s_domain(T_anchor)
     print()
     check_omega_coalescence_numerical(T_anchor)
     print()

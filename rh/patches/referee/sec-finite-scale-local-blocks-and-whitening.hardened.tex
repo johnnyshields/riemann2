@@ -1,0 +1,282 @@
+% =============================================================================
+% Hardened patch: §4 Finite-scale local blocks and whitening
+%   sec:finite-scale-local-blocks-and-whitening
+% =============================================================================
+
+% =============================================================================
+\section{Finite-scale local blocks and whitening}
+\label{sec:finite-scale-local-blocks-and-whitening}
+\statuspaper{LIVE}\quad
+\statusmig{migrated}\quad
+\statusreferee{in-progress}\quad
+\statussympy[rh/sympy/sec-finite-scale-local-blocks-and-whitening.py]{verified}\quad
+\statussim[rh/simulation/sec-finite-scale-local-blocks-and-whitening.py]{verified}\quad
+\statuslean{n/a}
+\par\medskip
+
+The jet-limit identities of Section~\ref{sec:jet-limit-local-blocks}
+produce the infinitesimal same-point and cross-point blocks.  The
+comparison theorems of Section~\ref{sec:projective-rigidity} require the
+corresponding two-center blocks at nonzero center separation, together
+with a controlled normalization by the same-point blocks.  This section
+records those finite-center blocks and the associated whitening loss.  No
+source-energy transfer or actual-zeta suppression input is used here.
+
+\begin{definition}[Finite packet domain]
+\label{def:finite-packet-domain}
+For a retained theta chart \(I_T\), define \(t_\pm=m\pm s/2\) and
+\[
+        \mathcal D_T
+        :=\{(m,s)\in\mathbb R^2:
+             t_-\in I_T,\ t_+\in I_T\}.
+\]
+Let \(\mathcal D_T^\times:=\{(m,s)\in\mathcal D_T:s\ne0\}\).  The
+orientation convention is that rows correspond to the center \(t_-\) and
+columns to the center \(t_+\).  In applications \(s>0\), but allowing
+signed \(s\) makes the removable-singularity statement at \(s=0\) precise.
+Uniform estimates below are taken on \(\mathcal D_T\), after the global
+lower-height cutoff has been enlarged if necessary.
+\end{definition}
+
+\subsection{Finite same-point and mixed blocks}
+\label{subsec:finite-same-point-and-mixed-blocks}
+
+Fix \((m,s)\in\mathcal D_T^\times\).  Set
+\[
+        t_\pm=m\pm s/2,
+        \qquad q_\pm=q(t_\pm),
+        \qquad \Del_m(s)=\Ph(t_-)-\Ph(t_+).
+\]
+
+\begin{definition}[Finite same-point and mixed blocks]
+\label{def:finite-same-point-and-mixed-blocks}
+The finite same-point blocks are
+\begin{equation}
+\label{eq:Gpm}
+G_{m,\pm}(s)
+=\frac1\pi
+\begin{pmatrix}
+2q(t_\pm) & \tfrac12 q'(t_\pm)\\[0.8ex]
+\tfrac12 q'(t_\pm) & \tfrac1{12}\bigl(q''(t_\pm)+2q(t_\pm)^3\bigr)
+\end{pmatrix}.
+\end{equation}
+For \(s\ne0\), the finite mixed block is
+\begin{equation}
+\label{eq:Nm}
+N_m(s)
+=\frac1\pi
+\begin{pmatrix}
+-\dfrac{2\sin\Del_m(s)}{s}
+&
+\dfrac{\sin\Del_m(s)+q_+ s\cos\Del_m(s)}{s^2}
+\\[2.4ex]
+-\dfrac{\sin\Del_m(s)+q_- s\cos\Del_m(s)}{s^2}
+&
+\dfrac{(q_-+q_+)s\cos\Del_m(s)+(2-q_-q_+s^2)\sin\Del_m(s)}{2s^3}
+\end{pmatrix}.
+\end{equation}
+\end{definition}
+
+\begin{lemma}[Exact finite-block interpretation]
+\label{lem:finite-blocks-exact-interpretation}
+For \((m,s)\in\mathcal D_T^\times\),
+\[
+        G_{m,\pm}(s)=J(t_\pm).
+\]
+Moreover,
+\begin{equation}
+\label{eq:Nm-kernel-derivative-form}
+N_m(s)=
+\begin{pmatrix}
+2K_\Ph(t_-,t_+) & \partial_y K_\Ph(t_-,t_+)\\[0.6ex]
+\partial_x K_\Ph(t_-,t_+) & \tfrac12\partial_{xy}K_\Ph(t_-,t_+)
+\end{pmatrix}.
+\end{equation}
+Equivalently, if \(N_{12}\) is the matrix of \eqref{eq:cross-N12} with
+\((T_1,T_2)=(t_-,t_+)\), then \(N_m(s)=\pi^{-1}N_{12}\), with
+\(s_{12}=T_1-T_2=-s\) absorbed into the signs in \eqref{eq:Nm}.
+\end{lemma}
+
+\begin{proof}
+The identity \(G_{m,\pm}(s)=J(t_\pm)\) is immediate from
+\eqref{eq:same-point-J}.  For the mixed block, apply the off-diagonal
+kernel derivative formulas of Lemma~\ref{lem:phase-kernel-derivatives}
+at \((T_1,T_2)=(t_-,t_+)\).  There
+\(s_{12}=t_- - t_+=-s\), \(q_1=q_-\), \(q_2=q_+\), and
+\(\Delta=\Del_m(s)\).  Substitution gives the four entries of
+\eqref{eq:Nm-kernel-derivative-form}, which are exactly the entries in
+\eqref{eq:Nm}.
+\end{proof}
+
+\begin{lemma}[Removable singularity of \(N_m(s)\)]
+\label{lem:Nm-removable-singularity}
+If \(\Ph\in C^3\) on a neighborhood of \(m\), then the entries of
+\(N_m(s)\) in \eqref{eq:Nm} extend continuously to \(s=0\).  The limiting
+value is
+\begin{equation}
+\label{eq:Nm-at-zero}
+        N_m(0)=J(m)
+        = \frac1\pi
+        \begin{pmatrix}
+        2q(m) & \tfrac12 q'(m)\\[0.8ex]
+        \tfrac12 q'(m) & \tfrac1{12}\bigl(q''(m)+2q(m)^3\bigr)
+        \end{pmatrix}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Write
+\[
+        q=q(m),\qquad a=q'(m),\qquad b=q''(m).
+\]
+Taylor expansion about \(m\), using the symmetric points
+\(m\pm s/2\), gives
+\[
+        \Del_m(s)
+        =\Ph(m-s/2)-\Ph(m+s/2)
+        =-qs-\frac{b}{24}s^3+o(s^3),
+\]
+\[
+        q_+=q+\frac a2s+\frac b8s^2+o(s^2),
+        \qquad
+        q_-=q-\frac a2s+\frac b8s^2+o(s^2).
+\]
+Consequently
+\[
+        \sin\Del_m(s)
+        =-qs+\left(\frac{q^3}{6}-\frac b{24}\right)s^3+o(s^3),
+        \qquad
+        \cos\Del_m(s)=1-\frac{q^2}{2}s^2+o(s^2).
+\]
+Substituting these expansions into \eqref{eq:Nm} gives
+\begin{align*}
+        -\frac{2\sin\Del_m(s)}{s}
+        &=2q+o(1),\\
+        \frac{\sin\Del_m(s)+q_+s\cos\Del_m(s)}{s^2}
+        &=\frac a2+o(1),\\
+        -\frac{\sin\Del_m(s)+q_-s\cos\Del_m(s)}{s^2}
+        &=\frac a2+o(1),\\
+        \frac{(q_-+q_+)s\cos\Del_m(s)+(2-q_-q_+s^2)\sin\Del_m(s)}{2s^3}
+        &=\frac b{12}+\frac{q^3}{6}+o(1).
+\end{align*}
+Multiplication by the common factor \(1/\pi\) gives
+\eqref{eq:Nm-at-zero}.
+\end{proof}
+
+\begin{remark}[Separate coalescence computation]
+\label{rem:Nm-coalescence-not-cross-limit}
+Lemma~\ref{lem:cross-block-jet-limit} is a fixed-center-separation limit
+in the sampling parameter \(h\).  Lemma~\ref{lem:Nm-removable-singularity}
+is instead a coalescence statement in the center-separation parameter
+\(s\).  The latter is not obtained by using
+Lemma~\ref{lem:cross-block-jet-limit} uniformly as \(s\to0\); it is the
+separate Taylor computation above.
+\end{remark}
+
+\subsection{Whitened finite block}
+\label{subsec:whitened-finite-block}
+
+\begin{definition}[Whitened finite block]
+\label{def:whitened-finite-block}
+Whenever \(G_{m,-}(s)\) and \(G_{m,+}(s)\) are positive definite, let
+\(G_{m,\pm}(s)^{-1/2}\) denote the positive definite inverse square root
+and set
+\begin{equation}
+\label{eq:omega-finite}
+\widehat\Om_\z(s;m)
+:= G_{m,-}(s)^{-1/2}\,N_m(s)\,G_{m,+}(s)^{-1/2}.
+\end{equation}
+\end{definition}
+
+\begin{corollary}[Coalescence: \(\widehat\Om_\z(0;m)=I_2\)]
+\label{cor:omega-coalescence}
+For every retained midpoint \(m\) at sufficiently large height,
+\(\widehat\Om_\z(s;m)\) extends continuously to \(s=0\), and
+\[
+        \widehat\Om_\z(0;m)=I_2.
+\]
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{lem:same-point-gram-positivity}, \(J(m)\succ0\) for every
+sufficiently large retained midpoint \(m\).  Hence, by continuity,
+\(G_{m,\pm}(s)=J(m\pm s/2)\) remain positive definite for all sufficiently
+small \(|s|\) with \((m,s)\in\mathcal D_T\).  The map
+\(G\mapsto G^{-1/2}\) is continuous on the positive definite cone.
+Lemma~\ref{lem:Nm-removable-singularity} gives \(N_m(0)=J(m)\), while
+\(G_{m,\pm}(0)=J(m)\).  Therefore
+\[
+\widehat\Om_\z(0;m)
+=J(m)^{-1/2}J(m)J(m)^{-1/2}=I_2.
+\]
+\end{proof}
+
+\subsection{Whitening loss}
+\label{subsec:whitening-loss}
+
+\begin{lemma}[Operator-norm bound for \(G_{m,\pm}^{-1/2}\)]
+\label{lem:whitening-loss}
+For \(\Ph_T=\theta\) on \(I_T\), after increasing the global lower-height
+cutoff if necessary, \(G_{m,\pm}(s)\) are positive definite for every
+\((m,s)\in\mathcal D_T\).  Moreover there is a quantity
+\(\varepsilon_T\to0\), independent of \((m,s)\in\mathcal D_T\), such that
+\begin{equation}
+\label{eq:whitening-loss-bound}
+        \bigl\|G_{m,\pm}(s)^{-1/2}\bigr\|_{\op}
+        \le
+        \sqrt{\frac{\pi}{2q(t_\pm)}}\,(1+\varepsilon_T)
+        \qquad (T\to\infty).
+\end{equation}
+In particular, after possibly increasing the same lower-height cutoff,
+\begin{equation}
+\label{eq:whitening-loss-polynomial}
+        \bigl\|G_{m,\pm}(s)^{-1/2}\bigr\|_{\op}
+        \le Q(T)^{C_W}
+\end{equation}
+uniformly on \(\mathcal D_T\), with the absolute exponent \(C_W=0\)
+whenever \(Q(T)\ge1\).
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:finite-blocks-exact-interpretation},
+\(G_{m,\pm}(s)=J(t_\pm)\).  Since \((m,s)\in\mathcal D_T\) implies
+\(t_\pm\in I_T\subset[T/2,2T]\), the theta derivative estimates of
+Lemma~\ref{lem:theta-derivative-asymptotics} are uniform at \(t=t_\pm\).
+Repeating the proof of Lemma~\ref{lem:same-point-gram-positivity} with
+\(T\) replaced by an arbitrary \(t\in I_T\) gives, uniformly on \(I_T\),
+\[
+        \lambda_{\min}(J(t))
+        =\frac{2q(t)}{\pi}\,(1+o(1)).
+\]
+Equivalently, for some \(\delta_T\to0\) independent of \(t\in I_T\),
+\[
+        \lambda_{\min}(J(t))
+        \ge \frac{2q(t)}{\pi}(1-\delta_T).
+\]
+For large \(T\), \(1-\delta_T>0\), so the finite same-point blocks are
+positive definite and
+\[
+        \bigl\|G_{m,\pm}(s)^{-1/2}\bigr\|_{\op}
+        =\lambda_{\min}(G_{m,\pm}(s))^{-1/2}
+        \le
+        \sqrt{\frac{\pi}{2q(t_\pm)}}\,(1-\delta_T)^{-1/2}.
+\]
+Absorbing \((1-\delta_T)^{-1/2}\) into \(1+\varepsilon_T\) proves
+\eqref{eq:whitening-loss-bound}.  Finally, the uniform asymptotic above together with
+Lemma~\ref{lem:phase-derivative-lower-bound} gives
+\(\lambda_{\min}(J(t))\to\infty\) uniformly for \(t\in I_T\).  After
+increasing the lower-height cutoff we therefore have
+\(\lambda_{\min}(J(t))\ge1\) uniformly on \(I_T\).  Thus
+\(\|G_{m,\pm}(s)^{-1/2}\|_{\op}\le1\le Q(T)^0\) whenever \(Q(T)\ge1\),
+which is \eqref{eq:whitening-loss-polynomial} with \(C_W=0\).
+\end{proof}
+
+\begin{remark}[Scope of Lemma~\ref{lem:whitening-loss}]
+\label{rem:whitening-loss-scope}
+Lemma~\ref{lem:whitening-loss} controls only the real-axis same-point
+whitening factors attached to the theta phase.  It does not prove
+actual-zeta transverse suppression, does not supply source-energy input,
+and does not give complex-disk or holomorphic whitening estimates.  Any
+stronger whitening statement needed for a later complex-analytic argument
+must be introduced as a separate input or proved in a separate section.
+\end{remark}
