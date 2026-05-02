@@ -382,20 +382,21 @@ The constants in the \(O\)-terms are absolute.
 
 \begin{proof}
 Let \(z=1/4+it/2\).  The half-plane \(\Re z\ge 1/4\) lies in a fixed
-Stirling sector, and Stirling's expansion for \(\log\Gamma z\), with
-remainder differentiated a fixed number of times, is uniform there as
-\(|z|\to\infty\).  Taking imaginary parts in \eqref{eq:theta-definition}
-gives the standard Riemann--Siegel expansion
+Stirling sector.  By the differentiated form of Stirling's expansion,
+after truncating \(\log\Gamma z\) at \(z^{-3}\) the remainder and its
+\(t\)-derivatives up to order three are uniform in this sector, with
+the corresponding differentiated powers of \(|z|\).  Taking imaginary
+parts in \eqref{eq:theta-definition} gives the standard
+Riemann--Siegel expansion
 \[
 \theta(t)=\frac{t}{2}\log\frac{t}{2\pi}-\frac{t}{2}-\frac{\pi}{8}
           +\frac{1}{48 t}+O(t^{-3}),
 \]
-again with the displayed remainder admitting three differentiations
-with the corresponding differentiated bounds.  Differentiating gives
-\(q(t)=\theta'(t)\) as stated; differentiating once and twice more gives
-the formulas for \(q'(t)\) and \(q''(t)\).  Since
-\(I_T\subset[T/2,2T]\), these estimates are uniform on \(I_T\), with
-absolute constants.
+with a remainder admitting three differentiations in \(t\) (needed for
+\(q''=\theta'''\)).  Termwise differentiation gives
+\(q(t)=\theta'(t)\); differentiating once and twice more gives \(q'(t)\)
+and \(q''(t)\).  Since \(I_T\subset[T/2,2T]\), these estimates are
+uniform on \(I_T\), with absolute constants.
 \end{proof}
 
 \begin{definition}[Local phase chart]
@@ -483,8 +484,22 @@ Lemma~\ref{lem:phase-kernel-diagonal-derivatives}.
 \begin{proof}
 For \(x\ne y\), symmetry follows from
 \(\sin(\Ph(y)-\Ph(x))/(y-x) = \sin(\Ph(x)-\Ph(y))/(x-y)\).
-Real-valuedness is immediate.  The diagonal value follows from
-\(\Ph(y+h)-\Ph(y) = h q(y) + o(h)\).
+Real-valuedness is immediate.  For joint continuity across the
+diagonal, near any \(T\in I\) write
+\[
+        \Ph(x)-\Ph(y)=(x-y)A(x,y),\qquad
+        A(x,y)=\int_0^1 q\bigl(y+\tau(x-y)\bigr)\,d\tau.
+\]
+The function \(A\) is continuous and \(A(T,T)=q(T)\).  For \(x\ne y\),
+\[
+        K_\Ph(x,y)
+        =\frac{A(x,y)}{\pi}\,
+          \frac{\sin\bigl((x-y)A(x,y)\bigr)}
+               {(x-y)A(x,y)},
+\]
+with the last factor interpreted by its continuous value \(1\) at zero.
+Hence \(K_\Ph(x,y)\to q(T)/\pi=K_\Ph(T,T)\) whenever
+\((x,y)\to(T,T)\).
 \end{proof}
 
 \begin{lemma}[Off-diagonal kernel derivatives]
@@ -678,6 +693,11 @@ Also \(K_\Ph(T\pm h,T\pm h)=q(T\pm h)/\pi\), with
 q(T\pm h)=q\pm hq'+\frac{h^2}{2}q''
           \pm\frac{h^3}{6}q'''+O(h^4).
 \]
+The \(O(h^5)\) phase remainder and the \(O(h^4)\) \(q\)-remainder are
+controlled by a local \(C^5\)-bound for \(\Ph\); after division by the
+separation \(2h\), the off-diagonal kernel expansion has an \(O(h^4)\)
+remainder, the order needed below since the \((2,2)\) jet entry
+divides a second difference by \(h^2\).
 For symmetric \(M\), conjugation by \eqref{eq:point-to-jet-transform}
 gives
 \begin{align*}
@@ -686,7 +706,10 @@ gives
 (P_h M P_h^\top)_{22} &= \tfrac{1}{8h^2}(M_{11}-2M_{12}+M_{22}).
 \end{align*}
 Substituting \eqref{eq:A12-same-point-expansion} and the Taylor series
-of \(q(T\pm h)\),
+of \(q(T\pm h)\): the constant and odd terms cancel in the second
+difference, while the first difference cancels its constant and even
+terms.  The divisions by \(h\) and \(h^2\) therefore leave entrywise
+\(O(h^2)\) remainders:
 \begin{align*}
 (P_h A_h P_h^\top)_{11} &= \frac{2q}{\pi} + O(h^2),\\
 (P_h A_h P_h^\top)_{12} &= \frac{q'}{2\pi} + O(h^2),\\
@@ -755,8 +778,8 @@ K_\Ph(T_1+u_1, T_2+u_2)
 = \sum_{a+b\le 4}\frac{K_{ab}}{a!\,b!}\, u_1^a\, u_2^b + O_s(h^5).
 \]
 The subscript indicates that the constant may depend on a finite power
-of \(|s|^{-1}\) and on the chosen off-diagonal neighborhoods.  For a
-general \(2\times 2\) matrix \(M\),
+of \(|s|^{-1}\) and on local \(C^5\)-bounds for \(\Ph\) in the chosen
+off-diagonal neighborhoods.  For a general \(2\times 2\) matrix \(M\),
 \begin{align*}
 (P_h M P_h^\top)_{11}
 &= \tfrac12(M_{11} + M_{12} + M_{21} + M_{22}),\\
@@ -769,8 +792,17 @@ general \(2\times 2\) matrix \(M\),
 \end{align*}
 Equivalently, these four expressions apply the sign weights
 \(1\), \(\sigma_2\), \(\sigma_1\), \(\sigma_1\sigma_2\) respectively to
-the four samples with \(u_i = \sigma_i h\).  The parity of the Taylor
-monomials therefore selects
+the four samples with \(u_i = \sigma_i h\).  Parity selects the
+required leading terms: the next surviving polynomial monomials in the
+\((1,1)\) entry have total degree at least two, contributing \(O(h^2)\);
+the \((1,2)\) and \((2,1)\) numerators select monomials with odd
+degree in one variable, so after division by \(h\) the surviving
+polynomial corrections are \(O(h^2)\); the \((2,2)\) numerator selects
+monomials odd in both variables, and division by \(h^2\) again leaves
+\(O(h^2)\).  The Taylor remainder \(O_s(h^5)\) per sample contributes
+\(O_s(h^5)\) to the \((1,1)\) entry (no division), \(O_s(h^4)\) to the
+off-diagonal entries (division by \(4h\)), and \(O_s(h^3)\) to the
+\((2,2)\) entry (division by \(8h^2\)).  Hence
 \[
 (P_h C_h P_h^\top)_{11} = 2 K_{00} + O(h^2),\qquad
 (P_h C_h P_h^\top)_{12} = K_{01} + O(h^2),
@@ -787,8 +819,10 @@ Lemma~\ref{lem:phase-kernel-derivatives} gives \eqref{eq:cross-N12}.
 \label{rem:cross-block-fixed-separation-scope}
 Lemma~\ref{lem:cross-block-jet-limit} is an off-diagonal jet limit at
 fixed separation.  It is not a collision expansion for \(T_1\to T_2\);
-any two-center blow-up or near-coalescence analysis must be derived
-from a separate scaling argument.
+the constants are not asserted to be uniform as \(s=T_1-T_2\to 0\).
+Any two-center blow-up or near-coalescence analysis must be derived
+from a separate scaling argument, rather than by citing this lemma
+with \(|s|\) comparable to \(h\).
 \end{remark}
 
 \subsection{Same-point Gram positivity}
@@ -839,7 +873,8 @@ heights, \(J(T)\) is positive definite.  More precisely,
 After increasing the lower-height cutoff if necessary,
 \(\lambda_{\min}(J(T)) \ge 1\); hence the polynomial-in-\(Q\) lower
 bound \(\lambda_{\min}(J(T)) \ge Q(T)^{-C_J}\) holds with \(C_J = 0\)
-whenever \(Q(T) \ge 1\).
+whenever \(Q(T) \ge 1\).  The cutoff is qualitative; no explicit
+numerical lower height is claimed here.
 \end{lemma}
 
 \begin{proof}
