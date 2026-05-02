@@ -128,33 +128,50 @@
 
 % Section-level status indicators.  Each axis has its own macro so it
 % can be read and edited independently in the source.  `\status{VALUE}'
-% is the underlying pill renderer.  Allowed values per axis:
+% is the underlying pill renderer.  The three computational axes
+% (sympy, sim, lean) take an optional path argument that points to the
+% verification artefact; if given, it is rendered next to the pill.
+% Allowed values per axis:
 %
-%   \statuspaper    LIVE | FINITE AUDIT | ARCHIVED | SUPERSEDED |
-%                   NO-GO | DIAGNOSTIC
-%   \statusmig     not-started | in-progress | partial | migrated | n/a
-%                   (migration from proof_of_rh.tex; n/a for
-%                    rebuild-original sections)
-%   \statusreferee  not-started | in-progress | passed | failed
-%   \statussympy   n/a | not-started | partial | verified
-%                   (symbolic/formula verification: sympy/numpy
-%                    re-derivation of matrix entries, identities,
-%                    Taylor coefficients)
-%   \statussim      n/a | not-started | partial | verified
-%                   (numerical simulation: empirical behavior at
-%                    specific heights, sweeps, Monte Carlo --- not
-%                    formula verification)
-%   \statuslean     n/a | not-started | in-progress | formalized
-%                   (Lean formalization)
+%   \statuspaper{<value>}            LIVE | FINITE AUDIT | ARCHIVED |
+%                                    SUPERSEDED | NO-GO | DIAGNOSTIC
+%   \statusmig{<value>}              not-started | in-progress |
+%                                    partial | migrated | n/a
+%                                    (migration from proof_of_rh.tex;
+%                                     n/a for rebuild-original
+%                                     sections)
+%   \statusreferee{<value>}          not-started | in-progress |
+%                                    passed | failed
+%   \statussympy[<path>]{<value>}    n/a | not-started | partial |
+%                                    verified
+%                                    (symbolic/formula verification;
+%                                     <path> points to sympy script)
+%   \statussim[<path>]{<value>}      n/a | not-started | partial |
+%                                    verified
+%                                    (numerical simulation; <path>
+%                                     points to simulation script)
+%   \statuslean[<path>]{<value>}     n/a | not-started | in-progress |
+%                                    formalized
+%                                    (Lean formalization; <path>
+%                                     points to Lean source)
 %
 % Removed at journal time.
 \newcommand{\status}[1]{\textbf{\scriptsize[#1]}}
 \newcommand{\statuspaper}[1]{\textsf{\footnotesize paper:}\,\status{#1}}
 \newcommand{\statusmig}[1]{\textsf{\footnotesize v1:}\,\status{#1}}
 \newcommand{\statusreferee}[1]{\textsf{\footnotesize referee:}\,\status{#1}}
-\newcommand{\statussympy}[1]{\textsf{\footnotesize sympy:}\,\status{#1}}
-\newcommand{\statussim}[1]{\textsf{\footnotesize sim:}\,\status{#1}}
-\newcommand{\statuslean}[1]{\textsf{\footnotesize lean:}\,\status{#1}}
+\newcommand{\statussympy}[2][\relax]{%
+  \textsf{\footnotesize sympy:}\,\status{#2}%
+  \ifx\relax#1\else\,\textsf{\scriptsize\texttt{#1}}\fi%
+}
+\newcommand{\statussim}[2][\relax]{%
+  \textsf{\footnotesize sim:}\,\status{#2}%
+  \ifx\relax#1\else\,\textsf{\scriptsize\texttt{#1}}\fi%
+}
+\newcommand{\statuslean}[2][\relax]{%
+  \textsf{\footnotesize lean:}\,\status{#2}%
+  \ifx\relax#1\else\,\textsf{\scriptsize\texttt{#1}}\fi%
+}
 
 \begin{document}
 
