@@ -1,0 +1,753 @@
+\documentclass[11pt,a4paper]{amsart}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs,bm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
+\usepackage[nameinlink,capitalize,noabbrev]{cleveref}
+\usepackage{microtype}
+
+% -----------------------------------------------------------------------------
+% Clean reconstruction scaffold.
+% Status discipline:
+%   CORE      = part of the active spine.
+%   OPEN      = proof debt; never cite downstream as proved.
+%   OPTIONAL  = possible proof-supply module, not mandatory in the spine.
+%   ARCHIVE   = may be mined from older drafts, but not part of this file until
+%               restated and re-refereed here.
+% -----------------------------------------------------------------------------
+
+\newcommand{\Status}[1]{\textnormal{\fbox{\scriptsize\textsf{#1}}}}
+\newcommand{\Core}{\Status{CORE}}
+\newcommand{\Open}{\Status{OPEN}}
+\newcommand{\Optional}{\Status{OPTIONAL}}
+\newcommand{\Archive}{\Status{ARCHIVE}}
+\newcommand{\Conditional}{\Status{CONDITIONAL}}
+\newcommand{\Verified}{\Status{VERIFIED}}
+\newcommand{\Imported}{\Status{IMPORTED}}
+
+\newcommand{\RH}{\mathrm{RH}}
+\newcommand{\z}{\zeta}
+\newcommand{\xiF}{\xi}
+\newcommand{\XiF}{\Xi}
+\newcommand{\Ph}{\Phi}
+\newcommand{\D}{\mathcal D}
+\newcommand{\JG}{\mathsf{JG}}
+\newcommand{\Energy}{\mathsf{Energy}}
+\newcommand{\Hardy}{\mathsf{Hardy}}
+\newcommand{\Toy}{\mathsf{Toy}}
+\newcommand{\Zeta}{\mathsf{Zeta}}
+\newcommand{\Loc}{\mathsf{Loc}}
+\newcommand{\Packet}{\mathcal P}
+\newcommand{\Scale}{Q}
+\newcommand{\can}{\mathrm{can}}
+\newcommand{\toy}{\mathrm{toy}}
+\newcommand{\trans}{\mathrm{tr}}
+\newcommand{\main}{\mathrm{main}}
+\newcommand{\err}{\mathrm{err}}
+\newcommand{\odd}{\mathrm{odd}}
+\newcommand{\even}{\mathrm{even}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\RePart}{\operatorname{Re}}
+\newcommand{\ImPart}{\operatorname{Im}}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{checkpoint}[theorem]{Referee checkpoint}
+\newtheorem{remark}[theorem]{Remark}
+
+\newenvironment{audit}[1]{%
+  \begin{quote}\noindent\textbf{Audit card: #1.}\par\smallskip\small
+}{\end{quote}}
+
+\newenvironment{dependencies}{%
+  \begin{quote}\noindent\textbf{Dependencies.}\par\smallskip\small
+  \begin{enumerate}[label=\textup{D\arabic*.},leftmargin=*]
+}{\end{enumerate}\end{quote}}
+
+\newenvironment{lossledger}{%
+  \begin{quote}\noindent\textbf{Loss ledger.}\par\smallskip\small
+  \begin{enumerate}[label=\textup{L\arabic*.},leftmargin=*]
+}{\end{enumerate}\end{quote}}
+
+\title{Jet--Gram Reconstruction of the Local Obstruction Program for the Riemann Hypothesis}
+\author{John Shields}
+\date{Clean reconstruction scaffold --- May 2026}
+
+\begin{document}
+
+\begin{abstract}
+This file is a clean reconstruction scaffold for a jet--Gram obstruction program aimed at the Riemann Hypothesis.  It is not a proof of \(\RH\).  The purpose is to rebuild the argument from the jet--Gram side, import only statements that are restated and re-refereed here, and keep the Hardy/source-transfer material as an optional energy-supply module that may or may not be needed for the two-point and four-point closures.
+\end{abstract}
+
+\maketitle
+\tableofcontents
+
+\section{Proof-state policy and reconstruction protocol}
+\label{sec:protocol}
+
+\subsection{Standing policy}
+\label{subsec:standing-policy}
+
+\begin{enumerate}[label=\textup{P\arabic*.},leftmargin=*]
+\item \textbf{No global claim.}  This draft does not assert a proof of \(\RH\).  A theorem may be used downstream only after its status has been changed from \Open\ to \Verified\ or after it is explicitly listed as a hypothesis of a conditional theorem.
+\item \textbf{Archive discipline.}  Older draft material is treated as an archive.  Nothing from the archive is part of the active proof until it is restated in this file with its hypotheses, normalizations, proof, loss accounting, and audit card.
+\item \textbf{No-go pruning.}  No-go arguments, historical failed routes, and diagnostic computations are excluded from the core text.  They may be referenced only in \Cref{app:archive-map} or in a separate archive note.
+\item \textbf{Jet--Gram first.}  The active spine begins with local phase kernels, jet coordinates, Gram blocks, whitening, and invariant/quotient extraction.  Arithmetic or Hardy input is introduced only after the two-point and four-point local targets are precisely stated.
+\item \textbf{Hardy is optional energy.}  Hardy/source-transfer work is not a mandatory upstream axiom in this scaffold.  It is a possible provider of extra zeta energy for the two-point and four-point estimates.  The structure must keep open the possibility that these estimates close from jet--Gram geometry alone.
+\end{enumerate}
+
+\begin{remark}[How to edit this file]
+Every insertion should follow the same pattern: definition, theorem statement, proof, dependency list, loss ledger, and audit card.  If a result is only plausible, it should be stated as a problem or hypothesis, not as a lemma.
+\end{remark}
+
+\subsection{Active dependency graph}
+\label{subsec:active-dependency-graph}
+
+The clean proof frontier is organized as follows:
+\[
+\boxed{\text{off-line zero}}
+\Longrightarrow
+\boxed{\text{scale-admissible local packet}}
+\Longrightarrow
+\boxed{\text{jet--Gram normal form}}
+\Longrightarrow
+\boxed{\text{two-point/four-point obstruction}}
+\Longrightarrow
+\boxed{\text{global contradiction}}.
+\]
+The uncertain part is the third-to-fourth transition.  This file therefore separates it into a local geometric target and two possible energy routes:
+\[
+\boxed{\text{jet--Gram geometry alone}}
+\quad\text{or}\quad
+\boxed{\text{jet--Gram geometry plus Hardy/zeta energy}}.
+\]
+
+\begin{definition}[Energy-supply node]
+\label{def:energy-supply-node}
+An \emph{energy-supply node} is any theorem that supplies the quantitative nonflatness, nonconcentration, or coercivity estimate needed by a two-point or four-point local obstruction theorem.  There are two allowed classes.
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=*]
+\item \Core\ \emph{Pure jet--Gram supply}: the estimate is proved using only the local jet--Gram packet hypotheses, whitening conventions, finite-dimensional quotient algebra, and scale-admissibility assumptions.
+\item \Optional\ \emph{Hardy-assisted supply}: the estimate uses additional actual-zeta/Hardy information, such as energy from a Hardy-normalized source, a source-transfer theorem, an explicit-formula lower bound, or an approximate-functional-equation estimate.
+\end{enumerate}
+The statements of the two-point and four-point theorems must specify which supply node they use.  A Hardy-assisted proof cannot be silently substituted for a pure jet--Gram proof.
+\end{definition}
+
+\section{Global conditional target}
+\label{sec:global-conditional-target}
+
+\begin{theorem}[Conditional high-height exclusion from a local obstruction]
+\label{thm:conditional-high-height-exclusion}
+\Conditional\
+Assume that every sufficiently high off-line zero \(\rho=\beta+i\gamma\), \(\beta\ne \tfrac12\), generates a scale-admissible local packet family \(\Packet_\rho\) satisfying the packet-entry hypotheses in \Cref{hyp:packet-entry}.  Assume further that the local jet--Gram obstruction theorem, \Cref{thm:local-jetgram-obstruction-target}, holds for every such packet family, with polynomial losses in the packet scale \(\Scale=\Scale(\gamma)\).  Then there are no sufficiently high off-line zeros satisfying \Cref{hyp:packet-entry}.
+\end{theorem}
+
+\begin{proof}
+This is a dependency theorem.  Given an off-line zero satisfying \Cref{hyp:packet-entry}, construct its packet family \(\Packet_\rho\).  By \Cref{thm:local-jetgram-obstruction-target}, the same packet forces two incompatible conclusions: the toy/off-line model has a surviving forbidden transverse jet--Gram component, while the actual-zeta packet has no such component after the certified normalization and cancellation procedure.  The contradiction excludes the original off-line zero.  All quantitative losses are polynomial by hypothesis, so the contradiction survives at high height.
+\end{proof}
+
+\begin{dependencies}
+\item Packet-entry theorem: currently \Open\; see \Cref{hyp:packet-entry}.
+\item Local jet--Gram obstruction theorem: currently \Open\; see \Cref{thm:local-jetgram-obstruction-target}.
+\item Loss audit: all normalization, extraction, whitening, quotient, and comparison losses must be polynomial in \(\Scale\).
+\end{dependencies}
+
+\begin{hypothesis}[Packet entry from an off-line zero]
+\label{hyp:packet-entry}
+\Open\
+Every sufficiently high off-line zero generates a packet family \(\Packet_\rho\) with the following properties.
+\begin{enumerate}[label=\textup{E\arabic*.},leftmargin=*]
+\item \textbf{Scale admissibility.}  A scale \(\Scale=\Scale(\gamma)\to\infty\) and local windows of size comparable to \(\Scale^{-1}\) are fixed.
+\item \textbf{Regular chart.}  The actual-zeta phase or scalar used to build the jet--Gram blocks is defined in a real chart whose denominators are polynomially bounded below on the retained packet set.
+\item \textbf{Gram nondegeneracy.}  The same-point Gram blocks used for whitening have polynomial lower spectral bounds.
+\item \textbf{Packet mass.}  Retained packets carry at least polynomial mass after all required local extractions.
+\item \textbf{Symmetry compatibility.}  The symmetry packet \(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\) is represented in the local model with the same normalization used in the zeta-side jet--Gram comparison.
+\end{enumerate}
+\end{hypothesis}
+
+\begin{audit}{packet entry}
+\begin{enumerate}[label=\textup{A\arabic*.},leftmargin=*]
+\item Identify the exact local coordinate and scale \(\Scale\).
+\item Prove chart regularity or route singular charts to a separate branch.
+\item Prove no extraction step discards more than polynomial mass.
+\item Verify that the toy/off-line packet and actual-zeta packet are compared in the same gauge.
+\end{enumerate}
+\end{audit}
+
+\section{Local phase kernel and jet--Gram blocks}
+\label{sec:local-phase-kernel-jetgram}
+
+\subsection{Phase kernel}
+\label{subsec:phase-kernel}
+
+Let \(\Ph\) be a real local phase in a local spectral coordinate \(t\), and put
+\[
+        q(t):=\D\Ph(t).
+\]
+When no normalized coordinate has yet been fixed, \(\D\) means ordinary differentiation with respect to \(t\).  After scale normalization, \(\D\) denotes the normalized packet derivative.
+
+\begin{definition}[Phase kernel]
+\label{def:phase-kernel}
+Define
+\begin{equation}
+\label{eq:phase-kernel}
+K_\Ph(x,y)=
+\begin{cases}
+\dfrac{\sin(\Ph(x)-\Ph(y))}{\pi(x-y)}, & x\ne y,\\[1ex]
+\dfrac{q(x)}{\pi}, & x=y.
+\end{cases}
+\end{equation}
+\end{definition}
+
+\begin{checkpoint}[kernel regularity]
+\label{chk:kernel-regularity}
+\Core\
+Before using \(K_\Ph\) as an actual-zeta object, verify the following.
+\begin{enumerate}[label=\textup{K\arabic*.},leftmargin=*]
+\item \(\Ph\) is real-valued on the packet interval in the chosen chart.
+\item The diagonal value in \eqref{eq:phase-kernel} is the removable-singularity limit.
+\item The derivative convention for \(q\), \(q''\), and higher jets is fixed before any scaling claim is made.
+\end{enumerate}
+\end{checkpoint}
+
+\subsection{Point-to-jet transform}
+\label{subsec:point-to-jet-transform}
+
+For a center \(T\) and two nearby points \(T\pm h\), introduce
+\begin{equation}
+\label{eq:point-to-jet-transform}
+P_h:=\frac12
+\begin{pmatrix}
+1 & 1\\[1ex]
+-1/h & 1/h
+\end{pmatrix}.
+\end{equation}
+This converts point values into value/first-derivative jet coordinates.
+
+\begin{lemma}[Same-point jet--Gram limit]
+\label{lem:same-point-jetgram-limit}
+\Core\ \Open\
+Let \(A_h\) be the \(2\times2\) same-point block of \(K_\Ph\) at \(T-h,T+h\).  Then
+\[
+        P_hA_hP_h^\top \longrightarrow J(T)
+\]
+as \(h\to0\), where
+\begin{equation}
+\label{eq:same-point-J}
+J(T)=\frac1\pi
+\begin{pmatrix}
+2q(T) & \frac12 q'(T)\\[1ex]
+\frac12 q'(T) & \frac1{12}\bigl(q''(T)+2q(T)^3\bigr)
+\end{pmatrix}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}[Proof to insert]
+Taylor expand \(\Ph(T\pm h)\) through the order needed to control the diagonal and off-diagonal entries after applying \(P_h\).  Check explicitly that all singular powers of \(h\) cancel.  The coefficient of the derivative--derivative entry must be rechecked independently; it is a common normalization-error location.
+\end{proof}
+
+\begin{audit}{same-point jet--Gram limit}
+\begin{enumerate}[label=\textup{A\arabic*.},leftmargin=*]
+\item Confirm whether the separation convention is \(T\pm h\) or \(T\pm h/2\).
+\item Confirm that the displayed \(P_h\) matches that convention.
+\item Verify positivity assumptions needed for later whitening: \(J(T)>0\) or a polynomial lower bound on the retained packets.
+\end{enumerate}
+\end{audit}
+
+\subsection{Two-center cross block}
+\label{subsec:two-center-cross-block}
+
+Let \(T_1\ne T_2\), set
+\[
+        s:=T_1-T_2,
+        \qquad
+        \Delta:=\Ph(T_1)-\Ph(T_2),
+        \qquad
+        q_j:=q(T_j).
+\]
+
+\begin{lemma}[Cross jet--Gram limit]
+\label{lem:cross-jetgram-limit}
+\Core\ \Open\
+Let \(C_h\) be the \(2\times2\) mixed block of \(K_\Ph\) between the point pairs \(T_1\pm h\) and \(T_2\pm h\).  Then
+\[
+        P_hC_hP_h^\top\longrightarrow \frac1\pi N_{12},
+\]
+where
+\begin{equation}
+\label{eq:cross-N12}
+N_{12}=
+\begin{pmatrix}
+\dfrac{2\sin \Delta}{s}
+&
+\dfrac{\sin \Delta-q_2s\cos \Delta}{s^2}
+\\[2ex]
+\dfrac{q_1s\cos \Delta-\sin \Delta}{s^2}
+&
+\dfrac{(q_1+q_2)s\cos \Delta+(q_1q_2s^2-2)\sin \Delta}{2s^3}
+\end{pmatrix}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}[Proof to insert]
+Taylor expand the four entries of the mixed block in the two displacement variables and apply \(P_h\) on both sides.  Keep the order of \(T_1,T_2\) fixed throughout; sign errors in \(s\) and \(\Delta\) must be audited before this lemma can be used.
+\end{proof}
+
+\begin{definition}[Whitened two-center jet--Gram block]
+\label{def:whitened-two-center-block}
+Assuming \(J(T_1)\) and \(J(T_2)\) are positive definite, define
+\begin{equation}
+\label{eq:omega-infty}
+\Omega_\infty(T_1,T_2):=J(T_1)^{-1/2}\left(\frac1\pi N_{12}\right)J(T_2)^{-1/2}.
+\end{equation}
+Equivalently, if \(J(T_j)=\pi^{-1}M_j\), then
+\[
+        \Omega_\infty(T_1,T_2)=M_1^{-1/2}N_{12}M_2^{-1/2}.
+\]
+\end{definition}
+
+\begin{checkpoint}[whitening]
+\label{chk:whitening}
+\Core\
+Every use of \(\Omega_\infty\) or its finite-scale analogue must record:
+\begin{enumerate}[label=\textup{W\arabic*.},leftmargin=*]
+\item the lower spectral bound for each same-point Gram block;
+\item the chosen square-root branch or functional calculus convention;
+\item the operator norm loss of the whitening map;
+\item whether the comparison is invariant under the gauge freedoms left in \(\Ph\).
+\end{enumerate}
+\end{checkpoint}
+
+\section{Finite-scale symmetric packet blocks}
+\label{sec:finite-scale-packet-blocks}
+
+Fix a midpoint \(m\), a separation parameter \(s\), and points
+\begin{equation}
+\label{eq:t-pm}
+        t_\pm=m\pm\frac{s}{2}.
+\end{equation}
+Let
+\[
+        q_\pm=q(t_\pm),
+        \qquad
+        \Delta_m(s)=\Ph(t_-)-\Ph(t_+).
+\]
+
+\begin{definition}[Finite symmetric same-point blocks]
+\label{def:finite-symmetric-same-blocks}
+The finite same-point jet--Gram blocks are
+\begin{equation}
+\label{eq:Gpm}
+G_{m,\pm}(s)=\frac1\pi
+\begin{pmatrix}
+2q(t_\pm) & \frac12 q'(t_\pm)\\[1ex]
+\frac12 q'(t_\pm) & \frac1{12}\bigl(q''(t_\pm)+2q(t_\pm)^3\bigr)
+\end{pmatrix}.
+\end{equation}
+\end{definition}
+
+\begin{definition}[Finite symmetric mixed block]
+\label{def:finite-symmetric-mixed-block}
+The finite mixed block is
+\begin{equation}
+\label{eq:Nm}
+N_m(s)=\frac1\pi
+\begin{pmatrix}
+-\dfrac{2\sin\Delta_m(s)}{s}
+&
+\dfrac{\sin\Delta_m(s)+q_+s\cos\Delta_m(s)}{s^2}
+\\[2ex]
+-\dfrac{\sin\Delta_m(s)+q_-s\cos\Delta_m(s)}{s^2}
+&
+\dfrac{(q_-+q_+)s\cos\Delta_m(s)+(2-q_-q_+s^2)\sin\Delta_m(s)}{2s^3}
+\end{pmatrix}.
+\end{equation}
+The finite whitened packet block is
+\begin{equation}
+\label{eq:omega-finite}
+\widehat\Omega_\zeta(s;m):=G_{m,-}(s)^{-1/2}N_m(s)G_{m,+}(s)^{-1/2}.
+\end{equation}
+\end{definition}
+
+\begin{checkpoint}[finite-block conventions]
+\label{chk:finite-block-conventions}
+\Core\
+Before inserting any finite-scale expansion, freeze:
+\begin{enumerate}[label=\textup{F\arabic*.},leftmargin=*]
+\item the sign convention for \(s\), \(t_-\), \(t_+\), and \(\Delta_m(s)\);
+\item the order at which the expansion is needed for the two-point and four-point cases;
+\item the exact remainder class, including uniformity in \(m\), \(s\), and \(\Scale\);
+\item the condition under which \(G_{m,\pm}(s)^{-1/2}\) is well-defined with polynomially bounded norm.
+\end{enumerate}
+\end{checkpoint}
+
+\section{Jet--Gram invariants and quotient targets}
+\label{sec:jetgram-invariants-quotient-targets}
+
+\begin{problem}[Choose the minimal invariant package]
+\label{prob:minimal-invariant-package}
+\Open\
+Identify the smallest invariant or quotient of \(\widehat\Omega_\zeta(s;m)\) that detects the off-line toy anomaly but is insensitive to the value channel, affine gauge choices, and harmless background corrections.
+\end{problem}
+
+\begin{definition}[Abstract transverse projection]
+\label{def:abstract-transverse-projection}
+Let \(\mathcal V_{\main}\) denote the finite-dimensional subspace generated by the value/gauge/background directions that are to be quotiented out.  A transverse projection is an operator
+\[
+        \Pi_{\trans}:\mathcal H_{\JG}\to \mathcal H_{\JG}/\mathcal V_{\main}
+\]
+or a concrete representative of this quotient, with polynomially controlled norm on retained packets.
+\end{definition}
+
+\begin{hypothesis}[Gauge-safe quotient]
+\label{hyp:gauge-safe-quotient}
+\Open\
+The chosen projection \(\Pi_{\trans}\) satisfies:
+\begin{enumerate}[label=\textup{Q\arabic*.},leftmargin=*]
+\item it annihilates all declared value/gauge/background directions exactly or with a controlled perturbative error;
+\item it preserves the toy/off-line anomaly with a polynomial lower bound;
+\item it maps actual-zeta finite-block errors into an error class smaller than the retained anomaly;
+\item its definition is independent of any arbitrary affine primitive unless the primitive has been canonically fixed.
+\end{enumerate}
+\end{hypothesis}
+
+\begin{audit}{quotient selection}
+The quotient is not allowed to be chosen after seeing the desired cancellation.  Its definition must precede the two-point and four-point proofs, and it must be applied identically to toy and actual-zeta packets.
+\end{audit}
+
+\section{Toy/off-line packet model}
+\label{sec:toy-offline-packet-model}
+
+\begin{definition}[Toy/off-line local model]
+\label{def:toy-offline-model}
+\Core\ \Open\
+A toy/off-line local model is a model packet \(\Toy_\rho\) built from the local symmetry data of a hypothetical off-line zero.  It must use the same local coordinate, scale, jet basis, same-point Gram normalization, and quotient map as the actual-zeta packet.
+\end{definition}
+
+\begin{theorem}[Toy anomaly visibility]
+\label{thm:toy-anomaly-visibility-target}
+\Core\ \Open\
+For every scale-admissible off-line toy packet \(\Toy_\rho\), the quotient-transverse jet--Gram anomaly satisfies
+\[
+        \|\Pi_{\trans}\mathcal A_{\toy}(\Toy_\rho)\|
+        \ge \Scale^{-A_{\toy}}
+\]
+for some fixed exponent \(A_{\toy}\), outside explicitly declared singular or transition loci.
+\end{theorem}
+
+\begin{dependencies}
+\item Exact definition of \(\mathcal A_{\toy}\).
+\item Positivity and polynomial nondegeneracy of toy same-point Gram blocks.
+\item Verification that excluded loci are either impossible for packet entry or routed separately.
+\end{dependencies}
+
+\begin{audit}{toy anomaly}
+\begin{enumerate}[label=\textup{A\arabic*.},leftmargin=*]
+\item State the toy model before choosing the quotient.
+\item Check the anomaly lower bound under all permitted local reparametrizations.
+\item Verify whether the bound is two-point, four-point, or requires an \(N\)-point aggregation.
+\end{enumerate}
+\end{audit}
+
+\section{Actual-zeta packet model}
+\label{sec:actual-zeta-packet-model}
+
+\begin{definition}[Actual-zeta local phase and canonical source]
+\label{def:actual-zeta-local-phase-canonical-source}
+\Core\ \Open\
+On an ordinary smooth actual-zeta packet, fix a real completed critical-line scalar or phase \(\Ph_\zeta\).  Define
+\[
+        q_\zeta:=\D\Ph_\zeta,
+        \qquad
+        q''_{\can}:=\D^2q_\zeta=\D^3\Ph_\zeta.
+\]
+The object \(q''_{\can}\) is the full actual-zeta source curvature in the chosen packet normalization.  It is not to be replaced by an affine-subtracted complement, a one-sided approximate-functional-equation truncation, or a toy proxy unless a transfer theorem with error bounds has been proved.
+\end{definition}
+
+\begin{checkpoint}[actual-zeta convention]
+\label{chk:actual-zeta-convention}
+\Core\
+Each actual-zeta packet proof must specify:
+\begin{enumerate}[label=\textup{Z\arabic*.},leftmargin=*]
+\item the exact real scalar/phase used to define \(\Ph_\zeta\);
+\item the treatment of critical-line zeros inside or near the packet;
+\item the normalized derivative \(\D\);
+\item the source curvature \(q''_{\can}\) and all allowed approximations to it;
+\item the chart-regularity lower bound.
+\end{enumerate}
+\end{checkpoint}
+
+\begin{hypothesis}[Actual-zeta transverse suppression]
+\label{hyp:actual-zeta-transverse-suppression}
+\Open\
+For each retained actual-zeta packet, after the certified normalization and cancellation procedure,
+\[
+        \|\Pi_{\trans}\mathcal A_\zeta(\Packet_\rho)\|
+        \le \Scale^{-B}
+\]
+with \(B>A_{\toy}\) after all losses, or with a structurally exact vanishing in the relevant quotient.
+\end{hypothesis}
+
+\begin{remark}[Role of source energy]
+This hypothesis may be proved in two different ways: either directly from jet--Gram geometry and finite-dimensional cancellation, or with additional energy from actual-zeta/Hardy source information.  The proof must state which route it uses.
+\end{remark}
+
+\section{Two-point closure target}
+\label{sec:two-point-closure-target}
+
+\begin{theorem}[Two-point jet--Gram closure]
+\label{thm:two-point-jetgram-closure-target}
+\Core\ \Open\
+Under the two-point packet hypotheses and the chosen quotient \(\Pi_{\trans}\), the two-point local comparison supplies the required lower/upper separation between the toy/off-line anomaly and the actual-zeta transverse channel, with polynomial loss.
+\end{theorem}
+
+\begin{dependencies}
+\item Same-point and cross-block jet--Gram limits, \Cref{lem:same-point-jetgram-limit,lem:cross-jetgram-limit}.
+\item Finite-scale expansion and whitening error bounds, \Cref{sec:finite-scale-packet-blocks}.
+\item Gauge-safe quotient, \Cref{hyp:gauge-safe-quotient}.
+\item One of the energy-supply nodes in \Cref{sec:energy-supply-module}, if pure jet--Gram estimates do not close.
+\end{dependencies}
+
+\begin{lossledger}
+\item Whitening loss.
+\item Finite-scale Taylor remainder.
+\item Projection/quotient condition number.
+\item Packet extraction loss.
+\item Optional source-energy transfer loss, used only if invoked.
+\end{lossledger}
+
+\begin{problem}[Pure two-point closure]
+\label{prob:pure-two-point-closure}
+\Open\
+Prove \Cref{thm:two-point-jetgram-closure-target} without Hardy/source-transfer input.
+\end{problem}
+
+\begin{problem}[Hardy-assisted two-point closure]
+\label{prob:hardy-assisted-two-point-closure}
+\Optional\ \Open\
+Assuming an actual-zeta/Hardy source-energy estimate of the form specified in \Cref{hyp:hardy-assisted-energy}, prove \Cref{thm:two-point-jetgram-closure-target}.
+\end{problem}
+
+\begin{audit}{two-point closure}
+A completed proof must mark exactly one of \Cref{prob:pure-two-point-closure,prob:hardy-assisted-two-point-closure} as solved, or must split the theorem into two versions.  Do not let Hardy energy enter implicitly through notation such as \(q''_{\can}\) unless the dependency line says so.
+\end{audit}
+
+\section{Four-point closure target}
+\label{sec:four-point-closure-target}
+
+\begin{theorem}[Four-point jet--Gram closure]
+\label{thm:four-point-jetgram-closure-target}
+\Core\ \Open\
+For every scale-admissible four-point packet attached to an off-line symmetry quartet, the four-point local comparison produces the required transverse obstruction or carrier contradiction after quotienting value/gauge/background directions, with polynomial loss.
+\end{theorem}
+
+\begin{dependencies}
+\item Two-point closure or an explicit statement that the four-point proof bypasses the two-point theorem.
+\item Four-point block decomposition in the same jet basis as \Cref{sec:finite-scale-packet-blocks}.
+\item Symmetry-packet bookkeeping for \(\rho,\bar\rho,1-\rho,1-\bar\rho\).
+\item Carrier or quotient nondegeneracy, with polynomial Gram lower bound.
+\item One of the energy-supply nodes in \Cref{sec:energy-supply-module}, if pure jet--Gram estimates do not close.
+\end{dependencies}
+
+\begin{problem}[Pure four-point closure]
+\label{prob:pure-four-point-closure}
+\Open\
+Prove \Cref{thm:four-point-jetgram-closure-target} using only local jet--Gram geometry, symmetry, quotient algebra, and finite-dimensional cancellation.
+\end{problem}
+
+\begin{problem}[Hardy-assisted four-point closure]
+\label{prob:hardy-assisted-four-point-closure}
+\Optional\ \Open\
+Assuming the source-energy estimate in \Cref{hyp:hardy-assisted-energy}, prove \Cref{thm:four-point-jetgram-closure-target}.
+\end{problem}
+
+\begin{audit}{four-point closure}
+The four-point proof must specify whether the mixed blocks are treated as independent finite-dimensional data, as an aggregation of two-point blocks, or through an \(N\)-point cancellation operator.  These are different proof routes and should not be conflated.
+\end{audit}
+
+\section{Odd cancellation and finite \texorpdfstring{$N$}{N}-point projectors}
+\label{sec:odd-cancellation-npoint}
+
+\begin{definition}[Odd-jet cancellation operator]
+\label{def:odd-jet-cancellation-operator}
+\Core\ \Open\
+An \(N\)-point odd-jet cancellation operator is a finite-support operator \(\mathcal C_N\) acting on a local transverse germ such that:
+\begin{enumerate}[label=\textup{C\arabic*.},leftmargin=*]
+\item the constant mode is preserved;
+\item odd jets of order \(<2N-1\) in the target channel are annihilated;
+\item the first surviving odd term is explicitly identified;
+\item the coefficient growth and support scale are polynomially controlled in the packet scale.
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}[Odd-cancellation coefficient identity]
+\label{lem:odd-cancellation-coefficient-identity}
+\Core\ \Open\
+State and prove the exact finite coefficient identity used by \(\mathcal C_N\).
+\end{lemma}
+
+\begin{proof}[Proof to insert]
+Insert a standalone finite-difference or interpolation proof.  This proof should not depend on zeta, Hardy theory, or the toy model.
+\end{proof}
+
+\begin{checkpoint}[odd-cancellation use]
+\label{chk:odd-cancellation-use}
+\Core\
+When \(\mathcal C_N\) is used, record whether it acts on the toy anomaly, the zeta transverse channel, or both.  Record the exact order at which the first uncancelled term enters and compare it with all finite-scale remainders.
+\end{checkpoint}
+
+\section{Optional energy-supply module}
+\label{sec:energy-supply-module}
+
+This section is deliberately downstream of the local jet--Gram definitions.  Its role is to provide optional extra energy from actual zeta data if the two-point or four-point closures cannot be proved purely locally.
+
+\subsection{Abstract energy target}
+\label{subsec:abstract-energy-target}
+
+\begin{hypothesis}[Abstract source-energy estimate]
+\label{hyp:abstract-source-energy}
+\Optional\ \Open\
+On each retained packet interval \(I\), the canonical source curvature satisfies an estimate of the form
+\begin{equation}
+\label{eq:abstract-source-energy}
+        \int_I |q''_{\can}(m)|^2\,dm \ge \Scale^{-A_E}|I|,
+\end{equation}
+possibly with additional weights, anisotropy factors, or carrier projections required by the two-point or four-point theorem.
+\end{hypothesis}
+
+\begin{remark}[Energy is not automatically enough]
+The estimate \eqref{eq:abstract-source-energy} is an energy input, not a closure theorem.  A separate transfer step must show that this energy enters the specific quotient or carrier used in \Cref{thm:two-point-jetgram-closure-target} or \Cref{thm:four-point-jetgram-closure-target}.
+\end{remark}
+
+\begin{hypothesis}[Energy-to-jet--Gram transfer]
+\label{hyp:energy-to-jetgram-transfer}
+\Optional\ \Open\
+The source-energy estimate in \Cref{hyp:abstract-source-energy} transfers to the required two-point or four-point jet--Gram quotient with polynomial loss.
+\end{hypothesis}
+
+\subsection{Hardy-assisted option}
+\label{subsec:hardy-assisted-option}
+
+\begin{hypothesis}[Hardy-assisted energy]
+\label{hyp:hardy-assisted-energy}
+\Optional\ \Open\
+There is a Hardy-normalized actual-zeta source \(u_H\) and a transfer theorem identifying it with the canonical source curvature on retained packets,
+\[
+        u_H \longrightarrow q''_{\can},
+\]
+with polynomial loss, such that the resulting source energy satisfies the estimate required by \Cref{hyp:abstract-source-energy} and transfers through \Cref{hyp:energy-to-jetgram-transfer}.
+\end{hypothesis}
+
+\begin{audit}{Hardy-assisted option}
+\begin{enumerate}[label=\textup{H\arabic*.},leftmargin=*]
+\item Define \(u_H\) exactly and in the same coordinate convention as \(q''_{\can}\).
+\item Prove or state the transfer map \(u_H\to q''_{\can}\) with all chart and normalization losses.
+\item Prove that the energy lands in the two-point/four-point quotient actually used downstream.
+\item Keep this module optional unless a local closure theorem explicitly invokes it.
+\end{enumerate}
+\end{audit}
+
+\subsection{Pure jet--Gram option}
+\label{subsec:pure-jetgram-option}
+
+\begin{problem}[Local energy from jet--Gram geometry]
+\label{prob:local-energy-from-jetgram}
+\Core\ \Open\
+Derive the energy or coercivity estimates needed by the two-point and four-point closures from the finite jet--Gram packet hypotheses alone, without using Hardy/source-transfer input.
+\end{problem}
+
+\begin{audit}{pure jet--Gram energy}
+A pure proof must not use actual-zeta arithmetic hidden in a phrase such as ``canonical source'' or ``Hardy normalization.''  It may use only what is stated in the local packet hypotheses.
+\end{audit}
+
+\section{Local obstruction theorem}
+\label{sec:local-obstruction-theorem}
+
+\begin{theorem}[Local jet--Gram obstruction target]
+\label{thm:local-jetgram-obstruction-target}
+\Core\ \Open\
+Assume packet entry, Gram nondegeneracy, the gauge-safe quotient, toy anomaly visibility, actual-zeta transverse suppression, and the needed two-point and/or four-point closure theorem.  Then no retained actual-zeta packet can realize the local jet--Gram data forced by an off-line toy packet.
+\end{theorem}
+
+\begin{proof}[Proof to insert]
+The proof should be a short comparison argument after all local components are proved.  It should not contain new analytic estimates.  Its only job is to align the toy lower bound and zeta upper bound in the same norm and verify that the exponents leave a positive contradiction gap.
+\end{proof}
+
+\begin{lossledger}
+\item Toy anomaly lower exponent \(A_{\toy}\).
+\item Actual-zeta transverse upper exponent \(B\).
+\item Whitening and quotient exponents.
+\item Energy-transfer exponent, if invoked.
+\item Extraction and packet-entry exponents.
+\item Required final inequality: the retained lower exponent is smaller than the upper-suppression exponent after all losses.
+\end{lossledger}
+
+\section{Referee checklist for each insertion}
+\label{sec:referee-checklist}
+
+For each imported or newly written result, fill the following card before using it downstream.
+
+\begin{center}
+\begin{tabular}{p{0.28\linewidth}p{0.62\linewidth}}
+\toprule
+Item & Required entry \\
+\midrule
+Statement status & \Core, \Optional, \Open, \Conditional, \Verified, or \Archive \\
+Inputs & Exact hypotheses and packet class \\
+Output & Quantitative conclusion with norm and scale \\
+Coordinate & Physical coordinate or normalized derivative \(\D\) \\
+Gauge & Phase/affine/chart conventions \\
+Whitening & Gram lower bounds and condition-number loss \\
+Energy use & None, pure jet--Gram, Hardy-assisted, or other actual-zeta input \\
+Remainders & Taylor, finite-scale, extraction, and transfer errors \\
+Downstream use & The first theorem that cites this result \\
+Failure modes & Singular chart, Gram degeneracy, loss explosion, quotient ambiguity \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\appendix
+
+\section{Archive map}
+\label{app:archive-map}
+
+The older large draft should be treated as an archive/source mine.  Recommended archive labels:
+\begin{enumerate}[label=\textup{A\arabic*.},leftmargin=*]
+\item \textbf{Kernel and jet normalization}: source for formulas in \Cref{sec:local-phase-kernel-jetgram,sec:finite-scale-packet-blocks}.
+\item \textbf{Toy anomaly computations}: candidate source for \Cref{thm:toy-anomaly-visibility-target}.
+\item \textbf{Odd cancellation}: candidate source for \Cref{sec:odd-cancellation-npoint}.
+\item \textbf{Two-point/four-point closure attempts}: source mine only; do not import no-go commentary into the core text.
+\item \textbf{Hardy/source-transfer work}: optional energy-supply material for \Cref{sec:energy-supply-module}, not the mandatory spine.
+\item \textbf{No-go and audit ledgers}: keep outside the core proof file unless a specific obstruction must be cited to justify a branch split.
+\end{enumerate}
+
+\section{Open-problem ledger}
+\label{app:open-problem-ledger}
+
+\begin{enumerate}[label=\textup{O\arabic*.},leftmargin=*]
+\item Prove the same-point and cross-block jet--Gram formulas in the exact conventions used here.
+\item Select and freeze the quotient \(\Pi_{\trans}\).
+\item Prove toy anomaly visibility in that quotient.
+\item Prove two-point closure purely, or prove the Hardy-assisted version with explicit energy transfer.
+\item Prove four-point closure purely, or prove the Hardy-assisted version with explicit energy transfer.
+\item Prove actual-zeta transverse suppression in the same quotient and norm.
+\item Prove packet entry from a hypothetical high off-line zero.
+\item Complete the final exponent/loss inequality in \Cref{thm:local-jetgram-obstruction-target}.
+\end{enumerate}
+
+\end{document}
