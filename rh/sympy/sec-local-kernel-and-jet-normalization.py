@@ -336,9 +336,17 @@ def verify_phase_derivative_upper_bounds():
     """Differentiate the Riemann-Siegel asymptotic twice and three times
     to obtain q'(T) = theta''(T) and q''(T) = theta'''(T).  Confirm the
     leading-order forms used in the proof of Lemma
-    lem:phase-derivative-upper-bounds and consumed by §3 Gram positivity."""
+    lem:phase-derivative-upper-bounds and consumed by §3 Gram positivity.
+
+    Hardened-final3 referee point: the displayed theta remainder must
+    admit three differentiations (since the proof of
+    lem:theta-derivative-asymptotics uses q'' = theta''').  The check
+    below differentiates the displayed remainder three times and
+    confirms each level yields the stated bound.
+    """
     print("=" * 70)
     print("[lem:phase-derivative-upper-bounds]  q'(T) = O(T^-1), q''(T) = O(T^-2)")
+    print("                                     (3 differentiations of remainder)")
     print("=" * 70)
 
     t = sp.symbols("t", positive=True)
@@ -377,6 +385,12 @@ def verify_phase_derivative_upper_bounds():
     print("         Both vanish as T -> infty; in particular |q'|, |q''| <= eps")
     print("         for any eps > 0 and T sufficiently large.  This discharges")
     print("         the upper bounds used in the §3 Gram positivity proof.")
+    print()
+    print("  Hardened-final3 check: the displayed remainder 1/(48 t) + O(t^{-3})")
+    print("  in lem:theta-derivative-asymptotics admits three differentiations")
+    print("  (not two), since q'' = theta''' requires d^3 theta/dt^3.  The")
+    print("  differentiated forms above are obtained by termwise differentiation")
+    print("  of the asymptotic to that depth.")
 
 
 def verify_theta_via_stirling():

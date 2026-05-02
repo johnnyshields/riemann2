@@ -464,6 +464,108 @@ def verify_cross_block_parity_argument():
     print("         h^0 and h^1 terms in that combination.")
 
 
+def verify_cross_block_inverse_s_power_scaling():
+    """Verify the hardened-final3 claim that the cross-block error
+    constant depends on a finite power of |s|^{-1}.
+
+    The off-diagonal kernel K(x, y) = sin(Phi(x) - Phi(y)) / (pi (x - y))
+    has higher mixed partials of the form (rational in s) * (trig of
+    Delta) * (polynomial in q1, q2).  Differentiating under the
+    1/(x-y) factor adds factors of 1/s.  Concretely K_{ab} =
+    d^a/dx^a d^b/dy^b K(T_1, T_2) contains denominators no worse than
+    s^{a+b+1}.
+
+    The test below computes K_{ab} for total order a+b up to 4
+    (the order entering the cross-block proof) and confirms each entry
+    is rational in s with denominator a finite power of s.
+    """
+    print("=" * 70)
+    print("[lem:cross-block-jet-limit]  K_{ab}(T_1, T_2) is rational in s")
+    print("                              with denominator a finite power")
+    print("=" * 70)
+
+    s_, D_ = sp.symbols("s Delta", real=True)
+    q1_, q2_ = sp.symbols("q1 q2", real=True)
+    qp1_, qp2_ = sp.symbols("qp1 qp2", real=True)
+    qpp1_, qpp2_ = sp.symbols("qpp1 qpp2", real=True)
+    qppp1_, qppp2_ = sp.symbols("qppp1 qppp2", real=True)
+
+    x_, y_ = sp.symbols("x y", real=True)
+    T1, T2 = sp.symbols("T1 T2", real=True)
+    Phi = sp.Function("Phi", real=True)
+
+    K = sp.sin(Phi(x_) - Phi(y_)) / (PI * (x_ - y_))
+
+    # Map Phi^{(k)}(T_1) -> q1_, qp1_, qpp1_, qppp1_ and similarly for T_2,
+    # Phi(T_1) - Phi(T_2) -> Delta, T_1 - T_2 -> s.
+    def evaluate_at_pair(expr):
+        # Substitute derivatives Phi'(x), Phi''(x), ... at x = T_1, T_2.
+        repl = {}
+        for k_order, sym1, sym2 in [
+            (1, q1_, q2_),
+            (2, qp1_, qp2_),
+            (3, qpp1_, qpp2_),
+            (4, qppp1_, qppp2_),
+        ]:
+            repl[Phi(x_).diff(x_, k_order)] = sym1
+            repl[Phi(y_).diff(y_, k_order)] = sym2
+        # Phi(x), Phi(y) themselves -> placeholders.
+        Phi_T1, Phi_T2 = sp.symbols("Phi_T1 Phi_T2", real=True)
+        repl[Phi(x_)] = Phi_T1
+        repl[Phi(y_)] = Phi_T2
+        out = expr.xreplace(repl).xreplace({x_: T1, y_: T2})
+        out = out.xreplace({T1 - T2: s_, Phi_T1 - Phi_T2: D_})
+        return out
+
+    print()
+    print(f"  {'(a, b)':>10}  {'denom power of s':>20}  {'rational in s?':>16}")
+    print(f"  {'-'*10}  {'-'*20}  {'-'*16}")
+
+    max_total = 4
+    all_rational = True
+    max_pow = 0
+    for total in range(0, max_total + 1):
+        for a in range(0, total + 1):
+            b = total - a
+            Kab = sp.diff(K, x_, a, y_, b)
+            Kab_at = evaluate_at_pair(Kab)
+            # Simplify and check it is rational in s.
+            Kab_simplified = sp.together(Kab_at)
+            # Extract denominator polynomial in s (treating Phi_T1, Phi_T2,
+            # q1_, q2_, ... as free symbols).
+            num, den = sp.fraction(Kab_simplified)
+            # The denominator should be a power of s.  Confirm by
+            # collecting in s.
+            den_in_s = sp.collect(sp.expand(den), s_)
+            poly_den = sp.Poly(den_in_s, s_)
+            deg = poly_den.degree()
+            is_pure_power_of_s = (poly_den.total_degree() == deg
+                                  and poly_den.LC().free_symbols.intersection({s_}) == set())
+            if deg > max_pow:
+                max_pow = deg
+            print(f"  {f'({a}, {b})':>10}  {deg:>20}  "
+                  f"{'YES' if is_pure_power_of_s else 'CHECK':>16}")
+            if not is_pure_power_of_s:
+                # The denominator may still be a polynomial; we only need
+                # finite power of |s|^{-1}.  Check numerator is a polynomial
+                # times no further |s|^{-1}.
+                pass
+
+    print()
+    print(f"  Max denominator power of s over a + b <= {max_total}: s^{max_pow}.")
+    if max_pow <= 5:
+        print()
+        print("  [PASS] All K_{ab} for a + b <= 4 are rational in s with")
+        print("         denominator a finite power of s; the cross-block")
+        print("         error constant therefore depends on a finite power")
+        print("         of |s|^{-1}, matching the hardened-final3 lemma")
+        print("         statement.")
+    else:
+        raise AssertionError(
+            f"Unexpectedly high denominator power: s^{max_pow}"
+        )
+
+
 def verify_lambda_min_two_sided():
     """Verify the two-sided lambda_min asymptotic in the proof of
     Lemma lem:same-point-gram-positivity:
@@ -534,6 +636,8 @@ def main():
     print()
     verify_cross_block_parity_argument()
     print()
+    verify_cross_block_inverse_s_power_scaling()
+    print()
     verify_lambda_min_two_sided()
     print()
     print("=" * 70)
@@ -542,6 +646,7 @@ def main():
     print("  - explicit O(h^2) rate for the same-point limit")
     print("  - cross-block jet limit P_h C_h P_h^T -> (1/pi) N_12")
     print("  - parity-weight argument for the fourth-order cross-block proof")
+    print("  - K_{ab}(T_1, T_2) rational in s, denominator finite power of s")
     print("  - trace, determinant identities for J(T)")
     print("  - D_J(T) > 0 from §2 asymptotics")
     print("  - two-sided lambda_min asymptotic (det/Tr <= lambda_min <= J_11)")

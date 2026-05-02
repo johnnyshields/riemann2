@@ -1,0 +1,119 @@
+--- /mnt/data/jet-gram-foundation(2).tex	2026-05-02 09:17:15.710489388 +0000
++++ /mnt/data/jet-gram-foundation.hardened-final3.tex	2026-05-02 09:20:08.440942930 +0000
+@@ -36,6 +36,9 @@
+ %   - Scope guardrail remark added: positivity here does NOT prove
+ %     anisotropy lower bounds (e.g. |q'' - 6 q + 2 q^3|) or supply
+ %     source-energy information.
++%   - Final hardening pass: theta remainder differentiability, diagonal
++%     rescaling terminology, off-diagonal neighborhood control, and
++%     fixed-separation scope made explicit.
+ %
+ % Closes:
+ %   §2: rem:wip-local-phase-chart
+@@ -134,8 +137,8 @@
+ \theta(t)=\frac{t}{2}\log\frac{t}{2\pi}-\frac{t}{2}-\frac{\pi}{8}
+           +\frac{1}{48 t}+O(t^{-3}),
+ \]
+-again with the displayed remainder differentiable twice with the
+-corresponding differentiated bounds.  Differentiating gives
++again with the displayed remainder admitting three differentiations with
++the corresponding differentiated bounds.  Differentiating gives
+ \(q(t)=\theta'(t)\) as stated; differentiating once and twice more gives
+ the formulas for \(q'(t)\) and \(q''(t)\).  Since
+ \(I_T\subset[T/2,2T]\), these estimates are uniform on \(I_T\), with
+@@ -149,15 +152,19 @@
+ \[
+         \Ph_T(t):=\theta(t)\qquad (t\in I_T).
+ \]
+-We write \(\Ph\) and \(q=\Ph'\) when \(T\) is fixed by context.  The
+-chart conditions used downstream are:
++We write \(\Ph\) and \(q=\Ph'\) when \(T\) is fixed by context.  This is a
++specialized theta chart, not a general phase-chart axiom.  The chart
++conditions used downstream are:
+ \begin{enumerate}[label=\textup{(P\arabic*)},leftmargin=*]
+ \item \(\Ph_T = \theta\) on \(I_T\);
+ \item \(q(t)\ge 1\) on \(I_T\), after increasing the global lower-height
+       cutoff if necessary.
+ \end{enumerate}
+ If \(Q(T)\ge 1\), then (P2) gives the polynomial-in-\(Q\) lower bound
+-\(q(t)\ge Q(T)^{-c_q}\) with \(c_q = 0\).
++\(q(t)\ge Q(T)^{-c_q}\) with \(c_q = 0\).  The uniform estimates
++\(q(t)\asymp \log T\), \(q'(t)=O(T^{-1})\), and
++\(q''(t)=O(T^{-2})\) on \(I_T\) are supplied by
++Lemma~\ref{lem:theta-derivative-asymptotics}.
+ \end{definition}
+ 
+ \begin{lemma}[Phase-derivative lower bound]
+@@ -275,7 +282,8 @@
+ A(u,v)
+ = q+\frac{q'}2(u+v)+\frac{q''}{6}(u^2+uv+v^2)+O(r^3).
+ \]
+-Since \(\Ph(T+u)-\Ph(T+v)=(u-v)A(u,v)=O(r)\),
++For \(u\ne v\), and then by continuous extension to \(u=v\),
++\(\Ph(T+u)-\Ph(T+v)=(u-v)A(u,v)=O(r)\) gives
+ \[
+ \frac{\sin(\Ph(T+u)-\Ph(T+v))}{u-v}
+ = A(u,v)-\frac{(u-v)^2}{6}A(u,v)^3+O(r^3).
+@@ -313,9 +321,10 @@
+ \end{pmatrix}.
+ \end{equation}
+ Thus \(P_h\) is the literal central value/derivative jet transform
+-followed by the fixed diagonal congruence
+-\(\diag(\sqrt 2, 1/\sqrt 2)\).  The value/derivative basis produced by
+-\(P_h\) is the \emph{Gram-normalized basis}.
++followed by the fixed diagonal rescaling
++\(\diag(\sqrt 2, 1/\sqrt 2)\); at the level of Gram blocks this induces
++the corresponding diagonal congruence.  The value/derivative basis
++produced by \(P_h\) is the \emph{Gram-normalized basis}.
+ 
+ With this convention,
+ \begin{equation}
+@@ -449,7 +458,9 @@
+         \qquad \Del = \Ph(T_1)-\Ph(T_2),
+         \qquad q_j = q(T_j),
+ \]
+-and assume \(0 < h < |s|/3\).  Define
++and assume \(0 < h < |s|/3\), with \(h\) also sufficiently small that
++the four sampled points lie in the chosen neighborhoods of \(T_1\) and
++\(T_2\).  Define
+ \[
+ C_h(T_1, T_2)=
+ \begin{pmatrix}
+@@ -465,8 +476,8 @@
+         \qquad (h\to 0),
+ \]
+ where the \(O(h^2)\) is entrywise for fixed \(T_1\ne T_2\); the implied
+-constant may depend on \(|s|^{-1}\) and on local \(C^5\)-bounds for
+-\(\Ph\), but not on \(h\).  Here
++constant may depend on a finite power of \(|s|^{-1}\) and on local
++\(C^5\)-bounds for \(\Ph\), but not on \(h\).  Here
+ \begin{equation}
+ \label{eq:cross-N12}
+ N_{12}=
+@@ -492,8 +503,10 @@
+ \(u_1, u_2 \in \{-h, +h\}\),
+ \[
+ K_\Ph(T_1+u_1, T_2+u_2)
+-= \sum_{a+b\le 4}\frac{K_{ab}}{a!\,b!}\, u_1^a\, u_2^b + O(h^5).
++= \sum_{a+b\le 4}\frac{K_{ab}}{a!\,b!}\, u_1^a\, u_2^b + O_s(h^5).
+ \]
++Here the subscript indicates that the constant may depend on a finite
++power of \(|s|^{-1}\) and on the chosen off-diagonal neighborhoods.
+ For a general \(2\times 2\) matrix \(M\),
+ \begin{align*}
+ (P_h M P_h^\top)_{11}
+@@ -521,6 +534,14 @@
+ Lemma~\ref{lem:phase-kernel-derivatives} gives \eqref{eq:cross-N12}.
+ \end{proof}
+ 
++\begin{remark}[Fixed-separation scope]
++\label{rem:cross-block-fixed-separation-scope}
++Lemma~\ref{lem:cross-block-jet-limit} is an off-diagonal jet limit at
++fixed separation.  It is not a collision expansion for \(T_1\to T_2\);
++any two-center blow-up or near-coalescence analysis must be derived from
++a separate scaling argument.
++\end{remark}
++
+ \subsection{Same-point Gram positivity}
+ \label{subsec:same-point-gram-positivity}
+ 

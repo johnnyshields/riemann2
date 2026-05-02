@@ -365,6 +365,56 @@ def main():
     print("         confirms the O(h^2) rate from the fourth-order parity argument.")
 
     # ----------------------------------------------------------------
+    # Cross-block error vs |s|: confirms finite power of |s|^{-1}.
+    # ----------------------------------------------------------------
+    print()
+    print("[cross-block error scales as a finite power of |s|^{-1}]")
+    print()
+    print("  Boost mp.dps so the residual is resolved for h^2 << precision")
+    print("  floor; fix h = 1e-6 with h << |s|/3 for all sampled s; sweep")
+    print("  s and fit the prefactor C(s) = err / h^2 against |s|.")
+    print()
+    saved_dps_local = mp.dps
+    mp.dps = 80
+    try:
+        print(f"  {'s':>10}  {'h':>10}  {'err':>16}  "
+              f"{'C(s) = err / h^2':>20}")
+        print(f"  {'-'*10}  {'-'*10}  {'-'*16}  {'-'*20}")
+        T1_fixed = heights[2]  # 1e5
+        h_fixed = mpf("1e-6")
+        s_grid = [mpf("0.3"), mpf("1"), mpf("3"),
+                  mpf("10"), mpf("30"), mpf("100")]
+        Cs_list = []
+        for s in s_grid:
+            T1 = T1_fixed
+            T2 = T1 + s
+            N12 = N12_over_pi(T1, T2)
+            M = numerical_cross_block(T1, T2, h_fixed)
+            err = mat2_max_abs_diff(M, N12)
+            Cs = err / h_fixed**2
+            Cs_list.append(Cs)
+            print(f"  {float(s):10.4f}  {float(h_fixed):10.0e}  "
+                  f"{float(err):16.6e}  {float(Cs):20.6e}")
+
+        # Fit log-log slope of C(s) against 1/|s|: C(s) ~ K / |s|^k.
+        # Equivalently, log C(s) vs log(1/|s|) has slope k.
+        inv_s = [1 / s for s in s_grid]
+        C_slope = loglog_slope(inv_s, Cs_list)
+        print()
+        print(f"  log C(s) vs log(1/|s|) slope: {float(C_slope):.4f}")
+        if mpf("0.5") < C_slope < mpf("6"):
+            print(f"  [PASS] C(s) ~ |s|^(-{float(C_slope):.2f}); the cross-block")
+            print(f"         constant depends on a finite power of |s|^{{-1}},")
+            print(f"         matching the hardened-final3 lemma statement.")
+        else:
+            raise AssertionError(
+                f"Cross-block prefactor scaling is not a finite power: "
+                f"slope = {float(C_slope)}"
+            )
+    finally:
+        mp.dps = saved_dps_local
+
+    # ----------------------------------------------------------------
     # h < |s|/3: sampled square stays |s + u_1 - u_2| >= |s|/3.
     # ----------------------------------------------------------------
     print()

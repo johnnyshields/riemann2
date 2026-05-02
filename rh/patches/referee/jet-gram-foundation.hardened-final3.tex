@@ -36,14 +36,9 @@
 %   - Scope guardrail remark added: positivity here does NOT prove
 %     anisotropy lower bounds (e.g. |q'' - 6 q + 2 q^3|) or supply
 %     source-energy information.
-%   - Final hardening: theta remainder admits three differentiations
-%     (q'' = theta'''), local phase chart marked as specialized
-%     theta chart, diagonal-kernel proof made explicit at u = v,
-%     P_h diagonal rescaling vs Gram-block congruence distinguished,
-%     cross-block hypothesis includes neighborhood containment, error
-%     constant depends on a finite power of |s|^{-1}, and a
-%     fixed-separation scope remark prevents misuse as a collision
-%     expansion.
+%   - Final hardening pass: theta remainder differentiability, diagonal
+%     rescaling terminology, off-diagonal neighborhood control, and
+%     fixed-separation scope made explicit.
 %
 % Closes:
 %   §2: rem:wip-local-phase-chart
@@ -81,15 +76,18 @@
 \statuslean[rh/lean/RH/LocalKernelJetNormalization.lean]{in-progress}
 \par\medskip
 
-Fix a height parameter \(T\), and let \(I_T\) denote an interval
-centered at \(T\) with
+All local blocks in this paper are extracted from the Riemann--Siegel
+phase on high-height real windows.  Throughout this section, a height
+parameter \(T\) is assumed sufficiently large, and \(I_T\) denotes an
+interval centered at \(T\) with
 \[
         |I_T|\ll Q(T)^{-1},
         \qquad I_T\subset [T/2,2T].
 \]
-The Stirling estimates of
-Lemma~\ref{lem:theta-derivative-asymptotics} are uniform on \(I_T\)
-under this inclusion.
+The second inclusion follows automatically at high height for every
+slowly growing choice of \(Q(T)\) used below, but it is recorded
+because the uniformity of the Stirling estimates is used on the whole
+window.
 
 \subsection{The Riemann--Siegel phase chart}
 \label{subsec:local-phase-chart}
@@ -103,10 +101,10 @@ For \(t>0\), define
 \label{eq:theta-definition}
  \theta(t)
  := \Im L\!\left(\frac14+\frac{it}{2}\right)
-    -\frac{t}{2}\log\pi,
+    -\frac{t}{2}\log\pi.
 \end{equation}
-and \(Z(t):=e^{i\theta(t)}\zeta(1/2+it)\).  The functional equation
-gives
+This is the standard Riemann--Siegel phase.  With
+\(Z(t):=e^{i\theta(t)}\zeta(1/2+it)\), the functional equation gives
 \[
         \zeta\!\left(\tfrac12+it\right)
         =e^{-i\theta(t)}\,Z(t),
@@ -139,8 +137,8 @@ gives the standard Riemann--Siegel expansion
 \theta(t)=\frac{t}{2}\log\frac{t}{2\pi}-\frac{t}{2}-\frac{\pi}{8}
           +\frac{1}{48 t}+O(t^{-3}),
 \]
-again with the displayed remainder admitting three differentiations
-with the corresponding differentiated bounds.  Differentiating gives
+again with the displayed remainder admitting three differentiations with
+the corresponding differentiated bounds.  Differentiating gives
 \(q(t)=\theta'(t)\) as stated; differentiating once and twice more gives
 the formulas for \(q'(t)\) and \(q''(t)\).  Since
 \(I_T\subset[T/2,2T]\), these estimates are uniform on \(I_T\), with
@@ -154,9 +152,9 @@ together with the real smooth phase
 \[
         \Ph_T(t):=\theta(t)\qquad (t\in I_T).
 \]
-When \(T\) is fixed by context, \(\Ph := \Ph_T\) and \(q := \Ph'\).
-This is a specialized theta chart, not a general phase-chart axiom.
-The chart conditions used downstream are:
+We write \(\Ph\) and \(q=\Ph'\) when \(T\) is fixed by context.  This is a
+specialized theta chart, not a general phase-chart axiom.  The chart
+conditions used downstream are:
 \begin{enumerate}[label=\textup{(P\arabic*)},leftmargin=*]
 \item \(\Ph_T = \theta\) on \(I_T\);
 \item \(q(t)\ge 1\) on \(I_T\), after increasing the global lower-height
@@ -268,14 +266,18 @@ K_x(T,T)=K_y(T,T)=\frac{q'(T)}{2\pi},
 \end{lemma}
 
 \begin{proof}
-Set \(x=T+u\), \(y=T+v\), and write \(r=|u|+|v|\); derivatives below
-are evaluated at \(T\).  Factor the phase difference as
+Set \(x=T+u\), \(y=T+v\), and write \(r=|u|+|v|\).  All derivatives
+below are evaluated at \(T\).  To avoid dividing an unfactored remainder
+by \(u-v\), first factor the phase difference:
 \[
-\Ph(T+u)-\Ph(T+v)=(u-v)A(u,v),\qquad
+\Ph(T+u)-\Ph(T+v)=(u-v)A(u,v),
+\]
+where, for \(u\ne v\),
+\[
 A(u,v)=\int_0^1 q\bigl(T+v+\tau(u-v)\bigr)\,d\tau,
 \]
-where the integral form extends continuously to \(u=v\).  Taylor
-expansion of the integrand gives
+and the same formula extends continuously to \(u=v\).  Taylor expansion
+of the integrand gives
 \[
 A(u,v)
 = q+\frac{q'}2(u+v)+\frac{q''}{6}(u^2+uv+v^2)+O(r^3).
@@ -492,10 +494,10 @@ N_{12}=
 \end{lemma}
 
 \begin{proof}
-The kernel is smooth in a neighborhood of \((T_1, T_2)\), and the
-hypothesis \(h<|s|/3\) gives
-\(|s+u_1-u_2|\ge |s|/3\) for \(|u_1|,|u_2|\le h\), bounding the
-Taylor remainder on the sampled square.  Write
+Since \(T_1 \ne T_2\), the kernel is smooth near \((T_1, T_2)\).  The
+condition \(h<|s|/3\) ensures
+\(|s+u_1-u_2|\ge |s|/3\) for \(|u_1|,|u_2|\le h\), so the Taylor
+remainder is controlled on the sampled square.  Write
 \(K_{ab} = \partial_x^a \partial_y^b K_\Ph(T_1, T_2)\).  Taylor
 expansion to total order four gives, uniformly for
 \(u_1, u_2 \in \{-h, +h\}\),
@@ -503,9 +505,9 @@ expansion to total order four gives, uniformly for
 K_\Ph(T_1+u_1, T_2+u_2)
 = \sum_{a+b\le 4}\frac{K_{ab}}{a!\,b!}\, u_1^a\, u_2^b + O_s(h^5).
 \]
-The subscript indicates that the constant may depend on a finite power
-of \(|s|^{-1}\) and on the chosen off-diagonal neighborhoods.  For a
-general \(2\times 2\) matrix \(M\),
+Here the subscript indicates that the constant may depend on a finite
+power of \(|s|^{-1}\) and on the chosen off-diagonal neighborhoods.
+For a general \(2\times 2\) matrix \(M\),
 \begin{align*}
 (P_h M P_h^\top)_{11}
 &= \tfrac12(M_{11} + M_{12} + M_{21} + M_{22}),\\
@@ -536,8 +538,8 @@ Lemma~\ref{lem:phase-kernel-derivatives} gives \eqref{eq:cross-N12}.
 \label{rem:cross-block-fixed-separation-scope}
 Lemma~\ref{lem:cross-block-jet-limit} is an off-diagonal jet limit at
 fixed separation.  It is not a collision expansion for \(T_1\to T_2\);
-any two-center blow-up or near-coalescence analysis must be derived
-from a separate scaling argument.
+any two-center blow-up or near-coalescence analysis must be derived from
+a separate scaling argument.
 \end{remark}
 
 \subsection{Same-point Gram positivity}
