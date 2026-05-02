@@ -1,23 +1,33 @@
 % =============================================================================
-% Patch: §2 sec:local-kernel-and-jet-normalization
+% Patch: jet-Gram foundation
+%   §2  sec:local-kernel-and-jet-normalization
+%   §3  sec:jet-limit-local-blocks
 %
 % Target file:   rh/rh_rebuild.tex
-% Target lines:  307 through 471 (the entire current §2 block).
+% Target lines:  307 through 578 (§2 + §3, contiguous)
 %
-% Action: replace the existing §2 with the content below.
+% Action: replace the existing §2 and §3 with the content below.
 %
 % Closes:
-%   rem:wip-local-phase-chart  (chart construction is closed; the
-%                               only residual is rem:wip-audit-chart-
-%                               regularity-placement, a structural
-%                               audit, not a missing proof)
+%   §2: rem:wip-local-phase-chart
+%       (only residual is rem:wip-audit-chart-regularity-placement,
+%        a structural design audit, not a missing proof)
+%   §3: rem:wip-same-point-jet-limit
+%       rem:wip-cross-block-jet-limit
+%       rem:wip-same-point-gram-positivity
 %
 % Status:
-%   \statusmig    not-started -> migrated
-%   \statussympy  not-started -> verified
-%       (rh/sympy/sec-local-kernel-and-jet-normalization.py)
-%   \statussim    not-started -> verified
-%       (rh/simulation/sec-local-kernel-and-jet-normalization.py)
+%   §2: \statusmig    not-started -> migrated
+%       \statussympy  not-started -> verified
+%           [rh/sympy/sec-local-kernel-and-jet-normalization.py]
+%       \statussim    not-started -> verified
+%           [rh/simulation/sec-local-kernel-and-jet-normalization.py]
+%   §3: \statusmig      not-started -> migrated
+%       \statusreferee  not-started -> in-progress
+%       \statussympy    not-started -> verified
+%           [rh/sympy/sec-jet-limit-local-blocks.py]
+%       \statussim      not-started -> partial
+%           [rh/simulation/sec-jet-limit-local-blocks.py]
 % =============================================================================
 
 % =============================================================================
@@ -252,3 +262,222 @@ congruence \(\diag(\sqrt 2, 1/\sqrt 2)\) of
 throughout this paper.
 \end{remark}
 
+% =============================================================================
+\section{Jet-limit local blocks}
+\label{sec:jet-limit-local-blocks}
+\statuspaper{LIVE}\quad
+\statusmig{migrated}\quad
+\statusreferee{in-progress}\quad
+\statussympy[rh/sympy/sec-jet-limit-local-blocks.py]{verified}\quad
+\statussim[rh/simulation/sec-jet-limit-local-blocks.py]{partial}\quad
+\statuslean{not-started}
+\par\medskip
+
+\subsection{Same-point jet-limit}
+\label{subsec:same-point-jet-limit}
+
+\begin{lemma}[Same-point jet-limit]
+\label{lem:same-point-jet-limit}
+Let
+\[
+A_h(T)=
+\begin{pmatrix}
+K_\Ph(T-h,T-h) & K_\Ph(T-h,T+h)\\
+K_\Ph(T+h,T-h) & K_\Ph(T+h,T+h)
+\end{pmatrix}
+\]
+with row and column order \((T-h,T+h)\).  Then
+\[
+P_h\,A_h(T)\,P_h^\top \;\longrightarrow\; J(T)
+\qquad (h\to 0),
+\]
+where
+\begin{equation}
+\label{eq:same-point-J}
+J(T)=\frac1\pi
+\begin{pmatrix}
+2q(T) & \tfrac12 q'(T)\\[1ex]
+\tfrac12 q'(T) & \tfrac1{12}\bigl(q''(T)+2q(T)^3\bigr)
+\end{pmatrix}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Derivatives below are evaluated at \(T\).  Taylor expanding to order
+\(h^4\),
+\[
+\Ph(T\pm h) = \Ph(T) \pm hq + \tfrac{h^2}{2}q' \pm \tfrac{h^3}{6}q''
+            + \tfrac{h^4}{24}q''' + O(h^5),
+\qquad
+\Ph(T-h) - \Ph(T+h) = -2hq - \tfrac{h^3}{3}q'' + O(h^5),
+\]
+so that
+\begin{equation}
+\label{eq:A12-same-point-expansion}
+K_\Ph(T-h,T+h)
+= \frac{q}{\pi} + \frac{h^2}{6\pi}\bigl(q'' - 4q^3\bigr) + O(h^4),
+\end{equation}
+while \(K_\Ph(T\pm h,T\pm h) = q(T\pm h)/\pi\) by the standard Taylor
+series of \(q\).  For symmetric \(M\) (here \(M=A_h\),
+\(M_{12}=M_{21}\) by Lemma~\ref{lem:phase-kernel-properties}(i)),
+conjugation by \eqref{eq:point-to-jet-transform} gives
+\begin{equation}
+\label{eq:Ph-conjugation-symmetric}
+(P_h M P_h^\top)_{11} = \tfrac12(M_{11}+2M_{12}+M_{22}),\quad
+(P_h M P_h^\top)_{12} = \tfrac{1}{4h}(M_{22}-M_{11}),\quad
+(P_h M P_h^\top)_{22} = \tfrac{1}{8h^2}(M_{11}-2M_{12}+M_{22}).
+\end{equation}
+Substituting,
+\begin{align*}
+(P_h A_h P_h^\top)_{11}
+&= \frac{2q}{\pi} + \frac{2h^2}{3\pi}(q''-q^3) + O(h^4),\\
+(P_h A_h P_h^\top)_{12}
+&= \frac{q'}{2\pi} + \frac{h^2 q'''}{12\pi} + O(h^4),\\
+(P_h A_h P_h^\top)_{22}
+&= \frac{q''+2q^3}{12\pi} + O(h^2),
+\end{align*}
+and \eqref{eq:same-point-J} follows.
+\end{proof}
+
+\subsection{Cross-block jet-limit}
+\label{subsec:cross-block-jet-limit}
+
+\begin{lemma}[Cross-block jet-limit]
+\label{lem:cross-block-jet-limit}
+For \(T_1\ne T_2\), set \(s=T_1-T_2\), \(\Del=\Ph(T_1)-\Ph(T_2)\),
+\(q_j=q(T_j)\), and let
+\[
+C_h(T_1,T_2)=
+\begin{pmatrix}
+K_\Ph(T_1-h,T_2-h) & K_\Ph(T_1-h,T_2+h)\\
+K_\Ph(T_1+h,T_2-h) & K_\Ph(T_1+h,T_2+h)
+\end{pmatrix}
+\]
+with row order \((T_1-h,T_1+h)\) and column order \((T_2-h,T_2+h)\).
+Then
+\[
+P_h\,C_h(T_1,T_2)\,P_h^\top \;\longrightarrow\;
+\frac1\pi N_{12}(T_1,T_2)
+\qquad (h\to 0),
+\]
+where
+\begin{equation}
+\label{eq:cross-N12}
+N_{12}=
+\begin{pmatrix}
+\dfrac{2\sin\Del}{s}
+&
+\dfrac{\sin\Del - q_2 s\cos\Del}{s^2}
+\\[2.4ex]
+\dfrac{q_1 s\cos\Del - \sin\Del}{s^2}
+&
+\dfrac{(q_1+q_2)s\cos\Del + (q_1 q_2 s^2 - 2)\sin\Del}{2s^3}
+\end{pmatrix}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+\(K_\Ph\) is smooth near \((T_1,T_2)\); write \(K=K_\Ph(T_1,T_2)\)
+and use subscripts for partial derivatives at \((T_1,T_2)\):
+\begin{equation}
+\label{eq:K-bivariate-taylor}
+K_\Ph(T_1+u_1,\,T_2+u_2)
+= K + u_1 K_x + u_2 K_y
+  + \tfrac12 u_1^2 K_{xx} + u_1 u_2 K_{xy} + \tfrac12 u_2^2 K_{yy}
+  + O(|u|^3).
+\end{equation}
+For general \(2\times 2\) \(M\), conjugation by
+\eqref{eq:point-to-jet-transform} gives
+\begin{align*}
+(P_h M P_h^\top)_{11}
+&= \tfrac12(M_{11}+M_{12}+M_{21}+M_{22}),\\
+(P_h M P_h^\top)_{12}
+&= \tfrac{1}{4h}(-M_{11}+M_{12}-M_{21}+M_{22}),\\
+(P_h M P_h^\top)_{21}
+&= \tfrac{1}{4h}(-M_{11}-M_{12}+M_{21}+M_{22}),\\
+(P_h M P_h^\top)_{22}
+&= \tfrac{1}{8h^2}(M_{11}-M_{12}-M_{21}+M_{22}).
+\end{align*}
+Substituting \eqref{eq:K-bivariate-taylor} with
+\(u_i\in\{-h,+h\}\),
+\[
+(P_h C_h P_h^\top)_{11}\to 2K,\quad
+(P_h C_h P_h^\top)_{12}\to K_y,\quad
+(P_h C_h P_h^\top)_{21}\to K_x,\quad
+(P_h C_h P_h^\top)_{22}\to \tfrac12 K_{xy}.
+\]
+By Lemma~\ref{lem:phase-kernel-derivatives}, the four kernel
+derivatives at \((T_1,T_2)\) evaluate to
+\begin{align*}
+K_\Ph(T_1,T_2) &= \frac{\sin\Del}{\pi s},
+&K_x(T_1,T_2) &= \frac{q_1 s\cos\Del - \sin\Del}{\pi s^2},\\
+K_y(T_1,T_2) &= \frac{\sin\Del - q_2 s\cos\Del}{\pi s^2},
+&K_{xy}(T_1,T_2)
+&= \frac{(q_1+q_2) s\cos\Del + (q_1 q_2 s^2 - 2)\sin\Del}{\pi s^3},
+\end{align*}
+and \eqref{eq:cross-N12} follows.
+\end{proof}
+
+\subsection{Same-point Gram positivity}
+\label{subsec:same-point-gram-positivity}
+
+\begin{definition}[Same-point Gram determinant]
+\label{def:same-point-gram-determinant}
+\begin{equation}
+\label{eq:same-point-gram-determinant}
+D_J(T) \;:=\; 4\,q(T)^4 + 2\,q(T)\,q''(T) - 3\,q'(T)^2.
+\end{equation}
+\end{definition}
+
+\begin{lemma}[Algebraic Gram criterion]
+\label{lem:algebraic-same-point-gram-criterion}
+\begin{equation}
+\label{eq:J-trace}
+\Tr J(T) = \frac{2 q(T)^3 + 24\,q(T) + q''(T)}{12\pi},\qquad
+\det J(T) = \frac{D_J(T)}{12\pi^2},
+\end{equation}
+and \(J(T)\succ 0\) iff \(q(T) > 0\) and \(D_J(T) > 0\).
+\end{lemma}
+
+\begin{proof}
+Direct computation from \eqref{eq:same-point-J} gives
+\eqref{eq:J-trace}.  By Sylvester's criterion, the symmetric matrix
+\(J(T)\) is positive definite iff its leading principal minor
+\(2q(T)/\pi\) and its determinant are both positive.
+\end{proof}
+
+\begin{lemma}[Same-point Gram positivity]
+\label{lem:same-point-gram-positivity}
+With \(\Ph_T = \theta\), on retained packets at sufficiently large
+\(T\) the matrix \(J(T)\) is positive definite, and
+\[
+\lambda_{\min}(J(T))
+\;\ge\; \frac{2\,q(T)}{\pi}\bigl(1 + o(1)\bigr)
+\;=\; \frac{1}{\pi}\,\log(T/(2\pi))\,\bigl(1 + o(1)\bigr).
+\]
+\end{lemma}
+
+\begin{proof}
+By Lemmas~\ref{lem:phase-derivative-lower-bound}
+and~\ref{lem:phase-derivative-upper-bounds},
+\(q(T) = \tfrac12 \log(T/(2\pi)) + O(T^{-2})\),
+\(q'(T) = O(T^{-1})\), \(q''(T) = O(T^{-2})\) at large \(T\).
+Substituting into \eqref{eq:same-point-gram-determinant},
+\[
+D_J(T)
+= 4\,q(T)^4 + O\bigl(q(T)\,T^{-2}\bigr) + O(T^{-2})
+= 4\,q(T)^4\bigl(1 + o(1)\bigr) > 0
+\]
+at sufficiently large \(T\), so
+Lemma~\ref{lem:algebraic-same-point-gram-criterion} gives
+\(J(T)\succ 0\).  For positive-definite \(2\times 2\),
+\(\lambda_{\min}\ge \det/\Tr\); with
+\(D_J(T) = 4q^4(1+o(1))\) and \(2q^3+24q+q'' = 2q^3(1+o(1))\),
+\[
+\lambda_{\min}(J(T))
+\ge \frac{D_J(T)}{\pi(2q^3+24q+q'')}
+= \frac{2q(T)}{\pi}\bigl(1+o(1)\bigr).
+\]
+Substituting \(q(T) = \tfrac12 \log(T/(2\pi)) + O(T^{-2})\) gives
+the displayed bound.
+\end{proof}
