@@ -1,0 +1,103 @@
+--- /mnt/data/sec-finite-scale-local-blocks-and-whitening(1).tex	2026-05-02 18:08:47.860380419 +0000
++++ /mnt/data/sec-finite-scale-local-blocks-and-whitening.referee-hardened2.tex	2026-05-02 18:12:05.764402875 +0000
+@@ -94,15 +94,12 @@
+ \par\medskip
+ 
+ Around a midpoint \(m\) at finite separation \(s\), the same-point and
+-cross-block jets of Section~\ref{sec:jet-limit-local-blocks} extend to
+-two same-point Gram blocks \(G_{m,\pm}(s)\) and a mixed block
+-\(N_m(s)\); whitening these into the dimensionless
+-\(\widehat\Om_\z(s;m)\)
+-(Definition~\ref{def:whitened-finite-block}) with the
+-polynomial-in-\(Q\) whitening-loss bound of
+-Lemma~\ref{lem:whitening-loss} produces the input consumed by every
+-comparison theorem from
+-Section~\ref{sec:toy-anomaly-and-transverse-obstruction} onward.
++cross-block jets of Section~\ref{sec:jet-limit-local-blocks} give two
++same-point Gram blocks \(G_{m,\pm}(s)\) and a mixed block \(N_m(s)\).
++This section records the finite real-axis block package and the
++whitening-factor loss used by later comparison arguments.  No
++source-energy transfer or actual-zeta transverse suppression input is
++used here.
+ 
+ \begin{definition}[Finite packet domain]
+ \label{def:finite-packet-domain}
+@@ -123,7 +120,7 @@
+ \subsection{Finite same-point and mixed blocks}
+ \label{subsec:finite-same-point-and-mixed-blocks}
+ 
+-Fix \((m,s)\in\mathcal D_T^\times\) and write
++For \((m,s)\in\mathcal D_T\), write
+ \[
+         t_\pm = m\pm s/2,
+         \qquad q_\pm = q(t_\pm),
+@@ -132,7 +129,7 @@
+ 
+ \begin{definition}[Finite same-point and mixed blocks]
+ \label{def:finite-same-point-and-mixed-blocks}
+-The finite same-point blocks are
++For \((m,s)\in\mathcal D_T\), the finite same-point blocks are
+ \begin{equation}
+ \label{eq:Gpm}
+ G_{m,\pm}(s)
+@@ -161,11 +158,11 @@
+ 
+ \begin{lemma}[Exact finite-block interpretation]
+ \label{lem:finite-blocks-exact-interpretation}
+-For \((m,s)\in\mathcal D_T^\times\),
++For \((m,s)\in\mathcal D_T\),
+ \[
+         G_{m,\pm}(s) = J(t_\pm).
+ \]
+-Moreover,
++For \((m,s)\in\mathcal D_T^\times\), moreover,
+ \begin{equation}
+ \label{eq:Nm-kernel-derivative-form}
+ N_m(s)
+@@ -195,7 +192,8 @@
+ 
+ \begin{lemma}[Removable singularity of \(N_m(s)\)]
+ \label{lem:Nm-removable-singularity}
+-If \(\Ph\in C^3\) on a neighborhood of \(m\), the entries of
++Let \(m\in I_T\).  If \(\Ph\in C^3\) on a neighborhood of \(m\), then,
++as \(s\to0\) with \((m,s)\in\mathcal D_T^\times\), the entries of
+ \(N_m(s)\) of \eqref{eq:Nm} extend continuously to \(s=0\) with
+ \begin{equation}
+ \label{eq:Nm-at-zero}
+@@ -251,7 +249,8 @@
+ as \(s\to 0\) (Remark~\ref{rem:cross-block-fixed-separation-scope}).
+ Lemma~\ref{lem:Nm-removable-singularity} is a separate coalescence
+ statement in the center-separation parameter \(s\), proved by direct
+-Taylor expansion above.
++Taylor expansion above.  From this point on, \(N_m(0)\) denotes the
++continuous extension supplied by Lemma~\ref{lem:Nm-removable-singularity}.
+ \end{remark}
+ 
+ \subsection{Whitened finite block}
+@@ -259,9 +258,10 @@
+ 
+ \begin{definition}[Whitened finite block]
+ \label{def:whitened-finite-block}
+-Whenever \(G_{m,-}(s)\) and \(G_{m,+}(s)\) are positive definite, let
+-\(G_{m,\pm}(s)^{-1/2}\) denote the positive definite inverse square
+-root and set
++For \((m,s)\in\mathcal D_T\), with \(N_m(0)\) understood by continuous
++extension, whenever \(G_{m,-}(s)\) and \(G_{m,+}(s)\) are positive
++definite, let \(G_{m,\pm}(s)^{-1/2}\) denote the positive definite
++inverse square root and set
+ \begin{equation}
+ \label{eq:omega-finite}
+ \widehat\Om_\z(s;m)
+@@ -271,9 +271,9 @@
+ 
+ \begin{corollary}[Coalescence: \(\widehat\Om_\z(0;m) = I_2\)]
+ \label{cor:omega-coalescence}
+-For every retained midpoint \(m\) at sufficiently large height,
+-\(\widehat\Om_\z(s;m)\) extends continuously to \(s=0\) with
+-\(\widehat\Om_\z(0;m) = I_2\).
++For every \(m\in I_T\) at sufficiently large height,
++\(\widehat\Om_\z(s;m)\) extends continuously to \(s=0\), along
++\((m,s)\in\mathcal D_T\), with \(\widehat\Om_\z(0;m) = I_2\).
+ \end{corollary}
+ 
+ \begin{proof}

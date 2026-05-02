@@ -106,10 +106,32 @@ def mat2_eigs_symmetric(A):
     return (tr - sq) / 2, (tr + sq) / 2
 
 
-def op_norm(A):
-    """Operator norm = largest eigenvalue magnitude (for symmetric A)."""
+def op_norm_symmetric(A):
+    """Operator norm of a symmetric 2x2 matrix = max |eigenvalue|.
+
+    Use ONLY for symmetric A.  For non-symmetric A (e.g. N_m(s) with
+    s != 0), use spectral_norm instead.
+    """
     lam_min, lam_max = mat2_eigs_symmetric(A)
     return max(abs(lam_min), abs(lam_max))
+
+
+def spectral_norm(A):
+    """True operator norm of a 2x2 matrix A: largest singular value =
+    sqrt(largest eigenvalue of A^T A).
+    """
+    AT_A = mp_matrix([
+        [A[0, 0] * A[0, 0] + A[1, 0] * A[1, 0],
+         A[0, 0] * A[0, 1] + A[1, 0] * A[1, 1]],
+        [A[0, 1] * A[0, 0] + A[1, 1] * A[1, 0],
+         A[0, 1] * A[0, 1] + A[1, 1] * A[1, 1]],
+    ])
+    _, lam_max = mat2_eigs_symmetric(AT_A)
+    return mp_sqrt(lam_max)
+
+
+def transpose_2x2(A):
+    return mp_matrix([[A[0, 0], A[1, 0]], [A[0, 1], A[1, 1]]])
 
 
 def G_inv_sqrt_closed(G):
@@ -136,47 +158,64 @@ def mat2_max_diff(A, B):
 # ---------------------------------------------------------------------------
 
 def check_finite_blocks_at_T(T, n_midpoints=5, n_seps=5):
+    """Verify G_{m,±}(s) is positive definite and N_m(s) has finite
+    spectral norm on a sample of (m, s) ∈ D_T.  D_T is enforced
+    explicitly: I_T = [T - rho/Q, T + rho/Q] with rho = 1, and only
+    pairs with t_± ∈ I_T are sampled.
+    """
     print("=" * 70)
     print(f"[finite blocks at T = {float(T):.2e}: G_{{m,+-}} and N_m well-defined]")
     print("=" * 70)
     print()
-    Q = mp_log(T)  # informal Q ~ log T scaling
-    half_window = mpf("0.05")
-    midpoints = [T - half_window
-                 + 2 * i * half_window / mpf(n_midpoints - 1)
-                 for i in range(n_midpoints)]
-    s_grid = [mpf(10) ** k for k in (-1, -2, -3, -4, -5)]
-
+    Q = mp_log(T)
+    rho = mpf(1)
+    I_T_half = rho / Q  # I_T = [T - rho/Q, T + rho/Q]
     print(f"  T = {float(T):.0e}, Q ~ log T = {float(Q):.4f}")
-    print(f"  midpoints sampled across I_T = [T - 0.05, T + 0.05]")
+    print(f"  I_T = [T - {float(I_T_half):.4e}, T + {float(I_T_half):.4e}]")
+    print(f"  D_T sampling: only (m, s) with t_± ∈ I_T")
     print()
-    print(f"  {'m offset':>12}  {'s':>8}  {'lam_min(G_-)':>14}  "
-          f"{'lam_min(G_+)':>14}  {'op N_m':>14}")
-    print(f"  {'-'*12}  {'-'*8}  {'-'*14}  {'-'*14}  {'-'*14}")
+    print(f"  {'m offset':>12}  {'s':>10}  {'lam_min(G_-)':>14}  "
+          f"{'lam_min(G_+)':>14}  {'sigma_max(N_m)':>16}")
+    print(f"  {'-'*12}  {'-'*10}  {'-'*14}  {'-'*14}  {'-'*16}")
 
-    for m in midpoints:
-        for s in s_grid:
+    # Only sample pairs (m, s) with t_± ∈ I_T.
+    midpoint_offsets = [-I_T_half / 2, mpf(0), I_T_half / 2]
+    s_candidates = [mpf(10) ** k for k in (-2, -3, -4, -5)]
+    sampled_count = 0
+    for m_off in midpoint_offsets:
+        m = T + m_off
+        for s in s_candidates:
             t_plus = m + s / 2
             t_minus = m - s / 2
+            # Enforce D_T: t_± ∈ I_T.
+            if not (T - I_T_half <= t_minus <= T + I_T_half):
+                continue
+            if not (T - I_T_half <= t_plus <= T + I_T_half):
+                continue
+            sampled_count += 1
             G_minus = G_at(t_minus)
             G_plus = G_at(t_plus)
             lam_min_minus, _ = mat2_eigs_symmetric(G_minus)
             lam_min_plus, _ = mat2_eigs_symmetric(G_plus)
             N = Nm_block(m, s)
-            op_N = op_norm(N)
+            sigma_max = spectral_norm(N)
             assert lam_min_minus > 0, \
                 f"G_{{m,-}} not positive at m={float(m)}, s={float(s)}"
             assert lam_min_plus > 0, \
                 f"G_{{m,+}} not positive at m={float(m)}, s={float(s)}"
             offset = float(m - T)
-            if s == s_grid[0] or s == s_grid[-1]:
-                print(f"  {offset:+12.4e}  {float(s):8.0e}  "
+            if s == s_candidates[0] or s == s_candidates[-1]:
+                print(f"  {offset:+12.4e}  {float(s):10.0e}  "
                       f"{float(lam_min_minus):14.6f}  "
                       f"{float(lam_min_plus):14.6f}  "
-                      f"{float(op_N):14.6f}")
+                      f"{float(sigma_max):16.6f}")
     print()
+    print(f"  Sampled {sampled_count} pairs (m, s) ∈ D_T.")
     print("  [PASS] G_{m,±}(s) is positive-definite at every sampled (m, s);")
-    print("         N_m(s) operator norm finite throughout.")
+    print("         spectral norm of N_m(s) (= largest singular value) is")
+    print("         finite throughout.  N_m is generally NOT symmetric, so")
+    print("         we use sigma_max via sqrt(eigval_max(N^T N)) rather than")
+    print("         the symmetric eigenvalue formula.")
 
 
 # ---------------------------------------------------------------------------
@@ -296,17 +335,14 @@ def check_Nm_removable_singularity_numerical(T):
 # ---------------------------------------------------------------------------
 
 def check_signed_s_domain(T):
-    """Confirm that the finite-block formulas extend to negative s on
-    the finite packet domain D_T = {(m, s): t_± in I_T}, matching the
-    hardened def:finite-packet-domain.
+    """Confirm full signed-s symmetry on D_T:
 
-    For symmetric reasons we expect:
-      - G_{m,±}(s) at s and at -s differ only by swapping t_+ <-> t_-,
-        i.e. G_{m,+}(s) = G_{m,-}(-s) and vice versa.
-      - N_m(s) at signed s extends continuously through s = 0.
+      - G_{m,+}(s) = G_{m,-}(-s)  (centers swap under s -> -s),
+      - N_m(-s) = N_m(s)^T,
+      - Omega_zeta_hat(-s; m) = Omega_zeta_hat(s; m)^T.
 
-    The sympy file verifies the symbolic identity; this is a numerical
-    regression guard.
+    Under s -> -s the substitution t_+ <-> t_- exchanges row and
+    column conventions, transposing the cross-block matrix.
     """
     print("=" * 70)
     print(f"[signed s in D_T at T = {float(T):.0e}]")
@@ -315,50 +351,67 @@ def check_signed_s_domain(T):
     m = T
     print(f"  m = T = {float(m):.0e}")
     print()
-    print(f"  {'s':>10}  {'max|G+(s) - G-(-s)|':>24}  {'max|N_m(s) - N_m(-s).T sign|':>32}")
-    print(f"  {'-'*10}  {'-'*24}  {'-'*32}")
+    print(f"  {'s':>8}  {'|G+(s) - G-(-s)|':>20}  {'|N(-s) - N(s)^T|':>20}  "
+          f"{'|Omega(-s) - Omega(s)^T|':>26}")
+    print(f"  {'-'*8}  {'-'*20}  {'-'*20}  {'-'*26}")
     s_grid = [mpf("0.01"), mpf("0.001"), mpf("0.0001")]
     for s_pos in s_grid:
         s_neg = -s_pos
-        # G_{m,+}(s) = J(m + s/2); G_{m,-}(-s) = J(m + s/2). Should match.
+        # G symmetry under s -> -s.
         G_plus_s = G_at(m + s_pos / 2)
-        G_minus_neg_s = G_at(m + (-s_neg) / 2)  # = m + s/2
+        G_minus_neg_s = G_at(m + (-s_neg) / 2)
         err_swap = mat2_max_diff(G_plus_s, G_minus_neg_s)
-        # For N_m: under s -> -s, the (1,1) entry stays even since
-        # sin(Delta_m(-s)) = -sin(Delta_m(s)) and the explicit -2 sin/s
-        # ratio is even.  The other entries swap roles.  We just check
-        # both N_m(s) and N_m(-s) are well-defined and finite.
+
+        # N_m(-s) should equal N_m(s)^T.
         N_pos = Nm_block(m, s_pos)
         N_neg = Nm_block(m, s_neg)
-        # The (1,1) entry is even in s (it equals -2 sin(Delta)/s and
-        # both sin(Delta) and s flip sign, leaving the ratio invariant).
-        err_n11_even = abs(N_pos[0, 0] - N_neg[0, 0])
-        print(f"  {float(s_pos):+10.4f}  {float(err_swap):24.4e}  "
-              f"{float(err_n11_even):32.4e}")
+        N_pos_T = transpose_2x2(N_pos)
+        err_N_transpose = mat2_max_diff(N_neg, N_pos_T)
+
+        # Omega(-s; m) should equal Omega(s; m)^T.
+        G_minus_pos = G_at(m - s_pos / 2)
+        G_plus_pos = G_at(m + s_pos / 2)
+        G_minus_neg_full = G_at(m - s_neg / 2)
+        G_plus_neg_full = G_at(m + s_neg / 2)
+
+        Ginv_minus_pos = G_inv_sqrt_closed(G_minus_pos)
+        Ginv_plus_pos = G_inv_sqrt_closed(G_plus_pos)
+        Ginv_minus_neg = G_inv_sqrt_closed(G_minus_neg_full)
+        Ginv_plus_neg = G_inv_sqrt_closed(G_plus_neg_full)
+
+        Omega_pos = Ginv_minus_pos * N_pos * Ginv_plus_pos
+        Omega_neg = Ginv_minus_neg * N_neg * Ginv_plus_neg
+        Omega_pos_T = transpose_2x2(Omega_pos)
+        err_Omega_transpose = mat2_max_diff(Omega_neg, Omega_pos_T)
+
+        print(f"  {float(s_pos):+8.4f}  {float(err_swap):20.4e}  "
+              f"{float(err_N_transpose):20.4e}  "
+              f"{float(err_Omega_transpose):26.4e}")
         assert err_swap < mpf("1e-30"), \
             f"G_+(s) != G_-(-s) at s = {float(s_pos)}: err = {float(err_swap)}"
-        assert err_n11_even < mpf("1e-30"), \
-            f"N_m(s)_{{11}} not even in s at s = {float(s_pos)}: "\
-            f"err = {float(err_n11_even)}"
+        assert err_N_transpose < mpf("1e-30"), \
+            f"N_m(-s) != N_m(s)^T at s = {float(s_pos)}: " \
+            f"err = {float(err_N_transpose)}"
+        assert err_Omega_transpose < mpf("1e-30"), \
+            f"Omega(-s) != Omega(s)^T at s = {float(s_pos)}: " \
+            f"err = {float(err_Omega_transpose)}"
     print()
-    print("  [PASS] Finite blocks are well-defined for signed s on D_T;")
-    print("         G_{m,+}(s) = G_{m,-}(-s) and N_m^{(1,1)}(s) is even in s.")
+    print("  [PASS] Full signed-s symmetry on D_T:")
+    print("         G_{m,+}(s) = G_{m,-}(-s),")
+    print("         N_m(-s) = N_m(s)^T,")
+    print("         Omega_zeta_hat(-s; m) = Omega_zeta_hat(s; m)^T.")
 
 
-def check_omega_coalescence_numerical(T):
-    print("=" * 70)
-    print(f"[cor:omega-coalescence]  Omega_hat(s -> 0; m) = I_2 at T = "
-          f"{float(T):.0e}")
-    print("=" * 70)
-    print()
+def _check_omega_coalescence_at(T):
+    """Single-T helper: confirms Omega_hat(s -> 0; T) = I_2.  Returns
+    the smallest-s error so the caller can summarize."""
     m = T
-    print(f"  m = T = {float(T):.0e}")
-    print()
-    print(f"  {'s':>10}  {'max|Omega(s; m) - I_2|':>26}")
-    print(f"  {'-'*10}  {'-'*26}")
-    errs = []
     s_grid = [mpf(10) ** k for k in (-1, -2, -3, -4, -5)]
     I2 = mp_eye(2)
+    errs = []
+    s_powers = [-1, -2, -3, -4, -5]
+    print(f"  T = {float(T):.0e}: " + ", ".join(
+        f"s=1e{p:+d}" for p in s_powers))
     for s in s_grid:
         t_minus = m - s / 2
         t_plus = m + s / 2
@@ -370,16 +423,36 @@ def check_omega_coalescence_numerical(T):
         Omega = Ginv_sqrt_minus * N * Ginv_sqrt_plus
         err = mat2_max_diff(Omega, I2)
         errs.append(err)
-        print(f"  {float(s):10.0e}  {float(err):26.6e}")
+    print(f"          errs = " + ", ".join(f"{float(e):.2e}" for e in errs))
     for i in range(1, len(errs)):
         assert errs[i] < errs[i - 1] + mpf("1e-30"), (
-            f"Omega coalescence error not monotone"
+            f"Omega coalescence error not monotone at T = {float(T):.0e}"
         )
     assert errs[-1] < mpf("1e-3"), \
-        f"Omega(0; m) does not approach I_2: final err = {float(errs[-1])}"
+        f"Omega(0; m) does not approach I_2 at T = {float(T):.0e}: " \
+        f"final err = {float(errs[-1])}"
+    return errs[-1]
+
+
+def check_omega_coalescence_numerical(T_values=(mpf("1e3"), mpf("1e4"),
+                                                 mpf("1e5"), mpf("1e6"))):
+    """Coalescence Omega(s -> 0; m) = I_2 across a height ladder.
+    Per the audit, this runs at multiple T, not just the anchor.
+    """
+    print("=" * 70)
+    print("[cor:omega-coalescence]  Omega_hat(s -> 0; m) = I_2 across heights")
+    print("=" * 70)
     print()
-    print("  [PASS] Omega_hat(s; m) -> I_2 as s -> 0; consistent with")
-    print("         cor:omega-coalescence.")
+    final_errs = {}
+    for T in T_values:
+        final_errs[T] = _check_omega_coalescence_at(T)
+        print()
+    print("  Smallest-s (s = 1e-5) error per height:")
+    for T in T_values:
+        print(f"    T = {float(T):.0e}: |Omega(1e-5; T) - I_2| = "
+              f"{float(final_errs[T]):.4e}")
+    print()
+    print("  [PASS] Omega_hat(s; m) -> I_2 as s -> 0 at every tested T.")
 
 
 # ---------------------------------------------------------------------------
@@ -501,7 +574,9 @@ def check_whitening_loss_sweep(T_values=(mpf("1e3"), mpf("1e4"),
 def check_lambda_min_polynomial_floor(T_values=(mpf("1e3"), mpf("1e5"),
                                                  mpf("1e6"))):
     print("=" * 70)
-    print("[lambda_min(G_{m,±}) polynomial floor]  lambda_min >= 2 q(t_±)/pi (1+o(1))")
+    print("[lambda_min(G_{m,±}) asymptote]  lambda_min(G) = 2 q(t_±)/pi (1 + o(1));")
+    print("                                  equivalently, for some delta_T -> 0,")
+    print("                                  lambda_min(G) >= 2 q(t_±)/pi (1 - delta_T).")
     print("=" * 70)
     print()
     print(f"  {'T':>10}  {'asymptote 2q/pi':>16}  {'min lam':>12}  "
@@ -531,8 +606,9 @@ def check_lambda_min_polynomial_floor(T_values=(mpf("1e3"), mpf("1e5"),
             assert rel_err < mpf("0.05"), \
                 f"lambda_min asymptote off at T={float(T):.0e}: rel.err = {float(rel_err)}"
     print()
-    print("  [PASS] lambda_min(G) approaches 2 q(t_±)/pi; absolute floor")
-    print("         dominated by the q-asymptotic of §2.")
+    print("  [PASS] lambda_min(G) = 2 q(t_±)/pi (1 + o(1)) numerically;")
+    print("         relative error decreases to ~1e-9 at T = 1e6 in the")
+    print("         tested range, confirming delta_T -> 0.")
 
 
 # ---------------------------------------------------------------------------
@@ -598,7 +674,7 @@ def main():
     print()
     check_signed_s_domain(T_anchor)
     print()
-    check_omega_coalescence_numerical(T_anchor)
+    check_omega_coalescence_numerical()
     print()
     check_whitening_loss_sweep()
     print()

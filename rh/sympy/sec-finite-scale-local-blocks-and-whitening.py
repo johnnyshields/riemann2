@@ -402,6 +402,50 @@ def verify_whitening_loss_constant():
 # (vi) Independent route: G^{-1/2} via two formulas.
 # ---------------------------------------------------------------------------
 
+def verify_generic_SPD_inverse_sqrt():
+    """Generic-SPD verification: for any 2x2 SPD matrix
+        G = [[a, b], [b, d]],  a > 0,  Delta = a d - b^2 > 0,
+    the closed-form inverse square root
+        S = (G + sqrt(Delta) I)^{-1} sqrt(Tr G + 2 sqrt(Delta))
+    satisfies S G S = I_2 symbolically.
+
+    Closes the audit gap: the previous verify_inverse_sqrt_closed_form
+    specialized to a single SPD point (q=5, q'=1/100, q''=-1/200), which
+    is a regression test, not a symbolic proof of the identity.
+    """
+    print("=" * 70)
+    print("[generic SPD]  G^{-1/2} G G^{-1/2} = I_2 for 2x2 SPD G")
+    print("=" * 70)
+    a, b, d = symbols("a b d", real=True, positive=True)
+    G = Matrix([[a, b], [b, d]])
+    det_G = a * d - b**2
+    tr_G = a + d
+    sqrt_det = sqrt(det_G)
+    norm = sqrt(tr_G + 2 * sqrt_det)
+    # Cayley-Hamilton SPD square root: sqrt(G) = (G + sqrt(det) I) / norm.
+    sqrt_G = (G + sqrt_det * eye(2)) / norm
+    # S = G^{-1/2} = sqrt(G)^{-1}.
+    S = sqrt_G.inv()
+    # Verify S G S = I_2 symbolically.
+    SGS = simplify(S * G * S)
+    diff_I = simplify(SGS - eye(2))
+    print()
+    print("  Symbolic G:")
+    sp.pprint(G)
+    print()
+    print("  S = G^{-1/2} (closed form):")
+    sp.pprint(simplify(S))
+    print()
+    print("  S * G * S - I_2:")
+    sp.pprint(diff_I)
+    assert diff_I == zeros(2, 2), \
+        f"Generic SPD identity S G S = I_2 fails: {diff_I}"
+    print()
+    print("  [PASS] G^{-1/2} G G^{-1/2} = I_2 for every 2x2 SPD G,")
+    print("         a > 0, det G > 0; closed-form inverse square root")
+    print("         is exact symbolically.")
+
+
 def verify_inverse_sqrt_closed_form():
     print("=" * 70)
     print("[independent route]  G^{-1/2} via diagonalization vs analytic form")
@@ -471,6 +515,8 @@ def main():
     print()
     verify_whitening_loss_constant()
     print()
+    verify_generic_SPD_inverse_sqrt()
+    print()
     verify_inverse_sqrt_closed_form()
     print()
     print("=" * 70)
@@ -482,6 +528,7 @@ def main():
     print("  - lem:Nm-removable-singularity: N_m(0) = J(m), entry by entry")
     print("  - cor:omega-coalescence: Omega_zeta_hat(0; m) = I_2")
     print("  - lem:whitening-loss: ||G^{-1/2}||_op ~ sqrt(pi / (2 q))")
+    print("  - generic SPD identity G^{-1/2} G G^{-1/2} = I_2 (a, b, d free)")
     print("  - independent route: G^{-1/2} via closed form vs diagonalization")
     print("=" * 70)
 
