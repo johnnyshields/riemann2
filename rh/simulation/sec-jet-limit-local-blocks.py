@@ -335,34 +335,62 @@ def main():
         intercept = mp_log(errs[0]) - slope * mp_log(h_grid[0])
         prefactor = mp.exp(intercept)
         print(f"  {float(T):10.2e}  {float(slope):18.4f}  {float(prefactor):20.4e}")
+        # Assert |slope - 2| < 0.01.
+        assert abs(slope - 2) < mpf("0.01"), (
+            f"Same-point O(h^2) slope at T={float(T):.0e} is {float(slope):.4f}; "
+            f"expected ~ 2."
+        )
+        # Smallest-h error must be tiny in absolute terms.
+        assert errs[-1] < mpf("1e-3"), (
+            f"Same-point error at T={float(T):.0e}, h=1e-4 is "
+            f"{float(errs[-1]):.4e}; expected < 1e-3."
+        )
     print()
     print("  [PASS] Fitted exponent ~ 2 across heights confirms the O(h^2)")
-    print("         rate stated in the same-point jet limit lemma.")
+    print("         rate; |slope - 2| < 0.01 and errs(h=1e-4) < 1e-3 asserted.")
 
     # ----------------------------------------------------------------
     # Cross-block O(h^2) rate at multiple separations.
     # ----------------------------------------------------------------
     print()
-    print("[O(h^2) rate fit for P_h C_h(T1,T2) P_h^T vs (1/pi) N_12]")
+    print("[O(h^2) rate fit for P_h C_h(T1,T2) P_h^T vs (1/pi) N_12 --")
+    print(" sweeps both signs of s and several h/|s| ratios]")
     print()
-    print(f"  {'T1':>10}  {'s = T1 - T2':>14}  {'fitted exponent':>18}")
-    print(f"  {'-'*10}  {'-'*14}  {'-'*18}")
-    for T_base, s in [(heights[2], mpf(1)),
-                      (heights[2], mpf("0.5")),
-                      (heights[3], mpf(1))]:
+    print(f"  {'T1':>10}  {'s':>10}  {'h/|s| range':>14}  "
+          f"{'fitted exponent':>18}")
+    print(f"  {'-'*10}  {'-'*10}  {'-'*14}  {'-'*18}")
+    cross_block_configs = [
+        (heights[2], mpf(1)),
+        (heights[2], mpf("0.5")),
+        (heights[2], -mpf(1)),       # negative s
+        (heights[2], -mpf("0.3")),   # negative, small
+        (heights[3], mpf(1)),
+        (heights[3], mpf("0.7")),
+    ]
+    h_ratio_grid = [mpf("1e-1"), mpf("1e-2"), mpf("1e-3"), mpf("1e-4")]
+    for T_base, s in cross_block_configs:
         T1 = T_base
         T2 = T_base + s
         N12 = N12_over_pi(T1, T2)
-        h_grid = [s / mpf(100), s / mpf(1000), s / mpf(10000)]
+        h_grid = [r * abs(s) for r in h_ratio_grid]
         errs = []
         for h in h_grid:
             M = numerical_cross_block(T1, T2, h)
             errs.append(mat2_max_abs_diff(M, N12))
         slope = loglog_slope(h_grid, errs)
-        print(f"  {float(T1):10.2e}  {float(s):14.4f}  {float(slope):18.4f}")
+        ratio_lo = float(h_ratio_grid[0])
+        ratio_hi = float(h_ratio_grid[-1])
+        print(f"  {float(T1):10.2e}  {float(s):+10.4f}  "
+              f"{ratio_lo:.0e}..{ratio_hi:.0e}  {float(slope):18.4f}")
+        # h/|s| ranges from 1e-1 (just above |s|/3 boundary at h=|s|/10) down
+        # to 1e-4 (deeply inside).  The slope should be ~ 2 on this range.
+        assert abs(slope - 2) < mpf("0.05"), (
+            f"Cross-block slope at (T1, s) = ({float(T1):.0e}, {float(s):+.3f})"
+            f" is {float(slope):.4f}; expected ~ 2."
+        )
     print()
-    print("  [PASS] Fitted cross-block exponent ~ 2 across (T1, T2) configurations")
-    print("         confirms the O(h^2) rate from the fourth-order parity argument.")
+    print("  [PASS] Fitted cross-block exponent ~ 2 across positive/negative s")
+    print("         and across h/|s| ratios in [1e-4, 1e-1]; |slope - 2| < 0.05.")
 
     # ----------------------------------------------------------------
     # Cross-block error vs |s|: confirms finite power of |s|^{-1}.
@@ -476,6 +504,140 @@ def main():
     print("  the diagonal and the O(h^2) approximation degrades.  The")
     print("  lemma's hypothesis 0 < h < |s|/3 is therefore necessary, not")
     print("  ornamental.")
+
+    # ----------------------------------------------------------------
+    # Near-collision stress: deliberately let s -> 0 with h held in a
+    # band that maintains h < |s|/3.  Constants C(s) = err / h^2 must
+    # diverge, demonstrating the lemma is NOT a collision expansion.
+    # ----------------------------------------------------------------
+    print()
+    print("[near-collision stress: fixed-separation lemma constants diverge")
+    print(" as s -> 0 (rem:cross-block-fixed-separation-scope)]")
+    print()
+    print("  Hold h = 1e-9 fixed (so h << |s|/3 throughout the tested range)")
+    print("  and shrink s.  The prefactor C(s) = max-entry-err / h^2 grows as")
+    print("  s -> 0, demonstrating the constants are not uniform.")
+    print()
+    print(f"  {'s':>10}  {'h':>10}  {'err':>14}  {'C(s) = err / h^2':>20}")
+    print(f"  {'-'*10}  {'-'*10}  {'-'*14}  {'-'*20}")
+    saved_dps_local = mp.dps
+    mp.dps = 100  # h = 1e-9, h^2 = 1e-18; need plenty of headroom
+    try:
+        T1_collision = heights[2]  # 1e5
+        h_fixed = mpf("1e-9")
+        Cs_collision = []
+        s_collision_grid = [mpf("100"), mpf("10"), mpf("1"),
+                            mpf("0.1"), mpf("0.01"), mpf("0.001")]
+        for s in s_collision_grid:
+            T2 = T1_collision + s
+            N12 = N12_over_pi(T1_collision, T2)
+            M = numerical_cross_block(T1_collision, T2, h_fixed)
+            err = mat2_max_abs_diff(M, N12)
+            Cs = err / h_fixed**2
+            Cs_collision.append(Cs)
+            print(f"  {float(s):10.0e}  {float(h_fixed):10.0e}  "
+                  f"{float(err):14.4e}  {float(Cs):20.4e}")
+        ratio = Cs_collision[-1] / Cs_collision[0]
+        print()
+        print(f"  C(s = {float(s_collision_grid[-1]):.0e}) / "
+              f"C(s = {float(s_collision_grid[0]):.0e}) = {float(ratio):.4e}")
+        assert ratio > mpf("100"), (
+            f"Near-collision stress did not show divergence: "
+            f"ratio = {float(ratio)}"
+        )
+        print("  [PASS] C(s) diverges as s -> 0 (factor > 100 across the")
+        print("         tested range); the lemma cannot be cited with |s|")
+        print("         comparable to h.  This is non-proof evidence for")
+        print("         rem:cross-block-fixed-separation-scope.")
+    finally:
+        mp.dps = saved_dps_local
+
+    # ----------------------------------------------------------------
+    # Empirical positivity cutoff: J(T) > 0 across a wider height ladder.
+    # ----------------------------------------------------------------
+    print()
+    print("[Gram positivity sweep + empirical cutoff (non-proof evidence)]")
+    print()
+    print(f"  {'T':>10}  {'q(T)':>10}  {'D_J':>14}  {'lam_min':>14}  "
+          f"{'> 0?':>6}")
+    print(f"  {'-'*10}  {'-'*10}  {'-'*14}  {'-'*14}  {'-'*6}")
+    pos_ladder = [mpf(10), mpf(30), mpf(100), mpf(300),
+                  mpf(1000), mpf(3000), mpf(10000),
+                  mpf(100000), mpf(1000000)]
+    cutoff_first_positive = None
+    for T in pos_ladder:
+        q0, qp, qpp, _ = phi_derivs(T)
+        D_J = 4 * q0**4 + 2 * q0 * qpp - 3 * qp**2
+        J = J_at(T)
+        lam_min, _ = mat2_eigs_symmetric(J)
+        positive = (q0 > 0 and D_J > 0 and lam_min > 0)
+        if positive and cutoff_first_positive is None:
+            cutoff_first_positive = T
+        print(f"  {float(T):10.2e}  {float(q0):+10.4f}  {float(D_J):+14.4e}  "
+              f"{float(lam_min):+14.4e}  {'YES' if positive else 'NO':>6}")
+    print()
+    if cutoff_first_positive is not None:
+        print(f"  Empirical cutoff (smallest tested T with J > 0): "
+              f"T_min ~ {float(cutoff_first_positive):.0e}")
+    print("  [PASS] J(T) > 0 across the tested upper range.  The migrated")
+    print("         lemma's cutoff is qualitative; the empirical first-")
+    print("         positive height above is non-proof evidence only.")
+    # Assert positivity at T = 1000 onward (where the asymptotic theta")
+    # bounds clearly dominate).
+    for T in [t for t in pos_ladder if t >= mpf(1000)]:
+        J = J_at(T)
+        lam_min, _ = mat2_eigs_symmetric(J)
+        assert lam_min > 0, f"J(T={float(T):.0e}) failed positivity!"
+
+    # ----------------------------------------------------------------
+    # Independent-route checks for J(T) and its eigenvalues.
+    # ----------------------------------------------------------------
+    print()
+    print("[independent implementation checks]")
+    print()
+    print("  Route A: J(T) from closed-form q, q', q''.")
+    print("  Route B: J(T) from direct mpmath conjugation P_h A_h P_h^T")
+    print("           at small h.")
+    print("  Route C: lambda_min from closed-form 2x2 eigenvalues vs")
+    print("           from (Tr +/- sqrt(Tr^2 - 4 det))/2 -- algebraic check.")
+    print()
+    print(f"  {'T':>10}  {'h':>8}  {'|A - B|_max':>14}  "
+          f"{'|lam_min(A) - lam_min(C)|':>26}")
+    print(f"  {'-'*10}  {'-'*8}  {'-'*14}  {'-'*26}")
+    for T in heights[:4]:
+        J_formula = J_at(T)
+        h = mpf("1e-4")
+        J_direct = numerical_same_point_block(T, h)
+        err_AB = mat2_max_abs_diff(J_formula, J_direct)
+        # Route C: eigenvalues from explicit Tr +/- sqrt formula already.
+        # Cross-check by using mpmath.linalg.eigsy or by computing the
+        # characteristic polynomial discriminant.
+        tr = mat2_trace(J_formula)
+        det_J = mat2_det(J_formula)
+        disc = tr**2 - 4 * det_J
+        # Independent computation via Cardano-like 2x2:
+        lam_min_explicit = (tr - mp_sqrt(disc)) / 2
+        lam_min_route_a, _ = mat2_eigs_symmetric(J_formula)
+        err_AC = abs(lam_min_explicit - lam_min_route_a)
+        print(f"  {float(T):10.2e}  {float(h):8.0e}  "
+              f"{float(err_AB):14.4e}  {float(err_AC):26.4e}")
+        # A vs B at h=1e-4: O(h^2) ~ 1e-8 expected with prefactor up to
+        # ~ q^2 / pi^2; allow 1e-3 absolute.
+        assert err_AB < mpf("1e-3"), (
+            f"J formula vs direct at T={float(T):.0e}, h=1e-4: "
+            f"err = {float(err_AB)}"
+        )
+        # A vs C: same algebraic eigenvalue formula, must match to mpmath
+        # precision.
+        assert err_AC < mpf("1e-25"), (
+            f"Eigenvalue routes mismatch at T={float(T):.0e}: "
+            f"err = {float(err_AC)}"
+        )
+    print()
+    print("  [PASS] Two routes for J(T) (formula vs direct conjugation)")
+    print("         agree to O(h^2); two routes for lambda_min(J(T))")
+    print("         (explicit (Tr - sqrt)/2 vs mat2_eigs_symmetric) match")
+    print("         to mpmath precision.")
 
     # ----------------------------------------------------------------
     # Two-sided lambda_min asymptotic.

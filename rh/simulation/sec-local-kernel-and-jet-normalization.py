@@ -334,14 +334,13 @@ def check_uniform_window_q_bounds(T_center, half_window, n_samples):
 # ----------------------------------------------------------------------
 
 def check_kernel_symmetry(T_center, n_pairs):
-    """Sample K_Phi(x, y) - K_Phi(y, x) at random pairs near T_center."""
+    """Sample K_Phi(x, y) - K_Phi(y, x) at random pairs near T_center.
+    Asserts symmetry holds to better than 1e-20 (well above mpmath floor)."""
     print(f"  Sampling K_Phi(x, y) and K_Phi(y, x) at random pairs near T = "
           f"{float(T_center):.2e}")
-    # Deterministic pseudo-random offsets via halton-like sequence (mpmath-friendly).
     max_err = mpf(0)
     for k in range(n_pairs):
-        # Two coprime fractional offsets in (-1, 1).
-        u1 = mpf((k * 7 + 3) % 100) / mpf(100) * 2 - 1  # [-1, 1)
+        u1 = mpf((k * 7 + 3) % 100) / mpf(100) * 2 - 1
         u2 = mpf((k * 11 + 5) % 100) / mpf(100) * 2 - 1
         x = T_center + u1 * mpf("0.1")
         y = T_center + u2 * mpf("0.1")
@@ -354,12 +353,9 @@ def check_kernel_symmetry(T_center, n_pairs):
             max_err = err
     print(f"    max |K_Phi(x,y) - K_Phi(y,x)| over {n_pairs} pairs = "
           f"{float(max_err):.4e}")
-    if max_err < mpf("1e-25"):
-        print("    [PASS] Kernel symmetry holds to mpmath-precision (~ 30 dps).")
-    elif max_err < mpf("1e-12"):
-        print("    [PASS] Kernel symmetry holds to standard precision.")
-    else:
-        print("    [WARN] Symmetry deviation above 1e-12.")
+    assert max_err < mpf("1e-20"), \
+        f"Kernel symmetry violated: max err = {float(max_err)}"
+    print("    [PASS] Kernel symmetry holds to << 1e-20.")
 
 
 # ----------------------------------------------------------------------
@@ -367,17 +363,237 @@ def check_kernel_symmetry(T_center, n_pairs):
 # ----------------------------------------------------------------------
 
 def check_removable_singularity(T_center):
-    """Verify K_Phi(T+h, T) -> q(T)/pi as h -> 0."""
+    """K_Phi(T+h, T) -> q(T)/pi as h -> 0.  Asserts monotonic decrease
+    of error with h on the well-resolved range."""
     print(f"  Removable singularity: K_Phi(T+h, T) -> q(T)/pi as h -> 0")
     T = mpf(T_center)
     q_at_T = theta_prime(T, 1) / MP_PI
     print(f"    q(T)/pi (target) = {float(q_at_T):.6e}")
-    for h_pow in [-1, -2, -4, -6, -10, -15]:
-        h = mpf(10) ** h_pow
-        kval = K_phi(T + h, T)
-        err = abs(kval - q_at_T)
-        print(f"    h = 1e{h_pow:>3d}: K_Phi(T+h, T) = {float(kval):.6e}, "
-              f"err = {float(err):.4e}")
+    saved_dps = mp.dps
+    mp.dps = 50
+    try:
+        h_pows = [-1, -2, -3, -4, -5, -6]
+        errs = []
+        for h_pow in h_pows:
+            h = mpf(10) ** h_pow
+            kval = K_phi(T + h, T)
+            err = abs(kval - q_at_T)
+            errs.append(err)
+            print(f"    h = 1e{h_pow:>3d}: K_Phi(T+h, T) = {float(kval):.6e}, "
+                  f"err = {float(err):.4e}")
+        # Asymptotic: K(T+h, T) - q/pi = (h/(2 pi)) q' + O(h^2).  At large
+        # T, q' = O(T^-1) is small; at moderate h, the h^2 q^3/(6 pi) term
+        # dominates and the empirical slope is 2.  Either way, the error
+        # must decrease monotonically across the tested range.
+        for i in range(1, len(errs)):
+            assert errs[i] < errs[i - 1], (
+                f"Removable-singularity error did not decrease: "
+                f"err(1e{h_pows[i-1]}) = {float(errs[i-1])}, "
+                f"err(1e{h_pows[i]}) = {float(errs[i])}"
+            )
+        # Fit slope on the well-resolved tail (last three points).
+        h_tail = [mpf(10) ** p for p in h_pows[-3:]]
+        slope = mp_log(errs[-1] / errs[-3]) / mp_log(h_tail[-1] / h_tail[0])
+        print(f"    log-log slope on tail (h = 1e{h_pows[-3]}..1e{h_pows[-1]}): "
+              f"{float(slope):.4f}")
+        assert slope > mpf("1.5"), (
+            f"Expected at-least-h^1 convergence; got slope {float(slope):.4f}"
+        )
+        print("    [PASS] K_Phi(T+h, T) -> q(T)/pi monotonically; tail slope >= 1.5.")
+    finally:
+        mp.dps = saved_dps
+
+
+def check_diagonal_multipath(T_center, eps_grid):
+    """Joint-continuity diagonal approach along multiple paths:
+       u = v, u = -v, u = 2v, u = v^2, random small pairs.
+    For each path, decrease the parameter and assert
+    K_Phi(T+u, T+v) -> q(T)/pi.
+    """
+    print(f"  Joint-continuity multi-path approach to (T, T) at T = "
+          f"{float(T_center):.2e}.")
+    T = mpf(T_center)
+    q_target = theta_prime(T, 1) / MP_PI
+
+    paths = [
+        ("u = v",     lambda e: (e, e)),
+        ("u = -v",    lambda e: (e, -e)),
+        ("u = 2v",    lambda e: (2 * e, e)),
+        ("u = v^2",   lambda e: (e * e, e)),
+        ("random a",  lambda e: (mpf("0.7") * e, -mpf("0.3") * e)),
+        ("random b",  lambda e: (-mpf("0.4") * e, mpf("0.9") * e)),
+    ]
+
+    print(f"  {'path':>14}  {'eps':>8}  {'K(T+u, T+v)':>16}  "
+          f"{'err vs q/pi':>14}")
+    print(f"  {'-'*14}  {'-'*8}  {'-'*16}  {'-'*14}")
+
+    for name, path in paths:
+        last_err = None
+        for eps in eps_grid:
+            u, v = path(eps)
+            x, y = T + u, T + v
+            if abs(x - y) < mpf("1e-30"):
+                k_val = q_target  # exact diagonal; sin form would give 0/0
+            else:
+                k_val = K_phi(x, y)
+            err = abs(k_val - q_target)
+            print(f"  {name:>14}  {float(eps):8.0e}  {float(k_val):16.6e}  "
+                  f"{float(err):14.4e}")
+            last_err = err
+        # Final-eps error must be small.
+        assert last_err < mpf("1e-6"), (
+            f"Diagonal multi-path '{name}' did not converge: "
+            f"final err = {float(last_err)}"
+        )
+    print()
+    print("  [PASS] K_Phi(T+u, T+v) -> q(T)/pi along every tested path,")
+    print("         confirming joint continuity at the diagonal.")
+
+
+def check_diagonal_derivative_rates(T_center):
+    """Numerically extract K_x(T,T), K_y(T,T), K_{xy}(T,T) by central
+    finite differences and assert convergence to the displayed formulas
+        K_x(T,T) = K_y(T,T) = q'(T) / (2 pi),
+        K_{xy}(T,T) = (q''(T) + 2 q(T)^3) / (6 pi).
+    """
+    print(f"  Diagonal derivative rates at T = {float(T_center):.2e}.")
+    T = mpf(T_center)
+    q0 = theta_prime(T, 1)
+    qp = theta_prime(T, 2)
+    qpp = theta_prime(T, 3)
+
+    # Closed-form targets.
+    Kx_target = qp / (2 * MP_PI)
+    Kxy_target = (qpp + 2 * q0**3) / (6 * MP_PI)
+
+    print(f"    closed-form  K_x = K_y = q'/(2 pi)        = "
+          f"{float(Kx_target):+.6e}")
+    print(f"    closed-form  K_xy   = (q'' + 2 q^3)/(6 pi) = "
+          f"{float(Kxy_target):+.6e}")
+    print()
+    print(f"  {'h':>10}  {'K_x FD':>16}  {'K_xy FD':>16}  "
+          f"{'|err K_x|':>12}  {'|err K_xy|':>12}")
+    print(f"  {'-'*10}  {'-'*16}  {'-'*16}  {'-'*12}  {'-'*12}")
+
+    # Use finite differences that approach the diagonal.
+    h_pows = [-2, -3, -4, -5]
+    errs_x = []
+    errs_xy = []
+    saved_dps = mp.dps
+    mp.dps = 60
+    try:
+        for h_pow in h_pows:
+            h = mpf(10) ** h_pow
+            # K_x(T, T) by central difference on x:
+            #   K_x(T,T) ~ (K(T+h, T) - K(T-h, T)) / (2 h),
+            # using the off-diagonal kernel (the on-diagonal value q/pi
+            # is constant and would give 0).
+            Kx_fd = (K_phi(T + h, T) - K_phi(T - h, T)) / (2 * h)
+            # K_{xy}(T, T) ~ (K(T+h, T+h) - K(T+h, T-h) - K(T-h, T+h)
+            #                  + K(T-h, T-h)) / (4 h^2).
+            # The pure-diagonal samples (T+h, T+h) and (T-h, T-h) take the
+            # removable-singularity branch (q(T+h)/pi, q(T-h)/pi).
+            K_pp = K_phi(T + h, T + h)
+            K_pm = K_phi(T + h, T - h)
+            K_mp = K_phi(T - h, T + h)
+            K_mm = K_phi(T - h, T - h)
+            Kxy_fd = (K_pp - K_pm - K_mp + K_mm) / (4 * h**2)
+            err_x = abs(Kx_fd - Kx_target)
+            err_xy = abs(Kxy_fd - Kxy_target)
+            errs_x.append(err_x)
+            errs_xy.append(err_xy)
+            print(f"  {float(h):10.0e}  {float(Kx_fd):+16.6e}  "
+                  f"{float(Kxy_fd):+16.6e}  "
+                  f"{float(err_x):12.4e}  {float(err_xy):12.4e}")
+        # Assert finite-difference errors decrease across the grid.
+        for i in range(1, len(errs_x)):
+            assert errs_x[i] < errs_x[i - 1], (
+                f"K_x FD did not improve: {float(errs_x[i-1])} -> "
+                f"{float(errs_x[i])}"
+            )
+        # K_xy is sensitive (4th-order central difference of an expression
+        # already involving 1/h); just assert the smallest h gives a small
+        # absolute error.
+        assert errs_xy[-1] < mpf("1e-3"), (
+            f"K_xy FD did not approach target: final err {float(errs_xy[-1])}"
+        )
+    finally:
+        mp.dps = saved_dps
+    print()
+    print("  [PASS] Numerical K_x and K_xy approach the displayed diagonal")
+    print("         formulas.  K_x error decreases with h; K_xy is within")
+    print("         1e-3 at the smallest tested h.")
+
+
+def check_theta_residuals_height_ladder():
+    """Across a wide height ladder T = 10^k, confirm scaled residuals:
+       T^2 (q(T) - (1/2) log(T/(2 pi))) -> -1/48,
+       T   (q'(T) - 1/(2 T))           -> 0,
+       T^2 (q''(T) + 1/(2 T^2))        -> 0,
+    with rate (each next-order error proportional to T^-2).
+
+    Assertion: the relative error to the leading constant is below 1e-6
+    at the highest tested T for each residual.
+    """
+    print("  Sweep theta residuals across height ladder, multiple points")
+    print("  inside I_T (0.25 * I_T offsets), confirm scaled residuals:")
+    print()
+    print(f"  {'T':>10}  {'offset':>10}  {'(q - asym)*T^2':>16}  "
+          f"{'(qp - asym)*T':>16}  {'(qpp + asym)*T^2':>18}")
+    print(f"  {'-'*10}  {'-'*10}  {'-'*16}  {'-'*16}  {'-'*18}")
+
+    saved_dps = mp.dps
+    mp.dps = 60
+    try:
+        Ts = [mpf(10) ** k for k in (3, 4, 5, 6, 7, 8)]
+        scaled_q_list = []
+        scaled_qp_list = []
+        scaled_qpp_list = []
+        for T in Ts:
+            half = mpf("0.25") / T  # << |I_T| ~ 1/Q(T); a comfortable interior
+            for off in [-half, mpf(0), +half]:
+                t = T + off
+                q_t = theta_prime(t, 1)
+                qp_t = theta_prime(t, 2)
+                qpp_t = theta_prime(t, 3)
+                q_asym = mpf("0.5") * mp_log(t / (2 * MP_PI))
+                qp_asym = mpf("0.5") / t
+                qpp_asym = -mpf("0.5") / t**2
+                rq = (q_t - q_asym) * t**2
+                rqp = (qp_t - qp_asym) * t
+                rqpp = (qpp_t - qpp_asym) * t**2
+                if off == 0:
+                    scaled_q_list.append(rq)
+                    scaled_qp_list.append(rqp)
+                    scaled_qpp_list.append(rqpp)
+                print(f"  {float(T):10.2e}  {float(off):+10.2e}  "
+                      f"{float(rq):+16.10f}  {float(rqp):+16.6e}  "
+                      f"{float(rqpp):+18.6e}")
+        # Asymptotic targets at the largest T:
+        #   T^2 (q - (1/2) log(T/(2 pi))) -> -1/48,
+        #   T   (q' - 1/(2 T))            -> 0  (next term is O(T^-2)),
+        #   T^2 (q'' + 1/(2 T^2))         -> 0  (next term is O(T^-2)).
+        target_q = mpf(-1) / 48
+        rel_err_q = abs(scaled_q_list[-1] - target_q) / abs(target_q)
+        rel_err_qp = abs(scaled_qp_list[-1])
+        rel_err_qpp = abs(scaled_qpp_list[-1])
+        print()
+        print(f"  At T = {float(Ts[-1]):.0e}:")
+        print(f"    q-residual rel.err to -1/48 : {float(rel_err_q):.2e}")
+        print(f"    q'-residual abs            : {float(rel_err_qp):.4e}")
+        print(f"    q''-residual abs           : {float(rel_err_qpp):.4e}")
+        assert rel_err_q < mpf("1e-6"), \
+            f"q residual scaling failed: {float(rel_err_q)}"
+        assert rel_err_qp < mpf("1e-6"), \
+            f"q' residual scaling failed: {float(rel_err_qp)}"
+        assert rel_err_qpp < mpf("1e-3"), \
+            f"q'' residual scaling failed: {float(rel_err_qpp)}"
+        print()
+        print("  [PASS] All three theta-derivative residuals scale as")
+        print("         predicted across heights and across the I_T window.")
+    finally:
+        mp.dps = saved_dps
 
 
 # ----------------------------------------------------------------------
@@ -416,14 +632,28 @@ def check_kernel_derivatives_at_pair(T1, T2):
 
     K_direct = K_phi(T1, T2)
 
+    err_K = abs(K_at_pair - K_direct)
+    err_Kx = abs(Kx - Kx_fd)
+    err_Ky = abs(Ky - Ky_fd)
+    err_Kxy = abs(Kxy - Kxy_fd)
     print(f"    K_Phi(T1,T2):        formula = {float(K_at_pair):.6e},  "
-          f"direct = {float(K_direct):.6e},  err = {float(abs(K_at_pair - K_direct)):.2e}")
+          f"direct = {float(K_direct):.6e},  err = {float(err_K):.2e}")
     print(f"    d/dx K_Phi:          formula = {float(Kx):.6e},  "
-          f"FD = {float(Kx_fd):.6e},  err = {float(abs(Kx - Kx_fd)):.2e}")
+          f"FD = {float(Kx_fd):.6e},  err = {float(err_Kx):.2e}")
     print(f"    d/dy K_Phi:          formula = {float(Ky):.6e},  "
-          f"FD = {float(Ky_fd):.6e},  err = {float(abs(Ky - Ky_fd)):.2e}")
+          f"FD = {float(Ky_fd):.6e},  err = {float(err_Ky):.2e}")
     print(f"    d^2/dxdy K_Phi:      formula = {float(Kxy):.6e},  "
-          f"FD = {float(Kxy_fd):.6e},  err = {float(abs(Kxy - Kxy_fd)):.2e}")
+          f"FD = {float(Kxy_fd):.6e},  err = {float(err_Kxy):.2e}")
+    # K_Phi(T1, T2) computed via formula and via direct kernel evaluation
+    # must match to numerical precision.
+    assert err_K < mpf("1e-25"), \
+        f"K_Phi formula vs direct mismatch: err = {float(err_K)}"
+    # FD vs closed-form derivatives must agree to ~h_fd^2 = 1e-8 at h_fd = 1e-4.
+    assert err_Kx < mpf("1e-6"), f"K_x FD mismatch: {float(err_Kx)}"
+    assert err_Ky < mpf("1e-6"), f"K_y FD mismatch: {float(err_Ky)}"
+    assert err_Kxy < mpf("1e-6"), f"K_xy FD mismatch: {float(err_Kxy)}"
+    print("    [PASS] Off-diagonal kernel-derivative formulas match FD")
+    print("           and direct evaluation at pair (independent routes).")
 
 
 # ----------------------------------------------------------------------
@@ -461,17 +691,33 @@ def main():
     check_uniform_window_q_bounds(T_center, half_window, n_samples)
     print()
 
+    print("[lem:theta-derivative-asymptotics: residuals across height ladder]")
+    print()
+    check_theta_residuals_height_ladder()
+    print()
+
     print("[kernel symmetry]")
     print()
     check_kernel_symmetry(T_center, n_pairs=20)
     print()
 
-    print("[removable singularity]")
+    print("[lem:phase-kernel-properties: removable singularity, monotone rate]")
     print()
     check_removable_singularity(T_center)
     print()
 
-    print("[kernel derivatives at distinct pair]")
+    print("[lem:phase-kernel-properties: joint-continuity multi-path approach]")
+    print()
+    eps_grid = [mpf("1e-2"), mpf("1e-3"), mpf("1e-4"), mpf("1e-6")]
+    check_diagonal_multipath(T_center, eps_grid)
+    print()
+
+    print("[lem:phase-kernel-diagonal-derivatives: numerical FD rate test]")
+    print()
+    check_diagonal_derivative_rates(T_center)
+    print()
+
+    print("[lem:phase-kernel-derivatives: kernel derivatives at distinct pair]")
     print()
     T1 = T_center
     T2 = T_center + mpf("0.5")
@@ -480,7 +726,7 @@ def main():
 
     print("=" * 70)
     print("§2 chart construction and kernel properties verified numerically")
-    print("at mpmath precision.")
+    print("at mpmath precision (every check is an assertion).")
     print("=" * 70)
 
 

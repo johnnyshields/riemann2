@@ -814,6 +814,72 @@ def verify_factored_taylor_diagonal():
     print("         by u - v.  Same diagonal derivatives as the bivariate route.")
 
 
+def verify_joint_continuity_form():
+    """Verify the joint-continuity formula in lem:phase-kernel-properties:
+       K_Phi(x, y) = sin(Phi(x) - Phi(y)) / (pi (x - y))
+                   = (A(x, y) / pi) * sinc((x - y) A(x, y))
+       where A(x, y) = int_0^1 q(y + tau (x - y)) d tau.
+
+    The sinc-form is regular at x = y (sinc(0) = 1), so the right-hand
+    side has a well-defined continuous extension to the diagonal, equal
+    to A(T, T) / pi = q(T) / pi = K_Phi(T, T).  This is the joint-
+    continuity argument used in the proof.
+
+    Test: substitute A symbolically into the sinc-form, multiply out,
+    and confirm equality with the original sin/(pi (x - y)) form.
+    """
+    print("=" * 70)
+    print("[lem:phase-kernel-properties]  joint-continuity formula")
+    print("=" * 70)
+
+    u, v, tau = sp.symbols("u v tau", real=True)
+    q_, qp_, qpp_, qppp_ = sp.symbols("q qp qpp qppp", real=True)
+
+    def q_taylor(w):
+        return (q_ + qp_ * w + Rational(1, 2) * qpp_ * w**2
+                + Rational(1, 6) * qppp_ * w**3)
+
+    A_integral = sp.integrate(q_taylor(v + tau * (u - v)), (tau, 0, 1))
+    A_integral = sp.expand(A_integral)
+
+    # Phi(T+u) - Phi(T+v) via Taylor (matches truncation depth of A above):
+    Phi_diff = (q_ * (u - v)
+                + Rational(1, 2) * qp_ * (u**2 - v**2)
+                + Rational(1, 6) * qpp_ * (u**3 - v**3)
+                + Rational(1, 24) * qppp_ * (u**4 - v**4))
+
+    # Identity (u - v) A = Phi(T + u) - Phi(T + v) at this truncation:
+    diff_A_id = sp.simplify(sp.expand((u - v) * A_integral - Phi_diff))
+    assert diff_A_id == 0, f"(u-v) A(u,v) != Phi-diff: {diff_A_id}"
+    print()
+    print("  [OK] (u - v) * A(u, v) = Phi(T+u) - Phi(T+v) symbolically.")
+
+    # K via the original formula (off-diagonal):
+    K_original = sp.sin(Phi_diff) / (PI * (u - v))
+
+    # K via the joint-continuity form:
+    z = (u - v) * A_integral
+    K_joint = (A_integral / PI) * sp.sin(z) / z
+
+    # Both should be equal as rational functions of sin/cos/u/v.
+    diff_K = sp.simplify(sp.expand(K_original - K_joint))
+    print(f"  K (original) - K (joint-continuity form): {diff_K}")
+    assert diff_K == 0, "Joint-continuity rewriting does not match original."
+    print("  [OK] Original K formula = joint-continuity rewriting.")
+
+    # Continuity at u = v: in the joint form the sinc factor sin(z)/z has
+    # the standard removable-singularity limit 1, so K -> A(T,T) / pi.
+    # Verify: A(0, 0) = q.
+    A_at_origin = A_integral.subs({u: 0, v: 0})
+    diff_A_origin = sp.simplify(A_at_origin - q_)
+    assert diff_A_origin == 0, f"A(0, 0) != q: {diff_A_origin}"
+    print(f"  A(T, T) = q.  Hence K_Phi(T, T) = q(T) / pi.")
+    print()
+    print("  [PASS] Joint-continuity rewriting verified: K_Phi has a")
+    print("         continuous extension to the diagonal whose value is")
+    print("         q(T)/pi, matching the displayed kernel diagonal.")
+
+
 def main():
     verify_symmetry()
     print()
@@ -835,12 +901,15 @@ def main():
     print()
     verify_factored_taylor_diagonal()
     print()
+    verify_joint_continuity_form()
+    print()
     print("=" * 70)
     print("All §2 lemmas verified symbolically:")
     print("  - kernel symmetry, removable singularity")
     print("  - off-diagonal and diagonal kernel-derivative formulas")
     print("  - bivariate Taylor proof of lem:phase-kernel-diagonal-derivatives")
     print("  - factored Taylor proof (no remainder divided by u - v)")
+    print("  - joint-continuity rewriting K = (A/pi) sinc((x-y) A)")
     print("  - phase-derivative lower bound (P2)")
     print("  - phase-derivative upper bounds (q' = O(T^-1), q'' = O(T^-2))")
     print("  - theta from Stirling expansion of log Gamma(1/4 + i t/2)")
