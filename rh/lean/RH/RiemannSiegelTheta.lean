@@ -93,7 +93,7 @@ private lemma z_ne_neg_nat (t : ℝ) :
 
 /-- `theta` has derivative `(1/2) Re(ψ(z(t))) − (1/2) log π` at `t`,
     provided `Γ(z(t)) ∈ slitPlane`. -/
-private lemma theta_hasDerivAt (t : ℝ)
+theorem theta_hasDerivAt (t : ℝ)
     (h_slit : Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2) ∈
               Complex.slitPlane) :
     HasDerivAt theta
@@ -152,6 +152,14 @@ private lemma theta_hasDerivAt (t : ℝ)
     have := h_div.mul_const (Real.log Real.pi)
     simpa using this
   exact h_im.sub h_linear
+
+/-- Convenience: `theta` is differentiable at `t` provided
+    `Γ(z(t)) ∈ slitPlane`. -/
+theorem theta_differentiableAt (t : ℝ)
+    (h_slit : Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2) ∈
+              Complex.slitPlane) :
+    DifferentiableAt ℝ theta t :=
+  (theta_hasDerivAt t h_slit).differentiableAt
 
 /-- `q t = (1/2) Re(digamma(1/4 + i t / 2)) − (1/2) log π`,
     provided `Γ(z(t)) ∈ slitPlane`. -/

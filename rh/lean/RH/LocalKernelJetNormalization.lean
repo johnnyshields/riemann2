@@ -106,7 +106,8 @@ theorem phase_kernel_partial_x (T₁ T₂ : ℝ) (h : T₁ ≠ T₂) :
       (q T₁ * (T₁ - T₂) * Real.cos (theta T₁ - theta T₂) -
        Real.sin (theta T₁ - theta T₂))
       / (Real.pi * (T₁ - T₂)^2) := by
-  -- TODO: quotient rule on `sin(θ(x) − θ(T₂)) / (π (x − T₂))` at `x = T₁`.
+  -- TODO: quotient rule on `sin(θ(x) − θ(T₂)) / (π (x − T₂))` at `x = T₁`,
+  -- requires theta differentiable at T₁ (h_slit hypothesis to be added).
   sorry
 
 /-- ∂/∂y K_Φ at distinct points. -/
