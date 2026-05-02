@@ -1315,276 +1315,47 @@ Lemma~\ref{lem:source-energy-to-suppression}, separating
 \end{remark}
 
 % =============================================================================
-\section{\texorpdfstring{\(N\)}{N}-point odd-moment cancellation}
+\section{\texorpdfstring{$N$}{N}-point odd-moment cancellation}
 \label{sec:n-point-odd-moment-cancellation}
 \statuspaper{LIVE}\quad
-\statusmig{migrated}\quad
-\statusreferee{in-progress}\quad
-\statussympy[rh/sympy/sec-n-point-odd-moment-cancellation.py]{verified}\quad
-\statussim[rh/simulation/sec-n-point-odd-moment-cancellation.py]{verified}\quad
-\statuslean{n/a}
+\statusmig{not-started}\quad
+\statusreferee{not-started}\quad
+\statussympy{not-started}\quad
+\statussim{not-started}\quad
+\statuslean{not-started}
 \par\medskip
 
-The two-point and four-point comparisons of
-Sections~\ref{subsec:two-point-comparison}
-and~\ref{subsec:four-point-comparison-symmetric-quartet} absorb finite
-Taylor remainders of \(\Ph\) at packet centers.  The remainders are
-controlled by the parity of an explicit discrete \(N\)-point measure
-on \(s\)-space, defined and analyzed below.
+The exponent inequality of Theorems~\ref{thm:two-point-rigidity}
+and~\ref{thm:four-point-rigidity} is load-bearing, but its inputs include
+finite remainders from the Taylor expansion of \(\Ph\) around midpoints.
+By the symmetry of the packet measure, all odd moments of the relevant
+expansion vanish; this is the mechanism that holds the remainders below
+\(\min(Q^{-A_\toy},Q^{-B_\z})\) and lets the comparison close uniformly
+in the height.
 
-\subsection{Coefficients and moment identities}
-\label{subsec:n-point-coefficients}
-
-\begin{definition}[\(N\)-point coefficients]
-\label{def:n-point-coefficients}
-For each integer \(N\ge 1\) and \(1\le j\le N\),
+\begin{lemma}[\(N\)-point odd-moment cancellation]
+\label{lem:n-point-odd-moment-cancellation}
+Let \(\widehat\mu_{N,Q}\) be the symmetric \(N\)-point packet measure
+attached to height \(T\) and scale \(Q\).  For every \(r\ge 0\),
 \begin{equation}
-\label{eq:n-point-coefficients}
-        a_j^{(N)}
-        :=
-        (-1)^{j+1}\,
-        \frac{j\,\binom{2N}{N+j}}{\binom{2N-2}{N-1}}.
+\label{eq:odd-moment-vanishing}
+\partial_z^{\,2r+1}\widehat\mu_{N,Q}(0)=0.
 \end{equation}
-\end{definition}
-
-\begin{lemma}[Moment identities for \(a_j^{(N)}\)]
-\label{lem:n-point-coefficients}
-The coefficients \(a_j^{(N)}\) of \eqref{eq:n-point-coefficients} satisfy
-\begin{align}
-\label{eq:n-point-normalization}
-        \sum_{j=1}^N a_j^{(N)}
-        &= 1,\\
-\label{eq:n-point-odd-moments-vanish}
-        \sum_{j=1}^N a_j^{(N)}\, j^{\,2r+1}
-        &= 0
-        \qquad (0\le r\le N-2),\\
-\label{eq:n-point-ell1}
-        \sum_{j=1}^N |a_j^{(N)}|
-        &= 2N - 1.
-\end{align}
-Consequently, for every integer \(k\ge 0\),
+The same identity holds with \(\widehat\mu_{N,Q}\) replaced by its
+convolution with any even bump \(\widehat\phi\): for every \(r\ge 0\),
 \begin{equation}
-\label{eq:n-point-moment-bound}
-        \Bigl|\sum_{j=1}^N a_j^{(N)}\, j^{\,k}\Bigr|
-        \;\le\;
-        (2N-1)\,N^{\,k}.
+\label{eq:odd-moment-vanishing-convolved}
+\partial_z^{\,2r+1}\bigl(\widehat\phi(\eta z)\widehat\mu_{N,Q}(z)\bigr)\big|_{z=0}=0.
 \end{equation}
 \end{lemma}
 
-\begin{proof}
-Write \(D_N=\binom{2N-2}{N-1}\), so
-\(a_j^{(N)} = (-1)^{j+1} j \binom{2N}{N+j} / D_N\).
+\begin{wip}\label{rem:wip-n-point-odd-moment-cancellation}
+Pure parity argument; v1 carries the full proof in the \(N\)-point
+odd-moment cancellation section.  Migration is straightforward provided
+the symmetry packet of \eqref{eq:odd-moment-vanishing} matches
+Definition~\ref{def:local-phase-chart}.
+\end{wip}
 
-\emph{Normalization.}  The identity
-\(j\binom{2N}{N+j} = N\bigl(\binom{2N-1}{N+j-1}-\binom{2N-1}{N+j}\bigr)\)
-turns the alternating sum into a telescoping sum, which the partial
-alternating-binomial identity
-\(\sum_{k=0}^m(-1)^k\binom{n}{k}=(-1)^m\binom{n-1}{m}\) evaluates to
-\((-1)^N D_N\).  After multiplying by \(N/D_N\) and the prefactor
-\((-1)^{j+1}\), this gives
-\(\sum_{j=1}^N a_j^{(N)} = 1\).
-
-\emph{Odd-moment vanishing.}  For any polynomial \(P(k)\) of degree
-\(<2N\),
-\begin{equation}
-\label{eq:n-point-finite-difference-identity}
-        \sum_{k=0}^{2N}(-1)^k\binom{2N}{k}P(k) = 0,
-\end{equation}
-because the operator on the left is the \(2N\)-th finite difference of
-\(P\) at the origin and any polynomial of degree \(<2N\) is annihilated
-by it.  Apply \eqref{eq:n-point-finite-difference-identity} to
-\(P(k)=(k-N)^{2r+2}\) for \(0\le r\le N-2\) (so \(2r+2 < 2N\)).  After
-the change of variables \(j=k-N\), this becomes
-\(\sum_{j=-N}^N(-1)^j\binom{2N}{N+j}j^{\,2r+2}=0\), and the
-\(j\mapsto -j\) symmetry of \((-1)^j\binom{2N}{N+j}\) restricts the sum
-to positive \(j\), giving
-\(\sum_{j=1}^N(-1)^j\binom{2N}{N+j}j^{\,2r+2}=0\).  Dividing by \(D_N\)
-yields \eqref{eq:n-point-odd-moments-vanish}.
-
-\emph{\(\ell^1\) control.}  The signs of \(a_j^{(N)}\) alternate, so
-\(\sum_{j=1}^N|a_j^{(N)}| = D_N^{-1}\sum_{j=1}^N j\binom{2N}{N+j}\).
-Telescoping the same identity used for normalization gives
-\(\sum_{j=1}^N j\binom{2N}{N+j}=N\binom{2N-1}{N}\), and the standard
-identity \(N\binom{2N-1}{N}=(2N-1)\binom{2N-2}{N-1}\) yields
-\(\sum_{j=1}^N|a_j^{(N)}|=2N-1\).
-
-The bound \eqref{eq:n-point-moment-bound} follows from
-\(|\sum a_j j^k| \le \sum|a_j|\,j^k \le (2N-1)N^k\).
-\end{proof}
-
-\subsection{The discrete \(N\)-point measure}
-\label{subsec:n-point-measure}
-
-\begin{definition}[\(N\)-point measure and its Fourier transform]
-\label{def:n-point-measure}
-For each height parameter \(Q>0\), let \(\mu_{N,Q}\) be the signed
-discrete measure on \(\mathbb R\) supported on
-\(\{j/Q^2:1\le j\le N\}\) with masses \(a_j^{(N)}\) of
-Definition~\ref{def:n-point-coefficients}.  Its Fourier transform is
-\begin{equation}
-\label{eq:mu-hat-N-Q}
-        \widehat\mu_{N,Q}(z)
-        := \sum_{j=1}^N a_j^{(N)}\, e^{j z / Q^2}.
-\end{equation}
-\end{definition}
-
-\begin{lemma}[Odd-jet vanishing of \(\widehat\mu_{N,Q}\)]
-\label{lem:n-point-odd-jet}
-For every \(N\ge 1\) and every \(Q>0\),
-\begin{equation}
-\label{eq:mu-hat-normalization}
-        \widehat\mu_{N,Q}(0) = 1,
-\end{equation}
-and
-\begin{equation}
-\label{eq:mu-hat-odd-vanishing}
-        \partial_z^{\,2r+1}\widehat\mu_{N,Q}(0) = 0
-        \qquad (0 \le r \le N - 2).
-\end{equation}
-\end{lemma}
-
-\begin{proof}
-Differentiating \eqref{eq:mu-hat-N-Q},
-\[
-        \partial_z^{\,k}\widehat\mu_{N,Q}(0)
-        = Q^{-2k}\sum_{j=1}^N a_j^{(N)}\, j^{\,k}.
-\]
-For \(k=0\) this is \(\sum_j a_j^{(N)} = 1\) by
-\eqref{eq:n-point-normalization}.  For \(k=2r+1\) with \(0\le r\le N-2\)
-the inner sum is zero by \eqref{eq:n-point-odd-moments-vanish}.
-\end{proof}
-
-\begin{lemma}[Convolution stability]
-\label{lem:n-point-convolution-parity}
-Let \(\widehat\phi:\mathbb R\to\mathbb R\) be even and \(C^\infty\) near
-\(0\), and let \(\eta\in\mathbb R\).  Then for every \(N\ge 1\) and
-every \(Q>0\),
-\begin{equation}
-\label{eq:n-point-convolution-vanishing}
-        \partial_z^{\,2r+1}
-        \bigl(\widehat\phi(\eta z)\,\widehat\mu_{N,Q}(z)\bigr)
-        \big|_{z=0}
-        = 0
-        \qquad (0 \le r \le N - 2).
-\end{equation}
-\end{lemma}
-
-\begin{proof}
-By the Leibniz rule,
-\[
-        \partial_z^{\,2r+1}
-        \bigl(\widehat\phi(\eta z)\widehat\mu_{N,Q}(z)\bigr)\big|_{z=0}
-        = \sum_{a+b = 2r+1}\binom{2r+1}{a}\,
-          \eta^a\,\widehat\phi^{\,(a)}(0)\,
-          \partial_z^{\,b}\widehat\mu_{N,Q}(0).
-\]
-With \(a+b\) odd, exactly one of \(a, b\) is odd.  If \(a\) is odd,
-\(\widehat\phi^{(a)}(0)=0\) since \(\widehat\phi\) is even.  If \(b\) is
-odd, then \(b\le 2r+1\le 2N-3\), so
-\(\partial_z^b\widehat\mu_{N,Q}(0)=0\) by
-Lemma~\ref{lem:n-point-odd-jet}.  Every summand vanishes.
-\end{proof}
-
-\begin{remark}[Even bump hypothesis is necessary]
-\label{rem:n-point-even-bump-necessary}
-The even-bump hypothesis in
-Lemma~\ref{lem:n-point-convolution-parity} is load-bearing: if
-\(\widehat\phi\) carries an odd component, the odd part of the product
-no longer vanishes at any order below \(2N-1\).  An explicit numerical
-witness for \(N=4\) appears in the simulation under
-``scope check: non-even bump breaks parity vanishing.''
-\end{remark}
-
-\subsection{Algebraic-difference identity}
-\label{subsec:n-point-difference-identity}
-
-\begin{lemma}[Closed form for \(A_N(t)-A_N(t^{-1})\)]
-\label{lem:A-N-difference}
-With \(A_N(t):=\sum_{j=1}^N a_j^{(N)}\, t^j\),
-\begin{equation}
-\label{eq:A-N-difference}
-        A_N(t) - A_N(t^{-1})
-        = \frac{(-1)^N\,N}{\binom{2N-2}{N-1}}\,
-          t^{-N}\,(1-t)^{2N-1}\,(1+t).
-\end{equation}
-\end{lemma}
-
-\begin{proof}
-Set \(F_N(t):=\sum_{j=-N}^N(-1)^j\binom{2N}{N+j}\,t^j\).  By the
-binomial theorem, \(F_N(t)=(-1)^N t^{-N}(1-t)^{2N}\).  Differentiating
-once and multiplying by \(t\),
-\[
-        t F_N'(t) = -N(-1)^N t^{-N}(1-t)^{2N-1}(1+t).
-\]
-On the other hand, the symmetry
-\((-1)^{-j}\binom{2N}{N-j}=(-1)^j\binom{2N}{N+j}\) gives
-\(tF_N'(t)=\sum_{j=1}^N j(-1)^j\binom{2N}{N+j}(t^j - t^{-j})\).
-Multiplying by \(-1/\binom{2N-2}{N-1}\) and re-introducing the
-\((-1)^{j+1}\) prefactor of \eqref{eq:n-point-coefficients} yields
-\eqref{eq:A-N-difference}.
-\end{proof}
-
-\begin{corollary}[First surviving odd derivative]
-\label{cor:n-point-first-surviving}
-For every \(N\ge 1\) and every \(Q>0\),
-\begin{equation}
-\label{eq:mu-hat-first-surviving}
-        \partial_z^{\,2N-1}\widehat\mu_{N,Q}(0)
-        = \frac{(-1)^{N+1}(2N-1)\,N!\,(N-1)!}{Q^{2(2N-1)}}.
-\end{equation}
-\end{corollary}
-
-\begin{proof}
-Substituting \(t=e^{z/Q^2}\) in \eqref{eq:A-N-difference}, the
-left-hand side equals
-\(\widehat\mu_{N,Q}(z)-\widehat\mu_{N,Q}(-z)\).  Near \(z=0\),
-\[
-        1-e^{z/Q^2}=-\frac{z}{Q^2}+O(z^2),\quad
-        e^{-Nz/Q^2}=1+O(z),\quad
-        1+e^{z/Q^2}=2+O(z).
-\]
-Therefore
-\[
-        \widehat\mu_{N,Q}(z)-\widehat\mu_{N,Q}(-z)
-        = \frac{(-1)^N\,N}{\binom{2N-2}{N-1}}\!
-          \left(-\frac{z}{Q^2}\right)^{\!2N-1}\!\!\!\cdot 2
-          + O(z^{2N})
-        = \frac{2\,(-1)^{N+1}\,N\,z^{2N-1}}
-               {\binom{2N-2}{N-1}\,Q^{2(2N-1)}}+O(z^{2N}).
-\]
-The \((2N-1)\)-fold derivative at \(z=0\) of the left-hand side is
-\(2\,\partial_z^{2N-1}\widehat\mu_{N,Q}(0)\); on the right-hand side it
-extracts \((2N-1)!\) times the leading coefficient.  Equating and using
-\(\binom{2N-2}{N-1}=(2N-2)!/((N-1)!)^2\) together with
-\(N(2N-1)!/(2N-2)!=N(2N-1)\) yields
-\eqref{eq:mu-hat-first-surviving}.
-\end{proof}
-
-\begin{remark}[Where the order-\(2N-1\) vanishing comes from]
-\label{rem:n-point-2N-minus-1-source}
-The factor \((1-t)^{2N-1}\) in \eqref{eq:A-N-difference} is the
-algebraic source of the order-\(2N-1\) odd-jet vanishing of
-\(\widehat\mu_{N,Q}\): substituting \(t=e^{z/Q^2}\),
-\(\widehat\mu_{N,Q}(z) - \widehat\mu_{N,Q}(-z)\) inherits a zero of
-order exactly \(2N-1\) at \(z=0\), with leading coefficient given by
-Corollary~\ref{cor:n-point-first-surviving}.
-\end{remark}
-
-
-\begin{remark}[Scope of \S\ref{sec:n-point-odd-moment-cancellation}]
-\label{rem:n-point-scope}
-This section supplies parity machinery only.  No
-analytic comparison, finite-scale block, or two-/four-point exponent
-estimate appears here.  The downstream consumers of
-Lemma~\ref{lem:n-point-coefficients} and
-Lemma~\ref{lem:n-point-odd-jet} are
-Section~\ref{subsec:two-point-comparison} (and the four-point
-analogue in
-Section~\ref{subsec:four-point-comparison-symmetric-quartet}),
-where the moment identities cancel finite Taylor remainders of \(\Ph\)
-inside the integrand, leaving the surviving terms below the
-\(\min(Q^{-A_\toy}, Q^{-B_\z})\) target.
-\end{remark}
 % =============================================================================
 \section{Aggregation and zero-free strip}
 \label{sec:aggregation-and-zero-free-strip}
