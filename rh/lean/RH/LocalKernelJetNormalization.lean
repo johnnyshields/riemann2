@@ -192,14 +192,86 @@ theorem phase_kernel_partial_y (T₁ T₂ : ℝ) (h : T₁ ≠ T₂)
   field_simp
   ring
 
-/-- ∂²/∂x∂y K_Φ at distinct points. -/
-theorem phase_kernel_partial_xy (T₁ T₂ : ℝ) (h : T₁ ≠ T₂) :
+/-- ∂²/∂x∂y K_Φ at distinct points, given `theta` differentiable at
+    both `T₁` and `T₂`. -/
+theorem phase_kernel_partial_xy (T₁ T₂ : ℝ) (h : T₁ ≠ T₂)
+    (h_diff_T₁ : DifferentiableAt ℝ theta T₁)
+    (h_diff_T₂ : DifferentiableAt ℝ theta T₂) :
     deriv (fun x => deriv (phaseKernel x) T₂) T₁ =
       ((q T₁ + q T₂) * (T₁ - T₂) * Real.cos (theta T₁ - theta T₂) +
        (q T₁ * q T₂ * (T₁ - T₂)^2 - 2) * Real.sin (theta T₁ - theta T₂))
       / (Real.pi * (T₁ - T₂)^3) := by
-  -- TODO: differentiate `phase_kernel_partial_y` in the first argument at `T₁`.
-  sorry
+  have h_θ₁ : HasDerivAt theta (q T₁) T₁ := h_diff_T₁.hasDerivAt
+  -- On a neighborhood of T₁, the inner deriv is given by phase_kernel_partial_y
+  have h_inner_eq : ∀ᶠ x in nhds T₁,
+      deriv (phaseKernel x) T₂ =
+        (Real.sin (theta x - theta T₂) -
+         q T₂ * (x - T₂) * Real.cos (theta x - theta T₂)) /
+        (Real.pi * (x - T₂) ^ 2) := by
+    filter_upwards [eventually_ne_nhds h] with x hx
+    exact phase_kernel_partial_y x T₂ hx h_diff_T₂
+  rw [Filter.EventuallyEq.deriv_eq h_inner_eq]
+  -- Numerator: A(x) = sin(θ(x) − θ(T₂)) − q(T₂)(x − T₂) cos(θ(x) − θ(T₂))
+  have h_θ_sub : HasDerivAt (fun x : ℝ => theta x - theta T₂) (q T₁) T₁ :=
+    h_θ₁.sub_const (theta T₂)
+  have h_sin : HasDerivAt (fun x : ℝ => Real.sin (theta x - theta T₂))
+      (Real.cos (theta T₁ - theta T₂) * q T₁) T₁ := by
+    exact (Real.hasDerivAt_sin (theta T₁ - theta T₂)).comp T₁ h_θ_sub
+  have h_cos : HasDerivAt (fun x : ℝ => Real.cos (theta x - theta T₂))
+      (-Real.sin (theta T₁ - theta T₂) * q T₁) T₁ := by
+    exact (Real.hasDerivAt_cos (theta T₁ - theta T₂)).comp T₁ h_θ_sub
+  have h_xT₂ : HasDerivAt (fun x : ℝ => x - T₂) (1 : ℝ) T₁ :=
+    (hasDerivAt_id T₁).sub_const T₂
+  have h_xT₂_cos : HasDerivAt (fun x : ℝ => (x - T₂) * Real.cos (theta x - theta T₂))
+      (1 * Real.cos (theta T₁ - theta T₂) +
+        (T₁ - T₂) * (-Real.sin (theta T₁ - theta T₂) * q T₁)) T₁ :=
+    h_xT₂.mul h_cos
+  have h_qT₂_term : HasDerivAt
+      (fun x : ℝ => q T₂ * ((x - T₂) * Real.cos (theta x - theta T₂)))
+      (q T₂ * (1 * Real.cos (theta T₁ - theta T₂) +
+        (T₁ - T₂) * (-Real.sin (theta T₁ - theta T₂) * q T₁))) T₁ :=
+    h_xT₂_cos.const_mul (q T₂)
+  have h_num : HasDerivAt
+      (fun x : ℝ => Real.sin (theta x - theta T₂) -
+                    q T₂ * ((x - T₂) * Real.cos (theta x - theta T₂)))
+      (Real.cos (theta T₁ - theta T₂) * q T₁ -
+        q T₂ * (1 * Real.cos (theta T₁ - theta T₂) +
+          (T₁ - T₂) * (-Real.sin (theta T₁ - theta T₂) * q T₁))) T₁ :=
+    h_sin.sub h_qT₂_term
+  have h_num_eq_fn :
+      (fun x : ℝ => Real.sin (theta x - theta T₂) -
+                    q T₂ * ((x - T₂) * Real.cos (theta x - theta T₂))) =
+      (fun x : ℝ => Real.sin (theta x - theta T₂) -
+                    q T₂ * (x - T₂) * Real.cos (theta x - theta T₂)) := by
+    funext x; ring
+  rw [h_num_eq_fn] at h_num
+  -- Denominator: D(x) = π (x − T₂)²
+  have h_xT₂_sq : HasDerivAt (fun x : ℝ => (x - T₂) ^ 2) (2 * (T₁ - T₂)) T₁ := by
+    have := h_xT₂.pow 2
+    simpa using this
+  have h_den : HasDerivAt (fun x : ℝ => Real.pi * (x - T₂) ^ 2)
+      (Real.pi * (2 * (T₁ - T₂))) T₁ :=
+    h_xT₂_sq.const_mul Real.pi
+  have h_den_ne : Real.pi * (T₁ - T₂) ^ 2 ≠ 0 := by
+    have : (T₁ - T₂) ^ 2 ≠ 0 := pow_ne_zero _ (sub_ne_zero.mpr h)
+    exact mul_ne_zero Real.pi_ne_zero this
+  -- Quotient with explicit return type to avoid Function.div display
+  have h_quot : HasDerivAt
+      (fun x : ℝ => (Real.sin (theta x - theta T₂) -
+                     q T₂ * (x - T₂) * Real.cos (theta x - theta T₂)) /
+                    (Real.pi * (x - T₂) ^ 2))
+      (((Real.cos (theta T₁ - theta T₂) * q T₁ -
+          q T₂ * (1 * Real.cos (theta T₁ - theta T₂) +
+            (T₁ - T₂) * (-Real.sin (theta T₁ - theta T₂) * q T₁))) *
+          (Real.pi * (T₁ - T₂) ^ 2) -
+        (Real.sin (theta T₁ - theta T₂) -
+          q T₂ * (T₁ - T₂) * Real.cos (theta T₁ - theta T₂)) *
+          (Real.pi * (2 * (T₁ - T₂)))) /
+        (Real.pi * (T₁ - T₂) ^ 2) ^ 2) T₁ :=
+    h_num.div h_den h_den_ne
+  rw [h_quot.deriv]
+  field_simp
+  ring
 
 /-! ## Point-to-jet transform -/
 
