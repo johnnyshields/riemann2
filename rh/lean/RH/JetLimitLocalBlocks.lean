@@ -24,13 +24,14 @@ Theorems:
 -/
 
 import Mathlib.Data.Matrix.Basic
-import Mathlib.Data.Matrix.Notation
+import Mathlib.LinearAlgebra.Matrix.Notation
 import Mathlib.LinearAlgebra.Matrix.PosDef
 import Mathlib.LinearAlgebra.Matrix.Trace
+import Mathlib.Topology.Instances.Matrix
 import Mathlib.Topology.Order.Basic
 import Mathlib.Topology.Algebra.Order.Field
 
-import «sec-local-kernel-and-jet-normalization»
+import RH.LocalKernelJetNormalization
 
 namespace RH.JetLimitLocalBlocks
 
