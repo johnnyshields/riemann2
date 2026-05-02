@@ -365,7 +365,40 @@ def main():
     print("         confirms the O(h^2) rate from the fourth-order parity argument.")
 
     # ----------------------------------------------------------------
-    # h < |s|/3 hypothesis: show breakdown.
+    # h < |s|/3: sampled square stays |s + u_1 - u_2| >= |s|/3.
+    # ----------------------------------------------------------------
+    print()
+    print("[h < |s|/3 keeps |s + u1 - u2| >= |s|/3 on the sampled square]")
+    print()
+    print(f"  {'h / |s|':>10}  {'min|s + u1 - u2|':>20}  {'|s|/3':>10}  {'>= |s|/3?':>10}")
+    print(f"  {'-'*10}  {'-'*20}  {'-'*10}  {'-'*10}")
+    s_test = mpf(1)
+    bound = abs(s_test) / 3
+    all_ok = True
+    for ratio in [mpf("0.001"), mpf("0.01"), mpf("0.1"),
+                  mpf("0.2"), mpf("0.3"), mpf("0.333")]:
+        h = ratio * abs(s_test)
+        # u1, u2 in {-h, +h}: minimum of |s + u1 - u2| is |s| - 2h (attained at
+        # (u1, u2) = (-h, +h) when s > 0).
+        min_dist = min(abs(s_test + u1 - u2)
+                       for u1 in [-h, h] for u2 in [-h, h])
+        ok = min_dist >= bound - mpf("1e-25")
+        if not ok:
+            all_ok = False
+        print(f"  {float(ratio):10.4f}  {float(min_dist):20.10f}  "
+              f"{float(bound):10.4f}  {'YES' if ok else 'NO':>10}")
+    print()
+    if all_ok:
+        print("  [PASS] For every h with h <= |s|/3, the four-sample square")
+        print("         {(s + u1 - u2) : u1, u2 in {-h, +h}} stays at distance")
+        print("         >= |s|/3 from the diagonal s + u = 0.  This is the")
+        print("         uniform separation used in the hardened cross-block")
+        print("         proof to control the Taylor remainder.")
+    else:
+        raise AssertionError("Sample square enters the diagonal under h <= |s|/3")
+
+    # ----------------------------------------------------------------
+    # h < |s|/3 hypothesis: show breakdown beyond the safe range.
     # ----------------------------------------------------------------
     print()
     print("[hypothesis 0 < h < |s|/3 in cross-block lemma]")

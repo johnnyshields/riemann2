@@ -683,6 +683,123 @@ def verify_bivariate_diagonal_taylor():
     print("         eq:diagonal-kernel-derivatives.")
 
 
+def verify_factored_taylor_diagonal():
+    """Verify the factored Taylor proof of lem:phase-kernel-diagonal-derivatives:
+
+       Phi(T+u) - Phi(T+v) = (u - v) * A(u, v),
+       A(u, v) = int_0^1 q(T + v + tau (u - v)) d tau
+              = q + (q'/2)(u + v) + (q''/6)(u^2 + u v + v^2) + O(r^3),
+
+       sin(Phi(T+u) - Phi(T+v)) / (u - v) = A(u, v) - (u-v)^2/6 A^3 + O(r^3),
+
+    so that no remainder is divided by (u - v) when reading off the diagonal
+    derivatives.  The factored form recovers the same kernel polynomial as
+    verify_bivariate_diagonal_taylor, but via an integrand that is regular
+    on the diagonal.
+    """
+    print("=" * 70)
+    print("[lem:phase-kernel-diagonal-derivatives]  factored Taylor proof")
+    print("=" * 70)
+
+    u, v, tau = sp.symbols("u v tau", real=True)
+    q_, qp_, qpp_, qppp_ = sp.symbols("q qp qpp qppp", real=True)
+
+    # q(T + w) Taylor in w:
+    def q_taylor(w):
+        return (q_ + qp_ * w + Rational(1, 2) * qpp_ * w**2
+                + Rational(1, 6) * qppp_ * w**3)
+
+    # Integrand q(T + v + tau (u - v)) and integrate over tau in [0, 1].
+    integrand = q_taylor(v + tau * (u - v))
+    A_integral = sp.integrate(integrand, (tau, 0, 1))
+    A_integral = sp.expand(A_integral)
+
+    # Expected truncation: A(u, v) = q + (q'/2)(u + v) + (q''/6)(u^2 + uv + v^2) + O(r^3).
+    # Drop monomials of total degree >= 3 in (u, v) using a uniform scaling u, v -> eps u, eps v.
+    eps = sp.symbols("eps", positive=True)
+    A_eps = A_integral.subs({u: eps * u, v: eps * v})
+    A_series = sp.series(A_eps, eps, 0, 3).removeO()
+    A_truncated = sp.expand(A_series.subs(eps, 1))
+
+    A_expected = (
+        q_
+        + Rational(1, 2) * qp_ * (u + v)
+        + Rational(1, 6) * qpp_ * (u**2 + u * v + v**2)
+    )
+
+    diff_A = sp.simplify(sp.expand(A_truncated - A_expected))
+
+    print()
+    print("  A(u, v) = int_0^1 q(T + v + tau (u-v)) d tau (truncated to total deg <= 2):")
+    sp.pprint(sp.expand(A_truncated))
+    print()
+    print("  Expected A(u, v) (from displayed proof):")
+    sp.pprint(sp.expand(A_expected))
+    print()
+    print(f"  Difference: {diff_A}")
+    if diff_A != 0:
+        raise AssertionError(f"Factored A(u, v) mismatch: {diff_A}")
+    print("  [OK] A(u, v) matches the displayed expansion.")
+    print()
+
+    # (u - v) * A(u, v) must equal Phi(T+u) - Phi(T+v) up to total degree O(r^4).
+    Phi_diff = (q_ * (u - v)
+                + Rational(1, 2) * qp_ * (u**2 - v**2)
+                + Rational(1, 6) * qpp_ * (u**3 - v**3)
+                + Rational(1, 24) * qppp_ * (u**4 - v**4))
+
+    factored = sp.expand((u - v) * A_integral)
+
+    diff_factored = sp.simplify(sp.expand(factored - Phi_diff))
+
+    print("  Verifying (u - v) * A(u, v) reproduces Phi(T+u) - Phi(T+v):")
+    print(f"  Difference up to deg-3 Taylor of q: {diff_factored}")
+    # The integrated A truncates q at qppp; the Phi_diff truncates at qppp;
+    # both forms agree exactly through that order.
+    if diff_factored != 0:
+        # Series-truncate to total degree <= 4 in (u, v) and confirm match.
+        diff_eps = diff_factored.subs({u: eps * u, v: eps * v})
+        diff_trunc = sp.series(diff_eps, eps, 0, 5).removeO()
+        diff_trunc = sp.expand(diff_trunc.subs(eps, 1))
+        if sp.simplify(diff_trunc) != 0:
+            raise AssertionError(
+                f"(u - v) A(u, v) does not match Phi(T+u) - Phi(T+v): {diff_trunc}"
+            )
+    print("  [OK] (u - v) * A(u, v) = Phi(T+u) - Phi(T+v) at the matching truncation.")
+    print()
+
+    # Recover the kernel polynomial via K = sin((u-v) A) / (pi (u-v))
+    #                              = (1/pi) [A - (u-v)^2 A^3 / 6 + O(r^4)].
+    # Compute through total degree 2 in (u, v) and compare with the
+    # bivariate-Taylor expected polynomial.
+    A_for_kernel = A_truncated  # already total deg <= 2
+    correction = -(u - v)**2 * A_for_kernel**3 / 6  # leading correction is deg >= 4
+    K_factored = (A_for_kernel + correction) / PI
+    K_eps = K_factored.subs({u: eps * u, v: eps * v})
+    K_series = sp.series(K_eps, eps, 0, 3).removeO()
+    K_truncated = sp.expand(K_series.subs(eps, 1))
+
+    K_expected = (1 / PI) * (
+        q_
+        + Rational(1, 2) * qp_ * (u + v)
+        + (Rational(1, 6) * qpp_ - Rational(1, 6) * q_**3) * (u**2 + v**2)
+        + (Rational(1, 6) * qpp_ + Rational(1, 3) * q_**3) * u * v
+    )
+    diff_K = sp.simplify(sp.expand(K_truncated - K_expected))
+
+    print("  Kernel polynomial K(T+u, T+v) reconstructed via factored route:")
+    sp.pprint(sp.expand(K_truncated))
+    print()
+    print(f"  Difference vs displayed bivariate polynomial: {diff_K}")
+    if diff_K != 0:
+        raise AssertionError(f"Factored route mismatch: {diff_K}")
+    print()
+    print("  [PASS] Factored proof of lem:phase-kernel-diagonal-derivatives:")
+    print("         A(u, v) regular on the diagonal, (u - v) factor explicit,")
+    print("         kernel polynomial recovered without dividing a remainder")
+    print("         by u - v.  Same diagonal derivatives as the bivariate route.")
+
+
 def main():
     verify_symmetry()
     print()
@@ -702,11 +819,14 @@ def main():
     print()
     verify_bivariate_diagonal_taylor()
     print()
+    verify_factored_taylor_diagonal()
+    print()
     print("=" * 70)
     print("All §2 lemmas verified symbolically:")
     print("  - kernel symmetry, removable singularity")
     print("  - off-diagonal and diagonal kernel-derivative formulas")
     print("  - bivariate Taylor proof of lem:phase-kernel-diagonal-derivatives")
+    print("  - factored Taylor proof (no remainder divided by u - v)")
     print("  - phase-derivative lower bound (P2)")
     print("  - phase-derivative upper bounds (q' = O(T^-1), q'' = O(T^-2))")
     print("  - theta from Stirling expansion of log Gamma(1/4 + i t/2)")

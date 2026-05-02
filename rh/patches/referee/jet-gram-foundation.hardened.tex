@@ -1,5 +1,5 @@
 % =============================================================================
-% Patch: jet-Gram foundation (referee-revised, hardened)
+% Patch: jet-Gram foundation (referee-revised)
 %   §2  sec:local-kernel-and-jet-normalization
 %   §3  sec:jet-limit-local-blocks
 %
@@ -9,28 +9,24 @@
 % Action: replace the existing §2 and §3 with the content below.
 %
 % Referee revisions integrated:
-%   - theta defined precisely as Im L(1/4 + i t / 2) - (t/2) log pi, with
-%     L(z) the unique holomorphic branch of log Gamma z on Re z > 0
-%     that is real on the positive real axis (Definition
-%     `def:riemann-siegel-phase').
+%   - theta defined precisely as Im log Gamma(1/4 + it/2) - (t/2) log pi
+%     with continuous branch (Definition `def:riemann-siegel-phase').
 %   - Window uniformity made explicit at section start:
 %     I_T subset [T/2, 2T] and |I_T| << Q(T)^{-1}, used uniformly in
-%     all Stirling-type estimates; differentiated Stirling on a fixed
-%     sector recorded.
+%     all Stirling-type estimates.
 %   - Differentiated theta asymptotics extracted as an explicit lemma
 %     (`lem:theta-derivative-asymptotics') giving uniform bounds on
-%     q, q', q'' over I_T with absolute O-constants.
+%     q, q', q'' over I_T.
 %   - (P2) recast as q(t) >= 1 (which subsumes any polynomial-in-Q
 %     bound with c_q = 0 when Q >= 1).
 %   - Diagonal kernel derivatives separated into their own lemma
-%     (`lem:phase-kernel-diagonal-derivatives') with a *factored*
-%     diagonal Taylor proof, so no remainder is divided by u - v.
+%     (`lem:phase-kernel-diagonal-derivatives') with a factored
+%     diagonal Taylor proof, so no remainder is divided by u-v.
 %   - Same-point jet limit stated with explicit entrywise O(h^2) rate.
 %   - Cross-block jet limit: hypothesis 0 < h < |s|/3 added; proof now
 %     uses fourth-order parity argument with sign weights
-%     1, sigma_2, sigma_1, sigma_1 sigma_2; the constraint h < |s|/3
-%     is used explicitly to keep |s + u_1 - u_2| >= |s|/3 on the
-%     sampled square.
+%     1, sigma_2, sigma_1, sigma_1 sigma_2 to make the O(h^2) rate
+%     referee-safe.
 %   - Same-point Gram positivity made explicitly theta-specific, with
 %     two-sided lambda_min asymptotic 2 q(T) / pi (1 + o(1)).
 %   - Scope guardrail remark added: positivity here does NOT prove
@@ -314,8 +310,8 @@ P_h
 \end{equation}
 Thus \(P_h\) is the literal central value/derivative jet transform
 followed by the fixed diagonal congruence
-\(\diag(\sqrt 2, 1/\sqrt 2)\).  The value/derivative basis produced by
-\(P_h\) is the \emph{Gram-normalized basis}.
+\(\diag(\sqrt 2, 1/\sqrt 2)\).  We refer to the value/derivative basis
+produced by \(P_h\) as the \emph{Gram-normalized basis}.
 
 With this convention,
 \begin{equation}

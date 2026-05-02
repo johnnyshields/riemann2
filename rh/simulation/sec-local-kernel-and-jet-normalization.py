@@ -120,12 +120,45 @@ def K_phi(x, y):
 
 def check_theta_via_loggamma():
     """Verify mpmath's siegeltheta(t) matches
-        theta(t) = Im log Gamma(1/4 + i t / 2) - (t/2) log pi.
+        theta(t) = Im L(1/4 + i t / 2) - (t/2) log pi
+    with L(z) the holomorphic branch of log Gamma z on Re z > 0 that is
+    real on the positive real axis (Definition def:riemann-siegel-phase).
+
+    Also confirms the branch convention numerically:
+      L(x) is real for x > 0  (so mpmath's loggamma returns a real value
+      on the positive real axis, matching L).
     """
-    print("  Compare siegeltheta(t) to Im log Gamma(1/4 + i t / 2) - (t/2) log pi.")
+    print("  Branch convention: L(x) = log Gamma(x) real on x > 0.")
+    print()
+    print(f"  {'x':>10}  {'L(x) = loggamma(x)':>30}  {'|Im L(x)|':>14}")
+    print(f"  {'-'*10}  {'-'*30}  {'-'*14}")
+    saved_dps = mp.dps
+    mp.dps = 50
+    try:
+        max_im = mpf(0)
+        for x in [mpf("0.25"), mpf("0.5"), mpf("1"), mpf("5"), mpf("100")]:
+            Lx = loggamma(mpc(x, 0))
+            im_abs = abs(Lx.imag)
+            if im_abs > max_im:
+                max_im = im_abs
+            print(f"  {float(x):10.4f}  {mp.nstr(Lx.real, 16):>30}  "
+                  f"{float(im_abs):14.4e}")
+        if max_im < mpf("1e-40"):
+            print()
+            print("  [PASS] L(x) is real on the positive real axis "
+                  "(holomorphic branch convention).")
+        else:
+            print()
+            print(f"  [WARN] Max |Im L(x)| = {float(max_im):.4e} on tested "
+                  f"positive reals.")
+    finally:
+        mp.dps = saved_dps
+
+    print()
+    print("  Compare siegeltheta(t) to Im L(1/4 + i t / 2) - (t/2) log pi.")
     print()
     print(f"  {'t':>10}  {'siegeltheta(t)':>22}  "
-          f"{'Im logGamma(...) - (t/2) log pi':>34}  {'diff':>14}")
+          f"{'Im L(...) - (t/2) log pi':>34}  {'diff':>14}")
     print(f"  {'-'*10}  {'-'*22}  {'-'*34}  {'-'*14}")
 
     saved_dps = mp.dps
