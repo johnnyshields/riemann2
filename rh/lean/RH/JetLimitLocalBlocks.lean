@@ -106,14 +106,26 @@ noncomputable def D_J (T : ℝ) : ℝ :=
 /-- Trace identity for `J(T)`. -/
 theorem J_trace (T : ℝ) :
     (J T).trace = (2 * (q T)^3 + 24 * q T + qDoublePrime T) / (12 * Real.pi) := by
-  sorry
+  have hπ : (Real.pi : ℝ) ≠ 0 := Real.pi_ne_zero
+  simp only [J, Matrix.trace_smul, Matrix.trace_fin_two_of, smul_eq_mul]
+  field_simp
+  ring
 
 /-- Determinant identity for `J(T)`. -/
 theorem J_det (T : ℝ) :
     (J T).det = D_J T / (12 * Real.pi^2) := by
-  sorry
+  have hπ : (Real.pi : ℝ) ≠ 0 := Real.pi_ne_zero
+  simp only [J, Matrix.det_smul, Matrix.det_fin_two_of, Fintype.card_fin, D_J]
+  field_simp
+  ring
 
-/-- Algebraic Gram criterion: `J(T) ≻ 0` iff `q(T) > 0` and `D_J(T) > 0`. -/
+/-- Algebraic Gram criterion: `J(T) ≻ 0` iff `q(T) > 0` and `D_J(T) > 0`.
+
+    Real symmetric 2×2 Sylvester: a positive-definite real symmetric
+    `[[a, b], [b, d]]` is characterized by `a > 0 ∧ a d - b² > 0`.  The
+    forward direction uses `J 0 0 = 2 q / π` (so `e₁ᵀ J e₁ > 0` forces
+    `q > 0`) and the determinant identity from `J_det`.  The reverse
+    direction completes the square. -/
 theorem algebraic_gram_criterion (T : ℝ) :
     (J T).PosDef ↔ 0 < q T ∧ 0 < D_J T := by
   sorry
