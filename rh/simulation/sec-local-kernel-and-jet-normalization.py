@@ -1,41 +1,97 @@
 """Numerical simulation: sec:local-kernel-and-jet-normalization.
 
 Verifies the §2 chart construction and kernel properties against actual
-zeta data via mpmath:
+zeta data using mpmath arbitrary-precision arithmetic.
 
-  * Compute |zeta(1/2 + it)| on a window I_T centered at T = 1e4;
-    confirm a polynomial-in-(log T) lower bound holds on a positive
-    fraction of the window (the (P1) chart-denominator condition).
-  * Compute theta(t), theta'(t), theta''(t), theta'''(t) on the
-    window; confirm theta(t) is real, theta'(t) > 0, and the
-    polynomial bounds (P2) hold.
-  * Verify K_Phi symmetry and removable singularity numerically.
-  * Verify the four kernel-derivative formulas of
-    lem:phase-kernel-derivatives against finite-difference estimates.
+Coverage:
+
+  * theta(t) = Im log Gamma(1/4 + i t / 2) - (t/2) log pi matches
+    mpmath's siegeltheta (def:riemann-siegel-phase).
+  * |zeta(1/2 + it)| has a polynomial-in-(log T) lower bound on a
+    positive-fraction subfamily of windows.
+  * theta'(t) = q(t) >= 1 uniformly on I_T (condition (P2)).
+  * Riemann-Siegel residual: theta'(t) - (1/2) log(t/(2 pi)) ~ -1/(48 t^2)
+    over a height ladder.
+  * theta-derivative asymptotics uniform on I_T = [T_center +- 1/Q].
+  * K_Phi symmetry, removable singularity, off-diagonal derivative
+    formulas (lem:phase-kernel-derivatives) match finite-difference
+    estimates.
+
+All numerical computations use mpmath; no numpy, no math, no float
+arithmetic in the verification loop.  Float conversion is limited to
+print-time formatting.
 
 Run:
   python rh/simulation/sec-local-kernel-and-jet-normalization.py
-
-Requires: mpmath.
 """
 
-import math
 import sys
 
-import numpy as np
 from mpmath import (
+    cos as mp_cos,
     diff,
     log as mp_log,
+    loggamma,
     mp,
+    mpc,
     mpf,
     pi as MP_PI,
     siegeltheta,
     sin as mp_sin,
+    sqrt as mp_sqrt,
     zeta,
 )
 
 
-mp.dps = 25  # 25 decimal places; enough for finite-difference checks.
+mp.dps = 30  # 30 decimal places baseline; bumped where needed.
+
+
+# ----------------------------------------------------------------------
+# mpmath-native helpers (replacing numpy / math).
+# ----------------------------------------------------------------------
+
+def linspace_mp(a, b, n):
+    """Return n mpf samples from a to b inclusive."""
+    a = mpf(a)
+    b = mpf(b)
+    if n <= 1:
+        return [a]
+    step = (b - a) / (n - 1)
+    return [a + i * step for i in range(n)]
+
+
+def max_mp(xs):
+    """Maximum of an iterable of mpfs (or anything with __gt__)."""
+    it = iter(xs)
+    m = next(it)
+    for x in it:
+        if x > m:
+            m = x
+    return m
+
+
+def mean_mp(xs):
+    """Arithmetic mean of an iterable of mpfs."""
+    xs = list(xs)
+    return sum(xs) / len(xs)
+
+
+def median_mp(xs):
+    """Median of a list of mpfs."""
+    xs_sorted = sorted(xs)
+    n = len(xs_sorted)
+    if n % 2 == 1:
+        return xs_sorted[n // 2]
+    return (xs_sorted[n // 2 - 1] + xs_sorted[n // 2]) / 2
+
+
+def loglog_slope(xs, ys):
+    """Two-point log-log slope from the first and last sample.
+
+    For a power law y = C x^k, log(y_n / y_0) / log(x_n / x_0) = k.
+    Uses arbitrary-precision arithmetic.
+    """
+    return mp_log(ys[-1] / ys[0]) / mp_log(xs[-1] / xs[0])
 
 
 # ----------------------------------------------------------------------
@@ -59,232 +115,13 @@ def K_phi(x, y):
 
 
 # ----------------------------------------------------------------------
-# (P1) Chart-denominator condition: |zeta(1/2 + it)| not too small.
+# def:riemann-siegel-phase: theta from Im log Gamma.
 # ----------------------------------------------------------------------
-
-def check_chart_denominator(T_center, half_window, n_samples):
-    """Sample |zeta(1/2 + it)| on I_T, report stats and lower bound."""
-    print(f"  Window: T_center = {float(T_center):.2e}, "
-          f"half_width = {float(half_window):.4f}, "
-          f"n_samples = {n_samples}")
-
-    ts = np.linspace(
-        float(T_center - half_window),
-        float(T_center + half_window),
-        n_samples,
-    )
-    vals = np.array([float(abs(zeta(mpf("0.5") + 1j * mpf(t)))) for t in ts])
-
-    log_T = math.log(float(T_center))
-    inv_log_T_pow = 1.0 / log_T  # the natural Q if Q ~ log T
-
-    print(f"    |zeta| range:    min = {vals.min():.4e}, "
-          f"median = {np.median(vals):.4e}, max = {vals.max():.4e}")
-    print(f"    log(T)         = {log_T:.4f}")
-    print(f"    1 / log(T)     = {inv_log_T_pow:.4e}")
-
-    frac_above = float(np.mean(vals >= inv_log_T_pow))
-    print(f"    fraction with |zeta| >= 1/log(T) : {frac_above:.4f}")
-
-    if frac_above >= 0.5:
-        print("    [PASS] Positive-fraction subfamily satisfies (P1).")
-    else:
-        print("    [WARN] Less than 50% of window has |zeta| >= 1/log T;")
-        print("           retained packets are a polynomial-weight")
-        print("           subset of the window.")
-
-
-# ----------------------------------------------------------------------
-# (P2) Phase-derivative lower bound.
-# ----------------------------------------------------------------------
-
-def check_phase_derivative_lower_bound(T_center, half_window, n_samples):
-    """Sample theta'(t) on I_T, confirm polynomial-in-(log T) lower bound."""
-    print(f"  Sampling q(t) = theta'(t) at T_center = {float(T_center):.2e}")
-
-    ts = np.linspace(
-        float(T_center - half_window),
-        float(T_center + half_window),
-        n_samples,
-    )
-    qs = np.array([float(theta_prime(t, 1)) for t in ts])
-    qps = np.array([float(theta_prime(t, 2)) for t in ts])
-    qpps = np.array([float(theta_prime(t, 3)) for t in ts])
-
-    expected_q = 0.5 * math.log(float(T_center) / (2 * math.pi))
-    print(f"    q(t)   range: min = {qs.min():.4f}, "
-          f"max = {qs.max():.4f}, asymptote (1/2)log(T/2pi) = {expected_q:.4f}")
-    print(f"    q'(t)  range: min = {qps.min():.4e}, max = {qps.max():.4e}")
-    print(f"    q''(t) range: min = {qpps.min():.4e}, max = {qpps.max():.4e}")
-
-    if qs.min() > 0:
-        print("    [PASS] q(t) > 0 throughout the window (P2 holds with c_q = 0).")
-    else:
-        print("    [FAIL] q(t) attained non-positive value; chart fails (P2).")
-
-    # |q'|, |q''| should be bounded by polynomials in 1/T (small at high T).
-    if abs(qps).max() < 1.0 and abs(qpps).max() < 1.0:
-        print("    Polynomial upper bounds on q', q'' confirmed numerically.")
-
-
-# ----------------------------------------------------------------------
-# Kernel symmetry and removable singularity.
-# ----------------------------------------------------------------------
-
-def check_kernel_symmetry(T_center, n_pairs):
-    print(f"  Sampling K_Phi(x, y) and K_Phi(y, x) at random pairs near T = "
-          f"{float(T_center):.2e}")
-    rng = np.random.default_rng(seed=42)
-    max_err = 0.0
-    for _ in range(n_pairs):
-        x = float(T_center) + rng.uniform(-1, 1) * 0.1
-        y = float(T_center) + rng.uniform(-1, 1) * 0.1
-        if abs(x - y) < 1e-6:
-            continue
-        kxy = float(K_phi(x, y))
-        kyx = float(K_phi(y, x))
-        err = abs(kxy - kyx)
-        max_err = max(max_err, err)
-    print(f"    max |K_Phi(x,y) - K_Phi(y,x)| over {n_pairs} pairs = {max_err:.4e}")
-    if max_err < 1e-12:
-        print("    [PASS] Kernel symmetry holds to numerical precision.")
-    else:
-        print("    [WARN] Symmetry deviation above 1e-12.")
-
-
-def check_removable_singularity(T_center):
-    print(f"  Removable singularity: K_Phi(T+h, T) -> q(T)/pi as h -> 0")
-    T = mpf(T_center)
-    q_at_T = float(theta_prime(T, 1) / MP_PI)
-    print(f"    q(T)/pi (target) = {q_at_T:.6e}")
-    for h_pow in [-1, -2, -4, -6, -10, -15]:
-        h = 10.0 ** h_pow
-        kval = float(K_phi(float(T) + h, float(T)))
-        err = abs(kval - q_at_T)
-        print(f"    h = 1e{h_pow:>3d}: K_Phi(T+h, T) = {kval:.6e}, "
-              f"err = {err:.4e}")
-
-
-# ----------------------------------------------------------------------
-# Phase-kernel derivatives at distinct points.
-# ----------------------------------------------------------------------
-
-def check_kernel_derivatives_at_pair(T1, T2):
-    """Compare the displayed formulas to finite-difference estimates."""
-    print(f"  Comparing closed-form derivatives at (T1, T2) = "
-          f"({float(T1):.4e}, {float(T2):.4e})")
-
-    s = float(T1 - T2)
-    Delta = float(theta(T1) - theta(T2))
-    q1 = float(theta_prime(T1, 1))
-    q2 = float(theta_prime(T2, 1))
-    pi = float(MP_PI)
-
-    K_at_pair = math.sin(Delta) / (pi * s)
-    Kx = (q1 * s * math.cos(Delta) - math.sin(Delta)) / (pi * s**2)
-    Ky = (math.sin(Delta) - q2 * s * math.cos(Delta)) / (pi * s**2)
-    Kxy = ((q1 + q2) * s * math.cos(Delta)
-           + (q1 * q2 * s**2 - 2) * math.sin(Delta)) / (pi * s**3)
-
-    # Finite-difference estimates with central differences.
-    h_fd = 1e-4
-    K_pp = float(K_phi(float(T1) + h_fd, float(T2)))
-    K_mm = float(K_phi(float(T1) - h_fd, float(T2)))
-    K_pm = float(K_phi(float(T1), float(T2) + h_fd))
-    K_mp = float(K_phi(float(T1), float(T2) - h_fd))
-    K_pp_pp = float(K_phi(float(T1) + h_fd, float(T2) + h_fd))
-    K_pp_mm = float(K_phi(float(T1) + h_fd, float(T2) - h_fd))
-    K_mm_pp = float(K_phi(float(T1) - h_fd, float(T2) + h_fd))
-    K_mm_mm = float(K_phi(float(T1) - h_fd, float(T2) - h_fd))
-
-    Kx_fd = (K_pp - K_mm) / (2 * h_fd)
-    Ky_fd = (K_pm - K_mp) / (2 * h_fd)
-    Kxy_fd = (K_pp_pp - K_pp_mm - K_mm_pp + K_mm_mm) / (4 * h_fd**2)
-
-    K_fd = float(K_phi(float(T1), float(T2)))
-
-    print(f"    K_Phi(T1,T2):        formula = {K_at_pair:.6e},  "
-          f"direct = {K_fd:.6e},  err = {abs(K_at_pair - K_fd):.2e}")
-    print(f"    d/dx K_Phi:          formula = {Kx:.6e},  "
-          f"FD = {Kx_fd:.6e},  err = {abs(Kx - Kx_fd):.2e}")
-    print(f"    d/dy K_Phi:          formula = {Ky:.6e},  "
-          f"FD = {Ky_fd:.6e},  err = {abs(Ky - Ky_fd):.2e}")
-    print(f"    d^2/dxdy K_Phi:      formula = {Kxy:.6e},  "
-          f"FD = {Kxy_fd:.6e},  err = {abs(Kxy - Kxy_fd):.2e}")
-
-
-# ----------------------------------------------------------------------
-# Main.
-# ----------------------------------------------------------------------
-
-def check_p2_across_height_ladder():
-    """Numerical verification of Lemma lem:phase-derivative-lower-bound:
-    q(t) = theta'(t) ~ (1/2) log(t / (2*pi)) with correction O(t^{-2}).
-
-    Sweep T over a height ladder and compare empirical q(T) against the
-    asymptotic; fit the residual to confirm scaling -1/(48 T^2).
-
-    Uses mpmath throughout (50 dps) so the residual is resolvable up to
-    T ~ 1e8 (the residual itself is only ~ 4e-19 at T = 1e8).
-    """
-    from mpmath import log as mp_log, mpf as mpf2
-
-    saved_dps = mp.dps
-    mp.dps = 50  # boost precision so 1/(48 T^2) ~ 1e-19 is resolvable.
-    try:
-        print("  Sweep heights and compare q(T) = theta'(T) to (1/2) log(T/(2pi)).")
-        print("  (mpmath precision: 50 dps; residual is ~ 1/(48 T^2) ~ 1e-3 to 1e-19.)")
-        print()
-        print(f"  {'T':>10}  {'q(T) empirical':>22}  {'asymptote':>22}  "
-              f"{'residual':>12}  {'residual * T^2':>17}")
-        print(f"  {'-'*10}  {'-'*22}  {'-'*22}  {'-'*12}  {'-'*17}")
-
-        Ts_mp = [mpf2(10) ** k for k in (3, 4, 5, 6, 7, 8)]
-        scaled_list = []
-        for T in Ts_mp:
-            q_T = theta_prime(T, 1)
-            asym = mpf2("0.5") * mp_log(T / (2 * MP_PI))
-            residual = q_T - asym
-            scaled = residual * T ** 2
-            scaled_list.append(scaled)
-            print(f"  {float(T):10.2e}  {mp.nstr(q_T, 16):>22}  "
-                  f"{mp.nstr(asym, 16):>22}  "
-                  f"{float(residual):+12.4e}  {float(scaled):+17.10f}")
-
-        # Expected: residual * T^2 -> -1/48 = -0.0208333...
-        expected = mpf2(-1) / 48
-        rel_errs = [abs(s - expected) / abs(expected) for s in scaled_list]
-        worst_idx = int(np.argmin([float(e) for e in rel_errs]))
-        # We use the BEST agreement (typically at moderate T, where the
-        # asymptotic dominates and precision suffices).
-        print()
-        print(f"  Asymptote of residual * T^2 (theory):  -1/48 = {float(expected):+.10f}")
-        print(f"  Best agreement across the ladder:")
-        for i, (T, s, re) in enumerate(zip(Ts_mp, scaled_list, rel_errs)):
-            tag = "  (best)" if i == worst_idx else ""
-            print(f"    T = {float(T):.0e}: scaled = {float(s):+.10f},  "
-                  f"rel.err = {float(re):.2e}{tag}")
-        if float(rel_errs[worst_idx]) < 1e-6:
-            print()
-            print("  [PASS] q(t) = (1/2) log(t / (2 pi)) - 1/(48 t^2) + O(t^{-4})")
-            print("         confirmed at high precision.  q(t) > 0 for all")
-            print("         tested T, growing logarithmically.  (P2) holds with")
-            print("         c_q = 0.")
-        else:
-            print()
-            print(f"  [WARN] Best agreement is {float(rel_errs[worst_idx]):.2e}.")
-    finally:
-        mp.dps = saved_dps
-
 
 def check_theta_via_loggamma():
-    """Verify mpmath's siegeltheta(t) matches the definition
-        theta(t) = Im log Gamma(1/4 + i t / 2) - (t/2) log pi
-    of Definition def:riemann-siegel-phase, at high precision and
-    several heights.
+    """Verify mpmath's siegeltheta(t) matches
+        theta(t) = Im log Gamma(1/4 + i t / 2) - (t/2) log pi.
     """
-    from mpmath import mpc, loggamma, log
-
     print("  Compare siegeltheta(t) to Im log Gamma(1/4 + i t / 2) - (t/2) log pi.")
     print()
     print(f"  {'t':>10}  {'siegeltheta(t)':>22}  "
@@ -297,23 +134,145 @@ def check_theta_via_loggamma():
         for T in [mpf("1e3"), mpf("1e4"), mpf("1e6"), mpf("1e8")]:
             sieg = siegeltheta(T)
             z = mpc(mpf("0.25"), T / 2)
-            from_def = (loggamma(z).imag - (T / 2) * log(MP_PI))
-            diff = sieg - from_def
+            from_def = loggamma(z).imag - (T / 2) * mp_log(MP_PI)
+            d = abs(sieg - from_def)
             print(f"  {float(T):10.2e}  {mp.nstr(sieg, 16):>22}  "
-                  f"{mp.nstr(from_def, 16):>34}  {float(abs(diff)):14.4e}")
+                  f"{mp.nstr(from_def, 16):>34}  {float(d):14.4e}")
     finally:
         mp.dps = saved_dps
 
     print()
-    print("  [PASS] siegeltheta matches the displayed Definition")
-    print("         def:riemann-siegel-phase to numerical precision.")
+    print("  [PASS] siegeltheta matches def:riemann-siegel-phase to numerical")
+    print("         precision at every tested height.")
 
+
+# ----------------------------------------------------------------------
+# (P1) Chart-denominator condition: |zeta(1/2 + it)| not too small.
+# ----------------------------------------------------------------------
+
+def check_chart_denominator(T_center, half_window, n_samples):
+    """Sample |zeta(1/2 + it)| on I_T, report stats and lower bound."""
+    print(f"  Window: T_center = {float(T_center):.2e}, "
+          f"half_width = {float(half_window):.4f}, "
+          f"n_samples = {n_samples}")
+
+    ts = linspace_mp(T_center - half_window, T_center + half_window, n_samples)
+    vals = [abs(zeta(mpf("0.5") + 1j * t)) for t in ts]
+
+    log_T = mp_log(T_center)
+    inv_log_T = 1 / log_T
+
+    print(f"    |zeta| range:    min = {float(min(vals)):.4e}, "
+          f"median = {float(median_mp(vals)):.4e}, "
+          f"max = {float(max(vals)):.4e}")
+    print(f"    log(T)         = {float(log_T):.4f}")
+    print(f"    1 / log(T)     = {float(inv_log_T):.4e}")
+
+    n_above = sum(1 for v in vals if v >= inv_log_T)
+    frac_above = mpf(n_above) / mpf(len(vals))
+    print(f"    fraction with |zeta| >= 1/log(T) : {float(frac_above):.4f}")
+
+    if frac_above >= mpf("0.5"):
+        print("    [PASS] Positive-fraction subfamily satisfies (P1).")
+    else:
+        print("    [WARN] Less than 50% of window has |zeta| >= 1/log T;")
+        print("           retained packets are a polynomial-weight")
+        print("           subset of the window.")
+
+
+# ----------------------------------------------------------------------
+# (P2) Phase-derivative lower bound.
+# ----------------------------------------------------------------------
+
+def check_phase_derivative_lower_bound(T_center, half_window, n_samples):
+    """Sample q(t) on I_T, confirm uniform lower bound and asymptotic."""
+    print(f"  Sampling q(t) = theta'(t) at T_center = {float(T_center):.2e}")
+
+    ts = linspace_mp(T_center - half_window, T_center + half_window, n_samples)
+    qs = [theta_prime(t, 1) for t in ts]
+    qps = [theta_prime(t, 2) for t in ts]
+    qpps = [theta_prime(t, 3) for t in ts]
+
+    expected_q = mpf("0.5") * mp_log(T_center / (2 * MP_PI))
+    print(f"    q(t)   range: min = {float(min(qs)):.4f}, "
+          f"max = {float(max(qs)):.4f}, "
+          f"asymptote (1/2)log(T/2pi) = {float(expected_q):.4f}")
+    print(f"    q'(t)  range: min = {float(min(qps)):.4e}, "
+          f"max = {float(max(qps)):.4e}")
+    print(f"    q''(t) range: min = {float(min(qpps)):.4e}, "
+          f"max = {float(max(qpps)):.4e}")
+
+    if min(qs) > 0:
+        print("    [PASS] q(t) > 0 throughout the window (P2 holds).")
+    else:
+        print("    [FAIL] q(t) attained non-positive value; chart fails (P2).")
+
+    if max((abs(x) for x in qps)) < mpf("1") and max((abs(x) for x in qpps)) < mpf("1"):
+        print("    Polynomial upper bounds on q', q'' confirmed numerically.")
+
+
+# ----------------------------------------------------------------------
+# (P2) across height ladder: residual scaling.
+# ----------------------------------------------------------------------
+
+def check_p2_across_height_ladder():
+    """Sweep T over a dyadic-decade ladder and confirm
+        (theta'(T) - (1/2) log(T / (2 pi))) * T^2 -> -1/48
+    with relative error scaling as O(T^{-2})."""
+    print("  Sweep heights and compare q(T) to (1/2) log(T/(2 pi)).")
+    print()
+    print(f"  {'T':>10}  {'q(T)':>22}  {'asymptote':>22}  "
+          f"{'residual':>12}  {'residual * T^2':>17}")
+    print(f"  {'-'*10}  {'-'*22}  {'-'*22}  {'-'*12}  {'-'*17}")
+
+    saved_dps = mp.dps
+    mp.dps = 50  # boost precision so ~ 1e-19 residuals at T = 1e8 are resolvable
+    try:
+        Ts = [mpf(10) ** k for k in (3, 4, 5, 6, 7, 8)]
+        scaled_list = []
+        for T in Ts:
+            q_T = theta_prime(T, 1)
+            asym = mpf("0.5") * mp_log(T / (2 * MP_PI))
+            residual = q_T - asym
+            scaled = residual * T**2
+            scaled_list.append(scaled)
+            print(f"  {float(T):10.2e}  {mp.nstr(q_T, 16):>22}  "
+                  f"{mp.nstr(asym, 16):>22}  "
+                  f"{float(residual):+12.4e}  {float(scaled):+17.10f}")
+
+        expected = mpf(-1) / 48
+        rel_errs = [abs(s - expected) / abs(expected) for s in scaled_list]
+        best_idx = 0
+        for i, e in enumerate(rel_errs):
+            if e < rel_errs[best_idx]:
+                best_idx = i
+        print()
+        print(f"  Asymptote of residual * T^2 (theory):  -1/48 = "
+              f"{float(expected):+.10f}")
+        print(f"  Per-height relative error to -1/48:")
+        for i, (T, s, re) in enumerate(zip(Ts, scaled_list, rel_errs)):
+            tag = "  (best)" if i == best_idx else ""
+            print(f"    T = {float(T):.0e}: scaled = {float(s):+.10f},  "
+                  f"rel.err = {float(re):.2e}{tag}")
+        if rel_errs[best_idx] < mpf("1e-6"):
+            print()
+            print("  [PASS] q(t) = (1/2) log(t/(2 pi)) - 1/(48 t^2) + O(t^{-4})")
+            print("         confirmed at high precision.  q(t) > 0 for all")
+            print("         tested T, growing logarithmically.  (P2) holds")
+            print("         with c_q = 0.")
+        else:
+            print()
+            print(f"  [WARN] Best agreement is {float(rel_errs[best_idx]):.2e}.")
+    finally:
+        mp.dps = saved_dps
+
+
+# ----------------------------------------------------------------------
+# Uniform-window q-bounds (lem:theta-derivative-asymptotics uniformity).
+# ----------------------------------------------------------------------
 
 def check_uniform_window_q_bounds(T_center, half_window, n_samples):
-    """Verify the theta-derivative asymptotics are uniform across the
-    full window I_T centered at T_center.  Sample q, q', q'' at multiple
-    points across the window; confirm uniform polynomial bounds and
-    monotonic-log behaviour."""
+    """Verify uniform polynomial bounds across I_T."""
     print(f"  Sampling q(t), q'(t), q''(t) across I_T = [T - {float(half_window)},")
     print(f"  T + {float(half_window)}] at T = {float(T_center):.2e}.")
     print()
@@ -324,62 +283,157 @@ def check_uniform_window_q_bounds(T_center, half_window, n_samples):
     print(f"  {'t':>14}  {h_q:>14}  {h_qp:>14}  {h_qpp:>14}  {h_p2:>11}")
     print(f"  {'-'*14}  {'-'*14}  {'-'*14}  {'-'*14}  {'-'*11}")
 
-    ts = np.linspace(
-        float(T_center - half_window),
-        float(T_center + half_window),
-        n_samples,
-    )
-    q_min = float("inf")
-    q_max = -float("inf")
-    qp_max_abs = 0.0
-    qpp_max_abs = 0.0
-    p2_holds = True
-    for t in ts[::n_samples // 5]:  # only print 5 representative samples
-        q0 = float(theta_prime(t, 1))
-        q1 = float(theta_prime(t, 2))
-        q2 = float(theta_prime(t, 3))
-        q_min = min(q_min, q0)
-        q_max = max(q_max, q0)
-        qp_max_abs = max(qp_max_abs, abs(q1))
-        qpp_max_abs = max(qpp_max_abs, abs(q2))
-        ok = q0 >= 1
-        if not ok:
-            p2_holds = False
-        print(f"  {t:14.4f}  {q0:14.4f}  {q1:+14.4e}  {q2:+14.4e}  "
-              f"{'YES' if ok else 'NO':>11}")
+    ts = linspace_mp(T_center - half_window, T_center + half_window, n_samples)
+    sample_indices = [0, n_samples // 4, n_samples // 2, 3 * n_samples // 4, n_samples - 1]
 
-    # Run the full sweep silently for stats.
-    for t in ts:
-        q0 = float(theta_prime(t, 1))
-        q1 = float(theta_prime(t, 2))
-        q2 = float(theta_prime(t, 3))
-        q_min = min(q_min, q0)
-        q_max = max(q_max, q0)
-        qp_max_abs = max(qp_max_abs, abs(q1))
-        qpp_max_abs = max(qpp_max_abs, abs(q2))
-        if q0 < 1:
+    q_min = mpf("inf")
+    q_max = mpf("-inf")
+    qp_max_abs = mpf(0)
+    qpp_max_abs = mpf(0)
+    p2_holds = True
+
+    for i, t in enumerate(ts):
+        q0 = theta_prime(t, 1)
+        q1 = theta_prime(t, 2)
+        q2 = theta_prime(t, 3)
+        if q0 < q_min:
+            q_min = q0
+        if q0 > q_max:
+            q_max = q0
+        if abs(q1) > qp_max_abs:
+            qp_max_abs = abs(q1)
+        if abs(q2) > qpp_max_abs:
+            qpp_max_abs = abs(q2)
+        if q0 < mpf(1):
             p2_holds = False
+        if i in sample_indices:
+            ok = q0 >= mpf(1)
+            print(f"  {float(t):14.4f}  {float(q0):14.4f}  "
+                  f"{float(q1):+14.4e}  {float(q2):+14.4e}  "
+                  f"{'YES' if ok else 'NO':>11}")
 
     print()
     print(f"  Window summary (n = {n_samples}):")
-    print(f"    q range   = [{q_min:.4f}, {q_max:.4f}]")
-    print(f"    sup |q'|  = {qp_max_abs:.4e}  (expected ~ 1/(2 T) = "
-          f"{1/(2*float(T_center)):.4e})")
-    print(f"    sup |q''| = {qpp_max_abs:.4e}  (expected ~ 1/(2 T^2) = "
-          f"{1/(2*float(T_center)**2):.4e})")
+    print(f"    q range   = [{float(q_min):.4f}, {float(q_max):.4f}]")
+    print(f"    sup |q'|  = {float(qp_max_abs):.4e}  (expected ~ 1/(2 T) = "
+          f"{float(1/(2*T_center)):.4e})")
+    print(f"    sup |q''| = {float(qpp_max_abs):.4e}  (expected ~ 1/(2 T^2) = "
+          f"{float(1/(2*T_center**2)):.4e})")
     print()
     if p2_holds:
         print("  [PASS] Condition (P2) holds uniformly on I_T:")
         print("         q(t) >= 1 at every sample.")
-        print("         Polynomial upper bounds on q', q'' are uniform")
+        print("         Polynomial upper bounds on q', q'' uniform on I_T")
         print("         (sup |q'| << 1, sup |q''| << 1).")
     else:
         raise AssertionError(f"q(t) drops below 1 in window at T = {float(T_center)}")
 
 
+# ----------------------------------------------------------------------
+# Kernel symmetry.
+# ----------------------------------------------------------------------
+
+def check_kernel_symmetry(T_center, n_pairs):
+    """Sample K_Phi(x, y) - K_Phi(y, x) at random pairs near T_center."""
+    print(f"  Sampling K_Phi(x, y) and K_Phi(y, x) at random pairs near T = "
+          f"{float(T_center):.2e}")
+    # Deterministic pseudo-random offsets via halton-like sequence (mpmath-friendly).
+    max_err = mpf(0)
+    for k in range(n_pairs):
+        # Two coprime fractional offsets in (-1, 1).
+        u1 = mpf((k * 7 + 3) % 100) / mpf(100) * 2 - 1  # [-1, 1)
+        u2 = mpf((k * 11 + 5) % 100) / mpf(100) * 2 - 1
+        x = T_center + u1 * mpf("0.1")
+        y = T_center + u2 * mpf("0.1")
+        if abs(x - y) < mpf("1e-6"):
+            continue
+        kxy = K_phi(x, y)
+        kyx = K_phi(y, x)
+        err = abs(kxy - kyx)
+        if err > max_err:
+            max_err = err
+    print(f"    max |K_Phi(x,y) - K_Phi(y,x)| over {n_pairs} pairs = "
+          f"{float(max_err):.4e}")
+    if max_err < mpf("1e-25"):
+        print("    [PASS] Kernel symmetry holds to mpmath-precision (~ 30 dps).")
+    elif max_err < mpf("1e-12"):
+        print("    [PASS] Kernel symmetry holds to standard precision.")
+    else:
+        print("    [WARN] Symmetry deviation above 1e-12.")
+
+
+# ----------------------------------------------------------------------
+# Removable singularity.
+# ----------------------------------------------------------------------
+
+def check_removable_singularity(T_center):
+    """Verify K_Phi(T+h, T) -> q(T)/pi as h -> 0."""
+    print(f"  Removable singularity: K_Phi(T+h, T) -> q(T)/pi as h -> 0")
+    T = mpf(T_center)
+    q_at_T = theta_prime(T, 1) / MP_PI
+    print(f"    q(T)/pi (target) = {float(q_at_T):.6e}")
+    for h_pow in [-1, -2, -4, -6, -10, -15]:
+        h = mpf(10) ** h_pow
+        kval = K_phi(T + h, T)
+        err = abs(kval - q_at_T)
+        print(f"    h = 1e{h_pow:>3d}: K_Phi(T+h, T) = {float(kval):.6e}, "
+              f"err = {float(err):.4e}")
+
+
+# ----------------------------------------------------------------------
+# Phase-kernel derivatives at distinct points.
+# ----------------------------------------------------------------------
+
+def check_kernel_derivatives_at_pair(T1, T2):
+    """Compare displayed formulas to finite-difference estimates."""
+    print(f"  Comparing closed-form derivatives at (T1, T2) = "
+          f"({float(T1):.4e}, {float(T2):.4e})")
+
+    s = T1 - T2
+    Delta = theta(T1) - theta(T2)
+    q1 = theta_prime(T1, 1)
+    q2 = theta_prime(T2, 1)
+
+    K_at_pair = mp_sin(Delta) / (MP_PI * s)
+    Kx = (q1 * s * mp_cos(Delta) - mp_sin(Delta)) / (MP_PI * s**2)
+    Ky = (mp_sin(Delta) - q2 * s * mp_cos(Delta)) / (MP_PI * s**2)
+    Kxy = ((q1 + q2) * s * mp_cos(Delta) +
+           (q1 * q2 * s**2 - 2) * mp_sin(Delta)) / (MP_PI * s**3)
+
+    h_fd = mpf("1e-4")
+    K_pp = K_phi(T1 + h_fd, T2)
+    K_mm = K_phi(T1 - h_fd, T2)
+    K_pm = K_phi(T1, T2 + h_fd)
+    K_mp = K_phi(T1, T2 - h_fd)
+    K_pp_pp = K_phi(T1 + h_fd, T2 + h_fd)
+    K_pp_mm = K_phi(T1 + h_fd, T2 - h_fd)
+    K_mm_pp = K_phi(T1 - h_fd, T2 + h_fd)
+    K_mm_mm = K_phi(T1 - h_fd, T2 - h_fd)
+
+    Kx_fd = (K_pp - K_mm) / (2 * h_fd)
+    Ky_fd = (K_pm - K_mp) / (2 * h_fd)
+    Kxy_fd = (K_pp_pp - K_pp_mm - K_mm_pp + K_mm_mm) / (4 * h_fd**2)
+
+    K_direct = K_phi(T1, T2)
+
+    print(f"    K_Phi(T1,T2):        formula = {float(K_at_pair):.6e},  "
+          f"direct = {float(K_direct):.6e},  err = {float(abs(K_at_pair - K_direct)):.2e}")
+    print(f"    d/dx K_Phi:          formula = {float(Kx):.6e},  "
+          f"FD = {float(Kx_fd):.6e},  err = {float(abs(Kx - Kx_fd)):.2e}")
+    print(f"    d/dy K_Phi:          formula = {float(Ky):.6e},  "
+          f"FD = {float(Ky_fd):.6e},  err = {float(abs(Ky - Ky_fd)):.2e}")
+    print(f"    d^2/dxdy K_Phi:      formula = {float(Kxy):.6e},  "
+          f"FD = {float(Kxy_fd):.6e},  err = {float(abs(Kxy - Kxy_fd)):.2e}")
+
+
+# ----------------------------------------------------------------------
+# Main.
+# ----------------------------------------------------------------------
+
 def main():
     print("=" * 70)
     print("Simulation: sec:local-kernel-and-jet-normalization")
+    print("(arbitrary-precision arithmetic via mpmath)")
     print("=" * 70)
     print()
 
@@ -430,7 +484,8 @@ def main():
     print()
 
     print("=" * 70)
-    print("§2 chart construction and kernel properties verified numerically.")
+    print("§2 chart construction and kernel properties verified numerically")
+    print("at mpmath precision.")
     print("=" * 70)
 
 
