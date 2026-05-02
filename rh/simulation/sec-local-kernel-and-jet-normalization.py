@@ -1,14 +1,16 @@
 """Numerical simulation: sec:local-kernel-and-jet-normalization.
 
-Verifies the §2 chart construction and kernel properties against actual
-zeta data using mpmath arbitrary-precision arithmetic.
+Verifies the §2 chart construction and kernel properties using mpmath
+arbitrary-precision arithmetic.  No zeta-side regularity is used: per
+rem:chart-regularity-zeta-side, the chart consumes zeta only through
+the identity zeta(1/2 + it) = exp(-i theta(t)) Z(t) and the theta
+phase itself.
 
 Coverage:
 
-  * theta(t) = Im log Gamma(1/4 + i t / 2) - (t/2) log pi matches
-    mpmath's siegeltheta (def:riemann-siegel-phase).
-  * |zeta(1/2 + it)| has a polynomial-in-(log T) lower bound on a
-    positive-fraction subfamily of windows.
+  * theta(t) = Im L(1/4 + i t / 2) - (t/2) log pi matches mpmath's
+    siegeltheta (def:riemann-siegel-phase); L is real on x > 0
+    (holomorphic branch convention).
   * theta'(t) = q(t) >= 1 uniformly on I_T (condition (P2)).
   * Riemann-Siegel residual: theta'(t) - (1/2) log(t/(2 pi)) ~ -1/(48 t^2)
     over a height ladder.
@@ -39,7 +41,6 @@ from mpmath import (
     siegeltheta,
     sin as mp_sin,
     sqrt as mp_sqrt,
-    zeta,
 )
 
 
@@ -177,40 +178,6 @@ def check_theta_via_loggamma():
     print()
     print("  [PASS] siegeltheta matches def:riemann-siegel-phase to numerical")
     print("         precision at every tested height.")
-
-
-# ----------------------------------------------------------------------
-# (P1) Chart-denominator condition: |zeta(1/2 + it)| not too small.
-# ----------------------------------------------------------------------
-
-def check_chart_denominator(T_center, half_window, n_samples):
-    """Sample |zeta(1/2 + it)| on I_T, report stats and lower bound."""
-    print(f"  Window: T_center = {float(T_center):.2e}, "
-          f"half_width = {float(half_window):.4f}, "
-          f"n_samples = {n_samples}")
-
-    ts = linspace_mp(T_center - half_window, T_center + half_window, n_samples)
-    vals = [abs(zeta(mpf("0.5") + 1j * t)) for t in ts]
-
-    log_T = mp_log(T_center)
-    inv_log_T = 1 / log_T
-
-    print(f"    |zeta| range:    min = {float(min(vals)):.4e}, "
-          f"median = {float(median_mp(vals)):.4e}, "
-          f"max = {float(max(vals)):.4e}")
-    print(f"    log(T)         = {float(log_T):.4f}")
-    print(f"    1 / log(T)     = {float(inv_log_T):.4e}")
-
-    n_above = sum(1 for v in vals if v >= inv_log_T)
-    frac_above = mpf(n_above) / mpf(len(vals))
-    print(f"    fraction with |zeta| >= 1/log(T) : {float(frac_above):.4f}")
-
-    if frac_above >= mpf("0.5"):
-        print("    [PASS] Positive-fraction subfamily satisfies (P1).")
-    else:
-        print("    [WARN] Less than 50% of window has |zeta| >= 1/log T;")
-        print("           retained packets are a polynomial-weight")
-        print("           subset of the window.")
 
 
 # ----------------------------------------------------------------------
@@ -477,11 +444,6 @@ def main():
     print("[def:riemann-siegel-phase: theta as Im log Gamma]")
     print()
     check_theta_via_loggamma()
-    print()
-
-    print("[chart-denominator condition: empirical |zeta| range]")
-    print()
-    check_chart_denominator(T_center, half_window, n_samples)
     print()
 
     print("[phase-derivative lower bound (P2): single-window check]")

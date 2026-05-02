@@ -234,10 +234,10 @@ def verify_gram_positivity():
     print(f"    det / trace asymptote:  ~ 2 q / pi")
     print()
     print("  This is the unconditional algebraic content of the Lemma.")
-    print("  The polynomial-in-Q lower bound on lambda_min(J(T)) requires")
-    print("  the polynomial bounds on q, q', q'' from (P1)-(P2) of")
-    print("  Definition def:local-phase-chart, which are themselves")
-    print("  open inputs (rem:wip-local-phase-chart).")
+    print("  For the theta phase chart of Definition def:local-phase-chart,")
+    print("  the polynomial bounds q ~ log T, q' = O(T^-1), q'' = O(T^-2)")
+    print("  are supplied unconditionally by")
+    print("  Lemma lem:theta-derivative-asymptotics (no rem:wip-* dependency).")
 
 
 def verify_gram_positivity_asymptotic():
