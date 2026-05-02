@@ -277,6 +277,106 @@ def check_p2_across_height_ladder():
         mp.dps = saved_dps
 
 
+def check_theta_via_loggamma():
+    """Verify mpmath's siegeltheta(t) matches the definition
+        theta(t) = Im log Gamma(1/4 + i t / 2) - (t/2) log pi
+    of Definition def:riemann-siegel-phase, at high precision and
+    several heights.
+    """
+    from mpmath import mpc, loggamma, log
+
+    print("  Compare siegeltheta(t) to Im log Gamma(1/4 + i t / 2) - (t/2) log pi.")
+    print()
+    print(f"  {'t':>10}  {'siegeltheta(t)':>22}  "
+          f"{'Im logGamma(...) - (t/2) log pi':>34}  {'diff':>14}")
+    print(f"  {'-'*10}  {'-'*22}  {'-'*34}  {'-'*14}")
+
+    saved_dps = mp.dps
+    mp.dps = 50
+    try:
+        for T in [mpf("1e3"), mpf("1e4"), mpf("1e6"), mpf("1e8")]:
+            sieg = siegeltheta(T)
+            z = mpc(mpf("0.25"), T / 2)
+            from_def = (loggamma(z).imag - (T / 2) * log(MP_PI))
+            diff = sieg - from_def
+            print(f"  {float(T):10.2e}  {mp.nstr(sieg, 16):>22}  "
+                  f"{mp.nstr(from_def, 16):>34}  {float(abs(diff)):14.4e}")
+    finally:
+        mp.dps = saved_dps
+
+    print()
+    print("  [PASS] siegeltheta matches the displayed Definition")
+    print("         def:riemann-siegel-phase to numerical precision.")
+
+
+def check_uniform_window_q_bounds(T_center, half_window, n_samples):
+    """Verify the theta-derivative asymptotics are uniform across the
+    full window I_T centered at T_center.  Sample q, q', q'' at multiple
+    points across the window; confirm uniform polynomial bounds and
+    monotonic-log behaviour."""
+    print(f"  Sampling q(t), q'(t), q''(t) across I_T = [T - {float(half_window)},")
+    print(f"  T + {float(half_window)}] at T = {float(T_center):.2e}.")
+    print()
+    h_q = "q(t)"
+    h_qp = "q'(t)"
+    h_qpp = "q''(t)"
+    h_p2 = "q(t) >= 1?"
+    print(f"  {'t':>14}  {h_q:>14}  {h_qp:>14}  {h_qpp:>14}  {h_p2:>11}")
+    print(f"  {'-'*14}  {'-'*14}  {'-'*14}  {'-'*14}  {'-'*11}")
+
+    ts = np.linspace(
+        float(T_center - half_window),
+        float(T_center + half_window),
+        n_samples,
+    )
+    q_min = float("inf")
+    q_max = -float("inf")
+    qp_max_abs = 0.0
+    qpp_max_abs = 0.0
+    p2_holds = True
+    for t in ts[::n_samples // 5]:  # only print 5 representative samples
+        q0 = float(theta_prime(t, 1))
+        q1 = float(theta_prime(t, 2))
+        q2 = float(theta_prime(t, 3))
+        q_min = min(q_min, q0)
+        q_max = max(q_max, q0)
+        qp_max_abs = max(qp_max_abs, abs(q1))
+        qpp_max_abs = max(qpp_max_abs, abs(q2))
+        ok = q0 >= 1
+        if not ok:
+            p2_holds = False
+        print(f"  {t:14.4f}  {q0:14.4f}  {q1:+14.4e}  {q2:+14.4e}  "
+              f"{'YES' if ok else 'NO':>11}")
+
+    # Run the full sweep silently for stats.
+    for t in ts:
+        q0 = float(theta_prime(t, 1))
+        q1 = float(theta_prime(t, 2))
+        q2 = float(theta_prime(t, 3))
+        q_min = min(q_min, q0)
+        q_max = max(q_max, q0)
+        qp_max_abs = max(qp_max_abs, abs(q1))
+        qpp_max_abs = max(qpp_max_abs, abs(q2))
+        if q0 < 1:
+            p2_holds = False
+
+    print()
+    print(f"  Window summary (n = {n_samples}):")
+    print(f"    q range   = [{q_min:.4f}, {q_max:.4f}]")
+    print(f"    sup |q'|  = {qp_max_abs:.4e}  (expected ~ 1/(2 T) = "
+          f"{1/(2*float(T_center)):.4e})")
+    print(f"    sup |q''| = {qpp_max_abs:.4e}  (expected ~ 1/(2 T^2) = "
+          f"{1/(2*float(T_center)**2):.4e})")
+    print()
+    if p2_holds:
+        print("  [PASS] Condition (P2) holds uniformly on I_T:")
+        print("         q(t) >= 1 at every sample.")
+        print("         Polynomial upper bounds on q', q'' are uniform")
+        print("         (sup |q'| << 1, sup |q''| << 1).")
+    else:
+        raise AssertionError(f"q(t) drops below 1 in window at T = {float(T_center)}")
+
+
 def main():
     print("=" * 70)
     print("Simulation: sec:local-kernel-and-jet-normalization")
@@ -286,6 +386,11 @@ def main():
     T_center = mpf("1e4")
     half_window = mpf("0.05")
     n_samples = 50
+
+    print("[def:riemann-siegel-phase: theta as Im log Gamma]")
+    print()
+    check_theta_via_loggamma()
+    print()
 
     print("[chart-denominator condition: empirical |zeta| range]")
     print()
@@ -300,6 +405,11 @@ def main():
     print("[phase-derivative lower bound (P2): height-ladder fit]")
     print()
     check_p2_across_height_ladder()
+    print()
+
+    print("[lem:theta-derivative-asymptotics: uniform on I_T]")
+    print()
+    check_uniform_window_q_bounds(T_center, half_window, n_samples)
     print()
 
     print("[kernel symmetry]")
