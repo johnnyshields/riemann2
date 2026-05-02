@@ -245,7 +245,7 @@ theorem algebraic_gram_criterion (T : ℝ) :
 
     Combines `algebraic_gram_criterion` with the Riemann–Siegel
     asymptotics from §2 (`phase_derivative_lower_bound`,
-    `q_prime_asymptotic`, `q_double_prime_asymptotic`). -/
+    `theta_derivative_asymptotics`). -/
 theorem same_point_gram_positivity :
     ∃ T₀ : ℝ, 0 < T₀ ∧ ∀ T : ℝ, T₀ ≤ T → (J T).PosDef := by
   sorry
