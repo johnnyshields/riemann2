@@ -332,6 +332,15 @@ Definition~\ref{def:local-phase-chart} hold.
 \statuslean[rh/lean/RH/LocalKernelJetNormalization.lean]{in-progress}
 \par\medskip
 
+The local geometric machinery for the rest of the paper is set up
+here: the high-height window \(I_T\), the Riemann--Siegel phase chart
+\(\Ph_T = \theta\) on \(I_T\) (Definition~\ref{def:local-phase-chart}),
+the phase kernel \(K_\Ph\) (Definition~\ref{def:phase-kernel}), and the
+Gram-normalized point-to-jet transform \(P_h\) of
+\eqref{eq:point-to-jet-transform}.  Every block of
+Section~\ref{sec:jet-limit-local-blocks} onward is built from these
+objects.
+
 Fix a height parameter \(T\), and let \(I_T\) denote an interval
 centered at \(T\) with
 \[
@@ -640,6 +649,17 @@ Gram-normalized convention.
 \statuslean[rh/lean/RH/JetLimitLocalBlocks.lean]{in-progress}
 \par\medskip
 
+From the phase kernel \(K_\Ph\) and the Gram-normalized transform
+\(P_h\) of Section~\ref{sec:local-kernel-and-jet-normalization}, the
+small-separation limits of \(K_\Ph\) at one and two centers produce
+the same-point Gram block \(J(T)\)
+(Lemma~\ref{lem:same-point-jet-limit}) and the cross-block
+\(N_{12}(T_1,T_2)\) (Lemma~\ref{lem:cross-block-jet-limit}); for the
+theta phase, \(J(T)\succ 0\) at sufficiently large height
+(Lemma~\ref{lem:same-point-gram-positivity}).  These are the only
+block-level objects consumed by
+Section~\ref{sec:finite-scale-local-blocks-and-whitening} and beyond.
+
 \subsection{Same-point jet limit}
 \label{subsec:same-point-jet-limit}
 
@@ -926,14 +946,14 @@ kind consumed in Section~\ref{sec:source-energy-supply}.
 \statuslean{not-started}
 \par\medskip
 
-The jet-limit identities of Section~\ref{sec:jet-limit-local-blocks} are
-not directly usable: the comparison theorems of
-Section~\ref{sec:projective-rigidity} requires
-the same blocks at
-finite separation \(s>0\) uniformly in \(s\) and the midpoint \(m\).
-Whitening is the change of basis that absorbs the positivity of \(J\)
-into the normalization and produces a single dimensionless finite-scale
-packet block \(\widehat\Om_\z(s;m)\), which is the input to every
+Around a midpoint \(m\) at finite separation \(s>0\), the same-point
+and cross-block jets of Section~\ref{sec:jet-limit-local-blocks}
+extend to two same-point Gram blocks \(G_{m,\pm}(s)\) and a mixed
+block \(N_m(s)\); whitening these into the dimensionless
+\(\widehat\Om_\z(s;m)\)
+(Definition~\ref{def:whitened-finite-block}) with the
+polynomial-in-\(Q\) whitening-loss bound of
+Lemma~\ref{lem:whitening-loss} produces the input consumed by every
 comparison theorem from
 Section~\ref{sec:toy-anomaly-and-transverse-obstruction} onward.
 
@@ -1325,13 +1345,14 @@ Lemma~\ref{lem:source-energy-to-suppression}, separating
 \statuslean{not-started}
 \par\medskip
 
-The exponent inequality of Theorems~\ref{thm:two-point-rigidity}
-and~\ref{thm:four-point-rigidity} is load-bearing, but its inputs include
-finite remainders from the Taylor expansion of \(\Ph\) around midpoints.
-By the symmetry of the packet measure, all odd moments of the relevant
-expansion vanish; this is the mechanism that holds the remainders below
-\(\min(Q^{-A_\toy},Q^{-B_\z})\) and lets the comparison close uniformly
-in the height.
+The two-point and four-point comparisons of
+Sections~\ref{subsec:two-point-comparison}
+and~\ref{subsec:four-point-comparison-symmetric-quartet} carry finite
+Taylor remainders of \(\Ph\) at packet centers.  The discrete
+\(N\)-point measure \(\mu_{N,Q}\) on \(s\)-space introduced below has
+its low-order odd moments cancelled by construction, which suppresses
+those remainders below \(\min(Q^{-A_\toy}, Q^{-B_\z})\) uniformly in
+the height.
 
 \begin{lemma}[\(N\)-point odd-moment cancellation]
 \label{lem:n-point-odd-moment-cancellation}
@@ -1402,6 +1423,12 @@ uniformly.
 \statussim{n/a}\quad
 \statuslean{not-started}
 \par\medskip
+
+The dyadic zero-free strip of Theorem~\ref{thm:zero-free-strip}
+excludes any off-line zero above the absolute height cutoff \(T_0\);
+at heights below \(T_0\) the standard numerical verification of
+\(\RH\) covers the remaining zeros, completing the unconditional
+statement.
 
 \begin{theorem}[Riemann hypothesis]
 \label{thm:riemann-hypothesis}

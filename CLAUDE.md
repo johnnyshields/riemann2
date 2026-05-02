@@ -101,6 +101,8 @@ Applies to every edit of `rh/rh_rebuild.tex`, including section migrations, refi
 
 **Tone.** Annals register: direct, terse, theorem-proof-remark. Let the proofs and lemma statements carry the content; remarks only when they genuinely clarify (a convention, a numeric value, a forward reference, an unconditional aside).
 
+**Section orientation.** Every section in `rh_rebuild.tex` (and every section-replacement patch under `rh/patches/`) opens with one or two natural-prose sentences immediately after the status block. They identify what the section consumes from prior sections (anchored by `\ref`) and what principal definition, lemma, theorem, or block of objects it delivers to subsequent sections. Orientation reads as Annals-register declarative prose, not as a metadata block: do **not** use literal "Inputs: …" / "Outcome: …" labels with colons. It is terse and factual — it does not motivate, narrate strategy, paraphrase the proof, or use editorial markers like "load-bearing," "the strategy is," "we therefore." Subsections do not need orientation — only sections.
+
 **Avoid:**
 
 - Editorial framing ("we therefore", "we never use \(\zeta\) again", "the algebra is unconditional and reduces to...", "load-bearing", "isolates", "structural separation").
