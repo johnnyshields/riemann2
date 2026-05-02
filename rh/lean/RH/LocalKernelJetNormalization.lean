@@ -117,24 +117,80 @@ theorem phase_kernel_diagonal_partial_xy (T : ℝ) :
 
 /-! ## Phase-kernel derivatives at distinct points -/
 
-/-- ∂/∂x K_Φ at distinct points. -/
-theorem phase_kernel_partial_x (T₁ T₂ : ℝ) (h : T₁ ≠ T₂) :
+/-- ∂/∂x K_Φ at distinct points, given `theta` differentiable at `T₁`. -/
+theorem phase_kernel_partial_x (T₁ T₂ : ℝ) (h : T₁ ≠ T₂)
+    (h_diff : DifferentiableAt ℝ theta T₁) :
     deriv (fun x => phaseKernel x T₂) T₁ =
       (q T₁ * (T₁ - T₂) * Real.cos (theta T₁ - theta T₂) -
        Real.sin (theta T₁ - theta T₂))
       / (Real.pi * (T₁ - T₂)^2) := by
-  -- TODO: quotient rule on `sin(θ(x) − θ(T₂)) / (π (x − T₂))` at `x = T₁`,
-  -- requires theta differentiable at T₁ (h_slit hypothesis to be added).
-  sorry
+  -- For x near T₁ (≠ T₂), `phaseKernel x T₂ = sin(θ(x) − θ(T₂)) / (π(x − T₂))`.
+  have h_θ : HasDerivAt theta (q T₁) T₁ := h_diff.hasDerivAt
+  have h_eq : ∀ᶠ x in nhds T₁,
+      phaseKernel x T₂ = Real.sin (theta x - theta T₂) / (Real.pi * (x - T₂)) := by
+    filter_upwards [eventually_ne_nhds h] with x hx
+    unfold phaseKernel
+    simp [hx]
+  rw [Filter.EventuallyEq.deriv_eq h_eq]
+  have h_num : HasDerivAt (fun x : ℝ => Real.sin (theta x - theta T₂))
+      (Real.cos (theta T₁ - theta T₂) * q T₁) T₁ := by
+    have h_sub : HasDerivAt (fun x : ℝ => theta x - theta T₂) (q T₁) T₁ :=
+      h_θ.sub_const (theta T₂)
+    exact (Real.hasDerivAt_sin (theta T₁ - theta T₂)).comp T₁ h_sub
+  have h_den : HasDerivAt (fun x : ℝ => Real.pi * (x - T₂)) Real.pi T₁ := by
+    have h_id : HasDerivAt (fun x : ℝ => x - T₂) 1 T₁ :=
+      (hasDerivAt_id T₁).sub_const T₂
+    have := h_id.const_mul Real.pi
+    simpa using this
+  have h_den_ne : Real.pi * (T₁ - T₂) ≠ 0 :=
+    mul_ne_zero Real.pi_ne_zero (sub_ne_zero.mpr h)
+  have h_quot : HasDerivAt
+      (fun x : ℝ => Real.sin (theta x - theta T₂) / (Real.pi * (x - T₂)))
+      ((Real.cos (theta T₁ - theta T₂) * q T₁ * (Real.pi * (T₁ - T₂)) -
+          Real.sin (theta T₁ - theta T₂) * Real.pi) /
+        (Real.pi * (T₁ - T₂)) ^ 2) T₁ :=
+    h_num.div h_den h_den_ne
+  rw [h_quot.deriv]
+  field_simp
 
-/-- ∂/∂y K_Φ at distinct points. -/
-theorem phase_kernel_partial_y (T₁ T₂ : ℝ) (h : T₁ ≠ T₂) :
+/-- ∂/∂y K_Φ at distinct points, given `theta` differentiable at `T₂`. -/
+theorem phase_kernel_partial_y (T₁ T₂ : ℝ) (h : T₁ ≠ T₂)
+    (h_diff : DifferentiableAt ℝ theta T₂) :
     deriv (phaseKernel T₁) T₂ =
       (Real.sin (theta T₁ - theta T₂) -
        q T₂ * (T₁ - T₂) * Real.cos (theta T₁ - theta T₂))
       / (Real.pi * (T₁ - T₂)^2) := by
-  -- TODO: quotient rule on `sin(θ(T₁) − θ(y)) / (π (T₁ − y))` at `y = T₂`.
-  sorry
+  have h_θ : HasDerivAt theta (q T₂) T₂ := h_diff.hasDerivAt
+  have h_ne_sym : T₁ ≠ T₂ ↔ T₂ ≠ T₁ := ne_comm
+  have h_eq : ∀ᶠ y in nhds T₂,
+      phaseKernel T₁ y = Real.sin (theta T₁ - theta y) / (Real.pi * (T₁ - y)) := by
+    filter_upwards [eventually_ne_nhds (h_ne_sym.mp h)] with y hy
+    unfold phaseKernel
+    simp [hy.symm]
+  rw [Filter.EventuallyEq.deriv_eq h_eq]
+  have h_num : HasDerivAt (fun y : ℝ => Real.sin (theta T₁ - theta y))
+      (Real.cos (theta T₁ - theta T₂) * (-(q T₂))) T₂ := by
+    have h_sub : HasDerivAt (fun y : ℝ => theta T₁ - theta y) (-(q T₂)) T₂ := by
+      have := (hasDerivAt_const T₂ (theta T₁)).sub h_θ
+      simpa using this
+    exact (Real.hasDerivAt_sin (theta T₁ - theta T₂)).comp T₂ h_sub
+  have h_den : HasDerivAt (fun y : ℝ => Real.pi * (T₁ - y)) (-Real.pi) T₂ := by
+    have h_id : HasDerivAt (fun y : ℝ => T₁ - y) (-1) T₂ := by
+      have := (hasDerivAt_const T₂ T₁).sub (hasDerivAt_id T₂)
+      simpa using this
+    have := h_id.const_mul Real.pi
+    simpa using this
+  have h_den_ne : Real.pi * (T₁ - T₂) ≠ 0 :=
+    mul_ne_zero Real.pi_ne_zero (sub_ne_zero.mpr h)
+  have h_quot : HasDerivAt
+      (fun y : ℝ => Real.sin (theta T₁ - theta y) / (Real.pi * (T₁ - y)))
+      ((Real.cos (theta T₁ - theta T₂) * (-(q T₂)) * (Real.pi * (T₁ - T₂)) -
+          Real.sin (theta T₁ - theta T₂) * (-Real.pi)) /
+        (Real.pi * (T₁ - T₂)) ^ 2) T₂ :=
+    h_num.div h_den h_den_ne
+  rw [h_quot.deriv]
+  field_simp
+  ring
 
 /-- ∂²/∂x∂y K_Φ at distinct points. -/
 theorem phase_kernel_partial_xy (T₁ T₂ : ℝ) (h : T₁ ≠ T₂) :
