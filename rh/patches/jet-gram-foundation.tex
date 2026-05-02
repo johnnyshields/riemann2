@@ -73,18 +73,15 @@
 \statuslean[rh/lean/RH/LocalKernelJetNormalization.lean]{in-progress}
 \par\medskip
 
-All local blocks in this paper are extracted from the Riemann--Siegel
-phase on high-height real windows.  Throughout this section, a height
-parameter \(T\) is assumed sufficiently large, and \(I_T\) denotes an
-interval centered at \(T\) with
+Fix a height parameter \(T\), and let \(I_T\) denote an interval
+centered at \(T\) with
 \[
         |I_T|\ll Q(T)^{-1},
         \qquad I_T\subset [T/2,2T].
 \]
-The second inclusion follows automatically at high height for every
-slowly growing choice of \(Q(T)\) used below, but it is recorded
-because the uniformity of the Stirling estimates is used on the whole
-window.
+The Stirling estimates of
+Lemma~\ref{lem:theta-derivative-asymptotics} are uniform on \(I_T\)
+under this inclusion.
 
 \subsection{The Riemann--Siegel phase chart}
 \label{subsec:local-phase-chart}
@@ -98,10 +95,10 @@ For \(t>0\), define
 \label{eq:theta-definition}
  \theta(t)
  := \Im L\!\left(\frac14+\frac{it}{2}\right)
-    -\frac{t}{2}\log\pi.
+    -\frac{t}{2}\log\pi,
 \end{equation}
-This is the standard Riemann--Siegel phase.  With
-\(Z(t):=e^{i\theta(t)}\zeta(1/2+it)\), the functional equation gives
+and \(Z(t):=e^{i\theta(t)}\zeta(1/2+it)\).  The functional equation
+gives
 \[
         \zeta\!\left(\tfrac12+it\right)
         =e^{-i\theta(t)}\,Z(t),
@@ -149,8 +146,8 @@ together with the real smooth phase
 \[
         \Ph_T(t):=\theta(t)\qquad (t\in I_T).
 \]
-We write \(\Ph\) and \(q=\Ph'\) when \(T\) is fixed by context.  The
-chart conditions used downstream are:
+When \(T\) is fixed by context, \(\Ph := \Ph_T\) and \(q := \Ph'\).
+The chart conditions used downstream are:
 \begin{enumerate}[label=\textup{(P\arabic*)},leftmargin=*]
 \item \(\Ph_T = \theta\) on \(I_T\);
 \item \(q(t)\ge 1\) on \(I_T\), after increasing the global lower-height
@@ -259,18 +256,14 @@ K_x(T,T)=K_y(T,T)=\frac{q'(T)}{2\pi},
 \end{lemma}
 
 \begin{proof}
-Set \(x=T+u\), \(y=T+v\), and write \(r=|u|+|v|\).  All derivatives
-below are evaluated at \(T\).  To avoid dividing an unfactored remainder
-by \(u-v\), first factor the phase difference:
+Set \(x=T+u\), \(y=T+v\), and write \(r=|u|+|v|\); derivatives below
+are evaluated at \(T\).  Factor the phase difference as
 \[
-\Ph(T+u)-\Ph(T+v)=(u-v)A(u,v),
-\]
-where, for \(u\ne v\),
-\[
+\Ph(T+u)-\Ph(T+v)=(u-v)A(u,v),\qquad
 A(u,v)=\int_0^1 q\bigl(T+v+\tau(u-v)\bigr)\,d\tau,
 \]
-and the same formula extends continuously to \(u=v\).  Taylor expansion
-of the integrand gives
+where the integral form extends continuously to \(u=v\).  Taylor
+expansion of the integrand gives
 \[
 A(u,v)
 = q+\frac{q'}2(u+v)+\frac{q''}{6}(u^2+uv+v^2)+O(r^3).
@@ -483,10 +476,10 @@ N_{12}=
 \end{lemma}
 
 \begin{proof}
-Since \(T_1 \ne T_2\), the kernel is smooth near \((T_1, T_2)\).  The
-condition \(h<|s|/3\) ensures
-\(|s+u_1-u_2|\ge |s|/3\) for \(|u_1|,|u_2|\le h\), so the Taylor
-remainder is controlled on the sampled square.  Write
+The kernel is smooth in a neighborhood of \((T_1, T_2)\), and the
+hypothesis \(h<|s|/3\) gives
+\(|s+u_1-u_2|\ge |s|/3\) for \(|u_1|,|u_2|\le h\), bounding the
+Taylor remainder on the sampled square.  Write
 \(K_{ab} = \partial_x^a \partial_y^b K_\Ph(T_1, T_2)\).  Taylor
 expansion to total order four gives, uniformly for
 \(u_1, u_2 \in \{-h, +h\}\),
