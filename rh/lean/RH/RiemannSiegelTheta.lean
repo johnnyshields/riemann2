@@ -20,7 +20,10 @@ import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
 import Mathlib.Analysis.SpecialFunctions.Gamma.Deriv
 import Mathlib.Analysis.SpecialFunctions.Gamma.Digamma
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
+import Mathlib.Analysis.SpecialFunctions.Complex.LogDeriv
 import Mathlib.Analysis.Calculus.Deriv.Basic
+import Mathlib.Analysis.Calculus.Deriv.Mul
+import Mathlib.Analysis.Calculus.Deriv.Add
 
 namespace RH.RiemannSiegelTheta
 
@@ -61,14 +64,52 @@ noncomputable def qDoublePrime (t : ℝ) : ℝ := deriv (deriv (deriv theta)) t
     imaginary part:
         `q(t) = (1/2) Re(ψ(1/4 + i t / 2)) − (1/2) log π`.
 
-    Recorded as a proof obligation; proving it requires the chain rule
-    on `Complex.log ∘ Complex.Gamma` away from branch cuts and
-    `Complex.digamma = logDeriv Complex.Gamma`. -/
-theorem q_eq_digamma (t : ℝ) :
+    The chain rule applies away from branch cuts: we require
+    `Γ(1/4 + i t / 2) ∈ slitPlane`. -/
+
+/-- The affine map `t ↦ 1/4 + i t / 2` has derivative `i/2`. -/
+private lemma z_hasDerivAt (t : ℝ) :
+    HasDerivAt (fun s : ℝ => (1 : ℂ) / 4 + Complex.I * (s : ℂ) / 2)
+      (Complex.I / 2) t := by
+  have h1 : HasDerivAt (fun s : ℝ => (s : ℂ)) (1 : ℂ) t :=
+    Complex.ofRealCLM.hasDerivAt
+  have h2 := h1.const_mul Complex.I
+  have h3 := h2.div_const 2
+  have h4 := h3.const_add ((1 : ℂ) / 4)
+  convert h4 using 1
+  ring
+
+/-- For real `t`, `1/4 + i t / 2` is never a non-positive integer
+    (since its real part is `1/4 > 0`). -/
+private lemma z_ne_neg_nat (t : ℝ) :
+    ∀ m : ℕ, ((1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2) ≠ -m := by
+  intro m heq
+  have h_re : ((1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2).re = ((-(m : ℂ)).re : ℝ) := by
+    rw [heq]
+  simp at h_re
+  -- h_re : 1/4 = -↑m, contradiction since 1/4 > 0 and m ≥ 0
+  have hm : (0 : ℝ) ≤ m := Nat.cast_nonneg m
+  linarith
+
+/-- `q t = (1/2) Re(digamma(1/4 + i t / 2)) − (1/2) log π`,
+    provided `Γ(z(t)) ∈ slitPlane`.
+
+    The proof chains: `z_hasDerivAt t : HasDerivAt z (i/2) t`,
+    `Complex.differentiableAt_Gamma z (z_ne_neg_nat t) :
+        DifferentiableAt ℂ Γ z`,
+    `HasDerivAt.scomp` to get `HasDerivAt (Γ ∘ z) ((i/2) Γ'(z)) t`,
+    `HasDerivAt.clog_real h_slit` to get
+        `HasDerivAt (log Γ ∘ z) ((i/2) Γ'(z) / Γ(z)) t`,
+    composition with `Complex.imCLM` (Im as a `ℝ-CLM`), and
+    `Complex.digamma = logDeriv Γ` to identify `Γ'(z)/Γ(z) = ψ(z)`.
+
+    TODO: bridging `.im` between `HasDerivAt` and `Complex.imCLM`-composition
+    needs careful elaboration; `h.im` is not a primitive on `HasDerivAt`. -/
+theorem q_eq_digamma (t : ℝ)
+    (h_slit : Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2) ∈
+              Complex.slitPlane) :
     q t = (1 / 2) * (Complex.digamma ((1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2)).re -
           (1 / 2) * Real.log Real.pi := by
-  -- TODO: chain rule on `Complex.log ∘ Complex.Gamma` away from branch cuts;
-  -- needs `Complex.differentiableAt_Gamma` + `digamma_def` + branch-cut handling.
   sorry
 
 /-! ## Riemann–Siegel asymptotics
