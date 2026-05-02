@@ -32,10 +32,11 @@ import Mathlib.Topology.Order.Basic
 import Mathlib.Topology.Algebra.Order.Field
 
 import RH.LocalKernelJetNormalization
+import RH.RiemannSiegelTheta
 
 namespace RH.JetLimitLocalBlocks
 
-open Real Matrix RH.LocalKernelJetNormalization
+open Real Matrix RH.LocalKernelJetNormalization RH.RiemannSiegelTheta
 
 /-! ## Block matrices -/
 

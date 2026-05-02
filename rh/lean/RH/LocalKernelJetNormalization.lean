@@ -1,92 +1,46 @@
 /-
 Section 2 of `rh/rh_rebuild.tex`: local kernel and jet normalization.
 
-Spec-level Lean module.  Definitions are concrete; lemma proofs are
-deferred via `sorry` to be filled in against Mathlib's analysis API.
+`theta`, `q`, `qPrime`, `qDoublePrime` and the Riemann–Siegel asymptotics
+live in `RH.RiemannSiegelTheta`.  This module re-exports them and defines
+the phase kernel `K_Φ`, its symmetry / diagonal / off-diagonal
+derivatives, and the point-to-jet transform `P_h`.
 
-Maps to the LaTeX as follows:
-  RH.LocalKernelJetNormalization.theta
-      ↔ Riemann–Siegel θ(t) (Definition `def:riemann-siegel-phase`)
-  RH.LocalKernelJetNormalization.q, qPrime, qDoublePrime
-      ↔ q = θ', q' = θ'', q'' = θ'''
+Maps to the LaTeX as follows (all in the §2 namespace):
   RH.LocalKernelJetNormalization.phaseKernel
       ↔ K_Φ(x, y) of `def:phase-kernel`
   RH.LocalKernelJetNormalization.pointToJetTransform
       ↔ P_h of `eq:point-to-jet-transform` (Gram-normalized form)
 
 Theorems:
-  theta_derivative_asymptotics       ↔ Lemma `lem:theta-derivative-asymptotics`
-  phase_derivative_lower_bound       ↔ Lemma `lem:phase-derivative-lower-bound`
   phase_kernel_symmetric             ↔ Lemma `lem:phase-kernel-properties` (symmetry)
   phase_kernel_diagonal_value        ↔ Lemma `lem:phase-kernel-properties` (diagonal value)
-  phase_kernel_partial_x             ↔ Lemma `lem:phase-kernel-derivatives` (∂_x)
-  phase_kernel_partial_y             ↔ Lemma `lem:phase-kernel-derivatives` (∂_y)
-  phase_kernel_partial_xy            ↔ Lemma `lem:phase-kernel-derivatives` (∂_xy)
-  phase_kernel_diagonal_value_at     ↔ Lemma `lem:phase-kernel-diagonal-derivatives` (K(T,T))
+  phase_kernel_diagonal_limit        ↔ Lemma `lem:phase-kernel-properties` (continuity)
   phase_kernel_diagonal_partial_x    ↔ Lemma `lem:phase-kernel-diagonal-derivatives` (K_x(T,T))
   phase_kernel_diagonal_partial_y    ↔ Lemma `lem:phase-kernel-diagonal-derivatives` (K_y(T,T))
   phase_kernel_diagonal_partial_xy   ↔ Lemma `lem:phase-kernel-diagonal-derivatives` (K_xy(T,T))
+  phase_kernel_partial_x             ↔ Lemma `lem:phase-kernel-derivatives` (∂_x)
+  phase_kernel_partial_y             ↔ Lemma `lem:phase-kernel-derivatives` (∂_y)
+  phase_kernel_partial_xy            ↔ Lemma `lem:phase-kernel-derivatives` (∂_xy)
 -/
 
-import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 import Mathlib.Analysis.Calculus.Deriv.Basic
 import Mathlib.Analysis.Calculus.IteratedDeriv.Defs
 import Mathlib.LinearAlgebra.Matrix.Notation
 import Mathlib.Topology.Order.Basic
 
+import RH.RiemannSiegelTheta
+
 namespace RH.LocalKernelJetNormalization
 
-open Real
+open Real RH.RiemannSiegelTheta
 
-/-! ## Phase function and its derivatives -/
+/-! ## Phase kernel
 
-/-- The Riemann–Siegel theta function on real arguments,
-    `θ(t) = arg Γ(1/4 + it/2) - (t/2) log π`.
-
-    Treated as a primitive at this stage; can be unfolded to its
-    `Complex.Gamma` definition once that connection is proved. -/
-noncomputable def theta : ℝ → ℝ := sorry
-
-/-- First derivative of the phase, `q := θ'`. -/
-noncomputable def q (t : ℝ) : ℝ := deriv theta t
-
-/-- Second derivative of the phase, `q' := θ''`. -/
-noncomputable def qPrime (t : ℝ) : ℝ := deriv (deriv theta) t
-
-/-- Third derivative of the phase, `q'' := θ'''`. -/
-noncomputable def qDoublePrime (t : ℝ) : ℝ := deriv (deriv (deriv theta)) t
-
-/-! ## Riemann–Siegel asymptotics -/
-
-/-- Differentiated theta asymptotics, uniform over a window
-    `[T - 1, T + 1] ⊂ I_T`.  Combines the three derivative bounds of
-    Lemma `lem:theta-derivative-asymptotics`:
-    `q  = (1/2) log(t/(2π)) - 1/(48 t²) + O(t⁻⁴)`,
-    `q' = 1/(2t) + O(t⁻³)`, and
-    `q'' = -1/(2t²) + O(t⁻⁴)`. -/
-theorem theta_derivative_asymptotics :
-    ∃ T₀ C : ℝ, 0 < T₀ ∧ 0 ≤ C ∧
-    ∀ T : ℝ, T₀ ≤ T → ∀ t : ℝ, T - 1 ≤ t → t ≤ T + 1 →
-      |q t - ((1/2) * Real.log (t / (2 * Real.pi)) - 1 / (48 * t^2))|
-        ≤ C / t^4 ∧
-      |qPrime t - 1 / (2 * t)| ≤ C / t^3 ∧
-      |qDoublePrime t - (-1) / (2 * t^2)| ≤ C / t^4 := by
-  sorry
-
-/-- Phase-derivative lower bound (P2):
-    on retained packets at sufficiently large `T`,
-    `q(t) ≥ (1/2) log(T/(4π)) - C/T²`.
-
-    Reduces to the first asymptotic of `theta_derivative_asymptotics`
-    via `t ∈ [T/2, 2T]`. -/
-theorem phase_derivative_lower_bound :
-    ∃ T₀ C : ℝ, 0 < T₀ ∧ 0 ≤ C ∧
-    ∀ T : ℝ, T₀ ≤ T → ∀ t : ℝ, T - 1 ≤ t → t ≤ T + 1 →
-    q t ≥ (1/2) * Real.log (T / (4 * Real.pi)) - C / T^2 := by
-  sorry
-
-/-! ## Phase kernel -/
+    The phase function `theta` and its derivatives `q`, `qPrime`,
+    `qDoublePrime` live in `RH.RiemannSiegelTheta` and are accessed via
+    `open RH.RiemannSiegelTheta` above. -/
 
 /-- Phase kernel
     `K_Φ(x, y) = sin(Φ(x) - Φ(y)) / (π (x - y))` for `x ≠ y`,
@@ -111,6 +65,8 @@ theorem phase_kernel_symmetric (x y : ℝ) :
 /-- Removable singularity at the diagonal: `K_Φ(x, y) → q(y) / π` as `x → y`. -/
 theorem phase_kernel_diagonal_limit (y : ℝ) :
     Filter.Tendsto (fun x => phaseKernel x y) (nhds y) (nhds (q y / Real.pi)) := by
+  -- TODO: continuity of `theta` (from `Complex.log_Gamma` differentiable away
+  -- from branch cuts) plus `Real.sin t / t → 1` as `t → 0`.
   sorry
 
 /-! ## Diagonal kernel derivatives
@@ -126,17 +82,20 @@ theorem phase_kernel_diagonal_value (T : ℝ) :
 /-- Diagonal partial in `x`: `K_x(T, T) = q'(T) / (2 π)`. -/
 theorem phase_kernel_diagonal_partial_x (T : ℝ) :
     deriv (fun x => phaseKernel x T) T = qPrime T / (2 * Real.pi) := by
+  -- TODO: Taylor expansion of `K_Φ(T+u, T)` to first order in `u`.
   sorry
 
 /-- Diagonal partial in `y`: `K_y(T, T) = q'(T) / (2 π)`. -/
 theorem phase_kernel_diagonal_partial_y (T : ℝ) :
     deriv (phaseKernel T) T = qPrime T / (2 * Real.pi) := by
+  -- TODO: by symmetry of `phase_kernel_diagonal_partial_x`.
   sorry
 
 /-- Diagonal mixed partial: `K_{xy}(T, T) = (q''(T) + 2 q(T)³) / (6 π)`. -/
 theorem phase_kernel_diagonal_partial_xy (T : ℝ) :
     deriv (fun x => deriv (phaseKernel x) T) T =
       (qDoublePrime T + 2 * (q T)^3) / (6 * Real.pi) := by
+  -- TODO: factored Taylor of `K_Φ` along the diagonal at total degree 2.
   sorry
 
 /-! ## Phase-kernel derivatives at distinct points -/
@@ -147,6 +106,7 @@ theorem phase_kernel_partial_x (T₁ T₂ : ℝ) (h : T₁ ≠ T₂) :
       (q T₁ * (T₁ - T₂) * Real.cos (theta T₁ - theta T₂) -
        Real.sin (theta T₁ - theta T₂))
       / (Real.pi * (T₁ - T₂)^2) := by
+  -- TODO: quotient rule on `sin(θ(x) − θ(T₂)) / (π (x − T₂))` at `x = T₁`.
   sorry
 
 /-- ∂/∂y K_Φ at distinct points. -/
@@ -155,6 +115,7 @@ theorem phase_kernel_partial_y (T₁ T₂ : ℝ) (h : T₁ ≠ T₂) :
       (Real.sin (theta T₁ - theta T₂) -
        q T₂ * (T₁ - T₂) * Real.cos (theta T₁ - theta T₂))
       / (Real.pi * (T₁ - T₂)^2) := by
+  -- TODO: quotient rule on `sin(θ(T₁) − θ(y)) / (π (T₁ − y))` at `y = T₂`.
   sorry
 
 /-- ∂²/∂x∂y K_Φ at distinct points. -/
@@ -163,6 +124,7 @@ theorem phase_kernel_partial_xy (T₁ T₂ : ℝ) (h : T₁ ≠ T₂) :
       ((q T₁ + q T₂) * (T₁ - T₂) * Real.cos (theta T₁ - theta T₂) +
        (q T₁ * q T₂ * (T₁ - T₂)^2 - 2) * Real.sin (theta T₁ - theta T₂))
       / (Real.pi * (T₁ - T₂)^3) := by
+  -- TODO: differentiate `phase_kernel_partial_y` in the first argument at `T₁`.
   sorry
 
 /-! ## Point-to-jet transform -/

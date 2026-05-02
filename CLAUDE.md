@@ -126,6 +126,42 @@ Wire each to the section-header status macros: `\statussympy[<path>]{verified}`,
 
 **Numerical simulation rigor.** All simulation scripts under `rh/simulation/` use mpmath for arbitrary-precision arithmetic — no `numpy`, no `math`, no built-in `float` arithmetic in the verification loop.  This is non-negotiable: float64's 16-digit precision masks rate fits at high heights (the Riemann–Siegel residual `-1/(48 t^2)` is `\sim 10^{-19}` at \(t = 10^{8}\), below float64 noise) and produces spurious \(O(h^2)\) slope deviations when the true rate is exact.  Use `mpmath.mpf` for scalars, closed-form 2x2 helpers (`mat2_eigs_symmetric`, `mat2_det`, etc.) for matrix operations, `mpmath.linspace_mp` / list comprehensions for samplings, and `loglog_slope` for two-point power-law fits.  Convert to `float` only at print time.  Imports of `numpy` or `math` in a simulation script are a defect; remove them.
 
+## Lean formalization (`rh/lean/`)
+
+Applies to every file under `rh/lean/RH/`.  The `lean` axis on each section header tracks progress on this formalization.
+
+**Aim.** Full unconditional Lean 4 / Mathlib formalization of `rh_rebuild.tex`, no `sorry` in shipping modules.  Each remaining `sorry` is an explicit liability with a docstring naming the missing dependency, and ideally a matching `wip` in the paper.  A section's `\statuslean{...}` axis advances `not-started → in-progress → formalized` when its sorries close.
+
+**Modular structure.** Code is organized by *mathematical object*, not by paper section; the paper sections are *users* of these object modules.
+
+```
+rh/lean/
+  RH.lean                            -- top-level re-export of all modules
+  RH/RiemannSiegelTheta.lean         -- θ, q, q′, q″ and their asymptotics
+  RH/PhaseKernel.lean                -- K_Φ, symmetry, partial derivatives
+  RH/JetTransform.lean               -- P_h
+  RH/LocalKernelJetNormalization.lean   -- §2 (imports the above)
+  RH/JetLimitLocalBlocks.lean           -- §3 (imports the above)
+  RH/<Section>.lean                  -- one file per migrated section
+```
+
+A heavyweight primitive (e.g.\ `theta`, requiring Stirling and digamma asymptotics) gets its own object module so the specialized infrastructure is isolated.  A section module (`RH/<Section>.lean`) then *imports* the relevant object modules and assembles the section's theorems on top.  When a section reuses an existing object module, it does not redefine it.
+
+**Naming conventions.**
+
+- Definitions: `lowerCamelCase` (`phaseKernel`, `pointToJetTransform`).
+- Theorems: `snake_case` (`phase_kernel_symmetric`, `algebraic_gram_criterion`).  Mathlib convention.
+- Module names: `UpperCamelCase`, matching file names (`RH.PhaseKernel`).
+- Each module opens with a docstring listing the LaTeX lemma labels it formalizes (`\\mapsto` lines).
+
+**Sorry discipline.**
+
+- Every `sorry` in a committed file carries a docstring that names the missing dependency: e.g.\ `-- TODO: needs differentiated Stirling for digamma at 1/4 + it/2`.
+- Commits introducing or discharging a sorry name it in the message (e.g.\ "Discharge `algebraic_gram_criterion`").
+- `lake build` must end with exit code 0.  Only `declaration uses sorry` warnings are acceptable.
+
+**Build verification.**  Run `cd rh/lean && lake build` after every Lean edit.  Targeted: `lake build RH.<ModuleName>`.  The mathlib cache lives in `rh/lean/.lake/` (gitignored) and is downloaded once via `lake exe cache get`.
+
 **Exhaustive verification.** Sympy and simulation scripts are not narration; they are a regression harness.  A section is *exhaustively verified* when:
 
 - **Every displayed formula has a failing test.** Symbolic identities are checked with `simplify(diff) == 0` and `assert`; numerical formulas are checked against an independent computation route and a tolerance.  A test that prints "looks fine" without an `assert` does not count.
