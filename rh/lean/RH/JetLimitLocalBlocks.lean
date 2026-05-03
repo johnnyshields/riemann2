@@ -76,35 +76,12 @@ noncomputable def N12 (T₁ T₂ : ℝ) : Matrix (Fin 2) (Fin 2) ℝ :=
      ((q₁ + q₂) * s * Real.cos Δ +
       (q₁ * q₂ * s^2 - 2) * Real.sin Δ) / (2 * s^3)]
 
-/-! ## Jet-limit theorems -/
-
-/-- Same-point jet-limit:
-    `P_h * A_h(T) * P_h^⊤ → J(T)` as `h → 0⁺`.
-    Cf. Lemma `lem:same-point-jet-limit`. -/
-axiom same_point_jet_limit (T : ℝ) :
-    Filter.Tendsto
-      (fun h => let P := pointToJetTransform h
-                P * samePointBlock T h * P.transpose)
-      (nhdsWithin 0 (Set.Ioi 0))
-      (nhds (J T))
-
-/-- Cross-block jet-limit:
-    `P_h * C_h(T₁, T₂) * P_h^⊤ → (1/π) · N₁₂(T₁, T₂)` as `h → 0⁺`,
-    for `T₁ ≠ T₂`.
-    Cf. Lemma `lem:cross-block-jet-limit`. -/
-axiom cross_block_jet_limit (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
-    Filter.Tendsto
-      (fun h => let P := pointToJetTransform h
-                P * crossBlock T₁ T₂ h * P.transpose)
-      (nhdsWithin 0 (Set.Ioi 0))
-      (nhds ((1 / Real.pi) • N12 T₁ T₂))
-
-/-! ## O(h²) rate statements
+/-! ## O(h²) rate statements (axiomatic Taylor inputs)
 
     The paper proves `P_h A_h(T) P_h^⊤ = J(T) + O(h²)` and the
-    corresponding cross-block bound entrywise.  The `Tendsto` versions
-    above lose this rate; the explicit `O(h²)` form is required by
-    downstream finite-scale comparisons. -/
+    corresponding cross-block bound entrywise.  The plain `Tendsto`
+    versions follow by squeeze; the explicit `O(h²)` form is required
+    by downstream finite-scale comparisons. -/
 
 /-- Same-point jet-limit with explicit `O(h²)` rate.  Entrywise:
     there is `M ≥ 0` such that for `h ∈ (0, 1]` and each entry `(i, j)`
@@ -126,6 +103,106 @@ axiom cross_block_jet_limit_rate (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
         |(pointToJetTransform h * crossBlock T₁ T₂ h *
             (pointToJetTransform h).transpose -
           (1 / Real.pi) • N12 T₁ T₂) i j| ≤ M * h^2
+
+/-! ## Jet-limit theorems (derived from the rate axioms by squeeze) -/
+
+/-- Helper: `M * h^2 → 0` as `h → 0⁺`. -/
+private lemma mul_sq_tendsto_zero (M : ℝ) :
+    Filter.Tendsto (fun h : ℝ => M * h^2) (nhdsWithin 0 (Set.Ioi 0)) (nhds 0) := by
+  have h₀ : Filter.Tendsto (fun h : ℝ => M * h^2) (nhds 0) (nhds 0) := by
+    have hcont : Continuous (fun h : ℝ => M * h^2) :=
+      continuous_const.mul (continuous_id.pow 2)
+    have h_at0 : (M * (0 : ℝ)^2) = 0 := by ring
+    have := hcont.tendsto 0
+    rw [h_at0] at this
+    exact this
+  exact h₀.mono_left nhdsWithin_le_nhds
+
+/-- Same-point jet-limit:
+    `P_h * A_h(T) * P_h^⊤ → J(T)` as `h → 0⁺`.
+    Cf. Lemma `lem:same-point-jet-limit`.
+    Derived from `same_point_jet_limit_rate` by entrywise squeeze. -/
+theorem same_point_jet_limit (T : ℝ) :
+    Filter.Tendsto
+      (fun h => let P := pointToJetTransform h
+                P * samePointBlock T h * P.transpose)
+      (nhdsWithin 0 (Set.Ioi 0))
+      (nhds (J T)) := by
+  obtain ⟨M, _, hM⟩ := same_point_jet_limit_rate T
+  refine tendsto_pi_nhds.mpr fun i => tendsto_pi_nhds.mpr fun j => ?_
+  have h_filter : ∀ᶠ h in nhdsWithin (0 : ℝ) (Set.Ioi 0),
+      |(pointToJetTransform h * samePointBlock T h *
+          (pointToJetTransform h).transpose - J T) i j| ≤ M * h^2 := by
+    filter_upwards [Ioo_mem_nhdsGT (zero_lt_one : (0:ℝ) < 1)] with h hh
+    exact hM h hh.1 (le_of_lt hh.2) i j
+  have h_bound_to_zero := mul_sq_tendsto_zero M
+  have h_target_const : Filter.Tendsto (fun _ : ℝ => J T i j)
+      (nhdsWithin (0 : ℝ) (Set.Ioi 0)) (nhds (J T i j)) :=
+    tendsto_const_nhds
+  have h_lower : Filter.Tendsto (fun h : ℝ => J T i j - M * h^2)
+      (nhdsWithin (0 : ℝ) (Set.Ioi 0)) (nhds (J T i j)) := by
+    have := h_target_const.sub h_bound_to_zero
+    simpa using this
+  have h_upper : Filter.Tendsto (fun h : ℝ => J T i j + M * h^2)
+      (nhdsWithin (0 : ℝ) (Set.Ioi 0)) (nhds (J T i j)) := by
+    have := h_target_const.add h_bound_to_zero
+    simpa using this
+  apply tendsto_of_tendsto_of_tendsto_of_le_of_le' h_lower h_upper
+  · filter_upwards [h_filter] with h hh
+    have habs := abs_le.mp hh
+    simp only [Matrix.sub_apply] at habs
+    linarith [habs.1]
+  · filter_upwards [h_filter] with h hh
+    have habs := abs_le.mp hh
+    simp only [Matrix.sub_apply] at habs
+    linarith [habs.2]
+
+/-- Cross-block jet-limit:
+    `P_h * C_h(T₁, T₂) * P_h^⊤ → (1/π) · N₁₂(T₁, T₂)` as `h → 0⁺`,
+    for `T₁ ≠ T₂`.
+    Cf. Lemma `lem:cross-block-jet-limit`.
+    Derived from `cross_block_jet_limit_rate` by entrywise squeeze. -/
+theorem cross_block_jet_limit (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
+    Filter.Tendsto
+      (fun h => let P := pointToJetTransform h
+                P * crossBlock T₁ T₂ h * P.transpose)
+      (nhdsWithin 0 (Set.Ioi 0))
+      (nhds ((1 / Real.pi) • N12 T₁ T₂)) := by
+  obtain ⟨M, _, hM⟩ := cross_block_jet_limit_rate T₁ T₂ hT
+  have h_pos : (0 : ℝ) < |T₁ - T₂| / 3 := by
+    have : |T₁ - T₂| > 0 := abs_pos.mpr (sub_ne_zero.mpr hT)
+    linarith
+  refine tendsto_pi_nhds.mpr fun i => tendsto_pi_nhds.mpr fun j => ?_
+  have h_filter : ∀ᶠ h in nhdsWithin (0 : ℝ) (Set.Ioi 0),
+      |(pointToJetTransform h * crossBlock T₁ T₂ h *
+          (pointToJetTransform h).transpose -
+        (1 / Real.pi) • N12 T₁ T₂) i j| ≤ M * h^2 := by
+    filter_upwards [Ioo_mem_nhdsGT h_pos] with h hh
+    exact hM h hh.1 (le_of_lt hh.2) i j
+  have h_bound_to_zero := mul_sq_tendsto_zero M
+  have h_target_const : Filter.Tendsto (fun _ : ℝ => ((1 / Real.pi) • N12 T₁ T₂) i j)
+      (nhdsWithin (0 : ℝ) (Set.Ioi 0))
+      (nhds (((1 / Real.pi) • N12 T₁ T₂) i j)) :=
+    tendsto_const_nhds
+  have h_lower : Filter.Tendsto (fun h : ℝ => ((1 / Real.pi) • N12 T₁ T₂) i j - M * h^2)
+      (nhdsWithin (0 : ℝ) (Set.Ioi 0))
+      (nhds (((1 / Real.pi) • N12 T₁ T₂) i j)) := by
+    have := h_target_const.sub h_bound_to_zero
+    simpa using this
+  have h_upper : Filter.Tendsto (fun h : ℝ => ((1 / Real.pi) • N12 T₁ T₂) i j + M * h^2)
+      (nhdsWithin (0 : ℝ) (Set.Ioi 0))
+      (nhds (((1 / Real.pi) • N12 T₁ T₂) i j)) := by
+    have := h_target_const.add h_bound_to_zero
+    simpa using this
+  apply tendsto_of_tendsto_of_tendsto_of_le_of_le' h_lower h_upper
+  · filter_upwards [h_filter] with h hh
+    have habs := abs_le.mp hh
+    simp only [Matrix.sub_apply] at habs
+    linarith [habs.1]
+  · filter_upwards [h_filter] with h hh
+    have habs := abs_le.mp hh
+    simp only [Matrix.sub_apply] at habs
+    linarith [habs.2]
 
 /-! ## Same-point Gram positivity -/
 
