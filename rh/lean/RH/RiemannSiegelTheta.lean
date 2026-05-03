@@ -713,4 +713,94 @@ theorem theta_taylor_remainder_5 (T : ℝ) :
           mul_le_mul_of_nonneg_right h_iter6_bound hpow_nn
       _ = K₀ / 720 * |h|^6 * 720 := by ring
 
+/-- Order-5 Taylor remainder for `Real.sin` at `0` (global bound).
+    `|sin u − (u − u³/6 + u⁵/120)| ≤ |u|⁶ / 720` for every `u ∈ ℝ`.
+
+    Proof: Apply `taylor_mean_remainder_lagrange_iteratedDeriv` to
+    `Real.sin` on `uIcc 0 u` for `u ≠ 0` with `n = 5`, then use the
+    universal bound `|iteratedDeriv 6 Real.sin ξ| ≤ 1`. -/
+theorem sin_taylor_remainder_5 (u : ℝ) :
+    |Real.sin u - (u - u^3/6 + u^5/120)| ≤ |u|^6 / 720 := by
+  by_cases hu : u = 0
+  · subst hu; simp
+  · have h_ne : (0 : ℝ) ≠ u := Ne.symm hu
+    have h_sin_C6_on : ContDiffOn ℝ 6 Real.sin (Set.uIcc 0 u) :=
+      Real.contDiff_sin.contDiffOn
+    obtain ⟨ξ, hξ_mem, hξ_eq⟩ :=
+      taylor_mean_remainder_lagrange_iteratedDeriv h_ne h_sin_C6_on
+    have h_min_lt_max : min (0:ℝ) u < max 0 u := by
+      rcases lt_or_gt_of_ne hu with hlt | hgt
+      · simp [min_eq_right hlt.le, max_eq_left hlt.le, hlt]
+      · simp [min_eq_left hgt.le, max_eq_right hgt.le, hgt]
+    have h_unique : UniqueDiffOn ℝ (Set.uIcc (0:ℝ) u) :=
+      uniqueDiffOn_Icc h_min_lt_max
+    -- Compute Taylor polynomial of sin at 0 to order 5: u - u³/6 + u⁵/120.
+    have h_taylor_form : taylorWithinEval Real.sin 5 (Set.uIcc 0 u) 0 u =
+        u - u^3/6 + u^5/120 := by
+      rw [taylor_within_apply]
+      simp only [Finset.sum_range_succ, Finset.sum_range_zero, zero_add,
+                 sub_zero, smul_eq_mul]
+      have h0_mem : (0:ℝ) ∈ Set.uIcc (0:ℝ) u := Set.left_mem_uIcc
+      have h_sin_C : ContDiffAt ℝ 6 Real.sin 0 := Real.contDiff_sin.contDiffAt
+      -- Functional equalities for iteratedDeriv k Real.sin.
+      have h_iter1_func : iteratedDeriv 1 Real.sin = Real.cos := by
+        rw [iteratedDeriv_one, Real.deriv_sin]
+      have h_iter2_func : iteratedDeriv 2 Real.sin = -Real.sin := by
+        rw [show (2:ℕ) = 1 + 1 from rfl, iteratedDeriv_succ, h_iter1_func,
+            Real.deriv_cos']
+        funext x; simp [Pi.neg_apply]
+      have h_iter3_func : iteratedDeriv 3 Real.sin = -Real.cos := by
+        rw [show (3:ℕ) = 2 + 1 from rfl, iteratedDeriv_succ, h_iter2_func]
+        rw [deriv.neg', Real.deriv_sin]
+        funext x; rfl
+      have h_iter4_func : iteratedDeriv 4 Real.sin = Real.sin := by
+        rw [show (4:ℕ) = 3 + 1 from rfl, iteratedDeriv_succ, h_iter3_func]
+        rw [deriv.neg', Real.deriv_cos']
+        funext x; simp
+      have h_iter5_func : iteratedDeriv 5 Real.sin = Real.cos := by
+        rw [show (5:ℕ) = 4 + 1 from rfl, iteratedDeriv_succ, h_iter4_func, Real.deriv_sin]
+      have h_iter_eq : ∀ k ≤ 5,
+          iteratedDerivWithin k Real.sin (Set.uIcc 0 u) 0 = iteratedDeriv k Real.sin 0 := by
+        intro k hk
+        exact iteratedDerivWithin_eq_iteratedDeriv h_unique
+            (h_sin_C.of_le (by exact_mod_cast (by omega : k ≤ 6))) h0_mem
+      have h0v : iteratedDeriv 0 Real.sin 0 = 0 := by
+        rw [iteratedDeriv_zero]; exact Real.sin_zero
+      have h1v : iteratedDeriv 1 Real.sin 0 = 1 := by
+        rw [h_iter1_func]; exact Real.cos_zero
+      have h2v : iteratedDeriv 2 Real.sin 0 = 0 := by
+        rw [h_iter2_func]; show (-Real.sin) 0 = 0
+        simp [Pi.neg_apply, Real.sin_zero]
+      have h3v : iteratedDeriv 3 Real.sin 0 = -1 := by
+        rw [h_iter3_func]; show (-Real.cos) 0 = -1
+        simp [Pi.neg_apply, Real.cos_zero]
+      have h4v : iteratedDeriv 4 Real.sin 0 = 0 := by
+        rw [h_iter4_func]; exact Real.sin_zero
+      have h5v : iteratedDeriv 5 Real.sin 0 = 1 := by
+        rw [h_iter5_func]; exact Real.cos_zero
+      rw [h_iter_eq 0 (by norm_num), h_iter_eq 1 (by norm_num),
+          h_iter_eq 2 (by norm_num), h_iter_eq 3 (by norm_num),
+          h_iter_eq 4 (by norm_num), h_iter_eq 5 (by norm_num)]
+      rw [h0v, h1v, h2v, h3v, h4v, h5v]
+      simp [Nat.factorial]
+      ring
+    rw [h_taylor_form] at hξ_eq
+    have h_iter6_bound : |iteratedDeriv 6 Real.sin ξ| ≤ 1 :=
+      Real.abs_iteratedDeriv_sin_le_one 6 ξ
+    have h_h_eq : u - 0 = u := by ring
+    rw [h_h_eq] at hξ_eq
+    have h_eq : Real.sin u - (u - u^3/6 + u^5/120) =
+        iteratedDeriv 6 Real.sin ξ * u^6 / 720 := by
+      have h_fact : ((5 + 1).factorial : ℝ) = 720 := by simp [Nat.factorial]
+      have := hξ_eq
+      rw [h_fact] at this
+      exact this
+    rw [h_eq, abs_div, abs_mul, abs_pow]
+    have h_abs_720 : |(720 : ℝ)| = 720 := by norm_num
+    rw [h_abs_720, div_le_iff₀ (by norm_num : (0:ℝ) < 720)]
+    have hpow_nn : 0 ≤ |u|^6 := pow_nonneg (abs_nonneg _) 6
+    calc |iteratedDeriv 6 Real.sin ξ| * |u|^6
+        ≤ 1 * |u|^6 := mul_le_mul_of_nonneg_right h_iter6_bound hpow_nn
+      _ = |u|^6 / 720 * 720 := by ring
+
 end RH.RiemannSiegelTheta
