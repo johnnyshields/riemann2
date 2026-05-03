@@ -39,6 +39,48 @@ namespace RH.LocalKernelJetNormalization
 
 open Real RH.RiemannSiegelTheta
 
+/-! ## Auxiliary bounds -/
+
+/-- Cubic bound on `|sin u - u|` for `|u| ≤ 1`.
+    Derived from `Real.sin_bound`:
+    `|sin u - (u - u³/6)| ≤ 5/96 |u|⁴`, then by triangle inequality
+    `|sin u - u| ≤ 5/96 |u|⁴ + |u|³/6 ≤ 21/96 |u|³ ≤ |u|³`. -/
+private lemma sin_sub_self_abs_le_cube {u : ℝ} (hu : |u| ≤ 1) :
+    |Real.sin u - u| ≤ |u|^3 := by
+  have h_sin := Real.sin_bound hu
+  have h_pow_3 : |u^3| = |u|^3 := abs_pow u 3
+  have h_u3_div_6 : |u^3 / 6| = |u|^3 / 6 := by
+    rw [abs_div, h_pow_3]
+    have h6 : |(6:ℝ)| = 6 := abs_of_pos (by norm_num)
+    rw [h6]
+  have h_decomp : Real.sin u - u = (Real.sin u - (u - u^3/6)) - u^3/6 := by ring
+  have h_u_nn : 0 ≤ |u| := abs_nonneg _
+  have h_u3_nn : 0 ≤ |u|^3 := pow_nonneg h_u_nn 3
+  have h_u4_le_u3 : |u|^4 ≤ |u|^3 := by
+    have hk : |u|^4 = |u|^3 * |u| := by ring
+    rw [hk]
+    have : |u|^3 * |u| ≤ |u|^3 * 1 :=
+      mul_le_mul_of_nonneg_left hu h_u3_nn
+    linarith
+  have h_tri : |Real.sin u - u| ≤ |Real.sin u - (u - u^3/6)| + |u^3/6| := by
+    rw [h_decomp]
+    exact abs_sub _ _
+  have h_5_96 : (0:ℝ) ≤ 5/96 := by norm_num
+  have h_u4_596 : |u|^4 * (5/96) ≤ |u|^3 * (5/96) :=
+    mul_le_mul_of_nonneg_right h_u4_le_u3 h_5_96
+  rw [h_u3_div_6] at h_tri
+  have h_step1 : |Real.sin u - u| ≤ |u|^4 * (5/96) + |u|^3/6 := by
+    linarith
+  have h_step2 : |u|^4 * (5/96) + |u|^3/6 ≤ |u|^3 * (21/96) := by
+    have h_eq : |u|^3 * (21/96) = |u|^3 * (5/96) + |u|^3/6 := by ring
+    linarith
+  have h_step3 : |u|^3 * (21/96) ≤ |u|^3 := by
+    have h21 : (21:ℝ)/96 ≤ 1 := by norm_num
+    have : |u|^3 * (21/96) ≤ |u|^3 * 1 :=
+      mul_le_mul_of_nonneg_left h21 h_u3_nn
+    linarith
+  linarith
+
 /-! ## Phase kernel
 
     The phase function `theta` and its derivatives `q`, `qPrime`,
@@ -153,13 +195,237 @@ theorem phase_kernel_diagonal_limit_theta (y : ℝ) :
     Filter.Tendsto (fun x => phaseKernel x y) (nhds y) (nhds (q y / Real.pi)) :=
   phase_kernel_diagonal_limit y (theta_differentiableAt y)
 
+set_option maxHeartbeats 600000 in
 /-- Joint continuity at the diagonal: `K_Φ(x, y) → q(T) / π` as
     `(x, y) → (T, T)`.  Stronger than the one-variable
     `phase_kernel_diagonal_limit` and matches the paper's continuity
-    statement in `lem:phase-kernel-properties`. -/
-axiom phase_kernel_joint_diagonal_limit (T : ℝ) :
+    statement in `lem:phase-kernel-properties`.
+
+    Proof: by MVT, `θ(x) − θ(y) = q(c)(x − y)` for some `c` between `x`
+    and `y`.  For `|q(c)(x−y)| ≤ 1`, `|sin u − u| ≤ |u|³` gives
+        `|K(x,y) − q(c)/π| ≤ |q(c)|³ (x−y)² / π`.
+    Continuity of `q` then gives `|q(c) − q(T)| → 0` as `(x,y) → (T,T)`. -/
+theorem phase_kernel_joint_diagonal_limit (T : ℝ) :
     Filter.Tendsto (fun p : ℝ × ℝ => phaseKernel p.1 p.2)
-      (nhds (T, T)) (nhds (q T / Real.pi))
+      (nhds (T, T)) (nhds (q T / Real.pi)) := by
+  -- q is continuous from theta_smooth → ContDiff ℝ 1 q.
+  have h_q_cont : Continuous q := by
+    have h_θ_C2 : ContDiff ℝ 2 theta := theta_smooth.of_le (by decide)
+    have h_q_C1 : ContDiff ℝ 1 q := by
+      have h : ContDiff ℝ (1 + 1 : ℕ) theta := by
+        have heq : (1 + 1 : ℕ) = 2 := by norm_num
+        rw [heq]; exact h_θ_C2
+      exact h.deriv'
+    exact h_q_C1.continuous
+  rw [Metric.tendsto_nhds]
+  intro ε hε
+  rw [Metric.eventually_nhds_iff]
+  -- Constants.
+  have hπ_pos : 0 < Real.pi := Real.pi_pos
+  have hπ_ne : Real.pi ≠ 0 := Real.pi_ne_zero
+  -- Pick δ_q from continuity of q at T (target ε * π / 2).
+  obtain ⟨δ_q, hδ_q_pos, hδ_q⟩ :=
+    Metric.continuous_iff.mp h_q_cont T (ε * Real.pi / 2) (by positivity)
+  -- A uniform |q| bound near T.
+  set M : ℝ := |q T| + 1 with hM_def
+  have hM_pos : 0 < M := by
+    have : 0 ≤ |q T| := abs_nonneg _
+    have heq : M = |q T| + 1 := rfl
+    linarith
+  obtain ⟨δ_M, hδ_M_pos, hδ_M_bd⟩ : ∃ δ_M, 0 < δ_M ∧ ∀ c, |c - T| < δ_M → |q c| ≤ M := by
+    obtain ⟨δ', hδ'_pos, hδ'⟩ := Metric.continuous_iff.mp h_q_cont T 1 zero_lt_one
+    refine ⟨δ', hδ'_pos, fun c hc => ?_⟩
+    have h₁ : |q c - q T| < 1 := hδ' c hc
+    have h₂ : |q c| ≤ |q T| + |q c - q T| := by
+      have heq : q c = q T + (q c - q T) := by ring
+      calc |q c| = |q T + (q c - q T)| := by rw [← heq]
+        _ ≤ |q T| + |q c - q T| := abs_add_le _ _
+    have heq : M = |q T| + 1 := rfl
+    linarith
+  -- Need δ small enough: 4 * M^3 * δ^2 / π < ε / 2 and 2 M δ ≤ 1.
+  -- δ < √(πε/(8M^3)) and δ ≤ 1/(2M).
+  have hM3_pos : 0 < M^3 := by positivity
+  set δ_cubic : ℝ := Real.sqrt (Real.pi * ε / (8 * M^3)) with hδc_def
+  have hδ_cubic_pos : 0 < δ_cubic := Real.sqrt_pos.mpr (by positivity)
+  set δ_lin : ℝ := 1 / (2 * M) with hδl_def
+  have hδ_lin_pos : 0 < δ_lin := by
+    have : 0 < 2 * M := by linarith
+    exact div_pos zero_lt_one this
+  set δ : ℝ := min δ_q (min δ_M (min δ_cubic δ_lin)) with hδ_def
+  have hδ_pos : 0 < δ := by
+    refine lt_min hδ_q_pos (lt_min hδ_M_pos (lt_min hδ_cubic_pos hδ_lin_pos))
+  refine ⟨δ, hδ_pos, ?_⟩
+  intro p hp
+  obtain ⟨x, y⟩ := p
+  simp only [Prod.dist_eq] at hp
+  have hx_dist : |x - T| < δ := by
+    have h := lt_of_le_of_lt (le_max_left _ _) hp
+    simpa [Real.dist_eq] using h
+  have hy_dist : |y - T| < δ := by
+    have h := lt_of_le_of_lt (le_max_right _ _) hp
+    simpa [Real.dist_eq] using h
+  have hδ_le_q : δ ≤ δ_q := min_le_left _ _
+  have hδ_le_M : δ ≤ δ_M := le_trans (min_le_right _ _) (min_le_left _ _)
+  have hδ_le_cubic : δ ≤ δ_cubic :=
+    le_trans (min_le_right _ _) (le_trans (min_le_right _ _) (min_le_left _ _))
+  have hδ_le_lin : δ ≤ δ_lin :=
+    le_trans (min_le_right _ _) (le_trans (min_le_right _ _) (min_le_right _ _))
+  rw [Real.dist_eq]
+  by_cases hxy : x = y
+  · -- Diagonal case: K(y, y) = q(y)/π → q(T)/π by continuity of q.
+    rw [hxy]
+    have h_pK : phaseKernel y y = q y / Real.pi := by unfold phaseKernel; simp
+    rw [h_pK]
+    have hy_q : |y - T| < δ_q := lt_of_lt_of_le hy_dist hδ_le_q
+    have h_q_diff : |q y - q T| < ε * Real.pi / 2 := hδ_q y hy_q
+    have heq : q y / Real.pi - q T / Real.pi = (q y - q T) / Real.pi := by
+      field_simp
+    rw [heq, abs_div, abs_of_pos hπ_pos]
+    rw [div_lt_iff₀ hπ_pos]
+    nlinarith [h_q_diff, hπ_pos.le, hε.le]
+  · -- Off-diagonal case: use MVT.
+    have hxy_ne : x - y ≠ 0 := sub_ne_zero.mpr hxy
+    have h_θ_diff : Differentiable ℝ theta :=
+      theta_smooth.differentiable (by decide)
+    have h_θ_cont : Continuous theta := h_θ_diff.continuous
+    -- Apply MVT.
+    obtain ⟨c, hc_min, hc_max, hc_eq⟩ : ∃ c : ℝ,
+        min x y < c ∧ c < max x y ∧ theta x - theta y = q c * (x - y) := by
+      rcases lt_or_gt_of_ne hxy with hlt | hgt
+      · obtain ⟨c, hc_in, hc⟩ := exists_hasDerivAt_eq_slope theta q hlt
+          h_θ_cont.continuousOn (fun z _ => (h_θ_diff z).hasDerivAt)
+        refine ⟨c, ?_, ?_, ?_⟩
+        · simpa [min_eq_left hlt.le] using hc_in.1
+        · simpa [max_eq_right hlt.le] using hc_in.2
+        · -- hc : q c = (theta y - theta x) / (y - x)
+          have h_yx : y - x ≠ 0 := sub_ne_zero.mpr (Ne.symm hxy)
+          have h_eq1 : q c * (y - x) = theta y - theta x := by
+            have := hc
+            field_simp at this
+            linarith
+          have h_eq2 : theta x - theta y = -(theta y - theta x) := by ring
+          have h_eq3 : x - y = -(y - x) := by ring
+          rw [h_eq2, h_eq3]
+          have h_neg : q c * -(y - x) = -(q c * (y - x)) := by ring
+          rw [h_neg, h_eq1]
+      · obtain ⟨c, hc_in, hc⟩ := exists_hasDerivAt_eq_slope theta q hgt
+          h_θ_cont.continuousOn (fun z _ => (h_θ_diff z).hasDerivAt)
+        refine ⟨c, ?_, ?_, ?_⟩
+        · simpa [min_eq_right hgt.le] using hc_in.1
+        · simpa [max_eq_left hgt.le] using hc_in.2
+        · have h_xy : x - y ≠ 0 := sub_ne_zero.mpr hxy
+          have h_eq1 : q c * (x - y) = theta x - theta y := by
+            field_simp at hc; linarith
+          linarith
+    -- |c - T| < δ since c is between x and y.
+    have hc_T : |c - T| < δ := by
+      rw [abs_lt]
+      have h_min_T : -δ < min x y - T := by
+        rcases le_total x y with hxy_le | hxy_le
+        · simp [min_eq_left hxy_le]; rw [abs_lt] at hx_dist; linarith
+        · simp [min_eq_right hxy_le]; rw [abs_lt] at hy_dist; linarith
+      have h_max_T : max x y - T < δ := by
+        rcases le_total x y with hxy_le | hxy_le
+        · simp [max_eq_right hxy_le]; rw [abs_lt] at hy_dist; linarith
+        · simp [max_eq_left hxy_le]; rw [abs_lt] at hx_dist; linarith
+      constructor
+      · linarith
+      · linarith
+    have hc_q : |q c - q T| < ε * Real.pi / 2 := hδ_q c (lt_of_lt_of_le hc_T hδ_le_q)
+    have hc_M : |q c| ≤ M := hδ_M_bd c (lt_of_lt_of_le hc_T hδ_le_M)
+    -- Now estimate.
+    set v : ℝ := x - y with hv_def
+    set u : ℝ := q c * v with hu_def
+    have hv_ne : v ≠ 0 := hxy_ne
+    have hv_abs : |v| < 2 * δ := by
+      rw [abs_lt] at hx_dist hy_dist
+      rw [abs_lt]; constructor <;> linarith
+    have hu_abs_le : |u| ≤ M * |v| := by
+      simp only [hu_def, abs_mul]
+      exact mul_le_mul_of_nonneg_right hc_M (abs_nonneg _)
+    have h_2δ_lin : 2 * δ ≤ 1 / M := by
+      have h2 : (2 : ℝ) * δ ≤ 2 * δ_lin := by linarith
+      have h3 : 2 * δ_lin = 1 / M := by
+        rw [hδl_def]; field_simp
+      linarith
+    have hMv_le_one : M * |v| ≤ 1 := by
+      have hv_le : |v| ≤ 2 * δ := le_of_lt hv_abs
+      have h₁ : M * |v| ≤ M * (2 * δ) := mul_le_mul_of_nonneg_left hv_le (le_of_lt hM_pos)
+      have h₂ : M * (2 * δ) ≤ M * (1 / M) := mul_le_mul_of_nonneg_left h_2δ_lin (le_of_lt hM_pos)
+      have h₃ : M * (1 / M) = 1 := by
+        rw [mul_one_div]; exact div_self (ne_of_gt hM_pos)
+      linarith
+    have hu_le_one : |u| ≤ 1 := le_trans hu_abs_le hMv_le_one
+    have h_sin_bound := sin_sub_self_abs_le_cube hu_le_one
+    -- phaseKernel(x, y) = sin u / (π v) for x ≠ y.
+    have h_pK : phaseKernel x y = Real.sin (theta x - theta y) / (Real.pi * v) := by
+      unfold phaseKernel
+      simp [hxy, hv_def]
+    rw [h_pK, hc_eq]
+    -- Goal: |sin(u) / (π v) - q T / π| < ε
+    -- Decompose: = (sin u - u)/(π v) + (q c - q T)/π
+    have h_decomp : Real.sin u / (Real.pi * v) - q T / Real.pi =
+        (Real.sin u - u) / (Real.pi * v) + (q c - q T) / Real.pi := by
+      have hu_eq : u = q c * v := rfl
+      field_simp
+      rw [hu_eq]; ring
+    have hv_pos : 0 < |v| := abs_pos.mpr hv_ne
+    -- Bound |(sin u - u)/(π v)| ≤ |u|^3/(π|v|) ≤ M^3 |v|^3 /(π|v|) = M^3 |v|^2 / π ≤ 4 M^3 δ^2 / π.
+    have h_term1 : |(Real.sin u - u) / (Real.pi * v)| ≤ M^3 * |v|^2 / Real.pi := by
+      rw [abs_div, abs_mul, abs_of_pos hπ_pos]
+      have hπv_pos : 0 < Real.pi * |v| := mul_pos hπ_pos hv_pos
+      rw [div_le_div_iff₀ hπv_pos hπ_pos]
+      have h_u3_le : |u|^3 ≤ M^3 * |v|^3 := by
+        have h_pow := pow_le_pow_left₀ (abs_nonneg u) hu_abs_le 3
+        rw [mul_pow] at h_pow
+        exact h_pow
+      have h_M3_nn : 0 ≤ M^3 := le_of_lt hM3_pos
+      have h_step1 : |Real.sin u - u| * Real.pi ≤ |u|^3 * Real.pi :=
+        mul_le_mul_of_nonneg_right h_sin_bound (le_of_lt hπ_pos)
+      have h_step2 : |u|^3 * Real.pi ≤ M^3 * |v|^3 * Real.pi :=
+        mul_le_mul_of_nonneg_right h_u3_le (le_of_lt hπ_pos)
+      have h_step3 : M^3 * |v|^3 * Real.pi = M^3 * |v|^2 * (Real.pi * |v|) := by ring
+      linarith
+    have h_term1_small : M^3 * |v|^2 / Real.pi < ε / 2 := by
+      -- δ^2 ≤ π ε / (8 M^3) from δ ≤ δ_cubic.
+      have hδ_sq : δ^2 ≤ Real.pi * ε / (8 * M^3) := by
+        have hδ_le := hδ_le_cubic
+        rw [hδc_def] at hδ_le
+        have hδ_nn : 0 ≤ δ := le_of_lt hδ_pos
+        have h_sq_le : δ^2 ≤ (Real.sqrt (Real.pi * ε / (8 * M^3)))^2 := by
+          nlinarith [Real.sqrt_nonneg (Real.pi * ε / (8 * M^3))]
+        rw [Real.sq_sqrt (by positivity : 0 ≤ Real.pi * ε / (8 * M^3))] at h_sq_le
+        exact h_sq_le
+      -- |v|^2 < 4 δ^2 (strict, from |v| < 2δ).
+      have hv_sq_lt : |v|^2 < 4 * δ^2 := by
+        have hv_nn : 0 ≤ |v| := abs_nonneg v
+        have h2δ_pos : 0 < 2 * δ := by linarith
+        have hv_lt : |v| < 2 * δ := hv_abs
+        nlinarith
+      -- M^3 |v|^2 < 4 M^3 δ^2 ≤ π ε / 2.
+      have h_main : M^3 * |v|^2 < Real.pi * ε / 2 := by
+        have h₁ : M^3 * |v|^2 < M^3 * (4 * δ^2) := by
+          nlinarith [hM3_pos.le]
+        have h₂ : M^3 * (4 * δ^2) ≤ M^3 * (4 * (Real.pi * ε / (8 * M^3))) := by
+          nlinarith [hM3_pos.le]
+        have h₃ : M^3 * (4 * (Real.pi * ε / (8 * M^3))) = Real.pi * ε / 2 := by
+          have hM3_ne : M^3 ≠ 0 := ne_of_gt hM3_pos
+          field_simp
+          ring
+        linarith
+      rw [div_lt_iff₀ hπ_pos]
+      have heq : ε / 2 * Real.pi = Real.pi * ε / 2 := by ring
+      linarith
+    have h_term2 : |(q c - q T) / Real.pi| < ε / 2 := by
+      rw [abs_div, abs_of_pos hπ_pos]
+      rw [div_lt_iff₀ hπ_pos]
+      linarith
+    calc |Real.sin u / (Real.pi * v) - q T / Real.pi|
+        = |(Real.sin u - u) / (Real.pi * v) + (q c - q T) / Real.pi| := by rw [h_decomp]
+      _ ≤ |(Real.sin u - u) / (Real.pi * v)| + |(q c - q T) / Real.pi| := abs_add_le _ _
+      _ < M^3 * |v|^2 / Real.pi + ε / 2 := by linarith
+      _ < ε / 2 + ε / 2 := by linarith
+      _ = ε := by ring
 
 /-! ## Diagonal kernel derivatives
 
