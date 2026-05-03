@@ -117,18 +117,28 @@ def verify_mu_hat_parity(N_values=(2, 3, 4, 5)):
             assert deriv == 0, \
                 f"N={N}, order={order}: d^{order} mu_hat(0) = {deriv}, expected 0"
 
-        # Order 2N-1 derivative: must be NONZERO (the lemma says the odd part
-        # starts there).  Confirm by symbolic evaluation.
+        # Order 2N-1 derivative: must equal the closed form of
+        # cor:n-point-first-surviving,
+        #     d^{2N-1} mu_hat_{N,Q}(0)
+        #         = (-1)^{N+1} (2N-1) N! (N-1)! / Q^{2(2N-1)}.
         order_first = 2 * N - 1
         deriv_first = diff(mu_hat, z, order_first).subs(z, 0)
         deriv_first = simplify(deriv_first)
+        C_N = ((-1)**(N + 1)) * (2 * N - 1) * factorial(N) * factorial(N - 1)
+        expected_first = C_N / Q**(2 * (2 * N - 1))
+        delta_closed = simplify(deriv_first - expected_first)
+        assert delta_closed == 0, (
+            f"N={N}: d^{order_first} mu_hat(0) closed-form mismatch: "
+            f"diff = {delta_closed}"
+        )
         assert deriv_first != 0, (
-            f"N={N}: d^{order_first} mu_hat(0) unexpectedly zero: {deriv_first}"
+            f"N={N}: d^{order_first} mu_hat(0) unexpectedly zero"
         )
 
         print(f"  N={N}: mu_hat(0) = 1; "
               f"d^1, d^3, ..., d^{2*(N-2)+1} all vanish at 0;")
-        print(f"        d^{order_first} mu_hat(0) = {deriv_first}  (nonzero, as expected).")
+        print(f"        d^{order_first} mu_hat(0) = {deriv_first}")
+        print(f"        matches closed form (-1)^{{N+1}} (2N-1) N! (N-1)! / Q^{{2(2N-1)}}.")
     print()
     print("  [PASS] mu_hat_{N,Q} has its odd part starting at order 2N-1,")
     print("         confirming the parity vanishing of the lemma.")
