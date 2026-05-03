@@ -1207,11 +1207,194 @@ needed for a later complex-analytic argument must be introduced as a
 separate input or proved in a separate section.
 \end{remark}
 
+\subsection{Two-sided whitening ledger}
+\label{subsec:two-sided-whitening-ledger}
+
+The one-sided estimate of Lemma~\ref{lem:whitening-loss} prevents
+same-point whitening from enlarging upper bounds.  Lower bounds require a
+separate ledger, because left and right multiplication by
+\(G_{m,\pm}^{-1/2}\) can attenuate a nonzero matrix.  Define the whitening
+map on \(2\times2\) real matrices by
+\begin{equation}
+\label{eq:whitening-map}
+        \mathsf W_{m,s}(X)
+        :=G_{m,-}(s)^{-1/2}\,X\,G_{m,+}(s)^{-1/2}.
+\end{equation}
+
+\begin{lemma}[Spectral size of the finite same-point blocks]
+\label{lem:finite-same-point-spectral-size}
+For \(\Ph_T=\theta\), uniformly for \((m,s)\in\mathcal D_T\),
+\begin{align}
+\label{eq:G-lambda-min-asymptotic}
+\lambda_{\min}\bigl(G_{m,\pm}(s)\bigr)
+&=\frac{2q(t_\pm)}{\pi}\,(1+o_T(1)),\\
+\label{eq:G-lambda-max-asymptotic}
+\lambda_{\max}\bigl(G_{m,\pm}(s)\bigr)
+&=\frac{q(t_\pm)^3}{6\pi}\,(1+o_T(1)).
+\end{align}
+Consequently, after increasing the global lower-height cutoff, there are
+absolute constants \(c,C>0\) such that, uniformly on \(\mathcal D_T\),
+\begin{equation}
+\label{eq:G-spectral-comparable}
+        c\,q(t_\pm)
+        \le \lambda_{\min}\bigl(G_{m,\pm}(s)\bigr)
+        \le C\,q(t_\pm),
+        \qquad
+        c\,q(t_\pm)^3
+        \le \lambda_{\max}\bigl(G_{m,\pm}(s)\bigr)
+        \le C\,q(t_\pm)^3.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:finite-blocks-exact-interpretation},
+\(G_{m,\pm}(s)=J(t_\pm)\).  Since \((m,s)\in\mathcal D_T\), both
+\(t_\pm\in I_T\), and the theta derivative asymptotics of
+Lemma~\ref{lem:theta-derivative-asymptotics} are uniform at these two
+points.  The proof of Lemma~\ref{lem:same-point-gram-positivity} therefore
+applies uniformly with \(T\) replaced by any \(t\in I_T\), giving
+\eqref{eq:G-lambda-min-asymptotic}.
+
+For the largest eigenvalue, use
+\[
+        \lambda_{\max}(J(t))
+        =\Tr J(t)-\lambda_{\min}(J(t)).
+\]
+By \eqref{eq:J-trace-det}, uniformly for \(t\in I_T\),
+\[
+        \Tr J(t)
+        =\frac{2q(t)^3+24q(t)+q''(t)}{12\pi}
+        =\frac{q(t)^3}{6\pi}\,(1+o_T(1)),
+\]
+while \(\lambda_{\min}(J(t))=O(q(t))\).  Since \(q(t)\to\infty\)
+uniformly on \(I_T\), the trace term of size \(q(t)^3\) dominates,
+which gives \eqref{eq:G-lambda-max-asymptotic}.  The two-sided
+comparability bounds \eqref{eq:G-spectral-comparable} follow by enlarging
+the lower-height cutoff once more.
+\end{proof}
+
+\begin{lemma}[Two-sided whitening ledger]
+\label{lem:two-sided-whitening-ledger}
+For \(\Ph_T=\theta\), after increasing the global lower-height cutoff,
+there are absolute constants \(c,C>0\) such that for every
+\((m,s)\in\mathcal D_T\) and every real \(2\times2\) matrix \(X\),
+\begin{equation}
+\label{eq:two-sided-whitening-ledger}
+        c\,\bigl(q(t_-)q(t_+)\bigr)^{-3/2}\,
+        \|X\|_{\op}
+        \le
+        \|\mathsf W_{m,s}(X)\|_{\op}
+        \le
+        C\,\bigl(q(t_-)q(t_+)\bigr)^{-1/2}\,
+        \|X\|_{\op}.
+\end{equation}
+In particular, the lower-bound attenuation of two-sided whitening is at
+worst
+\begin{equation}
+\label{eq:two-sided-whitening-log-loss}
+        \bigl(q(t_-)q(t_+)\bigr)^{-3/2}
+        \asymp (\log T)^{-3}
+\end{equation}
+uniformly on \(\mathcal D_T\).
+\end{lemma}
+
+\begin{proof}
+Let
+\[
+        A=G_{m,-}(s)^{-1/2},\qquad B=G_{m,+}(s)^{-1/2}.
+\]
+The upper bound follows from submultiplicativity:
+\[
+        \|AXB\|_{\op}
+        \le \|A\|_{\op}\,\|X\|_{\op}\,\|B\|_{\op}
+        = \lambda_{\min}(G_{m,-})^{-1/2}
+          \lambda_{\min}(G_{m,+})^{-1/2}\,\|X\|_{\op}.
+\]
+Using the lower-eigenvalue estimate in
+Lemma~\ref{lem:finite-same-point-spectral-size} gives the right-hand
+inequality in \eqref{eq:two-sided-whitening-ledger}.
+
+For the lower bound, write
+\[
+        X=A^{-1}(AXB)B^{-1}.
+\]
+Therefore
+\[
+        \|X\|_{\op}
+        \le \|A^{-1}\|_{\op}\,\|AXB\|_{\op}\,\|B^{-1}\|_{\op}
+        =\lambda_{\max}(G_{m,-})^{1/2}
+         \lambda_{\max}(G_{m,+})^{1/2}\,\|AXB\|_{\op}.
+\]
+The upper-eigenvalue estimate in
+Lemma~\ref{lem:finite-same-point-spectral-size} gives
+\[
+        \|AXB\|_{\op}
+        \ge
+        c\,\bigl(q(t_-)q(t_+)\bigr)^{-3/2}\,
+        \|X\|_{\op},
+\]
+which is the left-hand inequality in
+\eqref{eq:two-sided-whitening-ledger}.  Finally,
+Lemma~\ref{lem:theta-derivative-asymptotics} gives
+\(q(t_\pm)\asymp\log T\) uniformly on \(I_T\), and hence
+\eqref{eq:two-sided-whitening-log-loss}.
+\end{proof}
+
+\begin{corollary}[Polynomial ledger form]
+\label{cor:two-sided-whitening-polynomial-ledger}
+Assume the packet scale has an upper phase-slope ledger
+\begin{equation}
+\label{eq:upper-phase-slope-ledger}
+        q(t)\le Q(T)^{C_q^+}
+        \qquad (t\in I_T)
+\end{equation}
+for some absolute exponent \(C_q^+\).  Then for all retained
+\((m,s)\in\mathcal D_T\) and all real \(2\times2\) matrices \(X\),
+\begin{equation}
+\label{eq:two-sided-whitening-Q-ledger}
+        \|\mathsf W_{m,s}(X)\|_{\op}
+        \ge
+        c\,Q(T)^{-3C_q^+}\,\|X\|_{\op},
+\end{equation}
+with an absolute constant \(c>0\).  Thus any pre-whitening lower bound
+\(\|X\|_{\op}\ge Q(T)^{-A}\) becomes the post-whitening lower bound
+\begin{equation}
+\label{eq:pre-to-post-whitening-lower-bound}
+        \|\mathsf W_{m,s}(X)\|_{\op}
+        \ge c\,Q(T)^{-(A+3C_q^+)}.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Combine the lower bound in Lemma~\ref{lem:two-sided-whitening-ledger} with
+\eqref{eq:upper-phase-slope-ledger} at \(t_\pm\):
+\[
+        \bigl(q(t_-)q(t_+)\bigr)^{-3/2}
+        \ge Q(T)^{-3C_q^+}.
+\]
+This gives \eqref{eq:two-sided-whitening-Q-ledger}; applying it to a
+matrix satisfying \(\|X\|_{\op}\ge Q(T)^{-A}\) gives
+\eqref{eq:pre-to-post-whitening-lower-bound}.
+\end{proof}
+
+\begin{remark}[When the ledger is consumed]
+\label{rem:when-two-sided-whitening-ledger-is-consumed}
+Lemma~\ref{lem:two-sided-whitening-ledger} is needed only when a toy,
+source-side, or finite-algebraic lower bound is first proved in
+unwhitened coordinates and then transported through
+\(\mathsf W_{m,s}\).  If a visibility theorem is stated directly for the
+already whitened block \(\widehat\Om_\z\), then no additional whitening
+loss is charged.  The same caveat applies to any fixed finite-dimensional
+norm other than \(\|\cdot\|_{\op}\): because all norms on \(M_2(\mathbb R)\)
+are equivalent, the constants in the ledger change, but the powers of
+\(q(t_\pm)\), \(\log T\), and \(Q(T)\) do not.
+\end{remark}
+
 % =============================================================================
 \section{Toy anomaly and transverse obstruction}
 \label{sec:toy-anomaly-and-transverse-obstruction}
 \statuspaper{LIVE}\quad
-\statusmig{partial}\quad
+\statusmig{migrated}\quad
 \statusreferee{in-progress}\quad
 \statussympy[rh/sympy/sec-toy-anomaly-and-transverse-obstruction.py]{verified}\quad
 \statussim[rh/simulation/sec-toy-anomaly-and-transverse-obstruction.py]{verified}\quad
@@ -1545,6 +1728,143 @@ Cauchy-type bound for these coefficients, uniformly for \(d\in D\),
 increasing \(Q_1(D)\) if necessary.
 \end{proof}
 
+\subsection{Toy retained subdomain and polynomial-weight density}
+\label{subsec:toy-retained-subdomain}
+
+\begin{definition}[Toy retained subdomain]
+\label{def:toy-retained-subdomain}
+Fix a compact interval \(D=[d_-,d_+]\subset(0,\infty)\) avoiding the
+isolated zeros of \(F_{\infty}\) of
+Lemma~\ref{lem:toy-anomaly-leading}.  The signed toy retained subdomain
+at height \(T\) is
+\begin{equation}
+\label{eq:toy-retained-subdomain}
+        \mathcal D_T^\toy(D)
+        :=\bigl\{(m,s)\in\mathcal D_T^\times:
+              q(m)\,|s|\in D\bigr\}.
+\end{equation}
+Thus the positive and negative separation branches are both retained.
+The comparison estimates below are stated for the absolute scalar
+functional \(|\mathcal A_\toy|\), so retaining both signs does not change
+the toy lower bound; see Lemma~\ref{lem:toy-signed-separation-invariance}.
+\end{definition}
+
+\begin{lemma}[Polynomial-weight density of the toy retained subdomain]
+\label{lem:toy-retained-density}
+Let
+\[
+        q_T^-:=\inf_{m\in I_T}q(m),
+        \qquad
+        q_T^+:=\sup_{m\in I_T}q(m).
+\]
+Assume \(q_T^->0\) and
+\begin{equation}
+\label{eq:toy-density-height-hypothesis}
+        \frac{d_+}{q_T^-}\le \frac{|I_T|}{4}.
+\end{equation}
+Then
+\begin{equation}
+\label{eq:toy-retained-density-exact}
+        \frac{|\mathcal D_T^\toy(D)|}{|\mathcal D_T|}
+        \ge
+        \frac{d_+-d_-}{q_T^+\,|I_T|}.
+\end{equation}
+Consequently, if the retained windows satisfy
+\begin{equation}
+\label{eq:toy-window-comparability}
+        |I_T|\le C_I Q(T)^{-1},
+        \qquad
+        q_T^+\le C_q q(T)
+\end{equation}
+with absolute constants \(C_I,C_q\), then
+\begin{equation}
+\label{eq:toy-retained-density}
+        \frac{|\mathcal D_T^\toy(D)|}{|\mathcal D_T|}
+        \ge
+        \frac{d_+-d_-}{C_I C_q}\,\frac{Q(T)}{q(T)}.
+\end{equation}
+The height hypothesis \eqref{eq:toy-density-height-hypothesis} is
+implied for all sufficiently large \(T\) in any scale regime with
+\(|I_T|\ge c_I Q(T)^{-1}\), \(q_T^-\ge c_q q(T)\), and
+\(Q(T)=o(q(T))\), with constants depending only on \(D,c_I,c_q\).
+\end{lemma}
+
+\begin{proof}
+The finite packet domain is
+\[
+    \mathcal D_T
+    =\bigl\{(m,s): |m-T|+|s|/2\le |I_T|/2\bigr\},
+\]
+a rotated square of area \(|\mathcal D_T|=|I_T|^2\).  Restrict to the
+central slab
+\[
+        S_T:=\{m: |m-T|\le |I_T|/4\}.
+\]
+For \(m\in S_T\), the \(\mathcal D_T\)-constraint permits
+\(|s|\le |I_T|/2-|m-T|\), hence at least \(|s|\le |I_T|/4\).  By
+\eqref{eq:toy-density-height-hypothesis},
+\[
+        \frac{d_+}{q(m)}\le \frac{d_+}{q_T^-}\le \frac{|I_T|}{4},
+\]
+so both intervals
+\[
+        \left[\frac{d_-}{q(m)},\frac{d_+}{q(m)}\right],
+        \qquad
+        -\left[\frac{d_+}{q(m)},\frac{d_-}{q(m)}\right]
+\]
+are contained in the allowed \(s\)-range.  Their combined length is
+\(2(d_+-d_-)/q(m)\), which is at least \(2(d_+-d_-)/q_T^+\).  Therefore
+\[
+        |\mathcal D_T^\toy(D)|
+        \ge \int_{S_T}\frac{2(d_+-d_-)}{q_T^+}\,dm
+        =\frac{(d_+-d_-)|I_T|}{q_T^+}.
+\]
+Dividing by \(|\mathcal D_T|=|I_T|^2\) proves
+\eqref{eq:toy-retained-density-exact}.  The estimate
+\eqref{eq:toy-retained-density} follows immediately from
+\eqref{eq:toy-window-comparability}.  Finally, if
+\(|I_T|\ge c_IQ(T)^{-1}\) and \(q_T^-\ge c_q q(T)\), then
+\eqref{eq:toy-density-height-hypothesis} follows from
+\[
+        \frac{d_+}{c_q q(T)}\le \frac{c_I}{4Q(T)},
+        \quad\text{i.e.}\quad
+        \frac{Q(T)}{q(T)}\le \frac{c_Ic_q}{4d_+},
+\]
+which holds eventually whenever \(Q(T)=o(q(T))\).
+\end{proof}
+
+\begin{lemma}[Signed-separation invariance of the scalar toy channel]
+\label{lem:toy-signed-separation-invariance}
+For the toy finite blocks of Definition~\ref{def:toy-finite-blocks},
+\[
+        \widehat\Om_\toy(-s;m,u)=\widehat\Om_\toy(s;m,u)^\top
+\]
+whenever both sides are defined.  Consequently
+\begin{equation}
+\label{eq:toy-A-signed-invariance}
+        \mathcal A_\toy(\widehat\Om_\toy(-s;m,u))
+        =\mathcal A_\toy(\widehat\Om_\toy(s;m,u)).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Changing \(s\) to \(-s\) swaps the two centers \(t_-\) and \(t_+\).
+The same-point blocks therefore satisfy
+\[
+        G_{\toy,-}(-s;m,u)=G_{\toy,+}(s;m,u),\qquad
+        G_{\toy,+}(-s;m,u)=G_{\toy,-}(s;m,u),
+\]
+and the mixed block satisfies
+\(N_\toy(-s;m,u)=N_\toy(s;m,u)^\top\), by the symmetry of
+\(K_\Phi\) and the row/column convention of
+Definition~\ref{def:finite-same-point-and-mixed-blocks}.  Positive
+definite inverse square roots commute with transposition for symmetric
+matrices, so the displayed transpose identity for \(\widehat\Om_\toy\)
+follows.  Since
+\(\mathcal A_\toy(X)=X_{12}+X_{21}\) is invariant under transpose,
+\eqref{eq:toy-A-signed-invariance} follows.
+\end{proof}
+
 \subsection{Toy anomaly visibility}
 \label{subsec:toy-anomaly-visibility}
 
@@ -1589,6 +1909,36 @@ Decreasing \(u_\toy(D)\) so that \(u_\toy(D)^{\,2}\,C_R(D)\le c_\toy(D)/2\) give
 \eqref{eq:toy-anomaly-visibility-A}.
 \end{proof}
 
+\begin{corollary}[Visibility on the polynomial-weight subdomain]
+\label{cor:toy-visibility-polynomial-weight}
+Fix \(D\) and the constants \(Q_\toy(D)\), \(u_\toy(D)\), \(c_\toy(D)\)
+of Theorem~\ref{thm:toy-anomaly-visibility}.  Assume the height is large
+enough that \(q_T^-\ge Q_\toy(D)\), where
+\(q_T^-:=\inf_{m\in I_T}q(m)\).  Then for every \(0<|u|\le
+u_\toy(D)\) and every \((m,s)\in\mathcal D_T^\toy(D)\),
+\begin{equation}
+\label{eq:toy-anomaly-visibility-on-subdomain}
+        \bigl|\mathcal A_\toy(\widehat\Om_\toy(s;m,u))\bigr|
+        \ge \tfrac12 c_\toy(D)u^2.
+\end{equation}
+If, in addition, the hypotheses of Lemma~\ref{lem:toy-retained-density}
+hold, then this lower bound holds on a subset of \(\mathcal D_T\) of
+relative density at least the right-hand side of
+\eqref{eq:toy-retained-density-exact}, and hence at least
+\eqref{eq:toy-retained-density} under
+\eqref{eq:toy-window-comparability}.
+\end{corollary}
+
+\begin{proof}
+Let \((m,s)\in\mathcal D_T^\toy(D)\).  Then
+\(d=q(m)|s|\in D\) and \(q_0=q(m)\ge q_T^-\ge Q_\toy(D)\).  If
+\(s>0\), Theorem~\ref{thm:toy-anomaly-visibility} gives
+\eqref{eq:toy-anomaly-visibility-on-subdomain}.  If \(s<0\), apply the
+theorem to \(|s|\) and then use
+Lemma~\ref{lem:toy-signed-separation-invariance}.  The density statement
+is Lemma~\ref{lem:toy-retained-density}.
+\end{proof}
+
 \begin{remark}[Transverse projection deferred]
 \label{rem:toy-Pi-trans-deferred}
 The functional \(\mathcal A_\toy\) annihilates the on-line baseline
@@ -1617,18 +1967,24 @@ uses \(M(d)\), \(\Phi_K(M(d))\), \(A_{\val}\), or \(\Psi_{x,d}\) must be
 rederived for the present toy phase or kept in the archive.
 \end{remark}
 
-\begin{wip}\label{rem:wip-toy-anomaly-uniform-remainder}
-The bound \eqref{eq:toy-anomaly-visibility-A} is stated on compact
-intervals \(D\subset(0,\infty)\) avoiding the isolated zeros of
-\(F_{\infty}\); a uniform extension to the entire retained subset
-(allowing \(d\to 0\), \(d\to\infty\), or \(d\) approaching a
-zero along the polynomial-weight sample) requires a sharper analysis
-of the \(O(u^4)\) remainder \(R_\toy\) of
-Lemma~\ref{lem:toy-anomaly-leading}, together with a polynomial
-density estimate on the avoidance set of the \(F_\toy\)-zeros.
-The numerical and symbolic verifications cover the compact case;
-the uniform extension is deferred.
-\end{wip}
+\begin{remark}[No uniform extension; polynomial-weight scope]
+\label{rem:toy-anomaly-no-uniform-extension}
+The visibility lower bound \eqref{eq:toy-anomaly-visibility-A} cannot be
+extended to all of \(\mathcal D_T\).  At \(s=0\), the same coalescence
+argument as Corollary~\ref{cor:omega-coalescence}, applied to the toy
+finite blocks, gives \(\widehat\Om_\toy(0;m,u)=I_2\) for every \(u\).
+Hence \(\mathcal A_\toy(\widehat\Om_\toy(0;m,u))=0\); no
+\(u^2\)-lower bound can hold at the coalescence locus \(d=0\).  The
+regimes \(d\to\infty\) and \(d\) approaching an isolated zero of
+\(F_\infty\) are excluded by the compactness and avoidance hypotheses on
+\(D\) in Definition~\ref{def:toy-retained-subdomain}.  The signed
+polynomial-weight subdomain \(\mathcal D_T^\toy(D)\) carries the toy
+visibility lower bound by
+Corollary~\ref{cor:toy-visibility-polynomial-weight}; its relative
+density is polynomial in \(Q\) by Lemma~\ref{lem:toy-retained-density}
+and is the only density loss contributed by this replacement of the
+impossible all-of-\(\mathcal D_T\) assertion.
+\end{remark}
 
 % =============================================================================
 \section{Transverse projection}
