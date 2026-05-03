@@ -429,15 +429,29 @@ theorem same_point_gram_positivity :
     Equivalent to `λ_min(J(T)) ≥ 1` for real symmetric 2×2.  Matches
     the paper's whitening-relevant floor in
     Lemma `lem:same-point-gram-positivity` after raising the
-    lower-height cutoff. -/
+    lower-height cutoff.
+
+    Proof plan:
+      1. Strengthen `analytic_bounds_eventual` to give `q(T) ≥ 3` (and
+         the same `|q'| ≤ 1`, `|q''| ≤ 1` bounds).
+      2. Algebraic identity (valid for `q > π/2`):
+           `24 q π · (xᵀ(J − I)x) =
+              24 q (2q − π) (x₀ + q'/(2(2q − π)) x₁)²
+              + [(D_J − 24 q π)(2q − π) − 3 π q'²] / (2q − π) · x₁²`.
+         For `q ≥ 3`, `|q'| ≤ 1`, `|q''| ≤ 1`:
+           - `2q − π ≥ 6 − π > 0`,
+           - `D_J ≥ 4·81 − 6 − 3 = 315`,
+           - `D_J − 24qπ ≥ 315 − 72π ≈ 89 > 0`,
+           - `(D_J − 24qπ)(2q − π) − 3πq'² ≥ 89·2.86 − 3π ≈ 245 > 0`.
+         Both summands ≥ 0 ⟹ `xᵀ(J − I)x ≥ 0` after dividing by
+         `24qπ > 0`. -/
 theorem same_point_gram_uniform_floor :
     ∃ T₀ : ℝ, 0 < T₀ ∧
       ∀ T : ℝ, T₀ ≤ T →
       ∀ x : Fin 2 → ℝ,
         x ⬝ᵥ ((J T) *ᵥ x) ≥ x ⬝ᵥ x := by
-  -- TODO: strengthen `analytic_bounds_eventual` to a regime where
-  --   `λ_min(J(T)) = (2 q(T) / π) (1 + o(1)) ≥ 1`,
-  -- and translate via the SOS identity used in `algebraic_gram_criterion`.
+  -- TODO: strengthen `analytic_bounds_eventual` to `q ≥ 3` and apply
+  -- the SOS identity above.
   sorry
 
 end RH.JetLimitLocalBlocks
