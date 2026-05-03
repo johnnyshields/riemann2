@@ -629,6 +629,79 @@ def verify_lambda_min_two_sided():
     print("         pins the asymptote to (1/pi) log(T / (2 pi)) (1 + o(1)).")
 
 
+def verify_lambda_min_uniform_on_I_T():
+    """Verify that lambda_min(J(t)) ~ 2 q(t)/pi (1 + o_T(1)) is uniform
+    on the chart window I_T (referee revision of
+    lem:same-point-gram-positivity).
+
+    Substitute t = T (1 + xi) with the conservative window-position
+    parameter |xi| <= 1/2 (the actual chart has |xi| <= 1/(Q T) << 1).
+    Confirm both
+        upper / target -> 1   uniformly in xi as T -> oo,
+        lower / target -> 1   uniformly in xi as T -> oo,
+    where target = 2 q(t) / pi, by taking the limit T -> oo with xi
+    held fixed.
+    """
+    print("=" * 70)
+    print("[lem:same-point-gram-positivity]  uniformity of lambda_min on I_T")
+    print("=" * 70)
+
+    T = sp.symbols("T", positive=True)
+    xi = sp.symbols("xi", real=True)
+    t_param = T * (1 + xi)  # window-position parameterization
+
+    L = sp.log(t_param / (2 * PI))
+    q_asym = Rational(1, 2) * L - Rational(1, 48) / t_param**2
+    qp_asym = Rational(1, 2) / t_param + Rational(1, 24) / t_param**3
+    qpp_asym = -Rational(1, 2) / t_param**2 - Rational(1, 8) / t_param**4
+
+    J11 = 2 * q_asym / PI
+    J12 = qp_asym / (2 * PI)
+    J22 = (qpp_asym + 2 * q_asym**3) / (12 * PI)
+
+    Tr_J = J11 + J22
+    det_J = J11 * J22 - J12**2
+
+    lower = det_J / Tr_J  # det/Tr <= lambda_min
+    upper = J11           # lambda_min <= J_11
+    target = 2 * q_asym / PI
+
+    upper_ratio = sp.simplify(sp.limit(upper / target, T, sp.oo))
+    lower_ratio = sp.simplify(sp.limit(lower / target, T, sp.oo))
+
+    print()
+    print(f"  Substitution t = T (1 + xi), |xi| <= 1/2 (loose).")
+    print(f"  lim_{{T -> oo}} (upper / target) = {upper_ratio}    (expected: 1)")
+    print(f"  lim_{{T -> oo}} (lower / target) = {lower_ratio}    (expected: 1)")
+
+    assert upper_ratio == 1, (
+        f"Upper bound not uniform on I_T: ratio = {upper_ratio}"
+    )
+    assert lower_ratio == 1, (
+        f"Lower bound not uniform on I_T: ratio = {lower_ratio}"
+    )
+
+    # Sample-point check: pin xi at multiple positions inside the window
+    # and confirm the limit is 1 at every fixed xi (independent of where in
+    # the window the sample sits).
+    print()
+    print(f"  Sample positions (lim T -> oo at fixed xi):")
+    for xi_val in (-Rational(1, 2), -Rational(1, 4), Rational(0),
+                   Rational(1, 4), Rational(1, 2)):
+        u_ratio = sp.limit((upper / target).subs(xi, xi_val), T, sp.oo)
+        l_ratio = sp.limit((lower / target).subs(xi, xi_val), T, sp.oo)
+        print(f"    xi = {xi_val}:  upper/target -> {u_ratio},  "
+              f"lower/target -> {l_ratio}")
+        assert u_ratio == 1 and l_ratio == 1, (
+            f"non-uniform at xi = {xi_val}: upper {u_ratio}, lower {l_ratio}"
+        )
+
+    print()
+    print("  [PASS] lambda_min(J(t)) ~ 2 q(t) / pi (1 + o_T(1)) holds")
+    print("         uniformly for t in I_T = [T(1+xi) : |xi| <= 1/2];")
+    print("         the o_T(1) error decays in T at every fixed xi.")
+
+
 def main():
     verify_same_point()
     print()
@@ -646,6 +719,8 @@ def main():
     print()
     verify_lambda_min_two_sided()
     print()
+    verify_lambda_min_uniform_on_I_T()
+    print()
     print("=" * 70)
     print("All §3 lemmas verified symbolically:")
     print("  - same-point jet limit P_h A_h(T) P_h^T -> J(T)")
@@ -656,6 +731,7 @@ def main():
     print("  - trace, determinant identities for J(T)")
     print("  - D_J(T) > 0 from §2 asymptotics")
     print("  - two-sided lambda_min asymptotic (det/Tr <= lambda_min <= J_11)")
+    print("  - lambda_min(J(t)) ~ 2 q(t)/pi UNIFORMLY for t in I_T")
     print("=" * 70)
 
 

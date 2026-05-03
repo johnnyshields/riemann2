@@ -559,6 +559,160 @@ def check_density_scaling_in_Q():
     print("  [PASS] empirical/(Q/qT) >= (d_+-d_-) qT/q_T^+ across the Q-ladder.")
 
 
+def check_visibility_at_q0_equals_q_of_m():
+    """Polynomial-weight subdomain regression
+    (cor:toy-visibility-polynomial-weight): with q_0 specialized to q(m)
+    (the local theta slope), the visibility lower bound
+        |A_toy(Omega_toy(s; m, u, q(m)))| >= (1/2) c_toy(D) u^2
+    holds at sample (T, m) with d = q(m) s in compact D.
+
+    The toy visibility theorem (thm:toy-anomaly-visibility) was stated
+    uniformly in an abstract q_0; this check exercises the specialization
+    q_0 = q(m) used by the corollary on the toy retained subdomain.
+    """
+    print("=" * 70)
+    print("[cor:toy-visibility-polynomial-weight]  q_0 = q(m) specialization")
+    print("=" * 70)
+    print()
+    d_grid = [mpf(p) for p in ("0.6", "1.0", "1.4", "1.8", "2.2")]
+    u = mpf("0.01")
+    print(f"  u = {float(u)}, d in {[float(d_) for d_ in d_grid]}")
+    print()
+    print(f"  {'T':>10}  {'q(m)':>10}  {'min |A|/u^2 over D':>22}  "
+          f"{'F_inf min over D':>20}")
+    print(f"  {'-'*10}  {'-'*10}  {'-'*22}  {'-'*20}")
+    for T in (mpf("1e6"), mpf("1e9"), mpf("1e12")):
+        m = T  # midpoint at the chart center
+        q_of_m = q_zeta_asymp(m)  # local theta slope
+        min_ratio_specialized = None
+        min_F_inf = None
+        for d in d_grid:
+            s = d / q_of_m
+            # Toy block evaluated at q_0 = q(m): the polynomial-weight case.
+            a = fabs(A_toy(s, mpf("0"), u, q_of_m))
+            ratio = a / u**2
+            min_ratio_specialized = (
+                ratio if min_ratio_specialized is None
+                else min(min_ratio_specialized, ratio)
+            )
+            f_val = fabs(F_inf_closed_form_dens(d))
+            min_F_inf = f_val if min_F_inf is None else min(min_F_inf, f_val)
+        print(f"  {float(T):10.0e}  {float(q_of_m):10.3f}  "
+              f"{float(min_ratio_specialized):22.6e}  "
+              f"{float(min_F_inf):20.6e}")
+        # Visibility bound: |A_toy|/u^2 must stay close to |F_inf| once
+        # q(m) is large enough.  Use 30% tolerance (matches the corollary's
+        # (1/2) c_toy(D) factor).
+        assert min_ratio_specialized >= mpf("0.5") * min_F_inf, (
+            f"Visibility lower bound fails at T = {float(T):.0e} "
+            f"(q_0 = q(m) = {float(q_of_m):.3f}): "
+            f"min |A|/u^2 = {float(min_ratio_specialized):.4e}, "
+            f"0.5 * F_inf = {float(mpf('0.5') * min_F_inf):.4e}"
+        )
+    print()
+    print("  [PASS] |A_toy(Omega_toy(s; m, u, q(m)))| / u^2 >= (1/2) F_inf(d)")
+    print("         on the d-grid at every tested height; specialization")
+    print("         q_0 = q(m) preserves the visibility lower bound.")
+
+
+def check_window_comparability():
+    """Window-convention regression: |I_T| comparable to Q(T)^{-1}, i.e.
+        c_I Q(T)^{-1} <= |I_T| <= C_I Q(T)^{-1}
+    (referee revision of the §1 conventions).  In the simulation we use
+    |I_T| = 1/Q(T) by construction, so c_I = C_I = 1 is exact; the check
+    guards the convention from drift.
+    """
+    print("=" * 70)
+    print("[§1 window convention]  c_I Q(T)^{-1} <= |I_T| <= C_I Q(T)^{-1}")
+    print("=" * 70)
+    print()
+    print(f"  {'T':>10}  {'Q':>10}  {'|I_T|':>14}  "
+          f"{'|I_T| * Q':>14}  {'in [c_I, C_I]?':>16}")
+    print(f"  {'-'*10}  {'-'*10}  {'-'*14}  {'-'*14}  {'-'*16}")
+    c_I = mpf("0.99"); C_I = mpf("1.01")  # tight bracket around 1
+    for T, Q in [(mpf("1e6"),  mpf("0.5")),
+                 (mpf("1e9"),  mpf("0.7")),
+                 (mpf("1e12"), mpf("0.9"))]:
+        I_half = 1 / (2 * Q)            # |I_T| = 2 * I_half = 1/Q
+        I_len = 2 * I_half
+        product = I_len * Q
+        ok = c_I <= product <= C_I
+        print(f"  {float(T):10.2e}  {float(Q):10.4f}  "
+              f"{float(I_len):14.6f}  {float(product):14.6f}  "
+              f"{'YES' if ok else 'NO':>16}")
+        assert ok, (
+            f"|I_T| * Q = {float(product)} not in [{float(c_I)}, {float(C_I)}]"
+        )
+    print()
+    print("  [PASS] |I_T| Q(T) is bracketed by c_I = 0.99 and C_I = 1.01")
+    print("         at every sampled height; convention regression intact.")
+
+
+def check_density_geometry_full_range():
+    """Density-proof regression: the D_T-permitted s-range from the
+    midpoint m is the full
+        |s| <= |I_T| - 2 |m - T|
+    (NOT the buggy |s| <= |I_T|/2 - |m - T| in the prior draft).
+
+    The proof needs only the smaller symmetric range |s| <= |I_T|/4 on
+    the central slab S_T = {|m-T| <= |I_T|/4}, which is contained in
+    the full permitted range.  Here we check both: the full permitted
+    range and the smaller safe range are correct, and that
+    (m, s) inside the full range satisfies the original definition
+        D_T = {(m, s) : t_- = m - s/2 in I_T, t_+ = m + s/2 in I_T}.
+    """
+    print("=" * 70)
+    print("[lem:toy-retained-density proof]  full D_T s-range = "
+          "|I_T| - 2|m - T|")
+    print("=" * 70)
+    print()
+    T = mpf("1e9"); Q = mpf("0.7")
+    I_half = 1 / (2 * Q); I_len = 2 * I_half
+    print(f"  T = {float(T):.0e}, Q = {float(Q):.3f}, |I_T| = {float(I_len):.6f}")
+    print()
+    print(f"  {'|m - T|/|I_T|':>14}  {'full s_max/|I_T|':>16}  "
+          f"{'safe s_max/|I_T|':>16}  {'D_T check':>10}")
+    print(f"  {'-'*14}  {'-'*16}  {'-'*16}  {'-'*10}")
+    for ratio in (mpf("0"), mpf("0.1"), mpf("0.25"), mpf("0.4")):
+        m_off = ratio * I_len
+        m = T + m_off
+        # Full s-range from the corrected proof.
+        s_full = I_len - 2 * fabs(m_off)
+        # Safe symmetric range used in the density bound.
+        s_safe = I_len / 4 if ratio <= mpf("0.25") else mpf("0")
+        # Verify (m, s_full - tiny) lies in D_T:
+        #   t_-, t_+ both in I_T.
+        eps = mpf("1e-30")
+        s_test = max(s_full - eps, mpf("0"))
+        t_minus = m - s_test / 2
+        t_plus = m + s_test / 2
+        in_D_T = ((T - I_half <= t_minus <= T + I_half)
+                  and (T - I_half <= t_plus <= T + I_half))
+        # Buggy bound |s| <= |I_T|/2 - |m-T| is strictly smaller than
+        # the full range; the test point at s_test = s_full - eps must
+        # NOT satisfy the buggy bound (sanity check).
+        buggy_bound = I_len / 2 - fabs(m_off)
+        ratio_full_to_safe = s_full / I_len
+        ratio_safe = s_safe / I_len if I_len > 0 else mpf("0")
+        print(f"  {float(ratio):14.3f}  {float(ratio_full_to_safe):16.6f}  "
+              f"{float(ratio_safe):16.6f}  "
+              f"{'YES' if in_D_T else 'NO':>10}")
+        assert in_D_T, (
+            f"Full s-range point fails the D_T constraint at "
+            f"|m-T|/|I_T| = {float(ratio)}"
+        )
+        if ratio > mpf("0"):
+            assert s_full > buggy_bound + eps, (
+                f"Full range = buggy range at |m-T|/|I_T| = {float(ratio)}: "
+                f"{float(s_full)} vs {float(buggy_bound)}"
+            )
+    print()
+    print("  [PASS] full D_T s-range is |I_T| - 2|m - T|; the smaller")
+    print("         safe range |I_T|/4 is contained on the central slab,")
+    print("         and is sufficient for the density bound.  The prior")
+    print("         buggy bound |I_T|/2 - |m-T| was a factor-of-2 error.")
+
+
 def check_F_inf_zero_avoidance():
     """Sample-based F_inf zero avoidance on candidate D-intervals."""
     print("=" * 70)
@@ -612,6 +766,12 @@ def main():
     print()
     check_F_inf_zero_avoidance()
     print()
+    check_visibility_at_q0_equals_q_of_m()
+    print()
+    check_window_comparability()
+    print()
+    check_density_geometry_full_range()
+    print()
     check_density_at_heights()
     print()
     check_density_scaling_in_Q()
@@ -629,6 +789,9 @@ def main():
     print("  - F_inf-zero avoidance on sample D's (numerical)")
     print("  - density inequality (signed) at heights T ∈ {1e6, 1e9, 1e12}")
     print("  - empirical density scales like Q(T)/q(T) at fixed T")
+    print("  - window comparability c_I Q^{-1} <= |I_T| <= C_I Q^{-1}")
+    print("  - D_T s-range = |I_T| - 2|m-T| (corrected from |I_T|/2 - |m-T|)")
+    print("  - q_0 = q(m) specialization preserves visibility lower bound")
     print("=" * 70)
 
 

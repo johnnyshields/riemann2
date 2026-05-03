@@ -477,12 +477,29 @@ def verify_F_toy_closed_form_q0_independent():
     )
     print("  [PASS] F_inf(d) matches eq:F-toy-closed-form.")
 
-    # Removable-singularity check at d = 2 pi.
-    num_at_2pi = simplify(candidate_num.subs(d, 2 * sp.pi))
-    assert num_at_2pi == 0, (
-        f"Numerator does not vanish at d = 2 pi: {num_at_2pi}"
-    )
-    print("  [PASS] Numerator vanishes at d = 2 pi (removable singularity).")
+    # Removable-continuation check at the apparent sin(d/2)-poles
+    # d = 2 pi k for k = 1, 2 (the wording change in the referee revision):
+    # the apparent denominator zeros are removable, with finite limits.
+    for k in (1, 2, 3):
+        d_k = 2 * sp.pi * k
+        num_at = simplify(candidate_num.subs(d, d_k))
+        assert num_at == 0, (
+            f"Numerator does not vanish at d = 2 pi * {k}: {num_at}"
+        )
+        # Compute the actual limit lim_{d -> 2 pi k} F_inf(d) via L'Hopital
+        # / sympy.limit; verify it exists as a finite real value.
+        F_lim = sp.limit(F_inf, d, d_k)
+        F_lim_simplified = simplify(F_lim)
+        assert F_lim_simplified.is_finite is not False, (
+            f"F_inf(d) limit at d = 2 pi * {k} is not finite: "
+            f"{F_lim_simplified}"
+        )
+        assert F_lim_simplified.is_real is not False, (
+            f"F_inf(d) limit at d = 2 pi * {k} is not real: "
+            f"{F_lim_simplified}"
+        )
+        print(f"  [PASS] F_inf removable continuation at d = 2 pi * {k}: "
+              f"lim = {F_lim_simplified}")
     return F_inf
 
 
