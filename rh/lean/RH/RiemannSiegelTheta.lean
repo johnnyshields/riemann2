@@ -386,4 +386,110 @@ theorem q_taylor_remainder_2 (T : ℝ) :
           mul_le_mul_of_nonneg_right h_iter3_bound hpow_nn
       _ = K₀ / 6 * |h|^3 * 6 := by ring
 
+/-- Order-3 Taylor remainder for `theta` at `T` on the unit interval.
+    Asserts the existence of a uniform constant `K ≥ 0` such that for
+    every `h ∈ [-1, 1]`,
+        `|theta(T+h) − (theta T + q T h + qPrime T h²/2 + qDoublePrime T h³/6)| ≤ K |h|⁴`.
+
+    Proof: `theta ∈ C^∞`, so `iteratedDeriv 4 theta` is continuous and
+    bounded on `[T − 1, T + 1]`.  Apply Lagrange remainder with `n = 3`. -/
+theorem theta_taylor_remainder_3 (T : ℝ) :
+    ∃ K : ℝ, 0 ≤ K ∧ ∀ h : ℝ, |h| ≤ 1 →
+      |theta (T + h) - (theta T + q T * h + qPrime T * h^2 / 2 +
+        qDoublePrime T * h^3 / 6)| ≤ K * |h|^4 := by
+  have hθ_C4 : ContDiff ℝ 4 theta := theta_smooth.of_le (by decide)
+  have h_iter4_cont : Continuous (iteratedDeriv 4 theta) :=
+    hθ_C4.continuous_iteratedDeriv 4 (by decide)
+  have h_compact : IsCompact (Set.Icc (T - 1) (T + 1)) := isCompact_Icc
+  have h_nonempty : (Set.Icc (T - 1) (T + 1)).Nonempty :=
+    ⟨T, by constructor <;> linarith⟩
+  have h_cont_on : ContinuousOn (fun y => |iteratedDeriv 4 theta y|)
+      (Set.Icc (T - 1) (T + 1)) :=
+    (continuous_abs.comp h_iter4_cont).continuousOn
+  obtain ⟨ymax, hymax_mem, hymax⟩ :=
+    h_compact.exists_isMaxOn h_nonempty h_cont_on
+  set K₀ : ℝ := |iteratedDeriv 4 theta ymax| with hK₀_def
+  have hK₀_nn : 0 ≤ K₀ := abs_nonneg _
+  refine ⟨K₀ / 24, by positivity, ?_⟩
+  intro h hh
+  by_cases hh_zero : h = 0
+  · subst hh_zero; simp
+  · have h_ne : T ≠ T + h := fun e => hh_zero (by linarith)
+    have hθ_C4_on : ContDiffOn ℝ 4 theta (Set.uIcc T (T + h)) := hθ_C4.contDiffOn
+    obtain ⟨ξ, hξ_mem, hξ_eq⟩ :=
+      taylor_mean_remainder_lagrange_iteratedDeriv h_ne hθ_C4_on
+    -- Unique-diff structure on uIcc.
+    have h_min_lt_max : min T (T + h) < max T (T + h) := by
+      rcases lt_or_gt_of_ne hh_zero with hlt | hgt
+      · have h1 : T + h < T := by linarith
+        rw [min_eq_right h1.le, max_eq_left h1.le]; exact h1
+      · have h1 : T < T + h := by linarith
+        rw [min_eq_left h1.le, max_eq_right h1.le]; exact h1
+    have h_unique : UniqueDiffOn ℝ (Set.uIcc T (T + h)) :=
+      uniqueDiffOn_Icc h_min_lt_max
+    -- Compute Taylor polynomial.
+    have h_taylor_form : taylorWithinEval theta 3 (Set.uIcc T (T + h)) T (T + h) =
+        theta T + q T * h + qPrime T * h^2 / 2 + qDoublePrime T * h^3 / 6 := by
+      rw [taylor_within_apply]
+      simp only [Finset.sum_range_succ, Finset.sum_range_zero, zero_add,
+                 add_sub_cancel_left, smul_eq_mul]
+      have hT_mem : T ∈ Set.uIcc T (T + h) := Set.left_mem_uIcc
+      have h_iter0 : iteratedDerivWithin 0 theta (Set.uIcc T (T + h)) T = theta T := by
+        simp [iteratedDerivWithin_zero]
+      have h_iter1 : iteratedDerivWithin 1 theta (Set.uIcc T (T + h)) T = q T := by
+        rw [iteratedDerivWithin_eq_iteratedDeriv h_unique
+            (hθ_C4.contDiffAt.of_le (by decide)) hT_mem,
+            iteratedDeriv_one]
+        rfl
+      have h_iter2 : iteratedDerivWithin 2 theta (Set.uIcc T (T + h)) T = qPrime T := by
+        rw [iteratedDerivWithin_eq_iteratedDeriv h_unique
+            (hθ_C4.contDiffAt.of_le (by decide)) hT_mem]
+        rw [show (2 : ℕ) = 1 + 1 from rfl, iteratedDeriv_succ, iteratedDeriv_one]
+        rfl
+      have h_iter3 : iteratedDerivWithin 3 theta (Set.uIcc T (T + h)) T = qDoublePrime T := by
+        rw [iteratedDerivWithin_eq_iteratedDeriv h_unique
+            (hθ_C4.contDiffAt.of_le (by decide)) hT_mem]
+        rw [show (3 : ℕ) = 2 + 1 from rfl, iteratedDeriv_succ,
+            show (2 : ℕ) = 1 + 1 from rfl, iteratedDeriv_succ, iteratedDeriv_one]
+        rfl
+      rw [h_iter0, h_iter1, h_iter2, h_iter3]
+      simp [Nat.factorial]
+      ring
+    rw [h_taylor_form] at hξ_eq
+    -- Bound iteratedDeriv 4 theta on [T-1, T+1].
+    have hξ_in_Icc : ξ ∈ Set.Icc (T - 1) (T + 1) := by
+      have h_uIoo_subset : Set.uIoo T (T + h) ⊆ Set.Icc (T - 1) (T + 1) := by
+        intro y hy
+        rcases lt_or_gt_of_ne hh_zero with hlt | hgt
+        · have hh' : T + h < T := by linarith
+          rw [Set.uIoo, min_eq_right hh'.le, max_eq_left hh'.le] at hy
+          obtain ⟨hy1, hy2⟩ := hy
+          have hh_lo : -1 ≤ h := by rcases abs_le.mp hh with ⟨h1, _⟩; exact h1
+          constructor <;> linarith
+        · have hh' : T < T + h := by linarith
+          rw [Set.uIoo, min_eq_left hh'.le, max_eq_right hh'.le] at hy
+          obtain ⟨hy1, hy2⟩ := hy
+          have hh_hi : h ≤ 1 := by rcases abs_le.mp hh with ⟨_, h2⟩; exact h2
+          constructor <;> linarith
+      exact h_uIoo_subset hξ_mem
+    have h_iter4_bound : |iteratedDeriv 4 theta ξ| ≤ K₀ :=
+      hymax hξ_in_Icc
+    have h_h_eq : (T + h) - T = h := by ring
+    rw [h_h_eq] at hξ_eq
+    have h_eq : theta (T + h) -
+        (theta T + q T * h + qPrime T * h^2 / 2 + qDoublePrime T * h^3 / 6) =
+        iteratedDeriv 4 theta ξ * h^4 / 24 := by
+      have h_fact : ((3 + 1).factorial : ℝ) = 24 := by simp [Nat.factorial]
+      have := hξ_eq
+      rw [h_fact] at this
+      exact this
+    rw [h_eq, abs_div, abs_mul, abs_pow]
+    have h_abs_24 : |(24 : ℝ)| = 24 := by norm_num
+    rw [h_abs_24, div_le_iff₀ (by norm_num : (0:ℝ) < 24)]
+    have hpow_nn : 0 ≤ |h|^4 := pow_nonneg (abs_nonneg _) 4
+    calc |iteratedDeriv 4 theta ξ| * |h|^4
+        ≤ K₀ * |h|^4 :=
+          mul_le_mul_of_nonneg_right h_iter4_bound hpow_nn
+      _ = K₀ / 24 * |h|^4 * 24 := by ring
+
 end RH.RiemannSiegelTheta
