@@ -1,0 +1,154 @@
+% =============================================================================
+% Referee patch: §7 Actual-zeta transverse suppression
+% Purpose: make the Section 5 -> Section 7 scalar-functional handoff type-safe.
+%
+% This patch does not prove actual-zeta suppression.  It only fixes what the
+% Section 7 hypotheses mean after the new scalar toy anomaly functional
+% A_toy(X)=X_{12}+X_{21} is adopted.
+% =============================================================================
+
+% =============================================================================
+\section{Actual-zeta transverse suppression}
+\label{sec:actual-zeta-transverse-suppression}
+\statuspaper{LIVE}\quad
+\statusmig{not-started}\quad
+\statusreferee{in-progress}\quad
+\statussympy{not-started}\quad
+\statussim{not-started}\quad
+\statuslean{not-started}
+\par\medskip
+
+The actual zeta phase \(\Ph\) defines two whitened blocks --- the
+real-axis two-center block \(\widehat\Om_\z(s;m)\) and a four-center
+analogue \(\widehat\Om_\z^{(4)}\) for the symmetry quartet.  The scalar
+functional used on the actual-zeta side must be the same scalar channel
+selected on the toy side, namely the off-diagonal trace
+\[
+        \mathcal A_\toy(X)=X_{12}+X_{21}.
+\]
+If the transverse projection of Section~\ref{sec:transverse-projection}
+has already been constructed, this sentence is read as follows: there is
+a scalar functional \(\ell_2\) on the two-point transverse quotient such
+that
+\begin{equation}
+\label{eq:A2-transverse-representative}
+        \mathcal A_2(X):=\ell_2(\Pi_\trans X)
+\end{equation}
+agrees with \(X_{12}+X_{21}\) on the chosen normalized representatives.
+Before Section~\ref{sec:transverse-projection} is closed, \(\mathcal A_2\)
+should simply be read on representatives as
+\begin{equation}
+\label{eq:A2-representative-functional}
+        \mathcal A_2(X)=X_{12}+X_{21}.
+\end{equation}
+Thus \(\Pi_\trans\) acts on the matrix or its quotient class before any
+scalar evaluation; it is not applied after the scalar has already been
+taken.
+
+The suppression hypotheses below are analytic hypotheses about the
+actual-zeta blocks in this fixed scalar channel.  They do not use the toy
+phase, except through the choice of scalar channel, the retained compact
+separation set \(D\) from Theorem~\ref{thm:toy-anomaly-visibility}, and
+the toy exponent \(A_\toy=0\).  In particular, changing the toy phase in
+Section~\ref{sec:toy-anomaly-and-transverse-obstruction} does not change
+the actual-zeta block \(\widehat\Om_\z\); it changes only which scalar
+channel and which toy lower-bound constant are compared against the
+actual-zeta upper bound.
+
+\subsection{Two-point suppression}
+\label{subsec:two-point-suppression}
+
+\begin{hypothesis}[Two-point actual-zeta scalar suppression]
+\label{hyp:zeta-suppression-two-point}
+Let \(D\subset(0,\infty)\) be the compact separation interval retained
+in Theorem~\ref{thm:toy-anomaly-visibility}.  For the two-center
+actual-zeta packet associated with \(\rho\) and a symmetry partner, after
+the gauge-fixed normalization of Definition~\ref{def:local-phase-chart}
+and after the transverse representative convention of
+\eqref{eq:A2-transverse-representative}--\eqref{eq:A2-representative-functional},
+\begin{equation}
+\label{eq:zeta-two-point-scalar-suppression}
+        \bigl|\mathcal A_2(\widehat\Om_\z(s;m))\bigr|
+        \le Q^{-B_{\z,2}}
+\end{equation}
+on the retained subfamily with dimensionless separation \(d\in D\), for
+an absolute exponent \(B_{\z,2}>A_\toy=0\).  Here \(\mathcal A_2\) is
+the actual-zeta realization of the same scalar channel
+\(X_{12}+X_{21}\) used in
+Definition~\ref{def:toy-anomaly-functional}.
+\end{hypothesis}
+
+\begin{wip}\label{rem:wip-zeta-suppression-two-point}
+The two-point case of the structural gap.  Consumed by
+Theorem~\ref{thm:two-point-rigidity}.  Admissible proof routes:
+\textup{(i)} a standalone route from the local jet-Gram geometry alone;
+\textup{(ii)} an energy-supply route consuming the source bound
+of Section~\ref{sec:source-energy-supply} via
+Lemma~\ref{lem:source-energy-to-suppression}.  Existing v1 scalar
+estimates involving
+\(\Phi_K(X)=X_{12}+X_{21}\), such as estimates for
+\(H_m(s)=\Phi_K(\widehat\Omega_\zeta^{\mathrm{corr}}(s;m))\), are
+candidates for import only after their normalization, correction package,
+and representative convention are matched to
+\eqref{eq:A2-transverse-representative}.  V1 results using the toy
+matrix \(M(d)\), \(A_{\val}\), or \(\Psi_{x,d}\) are not imported by
+this hypothesis.
+\end{wip}
+
+\subsection{Four-point suppression}
+\label{subsec:four-point-suppression}
+
+\begin{hypothesis}[Four-point actual-zeta scalar suppression]
+\label{hyp:zeta-suppression-four-point}
+For the four-center packet associated with the symmetry quartet
+\(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\), let
+\(\mathcal A_4\) denote the four-point scalar channel chosen as the
+four-point analogue of \(\mathcal A_2\), after the four-point quotient
+representative has been fixed.  Then
+\begin{equation}
+\label{eq:zeta-four-point-scalar-suppression}
+        \bigl|\mathcal A_4(\widehat\Om_\z^{(4)})\bigr|
+        \le Q^{-B_{\z,4}}
+\end{equation}
+on the retained four-point subfamily, for an absolute exponent
+\(B_{\z,4}>A_\toy^{(4)}\).
+\end{hypothesis}
+
+\begin{wip}\label{rem:wip-zeta-suppression-four-point}
+The four-point case of the structural gap.  Consumed by
+Theorem~\ref{thm:four-point-rigidity}.  Same admissible proof routes
+as Hypothesis~\ref{hyp:zeta-suppression-two-point}.  The scalar channel
+\(\mathcal A_4\) must be fixed before the proof of four-point
+suppression and must not be chosen after seeing the actual-zeta error
+terms.  Any v1 four-point import must be checked at the scalar-channel
+level and may not silently use the archived two-point toy matrix
+calibration.
+\end{wip}
+
+\begin{remark}[Safe scalar import from v1]
+\label{rem:safe-scalar-import-from-v1}
+The new toy phase of Section~\ref{sec:toy-anomaly-and-transverse-obstruction}
+changes the toy lower-bound calculation, but it does not change the
+actual-zeta phase or the scalar functional \(X_{12}+X_{21}\).  Therefore
+v1 estimates that are purely estimates of the scalar
+\(\Phi_K(\widehat\Omega_\zeta^{\mathrm{corr}})\), with
+\(\Phi_K(X)=X_{12}+X_{21}\), are structurally compatible with the
+present rebuild.  By contrast, any v1 argument that normalizes by the
+archived toy matrix \(M(d)\), pairs with \(A_{\val}\), or invokes the
+calibration map \(\Psi_{x,d}\), is not compatible without a fresh
+rederivation for the new toy.
+\end{remark}
+
+\begin{remark}[Standalone and energy-supply routes]
+\label{rem:standalone-and-energy-supply-routes}
+Hypotheses~\ref{hyp:zeta-suppression-two-point}
+and~\ref{hyp:zeta-suppression-four-point} are stated independently of
+the technology of their proofs.  A purely local proof would use only
+Sections~\ref{sec:jet-limit-local-blocks}--\ref{sec:transverse-projection};
+an energy-supply proof may additionally use
+Section~\ref{sec:source-energy-supply}.  In either route, the output must
+be an upper bound in the fixed scalar channel appearing in
+\eqref{eq:zeta-two-point-scalar-suppression} or
+\eqref{eq:zeta-four-point-scalar-suppression}; source-energy estimates in
+other channels are not sufficient unless transferred into this channel.
+\end{remark}
