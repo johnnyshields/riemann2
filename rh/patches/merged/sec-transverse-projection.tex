@@ -88,8 +88,10 @@ Theorem~\ref{thm:toy-anomaly-visibility}.  The projection has
 Hilbert--Schmidt operator norm one, contributes no polynomial loss,
 and allows the actual-zeta two-point suppression statement of
 Section~\ref{sec:actual-zeta-transverse-suppression} to be formulated
-in the same scalar channel as the toy lower bound.  This section does
-not define the four-point projection \(\Pi_\trans^{(4)}\).
+in the same scalar channel as the toy lower bound.  All occurrences of
+\(\Pi_\trans\) in this section are therefore understood as two-point
+objects on \(M_2(\mathbb R)\).  This section does not define the
+four-point projection \(\Pi_\trans^{(4)}\).
 
 \subsection{Value subspace and transverse projection}
 \label{subsec:transverse-projection-construction}
@@ -262,6 +264,37 @@ The final assertion follows by applying this equality to
 \eqref{eq:toy-anomaly-visibility-A}.
 \end{proof}
 
+\begin{lemma}[Two-point scalar quotient well-definedness]
+\label{lem:A2-quotient-well-defined}
+The scalar channel \(\mathcal A_2\) descends to the quotient
+\(M_2(\mathbb R)/\mathcal V_\val\).  Equivalently, if
+\(X-Y\in\mathcal V_\val\), then
+\begin{equation}
+\label{eq:A2-quotient-well-defined}
+        \mathcal A_2(X)=\mathcal A_2(Y).
+\end{equation}
+Moreover, for every \(X\in M_2(\mathbb R)\),
+\begin{equation}
+\label{eq:A2-representative-identities}
+        \mathcal A_2(X)
+        =\mathcal A_\toy(\Pi_\trans X)
+        =\mathcal A_\toy(X)
+        =\sqrt2\,\langle X,e_\sym\rangle_{\mathrm{HS}}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+If \(X-Y\in\mathcal V_\val=\ker\mathcal A_\toy\), then
+\(\mathcal A_\toy(X)-\mathcal A_\toy(Y)=0\).  By
+Definition~\ref{def:two-point-scalar-transverse-channel} and
+Lemma~\ref{lem:transverse-projection-A-toy-compatibility},
+\(\mathcal A_2=\mathcal A_\toy\) on matrix representatives; hence
+\eqref{eq:A2-quotient-well-defined}.  The identities in
+\eqref{eq:A2-representative-identities} follow from
+Lemma~\ref{lem:transverse-projection-A-toy-compatibility} and
+\(\langle X,e_\sym\rangle_{\mathrm{HS}}=(x_{12}+x_{21})/\sqrt2\).
+\end{proof}
+
 \subsection{Scope of the chosen projection}
 \label{subsec:transverse-projection-scope}
 
@@ -310,7 +343,8 @@ scalar channel, namely as a bound for
 \begin{proof}
 Combine Lemmas~\ref{lem:transverse-projection-properties},
 \ref{lem:transverse-projection-quotient-representative},
-and~\ref{lem:transverse-projection-A-toy-compatibility} with
+\ref{lem:transverse-projection-A-toy-compatibility},
+and~\ref{lem:A2-quotient-well-defined} with
 Theorem~\ref{thm:toy-anomaly-visibility} and
 Corollary~\ref{cor:toy-visibility-polynomial-weight}.
 \end{proof}
