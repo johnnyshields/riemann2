@@ -1,0 +1,213 @@
+I would **not** go ahead and build the four-point projection yet.
+
+There is **not** a unique four-point projection determined by the two-point construction. The two-point projection is canonical only because we already made three choices:
+
+[
+M_2(\mathbb R),\qquad
+\mathcal A_2(X)=x_{12}+x_{21},\qquad
+\langle X,Y\rangle_{\mathrm{HS}}=\operatorname{tr}(X^\top Y).
+]
+
+Given those choices, the projection is forced:
+
+[
+\Pi_{\trans}^{(2)}X
+===================
+
+\frac{x_{12}+x_{21}}2
+\begin{pmatrix}0&1\1&0\end{pmatrix}.
+]
+
+The current symbolic verification reflects exactly that package: it verifies (\mathcal V_{\val}=\ker\mathcal A_{\toy}), the explicit projection formula, idempotence, self-adjointness, kernel, norm (1), scalar compatibility, and quotient well-definedness for the **two-point** map. 
+
+For four-point, those choices have **not** been made yet.
+
+## Why two-point is canonical but four-point is not
+
+The two-point situation is one (2\times2) whitened mixed block:
+
+[
+\widehat\Omega(s;m)\in M_2(\mathbb R).
+]
+
+The toy scalar anomaly selected
+
+[
+x_{12}+x_{21}.
+]
+
+So the transverse direction is the symmetric off-diagonal line. Once that scalar channel is chosen, the Hilbert–Schmidt orthogonal projection is the only natural projection.
+
+Four-point is different. A four-point object could be represented in several inequivalent ways:
+
+1. **A four-center block matrix**, perhaps a (4\times4) or block (8\times8) Gram object.
+2. **A collection of six pairwise two-point edges**, one for each pair of four centers.
+3. **A lifted finite-core object**, closer to V1’s ((c,u_5,v_5,\Delta_7)) or ((x,y,\sigma_v)) coordinates.
+4. **A determinant/circuit scalar**, e.g. a four-point affine-coplanarity determinant.
+5. **A quotient-determinant object**, closer to the mixed four-point machinery in V1.
+
+Those are not automatically equivalent. Choosing one prematurely risks building the wrong quotient.
+
+The original paper’s four-point branch was not a simple (M_2)-style off-diagonal projection. It involved affine dependence/coplanarity of lifted points and explicit determinant conditions. In the V1 finite-core model, minimal bad cores in the affine plane have size at most four; (k=4) is an affine circuit.  V1 also gives an explicit four-point determinant form for the coplanarity of four lifted points in variables involving (u_5/c), (v_5/c), and (\Delta_7/(cv_5)). 
+
+So a four-point projection in the rebuild should probably be designed around the **four-point carrier/determinant**, not guessed by analogy with
+
+[
+X_{12}+X_{21}.
+]
+
+## What V1 suggests
+
+V1 suggests that the four-point object is closer to a **quotient determinant** than to a simple orthogonal projection.
+
+In the mixed four-point audit, V1 separates several layers:
+
+* a pre-(\Phi_K) quotient package;
+* a (\Phi_K)-visible hidden state;
+* mixed four-point scalar exits built from (c,u_5,v_5,\Delta_7).
+
+It then states that the mixed four-point branch sees only the determinant projection
+
+[
+\Delta_7=u_7v_5-u_5v_7
+]
+
+or related quotient-determinant data, while another (T)-coordinate records a separate (\Phi_K)-visible projection. 
+
+That is strong evidence that the four-point branch has **more structure** than the two-point scalar branch. It is not determined by the two-point projection alone.
+
+## What I recommend
+
+Do **not** construct (\Pi_{\trans}^{(4)}) yet.
+
+Instead, add a four-point projection **specification gate**. That gate should say what must be provided before a four-point projection can be accepted.
+
+Something like:
+
+```tex
+\begin{wip}[Four-point transverse projection data]
+\label{wip:four-point-transverse-projection-data}
+The two-point projection \(\Pi_{\trans}^{(2)}\) does not determine a
+four-point projection.  A four-point branch requires, at minimum:
+\begin{enumerate}
+\item the four-center ambient object, e.g. a four-center Gram block, an
+      edge package, or a lifted finite-core coordinate package;
+\item the four-point value/nuisance subspace;
+\item the transverse channel, either scalar or finite-vector valued;
+\item a normalization and inner product, if an orthogonal projection is used;
+\item a toy visibility theorem in that same channel;
+\item an actual-zeta suppression theorem in that same channel;
+\item a compatibility statement with branch exhaustion.
+\end{enumerate}
+Until these data are fixed, \(\Pi_{\trans}^{(4)}\) is an open input and
+must not be identified with an entrywise extension of
+\(\Pi_{\trans}^{(2)}\).
+\end{wip}
+```
+
+This is better than trying to build the object now.
+
+## Is there a choice of ways to do it?
+
+Yes. There are several possible ways.
+
+The main candidates are:
+
+### Option A: Pairwise-edge four-point projection
+
+Represent the four-point packet by its six pairwise two-point whitened blocks:
+
+[
+{\widehat\Omega_{ij}}_{1\le i<j\le4}.
+]
+
+Then apply the two-point scalar channel to each edge:
+
+[
+H_{ij}:=\mathcal A_2(\widehat\Omega_{ij}).
+]
+
+A four-point functional would then be some scalar or vector built from the six (H_{ij})’s.
+
+This is closest to the current rebuild. It is easy to type-check. But it may miss V1’s determinant/circuit geometry.
+
+### Option B: Four-center Gram projection
+
+Build one ambient four-center Gram object and quotient its value/nuisance subspace directly.
+
+This is conceptually clean but requires choosing a large matrix space, a metric, and nuisance directions. It is not determined by Section 6.
+
+### Option C: Lifted affine-circuit determinant
+
+Follow V1 more closely. Define lifted coordinates such as
+
+[
+x=\frac{v_5}{c},\qquad
+y=\frac{u_5}{c},\qquad
+\sigma_v=\frac{\Delta_7}{cv_5},
+]
+
+and let the four-point obstruction be a determinant/coplanarity condition. V1’s explicit determinant form points in this direction. 
+
+This is probably the most faithful to V1, but it imports much heavier finite-core machinery.
+
+### Option D: Quotient-determinant channel
+
+Use a coordinate-free quotient determinant, modeled on the mixed four-point factorization through (\Delta_7). V1 says mixed four-point scalar exits depend on (c,u_5,v_5,\Delta_7) and not independently on the hidden (T)-coordinate. 
+
+This may be the cleanest eventual rebuild version, but it requires more setup than Section 6 currently has.
+
+## Which option is best?
+
+For the rebuild, I would currently favor **Option D**, a quotient-determinant interface, with Option C as the V1 reference model.
+
+But I would not implement it yet. First we need to know what the four-point theorem in Section 8 needs to consume:
+
+[
+\mathcal A_{4,\trans}(\Pi_{\trans}^{(4)}\widehat\Omega_\zeta^{(4)})
+]
+
+or perhaps just
+
+[
+\mathcal D_4(\text{four-center package})
+]
+
+as a determinant scalar.
+
+If the four-point branch is ultimately determinant-based, then calling it a “projection” may even be the wrong terminology. It may be better to call it the **four-point transverse channel** or **four-point quotient determinant**.
+
+## What should Section 6 say now?
+
+Section 6 should stay complete for two-point and open for four-point.
+
+I would use language like:
+
+```tex
+The construction of \(\Pi_{\trans}^{(2)}\) is canonical only after the
+two-point scalar channel \(\mathcal A_2(X)=x_{12}+x_{21}\) and the
+Hilbert--Schmidt metric on \(M_2(\mathbb R)\) have been fixed.  These
+choices do not determine a four-point projection.  The four-point branch
+requires its own ambient four-center object, value/nuisance quotient, and
+transverse channel.  In view of the archived finite-core geometry, the
+four-point channel may be determinant or quotient-determinant valued
+rather than an orthogonal projection onto a line.
+```
+
+That is the cleanest, most honest statement.
+
+## Bottom line
+
+Do **not** build the four-point projection now.
+
+There is not one forced answer from the two-point projection. The two-point projection is canonical because the scalar channel and metric are fixed. The four-point branch has several plausible realizations, and V1 strongly suggests it should be determinant/quotient-determinant based, not a naive entrywise (M_2) extension.
+
+The right next step is:
+
+[
+\boxed{
+\text{state four-point projection/channel data as an open specification gate.}
+}
+]
+
+Then build it only after Section 8 fixes exactly what the four-point branch must compare.

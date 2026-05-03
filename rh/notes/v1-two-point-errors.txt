@@ -1,0 +1,755 @@
+I audited the jet-gram/two-point/four-point side as a separate object, not the zeta-entry/Gate–1/Gate–2 problem. My verdict is:
+
+[
+\boxed{
+\text{The jet-gram side is a serious reduction framework, but it is not yet a closed proof structure.}
+}
+]
+
+There are several gaps independent of the zeta bridge. A perfect zeta bridge would **not** by itself prove RH unless the paper either repairs these jet-side issues or proves a formal supersession theorem showing that the canonical source-graded (K9/Y12) branch bypasses them completely.
+
+I am treating the Agent 1 RH-entry no-go as outside this audit, except for context.  The Agent 5 packet-to-jet no-go is directly relevant, because it concerns the finite jet/Gram bridge itself.  The coordinator handover correctly frames the current intended active chain as canonical Hardy branch (\to) source-graded (K9/Y12) final contradiction, but that handover also marks raw row certificates, packet/branch entry, and canonical no-loss inputs as still load-bearing. 
+
+## Executive finding
+
+The paper’s finite jet-gram side has three layers:
+
+[
+\text{formal finite jet algebra}
+]
+
+[
+\Downarrow
+]
+
+[
+\text{two-point / four-point reduction geometry}
+]
+
+[
+\Downarrow
+]
+
+[
+\text{source-graded }K9/Y12\text{ final atomic comparison}.
+]
+
+The **formal finite algebra** is often coherent and useful. The quotient determinant identities, fixed-sector bookkeeping, and many of the local reductions are legitimate as conditional algebraic statements.
+
+But the **proof-closing conclusions** do not yet hold unconditionally on the jet side. The paper itself repeatedly records that the two-point branch, mixed four-point branch, nonmixed four-point branch, hidden-state/transform bridge, and finite-core lower transfer still require additional theorems.
+
+There is also one more serious issue: the stated “minimal finite-order source criterion for quadratic two-point factorization” is not correct as written. It needs an extra bilinearity/evenness hypothesis. Without that repair, the two-point quadratic factorization theorem is formally overclaimed.
+
+## 1. The corrected-package map is a legitimate target, but it is not proved
+
+The current local frontier is stated as a single corrected-package problem:
+
+[
+\mathcal B_2
+\longrightarrow
+C_{\mathcal W}
+\longrightarrow
+B_7^{\mathfrak f}
+\longrightarrow
+Q_{7,m}^q
+\longrightarrow
+\mathcal H_7^q.
+]
+
+That is the right structural object. The paper explicitly says the two-point mixed branch and mixed four-point branch both require this same source-provenance package. It then says the two-point branch still needs swap symmetry, one-amplitude collapse, and diagonal merger for the actual corrected two-atom package; the mixed four-point branch needs the corrected source cross-effect not to create a new nonscalar fixed-sector quotient direction. See TeX lines 3248–3336.
+
+That is a valid reduction. It is not yet a proof.
+
+The paper itself says the corrected package theorem is needed, and that if it closes, then the two-point residual and mixed four-point local carrier are absorbed. That is conditional language, not theorem closure.
+
+## 2. The two-point quadratic factorization lemma is false as written
+
+This is the most important jet-side audit finding.
+
+The paper states a lemma roughly of this form:
+
+Given an analytic two-atom package
+
+[
+\mathfrak P_2(a_1,h_1;a_2,h_2)
+]
+
+with swap symmetry, one-amplitude collapse,
+
+[
+\mathfrak P_2(0,h_1;a_2,h_2)=a_2F_{h_2},
+\qquad
+\mathfrak P_2(a_1,h_1;0,h_2)=a_1F_{h_1},
+]
+
+and diagonal merger,
+
+[
+\mathfrak P_2(a_1,h;a_2,h)=(a_1+a_2)F_h,
+]
+
+then the interaction
+
+[
+\mathcal I_2
+============
+
+\mathfrak P_2-a_1F_{h_1}-a_2F_{h_2}
+]
+
+is claimed to factor as
+
+[
+\mathcal I_2
+============
+
+a_1a_2(h_1-h_2)^2\mathcal J_2.
+]
+
+This is TeX lines 12786–12890.
+
+The proof silently replaces the post-(a_1a_2) quotient by a function
+
+[
+G(h_1,h_2),
+]
+
+as if it were independent of amplitudes. But the hypotheses only imply
+
+[
+\mathcal I_2
+============
+
+a_1a_2,H(a_1,a_2,h_1,h_2).
+]
+
+Swap symmetry gives
+
+[
+H(a_1,a_2,h_1,h_2)
+==================
+
+H(a_2,a_1,h_2,h_1),
+]
+
+not
+
+[
+H(a_1,a_2,h_1,h_2)
+==================
+
+H(a_1,a_2,h_2,h_1).
+]
+
+Therefore (H) need not be even in (h_1-h_2) with amplitudes fixed.
+
+A concrete counterexample shows the issue. Let (V=\mathbb C), (F_h=1), and define
+
+[
+\mathfrak P_2(a_1,h_1;a_2,h_2)
+==============================
+
+a_1+a_2
++
+a_1a_2(a_1-a_2)(h_1-h_2).
+]
+
+Then:
+
+[
+\mathfrak P_2(a_1,h_1;a_2,h_2)
+==============================
+
+\mathfrak P_2(a_2,h_2;a_1,h_1),
+]
+
+the one-amplitude collapse identities hold, and
+
+[
+\mathfrak P_2(a_1,h;a_2,h)=a_1+a_2.
+]
+
+But
+
+[
+\mathcal I_2
+============
+
+a_1a_2(a_1-a_2)(h_1-h_2),
+]
+
+which is only first order in (h_1-h_2), not second order.
+
+So the lemma needs an additional assumption, such as:
+
+[
+\mathcal I_2/a_1a_2
+\text{ is independent of }(a_1,a_2),
+]
+
+or
+
+[
+\mathcal I_2/a_1a_2
+\text{ is even in }h_1-h_2\text{ at fixed amplitudes},
+]
+
+or a properly formulated collision-chart parity condition in the variables
+
+[
+m=\frac{h_1+h_2}{2},
+\qquad
+\delta=h_2-h_1,
+\qquad
+\omega=\frac{\lambda-1}{\lambda+1}.
+]
+
+The paper later recognizes this issue indirectly. It introduces the swap-compatible collision chart where
+
+[
+(m,\omega,\delta)\mapsto(m,-\omega,-\delta)
+]
+
+under atom swap, and observes that the future edge law must be formulated in that chart; see TeX lines 13306–13367. That later discussion is the correct repair direction, but the earlier minimal lemma is overstrong as written.
+
+This affects the two-point conclusion directly.
+
+## 3. The actual corrected two-point package is not proved
+
+Even setting aside the flaw in the minimal lemma, the paper explicitly says the actual two-point branch is not closed.
+
+At TeX lines 13051–13063, the draft says there are two possible two-point routes:
+
+[
+\text{finite-order source-level route}
+]
+
+and
+
+[
+\text{weaker quotient-diagonal route}.
+]
+
+Then it states:
+
+[
+\text{At present, the draft does not prove either route outright.}
+]
+
+That is decisive.
+
+The paper also records two no-go findings:
+
+First, the naive source-summed whitened model cannot prove one-atom linearity because the corrected block after whitening is an even analytic function of the amplitude (a); see TeX lines 13090–13125.
+
+Second, quotient/determinant routes are shear-blind: cubic/quintic minors, septic quotient class, and pointwise patch gauges do not see the repeated-node shear parameter; see TeX lines 13128–13152.
+
+So the two-point side is not merely missing a small estimate. It lacks the actual corrected source-level merger theorem.
+
+## 4. Gate A/Gate B are useful, but Gate B remains conditional
+
+The Gate A/Gate B package is the local algebraic mechanism intended to repair the corrected package.
+
+The paper says:
+
+[
+\text{Gate A}
+]
+
+is the leading homogeneous cubic audit and closes at the aggregate fixed-sector level under the homogeneous scalar-grade convention.
+
+But
+
+[
+\text{Gate B}
+]
+
+is the raw edge-divisibility theorem:
+
+[
+[z^7][\delta^1],
+\pi_{\mathfrak f_h}
+(1-\Pi_{1,1})*{\mathrm{mix}}
+C*{\mathcal W}^{\mathrm{raw}}
+=0.
+]
+
+The paper says Gate B uses:
+
+[
+\text{Gate A aggregate closure},
+]
+
+[
+\text{odd total-grade subset-complement cancellation},
+]
+
+[
+\text{moving Taylor-frame telescoping},
+]
+
+[
+2\text{-jet source-frame normalization}.
+]
+
+See TeX lines 13418–13458.
+
+Later, the final Gate A/B status says:
+
+[
+\text{Gate B is closed only in the conditional raw edge-divisibility sense}
+]
+
+and depends on midpoint parity, source-frame telescoping, (2)-jet source-frame normalization, and full-Taylor-tower-before-truncation hypotheses. If any of those fail in the final source model, Gate B reverts to an open raw edge-divisibility target. See TeX lines 54262–54278.
+
+That is a legitimate proof program. It is not yet an unconditional local theorem unless all those conventions/hypotheses are formally verified for the final source model.
+
+## 5. The mixed four-point quotient determinant reduction is valid but limited
+
+The paper has a solid local algebraic result: on a good fixed-sector patch, the mixed four-point scalar exits depend on the order-seven fixed-sector residual only through the determinant pairing
+
+[
+\omega_h(E,A_5^{\mathfrak f})=ev_5-u_5f.
+]
+
+Equivalently, the mixed four-point scalar package sees
+
+[
+\Delta_7=u_7v_5-u_5v_7,
+]
+
+not (u_7,v_7) separately. See TeX lines 3394–3479 and 3544–3613.
+
+That is a legitimate quotient statement.
+
+But it is not enough for the full transform state. The paper explicitly says quotient invisibility removes an order-seven corrected source residual from the mixed four-point branch, but is **not** enough to solve the package-to-transform hidden-state bridge; see TeX lines 3506–3541.
+
+This limitation becomes explicit later:
+
+[
+[A_7^{\mathfrak f}]
+\in
+\mathfrak f_m/\mathbf C A_5^{\mathfrak f}
+]
+
+does not determine the (\Phi_K)-visible septic state
+
+[
+[A_7^{\mathfrak f}]_\Phi
+\in
+\mathfrak f_m/\ker(\Phi_K).
+]
+
+The paper states quotient package equality does not imply equality of the first (\Phi_K)-visible corrected odd coefficient; see TeX lines 14784–14850.
+
+So the mixed four-point scalar-exit reduction is good local quotient algebra, but it does not by itself prove the transform-visible finite-jet conclusion.
+
+## 6. Bottleneck C is not closed locally in the transform-faithful framework
+
+The later Bottleneck-C audit is a major jet-side obstacle.
+
+The paper shows that endpoint symmetrization and alternative finite-(s) carriers do not remove the relevant (\eta\eta) second-Hessian row without losing transform faithfulness. It proves that a finite-(s) endpoint carrier still leaves a lower-row component and hence an (S)-visible fixed-sector term; see TeX lines 33511–33725.
+
+The local Bottleneck-C ledger then says that inside the present transform-faithful finite-(s) off-diagonal kernel architecture, Bottleneck C closes only if a specific physical aggregate (S)-visible coefficient vanishes:
+
+[
+\nu_{21,7}^{\new,\mathrm{agg}}=0.
+]
+
+The paper says:
+
+[
+\text{No currently proved identity supplies this vanishing.}
+]
+
+It then concludes that the local route remains open-negative unless one proves a new global zero-source cancellation theorem or pivots to global curvature/holonomy or quotient-only no-(T) architecture; see TeX lines 33766–33794.
+
+Later, the paper repackages this as a local rank-two affine forcing equation:
+
+[
+\nabla_\kappa^{\mathfrak f}A_7^{\mathfrak f}
+============================================
+
+E_{\eta\eta}+E_{\rm lower}.
+]
+
+That is a coherent repair, but the paper immediately says it does not prove a global contradiction and still needs a global boundary, holonomy, exactness, index, or transported finite-core non-concentration theorem; see TeX lines 45952–46000.
+
+Then it states the global rank-two affine transport gate as a hypothesis and says that without such a law, the rank-two architecture is locally coherent but globally non-closing; see TeX lines 46435–46450.
+
+That is a serious jet-side gap independent of Gate–1/Gate–2.
+
+## 7. The nonmixed four-point branch is explicitly not closed
+
+The nonmixed four-point branch has an impressive local reduction, but the paper itself says the remaining burden is global/source-level.
+
+The local result is:
+
+[
+\text{exact nonmixed contacts force zeros of }\mathcal R,
+]
+
+and isolated zeros are classified by parity. Even-order zeros are sterile; odd-order zeros seed local exact contacts. The same structure is encoded by the source-level Wronskian
+
+[
+\mathcal W_{\mathrm{src}}
+=========================
+
+J_\lambda J_{u_5}'-J_{u_5}J_\lambda'.
+]
+
+See TeX lines 23706–23743.
+
+But the paper then says determinant algebra alone cannot close the nonmixed branch. It states that the current route-2 source package is universal under normalization, arbitrary canonical quotient-septic geometry remains too free, and even the explicit direct provenance slice
+
+[
+\phi=Aq^{(7)}
+]
+
+is fully universal on each generic one-pair block. Even finite families of linear provenance or matching conditions on (q) are too weak. See TeX lines 23854–23947.
+
+The compact status summary says further progress must use:
+
+[
+\text{a genuinely non-universal continuum-strength provenance law for }q,
+]
+
+or an external mixed/canonical theorem constraining (q) on a whole block. See TeX lines 23877–23947.
+
+Then the fixed-slope/support-curve reformulation reduces the remaining problem to a finite table of remote endpoint/branch incidences, but explicitly says pure planarity, parity, interval-graph combinatorics, fixed-slope support order, and pseudoline combinatorics cannot close the branch. It says a final contradiction must use RH-specific source/provenance/canonical structure, not only abstract strip/support geometry; see TeX lines 23950–24010.
+
+That means the nonmixed four-point side is not closed from jet-gram geometry alone.
+
+## 8. Finite odd-germ determinacy is qualitative, not a lower bound
+
+The paper proves a Noetherian finite-determinacy result on compact nonsingular actual-source strata:
+
+[
+c_{\core,1}=\cdots=c_{\core,2R+1}=0
+\Longrightarrow
+H_{\core,\theta}\equiv0.
+]
+
+That is legitimate analytic geometry. See TeX lines 14347–14428.
+
+But the paper explicitly says this is qualitative. It does not prove the calibrated lower bound
+
+[
+|\Xi_{\core}^{(N)}(m)|
+\gtrsim
+\frac{x}{B_\zeta(m)}S(m),
+]
+
+does not provide a sign law, does not provide a tail-domination estimate, and does not give an explicit (R_{\Theta_k}) depending only on (k). See TeX lines 14526–14557.
+
+It then introduces the calibrated finite-core separation hypothesis and the near-zero-anomaly branch
+
+[
+\mathcal N_k(m,Q),
+]
+
+and states that the draft does not prove
+
+[
+\mathcal N_k(m,Q)=\varnothing.
+]
+
+See TeX lines 14586–14665.
+
+That is another independent jet-side gap.
+
+## 9. First-interaction rigidity remains open
+
+The paper defines a first interaction branch with
+
+[
+J_1=[s]\Phi_K(\mathcal I_{\ge2}).
+]
+
+It says ECT and lifted-curve geometry control defect-free affine incidence, but they do not control the genuinely interacting scalar (J_1). Known structural properties such as one-amplitude collapse and collision divisibility force (J_1) to vanish on some boundary strata, but they do not prove
+
+[
+J_1\equiv0,
+]
+
+nor impose a sign condition, nor put it in the radical of the controlled incidence ideal. See TeX lines 14700–14723.
+
+It then says the source-level first-interaction coefficient splits into independent (dd), (d\eta+\eta d), and (\eta\eta) channels, plus bilinear whitening products, and no current parity, endpoint-symmetry, ECT, or controlled-incidence theorem forces their sum to vanish, gives a calibrated sign/cone condition, or places it in the radical of the controlled incidence ideal. See TeX lines 14725–14754.
+
+This is a genuine finite-core/jet-side obstruction.
+
+## 10. The final (K9/Y12) branch may bypass some old geometry, but only with exact certificates
+
+The late canonical ledger says the source-graded (K9/Y12) final bridge is closed **inside the certified canonical branch**. It also says the remaining active downstream audit, if not discharged elsewhere, is the raw row/routing coefficient certificate
+
+[
+\mathfrak R_{2Y}(p).
+]
+
+See TeX lines 59078–59115 and 59127–59165.
+
+That is the strongest part of the current paper. If the canonical (K9/Y12) branch truly supersedes the old two-point/four-point finite-core geometry, then the old gaps can be archived.
+
+But the paper does not yet do that cleanly. Earlier sections still record live two-point, nonmixed four-point, hidden-state, rank-two transport, finite-core nonconcentration, and interaction-rigidity gaps. To make the late (K9/Y12) closure decisive, the paper needs a formal supersession theorem:
+
+[
+\boxed{
+\text{Every old two-point/four-point finite-core obstruction either maps into the certified }K9/Y12\text{ carrier or is irrelevant to the active proof chain.}
+}
+]
+
+Without that theorem, the final ledger and the older no-go sections coexist uneasily.
+
+## 11. Agent 5’s no-go is directly relevant to this audit
+
+The current final (K9/Y12) branch must not rely on a two-sided packet-to-corrected-jet equivalence on a full analytic packet Hilbert space. Agent 5 correctly found that such a theorem is false: a finite corrected jet map has infinite-dimensional kernel on the analytic packet space. 
+
+For the jet-gram side to be legitimate, the proof must use:
+
+[
+\text{upper trace control on analytic packets}
+]
+
+plus
+
+[
+\text{finite carrier Gram coercivity}
+]
+
+plus
+
+[
+\text{raw }2Y/K9\text{ live/dead routing certificate}.
+]
+
+If the paper’s final (K9) lower bound is read as a lower bound on arbitrary packet energy, it is invalid. If it is read as a finite carrier/coercivity statement on certified columns, it is potentially valid but requires the actual finite certificate
+
+[
+\mathfrak R_{2Y}(p)
+]
+
+and the carrier Gram audit.
+
+The coordinator handover also flags exactly this: the active chain uses the maximal labelled (K9) live/dead routing, but the (Y12)-certified quotient and (L_{\mathrm{eff},p}) are proved only after (\mathfrak R_{2Y}(p)) is verified or imported. 
+
+## Does the jet-gram side hold water?
+
+My answer is:
+
+[
+\boxed{
+\text{As a formal reduction architecture: yes, mostly.}
+}
+]
+
+[
+\boxed{
+\text{As a closed proof structure: no.}
+}
+]
+
+The following pieces are legitimate or close to legitimate:
+
+1. The fixed-sector quotient determinant algebra.
+2. The mixed four-point dependence on (\Delta_7) rather than raw (u_7,v_7).
+3. The Noetherian finite odd-germ determinacy theorem, as a qualitative local theorem.
+4. Gate A aggregate cancellation under the stated convention.
+5. Gate B as a conditional raw edge-divisibility theorem, provided the parity/telescoping/source-frame hypotheses are verified.
+6. The source-graded (K9/Y12) same-norm comparison, if restricted to the certified finite carrier and raw row certificate.
+
+The following are not yet closed:
+
+1. The actual corrected two-atom source-level merger.
+2. The two-point quadratic factorization as stated.
+3. The hidden-state / (\Phi_K)-visible transform bridge.
+4. The Bottleneck-C physical (T)-coordinate leak.
+5. The global rank-two affine transport law.
+6. The nonmixed four-point source-level odd-zero/global endpoint-sign problem.
+7. Finite-core calibrated lower transfer.
+8. Near-zero-anomaly exclusion.
+9. First-interaction rigidity.
+10. The raw (\mathfrak R_{2Y}(p)) certificate, unless already verified/imported.
+11. Finite carrier Gram coercivity replacing the false full packet-to-jet lower bound.
+
+## Would these gaps render the zeta-bridge work irrelevant?
+
+If the zeta bridge is aimed at the **old two-point/four-point finite-core route**, then yes: those gaps would make the zeta bridge insufficient. A perfect Gate–1/Gate–2 source theorem would still not close the proof because the finite-core/two-point/four-point jet side is not closed.
+
+If the zeta bridge is aimed at the **late canonical source-graded (K9/Y12) branch**, then no: the zeta bridge is still meaningful, but only after the paper supplies the missing finite-carrier and supersession infrastructure.
+
+The required repair is:
+
+[
+\boxed{
+\text{Prove that the active }K9/Y12\text{ branch genuinely supersedes the old two/four-point finite-core branches.}
+}
+]
+
+That means the paper must explicitly show:
+
+[
+\text{two-point residuals}
+\to
+\text{certified }K9/Y12\text{ carrier},
+]
+
+[
+\text{mixed four-point scalar exits}
+\to
+\text{certified }K9/Y12\text{ carrier or irrelevant scalar branch},
+]
+
+[
+\text{nonmixed four-point odd-zero/global endpoint branches}
+\to
+\text{source-graded finite carrier or separately impossible}.
+]
+
+Right now, that supersession is asserted in the final status language but not fully reconciled with the earlier live no-go sections.
+
+## Minimal repair list
+
+To make the jet-gram side proof-worthy, I would require the following.
+
+### 1. Repair the two-point factorization criterion
+
+Replace the current lemma with one of these stronger versions:
+
+[
+\mathcal I_2
+============
+
+a_1a_2G(h_1,h_2)
+\quad
+\text{with }G(h_1,h_2)=G(h_2,h_1),
+]
+
+or
+
+[
+E(m,\omega,\delta)
+\text{ is analytic and swap-even: }
+E(m,-\omega,-\delta)=E(m,\omega,\delta),
+]
+
+with enough vanishing at ((\omega,\delta)=(0,0)) to force
+
+[
+E=\delta^2\mathcal H(m,\kappa,\delta^2).
+]
+
+The present three assumptions are insufficient.
+
+### 2. Prove the actual corrected two-atom package identities
+
+For the real corrected package, prove:
+
+[
+\text{swap symmetry},
+]
+
+[
+\text{one-amplitude collapse},
+]
+
+[
+\text{diagonal merger}.
+]
+
+But do this before whitening destroys amplitude linearity, or use a homogeneous residue/source carrier whose additivity is exact.
+
+### 3. Close or bypass Gate B in the final source model
+
+Gate B must be verified under the actual final source convention, including:
+
+[
+\text{midpoint parity},
+]
+
+[
+\text{source-frame telescoping},
+]
+
+[
+2\text{-jet source-frame normalization},
+]
+
+[
+\text{full tower before truncation}.
+]
+
+If the final source changes, Gate B must be reaudited.
+
+### 4. Prove a hidden-state bridge
+
+The proof needs a theorem saying quotient-level equality is enough for the (\Phi_K)-visible transform state, or else the (K9/Y12) branch must retain and route the hidden state explicitly.
+
+### 5. Replace Bottleneck-C pointwise vanishing with global transport or finite carrier routing
+
+The rank-two affine forcing equation must be paired with a global law:
+
+[
+\text{holonomy, boundary condition, index, transported nonconcentration, or finite carrier coercivity}.
+]
+
+Otherwise Bottleneck C remains locally coherent but globally non-closing.
+
+### 6. Close the nonmixed four-point branch with source-specific structure
+
+The paper itself says pure geometry is exhausted. The needed theorem must use source/provenance/canonical structure. This is where the Pick/Cauchy plan is attractive: Cauchy principal-part carriers can supply an ECT/total-positivity law that ordinary planar geometry cannot.
+
+### 7. Replace packet-to-jet lower transfer by finite carrier Gram audit
+
+The final (K9) bridge must act on a certified finite carrier, not arbitrary analytic packet energy. This requires:
+
+[
+A_p^*G_{K9,p}^{\gr}A_p
+\ge
+Q^{-C}G_{\car,p}
+]
+
+on the effective carrier, plus the same-column (\mathfrak R_{2Y}(p)) row certificate.
+
+### 8. Add a supersession theorem
+
+The paper must explicitly state:
+
+[
+\text{The old two-point/four-point finite-core routes are either closed by named theorems or bypassed by the canonical }K9/Y12\text{ branch.}
+]
+
+Without that theorem, the reader cannot know whether the earlier no-go branches are historical diagnostics or still live proof gaps.
+
+## Bottom line
+
+The jet-gram side is not nonsense. It is a sophisticated and mostly coherent finite-dimensional reduction program.
+
+But it is not yet a closed proof. The two biggest internal problems are:
+
+[
+\boxed{
+\text{the two-point quadratic factorization criterion is insufficient as written;}
+}
+]
+
+and
+
+[
+\boxed{
+\text{the four-point/nonmixed/hidden-state branches remain globally non-closing unless superseded by certified }K9/Y12\text{ routing.}
+}
+]
+
+So the zeta-bridge work is not meaningless, but it must be aimed at a **repaired** downstream architecture:
+
+[
+\text{source bridge}
+\to
+\text{finite certified carrier}
+\to
+\mathfrak R_{2Y}
+\to
+\text{source-graded }K9/Y12\text{ atomic contradiction}.
+]
+
+If the paper still relies on the current two-point/four-point jet-gram conclusions as standalone closures, then the proof is not sound yet.
