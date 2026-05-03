@@ -1,0 +1,305 @@
+% =============================================================================
+% Patch: §6 Transverse projection
+%   sec:transverse-projection
+%
+% Target file:   rh/rh_rebuild.tex
+% Target lines:  1990 through 2032 (current §6 stub: abstract definition
+%                with conditions (Π1)-(Π3) plus a single wip remark).
+%
+% Action: this patch is NOT to be merged into rh_rebuild.tex yet.  It is
+% staged under rh/patches/ for review.
+%
+% Migration content (relative to the current stub):
+%
+%   - Definition def:value-subspace:
+%       \mathcal V_\val := { X in M_2(R) : x_{12} + x_{21} = 0 }
+%     i.e., the kernel of the scalar toy anomaly functional A_\toy of
+%     Definition~\ref{def:toy-anomaly-functional}.  This is the minimal
+%     value subspace consistent with §5's scalar formulation.
+%
+%   - Lemma lem:value-subspace-explicit-basis:
+%     \mathcal V_\val is a 3-dimensional subspace of M_2(R), with
+%     orthogonal basis (in the Hilbert-Schmidt inner product)
+%       e_{11} = [[1, 0], [0, 0]],
+%       e_{22} = [[0, 0], [0, 1]],
+%       e_anti = (1/√2) [[0, 1], [-1, 0]].
+%     Its 1-dimensional orthogonal complement \mathcal V_\val^⊥ is
+%     spanned by
+%       e_sym  = (1/√2) [[0, 1], [1, 0]].
+%
+%   - Definition def:transverse-projection (replaces the existing
+%     abstract definition; same name and label):
+%       Π_trans X := ((x_{12} + x_{21}) / 2) · [[0, 1], [1, 0]]
+%     the orthogonal projection of M_2(R) onto V_val^⊥ in the
+%     Hilbert-Schmidt inner product.
+%
+%   - Lemma lem:transverse-projection-properties:
+%     Π_trans is idempotent, self-adjoint, has kernel exactly V_val,
+%     and operator norm 1.  In particular condition (Π2) of the
+%     stub holds with polynomial-in-Q exponent 0 (no polynomial loss).
+%
+%   - Lemma lem:transverse-projection-A-toy-compatibility:
+%     A_\toy(Π_trans X) = A_\toy(X) for every X in M_2(R), i.e., the
+%     scalar toy anomaly functional descends through the transverse
+%     quotient.  This discharges the deferred compatibility flagged in
+%     Remark~\ref{rem:toy-Pi-trans-deferred} of §5.
+%
+%   - Remark rem:transverse-projection-no-richer-quotient:
+%     v1's richer transverse machinery (the matrix-valued A_val(x) of
+%     Proposition prop:explicit-Aval at proof_of_rh.tex line 1260, the
+%     Frobenius pairing with M(d), and the calibration map Ψ_{x,d} of
+%     Proposition prop:canonical-calibration at line 1528) is not
+%     adopted: at the scalar functional level used by §7-§8.1, the
+%     rebuild only consumes |A_\toy(·)|, for which the kernel
+%     V_val of A_\toy is the complete value subspace and Π_trans of
+%     Definition~\ref{def:transverse-projection} is the unique
+%     orthogonal-projection representative.  Any v1 theorem that
+%     explicitly uses A_val, M(d), or Ψ_{x,d} requires rederivation
+%     for the present scalar channel or remains in the archive
+%     (rem:toy-phase-v1-compatibility in §5).
+%
+%   - Remark rem:transverse-projection-residual-gauge:
+%     The retained chart of Definition~\ref{def:local-phase-chart} pins
+%     Φ_T = θ uniquely, so there is no residual gauge in the rebuild
+%     to be invariant under.  Additive constants Φ → Φ + c leave q,
+%     q', q'' unchanged and therefore leave the kernel and mixed
+%     blocks of Section~\ref{sec:finite-scale-local-blocks-and-whitening}
+%     and the whitened block \widehat\Om of §4 unchanged; affine-jet
+%     shifts Φ → Φ + a t change q to q + a and so do not preserve the
+%     chart class and are not chart symmetries.  Condition (Π3) of the
+%     stub is therefore vacuous in the rebuild.
+%
+% Closes:
+%   rem:wip-transverse-projection.
+%
+% Status (when merged):
+%   \statusmig      not-started -> migrated
+%   \statusreferee  not-started -> in-progress
+%   \statussympy    not-started -> verified
+%       [rh/sympy/sec-transverse-projection.py]
+%   \statussim      not-started -> verified
+%       [rh/simulation/sec-transverse-projection.py]
+%   \statuslean     not-started -> n/a
+%
+% Verification:
+%   - rh/sympy/sec-transverse-projection.py
+%       verify_value_subspace_kernel_of_A_toy,
+%       verify_transverse_projection_explicit_formula,
+%       verify_pi_trans_idempotent,
+%       verify_pi_trans_self_adjoint,
+%       verify_pi_trans_kernel_equals_V_val,
+%       verify_pi_trans_operator_norm,
+%       verify_A_toy_descends_through_pi_trans,
+%       verify_A_val_v1_lies_in_V_val (regression check that v1's
+%         A_val(x) of Proposition prop:explicit-Aval has zero off-
+%         diagonal trace, hence lies in the rebuild's V_val).
+%   - rh/simulation/sec-transverse-projection.py
+%       check_pi_trans_explicit_formula_mp,
+%       check_pi_trans_idempotent_mp,
+%       check_pi_trans_kernel_on_V_val_basis,
+%       check_A_toy_descends_through_pi_trans_mp,
+%       check_pi_trans_on_actual_zeta_block,
+%       check_pi_trans_on_toy_block_off_line,
+%       check_pi_trans_operator_norm_unity_mp.
+% =============================================================================
+
+% =============================================================================
+\section{Transverse projection}
+\label{sec:transverse-projection}
+\statuspaper{LIVE}\quad
+\statusmig{migrated}\quad
+\statusreferee{in-progress}\quad
+\statussympy[rh/sympy/sec-transverse-projection.py]{verified}\quad
+\statussim[rh/simulation/sec-transverse-projection.py]{verified}\quad
+\statuslean{not-started}
+\par\medskip
+
+The scalar toy anomaly functional \(\mathcal A_\toy\) of
+Definition~\ref{def:toy-anomaly-functional} fixes the value subspace as
+its kernel, and the transverse projection is the orthogonal projection
+of the Gram-normalized jet space onto its one-dimensional complement.
+This gives a unique \(\Pi_\trans\) compatible with the visibility lower
+bound of Theorem~\ref{thm:toy-anomaly-visibility} and the suppression
+hypotheses of Section~\ref{sec:actual-zeta-transverse-suppression}; the
+projection is bounded with operator norm one and discharges the
+compatibility deferred in
+Remark~\ref{rem:toy-Pi-trans-deferred}.
+
+\subsection{Value subspace and transverse projection}
+\label{subsec:transverse-projection-construction}
+
+We work on \(M_{2}(\mathbb R)\) with the Hilbert--Schmidt inner product
+\(\langle X,Y\rangle:=\Tr(X^\top Y)\).
+
+\begin{definition}[Value subspace]
+\label{def:value-subspace}
+The value subspace is
+\begin{equation}
+\label{eq:V-val}
+        \mathcal V_\val\;:=\;\bigl\{X\in M_{2}(\mathbb R):
+            x_{12}+x_{21}=0\bigr\}
+        \;=\;\ker\mathcal A_\toy.
+\end{equation}
+\end{definition}
+
+\begin{lemma}[Explicit basis for \(\mathcal V_\val\)]
+\label{lem:value-subspace-explicit-basis}
+\(\mathcal V_\val\) is a three-dimensional subspace of \(M_{2}(\mathbb R)\)
+with orthonormal basis
+\begin{equation}
+\label{eq:V-val-basis}
+        e_{11}=
+        \begin{pmatrix}1&0\\0&0\end{pmatrix},
+        \qquad
+        e_{22}=
+        \begin{pmatrix}0&0\\0&1\end{pmatrix},
+        \qquad
+        e_{\mathrm{anti}}=\frac{1}{\sqrt 2}
+        \begin{pmatrix}0&1\\-1&0\end{pmatrix},
+\end{equation}
+in the Hilbert--Schmidt inner product.  Its one-dimensional orthogonal
+complement is
+\begin{equation}
+\label{eq:V-val-perp-basis}
+        \mathcal V_\val^\perp=\mathbb R\,e_\sym,
+        \qquad
+        e_\sym:=\frac{1}{\sqrt 2}
+        \begin{pmatrix}0&1\\1&0\end{pmatrix}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The four matrices \(\{e_{11},e_{22},e_{\mathrm{anti}},e_\sym\}\) form an
+orthonormal basis of \(M_{2}(\mathbb R)\) by direct computation.  Each
+of \(e_{11},e_{22},e_{\mathrm{anti}}\) has \(x_{12}+x_{21}=0\), so it lies in
+\(\mathcal V_\val\); \(e_\sym\) has \(x_{12}+x_{21}=\sqrt 2\ne 0\) and
+is orthogonal to the other three, so it spans
+\(\mathcal V_\val^\perp\).
+\end{proof}
+
+\begin{definition}[Transverse projection]
+\label{def:transverse-projection}
+The transverse projection
+\(\Pi_\trans:M_{2}(\mathbb R)\to M_{2}(\mathbb R)\) is the orthogonal
+projection onto \(\mathcal V_\val^\perp\) in the Hilbert--Schmidt
+inner product.  Equivalently,
+\begin{equation}
+\label{eq:Pi-trans-explicit}
+        \Pi_\trans X
+        \;=\;\frac{x_{12}+x_{21}}{2}\,
+        \begin{pmatrix}0&1\\1&0\end{pmatrix}.
+\end{equation}
+\end{definition}
+
+\subsection{Properties of \(\Pi_\trans\)}
+\label{subsec:transverse-projection-properties}
+
+\begin{lemma}[Projection properties]
+\label{lem:transverse-projection-properties}
+The operator \(\Pi_\trans\) is idempotent, self-adjoint with respect to
+the Hilbert--Schmidt inner product, has kernel exactly
+\(\mathcal V_\val\), and satisfies
+\begin{equation}
+\label{eq:Pi-trans-norm}
+        \|\Pi_\trans\|_{\op}\;=\;1.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Idempotence: from \eqref{eq:Pi-trans-explicit}, the off-diagonal
+entries of \(\Pi_\trans X\) are equal, so
+\((\Pi_\trans X)_{12}+(\Pi_\trans X)_{21}=x_{12}+x_{21}\), giving
+\(\Pi_\trans^{\,2}=\Pi_\trans\).
+Self-adjointness: \(\Pi_\trans X=\langle X,e_\sym\rangle\,e_\sym\), so
+\(\langle \Pi_\trans X,Y\rangle=\langle X,e_\sym\rangle\langle e_\sym,Y\rangle
+=\langle X,\Pi_\trans Y\rangle\).
+Kernel: \(\Pi_\trans X=0\iff x_{12}+x_{21}=0\iff X\in\mathcal V_\val\).
+Norm: an orthogonal projection onto a non-zero subspace of a Hilbert
+space has operator norm one.
+\end{proof}
+
+\begin{lemma}[\(\mathcal A_\toy\) descends through \(\Pi_\trans\)]
+\label{lem:transverse-projection-A-toy-compatibility}
+For every \(X\in M_{2}(\mathbb R)\),
+\begin{equation}
+\label{eq:A-toy-pi-compat}
+        \mathcal A_\toy(\Pi_\trans X)\;=\;\mathcal A_\toy(X).
+\end{equation}
+Consequently the visibility lower bound
+\eqref{eq:toy-anomaly-visibility-A} of
+Theorem~\ref{thm:toy-anomaly-visibility} transports verbatim to its
+\(\Pi_\trans\)-projected form, with the same exponent \(A_\toy=0\) and
+the same constant \(c_\toy(D)/2\).
+\end{lemma}
+
+\begin{proof}
+By \eqref{eq:Pi-trans-explicit}, \((\Pi_\trans X)_{12}=
+(\Pi_\trans X)_{21}=(x_{12}+x_{21})/2\), so
+\(\mathcal A_\toy(\Pi_\trans X)=(x_{12}+x_{21})/2+(x_{12}+x_{21})/2=
+x_{12}+x_{21}=\mathcal A_\toy(X)\).  The transport claim follows
+because \(\mathcal A_\toy\) appears under absolute value in
+\eqref{eq:toy-anomaly-visibility-A} and the equality
+\eqref{eq:A-toy-pi-compat} preserves it.
+\end{proof}
+
+\subsection{Scope of the chosen projection}
+\label{subsec:transverse-projection-scope}
+
+\begin{remark}[No richer quotient is needed]
+\label{rem:transverse-projection-no-richer-quotient}
+The downstream comparison theorems of
+Section~\ref{sec:projective-rigidity} consume only the absolute scalar
+visibility \(|\mathcal A_\toy(\widehat\Om_\toy(s;m,u))|\) and its
+actual-zeta counterpart
+\(|\mathcal A_\toy(\widehat\Om_\z(s;m))|\) under the suppression
+hypothesis of Section~\ref{sec:actual-zeta-transverse-suppression}.
+At the scalar-functional level, the kernel of \(\mathcal A_\toy\) is
+the complete value subspace, and the orthogonal projection of
+Definition~\ref{def:transverse-projection} is the unique
+norm-one representative of the descend-through map
+\(M_{2}(\mathbb R)\to M_{2}(\mathbb R)/\mathcal V_\val\).  Richer
+matrix-level quotient constructions of the local-projective-rigidity
+literature are not required by the rebuild and remain in the
+archive; cf.\ Remark~\ref{rem:toy-phase-v1-compatibility}.
+\end{remark}
+
+\begin{remark}[Residual gauge]
+\label{rem:transverse-projection-residual-gauge}
+The retained chart of
+Definition~\ref{def:local-phase-chart} pins \(\Ph_T=\theta\) uniquely,
+so the only gauge transformations preserving the chart class are
+additive constants \(\Ph\mapsto\Ph+c\).  These leave \(q,q',q''\)
+unchanged and so leave \(G_{m,\pm}\), \(N_m\), and
+\(\widehat\Om_\z\) unchanged; \(\Pi_\trans\) acts on
+\(\widehat\Om_\z\) and is therefore trivially invariant under this
+gauge.  Affine-jet shifts \(\Ph\mapsto\Ph+at\) change \(q\) to
+\(q+a\) and do not preserve the chart class; they are not chart
+symmetries.
+\end{remark}
+
+\begin{lemma}[Sufficient input for \S\ref{sec:projective-rigidity}]
+\label{lem:transverse-projection-sufficient}
+The transverse projection \(\Pi_\trans\) of
+Definition~\ref{def:transverse-projection},
+together with the scalar toy anomaly functional \(\mathcal A_\toy\) of
+Definition~\ref{def:toy-anomaly-functional}, supplies all input
+required by the comparison theorems of
+Section~\ref{sec:projective-rigidity}: the visibility lower bound
+\eqref{eq:toy-anomaly-visibility-A} transports through
+\(\Pi_\trans\) by
+Lemma~\ref{lem:transverse-projection-A-toy-compatibility}, and the
+operator-norm bound \(\|\Pi_\trans\|_{\op}=1\) of
+\eqref{eq:Pi-trans-norm} contributes no polynomial-in-\(Q\) loss.
+The actual-zeta upper bound consumed by
+Section~\ref{sec:projective-rigidity} is
+Hypothesis~\ref{hyp:zeta-suppression-two-point}
+of Section~\ref{sec:actual-zeta-transverse-suppression}.
+\end{lemma}
+
+\begin{proof}
+Combine
+Lemmas~\ref{lem:transverse-projection-properties}
+and~\ref{lem:transverse-projection-A-toy-compatibility} with
+Theorem~\ref{thm:toy-anomaly-visibility} and
+Corollary~\ref{cor:toy-visibility-polynomial-weight}.
+\end{proof}
