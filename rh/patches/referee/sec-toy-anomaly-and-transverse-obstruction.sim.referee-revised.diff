@@ -1,0 +1,131 @@
+--- /mnt/data/sec-toy-anomaly-and-transverse-obstruction(1).py	2026-05-02 19:48:17.645075016 +0000
++++ /mnt/data/sec-toy-anomaly-and-transverse-obstruction.sim.referee-revised.py	2026-05-02 19:54:34.437029217 +0000
+@@ -13,11 +13,12 @@
+   * Anomaly u^2 scaling: at fixed (d, q_0), fit
+     log |A_toy(Omega_toy)| against log u and assert slope ≈ 2 over the
+     range where the leading term dominates the O(u^4) remainder.
+-  * Anomaly lower bound on compact d-range at large q_0: assert
+-    |A_toy(Omega_toy(s; m, u))| >= c u^2 for d in a sampled compact D.
+-  * Height independence: at fixed (d, u), sweep q_0 in
+-    {q_0 = log(T)/2 : T in {1e4, 1e6, 1e8, 1e12}} and confirm
+-    A_toy(Omega_toy)/u^2 converges (visibility exponent A_toy = 0).
++  * Anomaly lower bound on compact d-range at several large q_0 values:
++    assert |A_toy(Omega_toy(s; m, u))| >= c u^2 for d in a sampled
++    compact D and q_0 in a sampled high-frequency ladder.
++  * q_0-independence of the exponent: at fixed (d,u), sweep q_0 directly
++    and confirm A_toy(Omega_toy)/u^2 remains bounded away from zero and
++    approaches the q_0 -> infinity coefficient F_inf(d).
+   * Sign-independence in u: A_toy(Omega_toy(s; m, u)) is even in u
+     (Lemma~\ref{lem:toy-anomaly-leading}, no u^1 term).
+   * Cross-check the empirical leading u^2 coefficient against the
+@@ -271,79 +272,70 @@
+ 
+ def check_anomaly_lower_bound_on_compact_d():
+     print("=" * 70)
+-    print("[eq:F-toy-lower-bound]  |A_toy| >= c u^2 on compact D, large q_0")
++    print("[eq:F-toy-lower-bound]  |A_toy| >= c u^2 on compact D, q_0 ladder")
+     print("=" * 70)
+     d_grid = [mpf(f"{p}") for p in (
+         "0.6", "0.8", "1.0", "1.2", "1.4", "1.6", "1.8", "2.0", "2.2"
+     )]
+-    q0 = mpf("20.0")
++    q0_grid = [mpf("20.0"), mpf("50.0"), mpf("100.0")]
+     u = mpf("0.01")
+-    min_ratio = None
+-    for d in d_grid:
+-        s = d / q0
+-        a = fabs(A_toy(s, mpf("0"), u, q0))
+-        ratio = a / u**2
+-        assert ratio > mpf("1e-3"), (
+-            f"|A_toy|/u^2 = {ratio} at d={d} (q0={q0}) too small"
+-        )
+-        if min_ratio is None or ratio < min_ratio:
+-            min_ratio = ratio
+-    print(f"  [PASS] min_d |A_toy|/u^2 >= {float(min_ratio):.4e} "
+-          f"on D = [0.6, 2.2] at q_0 = 20.")
++    global_min_ratio = None
++    for q0 in q0_grid:
++        min_ratio = None
++        for d in d_grid:
++            s = d / q0
++            a = fabs(A_toy(s, mpf("0"), u, q0))
++            ratio = a / u**2
++            assert ratio > mpf("1e-3"), (
++                f"|A_toy|/u^2 = {ratio} at d={d} (q0={q0}) too small"
++            )
++            min_ratio = ratio if min_ratio is None else min(min_ratio, ratio)
++            global_min_ratio = ratio if global_min_ratio is None else min(global_min_ratio, ratio)
++        print(f"  q0={float(q0):6.1f}: min_d |A_toy|/u^2 >= {float(min_ratio):.4e}")
++    print(f"  [PASS] global min over D and q_0 ladder >= {float(global_min_ratio):.4e}.")
+ 
+ 
+ def check_anomaly_height_independence():
+     print("=" * 70)
+-    print("[A_toy = 0 visibility exponent]  Height independence sweep")
++    print("[A_toy = 0 visibility exponent]  q_0-independence sweep")
+     print("=" * 70)
+     d = mpf("1.5")
+     u = mpf("0.01")
+-    # Take q0 ~ log T / 2 for various heights T = 1e4, 1e6, 1e8, 1e12.
+-    heights = [mpf("1e4"), mpf("1e6"), mpf("1e8"), mpf("1e12")]
++    q0_grid = [mpf("5.0"), mpf("10.0"), mpf("20.0"), mpf("50.0"), mpf("100.0")]
+     ratios = []
+     F_inf_at_d = F_inf_closed_form(d)
+     print(f"  d = {float(d):.2f}, F_inf(d) = {float(F_inf_at_d):.6f}")
+-    for T in heights:
+-        q0 = mp_log(T) / 2
++    for q0 in q0_grid:
+         s = d / q0
+         a = A_toy(s, mpf("0"), u, q0)
+         ratio = a / u**2
+-        ratios.append((T, q0, ratio))
+-        print(f"  T = {float(T):.1e}, q_0 = {float(q0):.4f}, "
+-              f"A_toy/u^2 = {float(ratio):.6f}")
+-    # As q_0 grows, A_toy/u^2 should approach F_inf(d) at rate O(1/q_0).
+-    # Convergence is slow at physical heights (q_0 ~ 5-15); the
+-    # assertion is therefore the structural claim of the visibility
+-    # theorem:
+-    #   (a) A_toy/u^2 has the same sign as F_inf(d) at every height;
+-    #   (b) |A_toy/u^2| is bounded between c_lo * |F_inf| and
+-    #       c_hi * |F_inf| at every height, with c_lo > 0;
+-    #   (c) the ratios approach F_inf monotonically as q_0 grows.
++        ratios.append((q0, ratio))
++        print(f"  q_0 = {float(q0):7.2f}, A_toy/u^2 = {float(ratio):.6f}")
+     abs_F = fabs(F_inf_at_d)
+     sign_F = +1 if F_inf_at_d > 0 else -1
+     prev_diff = None
+-    for (T, q0, ratio) in ratios:
++    for (q0, ratio) in ratios:
+         sign_ratio = +1 if ratio > 0 else -1
+         assert sign_ratio == sign_F, (
+-            f"Sign flip at T={T}, q0={q0}: ratio={ratio}, F_inf={F_inf_at_d}"
++            f"Sign flip at q0={q0}: ratio={ratio}, F_inf={F_inf_at_d}"
+         )
+-        # Bounded between 0.3 |F_inf| and 1.3 |F_inf|.  At the smallest
+-        # q_0 ≈ 4.6 the empirical ratio is ≈ 0.53 |F_inf|; at q_0 ≈ 14
+-        # it is ≈ 0.78 |F_inf|; far from 0 and well-bounded.
+         assert mpf("0.3") * abs_F <= fabs(ratio) <= mpf("1.3") * abs_F, (
+-            f"At T={T}, q0={q0}: |A_toy/u^2| = {fabs(ratio)}, "
++            f"At q0={q0}: |A_toy/u^2| = {fabs(ratio)}, "
+             f"out of [{0.3 * float(abs_F)}, {1.3 * float(abs_F)}]"
+         )
+         diff = fabs(ratio - F_inf_at_d)
+         if prev_diff is not None:
+             assert diff <= prev_diff + mpf("1e-6"), (
+-                f"Non-monotonic convergence at T={T}, q0={q0}: "
++                f"Non-monotonic convergence at q0={q0}: "
+                 f"prev diff={prev_diff}, current={diff}"
+             )
+         prev_diff = diff
+-    print(f"  [PASS] A_toy/u^2 has the same sign as F_inf, is bounded in "
+-          f"[0.3, 1.3] * |F_inf|, and converges monotonically to F_inf "
+-          f"as q_0 -> infinity (visibility exponent A_toy = 0).")
++    assert prev_diff / abs_F < mpf("0.05"), (
++        f"Final q0={q0_grid[-1]} relative error too large: {prev_diff / abs_F}"
++    )
++    print(f"  [PASS] A_toy/u^2 has the same sign as F_inf, remains bounded "
++          f"away from zero, and converges to F_inf as q_0 grows "
++          f"(visibility exponent A_toy = 0).")
+ 
+ 
+ def check_anomaly_sign_independence_in_u():

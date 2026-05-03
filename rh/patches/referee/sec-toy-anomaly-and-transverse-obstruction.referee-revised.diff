@@ -1,0 +1,284 @@
+--- /mnt/data/sec-toy-anomaly-and-transverse-obstruction.tex	2026-05-02 19:48:17.663851521 +0000
++++ /mnt/data/sec-toy-anomaly-and-transverse-obstruction.referee-revised.tex	2026-05-02 19:52:58.388202639 +0000
+@@ -143,23 +143,24 @@
+ \statuslean{not-started}
+ \par\medskip
+ 
+-The off-line toy phase \(\Ph_\toy\) defined below is a real-analytic
+-split-pair model carrying an explicit even-\(u^2\) deformation of the
+-linear baseline, with \(u=\beta-\tfrac12\) the off-line displacement.
+-Applying the finite-block package of
++The toy phase \(\Ph_\toy\) defined below is a real-analytic visibility
++model carrying an explicit even-\(u^2\) deformation of the linear
++baseline, with \(u=\beta-\tfrac12\) the off-line displacement parameter.
++It is not imported from the v1 toy matrix \(M(d)\); it replaces that
++matrix-level toy package by a scalar-functional toy package for the
++clean rebuild.  Applying the finite-block package of
+ Section~\ref{sec:finite-scale-local-blocks-and-whitening} to
+ \(\Ph_\toy\) produces a toy whitened block
+-\(\widehat\Om_\toy(s;m,u)\); the off-diagonal trace
++\(\widehat\Om_\toy(s;m,u)\).  The off-diagonal trace
+ \(\mathcal A_\toy\) of this block is identically zero on the on-line
+ baseline and has nonzero leading-\(u^2\) coefficient
+-\(F_\toy(d,q_0)\) with \(d=q_0\,s\) the dimensionless local
+-separation, converging uniformly on compacts to a
+-\(q_0\)-independent closed-form limit \(F_{\infty}(d)\) as
+-\(q_0\to\infty\).
+-This is the visibility lower bound consumed by
+-Section~\ref{sec:projective-rigidity}; the gauge-fixing projection
+-\(\Pi_\trans\) of Section~\ref{sec:transverse-projection} is the
+-further step under which the visibility statement transports verbatim.
++\(F_\toy(d,q_0)\), where \(d=q_0\,s\) is the dimensionless local
++separation.  As \(q_0\to\infty\), this coefficient converges uniformly
++on compact \(d\)-intervals to a \(q_0\)-independent closed-form limit
++\(F_{\infty}(d)\).  The gauge-fixing projection
++\(\Pi_\trans\) of Section~\ref{sec:transverse-projection} is a separate
++step; this section proves the scalar visibility input that such a
++projection must preserve.
+ 
+ \subsection{Off-line toy phase}
+ \label{subsec:off-line-toy-phase}
+@@ -195,10 +196,14 @@
+ \end{equation}
+ At \(\tau=0\),
+ \(q_\toy(0)=q_0\), \(q_\toy'(0)=u^2 q_0^{\,2}\),
+-\(q_\toy''(0)=0\).  The chart conditions \textup{(P1)--(P2)} of
+-Definition~\ref{def:local-phase-chart} hold whenever
+-\(q_0\,(1-u^2)\ge 1\); for \(|u|<1\) and \(q_0\ge 1/(1-u^2)\) this
+-is automatic.
++\(q_\toy''(0)=0\).  The toy phase is not the retained theta chart of
++Definition~\ref{def:local-phase-chart}; it is used only as a model
++phase.  Its positivity analogue is
++\[
++        q_\toy(\tau)\ge q_0(1-u^2),
++\]
++so the toy same-point blocks are safely in the positive-frequency regime
++whenever \(|u|<1\) and \(q_0(1-u^2)>0\).
+ \end{lemma}
+ 
+ \begin{proof}
+@@ -279,30 +284,39 @@
+ 
+ \begin{lemma}[Toy block positivity]
+ \label{lem:toy-block-positivity}
+-Fix a compact interval \(D=[d_-,d_+]\subset(0,\infty)\),
+-\(u_0\in(0,\tfrac12]\), and \(Q_0\ge 1\).  There exists
+-\(c_G(D,u_0,Q_0)>0\) such that whenever \(d=q_0\,s\in D\),
+-\(|u|\le u_0\), and \(q_0\ge Q_0\),
++Fix a compact interval \(D=[d_-,d_+]\subset(0,\infty)\) and
++\(Q_0\ge 1\).  There exist \(u_G=u_G(D,Q_0)\in(0,\tfrac12]\) and
++\(c_G(D,Q_0)>0\) such that whenever \(d=q_0\,s\in D\),
++\(|u|\le u_G\), and \(q_0\ge Q_0\),
+ \[
+         G_{\toy,\pm}(s;m,u)\succ 0,
+         \qquad
+-        \lambda_{\min}\bigl(G_{\toy,\pm}(s;m,u)\bigr)\;\ge\;c_G(D,u_0,Q_0).
++        \lambda_{\min}\bigl(G_{\toy,\pm}(s;m,u)\bigr)\;\ge\;c_G(D,Q_0).
+ \]
+ \end{lemma}
+ 
+ \begin{proof}
+-By \eqref{eq:q-pm-symmetric-split}, \(q_\pm=q_0(1+O(u^2))\),
+-\(q_\pm'=O(u^2 q_0^{\,2})\), \(q_\pm''=O(u^2 q_0^{\,3})\) uniformly
+-on the parameter rectangle.  The same-point determinant
+-\(D_J(t_\pm)=4q_\pm^{\,4}+2q_\pm q_\pm''-3 q_\pm'^{\,2}\) of
+-Definition~\ref{def:same-point-gram-determinant} satisfies
+-\(D_J(t_\pm)=4q_0^{\,4}(1+O(u^2))\) on the rectangle, hence is
+-positive uniformly for \(|u|\le u_0\) with \(u_0\) sufficiently small.
+-By Lemma~\ref{lem:algebraic-same-point-gram-criterion},
+-\(G_{\toy,\pm}\succ 0\), and the explicit eigenvalue lower bound from
+-the proof of Lemma~\ref{lem:same-point-gram-positivity} gives
+-\(\lambda_{\min}(G_{\toy,\pm})\ge \frac{2 q_\pm}{\pi}(1+O(u^2))\),
+-which is bounded below by a positive constant on the rectangle.
++Write \(r=u^2\), \(z=\sin(d/2)\), and \(c=\cos(d/2)\).  From
++\eqref{eq:q-pm-symmetric-split}, after factoring out the powers of
++\(q_0\), the normalized same-point determinant has the form
++\[
++q_0^{-4}D_J(t_\pm)
++=
++4(1\pm rz)^4 \mp 2rz(1\pm rz)-3r^2c^2.
++\]
++This expression converges uniformly to \(4\) as \(r\to0\), uniformly in
++\(d\in D\).  Decrease \(u_G\), if necessary, so that
++\(q_0^{-4}D_J(t_\pm)\ge 1\) and \(q_\pm\ge q_0/2\) for
++\(|u|\le u_G\).  By Lemma~\ref{lem:algebraic-same-point-gram-criterion},
++\(G_{\toy,\pm}\succ0\).  Also, on \(d\in D\) and \(|u|\le u_G\),
++\(\Tr G_{\toy,\pm}\le C(D,u_G)q_0^3\).  Therefore
++\[
++\lambda_{\min}(G_{\toy,\pm})
++\ge \frac{\det G_{\toy,\pm}}{\Tr G_{\toy,\pm}}
++\ge c(D,u_G)q_0
++\ge c(D,u_G)Q_0.
++\]
++Absorbing the last quantity into \(c_G(D,Q_0)\) gives the claim.
+ \end{proof}
+ 
+ \subsection{Toy anomaly functional and leading expansion}
+@@ -348,18 +362,18 @@
+ 
+ \begin{lemma}[Leading \(u^2\) expansion of the off-diagonal trace]
+ \label{lem:toy-anomaly-leading}
+-Fix a compact interval \(D=[d_-,d_+]\subset(0,\infty)\) and
+-\(Q_0\ge 1\).  There exist \(u_1=u_1(D,Q_0)>0\) and a function
+-\(F_\toy:(0,\infty)\times[Q_0,\infty)\to\mathbb R\) such that for every
+-\(0<|u|<u_1\), every \(q_0\ge Q_0\), and every
++Fix a compact interval \(D=[d_-,d_+]\subset(0,\infty)\).  There exist
++\(Q_1=Q_1(D)\ge1\), \(u_1=u_1(D)>0\), and a function
++\(F_\toy:D\times[Q_1,\infty)\to\mathbb R\) such that for every
++\(0<|u|<u_1\), every \(q_0\ge Q_1\), and every
+ \((m,s)\in\mathcal D_T^\times\) with \(d=q_0\,s\in D\),
+ \begin{equation}
+ \label{eq:toy-anomaly-leading}
+ \mathcal A_\toy\bigl(\widehat\Om_\toy(s;m,u)\bigr)
+ \;=\;u^2\,F_\toy(d,q_0)\;+\;u^4\,R_\toy(d,q_0,u),
+ \end{equation}
+-with \(|R_\toy(d,q_0,u)|\le C_R(D)\) uniformly on the rectangle
+-\(\{|u|\le u_1,\,d\in D,\,q_0\ge Q_0\}\).  The high-frequency limit
++with \(|R_\toy(d,q_0,u)|\le C_R(D)\) uniformly on the region
++\(\{|u|\le u_1,\,d\in D,\,q_0\ge Q_1(D)\}\).  The high-frequency limit
+ \begin{equation}
+ \label{eq:F-toy-asymptotic}
+         F_{\infty}(d)\;:=\;\lim_{q_0\to\infty}F_\toy(d,q_0)
+@@ -395,7 +409,7 @@
+ and \eqref{eq:Gpm}--\eqref{eq:Nm}.  By
+ Lemma~\ref{lem:toy-block-positivity},
+ \(G_{\toy,\pm}(s;m,u)^{-1/2}\) is real-analytic in \(u^2\) on the
+-parameter rectangle (continuity of the SPD inverse-square-root map).
++parameter region (real-analyticity of the SPD inverse-square-root map on the positive-definite cone).
+ Hence \(\widehat\Om_\toy(s;m,u)\) and the scalar
+ \(\mathcal A_\toy(\widehat\Om_\toy(s;m,u))\) are real-analytic in
+ \(u^2\), with \(u^0\) coefficient zero by
+@@ -408,30 +422,29 @@
+ \(G_{\toy,\pm}=G_{\toy,\pm}^{(0)}+u^2\,G_{\toy,\pm}^{(2)}+O(u^4)\) of
+ \eqref{eq:Gpm} with the toy substitutions of
+ \eqref{eq:q-pm-symmetric-split} and to \(N_\toy\) of
+-Definition~\ref{def:toy-finite-blocks}, yields a rational expression
+-in \((\sin d,\cos d,\sin(d/2),\cos(d/2),q_0)\) with denominator
+-\(8\,d^{\,3}\,(q_0^{\,2}-12)\,\sin(d/2)\).  The numerator is a
+-polynomial of degree \(\le 2\) in \(q_0\) with trigonometric
+-coefficients in \(d\).  Taking \(q_0\to\infty\) extracts the leading
+-\(q_0^{\,2}\) term in numerator and denominator, giving
++Definition~\ref{def:toy-finite-blocks}, yields an explicit expression
++for \(F_\toy(d,q_0)\) in
++\((\sin d,\cos d,\sin(d/2),\cos(d/2),q_0)\).  After choosing
++\(Q_1(D)\) large enough, this expression is regular for
++\(d\in D\), \(q_0\ge Q_1(D)\), has a finite \(q_0\to\infty\) limit
++uniformly on \(D\), and the limiting expression is
+ \eqref{eq:F-toy-closed-form}.
+ 
+ The factor \(\sin(d/2)\) of the denominator of
+ \eqref{eq:F-toy-closed-form} vanishes at \(d=2\pi k\),
+ \(k\in\mathbb Z_{\ge 1}\); the trigonometric numerator vanishes at
+-the same points (verified by substitution: at \(d=2\pi\) the bracket
+-in \eqref{eq:F-toy-closed-form} evaluates to
+-\(8\pi^{\,2}+20\pi^{\,2}-28\pi^{\,2}+0-0-12+12=0\)), so the apparent
+-poles are removable and \(F_{\infty}\) extends real-analytically to
+-\((0,\infty)\).  On any compact subinterval avoiding the zeros of
++the same points.  Expanding the numerator at each \(d=2\pi k\) shows a
++factor of \(\sin(d/2)\), so the apparent poles are removable and
++\(F_{\infty}\) extends real-analytically to \((0,\infty)\).  On any compact subinterval avoiding the zeros of
+ \(F_{\infty}\), the difference \(F_\toy(d,q_0)-F_{\infty}(d)\) is
+ \(O(1/q_0)\) uniformly; for \(q_0\) sufficiently large
+ \(|F_\toy(d,q_0)|\ge \tfrac12|F_{\infty}(d)|\), giving
+-\eqref{eq:F-toy-lower-bound}.  The remainder \(R_\toy\) is the
+-\(u^4\)-and-higher coefficient of the real-analytic expansion; its
+-uniform bound on the rectangle follows by analyticity of the SPD
+-inverse-square-root map on the compact positive-definite cone fixed
+-by Lemma~\ref{lem:toy-block-positivity}.
++\eqref{eq:F-toy-lower-bound}.  The remainder \(R_\toy\) is the \(u^4\)-and-higher coefficient of the
++real-analytic expansion.  The same explicit formulas used to compute
++\(F_\toy\), together with Lemma~\ref{lem:toy-block-positivity}, show that
++these coefficients are uniformly bounded for \(d\in D\), \(|u|\le u_1\),
++and \(q_0\ge Q_1(D)\), after decreasing \(u_1\) and increasing
++\(Q_1(D)\) if necessary.
+ \end{proof}
+ 
+ \subsection{Toy anomaly visibility}
+@@ -440,10 +453,12 @@
+ \begin{theorem}[Toy anomaly visibility]
+ \label{thm:toy-anomaly-visibility}
+ Let \(D\subset(0,\infty)\) be a compact interval avoiding the
+-isolated zeros of \(F_\toy\) of
+-Lemma~\ref{lem:toy-anomaly-leading}.  For every off-line displacement
+-\(u=\beta-\tfrac12\in\mathbb R\) with \(|u|\) sufficiently small and
+-every \((m,s)\in\mathcal D_T^\times\) with \(d=q_0\,s\in D\), the toy
++isolated zeros of \(F_{\infty}\) of
++Lemma~\ref{lem:toy-anomaly-leading}.  There are constants
++\(Q_\toy(D)\ge1\) and \(u_\toy(D)>0\) such that, for every off-line
++displacement \(u=\beta-\tfrac12\in\mathbb R\) with \(0<|u|\le u_\toy(D)\),
++every \(q_0\ge Q_\toy(D)\), and every \((m,s)\in\mathcal D_T^\times\)
++with \(d=q_0\,s\in D\), the toy
+ whitened block \(\widehat\Om_\toy(s;m,u)\) of
+ Definition~\ref{def:toy-whitened-block} satisfies
+ \begin{equation}
+@@ -460,38 +475,55 @@
+ \end{theorem}
+ 
+ \begin{proof}
+-Choose \(u_1\) as in Lemma~\ref{lem:toy-anomaly-leading} and require
+-\(|u|\le \min\{u_0,u_1\}\) so that
+-Lemmas~\ref{lem:toy-block-positivity}
+-and~\ref{lem:toy-anomaly-leading} both apply.  By
++Choose \(Q_\toy(D)\ge Q_1(D)\).  Apply Lemma~\ref{lem:toy-block-positivity}
++with \(Q_0=Q_\toy(D)\), and let \(u_G(D,Q_\toy(D))\) be its smallness
++threshold.  Choose
++\[
++        u_\toy(D)\le \min\{u_1(D),u_G(D,Q_\toy(D))\}
++\]
++small enough that both lemmas apply.  By
+ \eqref{eq:toy-anomaly-leading} and \eqref{eq:F-toy-lower-bound},
+ \[
+ \bigl|\mathcal A_\toy\bigl(\widehat\Om_\toy(s;m,u)\bigr)\bigr|
+ \;\ge\;
+ u^2\bigl(c_\toy(D)-u^2\,C_R(D)\bigr).
+ \]
+-Decreasing \(u_1\) so that \(u_1^{\,2}\,C_R(D)\le c_\toy(D)/2\) gives
++Decreasing \(u_\toy(D)\) so that \(u_\toy(D)^{\,2}\,C_R(D)\le c_\toy(D)/2\) gives
+ \eqref{eq:toy-anomaly-visibility-A}.
+ \end{proof}
+ 
+ \begin{remark}[Transverse projection deferred]
+ \label{rem:toy-Pi-trans-deferred}
+ The functional \(\mathcal A_\toy\) annihilates the on-line baseline
+-(Lemma~\ref{lem:A-toy-baseline-vanishing}) and, after
+-Definition~\ref{def:transverse-projection} of
+-Section~\ref{sec:transverse-projection} fixes the gauge,
+-\(\mathcal A_\toy=\mathcal A_\toy\circ\Pi_\trans\) on the retained
+-packets used in this theorem.  The visibility bound
+-\eqref{eq:toy-anomaly-visibility-A} therefore transports verbatim to
+-the \(\Pi_\trans\)-projected form invoked in the comparison theorems
+-of Section~\ref{sec:projective-rigidity}, with the same exponent
+-\(A_\toy=0\) and the same constant \(c_\toy(D)/2\).
++(Lemma~\ref{lem:A-toy-baseline-vanishing}).  The later projection
++\(\Pi_\trans\) must be chosen so that this scalar functional descends to
++or is represented on the retained transverse quotient.  Once
++Section~\ref{sec:transverse-projection} proves that compatibility, the
++visibility bound \eqref{eq:toy-anomaly-visibility-A} transfers to the
++\(\Pi_\trans\)-projected comparison with the same exponent
++\(A_\toy=0\).  This compatibility is not proved in the present section.
++\end{remark}
++
++
++\begin{remark}[Compatibility with the archived v1 toy matrix]
++\label{rem:toy-phase-v1-compatibility}
++The toy phase \eqref{eq:toy-phase} is a replacement toy for the clean
++scalar-functional rebuild.  It is not the archived v1 matrix \(M(d)\),
++and this section does not import the v1 calibration map
++\(\Psi_{x,d}\) or the Frobenius pairings with \(A_{\val}\).  Consequently
++this change is isolated for the present rebuild through
++Sections~\ref{sec:transverse-projection}--\ref{sec:projective-rigidity},
++where only the scalar functional \(\mathcal A_\toy\), the exponent
++\(A_\toy=0\), and the lower bound \eqref{eq:toy-anomaly-visibility-A}
++are consumed.  Any later attempt to import a v1 theorem that explicitly
++uses \(M(d)\), \(\Phi_K(M(d))\), \(A_{\val}\), or \(\Psi_{x,d}\) must be
++rederived for the present toy phase or kept in the archive.
+ \end{remark}
+ 
+ \begin{wip}\label{rem:wip-toy-anomaly-uniform-remainder}
+ The bound \eqref{eq:toy-anomaly-visibility-A} is stated on compact
+ intervals \(D\subset(0,\infty)\) avoiding the isolated zeros of
+-\(F_\toy\); a uniform extension to the entire retained subset
++\(F_{\infty}\); a uniform extension to the entire retained subset
+ (allowing \(d\to 0\), \(d\to\infty\), or \(d\) approaching a
+ zero along the polynomial-weight sample) requires a sharper analysis
+ of the \(O(u^4)\) remainder \(R_\toy\) of

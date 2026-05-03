@@ -12,8 +12,9 @@ Coverage:
   * Whitening-loss sweep: ||G_{m,±}(s)^{-1/2}||_op tracked across
     midpoints and separations; fit and assert C_W = 0
     (||.||_op bounded by an absolute constant).
-  * lambda_min(G_{m,±}) polynomial-in-Q floor: confirm
-    lambda_min(G) >= 2 q(t_±) / pi  (1 + o(1)) on the retained set.
+  * lambda_min(G_{m,±}) asymptotic floor: confirm
+    lambda_min(G) = 2 q(t_±) / pi (1 + o(1)), equivalently
+    lambda_min(G) >= 2 q(t_±) / pi (1 - delta_T) on the retained set.
   * Coalescence Omega(0; m) = I_2 numerically across heights.
   * Independent-route check for G^{-1/2}: closed-form
     Cayley-Hamilton SPD square root vs mpmath.sqrtm.
@@ -406,12 +407,14 @@ def _check_omega_coalescence_at(T):
     """Single-T helper: confirms Omega_hat(s -> 0; T) = I_2.  Returns
     the smallest-s error so the caller can summarize."""
     m = T
-    s_grid = [mpf(10) ** k for k in (-1, -2, -3, -4, -5)]
+    Q = mp_log(T)
+    # Keep the coalescence samples inside the finite packet domain
+    # I_T = [T - 1/Q, T + 1/Q] by taking s <= 0.1/Q.
+    s_grid = [(mpf("0.1") / Q) * (mpf(10) ** k) for k in (0, -1, -2, -3, -4)]
     I2 = mp_eye(2)
     errs = []
-    s_powers = [-1, -2, -3, -4, -5]
     print(f"  T = {float(T):.0e}: " + ", ".join(
-        f"s=1e{p:+d}" for p in s_powers))
+        f"s={float(s):.2e}" for s in s_grid))
     for s in s_grid:
         t_minus = m - s / 2
         t_plus = m + s / 2
@@ -447,9 +450,9 @@ def check_omega_coalescence_numerical(T_values=(mpf("1e3"), mpf("1e4"),
     for T in T_values:
         final_errs[T] = _check_omega_coalescence_at(T)
         print()
-    print("  Smallest-s (s = 1e-5) error per height:")
+    print("  Smallest-s error per height:")
     for T in T_values:
-        print(f"    T = {float(T):.0e}: |Omega(1e-5; T) - I_2| = "
+        print(f"    T = {float(T):.0e}: final |Omega(s; T) - I_2| = "
               f"{float(final_errs[T]):.4e}")
     print()
     print("  [PASS] Omega_hat(s; m) -> I_2 as s -> 0 at every tested T.")

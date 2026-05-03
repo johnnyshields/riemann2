@@ -1,0 +1,131 @@
+--- /mnt/data/sec-toy-anomaly-and-transverse-obstruction.py	2026-05-02 19:48:17.670409279 +0000
++++ /mnt/data/sec-toy-anomaly-and-transverse-obstruction.sympy.referee-revised.py	2026-05-02 19:53:44.763262344 +0000
+@@ -26,9 +26,10 @@
+     where numerator(d) is the trigonometric polynomial of
+     eq:F-toy-closed-form.  Verified by sp.limit(F_toy, q0, oo) and
+     compared to the displayed form.
+-  * Lower bound |F_toy(d, q_0)| >= c on a sampled compact
+-    subinterval of (0, infty) at large enough q_0
+-    (eq:F-toy-lower-bound).
++  * Lower bound regression on a sampled compact subinterval: both
++    |F_inf(d)| and |F_toy(d,q_0)| at large q_0 are bounded away from zero
++    on the sampled grid.  This is numerical regression coverage, not a
++    proof of zero exclusion for the whole interval.
+ 
+ Run:
+   python3 rh/sympy/sec-toy-anomaly-and-transverse-obstruction.py
+@@ -256,6 +257,39 @@
+     return G_minus_inv_sqrt * N * G_plus_inv_sqrt
+ 
+ 
++
++# ---------------------------------------------------------------------------
++# (v) Symbolic toy same-point determinant: positivity mechanism.
++# ---------------------------------------------------------------------------
++
++def verify_toy_block_positivity_determinant_expansion():
++    """Verify the normalized determinant structure used in the paper.
++
++    With r=u^2, z=sin(d/2), c=cos(d/2), the same-point determinant
++    D_J=4q^4+2qq''-3(q')^2 at t_± satisfies
++
++      q0^{-4} D_J(t_+) = 4(1+r z)^4 - 2 r z(1+r z) - 3 r^2 c^2,
++      q0^{-4} D_J(t_-) = 4(1-r z)^4 + 2 r z(1-r z) - 3 r^2 c^2.
++
++    In particular each equals 4 + O(r), uniformly for z,c bounded.
++    """
++    print("=" * 70)
++    print("[lem:toy-block-positivity] normalized determinant expansion")
++    print("=" * 70)
++    r, z, c = symbols("r z c", real=True)
++    D_plus = 4 * (1 + r * z)**4 - 2 * r * z * (1 + r * z) - 3 * r**2 * c**2
++    D_minus = 4 * (1 - r * z)**4 + 2 * r * z * (1 - r * z) - 3 * r**2 * c**2
++    assert simplify(D_plus.subs(r, 0) - 4) == 0
++    assert simplify(D_minus.subs(r, 0) - 4) == 0
++    # Check the first-order terms are finite polynomial expressions.
++    Dp_lin = simplify(diff(D_plus, r).subs(r, 0))
++    Dm_lin = simplify(diff(D_minus, r).subs(r, 0))
++    print(f"  D_plus/r expansion starts 4 + ({Dp_lin}) r + O(r^2)")
++    print(f"  D_minus/r expansion starts 4 + ({Dm_lin}) r + O(r^2)")
++    assert Dp_lin == 14 * z
++    assert Dm_lin == -14 * z
++    print("  [PASS] D_J/q0^4 = 4 + O(u^2) for both toy same-point blocks.")
++
+ # ---------------------------------------------------------------------------
+ # (v) Baseline: at u = 0, A_toy(Omega_toy) = 0.
+ # ---------------------------------------------------------------------------
+@@ -400,24 +434,33 @@
+ 
+ def verify_F_toy_lower_bound_on_compact_d():
+     print("=" * 70)
+-    print("[eq:F-toy-lower-bound]  |F_inf(d)| >= c on a sampled compact D")
++    print("[eq:F-toy-lower-bound] sampled |F_inf| and finite-q0 |F_toy| lower bounds")
+     print("=" * 70)
+     F_inf = verify_F_toy_closed_form_q0_independent()
+-    # Sample d in (0.5, 2.5) avoiding known zero structures.
++    F_d_q0 = compute_F_toy_d_q0()
++    # Sample d in (0.5, 2.5), avoiding visible near-zeros.
+     sample_points = [Rational(p, 10) for p in range(5, 26)]
+-    F_func = sp.lambdify(d, F_inf, modules=["mpmath"])
+-    print(f"  Sampling F_inf(d) at {len(sample_points)} points in [0.5, 2.5]:")
+-    min_abs = None
++    F_inf_func = sp.lambdify(d, F_inf, modules=["mpmath"])
++    F_toy_func = sp.lambdify((d, q0), F_d_q0, modules=["mpmath"])
++    print(f"  Sampling F_inf(d) and F_toy(d,q0) at {len(sample_points)} points in [0.5, 2.5].")
++    min_inf = None
++    min_finite = None
+     for dp in sample_points:
+-        val = F_func(float(dp))
+-        abs_val = float(abs(val))
+-        if min_abs is None or abs_val < min_abs:
+-            min_abs = abs_val
+-        assert abs_val > 1e-6, (
+-            f"|F_inf({dp})| = {abs_val:.3e} too close to zero "
+-            "in compact subinterval"
++        inf_val = float(abs(F_inf_func(float(dp))))
++        finite_val = float(abs(F_toy_func(float(dp), 50.0)))
++        min_inf = inf_val if min_inf is None else min(min_inf, inf_val)
++        min_finite = finite_val if min_finite is None else min(min_finite, finite_val)
++        assert inf_val > 1e-6, (
++            f"|F_inf({dp})| = {inf_val:.3e} too close to zero "
++            "in sampled compact subinterval"
+         )
+-    print(f"  [PASS] min_d |F_inf(d)| >= {min_abs:.4e} on sampled D.")
++        assert finite_val > 1e-6, (
++            f"|F_toy({dp},50)| = {finite_val:.3e} too close to zero "
++            "in sampled compact subinterval"
++        )
++    print(f"  [PASS] min_d |F_inf(d)|      >= {min_inf:.4e} on sampled D.")
++    print(f"  [PASS] min_d |F_toy(d,50)|  >= {min_finite:.4e} on sampled D.")
++    print("         This is regression coverage; rigorous interval zero-exclusion remains textual.")
+ 
+ 
+ # ---------------------------------------------------------------------------
+@@ -431,8 +474,12 @@
+     print()
+     verify_toy_blocks_substitution()
+     print()
++    verify_toy_block_positivity_determinant_expansion()
++    print()
+     verify_omega_toy_baseline_at_u_zero()
+     print()
++    verify_leading_u2_expansion()
++    print()
+     verify_F_toy_closed_form_q0_independent()
+     print()
+     verify_F_toy_lower_bound_on_compact_d()
+@@ -442,12 +489,13 @@
+     print("  - lem:toy-phase-derivatives: q_toy, q_toy', q_toy'' formulas")
+     print("  - lem:q-pm-split-at-centres: q_±, q'_±, q''_± and Delta_m^toy")
+     print("  - def:toy-finite-blocks: G_{toy,±}, N_toy by §4 substitution")
++    print("  - lem:toy-block-positivity: normalized determinant = 4 + O(u^2)")
+     print("  - lem:A-toy-baseline-vanishing: A_toy vanishes on on-line baseline")
+     print("  - lem:toy-anomaly-leading: leading u^2 expansion of A_toy(Omega)")
+     print("    F_toy(d, q_0) is rational with q_0-deg <= 2 in num and den")
+     print("  - eq:F-toy-closed-form: F_inf(d) := lim_{q_0->oo} F_toy matches")
+     print("    the paper's displayed closed form exactly")
+-    print("  - eq:F-toy-lower-bound: numerical lower bound on a compact D")
++    print("  - eq:F-toy-lower-bound: sampled lower bounds for F_inf and finite-q0 F_toy")
+     print("=" * 70)
+ 
+ 

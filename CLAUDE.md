@@ -113,6 +113,7 @@ Applies to every edit of `rh/rh_rebuild.tex`, including section migrations, refi
 - Meta-commentary about authorship, agent names, referee reports, or `proof_of_rh.tex` history.  Provenance, if strictly required, goes outside the paper (lore, commit message, or a separate provenance block under `lore/`); avoid adding it to the paper at all.
 - Per-lemma "Symbolic verification: \texttt{...}" remarks.  Put script paths in the section-header status macros (`\statussympy[<path>]{...}`, etc.) instead.
 - "We" pronouns where the passive or a definite construction works.
+- Mentions of sympy, simulation, mpmath, Lean, or any verification script anywhere in the body of `rh_rebuild.tex` (or in section-replacement patches under `rh/patches/`), including in remark text, lemma proofs, and prose.  The only place these may appear is the section-header status macros (`\statussympy[<path>]{...}`, `\statussim[<path>]{...}`, `\statuslean[<path>]{...}`) and inside `wip` remarks (which are temporary and will be removed when the gap closes).  Closed-form formulas verified by sympy must either be displayed in the paper directly or recorded silently in the script — not gestured to with phrases like "the closed form is recorded in the script" inside a non-`wip` remark.
 
 **Wips and conditionals.** The goal is a *full unconditional proof*.  Every `\begin{wip}` in `rh_rebuild.tex` is an explicit liability, and every `\begin{hypothesis}` carried into a closure step makes the whole closure conditional.  When a gap surfaces:
 

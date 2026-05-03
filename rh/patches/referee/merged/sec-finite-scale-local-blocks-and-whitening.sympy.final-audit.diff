@@ -1,0 +1,114 @@
+--- /mnt/data/sec-finite-scale-local-blocks-and-whitening(3).py	2026-05-02 18:43:10.526153682 +0000
++++ /mnt/data/sec-finite-scale-local-blocks-and-whitening.sympy.final-audit.py	2026-05-02 18:45:25.018040044 +0000
+@@ -12,17 +12,16 @@
+   * Removable singularity of N_m(s) at s = 0:
+         N_m(0) = J(m)
+     (lem:Nm-removable-singularity).
+-  * Coalescence: Omega_zeta_hat(0; m) = I_2 (cor:omega-coalescence).
++  * Signed-s convention: N_m(-s) = N_m(s)^T under t_+ <-> t_-
++    (regression guard for def:finite-packet-domain).
++  * Coalescence: Omega_zeta_hat(0; m) = I_2 (cor:omega-coalescence),
++    using the generic 2x2 SPD inverse-square-root identity.
+   * Whitening loss: ||G_{m,±}(s)^{-1/2}||_op = lambda_min(G)^{-1/2}, and
+     the closed-form 2x2 inverse-square-root formula
+     (lem:whitening-loss).
+-  * Independent route: G^{-1/2} via diagonalization vs the analytic
+-    closed-form
+-
+-        G^{-1/2} = (G + sqrt(det G) I) / sqrt(Tr G + 2 sqrt(det G))   -1
+-            (positive-definite branch).
+-
+-    Both routes match symbolically.
++  * Independent route: the generic Cayley-Hamilton identity is checked
++    symbolically; the comparison with numerical diagonalization/sqrtm is
++    a regression check at one positive-definite sample point.
+ 
+ Run:
+   python3 rh/sympy/sec-finite-scale-local-blocks-and-whitening.py
+@@ -146,6 +145,50 @@
+     print("  [PASS] Cross-block substitution clean.")
+ 
+ 
++
++# ---------------------------------------------------------------------------
++# (iii) Signed-s orientation convention: N_m(-s) = N_m(s)^T.
++# ---------------------------------------------------------------------------
++
++def verify_signed_s_symmetry():
++    """Verify the signed-s convention used in def:finite-packet-domain.
++
++    Under s -> -s, the two centers t_- and t_+ are swapped and
++    Delta_m(-s)=-Delta_m(s).  Since K_Phi is symmetric, the mixed
++    derivative block should transpose:
++
++        N_m(-s) = N_m(s)^T.
++    """
++    print("=" * 70)
++    print("[signed-s convention]  N_m(-s) = N_m(s)^T")
++    print("=" * 70)
++    s, D = symbols("s Delta", real=True)
++    qmin, qplus = symbols("q_minus q_plus", real=True)
++
++    def Nm_unscaled(s_, D_, qm_, qp_):
++        return Matrix([
++            [
++                -2 * sin(D_) / s_,
++                (sin(D_) + qp_ * s_ * cos(D_)) / s_**2,
++            ],
++            [
++                -(sin(D_) + qm_ * s_ * cos(D_)) / s_**2,
++                ((qm_ + qp_) * s_ * cos(D_)
++                 + (2 - qm_ * qp_ * s_**2) * sin(D_)) / (2 * s_**3),
++            ],
++        ])
++
++    N_pos = Nm_unscaled(s, D, qmin, qplus)
++    # Reversing s swaps q_- and q_+, and sends Delta to -Delta.
++    N_neg = Nm_unscaled(-s, -D, qplus, qmin)
++    diff_sym = (N_neg - N_pos.T).applyfunc(lambda e: trigsimp(simplify(e)))
++    print()
++    print("  Difference N_m(-s) - N_m(s)^T:")
++    sp.pprint(diff_sym)
++    assert diff_sym == zeros(2, 2), f"signed-s transpose identity failed: {diff_sym}"
++    print()
++    print("  [PASS] Signed-s orientation is compatible with transposition.")
++
+ # ---------------------------------------------------------------------------
+ # (iii) q_± Taylor expansion sign pattern (proof regression guard).
+ # ---------------------------------------------------------------------------
+@@ -338,7 +381,8 @@
+     Omega_simplified = simplify(Omega)
+ 
+     print()
+-    print("  Computing G^{-1/2} J(m) G^{-1/2} symbolically (q, q', q'' free):")
++    print("  Representative positive-definite specialization of G^{-1/2}J(m)G^{-1/2}:")
++    print("  (The generic SPD identity is verified in verify_generic_SPD_inverse_sqrt.)")
+     print()
+     # Test by specializing to a simple positive-definite J(m): use q = 5,
+     # q' = 1/100, q'' = -1/200 to mirror the theta asymptotic at large T.
+@@ -352,7 +396,7 @@
+     assert err == 0, f"Omega coalescence test failed: {err}"
+     print()
+     print("  [PASS] Omega_zeta_hat(0; m) = I_2 at the tested point.")
+-    print("         Symbolic identity G^{-1/2} G G^{-1/2} = I_2 in dimension 2.")
++    print("         Generic symbolic coverage is supplied by the 2x2 SPD identity below.")
+ 
+ 
+ # ---------------------------------------------------------------------------
+@@ -507,6 +551,8 @@
+     print()
+     verify_Nm_matches_cross_block()
+     print()
++    verify_signed_s_symmetry()
++    print()
+     verify_q_pm_taylor_signs()
+     print()
+     verify_Nm_removable_singularity()
+@@ -523,6 +569,7 @@
+     print("All §4 lemmas verified symbolically:")
+     print("  - lem:finite-blocks-exact-interpretation: G_{m,±}(s) = J(t_±),")
+     print("    N_m(s) = (1/pi) N_12(t_-, t_+) cross-block substitution")
++    print("  - signed-s convention: N_m(-s) = N_m(s)^T")
+     print("  - q_± Taylor signs: q_+ has +linear, q_- has -linear, both have")
+     print("    +quadratic (proof regression guard)")
+     print("  - lem:Nm-removable-singularity: N_m(0) = J(m), entry by entry")
