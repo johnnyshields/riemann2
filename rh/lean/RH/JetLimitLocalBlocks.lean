@@ -262,6 +262,63 @@ private lemma jet_matrix_apply_11 (T h : ℝ) (h_pos : 0 < h) :
   field_simp
   ring
 
+/-- `J(T)` entry values. -/
+private lemma J_apply (T : ℝ) :
+    J T 0 0 = 2 * q T / Real.pi ∧
+    J T 0 1 = qPrime T / (2 * Real.pi) ∧
+    J T 1 0 = qPrime T / (2 * Real.pi) ∧
+    J T 1 1 = (qDoublePrime T + 2 * (q T)^3) / (12 * Real.pi) := by
+  have hπ_ne : Real.pi ≠ 0 := Real.pi_ne_zero
+  refine ⟨?_, ?_, ?_, ?_⟩ <;>
+    (unfold J; simp [Matrix.smul_apply, smul_eq_mul]; field_simp)
+
+/-- Bound on entry `(0, 1)` of `P_h A_h(T) P_h^⊤ − J(T)` is `O(h²)`. -/
+private lemma rate_bound_01 (T : ℝ) :
+    ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, 0 < h → h ≤ 1 →
+      |(pointToJetTransform h * samePointBlock T h *
+          (pointToJetTransform h).transpose - J T) 0 1| ≤ M * h^2 := by
+  obtain ⟨K_q, hK_q_nn, hK_q⟩ := q_taylor_remainder_2 T
+  obtain ⟨_, hJ_01, _, _⟩ := J_apply T
+  refine ⟨K_q / (2 * Real.pi), by positivity, ?_⟩
+  intro h h_pos h_le
+  rw [Matrix.sub_apply, jet_matrix_apply_01 T h h_pos, hJ_01]
+  have hπ_pos : 0 < Real.pi := Real.pi_pos
+  have hh_ne : h ≠ 0 := h_pos.ne'
+  have h_pos_abs : |h| ≤ 1 := by rw [abs_of_pos h_pos]; exact h_le
+  have h_neg_abs : |(-h)| ≤ 1 := by rw [abs_neg]; exact h_pos_abs
+  have h_taylor_p := hK_q h h_pos_abs
+  have h_taylor_m := hK_q (-h) h_neg_abs
+  have h_T_m : T + (-h) = T - h := by ring
+  rw [h_T_m] at h_taylor_m
+  have habs_h : |h|^3 = h^3 := by rw [abs_of_pos h_pos]
+  have habs_neg_h : |(-h)|^3 = h^3 := by rw [abs_neg, abs_of_pos h_pos]
+  rw [habs_h] at h_taylor_p
+  rw [habs_neg_h] at h_taylor_m
+  -- Key bound: |q(T+h) - q(T-h) - 2 qPrime T h| ≤ 2 K_q h^3.
+  have h_abs_diff : |q (T + h) - q (T - h) - 2 * qPrime T * h| ≤ 2 * K_q * h^3 := by
+    have heq : q (T + h) - q (T - h) - 2 * qPrime T * h =
+        (q (T + h) - (q T + qPrime T * h + qDoublePrime T * h^2/2)) -
+        (q (T - h) - (q T + qPrime T * (-h) + qDoublePrime T * (-h)^2/2)) := by ring
+    rw [heq]
+    have htri := abs_sub
+      (q (T + h) - (q T + qPrime T * h + qDoublePrime T * h^2/2))
+      (q (T - h) - (q T + qPrime T * (-h) + qDoublePrime T * (-h)^2/2))
+    linarith
+  -- |(q(T+h) - q(T-h))/(4πh) - qPrime T/(2π)| = |(q(T+h) - q(T-h) - 2 qPrime T h)/(4πh)|
+  have h_eq : (q (T + h) - q (T - h)) / (4 * Real.pi * h) - qPrime T / (2 * Real.pi) =
+      (q (T + h) - q (T - h) - 2 * qPrime T * h) / (4 * Real.pi * h) := by
+    field_simp
+    ring
+  rw [h_eq]
+  rw [abs_div]
+  rw [abs_of_pos (by positivity : 0 < 4 * Real.pi * h)]
+  rw [div_le_iff₀ (by positivity : 0 < 4 * Real.pi * h)]
+  calc |q (T + h) - q (T - h) - 2 * qPrime T * h|
+      ≤ 2 * K_q * h^3 := h_abs_diff
+    _ = K_q / (2 * Real.pi) * h^2 * (4 * Real.pi * h) := by
+        field_simp
+        ring
+
 /-- Same-point jet-limit with explicit `O(h²)` rate.  Entrywise:
     there is `M ≥ 0` such that for `h ∈ (0, 1]` and each entry `(i, j)`
     of `Fin 2 × Fin 2`,
