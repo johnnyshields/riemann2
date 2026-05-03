@@ -305,6 +305,12 @@ def q_zeta_asymp(t):
     return mp_log(t / (2 * MP_PI)) / 2 - 1 / (48 * t**2)
 
 
+def Phi_toy(t, u, m0, q0):
+    """Toy phase Phi_toy(t; u, m_0, q_0) = q_0 (t - m_0) + u^2 (1 - cos(q_0 (t - m_0)))."""
+    t = mpf(t); u = mpf(u); m0 = mpf(m0); q0 = mpf(q0)
+    return q0 * (t - m0) + u**2 * (1 - mp_cos(q0 * (t - m0)))
+
+
 def q_toy(tau, u, q0):
     """Toy phase derivative q_toy(tau) = q_0 + u^2 q_0 sin(q_0 tau)."""
     return q0 + u**2 * q0 * mp_sin(q0 * tau)
@@ -455,6 +461,122 @@ def check_pi_trans_on_toy_block_off_line():
 
 
 # ---------------------------------------------------------------------------
+# Coverage of remaining §6 claims: self-adjointness, A_2 quotient
+# well-definedness, residual gauge invariance.
+# ---------------------------------------------------------------------------
+
+def check_pi_trans_self_adjoint_mp():
+    """lem:transverse-projection-properties (self-adjoint).
+
+    Verify <Pi_trans X, Y>_HS = <X, Pi_trans Y>_HS on samples.
+    """
+    print("=" * 70)
+    print("[lem:transverse-projection-properties]  "
+          "Pi_trans = Pi_trans^* (HS)")
+    print("=" * 70)
+    pairs = [
+        (mp_matrix([[mpf("1.7"), mpf("-2.1")], [mpf("0.4"), mpf("3.3")]]),
+         mp_matrix([[mpf("0.5"), mpf("1.2")], [mpf("-0.7"), mpf("2.0")]])),
+        (mp_matrix([[mpf("100"), mpf("0.5")], [mpf("-0.5"), mpf("-100")]]),
+         mp_matrix([[mpf("0.001"), mpf("3")], [mpf("-2"), mpf("0.05")]])),
+        (mp_matrix([[mpf("0"), mpf("1.234")], [mpf("5.678"), mpf("0")]]),
+         mp_matrix([[mpf("9.9"), mpf("-0.4")], [mpf("0.4"), mpf("-9.9")]])),
+    ]
+    eps = mpf("1e-30")
+    for X, Y in pairs:
+        lhs = hs_inner(Pi_trans(X), Y)
+        rhs = hs_inner(X, Pi_trans(Y))
+        delta = fabs(lhs - rhs)
+        assert delta < eps, (
+            f"<Pi X, Y>_HS - <X, Pi Y>_HS = {delta} on (X, Y)"
+        )
+    print(f"  [PASS] <Pi_trans X, Y>_HS = <X, Pi_trans Y>_HS on "
+          f"{len(pairs)} sample pairs.")
+
+
+def check_A2_quotient_well_defined_mp():
+    """lem:A2-quotient-well-defined.
+
+    Verify that for V in V_val (i.e., A_toy(V) = 0), A_2(X + V) = A_2(X).
+    Sample a few X and a few V_val basis combinations.
+    """
+    print("=" * 70)
+    print("[lem:A2-quotient-well-defined]  "
+          "A_2(X + V) = A_2(X) for V in V_val")
+    print("=" * 70)
+    samples = [
+        mp_matrix([[mpf("1.7"), mpf("-2.1")], [mpf("0.4"), mpf("3.3")]]),
+        mp_matrix([[mpf("100"), mpf("0.5")], [mpf("-0.5"), mpf("-100")]]),
+    ]
+    # V_val basis combinations: alpha e_11 + beta e_22 + gamma e_anti.
+    V_combos = [
+        (mpf("3"), mpf("-2"), mpf("0")),
+        (mpf("0.1"), mpf("4.7"), mpf("-1.3")),
+        (mpf("-50"), mpf("50"), mpf("2.5")),
+    ]
+    eps = mpf("1e-30")
+    for X in samples:
+        a_X = A_toy(X)
+        for alpha, beta, gamma in V_combos:
+            V = (
+                alpha * E_11()
+                + beta * E_22()
+                + gamma * E_anti()
+            )
+            # Confirm V is in V_val.
+            assert fabs(A_toy(V)) < eps, (
+                f"V not in V_val: A_toy(V) = {A_toy(V)} for "
+                f"alpha={alpha}, beta={beta}, gamma={gamma}"
+            )
+            X_plus_V = X + V
+            a_shifted = A2_trans(X_plus_V)
+            delta = fabs(a_shifted - a_X)
+            assert delta < eps, (
+                f"A_2(X + V) - A_2(X) = {delta} for V in V_val"
+            )
+    print(f"  [PASS] A_2 invariant under adding V_val elements on "
+          f"{len(samples) * len(V_combos)} (X, V) configurations.")
+
+
+def check_residual_gauge_invariance_mp():
+    """rem:transverse-projection-residual-gauge.
+
+    Verify that adding a constant c to the toy phase Phi_toy leaves
+    q_toy, q_toy', q_toy'', and therefore G_{toy,±}, N_toy, and Omega_toy
+    unchanged.  Done numerically via mpmath.diff so the test exercises
+    the framework end-to-end (independent of the analytic argument that
+    derivatives of constants are zero).
+    """
+    print("=" * 70)
+    print("[rem:transverse-projection-residual-gauge]  Phi -> Phi + c "
+          "leaves q, q', q'' unchanged")
+    print("=" * 70)
+    from mpmath import diff
+    eps = mpf("1e-25")
+    cases = [
+        (mpf("1.0"), mpf("0.05"), mpf("8.0"), mpf("3.7")),
+        (mpf("0.5"), mpf("0.10"), mpf("12.0"), mpf("-2.3")),
+        (mpf("-0.2"), mpf("0.08"), mpf("4.5"), mpf("100.0")),
+    ]
+    for tau, u, q0, c in cases:
+        f_orig = lambda x: Phi_toy(x, u, mpf("0"), q0)
+        f_shift = lambda x: Phi_toy(x, u, mpf("0"), q0) + c
+        for k in (1, 2, 3):
+            d_orig = diff(f_orig, tau, k)
+            d_shift = diff(f_shift, tau, k)
+            delta = fabs(d_orig - d_shift)
+            assert delta < eps, (
+                f"k={k}-th derivative changed under Phi -> Phi + c "
+                f"at tau={tau}, c={c}: delta = {delta}"
+            )
+    print(f"  [PASS] q_toy, q_toy', q_toy'' invariant under Phi -> Phi + c "
+          f"on {len(cases)} samples.")
+    # Since Phi enters the §4 block calculus only through its derivatives
+    # (verified above), the toy whitened block Omega_toy is bitwise
+    # identical after the shift.  No separate Omega comparison needed.
+
+
+# ---------------------------------------------------------------------------
 # Main.
 # ---------------------------------------------------------------------------
 
@@ -463,15 +585,21 @@ def main():
     print()
     check_pi_trans_idempotent_mp()
     print()
+    check_pi_trans_self_adjoint_mp()
+    print()
     check_pi_trans_kernel_on_V_val_basis()
     print()
     check_A_toy_descends_through_pi_trans_mp()
     print()
     check_A2_type_handoff_mp()
     print()
+    check_A2_quotient_well_defined_mp()
+    print()
     check_quotient_decomposition_mp()
     print()
     check_pi_trans_operator_norm_unity_mp()
+    print()
+    check_residual_gauge_invariance_mp()
     print()
     check_pi_trans_on_actual_zeta_block()
     print()
@@ -481,11 +609,14 @@ def main():
     print("All §6 simulations passed at mpmath precision dps =", mp.dps)
     print("  - Pi_trans explicit formula matches HS projection")
     print("  - Pi_trans is idempotent")
+    print("  - Pi_trans is self-adjoint")
     print("  - kernel of Pi_trans = span{e_11, e_22, e_anti}")
     print("  - A_toy invariant under Pi_trans on generic samples")
     print("  - A_2(X):=A_toy(Pi_trans X) equals A_toy(X)")
+    print("  - A_2 quotient-well-defined: A_2(X + V) = A_2(X) for V in V_val")
     print("  - quotient representative decomposition on sampled matrices")
     print("  - ||Pi_trans||_op = 1 over unit-HS-norm sweep, achieved at e_sym")
+    print("  - residual gauge: Phi -> Phi + c leaves q, q', q'' invariant")
     print("  - A_toy and projected-norm handoff on actual-zeta block at high T")
     print("  - A_toy and projected-norm handoff on off-line toy block")
     print("=" * 70)

@@ -341,6 +341,54 @@ def verify_A_val_v1_lies_in_V_val():
 
 
 # ---------------------------------------------------------------------------
+# (v) Residual gauge invariance.
+# ---------------------------------------------------------------------------
+
+def verify_residual_gauge_invariance_symbolic():
+    """rem:transverse-projection-residual-gauge.
+
+    The retained chart of Definition def:local-phase-chart pins Phi_T = theta.
+    Additive constants Phi -> Phi + c leave q, q', q'' unchanged
+    (derivatives of constants are zero), hence leave G_{m,±}, N_m, and
+    Omega_zeta unchanged.  Affine-jet shifts Phi -> Phi + a t change q
+    to q + a and so do not preserve the chart class; this is recorded as
+    a negative test.
+    """
+    print("=" * 70)
+    print("[rem:transverse-projection-residual-gauge]  Phi -> Phi + c invariance")
+    print("=" * 70)
+    t_var = sp.symbols("t", real=True)
+    c_const, a_aff = sp.symbols("c a", real=True)
+    Phi_sym = sp.Function("Phi")(t_var)
+
+    # Additive constant: q, q', q'' invariant.
+    Phi_shift_const = Phi_sym + c_const
+    for k in (1, 2, 3):
+        delta = sp.simplify(
+            sp.diff(Phi_shift_const, t_var, k) - sp.diff(Phi_sym, t_var, k)
+        )
+        assert delta == 0, (
+            f"k={k}-th derivative not invariant under Phi -> Phi + c: {delta}"
+        )
+    print("  [PASS] q, q', q'' invariant under Phi -> Phi + c.")
+    print("         Hence G_{m,±}, N_m, Omega_zeta are gauge-invariant.")
+
+    # Affine-jet shift: q changes by a (negative test; not a chart symmetry).
+    Phi_shift_aff = Phi_sym + a_aff * t_var
+    delta_q_aff = sp.simplify(
+        sp.diff(Phi_shift_aff, t_var) - sp.diff(Phi_sym, t_var)
+    )
+    assert sp.simplify(delta_q_aff - a_aff) == 0, (
+        f"affine-shift q-change != a: {delta_q_aff}"
+    )
+    delta_qp_aff = sp.simplify(
+        sp.diff(Phi_shift_aff, t_var, 2) - sp.diff(Phi_sym, t_var, 2)
+    )
+    assert delta_qp_aff == 0
+    print("  [PASS] Phi -> Phi + a t changes q by a (not a chart symmetry).")
+
+
+# ---------------------------------------------------------------------------
 # Main.
 # ---------------------------------------------------------------------------
 
@@ -367,6 +415,8 @@ def main():
     print()
     verify_A2_quotient_well_defined()
     print()
+    verify_residual_gauge_invariance_symbolic()
+    print()
     verify_A_val_v1_lies_in_V_val()
     print()
     print("=" * 70)
@@ -383,6 +433,8 @@ def main():
     print("  - lem:transverse-projection-A-toy-compatibility:")
     print("    A_toy(Pi_trans X) = A_toy(X)")
     print("  - lem:A2-quotient-well-defined: A_2 descends to M_2/V_val")
+    print("  - rem:transverse-projection-residual-gauge: Phi -> Phi + c")
+    print("    leaves q, q', q'', and hence G_{m,±}, N_m, Omega, unchanged")
     print("  - regression: v1's A_val(x) lies in V_val and is annihilated")
     print("    by Pi_trans (matches v1's cor:PhiK-Aval-zero)")
     print("=" * 70)

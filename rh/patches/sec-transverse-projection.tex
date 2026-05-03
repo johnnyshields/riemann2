@@ -1,45 +1,48 @@
 % =============================================================================
-% Patch: §6 Transverse projection + §7 Actual-zeta transverse suppression
-%        (referee-revised, with §7 connectivity type-fix)
+% Patch: §6 Transverse projection
+%      + §7 Actual-zeta transverse suppression (connectivity type-fix)
+%      + §8 Local projective rigidity (branch-exhaustion subsection)
 %
 %   sec:transverse-projection
 %   sec:actual-zeta-transverse-suppression
+%   sec:projective-rigidity
 %
 % Target file:   rh/rh_rebuild.tex
 % Action:        this patch is NOT to be merged into rh_rebuild.tex yet.
 %                It is staged under rh/patches/ for review.
 %
 % Scope.
-%   §6:
-%     - Defines only the two-point scalar transverse projection on M_2(R).
-%     - Makes the scalar channel used by §5 and §7 type-safe:
-%           A_2(X) := A_toy(Pi_trans X) = A_toy(X) = x_{12} + x_{21}.
-%     - Records the quotient-representative identity
-%           Pi_trans X = (A_toy(X)/sqrt(2)) e_sym
-%       and the HS-norm relation ||Pi_trans X||_HS^2 = A_toy(X)^2 / 2.
-%     - Does NOT define the four-point projection Pi_trans^{(4)} or any
-%       four-point value subspace; cf. the new
-%       rem:transverse-projection-four-point-not-supplied.
-%     - Does NOT import v1's M(d), A_val, or Psi_{x,d} calibration
-%       machinery (cf. rem:toy-phase-v1-compatibility in §5).
+%   §6 (replaces stub):
+%     - Two-point scalar transverse projection on M_2(R) only.
+%     - A_2(X) := A_toy(Pi_trans X) = A_toy(X) = x_{12} + x_{21}.
+%     - Quotient-representative identity Pi_trans X = (A_toy(X)/sqrt(2)) e_sym
+%       and HS-norm relation ||Pi_trans X||^2 = A_toy(X)^2 / 2.
+%     - rem:transverse-projection-four-point-not-supplied disclaiming
+%       the four-point projection.
 %
-%   §7 (connectivity type-fix):
-%     - Replaces the ill-typed expression ||Pi_trans A_2(X)|| (with A_2
-%       scalar-valued) by the scalar |A_2(X)| = |A_toy(Pi_trans X)| =
-%       |A_toy(X)| <= Q^{-B_{z,2}}.
+%   §7 (orientation + hypothesis statements, type-fix only):
+%     - Replaces ill-typed ||Pi_trans A_2(X)|| (with A_2 scalar-valued) by
+%       the type-safe |A_2(X)| = |A_toy(Pi_trans X)| = |A_toy(X)| <=
+%       Q^{-B_{z,2}}.
 %     - Restates the four-point hypothesis using a separate four-point
-%       transverse functional A_{4,trans}, rather than borrowing the
-%       two-center scalar projection of §6.
-%     - Updates the four-point wip remark to mark Pi_trans^{(4)} and the
-%       four-point value subspace as separate inputs not supplied by §6.
+%       transverse functional A_{4,trans}, since §6 supplies only the
+%       two-center M_2(R) projection.
+%
+%   §8 (insertion only; orientation prose unchanged):
+%     - New subsec:branch-exhaustion inserted between the §8 orientation
+%       and subsec:two-point-comparison, containing
+%       hyp:branch-exhaustion and rem:branch-exhaustion-status.
+%       The hypothesis names the proof obligation consumed by the
+%       master conditional alongside thm:two-point-rigidity and
+%       thm:four-point-rigidity.  Stated as a Hypothesis until proved.
 %
 % Replaces in rh/rh_rebuild.tex:
-%   §6 stub (the abstract-conditions definition + rem:wip-transverse-projection),
-%   and the two §7 hypothesis statements (hyp:zeta-suppression-two-point,
-%   hyp:zeta-suppression-four-point) plus the §7 orientation prose.
+%   §6 stub; §7 orientation prose + two-point hypothesis + four-point
+%   hypothesis + four-point wip remark.  Inserts a new §8 subsection at
+%   the start of sec:projective-rigidity, before subsec:two-point-comparison.
 %
 % Closes:
-%   rem:wip-transverse-projection.
+%   rem:wip-transverse-projection (§6 stub gap closed by the migrated §6).
 %
 % Status (when merged):
 %   §6:
@@ -50,39 +53,18 @@
 %     \statussim      not-started -> verified
 %         [rh/simulation/sec-transverse-projection.py]
 %     \statuslean     not-started -> n/a
-%   §7: only orientation+hypotheses are type-fixed; the
-%       sec:actual-zeta-transverse-suppression status pills are unchanged
-%       since the suppression is still a hypothesis, not a proved theorem.
+%   §7: only orientation+hypotheses are type-fixed; sec:actual-zeta-
+%       transverse-suppression status pills unchanged (still hypothesis).
+%   §8: subsec:branch-exhaustion inserted; sec:projective-rigidity status
+%       pills unchanged (still depends on §7 hypotheses).
 %
 % Verification:
 %   - rh/sympy/sec-transverse-projection.py
-%       verify_value_subspace_kernel_of_A_toy,
-%       verify_explicit_basis_orthonormality,
-%       verify_transverse_projection_explicit_formula,
-%       verify_pi_trans_idempotent,
-%       verify_pi_trans_self_adjoint,
-%       verify_pi_trans_kernel_equals_V_val,
-%       verify_quotient_representative_and_norm_relation,
-%       verify_pi_trans_operator_norm,
-%       verify_A_toy_descends_through_pi_trans,
-%       verify_A2_type_handoff,
-%       verify_A2_quotient_well_defined,
-%       verify_A_val_v1_lies_in_V_val.
 %   - rh/simulation/sec-transverse-projection.py
-%       check_pi_trans_explicit_formula_mp,
-%       check_pi_trans_idempotent_mp,
-%       check_pi_trans_kernel_on_V_val_basis,
-%       check_A_toy_descends_through_pi_trans_mp,
-%       check_A2_type_handoff_mp,
-%       check_quotient_decomposition_mp,
-%       check_pi_trans_operator_norm_unity_mp,
-%       check_pi_trans_on_actual_zeta_block,
-%       check_pi_trans_on_toy_block_off_line.
 % =============================================================================
 
 % =============================================================================
-% (1) §6: replace the existing stub (def:transverse-projection abstract
-%     conditions + rem:wip-transverse-projection).
+% (1) §6: replace the existing stub.
 % =============================================================================
 
 \section{Transverse projection}
@@ -447,6 +429,38 @@ Lemma~\ref{lem:source-energy-to-suppression} (the energy-supply
 route).  The two routes are not exclusive; the rigidity theorems of
 Section~\ref{sec:projective-rigidity} indicate which hypothesis is
 invoked, not which route proves it.
+\end{remark}
+
+% =============================================================================
+% (3) §8: insert a new \subsection{Branch exhaustion} between the §8
+%     orientation paragraph and \subsection{Two-point comparison}.
+% =============================================================================
+
+\subsection{Branch exhaustion}
+\label{subsec:branch-exhaustion}
+
+\begin{hypothesis}[Branch exhaustion]
+\label{hyp:branch-exhaustion}
+Every admissible off-line packet produced by the branch-entry
+construction is excluded by at least one of:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item the two-point scalar branch of
+      Theorem~\ref{thm:two-point-rigidity}; or
+\item the four-point full-quartet branch of
+      Theorem~\ref{thm:four-point-rigidity}.
+\end{enumerate}
+\end{hypothesis}
+
+\begin{remark}[Status of Hypothesis~\ref{hyp:branch-exhaustion}]
+\label{rem:branch-exhaustion-status}
+Hypothesis~\ref{hyp:branch-exhaustion} is not a consequence of
+Definition~\ref{def:transverse-projection} and is not implied by
+Sections~\ref{sec:transverse-projection}--\ref{sec:actual-zeta-transverse-suppression}.
+The master conditional theorem of
+Section~\ref{subsec:master-conditional} consumes
+Hypothesis~\ref{hyp:branch-exhaustion} alongside
+Theorems~\ref{thm:two-point-rigidity}
+and~\ref{thm:four-point-rigidity}.
 \end{remark}
 
 % =============================================================================
