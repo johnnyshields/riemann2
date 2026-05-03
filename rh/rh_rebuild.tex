@@ -317,10 +317,18 @@ throughout.  The point-to-jet transform \(P_h\) of
 parameter \(Q=Q(\gamma)\) is a fixed slowly growing function of the
 height; all polynomial losses are stated as powers of \(Q\) with absolute
 exponents.  For each height parameter \(T\), \(I_T\) denotes an
-interval centered at \(T\) of length
-\(|I_T|\ll Q(T)^{-1}\) and contained in \([T/2, 2T]\); high-height
-analysis takes \(T\) sufficiently large that the second inclusion is
-automatic.  ``Retained packets'' refers to a polynomial-weight
+interval centered at \(T\) of length comparable to \(Q(T)^{-1}\):
+there are fixed absolute constants \(0<c_I\le C_I<\infty\) such that
+\[
+        c_I Q(T)^{-1}\le |I_T|\le C_I Q(T)^{-1}.
+\]
+We also require \(I_T\subset[T/2,2T]\); high-height analysis takes
+\(T\) sufficiently large that this inclusion is automatic.  The toy
+polynomial-weight subdomain in
+Section~\ref{sec:toy-anomaly-and-transverse-obstruction} uses the
+slow-scale condition \(Q(T)=o(q(T))\), where \(q=\theta'\); when that
+subdomain is not being invoked, the relevant lemmas state their window
+hypotheses explicitly.  ``Retained packets'' refers to a polynomial-weight
 sub-family of the local packets at height \(\gamma\) on which the
 chart-regularity and Gram nondegeneracy hypotheses of
 Definition~\ref{def:local-phase-chart} hold.
@@ -368,6 +376,21 @@ gives
 \]
 \end{definition}
 
+\begin{remark}[Branch convention for the Riemann--Siegel phase]
+\label{rem:theta-branch-convention}
+The branch \(L\) in Definition~\ref{def:riemann-siegel-phase} is the
+holomorphic logarithm of \(\Gamma\) on the half-plane \(\Re z>0\), not the
+principal logarithm applied pointwise to \(\Gamma(z)\).  This branch exists
+because \(\Gamma\) has no zeros or poles on \(\Re z>0\), and the half-plane
+is simply connected; the normalization on \((0,\infty)\) fixes the additive
+constant.  Any other holomorphic logarithm on a connected subdomain would
+change \(\theta\) only by an additive constant \(2\pi k\), which leaves
+\(q=\theta'\), the phase differences \(\theta(x)-\theta(y)\), and therefore
+\(K_\theta\) unchanged.  A discontinuous branch, such as a principal-branch
+representative with jumps, is not part of the definition and cannot be used
+for derivative identities.
+\end{remark}
+
 \begin{lemma}[Differentiated theta asymptotics]
 \label{lem:theta-derivative-asymptotics}
 Uniformly for \(t\in I_T\),
@@ -386,7 +409,7 @@ The constants in the \(O\)-terms are absolute.
 \begin{proof}
 Let \(z=1/4+it/2\).  The half-plane \(\Re z\ge 1/4\) lies in a fixed
 Stirling sector.  By the differentiated form of Stirling's expansion,
-after truncating \(\log\Gamma z\) at \(z^{-3}\) the remainder and its
+after truncating \(L(z)\) at \(z^{-3}\) the remainder and its
 \(t\)-derivatives up to order three are uniform in this sector, with
 the corresponding differentiated powers of \(|z|\).  Taking imaginary
 parts in \eqref{eq:theta-definition} gives the standard
@@ -875,45 +898,50 @@ positive.
 \begin{lemma}[Same-point Gram positivity for the theta phase]
 \label{lem:same-point-gram-positivity}
 For \(\Ph_T = \theta\), and for all sufficiently large retained
-heights, \(J(T)\) is positive definite.  More precisely,
+heights, \(J(t)\) is positive definite uniformly for \(t\in I_T\).
+More precisely,
 \begin{equation}
 \label{eq:lambda-min-asymptotic}
-        \lambda_{\min}(J(T))
-        = \frac{2 q(T)}{\pi}\,(1 + o(1))
-        = \frac{1}{\pi}\,\log\frac{T}{2\pi}\,(1 + o(1)).
+        \lambda_{\min}(J(t))
+        = \frac{2 q(t)}{\pi}\,(1 + o_T(1))
+        = \frac{1}{\pi}\,\log\frac{t}{2\pi}\,(1 + o_T(1))
+        \qquad(t\in I_T),
 \end{equation}
-After increasing the lower-height cutoff if necessary,
-\(\lambda_{\min}(J(T)) \ge 1\); hence the polynomial-in-\(Q\) lower
-bound \(\lambda_{\min}(J(T)) \ge Q(T)^{-C_J}\) holds with \(C_J = 0\)
+where the error is uniform on \(I_T\).  In particular this holds at the
+center \(t=T\).  After increasing the lower-height cutoff if necessary,
+\(\lambda_{\min}(J(t)) \ge 1\) uniformly on \(I_T\); hence the
+polynomial-in-\(Q\) lower bound
+\(\lambda_{\min}(J(t)) \ge Q(T)^{-C_J}\) holds with \(C_J = 0\)
 whenever \(Q(T) \ge 1\).  The cutoff is qualitative; no explicit
 numerical lower height is claimed here.
 \end{lemma}
 
 \begin{proof}
-By Lemma~\ref{lem:theta-derivative-asymptotics},
+Let \(t\in I_T\).  By Lemma~\ref{lem:theta-derivative-asymptotics},
+uniformly on \(I_T\),
 \[
-q(T) = \tfrac12 \log(T/(2\pi)) + O(T^{-2}),\qquad
-q'(T) = O(T^{-1}),\qquad q''(T) = O(T^{-2}).
+q(t) = \tfrac12 \log(t/(2\pi)) + O(t^{-2}),\qquad
+q'(t) = O(t^{-1}),\qquad q''(t) = O(t^{-2}).
 \]
-Therefore
+Therefore, uniformly on \(I_T\),
 \[
-D_J(T) = 4\,q(T)^4 + O\!\bigl(q(T)\,T^{-2}\bigr) + O(T^{-2})
-       = 4\,q(T)^4\,(1 + o(1)) > 0
+D_J(t) = 4\,q(t)^4 + O\!\bigl(q(t)\,t^{-2}\bigr) + O(t^{-2})
+       = 4\,q(t)^4\,(1 + o_T(1)) > 0
 \]
-for sufficiently large \(T\), and \(q(T) > 0\).  By
+for sufficiently large \(T\), and \(q(t)>0\).  By
 Lemma~\ref{lem:algebraic-same-point-gram-criterion},
-\(J(T) \succ 0\).
+\(J(t) \succ 0\).
 
-Let \(0 < \lambda_1 \le \lambda_2\) be the eigenvalues of \(J(T)\).
-Since \(\lambda_2 \le \Tr J(T)\),
+Let \(0 < \lambda_1(t) \le \lambda_2(t)\) be the eigenvalues of
+\(J(t)\).  Since \(\lambda_2(t) \le \Tr J(t)\),
 \[
-\lambda_1 = \frac{\det J(T)}{\lambda_2}
-          \ge \frac{\det J(T)}{\Tr J(T)}
-          = \frac{D_J(T)}{\pi(2 q(T)^3 + 24\,q(T) + q''(T))}
-          = \frac{2 q(T)}{\pi}\,(1 + o(1)).
+\lambda_1(t) = \frac{\det J(t)}{\lambda_2(t)}
+          \ge \frac{\det J(t)}{\Tr J(t)}
+          = \frac{D_J(t)}{\pi(2 q(t)^3 + 24\,q(t) + q''(t))}
+          = \frac{2 q(t)}{\pi}\,(1 + o_T(1)),
 \]
-The Rayleigh quotient at \(e_1\) gives
-\(\lambda_1 \le J_{11}(T) = 2 q(T)/\pi\), proving
+uniformly for \(t\in I_T\).  The Rayleigh quotient at \(e_1\) gives
+\(\lambda_1(t) \le J_{11}(t) = 2 q(t)/\pi\), proving
 \eqref{eq:lambda-min-asymptotic}.
 \end{proof}
 
@@ -1121,7 +1149,7 @@ For every \(m\in I_T\) at sufficiently large height,
 
 \begin{proof}
 By Lemma~\ref{lem:same-point-gram-positivity}, \(J(m)\succ 0\) at
-every sufficiently large retained midpoint \(m\).  By continuity,
+every midpoint \(m\in I_T\) at sufficiently large height.  By continuity,
 \(G_{m,\pm}(s) = J(m\pm s/2)\) remain positive definite for all
 sufficiently small \(|s|\) with \((m,s)\in\mathcal D_T\), and the map
 \(G\mapsto G^{-1/2}\) is continuous on the positive definite cone.
@@ -1407,7 +1435,7 @@ baseline, with \(u=\beta-\tfrac12\) the off-line displacement parameter.
 Applying the finite-block package of
 Section~\ref{sec:finite-scale-local-blocks-and-whitening} to
 \(\Ph_\toy\) produces a toy whitened block
-\(\widehat\Om_\toy(s;m,u)\).  The off-diagonal trace
+\(\widehat\Om_\toy(s;m,u,q_0)\).  The off-diagonal trace
 \(\mathcal A_\toy\) of this block is identically zero on the on-line
 baseline and has nonzero leading-\(u^2\) coefficient
 \(F_\toy(d,q_0)\), where \(d=q_0\,s\) is the dimensionless local
@@ -1437,6 +1465,23 @@ The displacement is identified with the off-line real part by
 only through \(u^2\) and is \(C^\infty\) on \(\mathbb R\) for every
 \((u,q_0)\).
 \end{definition}
+
+\begin{remark}[Toy frequency convention]
+\label{rem:toy-frequency-convention}
+The parameter \(q_0\) is part of the toy data.  When it matters, we
+write
+\[
+        G_{\toy,\pm}(s;m,u,q_0),\qquad
+        N_\toy(s;m,u,q_0),\qquad
+        \widehat\Om_\toy(s;m,u,q_0).
+\]
+In Section~\ref{subsec:toy-retained-subdomain}, where the toy is placed
+on a retained theta packet, the toy frequency is specialized to the
+local theta slope \(q_0=q(m)\).  This convention is essential: the toy
+visibility theorem is uniform in an abstract high-frequency parameter
+\(q_0\), while the polynomial-weight subdomain chooses that parameter
+from the actual retained packet.
+\end{remark}
 
 \begin{lemma}[Toy phase derivatives]
 \label{lem:toy-phase-derivatives}
@@ -1510,16 +1555,17 @@ and subtract.
 
 \begin{definition}[Toy finite blocks]
 \label{def:toy-finite-blocks}
-For \((m,s)\in\mathcal D_T\), with \(t_\pm=m\pm s/2\) and the toy phase
-\(\Ph_\toy\) of Definition~\ref{def:off-line-toy-phase} centred at
-\(m_0=m\), set
+For \((m,s)\in\mathcal D_T\), with \(t_\pm=m\pm s/2\), and for a
+frequency parameter \(q_0>0\), evaluate the toy phase
+\(\Ph_\toy(t;u,m_0,q_0)\) of Definition~\ref{def:off-line-toy-phase}
+with centre \(m_0=m\).  Set
 \begin{equation}
 \label{eq:toy-G-N}
-G_{\toy,\pm}(s;m,u)\;:=\;G_{m,\pm}(s)\big|_{\Ph=\Ph_\toy},
+G_{\toy,\pm}(s;m,u,q_0)\;:=\;G_{m,\pm}(s)\big|_{\Ph=\Ph_\toy},
 \qquad
-N_\toy(s;m,u)\;:=\;N_m(s)\big|_{\Ph=\Ph_\toy},
+N_\toy(s;m,u,q_0)\;:=\;N_m(s)\big|_{\Ph=\Ph_\toy}.
 \end{equation}
-where the right-hand sides are the same-point and mixed blocks
+Here the right-hand sides are the same-point and mixed blocks
 \eqref{eq:Gpm}--\eqref{eq:Nm} of
 Section~\ref{sec:finite-scale-local-blocks-and-whitening} evaluated
 with \((q,q',q'',\Del_m)\) replaced by
@@ -1529,11 +1575,12 @@ Lemmas~\ref{lem:toy-phase-derivatives}--\ref{lem:q-pm-split-at-centres}.
 
 \begin{definition}[Toy whitened block]
 \label{def:toy-whitened-block}
-For \((m,s)\in\mathcal D_T\) with \(G_{\toy,\pm}(s;m,u)\succ 0\),
+For \((m,s)\in\mathcal D_T\), \(q_0>0\), and
+\(G_{\toy,\pm}(s;m,u,q_0)\succ 0\), define
 \begin{equation}
 \label{eq:omega-toy}
-\widehat\Om_\toy(s;m,u)
-\;:=\;G_{\toy,-}(s;m,u)^{-1/2}\,N_\toy(s;m,u)\,G_{\toy,+}(s;m,u)^{-1/2}.
+\widehat\Om_\toy(s;m,u,q_0)
+\;:=\;G_{\toy,-}(s;m,u,q_0)^{-1/2}\,N_\toy(s;m,u,q_0)\,G_{\toy,+}(s;m,u,q_0)^{-1/2}.
 \end{equation}
 The inverse square root is the unique positive definite one.
 \end{definition}
@@ -1544,11 +1591,11 @@ Fix a compact interval \(D=[d_-,d_+]\subset(0,\infty)\).  There exist
 \(u_G=u_G(D)\in(0,\tfrac12]\), \(Q_G(D)\ge1\), and \(c_G(D)>0\) such
 that whenever \(d=q_0\,s\in D\), \(|u|\le u_G\), and \(q_0\ge Q_G(D)\),
 \[
-        G_{\toy,\pm}(s;m,u)\succ 0,
+        G_{\toy,\pm}(s;m,u,q_0)\succ 0,
         \qquad
-        \lambda_{\min}\bigl(G_{\toy,\pm}(s;m,u)\bigr)\;\ge\;c_G(D)\,q_0.
+        \lambda_{\min}\bigl(G_{\toy,\pm}(s;m,u,q_0)\bigr)\;\ge\;c_G(D)\,q_0.
 \]
-In particular \(\|G_{\toy,\pm}(s;m,u)^{-1/2}\|_{\op}\le C_G(D)q_0^{-1/2}\)
+In particular \(\|G_{\toy,\pm}(s;m,u,q_0)^{-1/2}\|_{\op}\le C_G(D)q_0^{-1/2}\)
 on the same region.
 \end{lemma}
 
@@ -1593,12 +1640,12 @@ functional is the off-diagonal trace
 \begin{lemma}[Vanishing on the on-line baseline]
 \label{lem:A-toy-baseline-vanishing}
 At \(u=0\) the toy phase reduces to the linear baseline
-\(\Ph_\toy(t;0,m,q_0)=q_0(t-m)\), and \(\widehat\Om_\toy(s;m,0)\) is
+\(\Ph_\toy(t;0,m,q_0)=q_0(t-m)\), and \(\widehat\Om_\toy(s;m,0,q_0)\) is
 the constant-phase whitened block of the linear baseline.  In
 particular
 \begin{equation}
 \label{eq:A-toy-baseline}
-        \mathcal A_\toy\bigl(\widehat\Om_\toy(s;m,0)\bigr)\;=\;0
+        \mathcal A_\toy\bigl(\widehat\Om_\toy(s;m,0,q_0)\bigr)\;=\;0
         \qquad\bigl((m,s)\in\mathcal D_T^\times\bigr).
 \end{equation}
 \end{lemma}
@@ -1610,7 +1657,7 @@ At \(u=0\), \eqref{eq:toy-phase-derivatives} gives \(q_\pm=q_0\) and
 and \(G_{\toy,-}^{-1/2}=G_{\toy,+}^{-1/2}\) is the same diagonal
 matrix.  By \eqref{eq:Nm} with \(q_+=q_-=q_0\),
 \[
-N_\toy(s;m,0)_{12}+N_\toy(s;m,0)_{21}
+N_\toy(s;m,0,q_0)_{12}+N_\toy(s;m,0,q_0)_{21}
 =\frac{(q_+-q_-)\cos\Del_m^\toy(s)}{\pi s}=0.
 \]
 Whitening by the diagonal \(G^{-1/2}\) preserves this off-diagonal
@@ -1627,7 +1674,7 @@ Fix a compact interval \(D=[d_-,d_+]\subset(0,\infty)\).  There exist
 \((m,s)\in\mathcal D_T^\times\) with \(d=q_0\,s\in D\),
 \begin{equation}
 \label{eq:toy-anomaly-leading}
-\mathcal A_\toy\bigl(\widehat\Om_\toy(s;m,u)\bigr)
+\mathcal A_\toy\bigl(\widehat\Om_\toy(s;m,u,q_0)\bigr)
 \;=\;u^2\,F_\toy(d,q_0)\;+\;u^4\,R_\toy(d,q_0,u),
 \end{equation}
 with \(|R_\toy(d,q_0,u)|\le C_R(D)\) uniformly on the region
@@ -1648,11 +1695,11 @@ F_{\infty}(d)
 +6\,d\sin d-15\,d\sin 2d-12\cos 2d+12\Bigr).
 \end{aligned}
 \end{equation}
-\(F_{\infty}\) is real-analytic on \((0,\infty)\); the apparent
-\(\sin(d/2)\)-pole at \(d=2\pi k\) is removable, and \(F_{\infty}\)
-vanishes only on the discrete zero set of its trigonometric
-numerator.  On every compact subinterval \(D\subset(0,\infty)\)
-avoiding the zeros of \(F_{\infty}\) there exist \(Q_0(D)\ge 1\) and
+\(F_{\infty}\) is interpreted by removable continuation at the
+apparent \(\sin(d/2)\)-poles \(d=2\pi k\), \(k\ge1\).  Its zero set in
+\((0,\infty)\) is discrete.  On every compact subinterval
+\(D\subset(0,\infty)\) avoiding the zeros of this continued function
+there exist \(Q_0(D)\ge 1\) and
 \(c_\toy(D)>0\) with
 \begin{equation}
 \label{eq:F-toy-lower-bound}
@@ -1662,7 +1709,7 @@ avoiding the zeros of \(F_{\infty}\) there exist \(Q_0(D)\ge 1\) and
 \end{lemma}
 
 \begin{proof}
-Each entry of \(G_{\toy,\pm}(s;m,u)\) and \(N_\toy(s;m,u)\) is a
+Each entry of \(G_{\toy,\pm}(s;m,u,q_0)\) and \(N_\toy(s;m,u,q_0)\) is a
 real-analytic function of \(r:=u^2\) by \eqref{eq:toy-phase-derivatives}
 and \eqref{eq:Gpm}--\eqref{eq:Nm}.  To make the uniformity in \(q_0\)
 explicit after substituting \(s=d/q_0\), use the natural powers
@@ -1800,8 +1847,12 @@ central slab
 \[
         S_T:=\{m: |m-T|\le |I_T|/4\}.
 \]
-For \(m\in S_T\), the \(\mathcal D_T\)-constraint permits
-\(|s|\le |I_T|/2-|m-T|\), hence at least \(|s|\le |I_T|/4\).  By
+For \(m\in S_T\), the \(\mathcal D_T\)-constraint permits the full range
+\[
+        |s|\le |I_T|-2|m-T|.
+\]
+In particular it contains the smaller symmetric range
+\(|s|\le |I_T|/4\).  By
 \eqref{eq:toy-density-height-hypothesis},
 \[
         \frac{d_+}{q(m)}\le \frac{d_+}{q_T^-}\le \frac{|I_T|}{4},
@@ -1835,15 +1886,16 @@ which holds eventually whenever \(Q(T)=o(q(T))\).
 
 \begin{lemma}[Signed-separation invariance of the scalar toy channel]
 \label{lem:toy-signed-separation-invariance}
-For the toy finite blocks of Definition~\ref{def:toy-finite-blocks},
+For the toy finite blocks of Definition~\ref{def:toy-finite-blocks}, with fixed
+\(q_0>0\),
 \[
-        \widehat\Om_\toy(-s;m,u)=\widehat\Om_\toy(s;m,u)^\top
+        \widehat\Om_\toy(-s;m,u,q_0)=\widehat\Om_\toy(s;m,u,q_0)^\top
 \]
 whenever both sides are defined.  Consequently
 \begin{equation}
 \label{eq:toy-A-signed-invariance}
-        \mathcal A_\toy(\widehat\Om_\toy(-s;m,u))
-        =\mathcal A_\toy(\widehat\Om_\toy(s;m,u)).
+        \mathcal A_\toy(\widehat\Om_\toy(-s;m,u,q_0))
+        =\mathcal A_\toy(\widehat\Om_\toy(s;m,u,q_0)).
 \end{equation}
 \end{lemma}
 
@@ -1851,11 +1903,11 @@ whenever both sides are defined.  Consequently
 Changing \(s\) to \(-s\) swaps the two centers \(t_-\) and \(t_+\).
 The same-point blocks therefore satisfy
 \[
-        G_{\toy,-}(-s;m,u)=G_{\toy,+}(s;m,u),\qquad
-        G_{\toy,+}(-s;m,u)=G_{\toy,-}(s;m,u),
+        G_{\toy,-}(-s;m,u,q_0)=G_{\toy,+}(s;m,u,q_0),\qquad
+        G_{\toy,+}(-s;m,u,q_0)=G_{\toy,-}(s;m,u,q_0),
 \]
 and the mixed block satisfies
-\(N_\toy(-s;m,u)=N_\toy(s;m,u)^\top\), by the symmetry of
+\(N_\toy(-s;m,u,q_0)=N_\toy(s;m,u,q_0)^\top\), by the symmetry of
 \(K_\Phi\) and the row/column convention of
 Definition~\ref{def:finite-same-point-and-mixed-blocks}.  Positive
 definite inverse square roots commute with transposition for symmetric
@@ -1877,11 +1929,11 @@ Lemma~\ref{lem:toy-anomaly-leading}.  There are constants
 displacement \(u=\beta-\tfrac12\in\mathbb R\) with \(0<|u|\le u_\toy(D)\),
 every \(q_0\ge Q_\toy(D)\), and every \((m,s)\in\mathcal D_T^\times\)
 with \(d=q_0\,s\in D\), the toy
-whitened block \(\widehat\Om_\toy(s;m,u)\) of
+whitened block \(\widehat\Om_\toy(s;m,u,q_0)\) of
 Definition~\ref{def:toy-whitened-block} satisfies
 \begin{equation}
 \label{eq:toy-anomaly-visibility-A}
-        \bigl|\mathcal A_\toy\bigl(\widehat\Om_\toy(s;m,u)\bigr)\bigr|
+        \bigl|\mathcal A_\toy\bigl(\widehat\Om_\toy(s;m,u,q_0)\bigr)\bigr|
         \;\ge\;
         \tfrac12\,c_\toy(D)\,u^2.
 \end{equation}
@@ -1901,7 +1953,7 @@ smallness threshold from Lemma~\ref{lem:toy-block-positivity}.  Choose
 small enough that both lemmas apply.  By
 \eqref{eq:toy-anomaly-leading} and \eqref{eq:F-toy-lower-bound},
 \[
-\bigl|\mathcal A_\toy\bigl(\widehat\Om_\toy(s;m,u)\bigr)\bigr|
+\bigl|\mathcal A_\toy\bigl(\widehat\Om_\toy(s;m,u,q_0)\bigr)\bigr|
 \;\ge\;
 u^2\bigl(c_\toy(D)-u^2\,C_R(D)\bigr).
 \]
@@ -1914,11 +1966,12 @@ Decreasing \(u_\toy(D)\) so that \(u_\toy(D)^{\,2}\,C_R(D)\le c_\toy(D)/2\) give
 Fix \(D\) and the constants \(Q_\toy(D)\), \(u_\toy(D)\), \(c_\toy(D)\)
 of Theorem~\ref{thm:toy-anomaly-visibility}.  Assume the height is large
 enough that \(q_T^-\ge Q_\toy(D)\), where
-\(q_T^-:=\inf_{m\in I_T}q(m)\).  Then for every \(0<|u|\le
+\(q_T^-:=\inf_{m\in I_T}q(m)\).  On the toy retained subdomain we set
+\(q_0=q(m)\).  Then for every \(0<|u|\le
 u_\toy(D)\) and every \((m,s)\in\mathcal D_T^\toy(D)\),
 \begin{equation}
 \label{eq:toy-anomaly-visibility-on-subdomain}
-        \bigl|\mathcal A_\toy(\widehat\Om_\toy(s;m,u))\bigr|
+        \bigl|\mathcal A_\toy(\widehat\Om_\toy(s;m,u,q(m)))\bigr|
         \ge \tfrac12 c_\toy(D)u^2.
 \end{equation}
 If, in addition, the hypotheses of Lemma~\ref{lem:toy-retained-density}
@@ -1972,8 +2025,8 @@ rederived for the present toy phase or kept in the archive.
 The visibility lower bound \eqref{eq:toy-anomaly-visibility-A} cannot be
 extended to all of \(\mathcal D_T\).  At \(s=0\), the same coalescence
 argument as Corollary~\ref{cor:omega-coalescence}, applied to the toy
-finite blocks, gives \(\widehat\Om_\toy(0;m,u)=I_2\) for every \(u\).
-Hence \(\mathcal A_\toy(\widehat\Om_\toy(0;m,u))=0\); no
+finite blocks, gives \(\widehat\Om_\toy(0;m,u,q_0)=I_2\) for every \(u\).
+Hence \(\mathcal A_\toy(\widehat\Om_\toy(0;m,u,q_0))=0\); no
 \(u^2\)-lower bound can hold at the coalescence locus \(d=0\).  The
 regimes \(d\to\infty\) and \(d\) approaching an isolated zero of
 \(F_\infty\) are excluded by the compactness and avoidance hypotheses on
@@ -2411,7 +2464,7 @@ polynomial lower bound on \(\partial_t^3 Z\) across the
 retained packet family.  This is an analytic estimate on \(\zeta\) and
 not on the local jet-Gram geometry; it is what makes
 Section~\ref{sec:source-energy-supply} optional.  v1 prose to
-mine: the Hardy-curvature mass-good packet source block.
+mine: the source-energy mass-good packet block.
 \end{wip}
 
 \subsection{Energy-to-suppression transfer}
@@ -2486,7 +2539,7 @@ summarizes the principal mining correspondences.
 \S\ref{sec:riemann-hypothesis}
 & Master conditional theorem; introduction. \\
 \S\ref{sec:source-energy-supply}
-& Hardy-curvature mass-good packet source block; carrier-corrected
+& Source-energy mass-good packet block; carrier-corrected
   source bridge package; upstream Gate-1 arithmetic inputs. \\
 \hline
 \end{tabular}

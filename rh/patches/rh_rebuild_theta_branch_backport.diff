@@ -1,0 +1,51 @@
+--- rh_rebuild(12).tex
++++ rh_rebuild_theta_branch_backport.tex
+@@ -368,6 +368,21 @@
+ \]
+ \end{definition}
+ 
++\begin{remark}[Branch convention for the Riemann--Siegel phase]
++\label{rem:theta-branch-convention}
++The branch \(L\) in Definition~\ref{def:riemann-siegel-phase} is the
++holomorphic logarithm of \(\Gamma\) on the half-plane \(\Re z>0\), not the
++principal logarithm applied pointwise to \(\Gamma(z)\).  This branch exists
++because \(\Gamma\) has no zeros or poles on \(\Re z>0\), and the half-plane
++is simply connected; the normalization on \((0,\infty)\) fixes the additive
++constant.  Any other holomorphic logarithm on a connected subdomain would
++change \(\theta\) only by an additive constant \(2\pi k\), which leaves
++\(q=\theta'\), the phase differences \(\theta(x)-\theta(y)\), and therefore
++\(K_\theta\) unchanged.  A discontinuous branch, such as a principal-branch
++representative with jumps, is not part of the definition and cannot be used
++for derivative identities.
++\end{remark}
++
+ \begin{lemma}[Differentiated theta asymptotics]
+ \label{lem:theta-derivative-asymptotics}
+ Uniformly for \(t\in I_T\),
+@@ -386,7 +401,7 @@
+ \begin{proof}
+ Let \(z=1/4+it/2\).  The half-plane \(\Re z\ge 1/4\) lies in a fixed
+ Stirling sector.  By the differentiated form of Stirling's expansion,
+-after truncating \(\log\Gamma z\) at \(z^{-3}\) the remainder and its
++after truncating \(L(z)\) at \(z^{-3}\) the remainder and its
+ \(t\)-derivatives up to order three are uniform in this sector, with
+ the corresponding differentiated powers of \(|z|\).  Taking imaginary
+ parts in \eqref{eq:theta-definition} gives the standard
+@@ -2055,7 +2070,7 @@
+ retained packet family.  This is an analytic estimate on \(\zeta\) and
+ not on the local jet-Gram geometry; it is what makes
+ Section~\ref{sec:source-energy-supply} optional.  v1 prose to
+-mine: the Hardy-curvature mass-good packet source block.
++mine: the source-energy mass-good packet block.
+ \end{wip}
+ 
+ \subsection{Energy-to-suppression transfer}
+@@ -2130,7 +2145,7 @@
+ \S\ref{sec:riemann-hypothesis}
+ & Master conditional theorem; introduction. \\
+ \S\ref{sec:source-energy-supply}
+-& Hardy-curvature mass-good packet source block; carrier-corrected
++& Source-energy mass-good packet block; carrier-corrected
+   source bridge package; upstream Gate-1 arithmetic inputs. \\
+ \hline
+ \end{tabular}
