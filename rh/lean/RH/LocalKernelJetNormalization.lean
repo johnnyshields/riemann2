@@ -25,8 +25,11 @@ Theorems:
 -/
 
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
 import Mathlib.Analysis.Calculus.Deriv.Basic
 import Mathlib.Analysis.Calculus.IteratedDeriv.Defs
+import Mathlib.Analysis.Calculus.Taylor
+import Mathlib.Analysis.Calculus.DSlope
 import Mathlib.LinearAlgebra.Matrix.Notation
 import Mathlib.Topology.Order.Basic
 
@@ -168,9 +171,90 @@ theorem phase_kernel_diagonal_value (T : ℝ) :
   unfold phaseKernel
   simp
 
-/-- Diagonal partial in `x`: `K_x(T, T) = q'(T) / (2 π)`. -/
-axiom phase_kernel_diagonal_partial_x (T : ℝ) :
-    deriv (fun x => phaseKernel x T) T = qPrime T / (2 * Real.pi)
+/-- Diagonal partial in `x`: `K_x(T, T) = q'(T) / (2 π)`.
+
+    Proof via 2nd-order Taylor of `g(x) := sin(θ(x) − θ(T))` at `T`,
+    using `theta_smooth`.  Key steps:
+      (a) `g(T) = 0`, `iteratedDeriv 1 g T = q(T)`,
+          `iteratedDeriv 2 g T = q'(T)`.
+      (b) `taylor_isLittleO_univ`: `g x − [q(T)(x−T) + (q'(T)/2)(x−T)²] = o((x−T)²)`.
+      (c) Divide by `π(x−T)` to get the linear approximation of
+          `phaseKernel(·, T)` at `T` with derivative `q'(T)/(2π)`. -/
+theorem phase_kernel_diagonal_partial_x (T : ℝ) :
+    deriv (fun x => phaseKernel x T) T = qPrime T / (2 * Real.pi) := by
+  -- The smooth auxiliary function
+  set g : ℝ → ℝ := fun x => Real.sin (theta x - theta T) with hg_def
+  -- g is C^∞ (sin smooth, theta_smooth, composition)
+  have h_g_smooth : ContDiff ℝ ⊤ g := by
+    have h_θ_sub : ContDiff ℝ ⊤ (fun x => theta x - theta T) :=
+      theta_smooth.sub contDiff_const
+    exact Real.contDiff_sin.comp h_θ_sub
+  have h_g_C2 : ContDiff ℝ 2 g := h_g_smooth.of_le (by norm_num)
+  -- g(T) = 0
+  have h_g_T : g T = 0 := by
+    show Real.sin (theta T - theta T) = 0
+    rw [sub_self]; exact Real.sin_zero
+  -- g'(T) = q(T)
+  have h_θ : HasDerivAt theta (q T) T := (theta_differentiableAt T).hasDerivAt
+  have h_g_hasDeriv : HasDerivAt g (q T) T := by
+    have h_sub : HasDerivAt (fun x => theta x - theta T) (q T) T :=
+      h_θ.sub_const (theta T)
+    have := (Real.hasDerivAt_sin (theta T - theta T)).comp T h_sub
+    simpa [hg_def, sub_self] using this
+  have h_deriv_g_T : deriv g T = q T := h_g_hasDeriv.deriv
+  -- The key Taylor application: sin(θ(x) − θ(T)) − q(T)(x−T) − (q'(T)/2)(x−T)² = o((x−T)²).
+  -- We use the slope-style HasDerivAt directly.
+  -- For x ≠ T near T, phaseKernel(x, T) = g(x) / (π(x − T)).
+  -- For x = T, phaseKernel(T, T) = q(T)/π.
+  -- (a) Show phaseKernel(·, T) has the same value as (1/π) · dslope g T everywhere near T.
+  have h_phaseKernel_eq : (fun x => phaseKernel x T) =ᶠ[nhds T]
+      (fun x => (1 / Real.pi) * dslope g T x) := by
+    refine Filter.Eventually.of_forall fun x => ?_
+    show phaseKernel x T = (1 / Real.pi) * dslope g T x
+    by_cases hx : x = T
+    · subst hx
+      have hpK : phaseKernel x x = q x / Real.pi := by unfold phaseKernel; simp
+      rw [hpK, dslope_same, h_deriv_g_T]
+      field_simp
+    · have hxT : x ≠ T := hx
+      have h_phK : phaseKernel x T = Real.sin (theta x - theta T) / (Real.pi * (x - T)) := by
+        unfold phaseKernel; simp [hxT]
+      rw [h_phK, dslope_of_ne g hxT]
+      simp only [slope, vsub_eq_sub, smul_eq_mul]
+      show Real.sin (theta x - theta T) / (Real.pi * (x - T)) =
+           1 / Real.pi * ((x - T)⁻¹ * (g x - g T))
+      rw [h_g_T, sub_zero]
+      show Real.sin (theta x - theta T) / (Real.pi * (x - T)) =
+           1 / Real.pi * ((x - T)⁻¹ * Real.sin (theta x - theta T))
+      field_simp
+  -- (b) Show dslope g T has HasDerivAt at T with value q'(T)/2 = iteratedDeriv 2 g T / 2.
+  -- This follows from g being C^2 via Taylor.
+  -- Use taylor_isLittleO_univ: g(x) − taylorPoly_2(x) = o((x − T)²).
+  have h_taylor : (fun x => g x - taylorWithinEval g 2 Set.univ T x) =o[nhds T]
+      (fun x => (x - T)^2) := taylor_isLittleO_univ h_g_C2
+  -- Compute the Taylor polynomial: T_2(x) = 0 + q(T)(x−T) + (q'(T)/2)(x−T)².
+  have h_iter1 : iteratedDerivWithin 1 g Set.univ T = q T := by
+    rw [iteratedDerivWithin_one]
+    rw [derivWithin_of_isOpen isOpen_univ (Set.mem_univ T)]
+    exact h_deriv_g_T
+  have h_iter2_eq_qPrime : iteratedDerivWithin 2 g Set.univ T = qPrime T := by
+    -- Computing the second derivative of `g(x) = sin(θ(x) − θ(T))` at `T`.
+    -- g'(x) = cos(θ(x) − θ(T)) · θ'(x).
+    -- g''(T) = -sin(0)·q(T)² + cos(0)·q'(T) = q'(T).
+    -- TODO: explicit computation via chain rule + product rule + iteratedDeriv API.
+    sorry
+  -- Now the Taylor polynomial at order 2 is:
+  --   taylorWithinEval g 2 univ T x = g(T) + g'(T)(x−T) + (g''(T)/2)(x−T)²
+  --                                  = 0 + q(T)(x−T) + (q'(T)/2)(x−T)².
+  -- (c) Use the o-bound to derive HasDerivAt for phaseKernel(·, T).
+  have h_kernel_hasDeriv : HasDerivAt (fun x => phaseKernel x T)
+      (qPrime T / (2 * Real.pi)) T := by
+    -- TODO: piece h_phaseKernel_eq, h_taylor, h_iter1, h_iter2_eq_qPrime
+    -- together to conclude.  The bound shows
+    --   phaseKernel(x, T) − q(T)/π − (qPrime T/(2π))(x − T) = o(x − T)
+    -- which is exactly HasDerivAt.
+    sorry
+  exact h_kernel_hasDeriv.deriv
 
 /-- Diagonal partial in `y`: `K_y(T, T) = q'(T) / (2 π)`. -/
 axiom phase_kernel_diagonal_partial_y (T : ℝ) :
