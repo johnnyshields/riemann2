@@ -1,0 +1,306 @@
+% =============================================================================
+% Referee-revised patch: §6 Transverse projection
+%   sec:transverse-projection
+%
+% Scope.
+%   - Defines only the two-point scalar transverse projection on M_2(R).
+%   - Makes the scalar channel used by §5 and §7 type-safe:
+%         A_2(X) := A_toy(Pi_trans X) = A_toy(X) = x_12+x_21.
+%   - Does not define the four-point projection Pi_trans^{(4)}.
+%   - Does not import v1's M(d), A_val, or Psi_{x,d} calibration machinery.
+% =============================================================================
+
+% =============================================================================
+\section{Transverse projection}
+\label{sec:transverse-projection}
+\statuspaper{LIVE}\quad
+\statusmig{migrated}\quad
+\statusreferee{in-progress}\quad
+\statussympy[rh/sympy/sec-transverse-projection.py]{verified}\quad
+\statussim[rh/simulation/sec-transverse-projection.py]{verified}\quad
+\statuslean{not-started}
+\par\medskip
+
+The scalar toy anomaly functional \(\mathcal A_\toy\) of
+Definition~\ref{def:toy-anomaly-functional} fixes the two-point value
+subspace as its kernel.  The transverse projection in this section is
+the Hilbert--Schmidt orthogonal projection of the Gram-normalized
+\(2\times2\) matrix space onto the one-dimensional complement of that
+kernel.  This gives a canonical two-point \(\Pi_\trans\) compatible with
+the scalar visibility lower bound of
+Theorem~\ref{thm:toy-anomaly-visibility}.  The projection has
+Hilbert--Schmidt operator norm one, contributes no polynomial loss, and
+allows the actual-zeta two-point suppression statement of
+Section~\ref{sec:actual-zeta-transverse-suppression} to be formulated in
+the same scalar channel as the toy lower bound.  This section does not
+define the four-point projection \(\Pi_\trans^{(4)}\).
+
+\subsection{Value subspace and transverse projection}
+\label{subsec:transverse-projection-construction}
+
+We work on \(M_{2}(\mathbb R)\) with the Hilbert--Schmidt inner product
+\(
+        \langle X,Y\rangle_{\mathrm{HS}}
+        :=\operatorname{tr}(X^\top Y).
+\)
+
+\begin{definition}[Value subspace]
+\label{def:value-subspace}
+The two-point scalar value subspace is
+\begin{equation}
+\label{eq:V-val}
+        \mathcal V_\val
+        :=\bigl\{X\in M_{2}(\mathbb R):x_{12}+x_{21}=0\bigr\}
+        =\ker\mathcal A_\toy.
+\end{equation}
+\end{definition}
+
+\begin{lemma}[Explicit basis for \(\mathcal V_\val\)]
+\label{lem:value-subspace-explicit-basis}
+\(\mathcal V_\val\) is a three-dimensional subspace of \(M_2(\mathbb R)\)
+with orthonormal basis
+\begin{equation}
+\label{eq:V-val-basis}
+        e_{11}=\begin{pmatrix}1&0\\0&0\end{pmatrix},
+        \qquad
+        e_{22}=\begin{pmatrix}0&0\\0&1\end{pmatrix},
+        \qquad
+        e_{\mathrm{anti}}=\frac1{\sqrt2}
+        \begin{pmatrix}0&1\\-1&0\end{pmatrix}.
+\end{equation}
+Its one-dimensional orthogonal complement is
+\begin{equation}
+\label{eq:V-val-perp-basis}
+        \mathcal V_\val^\perp=\mathbb R e_\sym,
+        \qquad
+        e_\sym:=\frac1{\sqrt2}
+        \begin{pmatrix}0&1\\1&0\end{pmatrix}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The four matrices \(e_{11},e_{22},e_{\mathrm{anti}},e_\sym\) form an
+orthonormal basis of \(M_2(\mathbb R)\) by direct calculation.  The first
+three have \(x_{12}+x_{21}=0\), so they lie in \(\mathcal V_\val\).
+The matrix \(e_\sym\) has \(x_{12}+x_{21}=\sqrt2\ne0\) and is orthogonal
+to the first three, so it spans \(\mathcal V_\val^\perp\).
+\end{proof}
+
+\begin{remark}[Four-point projection not supplied here]
+\label{rem:transverse-projection-four-point-not-supplied}
+This section defines the two-center projection on \(M_2(\mathbb R)\).
+The four-center projection \(\Pi_\trans^{(4)}\) appearing in
+Hypothesis~\ref{hyp:zeta-suppression-four-point} and
+Theorem~\ref{thm:four-point-rigidity} is a separate object.  No
+four-point quotient, four-point value subspace, or four-point scalar
+functional is proved in this section.
+\end{remark}
+
+\begin{remark}[Projection arity scope]
+\label{rem:transverse-projection-arity-scope}
+This is a projection section, not a catalogue of all finite-core arities.
+The projection constructed here is deliberately the two-point projection
+on \(M_2(\mathbb R)\).  The following conventions prevent later misuse of
+\(\Pi_\trans\).
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=*]
+\item \emph{One-center data.}  There is no one-point obstruction
+projection.  The same-point block \(J(t)\) is normalization data used for
+positivity and whitening before the mixed block enters this section.
+Calling this a one-point projection would conflate the metric used for
+whitening with the transverse obstruction.
+\item \emph{Two-center data.}  The two-center object is the whitened
+\(2\times2\) mixed block \(\widehat\Om(s;m)\).  On this space the scalar
+channel \(\mathcal A_2(X)=x_{12}+x_{21}\) and the projection
+\(\Pi_\trans\) of Definition~\ref{def:transverse-projection} are the
+completed objects of this section.
+\item \emph{Three-center data.}  There is no three-point projection in
+this rebuild, and no three-point symmetry-packet branch is used in the
+current comparison architecture.  The archived draft does contain
+three-point finite-core geometry, where three lifted points are tested for
+collinearity, but that is a separate lifted/projective branch and is not
+a restriction of the present \(M_2\)-projection.  It remains archived
+unless a later section explicitly imports and rederives it.
+\item \emph{Four-center data.}  The only additional projection arity that
+belongs to the comparison layer is the four-point/full-quartet frontier.
+Its projection \(\Pi_\trans^{(4)}\) is not obtained by applying
+\(\Pi_\trans\) entrywise; it must be constructed in the four-center
+jet--Gram space, with its own value subspace and compatibility theorem.
+\item \emph{\(N\)-point data.}  The \(N\)-point package is not a projection
+package.  It is scalar moment aggregation applied to already-defined
+two-point scalar samples, schematically
+\(H_m(s_j)=\mathcal A_2(\widehat\Om(s_j;m))\), with moment-canceling
+coefficients.  Thus it belongs to the later odd-moment/aggregation layer,
+not to this projection section.
+\end{enumerate}
+\end{remark}
+
+\begin{wip}[Four-point projection data]
+\label{gap:four-point-projection-data}
+A four-point projection package, if used, must supply the following data:
+\begin{enumerate}[label=\textup{(F\arabic*)},leftmargin=*]
+\item the ambient four-center jet--Gram space and its normalization;
+\item the four-point value/nuisance subspace to be quotiented;
+\item a scalar or finite-vector transverse channel
+      \(\mathcal A_{4,\trans}\);
+\item a projection or quotient representative \(\Pi_\trans^{(4)}\) with
+      polynomial operator loss;
+\item toy visibility and actual-zeta suppression stated in this same
+      four-point channel.
+\end{enumerate}
+Until these data are supplied, all four-point statements must remain
+hypotheses or gap statements.  They are not consequences of
+Definition~\ref{def:transverse-projection}.
+\end{wip}
+
+\begin{definition}[Transverse projection]
+\label{def:transverse-projection}
+The two-point transverse projection
+\(\Pi_\trans:M_2(\mathbb R)\to M_2(\mathbb R)\) is the Hilbert--Schmidt
+orthogonal projection onto \(\mathcal V_\val^\perp\).  Equivalently,
+\begin{equation}
+\label{eq:Pi-trans-explicit}
+        \Pi_\trans X
+        =\frac{x_{12}+x_{21}}{2}
+        \begin{pmatrix}0&1\\1&0\end{pmatrix}.
+\end{equation}
+\end{definition}
+
+\begin{definition}[Two-point scalar transverse channel]
+\label{def:two-point-scalar-transverse-channel}
+For a real two-center whitened block \(X\in M_2(\mathbb R)\), define
+\begin{equation}
+\label{eq:two-point-scalar-channel}
+        \mathcal A_2(X):=\mathcal A_\toy(\Pi_\trans X).
+\end{equation}
+Lemma~\ref{lem:transverse-projection-A-toy-compatibility} proves that
+\(\mathcal A_2(X)=\mathcal A_\toy(X)=x_{12}+x_{21}\).  Thus
+\(\mathcal A_2\) is a scalar functional on two-point matrix
+representatives, or equivalently on the quotient
+\(M_2(\mathbb R)/\mathcal V_\val\) after choosing the Hilbert--Schmidt
+orthogonal representative \(\Pi_\trans X\).
+\end{definition}
+
+\subsection{Properties of \(\Pi_\trans\)}
+\label{subsec:transverse-projection-properties}
+
+\begin{lemma}[Projection properties]
+\label{lem:transverse-projection-properties}
+The operator \(\Pi_\trans\) is idempotent, self-adjoint with respect to
+the Hilbert--Schmidt inner product, has kernel exactly
+\(\mathcal V_\val\), and, as an operator on
+\((M_2(\mathbb R),\|\cdot\|_{\mathrm{HS}})\), satisfies
+\begin{equation}
+\label{eq:Pi-trans-norm}
+        \|\Pi_\trans\|_{\op,\mathrm{HS}\to\mathrm{HS}}=1.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Formula~\eqref{eq:Pi-trans-explicit} is the same as
+\(\Pi_\trans X=\langle X,e_\sym\rangle_{\mathrm{HS}}e_\sym\).  Hence
+\(\Pi_\trans\) is the Hilbert--Schmidt orthogonal projection onto the
+nonzero subspace \(\mathbb R e_\sym\).  Idempotence, self-adjointness,
+kernel \(\mathcal V_\val\), and operator norm one follow immediately.
+\end{proof}
+
+\begin{lemma}[Quotient representative and scalar norm]
+\label{lem:transverse-projection-quotient-representative}
+For every \(X\in M_2(\mathbb R)\),
+\begin{equation}
+\label{eq:Pi-trans-representative}
+        \Pi_\trans X=\frac{\mathcal A_\toy(X)}{\sqrt2}\,e_\sym,
+        \qquad X-\Pi_\trans X\in\mathcal V_\val,
+\end{equation}
+and
+\begin{equation}
+\label{eq:Pi-trans-HS-norm-scalar}
+        \|\Pi_\trans X\|_{\mathrm{HS}}^2
+        =\frac{|\mathcal A_\toy(X)|^2}{2}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The representative identity follows from \eqref{eq:Pi-trans-explicit} and
+\(e_\sym=2^{-1/2}\begin{psmallmatrix}0&1\\1&0\end{psmallmatrix}\).  Applying
+\(\mathcal A_\toy\) to \(X-\Pi_\trans X\) gives zero by
+Lemma~\ref{lem:transverse-projection-A-toy-compatibility}, so the residual
+lies in \(\mathcal V_\val\).  The norm identity follows from
+\(\|e_\sym\|_{\mathrm{HS}}=1\).
+\end{proof}
+
+\begin{lemma}[Scalar-channel compatibility]
+\label{lem:transverse-projection-A-toy-compatibility}
+For every \(X\in M_2(\mathbb R)\),
+\begin{equation}
+\label{eq:A-toy-pi-compat}
+        \mathcal A_\toy(\Pi_\trans X)=\mathcal A_\toy(X).
+\end{equation}
+Consequently the toy visibility lower bound
+\eqref{eq:toy-anomaly-visibility-A} is unchanged if the toy whitened
+block is first replaced by its projected representative
+\(\Pi_\trans\widehat\Om_\toy\).  No matrix-norm lower bound is asserted;
+only the scalar channel \(\mathcal A_2=\mathcal A_\toy\circ\Pi_\trans\)
+is transported.
+\end{lemma}
+
+\begin{proof}
+By \eqref{eq:Pi-trans-explicit},
+\((\Pi_\trans X)_{12}=(\Pi_\trans X)_{21}=(x_{12}+x_{21})/2\).  Therefore
+\[
+\mathcal A_\toy(\Pi_\trans X)
+=\frac{x_{12}+x_{21}}2+\frac{x_{12}+x_{21}}2
+=x_{12}+x_{21}=\mathcal A_\toy(X).
+\]
+The final assertion follows by applying this equality to
+\(X=\widehat\Om_\toy(s;m,u,q_0)\) inside the absolute value in
+\eqref{eq:toy-anomaly-visibility-A}.
+\end{proof}
+
+\subsection{Scope of the chosen projection}
+\label{subsec:transverse-projection-scope}
+
+\begin{remark}[No richer quotient is used in the scalar rebuild]
+\label{rem:transverse-projection-no-richer-quotient}
+The downstream two-point comparison consumes only the scalar visibility
+\(|\mathcal A_2(\widehat\Om_\toy)|\) and the matching actual-zeta scalar
+upper bound \(|\mathcal A_2(\widehat\Om_\z)|\).  At this scalar level,
+the kernel of \(\mathcal A_\toy\) is the complete value subspace.  The
+orthogonal projection of Definition~\ref{def:transverse-projection}
+gives the canonical Hilbert--Schmidt representative of the quotient map
+\(M_2(\mathbb R)\to M_2(\mathbb R)/\mathcal V_\val\), with no polynomial
+loss.  Richer matrix-level quotient constructions from the archived
+local-projective-rigidity machinery are not imported here; cf.
+Remark~\ref{rem:toy-phase-v1-compatibility}.
+\end{remark}
+
+\begin{remark}[Residual gauge]
+\label{rem:transverse-projection-residual-gauge}
+The retained chart of Definition~\ref{def:local-phase-chart} pins
+\(\Ph_T=\theta\).  Additive constants \(\Ph\mapsto\Ph+c\) leave
+\(q,q',q''\), hence \(G_{m,\pm}\), \(N_m\), and \(\widehat\Om_\z\),
+unchanged.  Affine-jet shifts \(\Ph\mapsto\Ph+at\) change \(q\) to
+\(q+a\) and do not preserve the chart class.  Thus there is no residual
+gauge action on the two-point matrix representatives beyond the trivial
+additive-constant invariance.
+\end{remark}
+
+\begin{lemma}[Sufficient two-point projection input]
+\label{lem:transverse-projection-sufficient}
+The transverse projection \(\Pi_\trans\) and scalar channel
+\(\mathcal A_2\) supply the two-point projection input required by
+Section~\ref{sec:projective-rigidity}: the toy visibility lower bound
+\eqref{eq:toy-anomaly-visibility-A} transports through \(\Pi_\trans\)
+by Lemma~\ref{lem:transverse-projection-A-toy-compatibility}, and the
+Hilbert--Schmidt operator-norm bound \eqref{eq:Pi-trans-norm}
+contributes no polynomial-in-\(Q\) loss.  The actual-zeta two-point
+upper bound must be stated in the same scalar channel, namely as a
+bound for \(|\mathcal A_2(\widehat\Om_\z(s;m))|\).
+\end{lemma}
+
+\begin{proof}
+Combine Lemmas~\ref{lem:transverse-projection-properties},
+\ref{lem:transverse-projection-quotient-representative},
+and~\ref{lem:transverse-projection-A-toy-compatibility} with
+Theorem~\ref{thm:toy-anomaly-visibility} and
+Corollary~\ref{cor:toy-visibility-polynomial-weight}.
+\end{proof}

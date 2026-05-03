@@ -1,0 +1,128 @@
+--- rh_rebuild(14).tex:section7
++++ sec-actual-zeta-transverse-suppression.typefix.tex
+@@ -1,3 +1,15 @@
++% =============================================================================
++% Connectivity patch: §7 Actual-zeta transverse suppression
++%
++% Purpose:
++%   * Make the two-point suppression hypothesis type-safe after the §6
++%     scalar projection patch.
++%   * Avoid expressions of the form Pi_trans A_2(X), where A_2 is scalar.
++%   * Leave the four-point projection/functional as an explicit separate
++%     datum, since §6 supplies only the two-center M_2(R) projection.
++% =============================================================================
++
++% =============================================================================
+ \section{Actual-zeta transverse suppression}
+ \label{sec:actual-zeta-transverse-suppression}
+ \statuspaper{LIVE}\quad
+@@ -11,12 +23,21 @@
+ The actual zeta phase \(\Ph\) defines two whitened blocks --- the
+ two-center block \(\widehat\Om_\z(s;m)\) and a four-center analogue
+ \(\widehat\Om_\z^{(4)}\) for the symmetric quartet --- on which the
+-actual-zeta anomaly is suppressed at a strictly larger polynomial
+-exponent than the corresponding toy lower bound of
+-Theorem~\ref{thm:toy-anomaly-visibility}.  This is the load-bearing
+-asymmetry of the program: the off-line scenario forces the projective
+-anomaly to be large; the actual zeta phase forces it to be small.  The
+-two-point and four-point comparisons of
++actual-zeta transverse anomaly is suppressed at a strictly larger
++polynomial exponent than the corresponding toy lower bound of
++Theorem~\ref{thm:toy-anomaly-visibility}.  In the two-point case, the
++transverse scalar channel is the one fixed in
++Section~\ref{sec:transverse-projection}:
++\[
++        \mathcal A_2(X)
++        :=\mathcal A_\toy(\Pi_\trans X)
++        =\mathcal A_\toy(X).
++\]
++The equality is Lemma~\ref{lem:transverse-projection-A-toy-compatibility}.
++Thus \(\Pi_\trans\) acts on the block before the scalar functional is
++applied; the expression \(\Pi_\trans\mathcal A_2(X)\) is not used.
++
++The two-point and four-point comparisons of
+ Section~\ref{sec:projective-rigidity} consume different forms of this
+ suppression, stated separately below.
+ 
+@@ -25,19 +46,22 @@
+ 
+ \begin{hypothesis}[Two-point actual-zeta transverse suppression]
+ \label{hyp:zeta-suppression-two-point}
+-For the two-center packet associated with \(\rho\) and a symmetry
+-partner, after the gauge-fixed normalization of
+-Definition~\ref{def:local-phase-chart} and the projection
+-\(\Pi_\trans\) of Definition~\ref{def:transverse-projection},
++For the two-center packet associated with \(\rho\) and a symmetry partner,
++after the gauge-fixed normalization of Definition~\ref{def:local-phase-chart},
++\begin{equation}
++\label{eq:zeta-suppression-two-point-scalar}
++        \bigl|\mathcal A_2\bigl(\widehat\Om_\z(s;m)\bigr)\bigr|
++        \le Q^{-B_{\z,2}}
++\end{equation}
++for an absolute exponent \(B_{\z,2}>A_\toy\) on the retained subfamily
++matched to the toy visibility theorem.  Equivalently, by
++Lemma~\ref{lem:transverse-projection-A-toy-compatibility},
+ \[
+-\bigl\|\Pi_\trans\,\mathcal A_2\bigl(\widehat\Om_\z(s;m)\bigr)\bigr\|
+-\;\le\; Q^{-B_{\z,2}}
++        \bigl|\mathcal A_\toy\bigl(\Pi_\trans\widehat\Om_\z(s;m)\bigr)\bigr|
++        =
++        \bigl|\mathcal A_\toy\bigl(\widehat\Om_\z(s;m)\bigr)\bigr|
++        \le Q^{-B_{\z,2}}.
+ \]
+-for an absolute exponent \(B_{\z,2}>A_\toy\) on the retained subfamily
+-used in Theorem~\ref{thm:toy-anomaly-visibility}.  Here \(\mathcal A_2\)
+-is the restriction of the toy anomaly functional of
+-Theorem~\ref{thm:toy-anomaly-visibility} to the actual-zeta two-center
+-whitened block.
+ \end{hypothesis}
+ 
+ \begin{wip}\label{rem:wip-zeta-suppression-two-point}
+@@ -57,25 +81,29 @@
+ \begin{hypothesis}[Four-point actual-zeta transverse suppression]
+ \label{hyp:zeta-suppression-four-point}
+ For the four-center packet associated with the symmetry quartet
+-\(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\), under the four-point
+-projection \(\Pi_\trans^{(4)}\) extending
+-Definition~\ref{def:transverse-projection},
+-\[
+-\bigl\|\Pi_\trans^{(4)}\,\mathcal A_4\bigl(\widehat\Om_\z^{(4)}\bigr)\bigr\|
+-\;\le\; Q^{-B_{\z,4}}
+-\]
++\(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\), let
++\(\Pi_\trans^{(4)}\) be a four-point transverse projection and let
++\(\mathcal A_{4,\trans}\) be the corresponding four-point transverse
++functional, i.e. a scalar or finite-dimensional normed output after the
++four-point projection has been applied.  Then
++\begin{equation}
++\label{eq:zeta-suppression-four-point-transverse}
++        \bigl\|\mathcal A_{4,\trans}\bigl(\widehat\Om_\z^{(4)}\bigr)\bigr\|
++        \le Q^{-B_{\z,4}}
++\end{equation}
+ for an absolute exponent \(B_{\z,4}>A_\toy^{(4)}\) on the retained
+-four-point subfamily.  Here \(\mathcal A_4\) is the four-point analogue
+-of the toy anomaly functional and \(A_\toy^{(4)}\) is the four-point
+-toy visibility exponent.
++four-point subfamily.
+ \end{hypothesis}
+ 
+ \begin{wip}\label{rem:wip-zeta-suppression-four-point}
+ The four-point case of the structural gap.  Consumed by
+ Theorem~\ref{thm:four-point-rigidity}.  Same admissible proof routes
+-as Hypothesis~\ref{hyp:zeta-suppression-two-point}.  v1 prose to mine:
+-the local projective rigidity of the one-pair and multi-pair families
+-section, four-point variant.
++as Hypothesis~\ref{hyp:zeta-suppression-two-point}.  The projection
++\(\Pi_\trans^{(4)}\), the four-point value subspace, and the functional
++\(\mathcal A_{4,\trans}\) are not supplied by
++Section~\ref{sec:transverse-projection}; they are separate four-center
++inputs.  v1 prose to mine: the local projective rigidity of the one-pair
++and multi-pair families section, four-point variant.
+ \end{wip}
+ 
+ \begin{remark}[Standalone and energy-supply routes]
+@@ -90,4 +118,3 @@
+ Section~\ref{sec:projective-rigidity} indicate which hypothesis is
+ invoked, not which route proves it.
+ \end{remark}
+-

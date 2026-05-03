@@ -9,12 +9,16 @@ Coverage:
   * Pi_trans is idempotent and self-adjoint (HS inner product).
   * Pi_trans annihilates each V_val basis element {e_11, e_22, e_anti}
     and fixes e_sym.
-  * A_toy(Pi_trans X) = A_toy(X) for randomly sampled X.
+  * A_toy(Pi_trans X) = A_toy(X) for sampled X, and the type-safe
+    two-point scalar channel A_2(X):=A_toy(Pi_trans X) agrees with A_toy(X).
   * Apply Pi_trans to actual-zeta whitened block \widehat\Om_z(s; m) at
     high T; confirm A_toy(Pi_trans \widehat\Om_z) = A_toy(\widehat\Om_z)
-    and the deviation is bounded by the §7 suppression hypothesis order.
+    and ||Pi_trans \widehat\Om_z||_HS = |A_toy(\widehat\Om_z)|/sqrt(2).
+    This does not verify the §7 suppression hypothesis; it verifies only
+    the type-safe scalar/projection handoff.
   * Apply Pi_trans to the toy whitened block at off-line displacement;
-    confirm A_toy preserved and the visibility lower bound transports.
+    confirm A_toy is preserved and the projected norm relation holds.
+    The actual visibility lower bound is supplied by §5.
   * ||Pi_trans||_op = 1 verified by sweeping HS-unit-norm matrices.
 
 All checks are assertions.  No numpy, no math, no built-in float in
@@ -68,6 +72,15 @@ def Pi_trans(X):
     """Pi_trans X = ((X_{12} + X_{21}) / 2) * [[0, 1], [1, 0]]."""
     half = (X[0, 1] + X[1, 0]) / 2
     return mp_matrix([[mpf("0"), half], [half, mpf("0")]])
+
+
+def A2_trans(X):
+    """Type-safe scalar two-point channel: A_2(X)=A_toy(Pi_trans X)."""
+    return A_toy(Pi_trans(X))
+
+def projected_norm_relation_error(X):
+    """Return | ||Pi_trans X||_HS - |A_toy(X)|/sqrt(2) |."""
+    return fabs(hs_norm(Pi_trans(X)) - fabs(A_toy(X)) / mp_sqrt(2))
 
 
 # Basis matrices.
@@ -178,8 +191,12 @@ def check_A_toy_descends_through_pi_trans_mp():
         before = A_toy(X)
         after = A_toy(Pi_trans(X))
         delta = fabs(before - after)
+        norm_delta = projected_norm_relation_error(X)
         assert delta < eps, (
             f"A_toy(Pi X) - A_toy(X) = {delta} != 0 at X = {X}"
+        )
+        assert norm_delta < eps, (
+            f"||Pi X||_HS - |A_toy(X)|/sqrt(2) = {norm_delta} != 0"
         )
     print(f"  [PASS] A_toy invariant under Pi_trans on {len(samples)} samples.")
 
@@ -237,6 +254,42 @@ def check_pi_trans_operator_norm_unity_mp():
     print(f"  ||Pi_trans e_sym||_HS = {float(e_sym_norm):.6f}  (= 1)")
     print("  [PASS] ||Pi_trans||_op = 1 (achieved at e_sym).")
 
+
+
+
+def check_A2_type_handoff_mp():
+    print("=" * 70)
+    print("[def:two-point-scalar-transverse-channel]  A_2(X)=A_toy(X)")
+    print("=" * 70)
+    samples = [
+        mp_matrix([[mpf("2"), mpf("-3")], [mpf("5"), mpf("7")]]),
+        mp_matrix([[mpf("0.2"), mpf("0.4")], [mpf("-1.1"), mpf("3.5")]]),
+    ]
+    eps = mpf("1e-30")
+    for X in samples:
+        delta = fabs(A2_trans(X) - A_toy(X))
+        assert delta < eps, f"A2_trans(X) - A_toy(X) = {delta}"
+    print(f"  [PASS] A_2(X):=A_toy(Pi_trans X) equals A_toy(X) on {len(samples)} samples.")
+
+
+def check_quotient_decomposition_mp():
+    print("=" * 70)
+    print("[lem:transverse-projection-quotient-representative] sampled decomposition")
+    print("=" * 70)
+    samples = [
+        mp_matrix([[mpf("2"), mpf("-3")], [mpf("5"), mpf("7")]]),
+        mp_matrix([[mpf("0.2"), mpf("0.4")], [mpf("-1.1"), mpf("3.5")]]),
+    ]
+    eps = mpf("1e-30")
+    for X in samples:
+        P = Pi_trans(X)
+        V = X - P
+        assert fabs(A_toy(V)) < eps, f"X-PiX not in V_val: A_toy={A_toy(V)}"
+        assert fabs(hs_inner(V, P)) < eps, f"orthogonality failed: <V,P>={hs_inner(V, P)}"
+        recon = P + V
+        err = max(fabs(recon[i, j] - X[i, j]) for i in range(2) for j in range(2))
+        assert err < eps, f"reconstruction failed: {err}"
+    print(f"  [PASS] X = Pi_trans X + V_val part, orthogonally, on {len(samples)} samples.")
 
 # ---------------------------------------------------------------------------
 # (ii) Apply Pi_trans to the actual-zeta and toy whitened blocks.
@@ -327,17 +380,22 @@ def check_pi_trans_on_actual_zeta_block():
         a_before = A_toy(Omega_z)
         a_after = A_toy(Pi_trans(Omega_z))
         delta = fabs(a_before - a_after)
-        cases.append((T, Q, a_before, delta))
+        norm_delta = projected_norm_relation_error(Omega_z)
+        cases.append((T, Q, a_before, delta, norm_delta))
         assert delta < eps, (
             f"At T = {T}, A_toy(Pi Om) - A_toy(Om) = {delta}, expected 0"
         )
+        assert norm_delta < eps, (
+            f"At T = {T}, projected norm relation error = {norm_delta}"
+        )
 
-    for T, Q, a, d in cases:
+    for T, Q, a, d, nd in cases:
         print(f"  T={float(T):.1e}, Q={float(Q):.3f}: "
               f"|A_toy(Om_z)|={float(fabs(a)):.4e}, "
-              f"|A_toy(Pi Om_z) - A_toy(Om_z)|={float(d):.2e}")
-    print(f"  [PASS] A_toy invariant under Pi_trans on actual-zeta block "
-          f"at {len(cases)} heights.")
+              f"|A_toy(Pi Om_z)-A_toy(Om_z)|={float(d):.2e}, "
+              f"norm-rel.err={float(nd):.2e}")
+    print(f"  [PASS] A_toy and projected-norm handoff verified on actual-zeta block "
+          f"at {len(cases)} heights.  No §7 suppression bound is asserted here.")
 
 
 def check_pi_trans_on_toy_block_off_line():
@@ -378,16 +436,21 @@ def check_pi_trans_on_toy_block_off_line():
         a_before = A_toy(Omega_toy)
         a_after = A_toy(Pi_trans(Omega_toy))
         delta = fabs(a_before - a_after)
-        results.append((q0, u, d, a_before, delta))
+        norm_delta = projected_norm_relation_error(Omega_toy)
+        results.append((q0, u, d, a_before, delta, norm_delta))
         assert delta < eps, (
             f"At q0={q0}, u={u}, d={d}: |A_toy(Pi Om) - A_toy(Om)| = {delta}"
         )
+        assert norm_delta < eps, (
+            f"At q0={q0}, u={u}, d={d}: projected norm relation error = {norm_delta}"
+        )
 
-    for q0, u, d, a, dd in results:
+    for q0, u, d, a, dd, nd in results:
         print(f"  q0={float(q0):4.1f}, u={float(u):.3f}, d={float(d):.2f}: "
               f"|A_toy|={float(fabs(a)):.4e}, "
-              f"|A_toy(Pi)-A_toy|={float(dd):.2e}")
-    print(f"  [PASS] A_toy invariant under Pi_trans on toy block "
+              f"|A_toy(Pi)-A_toy|={float(dd):.2e}, "
+              f"norm-rel.err={float(nd):.2e}")
+    print(f"  [PASS] A_toy and projected-norm handoff verified on toy block "
           f"at {len(cases)} (q0, u, d) triples.")
 
 
@@ -404,6 +467,10 @@ def main():
     print()
     check_A_toy_descends_through_pi_trans_mp()
     print()
+    check_A2_type_handoff_mp()
+    print()
+    check_quotient_decomposition_mp()
+    print()
     check_pi_trans_operator_norm_unity_mp()
     print()
     check_pi_trans_on_actual_zeta_block()
@@ -416,9 +483,11 @@ def main():
     print("  - Pi_trans is idempotent")
     print("  - kernel of Pi_trans = span{e_11, e_22, e_anti}")
     print("  - A_toy invariant under Pi_trans on generic samples")
+    print("  - A_2(X):=A_toy(Pi_trans X) equals A_toy(X)")
+    print("  - quotient representative decomposition on sampled matrices")
     print("  - ||Pi_trans||_op = 1 over unit-HS-norm sweep, achieved at e_sym")
-    print("  - A_toy invariant under Pi_trans on actual-zeta block at high T")
-    print("  - A_toy invariant under Pi_trans on off-line toy block")
+    print("  - A_toy and projected-norm handoff on actual-zeta block at high T")
+    print("  - A_toy and projected-norm handoff on off-line toy block")
     print("=" * 70)
 
 

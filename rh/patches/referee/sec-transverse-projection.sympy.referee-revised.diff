@@ -1,0 +1,138 @@
+--- /mnt/data/sec-transverse-projection(1).py	2026-05-03 09:25:28.435011198 +0000
++++ /mnt/data/sec-transverse-projection.sympy.referee-revised.py	2026-05-03 09:38:41.687172094 +0000
+@@ -4,8 +4,8 @@
+ 
+ Coverage:
+ 
+-  * Value subspace V_val = ker(A_toy) = {X : x_12 + x_21 = 0}
+-    is three-dimensional with explicit orthonormal basis
++  * Two-point scalar value subspace V_val = ker(A_toy) =
++    {X : x_12 + x_21 = 0} is three-dimensional with explicit orthonormal basis
+     (e_11, e_22, e_anti) in the Hilbert-Schmidt inner product
+     (def:value-subspace, lem:value-subspace-explicit-basis).
+   * Pi_trans X = ((x_12 + x_21)/2) * [[0, 1], [1, 0]]
+@@ -16,6 +16,11 @@
+   * ||Pi_trans||_op = 1 (orthogonal projection onto a non-zero subspace).
+   * A_toy(Pi_trans X) = A_toy(X) for every X
+     (lem:transverse-projection-A-toy-compatibility).
++  * Type handoff for the two-point actual-zeta side:
++        A_2(X) := A_toy(Pi_trans X) = A_toy(X).
++  * Quotient well-definedness: if X-Y lies in V_val then A_2(X)=A_2(Y),
++    and X-Pi_trans X is the orthogonal V_val representative
++    (lem:A2-quotient-well-defined).
+   * Regression: v1's A_val(x) of Proposition prop:explicit-Aval
+     (proof_of_rh.tex line 1260) has zero off-diagonal trace, hence lies
+     in the rebuild's V_val and is annihilated by Pi_trans.
+@@ -177,6 +182,28 @@
+     print("  [PASS] kernel of Pi_trans is exactly V_val; e_sym is fixed.")
+ 
+ 
++def verify_quotient_representative_and_norm_relation():
++    """Verify Pi_trans X = A_toy(X)/sqrt(2) e_sym and the HS norm relation."""
++    print("=" * 70)
++    print("[lem:transverse-projection-quotient-representative]  scalar/norm bridge")
++    print("=" * 70)
++    X = generic_2x2_matrix()
++    pi_X = Pi_trans(X)
++    representative = simplify(A_toy(X) / sqrt(2)) * E_sym
++    delta_rep = simplify(pi_X - representative)
++    assert delta_rep == zeros(2, 2), f"Pi_trans representative mismatch: {delta_rep}"
++    residual = simplify(X - pi_X)
++    residual_A = simplify(A_toy(residual))
++    assert residual_A == 0, f"X - Pi_trans X not in V_val: A={residual_A}"
++    norm_sq = simplify(hs_inner(pi_X, pi_X))
++    expected_norm_sq = simplify(A_toy(X)**2 / 2)
++    delta_norm = simplify(norm_sq - expected_norm_sq)
++    assert delta_norm == 0, f"norm relation mismatch: {delta_norm}"
++    print("  [PASS] Pi_trans X = A_toy(X)/sqrt(2) * e_sym.")
++    print("  [PASS] X - Pi_trans X lies in V_val.")
++    print("  [PASS] ||Pi_trans X||_HS^2 = A_toy(X)^2 / 2.")
++
++
+ def verify_pi_trans_operator_norm():
+     """An orthogonal projection onto a 1D subspace of a Hilbert space has
+     operator norm 1.  Verify via direct calculation: for every X with
+@@ -222,6 +249,53 @@
+     print("  [PASS] A_toy(Pi_trans X) = A_toy(X) for generic X.")
+ 
+ 
++
++
++def A_2(X):
++    """Two-point actual-zeta scalar channel: A_2(X)=A_toy(Pi_trans X)."""
++    return A_toy(Pi_trans(X))
++
++
++def verify_A2_type_handoff():
++    """Verify the type-safe §7 handoff: A_2(X) is scalar-valued and equals
++    A_toy(X).  This guards against the ill-typed expression Pi_trans A_2(X).
++    """
++    print("=" * 70)
++    print("[type handoff]  A_2(X) := A_toy(Pi_trans X) = A_toy(X)")
++    print("=" * 70)
++    X = generic_2x2_matrix()
++    delta = simplify(A_2(X) - A_toy(X))
++    assert delta == 0, f"A_2(X)-A_toy(X) = {delta}, expected 0"
++    print("  [PASS] A_2 is the same scalar channel as A_toy after projection.")
++
++
++def verify_A2_quotient_well_defined():
++    """If X-Y lies in V_val=ker(A_toy), then A_2(X)=A_2(Y).
++
++    This is the symbolic type check for the Section 7 handoff: the
++    actual-zeta side should use A_2(X)=A_toy(X) or ell_2(Pi_trans X),
++    not Pi_trans(A_2(X)).
++    """
++    print("=" * 70)
++    print("[lem:A2-quotient-well-defined]  A_2 descends to M_2/V_val")
++    print("=" * 70)
++    X = generic_2x2_matrix(prefix="x")
++    a, b, c = symbols("a b c", real=True)
++    V = a * E11 + b * E22 + c * E_anti
++    assert simplify(A_toy(V)) == 0, f"generic V_val element has A_toy={A_toy(V)}"
++    delta = simplify(A_toy(X + V) - A_toy(X))
++    assert delta == 0, f"A_2 not quotient well-defined: {delta}"
++
++    P = Pi_trans(X)
++    R = simplify(X - P)
++    assert simplify(A_toy(R)) == 0, f"X - Pi_trans X not in V_val: {A_toy(R)}"
++    assert simplify(hs_inner(R, P)) == 0, "orthogonal decomposition failed"
++    ell2_PiX = simplify(P[0, 1] + P[1, 0])
++    delta_rep = simplify(ell2_PiX - A_toy(X))
++    assert delta_rep == 0, f"ell_2(Pi X) != A_2(X): {delta_rep}"
++    print("  [PASS] A_2 is invariant under adding V_val and equals ell_2(Pi X).")
++
++
+ # ---------------------------------------------------------------------------
+ # (iv) Regression: v1's A_val(x) lies in V_val.
+ # ---------------------------------------------------------------------------
+@@ -283,10 +357,16 @@
+     print()
+     verify_pi_trans_kernel_equals_V_val()
+     print()
++    verify_quotient_representative_and_norm_relation()
++    print()
+     verify_pi_trans_operator_norm()
+     print()
+     verify_A_toy_descends_through_pi_trans()
+     print()
++    verify_A2_type_handoff()
++    print()
++    verify_A2_quotient_well_defined()
++    print()
+     verify_A_val_v1_lies_in_V_val()
+     print()
+     print("=" * 70)
+@@ -297,8 +377,12 @@
+     print("  - def:transverse-projection: Pi_trans X = <X,e_sym>_HS e_sym")
+     print("  - lem:transverse-projection-properties: idempotent, self-adjoint,")
+     print("    kernel = V_val, ||Pi_trans||_op = 1")
++    print("  - lem:transverse-projection-quotient-representative:")
++    print("    Pi_trans X = A_toy(X)/sqrt(2) e_sym and")
++    print("    ||Pi_trans X||_HS^2 = A_toy(X)^2/2")
+     print("  - lem:transverse-projection-A-toy-compatibility:")
+     print("    A_toy(Pi_trans X) = A_toy(X)")
++    print("  - lem:A2-quotient-well-defined: A_2 descends to M_2/V_val")
+     print("  - regression: v1's A_val(x) lies in V_val and is annihilated")
+     print("    by Pi_trans (matches v1's cor:PhiK-Aval-zero)")
+     print("=" * 70)
