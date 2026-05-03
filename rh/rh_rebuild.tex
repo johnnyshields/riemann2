@@ -2043,46 +2043,250 @@ impossible all-of-\(\mathcal D_T\) assertion.
 \section{Transverse projection}
 \label{sec:transverse-projection}
 \statuspaper{LIVE}\quad
-\statusmig{not-started}\quad
-\statusreferee{not-started}\quad
-\statussympy{not-started}\quad
-\statussim{not-started}\quad
+\statusmig{migrated}\quad
+\statusreferee{in-progress}\quad
+\statussympy[rh/sympy/sec-transverse-projection.py]{verified}\quad
+\statussim[rh/simulation/sec-transverse-projection.py]{verified}\quad
 \statuslean{not-started}
 \par\medskip
 
-The transverse projection \(\Pi_\trans\) is the fixed value/gauge
-quotient under which the toy whitened block of
-Section~\ref{sec:toy-anomaly-and-transverse-obstruction} and the
-actual-zeta whitened block of
-Section~\ref{sec:actual-zeta-transverse-suppression} are compared.  Its
-construction is the most sensitive structural decision in the rebuild:
-\(\Pi_\trans\) is fixed here and is not to be re-chosen afterward.
+The scalar toy anomaly functional \(\mathcal A_\toy\) of
+Definition~\ref{def:toy-anomaly-functional} fixes the two-point value
+subspace as its kernel.  The transverse projection in this section is
+the Hilbert--Schmidt orthogonal projection of the Gram-normalized
+\(2\times2\) matrix space onto the one-dimensional complement of that
+kernel.  This gives a canonical two-point \(\Pi_\trans\) compatible
+with the scalar visibility lower bound of
+Theorem~\ref{thm:toy-anomaly-visibility}.  The projection has
+Hilbert--Schmidt operator norm one, contributes no polynomial loss,
+and allows the actual-zeta two-point suppression statement of
+Section~\ref{sec:actual-zeta-transverse-suppression} to be formulated
+in the same scalar channel as the toy lower bound.  This section does
+not define the four-point projection \(\Pi_\trans^{(4)}\).
 
-\begin{definition}[Transverse projection]
-\label{def:transverse-projection}
-Let \(\mathcal V_\val\) denote the finite-dimensional subspace of the
-Gram-normalized jet space spanned by the value, gauge, and background
-directions to be quotiented out.  A transverse projection
-\(\Pi_\trans\) is an operator onto the orthogonal complement of
-\(\mathcal V_\val\) satisfying, on the retained packets:
-\begin{enumerate}[label=\textup{(\(\Pi\)\arabic*)},leftmargin=*]
-\item \(\Pi_\trans\) annihilates \(\mathcal V_\val\) exactly;
-\item \(\Pi_\trans\) is bounded with polynomial-in-\(Q\) loss;
-\item \(\Pi_\trans\) is invariant under the residual gauge freedom left
-  in \(\Ph\) after Definition~\ref{def:local-phase-chart}.
-\end{enumerate}
+\subsection{Value subspace and transverse projection}
+\label{subsec:transverse-projection-construction}
+
+We work on \(M_{2}(\mathbb R)\) with the Hilbert--Schmidt inner product
+\(
+        \langle X,Y\rangle_{\mathrm{HS}}
+        :=\operatorname{tr}(X^\top Y).
+\)
+
+\begin{definition}[Value subspace]
+\label{def:value-subspace}
+The two-point scalar value subspace is
+\begin{equation}
+\label{eq:V-val}
+        \mathcal V_\val
+        \;:=\;\bigl\{X\in M_{2}(\mathbb R):x_{12}+x_{21}=0\bigr\}
+        \;=\;\ker\mathcal A_\toy.
+\end{equation}
 \end{definition}
 
-\begin{wip}\label{rem:wip-transverse-projection}
-The choice of \(\mathcal V_\val\) must precede
+\begin{lemma}[Explicit basis for \(\mathcal V_\val\)]
+\label{lem:value-subspace-explicit-basis}
+\(\mathcal V_\val\) is a three-dimensional subspace of
+\(M_2(\mathbb R)\) with orthonormal basis
+\begin{equation}
+\label{eq:V-val-basis}
+        e_{11}=\begin{pmatrix}1&0\\0&0\end{pmatrix},
+        \qquad
+        e_{22}=\begin{pmatrix}0&0\\0&1\end{pmatrix},
+        \qquad
+        e_{\mathrm{anti}}=\frac1{\sqrt2}
+        \begin{pmatrix}0&1\\-1&0\end{pmatrix}.
+\end{equation}
+Its one-dimensional orthogonal complement is
+\begin{equation}
+\label{eq:V-val-perp-basis}
+        \mathcal V_\val^\perp=\mathbb R\,e_\sym,
+        \qquad
+        e_\sym:=\frac1{\sqrt2}
+        \begin{pmatrix}0&1\\1&0\end{pmatrix}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The four matrices \(e_{11},e_{22},e_{\mathrm{anti}},e_\sym\) form an
+orthonormal basis of \(M_2(\mathbb R)\) by direct calculation.  The
+first three have \(x_{12}+x_{21}=0\), so they lie in
+\(\mathcal V_\val\).  The matrix \(e_\sym\) has
+\(x_{12}+x_{21}=\sqrt2\ne 0\) and is orthogonal to the first three, so
+it spans \(\mathcal V_\val^\perp\).
+\end{proof}
+
+\begin{remark}[Four-point projection not supplied here]
+\label{rem:transverse-projection-four-point-not-supplied}
+This section defines the two-center projection on \(M_2(\mathbb R)\).
+The four-center projection \(\Pi_\trans^{(4)}\) appearing in
+Hypothesis~\ref{hyp:zeta-suppression-four-point} and
+Theorem~\ref{thm:four-point-rigidity} is a separate object.  No
+four-point quotient, four-point value subspace, or four-point scalar
+functional is proved in this section.
+\end{remark}
+
+\begin{definition}[Two-point transverse projection]
+\label{def:two-point-transverse-projection}
+The two-point transverse projection
+\(\Pi_\trans:M_2(\mathbb R)\to M_2(\mathbb R)\) is the
+Hilbert--Schmidt orthogonal projection onto
+\(\mathcal V_\val^\perp\).  Equivalently,
+\begin{equation}
+\label{eq:Pi-trans-explicit}
+        \Pi_\trans X
+        \;=\;\frac{x_{12}+x_{21}}{2}
+        \begin{pmatrix}0&1\\1&0\end{pmatrix}.
+\end{equation}
+\end{definition}
+
+\begin{definition}[Two-point scalar transverse channel]
+\label{def:two-point-scalar-transverse-channel}
+For a real two-center whitened block \(X\in M_2(\mathbb R)\), define
+\begin{equation}
+\label{eq:two-point-scalar-channel}
+        \mathcal A_2(X):=\mathcal A_\toy(\Pi_\trans X).
+\end{equation}
+Lemma~\ref{lem:transverse-projection-A-toy-compatibility} gives
+\(\mathcal A_2(X)=\mathcal A_\toy(X)=x_{12}+x_{21}\).  Thus
+\(\mathcal A_2\) is a scalar functional on two-point matrix
+representatives, or equivalently on the quotient
+\(M_2(\mathbb R)/\mathcal V_\val\) after choosing the
+Hilbert--Schmidt orthogonal representative \(\Pi_\trans X\).
+\end{definition}
+
+\subsection{Properties of \(\Pi_\trans\)}
+\label{subsec:transverse-projection-properties}
+
+\begin{lemma}[Projection properties]
+\label{lem:transverse-projection-properties}
+The operator \(\Pi_\trans\) is idempotent, self-adjoint with respect
+to the Hilbert--Schmidt inner product, has kernel exactly
+\(\mathcal V_\val\), and, as an operator on
+\((M_2(\mathbb R),\|\cdot\|_{\mathrm{HS}})\),
+\begin{equation}
+\label{eq:Pi-trans-norm}
+        \|\Pi_\trans\|_{\op,\mathrm{HS}\to\mathrm{HS}}=1.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Formula~\eqref{eq:Pi-trans-explicit} is the same as
+\(\Pi_\trans X=\langle X,e_\sym\rangle_{\mathrm{HS}}\,e_\sym\).  Hence
+\(\Pi_\trans\) is the Hilbert--Schmidt orthogonal projection onto the
+nonzero subspace \(\mathbb R e_\sym\).  Idempotence,
+self-adjointness, kernel \(\mathcal V_\val\), and operator norm one
+follow immediately.
+\end{proof}
+
+\begin{lemma}[Quotient representative and scalar norm]
+\label{lem:transverse-projection-quotient-representative}
+For every \(X\in M_2(\mathbb R)\),
+\begin{equation}
+\label{eq:Pi-trans-representative}
+        \Pi_\trans X=\frac{\mathcal A_\toy(X)}{\sqrt2}\,e_\sym,
+        \qquad X-\Pi_\trans X\in\mathcal V_\val,
+\end{equation}
+and
+\begin{equation}
+\label{eq:Pi-trans-HS-norm-scalar}
+        \|\Pi_\trans X\|_{\mathrm{HS}}^{\,2}
+        =\frac{|\mathcal A_\toy(X)|^{\,2}}{2}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The representative identity follows from
+\eqref{eq:Pi-trans-explicit} and
+\(e_\sym=2^{-1/2}\bigl(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\bigr)\).
+Applying \(\mathcal A_\toy\) to \(X-\Pi_\trans X\) gives zero by
+Lemma~\ref{lem:transverse-projection-A-toy-compatibility}, so the
+residual lies in \(\mathcal V_\val\).  The norm identity follows from
+\(\|e_\sym\|_{\mathrm{HS}}=1\).
+\end{proof}
+
+\begin{lemma}[Scalar-channel compatibility]
+\label{lem:transverse-projection-A-toy-compatibility}
+For every \(X\in M_2(\mathbb R)\),
+\begin{equation}
+\label{eq:A-toy-pi-compat}
+        \mathcal A_\toy(\Pi_\trans X)\;=\;\mathcal A_\toy(X).
+\end{equation}
+Consequently the toy visibility lower bound
+\eqref{eq:toy-anomaly-visibility-A} is unchanged if the toy whitened
+block is first replaced by its projected representative
+\(\Pi_\trans\widehat\Om_\toy\).  No matrix-norm lower bound is
+asserted; only the scalar channel
+\(\mathcal A_2=\mathcal A_\toy\circ\Pi_\trans\) is transported.
+\end{lemma}
+
+\begin{proof}
+By \eqref{eq:Pi-trans-explicit},
+\((\Pi_\trans X)_{12}=(\Pi_\trans X)_{21}=(x_{12}+x_{21})/2\).
+Therefore
+\[
+        \mathcal A_\toy(\Pi_\trans X)
+        \;=\;\frac{x_{12}+x_{21}}{2}+\frac{x_{12}+x_{21}}{2}
+        \;=\;x_{12}+x_{21}
+        \;=\;\mathcal A_\toy(X).
+\]
+The final assertion follows by applying this equality to
+\(X=\widehat\Om_\toy(s;m,u,q_0)\) inside the absolute value in
+\eqref{eq:toy-anomaly-visibility-A}.
+\end{proof}
+
+\subsection{Scope of the chosen projection}
+\label{subsec:transverse-projection-scope}
+
+\begin{remark}[No richer quotient is used in the scalar rebuild]
+\label{rem:transverse-projection-no-richer-quotient}
+The downstream two-point comparison consumes only the scalar
+visibility \(|\mathcal A_2(\widehat\Om_\toy)|\) and the matching
+actual-zeta scalar upper bound
+\(|\mathcal A_2(\widehat\Om_\z)|\).  At this scalar level, the kernel
+of \(\mathcal A_\toy\) is the complete value subspace.  The
+orthogonal projection of
+Definition~\ref{def:two-point-transverse-projection} gives the canonical
+Hilbert--Schmidt representative of the quotient map
+\(M_2(\mathbb R)\to M_2(\mathbb R)/\mathcal V_\val\), with no
+polynomial loss.  Richer matrix-level quotient constructions from the
+archived local-projective-rigidity machinery are not imported here;
+cf.\ Remark~\ref{rem:toy-phase-v1-compatibility}.
+\end{remark}
+
+\begin{remark}[Residual gauge]
+\label{rem:transverse-projection-residual-gauge}
+The retained chart of Definition~\ref{def:local-phase-chart} pins
+\(\Ph_T=\theta\).  Additive constants \(\Ph\mapsto\Ph+c\) leave
+\(q,q',q''\), hence \(G_{m,\pm}\), \(N_m\), and \(\widehat\Om_\z\),
+unchanged.  Affine-jet shifts \(\Ph\mapsto\Ph+at\) change \(q\) to
+\(q+a\) and do not preserve the chart class.  Thus there is no
+residual gauge action on the two-point matrix representatives beyond
+the trivial additive-constant invariance.
+\end{remark}
+
+\begin{lemma}[Sufficient two-point projection input]
+\label{lem:transverse-projection-sufficient}
+The transverse projection \(\Pi_\trans\) and scalar channel
+\(\mathcal A_2\) supply the two-point projection input required by
+Section~\ref{sec:projective-rigidity}: the toy visibility lower bound
+\eqref{eq:toy-anomaly-visibility-A} transports through
+\(\Pi_\trans\) by
+Lemma~\ref{lem:transverse-projection-A-toy-compatibility}, and the
+Hilbert--Schmidt operator-norm bound
+\eqref{eq:Pi-trans-norm} contributes no polynomial-in-\(Q\) loss.
+The actual-zeta two-point upper bound must be stated in the same
+scalar channel, namely as a bound for
+\(|\mathcal A_2(\widehat\Om_\z(s;m))|\).
+\end{lemma}
+
+\begin{proof}
+Combine Lemmas~\ref{lem:transverse-projection-properties},
+\ref{lem:transverse-projection-quotient-representative},
+and~\ref{lem:transverse-projection-A-toy-compatibility} with
 Theorem~\ref{thm:toy-anomaly-visibility} and
-Hypotheses~\ref{hyp:zeta-suppression-two-point}
-and~\ref{hyp:zeta-suppression-four-point}; it is not to be re-chosen
-after any has been invoked.  v1 prose to mine: the
-leading value matrix and canonical calibration section, together with
-the local projective rigidity of the one-pair and multi-pair families
-section.
-\end{wip}
+Corollary~\ref{cor:toy-visibility-polynomial-weight}.
+\end{proof}
 
 % =============================================================================
 \section{Actual-zeta transverse suppression}
@@ -2098,12 +2302,22 @@ section.
 The actual zeta phase \(\Ph\) defines two whitened blocks --- the
 two-center block \(\widehat\Om_\z(s;m)\) and a four-center analogue
 \(\widehat\Om_\z^{(4)}\) for the symmetric quartet --- on which the
-actual-zeta anomaly is suppressed at a strictly larger polynomial
-exponent than the corresponding toy lower bound of
-Theorem~\ref{thm:toy-anomaly-visibility}.  This is the load-bearing
-asymmetry of the program: the off-line scenario forces the projective
-anomaly to be large; the actual zeta phase forces it to be small.  The
-two-point and four-point comparisons of
+actual-zeta transverse anomaly is suppressed at a strictly larger
+polynomial exponent than the corresponding toy lower bound of
+Theorem~\ref{thm:toy-anomaly-visibility}.  In the two-point case, the
+transverse scalar channel is the one fixed in
+Section~\ref{sec:transverse-projection}:
+\[
+        \mathcal A_2(X)
+        \;:=\;\mathcal A_\toy(\Pi_\trans X)
+        \;=\;\mathcal A_\toy(X).
+\]
+The equality is
+Lemma~\ref{lem:transverse-projection-A-toy-compatibility}.  Thus
+\(\Pi_\trans\) acts on the block before the scalar functional is
+applied; the expression \(\Pi_\trans\mathcal A_2(X)\) is not used.
+
+The two-point and four-point comparisons of
 Section~\ref{sec:projective-rigidity} consume different forms of this
 suppression, stated separately below.
 
@@ -2114,17 +2328,21 @@ suppression, stated separately below.
 \label{hyp:zeta-suppression-two-point}
 For the two-center packet associated with \(\rho\) and a symmetry
 partner, after the gauge-fixed normalization of
-Definition~\ref{def:local-phase-chart} and the projection
-\(\Pi_\trans\) of Definition~\ref{def:transverse-projection},
+Definition~\ref{def:local-phase-chart},
+\begin{equation}
+\label{eq:zeta-suppression-two-point-scalar}
+        \bigl|\mathcal A_2\bigl(\widehat\Om_\z(s;m)\bigr)\bigr|
+        \;\le\; Q^{-B_{\z,2}}
+\end{equation}
+for an absolute exponent \(B_{\z,2}>A_\toy\) on the retained
+subfamily matched to the toy visibility theorem.  Equivalently, by
+Lemma~\ref{lem:transverse-projection-A-toy-compatibility},
 \[
-\bigl\|\Pi_\trans\,\mathcal A_2\bigl(\widehat\Om_\z(s;m)\bigr)\bigr\|
-\;\le\; Q^{-B_{\z,2}}
+        \bigl|\mathcal A_\toy\bigl(\Pi_\trans\widehat\Om_\z(s;m)\bigr)\bigr|
+        \;=\;
+        \bigl|\mathcal A_\toy\bigl(\widehat\Om_\z(s;m)\bigr)\bigr|
+        \;\le\; Q^{-B_{\z,2}}.
 \]
-for an absolute exponent \(B_{\z,2}>A_\toy\) on the retained subfamily
-used in Theorem~\ref{thm:toy-anomaly-visibility}.  Here \(\mathcal A_2\)
-is the restriction of the toy anomaly functional of
-Theorem~\ref{thm:toy-anomaly-visibility} to the actual-zeta two-center
-whitened block.
 \end{hypothesis}
 
 \begin{wip}\label{rem:wip-zeta-suppression-two-point}
@@ -2144,25 +2362,29 @@ holomorphic whitening sections.
 \begin{hypothesis}[Four-point actual-zeta transverse suppression]
 \label{hyp:zeta-suppression-four-point}
 For the four-center packet associated with the symmetry quartet
-\(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\), under the four-point
-projection \(\Pi_\trans^{(4)}\) extending
-Definition~\ref{def:transverse-projection},
-\[
-\bigl\|\Pi_\trans^{(4)}\,\mathcal A_4\bigl(\widehat\Om_\z^{(4)}\bigr)\bigr\|
-\;\le\; Q^{-B_{\z,4}}
-\]
+\(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\), let
+\(\Pi_\trans^{(4)}\) be a four-point transverse projection and let
+\(\mathcal A_{4,\trans}\) be the corresponding four-point transverse
+functional, i.e.\ a scalar or finite-dimensional normed output after
+the four-point projection has been applied.  Then
+\begin{equation}
+\label{eq:zeta-suppression-four-point-transverse}
+        \bigl\|\mathcal A_{4,\trans}\bigl(\widehat\Om_\z^{(4)}\bigr)\bigr\|
+        \;\le\; Q^{-B_{\z,4}}
+\end{equation}
 for an absolute exponent \(B_{\z,4}>A_\toy^{(4)}\) on the retained
-four-point subfamily.  Here \(\mathcal A_4\) is the four-point analogue
-of the toy anomaly functional and \(A_\toy^{(4)}\) is the four-point
-toy visibility exponent.
+four-point subfamily.
 \end{hypothesis}
 
 \begin{wip}\label{rem:wip-zeta-suppression-four-point}
 The four-point case of the structural gap.  Consumed by
 Theorem~\ref{thm:four-point-rigidity}.  Same admissible proof routes
-as Hypothesis~\ref{hyp:zeta-suppression-two-point}.  v1 prose to mine:
-the local projective rigidity of the one-pair and multi-pair families
-section, four-point variant.
+as Hypothesis~\ref{hyp:zeta-suppression-two-point}.  The projection
+\(\Pi_\trans^{(4)}\), the four-point value subspace, and the
+functional \(\mathcal A_{4,\trans}\) are not supplied by
+Section~\ref{sec:transverse-projection}; they are separate
+four-center inputs.  v1 prose to mine: the local projective rigidity
+of the one-pair and multi-pair families section, four-point variant.
 \end{wip}
 
 \begin{remark}[Standalone and energy-supply routes]
@@ -2193,7 +2415,7 @@ Theorem~\ref{thm:toy-anomaly-visibility} provides the toy lower bound
 and Hypotheses~\ref{hyp:zeta-suppression-two-point}
 and~\ref{hyp:zeta-suppression-four-point} provide the matching
 actual-zeta upper bounds on the transverse anomaly under
-\(\Pi_\trans\) of Definition~\ref{def:transverse-projection}.  The present section assembles the comparison.  On the
+\(\Pi_\trans\) of Definition~\ref{def:two-point-transverse-projection}.  The present section assembles the comparison.  On the
 two-point family attached to \(\rho\) and a single symmetry partner,
 and on the four-point family of the full symmetric quartet
 \(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\), the exponent inequality
@@ -2204,9 +2426,36 @@ in the underlying jet-Gram object: the two-point case uses the cross-block
 \(N_{12}\) of Lemma~\ref{lem:cross-block-jet-limit}; the four-point case
 uses a four-center analogue \(\widehat\Om_\z^{(4)}\) and a four-point
 extension \(\Pi_\trans^{(4)}\) of the projection of
-Definition~\ref{def:transverse-projection}.  Either case suffices for the
+Definition~\ref{def:two-point-transverse-projection}.  Either case suffices for the
 aggregation step in
 Section~\ref{sec:aggregation-and-zero-free-strip}.
+
+\subsection{Branch exhaustion}
+\label{subsec:branch-exhaustion}
+
+\begin{hypothesis}[Branch exhaustion]
+\label{hyp:branch-exhaustion}
+Every admissible off-line packet produced by the branch-entry
+construction is excluded by at least one of:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item the two-point scalar branch of
+      Theorem~\ref{thm:two-point-rigidity}; or
+\item the four-point full-quartet branch of
+      Theorem~\ref{thm:four-point-rigidity}.
+\end{enumerate}
+\end{hypothesis}
+
+\begin{remark}[Status of Hypothesis~\ref{hyp:branch-exhaustion}]
+\label{rem:branch-exhaustion-status}
+Hypothesis~\ref{hyp:branch-exhaustion} is not a consequence of
+Definition~\ref{def:two-point-transverse-projection} and is not implied by
+Sections~\ref{sec:transverse-projection}--\ref{sec:actual-zeta-transverse-suppression}.
+The master conditional theorem of
+Section~\ref{subsec:master-conditional} consumes
+Hypothesis~\ref{hyp:branch-exhaustion} alongside
+Theorems~\ref{thm:two-point-rigidity}
+and~\ref{thm:four-point-rigidity}.
+\end{remark}
 
 \subsection{Two-point comparison}
 \label{subsec:two-point-comparison}
