@@ -50,6 +50,8 @@ import Mathlib.Analysis.SpecialFunctions.Complex.LogDeriv
 import Mathlib.Analysis.Calculus.Deriv.Basic
 import Mathlib.Analysis.Calculus.Deriv.Mul
 import Mathlib.Analysis.Calculus.Deriv.Add
+import Mathlib.Analysis.Calculus.Taylor
+import Mathlib.Topology.Order.Compact
 
 namespace RH.RiemannSiegelTheta
 
@@ -269,5 +271,119 @@ theorem phase_derivative_lower_bound_dyadic :
     field_simp
     ring
   linarith
+
+/-! ## Taylor remainder bounds (infrastructure for rate axioms)
+
+    These compact-interval Lagrange remainder bounds are foundational
+    pieces for closing `same_point_jet_limit_rate` and
+    `cross_block_jet_limit_rate`.  They follow from `theta_smooth` plus
+    Mathlib's `taylor_mean_remainder_lagrange_iteratedDeriv`. -/
+
+/-- Order-2 Taylor remainder for `q` at `T` on the unit interval.
+    Asserts the existence of a uniform constant `K ≥ 0` such that for
+    every `h ∈ [-1, 1]`,
+        `|q(T+h) − (q(T) + q'(T) h + q''(T) h²/2)| ≤ K |h|³`.
+
+    Proof: `q ∈ C^∞` (via `theta_smooth`), so `iteratedDeriv 3 q` is
+    continuous and bounded on `[T − 1, T + 1]`.  Apply Lagrange
+    remainder with `n = 2` to get the bound. -/
+theorem q_taylor_remainder_2 (T : ℝ) :
+    ∃ K : ℝ, 0 ≤ K ∧ ∀ h : ℝ, |h| ≤ 1 →
+      |q (T + h) - (q T + qPrime T * h + qDoublePrime T * h^2 / 2)| ≤ K * |h|^3 := by
+  -- q is C^∞, so iteratedDeriv 3 q is continuous.
+  have hθ_C4 : ContDiff ℝ 4 theta := theta_smooth.of_le (by decide)
+  have h_q_C3 : ContDiff ℝ 3 q := by
+    have h : ContDiff ℝ (3 + 1 : ℕ) theta := by
+      rw [show (3 + 1 : ℕ) = 4 from by norm_num]; exact hθ_C4
+    exact h.deriv'
+  have h_iter3_cont : Continuous (iteratedDeriv 3 q) :=
+    h_q_C3.continuous_iteratedDeriv 3 (by decide)
+  -- Bound on the compact set [T-1, T+1].
+  have h_compact : IsCompact (Set.Icc (T - 1) (T + 1)) := isCompact_Icc
+  have h_nonempty : (Set.Icc (T - 1) (T + 1)).Nonempty :=
+    ⟨T, by constructor <;> linarith⟩
+  have h_cont_on : ContinuousOn (fun y => |iteratedDeriv 3 q y|) (Set.Icc (T - 1) (T + 1)) :=
+    (continuous_abs.comp h_iter3_cont).continuousOn
+  obtain ⟨ymax, hymax_mem, hymax⟩ := h_compact.exists_isMaxOn h_nonempty h_cont_on
+  set K₀ : ℝ := |iteratedDeriv 3 q ymax| with hK₀_def
+  have hK₀_nn : 0 ≤ K₀ := abs_nonneg _
+  refine ⟨K₀ / 6, by positivity, ?_⟩
+  intro h hh
+  by_cases hh_zero : h = 0
+  · subst hh_zero; simp
+  · -- Apply Lagrange remainder for q on uIcc T (T+h).
+    have h_ne : T ≠ T + h := fun e => hh_zero (by linarith)
+    have h_q_C3_on : ContDiffOn ℝ 3 q (Set.uIcc T (T + h)) := h_q_C3.contDiffOn
+    obtain ⟨ξ, hξ_mem, hξ_eq⟩ :=
+      taylor_mean_remainder_lagrange_iteratedDeriv h_ne h_q_C3_on
+    -- The interval has unique-diff structure, since T ≠ T+h.
+    have h_min_lt_max : min T (T + h) < max T (T + h) := by
+      rcases lt_or_gt_of_ne hh_zero with hlt | hgt
+      · have h1 : T + h < T := by linarith
+        rw [min_eq_right h1.le, max_eq_left h1.le]; exact h1
+      · have h1 : T < T + h := by linarith
+        rw [min_eq_left h1.le, max_eq_right h1.le]; exact h1
+    have h_unique : UniqueDiffOn ℝ (Set.uIcc T (T + h)) :=
+      uniqueDiffOn_Icc h_min_lt_max
+    -- Compute the Taylor polynomial: T₂(T+h) = q T + qPrime T · h + qDoublePrime T · h²/2.
+    have h_taylor_form : taylorWithinEval q 2 (Set.uIcc T (T + h)) T (T + h) =
+        q T + qPrime T * h + qDoublePrime T * h^2 / 2 := by
+      rw [taylor_within_apply]
+      simp only [Finset.sum_range_succ, Finset.sum_range_zero, zero_add,
+                 add_sub_cancel_left, smul_eq_mul]
+      have hT_mem : T ∈ Set.uIcc T (T + h) := Set.left_mem_uIcc
+      have h_iter0 : iteratedDerivWithin 0 q (Set.uIcc T (T + h)) T = q T := by
+        simp [iteratedDerivWithin_zero]
+      have h_iter1 : iteratedDerivWithin 1 q (Set.uIcc T (T + h)) T = qPrime T := by
+        rw [iteratedDerivWithin_eq_iteratedDeriv h_unique
+            (h_q_C3.contDiffAt.of_le (by decide)) hT_mem,
+            iteratedDeriv_one]
+        rfl
+      have h_iter2 : iteratedDerivWithin 2 q (Set.uIcc T (T + h)) T = qDoublePrime T := by
+        rw [iteratedDerivWithin_eq_iteratedDeriv h_unique
+            (h_q_C3.contDiffAt.of_le (by decide)) hT_mem]
+        rw [show (2 : ℕ) = 1 + 1 from rfl, iteratedDeriv_succ, iteratedDeriv_one]
+        rfl
+      rw [h_iter0, h_iter1, h_iter2]
+      simp [Nat.factorial]
+      ring
+    rw [h_taylor_form] at hξ_eq
+    -- |iteratedDeriv 3 q ξ| ≤ K₀ since ξ ∈ uIoo T (T+h) ⊂ [T-1, T+1].
+    have hξ_in_Icc : ξ ∈ Set.Icc (T - 1) (T + 1) := by
+      have h_uIoo_subset : Set.uIoo T (T + h) ⊆ Set.Icc (T - 1) (T + 1) := by
+        intro y hy
+        rcases lt_or_gt_of_ne hh_zero with hlt | hgt
+        · -- h < 0
+          have hh' : T + h < T := by linarith
+          rw [Set.uIoo, min_eq_right hh'.le, max_eq_left hh'.le] at hy
+          obtain ⟨hy1, hy2⟩ := hy
+          have hh_lo : -1 ≤ h := by rcases abs_le.mp hh with ⟨h1, _⟩; exact h1
+          constructor <;> linarith
+        · -- h > 0
+          have hh' : T < T + h := by linarith
+          rw [Set.uIoo, min_eq_left hh'.le, max_eq_right hh'.le] at hy
+          obtain ⟨hy1, hy2⟩ := hy
+          have hh_hi : h ≤ 1 := by rcases abs_le.mp hh with ⟨_, h2⟩; exact h2
+          constructor <;> linarith
+      exact h_uIoo_subset hξ_mem
+    have h_iter3_bound : |iteratedDeriv 3 q ξ| ≤ K₀ :=
+      hymax hξ_in_Icc
+    -- Now bound the remainder.
+    have h_h_eq : (T + h) - T = h := by ring
+    rw [h_h_eq] at hξ_eq
+    have h_eq : q (T + h) - (q T + qPrime T * h + qDoublePrime T * h^2 / 2) =
+        iteratedDeriv 3 q ξ * h^3 / 6 := by
+      have h_fact : ((2 + 1).factorial : ℝ) = 6 := by simp [Nat.factorial]
+      have := hξ_eq
+      rw [h_fact] at this
+      exact this
+    rw [h_eq, abs_div, abs_mul, abs_pow]
+    have h_abs_6 : |(6 : ℝ)| = 6 := by norm_num
+    rw [h_abs_6, div_le_iff₀ (by norm_num : (0:ℝ) < 6)]
+    have hpow_nn : 0 ≤ |h|^3 := pow_nonneg (abs_nonneg _) 3
+    calc |iteratedDeriv 3 q ξ| * |h|^3
+        ≤ K₀ * |h|^3 :=
+          mul_le_mul_of_nonneg_right h_iter3_bound hpow_nn
+      _ = K₀ / 6 * |h|^3 * 6 := by ring
 
 end RH.RiemannSiegelTheta
