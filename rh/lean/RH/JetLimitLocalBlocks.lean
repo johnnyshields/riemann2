@@ -114,6 +114,154 @@ noncomputable def N12 (T₁ T₂ : ℝ) : Matrix (Fin 2) (Fin 2) ℝ :=
     plus shared infrastructure for q/theta Taylor remainders.  Both
     rate axioms together would be `~1500−2000 lines`. -/
 
+/-- Helper: phaseKernel values at `(T ± h, T ± h)` for `h > 0`. -/
+private lemma phaseKernel_vals_at_pm (T h : ℝ) (h_pos : 0 < h) :
+    phaseKernel (T - h) (T - h) = q (T - h) / Real.pi ∧
+    phaseKernel (T + h) (T + h) = q (T + h) / Real.pi ∧
+    phaseKernel (T - h) (T + h) =
+      Real.sin (theta (T + h) - theta (T - h)) / (2 * Real.pi * h) ∧
+    phaseKernel (T + h) (T - h) =
+      Real.sin (theta (T + h) - theta (T - h)) / (2 * Real.pi * h) := by
+  have hh_ne : h ≠ 0 := ne_of_gt h_pos
+  have h_neq_h : (T - h) ≠ (T + h) := by intro heq; linarith
+  have h_pK_aa : phaseKernel (T - h) (T - h) = q (T - h) / Real.pi := by
+    unfold phaseKernel; simp
+  have h_pK_bb : phaseKernel (T + h) (T + h) = q (T + h) / Real.pi := by
+    unfold phaseKernel; simp
+  have h_pK_ab : phaseKernel (T - h) (T + h) =
+      Real.sin (theta (T + h) - theta (T - h)) / (2 * Real.pi * h) := by
+    unfold phaseKernel
+    rw [if_neg h_neq_h]
+    have hsub : T - h - (T + h) = -(2 * h) := by ring
+    rw [hsub]
+    rw [show Real.pi * -(2 * h) = -(Real.pi * (2 * h)) from by ring]
+    have h_sin : Real.sin (theta (T - h) - theta (T + h)) =
+                 -Real.sin (theta (T + h) - theta (T - h)) := by
+      rw [show theta (T - h) - theta (T + h) = -(theta (T + h) - theta (T - h)) from by ring,
+          Real.sin_neg]
+    rw [h_sin]
+    field_simp
+  have h_pK_ba : phaseKernel (T + h) (T - h) =
+      Real.sin (theta (T + h) - theta (T - h)) / (2 * Real.pi * h) := by
+    rw [phase_kernel_symmetric]; exact h_pK_ab
+  exact ⟨h_pK_aa, h_pK_bb, h_pK_ab, h_pK_ba⟩
+
+/-- The bare 2×2 matrix `M_p(h) = !![1, 1; -1/(2h), 1/(2h)]` with the
+    `1/√2` factor of `pointToJetTransform` stripped. -/
+private noncomputable def jetMatrixBare (h : ℝ) : Matrix (Fin 2) (Fin 2) ℝ :=
+  !![1, 1; -1/(2*h), 1/(2*h)]
+
+/-- `pointToJetTransform h = (1/√2) • jetMatrixBare h`. -/
+private lemma pointToJetTransform_eq (h : ℝ) :
+    pointToJetTransform h = (1 / Real.sqrt 2) • jetMatrixBare h := rfl
+
+/-- The smul-factor of `pointToJetTransform` extracted: `P_h X P_h^⊤ =
+    (1/2) • (M_p(h) * X * M_p(h)^⊤)`. -/
+private lemma pointToJetTransform_mul_eq (h : ℝ) (X : Matrix (Fin 2) (Fin 2) ℝ) :
+    pointToJetTransform h * X * (pointToJetTransform h).transpose =
+    (1/2 : ℝ) • (jetMatrixBare h * X * (jetMatrixBare h).transpose) := by
+  rw [pointToJetTransform_eq]
+  rw [Matrix.transpose_smul]
+  rw [Matrix.smul_mul, Matrix.smul_mul, Matrix.mul_smul, smul_smul]
+  congr 1
+  rw [show (1 / Real.sqrt 2 : ℝ) * (1 / Real.sqrt 2) = 1 / (Real.sqrt 2 * Real.sqrt 2) from by
+    ring]
+  rw [Real.mul_self_sqrt (by norm_num : (0:ℝ) ≤ 2)]
+
+/-- Pointwise values of `samePointBlock T h` for `h > 0`. -/
+private lemma samePointBlock_apply (T h : ℝ) (h_pos : 0 < h) :
+    samePointBlock T h 0 0 = q (T - h) / Real.pi ∧
+    samePointBlock T h 0 1 =
+      Real.sin (theta (T + h) - theta (T - h)) / (2 * Real.pi * h) ∧
+    samePointBlock T h 1 0 =
+      Real.sin (theta (T + h) - theta (T - h)) / (2 * Real.pi * h) ∧
+    samePointBlock T h 1 1 = q (T + h) / Real.pi := by
+  have ⟨h_pK_aa, h_pK_bb, h_pK_ab, h_pK_ba⟩ := phaseKernel_vals_at_pm T h h_pos
+  refine ⟨?_, ?_, ?_, ?_⟩
+  all_goals (unfold samePointBlock; simp [h_pK_aa, h_pK_bb, h_pK_ab, h_pK_ba])
+
+/-- Pointwise values of `jetMatrixBare h` (the bare 2×2 part). -/
+private lemma jetMatrixBare_apply (h : ℝ) :
+    jetMatrixBare h 0 0 = 1 ∧
+    jetMatrixBare h 0 1 = 1 ∧
+    jetMatrixBare h 1 0 = -1 / (2 * h) ∧
+    jetMatrixBare h 1 1 = 1 / (2 * h) := by
+  refine ⟨?_, ?_, ?_, ?_⟩ <;> simp [jetMatrixBare]
+
+/-- Matrix entry `(0, 0)` of `P_h A_h(T) P_h^⊤`. -/
+private lemma jet_matrix_apply_00 (T h : ℝ) (h_pos : 0 < h) :
+    (pointToJetTransform h * samePointBlock T h *
+      (pointToJetTransform h).transpose) 0 0 =
+    (q (T - h) + q (T + h)) / (2 * Real.pi) +
+    Real.sin (theta (T + h) - theta (T - h)) / (2 * Real.pi * h) := by
+  have ⟨h_A_00, h_A_01, h_A_10, h_A_11⟩ := samePointBlock_apply T h h_pos
+  have ⟨h_M_00, h_M_01, h_M_10, h_M_11⟩ := jetMatrixBare_apply h
+  have hh_ne : h ≠ 0 := ne_of_gt h_pos
+  have hπ_ne : Real.pi ≠ 0 := Real.pi_ne_zero
+  rw [pointToJetTransform_mul_eq]
+  rw [Matrix.smul_apply, smul_eq_mul]
+  rw [Matrix.mul_apply, Fin.sum_univ_two,
+      Matrix.mul_apply, Matrix.mul_apply, Fin.sum_univ_two, Fin.sum_univ_two,
+      Matrix.transpose_apply, Matrix.transpose_apply]
+  rw [h_M_00, h_M_01, h_A_00, h_A_01, h_A_10, h_A_11]
+  field_simp
+  ring
+
+/-- Matrix entry `(0, 1)` of `P_h A_h(T) P_h^⊤`. -/
+private lemma jet_matrix_apply_01 (T h : ℝ) (h_pos : 0 < h) :
+    (pointToJetTransform h * samePointBlock T h *
+      (pointToJetTransform h).transpose) 0 1 =
+    (q (T + h) - q (T - h)) / (4 * Real.pi * h) := by
+  have ⟨h_A_00, h_A_01, h_A_10, h_A_11⟩ := samePointBlock_apply T h h_pos
+  have ⟨h_M_00, h_M_01, h_M_10, h_M_11⟩ := jetMatrixBare_apply h
+  have hh_ne : h ≠ 0 := ne_of_gt h_pos
+  have hπ_ne : Real.pi ≠ 0 := Real.pi_ne_zero
+  rw [pointToJetTransform_mul_eq]
+  rw [Matrix.smul_apply, smul_eq_mul]
+  rw [Matrix.mul_apply, Fin.sum_univ_two,
+      Matrix.mul_apply, Matrix.mul_apply, Fin.sum_univ_two, Fin.sum_univ_two,
+      Matrix.transpose_apply, Matrix.transpose_apply]
+  rw [h_M_00, h_M_01, h_M_10, h_M_11, h_A_00, h_A_01, h_A_10, h_A_11]
+  field_simp
+  ring
+
+/-- Matrix entry `(1, 0)` of `P_h A_h(T) P_h^⊤`. -/
+private lemma jet_matrix_apply_10 (T h : ℝ) (h_pos : 0 < h) :
+    (pointToJetTransform h * samePointBlock T h *
+      (pointToJetTransform h).transpose) 1 0 =
+    (q (T + h) - q (T - h)) / (4 * Real.pi * h) := by
+  have ⟨h_A_00, h_A_01, h_A_10, h_A_11⟩ := samePointBlock_apply T h h_pos
+  have ⟨h_M_00, h_M_01, h_M_10, h_M_11⟩ := jetMatrixBare_apply h
+  have hh_ne : h ≠ 0 := ne_of_gt h_pos
+  have hπ_ne : Real.pi ≠ 0 := Real.pi_ne_zero
+  rw [pointToJetTransform_mul_eq]
+  rw [Matrix.smul_apply, smul_eq_mul]
+  rw [Matrix.mul_apply, Fin.sum_univ_two,
+      Matrix.mul_apply, Matrix.mul_apply, Fin.sum_univ_two, Fin.sum_univ_two,
+      Matrix.transpose_apply, Matrix.transpose_apply]
+  rw [h_M_00, h_M_01, h_M_10, h_M_11, h_A_00, h_A_01, h_A_10, h_A_11]
+  field_simp
+  ring
+
+/-- Matrix entry `(1, 1)` of `P_h A_h(T) P_h^⊤`. -/
+private lemma jet_matrix_apply_11 (T h : ℝ) (h_pos : 0 < h) :
+    (pointToJetTransform h * samePointBlock T h *
+      (pointToJetTransform h).transpose) 1 1 =
+    (q (T - h) + q (T + h)) / (8 * Real.pi * h^2) -
+    Real.sin (theta (T + h) - theta (T - h)) / (8 * Real.pi * h^3) := by
+  have ⟨h_A_00, h_A_01, h_A_10, h_A_11⟩ := samePointBlock_apply T h h_pos
+  have ⟨h_M_00, h_M_01, h_M_10, h_M_11⟩ := jetMatrixBare_apply h
+  have hh_ne : h ≠ 0 := ne_of_gt h_pos
+  have hπ_ne : Real.pi ≠ 0 := Real.pi_ne_zero
+  rw [pointToJetTransform_mul_eq]
+  rw [Matrix.smul_apply, smul_eq_mul]
+  rw [Matrix.mul_apply, Fin.sum_univ_two,
+      Matrix.mul_apply, Matrix.mul_apply, Fin.sum_univ_two, Fin.sum_univ_two,
+      Matrix.transpose_apply, Matrix.transpose_apply]
+  rw [h_M_10, h_M_11, h_A_00, h_A_01, h_A_10, h_A_11]
+  field_simp
+  ring
+
 /-- Same-point jet-limit with explicit `O(h²)` rate.  Entrywise:
     there is `M ≥ 0` such that for `h ∈ (0, 1]` and each entry `(i, j)`
     of `Fin 2 × Fin 2`,
