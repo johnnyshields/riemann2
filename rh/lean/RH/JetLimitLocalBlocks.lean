@@ -32,6 +32,7 @@ import Mathlib.LinearAlgebra.Matrix.Trace
 import Mathlib.Topology.Instances.Matrix
 import Mathlib.Topology.Order.Basic
 import Mathlib.Topology.Algebra.Order.Field
+import Mathlib.Analysis.Real.Pi.Bounds
 
 import RH.LocalKernelJetNormalization
 import RH.RiemannSiegelTheta
@@ -415,17 +416,198 @@ theorem same_point_gram_positivity :
     ∃ T₀ : ℝ, 0 < T₀ ∧ ∀ T : ℝ, T₀ ≤ T → (J T).PosDef :=
   same_point_gram_posdef_eventual
 
+/-- Algebraic spectral floor: under `q(T) ≥ 5`, `|q'(T)| ≤ 1`, and
+    `|q''(T)| ≤ 1`, the quadratic form `xᵀ J(T) x` dominates `xᵀ x`.
+
+    Proof via the SOS identity (purely algebraic, valid for `2q − π > 0`):
+        `144 (2q − π) · π · (xᵀ J x − xᵀ x) =
+            (12 (2q − π) x₀ + 6 q' x₁)²
+            + (12 (2q − π) (q'' + 2q³ − 12π) − 36 q'²) · x₁²`.
+    For `q ≥ 5`, both summands are nonneg (`12(2q−π) ≥ 72`,
+    `q'' + 2q³ − 12π ≥ 201`, `36 q'² ≤ 36 ≪ 72·201`). -/
+private lemma J_floor_quadform (T : ℝ) (hQ : 5 ≤ q T)
+    (hQp : |qPrime T| ≤ 1) (hQpp : |qDoublePrime T| ≤ 1) :
+    ∀ x : Fin 2 → ℝ, x ⬝ᵥ ((J T) *ᵥ x) ≥ x ⬝ᵥ x := by
+  intro x
+  have hπpos : (0:ℝ) < Real.pi := Real.pi_pos
+  have hπne : (Real.pi : ℝ) ≠ 0 := ne_of_gt hπpos
+  have hπ_lt_4 : Real.pi < 4 := Real.pi_lt_four
+  have h_q_pos : 0 < q T := by linarith
+  have h_qp_sq : (qPrime T)^2 ≤ 1 := by
+    have := sq_abs (qPrime T)
+    nlinarith [hQp, abs_nonneg (qPrime T)]
+  have h_qpp_lb : -1 ≤ qDoublePrime T := neg_le_of_abs_le hQpp
+  have h_2q_minus_π : 6 ≤ 2 * q T - Real.pi := by linarith
+  have h_q_sq : 25 ≤ (q T)^2 := by nlinarith [hQ]
+  have h_q_cube : 125 ≤ (q T)^3 := by
+    have : (q T)^3 = q T * (q T)^2 := by ring
+    rw [this]; nlinarith [hQ, h_q_sq, h_q_pos]
+  have h_inner_lb : 201 ≤ qDoublePrime T + 2 * (q T)^3 - 12 * Real.pi := by
+    have h12π : 12 * Real.pi ≤ 48 := by linarith
+    linarith
+  -- Closed-form quadratic form
+  have hQF :
+      x ⬝ᵥ ((J T) *ᵥ x) =
+      (2 * q T * (x 0)^2 + qPrime T * x 0 * x 1 +
+       ((qDoublePrime T + 2 * (q T)^3) / 12) * (x 1)^2) / Real.pi := by
+    simp only [J, dotProduct, mulVec, Fin.sum_univ_two,
+               Matrix.smul_apply, smul_eq_mul,
+               Matrix.cons_val_zero, Matrix.cons_val_one,
+               Matrix.of_apply]
+    field_simp
+    ring
+  have hQ_xx : x ⬝ᵥ x = (x 0)^2 + (x 1)^2 := by
+    simp [dotProduct, Fin.sum_univ_two, sq]
+  rw [ge_iff_le, hQF, hQ_xx, le_div_iff₀ hπpos]
+  -- Goal: π · (x₀² + x₁²) ≤ 2q x₀² + q' x₀ x₁ + ((q'' + 2q³)/12) x₁²
+  -- Multiply by 12 · 12(2q−π) > 0 and use the SOS identity.
+  have h_a_pos : 0 < 12 * (2 * q T - Real.pi) := by linarith
+  -- The SOS identity (proved by ring)
+  have h_SOS :
+      12 * (12 * (2 * q T - Real.pi)) *
+        ((2 * q T) * (x 0)^2 + qPrime T * x 0 * x 1 +
+         ((qDoublePrime T + 2 * (q T)^3) / 12) * (x 1)^2 -
+         Real.pi * ((x 0)^2 + (x 1)^2)) =
+      (12 * (2 * q T - Real.pi) * x 0 + 6 * qPrime T * x 1)^2 +
+      (12 * (2 * q T - Real.pi) *
+        (qDoublePrime T + 2 * (q T)^3 - 12 * Real.pi) -
+        36 * (qPrime T)^2) * (x 1)^2 := by
+    field_simp
+    ring
+  -- Both summands of the SOS RHS are non-negative
+  have h_sq_nn : 0 ≤ (12 * (2 * q T - Real.pi) * x 0 + 6 * qPrime T * x 1)^2 :=
+    sq_nonneg _
+  have h_disc_nn :
+      0 ≤ 12 * (2 * q T - Real.pi) *
+            (qDoublePrime T + 2 * (q T)^3 - 12 * Real.pi) -
+          36 * (qPrime T)^2 := by
+    have h1 : 72 ≤ 12 * (2 * q T - Real.pi) := by linarith
+    have h2 : (12 * (2 * q T - Real.pi)) *
+              (qDoublePrime T + 2 * (q T)^3 - 12 * Real.pi) ≥ 72 * 201 := by
+      have : 0 ≤ qDoublePrime T + 2 * (q T)^3 - 12 * Real.pi := by linarith
+      nlinarith [h1, h_inner_lb]
+    have h3 : 36 * (qPrime T)^2 ≤ 36 := by linarith [h_qp_sq]
+    linarith
+  have h_disc_term_nn :
+      0 ≤ (12 * (2 * q T - Real.pi) *
+            (qDoublePrime T + 2 * (q T)^3 - 12 * Real.pi) -
+           36 * (qPrime T)^2) * (x 1)^2 :=
+    mul_nonneg h_disc_nn (sq_nonneg _)
+  have h_RHS_nn :
+      0 ≤ (12 * (2 * q T - Real.pi) * x 0 + 6 * qPrime T * x 1)^2 +
+          (12 * (2 * q T - Real.pi) *
+            (qDoublePrime T + 2 * (q T)^3 - 12 * Real.pi) -
+            36 * (qPrime T)^2) * (x 1)^2 := by linarith
+  -- Combine: LHS = RHS ≥ 0; LHS = 144(2q-π) · (E - π · ‖x‖²)
+  have h_LHS_nn :
+      0 ≤ 12 * (12 * (2 * q T - Real.pi)) *
+            ((2 * q T) * (x 0)^2 + qPrime T * x 0 * x 1 +
+             ((qDoublePrime T + 2 * (q T)^3) / 12) * (x 1)^2 -
+             Real.pi * ((x 0)^2 + (x 1)^2)) := h_SOS ▸ h_RHS_nn
+  have h_factor_pos : 0 < 12 * (12 * (2 * q T - Real.pi)) := by positivity
+  -- Divide by the positive factor
+  have h_E_nn :
+      0 ≤ (2 * q T) * (x 0)^2 + qPrime T * x 0 * x 1 +
+          ((qDoublePrime T + 2 * (q T)^3) / 12) * (x 1)^2 -
+          Real.pi * ((x 0)^2 + (x 1)^2) := by
+    by_contra h
+    push_neg at h
+    have : 12 * (12 * (2 * q T - Real.pi)) *
+              ((2 * q T) * (x 0)^2 + qPrime T * x 0 * x 1 +
+               ((qDoublePrime T + 2 * (q T)^3) / 12) * (x 1)^2 -
+               Real.pi * ((x 0)^2 + (x 1)^2)) < 0 :=
+      mul_neg_of_pos_of_neg h_factor_pos h
+    linarith
+  linarith
+
 /-- Uniform spectral floor for `J(T)`: at sufficiently large `T`,
     `xᵀ J(T) x ≥ xᵀ x` for every `x : Fin 2 → ℝ`.
 
-    This is the whitening-relevant strengthening of eventual positive
-    definiteness.  The paper proves it from the theta asymptotics after
-    raising the lower-height cutoff.  It is kept as an explicit theorem-
-    level proof obligation here rather than hidden behind an unfinished theorem body. -/
-axiom same_point_gram_uniform_floor :
+    Combines `J_floor_quadform` (algebraic SOS, given `q ≥ 5`,
+    `|q'| ≤ 1`, `|q''| ≤ 1`) with the §2 asymptotics — at threshold
+    `T ≥ 4π exp(12)`, the bound `q(T) ≥ 5` follows from
+    `phase_derivative_lower_bound_dyadic`, and `|q'|, |q''| ≤ 1` follow
+    from `theta_derivative_asymptotics_dyadic`. -/
+theorem same_point_gram_uniform_floor :
     ∃ T₀ : ℝ, 0 < T₀ ∧
       ∀ T : ℝ, T₀ ≤ T →
       ∀ x : Fin 2 → ℝ,
-        x ⬝ᵥ ((J T) *ᵥ x) ≥ x ⬝ᵥ x
+        x ⬝ᵥ ((J T) *ᵥ x) ≥ x ⬝ᵥ x := by
+  obtain ⟨T₁, C₁, hT₁_pos, hC₁_nn, hq_lb⟩ := phase_derivative_lower_bound_dyadic
+  obtain ⟨T₂, C₂, hT₂_pos, hC₂_nn, hasymp⟩ := theta_derivative_asymptotics_dyadic
+  have h_4π_pos : (0 : ℝ) < 4 * Real.pi := by positivity
+  set Tlog : ℝ := 4 * Real.pi * Real.exp 12 with hTlog
+  set Tcoef : ℝ := 1 + C₁ + 2 * C₂ with hTcoef
+  refine ⟨max (max T₁ T₂) (max Tlog Tcoef), ?_, ?_⟩
+  · have h1 : 0 < max T₁ T₂ := lt_max_of_lt_left hT₁_pos
+    exact lt_max_of_lt_left h1
+  intro T hT x
+  have hT_T₁ : T₁ ≤ T :=
+    le_trans (le_max_left _ _) (le_trans (le_max_left _ _) hT)
+  have hT_T₂ : T₂ ≤ T :=
+    le_trans (le_max_right _ _) (le_trans (le_max_left _ _) hT)
+  have hT_log : Tlog ≤ T :=
+    le_trans (le_max_left _ _) (le_trans (le_max_right _ _) hT)
+  have hT_coef : Tcoef ≤ T :=
+    le_trans (le_max_right _ _) (le_trans (le_max_right _ _) hT)
+  have h_exp_pos : (0 : ℝ) < Real.exp 12 := Real.exp_pos 12
+  have hT_pos : 0 < T := by
+    have : 0 < Tlog := by rw [hTlog]; positivity
+    linarith
+  have hT_ge_one : 1 ≤ T := by rw [hTcoef] at hT_coef; linarith
+  have hT_sq_pos : 0 < T^2 := by positivity
+  have hT_cube_pos : 0 < T^3 := by positivity
+  have hT_four_pos : 0 < T^4 := by positivity
+  -- q T ≥ 5
+  have h_q_ge_5 : 5 ≤ q T := by
+    have h_T_ratio : Real.exp 12 ≤ T / (4 * Real.pi) := by
+      rw [le_div_iff₀ h_4π_pos]
+      have : 4 * Real.pi * Real.exp 12 ≤ T := by rw [← hTlog]; exact hT_log
+      linarith
+    have h_log_T : 12 ≤ Real.log (T / (4 * Real.pi)) := by
+      calc 12 = Real.log (Real.exp 12) := (Real.log_exp 12).symm
+        _ ≤ Real.log (T / (4 * Real.pi)) := Real.log_le_log h_exp_pos h_T_ratio
+    have h_C₁_small : C₁ / T^2 ≤ 1 := by
+      have h_T_sq : C₁ ≤ T^2 := by
+        rw [hTcoef] at hT_coef
+        nlinarith [hT_ge_one, hC₁_nn, hC₂_nn]
+      rw [div_le_one hT_sq_pos]; exact h_T_sq
+    have h_qbd := hq_lb T T hT_T₁ (by linarith) (by linarith)
+    linarith
+  -- |q'| ≤ 1, |q''| ≤ 1
+  obtain ⟨_, hqp_bd, hqpp_bd⟩ := hasymp T T hT_T₂ (by linarith) (by linarith)
+  have h_C₂_T_cube : C₂ / T^3 ≤ 1/2 := by
+    have hT3_ge : 2 * C₂ ≤ T^3 := by
+      have h_T_ge_2C₂ : 2 * C₂ ≤ T := by rw [hTcoef] at hT_coef; linarith
+      have h_T3_ge_T : T ≤ T^3 := by nlinarith [hT_ge_one]
+      linarith
+    rw [div_le_iff₀ hT_cube_pos]; linarith
+  have h_C₂_T_four : C₂ / T^4 ≤ 1/2 := by
+    have hT4_ge : 2 * C₂ ≤ T^4 := by
+      have h_T_ge_2C₂ : 2 * C₂ ≤ T := by rw [hTcoef] at hT_coef; linarith
+      have h_T4_ge_T : T ≤ T^4 := by nlinarith [hT_ge_one]
+      linarith
+    rw [div_le_iff₀ hT_four_pos]; linarith
+  have h_1_2T_le : 1 / (2 * T) ≤ 1/2 := by
+    have h2T : 0 < 2 * T := by linarith
+    rw [div_le_div_iff₀ h2T (by norm_num : (0:ℝ) < 2)]
+    nlinarith
+  have h_1_2T2_le : 1 / (2 * T^2) ≤ 1/2 := by
+    have h2T2 : 0 < 2 * T^2 := by positivity
+    rw [div_le_div_iff₀ h2T2 (by norm_num : (0:ℝ) < 2)]
+    nlinarith [hT_ge_one]
+  have h_1_2T_pos : 0 ≤ 1 / (2 * T) := by positivity
+  have h_qp_le : |qPrime T| ≤ 1 := by
+    rw [abs_le]
+    obtain ⟨h_lo, h_hi⟩ := abs_le.mp hqp_bd
+    refine ⟨by linarith, by linarith⟩
+  have h_qpp_le : |qDoublePrime T| ≤ 1 := by
+    rw [abs_le]
+    obtain ⟨h_lo, h_hi⟩ := abs_le.mp hqpp_bd
+    have h_pos : 0 ≤ 1 / (2 * T^2) := by positivity
+    have h_neg : (-1 : ℝ) / (2 * T^2) = -(1 / (2 * T^2)) := by ring
+    rw [h_neg] at h_lo h_hi
+    refine ⟨by linarith, by linarith⟩
+  exact J_floor_quadform T h_q_ge_5 h_qp_le h_qpp_le x
 
 end RH.JetLimitLocalBlocks
