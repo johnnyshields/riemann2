@@ -631,10 +631,360 @@ theorem phase_kernel_diagonal_partial_y (T : ℝ) :
   rw [h]
   exact phase_kernel_diagonal_partial_x T
 
-/-- Diagonal mixed partial: `K_{xy}(T, T) = (q''(T) + 2 q(T)³) / (6 π)`. -/
-axiom phase_kernel_diagonal_partial_xy (T : ℝ) :
+set_option maxHeartbeats 1600000 in
+/-- Diagonal mixed partial: `K_{xy}(T, T) = (q''(T) + 2 q(T)³) / (6 π)`.
+
+    Proof: For `x ≠ T`, the inner derivative is computed directly via the
+    quotient rule: `deriv (phaseKernel x) T = N(x) / (π(x − T)²)` where
+    `N(x) := sin(θx − θT) − q(T)(x − T)cos(θx − θT)`.  At `x = T`,
+    `phase_kernel_diagonal_partial_y` gives the value `q'(T) / (2π)`.
+    Order-3 Taylor of `N` at `T` (with `iteratedDeriv 0/1/2/3 N T =
+    0, 0, q'(T), q''(T) + 2 q(T)³`) plus IsLittleO division by `(x − T)²`
+    yields `HasDerivAt (fun x => deriv (phaseKernel x) T)
+        ((q''(T) + 2 q(T)³)/(6π)) T`. -/
+theorem phase_kernel_diagonal_partial_xy (T : ℝ) :
     deriv (fun x => deriv (phaseKernel x) T) T =
-      (qDoublePrime T + 2 * (q T)^3) / (6 * Real.pi)
+      (qDoublePrime T + 2 * (q T)^3) / (6 * Real.pi) := by
+  -- The auxiliary function N(x).
+  set N : ℝ → ℝ := fun x =>
+    Real.sin (theta x - theta T) - q T * (x - T) * Real.cos (theta x - theta T) with hN_def
+  -- Closed-form deriv N (= N₁).
+  set N₁ : ℝ → ℝ := fun x =>
+    (q x - q T) * Real.cos (theta x - theta T) +
+    q T * (x - T) * q x * Real.sin (theta x - theta T) with hN1_def
+  -- Closed-form deriv N₁ (= N₂).
+  set N₂ : ℝ → ℝ := fun x =>
+    (qPrime x + q T * (x - T) * (q x)^2) * Real.cos (theta x - theta T) +
+    (-(q x)^2 + 2 * q T * q x + q T * (x - T) * qPrime x) * Real.sin (theta x - theta T)
+    with hN2_def
+  -- Smoothness inputs.
+  have h_θ_diff : Differentiable ℝ theta := theta_smooth.differentiable (by decide)
+  have h_θ_C2 : ContDiff ℝ 2 theta := theta_smooth.of_le (by decide)
+  have h_θ_C3 : ContDiff ℝ 3 theta := theta_smooth.of_le (by decide)
+  have h_q_C1 : ContDiff ℝ 1 q := by
+    have h : ContDiff ℝ (1 + 1 : ℕ) theta := by
+      rw [show (1 + 1 : ℕ) = 2 from by norm_num]; exact h_θ_C2
+    exact h.deriv'
+  have h_q_C2 : ContDiff ℝ 2 q := by
+    have h : ContDiff ℝ (2 + 1 : ℕ) theta := by
+      rw [show (2 + 1 : ℕ) = 3 from by norm_num]; exact h_θ_C3
+    exact h.deriv'
+  have h_qPrime_C1 : ContDiff ℝ 1 qPrime := by
+    have h : ContDiff ℝ (1 + 1 : ℕ) q := by
+      rw [show (1 + 1 : ℕ) = 2 from by norm_num]; exact h_q_C2
+    exact h.deriv'
+  have h_q_diff : Differentiable ℝ q := h_q_C1.differentiable (by decide)
+  have h_qPrime_diff : Differentiable ℝ qPrime := h_qPrime_C1.differentiable (by decide)
+  have h_θ_hasDerivAt : ∀ x, HasDerivAt theta (q x) x := fun x => (h_θ_diff x).hasDerivAt
+  have h_q_hasDerivAt : ∀ x, HasDerivAt q (qPrime x) x := fun x => (h_q_diff x).hasDerivAt
+  have h_qPrime_hasDerivAt : ∀ x, HasDerivAt qPrime (qDoublePrime x) x :=
+    fun x => (h_qPrime_diff x).hasDerivAt
+  -- N is C^4 (composition of C^∞ functions).
+  have h_N_C3 : ContDiff ℝ 3 N := by
+    have h_φ : ContDiff ℝ ⊤ (fun x => theta x - theta T) :=
+      theta_smooth.sub contDiff_const
+    have h_sin : ContDiff ℝ ⊤ (fun x => Real.sin (theta x - theta T)) :=
+      Real.contDiff_sin.comp h_φ
+    have h_cos : ContDiff ℝ ⊤ (fun x => Real.cos (theta x - theta T)) :=
+      Real.contDiff_cos.comp h_φ
+    have h_id : ContDiff ℝ ⊤ (fun x : ℝ => x - T) := contDiff_id.sub contDiff_const
+    have h_qT_xT : ContDiff ℝ ⊤ (fun x : ℝ => q T * (x - T)) := contDiff_const.mul h_id
+    have h_qT_xT_cos : ContDiff ℝ ⊤
+        (fun x => q T * (x - T) * Real.cos (theta x - theta T)) := h_qT_xT.mul h_cos
+    have h_N_smooth : ContDiff ℝ ⊤ N := h_sin.sub h_qT_xT_cos
+    exact h_N_smooth.of_le (by decide)
+  -- Step 1: HasDerivAt N (N₁ x) x for every x.
+  have h_N_deriv : ∀ x, HasDerivAt N (N₁ x) x := by
+    intro x
+    have h_φ : HasDerivAt (fun y => theta y - theta T) (q x) x :=
+      (h_θ_hasDerivAt x).sub_const _
+    have h_sin : HasDerivAt (fun y => Real.sin (theta y - theta T))
+        (Real.cos (theta x - theta T) * q x) x := by
+      have h := (Real.hasDerivAt_sin (theta x - theta T)).comp x h_φ
+      simpa using h
+    have h_cos : HasDerivAt (fun y => Real.cos (theta y - theta T))
+        (-Real.sin (theta x - theta T) * q x) x := by
+      have h := (Real.hasDerivAt_cos (theta x - theta T)).comp x h_φ
+      simpa using h
+    have h_xT : HasDerivAt (fun y : ℝ => y - T) (1 : ℝ) x :=
+      (hasDerivAt_id x).sub_const T
+    have h_qT_xT : HasDerivAt (fun y : ℝ => q T * (y - T)) (q T * 1) x :=
+      h_xT.const_mul (q T)
+    have h_qT_xT_cos : HasDerivAt (fun y => q T * (y - T) * Real.cos (theta y - theta T))
+        (q T * 1 * Real.cos (theta x - theta T) +
+         q T * (x - T) * (-Real.sin (theta x - theta T) * q x)) x :=
+      h_qT_xT.mul h_cos
+    have h_N_at_x : HasDerivAt N
+        (Real.cos (theta x - theta T) * q x -
+         (q T * 1 * Real.cos (theta x - theta T) +
+          q T * (x - T) * (-Real.sin (theta x - theta T) * q x))) x :=
+      h_sin.sub h_qT_xT_cos
+    convert h_N_at_x using 1
+    show N₁ x = _
+    simp only [hN1_def]
+    ring
+  -- Therefore deriv N = N₁ as functions.
+  have h_deriv_N_eq : deriv N = N₁ := funext fun x => (h_N_deriv x).deriv
+  -- Step 2: HasDerivAt N₁ (N₂ x) x for every x.
+  have h_N1_deriv : ∀ x, HasDerivAt N₁ (N₂ x) x := by
+    intro x
+    have h_φ : HasDerivAt (fun y => theta y - theta T) (q x) x :=
+      (h_θ_hasDerivAt x).sub_const _
+    have h_sin : HasDerivAt (fun y => Real.sin (theta y - theta T))
+        (Real.cos (theta x - theta T) * q x) x := by
+      have h := (Real.hasDerivAt_sin (theta x - theta T)).comp x h_φ
+      simpa using h
+    have h_cos : HasDerivAt (fun y => Real.cos (theta y - theta T))
+        (-Real.sin (theta x - theta T) * q x) x := by
+      have h := (Real.hasDerivAt_cos (theta x - theta T)).comp x h_φ
+      simpa using h
+    have h_qx : HasDerivAt q (qPrime x) x := h_q_hasDerivAt x
+    have h_xT : HasDerivAt (fun y : ℝ => y - T) (1 : ℝ) x :=
+      (hasDerivAt_id x).sub_const T
+    -- A(x) := (q x - q T) * cos(theta x - theta T)
+    have h_qx_sub : HasDerivAt (fun y => q y - q T) (qPrime x) x :=
+      h_qx.sub_const _
+    have h_A : HasDerivAt (fun y => (q y - q T) * Real.cos (theta y - theta T))
+        (qPrime x * Real.cos (theta x - theta T) +
+         (q x - q T) * (-Real.sin (theta x - theta T) * q x)) x :=
+      h_qx_sub.mul h_cos
+    -- B(x) := q T * (x - T) * q x * sin(theta x - theta T)
+    have h_qT_xT : HasDerivAt (fun y : ℝ => q T * (y - T)) (q T * 1) x :=
+      h_xT.const_mul (q T)
+    have h_qT_xT_qx : HasDerivAt (fun y : ℝ => q T * (y - T) * q y)
+        (q T * 1 * q x + q T * (x - T) * qPrime x) x :=
+      h_qT_xT.mul h_qx
+    have h_B : HasDerivAt (fun y => q T * (y - T) * q y * Real.sin (theta y - theta T))
+        ((q T * 1 * q x + q T * (x - T) * qPrime x) * Real.sin (theta x - theta T) +
+         q T * (x - T) * q x * (Real.cos (theta x - theta T) * q x)) x :=
+      h_qT_xT_qx.mul h_sin
+    have h_N1_at_x : HasDerivAt N₁
+        ((qPrime x * Real.cos (theta x - theta T) +
+          (q x - q T) * (-Real.sin (theta x - theta T) * q x)) +
+         ((q T * 1 * q x + q T * (x - T) * qPrime x) * Real.sin (theta x - theta T) +
+          q T * (x - T) * q x * (Real.cos (theta x - theta T) * q x))) x :=
+      h_A.add h_B
+    convert h_N1_at_x using 1
+    show N₂ x = _
+    simp only [hN2_def]
+    ring
+  -- Therefore deriv N₁ = N₂ as functions.
+  have h_deriv_N1_eq : deriv N₁ = N₂ := funext fun x => (h_N1_deriv x).deriv
+  -- Step 3: HasDerivAt N₂ (qDoublePrime T + 2 (q T)^3) at T.
+  have h_N2_at_T : HasDerivAt N₂ (qDoublePrime T + 2 * (q T)^3) T := by
+    -- N₂(x) = P(x) cos(θx - θT) + Q(x) sin(θx - θT) where
+    --   P(x) := qPrime x + q T (x - T) (q x)^2
+    --   Q(x) := -(q x)^2 + 2 q T q x + q T (x - T) qPrime x
+    -- At T: cos = 1, sin = 0, x - T = 0.
+    -- N₂'(T) = P'(T) + Q(T) * q T = (q''(T) + (qT)³) + (qT)² * qT = q''(T) + 2(qT)³.
+    have h_φ : HasDerivAt (fun y => theta y - theta T) (q T) T :=
+      (h_θ_hasDerivAt T).sub_const _
+    have h_sin : HasDerivAt (fun y => Real.sin (theta y - theta T))
+        (Real.cos (theta T - theta T) * q T) T := by
+      have h := (Real.hasDerivAt_sin (theta T - theta T)).comp T h_φ
+      simpa using h
+    have h_cos : HasDerivAt (fun y => Real.cos (theta y - theta T))
+        (-Real.sin (theta T - theta T) * q T) T := by
+      have h := (Real.hasDerivAt_cos (theta T - theta T)).comp T h_φ
+      simpa using h
+    have h_qT_T : HasDerivAt q (qPrime T) T := h_q_hasDerivAt T
+    have h_qPrimeT : HasDerivAt qPrime (qDoublePrime T) T := h_qPrime_hasDerivAt T
+    have h_xT : HasDerivAt (fun y : ℝ => y - T) (1 : ℝ) T :=
+      (hasDerivAt_id T).sub_const T
+    -- P(x) = qPrime x + q T * (x - T) * (q x)^2
+    have h_qx_sq : HasDerivAt (fun y : ℝ => (q y)^2) (2 * q T * qPrime T) T := by
+      have := h_qT_T.pow 2
+      simpa [pow_one] using this
+    have h_qT_xT : HasDerivAt (fun y : ℝ => q T * (y - T)) (q T * 1) T :=
+      h_xT.const_mul (q T)
+    have h_qT_xT_qx_sq : HasDerivAt (fun y : ℝ => q T * (y - T) * (q y)^2)
+        (q T * 1 * (q T)^2 + q T * (T - T) * (2 * q T * qPrime T)) T :=
+      h_qT_xT.mul h_qx_sq
+    have h_P : HasDerivAt (fun y : ℝ => qPrime y + q T * (y - T) * (q y)^2)
+        (qDoublePrime T + (q T * 1 * (q T)^2 + q T * (T - T) * (2 * q T * qPrime T))) T :=
+      h_qPrimeT.add h_qT_xT_qx_sq
+    -- P(T) = qPrime T (after T - T = 0).
+    -- P * cos:
+    have h_P_cos : HasDerivAt
+        (fun y => (qPrime y + q T * (y - T) * (q y)^2) * Real.cos (theta y - theta T))
+        ((qDoublePrime T + (q T * 1 * (q T)^2 + q T * (T - T) * (2 * q T * qPrime T))) *
+            Real.cos (theta T - theta T) +
+         (qPrime T + q T * (T - T) * (q T)^2) * (-Real.sin (theta T - theta T) * q T)) T :=
+      h_P.mul h_cos
+    -- Q(x) = -(q x)^2 + 2 q T q x + q T (x - T) qPrime x
+    have h_neg_qx_sq : HasDerivAt (fun y : ℝ => -(q y)^2) (-(2 * q T * qPrime T)) T :=
+      h_qx_sq.neg
+    have h_2qTqx : HasDerivAt (fun y : ℝ => 2 * q T * q y) (2 * q T * qPrime T) T :=
+      h_qT_T.const_mul (2 * q T)
+    have h_qT_xT_qPrime : HasDerivAt (fun y : ℝ => q T * (y - T) * qPrime y)
+        (q T * 1 * qPrime T + q T * (T - T) * qDoublePrime T) T :=
+      h_qT_xT.mul h_qPrimeT
+    have h_Q : HasDerivAt
+        (fun y : ℝ => -(q y)^2 + 2 * q T * q y + q T * (y - T) * qPrime y)
+        (-(2 * q T * qPrime T) + 2 * q T * qPrime T +
+         (q T * 1 * qPrime T + q T * (T - T) * qDoublePrime T)) T :=
+      (h_neg_qx_sq.add h_2qTqx).add h_qT_xT_qPrime
+    -- Q * sin:
+    have h_Q_sin : HasDerivAt
+        (fun y => (-(q y)^2 + 2 * q T * q y + q T * (y - T) * qPrime y) *
+                  Real.sin (theta y - theta T))
+        ((-(2 * q T * qPrime T) + 2 * q T * qPrime T +
+          (q T * 1 * qPrime T + q T * (T - T) * qDoublePrime T)) *
+            Real.sin (theta T - theta T) +
+         (-(q T)^2 + 2 * q T * q T + q T * (T - T) * qPrime T) *
+            (Real.cos (theta T - theta T) * q T)) T :=
+      h_Q.mul h_sin
+    -- Sum: N₂ at T.
+    have h_N2_at : HasDerivAt N₂
+        (((qDoublePrime T + (q T * 1 * (q T)^2 + q T * (T - T) * (2 * q T * qPrime T))) *
+            Real.cos (theta T - theta T) +
+          (qPrime T + q T * (T - T) * (q T)^2) * (-Real.sin (theta T - theta T) * q T)) +
+         ((-(2 * q T * qPrime T) + 2 * q T * qPrime T +
+           (q T * 1 * qPrime T + q T * (T - T) * qDoublePrime T)) *
+             Real.sin (theta T - theta T) +
+          (-(q T)^2 + 2 * q T * q T + q T * (T - T) * qPrime T) *
+             (Real.cos (theta T - theta T) * q T))) T :=
+      h_P_cos.add h_Q_sin
+    convert h_N2_at using 1
+    have hsub : theta T - theta T = 0 := sub_self _
+    rw [hsub, Real.sin_zero, Real.cos_zero]
+    ring
+  -- Step 4: iteratedDeriv values at T.
+  have h_iter_0 : iteratedDeriv 0 N T = 0 := by
+    rw [iteratedDeriv_zero]
+    show Real.sin (theta T - theta T) - q T * (T - T) * Real.cos (theta T - theta T) = 0
+    simp [sub_self]
+  have h_iter_1 : iteratedDeriv 1 N T = 0 := by
+    rw [iteratedDeriv_one, h_deriv_N_eq]
+    show N₁ T = 0
+    simp [hN1_def, sub_self]
+  have h_iter_2 : iteratedDeriv 2 N T = qPrime T := by
+    rw [show (2 : ℕ) = 1 + 1 from rfl, iteratedDeriv_succ, iteratedDeriv_one,
+        h_deriv_N_eq, h_deriv_N1_eq]
+    show N₂ T = qPrime T
+    simp [hN2_def, sub_self]
+  have h_iter_3 : iteratedDeriv 3 N T = qDoublePrime T + 2 * (q T)^3 := by
+    rw [show (3 : ℕ) = 2 + 1 from rfl, iteratedDeriv_succ,
+        show (2 : ℕ) = 1 + 1 from rfl, iteratedDeriv_succ, iteratedDeriv_one,
+        h_deriv_N_eq, h_deriv_N1_eq]
+    exact h_N2_at_T.deriv
+  -- Step 5: Apply taylor_isLittleO_univ for N at order 3.
+  have h_taylor : (fun x => N x - taylorWithinEval N 3 Set.univ T x) =o[nhds T]
+      (fun x => (x - T)^3) := taylor_isLittleO_univ h_N_C3
+  -- Step 6: Closed form of taylorWithinEval N 3 univ T x.
+  have h_taylor_form : ∀ x : ℝ, taylorWithinEval N 3 Set.univ T x =
+      (qPrime T / 2) * (x - T)^2 + (qDoublePrime T + 2 * (q T)^3) / 6 * (x - T)^3 := by
+    intro x
+    rw [taylor_within_apply]
+    simp only [Finset.sum_range_succ, Finset.sum_range_zero, zero_add,
+               iteratedDerivWithin_univ, smul_eq_mul]
+    rw [show iteratedDeriv 0 N T = N T from rfl]
+    rw [show N T = 0 from by simp [hN_def, sub_self]]
+    rw [h_iter_1, h_iter_2, h_iter_3]
+    simp [Nat.factorial]
+    ring
+  -- Step 7: Convert h_taylor to the closed form.
+  have h_R : (fun x : ℝ => N x - (qPrime T / 2) * (x - T)^2 -
+              (qDoublePrime T + 2 * (q T)^3) / 6 * (x - T)^3)
+      =o[nhds T] (fun x : ℝ => (x - T)^3) := by
+    have heq : (fun x : ℝ => N x - (qPrime T / 2) * (x - T)^2 -
+                  (qDoublePrime T + 2 * (q T)^3) / 6 * (x - T)^3) =
+               (fun x => N x - taylorWithinEval N 3 Set.univ T x) := by
+      funext x; rw [h_taylor_form]; ring
+    rw [heq]; exact h_taylor
+  -- Step 8: Multiply by (x - T)⁻² to get o(x - T).
+  have h_inv2_O : (fun x : ℝ => ((x - T)^2)⁻¹) =O[nhds T] (fun x : ℝ => ((x - T)^2)⁻¹) :=
+    Asymptotics.isBigO_refl _ _
+  have h_R_div : (fun x : ℝ => (N x - (qPrime T / 2) * (x - T)^2 -
+                  (qDoublePrime T + 2 * (q T)^3) / 6 * (x - T)^3) * ((x - T)^2)⁻¹)
+      =o[nhds T] (fun x : ℝ => (x - T)^3 * ((x - T)^2)⁻¹) :=
+    h_R.mul_isBigO h_inv2_O
+  -- (x - T)^3 * ((x - T)^2)⁻¹ = (x - T) everywhere (using 0⁻¹ = 0 at x = T).
+  have h_simp : (fun x : ℝ => (x - T)^3 * ((x - T)^2)⁻¹) = (fun x : ℝ => x - T) := by
+    funext x
+    by_cases hx : x = T
+    · subst hx; simp
+    · have hxT : x - T ≠ 0 := sub_ne_zero.mpr hx
+      have hxT2 : (x - T)^2 ≠ 0 := pow_ne_zero _ hxT
+      field_simp
+  rw [h_simp] at h_R_div
+  -- Scale by 1/π.
+  have h_R_scaled : (fun x : ℝ => (1 / Real.pi) *
+      ((N x - (qPrime T / 2) * (x - T)^2 -
+        (qDoublePrime T + 2 * (q T)^3) / 6 * (x - T)^3) * ((x - T)^2)⁻¹))
+      =o[nhds T] (fun x : ℝ => x - T) :=
+    h_R_div.const_mul_left (1 / Real.pi)
+  -- Step 9: Translate to HasDerivAt of fun x => deriv (phaseKernel x) T.
+  -- For x ≠ T, deriv (phaseKernel x) T = N(x) / (π(x-T)²) = phase_kernel_partial_y x T.
+  -- For x = T, deriv (phaseKernel T) T = qPrime T / (2π) = phase_kernel_diagonal_partial_y T.
+  set g : ℝ → ℝ := fun x => deriv (phaseKernel x) T with hg_def
+  have h_g_T : g T = qPrime T / (2 * Real.pi) := phase_kernel_diagonal_partial_y T
+  have h_g_form : ∀ x ≠ T, g x = N x / (Real.pi * (x - T)^2) := by
+    intro x hx
+    -- For y close to T (with x ≠ T), phaseKernel x y = sin(θx - θy)/(π(x - y)).
+    have h_pK_eq : (fun y => phaseKernel x y) =ᶠ[nhds T]
+        (fun y => Real.sin (theta x - theta y) / (Real.pi * (x - y))) := by
+      filter_upwards [eventually_ne_nhds (Ne.symm hx)] with y hy
+      unfold phaseKernel
+      simp [hy.symm]
+    show deriv (phaseKernel x) T = _
+    rw [Filter.EventuallyEq.deriv_eq h_pK_eq]
+    -- Quotient rule for sin(θx - θy)/(π(x - y)) at y = T.
+    have h_θ_y : HasDerivAt theta (q T) T := h_θ_hasDerivAt T
+    have h_θ_neg : HasDerivAt (fun y => theta x - theta y) (-(q T)) T := by
+      have := (hasDerivAt_const T (theta x)).sub h_θ_y
+      simpa using this
+    have h_sin_x : HasDerivAt (fun y => Real.sin (theta x - theta y))
+        (Real.cos (theta x - theta T) * (-(q T))) T := by
+      have h := (Real.hasDerivAt_sin (theta x - theta T)).comp T h_θ_neg
+      simpa using h
+    have h_xy : HasDerivAt (fun y : ℝ => x - y) (-1 : ℝ) T := by
+      have := (hasDerivAt_const T x).sub (hasDerivAt_id T)
+      simpa using this
+    have h_pi_xy : HasDerivAt (fun y : ℝ => Real.pi * (x - y)) (Real.pi * (-1)) T :=
+      h_xy.const_mul Real.pi
+    have h_den_ne : Real.pi * (x - T) ≠ 0 :=
+      mul_ne_zero Real.pi_ne_zero (sub_ne_zero.mpr hx)
+    have h_quot : HasDerivAt
+        (fun y => Real.sin (theta x - theta y) / (Real.pi * (x - y)))
+        ((Real.cos (theta x - theta T) * (-(q T)) * (Real.pi * (x - T)) -
+          Real.sin (theta x - theta T) * (Real.pi * (-1))) /
+         (Real.pi * (x - T)) ^ 2) T :=
+      h_sin_x.div h_pi_xy h_den_ne
+    rw [h_quot.deriv]
+    have hxT : x - T ≠ 0 := sub_ne_zero.mpr hx
+    show _ = N x / (Real.pi * (x - T) ^ 2)
+    simp only [hN_def]
+    field_simp
+    ring
+  have hπ_pos : 0 < Real.pi := Real.pi_pos
+  have hπ_ne : Real.pi ≠ 0 := Real.pi_ne_zero
+  -- Goal: deriv g T = (qDoublePrime T + 2 (q T)^3) / (6π).
+  -- Use HasDerivAt criterion via IsLittleO.
+  suffices h_g_hasDeriv : HasDerivAt g ((qDoublePrime T + 2 * (q T)^3) / (6 * Real.pi)) T from
+    h_g_hasDeriv.deriv
+  rw [hasDerivAt_iff_isLittleO]
+  -- Goal: (fun y => g y - g T - (y - T) • ((qDoublePrime T + 2 (q T)^3) / (6π))) =o[nhds T] (fun y => y - T)
+  have h_eq : (fun y : ℝ => g y - g T -
+                  (y - T) • ((qDoublePrime T + 2 * (q T)^3) / (6 * Real.pi)))
+      =ᶠ[nhds T] (fun y : ℝ => (1 / Real.pi) *
+          ((N y - (qPrime T / 2) * (y - T)^2 -
+            (qDoublePrime T + 2 * (q T)^3) / 6 * (y - T)^3) * ((y - T)^2)⁻¹)) := by
+    filter_upwards with y
+    show g y - g T - (y - T) • ((qDoublePrime T + 2 * (q T)^3) / (6 * Real.pi)) =
+        (1 / Real.pi) *
+          ((N y - (qPrime T / 2) * (y - T)^2 -
+            (qDoublePrime T + 2 * (q T)^3) / 6 * (y - T)^3) * ((y - T)^2)⁻¹)
+    rw [smul_eq_mul]
+    by_cases hy : y = T
+    · rw [hy, h_g_T]
+      have hN_T : N T = 0 := by simp [hN_def, sub_self]
+      simp [hN_T, sub_self]
+    · have hyT : y - T ≠ 0 := sub_ne_zero.mpr hy
+      have hyT2 : (y - T)^2 ≠ 0 := pow_ne_zero _ hyT
+      rw [h_g_T, h_g_form y hy]
+      field_simp
+  exact h_eq.trans_isLittleO h_R_scaled
 
 /-! ## Phase-kernel derivatives at distinct points -/
 
