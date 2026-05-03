@@ -450,8 +450,16 @@ theorem same_point_gram_uniform_floor :
       ∀ T : ℝ, T₀ ≤ T →
       ∀ x : Fin 2 → ℝ,
         x ⬝ᵥ ((J T) *ᵥ x) ≥ x ⬝ᵥ x := by
-  -- TODO: strengthen `analytic_bounds_eventual` to `q ≥ 3` and apply
-  -- the SOS identity above.
+  -- TODO: SOS proof in progress.  Approach: extract `q T ≥ 5`,
+  -- `|q'(T)| ≤ 1`, `|q''(T)| ≤ 1` from the §2 asymptotics with a
+  -- sufficiently large lower-height cutoff (`Real.exp 12` works).
+  -- Then use the SOS identity
+  --   12 (2q − π) · (xᵀ J x − xᵀ x) · π
+  --     = (12(2q − π) x₀ + 6 q' x₁)² · (1/(12(2q − π)))
+  --       + ((q'' + 2q³ − 12π)(2q − π) − 3 q'²) · x₁²
+  -- which is non-negative for q ≥ 5 since both summands are.
+  -- Lean's `nlinarith` times out on the SOS expansion at the
+  -- heartbeat limit; needs polyrith or a hand-rolled SOS witness.
   sorry
 
 end RH.JetLimitLocalBlocks
