@@ -127,24 +127,10 @@ theorem theta_differentiableAt (t : ℝ) : DifferentiableAt ℝ theta t :=
 theorem theta_contDiff (k : ℕ∞) : ContDiff ℝ k theta :=
   theta_smooth.of_le le_top
 
-/-- Differentiated theta asymptotics on the surrogate window
-    `[T - 1, T + 1]`.  Combines the three derivative bounds:
-    `q  = (1/2) log(t/(2π)) - 1/(48 t²) + O(t⁻⁴)`,
-    `q' = 1/(2t) + O(t⁻³)`, and
-    `q'' = -1/(2t²) + O(t⁻⁴)`.
-
-This is an analytic input from differentiated Stirling. -/
-axiom theta_derivative_asymptotics :
-    ∃ T₀ C : ℝ, 0 < T₀ ∧ 0 ≤ C ∧
-    ∀ T : ℝ, T₀ ≤ T → ∀ t : ℝ, T - 1 ≤ t → t ≤ T + 1 →
-      |q t - ((1/2) * Real.log (t / (2 * Real.pi)) - 1 / (48 * t^2))|
-        ≤ C / t^4 ∧
-      |qPrime t - 1 / (2 * t)| ≤ C / t^3 ∧
-      |qDoublePrime t - (-1) / (2 * t^2)| ≤ C / t^4
-
-/-- Dyadic-window form of `theta_derivative_asymptotics`, matching the
+/-- Dyadic-window form of differentiated theta asymptotics, matching the
     paper's `I_T ⊂ [T/2, 2T]` interface.  This is the preferred interface
-    for downstream packet arguments. -/
+    for downstream packet arguments and is the foundational analytic
+    input from differentiated Stirling. -/
 axiom theta_derivative_asymptotics_dyadic :
     ∃ T₀ C : ℝ, 0 < T₀ ∧ 0 ≤ C ∧
     ∀ T t : ℝ, T₀ ≤ T → T / 2 ≤ t → t ≤ 2 * T →
@@ -152,6 +138,32 @@ axiom theta_derivative_asymptotics_dyadic :
         ≤ C / t^4 ∧
       |qPrime t - 1 / (2 * t)| ≤ C / t^3 ∧
       |qDoublePrime t - (-1) / (2 * t^2)| ≤ C / t^4
+
+/-- Differentiated theta asymptotics on the surrogate window
+    `[T - 1, T + 1]`.  Combines the three derivative bounds:
+    `q  = (1/2) log(t/(2π)) - 1/(48 t²) + O(t⁻⁴)`,
+    `q' = 1/(2t) + O(t⁻³)`, and
+    `q'' = -1/(2t²) + O(t⁻⁴)`.
+
+    Derived from `theta_derivative_asymptotics_dyadic`: for `T ≥ 2`,
+    the inclusion `[T - 1, T + 1] ⊂ [T/2, 2T]` is automatic, so the
+    dyadic bound applies. -/
+theorem theta_derivative_asymptotics :
+    ∃ T₀ C : ℝ, 0 < T₀ ∧ 0 ≤ C ∧
+    ∀ T : ℝ, T₀ ≤ T → ∀ t : ℝ, T - 1 ≤ t → t ≤ T + 1 →
+      |q t - ((1/2) * Real.log (t / (2 * Real.pi)) - 1 / (48 * t^2))|
+        ≤ C / t^4 ∧
+      |qPrime t - 1 / (2 * t)| ≤ C / t^3 ∧
+      |qDoublePrime t - (-1) / (2 * t^2)| ≤ C / t^4 := by
+  obtain ⟨T₀', C', hT₀'_pos, hC'_nn, hasymp⟩ := theta_derivative_asymptotics_dyadic
+  refine ⟨max T₀' 2, C', ?_, hC'_nn, ?_⟩
+  · exact lt_max_of_lt_right (by norm_num)
+  intro T hT t ht_lo ht_hi
+  have hT_T₀' : T₀' ≤ T := le_trans (le_max_left _ _) hT
+  have hT_2 : (2 : ℝ) ≤ T := le_trans (le_max_right _ _) hT
+  have h_half : T / 2 ≤ t := by linarith
+  have h_double : t ≤ 2 * T := by linarith
+  exact hasymp T t hT_T₀' h_half h_double
 
 /-- Phase-derivative lower bound (P2):
     on retained packets at sufficiently large `T`,
