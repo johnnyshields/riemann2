@@ -75,17 +75,73 @@ theorem phase_kernel_symmetric (x y : ℝ) :
     sin(θ(·) − θ(y)) / (π(· − y)).  The latter is the slope of
     g(x) = sin(θ(x) − θ(y)) at y (with g(y) = 0), so it tends to
     g'(y) = cos(0) · q(y) = q(y) by `hasDerivAt_iff_tendsto_slope`.
-    Dividing by π gives the punctured limit q(y)/π; at x = y, the value
-    is q(y)/π by `phase_kernel_diagonal_value`.  Bridge punctured →
-    full nhds via `tendsto_nhds_of_eventuallyEq`-style reasoning. -/
+    Dividing by π gives the punctured limit q(y)/π; at x = y the value
+    equals q(y)/π by `phase_kernel_diagonal_value`.  Combine via
+    `nhdsNE_sup_pure y : 𝓝[≠] y ⊔ pure y = 𝓝 y`. -/
 theorem phase_kernel_diagonal_limit (y : ℝ)
     (h_diff : DifferentiableAt ℝ theta y) :
     Filter.Tendsto (fun x => phaseKernel x y) (nhds y) (nhds (q y / Real.pi)) := by
-  -- TODO: structural sorry — needs nhds y = nhdsWithin {y}ᶜ y ⊔ pure y bridging.
-  -- The punctured-neighborhood limit and value at y are both established
-  -- above (in the proof attempt), but the final filter sup combining
-  -- step needs careful Mathlib API navigation.
-  sorry
+  have h_θ : HasDerivAt theta (q y) y := h_diff.hasDerivAt
+  have h_θ_sub : HasDerivAt (fun x : ℝ => theta x - theta y) (q y) y :=
+    h_θ.sub_const (theta y)
+  -- HasDerivAt sin∘(θ − θ y) at y, with deriv cos(0) · q y = q y
+  have h_g : HasDerivAt (fun x : ℝ => Real.sin (theta x - theta y)) (q y) y := by
+    have h := (Real.hasDerivAt_sin (theta y - theta y)).comp y h_θ_sub
+    simpa [sub_self] using h
+  -- Slope tendsto on punctured nhds
+  have h_slope := hasDerivAt_iff_tendsto_slope.mp h_g
+  -- Convert from `slope` to explicit form `(g x - g y) / (x - y)`.
+  -- slope f x y = (y - x)⁻¹ • (f y - f x)
+  have h_slope_form : Filter.Tendsto
+      (fun x => (Real.sin (theta x - theta y) - Real.sin (theta y - theta y)) / (x - y))
+      (nhdsWithin y {y}ᶜ) (nhds (q y)) := by
+    have heq : (fun x => (Real.sin (theta x - theta y) -
+                          Real.sin (theta y - theta y)) / (x - y)) =
+                (fun x => slope (fun x : ℝ => Real.sin (theta x - theta y)) y x) := by
+      funext x
+      simp [slope, smul_eq_mul]
+      ring
+    rw [heq]; exact h_slope
+  -- Simplify using sin(θ y − θ y) = sin 0 = 0
+  have h_sin_y_zero : Real.sin (theta y - theta y) = 0 := by
+    rw [sub_self]; exact Real.sin_zero
+  have h_punc : Filter.Tendsto (fun x => Real.sin (theta x - theta y) / (x - y))
+      (nhdsWithin y {y}ᶜ) (nhds (q y)) := by
+    have heq : (fun x => Real.sin (theta x - theta y) / (x - y)) =ᶠ[nhdsWithin y {y}ᶜ]
+        (fun x => (Real.sin (theta x - theta y) - Real.sin (theta y - theta y)) / (x - y)) := by
+      filter_upwards with x
+      rw [h_sin_y_zero, sub_zero]
+    exact (Filter.tendsto_congr' heq).mpr h_slope_form
+  -- Divide by π: punctured limit of phaseKernel is q y / π
+  have h_punc_pi : Filter.Tendsto
+      (fun x => Real.sin (theta x - theta y) / (Real.pi * (x - y)))
+      (nhdsWithin y {y}ᶜ) (nhds (q y / Real.pi)) := by
+    have h_div := h_punc.div_const Real.pi
+    have heq : (fun x => Real.sin (theta x - theta y) / (x - y) / Real.pi) =
+        (fun x => Real.sin (theta x - theta y) / (Real.pi * (x - y))) := by
+      funext x; rw [div_div, mul_comm]
+    rw [heq] at h_div
+    exact h_div
+  -- phaseKernel agrees with sin/(π(x-y)) on the punctured neighborhood
+  have h_eq_punc : (fun x => phaseKernel x y) =ᶠ[nhdsWithin y {y}ᶜ]
+      (fun x => Real.sin (theta x - theta y) / (Real.pi * (x - y))) := by
+    filter_upwards [self_mem_nhdsWithin] with x hx
+    have hxy : x ≠ y := hx
+    unfold phaseKernel
+    simp [hxy]
+  have h_punc_kernel : Filter.Tendsto (fun x => phaseKernel x y)
+      (nhdsWithin y {y}ᶜ) (nhds (q y / Real.pi)) :=
+    (Filter.tendsto_congr' h_eq_punc).mpr h_punc_pi
+  -- At x = y, phaseKernel y y = q y / π = limit value
+  have h_at_y : phaseKernel y y = q y / Real.pi := phase_kernel_diagonal_value y
+  -- Bridge: 𝓝 y = 𝓝[≠] y ⊔ pure y
+  rw [← nhdsNE_sup_pure y, Filter.tendsto_sup]
+  refine ⟨h_punc_kernel, ?_⟩
+  -- Tendsto on `pure y`: just need f y to be in nhds of (q y / π)
+  rw [Filter.tendsto_pure_left]
+  intro V hV
+  rw [h_at_y]
+  exact mem_of_mem_nhds hV
 
 /-- Joint continuity at the diagonal: `K_Φ(x, y) → q(T) / π` as
     `(x, y) → (T, T)`.  Stronger than the one-variable
