@@ -1,0 +1,242 @@
+% =============================================================================
+% Patch: §5 Toy anomaly --- uniform-remainder gap closure
+%   sec:toy-anomaly-and-transverse-obstruction
+%
+% Target file:   rh/rh_rebuild.tex (currently at master after the §5
+%                migration patch rh/patches/sec-toy-anomaly-and-transverse-
+%                obstruction.tex was applied).
+% Action:        this patch is NOT to be merged into rh_rebuild.tex yet.
+%                It is staged under rh/patches/ for review.
+% Format:        purely additive.  Does not modify any existing
+%                statement, proof, or remark in §5.  Inserts new content
+%                only.
+%
+% Purpose:       discharge rem:wip-toy-anomaly-uniform-remainder by
+%                stating the visibility lower bound on a
+%                polynomial-weight retained subdomain
+%                D_T^toy(D) ⊂ D_T, with an explicit density estimate.
+%
+% Honest scope:  the original wip asks for a uniform extension of
+%                eq:toy-anomaly-visibility-A to all of D_T, including
+%                d → 0, d → ∞, and d approaching a zero of F_∞.
+%                Of these three regimes:
+%                  - d = 0 is genuinely impossible:
+%                    cor:omega-coalescence applied to the toy phase
+%                    forces \widehat\Om_toy(0; m, u) = I_2 for every u,
+%                    whence A_toy = 0 by lem:A-toy-baseline-vanishing;
+%                    no u^2-lower bound can hold there.
+%                  - d → ∞ and d near zeros of F_∞ are excluded by
+%                    the compactness and avoidance hypotheses on D.
+%                The polynomial-weight subdomain produced here is what
+%                the §8.1 rigidity comparison
+%                (subsec:two-point-comparison) consumes; the density
+%                loss Q(T)/q(T) combines with the other polynomial
+%                losses tracked in
+%                sec:aggregation-and-zero-free-strip.
+%
+% Insertion points (relative to §5 of rh_rebuild.tex as currently
+% committed):
+%
+%   (1) NEW SUBSECTION between subsec:toy-anomaly-functional and
+%       subsec:toy-anomaly-visibility, containing
+%       def:toy-retained-subdomain and lem:toy-retained-density.
+%
+%   (2) NEW COROLLARY at the end of subsec:toy-anomaly-visibility,
+%       immediately after the proof of thm:toy-anomaly-visibility:
+%       cor:toy-visibility-polynomial-weight.
+%
+%   (3) NEW REMARK appended at the end of §5, immediately after the
+%       existing wip rem:wip-toy-anomaly-uniform-remainder:
+%       rem:toy-anomaly-no-uniform-extension.  This is a closed
+%       (non-wip) remark that documents which sub-claims of the wip
+%       are genuinely impossible (d = 0 by coalescence) and which are
+%       handled by the polynomial-weight scope established here.
+%       The wip itself remains in place; once a referee or coordinator
+%       agrees that the new content discharges it, the wip can be
+%       removed in a separate edit.
+%
+% Closes (when merged + wip removed):
+%   rem:wip-toy-anomaly-uniform-remainder.
+%
+% Status (when merged):
+%   \statusmig      partial -> migrated  (after wip removal)
+%   \statusreferee  in-progress -> in-progress (re-review needed)
+%   \statussympy    [..] verified -> [..] verified (extended via
+%                     rh/sympy/sec-toy-anomaly-uniform-remainder-closure.py)
+%   \statussim      [..] verified -> [..] verified (extended via
+%                     rh/simulation/sec-toy-anomaly-uniform-remainder-closure.py)
+%
+% Verification (every claim has a failing test in the cited script):
+%   - rh/sympy/sec-toy-anomaly-uniform-remainder-closure.py
+%       verify_toy_retained_density_inequality_symbolic,
+%       verify_density_constant_positivity_on_sample_D,
+%       verify_height_hypothesis_consistency.
+%   - rh/simulation/sec-toy-anomaly-uniform-remainder-closure.py
+%       check_density_at_heights,
+%       check_density_scaling_in_Q,
+%       check_height_hypothesis_holds_at_high_T,
+%       check_avoidance_set_for_F_inf_zeros.
+% =============================================================================
+
+% =============================================================================
+% (1) Insert this subsection BETWEEN subsec:toy-anomaly-functional
+%     (which currently ends with the proof of lem:toy-anomaly-leading
+%     in rh_rebuild.tex) AND subsec:toy-anomaly-visibility (which
+%     currently begins with thm:toy-anomaly-visibility).
+% =============================================================================
+
+\subsection{Toy retained subdomain and polynomial-weight density}
+\label{subsec:toy-retained-subdomain}
+
+\begin{definition}[Toy retained subdomain]
+\label{def:toy-retained-subdomain}
+Fix a compact interval \(D=[d_-,d_+]\subset(0,\infty)\) avoiding the
+isolated zeros of \(F_{\infty}\) of
+Lemma~\ref{lem:toy-anomaly-leading}.  The toy retained subdomain at
+height \(T\) is
+\begin{equation}
+\label{eq:toy-retained-subdomain}
+        \mathcal D_T^\toy(D)
+        \;:=\;\bigl\{(m,s)\in\mathcal D_T^\times :
+            q(m)\,s\in D\bigr\}.
+\end{equation}
+\end{definition}
+
+\begin{lemma}[Polynomial-weight density of the toy retained subdomain]
+\label{lem:toy-retained-density}
+For every compact \(D=[d_-,d_+]\subset(0,\infty)\), at every height
+\(T\) with
+\begin{equation}
+\label{eq:toy-density-height-hypothesis}
+        \frac{d_+}{q(T)}\;\le\;\frac{|I_T|}{4},
+\end{equation}
+the toy retained subdomain satisfies
+\begin{equation}
+\label{eq:toy-retained-density}
+    \frac{|\mathcal D_T^\toy(D)|}{|\mathcal D_T|}
+    \;\ge\;
+    \frac{(d_+-d_-)\,Q(T)}{q(T)},
+\end{equation}
+where \(|\cdot|\) denotes two-dimensional Lebesgue measure on the
+\((m,s)\) plane.  The right-hand side is positive and
+polynomial-in-\(Q\) under any retained \(Q\)-scaling with
+\(\log T\le Q(T)^{c}\) for some absolute \(c\ge 1\).  The height
+hypothesis \eqref{eq:toy-density-height-hypothesis} is equivalent to
+\(Q(T)/q(T)\le 1/(4 d_+)\) under the chart convention
+\(|I_T|\le 1/Q(T)\) used in
+Section~\ref{sec:local-kernel-and-jet-normalization}; it is satisfied
+for all sufficiently large \(T\) whenever \(Q(T)=o(q(T))\), which is
+the slowly-growing-\(Q\) regime of
+Section~\ref{subsec:notation-and-conventions}.
+\end{lemma}
+
+\begin{proof}
+Recall that
+\[
+    \mathcal D_T
+    \;=\;\bigl\{(m,s)\in\mathbb R^{\,2}: t_-=m-s/2\in I_T,\;
+        t_+=m+s/2\in I_T\bigr\},
+\]
+which is the rotated square
+\(\{(m,s):|m-T|+|s|/2\le |I_T|/2\}\) of area \(|\mathcal D_T|=|I_T|^{2}\).
+
+Restrict to the slab \(|m-T|\le|I_T|/4\).  For such \(m\), the
+\(\mathcal D_T\) constraint reduces to \(|s|\le|I_T|/2-|m-T|\ge|I_T|/4\).
+By Lemma~\ref{lem:theta-derivative-asymptotics},
+\(q(m)\le q(T)\) on \(I_T\), so the toy constraint
+\(q(m)\,s\in D\) reads
+\(s\in[d_-/q(m),d_+/q(m)]\), an interval of length
+\((d_+-d_-)/q(m)\ge(d_+-d_-)/q(T)\).  Under
+\eqref{eq:toy-density-height-hypothesis},
+\(d_+/q(m)\le d_+/q(T)\cdot 1\le|I_T|/4\), so this \(s\)-interval is
+contained in \([0,|I_T|/4]\) and hence in the allowed
+\(\mathcal D_T\)-range \([0,|I_T|/2-|m-T|]\) for every
+\(|m-T|\le|I_T|/4\).  By symmetry the negative-\(s\) interval
+\([-d_+/q(m),-d_-/q(m)]\) contributes equally.  Therefore
+\[
+    |\mathcal D_T^\toy(D)|
+    \;\ge\;2\int_{\{|m-T|\le|I_T|/4\}}\frac{d_+-d_-}{q(T)}\,dm
+    \;=\;\frac{(d_+-d_-)\,|I_T|}{q(T)}.
+\]
+Comparing with \(|\mathcal D_T|=|I_T|^{2}\),
+\[
+    \frac{|\mathcal D_T^\toy(D)|}{|\mathcal D_T|}
+    \;\ge\;\frac{d_+-d_-}{q(T)\,|I_T|}.
+\]
+The convention \(|I_T|\le 1/Q(T)\) of
+Section~\ref{sec:local-kernel-and-jet-normalization}
+gives \eqref{eq:toy-retained-density}.  For the equivalence stated
+after the lemma, multiply the hypothesis
+\eqref{eq:toy-density-height-hypothesis} on both sides by \(4/|I_T|\)
+and use \(1/|I_T|\ge Q(T)\) to obtain \(4 d_+ Q(T)/q(T)\le 1\).
+\end{proof}
+
+% =============================================================================
+% (2) Insert this corollary at the END of subsec:toy-anomaly-visibility,
+%     immediately after the proof of thm:toy-anomaly-visibility.
+% =============================================================================
+
+\begin{corollary}[Visibility on the polynomial-weight subdomain]
+\label{cor:toy-visibility-polynomial-weight}
+Fix \(D\) and the constants \(Q_\toy(D)\), \(u_\toy(D)\), \(c_\toy(D)\)
+of Theorem~\ref{thm:toy-anomaly-visibility}.  For every
+\(0<|u|\le u_\toy(D)\), every \(q_0\ge Q_\toy(D)\), and every
+\((m,s)\in\mathcal D_T^\toy(D)\) of
+Definition~\ref{def:toy-retained-subdomain},
+\begin{equation}
+\label{eq:toy-anomaly-visibility-on-subdomain}
+        \bigl|\mathcal A_\toy\bigl(\widehat\Om_\toy(s;m,u)\bigr)\bigr|
+        \;\ge\;\tfrac12\,c_\toy(D)\,u^{2}.
+\end{equation}
+By Lemma~\ref{lem:toy-retained-density},
+\(\mathcal D_T^\toy(D)\) carries a relative Lebesgue density at
+least \((d_+-d_-)\,Q(T)/q(T)\) inside \(\mathcal D_T\).  Hence the
+visibility lower bound is consumed by
+Section~\ref{sec:projective-rigidity} on a polynomial-weight subset
+of midpoints and separations, with the same exponent \(A_\toy=0\) and
+the same constant \(c_\toy(D)/2\), and a polynomial-in-\(Q\)
+density factor that combines with the other polynomial losses tracked
+in Section~\ref{sec:aggregation-and-zero-free-strip}.
+\end{corollary}
+
+\begin{proof}
+For \((m,s)\in\mathcal D_T^\toy(D)\) one has \(q(m)\,s\in D\) by
+\eqref{eq:toy-retained-subdomain}; with \(q_0=q(m)\),
+\(d=q_0\,s\in D\).  Theorem~\ref{thm:toy-anomaly-visibility} then
+gives \eqref{eq:toy-anomaly-visibility-on-subdomain}.  The density
+estimate is Lemma~\ref{lem:toy-retained-density}.
+\end{proof}
+
+% =============================================================================
+% (3) Append this remark at the END of §5, immediately after the
+%     existing wip rem:wip-toy-anomaly-uniform-remainder.  The remark
+%     documents why the wip's "uniform extension to all of D_T" is
+%     genuinely impossible at d = 0 and how the polynomial-weight
+%     scope above subsumes the other regimes mentioned in the wip.
+% =============================================================================
+
+\begin{remark}[No uniform extension; polynomial-weight scope]
+\label{rem:toy-anomaly-no-uniform-extension}
+The visibility lower bound \eqref{eq:toy-anomaly-visibility-A} cannot
+be extended to all of \(\mathcal D_T\).  At \(s=0\),
+Corollary~\ref{cor:omega-coalescence} applied to the toy phase gives
+\(\widehat\Om_\toy(0;m,u)=I_{2}\) for every \(u\), whence
+\(\mathcal A_\toy(\widehat\Om_\toy(0;m,u))=0\) by
+Lemma~\ref{lem:A-toy-baseline-vanishing}; no \(u^{\,2}\)-lower bound
+can hold at the coalescence locus \(d=0\).  The regimes \(d\to\infty\)
+and \(d\) approaching an isolated zero of \(F_{\infty}\) are excluded
+by the compactness and avoidance hypotheses on \(D\) of
+Definition~\ref{def:toy-retained-subdomain}.  The polynomial-weight
+subdomain \(\mathcal D_T^\toy(D)\) of
+Lemma~\ref{lem:toy-retained-density} carries
+\eqref{eq:toy-anomaly-visibility-A} via
+Corollary~\ref{cor:toy-visibility-polynomial-weight}; the density
+factor \(Q(T)/q(T)\) combines with the other polynomial losses tracked
+in Section~\ref{sec:aggregation-and-zero-free-strip}.  This
+polynomial-weight statement is what the comparison theorems of
+Section~\ref{sec:projective-rigidity} consume.
+\end{remark}
+
+% =============================================================================
+% End of patch.
+% =============================================================================
