@@ -1,0 +1,76 @@
+--- /mnt/data/sec-n-point-odd-moment-cancellation(1).py	2026-05-03 13:12:50.278899075 +0000
++++ /mnt/data/sec-n-point-odd-moment-cancellation.sim.referee-revised.py	2026-05-03 13:16:16.112274463 +0000
+@@ -5,16 +5,16 @@
+ Coverage:
+ 
+   * Coefficient identities (lem:n-point-coefficients) at high N
+-    (N up to 12), beyond what symbolic verification reaches in
++    (N = 1 through 12), beyond what symbolic verification reaches in
+     reasonable time.
+   * mu_hat_{N,Q}(z) low odd-jet vanishing at z = 0, computed via
+     finite-difference odd derivatives at high mpmath precision.
+   * Convolution stability: random even bumps (mpmath-generated)
+     paired with mu_hat_{N,Q}; numerical odd derivatives at z = 0
+-    asserted to vanish to machine precision.
++    asserted to vanish to the stated high-precision tolerance.
+   * Stress: confirm the FIRST surviving odd derivative
+-    d^{2N-1} mu_hat_{N,Q}(0) is bounded away from zero (positive
+-    nonzero in absolute value) at high N.
++    d^{2N-1} mu_hat_{N,Q}(0) is nonzero in absolute
++    value, including the N=1 edge case.
+ 
+ Every check is an assertion.  No numpy, no math, no built-in
+ float arithmetic in the verification loop.
+@@ -134,7 +134,7 @@
+     return mp_diff(f, z0, order)
+ 
+ 
+-def check_mu_hat_odd_vanishing(N_values=(2, 3, 4, 5, 6, 7)):
++def check_mu_hat_odd_vanishing(N_values=(1, 2, 3, 4, 5, 6, 7)):
+     print("=" * 70)
+     print("[mu_hat_{N,Q}]  d^{2r+1} mu_hat(0) = 0 for 0 <= r <= N-2,")
+     print("                d^{2N-1} mu_hat(0) is nonzero (first surviving)")
+@@ -214,7 +214,7 @@
+     return phi_hat, coeffs
+ 
+ 
+-def check_convolution_parity(N_values=(2, 3, 4, 5), n_bumps=5):
++def check_convolution_parity(N_values=(1, 2, 3, 4, 5), n_bumps=5):
+     print("=" * 70)
+     print("[convolution form]  d^{2r+1} (phi_hat(eta z) mu_hat(z))(0) = 0")
+     print("=" * 70)
+@@ -252,14 +252,14 @@
+         mp.dps = saved_dps
+     print()
+     print("  [PASS] Random even bumps preserve the parity vanishing under")
+-    print("         product with mu_hat_{N,Q}, confirmed to ~ 1e-7.")
++    print("         product with mu_hat_{N,Q}, confirmed to the asserted high-precision tolerance.")
+ 
+ 
+ # ---------------------------------------------------------------------------
+ # (iv) ell^1 control vs N: stress test for large N.
+ # ---------------------------------------------------------------------------
+ 
+-def check_ell1_growth(N_values=(2, 5, 10, 20, 30, 50)):
++def check_ell1_growth(N_values=(1, 2, 5, 10, 20, 30, 50)):
+     print("=" * 70)
+     print("[ell^1 control]  sum |a_j^{(N)}| = 2N - 1 across a wide N ladder")
+     print("=" * 70)
+@@ -330,7 +330,7 @@
+ # (vi) Independent route: closed-form (1-t)^{2N-1}(1+t) generating identity.
+ # ---------------------------------------------------------------------------
+ 
+-def check_difference_identity_numerical(N_values=(2, 3, 4, 5, 6, 8)):
++def check_difference_identity_numerical(N_values=(1, 2, 3, 4, 5, 6, 8)):
+     """Compare A_N(t) - A_N(1/t) computed two ways at random t > 0, t != 1:
+        (a) directly from the coefficients,
+        (b) via the closed form (-1)^N N / C(2N-2, N-1) t^{-N} (1-t)^{2N-1} (1+t).
+@@ -370,7 +370,7 @@
+     print("=" * 70)
+     print()
+ 
+-    check_coefficient_identities(N_values=(2, 3, 4, 5, 6, 7, 8, 10, 12))
++    check_coefficient_identities(N_values=(1, 2, 3, 4, 5, 6, 7, 8, 10, 12))
+     print()
+     check_mu_hat_odd_vanishing()
+     print()
