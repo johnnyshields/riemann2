@@ -44,6 +44,7 @@ from mpmath import (
     mp,
     mpf,
     pi as MP_PI,
+    quad,
     sin as mp_sin,
     sqrt as mp_sqrt,
 )
@@ -426,6 +427,169 @@ def check_F_toy_against_sympy():
 
 
 # ---------------------------------------------------------------------------
+# Uniform-remainder closure: signed retained subdomain D_T^toy(D),
+# polynomial-weight density, F_inf-zero avoidance.
+# ---------------------------------------------------------------------------
+
+def q_zeta_asymp(t):
+    """Asymptotic q(t) = θ'(t) ≈ (1/2) log(t/(2π)) - 1/(48 t^2).
+
+    Used for the density-integration kernel; cheaper than mpmath.diff(siegeltheta, ...)
+    and accurate at the heights sampled below.
+    """
+    t = mpf(t)
+    return mp_log(t / (2 * MP_PI)) / 2 - 1 / (48 * t**2)
+
+
+def q_bounds_on_window(T, I_half):
+    """(q_T^-, q_T^+) on I_T = [T - I_half, T + I_half].
+    For high T, q is increasing in t, so the inf is at the left endpoint
+    and the sup at the right endpoint.
+    """
+    return q_zeta_asymp(T - I_half), q_zeta_asymp(T + I_half)
+
+
+def F_inf_closed_form_dens(d_val):
+    """Numerical F_inf(d) of eq:F-toy-closed-form (used for D-zero
+    avoidance check in the closure)."""
+    d_val = mpf(d_val)
+    num = (
+        2 * d_val**2 * mp_cos(d_val)
+        + 5 * d_val**2 * mp_cos(2 * d_val)
+        - 7 * d_val**2
+        + 6 * d_val * mp_sin(d_val)
+        - 15 * d_val * mp_sin(2 * d_val)
+        - 12 * mp_cos(2 * d_val)
+        + 12
+    )
+    den = 8 * d_val**3 * mp_sin(d_val / 2)
+    return mp_sqrt(mpf(3)) * num / den
+
+
+def measure_D_T(I_half):
+    """|D_T| where D_T = {(m, s) : |m - T| + |s|/2 <= |I_T|/2}."""
+    return (2 * mpf(I_half))**2
+
+
+def measure_D_T_toy_signed(T, I_half, dminus, dplus):
+    """|D_T^toy(D)| under the signed definition q(m)|s| in [d_-, d_+].
+
+    For each m in I_T, both s in [d_-/q(m), d_+/q(m)] and the reflected
+    negative interval contribute; both clipped to the D_T-allowed range.
+    """
+    T = mpf(T); I_half = mpf(I_half)
+    dminus = mpf(dminus); dplus = mpf(dplus)
+
+    def integrand(m):
+        m = mpf(m)
+        smax = 2 * (I_half - fabs(m - T))
+        if smax <= 0:
+            return mpf("0")
+        q_m = q_zeta_asymp(m)
+        slo = dminus / q_m
+        shi = dplus / q_m
+        single = max(mpf("0"), min(shi, smax) - min(slo, smax))
+        return 2 * single  # signed: positive and negative branches
+
+    return quad(integrand, [T - I_half, T + I_half])
+
+
+def density_ratio(T, I_half, dminus, dplus):
+    """|D_T^toy(D)| / |D_T| empirical."""
+    return (measure_D_T_toy_signed(T, I_half, dminus, dplus)
+            / measure_D_T(I_half))
+
+
+def check_density_at_heights():
+    """Verify lem:toy-retained-density at concrete heights with Q ≪ q
+    so the height hypothesis holds."""
+    print("=" * 70)
+    print("[lem:toy-retained-density]  density at concrete heights "
+          "(signed, q_T^+-corrected)")
+    print("=" * 70)
+    cases = [
+        (mpf("1e6"),  mpf("0.5"),  (mpf("0.4"), mpf("1.5"))),
+        (mpf("1e9"),  mpf("0.7"),  (mpf("0.4"), mpf("2.0"))),
+        (mpf("1e12"), mpf("0.9"),  (mpf("0.4"), mpf("2.5"))),
+    ]
+    for T, Q, D in cases:
+        dminus, dplus = D
+        I_half = 1 / (2 * Q)
+        qmin, qmax = q_bounds_on_window(T, I_half)
+        # Height hypothesis: d_+ / q_T^- <= |I_T|/4.
+        assert dplus / qmin <= (2 * I_half) / 4, (
+            f"Height hypothesis fails at T={T}, Q={Q}, d_+={dplus}: "
+            f"d_+/q_T^-={dplus/qmin}, |I_T|/4={(2*I_half)/4}"
+        )
+        empirical = density_ratio(T, I_half, dminus, dplus)
+        # Exact lower bound from lem:toy-retained-density:
+        #   |D_T^toy(D)| / |D_T| >= (d_+ - d_-) / (q_T^+ |I_T|).
+        exact_lower = (dplus - dminus) / (qmax * (2 * I_half))
+        assert empirical >= exact_lower - mpf("1e-12"), (
+            f"Density inequality fails at T={T}, Q={Q}, "
+            f"D=[{dminus}, {dplus}]: empirical={empirical}, "
+            f"exact_lower={exact_lower}"
+        )
+        print(f"  T={float(T):.1e}, Q={float(Q):.3f}: "
+              f"empirical={float(empirical):.4e}, "
+              f"exact lower={float(exact_lower):.4e}")
+    print(f"  [PASS] |D_T^toy(D)| / |D_T| >= (d_+-d_-)/(q_T^+ |I_T|) "
+          f"verified at {len(cases)} (T, Q, D) triples.")
+
+
+def check_density_scaling_in_Q():
+    """At fixed T, sweep Q across a ladder; confirm empirical/(Q/qT) ≥
+    (d_+ - d_-) qT / q_T^+ (the corrected polynomial-weight bound)."""
+    print("=" * 70)
+    print("[lem:toy-retained-density]  empirical density scales like Q/q(T)")
+    print("=" * 70)
+    T = mpf("1e9")
+    dminus, dplus = mpf("0.4"), mpf("1.5")
+    qT = q_zeta_asymp(T)
+    for Q in [qT / 32, qT / 16, qT / 8]:
+        I_half = 1 / (2 * Q)
+        qmin, qmax = q_bounds_on_window(T, I_half)
+        assert dplus / qmin <= (2 * I_half) / 4
+        empirical = density_ratio(T, I_half, dminus, dplus)
+        scaled = empirical / (Q / qT)
+        lower_scaled = (dplus - dminus) * qT / qmax
+        assert scaled >= lower_scaled - mpf("1e-10")
+        print(f"  Q={float(Q):.4f}: empirical/(Q/qT)={float(scaled):.4f}, "
+              f"lower={float(lower_scaled):.4f}")
+    print("  [PASS] empirical/(Q/qT) >= (d_+-d_-) qT/q_T^+ across the Q-ladder.")
+
+
+def check_F_inf_zero_avoidance():
+    """Sample-based F_inf zero avoidance on candidate D-intervals."""
+    print("=" * 70)
+    print("[def:toy-retained-subdomain]  F_inf zero avoidance on sample D")
+    print("=" * 70)
+    samples = [
+        (mpf("0.5"), mpf("1.5")),
+        (mpf("0.5"), mpf("2.0")),
+        (mpf("0.5"), mpf("2.5")),
+        (mpf("1.0"), mpf("2.5")),
+    ]
+    for d_minus, d_plus in samples:
+        n_check = 51
+        signs = []
+        for k in range(n_check):
+            dp = d_minus + (d_plus - d_minus) * k / (n_check - 1)
+            f_val = F_inf_closed_form_dens(dp)
+            signs.append(1 if f_val > 0 else (-1 if f_val < 0 else 0))
+        sign_changes = sum(
+            1 for i in range(1, len(signs)) if signs[i] != signs[i - 1]
+        )
+        assert sign_changes == 0, (
+            f"D = [{d_minus}, {d_plus}] crosses an F_inf zero "
+            f"({sign_changes} sign changes among {n_check} samples)"
+        )
+        print(f"  D = [{float(d_minus):.2f}, {float(d_plus):.2f}]: "
+              f"no F_inf sign change.")
+    print("  [PASS] all sample D's avoid F_inf zeros at high mpmath dps.")
+
+
+# ---------------------------------------------------------------------------
 # Main.
 # ---------------------------------------------------------------------------
 
@@ -446,6 +610,12 @@ def main():
     print()
     check_anomaly_height_independence()
     print()
+    check_F_inf_zero_avoidance()
+    print()
+    check_density_at_heights()
+    print()
+    check_density_scaling_in_Q()
+    print()
     print("=" * 70)
     print("All §5 checks passed at mpmath precision dps =", mp.dps)
     print("  - Phi_toy derivatives match closed form via mpmath.diff")
@@ -456,6 +626,9 @@ def main():
     print("  - A_toy is even in u")
     print("  - Empirical A_toy/u^2 matches F_inf(d) closed form")
     print("  - Visibility exponent A_toy = 0 verified across heights")
+    print("  - F_inf-zero avoidance on sample D's (numerical)")
+    print("  - density inequality (signed) at heights T ∈ {1e6, 1e9, 1e12}")
+    print("  - empirical density scales like Q(T)/q(T) at fixed T")
     print("=" * 70)
 
 

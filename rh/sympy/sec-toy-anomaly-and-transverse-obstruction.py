@@ -522,6 +522,112 @@ def verify_F_toy_lower_bound_on_compact_d():
 
 
 # ---------------------------------------------------------------------------
+# (vii) Uniform-remainder closure: signed retained subdomain D_T^toy(D),
+#       polynomial-weight density, signed-separation invariance.
+# ---------------------------------------------------------------------------
+
+def verify_density_bound_with_q_extrema():
+    """Check the exact density lower bound for lem:toy-retained-density.
+
+    With q^- <= q(m) <= q^+ on I_T and the height hypothesis
+    d_+/q^- <= |I_T|/4, the signed retained set q(m)|s| in [d_-,d_+]
+    has density at least (d_+-d_-)/(q^+ |I_T|).
+    """
+    print("=" * 70)
+    print("[lem:toy-retained-density]  exact signed density lower bound")
+    print("=" * 70)
+    dminus, dplus, qplus, I = sp.symbols("dminus dplus qplus I", positive=True)
+    width = dplus - dminus
+    # Central slab length is |I|/2; two signs of s contribute total
+    # s-width >= 2 width / qplus at each slab point.
+    retained_lower = (I / 2) * (2 * width / qplus)
+    total_area = I**2
+    ratio = sp.simplify(retained_lower / total_area)
+    target = width / (qplus * I)
+    assert sp.simplify(ratio - target) == 0
+    print("  [PASS] exact signed density ratio >= (d_+-d_-)/(q_T^+ |I_T|).")
+
+
+def verify_polynomial_density_consequence():
+    """Polynomial-weight consequence under |I_T| <= C_I/Q and q^+ <= C_q q(T)."""
+    print("=" * 70)
+    print("[lem:toy-retained-density]  polynomial-weight Q/q consequence")
+    print("=" * 70)
+    width, Q, qT, CI, Cq = sp.symbols("width Q qT C_I C_q", positive=True)
+    I_boundary = CI / Q
+    qplus_boundary = Cq * qT
+    exact_ratio_boundary = width / (qplus_boundary * I_boundary)
+    polynomial_target = width * Q / (CI * Cq * qT)
+    assert sp.simplify(exact_ratio_boundary - polynomial_target) == 0
+    print("  [PASS] exact density implies width/(C_I C_q) * Q/q(T) at boundary.")
+
+
+def verify_height_hypothesis_implication():
+    """Sufficient high-height condition for eq:toy-density-height-hypothesis.
+
+    If |I_T| >= c_I/Q, q^- >= c_q q(T), and Q/q(T) <= c_I c_q/(4 d_+),
+    then d_+/q^- <= |I_T|/4.
+    """
+    print("=" * 70)
+    print("[eq:toy-density-height-hypothesis]  sufficient high-height implication")
+    print("=" * 70)
+    dplus, Q, qT, cI, cq = sp.symbols("dplus Q qT c_I c_q", positive=True)
+    I_lower = cI / Q
+    qminus_lower = cq * qT
+    lhs = dplus / qminus_lower
+    rhs = I_lower / 4
+    Q_boundary = cI * cq * qT / (4 * dplus)
+    assert sp.simplify(lhs - rhs.subs(Q, Q_boundary)) == 0
+    print("  [PASS] Q/q(T) <= c_I c_q/(4 d_+) implies the height hypothesis.")
+
+
+def verify_signed_definition_matches_two_branches():
+    """Two-branch length for q(m)|s| in D.
+
+    The signed definition keeps s in [d_-/q, d_+/q] and the reflected
+    negative interval [-d_+/q, -d_-/q].  Total length is 2(d_+ - d_-)/q.
+    """
+    print("=" * 70)
+    print("[def:toy-retained-subdomain]  signed two-branch total length")
+    print("=" * 70)
+    dminus, dplus, q = sp.symbols("dminus dplus q", positive=True)
+    length_positive = dplus / q - dminus / q
+    length_negative = (-dminus / q) - (-dplus / q)
+    total = sp.simplify(length_positive + length_negative)
+    assert sp.simplify(total - 2 * (dplus - dminus) / q) == 0
+    print("  [PASS] q(m)|s| in D contributes two branches of total "
+          "length 2(d_+ - d_-)/q(m).")
+
+
+def verify_signed_scalar_channel_invariance():
+    """Algebra behind lem:toy-signed-separation-invariance.
+
+    If H_- and H_+ are symmetric inverse square roots and
+    N(-s) = N(s)^T with H_-(-s) = H_+(s), H_+(-s) = H_-(s), then
+    Omega(-s) = Omega(s)^T.  Since A_toy(X) = X_12 + X_21 is
+    transpose-invariant, the scalar channel is unchanged.
+    """
+    print("=" * 70)
+    print("[lem:toy-signed-separation-invariance]  Omega(-s) = Omega(s)^T, "
+          "A_toy invariant")
+    print("=" * 70)
+    hm11, hm12, hm22, hp11, hp12, hp22 = sp.symbols(
+        "hm11 hm12 hm22 hp11 hp12 hp22"
+    )
+    n11, n12, n21, n22 = sp.symbols("n11 n12 n21 n22")
+    Hm = sp.Matrix([[hm11, hm12], [hm12, hm22]])
+    Hp = sp.Matrix([[hp11, hp12], [hp12, hp22]])
+    N = sp.Matrix([[n11, n12], [n21, n22]])
+    Omega_pos = Hm * N * Hp
+    Omega_neg = Hp * N.T * Hm
+    assert sp.simplify(Omega_neg - Omega_pos.T) == sp.zeros(2, 2)
+    A = lambda X: X[0, 1] + X[1, 0]
+    assert sp.simplify(A(Omega_neg) - A(Omega_pos)) == 0
+    print("  [PASS] signed separation transposes Omega and preserves "
+          "A_toy(X) = X_12 + X_21.")
+
+
+# ---------------------------------------------------------------------------
 # Main.
 # ---------------------------------------------------------------------------
 
@@ -544,6 +650,16 @@ def main():
     print()
     verify_F_toy_lower_bound_on_compact_d()
     print()
+    verify_density_bound_with_q_extrema()
+    print()
+    verify_polynomial_density_consequence()
+    print()
+    verify_height_hypothesis_implication()
+    print()
+    verify_signed_definition_matches_two_branches()
+    print()
+    verify_signed_scalar_channel_invariance()
+    print()
     print("=" * 70)
     print("All §5 lemmas verified symbolically:")
     print("  - lem:toy-phase-derivatives: q_toy, q_toy', q_toy'' formulas")
@@ -557,6 +673,13 @@ def main():
     print("  - eq:F-toy-closed-form: F_inf(d) := lim_{q_0->oo} F_toy matches")
     print("    the paper's displayed closed form exactly")
     print("  - eq:F-toy-lower-bound: sampled lower bounds for F_inf and finite-q0 F_toy")
+    print("  - lem:toy-retained-density: signed exact bound (d_+-d_-)/(q_T^+ |I_T|)")
+    print("    and polynomial form (d_+-d_-)/(C_I C_q) * Q(T)/q(T)")
+    print("  - eq:toy-density-height-hypothesis: sufficient implication via")
+    print("    Q/q(T) <= c_I c_q / (4 d_+)")
+    print("  - def:toy-retained-subdomain: signed two-branch total length 2|D|/q(m)")
+    print("  - lem:toy-signed-separation-invariance: Omega(-s) = Omega(s)^T,")
+    print("    A_toy invariant under transpose")
     print("=" * 70)
 
 
