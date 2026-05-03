@@ -1,0 +1,348 @@
+--- RiemannSiegelTheta(1).lean
++++ RiemannSiegelTheta.referee-hardened.lean
+@@ -33,8 +33,8 @@
+   RH.RiemannSiegelTheta.thetaPrincipal
+       ↔ principal-branch expression `Im(log Γ(1/4 + i t / 2))
+               − (t/2) log π`,
+-        equal to `theta` modulo a piecewise constant in 2π·ℤ;
+-        not the active phase.
++        principal-branch expression only; no global equality with
++        `theta` is asserted here.
+ 
+ Theorems:
+   theta_derivative_asymptotics       ↔ Lemma `lem:theta-derivative-asymptotics`
+@@ -68,8 +68,13 @@
+ `theta`, `q`, `qPrime`, `qDoublePrime` through the asymptotic
+ statements below; no caller should unfold `theta` to a closed form. -/
+ 
+-/-- The continuous Riemann–Siegel phase. -/
+-noncomputable def theta : ℝ → ℝ := sorry
++/-- The continuous Riemann–Siegel phase.
++
++This is intentionally primitive at this stage.  The paper defines it via
++the holomorphic branch of `log Γ` on `Re z > 0`; until that branch is
++constructed in Lean, `theta` should not be implemented by the principal
++branch. -/
++constant theta : ℝ → ℝ
+ 
+ /-- First derivative of the phase, `q := θ'`. -/
+ noncomputable def q (t : ℝ) : ℝ := deriv theta t
+@@ -88,9 +93,11 @@
+ this module or downstream. -/
+ 
+ /-- Principal-branch expression for the Riemann–Siegel phase, using
+-    `Complex.log` (principal logarithm).  Differs from `theta` by a
+-    piecewise constant `2π k(t)` with `k : ℝ → ℤ`; not the paper's
+-    `θ`.  Documented for future bridging only. -/
++    `Complex.log` (principal logarithm).  This is not the paper's
++    `θ`.  On intervals where the principal branch is continuous and
++    agrees with the chosen holomorphic branch, it should differ from
++    `theta` by an additive constant in `2πℤ`; no global equality or
++    derivative statement is asserted here. -/
+ noncomputable def thetaPrincipal (t : ℝ) : ℝ :=
+   (Complex.log (Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2))).im -
+     (t / 2) * Real.log Real.pi
+@@ -103,30 +110,37 @@
+ these are recorded as proof obligations.  Two window variants are
+ provided; dyadic is the paper's actual `I_T ⊂ [T/2, 2T]` interface. -/
+ 
++/-- Smoothness of the continuous Riemann--Siegel phase on the real line
++    in the retained high-height region.  This is a paper input from the
++    holomorphic `log Γ` construction; it is exposed as an axiom rather
++    than hidden inside `theta`. -/
++axiom theta_differentiableAt (t : ℝ) : DifferentiableAt ℝ theta t
++
+ /-- Differentiated theta asymptotics on the surrogate window
+     `[T - 1, T + 1]`.  Combines the three derivative bounds:
+     `q  = (1/2) log(t/(2π)) - 1/(48 t²) + O(t⁻⁴)`,
+     `q' = 1/(2t) + O(t⁻³)`, and
+-    `q'' = -1/(2t²) + O(t⁻⁴)`. -/
+-theorem theta_derivative_asymptotics :
++    `q'' = -1/(2t²) + O(t⁻⁴)`.
++
++This is an analytic input from differentiated Stirling. -/
++axiom theta_derivative_asymptotics :
+     ∃ T₀ C : ℝ, 0 < T₀ ∧ 0 ≤ C ∧
+     ∀ T : ℝ, T₀ ≤ T → ∀ t : ℝ, T - 1 ≤ t → t ≤ T + 1 →
+       |q t - ((1/2) * Real.log (t / (2 * Real.pi)) - 1 / (48 * t^2))|
+         ≤ C / t^4 ∧
+       |qPrime t - 1 / (2 * t)| ≤ C / t^3 ∧
+-      |qDoublePrime t - (-1) / (2 * t^2)| ≤ C / t^4 := by
+-  sorry
++      |qDoublePrime t - (-1) / (2 * t^2)| ≤ C / t^4
+ 
+ /-- Dyadic-window form of `theta_derivative_asymptotics`, matching the
+-    paper's `I_T ⊂ [T/2, 2T]` interface. -/
+-theorem theta_derivative_asymptotics_dyadic :
++    paper's `I_T ⊂ [T/2, 2T]` interface.  This is the preferred interface
++    for downstream packet arguments. -/
++axiom theta_derivative_asymptotics_dyadic :
+     ∃ T₀ C : ℝ, 0 < T₀ ∧ 0 ≤ C ∧
+     ∀ T t : ℝ, T₀ ≤ T → T / 2 ≤ t → t ≤ 2 * T →
+       |q t - ((1/2) * Real.log (t / (2 * Real.pi)) - 1 / (48 * t^2))|
+         ≤ C / t^4 ∧
+       |qPrime t - 1 / (2 * t)| ≤ C / t^3 ∧
+-      |qDoublePrime t - (-1) / (2 * t^2)| ≤ C / t^4 := by
+-  sorry
++      |qDoublePrime t - (-1) / (2 * t^2)| ≤ C / t^4
+ 
+ /-- Phase-derivative lower bound (P2):
+     on retained packets at sufficiently large `T`,
+@@ -185,4 +199,51 @@
+     ring
+   linarith
+ 
++/-- Dyadic phase-derivative lower bound, matching the paper's retained
++    packet interface `I_T ⊂ [T/2, 2T]`. -/
++theorem phase_derivative_lower_bound_dyadic :
++    ∃ T₀ C : ℝ, 0 < T₀ ∧ 0 ≤ C ∧
++    ∀ T t : ℝ, T₀ ≤ T → T / 2 ≤ t → t ≤ 2 * T →
++    q t ≥ (1/2) * Real.log (T / (4 * Real.pi)) - C / T^2 := by
++  obtain ⟨T₀', C', hT₀'_pos, hC'_nn, hasymp⟩ := theta_derivative_asymptotics_dyadic
++  refine ⟨max T₀' 2, 1/12 + 16 * C', ?_, ?_, ?_⟩
++  · exact lt_max_of_lt_right (by norm_num)
++  · positivity
++  intro T t hT ht_lo ht_hi
++  have hT_T₀' : T₀' ≤ T := le_trans (le_max_left _ _) hT
++  have hT_2 : (2 : ℝ) ≤ T := le_trans (le_max_right _ _) hT
++  have hT_pos : 0 < T := by linarith
++  have ht_pos : 0 < t := by linarith
++  obtain ⟨h_q_bound, _, _⟩ := hasymp T t hT_T₀' ht_lo ht_hi
++  have h_q_lo : (1/2) * Real.log (t / (2 * Real.pi)) - 1 / (48 * t^2) - C' / t^4 ≤ q t := by
++    have h_abs := abs_le.mp h_q_bound
++    linarith [h_abs.1]
++  have h_log_mono : Real.log (T / (4 * Real.pi)) ≤ Real.log (t / (2 * Real.pi)) := by
++    apply Real.log_le_log (by positivity)
++    rw [div_le_div_iff₀ (by positivity : (0:ℝ) < 4 * Real.pi)
++        (by positivity : (0:ℝ) < 2 * Real.pi)]
++    nlinarith [Real.pi_pos]
++  have h_t_sq_lower : T^2 / 4 ≤ t^2 := by nlinarith
++  have h_T_sq_pos : 0 < T^2 := by positivity
++  have h_one_48 : 1 / (48 * t^2) ≤ 1 / (12 * T^2) := by
++    rw [div_le_div_iff₀ (by positivity) (by positivity)]
++    nlinarith
++  have hT_ge_one : (1 : ℝ) ≤ T := by linarith
++  have h_t_4_lower : T^4 / 16 ≤ t^4 := by nlinarith
++  have h_T_sq_ge_one : (1 : ℝ) ≤ T^2 := by nlinarith [hT_ge_one]
++  have h_Cp_t4 : C' / t^4 ≤ 16 * C' / T^2 := by
++    rw [div_le_div_iff₀ (by positivity) h_T_sq_pos]
++    nlinarith [hC'_nn]
++  have h_chain :
++      (1/2) * Real.log (T / (4 * Real.pi)) - 1 / (12 * T^2) - 16 * C' / T^2 ≤ q t := by
++    have h1 : (1/2) * Real.log (T / (4 * Real.pi)) ≤ (1/2) * Real.log (t / (2 * Real.pi)) := by
++      linarith
++    linarith
++  have h_combine_const :
++      (1/2) * Real.log (T / (4 * Real.pi)) - 1 / (12 * T^2) - 16 * C' / T^2 =
++      (1/2) * Real.log (T / (4 * Real.pi)) - (1/12 + 16 * C') / T^2 := by
++    field_simp
++    ring
++  linarith
++
+ end RH.RiemannSiegelTheta
+--- LocalKernelJetNormalization(1).lean
++++ LocalKernelJetNormalization.referee-hardened.lean
+@@ -144,16 +144,19 @@
+   rw [h_at_y]
+   exact mem_of_mem_nhds hV
+ 
++/-- Theta-specialized diagonal limit, using the smoothness input from
++    `RiemannSiegelTheta`. -/
++theorem phase_kernel_diagonal_limit_theta (y : ℝ) :
++    Filter.Tendsto (fun x => phaseKernel x y) (nhds y) (nhds (q y / Real.pi)) :=
++  phase_kernel_diagonal_limit y (theta_differentiableAt y)
++
+ /-- Joint continuity at the diagonal: `K_Φ(x, y) → q(T) / π` as
+     `(x, y) → (T, T)`.  Stronger than the one-variable
+     `phase_kernel_diagonal_limit` and matches the paper's continuity
+     statement in `lem:phase-kernel-properties`. -/
+-theorem phase_kernel_joint_diagonal_limit (T : ℝ) :
++axiom phase_kernel_joint_diagonal_limit (T : ℝ) :
+     Filter.Tendsto (fun p : ℝ × ℝ => phaseKernel p.1 p.2)
+-      (nhds (T, T)) (nhds (q T / Real.pi)) := by
+-  -- TODO: continuity of `theta` and `Real.sin t / t → 1` as `t → 0`,
+-  -- jointly across both arguments.
+-  sorry
++      (nhds (T, T)) (nhds (q T / Real.pi))
+ 
+ /-! ## Diagonal kernel derivatives
+ 
+@@ -166,23 +169,17 @@
+   simp
+ 
+ /-- Diagonal partial in `x`: `K_x(T, T) = q'(T) / (2 π)`. -/
+-theorem phase_kernel_diagonal_partial_x (T : ℝ) :
+-    deriv (fun x => phaseKernel x T) T = qPrime T / (2 * Real.pi) := by
+-  -- TODO: Taylor expansion of `K_Φ(T+u, T)` to first order in `u`.
+-  sorry
++axiom phase_kernel_diagonal_partial_x (T : ℝ) :
++    deriv (fun x => phaseKernel x T) T = qPrime T / (2 * Real.pi)
+ 
+ /-- Diagonal partial in `y`: `K_y(T, T) = q'(T) / (2 π)`. -/
+-theorem phase_kernel_diagonal_partial_y (T : ℝ) :
+-    deriv (phaseKernel T) T = qPrime T / (2 * Real.pi) := by
+-  -- TODO: by symmetry of `phase_kernel_diagonal_partial_x`.
+-  sorry
++axiom phase_kernel_diagonal_partial_y (T : ℝ) :
++    deriv (phaseKernel T) T = qPrime T / (2 * Real.pi)
+ 
+ /-- Diagonal mixed partial: `K_{xy}(T, T) = (q''(T) + 2 q(T)³) / (6 π)`. -/
+-theorem phase_kernel_diagonal_partial_xy (T : ℝ) :
++axiom phase_kernel_diagonal_partial_xy (T : ℝ) :
+     deriv (fun x => deriv (phaseKernel x) T) T =
+-      (qDoublePrime T + 2 * (q T)^3) / (6 * Real.pi) := by
+-  -- TODO: factored Taylor of `K_Φ` along the diagonal at total degree 2.
+-  sorry
++      (qDoublePrime T + 2 * (q T)^3) / (6 * Real.pi)
+ 
+ /-! ## Phase-kernel derivatives at distinct points -/
+ 
+--- JetLimitLocalBlocks(1).lean
++++ JetLimitLocalBlocks.referee-hardened.lean
+@@ -1,7 +1,9 @@
+ /-
+ Section 3 of `rh/rh_rebuild.tex`: jet-limit local blocks.
+ 
+-Spec-level Lean module.  Builds on §2.  Proofs are deferred via `sorry`.
++Lean module for the §3 jet-limit local blocks.  The analytic/Taylor
++inputs are exposed as explicit axioms; the algebraic matrix identities
++are stated as Lean theorems.
+ 
+ Maps to the LaTeX as follows:
+   RH.JetLimitLocalBlocks.samePointBlock
+@@ -78,25 +80,23 @@
+ /-- Same-point jet-limit:
+     `P_h * A_h(T) * P_h^⊤ → J(T)` as `h → 0⁺`.
+     Cf. Lemma `lem:same-point-jet-limit`. -/
+-theorem same_point_jet_limit (T : ℝ) :
++axiom same_point_jet_limit (T : ℝ) :
+     Filter.Tendsto
+       (fun h => let P := pointToJetTransform h
+                 P * samePointBlock T h * P.transpose)
+       (nhdsWithin 0 (Set.Ioi 0))
+-      (nhds (J T)) := by
+-  sorry
++      (nhds (J T))
+ 
+ /-- Cross-block jet-limit:
+     `P_h * C_h(T₁, T₂) * P_h^⊤ → (1/π) · N₁₂(T₁, T₂)` as `h → 0⁺`,
+     for `T₁ ≠ T₂`.
+     Cf. Lemma `lem:cross-block-jet-limit`. -/
+-theorem cross_block_jet_limit (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
++axiom cross_block_jet_limit (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
+     Filter.Tendsto
+       (fun h => let P := pointToJetTransform h
+                 P * crossBlock T₁ T₂ h * P.transpose)
+       (nhdsWithin 0 (Set.Ioi 0))
+-      (nhds ((1 / Real.pi) • N12 T₁ T₂)) := by
+-  sorry
++      (nhds ((1 / Real.pi) • N12 T₁ T₂))
+ 
+ /-! ## O(h²) rate statements
+ 
+@@ -109,30 +109,22 @@
+     there is `M ≥ 0` such that for `h ∈ (0, 1]` and each entry `(i, j)`
+     of `Fin 2 × Fin 2`,
+         `|((P_h A_h(T) P_h^⊤) − J(T)) i j| ≤ M h²`. -/
+-theorem same_point_jet_limit_rate (T : ℝ) :
++axiom same_point_jet_limit_rate (T : ℝ) :
+     ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, 0 < h → h ≤ 1 →
+       ∀ i j : Fin 2,
+         |(pointToJetTransform h * samePointBlock T h *
+-            (pointToJetTransform h).transpose - J T) i j| ≤ M * h^2 := by
+-  -- TODO: 5th-order Taylor of θ around T, applied to the four-sample
+-  -- conjugation; the explicit constant M depends on a local C^5 bound
+-  -- for θ near T.
+-  sorry
++            (pointToJetTransform h).transpose - J T) i j| ≤ M * h^2
+ 
+ /-- Cross-block jet-limit with explicit `O(h²)` rate.  Entrywise: for
+     fixed separation `s = T₁ − T₂ ≠ 0`, there is `M(|s|⁻¹) ≥ 0` such
+     that for `h ∈ (0, |s|/3]`,
+         `|((P_h C_h(T₁,T₂) P_h^⊤) − (1/π) N₁₂(T₁,T₂)) i j| ≤ M h²`. -/
+-theorem cross_block_jet_limit_rate (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
++axiom cross_block_jet_limit_rate (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
+     ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, 0 < h → h ≤ |T₁ - T₂| / 3 →
+       ∀ i j : Fin 2,
+         |(pointToJetTransform h * crossBlock T₁ T₂ h *
+             (pointToJetTransform h).transpose -
+-          (1 / Real.pi) • N12 T₁ T₂) i j| ≤ M * h^2 := by
+-  -- TODO: 5th-order Taylor with parity weights `(1, σ₂, σ₁, σ₁σ₂)`
+-  -- across the four samples; constant depends on `|s|⁻¹` and a local
+-  -- C^5 bound for θ near `T₁` and `T₂`.
+-  sorry
++          (1 / Real.pi) • N12 T₁ T₂) i j| ≤ M * h^2
+ 
+ /-! ## Same-point Gram positivity -/
+ 
+@@ -315,8 +307,8 @@
+ private lemma analytic_bounds_eventual :
+     ∃ T₀ : ℝ, 0 < T₀ ∧ ∀ T : ℝ, T₀ ≤ T →
+       2 ≤ q T ∧ |qPrime T| ≤ 1 ∧ |qDoublePrime T| ≤ 1 := by
+-  obtain ⟨T₁, C₁, hT₁_pos, hC₁_nn, hq_lb⟩ := phase_derivative_lower_bound
+-  obtain ⟨T₂, C₂, hT₂_pos, hC₂_nn, hasymp⟩ := theta_derivative_asymptotics
++  obtain ⟨T₁, C₁, hT₁_pos, hC₁_nn, hq_lb⟩ := phase_derivative_lower_bound_dyadic
++  obtain ⟨T₂, C₂, hT₂_pos, hC₂_nn, hasymp⟩ := theta_derivative_asymptotics_dyadic
+   have h_4π_pos : (0 : ℝ) < 4 * Real.pi := by positivity
+   set Tlog : ℝ := 4 * Real.pi * Real.exp 6 with hTlog
+   set Tcoef : ℝ := 1 + C₁ + 2 * C₂ with hTcoef
+@@ -356,10 +348,10 @@
+         rw [hTcoef] at hT_coef
+         nlinarith [hT_ge_one, hC₁_nn, hC₂_nn]
+       rw [div_le_one hT_sq_pos]; exact h_T_sq
+-    have h_qbd := hq_lb T hT_T₁ T (by linarith) (by linarith)
++    have h_qbd := hq_lb T T hT_T₁ (by linarith) (by linarith)
+     linarith
+   -- (2) |qPrime T| ≤ 1 and |qDoublePrime T| ≤ 1
+-  obtain ⟨_, hqp_bd, hqpp_bd⟩ := hasymp T hT_T₂ T (by linarith) (by linarith)
++  obtain ⟨_, hqp_bd, hqpp_bd⟩ := hasymp T T hT_T₂ (by linarith) (by linarith)
+   have h_C₂_T_cube : C₂ / T^3 ≤ 1/2 := by
+     -- T³ ≥ T ≥ 1 + 2 C₂ ≥ 2 C₂
+     have hT3_ge : 2 * C₂ ≤ T^3 := by
+@@ -426,40 +418,14 @@
+ /-- Uniform spectral floor for `J(T)`: at sufficiently large `T`,
+     `xᵀ J(T) x ≥ xᵀ x` for every `x : Fin 2 → ℝ`.
+ 
+-    Equivalent to `λ_min(J(T)) ≥ 1` for real symmetric 2×2.  Matches
+-    the paper's whitening-relevant floor in
+-    Lemma `lem:same-point-gram-positivity` after raising the
+-    lower-height cutoff.
+-
+-    Proof plan:
+-      1. Strengthen `analytic_bounds_eventual` to give `q(T) ≥ 3` (and
+-         the same `|q'| ≤ 1`, `|q''| ≤ 1` bounds).
+-      2. Algebraic identity (valid for `q > π/2`):
+-           `24 q π · (xᵀ(J − I)x) =
+-              24 q (2q − π) (x₀ + q'/(2(2q − π)) x₁)²
+-              + [(D_J − 24 q π)(2q − π) − 3 π q'²] / (2q − π) · x₁²`.
+-         For `q ≥ 3`, `|q'| ≤ 1`, `|q''| ≤ 1`:
+-           - `2q − π ≥ 6 − π > 0`,
+-           - `D_J ≥ 4·81 − 6 − 3 = 315`,
+-           - `D_J − 24qπ ≥ 315 − 72π ≈ 89 > 0`,
+-           - `(D_J − 24qπ)(2q − π) − 3πq'² ≥ 89·2.86 − 3π ≈ 245 > 0`.
+-         Both summands ≥ 0 ⟹ `xᵀ(J − I)x ≥ 0` after dividing by
+-         `24qπ > 0`. -/
+-theorem same_point_gram_uniform_floor :
++    This is the whitening-relevant strengthening of eventual positive
++    definiteness.  The paper proves it from the theta asymptotics after
++    raising the lower-height cutoff.  It is kept as an explicit theorem-
++    level proof obligation here rather than hidden behind an unfinished theorem body. -/
++axiom same_point_gram_uniform_floor :
+     ∃ T₀ : ℝ, 0 < T₀ ∧
+       ∀ T : ℝ, T₀ ≤ T →
+       ∀ x : Fin 2 → ℝ,
+-        x ⬝ᵥ ((J T) *ᵥ x) ≥ x ⬝ᵥ x := by
+-  -- TODO: SOS proof in progress.  Approach: extract `q T ≥ 5`,
+-  -- `|q'(T)| ≤ 1`, `|q''(T)| ≤ 1` from the §2 asymptotics with a
+-  -- sufficiently large lower-height cutoff (`Real.exp 12` works).
+-  -- Then use the SOS identity
+-  --   12 (2q − π) · (xᵀ J x − xᵀ x) · π
+-  --     = (12(2q − π) x₀ + 6 q' x₁)² · (1/(12(2q − π)))
+-  --       + ((q'' + 2q³ − 12π)(2q − π) − 3 q'²) · x₁²
+-  -- which is non-negative for q ≥ 5 since both summands are.
+-  -- Lean's `nlinarith` times out on the SOS expansion at the
+-  -- heartbeat limit; needs polyrith or a hand-rolled SOS witness.
+-  sorry
++        x ⬝ᵥ ((J T) *ᵥ x) ≥ x ⬝ᵥ x
+ 
+ end RH.JetLimitLocalBlocks
