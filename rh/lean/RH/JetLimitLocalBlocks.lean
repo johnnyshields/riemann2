@@ -81,7 +81,38 @@ noncomputable def N12 (T₁ T₂ : ℝ) : Matrix (Fin 2) (Fin 2) ℝ :=
     The paper proves `P_h A_h(T) P_h^⊤ = J(T) + O(h²)` and the
     corresponding cross-block bound entrywise.  The plain `Tendsto`
     versions follow by squeeze; the explicit `O(h²)` form is required
-    by downstream finite-scale comparisons. -/
+    by downstream finite-scale comparisons.
+
+    **Decomposition for future closure.**  Each rate axiom decomposes
+    into per-entry bounds on the 2 × 2 matrix `P_h A_h(T) P_h^⊤ − J(T)`.
+    Using the symmetry-induced parity of the entries (each is an *even*
+    function of `h`), the order-1 Taylor coefficient at `h = 0` vanishes,
+    and the residual is `O(h²)`.  Concretely:
+
+    * Entry `(1, 2) = (q(T+h) − q(T−h)) / (4πh) − q'(T)/(2π)`.  This
+      reduces to `|q(T+h) − q(T−h) − 2 q'(T) h| ≤ M h³`, which follows
+      from `taylor_mean_remainder_lagrange_iteratedDeriv` for `q` at `T`
+      with `n = 2` (using `q ∈ C^3`, derived from `theta_smooth`) and a
+      uniform bound on `iteratedDeriv 3 q` over `[T − 1, T + 1]`.
+    * Entry `(1, 1) = (q(T−h) + q(T+h))/(2π) + sin(θ(T+h) − θ(T−h)) /
+      (2πh) − 2q(T)/π`.  This involves a Taylor expansion of `sin ∘ ε`
+      where `ε(h) := θ(T+h) − θ(T−h)`, giving a third-order bound on
+      `sin(ε(h))/h − 2q(T) − (q''(T) − 4q(T)³)/3 · h²` via
+      `Real.sin_bound` plus order-3 Taylor of `θ`.
+    * Entry `(2, 2) = (q(T−h) + q(T+h))/(8πh²) − sin(...)/(8πh³) −
+      (q''(T) + 2q(T)³)/(12π)`.  The leading and `h¹/h⁰` terms cancel
+      after the Taylor expansions, leaving the `O(h²)` residual.
+
+    For the cross block (`T₁ ≠ T₂`), the entries involve `θ(T_i ± h)`
+    differences across the fixed separation `s = T₁ − T₂` and the
+    expansions are smooth (no `1/h^k` blowups for `h ≤ |s|/3`); the
+    bound is again `M h²` with `M` depending on `1/|s|`.
+
+    **Build-out cost.**  Each per-entry bound is roughly `~200 Lean
+    lines` (Lagrange remainder setup + compact-interval sup-norm bound
+    + algebraic combination), giving `~600−800 lines` per rate axiom
+    plus shared infrastructure for q/theta Taylor remainders.  Both
+    rate axioms together would be `~1500−2000 lines`. -/
 
 /-- Same-point jet-limit with explicit `O(h²)` rate.  Entrywise:
     there is `M ≥ 0` such that for `h ∈ (0, 1]` and each entry `(i, j)`
