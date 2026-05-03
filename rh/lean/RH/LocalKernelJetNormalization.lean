@@ -286,11 +286,71 @@ theorem phase_kernel_diagonal_partial_x (T : ℝ) :
   -- (c) Use the o-bound to derive HasDerivAt for phaseKernel(·, T).
   have h_kernel_hasDeriv : HasDerivAt (fun x => phaseKernel x T)
       (qPrime T / (2 * Real.pi)) T := by
-    -- TODO: piece h_phaseKernel_eq, h_taylor, h_iter1, h_iter2_eq_qPrime
-    -- together to conclude.  The bound shows
-    --   phaseKernel(x, T) − q(T)/π − (qPrime T/(2π))(x − T) = o(x − T)
-    -- which is exactly HasDerivAt.
-    sorry
+    -- Closed form of the order-2 Taylor polynomial of g at T:
+    --   T_2(x) = g(T) + g'(T)(x-T) + (g''(T)/2)(x-T)²
+    --         = 0 + q(T)(x-T) + (qPrime T / 2)(x-T)²
+    have h_taylor_form : ∀ x : ℝ, taylorWithinEval g 2 Set.univ T x =
+        q T * (x - T) + (qPrime T / 2) * (x - T) ^ 2 := by
+      intro x
+      rw [taylor_within_apply]
+      simp only [Finset.sum_range_succ, Finset.sum_range_zero, zero_add,
+                 iteratedDerivWithin_zero, smul_eq_mul]
+      rw [show g T = 0 from h_g_T, h_iter1, h_iter2_eq_qPrime]
+      simp [Nat.factorial]
+      ring
+    -- Recast h_taylor in closed form: g(x) - q(T)(x-T) - (q'(T)/2)(x-T)² = o((x-T)²)
+    have h_R : (fun x : ℝ => g x - q T * (x - T) - (qPrime T / 2) * (x - T) ^ 2)
+        =o[nhds T] (fun x : ℝ => (x - T) ^ 2) := by
+      have heq : (fun x : ℝ => g x - q T * (x - T) - (qPrime T / 2) * (x - T) ^ 2) =
+                 (fun x : ℝ => g x - taylorWithinEval g 2 Set.univ T x) := by
+        funext x; rw [h_taylor_form]; ring
+      rw [heq]; exact h_taylor
+    -- Multiply by (x-T)⁻¹: o((x-T)²) * O((x-T)⁻¹) = o((x-T)² · (x-T)⁻¹)
+    have h_inv_O : (fun x : ℝ => (x - T)⁻¹) =O[nhds T] (fun x : ℝ => (x - T)⁻¹) :=
+      Asymptotics.isBigO_refl _ _
+    have h_R_div : (fun x : ℝ => (g x - q T * (x - T) - (qPrime T / 2) * (x - T) ^ 2) *
+                                  (x - T)⁻¹)
+        =o[nhds T] (fun x : ℝ => (x - T) ^ 2 * (x - T)⁻¹) :=
+      h_R.mul_isBigO h_inv_O
+    -- (x-T)² · (x-T)⁻¹ = (x-T) everywhere (using 0⁻¹ = 0 in Lean at x = T)
+    have h_simp : (fun x : ℝ => (x - T) ^ 2 * (x - T)⁻¹) = (fun x : ℝ => x - T) := by
+      funext x
+      by_cases hx : x = T
+      · subst hx; simp
+      · have hxT : x - T ≠ 0 := sub_ne_zero.mpr hx
+        rw [pow_two, mul_assoc, mul_inv_cancel₀ hxT, mul_one]
+    rw [h_simp] at h_R_div
+    -- Scale by 1/π
+    have h_R_scaled : (fun x : ℝ => (1 / Real.pi) *
+        ((g x - q T * (x - T) - (qPrime T / 2) * (x - T) ^ 2) * (x - T)⁻¹))
+        =o[nhds T] (fun x : ℝ => x - T) :=
+      h_R_div.const_mul_left (1 / Real.pi)
+    -- Translate to HasDerivAt via the IsLittleO criterion
+    rw [hasDerivAt_iff_isLittleO]
+    -- Goal: (fun y => phaseKernel y T - phaseKernel T T - (y - T) • (qPrime T / (2π)))
+    --   =o[𝓝 T] (fun y => y - T)
+    have h_eq : (fun y : ℝ => phaseKernel y T - phaseKernel T T -
+                    (y - T) • (qPrime T / (2 * Real.pi)))
+        =ᶠ[nhds T] (fun y : ℝ => (1 / Real.pi) *
+            ((g y - q T * (y - T) - (qPrime T / 2) * (y - T) ^ 2) * (y - T)⁻¹)) := by
+      filter_upwards with y
+      show phaseKernel y T - phaseKernel T T - (y - T) • (qPrime T / (2 * Real.pi)) =
+          (1 / Real.pi) *
+            ((g y - q T * (y - T) - (qPrime T / 2) * (y - T) ^ 2) * (y - T)⁻¹)
+      rw [smul_eq_mul]
+      by_cases hy : y = T
+      · rw [hy]
+        simp [phase_kernel_diagonal_value, h_g_T]
+      · have hyT : y - T ≠ 0 := sub_ne_zero.mpr hy
+        have hπ : Real.pi ≠ 0 := Real.pi_ne_zero
+        have h_pK_y : phaseKernel y T = g y / (Real.pi * (y - T)) := by
+          show (if y = T then q y / Real.pi
+                else Real.sin (theta y - theta T) / (Real.pi * (y - T))) =
+                g y / (Real.pi * (y - T))
+          rw [if_neg hy]
+        rw [h_pK_y, phase_kernel_diagonal_value]
+        field_simp
+    exact h_eq.trans_isLittleO h_R_scaled
   exact h_kernel_hasDeriv.deriv
 
 /-- Diagonal partial in `y`: `K_y(T, T) = q'(T) / (2 π)`. -/
