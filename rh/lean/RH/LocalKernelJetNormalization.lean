@@ -238,11 +238,48 @@ theorem phase_kernel_diagonal_partial_x (T : ℝ) :
     rw [derivWithin_of_isOpen isOpen_univ (Set.mem_univ T)]
     exact h_deriv_g_T
   have h_iter2_eq_qPrime : iteratedDerivWithin 2 g Set.univ T = qPrime T := by
-    -- Computing the second derivative of `g(x) = sin(θ(x) − θ(T))` at `T`.
-    -- g'(x) = cos(θ(x) − θ(T)) · θ'(x).
-    -- g''(T) = -sin(0)·q(T)² + cos(0)·q'(T) = q'(T).
-    -- TODO: explicit computation via chain rule + product rule + iteratedDeriv API.
-    sorry
+    rw [iteratedDerivWithin_univ, iteratedDeriv_succ, iteratedDeriv_one]
+    -- Goal: deriv (deriv g) T = qPrime T
+    have h_deriv_g_eq : deriv g = fun x => Real.cos (theta x - theta T) * q x := by
+      funext x
+      have h_θ_x : HasDerivAt theta (q x) x := (theta_differentiableAt x).hasDerivAt
+      have h_sub : HasDerivAt (fun y => theta y - theta T) (q x) x :=
+        h_θ_x.sub_const (theta T)
+      have h_g_x : HasDerivAt g (Real.cos (theta x - theta T) * q x) x := by
+        have h := (Real.hasDerivAt_sin (theta x - theta T)).comp x h_sub
+        simpa [hg_def] using h
+      exact h_g_x.deriv
+    rw [h_deriv_g_eq]
+    -- Goal: deriv (fun x => cos(θ(x) - θ T) * q x) T = qPrime T
+    have h_θ_T : HasDerivAt theta (q T) T := (theta_differentiableAt T).hasDerivAt
+    have h_sub_T : HasDerivAt (fun y => theta y - theta T) (q T) T :=
+      h_θ_T.sub_const (theta T)
+    have h_cos_diff : HasDerivAt (fun x => Real.cos (theta x - theta T))
+        (-Real.sin (theta T - theta T) * q T) T := by
+      exact (Real.hasDerivAt_cos (theta T - theta T)).comp T h_sub_T
+    -- q is C^1 via theta_smooth.deriv' → q differentiable
+    have h_θ_C2 : ContDiff ℝ 2 theta := theta_smooth.of_le (by decide)
+    have h_q_C1 : ContDiff ℝ 1 q := by
+      have h : ContDiff ℝ (1 + 1 : ℕ) theta := by
+        have : (1 + 1 : ℕ) = 2 := by norm_num
+        rw [this]; exact h_θ_C2
+      exact h.deriv'
+    have h_q_diff : DifferentiableAt ℝ q T :=
+      (h_q_C1.differentiable (by decide)).differentiableAt
+    have h_q_hasDeriv : HasDerivAt q (qPrime T) T := by
+      show HasDerivAt q (deriv (deriv theta) T) T
+      exact h_q_diff.hasDerivAt
+    have h_prod := h_cos_diff.mul h_q_hasDeriv
+    have h_simp_form :
+        (-Real.sin (theta T - theta T) * q T) * q T +
+          Real.cos (theta T - theta T) * qPrime T = qPrime T := by
+      rw [sub_self, Real.sin_zero, Real.cos_zero]; ring
+    have h_target : HasDerivAt (fun x => Real.cos (theta x - theta T) * q x) (qPrime T) T := by
+      have := h_prod
+      rw [show (qPrime T : ℝ) = (-Real.sin (theta T - theta T) * q T) * q T +
+            Real.cos (theta T - theta T) * qPrime T from h_simp_form.symm]
+      exact this
+    exact h_target.deriv
   -- Now the Taylor polynomial at order 2 is:
   --   taylorWithinEval g 2 univ T x = g(T) + g'(T)(x−T) + (g''(T)/2)(x−T)²
   --                                  = 0 + q(T)(x−T) + (q'(T)/2)(x−T)².
