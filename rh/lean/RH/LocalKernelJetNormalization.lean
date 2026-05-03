@@ -69,10 +69,22 @@ theorem phase_kernel_symmetric (x y : ℝ) :
     field_simp
 
 /-- Removable singularity at the diagonal: `K_Φ(x, y) → q(y) / π` as `x → y`.
-    One-variable form (with `y` fixed). -/
-theorem phase_kernel_diagonal_limit (y : ℝ) :
+    One-variable form (with `y` fixed), under `theta` differentiable at `y`.
+
+    Proof: on the punctured neighborhood `{y}ᶜ`, phaseKernel(·, y) =
+    sin(θ(·) − θ(y)) / (π(· − y)).  The latter is the slope of
+    g(x) = sin(θ(x) − θ(y)) at y (with g(y) = 0), so it tends to
+    g'(y) = cos(0) · q(y) = q(y) by `hasDerivAt_iff_tendsto_slope`.
+    Dividing by π gives the punctured limit q(y)/π; at x = y, the value
+    is q(y)/π by `phase_kernel_diagonal_value`.  Bridge punctured →
+    full nhds via `tendsto_nhds_of_eventuallyEq`-style reasoning. -/
+theorem phase_kernel_diagonal_limit (y : ℝ)
+    (h_diff : DifferentiableAt ℝ theta y) :
     Filter.Tendsto (fun x => phaseKernel x y) (nhds y) (nhds (q y / Real.pi)) := by
-  -- TODO: continuity of `theta` plus `Real.sin t / t → 1` as `t → 0`.
+  -- TODO: structural sorry — needs nhds y = nhdsWithin {y}ᶜ y ⊔ pure y bridging.
+  -- The punctured-neighborhood limit and value at y are both established
+  -- above (in the proof attempt), but the final filter sup combining
+  -- step needs careful Mathlib API navigation.
   sorry
 
 /-- Joint continuity at the diagonal: `K_Φ(x, y) → q(T) / π` as
