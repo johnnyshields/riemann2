@@ -1,0 +1,146 @@
+--- /mnt/data/sec-toy-anomaly-and-transverse-obstruction(2).tex	2026-05-03 03:34:51.417630086 +0000
++++ /mnt/data/sec-toy-anomaly-and-transverse-obstruction.pass2-hardened.tex	2026-05-03 03:44:08.503155198 +0000
+@@ -21,10 +21,11 @@
+ %     C^infty in t for every (u, q_0).  The chosen u^2 modulation
+ %     amplitude (no extra q_0 factor) matches the natural q_0 scaling
+ %     of the §4 blocks G and N: q_+^{(2)} ~ q_0, q'^{(2)} ~ q_0^2,
+-%     q''^{(2)} ~ q_0^3, so the resulting F_toy(d) depends only on
+-%     d = q_0 s and not separately on q_0.  This is what gives the
+-%     visibility exponent A_toy = 0 (no Q-dependence in the lower
+-%     bound).
++%     q''^{(2)} ~ q_0^3.  After the natural diagonal scaling of
++%     the §4 Gram blocks, the leading coefficient has a regular
++%     high-frequency limit F_\infty(d) independent of q_0.  This is what
++%     gives the visibility exponent A_toy = 0 on compact d-ranges avoiding
++%     the zero set of F_\infty.
+ %
+ %   - Lemma lem:toy-phase-derivatives: explicit q_toy, q_toy', q_toy''
+ %     as elementary functions of (t - m_0), u, and q_0;
+@@ -284,15 +285,16 @@
+ 
+ \begin{lemma}[Toy block positivity]
+ \label{lem:toy-block-positivity}
+-Fix a compact interval \(D=[d_-,d_+]\subset(0,\infty)\) and
+-\(Q_0\ge 1\).  There exist \(u_G=u_G(D,Q_0)\in(0,\tfrac12]\) and
+-\(c_G(D,Q_0)>0\) such that whenever \(d=q_0\,s\in D\),
+-\(|u|\le u_G\), and \(q_0\ge Q_0\),
++Fix a compact interval \(D=[d_-,d_+]\subset(0,\infty)\).  There exist
++\(u_G=u_G(D)\in(0,\tfrac12]\), \(Q_G(D)\ge1\), and \(c_G(D)>0\) such
++that whenever \(d=q_0\,s\in D\), \(|u|\le u_G\), and \(q_0\ge Q_G(D)\),
+ \[
+         G_{\toy,\pm}(s;m,u)\succ 0,
+         \qquad
+-        \lambda_{\min}\bigl(G_{\toy,\pm}(s;m,u)\bigr)\;\ge\;c_G(D,Q_0).
++        \lambda_{\min}\bigl(G_{\toy,\pm}(s;m,u)\bigr)\;\ge\;c_G(D)\,q_0.
+ \]
++In particular \(\|G_{\toy,\pm}(s;m,u)^{-1/2}\|_{\op}\le C_G(D)q_0^{-1/2}\)
++on the same region.
+ \end{lemma}
+ 
+ \begin{proof}
+@@ -309,14 +311,15 @@
+ \(q_0^{-4}D_J(t_\pm)\ge 1\) and \(q_\pm\ge q_0/2\) for
+ \(|u|\le u_G\).  By Lemma~\ref{lem:algebraic-same-point-gram-criterion},
+ \(G_{\toy,\pm}\succ0\).  Also, on \(d\in D\) and \(|u|\le u_G\),
+-\(\Tr G_{\toy,\pm}\le C(D,u_G)q_0^3\).  Therefore
++\(\Tr G_{\toy,\pm}\le C(D)q_0^3\).  Therefore
+ \[
+ \lambda_{\min}(G_{\toy,\pm})
+ \ge \frac{\det G_{\toy,\pm}}{\Tr G_{\toy,\pm}}
+-\ge c(D,u_G)q_0
+-\ge c(D,u_G)Q_0.
++\ge c_G(D)q_0.
+ \]
+-Absorbing the last quantity into \(c_G(D,Q_0)\) gives the claim.
++After increasing \(Q_G(D)\), this holds throughout the retained
++high-frequency region.  The inverse-square-root bound follows by taking
++reciprocals and square roots.
+ \end{proof}
+ 
+ \subsection{Toy anomaly functional and leading expansion}
+@@ -405,17 +408,40 @@
+ 
+ \begin{proof}
+ Each entry of \(G_{\toy,\pm}(s;m,u)\) and \(N_\toy(s;m,u)\) is a
+-real-analytic function of \(u^2\) by \eqref{eq:toy-phase-derivatives}
+-and \eqref{eq:Gpm}--\eqref{eq:Nm}.  By
+-Lemma~\ref{lem:toy-block-positivity},
+-\(G_{\toy,\pm}(s;m,u)^{-1/2}\) is real-analytic in \(u^2\) on the
+-parameter region (real-analyticity of the SPD inverse-square-root map on the positive-definite cone).
+-Hence \(\widehat\Om_\toy(s;m,u)\) and the scalar
+-\(\mathcal A_\toy(\widehat\Om_\toy(s;m,u))\) are real-analytic in
+-\(u^2\), with \(u^0\) coefficient zero by
+-Lemma~\ref{lem:A-toy-baseline-vanishing}.  The leading nonzero term
+-is at order \(u^2\); call its coefficient \(F_\toy(d,q_0)\) after
+-substituting \(s=d/q_0\).
++real-analytic function of \(r:=u^2\) by \eqref{eq:toy-phase-derivatives}
++and \eqref{eq:Gpm}--\eqref{eq:Nm}.  To make the uniformity in \(q_0\)
++explicit after substituting \(s=d/q_0\), use the natural powers
++\(q_0,q_0^2,q_0^3\) attached to the value/derivative coordinates:
++\[
++G_{11}=q_0\,g_{11},\quad G_{12}=q_0^2\,g_{12},\quad
++G_{22}=q_0^3\,g_{22},
++\]
++and similarly
++\[
++N_{11}=q_0\,n_{11},\quad N_{12}=q_0^2\,n_{12},\quad
++N_{21}=q_0^2\,n_{21},\quad N_{22}=q_0^3\,n_{22}.
++\]
++The coefficients \(g_{ij}\) and \(n_{ij}\) are real-analytic functions
++of \((r,d,\eta)\), \(\eta=q_0^{-1}\), on
++\([0,u_1^2]\times D\times[0,\eta_1]\), once \(u_1\) is small and
++\(Q_1=\eta_1^{-1}\) is large.  By Lemma~\ref{lem:toy-block-positivity},
++the normalized determinants of the \(G_{\toy,\pm}\) stay bounded away
++from zero on this compact parameter set.  The explicit \(2\times2\)
++positive-definite inverse-square-root formula therefore gives
++\[
++(G_{\toy,\pm}^{-1/2})_{11}=q_0^{-1/2}h_{11}^{\pm},\quad
++(G_{\toy,\pm}^{-1/2})_{12}=q_0^{-3/2}h_{12}^{\pm},\quad
++(G_{\toy,\pm}^{-1/2})_{22}=q_0^{-3/2}h_{22}^{\pm},
++\]
++where the \(h_{ij}^{\pm}\) are again real-analytic and uniformly bounded
++on the same compact set.  Multiplying the three factors in
++\(G_{\toy,-}^{-1/2}N_\toy G_{\toy,+}^{-1/2}\) shows that every entry of
++\(\widehat\Om_\toy\), and in particular
++\(\mathcal A_\toy(\widehat\Om_\toy)\), is real-analytic in \(r\) with
++uniformly bounded Taylor coefficients.  Since the \(u^0\) coefficient
++vanishes by Lemma~\ref{lem:A-toy-baseline-vanishing}, the leading
++nonzero term is at order \(u^2\); call its coefficient
++\(F_\toy(d,q_0)\).
+ 
+ Direct computation using the closed-form \(2\times 2\) SPD
+ inverse-square-root, applied to
+@@ -439,12 +465,12 @@
+ \(F_{\infty}\), the difference \(F_\toy(d,q_0)-F_{\infty}(d)\) is
+ \(O(1/q_0)\) uniformly; for \(q_0\) sufficiently large
+ \(|F_\toy(d,q_0)|\ge \tfrac12|F_{\infty}(d)|\), giving
+-\eqref{eq:F-toy-lower-bound}.  The remainder \(R_\toy\) is the \(u^4\)-and-higher coefficient of the
+-real-analytic expansion.  The same explicit formulas used to compute
+-\(F_\toy\), together with Lemma~\ref{lem:toy-block-positivity}, show that
+-these coefficients are uniformly bounded for \(d\in D\), \(|u|\le u_1\),
+-and \(q_0\ge Q_1(D)\), after decreasing \(u_1\) and increasing
+-\(Q_1(D)\) if necessary.
++\eqref{eq:F-toy-lower-bound}.  The remainder \(R_\toy\) is the \(u^4\)-and-higher part of this
++real-analytic expansion.  The compactness of the normalized parameter
++set and the uniform positive-definiteness just described give a
++Cauchy-type bound for these coefficients, uniformly for \(d\in D\),
++\(|u|\le u_1\), and \(q_0\ge Q_1(D)\), after decreasing \(u_1\) and
++increasing \(Q_1(D)\) if necessary.
+ \end{proof}
+ 
+ \subsection{Toy anomaly visibility}
+@@ -475,11 +501,10 @@
+ \end{theorem}
+ 
+ \begin{proof}
+-Choose \(Q_\toy(D)\ge Q_1(D)\).  Apply Lemma~\ref{lem:toy-block-positivity}
+-with \(Q_0=Q_\toy(D)\), and let \(u_G(D,Q_\toy(D))\) be its smallness
+-threshold.  Choose
++Choose \(Q_\toy(D)\ge\max\{Q_1(D),Q_G(D)\}\).  Let \(u_G(D)\) be the
++smallness threshold from Lemma~\ref{lem:toy-block-positivity}.  Choose
+ \[
+-        u_\toy(D)\le \min\{u_1(D),u_G(D,Q_\toy(D))\}
++        u_\toy(D)\le \min\{u_1(D),u_G(D)\}
+ \]
+ small enough that both lemmas apply.  By
+ \eqref{eq:toy-anomaly-leading} and \eqref{eq:F-toy-lower-bound},

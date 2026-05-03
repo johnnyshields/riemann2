@@ -26,6 +26,10 @@ Coverage:
     where numerator(d) is the trigonometric polynomial of
     eq:F-toy-closed-form.  Verified by sp.limit(F_toy, q0, oo) and
     compared to the displayed form.
+  * Rescaled compactness structure: after s=d/q_0, the naturally scaled
+    G, N, and G^{-1/2} entries have finite high-frequency limits.  This
+    guards the uniform O(u^4) remainder argument in
+    Lemma~\ref{lem:toy-anomaly-leading}.
   * Lower bound regression on a sampled compact subinterval: both
     |F_inf(d)| and |F_toy(d,q_0)| at large q_0 are bounded away from zero
     on the sampled grid.  This is numerical regression coverage, not a
@@ -290,6 +294,60 @@ def verify_toy_block_positivity_determinant_expansion():
     assert Dm_lin == -14 * z
     print("  [PASS] D_J/q0^4 = 4 + O(u^2) for both toy same-point blocks.")
 
+
+# ---------------------------------------------------------------------------
+# (v) Rescaled compactness structure for the uniform remainder.
+# ---------------------------------------------------------------------------
+
+def verify_rescaled_block_compactness_structure():
+    """Verify the natural q0-scaling used in the uniform remainder proof.
+
+    With s=d/q0, the entries of G, N, and H=G^{-1/2} have fixed powers
+    of q0.  Multiplying by the reciprocal powers should produce finite
+    q0 -> infinity limits.  This checks the bookkeeping behind the
+    Cauchy-bound paragraph in Lemma~\ref{lem:toy-anomaly-leading}; it does
+    not claim that inverse square roots commute with diagonal congruence.
+    """
+    print("=" * 70)
+    print("[uniform remainder] scaled G/N/G^{-1/2} entries under s=d/q_0")
+    print("=" * 70)
+    s_sub = d / q0
+    Gm = G_toy_pm(s_sub, q0, u, -1)
+    Gp = G_toy_pm(s_sub, q0, u, +1)
+    N = N_toy(s_sub, q0, u)
+    Hm = inv_sqrt_2x2_SPD(Gm)
+    Hp = inv_sqrt_2x2_SPD(Gp)
+
+    checks = []
+    for name, G in (("Gminus", Gm), ("Gplus", Gp)):
+        checks += [
+            (f"{name}_11/q0", G[0, 0] / q0),
+            (f"{name}_12/q0^2", G[0, 1] / q0**2),
+            (f"{name}_22/q0^3", G[1, 1] / q0**3),
+        ]
+    checks += [
+        ("N11/q0", N[0, 0] / q0),
+        ("N12/q0^2", N[0, 1] / q0**2),
+        ("N21/q0^2", N[1, 0] / q0**2),
+        ("N22/q0^3", N[1, 1] / q0**3),
+    ]
+    for name, H in (("Hminus", Hm), ("Hplus", Hp)):
+        checks += [
+            (f"q0^(1/2){name}_11", q0**Rational(1, 2) * H[0, 0]),
+            (f"q0^(3/2){name}_12", q0**Rational(3, 2) * H[0, 1]),
+            (f"q0^(3/2){name}_22", q0**Rational(3, 2) * H[1, 1]),
+        ]
+
+    for label, expr in checks:
+        expr = trigsimp(simplify(expr))
+        lim = sp.limit(expr, q0, sp.oo)
+        lim = trigsimp(simplify(lim))
+        print(f"  {label}: limit = {lim}")
+        assert lim not in (sp.oo, -sp.oo, sp.zoo, sp.nan), \
+            f"{label} has bad q0->oo limit: {lim}"
+    print()
+    print("  [PASS] Scaled G, N, and G^{-1/2} entries have finite q0->oo limits.")
+
 # ---------------------------------------------------------------------------
 # (v) Baseline: at u = 0, A_toy(Omega_toy) = 0.
 # ---------------------------------------------------------------------------
@@ -476,6 +534,8 @@ def main():
     print()
     verify_toy_block_positivity_determinant_expansion()
     print()
+    verify_rescaled_block_compactness_structure()
+    print()
     verify_omega_toy_baseline_at_u_zero()
     print()
     verify_leading_u2_expansion()
@@ -490,6 +550,7 @@ def main():
     print("  - lem:q-pm-split-at-centres: q_±, q'_±, q''_± and Delta_m^toy")
     print("  - def:toy-finite-blocks: G_{toy,±}, N_toy by §4 substitution")
     print("  - lem:toy-block-positivity: normalized determinant = 4 + O(u^2)")
+    print("  - uniform remainder guard: scaled G/N/G^{-1/2} entries have finite q0->oo limits")
     print("  - lem:A-toy-baseline-vanishing: A_toy vanishes on on-line baseline")
     print("  - lem:toy-anomaly-leading: leading u^2 expansion of A_toy(Omega)")
     print("    F_toy(d, q_0) is rational with q_0-deg <= 2 in num and den")

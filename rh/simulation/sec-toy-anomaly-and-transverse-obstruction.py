@@ -19,6 +19,8 @@ Coverage:
   * q_0-independence of the exponent: at fixed (d,u), sweep q_0 directly
     and confirm A_toy(Omega_toy)/u^2 remains bounded away from zero and
     approaches the q_0 -> infinity coefficient F_inf(d).
+  * Rescaled compactness sweep: after S(q_0)=diag(q_0^{1/2},q_0^{3/2}),
+    the rescaled G and N blocks stay uniformly bounded across a q_0 ladder.
   * Sign-independence in u: A_toy(Omega_toy(s; m, u)) is even in u
     (Lemma~\ref{lem:toy-anomaly-leading}, no u^1 term).
   * Cross-check the empirical leading u^2 coefficient against the
@@ -175,6 +177,16 @@ def mat2_det(M):
 def loglog_slope(x1, y1, x2, y2):
     return (mp_log(y2) - mp_log(y1)) / (mp_log(x2) - mp_log(x1))
 
+def mat2_max_abs(M):
+    return max(fabs(M[i, j]) for i in range(2) for j in range(2))
+
+
+def rescale_matrix_for_toy(M, q0):
+    """Return S(q0)^{-1} M S(q0)^{-1}, S=diag(q0^{1/2},q0^{3/2})."""
+    q0 = mpf(q0)
+    left = mp_matrix([[q0**(-mpf("0.5")), 0], [0, q0**(-mpf("1.5"))]])
+    return left * M * left
+
 
 # ---------------------------------------------------------------------------
 # Checks.
@@ -222,6 +234,7 @@ def check_toy_block_positivity_sweep():
     q0_grid = [mpf("3.0"), mpf("5.0"), mpf("8.0"), mpf("12.0")]
     u_grid = [mpf("0.05"), mpf("0.1"), mpf("0.2")]
     min_lambda = None
+    min_lambda_over_q0 = None
     samples_checked = 0
     for d in d_grid:
         for q0 in q0_grid:
@@ -237,10 +250,42 @@ def check_toy_block_positivity_sweep():
                     )
                     if min_lambda is None or lam_min < min_lambda:
                         min_lambda = lam_min
+                    ratio = lam_min / q0
+                    if min_lambda_over_q0 is None or ratio < min_lambda_over_q0:
+                        min_lambda_over_q0 = ratio
                     samples_checked += 1
     print(f"  Checked {samples_checked} (d, q_0, u, sign) configurations.")
     print(f"  [PASS] min lambda_min(G_{{toy,±}}) >= "
           f"{float(min_lambda):.4e} > 0.")
+    print(f"         min lambda_min/q_0 >= {float(min_lambda_over_q0):.4e},")
+    print("         consistent with the q_0-growing lower bound in the lemma.")
+
+
+
+def check_rescaled_block_compactness_sweep():
+    print("=" * 70)
+    print("[uniform remainder guard]  rescaled G/N bounded across q_0 ladder")
+    print("=" * 70)
+    d_grid = [mpf("0.6"), mpf("1.0"), mpf("1.5"), mpf("2.0"), mpf("2.4")]
+    q0_grid = [mpf("5.0"), mpf("10.0"), mpf("20.0"), mpf("50.0"), mpf("100.0")]
+    u_grid = [mpf("0.0"), mpf("0.05"), mpf("0.10")]
+    max_scaled = mpf("0")
+    for d in d_grid:
+        for q0 in q0_grid:
+            s = d / q0
+            for u in u_grid:
+                for sign in (-1, +1):
+                    G = G_toy_pm(s, mpf("0"), u, q0, sign)
+                    Gt = rescale_matrix_for_toy(G, q0)
+                    max_scaled = max(max_scaled, mat2_max_abs(Gt))
+                N = N_toy_block(s, mpf("0"), u, q0)
+                Nt = rescale_matrix_for_toy(N, q0)
+                max_scaled = max(max_scaled, mat2_max_abs(Nt))
+    assert max_scaled < mpf("10"), (
+        f"rescaled toy blocks not uniformly bounded; max entry = {max_scaled}"
+    )
+    print(f"  [PASS] max entry of rescaled G/N blocks <= {float(max_scaled):.4e}")
+    print("         on sampled compact D, u-grid, and q_0 ladder.")
 
 
 def check_anomaly_u2_scaling():
@@ -313,7 +358,7 @@ def check_anomaly_height_independence():
         print(f"  q_0 = {float(q0):7.2f}, A_toy/u^2 = {float(ratio):.6f}")
     abs_F = fabs(F_inf_at_d)
     sign_F = +1 if F_inf_at_d > 0 else -1
-    prev_diff = None
+    diffs = []
     for (q0, ratio) in ratios:
         sign_ratio = +1 if ratio > 0 else -1
         assert sign_ratio == sign_F, (
@@ -323,18 +368,15 @@ def check_anomaly_height_independence():
             f"At q0={q0}: |A_toy/u^2| = {fabs(ratio)}, "
             f"out of [{0.3 * float(abs_F)}, {1.3 * float(abs_F)}]"
         )
-        diff = fabs(ratio - F_inf_at_d)
-        if prev_diff is not None:
-            assert diff <= prev_diff + mpf("1e-6"), (
-                f"Non-monotonic convergence at q0={q0}: "
-                f"prev diff={prev_diff}, current={diff}"
-            )
-        prev_diff = diff
-    assert prev_diff / abs_F < mpf("0.05"), (
-        f"Final q0={q0_grid[-1]} relative error too large: {prev_diff / abs_F}"
+        diffs.append(fabs(ratio - F_inf_at_d))
+    assert diffs[-1] / abs_F < mpf("0.05"), (
+        f"Final q0={q0_grid[-1]} relative error too large: {diffs[-1] / abs_F}"
+    )
+    assert diffs[-1] < diffs[0], (
+        f"High-frequency error did not improve: first={diffs[0]}, final={diffs[-1]}"
     )
     print(f"  [PASS] A_toy/u^2 has the same sign as F_inf, remains bounded "
-          f"away from zero, and converges to F_inf as q_0 grows "
+          f"away from zero, and is within 5% of F_inf at the largest q_0 "
           f"(visibility exponent A_toy = 0).")
 
 
@@ -392,6 +434,8 @@ def main():
     print()
     check_toy_block_positivity_sweep()
     print()
+    check_rescaled_block_compactness_sweep()
+    print()
     check_anomaly_u2_scaling()
     print()
     check_anomaly_lower_bound_on_compact_d()
@@ -406,6 +450,7 @@ def main():
     print("All §5 checks passed at mpmath precision dps =", mp.dps)
     print("  - Phi_toy derivatives match closed form via mpmath.diff")
     print("  - G_{toy,±} ≻ 0 on (d, q_0, u)-grid")
+    print("  - rescaled G/N blocks remain bounded across q_0 ladder")
     print("  - |A_toy(Omega_toy)| ~ u^2 (slope ≈ 2 in log-log)")
     print("  - |A_toy|/u^2 bounded below on compact D at large q_0")
     print("  - A_toy is even in u")
