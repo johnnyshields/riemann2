@@ -133,7 +133,8 @@ theorem phase_kernel_diagonal_limit (y : ℝ)
       (nhdsWithin y {y}ᶜ) (nhds (q y / Real.pi)) :=
     (Filter.tendsto_congr' h_eq_punc).mpr h_punc_pi
   -- At x = y, phaseKernel y y = q y / π = limit value
-  have h_at_y : phaseKernel y y = q y / Real.pi := phase_kernel_diagonal_value y
+  have h_at_y : phaseKernel y y = q y / Real.pi := by
+    unfold phaseKernel; simp
   -- Bridge: 𝓝 y = 𝓝[≠] y ⊔ pure y
   rw [← nhdsNE_sup_pure y, Filter.tendsto_sup]
   refine ⟨h_punc_kernel, ?_⟩
