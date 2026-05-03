@@ -511,12 +511,14 @@ private lemma J_floor_quadform (T : ℝ) (hQ : 5 ≤ q T)
           ((qDoublePrime T + 2 * (q T)^3) / 12) * (x 1)^2 -
           Real.pi * ((x 0)^2 + (x 1)^2) := by
     by_contra h
-    push_neg at h
+    have h_neg : (2 * q T) * (x 0)^2 + qPrime T * x 0 * x 1 +
+                 ((qDoublePrime T + 2 * (q T)^3) / 12) * (x 1)^2 -
+                 Real.pi * ((x 0)^2 + (x 1)^2) < 0 := lt_of_not_ge h
     have : 12 * (12 * (2 * q T - Real.pi)) *
               ((2 * q T) * (x 0)^2 + qPrime T * x 0 * x 1 +
                ((qDoublePrime T + 2 * (q T)^3) / 12) * (x 1)^2 -
                Real.pi * ((x 0)^2 + (x 1)^2)) < 0 :=
-      mul_neg_of_pos_of_neg h_factor_pos h
+      mul_neg_of_pos_of_neg h_factor_pos h_neg
     linarith
   linarith
 

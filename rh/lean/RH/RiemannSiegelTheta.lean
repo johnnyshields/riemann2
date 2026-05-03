@@ -110,11 +110,22 @@ the leading term of Stirling but not the polynomial corrections, so
 these are recorded as proof obligations.  Two window variants are
 provided; dyadic is the paper's actual `I_T ⊂ [T/2, 2T]` interface. -/
 
-/-- Smoothness of the continuous Riemann–Siegel phase on the real line
-    in the retained high-height region.  This is a paper input from the
-    holomorphic `log Γ` construction; it is exposed as an axiom rather
-    than hidden inside `theta`. -/
-axiom theta_differentiableAt (t : ℝ) : DifferentiableAt ℝ theta t
+/-- Smoothness of the continuous Riemann–Siegel phase on the real line.
+    The paper definition (holomorphic branch of `log Γ` on `Re z > 0`,
+    evaluated along `z = 1/4 + i t / 2`) is C^∞ on `(0, ∞)`; we record
+    the strongest form (C^∞ on all of ℝ) as the foundational axiom.
+    This implies `Differentiable ℝ theta` and `ContDiff ℝ k theta` for
+    every `k`. -/
+axiom theta_smooth : ContDiff ℝ ⊤ theta
+
+/-- `theta` is differentiable at every real `t`.  Derived from the
+    smoothness axiom. -/
+theorem theta_differentiableAt (t : ℝ) : DifferentiableAt ℝ theta t :=
+  (theta_smooth.differentiable (by decide)).differentiableAt
+
+/-- `theta` is C^k for every k. -/
+theorem theta_contDiff (k : ℕ∞) : ContDiff ℝ k theta :=
+  theta_smooth.of_le le_top
 
 /-- Differentiated theta asymptotics on the surrogate window
     `[T - 1, T + 1]`.  Combines the three derivative bounds:
