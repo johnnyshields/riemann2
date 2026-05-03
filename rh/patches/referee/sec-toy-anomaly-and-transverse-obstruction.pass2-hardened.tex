@@ -1,0 +1,559 @@
+% =============================================================================
+% Patch: §5 Toy anomaly and transverse obstruction
+%   sec:toy-anomaly-and-transverse-obstruction
+%
+% Target file:   rh/rh_rebuild.tex
+% Target lines:  1211 through 1263 (current §5 stub: bare definition + theorem
+%                with two `wip' remarks).
+%
+% Action: this patch is NOT to be merged into rh_rebuild.tex yet.  It is
+% staged under rh/patches/ for review.
+%
+% Migration content (relative to the current stub), restated in the
+% rebuild's Gram-normalized real-phase framework:
+%
+%   - Definition def:off-line-toy-phase (replaces the bare stub
+%     definition): explicit toy phase
+%         Phi_toy(t; u, m_0, q_0) := q_0 (t - m_0)
+%                                   + u^2 (1 - cos(q_0 (t - m_0))),
+%     parameterized by the off-line displacement u = beta - 1/2, the
+%     height m_0, and the local frequency q_0.  Real-valued and
+%     C^infty in t for every (u, q_0).  The chosen u^2 modulation
+%     amplitude (no extra q_0 factor) matches the natural q_0 scaling
+%     of the §4 blocks G and N: q_+^{(2)} ~ q_0, q'^{(2)} ~ q_0^2,
+%     q''^{(2)} ~ q_0^3.  After the natural diagonal scaling of
+%     the §4 Gram blocks, the leading coefficient has a regular
+%     high-frequency limit F_\infty(d) independent of q_0.  This is what
+%     gives the visibility exponent A_toy = 0 on compact d-ranges avoiding
+%     the zero set of F_\infty.
+%
+%   - Lemma lem:toy-phase-derivatives: explicit q_toy, q_toy', q_toy''
+%     as elementary functions of (t - m_0), u, and q_0;
+%     even-in-u^2 dependence and non-trivial first-order-in-(s/2)
+%     splitting q_+ - q_- = 2 u^2 q_0 sin(q_0 s/2) at the symmetric
+%     centers.
+%
+%   - Definition def:toy-finite-blocks: G_{toy,±}(s; m, u) and
+%     N_toy(s; m, u) defined by applying the §4 package to Phi_toy.
+%   - Definition def:toy-whitened-block: Omega_toy(s; m, u) by inverse
+%     square root.
+%
+%   - Lemma lem:toy-block-positivity: G_{toy,±}(s) ≻ 0 on a retained
+%     packet domain (compact d-range, |u| <= u_0).
+%
+%   - Definition def:toy-anomaly-functional: A_toy(X) := X_{12} + X_{21}
+%     (the off-diagonal trace).  This is the rebuild's choice of
+%     transverse functional, the analogue of v1's Phi_K
+%     (proof_of_rh.tex line 1196).  A_toy(I_2) = 0;
+%     A_toy(Omega_const) = 0 on the constant-phase on-line baseline by
+%     the q_+ = q_- structure.
+%
+%   - Lemma lem:toy-anomaly-leading: leading-order expansion in u^2 of
+%     the off-diagonal trace at small displacement,
+%         A_toy(Omega_toy(s; m, u)) = u^2 . F_toy(d, q_0) + O(u^4),
+%     with d := q_0 . s the dimensionless local separation.
+%     F_toy(d, q_0) is a rational function of (sin d, cos d, sin(d/2),
+%     cos(d/2), q_0) bounded uniformly on compact (d, q_0)-rectangles
+%     and admits the high-frequency asymptotic limit
+%         F_inf(d) := lim_{q_0 -> oo} F_toy(d, q_0)
+%               = sqrt(3) (2 d^2 cos d + 5 d^2 cos 2d - 7 d^2
+%                          + 6 d sin d - 15 d sin 2d
+%                          - 12 cos 2d + 12) / (8 d^3 sin(d/2)),
+%     which is q_0-independent, real-analytic on (0, infty), and
+%     vanishes only at the discrete zero set of its trigonometric
+%     numerator (with the sin(d/2) factor of the denominator
+%     compensated by a matching factor in the numerator at d = 2 pi k).
+%     On every compact subinterval D ⊂ (0, infty) avoiding the zeros
+%     of F_inf there exist Q_0(D) >= 1 and c_toy(D) > 0 such that
+%     |F_toy(d, q_0)| ≥ c_toy(D) for d in D and q_0 >= Q_0(D).
+%
+%   - Theorem thm:toy-anomaly-visibility (replaces the existing
+%     theorem; same name and label): for every off-line displacement
+%     u = beta - 1/2 with 0 < |u| < u_0(D) and every (m, s) with
+%     d = q_0 s in a fixed compact D ⊂ (0, infty),
+%         |A_toy(Omega_toy(s; m, u))| ≥ (1/2) c_toy(D) u^2.
+%     Hence on the retained polynomial-weight subset of (m, s) on
+%     which d ranges over D, the visibility exponent is
+%     A_toy = 0 (no Q-dependence; the bound is c (beta - 1/2)^2 Q^0).
+%
+%   - Remark rem:toy-Pi-trans-deferred: the projection Pi_trans of
+%     Section~\ref{sec:transverse-projection} is the further
+%     gauge-fixing step.  Its definition is deferred to §6;
+%     A_toy(.) = X_{12} + X_{21} of this section is one of the
+%     functionals annihilating the value channel that Pi_trans is
+%     designed to preserve, so the visibility statement transports to
+%     the Pi_trans-projected form once §6 fixes the gauge.
+%
+% Closes (when migrated):
+%   rem:wip-off-line-toy-phase                (closed: explicit formula).
+%   rem:wip-toy-anomaly-visibility            (partially closed: leading
+%                                              u^2 lower bound on compact
+%                                              d-ranges; remainder still
+%                                              flagged below).
+%
+% Remaining gaps after this patch:
+%   - Uniform O(u^4) remainder bound across the full retained subset
+%     (not just compact d-ranges avoiding F_toy-zeros).  Recorded as
+%     rem:wip-toy-anomaly-uniform-remainder.
+%   - The Pi_trans projection step itself is in §6.  This patch does
+%     not migrate §6.
+%   - The chosen toy phase is a model split-pair perturbation with
+%     even-u^2 leading order, in line with v1's
+%     "even symmetry of the off-line split" assumption (proof_of_rh.tex
+%     line 51977).  A physically derived split-pair phase with the
+%     same even-u^2 structure is not migrated here; the model toy
+%     suffices for the visibility statement consumed downstream.
+%
+% Status (when merged):
+%   \statusmig      not-started -> partial
+%   \statusreferee  not-started -> in-progress
+%   \statussympy    not-started -> verified
+%       [rh/sympy/sec-toy-anomaly-and-transverse-obstruction.py]
+%   \statussim      not-started -> verified
+%       [rh/simulation/sec-toy-anomaly-and-transverse-obstruction.py]
+%   \statuslean     not-started -> n/a
+%
+% Verification (every claim has a failing test in the cited script):
+%   - rh/sympy/sec-toy-anomaly-and-transverse-obstruction.py
+%       verify_toy_phase_derivatives,
+%       verify_q_pm_split_at_centers,
+%       verify_toy_blocks_substitution,
+%       verify_omega_toy_baseline_at_u_zero,
+%       verify_anomaly_functional_vanishes_on_baseline,
+%       verify_leading_u2_expansion,
+%       verify_F_toy_closed_form_q0_independent,
+%       verify_F_toy_lower_bound_on_compact_d.
+%   - rh/simulation/sec-toy-anomaly-and-transverse-obstruction.py
+%       check_toy_phase_derivatives_mp,
+%       check_toy_block_positivity_sweep,
+%       check_anomaly_u2_scaling,
+%       check_anomaly_lower_bound_on_compact_d,
+%       check_anomaly_height_independence,
+%       check_anomaly_sign_independence_in_u,
+%       check_F_toy_against_sympy.
+% =============================================================================
+
+% =============================================================================
+\section{Toy anomaly and transverse obstruction}
+\label{sec:toy-anomaly-and-transverse-obstruction}
+\statuspaper{LIVE}\quad
+\statusmig{partial}\quad
+\statusreferee{in-progress}\quad
+\statussympy[rh/sympy/sec-toy-anomaly-and-transverse-obstruction.py]{verified}\quad
+\statussim[rh/simulation/sec-toy-anomaly-and-transverse-obstruction.py]{verified}\quad
+\statuslean{not-started}
+\par\medskip
+
+The toy phase \(\Ph_\toy\) defined below is a real-analytic visibility
+model carrying an explicit even-\(u^2\) deformation of the linear
+baseline, with \(u=\beta-\tfrac12\) the off-line displacement parameter.
+It is not imported from the v1 toy matrix \(M(d)\); it replaces that
+matrix-level toy package by a scalar-functional toy package for the
+clean rebuild.  Applying the finite-block package of
+Section~\ref{sec:finite-scale-local-blocks-and-whitening} to
+\(\Ph_\toy\) produces a toy whitened block
+\(\widehat\Om_\toy(s;m,u)\).  The off-diagonal trace
+\(\mathcal A_\toy\) of this block is identically zero on the on-line
+baseline and has nonzero leading-\(u^2\) coefficient
+\(F_\toy(d,q_0)\), where \(d=q_0\,s\) is the dimensionless local
+separation.  As \(q_0\to\infty\), this coefficient converges uniformly
+on compact \(d\)-intervals to a \(q_0\)-independent closed-form limit
+\(F_{\infty}(d)\).  The gauge-fixing projection
+\(\Pi_\trans\) of Section~\ref{sec:transverse-projection} is a separate
+step; this section proves the scalar visibility input that such a
+projection must preserve.
+
+\subsection{Off-line toy phase}
+\label{subsec:off-line-toy-phase}
+
+\begin{definition}[Off-line toy phase]
+\label{def:off-line-toy-phase}
+Fix a height \(m_0\), a local frequency \(q_0>0\), and an off-line
+displacement \(u\in\mathbb R\).  The off-line toy phase is the
+real-analytic phase
+\begin{equation}
+\label{eq:toy-phase}
+\Ph_\toy(t;u,m_0,q_0)
+\;:=\;q_0\,(t-m_0)\;+\;u^2\,\bigl(1-\cos(q_0\,(t-m_0))\bigr),
+\qquad t\in\mathbb R.
+\end{equation}
+The displacement is identified with the off-line real part by
+\(u=\beta-\tfrac12\).  By construction \(\Ph_\toy\) depends on \(u\)
+only through \(u^2\) and is \(C^\infty\) on \(\mathbb R\) for every
+\((u,q_0)\).
+\end{definition}
+
+\begin{lemma}[Toy phase derivatives]
+\label{lem:toy-phase-derivatives}
+With \(\tau:=t-m_0\), the derivatives of \(\Ph_\toy\) are
+\begin{equation}
+\label{eq:toy-phase-derivatives}
+q_\toy(\tau)
+=q_0+u^2\,q_0\sin(q_0\tau),
+\quad
+q_\toy'(\tau)=u^2\,q_0^{\,2}\cos(q_0\tau),
+\quad
+q_\toy''(\tau)=-u^2\,q_0^{\,3}\sin(q_0\tau).
+\end{equation}
+At \(\tau=0\),
+\(q_\toy(0)=q_0\), \(q_\toy'(0)=u^2 q_0^{\,2}\),
+\(q_\toy''(0)=0\).  The toy phase is not the retained theta chart of
+Definition~\ref{def:local-phase-chart}; it is used only as a model
+phase.  Its positivity analogue is
+\[
+        q_\toy(\tau)\ge q_0(1-u^2),
+\]
+so the toy same-point blocks are safely in the positive-frequency regime
+whenever \(|u|<1\) and \(q_0(1-u^2)>0\).
+\end{lemma}
+
+\begin{proof}
+Direct differentiation of \eqref{eq:toy-phase}.  The lower bound
+\(q_\toy\ge q_0(1-u^2)\) follows from \(|\sin|\le 1\).
+\end{proof}
+
+\begin{lemma}[Symmetric-centre splitting at scale \(s\)]
+\label{lem:q-pm-split-at-centres}
+With \(t_\pm=m_0\pm s/2\) and \(d:=q_0\,s\), the toy phase derivatives
+at the symmetric centres satisfy
+\begin{equation}
+\label{eq:q-pm-symmetric-split}
+q_\pm:=q_\toy(\pm s/2)\;=\;q_0\;\pm\;u^2\,q_0\sin(d/2),
+\qquad
+q_\pm'\;=\;u^2\,q_0^{\,2}\cos(d/2),
+\end{equation}
+\[
+q_\pm''\;=\;\mp\,u^2\,q_0^{\,3}\sin(d/2).
+\]
+In particular \(q_+ - q_- = 2 u^2 q_0\sin(d/2)\),
+\(q_+' = q_-'\), and \(q_+''+q_-'' = 0\).  The phase difference
+\(\Del_m^\toy(s)\) at the symmetric pair is
+\begin{equation}
+\label{eq:toy-Delta}
+\Del_m^\toy(s)\;:=\;\Ph_\toy(t_-)-\Ph_\toy(t_+)\;=\;-q_0\,s\;=\;-d
+\end{equation}
+(no \(u\)-dependence: the cosine is even at \(\pm s/2\)).
+\end{lemma}
+
+\begin{proof}
+\eqref{eq:q-pm-symmetric-split} substitutes \(\tau=\pm s/2\) into
+\eqref{eq:toy-phase-derivatives} and uses oddness of \(\sin\) and
+evenness of \(\cos\).  For \eqref{eq:toy-Delta}, evaluate
+\eqref{eq:toy-phase} at \(\tau=\pm s/2\):
+\[
+\Ph_\toy(\pm s/2)
+=\pm\tfrac{q_0 s}{2}
++u^2\bigl(1-\cos(\mp d/2)\bigr)
+=\pm\tfrac{q_0 s}{2}
++u^2\bigl(1-\cos(d/2)\bigr),
+\]
+and subtract.
+\end{proof}
+
+\subsection{Toy whitened block}
+\label{subsec:toy-whitened-block}
+
+\begin{definition}[Toy finite blocks]
+\label{def:toy-finite-blocks}
+For \((m,s)\in\mathcal D_T\), with \(t_\pm=m\pm s/2\) and the toy phase
+\(\Ph_\toy\) of Definition~\ref{def:off-line-toy-phase} centred at
+\(m_0=m\), set
+\begin{equation}
+\label{eq:toy-G-N}
+G_{\toy,\pm}(s;m,u)\;:=\;G_{m,\pm}(s)\big|_{\Ph=\Ph_\toy},
+\qquad
+N_\toy(s;m,u)\;:=\;N_m(s)\big|_{\Ph=\Ph_\toy},
+\end{equation}
+where the right-hand sides are the same-point and mixed blocks
+\eqref{eq:Gpm}--\eqref{eq:Nm} of
+Section~\ref{sec:finite-scale-local-blocks-and-whitening} evaluated
+with \((q,q',q'',\Del_m)\) replaced by
+\((q_\toy,q_\toy',q_\toy'',\Del_m^\toy)\) of
+Lemmas~\ref{lem:toy-phase-derivatives}--\ref{lem:q-pm-split-at-centres}.
+\end{definition}
+
+\begin{definition}[Toy whitened block]
+\label{def:toy-whitened-block}
+For \((m,s)\in\mathcal D_T\) with \(G_{\toy,\pm}(s;m,u)\succ 0\),
+\begin{equation}
+\label{eq:omega-toy}
+\widehat\Om_\toy(s;m,u)
+\;:=\;G_{\toy,-}(s;m,u)^{-1/2}\,N_\toy(s;m,u)\,G_{\toy,+}(s;m,u)^{-1/2}.
+\end{equation}
+The inverse square root is the unique positive definite one.
+\end{definition}
+
+\begin{lemma}[Toy block positivity]
+\label{lem:toy-block-positivity}
+Fix a compact interval \(D=[d_-,d_+]\subset(0,\infty)\).  There exist
+\(u_G=u_G(D)\in(0,\tfrac12]\), \(Q_G(D)\ge1\), and \(c_G(D)>0\) such
+that whenever \(d=q_0\,s\in D\), \(|u|\le u_G\), and \(q_0\ge Q_G(D)\),
+\[
+        G_{\toy,\pm}(s;m,u)\succ 0,
+        \qquad
+        \lambda_{\min}\bigl(G_{\toy,\pm}(s;m,u)\bigr)\;\ge\;c_G(D)\,q_0.
+\]
+In particular \(\|G_{\toy,\pm}(s;m,u)^{-1/2}\|_{\op}\le C_G(D)q_0^{-1/2}\)
+on the same region.
+\end{lemma}
+
+\begin{proof}
+Write \(r=u^2\), \(z=\sin(d/2)\), and \(c=\cos(d/2)\).  From
+\eqref{eq:q-pm-symmetric-split}, after factoring out the powers of
+\(q_0\), the normalized same-point determinant has the form
+\[
+q_0^{-4}D_J(t_\pm)
+=
+4(1\pm rz)^4 \mp 2rz(1\pm rz)-3r^2c^2.
+\]
+This expression converges uniformly to \(4\) as \(r\to0\), uniformly in
+\(d\in D\).  Decrease \(u_G\), if necessary, so that
+\(q_0^{-4}D_J(t_\pm)\ge 1\) and \(q_\pm\ge q_0/2\) for
+\(|u|\le u_G\).  By Lemma~\ref{lem:algebraic-same-point-gram-criterion},
+\(G_{\toy,\pm}\succ0\).  Also, on \(d\in D\) and \(|u|\le u_G\),
+\(\Tr G_{\toy,\pm}\le C(D)q_0^3\).  Therefore
+\[
+\lambda_{\min}(G_{\toy,\pm})
+\ge \frac{\det G_{\toy,\pm}}{\Tr G_{\toy,\pm}}
+\ge c_G(D)q_0.
+\]
+After increasing \(Q_G(D)\), this holds throughout the retained
+high-frequency region.  The inverse-square-root bound follows by taking
+reciprocals and square roots.
+\end{proof}
+
+\subsection{Toy anomaly functional and leading expansion}
+\label{subsec:toy-anomaly-functional}
+
+\begin{definition}[Toy anomaly functional]
+\label{def:toy-anomaly-functional}
+For a real \(2\times 2\) matrix \(X=(x_{ij})\), the toy anomaly
+functional is the off-diagonal trace
+\begin{equation}
+\label{eq:toy-anomaly-functional}
+\mathcal A_\toy(X)\;:=\;x_{12}+x_{21}.
+\end{equation}
+\end{definition}
+
+\begin{lemma}[Vanishing on the on-line baseline]
+\label{lem:A-toy-baseline-vanishing}
+At \(u=0\) the toy phase reduces to the linear baseline
+\(\Ph_\toy(t;0,m,q_0)=q_0(t-m)\), and \(\widehat\Om_\toy(s;m,0)\) is
+the constant-phase whitened block of the linear baseline.  In
+particular
+\begin{equation}
+\label{eq:A-toy-baseline}
+        \mathcal A_\toy\bigl(\widehat\Om_\toy(s;m,0)\bigr)\;=\;0
+        \qquad\bigl((m,s)\in\mathcal D_T^\times\bigr).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+At \(u=0\), \eqref{eq:toy-phase-derivatives} gives \(q_\pm=q_0\) and
+\(q_\pm'=q_\pm''=0\); by \eqref{eq:Gpm},
+\(G_{\toy,\pm}(s;m,0)=(1/\pi)\diag(2q_0,q_0^{\,3}/6)\) is diagonal,
+and \(G_{\toy,-}^{-1/2}=G_{\toy,+}^{-1/2}\) is the same diagonal
+matrix.  By \eqref{eq:Nm} with \(q_+=q_-=q_0\),
+\[
+N_\toy(s;m,0)_{12}+N_\toy(s;m,0)_{21}
+=\frac{(q_+-q_-)\cos\Del_m^\toy(s)}{\pi s}=0.
+\]
+Whitening by the diagonal \(G^{-1/2}\) preserves this off-diagonal
+cancellation: \(\widehat\Om_{12}+\widehat\Om_{21}
+=(G^{-1/2})_{11}(G^{-1/2})_{22}(N_{12}+N_{21})=0\).
+\end{proof}
+
+\begin{lemma}[Leading \(u^2\) expansion of the off-diagonal trace]
+\label{lem:toy-anomaly-leading}
+Fix a compact interval \(D=[d_-,d_+]\subset(0,\infty)\).  There exist
+\(Q_1=Q_1(D)\ge1\), \(u_1=u_1(D)>0\), and a function
+\(F_\toy:D\times[Q_1,\infty)\to\mathbb R\) such that for every
+\(0<|u|<u_1\), every \(q_0\ge Q_1\), and every
+\((m,s)\in\mathcal D_T^\times\) with \(d=q_0\,s\in D\),
+\begin{equation}
+\label{eq:toy-anomaly-leading}
+\mathcal A_\toy\bigl(\widehat\Om_\toy(s;m,u)\bigr)
+\;=\;u^2\,F_\toy(d,q_0)\;+\;u^4\,R_\toy(d,q_0,u),
+\end{equation}
+with \(|R_\toy(d,q_0,u)|\le C_R(D)\) uniformly on the region
+\(\{|u|\le u_1,\,d\in D,\,q_0\ge Q_1(D)\}\).  The high-frequency limit
+\begin{equation}
+\label{eq:F-toy-asymptotic}
+        F_{\infty}(d)\;:=\;\lim_{q_0\to\infty}F_\toy(d,q_0)
+\end{equation}
+exists, is reached uniformly on compact \(d\)-intervals, and admits
+the explicit closed form
+\begin{equation}
+\label{eq:F-toy-closed-form}
+\begin{aligned}
+F_{\infty}(d)
+\;&=\;\frac{\sqrt 3}{8\,d^{\,3}\,\sin(d/2)}\;\Bigl(
+2\,d^{\,2}\cos d+5\,d^{\,2}\cos 2d-7\,d^{\,2}\\
+&\qquad\qquad\qquad\quad
++6\,d\sin d-15\,d\sin 2d-12\cos 2d+12\Bigr).
+\end{aligned}
+\end{equation}
+\(F_{\infty}\) is real-analytic on \((0,\infty)\); the apparent
+\(\sin(d/2)\)-pole at \(d=2\pi k\) is removable, and \(F_{\infty}\)
+vanishes only on the discrete zero set of its trigonometric
+numerator.  On every compact subinterval \(D\subset(0,\infty)\)
+avoiding the zeros of \(F_{\infty}\) there exist \(Q_0(D)\ge 1\) and
+\(c_\toy(D)>0\) with
+\begin{equation}
+\label{eq:F-toy-lower-bound}
+        \bigl|F_\toy(d,q_0)\bigr|\;\ge\;c_\toy(D)
+        \qquad (d\in D,\;q_0\ge Q_0(D)).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Each entry of \(G_{\toy,\pm}(s;m,u)\) and \(N_\toy(s;m,u)\) is a
+real-analytic function of \(r:=u^2\) by \eqref{eq:toy-phase-derivatives}
+and \eqref{eq:Gpm}--\eqref{eq:Nm}.  To make the uniformity in \(q_0\)
+explicit after substituting \(s=d/q_0\), use the natural powers
+\(q_0,q_0^2,q_0^3\) attached to the value/derivative coordinates:
+\[
+G_{11}=q_0\,g_{11},\quad G_{12}=q_0^2\,g_{12},\quad
+G_{22}=q_0^3\,g_{22},
+\]
+and similarly
+\[
+N_{11}=q_0\,n_{11},\quad N_{12}=q_0^2\,n_{12},\quad
+N_{21}=q_0^2\,n_{21},\quad N_{22}=q_0^3\,n_{22}.
+\]
+The coefficients \(g_{ij}\) and \(n_{ij}\) are real-analytic functions
+of \((r,d,\eta)\), \(\eta=q_0^{-1}\), on
+\([0,u_1^2]\times D\times[0,\eta_1]\), once \(u_1\) is small and
+\(Q_1=\eta_1^{-1}\) is large.  By Lemma~\ref{lem:toy-block-positivity},
+the normalized determinants of the \(G_{\toy,\pm}\) stay bounded away
+from zero on this compact parameter set.  The explicit \(2\times2\)
+positive-definite inverse-square-root formula therefore gives
+\[
+(G_{\toy,\pm}^{-1/2})_{11}=q_0^{-1/2}h_{11}^{\pm},\quad
+(G_{\toy,\pm}^{-1/2})_{12}=q_0^{-3/2}h_{12}^{\pm},\quad
+(G_{\toy,\pm}^{-1/2})_{22}=q_0^{-3/2}h_{22}^{\pm},
+\]
+where the \(h_{ij}^{\pm}\) are again real-analytic and uniformly bounded
+on the same compact set.  Multiplying the three factors in
+\(G_{\toy,-}^{-1/2}N_\toy G_{\toy,+}^{-1/2}\) shows that every entry of
+\(\widehat\Om_\toy\), and in particular
+\(\mathcal A_\toy(\widehat\Om_\toy)\), is real-analytic in \(r\) with
+uniformly bounded Taylor coefficients.  Since the \(u^0\) coefficient
+vanishes by Lemma~\ref{lem:A-toy-baseline-vanishing}, the leading
+nonzero term is at order \(u^2\); call its coefficient
+\(F_\toy(d,q_0)\).
+
+Direct computation using the closed-form \(2\times 2\) SPD
+inverse-square-root, applied to
+\(G_{\toy,\pm}=G_{\toy,\pm}^{(0)}+u^2\,G_{\toy,\pm}^{(2)}+O(u^4)\) of
+\eqref{eq:Gpm} with the toy substitutions of
+\eqref{eq:q-pm-symmetric-split} and to \(N_\toy\) of
+Definition~\ref{def:toy-finite-blocks}, yields an explicit expression
+for \(F_\toy(d,q_0)\) in
+\((\sin d,\cos d,\sin(d/2),\cos(d/2),q_0)\).  After choosing
+\(Q_1(D)\) large enough, this expression is regular for
+\(d\in D\), \(q_0\ge Q_1(D)\), has a finite \(q_0\to\infty\) limit
+uniformly on \(D\), and the limiting expression is
+\eqref{eq:F-toy-closed-form}.
+
+The factor \(\sin(d/2)\) of the denominator of
+\eqref{eq:F-toy-closed-form} vanishes at \(d=2\pi k\),
+\(k\in\mathbb Z_{\ge 1}\); the trigonometric numerator vanishes at
+the same points.  Expanding the numerator at each \(d=2\pi k\) shows a
+factor of \(\sin(d/2)\), so the apparent poles are removable and
+\(F_{\infty}\) extends real-analytically to \((0,\infty)\).  On any compact subinterval avoiding the zeros of
+\(F_{\infty}\), the difference \(F_\toy(d,q_0)-F_{\infty}(d)\) is
+\(O(1/q_0)\) uniformly; for \(q_0\) sufficiently large
+\(|F_\toy(d,q_0)|\ge \tfrac12|F_{\infty}(d)|\), giving
+\eqref{eq:F-toy-lower-bound}.  The remainder \(R_\toy\) is the \(u^4\)-and-higher part of this
+real-analytic expansion.  The compactness of the normalized parameter
+set and the uniform positive-definiteness just described give a
+Cauchy-type bound for these coefficients, uniformly for \(d\in D\),
+\(|u|\le u_1\), and \(q_0\ge Q_1(D)\), after decreasing \(u_1\) and
+increasing \(Q_1(D)\) if necessary.
+\end{proof}
+
+\subsection{Toy anomaly visibility}
+\label{subsec:toy-anomaly-visibility}
+
+\begin{theorem}[Toy anomaly visibility]
+\label{thm:toy-anomaly-visibility}
+Let \(D\subset(0,\infty)\) be a compact interval avoiding the
+isolated zeros of \(F_{\infty}\) of
+Lemma~\ref{lem:toy-anomaly-leading}.  There are constants
+\(Q_\toy(D)\ge1\) and \(u_\toy(D)>0\) such that, for every off-line
+displacement \(u=\beta-\tfrac12\in\mathbb R\) with \(0<|u|\le u_\toy(D)\),
+every \(q_0\ge Q_\toy(D)\), and every \((m,s)\in\mathcal D_T^\times\)
+with \(d=q_0\,s\in D\), the toy
+whitened block \(\widehat\Om_\toy(s;m,u)\) of
+Definition~\ref{def:toy-whitened-block} satisfies
+\begin{equation}
+\label{eq:toy-anomaly-visibility-A}
+        \bigl|\mathcal A_\toy\bigl(\widehat\Om_\toy(s;m,u)\bigr)\bigr|
+        \;\ge\;
+        \tfrac12\,c_\toy(D)\,u^2.
+\end{equation}
+The constant \(c_\toy(D)>0\) is the lower bound of
+Lemma~\ref{lem:toy-anomaly-leading} and depends on \(D\) only.
+On the polynomial-weight subset of midpoints and separations on which
+\(d\in D\), the visibility exponent is \(A_\toy=0\): the lower bound
+is \((c_\toy(D)/2)\,u^2\,Q^0\), independent of the height.
+\end{theorem}
+
+\begin{proof}
+Choose \(Q_\toy(D)\ge\max\{Q_1(D),Q_G(D)\}\).  Let \(u_G(D)\) be the
+smallness threshold from Lemma~\ref{lem:toy-block-positivity}.  Choose
+\[
+        u_\toy(D)\le \min\{u_1(D),u_G(D)\}
+\]
+small enough that both lemmas apply.  By
+\eqref{eq:toy-anomaly-leading} and \eqref{eq:F-toy-lower-bound},
+\[
+\bigl|\mathcal A_\toy\bigl(\widehat\Om_\toy(s;m,u)\bigr)\bigr|
+\;\ge\;
+u^2\bigl(c_\toy(D)-u^2\,C_R(D)\bigr).
+\]
+Decreasing \(u_\toy(D)\) so that \(u_\toy(D)^{\,2}\,C_R(D)\le c_\toy(D)/2\) gives
+\eqref{eq:toy-anomaly-visibility-A}.
+\end{proof}
+
+\begin{remark}[Transverse projection deferred]
+\label{rem:toy-Pi-trans-deferred}
+The functional \(\mathcal A_\toy\) annihilates the on-line baseline
+(Lemma~\ref{lem:A-toy-baseline-vanishing}).  The later projection
+\(\Pi_\trans\) must be chosen so that this scalar functional descends to
+or is represented on the retained transverse quotient.  Once
+Section~\ref{sec:transverse-projection} proves that compatibility, the
+visibility bound \eqref{eq:toy-anomaly-visibility-A} transfers to the
+\(\Pi_\trans\)-projected comparison with the same exponent
+\(A_\toy=0\).  This compatibility is not proved in the present section.
+\end{remark}
+
+
+\begin{remark}[Compatibility with the archived v1 toy matrix]
+\label{rem:toy-phase-v1-compatibility}
+The toy phase \eqref{eq:toy-phase} is a replacement toy for the clean
+scalar-functional rebuild.  It is not the archived v1 matrix \(M(d)\),
+and this section does not import the v1 calibration map
+\(\Psi_{x,d}\) or the Frobenius pairings with \(A_{\val}\).  Consequently
+this change is isolated for the present rebuild through
+Sections~\ref{sec:transverse-projection}--\ref{sec:projective-rigidity},
+where only the scalar functional \(\mathcal A_\toy\), the exponent
+\(A_\toy=0\), and the lower bound \eqref{eq:toy-anomaly-visibility-A}
+are consumed.  Any later attempt to import a v1 theorem that explicitly
+uses \(M(d)\), \(\Phi_K(M(d))\), \(A_{\val}\), or \(\Psi_{x,d}\) must be
+rederived for the present toy phase or kept in the archive.
+\end{remark}
+
+\begin{wip}\label{rem:wip-toy-anomaly-uniform-remainder}
+The bound \eqref{eq:toy-anomaly-visibility-A} is stated on compact
+intervals \(D\subset(0,\infty)\) avoiding the isolated zeros of
+\(F_{\infty}\); a uniform extension to the entire retained subset
+(allowing \(d\to 0\), \(d\to\infty\), or \(d\) approaching a
+zero along the polynomial-weight sample) requires a sharper analysis
+of the \(O(u^4)\) remainder \(R_\toy\) of
+Lemma~\ref{lem:toy-anomaly-leading}, together with a polynomial
+density estimate on the avoidance set of the \(F_\toy\)-zeros.
+The numerical and symbolic verifications cover the compact case;
+the uniform extension is deferred.
+\end{wip}
