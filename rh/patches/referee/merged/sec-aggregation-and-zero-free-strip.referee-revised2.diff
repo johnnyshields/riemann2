@@ -1,0 +1,319 @@
+--- sec-aggregation-and-zero-free-strip.tex
++++ sec-aggregation-and-zero-free-strip.referee-revised2.tex
+@@ -1,63 +1,21 @@
+ % =============================================================================
+-% Patch: §10 Aggregation and zero-free strip + §11 The Riemann hypothesis
++% Referee-revised patch v2: §10 Aggregation and zero-free strip + §11 RH
+ %   sec:aggregation-and-zero-free-strip
+ %   sec:riemann-hypothesis
+ %
+-% Target file:   rh/rh_rebuild.tex
+-% Action:        replace the existing §10 stub (bare theorem + wip) and
+-%                refresh §11 (orientation prose + status pills); the §11
+-%                proof is essentially unchanged.
++% Action: replace current §§10--11.
+ %
+-% Migration content:
+-%
+-%   §10 Aggregation and zero-free strip
+-%     - One-paragraph orientation: inputs from §6 (branch-exhaustion)
+-%       and §8 (per-zero rigidity); delivers the uniform high-height
+-%       exclusion consumed by §11.
+-%     - Theorem (Zero-free strip above an absolute height): existence
+-%       of an absolute height threshold T_0 above which no off-line
+-%       zero of zeta lies.
+-%     - Proof: short composition of Hypothesis (branch-exhaustion) +
+-%       Theorem two-point-rigidity / four-point-rigidity.
+-%     - Remark (no-aggregation-loss): records that no per-zero
+-%       polynomial loss accumulates; T_0 is the max of per-theorem
+-%       thresholds and is independent of the dyadic height ladder.
+-%     - Scope remark.
+-%
+-%   §11 The Riemann hypothesis
+-%     - Orientation prose: drop the inaccurate "dyadic" adjective and
+-%       the "unconditional" claim (the proof is conditional on the
+-%       upstream wips and Hypotheses).
+-%     - Theorem (Riemann hypothesis): unchanged statement.
+-%     - Proof: zero-free strip + low-height numerical verification,
+-%       essentially unchanged from the existing stub but cited
+-%       precisely.
+-%
+-% Closes:
+-%   rem:wip-zero-free-strip
+-%
+-% Status (§10):
+-%   \statusmig      not-started -> migrated
+-%   \statusreferee  not-started -> in-progress
+-%   \statussympy    not-started -> n/a (no formulas to verify)
+-%   \statussim      not-started -> n/a (no numerics to verify)
+-%   \statuslean     not-started -> n/a (deferred until §8 rigidity is formalized)
+-%
+-% Status (§11):
+-%   \statusmig      n/a (rebuild-original)
+-%   \statusreferee  not-started -> in-progress
+-%   \statussympy    n/a
+-%   \statussim      n/a
+-%   \statuslean     not-started (deferred until §10 is formalized)
+-%
+-% Note:
+-%   The §10 statement is conditional on Theorems
+-%   thm:two-point-rigidity / thm:four-point-rigidity (whose own wip's
+-%   remain) and on Hypothesis hyp:branch-exhaustion.  The §10 *assembly*
+-%   itself is unconditional: once the rigidity theorems and
+-%   branch-exhaustion hold, the strip statement follows in two lines.
+-%   §11 is similarly a clean composition: zero-free strip + the
+-%   classical low-height numerical verification of RH.
++% Referee hardening relative to submitted patch:
++%   - fixes the location of branch exhaustion: it lives in §8, not §6;
++%   - adds an explicit high-height branch-entry input, since branch exhaustion
++%     only applies to admissible packets after branch entry;
++%   - separates the final single-zero assembly from any polynomial-weight or
++%     N-point scalar aggregation needed to prove the rigidity/suppression inputs;
++%   - makes the finite-height step explicit, because an ineffective T_0 requires
++%     a finite verification certificate up to that same T_0;
++%   - records the two possible ways to remove the finite-height input: prove
++%     all-height applicability of the local argument, or make T_0 effective and
++%     place it below a certified numerical verification height.
+ % =============================================================================
+ 
+ % =============================================================================
+@@ -71,21 +29,76 @@
+ \statuslean{n/a}
+ \par\medskip
+ 
+-The two-point and four-point rigidity theorems of
+-Section~\ref{sec:projective-rigidity} exclude any single off-line zero
+-whose height is sufficiently large; the branch-exhaustion input of
+-Section~\ref{sec:transverse-projection}
+-(Hypothesis~\ref{hyp:branch-exhaustion}) guarantees that every off-line
+-zero falls in the scope of one or the other.  This section assembles
+-these per-zero exclusions into a single absolute height threshold above
+-which no off-line zero of \(\zeta\) lies.
++The preceding sections separate local exclusion from global assembly.  The
++local comparison theorems of Section~\ref{sec:projective-rigidity} exclude
++admissible packets in the two-point scalar branch or in the four-point
++full-quartet branch.  The branch-exhaustion input
++(Hypothesis~\ref{hyp:branch-exhaustion}) says that these two branches cover
++all admissible off-line packets produced by the branch-entry construction.
++The present section records the final high-height assembly.  It does not
++prove branch entry, actual-zeta suppression, source-energy transfer, or the
++analytic estimates needed to consume the \(N\)-point cancellation of
++Section~\ref{sec:n-point-odd-moment-cancellation}; those inputs must already
++be included in the rigidity/suppression theorems being invoked.
++
++\begin{hypothesis}[High-height branch entry]
++\label{hyp:high-height-branch-entry}
++There exists a height \(T_{\mathrm{entry}}>0\) such that every hypothetical
++off-line zero
++\[
++        \rho=\beta+i\gamma,
++        \qquad \beta\ne \tfrac12,
++        \qquad |\gamma|\ge T_{\mathrm{entry}},
++\]
++produces an admissible off-line packet in the local jet--Gram framework, with
++all normalizations, retained subdomains, and loss ledgers required by
++Hypothesis~\ref{hyp:branch-exhaustion} and by the applicable rigidity theorem.
++\end{hypothesis}
++
++\begin{remark}[All-height alternative versus finite verification]
++\label{rem:all-height-vs-finite-verification}
++The high-height formulation is a proof-management device, not an intrinsic
++feature of the desired theorem.  There are two possible ways to remove the
++finite-height input in Section~\ref{sec:riemann-hypothesis}.
++
++First, one may strengthen Hypothesis~\ref{hyp:high-height-branch-entry} and
++the local rigidity inputs so that they apply at every nontrivial-zero height,
++with no asymptotic lower-height cutoff.  This would require replacing the
++large-
++\(T\) estimates used in the local chart, whitening, toy high-frequency limit,
++and packet-retention arguments by uniform finite-height estimates.  In that
++case one may take \(T_{\mathrm{entry}}=0\) and no numerical finite-height
++verification is needed for the nontrivial zeros.
++
++Second, one may keep the high-height proof but make the resulting threshold
++\(T_0\) effective.  If a certified computation verifies that all zeros with
++\(0<|\gamma|\le H_{\mathrm{cert}}\) lie on the critical line and if
++\(T_0\le H_{\mathrm{cert}}\), then the finite-height verification input of
++Hypothesis~\ref{hyp:finite-height-verification} follows from that certificate.
++For example, Platt--Trudgian verify the Riemann hypothesis rigorously up to
++height \(3\cdot10^{12}\) by interval arithmetic.  If \(T_0\) is ineffective,
++or if \(T_0>H_{\mathrm{cert}}\), then a separate finite-height certificate up
++to \(T_0\) is still required.
++\end{remark}
++
++\begin{remark}[Role of the \(N\)-point section in the final assembly]
++\label{rem:n-point-role-in-aggregation}
++Section~\ref{sec:n-point-odd-moment-cancellation} supplies algebraic scalar
++moment cancellation.  If a two-point or four-point suppression theorem uses
++that cancellation, then the corresponding analytic remainder estimates,
++polynomial-weight density losses, and exponent bookkeeping must be absorbed in
++that suppression or rigidity theorem before Theorem~\ref{thm:zero-free-strip}
++is invoked.  The final assembly below does not itself turn the
++\(N\)-point algebra into an analytic suppression estimate.
++\end{remark}
+ 
+ \begin{theorem}[Zero-free strip above an absolute height]
+ \label{thm:zero-free-strip}
+-Assume the inputs of
+-Theorems~\ref{thm:two-point-rigidity} and \ref{thm:four-point-rigidity}
+-together with Hypothesis~\ref{hyp:branch-exhaustion}.  Then there is an
+-absolute constant \(T_0>0\) such that
++Assume Hypothesis~\ref{hyp:high-height-branch-entry},
++Hypothesis~\ref{hyp:branch-exhaustion}, and the inputs of
++Theorems~\ref{thm:two-point-rigidity} and~\ref{thm:four-point-rigidity}
++with absolute high-height thresholds.  Then there exists an absolute constant
++\(T_0>0\) such that
+ \begin{equation}
+ \label{eq:zero-free-strip}
+         \zeta(\beta+i\gamma)\ne 0
+@@ -95,56 +108,48 @@
+ \end{theorem}
+ 
+ \begin{proof}
+-Let \(T_0^{(2)}\) be the height threshold supplied by
+-Theorem~\ref{thm:two-point-rigidity} and \(T_0^{(4)}\) the threshold
+-supplied by Theorem~\ref{thm:four-point-rigidity}; set
+-\(T_0:=\max(T_0^{(2)},T_0^{(4)})\).
+-
+-Suppose, to the contrary, that
++Let \(T_0^{(2)}\) and \(T_0^{(4)}\) be the high-height thresholds for the
++two-point and four-point rigidity theorems, respectively, and let
++\[
++        T_0:=\max\{T_{\mathrm{entry}},T_0^{(2)},T_0^{(4)}\}.
++\]
++Suppose, for contradiction, that
+ \(\rho=\beta+i\gamma\) is a nontrivial zero of \(\zeta\) with
+ \(\beta\ne\tfrac12\) and \(|\gamma|\ge T_0\).  By
+-Hypothesis~\ref{hyp:branch-exhaustion}, either the symmetry pair
+-\((\rho,\bar\rho)\) (or \((\rho,1-\rho)\)) is in the scope of the
+-two-point comparison, or the full symmetry quartet
+-\(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\) is in the scope of the
+-four-point comparison.
+-
+-In the two-point case, since \(|\gamma|\ge T_0\ge T_0^{(2)}\),
+-Theorem~\ref{thm:two-point-rigidity} applies: under its inputs, the
+-exponent inequality \(A_\toy<B_{\z,2}\) yields \(\rho\notin\{\zeta=0\}\),
+-contradicting the assumption.
+-
+-In the four-point case, since \(|\gamma|\ge T_0\ge T_0^{(4)}\),
+-Theorem~\ref{thm:four-point-rigidity} applies: under its inputs, the
+-exponent inequality \(A_\toy^{(4)}<B_{\z,4}\) yields
+-\(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\not\subset\{\zeta=0\}\), again a
+-contradiction.
+-
+-In either case the assumption is impossible, so
++Hypothesis~\ref{hyp:high-height-branch-entry}, \(\rho\) produces an
++admissible off-line packet.  By Hypothesis~\ref{hyp:branch-exhaustion}, this
++packet is excluded by either the two-point scalar branch of
++Theorem~\ref{thm:two-point-rigidity} or the four-point full-quartet branch of
++Theorem~\ref{thm:four-point-rigidity}.
++
++If the two-point branch applies, then \(|\gamma|\ge T_0^{(2)}\), and
++Theorem~\ref{thm:two-point-rigidity}, under its stated inputs, contradicts the
++existence of \(\rho\).  If the four-point branch applies, then
++\(|\gamma|\ge T_0^{(4)}\), and Theorem~\ref{thm:four-point-rigidity}, under
++its stated inputs, contradicts the existence of the symmetry quartet generated
++by \(\rho\).  Both alternatives are impossible.  Hence
+ \eqref{eq:zero-free-strip} holds.
+ \end{proof}
+ 
+-\begin{remark}[No aggregation loss]
++\begin{remark}[No additional zero-counting loss]
+ \label{rem:zero-free-strip-no-aggregation-loss}
+-Each application of
+-Theorem~\ref{thm:two-point-rigidity}
+-or~\ref{thm:four-point-rigidity}
+-yields an outright contradiction for the single zero \(\rho\) under
+-consideration; no polynomial loss accumulates in the union over all
+-off-line zeros above height \(T_0\).  In particular, the threshold
+-\(T_0\) of \eqref{eq:zero-free-strip} is the maximum of the
+-per-theorem thresholds \(T_0^{(2)}\) and \(T_0^{(4)}\) and does not
+-depend on the height-density of zeros or on a dyadic decomposition
+-of the height ladder.
++Once Hypothesis~\ref{hyp:high-height-branch-entry},
++Hypothesis~\ref{hyp:branch-exhaustion}, and the relevant local rigidity theorem
++are available with absolute thresholds, the final high-height assembly does not
++accumulate a loss over the set of zeros.  Each hypothetical off-line zero above
++\(T_0\) is contradicted individually.  Any polynomial-weight density loss,
++\(N\)-point moment-cancellation loss, or source-energy loss must already have
++been charged in the proof of the suppression or rigidity input being used.
+ \end{remark}
+ 
+ \begin{remark}[Scope of \S\ref{sec:aggregation-and-zero-free-strip}]
+ \label{rem:zero-free-strip-scope}
+-This section delivers only the high-height aggregation step.  It does
+-not address heights \(|\gamma|<T_0\); those are handled by the
+-classical numerical verification of the Riemann hypothesis on bounded
+-ordinate ranges (Section~\ref{sec:riemann-hypothesis}), and the
+-constant \(T_0\) is not made effective here.
++This section proves only the formal high-height implication from branch entry,
++branch exhaustion, and local rigidity to a zero-free strip.  It does not address
++heights \(|\gamma|<T_0\), and it does not make \(T_0\) effective.  The finite
++height range is a separate input in Section~\ref{sec:riemann-hypothesis} unless
++all constants have been made explicit and lie below an already certified
++verification height.
+ \end{remark}
+ 
+ % =============================================================================
+@@ -158,27 +163,45 @@
+ \statuslean{not-started}
+ \par\medskip
+ 
+-The high-height zero-free statement of
+-Theorem~\ref{thm:zero-free-strip} excludes any off-line zero of
+-\(\zeta\) above the absolute height threshold \(T_0\); the classical
+-numerical verification of the Riemann hypothesis on bounded ordinate
+-ranges covers \(|\gamma|<T_0\).  Composing the two yields the
+-hypothesis in full, conditional on the inputs assembled in
+-Section~\ref{sec:aggregation-and-zero-free-strip}.
+-
+-\begin{theorem}[Riemann hypothesis]
++Theorem~\ref{thm:zero-free-strip} excludes off-line zeros above the height
++\(T_0\) supplied by the high-height assembly.  To conclude the full Riemann
++hypothesis, the bounded interval \(|\gamma|<T_0\) must also be certified.  If
++\(T_0\) is not effective, this finite-height certification remains a separate
++input.
++
++\begin{hypothesis}[Finite-height verification]
++\label{hyp:finite-height-verification}
++For the height \(T_0\) appearing in Theorem~\ref{thm:zero-free-strip}, every
++nontrivial zero \(\rho=\beta+i\gamma\) of \(\zeta\) with \(|\gamma|<T_0\)
++satisfies \(\beta=\tfrac12\).
++\end{hypothesis}
++
++\begin{theorem}[Conditional Riemann hypothesis]
+ \label{thm:riemann-hypothesis}
+-Assume the inputs of Theorem~\ref{thm:zero-free-strip}.  Then every
+-nontrivial zero of \(\zeta\) satisfies \(\RePart s = \tfrac12\).
++Assume the inputs of Theorem~\ref{thm:zero-free-strip} and
++Hypothesis~\ref{hyp:finite-height-verification}.  Then every nontrivial zero
++of \(\zeta\) satisfies \(\RePart s = \tfrac12\).
+ \end{theorem}
+ 
+ \begin{proof}
+ Let \(\rho=\beta+i\gamma\) be a nontrivial zero of \(\zeta\).  If
+ \(|\gamma|\ge T_0\), then \(\beta=\tfrac12\) by
+ Theorem~\ref{thm:zero-free-strip}.  If \(|\gamma|<T_0\), then
+-\(\beta=\tfrac12\) by the classical numerical verification of the
+-Riemann hypothesis on bounded ordinate ranges; see, e.g.,
+-\cite{Edwards2001,Titchmarsh1986} for the textbook treatment and the
+-references therein for explicit numerical heights.  In either case
+-\(\beta=\tfrac12\).
++\(\beta=\tfrac12\) by Hypothesis~\ref{hyp:finite-height-verification}.
++Thus every nontrivial zero lies on the critical line.
+ \end{proof}
++
++\begin{remark}[Effectivity and numerical verification]
++\label{rem:finite-height-effectivity}
++Certified finite-height verification may be used once the height threshold is
++made explicit.  Let \(H_{\mathrm{cert}}\) denote a rigorous certified height up
++to which every nontrivial zero has been verified to lie on the critical line.
++If the proof produces an explicit \(T_0\le H_{\mathrm{cert}}\), then
++Hypothesis~\ref{hyp:finite-height-verification} follows from that certificate.
++Known computations include the rigorous interval-arithmetic verification of
++Platt--Trudgian up to \(H_{\mathrm{cert}}=3\cdot10^{12}\).  If the proof only
++produces a non-effective \(T_0\), then known finite computations cannot be
++invoked automatically; one must either make \(T_0\) effective and compare it
++with a certified height, prove all-height applicability of the local argument,
++or supply a finite verification certificate for the particular \(T_0\).
++\end{remark}
