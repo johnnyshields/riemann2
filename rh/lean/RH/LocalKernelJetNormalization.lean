@@ -353,9 +353,17 @@ theorem phase_kernel_diagonal_partial_x (T : ℝ) :
     exact h_eq.trans_isLittleO h_R_scaled
   exact h_kernel_hasDeriv.deriv
 
-/-- Diagonal partial in `y`: `K_y(T, T) = q'(T) / (2 π)`. -/
-axiom phase_kernel_diagonal_partial_y (T : ℝ) :
-    deriv (phaseKernel T) T = qPrime T / (2 * Real.pi)
+/-- Diagonal partial in `y`: `K_y(T, T) = q'(T) / (2 π)`.
+    By kernel symmetry, `phaseKernel T` (as a function of `y`) coincides
+    with `fun y => phaseKernel y T`, so the diagonal `y`-derivative
+    equals the diagonal `x`-derivative. -/
+theorem phase_kernel_diagonal_partial_y (T : ℝ) :
+    deriv (phaseKernel T) T = qPrime T / (2 * Real.pi) := by
+  have h : phaseKernel T = (fun y => phaseKernel y T) := by
+    funext y
+    exact phase_kernel_symmetric T y
+  rw [h]
+  exact phase_kernel_diagonal_partial_x T
 
 /-- Diagonal mixed partial: `K_{xy}(T, T) = (q''(T) + 2 q(T)³) / (6 π)`. -/
 axiom phase_kernel_diagonal_partial_xy (T : ℝ) :
