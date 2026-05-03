@@ -15,6 +15,17 @@ Coverage:
   * lambda_min(G_{m,±}) asymptotic floor: confirm
     lambda_min(G) = 2 q(t_±) / pi (1 + o(1)), equivalently
     lambda_min(G) >= 2 q(t_±) / pi (1 - delta_T) on the retained set.
+  * lambda_max(G_{m,±}) asymptotic ceiling
+    (lem:finite-same-point-spectral-size):
+        lambda_max(G) = q(t_±)^3 / (6 pi) (1 + o(1)),
+    plus the two-sided comparability bracket
+        c q(t_±) <= lambda_min(G) <= C q(t_±),
+        c q(t_±)^3 <= lambda_max(G) <= C q(t_±)^3.
+  * Two-sided whitening ledger (lem:two-sided-whitening-ledger):
+        c (q_- q_+)^{-3/2} ||X||_op
+                <= ||W_{m,s}(X)||_op
+                <= C (q_- q_+)^{-1/2} ||X||_op,
+    verified at sample (m, s) inside D_T against several X.
   * Coalescence Omega(0; m) = I_2 numerically across heights.
   * Independent-route check for G^{-1/2}: closed-form
     Cayley-Hamilton SPD square root vs mpmath.sqrtm.
@@ -615,6 +626,180 @@ def check_lambda_min_polynomial_floor(T_values=(mpf("1e3"), mpf("1e5"),
 
 
 # ---------------------------------------------------------------------------
+# (v') Spectral size of finite same-point blocks: lambda_max asymptotic
+#      and two-sided comparability with q(t) and q(t)^3.
+#      (lem:finite-same-point-spectral-size).
+# ---------------------------------------------------------------------------
+
+def check_lambda_max_asymptotic(T_values=(mpf("1e3"), mpf("1e5"),
+                                          mpf("1e6"))):
+    print("=" * 70)
+    print("[lem:finite-same-point-spectral-size]  lambda_max(G_{m,±}) ~ q^3/(6 pi)")
+    print("=" * 70)
+    print()
+    print(f"  {'T':>10}  {'asymptote q^3/(6 pi)':>22}  "
+          f"{'max lam':>12}  {'rel.err':>10}")
+    print(f"  {'-'*10}  {'-'*22}  {'-'*12}  {'-'*10}")
+    for T in T_values:
+        Q = mp_log(T)
+        half_window = mpf("0.05") / Q
+        midpoints = [T - half_window + 2 * i * half_window / mpf(4)
+                     for i in range(5)]
+        s_grid = [k / Q for k in [mpf("0.01"), mpf("0.5"), mpf("1")]]
+        max_lam_observed = mpf("-inf")
+        min_max_lam = mpf("inf")
+        q_T, _, _, _ = phi_derivs(T)
+        target = q_T**3 / (6 * MP_PI)
+        for m in midpoints:
+            for s in s_grid:
+                for t_pm in [m - s / 2, m + s / 2]:
+                    G = G_at(t_pm)
+                    _, lam_max = mat2_eigs_symmetric(G)
+                    if lam_max > max_lam_observed:
+                        max_lam_observed = lam_max
+                    if lam_max < min_max_lam:
+                        min_max_lam = lam_max
+        rel_err = fabs(max_lam_observed - target) / target
+        print(f"  {float(T):10.2e}  {float(target):22.6f}  "
+              f"{float(max_lam_observed):12.6f}  {float(rel_err):10.4e}")
+        if T >= mpf("1e5"):
+            assert rel_err < mpf("0.05"), (
+                f"lambda_max asymptotic off at T = {float(T):.0e}: "
+                f"rel.err = {float(rel_err)}"
+            )
+    print()
+    print("  [PASS] lambda_max(G_{m,±}(s)) = q(t_±)^3 / (6 pi) (1 + o_T(1))")
+    print("         numerically across heights and (m, s) grid.")
+
+
+def check_spectral_comparable_constants(T_values=(mpf("1e3"), mpf("1e5"),
+                                                  mpf("1e6"))):
+    """Verify the two-sided comparability bounds
+        c q(t_±)   <= lambda_min(G_{m,±}(s)) <= C q(t_±),
+        c q(t_±)^3 <= lambda_max(G_{m,±}(s)) <= C q(t_±)^3.
+    The c, C are extracted empirically from the sweep; the assertion is
+    that ratios stay within fixed brackets independent of T (after
+    raising the lower-height cutoff).
+    """
+    print("=" * 70)
+    print("[lem:finite-same-point-spectral-size]  spectral comparability:")
+    print("                                       lam_min/q in [c, C], lam_max/q^3 in [c, C]")
+    print("=" * 70)
+    print()
+    print(f"  {'T':>10}  {'min lam_min/q':>16}  {'max lam_min/q':>16}  "
+          f"{'min lam_max/q^3':>16}  {'max lam_max/q^3':>16}")
+    print(f"  {'-'*10}  {'-'*16}  {'-'*16}  {'-'*16}  {'-'*16}")
+    for T in T_values:
+        Q = mp_log(T)
+        half_window = mpf("0.05") / Q
+        midpoints = [T - half_window + 2 * i * half_window / mpf(4)
+                     for i in range(5)]
+        s_grid = [k / Q for k in [mpf("0.01"), mpf("0.5"), mpf("1")]]
+        min_min_ratio = mpf("inf")
+        max_min_ratio = mpf("-inf")
+        min_max_ratio = mpf("inf")
+        max_max_ratio = mpf("-inf")
+        for m in midpoints:
+            for s in s_grid:
+                for t_pm in [m - s / 2, m + s / 2]:
+                    q_pm, _, _, _ = phi_derivs(t_pm)
+                    G = G_at(t_pm)
+                    lam_min, lam_max = mat2_eigs_symmetric(G)
+                    r_min = lam_min / q_pm
+                    r_max = lam_max / q_pm**3
+                    if r_min < min_min_ratio: min_min_ratio = r_min
+                    if r_min > max_min_ratio: max_min_ratio = r_min
+                    if r_max < min_max_ratio: min_max_ratio = r_max
+                    if r_max > max_max_ratio: max_max_ratio = r_max
+        print(f"  {float(T):10.2e}  {float(min_min_ratio):16.6f}  "
+              f"{float(max_min_ratio):16.6f}  "
+              f"{float(min_max_ratio):16.6f}  {float(max_max_ratio):16.6f}")
+        # Both ratios must be bounded.  The asymptotes are 2/pi ~ 0.637
+        # for lam_min/q and 1/(6 pi) ~ 0.053 for lam_max/q^3.
+        assert min_min_ratio > mpf("0.1"), (
+            f"lam_min / q ratio collapses at T = {float(T):.0e}"
+        )
+        assert max_max_ratio < mpf("1"), (
+            f"lam_max / q^3 ratio diverges at T = {float(T):.0e}"
+        )
+    print()
+    print("  [PASS] Both ratios stay within bounded brackets across T,")
+    print("         confirming spectral comparability with absolute c, C.")
+
+
+# ---------------------------------------------------------------------------
+# (v'') Two-sided whitening ledger
+#       (lem:two-sided-whitening-ledger).
+# ---------------------------------------------------------------------------
+
+def check_two_sided_whitening_ledger(T_values=(mpf("1e3"), mpf("1e5"),
+                                                mpf("1e6"))):
+    """Numerical check of the two-sided whitening ledger:
+        c (q_- q_+)^{-3/2} ||X||_op <= ||W_{m,s}(X)||_op
+                                    <= C (q_- q_+)^{-1/2} ||X||_op
+    via the strict spectral identities at each (m, s):
+        ||A X B||_op <= ||A||_op ||X||_op ||B||_op
+                     = lam_min(G_-)^{-1/2} lam_min(G_+)^{-1/2} ||X||_op,
+        ||X||_op    <= lam_max(G_-)^{1/2} lam_max(G_+)^{1/2} ||A X B||_op.
+    Tests both inequalities at sample (m, s) inside D_T for several test
+    matrices X (identity, off-diagonal, asymmetric, anti-symmetric).
+    """
+    print("=" * 70)
+    print("[lem:two-sided-whitening-ledger]  two-sided operator-norm bracket")
+    print("=" * 70)
+    print()
+    test_X = [
+        ("X = I_2",
+         mp_matrix([[mpf(1), mpf(0)], [mpf(0), mpf(1)]])),
+        ("X = sigma_x",
+         mp_matrix([[mpf(0), mpf(1)], [mpf(1), mpf(0)]])),
+        ("X = [[1,2],[-3,1]]",
+         mp_matrix([[mpf(1), mpf(2)], [mpf(-3), mpf(1)]])),
+        ("X = anti-sym",
+         mp_matrix([[mpf(0), mpf(1)], [mpf(-1), mpf(0)]])),
+    ]
+    for T in T_values:
+        Q = mp_log(T)
+        m = T
+        s = mpf("0.5") / Q
+        t_minus = m - s / 2
+        t_plus = m + s / 2
+        G_minus = G_at(t_minus)
+        G_plus = G_at(t_plus)
+        lam_min_minus, lam_max_minus = mat2_eigs_symmetric(G_minus)
+        lam_min_plus, lam_max_plus = mat2_eigs_symmetric(G_plus)
+        A = G_inv_sqrt_closed(G_minus)
+        B = G_inv_sqrt_closed(G_plus)
+        upper_factor = 1 / mp_sqrt(lam_min_minus * lam_min_plus)
+        lower_factor = 1 / mp_sqrt(lam_max_minus * lam_max_plus)
+        print(f"  T = {float(T):.0e}, s = {float(s):.4e}")
+        print(f"    upper-bound spectral factor "
+              f"(lam_min G_- lam_min G_+)^{{-1/2}} = {float(upper_factor):.6f}")
+        print(f"    lower-bound spectral factor "
+              f"(lam_max G_- lam_max G_+)^{{-1/2}} = {float(lower_factor):.6f}")
+        for name, X in test_X:
+            W = A * X * B
+            normW = spectral_norm(W)
+            normX = spectral_norm(X)
+            ratio = normW / normX
+            print(f"    {name}:  ||W(X)||_op/||X||_op = {float(ratio):.6e}")
+            tol = mpf("1e-25")
+            assert ratio <= upper_factor * (1 + tol), (
+                f"upper bound violated at T = {float(T):.0e}, {name}: "
+                f"{float(ratio)} > {float(upper_factor)}"
+            )
+            assert ratio >= lower_factor * (1 - tol), (
+                f"lower bound violated at T = {float(T):.0e}, {name}: "
+                f"{float(ratio)} < {float(lower_factor)}"
+            )
+        print()
+    print("  [PASS] Two-sided whitening ledger holds at every tested T")
+    print("         and every test matrix X: lower spectral factor")
+    print("         (lam_max-based) <= ||W(X)||_op/||X||_op")
+    print("                          <= upper spectral factor (lam_min-based).")
+
+
+# ---------------------------------------------------------------------------
 # (vi) Independent-route check: G^{-1/2} via two methods.
 # ---------------------------------------------------------------------------
 
@@ -682,6 +867,12 @@ def main():
     check_whitening_loss_sweep()
     print()
     check_lambda_min_polynomial_floor()
+    print()
+    check_lambda_max_asymptotic()
+    print()
+    check_spectral_comparable_constants()
+    print()
+    check_two_sided_whitening_ledger()
     print()
     check_inverse_sqrt_routes(T_anchor)
     print()

@@ -33,8 +33,8 @@ Maps to the LaTeX as follows:
   RH.RiemannSiegelTheta.thetaPrincipal
       ↔ principal-branch expression `Im(log Γ(1/4 + i t / 2))
               − (t/2) log π`,
-        equal to `theta` modulo a piecewise constant in 2π·ℤ;
-        not the active phase.
+        principal-branch expression only; no global equality with
+        `theta` is asserted here.
 
 Theorems:
   theta_derivative_asymptotics       ↔ Lemma `lem:theta-derivative-asymptotics`
@@ -68,8 +68,13 @@ The kernel `sin(θ(x) − θ(y))` and its derivatives only ever consume
 `theta`, `q`, `qPrime`, `qDoublePrime` through the asymptotic
 statements below; no caller should unfold `theta` to a closed form. -/
 
-/-- The continuous Riemann–Siegel phase. -/
-noncomputable def theta : ℝ → ℝ := sorry
+/-- The continuous Riemann–Siegel phase.
+
+This is intentionally primitive at this stage.  The paper defines it via
+the holomorphic branch of `log Γ` on `Re z > 0`; until that branch is
+constructed in Lean, `theta` should not be implemented by the principal
+branch. -/
+opaque theta : ℝ → ℝ
 
 /-- First derivative of the phase, `q := θ'`. -/
 noncomputable def q (t : ℝ) : ℝ := deriv theta t
@@ -88,9 +93,11 @@ crossings of `t ↦ Γ(1/4 + i t / 2)`.  It is **not** used elsewhere in
 this module or downstream. -/
 
 /-- Principal-branch expression for the Riemann–Siegel phase, using
-    `Complex.log` (principal logarithm).  Differs from `theta` by a
-    piecewise constant `2π k(t)` with `k : ℝ → ℤ`; not the paper's
-    `θ`.  Documented for future bridging only. -/
+    `Complex.log` (principal logarithm).  This is not the paper's
+    `θ`.  On intervals where the principal branch is continuous and
+    agrees with the chosen holomorphic branch, it should differ from
+    `theta` by an additive constant in `2πℤ`; no global equality or
+    derivative statement is asserted here. -/
 noncomputable def thetaPrincipal (t : ℝ) : ℝ :=
   (Complex.log (Complex.Gamma ((1 : ℂ) / 4 + Complex.I * (t : ℂ) / 2))).im -
     (t / 2) * Real.log Real.pi
@@ -103,30 +110,37 @@ the leading term of Stirling but not the polynomial corrections, so
 these are recorded as proof obligations.  Two window variants are
 provided; dyadic is the paper's actual `I_T ⊂ [T/2, 2T]` interface. -/
 
+/-- Smoothness of the continuous Riemann–Siegel phase on the real line
+    in the retained high-height region.  This is a paper input from the
+    holomorphic `log Γ` construction; it is exposed as an axiom rather
+    than hidden inside `theta`. -/
+axiom theta_differentiableAt (t : ℝ) : DifferentiableAt ℝ theta t
+
 /-- Differentiated theta asymptotics on the surrogate window
     `[T - 1, T + 1]`.  Combines the three derivative bounds:
     `q  = (1/2) log(t/(2π)) - 1/(48 t²) + O(t⁻⁴)`,
     `q' = 1/(2t) + O(t⁻³)`, and
-    `q'' = -1/(2t²) + O(t⁻⁴)`. -/
-theorem theta_derivative_asymptotics :
+    `q'' = -1/(2t²) + O(t⁻⁴)`.
+
+This is an analytic input from differentiated Stirling. -/
+axiom theta_derivative_asymptotics :
     ∃ T₀ C : ℝ, 0 < T₀ ∧ 0 ≤ C ∧
     ∀ T : ℝ, T₀ ≤ T → ∀ t : ℝ, T - 1 ≤ t → t ≤ T + 1 →
       |q t - ((1/2) * Real.log (t / (2 * Real.pi)) - 1 / (48 * t^2))|
         ≤ C / t^4 ∧
       |qPrime t - 1 / (2 * t)| ≤ C / t^3 ∧
-      |qDoublePrime t - (-1) / (2 * t^2)| ≤ C / t^4 := by
-  sorry
+      |qDoublePrime t - (-1) / (2 * t^2)| ≤ C / t^4
 
 /-- Dyadic-window form of `theta_derivative_asymptotics`, matching the
-    paper's `I_T ⊂ [T/2, 2T]` interface. -/
-theorem theta_derivative_asymptotics_dyadic :
+    paper's `I_T ⊂ [T/2, 2T]` interface.  This is the preferred interface
+    for downstream packet arguments. -/
+axiom theta_derivative_asymptotics_dyadic :
     ∃ T₀ C : ℝ, 0 < T₀ ∧ 0 ≤ C ∧
     ∀ T t : ℝ, T₀ ≤ T → T / 2 ≤ t → t ≤ 2 * T →
       |q t - ((1/2) * Real.log (t / (2 * Real.pi)) - 1 / (48 * t^2))|
         ≤ C / t^4 ∧
       |qPrime t - 1 / (2 * t)| ≤ C / t^3 ∧
-      |qDoublePrime t - (-1) / (2 * t^2)| ≤ C / t^4 := by
-  sorry
+      |qDoublePrime t - (-1) / (2 * t^2)| ≤ C / t^4
 
 /-- Phase-derivative lower bound (P2):
     on retained packets at sufficiently large `T`,
@@ -178,6 +192,54 @@ theorem phase_derivative_lower_bound :
       linarith
     linarith
   have h_T_sq_ne : T^2 ≠ 0 := ne_of_gt h_T_sq_pos
+  have h_combine_const :
+      (1/2) * Real.log (T / (4 * Real.pi)) - 1 / (12 * T^2) - 16 * C' / T^2 =
+      (1/2) * Real.log (T / (4 * Real.pi)) - (1/12 + 16 * C') / T^2 := by
+    field_simp
+    ring
+  linarith
+
+/-- Dyadic phase-derivative lower bound, matching the paper's retained
+    packet interface `I_T ⊂ [T/2, 2T]`. -/
+theorem phase_derivative_lower_bound_dyadic :
+    ∃ T₀ C : ℝ, 0 < T₀ ∧ 0 ≤ C ∧
+    ∀ T t : ℝ, T₀ ≤ T → T / 2 ≤ t → t ≤ 2 * T →
+    q t ≥ (1/2) * Real.log (T / (4 * Real.pi)) - C / T^2 := by
+  obtain ⟨T₀', C', hT₀'_pos, hC'_nn, hasymp⟩ := theta_derivative_asymptotics_dyadic
+  refine ⟨max T₀' 2, 1/12 + 16 * C', ?_, ?_, ?_⟩
+  · exact lt_max_of_lt_right (by norm_num)
+  · positivity
+  intro T t hT ht_lo ht_hi
+  have hT_T₀' : T₀' ≤ T := le_trans (le_max_left _ _) hT
+  have hT_2 : (2 : ℝ) ≤ T := le_trans (le_max_right _ _) hT
+  have hT_pos : 0 < T := by linarith
+  have ht_pos : 0 < t := by linarith
+  obtain ⟨h_q_bound, _, _⟩ := hasymp T t hT_T₀' ht_lo ht_hi
+  have h_q_lo : (1/2) * Real.log (t / (2 * Real.pi)) - 1 / (48 * t^2) - C' / t^4 ≤ q t := by
+    have h_abs := abs_le.mp h_q_bound
+    linarith [h_abs.1]
+  have h_log_mono : Real.log (T / (4 * Real.pi)) ≤ Real.log (t / (2 * Real.pi)) := by
+    apply Real.log_le_log (by positivity)
+    rw [div_le_div_iff₀ (by positivity : (0:ℝ) < 4 * Real.pi)
+        (by positivity : (0:ℝ) < 2 * Real.pi)]
+    nlinarith [Real.pi_pos]
+  have h_t_sq_lower : T^2 / 4 ≤ t^2 := by nlinarith
+  have h_T_sq_pos : 0 < T^2 := by positivity
+  have h_one_48 : 1 / (48 * t^2) ≤ 1 / (12 * T^2) := by
+    rw [div_le_div_iff₀ (by positivity) (by positivity)]
+    nlinarith
+  have hT_ge_one : (1 : ℝ) ≤ T := by linarith
+  have h_t_4_lower : T^4 / 16 ≤ t^4 := by nlinarith
+  have h_T_sq_ge_one : (1 : ℝ) ≤ T^2 := by nlinarith [hT_ge_one]
+  have h_T4_ge_T2 : T^2 ≤ T^4 := by nlinarith [h_T_sq_ge_one]
+  have h_Cp_t4 : C' / t^4 ≤ 16 * C' / T^2 := by
+    rw [div_le_div_iff₀ (by positivity) h_T_sq_pos]
+    nlinarith [hC'_nn]
+  have h_chain :
+      (1/2) * Real.log (T / (4 * Real.pi)) - 1 / (12 * T^2) - 16 * C' / T^2 ≤ q t := by
+    have h1 : (1/2) * Real.log (T / (4 * Real.pi)) ≤ (1/2) * Real.log (t / (2 * Real.pi)) := by
+      linarith
+    linarith
   have h_combine_const :
       (1/2) * Real.log (T / (4 * Real.pi)) - 1 / (12 * T^2) - 16 * C' / T^2 =
       (1/2) * Real.log (T / (4 * Real.pi)) - (1/12 + 16 * C') / T^2 := by

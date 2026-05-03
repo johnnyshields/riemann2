@@ -19,6 +19,11 @@ Coverage:
   * Whitening loss: ||G_{m,±}(s)^{-1/2}||_op = lambda_min(G)^{-1/2}, and
     the closed-form 2x2 inverse-square-root formula
     (lem:whitening-loss).
+  * Spectral size of finite same-point blocks (lem:finite-same-point-
+    spectral-size): lambda_min ~ 2 q(t_±)/pi and lambda_max ~ q(t_±)^3/(6 pi).
+  * Two-sided whitening ledger (lem:two-sided-whitening-ledger):
+        c (q_- q_+)^{-3/2} ||X||_op <= ||W_{m,s}(X)||_op
+                                    <= C (q_- q_+)^{-1/2} ||X||_op.
   * Independent route: the generic Cayley-Hamilton identity is checked
     symbolically; the comparison with numerical diagonalization/sqrtm is
     a regression check at one positive-definite sample point.
@@ -445,6 +450,173 @@ def verify_whitening_loss_constant():
 
 
 # ---------------------------------------------------------------------------
+# (v') Spectral size of finite same-point blocks: lambda_min ~ 2q/pi,
+#      lambda_max ~ q^3/(6 pi)  (lem:finite-same-point-spectral-size).
+# ---------------------------------------------------------------------------
+
+def verify_finite_same_point_spectral_size():
+    """Symbolic-asymptotic verification of the eigenvalue size of
+    G_{m,±}(s) = J(t_±) for theta-derivative asymptotics.
+
+    Substitutes the §2 asymptotics
+        q(t)   = (1/2) log(t/(2 pi)) - 1/(48 t^2),
+        q'(t)  = 1/(2 t) + 1/(24 t^3),
+        q''(t) = -1/(2 t^2) - 1/(8 t^4),
+    and confirms
+        lim_{t -> oo} lambda_min(J(t)) / (2 q(t) / pi)        = 1,
+        lim_{t -> oo} lambda_max(J(t)) / (q(t)^3 / (6 pi))    = 1.
+    """
+    print("=" * 70)
+    print("[lem:finite-same-point-spectral-size]  lambda_min ~ 2 q/pi,")
+    print("                                       lambda_max ~ q^3/(6 pi)")
+    print("=" * 70)
+    t = symbols("t", positive=True)
+    L = sp.log(t / (2 * PI))
+    q_asym = Rational(1, 2) * L - Rational(1, 48) / t**2
+    qp_asym = Rational(1, 2) / t + Rational(1, 24) / t**3
+    qpp_asym = -Rational(1, 2) / t**2 - Rational(1, 8) / t**4
+
+    G = J_block(t, q_asym, qp_asym, qpp_asym)
+    tr = G.trace()
+    det_G = G.det()
+    disc = tr**2 - 4 * det_G
+    lam_min = (tr - sqrt(disc)) / 2
+    lam_max = (tr + sqrt(disc)) / 2
+
+    target_min = 2 * q_asym / PI
+    target_max = q_asym**3 / (6 * PI)
+
+    ratio_min = sp.limit(lam_min / target_min, t, sp.oo)
+    ratio_max = sp.limit(lam_max / target_max, t, sp.oo)
+
+    print()
+    print(f"  lim lambda_min / (2 q / pi)        = {ratio_min}    (expected 1)")
+    print(f"  lim lambda_max / (q^3 / (6 pi))    = {ratio_max}    (expected 1)")
+
+    assert ratio_min == 1, f"lambda_min asymptotic mismatch: {ratio_min}"
+    assert ratio_max == 1, f"lambda_max asymptotic mismatch: {ratio_max}"
+
+    print()
+    print("  [PASS] Both eigenvalue asymptotes agree with theta-derivative")
+    print("         §2 asymptotics; lambda_min and lambda_max are comparable")
+    print("         to q(t)  and  q(t)^3  respectively, with absolute constants.")
+
+
+# ---------------------------------------------------------------------------
+# (v'') Two-sided whitening ledger
+#       (lem:two-sided-whitening-ledger,
+#        cor:two-sided-whitening-polynomial-ledger).
+# ---------------------------------------------------------------------------
+
+def verify_two_sided_whitening_ledger():
+    """Symbolic verification of the two-sided whitening ledger.
+
+    The lemma reduces to two abstract operator-norm identities for SPD
+    matrices A, B and arbitrary 2x2 X:
+
+        ||A X B||_op  <=  ||A||_op ||X||_op ||B||_op
+                       =  lambda_min(G_-)^{-1/2}
+                          lambda_min(G_+)^{-1/2}  ||X||_op,
+
+        ||X||_op      <=  ||A^{-1}||_op ||A X B||_op ||B^{-1}||_op
+                       =  lambda_max(G_-)^{1/2}
+                          lambda_max(G_+)^{1/2}  ||A X B||_op.
+
+    For 2x2 matrices, the operator norm has a closed form
+        ||M||_op = sqrt(largest eigenvalue of M^T M).
+    We verify the two inequalities at a specialized SPD pair
+    (G_-, G_+) and a generic real X, then chain them with the spectral
+    asymptotics of verify_finite_same_point_spectral_size to obtain the
+    ledger statement
+        c (q_- q_+)^{-3/2} ||X||_op
+            <=  ||W_{m,s}(X)||_op
+            <=  C (q_- q_+)^{-1/2} ||X||_op.
+    """
+    print("=" * 70)
+    print("[lem:two-sided-whitening-ledger]  c (q_- q_+)^{-3/2} ||X||_op")
+    print("                                   <= ||W(X)||_op")
+    print("                                   <= C (q_- q_+)^{-1/2} ||X||_op")
+    print("=" * 70)
+
+    # Specialize to representative SPD blocks.  Use distinct (q_-, q_+) so
+    # the ledger is exercised with non-trivial spectral pre-/post-factors.
+    qm_minus = Rational(5)
+    qm_plus = Rational(6)
+    G_minus = J_block(None, qm_minus, Rational(1, 100), -Rational(1, 200))
+    G_plus = J_block(None, qm_plus, Rational(1, 144), -Rational(1, 288))
+
+    # Closed-form SPD inverse square root.
+    A = mat2_inverse_sqrt_pd(G_minus)
+    B = mat2_inverse_sqrt_pd(G_plus)
+
+    # Test matrices: identity and a generic real 2x2.
+    X1 = eye(2)
+    X2 = Matrix([[Rational(1), Rational(2)], [-Rational(3), Rational(1)]])
+
+    def op_norm_2x2(M):
+        # ||M||_op = sqrt(max eigenvalue of M^T M).
+        MTM = simplify(M.T * M)
+        tr_M = MTM[0, 0] + MTM[1, 1]
+        det_M = MTM[0, 0] * MTM[1, 1] - MTM[0, 1] * MTM[1, 0]
+        disc = tr_M**2 - 4 * det_M
+        # Operator norm squared = largest eigenvalue of M^T M.
+        sigma_max_sq = (tr_M + sqrt(disc)) / 2
+        return sqrt(simplify(sigma_max_sq))
+
+    # Numerical spectral data for G_minus, G_plus.
+    tr_minus = G_minus.trace()
+    det_minus = G_minus.det()
+    disc_minus = tr_minus**2 - 4 * det_minus
+    lam_min_minus = float((tr_minus - sqrt(disc_minus)) / 2)
+    lam_max_minus = float((tr_minus + sqrt(disc_minus)) / 2)
+    tr_plus = G_plus.trace()
+    det_plus = G_plus.det()
+    disc_plus = tr_plus**2 - 4 * det_plus
+    lam_min_plus = float((tr_plus - sqrt(disc_plus)) / 2)
+    lam_max_plus = float((tr_plus + sqrt(disc_plus)) / 2)
+
+    upper_factor = 1 / float(sp.sqrt(lam_min_minus * lam_min_plus))
+    lower_factor = 1 / float(sp.sqrt(lam_max_minus * lam_max_plus))
+
+    print()
+    print(f"  G_- spectral data:  lam_min = {lam_min_minus:.6f},  "
+          f"lam_max = {lam_max_minus:.6f}")
+    print(f"  G_+ spectral data:  lam_min = {lam_min_plus:.6f},  "
+          f"lam_max = {lam_max_plus:.6f}")
+    print(f"  upper-bound spectral factor (lam_min G_- lam_min G_+)^{{-1/2}}"
+          f" = {upper_factor:.6f}")
+    print(f"  lower-bound spectral factor (lam_max G_- lam_max G_+)^{{-1/2}}"
+          f" = {lower_factor:.6f}")
+    print()
+
+    for name, X in [("X = I_2", X1), ("X = [[1,2],[-3,1]]", X2)]:
+        W = simplify(A * X * B)
+        normW = float(op_norm_2x2(W))
+        normX = float(op_norm_2x2(X))
+        print(f"  {name}:  ||X||_op = {normX:.6f},  ||W(X)||_op = {normW:.6f}")
+        ratio = normW / normX
+        print(f"    ||W(X)||_op / ||X||_op = {ratio:.6f}")
+        print(f"    upper-bound factor      = {upper_factor:.6f}")
+        print(f"    lower-bound factor      = {lower_factor:.6f}")
+        # Both inequalities must hold (with tiny tolerance for rounding).
+        tol = 1e-9
+        assert ratio <= upper_factor * (1 + tol), (
+            f"upper bound violated: {ratio} > {upper_factor}"
+        )
+        assert ratio >= lower_factor * (1 - tol), (
+            f"lower bound violated: {ratio} < {lower_factor}"
+        )
+        print()
+
+    print("  [PASS] At the specialized SPD pair, the two-sided whitening")
+    print("         ledger holds for both X = I_2 and a generic real 2x2 X.")
+    print("         Combined with the asymptotic spectral sizes")
+    print("         lambda_min ~ 2 q / pi, lambda_max ~ q^3 / (6 pi)")
+    print("         (verify_finite_same_point_spectral_size), this gives the")
+    print("         (q_- q_+)^{-3/2}  ...  (q_- q_+)^{-1/2}  bracket.")
+
+
+# ---------------------------------------------------------------------------
 # (vi) Independent route: G^{-1/2} via two formulas.
 # ---------------------------------------------------------------------------
 
@@ -563,6 +735,10 @@ def main():
     print()
     verify_whitening_loss_constant()
     print()
+    verify_finite_same_point_spectral_size()
+    print()
+    verify_two_sided_whitening_ledger()
+    print()
     verify_generic_SPD_inverse_sqrt()
     print()
     verify_inverse_sqrt_closed_form()
@@ -577,6 +753,11 @@ def main():
     print("  - lem:Nm-removable-singularity: N_m(0) = J(m), entry by entry")
     print("  - cor:omega-coalescence: Omega_zeta_hat(0; m) = I_2")
     print("  - lem:whitening-loss: ||G^{-1/2}||_op ~ sqrt(pi / (2 q))")
+    print("  - lem:finite-same-point-spectral-size: lambda_min ~ 2q/pi,")
+    print("    lambda_max ~ q^3/(6 pi) (theta-derivative §2 asymptotics)")
+    print("  - lem:two-sided-whitening-ledger:")
+    print("      c (q_- q_+)^{-3/2} ||X||_op <= ||W(X)||_op <=")
+    print("      C (q_- q_+)^{-1/2} ||X||_op (verified at SPD test point)")
     print("  - generic SPD identity G^{-1/2} G G^{-1/2} = I_2 (a, b, d free)")
     print("  - independent route: G^{-1/2} via closed form vs diagonalization")
     print("=" * 70)

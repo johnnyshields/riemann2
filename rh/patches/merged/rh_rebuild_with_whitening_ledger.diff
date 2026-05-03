@@ -1,0 +1,206 @@
+--- rh_rebuild(10).tex
++++ rh_rebuild_with_whitening_ledger.tex
+@@ -1208,6 +1208,203 @@
+ \end{remark}
+ 
+ % =============================================================================
++% Patch: two-sided whitening ledger for §4
++%
++% Insert immediately after Remark~\ref{rem:whitening-loss-scope} in
++% §4 ``Finite-scale local blocks and whitening''.
++%
++% Purpose: Lemma~\ref{lem:whitening-loss} controls only upper-bound
++% amplification by same-point whitening.  The following ledger records the
++% lower-bound attenuation paid when a toy/source lower bound is first proved
++% in unwhitened coordinates and then transferred into the whitened coordinates.
++% =============================================================================
++
++\subsection{Two-sided whitening ledger}
++\label{subsec:two-sided-whitening-ledger}
++
++The one-sided estimate of Lemma~\ref{lem:whitening-loss} prevents
++same-point whitening from enlarging upper bounds.  Lower bounds require a
++separate ledger, because left and right multiplication by
++\(G_{m,\pm}^{-1/2}\) can attenuate a nonzero matrix.  Define the whitening
++map on \(2\times2\) real matrices by
++\begin{equation}
++\label{eq:whitening-map}
++        \mathsf W_{m,s}(X)
++        :=G_{m,-}(s)^{-1/2}\,X\,G_{m,+}(s)^{-1/2}.
++\end{equation}
++
++\begin{lemma}[Spectral size of the finite same-point blocks]
++\label{lem:finite-same-point-spectral-size}
++For \(\Ph_T=\theta\), uniformly for \((m,s)\in\mathcal D_T\),
++\begin{align}
++\label{eq:G-lambda-min-asymptotic}
++\lambda_{\min}\bigl(G_{m,\pm}(s)\bigr)
++&=\frac{2q(t_\pm)}{\pi}\,(1+o_T(1)),\\
++\label{eq:G-lambda-max-asymptotic}
++\lambda_{\max}\bigl(G_{m,\pm}(s)\bigr)
++&=\frac{q(t_\pm)^3}{6\pi}\,(1+o_T(1)).
++\end{align}
++Consequently, after increasing the global lower-height cutoff, there are
++absolute constants \(c,C>0\) such that, uniformly on \(\mathcal D_T\),
++\begin{equation}
++\label{eq:G-spectral-comparable}
++        c\,q(t_\pm)
++        \le \lambda_{\min}\bigl(G_{m,\pm}(s)\bigr)
++        \le C\,q(t_\pm),
++        \qquad
++        c\,q(t_\pm)^3
++        \le \lambda_{\max}\bigl(G_{m,\pm}(s)\bigr)
++        \le C\,q(t_\pm)^3.
++\end{equation}
++\end{lemma}
++
++\begin{proof}
++By Lemma~\ref{lem:finite-blocks-exact-interpretation},
++\(G_{m,\pm}(s)=J(t_\pm)\).  Since \((m,s)\in\mathcal D_T\), both
++\(t_\pm\in I_T\), and the theta derivative asymptotics of
++Lemma~\ref{lem:theta-derivative-asymptotics} are uniform at these two
++points.  The proof of Lemma~\ref{lem:same-point-gram-positivity} therefore
++applies uniformly with \(T\) replaced by any \(t\in I_T\), giving
++\eqref{eq:G-lambda-min-asymptotic}.
++
++For the largest eigenvalue, use
++\[
++        \lambda_{\max}(J(t))
++        =\Tr J(t)-\lambda_{\min}(J(t)).
++\]
++By \eqref{eq:J-trace-det}, uniformly for \(t\in I_T\),
++\[
++        \Tr J(t)
++        =\frac{2q(t)^3+24q(t)+q''(t)}{12\pi}
++        =\frac{q(t)^3}{6\pi}\,(1+o_T(1)),
++\]
++while \(\lambda_{\min}(J(t))=O(q(t))\).  Since \(q(t)\to\infty\)
++uniformly on \(I_T\), the trace term of size \(q(t)^3\) dominates,
++which gives \eqref{eq:G-lambda-max-asymptotic}.  The two-sided
++comparability bounds \eqref{eq:G-spectral-comparable} follow by enlarging
++the lower-height cutoff once more.
++\end{proof}
++
++\begin{lemma}[Two-sided whitening ledger]
++\label{lem:two-sided-whitening-ledger}
++For \(\Ph_T=\theta\), after increasing the global lower-height cutoff,
++there are absolute constants \(c,C>0\) such that for every
++\((m,s)\in\mathcal D_T\) and every real \(2\times2\) matrix \(X\),
++\begin{equation}
++\label{eq:two-sided-whitening-ledger}
++        c\,\bigl(q(t_-)q(t_+)\bigr)^{-3/2}\,
++        \|X\|_{\op}
++        \le
++        \|\mathsf W_{m,s}(X)\|_{\op}
++        \le
++        C\,\bigl(q(t_-)q(t_+)\bigr)^{-1/2}\,
++        \|X\|_{\op}.
++\end{equation}
++In particular, the lower-bound attenuation of two-sided whitening is at
++worst
++\begin{equation}
++\label{eq:two-sided-whitening-log-loss}
++        \bigl(q(t_-)q(t_+)\bigr)^{-3/2}
++        \asymp (\log T)^{-3}
++\end{equation}
++uniformly on \(\mathcal D_T\).
++\end{lemma}
++
++\begin{proof}
++Let
++\[
++        A=G_{m,-}(s)^{-1/2},\qquad B=G_{m,+}(s)^{-1/2}.
++\]
++The upper bound follows from submultiplicativity:
++\[
++        \|AXB\|_{\op}
++        \le \|A\|_{\op}\,\|X\|_{\op}\,\|B\|_{\op}
++        = \lambda_{\min}(G_{m,-})^{-1/2}
++          \lambda_{\min}(G_{m,+})^{-1/2}\,\|X\|_{\op}.
++\]
++Using the lower-eigenvalue estimate in
++Lemma~\ref{lem:finite-same-point-spectral-size} gives the right-hand
++inequality in \eqref{eq:two-sided-whitening-ledger}.
++
++For the lower bound, write
++\[
++        X=A^{-1}(AXB)B^{-1}.
++\]
++Therefore
++\[
++        \|X\|_{\op}
++        \le \|A^{-1}\|_{\op}\,\|AXB\|_{\op}\,\|B^{-1}\|_{\op}
++        =\lambda_{\max}(G_{m,-})^{1/2}
++         \lambda_{\max}(G_{m,+})^{1/2}\,\|AXB\|_{\op}.
++\]
++The upper-eigenvalue estimate in
++Lemma~\ref{lem:finite-same-point-spectral-size} gives
++\[
++        \|AXB\|_{\op}
++        \ge
++        c\,\bigl(q(t_-)q(t_+)\bigr)^{-3/2}\,
++        \|X\|_{\op},
++\]
++which is the left-hand inequality in
++\eqref{eq:two-sided-whitening-ledger}.  Finally,
++Lemma~\ref{lem:theta-derivative-asymptotics} gives
++\(q(t_\pm)\asymp\log T\) uniformly on \(I_T\), and hence
++\eqref{eq:two-sided-whitening-log-loss}.
++\end{proof}
++
++\begin{corollary}[Polynomial ledger form]
++\label{cor:two-sided-whitening-polynomial-ledger}
++Assume the packet scale has an upper phase-slope ledger
++\begin{equation}
++\label{eq:upper-phase-slope-ledger}
++        q(t)\le Q(T)^{C_q^+}
++        \qquad (t\in I_T)
++\end{equation}
++for some absolute exponent \(C_q^+\).  Then for all retained
++\((m,s)\in\mathcal D_T\) and all real \(2\times2\) matrices \(X\),
++\begin{equation}
++\label{eq:two-sided-whitening-Q-ledger}
++        \|\mathsf W_{m,s}(X)\|_{\op}
++        \ge
++        c\,Q(T)^{-3C_q^+}\,\|X\|_{\op},
++\end{equation}
++with an absolute constant \(c>0\).  Thus any pre-whitening lower bound
++\(\|X\|_{\op}\ge Q(T)^{-A}\) becomes the post-whitening lower bound
++\begin{equation}
++\label{eq:pre-to-post-whitening-lower-bound}
++        \|\mathsf W_{m,s}(X)\|_{\op}
++        \ge c\,Q(T)^{-(A+3C_q^+)}.
++\end{equation}
++\end{corollary}
++
++\begin{proof}
++Combine the lower bound in Lemma~\ref{lem:two-sided-whitening-ledger} with
++\eqref{eq:upper-phase-slope-ledger} at \(t_\pm\):
++\[
++        \bigl(q(t_-)q(t_+)\bigr)^{-3/2}
++        \ge Q(T)^{-3C_q^+}.
++\]
++This gives \eqref{eq:two-sided-whitening-Q-ledger}; applying it to a
++matrix satisfying \(\|X\|_{\op}\ge Q(T)^{-A}\) gives
++\eqref{eq:pre-to-post-whitening-lower-bound}.
++\end{proof}
++
++\begin{remark}[When the ledger is consumed]
++\label{rem:when-two-sided-whitening-ledger-is-consumed}
++Lemma~\ref{lem:two-sided-whitening-ledger} is needed only when a toy,
++source-side, or finite-algebraic lower bound is first proved in
++unwhitened coordinates and then transported through
++\(\mathsf W_{m,s}\).  If a visibility theorem is stated directly for the
++already whitened block \(\widehat\Om_\z\), then no additional whitening
++loss is charged.  The same caveat applies to any fixed finite-dimensional
++norm other than \(\|\cdot\|_{\op}\): because all norms on \(M_2(\mathbb R)\)
++are equivalent, the constants in the ledger change, but the powers of
++\(q(t_\pm)\), \(\log T\), and \(Q(T)\) do not.
++\end{remark}
++
++
++
++% =============================================================================
+ \section{Toy anomaly and transverse obstruction}
+ \label{sec:toy-anomaly-and-transverse-obstruction}
+ \statuspaper{LIVE}\quad

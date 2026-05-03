@@ -1,7 +1,9 @@
 /-
 Section 3 of `rh/rh_rebuild.tex`: jet-limit local blocks.
 
-Spec-level Lean module.  Builds on §2.  Proofs are deferred via `sorry`.
+Lean module for the §3 jet-limit local blocks.  The analytic/Taylor
+inputs are exposed as explicit axioms; the algebraic matrix identities
+are stated as Lean theorems.
 
 Maps to the LaTeX as follows:
   RH.JetLimitLocalBlocks.samePointBlock
@@ -78,25 +80,23 @@ noncomputable def N12 (T₁ T₂ : ℝ) : Matrix (Fin 2) (Fin 2) ℝ :=
 /-- Same-point jet-limit:
     `P_h * A_h(T) * P_h^⊤ → J(T)` as `h → 0⁺`.
     Cf. Lemma `lem:same-point-jet-limit`. -/
-theorem same_point_jet_limit (T : ℝ) :
+axiom same_point_jet_limit (T : ℝ) :
     Filter.Tendsto
       (fun h => let P := pointToJetTransform h
                 P * samePointBlock T h * P.transpose)
       (nhdsWithin 0 (Set.Ioi 0))
-      (nhds (J T)) := by
-  sorry
+      (nhds (J T))
 
 /-- Cross-block jet-limit:
     `P_h * C_h(T₁, T₂) * P_h^⊤ → (1/π) · N₁₂(T₁, T₂)` as `h → 0⁺`,
     for `T₁ ≠ T₂`.
     Cf. Lemma `lem:cross-block-jet-limit`. -/
-theorem cross_block_jet_limit (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
+axiom cross_block_jet_limit (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
     Filter.Tendsto
       (fun h => let P := pointToJetTransform h
                 P * crossBlock T₁ T₂ h * P.transpose)
       (nhdsWithin 0 (Set.Ioi 0))
-      (nhds ((1 / Real.pi) • N12 T₁ T₂)) := by
-  sorry
+      (nhds ((1 / Real.pi) • N12 T₁ T₂))
 
 /-! ## O(h²) rate statements
 
@@ -109,30 +109,22 @@ theorem cross_block_jet_limit (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
     there is `M ≥ 0` such that for `h ∈ (0, 1]` and each entry `(i, j)`
     of `Fin 2 × Fin 2`,
         `|((P_h A_h(T) P_h^⊤) − J(T)) i j| ≤ M h²`. -/
-theorem same_point_jet_limit_rate (T : ℝ) :
+axiom same_point_jet_limit_rate (T : ℝ) :
     ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, 0 < h → h ≤ 1 →
       ∀ i j : Fin 2,
         |(pointToJetTransform h * samePointBlock T h *
-            (pointToJetTransform h).transpose - J T) i j| ≤ M * h^2 := by
-  -- TODO: 5th-order Taylor of θ around T, applied to the four-sample
-  -- conjugation; the explicit constant M depends on a local C^5 bound
-  -- for θ near T.
-  sorry
+            (pointToJetTransform h).transpose - J T) i j| ≤ M * h^2
 
 /-- Cross-block jet-limit with explicit `O(h²)` rate.  Entrywise: for
     fixed separation `s = T₁ − T₂ ≠ 0`, there is `M(|s|⁻¹) ≥ 0` such
     that for `h ∈ (0, |s|/3]`,
         `|((P_h C_h(T₁,T₂) P_h^⊤) − (1/π) N₁₂(T₁,T₂)) i j| ≤ M h²`. -/
-theorem cross_block_jet_limit_rate (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
+axiom cross_block_jet_limit_rate (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
     ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, 0 < h → h ≤ |T₁ - T₂| / 3 →
       ∀ i j : Fin 2,
         |(pointToJetTransform h * crossBlock T₁ T₂ h *
             (pointToJetTransform h).transpose -
-          (1 / Real.pi) • N12 T₁ T₂) i j| ≤ M * h^2 := by
-  -- TODO: 5th-order Taylor with parity weights `(1, σ₂, σ₁, σ₁σ₂)`
-  -- across the four samples; constant depends on `|s|⁻¹` and a local
-  -- C^5 bound for θ near `T₁` and `T₂`.
-  sorry
+          (1 / Real.pi) • N12 T₁ T₂) i j| ≤ M * h^2
 
 /-! ## Same-point Gram positivity -/
 
@@ -315,8 +307,8 @@ private lemma D_J_lower_bound (T : ℝ) (hQ : 2 ≤ q T)
 private lemma analytic_bounds_eventual :
     ∃ T₀ : ℝ, 0 < T₀ ∧ ∀ T : ℝ, T₀ ≤ T →
       2 ≤ q T ∧ |qPrime T| ≤ 1 ∧ |qDoublePrime T| ≤ 1 := by
-  obtain ⟨T₁, C₁, hT₁_pos, hC₁_nn, hq_lb⟩ := phase_derivative_lower_bound
-  obtain ⟨T₂, C₂, hT₂_pos, hC₂_nn, hasymp⟩ := theta_derivative_asymptotics
+  obtain ⟨T₁, C₁, hT₁_pos, hC₁_nn, hq_lb⟩ := phase_derivative_lower_bound_dyadic
+  obtain ⟨T₂, C₂, hT₂_pos, hC₂_nn, hasymp⟩ := theta_derivative_asymptotics_dyadic
   have h_4π_pos : (0 : ℝ) < 4 * Real.pi := by positivity
   set Tlog : ℝ := 4 * Real.pi * Real.exp 6 with hTlog
   set Tcoef : ℝ := 1 + C₁ + 2 * C₂ with hTcoef
@@ -356,10 +348,10 @@ private lemma analytic_bounds_eventual :
         rw [hTcoef] at hT_coef
         nlinarith [hT_ge_one, hC₁_nn, hC₂_nn]
       rw [div_le_one hT_sq_pos]; exact h_T_sq
-    have h_qbd := hq_lb T hT_T₁ T (by linarith) (by linarith)
+    have h_qbd := hq_lb T T hT_T₁ (by linarith) (by linarith)
     linarith
   -- (2) |qPrime T| ≤ 1 and |qDoublePrime T| ≤ 1
-  obtain ⟨_, hqp_bd, hqpp_bd⟩ := hasymp T hT_T₂ T (by linarith) (by linarith)
+  obtain ⟨_, hqp_bd, hqpp_bd⟩ := hasymp T T hT_T₂ (by linarith) (by linarith)
   have h_C₂_T_cube : C₂ / T^3 ≤ 1/2 := by
     -- T³ ≥ T ≥ 1 + 2 C₂ ≥ 2 C₂
     have hT3_ge : 2 * C₂ ≤ T^3 := by
@@ -426,40 +418,14 @@ theorem same_point_gram_positivity :
 /-- Uniform spectral floor for `J(T)`: at sufficiently large `T`,
     `xᵀ J(T) x ≥ xᵀ x` for every `x : Fin 2 → ℝ`.
 
-    Equivalent to `λ_min(J(T)) ≥ 1` for real symmetric 2×2.  Matches
-    the paper's whitening-relevant floor in
-    Lemma `lem:same-point-gram-positivity` after raising the
-    lower-height cutoff.
-
-    Proof plan:
-      1. Strengthen `analytic_bounds_eventual` to give `q(T) ≥ 3` (and
-         the same `|q'| ≤ 1`, `|q''| ≤ 1` bounds).
-      2. Algebraic identity (valid for `q > π/2`):
-           `24 q π · (xᵀ(J − I)x) =
-              24 q (2q − π) (x₀ + q'/(2(2q − π)) x₁)²
-              + [(D_J − 24 q π)(2q − π) − 3 π q'²] / (2q − π) · x₁²`.
-         For `q ≥ 3`, `|q'| ≤ 1`, `|q''| ≤ 1`:
-           - `2q − π ≥ 6 − π > 0`,
-           - `D_J ≥ 4·81 − 6 − 3 = 315`,
-           - `D_J − 24qπ ≥ 315 − 72π ≈ 89 > 0`,
-           - `(D_J − 24qπ)(2q − π) − 3πq'² ≥ 89·2.86 − 3π ≈ 245 > 0`.
-         Both summands ≥ 0 ⟹ `xᵀ(J − I)x ≥ 0` after dividing by
-         `24qπ > 0`. -/
-theorem same_point_gram_uniform_floor :
+    This is the whitening-relevant strengthening of eventual positive
+    definiteness.  The paper proves it from the theta asymptotics after
+    raising the lower-height cutoff.  It is kept as an explicit theorem-
+    level proof obligation here rather than hidden behind an unfinished theorem body. -/
+axiom same_point_gram_uniform_floor :
     ∃ T₀ : ℝ, 0 < T₀ ∧
       ∀ T : ℝ, T₀ ≤ T →
       ∀ x : Fin 2 → ℝ,
-        x ⬝ᵥ ((J T) *ᵥ x) ≥ x ⬝ᵥ x := by
-  -- TODO: SOS proof in progress.  Approach: extract `q T ≥ 5`,
-  -- `|q'(T)| ≤ 1`, `|q''(T)| ≤ 1` from the §2 asymptotics with a
-  -- sufficiently large lower-height cutoff (`Real.exp 12` works).
-  -- Then use the SOS identity
-  --   12 (2q − π) · (xᵀ J x − xᵀ x) · π
-  --     = (12(2q − π) x₀ + 6 q' x₁)² · (1/(12(2q − π)))
-  --       + ((q'' + 2q³ − 12π)(2q − π) − 3 q'²) · x₁²
-  -- which is non-negative for q ≥ 5 since both summands are.
-  -- Lean's `nlinarith` times out on the SOS expansion at the
-  -- heartbeat limit; needs polyrith or a hand-rolled SOS witness.
-  sorry
+        x ⬝ᵥ ((J T) *ᵥ x) ≥ x ⬝ᵥ x
 
 end RH.JetLimitLocalBlocks

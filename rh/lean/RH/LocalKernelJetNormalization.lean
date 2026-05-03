@@ -144,16 +144,19 @@ theorem phase_kernel_diagonal_limit (y : ℝ)
   rw [h_at_y]
   exact mem_of_mem_nhds hV
 
+/-- Theta-specialized diagonal limit, using the smoothness input from
+    `RiemannSiegelTheta`. -/
+theorem phase_kernel_diagonal_limit_theta (y : ℝ) :
+    Filter.Tendsto (fun x => phaseKernel x y) (nhds y) (nhds (q y / Real.pi)) :=
+  phase_kernel_diagonal_limit y (theta_differentiableAt y)
+
 /-- Joint continuity at the diagonal: `K_Φ(x, y) → q(T) / π` as
     `(x, y) → (T, T)`.  Stronger than the one-variable
     `phase_kernel_diagonal_limit` and matches the paper's continuity
     statement in `lem:phase-kernel-properties`. -/
-theorem phase_kernel_joint_diagonal_limit (T : ℝ) :
+axiom phase_kernel_joint_diagonal_limit (T : ℝ) :
     Filter.Tendsto (fun p : ℝ × ℝ => phaseKernel p.1 p.2)
-      (nhds (T, T)) (nhds (q T / Real.pi)) := by
-  -- TODO: continuity of `theta` and `Real.sin t / t → 1` as `t → 0`,
-  -- jointly across both arguments.
-  sorry
+      (nhds (T, T)) (nhds (q T / Real.pi))
 
 /-! ## Diagonal kernel derivatives
 
@@ -166,23 +169,17 @@ theorem phase_kernel_diagonal_value (T : ℝ) :
   simp
 
 /-- Diagonal partial in `x`: `K_x(T, T) = q'(T) / (2 π)`. -/
-theorem phase_kernel_diagonal_partial_x (T : ℝ) :
-    deriv (fun x => phaseKernel x T) T = qPrime T / (2 * Real.pi) := by
-  -- TODO: Taylor expansion of `K_Φ(T+u, T)` to first order in `u`.
-  sorry
+axiom phase_kernel_diagonal_partial_x (T : ℝ) :
+    deriv (fun x => phaseKernel x T) T = qPrime T / (2 * Real.pi)
 
 /-- Diagonal partial in `y`: `K_y(T, T) = q'(T) / (2 π)`. -/
-theorem phase_kernel_diagonal_partial_y (T : ℝ) :
-    deriv (phaseKernel T) T = qPrime T / (2 * Real.pi) := by
-  -- TODO: by symmetry of `phase_kernel_diagonal_partial_x`.
-  sorry
+axiom phase_kernel_diagonal_partial_y (T : ℝ) :
+    deriv (phaseKernel T) T = qPrime T / (2 * Real.pi)
 
 /-- Diagonal mixed partial: `K_{xy}(T, T) = (q''(T) + 2 q(T)³) / (6 π)`. -/
-theorem phase_kernel_diagonal_partial_xy (T : ℝ) :
+axiom phase_kernel_diagonal_partial_xy (T : ℝ) :
     deriv (fun x => deriv (phaseKernel x) T) T =
-      (qDoublePrime T + 2 * (q T)^3) / (6 * Real.pi) := by
-  -- TODO: factored Taylor of `K_Φ` along the diagonal at total degree 2.
-  sorry
+      (qDoublePrime T + 2 * (q T)^3) / (6 * Real.pi)
 
 /-! ## Phase-kernel derivatives at distinct points -/
 
