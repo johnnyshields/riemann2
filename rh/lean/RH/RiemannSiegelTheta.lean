@@ -803,6 +803,79 @@ theorem sin_taylor_remainder_5 (u : ℝ) :
         ≤ 1 * |u|^6 := mul_le_mul_of_nonneg_right h_iter6_bound hpow_nn
       _ = |u|^6 / 720 * 720 := by ring
 
+/-- sin Taylor remainder at an arbitrary point `y` to order 2.
+
+    For any `y, u : ℝ`,
+        `|sin(y + u) − (sin y + cos y · u − sin y · u²/2)| ≤ |u|³/6`.
+
+    Proof: Apply Lagrange remainder for `Real.sin` on `uIcc y (y+u)`
+    with `n = 2`, then use `Real.abs_iteratedDeriv_sin_le_one`. -/
+theorem sin_taylor_at_cubic (y u : ℝ) :
+    |Real.sin (y + u) - (Real.sin y + Real.cos y * u - Real.sin y * u^2 / 2)| ≤ |u|^3 / 6 := by
+  by_cases hu : u = 0
+  · subst hu; simp
+  · have h_ne : y ≠ y + u := fun e => hu (by linarith)
+    have h_sin_C3_on : ContDiffOn ℝ 3 Real.sin (Set.uIcc y (y + u)) :=
+      Real.contDiff_sin.contDiffOn
+    obtain ⟨ξ, hξ_mem, hξ_eq⟩ :=
+      taylor_mean_remainder_lagrange_iteratedDeriv h_ne h_sin_C3_on
+    have h_min_lt_max : min y (y + u) < max y (y + u) := by
+      rcases lt_or_gt_of_ne hu with hlt | hgt
+      · have h1 : y + u < y := by linarith
+        rw [min_eq_right h1.le, max_eq_left h1.le]; exact h1
+      · have h1 : y < y + u := by linarith
+        rw [min_eq_left h1.le, max_eq_right h1.le]; exact h1
+    have h_unique : UniqueDiffOn ℝ (Set.uIcc y (y + u)) :=
+      uniqueDiffOn_Icc h_min_lt_max
+    have h_taylor_form : taylorWithinEval Real.sin 2 (Set.uIcc y (y + u)) y (y + u) =
+        Real.sin y + Real.cos y * u - Real.sin y * u^2 / 2 := by
+      rw [taylor_within_apply]
+      simp only [Finset.sum_range_succ, Finset.sum_range_zero, zero_add,
+                 add_sub_cancel_left, smul_eq_mul]
+      have hy_mem : y ∈ Set.uIcc y (y + u) := Set.left_mem_uIcc
+      have h_sin_C : ContDiffAt ℝ 3 Real.sin y := Real.contDiff_sin.contDiffAt
+      have h_iter1_func : iteratedDeriv 1 Real.sin = Real.cos := by
+        rw [iteratedDeriv_one, Real.deriv_sin]
+      have h_iter2_func : iteratedDeriv 2 Real.sin = -Real.sin := by
+        rw [show (2:ℕ) = 1 + 1 from rfl, iteratedDeriv_succ, h_iter1_func,
+            Real.deriv_cos']
+        funext x; simp [Pi.neg_apply]
+      have h_iter_eq : ∀ k ≤ 2,
+          iteratedDerivWithin k Real.sin (Set.uIcc y (y + u)) y =
+            iteratedDeriv k Real.sin y := by
+        intro k hk
+        exact iteratedDerivWithin_eq_iteratedDeriv h_unique
+            (h_sin_C.of_le (by exact_mod_cast (by omega : k ≤ 3))) hy_mem
+      have h0v : iteratedDeriv 0 Real.sin y = Real.sin y := by
+        rw [iteratedDeriv_zero]
+      have h1v : iteratedDeriv 1 Real.sin y = Real.cos y := by
+        rw [h_iter1_func]
+      have h2v : iteratedDeriv 2 Real.sin y = -Real.sin y := by
+        rw [h_iter2_func]; rfl
+      rw [h_iter_eq 0 (by norm_num), h_iter_eq 1 (by norm_num),
+          h_iter_eq 2 (by norm_num)]
+      rw [h0v, h1v, h2v]
+      simp [Nat.factorial]
+      ring
+    rw [h_taylor_form] at hξ_eq
+    have h_iter3_bound : |iteratedDeriv 3 Real.sin ξ| ≤ 1 :=
+      Real.abs_iteratedDeriv_sin_le_one 3 ξ
+    have h_h_eq : (y + u) - y = u := by ring
+    rw [h_h_eq] at hξ_eq
+    have h_eq : Real.sin (y + u) - (Real.sin y + Real.cos y * u - Real.sin y * u^2 / 2) =
+        iteratedDeriv 3 Real.sin ξ * u^3 / 6 := by
+      have h_fact : ((2 + 1).factorial : ℝ) = 6 := by simp [Nat.factorial]
+      have := hξ_eq
+      rw [h_fact] at this
+      exact this
+    rw [h_eq, abs_div, abs_mul, abs_pow]
+    have h_abs_6 : |(6 : ℝ)| = 6 := by norm_num
+    rw [h_abs_6, div_le_iff₀ (by norm_num : (0:ℝ) < 6)]
+    have hpow_nn : 0 ≤ |u|^3 := pow_nonneg (abs_nonneg _) 3
+    calc |iteratedDeriv 3 Real.sin ξ| * |u|^3
+        ≤ 1 * |u|^3 := mul_le_mul_of_nonneg_right h_iter3_bound hpow_nn
+      _ = |u|^3 / 6 * 6 := by ring
+
 /-- sin Taylor remainder at an arbitrary point `y` to order 1.
 
     For any `y, u : ℝ`,
