@@ -1006,15 +1006,204 @@ private lemma epsilon_pow_5_bound (T : ℝ) :
   have heq : (C * h)^5 = C^5 * h^5 := by ring
   linarith [h_abs_pow ▸ h_eps_pow_5, heq]
 
-/-- Bound on entry `(1, 1)` of `P_h A_h(T) P_h^⊤ − J(T)`.  Helpers
-    available: `q_sum_residual_bound`, `epsilon_residual_bound`,
-    `epsilon_abs_bound`, `epsilon_minus_2qTh_bound`,
-    `epsilon_cube_residual_bound`, `epsilon_pow_5_bound`,
-    `sin_taylor_remainder_5`. -/
-axiom rate_bound_11 (T : ℝ) :
+set_option maxHeartbeats 4000000 in
+/-- Bound on entry `(1, 1)` of `P_h A_h(T) P_h^⊤ − J(T)` is `O(h²)`. -/
+theorem rate_bound_11 (T : ℝ) :
     ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, 0 < h → h ≤ 1 →
       |(pointToJetTransform h * samePointBlock T h *
-          (pointToJetTransform h).transpose - J T) 1 1| ≤ M * h^2
+          (pointToJetTransform h).transpose - J T) 1 1| ≤ M * h^2 := by
+  obtain ⟨K_q, hK_q_nn, hK_q⟩ := q_sum_residual_bound T
+  obtain ⟨K_ε, hK_ε_nn, hK_ε⟩ := epsilon_residual_bound T
+  obtain ⟨C, hC_nn, hC⟩ := epsilon_abs_bound T
+  obtain ⟨E, hE_nn, hE⟩ := epsilon_cube_residual_bound T
+  obtain ⟨F, hF_nn, hF⟩ := epsilon_pow_5_bound T
+  obtain ⟨_, _, _, hJ_11⟩ := J_apply T
+  set M_total : ℝ :=
+    |iteratedDeriv 5 theta T|/20 + 3 * K_ε + E/2 + F/40 + C^6/240 + 3 * K_q
+    with hM_total_def
+  set M_11 : ℝ := M_total / (24 * Real.pi) with hM_11_def
+  have hπ_pos : 0 < Real.pi := Real.pi_pos
+  have hM_total_nn : 0 ≤ M_total := by
+    have := abs_nonneg (iteratedDeriv 5 theta T)
+    rw [hM_total_def]; positivity
+  refine ⟨M_11, by rw [hM_11_def]; positivity, ?_⟩
+  intro h h_pos h_le
+  have hh_ne : h ≠ 0 := h_pos.ne'
+  have hh_nn : 0 ≤ h := le_of_lt h_pos
+  have hπ_ne : Real.pi ≠ 0 := hπ_pos.ne'
+  have h_h_le_1 := h_le
+  have h_h2_le_1 : h^2 ≤ 1 := by nlinarith
+  have h_h_pow_nn : ∀ k : ℕ, 0 ≤ h^k := fun k => pow_nonneg hh_nn k
+  have h_h6_le_h5 : h^6 ≤ h^5 := by
+    have : h^6 = h^5 * h := by ring
+    rw [this]
+    have := mul_le_mul_of_nonneg_left h_le (h_h_pow_nn 5)
+    linarith
+  -- Compute the entry.
+  rw [Matrix.sub_apply, jet_matrix_apply_11 T h h_pos, hJ_11]
+  set ε : ℝ := theta (T + h) - theta (T - h) with hε_def
+  set d_5 : ℝ := iteratedDeriv 5 theta T with hd_5_def
+  -- Reformulate as numerator/(24πh^3).
+  rw [show (q (T - h) + q (T + h)) / (8 * Real.pi * h^2) -
+      Real.sin (theta (T + h) - theta (T - h)) / (8 * Real.pi * h^3) -
+      (qDoublePrime T + 2 * (q T)^3) / (12 * Real.pi) =
+      (3 * h * (q (T - h) + q (T + h)) - 3 * Real.sin ε -
+        2 * (qDoublePrime T + 2 * (q T)^3) * h^3) / (24 * Real.pi * h^3) from by
+    rw [show ε = theta (T + h) - theta (T - h) from rfl]
+    field_simp
+    ring]
+  rw [abs_div, abs_of_pos (by positivity : 0 < 24 * Real.pi * h^3),
+      div_le_iff₀ (by positivity : 0 < 24 * Real.pi * h^3)]
+  -- Goal: |numerator| ≤ M_11 * h^2 * (24 π h^3) = M_total h^5.
+  -- Key algebraic identity (verified by hand earlier).
+  have h_alg : 3 * h * (q (T - h) + q (T + h)) - 3 * Real.sin ε -
+      2 * (qDoublePrime T + 2 * (q T)^3) * h^3 =
+    -d_5 * h^5/20 +
+      -3 * (ε - 2 * q T * h - qDoublePrime T * h^3/3 - d_5 * h^5/60) +
+    (ε^3 - 8 * (q T)^3 * h^3)/2 + -ε^5/40 +
+      -3 * (Real.sin ε - (ε - ε^3/6 + ε^5/120)) +
+    3 * h * (q (T - h) + q (T + h) - 2 * q T - qDoublePrime T * h^2) := by
+    rw [hd_5_def]
+    ring
+  rw [h_alg]
+  -- Bounds on the six terms.
+  have h_q_sum := hK_q h h_pos h_le
+  have h_ε_res := hK_ε h h_pos h_le
+  have h_ε_abs := hC h h_pos h_le
+  have h_eps_cube := hE h h_pos h_le
+  have h_eps_pow_5 := hF h h_pos h_le
+  have h_sin5 := sin_taylor_remainder_5 ε
+  -- |d_5 h^5/20| = |d_5| h^5/20.
+  have h_term1 : |(-d_5) * h^5/20| ≤ |iteratedDeriv 5 theta T| / 20 * h^5 := by
+    rw [show (-d_5) * h^5/20 = (-d_5) * h^5 * (1/20) from by ring]
+    rw [abs_mul, abs_mul, abs_of_pos (pow_pos h_pos 5)]
+    rw [show |(1/20:ℝ)| = 1/20 from abs_of_pos (by norm_num)]
+    rw [abs_neg]
+    rw [hd_5_def]
+    have : |iteratedDeriv 5 theta T| * h^5 * (1/20) = |iteratedDeriv 5 theta T| / 20 * h^5 := by
+      ring
+    linarith [le_refl (|iteratedDeriv 5 theta T| * h^5 * (1/20))]
+  -- |3 R_ε| ≤ 3 K_ε h^6 ≤ 3 K_ε h^5.
+  have h_term2 : |(-3) * (ε - 2 * q T * h - qDoublePrime T * h^3/3 -
+      d_5 * h^5/60)| ≤ 3 * K_ε * h^5 := by
+    rw [hd_5_def, hε_def] at *
+    rw [abs_mul, abs_neg, show |(3:ℝ)| = 3 from by norm_num]
+    have hres : |theta (T + h) - theta (T - h) - 2 * q T * h - qDoublePrime T * h^3/3 -
+        iteratedDeriv 5 theta T * h^5/60| ≤ K_ε * h^6 := h_ε_res
+    have : 3 * |theta (T + h) - theta (T - h) - 2 * q T * h - qDoublePrime T * h^3/3 -
+        iteratedDeriv 5 theta T * h^5/60| ≤ 3 * (K_ε * h^6) := by linarith
+    have h6le5 : 3 * (K_ε * h^6) ≤ 3 * K_ε * h^5 := by
+      have h6 : K_ε * h^6 ≤ K_ε * h^5 := by nlinarith [hK_ε_nn]
+      linarith
+    linarith
+  -- |(ε^3 - 8 qT^3 h^3)/2| ≤ E h^5/2.
+  have h_term3 : |(ε^3 - 8 * (q T)^3 * h^3)/2| ≤ E/2 * h^5 := by
+    rw [show (ε^3 - 8 * (q T)^3 * h^3) / 2 = (ε^3 - 8 * (q T)^3 * h^3) * (1/2) from by ring]
+    rw [abs_mul, show |(1/2:ℝ)| = 1/2 from abs_of_pos (by norm_num)]
+    have heq : ε^3 = (theta (T + h) - theta (T - h))^3 := by rw [hε_def]
+    have h_cube_bd : |(theta (T + h) - theta (T - h))^3 - 8 * (q T)^3 * h^3| ≤ E * h^5 :=
+      h_eps_cube
+    rw [heq]
+    nlinarith
+  -- |ε^5/40| ≤ F h^5/40.
+  have h_term4 : |(-ε^5)/40| ≤ F/40 * h^5 := by
+    rw [show (-ε^5)/40 = (-ε^5) * (1/40) from by ring]
+    rw [abs_mul, show |(1/40:ℝ)| = 1/40 from abs_of_pos (by norm_num)]
+    rw [abs_neg]
+    have heq : ε^5 = (theta (T + h) - theta (T - h))^5 := by rw [hε_def]
+    rw [heq]
+    have hbd : |(theta (T + h) - theta (T - h))^5| ≤ F * h^5 := h_eps_pow_5
+    nlinarith
+  -- |3 S_sin| ≤ 3 |ε|^6/720 ≤ C^6 h^6/240 ≤ C^6 h^5/240.
+  have h_term5 : |(-3) * (Real.sin ε - (ε - ε^3/6 + ε^5/120))| ≤ C^6/240 * h^5 := by
+    rw [abs_mul, abs_neg, show |(3:ℝ)| = 3 from by norm_num]
+    have h_sin_bd : |Real.sin ε - (ε - ε^3/6 + ε^5/120)| ≤ |ε|^6/720 := h_sin5
+    have h_eps_pow6_bd : |ε|^6 ≤ C^6 * h^6 := by
+      have h_eps_le : |ε| ≤ C * h := by rw [hε_def]; exact h_ε_abs
+      have h_eps_nn : 0 ≤ |ε| := abs_nonneg _
+      have h_pow := pow_le_pow_left₀ h_eps_nn h_eps_le 6
+      have hCh : (C * h)^6 = C^6 * h^6 := by ring
+      linarith
+    have h_eps_pow6_h5 : C^6 * h^6 ≤ C^6 * h^5 := by
+      have hC6_nn : 0 ≤ C^6 := pow_nonneg hC_nn 6
+      nlinarith
+    -- Combine: 3 |sin - poly| ≤ 3 * (|ε|^6/720) ≤ 3 * (C^6 h^6/720) = C^6 h^6/240 ≤ C^6 h^5/240.
+    have h_step1 : 3 * |Real.sin ε - (ε - ε^3/6 + ε^5/120)| ≤ 3 * |ε|^6/720 := by
+      linarith
+    have h_step2 : 3 * |ε|^6 ≤ 3 * (C^6 * h^6) := by
+      have := abs_nonneg ε
+      nlinarith
+    have h_step3 : 3 * (C^6 * h^6)/720 ≤ C^6/240 * h^5 := by
+      have heq : 3 * (C^6 * h^6)/720 = C^6 * h^6 / 240 := by ring
+      have hC6_nn : 0 ≤ C^6 := pow_nonneg hC_nn 6
+      have h6le5 : C^6 * h^6 ≤ C^6 * h^5 := by nlinarith
+      have : C^6 * h^6 / 240 ≤ C^6 * h^5 / 240 := by linarith
+      have heq2 : C^6 * h^5 / 240 = C^6/240 * h^5 := by ring
+      linarith
+    linarith
+  -- |3 h R_q| ≤ 3 K_q h^5 (R_q has |R_q| ≤ K_q h^4).
+  have h_term6 : |3 * h * (q (T - h) + q (T + h) - 2 * q T - qDoublePrime T * h^2)| ≤
+      3 * K_q * h^5 := by
+    rw [show (3:ℝ) * h * (q (T - h) + q (T + h) - 2 * q T - qDoublePrime T * h^2) =
+        3 * h * (q (T - h) + q (T + h) - 2 * q T - qDoublePrime T * h^2) from rfl]
+    rw [abs_mul, abs_mul, show |(3:ℝ)| = 3 from by norm_num, abs_of_pos h_pos]
+    have hres : |q (T + h) + q (T - h) - 2 * q T - qDoublePrime T * h^2| ≤ K_q * h^4 := h_q_sum
+    have hreord : q (T + h) + q (T - h) - 2 * q T - qDoublePrime T * h^2 =
+        q (T - h) + q (T + h) - 2 * q T - qDoublePrime T * h^2 := by ring
+    rw [hreord] at hres
+    have : 3 * h * |q (T - h) + q (T + h) - 2 * q T - qDoublePrime T * h^2| ≤
+        3 * h * (K_q * h^4) := by
+      have : 0 ≤ 3 * h := by positivity
+      nlinarith
+    have heq : 3 * h * (K_q * h^4) = 3 * K_q * h^5 := by ring
+    linarith
+  -- Combine all terms.
+  have htri := abs_add_le
+    ((-d_5) * h^5/20 +
+     ((-3) * (ε - 2 * q T * h - qDoublePrime T * h^3/3 - d_5 * h^5/60)) +
+     ((ε^3 - 8 * (q T)^3 * h^3)/2) +
+     ((-ε^5)/40) +
+     ((-3) * (Real.sin ε - (ε - ε^3/6 + ε^5/120))))
+    (3 * h * (q (T - h) + q (T + h) - 2 * q T - qDoublePrime T * h^2))
+  -- Repeated triangle:
+  have htri2 := abs_add_le
+    ((-d_5) * h^5/20 +
+     ((-3) * (ε - 2 * q T * h - qDoublePrime T * h^3/3 - d_5 * h^5/60)) +
+     ((ε^3 - 8 * (q T)^3 * h^3)/2) +
+     ((-ε^5)/40))
+    ((-3) * (Real.sin ε - (ε - ε^3/6 + ε^5/120)))
+  have htri3 := abs_add_le
+    ((-d_5) * h^5/20 +
+     ((-3) * (ε - 2 * q T * h - qDoublePrime T * h^3/3 - d_5 * h^5/60)) +
+     ((ε^3 - 8 * (q T)^3 * h^3)/2))
+    ((-ε^5)/40)
+  have htri4 := abs_add_le
+    ((-d_5) * h^5/20 +
+     ((-3) * (ε - 2 * q T * h - qDoublePrime T * h^3/3 - d_5 * h^5/60)))
+    ((ε^3 - 8 * (q T)^3 * h^3)/2)
+  have htri5 := abs_add_le
+    ((-d_5) * h^5/20)
+    ((-3) * (ε - 2 * q T * h - qDoublePrime T * h^3/3 - d_5 * h^5/60))
+  rw [hM_11_def]
+  rw [hM_total_def]
+  -- The big inequality.
+  have h_full : |((-d_5) * h^5/20 +
+      ((-3) * (ε - 2 * q T * h - qDoublePrime T * h^3/3 - d_5 * h^5/60)) +
+      ((ε^3 - 8 * (q T)^3 * h^3)/2) +
+      ((-ε^5)/40) +
+      ((-3) * (Real.sin ε - (ε - ε^3/6 + ε^5/120)))) +
+      3 * h * (q (T - h) + q (T + h) - 2 * q T - qDoublePrime T * h^2)| ≤
+      (|iteratedDeriv 5 theta T|/20 + 3 * K_ε + E/2 + F/40 + C^6/240 + 3 * K_q) * h^5 := by
+    linarith
+  -- Goal RHS: M_total / (24 π) * h^2 * (24 π h^3) = M_total * h^5.
+  have h_rhs : (|iteratedDeriv 5 theta T| / 20 + 3 * K_ε + E / 2 + F / 40 + C ^ 6 / 240 +
+      3 * K_q) /
+        (24 * Real.pi) * h^2 * (24 * Real.pi * h^3) =
+      (|iteratedDeriv 5 theta T| / 20 + 3 * K_ε + E / 2 + F / 40 + C ^ 6 / 240 +
+      3 * K_q) * h ^ 5 := by
+    field_simp
+  rw [h_rhs]
+  linarith [h_full]
 
 /-- Same-point jet-limit with explicit `O(h²)` rate.  Entrywise:
     for `h ∈ (0, 1]` and each entry `(i, j)` of `Fin 2 × Fin 2`,
