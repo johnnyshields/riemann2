@@ -717,16 +717,109 @@ private lemma epsilon_residual_bound (T : ℝ) :
     exact this
   linarith
 
+/-- |ε| ≤ C h on the unit interval, where ε := θ(T+h) - θ(T-h). -/
+private lemma epsilon_abs_bound (T : ℝ) :
+    ∃ C : ℝ, 0 ≤ C ∧ ∀ h : ℝ, 0 < h → h ≤ 1 →
+      |theta (T + h) - theta (T - h)| ≤ C * h := by
+  obtain ⟨K_ε, hK_ε_nn, hK_ε⟩ := epsilon_residual_bound T
+  set C : ℝ := 2 * |q T| + |qDoublePrime T|/3 + |iteratedDeriv 5 theta T|/60 + K_ε
+    with hC_def
+  have hC_nn : 0 ≤ C := by
+    have := abs_nonneg (q T); have := abs_nonneg (qDoublePrime T)
+    have := abs_nonneg (iteratedDeriv 5 theta T)
+    rw [hC_def]; linarith
+  refine ⟨C, hC_nn, ?_⟩
+  intro h h_pos h_le
+  have h_h_nn : 0 ≤ h := le_of_lt h_pos
+  have h_h2_le_1 : h^2 ≤ 1 := by nlinarith
+  have h_h3_le_h : h^3 ≤ h := by
+    have heq : h^3 = h * h^2 := by ring
+    rw [heq]
+    have := mul_le_mul_of_nonneg_left h_h2_le_1 h_h_nn
+    linarith
+  have h_h5_le_h : h^5 ≤ h := by
+    have heq : h^5 = h * h^4 := by ring
+    rw [heq]
+    have h_h4_le_1 : h^4 ≤ 1 := by nlinarith
+    have := mul_le_mul_of_nonneg_left h_h4_le_1 h_h_nn
+    linarith
+  have h_h6_le_h : h^6 ≤ h := by
+    have heq : h^6 = h * h^5 := by ring
+    rw [heq]
+    have h_h5_le_1 : h^5 ≤ 1 := by nlinarith
+    have := mul_le_mul_of_nonneg_left h_h5_le_1 h_h_nn
+    linarith
+  have hε_res := hK_ε h h_pos h_le
+  have heq : theta (T + h) - theta (T - h) =
+      (theta (T + h) - theta (T - h) - 2 * q T * h - qDoublePrime T * h^3/3 -
+        iteratedDeriv 5 theta T * h^5/60) +
+      (2 * q T * h + qDoublePrime T * h^3/3 + iteratedDeriv 5 theta T * h^5/60) := by
+    ring
+  rw [heq]
+  have htri := abs_add_le
+    (theta (T + h) - theta (T - h) - 2 * q T * h - qDoublePrime T * h^3/3 -
+      iteratedDeriv 5 theta T * h^5/60)
+    (2 * q T * h + qDoublePrime T * h^3/3 + iteratedDeriv 5 theta T * h^5/60)
+  -- Spart parses as ((2 qT h) + qD h^3/3) + d_5 h^5/60 (left-assoc).
+  -- |Spart| ≤ |(2 qT h) + qD h^3/3| + |d_5 h^5/60| ≤ |2 qT h| + |qD h^3/3| + |d_5 h^5/60|.
+  have h_tri2 := abs_add_le (2 * q T * h + qDoublePrime T * h^3/3)
+    (iteratedDeriv 5 theta T * h^5/60)
+  have h_tri3 := abs_add_le (2 * q T * h) (qDoublePrime T * h^3/3)
+  have h_abs_2qTh : |2 * q T * h| = 2 * |q T| * h := by
+    rw [abs_mul, abs_mul]
+    rw [show |(2:ℝ)| = 2 from by norm_num, abs_of_pos h_pos]
+  have h_abs_qDh3 : |qDoublePrime T * h^3 / 3| = |qDoublePrime T| * h^3 / 3 := by
+    rw [show qDoublePrime T * h^3 / 3 = qDoublePrime T * h^3 * (1/3) from by ring]
+    rw [abs_mul, abs_mul]
+    rw [abs_of_pos (by positivity : (0:ℝ) < h^3)]
+    rw [show |(1/3 : ℝ)| = 1/3 from abs_of_pos (by norm_num)]
+    ring
+  have h_abs_d5h5 : |iteratedDeriv 5 theta T * h^5 / 60| =
+      |iteratedDeriv 5 theta T| * h^5 / 60 := by
+    rw [show iteratedDeriv 5 theta T * h^5 / 60 =
+        iteratedDeriv 5 theta T * h^5 * (1/60) from by ring]
+    rw [abs_mul, abs_mul]
+    rw [abs_of_pos (by positivity : (0:ℝ) < h^5)]
+    rw [show |(1/60 : ℝ)| = 1/60 from abs_of_pos (by norm_num)]
+    ring
+  -- bounds for the polynomial pieces
+  have b_qD : |qDoublePrime T| * h^3 ≤ |qDoublePrime T| * h := by
+    have := abs_nonneg (qDoublePrime T)
+    nlinarith
+  have b_d5 : |iteratedDeriv 5 theta T| * h^5 ≤ |iteratedDeriv 5 theta T| * h := by
+    have := abs_nonneg (iteratedDeriv 5 theta T)
+    nlinarith
+  have b_Kε : K_ε * h^6 ≤ K_ε * h := by nlinarith
+  rw [hC_def]
+  -- Set up shorthand.
+  set R : ℝ := theta (T + h) - theta (T - h) - 2 * q T * h - qDoublePrime T * h^3/3 -
+    iteratedDeriv 5 theta T * h^5/60
+  set Spart : ℝ := 2 * q T * h + qDoublePrime T * h^3/3 + iteratedDeriv 5 theta T * h^5/60
+  -- htri form: |R + S| ≤ |R| + |S|.
+  -- Derivative bounds.
+  have h_qD_h3_le_h : |qDoublePrime T| * h^3 ≤ |qDoublePrime T| * h := b_qD
+  have h_d5_h5_le_h : |iteratedDeriv 5 theta T| * h^5 ≤
+      |iteratedDeriv 5 theta T| * h := b_d5
+  -- Chain step by step:
+  calc |R + Spart|
+      ≤ |R| + |Spart| := htri
+    _ ≤ K_ε * h^6 + |Spart| := by linarith
+    _ ≤ K_ε * h^6 + (|2 * q T * h + qDoublePrime T * h^3/3| +
+        |iteratedDeriv 5 theta T * h^5/60|) := by linarith
+    _ ≤ K_ε * h^6 + (|2 * q T * h| + |qDoublePrime T * h^3/3| +
+        |iteratedDeriv 5 theta T * h^5/60|) := by linarith
+    _ = K_ε * h^6 + (2 * |q T| * h + |qDoublePrime T| * h^3 / 3 +
+        |iteratedDeriv 5 theta T| * h^5 / 60) := by
+          rw [h_abs_2qTh, h_abs_qDh3, h_abs_d5h5]
+    _ ≤ K_ε * h + (2 * |q T| * h + |qDoublePrime T| / 3 * h +
+        |iteratedDeriv 5 theta T| / 60 * h) := by linarith
+    _ = (2 * |q T| + |qDoublePrime T|/3 + |iteratedDeriv 5 theta T|/60 + K_ε) * h := by
+          ring
+
 /-- Bound on entry `(1, 1)` of `P_h A_h(T) P_h^⊤ − J(T)`.  The full
     proof requires order-5 Taylor expansion with explicit `ε^3` and `ε^5`
     cross-term bounds (~400 lines).  All necessary infrastructure helpers
-    (`q_taylor_remainder_3`, `theta_taylor_remainder_5`,
-    `sin_taylor_remainder_5`, the matrix-entry computations,
-    `q_sum_residual_bound`, `epsilon_residual_bound`) are in place;
-    combining them is mechanical but extensive.
-
-    Stated as an axiom for now.  Will be promoted to a theorem once the
-    matrix-Taylor combination is filled in. -/
+    are in place. -/
 axiom rate_bound_11 (T : ℝ) :
     ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, 0 < h → h ≤ 1 →
       |(pointToJetTransform h * samePointBlock T h *
