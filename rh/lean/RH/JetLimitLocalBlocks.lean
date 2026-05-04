@@ -1343,6 +1343,76 @@ private lemma crossBlock_apply (T₁ T₂ h : ℝ) (hT : T₁ ≠ T₂)
   refine ⟨?_, ?_, ?_, ?_⟩
   all_goals (unfold crossBlock; simp [h_pK_00, h_pK_01, h_pK_10, h_pK_11])
 
+/-- Matrix entry `(0, 0)` of `P_h · C(T₁, T₂; h) · P_h^⊤`. -/
+private lemma jet_cross_matrix_apply_00 (T₁ T₂ h : ℝ) (hT : T₁ ≠ T₂)
+    (h_pos : 0 < h) (h_le : h ≤ |T₁ - T₂| / 3) :
+    (pointToJetTransform h * crossBlock T₁ T₂ h *
+      (pointToJetTransform h).transpose) 0 0 =
+    (crossBlock T₁ T₂ h 0 0 + crossBlock T₁ T₂ h 0 1 +
+     crossBlock T₁ T₂ h 1 0 + crossBlock T₁ T₂ h 1 1) / 2 := by
+  have ⟨h_M_00, h_M_01, h_M_10, h_M_11⟩ := jetMatrixBare_apply h
+  rw [pointToJetTransform_mul_eq]
+  rw [Matrix.smul_apply, smul_eq_mul]
+  rw [Matrix.mul_apply, Fin.sum_univ_two,
+      Matrix.mul_apply, Matrix.mul_apply, Fin.sum_univ_two, Fin.sum_univ_two,
+      Matrix.transpose_apply, Matrix.transpose_apply]
+  rw [h_M_00, h_M_01]
+  ring
+
+/-- Matrix entry `(0, 1)` of `P_h · C(T₁, T₂; h) · P_h^⊤`. -/
+private lemma jet_cross_matrix_apply_01 (T₁ T₂ h : ℝ) (hT : T₁ ≠ T₂)
+    (h_pos : 0 < h) (h_le : h ≤ |T₁ - T₂| / 3) :
+    (pointToJetTransform h * crossBlock T₁ T₂ h *
+      (pointToJetTransform h).transpose) 0 1 =
+    (-crossBlock T₁ T₂ h 0 0 + crossBlock T₁ T₂ h 0 1 -
+     crossBlock T₁ T₂ h 1 0 + crossBlock T₁ T₂ h 1 1) / (4 * h) := by
+  have ⟨h_M_00, h_M_01, h_M_10, h_M_11⟩ := jetMatrixBare_apply h
+  have hh_ne : h ≠ 0 := h_pos.ne'
+  rw [pointToJetTransform_mul_eq]
+  rw [Matrix.smul_apply, smul_eq_mul]
+  rw [Matrix.mul_apply, Fin.sum_univ_two,
+      Matrix.mul_apply, Matrix.mul_apply, Fin.sum_univ_two, Fin.sum_univ_two,
+      Matrix.transpose_apply, Matrix.transpose_apply]
+  rw [h_M_00, h_M_01, h_M_10, h_M_11]
+  field_simp
+  ring
+
+/-- Matrix entry `(1, 0)` of `P_h · C(T₁, T₂; h) · P_h^⊤`. -/
+private lemma jet_cross_matrix_apply_10 (T₁ T₂ h : ℝ) (hT : T₁ ≠ T₂)
+    (h_pos : 0 < h) (h_le : h ≤ |T₁ - T₂| / 3) :
+    (pointToJetTransform h * crossBlock T₁ T₂ h *
+      (pointToJetTransform h).transpose) 1 0 =
+    (-crossBlock T₁ T₂ h 0 0 - crossBlock T₁ T₂ h 0 1 +
+     crossBlock T₁ T₂ h 1 0 + crossBlock T₁ T₂ h 1 1) / (4 * h) := by
+  have ⟨h_M_00, h_M_01, h_M_10, h_M_11⟩ := jetMatrixBare_apply h
+  have hh_ne : h ≠ 0 := h_pos.ne'
+  rw [pointToJetTransform_mul_eq]
+  rw [Matrix.smul_apply, smul_eq_mul]
+  rw [Matrix.mul_apply, Fin.sum_univ_two,
+      Matrix.mul_apply, Matrix.mul_apply, Fin.sum_univ_two, Fin.sum_univ_two,
+      Matrix.transpose_apply, Matrix.transpose_apply]
+  rw [h_M_00, h_M_01, h_M_10, h_M_11]
+  field_simp
+  ring
+
+/-- Matrix entry `(1, 1)` of `P_h · C(T₁, T₂; h) · P_h^⊤`. -/
+private lemma jet_cross_matrix_apply_11 (T₁ T₂ h : ℝ) (hT : T₁ ≠ T₂)
+    (h_pos : 0 < h) (h_le : h ≤ |T₁ - T₂| / 3) :
+    (pointToJetTransform h * crossBlock T₁ T₂ h *
+      (pointToJetTransform h).transpose) 1 1 =
+    (crossBlock T₁ T₂ h 0 0 - crossBlock T₁ T₂ h 0 1 -
+     crossBlock T₁ T₂ h 1 0 + crossBlock T₁ T₂ h 1 1) / (8 * h^2) := by
+  have ⟨h_M_00, h_M_01, h_M_10, h_M_11⟩ := jetMatrixBare_apply h
+  have hh_ne : h ≠ 0 := h_pos.ne'
+  rw [pointToJetTransform_mul_eq]
+  rw [Matrix.smul_apply, smul_eq_mul]
+  rw [Matrix.mul_apply, Fin.sum_univ_two,
+      Matrix.mul_apply, Matrix.mul_apply, Fin.sum_univ_two, Fin.sum_univ_two,
+      Matrix.transpose_apply, Matrix.transpose_apply]
+  rw [h_M_10, h_M_11]
+  field_simp
+  ring
+
 /-- Cross-block jet-limit with explicit `O(h²)` rate.  Entrywise: for
     fixed separation `s = T₁ − T₂ ≠ 0`, there is `M(|s|⁻¹) ≥ 0` such
     that for `h ∈ (0, |s|/3]`,
