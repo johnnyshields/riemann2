@@ -816,6 +816,71 @@ private lemma epsilon_abs_bound (T : ℝ) :
     _ = (2 * |q T| + |qDoublePrime T|/3 + |iteratedDeriv 5 theta T|/60 + K_ε) * h := by
           ring
 
+/-- |ε - 2 qT h| ≤ D h^3 on the unit interval. -/
+private lemma epsilon_minus_2qTh_bound (T : ℝ) :
+    ∃ D : ℝ, 0 ≤ D ∧ ∀ h : ℝ, 0 < h → h ≤ 1 →
+      |theta (T + h) - theta (T - h) - 2 * q T * h| ≤ D * h^3 := by
+  obtain ⟨K_ε, hK_ε_nn, hK_ε⟩ := epsilon_residual_bound T
+  set D : ℝ := |qDoublePrime T|/3 + |iteratedDeriv 5 theta T|/60 + K_ε with hD_def
+  have hD_nn : 0 ≤ D := by
+    have := abs_nonneg (qDoublePrime T)
+    have := abs_nonneg (iteratedDeriv 5 theta T)
+    rw [hD_def]; linarith
+  refine ⟨D, hD_nn, ?_⟩
+  intro h h_pos h_le
+  have h_h_nn : 0 ≤ h := le_of_lt h_pos
+  have h_h2_le_1 : h^2 ≤ 1 := by nlinarith
+  have h_h3_nn : 0 ≤ h^3 := by positivity
+  have h_h5_le_h3 : h^5 ≤ h^3 := by
+    have heq : h^5 = h^3 * h^2 := by ring
+    rw [heq]
+    nlinarith
+  have h_h6_le_h3 : h^6 ≤ h^3 := by
+    have heq : h^6 = h^3 * h^3 := by ring
+    rw [heq]
+    have h_h3_le_1 : h^3 ≤ 1 := by nlinarith
+    nlinarith
+  have hε_res := hK_ε h h_pos h_le
+  have heq : theta (T + h) - theta (T - h) - 2 * q T * h =
+      (theta (T + h) - theta (T - h) - 2 * q T * h - qDoublePrime T * h^3/3 -
+        iteratedDeriv 5 theta T * h^5/60) +
+      (qDoublePrime T * h^3/3 + iteratedDeriv 5 theta T * h^5/60) := by ring
+  rw [heq]
+  have htri := abs_add_le
+    (theta (T + h) - theta (T - h) - 2 * q T * h - qDoublePrime T * h^3/3 -
+      iteratedDeriv 5 theta T * h^5/60)
+    (qDoublePrime T * h^3/3 + iteratedDeriv 5 theta T * h^5/60)
+  have h_tri2 := abs_add_le (qDoublePrime T * h^3/3) (iteratedDeriv 5 theta T * h^5/60)
+  have h_abs_qDh3 : |qDoublePrime T * h^3 / 3| = |qDoublePrime T| * h^3 / 3 := by
+    rw [show qDoublePrime T * h^3 / 3 = qDoublePrime T * h^3 * (1/3) from by ring]
+    rw [abs_mul, abs_mul, abs_of_pos (pow_pos h_pos 3)]
+    rw [show |(1/3 : ℝ)| = 1/3 from abs_of_pos (by norm_num)]
+    ring
+  have h_abs_d5h5 : |iteratedDeriv 5 theta T * h^5 / 60| =
+      |iteratedDeriv 5 theta T| * h^5 / 60 := by
+    rw [show iteratedDeriv 5 theta T * h^5 / 60 =
+        iteratedDeriv 5 theta T * h^5 * (1/60) from by ring]
+    rw [abs_mul, abs_mul, abs_of_pos (pow_pos h_pos 5)]
+    rw [show |(1/60 : ℝ)| = 1/60 from abs_of_pos (by norm_num)]
+    ring
+  rw [hD_def]
+  calc |(theta (T + h) - theta (T - h) - 2 * q T * h - qDoublePrime T * h^3/3 -
+        iteratedDeriv 5 theta T * h^5/60) +
+      (qDoublePrime T * h^3/3 + iteratedDeriv 5 theta T * h^5/60)|
+      ≤ |theta (T + h) - theta (T - h) - 2 * q T * h - qDoublePrime T * h^3/3 -
+          iteratedDeriv 5 theta T * h^5/60| +
+        |qDoublePrime T * h^3/3 + iteratedDeriv 5 theta T * h^5/60| := htri
+    _ ≤ K_ε * h^6 + (|qDoublePrime T * h^3/3| + |iteratedDeriv 5 theta T * h^5/60|) := by
+        linarith
+    _ = K_ε * h^6 + (|qDoublePrime T| * h^3 / 3 + |iteratedDeriv 5 theta T| * h^5 / 60) := by
+        rw [h_abs_qDh3, h_abs_d5h5]
+    _ ≤ K_ε * h^3 + (|qDoublePrime T| * h^3 / 3 + |iteratedDeriv 5 theta T| * h^3 / 60) := by
+        have hKε : 0 ≤ K_ε := hK_ε_nn
+        have h_qD_nn : 0 ≤ |qDoublePrime T| := abs_nonneg _
+        have h_d5_nn : 0 ≤ |iteratedDeriv 5 theta T| := abs_nonneg _
+        nlinarith
+    _ = (|qDoublePrime T|/3 + |iteratedDeriv 5 theta T|/60 + K_ε) * h^3 := by ring
+
 /-- Bound on entry `(1, 1)` of `P_h A_h(T) P_h^⊤ − J(T)`.  The full
     proof requires order-5 Taylor expansion with explicit `ε^3` and `ε^5`
     cross-term bounds (~400 lines).  All necessary infrastructure helpers
