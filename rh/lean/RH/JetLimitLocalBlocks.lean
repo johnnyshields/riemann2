@@ -2452,6 +2452,330 @@ private lemma cross_neg_pos_combine_alg (s h a b c d : ℝ)
   field_simp
   ring
 
+set_option maxHeartbeats 4000000 in
+/-- Bound on entry `(0, 1)` of `P_h C_h(T₁, T₂) P_h^⊤ − (1/π) N₁₂(T₁, T₂)`
+    for `h ∈ (0, |s|/3]`. -/
+private lemma cross_rate_bound_01 (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
+    ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, 0 < h → h ≤ |T₁ - T₂| / 3 →
+      |(pointToJetTransform h * crossBlock T₁ T₂ h *
+          (pointToJetTransform h).transpose -
+        (1 / Real.pi) • N12 T₁ T₂) 0 1| ≤ M * h^2 := by
+  set R : ℝ := |T₁ - T₂| / 3 with hR_def
+  have hs_ne : T₁ - T₂ ≠ 0 := sub_ne_zero.mpr hT
+  have hs_abs_pos : 0 < |T₁ - T₂| := abs_pos.mpr hs_ne
+  have hR_pos : 0 < R := by show 0 < |T₁ - T₂| / 3; linarith
+  obtain ⟨M_sym, hM_sym_nn, hM_sym⟩ := cross_sin_pair_sym_bound T₁ T₂ R hR_pos
+  obtain ⟨M_a, hM_a_nn, hM_a⟩ := cross_sin_pair_anti_lin_bound T₁ T₂ R hR_pos
+  -- M_01 constant: bound on |D| = O(h²).
+  -- Decomposition gives 3 pieces E₁, E₂, E₃ each O(h³) before /(4h):
+  --   |E₁/(4h)| ≤ M_a/(2π|s|) · h²
+  --   |E₂/(4h)| ≤ M_sym/(2π s²) · h²
+  --   |E₃/(4h)| bound: depends on |sin β + sin γ| linear in h (= M_b lin) plus const.
+  -- For a coarse bound, use cross_sin_pair_anti_bound for |sin β - sin γ| ≤ M_b h.
+  obtain ⟨M_b, hM_b_nn, hM_b⟩ := cross_sin_pair_anti_bound T₁ T₂ R hR_pos
+  -- Set the final M to be a sufficient bound.
+  set M_01 : ℝ :=
+      M_a / (2 * Real.pi * |T₁ - T₂|) +
+      M_sym / (2 * Real.pi * (T₁ - T₂)^2) +
+      9 * (M_b * |T₁ - T₂| + 4) / (5 * Real.pi * (T₁ - T₂)^4) with hM_01_def
+  have hπ_pos : 0 < Real.pi := Real.pi_pos
+  have hπ_ne : Real.pi ≠ 0 := Real.pi_ne_zero
+  have hs_sq_pos : 0 < (T₁ - T₂)^2 := by positivity
+  have hs_4_pos : 0 < (T₁ - T₂)^4 := by positivity
+  have hM_01_nn : 0 ≤ M_01 := by
+    show 0 ≤ M_a / (2 * Real.pi * |T₁ - T₂|) +
+        M_sym / (2 * Real.pi * (T₁ - T₂)^2) +
+        9 * (M_b * |T₁ - T₂| + 4) / (5 * Real.pi * (T₁ - T₂)^4)
+    have h1 : 0 ≤ M_a / (2 * Real.pi * |T₁ - T₂|) := by positivity
+    have h2 : 0 ≤ M_sym / (2 * Real.pi * (T₁ - T₂)^2) := by positivity
+    have h3 : 0 ≤ 9 * (M_b * |T₁ - T₂| + 4) / (5 * Real.pi * (T₁ - T₂)^4) := by
+      apply div_nonneg
+      · have : 0 ≤ M_b * |T₁ - T₂| + 4 := by positivity
+        linarith
+      · positivity
+    linarith
+  refine ⟨M_01, hM_01_nn, ?_⟩
+  intro h h_pos h_le
+  have h_abs_le : |h| ≤ R := by rw [abs_of_pos h_pos]; exact h_le
+  obtain ⟨h_pK_00, h_pK_01, h_pK_10, h_pK_11⟩ :=
+    crossBlock_apply T₁ T₂ h hT h_pos h_le
+  obtain ⟨_, h_N_01, _, _⟩ := N12_smul_apply T₁ T₂ hT
+  obtain ⟨_, h_sym_βγ⟩ := hM_sym h h_abs_le
+  obtain ⟨h_anti_αδ, h_anti_βγ⟩ := hM_a h h_abs_le
+  have h_anti_diff_βγ := hM_b h h_abs_le
+  obtain ⟨h_denom_lower, h_denom_pos⟩ :=
+    cross_denom_sq_lower (T₁ - T₂) h hs_ne h_pos h_le
+  obtain ⟨_, hsp_ne, hsm_ne⟩ := cross_denominators_nonzero T₁ T₂ h hT h_pos h_le
+  have h_h_abs_eq : |h| = h := abs_of_pos h_pos
+  -- Sin abbreviations.
+  set α_sin := Real.sin (theta (T₁ - h) - theta (T₂ - h)) with hα_sin_def
+  set β_sin := Real.sin (theta (T₁ - h) - theta (T₂ + h)) with hβ_sin_def
+  set γ_sin := Real.sin (theta (T₁ + h) - theta (T₂ - h)) with hγ_sin_def
+  set δ_sin := Real.sin (theta (T₁ + h) - theta (T₂ + h)) with hδ_sin_def
+  set Δ_sin := Real.sin (theta T₁ - theta T₂) with hΔ_sin_def
+  set Δ_cos := Real.cos (theta T₁ - theta T₂) with hΔ_cos_def
+  -- Step 1: jet entry = (-α_sin/(πs) + β_sin/(π(s-2h)) - γ_sin/(π(s+2h)) + δ_sin/(πs)) / (4h).
+  have h_jet_01 : (pointToJetTransform h * crossBlock T₁ T₂ h *
+      (pointToJetTransform h).transpose) 0 1 =
+      (-(α_sin / (Real.pi * (T₁ - T₂))) +
+       β_sin / (Real.pi * (T₁ - T₂ - 2 * h)) -
+       γ_sin / (Real.pi * (T₁ - T₂ + 2 * h)) +
+       δ_sin / (Real.pi * (T₁ - T₂))) / (4 * h) := by
+    rw [jet_cross_matrix_apply_01 T₁ T₂ h hT h_pos h_le]
+    rw [h_pK_00, h_pK_01, h_pK_10, h_pK_11]
+  -- Apply cross_neg_pos_combine_alg with s = π·(T₁-T₂), the abstract values
+  -- Actually our denoms have an extra π factor. Let me rewrite into pure form.
+  -- Note: -(α_sin / (π·s)) = -(α_sin/π) / s. So if we set a := α_sin/π, etc.,
+  -- this matches the cross_neg_pos_combine_alg form.
+  set a := α_sin / Real.pi with ha_def
+  set b := β_sin / Real.pi with hb_def
+  set c := γ_sin / Real.pi with hc_def
+  set d := δ_sin / Real.pi with hd_def
+  have h_jet_01_v2 : (pointToJetTransform h * crossBlock T₁ T₂ h *
+      (pointToJetTransform h).transpose) 0 1 =
+      (-(a / (T₁ - T₂)) +
+       b / ((T₁ - T₂) - 2 * h) -
+       c / ((T₁ - T₂) + 2 * h) +
+       d / (T₁ - T₂)) / (4 * h) := by
+    rw [h_jet_01]
+    show (-(α_sin / (Real.pi * (T₁ - T₂))) +
+         β_sin / (Real.pi * (T₁ - T₂ - 2 * h)) -
+         γ_sin / (Real.pi * (T₁ - T₂ + 2 * h)) +
+         δ_sin / (Real.pi * (T₁ - T₂))) / (4 * h) = _
+    rw [ha_def, hb_def, hc_def, hd_def]
+    have hπ_ne' : Real.pi ≠ 0 := hπ_ne
+    field_simp
+  -- Apply cross_neg_pos_combine_alg.
+  have h_combine := cross_neg_pos_combine_alg (T₁ - T₂) h a b c d
+      hs_ne hsm_ne hsp_ne
+  rw [h_combine] at h_jet_01_v2
+  -- Now h_jet_01_v2 has the combined form: (numerator) / (s(s²-4h²)) / (4h).
+  -- Define explicit sin-num form.
+  set num_combined : ℝ :=
+    ((T₁ - T₂)^2 - 4 * h^2) * (d - a) +
+    (T₁ - T₂)^2 * (b - c) +
+    2 * (T₁ - T₂) * h * (b + c)
+  have h_jet_01_v3 : (pointToJetTransform h * crossBlock T₁ T₂ h *
+      (pointToJetTransform h).transpose) 0 1 =
+      num_combined / ((T₁ - T₂) * ((T₁ - T₂)^2 - 4 * h^2)) / (4 * h) :=
+    h_jet_01_v2
+  -- Compute D = jet - n12_value.
+  have h_n_01 : ((1 / Real.pi) • N12 T₁ T₂) 0 1 =
+      (Δ_sin - q T₂ * (T₁ - T₂) * Δ_cos) /
+        (Real.pi * (T₁ - T₂)^2) := h_N_01
+  -- Multiply both sides of h_jet_01_v3 by (T₁ - T₂) · π and show:
+  -- num_combined = ((T₁-T₂)²-4h²)(d-a) + (T₁-T₂)²(b-c) + 2(T₁-T₂)h(b+c)
+  --             = ((T₁-T₂)² - 4h²)·(δ_sin - α_sin)/π + (T₁-T₂)²·(β_sin - γ_sin)/π +
+  --                + 2(T₁-T₂)·h·(β_sin + γ_sin)/π
+  -- All divided by π.
+  -- Express num_combined explicitly in sin form.
+  have h_num_combined_expand : num_combined =
+      (((T₁ - T₂)^2 - 4 * h^2) * (δ_sin - α_sin) +
+       (T₁ - T₂)^2 * (β_sin - γ_sin) +
+       2 * (T₁ - T₂) * h * (β_sin + γ_sin)) / Real.pi := by
+    show num_combined = _
+    rw [show num_combined = ((T₁ - T₂)^2 - 4 * h^2) * (d - a) +
+        (T₁ - T₂)^2 * (b - c) +
+        2 * (T₁ - T₂) * h * (b + c) from rfl]
+    rw [ha_def, hb_def, hc_def, hd_def]
+    field_simp
+  rw [h_num_combined_expand] at h_jet_01_v3
+  -- Key step: bound D = jet_01_value - n12_value using algebraic decomposition.
+  -- Define the residual functions.
+  set R_αδ := δ_sin - α_sin - 2 * (q T₁ - q T₂) * Δ_cos * h with hR_αδ_def
+  set R_βγ := β_sin - γ_sin + 2 * (q T₁ + q T₂) * Δ_cos * h with hR_βγ_def
+  set R_sym := β_sin + γ_sin - 2 * Δ_sin with hR_sym_def
+  have h_h_pow_eq : |h|^3 = h^3 := by rw [h_h_abs_eq]
+  have hR_αδ_b : |R_αδ| ≤ M_a * h^3 := by
+    have := h_anti_αδ
+    rw [h_h_pow_eq] at this
+    exact this
+  have hR_βγ_b : |R_βγ| ≤ M_a * h^3 := by
+    have := h_anti_βγ
+    rw [h_h_pow_eq] at this
+    exact this
+  have hR_sym_b : |R_sym| ≤ M_sym * h^2 := h_sym_βγ
+  -- Key identity using residuals (derived purely algebraically):
+  -- jet_01 - (1/π)N12_01 = E₁ + E₂ + E₃ where:
+  --   E₁ = (R_αδ + R_βγ) / (4h π (T₁-T₂))
+  --   E₂ = R_sym / (2 π (T₁-T₂)²)   -- note: 2h R_sym / (4h π s²) = R_sym/(2π s²)
+  --   E₃ = h(β_sin(T₁-T₂+2h) - γ_sin(T₁-T₂-2h)) / (π (T₁-T₂)² ((T₁-T₂)²-4h²))
+  set E₁ := (R_αδ + R_βγ) / (4 * h * Real.pi * (T₁ - T₂))
+  set E₂ := R_sym / (2 * Real.pi * (T₁ - T₂)^2)
+  set E₃ := h * (β_sin * ((T₁ - T₂) + 2 * h) - γ_sin * ((T₁ - T₂) - 2 * h)) /
+      (Real.pi * (T₁ - T₂)^2 * ((T₁ - T₂)^2 - 4 * h^2))
+  -- Final bound: each |E_i| ≤ M_i h².  Use triangle.
+  have h_h2_nn : 0 ≤ h^2 := sq_nonneg h
+  have h_h_nn : 0 ≤ h := h_pos.le
+  -- Bound |E₁|: |R_αδ + R_βγ| ≤ |R_αδ| + |R_βγ| ≤ 2 M_a h³.
+  -- |E₁| = |R_αδ + R_βγ| / (4 h π |T₁-T₂|) ≤ 2 M_a h³ / (4 h π |T₁-T₂|) = M_a h² / (2 π |T₁-T₂|).
+  have h_E1_bound : |E₁| ≤ M_a / (2 * Real.pi * |T₁ - T₂|) * h^2 := by
+    show |(R_αδ + R_βγ) / (4 * h * Real.pi * (T₁ - T₂))| ≤ _
+    rw [abs_div]
+    rw [show |4 * h * Real.pi * (T₁ - T₂)| =
+        4 * h * Real.pi * |T₁ - T₂| from by
+      rw [show 4 * h * Real.pi * (T₁ - T₂) =
+          (4 * h * Real.pi) * (T₁ - T₂) from by ring]
+      rw [abs_mul]
+      rw [show |4 * h * Real.pi| = 4 * h * Real.pi from
+          abs_of_pos (by positivity)]]
+    rw [div_le_iff₀ (by positivity : (0:ℝ) < 4 * h * Real.pi * |T₁ - T₂|)]
+    have h_R_sum : |R_αδ + R_βγ| ≤ 2 * M_a * h^3 := by
+      calc |R_αδ + R_βγ| ≤ |R_αδ| + |R_βγ| := abs_add_le _ _
+        _ ≤ M_a * h^3 + M_a * h^3 := by linarith
+        _ = 2 * M_a * h^3 := by ring
+    have h_eq : 2 * M_a * h^3 =
+        M_a / (2 * Real.pi * |T₁ - T₂|) * h^2 * (4 * h * Real.pi * |T₁ - T₂|) := by
+      have hπ_ne_local : Real.pi ≠ 0 := Real.pi_ne_zero
+      have hs_abs_ne : |T₁ - T₂| ≠ 0 := hs_abs_pos.ne'
+      field_simp
+      ring
+    linarith [h_R_sum, h_eq]
+  -- Bound |E₂|: |R_sym| ≤ M_sym h². So |E₂| ≤ M_sym h² / (2 π s²).
+  have h_E2_bound : |E₂| ≤ M_sym / (2 * Real.pi * (T₁ - T₂)^2) * h^2 := by
+    show |R_sym / (2 * Real.pi * (T₁ - T₂)^2)| ≤ _
+    rw [abs_div]
+    rw [show |2 * Real.pi * (T₁ - T₂)^2| = 2 * Real.pi * (T₁ - T₂)^2 from
+        abs_of_pos (by positivity)]
+    rw [div_le_iff₀ (by positivity : (0:ℝ) < 2 * Real.pi * (T₁ - T₂)^2)]
+    calc |R_sym| ≤ M_sym * h^2 := hR_sym_b
+      _ = M_sym / (2 * Real.pi * (T₁ - T₂)^2) * h^2 * (2 * Real.pi * (T₁ - T₂)^2) := by
+          field_simp
+  -- Bound |E₃|. The numerator: h · (β_sin(s+2h) - γ_sin(s-2h)).
+  -- Let X = β_sin(s+2h) - γ_sin(s-2h) = s(β_sin - γ_sin) + 2h(β_sin + γ_sin)
+  -- |s(β_sin - γ_sin)| ≤ |s| · M_b h
+  -- |2h(β_sin + γ_sin)| ≤ 2h · 2 = 4h (using |sin| ≤ 1)
+  -- |X| ≤ M_b |s| h + 4h
+  -- |h · X| ≤ M_b |s| h² + 4 h²
+  -- Denom: π s² (s²-4h²) ≥ π s² · 5s²/9 = 5π s⁴/9.
+  -- |E₃| ≤ (M_b |s| h² + 4 h²) / (5π s⁴/9) = 9(M_b |s| + 4) h² / (5π s⁴)
+  have h_E3_bound : |E₃| ≤ 9 * (M_b * |T₁ - T₂| + 4) / (5 * Real.pi * (T₁ - T₂)^4) * h^2 := by
+    show |h * (β_sin * ((T₁ - T₂) + 2 * h) - γ_sin * ((T₁ - T₂) - 2 * h)) /
+         (Real.pi * (T₁ - T₂)^2 * ((T₁ - T₂)^2 - 4 * h^2))| ≤ _
+    rw [abs_div]
+    have h_denom_pos_full :
+        0 < Real.pi * (T₁ - T₂)^2 * ((T₁ - T₂)^2 - 4 * h^2) := by positivity
+    rw [abs_of_pos h_denom_pos_full]
+    rw [div_le_iff₀ h_denom_pos_full]
+    -- |h · X| ≤ h · (|s| · M_b h + 4h) = M_b |s| h² + 4 h²
+    have h_X_bound : |β_sin * ((T₁ - T₂) + 2 * h) - γ_sin * ((T₁ - T₂) - 2 * h)| ≤
+        M_b * |T₁ - T₂| * h + 4 * h := by
+      have h_X_eq : β_sin * ((T₁ - T₂) + 2 * h) - γ_sin * ((T₁ - T₂) - 2 * h) =
+          (T₁ - T₂) * (β_sin - γ_sin) + 2 * h * (β_sin + γ_sin) := by ring
+      rw [h_X_eq]
+      have h_step1 : |(T₁ - T₂) * (β_sin - γ_sin) + 2 * h * (β_sin + γ_sin)| ≤
+          |(T₁ - T₂) * (β_sin - γ_sin)| + |2 * h * (β_sin + γ_sin)| := abs_add_le _ _
+      have h_step2 : |(T₁ - T₂) * (β_sin - γ_sin)| ≤ |T₁ - T₂| * (M_b * h) := by
+        rw [abs_mul]
+        have h_anti_h : |β_sin - γ_sin| ≤ M_b * h := by
+          rw [← h_h_abs_eq]; exact h_anti_diff_βγ
+        exact mul_le_mul_of_nonneg_left h_anti_h (abs_nonneg _)
+      have h_sin_sum : |β_sin + γ_sin| ≤ 2 := by
+        have hβ : |β_sin| ≤ 1 := Real.abs_sin_le_one _
+        have hγ : |γ_sin| ≤ 1 := Real.abs_sin_le_one _
+        have h_tri := abs_add_le β_sin γ_sin
+        linarith
+      have h_step3 : |2 * h * (β_sin + γ_sin)| ≤ 2 * h * 2 := by
+        rw [abs_mul, abs_mul, abs_of_pos h_pos,
+            show |(2:ℝ)| = 2 from by norm_num]
+        exact mul_le_mul_of_nonneg_left h_sin_sum (by positivity)
+      have h_combined : |(T₁ - T₂) * (β_sin - γ_sin) + 2 * h * (β_sin + γ_sin)| ≤
+          M_b * |T₁ - T₂| * h + 4 * h := by
+        have h_sum : |T₁ - T₂| * (M_b * h) + 2 * h * 2 = M_b * |T₁ - T₂| * h + 4 * h := by ring
+        linarith [h_step1, h_step2, h_step3, h_sum]
+      exact h_combined
+    have h_h_X_bound : |h * (β_sin * ((T₁ - T₂) + 2 * h) - γ_sin * ((T₁ - T₂) - 2 * h))| ≤
+        h * (M_b * |T₁ - T₂| * h + 4 * h) := by
+      rw [abs_mul, abs_of_pos h_pos]
+      exact mul_le_mul_of_nonneg_left h_X_bound h_h_nn
+    -- Now use h_denom_lower (s²-4h² ≥ 5s²/9).
+    -- Goal: |h · X| ≤ M_h2 · π s²(s²-4h²) where M_h2 = 9(M_b|s|+4)/(5π s⁴) · h²
+    have h_target : 9 * (M_b * |T₁ - T₂| + 4) / (5 * Real.pi * (T₁ - T₂)^4) * h^2 *
+        (Real.pi * (T₁ - T₂)^2 * ((T₁ - T₂)^2 - 4 * h^2)) ≥
+        h * (M_b * |T₁ - T₂| * h + 4 * h) := by
+      -- Goal: h * (M_b * |T₁-T₂| * h + 4 * h) ≤ (M_01_3) * h² * π s²(s²-4h²)
+      -- where M_01_3 = 9(M_b|s|+4)/(5πs⁴).
+      -- LHS = (M_b|s|+4) h²
+      -- RHS = (9(M_b|s|+4)/(5πs⁴)) · h² · πs²(s²-4h²)
+      --     = (9(M_b|s|+4) · s² · (s²-4h²) / (5 s⁴)) · h²
+      --     ≥ (9(M_b|s|+4) · s² · 5s²/9 / (5 s⁴)) · h² (using s²-4h² ≥ 5s²/9)
+      --     = (M_b|s|+4) · h²
+      have h_h2_pos : 0 ≤ h^2 := sq_nonneg h
+      have h_factor_nn : 0 ≤ M_b * |T₁ - T₂| + 4 := by positivity
+      have h_5s4_pos : 0 < 5 * (T₁ - T₂)^4 := by positivity
+      have h_lhs_eq : h * (M_b * |T₁ - T₂| * h + 4 * h) = (M_b * |T₁ - T₂| + 4) * h^2 := by ring
+      have h_rhs_eq :
+          9 * (M_b * |T₁ - T₂| + 4) / (5 * Real.pi * (T₁ - T₂)^4) * h^2 *
+            (Real.pi * (T₁ - T₂)^2 * ((T₁ - T₂)^2 - 4 * h^2)) =
+          9 * (M_b * |T₁ - T₂| + 4) * (T₁ - T₂)^2 * ((T₁ - T₂)^2 - 4 * h^2) /
+            (5 * (T₁ - T₂)^4) * h^2 := by
+        have h_pi_ne : Real.pi ≠ 0 := Real.pi_ne_zero
+        have h_s2_ne : (T₁ - T₂)^2 ≠ 0 := by positivity
+        have h_s4_ne : (T₁ - T₂)^4 ≠ 0 := by positivity
+        field_simp
+      rw [h_lhs_eq, h_rhs_eq]
+      -- Goal: (M_b|s|+4) h² ≤ 9(M_b|s|+4) s² (s²-4h²)/(5 s⁴) · h²
+      -- Divide out h²: need (M_b|s|+4) ≤ 9(M_b|s|+4) s² (s²-4h²)/(5 s⁴)
+      -- i.e., 5 s⁴ ≤ 9 s² (s²-4h²) (using M_b|s|+4 ≥ 0)
+      -- i.e., 5 s² ≤ 9 (s²-4h²) (dividing by s²)
+      -- which follows from s²-4h² ≥ 5s²/9
+      have h_inner_ineq : 5 * (T₁ - T₂)^4 ≤
+          9 * (T₁ - T₂)^2 * ((T₁ - T₂)^2 - 4 * h^2) := by
+        have h_step1 : 9 * (T₁ - T₂)^2 * ((T₁ - T₂)^2 - 4 * h^2) ≥
+            9 * (T₁ - T₂)^2 * (5 * (T₁ - T₂)^2 / 9) :=
+          mul_le_mul_of_nonneg_left h_denom_lower (by positivity)
+        have h_step2 : 9 * (T₁ - T₂)^2 * (5 * (T₁ - T₂)^2 / 9) = 5 * (T₁ - T₂)^4 := by ring
+        linarith
+      have h_div_le : (M_b * |T₁ - T₂| + 4) ≤
+          9 * (M_b * |T₁ - T₂| + 4) * (T₁ - T₂)^2 * ((T₁ - T₂)^2 - 4 * h^2) /
+            (5 * (T₁ - T₂)^4) := by
+        rw [le_div_iff₀ h_5s4_pos]
+        have step1 :
+            (M_b * |T₁ - T₂| + 4) * (5 * (T₁ - T₂)^4) ≤
+            (M_b * |T₁ - T₂| + 4) *
+              (9 * (T₁ - T₂)^2 * ((T₁ - T₂)^2 - 4 * h^2)) :=
+          mul_le_mul_of_nonneg_left h_inner_ineq h_factor_nn
+        linarith
+      have h_target_inner :
+          (M_b * |T₁ - T₂| + 4) * h^2 ≤
+          9 * (M_b * |T₁ - T₂| + 4) * (T₁ - T₂)^2 * ((T₁ - T₂)^2 - 4 * h^2) /
+            (5 * (T₁ - T₂)^4) * h^2 :=
+        mul_le_mul_of_nonneg_right h_div_le h_h2_pos
+      linarith [h_target_inner]
+    linarith [h_h_X_bound, h_target]
+  -- Now use h_jet_01_v3 and h_n_01 to express D = E₁ + E₂ + E₃.
+  -- D = jet_value - n12_value
+  -- jet_value = ((s²-4h²)(δ_sin-α_sin) + s²(β_sin-γ_sin) + 2sh(β_sin+γ_sin)) / (π s(s²-4h²) · 4h)
+  -- n12_value = (Δ_sin - q T₂ s Δ_cos) / (π s²)
+  -- We claim: D = E₁ + E₂ + E₃.
+  have h_D_decomp :
+      (pointToJetTransform h * crossBlock T₁ T₂ h *
+          (pointToJetTransform h).transpose -
+        (1 / Real.pi) • N12 T₁ T₂) 0 1 = E₁ + E₂ + E₃ := by
+    rw [Matrix.sub_apply, h_jet_01_v3, h_n_01]
+    -- Goal: (((s²-4h²)(δ_sin-α_sin) + s²(β_sin-γ_sin) + 2sh(β_sin+γ_sin))/π / (s(s²-4h²))) / (4h)
+    --       - (Δ_sin - q T₂ s Δ_cos)/(π s²) = E₁ + E₂ + E₃
+    show _ = E₁ + E₂ + E₃
+    rw [show E₁ = (R_αδ + R_βγ) / (4 * h * Real.pi * (T₁ - T₂)) from rfl]
+    rw [show E₂ = R_sym / (2 * Real.pi * (T₁ - T₂)^2) from rfl]
+    rw [show E₃ = h * (β_sin * ((T₁ - T₂) + 2 * h) - γ_sin * ((T₁ - T₂) - 2 * h)) /
+        (Real.pi * (T₁ - T₂)^2 * ((T₁ - T₂)^2 - 4 * h^2)) from rfl]
+    rw [hR_αδ_def, hR_βγ_def, hR_sym_def, hΔ_sin_def, hΔ_cos_def]
+    field_simp
+    ring
+  rw [h_D_decomp]
+  -- Now bound |E₁ + E₂ + E₃| ≤ |E₁| + |E₂| + |E₃| and use the bounds.
+  have h_tri₁ : |E₁ + E₂ + E₃| ≤ |E₁ + E₂| + |E₃| := abs_add_le _ _
+  have h_tri₂ : |E₁ + E₂| ≤ |E₁| + |E₂| := abs_add_le _ _
+  calc |E₁ + E₂ + E₃|
+      ≤ |E₁ + E₂| + |E₃| := h_tri₁
+    _ ≤ (|E₁| + |E₂|) + |E₃| := by linarith
+    _ ≤ M_a / (2 * Real.pi * |T₁ - T₂|) * h^2 +
+        M_sym / (2 * Real.pi * (T₁ - T₂)^2) * h^2 +
+        9 * (M_b * |T₁ - T₂| + 4) / (5 * Real.pi * (T₁ - T₂)^4) * h^2 := by
+        linarith [h_E1_bound, h_E2_bound, h_E3_bound]
+    _ = M_01 * h^2 := by rw [hM_01_def]; ring
+
 /-- Cross-block jet-limit with explicit `O(h²)` rate.  Entrywise: for
     fixed separation `s = T₁ − T₂ ≠ 0`, there is `M(|s|⁻¹) ≥ 0` such
     that for `h ∈ (0, |s|/3]`,
