@@ -615,6 +615,25 @@ private lemma rate_bound_00 (T : ℝ) :
     _ ≤ M_first * h^2 + M_second * h^2 := by linarith
     _ = (M_first + M_second) * h^2 := by ring
 
+/-- Bound on entry `(1, 0)` is the same as `(0, 1)` by symmetry. -/
+private lemma rate_bound_10 (T : ℝ) :
+    ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, 0 < h → h ≤ 1 →
+      |(pointToJetTransform h * samePointBlock T h *
+          (pointToJetTransform h).transpose - J T) 1 0| ≤ M * h^2 := by
+  obtain ⟨M, hM_nn, hM⟩ := rate_bound_01 T
+  refine ⟨M, hM_nn, ?_⟩
+  intro h h_pos h_le
+  obtain ⟨_, hJ_01, hJ_10, _⟩ := J_apply T
+  have h_diff_eq : (pointToJetTransform h * samePointBlock T h *
+        (pointToJetTransform h).transpose - J T) 1 0 =
+      (pointToJetTransform h * samePointBlock T h *
+        (pointToJetTransform h).transpose - J T) 0 1 := by
+    rw [Matrix.sub_apply, Matrix.sub_apply,
+        jet_matrix_apply_10 T h h_pos, jet_matrix_apply_01 T h h_pos,
+        hJ_01, hJ_10]
+  rw [h_diff_eq]
+  exact hM h h_pos h_le
+
 /-- Same-point jet-limit with explicit `O(h²)` rate.  Entrywise:
     there is `M ≥ 0` such that for `h ∈ (0, 1]` and each entry `(i, j)`
     of `Fin 2 × Fin 2`,
