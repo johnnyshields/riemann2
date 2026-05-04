@@ -881,6 +881,113 @@ private lemma epsilon_minus_2qTh_bound (T : ℝ) :
         nlinarith
     _ = (|qDoublePrime T|/3 + |iteratedDeriv 5 theta T|/60 + K_ε) * h^3 := by ring
 
+/-- |ε^3 - 8 qT^3 h^3| ≤ E h^5 on the unit interval. -/
+private lemma epsilon_cube_residual_bound (T : ℝ) :
+    ∃ E : ℝ, 0 ≤ E ∧ ∀ h : ℝ, 0 < h → h ≤ 1 →
+      |(theta (T + h) - theta (T - h))^3 - 8 * (q T)^3 * h^3| ≤ E * h^5 := by
+  obtain ⟨D, hD_nn, hD⟩ := epsilon_minus_2qTh_bound T
+  set E : ℝ := 12 * |q T|^2 * D + 6 * |q T| * D^2 + D^3 with hE_def
+  have hE_nn : 0 ≤ E := by
+    have h1 : 0 ≤ |q T|^2 := by positivity
+    have h2 : 0 ≤ |q T| := abs_nonneg _
+    have h3 : 0 ≤ D^2 := by positivity
+    have h4 : 0 ≤ D^3 := by positivity
+    rw [hE_def]
+    positivity
+  refine ⟨E, hE_nn, ?_⟩
+  intro h h_pos h_le
+  have h_h_nn : 0 ≤ h := le_of_lt h_pos
+  have h_h2_nn : 0 ≤ h^2 := by positivity
+  have h_h2_le_1 : h^2 ≤ 1 := by nlinarith
+  have h_h7_le_h5 : h^7 ≤ h^5 := by
+    have : h^7 = h^5 * h^2 := by ring
+    rw [this]; nlinarith [pow_nonneg h_h_nn 5]
+  have h_h9_le_h5 : h^9 ≤ h^5 := by
+    have : h^9 = h^5 * h^4 := by ring
+    rw [this]
+    have h_h4_le_1 : h^4 ≤ 1 := by nlinarith
+    nlinarith [pow_nonneg h_h_nn 5]
+  -- δ := theta(T+h) - theta(T-h) - 2 qT h.
+  set δ : ℝ := theta (T + h) - theta (T - h) - 2 * q T * h with hδ_def
+  -- |δ| ≤ D h^3.
+  have hδ_bd : |δ| ≤ D * h^3 := hD h h_pos h_le
+  have hδ_sq_bd : |δ|^2 ≤ D^2 * h^6 := by
+    have h_δ_nn : 0 ≤ |δ| := abs_nonneg _
+    have h_D_h3_nn : 0 ≤ D * h^3 := by positivity
+    have h_sq : |δ|^2 ≤ (D * h^3)^2 := by nlinarith
+    have heq : (D * h^3)^2 = D^2 * h^6 := by ring
+    linarith
+  have hδ_cube_bd : |δ|^3 ≤ D^3 * h^9 := by
+    have h_δ_nn : 0 ≤ |δ| := abs_nonneg _
+    have h_D_h3_nn : 0 ≤ D * h^3 := by positivity
+    have h_cube : |δ|^3 ≤ (D * h^3)^3 := by
+      have := pow_le_pow_left₀ h_δ_nn hδ_bd 3
+      exact this
+    have heq : (D * h^3)^3 = D^3 * h^9 := by ring
+    linarith
+  -- (theta(T+h) - theta(T-h))^3 - 8 qT^3 h^3 = 12 qT^2 h^2 δ + 6 qT h δ^2 + δ^3.
+  have heq : (theta (T + h) - theta (T - h))^3 - 8 * (q T)^3 * h^3 =
+      12 * (q T)^2 * h^2 * δ + 6 * q T * h * δ^2 + δ^3 := by
+    rw [hδ_def]; ring
+  rw [heq]
+  -- Use triangle and absolute value lemmas.
+  have h_qT_sq_eq : |q T|^2 = (q T)^2 := sq_abs (q T)
+  have h_term1_abs : |12 * (q T)^2 * h^2 * δ| ≤ 12 * |q T|^2 * h^2 * |δ| := by
+    rw [show 12 * (q T)^2 * h^2 * δ = 12 * h^2 * ((q T)^2 * δ) from by ring]
+    rw [abs_mul, abs_mul, abs_of_pos (by norm_num : (0:ℝ) < 12),
+        abs_of_pos (pow_pos h_pos 2)]
+    rw [show |(q T)^2 * δ| = (q T)^2 * |δ| from by rw [abs_mul]; rw [abs_of_nonneg (sq_nonneg _)]]
+    rw [← h_qT_sq_eq]
+    linarith
+  have h_term2_abs : |6 * q T * h * δ^2| ≤ 6 * |q T| * h * |δ|^2 := by
+    have habs : |6 * q T * h * δ^2| = 6 * |q T| * h * |δ|^2 := by
+      rw [abs_mul, abs_mul, abs_mul, abs_of_pos (by norm_num : (0:ℝ) < 6),
+          abs_of_pos h_pos]
+      have : |δ^2| = |δ|^2 := abs_pow δ 2
+      rw [this]
+    linarith
+  have h_term3_abs : |δ^3| = |δ|^3 := abs_pow δ 3
+  -- Combine.
+  have htri := abs_add_le (12 * (q T)^2 * h^2 * δ + 6 * q T * h * δ^2) (δ^3)
+  have htri2 := abs_add_le (12 * (q T)^2 * h^2 * δ) (6 * q T * h * δ^2)
+  have h_qT2_h2_nn : 0 ≤ |q T|^2 * h^2 := by positivity
+  have h_qT_h_nn : 0 ≤ |q T| * h := by
+    have := abs_nonneg (q T); have := le_of_lt h_pos; positivity
+  -- 12 |qT|^2 h^2 |δ| ≤ 12 |qT|^2 h^2 * D h^3 = 12 |qT|^2 D h^5.
+  have h_t1 : 12 * |q T|^2 * h^2 * |δ| ≤ 12 * |q T|^2 * D * h^5 := by
+    have : 12 * |q T|^2 * h^2 * |δ| ≤ 12 * |q T|^2 * h^2 * (D * h^3) := by
+      have h_h2_nn' : 0 ≤ 12 * |q T|^2 * h^2 := by positivity
+      nlinarith
+    have heq2 : 12 * |q T|^2 * h^2 * (D * h^3) = 12 * |q T|^2 * D * h^5 := by ring
+    linarith
+  -- 6 |qT| h |δ|^2 ≤ 6 |qT| h * D^2 h^6 = 6 |qT| D^2 h^7 ≤ 6 |qT| D^2 h^5.
+  have h_t2 : 6 * |q T| * h * |δ|^2 ≤ 6 * |q T| * D^2 * h^5 := by
+    have step1 : 6 * |q T| * h * |δ|^2 ≤ 6 * |q T| * h * (D^2 * h^6) := by
+      have h_qT_h_nn' : 0 ≤ 6 * |q T| * h := by positivity
+      nlinarith
+    have heq2 : 6 * |q T| * h * (D^2 * h^6) = 6 * |q T| * D^2 * h^7 := by ring
+    have h_h7 : 6 * |q T| * D^2 * h^7 ≤ 6 * |q T| * D^2 * h^5 := by
+      have : 0 ≤ 6 * |q T| * D^2 := by
+        have := abs_nonneg (q T); have := sq_nonneg D; positivity
+      nlinarith
+    linarith
+  -- |δ|^3 ≤ D^3 h^9 ≤ D^3 h^5.
+  have h_t3 : |δ|^3 ≤ D^3 * h^5 := by
+    have h_h9_le : D^3 * h^9 ≤ D^3 * h^5 := by
+      have : 0 ≤ D^3 := by positivity
+      nlinarith
+    linarith
+  -- Combine.
+  rw [hE_def]
+  calc |12 * (q T)^2 * h^2 * δ + 6 * q T * h * δ^2 + δ^3|
+      ≤ |12 * (q T)^2 * h^2 * δ + 6 * q T * h * δ^2| + |δ^3| := htri
+    _ ≤ |12 * (q T)^2 * h^2 * δ| + |6 * q T * h * δ^2| + |δ^3| := by linarith
+    _ ≤ 12 * |q T|^2 * h^2 * |δ| + 6 * |q T| * h * |δ|^2 + |δ|^3 := by
+        rw [h_term3_abs] at *
+        linarith
+    _ ≤ 12 * |q T|^2 * D * h^5 + 6 * |q T| * D^2 * h^5 + D^3 * h^5 := by linarith
+    _ = (12 * |q T|^2 * D + 6 * |q T| * D^2 + D^3) * h^5 := by ring
+
 /-- Bound on entry `(1, 1)` of `P_h A_h(T) P_h^⊤ − J(T)`.  The full
     proof requires order-5 Taylor expansion with explicit `ε^3` and `ε^5`
     cross-term bounds (~400 lines).  All necessary infrastructure helpers
