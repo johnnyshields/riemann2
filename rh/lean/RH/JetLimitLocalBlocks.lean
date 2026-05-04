@@ -1832,6 +1832,26 @@ private lemma cross_sin_pair_anti_bound (T₁ T₂ R : ℝ) (hR : 0 < R) :
         linarith
     _ = ((K_anti_1 + K_anti_2) * R + 2 * (|q T₁| + |q T₂|)) * |h| := by ring
 
+/-- Lower bound on `s² - 4h²` for `h ∈ (0, |s|/3]`. -/
+private lemma cross_denom_sq_lower (s h : ℝ) (hs_ne : s ≠ 0)
+    (h_pos : 0 < h) (h_le : h ≤ |s| / 3) :
+    5 * s^2 / 9 ≤ s^2 - 4 * h^2 ∧ 0 < s^2 - 4 * h^2 := by
+  have hs_abs_pos : 0 < |s| := abs_pos.mpr hs_ne
+  have hs_sq_pos : 0 < s^2 := by
+    have : s^2 = |s|^2 := (sq_abs s).symm
+    rw [this]; positivity
+  have h_h_nn : 0 ≤ h := h_pos.le
+  have h_h_sq_le : h^2 ≤ s^2 / 9 := by
+    have h_lhs : h * h ≤ (|s| / 3) * (|s| / 3) :=
+      mul_le_mul h_le h_le h_h_nn (by linarith)
+    have h_rhs_eq : (|s| / 3) * (|s| / 3) = |s|^2 / 9 := by ring
+    have h_abs_sq : |s|^2 = s^2 := sq_abs s
+    have h_h_sq : h * h = h^2 := (sq h).symm
+    linarith [h_lhs, h_rhs_eq, h_abs_sq, h_h_sq]
+  refine ⟨?_, ?_⟩
+  · linarith
+  · linarith
+
 /-- Cross-block jet-limit with explicit `O(h²)` rate.  Entrywise: for
     fixed separation `s = T₁ − T₂ ≠ 0`, there is `M(|s|⁻¹) ≥ 0` such
     that for `h ∈ (0, |s|/3]`,
