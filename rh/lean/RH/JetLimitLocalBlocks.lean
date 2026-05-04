@@ -1413,6 +1413,29 @@ private lemma jet_cross_matrix_apply_11 (T₁ T₂ h : ℝ) (hT : T₁ ≠ T₂)
   field_simp
   ring
 
+/-- Pointwise values of `(1/π) • N12 T₁ T₂`. -/
+private lemma N12_smul_apply (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
+    ((1 / Real.pi) • N12 T₁ T₂) 0 0 =
+      2 * Real.sin (theta T₁ - theta T₂) /
+        (Real.pi * (T₁ - T₂)) ∧
+    ((1 / Real.pi) • N12 T₁ T₂) 0 1 =
+      (Real.sin (theta T₁ - theta T₂) -
+        q T₂ * (T₁ - T₂) * Real.cos (theta T₁ - theta T₂)) /
+        (Real.pi * (T₁ - T₂)^2) ∧
+    ((1 / Real.pi) • N12 T₁ T₂) 1 0 =
+      (q T₁ * (T₁ - T₂) * Real.cos (theta T₁ - theta T₂) -
+        Real.sin (theta T₁ - theta T₂)) /
+        (Real.pi * (T₁ - T₂)^2) ∧
+    ((1 / Real.pi) • N12 T₁ T₂) 1 1 =
+      ((q T₁ + q T₂) * (T₁ - T₂) * Real.cos (theta T₁ - theta T₂) +
+        (q T₁ * q T₂ * (T₁ - T₂)^2 - 2) *
+          Real.sin (theta T₁ - theta T₂)) /
+        (2 * Real.pi * (T₁ - T₂)^3) := by
+  have hs_ne : T₁ - T₂ ≠ 0 := sub_ne_zero.mpr hT
+  have hπ_ne : Real.pi ≠ 0 := Real.pi_ne_zero
+  refine ⟨?_, ?_, ?_, ?_⟩
+  all_goals (unfold N12; simp [Matrix.smul_apply, smul_eq_mul]; field_simp)
+
 /-- Cross-block jet-limit with explicit `O(h²)` rate.  Entrywise: for
     fixed separation `s = T₁ − T₂ ≠ 0`, there is `M(|s|⁻¹) ≥ 0` such
     that for `h ∈ (0, |s|/3]`,
