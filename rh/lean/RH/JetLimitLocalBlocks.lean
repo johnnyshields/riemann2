@@ -634,15 +634,65 @@ private lemma rate_bound_10 (T : ℝ) :
   rw [h_diff_eq]
   exact hM h h_pos h_le
 
+/-- Bound on entry `(1, 1)` of `P_h A_h(T) P_h^⊤ − J(T)`.  The full
+    proof requires order-5 Taylor expansion with explicit `ε^3` and `ε^5`
+    cross-term bounds (~400 lines).  All necessary infrastructure helpers
+    (`q_taylor_remainder_3`, `theta_taylor_remainder_5`,
+    `sin_taylor_remainder_5`, and the matrix-entry computations) are in
+    place; combining them is mechanical but extensive.
+
+    Stated as an axiom for now.  Will be promoted to a theorem once the
+    matrix-Taylor combination is filled in. -/
+axiom rate_bound_11 (T : ℝ) :
+    ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, 0 < h → h ≤ 1 →
+      |(pointToJetTransform h * samePointBlock T h *
+          (pointToJetTransform h).transpose - J T) 1 1| ≤ M * h^2
+
 /-- Same-point jet-limit with explicit `O(h²)` rate.  Entrywise:
-    there is `M ≥ 0` such that for `h ∈ (0, 1]` and each entry `(i, j)`
-    of `Fin 2 × Fin 2`,
-        `|((P_h A_h(T) P_h^⊤) − J(T)) i j| ≤ M h²`. -/
-axiom same_point_jet_limit_rate (T : ℝ) :
+    for `h ∈ (0, 1]` and each entry `(i, j)` of `Fin 2 × Fin 2`,
+        `|((P_h A_h(T) P_h^⊤) − J(T)) i j| ≤ M h²`.
+
+    Proved by combining `rate_bound_00`, `rate_bound_01`, `rate_bound_10`,
+    `rate_bound_11` with `M := max(M_00, M_01, M_10, M_11)`. -/
+theorem same_point_jet_limit_rate (T : ℝ) :
     ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, 0 < h → h ≤ 1 →
       ∀ i j : Fin 2,
         |(pointToJetTransform h * samePointBlock T h *
-            (pointToJetTransform h).transpose - J T) i j| ≤ M * h^2
+            (pointToJetTransform h).transpose - J T) i j| ≤ M * h^2 := by
+  obtain ⟨M_00, hM_00_nn, hM_00⟩ := rate_bound_00 T
+  obtain ⟨M_01, hM_01_nn, hM_01⟩ := rate_bound_01 T
+  obtain ⟨M_10, hM_10_nn, hM_10⟩ := rate_bound_10 T
+  obtain ⟨M_11, hM_11_nn, hM_11⟩ := rate_bound_11 T
+  refine ⟨max M_00 (max M_01 (max M_10 M_11)), ?_, ?_⟩
+  · exact le_max_of_le_left hM_00_nn
+  intro h h_pos h_le i j
+  have h_h2_nn : 0 ≤ h^2 := by positivity
+  fin_cases i <;> fin_cases j
+  · calc |(pointToJetTransform h * samePointBlock T h *
+            (pointToJetTransform h).transpose - J T) 0 0|
+        ≤ M_00 * h^2 := hM_00 h h_pos h_le
+      _ ≤ max M_00 (max M_01 (max M_10 M_11)) * h^2 :=
+          mul_le_mul_of_nonneg_right (le_max_left _ _) h_h2_nn
+  · calc |(pointToJetTransform h * samePointBlock T h *
+            (pointToJetTransform h).transpose - J T) 0 1|
+        ≤ M_01 * h^2 := hM_01 h h_pos h_le
+      _ ≤ max M_00 (max M_01 (max M_10 M_11)) * h^2 :=
+          mul_le_mul_of_nonneg_right
+            (le_trans (le_max_left _ _) (le_max_right _ _)) h_h2_nn
+  · calc |(pointToJetTransform h * samePointBlock T h *
+            (pointToJetTransform h).transpose - J T) 1 0|
+        ≤ M_10 * h^2 := hM_10 h h_pos h_le
+      _ ≤ max M_00 (max M_01 (max M_10 M_11)) * h^2 :=
+          mul_le_mul_of_nonneg_right
+            (le_trans (le_max_left _ _)
+              (le_trans (le_max_right _ _) (le_max_right _ _))) h_h2_nn
+  · calc |(pointToJetTransform h * samePointBlock T h *
+            (pointToJetTransform h).transpose - J T) 1 1|
+        ≤ M_11 * h^2 := hM_11 h h_pos h_le
+      _ ≤ max M_00 (max M_01 (max M_10 M_11)) * h^2 :=
+          mul_le_mul_of_nonneg_right
+            (le_trans (le_max_right _ _)
+              (le_trans (le_max_right _ _) (le_max_right _ _))) h_h2_nn
 
 /-- Cross-block jet-limit with explicit `O(h²)` rate.  Entrywise: for
     fixed separation `s = T₁ − T₂ ≠ 0`, there is `M(|s|⁻¹) ≥ 0` such
