@@ -1852,6 +1852,232 @@ private lemma cross_denom_sq_lower (s h : ℝ) (hs_ne : s ≠ 0)
   · linarith
   · linarith
 
+set_option maxHeartbeats 1200000 in
+/-- Bound on entry `(0, 0)` of `P_h C_h(T₁, T₂) P_h^⊤ − (1/π) N₁₂(T₁, T₂)`
+    for `h ∈ (0, |s|/3]`. -/
+private lemma cross_rate_bound_00 (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
+    ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, 0 < h → h ≤ |T₁ - T₂| / 3 →
+      |(pointToJetTransform h * crossBlock T₁ T₂ h *
+          (pointToJetTransform h).transpose -
+        (1 / Real.pi) • N12 T₁ T₂) 0 0| ≤ M * h^2 := by
+  set s : ℝ := T₁ - T₂ with hs_def
+  set R : ℝ := |s| / 3 with hR_def
+  have hs_ne : s ≠ 0 := sub_ne_zero.mpr hT
+  have hs_abs_pos : 0 < |s| := abs_pos.mpr hs_ne
+  have hR_pos : 0 < R := by show 0 < |s| / 3; linarith
+  have hs_sq_pos : 0 < s^2 := by have : s^2 = |s|^2 := (sq_abs s).symm; rw [this]; positivity
+  have hs_cube_pos : 0 < |s|^3 := by positivity
+  have hπ_pos : 0 < Real.pi := Real.pi_pos
+  obtain ⟨M_a, hM_a_nn, hM_a⟩ := cross_sin_pair_sym_bound T₁ T₂ R hR_pos
+  obtain ⟨M_b, hM_b_nn, hM_b⟩ := cross_sin_pair_anti_bound T₁ T₂ R hR_pos
+  set M : ℝ := (18 * s^2 * M_a + 18 * |s| * M_b + 72) / (10 * Real.pi * |s|^3) with hM_def
+  have hM_nn : 0 ≤ M := by
+    apply div_nonneg
+    · have h_term1_nn : 0 ≤ 18 * s^2 * M_a := by positivity
+      have h_term2_nn : 0 ≤ 18 * |s| * M_b := by positivity
+      linarith
+    · positivity
+  refine ⟨M, hM_nn, ?_⟩
+  intro h h_pos h_le
+  have h_le_R : h ≤ R := by show h ≤ |s| / 3; exact h_le
+  have h_abs_le : |h| ≤ R := by rw [abs_of_pos h_pos]; exact h_le_R
+  obtain ⟨h_pK_00, h_pK_01, h_pK_10, h_pK_11⟩ :=
+    crossBlock_apply T₁ T₂ h hT h_pos h_le
+  obtain ⟨h_N_00, h_N_01, h_N_10, h_N_11⟩ := N12_smul_apply T₁ T₂ hT
+  -- Apply (P · C · P^T)(0,0) = (a+b+c+d)/2
+  have h_jet_00 : (pointToJetTransform h * crossBlock T₁ T₂ h *
+      (pointToJetTransform h).transpose) 0 0 =
+      (Real.sin (theta (T₁ - h) - theta (T₂ - h)) / (Real.pi * s) +
+       Real.sin (theta (T₁ - h) - theta (T₂ + h)) / (Real.pi * (s - 2 * h)) +
+       Real.sin (theta (T₁ + h) - theta (T₂ - h)) / (Real.pi * (s + 2 * h)) +
+       Real.sin (theta (T₁ + h) - theta (T₂ + h)) / (Real.pi * s)) / 2 := by
+    rw [jet_cross_matrix_apply_00 T₁ T₂ h hT h_pos h_le]
+    rw [h_pK_00, h_pK_01, h_pK_10, h_pK_11]
+  -- The target.
+  have h_n_00 : ((1 / Real.pi) • N12 T₁ T₂) 0 0 =
+      2 * Real.sin (theta T₁ - theta T₂) / (Real.pi * s) := h_N_00
+  -- Algebraic constants/sin values.
+  set Δ := theta T₁ - theta T₂ with hΔ_def
+  set α := theta (T₁ - h) - theta (T₂ - h) with hα_def
+  set β := theta (T₁ - h) - theta (T₂ + h) with hβ_def
+  set γ := theta (T₁ + h) - theta (T₂ - h) with hγ_def
+  set δ := theta (T₁ + h) - theta (T₂ + h) with hδ_def
+  -- Get the sin pair sym/anti bounds.
+  obtain ⟨h_sym_αδ, h_sym_βγ⟩ := hM_a h h_abs_le
+  have h_anti_βγ := hM_b h h_abs_le
+  rw [show |h| = h from abs_of_pos h_pos] at h_anti_βγ
+  -- Denominator bounds.
+  obtain ⟨h_denom_lower, h_denom_pos⟩ := cross_denom_sq_lower s h hs_ne h_pos h_le
+  -- Useful: |s² - 4h²| ≤ s²
+  have h_denom_upper : s^2 - 4 * h^2 ≤ s^2 := by nlinarith [sq_nonneg h]
+  have h_denom_abs : |s^2 - 4 * h^2| = s^2 - 4 * h^2 := abs_of_pos h_denom_pos
+  have hs_2h_ne : s + 2 * h ≠ 0 := by
+    have : (s - 2 * h) * (s + 2 * h) = s^2 - 4 * h^2 := by ring
+    intro heq
+    have : s^2 - 4 * h^2 = 0 := by rw [← this, heq]; ring
+    linarith
+  have hs_2h_neg_ne : s - 2 * h ≠ 0 := by
+    intro heq
+    have : (s - 2 * h) * (s + 2 * h) = s^2 - 4 * h^2 := by ring
+    have : s^2 - 4 * h^2 = 0 := by rw [← this, heq]; ring
+    linarith
+  -- Compute the difference.
+  have hπ_ne : Real.pi ≠ 0 := Real.pi_ne_zero
+  have h_denom_sq_ne : s^2 - 4 * h^2 ≠ 0 := h_denom_pos.ne'
+  -- Algebraic identity.
+  have h_identity :
+      (pointToJetTransform h * crossBlock T₁ T₂ h *
+          (pointToJetTransform h).transpose -
+        (1 / Real.pi) • N12 T₁ T₂) 0 0 =
+      ((s^2 - 4 * h^2) * (Real.sin α + Real.sin δ - 2 * Real.sin Δ) +
+       s^2 * (Real.sin β + Real.sin γ - 2 * Real.sin Δ) +
+       2 * s * h * (Real.sin β - Real.sin γ) +
+       8 * h^2 * Real.sin Δ) /
+       (2 * Real.pi * s * (s^2 - 4 * h^2)) := by
+    rw [Matrix.sub_apply, h_jet_00, h_n_00]
+    have h_denom_prod_eq : s^2 - 4 * h^2 = (s - 2 * h) * (s + 2 * h) := by ring
+    rw [h_denom_prod_eq]
+    field_simp
+    ring
+  rw [h_identity]
+  rw [abs_div]
+  -- Bound the absolute value of the denominator.
+  have h_denom_full_pos : 0 < 2 * Real.pi * s * (s^2 - 4 * h^2) ∨
+                         2 * Real.pi * s * (s^2 - 4 * h^2) < 0 := by
+    rcases lt_or_gt_of_ne hs_ne with hslt | hsgt
+    · right
+      have h_neg : 2 * Real.pi * s < 0 := by
+        have : 2 * Real.pi > 0 := by positivity
+        nlinarith
+      nlinarith
+    · left
+      have h_pos2 : 2 * Real.pi * s > 0 := by positivity
+      nlinarith
+  have h_denom_abs_full : |2 * Real.pi * s * (s^2 - 4 * h^2)| =
+      2 * Real.pi * |s| * (s^2 - 4 * h^2) := by
+    rw [show 2 * Real.pi * s * (s^2 - 4 * h^2) =
+        (2 * Real.pi) * s * (s^2 - 4 * h^2) from by ring]
+    rw [abs_mul, abs_mul]
+    rw [abs_of_pos (by positivity : 0 < 2 * Real.pi)]
+    rw [abs_of_pos h_denom_pos]
+  rw [h_denom_abs_full]
+  -- Bound numerator.
+  have h_num_bound :
+      |(s^2 - 4 * h^2) * (Real.sin α + Real.sin δ - 2 * Real.sin Δ) +
+       s^2 * (Real.sin β + Real.sin γ - 2 * Real.sin Δ) +
+       2 * s * h * (Real.sin β - Real.sin γ) +
+       8 * h^2 * Real.sin Δ| ≤
+      (2 * s^2 * M_a + 2 * |s| * M_b + 8) * h^2 := by
+    have h_t1 : |(s^2 - 4 * h^2) * (Real.sin α + Real.sin δ - 2 * Real.sin Δ)| ≤
+        s^2 * M_a * h^2 := by
+      rw [abs_mul]
+      rw [h_denom_abs]
+      calc (s^2 - 4 * h^2) * |Real.sin α + Real.sin δ - 2 * Real.sin Δ|
+          ≤ s^2 * |Real.sin α + Real.sin δ - 2 * Real.sin Δ| := by
+            apply mul_le_mul_of_nonneg_right h_denom_upper (abs_nonneg _)
+        _ ≤ s^2 * (M_a * h^2) := by
+            apply mul_le_mul_of_nonneg_left h_sym_αδ (le_of_lt hs_sq_pos)
+        _ = s^2 * M_a * h^2 := by ring
+    have h_t2 : |s^2 * (Real.sin β + Real.sin γ - 2 * Real.sin Δ)| ≤
+        s^2 * M_a * h^2 := by
+      rw [abs_mul]
+      have h_s2_abs : |s^2| = s^2 := abs_of_pos hs_sq_pos
+      rw [h_s2_abs]
+      calc s^2 * |Real.sin β + Real.sin γ - 2 * Real.sin Δ|
+          ≤ s^2 * (M_a * h^2) := mul_le_mul_of_nonneg_left h_sym_βγ (le_of_lt hs_sq_pos)
+        _ = s^2 * M_a * h^2 := by ring
+    have h_t3 : |2 * s * h * (Real.sin β - Real.sin γ)| ≤
+        2 * |s| * M_b * h^2 := by
+      rw [abs_mul, abs_mul, abs_mul]
+      rw [show |(2 : ℝ)| = 2 from by norm_num, abs_of_pos h_pos]
+      calc 2 * |s| * h * |Real.sin β - Real.sin γ|
+          ≤ 2 * |s| * h * (M_b * h) := by
+            apply mul_le_mul_of_nonneg_left h_anti_βγ (by positivity)
+        _ = 2 * |s| * M_b * h^2 := by ring
+    have h_t4 : |8 * h^2 * Real.sin Δ| ≤ 8 * h^2 := by
+      rw [abs_mul, abs_mul]
+      rw [show |(8 : ℝ)| = 8 from by norm_num]
+      have h_h_sq_abs : |h^2| = h^2 := abs_of_nonneg (sq_nonneg h)
+      rw [h_h_sq_abs]
+      calc 8 * h^2 * |Real.sin Δ|
+          ≤ 8 * h^2 * 1 := by
+            apply mul_le_mul_of_nonneg_left (Real.abs_sin_le_one Δ) (by positivity)
+        _ = 8 * h^2 := by ring
+    calc |(s^2 - 4 * h^2) * (Real.sin α + Real.sin δ - 2 * Real.sin Δ) +
+         s^2 * (Real.sin β + Real.sin γ - 2 * Real.sin Δ) +
+         2 * s * h * (Real.sin β - Real.sin γ) +
+         8 * h^2 * Real.sin Δ|
+        ≤ |(s^2 - 4 * h^2) * (Real.sin α + Real.sin δ - 2 * Real.sin Δ)| +
+          |s^2 * (Real.sin β + Real.sin γ - 2 * Real.sin Δ)| +
+          |2 * s * h * (Real.sin β - Real.sin γ)| +
+          |8 * h^2 * Real.sin Δ| := by
+          have h₁ := abs_add_le
+            ((s^2 - 4 * h^2) * (Real.sin α + Real.sin δ - 2 * Real.sin Δ) +
+             s^2 * (Real.sin β + Real.sin γ - 2 * Real.sin Δ) +
+             2 * s * h * (Real.sin β - Real.sin γ))
+            (8 * h^2 * Real.sin Δ)
+          have h₂ := abs_add_le
+            ((s^2 - 4 * h^2) * (Real.sin α + Real.sin δ - 2 * Real.sin Δ) +
+             s^2 * (Real.sin β + Real.sin γ - 2 * Real.sin Δ))
+            (2 * s * h * (Real.sin β - Real.sin γ))
+          have h₃ := abs_add_le
+            ((s^2 - 4 * h^2) * (Real.sin α + Real.sin δ - 2 * Real.sin Δ))
+            (s^2 * (Real.sin β + Real.sin γ - 2 * Real.sin Δ))
+          linarith
+      _ ≤ s^2 * M_a * h^2 + s^2 * M_a * h^2 + 2 * |s| * M_b * h^2 + 8 * h^2 := by linarith
+      _ = (2 * s^2 * M_a + 2 * |s| * M_b + 8) * h^2 := by ring
+  -- Final calculation.
+  rw [div_le_iff₀ (by positivity : 0 < 2 * Real.pi * |s| * (s^2 - 4 * h^2))]
+  calc |(s^2 - 4 * h^2) * (Real.sin α + Real.sin δ - 2 * Real.sin Δ) +
+        s^2 * (Real.sin β + Real.sin γ - 2 * Real.sin Δ) +
+        2 * s * h * (Real.sin β - Real.sin γ) +
+        8 * h^2 * Real.sin Δ|
+      ≤ (2 * s^2 * M_a + 2 * |s| * M_b + 8) * h^2 := h_num_bound
+    _ ≤ M * h^2 * (2 * Real.pi * |s| * (s^2 - 4 * h^2)) := by
+        -- M * (2π|s|·(s²-4h²)) ≥ M · 2π|s| · 5s²/9 = 10π|s|³ M / 9 needed ≥ (2s²M_a + 2|s|M_b + 8)
+        -- Recall M = (18 s² M_a + 18 |s| M_b + 72) / (10 π |s|³).
+        -- Then 10π|s|³ M / 9 = (10π|s|³)/9 · (18s²M_a + 18|s|M_b + 72)/(10π|s|³)
+        --                   = (18s²M_a + 18|s|M_b + 72)/9
+        --                   = 2 s² M_a + 2|s| M_b + 8.
+        have h_h_sq_nn : 0 ≤ h^2 := sq_nonneg h
+        have hM_eq : M * (2 * Real.pi * |s| * (s^2 - 4 * h^2)) =
+            (18 * s^2 * M_a + 18 * |s| * M_b + 72) * (s^2 - 4 * h^2) /
+              (5 * |s|^2) := by
+          show ((18 * s^2 * M_a + 18 * |s| * M_b + 72) /
+                (10 * Real.pi * |s|^3)) * (2 * Real.pi * |s| * (s^2 - 4 * h^2)) = _
+          rw [show |s|^3 = |s| * |s|^2 from by ring]
+          field_simp
+          ring
+        have hM_factor :
+            M * h^2 * (2 * Real.pi * |s| * (s^2 - 4 * h^2)) =
+            M * (2 * Real.pi * |s| * (s^2 - 4 * h^2)) * h^2 := by ring
+        rw [hM_factor, hM_eq]
+        -- Need: (2s² M_a + 2|s| M_b + 8) ≤ (18s²M_a + 18|s|M_b + 72)(s²-4h²)/(5|s|²)
+        have h_step1 :
+            (18 * s^2 * M_a + 18 * |s| * M_b + 72) * (s^2 - 4 * h^2) ≥
+            (18 * s^2 * M_a + 18 * |s| * M_b + 72) * (5 * s^2 / 9) := by
+          have h_factor_nn : 0 ≤ 18 * s^2 * M_a + 18 * |s| * M_b + 72 := by positivity
+          exact mul_le_mul_of_nonneg_left h_denom_lower h_factor_nn
+        have h_step2 :
+            (18 * s^2 * M_a + 18 * |s| * M_b + 72) * (5 * s^2 / 9) / (5 * |s|^2) =
+            (2 * s^2 * M_a + 2 * |s| * M_b + 8) := by
+          have h_abs_sq : |s|^2 = s^2 := sq_abs s
+          rw [h_abs_sq]
+          field_simp
+          ring
+        have h_step3 :
+            (2 * s^2 * M_a + 2 * |s| * M_b + 8) ≤
+            (18 * s^2 * M_a + 18 * |s| * M_b + 72) * (s^2 - 4 * h^2) / (5 * |s|^2) := by
+          rw [show (2 * s^2 * M_a + 2 * |s| * M_b + 8) =
+              (18 * s^2 * M_a + 18 * |s| * M_b + 72) * (5 * s^2 / 9) / (5 * |s|^2) from h_step2.symm]
+          have h_5s2_pos : 0 ≤ 5 * |s|^2 := by
+            have : |s|^2 = s^2 := sq_abs s
+            rw [this]; linarith
+          exact div_le_div_of_nonneg_right h_step1 h_5s2_pos
+        calc (2 * s^2 * M_a + 2 * |s| * M_b + 8) * h^2
+            ≤ (18 * s^2 * M_a + 18 * |s| * M_b + 72) * (s^2 - 4 * h^2) / (5 * |s|^2) * h^2 := by
+              exact mul_le_mul_of_nonneg_right h_step3 h_h_sq_nn
+
 /-- Cross-block jet-limit with explicit `O(h²)` rate.  Entrywise: for
     fixed separation `s = T₁ − T₂ ≠ 0`, there is `M(|s|⁻¹) ≥ 0` such
     that for `h ∈ (0, |s|/3]`,
