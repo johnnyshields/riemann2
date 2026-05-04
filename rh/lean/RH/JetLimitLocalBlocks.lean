@@ -1251,6 +1251,98 @@ theorem same_point_jet_limit_rate (T : ℝ) :
             (le_trans (le_max_right _ _)
               (le_trans (le_max_right _ _) (le_max_right _ _))) h_h2_nn
 
+/-! ### Cross-block helpers -/
+
+/-- For `h ∈ (0, |s|/3]` with `s = T₁ - T₂ ≠ 0`, all of `s`, `s + 2h`,
+    `s - 2h` are nonzero and bounded below by `|s|/3`. -/
+private lemma cross_denominators_nonzero (T₁ T₂ h : ℝ) (hT : T₁ ≠ T₂)
+    (h_pos : 0 < h) (h_le : h ≤ |T₁ - T₂| / 3) :
+    (T₁ - T₂) ≠ 0 ∧
+    (T₁ - T₂ + 2 * h) ≠ 0 ∧
+    (T₁ - T₂ - 2 * h) ≠ 0 := by
+  set s := T₁ - T₂ with hs_def
+  have hs_ne : s ≠ 0 := sub_ne_zero.mpr hT
+  have hs_abs_pos : 0 < |s| := abs_pos.mpr hs_ne
+  have hs_abs_pos_3 : 0 < |s| / 3 := by linarith
+  have h_2h_lt : 2 * h ≤ 2 * (|s| / 3) := by linarith
+  have h_2h_lt_abs : 2 * h < |s| := by
+    have : 2 * (|s| / 3) < |s| := by linarith
+    linarith
+  refine ⟨hs_ne, ?_, ?_⟩
+  · -- s + 2h ≠ 0
+    intro heq
+    have : 2 * h = -s := by linarith
+    rcases lt_or_gt_of_ne hs_ne with hslt | hsgt
+    · have hs_abs : |s| = -s := abs_of_neg hslt
+      rw [hs_abs] at h_2h_lt_abs
+      linarith
+    · have hs_abs : |s| = s := abs_of_pos hsgt
+      rw [hs_abs] at h_2h_lt_abs
+      linarith
+  · -- s - 2h ≠ 0
+    intro heq
+    have : 2 * h = s := by linarith
+    rcases lt_or_gt_of_ne hs_ne with hslt | hsgt
+    · have hs_abs : |s| = -s := abs_of_neg hslt
+      rw [hs_abs] at h_2h_lt_abs
+      linarith
+    · have hs_abs : |s| = s := abs_of_pos hsgt
+      rw [hs_abs] at h_2h_lt_abs
+      linarith
+
+/-- phaseKernel values at the 4 cross-block evaluation points,
+    for `h ∈ (0, |s|/3]`. -/
+private lemma phaseKernel_cross_vals (T₁ T₂ h : ℝ) (hT : T₁ ≠ T₂)
+    (h_pos : 0 < h) (h_le : h ≤ |T₁ - T₂| / 3) :
+    phaseKernel (T₁ - h) (T₂ - h) =
+      Real.sin (theta (T₁ - h) - theta (T₂ - h)) /
+        (Real.pi * (T₁ - T₂)) ∧
+    phaseKernel (T₁ - h) (T₂ + h) =
+      Real.sin (theta (T₁ - h) - theta (T₂ + h)) /
+        (Real.pi * (T₁ - T₂ - 2 * h)) ∧
+    phaseKernel (T₁ + h) (T₂ - h) =
+      Real.sin (theta (T₁ + h) - theta (T₂ - h)) /
+        (Real.pi * (T₁ - T₂ + 2 * h)) ∧
+    phaseKernel (T₁ + h) (T₂ + h) =
+      Real.sin (theta (T₁ + h) - theta (T₂ + h)) /
+        (Real.pi * (T₁ - T₂)) := by
+  obtain ⟨hs_ne, hsp_ne, hsm_ne⟩ := cross_denominators_nonzero T₁ T₂ h hT h_pos h_le
+  have h_aa_ne : T₁ - h ≠ T₂ - h := by intro heq; apply hs_ne; linarith
+  have h_ab_ne : T₁ - h ≠ T₂ + h := by intro heq; apply hsm_ne; linarith
+  have h_ba_ne : T₁ + h ≠ T₂ - h := by intro heq; apply hsp_ne; linarith
+  have h_bb_ne : T₁ + h ≠ T₂ + h := by intro heq; apply hs_ne; linarith
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · unfold phaseKernel
+    rw [if_neg h_aa_ne]
+    congr 2; ring
+  · unfold phaseKernel
+    rw [if_neg h_ab_ne]
+    congr 2; ring
+  · unfold phaseKernel
+    rw [if_neg h_ba_ne]
+    congr 2; ring
+  · unfold phaseKernel
+    rw [if_neg h_bb_ne]
+    congr 2; ring
+
+/-- Pointwise values of `crossBlock T₁ T₂ h` for `h ∈ (0, |s|/3]`. -/
+private lemma crossBlock_apply (T₁ T₂ h : ℝ) (hT : T₁ ≠ T₂)
+    (h_pos : 0 < h) (h_le : h ≤ |T₁ - T₂| / 3) :
+    crossBlock T₁ T₂ h 0 0 =
+      Real.sin (theta (T₁ - h) - theta (T₂ - h)) / (Real.pi * (T₁ - T₂)) ∧
+    crossBlock T₁ T₂ h 0 1 =
+      Real.sin (theta (T₁ - h) - theta (T₂ + h)) /
+        (Real.pi * (T₁ - T₂ - 2 * h)) ∧
+    crossBlock T₁ T₂ h 1 0 =
+      Real.sin (theta (T₁ + h) - theta (T₂ - h)) /
+        (Real.pi * (T₁ - T₂ + 2 * h)) ∧
+    crossBlock T₁ T₂ h 1 1 =
+      Real.sin (theta (T₁ + h) - theta (T₂ + h)) / (Real.pi * (T₁ - T₂)) := by
+  have ⟨h_pK_00, h_pK_01, h_pK_10, h_pK_11⟩ :=
+    phaseKernel_cross_vals T₁ T₂ h hT h_pos h_le
+  refine ⟨?_, ?_, ?_, ?_⟩
+  all_goals (unfold crossBlock; simp [h_pK_00, h_pK_01, h_pK_10, h_pK_11])
+
 /-- Cross-block jet-limit with explicit `O(h²)` rate.  Entrywise: for
     fixed separation `s = T₁ − T₂ ≠ 0`, there is `M(|s|⁻¹) ≥ 0` such
     that for `h ∈ (0, |s|/3]`,
