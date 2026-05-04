@@ -319,6 +319,302 @@ private lemma rate_bound_01 (T : ℝ) :
         field_simp
         ring
 
+set_option maxHeartbeats 1200000 in
+/-- Bound on entry `(0, 0)` of `P_h A_h(T) P_h^⊤ − J(T)` is `O(h²)`. -/
+private lemma rate_bound_00 (T : ℝ) :
+    ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, 0 < h → h ≤ 1 →
+      |(pointToJetTransform h * samePointBlock T h *
+          (pointToJetTransform h).transpose - J T) 0 0| ≤ M * h^2 := by
+  obtain ⟨K_q, hK_q_nn, hK_q⟩ := q_taylor_remainder_2 T
+  obtain ⟨K_θ, hK_θ_nn, hK_θ⟩ := theta_taylor_remainder_3 T
+  obtain ⟨hJ_00, _, _, _⟩ := J_apply T
+  -- Constants.
+  set C_ε : ℝ := 2 * |q T| + |qDoublePrime T| / 3 + 2 * K_θ with hC_ε_def
+  have hC_ε_nn : 0 ≤ C_ε := by
+    have h1 : 0 ≤ |q T| := abs_nonneg _
+    have h2 : 0 ≤ |qDoublePrime T| := abs_nonneg _
+    rw [hC_ε_def]; linarith
+  set M_sin : ℝ := C_ε^3/6 + C_ε^5/120 + C_ε^6/720 with hM_sin_def
+  have hM_sin_nn : 0 ≤ M_sin := by
+    have h3 : 0 ≤ C_ε^3 := pow_nonneg hC_ε_nn 3
+    have h5 : 0 ≤ C_ε^5 := pow_nonneg hC_ε_nn 5
+    have h6 : 0 ≤ C_ε^6 := pow_nonneg hC_ε_nn 6
+    rw [hM_sin_def]; positivity
+  set M_first : ℝ := (|qDoublePrime T| + 2 * K_q) / (2 * Real.pi) with hM_first_def
+  set M_second : ℝ := (M_sin + |qDoublePrime T|/3 + 2 * K_θ) / (2 * Real.pi)
+    with hM_second_def
+  refine ⟨M_first + M_second, ?_, ?_⟩
+  · have hπ_pos : 0 < Real.pi := Real.pi_pos
+    have h1 : 0 ≤ M_first := by
+      rw [hM_first_def]
+      have : 0 ≤ |qDoublePrime T| + 2 * K_q := by linarith [abs_nonneg (qDoublePrime T)]
+      positivity
+    have h2 : 0 ≤ M_second := by
+      rw [hM_second_def]
+      have : 0 ≤ M_sin + |qDoublePrime T|/3 + 2 * K_θ := by
+        have : 0 ≤ |qDoublePrime T| := abs_nonneg _
+        linarith
+      positivity
+    linarith
+  intro h h_pos h_le
+  rw [Matrix.sub_apply, jet_matrix_apply_00 T h h_pos, hJ_00]
+  have hh_ne : h ≠ 0 := h_pos.ne'
+  have hπ_pos : 0 < Real.pi := Real.pi_pos
+  have hπ_ne : Real.pi ≠ 0 := hπ_pos.ne'
+  have h_pos_abs : |h| ≤ 1 := by rw [abs_of_pos h_pos]; exact h_le
+  have h_neg_abs : |(-h)| ≤ 1 := by rw [abs_neg]; exact h_pos_abs
+  have habs_h : |h|^3 = h^3 := by rw [abs_of_pos h_pos]
+  have habs_neg_h : |(-h)|^3 = h^3 := by rw [abs_neg, abs_of_pos h_pos]
+  have habs_h4 : |h|^4 = h^4 := by rw [abs_of_pos h_pos]
+  have habs_neg_h4 : |(-h)|^4 = h^4 := by rw [abs_neg, abs_of_pos h_pos]
+  -- Decompose the entry into two parts.
+  have h_decomp : (q (T - h) + q (T + h)) / (2 * Real.pi) +
+      Real.sin (theta (T + h) - theta (T - h)) / (2 * Real.pi * h) -
+      2 * q T / Real.pi =
+      (q (T - h) + q (T + h) - 2 * q T) / (2 * Real.pi) +
+      (Real.sin (theta (T + h) - theta (T - h)) - 2 * q T * h) /
+        (2 * Real.pi * h) := by
+    field_simp
+    ring
+  rw [h_decomp]
+  set ε : ℝ := theta (T + h) - theta (T - h) with hε_def
+  -- Bound first term: |q(T-h) + q(T+h) - 2 q T - qDoublePrime T h^2| ≤ 2 K_q h^3.
+  have h_taylor_q_p := hK_q h h_pos_abs
+  have h_taylor_q_m := hK_q (-h) h_neg_abs
+  have h_T_m : T + (-h) = T - h := by ring
+  rw [h_T_m] at h_taylor_q_m
+  rw [habs_h] at h_taylor_q_p
+  rw [habs_neg_h] at h_taylor_q_m
+  have h_q_sym : |q (T + h) + q (T - h) - 2 * q T - qDoublePrime T * h^2| ≤
+      2 * K_q * h^3 := by
+    have heq : q (T + h) + q (T - h) - 2 * q T - qDoublePrime T * h^2 =
+      (q (T + h) - (q T + qPrime T * h + qDoublePrime T * h^2/2)) +
+      (q (T - h) - (q T + qPrime T * (-h) + qDoublePrime T * (-h)^2/2)) := by ring
+    rw [heq]
+    have htri := abs_add_le
+      (q (T + h) - (q T + qPrime T * h + qDoublePrime T * h^2/2))
+      (q (T - h) - (q T + qPrime T * (-h) + qDoublePrime T * (-h)^2/2))
+    linarith
+  have h_q_sum : |q (T + h) + q (T - h) - 2 * q T| ≤
+      |qDoublePrime T| * h^2 + 2 * K_q * h^3 := by
+    have heq : q (T + h) + q (T - h) - 2 * q T =
+        qDoublePrime T * h^2 + (q (T + h) + q (T - h) - 2 * q T - qDoublePrime T * h^2) := by
+      ring
+    rw [heq]
+    have htri := abs_add_le (qDoublePrime T * h^2)
+      (q (T + h) + q (T - h) - 2 * q T - qDoublePrime T * h^2)
+    have h_abs1 : |qDoublePrime T * h^2| = |qDoublePrime T| * h^2 := by
+      rw [abs_mul]
+      congr 1
+      rw [abs_of_pos (by positivity : 0 < h^2)]
+    linarith
+  have h_first_bd : |(q (T - h) + q (T + h) - 2 * q T) / (2 * Real.pi)| ≤
+      M_first * h^2 := by
+    rw [abs_div]
+    rw [abs_of_pos (by positivity : 0 < 2 * Real.pi)]
+    rw [div_le_iff₀ (by positivity : 0 < 2 * Real.pi)]
+    have hreord : q (T - h) + q (T + h) - 2 * q T = q (T + h) + q (T - h) - 2 * q T := by ring
+    rw [hreord]
+    -- |q sum - 2 q T| ≤ |qDoublePrime T| h^2 + 2 K_q h^3 ≤ (|qDoublePrime T| + 2 K_q) h^2.
+    have h3_le_h2 : h^3 ≤ h^2 := by
+      have : h^3 = h^2 * h := by ring
+      rw [this]
+      have : h^2 * h ≤ h^2 * 1 := mul_le_mul_of_nonneg_left h_le (by positivity)
+      linarith
+    have step1 : |qDoublePrime T| * h^2 + 2 * K_q * h^3 ≤
+        (|qDoublePrime T| + 2 * K_q) * h^2 := by
+      have : 2 * K_q * h^3 ≤ 2 * K_q * h^2 := by
+        have : 2 * K_q * h^3 = 2 * K_q * h^2 * h := by ring
+        rw [this]
+        nlinarith
+      linarith
+    calc |q (T + h) + q (T - h) - 2 * q T|
+        ≤ |qDoublePrime T| * h^2 + 2 * K_q * h^3 := h_q_sum
+      _ ≤ (|qDoublePrime T| + 2 * K_q) * h^2 := step1
+      _ = M_first * h^2 * (2 * Real.pi) := by
+          rw [hM_first_def]; field_simp
+  -- Bound on |ε|: |ε| ≤ C_ε h.
+  have h_taylor_θ_p := hK_θ h h_pos_abs
+  have h_taylor_θ_m := hK_θ (-h) h_neg_abs
+  rw [h_T_m] at h_taylor_θ_m
+  rw [habs_h4] at h_taylor_θ_p
+  rw [habs_neg_h4] at h_taylor_θ_m
+  -- |ε - 2 qT h - qDoublePrime T h^3/3| ≤ 2 K_θ h^4.
+  have h_ε_sub : |ε - 2 * q T * h - qDoublePrime T * h^3 / 3| ≤ 2 * K_θ * h^4 := by
+    have heq : ε - 2 * q T * h - qDoublePrime T * h^3 / 3 =
+        (theta (T + h) -
+          (theta T + q T * h + qPrime T * h^2/2 + qDoublePrime T * h^3/6)) -
+        (theta (T - h) -
+          (theta T + q T * (-h) + qPrime T * (-h)^2/2 + qDoublePrime T * (-h)^3/6)) := by
+      simp [hε_def]; ring
+    rw [heq]
+    have htri := abs_sub
+      (theta (T + h) -
+        (theta T + q T * h + qPrime T * h^2/2 + qDoublePrime T * h^3/6))
+      (theta (T - h) -
+        (theta T + q T * (-h) + qPrime T * (-h)^2/2 + qDoublePrime T * (-h)^3/6))
+    linarith
+  have h_ε_2qT : |ε - 2 * q T * h| ≤ (|qDoublePrime T|/3 + 2 * K_θ) * h^3 := by
+    have heq : ε - 2 * q T * h =
+        qDoublePrime T * h^3/3 + (ε - 2 * q T * h - qDoublePrime T * h^3/3) := by ring
+    rw [heq]
+    have htri := abs_add_le (qDoublePrime T * h^3/3)
+      (ε - 2 * q T * h - qDoublePrime T * h^3/3)
+    have h_abs1 : |qDoublePrime T * h^3 / 3| = |qDoublePrime T| * h^3 / 3 := by
+      rw [show qDoublePrime T * h^3 / 3 = (qDoublePrime T * h^3) / 3 from rfl]
+      rw [abs_div, abs_mul, abs_of_pos (by positivity : 0 < h^3)]
+      have : |(3 : ℝ)| = 3 := by norm_num
+      rw [this]
+    have h4_le_h3 : h^4 ≤ h^3 := by
+      have : h^4 = h^3 * h := by ring
+      rw [this]
+      have : h^3 * h ≤ h^3 * 1 := mul_le_mul_of_nonneg_left h_le (by positivity)
+      linarith
+    have h_step : |qDoublePrime T| * h^3 / 3 + 2 * K_θ * h^4 ≤
+        (|qDoublePrime T|/3 + 2 * K_θ) * h^3 := by
+      have : 2 * K_θ * h^4 ≤ 2 * K_θ * h^3 := by nlinarith
+      have heq2 : (|qDoublePrime T|/3 + 2 * K_θ) * h^3 =
+          |qDoublePrime T| * h^3 / 3 + 2 * K_θ * h^3 := by ring
+      linarith
+    linarith
+  have h_ε_bd : |ε| ≤ C_ε * h := by
+    have heq : ε = 2 * q T * h + (ε - 2 * q T * h) := by ring
+    rw [heq]
+    have htri := abs_add_le (2 * q T * h) (ε - 2 * q T * h)
+    have h_abs1 : |2 * q T * h| = 2 * |q T| * h := by
+      rw [abs_mul, abs_mul]
+      rw [show |(2 : ℝ)| = 2 from by norm_num]
+      rw [abs_of_pos h_pos]
+    rw [hC_ε_def]
+    have h3_le_h : h^3 ≤ h := by
+      have heq3 : h^3 = h * h^2 := by ring
+      rw [heq3]
+      have : h * h^2 ≤ h * 1 :=
+        mul_le_mul_of_nonneg_left (by nlinarith) (le_of_lt h_pos)
+      linarith
+    have h_d : (|qDoublePrime T|/3 + 2 * K_θ) * h^3 ≤
+        (|qDoublePrime T|/3 + 2 * K_θ) * h := by
+      have : 0 ≤ |qDoublePrime T|/3 + 2 * K_θ := by
+        have : 0 ≤ |qDoublePrime T| := abs_nonneg _
+        linarith
+      nlinarith
+    linarith
+  -- |sin(ε) - ε| ≤ M_sin h^3.
+  have h_sin_sub : |Real.sin ε - ε| ≤ M_sin * h^3 := by
+    have h_sin5 := sin_taylor_remainder_5 ε
+    -- |sin ε - (ε - ε^3/6 + ε^5/120)| ≤ |ε|^6/720
+    have h_decomp_sin : Real.sin ε - ε =
+        (Real.sin ε - (ε - ε^3/6 + ε^5/120)) - ε^3/6 + ε^5/120 := by ring
+    have habs1 := abs_sub (Real.sin ε - (ε - ε^3/6 + ε^5/120) - ε^3/6) (ε^5/120)
+    have habs2 := abs_sub (Real.sin ε - (ε - ε^3/6 + ε^5/120)) (ε^3/6)
+    have h_abs_e3 : |ε^3 / 6| = |ε|^3 / 6 := by
+      rw [abs_div, abs_pow]
+      rw [show |(6 : ℝ)| = 6 from by norm_num]
+    have h_abs_e5 : |ε^5 / 120| = |ε|^5 / 120 := by
+      rw [abs_div, abs_pow]
+      rw [show |(120 : ℝ)| = 120 from by norm_num]
+    have h_abs_e6 : |ε|^6 = |ε|^6 := rfl
+    have h_e_sub : |Real.sin ε - ε| ≤ |ε|^6/720 + |ε|^3/6 + |ε|^5/120 := by
+      rw [h_decomp_sin]
+      have h1 : |Real.sin ε - (ε - ε^3/6 + ε^5/120) - ε^3/6 + ε^5/120| ≤
+          |Real.sin ε - (ε - ε^3/6 + ε^5/120) - ε^3/6| + |ε^5/120| := by
+        have := abs_add_le (Real.sin ε - (ε - ε^3/6 + ε^5/120) - ε^3/6) (ε^5/120)
+        linarith
+      have h2 : |Real.sin ε - (ε - ε^3/6 + ε^5/120) - ε^3/6| ≤
+          |Real.sin ε - (ε - ε^3/6 + ε^5/120)| + |ε^3/6| := by
+        have := abs_sub (Real.sin ε - (ε - ε^3/6 + ε^5/120)) (ε^3/6)
+        linarith
+      rw [h_abs_e3, h_abs_e5] at *
+      linarith
+    -- |ε|^k ≤ C_ε^k h^k for k = 3, 5, 6.
+    have h_e_pow : ∀ k : ℕ, |ε|^k ≤ C_ε^k * h^k := by
+      intro k
+      have hε_nn : 0 ≤ |ε| := abs_nonneg _
+      have h_h_nn : 0 ≤ h := le_of_lt h_pos
+      have h_Ce_h : C_ε * h ≥ 0 := mul_nonneg hC_ε_nn h_h_nn
+      have h_pow_le : |ε|^k ≤ (C_ε * h)^k := by
+        apply pow_le_pow_left₀ hε_nn h_ε_bd
+      rw [mul_pow] at h_pow_le
+      exact h_pow_le
+    have h_e3 := h_e_pow 3
+    have h_e5 := h_e_pow 5
+    have h_e6 := h_e_pow 6
+    -- For h ∈ (0, 1]: h^k ≤ h^3 for k ≥ 3.
+    have h_h_nn : 0 ≤ h := le_of_lt h_pos
+    have h_h3_nn : 0 ≤ h^3 := pow_nonneg h_h_nn 3
+    have h_h2_le : h^2 ≤ 1 := by
+      have : h * h ≤ 1 * 1 := mul_le_mul h_le h_le h_h_nn zero_le_one
+      have heq : h^2 = h * h := by ring
+      rw [heq]; linarith
+    have h_h3_le : h^3 ≤ 1 := by
+      have h32 : h^3 = h * h^2 := by ring
+      rw [h32]
+      have : h * h^2 ≤ 1 * 1 :=
+        mul_le_mul h_le h_h2_le (by positivity) zero_le_one
+      linarith
+    have h5_le_h3 : h^5 ≤ h^3 := by
+      have heq : h^5 = h^3 * h^2 := by ring
+      rw [heq]
+      have : h^3 * h^2 ≤ h^3 * 1 :=
+        mul_le_mul_of_nonneg_left h_h2_le h_h3_nn
+      linarith
+    have h6_le_h3 : h^6 ≤ h^3 := by
+      have heq : h^6 = h^3 * h^3 := by ring
+      rw [heq]
+      have : h^3 * h^3 ≤ h^3 * 1 :=
+        mul_le_mul_of_nonneg_left h_h3_le h_h3_nn
+      linarith
+    -- Combine.
+    have hC5_nn : 0 ≤ C_ε^5 := pow_nonneg hC_ε_nn 5
+    have hC6_nn : 0 ≤ C_ε^6 := pow_nonneg hC_ε_nn 6
+    have h_target : |ε|^6/720 + |ε|^3/6 + |ε|^5/120 ≤
+        (C_ε^3/6 + C_ε^5/120 + C_ε^6/720) * h^3 := by
+      have h_e3' : |ε|^3/6 ≤ C_ε^3 * h^3 / 6 := by linarith
+      have h_C5h5_le : C_ε^5 * h^5 ≤ C_ε^5 * h^3 :=
+        mul_le_mul_of_nonneg_left h5_le_h3 hC5_nn
+      have h_e5' : |ε|^5/120 ≤ C_ε^5 * h^3 / 120 := by linarith
+      have h_C6h6_le : C_ε^6 * h^6 ≤ C_ε^6 * h^3 :=
+        mul_le_mul_of_nonneg_left h6_le_h3 hC6_nn
+      have h_e6' : |ε|^6/720 ≤ C_ε^6 * h^3 / 720 := by linarith
+      have h_combine : C_ε^3 * h^3 / 6 + C_ε^5 * h^3 / 120 + C_ε^6 * h^3 / 720 =
+          (C_ε^3/6 + C_ε^5/120 + C_ε^6/720) * h^3 := by ring
+      linarith
+    rw [hM_sin_def]
+    linarith
+  -- |sin(ε) - 2 q T h| ≤ (M_sin + |qDoublePrime T|/3 + 2 K_θ) * h^3.
+  have h_sin_2qT : |Real.sin ε - 2 * q T * h| ≤
+      (M_sin + |qDoublePrime T|/3 + 2 * K_θ) * h^3 := by
+    have heq : Real.sin ε - 2 * q T * h = (Real.sin ε - ε) + (ε - 2 * q T * h) := by ring
+    rw [heq]
+    have := abs_add_le (Real.sin ε - ε) (ε - 2 * q T * h)
+    have h1 := h_sin_sub
+    have h2 := h_ε_2qT
+    linarith
+  -- Bound second term.
+  have h_second_bd :
+      |(Real.sin (theta (T + h) - theta (T - h)) - 2 * q T * h) /
+        (2 * Real.pi * h)| ≤ M_second * h^2 := by
+    rw [show theta (T + h) - theta (T - h) = ε from rfl]
+    rw [abs_div, abs_of_pos (by positivity : 0 < 2 * Real.pi * h)]
+    rw [div_le_iff₀ (by positivity : 0 < 2 * Real.pi * h)]
+    calc |Real.sin ε - 2 * q T * h|
+        ≤ (M_sin + |qDoublePrime T|/3 + 2 * K_θ) * h^3 := h_sin_2qT
+      _ = M_second * h^2 * (2 * Real.pi * h) := by
+          rw [hM_second_def]; field_simp
+  -- Triangle inequality: total ≤ M_first h^2 + M_second h^2.
+  have h_total :=
+    abs_add_le ((q (T - h) + q (T + h) - 2 * q T) / (2 * Real.pi))
+      ((Real.sin (theta (T + h) - theta (T - h)) - 2 * q T * h) /
+        (2 * Real.pi * h))
+  calc |(q (T - h) + q (T + h) - 2 * q T) / (2 * Real.pi) +
+        (Real.sin (theta (T + h) - theta (T - h)) - 2 * q T * h) /
+          (2 * Real.pi * h)|
+      ≤ |(q (T - h) + q (T + h) - 2 * q T) / (2 * Real.pi)| +
+        |(Real.sin (theta (T + h) - theta (T - h)) - 2 * q T * h) /
+          (2 * Real.pi * h)| := h_total
+    _ ≤ M_first * h^2 + M_second * h^2 := by linarith
+    _ = (M_first + M_second) * h^2 := by ring
+
 /-- Same-point jet-limit with explicit `O(h²)` rate.  Entrywise:
     there is `M ≥ 0` such that for `h ∈ (0, 1]` and each entry `(i, j)`
     of `Fin 2 × Fin 2`,
