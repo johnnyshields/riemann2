@@ -634,12 +634,96 @@ private lemma rate_bound_10 (T : ℝ) :
   rw [h_diff_eq]
   exact hM h h_pos h_le
 
+/-- Helper: q sum residual for use in rate_bound_11.  -/
+private lemma q_sum_residual_bound (T : ℝ) :
+    ∃ K : ℝ, 0 ≤ K ∧ ∀ h : ℝ, 0 < h → h ≤ 1 →
+      |q (T + h) + q (T - h) - 2 * q T - qDoublePrime T * h^2| ≤ K * h^4 := by
+  obtain ⟨K_q3, hK_q3_nn, hK_q3⟩ := q_taylor_remainder_3 T
+  refine ⟨2 * K_q3, by positivity, ?_⟩
+  intro h h_pos h_le
+  have h_pos_abs : |h| ≤ 1 := by rw [abs_of_pos h_pos]; exact h_le
+  have h_neg_abs : |(-h)| ≤ 1 := by rw [abs_neg]; exact h_pos_abs
+  have h_T_m : T + (-h) = T - h := by ring
+  have habs_h4 : |h|^4 = h^4 := by rw [abs_of_pos h_pos]
+  have habs_neg_h4 : |(-h)|^4 = h^4 := by rw [abs_neg, abs_of_pos h_pos]
+  have h_q_p := hK_q3 h h_pos_abs
+  have h_q_m := hK_q3 (-h) h_neg_abs
+  rw [h_T_m] at h_q_m
+  rw [habs_h4] at h_q_p
+  rw [habs_neg_h4] at h_q_m
+  have heq : q (T + h) + q (T - h) - 2 * q T - qDoublePrime T * h^2 =
+    (q (T + h) - (q T + qPrime T * h + qDoublePrime T * h^2/2 +
+      iteratedDeriv 3 q T * h^3 / 6)) +
+    (q (T - h) - (q T + qPrime T * (-h) + qDoublePrime T * (-h)^2/2 +
+      iteratedDeriv 3 q T * (-h)^3 / 6)) := by ring
+  rw [heq]
+  have htri := abs_add_le
+    (q (T + h) - (q T + qPrime T * h + qDoublePrime T * h^2/2 +
+      iteratedDeriv 3 q T * h^3 / 6))
+    (q (T - h) - (q T + qPrime T * (-h) + qDoublePrime T * (-h)^2/2 +
+      iteratedDeriv 3 q T * (-h)^3 / 6))
+  linarith
+
+/-- Helper: ε := θ(T+h) - θ(T-h) residual for use in rate_bound_11. -/
+private lemma epsilon_residual_bound (T : ℝ) :
+    ∃ K : ℝ, 0 ≤ K ∧ ∀ h : ℝ, 0 < h → h ≤ 1 →
+      |(theta (T + h) - theta (T - h)) - 2 * q T * h - qDoublePrime T * h^3 / 3 -
+        iteratedDeriv 5 theta T * h^5 / 60| ≤ K * h^6 := by
+  obtain ⟨K_θ5, hK_θ5_nn, hK_θ5⟩ := theta_taylor_remainder_5 T
+  refine ⟨2 * K_θ5, by positivity, ?_⟩
+  intro h h_pos h_le
+  have h_pos_abs : |h| ≤ 1 := by rw [abs_of_pos h_pos]; exact h_le
+  have h_neg_abs : |(-h)| ≤ 1 := by rw [abs_neg]; exact h_pos_abs
+  have h_T_m : T + (-h) = T - h := by ring
+  have habs_h6 : |h|^6 = h^6 := by rw [abs_of_pos h_pos]
+  have habs_neg_h6 : |(-h)|^6 = h^6 := by rw [abs_neg, abs_of_pos h_pos]
+  have h_θ_p := hK_θ5 h h_pos_abs
+  have h_θ_m := hK_θ5 (-h) h_neg_abs
+  rw [h_T_m] at h_θ_m
+  rw [habs_h6] at h_θ_p
+  rw [habs_neg_h6] at h_θ_m
+  have heq : theta (T + h) - theta (T - h) - 2 * q T * h -
+        qDoublePrime T * h^3 / 3 - iteratedDeriv 5 theta T * h^5 / 60 =
+    (theta (T + h) - (theta T + q T * h + qPrime T * h^2/2 +
+      qDoublePrime T * h^3/6 + iteratedDeriv 4 theta T * h^4/24 +
+      iteratedDeriv 5 theta T * h^5/120)) -
+    (theta (T - h) - (theta T + q T * (-h) + qPrime T * (-h)^2/2 +
+      qDoublePrime T * (-h)^3/6 + iteratedDeriv 4 theta T * (-h)^4/24 +
+      iteratedDeriv 5 theta T * (-h)^5/120)) := by ring
+  rw [heq]
+  have htri : |(theta (T + h) - (theta T + q T * h + qPrime T * h^2/2 +
+        qDoublePrime T * h^3/6 + iteratedDeriv 4 theta T * h^4/24 +
+        iteratedDeriv 5 theta T * h^5/120)) -
+      (theta (T - h) - (theta T + q T * (-h) + qPrime T * (-h)^2/2 +
+        qDoublePrime T * (-h)^3/6 + iteratedDeriv 4 theta T * (-h)^4/24 +
+        iteratedDeriv 5 theta T * (-h)^5/120))| ≤
+      |theta (T + h) - (theta T + q T * h + qPrime T * h^2/2 +
+        qDoublePrime T * h^3/6 + iteratedDeriv 4 theta T * h^4/24 +
+        iteratedDeriv 5 theta T * h^5/120)| +
+      |theta (T - h) - (theta T + q T * (-h) + qPrime T * (-h)^2/2 +
+        qDoublePrime T * (-h)^3/6 + iteratedDeriv 4 theta T * (-h)^4/24 +
+        iteratedDeriv 5 theta T * (-h)^5/120)| := by
+    have heq2 : ∀ a b : ℝ, a - b = a + (-b) := fun _ _ => by ring
+    rw [heq2]
+    have habs_neg : ∀ x : ℝ, |(-x)| = |x| := abs_neg
+    have := abs_add_le
+      (theta (T + h) - (theta T + q T * h + qPrime T * h^2/2 +
+        qDoublePrime T * h^3/6 + iteratedDeriv 4 theta T * h^4/24 +
+        iteratedDeriv 5 theta T * h^5/120))
+      (-(theta (T - h) - (theta T + q T * (-h) + qPrime T * (-h)^2/2 +
+        qDoublePrime T * (-h)^3/6 + iteratedDeriv 4 theta T * (-h)^4/24 +
+        iteratedDeriv 5 theta T * (-h)^5/120)))
+    rw [habs_neg] at this
+    exact this
+  linarith
+
 /-- Bound on entry `(1, 1)` of `P_h A_h(T) P_h^⊤ − J(T)`.  The full
     proof requires order-5 Taylor expansion with explicit `ε^3` and `ε^5`
     cross-term bounds (~400 lines).  All necessary infrastructure helpers
     (`q_taylor_remainder_3`, `theta_taylor_remainder_5`,
-    `sin_taylor_remainder_5`, and the matrix-entry computations) are in
-    place; combining them is mechanical but extensive.
+    `sin_taylor_remainder_5`, the matrix-entry computations,
+    `q_sum_residual_bound`, `epsilon_residual_bound`) are in place;
+    combining them is mechanical but extensive.
 
     Stated as an axiom for now.  Will be promoted to a theorem once the
     matrix-Taylor combination is filled in. -/
