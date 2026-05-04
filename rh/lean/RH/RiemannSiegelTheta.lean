@@ -803,4 +803,162 @@ theorem sin_taylor_remainder_5 (u : ℝ) :
         ≤ 1 * |u|^6 := mul_le_mul_of_nonneg_right h_iter6_bound hpow_nn
       _ = |u|^6 / 720 * 720 := by ring
 
+/-- sin Taylor remainder at an arbitrary point `y` to order 1.
+
+    For any `y, u : ℝ`,
+        `|sin(y + u) − (sin y + cos y · u)| ≤ u²/2`.
+
+    Proof: Apply Lagrange remainder for `Real.sin` on `uIcc y (y+u)`
+    with `n = 1`, then use `Real.abs_iteratedDeriv_sin_le_one`. -/
+theorem sin_taylor_at_quad (y u : ℝ) :
+    |Real.sin (y + u) - (Real.sin y + Real.cos y * u)| ≤ u^2 / 2 := by
+  by_cases hu : u = 0
+  · subst hu; simp
+  · have h_ne : y ≠ y + u := fun e => hu (by linarith)
+    have h_sin_C2_on : ContDiffOn ℝ 2 Real.sin (Set.uIcc y (y + u)) :=
+      Real.contDiff_sin.contDiffOn
+    obtain ⟨ξ, hξ_mem, hξ_eq⟩ :=
+      taylor_mean_remainder_lagrange_iteratedDeriv h_ne h_sin_C2_on
+    have h_min_lt_max : min y (y + u) < max y (y + u) := by
+      rcases lt_or_gt_of_ne hu with hlt | hgt
+      · have h1 : y + u < y := by linarith
+        rw [min_eq_right h1.le, max_eq_left h1.le]; exact h1
+      · have h1 : y < y + u := by linarith
+        rw [min_eq_left h1.le, max_eq_right h1.le]; exact h1
+    have h_unique : UniqueDiffOn ℝ (Set.uIcc y (y + u)) :=
+      uniqueDiffOn_Icc h_min_lt_max
+    -- Taylor polynomial of sin at y to order 1: sin y + cos y · u.
+    have h_taylor_form : taylorWithinEval Real.sin 1 (Set.uIcc y (y + u)) y (y + u) =
+        Real.sin y + Real.cos y * u := by
+      rw [taylor_within_apply]
+      simp only [Finset.sum_range_succ, Finset.sum_range_zero, zero_add,
+                 add_sub_cancel_left, smul_eq_mul]
+      have hy_mem : y ∈ Set.uIcc y (y + u) := Set.left_mem_uIcc
+      have h_sin_C : ContDiffAt ℝ 2 Real.sin y := Real.contDiff_sin.contDiffAt
+      have h_iter1_func : iteratedDeriv 1 Real.sin = Real.cos := by
+        rw [iteratedDeriv_one, Real.deriv_sin]
+      have h_iter_eq : ∀ k ≤ 1,
+          iteratedDerivWithin k Real.sin (Set.uIcc y (y + u)) y =
+            iteratedDeriv k Real.sin y := by
+        intro k hk
+        exact iteratedDerivWithin_eq_iteratedDeriv h_unique
+            (h_sin_C.of_le (by exact_mod_cast (by omega : k ≤ 2))) hy_mem
+      have h0v : iteratedDeriv 0 Real.sin y = Real.sin y := by
+        rw [iteratedDeriv_zero]
+      have h1v : iteratedDeriv 1 Real.sin y = Real.cos y := by
+        rw [h_iter1_func]
+      rw [h_iter_eq 0 (by norm_num), h_iter_eq 1 (by norm_num)]
+      rw [h0v, h1v]
+      simp [Nat.factorial]
+      ring
+    rw [h_taylor_form] at hξ_eq
+    have h_iter2_bound : |iteratedDeriv 2 Real.sin ξ| ≤ 1 :=
+      Real.abs_iteratedDeriv_sin_le_one 2 ξ
+    have h_h_eq : (y + u) - y = u := by ring
+    rw [h_h_eq] at hξ_eq
+    have h_eq : Real.sin (y + u) - (Real.sin y + Real.cos y * u) =
+        iteratedDeriv 2 Real.sin ξ * u^2 / 2 := by
+      have h_fact : ((1 + 1).factorial : ℝ) = 2 := by simp [Nat.factorial]
+      have := hξ_eq
+      rw [h_fact] at this
+      exact this
+    rw [h_eq, abs_div, abs_mul, abs_pow]
+    have h_abs_2 : |(2 : ℝ)| = 2 := by norm_num
+    rw [h_abs_2, div_le_iff₀ (by norm_num : (0:ℝ) < 2)]
+    have hpow_nn : 0 ≤ |u|^2 := pow_nonneg (abs_nonneg _) 2
+    have h_pow_eq : |u|^2 = u^2 := by rw [sq_abs]
+    calc |iteratedDeriv 2 Real.sin ξ| * |u|^2
+        ≤ 1 * |u|^2 := mul_le_mul_of_nonneg_right h_iter2_bound hpow_nn
+      _ = u^2 := by rw [h_pow_eq]; ring
+      _ = u^2 / 2 * 2 := by ring
+
+/-- Theta Taylor remainder at order 1: there is a uniform constant `K ≥ 0`
+    on `[T - 1, T + 1]` such that for every `h ∈ [-1, 1]`,
+        `|theta(T + h) − (theta T + q T · h)| ≤ K · h²`.
+
+    Proof: use `theta_smooth ⊃ ContDiff 2`, apply Lagrange remainder
+    with `n = 1`, and bound `|iteratedDeriv 2 theta|` on `[T - 1, T + 1]`. -/
+theorem theta_taylor_remainder_1 (T : ℝ) :
+    ∃ K : ℝ, 0 ≤ K ∧ ∀ h : ℝ, |h| ≤ 1 →
+      |theta (T + h) - (theta T + q T * h)| ≤ K * h^2 := by
+  have hθ_C2 : ContDiff ℝ 2 theta := theta_smooth.of_le (by decide)
+  have h_iter2_cont : Continuous (iteratedDeriv 2 theta) :=
+    hθ_C2.continuous_iteratedDeriv 2 (by decide)
+  have h_compact : IsCompact (Set.Icc (T - 1) (T + 1)) := isCompact_Icc
+  have h_nonempty : (Set.Icc (T - 1) (T + 1)).Nonempty :=
+    ⟨T, by constructor <;> linarith⟩
+  have h_cont_on : ContinuousOn (fun y => |iteratedDeriv 2 theta y|)
+      (Set.Icc (T - 1) (T + 1)) :=
+    (continuous_abs.comp h_iter2_cont).continuousOn
+  obtain ⟨ymax, hymax_mem, hymax⟩ :=
+    h_compact.exists_isMaxOn h_nonempty h_cont_on
+  set K₀ : ℝ := |iteratedDeriv 2 theta ymax| with hK₀_def
+  have hK₀_nn : 0 ≤ K₀ := abs_nonneg _
+  refine ⟨K₀ / 2, by positivity, ?_⟩
+  intro h hh
+  by_cases hh_zero : h = 0
+  · subst hh_zero; simp
+  · have h_ne : T ≠ T + h := fun e => hh_zero (by linarith)
+    have hθ_C2_on : ContDiffOn ℝ 2 theta (Set.uIcc T (T + h)) := hθ_C2.contDiffOn
+    obtain ⟨ξ, hξ_mem, hξ_eq⟩ :=
+      taylor_mean_remainder_lagrange_iteratedDeriv h_ne hθ_C2_on
+    have h_min_lt_max : min T (T + h) < max T (T + h) := by
+      rcases lt_or_gt_of_ne hh_zero with hlt | hgt
+      · have h1 : T + h < T := by linarith
+        rw [min_eq_right h1.le, max_eq_left h1.le]; exact h1
+      · have h1 : T < T + h := by linarith
+        rw [min_eq_left h1.le, max_eq_right h1.le]; exact h1
+    have h_unique : UniqueDiffOn ℝ (Set.uIcc T (T + h)) :=
+      uniqueDiffOn_Icc h_min_lt_max
+    have h_taylor_form : taylorWithinEval theta 1 (Set.uIcc T (T + h)) T (T + h) =
+        theta T + q T * h := by
+      rw [taylor_within_apply]
+      simp only [Finset.sum_range_succ, Finset.sum_range_zero, zero_add,
+                 add_sub_cancel_left, smul_eq_mul]
+      have hT_mem : T ∈ Set.uIcc T (T + h) := Set.left_mem_uIcc
+      have h_iter0 : iteratedDerivWithin 0 theta (Set.uIcc T (T + h)) T = theta T := by
+        simp [iteratedDerivWithin_zero]
+      have h_iter1 : iteratedDerivWithin 1 theta (Set.uIcc T (T + h)) T = q T := by
+        rw [iteratedDerivWithin_eq_iteratedDeriv h_unique
+            (hθ_C2.contDiffAt.of_le (by decide)) hT_mem,
+            iteratedDeriv_one]
+        rfl
+      rw [h_iter0, h_iter1]
+      simp [Nat.factorial]
+      ring
+    rw [h_taylor_form] at hξ_eq
+    have hξ_in_Icc : ξ ∈ Set.Icc (T - 1) (T + 1) := by
+      have h_uIoo_subset : Set.uIoo T (T + h) ⊆ Set.Icc (T - 1) (T + 1) := by
+        intro y hy
+        rcases lt_or_gt_of_ne hh_zero with hlt | hgt
+        · have hh' : T + h < T := by linarith
+          rw [Set.uIoo, min_eq_right hh'.le, max_eq_left hh'.le] at hy
+          obtain ⟨hy1, hy2⟩ := hy
+          have hh_lo : -1 ≤ h := by rcases abs_le.mp hh with ⟨h1, _⟩; exact h1
+          constructor <;> linarith
+        · have hh' : T < T + h := by linarith
+          rw [Set.uIoo, min_eq_left hh'.le, max_eq_right hh'.le] at hy
+          obtain ⟨hy1, hy2⟩ := hy
+          have hh_hi : h ≤ 1 := by rcases abs_le.mp hh with ⟨_, h2⟩; exact h2
+          constructor <;> linarith
+      exact h_uIoo_subset hξ_mem
+    have hξ_bound : |iteratedDeriv 2 theta ξ| ≤ K₀ := hymax hξ_in_Icc
+    have h_h_eq : (T + h) - T = h := by ring
+    rw [h_h_eq] at hξ_eq
+    have h_eq : theta (T + h) - (theta T + q T * h) =
+        iteratedDeriv 2 theta ξ * h^2 / 2 := by
+      have h_fact : ((1 + 1).factorial : ℝ) = 2 := by simp [Nat.factorial]
+      have := hξ_eq
+      rw [h_fact] at this
+      exact this
+    rw [h_eq, abs_div, abs_mul, abs_pow]
+    have h_abs_2 : |(2 : ℝ)| = 2 := by norm_num
+    rw [h_abs_2, div_le_iff₀ (by norm_num : (0:ℝ) < 2)]
+    have hpow_nn : 0 ≤ |h|^2 := pow_nonneg (abs_nonneg _) 2
+    have h_pow_eq : |h|^2 = h^2 := by rw [sq_abs]
+    calc |iteratedDeriv 2 theta ξ| * |h|^2
+        ≤ K₀ * |h|^2 := mul_le_mul_of_nonneg_right hξ_bound hpow_nn
+      _ = K₀ * h^2 := by rw [h_pow_eq]
+      _ = K₀ / 2 * h^2 * 2 := by ring
+
 end RH.RiemannSiegelTheta
