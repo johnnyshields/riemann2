@@ -1792,6 +1792,339 @@ private lemma cross_sin_pair_sym_bound (T₁ T₂ R : ℝ) (hR : 0 < R) :
       _ = ((M_lin_1 + M_lin_2)^2 + (K_sym_1 + K_sym_2)) * h^2 := by ring
   exact ⟨h_α_δ, h_β_γ⟩
 
+/-- Cubic-remainder linear approximation for the cross block:
+    sin pairs are linear in h with O(h³) residual.
+
+    `|sin δ − sin α − 2(q T₁ − q T₂) cos Δ · h| ≤ M |h|³`
+    `|sin β − sin γ + 2(q T₁ + q T₂) cos Δ · h| ≤ M |h|³`
+-/
+private lemma cross_sin_pair_anti_lin_bound (T₁ T₂ R : ℝ) (hR : 0 < R) :
+    ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, |h| ≤ R →
+      |Real.sin (theta (T₁ + h) - theta (T₂ + h)) -
+       Real.sin (theta (T₁ - h) - theta (T₂ - h)) -
+       2 * (q T₁ - q T₂) * Real.cos (theta T₁ - theta T₂) * h| ≤ M * |h|^3 ∧
+      |Real.sin (theta (T₁ - h) - theta (T₂ + h)) -
+       Real.sin (theta (T₁ + h) - theta (T₂ - h)) +
+       2 * (q T₁ + q T₂) * Real.cos (theta T₁ - theta T₂) * h| ≤ M * |h|^3 := by
+  obtain ⟨M_lin_1, hM_lin_1_nn, hM_lin_1⟩ := theta_lin_abs_bound T₁ R hR
+  obtain ⟨M_lin_2, hM_lin_2_nn, hM_lin_2⟩ := theta_lin_abs_bound T₂ R hR
+  obtain ⟨K_sym_1, hK_sym_1_nn, hK_sym_1⟩ := theta_sym_sum_bound T₁ R hR
+  obtain ⟨K_sym_2, hK_sym_2_nn, hK_sym_2⟩ := theta_sym_sum_bound T₂ R hR
+  obtain ⟨K_anti_1, hK_anti_1_nn, hK_anti_1⟩ := theta_anti_sym_diff_bound_3 T₁ R hR
+  obtain ⟨K_anti_2, hK_anti_2_nn, hK_anti_2⟩ := theta_anti_sym_diff_bound_3 T₂ R hR
+  set M_lin := M_lin_1 + M_lin_2 with hM_lin_def
+  set K_sym := K_sym_1 + K_sym_2 with hK_sym_def
+  set K_anti := K_anti_1 + K_anti_2 with hK_anti_def
+  refine ⟨M_lin^3 / 3 + K_anti + K_sym * M_lin, by positivity, ?_⟩
+  intro h hh
+  set Δ := theta T₁ - theta T₂ with hΔ_def
+  set α := theta (T₁ - h) - theta (T₂ - h) with hα_def
+  set β := theta (T₁ - h) - theta (T₂ + h) with hβ_def
+  set γ := theta (T₁ + h) - theta (T₂ - h) with hγ_def
+  set δ := theta (T₁ + h) - theta (T₂ + h) with hδ_def
+  have h_neg_abs : |(-h)| ≤ R := by rw [abs_neg]; exact hh
+  -- Linear bounds.
+  have h_θT₁_p : |theta (T₁ + h) - theta T₁| ≤ M_lin_1 * |h| := hM_lin_1 h hh
+  have h_θT₁_m : |theta (T₁ - h) - theta T₁| ≤ M_lin_1 * |h| := by
+    have := hM_lin_1 (-h) h_neg_abs
+    rw [show T₁ + (-h) = T₁ - h from by ring, abs_neg] at this
+    exact this
+  have h_θT₂_p : |theta (T₂ + h) - theta T₂| ≤ M_lin_2 * |h| := hM_lin_2 h hh
+  have h_θT₂_m : |theta (T₂ - h) - theta T₂| ≤ M_lin_2 * |h| := by
+    have := hM_lin_2 (-h) h_neg_abs
+    rw [show T₂ + (-h) = T₂ - h from by ring, abs_neg] at this
+    exact this
+  -- |α - Δ|, |β - Δ|, |γ - Δ|, |δ - Δ| ≤ M_lin |h|
+  have h_α_Δ : |α - Δ| ≤ M_lin * |h| := by
+    have h_split : α - Δ =
+        (theta (T₁ - h) - theta T₁) - (theta (T₂ - h) - theta T₂) := by
+      simp [hα_def, hΔ_def]; ring
+    calc |α - Δ| = _ := by rw [h_split]
+      _ ≤ |theta (T₁ - h) - theta T₁| + |theta (T₂ - h) - theta T₂| := abs_sub _ _
+      _ ≤ M_lin_1 * |h| + M_lin_2 * |h| := by linarith
+      _ = M_lin * |h| := by rw [hM_lin_def]; ring
+  have h_β_Δ : |β - Δ| ≤ M_lin * |h| := by
+    have h_split : β - Δ =
+        (theta (T₁ - h) - theta T₁) - (theta (T₂ + h) - theta T₂) := by
+      simp [hβ_def, hΔ_def]; ring
+    calc |β - Δ| = _ := by rw [h_split]
+      _ ≤ |theta (T₁ - h) - theta T₁| + |theta (T₂ + h) - theta T₂| := abs_sub _ _
+      _ ≤ M_lin_1 * |h| + M_lin_2 * |h| := by linarith
+      _ = M_lin * |h| := by rw [hM_lin_def]; ring
+  have h_γ_Δ : |γ - Δ| ≤ M_lin * |h| := by
+    have h_split : γ - Δ =
+        (theta (T₁ + h) - theta T₁) - (theta (T₂ - h) - theta T₂) := by
+      simp [hγ_def, hΔ_def]; ring
+    calc |γ - Δ| = _ := by rw [h_split]
+      _ ≤ |theta (T₁ + h) - theta T₁| + |theta (T₂ - h) - theta T₂| := abs_sub _ _
+      _ ≤ M_lin_1 * |h| + M_lin_2 * |h| := by linarith
+      _ = M_lin * |h| := by rw [hM_lin_def]; ring
+  have h_δ_Δ : |δ - Δ| ≤ M_lin * |h| := by
+    have h_split : δ - Δ =
+        (theta (T₁ + h) - theta T₁) - (theta (T₂ + h) - theta T₂) := by
+      simp [hδ_def, hΔ_def]; ring
+    calc |δ - Δ| = _ := by rw [h_split]
+      _ ≤ |theta (T₁ + h) - theta T₁| + |theta (T₂ + h) - theta T₂| := abs_sub _ _
+      _ ≤ M_lin_1 * |h| + M_lin_2 * |h| := by linarith
+      _ = M_lin * |h| := by rw [hM_lin_def]; ring
+  -- |α + δ - 2Δ|, |β + γ - 2Δ| ≤ K_sym h².
+  have h_sym_αδ : |α + δ - 2 * Δ| ≤ K_sym * h^2 := by
+    have h_split : α + δ - 2 * Δ =
+        (theta (T₁ + h) + theta (T₁ - h) - 2 * theta T₁) -
+        (theta (T₂ + h) + theta (T₂ - h) - 2 * theta T₂) := by
+      simp [hα_def, hδ_def, hΔ_def]; ring
+    calc |α + δ - 2 * Δ| = _ := by rw [h_split]
+      _ ≤ |theta (T₁ + h) + theta (T₁ - h) - 2 * theta T₁| +
+          |theta (T₂ + h) + theta (T₂ - h) - 2 * theta T₂| := abs_sub _ _
+      _ ≤ K_sym_1 * h^2 + K_sym_2 * h^2 := by linarith [hK_sym_1 h hh, hK_sym_2 h hh]
+      _ = K_sym * h^2 := by rw [hK_sym_def]; ring
+  have h_sym_βγ : |β + γ - 2 * Δ| ≤ K_sym * h^2 := by
+    have h_split : β + γ - 2 * Δ =
+        (theta (T₁ + h) + theta (T₁ - h) - 2 * theta T₁) -
+        (theta (T₂ + h) + theta (T₂ - h) - 2 * theta T₂) := by
+      simp [hβ_def, hγ_def, hΔ_def]; ring
+    calc |β + γ - 2 * Δ| = _ := by rw [h_split]
+      _ ≤ |theta (T₁ + h) + theta (T₁ - h) - 2 * theta T₁| +
+          |theta (T₂ + h) + theta (T₂ - h) - 2 * theta T₂| := abs_sub _ _
+      _ ≤ K_sym_1 * h^2 + K_sym_2 * h^2 := by linarith [hK_sym_1 h hh, hK_sym_2 h hh]
+      _ = K_sym * h^2 := by rw [hK_sym_def]; ring
+  -- |δ - α - 2(q₁-q₂)h| ≤ K_anti |h|³
+  have h_δα_lin : |δ - α - 2 * (q T₁ - q T₂) * h| ≤ K_anti * |h|^3 := by
+    have h_split : δ - α - 2 * (q T₁ - q T₂) * h =
+        (theta (T₁ + h) - theta (T₁ - h) - 2 * q T₁ * h) -
+        (theta (T₂ + h) - theta (T₂ - h) - 2 * q T₂ * h) := by
+      simp [hα_def, hδ_def]; ring
+    calc |δ - α - 2 * (q T₁ - q T₂) * h| = _ := by rw [h_split]
+      _ ≤ |theta (T₁ + h) - theta (T₁ - h) - 2 * q T₁ * h| +
+          |theta (T₂ + h) - theta (T₂ - h) - 2 * q T₂ * h| := abs_sub _ _
+      _ ≤ K_anti_1 * |h|^3 + K_anti_2 * |h|^3 := by
+          linarith [hK_anti_1 h hh, hK_anti_2 h hh]
+      _ = K_anti * |h|^3 := by rw [hK_anti_def]; ring
+  -- |γ - β - 2(q₁+q₂)h| ≤ K_anti |h|³ (i.e., |β - γ + 2(q₁+q₂)h| ≤ K_anti |h|³)
+  have h_βγ_lin : |γ - β - 2 * (q T₁ + q T₂) * h| ≤ K_anti * |h|^3 := by
+    have h_split : γ - β - 2 * (q T₁ + q T₂) * h =
+        (theta (T₁ + h) - theta (T₁ - h) - 2 * q T₁ * h) +
+        (theta (T₂ + h) - theta (T₂ - h) - 2 * q T₂ * h) := by
+      simp [hβ_def, hγ_def]; ring
+    calc |γ - β - 2 * (q T₁ + q T₂) * h| = _ := by rw [h_split]
+      _ ≤ |theta (T₁ + h) - theta (T₁ - h) - 2 * q T₁ * h| +
+          |theta (T₂ + h) - theta (T₂ - h) - 2 * q T₂ * h| := abs_add_le _ _
+      _ ≤ K_anti_1 * |h|^3 + K_anti_2 * |h|^3 := by
+          linarith [hK_anti_1 h hh, hK_anti_2 h hh]
+      _ = K_anti * |h|^3 := by rw [hK_anti_def]; ring
+  -- Sin Taylor at cubic at sin α, β, γ, δ relative to Δ.
+  have h_sin_α_cub : |Real.sin α - (Real.sin Δ + Real.cos Δ * (α - Δ) -
+      Real.sin Δ * (α - Δ)^2 / 2)| ≤ |α - Δ|^3 / 6 := by
+    have hh_cub := sin_taylor_at_cubic Δ (α - Δ)
+    have h_eq : Δ + (α - Δ) = α := by ring
+    rw [h_eq] at hh_cub
+    exact hh_cub
+  have h_sin_β_cub : |Real.sin β - (Real.sin Δ + Real.cos Δ * (β - Δ) -
+      Real.sin Δ * (β - Δ)^2 / 2)| ≤ |β - Δ|^3 / 6 := by
+    have hh_cub := sin_taylor_at_cubic Δ (β - Δ)
+    have h_eq : Δ + (β - Δ) = β := by ring
+    rw [h_eq] at hh_cub
+    exact hh_cub
+  have h_sin_γ_cub : |Real.sin γ - (Real.sin Δ + Real.cos Δ * (γ - Δ) -
+      Real.sin Δ * (γ - Δ)^2 / 2)| ≤ |γ - Δ|^3 / 6 := by
+    have hh_cub := sin_taylor_at_cubic Δ (γ - Δ)
+    have h_eq : Δ + (γ - Δ) = γ := by ring
+    rw [h_eq] at hh_cub
+    exact hh_cub
+  have h_sin_δ_cub : |Real.sin δ - (Real.sin Δ + Real.cos Δ * (δ - Δ) -
+      Real.sin Δ * (δ - Δ)^2 / 2)| ≤ |δ - Δ|^3 / 6 := by
+    have hh_cub := sin_taylor_at_cubic Δ (δ - Δ)
+    have h_eq : Δ + (δ - Δ) = δ := by ring
+    rw [h_eq] at hh_cub
+    exact hh_cub
+  have h_cos_le : |Real.cos Δ| ≤ 1 := Real.abs_cos_le_one Δ
+  have h_sin_le : |Real.sin Δ| ≤ 1 := Real.abs_sin_le_one Δ
+  -- Bounds on |α-Δ|³, etc.
+  have h_M_lin_nn : 0 ≤ M_lin := by rw [hM_lin_def]; linarith
+  have h_M_lin_h_nn : 0 ≤ M_lin * |h| := by positivity
+  have h_α_Δ_cube : |α - Δ|^3 ≤ M_lin^3 * |h|^3 := by
+    calc |α - Δ|^3 ≤ (M_lin * |h|)^3 :=
+          pow_le_pow_left₀ (abs_nonneg _) h_α_Δ 3
+      _ = M_lin^3 * |h|^3 := by ring
+  have h_β_Δ_cube : |β - Δ|^3 ≤ M_lin^3 * |h|^3 := by
+    calc |β - Δ|^3 ≤ (M_lin * |h|)^3 :=
+          pow_le_pow_left₀ (abs_nonneg _) h_β_Δ 3
+      _ = M_lin^3 * |h|^3 := by ring
+  have h_γ_Δ_cube : |γ - Δ|^3 ≤ M_lin^3 * |h|^3 := by
+    calc |γ - Δ|^3 ≤ (M_lin * |h|)^3 :=
+          pow_le_pow_left₀ (abs_nonneg _) h_γ_Δ 3
+      _ = M_lin^3 * |h|^3 := by ring
+  have h_δ_Δ_cube : |δ - Δ|^3 ≤ M_lin^3 * |h|^3 := by
+    calc |δ - Δ|^3 ≤ (M_lin * |h|)^3 :=
+          pow_le_pow_left₀ (abs_nonneg _) h_δ_Δ 3
+      _ = M_lin^3 * |h|^3 := by ring
+  -- (δ-Δ)² - (α-Δ)² = (δ+α-2Δ)(δ-α). Bound using sym_sum × lin.
+  have h_sq_diff_αδ : (δ - Δ)^2 - (α - Δ)^2 = (δ + α - 2 * Δ) * (δ - α) := by ring
+  have h_sq_diff_βγ : (β - Δ)^2 - (γ - Δ)^2 = (β + γ - 2 * Δ) * (β - γ) := by ring
+  have h_δ_α : |δ - α| ≤ 2 * M_lin * |h| := by
+    have h_split : δ - α = (δ - Δ) - (α - Δ) := by ring
+    calc |δ - α| = _ := by rw [h_split]
+      _ ≤ |δ - Δ| + |α - Δ| := abs_sub _ _
+      _ ≤ M_lin * |h| + M_lin * |h| := by linarith
+      _ = 2 * M_lin * |h| := by ring
+  have h_β_γ : |β - γ| ≤ 2 * M_lin * |h| := by
+    have h_split : β - γ = (β - Δ) - (γ - Δ) := by ring
+    calc |β - γ| = _ := by rw [h_split]
+      _ ≤ |β - Δ| + |γ - Δ| := abs_sub _ _
+      _ ≤ M_lin * |h| + M_lin * |h| := by linarith
+      _ = 2 * M_lin * |h| := by ring
+  have h_h_sq_eq : |h|^2 = h^2 := sq_abs h
+  have h_h_cube_eq : |h|^3 = |h|^2 * |h| := by rw [show |h|^3 = |h| * |h|^2 from by ring]; ring
+  -- Bound |sin Δ ((δ-Δ)² - (α-Δ)²) / 2| ≤ K_sym M_lin |h|³.
+  have h_sin_Δ_sq_diff_αδ : |Real.sin Δ * ((δ - Δ)^2 - (α - Δ)^2) / 2| ≤
+      K_sym * M_lin * |h|^3 := by
+    rw [h_sq_diff_αδ]
+    rw [show Real.sin Δ * ((δ + α - 2 * Δ) * (δ - α)) / 2 =
+        Real.sin Δ * (δ + α - 2 * Δ) * (δ - α) / 2 from by ring]
+    rw [abs_div, abs_mul, abs_mul]
+    rw [show |(2 : ℝ)| = 2 from by norm_num]
+    rw [div_le_iff₀ (by norm_num : (0:ℝ) < 2)]
+    have h_h_nn : 0 ≤ |h| := abs_nonneg h
+    have h_α_δ_sym_eq : δ + α - 2 * Δ = α + δ - 2 * Δ := by ring
+    have h_sym_αδ' : |δ + α - 2 * Δ| ≤ K_sym * h^2 := by
+      rw [h_α_δ_sym_eq]; exact h_sym_αδ
+    have h_α_δ_sym_nn : 0 ≤ |δ + α - 2 * Δ| := abs_nonneg _
+    calc |Real.sin Δ| * |δ + α - 2 * Δ| * |δ - α|
+        ≤ 1 * (K_sym * h^2) * (2 * M_lin * |h|) := by
+          have step1 : |Real.sin Δ| * |δ + α - 2 * Δ| ≤ 1 * |δ + α - 2 * Δ| :=
+            mul_le_mul_of_nonneg_right h_sin_le h_α_δ_sym_nn
+          have step2 : 1 * |δ + α - 2 * Δ| ≤ 1 * (K_sym * h^2) :=
+            mul_le_mul_of_nonneg_left h_sym_αδ' (by norm_num)
+          have step3 : 1 * (K_sym * h^2) * |δ - α| ≤
+              1 * (K_sym * h^2) * (2 * M_lin * |h|) :=
+            mul_le_mul_of_nonneg_left h_δ_α (by positivity)
+          have h_lhs_le : |Real.sin Δ| * |δ + α - 2 * Δ| * |δ - α| ≤
+              1 * (K_sym * h^2) * |δ - α| := by
+            apply mul_le_mul_of_nonneg_right (le_trans step1 step2)
+            exact abs_nonneg _
+          linarith
+      _ = K_sym * M_lin * |h|^3 * 2 := by
+          rw [show |h|^3 = h^2 * |h| from by rw [h_h_cube_eq, h_h_sq_eq]]; ring
+  have h_sin_Δ_sq_diff_βγ : |Real.sin Δ * ((β - Δ)^2 - (γ - Δ)^2) / 2| ≤
+      K_sym * M_lin * |h|^3 := by
+    rw [h_sq_diff_βγ]
+    rw [show Real.sin Δ * ((β + γ - 2 * Δ) * (β - γ)) / 2 =
+        Real.sin Δ * (β + γ - 2 * Δ) * (β - γ) / 2 from by ring]
+    rw [abs_div, abs_mul, abs_mul]
+    rw [show |(2 : ℝ)| = 2 from by norm_num]
+    rw [div_le_iff₀ (by norm_num : (0:ℝ) < 2)]
+    have h_β_γ_sym_nn : 0 ≤ |β + γ - 2 * Δ| := abs_nonneg _
+    calc |Real.sin Δ| * |β + γ - 2 * Δ| * |β - γ|
+        ≤ 1 * (K_sym * h^2) * (2 * M_lin * |h|) := by
+          have step1 : |Real.sin Δ| * |β + γ - 2 * Δ| ≤ 1 * |β + γ - 2 * Δ| :=
+            mul_le_mul_of_nonneg_right h_sin_le h_β_γ_sym_nn
+          have step2 : 1 * |β + γ - 2 * Δ| ≤ 1 * (K_sym * h^2) :=
+            mul_le_mul_of_nonneg_left h_sym_βγ (by norm_num)
+          have step3 : 1 * (K_sym * h^2) * |β - γ| ≤
+              1 * (K_sym * h^2) * (2 * M_lin * |h|) :=
+            mul_le_mul_of_nonneg_left h_β_γ (by positivity)
+          have h_lhs_le : |Real.sin Δ| * |β + γ - 2 * Δ| * |β - γ| ≤
+              1 * (K_sym * h^2) * |β - γ| := by
+            apply mul_le_mul_of_nonneg_right (le_trans step1 step2)
+            exact abs_nonneg _
+          linarith
+      _ = K_sym * M_lin * |h|^3 * 2 := by
+          rw [show |h|^3 = h^2 * |h| from by rw [h_h_cube_eq, h_h_sq_eq]]; ring
+  -- Bound |cos Δ (δ - α) - 2(q₁-q₂) cos Δ h| ≤ K_anti |h|³.
+  have h_cos_δα : |Real.cos Δ * (δ - α) - 2 * (q T₁ - q T₂) * Real.cos Δ * h| ≤
+      K_anti * |h|^3 := by
+    have h_eq : Real.cos Δ * (δ - α) - 2 * (q T₁ - q T₂) * Real.cos Δ * h =
+        Real.cos Δ * (δ - α - 2 * (q T₁ - q T₂) * h) := by ring
+    rw [h_eq, abs_mul]
+    have h_anti_nn : 0 ≤ |δ - α - 2 * (q T₁ - q T₂) * h| := abs_nonneg _
+    calc |Real.cos Δ| * |δ - α - 2 * (q T₁ - q T₂) * h|
+        ≤ 1 * |δ - α - 2 * (q T₁ - q T₂) * h| :=
+          mul_le_mul_of_nonneg_right h_cos_le h_anti_nn
+      _ ≤ 1 * (K_anti * |h|^3) :=
+          mul_le_mul_of_nonneg_left h_δα_lin (by norm_num)
+      _ = K_anti * |h|^3 := by ring
+  have h_cos_γβ : |Real.cos Δ * (γ - β) - 2 * (q T₁ + q T₂) * Real.cos Δ * h| ≤
+      K_anti * |h|^3 := by
+    have h_eq : Real.cos Δ * (γ - β) - 2 * (q T₁ + q T₂) * Real.cos Δ * h =
+        Real.cos Δ * (γ - β - 2 * (q T₁ + q T₂) * h) := by ring
+    rw [h_eq, abs_mul]
+    have h_anti_nn : 0 ≤ |γ - β - 2 * (q T₁ + q T₂) * h| := abs_nonneg _
+    calc |Real.cos Δ| * |γ - β - 2 * (q T₁ + q T₂) * h|
+        ≤ 1 * |γ - β - 2 * (q T₁ + q T₂) * h| :=
+          mul_le_mul_of_nonneg_right h_cos_le h_anti_nn
+      _ ≤ 1 * (K_anti * |h|^3) :=
+          mul_le_mul_of_nonneg_left h_βγ_lin (by norm_num)
+      _ = K_anti * |h|^3 := by ring
+  -- Main bound 1: |sin δ - sin α - 2(q₁-q₂) cos Δ h| ≤ M h³
+  have h_main_αδ : |Real.sin δ - Real.sin α -
+      2 * (q T₁ - q T₂) * Real.cos Δ * h| ≤
+      (M_lin^3 / 3 + K_anti + K_sym * M_lin) * |h|^3 := by
+    have h_combined :
+        Real.sin δ - Real.sin α - 2 * (q T₁ - q T₂) * Real.cos Δ * h =
+        (Real.sin δ - (Real.sin Δ + Real.cos Δ * (δ - Δ) -
+          Real.sin Δ * (δ - Δ)^2 / 2)) -
+        (Real.sin α - (Real.sin Δ + Real.cos Δ * (α - Δ) -
+          Real.sin Δ * (α - Δ)^2 / 2)) +
+        (Real.cos Δ * (δ - α) - 2 * (q T₁ - q T₂) * Real.cos Δ * h) -
+        Real.sin Δ * ((δ - Δ)^2 - (α - Δ)^2) / 2 := by ring
+    -- Use triangle: |R_δ - R_α + S - C| ≤ |R_δ| + |R_α| + |S| + |C|
+    set Rδ := Real.sin δ - (Real.sin Δ + Real.cos Δ * (δ - Δ) -
+                  Real.sin Δ * (δ - Δ)^2 / 2) with hRδ_def
+    set Rα := Real.sin α - (Real.sin Δ + Real.cos Δ * (α - Δ) -
+                  Real.sin Δ * (α - Δ)^2 / 2) with hRα_def
+    set S := Real.cos Δ * (δ - α) - 2 * (q T₁ - q T₂) * Real.cos Δ * h with hS_def
+    set C := Real.sin Δ * ((δ - Δ)^2 - (α - Δ)^2) / 2 with hC_def
+    have h_tri : |Rδ - Rα + S - C| ≤ |Rδ| + |Rα| + |S| + |C| := by
+      have h1 : |Rδ - Rα + S - C| ≤ |Rδ - Rα + S| + |C| := abs_sub _ _
+      have h2 : |Rδ - Rα + S| ≤ |Rδ - Rα| + |S| := abs_add_le _ _
+      have h3 : |Rδ - Rα| ≤ |Rδ| + |Rα| := abs_sub _ _
+      linarith
+    calc |Real.sin δ - Real.sin α - 2 * (q T₁ - q T₂) * Real.cos Δ * h|
+        = |Rδ - Rα + S - C| := by rw [h_combined]
+      _ ≤ |Rδ| + |Rα| + |S| + |C| := h_tri
+      _ ≤ |δ - Δ|^3 / 6 + |α - Δ|^3 / 6 +
+          K_anti * |h|^3 + K_sym * M_lin * |h|^3 := by
+          linarith [h_sin_δ_cub, h_sin_α_cub, h_cos_δα, h_sin_Δ_sq_diff_αδ]
+      _ ≤ M_lin^3 * |h|^3 / 6 + M_lin^3 * |h|^3 / 6 +
+          K_anti * |h|^3 + K_sym * M_lin * |h|^3 := by linarith
+      _ = (M_lin^3 / 3 + K_anti + K_sym * M_lin) * |h|^3 := by ring
+  -- Main bound 2: |sin β - sin γ + 2(q₁+q₂) cos Δ h| ≤ M h³
+  have h_main_βγ : |Real.sin β - Real.sin γ +
+      2 * (q T₁ + q T₂) * Real.cos Δ * h| ≤
+      (M_lin^3 / 3 + K_anti + K_sym * M_lin) * |h|^3 := by
+    -- sin β - sin γ + ... = -(sin γ - sin β - 2(q₁+q₂) cos Δ h) and the analysis
+    -- mirrors the αδ pair using h_cos_γβ for the (γ-β) part.
+    have h_combined :
+        Real.sin β - Real.sin γ + 2 * (q T₁ + q T₂) * Real.cos Δ * h =
+        (Real.sin β - (Real.sin Δ + Real.cos Δ * (β - Δ) -
+          Real.sin Δ * (β - Δ)^2 / 2)) -
+        (Real.sin γ - (Real.sin Δ + Real.cos Δ * (γ - Δ) -
+          Real.sin Δ * (γ - Δ)^2 / 2)) -
+        (Real.cos Δ * (γ - β) - 2 * (q T₁ + q T₂) * Real.cos Δ * h) -
+        Real.sin Δ * ((β - Δ)^2 - (γ - Δ)^2) / 2 := by ring
+    -- Use triangle: |R_β - R_γ - S - C| ≤ |R_β| + |R_γ| + |S| + |C|
+    set Rβ := Real.sin β - (Real.sin Δ + Real.cos Δ * (β - Δ) -
+                  Real.sin Δ * (β - Δ)^2 / 2) with hRβ_def
+    set Rγ := Real.sin γ - (Real.sin Δ + Real.cos Δ * (γ - Δ) -
+                  Real.sin Δ * (γ - Δ)^2 / 2) with hRγ_def
+    set S := Real.cos Δ * (γ - β) - 2 * (q T₁ + q T₂) * Real.cos Δ * h with hS_def
+    set C := Real.sin Δ * ((β - Δ)^2 - (γ - Δ)^2) / 2 with hC_def
+    have h_tri : |Rβ - Rγ - S - C| ≤ |Rβ| + |Rγ| + |S| + |C| := by
+      have h1 : |Rβ - Rγ - S - C| ≤ |Rβ - Rγ - S| + |C| := abs_sub _ _
+      have h2 : |Rβ - Rγ - S| ≤ |Rβ - Rγ| + |S| := abs_sub _ _
+      have h3 : |Rβ - Rγ| ≤ |Rβ| + |Rγ| := abs_sub _ _
+      linarith
+    calc |Real.sin β - Real.sin γ + 2 * (q T₁ + q T₂) * Real.cos Δ * h|
+        = |Rβ - Rγ - S - C| := by rw [h_combined]
+      _ ≤ |Rβ| + |Rγ| + |S| + |C| := h_tri
+      _ ≤ |β - Δ|^3 / 6 + |γ - Δ|^3 / 6 +
+          K_anti * |h|^3 + K_sym * M_lin * |h|^3 := by
+          linarith [h_sin_β_cub, h_sin_γ_cub, h_cos_γβ, h_sin_Δ_sq_diff_βγ]
+      _ ≤ M_lin^3 * |h|^3 / 6 + M_lin^3 * |h|^3 / 6 +
+          K_anti * |h|^3 + K_sym * M_lin * |h|^3 := by linarith
+      _ = (M_lin^3 / 3 + K_anti + K_sym * M_lin) * |h|^3 := by ring
+  exact ⟨h_main_αδ, h_main_βγ⟩
+
 /-- Anti-difference of sines bound for the cross block:
     `|sin β − sin γ| ≤ M · |h|` (linear in `h`). -/
 private lemma cross_sin_pair_anti_bound (T₁ T₂ R : ℝ) (hR : 0 < R) :
