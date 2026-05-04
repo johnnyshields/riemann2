@@ -988,10 +988,29 @@ private lemma epsilon_cube_residual_bound (T : ℝ) :
     _ ≤ 12 * |q T|^2 * D * h^5 + 6 * |q T| * D^2 * h^5 + D^3 * h^5 := by linarith
     _ = (12 * |q T|^2 * D + 6 * |q T| * D^2 + D^3) * h^5 := by ring
 
-/-- Bound on entry `(1, 1)` of `P_h A_h(T) P_h^⊤ − J(T)`.  The full
-    proof requires order-5 Taylor expansion with explicit `ε^3` and `ε^5`
-    cross-term bounds (~400 lines).  All necessary infrastructure helpers
-    are in place. -/
+/-- |ε^5| ≤ C^5 h^5 on the unit interval (raw `ε^5` upper bound). -/
+private lemma epsilon_pow_5_bound (T : ℝ) :
+    ∃ F : ℝ, 0 ≤ F ∧ ∀ h : ℝ, 0 < h → h ≤ 1 →
+      |(theta (T + h) - theta (T - h))^5| ≤ F * h^5 := by
+  obtain ⟨C, hC_nn, hC⟩ := epsilon_abs_bound T
+  refine ⟨C^5, by positivity, ?_⟩
+  intro h h_pos h_le
+  have h_h_nn : 0 ≤ h := le_of_lt h_pos
+  have h_C_h_nn : 0 ≤ C * h := mul_nonneg hC_nn h_h_nn
+  have h_eps_pow_5 : |theta (T + h) - theta (T - h)|^5 ≤ (C * h)^5 := by
+    have := hC h h_pos h_le
+    have h_eps_nn : 0 ≤ |theta (T + h) - theta (T - h)| := abs_nonneg _
+    exact pow_le_pow_left₀ h_eps_nn this 5
+  have h_abs_pow : |(theta (T + h) - theta (T - h))^5| =
+      |theta (T + h) - theta (T - h)|^5 := abs_pow _ 5
+  have heq : (C * h)^5 = C^5 * h^5 := by ring
+  linarith [h_abs_pow ▸ h_eps_pow_5, heq]
+
+/-- Bound on entry `(1, 1)` of `P_h A_h(T) P_h^⊤ − J(T)`.  Helpers
+    available: `q_sum_residual_bound`, `epsilon_residual_bound`,
+    `epsilon_abs_bound`, `epsilon_minus_2qTh_bound`,
+    `epsilon_cube_residual_bound`, `epsilon_pow_5_bound`,
+    `sin_taylor_remainder_5`. -/
 axiom rate_bound_11 (T : ℝ) :
     ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, 0 < h → h ≤ 1 →
       |(pointToJetTransform h * samePointBlock T h *
