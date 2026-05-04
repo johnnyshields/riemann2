@@ -1465,6 +1465,34 @@ private lemma theta_sym_sum_bound (T R : ℝ) (hR : 0 < R) :
     _ ≤ K₀ * h^2 + K₀ * h^2 := by linarith
     _ = 2 * K₀ * h^2 := by ring
 
+/-- Anti-symmetric difference bound for `θ` at order 3:
+    `|θ(T+h) − θ(T−h) − 2 q T h| ≤ 2 K |h|³` (cubic remainder). -/
+private lemma theta_anti_sym_diff_bound_3 (T R : ℝ) (hR : 0 < R) :
+    ∃ K : ℝ, 0 ≤ K ∧ ∀ h : ℝ, |h| ≤ R →
+      |theta (T + h) - theta (T - h) - 2 * q T * h| ≤ K * |h|^3 := by
+  obtain ⟨K_2, hK_2_nn, hK_2⟩ := theta_taylor_remainder_2_on T R hR
+  refine ⟨2 * K_2, by positivity, ?_⟩
+  intro h hh
+  have h_neg_abs : |(-h)| ≤ R := by rw [abs_neg]; exact hh
+  have h_taylor_p := hK_2 h hh
+  have h_taylor_m := hK_2 (-h) h_neg_abs
+  have h_T_m : T + (-h) = T - h := by ring
+  rw [h_T_m] at h_taylor_m
+  have h_neg_sq : (-h)^2 = h^2 := by ring
+  rw [h_neg_sq] at h_taylor_m
+  have h_neg_abs_3 : |(-h)|^3 = |h|^3 := by rw [abs_neg]
+  rw [h_neg_abs_3] at h_taylor_m
+  have h_split : theta (T + h) - theta (T - h) - 2 * q T * h =
+      (theta (T + h) - (theta T + q T * h + qPrime T * h^2 / 2)) -
+      (theta (T - h) - (theta T + q T * (-h) + qPrime T * h^2 / 2)) := by ring
+  calc |theta (T + h) - theta (T - h) - 2 * q T * h|
+      = |(theta (T + h) - (theta T + q T * h + qPrime T * h^2 / 2)) -
+         (theta (T - h) - (theta T + q T * (-h) + qPrime T * h^2 / 2))| := by rw [h_split]
+    _ ≤ |theta (T + h) - (theta T + q T * h + qPrime T * h^2 / 2)| +
+        |theta (T - h) - (theta T + q T * (-h) + qPrime T * h^2 / 2)| := abs_sub _ _
+    _ ≤ K_2 * |h|^3 + K_2 * |h|^3 := by linarith
+    _ = 2 * K_2 * |h|^3 := by ring
+
 /-- Anti-symmetric difference bound for `θ`:
     `|θ(T+h) − θ(T−h) − 2 q T h| ≤ 2 K h²`. -/
 private lemma theta_anti_sym_diff_bound (T R : ℝ) (hR : 0 < R) :
