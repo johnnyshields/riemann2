@@ -2439,6 +2439,19 @@ private lemma cross_rate_bound_00 (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
             ≤ (18 * s^2 * M_a + 18 * |s| * M_b + 72) * (s^2 - 4 * h^2) / (5 * |s|^2) * h^2 := by
               exact mul_le_mul_of_nonneg_right h_step3 h_h_sq_nn
 
+/-- Pure algebraic identity used to combine the four phaseKernel entries
+    into a single fraction.  Treats `a, b, c, d, s, h` as abstract real
+    numbers, sidestepping function-argument normalization issues. -/
+private lemma cross_neg_pos_combine_alg (s h a b c d : ℝ)
+    (hs_ne : s ≠ 0) (hsm_ne : s - 2 * h ≠ 0) (hsp_ne : s + 2 * h ≠ 0) :
+    -(a / s) + b / (s - 2 * h) - c / (s + 2 * h) + d / s =
+    ((s^2 - 4 * h^2) * (d - a) + s^2 * (b - c) + 2 * s * h * (b + c)) /
+    (s * (s^2 - 4 * h^2)) := by
+  have h_eq : s^2 - 4 * h^2 = (s - 2 * h) * (s + 2 * h) := by ring
+  rw [h_eq]
+  field_simp
+  ring
+
 /-- Cross-block jet-limit with explicit `O(h²)` rate.  Entrywise: for
     fixed separation `s = T₁ − T₂ ≠ 0`, there is `M(|s|⁻¹) ≥ 0` such
     that for `h ∈ (0, |s|/3]`,
