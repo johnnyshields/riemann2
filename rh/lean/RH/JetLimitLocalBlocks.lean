@@ -2776,6 +2776,114 @@ private lemma cross_rate_bound_01 (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
         linarith [h_E1_bound, h_E2_bound, h_E3_bound]
     _ = M_01 * h^2 := by rw [hM_01_def]; ring
 
+/-- Bound on entry `(1, 0)` of `P_h C_h(T₁, T₂) P_h^⊤ − (1/π) N₁₂(T₁, T₂)`
+    for `h ∈ (0, |s|/3]`.  Derived from `cross_rate_bound_01` via the
+    identity `D₁₀ = 2 F − D₀₁` where `F = (sin δ − sin α − 2(q₁−q₂) cos Δ · h) /
+    (4hπs)` is the "α/δ residual" piece. -/
+private lemma cross_rate_bound_10 (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
+    ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, 0 < h → h ≤ |T₁ - T₂| / 3 →
+      |(pointToJetTransform h * crossBlock T₁ T₂ h *
+          (pointToJetTransform h).transpose -
+        (1 / Real.pi) • N12 T₁ T₂) 1 0| ≤ M * h^2 := by
+  set R : ℝ := |T₁ - T₂| / 3 with hR_def
+  have hs_ne : T₁ - T₂ ≠ 0 := sub_ne_zero.mpr hT
+  have hs_abs_pos : 0 < |T₁ - T₂| := abs_pos.mpr hs_ne
+  have hR_pos : 0 < R := by show 0 < |T₁ - T₂| / 3; linarith
+  obtain ⟨M_01, hM_01_nn, hM_01⟩ := cross_rate_bound_01 T₁ T₂ hT
+  obtain ⟨M_a, hM_a_nn, hM_a⟩ := cross_sin_pair_anti_lin_bound T₁ T₂ R hR_pos
+  -- M_10 = M_a/(2π|s|) + M_01.
+  set M_10 : ℝ := M_a / (2 * Real.pi * |T₁ - T₂|) + M_01 with hM_10_def
+  have hπ_pos : 0 < Real.pi := Real.pi_pos
+  have hπ_ne : Real.pi ≠ 0 := Real.pi_ne_zero
+  have hM_10_nn : 0 ≤ M_10 := by
+    show 0 ≤ M_a / (2 * Real.pi * |T₁ - T₂|) + M_01
+    have h1 : 0 ≤ M_a / (2 * Real.pi * |T₁ - T₂|) := by positivity
+    linarith
+  refine ⟨M_10, hM_10_nn, ?_⟩
+  intro h h_pos h_le
+  have h_abs_le : |h| ≤ R := by rw [abs_of_pos h_pos]; exact h_le
+  obtain ⟨h_pK_00, h_pK_01, h_pK_10, h_pK_11⟩ :=
+    crossBlock_apply T₁ T₂ h hT h_pos h_le
+  obtain ⟨_, h_N_01, h_N_10, _⟩ := N12_smul_apply T₁ T₂ hT
+  obtain ⟨h_anti_αδ, _⟩ := hM_a h h_abs_le
+  obtain ⟨_, hsp_ne, hsm_ne⟩ := cross_denominators_nonzero T₁ T₂ h hT h_pos h_le
+  have h_h_abs_eq : |h| = h := abs_of_pos h_pos
+  have h_h_pow_eq : |h|^3 = h^3 := by rw [h_h_abs_eq]
+  -- F = R_αδ/(4hπs).
+  set α_sin := Real.sin (theta (T₁ - h) - theta (T₂ - h))
+  set δ_sin := Real.sin (theta (T₁ + h) - theta (T₂ + h))
+  set Δ_cos := Real.cos (theta T₁ - theta T₂)
+  set R_αδ := δ_sin - α_sin - 2 * (q T₁ - q T₂) * Δ_cos * h with hR_αδ_def
+  have hR_αδ_b : |R_αδ| ≤ M_a * h^3 := by
+    have := h_anti_αδ
+    rw [h_h_pow_eq] at this
+    exact this
+  set F := R_αδ / (4 * h * Real.pi * (T₁ - T₂)) with hF_def
+  -- |F| ≤ M_a/(4π|s|) · h².
+  have h_F_bound : |F| ≤ M_a / (4 * Real.pi * |T₁ - T₂|) * h^2 := by
+    show |R_αδ / (4 * h * Real.pi * (T₁ - T₂))| ≤ _
+    rw [abs_div]
+    have h_denom_eq : |4 * h * Real.pi * (T₁ - T₂)| =
+        4 * h * Real.pi * |T₁ - T₂| := by
+      rw [show 4 * h * Real.pi * (T₁ - T₂) =
+          (4 * h * Real.pi) * (T₁ - T₂) from by ring]
+      rw [abs_mul]
+      rw [show |4 * h * Real.pi| = 4 * h * Real.pi from
+          abs_of_pos (by positivity)]
+    rw [h_denom_eq]
+    rw [div_le_iff₀ (by positivity : (0:ℝ) < 4 * h * Real.pi * |T₁ - T₂|)]
+    have h_eq : M_a * h^3 =
+        M_a / (4 * Real.pi * |T₁ - T₂|) * h^2 * (4 * h * Real.pi * |T₁ - T₂|) := by
+      have hπ_ne_local : Real.pi ≠ 0 := Real.pi_ne_zero
+      have hs_abs_ne : |T₁ - T₂| ≠ 0 := hs_abs_pos.ne'
+      field_simp
+    linarith [hR_αδ_b, h_eq]
+  -- Identity: D_(1,0) = 2F - D_(0,1).
+  -- D_(0,1) = jet_01 - n12_01, D_(1,0) = jet_10 - n12_10.
+  -- jet_10 + jet_01 = (sin δ - sin α)/(2hπs).
+  -- n12_10 + n12_01 = (q₁-q₂) cos Δ/(πs).
+  -- 2F = (sin δ - sin α - 2(q₁-q₂) cos Δ h)/(2hπs) = (sin δ - sin α)/(2hπs) - (q₁-q₂) cos Δ/(πs)
+  --    = (jet_10 + jet_01) - (n12_10 + n12_01)
+  --    = (jet_10 - n12_10) + (jet_01 - n12_01) = D_(1,0) + D_(0,1)
+  -- Hence D_(1,0) = 2F - D_(0,1).
+  have h_D_id :
+      (pointToJetTransform h * crossBlock T₁ T₂ h *
+          (pointToJetTransform h).transpose -
+        (1 / Real.pi) • N12 T₁ T₂) 1 0 =
+      2 * F -
+      (pointToJetTransform h * crossBlock T₁ T₂ h *
+          (pointToJetTransform h).transpose -
+        (1 / Real.pi) • N12 T₁ T₂) 0 1 := by
+    rw [Matrix.sub_apply, Matrix.sub_apply]
+    rw [jet_cross_matrix_apply_10 T₁ T₂ h hT h_pos h_le]
+    rw [jet_cross_matrix_apply_01 T₁ T₂ h hT h_pos h_le]
+    rw [h_pK_00, h_pK_01, h_pK_10, h_pK_11]
+    rw [h_N_01, h_N_10]
+    rw [hF_def, hR_αδ_def]
+    field_simp
+    ring
+  rw [h_D_id]
+  have h_D_01 := hM_01 h h_pos h_le
+  have h_tri : |2 * F - (pointToJetTransform h * crossBlock T₁ T₂ h *
+          (pointToJetTransform h).transpose -
+        (1 / Real.pi) • N12 T₁ T₂) 0 1| ≤
+      |2 * F| + |(pointToJetTransform h * crossBlock T₁ T₂ h *
+          (pointToJetTransform h).transpose -
+        (1 / Real.pi) • N12 T₁ T₂) 0 1| := abs_sub _ _
+  have h_2F_bound : |2 * F| = 2 * |F| := by
+    rw [abs_mul, show |(2:ℝ)| = 2 from by norm_num]
+  calc |2 * F - (pointToJetTransform h * crossBlock T₁ T₂ h *
+          (pointToJetTransform h).transpose -
+        (1 / Real.pi) • N12 T₁ T₂) 0 1|
+      ≤ |2 * F| + |(pointToJetTransform h * crossBlock T₁ T₂ h *
+          (pointToJetTransform h).transpose -
+        (1 / Real.pi) • N12 T₁ T₂) 0 1| := h_tri
+    _ = 2 * |F| + |(pointToJetTransform h * crossBlock T₁ T₂ h *
+          (pointToJetTransform h).transpose -
+        (1 / Real.pi) • N12 T₁ T₂) 0 1| := by rw [h_2F_bound]
+    _ ≤ 2 * (M_a / (4 * Real.pi * |T₁ - T₂|) * h^2) + M_01 * h^2 := by linarith
+    _ = M_10 * h^2 := by rw [hM_10_def]; ring
+
 /-- Cross-block jet-limit with explicit `O(h²)` rate.  Entrywise: for
     fixed separation `s = T₁ − T₂ ≠ 0`, there is `M(|s|⁻¹) ≥ 0` such
     that for `h ∈ (0, |s|/3]`,
