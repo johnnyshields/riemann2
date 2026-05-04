@@ -1764,6 +1764,74 @@ private lemma cross_sin_pair_sym_bound (T₁ T₂ R : ℝ) (hR : 0 < R) :
       _ = ((M_lin_1 + M_lin_2)^2 + (K_sym_1 + K_sym_2)) * h^2 := by ring
   exact ⟨h_α_δ, h_β_γ⟩
 
+/-- Anti-difference of sines bound for the cross block:
+    `|sin β − sin γ| ≤ M · |h|` (linear in `h`). -/
+private lemma cross_sin_pair_anti_bound (T₁ T₂ R : ℝ) (hR : 0 < R) :
+    ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, |h| ≤ R →
+      |Real.sin (theta (T₁ - h) - theta (T₂ + h)) -
+       Real.sin (theta (T₁ + h) - theta (T₂ - h))| ≤ M * |h| := by
+  obtain ⟨K_anti_1, hK_anti_1_nn, hK_anti_1⟩ := theta_anti_sym_diff_bound T₁ R hR
+  obtain ⟨K_anti_2, hK_anti_2_nn, hK_anti_2⟩ := theta_anti_sym_diff_bound T₂ R hR
+  refine ⟨(K_anti_1 + K_anti_2) * R + 2 * (|q T₁| + |q T₂|), by positivity, ?_⟩
+  intro h hh
+  set β := theta (T₁ - h) - theta (T₂ + h) with hβ_def
+  set γ := theta (T₁ + h) - theta (T₂ - h) with hγ_def
+  -- |sin β - sin γ| ≤ |β - γ|
+  have h_lipschitz : |Real.sin β - Real.sin γ| ≤ |β - γ| :=
+    Real.abs_sin_sub_sin_le β γ
+  -- |β - γ| ≤ |θ(T₁+h) - θ(T₁-h)| + |θ(T₂+h) - θ(T₂-h)|
+  have h_β_minus_γ : β - γ = -(theta (T₁ + h) - theta (T₁ - h)) -
+      (theta (T₂ + h) - theta (T₂ - h)) := by simp [hβ_def, hγ_def]; ring
+  -- Bounds on each of |θ(T+h) - θ(T-h)|.
+  have h_T₁_diff : |theta (T₁ + h) - theta (T₁ - h)| ≤
+      K_anti_1 * h^2 + 2 * |q T₁| * |h| := by
+    have h_aux : theta (T₁ + h) - theta (T₁ - h) =
+        (theta (T₁ + h) - theta (T₁ - h) - 2 * q T₁ * h) + 2 * q T₁ * h := by ring
+    calc |theta (T₁ + h) - theta (T₁ - h)|
+        = |(theta (T₁ + h) - theta (T₁ - h) - 2 * q T₁ * h) + 2 * q T₁ * h| := by
+          rw [← h_aux]
+      _ ≤ |theta (T₁ + h) - theta (T₁ - h) - 2 * q T₁ * h| + |2 * q T₁ * h| := abs_add_le _ _
+      _ ≤ K_anti_1 * h^2 + 2 * |q T₁| * |h| := by
+          have := hK_anti_1 h hh
+          have h_abs : |2 * q T₁ * h| = 2 * |q T₁| * |h| := by
+            rw [abs_mul, abs_mul, abs_of_pos (by norm_num : (2:ℝ) > 0)]
+          linarith
+  have h_T₂_diff : |theta (T₂ + h) - theta (T₂ - h)| ≤
+      K_anti_2 * h^2 + 2 * |q T₂| * |h| := by
+    have h_aux : theta (T₂ + h) - theta (T₂ - h) =
+        (theta (T₂ + h) - theta (T₂ - h) - 2 * q T₂ * h) + 2 * q T₂ * h := by ring
+    calc |theta (T₂ + h) - theta (T₂ - h)|
+        = |(theta (T₂ + h) - theta (T₂ - h) - 2 * q T₂ * h) + 2 * q T₂ * h| := by
+          rw [← h_aux]
+      _ ≤ |theta (T₂ + h) - theta (T₂ - h) - 2 * q T₂ * h| + |2 * q T₂ * h| := abs_add_le _ _
+      _ ≤ K_anti_2 * h^2 + 2 * |q T₂| * |h| := by
+          have := hK_anti_2 h hh
+          have h_abs : |2 * q T₂ * h| = 2 * |q T₂| * |h| := by
+            rw [abs_mul, abs_mul, abs_of_pos (by norm_num : (2:ℝ) > 0)]
+          linarith
+  -- Combine and convert h² ≤ R · |h|
+  have h_h_abs_nn : 0 ≤ |h| := abs_nonneg h
+  have h_h_sq_le_R_abs : h^2 ≤ R * |h| := by
+    have h_eq : h^2 = |h| * |h| := by rw [show |h| * |h| = |h|^2 from (sq |h|).symm, sq_abs]
+    rw [h_eq]
+    exact mul_le_mul_of_nonneg_right hh h_h_abs_nn
+  calc |Real.sin β - Real.sin γ|
+      ≤ |β - γ| := h_lipschitz
+    _ = |-(theta (T₁ + h) - theta (T₁ - h)) - (theta (T₂ + h) - theta (T₂ - h))| := by
+        rw [h_β_minus_γ]
+    _ ≤ |-(theta (T₁ + h) - theta (T₁ - h))| + |theta (T₂ + h) - theta (T₂ - h)| :=
+        abs_sub _ _
+    _ = |theta (T₁ + h) - theta (T₁ - h)| + |theta (T₂ + h) - theta (T₂ - h)| := by
+        rw [abs_neg]
+    _ ≤ (K_anti_1 * h^2 + 2 * |q T₁| * |h|) + (K_anti_2 * h^2 + 2 * |q T₂| * |h|) := by linarith
+    _ = (K_anti_1 + K_anti_2) * h^2 + 2 * (|q T₁| + |q T₂|) * |h| := by ring
+    _ ≤ (K_anti_1 + K_anti_2) * (R * |h|) + 2 * (|q T₁| + |q T₂|) * |h| := by
+        have h_ge : 0 ≤ K_anti_1 + K_anti_2 := by linarith
+        have : (K_anti_1 + K_anti_2) * h^2 ≤ (K_anti_1 + K_anti_2) * (R * |h|) :=
+          mul_le_mul_of_nonneg_left h_h_sq_le_R_abs h_ge
+        linarith
+    _ = ((K_anti_1 + K_anti_2) * R + 2 * (|q T₁| + |q T₂|)) * |h| := by ring
+
 /-- Cross-block jet-limit with explicit `O(h²)` rate.  Entrywise: for
     fixed separation `s = T₁ − T₂ ≠ 0`, there is `M(|s|⁻¹) ≥ 0` such
     that for `h ∈ (0, |s|/3]`,
