@@ -1413,6 +1413,84 @@ private lemma jet_cross_matrix_apply_11 (T₁ T₂ h : ℝ) (hT : T₁ ≠ T₂)
   field_simp
   ring
 
+/-- Linear absolute bound on `θ` differences: there is `M ≥ 0` such that
+    for `|h| ≤ R`, `|θ(T+h) - θT| ≤ M · |h|`. -/
+private lemma theta_lin_abs_bound (T R : ℝ) (hR : 0 < R) :
+    ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, |h| ≤ R →
+      |theta (T + h) - theta T| ≤ M * |h| := by
+  obtain ⟨K, hK_nn, hK⟩ := theta_taylor_remainder_1_on T R hR
+  refine ⟨|q T| + K * R, by positivity, ?_⟩
+  intro h hh
+  have h_split : theta (T + h) - theta T =
+      (theta (T + h) - (theta T + q T * h)) + (q T * h) := by ring
+  have h_abs_sq : |h|^2 = h^2 := sq_abs h
+  have h_abs_nn : 0 ≤ |h| := abs_nonneg h
+  have h_abs_le_R : |h| ≤ R := hh
+  calc |theta (T + h) - theta T|
+      = |(theta (T + h) - (theta T + q T * h)) + (q T * h)| := by rw [← h_split]
+    _ ≤ |theta (T + h) - (theta T + q T * h)| + |q T * h| := abs_add_le _ _
+    _ ≤ K * h^2 + |q T| * |h| := by
+        rw [abs_mul]; linarith [hK h hh]
+    _ = K * (|h| * |h|) + |q T| * |h| := by rw [show h^2 = |h| * |h| from by
+          rw [show |h| * |h| = |h|^2 from (sq |h|).symm, h_abs_sq]]
+    _ ≤ K * (R * |h|) + |q T| * |h| := by
+        have : K * (|h| * |h|) ≤ K * (R * |h|) :=
+          mul_le_mul_of_nonneg_left
+            (by nlinarith) hK_nn
+        linarith
+    _ = (|q T| + K * R) * |h| := by ring
+
+/-- Symmetric-sum bound for `θ`: `|θ(T+h) + θ(T-h) - 2 θ T| ≤ 2 K h²`. -/
+private lemma theta_sym_sum_bound (T R : ℝ) (hR : 0 < R) :
+    ∃ K : ℝ, 0 ≤ K ∧ ∀ h : ℝ, |h| ≤ R →
+      |theta (T + h) + theta (T - h) - 2 * theta T| ≤ K * h^2 := by
+  obtain ⟨K₀, hK₀_nn, hK₀⟩ := theta_taylor_remainder_1_on T R hR
+  refine ⟨2 * K₀, by positivity, ?_⟩
+  intro h hh
+  have h_neg_abs : |(-h)| ≤ R := by rw [abs_neg]; exact hh
+  have h_taylor_p := hK₀ h hh
+  have h_taylor_m := hK₀ (-h) h_neg_abs
+  have h_T_m : T + (-h) = T - h := by ring
+  rw [h_T_m] at h_taylor_m
+  have h_neg_sq : (-h)^2 = h^2 := by ring
+  rw [h_neg_sq] at h_taylor_m
+  have h_split : theta (T + h) + theta (T - h) - 2 * theta T =
+      (theta (T + h) - (theta T + q T * h)) +
+      (theta (T - h) - (theta T + q T * (-h))) := by ring
+  calc |theta (T + h) + theta (T - h) - 2 * theta T|
+      = |(theta (T + h) - (theta T + q T * h)) +
+         (theta (T - h) - (theta T + q T * (-h)))| := by rw [h_split]
+    _ ≤ |theta (T + h) - (theta T + q T * h)| +
+        |theta (T - h) - (theta T + q T * (-h))| := abs_add_le _ _
+    _ ≤ K₀ * h^2 + K₀ * h^2 := by linarith
+    _ = 2 * K₀ * h^2 := by ring
+
+/-- Anti-symmetric difference bound for `θ`:
+    `|θ(T+h) − θ(T−h) − 2 q T h| ≤ 2 K h²`. -/
+private lemma theta_anti_sym_diff_bound (T R : ℝ) (hR : 0 < R) :
+    ∃ K : ℝ, 0 ≤ K ∧ ∀ h : ℝ, |h| ≤ R →
+      |theta (T + h) - theta (T - h) - 2 * q T * h| ≤ K * h^2 := by
+  obtain ⟨K₀, hK₀_nn, hK₀⟩ := theta_taylor_remainder_1_on T R hR
+  refine ⟨2 * K₀, by positivity, ?_⟩
+  intro h hh
+  have h_neg_abs : |(-h)| ≤ R := by rw [abs_neg]; exact hh
+  have h_taylor_p := hK₀ h hh
+  have h_taylor_m := hK₀ (-h) h_neg_abs
+  have h_T_m : T + (-h) = T - h := by ring
+  rw [h_T_m] at h_taylor_m
+  have h_neg_sq : (-h)^2 = h^2 := by ring
+  rw [h_neg_sq] at h_taylor_m
+  have h_split : theta (T + h) - theta (T - h) - 2 * q T * h =
+      (theta (T + h) - (theta T + q T * h)) -
+      (theta (T - h) - (theta T + q T * (-h))) := by ring
+  calc |theta (T + h) - theta (T - h) - 2 * q T * h|
+      = |(theta (T + h) - (theta T + q T * h)) -
+         (theta (T - h) - (theta T + q T * (-h)))| := by rw [h_split]
+    _ ≤ |theta (T + h) - (theta T + q T * h)| +
+        |theta (T - h) - (theta T + q T * (-h))| := abs_sub _ _
+    _ ≤ K₀ * h^2 + K₀ * h^2 := by linarith
+    _ = 2 * K₀ * h^2 := by ring
+
 /-- Pointwise values of `(1/π) • N12 T₁ T₂`. -/
 private lemma N12_smul_apply (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
     ((1 / Real.pi) • N12 T₁ T₂) 0 0 =
