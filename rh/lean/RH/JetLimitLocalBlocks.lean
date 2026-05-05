@@ -2476,6 +2476,52 @@ private lemma theta_sym_sum_bound_h2 (T R : ℝ) (hR : 0 < R) :
     _ ≤ K_3 * |h|^4 + K_3 * |h|^4 := by linarith
     _ = 2 * K_3 * |h|^4 := by ring
 
+/-- Cross-block precise sym sum bound at h² leading order:
+    `|(α + δ - 2Δ) - (qPrime T₁ - qPrime T₂) h²| ≤ K |h|⁴`
+    and same for `(β + γ - 2Δ)`.  Critical for `cross_rate_bound_11`. -/
+private lemma cross_theta_sym_sum_h2 (T₁ T₂ R : ℝ) (hR : 0 < R) :
+    ∃ K : ℝ, 0 ≤ K ∧ ∀ h : ℝ, |h| ≤ R →
+      |(theta (T₁ - h) - theta (T₂ - h)) +
+       (theta (T₁ + h) - theta (T₂ + h)) -
+       2 * (theta T₁ - theta T₂) -
+       (qPrime T₁ - qPrime T₂) * h^2| ≤ K * |h|^4 ∧
+      |(theta (T₁ - h) - theta (T₂ + h)) +
+       (theta (T₁ + h) - theta (T₂ - h)) -
+       2 * (theta T₁ - theta T₂) -
+       (qPrime T₁ - qPrime T₂) * h^2| ≤ K * |h|^4 := by
+  obtain ⟨K_1, hK_1_nn, hK_1⟩ := theta_sym_sum_bound_h2 T₁ R hR
+  obtain ⟨K_2, hK_2_nn, hK_2⟩ := theta_sym_sum_bound_h2 T₂ R hR
+  refine ⟨K_1 + K_2, by positivity, ?_⟩
+  intro h hh
+  have h1 := hK_1 h hh
+  have h2 := hK_2 h hh
+  refine ⟨?_, ?_⟩
+  · -- α + δ - 2Δ = (θ(T₁-h) - θ(T₂-h)) + (θ(T₁+h) - θ(T₂+h)) - 2(θT₁ - θT₂)
+    -- = (θ(T₁+h) + θ(T₁-h) - 2θT₁) - (θ(T₂+h) + θ(T₂-h) - 2θT₂)
+    have h_split :
+        (theta (T₁ - h) - theta (T₂ - h)) + (theta (T₁ + h) - theta (T₂ + h)) -
+          2 * (theta T₁ - theta T₂) - (qPrime T₁ - qPrime T₂) * h^2 =
+        (theta (T₁ + h) + theta (T₁ - h) - 2 * theta T₁ - qPrime T₁ * h^2) -
+        (theta (T₂ + h) + theta (T₂ - h) - 2 * theta T₂ - qPrime T₂ * h^2) := by
+      ring
+    calc |_| = _ := by rw [h_split]
+      _ ≤ |theta (T₁ + h) + theta (T₁ - h) - 2 * theta T₁ - qPrime T₁ * h^2| +
+          |theta (T₂ + h) + theta (T₂ - h) - 2 * theta T₂ - qPrime T₂ * h^2| := abs_sub _ _
+      _ ≤ K_1 * |h|^4 + K_2 * |h|^4 := by linarith
+      _ = (K_1 + K_2) * |h|^4 := by ring
+  · -- β + γ - 2Δ has the same form: same algebraic simplification.
+    have h_split :
+        (theta (T₁ - h) - theta (T₂ + h)) + (theta (T₁ + h) - theta (T₂ - h)) -
+          2 * (theta T₁ - theta T₂) - (qPrime T₁ - qPrime T₂) * h^2 =
+        (theta (T₁ + h) + theta (T₁ - h) - 2 * theta T₁ - qPrime T₁ * h^2) -
+        (theta (T₂ + h) + theta (T₂ - h) - 2 * theta T₂ - qPrime T₂ * h^2) := by
+      ring
+    calc |_| = _ := by rw [h_split]
+      _ ≤ |theta (T₁ + h) + theta (T₁ - h) - 2 * theta T₁ - qPrime T₁ * h^2| +
+          |theta (T₂ + h) + theta (T₂ - h) - 2 * theta T₂ - qPrime T₂ * h^2| := abs_sub _ _
+      _ ≤ K_1 * |h|^4 + K_2 * |h|^4 := by linarith
+      _ = (K_1 + K_2) * |h|^4 := by ring
+
 /-- Pure algebraic identity used to combine the four phaseKernel entries
     into a single fraction.  Treats `a, b, c, d, s, h` as abstract real
     numbers, sidestepping function-argument normalization issues. -/
