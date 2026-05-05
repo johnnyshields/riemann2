@@ -2602,6 +2602,152 @@ private lemma cross_angle_lin_bound_h2 (T₁ T₂ R : ℝ) (hR : 0 < R) :
       _ ≤ K_1 * h^2 + K_2 * h^2 := by linarith
       _ = (K_1 + K_2) * h^2 := by ring
 
+/-- Anti-sym diff bound at order 3 with cubic-remainder bound:
+    `|R_T(h) - R_T(-h)| ≤ 2 K_2 |h|³` where R_T is the order-1 theta
+    Taylor residual, using theta_taylor_remainder_2_on. -/
+private lemma theta_R1_anti_diff_h3 (T R : ℝ) (hR : 0 < R) :
+    ∃ K : ℝ, 0 ≤ K ∧ ∀ h : ℝ, |h| ≤ R →
+      |(theta (T + h) - (theta T + q T * h)) -
+       (theta (T - h) - (theta T + q T * (-h)))| ≤ K * |h|^3 := by
+  obtain ⟨K_2, hK_2_nn, hK_2⟩ := theta_taylor_remainder_2_on T R hR
+  refine ⟨2 * K_2, by positivity, ?_⟩
+  intro h hh
+  have h_neg_abs : |(-h)| ≤ R := by rw [abs_neg]; exact hh
+  have h_p := hK_2 h hh
+  have h_m := hK_2 (-h) h_neg_abs
+  -- Goal: |R_T(h) - R_T(-h)| ≤ 2 K_2 |h|³
+  -- where R_T(h) = θ(T+h) - θT - qT h.
+  -- The order-2 Taylor: θ(T+h) - (θT + qT h + qPrime T h²/2) = R'(h) where |R'(h)| ≤ K_2 |h|³.
+  -- So R_T(h) = qPrime T h²/2 + R'(h).
+  -- R_T(h) - R_T(-h) = qPrime T h²/2 + R'(h) - qPrime T (-h)²/2 - R'(-h)
+  --                  = qPrime T h²/2 - qPrime T h²/2 + R'(h) - R'(-h)
+  --                  = R'(h) - R'(-h)
+  -- Bounded by 2 K_2 |h|³.
+  have h_T_m : T + (-h) = T - h := by ring
+  rw [h_T_m] at h_m
+  have h_neg_sq : (-h)^2 = h^2 := by ring
+  rw [h_neg_sq] at h_m
+  have h_neg_abs_3 : |(-h)|^3 = |h|^3 := by rw [abs_neg]
+  rw [h_neg_abs_3] at h_m
+  have h_split :
+      (theta (T + h) - (theta T + q T * h)) -
+      (theta (T - h) - (theta T + q T * (-h))) =
+      (theta (T + h) - (theta T + q T * h + qPrime T * h^2 / 2)) -
+      (theta (T - h) - (theta T + q T * (-h) + qPrime T * h^2 / 2)) := by ring
+  calc |_| = _ := by rw [h_split]
+    _ ≤ |theta (T + h) - (theta T + q T * h + qPrime T * h^2 / 2)| +
+        |theta (T - h) - (theta T + q T * (-h) + qPrime T * h^2 / 2)| := abs_sub _ _
+    _ ≤ K_2 * |h|^3 + K_2 * |h|^3 := by linarith
+    _ = 2 * K_2 * |h|^3 := by ring
+
+/-- Cross-block squared-angle sum precise h² bound for αδ pair:
+    `|((α-Δ)² + (δ-Δ)²) - 2(q T₁ - q T₂)² h²| ≤ K h⁴`. -/
+private lemma cross_angle_sq_sum_αδ_h2 (T₁ T₂ R : ℝ) (hR : 0 < R) :
+    ∃ K : ℝ, 0 ≤ K ∧ ∀ h : ℝ, |h| ≤ R →
+      let α := theta (T₁ - h) - theta (T₂ - h)
+      let δ := theta (T₁ + h) - theta (T₂ + h)
+      let Δ := theta T₁ - theta T₂
+      |(α - Δ)^2 + (δ - Δ)^2 - 2 * (q T₁ - q T₂)^2 * h^2| ≤ K * h^4 := by
+  obtain ⟨K_lin, hK_lin_nn, hK_lin⟩ := cross_angle_lin_bound_h2 T₁ T₂ R hR
+  obtain ⟨K_anti_T₁, hK_anti_T₁_nn, hK_anti_T₁⟩ := theta_R1_anti_diff_h3 T₁ R hR
+  obtain ⟨K_anti_T₂, hK_anti_T₂_nn, hK_anti_T₂⟩ := theta_R1_anti_diff_h3 T₂ R hR
+  refine ⟨2 * |q T₁ - q T₂| * (K_anti_T₁ + K_anti_T₂) + 2 * K_lin^2,
+    by positivity, ?_⟩
+  intro h hh
+  simp only
+  -- Define r_α := α - Δ + (q₁-q₂) h, r_δ := δ - Δ - (q₁-q₂) h.
+  -- (α-Δ)² + (δ-Δ)² - 2(q₁-q₂)² h² = 2(q₁-q₂) h (r_δ - r_α) + r_α² + r_δ²
+  set α := theta (T₁ - h) - theta (T₂ - h)
+  set δ := theta (T₁ + h) - theta (T₂ + h)
+  set Δ := theta T₁ - theta T₂
+  set r_α := α - Δ + (q T₁ - q T₂) * h with hr_α_def
+  set r_δ := δ - Δ - (q T₁ - q T₂) * h with hr_δ_def
+  obtain ⟨h_α_lin, h_δ_lin, _, _⟩ := hK_lin h hh
+  -- |r_α| ≤ K_lin h²
+  have h_r_α_b : |r_α| ≤ K_lin * h^2 := h_α_lin
+  -- |r_δ| ≤ K_lin h²
+  have h_r_δ_b : |r_δ| ≤ K_lin * h^2 := by
+    show |δ - Δ - (q T₁ - q T₂) * h| ≤ _
+    exact h_δ_lin
+  -- |r_δ - r_α| bound: from theta_R1_anti_diff_h3 for T₁ and T₂.
+  have h_R1_T₁ := hK_anti_T₁ h hh
+  have h_R1_T₂ := hK_anti_T₂ h hh
+  -- r_α = R_T₁(-h) - R_T₂(-h) where R_T(h) = θ(T+h) - θT - qT h.
+  -- r_δ = R_T₁(h) - R_T₂(h).
+  -- r_δ - r_α = (R_T₁(h) - R_T₁(-h)) - (R_T₂(h) - R_T₂(-h)).
+  have h_r_diff : |r_δ - r_α| ≤ (K_anti_T₁ + K_anti_T₂) * |h|^3 := by
+    have h_split : r_δ - r_α =
+        ((theta (T₁ + h) - (theta T₁ + q T₁ * h)) -
+         (theta (T₁ - h) - (theta T₁ + q T₁ * (-h)))) -
+        ((theta (T₂ + h) - (theta T₂ + q T₂ * h)) -
+         (theta (T₂ - h) - (theta T₂ + q T₂ * (-h)))) := by
+      simp [hr_α_def, hr_δ_def]; ring
+    calc |r_δ - r_α| = _ := by rw [h_split]
+      _ ≤ |(theta (T₁ + h) - (theta T₁ + q T₁ * h)) -
+            (theta (T₁ - h) - (theta T₁ + q T₁ * (-h)))| +
+          |(theta (T₂ + h) - (theta T₂ + q T₂ * h)) -
+            (theta (T₂ - h) - (theta T₂ + q T₂ * (-h)))| := abs_sub _ _
+      _ ≤ K_anti_T₁ * |h|^3 + K_anti_T₂ * |h|^3 := by linarith
+      _ = (K_anti_T₁ + K_anti_T₂) * |h|^3 := by ring
+  -- Now combine.
+  have h_id : (α - Δ)^2 + (δ - Δ)^2 - 2 * (q T₁ - q T₂)^2 * h^2 =
+      2 * (q T₁ - q T₂) * h * (r_δ - r_α) + r_α^2 + r_δ^2 := by
+    rw [hr_α_def, hr_δ_def]; ring
+  rw [h_id]
+  -- Bound each piece.
+  have h_h_abs : |h|^2 = h^2 := sq_abs h
+  have h_h_pow_4 : |h|^4 = h^4 := by
+    rw [show (4 : ℕ) = 2 + 2 from rfl, pow_add, h_h_abs]
+    ring
+  have h_h_pow_3 : |h|^3 = |h| * h^2 := by
+    rw [show (3 : ℕ) = 1 + 2 from rfl, pow_add, h_h_abs]; ring
+  have h_h_abs_le_R : |h| ≤ R := hh
+  -- |2(q₁-q₂) h (r_δ - r_α)| ≤ 2|q₁-q₂||h| · (K_anti_T₁ + K_anti_T₂) |h|³
+  --                       = 2|q₁-q₂| (K_anti_T₁ + K_anti_T₂) |h|⁴
+  have h_b1 : |2 * (q T₁ - q T₂) * h * (r_δ - r_α)| ≤
+      2 * |q T₁ - q T₂| * (K_anti_T₁ + K_anti_T₂) * |h|^4 := by
+    rw [show 2 * (q T₁ - q T₂) * h * (r_δ - r_α) =
+        2 * (q T₁ - q T₂) * (h * (r_δ - r_α)) from by ring]
+    rw [abs_mul, abs_mul, abs_mul]
+    rw [show |(2:ℝ)| = 2 from by norm_num]
+    have h_step1 : |h| * |r_δ - r_α| ≤ |h| * ((K_anti_T₁ + K_anti_T₂) * |h|^3) :=
+      mul_le_mul_of_nonneg_left h_r_diff (abs_nonneg _)
+    have h_simpl : |h| * ((K_anti_T₁ + K_anti_T₂) * |h|^3) =
+        (K_anti_T₁ + K_anti_T₂) * |h|^4 := by
+      rw [show |h|^4 = |h| * |h|^3 from by ring]; ring
+    calc 2 * |q T₁ - q T₂| * (|h| * |r_δ - r_α|)
+        ≤ 2 * |q T₁ - q T₂| * (|h| * ((K_anti_T₁ + K_anti_T₂) * |h|^3)) := by
+          apply mul_le_mul_of_nonneg_left h_step1 (by positivity)
+      _ = 2 * |q T₁ - q T₂| * (K_anti_T₁ + K_anti_T₂) * |h|^4 := by
+          rw [h_simpl]; ring
+  -- |r_α²| ≤ K_lin² h⁴.
+  have h_b2 : |r_α^2| ≤ K_lin^2 * h^4 := by
+    rw [show r_α^2 = r_α * r_α from sq r_α]
+    rw [abs_mul]
+    have : |r_α| * |r_α| ≤ (K_lin * h^2) * (K_lin * h^2) :=
+      mul_le_mul h_r_α_b h_r_α_b (abs_nonneg _) (by positivity)
+    linarith [show (K_lin * h^2) * (K_lin * h^2) = K_lin^2 * h^4 from by ring]
+  -- |r_δ²| ≤ K_lin² h⁴.
+  have h_b3 : |r_δ^2| ≤ K_lin^2 * h^4 := by
+    rw [show r_δ^2 = r_δ * r_δ from sq r_δ]
+    rw [abs_mul]
+    have : |r_δ| * |r_δ| ≤ (K_lin * h^2) * (K_lin * h^2) :=
+      mul_le_mul h_r_δ_b h_r_δ_b (abs_nonneg _) (by positivity)
+    linarith [show (K_lin * h^2) * (K_lin * h^2) = K_lin^2 * h^4 from by ring]
+  -- Combine via triangle inequality.
+  have h_tri : |2 * (q T₁ - q T₂) * h * (r_δ - r_α) + r_α^2 + r_δ^2| ≤
+      |2 * (q T₁ - q T₂) * h * (r_δ - r_α)| + |r_α^2| + |r_δ^2| := by
+    have h₁ := abs_add_le (2 * (q T₁ - q T₂) * h * (r_δ - r_α) + r_α^2) (r_δ^2)
+    have h₂ := abs_add_le (2 * (q T₁ - q T₂) * h * (r_δ - r_α)) (r_α^2)
+    linarith
+  calc |2 * (q T₁ - q T₂) * h * (r_δ - r_α) + r_α^2 + r_δ^2|
+      ≤ |2 * (q T₁ - q T₂) * h * (r_δ - r_α)| + |r_α^2| + |r_δ^2| := h_tri
+    _ ≤ 2 * |q T₁ - q T₂| * (K_anti_T₁ + K_anti_T₂) * |h|^4 +
+        K_lin^2 * h^4 + K_lin^2 * h^4 := by linarith
+    _ = 2 * |q T₁ - q T₂| * (K_anti_T₁ + K_anti_T₂) * h^4 +
+        2 * K_lin^2 * h^4 := by rw [h_h_pow_4]; ring
+    _ = (2 * |q T₁ - q T₂| * (K_anti_T₁ + K_anti_T₂) + 2 * K_lin^2) * h^4 := by ring
+
 /-- Pure algebraic identity used to combine the four phaseKernel entries
     into a single fraction.  Treats `a, b, c, d, s, h` as abstract real
     numbers, sidestepping function-argument normalization issues. -/
