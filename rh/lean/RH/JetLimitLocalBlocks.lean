@@ -3723,6 +3723,38 @@ private lemma cross_neg_pos_combine_alg (s h a b c d : ℝ)
   field_simp
   ring
 
+/-- Pure algebraic identity for the (1,1) entry combination.
+    `a/s − b/(s−2h) − c/(s+2h) + d/s = ((a+d)(s²−4h²) − s²(b+c) − 2sh(b−c)) / (s(s²−4h²))`. -/
+private lemma cross_pos_neg_neg_pos_combine_alg (s h a b c d : ℝ)
+    (hs_ne : s ≠ 0) (hsm_ne : s - 2 * h ≠ 0) (hsp_ne : s + 2 * h ≠ 0) :
+    a / s - b / (s - 2 * h) - c / (s + 2 * h) + d / s =
+    ((a + d) * (s^2 - 4 * h^2) - s^2 * (b + c) - 2 * s * h * (b - c)) /
+    (s * (s^2 - 4 * h^2)) := by
+  have h_eq : s^2 - 4 * h^2 = (s - 2 * h) * (s + 2 * h) := by ring
+  rw [h_eq]
+  field_simp
+  ring
+
+/-- Pure algebraic decomposition identity for the (1,1) entry numerator:
+    expresses `s²(s²-4h²)(a+d) - s⁴(b+c) - 2s³h(b-c) - 4h²(s²-4h²)·N`
+    in terms of an `h⁴` leading constant `K` and three precise residuals
+    `U_αδ`, `U_βγ`, `V`.  Used inside `cross_rate_bound_11`. -/
+private lemma cross_rate_11_decomp_alg
+    (s h a b c d q1 q2 qp1 qp2 Δs Δc : ℝ) :
+    s^2 * (s^2 - 4 * h^2) * (a + d) - s^4 * (b + c) -
+      2 * s^3 * h * (b - c) -
+      4 * h^2 * (s^2 - 4 * h^2) *
+        ((q1 + q2) * s * Δc + (q1 * q2 * s^2 - 2) * Δs) =
+    h^4 *
+      (-4 * s^2 * (qp1 - qp2) * Δc + 4 * (q1 - q2)^2 * s^2 * Δs +
+       16 * (q1 + q2) * s * Δc + 16 * q1 * q2 * s^2 * Δs - 32 * Δs) +
+    s^2 * (s^2 - 4 * h^2) *
+      (a + d - 2 * Δs - ((qp1 - qp2) * Δc - (q1 - q2)^2 * Δs) * h^2) -
+    s^4 *
+      (b + c - 2 * Δs - ((qp1 - qp2) * Δc - (q1 + q2)^2 * Δs) * h^2) -
+    2 * s^3 * h *
+      (b - c + 2 * (q1 + q2) * Δc * h) := by ring
+
 set_option maxHeartbeats 4000000 in
 /-- Bound on entry `(0, 1)` of `P_h C_h(T₁, T₂) P_h^⊤ − (1/π) N₁₂(T₁, T₂)`
     for `h ∈ (0, |s|/3]`. -/
