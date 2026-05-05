@@ -2439,6 +2439,43 @@ private lemma cross_rate_bound_00 (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
             ≤ (18 * s^2 * M_a + 18 * |s| * M_b + 72) * (s^2 - 4 * h^2) / (5 * |s|^2) * h^2 := by
               exact mul_le_mul_of_nonneg_right h_step3 h_h_sq_nn
 
+/-- Symmetric difference bound for theta at order 3:
+    `|θ(T+h) + θ(T-h) - 2θT - qPrime T h²| ≤ 2 K |h|⁴`.
+    Used for precise h² leading-term tracking in cross_rate_bound_11. -/
+private lemma theta_sym_sum_bound_h2 (T R : ℝ) (hR : 0 < R) :
+    ∃ K : ℝ, 0 ≤ K ∧ ∀ h : ℝ, |h| ≤ R →
+      |theta (T + h) + theta (T - h) - 2 * theta T - qPrime T * h^2| ≤
+        K * |h|^4 := by
+  obtain ⟨K_3, hK_3_nn, hK_3⟩ := theta_taylor_remainder_3_on T R hR
+  refine ⟨2 * K_3, by positivity, ?_⟩
+  intro h hh
+  have h_neg_abs : |(-h)| ≤ R := by rw [abs_neg]; exact hh
+  have h_taylor_p := hK_3 h hh
+  have h_taylor_m := hK_3 (-h) h_neg_abs
+  have h_T_m : T + (-h) = T - h := by ring
+  rw [h_T_m] at h_taylor_m
+  have h_neg_sq : (-h)^2 = h^2 := by ring
+  have h_neg_cube : (-h)^3 = -(h^3) := by ring
+  rw [h_neg_sq, h_neg_cube] at h_taylor_m
+  have h_neg_abs_4 : |(-h)|^4 = |h|^4 := by rw [abs_neg]
+  rw [h_neg_abs_4] at h_taylor_m
+  have h_split : theta (T + h) + theta (T - h) - 2 * theta T - qPrime T * h^2 =
+      (theta (T + h) - (theta T + q T * h + qPrime T * h^2 / 2 +
+        qDoublePrime T * h^3 / 6)) +
+      (theta (T - h) - (theta T + q T * (-h) + qPrime T * h^2 / 2 +
+        qDoublePrime T * (-(h^3)) / 6)) := by ring
+  calc |theta (T + h) + theta (T - h) - 2 * theta T - qPrime T * h^2|
+      = |(theta (T + h) - (theta T + q T * h + qPrime T * h^2 / 2 +
+            qDoublePrime T * h^3 / 6)) +
+         (theta (T - h) - (theta T + q T * (-h) + qPrime T * h^2 / 2 +
+            qDoublePrime T * (-(h^3)) / 6))| := by rw [h_split]
+    _ ≤ |theta (T + h) - (theta T + q T * h + qPrime T * h^2 / 2 +
+            qDoublePrime T * h^3 / 6)| +
+        |theta (T - h) - (theta T + q T * (-h) + qPrime T * h^2 / 2 +
+            qDoublePrime T * (-(h^3)) / 6)| := abs_add_le _ _
+    _ ≤ K_3 * |h|^4 + K_3 * |h|^4 := by linarith
+    _ = 2 * K_3 * |h|^4 := by ring
+
 /-- Pure algebraic identity used to combine the four phaseKernel entries
     into a single fraction.  Treats `a, b, c, d, s, h` as abstract real
     numbers, sidestepping function-argument normalization issues. -/
