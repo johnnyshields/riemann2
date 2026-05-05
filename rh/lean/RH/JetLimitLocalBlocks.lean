@@ -2522,6 +2522,86 @@ private lemma cross_theta_sym_sum_h2 (T₁ T₂ R : ℝ) (hR : 0 < R) :
       _ ≤ K_1 * |h|^4 + K_2 * |h|^4 := by linarith
       _ = (K_1 + K_2) * |h|^4 := by ring
 
+/-- Cross-block angle precise linear approximation:
+    `|(α - Δ) + (q T₁ - q T₂) h| ≤ K h²` (residual after subtracting linear h leading).
+    Similarly for β, γ, δ.  Foundation for `cross_rate_bound_11`. -/
+private lemma cross_angle_lin_bound_h2 (T₁ T₂ R : ℝ) (hR : 0 < R) :
+    ∃ K : ℝ, 0 ≤ K ∧ ∀ h : ℝ, |h| ≤ R →
+      |(theta (T₁ - h) - theta (T₂ - h)) - (theta T₁ - theta T₂) +
+        (q T₁ - q T₂) * h| ≤ K * h^2 ∧
+      |(theta (T₁ + h) - theta (T₂ + h)) - (theta T₁ - theta T₂) -
+        (q T₁ - q T₂) * h| ≤ K * h^2 ∧
+      |(theta (T₁ - h) - theta (T₂ + h)) - (theta T₁ - theta T₂) +
+        (q T₁ + q T₂) * h| ≤ K * h^2 ∧
+      |(theta (T₁ + h) - theta (T₂ - h)) - (theta T₁ - theta T₂) -
+        (q T₁ + q T₂) * h| ≤ K * h^2 := by
+  obtain ⟨K_1, hK_1_nn, hK_1⟩ := theta_taylor_remainder_1_on T₁ R hR
+  obtain ⟨K_2, hK_2_nn, hK_2⟩ := theta_taylor_remainder_1_on T₂ R hR
+  refine ⟨K_1 + K_2, by positivity, ?_⟩
+  intro h hh
+  have h_neg_abs : |(-h)| ≤ R := by rw [abs_neg]; exact hh
+  -- For each T, theta(T+h) - θT - qT·h is bounded by K·h².
+  have hR_T₁_p : |theta (T₁ + h) - (theta T₁ + q T₁ * h)| ≤ K_1 * h^2 := hK_1 h hh
+  have hR_T₁_m_orig : |theta (T₁ + (-h)) - (theta T₁ + q T₁ * (-h))| ≤ K_1 * (-h)^2 :=
+    hK_1 (-h) h_neg_abs
+  have h_neg_sq : (-h)^2 = h^2 := by ring
+  have hR_T₁_m : |theta (T₁ - h) - (theta T₁ + q T₁ * (-h))| ≤ K_1 * h^2 := by
+    have : theta (T₁ + (-h)) = theta (T₁ - h) := by ring_nf
+    rw [this, h_neg_sq] at hR_T₁_m_orig
+    exact hR_T₁_m_orig
+  have hR_T₂_p : |theta (T₂ + h) - (theta T₂ + q T₂ * h)| ≤ K_2 * h^2 := hK_2 h hh
+  have hR_T₂_m_orig : |theta (T₂ + (-h)) - (theta T₂ + q T₂ * (-h))| ≤ K_2 * (-h)^2 :=
+    hK_2 (-h) h_neg_abs
+  have hR_T₂_m : |theta (T₂ - h) - (theta T₂ + q T₂ * (-h))| ≤ K_2 * h^2 := by
+    have : theta (T₂ + (-h)) = theta (T₂ - h) := by ring_nf
+    rw [this, h_neg_sq] at hR_T₂_m_orig
+    exact hR_T₂_m_orig
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · -- α: (θ(T₁-h) - θT₁ + qT₁ h) - (θ(T₂-h) - θT₂ + qT₂ h)
+    have h_split :
+        (theta (T₁ - h) - theta (T₂ - h)) - (theta T₁ - theta T₂) +
+          (q T₁ - q T₂) * h =
+        (theta (T₁ - h) - (theta T₁ + q T₁ * (-h))) -
+        (theta (T₂ - h) - (theta T₂ + q T₂ * (-h))) := by ring
+    calc |_| = _ := by rw [h_split]
+      _ ≤ |theta (T₁ - h) - (theta T₁ + q T₁ * (-h))| +
+          |theta (T₂ - h) - (theta T₂ + q T₂ * (-h))| := abs_sub _ _
+      _ ≤ K_1 * h^2 + K_2 * h^2 := by linarith
+      _ = (K_1 + K_2) * h^2 := by ring
+  · -- δ: (θ(T₁+h) - θT₁ - qT₁ h) - (θ(T₂+h) - θT₂ - qT₂ h)
+    have h_split :
+        (theta (T₁ + h) - theta (T₂ + h)) - (theta T₁ - theta T₂) -
+          (q T₁ - q T₂) * h =
+        (theta (T₁ + h) - (theta T₁ + q T₁ * h)) -
+        (theta (T₂ + h) - (theta T₂ + q T₂ * h)) := by ring
+    calc |_| = _ := by rw [h_split]
+      _ ≤ |theta (T₁ + h) - (theta T₁ + q T₁ * h)| +
+          |theta (T₂ + h) - (theta T₂ + q T₂ * h)| := abs_sub _ _
+      _ ≤ K_1 * h^2 + K_2 * h^2 := by linarith
+      _ = (K_1 + K_2) * h^2 := by ring
+  · -- β: (θ(T₁-h) - θT₁ + qT₁ h) - (θ(T₂+h) - θT₂ - qT₂ h)
+    have h_split :
+        (theta (T₁ - h) - theta (T₂ + h)) - (theta T₁ - theta T₂) +
+          (q T₁ + q T₂) * h =
+        (theta (T₁ - h) - (theta T₁ + q T₁ * (-h))) -
+        (theta (T₂ + h) - (theta T₂ + q T₂ * h)) := by ring
+    calc |_| = _ := by rw [h_split]
+      _ ≤ |theta (T₁ - h) - (theta T₁ + q T₁ * (-h))| +
+          |theta (T₂ + h) - (theta T₂ + q T₂ * h)| := abs_sub _ _
+      _ ≤ K_1 * h^2 + K_2 * h^2 := by linarith
+      _ = (K_1 + K_2) * h^2 := by ring
+  · -- γ: (θ(T₁+h) - θT₁ - qT₁ h) - (θ(T₂-h) - θT₂ + qT₂ h)
+    have h_split :
+        (theta (T₁ + h) - theta (T₂ - h)) - (theta T₁ - theta T₂) -
+          (q T₁ + q T₂) * h =
+        (theta (T₁ + h) - (theta T₁ + q T₁ * h)) -
+        (theta (T₂ - h) - (theta T₂ + q T₂ * (-h))) := by ring
+    calc |_| = _ := by rw [h_split]
+      _ ≤ |theta (T₁ + h) - (theta T₁ + q T₁ * h)| +
+          |theta (T₂ - h) - (theta T₂ + q T₂ * (-h))| := abs_sub _ _
+      _ ≤ K_1 * h^2 + K_2 * h^2 := by linarith
+      _ = (K_1 + K_2) * h^2 := by ring
+
 /-- Pure algebraic identity used to combine the four phaseKernel entries
     into a single fraction.  Treats `a, b, c, d, s, h` as abstract real
     numbers, sidestepping function-argument normalization issues. -/
