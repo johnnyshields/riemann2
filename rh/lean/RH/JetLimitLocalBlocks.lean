@@ -2849,6 +2849,128 @@ private lemma cross_angle_sq_sum_βγ_h2 (T₁ T₂ R : ℝ) (hR : 0 < R) :
         2 * K_lin^2 * h^4 := by rw [h_h_pow_4]; ring
     _ = (2 * |q T₁ + q T₂| * (K_anti_T₁ + K_anti_T₂) + 2 * K_lin^2) * h^4 := by ring
 
+/-- Cross-block angle cubed-sum bound for αδ pair: `|(α-Δ)³ + (δ-Δ)³| ≤ K h⁴`.
+    The h³ contribution from the linear part cancels by parity, leaving an
+    O(h⁴) leading term.  Combines `cross_angle_lin_bound_h2`. -/
+private lemma cross_angle_cube_sum_αδ_h2 (T₁ T₂ R : ℝ) (hR : 0 < R) :
+    ∃ K : ℝ, 0 ≤ K ∧ ∀ h : ℝ, |h| ≤ R →
+      let α := theta (T₁ - h) - theta (T₂ - h)
+      let δ := theta (T₁ + h) - theta (T₂ + h)
+      let Δ := theta T₁ - theta T₂
+      |(α - Δ)^3 + (δ - Δ)^3| ≤ K * h^4 := by
+  obtain ⟨K_lin, hK_lin_nn, hK_lin⟩ := cross_angle_lin_bound_h2 T₁ T₂ R hR
+  refine ⟨6 * (q T₁ - q T₂)^2 * K_lin + 6 * |q T₁ - q T₂| * K_lin^2 * R +
+           2 * K_lin^3 * R^2, by positivity, ?_⟩
+  intro h hh
+  simp only
+  set α := theta (T₁ - h) - theta (T₂ - h) with hα_def
+  set δ := theta (T₁ + h) - theta (T₂ + h) with hδ_def
+  set Δ := theta T₁ - theta T₂ with hΔ_def
+  set r_α := α - Δ + (q T₁ - q T₂) * h with hr_α_def
+  set r_δ := δ - Δ - (q T₁ - q T₂) * h with hr_δ_def
+  obtain ⟨h_α_lin, h_δ_lin, _, _⟩ := hK_lin h hh
+  have h_r_α_b : |r_α| ≤ K_lin * h^2 := h_α_lin
+  have h_r_δ_b : |r_δ| ≤ K_lin * h^2 := by
+    show |δ - Δ - (q T₁ - q T₂) * h| ≤ _
+    exact h_δ_lin
+  have h_id : (α - Δ)^3 + (δ - Δ)^3 =
+      3 * ((q T₁ - q T₂) * h)^2 * (r_α + r_δ) +
+      3 * ((q T₁ - q T₂) * h) * (r_δ^2 - r_α^2) +
+      (r_α^3 + r_δ^3) := by
+    rw [hr_α_def, hr_δ_def]; ring
+  rw [h_id]
+  have h_h_pow_4_nn : 0 ≤ h^4 := by positivity
+  have h_h_sq_le_R_sq : h^2 ≤ R^2 := by
+    rw [show h^2 = |h|^2 from (sq_abs h).symm,
+        show R^2 = R * R from sq R, show |h|^2 = |h| * |h| from sq |h|]
+    exact mul_le_mul hh hh (abs_nonneg _) hR.le
+  -- Bound 1: |3 ((q₁-q₂) h)² (r_α + r_δ)| ≤ 6 (q₁-q₂)² K_lin h⁴
+  have h_b1 : |3 * ((q T₁ - q T₂) * h)^2 * (r_α + r_δ)| ≤
+      6 * (q T₁ - q T₂)^2 * K_lin * h^4 := by
+    rw [show 3 * ((q T₁ - q T₂) * h)^2 * (r_α + r_δ) =
+        (3 * (q T₁ - q T₂)^2 * h^2) * (r_α + r_δ) from by ring]
+    rw [abs_mul]
+    rw [show |3 * (q T₁ - q T₂)^2 * h^2| = 3 * (q T₁ - q T₂)^2 * h^2 from
+        abs_of_nonneg (by positivity)]
+    have h_sum_b : |r_α + r_δ| ≤ 2 * K_lin * h^2 := by
+      calc |r_α + r_δ| ≤ |r_α| + |r_δ| := abs_add_le _ _
+        _ ≤ K_lin * h^2 + K_lin * h^2 := by linarith
+        _ = 2 * K_lin * h^2 := by ring
+    calc 3 * (q T₁ - q T₂)^2 * h^2 * |r_α + r_δ|
+        ≤ 3 * (q T₁ - q T₂)^2 * h^2 * (2 * K_lin * h^2) := by
+          apply mul_le_mul_of_nonneg_left h_sum_b (by positivity)
+      _ = 6 * (q T₁ - q T₂)^2 * K_lin * h^4 := by ring
+  -- Bound 2: |3 ((q₁-q₂) h) (r_δ² - r_α²)| ≤ 6 |q₁-q₂| K_lin² R h⁴
+  have h_b2 : |3 * ((q T₁ - q T₂) * h) * (r_δ^2 - r_α^2)| ≤
+      6 * |q T₁ - q T₂| * K_lin^2 * R * h^4 := by
+    rw [abs_mul, abs_mul]
+    rw [show |(3:ℝ)| = 3 from by norm_num]
+    rw [show |(q T₁ - q T₂) * h| = |q T₁ - q T₂| * |h| from abs_mul _ _]
+    have h_α_sq_b : |r_α^2| ≤ K_lin^2 * h^4 := by
+      rw [show r_α^2 = r_α * r_α from sq r_α, abs_mul]
+      have := mul_le_mul h_r_α_b h_r_α_b (abs_nonneg _) (by positivity)
+      linarith [show (K_lin * h^2) * (K_lin * h^2) = K_lin^2 * h^4 from by ring]
+    have h_δ_sq_b : |r_δ^2| ≤ K_lin^2 * h^4 := by
+      rw [show r_δ^2 = r_δ * r_δ from sq r_δ, abs_mul]
+      have := mul_le_mul h_r_δ_b h_r_δ_b (abs_nonneg _) (by positivity)
+      linarith [show (K_lin * h^2) * (K_lin * h^2) = K_lin^2 * h^4 from by ring]
+    have h_diff_b : |r_δ^2 - r_α^2| ≤ 2 * K_lin^2 * h^4 := by
+      calc |r_δ^2 - r_α^2| ≤ |r_δ^2| + |r_α^2| := abs_sub _ _
+        _ ≤ K_lin^2 * h^4 + K_lin^2 * h^4 := by linarith
+        _ = 2 * K_lin^2 * h^4 := by ring
+    calc 3 * (|q T₁ - q T₂| * |h|) * |r_δ^2 - r_α^2|
+        ≤ 3 * (|q T₁ - q T₂| * |h|) * (2 * K_lin^2 * h^4) := by
+          apply mul_le_mul_of_nonneg_left h_diff_b (by positivity)
+      _ = 6 * |q T₁ - q T₂| * K_lin^2 * (|h| * h^4) := by ring
+      _ ≤ 6 * |q T₁ - q T₂| * K_lin^2 * (R * h^4) := by
+          apply mul_le_mul_of_nonneg_left _ (by positivity)
+          exact mul_le_mul_of_nonneg_right hh h_h_pow_4_nn
+      _ = 6 * |q T₁ - q T₂| * K_lin^2 * R * h^4 := by ring
+  -- Bound 3: |r_α³ + r_δ³| ≤ 2 K_lin³ R² h⁴
+  have h_b3 : |r_α^3 + r_δ^3| ≤ 2 * K_lin^3 * R^2 * h^4 := by
+    have h_α_cube : |r_α^3| ≤ K_lin^3 * h^6 := by
+      have h_α_sq_b' : |r_α|^2 ≤ K_lin^2 * h^4 := by
+        rw [show |r_α|^2 = |r_α| * |r_α| from sq _]
+        have := mul_le_mul h_r_α_b h_r_α_b (abs_nonneg _) (by positivity)
+        linarith [show (K_lin * h^2) * (K_lin * h^2) = K_lin^2 * h^4 from by ring]
+      rw [show r_α^3 = r_α * (r_α * r_α) from by ring, abs_mul]
+      rw [show |r_α * r_α| = |r_α|^2 from by rw [abs_mul, sq]]
+      have := mul_le_mul h_r_α_b h_α_sq_b' (sq_nonneg _) (by positivity)
+      linarith [show K_lin * h^2 * (K_lin^2 * h^4) = K_lin^3 * h^6 from by ring]
+    have h_δ_cube : |r_δ^3| ≤ K_lin^3 * h^6 := by
+      have h_δ_sq_b' : |r_δ|^2 ≤ K_lin^2 * h^4 := by
+        rw [show |r_δ|^2 = |r_δ| * |r_δ| from sq _]
+        have := mul_le_mul h_r_δ_b h_r_δ_b (abs_nonneg _) (by positivity)
+        linarith [show (K_lin * h^2) * (K_lin * h^2) = K_lin^2 * h^4 from by ring]
+      rw [show r_δ^3 = r_δ * (r_δ * r_δ) from by ring, abs_mul]
+      rw [show |r_δ * r_δ| = |r_δ|^2 from by rw [abs_mul, sq]]
+      have := mul_le_mul h_r_δ_b h_δ_sq_b' (sq_nonneg _) (by positivity)
+      linarith [show K_lin * h^2 * (K_lin^2 * h^4) = K_lin^3 * h^6 from by ring]
+    calc |r_α^3 + r_δ^3| ≤ |r_α^3| + |r_δ^3| := abs_add_le _ _
+      _ ≤ K_lin^3 * h^6 + K_lin^3 * h^6 := by linarith
+      _ = 2 * K_lin^3 * (h^4 * h^2) := by ring
+      _ ≤ 2 * K_lin^3 * (h^4 * R^2) := by
+          apply mul_le_mul_of_nonneg_left _ (by positivity)
+          exact mul_le_mul_of_nonneg_left h_h_sq_le_R_sq h_h_pow_4_nn
+      _ = 2 * K_lin^3 * R^2 * h^4 := by ring
+  -- Combine via triangle inequality
+  calc |3 * ((q T₁ - q T₂) * h)^2 * (r_α + r_δ) +
+        3 * ((q T₁ - q T₂) * h) * (r_δ^2 - r_α^2) +
+        (r_α^3 + r_δ^3)|
+      ≤ |3 * ((q T₁ - q T₂) * h)^2 * (r_α + r_δ) +
+         3 * ((q T₁ - q T₂) * h) * (r_δ^2 - r_α^2)| + |r_α^3 + r_δ^3| :=
+        abs_add_le _ _
+    _ ≤ |3 * ((q T₁ - q T₂) * h)^2 * (r_α + r_δ)| +
+        |3 * ((q T₁ - q T₂) * h) * (r_δ^2 - r_α^2)| + |r_α^3 + r_δ^3| := by
+        have := abs_add_le (3 * ((q T₁ - q T₂) * h)^2 * (r_α + r_δ))
+                            (3 * ((q T₁ - q T₂) * h) * (r_δ^2 - r_α^2))
+        linarith
+    _ ≤ 6 * (q T₁ - q T₂)^2 * K_lin * h^4 +
+        6 * |q T₁ - q T₂| * K_lin^2 * R * h^4 +
+        2 * K_lin^3 * R^2 * h^4 := by linarith
+    _ = (6 * (q T₁ - q T₂)^2 * K_lin + 6 * |q T₁ - q T₂| * K_lin^2 * R +
+         2 * K_lin^3 * R^2) * h^4 := by ring
+
 /-- Pure algebraic identity used to combine the four phaseKernel entries
     into a single fraction.  Treats `a, b, c, d, s, h` as abstract real
     numbers, sidestepping function-argument normalization issues. -/
