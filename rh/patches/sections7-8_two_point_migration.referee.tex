@@ -1,0 +1,321 @@
+% =============================================================================
+\section{Actual-zeta two-point scalar suppression}
+\label{sec:actual-zeta-transverse-suppression}
+\statuspaper{LIVE}\quad
+\statusmig{migrated}\quad
+\statusreferee{in-progress}\quad
+\statussympy{not-started}\quad
+\statussim{not-started}\quad
+\statuslean{not-started}
+\par\medskip
+
+This section proves the two-point scalar suppression statement for the
+actual block as it is currently defined in the rebuild: the finite block
+\(\widehat\Om_\z(s;m)\) built from the Riemann--Siegel theta phase
+\(\Ph_T=\theta\).  The scalar channel is the two-point channel fixed in
+Section~\ref{sec:transverse-projection}:
+\begin{equation}
+\label{eq:A2-actual-zeta-scalar-channel}
+        \mathcal A_2(X)
+        :=\mathcal A_\toy(\Pi_\trans X)
+        =\mathcal A_\toy(X)
+        =X_{12}+X_{21}.
+\end{equation}
+The equality is Lemma~\ref{lem:transverse-projection-A-toy-compatibility};
+\(\Pi_\trans\) acts on the matrix before the scalar functional is applied.
+The expression \(\Pi_\trans\mathcal A_2(X)\) is not used.
+
+\begin{remark}[Scope of this suppression theorem]
+\label{rem:theta-suppression-scope}
+The proof below is a standalone local theta-phase estimate.  It does not
+prove suppression for any later corrected actual-zeta block, source-energy
+package, or V1 finite source-provenance package.  If a later section
+replaces \(\widehat\Om_\z\) by a corrected block involving additional
+zeta-source data, the suppression theorem must be restated and reproved for
+that corrected object.
+\end{remark}
+
+\subsection{Constant-slope baseline}
+\label{subsec:constant-slope-baseline}
+
+\begin{lemma}[Constant-slope scalar cancellation]
+\label{lem:constant-slope-scalar-cancellation}
+Fix \(q_0>0\) and \(d\in\mathbb R\setminus\{0\}\).  Let \(\Ph_0(t)=q_0t\),
+let \(s=d/q_0\), and form the corresponding finite two-point block
+\(\widehat\Om_0(d;q_0)\) using the definitions of
+Section~\ref{sec:finite-scale-local-blocks-and-whitening}.  Then
+\begin{equation}
+\label{eq:constant-slope-A2-zero}
+        \mathcal A_2\bigl(\widehat\Om_0(d;q_0)\bigr)=0.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For the constant-slope phase, \(q_-=q_+=q_0\), \(q'=q''=0\), and
+\(\Delta_m(s)=-q_0s=-d\).  Hence
+\[
+G_{0,-}=G_{0,+}=\frac1\pi
+\begin{pmatrix}
+2q_0&0\\
+0&q_0^3/6
+\end{pmatrix}.
+\]
+The mixed block has off-diagonal entries
+\[
+(N_0)_{12}=\frac{-\sin d+d\cos d}{\pi s^2},
+\qquad
+(N_0)_{21}=\frac{\sin d-d\cos d}{\pi s^2}=-(N_0)_{12}.
+\]
+The whitening factors are diagonal, so whitening preserves the antisymmetry
+of the off-diagonal pair.  Therefore the off-diagonal trace vanishes:
+\[
+\mathcal A_2(\widehat\Om_0)=
+(\widehat\Om_0)_{12}+(\widehat\Om_0)_{21}=0.
+\]
+\end{proof}
+
+\subsection{Theta perturbation from the constant-slope baseline}
+\label{subsec:theta-perturbation-two-point}
+
+\begin{lemma}[Theta two-point scalar perturbation]
+\label{lem:theta-two-point-scalar-perturbation}
+Let \(D\subset(0,\infty)\) be compact.  For \((m,s)\in\mathcal D_T^\times\)
+with
+\begin{equation}
+\label{eq:theta-two-point-d-constraint}
+        d:=q(m)|s|\in D,
+\end{equation}
+the theta-phase finite block satisfies
+\begin{equation}
+\label{eq:theta-two-point-perturbation-bound}
+        \bigl|\mathcal A_2(\widehat\Om_\z(s;m))\bigr|
+        \le C_D\,T^{-1}(\log T)^{C_D}
+\end{equation}
+for all sufficiently large \(T\), uniformly over the retained packet domain.
+\end{lemma}
+
+\begin{proof}
+By the signed-separation symmetry of Section~\ref{sec:finite-scale-local-blocks-and-whitening}
+and the transpose invariance of \(\mathcal A_2\), it is enough to treat
+\(s>0\).  Put \(q_0=q(m)\) and \(d=q_0s\in D\).  The theta estimates of
+Lemma~\ref{lem:theta-derivative-asymptotics} give, uniformly on
+\(I_T\),
+\[
+        q'(t)=O(T^{-1}),\qquad q''(t)=O(T^{-2}),\qquad q(t)\asymp\log T.
+\]
+Since \(s=d/q_0\) and \(d\in D\), Taylor expansion at the midpoint gives
+\begin{align*}
+q(t_\pm)&=q_0+O_D(T^{-1}q_0^{-1}),\\
+q'(t_\pm)&=O(T^{-1}),\\
+q''(t_\pm)&=O(T^{-2}),\\
+\Delta_m(s)&=-d+O_D(T^{-2}q_0^{-3}).
+\end{align*}
+After substituting these quantities into the finite formulas
+\eqref{eq:Gpm}--\eqref{eq:Nm}, rescale by the constant-slope sizes
+\(q_0\), \(q_0^2\), and \(q_0^3\) appearing in the four matrix entries.
+On the compact set \(d\in D\), the resulting normalized same-point and mixed
+blocks are smooth functions of \(d\) and of the small parameters
+\[
+        O_D(T^{-1}q_0^{-2}),\qquad O(T^{-1}q_0^{-2}),
+        \qquad O(T^{-2}q_0^{-3}).
+\]
+The positive-definite inverse-square-root map is smooth on the compact
+neighborhood of the constant-slope same-point blocks supplied by
+Lemma~\ref{lem:constant-slope-scalar-cancellation}.  Therefore
+\(\mathcal A_2(\widehat\Om_\z(s;m))\), as a function of these normalized
+parameters, is Lipschitz on that compact neighborhood.  Its value at the
+constant-slope point is zero by
+Lemma~\ref{lem:constant-slope-scalar-cancellation}.  This gives
+\eqref{eq:theta-two-point-perturbation-bound}, after allowing a harmless
+power of \(\log T\) to absorb the normalizing factors.
+\end{proof}
+
+\begin{theorem}[Two-point theta scalar suppression]
+\label{thm:zeta-suppression-two-point-theta}
+Let \(D\subset(0,\infty)\) be compact and assume the slow-scale regime
+\(Q(T)=o(q(T))\).  Then for every fixed \(B>0\), after increasing the
+lower-height cutoff depending on \(B\) and \(D\),
+\begin{equation}
+\label{eq:zeta-suppression-two-point-scalar}
+        \bigl|\mathcal A_2(\widehat\Om_\z(s;m))\bigr|
+        \le Q(T)^{-B}
+\end{equation}
+uniformly for all retained \((m,s)\in\mathcal D_T^\times\) satisfying
+\(q(m)|s|\in D\).
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{lem:theta-two-point-scalar-perturbation}, the left-hand side
+is at most \(C_D T^{-1}(\log T)^{C_D}\).  Since
+\(q(T)\asymp\log T\) and \(Q(T)=o(q(T))\), for every fixed \(B>0\),
+\[
+        T^{-1}(\log T)^{C_D}=o(Q(T)^{-B}).
+\]
+Increasing the lower-height cutoff gives \eqref{eq:zeta-suppression-two-point-scalar}.
+\end{proof}
+
+\begin{remark}[Relation to the archived corrected block]
+\label{rem:theta-suppression-not-v1-corrected-package}
+Theorem~\ref{thm:zeta-suppression-two-point-theta} proves suppression for
+the current rebuild's theta-phase block.  It does not close the archived V1
+corrected source package.  In the archived proof, the corrected two-point
+actual-zeta bridge remains tied to finite package conditions such as swap
+symmetry, one-amplitude collapse, and diagonal merger.  Those are not used in
+the present theorem, and importing the corrected V1 block would require a
+separate finite package certificate.
+\end{remark}
+
+\subsection{Four-point suppression}
+\label{subsec:four-point-suppression}
+
+\begin{hypothesis}[Four-point actual-zeta transverse suppression]
+\label{hyp:zeta-suppression-four-point}
+For the four-center packet associated with the symmetry quartet
+\(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\), let
+\(\Pi_\trans^{(4)}\) be a four-point transverse projection and let
+\(\mathcal A_{4,\trans}\) be the corresponding four-point transverse
+functional, i.e.\ a scalar or finite-dimensional normed output after the
+four-point projection has been applied.  Then
+\begin{equation}
+\label{eq:zeta-suppression-four-point-transverse}
+        \bigl\|\mathcal A_{4,\trans}\bigl(\widehat\Om_\z^{(4)}\bigr)\bigr\|
+        \le Q^{-B_{\z,4}}
+\end{equation}
+for an absolute exponent \(B_{\z,4}>A_\toy^{(4)}\) on the retained
+four-point subfamily.
+\end{hypothesis}
+
+\begin{wip}\label{rem:wip-zeta-suppression-four-point}
+The four-point case remains open.  The projection \(\Pi_\trans^{(4)}\), the
+four-point value subspace, and the functional \(\mathcal A_{4,\trans}\) are
+not supplied by Section~\ref{sec:transverse-projection}; they are separate
+four-center inputs.
+\end{wip}
+
+% =============================================================================
+\section{Local projective rigidity}
+\label{sec:projective-rigidity}
+\statuspaper{LIVE}\quad
+\statusmig{migrated}\quad
+\statusreferee{in-progress}\quad
+\statussympy{not-started}\quad
+\statussim{not-started}\quad
+\statuslean{not-started}
+\par\medskip
+
+The present section assembles the local comparison.  The two-point branch is
+now a proved theta-phase scalar comparison: Section~\ref{sec:toy-anomaly-and-transverse-obstruction}
+provides the toy lower bound, Section~\ref{sec:transverse-projection}
+identifies the scalar channel, and
+Theorem~\ref{thm:zeta-suppression-two-point-theta} supplies the theta-side
+actual-zeta upper bound.  The four-point branch remains an open frontier.
+
+\subsection{Branch exhaustion}
+\label{subsec:branch-exhaustion}
+
+\begin{hypothesis}[Branch exhaustion]
+\label{hyp:branch-exhaustion}
+Every admissible off-line packet produced by the branch-entry construction
+is excluded by at least one of:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item the two-point scalar branch of Theorem~\ref{thm:two-point-rigidity}; or
+\item the four-point full-quartet branch of Theorem~\ref{thm:four-point-rigidity}.
+\end{enumerate}
+\end{hypothesis}
+
+\begin{remark}[Status of Hypothesis~\ref{hyp:branch-exhaustion}]
+\label{rem:branch-exhaustion-status}
+Hypothesis~\ref{hyp:branch-exhaustion} is not a consequence of the
+linear projection \(\Pi_\trans\).  It is the rebuild's replacement for
+importing the archived finite-core arity taxonomy wholesale.
+\end{remark}
+
+\subsection{Two-point comparison}
+\label{subsec:two-point-comparison}
+
+The two-point comparison is a scalar contradiction only after a quantitative
+split-size ledger is supplied.  The toy lower bound is proportional to
+\(u^2\), where \(u=\beta-\tfrac12\).  Therefore a polynomial lower bound on
+\(|u|\), or an equivalent branch-entry statement, is required if the two-point
+branch is to exclude a zero whose real part approaches the critical line with
+height.
+
+\begin{definition}[Polynomially visible two-point split]
+\label{def:polynomially-visible-two-point-split}
+A two-point off-line packet at scale \(Q(T)\) has polynomially visible split
+exponent \(A_u\) if
+\begin{equation}
+\label{eq:polynomial-visible-split}
+        u^2=\bigl(\beta-\tfrac12\bigr)^2\ge Q(T)^{-A_u}.
+\end{equation}
+\end{definition}
+
+\begin{theorem}[Two-point rigidity, polynomial-split form]
+\label{thm:two-point-rigidity}
+Fix a compact interval \(D\subset(0,\infty)\) avoiding the isolated zeros of
+\(F_\infty\).  Assume an admissible off-line packet has a two-point retained
+subdomain \(\mathcal D_T^\toy(D)\), uses the matched scalar channel
+\(\mathcal A_2\), and has polynomially visible split exponent \(A_u\).
+Let \(B_{\z,2}>A_u\).  Then, for all sufficiently large \(T\), the
+existence of that two-point packet contradicts
+Theorem~\ref{thm:zeta-suppression-two-point-theta}.  Hence no such
+polynomially visible two-point off-line packet exists.
+\end{theorem}
+
+\begin{proof}
+On \(\mathcal D_T^\toy(D)\), with \(q_0=q(m)\),
+Corollary~\ref{cor:toy-visibility-polynomial-weight} gives
+\[
+        \bigl|\mathcal A_2(\widehat\Om_\toy(s;m,u,q(m)))\bigr|
+        =\bigl|\mathcal A_\toy(\widehat\Om_\toy(s;m,u,q(m)))\bigr|
+        \ge \tfrac12 c_\toy(D)u^2.
+\]
+By \eqref{eq:polynomial-visible-split}, this is at least
+\(c_DQ(T)^{-A_u}\) for \(c_D=c_\toy(D)/2\).  On the matched actual theta-side
+block, Theorem~\ref{thm:zeta-suppression-two-point-theta} gives
+\[
+        \bigl|\mathcal A_2(\widehat\Om_\z(s;m))\bigr|
+        \le Q(T)^{-B_{\z,2}}.
+\]
+The two blocks are compared in the same scalar channel.  If
+\(B_{\z,2}>A_u\), then for large \(Q(T)\)
+\(c_DQ(T)^{-A_u}>Q(T)^{-B_{\z,2}}\), a contradiction.
+\end{proof}
+
+\begin{remark}[Limitation of the two-point theorem]
+\label{rem:two-point-polynomial-split-limitation}
+Theorem~\ref{thm:two-point-rigidity} does not exclude off-line zeros with
+super-polynomially small split \(|\beta-\tfrac12|\) unless branch entry or a
+separate argument supplies a replacement for
+\eqref{eq:polynomial-visible-split}.  Such packets must be caught by the
+branch-exhaustion/four-point mechanism or by a stronger future two-point
+entry theorem.
+\end{remark}
+
+\subsection{Four-point comparison in the symmetric quartet}
+\label{subsec:four-point-comparison-symmetric-quartet}
+
+The four-point comparison uses the full symmetry packet
+\(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\).  It is stated independently of
+Theorem~\ref{thm:two-point-rigidity} and remains open until the four-point
+transverse channel and suppression theorem are supplied.
+
+\begin{theorem}[Four-point rigidity]
+\label{thm:four-point-rigidity}
+Let \(\rho\) be a hypothetical off-line zero and
+\(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\) its symmetry quartet.  Under the
+four-point analogue of Theorem~\ref{thm:toy-anomaly-visibility} and
+Hypothesis~\ref{hyp:zeta-suppression-four-point},
+\[
+A_\toy^{(4)} < B_{\z,4} \qquad\Longrightarrow\qquad
+\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\not\subset\{\zeta=0\}.
+\]
+\end{theorem}
+
+\begin{wip}\label{rem:wip-four-point-rigidity}
+State and prove the four-center analogue \(\widehat\Om_\z^{(4)}\), the
+four-point transverse channel, and the four-point analogue of the toy
+visibility theorem matching Hypothesis~\ref{hyp:zeta-suppression-four-point}.
+Assemble the exponent inequality.  This is not supplied by the two-point
+projection or by Theorem~\ref{thm:zeta-suppression-two-point-theta}.
+\end{wip}

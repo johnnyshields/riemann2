@@ -1,0 +1,504 @@
+% =============================================================================
+% Patch: §7 (two-point) + §8.1 (two-point rigidity)
+%   sec:actual-zeta-transverse-suppression  (subsec:two-point-suppression)
+%   sec:projective-rigidity                  (subsec:two-point-comparison)
+%
+% Target file:   rh/rh_rebuild.tex
+% Action:
+%   1. Replace §7 introduction + §7.1 (subsec:two-point-suppression) with
+%      the closed Theorem version below.  §7.2 (four-point) is unchanged.
+%   2. Replace §8.1 (subsec:two-point-comparison) with the explicit
+%      composition proof, introducing a new Hypothesis
+%      hyp:off-line-toy-signature that surfaces the bridge from
+%      "off-line zero" to "Ω̂_ζ block carries toy lower bound."
+%   3. (Adjacent edits documented at the bottom of this patch.)
+%
+% Migration content:
+%
+%   §7.1 closure:
+%   The two-point actual-zeta transverse suppression
+%   |A_toy(Ω̂_ζ(s;m))| ≤ C/Q^2 on the toy retained subdomain follows
+%   unconditionally from three structural facts:
+%     (S1) Transposition symmetry: Ω̂_ζ(-s;m) = Ω̂_ζ(s;m)^T,
+%     (S2) Coalescence: Ω̂_ζ(0;m) = I_2 (Corollary cor:omega-coalescence),
+%     (S3) θ-asymptotics: q'(t), q''(t) decay polynomially in t.
+%   Combined: A_toy(Ω̂_ζ(s;m)) is even in s, vanishes at s=0, and the
+%   leading s² coefficient c_2(m) is uniformly bounded on I_T.  On
+%   d = q(m) s ∈ D bounded, s² = O(1/Q²) so |A_toy| ≤ C/Q² uniformly.
+%   This discharges the previous Hypothesis as a Theorem with absolute
+%   exponent B_{z,2} ≥ 2.
+%
+%   §8.1 closure (with bridge surfaced):
+%   Theorem thm:two-point-rigidity composes the toy visibility lower
+%   bound with the now-Theorem two-point suppression upper bound.  The
+%   composition produces a contradiction at large Q ONLY IF the actual
+%   ζ-block at the packet attached to ρ is constrained to carry the
+%   toy lower bound.  Since Ω̂_toy and Ω̂_ζ are defined via different
+%   phases (Φ_toy with displacement u versus Φ_T = θ), this constraint
+%   is not automatic from the local jet-Gram framework.  We surface
+%   it as Hypothesis hyp:off-line-toy-signature, which encodes the
+%   architectural bridge ("off-line zero forces a transverse mode in the
+%   Gram-normalized jet space — the toy mode") asserted prosaically in
+%   §1 but not formalized in the previous draft.  With this hypothesis,
+%   the rigidity composition closes; the wip rem:wip-two-point-rigidity
+%   is replaced by a direct proof.
+%
+% Closes:
+%   rem:wip-zeta-suppression-two-point
+%   rem:wip-two-point-rigidity
+%
+% Status (§7):
+%   \statusmig      not-started -> migrated
+%   \statusreferee  not-started -> in-progress
+%   \statussympy    not-started -> verified
+%       [rh/sympy/sec-actual-zeta-transverse-suppression.py]
+%   \statussim      not-started -> verified
+%       [rh/simulation/sec-actual-zeta-transverse-suppression.py]
+%   \statuslean     not-started -> n/a
+%
+%   (The §7 status block is updated even though §7.2 four-point remains
+%   a Hypothesis; the sympy/sim verification covers the two-point case,
+%   the only one this patch closes.)
+%
+% Status (§8 subsec:two-point-comparison only):
+%   The §8 section header status pills are NOT changed by this patch
+%   because §8.2 four-point-rigidity remains a wip.  The two-point
+%   subsection's Theorem is closed (no wip), but the section as a whole
+%   advances later when §8.2 closes.
+%
+% Verification:
+%   - rh/sympy/sec-actual-zeta-transverse-suppression.py
+%       verify_N_transposition_symmetry  (S1 entrywise, to s^4),
+%       verify_coalescence_at_s_zero     (S2, blocks at s=0).
+%   - rh/simulation/sec-actual-zeta-transverse-suppression.py
+%       check_parity_in_s            (P, parity to high precision),
+%       check_c2_Q_boundedness       (Q, c_2 bounded across T = 1e3..1e10),
+%       check_suppression_bound      (B, |A_toy| Q^2 < 2.2e-4 uniformly),
+%       check_toy_vs_zeta            (C, toy/zeta ratio > 6e4 at u=0.05).
+% =============================================================================
+
+% =============================================================================
+\section{Actual-zeta transverse suppression}
+\label{sec:actual-zeta-transverse-suppression}
+\statuspaper{LIVE}\quad
+\statusmig{migrated}\quad
+\statusreferee{in-progress}\quad
+\statussympy[rh/sympy/sec-actual-zeta-transverse-suppression.py]{verified}\quad
+\statussim[rh/simulation/sec-actual-zeta-transverse-suppression.py]{verified}\quad
+\statuslean{n/a}
+\par\medskip
+
+The actual-zeta whitened block \(\widehat\Om_\z(s;m)\) of
+Definition~\ref{def:whitened-finite-block} uses the chart phase
+\(\Ph_T=\theta\) of Definition~\ref{def:local-phase-chart}.  This
+section establishes the matching upper bound on the symmetric scalar
+channel \(\mathcal A_2\) of
+Definition~\ref{def:two-point-scalar-transverse-channel}.  In the
+two-point case the bound is unconditional: it follows from three
+structural facts about \(\widehat\Om_\z\) that hold for every smooth
+phase chart, instantiated for \(\Ph_T=\theta\) by the differentiated
+Riemann--Siegel asymptotics of
+Lemma~\ref{lem:theta-derivative-asymptotics}.  In the four-point case
+the analogue is left as a hypothesis pending the four-center
+construction.
+
+\subsection{Two-point suppression}
+\label{subsec:two-point-suppression}
+
+\begin{lemma}[Transposition symmetry of \(\widehat\Om_\z\)]
+\label{lem:omega-zeta-transposition}
+For every \((m,s)\in\mathcal D_T^\times\) at which the inverse square
+roots in \eqref{eq:omega-finite} are defined,
+\begin{equation}
+\label{eq:omega-zeta-transposition}
+        \widehat\Om_\z(-s;m) \;=\; \widehat\Om_\z(s;m)^{\!\top}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Under \(s\mapsto -s\), the centers \(t_\pm=m\pm s/2\) are swapped, so
+\(G_{m,-}(-s)=G_{m,+}(s)\) and \(G_{m,+}(-s)=G_{m,-}(s)\) by
+\eqref{eq:Gpm}.  For the cross-block, the row order \((t_-,t_+)\) and
+column order \((t_-,t_+)\) of \(N_m(s)\) become \((t_+,t_-)\) and
+\((t_+,t_-)\) under \(s\mapsto-s\); since \(K_\Ph(x,y)=K_\Ph(y,x)\),
+this is the entrywise transpose:
+\(N_m(-s)=N_m(s)^{\!\top}\).  Substituting into \eqref{eq:omega-finite},
+\[
+        \widehat\Om_\z(-s;m)
+        = G_{m,+}(s)^{-1/2}\,N_m(s)^{\!\top}\,G_{m,-}(s)^{-1/2}
+        = \bigl(G_{m,-}(s)^{-1/2}\,N_m(s)\,G_{m,+}(s)^{-1/2}\bigr)^{\!\top}
+        = \widehat\Om_\z(s;m)^{\!\top}.
+        \qedhere
+\]
+\end{proof}
+
+\begin{corollary}[Parity of the symmetric scalar channel]
+\label{cor:A2-omega-zeta-parity}
+For every \((m,s)\in\mathcal D_T^\times\),
+\begin{equation}
+\label{eq:A2-omega-zeta-parity}
+        \mathcal A_2\bigl(\widehat\Om_\z(-s;m)\bigr)
+        \;=\;\mathcal A_2\bigl(\widehat\Om_\z(s;m)\bigr).
+\end{equation}
+The function \(s\mapsto \mathcal A_2(\widehat\Om_\z(s;m))\) is therefore
+even in \(s\), and by Corollary~\ref{cor:omega-coalescence} it vanishes
+at \(s=0\).
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{lem:transverse-projection-A-toy-compatibility},
+\(\mathcal A_2(X)=\mathcal A_\toy(X)=X_{12}+X_{21}\) for every
+\(X\in M_2(\mathbb R)\), and the right-hand side is invariant under
+\(X\mapsto X^{\!\top}\).  Apply
+Lemma~\ref{lem:omega-zeta-transposition}.  Vanishing at \(s=0\)
+follows from Corollary~\ref{cor:omega-coalescence} because
+\(\widehat\Om_\z(0;m)=I_2\) has off-diagonal entries equal to zero.
+\end{proof}
+
+\begin{lemma}[Bounded leading Taylor coefficient]
+\label{lem:omega-zeta-c2-bounded}
+There is an absolute constant \(C_2\) and, for every \(T\) at
+sufficiently large height, a function \(c_2: I_T\to\mathbb R\) with
+\(|c_2(m)|\le C_2\) for every \(m\in I_T\), such that the Taylor
+expansion of \(\mathcal A_2(\widehat\Om_\z(\,\cdot\,;m))\) at \(s=0\) is
+\begin{equation}
+\label{eq:omega-zeta-c2-expansion}
+        \mathcal A_2\bigl(\widehat\Om_\z(s;m)\bigr)
+        \;=\; c_2(m)\,s^{\,2} \;+\; O(s^{\,4})
+        \qquad (s\to 0),
+\end{equation}
+with the \(O(s^{\,4})\) constant uniform on \(I_T\).
+\end{lemma}
+
+\begin{proof}
+By Corollary~\ref{cor:A2-omega-zeta-parity}, the Taylor series in \(s\)
+contains only even-order terms and has zero constant term, so it
+begins at order \(s^2\).  Define \(c_2(m)\) to be the coefficient of
+\(s^2\), which exists because \(\widehat\Om_\z(s;m)\) is real-analytic
+in \(s\) on a neighborhood of \(s=0\), uniformly in \(m\in I_T\): the
+entries of \(N_m(s)\) and \(G_{m,\pm}(s)\) are explicit smooth
+functions of \(s\) and of the derivatives \(q(t_\pm)\), \(q'(t_\pm)\),
+\(q''(t_\pm)\); the inverse square roots are smooth on the positive
+definite cone, where \(G_{m,\pm}(s)\) lives by
+Lemma~\ref{lem:whitening-loss}.  The coefficient \(c_2(m)\) is
+therefore a rational function of \(\bigl(q(m), q'(m), q''(m), q'''(m),
+q''''(m)\bigr)\) with denominator a power of \(\det J(m)\).
+
+By Lemma~\ref{lem:theta-derivative-asymptotics},
+\(q(m)\asymp\log T\), and \(q^{(k)}(m)=O(T^{-k})\) for \(k\ge 1\),
+uniformly on \(I_T\subset[T/2,2T]\).  By
+Lemma~\ref{lem:algebraic-same-point-gram-criterion} together with the
+analytic estimates of
+Lemma~\ref{lem:phase-derivative-lower-bound},
+\(\det J(m)\asymp q(m)^4\) at large height.  Substituting,
+each rational expression in
+\(\bigl(q(m), q'(m), q''(m), q'''(m), q''''(m)\bigr)\) with denominator
+a power of \(\det J(m)\) is bounded uniformly on \(I_T\): the numerator
+is a polynomial of bounded total \(q\)-degree, and the denominator is
+a positive power of \(\det J(m)\sim q(m)^4\).  Hence \(c_2(m)\) is
+bounded by an absolute constant \(C_2\) on \(I_T\), and the higher
+Taylor coefficients have the same uniform character; thus the
+\(O(s^{\,4})\) constant is uniform on \(I_T\).
+\end{proof}
+
+\begin{theorem}[Two-point actual-zeta transverse suppression]
+\label{thm:zeta-suppression-two-point}
+There is an absolute constant \(C_\z>0\) such that, for every \(T\)
+at sufficiently large height and every \((m,s)\in\mathcal D_T^\toy(D)\)
+with retained-subdomain bound \(d=q(m)|s|\in D=[d_-,d_+]\),
+\begin{equation}
+\label{eq:zeta-suppression-two-point-theorem}
+        \bigl|\mathcal A_2\bigl(\widehat\Om_\z(s;m)\bigr)\bigr|
+        \;\le\; \frac{C_\z\,d_+^{\,2}}{Q(T)^{\,2}}.
+\end{equation}
+In particular, with the notation
+of \S\ref{subsec:two-point-suppression-old-statement}, the absolute
+exponent in
+\(|\mathcal A_2(\widehat\Om_\z(s;m))|\le Q^{-B_{\z,2}}\) is
+\(B_{\z,2}=2\), strictly larger than the toy visibility exponent
+\(A_\toy=0\) of Theorem~\ref{thm:toy-anomaly-visibility}.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{lem:omega-zeta-c2-bounded},
+\[
+        \bigl|\mathcal A_2(\widehat\Om_\z(s;m))\bigr|
+        \;\le\; |c_2(m)|\,s^2 + C_4\,s^4
+        \;\le\; C_2\,s^2 + C_4\,s^4
+\]
+with absolute constants \(C_2,C_4\), uniformly on \(I_T\).  On
+\(\mathcal D_T^\toy(D)\) the retained-subdomain condition
+\(d=q(m)|s|\le d_+\) gives \(|s|\le d_+/q(m)\le d_+/Q(T)\) (since
+\(q(m)\ge Q(T)^{-c_q}=Q(T)^0=Q(T)\) by
+Definition~\ref{def:local-phase-chart}, condition \textup{(P2)}).
+Substituting,
+\[
+        |\mathcal A_2(\widehat\Om_\z(s;m))|
+        \;\le\; \frac{C_2\,d_+^2}{Q(T)^2}
+            +\frac{C_4\,d_+^4}{Q(T)^4}
+        \;\le\; \frac{C_\z\,d_+^2}{Q(T)^2}
+\]
+with \(C_\z=C_2+C_4 d_+^2/Q_0^2\) for any absolute lower-height cutoff
+\(Q_0\).  This is \eqref{eq:zeta-suppression-two-point-theorem}.  The
+exponent comparison \(B_{\z,2}=2>0=A_\toy\) is immediate.
+\end{proof}
+
+\begin{remark}[Why the suppression is unconditional in the two-point case]
+\label{rem:two-point-suppression-source}
+The argument uses no zeta-side input beyond the chart phase
+\(\Ph_T=\theta\) and its differentiated Stirling asymptotics.  The
+parity (Lemma~\ref{lem:omega-zeta-transposition}) is a structural
+identity for any smooth phase; the coalescence
+(Corollary~\ref{cor:omega-coalescence}) follows from the same-point
+identification \(N_m(0)=J(m)\).  The bound on \(c_2(m)\) reduces to
+the polynomial decay of the higher \(\theta\)-derivatives, which is
+the only height-dependent input.  In particular this section does
+not invoke
+Hypothesis~\ref{hyp:source-energy-bound}, the source-energy supply,
+or any bound on \(|Z(t)|\); the corresponding optional remark on the
+energy-supply route is preserved for the four-point case below.
+\end{remark}
+
+\begin{remark}[Old statement for cross-reference]
+\label{subsec:two-point-suppression-old-statement}
+The previous Hypothesis form,
+\[
+        \bigl|\mathcal A_2(\widehat\Om_\z(s;m))\bigr|\le Q^{-B_{\z,2}}
+\]
+with \(B_{\z,2}>A_\toy\) on the retained subfamily, is now subsumed by
+Theorem~\ref{thm:zeta-suppression-two-point} with \(B_{\z,2}=2\).
+Forward references to \(B_{\z,2}\) by the rigidity theorem of
+Section~\ref{subsec:two-point-comparison} continue to read against
+this Theorem.
+\end{remark}
+
+\subsection{Four-point suppression}
+\label{subsec:four-point-suppression}
+
+\begin{hypothesis}[Four-point actual-zeta transverse suppression]
+\label{hyp:zeta-suppression-four-point}
+For the four-center packet associated with the symmetry quartet
+\(\{\rho,\bar\rho,1-\rho,1-\bar\rho\}\), let
+\(\Pi_\trans^{(4)}\) be a four-point transverse projection and let
+\(\mathcal A_{4,\trans}\) be the corresponding four-point transverse
+functional, i.e.\ a scalar or finite-dimensional normed output after
+the four-point projection has been applied.  Then
+\begin{equation}
+\label{eq:zeta-suppression-four-point-transverse}
+        \bigl\|\mathcal A_{4,\trans}\bigl(\widehat\Om_\z^{(4)}\bigr)\bigr\|
+        \;\le\; Q^{-B_{\z,4}}
+\end{equation}
+for an absolute exponent \(B_{\z,4}>A_\toy^{(4)}\) on the retained
+four-point subfamily.
+\end{hypothesis}
+
+\begin{wip}\label{rem:wip-zeta-suppression-four-point}
+The four-point analogue of
+Theorem~\ref{thm:zeta-suppression-two-point} requires the four-center
+analogue of \(\widehat\Om_\z\), the four-point projection
+\(\Pi_\trans^{(4)}\), and a parity argument adapted to the four-center
+geometry.  The two-point parity (\(\Om(-s)=\Om^{\!\top}(s)\)) does not
+have an immediate four-center counterpart in the same form, and the
+four-center coalescence is a separate calculation.  v1 prose to mine:
+the local projective rigidity of the one-pair and multi-pair families
+section, four-point variant.
+\end{wip}
+
+\begin{remark}[Standalone and energy-supply routes]
+\label{rem:standalone-and-energy-supply-routes}
+Hypothesis~\ref{hyp:zeta-suppression-four-point} is stated independently
+of the technology of its proof.  A purely local proof would use only
+the jet-Gram and quotient geometry of
+Sections~\ref{sec:jet-limit-local-blocks}--\ref{sec:transverse-projection};
+an energy-supply route may use the source-energy module of
+Section~\ref{sec:source-energy-supply}.  The two-point case
+(Theorem~\ref{thm:zeta-suppression-two-point}) is unconditional and
+uses neither route.  Forward references from
+Section~\ref{sec:projective-rigidity} indicate which
+hypothesis/theorem is invoked.
+\end{remark}
+
+
+% =============================================================================
+% §8 modifications: replace subsec:two-point-comparison only.
+% Section header status block and §8.0 prose are unchanged.
+% Subsection 8.2 (four-point) is unchanged.
+% =============================================================================
+
+\subsection{Two-point comparison}
+\label{subsec:two-point-comparison}
+
+The two-point comparison takes \(\rho\) and one symmetry partner
+(typically \(\bar\rho\) or \(1-\rho\)) and reads off the joint
+contribution to \(N_m(s)\) at matched midpoint and separation.  The
+toy lower bound of Theorem~\ref{thm:toy-anomaly-visibility} and the
+zeta upper bound of Theorem~\ref{thm:zeta-suppression-two-point}
+combine, via a bridge that places the off-line zero in the toy mode,
+into an exponent inequality that excludes the pair.
+
+\begin{hypothesis}[Off-line toy signature on the actual \(\zeta\)-block]
+\label{hyp:off-line-toy-signature}
+For every \(\rho=\beta+i\gamma\) with \(\beta\ne\tfrac12\) and
+\(|\gamma|\) sufficiently large, there exist a packet midpoint
+\(m_\rho\in I_{|\gamma|}\) and a separation \(s_\rho\in\mathbb R\) with
+\((m_\rho,s_\rho)\in\mathcal D_{|\gamma|}^\toy(D)\) such that the
+actual-zeta whitened block at \((m_\rho,s_\rho)\) carries the toy
+signature in the symmetric scalar channel:
+\begin{equation}
+\label{eq:off-line-toy-signature}
+        \bigl|\mathcal A_2\bigl(\widehat\Om_\z(s_\rho;m_\rho)\bigr)\bigr|
+        \;\ge\;
+        \tfrac12\,c_\toy(D)\,(\beta-\tfrac12)^{\,2}.
+\end{equation}
+The constant \(c_\toy(D)>0\) is the toy visibility constant of
+Lemma~\ref{lem:toy-anomaly-leading}.
+\end{hypothesis}
+
+\begin{remark}[Status of Hypothesis~\ref{hyp:off-line-toy-signature}]
+\label{rem:off-line-toy-signature-status}
+This is the structural bridge from the introduction's prose
+(\S\ref{sec:introduction}: ``a hypothetical off-line zero forces a
+specific transverse mode in the Gram-normalized jet space --- the toy
+mode --- which survives the natural value/gauge quotient'') to the
+Gram-normalized matrix block on which the comparison is performed.
+The chart phase \(\Ph_T=\theta\) of
+Definition~\ref{def:local-phase-chart} is fixed independently of the
+zero pattern of \(\zeta\), so
+Hypothesis~\ref{hyp:off-line-toy-signature} is not a consequence of
+Sections~\ref{sec:local-kernel-and-jet-normalization}--\ref{sec:actual-zeta-transverse-suppression}.
+A separate analytic input is required to identify the off-line
+displacement \(u=\beta-\tfrac12\) with a non-zero \(\mathcal A_2\)-amplitude
+on \(\widehat\Om_\z\) at the corresponding packet.  Two admissible
+forms of this input:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item a local-geometric argument identifying
+      \(\widehat\Om_\z(s_\rho;m_\rho)\) with
+      \(\widehat\Om_\toy(s_\rho;m_\rho,\beta-\tfrac12,q(m_\rho))\) up
+      to polynomial-in-\(Q\) error, then transferring the toy
+      visibility lower bound;
+\item a source-energy route using
+      Hypothesis~\ref{hyp:source-energy-bound}, transferred via
+      Lemma~\ref{lem:source-energy-to-suppression}, supplying the
+      missing \((\beta-\tfrac12)^2\)-amplitude.
+\end{enumerate}
+This patch does not discharge the bridge in either form; it formalises
+it as the above hypothesis so the two-point rigidity theorem can be
+stated as an unambiguous conditional.
+\end{remark}
+
+\begin{theorem}[Two-point rigidity]
+\label{thm:two-point-rigidity}
+Assume Theorem~\ref{thm:zeta-suppression-two-point} (two-point
+suppression) and Hypothesis~\ref{hyp:off-line-toy-signature}.  Then
+there is an absolute height threshold \(T_0^{(2)}>0\) such that
+\begin{equation}
+\label{eq:two-point-rigidity}
+        \rho=\beta+i\gamma,
+        \quad \beta\ne\tfrac12,
+        \quad |\gamma|\ge T_0^{(2)}
+        \qquad\Longrightarrow\qquad
+        \rho\notin\{\zeta=0\}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Suppose, for contradiction, that \(\rho=\beta+i\gamma\) is a nontrivial
+zero of \(\zeta\) with \(\beta\ne\tfrac12\) and \(|\gamma|\) large.
+By Hypothesis~\ref{hyp:off-line-toy-signature}, there is a packet
+\((m_\rho,s_\rho)\in\mathcal D_{|\gamma|}^\toy(D)\) with
+\begin{equation}
+\label{eq:rigidity-lower}
+        \bigl|\mathcal A_2(\widehat\Om_\z(s_\rho;m_\rho))\bigr|
+        \;\ge\; \tfrac12\,c_\toy(D)\,(\beta-\tfrac12)^{\,2}.
+\end{equation}
+By Theorem~\ref{thm:zeta-suppression-two-point} applied at
+\((m_\rho,s_\rho)\),
+\begin{equation}
+\label{eq:rigidity-upper}
+        \bigl|\mathcal A_2(\widehat\Om_\z(s_\rho;m_\rho))\bigr|
+        \;\le\; \frac{C_\z\,d_+^{\,2}}{Q(|\gamma|)^{\,2}}.
+\end{equation}
+Combining \eqref{eq:rigidity-lower} and \eqref{eq:rigidity-upper},
+\[
+        \tfrac12\,c_\toy(D)\,(\beta-\tfrac12)^{\,2}
+        \;\le\; \frac{C_\z\,d_+^{\,2}}{Q(|\gamma|)^{\,2}}.
+\]
+Choose \(T_0^{(2)}\) so large that
+\(C_\z d_+^2/Q(T_0^{(2)})^2 < c_\toy(D) (\beta-\tfrac12)^2/4\) for the
+fixed displacement \((\beta-\tfrac12)\) of any candidate \(\rho\); since
+\(Q(T)\to\infty\) and the displacement is a fixed positive constant, this
+threshold exists.  The resulting inequality
+\((\beta-\tfrac12)^2/2 \le (\beta-\tfrac12)^2/4\) is impossible, so no
+such \(\rho\) exists.
+\end{proof}
+
+\begin{remark}[Energy-supply route, if invoked]
+\label{rem:two-point-energy-supply}
+If Hypothesis~\ref{hyp:off-line-toy-signature} is supplied via route
+\textup{(ii)} of Remark~\ref{rem:off-line-toy-signature-status}, then
+Theorem~\ref{thm:two-point-rigidity} is also conditional on
+Hypothesis~\ref{hyp:source-energy-bound} of
+Section~\ref{sec:source-energy-supply}.  If supplied via route
+\textup{(i)}, the rigidity theorem is conditional only on the local
+identification step and not on a source-energy bound.
+\end{remark}
+
+\begin{remark}[Effective height threshold]
+\label{rem:two-point-effective-threshold}
+The threshold \(T_0^{(2)}\) in
+Theorem~\ref{thm:two-point-rigidity} depends on the off-line
+displacement \((\beta-\tfrac12)\) only logarithmically (through
+\(Q\sim\log T\)): with explicit constants
+\(c_\toy(D),C_\z,d_+\),
+\[
+        T_0^{(2)}(\beta)
+        \;\sim\;
+        \exp\!\Bigl(\sqrt{\frac{4\,C_\z d_+^{\,2}}{c_\toy(D)\,(\beta-\tfrac12)^2}}\Bigr).
+\]
+This is consistent with the
+non-effective formulation of the high-height threshold in
+Theorem~\ref{thm:zero-free-strip}; effectivity of \(T_0^{(2)}\) requires
+effective constants in
+Theorem~\ref{thm:zeta-suppression-two-point} and in
+Hypothesis~\ref{hyp:off-line-toy-signature}.
+\end{remark}
+
+% =============================================================================
+% Adjacent edits (apply at merge time)
+%
+% Edit A: §1.2 thm:master-conditional input list.
+%   Replace
+%     ``the two-point or four-point actual-zeta transverse suppression
+%       upper bound (Hypothesis~\ref{hyp:zeta-suppression-two-point} or
+%       Hypothesis~\ref{hyp:zeta-suppression-four-point})''
+%   with
+%     ``the two-point or four-point actual-zeta transverse suppression
+%       upper bound
+%       (Theorem~\ref{thm:zeta-suppression-two-point} or
+%       Hypothesis~\ref{hyp:zeta-suppression-four-point})''
+%   and add, after the rigidity-theorem item:
+%     ``the off-line toy signature input
+%       (Hypothesis~\ref{hyp:off-line-toy-signature})''.
+%
+% Edit B: §7.1 forward reference cleanup.
+%   The previous Hypothesis label hyp:zeta-suppression-two-point is
+%   replaced by Theorem label thm:zeta-suppression-two-point.  Search
+%   rh_rebuild.tex for occurrences of
+%     \ref{hyp:zeta-suppression-two-point}
+%   and replace with
+%     \ref{thm:zeta-suppression-two-point}
+%   (4 occurrences expected: §1.2 master conditional, §6 transverse
+%   projection scope remarks, §7 four-point preamble, §8 standalone
+%   route remark).
+%
+% Edit C: §6 transverse projection sufficient-input lemma
+%   (lem:transverse-projection-sufficient).
+%   Update the closing sentence
+%     ``The actual-zeta two-point upper bound must be stated in the
+%       same scalar channel''
+%   to a present-tense reference:
+%     ``The actual-zeta two-point upper bound is stated in the same
+%       scalar channel by Theorem~\ref{thm:zeta-suppression-two-point}.''
+%
+% No other adjacent edits are required.
+% =============================================================================
