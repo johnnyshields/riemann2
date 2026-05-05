@@ -4529,13 +4529,45 @@ private lemma cross_rate_bound_11 (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
 /-- Cross-block jet-limit with explicit `O(h²)` rate.  Entrywise: for
     fixed separation `s = T₁ − T₂ ≠ 0`, there is `M(|s|⁻¹) ≥ 0` such
     that for `h ∈ (0, |s|/3]`,
-        `|((P_h C_h(T₁,T₂) P_h^⊤) − (1/π) N₁₂(T₁,T₂)) i j| ≤ M h²`. -/
-axiom cross_block_jet_limit_rate (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
+        `|((P_h C_h(T₁,T₂) P_h^⊤) − (1/π) N₁₂(T₁,T₂)) i j| ≤ M h²`.
+    Combines the four per-entry bounds `cross_rate_bound_00/01/10/11`. -/
+theorem cross_block_jet_limit_rate (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
     ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, 0 < h → h ≤ |T₁ - T₂| / 3 →
       ∀ i j : Fin 2,
         |(pointToJetTransform h * crossBlock T₁ T₂ h *
             (pointToJetTransform h).transpose -
-          (1 / Real.pi) • N12 T₁ T₂) i j| ≤ M * h^2
+          (1 / Real.pi) • N12 T₁ T₂) i j| ≤ M * h^2 := by
+  obtain ⟨M_00, hM_00_nn, hM_00⟩ := cross_rate_bound_00 T₁ T₂ hT
+  obtain ⟨M_01, hM_01_nn, hM_01⟩ := cross_rate_bound_01 T₁ T₂ hT
+  obtain ⟨M_10, hM_10_nn, hM_10⟩ := cross_rate_bound_10 T₁ T₂ hT
+  obtain ⟨M_11, hM_11_nn, hM_11⟩ := cross_rate_bound_11 T₁ T₂ hT
+  refine ⟨max (max M_00 M_01) (max M_10 M_11), ?_, ?_⟩
+  · exact le_max_of_le_left (le_max_of_le_left hM_00_nn)
+  intro h h_pos h_le i j
+  have h_h_sq_nn : 0 ≤ h^2 := sq_nonneg h
+  have h_max_nn : 0 ≤ max (max M_00 M_01) (max M_10 M_11) :=
+    le_max_of_le_left (le_max_of_le_left hM_00_nn)
+  have h_M_00_le : M_00 ≤ max (max M_00 M_01) (max M_10 M_11) :=
+    le_max_of_le_left (le_max_left _ _)
+  have h_M_01_le : M_01 ≤ max (max M_00 M_01) (max M_10 M_11) :=
+    le_max_of_le_left (le_max_right _ _)
+  have h_M_10_le : M_10 ≤ max (max M_00 M_01) (max M_10 M_11) :=
+    le_max_of_le_right (le_max_left _ _)
+  have h_M_11_le : M_11 ≤ max (max M_00 M_01) (max M_10 M_11) :=
+    le_max_of_le_right (le_max_right _ _)
+  fin_cases i <;> fin_cases j
+  · calc |_| ≤ M_00 * h^2 := hM_00 h h_pos h_le
+      _ ≤ max (max M_00 M_01) (max M_10 M_11) * h^2 :=
+          mul_le_mul_of_nonneg_right h_M_00_le h_h_sq_nn
+  · calc |_| ≤ M_01 * h^2 := hM_01 h h_pos h_le
+      _ ≤ max (max M_00 M_01) (max M_10 M_11) * h^2 :=
+          mul_le_mul_of_nonneg_right h_M_01_le h_h_sq_nn
+  · calc |_| ≤ M_10 * h^2 := hM_10 h h_pos h_le
+      _ ≤ max (max M_00 M_01) (max M_10 M_11) * h^2 :=
+          mul_le_mul_of_nonneg_right h_M_10_le h_h_sq_nn
+  · calc |_| ≤ M_11 * h^2 := hM_11 h h_pos h_le
+      _ ≤ max (max M_00 M_01) (max M_10 M_11) * h^2 :=
+          mul_le_mul_of_nonneg_right h_M_11_le h_h_sq_nn
 
 /-! ## Jet-limit theorems (derived from the rate axioms by squeeze) -/
 
