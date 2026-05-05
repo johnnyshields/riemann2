@@ -3093,6 +3093,393 @@ private lemma cross_angle_cube_sum_βγ_h2 (T₁ T₂ R : ℝ) (hR : 0 < R) :
     _ = (6 * (q T₁ + q T₂)^2 * K_lin + 6 * |q T₁ + q T₂| * K_lin^2 * R +
          2 * K_lin^3 * R^2) * h^4 := by ring
 
+set_option maxHeartbeats 4000000 in
+/-- Cross-block precise sin-pair sym bound: `|sin α + sin δ - 2 sin Δ - X_αδ h²| ≤ M h⁴`
+    where X_αδ := (qPrime T₁ - qPrime T₂) cos Δ - (q T₁ - q T₂)² sin Δ.
+    Combines `cross_theta_sym_sum_h2` (h² coefficient of α + δ - 2Δ),
+    `cross_angle_sq_sum_αδ_h2` (h² coefficient of (α-Δ)² + (δ-Δ)²),
+    `cross_angle_cube_sum_αδ_h2` (h⁴ bound on (α-Δ)³ + (δ-Δ)³),
+    and `sin_taylor_at_quartic` (sin Taylor at order 3).
+    Mirror βγ statement uses (q T₁ + q T₂)² in place of (q T₁ - q T₂)². -/
+private lemma cross_sin_pair_sym_bound_h2 (T₁ T₂ R : ℝ) (hR : 0 < R) :
+    ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, |h| ≤ R →
+      |Real.sin (theta (T₁ - h) - theta (T₂ - h)) +
+       Real.sin (theta (T₁ + h) - theta (T₂ + h)) -
+       2 * Real.sin (theta T₁ - theta T₂) -
+       ((qPrime T₁ - qPrime T₂) * Real.cos (theta T₁ - theta T₂) -
+        (q T₁ - q T₂)^2 * Real.sin (theta T₁ - theta T₂)) * h^2| ≤ M * h^4 ∧
+      |Real.sin (theta (T₁ - h) - theta (T₂ + h)) +
+       Real.sin (theta (T₁ + h) - theta (T₂ - h)) -
+       2 * Real.sin (theta T₁ - theta T₂) -
+       ((qPrime T₁ - qPrime T₂) * Real.cos (theta T₁ - theta T₂) -
+        (q T₁ + q T₂)^2 * Real.sin (theta T₁ - theta T₂)) * h^2| ≤ M * h^4 := by
+  obtain ⟨K_sym, hK_sym_nn, hK_sym⟩ := cross_theta_sym_sum_h2 T₁ T₂ R hR
+  obtain ⟨K_sq_αδ, hK_sq_αδ_nn, hK_sq_αδ⟩ := cross_angle_sq_sum_αδ_h2 T₁ T₂ R hR
+  obtain ⟨K_sq_βγ, hK_sq_βγ_nn, hK_sq_βγ⟩ := cross_angle_sq_sum_βγ_h2 T₁ T₂ R hR
+  obtain ⟨K_cube_αδ, hK_cube_αδ_nn, hK_cube_αδ⟩ := cross_angle_cube_sum_αδ_h2 T₁ T₂ R hR
+  obtain ⟨K_cube_βγ, hK_cube_βγ_nn, hK_cube_βγ⟩ := cross_angle_cube_sum_βγ_h2 T₁ T₂ R hR
+  obtain ⟨M_lin_1, hM_lin_1_nn, hM_lin_1⟩ := theta_lin_abs_bound T₁ R hR
+  obtain ⟨M_lin_2, hM_lin_2_nn, hM_lin_2⟩ := theta_lin_abs_bound T₂ R hR
+  -- Combine all bounds.  The largest of the αδ and βγ versions covers both.
+  set K_sq := max K_sq_αδ K_sq_βγ with hK_sq_def
+  set K_cube := max K_cube_αδ K_cube_βγ with hK_cube_def
+  set M_lin := M_lin_1 + M_lin_2 with hM_lin_def
+  refine ⟨K_sym + K_sq / 2 + K_cube / 6 + M_lin^4 / 12, ?_, ?_⟩
+  · have hK_sq_nn : 0 ≤ K_sq := le_max_of_le_left hK_sq_αδ_nn
+    have hK_cube_nn : 0 ≤ K_cube := le_max_of_le_left hK_cube_αδ_nn
+    have hM_lin_nn : 0 ≤ M_lin := by simp [hM_lin_def]; linarith
+    positivity
+  intro h hh
+  set Δ := theta T₁ - theta T₂ with hΔ_def
+  set α := theta (T₁ - h) - theta (T₂ - h) with hα_def
+  set β := theta (T₁ - h) - theta (T₂ + h) with hβ_def
+  set γ := theta (T₁ + h) - theta (T₂ - h) with hγ_def
+  set δ := theta (T₁ + h) - theta (T₂ + h) with hδ_def
+  have hK_sq_αδ_nn' : 0 ≤ K_sq_αδ := hK_sq_αδ_nn
+  have hK_sq_βγ_nn' : 0 ≤ K_sq_βγ := hK_sq_βγ_nn
+  have hK_cube_αδ_nn' : 0 ≤ K_cube_αδ := hK_cube_αδ_nn
+  have hK_cube_βγ_nn' : 0 ≤ K_cube_βγ := hK_cube_βγ_nn
+  have hK_sym_nn' : 0 ≤ K_sym := hK_sym_nn
+  have hK_sq_nn : 0 ≤ K_sq := le_max_of_le_left hK_sq_αδ_nn
+  have hK_cube_nn : 0 ≤ K_cube := le_max_of_le_left hK_cube_αδ_nn
+  have hM_lin_nn : 0 ≤ M_lin := by simp [hM_lin_def]; linarith
+  have h_K_sq_αδ_le : K_sq_αδ ≤ K_sq := le_max_left _ _
+  have h_K_sq_βγ_le : K_sq_βγ ≤ K_sq := le_max_right _ _
+  have h_K_cube_αδ_le : K_cube_αδ ≤ K_cube := le_max_left _ _
+  have h_K_cube_βγ_le : K_cube_βγ ≤ K_cube := le_max_right _ _
+  -- Foundational h-power identities.
+  have h_h_pow_4_nn : 0 ≤ h^4 := by positivity
+  have h_h_pow_4_eq : |h|^4 = h^4 := by
+    rw [show (4 : ℕ) = 2 + 2 from rfl, pow_add, sq_abs h]; ring
+  -- Linear bounds on |α-Δ|, |β-Δ|, |γ-Δ|, |δ-Δ| ≤ M_lin |h|.
+  have h_neg_abs : |(-h)| ≤ R := by rw [abs_neg]; exact hh
+  have h_θT₁_p : |theta (T₁ + h) - theta T₁| ≤ M_lin_1 * |h| := hM_lin_1 h hh
+  have h_θT₁_m : |theta (T₁ - h) - theta T₁| ≤ M_lin_1 * |h| := by
+    have := hM_lin_1 (-h) h_neg_abs
+    rw [show T₁ + (-h) = T₁ - h from by ring, abs_neg] at this
+    exact this
+  have h_θT₂_p : |theta (T₂ + h) - theta T₂| ≤ M_lin_2 * |h| := hM_lin_2 h hh
+  have h_θT₂_m : |theta (T₂ - h) - theta T₂| ≤ M_lin_2 * |h| := by
+    have := hM_lin_2 (-h) h_neg_abs
+    rw [show T₂ + (-h) = T₂ - h from by ring, abs_neg] at this
+    exact this
+  have h_α_Δ : |α - Δ| ≤ M_lin * |h| := by
+    have h_split : α - Δ =
+        (theta (T₁ - h) - theta T₁) - (theta (T₂ - h) - theta T₂) := by
+      simp [hα_def, hΔ_def]; ring
+    calc |α - Δ| = _ := by rw [h_split]
+      _ ≤ |theta (T₁ - h) - theta T₁| + |theta (T₂ - h) - theta T₂| := abs_sub _ _
+      _ ≤ M_lin_1 * |h| + M_lin_2 * |h| := by linarith
+      _ = M_lin * |h| := by simp [hM_lin_def]; ring
+  have h_δ_Δ : |δ - Δ| ≤ M_lin * |h| := by
+    have h_split : δ - Δ =
+        (theta (T₁ + h) - theta T₁) - (theta (T₂ + h) - theta T₂) := by
+      simp [hδ_def, hΔ_def]; ring
+    calc |δ - Δ| = _ := by rw [h_split]
+      _ ≤ |theta (T₁ + h) - theta T₁| + |theta (T₂ + h) - theta T₂| := abs_sub _ _
+      _ ≤ M_lin_1 * |h| + M_lin_2 * |h| := by linarith
+      _ = M_lin * |h| := by simp [hM_lin_def]; ring
+  have h_β_Δ : |β - Δ| ≤ M_lin * |h| := by
+    have h_split : β - Δ =
+        (theta (T₁ - h) - theta T₁) - (theta (T₂ + h) - theta T₂) := by
+      simp [hβ_def, hΔ_def]; ring
+    calc |β - Δ| = _ := by rw [h_split]
+      _ ≤ |theta (T₁ - h) - theta T₁| + |theta (T₂ + h) - theta T₂| := abs_sub _ _
+      _ ≤ M_lin_1 * |h| + M_lin_2 * |h| := by linarith
+      _ = M_lin * |h| := by simp [hM_lin_def]; ring
+  have h_γ_Δ : |γ - Δ| ≤ M_lin * |h| := by
+    have h_split : γ - Δ =
+        (theta (T₁ + h) - theta T₁) - (theta (T₂ - h) - theta T₂) := by
+      simp [hγ_def, hΔ_def]; ring
+    calc |γ - Δ| = _ := by rw [h_split]
+      _ ≤ |theta (T₁ + h) - theta T₁| + |theta (T₂ - h) - theta T₂| := abs_sub _ _
+      _ ≤ M_lin_1 * |h| + M_lin_2 * |h| := by linarith
+      _ = M_lin * |h| := by simp [hM_lin_def]; ring
+  -- Quartic bound: |x - Δ|⁴ ≤ M_lin⁴ h⁴.
+  have h_pow4_bound : ∀ x : ℝ, |x - Δ| ≤ M_lin * |h| → |x - Δ|^4 ≤ M_lin^4 * h^4 := by
+    intro x hx
+    have := pow_le_pow_left₀ (abs_nonneg _) hx 4
+    have h_eq : (M_lin * |h|)^4 = M_lin^4 * h^4 := by
+      rw [mul_pow]; rw [h_h_pow_4_eq]
+    linarith
+  -- Apply sin_taylor_at_quartic for sin α, sin δ, sin β, sin γ.
+  have h_sin_α : |Real.sin α - Real.sin Δ - Real.cos Δ * (α - Δ) +
+      Real.sin Δ * (α - Δ)^2 / 2 + Real.cos Δ * (α - Δ)^3 / 6| ≤ |α - Δ|^4 / 24 := by
+    have hh' := sin_taylor_at_quartic Δ (α - Δ)
+    have h_eq : Δ + (α - Δ) = α := by ring
+    rw [h_eq] at hh'
+    have h_sub_eq :
+        Real.sin α - (Real.sin Δ + Real.cos Δ * (α - Δ) -
+          Real.sin Δ * (α - Δ)^2 / 2 - Real.cos Δ * (α - Δ)^3 / 6) =
+        Real.sin α - Real.sin Δ - Real.cos Δ * (α - Δ) +
+        Real.sin Δ * (α - Δ)^2 / 2 + Real.cos Δ * (α - Δ)^3 / 6 := by ring
+    rw [h_sub_eq] at hh'
+    exact hh'
+  have h_sin_δ : |Real.sin δ - Real.sin Δ - Real.cos Δ * (δ - Δ) +
+      Real.sin Δ * (δ - Δ)^2 / 2 + Real.cos Δ * (δ - Δ)^3 / 6| ≤ |δ - Δ|^4 / 24 := by
+    have hh' := sin_taylor_at_quartic Δ (δ - Δ)
+    have h_eq : Δ + (δ - Δ) = δ := by ring
+    rw [h_eq] at hh'
+    have h_sub_eq :
+        Real.sin δ - (Real.sin Δ + Real.cos Δ * (δ - Δ) -
+          Real.sin Δ * (δ - Δ)^2 / 2 - Real.cos Δ * (δ - Δ)^3 / 6) =
+        Real.sin δ - Real.sin Δ - Real.cos Δ * (δ - Δ) +
+        Real.sin Δ * (δ - Δ)^2 / 2 + Real.cos Δ * (δ - Δ)^3 / 6 := by ring
+    rw [h_sub_eq] at hh'
+    exact hh'
+  have h_sin_β : |Real.sin β - Real.sin Δ - Real.cos Δ * (β - Δ) +
+      Real.sin Δ * (β - Δ)^2 / 2 + Real.cos Δ * (β - Δ)^3 / 6| ≤ |β - Δ|^4 / 24 := by
+    have hh' := sin_taylor_at_quartic Δ (β - Δ)
+    have h_eq : Δ + (β - Δ) = β := by ring
+    rw [h_eq] at hh'
+    have h_sub_eq :
+        Real.sin β - (Real.sin Δ + Real.cos Δ * (β - Δ) -
+          Real.sin Δ * (β - Δ)^2 / 2 - Real.cos Δ * (β - Δ)^3 / 6) =
+        Real.sin β - Real.sin Δ - Real.cos Δ * (β - Δ) +
+        Real.sin Δ * (β - Δ)^2 / 2 + Real.cos Δ * (β - Δ)^3 / 6 := by ring
+    rw [h_sub_eq] at hh'
+    exact hh'
+  have h_sin_γ : |Real.sin γ - Real.sin Δ - Real.cos Δ * (γ - Δ) +
+      Real.sin Δ * (γ - Δ)^2 / 2 + Real.cos Δ * (γ - Δ)^3 / 6| ≤ |γ - Δ|^4 / 24 := by
+    have hh' := sin_taylor_at_quartic Δ (γ - Δ)
+    have h_eq : Δ + (γ - Δ) = γ := by ring
+    rw [h_eq] at hh'
+    have h_sub_eq :
+        Real.sin γ - (Real.sin Δ + Real.cos Δ * (γ - Δ) -
+          Real.sin Δ * (γ - Δ)^2 / 2 - Real.cos Δ * (γ - Δ)^3 / 6) =
+        Real.sin γ - Real.sin Δ - Real.cos Δ * (γ - Δ) +
+        Real.sin Δ * (γ - Δ)^2 / 2 + Real.cos Δ * (γ - Δ)^3 / 6 := by ring
+    rw [h_sub_eq] at hh'
+    exact hh'
+  have h_cos_le : |Real.cos Δ| ≤ 1 := Real.abs_cos_le_one Δ
+  have h_sin_le : |Real.sin Δ| ≤ 1 := Real.abs_sin_le_one Δ
+  -- Cross-block precise bounds.
+  obtain ⟨h_sym_αδ, h_sym_βγ⟩ := hK_sym h hh
+  have h_sq_αδ := hK_sq_αδ h hh
+  have h_sq_βγ := hK_sq_βγ h hh
+  have h_cube_αδ := hK_cube_αδ h hh
+  have h_cube_βγ := hK_cube_βγ h hh
+  -- Refine into the conjunction.
+  refine ⟨?_, ?_⟩
+  · -- αδ: |sin α + sin δ - 2 sin Δ - X_αδ h²| ≤ M h⁴
+    -- where X_αδ := (qPrime₁-qPrime₂) cos Δ - (q₁-q₂)² sin Δ.
+    -- Combined identity:
+    -- sin α + sin δ - 2 sin Δ - X_αδ h²
+    -- = cos Δ (α + δ - 2Δ - (qPrime₁-qPrime₂) h²)
+    --   - (sin Δ / 2) ((α-Δ)² + (δ-Δ)² - 2(q₁-q₂)² h²)
+    --   - (cos Δ / 6) ((α-Δ)³ + (δ-Δ)³)
+    --   + R_α + R_δ
+    -- where R_x := sin x - sin Δ - cos Δ (x-Δ) + sin Δ (x-Δ)²/2 + cos Δ (x-Δ)³/6.
+    have h_combined :
+        Real.sin α + Real.sin δ - 2 * Real.sin Δ -
+          ((qPrime T₁ - qPrime T₂) * Real.cos Δ -
+            (q T₁ - q T₂)^2 * Real.sin Δ) * h^2 =
+        Real.cos Δ * ((α + δ - 2 * Δ) - (qPrime T₁ - qPrime T₂) * h^2) -
+        (Real.sin Δ / 2) *
+          ((α - Δ)^2 + (δ - Δ)^2 - 2 * (q T₁ - q T₂)^2 * h^2) -
+        (Real.cos Δ / 6) * ((α - Δ)^3 + (δ - Δ)^3) +
+        (Real.sin α - Real.sin Δ - Real.cos Δ * (α - Δ) +
+         Real.sin Δ * (α - Δ)^2 / 2 + Real.cos Δ * (α - Δ)^3 / 6) +
+        (Real.sin δ - Real.sin Δ - Real.cos Δ * (δ - Δ) +
+         Real.sin Δ * (δ - Δ)^2 / 2 + Real.cos Δ * (δ - Δ)^3 / 6) := by
+      ring
+    -- Bounds on each piece.
+    have h_b_sym : |Real.cos Δ *
+        ((α + δ - 2 * Δ) - (qPrime T₁ - qPrime T₂) * h^2)| ≤ K_sym * h^4 := by
+      rw [abs_mul]
+      calc |Real.cos Δ| * |α + δ - 2 * Δ - (qPrime T₁ - qPrime T₂) * h^2|
+          ≤ 1 * (K_sym * |h|^4) := by
+            apply mul_le_mul h_cos_le h_sym_αδ (abs_nonneg _) (by norm_num)
+        _ = K_sym * h^4 := by rw [h_h_pow_4_eq]; ring
+    have h_b_sq : |(Real.sin Δ / 2) *
+        ((α - Δ)^2 + (δ - Δ)^2 - 2 * (q T₁ - q T₂)^2 * h^2)| ≤
+        K_sq / 2 * h^4 := by
+      rw [abs_mul]
+      have h_div_abs : |Real.sin Δ / 2| ≤ 1 / 2 := by
+        rw [abs_div, show |(2:ℝ)| = 2 from by norm_num]
+        linarith [h_sin_le]
+      have h_sq_le_K : |(α - Δ)^2 + (δ - Δ)^2 - 2 * (q T₁ - q T₂)^2 * h^2|
+          ≤ K_sq * h^4 :=
+        le_trans h_sq_αδ (by
+          apply mul_le_mul_of_nonneg_right h_K_sq_αδ_le h_h_pow_4_nn)
+      calc |Real.sin Δ / 2| *
+            |(α - Δ)^2 + (δ - Δ)^2 - 2 * (q T₁ - q T₂)^2 * h^2|
+          ≤ (1 / 2) * (K_sq * h^4) := by
+            apply mul_le_mul h_div_abs h_sq_le_K (abs_nonneg _) (by norm_num)
+        _ = K_sq / 2 * h^4 := by ring
+    have h_b_cube : |(Real.cos Δ / 6) * ((α - Δ)^3 + (δ - Δ)^3)| ≤
+        K_cube / 6 * h^4 := by
+      rw [abs_mul]
+      have h_div_abs : |Real.cos Δ / 6| ≤ 1 / 6 := by
+        rw [abs_div, show |(6:ℝ)| = 6 from by norm_num]
+        linarith [h_cos_le]
+      have h_cube_le_K : |(α - Δ)^3 + (δ - Δ)^3| ≤ K_cube * h^4 :=
+        le_trans h_cube_αδ (by
+          apply mul_le_mul_of_nonneg_right h_K_cube_αδ_le h_h_pow_4_nn)
+      calc |Real.cos Δ / 6| * |(α - Δ)^3 + (δ - Δ)^3|
+          ≤ (1 / 6) * (K_cube * h^4) := by
+            apply mul_le_mul h_div_abs h_cube_le_K (abs_nonneg _) (by norm_num)
+        _ = K_cube / 6 * h^4 := by ring
+    have h_α_Δ_pow4 : |α - Δ|^4 ≤ M_lin^4 * h^4 := h_pow4_bound α h_α_Δ
+    have h_δ_Δ_pow4 : |δ - Δ|^4 ≤ M_lin^4 * h^4 := h_pow4_bound δ h_δ_Δ
+    have h_R_α : |Real.sin α - Real.sin Δ - Real.cos Δ * (α - Δ) +
+        Real.sin Δ * (α - Δ)^2 / 2 + Real.cos Δ * (α - Δ)^3 / 6| ≤
+        M_lin^4 / 24 * h^4 := by
+      calc _ ≤ |α - Δ|^4 / 24 := h_sin_α
+        _ ≤ M_lin^4 * h^4 / 24 := by linarith
+        _ = M_lin^4 / 24 * h^4 := by ring
+    have h_R_δ : |Real.sin δ - Real.sin Δ - Real.cos Δ * (δ - Δ) +
+        Real.sin Δ * (δ - Δ)^2 / 2 + Real.cos Δ * (δ - Δ)^3 / 6| ≤
+        M_lin^4 / 24 * h^4 := by
+      calc _ ≤ |δ - Δ|^4 / 24 := h_sin_δ
+        _ ≤ M_lin^4 * h^4 / 24 := by linarith
+        _ = M_lin^4 / 24 * h^4 := by ring
+    -- Sum bounds via triangle inequality.
+    rw [h_combined]
+    have h_eq_simplification :
+        K_sym + K_sq / 2 + K_cube / 6 + M_lin^4 / 12 =
+        K_sym + K_sq / 2 + K_cube / 6 + (M_lin^4 / 24 + M_lin^4 / 24) := by ring
+    calc |Real.cos Δ * ((α + δ - 2 * Δ) - (qPrime T₁ - qPrime T₂) * h^2) -
+          (Real.sin Δ / 2) *
+            ((α - Δ)^2 + (δ - Δ)^2 - 2 * (q T₁ - q T₂)^2 * h^2) -
+          (Real.cos Δ / 6) * ((α - Δ)^3 + (δ - Δ)^3) +
+          (Real.sin α - Real.sin Δ - Real.cos Δ * (α - Δ) +
+           Real.sin Δ * (α - Δ)^2 / 2 + Real.cos Δ * (α - Δ)^3 / 6) +
+          (Real.sin δ - Real.sin Δ - Real.cos Δ * (δ - Δ) +
+           Real.sin Δ * (δ - Δ)^2 / 2 + Real.cos Δ * (δ - Δ)^3 / 6)|
+        ≤ K_sym * h^4 + K_sq / 2 * h^4 + K_cube / 6 * h^4 +
+          M_lin^4 / 24 * h^4 + M_lin^4 / 24 * h^4 := by
+          have ht1 := abs_add_le
+            (Real.cos Δ * ((α + δ - 2 * Δ) - (qPrime T₁ - qPrime T₂) * h^2) -
+              (Real.sin Δ / 2) *
+                ((α - Δ)^2 + (δ - Δ)^2 - 2 * (q T₁ - q T₂)^2 * h^2) -
+              (Real.cos Δ / 6) * ((α - Δ)^3 + (δ - Δ)^3) +
+              (Real.sin α - Real.sin Δ - Real.cos Δ * (α - Δ) +
+               Real.sin Δ * (α - Δ)^2 / 2 + Real.cos Δ * (α - Δ)^3 / 6))
+            (Real.sin δ - Real.sin Δ - Real.cos Δ * (δ - Δ) +
+             Real.sin Δ * (δ - Δ)^2 / 2 + Real.cos Δ * (δ - Δ)^3 / 6)
+          have ht2 := abs_add_le
+            (Real.cos Δ * ((α + δ - 2 * Δ) - (qPrime T₁ - qPrime T₂) * h^2) -
+              (Real.sin Δ / 2) *
+                ((α - Δ)^2 + (δ - Δ)^2 - 2 * (q T₁ - q T₂)^2 * h^2) -
+              (Real.cos Δ / 6) * ((α - Δ)^3 + (δ - Δ)^3))
+            (Real.sin α - Real.sin Δ - Real.cos Δ * (α - Δ) +
+             Real.sin Δ * (α - Δ)^2 / 2 + Real.cos Δ * (α - Δ)^3 / 6)
+          have ht3 := abs_sub
+            (Real.cos Δ * ((α + δ - 2 * Δ) - (qPrime T₁ - qPrime T₂) * h^2) -
+              (Real.sin Δ / 2) *
+                ((α - Δ)^2 + (δ - Δ)^2 - 2 * (q T₁ - q T₂)^2 * h^2))
+            ((Real.cos Δ / 6) * ((α - Δ)^3 + (δ - Δ)^3))
+          have ht4 := abs_sub
+            (Real.cos Δ * ((α + δ - 2 * Δ) - (qPrime T₁ - qPrime T₂) * h^2))
+            ((Real.sin Δ / 2) *
+              ((α - Δ)^2 + (δ - Δ)^2 - 2 * (q T₁ - q T₂)^2 * h^2))
+          linarith
+      _ = (K_sym + K_sq / 2 + K_cube / 6 + M_lin^4 / 12) * h^4 := by ring
+  · -- βγ: |sin β + sin γ - 2 sin Δ - Y_βγ h²| ≤ M h⁴
+    -- where Y_βγ := (qPrime₁-qPrime₂) cos Δ - (q₁+q₂)² sin Δ.
+    have h_combined :
+        Real.sin β + Real.sin γ - 2 * Real.sin Δ -
+          ((qPrime T₁ - qPrime T₂) * Real.cos Δ -
+            (q T₁ + q T₂)^2 * Real.sin Δ) * h^2 =
+        Real.cos Δ * ((β + γ - 2 * Δ) - (qPrime T₁ - qPrime T₂) * h^2) -
+        (Real.sin Δ / 2) *
+          ((β - Δ)^2 + (γ - Δ)^2 - 2 * (q T₁ + q T₂)^2 * h^2) -
+        (Real.cos Δ / 6) * ((β - Δ)^3 + (γ - Δ)^3) +
+        (Real.sin β - Real.sin Δ - Real.cos Δ * (β - Δ) +
+         Real.sin Δ * (β - Δ)^2 / 2 + Real.cos Δ * (β - Δ)^3 / 6) +
+        (Real.sin γ - Real.sin Δ - Real.cos Δ * (γ - Δ) +
+         Real.sin Δ * (γ - Δ)^2 / 2 + Real.cos Δ * (γ - Δ)^3 / 6) := by
+      ring
+    have h_b_sym : |Real.cos Δ *
+        ((β + γ - 2 * Δ) - (qPrime T₁ - qPrime T₂) * h^2)| ≤ K_sym * h^4 := by
+      rw [abs_mul]
+      calc |Real.cos Δ| * |β + γ - 2 * Δ - (qPrime T₁ - qPrime T₂) * h^2|
+          ≤ 1 * (K_sym * |h|^4) := by
+            apply mul_le_mul h_cos_le h_sym_βγ (abs_nonneg _) (by norm_num)
+        _ = K_sym * h^4 := by rw [h_h_pow_4_eq]; ring
+    have h_b_sq : |(Real.sin Δ / 2) *
+        ((β - Δ)^2 + (γ - Δ)^2 - 2 * (q T₁ + q T₂)^2 * h^2)| ≤
+        K_sq / 2 * h^4 := by
+      rw [abs_mul]
+      have h_div_abs : |Real.sin Δ / 2| ≤ 1 / 2 := by
+        rw [abs_div, show |(2:ℝ)| = 2 from by norm_num]
+        linarith [h_sin_le]
+      have h_sq_le_K : |(β - Δ)^2 + (γ - Δ)^2 - 2 * (q T₁ + q T₂)^2 * h^2|
+          ≤ K_sq * h^4 :=
+        le_trans h_sq_βγ (by
+          apply mul_le_mul_of_nonneg_right h_K_sq_βγ_le h_h_pow_4_nn)
+      calc |Real.sin Δ / 2| *
+            |(β - Δ)^2 + (γ - Δ)^2 - 2 * (q T₁ + q T₂)^2 * h^2|
+          ≤ (1 / 2) * (K_sq * h^4) := by
+            apply mul_le_mul h_div_abs h_sq_le_K (abs_nonneg _) (by norm_num)
+        _ = K_sq / 2 * h^4 := by ring
+    have h_b_cube : |(Real.cos Δ / 6) * ((β - Δ)^3 + (γ - Δ)^3)| ≤
+        K_cube / 6 * h^4 := by
+      rw [abs_mul]
+      have h_div_abs : |Real.cos Δ / 6| ≤ 1 / 6 := by
+        rw [abs_div, show |(6:ℝ)| = 6 from by norm_num]
+        linarith [h_cos_le]
+      have h_cube_le_K : |(β - Δ)^3 + (γ - Δ)^3| ≤ K_cube * h^4 :=
+        le_trans h_cube_βγ (by
+          apply mul_le_mul_of_nonneg_right h_K_cube_βγ_le h_h_pow_4_nn)
+      calc |Real.cos Δ / 6| * |(β - Δ)^3 + (γ - Δ)^3|
+          ≤ (1 / 6) * (K_cube * h^4) := by
+            apply mul_le_mul h_div_abs h_cube_le_K (abs_nonneg _) (by norm_num)
+        _ = K_cube / 6 * h^4 := by ring
+    have h_β_Δ_pow4 : |β - Δ|^4 ≤ M_lin^4 * h^4 := h_pow4_bound β h_β_Δ
+    have h_γ_Δ_pow4 : |γ - Δ|^4 ≤ M_lin^4 * h^4 := h_pow4_bound γ h_γ_Δ
+    have h_R_β : |Real.sin β - Real.sin Δ - Real.cos Δ * (β - Δ) +
+        Real.sin Δ * (β - Δ)^2 / 2 + Real.cos Δ * (β - Δ)^3 / 6| ≤
+        M_lin^4 / 24 * h^4 := by
+      calc _ ≤ |β - Δ|^4 / 24 := h_sin_β
+        _ ≤ M_lin^4 * h^4 / 24 := by linarith
+        _ = M_lin^4 / 24 * h^4 := by ring
+    have h_R_γ : |Real.sin γ - Real.sin Δ - Real.cos Δ * (γ - Δ) +
+        Real.sin Δ * (γ - Δ)^2 / 2 + Real.cos Δ * (γ - Δ)^3 / 6| ≤
+        M_lin^4 / 24 * h^4 := by
+      calc _ ≤ |γ - Δ|^4 / 24 := h_sin_γ
+        _ ≤ M_lin^4 * h^4 / 24 := by linarith
+        _ = M_lin^4 / 24 * h^4 := by ring
+    rw [h_combined]
+    calc |Real.cos Δ * ((β + γ - 2 * Δ) - (qPrime T₁ - qPrime T₂) * h^2) -
+          (Real.sin Δ / 2) *
+            ((β - Δ)^2 + (γ - Δ)^2 - 2 * (q T₁ + q T₂)^2 * h^2) -
+          (Real.cos Δ / 6) * ((β - Δ)^3 + (γ - Δ)^3) +
+          (Real.sin β - Real.sin Δ - Real.cos Δ * (β - Δ) +
+           Real.sin Δ * (β - Δ)^2 / 2 + Real.cos Δ * (β - Δ)^3 / 6) +
+          (Real.sin γ - Real.sin Δ - Real.cos Δ * (γ - Δ) +
+           Real.sin Δ * (γ - Δ)^2 / 2 + Real.cos Δ * (γ - Δ)^3 / 6)|
+        ≤ K_sym * h^4 + K_sq / 2 * h^4 + K_cube / 6 * h^4 +
+          M_lin^4 / 24 * h^4 + M_lin^4 / 24 * h^4 := by
+          have ht1 := abs_add_le
+            (Real.cos Δ * ((β + γ - 2 * Δ) - (qPrime T₁ - qPrime T₂) * h^2) -
+              (Real.sin Δ / 2) *
+                ((β - Δ)^2 + (γ - Δ)^2 - 2 * (q T₁ + q T₂)^2 * h^2) -
+              (Real.cos Δ / 6) * ((β - Δ)^3 + (γ - Δ)^3) +
+              (Real.sin β - Real.sin Δ - Real.cos Δ * (β - Δ) +
+               Real.sin Δ * (β - Δ)^2 / 2 + Real.cos Δ * (β - Δ)^3 / 6))
+            (Real.sin γ - Real.sin Δ - Real.cos Δ * (γ - Δ) +
+             Real.sin Δ * (γ - Δ)^2 / 2 + Real.cos Δ * (γ - Δ)^3 / 6)
+          have ht2 := abs_add_le
+            (Real.cos Δ * ((β + γ - 2 * Δ) - (qPrime T₁ - qPrime T₂) * h^2) -
+              (Real.sin Δ / 2) *
+                ((β - Δ)^2 + (γ - Δ)^2 - 2 * (q T₁ + q T₂)^2 * h^2) -
+              (Real.cos Δ / 6) * ((β - Δ)^3 + (γ - Δ)^3))
+            (Real.sin β - Real.sin Δ - Real.cos Δ * (β - Δ) +
+             Real.sin Δ * (β - Δ)^2 / 2 + Real.cos Δ * (β - Δ)^3 / 6)
+          have ht3 := abs_sub
+            (Real.cos Δ * ((β + γ - 2 * Δ) - (qPrime T₁ - qPrime T₂) * h^2) -
+              (Real.sin Δ / 2) *
+                ((β - Δ)^2 + (γ - Δ)^2 - 2 * (q T₁ + q T₂)^2 * h^2))
+            ((Real.cos Δ / 6) * ((β - Δ)^3 + (γ - Δ)^3))
+          have ht4 := abs_sub
+            (Real.cos Δ * ((β + γ - 2 * Δ) - (qPrime T₁ - qPrime T₂) * h^2))
+            ((Real.sin Δ / 2) *
+              ((β - Δ)^2 + (γ - Δ)^2 - 2 * (q T₁ + q T₂)^2 * h^2))
+          linarith
+      _ = (K_sym + K_sq / 2 + K_cube / 6 + M_lin^4 / 12) * h^4 := by ring
+
 /-- Pure algebraic identity used to combine the four phaseKernel entries
     into a single fraction.  Treats `a, b, c, d, s, h` as abstract real
     numbers, sidestepping function-argument normalization issues. -/
