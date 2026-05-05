@@ -4187,6 +4187,345 @@ private lemma cross_rate_bound_10 (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
     _ ≤ 2 * (M_a / (4 * Real.pi * |T₁ - T₂|) * h^2) + M_01 * h^2 := by linarith
     _ = M_10 * h^2 := by rw [hM_10_def]; ring
 
+set_option maxHeartbeats 8000000 in
+/-- Bound on entry `(1, 1)` of `P_h C_h(T₁, T₂) P_h^⊤ − (1/π) N₁₂(T₁, T₂)`
+    for `h ∈ (0, |s|/3]`.  Uses precise sin-pair bounds at h⁴/h³ orders
+    so that the leading h² of jet_11 cancels exactly with N₁₂_11. -/
+private lemma cross_rate_bound_11 (T₁ T₂ : ℝ) (hT : T₁ ≠ T₂) :
+    ∃ M : ℝ, 0 ≤ M ∧ ∀ h : ℝ, 0 < h → h ≤ |T₁ - T₂| / 3 →
+      |(pointToJetTransform h * crossBlock T₁ T₂ h *
+          (pointToJetTransform h).transpose -
+        (1 / Real.pi) • N12 T₁ T₂) 1 1| ≤ M * h^2 := by
+  set s : ℝ := T₁ - T₂ with hs_def
+  set R : ℝ := |s| / 3 with hR_def
+  have hs_ne : s ≠ 0 := sub_ne_zero.mpr hT
+  have hs_abs_pos : 0 < |s| := abs_pos.mpr hs_ne
+  have hR_pos : 0 < R := by show 0 < |s| / 3; linarith
+  have hs_sq_pos : 0 < s^2 := by
+    have : s^2 = |s|^2 := (sq_abs s).symm; rw [this]; positivity
+  have hπ_pos : 0 < Real.pi := Real.pi_pos
+  obtain ⟨M_sym, hM_sym_nn, hM_sym⟩ := cross_sin_pair_sym_bound_h2 T₁ T₂ R hR_pos
+  obtain ⟨M_anti, hM_anti_nn, hM_anti⟩ := cross_sin_pair_anti_bound_h3 T₁ T₂ R hR_pos
+  -- Compute |K_const| upper bound K_abs.
+  set K_abs : ℝ := 4 * s^2 * |qPrime T₁ - qPrime T₂| +
+      4 * (q T₁ - q T₂)^2 * s^2 + 16 * |q T₁ + q T₂| * |s| +
+      16 * |q T₁| * |q T₂| * s^2 + 32 with hK_abs_def
+  have hK_abs_nn : 0 ≤ K_abs := by
+    rw [hK_abs_def]; positivity
+  -- Total bound on |numerator| in units of h⁴.
+  set C_total : ℝ := K_abs + 2 * s^4 * M_sym + 2 * |s|^3 * M_anti with hC_def
+  have hC_total_nn : 0 ≤ C_total := by
+    rw [hC_def]
+    have : 0 ≤ 2 * s^4 * M_sym := by positivity
+    have : 0 ≤ 2 * |s|^3 * M_anti := by positivity
+    linarith
+  -- Final M for the bound.
+  set M : ℝ := 9 * C_total / (40 * Real.pi * |s|^5) with hM_def
+  have hM_nn : 0 ≤ M := by
+    rw [hM_def]
+    apply div_nonneg
+    · positivity
+    · positivity
+  refine ⟨M, hM_nn, ?_⟩
+  intro h h_pos h_le
+  have h_le_R : h ≤ R := by show h ≤ |s| / 3; exact h_le
+  have h_abs_le : |h| ≤ R := by rw [abs_of_pos h_pos]; exact h_le_R
+  -- Get the precise bounds.
+  obtain ⟨hM_sym_αδ, hM_sym_βγ⟩ := hM_sym h h_abs_le
+  have hM_anti_h := hM_anti h h_abs_le
+  obtain ⟨h_pK_00, h_pK_01, h_pK_10, h_pK_11⟩ :=
+    crossBlock_apply T₁ T₂ h hT h_pos h_le
+  obtain ⟨_, _, _, h_N_11⟩ := N12_smul_apply T₁ T₂ hT
+  -- Denominator bounds.
+  obtain ⟨h_denom_lower, h_denom_pos⟩ := cross_denom_sq_lower s h hs_ne h_pos h_le
+  have h_denom_upper : s^2 - 4 * h^2 ≤ s^2 := by nlinarith [sq_nonneg h]
+  have hs_2h_ne : s + 2 * h ≠ 0 := by
+    intro heq
+    have : (s - 2 * h) * (s + 2 * h) = s^2 - 4 * h^2 := by ring
+    have : s^2 - 4 * h^2 = 0 := by rw [← this, heq]; ring
+    linarith
+  have hs_2h_neg_ne : s - 2 * h ≠ 0 := by
+    intro heq
+    have : (s - 2 * h) * (s + 2 * h) = s^2 - 4 * h^2 := by ring
+    have : s^2 - 4 * h^2 = 0 := by rw [← this, heq]; ring
+    linarith
+  have hπ_ne : Real.pi ≠ 0 := Real.pi_ne_zero
+  have hh_ne : h ≠ 0 := h_pos.ne'
+  have hh_sq_pos : 0 < h^2 := by positivity
+  -- Set up named values.
+  set Δ := theta T₁ - theta T₂ with hΔ_def
+  set α := theta (T₁ - h) - theta (T₂ - h) with hα_def
+  set β := theta (T₁ - h) - theta (T₂ + h) with hβ_def
+  set γ := theta (T₁ + h) - theta (T₂ - h) with hγ_def
+  set δ := theta (T₁ + h) - theta (T₂ + h) with hδ_def
+  -- Apply jet_cross_matrix_apply_11 to get the (1,1) entry form.
+  have h_jet_11 : (pointToJetTransform h * crossBlock T₁ T₂ h *
+      (pointToJetTransform h).transpose) 1 1 =
+      (Real.sin α / (Real.pi * s) -
+       Real.sin β / (Real.pi * (s - 2 * h)) -
+       Real.sin γ / (Real.pi * (s + 2 * h)) +
+       Real.sin δ / (Real.pi * s)) / (8 * h^2) := by
+    rw [jet_cross_matrix_apply_11 T₁ T₂ h hT h_pos h_le]
+    rw [h_pK_00, h_pK_01, h_pK_10, h_pK_11]
+  -- Apply cross_pos_neg_neg_pos_combine_alg with abstract reals.
+  have hπs_ne : Real.pi * s ≠ 0 := mul_ne_zero hπ_ne hs_ne
+  have hπsm_ne : Real.pi * (s - 2 * h) ≠ 0 := mul_ne_zero hπ_ne hs_2h_neg_ne
+  have hπsp_ne : Real.pi * (s + 2 * h) ≠ 0 := mul_ne_zero hπ_ne hs_2h_ne
+  -- Rewrite jet_11 via the algebraic combine helper.
+  have h_jet_11_combined :
+      Real.sin α / (Real.pi * s) -
+       Real.sin β / (Real.pi * (s - 2 * h)) -
+       Real.sin γ / (Real.pi * (s + 2 * h)) +
+       Real.sin δ / (Real.pi * s) =
+      ((Real.sin α + Real.sin δ) * (s^2 - 4 * h^2) -
+       s^2 * (Real.sin β + Real.sin γ) -
+       2 * s * h * (Real.sin β - Real.sin γ)) /
+      (Real.pi * s * (s^2 - 4 * h^2)) := by
+    have h1 : Real.pi * (s - 2 * h) = Real.pi * s - 2 * (Real.pi * h) := by ring
+    have h2 : Real.pi * (s + 2 * h) = Real.pi * s + 2 * (Real.pi * h) := by ring
+    rw [h1, h2]
+    have h3 := cross_pos_neg_neg_pos_combine_alg
+      (Real.pi * s) (Real.pi * h)
+      (Real.sin α) (Real.sin β) (Real.sin γ) (Real.sin δ)
+      hπs_ne (by rw [← h1]; exact hπsm_ne) (by rw [← h2]; exact hπsp_ne)
+    rw [h3]
+    field_simp
+  -- The full diff identity.
+  have h_diff_form : (pointToJetTransform h * crossBlock T₁ T₂ h *
+      (pointToJetTransform h).transpose -
+      (1 / Real.pi) • N12 T₁ T₂) 1 1 =
+      (s^2 * (s^2 - 4 * h^2) * (Real.sin α + Real.sin δ) -
+       s^4 * (Real.sin β + Real.sin γ) -
+       2 * s^3 * h * (Real.sin β - Real.sin γ) -
+       4 * h^2 * (s^2 - 4 * h^2) *
+        ((q T₁ + q T₂) * s * Real.cos Δ +
+         (q T₁ * q T₂ * s^2 - 2) * Real.sin Δ)) /
+      (8 * h^2 * Real.pi * s^3 * (s^2 - 4 * h^2)) := by
+    rw [Matrix.sub_apply, h_jet_11, h_jet_11_combined, h_N_11]
+    -- Convert (T₁ - T₂) back to s using hs_def : s = T₁ - T₂.
+    rw [show (T₁ - T₂) = s from hs_def.symm]
+    field_simp
+    ring
+  rw [h_diff_form]
+  -- Apply decomp_alg.
+  have h_decomp := cross_rate_11_decomp_alg s h
+    (Real.sin α) (Real.sin β) (Real.sin γ) (Real.sin δ)
+    (q T₁) (q T₂) (qPrime T₁) (qPrime T₂) (Real.sin Δ) (Real.cos Δ)
+  -- The numerator equals h⁴ K_const + s²(s²-4h²) U_αδ - s⁴ U_βγ - 2 s³ h V.
+  rw [h_decomp]
+  -- Define the named pieces.
+  set K_const : ℝ := -4 * s^2 * (qPrime T₁ - qPrime T₂) * Real.cos Δ +
+       4 * (q T₁ - q T₂)^2 * s^2 * Real.sin Δ +
+       16 * (q T₁ + q T₂) * s * Real.cos Δ +
+       16 * q T₁ * q T₂ * s^2 * Real.sin Δ - 32 * Real.sin Δ with hK_def
+  set U_αδ : ℝ := Real.sin α + Real.sin δ - 2 * Real.sin Δ -
+       ((qPrime T₁ - qPrime T₂) * Real.cos Δ -
+        (q T₁ - q T₂)^2 * Real.sin Δ) * h^2 with hU_αδ_def
+  set U_βγ : ℝ := Real.sin β + Real.sin γ - 2 * Real.sin Δ -
+       ((qPrime T₁ - qPrime T₂) * Real.cos Δ -
+        (q T₁ + q T₂)^2 * Real.sin Δ) * h^2 with hU_βγ_def
+  set V : ℝ := Real.sin β - Real.sin γ +
+       2 * (q T₁ + q T₂) * Real.cos Δ * h with hV_def
+  -- Bounds on each piece.
+  have h_U_αδ_b : |U_αδ| ≤ M_sym * h^4 := hM_sym_αδ
+  have h_U_βγ_b : |U_βγ| ≤ M_sym * h^4 := hM_sym_βγ
+  have h_V_b : |V| ≤ M_anti * |h|^3 := hM_anti_h
+  -- Bound on |K_const| by K_abs.
+  have h_cos_le : |Real.cos Δ| ≤ 1 := Real.abs_cos_le_one Δ
+  have h_sin_le : |Real.sin Δ| ≤ 1 := Real.abs_sin_le_one Δ
+  have h_K_abs : |K_const| ≤ K_abs := by
+    rw [hK_def, hK_abs_def]
+    have h_t1 : |-4 * s^2 * (qPrime T₁ - qPrime T₂) * Real.cos Δ| ≤
+        4 * s^2 * |qPrime T₁ - qPrime T₂| := by
+      rw [abs_mul, abs_mul, abs_mul]
+      rw [show |(-4 : ℝ)| = 4 from by norm_num]
+      have : |s^2| = s^2 := abs_of_nonneg (sq_nonneg _)
+      rw [this]
+      calc 4 * s^2 * |qPrime T₁ - qPrime T₂| * |Real.cos Δ|
+          ≤ 4 * s^2 * |qPrime T₁ - qPrime T₂| * 1 :=
+            mul_le_mul_of_nonneg_left h_cos_le (by positivity)
+        _ = 4 * s^2 * |qPrime T₁ - qPrime T₂| := by ring
+    have h_t2 : |4 * (q T₁ - q T₂)^2 * s^2 * Real.sin Δ| ≤
+        4 * (q T₁ - q T₂)^2 * s^2 := by
+      rw [abs_mul, abs_mul, abs_mul]
+      rw [show |(4 : ℝ)| = 4 from by norm_num]
+      have h_sq_abs : |(q T₁ - q T₂)^2| = (q T₁ - q T₂)^2 := abs_of_nonneg (sq_nonneg _)
+      rw [h_sq_abs]
+      have : |s^2| = s^2 := abs_of_nonneg (sq_nonneg _)
+      rw [this]
+      calc 4 * (q T₁ - q T₂)^2 * s^2 * |Real.sin Δ|
+          ≤ 4 * (q T₁ - q T₂)^2 * s^2 * 1 :=
+            mul_le_mul_of_nonneg_left h_sin_le (by positivity)
+        _ = 4 * (q T₁ - q T₂)^2 * s^2 := by ring
+    have h_t3 : |16 * (q T₁ + q T₂) * s * Real.cos Δ| ≤
+        16 * |q T₁ + q T₂| * |s| := by
+      rw [abs_mul, abs_mul, abs_mul]
+      rw [show |(16 : ℝ)| = 16 from by norm_num]
+      calc 16 * |q T₁ + q T₂| * |s| * |Real.cos Δ|
+          ≤ 16 * |q T₁ + q T₂| * |s| * 1 :=
+            mul_le_mul_of_nonneg_left h_cos_le (by positivity)
+        _ = 16 * |q T₁ + q T₂| * |s| := by ring
+    have h_t4 : |16 * q T₁ * q T₂ * s^2 * Real.sin Δ| ≤
+        16 * |q T₁| * |q T₂| * s^2 := by
+      rw [abs_mul, abs_mul, abs_mul, abs_mul]
+      rw [show |(16 : ℝ)| = 16 from by norm_num]
+      have : |s^2| = s^2 := abs_of_nonneg (sq_nonneg _)
+      rw [this]
+      calc 16 * |q T₁| * |q T₂| * s^2 * |Real.sin Δ|
+          ≤ 16 * |q T₁| * |q T₂| * s^2 * 1 :=
+            mul_le_mul_of_nonneg_left h_sin_le (by positivity)
+        _ = 16 * |q T₁| * |q T₂| * s^2 := by ring
+    have h_t5 : |(-32 : ℝ) * Real.sin Δ| ≤ 32 := by
+      rw [abs_mul]
+      rw [show |(-32 : ℝ)| = 32 from by norm_num]
+      calc (32 : ℝ) * |Real.sin Δ| ≤ 32 * 1 :=
+            mul_le_mul_of_nonneg_left h_sin_le (by norm_num)
+        _ = 32 := by norm_num
+    -- Triangle inequality.
+    have h_alg_eq : -4 * s^2 * (qPrime T₁ - qPrime T₂) * Real.cos Δ +
+        4 * (q T₁ - q T₂)^2 * s^2 * Real.sin Δ +
+        16 * (q T₁ + q T₂) * s * Real.cos Δ +
+        16 * q T₁ * q T₂ * s^2 * Real.sin Δ - 32 * Real.sin Δ =
+      (-4 * s^2 * (qPrime T₁ - qPrime T₂) * Real.cos Δ) +
+      (4 * (q T₁ - q T₂)^2 * s^2 * Real.sin Δ) +
+      (16 * (q T₁ + q T₂) * s * Real.cos Δ) +
+      (16 * q T₁ * q T₂ * s^2 * Real.sin Δ) +
+      ((-32 : ℝ) * Real.sin Δ) := by ring
+    rw [h_alg_eq]
+    have ht1 := abs_add_le
+      ((-4 * s^2 * (qPrime T₁ - qPrime T₂) * Real.cos Δ) +
+       (4 * (q T₁ - q T₂)^2 * s^2 * Real.sin Δ) +
+       (16 * (q T₁ + q T₂) * s * Real.cos Δ) +
+       (16 * q T₁ * q T₂ * s^2 * Real.sin Δ))
+      ((-32 : ℝ) * Real.sin Δ)
+    have ht2 := abs_add_le
+      ((-4 * s^2 * (qPrime T₁ - qPrime T₂) * Real.cos Δ) +
+       (4 * (q T₁ - q T₂)^2 * s^2 * Real.sin Δ) +
+       (16 * (q T₁ + q T₂) * s * Real.cos Δ))
+      (16 * q T₁ * q T₂ * s^2 * Real.sin Δ)
+    have ht3 := abs_add_le
+      ((-4 * s^2 * (qPrime T₁ - qPrime T₂) * Real.cos Δ) +
+       (4 * (q T₁ - q T₂)^2 * s^2 * Real.sin Δ))
+      (16 * (q T₁ + q T₂) * s * Real.cos Δ)
+    have ht4 := abs_add_le
+      (-4 * s^2 * (qPrime T₁ - qPrime T₂) * Real.cos Δ)
+      (4 * (q T₁ - q T₂)^2 * s^2 * Real.sin Δ)
+    linarith
+  -- Bound numerator |...| ≤ C_total · h⁴.
+  have h_h_pow_4_nn : 0 ≤ h^4 := by positivity
+  have h_h_abs : |h| = h := abs_of_pos h_pos
+  have h_h_pow_3_eq : |h|^3 = h^3 := by rw [h_h_abs]
+  have h_h_pow_3_h : h^3 * h = h^4 := by ring
+  have h_b_K : |h^4 * K_const| ≤ K_abs * h^4 := by
+    rw [abs_mul]
+    rw [show |h^4| = h^4 from abs_of_nonneg h_h_pow_4_nn]
+    calc h^4 * |K_const| ≤ h^4 * K_abs :=
+          mul_le_mul_of_nonneg_left h_K_abs h_h_pow_4_nn
+      _ = K_abs * h^4 := by ring
+  have h_b_Uαδ : |s^2 * (s^2 - 4 * h^2) * U_αδ| ≤ s^4 * M_sym * h^4 := by
+    rw [abs_mul]
+    rw [show |s^2 * (s^2 - 4 * h^2)| = s^2 * (s^2 - 4 * h^2) from
+        abs_of_nonneg (by have := hs_sq_pos.le; have := h_denom_pos.le; positivity)]
+    calc s^2 * (s^2 - 4 * h^2) * |U_αδ|
+        ≤ s^2 * s^2 * |U_αδ| := by
+          apply mul_le_mul_of_nonneg_right
+          · apply mul_le_mul_of_nonneg_left h_denom_upper hs_sq_pos.le
+          · exact abs_nonneg _
+      _ = s^4 * |U_αδ| := by ring
+      _ ≤ s^4 * (M_sym * h^4) :=
+          mul_le_mul_of_nonneg_left h_U_αδ_b (by positivity)
+      _ = s^4 * M_sym * h^4 := by ring
+  have h_b_Uβγ : |s^4 * U_βγ| ≤ s^4 * M_sym * h^4 := by
+    rw [abs_mul]
+    rw [show |s^4| = s^4 from abs_of_nonneg (by positivity)]
+    calc s^4 * |U_βγ| ≤ s^4 * (M_sym * h^4) :=
+          mul_le_mul_of_nonneg_left h_U_βγ_b (by positivity)
+      _ = s^4 * M_sym * h^4 := by ring
+  have h_b_V : |2 * s^3 * h * V| ≤ 2 * |s|^3 * M_anti * h^4 := by
+    rw [abs_mul, abs_mul, abs_mul]
+    rw [show |(2:ℝ)| = 2 from by norm_num]
+    rw [show |s^3| = |s|^3 from by rw [show s^3 = s * s * s from by ring,
+        abs_mul, abs_mul, show |s| * |s| * |s| = |s|^3 from by ring]]
+    rw [h_h_abs]
+    calc 2 * |s|^3 * h * |V|
+        ≤ 2 * |s|^3 * h * (M_anti * |h|^3) :=
+          mul_le_mul_of_nonneg_left h_V_b (by positivity)
+      _ = 2 * |s|^3 * h * (M_anti * h^3) := by rw [h_h_pow_3_eq]
+      _ = 2 * |s|^3 * M_anti * (h^3 * h) := by ring
+      _ = 2 * |s|^3 * M_anti * h^4 := by rw [h_h_pow_3_h]
+  -- Combine.
+  have h_num_b : |h^4 * K_const + s^2 * (s^2 - 4 * h^2) * U_αδ -
+      s^4 * U_βγ - 2 * s^3 * h * V| ≤ C_total * h^4 := by
+    have ht1 := abs_sub
+      (h^4 * K_const + s^2 * (s^2 - 4 * h^2) * U_αδ - s^4 * U_βγ)
+      (2 * s^3 * h * V)
+    have ht2 := abs_sub
+      (h^4 * K_const + s^2 * (s^2 - 4 * h^2) * U_αδ)
+      (s^4 * U_βγ)
+    have ht3 := abs_add_le
+      (h^4 * K_const)
+      (s^2 * (s^2 - 4 * h^2) * U_αδ)
+    rw [hC_def]
+    linarith
+  -- Bound denom.
+  have h_denom_pos_full : 0 < 8 * h^2 * Real.pi * s^3 * (s^2 - 4 * h^2) ∨
+      8 * h^2 * Real.pi * s^3 * (s^2 - 4 * h^2) < 0 := by
+    rcases lt_or_gt_of_ne hs_ne with hslt | hsgt
+    · right
+      have h_s3_neg : s^3 < 0 := by
+        have : s^3 = s * s^2 := by ring
+        rw [this]; nlinarith [hs_sq_pos]
+      have : (8 * h^2) * Real.pi > 0 := by positivity
+      have : (8 * h^2 * Real.pi) * s^3 < 0 := mul_neg_of_pos_of_neg this h_s3_neg
+      nlinarith [h_denom_pos]
+    · left
+      have h_s3_pos : 0 < s^3 := by
+        have : s^3 = s * s^2 := by ring
+        rw [this]; positivity
+      positivity
+  have h_denom_abs : |8 * h^2 * Real.pi * s^3 * (s^2 - 4 * h^2)| =
+      8 * h^2 * Real.pi * |s|^3 * (s^2 - 4 * h^2) := by
+    rw [show 8 * h^2 * Real.pi * s^3 * (s^2 - 4 * h^2) =
+        (8 * h^2 * Real.pi) * s^3 * (s^2 - 4 * h^2) from by ring]
+    rw [abs_mul, abs_mul]
+    rw [abs_of_pos (by positivity : 0 < 8 * h^2 * Real.pi)]
+    rw [abs_of_pos h_denom_pos]
+    rw [show |s^3| = |s|^3 from by rw [show s^3 = s * s * s from by ring,
+        abs_mul, abs_mul, show |s| * |s| * |s| = |s|^3 from by ring]]
+  rw [abs_div, h_denom_abs]
+  -- Goal: |num| / (8 h² π |s|³ (s²-4h²)) ≤ M h²
+  have h_denom_full_pos : 0 < 8 * h^2 * Real.pi * |s|^3 * (s^2 - 4 * h^2) := by
+    positivity
+  rw [hM_def, div_le_iff₀ h_denom_full_pos]
+  -- Goal: |num| ≤ (9 C_total / (40 π |s|⁵)) · h² · (8 h² π |s|³ (s²-4h²))
+  -- First simplify RHS:
+  have h_s5_eq : |s|^5 = |s|^3 * s^2 := by
+    have : |s|^5 = |s|^3 * |s|^2 := by ring
+    rw [this, sq_abs]
+  have h_rhs_simpl : 9 * C_total / (40 * Real.pi * |s|^5) * h^2 *
+      (8 * h^2 * Real.pi * |s|^3 * (s^2 - 4 * h^2)) =
+      9 * C_total * h^4 * (s^2 - 4 * h^2) / (5 * s^2) := by
+    rw [h_s5_eq]
+    have h_pi_ne : Real.pi ≠ 0 := hπ_ne
+    have h_s2_ne : s^2 ≠ 0 := hs_sq_pos.ne'
+    have h_s3_ne : |s|^3 ≠ 0 := by positivity
+    field_simp
+    ring
+  rw [h_rhs_simpl]
+  -- Goal: |num| ≤ 9 C_total h⁴ (s²-4h²) / (5 s²)
+  have h_5s_le_9 : 5 * s^2 ≤ 9 * (s^2 - 4 * h^2) := by linarith [h_denom_lower]
+  have h_5s2_pos : 0 < 5 * s^2 := by linarith
+  rw [le_div_iff₀ h_5s2_pos]
+  -- Goal: |num| · (5 s²) ≤ 9 C_total h⁴ (s²-4h²)
+  have h_C_h4_nn : 0 ≤ C_total * h^4 := by positivity
+  calc |h^4 * K_const + s^2 * (s^2 - 4 * h^2) * U_αδ -
+        s^4 * U_βγ - 2 * s^3 * h * V| * (5 * s^2)
+      ≤ (C_total * h^4) * (5 * s^2) := by
+        apply mul_le_mul_of_nonneg_right h_num_b h_5s2_pos.le
+    _ ≤ (C_total * h^4) * (9 * (s^2 - 4 * h^2)) := by
+        apply mul_le_mul_of_nonneg_left h_5s_le_9 h_C_h4_nn
+    _ = 9 * C_total * h^4 * (s^2 - 4 * h^2) := by ring
+
 /-- Cross-block jet-limit with explicit `O(h²)` rate.  Entrywise: for
     fixed separation `s = T₁ − T₂ ≠ 0`, there is `M(|s|⁻¹) ≥ 0` such
     that for `h ∈ (0, |s|/3]`,
